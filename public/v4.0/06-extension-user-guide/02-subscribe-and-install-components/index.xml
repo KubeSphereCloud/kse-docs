@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>订阅与安装扩展组件 on KubeSphere 企业版</title>
+    <link>/v4.0/06-extension-user-guide/02-subscribe-and-install-components/</link>
+    <description>Recent content in 订阅与安装扩展组件 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.0/06-extension-user-guide/02-subscribe-and-install-components/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>订阅扩展组件</title>
+      <link>/v4.0/06-extension-user-guide/02-subscribe-and-install-components/01-subscribe-components/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/06-extension-user-guide/02-subscribe-and-install-components/01-subscribe-components/</guid>
+      <description>本节介绍如何订阅扩展组件。
+在安装组件之前，您需要使用 KubeSphere 云账号在扩展市场订阅组件。
+前提条件 您需要注册一个 KubeSphere 云账号，并在扩展中心绑定您的 KubeSphere 云账号。
+操作步骤 点击 KubeSphere 企业版 Web 控制台左上角的扩展市场，进入扩展市场页面。
+搜索您要安装的扩展组件，点击订阅。
+如果您未登录 KubeSphere 云账号，请登录，然后进入订阅流程。
+在订单确认与支付页面，选择订阅方案、订阅时长后，提交订单进行支付。
+支付完成后，点击对话框中的立即安装，进入组件安装流程。
+说明 扩展市场中部分组件可免费订阅，部分需要付费订阅。</description>
+    </item>
+    
+    <item>
+      <title>安装扩展组件</title>
+      <link>/v4.0/06-extension-user-guide/02-subscribe-and-install-components/02-install-components/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/06-extension-user-guide/02-subscribe-and-install-components/02-install-components/</guid>
+      <description>本节介绍如何安装扩展组件。
+前提条件 您需要使用 KubeSphere 云账号在扩展市场订阅组件。
+安装步骤 采用以下方式之一，进入安装页面，开始安装流程。
+订阅完成后，点击订阅对话框中的立即安装，进入组件安装页面。
+点击扩展市场中组件详情页的安装按钮，进入组件安装页面。
+在扩展中心登录 KubeSphere 云账号后，对已订阅未安装的组件，点击右侧的安装按钮，进入组件安装页面。
+在单集群上安装扩展组件 在组件安装对话框的安装检测页签，选择扩展组件的版本号，并安装好所有必装组件，点击下一步。
+说明 安装检测时，会识别扩展组件是否有依赖组件。依赖组件分为必装组件和选装组件。
+若必装组件的状态为未就绪，您需要先行安装正确版本的必装组件，以确保扩展组件的正常使用。而选装组件不会影响扩展组件的安装。
+在扩展组件安装页签，修改扩展组件的配置后（可选），点击开始安装，开始安装扩展组件。
+安装过程中，可在扩展市场的扩展组件详情页查看安装状态。安装完成后，可以在扩展中心配置、升级、禁用、卸载扩展组件。
+在多集群上安装扩展组件 若当前为多集群环境，按照上述步骤完成组件安装后，还需要为指定的主集群和成员集群配置 Agent。
+在集群选择页签，根据名称，标识，标签选择集群。
+在差异化设置页签，分别编辑选中集群的 YAML 配置，也可不修改，使用初始默认配置。点击确定，开始配置集群 Agent。</description>
+    </item>
+    
+  </channel>
+</rss>
