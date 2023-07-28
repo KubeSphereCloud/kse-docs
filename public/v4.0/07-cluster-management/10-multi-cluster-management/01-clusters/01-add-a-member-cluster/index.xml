@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>添加成员集群 on KubeSphere 企业版</title>
+    <link>/v4.0/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/</link>
+    <description>Recent content in 添加成员集群 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.0/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>通过直接连接添加成员集群</title>
+      <link>/v4.0/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/01-add-a-member-cluster-using-direct-connection/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/01-add-a-member-cluster-using-direct-connection/</guid>
+      <description>本节介绍如何通过直接连接添加成员集群。
+前提条件 您需要在主集群和成员集群中都具有 platform-admin 角色。
+主集群所有节点必须能访问成员集群的 Kubernetes API 服务（默认为成员集群主节点的 6443 端口）。取决于您的网络环境，您可能需要配置防火墙和流量转发规则。
+主集群和成员集群都需要启用多集群管理扩展组件。
+获取主集群 jwtSecret 以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
+将光标悬停在页面右下角的 图标，然后在菜单中选择 kubectl。
+在 kubectl 对话框，执行以下命令获取主集群的 jwtSecret 值。
+kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v &amp;#34;apiVersion&amp;#34; | grep jwtSecret 设置成员集群 jwtSecret 并获取 kubeconfig 执行以下步骤同步主集群和成员集群的 jwtSecret 值：
+以具有 platform-admin 角色的用户登录成员集群的 Web 控制台。
+将光标悬停在页面右下角的 图标，然后在菜单中选择 kubectl。
+在 kubectl 对话框，执行以下命令编辑集群配置文件：
+kubectl edit cc ks-installer -n kubesphere-system 在集群配置文件中，将 spec:authentication:jwtSecret 参数设置为主集群的 jwtSecret 值，然后保存文件。</description>
+    </item>
+    
+    <item>
+      <title>通过代理连接添加成员集群</title>
+      <link>/v4.0/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/02-add-a-member-cluster-using-proxy-connection/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/02-add-a-member-cluster-using-proxy-connection/</guid>
+      <description>本节介绍如何通过代理连接添加成员集群。
+KubeSphere 企业版提供了代理服务 tower。如果主集群无法访问成员集群的 Kubernetes API 服务，您可以设置成员集群连接到主集群对外暴露的 tower 服务从而添加成员集群。
+前提条件 您需要在主集群和成员集群中都具有 platform-admin 角色。
+成员集群所有节点必须能访问主集群 tower 服务的外部访问地址。取决于您的网络环境，您可能需要配置防火墙和流量转发规则。
+主集群和成员集群都需要启用多集群管理扩展组件。
+获取主集群 jwtSecret 和 tower agent 配置文件 执行以下步骤获取主集群的 jwtSecret 值：
+以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
+将光标悬停在页面右下角的 图标，然后在菜单中选择 kubectl。
+在 kubectl 对话框，执行以下命令获取主集群的 jwtSecret 值。
+kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v &amp;#34;apiVersion&amp;#34; | grep jwtSecret 执行以下步骤获取主集群的 tower agent 配置：
+以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
+点击集群管理。
+在集群管理页面，点击添加集群。
+在基本信息页签，设置成员集群的名称、标签、提供商和描述信息，然后点击下一步。
+参数 描述 名称</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工具箱 on KubeSphere 企业版</title>
+    <link>/v4.0/09-project-management/07-toolbox/</link>
+    <description>Recent content in 工具箱 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.0/09-project-management/07-toolbox/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>查看 kubeconfig 文件</title>
+      <link>/v4.0/09-project-management/07-toolbox/02-view-a-kubeconfig-file/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/09-project-management/07-toolbox/02-view-a-kubeconfig-file/</guid>
+      <description>本节介绍如何查看 kubeconfig 文件。
+kubeconfig 文件包含集群的认证信息，用于向其他应用程序提供集群的访问权限。KubeSphere 企业版支持自动根据当前登录用户生成 kubeconfig 文件，可向其他应用程序提供当前登录用户相同的访问权限。有关更多信息，请参阅 Kubernetes 官方文档。
+前提条件 您需要获取 KubeSphere 企业版用户名和密码。
+操作步骤 登录 KubeSphere 企业版 Web 控制台。
+将光标悬停在页面右下角的 图标，然后在菜单中选择 kubeconfig。
+在弹出的对话框查看 kubeconfig 配置信息。
+clusters:cluster:server 字段显示的访问地址为虚拟 IP 地址，只能从集群内部部访问。如需从集群外部访问，请将该地址修改为 kube-apiserver 对外暴露的地址。
+contexts:cluster:namespace 字段默认显示的项目名称为 default。请将该字段取值修改为当前用户实际具有访问权限的项目名称。
+点击 可将 kubeconfig.yaml 文件下载到本地。</description>
+    </item>
+    
+  </channel>
+</rss>

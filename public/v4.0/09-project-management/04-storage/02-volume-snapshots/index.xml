@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>卷快照 on KubeSphere 企业版</title>
+    <link>/v4.0/09-project-management/04-storage/02-volume-snapshots/</link>
+    <description>Recent content in 卷快照 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.0/09-project-management/04-storage/02-volume-snapshots/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建卷快照</title>
+      <link>/v4.0/09-project-management/04-storage/02-volume-snapshots/01-create-a-volume-snapshot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/09-project-management/04-storage/02-volume-snapshots/01-create-a-volume-snapshot/</guid>
+      <description>本节介绍如何创建卷快照。
+卷快照保存了存储卷的当前数据，可用于创建持久卷声明以及对应的持久卷。
+前提条件 您需要加入一个项目并在项目中具有卷快照管理权限。有关更多信息，请参阅项目成员和项目角色。
+请确保系统已为持久卷声明创建持久卷。
+请确保后端存储系统支持卷快照功能，并已在持久卷声明对应的存储类上启用卷快照功能。
+操作步骤 以具有卷快照管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+在左侧导航栏选择存储 &amp;gt; 卷快照。
+在页面点击创建。
+在创建快照对话框，设置需要创建快照的持久卷声明、卷快照的名称和卷快照类，然后点击确定。
+参数 描述 持久卷声明
+需要创建快照的持久卷声明。
+名称
+卷快照的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 253 个字符。
+卷快照类
+用于创建卷快照的卷快照类。请确保卷快照类的供应者与持久卷对应的存储类的供应者一致，否则卷快照将创建失败。
+卷快照创建后将显示在卷快照列表中。</description>
+    </item>
+    
+    <item>
+      <title>查看卷快照列表</title>
+      <link>/v4.0/09-project-management/04-storage/02-volume-snapshots/02-view-a-volume-snapshot-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/09-project-management/04-storage/02-volume-snapshots/02-view-a-volume-snapshot-list/</guid>
+      <description>本节介绍如何查看卷快照。
+前提条件 您需要加入一个项目并在项目中具有卷快照查看权限。有关更多信息，请参阅项目成员和项目角色。
+操作步骤 以具有卷快照查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+在左侧导航栏选择存储 &amp;gt; 卷快照。
+卷快照列表提供以下信息：
+参数 描述 名称
+卷快照的名称、别名和卷快照类。
+状态
+卷快照当前的状态。
+创建中：卷快照和对应的卷快照内容正在创建中。
+创建成功：卷快照和对应的卷快照内容创建成功。
+创建失败：系统存在错误，卷快照或对应的卷快照内容创建失败。
+删除中：卷快照正在删除中。取决于卷快照的删除策略，系统可能会在卷快照删除后保留或自动删除卷快照内容。
+项目
+卷快照所属的项目。
+容量
+卷快照对应持久卷的容量。
+创建时间
+卷快照的创建时间。
+在列表上方点击搜索框并设置搜索条件，可按名称或状态搜索卷快照。
+在列表右上角点击可刷新列表信息。
+在列表右上角点击可定制列表中显示的信息。</description>
+    </item>
+    
+    <item>
+      <title>查看卷快照详情</title>
+      <link>/v4.0/09-project-management/04-storage/02-volume-snapshots/03-view-volume-snapshot-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/09-project-management/04-storage/02-volume-snapshots/03-view-volume-snapshot-details/</guid>
+      <description>本节介绍如何查看卷快照的详情。
+前提条件 您需要加入一个项目并在项目中具有卷快照查看权限。有关更多信息，请参阅项目成员和项目角色。
+操作步骤 以具有卷快照查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+在左侧导航栏选择存储 &amp;gt; 卷快照。
+在卷快照列表中点击一个卷快照的名称打开其详情页面。
+在卷快照详情页面左侧的属性区域查看卷快照的资源属性。
+参数 描述 项目
+卷快照的所属项目。
+状态
+卷快照当前的状态。
+创建中：卷快照和对应的卷快照内容正在创建中。
+创建成功：卷快照和对应的卷快照内容创建成功。
+创建失败：系统存在错误，卷快照或对应的卷快照内容创建失败。
+删除中：卷快照正在删除中。取决于卷快照的删除策略，系统可能会在卷快照删除后保留或自动删除卷快照内容。
+容量
+卷快照对应持久卷的容量。
+快照类
+用于保存快照数据的存储系统对应的卷快照类。
+创建时间
+卷快照的创建时间。
+创建者
+创建卷快照的用户。
+在卷快照详情页面右侧的数据源页签查看用于创建快照的持久卷声明的信息。
+参数 描述 名称
+持久卷声明的名称。
+存储类
+创建持久卷声明使用的存储类。
+创建时间
+持久卷声明的创建时间。
+供应者
+存储类使用的存储插件。
+访问模式
+持久卷的读写模式。
+RWO（ReadWriteOnce）：允许单个节点读取持久卷中的数据并向其中写入数据。
+ROX（ReadOnlyMany）：允许多个节点读取持久卷中的数据。
+RWX（ReadWriteMany）：允许多个节点读取持久卷中的数据并向其中写入数据。
+容量
+后端存储区域的容量大小。
+在卷快照详情页面右侧点击事件页签查看卷快照的事件。
+参数 描述 类型
+事件的类型，包括正常和告警两种类型。
+原因
+事件发生的原因。
+发生时间
+事件发生的时间。
+来源
+上报事件的组件。
+消息
+事件消息的内容。</description>
+    </item>
+    
+    <item>
+      <title>使用卷快照创建持久卷</title>
+      <link>/v4.0/09-project-management/04-storage/02-volume-snapshots/04-create-a-persistent-volume-from-a-volume-snapshot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/09-project-management/04-storage/02-volume-snapshots/04-create-a-persistent-volume-from-a-volume-snapshot/</guid>
+      <description>本节介绍如何使用卷快照创建持久卷。
+卷快照创建后，您可以使用卷快照创建持久卷声明和持久卷。
+前提条件 您需要加入一个项目并在项目中具有卷快照管理权限。有关更多信息，请参阅项目成员和项目角色。
+操作步骤 以具有卷快照管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+在左侧导航栏选择存储 &amp;gt; 卷快照。
+在卷快照列表中点击一个卷快照的名称打开其详情页面。
+在卷快照详情页面左上角选择更多操作 &amp;gt; 创建卷。
+在基本信息页签，设置持久卷声明的基本信息，然后点击下一步。
+参数 描述 名称
+持久卷声明的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 253 个字符。
+别名
+持久卷声明的别名。不同持久卷声明的别名可以相同。别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。
+描述
+持久卷声明的描述信息。描述可包含任意字符，最长 256 个字符。
+在存储设置页签，选择后端存储区域的访问模式，然后点击下一步。
+参数 描述 ReadWriteOnce
+允许单个节点读取后端存储区域中的数据并向其中写入数据。
+ReadOnlyMany
+允许多个节点读取后端存储区域中的数据。
+ReadWriteMany
+允许多个节点读取后端存储区域中的数据并向其中写入数据。
+在高级设置页签，设置持久卷声明的标签和注解，然后点击创建。
+点击添加可设置多条标签或注解。
+在已创建的标签或注解右侧点击 可删除标签或注解。
+系统将根据以上步骤设置的参数创建持久卷声明，并且还将根据快照数据创建持久卷声明对应的持久卷。</description>
+    </item>
+    
+    <item>
+      <title>删除卷快照</title>
+      <link>/v4.0/09-project-management/04-storage/02-volume-snapshots/05-delete-volume-snapshots/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/09-project-management/04-storage/02-volume-snapshots/05-delete-volume-snapshots/</guid>
+      <description>本节介绍如何删除卷快照。
+警告 卷快照删除后不能恢复，请谨慎执行此操作以免数据丢失。
+前提条件 您需要加入一个项目并在项目中具有卷快照管理权限。有关更多信息，请参阅项目成员和项目角色。
+删除单个卷快照 以具有卷快照管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+在左侧导航栏选择存储 &amp;gt; 卷快照。
+在需要删除的卷快照右侧点击，然后在下拉列表中选择删除。
+在删除卷快照对话框，输入卷快照的名称，然后点击确定。
+批量删除卷快照 以具有卷快照管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+在左侧导航栏选择存储 &amp;gt; 卷快照。
+选择需要删除的卷快照左侧的复选框，然后在卷快照列表上方点击删除。
+在批量删除卷快照对话框，输入卷快照的名称，然后点击确定。
+备注 请使用半角逗号（,）和空格分隔多个名称。</description>
+    </item>
+    
+  </channel>
+</rss>
