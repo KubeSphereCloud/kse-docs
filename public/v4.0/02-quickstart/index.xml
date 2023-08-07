@@ -13,7 +13,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.0/02-quickstart/01-install-ks-core/</guid>
-      <description>本节介绍如何安装 KubeSphere 企业版的核心组件 KubeSphere Core。KubeSphere Core 为扩展组件提供基础的运行环境。
+      <description>本节介绍如何安装 KubeSphere 企业版的核心组件 KubeSphere Core。
+KubeSphere Core 为扩展组件提供基础的运行环境。安装完成后，即可使用 KubeSphere 企业版。
 安装 KubeSphere Core 前提条件 确保您的机器满足最低硬件要求：CPU &amp;gt; 2 核，内存 &amp;gt; 2 GB。
 您需要提前安装 Helm。具体请参阅安装 Helm。
 操作步骤 （可选）如果您没有可用的 Kubernetes 集群，执行以下命令快速创建一个 Kubernetes 集群。
@@ -30,20 +31,22 @@ helm repo add test https://charts.kubesphere.io/test helm repo update test helm 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.0/02-quickstart/02-install-a-demo-extension/</guid>
-      <description>本节以安装 DevOps 为例，演示如何在 KubeSphere 企业版 Web 控制台安装扩展组件。有关组件使用的更多信息，请参阅扩展组件管理。
-DevOps 组件是专为 Kubernetes 中的 CI/CD 工作流设计的，它提供了一站式的解决方案，帮助开发和运维团队用非常简单的方式构建、测试和发布应用到 Kubernetes。
-前提条件 您需要已经安装好 KubeSphere Core，并可以登录到 KubeSphere 企业版 Web 控制台。
+      <description>KubeSphere 扩展组件，是运行在 KubeSphere Core 之上，用来扩展并增强 KubeSphere 产品能力，以进一步满足企业各类型的业务需求。
+本节以安装 DevOps 为例，演示如何在 KubeSphere 企业版 Web 控制台安装扩展组件。有关组件使用的更多信息，请参阅扩展组件管理。
+Devops 安装完成后，即可在企业空间中创建 Devops 项目。有关 Devops 项目的更多信息，请参阅Devops 项目。
+前提条件 您需要以 platform-admin 角色登录到 KubeSphere 企业版 Web 控制台。有关平台角色的更多信息，请参阅平台角色。
+您需要注册一个 KubeSphere 云账号。
 安装准备 点击 KubeSphere 企业版 Web 控制台左上角的扩展市场，进入扩展市场页面。
 搜索查找 DevOps，点击订阅。
-如果您未登录 KubeSphere 云账号，请先登录，然后进入订阅流程。支付完成后，点击对话框中的立即安装，进入组件安装流程。
-安装步骤 在单集群上安装 DevOps 在组件安装对话框的安装检测页签，选择 DevOps 的版本号，并安装好所有必装组件（若有），点击下一步。
+如果您未绑定 KubeSphere 云账号，前往扩展中心绑定您的 KubeSphere 云账户，然后进入订阅流程。
+订阅完成后，在扩展市场的 DevOps 页面，点击安装，进入组件安装流程。
+安装步骤 在组件安装对话框的版本选择页签，选择 DevOps 的版本号，并安装好所有必装组件（若有），点击下一步。
 说明 安装检测时，会识别扩展组件是否有依赖组件。依赖组件分为必装组件和选装组件。
 若必装组件的状态为未就绪，您需要先行安装正确版本的必装组件，以确保扩展组件的正常使用。而选装组件不会影响扩展组件的安装。
 在扩展组件安装页签，修改 DevOps 的配置后（可选），点击开始安装即开始安装 DevOps。
-安装过程中，可在扩展市场的扩展组件详情页查看安装状态。安装完成后，可以在扩展中心配置、升级、禁用、卸载 DevOps。
-在多集群上安装 DevOps 若当前为多集群环境，按照上述步骤完成组件安装后，还需要继续为指定的主集群和成员集群配置 Agent。
 在集群选择页签，根据名称，标识，标签选择集群。
-在差异化设置页签，分别编辑选中集群的 YAML 配置，也可不修改，使用初始默认配置。点击确定，开始配置集群 Agent。</description>
+在差异化配置页签，分别编辑选中集群的 YAML 配置，也可不修改，使用初始默认配置。点击确定，开始配置集群 Agent。
+安装完成后，默认启用该组件。您可以在扩展市场或扩展中心配置、升级、禁用、卸载扩展组件，还可以点击顶部导航栏上的图标，查看使用该组件。</description>
     </item>
     
     <item>
@@ -67,7 +70,8 @@ KubeSphere 企业版的多租户系统分为三个层级，即集群、企业�
 点击确定。用户创建后将显示在用户列表中。
 创建企业空间 登录 KubeSphere 企业版 Web 控制台。
 点击企业空间管理。
-点击左侧导航栏上方的默认企业空间 system-workspace。
+点击默认企业空间 system-workspace。
+进入企业空间后，点击左侧导航栏上方的 system-workspace。
 在企业空间列表页面，点击创建企业空间。
 在创建企业空间的基本信息页面，输入企业空间的名称（例如 demo-workspace）。
 备注 对于多集群环境，设置企业空间的基本信息后，点击下一步。在集群设置页面，选择企业空间需要使用的集群。
@@ -82,8 +86,7 @@ workspace-self-provisioner
 workspace-regular
 企业空间普通成员，可以查看企业空间设置。
 workspace-admin
-企业空间管理员，可以管理企业空间中的所有资源。
-备注 企业空间内置角色的名称以 &amp;lt;企业空间名称&amp;gt;-&amp;lt;角色名称&amp;gt; 格式显示。例如，在名称为 demo-workspace 的企业空间中，角色 admin 的实际角色名称为 demo-workspace-admin。</description>
+企业空间管理员，可以管理企业空间中的所有资源。</description>
     </item>
     
   </channel>
