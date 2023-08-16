@@ -32,7 +32,10 @@ KubeSphere LuBan 优势 插件式的核心框架
 前后端热更新、热修复
 开发者可以在系统运行时对前端和后端进行实时更新和修复，提高了开发和运维的效率，同时保证了应用程序的可用性和用户体验。
 开放性扩展中心，生态共建
-我们提供一个开放的平台，鼓励第三方开发者通过组件向系统添加新的功能或增强现有功能，在系统的框架内进行开发和集成，并将他们的组件与系统进行无缝连接，共同构建一个健康、繁荣的生态系统。</description>
+我们提供一个开放的平台，鼓励第三方开发者通过组件向系统添加新的功能或增强现有功能，在系统的框架内进行开发和集成，并将他们的组件与系统进行无缝连接，共同构建一个健康、繁荣的生态系统。
+KubeSphere LuBan 如何帮助到您 KubeSphere LuBan 架构可以使以下人员受益：
+KubeSphere 用户
+KubeSphere 用户可以自由选择启用哪些 KubeSphere 扩展组件。同时还能将自己的应用无缝融入到 KubeSphere 控制台。此外，随着 KubeSphere 扩展组件生态的丰富，用户可以在 KubeSphere 扩展市场中自由选择更丰富的产品和服务，最终实现容器管理平台的千人千面的效果。</description>
     </item>
     
     <item>
@@ -41,17 +44,21 @@ KubeSphere LuBan 优势 插件式的核心框架
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.0/01-intro/02-architecture/</guid>
-      <description>为了使 KubeSphere 灵活可扩展，我们设计了微内核 + 扩展组件的架构（代号 LuBan）。其中内核部分（KubeSphere Core）仅包含系统运行的必备基础功能，而将独立的业务模块分别封装在各个扩展组件（Extensions）中。用户可在系统运行时动态的安装、卸载、启用、禁用扩展组件。
+      <description>为了使 KubeSphere 灵活可扩展，我们设计了微内核 + 扩展组件的架构（代号 LuBan）。其中内核部分（KubeSphere Core）仅包含系统运行的必备基础功能，而将独立的业务模块分别封装在各个扩展组件（Extensions）中。用户可在系统运行时动态地安装、卸载、启用、禁用扩展组件。
 KubeSphere LuBan 架构 KubeSphere LuBan 架构设计如下图所示。
-KubeSphere LuBan 如何帮助到您 KubeSphere LuBan 架构可以使以下人员受益：
-KubeSphere 用户
-KubeSphere 用户可以自由选择启用哪些 KubeSphere 扩展组件。同时还能将自己的应用无缝融入到 KubeSphere 控制台。此外，随着 KubeSphere 扩展组件生态的丰富，用户可以在 KubeSphere 扩展市场中自由选择更丰富的产品和服务，最终实现容器管理平台的千人千面的效果。
-KubeSphere 维护者
-扩展机制使得维护者可以更聚焦 KubeSphere 核心功能的开发，并可使得 KubeSphere Core 更加轻量，版本发布节奏也可以加快。此外，因为扩展组件能够独立进行迭代，能够更及时地满足用户的需求。
-KubeSphere 贡献者
-扩展机制的引入使得 KubeSphere Core 及 KubeSphere 其他扩展组件变得更加松耦合，开发也更加易于上手。
-云原生应用开发商（ISV）或其他开源项目
-众多 ISV 或其他开源项目可以低成本将产品或开源项目无缝融入到 KubeSphere 生态系统中。比如 Karmada/KubeEdge 的开发人员可以基于 KubeSphere LuBan 开发独立的 Karmada/KubeEdge 控制台。</description>
+什么是 KubeSphere 扩展组件？ KubeSphere 扩展组件是一个可以对 KubeSphere 功能进行扩展并借助 Helm 进行编排的，遵循 KubeSphere 扩展组件开发规范的 Helm Chart。
+作为云原生领域的开发者，您不必再花大量的时间去学习一个私有的应用编排方式。
+如果您正在寻找已发布的扩展，请前往 KubeSphere Marketplace。
+KubeSphere 扩展组件可以做什么？ 从前端 UI 到后端 API，KubeSphere 的几乎每个部分都可以通过扩展 API 进行定制和增强。KubeSphere 的许多核心功能也都是作为扩展构建的，并使用相同的扩展 API。
+以下是使用扩展 API 可以实现的一些示例：
+在项目的侧边导航栏，注入新的菜单与功能页面，支持管理更多类型的资源。
+在平台层级菜单中注入功能入口，对平台的管理能力进行增强。
+直接嵌入已有的第三方功能组件页面到 KubeSphere，对各分散的系统进行聚合。
+覆盖 KubeSphere 已有的页面路由，实现您独有的业务逻辑。
+对 KubeSphere 的 API 进行扩展。
+如果您想更全面地了解扩展 API，请参阅功能定制。
+如何构建扩展组件？ 请参阅开发流程章节来熟悉如何构建扩展组件。
+如果您在扩展组件的开发过程中有疑问，请尝试在 GitHub Issue 获得帮助。</description>
     </item>
     
     <item>

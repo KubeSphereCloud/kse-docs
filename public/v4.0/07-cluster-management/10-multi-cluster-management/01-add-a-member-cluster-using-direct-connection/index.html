@@ -461,12 +461,6 @@
                 
               
             
-              
-                
-                  
-                
-              
-            
             
               <span
                 class="menu-switch-icon icon-caret_down_fill">
@@ -485,19 +479,6 @@
           
           <li class="sidebar-item  ">
             <a href="/v4.0/04-platform-management/02-platform-settings/01-view-and-customize-platform-information/">查看平台信息</a>
-          </li>
-        
-      
-    
-  
-    
-      
-      
-      
-      
-          
-          <li class="sidebar-item  ">
-            <a href="/v4.0/04-platform-management/02-platform-settings/03-change-language/">修改平台语言</a>
           </li>
         
       
@@ -556,6 +537,12 @@
             class="sidebar-item collapsed ">
             <a href="/v4.0/05-users-and-roles/01-users/">用户</a>
             
+            
+              
+                
+                  
+                
+              
             
               
                 
@@ -681,7 +668,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/05-users-and-roles/01-users/06-change-the-password-of-a-user/">修改用户密码</a>
+            <a href="/v4.0/05-users-and-roles/01-users/06-change-the-email-language-and-language/">修改邮箱和语言</a>
           </li>
         
       
@@ -694,7 +681,20 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/05-users-and-roles/01-users/07-delete-users/">删除用户</a>
+            <a href="/v4.0/05-users-and-roles/01-users/07-change-the-password-of-a-user/">修改用户密码</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/05-users-and-roles/01-users/08-delete-users/">删除用户</a>
           </li>
         
       
@@ -1210,12 +1210,6 @@
             class="sidebar-item active ">
             <a href="/v4.0/07-cluster-management/">集群管理</a>
             
-            
-              
-                
-                  
-                
-              
             
               
                 
@@ -4037,51 +4031,6 @@
           
           <li class="sidebar-item  ">
             <a href="/v4.0/07-cluster-management/10-multi-cluster-management/06-remove-a-member-cluster/">移除成员集群</a>
-          </li>
-        
-      
-    
-  
-</ul>
-        
-      
-    
-  
-    
-      
-      
-      
-      
-        
-          <li
-            class="sidebar-item collapsed ">
-            <a href="/v4.0/07-cluster-management/11-toolbox/">工具箱</a>
-            
-            
-              
-                
-                  
-                
-              
-            
-            
-              <span
-                class="menu-switch-icon icon-caret_down_fill">
-              </span>
-            
-          </li>
-          
-          <ul>
-  
-  
-    
-      
-      
-      
-      
-          
-          <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/11-toolbox/01-view-a-kubeconfig-file/">查看 kubeconfig 文件</a>
           </li>
         
       
@@ -7117,6 +7066,70 @@
     
   
     
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.0/10-toolbox/">工具箱</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/10-toolbox/01-use-kubectl-tool/">通过 kubectl 运行命令</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/10-toolbox/02-view-a-kubeconfig-file/">查看 kubeconfig 文件</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
   
 </ul>
       
@@ -7135,7 +7148,7 @@
     添加成员集群</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2023-08-07 09:38:28
+      更新时间：2023-08-16 06:26:43
     </div>
     
     
@@ -7143,16 +7156,21 @@
     
     
     
-      
     
+    <div
+      class="tag post-tag export-pdf has-tooltip-top has-tooltip-arrow"
+      data-tooltip="下载范围：所属一级目录的全部内容"
+      data-url="/v4.0/07-cluster-management">
+      <span class="icon-format_pdf_2_fill"></span>
+      PDF
+    </div>
     
   </div><div class="post-menu">
   <div class="post-menu-title">本页目录</div>
   <nav id="TableOfContents">
   <ul>
     <li><a href="#_前提条件">前提条件</a></li>
-    <li><a href="#_获取主集群_jwtsecret">获取主集群 jwtSecret</a></li>
-    <li><a href="#_设置成员集群_jwtsecret_并获取_kubeconfig">设置成员集群 jwtSecret 并获取 kubeconfig</a></li>
+    <li><a href="#_获取成员集群_kubeconfig">获取成员集群 kubeconfig</a></li>
     <li><a href="#_添加成员集群">添加成员集群</a></li>
   </ul>
 </nav>
@@ -7179,63 +7197,8 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_获取主集群_jwtsecret">获取主集群 jwtSecret<a href="" id="80cec7eee9fd42cb9b88c6d8ec1b2666" class="bare"></a></h2>
+<h2 id="_获取成员集群_kubeconfig">获取成员集群 kubeconfig</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>以具有 <strong>platform-admin</strong> 角色的用户登录主集群的 Web 控制台。</p>
-</li>
-<li>
-<p>将光标悬停在页面右下角的<span class="image"><img src="/images/ks-qkcp/zh/icons/hammer.svg" alt="hammer" width="18" height="18"/></span> 图标，然后在菜单中选择 <strong>kubectl</strong>。</p>
-</li>
-<li>
-<p>在 <strong>kubectl</strong> 对话框，执行以下命令获取主集群的 jwtSecret 值。</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v &#34;apiVersion&#34; | grep jwtSecret</code></pre>
-</div>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_设置成员集群_jwtsecret_并获取_kubeconfig">设置成员集群 jwtSecret 并获取 kubeconfig<a href="" id="5e5963b40d2c4261842d7e99d1822ac2" class="bare"></a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>执行以下步骤同步主集群和成员集群的 jwtSecret 值：</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>以具有 <strong>platform-admin</strong> 角色的用户登录成员集群的 Web 控制台。</p>
-</li>
-<li>
-<p>将光标悬停在页面右下角的<span class="image"><img src="/images/ks-qkcp/zh/icons/hammer.svg" alt="hammer" width="18" height="18"/></span> 图标，然后在菜单中选择 <strong>kubectl</strong>。</p>
-</li>
-<li>
-<p>在 <strong>kubectl</strong> 对话框，执行以下命令编辑集群配置文件：</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">kubectl edit cc ks-installer -n kubesphere-system</code></pre>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>在集群配置文件中，将 <strong>spec:authentication:jwtSecret</strong> 参数设置为主集群的 jwtSecret 值，然后保存文件。</p>
-</li>
-</ol>
-</div>
 <div class="paragraph">
 <p>执行以下步骤获取成员集群的 kubeconfig 信息：</p>
 </div>
@@ -7381,8 +7344,7 @@
   <nav id="TableOfContents">
   <ul>
     <li><a href="#_前提条件">前提条件</a></li>
-    <li><a href="#_获取主集群_jwtsecret">获取主集群 jwtSecret</a></li>
-    <li><a href="#_设置成员集群_jwtsecret_并获取_kubeconfig">设置成员集群 jwtSecret 并获取 kubeconfig</a></li>
+    <li><a href="#_获取成员集群_kubeconfig">获取成员集群 kubeconfig</a></li>
     <li><a href="#_添加成员集群">添加成员集群</a></li>
   </ul>
 </nav>

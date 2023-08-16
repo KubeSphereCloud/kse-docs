@@ -290,14 +290,24 @@ cluster-viewer
       <description>本节介绍如何通过直接连接添加成员集群。
 前提条件 您需要在主集群和成员集群中都具有 platform-admin 角色。
 主集群所有节点必须能访问成员集群的 Kubernetes API 服务（默认为成员集群主节点的 6443 端口）。取决于您的网络环境，您可能需要配置防火墙和流量转发规则。
-获取主集群 jwtSecret 以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
-将光标悬停在页面右下角的 图标，然后在菜单中选择 kubectl。
-在 kubectl 对话框，执行以下命令获取主集群的 jwtSecret 值。
-kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v &amp;#34;apiVersion&amp;#34; | grep jwtSecret 设置成员集群 jwtSecret 并获取 kubeconfig 执行以下步骤同步主集群和成员集群的 jwtSecret 值：
+获取成员集群 kubeconfig 执行以下步骤获取成员集群的 kubeconfig 信息：
 以具有 platform-admin 角色的用户登录成员集群的 Web 控制台。
-将光标悬停在页面右下角的 图标，然后在菜单中选择 kubectl。
-在 kubectl 对话框，执行以下命令编辑集群配置文件：
-kubectl edit cc ks-installer -n kubesphere-system 在集群配置文件中，将 spec:authentication:jwtSecret 参数设置为主集群的 jwtSecret 值，然后保存文件。</description>
+将光标悬停在页面右下角的 图标，然后在菜单中选择 kubeconfig。
+在 kubeconfig 对话框，查看成员集群的 kubeconfig 信息并记录。
+备注 您可以复制 kubeconfig 信息或点击 将 kubeconfig.yaml 文件下载到本地。
+请将 kubeconfig 信息中的 clusters:cluster:server 参数修改为成员集群的 Kubernetes API 服务的访问地址，默认在成员集群主节点的 6443 端口暴露。请确保主集群的所有节点都能访问该地址，取决于您的网络环境，您可能需要配置防火墙规则和流量转发策略。
+添加成员集群 以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
+点击集群管理。
+在集群管理页面，点击添加集群。
+在基本信息页签，设置成员集群的名称、标签、提供商和描述信息，然后点击下一步。
+参数 描述 名称
+成员集群的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+标签
+成员集群的用途标识。您可以在下拉列表中选择标签，也可以手动输入标签。
+提供商
+成员集群的提供商。您可以在下拉列表中选择提供商，也可以手动输入提供商。
+描述
+成员集群的描述信息。描述可包含任意字符，最长 256 个字符。</description>
     </item>
     
     <item>
@@ -464,22 +474,22 @@ workspace-self-provisioner
 在编辑权限对话框，设置企业空间角色的权限，然后点击确定。
 所有企业空间成员都可以查看企业空间基本信息。其他操作所需的权限如下：
 项目
-权限 允许操作 项目管理
-编辑项目信息、删除项目、编辑项目配额。
-项目创建
+权限 允许操作 项目创建
 创建项目，并成为所创建的项目的管理员。
+项目管理
+创建、编辑和删除企业空间中的项目。
 项目查看
 查看项目列表、查看项目中的所有资源。
-DevOps 项目
-权限 允许操作 DevOps 项目管理
-编辑 DevOps 项目信息、删除 DevOps 项目。
-DevOps 项目创建
+DevOps 项目（需要安装 DevOps 扩展组件）
+权限 允许操作 DevOps 项目创建
 创建 DevOps 项目，并成为所创建的 DevOps 项目的管理员。
+DevOps 项目管理
+创建、编辑和删除企业空间中的 DevOps 项目。
 DevOps 项目查看
 查看 DevOps 项目列表、查看 DevOps 项目中的所有资源。
 访问控制
-权限 允许操作 成员管理
-邀请用户加入企业空间、修改企业空间成员的角色、移除企业空间成员。</description>
+权限 允许操作 成员查看
+查看企业空间成员列表、查看企业空间成员详情。</description>
     </item>
     
     <item>
@@ -898,11 +908,39 @@ TLS 私钥。
 描述
 项目角色的描述信息。描述可包含任意字符，最长 256 个字符。
 在编辑权限对话框，设置项目角色的权限，然后点击确定。
+存储
+权限 允许操作 持久卷声明管理
+创建持久卷声明、克隆持久卷、扩展持久卷、编辑持久卷声明信息、删除持久卷声明。
+持久卷声明查看
+查看持久卷声明列表、查看持久卷声明详情。
+配置
+权限 允许操作 配置字典管理
+创建配置字典、编辑配置字典信息、编辑配置字典设置、删除配置字典。
+配置字典查看
+查看配置字典列表、查看配置字典详情。
+保密字典管理
+创建保密字典、编辑保密字典信息、编辑保密字典设置、删除保密字典。
+保密字典查看
+查看保密字典列表、查看保密字典详情。
+服务帐户管理
+创建服务帐户、编辑服务帐户信息、修改服务帐户角色、删除服务帐户。
+服务帐户查看
+查看服务帐户列表、查看服务帐户详情。
+应用负载
+权限 允许操作 应用负载管理
+服务管理：创建有状态或无状态服务、创建外部服务、通过现有工作负载创建服务、编辑服务信息、编辑服务设置、编辑服务外部访问设置、删除服务。
+工作负载管理：创建工作负载、编辑工作负载信息、重新创建工作负载、删除工作负载、调整容器组副本数量、停止工作负载、回退工作负载设置、编辑工作负载设置。
+任务管理：创建任务、编辑任务信息、删除任务、重新运行任务、暂停定时任务。
+应用路由管理：创建应用路由、编辑应用路由信息、编辑路由规则、编辑应用路由注解、删除应用路由。
+容器组管理：访问容器终端、删除容器组。
+应用负载查看
+服务查看：查看服务拓扑、查看服务列表、查看服务详情。
+工作负载查看：查看工作负载列表、查看工作负载详情。
+任务查看：查看任务列表、查看任务详情。
+应用路由查看：查看应用路由列表、查看应用路由详情、访问应用路由的后端服务。
+容器组查看：查看容器组列表、查看容器组详情、查看容器详情。
 访问控制
-权限 允许操作 角色查看
-查看项目角色列表、查看项目角色详情。
-成员查看
-查看项目成员列表。</description>
+权限 允许操作 角色查看</description>
     </item>
     
     <item>
@@ -953,7 +991,10 @@ KubeSphere LuBan 优势 插件式的核心框架
 前后端热更新、热修复
 开发者可以在系统运行时对前端和后端进行实时更新和修复，提高了开发和运维的效率，同时保证了应用程序的可用性和用户体验。
 开放性扩展中心，生态共建
-我们提供一个开放的平台，鼓励第三方开发者通过组件向系统添加新的功能或增强现有功能，在系统的框架内进行开发和集成，并将他们的组件与系统进行无缝连接，共同构建一个健康、繁荣的生态系统。</description>
+我们提供一个开放的平台，鼓励第三方开发者通过组件向系统添加新的功能或增强现有功能，在系统的框架内进行开发和集成，并将他们的组件与系统进行无缝连接，共同构建一个健康、繁荣的生态系统。
+KubeSphere LuBan 如何帮助到您 KubeSphere LuBan 架构可以使以下人员受益：
+KubeSphere 用户
+KubeSphere 用户可以自由选择启用哪些 KubeSphere 扩展组件。同时还能将自己的应用无缝融入到 KubeSphere 控制台。此外，随着 KubeSphere 扩展组件生态的丰富，用户可以在 KubeSphere 扩展市场中自由选择更丰富的产品和服务，最终实现容器管理平台的千人千面的效果。</description>
     </item>
     
     <item>
@@ -971,7 +1012,7 @@ KubeSphere Core 为扩展组件提供基础的运行环境。安装完成后，�
 curl -sfL https://get-kk.kubesphere.io | sh - 执行以下命令安装依赖项。
 apt install socat conntrack -y 执行以下命令快速创建一个 Kubernetes 集群。
 ./kk create cluster --skip-pull-images --with-local-storage --with-kubernetes v1.25.4 --container-manager containerd -y 如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 helm 安装 KubeSphere Core。
-helm repo add test https://charts.kubesphere.io/test helm repo update test helm upgrade ks-core --install -n kubesphere-system --create-namespace test/ks-core --set apiserver.</description>
+helm repo add test https://charts.kubesphere.io/test helm repo update test helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.</description>
     </item>
     
     <item>
@@ -988,24 +1029,7 @@ helm repo add test https://charts.kubesphere.io/test helm repo update test helm 
 curl -sfL https://get-kk.kubesphere.io | sh - 执行以下命令安装依赖项。
 apt install socat conntrack -y 执行以下命令快速创建一个 Kubernetes 集群。
 ./kk create cluster --skip-pull-images --with-local-storage --with-kubernetes v1.25.4 --container-manager containerd -y 如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 helm 安装 KubeSphere Core。
-helm repo add test https://charts.kubesphere.io/test helm repo update test helm upgrade --install -n kubesphere-system --create-namespace ks-core --set apiserver.</description>
-    </item>
-    
-    <item>
-      <title>查看 kubeconfig 文件</title>
-      <link>/v4.0/07-cluster-management/11-toolbox/01-view-a-kubeconfig-file/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/v4.0/07-cluster-management/11-toolbox/01-view-a-kubeconfig-file/</guid>
-      <description>本节介绍如何查看 kubeconfig 文件。
-kubeconfig 文件包含集群的认证信息，用于向其他应用程序提供集群的访问权限。KubeSphere 企业版支持自动根据当前登录用户生成 kubeconfig 文件，可向其他应用程序提供当前登录用户相同的访问权限。有关更多信息，请参阅 Kubernetes 官方文档。
-前提条件 您需要获取 KubeSphere 企业版用户名和密码。
-操作步骤 登录 KubeSphere 企业版 Web 控制台。
-将光标悬停在页面右下角的 图标，然后在菜单中选择 kubeconfig。
-在弹出的对话框查看 kubeconfig 配置信息。
-clusters:cluster:server 字段显示的访问地址为虚拟 IP 地址，只能从集群内部部访问。如需从集群外部访问，请将该地址修改为 kube-apiserver 对外暴露的地址。
-contexts:cluster:namespace 字段默认显示的项目名称为 default。请将该字段取值修改为当前用户实际具有访问权限的项目名称。
-点击 可将 kubeconfig.yaml 文件下载到本地。</description>
+helm repo add test https://charts.kubesphere.io/test helm repo update test helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.</description>
     </item>
     
     <item>
@@ -1184,25 +1208,23 @@ platform-self-provisioner
 平台角色的描述信息。描述可包含任意字符，最长 256 个字符。
 在编辑权限对话框，设置平台角色的权限，然后点击确定。
 具有 platform-admin 角色的用户可以启用和禁用扩展组件。其他平台操作所需权限如下：
-访问控制
-权限 允许操作 企业空间查看
-查看企业空间列表。
+企业空间
+权限 允许操作 企业空间创建
+创建企业空间。
 企业空间管理
-创建企业空间、编辑企业空间信息、删除企业空间。
-用户查看
-查看用户列表、查看用户详情
-用户管理
-创建用户、编辑用户信息、启用和禁用用户、修改用户角色、删除用户。
+管理所有企业空间和企业空间下的资源。
+企业空间查看
+查看所有企业空间和企业空间下的资源。
+集群管理
+权限 允许操作 集群管理
+创建集群、删除集群和管理集群中的所有资源。
+集群查看
+查看所有集群和集群资源。
+访问控制
+权限 允许操作 用户查看
+查看用户列表、查看用户详情。
 角色查看
-查看角色列表、查看角色详情。
-角色管理
-创建平台角色、编辑平台角色信息、编辑平台角色权限、删除平台角色。
-集群管理
-权限 允许操作 集群查看
-查看集群列表。
-集群管理
-添加成员集群、编辑集群信息、更新 kubeconfig、移除成员集群。
-应用管理</description>
+查看角色列表、查看角色详情。</description>
     </item>
     
     <item>
@@ -1367,7 +1389,8 @@ platform-self-provisioner
       <guid>/v4.0/06-extension-user-guide/02-subscribe-and-install-components/01-subscribe-components/</guid>
       <description>本节介绍如何订阅扩展组件。
 在安装组件之前，您需要使用 KubeSphere 云账号在扩展市场订阅组件。
-前提条件 您需要注册一个 KubeSphere 云账号。
+前提条件 您需要以 platform-admin 角色登录到 KubeSphere 企业版 Web 控制台。
+您需要注册一个 KubeSphere 云账号。
 操作步骤 点击 KubeSphere 企业版 Web 控制台左上角的扩展市场，进入扩展市场页面。
 搜索您要安装的扩展组件，点击订阅。
 如果您未绑定 KubeSphere 云账号，前往扩展中心绑定您的 KubeSphere 云账户，然后进入订阅流程。
@@ -1426,8 +1449,29 @@ KubeSphere 企业版安装完成后默认仅启用了核心组件。建议您�
 扩展组件
 平台级、多集群和多租户级扩展组件的全局访问入口，支持快捷访问已安装的扩展组件。
 平台设置
-定制平台信息。
+查看平台信息。
 说明 关于各个功能的详细介绍，请参照对应的管理指南。</description>
+    </item>
+    
+    <item>
+      <title>通过 kubectl 运行命令</title>
+      <link>/v4.0/10-toolbox/01-use-kubectl-tool/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/10-toolbox/01-use-kubectl-tool/</guid>
+      <description>Kubectl 是 Kubernetes 命令行工具。您可以用它在 Kubernetes 集群上运行命令，以便查看和管理集群资源等。
+KubeSphere 企业版控制台提供 Web kubectl，方便用户使用。在默认情况下，当前版本中，只有被授予 platform-admin 角色的用户（例如默认账户 admin）才有权限使用 Web kubectl 进行集群资源操作和管理。
+本节演示如何使用 Web kubectl 进行集群资源操作和管理。
+前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。
+使用 Web Kubectl 登录 KubeSphere 企业版 Web 控制台。
+将光标悬停在页面右下角的图标，然后在菜单中选择 kubectl。
+在弹出窗口中看到 kubectl 界面，如下图所示。如果您启用了多集群功能，则需要先在右上角的下拉列表中选择目标集群。如果未启用多集群功能，则该下拉列表不可见。
+在命令行工具中输入 kubectl 命令，查询并管理 Kubernetes 集群资源。例如，执行以下命令查询集群中所有 pod 的状态。
+kubectl get pods -A 在终端窗口中使用以下语法运行 kubectl 命令：
+kubectl [command] [TYPE] [NAME] [flags] 说明 其中，command、TYPE、NAME 和 flags 分别是：
+command：指定要对一个或多个资源执行的操作，例如 create、get、describe 和 delete。
+TYPE：指定资源类型。资源类型不区分大小写，您可以指定单数、复数或缩写形式。
+NAME：指定资源的名称。名称区分大小写。如果省略名称，则会显示所有资源的详细信息，例如 kubectl get pods。</description>
     </item>
     
     <item>
@@ -2046,7 +2090,7 @@ LoadBalancer：系统在 NodePort 服务的基础上为服务分配一个外部 
 集群网关或项目网关的 IP 地址。
 如果网关的外部访问模式为 NodePort，网关地址为某一个集群节点的 IP 地址。客户端可以通过任意集群节点的 IP 地址和端口访问应用路由的后端服务。
 如果网关的外部访问模式为 LoadBalancer，网关地址为负载均衡器的地址。
-如果网关地址未显示，可能是因为集群节点缺少 label node-role.kubernetes.io/master 标签。点击集群节点页面，点击控制平面节点，选择更多操作 &amp;gt; 编辑标签添加 label node-role.kubernetes.io/master 标签。
+如果网关地址未显示，可能是因为集群节点缺少 node-role.kubernetes.io/master 标签。点击集群节点页面，点击控制平面节点，选择更多操作 &amp;gt; 编辑标签添加 node-role.kubernetes.io/master 标签。
 应用
 应用路由所对应的应用名称。
 创建时间
@@ -2281,22 +2325,43 @@ viewer
     </item>
     
     <item>
+      <title>查看 kubeconfig 文件</title>
+      <link>/v4.0/10-toolbox/02-view-a-kubeconfig-file/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/10-toolbox/02-view-a-kubeconfig-file/</guid>
+      <description>本节介绍如何查看 kubeconfig 文件。
+kubeconfig 文件包含集群的认证信息，用于向其他应用程序提供集群的访问权限。KubeSphere 企业版支持自动根据当前登录用户生成 kubeconfig 文件，可向其他应用程序提供当前登录用户相同的访问权限。有关更多信息，请参阅 Kubernetes 官方文档。
+前提条件 您需要获取 KubeSphere 企业版用户名和密码。
+操作步骤 登录 KubeSphere 企业版 Web 控制台。
+将光标悬停在页面右下角的 图标，然后在菜单中选择 kubeconfig。
+在弹出的对话框查看 kubeconfig 配置信息。
+clusters:cluster:server 字段显示的访问地址为虚拟 IP 地址，只能从集群内部部访问。如需从集群外部访问，请将该地址修改为 kube-apiserver 对外暴露的地址。
+contexts:cluster:namespace 字段默认显示的项目名称为 default。请将该字段取值修改为当前用户实际具有访问权限的项目名称。
+点击 可将 kubeconfig.yaml 文件下载到本地。</description>
+    </item>
+    
+    <item>
       <title>KubeSphere LuBan 架构</title>
       <link>/v4.0/01-intro/02-architecture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.0/01-intro/02-architecture/</guid>
-      <description>为了使 KubeSphere 灵活可扩展，我们设计了微内核 + 扩展组件的架构（代号 LuBan）。其中内核部分（KubeSphere Core）仅包含系统运行的必备基础功能，而将独立的业务模块分别封装在各个扩展组件（Extensions）中。用户可在系统运行时动态的安装、卸载、启用、禁用扩展组件。
+      <description>为了使 KubeSphere 灵活可扩展，我们设计了微内核 + 扩展组件的架构（代号 LuBan）。其中内核部分（KubeSphere Core）仅包含系统运行的必备基础功能，而将独立的业务模块分别封装在各个扩展组件（Extensions）中。用户可在系统运行时动态地安装、卸载、启用、禁用扩展组件。
 KubeSphere LuBan 架构 KubeSphere LuBan 架构设计如下图所示。
-KubeSphere LuBan 如何帮助到您 KubeSphere LuBan 架构可以使以下人员受益：
-KubeSphere 用户
-KubeSphere 用户可以自由选择启用哪些 KubeSphere 扩展组件。同时还能将自己的应用无缝融入到 KubeSphere 控制台。此外，随着 KubeSphere 扩展组件生态的丰富，用户可以在 KubeSphere 扩展市场中自由选择更丰富的产品和服务，最终实现容器管理平台的千人千面的效果。
-KubeSphere 维护者
-扩展机制使得维护者可以更聚焦 KubeSphere 核心功能的开发，并可使得 KubeSphere Core 更加轻量，版本发布节奏也可以加快。此外，因为扩展组件能够独立进行迭代，能够更及时地满足用户的需求。
-KubeSphere 贡献者
-扩展机制的引入使得 KubeSphere Core 及 KubeSphere 其他扩展组件变得更加松耦合，开发也更加易于上手。
-云原生应用开发商（ISV）或其他开源项目
-众多 ISV 或其他开源项目可以低成本将产品或开源项目无缝融入到 KubeSphere 生态系统中。比如 Karmada/KubeEdge 的开发人员可以基于 KubeSphere LuBan 开发独立的 Karmada/KubeEdge 控制台。</description>
+什么是 KubeSphere 扩展组件？ KubeSphere 扩展组件是一个可以对 KubeSphere 功能进行扩展并借助 Helm 进行编排的，遵循 KubeSphere 扩展组件开发规范的 Helm Chart。
+作为云原生领域的开发者，您不必再花大量的时间去学习一个私有的应用编排方式。
+如果您正在寻找已发布的扩展，请前往 KubeSphere Marketplace。
+KubeSphere 扩展组件可以做什么？ 从前端 UI 到后端 API，KubeSphere 的几乎每个部分都可以通过扩展 API 进行定制和增强。KubeSphere 的许多核心功能也都是作为扩展构建的，并使用相同的扩展 API。
+以下是使用扩展 API 可以实现的一些示例：
+在项目的侧边导航栏，注入新的菜单与功能页面，支持管理更多类型的资源。
+在平台层级菜单中注入功能入口，对平台的管理能力进行增强。
+直接嵌入已有的第三方功能组件页面到 KubeSphere，对各分散的系统进行聚合。
+覆盖 KubeSphere 已有的页面路由，实现您独有的业务逻辑。
+对 KubeSphere 的 API 进行扩展。
+如果您想更全面地了解扩展 API，请参阅功能定制。
+如何构建扩展组件？ 请参阅开发流程章节来熟悉如何构建扩展组件。
+如果您在扩展组件的开发过程中有疑问，请尝试在 GitHub Issue 获得帮助。</description>
     </item>
     
     <item>
@@ -2479,7 +2544,8 @@ kube-proxy 版本
 前提条件 您需要在 KubeSphere 企业版平台具有角色查看权限。有关更多信息，请参阅用户和平台角色。
 操作步骤 以具有角色查看权限的用户登录 KubeSphere 企业版 Web 控制台。
 点击用户和角色管理。
-在左侧导航栏选择平台角色。</description>
+在左侧导航栏选择平台角色。
+平台角色列表提供角色的名称、描述和创建时间。</description>
     </item>
     
     <item>
@@ -2593,7 +2659,7 @@ BestEffort：容器组中的容器没有配置任何内存上限、内存请求�
 集群网关或项目网关的 IP 地址。
 如果网关的外部访问模式为 NodePort，网关地址为某一个集群节点的 IP 地址。客户端可以通过任意集群节点的 IP 地址和端口访问应用路由的后端服务。
 如果网关的外部访问模式为 LoadBalancer，网关地址为负载均衡器的地址。
-如果网关地址未显示，可能是因为集群节点缺少 label node-role.kubernetes.io/master 标签。点击集群节点页面，点击控制平面节点，选择更多操作 &amp;gt; 编辑标签添加 label node-role.kubernetes.io/master 标签。
+如果网关地址未显示，可能是因为集群节点缺少 node-role.kubernetes.io/master 标签。点击集群节点页面，点击控制平面节点，选择更多操作 &amp;gt; 编辑标签添加 node-role.kubernetes.io/master 标签。
 应用
 应用路由所对应的应用名称。
 创建时间
@@ -2997,35 +3063,32 @@ DevOps 项目的描述信息。描述可包含任意字符，最长 256 个字�
 在企业空间角色详情页面右侧的权限页签查看企业空间角色具有的权限。
 所有企业空间成员都可以查看企业空间基本信息。其他操作所需的权限如下：
 项目
-权限 允许操作 项目管理
-编辑项目信息、删除项目、编辑项目配额。
-项目创建
+权限 允许操作 项目创建
 创建项目，并成为所创建的项目的管理员。
+项目管理
+创建、编辑和删除企业空间中的项目。
 项目查看
 查看项目列表、查看项目中的所有资源。
-DevOps 项目
-权限 允许操作 DevOps 项目管理
-编辑 DevOps 项目信息、删除 DevOps 项目。
-DevOps 项目创建
+DevOps 项目（需要安装 DevOps 扩展组件）
+权限 允许操作 DevOps 项目创建
 创建 DevOps 项目，并成为所创建的 DevOps 项目的管理员。
+DevOps 项目管理
+创建、编辑和删除企业空间中的 DevOps 项目。
 DevOps 项目查看
 查看 DevOps 项目列表、查看 DevOps 项目中的所有资源。
 访问控制
-权限 允许操作 成员管理
-邀请用户加入企业空间、修改企业空间成员的角色、移除企业空间成员。
-成员查看
+权限 允许操作 成员查看
 查看企业空间成员列表、查看企业空间成员详情。
-角色管理
-创建企业空间角色、编辑企业空间角色信息、编辑企业空间角色权限、删除企业空间角色。
 角色查看
 查看企业空间角色列表、查看企业空间角色详情。
-企业空间设置
-权限 允许操作 企业空间设置管理
-编辑企业空间信息、启用和禁用网络隔离、删除企业空间、编辑企业空间配额。
-企业空间设置查看
-查看集群资源用量、查看项目资源用量排行、查看企业空间资源用量、查看企业空间配额。
 在企业空间角色详情页面右侧点击授权用户页签具有当前企业空间角色的用户。
-参数 描述 用户名</description>
+参数 描述 用户名
+获得授权的用户的名称。
+状态
+获得授权的用户当前的状态。
+活跃：用户当前状态正常。
+等待中：系统正在创建用户。
+已禁用：用户被平台管理员禁用，无法登录 KubeSphere 企业版 Web 控制台。</description>
     </item>
     
     <item>
@@ -3164,7 +3227,7 @@ DevOps 项目查看
 集群网关或项目网关的 IP 地址。
 如果网关的外部访问模式为 NodePort，网关地址为某一个集群节点的 IP 地址。客户端可以通过任意集群节点的 IP 地址和端口访问应用路由的后端服务。
 如果网关的外部访问模式为 LoadBalancer，网关地址为负载均衡器的地址。
-如果网关地址未显示，可能是因为集群节点缺少 label node-role.kubernetes.io/master 标签。点击集群节点页面，点击控制平面节点，选择更多操作 &amp;gt; 编辑标签添加 label node-role.kubernetes.io/master 标签。
+如果网关地址未显示，可能是因为集群节点缺少 node-role.kubernetes.io/master 标签。点击集群节点页面，点击控制平面节点，选择更多操作 &amp;gt; 编辑标签添加 node-role.kubernetes.io/master 标签。
 创建时间
 应用路由的创建时间。
 创建者
@@ -3411,16 +3474,7 @@ GPU 上限
 操作步骤 以具有角色查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
 在左侧导航栏选择项目设置 &amp;gt; 项目角色。
 在项目角色列表中点击一个项目角色的名称打开其详情页面。
-在集群角色详情页面右侧的权限页签查看集群角色具有的权限。
-访问控制
-权限 允许操作 角色查看
-查看项目角色列表、查看项目角色详情。
-角色管理
-创建项目角色、编辑项目角色信息、编辑项目角色权限、删除项目角色。
-成员查看
-查看项目成员列表。
-成员管理
-邀请用户加入项目、修改项目成员角色、移除项目成员。
+在项目角色详情页面右侧的权限页签查看项目角色具有的权限。
 在项目角色详情页面右侧点击授权用户页签具有当前项目角色的用户。</description>
     </item>
     
@@ -3541,7 +3595,8 @@ ExternalName：服务将业务流量转发给集群外部的其他服务。系�
 点击用户和角色管理。
 在左侧导航栏选择平台角色。
 在平台角色列表点击一个平台角色的名称打开其详情页面。
-在平台角色详情页面右侧点击授权用户页签，查看具有当前平台角色的用户。
+在平台角色详情页面的权限页签，查看当前角色拥有的权限。
+在平台角色详情页面点击授权用户页签，查看具有当前平台角色的用户。
 参数 描述 用户名
 获得授权的用户的名称。
 状态
@@ -3723,7 +3778,7 @@ ExternalName：服务将业务流量转发给集群外部的其他服务。系�
 集群网关或项目网关的 IP 地址。
 如果网关的外部访问模式为 NodePort，网关地址为某一个集群节点的 IP 地址。客户端可以通过任意集群节点的 IP 地址和端口访问应用路由的后端服务。
 如果网关的外部访问模式为 LoadBalancer，网关地址为负载均衡器的地址。
-如果网关地址未显示，可能是因为集群节点缺少 label node-role.kubernetes.io/master 标签。点击集群节点页面，点击控制平面节点，选择更多操作 &amp;gt; 编辑标签添加 label node-role.kubernetes.io/master 标签。
+如果网关地址未显示，可能是因为集群节点缺少 node-role.kubernetes.io/master 标签。点击集群节点页面，点击控制平面节点，选择更多操作 &amp;gt; 编辑标签添加 node-role.kubernetes.io/master 标签。
 创建时间
 应用路由的创建时间。
 创建者
@@ -3851,19 +3906,6 @@ workspace-admin
 前提条件 为避免数据丢失，请提前备份所有重要数据。
 操作步骤 执行以下命令卸载 KubeSphere 企业版。
 helm -n kubesphere-system uninstall ks-core </description>
-    </item>
-    
-    <item>
-      <title>修改平台语言</title>
-      <link>/v4.0/04-platform-management/02-platform-settings/03-change-language/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/v4.0/04-platform-management/02-platform-settings/03-change-language/</guid>
-      <description>本节介绍如何修改 KubeSphere 企业版 Web 控制台的语言。
-操作步骤 登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击当前用户名，然后在下拉列表中选择用户设置。
-在基本信息页签修改平台的显示语言。
-点击确定。</description>
     </item>
     
     <item>
@@ -4738,33 +4780,24 @@ TLS 私钥。
 在编辑权限对话框，设置企业空间角色的权限，然后点击确定。
 所有企业空间成员都可以查看企业空间基本信息。其他操作所需的权限如下：
 项目
-权限 允许操作 项目管理
-编辑项目信息、删除项目、编辑项目配额。
-项目创建
+权限 允许操作 项目创建
 创建项目，并成为所创建的项目的管理员。
+项目管理
+创建、编辑和删除企业空间中的项目。
 项目查看
 查看项目列表、查看项目中的所有资源。
-DevOps 项目
-权限 允许操作 DevOps 项目管理
-编辑 DevOps 项目信息、删除 DevOps 项目。
-DevOps 项目创建
+DevOps 项目（需要安装 DevOps 扩展组件）
+权限 允许操作 DevOps 项目创建
 创建 DevOps 项目，并成为所创建的 DevOps 项目的管理员。
+DevOps 项目管理
+创建、编辑和删除企业空间中的 DevOps 项目。
 DevOps 项目查看
 查看 DevOps 项目列表、查看 DevOps 项目中的所有资源。
 访问控制
-权限 允许操作 成员管理
-邀请用户加入企业空间、修改企业空间成员的角色、移除企业空间成员。
-成员查看
+权限 允许操作 成员查看
 查看企业空间成员列表、查看企业空间成员详情。
-角色管理
-创建企业空间角色、编辑企业空间角色信息、编辑企业空间角色权限、删除企业空间角色。
 角色查看
-查看企业空间角色列表、查看企业空间角色详情。
-企业空间设置
-权限 允许操作 企业空间设置管理
-编辑企业空间信息、启用和禁用网络隔离、删除企业空间、编辑企业空间配额。
-企业空间设置查看
-查看集群资源用量、查看项目资源用量排行、查看企业空间资源用量、查看企业空间配额。</description>
+查看企业空间角色列表、查看企业空间角色详情。</description>
     </item>
     
     <item>
@@ -4997,6 +5030,37 @@ TLS 私钥。
 在左侧导航栏选择项目设置 &amp;gt; 项目角色。
 在需要操作的项目角色右侧点击 ，然后在下拉列表中选择编辑权限。
 在编辑权限对话框，设置项目角色的权限，然后点击确定。
+存储
+权限 允许操作 持久卷声明管理
+创建持久卷声明、克隆持久卷、扩展持久卷、编辑持久卷声明信息、删除持久卷声明。
+持久卷声明查看
+查看持久卷声明列表、查看持久卷声明详情。
+配置
+权限 允许操作 配置字典管理
+创建配置字典、编辑配置字典信息、编辑配置字典设置、删除配置字典。
+配置字典查看
+查看配置字典列表、查看配置字典详情。
+保密字典管理
+创建保密字典、编辑保密字典信息、编辑保密字典设置、删除保密字典。
+保密字典查看
+查看保密字典列表、查看保密字典详情。
+服务帐户管理
+创建服务帐户、编辑服务帐户信息、修改服务帐户角色、删除服务帐户。
+服务帐户查看
+查看服务帐户列表、查看服务帐户详情。
+应用负载
+权限 允许操作 应用负载管理
+服务管理：创建有状态或无状态服务、创建外部服务、通过现有工作负载创建服务、编辑服务信息、编辑服务设置、编辑服务外部访问设置、删除服务。
+工作负载管理：创建工作负载、编辑工作负载信息、重新创建工作负载、删除工作负载、调整容器组副本数量、停止工作负载、回退工作负载设置、编辑工作负载设置。
+任务管理：创建任务、编辑任务信息、删除任务、重新运行任务、暂停定时任务。
+应用路由管理：创建应用路由、编辑应用路由信息、编辑路由规则、编辑应用路由注解、删除应用路由。
+容器组管理：访问容器终端、删除容器组。
+应用负载查看
+服务查看：查看服务拓扑、查看服务列表、查看服务详情。
+工作负载查看：查看工作负载列表、查看工作负载详情。
+任务查看：查看任务列表、查看任务详情。
+应用路由查看：查看应用路由列表、查看应用路由详情、访问应用路由的后端服务。
+容器组查看：查看容器组列表、查看容器组详情、查看容器详情。
 访问控制
 权限 允许操作 角色查看
 查看项目角色列表、查看项目角色详情。
@@ -5076,32 +5140,23 @@ TLS 私钥。
 在需要操作的平台角色右侧点击，然后在下拉列表中选择编辑权限。
 在编辑权限对话框，设置平台角色的权限，然后点击确定。
 具有 platform-admin 角色的用户可以启用和禁用扩展组件。其他平台操作所需权限如下：
-访问控制
-权限 允许操作 企业空间查看
-查看企业空间列表。
+企业空间
+权限 允许操作 企业空间创建
+创建企业空间。
 企业空间管理
-创建企业空间、编辑企业空间信息、删除企业空间。
-用户查看
-查看用户列表、查看用户详情
-用户管理
-创建用户、编辑用户信息、启用和禁用用户、修改用户角色、删除用户。
+管理所有企业空间和企业空间下的资源。
+企业空间查看
+查看所有企业空间和企业空间下的资源。
+集群管理
+权限 允许操作 集群管理
+创建集群、删除集群和管理集群中的所有资源。
+集群查看
+查看所有集群和集群资源。
+访问控制
+权限 允许操作 用户查看
+查看用户列表、查看用户详情。
 角色查看
-查看角色列表、查看角色详情。
-角色管理
-创建平台角色、编辑平台角色信息、编辑平台角色权限、删除平台角色。
-集群管理
-权限 允许操作 集群查看
-查看集群列表。
-集群管理
-添加成员集群、编辑集群信息、更新 kubeconfig、移除成员集群。
-应用管理
-权限 允许操作 应用查看
-查看应用模板列表、查看应用模板详情、查看应用审核记录。
-应用模板管理
-下架和上架应用、下架和上架应用版本、管理应用分类、设置应用所属的分类、审核应用版本。
-平台设置管理
-权限 允许操作 平台设置管理
-设置邮件通知、设置飞书通知、设置钉钉通知、设置企业微信通知、设置 Slack 通知、设置 Webhook 通知。</description>
+查看角色列表、查看角色详情。</description>
     </item>
     
     <item>
@@ -5715,20 +5770,20 @@ GPU 上限
     </item>
     
     <item>
-      <title>修改用户密码</title>
-      <link>/v4.0/05-users-and-roles/01-users/06-change-the-password-of-a-user/</link>
+      <title>修改邮箱和语言</title>
+      <link>/v4.0/05-users-and-roles/01-users/06-change-the-email-language-and-language/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/v4.0/05-users-and-roles/01-users/06-change-the-password-of-a-user/</guid>
-      <description>本节介绍如何修改用户密码。
-前提条件 您需要在 KubeSphere 企业版平台具有用户管理权限。有关更多信息，请参阅用户和平台角色。
-操作步骤 以具有用户管理权限的用户登录 KubeSphere 企业版 Web 控制台。
-点击用户和角色管理。
-在左侧导航栏选择用户。
-在用户列表中点击一个用户的名称打开其详情页面。
-在用户详情页面左上角，选择更多操作 &amp;gt; 修改密码。
-在修改密码对话框，设置新密码并重复输入新密码，然后点击确定。
-密码必须包含数字、大写字母和小写字母，长度为 8 至 64 个字符。</description>
+      <guid>/v4.0/05-users-and-roles/01-users/06-change-the-email-language-and-language/</guid>
+      <description>本节介绍如何修改当前用户的邮箱和语言。
+前提条件 您需要获取集群成员的用户名和密码。
+操作步骤 登录 KubeSphere 企业版 Web 控制台。
+在页面右上角点击当前用户名，然后在下拉列表中选择用户设置。
+在基本信息页签设置用户的邮箱和语言。
+参数 描述 邮箱
+用户的邮箱地址。邮箱地址可用于登录 KubeSphere 企业版 Web 控制台。
+语言
+KubeSphere 企业版 Web 控制台对当前用户显示的语言。</description>
     </item>
     
     <item>
@@ -5954,24 +6009,23 @@ LoadBalancer
     </item>
     
     <item>
-      <title>删除用户</title>
-      <link>/v4.0/05-users-and-roles/01-users/07-delete-users/</link>
+      <title>修改用户密码</title>
+      <link>/v4.0/05-users-and-roles/01-users/07-change-the-password-of-a-user/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/v4.0/05-users-and-roles/01-users/07-delete-users/</guid>
-      <description>本节介绍如何删除用户。
-前提条件 您需要在 KubeSphere 企业版平台具有删除用户权限。有关更多信息，请参阅用户和平台角色。
-删除单个用户 以具有删除用户权限的用户登录 KubeSphere 企业版 Web 控制台。
+      <guid>/v4.0/05-users-and-roles/01-users/07-change-the-password-of-a-user/</guid>
+      <description>本节介绍如何修改用户密码。
+修改集群成员的密码 以具有用户管理权限的用户登录 KubeSphere 企业版 Web 控制台。
 点击用户和角色管理。
 在左侧导航栏选择用户。
-在需要删除的用户右侧点击，然后在下拉列表中选择删除。
-在删除用户对话框输入用户的名称，然后点击确定。
-批量删除用户 以具有删除用户权限的用户登录 KubeSphere 企业版 Web 控制台。
-点击用户和角色管理。
-在左侧导航栏选择用户。
-选择需要删除的用户左侧的复选框，然后在列表上方点击删除。
-在批量删除用户对话框，输入用户的名称，然后点击确定。
-说明 请使用半角逗号（,）和空格分隔多个名称。</description>
+在用户列表中点击一个用户的名称打开其详情页面。
+在用户详情页面左上角，选择更多操作 &amp;gt; 修改密码。
+在修改密码对话框，设置新密码并重复输入新密码，然后点击确定。
+密码必须包含数字、大写字母和小写字母，长度为 8 至 64 个字符。
+修改当前用户的密码 登录 KubeSphere 企业版 Web 控制台。
+在页面右上角点击当前用户名，然后在下拉列表中选择用户设置。
+点击密码设置⻚签可修改当前⽤⼾的密码。
+密码必须包含数字、大写字母和小写字母，长度为 8 至 64 个字符。</description>
     </item>
     
     <item>
@@ -6108,6 +6162,27 @@ LoadBalancer
     </item>
     
     <item>
+      <title>删除用户</title>
+      <link>/v4.0/05-users-and-roles/01-users/08-delete-users/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/05-users-and-roles/01-users/08-delete-users/</guid>
+      <description>本节介绍如何删除用户。
+前提条件 您需要在 KubeSphere 企业版平台具有删除用户权限。有关更多信息，请参阅用户和平台角色。
+删除单个用户 以具有删除用户权限的用户登录 KubeSphere 企业版 Web 控制台。
+点击用户和角色管理。
+在左侧导航栏选择用户。
+在需要删除的用户右侧点击，然后在下拉列表中选择删除。
+在删除用户对话框输入用户的名称，然后点击确定。
+批量删除用户 以具有删除用户权限的用户登录 KubeSphere 企业版 Web 控制台。
+点击用户和角色管理。
+在左侧导航栏选择用户。
+选择需要删除的用户左侧的复选框，然后在列表上方点击删除。
+在批量删除用户对话框，输入用户的名称，然后点击确定。
+说明 请使用半角逗号（,）和空格分隔多个名称。</description>
+    </item>
+    
+    <item>
       <title>停止工作负载</title>
       <link>/v4.0/07-cluster-management/05-application-workloads/01-workloads/08-stop-workloads/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -6199,7 +6274,7 @@ LoadBalancer
 持久卷的名称、别名和存储类。自动供应的持久卷的名称由系统自动生成。有关存储类的更多信息，请参阅存储类。
 状态
 持久卷当前的状态。
-可用：持久卷未与持久卷声明绑定。 KubeSphere 企业版 Web 控制台目前不支持直接创建持久卷，如果您通过后台命令行直接创建持久卷，将出现状态为可用的持久卷。有关更多信息，请参阅 Kubernetes 官方文档。
+可用：持久卷未与持久卷声明绑定。KubeSphere 企业版 Web 控制台目前不支持直接创建持久卷，如果您通过后台命令行直接创建持久卷，将出现状态为可用的持久卷。有关更多信息，请参阅 Kubernetes 官方文档。
 已绑定：持久卷已经与持久卷声明绑定。
 已释放：与持久卷绑定的持久卷声明已被删除而持久卷尚未被删除。
 失败：持久卷存在未知错误。
@@ -6298,7 +6373,7 @@ RWX（ReadWriteMany）：允许多个节点读取持久卷中的数据并向其�
 在持久卷详情页面左侧的属性区域查看持久卷的资源属性。
 参数 描述 状态
 持久卷当前的状态。
-可用：持久卷未与持久卷声明绑定。 KubeSphere 企业版 Web 控制台目前不支持直接创建持久卷，如果您通过后台命令行直接创建持久卷，将出现状态为可用的持久卷。有关更多信息，请参阅 Kubernetes 官方文档。
+可用：持久卷未与持久卷声明绑定。KubeSphere 企业版 Web 控制台目前不支持直接创建持久卷，如果您通过后台命令行直接创建持久卷，将出现状态为可用的持久卷。有关更多信息，请参阅 Kubernetes 官方文档。
 已绑定：持久卷已经与持久卷声明绑定。
 已释放：与持久卷绑定的持久卷声明已被删除而持久卷尚未被删除。
 失败：持久卷存在未知错误。
@@ -6335,7 +6410,8 @@ RWX（ReadWriteMany）：允许多个节点读取持久卷中的数据并向其�
 RWO（ReadWriteOnce）：允许单个节点读取持久卷中的数据并向其中写入数据。
 ROX（ReadOnlyMany）：允许多个节点读取持久卷中的数据。
 RWX（ReadWriteMany）：允许多个节点读取持久卷中的数据并向其中写入数据。
-容量</description>
+容量
+后端存储区域的容量大小。</description>
     </item>
     
     <item>

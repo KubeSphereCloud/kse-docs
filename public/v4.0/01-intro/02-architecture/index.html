@@ -460,12 +460,6 @@
                 
               
             
-              
-                
-                  
-                
-              
-            
             
               <span
                 class="menu-switch-icon icon-caret_down_fill">
@@ -484,19 +478,6 @@
           
           <li class="sidebar-item  ">
             <a href="/v4.0/04-platform-management/02-platform-settings/01-view-and-customize-platform-information/">查看平台信息</a>
-          </li>
-        
-      
-    
-  
-    
-      
-      
-      
-      
-          
-          <li class="sidebar-item  ">
-            <a href="/v4.0/04-platform-management/02-platform-settings/03-change-language/">修改平台语言</a>
           </li>
         
       
@@ -555,6 +536,12 @@
             class="sidebar-item collapsed ">
             <a href="/v4.0/05-users-and-roles/01-users/">用户</a>
             
+            
+              
+                
+                  
+                
+              
             
               
                 
@@ -680,7 +667,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/05-users-and-roles/01-users/06-change-the-password-of-a-user/">修改用户密码</a>
+            <a href="/v4.0/05-users-and-roles/01-users/06-change-the-email-language-and-language/">修改邮箱和语言</a>
           </li>
         
       
@@ -693,7 +680,20 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/05-users-and-roles/01-users/07-delete-users/">删除用户</a>
+            <a href="/v4.0/05-users-and-roles/01-users/07-change-the-password-of-a-user/">修改用户密码</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/05-users-and-roles/01-users/08-delete-users/">删除用户</a>
           </li>
         
       
@@ -1209,12 +1209,6 @@
             class="sidebar-item collapsed ">
             <a href="/v4.0/07-cluster-management/">集群管理</a>
             
-            
-              
-                
-                  
-                
-              
             
               
                 
@@ -4036,51 +4030,6 @@
           
           <li class="sidebar-item  ">
             <a href="/v4.0/07-cluster-management/10-multi-cluster-management/06-remove-a-member-cluster/">移除成员集群</a>
-          </li>
-        
-      
-    
-  
-</ul>
-        
-      
-    
-  
-    
-      
-      
-      
-      
-        
-          <li
-            class="sidebar-item collapsed ">
-            <a href="/v4.0/07-cluster-management/11-toolbox/">工具箱</a>
-            
-            
-              
-                
-                  
-                
-              
-            
-            
-              <span
-                class="menu-switch-icon icon-caret_down_fill">
-              </span>
-            
-          </li>
-          
-          <ul>
-  
-  
-    
-      
-      
-      
-      
-          
-          <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/11-toolbox/01-view-a-kubeconfig-file/">查看 kubeconfig 文件</a>
           </li>
         
       
@@ -7116,6 +7065,70 @@
     
   
     
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.0/10-toolbox/">工具箱</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/10-toolbox/01-use-kubectl-tool/">通过 kubectl 运行命令</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/10-toolbox/02-view-a-kubeconfig-file/">查看 kubeconfig 文件</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
   
 </ul>
       
@@ -7133,7 +7146,7 @@
     KubeSphere LuBan 架构</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2023-08-07 08:33:02
+      更新时间：2023-08-16 06:26:43
     </div>
     
     
@@ -7141,15 +7154,23 @@
     
     
     
-      
     
+    <div
+      class="tag post-tag export-pdf has-tooltip-top has-tooltip-arrow"
+      data-tooltip="下载范围：所属一级目录的全部内容"
+      data-url="/v4.0/01-intro">
+      <span class="icon-format_pdf_2_fill"></span>
+      PDF
+    </div>
     
   </div><div class="post-menu">
   <div class="post-menu-title">本页目录</div>
   <nav id="TableOfContents">
   <ul>
     <li><a href="#_kubesphere_luban_架构">KubeSphere LuBan 架构</a></li>
-    <li><a href="#_kubesphere_luban_如何帮助到您">KubeSphere LuBan 如何帮助到您</a></li>
+    <li><a href="#_什么是_kubesphere_扩展组件">什么是 KubeSphere 扩展组件？</a></li>
+    <li><a href="#_kubesphere_扩展组件可以做什么">KubeSphere 扩展组件可以做什么？</a></li>
+    <li><a href="#_如何构建扩展组件">如何构建扩展组件？</a></li>
   </ul>
 </nav>
 </div><div class="post-content">
@@ -7157,7 +7178,7 @@
       
       
 <div class="paragraph">
-<p>为了使 KubeSphere 灵活可扩展，我们设计了微内核 + 扩展组件的架构（代号 LuBan）。其中内核部分（KubeSphere Core）仅包含系统运行的必备基础功能，而将独立的业务模块分别封装在各个扩展组件（Extensions）中。用户可在系统运行时动态的安装、卸载、启用、禁用扩展组件。</p>
+<p>为了使 KubeSphere 灵活可扩展，我们设计了微内核 + 扩展组件的架构（代号 LuBan）。其中内核部分（KubeSphere Core）仅包含系统运行的必备基础功能，而将独立的业务模块分别封装在各个扩展组件（Extensions）中。用户可在系统运行时动态地安装、卸载、启用、禁用扩展组件。</p>
 </div>
 <div class="sect1">
 <h2 id="_kubesphere_luban_架构">KubeSphere LuBan 架构</h2>
@@ -7166,39 +7187,65 @@
 <p>KubeSphere LuBan 架构设计如下图所示。</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="/images/ks-qkcp/zh/v4.0/4.0-architecture.png" alt="architecture" width="100%"/></span></p>
+<p><span class="image"><img src="/images/ks-qkcp/zh/v4.0/4.0-architecture.png" alt="architecture" width="80%"/></span></p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_kubesphere_luban_如何帮助到您">KubeSphere LuBan 如何帮助到您</h2>
+<h2 id="_什么是_kubesphere_扩展组件">什么是 KubeSphere 扩展组件？</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>KubeSphere LuBan 架构可以使以下人员受益：</p>
+<p>KubeSphere 扩展组件是一个可以对 KubeSphere 功能进行扩展并借助 Helm 进行编排的，遵循 KubeSphere 扩展组件开发规范的 Helm Chart。</p>
 </div>
 <div class="paragraph">
-<p><strong>KubeSphere 用户</strong></p>
+<p>作为云原生领域的开发者，您不必再花大量的时间去学习一个私有的应用编排方式。</p>
 </div>
 <div class="paragraph">
-<p>KubeSphere 用户可以自由选择启用哪些 KubeSphere 扩展组件。同时还能将自己的应用无缝融入到 KubeSphere 控制台。此外，随着 KubeSphere 扩展组件生态的丰富，用户可以在 KubeSphere 扩展市场中自由选择更丰富的产品和服务，最终实现容器管理平台的千人千面的效果。</p>
+<p>如果您正在寻找已发布的扩展，请前往 <a href="https://kubesphere.com.cn/extensions/marketplace/">KubeSphere Marketplace</a>。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kubesphere_扩展组件可以做什么">KubeSphere 扩展组件可以做什么？</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>从前端 UI 到后端 API，KubeSphere 的几乎每个部分都可以通过扩展 API 进行定制和增强。KubeSphere 的许多核心功能也都是作为扩展构建的，并使用相同的扩展 API。</p>
 </div>
 <div class="paragraph">
-<p><strong>KubeSphere 维护者</strong></p>
+<p>以下是使用扩展 API 可以实现的一些示例：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>在项目的侧边导航栏，注入新的菜单与功能页面，支持管理更多类型的资源。</p>
+</li>
+<li>
+<p>在平台层级菜单中注入功能入口，对平台的管理能力进行增强。</p>
+</li>
+<li>
+<p>直接嵌入已有的第三方功能组件页面到 KubeSphere，对各分散的系统进行聚合。</p>
+</li>
+<li>
+<p>覆盖 KubeSphere 已有的页面路由，实现您独有的业务逻辑。</p>
+</li>
+<li>
+<p>对 KubeSphere 的 API 进行扩展。</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>扩展机制使得维护者可以更聚焦 KubeSphere 核心功能的开发，并可使得 KubeSphere Core 更加轻量，版本发布节奏也可以加快。此外，因为扩展组件能够独立进行迭代，能够更及时地满足用户的需求。</p>
+<p>如果您想更全面地了解扩展 API，请参阅<a href="https://dev-guide.kubesphere.io/extension-dev-guide/zh/feature-customization/">功能定制</a>。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_如何构建扩展组件">如何构建扩展组件？</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>请参阅<a href="https://dev-guide.kubesphere.io/extension-dev-guide/zh/development-procedure/">开发流程</a>章节来熟悉如何构建扩展组件。</p>
 </div>
 <div class="paragraph">
-<p><strong>KubeSphere 贡献者</strong></p>
-</div>
-<div class="paragraph">
-<p>扩展机制的引入使得 KubeSphere Core 及 KubeSphere 其他扩展组件变得更加松耦合，开发也更加易于上手。</p>
-</div>
-<div class="paragraph">
-<p><strong>云原生应用开发商（ISV）或其他开源项目</strong></p>
-</div>
-<div class="paragraph">
-<p>众多 ISV 或其他开源项目可以低成本将产品或开源项目无缝融入到 KubeSphere 生态系统中。比如 Karmada/KubeEdge 的开发人员可以基于 KubeSphere LuBan 开发独立的 Karmada/KubeEdge 控制台。</p>
+<p>如果您在扩展组件的开发过程中有疑问，请尝试在 <a href="https://github.com/kubesphere/kubesphere/issues/new/choose">GitHub Issue</a> 获得帮助。</p>
 </div>
 </div>
 </div>
@@ -7220,7 +7267,9 @@
   <nav id="TableOfContents">
   <ul>
     <li><a href="#_kubesphere_luban_架构">KubeSphere LuBan 架构</a></li>
-    <li><a href="#_kubesphere_luban_如何帮助到您">KubeSphere LuBan 如何帮助到您</a></li>
+    <li><a href="#_什么是_kubesphere_扩展组件">什么是 KubeSphere 扩展组件？</a></li>
+    <li><a href="#_kubesphere_扩展组件可以做什么">KubeSphere 扩展组件可以做什么？</a></li>
+    <li><a href="#_如何构建扩展组件">如何构建扩展组件？</a></li>
   </ul>
 </nav>
 </div></div>

@@ -16,14 +16,24 @@
       <description>本节介绍如何通过直接连接添加成员集群。
 前提条件 您需要在主集群和成员集群中都具有 platform-admin 角色。
 主集群所有节点必须能访问成员集群的 Kubernetes API 服务（默认为成员集群主节点的 6443 端口）。取决于您的网络环境，您可能需要配置防火墙和流量转发规则。
-获取主集群 jwtSecret 以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
-将光标悬停在页面右下角的 图标，然后在菜单中选择 kubectl。
-在 kubectl 对话框，执行以下命令获取主集群的 jwtSecret 值。
-kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v &amp;#34;apiVersion&amp;#34; | grep jwtSecret 设置成员集群 jwtSecret 并获取 kubeconfig 执行以下步骤同步主集群和成员集群的 jwtSecret 值：
+获取成员集群 kubeconfig 执行以下步骤获取成员集群的 kubeconfig 信息：
 以具有 platform-admin 角色的用户登录成员集群的 Web 控制台。
-将光标悬停在页面右下角的 图标，然后在菜单中选择 kubectl。
-在 kubectl 对话框，执行以下命令编辑集群配置文件：
-kubectl edit cc ks-installer -n kubesphere-system 在集群配置文件中，将 spec:authentication:jwtSecret 参数设置为主集群的 jwtSecret 值，然后保存文件。</description>
+将光标悬停在页面右下角的 图标，然后在菜单中选择 kubeconfig。
+在 kubeconfig 对话框，查看成员集群的 kubeconfig 信息并记录。
+备注 您可以复制 kubeconfig 信息或点击 将 kubeconfig.yaml 文件下载到本地。
+请将 kubeconfig 信息中的 clusters:cluster:server 参数修改为成员集群的 Kubernetes API 服务的访问地址，默认在成员集群主节点的 6443 端口暴露。请确保主集群的所有节点都能访问该地址，取决于您的网络环境，您可能需要配置防火墙规则和流量转发策略。
+添加成员集群 以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
+点击集群管理。
+在集群管理页面，点击添加集群。
+在基本信息页签，设置成员集群的名称、标签、提供商和描述信息，然后点击下一步。
+参数 描述 名称
+成员集群的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+标签
+成员集群的用途标识。您可以在下拉列表中选择标签，也可以手动输入标签。
+提供商
+成员集群的提供商。您可以在下拉列表中选择提供商，也可以手动输入提供商。
+描述
+成员集群的描述信息。描述可包含任意字符，最长 256 个字符。</description>
     </item>
     
     <item>

@@ -11,11 +11,11 @@
 
 
 
-<meta name="description" content="介绍如何使用工具箱。">
+<meta name="description" content="介绍如何修改当前用户的邮箱和语言。">
 
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<title>工具箱 - KubeSphere 企业版</title>
+<title>修改邮箱和语言 - KubeSphere 企业版</title>
 <link href="/css/bulma.css" rel="stylesheet">
 <link href="/css/bulma-tooltip.min.css" rel="stylesheet">
 <link href="/css/atom-one-light.css" rel="stylesheet" />
@@ -119,8 +119,8 @@
     <ul class="pagination-list">
     </ul>
   </nav>
-</script><div class="container">
-  
+</script>
+<div class="container">
 
   
 
@@ -461,12 +461,6 @@
                 
               
             
-              
-                
-                  
-                
-              
-            
             
               <span
                 class="menu-switch-icon icon-caret_down_fill">
@@ -490,19 +484,6 @@
       
     
   
-    
-      
-      
-      
-      
-          
-          <li class="sidebar-item  ">
-            <a href="/v4.0/04-platform-management/02-platform-settings/03-change-language/">修改平台语言</a>
-          </li>
-        
-      
-    
-  
 </ul>
         
       
@@ -520,7 +501,7 @@
       
         
           <li
-            class="sidebar-item collapsed ">
+            class="sidebar-item active ">
             <a href="/v4.0/05-users-and-roles/">用户和角色管理</a>
             
             
@@ -538,7 +519,7 @@
             
             
               <span
-                class="menu-switch-icon icon-caret_down_fill">
+                class="menu-switch-icon icon-caret_up_fill">
               </span>
             
           </li>
@@ -553,7 +534,7 @@
       
         
           <li
-            class="sidebar-item collapsed ">
+            class="sidebar-item active ">
             <a href="/v4.0/05-users-and-roles/01-users/">用户</a>
             
             
@@ -599,9 +580,15 @@
                 
               
             
+              
+                
+                  
+                
+              
+            
             
               <span
-                class="menu-switch-icon icon-caret_down_fill">
+                class="menu-switch-icon icon-caret_up_fill">
               </span>
             
           </li>
@@ -680,8 +667,8 @@
       
       
           
-          <li class="sidebar-item  ">
-            <a href="/v4.0/05-users-and-roles/01-users/06-change-the-password-of-a-user/">修改用户密码</a>
+          <li class="sidebar-item active current">
+            <a href="/v4.0/05-users-and-roles/01-users/06-change-the-email-language-and-language/">修改邮箱和语言</a>
           </li>
         
       
@@ -694,7 +681,20 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/05-users-and-roles/01-users/07-delete-users/">删除用户</a>
+            <a href="/v4.0/05-users-and-roles/01-users/07-change-the-password-of-a-user/">修改用户密码</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/05-users-and-roles/01-users/08-delete-users/">删除用户</a>
           </li>
         
       
@@ -1207,7 +1207,7 @@
       
         
           <li
-            class="sidebar-item active ">
+            class="sidebar-item collapsed ">
             <a href="/v4.0/07-cluster-management/">集群管理</a>
             
             
@@ -1271,15 +1271,9 @@
                 
               
             
-              
-                
-                  
-                
-              
-            
             
               <span
-                class="menu-switch-icon icon-caret_up_fill">
+                class="menu-switch-icon icon-caret_down_fill">
               </span>
             
           </li>
@@ -4037,51 +4031,6 @@
           
           <li class="sidebar-item  ">
             <a href="/v4.0/07-cluster-management/10-multi-cluster-management/06-remove-a-member-cluster/">移除成员集群</a>
-          </li>
-        
-      
-    
-  
-</ul>
-        
-      
-    
-  
-    
-      
-      
-      
-      
-        
-          <li
-            class="sidebar-item active current">
-            <a href="/v4.0/07-cluster-management/11-toolbox/">工具箱</a>
-            
-            
-              
-                
-                  
-                
-              
-            
-            
-              <span
-                class="menu-switch-icon icon-caret_up_fill">
-              </span>
-            
-          </li>
-          
-          <ul>
-  
-  
-    
-      
-      
-      
-      
-          
-          <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/11-toolbox/01-view-a-kubeconfig-file/">查看 kubeconfig 文件</a>
           </li>
         
       
@@ -7117,6 +7066,70 @@
     
   
     
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.0/10-toolbox/">工具箱</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/10-toolbox/01-use-kubectl-tool/">通过 kubectl 运行命令</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/10-toolbox/02-view-a-kubeconfig-file/">查看 kubeconfig 文件</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
   
 </ul>
       
@@ -7128,13 +7141,14 @@
   <div class="content-card">
     <div class="content-wrapper"><ul class="content-breadcrumb">
       <li class="icon-slash_fill"><a href="/v4.0" data-url="/v4.0">KubeSphere 企业版</a></li>
-      <li class="icon-slash_fill"><a href="/v4.0/07-cluster-management" data-url="/v4.0/07-cluster-management">集群管理</a></li>
-      <li class="icon-slash_fill"><a href="/v4.0/07-cluster-management/11-toolbox" data-url="/v4.0/07-cluster-management/11-toolbox">工具箱</a></li></ul><div class="post-wrapper"><div class="post">
+      <li class="icon-slash_fill"><a href="/v4.0/05-users-and-roles" data-url="/v4.0/05-users-and-roles">用户和角色管理</a></li>
+      <li class="icon-slash_fill"><a href="/v4.0/05-users-and-roles/01-users" data-url="/v4.0/05-users-and-roles/01-users">用户</a></li>
+      <li class="icon-slash_fill"><a href="/v4.0/05-users-and-roles/01-users/06-change-the-email-language-and-language" data-url="/v4.0/05-users-and-roles/01-users/06-change-the-email-language-and-language">修改邮箱和语言</a></li></ul><div class="post-wrapper"><div class="post">
   <h1 class="post-title">
-    工具箱</h1>
+    修改邮箱和语言</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2023-08-07 08:33:02
+      更新时间：2023-08-16 06:26:43
     </div>
     
     
@@ -7142,17 +7156,89 @@
     
     
     
-      
     
+    <div
+      class="tag post-tag export-pdf has-tooltip-top has-tooltip-arrow"
+      data-tooltip="下载范围：所属一级目录的全部内容"
+      data-url="/v4.0/05-users-and-roles">
+      <span class="icon-format_pdf_2_fill"></span>
+      PDF
+    </div>
     
   </div><div class="post-menu">
   <div class="post-menu-title">本页目录</div>
-  
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_前提条件">前提条件</a></li>
+    <li><a href="#_操作步骤">操作步骤</a></li>
+  </ul>
+</nav>
 </div><div class="post-content">
     
       
-      <div class="paragraph">
-<p>本节介绍如何使用工具箱。</p>
+      
+<div class="paragraph">
+<p>本节介绍如何修改当前用户的邮箱和语言。</p>
+</div>
+<div class="sect1">
+<h2 id="_前提条件">前提条件<a href="" id="a68b65d0f5ed4188944e9a7c02170536" class="bare"></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>您需要获取集群成员的用户名和密码。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_操作步骤">操作步骤<a href="" id="98109f3b81cc42eeb02a24604d683685" class="bare"></a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>登录 KubeSphere 企业版 Web 控制台。</p>
+</li>
+<li>
+<p>在页面右上角点击当前用户名，然后在下拉列表中选择<strong>用户设置</strong>。</p>
+</li>
+<li>
+<p>在<strong>基本信息</strong>页签设置用户的邮箱和语言。</p>
+<div class="openblock">
+<div class="content">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 80%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">参数</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>邮箱</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>用户的邮箱地址。邮箱地址可用于登录 KubeSphere 企业版 Web 控制台。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>语言</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>KubeSphere 企业版 Web 控制台对当前用户显示的语言。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
 </div>
 
     
@@ -7169,13 +7255,17 @@
   </div>
 </div><div class="post-placeholder"><div class="post-menu">
   <div class="post-menu-title">本页目录</div>
-  
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_前提条件">前提条件</a></li>
+    <li><a href="#_操作步骤">操作步骤</a></li>
+  </ul>
+</nav>
 </div></div>
       </div>
     </div>
   </div>
-</div>
-</div>
+</div></div>
     </body><script src="/js/bootstrap.min.js"></script>
 <script src="/js/autocomplete/jquery.autocomplete.js"></script>
 <script src="/js/copy-to-clipboard.js"></script>
