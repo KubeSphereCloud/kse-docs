@@ -207,7 +207,7 @@
       
       
           
-          <li class="sidebar-item  ">
+          <li class="sidebar-item active current">
             <a href="/v4.0/01-intro/02-architecture/">KubeSphere LuBan 架构</a>
           </li>
         
@@ -277,7 +277,7 @@
       
       
           
-          <li class="sidebar-item  ">
+          <li class="sidebar-item active current">
             <a href="/v4.0/02-quickstart/01-install-ks-core/">安装 KubeSphere Core</a>
           </li>
         
@@ -323,14 +323,8 @@
         
           <li
             class="sidebar-item collapsed ">
-            <a href="/v4.0/03-install-and-upgrade/">安装和升级</a>
+            <a href="/v4.0/03-install-and-uninstall/">安装和卸载</a>
             
-            
-              
-                
-                  
-                
-              
             
               
                 
@@ -361,7 +355,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/03-install-and-upgrade/01-install-ks-core/">安装 KubeSphere 企业版</a>
+            <a href="/v4.0/03-install-and-uninstall/01-install-ks-core/">安装 KubeSphere 企业版</a>
           </li>
         
       
@@ -374,20 +368,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/03-install-and-upgrade/02-upgrade-ks-core/">升级 KubeSphere 企业版</a>
-          </li>
-        
-      
-    
-  
-    
-      
-      
-      
-      
-          
-          <li class="sidebar-item  ">
-            <a href="/v4.0/03-install-and-upgrade/03-uninstall-ks-core/">卸载 KubeSphere 企业版</a>
+            <a href="/v4.0/03-install-and-uninstall/02-uninstall-ks-core/">卸载 KubeSphere 企业版</a>
           </li>
         
       
@@ -7147,7 +7128,7 @@
     安装 KubeSphere Core</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2023-08-16 06:26:43
+      更新时间：2023-08-17 02:24:53
     </div>
     
     
@@ -7241,9 +7222,7 @@
 <p>如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 <code>helm</code> 安装 KubeSphere Core。</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">helm repo add test https://charts.kubesphere.io/test
-helm repo update test
-helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait</code></pre>
 </div>
 </div>
 </li>

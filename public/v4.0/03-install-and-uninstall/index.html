@@ -10,11 +10,12 @@
 <meta name="keywords" content="">
 
 
-<meta name="description" content="这是 KubeSphere 企业版文档页面">
+
+<meta name="description" content="介绍如何安装和卸载 KubeSphere Core。">
 
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<title>安装 KubeSphere 企业版 - KubeSphere 企业版</title>
+<title>安装和卸载 - KubeSphere 企业版</title>
 <link href="/css/bulma.css" rel="stylesheet">
 <link href="/css/bulma-tooltip.min.css" rel="stylesheet">
 <link href="/css/atom-one-light.css" rel="stylesheet" />
@@ -118,8 +119,8 @@
     <ul class="pagination-list">
     </ul>
   </nav>
-</script>
-<div class="container">
+</script><div class="container">
+  
 
   
 
@@ -155,7 +156,7 @@
       
         
           <li
-            class="sidebar-item active ">
+            class="sidebar-item collapsed ">
             <a href="/v4.0/01-intro/">产品简介</a>
             
             
@@ -179,7 +180,7 @@
             
             
               <span
-                class="menu-switch-icon icon-caret_up_fill">
+                class="menu-switch-icon icon-caret_down_fill">
               </span>
             
           </li>
@@ -206,7 +207,7 @@
       
       
           
-          <li class="sidebar-item active current">
+          <li class="sidebar-item  ">
             <a href="/v4.0/01-intro/02-architecture/">KubeSphere LuBan 架构</a>
           </li>
         
@@ -276,7 +277,7 @@
       
       
           
-          <li class="sidebar-item active current">
+          <li class="sidebar-item  ">
             <a href="/v4.0/02-quickstart/01-install-ks-core/">安装 KubeSphere Core</a>
           </li>
         
@@ -321,15 +322,9 @@
       
         
           <li
-            class="sidebar-item collapsed ">
-            <a href="/v4.0/03-install-and-upgrade/">安装和升级</a>
+            class="sidebar-item active current">
+            <a href="/v4.0/03-install-and-uninstall/">安装和卸载</a>
             
-            
-              
-                
-                  
-                
-              
             
               
                 
@@ -345,7 +340,7 @@
             
             
               <span
-                class="menu-switch-icon icon-caret_down_fill">
+                class="menu-switch-icon icon-caret_up_fill">
               </span>
             
           </li>
@@ -360,7 +355,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/03-install-and-upgrade/01-install-ks-core/">安装 KubeSphere 企业版</a>
+            <a href="/v4.0/03-install-and-uninstall/01-install-ks-core/">安装 KubeSphere 企业版</a>
           </li>
         
       
@@ -373,20 +368,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/03-install-and-upgrade/02-upgrade-ks-core/">升级 KubeSphere 企业版</a>
-          </li>
-        
-      
-    
-  
-    
-      
-      
-      
-      
-          
-          <li class="sidebar-item  ">
-            <a href="/v4.0/03-install-and-upgrade/03-uninstall-ks-core/">卸载 KubeSphere 企业版</a>
+            <a href="/v4.0/03-install-and-uninstall/02-uninstall-ks-core/">卸载 KubeSphere 企业版</a>
           </li>
         
       
@@ -7140,13 +7122,12 @@
   <div class="content-card">
     <div class="content-wrapper"><ul class="content-breadcrumb">
       <li class="icon-slash_fill"><a href="/v4.0" data-url="/v4.0">KubeSphere 企业版</a></li>
-      <li class="icon-slash_fill"><a href="/v4.0/03-install-and-upgrade" data-url="/v4.0/03-install-and-upgrade">安装和升级</a></li>
-      <li class="icon-slash_fill"><a href="/v4.0/03-install-and-upgrade/01-install-ks-core" data-url="/v4.0/03-install-and-upgrade/01-install-ks-core">安装 KubeSphere 企业版</a></li></ul><div class="post-wrapper"><div class="post">
+      <li class="icon-slash_fill"><a href="/v4.0/03-install-and-uninstall" data-url="/v4.0/03-install-and-uninstall">安装和卸载</a></li></ul><div class="post-wrapper"><div class="post">
   <h1 class="post-title">
-    安装 KubeSphere 企业版</h1>
+    安装和卸载</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2023-08-16 06:26:43
+      更新时间：2023-08-17 02:24:53
     </div>
     
     
@@ -7158,105 +7139,23 @@
     <div
       class="tag post-tag export-pdf has-tooltip-top has-tooltip-arrow"
       data-tooltip="下载范围：所属一级目录的全部内容"
-      data-url="/v4.0/03-install-and-upgrade">
+      data-url="/v4.0/03-install-and-uninstall">
       <span class="icon-format_pdf_2_fill"></span>
       PDF
     </div>
     
   </div><div class="post-menu">
   <div class="post-menu-title">本页目录</div>
-  <nav id="TableOfContents">
-  <ul>
-    <li><a href="#_前提条件">前提条件</a></li>
-    <li><a href="#_操作步骤">操作步骤</a></li>
-  </ul>
-</nav>
+  
 </div><div class="post-content">
     
       
-      
-<div class="paragraph">
-<p>本节介绍如何安装 KubeSphere 企业版。</p>
-</div>
-<div class="sect1">
-<h2 id="_前提条件">前提条件</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>确保您的机器满足最低硬件要求：CPU &gt; 2 核，内存 &gt; 2 GB。</p>
-</li>
-<li>
-<p>您需要提前安装 Helm。具体请参阅<a href="https://helm.sh/zh/docs/intro/install/">安装 Helm</a>。</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_操作步骤">操作步骤</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>（可选）如果您没有可用的 Kubernetes 集群，执行以下命令快速创建一个 Kubernetes 集群。</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>执行以下命令安装 KubeKey。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">curl -sfL https://get-kk.kubesphere.io | sh -</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>执行以下命令安装依赖项。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">apt install socat conntrack -y</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>执行以下命令快速创建一个 Kubernetes 集群。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">./kk create cluster --skip-pull-images --with-local-storage  --with-kubernetes v1.25.4 --container-manager containerd  -y</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 <code>helm</code> 安装 KubeSphere Core。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">helm repo add test https://charts.kubesphere.io/test
-helm repo update test
-helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait</code></pre>
-</div>
+      <div class="paragraph">
+<p>本节介绍如何安装和卸载 KubeSphere 企业版的核心组件 KubeSphere Core。</p>
 </div>
 <div class="paragraph">
-<p>如果显⽰如下信息，则表明安装成功：</p>
+<p>KubeSphere Core 安装完成后，即可使用 KubeSphere 企业版。</p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="/images/ks-qkcp/zh/v4.0/install-complete.png" alt="，100%"/></span></p>
-</div>
-</li>
-<li>
-<p>执行以下命令检查 Pod 状态。</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">kubectl get pod -n kubesphere-system</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>当 Pod 状态都为 <strong>Running</strong> 时，从安装成功信息中的 Console、Account 和 Password 参数分别获取 KubeSphere 企业版 Web 控制台的 IP 地址、管理员⽤⼾名和管理员密码，并使⽤⽹⻚浏览器登录 KubeSphere 企业版 Web 控制台。</p>
-<div class="openblock">
-<div class="content">
 <table class="tableblock frame-all grid-all stretch admon note">
 <colgroup>
 <col style="width: 100%;"/>
@@ -7269,18 +7168,11 @@ helm upgrade --install -n kubesphere-system --create-namespace ks-core https://c
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>取决于您的网络环境，您可能需要配置流量转发规则并在防火墙中放行 30880 端口。</p>
+<p>暂不支持从 KubeSphere 企业版 3.x 版本升级到 4.x，将在后续版本中支持 3.x 版本的升级。</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
 
     
 
@@ -7296,17 +7188,13 @@ helm upgrade --install -n kubesphere-system --create-namespace ks-core https://c
   </div>
 </div><div class="post-placeholder"><div class="post-menu">
   <div class="post-menu-title">本页目录</div>
-  <nav id="TableOfContents">
-  <ul>
-    <li><a href="#_前提条件">前提条件</a></li>
-    <li><a href="#_操作步骤">操作步骤</a></li>
-  </ul>
-</nav>
+  
 </div></div>
       </div>
     </div>
   </div>
-</div></div>
+</div>
+</div>
     </body><script src="/js/bootstrap.min.js"></script>
 <script src="/js/autocomplete/jquery.autocomplete.js"></script>
 <script src="/js/copy-to-clipboard.js"></script>

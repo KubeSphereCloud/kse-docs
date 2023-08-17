@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>安装和卸载 on KubeSphere 企业版</title>
+    <link>/v4.0/03-install-and-uninstall/</link>
+    <description>Recent content in 安装和卸载 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.0/03-install-and-uninstall/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安装 KubeSphere 企业版</title>
+      <link>/v4.0/03-install-and-uninstall/01-install-ks-core/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/03-install-and-uninstall/01-install-ks-core/</guid>
+      <description>本节介绍如何安装 KubeSphere 企业版 v4.0.0。
+前提条件 确保您的机器满足最低硬件要求：CPU &amp;gt; 2 核，内存 &amp;gt; 2 GB。
+您需要提前安装 Helm。具体请参阅安装 Helm。
+操作步骤 （可选）如果您没有可用的 Kubernetes 集群，执行以下命令快速创建一个 Kubernetes 集群。
+执行以下命令安装 KubeKey。
+curl -sfL https://get-kk.kubesphere.io | sh - 执行以下命令安装依赖项。
+apt install socat conntrack -y 执行以下命令快速创建一个 Kubernetes 集群。
+./kk create cluster --skip-pull-images --with-local-storage --with-kubernetes v1.25.4 --container-manager containerd -y 如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 helm 安装 KubeSphere Core。
+helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait 如果显⽰如下信息，则表明安装成功：
+执行以下命令检查 Pod 状态。</description>
+    </item>
+    
+    <item>
+      <title>卸载 KubeSphere 企业版</title>
+      <link>/v4.0/03-install-and-uninstall/02-uninstall-ks-core/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/03-install-and-uninstall/02-uninstall-ks-core/</guid>
+      <description> 本节介绍如何卸载 KubeSphere Core，即卸载 KubeSphere 企业版。当前集群中运⾏的 Kubernetes 将不会被卸载。
+警告 虽然此操作不会卸载 Kubernetes，如果当前集群中运行的业务使用了 KubeSphere 企业版提供的功能，此操作仍然可能导致业务中断。
+此操作不能撤销，请谨慎执行此操作。
+前提条件 为避免数据丢失，请提前备份所有重要数据。
+操作步骤 执行以下命令卸载 KubeSphere 企业版。
+helm -n kubesphere-system uninstall ks-core </description>
+    </item>
+    
+  </channel>
+</rss>

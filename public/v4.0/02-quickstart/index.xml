@@ -22,7 +22,7 @@ KubeSphere Core 为扩展组件提供基础的运行环境。安装完成后，�
 curl -sfL https://get-kk.kubesphere.io | sh - 执行以下命令安装依赖项。
 apt install socat conntrack -y 执行以下命令快速创建一个 Kubernetes 集群。
 ./kk create cluster --skip-pull-images --with-local-storage --with-kubernetes v1.25.4 --container-manager containerd -y 如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 helm 安装 KubeSphere Core。
-helm repo add test https://charts.kubesphere.io/test helm repo update test helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.</description>
+helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.</description>
     </item>
     
     <item>

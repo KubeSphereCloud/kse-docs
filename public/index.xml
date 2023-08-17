@@ -1012,16 +1012,16 @@ KubeSphere Core 为扩展组件提供基础的运行环境。安装完成后，�
 curl -sfL https://get-kk.kubesphere.io | sh - 执行以下命令安装依赖项。
 apt install socat conntrack -y 执行以下命令快速创建一个 Kubernetes 集群。
 ./kk create cluster --skip-pull-images --with-local-storage --with-kubernetes v1.25.4 --container-manager containerd -y 如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 helm 安装 KubeSphere Core。
-helm repo add test https://charts.kubesphere.io/test helm repo update test helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.</description>
+helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.</description>
     </item>
     
     <item>
       <title>安装 KubeSphere 企业版</title>
-      <link>/v4.0/03-install-and-upgrade/01-install-ks-core/</link>
+      <link>/v4.0/03-install-and-uninstall/01-install-ks-core/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/v4.0/03-install-and-upgrade/01-install-ks-core/</guid>
-      <description>本节介绍如何安装 KubeSphere 企业版。
+      <guid>/v4.0/03-install-and-uninstall/01-install-ks-core/</guid>
+      <description>本节介绍如何安装 KubeSphere 企业版 v4.0.0。
 前提条件 确保您的机器满足最低硬件要求：CPU &amp;gt; 2 核，内存 &amp;gt; 2 GB。
 您需要提前安装 Helm。具体请参阅安装 Helm。
 操作步骤 （可选）如果您没有可用的 Kubernetes 集群，执行以下命令快速创建一个 Kubernetes 集群。
@@ -1029,7 +1029,8 @@ helm repo add test https://charts.kubesphere.io/test helm repo update test helm 
 curl -sfL https://get-kk.kubesphere.io | sh - 执行以下命令安装依赖项。
 apt install socat conntrack -y 执行以下命令快速创建一个 Kubernetes 集群。
 ./kk create cluster --skip-pull-images --with-local-storage --with-kubernetes v1.25.4 --container-manager containerd -y 如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 helm 安装 KubeSphere Core。
-helm repo add test https://charts.kubesphere.io/test helm repo update test helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.</description>
+helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait 如果显⽰如下信息，则表明安装成功：
+执行以下命令检查 Pod 状态。</description>
     </item>
     
     <item>
@@ -2734,17 +2735,17 @@ BestEffort：容器组中的容器没有配置任何内存上限、内存请求�
     </item>
     
     <item>
-      <title>升级 KubeSphere 企业版</title>
-      <link>/v4.0/03-install-and-upgrade/02-upgrade-ks-core/</link>
+      <title>卸载 KubeSphere 企业版</title>
+      <link>/v4.0/03-install-and-uninstall/02-uninstall-ks-core/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/v4.0/03-install-and-upgrade/02-upgrade-ks-core/</guid>
-      <description>本节介绍如何升级 KubeSphere 企业版。
-前提条件 请确保当前 KubeSphere 企业版版本为 v4.0.x。如果您的 KubeSphere 企业版版本低于 v4.0.x，请先将 KubeSphere 企业版版本升级到 v4.0.x。
-为避免数据丢失，请提前备份所有重要数据。
-操作步骤 执行以下命令升级 KubeSphere 企业版。
-helm repo update test helm upgrade ks-core --install -n kubesphere-system --create-namespace test/ks-core --set apiserver.nodePort=30881 --debug --wait 如果显⽰如下信息，则表明升级成功：
-从成功信息中的 Console、Account 和 Password 参数分别获取 KubeSphere 企业版 Web 控制台的 IP 地址、管理员⽤⼾名和管理员密码，并使⽤⽹⻚浏览器登录 KubeSphere 企业版 Web 控制台。</description>
+      <guid>/v4.0/03-install-and-uninstall/02-uninstall-ks-core/</guid>
+      <description> 本节介绍如何卸载 KubeSphere Core，即卸载 KubeSphere 企业版。当前集群中运⾏的 Kubernetes 将不会被卸载。
+警告 虽然此操作不会卸载 Kubernetes，如果当前集群中运行的业务使用了 KubeSphere 企业版提供的功能，此操作仍然可能导致业务中断。
+此操作不能撤销，请谨慎执行此操作。
+前提条件 为避免数据丢失，请提前备份所有重要数据。
+操作步骤 执行以下命令卸载 KubeSphere 企业版。
+helm -n kubesphere-system uninstall ks-core </description>
     </item>
     
     <item>
@@ -3892,20 +3893,6 @@ workspace-admin
 在扩展中心升级组件 登录 KubeSphere 企业版 Web 控制台。
 点击扩展中心，进入扩展中心页面。
 点击组件右侧的，选择升级。</description>
-    </item>
-    
-    <item>
-      <title>卸载 KubeSphere 企业版</title>
-      <link>/v4.0/03-install-and-upgrade/03-uninstall-ks-core/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/v4.0/03-install-and-upgrade/03-uninstall-ks-core/</guid>
-      <description> 本节介绍如何卸载 KubeSphere Core，即卸载 KubeSphere 企业版。当前集群中运⾏的 Kubernetes 将不会被卸载。
-警告 虽然此操作不会卸载 Kubernetes，如果当前集群中运行的业务使用了 KubeSphere 企业版提供的功能，此操作仍然可能导致业务中断。
-此操作不能撤销，请谨慎执行此操作。
-前提条件 为避免数据丢失，请提前备份所有重要数据。
-操作步骤 执行以下命令卸载 KubeSphere 企业版。
-helm -n kubesphere-system uninstall ks-core </description>
     </item>
     
     <item>
