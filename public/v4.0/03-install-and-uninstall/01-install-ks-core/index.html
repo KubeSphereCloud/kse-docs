@@ -206,7 +206,7 @@
       
       
           
-          <li class="sidebar-item active current">
+          <li class="sidebar-item  ">
             <a href="/v4.0/01-intro/02-architecture/">KubeSphere LuBan 架构</a>
           </li>
         
@@ -276,7 +276,7 @@
       
       
           
-          <li class="sidebar-item active current">
+          <li class="sidebar-item  ">
             <a href="/v4.0/02-quickstart/01-install-ks-core/">安装 KubeSphere Core</a>
           </li>
         
@@ -353,7 +353,7 @@
       
       
           
-          <li class="sidebar-item  ">
+          <li class="sidebar-item active current">
             <a href="/v4.0/03-install-and-uninstall/01-install-ks-core/">安装 KubeSphere 企业版</a>
           </li>
         
@@ -7127,7 +7127,7 @@
     安装 KubeSphere 企业版</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2023-08-17 02:24:53
+      更新时间：2023-08-31 02:56:47
     </div>
     
     
@@ -7149,7 +7149,8 @@
   <nav id="TableOfContents">
   <ul>
     <li><a href="#_前提条件">前提条件</a></li>
-    <li><a href="#_操作步骤">操作步骤</a></li>
+    <li><a href="#_安装_kubernetes">安装 Kubernetes</a></li>
+    <li><a href="#_安装_kubesphere_企业版">安装 KubeSphere 企业版</a></li>
   </ul>
 </nav>
 </div><div class="post-content">
@@ -7159,40 +7160,161 @@
 <div class="paragraph">
 <p>本节介绍如何安装 KubeSphere 企业版 v4.0.0。</p>
 </div>
+<div class="paragraph">
+<p>安装过程中将用到开源工具 KubeKey。有关安装的更多信息，请访问 <a href="https://github.com/kubesphere/kubekey">GitHub KubeKey 仓库</a>。</p>
+</div>
 <div class="sect1">
 <h2 id="_前提条件">前提条件</h2>
 <div class="sectionbody">
-<div class="ulist">
+<div class="paragraph">
+<p>您需要准备一台 Linux 主机，并确保主机软硬件满足以下条件：</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 80%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">类别</th>
+<th class="tableblock halign-left valign-top">配置要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>硬件</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>最低配置：2 核 CPU，2 GB 内存，40 GB 磁盘空间。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>操作系统</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p>确保您的机器满足最低硬件要求：CPU &gt; 2 核，内存 &gt; 2 GB。</p>
+<p>Ubuntu 16.04, 18.04, 20.04, 22.04</p>
 </li>
 <li>
-<p>您需要提前安装 Helm。具体请参阅<a href="https://helm.sh/zh/docs/intro/install/">安装 Helm</a>。</p>
+<p>Debian Bullseye, Buster, Stretch</p>
+</li>
+<li>
+<p>CentOS/RHEL 7</p>
+</li>
+<li>
+<p>AlmaLinux 9.0</p>
+</li>
+<li>
+<p>SUSE Linux Enterprise Server 15</p>
 </li>
 </ul>
-</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Linux 内核</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>4.15 及更高版本。可以通过命令 uname -srm 查看 Linux 内核版本。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>网络</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>请确保 /etc/resolv.conf 中的 DNS 地址可用。</p>
+</li>
+<li>
+<p>建议禁用防火墙以避免组件通信受阻。</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>其他</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>节点上可以使用 sudo、curl 和 openssl 命令。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_操作步骤">操作步骤</h2>
+<h2 id="_安装_kubernetes">安装 Kubernetes</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>安装 KubeSphere 企业版之前，你需要一个可用的 Kubernetes 集群。执行以下命令快速创建 Kubernetes 集群。</p>
+</div>
+<div class="paragraph">
+<p>KubeSphere 企业版支持的 Kubernetes 版本有：v1.21.x、v1.22.x、v1.23.x、v1.24.x、v1.25.x、v1.26.x 和 v1.27.x。最低支持版本为 v1.21。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch admon note">
+<colgroup>
+<col style="width: 100%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>KubeSphere 企业版中各个扩展组件支持的 Kubernetes 版本和 KubeSphere 企业版支持的 Kubernetes 版本可能不同。安装扩展组件时，请以扩展市场的组件详情页中的 <strong>Kubernetes 版本</strong>为准。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>（可选）如果您没有可用的 Kubernetes 集群，执行以下命令快速创建一个 Kubernetes 集群。</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>如果您访问 GitHub/Googleapis 受限，请登录 Linux 主机，执行以下命令设置下载区域。</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">export KKZONE=cn</code></pre>
+</div>
+</div>
+</li>
 <li>
-<p>执行以下命令安装 KubeKey。</p>
+<p>执行以下命令下载安装⼯具 KubeKey。</p>
+<div class="openblock">
+<div class="content">
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">curl -sfL https://get-kk.kubesphere.io | sh -</code></pre>
 </div>
 </div>
+<table class="tableblock frame-all grid-all stretch admon note">
+<colgroup>
+<col style="width: 100%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>KubeKey 是 Kubernetes 和 KubeSphere 的安装工具。有关 KubeKey 的更多信息，请访问 <a href="https://github.com/kubesphere/kubekey">KubeKey GitHub 仓库</a>。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </li>
 <li>
-<p>执行以下命令安装依赖项。</p>
+<p>执行以下命令安装依赖项 socat 和 conntrack。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">apt install socat conntrack -y</code></pre>
@@ -7209,12 +7331,21 @@
 </li>
 </ol>
 </div>
-</li>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_安装_kubesphere_企业版">安装 KubeSphere 企业版</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>您需要提前安装 Helm。具体请参阅<a href="https://helm.sh/zh/docs/intro/install/">安装 Helm</a>。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 <code>helm</code> 安装 KubeSphere Core。</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7278,7 +7409,8 @@
   <nav id="TableOfContents">
   <ul>
     <li><a href="#_前提条件">前提条件</a></li>
-    <li><a href="#_操作步骤">操作步骤</a></li>
+    <li><a href="#_安装_kubernetes">安装 Kubernetes</a></li>
+    <li><a href="#_安装_kubesphere_企业版">安装 KubeSphere 企业版</a></li>
   </ul>
 </nav>
 </div></div>
