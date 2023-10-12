@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[3264],{38253:e=>{e.exports=JSON.parse('{"title":"KubeSphere Enterprise API (v4.0)","description":" ","slug":"/category/v4.0.0","permalink":"/reference/category/v4.0.0","navigation":{"next":{"title":"Introduction","permalink":"/reference/api/v4.0.0/introduction"}}}')}}]);
