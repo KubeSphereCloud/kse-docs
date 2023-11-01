@@ -973,7 +973,7 @@ viewer
       
       <guid>/v4.0/01-intro/01-introduction/</guid>
       <description>KubeSphere 企业版（KubeSphere Enterprise），是基于 Kubernetes 内核的分布式多租户商用云原生操作系统。在开源能力的基础上，在多云集群管理、微服务治理、应用管理等多个核心业务场景进行功能延伸。商用扩展中心实现高度模块化，满足不同场景业务需求。以强大的企业级云原生底座，完善的专家级解决方案和服务支持，赋能企业数字化转型和规模化运营。
-在 KubeSphere 企业版 v4.0 中，我们引入扩展机制，推出了全新的 KubeSphere 架构：KubeSphere LuBan，它构建在 Kubernetes 之上，支持高度可配置和可扩展。KubeSphere LuBan，是一个分布式的云原生可扩展开放架构，为扩展组件提供一个可热插拔的微内核。自此，KubeSphere 所有功能组件及第三方组件都会基于 KubeSphere LuBan，以扩展组件的方式无缝融入到 KubeSphere 控制台中，并独立维护版本，真正 实现即插即用的应用级云原生操作系统。
+在 KubeSphere 企业版 v4.0 中，我们引入扩展机制，推出了全新的 KubeSphere 架构：KubeSphere LuBan，它构建在 Kubernetes 之上，支持高度可配置和可扩展。KubeSphere LuBan，是一个分布式的云原生可扩展开放架构，为扩展组件提供一个可热插拔的微内核。自此，KubeSphere 所有功能组件及第三方组件都会基于 KubeSphere LuBan，以扩展组件的方式无缝融入到 KubeSphere 控制台中，并独立维护版本，真正实现即插即用的应用级云原生操作系统。
 为什么推出 KubeSphere LuBan 自 2018 年以来，KubeSphere 混合多云容器管理平台已发布过十几个版本，其中包括三个重大版本。为了满足用户需求，KubeSphere 集成了众多企业级功能，如多租户管理，多集群管理，DevOps，GitOps，服务网格，微服务，可观测（包括监控、告警、日志、审计、事件、通知等），应用商店，边缘计算，网络与存储管理等。
 虽然 KubeSphere 的一站式容器解决方案极大地提升了用户的容器使用体验，但也带来了如下挑战：
 发版周期长
@@ -1021,8 +1021,7 @@ helm upgrade --install -n kubesphere-system --create-namespace ks-core https://c
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.0/03-install-and-uninstall/01-install-ks-core/</guid>
-      <description>本节介绍如何安装 KubeSphere 企业版 v4.0.0。
-安装过程中将用到开源工具 KubeKey。有关安装的更多信息，请访问 GitHub KubeKey 仓库。
+      <description>本节介绍如何安装 KubeSphere 企业版 v4.0。
 前提条件 您需要准备一台 Linux 主机，并确保主机软硬件满足以下条件：
 类别 配置要求 硬件
 最低配置：2 核 CPU，2 GB 内存，40 GB 磁盘空间。
@@ -1039,7 +1038,8 @@ Linux 内核
 建议禁用防火墙以避免组件通信受阻。
 其他
 节点上可以使用 sudo、curl 和 openssl 命令。
-安装 Kubernetes 安装 KubeSphere 企业版之前，你需要一个可用的 Kubernetes 集群。执行以下命令快速创建 Kubernetes 集群。</description>
+安装 Kubernetes 安装 KubeSphere 企业版之前，你需要一个可用的 Kubernetes 集群。执行以下命令快速创建 Kubernetes 集群。
+KubeSphere 企业版支持的 Kubernetes 版本有：v1.</description>
     </item>
     
     <item>
@@ -2429,7 +2429,8 @@ KubeSphere 扩展组件可以做什么？ 从前端 UI 到后端 API，KubeSpher
       
       <guid>/v4.0/06-extension-user-guide/02-subscribe-and-install-components/02-install-components/</guid>
       <description>本节介绍如何安装扩展组件。
-前提条件 您需要以 platform-admin 角色登录到 KubeSphere 企业版 Web 控制台。有关平台角色的更多信息，请参阅平台角色。
+前提条件 以 platform-admin 角色登录到 KubeSphere 企业版 Web 控制台。有关平台角色的更多信息，请参阅平台角色。
+请先订阅您要安装的扩展组件。
 安装步骤 采用以下方式之一，进入安装页面，开始安装流程。
 点击扩展市场中组件详情页的安装按钮，进入组件安装页面。
 在扩展中心绑定 KubeSphere 云账号后，对已订阅未安装的组件，点击右侧的安装按钮，进入组件安装页面。
@@ -2451,10 +2452,10 @@ KubeSphere 扩展组件可以做什么？ 从前端 UI 到后端 API，KubeSpher
       <guid>/v4.0/02-quickstart/02-install-a-demo-extension/</guid>
       <description>KubeSphere 扩展组件，是运行在 KubeSphere Core 之上，用来扩展并增强 KubeSphere 产品能力，以进一步满足企业各类型的业务需求。
 本节以安装 DevOps 为例，演示如何在 KubeSphere 企业版 Web 控制台安装扩展组件。有关组件使用的更多信息，请参阅扩展组件管理。
-Devops 安装完成后，即可在企业空间中创建 Devops 项目。有关 Devops 项目的更多信息，请参阅Devops 项目。
+Devops 安装完成后，即可在企业空间中创建 Devops 项目。有关 Devops 项目的更多信息，请参阅 Devops 项目。
 前提条件 您需要以 platform-admin 角色登录到 KubeSphere 企业版 Web 控制台。有关平台角色的更多信息，请参阅平台角色。
 您需要注册一个 KubeSphere 云账号。
-安装准备 点击 KubeSphere 企业版 Web 控制台左上角的扩展市场，进入扩展市场页面。
+订阅步骤 点击 KubeSphere 企业版 Web 控制台左上角的扩展市场，进入扩展市场页面。
 搜索查找 DevOps，点击订阅。
 如果您未绑定 KubeSphere 云账号，前往扩展中心绑定您的 KubeSphere 云账户，然后进入订阅流程。
 订阅完成后，在扩展市场的 DevOps 页面，点击安装，进入组件安装流程。
@@ -2789,20 +2790,6 @@ BestEffort：容器组中的容器没有配置任何内存上限、内存请求�
 点击组件图标下的，选择集群 Agent 配置。
 选择一个集群，并进行差异化配置。
 点击确定。</description>
-    </item>
-    
-    <item>
-      <title>卸载 KubeSphere 企业版</title>
-      <link>/v4.0/03-install-and-uninstall/02-uninstall-ks-core/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/v4.0/03-install-and-uninstall/02-uninstall-ks-core/</guid>
-      <description> 本节介绍如何卸载 KubeSphere Core，即卸载 KubeSphere 企业版。当前集群中运⾏的 Kubernetes 将不会被卸载。
-警告 虽然此操作不会卸载 Kubernetes，如果当前集群中运行的业务使用了 KubeSphere 企业版提供的功能，此操作仍然可能导致业务中断。
-此操作不能撤销，请谨慎执行此操作。
-前提条件 为避免数据丢失，请提前备份所有重要数据。
-操作步骤 执行以下命令卸载 KubeSphere 企业版。
-helm -n kubesphere-system uninstall ks-core </description>
     </item>
     
     <item>
@@ -3953,6 +3940,20 @@ workspace-admin
     </item>
     
     <item>
+      <title>卸载 KubeSphere 企业版</title>
+      <link>/v4.0/03-install-and-uninstall/03-uninstall-ks-core/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/03-install-and-uninstall/03-uninstall-ks-core/</guid>
+      <description> 本节介绍如何卸载 KubeSphere Core，即卸载 KubeSphere 企业版。当前集群中运⾏的 Kubernetes 将不会被卸载。
+警告 虽然此操作不会卸载 Kubernetes，如果当前集群中运行的业务使用了 KubeSphere 企业版提供的功能，此操作仍然可能导致业务中断。
+此操作不能撤销，请谨慎执行此操作。
+前提条件 为避免数据丢失，请提前备份所有重要数据。
+操作步骤 执行以下命令卸载 KubeSphere 企业版。
+helm -n kubesphere-system uninstall ks-core </description>
+    </item>
+    
+    <item>
       <title>应用场景</title>
       <link>/v4.0/01-intro/03-scenarios/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -3960,9 +3961,9 @@ workspace-admin
       <guid>/v4.0/01-intro/03-scenarios/</guid>
       <description>KubeSphere 企业版 v4.0 适用于以下场景。
 资源量化运营 多部门资源管理往往会给运维带来巨大的资源管理压力，运维部门统计各业务线的资源利用率，评估各业务资源利用率的合理性，都需要巨大的工作时间成本。KubeSphere 企业版提供多维度、多角度的资源量化统计方式，资源数据一目了然。
-多级权限管控 公司各业务线如何高效协同一直是个亘古难题，基础设施运维、应用运维以及业务开发人员如何能通过平台紧密合作，实现权限隔离 成为了负载组织架构的核心需求。KubeSphere 企业版提供 “三权分立” 的用户权限体系，平台管理员、集群运维和应用运维三大权限视角合理分配，促进部门协作。
+多级权限管控 公司各业务线如何高效协同一直是个亘古难题，基础设施运维、应用运维以及业务开发人员如何能通过平台紧密合作，实现权限隔离成为了组织架构的核心需求。KubeSphere 企业版提供 “三权分立” 的用户权限体系，平台管理员、集群运维和应用运维三大权限视角合理分配，促进部门协作。
 智能弹性运维 基础资源过度浪费会给企业带来额外的运营成本，如何有效分析资源使用的合理性、在不同的场景下进行高效资源弹性管理也成为运维人员的难题。KubeSphere 企业版提供业务资源的智能推荐方案，定时分析，一键应用，同时支持自定义指标弹性伸缩，赋能智能运维。
-云原生一栈式转型 不少企业转型云原生都会遇到技术选型难题，如何实现 DevOps 运维一体化，云原生微服务治理，云边协同，AI 人工智能以及云原生下的可观测性，各种技术方案的选型以及运维给各企业带来了极大的困扰。KubeSphere 企业版集成业界最佳实践，提供高度图形化，一致性的使用体验，助力企业低成本走向云原生。</description>
+云原生一栈式转型 不少企业转型云原生都会遇到技术选型难题，如何实现 DevOps 运维一体化，云原生微服务治理，云边协同，AI 人工智能以及云原生下的可观测性。各种技术方案的选型以及运维给各企业带来了极大的困扰。KubeSphere 企业版集成业界最佳实践，提供高度图形化，一致性的使用体验，助力企业低成本走向云原生。</description>
     </item>
     
     <item>

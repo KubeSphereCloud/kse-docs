@@ -367,7 +367,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/03-install-and-uninstall/02-uninstall-ks-core/">卸载 KubeSphere 企业版</a>
+            <a href="/v4.0/03-install-and-uninstall/03-uninstall-ks-core/">卸载 KubeSphere 企业版</a>
           </li>
         
       
@@ -7172,7 +7172,7 @@
     安装 KubeSphere 企业版</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2023-09-25 03:07:58
+      更新时间：2023-10-31 09:16:56
     </div>
     
     
@@ -7196,6 +7196,12 @@
     <li><a href="#_前提条件">前提条件</a></li>
     <li><a href="#_安装_kubernetes">安装 Kubernetes</a></li>
     <li><a href="#_安装_kubesphere_企业版">安装 KubeSphere 企业版</a></li>
+    <li><a href="#_高级配置">高级配置</a>
+      <ul>
+        <li><a href="#_kubesphere_helm_chart_选项">KubeSphere Helm Chart 选项</a></li>
+        <li><a href="#_tls_配置">TLS 配置</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div><div class="post-content">
@@ -7203,10 +7209,7 @@
       
       
 <div class="paragraph">
-<p>本节介绍如何安装 KubeSphere 企业版 v4.0.0。</p>
-</div>
-<div class="paragraph">
-<p>安装过程中将用到开源工具 KubeKey。有关安装的更多信息，请访问 <a href="https://github.com/kubesphere/kubekey">GitHub KubeKey 仓库</a>。</p>
+<p>本节介绍如何安装 KubeSphere 企业版 v4.0。</p>
 </div>
 <div class="sect1">
 <h2 id="_前提条件">前提条件</h2>
@@ -7387,7 +7390,7 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 <code>helm</code> 安装 KubeSphere Core。</p>
+<p>如果已有可用的 Kubernetes 集群，执行以下命令通过 <code>helm</code> 安装 KubeSphere Core。</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz</code></pre>
@@ -7436,6 +7439,401 @@
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_高级配置">高级配置</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_kubesphere_helm_chart_选项">KubeSphere Helm Chart 选项</h3>
+<div class="paragraph">
+<p><strong>常用选项</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 50%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">选项</th>
+<th class="tableblock halign-left valign-top">默认值</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">adminPassword</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 为第一个管理员用户设置引导密码。登录后，管理员需要重置密码。如不设置，会使用内置默认密码 <strong>P@88w0rd</strong>。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hostname</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;example.com&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - KubeSphere Server 完全限定的域名。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.enabled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool - 如果值为 true, 创建 KubeSphere Ingress 网关。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.tls.enabled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool - 如果值为 true, 则为 KubeSphere  Ingress 网关启用 HTTPS。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.tls.source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;generation&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - Ingress 证书的来源，可选项：&#34;generation, importation, letsEncrypt&#34;。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">letsEncrypt.email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 邮箱地址，证书过期时会收到邮件提醒。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">letsEncrypt.environment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;production&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 可选项：&#34;staging, production&#34;。测试环境和生产环境证书在速率限制上存在区别，详情见：<a href="https://letsencrypt.org/docs/">Let’s Encrypt 官方文档</a>。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>高级选项</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 50%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">选项</th>
+<th class="tableblock halign-left valign-top">默认值</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">internalTLS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool - 如果值为 true, 启用内部 TLS。console 和 apiserver 均会启用 HTTPS 服务。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.ingressClassName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 使用网关的可选 Ingress 类，可选项：&#34;nginx，traefik&#34;。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.secretName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;kubesphere-tls-certs&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - Ingress 网关所使用的包含 TLS 证书的 Secrets。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">certmanager.duration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2160h</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - cert-manager 生成证书的过期时间。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">certmanager.renewBefore</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">360h</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - cert-manager 刷新证书到证书过期之间的时间间隔。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">global.imageRegistry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">registry.cn-beijing.aliyuncs.com</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 设置全局的 KubeSphere 镜像仓库地址。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">global.tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;v4.0.0&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 设置全局的 KubeSphere 镜像仓库标签。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">apiserver.image.registry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 设置 ks-apiserver 镜像仓库地址。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">apiserver.image.repository</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;kse/ks-apiserver&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 设置 ks-apiserver 镜像名称。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">apiserver.image.tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 设置 ks-apiserver 镜像标签。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">apiserver.nodePort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">uint16 - 设置 ks-apiserver 服务 service 的 NodePort 端口。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">console.image.registry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 设置 ks-console 镜像仓库地址。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">console.image.repository</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;kse/ks-console&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 设置 ks-console 镜像名称。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">console.image.tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 设置 ks-console 镜像标签。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">console.nodePort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">30880</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">uint16 - 设置 ks-console 服务 service 的 NodePort 端口。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">controller.image.registry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 设置 ks-controller-manager 镜像仓库地址。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">controller.image.repository</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;kse/ks-controller-manager&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 设置 ks-controller-manager 镜像名称。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">controller.image.tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string - 设置 ks-controller-manager 镜像标签。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_tls_配置">TLS 配置</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>选择 SSL 配置</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>KubeSphere 安全配置分为<strong>网关 SSL 配置</strong>以及<strong>内部服务 SSL 配置</strong>两个部分。其中<strong>网关 SSL 配置</strong>默认支持以下三种模式来启用 SSL/TLS，以保证访问的安全性。
+，以确保访问的安全性。</p>
+</div>
+</div>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>网关 SSL 配置</p>
+<div class="openblock">
+<div class="content">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 50%;"/>
+<col style="width: 25%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">配置</th>
+<th class="tableblock halign-left valign-top">Helm Chart 选项</th>
+<th class="tableblock halign-left valign-top">是否需要 cert-manager</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KubeSphere 生成的 TLS证书</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.tls.source=generation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">否</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Let’s Encrypt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.tls.source=letsEncrypt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">导入已有的证书</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.tls.source=importation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">否</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>KubeSphere 生成的 TLS 证书：支持 cert-manager 和 helm 两种方式。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>如果 Kubernetes 集群中已安装 cert-manager，则首选使用 cert-manager 生成证书。KubeSphere 使用 cert-manager 签发并维护证书。KubeSphere 会生成自己的 CA 证书，并用该 CA 签署证书，然后由 cert-manager 管理该证书。</p>
+</li>
+<li>
+<p>如果未安装 cert-manager，则使用 helm 生成证书。在使用 helm 安装的过程中，KubeSphere 会根据设置的 <code>hostname</code> 生成 CA 和 TLS 证书。在此选项下，证书不支持自动过期轮转。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Let’s Encrypt</p>
+<div class="paragraph">
+<p>使用 Let’s Encrypt 选项必须使用 cert-manager。但是，在这种情况下，cert-manager 与 Let’s Encrypt 的特殊颁发者相结合，该颁发者执行获取 Let’s Encrypt 颁发证书所需的所有操作，包括请求和验证。此配置使用 HTTP 验证（HTTP-01），因此负载均衡器必须具有可以从互联网访问的公共 DNS 记录。</p>
+</div>
+</li>
+<li>
+<p>导入已有的证书</p>
+<div class="paragraph">
+<p>使用已有的CA 颁发的公有或私有证书。KubeSphere 将使用该证书来保护 WebSocket 和 HTTPS 流量。在这种情况下，您必须上传名称分别为 tls.crt 和 tls.key 的 PEM 格式的证书以及相关的密钥。如果您使用私有 CA，则还必须上传该 CA 证书。这是由于您的节点可能不信任此私有 CA。</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>内部服务 SSL 配置</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>启用内部 SSL 配置之后，KubeSphere 中 Console UI 和 Apiserver 均会启用 HTTPS，内置支持 cert-manager 和 helm 生成证书。在 Kubernetes 集群已安装 cert-manager 的情况下优先使用 cert-manager 生成/管理证书，证书的 DNS 默认使用 Console UI 和 Apiserver 在 Kubernetes 集群内部的 Service DNS。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">配置</th>
+<th class="tableblock halign-left valign-top">Helm Chart 选项</th>
+<th class="tableblock halign-left valign-top">是否需要 cert-manager</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">启用内部SSL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">internalTLS=true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">否</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>安装 cert-manager</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>若使用自己的证书文件（ingress.tls.source=importation），您可以跳过此步骤。</p>
+</div>
+<div class="paragraph">
+<p>仅在使用 KubeSphere 生成的证书（ingress.tls.source=generation）或 Let’s Encrypt 颁发的证书（ingress.tls.source=letsEncrypt）时，才需要安装 cert-manager。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># 添加 Jetstack Helm 仓库
+helm repo add jetstack https://charts.jetstack.io
+
+# 更新本地 Helm Chart 仓库缓存
+helm repo update
+
+# 安装 cert-manager Helm Chart
+helm install cert-manager jetstack/cert-manager -n cert-manager --create-namespace --set prometheus.enabled=false
+# 或
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/&lt;VERSION&gt;/cert-manager.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>安装完 cert-manager 后，检查 cert-manager 命名空间中正在运行的 Pod 来验证它是否已正确部署：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">kubectl get pods --namespace cert-manager</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>根据您选择的证书选项，通过 Helm 为 KubeSphere 开启 SSL 配置</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>启用网关 SSL 配置</p>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>KubeSphere 生成的证书</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz \
+--set ingress.enabled=true \
+--set hostname=kubesphere.my.org</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Let’s Encrypt</p>
+<div class="paragraph">
+<p>此选项使用 cert-manager 来自动请求和续订 Let’s Encrypt 证书。Let’s Encrypt 是免费的，而且是受信的 CA，因此可以提供有效的证书。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz \
+--set hostname=kubesphere.my.org \
+--set ingress.enabled=true \
+--set ingress.tls.source=letsEncrypt \
+--set letsEncrypt.email=me@example.org</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>导入外部证书</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># 导入外部证书
+kubectl create secret tls tls-ks-core-ingress --cert=tls.crt --key=tls.key -n kubesphere-system
+
+# 安装 KubeSphere
+helm upgrade --install -n kubesphere-system --create-namespace ks-core
+https://charts.kubesphere.io/main/ks-core-0.4.0.tgz \
+--set ingress.enabled=true \
+--set hostname=kubesphere.my.org \
+--set ingress.tls.source=importation</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>启用内部服务 SSL 配置</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core
+https://charts.kubesphere.io/main/ks-core-0.4.0.tgz \
+--set internalTLS=true</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
 
     
 
@@ -7456,6 +7854,12 @@
     <li><a href="#_前提条件">前提条件</a></li>
     <li><a href="#_安装_kubernetes">安装 Kubernetes</a></li>
     <li><a href="#_安装_kubesphere_企业版">安装 KubeSphere 企业版</a></li>
+    <li><a href="#_高级配置">高级配置</a>
+      <ul>
+        <li><a href="#_kubesphere_helm_chart_选项">KubeSphere Helm Chart 选项</a></li>
+        <li><a href="#_tls_配置">TLS 配置</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div></div>
