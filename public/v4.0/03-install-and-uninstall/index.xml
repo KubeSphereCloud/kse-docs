@@ -13,8 +13,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.0/03-install-and-uninstall/01-install-ks-core/</guid>
-      <description>本节介绍如何安装 KubeSphere 企业版 v4.0.0。
-安装过程中将用到开源工具 KubeKey。有关安装的更多信息，请访问 GitHub KubeKey 仓库。
+      <description>本节介绍如何安装 KubeSphere 企业版 v4.0。
 前提条件 您需要准备一台 Linux 主机，并确保主机软硬件满足以下条件：
 类别 配置要求 硬件
 最低配置：2 核 CPU，2 GB 内存，40 GB 磁盘空间。
@@ -31,15 +30,16 @@ Linux 内核
 建议禁用防火墙以避免组件通信受阻。
 其他
 节点上可以使用 sudo、curl 和 openssl 命令。
-安装 Kubernetes 安装 KubeSphere 企业版之前，你需要一个可用的 Kubernetes 集群。执行以下命令快速创建 Kubernetes 集群。</description>
+安装 Kubernetes 安装 KubeSphere 企业版之前，你需要一个可用的 Kubernetes 集群。执行以下命令快速创建 Kubernetes 集群。
+KubeSphere 企业版支持的 Kubernetes 版本有：v1.</description>
     </item>
     
     <item>
       <title>卸载 KubeSphere 企业版</title>
-      <link>/v4.0/03-install-and-uninstall/02-uninstall-ks-core/</link>
+      <link>/v4.0/03-install-and-uninstall/03-uninstall-ks-core/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/v4.0/03-install-and-uninstall/02-uninstall-ks-core/</guid>
+      <guid>/v4.0/03-install-and-uninstall/03-uninstall-ks-core/</guid>
       <description> 本节介绍如何卸载 KubeSphere Core，即卸载 KubeSphere 企业版。当前集群中运⾏的 Kubernetes 将不会被卸载。
 警告 虽然此操作不会卸载 Kubernetes，如果当前集群中运行的业务使用了 KubeSphere 企业版提供的功能，此操作仍然可能导致业务中断。
 此操作不能撤销，请谨慎执行此操作。
