@@ -120,10 +120,10 @@ Kubernetes 版本
 备注 在多集群系统中，主集群上的通知渠道、静默规则、通知语言等配置数据会自动同步到成员集群。如果移除集群时未选择删除集群中的所有通知配置数据，集群被移除后仍将按照原有的配置发送通知。
 通过命令行移除集群 某些情况下可能无法从 Web 控制台移除成员集群。例如，成员集群的凭证存在错误。在此情况下，您可以执行以下步骤通过命令行移除不健康的成员集群：
 以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
-将光标悬停在页面右下角的 图标，然后在菜单中选择 kubectl。
+将光标悬停在页面右下角的图标，然后在菜单中选择 kubectl。
 在 kubectl 对话框，执行以下命令移除成员集群（将 &amp;lt;cluster name&amp;gt; 替换为成员集群的名称）：
 kubectl delete cluster &amp;lt;cluster name&amp;gt; 清理多集群配置数据 以具有 platform-admin 角色的用户登录被移除集群的 Web 控制台。
-将光标悬停在页面右下角的 图标，然后在菜单中选择 kubectl。
+将光标悬停在页面右下角的图标，然后在菜单中选择 kubectl。
 在 kubectl 对话框，执行以下命令清理集群中的多集群配置数据：
 for ns in $(kubectl get ns --field-selector status.</description>
     </item>
