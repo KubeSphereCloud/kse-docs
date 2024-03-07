@@ -39,7 +39,7 @@
     
     <div class="navbar-nav">
       <div
-        class="navbar-nav-item navbar-nav-version "
+        class="navbar-nav-item navbar-nav-version dropdown"
         style="">
         
         <div class="dropdown-trigger">
@@ -47,7 +47,29 @@
             v4.0
           </span>
           
+            <span class="icon icon-chevron_down_fill"></span>
+          
         </div>
+        
+          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              
+              <a
+                class=""
+                href="/v4.1/"
+              >
+                v4.1
+              </a>
+              
+              <a
+                class="active"
+                href="/v4.0/"
+              >
+                v4.0
+              </a>
+              
+            </div>
+          </div>
         
       </div>
       
@@ -1564,6 +1586,12 @@
                 
               
             
+              
+                
+                  
+                
+              
+            
             
               <span
                 class="menu-switch-icon icon-caret_down_fill">
@@ -1633,7 +1661,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/04-projects/05-edit-project-quotas/">编辑项目配额</a>
+            <a href="/v4.0/07-cluster-management/04-projects/05-edit-project-annotations/">编辑项目注解</a>
           </li>
         
       
@@ -1646,7 +1674,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/04-projects/06-edit-default-container-quotas/">编辑默认容器配额</a>
+            <a href="/v4.0/07-cluster-management/04-projects/06-edit-project-quotas/">编辑项目配额</a>
           </li>
         
       
@@ -1659,7 +1687,20 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/04-projects/07-delete-projects/">删除项目</a>
+            <a href="/v4.0/07-cluster-management/04-projects/07-edit-default-container-quotas/">编辑默认容器配额</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/07-cluster-management/04-projects/08-delete-projects/">删除项目</a>
           </li>
         
       
@@ -3310,7 +3351,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/08-storage/01-persistent-volume-claims/07-expand-a-persistent-volume/">扩展持久卷</a>
+            <a href="/v4.0/07-cluster-management/08-storage/01-persistent-volume-claims/05-expand-a-persistent-volume/">扩展持久卷</a>
           </li>
         
       
@@ -7302,7 +7343,7 @@
     删除任务</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2023-08-31 02:56:47
+      更新时间：2024-03-06 09:40:14
     </div>
     
     
@@ -7357,7 +7398,7 @@
 <h2 id="_前提条件">前提条件</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>您需要加入一个集群并在集群中具有<strong>项目资源管理</strong>权限。有关更多信息，请参阅<a href="../../../../07-cluster-management/09-cluster-settings/03-cluster-members/_index/">集群成员</a>和<a href="../../../../07-cluster-management/09-cluster-settings/04-cluster-roles/_index/">集群角色</a>。</p>
+<p>您需要加入一个集群并在集群中具有<strong>应用负载管理</strong>权限。有关更多信息，请参阅<a href="../../../../07-cluster-management/09-cluster-settings/03-cluster-members/_index/">集群成员</a>和<a href="../../../../07-cluster-management/09-cluster-settings/04-cluster-roles/_index/">集群角色</a>。</p>
 </div>
 </div>
 </div>
@@ -7367,7 +7408,7 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>以具有<strong>项目资源管理</strong>权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。</p>
+<p>以具有<strong>应用负载管理</strong>权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。</p>
 </li>
 <li>
 <p>在左侧导航栏选择<strong>应用负载 &gt; 任务</strong>。</p>
@@ -7391,7 +7432,7 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>以具有<strong>项目资源管理</strong>权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。</p>
+<p>以具有<strong>应用负载管理</strong>权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。</p>
 </li>
 <li>
 <p>在左侧导航栏选择<strong>应用负载 &gt; 任务</strong>。</p>
@@ -7412,7 +7453,7 @@
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">备注</th>
+<th class="tableblock halign-left valign-top">说明</th>
 </tr>
 </thead>
 <tbody>

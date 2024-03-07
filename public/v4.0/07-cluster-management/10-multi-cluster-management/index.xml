@@ -6,127 +6,42 @@
     <description>Recent content in 多集群管理 on KubeSphere 企业版</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.0/07-cluster-management/10-multi-cluster-management/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.0/07-cluster-management/10-multi-cluster-management/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>添加成员集群</title>
       <link>/v4.0/07-cluster-management/10-multi-cluster-management/01-add-a-member-cluster-using-direct-connection/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.0/07-cluster-management/10-multi-cluster-management/01-add-a-member-cluster-using-direct-connection/</guid>
-      <description>本节介绍如何通过直接连接添加成员集群。
-前提条件 您需要在主集群和成员集群中都具有 platform-admin 角色。
-主集群所有节点必须能访问成员集群的 Kubernetes API 服务（默认为成员集群主节点的 6443 端口）。取决于您的网络环境，您可能需要配置防火墙和流量转发规则。
-获取成员集群 kubeconfig 执行以下步骤获取成员集群的 kubeconfig 信息：
-以具有 platform-admin 角色的用户登录成员集群的 Web 控制台。
-将光标悬停在页面右下角的 图标，然后在菜单中选择 kubeconfig。
-在 kubeconfig 对话框，查看成员集群的 kubeconfig 信息并记录。
-备注 您可以复制 kubeconfig 信息或点击 将 kubeconfig.yaml 文件下载到本地。
-请将 kubeconfig 信息中的 clusters:cluster:server 参数修改为成员集群的 Kubernetes API 服务的访问地址，默认在成员集群主节点的 6443 端口暴露。请确保主集群的所有节点都能访问该地址，取决于您的网络环境，您可能需要配置防火墙规则和流量转发策略。
-添加成员集群 以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
-点击集群管理。
-在集群管理页面，点击添加集群。
-在基本信息页签，设置成员集群的名称、标签、提供商和描述信息，然后点击下一步。
-参数 描述 名称
-成员集群的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
-标签
-成员集群的用途标识。您可以在下拉列表中选择标签，也可以手动输入标签。
-提供商
-成员集群的提供商。您可以在下拉列表中选择提供商，也可以手动输入提供商。
-描述
-成员集群的描述信息。描述可包含任意字符，最长 256 个字符。</description>
+      <description>本节介绍如何通过直接连接添加成员集群。&#xA;前提条件 您需要在主集群和成员集群中都具有 platform-admin 角色。&#xA;主集群所有节点必须能访问成员集群的 Kubernetes API 服务（默认为成员集群主节点的 6443 端口）。取决于您的网络环境，您可能需要配置防火墙和流量转发规则。&#xA;获取成员集群 kubeconfig 执行以下步骤获取成员集群的 kubeconfig 信息：&#xA;以具有 platform-admin 角色的用户登录成员集群的 Web 控制台。&#xA;将光标悬停在页面右下角的 图标，然后在菜单中选择 kubeconfig。&#xA;在 kubeconfig 对话框，查看成员集群的 kubeconfig 信息并记录。&#xA;说明 您可以复制 kubeconfig 信息或点击 将 kubeconfig.yaml 文件下载到本地。&#xA;请将 kubeconfig 信息中的 clusters:cluster:server 参数修改为成员集群的 Kubernetes API 服务的访问地址，默认在成员集群主节点的 6443 端口暴露。请确保主集群的所有节点都能访问该地址，取决于您的网络环境，您可能需要配置防火墙规则和流量转发策略。&#xA;添加成员集群 以具有 platform-admin 角色的用户登录主集群的 Web 控制台。&#xA;点击集群管理。&#xA;在集群管理页面，点击添加集群。&#xA;在基本信息页签，设置成员集群的名称、标签、提供商和描述信息，然后点击下一步。&#xA;参数 描述 名称&#xA;成员集群的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。&#xA;标签&#xA;成员集群的用途标识。您可以在下拉列表中选择标签，也可以手动输入标签。&#xA;提供商&#xA;成员集群的提供商。您可以在下拉列表中选择提供商，也可以手动输入提供商。&#xA;描述&#xA;成员集群的描述信息。描述可包含任意字符，最长 256 个字符。</description>
     </item>
-    
     <item>
       <title>查看集群列表</title>
       <link>/v4.0/07-cluster-management/10-multi-cluster-management/02-view-a-cluster-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.0/07-cluster-management/10-multi-cluster-management/02-view-a-cluster-list/</guid>
-      <description>本节介绍如何查看集群列表。
-前提条件 您需要在 KubeSphere 企业版平台具有集群查看权限。
-操作步骤 以具有集群查看权限的用户登录 KubeSphere 企业版 Web 控制台。
-点击集群管理。
-集群列表提供以下信息：
-参数 描述 名称、标签和描述
-集群的名称、标签和描述信息。
-节点数量
-集群中服务器节点的数量。
-Kubernetes 版本
-集群中运行的 Kubernetes 版本。
-提供商
-集群环境的提供商。
-创建时间
-集群加入 KubeSphere 企业版 Web 控制台的时间。
-在列表上方点击搜索框并设置搜索条件，可按名称、类型或标签搜索集群。
-在列表右上角点击可刷新列表信息。
-在列表右上角点击可定制列表中显示的信息。
-点击集群的名称可进入集群管理集群中的资源。</description>
+      <description>本节介绍如何查看集群列表。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有集群查看权限。&#xA;操作步骤 以具有集群查看权限的用户登录 KubeSphere 企业版 Web 控制台。&#xA;点击集群管理。&#xA;集群列表提供以下信息：&#xA;参数 描述 名称、标签和描述&#xA;集群的名称、标签和描述信息。&#xA;节点数量&#xA;集群中服务器节点的数量。&#xA;Kubernetes 版本&#xA;集群中运行的 Kubernetes 版本。&#xA;提供商&#xA;集群环境的提供商。&#xA;创建时间&#xA;集群加入 KubeSphere 企业版 Web 控制台的时间。&#xA;在列表上方点击搜索框并设置搜索条件，可按名称、类型或标签搜索集群。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。&#xA;点击集群的名称可进入集群管理集群中的资源。</description>
     </item>
-    
     <item>
       <title>编辑集群信息</title>
       <link>/v4.0/07-cluster-management/10-multi-cluster-management/03-edit-cluster-information/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.0/07-cluster-management/10-multi-cluster-management/03-edit-cluster-information/</guid>
-      <description>本节介绍编辑集群信息。
-您可以编辑集群的类型、提供商和描述。KubeSphere 企业版不支持编辑已添加集群的名称。
-前提条件 您需要在 KubeSphere 企业版平台具有集群管理权限。
-操作步骤 以具有集群管理权限的用户登录 KubeSphere 企业版 Web 控制台。
-点击集群管理。
-在需要操作的集群右侧点击 ，然后在下拉列表中选择编辑信息。
-在编辑信息对话框，设置集群的标签、提供商和描述，然后点击确定。
-参数 描述 标签
-成员集群的用途标识。您可以在下拉列表中选择标签，也可以手动输入标签。
-提供商
-成员集群的提供商。您可以在下拉列表中选择提供商，也可以手动输入提供商。
-描述
-成员集群的描述信息。描述可包含任意字符，最长 256 个字符。</description>
+      <description>本节介绍编辑集群信息。&#xA;您可以编辑集群的类型、提供商和描述。KubeSphere 企业版不支持编辑已添加集群的名称。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有集群管理权限。&#xA;操作步骤 以具有集群管理权限的用户登录 KubeSphere 企业版 Web 控制台。&#xA;点击集群管理。&#xA;在需要操作的集群右侧点击 ，然后在下拉列表中选择编辑信息。&#xA;在编辑信息对话框，设置集群的标签、提供商和描述，然后点击确定。&#xA;参数 描述 标签&#xA;成员集群的用途标识。您可以在下拉列表中选择标签，也可以手动输入标签。&#xA;提供商&#xA;成员集群的提供商。您可以在下拉列表中选择提供商，也可以手动输入提供商。&#xA;描述&#xA;成员集群的描述信息。描述可包含任意字符，最长 256 个字符。</description>
     </item>
-    
     <item>
       <title>更新 kubeconfig</title>
       <link>/v4.0/07-cluster-management/10-multi-cluster-management/05-update-kubeconfig/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.0/07-cluster-management/10-multi-cluster-management/05-update-kubeconfig/</guid>
-      <description>本节介绍如何更新成员集群 kubeconfig 信息。
-成员集群添加在主集群的 KubeSphere 企业版平台后，如果成员集群的访问信息发生变化，您可以更新成员集群的 kubeconfig 信息。
-备注 KubeSphere 企业版仅支持编辑通过直接连接添加的集群的 kubeconfig 信息，不支持编辑通过代理连接添加的集群的 kubeconfig 信息。
-前提条件 您需要在 KubeSphere 企业版平台具有集群管理权限。
-操作步骤 以具有集群管理权限的用户登录 KubeSphere 企业版 Web 控制台。
-点击集群管理。
-在需要操作的集群右侧点击 ，然后在下拉列表中选择更新 kubeconfig。
-在更新 kubeconfig 对话框输入 kubeconfig 信息，然后点击更新。
-提示 您可以点击 从本地上传 kubeconfig 配置文件。
-主集群的 KubeSphere 企业版 Web 控制台将使用新的 kubeconfig 信息连接成员集群。</description>
+      <description>本节介绍如何更新成员集群 kubeconfig 信息。&#xA;成员集群添加在主集群的 KubeSphere 企业版平台后，如果成员集群的访问信息发生变化，您可以更新成员集群的 kubeconfig 信息。&#xA;说明 KubeSphere 企业版仅支持编辑通过直接连接添加的集群的 kubeconfig 信息，不支持编辑通过代理连接添加的集群的 kubeconfig 信息。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有集群管理权限。&#xA;操作步骤 以具有集群管理权限的用户登录 KubeSphere 企业版 Web 控制台。&#xA;点击集群管理。&#xA;在需要操作的集群右侧点击 ，然后在下拉列表中选择更新 kubeconfig。&#xA;在更新 kubeconfig 对话框输入 kubeconfig 信息，然后点击更新。&#xA;提示 您可以点击 从本地上传 kubeconfig 配置文件。&#xA;主集群的 KubeSphere 企业版 Web 控制台将使用新的 kubeconfig 信息连接成员集群。</description>
     </item>
-    
     <item>
       <title>移除成员集群</title>
       <link>/v4.0/07-cluster-management/10-multi-cluster-management/06-remove-a-member-cluster/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.0/07-cluster-management/10-multi-cluster-management/06-remove-a-member-cluster/</guid>
-      <description>本节介绍如何移除成员集群。
-备注 主集群无法移除。
-成员集群移除后，KubeSphere 企业版将无法管理该集群。集群中原有的 Kubernetes 资源将不会被删除。
-警告 集群被移除后，集群中原有的多集群配置数据不会被自动清除，卸载 KubeSphere 企业版或删除关联资源时可能会导致用户数据丢失。请务必在被移除的集群上执行清理多集群配置数据步骤。
-前提条件 您需要在主集群和需要移除的成员集群都具有 platform-admin 角色。
-通过 Web 控制台移除集群 以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
-点击集群管理。
-在需要操作的集群右侧点击 ，然后在下拉列表中选择移除集群。
-在移除集群对话框，确认需要移除的集群的信息，将滑块拖动到右侧，输入需要移除的集群的名称，根据需要选择或取消选择删除集群中的所有通知配置数据，然后点击确定。
-备注 在多集群系统中，主集群上的通知渠道、静默规则、通知语言等配置数据会自动同步到成员集群。如果移除集群时未选择删除集群中的所有通知配置数据，集群被移除后仍将按照原有的配置发送通知。
-通过命令行移除集群 某些情况下可能无法从 Web 控制台移除成员集群。例如，成员集群的凭证存在错误。在此情况下，您可以执行以下步骤通过命令行移除不健康的成员集群：
-以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
-将光标悬停在页面右下角的图标，然后在菜单中选择 kubectl。
-在 kubectl 对话框，执行以下命令移除成员集群（将 &amp;lt;cluster name&amp;gt; 替换为成员集群的名称）：
-kubectl delete cluster &amp;lt;cluster name&amp;gt; 清理多集群配置数据 以具有 platform-admin 角色的用户登录被移除集群的 Web 控制台。
-将光标悬停在页面右下角的图标，然后在菜单中选择 kubectl。
-在 kubectl 对话框，执行以下命令清理集群中的多集群配置数据：
-for ns in $(kubectl get ns --field-selector status.</description>
+      <description>本节介绍如何移除成员集群。&#xA;说明 主集群无法移除。&#xA;成员集群移除后，KubeSphere 企业版将无法管理该集群。集群中原有的 Kubernetes 资源将不会被删除。&#xA;警告 集群被移除后，集群中原有的多集群配置数据不会被自动清除，卸载 KubeSphere 企业版或删除关联资源时可能会导致用户数据丢失。请务必在被移除的集群上执行清理多集群配置数据步骤。&#xA;前提条件 您需要在主集群和需要移除的成员集群都具有 platform-admin 角色。&#xA;通过 Web 控制台移除集群 以具有 platform-admin 角色的用户登录主集群的 Web 控制台。&#xA;点击集群管理。&#xA;在需要操作的集群右侧点击 ，然后在下拉列表中选择移除集群。&#xA;在移除集群对话框，确认需要移除的集群的信息，将滑块拖动到右侧，输入需要移除的集群的名称，根据需要选择或取消选择删除集群中的所有通知配置数据，然后点击确定。&#xA;说明 在多集群系统中，主集群上的通知渠道、静默规则、通知语言等配置数据会自动同步到成员集群。如果移除集群时未选择删除集群中的所有通知配置数据，集群被移除后仍将按照原有的配置发送通知。&#xA;通过命令行移除集群 某些情况下可能无法从 Web 控制台移除成员集群。例如，成员集群的凭证存在错误。在此情况下，您可以执行以下步骤通过命令行移除不健康的成员集群：&#xA;以具有 platform-admin 角色的用户登录主集群的 Web 控制台。&#xA;将光标悬停在页面右下角的图标，然后在菜单中选择 kubectl。&#xA;在 kubectl 对话框，执行以下命令移除成员集群（将 &amp;lt;cluster name&amp;gt; 替换为成员集群的名称）：&#xA;kubectl delete cluster &amp;lt;cluster name&amp;gt; 清理多集群配置数据 以具有 platform-admin 角色的用户登录被移除集群的 Web 控制台。&#xA;将光标悬停在页面右下角的图标，然后在菜单中选择 kubectl。&#xA;在 kubectl 对话框，执行以下命令清理集群中的多集群配置数据：&#xA;for ns in $(kubectl get ns --field-selector status.</description>
     </item>
-    
   </channel>
 </rss>
