@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>集群状态 on KubeSphere 企业版</title>
+    <link>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/</link>
+    <description>Recent content in 集群状态 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>查看集群状态概览</title>
+      <link>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/01-view-cluster-status-overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/01-view-cluster-status-overview/</guid>
+      <description>本节介绍如何查看集群状态概览。
+前提条件 您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
+KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 监控扩展组件。
+操作步骤 以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择监控告警 &amp;gt; 集群状态。
+在集群状态页面的概览区域查看集群节点、集群资源、etcd 和服务组件的状态。
+参数 描述 集群节点状态
+集群的节点总数和正常节点数量。
+集群资源用量
+集群的 CPU、内存、磁盘资源的总数和已使用量，以及集群可创建容器组总数和已创建容器组数量。默认情况下每个正常集群节点最多可创建 110 个容器组。
+etcd 监控
+etcd 数据库的服务状态、Raft 提议数量、数据库大小和客户端流量。
+服务状态：显示 etcd 集群的 Leader 节点、每个节点的 IP 地址和 1 小时内 Leader 变更次数。
+Raft 提议：显示 Raft 提议的每秒提交次数、应用次数、失败次数和排队提议数量。
+数据库大小：etcd 数据库大小随时间的变化。
+客户端流量：发送给 gRPC 客户端和从 gRPC 客户端接收的数据流量。
+查看 etcd 监控信息需要提前启用 etcd 监控。有关更多信息，请参阅扩展中心 WhizardTelemetry 监控扩展组件的详情页说明。
+服务组件监控
+Kubernetes API 服务器的请求延迟和每秒请求次数，以及调度器的累计调度次数和每秒调度次数。</description>
+    </item>
+    
+    <item>
+      <title>查看物理资源状态</title>
+      <link>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/02-view-physical-resource-status/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/02-view-physical-resource-status/</guid>
+      <description>本节介绍如何查看物理资源状态。
+前提条件 您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
+KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 监控扩展组件。
+操作步骤 以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择监控告警 &amp;gt; 集群状态。
+在集群状态页面，点击物理资源监控查看集群物理资源的使用情况。
+物理资源监控页签提供以下信息：
+参数 描述 CPU 用量
+显示指定时间范围内的集群 CPU 使用量百分比。
+CPU 平均负载
+显示指定时间范围内的集群 CPU 平均负载。CPU 平均负载是一个无量纲值，表示单位时间内 CPU 的平均活跃进程数。
+内存用量
+显示指定时间范围内的集群内存使用量百分比。
+磁盘用量
+显示指定时间范围的内集群磁盘使用量。
+Inode 用量
+显示指定时间范围内的集群 Inode 使用量百分比。
+磁盘吞吐
+显示指定时间范围内的集群磁盘读写速率。
+IOPS
+显示指定时间范围内的集群磁盘每秒读写操作数。
+网络流量
+显示指定时间范围内集群网络出入速率。
+容器组状态
+显示指定时间范围内集群运行中、已完成和异常容器组的数。
+在右上角点击 可设置数据的时间范围。
+在右上角点击 / 可开启/停止实时数据刷新。
+在右上角点击 可手动刷新数据。</description>
+    </item>
+    
+    <item>
+      <title>查看 etcd 数据库状态</title>
+      <link>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/03-view-etcd-status/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/03-view-etcd-status/</guid>
+      <description>本节介绍如何查看 etcd 数据库状态。
+说明 查看 etcd 监控信息需要提前启用 etcd 监控。有关更多信息，请参阅扩展中心 WhizardTelemetry 监控扩展组件的详情页说明。
+前提条件 您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
+KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 监控扩展组件。
+操作步骤 以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择监控告警 &amp;gt; 集群状态。
+在集群状态页面，点击 etcd 监控页签查看 etcd 数据库的运行状态。
+etcd 监控页签提供以下信息：
+参数 描述 服务状态
+显示 etcd 集群的 Leader 节点、每个节点的 IP 地址和 1 小时内 Leader 变更次数。
+数据库大小
+指定时间范围内 etcd 数据库的大小。
+客户端流量
+显示发送给 gRPC 客户端和从 gRPC 客户端接收的数据流量。
+gRPC 流式消息
+显示服务端的 gRPC 流式消息每秒接收次数和发送次数。
+WAL 日志同步时间
+显示 WAL 调用 fsync 的延迟。在应用日志条目之前，etcd 会在持久化日志条目到磁盘时调用 wal_fsync。</description>
+    </item>
+    
+    <item>
+      <title>查看 Kubernetes API 服务器状态</title>
+      <link>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/04-view-api-server-status/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/04-view-api-server-status/</guid>
+      <description>本节介绍如何查看 Kubernetes API 服务器状态。
+前提条件 您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
+KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 监控扩展组件。
+操作步骤 以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择监控告警 &amp;gt; 集群状态。
+在集群状态页面，点击 API Server 监控页签查看 API 服务器的运行状态。
+API Server 监控页签提供以下信息：
+指标 描述 请求延迟
+指定时间范围内 API 服务器的请求延迟。
+每秒请求次数
+指定时间范围内 API 服务器每秒接受的请求数。
+在右上角点击 可设置数据的时间范围。
+在右上角点击 / 可开启/停止实时数据刷新。
+在右上角点击 可手动刷新数据。</description>
+    </item>
+    
+    <item>
+      <title>查看调度器状态</title>
+      <link>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/05-view-scheduler-monitoring-data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/05-view-scheduler-monitoring-data/</guid>
+      <description>本节介绍如何查看调度器状态。调度器根据容器组的资源需求、节点可用资源和其他约束条件决定容器组运行在哪些节点上。
+前提条件 您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
+KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 监控扩展组件。
+操作步骤 以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择监控告警 &amp;gt; 集群状态。
+在集群状态页面，点击调度器监控页签查看调度器的运行状态。
+调度器监控页签提供以下信息：
+指标 描述 调度次数
+指定时间范围内的容器组调度成功、错误和失败累计次数。
+调度速率
+指定时间范围内的容器组每秒调度成功、错误和失败次数。
+调度延迟
+指定时间范围内容器组调度延迟的 99% 分位数、90% 分位数、中位数和平均值。
+在右上角点击 可设置数据的时间范围。
+在右上角点击 / 可开启/停止实时数据刷新。
+在右上角点击 可手动刷新数据。</description>
+    </item>
+    
+    <item>
+      <title>查看节点资源用量排行</title>
+      <link>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/06-view-nodes-ranked-by-resource-usage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/03-cluster-status/06-view-nodes-ranked-by-resource-usage/</guid>
+      <description>本节介绍如何按照特定资源的用量对节点进行排序。
+前提条件 您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
+KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 监控扩展组件。
+操作步骤 以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择监控告警 &amp;gt; 集群状态。
+在集群状态页面，点击资源用量排行页签查看各节点的资源使用情况。
+在左上角点击下拉列表可选择按照 CPU 用量、CPU 平均负载、内存用量、磁盘用量、Inode 用量或容器组用量对节点进行排序。
+在列表左上角点击/可按升序/降序排序。
+在列表右上角点击导出可下载 JSON 格式的资源用量数据。</description>
+    </item>
+    
+  </channel>
+</rss>

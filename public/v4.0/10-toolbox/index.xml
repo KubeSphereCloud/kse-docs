@@ -19,7 +19,7 @@ KubeSphere 企业版控制台提供 Web kubectl，方便用户使用。在默�
 前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。
 使用 Web Kubectl 登录 KubeSphere 企业版 Web 控制台。
 将光标悬停在页面右下角的图标，然后在菜单中选择 kubectl。
-在弹出窗口中看到 kubectl 界面，如下图所示。如果您启用了多集群功能，则需要先在右上角的下拉列表中选择目标集群。如果未启用多集群功能，则该下拉列表不可见。
+在弹出窗口中看到 kubectl 界面，如下图所示。如果有多个集群，则需要先在右上角的下拉列表中选择目标集群。如果只有一个集群，则该下拉列表不可见。
 在命令行工具中输入 kubectl 命令，查询并管理 Kubernetes 集群资源。例如，执行以下命令查询集群中所有 pod 的状态。
 kubectl get pods -A 在终端窗口中使用以下语法运行 kubectl 命令：
 kubectl [command] [TYPE] [NAME] [flags] 说明 其中，command、TYPE、NAME 和 flags 分别是：

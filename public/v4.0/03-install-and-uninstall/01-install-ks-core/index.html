@@ -38,7 +38,7 @@
     
     <div class="navbar-nav">
       <div
-        class="navbar-nav-item navbar-nav-version "
+        class="navbar-nav-item navbar-nav-version dropdown"
         style="">
         
         <div class="dropdown-trigger">
@@ -46,7 +46,29 @@
             v4.0
           </span>
           
+            <span class="icon icon-chevron_down_fill"></span>
+          
         </div>
+        
+          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              
+              <a
+                class=""
+                href="/v4.1.1/"
+              >
+                v4.1.1
+              </a>
+              
+              <a
+                class="active"
+                href="/v4.0/"
+              >
+                v4.0
+              </a>
+              
+            </div>
+          </div>
         
       </div>
       
@@ -206,7 +228,7 @@
       
       
           
-          <li class="sidebar-item  ">
+          <li class="sidebar-item active current">
             <a href="/v4.0/01-intro/02-architecture/">KubeSphere LuBan 架构</a>
           </li>
         
@@ -289,7 +311,7 @@
       
       
           
-          <li class="sidebar-item active current">
+          <li class="sidebar-item  ">
             <a href="/v4.0/02-quickstart/02-install-a-demo-extension/">安装示例组件</a>
           </li>
         
@@ -302,7 +324,7 @@
       
       
           
-          <li class="sidebar-item  ">
+          <li class="sidebar-item active current">
             <a href="/v4.0/02-quickstart/03-control-user-permissions/">控制用户权限</a>
           </li>
         
@@ -1563,6 +1585,12 @@
                 
               
             
+              
+                
+                  
+                
+              
+            
             
               <span
                 class="menu-switch-icon icon-caret_down_fill">
@@ -1632,7 +1660,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/04-projects/05-edit-project-quotas/">编辑项目配额</a>
+            <a href="/v4.0/07-cluster-management/04-projects/05-edit-project-annotations/">编辑项目注解</a>
           </li>
         
       
@@ -1645,7 +1673,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/04-projects/06-edit-default-container-quotas/">编辑默认容器配额</a>
+            <a href="/v4.0/07-cluster-management/04-projects/06-edit-project-quotas/">编辑项目配额</a>
           </li>
         
       
@@ -1658,7 +1686,20 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/04-projects/07-delete-projects/">删除项目</a>
+            <a href="/v4.0/07-cluster-management/04-projects/07-edit-default-container-quotas/">编辑默认容器配额</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/07-cluster-management/04-projects/08-delete-projects/">删除项目</a>
           </li>
         
       
@@ -3309,7 +3350,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/08-storage/01-persistent-volume-claims/07-expand-a-persistent-volume/">扩展持久卷</a>
+            <a href="/v4.0/07-cluster-management/08-storage/01-persistent-volume-claims/05-expand-a-persistent-volume/">扩展持久卷</a>
           </li>
         
       
@@ -7299,7 +7340,7 @@
     安装 KubeSphere 企业版</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2024-01-03 08:53:31
+      更新时间：2024-07-02 09:08:55
     </div>
     
     
@@ -7428,7 +7469,7 @@
 <h2 id="_安装_kubernetes">安装 Kubernetes</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>安装 KubeSphere 企业版之前，你需要一个可用的 Kubernetes 集群。执行以下命令快速创建 Kubernetes 集群。</p>
+<p>安装 KubeSphere 企业版之前，您需要一个可用的 Kubernetes 集群。执行以下命令快速创建 Kubernetes 集群。</p>
 </div>
 <div class="paragraph">
 <p>KubeSphere 企业版支持的 Kubernetes 版本有：v1.21.x、v1.22.x、v1.23.x、v1.24.x、v1.25.x、v1.26.x 和 v1.27.x。最低支持版本为 v1.21。</p>
@@ -7439,7 +7480,7 @@
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">备注</th>
+<th class="tableblock halign-left valign-top">说明</th>
 </tr>
 </thead>
 <tbody>
@@ -7475,7 +7516,7 @@
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">备注</th>
+<th class="tableblock halign-left valign-top">说明</th>
 </tr>
 </thead>
 <tbody>
@@ -7528,7 +7569,7 @@
 <p>如果显⽰如下信息，则表明安装成功：</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="/images/ks-qkcp/zh/v4.0/install-complete.png" alt="，100%"/></span></p>
+<p><span class="image"><img src="/images/ks-qkcp/zh/v4.0/install-complete.png" alt="install complete" width="100%"/></span></p>
 </div>
 </li>
 <li>
@@ -7549,7 +7590,7 @@
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">备注</th>
+<th class="tableblock halign-left valign-top">说明</th>
 </tr>
 </thead>
 <tbody>
