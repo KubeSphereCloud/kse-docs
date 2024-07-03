@@ -12892,7 +12892,7 @@
     附录：KubeSphere Core 高级配置</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2024-07-02 07:32:25
+      更新时间：2024-07-03 08:34:37
     </div>
     
     
@@ -12900,15 +12900,8 @@
     
     
     
-    
-      <div
-        class="tag post-tag export-pdf has-tooltip-top has-tooltip-arrow"
-        data-tooltip="下载范围：所属一级目录的全部内容"
-        data-url="/v4.1.1/03-installation-and-upgrade">
-        <span class="icon-format_pdf_2_fill"></span>
-        PDF
-      </div>
       
+    
     
   </div><div class="post-menu">
   <div class="post-menu-title">本页目录</div>
@@ -13281,7 +13274,7 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 <p>KubeSphere 生成的证书</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz \
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version \
 --set ingress.enabled=true \
 --set hostname=kubesphere.my.org</code></pre>
 </div>
@@ -13294,7 +13287,7 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz \
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version \
 --set hostname=kubesphere.my.org \
 --set ingress.enabled=true \
 --set ingress.tls.source=letsEncrypt \
@@ -13311,7 +13304,7 @@ kubectl create secret tls tls-ks-core-ingress --cert=tls.crt --key=tls.key -n ku
 
 # 安装 KubeSphere
 helm upgrade --install -n kubesphere-system --create-namespace ks-core
-https://charts.kubesphere.io/main/ks-core-0.4.0.tgz \
+$chart --version $version \
 --set ingress.enabled=true \
 --set hostname=kubesphere.my.org \
 --set ingress.tls.source=importation</code></pre>
@@ -13328,7 +13321,7 @@ https://charts.kubesphere.io/main/ks-core-0.4.0.tgz \
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core
-https://charts.kubesphere.io/main/ks-core-0.4.0.tgz \
+$chart --version $version \
 --set internalTLS=true</code></pre>
 </div>
 </div>
