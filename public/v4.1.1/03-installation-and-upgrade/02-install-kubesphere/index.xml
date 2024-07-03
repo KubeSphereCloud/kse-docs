@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>安装{ks_product_left} on KubeSphere 企业版</title>
+    <link>/v4.1.1/03-installation-and-upgrade/02-install-kubesphere/</link>
+    <description>Recent content in 安装{ks_product_left} on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.1/03-installation-and-upgrade/02-install-kubesphere/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安装 Kubernetes 和 KubeSphere 企业版</title>
+      <link>/v4.1.1/03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/</guid>
+      <description>本节介绍如何安装 Kubernetes 和 KubeSphere 企业版。
+安装过程中将用到开源工具 KubeKey。有关 KubeKey 的更多信息，请访问 GitHub KubeKey 仓库。
+前提条件 您需要准备至少 1 台 Linux 服务器作为集群节点。在生产环境中，为确保集群具备高可用性，建议准备至少 5 台 Linux 服务器，其中 3 台作为控制平面节点，另外 2 台作为工作节点。如果您在多台 Linux 服务器上安装 KubeSphere 企业版，请确保所有服务器属于同一子网。
+集群节点的操作系统和版本须为 Ubuntu 16.04、Ubuntu 18.04、Ubuntu 20.04、Ubuntu 22.04、Debian 9、Debian 10、CentOS 7、CentOS Stream、RHEL 7、RHEL 8、SLES 15 或 openSUSE Leap 15。多台服务器的操作系统可以不同。关于其它操作系统和版本支持，请咨询青云科技官方解决方案专家或交付服务专家。
+在生产环境中，为确保集群具有足够的计算和存储资源，建议每台集群节点配置至少 8 个 CPU 核心、16 GB 内存和 200 GB 磁盘空间。除此之外，建议在每台集群节点的 /var/lib/docker（对于 Docker）或 /var/lib/containerd（对于 containerd） 目录额外挂载至少 200 GB 磁盘空间用于存储容器运行时数据。
+在生产环境中，建议提前为 KubeSphere 企业版集群配置高可用性以避免单个控制平面节点出现故障时集群服务中断。有关更多信息，请参阅配置高可用性。
+说明 如果您规划了多个控制平面节点，请务必提前为集群配置高可用性。</description>
+    </item>
+    
+    <item>
+      <title>激活 KubeSphere 企业版</title>
+      <link>/v4.1.1/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/</guid>
+      <description>登录 KubeSphere 企业版 Web 控制台后，您需要绑定 KubeSphere 云账号，订阅 KubeSphere 企业版，以使用它的全部功能。
+说明 KubeSphere 企业版 v4.1.1 为每位用户提供了单个集群 24 vCPU 30 天的免费试用许可。到期后，您需要付费订阅 KubeSphere 企业版。
+操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+点击顶部的绑定 KubeSphere 云账号提示，输入云账号信息并授权，完成账号绑定。
+在平台设置 &amp;gt; 云账号页面，点击前往订阅。
+选择订阅方案和订阅时长，确认集群 ID，点击提交订单，并完成支付。
+在支付成功页面，下拉到页面底部，点击返回按钮回到 KubeSphere 企业版 Web 控制台。
+激活成功 如看到 KubeSphere 企业版许可证状态显示数字，即表示激活成功，可开始使用 KubeSphere 企业版。
+激活失败 每个云账号只能免费获取一个集群的免费订阅授权，如尝试在其他集群中激活，会提示 KubeSphere 企业版激活失败。请点击前往订阅，订阅成功后，集群将自动获得授权。
+网络问题导致云账号绑定时数据同步失败，会提示 KubeSphere 企业版激活失败。请点击重新授权，手动触发数据同步，重试激活。
+检测到云账号中此集群的许可证已过期，会提示 KubeSphere 企业版激活失败。请点击前往续订，续订成功后，即可自动恢复使用。</description>
+    </item>
+    
+    <item>
+      <title>附录：KubeSphere Core 高级配置</title>
+      <link>/v4.1.1/03-installation-and-upgrade/02-install-kubesphere/05-appendix/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/03-installation-and-upgrade/02-install-kubesphere/05-appendix/</guid>
+      <description>KubeSphere Helm Chart 选项 常用选项 选项 默认值 描述 adminPassword
+&amp;#34;&amp;#34;
+string - 为第一个管理员用户设置引导密码。登录后，管理员需要重置密码。如不设置，会使用内置默认密码 P@88w0rd。
+hostname
+&amp;#34;example.com&amp;#34;
+string - KubeSphere Server 完全限定的域名。
+ingress.enabled
+false
+bool - 如果值为 true, 创建 KubeSphere Ingress 网关。
+ingress.tls.enabled
+true
+bool - 如果值为 true, 则为 KubeSphere Ingress 网关启用 HTTPS。
+ingress.tls.source
+&amp;#34;generation&amp;#34;
+string - Ingress 证书的来源，可选项：&amp;#34;generation, importation, letsEncrypt&amp;#34;。
+letsEncrypt.email
+&amp;#34;&amp;#34;
+string - 邮箱地址，证书过期时会收到邮件提醒。
+letsEncrypt.environment
+&amp;#34;production&amp;#34;
+string - 可选项：&amp;#34;staging, production&amp;#34;。测试环境和生产环境证书在速率限制上存在区别，详情见：Let’s Encrypt 官方文档。
+高级选项 选项 默认值 描述 internalTLS
+false</description>
+    </item>
+    
+  </channel>
+</rss>

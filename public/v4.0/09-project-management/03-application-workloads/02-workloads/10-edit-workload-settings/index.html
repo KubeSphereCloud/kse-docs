@@ -39,7 +39,7 @@
     
     <div class="navbar-nav">
       <div
-        class="navbar-nav-item navbar-nav-version "
+        class="navbar-nav-item navbar-nav-version dropdown"
         style="">
         
         <div class="dropdown-trigger">
@@ -47,7 +47,29 @@
             v4.0
           </span>
           
+            <span class="icon icon-chevron_down_fill"></span>
+          
         </div>
+        
+          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              
+              <a
+                class=""
+                href="/v4.1.1/"
+              >
+                v4.1.1
+              </a>
+              
+              <a
+                class="active"
+                href="/v4.0/"
+              >
+                v4.0
+              </a>
+              
+            </div>
+          </div>
         
       </div>
       
@@ -1564,6 +1586,12 @@
                 
               
             
+              
+                
+                  
+                
+              
+            
             
               <span
                 class="menu-switch-icon icon-caret_down_fill">
@@ -1633,7 +1661,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/04-projects/05-edit-project-quotas/">编辑项目配额</a>
+            <a href="/v4.0/07-cluster-management/04-projects/05-edit-project-annotations/">编辑项目注解</a>
           </li>
         
       
@@ -1646,7 +1674,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/04-projects/06-edit-default-container-quotas/">编辑默认容器配额</a>
+            <a href="/v4.0/07-cluster-management/04-projects/06-edit-project-quotas/">编辑项目配额</a>
           </li>
         
       
@@ -1659,7 +1687,20 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/04-projects/07-delete-projects/">删除项目</a>
+            <a href="/v4.0/07-cluster-management/04-projects/07-edit-default-container-quotas/">编辑默认容器配额</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          
+          <li class="sidebar-item  ">
+            <a href="/v4.0/07-cluster-management/04-projects/08-delete-projects/">删除项目</a>
           </li>
         
       
@@ -3310,7 +3351,7 @@
       
           
           <li class="sidebar-item  ">
-            <a href="/v4.0/07-cluster-management/08-storage/01-persistent-volume-claims/07-expand-a-persistent-volume/">扩展持久卷</a>
+            <a href="/v4.0/07-cluster-management/08-storage/01-persistent-volume-claims/05-expand-a-persistent-volume/">扩展持久卷</a>
           </li>
         
       
@@ -7302,7 +7343,7 @@
     编辑工作负载设置</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2023-08-31 02:56:47
+      更新时间：2024-07-02 09:08:55
     </div>
     
     
@@ -7340,7 +7381,7 @@
 <p>工作负载创建完成后，您可以编辑工作负载的更新策略、容器、存储和容器组调度规则。</p>
 </div>
 <div class="sect1">
-<h2 id="_前提条件">前提条件<a href="" id="825062a515d545d3a1f7f0411e9db6ba" class="bare"></a></h2>
+<h2 id="_前提条件">前提条件</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>您需要加入一个项目并在项目中具有<strong>应用负载管理</strong>权限。有关更多信息，请参阅<a href="../../../../09-project-management/06-project-settings/03-project-members/_index/">项目成员</a>和<a href="../../../../09-project-management/06-project-settings/02-project-roles/_index/">项目角色</a>。</p>
@@ -7348,7 +7389,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_操作步骤">操作步骤<a href="" id="3c1d9929e7b749dea01f42c0a10b1fa6" class="bare"></a></h2>
+<h2 id="_操作步骤">操作步骤</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -7372,7 +7413,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_参数描述">参数描述<a href="" id="fddcc52d437e49cf8d372b5be811a9ad" class="bare"></a></h2>
+<h2 id="_参数描述">参数描述</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -7508,7 +7549,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>输入镜像的名称（例如 <strong>nginx:latest</strong>）或路径（例如 <strong>docker.io/nginx:latest</strong>），然后按 <strong>Enter</strong> 键可搜索镜像。在镜像搜索结果中点击<strong>使用默认端口</strong>可将容器端口设置为镜像的默认端口。</p>
+<p>输入镜像的名称（例如 <strong>nginx:latest</strong>）或路径（例如 <strong>docker.io/nginx:latest</strong>），然后按 <strong>Enter</strong> 键可搜索镜像。</p>
 </li>
 <li>
 <p>如果您只输入镜像的名称，默认情况下将从 Docker Hub 拉取镜像。如需使用私有镜像服务，您需要创建包含私有镜像服务信息的保密字典，然后在<strong>镜像</strong>文本框左侧选择私有镜像服务。</p>
@@ -7603,7 +7644,7 @@
 <div class="openblock">
 <div class="content">
 <div class="paragraph">
-<p>设置容器的端口。点击<strong>添加端口</strong>可为容器设置多个端口。</p>
+<p>设置容器的端口。点击<strong>使用默认镜像端口</strong>可将容器端口设置为镜像的默认端口。点击<strong>添加端口</strong>可为容器设置多个端口。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -7927,7 +7968,7 @@
 <p><strong>特权模式</strong>：以主机上的 <strong>root</strong> 用户运行容器进程。</p>
 </li>
 <li>
-<p><strong>允许特权提升</strong>：允许容器进程获取比父进程更多的特权。当<strong>特权模式</strong>启用时，此选项目默认启用。</p>
+<p><strong>允许特权提升</strong>：允许容器进程获取比父进程更多的特权。当<strong>特权模式</strong>启用时，此选项默认启用。</p>
 </li>
 <li>
 <p><strong>根目录只读</strong>：将容器文件系统的根目录设置为只读。</p>
@@ -8323,7 +8364,7 @@
 <p>选择特定键</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>将配置字典或保密字典中的键值对作为文件挂载到容器中，挂载到容器中的文件会随配置字典或保密字典动态更新。点击添加可挂载多个键值对。</p>
+<p>将配置字典或保密字典中的键值对作为文件挂载到容器中，挂载到容器中的文件会随配置字典或保密字典动态更新。点击<strong>添加</strong>可挂载多个键值对。</p>
 </div>
 <div class="ulist">
 <ul>

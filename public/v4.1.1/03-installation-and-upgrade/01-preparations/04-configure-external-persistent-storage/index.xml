@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>配置外部持久化存储 on KubeSphere 企业版</title>
+    <link>/v4.1.1/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/</link>
+    <description>Recent content in 配置外部持久化存储 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.1/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置云上存储设备</title>
+      <link>/v4.1.1/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/01-configure-storage-devices-on-cloud/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/01-configure-storage-devices-on-cloud/</guid>
+      <description>本节介绍如何在生产环境中为 KubeSphere 企业版配置云上存储设备。
+您可以在云环境中创建 API 密钥，并设置 KubeSphere 企业版使用 API 密钥通过容器存储接口（CSI）与云环境对接。用户在 KubeSphere 企业版平台上创建卷并将卷挂载到容器组时，KubeSphere 企业版将自动在云环境中创建存储设备供容器组使用。以下以青云QingCloud 为例介绍具体操作。有关其他云环境中的操作，请参阅云环境的用户指南或联系您的云服务提供商。
+前提条件 您需要获取一个青云QingCloud 帐户，并确保帐户余额可以创建所需的存储设备。有关更多信息，请访问青云QingCloud 官网。
+操作步骤 登录青云QingCloud 控制台，点击页面右上角的用户名，然后在下拉列表中选择 API 密钥。
+在 API 密钥页面，点击创建。
+在创建API密钥对话框，设置密钥的名称，然后点击提交。
+在弹出的对话框将私钥文件下载到本地。
+警告 KubeSphere 企业版将使用该私钥与云上的存储设备对接。请妥善保存该私钥文件以避免用户数据泄露。
+在 API 密钥列表中获取 API 密钥的 ID。
+登录用于执行 KubeSphere 企业版安装操作的集群节点，执行以下命令创建存储插件配置文件：
+vi csi-qingcloud.yaml 将以下信息添加到配置文件中，并保存文件供后续安装 KubeSphere 企业版时使用：
+config: qy_access_key_id: &amp;#34;&amp;lt;key ID&amp;gt;&amp;#34; qy_secret_access_key: &amp;#34;&amp;lt;access key&amp;gt;&amp;#34; zone: &amp;#34;&amp;lt;zone ID&amp;gt;&amp;#34; sc: isDefaultClass: true 将以下参数替换为实际值：
+参数 描述 &amp;lt;key ID&amp;gt;
+API 密钥的 ID。
+&amp;lt;access key&amp;gt;
+API 密钥的私钥文本。</description>
+    </item>
+    
+    <item>
+      <title>配置 NeonSAN CSI</title>
+      <link>/v4.1.1/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/04-configure-neosan-csi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/04-configure-neosan-csi/</guid>
+      <description>NeonSAN 是青云的一款企业级分布式块存储系统，NeonSAN CSI 是 NeonSAN 团队面向 Kubernetes 提供的存储插件，具有在 Kubernetes 平台上动态创建持久存储卷的能力。
+本节介绍如何在生产环境中为 KubeSphere 企业版集群配置 NeonSAN CSI。
+前提条件 您已经成功部署 NeonSAN v2.2.0 及以上版本，且容器集群的每个节点都已安装 QBD 与 NeonSAN 连通。具体操作请咨询青云科技官方解决方案专家或交付服务专家。
+您已经安装 Kubernetes v1.16 及其以上版本。
+您已经在容器集群的 master 节点安装了 Helm。本节以 Helm 3 为例。
+操作步骤 在线安装 NeonSAN CSI 在线安装适用于容器集群能够访问外网的情况。
+执行以下命令添加 Helm 仓库，如 https://charts.kubesphere.io/test。
+$ helm repo add ks-test https://charts.kubesphere.io/test &amp;#34;ks-test&amp;#34; has been added to your repositories 执行以下命令查看仓库是否添加成功。
+$ helm repo list NAME URL ks-test https://charts.kubesphere.io/test 执行以下命令更新仓库的 Chart 列表。</description>
+    </item>
+    
+    <item>
+      <title>配置 NFS</title>
+      <link>/v4.1.1/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/05-configure-nfs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/05-configure-nfs/</guid>
+      <description>本节介绍如何在生产环境中为 KubeSphere 企业版集群配置网络文件系统（NFS）。
+说明 NFS 与部分应用不兼容（例如 Prometheus），可能会导致容器组创建失败。如果确实需要在生产环境中使用 NFS，请确保您了解相关风险或咨询青云科技官方解决方案专家或交付服务专家。
+搭建 NFS 服务端 为 KubeSphere 企业版配置 NFS 前，您需要先搭建 NFS 服务端。如果您已经有可用的 NFS 服务端，您可以跳过此步骤。以下以 Ubuntu 操作系统安装操作 NFS Kernel Server 为例介绍如何搭建 NFS 服务端。有关其他 NFS 服务端和其他操作系统的具体操作，请参阅 NFS 服务端和操作系统的用户指南。
+前提条件 您需要准备一台 Linux 服务器（以下以 Ubuntu 操作系统为例），该服务器必须与 KubeSphere 企业版集群节点网络连通。
+操作步骤 登录用于搭建 NFS 服务端的服务器，执行以下命令指安装 NFS Kernel Server：
+sudo apt update sudo apt install nfs-kernel-server 执行以下命令创建供 KubeSphere 企业版使用的目录（将 &amp;lt;directory&amp;gt; 替换为实际的目录路径，例如 /mnt/demo）：
+sudo mkdir -p &amp;lt;directory&amp;gt; 执行以下命令移除目录的访问限制（将 &amp;lt;directory&amp;gt; 替换为实际的目录路径，例如 /mnt/demo）：
+sudo chown nobody:nogroup &amp;lt;directory&amp;gt; sudo chmod 777 &amp;lt;directory&amp;gt; 执行以下命令编辑 NFS Kernel Server 的配置文件：</description>
+    </item>
+    
+  </channel>
+</rss>

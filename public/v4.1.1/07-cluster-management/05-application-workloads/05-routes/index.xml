@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>应用路由 on KubeSphere 企业版</title>
+    <link>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/</link>
+    <description>Recent content in 应用路由 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.1/07-cluster-management/05-application-workloads/05-routes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建应用路由</title>
+      <link>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/01-create-a-route/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/01-create-a-route/</guid>
+      <description>本节介绍如何创建应用路由。
+前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
+如需创建支持 HTTPS 协议的应用路由，您需要创建 TLS 信息类型的保密字典，保密字典中必须包含 Base64 编码的证书和私钥。有关更多信息，请参阅创建保密字典。
+应用路由所属的项目中存在至少一个服务。有关更多信息，请参阅创建服务。
+操作步骤 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择应用负载 &amp;gt; 应用路由。
+在页面点击创建。
+在基本信息页签，设置应用路由的基本信息，然后点击下一步。
+参数 描述 名称
+应用路由的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 253 个字符。
+别名
+应用路由的别名。不同应用路由的别名可以相同。别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。
+描述
+应用路由的描述。描述可包含任意字符，最长 256 个字符。
+在路由规则页签，点击添加路由规则，设置路由规则参数，然后点击下一步。
+点击添加路由规则可设置路由规则。您可以设置多条路由规则，每条规则对应一个域名。
+将光标悬停在已创建的路由规则上，然后在右侧点击可编辑路由规则的设置。
+将光标悬停在已创建的路由规则上，然后在右侧点击可删除路由规则。
+参数 描述 域名
+用户自定义的域名。
+协议
+应用路由支持的协议，参数值可以为 HTTP 或 HTTPS。
+保密字典
+应用路由协议为 HTTPS 时，用于提供证书和密钥的保密字典。该保密字典必须包含 tls.cert 和 tls.key 字段，分别存储 Base64 编码的证书和私钥。
+路径
+域名路径及其与服务端口的映射关系。
+点击添加可设置多条路径。
+在已创建的路径右侧点击可删除路径。
+在高级设置页签，为应用路由设置标签和注解，然后点击创建。
+点击添加可设置多条标签或注解。
+在已创建的标签或注解右侧点击可删除标签或注解。
+说明 KubeSphere 企业版的集群网关和项目网关底层基于 Nginx Ingress Controller 实现。您可以在应用路由上设置注解控制网关的行为。有关更多信息，请参阅 Nginx Ingress Controller 官方文档。</description>
+    </item>
+    
+    <item>
+      <title>查看应用路由列表</title>
+      <link>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/02-view-a-route-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/02-view-a-route-list/</guid>
+      <description>本节介绍如何查看应用路由列表。
+前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有应用负载查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择应用负载 &amp;gt; 应用路由。
+应用路由列表提供以下信息：
+参数 描述 名称
+应用路由的名称和描述。
+网关地址
+集群网关或项目网关的 IP 地址。
+如果网关的外部访问模式为 NodePort，网关地址为某一个集群节点的 IP 地址。客户端可以通过任意集群节点的 IP 地址和端口访问应用路由的后端服务。
+如果网关的外部访问模式为 LoadBalancer，网关地址为负载均衡器的地址。
+应用
+应用路由所对应的应用名称。
+创建时间
+应用路由的创建时间。
+在列表左上角的下拉列表中选择一个项目，可以查看特定项目中的应用路由。
+在列表上方点击搜索框并设置搜索条件，可按名称搜索应用路由。
+在列表右上角点击可刷新列表信息。
+在列表右上角点击可定制列表中显示的信息。</description>
+    </item>
+    
+    <item>
+      <title>查看应用路由详情</title>
+      <link>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/03-view-route-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/03-view-route-details/</guid>
+      <description>本节介绍如何查看应用路由详情。
+前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有应用负载查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择应用负载 &amp;gt; 应用路由。
+在应用路由列表中点击一个应用路由的名称打开其详情页面。
+在应用路由详情页面左侧的属性区域查看应用路由的详细信息。
+参数 描述 集群
+应用路由的所属集群。
+项目
+应用路由的所属项目。
+应用
+应用路由对应的应用。
+网关地址
+集群网关或项目网关的 IP 地址。
+如果网关的外部访问模式为 NodePort，网关地址为某一个集群节点的 IP 地址。客户端可以通过任意集群节点的 IP 地址和端口访问应用路由的后端服务。
+如果网关的外部访问模式为 LoadBalancer，网关地址为负载均衡器的地址。
+创建时间
+应用路由的创建时间。
+创建者
+创建应用路由的用户。
+在应用路由详情页面右侧的资源状态页签查看应用路由的路由规则。
+资源状态页签显示当前应用路由的所有路由规则。
+参数 描述 域名和端口
+应用路由的域名和节点端口号。节点端口号仅在集群网关或项目网关的外部访问为 NodePort 时显示。
+如果集群网关或项目网关的外部访问模式为 NodePort，客户端需要通过 DNS 服务或本地 hosts 文件将域名解析为集群中任意节点的 IP 地址，并通过域名、路径和端口号（例如 example.com/test:30240）访问应用路由。
+如果集群网关或项目网关的外部访问模式为 LoadBalancer，客户端需要通过 DNS 服务或本地 hosts 文件将域名解析为项目网关负载均衡器的 IP 地址，并通过域名和路径（例如 example.com/test）访问应用路由。
+协议
+应用路由支持的协议，取值为HTTP 或 HTTPS。
+证书</description>
+    </item>
+    
+    <item>
+      <title>访问应用路由的后端服务</title>
+      <link>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/04-access-a-backend-service-of-a-route/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/04-access-a-backend-service-of-a-route/</guid>
+      <description>本节介绍如何访问应用路由的后端服务。
+应用路由创建完成后，您可通过任意 HTTP 或 HTTPS 客户端访问应用路由的后端服务。取决于集群网关或项目网关的外部访问模式，您可以使用以下访问方式：
+如果集群网关或项目网关的外部访问模式为 NodePort，您可以通过域名、路径和端口号（例如 example.com/test:30240）访问应用路由的后端服务。
+如果集群网关或项目网关的外部访问模式为 LoadBalancer，您可以通过域名和路径（例如 example.com/test）访问应用路由的后端服务。
+以下仅演示如何在 KubeSphere 企业版 Web 控制台测试应用路由是否设置正确。
+前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
+您需要启用 KubeSphere 企业版集群网关或项目网关。
+客户端必须通过本地 hosts 文件或 DNS 服务将域名解析为网关 IP 地址。
+客户端必须与网关 IP 地址网络连通。有关更多信息，请联系您的网络环境管理员。
+操作步骤 以具有应用负载查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择应用负载 &amp;gt; 应用路由。
+在应用路由列表中点击一个应用路由的名称打开其详情页面。
+在资源状态页签，在需要访问的路由规则右侧点击访问服务。
+如果应用路由设置正确，浏览器将显示后端服务的响应信息。</description>
+    </item>
+    
+    <item>
+      <title>编辑应用路由信息</title>
+      <link>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/05-edit-route-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/05-edit-route-information/</guid>
+      <description>本节介绍如何编辑应用路由信息。
+您可以编辑应用路由的别名和描述。KubeSphere 企业版不支持编辑已创建应用路由的名称。
+前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择应用负载 &amp;gt; 应用路由。
+在需要操作的应用路由右侧点击，然后在下拉列表中选择编辑信息。
+在编辑信息对话框，设置应用路由的别名和描述，然后点击确定。
+参数 描述 别名
+应用路由的别名。不同应用路由的别名可以相同。别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。
+描述
+应用路由的描述信息。描述可包含任意字符，最多包含 256 个字符。</description>
+    </item>
+    
+    <item>
+      <title>编辑路由规则</title>
+      <link>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/06-edit-routing-rules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/06-edit-routing-rules/</guid>
+      <description>本节介绍如何编辑路由规则。
+前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择应用负载 &amp;gt; 应用路由。
+在需要操作的应用路由右侧点击，然后在下拉列表中选择编辑路由规则。
+在编辑路由规则对话框，设置路由规则，然后点击确定。
+点击添加路由规则可设置路由规则。您可以设置多条路由规则，每条规则对应一个域名。
+将光标悬停在已创建的路由规则上，然后在右侧点击可编辑路由规则的设置。
+将光标悬停在已创建的路由规则上，然后在右侧点击可删除路由规则。
+参数 描述 域名
+用户自定义的域名。
+协议
+应用路由支持的协议，参数值可以为 HTTP 或 HTTPS。
+保密字典
+应用路由协议为 HTTPS 时，用于提供证书和密钥的保密字典。该保密字典必须包含 tls.cert 和 tls.key 字段，分别存储 Base64 编码的证书和私钥。
+路径
+域名路径及其与服务端口的映射关系。
+点击添加可设置多条路径。
+在已创建的路径右侧点击可删除路径。</description>
+    </item>
+    
+    <item>
+      <title>编辑应用路由注解</title>
+      <link>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/07-edit-route-annotations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/07-edit-route-annotations/</guid>
+      <description>本节介绍如何编辑应用路由注解。
+前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择应用负载 &amp;gt; 应用路由。
+在需要操作的应用路由右侧点击，然后在下拉列表中选择编辑注解。
+在编辑注解对话框，设置注解键值对，然后点击确定。
+点击添加可设置多条注解。
+在已创建的注解右侧点击可删除注解。
+说明 KubeSphere 企业版的集群网关和项目网关底层基于 Nginx Ingress Controller 实现。您可以在应用路由上设置注解控制网关的行为。有关更多信息，请参阅 Nginx Ingress Controller 官方文档。</description>
+    </item>
+    
+    <item>
+      <title>删除应用路由</title>
+      <link>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/08-delete-routes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/07-cluster-management/05-application-workloads/05-routes/08-delete-routes/</guid>
+      <description>本节介绍如何删除应用路由。
+警告 删除应用路由后将无法通过应用路由访问其后端的服务，请谨慎执行此操作。
+前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
+删除单个应用路由 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择应用负载 &amp;gt; 应用路由。
+在需要删除的应用路由右侧点击，然后在下拉列表中选择删除。
+在删除应用路由对话框，输入应用路由的名称，然后点击确定。
+批量删除应用路由 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择应用负载 &amp;gt; 应用路由。
+选择需要删除的应用路由左侧的复选框，然后在应用路由列表上方点击删除。
+在批量删除应用路由对话框，输入应用路由的名称，然后点击确定。
+说明 请使用半角逗号（,）和空格分隔多个名称。</description>
+    </item>
+    
+  </channel>
+</rss>

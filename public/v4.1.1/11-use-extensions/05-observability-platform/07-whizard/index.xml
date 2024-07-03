@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Whizard 可观测中心 on KubeSphere 企业版</title>
+    <link>/v4.1.1/11-use-extensions/05-observability-platform/07-whizard/</link>
+    <description>Recent content in Whizard 可观测中心 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.1/11-use-extensions/05-observability-platform/07-whizard/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>启用 Whizard 可观测中心</title>
+      <link>/v4.1.1/11-use-extensions/05-observability-platform/07-whizard/01-enable-whizard/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/11-use-extensions/05-observability-platform/07-whizard/01-enable-whizard/</guid>
+      <description>本节介绍如何配置相关扩展组件，以启用 Whizard 可观测中心。
+为了使用 Whizard 可观测中心的完整功能，您需要安装并启用 WhizardTelemetry 平台服务、 WhizardTelemetry 监控以及 WhizardTelemetry 告警管理扩展组件，并进行以下配置。
+前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+已安装 WhizardTelemetry 平台服务、 WhizardTelemetry 监控以及 WhizardTelemetry 告警管理扩展组件。
+操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+点击扩展中心。
+点击已安装的组件名称，进入组件详情页。
+点击组件图标下的，选择扩展组件配置。
+WhizardTelemetry 平台服务
+将配置文件中的 whizard-telemetry.config.observability.enabled 参数设置为 true，然后点击确定。
+whizard-telemetry: config: observability: enabled: true endpoint: &amp;#34;http://query-frontend-whizard-operated.kubesphere-monitoring-system.svc:10902&amp;#34; WhizardTelemetry 监控
+修改配置文件的以下部分，然后点击确定。
+whizard-monitoring-helper: whizardHelper: enabled: true ## set true to enable whizard whizard: enabled: true frontend: enabled: true whizardAgentProxy: enabled: true whizard-agent-proxy: config: gatewayUrl: &amp;#34;http://172.</description>
+    </item>
+    
+    <item>
+      <title>查看多集群监控数据</title>
+      <link>/v4.1.1/11-use-extensions/05-observability-platform/07-whizard/03-view-monitoring-data-of-multiple-clusters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/11-use-extensions/05-observability-platform/07-whizard/03-view-monitoring-data-of-multiple-clusters/</guid>
+      <description>本节介绍如何查看多集群监控数据。
+前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+host 集群和需要监控的成员集群需要启用 Whizard 可观测中心。
+说明 如果成员集群未启用 Whizard 可观测中心，Whizard 可观测中心将无法获取成员集群的数据。
+操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+在页面右上角点击图标，选择 Whizard 可观测中心。
+Whizard 可观测中心的概览页面显示所有集群的监控信息。
+功能区 描述 已创建资源数量
+显示当前平台管理的所有集群、节点、项目、容器组、部署、有状态副本集、守护进程集、任务、定时任务、卷、服务、应用路由的数量。
+资源使用情况
+显示当前平台管理的所有集群的所有节点的 CPU、内存、磁盘使用情况，以及可已创建容器组数量占可创建容器组最大数量的百分比。默认情况下每个节点最多可以创建 110 个容器组。
+对于 CPU 和内存，将光标悬停在可查看已分配给容器和项目的资源预留和上限数量。
+集群成员和集群角色
+显示当前平台管理的所有集群的集群成员和集群角色数量。
+全局告警
+显示全局告警规则组产生的告警数量及最近的告警消息。此处显示的告警不包括集群和项目告警规则组产生的告警。全局告警规则组由平台管理员在 Whizard 可观测中心管理。
+告警级别的类型包括提醒、警告、重要和紧急。
+告警状态的类型包括：
+验证中：监控指标满足预设的条件，但未满足预设的持续时间。
+已触发：监控指标满足预设的条件，并且满足预设的持续时间。
+资源用量排行
+显示当前平台资源用量最多的集群、节点、项目和容器组。
+点击下拉列表可选择对象类型和排序依据。
+在列表上方点击/ 可按升序/降序排序。
+点击查看更多可查看集群、节点、项目和容器组的资源用量详情。
+容器组
+显示当前平台管理的所有集群的各种类型容器组的数量。
+容器组状态类型包括：
+运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。
+等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。
+已完成：容器组中的所有容器都成功终止（以 0 退出码终止），并且不再重启。
+失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。
+未知：系统无法获取容器组状态。出现这种状态通常是由于系统与容器组所在的主机通信失败。</description>
+    </item>
+    
+    <item>
+      <title>设置组件</title>
+      <link>/v4.1.1/11-use-extensions/05-observability-platform/07-whizard/07-set-alert-components/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.1/11-use-extensions/05-observability-platform/07-whizard/07-set-alert-components/</guid>
+      <description>本节介绍如何设置 Whizard 可观测中心的组件。
+前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+在页面右上角点击图标，选择 Whizard 可观测中心。
+在页面右侧，点击进入组件设置页面。
+在数据接入页签，设置以下参数。
+参数 描述 网关设置
+组件副本数量: 设置存储网关组件的副本数量，默认值为 2。
+容器配额: 设置 CPU 预留和限制以及内存预留和上限。
+数据路由
+数据保留副本数量: 设置数据保留组件的副本数量，默认值为 1。
+组件副本数量: 设置数据路由组件的副本数量，默认值为 2。
+容器配额: 设置 CPU 预留和限制以及内存预留和上限。
+本地存储
+本地数据存储时间: 设置本地数据的存储时间，最小时间必须大于 3 天，默认为 7 天。
+组件副本数量: 设置本地存储组件的副本数量，默认值为 2。
+容器配额: 设置 CPU 预留和限制以及内存预留和上限。
+在数据查询页签，设置以下参数。
+参数 描述 基础设置
+组件副本数量: 设置 Query 组件的副本数量，默认值为 2。
+容器配额: 设置 CPU 预留和限制以及内存预留和上限。</description>
+    </item>
+    
+  </channel>
+</rss>

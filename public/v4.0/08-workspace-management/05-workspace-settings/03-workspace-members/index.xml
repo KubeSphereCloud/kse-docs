@@ -22,12 +22,12 @@
 KubeSphere 企业版平台提供以下预置企业空间角色：
 角色 描述 workspace-admin
 企业空间管理员，在企业空间内具有全部权限。
+workspace-self-provisioner
+企业空间自治用户，在企业空间内可以查看和创建项目、多集群项目和 DevOps 项目，查看和管理应用模板，以及查看企业空间设置，同时对自身创建的项目、多集群项目和 DevOps 项目具有管理权限。
 workspace-viewer
 企业空间观察员，可以查看企业空间内的所有资源。
 workspace-regular
 企业空间普通用户，在企业空间内只具有企业空间设置查看权限。该角色一般授予不需要其他企业空间权限的项目成员。
-workspace-self-provisioner
-企业空间自治用户，在企业空间内可以查看和创建项目、多集群项目和 DevOps 项目，查看和管理应用模板，以及查看企业空间设置，同时对自身创建的项目、多集群项目和 DevOps 项目具有管理权限。
 用户被邀请加入企业空间后将显示在企业空间成员列表中。</description>
     </item>
     
@@ -97,12 +97,12 @@ workspace-self-provisioner
 KubeSphere 企业版平台提供以下预置企业空间角色：
 角色 描述 workspace-admin
 企业空间管理员，在企业空间内具有全部权限。
+workspace-self-provisioner
+企业空间自治用户，在企业空间内可以查看和创建项目、多集群项目和 DevOps 项目，查看和管理应用模板，以及查看企业空间设置，同时对自身创建的项目、多集群项目和 DevOps 项目具有管理权限。
 workspace-viewer
 企业空间观察员，可以查看企业空间内的所有资源。
 workspace-regular
-企业空间普通用户，在企业空间内只具有企业空间设置查看权限。该角色一般授予不需要其他企业空间权限的项目成员。
-workspace-self-provisioner
-企业空间自治用户，在企业空间内可以查看和创建项目、多集群项目和 DevOps 项目，查看和管理应用模板，以及查看企业空间设置，同时对自身创建的项目、多集群项目和 DevOps 项目具有管理权限。</description>
+企业空间普通用户，在企业空间内只具有企业空间设置查看权限。该角色一般授予不需要其他企业空间权限的项目成员。</description>
     </item>
     
     <item>
@@ -112,7 +112,7 @@ workspace-self-provisioner
       
       <guid>/v4.0/08-workspace-management/05-workspace-settings/03-workspace-members/05-remove-a-workspace-member/</guid>
       <description>本节介绍如何移除企业空间成员。
-备注 用户被从企业空间中移除后，将失去企业空间角色提供的权限。如果用户已加入企业空间中的项目或 DevOps 项目，用户也会离开项目或 DevOps 项目。
+说明 用户被从企业空间中移除后，将失去企业空间角色提供的权限。如果用户已加入企业空间中的项目或 DevOps 项目，用户也会离开项目或 DevOps 项目。
 前提条件 您需要加入一个企业空间并在企业空间中具有成员管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
 操作步骤 以具有成员管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
 在左侧导航栏选择企业空间设置 &amp;gt; 企业空间成员。
