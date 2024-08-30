@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>集群成员 on KubeSphere 企业版</title>
+    <link>/v4.1/07-cluster-management/09-cluster-settings/03-cluster-members/</link>
+    <description>Recent content in 集群成员 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1/07-cluster-management/09-cluster-settings/03-cluster-members/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>邀请用户加入集群</title>
+      <link>/v4.1/07-cluster-management/09-cluster-settings/03-cluster-members/01-invite-a-user-to-a-cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/07-cluster-management/09-cluster-settings/03-cluster-members/01-invite-a-user-to-a-cluster/</guid>
+      <description>本节介绍如何邀请用户加入集群。
+前提条件 您需要加入一个集群并在集群中具有成员管理权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有成员管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择集群设置 &amp;gt; 集群成员。
+在页面右侧点击邀请。
+在邀请成员对话框，在需要邀请的用户右侧点击，在下拉列表中选择用户在集群中的角色，然后点击确定。
+KubeSphere 企业版平台提供以下预置集群角色：
+角色 描述 cluster-admin
+集群管理员，在集群内具有除创建和删除集群以外的所有权限。
+cluster-viewer
+集群观察员，在集群内具有所有资源的查看权限。
+用户被邀请加入集群后将显示在集群成员列表中。</description>
+    </item>
+    
+    <item>
+      <title>查看集群成员列表</title>
+      <link>/v4.1/07-cluster-management/09-cluster-settings/03-cluster-members/02-view-a-cluster-member-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/07-cluster-management/09-cluster-settings/03-cluster-members/02-view-a-cluster-member-list/</guid>
+      <description>本节介绍如何查看集群成员列表。
+前提条件 您需要加入一个集群并在集群中具有成员查看权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有成员查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择集群设置 &amp;gt; 集群成员。
+集群成员列表提供以下信息：
+参数 描述 用户名
+集群成员的用户名。
+状态
+集群成员当前的状态。
+活跃：用户当前状态正常。
+等待中：系统正在创建用户。
+已禁用：用户被平台管理员禁用，无法登录 KubeSphere 企业版 Web 控制台。
+限制登录：用户在 10 分钟内连续 10 次登录失败，在 10 分钟内被禁止登录 KubeSphere 企业版 Web 控制台。
+角色
+集群成员在集群中的角色。
+cluster-admin：集群管理员，在集群内具有除创建和删除集群以外的所有权限。
+cluster-viewer：集群观察员，在集群内具有所有资源的查看权限。
+最近登录
+集群成员最近一次登录 KubeSphere 企业版 Web 控制台的时间。
+在列表上方点击搜索框并输入关键字，可搜索名称包含特定关键字的集群成员。
+在列表右上角点击可刷新列表信息。
+在列表右上角点击可定制列表中显示的信息。</description>
+    </item>
+    
+    <item>
+      <title>修改集群成员的角色</title>
+      <link>/v4.1/07-cluster-management/09-cluster-settings/03-cluster-members/03-change-the-role-of-a-cluster-member/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/07-cluster-management/09-cluster-settings/03-cluster-members/03-change-the-role-of-a-cluster-member/</guid>
+      <description>本节介绍如何修改集群成员的角色。
+前提条件 您需要加入一个集群并在集群中具有成员管理权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有成员管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择集群设置 &amp;gt; 集群成员。
+在需要移除的集群成员右侧点击，然后选择修改角色。
+在修改角色对话框，设置集群成员的角色，然后点击确定。
+KubeSphere 企业版平台提供以下预置集群角色：
+角色 描述 cluster-admin
+集群管理员，在集群内具有除创建和删除集群以外的所有权限。
+cluster-viewer
+集群观察员，在集群内具有所有资源的查看权限。</description>
+    </item>
+    
+    <item>
+      <title>移除集群成员</title>
+      <link>/v4.1/07-cluster-management/09-cluster-settings/03-cluster-members/04-remove-a-cluster-member/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/07-cluster-management/09-cluster-settings/03-cluster-members/04-remove-a-cluster-member/</guid>
+      <description>本节介绍如何移除集群成员。
+说明 从集群中移除用户后，用户将失去集群角色提供的权限。
+前提条件 您需要加入一个集群并在集群中具有成员管理权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有成员管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择集群设置 &amp;gt; 集群成员。
+在需要移除的集群成员右侧点击，然后选择移除。
+在移除成员对话框输出集群成员的用户名，然后点击确定。
+集群成员被移除后将不再显示在集群成员列表中。</description>
+    </item>
+    
+  </channel>
+</rss>

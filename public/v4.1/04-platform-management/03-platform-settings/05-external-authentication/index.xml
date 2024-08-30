@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>外部身份验证 on KubeSphere 企业版</title>
+    <link>/v4.1/04-platform-management/03-platform-settings/05-external-authentication/</link>
+    <description>Recent content in 外部身份验证 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1/04-platform-management/03-platform-settings/05-external-authentication/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置外部身份验证</title>
+      <link>/v4.1/04-platform-management/03-platform-settings/05-external-authentication/01-set-up-external-authentication/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/04-platform-management/03-platform-settings/05-external-authentication/01-set-up-external-authentication/</guid>
+      <description>KubeSphere 企业版支持设置外部身份验证，平台管理员可以通过 secret（保密字典）配置身份提供者。
+配置外部身份提供者后，允许使用 LDAP、CAS、GitHub、阿里云 IDaas、或 OpenID Connect 的用户名和密码登录 KubeSphere 企业版 Web 控制台。
+操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+进入企业空间 system-workspace 下的项目 kubesphere-system。
+在左侧导航栏选择配置 &amp;gt; 保密字典。
+在页面点击创建。
+在创建保密字典对话框，点击右上角的编辑 YAML 开关，使用 yaml 创建保密字典。
+按照以下示例及配置说明修改 yaml 文件，配置完成后，点击创建。
+登出 KubeSphere 企业版 Web 控制台，在登录页面，根据配置的外部身份验证类型，输入 LDAP、CAS、GitHub、阿里云 IDaas、或 OpenID Connect 的用户名和密码登录。
+说明 多集群环境中，只需要在主集群中进行配置。
+OpenLDAP 示例 yaml apiVersion: v1 kind: Secret metadata: namespace: kubesphere-system name: identity-provider-ldap labels: config.kubesphere.io/type: identityprovider stringData: configuration.yaml: | name: openldap type: LDAPIdentityProvider mappingMethod: auto provider: host: &amp;#34;192.</description>
+    </item>
+    
+  </channel>
+</rss>

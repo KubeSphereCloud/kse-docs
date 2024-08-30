@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>升级{ks_product_left} on KubeSphere 企业版</title>
+    <link>/v4.1/03-installation-and-upgrade/03-upgrade-kubesphere/</link>
+    <description>Recent content in 升级{ks_product_left} on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1/03-installation-and-upgrade/03-upgrade-kubesphere/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>升级 KubeSphere 企业版</title>
+      <link>/v4.1/03-installation-and-upgrade/03-upgrade-kubesphere/03-upgrade-kubephere-new/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/03-installation-and-upgrade/03-upgrade-kubesphere/03-upgrade-kubephere-new/</guid>
+      <description>本节介绍如何在保持当前的 Kubernetes 版本不变的情况下从 KubeSphere 企业版 v3.5.0 升级到 KubeSphere 企业版 v4.1.0。
+前提条件 联系 KubeSphere 企业版交付服务专家获取 KubeSphere 企业版 v4.1.0 安装包以及升级包。
+请确保当前 KubeSphere 企业版版本为 v3.5.0。如果您的 KubeSphere 企业版版本低于 v3.5.0，请先将 KubeSphere 企业版版本升级到 v3.5.0。
+请确保当前 Kubernetes 版本为 v1.21.x、v1.22.x、v1.23.x, v1.24.x, v1.25.x, v1.26.x, v1.27.x 或 v1.28.x。
+为避免数据丢失，请提前备份所有重要数据。
+准备工作 1. 解压安装包和升级包 将 KubeSphere 企业版安装包和升级包传输到待升级集群的节点，并登录该集群节点。
+执行以下命令解压安装包和升级包（将 &amp;lt;package name&amp;gt; 替换为安装包和升级包的实际名称）。
+tar -zxvf &amp;lt;package name&amp;gt; 说明 解压后共需占用 66 GB 空间，请确保集群节点具有足够的可用空间。
+进入升级包解压后生成的目录（将 &amp;lt;directory&amp;gt; 替换为升级包解压后生成的目录）。
+cd &amp;lt;directory&amp;gt; 升级包包含以下文件：
+kse-v3.5-to-v4.1-linux-amd64/ ├── charts │ ├── ks-core # KubeSphere 企业版核心组件 │ ├── kse-extensions-publish # 用于发布 KubeSphere 企业版扩展组件 │ ├── csi-qingcloud # 用于对接青云云平台存储 │ ├── csi-neonsan # 用于对接 NeonSan 存储 │ └── nfs-client-provisioner # 用于对接 NFS 存储 ├── pre-check.</description>
+    </item>
+    
+    <item>
+      <title>附录 1：ks-core Helm Chart 升级参数</title>
+      <link>/v4.1/03-installation-and-upgrade/03-upgrade-kubesphere/05-appendix-ks-core/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/03-installation-and-upgrade/03-upgrade-kubesphere/05-appendix-ks-core/</guid>
+      <description>升级 Job 配置 选项 默认值 描述 upgrade.enabled
+true
+bool - 是否启用升级组件
+upgrade.image.registry
+&amp;#34;&amp;#34;
+string - 设置升级 Job 的镜像仓库地址
+upgrade.image.repository
+kse/ks-upgrade
+string - 设置升级 Job 的镜像名称
+upgrade.image.tag
+&amp;#34;&amp;#34;
+string - 设置升级 Job 的镜像标签
+upgrade.image.pullPolicy
+Always
+string - 设置升级 Job 的镜像拉取策略
+upgrade.persistenceVolume.name
+ks-upgrade
+string - 设置升级 Job 的存储卷
+upgrade.persistenceVolume.storageClassName
+&amp;#34;&amp;#34;
+string - 设置升级 Job 的存储卷类
+upgrade.persistenceVolume.accessMode
+ReadWriteOnce
+string - 设置升级 Job 的存储卷访问模式
+upgrade.persistenceVolume.size
+5Gi
+string - 设置升级 Job 的存储卷容量
+upgrade.resources.limit.cpu
+1</description>
+    </item>
+    
+  </channel>
+</rss>
