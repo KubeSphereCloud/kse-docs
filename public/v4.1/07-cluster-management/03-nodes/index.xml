@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>节点 on KubeSphere 企业版</title>
+    <link>/v4.1/07-cluster-management/03-nodes/</link>
+    <description>Recent content in 节点 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1/07-cluster-management/03-nodes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>查看节点列表</title>
+      <link>/v4.1/07-cluster-management/03-nodes/01-view-a-node-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/07-cluster-management/03-nodes/01-view-a-node-list/</guid>
+      <description>本节介绍如何查看节点列表。
+前提条件 您需要加入一个集群并在集群中具有节点查看权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有节点查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
+节点列表提供以下信息：
+参数 描述 名称
+各节点的主机名称和在子网内部的 IP 地址。
+状态
+各节点的运行状态。
+运行中：节点运行正常。
+无法调度：节点被用户手动设置为不可调度。如果节点处在此状态，容器组将不能被调度到该节点。
+如果节点上存在污点，状态列还将显示节点上污点的数量。将光标悬停在污点数字上查看污点的具体信息。有关更多信息，请参阅设置节点污点。
+角色
+各节点在集群中的角色，取值为控制平面节点、工作节点。
+在列表上方点击搜索框并设置搜索条件，可按名称、状态或角色搜索节点。
+在列表右上角点击可刷新列表信息。
+在列表右上角点击可定制列表中显示的信息。</description>
+    </item>
+    
+    <item>
+      <title>查看节点详情</title>
+      <link>/v4.1/07-cluster-management/03-nodes/02-view-node-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/07-cluster-management/03-nodes/02-view-node-details/</guid>
+      <description>本节介绍如何查看节点详情。
+前提条件 您需要加入一个集群并在集群中具有节点查看权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有节点查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
+在节点列表中点击一个节点的名称打开其详情页面。
+在节点详情页面左侧的属性区域查看节点的资源属性。
+参数 描述 状态
+各节点的运行状态。
+运行中：节点运行正常。
+无法调度：节点被用户手动设置为不可调度。如果节点处在此状态，容器组将不能被调度到该节点。
+IP 地址
+节点的 IP 地址。
+角色
+各节点在集群中的角色，取值为控制平面节点、工作节点。
+操作系统版本
+节点的操作系统发行版和版本。
+操作系统类型
+节点的操作系统类型。
+内核版本
+节点的内核版本。
+容器运行时
+节点使用的容器运行时类型和版本。
+kubelet 版本
+节点上运行的 kubelet 版本。
+kube-proxy 版本
+节点上运行的 kube-proxy 版本。
+系统架构
+节点的 CPU 架构。
+创建时间
+节点加入当前集群的时间。
+在节点详情页面右侧的运行状态页签查看节点的健康状态和污点。
+功能区 描述 健康状态
+显示节点的网络、内存、磁盘、进程压力和就绪状态。如果显示 则表明状态正常，如果显示 则表明出现告警。
+网络可用性：节点的网络配置是否正确。
+内存压力：节点剩余内存是否小于阈值，默认阈值为 100 MiB。
+磁盘压力：节点剩余磁盘空间或 inode 数量是否小于阈值，默认磁盘空间阈值为磁盘空间总量的 10%，默认 inode 数量阈值为 inode 最大数量的 5%。</description>
+    </item>
+    
+    <item>
+      <title>阻止和允许容器组调度</title>
+      <link>/v4.1/07-cluster-management/03-nodes/03-prevent-and-allow-pod-scheduling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/07-cluster-management/03-nodes/03-prevent-and-allow-pod-scheduling/</guid>
+      <description>本节介绍如何阻止和允许容器组调度到节点。
+前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有节点管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
+在需要操作的节点右侧点击，然后在下拉列表中选择停止调度。操作完成后节点状态将变为无法调度。
+在状态为无法调度的节点右侧点击，然后在下拉列表中选择启用调度可以允许容器组调度到该节点。
+说明 节点状态被设置为无法调度后，新创建的容器组将不再调度到该节点，节点上原本运行的容器组不受影响。</description>
+    </item>
+    
+    <item>
+      <title>使用节点终端</title>
+      <link>/v4.1/07-cluster-management/03-nodes/04-access-a-node-terminal/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/07-cluster-management/03-nodes/04-access-a-node-terminal/</guid>
+      <description>本节介绍如何使用节点的终端。
+您可以使用 KubeSphere 企业版提供的命令行终端对节点进行操作。
+前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有节点管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
+在需要操作的节点右侧点击，然后在下拉列表中选择打开终端。
+说明 初次打开节点终端时，由于相关服务尚未启动，系统可能会提示缺少相关权限。如果遇到此情况，您可以稍后重试。</description>
+    </item>
+    
+    <item>
+      <title>编辑节点污点</title>
+      <link>/v4.1/07-cluster-management/03-nodes/05-edit-node-taints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/07-cluster-management/03-nodes/05-edit-node-taints/</guid>
+      <description>本节介绍如何编辑节点污点。
+污点是用户在节点上创建的标记，与容器组上创建的容忍度配合使用。当节点存在污点时，根据设置的污点效果，所有缺少与污点匹配的容忍度的容器组都将被阻止调度到节点或被尽可能阻止调度到节点。
+一个污点由键、值和效果三部分组成。容器组容忍度必须与污点的键、值和效果匹配，容器组才能不受污点影响。
+说明 KubeSphere 企业版 Web 控制台目前暂不支持编辑容器组容忍度，因而默认情况下节点污点对所有容器组生效。
+前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有节点管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
+选择需要操作的节点左侧的复选框，然后在节点列表上方点击编辑污点。
+在编辑污点对话框，设置污点的键、值和效果，然后点击确定。
+您可以为一个污点选择以下效果之一：
+污点效果 描述 阻止调度
+缺少与污点匹配的容忍度的容器组将被阻止调度到节点，节点上原本运行的容器组不受影响。
+尽可能阻止调度
+缺少与污点匹配的容忍度的容器组将被尽可能阻止调度到节点，节点上原本运行的容器组不受影响。
+阻止调度并驱逐现有容器组
+缺少与污点匹配的容忍度的容器组将被阻止调度到节点，节点上原本运行的容器组如果缺少与污点匹配的容忍度会被立即驱逐。
+说明 点击添加污点可以为节点设置多个污点。
+如果您同时编辑多个节点的污点，您可以设置多个节点的公共污点以及每个节点各自的污点。</description>
+    </item>
+    
+    <item>
+      <title>编辑节点标签</title>
+      <link>/v4.1/07-cluster-management/03-nodes/06-edit-node-labels/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/07-cluster-management/03-nodes/06-edit-node-labels/</guid>
+      <description>本节介绍如何编辑节点标签。
+节点标签是用户在节点上设置的键值对，可用于选择节点。例如，在创建工作负载时，您可以指定容器组调度到具有特定标签的节点上。
+前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有节点管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
+在节点列表中，点击需要操作的节点的名称打开节点详情页面。
+在节点详情页面左上角选择更多操作 &amp;gt; 编辑标签。
+在编辑标签对话框，设置节点标签的键和值，然后点击确定。
+说明 点击添加可以为节点设置多个标签。</description>
+    </item>
+    
+  </channel>
+</rss>

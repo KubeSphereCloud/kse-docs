@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>用户通知设置 on KubeSphere 企业版</title>
+    <link>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/</link>
+    <description>Recent content in 用户通知设置 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设置邮件通知</title>
+      <link>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/01-set-email-notification/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/01-set-email-notification/</guid>
+      <description>本节介绍如何设置邮件通知。
+前提条件 KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 通知管理扩展组件。
+操作步骤 登录 KubeSphere 企业版 Web 控制台。
+在页面右上角点击当前用户名，然后在下拉列表中选择通知设置。
+在通知设置页面的邮箱页签，设置邮件通知参数，然后点击确定。
+接收设置
+输入邮箱地址，点击添加可设置多个通知接收人。
+过滤条件
+KubeSphere 企业版发送的通知以键值对的形式呈现。当此处填写的键和值与规则组告警规则的标签设置中的键和值一致时，就可以通过标签过滤，发送标签符合特定条件的告警通知。点击添加可设置多个条件。
+参数 描述 键
+通知内容中的键。点击下拉列表可选择预设的键，在下拉列表中可以输入自定义的键。
+操作符
+筛选条件的操作符。
+包含：键对应的值包含特定的字符串。
+不包含：键对应的值不包含特定的字符串。
+存在：通知内容中存在特定的键。
+不存在：通知内容中不存在特定的键。
+正则匹配：通过正则表达式来筛选符合条件的通知。
+值
+键对应的值必须包含的字符串。按 Enter 可设置多个字符串，键对应的值包含其中一个字条串即满足条件。
+点击发送测试信息以确认通知渠道工作正常。
+点击上方的通知已禁用开关，启用邮箱通知。</description>
+    </item>
+    
+    <item>
+      <title>设置飞书通知</title>
+      <link>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/02-set-feishu-notification/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/02-set-feishu-notification/</guid>
+      <description>本节介绍如何设置飞书通知。
+飞书通知功能支持通过以下两种方式向用户发送通知：
+会话设置：使用飞书应用向特定用户或部门发送通知。
+群机器人设置：使用飞书机器人向特定群聊发送通知。
+前提条件 KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 通知管理扩展组件。
+您需要提前从飞书平台获取应用或群机器人的访问参数。有关更多信息，请参阅飞书开发者文档。
+操作步骤 登录 KubeSphere 企业版 Web 控制台。
+在页面右上角点击当前用户名，然后在下拉列表中选择通知设置。
+在通知设置页面的飞书页签，设置飞书通知参数，然后点击确定。
+会话设置
+参数 描述 会话 ID
+接收通知的会话的 User ID 或 Department ID。点击添加可设置多个会话 ID。
+群机器人设置
+参数 描述 Webhook URL
+群机器人的 Webhook URL。KubeSphere 企业版将向该 URL 发送通知。
+Secret
+群机器人的访问密钥。
+关键词
+群机器人接受的关键词。点击添加可设置多个关键词。
+过滤条件
+KubeSphere 企业版发送的通知以键值对的形式呈现。当此处填写的键和值与规则组告警规则的标签设置中的键和值一致时，就可以通过标签过滤，发送标签符合特定条件的告警通知。点击添加可设置多个条件。
+参数 描述 键
+通知内容中的键。点击下拉列表可选择预设的键，在下拉列表中可以输入自定义的键。
+操作符
+筛选条件的操作符。
+包含：键对应的值包含特定的字符串。
+不包含：键对应的值不包含特定的字符串。
+存在：通知内容中存在特定的键。
+不存在：通知内容中不存在特定的键。
+正则匹配：通过正则表达式来筛选符合条件的通知。
+值
+键对应的值必须包含的字符串。按 Enter 可设置多个字符串，键对应的值包含其中一个字条串即满足条件。
+点击发送测试信息以确认通知渠道工作正常。
+点击上方的通知已禁用开关，启用飞书通知。</description>
+    </item>
+    
+    <item>
+      <title>设置钉钉通知</title>
+      <link>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/03-set-dingtalk-notification/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/03-set-dingtalk-notification/</guid>
+      <description>本节介绍如何设置钉钉通知。
+钉钉通知功能支持通过以下两种方式向用户发送通知：
+会话设置：使用钉钉应用向特定用户或部门发送通知。
+群机器人设置：使用钉钉机器人向特定群聊发送通知。
+前提条件 KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 通知管理扩展组件。
+您需要提前从钉钉平台获取应用或群机器人的访问参数。有关更多信息，请参阅钉钉开发者文档。
+操作步骤 登录 KubeSphere 企业版 Web 控制台。
+在页面右上角点击当前用户名，然后在下拉列表中选择通知设置。
+在通知设置页面的钉钉页签，设置钉钉通知参数，然后点击确定。
+会话设置
+参数 描述 Chat ID
+接收通知的 Chat ID。点击添加可设置多个 Chat ID。
+群机器人设置
+参数 描述 Webhook URL
+群机器人的 Webhook URL。KubeSphere 企业版将向该 URL 发送通知。
+Secret
+群机器人的访问密钥。
+关键词
+群机器人接受的关键词。点击添加可设置多个关键词。
+过滤条件
+KubeSphere 企业版发送的通知以键值对的形式呈现。当此处填写的键和值与规则组告警规则的标签设置中的键和值一致时，就可以通过标签过滤，发送标签符合特定条件的告警通知。点击添加可设置多个条件。
+参数 描述 键
+通知内容中的键。点击下拉列表可选择预设的键，在下拉列表中可以输入自定义的键。
+操作符
+筛选条件的操作符。
+包含：键对应的值包含特定的字符串。
+不包含：键对应的值不包含特定的字符串。
+存在：通知内容中存在特定的键。
+不存在：通知内容中不存在特定的键。
+正则匹配：通过正则表达式来筛选符合条件的通知。
+值
+键对应的值必须包含的字符串。按 Enter 可设置多个字符串，键对应的值包含其中一个字条串即满足条件。
+点击发送测试信息以确认通知渠道工作正常。
+点击上方的通知已禁用开关，启用钉钉通知。</description>
+    </item>
+    
+    <item>
+      <title>设置企业微信通知</title>
+      <link>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/04-set-wecom-notification/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/04-set-wecom-notification/</guid>
+      <description>本节介绍如何设置企业微信通知。
+前提条件 KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 通知管理扩展组件。
+您需要提前从企业微信平台获取应用访问参数。有关更多信息，请参阅企业微信开发者文档。
+操作步骤 登录 KubeSphere 企业版 Web 控制台。
+在页面右上角点击当前用户名，然后在下拉列表中选择通知设置。
+在通知设置页面的企业微信页签，设置企业微信通知参数，然后点击确定。
+接收设置
+设置接收通知的 User ID、Department ID 或 Tag ID。点击添加可设置多个 ID。
+过滤条件
+KubeSphere 企业版发送的通知以键值对的形式呈现。当此处填写的键和值与规则组告警规则的标签设置中的键和值一致时，就可以通过标签过滤，发送标签符合特定条件的告警通知。点击添加可设置多个条件。
+参数 描述 键
+通知内容中的键。点击下拉列表可选择预设的键，在下拉列表中可以输入自定义的键。
+操作符
+筛选条件的操作符。
+包含：键对应的值包含特定的字符串。
+不包含：键对应的值不包含特定的字符串。
+存在：通知内容中存在特定的键。
+不存在：通知内容中不存在特定的键。
+正则匹配：通过正则表达式来筛选符合条件的通知。
+值
+键对应的值必须包含的字符串。按 Enter 可设置多个字符串，键对应的值包含其中一个字条串即满足条件。
+点击发送测试信息以确认通知渠道工作正常。
+点击上方的通知已禁用开关，启用企业微信通知。</description>
+    </item>
+    
+    <item>
+      <title>设置 Slack 通知</title>
+      <link>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/05-set-slack-notification/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/05-set-slack-notification/</guid>
+      <description>本节介绍如何设置 Slack 通知。
+前提条件 KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 通知管理扩展组件。
+您需要提前从 Slack 平台获取应用访问参数。有关更多信息，请参阅 Slack 开发者文档。
+操作步骤 登录 KubeSphere 企业版 Web 控制台。
+在页面右上角点击当前用户名，然后在下拉列表中选择通知设置。
+在通知设置页面的 Slack 页签，设置 Slack 通知参数，然后点击确定。
+Slack 频道设置
+设置接收通知的 Slack 频道。点击添加可设置多个 Slack 频道。
+过滤条件
+KubeSphere 企业版发送的通知以键值对的形式呈现。当此处填写的键和值与规则组告警规则的标签设置中的键和值一致时，就可以通过标签过滤，发送标签符合特定条件的告警通知。点击添加可设置多个条件。
+参数 描述 键
+通知内容中的键。点击下拉列表可选择预设的键，在下拉列表中可以输入自定义的键。
+操作符
+筛选条件的操作符。
+包含：键对应的值包含特定的字符串。
+不包含：键对应的值不包含特定的字符串。
+存在：通知内容中存在特定的键。
+不存在：通知内容中不存在特定的键。
+正则匹配：通过正则表达式来筛选符合条件的通知。
+值
+键对应的值必须包含的字符串。按 Enter 可设置多个字符串，键对应的值包含其中一个字条串即满足条件。
+点击发送测试信息以确认通知渠道工作正常。
+点击上方的通知已禁用开关，启用 Slack 通知。</description>
+    </item>
+    
+    <item>
+      <title>设置 Webhook 通知</title>
+      <link>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/06-set-webhook-notification/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/11-use-extensions/05-observability-platform/11-notifications/05-users-notification/06-set-webhook-notification/</guid>
+      <description>本节介绍如何设置 Webhook 通知。
+前提条件 KubeSphere 企业版平台需要安装并启用 WhizardTelemetry 通知管理扩展组件。
+您需要提前获取 Webhook 的访问参数。有关更多信息，请联系您的 Webhook 管理员。
+操作步骤 登录 KubeSphere 企业版 Web 控制台。
+在页面右上角点击当前用户名，然后在下拉列表中选择通知设置。
+在通知设置页面的 Webhook 页签，设置 Webhook 通知参数，然后点击确定。
+服务器设置
+参数 描述 Webhook URL
+Webhook 的访问 URL。
+认证类型
+Webhook 的认证类型。
+无需认证：不需要进行认证。
+Bearer 令牌：使用 URL Bearer 令牌进行认证。如果选择此类型，您需要进一步设置用于认证的令牌。
+基础认证：使用用户名和密码进行认证。如果选择此类型，您需要进一步设置用于认证的用户名和密码。
+跳过 TLS 验证（不安全）
+调用 Webhook 时是否跳过 TLS 验证。
+过滤条件
+KubeSphere 企业版发送的通知以键值对的形式呈现。当此处填写的键和值与规则组告警规则的标签设置中的键和值一致时，就可以通过标签过滤，发送标签符合特定条件的告警通知。点击添加可设置多个条件。
+参数 描述 键
+通知内容中的键。点击下拉列表可选择预设的键，在下拉列表中可以输入自定义的键。
+操作符
+筛选条件的操作符。
+包含：键对应的值包含特定的字符串。
+不包含：键对应的值不包含特定的字符串。
+存在：通知内容中存在特定的键。
+不存在：通知内容中不存在特定的键。
+正则匹配：通过正则表达式来筛选符合条件的通知。
+值
+键对应的值必须包含的字符串。按 Enter 可设置多个字符串，键对应的值包含其中一个字条串即满足条件。</description>
+    </item>
+    
+  </channel>
+</rss>

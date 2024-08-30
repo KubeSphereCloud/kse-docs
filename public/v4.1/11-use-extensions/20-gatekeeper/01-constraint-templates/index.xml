@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>约束模板 on KubeSphere 企业版</title>
+    <link>/v4.1/11-use-extensions/20-gatekeeper/01-constraint-templates/</link>
+    <description>Recent content in 约束模板 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1/11-use-extensions/20-gatekeeper/01-constraint-templates/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建约束模板</title>
+      <link>/v4.1/11-use-extensions/20-gatekeeper/01-constraint-templates/01-create-a-constraint-template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/11-use-extensions/20-gatekeeper/01-constraint-templates/01-create-a-constraint-template/</guid>
+      <description>本节介绍如何创建约束模板。
+前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
+操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择 Gatekeeper &amp;gt; 约束模板。
+在页面点击创建。
+在创建约束模板对话框，设置约束模板的名称和目标（Targets），然后点击确定。
+参数 描述 CRD 名称
+约束模板对应的 CRD 名称。
+Targets
+Targets 是约束的目标对象，即需要应用约束规则的资源对象。Targets 可以是 Kubernetes 集群中的各种资源，如 Pod、Deployment、Namespace 等。约束将被应用于这些目标对象，以确保它们满足约束规则的要求。
+您将在约束模板页面查看已创建的约束模板。</description>
+    </item>
+    
+    <item>
+      <title>查看约束模板详情</title>
+      <link>/v4.1/11-use-extensions/20-gatekeeper/01-constraint-templates/03-view-constraint-template-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/11-use-extensions/20-gatekeeper/01-constraint-templates/03-view-constraint-template-details/</guid>
+      <description>本节介绍如何查看约束模板详情。
+前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
+操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择 Gatekeeper &amp;gt; 约束模板。
+在约束模板列表中点击一个约束模板的名称打开其详情页面。
+在约束模板详情页面左侧的属性区域，查看约束模板的基本信息。
+参数 描述 集群
+约束模板所属的集群。
+创建时间
+约束模板的创建时间。
+CRD
+约束模板对应的 CRD 名称。
+在约束模板详情页面右侧的目标页签，查看约束模板的约束对象。
+在约束模板详情页面右侧点击状态页签，查看约束模板的标签和注解。
+在约束模板详情页面右侧点击约束页签，查看使用约束模板创建的约束条件。</description>
+    </item>
+    
+    <item>
+      <title>编辑约束模板配置</title>
+      <link>/v4.1/11-use-extensions/20-gatekeeper/01-constraint-templates/04-edit-constraint-template-yaml/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/11-use-extensions/20-gatekeeper/01-constraint-templates/04-edit-constraint-template-yaml/</guid>
+      <description>本节介绍如何编辑约束模板配置。
+前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
+操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择 Gatekeeper &amp;gt; 约束模板。
+在需要编辑的约束模板右侧点击，然后在下拉列表中选择编辑 YAML。
+在编辑 YAML对话框，修改相关配置，然后点击确定。</description>
+    </item>
+    
+    <item>
+      <title>删除约束模板</title>
+      <link>/v4.1/11-use-extensions/20-gatekeeper/01-constraint-templates/07-delete-constraint-templates/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1/11-use-extensions/20-gatekeeper/01-constraint-templates/07-delete-constraint-templates/</guid>
+      <description>本节介绍如何删除约束模板。
+警告 约束模板删除后不能恢复，请谨慎执行此操作。
+前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
+操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择 Gatekeeper &amp;gt; 约束模板。
+在需要删除的约束模板右侧点击，然后在下拉列表中选择删除。
+在删除约束模板对话框，输入约束模板的名称，然后点击确定。</description>
+    </item>
+    
+  </channel>
+</rss>
