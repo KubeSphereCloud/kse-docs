@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>快速入门 on KubeSphere 企业版</title>
+    <link>/v4.0/02-quickstart/</link>
+    <description>Recent content in 快速入门 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.0/02-quickstart/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安装 KubeSphere Core</title>
+      <link>/v4.0/02-quickstart/01-install-ks-core/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/02-quickstart/01-install-ks-core/</guid>
+      <description>本节介绍如何安装 KubeSphere 企业版的核心组件 KubeSphere Core。
+KubeSphere Core 为扩展组件提供基础的运行环境。安装完成后，即可使用 KubeSphere 企业版。
+安装 KubeSphere Core 前提条件 确保您的机器满足最低硬件要求：CPU &amp;gt; 2 核，内存 &amp;gt; 2 GB。
+您需要提前安装 Helm。具体请参阅安装 Helm。
+操作步骤 （可选）如果您没有可用的 Kubernetes 集群，执行以下命令快速创建一个 Kubernetes 集群。
+执行以下命令安装 KubeKey。
+curl -sfL https://get-kk.kubesphere.io | sh - 执行以下命令安装依赖项。
+apt install socat conntrack -y 执行以下命令快速创建一个 Kubernetes 集群。
+./kk create cluster --skip-pull-images --with-local-storage --with-kubernetes v1.25.4 --container-manager containerd -y 如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 helm 安装 KubeSphere Core。
+helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.</description>
+    </item>
+    
+    <item>
+      <title>安装示例组件</title>
+      <link>/v4.0/02-quickstart/02-install-a-demo-extension/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/02-quickstart/02-install-a-demo-extension/</guid>
+      <description>KubeSphere 扩展组件，是运行在 KubeSphere Core 之上，用来扩展并增强 KubeSphere 产品能力，以进一步满足企业各类型的业务需求。
+本节以安装 DevOps 为例，演示如何在 KubeSphere 企业版 Web 控制台安装扩展组件。有关组件管理的更多信息，请参阅扩展组件管理。
+Devops 安装完成后，即可在企业空间中创建 Devops 项目。有关 Devops 项目的更多信息，请参阅 Devops 项目。
+前提条件 您需要以 platform-admin 角色登录到 KubeSphere 企业版 Web 控制台。有关平台角色的更多信息，请参阅平台角色。
+您需要注册一个 KubeSphere 云账号。
+订阅步骤 点击 KubeSphere 企业版 Web 控制台左上角的扩展市场，进入扩展市场页面。
+搜索查找 DevOps，点击订阅。
+如果您未绑定 KubeSphere 云账号，前往扩展中心绑定您的 KubeSphere 云账户，然后进入订阅流程。
+订阅完成后，在扩展市场的 DevOps 页面，点击安装，进入组件安装流程。
+安装步骤 在组件安装对话框的版本选择页签，选择 DevOps 的版本号，并安装好所有必装组件（若有），点击下一步。
+说明 安装检测时，会识别扩展组件是否有依赖组件。依赖组件分为必装组件和选装组件。
+若必装组件的状态为未就绪，您需要先行安装正确版本的必装组件，以确保扩展组件的正常使用。而选装组件不会影响扩展组件的安装。
+在扩展组件安装页签，修改 DevOps 的配置后（可选），点击开始安装即开始安装 DevOps。
+在集群选择页签，根据名称，标识，标签选择集群。
+在差异化配置页签，分别编辑选中集群的 YAML 配置，也可不修改，使用初始默认配置。点击确定，开始配置集群 Agent。
+安装完成后，默认启用该组件。您可以在扩展市场或扩展中心配置、升级、禁用、卸载扩展组件，还可以点击顶部导航栏上的图标，查看使用该组件。
+说明 某些扩展组件安装后，需要激活才能使用。更多信息，请参阅激活扩展组件。</description>
+    </item>
+    
+    <item>
+      <title>控制用户权限</title>
+      <link>/v4.0/02-quickstart/03-control-user-permissions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.0/02-quickstart/03-control-user-permissions/</guid>
+      <description>本节介绍如何创建用户，并使用企业空间、项目和角色控制用户的访问权限。有关用户权限控制的更多信息，请参阅用户和角色管理。
+KubeSphere 企业版的多租户系统分为三个层级，即集群、企业空间和项目。您可以在一个 KubeSphere 企业版集群中创建多个企业空间，每个企业空间下可以创建多个项目。KubeSphere 企业版为每个层级默认设有多个内置角色，您也可以创建拥有自定义权限的角色。
+前提条件 您需要准备一个 Kubernetes 集群，并已安装 KubeSphere 企业版。
+创建用户 使用默认用户 admin 和密码 P@88w0rd 登录 KubeSphere 企业版 Web 控制台。
+说明 为了您的账户安全，首次登录时系统会提示您修改密码。密码修改后，后续请使用新密码登录。
+点击用户和角色管理。
+在左侧导航栏，选择用户。
+在用户列表页面，点击创建。
+在创建用户对话框，输入以下必填参数：
+用户名：用户的名称。
+邮箱：用户的邮箱地址。
+密码：用户的密码。
+点击确定。用户创建后将显示在用户列表中。
+创建企业空间 登录 KubeSphere 企业版 Web 控制台。
+点击企业空间管理。
+点击默认企业空间 system-workspace。
+进入企业空间后，点击左侧导航栏上方的 system-workspace。
+在企业空间列表页面，点击创建企业空间。
+在创建企业空间的基本信息页面，输入企业空间的名称（例如 demo-workspace）。
+说明 对于多集群环境，设置企业空间的基本信息后，点击下一步。在集群设置页面，选择企业空间需要使用的集群。
+点击确定。企业空间创建后将显示在企业空间列表中。
+创建企业空间角色 在企业空间列表页面，点击企业空间的名称 demo-workspace 进入该企业空间。
+在左侧导航栏，选择企业空间设置 &amp;gt; 企业空间角色。
+企业空间角色列表页面默认列出以下四个内置角色。
+角色 描述 workspace-viewer
+企业空间观察员，可以查看企业空间中的所有资源。
+workspace-self-provisioner
+企业空间普通成员，可以查看企业设置、管理应用模板、创建项目和 DevOps 项目。
+workspace-regular
+企业空间普通成员，可以查看企业空间设置。
+workspace-admin
+企业空间管理员，可以管理企业空间中的所有资源。</description>
+    </item>
+    
+  </channel>
+</rss>
