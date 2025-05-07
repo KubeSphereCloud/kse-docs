@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>日志收集 on KubeSphere 企业版</title>
+    <link>/v4.1.3/11-use-extensions/05-observability-platform/02-logging/05-log-collection/</link>
+    <description>Recent content in 日志收集 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.3/11-use-extensions/05-observability-platform/02-logging/05-log-collection/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>启用日志收集</title>
+      <link>/v4.1.3/11-use-extensions/05-observability-platform/02-logging/05-log-collection/01-enable-logsidecar/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/05-observability-platform/02-logging/05-log-collection/01-enable-logsidecar/</guid>
+      <description>本节介绍如何修改“WizTelemetry 日志”扩展组件的配置，以启用日志收集功能。
+说明 启用后，项目左侧导航栏的项目设置菜单下将显⽰日志收集选项。
+前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+KubeSphere 企业版平台需要安装并启用 WizTelemetry 日志扩展组件。
+操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+点击扩展中心。
+点击已安装的 WizTelemetry 日志扩展组件，进入组件详情页。
+点击组件图标下的，选择扩展组件配置。
+在扩展组件配置文件中，将 logsidecar-injector.enabled 参数设置为 true，然后保存文件。
+logsidecar-injector: enabled: true 说明 由于控制此参数更新的 job 只会在 host 集群运行，因此如果想仅开启或关闭某些 member 集群的落盘日志收集功能，只设置 member 集群的 logsidecar-injector.enabled 不会生效。每次修改此参数都需要同时修改 host 集群的参数，以此来触发参数更新。
+例如，当需要将某个 member 集群的日志收集功能关闭，只需要在该 member 集群的配置中设置 logsidecar-injector.enabled: false，然后在 host 集群的配置中设置 logsidecar-injector.updateVersion: 1。后续再进行同样操作只需要更新 logsidecar-injector.updateVersion，即可触发更新。</description>
+    </item>
+    
+    <item>
+      <title>在项目中启用日志收集</title>
+      <link>/v4.1.3/11-use-extensions/05-observability-platform/02-logging/05-log-collection/02-enable-project-log-collection/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/05-observability-platform/02-logging/05-log-collection/02-enable-project-log-collection/</guid>
+      <description>本节介绍如何在项目中启用日志收集。
+说明 启用后，在项目中创建工作负载和任务时，存储设置页签的收集卷上日志功能将可用。
+前提条件 您需要加入一个项目并在项目中具有项目设置管理权限。有关更多信息，请参阅项目成员和项目角色。
+KubeSphere 企业版平台需要安装并启用 WizTelemetry 日志扩展组件，并已启用日志收集。
+操作步骤 以具有项目设置管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+在左侧导航栏选择项目设置 &amp;gt; 日志收集。
+在收集卷上日志区域，点击切换开关将功能状态设置为已启用。
+说明 启用日志收集后，您需要重启容器组才能对现有的容器组生效。有关更多信息，请参阅重新创建工作负载、重新运行任务或删除容器组。</description>
+    </item>
+    
+    <item>
+      <title>启用收集卷上日志</title>
+      <link>/v4.1.3/11-use-extensions/05-observability-platform/02-logging/05-log-collection/03-enable-collect-volume-logs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/05-observability-platform/02-logging/05-log-collection/03-enable-collect-volume-logs/</guid>
+      <description>本节介绍如何在创建工作负载、服务或任务时启用收集卷上的日志。有关更多信息，请参阅创建工作负载或创建任务。
+前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
+KubeSphere 企业版平台需要安装并启用 WizTelemetry 日志扩展组件，并已在项目中启用日志收集。
+操作步骤 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+在左侧导航栏选择应用负载 &amp;gt; 工作负载或应用负载 &amp;gt; 任务。
+在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表，或在任务页面，点击任务或定时任务打开任务列表。
+在页面点击创建。
+在存储设置页签，点击收集卷上日志开关启用该功能。
+点击挂载卷，为容器挂载读写模式的持久卷或临时卷，并设置容器日志路径。
+设置容器中的应用程序，将日志导出到卷挂载目录下的容器日志路径。
+日志收集完成后将打印到容器的标准输出，您可以在 KubeSphere 企业版提供的工具箱对容器日志进行查询。有关更多信息，请参阅使用容器日志查询工具。</description>
+    </item>
+    
+  </channel>
+</rss>

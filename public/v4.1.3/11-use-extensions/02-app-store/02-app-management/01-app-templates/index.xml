@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>应用模板 on KubeSphere 企业版</title>
+    <link>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/</link>
+    <description>Recent content in 应用模板 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建应用模板</title>
+      <link>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/01-create-an-app-template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/01-create-an-app-template/</guid>
+      <description>本节介绍如何创建应用模板。
+前提条件 您需要加入一个企业空间并在企业空间中具有应用/应用版本/应用实例创建权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+已准备 .tar.gz 或 .tgz 格式的 Helm Chart 压缩包，或应用的 yaml 文件。您可以下载 Nginx Helm Chart 用于测试。有关更多信息，请参阅 Helm 官方文档。
+操作步骤 以具有应用/应用版本/应用实例创建权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择应用管理 &amp;gt; 应用模板。
+在页面点击创建。
+在创建应用对话框，点击上传 Helm Chart，选择本地存储的 .tar.gz 或 .tgz 格式的 Helm Chart 压缩包。
+或者点击创建 yaml 应用，输入应用名称和版本号，使用 yaml 文件创建应用。
+说明 点击可从本地上传 yaml 文件。
+点击可将 yaml 文件下载到本地。
+点击确定。
+应用模板创建完成后将显示在应用模板列表中。</description>
+    </item>
+    
+    <item>
+      <title>查看应用模板列表</title>
+      <link>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/02-view-an-app-template-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/02-view-an-app-template-list/</guid>
+      <description>本节介绍如何查看应用模板列表。
+前提条件 您需要加入一个企业空间并在企业空间中具有应用/应用版本/应用实例查看权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+操作步骤 以具有应用/应用版本/应用实例查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择应用管理 &amp;gt; 应用模板。
+应用模板列表提供以下信息：
+参数 描述 名称
+应用模板的名称、图标和描述信息。
+状态
+应用模板当前的状态。
+未上架：应用模板已创建成功，但是未上架到 KubeSphere 企业版平台的应用商店。
+已上架：应用模板已创建成功，并且已上架到 KubeSphere 企业版平台的应用商店。
+已下架：应用模板上架到 KubeSphere 企业版平台的应用商店后被应用商店管理员下架。
+企业空间
+应用模板所属的企业空间。
+最新版本
+应用模板中 Helm Chart 的最新版本。每个应用模板可包含应用的多个版本。
+应用模板
+应用模板的类型，如 helm 应用或 yaml 应用。
+更新时间
+应用模板的更新时间。
+在列表上方点击搜索框并输入关键字，可按名称搜索应用模板。
+在列表右上角点击可刷新列表信息。
+在列表右上角点击可定制列表中显示的信息。</description>
+    </item>
+    
+    <item>
+      <title>查看应用模板详情</title>
+      <link>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/03-view-app-template-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/03-view-app-template-details/</guid>
+      <description>本节介绍如何查看应用模板详情。
+前提条件 您需要加入一个企业空间并在企业空间中具有应用/应用版本/应用实例查看权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+操作步骤 以具有应用/应用版本/应用实例查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择应用管理 &amp;gt; 应用模板。
+在应用模板列表中点击一个应用模板的名称打开其详情页面。
+在应用模板详情页面左侧的属性区域，查看应用模板的资源属性。
+参数 描述 应用 ID
+应用名称。
+状态
+应用模板当前的状态。
+未上架：应用模板已创建成功，但是未上架到 KubeSphere 企业版平台的应用商店。
+已上架：应用模板已创建成功，并且已上架到 KubeSphere 企业版平台的应用商店。
+已下架：应用模板上架到 KubeSphere 企业版平台的应用商店后被应用商店管理员下架。
+分类
+应用模板所属的分类，需手动设置。有关更多信息，请参阅编辑应用模板信息。
+类型
+应用模板的类型，如 helm 应用或 yaml 应用。
+企业空间
+应用模板所属的企业空间。
+创建时间
+应用模板的创建时间。
+在应用模板详情页面右侧的版本页签，查看应用模板中包含的应用版本。
+参数 描述 状态
+应用版本当前的状态。
+未提交：应用版本已上传到企业空间，但未提交给 KubeSphere 企业版平台的应用商店管理员审核。
+已提交：应用版本已提交给 KubeSphere 企业版平台的应用商店管理员审核。
+已发布：应用版本已获得 KubeSphere 企业版平台的应用商店管理员的批准，可以上架到应用商店。
+已拒绝：应用版本未获得 KubeSphere 企业版平台的应用商店管理员的批准，审核不通过。
+未发布：应用版本发布后被应用商店管理员取消发布，或应用版本上架到 KubeSphere 企业版平台的应用商店后被应用商店管理员下架。
+版本
+Helm Chart 的版本。</description>
+    </item>
+    
+    <item>
+      <title>编辑应用模板信息</title>
+      <link>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/04-edit-app-template-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/04-edit-app-template-information/</guid>
+      <description>本节介绍如何编辑应用模板信息。
+前提条件 您需要加入一个企业空间并在企业空间中具有应用/应用版本/应用实例管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+操作步骤 以具有应用/应用版本/应用实例管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择应用管理 &amp;gt; 应用模板。
+在应用模板列表中点击一个应用模板的名称打开其详情页面。
+在应用模板详情页面左上角点击编辑。
+在编辑信息对话框设置应用模板的参数，然后点击确定。
+参数 描述 别名
+应用的别名。别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。
+描述
+应用的描述信息。描述可包含任意字符，最长 120 个字符。
+图标
+应用的图标。如果未设置应用模板的图标，系统将默认使用应用名称第一个字符大写作为图标。图标格式必须为 .png 或 .jpg，不能超过 96 x 96 像素和 20 KB。
+应用分类
+应用的功能分类。应用模板在上传到应用商店后将被自动划分到此处选择的分类下。
+服务商网站
+服务商的网站地址。从应用商店安装应用的用户可联系服务商获取技术支持。
+应用截图
+应用的介绍图片。最多支持上传 6 张截图，每张截图大小不能超过 2 MB。
+应用介绍
+应用的介绍信息。支持输入 markdown 格式的图文介绍。</description>
+    </item>
+    
+    <item>
+      <title>使用应用模板安装应用</title>
+      <link>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/05-install-an-app-by-using-an-app-template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/05-install-an-app-by-using-an-app-template/</guid>
+      <description>本节介绍如何在企业空间中使用应用模板安装应用。
+前提条件 您需要加入一个企业空间并在企业空间中具有应用/应用版本/应用实例管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+操作步骤 以具有应用/应用版本/应用实例管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择应用管理 &amp;gt; 应用模板。
+在应用模板列表中点击一个应用模板的名称打开其详情页面。
+在应用模板详情页面右侧的版本页签，点击所需的应用版本，然后在展开的区域中点击部署。
+在弹出的位置对话框，选择应用的安装位置，然后点击确定。
+在基本信息页签，设置应用的基本信息，然后点击下一步。
+参数 描述 名称
+用户自定义的应用名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 32 个字符。
+版本
+需要安装的应用版本。
+描述
+应用的描述信息。描述可包含任意字符，最长 256 个字符。
+位置
+应用所属的集群和项目。应用所属的企业空间默认为应用模板所属的企业空间。
+在应用设置页签，根据需要修改应用的参数设置，然后点击安装。
+说明 KubeSphere 企业版的应用模板功能底层基于 Helm Chart 实现。应用设置页签的参数设置应符合 Helm Chart 的 Values 文件规范。有关更多信息，请参阅 Helm 官方文档。
+应用安装完成后，即可在目标项目中查看已安装的应用。</description>
+    </item>
+    
+    <item>
+      <title>上传应用版本</title>
+      <link>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/06-upload-an-app-version/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/06-upload-an-app-version/</guid>
+      <description>本节介绍如何在应用模板创建后上传应用版本。
+前提条件 您需要加入一个企业空间并在企业空间中具有应用/应用版本/应用实例管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+已准备 .tar.gz 或 .tgz 格式的 Helm Chart 压缩包。有关更多信息，请参阅 Helm 官方文档。
+操作步骤 以具有应用/应用版本/应用实例管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择应用管理 &amp;gt; 应用模板。
+在应用模板列表中点击一个应用模板的名称打开其详情页面。
+在应用模板详情页面右侧的版本页签，点击上传版本。
+在弹出的对话框中，点击上传 Helm Chart，选择本地存储的 .tar.gz 或 .tgz 格式 Helm Chart 压缩包，然后点击确定。
+应用新版本上传完成后将显示在应用模板详情页面的版本页签。</description>
+    </item>
+    
+    <item>
+      <title>删除应用版本</title>
+      <link>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/08-delete-an-app-version/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/08-delete-an-app-version/</guid>
+      <description>本节介绍如何在应用模板中删除应用版本。
+警告 应用版本删除后无法恢复，请谨慎执行此操作。
+前提条件 您需要加入一个企业空间并在企业空间中具有应用/应用版本/应用实例删除权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+如果需要删除的应用版本已上架到应用商店，您需要联系应用商店管理员将应用版本下架。
+操作步骤 以具有应用/应用版本/应用实例删除权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择应用管理 &amp;gt; 应用模板。
+在应用模板列表中点击一个应用模板的名称打开其详情页面。
+在应用模板详情页面右侧的版本页签，点击需要删除的应用版本，在展开的区域中点击删除，然后在弹出的对话框点击确定。</description>
+    </item>
+    
+    <item>
+      <title>下载 Helm Chart 压缩包</title>
+      <link>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/09-download-a-helm-chart-package/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/09-download-a-helm-chart-package/</guid>
+      <description>本节介绍如何下载应用版本的 Helm Chart 压缩包。
+前提条件 您需要加入一个企业空间并在企业空间中具有应用/应用版本/应用实例查看权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+操作步骤 以具有应用/应用版本/应用实例查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择应用管理 &amp;gt; 应用模板。
+在应用模板列表中点击一个应用模板的名称打开其详情页面。
+在应用模板详情页面右侧的版本页签，点击所需的应用版本，然后在展开的区域中点击下载。
+应用版本的 Helm Chart 压缩包将通过浏览器下载到本地。</description>
+    </item>
+    
+    <item>
+      <title>将应用版本发布到应用商店</title>
+      <link>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/10-release-an-app-version-to-the-app-store/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/10-release-an-app-version-to-the-app-store/</guid>
+      <description>本节介绍如何将应用版本发布到应用商店。
+前提条件 您需要加入一个企业空间并在企业空间中具有应用/应用版本/应用实例管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+操作步骤 以具有应用/应用版本/应用实例管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择应用管理 &amp;gt; 应用模板。
+在应用模板列表中点击一个应用模板的名称打开其详情页面。
+在应用模板详情页面右侧的版本页签，点击需要发布的应用版本，然后在展开的区域中点击提交审核。
+待应用商店管理员审核通过并将其上架后，在页面左上角点击应用商店，即可在应用商店中查看已上架的应用版本。
+说明 审核通过后，应用版本的状态将变为已发布，表示可以被应用商店管理员上架到应用商店。上架后，所有项目成员才可以从应用商店将应用版本安装到项目中。
+有关应用审核和上架的更多信息，请参阅应用商店管理。</description>
+    </item>
+    
+    <item>
+      <title>删除应用模板</title>
+      <link>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/11-delete-an-app-template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/02-app-store/02-app-management/01-app-templates/11-delete-an-app-template/</guid>
+      <description>本节介绍如何删除应用模板。
+警告 应用模板删除后无法恢复，请谨慎执行此操作。
+前提条件 您需要加入一个企业空间并在企业空间中具有应用/应用版本/应用实例删除权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+操作步骤 以具有应用/应用版本/应用实例删除权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择应用管理 &amp;gt; 应用模板。
+在需要删除的应用模板右侧点击，然后在下拉列表中选择删除。
+在删除应用模板对话框，输入应用模板的名称，然后点击确定。</description>
+    </item>
+    
+  </channel>
+</rss>
