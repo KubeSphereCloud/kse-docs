@@ -1,0 +1,1227 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta name="keywords" content="[Kubernetes, {ks_product}, 安装, 准备, 高可用]">
+
+
+
+<meta name="description" content="介绍如何在生产环境中为 KubeSphere 企业版集群配置多个控制平面节点，以防止单个控制平面节点故障时集群服务中断，从而实现高可用性。">
+
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<title>配置高可用性 - KubeSphere 企业版</title>
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/bulma-tooltip.min.css" rel="stylesheet">
+<link href="/css/atom-one-light.css" rel="stylesheet" />
+<link href="/css/magnific-popup.css" rel="stylesheet" />
+
+
+<link href="/scss/main.min.3f975d466d577a77f0f174d270294cab5515450a1619ced59c3e7370b108aeb6.css" rel="stylesheet" integrity="sha256-P5ddRm1Xenfw8XTScClMq1UVRQoWGc7VnD5zcLEIrrY=">
+
+<script src="/js/jquery-2.2.4.js"></script>
+<body
+        class="root   "
+        style=""
+        ><header>
+  <nav class="navbar">
+    
+      <a href="/" class="navbar-logo-wrapper">
+        <img class="navbar-logo" src="/images/qingcloud-logo.svg" />
+        <div class="navbar-split navbar-left-split">|</div>
+        <div class="navbar-logo-text">KubeSphere 企业版</div>
+      </a>
+    
+    <div class="navbar-nav">
+      <div
+        class="navbar-nav-item navbar-nav-version "
+        style="">
+        
+        <div class="dropdown-trigger">
+          <span class="project-version">
+            v4.1.3
+          </span>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    <div class="search navbar-search">
+      <form action="/v4.1.3/search/" method="GET">
+        <div class="control has-icons-left has-icons-right docs-search-input">
+          <span class="icon is-left">
+            <img src="/images/icons/magnifier_duotone.svg" />
+          </span>
+          <input
+            class="input"
+            name="q"
+            type="input"
+            placeholder="请输入关键字快速获取帮助"
+            autocomplete="off"
+          />
+          <span class="icon is-right"> </span>
+        </div>
+        <img class="clear-search-input" src="/images/icons/close_duotone.svg" />
+      </form>
+      <div class="search-result navbar-search-result">
+        <div class="search-result-loading"></div>
+        <div class="search-result-content"></div>
+        <div class="search-result-none">
+          没有找到搜索结果， 请更换关键词重新搜索
+        </div>
+      </div>
+    </div>
+    
+  </nav>
+</header><script id="search-result-total-template" type="text/x-js-template">
+  <div class="search-result-total">
+    共为您找到 ${count} 个结果
+  </div>
+</script>
+
+<script id="search-result-item-template" type="text/x-js-template">
+  <div class="search-result-content-item">
+    <div class="search-result-content-item-title">
+      <a href="${href}">${title}</a>
+    </div>
+    <div class="search-result-content-item-content">
+      ${content}
+    </div>
+    <div class="search-result-content-item-ref">
+      <ul class="content-breadcrumb">
+      </ul>
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="search-breadcrumb-template" type="text/x-js-template">
+  <li class="icon-slash_fill">
+    <a href="${href}">${title}</a>
+  </li>
+</script>
+
+<script id="search-result-total-template" type="text/x-js-template">
+  <div class="search-result-total">
+    共为您找到 ${count} 个结果
+  </div>
+</script>
+<script id="search-result-page-template" type="text/x-js-template">
+  <nav class="search-result-pagination pagination is-centered">
+    <a class="pagination-previous icon-chevron_left_fill"></a>
+    <a class="pagination-next icon-chevron_right_fill"></a>
+    <ul class="pagination-list">
+    </ul>
+  </nav>
+</script>
+<div class="container">
+
+  
+
+
+  
+    
+  
+
+
+<aside class="sidebar-wrapper">
+  <div class="sidebar-drag"></div>
+  <div class="sidebar">
+    
+      <div class="sidebar-title" >
+        <a href="/v4.1.3/">
+          
+            KubeSphere 企业版
+        </a>
+        
+      </div>
+      
+    
+    <nav class="sidebar-menu">
+      
+        
+        <ul>
+  
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item active ">
+            <a href="/v4.1.3/03-installation-and-upgrade/">安装指南</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_up_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/">准备工作</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/01-supported-k8s/">环境要求</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/03-configure-high-availability/">配置高可用性</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/">配置外部持久化存储</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/01-configure-storage-devices-on-cloud/">配置云上存储设备</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/04-configure-neosan-csi/">配置 NeonSAN CSI</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/05-configure-nfs/">配置 NFS</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/07-configure-opensource-storage/">配置开源存储系统</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item active ">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/">安装 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_up_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/">在线安装 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/">离线安装 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/">激活 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/05-appendix/">附录：KubeSphere Core 高级配置</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/">升级 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/05-appendix-ks-core/">附录 1：ks-core Helm Chart 升级参数</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/">卸载 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/01-uninstall-kubesphere-only/">仅卸载 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/02-uninstall-kubernetes-and-kubesphere/">卸载 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/">添加和删除集群节点</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/01-add-cluster-nodes/">添加集群节点</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/02-delete-cluster-nodes/">删除集群节点</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+  
+</ul>
+      
+    </nav>
+
+  </div>
+</aside>
+<div class="content-card-wrapper">
+  <div class="content-card">
+    <div class="content-wrapper"><ul class="content-breadcrumb">
+      <li class="icon-slash_fill"><a href="/v4.1.3" data-url="/v4.1.3">KubeSphere 企业版</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade" data-url="/v4.1.3/03-installation-and-upgrade">安装指南</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade/01-preparations" data-url="/v4.1.3/03-installation-and-upgrade/01-preparations">准备工作</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade/01-preparations/03-configure-high-availability" data-url="/v4.1.3/03-installation-and-upgrade/01-preparations/03-configure-high-availability">配置高可用性</a></li></ul><div class="post-wrapper"><div class="post">
+  <h1 class="post-title">
+    配置高可用性</h1>
+  <div class="post-info">
+    <div class="post-date">
+      更新时间：2025-04-23 06:23:46
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+  </div><div class="post-menu">
+  <div class="post-menu-title">本页目录</div>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_使用本地负载均衡配置">使用本地负载均衡配置</a></li>
+    <li><a href="#_使用专用负载均衡器">使用专用负载均衡器</a></li>
+    <li><a href="#_使用通用服务器作为负载均衡器">使用通用服务器作为负载均衡器</a>
+      <ul>
+        <li><a href="#_前提条件">前提条件</a></li>
+        <li><a href="#_配置高可用性">配置高可用性</a></li>
+        <li><a href="#_验证高可用性">验证高可用性</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div><div class="post-content">
+    
+      
+      
+<div class="paragraph">
+<p>本节介绍如何在生产环境中为 KubeSphere 企业版集群配置多个控制平面节点，以防止单个控制平面节点故障时集群服务中断，从而实现高可用性。如果您的 KubeSphere 企业版集群没有高可用性需求，您可以跳过本节。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch admon note">
+<colgroup>
+<col style="width: 100%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>KubeSphere 企业版高可用性配置仅支持同时安装 Kubernetes 和 KubeSphere 企业版的场景。如果您在现有的 Kubernetes 集群上安装 KubeSphere 企业版，KubeSphere 企业版安装完成后将使用 Kubernetes 集群现有的高可用性配置。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>本节介绍以下高可用性配置方式：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>使用本地负载均衡配置。您可以在安装 KubeSphere 企业版的过程中，设置 KubeKey 工具在工作节点上安装 HAProxy 作为各控制平面节点的反向代理，所有工作节点的 Kubernetes 组件将通过 HAProxy 连接各控制平面节点。这种方式需要额外的健康检查机制，所以相较其他方式运行效率有所降低，但可以用于没有专用负载均衡器且服务器数量有限的场景。</p>
+</li>
+<li>
+<p>使用专用负载均衡器。您可以使用云环境提供的负载均衡器作为各控制平面节点的反向代理。这种方式要求 KubeSphere 企业版集群安装在云环境中，并且云环境可以提供专用负载均衡器。</p>
+</li>
+<li>
+<p>使用通用服务器作为负载均衡器。您可以在集群节点以外的 Linux 服务器上安装 Keepalived 和 HAProxy 作为负载均衡器。这种方式需要至少 2 台额外的 Linux 服务器。</p>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="_使用本地负载均衡配置">使用本地负载均衡配置</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>如需使用 HAProxy 实现高可用性，只需要在安装 KubeSphere 企业版时在安装配置文件 <strong>config-sample.yaml</strong> 中设置以下参数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">spec:
+  controlPlaneEndpoint:
+    internalLoadbalancer: haproxy
+    domain: lb.kubesphere.local
+    address: &#34;&#34;
+    port: 6443</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>KubeKey 将自动在工作节点上安装 HAProxy 并完成高可用配置，您无需进行其他操作。有关更多信息请参阅<a href="../../02-install-kubesphere/02-install-kubernetes-and-kubesphere/">安装 Kubernetes 和 KubeSphere 企业版</a>。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用专用负载均衡器">使用专用负载均衡器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>如需使用云环境提供的专用负载均衡器实现高可用性，您需要在云环境中进行以下操作：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>在云环境中创建一台至少包含两个副本的负载均衡器。</p>
+</li>
+<li>
+<p>设置负载均衡器监听 KubeSphere 企业版集群各控制平面节点的 6443 端口。</p>
+</li>
+<li>
+<p>获取负载均衡器的 IP 地址，供后续安装 KubeSphere 企业版时使用。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>有关具体操作，请参阅云环境的用户指南或联系您的云服务提供商。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用通用服务器作为负载均衡器">使用通用服务器作为负载均衡器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>以下介绍如何使用 Keepalived 和 HAProxy 将通用服务器配置成负载均衡器。</p>
+</div>
+<div class="sect2">
+<h3 id="_前提条件">前提条件</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>您需要准备 2 台与集群节点属于同一私有网络的 Linux 服务器，用作负载均衡器。</p>
+</li>
+<li>
+<p>您需要准备一个虚拟 IP 地址（VIP）用作 2 台负载均衡器服务器的浮动 IP 地址。该地址不应被其他设备或组件占用以免出现地址冲突。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_配置高可用性">配置高可用性</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>登录用作负载均衡器的服务器，执行以下命令安装 HAProxy 和 Keepalived（以下以 Ubuntu 操作系统为例，在其他操作系统中请将 <strong>apt</strong> 替换为操作系统对应的软件包管理工具）：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">apt install keepalived haproxy psmisc -y</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令编辑 HAProxy 的配置文件：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">vi /etc/haproxy/haproxy.cfg</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>在 HAProxy 的配置文件中添加以下信息并保存文件（将 &lt;IP address&gt; 替换为 KubeSphere 企业版集群各控制平面节点的私网 IP 地址）：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">global
+    log /dev/log  local0 warning
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        haproxy
+    group       haproxy
+    daemon
+
+   stats socket /var/lib/haproxy/stats
+
+defaults
+  log global
+  option  httplog
+  option  dontlognull
+        timeout connect 5000
+        timeout client 50000
+        timeout server 50000
+
+frontend kube-apiserver
+  bind *:6443
+  mode tcp
+  option tcplog
+  default_backend kube-apiserver
+
+backend kube-apiserver
+    mode tcp
+    option tcplog
+    option tcp-check
+    balance roundrobin
+    default-server inter 10s downinter 5s rise 2 fall 2 slowstart 60s maxconn 250 maxqueue 256 weight 100
+    server kube-apiserver-1 &lt;IP address&gt;:6443 check
+    server kube-apiserver-2 &lt;IP address&gt;:6443 check
+    server kube-apiserver-3 &lt;IP address&gt;:6443 check</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令重启 HAProxy：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">systemctl restart haproxy</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令设置 HAProxy 开机后自动运行：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">systemctl enable haproxy</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令编辑 Keepalived 的配置文件：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">vi /etc/keepalived/keepalived.conf</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>在 Keepalived 的配置文件中添加以下信息并保存文件：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">global_defs {
+  notification_email {
+  }
+  router_id LVS_DEVEL
+  vrrp_skip_check_adv_addr
+  vrrp_garp_interval 0
+  vrrp_gna_interval 0
+}
+
+vrrp_script chk_haproxy {
+  script &#34;killall -0 haproxy&#34;
+  interval 2
+  weight 2
+}
+
+vrrp_instance haproxy-vip {
+  state BACKUP
+  priority 100
+  interface &lt;NIC&gt;
+  virtual_router_id 60
+  advert_int 1
+  authentication {
+    auth_type PASS
+    auth_pass 1111
+  }
+  unicast_src_ip &lt;source IP address&gt;
+  unicast_peer {
+    &lt;peer IP address&gt;
+  }
+
+  virtual_ipaddress {
+    &lt;floating IP address&gt;
+  }
+
+  track_script {
+    chk_haproxy
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将以下参数替换为实际值：</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 66.6667%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">参数</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&lt;NIC&gt;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>当前负载均衡器的网卡名称。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&lt;source IP address&gt;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>当前负载均衡器的 IP 地址。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&lt;peer IP address&gt;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>另一台负载均衡器的 IP 地址。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&lt;floating IP address&gt;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>用作浮动 IP 地址的虚拟 IP 地址。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令重启 Keepalived：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">systemctl restart keepalived</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令设置 Keepalived 开机后自动运行：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">systemctl enable keepalived</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>重复以上步骤在另一台负载均衡器服务器上安装、配置 HAProxy 和 Keepalived。</p>
+</li>
+<li>
+<p>记录浮动 IP 地址，供后续安装 KubeSphere 企业版时使用。</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_验证高可用性">验证高可用性</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>登录第一台负载均衡器服务器并执行以下命令查看浮动 IP 地址：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">ip a s</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果系统高可用性正常，命令回显中将显示已配置的浮动 IP 地址。例如，在以下命令回显中，<strong>inet 172.16.0.10/24 scope global secondary eth0</strong> 表明浮动 IP 地址已与 eth0 网卡绑定：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 52:54:9e:27:38:c8 brd ff:ff:ff:ff:ff:ff
+    inet 172.16.0.2/24 brd 172.16.0.255 scope global noprefixroute dynamic eth0
+       valid_lft 73334sec preferred_lft 73334sec
+    inet 172.16.0.10/24 scope global secondary eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::510e:f96:98b2:af40/64 scope link noprefixroute
+       valid_lft forever preferred_lft forever</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令模拟当前负载均衡器服务器故障：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">systemctl stop haproxy</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令再次检查浮动 IP 地址：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">ip a s</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果系统高可用性正常，命令回显中将不再显示浮动 IP 地址，如以下命令回显所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 52:54:9e:27:38:c8 brd ff:ff:ff:ff:ff:ff
+    inet 172.16.0.2/24 brd 172.16.0.255 scope global noprefixroute dynamic eth0
+       valid_lft 72802sec preferred_lft 72802sec
+    inet6 fe80::510e:f96:98b2:af40/64 scope link noprefixroute
+       valid_lft forever preferred_lft forever</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>登录另一台负载均衡器服务器，执行以下命令查看浮动 IP 地址：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">ip a s</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果系统高可用性正常，命令回显中将显示已配置的浮动 IP 地址。例如，在以下命令回显中，<strong>inet 172.16.0.10/24 scope global secondary eth0</strong> 表明浮动 IP 地址已与 eth0 网卡绑定：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 52:54:9e:3f:51:ba brd ff:ff:ff:ff:ff:ff
+    inet 172.16.0.3/24 brd 172.16.0.255 scope global noprefixroute dynamic eth0
+       valid_lft 72690sec preferred_lft 72690sec
+    inet 172.16.0.10/24 scope global secondary eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::f67c:bd4f:d6d5:1d9b/64 scope link noprefixroute
+       valid_lft forever preferred_lft forever</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>在第一台负载均衡器服务器上执行以下命令恢复运行 HAProxy：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">systemctl start haproxy</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+    
+
+  </div>
+  <div class="post-footer">
+    <div class="post-prev">
+    </div>
+    <div class="post-next">
+    </div>
+  </div>
+  <div class="post-back-to-top">
+    <span class="icon-up_3_fill"></span>
+  </div>
+</div>
+<div class="post-placeholder"><div class="post-menu">
+  <div class="post-menu-title">本页目录</div>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_使用本地负载均衡配置">使用本地负载均衡配置</a></li>
+    <li><a href="#_使用专用负载均衡器">使用专用负载均衡器</a></li>
+    <li><a href="#_使用通用服务器作为负载均衡器">使用通用服务器作为负载均衡器</a>
+      <ul>
+        <li><a href="#_前提条件">前提条件</a></li>
+        <li><a href="#_配置高可用性">配置高可用性</a></li>
+        <li><a href="#_验证高可用性">验证高可用性</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+    </body><script src="/js/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script src="/js/jquery.tmpl.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/search/jquery.mark.min.js"></script>
+
+<script type="text/javascript" src="/js/common.0804ad48c7d18e84f98d818f8d8bf2606673ca5f9e919237311eff97b31b98061da1f72f95c4177ed55c843aa7b63025f5154d4651b46f49640309d80ba9972d.js" integrity="sha512-CAStSMfRjoT5jYGPjYvyYGZzyl&#43;ekZI3MR7/l7MbmAYdofcvlcQXftVchDqntjAl9RVNRlG0b0lkAwnYC6mXLQ=="></script>
+
+<script type="text/javascript" src="/js/search.d8001c3e1b66b9a0b48e0c23ad0dbfc0906f194f8925ae78a9900b960679cfa7e41cebd9efd654f84535d02cbce7c4971f226e6f07288c26c3c4560c36d7655b.js"></script>
+<script>
+  $(function() {
+    
+    hljs.highlightAll();
+    
+    $.each($('.post-content .imageblock img'), function () {
+      $(this).attr('data-mfp-src', $(this).attr('src'));
+    });
+    $('.post-content').magnificPopup({
+      disableOn: function () {
+        if ($(window).width() < 600) {
+          return false;
+        }
+        return true;
+      },
+      delegate: '.imageblock img',
+      type: 'image',
+      gallery: {
+        enabled: true,
+      },
+    });
+  });
+</script>
+</html>

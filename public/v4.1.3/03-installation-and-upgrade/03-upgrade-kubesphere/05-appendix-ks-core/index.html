@@ -1,0 +1,1170 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta name="keywords" content="云计算,青云,QingCloud,文档,KubeSphere 企业版,KubeSphere">
+
+
+<meta name="description" content="这是 KubeSphere 企业版文档页面">
+
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<title>附录 1：ks-core Helm Chart 升级参数 - KubeSphere 企业版</title>
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/bulma-tooltip.min.css" rel="stylesheet">
+<link href="/css/atom-one-light.css" rel="stylesheet" />
+<link href="/css/magnific-popup.css" rel="stylesheet" />
+
+
+<link href="/scss/main.min.3f975d466d577a77f0f174d270294cab5515450a1619ced59c3e7370b108aeb6.css" rel="stylesheet" integrity="sha256-P5ddRm1Xenfw8XTScClMq1UVRQoWGc7VnD5zcLEIrrY=">
+
+<script src="/js/jquery-2.2.4.js"></script>
+<body
+        class="root   "
+        style=""
+        ><header>
+  <nav class="navbar">
+    
+      <a href="/" class="navbar-logo-wrapper">
+        <img class="navbar-logo" src="/images/qingcloud-logo.svg" />
+        <div class="navbar-split navbar-left-split">|</div>
+        <div class="navbar-logo-text">KubeSphere 企业版</div>
+      </a>
+    
+    <div class="navbar-nav">
+      <div
+        class="navbar-nav-item navbar-nav-version "
+        style="">
+        
+        <div class="dropdown-trigger">
+          <span class="project-version">
+            v4.1.3
+          </span>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    <div class="search navbar-search">
+      <form action="/v4.1.3/search/" method="GET">
+        <div class="control has-icons-left has-icons-right docs-search-input">
+          <span class="icon is-left">
+            <img src="/images/icons/magnifier_duotone.svg" />
+          </span>
+          <input
+            class="input"
+            name="q"
+            type="input"
+            placeholder="请输入关键字快速获取帮助"
+            autocomplete="off"
+          />
+          <span class="icon is-right"> </span>
+        </div>
+        <img class="clear-search-input" src="/images/icons/close_duotone.svg" />
+      </form>
+      <div class="search-result navbar-search-result">
+        <div class="search-result-loading"></div>
+        <div class="search-result-content"></div>
+        <div class="search-result-none">
+          没有找到搜索结果， 请更换关键词重新搜索
+        </div>
+      </div>
+    </div>
+    
+  </nav>
+</header><script id="search-result-total-template" type="text/x-js-template">
+  <div class="search-result-total">
+    共为您找到 ${count} 个结果
+  </div>
+</script>
+
+<script id="search-result-item-template" type="text/x-js-template">
+  <div class="search-result-content-item">
+    <div class="search-result-content-item-title">
+      <a href="${href}">${title}</a>
+    </div>
+    <div class="search-result-content-item-content">
+      ${content}
+    </div>
+    <div class="search-result-content-item-ref">
+      <ul class="content-breadcrumb">
+      </ul>
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="search-breadcrumb-template" type="text/x-js-template">
+  <li class="icon-slash_fill">
+    <a href="${href}">${title}</a>
+  </li>
+</script>
+
+<script id="search-result-total-template" type="text/x-js-template">
+  <div class="search-result-total">
+    共为您找到 ${count} 个结果
+  </div>
+</script>
+<script id="search-result-page-template" type="text/x-js-template">
+  <nav class="search-result-pagination pagination is-centered">
+    <a class="pagination-previous icon-chevron_left_fill"></a>
+    <a class="pagination-next icon-chevron_right_fill"></a>
+    <ul class="pagination-list">
+    </ul>
+  </nav>
+</script>
+<div class="container">
+
+  
+
+
+  
+    
+  
+
+
+<aside class="sidebar-wrapper">
+  <div class="sidebar-drag"></div>
+  <div class="sidebar">
+    
+      <div class="sidebar-title" >
+        <a href="/v4.1.3/">
+          
+            KubeSphere 企业版
+        </a>
+        
+      </div>
+      
+    
+    <nav class="sidebar-menu">
+      
+        
+        <ul>
+  
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item active ">
+            <a href="/v4.1.3/03-installation-and-upgrade/">安装指南</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_up_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/">准备工作</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/01-supported-k8s/">环境要求</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/03-configure-high-availability/">配置高可用性</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/">配置外部持久化存储</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/01-configure-storage-devices-on-cloud/">配置云上存储设备</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/04-configure-neosan-csi/">配置 NeonSAN CSI</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/05-configure-nfs/">配置 NFS</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/07-configure-opensource-storage/">配置开源存储系统</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/">安装 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/">在线安装 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/">离线安装 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/">激活 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/05-appendix/">附录：KubeSphere Core 高级配置</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item active ">
+            <a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/">升级 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_up_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/05-appendix-ks-core/">附录 1：ks-core Helm Chart 升级参数</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/">卸载 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/01-uninstall-kubesphere-only/">仅卸载 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/02-uninstall-kubernetes-and-kubesphere/">卸载 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/">添加和删除集群节点</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/01-add-cluster-nodes/">添加集群节点</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/02-delete-cluster-nodes/">删除集群节点</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+  
+</ul>
+      
+    </nav>
+
+  </div>
+</aside>
+<div class="content-card-wrapper">
+  <div class="content-card">
+    <div class="content-wrapper"><ul class="content-breadcrumb">
+      <li class="icon-slash_fill"><a href="/v4.1.3" data-url="/v4.1.3">KubeSphere 企业版</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade" data-url="/v4.1.3/03-installation-and-upgrade">安装指南</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere" data-url="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere">升级 KubeSphere 企业版</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/05-appendix-ks-core" data-url="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/05-appendix-ks-core">附录 1：ks-core Helm Chart 升级参数</a></li></ul><div class="post-wrapper"><div class="post">
+  <h1 class="post-title">
+    附录 1：ks-core Helm Chart 升级参数</h1>
+  <div class="post-info">
+    <div class="post-date">
+      更新时间：2025-04-23 06:23:46
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+  </div><div class="post-menu">
+  <div class="post-menu-title">本页目录</div>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_升级_job_配置">升级 Job 配置</a></li>
+    <li><a href="#_升级应用配置">升级应用配置</a></li>
+    <li><a href="#_升级组件配置">升级组件配置</a></li>
+  </ul>
+</nav>
+</div><div class="post-content">
+    
+      
+      
+<div class="sect1">
+<h2 id="_升级_job_配置">升级 Job 配置</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">选项</th>
+<th class="tableblock halign-left valign-top">默认值</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.enabled</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>true</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>bool - 是否启用升级组件</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.image.registry</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的镜像仓库地址</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.image.repository</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>kse/ks-upgrade</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的镜像名称</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.image.tag</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的镜像标签</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.image.pullPolicy</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Always</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的镜像拉取策略</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.persistenceVolume.name</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>ks-upgrade</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的存储卷</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.persistenceVolume.storageClassName</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的存储卷类</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.persistenceVolume.accessMode</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>ReadWriteOnce</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的存储卷访问模式</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.persistenceVolume.size</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>5Gi</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的存储卷容量</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.resources.limit.cpu</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的 CPU 资源配额上限</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.resources.limit.memory</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1024Mi</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的 Memory 资源配额上限</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.resources.requests.cpu</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>20m</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的 CPU 资源申请配额</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.resources.requests.memory</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>100Mi</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 的 Memory 资源申请配额</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_升级应用配置">升级应用配置</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">选项</th>
+<th class="tableblock halign-left valign-top">默认值</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.storage.local.path</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>/tmp/ks-upgrade</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 使用本地目录存储备份数据</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.storage.s3.endpoint</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置升级 Job 使用支持 S3 协议的对象存储服务备份数据，存储服务地址</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.storage.s3.region</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 S3 服务数据存储区域</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.storage.s3.disableSSL</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>bool - 设置禁用 SSL 安全协议</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.storage.s3.forcePathStyle</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>bool - 设置 S3 客户端对桶使用路径式寻址</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.storage.s3.accessKeyID</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 S3 服务账号的访问键，不使用凭证文件时是必需的</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.storage.s3.secretAccessKey</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 S3 服务账号的访问密钥，不使用凭证文件时是必需的</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.storage.s3.sessionToken</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 S3 服务的访问凭证文件</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.storage.s3.bucket</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 S3 服务的存储桶</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.download.globalRegistryUrl</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>oci://hub.kubesphere.com.cn/kse-extensions</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置扩展组件的仓库地址</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.download.file</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>系统预留配置</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.download.http.timeout</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>20</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>int64 - 设置拉取扩展组件的超时时间</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.download.http.caBundle</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置扩展组件仓库的自签名证书的 base64 字符串，多个自签名证书合并字符串 base64</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.download.http.insecureSkipVerify</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>true</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>bool - 设置跳过扩展组件仓库 TLS 认证</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.download.oci</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>-</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>系统预留配置</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.skipValidator</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>bool - 设置跳过升级 Job 版本校验，当前校验 KubeSphere 版本</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_升级组件配置">升级组件配置</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">选项</th>
+<th class="tableblock halign-left valign-top">默认值</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.jobs.$ID.enabled</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>bool - 设置启用升级组件 $ID</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.jobs.$ID.priority</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>int - 设置组件升级顺序的优先级</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.jobs.$ID.extensionRef.name</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置扩展组件名称</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>upgrade.config.jobs.$ID.extensionRef.version</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>&#34;&#34;</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置扩展组件版本</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+    
+
+  </div>
+  <div class="post-footer">
+    <div class="post-prev">
+    </div>
+    <div class="post-next">
+    </div>
+  </div>
+  <div class="post-back-to-top">
+    <span class="icon-up_3_fill"></span>
+  </div>
+</div>
+<div class="post-placeholder"><div class="post-menu">
+  <div class="post-menu-title">本页目录</div>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_升级_job_配置">升级 Job 配置</a></li>
+    <li><a href="#_升级应用配置">升级应用配置</a></li>
+    <li><a href="#_升级组件配置">升级组件配置</a></li>
+  </ul>
+</nav>
+</div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+    </body><script src="/js/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script src="/js/jquery.tmpl.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/search/jquery.mark.min.js"></script>
+
+<script type="text/javascript" src="/js/common.0804ad48c7d18e84f98d818f8d8bf2606673ca5f9e919237311eff97b31b98061da1f72f95c4177ed55c843aa7b63025f5154d4651b46f49640309d80ba9972d.js" integrity="sha512-CAStSMfRjoT5jYGPjYvyYGZzyl&#43;ekZI3MR7/l7MbmAYdofcvlcQXftVchDqntjAl9RVNRlG0b0lkAwnYC6mXLQ=="></script>
+
+<script type="text/javascript" src="/js/search.d8001c3e1b66b9a0b48e0c23ad0dbfc0906f194f8925ae78a9900b960679cfa7e41cebd9efd654f84535d02cbce7c4971f226e6f07288c26c3c4560c36d7655b.js"></script>
+<script>
+  $(function() {
+    
+    hljs.highlightAll();
+    
+    $.each($('.post-content .imageblock img'), function () {
+      $(this).attr('data-mfp-src', $(this).attr('src'));
+    });
+    $('.post-content').magnificPopup({
+      disableOn: function () {
+        if ($(window).width() < 600) {
+          return false;
+        }
+        return true;
+      },
+      delegate: '.imageblock img',
+      type: 'image',
+      gallery: {
+        enabled: true,
+      },
+    });
+  });
+</script>
+</html>

@@ -1,0 +1,734 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta name="keywords" content="[Kubernetes, {ks_product}, 安装, 升级, 卸载]">
+
+
+
+<meta name="description" content="介绍如何安装、升级和卸载 KubeSphere 企业版。">
+
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<title>安装指南 - KubeSphere 企业版</title>
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/bulma-tooltip.min.css" rel="stylesheet">
+<link href="/css/atom-one-light.css" rel="stylesheet" />
+<link href="/css/magnific-popup.css" rel="stylesheet" />
+
+
+<link href="/scss/main.min.3f975d466d577a77f0f174d270294cab5515450a1619ced59c3e7370b108aeb6.css" rel="stylesheet" integrity="sha256-P5ddRm1Xenfw8XTScClMq1UVRQoWGc7VnD5zcLEIrrY=">
+
+<script src="/js/jquery-2.2.4.js"></script>
+<body
+        class="root   "
+        style=""
+        ><header>
+  <nav class="navbar">
+    
+      <a href="/" class="navbar-logo-wrapper">
+        <img class="navbar-logo" src="/images/qingcloud-logo.svg" />
+        <div class="navbar-split navbar-left-split">|</div>
+        <div class="navbar-logo-text">KubeSphere 企业版</div>
+      </a>
+    
+    <div class="navbar-nav">
+      <div
+        class="navbar-nav-item navbar-nav-version "
+        style="">
+        
+        <div class="dropdown-trigger">
+          <span class="project-version">
+            v4.1.3
+          </span>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    <div class="search navbar-search">
+      <form action="/v4.1.3/search/" method="GET">
+        <div class="control has-icons-left has-icons-right docs-search-input">
+          <span class="icon is-left">
+            <img src="/images/icons/magnifier_duotone.svg" />
+          </span>
+          <input
+            class="input"
+            name="q"
+            type="input"
+            placeholder="请输入关键字快速获取帮助"
+            autocomplete="off"
+          />
+          <span class="icon is-right"> </span>
+        </div>
+        <img class="clear-search-input" src="/images/icons/close_duotone.svg" />
+      </form>
+      <div class="search-result navbar-search-result">
+        <div class="search-result-loading"></div>
+        <div class="search-result-content"></div>
+        <div class="search-result-none">
+          没有找到搜索结果， 请更换关键词重新搜索
+        </div>
+      </div>
+    </div>
+    
+  </nav>
+</header><script id="search-result-total-template" type="text/x-js-template">
+  <div class="search-result-total">
+    共为您找到 ${count} 个结果
+  </div>
+</script>
+
+<script id="search-result-item-template" type="text/x-js-template">
+  <div class="search-result-content-item">
+    <div class="search-result-content-item-title">
+      <a href="${href}">${title}</a>
+    </div>
+    <div class="search-result-content-item-content">
+      ${content}
+    </div>
+    <div class="search-result-content-item-ref">
+      <ul class="content-breadcrumb">
+      </ul>
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="search-breadcrumb-template" type="text/x-js-template">
+  <li class="icon-slash_fill">
+    <a href="${href}">${title}</a>
+  </li>
+</script>
+
+<script id="search-result-total-template" type="text/x-js-template">
+  <div class="search-result-total">
+    共为您找到 ${count} 个结果
+  </div>
+</script>
+<script id="search-result-page-template" type="text/x-js-template">
+  <nav class="search-result-pagination pagination is-centered">
+    <a class="pagination-previous icon-chevron_left_fill"></a>
+    <a class="pagination-next icon-chevron_right_fill"></a>
+    <ul class="pagination-list">
+    </ul>
+  </nav>
+</script><div class="container">
+  
+
+  
+
+
+  
+    
+  
+
+
+<aside class="sidebar-wrapper">
+  <div class="sidebar-drag"></div>
+  <div class="sidebar">
+    
+      <div class="sidebar-title" >
+        <a href="/v4.1.3/">
+          
+            KubeSphere 企业版
+        </a>
+        
+      </div>
+      
+    
+    <nav class="sidebar-menu">
+      
+        
+        <ul>
+  
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item active current">
+            <a href="/v4.1.3/03-installation-and-upgrade/">安装指南</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_up_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/">准备工作</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/01-supported-k8s/">环境要求</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/03-configure-high-availability/">配置高可用性</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/">配置外部持久化存储</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/01-configure-storage-devices-on-cloud/">配置云上存储设备</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/04-configure-neosan-csi/">配置 NeonSAN CSI</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/05-configure-nfs/">配置 NFS</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/07-configure-opensource-storage/">配置开源存储系统</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/">安装 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/">在线安装 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/">离线安装 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/">激活 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/05-appendix/">附录：KubeSphere Core 高级配置</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/">升级 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/05-appendix-ks-core/">附录 1：ks-core Helm Chart 升级参数</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/">卸载 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/01-uninstall-kubesphere-only/">仅卸载 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/02-uninstall-kubernetes-and-kubesphere/">卸载 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/">添加和删除集群节点</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/01-add-cluster-nodes/">添加集群节点</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/02-delete-cluster-nodes/">删除集群节点</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+  
+</ul>
+      
+    </nav>
+
+  </div>
+</aside>
+<div class="content-card-wrapper">
+  <div class="content-card">
+    <div class="content-wrapper"><ul class="content-breadcrumb">
+      <li class="icon-slash_fill"><a href="/v4.1.3" data-url="/v4.1.3">KubeSphere 企业版</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade" data-url="/v4.1.3/03-installation-and-upgrade">安装指南</a></li></ul><div class="post-wrapper"><div class="post">
+  <h1 class="post-title">
+    安装指南</h1>
+  <div class="post-info">
+    <div class="post-date">
+      更新时间：2025-04-23 06:23:46
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+  </div><div class="post-menu">
+  <div class="post-menu-title">本页目录</div>
+  
+</div><div class="post-content">
+    
+      
+      <div class="paragraph">
+<p>本节介绍如何安装、升级和卸载 KubeSphere 企业版，以及如何添加和删除 KubeSphere 企业版集群节点。</p>
+</div>
+
+    
+
+  </div>
+  <div class="post-footer">
+    <div class="post-prev">
+    </div>
+    <div class="post-next">
+    </div>
+  </div>
+  <div class="post-back-to-top">
+    <span class="icon-up_3_fill"></span>
+  </div>
+</div>
+<div class="post-placeholder"><div class="post-menu">
+  <div class="post-menu-title">本页目录</div>
+  
+</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    </body><script src="/js/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script src="/js/jquery.tmpl.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/search/jquery.mark.min.js"></script>
+
+<script type="text/javascript" src="/js/common.0804ad48c7d18e84f98d818f8d8bf2606673ca5f9e919237311eff97b31b98061da1f72f95c4177ed55c843aa7b63025f5154d4651b46f49640309d80ba9972d.js" integrity="sha512-CAStSMfRjoT5jYGPjYvyYGZzyl&#43;ekZI3MR7/l7MbmAYdofcvlcQXftVchDqntjAl9RVNRlG0b0lkAwnYC6mXLQ=="></script>
+
+<script type="text/javascript" src="/js/search.d8001c3e1b66b9a0b48e0c23ad0dbfc0906f194f8925ae78a9900b960679cfa7e41cebd9efd654f84535d02cbce7c4971f226e6f07288c26c3c4560c36d7655b.js"></script>
+<script>
+  $(function() {
+    
+    hljs.highlightAll();
+    
+    $.each($('.post-content .imageblock img'), function () {
+      $(this).attr('data-mfp-src', $(this).attr('src'));
+    });
+    $('.post-content').magnificPopup({
+      disableOn: function () {
+        if ($(window).width() < 600) {
+          return false;
+        }
+        return true;
+      },
+      delegate: '.imageblock img',
+      type: 'image',
+      gallery: {
+        enabled: true,
+      },
+    });
+  });
+</script>
+</html>

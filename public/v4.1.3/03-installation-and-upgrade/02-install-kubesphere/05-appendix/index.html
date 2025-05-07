@@ -1,0 +1,1389 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta name="keywords" content="云计算,青云,QingCloud,文档,KubeSphere 企业版,KubeSphere">
+
+
+<meta name="description" content="这是 KubeSphere 企业版文档页面">
+
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<title>附录：KubeSphere Core 高级配置 - KubeSphere 企业版</title>
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/bulma-tooltip.min.css" rel="stylesheet">
+<link href="/css/atom-one-light.css" rel="stylesheet" />
+<link href="/css/magnific-popup.css" rel="stylesheet" />
+
+
+<link href="/scss/main.min.3f975d466d577a77f0f174d270294cab5515450a1619ced59c3e7370b108aeb6.css" rel="stylesheet" integrity="sha256-P5ddRm1Xenfw8XTScClMq1UVRQoWGc7VnD5zcLEIrrY=">
+
+<script src="/js/jquery-2.2.4.js"></script>
+<body
+        class="root   "
+        style=""
+        ><header>
+  <nav class="navbar">
+    
+      <a href="/" class="navbar-logo-wrapper">
+        <img class="navbar-logo" src="/images/qingcloud-logo.svg" />
+        <div class="navbar-split navbar-left-split">|</div>
+        <div class="navbar-logo-text">KubeSphere 企业版</div>
+      </a>
+    
+    <div class="navbar-nav">
+      <div
+        class="navbar-nav-item navbar-nav-version "
+        style="">
+        
+        <div class="dropdown-trigger">
+          <span class="project-version">
+            v4.1.3
+          </span>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    <div class="search navbar-search">
+      <form action="/v4.1.3/search/" method="GET">
+        <div class="control has-icons-left has-icons-right docs-search-input">
+          <span class="icon is-left">
+            <img src="/images/icons/magnifier_duotone.svg" />
+          </span>
+          <input
+            class="input"
+            name="q"
+            type="input"
+            placeholder="请输入关键字快速获取帮助"
+            autocomplete="off"
+          />
+          <span class="icon is-right"> </span>
+        </div>
+        <img class="clear-search-input" src="/images/icons/close_duotone.svg" />
+      </form>
+      <div class="search-result navbar-search-result">
+        <div class="search-result-loading"></div>
+        <div class="search-result-content"></div>
+        <div class="search-result-none">
+          没有找到搜索结果， 请更换关键词重新搜索
+        </div>
+      </div>
+    </div>
+    
+  </nav>
+</header><script id="search-result-total-template" type="text/x-js-template">
+  <div class="search-result-total">
+    共为您找到 ${count} 个结果
+  </div>
+</script>
+
+<script id="search-result-item-template" type="text/x-js-template">
+  <div class="search-result-content-item">
+    <div class="search-result-content-item-title">
+      <a href="${href}">${title}</a>
+    </div>
+    <div class="search-result-content-item-content">
+      ${content}
+    </div>
+    <div class="search-result-content-item-ref">
+      <ul class="content-breadcrumb">
+      </ul>
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="search-breadcrumb-template" type="text/x-js-template">
+  <li class="icon-slash_fill">
+    <a href="${href}">${title}</a>
+  </li>
+</script>
+
+<script id="search-result-total-template" type="text/x-js-template">
+  <div class="search-result-total">
+    共为您找到 ${count} 个结果
+  </div>
+</script>
+<script id="search-result-page-template" type="text/x-js-template">
+  <nav class="search-result-pagination pagination is-centered">
+    <a class="pagination-previous icon-chevron_left_fill"></a>
+    <a class="pagination-next icon-chevron_right_fill"></a>
+    <ul class="pagination-list">
+    </ul>
+  </nav>
+</script>
+<div class="container">
+
+  
+
+
+  
+    
+  
+
+
+<aside class="sidebar-wrapper">
+  <div class="sidebar-drag"></div>
+  <div class="sidebar">
+    
+      <div class="sidebar-title" >
+        <a href="/v4.1.3/">
+          
+            KubeSphere 企业版
+        </a>
+        
+      </div>
+      
+    
+    <nav class="sidebar-menu">
+      
+        
+        <ul>
+  
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item active ">
+            <a href="/v4.1.3/03-installation-and-upgrade/">安装指南</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_up_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/">准备工作</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/01-supported-k8s/">环境要求</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/03-configure-high-availability/">配置高可用性</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/">配置外部持久化存储</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/01-configure-storage-devices-on-cloud/">配置云上存储设备</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/04-configure-neosan-csi/">配置 NeonSAN CSI</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/05-configure-nfs/">配置 NFS</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/07-configure-opensource-storage/">配置开源存储系统</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item active ">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/">安装 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_up_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/">在线安装 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/">离线安装 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/">激活 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/05-appendix/">附录：KubeSphere Core 高级配置</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/">升级 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/05-appendix-ks-core/">附录 1：ks-core Helm Chart 升级参数</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/">卸载 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/01-uninstall-kubesphere-only/">仅卸载 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/02-uninstall-kubernetes-and-kubesphere/">卸载 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/">添加和删除集群节点</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/01-add-cluster-nodes/">添加集群节点</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/02-delete-cluster-nodes/">删除集群节点</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+  
+</ul>
+      
+    </nav>
+
+  </div>
+</aside>
+<div class="content-card-wrapper">
+  <div class="content-card">
+    <div class="content-wrapper"><ul class="content-breadcrumb">
+      <li class="icon-slash_fill"><a href="/v4.1.3" data-url="/v4.1.3">KubeSphere 企业版</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade" data-url="/v4.1.3/03-installation-and-upgrade">安装指南</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere" data-url="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere">安装 KubeSphere 企业版</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/05-appendix" data-url="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/05-appendix">附录：KubeSphere Core 高级配置</a></li></ul><div class="post-wrapper"><div class="post">
+  <h1 class="post-title">
+    附录：KubeSphere Core 高级配置</h1>
+  <div class="post-info">
+    <div class="post-date">
+      更新时间：2025-04-23 06:23:46
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+  </div><div class="post-menu">
+  <div class="post-menu-title">本页目录</div>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_kubesphere_helm_chart_选项">KubeSphere Helm Chart 选项</a>
+      <ul>
+        <li><a href="#_常用选项">常用选项</a></li>
+        <li><a href="#_高级选项">高级选项</a></li>
+      </ul>
+    </li>
+    <li><a href="#_tls_配置">TLS 配置</a></li>
+    <li><a href="#_配置_ratelimit_限流器">配置 ratelimit 限流器</a></li>
+  </ul>
+</nav>
+</div><div class="post-content">
+    
+      
+      
+<div class="sect1">
+<h2 id="_kubesphere_helm_chart_选项">KubeSphere Helm Chart 选项</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_常用选项">常用选项</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">选项</th>
+<th class="tableblock halign-left valign-top">默认值</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">adminPassword</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 为第一个管理员用户设置引导密码。登录后，管理员需要重置密码。如不设置，会使用内置默认密码 <strong>P@88w0rd</strong>。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hostname</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;example.com&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - KubeSphere Server 完全限定的域名。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.enabled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>bool - 如果值为 true, 创建 KubeSphere Ingress 网关。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.tls.enabled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>bool - 如果值为 true, 则为 KubeSphere  Ingress 网关启用 HTTPS。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.tls.source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;generation&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - Ingress 证书的来源，可选项：&#34;generation, importation, letsEncrypt&#34;。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">letsEncrypt.email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 邮箱地址，证书过期时会收到邮件提醒。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">letsEncrypt.environment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;production&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 可选项：&#34;staging, production&#34;。测试环境和生产环境证书在速率限制上存在区别，详情见：<a href="https://letsencrypt.org/docs/">Let’s Encrypt 官方文档</a>。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_高级选项">高级选项</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">选项</th>
+<th class="tableblock halign-left valign-top">默认值</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">internalTLS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>bool - 如果值为 true, 启用内部 TLS。console 和 apiserver 均会启用 HTTPS 服务。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.ingressClassName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 使用网关的可选 Ingress 类，可选项：&#34;nginx，traefik&#34;。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.secretName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;kubesphere-tls-certs&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - Ingress 网关所使用的包含 TLS 证书的 Secrets。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">extension.ingress.ingressClassName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>用于扩展组件访问的外部 ingress 的 ingressClassName。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">extension.ingress.domainSuffix</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>用于创建扩展组件访问入口的域名后缀；根据外部 ingress 地址，它可以是 LB 主机名地址（比如 xx.com）、{node_ip}.nip.io 或内部 DNS 地址（比如 kse.local）。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">extension.ingress.httpPort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">80</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>扩展组件的 ingress 的 http 端口。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">extension.ingress.httpsPort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">443</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>扩展组件的 ingress 的 https 端口。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">certmanager.duration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2160h</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - cert-manager 生成证书的过期时间。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">certmanager.renewBefore</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">360h</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - cert-manager 刷新证书到证书过期之间的时间间隔。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">global.imageRegistry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">registry.cn-beijing.aliyuncs.com</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置全局的 KubeSphere 镜像仓库地址。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">global.tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;v4.1.3&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置全局的 KubeSphere 镜像仓库标签。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">apiserver.image.registry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 ks-apiserver 镜像仓库地址。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">apiserver.image.repository</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;kse/ks-apiserver&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 ks-apiserver 镜像名称。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">apiserver.image.tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 ks-apiserver 镜像标签。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">apiserver.nodePort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>uint16 - 设置 ks-apiserver 服务 service 的 NodePort 端口。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">console.image.registry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 ks-console 镜像仓库地址。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">console.image.repository</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;kse/ks-console&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 ks-console 镜像名称。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">console.image.tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 ks-console 镜像标签。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">console.nodePort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">30880</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>uint16 - 设置 ks-console 服务 service 的 NodePort 端口。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">controller.image.registry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 ks-controller-manager 镜像仓库地址。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">controller.image.repository</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;kse/ks-controller-manager&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 ks-controller-manager 镜像名称。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">controller.image.tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 设置 ks-controller-manager 镜像标签。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">composedApp.appSelector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 指定 annotation 或 label，以便对匹配的自制应用进行处理并更新状态。</p>
+</div>
+<div class="paragraph">
+<p>若 appSelector 值为空，则处理所有自制应用。若在命令或配置字典中添加以下内容，可指定只处理 KubeSphere 创建、管理的自制应用。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>安装 ks-core 时，在安装命令中添加：</p>
+<div class="paragraph">
+<p>--set composedApp.appSelector=&#34;kubesphere.io/creator&#34;</p>
+</div>
+</li>
+<li>
+<p>升级 ks-core 时，在升级命令中添加：</p>
+<div class="paragraph">
+<p>--set composedApp.appSelector=&#34;kubesphere.io/creator&#34;</p>
+</div>
+</li>
+<li>
+<p>安装升级完成后，在集群的 kubesphere-config 配置字典中设置为：</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">composedApp:
+  appSelector: &#34;kubesphere.io/creator&#34;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tls_配置">TLS 配置</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>选择 SSL 配置</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>KubeSphere 安全配置分为<strong>网关 SSL 配置</strong>以及<strong>内部服务 SSL 配置</strong>两个部分。其中<strong>网关 SSL 配置</strong>默认支持以下三种模式来启用 SSL/TLS，以保证访问的安全性。</p>
+</div>
+</div>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>网关 SSL 配置</p>
+<div class="openblock">
+<div class="content">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;"/>
+<col style="width: 50%;"/>
+<col style="width: 25%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">配置</th>
+<th class="tableblock halign-left valign-top">Helm Chart 选项</th>
+<th class="tableblock halign-left valign-top">是否需要 cert-manager</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KubeSphere 生成的 TLS 证书</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.tls.source=generation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">否</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Let’s Encrypt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.tls.source=letsEncrypt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">导入已有的证书</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ingress.tls.source=importation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">否</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>KubeSphere 生成的 TLS 证书：支持 cert-manager 和 helm 两种方式。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>如果 Kubernetes 集群中已安装 cert-manager，则首选使用 cert-manager 生成证书。KubeSphere 使用 cert-manager 签发并维护证书。KubeSphere 会生成自己的 CA 证书，并用该 CA 签署证书，然后由 cert-manager 管理该证书。</p>
+</li>
+<li>
+<p>如果未安装 cert-manager，则使用 helm 生成证书。在使用 helm 安装的过程中，KubeSphere 会根据设置的 <code>hostname</code> 生成 CA 和 TLS 证书。在此选项下，证书不支持自动过期轮转。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Let’s Encrypt</p>
+<div class="paragraph">
+<p>使用 Let’s Encrypt 选项必须使用 cert-manager。但是，在这种情况下，cert-manager 与 Let’s Encrypt 的特殊颁发者相结合，该颁发者执行获取 Let’s Encrypt 颁发证书所需的所有操作，包括请求和验证。此配置使用 HTTP 验证（HTTP-01），因此负载均衡器必须具有可以从互联网访问的公共 DNS 记录。</p>
+</div>
+</li>
+<li>
+<p>导入已有的证书</p>
+<div class="paragraph">
+<p>使用已有的 CA 颁发的公有或私有证书。KubeSphere 将使用该证书来保护 WebSocket 和 HTTPS 流量。在这种情况下，您必须上传名称分别为 tls.crt 和 tls.key 的 PEM 格式的证书以及相关的密钥。如果您使用私有 CA，则还必须上传该 CA 证书。这是由于您的节点可能不信任此私有 CA。</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>内部服务 SSL 配置</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>启用内部 SSL 配置之后，KubeSphere 中 Console UI 和 Apiserver 均会启用 HTTPS，内置支持 cert-manager 和 helm 生成证书。在 Kubernetes 集群已安装 cert-manager 的情况下优先使用 cert-manager 生成/管理证书，证书的 DNS 默认使用 Console UI 和 Apiserver 在 Kubernetes 集群内部的 Service DNS。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">配置</th>
+<th class="tableblock halign-left valign-top">Helm Chart 选项</th>
+<th class="tableblock halign-left valign-top">是否需要 cert-manager</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">启用内部 SSL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">internalTLS=true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">否</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>安装 cert-manager</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>若使用自己的证书文件（ingress.tls.source=importation），您可以跳过此步骤。</p>
+</div>
+<div class="paragraph">
+<p>仅在使用 KubeSphere 生成的证书（ingress.tls.source=generation）或 Let’s Encrypt 颁发的证书（ingress.tls.source=letsEncrypt）时，才需要安装 cert-manager。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># 添加 Jetstack Helm 仓库
+helm repo add jetstack https://charts.jetstack.io
+
+# 更新本地 Helm Chart 仓库缓存
+helm repo update
+
+# 安装 cert-manager Helm Chart
+helm install cert-manager jetstack/cert-manager -n cert-manager --create-namespace --set prometheus.enabled=false
+# 或
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/&lt;VERSION&gt;/cert-manager.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>安装完 cert-manager 后，检查 cert-manager 命名空间中正在运行的 Pod 来验证它是否已正确部署：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">kubectl get pods --namespace cert-manager</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>根据您选择的证书选项，通过 Helm 为 KubeSphere 开启 SSL 配置</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>启用网关 SSL 配置</p>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>KubeSphere 生成的证书</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version \
+--set ingress.enabled=true \
+--set hostname=kubesphere.my.org</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Let’s Encrypt</p>
+<div class="paragraph">
+<p>此选项使用 cert-manager 来自动请求和续订 Let’s Encrypt 证书。Let’s Encrypt 是免费的，而且是受信的 CA，因此可以提供有效的证书。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version \
+--set hostname=kubesphere.my.org \
+--set ingress.enabled=true \
+--set ingress.tls.source=letsEncrypt \
+--set letsEncrypt.email=me@example.org</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>导入外部证书</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># 导入外部证书
+kubectl create secret tls tls-ks-core-ingress --cert=tls.crt --key=tls.key -n kubesphere-system
+
+# 安装 KubeSphere
+helm upgrade --install -n kubesphere-system --create-namespace ks-core
+$chart --version $version \
+--set ingress.enabled=true \
+--set hostname=kubesphere.my.org \
+--set ingress.tls.source=importation</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>启用内部服务 SSL 配置</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install -n kubesphere-system --create-namespace ks-core
+$chart --version $version \
+--set internalTLS=true</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_配置_ratelimit_限流器">配置 ratelimit 限流器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>启用限流器之后，限流器会对所有用户的请求独立限流，主要支持以下两种方式：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>对 KubeSphere 中的每个用户设置限流速率，暂不支持独立设置每个用户的限流速率；</p>
+</li>
+<li>
+<p>对 KubeSphere 中的每个 ServiceAccount 独立设置限流速率。</p>
+</li>
+</ul>
+</div>
+<h3 id="_启用限流器" class="discrete">启用限流器</h3>
+<div class="paragraph">
+<p>启用限流器就是对 KubeSphere 中的每个用户设置限流速率。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>修改 kubesphere-system 配置文件。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">kubectl -n kubesphere-system edit cm kubesphere-system</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>新增以下内容：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">rateLimit:
+  enable: true   # 启用限流器
+  driver: memory # 内存模式
+  QPS: 40.0      # 令牌恢复速率
+  burst: 80      # 令牌桶容量</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>重启 ks-apiserver。</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">kubectl -n kubesphere-system rollout restart deploy ks-apiserver</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="_设置_serviceaccount_限流器" class="discrete">设置 ServiceAccount 限流器</h3>
+<div class="paragraph">
+<p>设置前，您需要按照上一步启用限流器。然后执行以下命令对 ServiceAccount 设置限流速率。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">kubectl -n &lt;Namespace&gt; patch serviceaccounts.kubesphere.io &lt;ServiceAccount&gt; --type merge -p &#39;{&#34;metadata&#34;: {&#34;annotations&#34;: {&#34;kubesphere.io/ratelimiter-qps&#34;: &#34;20.0&#34;, &#34;kubesphere.io/ratelimiter-burst&#34;: &#34;40&#34;}}}&#39;</code></pre>
+</div>
+</div>
+<h3 id="_参数说明" class="discrete">参数说明</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 60%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">选项</th>
+<th class="tableblock halign-left valign-top">默认值</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rateLimit.enable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>bool - 启用限流器。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rateLimit.driver</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">memory</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>string - 限流器存储类型，可选项：&#34;memory&#34;。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rateLimit.QPS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5.0</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>float32 - 限流器令牌桶算法中每秒恢复的令牌数。</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rateLimit.burst</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>int - 限流器令牌桶算法中令牌桶的最大容量。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch admon note">
+<colgroup>
+<col style="width: 100%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>令牌的恢复速率 QPS 建议设置为桶容量 burst 的一半。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+    
+
+  </div>
+  <div class="post-footer">
+    <div class="post-prev">
+    </div>
+    <div class="post-next">
+    </div>
+  </div>
+  <div class="post-back-to-top">
+    <span class="icon-up_3_fill"></span>
+  </div>
+</div>
+<div class="post-placeholder"><div class="post-menu">
+  <div class="post-menu-title">本页目录</div>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_kubesphere_helm_chart_选项">KubeSphere Helm Chart 选项</a>
+      <ul>
+        <li><a href="#_常用选项">常用选项</a></li>
+        <li><a href="#_高级选项">高级选项</a></li>
+      </ul>
+    </li>
+    <li><a href="#_tls_配置">TLS 配置</a></li>
+    <li><a href="#_配置_ratelimit_限流器">配置 ratelimit 限流器</a></li>
+  </ul>
+</nav>
+</div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+    </body><script src="/js/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script src="/js/jquery.tmpl.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/search/jquery.mark.min.js"></script>
+
+<script type="text/javascript" src="/js/common.0804ad48c7d18e84f98d818f8d8bf2606673ca5f9e919237311eff97b31b98061da1f72f95c4177ed55c843aa7b63025f5154d4651b46f49640309d80ba9972d.js" integrity="sha512-CAStSMfRjoT5jYGPjYvyYGZzyl&#43;ekZI3MR7/l7MbmAYdofcvlcQXftVchDqntjAl9RVNRlG0b0lkAwnYC6mXLQ=="></script>
+
+<script type="text/javascript" src="/js/search.d8001c3e1b66b9a0b48e0c23ad0dbfc0906f194f8925ae78a9900b960679cfa7e41cebd9efd654f84535d02cbce7c4971f226e6f07288c26c3c4560c36d7655b.js"></script>
+<script>
+  $(function() {
+    
+    hljs.highlightAll();
+    
+    $.each($('.post-content .imageblock img'), function () {
+      $(this).attr('data-mfp-src', $(this).attr('src'));
+    });
+    $('.post-content').magnificPopup({
+      disableOn: function () {
+        if ($(window).width() < 600) {
+          return false;
+        }
+        return true;
+      },
+      delegate: '.imageblock img',
+      type: 'image',
+      gallery: {
+        enabled: true,
+      },
+    });
+  });
+</script>
+</html>

@@ -1,0 +1,1129 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta name="keywords" content="[Kubernetes, {ks_product}, 安装, 准备, 持久化存储, 网络文件系统, NeonSAN CSI]">
+
+
+
+<meta name="description" content="介绍如何在生产环境中为 KubeSphere 企业版集群配置 NeonSAN CSI。">
+
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<title>配置 NeonSAN CSI - KubeSphere 企业版</title>
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/bulma-tooltip.min.css" rel="stylesheet">
+<link href="/css/atom-one-light.css" rel="stylesheet" />
+<link href="/css/magnific-popup.css" rel="stylesheet" />
+
+
+<link href="/scss/main.min.3f975d466d577a77f0f174d270294cab5515450a1619ced59c3e7370b108aeb6.css" rel="stylesheet" integrity="sha256-P5ddRm1Xenfw8XTScClMq1UVRQoWGc7VnD5zcLEIrrY=">
+
+<script src="/js/jquery-2.2.4.js"></script>
+<body
+        class="root   "
+        style=""
+        ><header>
+  <nav class="navbar">
+    
+      <a href="/" class="navbar-logo-wrapper">
+        <img class="navbar-logo" src="/images/qingcloud-logo.svg" />
+        <div class="navbar-split navbar-left-split">|</div>
+        <div class="navbar-logo-text">KubeSphere 企业版</div>
+      </a>
+    
+    <div class="navbar-nav">
+      <div
+        class="navbar-nav-item navbar-nav-version "
+        style="">
+        
+        <div class="dropdown-trigger">
+          <span class="project-version">
+            v4.1.3
+          </span>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    <div class="search navbar-search">
+      <form action="/v4.1.3/search/" method="GET">
+        <div class="control has-icons-left has-icons-right docs-search-input">
+          <span class="icon is-left">
+            <img src="/images/icons/magnifier_duotone.svg" />
+          </span>
+          <input
+            class="input"
+            name="q"
+            type="input"
+            placeholder="请输入关键字快速获取帮助"
+            autocomplete="off"
+          />
+          <span class="icon is-right"> </span>
+        </div>
+        <img class="clear-search-input" src="/images/icons/close_duotone.svg" />
+      </form>
+      <div class="search-result navbar-search-result">
+        <div class="search-result-loading"></div>
+        <div class="search-result-content"></div>
+        <div class="search-result-none">
+          没有找到搜索结果， 请更换关键词重新搜索
+        </div>
+      </div>
+    </div>
+    
+  </nav>
+</header><script id="search-result-total-template" type="text/x-js-template">
+  <div class="search-result-total">
+    共为您找到 ${count} 个结果
+  </div>
+</script>
+
+<script id="search-result-item-template" type="text/x-js-template">
+  <div class="search-result-content-item">
+    <div class="search-result-content-item-title">
+      <a href="${href}">${title}</a>
+    </div>
+    <div class="search-result-content-item-content">
+      ${content}
+    </div>
+    <div class="search-result-content-item-ref">
+      <ul class="content-breadcrumb">
+      </ul>
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="search-breadcrumb-template" type="text/x-js-template">
+  <li class="icon-slash_fill">
+    <a href="${href}">${title}</a>
+  </li>
+</script>
+
+<script id="search-result-total-template" type="text/x-js-template">
+  <div class="search-result-total">
+    共为您找到 ${count} 个结果
+  </div>
+</script>
+<script id="search-result-page-template" type="text/x-js-template">
+  <nav class="search-result-pagination pagination is-centered">
+    <a class="pagination-previous icon-chevron_left_fill"></a>
+    <a class="pagination-next icon-chevron_right_fill"></a>
+    <ul class="pagination-list">
+    </ul>
+  </nav>
+</script>
+<div class="container">
+
+  
+
+
+  
+    
+  
+
+
+<aside class="sidebar-wrapper">
+  <div class="sidebar-drag"></div>
+  <div class="sidebar">
+    
+      <div class="sidebar-title" >
+        <a href="/v4.1.3/">
+          
+            KubeSphere 企业版
+        </a>
+        
+      </div>
+      
+    
+    <nav class="sidebar-menu">
+      
+        
+        <ul>
+  
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item active ">
+            <a href="/v4.1.3/03-installation-and-upgrade/">安装指南</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_up_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/">准备工作</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/01-supported-k8s/">环境要求</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/03-configure-high-availability/">配置高可用性</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/">配置外部持久化存储</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/01-configure-storage-devices-on-cloud/">配置云上存储设备</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/04-configure-neosan-csi/">配置 NeonSAN CSI</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/05-configure-nfs/">配置 NFS</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/07-configure-opensource-storage/">配置开源存储系统</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item active ">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/">安装 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_up_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/">在线安装 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/">离线安装 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/">激活 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/05-appendix/">附录：KubeSphere Core 高级配置</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/">升级 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/03-upgrade-kubesphere/05-appendix-ks-core/">附录 1：ks-core Helm Chart 升级参数</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/">卸载 KubeSphere 企业版</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/01-uninstall-kubesphere-only/">仅卸载 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/04-uninstall-kubesphere/02-uninstall-kubernetes-and-kubesphere/">卸载 Kubernetes 和 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/">添加和删除集群节点</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
+          </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/01-add-cluster-nodes/">添加集群节点</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/02-delete-cluster-nodes/">删除集群节点</a>
+          </li>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+</ul>
+        
+      
+    
+  
+    
+  
+</ul>
+      
+    </nav>
+
+  </div>
+</aside>
+<div class="content-card-wrapper">
+  <div class="content-card">
+    <div class="content-wrapper"><ul class="content-breadcrumb">
+      <li class="icon-slash_fill"><a href="/v4.1.3" data-url="/v4.1.3">KubeSphere 企业版</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade" data-url="/v4.1.3/03-installation-and-upgrade">安装指南</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade/01-preparations" data-url="/v4.1.3/03-installation-and-upgrade/01-preparations">准备工作</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage" data-url="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage">配置外部持久化存储</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/04-configure-neosan-csi" data-url="/v4.1.3/03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/04-configure-neosan-csi">配置 NeonSAN CSI</a></li></ul><div class="post-wrapper"><div class="post">
+  <h1 class="post-title">
+    配置 NeonSAN CSI</h1>
+  <div class="post-info">
+    <div class="post-date">
+      更新时间：2025-04-23 06:23:46
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+  </div><div class="post-menu">
+  <div class="post-menu-title">本页目录</div>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_前提条件">前提条件</a></li>
+    <li><a href="#_操作步骤">操作步骤</a>
+      <ul>
+        <li><a href="#_在线安装_neonsan_csi">在线安装 NeonSAN CSI</a></li>
+        <li><a href="#_离线安装_neonsan_csi">离线安装 NeonSAN CSI</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div><div class="post-content">
+    
+      
+      
+<div class="paragraph">
+<p>NeonSAN 是青云的一款企业级分布式块存储系统，NeonSAN CSI 是 NeonSAN 团队面向 Kubernetes 提供的存储插件，具有在 Kubernetes 平台上动态创建持久存储卷的能力。</p>
+</div>
+<div class="paragraph">
+<p>本节介绍如何在生产环境中为 KubeSphere 企业版集群配置 NeonSAN CSI。</p>
+</div>
+<div class="sect1">
+<h2 id="_前提条件">前提条件</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>您已经成功部署 NeonSAN v2.2.0 及以上版本，且容器集群的每个节点都已安装 QBD 与 NeonSAN 连通。具体操作请咨询青云科技官方解决方案专家或交付服务专家。</p>
+</li>
+<li>
+<p>您已经安装 Kubernetes v1.16 及其以上版本。</p>
+</li>
+<li>
+<p>您已经在容器集群的 master 节点安装了 Helm。本节以 Helm 3 为例。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_操作步骤">操作步骤</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_在线安装_neonsan_csi">在线安装 NeonSAN CSI</h3>
+<div class="paragraph">
+<p>在线安装适用于容器集群能够访问外网的情况。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>执行以下命令添加 Helm 仓库，如 <a href="https://charts.kubesphere.io/test。" class="bare">https://charts.kubesphere.io/test。</a></p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ helm repo add ks-test https://charts.kubesphere.io/test
+&#34;ks-test&#34; has been added to your repositories</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令查看仓库是否添加成功。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ helm repo list
+NAME        URL
+ks-test     https://charts.kubesphere.io/test</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令更新仓库的 Chart 列表。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ helm repo update</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令在仓库中查找 NeonSAN CSI 的安装包。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ helm search repo neonsan
+NAME                CHART VERSION   APP VERSION DESCRIPTION
+ks-test/csi-neonsan 1.2.2           1.2.0       A Helm chart for NeonSAN CSI Driver</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>查看 Master 节点上安装的 qbd 版本。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ qbd -v
+Package Version:       2.2.0-336092c-202202101432-ubuntu2004
+Loaded Module Version: 2.2.0-336092c-202209010306-testlangchaor01n01
+NeonSAN Static Library Version: 3.0.0-092498bf
+NeonSAN Protocol Version: 1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令安装 NeonSAN CSI。根据 Master 节点操作系统上安装的 qbd 版本，设置参数 <strong>driver.repository</strong>，例如如果查询到的 qbd 版本为 2.2.0，则命令里的参数为 <strong>driver.repository=&#34;csiplugin/csi-neonsan-qbd2.2.0&#34;</strong>。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ helm install csi-neonsan ks-test/csi-neonsan --namespace kube-system --set driver.tag=&#34;v1.2.3&#34; --set sc.rep_count=2 --set driver.repository=&#34;csiplugin/csi-neonsan-qbd2.2.0&#34;
+NAME: csi-neonsan
+LAST DEPLOYED: Fri Nov 20 10:28:32 2020
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令检查 NeonSAN CSI 是否安装成功。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ helm list -n kube-system
+NAME                    NAMESPACE   REVISION    UPDATED                                 STATUS      CHART                           APP VERSION
+csi-neonsan             kube-system 1           2020-11-20 10:28:32.240990384 +0800 CST deployed    csi-neonsan-1.2.2               1.2.0</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>检查 pod 是否在 Running 状态。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ kubectl get pod -n kube-system | grep csi-neonsan
+   kube-system                    csi-neonsan-controller-75dc5cbcff-6gk54                5/5     Running     0          38s
+   kube-system                    csi-neonsan-node-8vd8l                                 2/2     Running     0          38s
+   kube-system                    csi-neonsan-node-dxk2z                                 2/2     Running     0          38s
+   kube-system                    csi-neonsan-node-mp2b2                                 2/2     Running     0          38s</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>检查是否所有 NeonSAN CSI 组件运行正常。</p>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>当 <strong>READY</strong> 取值等于 <strong>AVAILABLE</strong> 取值时，csi-neonsan-controller 正常。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ kubectl -n kube-system get deployments.apps  csi-neonsan-controller
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+csi-neonsan-controller   1/1     1            1           66m</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>当 <strong>DESIRED</strong> 取值等于 <strong>READY</strong> 和 <strong>AVAILABLE</strong> 取值时，csi-neonsan-node 正常。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ kubectl -n kube-system get daemonsets.apps csi-neonsan-node
+NAME               DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+      csi-neonsan-node   3         3         3       3            3           &lt;none&gt;          66m</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>检查存储类是否安装。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ kubectl get storageclass
+NAME              PROVISIONER                            RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+csi-neonsan       neonsan.csi.qingstor.com               Delete          Immediate              true                   2m56s</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>查看存储类所使用的存储池。此存储池必须在 NeonSAN 中存在, 否则无法使用此存储类创建存储卷。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ kubectl get storageclass csi-neonsan -o yaml | grep pool_name
+pool_name: kube</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>登陆 NeonSAN 服务器, 查看存储类所使用的存储池是否存在，如不存在，请使用 <strong>neonsan create_pool</strong> 命令创建存储池。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ neonsan list_pool -pool kube -detail
+Pool Count:  1
++----------+------+---------------------------+
+|    ID    | NAME |       CREATED TIME        |
++----------+------+---------------------------+
+| 33554432 | kube | 2020-08-07T14:53:52+08:00 |
++----------+------+---------------------------+</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_离线安装_neonsan_csi">离线安装 NeonSAN CSI</h3>
+<div class="paragraph">
+<p>离线安装适用于容器集群无法访问外网的情况。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>在本机上，下载 NeonSAN CSI 安装包，并安装包拷贝至集群 Master 节点。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ helm repo add ks-test https://charts.kubesphere.io/test
+&#34;ks-test&#34; has been added to your repositories
+$ helm pull ks-test/csi-neonsan
+$ ls -l csi-neonsan*.tgz
+-rw-r--r--. 1 root root 5196 Nov 20 13:13 csi-neonsan-1.2.2.tgz</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令查看 NeonSAN CSI 所需要的所有镜像文件。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ helm show values ks-test/csi-neonsan
+driver:
+  repository: csiplugin/csi-neonsan
+  tag: v1.2.0
+  node:
+    repository: csiplugin/csi-neonsan-ubuntu
+    tag: v1.2.0
+provisioner:
+  repository: csiplugin/csi-provisioner
+  tag: v1.5.0
+  volumeNamePrefix: pvc
+attacher:
+  repository: csiplugin/csi-attacher
+  tag: v2.1.1
+resizer:
+  repository: csiplugin/csi-resizer
+  tag: v0.4.0
+snapshotter:
+  repository: csiplugin/csi-snapshotter
+  tag: v2.0.1
+registrar:
+  repository: csiplugin/csi-node-driver-registrar
+  tag: v1.2.0</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>使用 Docker 将所有镜像下载到本地并打包，或上传至内网仓库（如 harbor）中。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">docker pull csiplugin/csi-neonsan:v1.2.0
+docker pull csiplugin/csi-neonsan-ubuntu:v1.2.0
+docker pull csiplugin/csi-provisioner:v1.5.0
+docker pull csiplugin/csi-attacher:v2.1.1
+docker pull csiplugin/csi-resizer:v0.4.0
+docker pull csiplugin/csi-snapshotter:v2.0.1
+docker pull csiplugin/csi-node-driver-registrar:v1.2.0</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">docker save csiplugin/csi-neonsan:v1.2.0 \
+  csiplugin/csi-neonsan-ubuntu:v1.2.0 \
+  csiplugin/csi-provisioner:v1.5.0 \
+  csiplugin/csi-attacher:v2.1.1 \
+  csiplugin/csi-resizer:v0.4.0 \
+  csiplugin/csi-snapshotter:v2.0.1 \
+  csiplugin/csi-node-driver-registrar:v1.2.0 \
+  -o neonsan-csi-images.tar</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令将镜像包上传至集群所有节点的目录，如 <strong>/tmp</strong> 目录下，解压并安装。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ scp neonsan-csi-images.tar user@node1:/tmp/
+scp neonsan-csi-images.tar user@node2:/tmp/
+...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ tar -xvf /tmp/neonsan-csi-images.tar -C /</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令检查安装是否完成。如果您看到所有的 NeonSAN CSI 镜像已经在列表中，那么说明安装成功。</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ docker images</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>参考<a href="#_在线安装_neonsan_csi">在线安装</a>中步骤 8 - 12 执行安装后检查。</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>NeonSAN CSI 安装成功后，您可以在 KubeSphere 企业版控制台上的<strong>存储</strong>区域查看。</p>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+    
+
+  </div>
+  <div class="post-footer">
+    <div class="post-prev">
+    </div>
+    <div class="post-next">
+    </div>
+  </div>
+  <div class="post-back-to-top">
+    <span class="icon-up_3_fill"></span>
+  </div>
+</div>
+<div class="post-placeholder"><div class="post-menu">
+  <div class="post-menu-title">本页目录</div>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_前提条件">前提条件</a></li>
+    <li><a href="#_操作步骤">操作步骤</a>
+      <ul>
+        <li><a href="#_在线安装_neonsan_csi">在线安装 NeonSAN CSI</a></li>
+        <li><a href="#_离线安装_neonsan_csi">离线安装 NeonSAN CSI</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+    </body><script src="/js/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script src="/js/jquery.tmpl.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/search/jquery.mark.min.js"></script>
+
+<script type="text/javascript" src="/js/common.0804ad48c7d18e84f98d818f8d8bf2606673ca5f9e919237311eff97b31b98061da1f72f95c4177ed55c843aa7b63025f5154d4651b46f49640309d80ba9972d.js" integrity="sha512-CAStSMfRjoT5jYGPjYvyYGZzyl&#43;ekZI3MR7/l7MbmAYdofcvlcQXftVchDqntjAl9RVNRlG0b0lkAwnYC6mXLQ=="></script>
+
+<script type="text/javascript" src="/js/search.d8001c3e1b66b9a0b48e0c23ad0dbfc0906f194f8925ae78a9900b960679cfa7e41cebd9efd654f84535d02cbce7c4971f226e6f07288c26c3c4560c36d7655b.js"></script>
+<script>
+  $(function() {
+    
+    hljs.highlightAll();
+    
+    $.each($('.post-content .imageblock img'), function () {
+      $(this).attr('data-mfp-src', $(this).attr('src'));
+    });
+    $('.post-content').magnificPopup({
+      disableOn: function () {
+        if ($(window).width() < 600) {
+          return false;
+        }
+        return true;
+      },
+      delegate: '.imageblock img',
+      type: 'image',
+      gallery: {
+        enabled: true,
+      },
+    });
+  });
+</script>
+</html>
