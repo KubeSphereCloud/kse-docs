@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DevOps on KubeSphere 企业版</title>
+    <link>/v4.1.3/11-use-extensions/01-devops/</link>
+    <description>Recent content in DevOps on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.3/11-use-extensions/01-devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概述</title>
+      <link>/v4.1.3/11-use-extensions/01-devops/01-overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/01-devops/01-overview/</guid>
+      <description>DevOps 提供一系列持续集成 (CI) 和持续交付 (CD) 工具，可以使 IT 和软件开发团队之间的流程实现自动化。在 CI/CD 工作流中，每次集成都通过自动化构建来验证，包括编码、发布和测试，从而帮助开发者提前发现集成错误，团队也可以快速、安全、可靠地将内部软件交付到生产环境。
+不过，传统的 Jenkins Controller-Agent 架构（即多个 Agent 为一个 Controller 工作）有以下不足。
+如果 Controller 宕机，整个 CI/CD 流水线会崩溃。
+资源分配不均衡，一些 Agent 的流水线任务 (Job) 出现排队等待，而其他 Agent 处于空闲状态。
+不同的 Agent 可能配置环境不同，并需要使用不同的编码语言。这种差异会给管理和维护带来不便。
+DevOps 组件支持源代码管理工具，例如 GitHub、Git 和 Bitbucket，支持通过图形编辑面板 (Jenkinsfile out of SCM) 构建 CI/CD 流水线，或者从代码仓库 (Jenkinsfile in SCM) 创建基于 Jenkinsfile 的流水线。
+功能 DevOps 组件提供以下功能：
+独立的 DevOps 项目，提供访问可控的 CI/CD 流水线。
+开箱即用的 DevOps 功能，无需复杂的 Jenkins 配置。
+基于 Jenkinsfile 的流水线，提供一致的用户体验，支持多个代码仓库。
+图形编辑面板，用于创建流水线，学习成本低。
+强大的工具集成机制，例如 SonarQube，用于代码质量检查。</description>
+    </item>
+    
+  </channel>
+</rss>

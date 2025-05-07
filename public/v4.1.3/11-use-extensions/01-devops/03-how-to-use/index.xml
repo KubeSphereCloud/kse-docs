@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>使用 DevOps on KubeSphere 企业版</title>
+    <link>/v4.1.3/11-use-extensions/01-devops/03-how-to-use/</link>
+    <description>Recent content in 使用 DevOps on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.3/11-use-extensions/01-devops/03-how-to-use/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建和管理 DevOps 项目</title>
+      <link>/v4.1.3/11-use-extensions/01-devops/03-how-to-use/01-devops-project-management/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/01-devops/03-how-to-use/01-devops-project-management/</guid>
+      <description>本节演示如何创建和管理 DevOps 项目。
+前提条件 已创建一个企业空间和一个用户 (project-admin)，需要邀请该用户至该企业空间并赋予 workspace-self-provisioner 角色。有关更多信息，请参阅控制用户权限。
+KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
+创建 DevOps 项目 以 project-admin 用户登录 KubeSphere 企业版 Web 控制台，进入一个企业空间。
+点击 DevOps 项目，然后点击创建。
+输入 DevOps 项目的基本信息，然后点击确定。
+名称：DevOps 项目的简明名称，便于用户识别，例如 demo-devops。
+别名：DevOps 项目的别名。
+描述信息：DevOps 项目的简要介绍。
+集群设置：在当前版本中，DevOps 项目无法同时跨多个集群运行。如果有多个集群，则必须选择一个集群来运行 DevOps 项目。
+DevOps 项目创建后，会显示在 DevOps 项目页面的列表中。
+查看 DevOps 项目 点击刚刚创建的 DevOps 项目，转到其详情页面。
+在 DevOps 项目中，用户可以创建 CI/CD 流水线、凭证，以及管理项目成员和角色。根据权限不同，用户在 DevOps 项目中可以执行的操作也不同。
+流水线
+流水线是一系列插件的集合，支持持续地集成、测试和构建代码。流水线将持续集成 (CI) 和持续交付 (CD) 进行结合，提供精简的工作流，使您的代码可以自动交付给任何目标。
+凭证
+具有相应权限的 DevOps 项目用户可以为流水线配置凭证，以便与外部环境进行交互。用户在 DevOps 项目中添加凭证后，DevOps 项目就可以使用这些凭证与第三方应用程序（例如 GitHub、GitLab 和 Docker Hub）进行交互。有关更多信息，请参阅凭证管理。</description>
+    </item>
+    
+    <item>
+      <title>使用 GitOps 实现应用持续部署</title>
+      <link>/v4.1.3/11-use-extensions/01-devops/03-how-to-use/03-use-gitops-for-continous-deployment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/01-devops/03-how-to-use/03-use-gitops-for-continous-deployment/</guid>
+      <description>KubeSphere 企业版引入了一种为云原生应用实现持续部署的理念 – GitOps。GitOps 的核心思想是拥有一个 Git 仓库，并将应用系统的申明式基础架构和应用程序存放在 Git 仓库中进行版本控制。GitOps 结合 Kubernetes 能够利用自动交付流水线将更改应用到指定的任意多个集群中，从而解决跨云部署的一致性问题。
+本文档演示如何创建持续部署以实现应用的部署。
+前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
+已有一个企业空间、一个 DevOps 项目和一个用户 (例如 project-regular)，并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅角色和成员管理。
+导入代码仓库 以 project-regular 用户登录 KubeSphere 企业版 Web 控制台。
+点击企业空间管理并进入您的 DevOps 项目。
+在左侧导航栏，点击代码仓库。
+在右侧的代码仓库页面，点击添加。
+在导入代码仓库对话框，输入代码仓库名称，如 open-podcasts，点击选择代码仓库。您也可以为代码仓库设置别名和添加描述信息。
+在选择代码仓库对话框，点击 Git，在代码仓库地址区域，输入代码仓库地址，如 https://github.com/kubesphere-sigs/open-podcasts，点击确定。
+说明 此处导入的是公共仓库，因此不需要创建凭证。如果您添加的是私有仓库，则需要创建凭证。有关如何添加凭证的更多信息，请参阅凭证管理。
+创建持续部署 在左侧导航栏，点击持续部署。
+在右侧的持续部署页面，点击创建。
+在基本信息页签，输入持续部署名称，如 open-podcasts。在部署位置区域，选择持续部署的部署集群和项目。点击下一步。
+在代码仓库设置页签，选择上一步创建的代码仓库，设置代码仓库的分支或标签以及 Kustomization 清单文件路径。点击下一步。
+参数 描述 修订版本
+Git 仓库中的 commit ID、分支或标签。例如，master, v1.2.0, 0a1b2c3 或 HEAD。
+清单文件路径
+设置清单文件路径。例如，config/default。
+在同步策略区域，根据需要选择自动同步或手动同步。</description>
+    </item>
+    
+    <item>
+      <title>导入代码仓库</title>
+      <link>/v4.1.3/11-use-extensions/01-devops/03-how-to-use/04-import-code-repositories/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/11-use-extensions/01-devops/03-how-to-use/04-import-code-repositories/</guid>
+      <description>KubeSphere 企业版支持导入 GitHub、GitLab、Bitbucket 或其它基于 Git 的代码仓库，如 Gitee。下面以 Github 仓库为例，展示如何导入代码仓库。
+前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
+已有一个企业空间、一个 DevOps 项目和一个用户 (例如 project-regular)，并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅角色和成员管理。
+操作步骤 以 project-regular 用户登录 KubeSphere 企业版 Web 控制台。
+点击企业空间管理并进入您的 DevOps 项目。
+在左侧导航栏，点击代码仓库。
+在右侧的代码仓库页面，点击添加。
+在导入代码仓库对话框，输入代码仓库名称，点击选择代码仓库。您也可以为代码仓库设置别名和添加描述信息。
+下表列举了支持导入的代码仓库和参数设置项。以下步骤以 GitHub 为例。
+参数 描述 GitHub
+凭证：选择访问代码仓库的凭证。
+GitLab
+GitLab 服务器地址：选择 GitLab 服务器地址，默认值为 https://gitlab.com。
+项目组/所有者：输入 GitLab 账号。
+凭证：选择访问代码仓库的凭证。
+代码仓库：选择代码仓库。
+Bitbucket
+Bitbucket 服务器地址：设置 Bitbucket 服务器地址。
+凭证：选择访问代码仓库的凭证。
+Git
+代码仓库地址：输入代码仓库地址，如 https://gitee.com。
+凭证：选择访问代码仓库的凭证。
+说明 如需使用 GitLab 私有仓库，请参阅使用 GitLab 创建多分支流水线。</description>
+    </item>
+    
+  </channel>
+</rss>
