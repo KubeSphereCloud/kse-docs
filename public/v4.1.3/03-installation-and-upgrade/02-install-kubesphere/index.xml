@@ -49,6 +49,25 @@
     </item>
     
     <item>
+      <title>配置 KubeSphere 高可用性</title>
+      <link>/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/04-configure-ks-high-availability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/04-configure-ks-high-availability/</guid>
+      <description>本节介绍如何配置 KubeSphere 的高可用性。
+注意 KubeSphere 的高可用性建立在 Kubernetes 控制平面节点高可用的基础上，因此需先确保 Kubernetes 为高可用部署。
+1. 高可用架构概述 KubeSphere 支持高可用部署，可通过 ha.enabled 开启。
+在高可用模式下，Redis 支持两种部署方式：
+Redis 单实例模式
+Redis 高可用模式 (Redis HA)
+2. 版本兼容性 KubeSphere 高可用配置适用于 KubeSphere 企业版 v4.1.2 及之后更新的版本。
+3. KubeSphere 高可用配置 3.1 启用高可用模式 创建 values.yaml 文件，添加如下配置。
+ha: enabled: true 4. Redis 配置 根据需求选择 Redis 单实例模式或 Redis 高可用模式，在上一步创建的 values.yaml 文件中继续添加对应的配置。
+4.1 Redis 单实例模式 适用于小型集群，配置简单，资源消耗较少。
+redis: port: 6379 replicaCount: 1 image: repository: kubesphereio/redis tag: 7.2.4-alpine pullPolicy: IfNotPresent persistentVolume: enabled: true size: 2Gi 4.</description>
+    </item>
+    
+    <item>
       <title>附录：KubeSphere Core 高级配置</title>
       <link>/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/05-appendix/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

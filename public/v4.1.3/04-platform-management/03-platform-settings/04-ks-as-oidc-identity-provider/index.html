@@ -7,15 +7,15 @@
 <html lang="zh"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-<meta name="keywords" content="[Kubernetes, KubeSphere, CAS, 身份提供者, 身份验证]">
+<meta name="keywords" content="[Kubernetes, KubeSphere, OIDC, 身份提供者]">
 
 
 
-<meta name="description" content="了解如何在 KubeSphere 上配置 CAS 服务。">
+<meta name="description" content="了解如何配置 OIDC 身份提供者。">
 
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<title>CAS 身份验证 - KubeSphere 企业版</title>
+<title>作为 OIDC 身份提供者 - KubeSphere 企业版</title>
 <link href="/css/bulma.css" rel="stylesheet">
 <link href="/css/bulma-tooltip.min.css" rel="stylesheet">
 <link href="/css/atom-one-light.css" rel="stylesheet" />
@@ -488,9 +488,41 @@
       
       
       
-          <li class="sidebar-item">
-            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/03-configure-high-availability/">配置高可用性</a>
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a >配置高可用性</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
           </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/02-configure-high-availability/02-configure-k8s-high-availability/">配置 Kubernetes 高可用性</a>
+          </li>
+        
+      
+    
+  
+</ul>
         
       
     
@@ -633,6 +665,12 @@
                 
               
             
+              
+                
+                  
+                
+              
+            
             
               <span
                 class="menu-switch-icon icon-caret_down_fill">
@@ -674,6 +712,18 @@
       
           <li class="sidebar-item">
             <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/">激活 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/04-configure-ks-high-availability/">配置 KubeSphere 高可用性</a>
           </li>
         
       
@@ -997,6 +1047,12 @@
                 
               
             
+              
+                
+                  
+                
+              
+            
             
               <span
                 class="menu-switch-icon icon-caret_up_fill">
@@ -1124,8 +1180,8 @@
       
         
           <li
-            class="sidebar-item active ">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/">外部身份验证</a>
+            class="sidebar-item collapsed ">
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/">外部身份验证</a>
             
             
               
@@ -1154,7 +1210,7 @@
             
             
               <span
-                class="menu-switch-icon icon-caret_up_fill">
+                class="menu-switch-icon icon-caret_down_fill">
               </span>
             
           </li>
@@ -1168,7 +1224,7 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/01-set-up-external-authentication/">配置外部身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/01-set-up-external-authentication/">配置外部身份验证</a>
           </li>
         
       
@@ -1180,7 +1236,7 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/03-use-ldap/">LDAP/LDAPS 身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/03-use-ldap/">LDAP/LDAPS 身份验证</a>
           </li>
         
       
@@ -1192,7 +1248,7 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/05-use-oidc/">OIDC 身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/05-use-oidc/">OIDC 身份验证</a>
           </li>
         
       
@@ -1204,13 +1260,25 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/07-use-cas/">CAS 身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/07-use-cas/">CAS 身份验证</a>
           </li>
         
       
     
   
 </ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/04-ks-as-oidc-identity-provider/">作为 OIDC 身份提供者</a>
+          </li>
         
       
     
@@ -16889,13 +16957,12 @@
       <li class="icon-slash_fill"><a href="/v4.1.3" data-url="/v4.1.3">KubeSphere 企业版</a></li>
       <li class="icon-slash_fill"><a href="/v4.1.3/04-platform-management" data-url="/v4.1.3/04-platform-management">平台管理</a></li>
       <li class="icon-slash_fill"><a href="/v4.1.3/04-platform-management/03-platform-settings" data-url="/v4.1.3/04-platform-management/03-platform-settings">平台设置</a></li>
-      <li class="icon-slash_fill"><a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication" data-url="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication">外部身份验证</a></li>
-      <li class="icon-slash_fill"><a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/07-use-cas" data-url="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/07-use-cas">CAS 身份验证</a></li></ul><div class="post-wrapper"><div class="post">
+      <li class="icon-slash_fill"><a href="/v4.1.3/04-platform-management/03-platform-settings/04-ks-as-oidc-identity-provider" data-url="/v4.1.3/04-platform-management/03-platform-settings/04-ks-as-oidc-identity-provider">作为 OIDC 身份提供者</a></li></ul><div class="post-wrapper"><div class="post">
   <h1 class="post-title">
-    CAS 身份验证</h1>
+    作为 OIDC 身份提供者</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2025-04-23 06:23:46
+      更新时间：2025-05-13 02:11:10
     </div>
     
     
@@ -16910,10 +16977,10 @@
   <div class="post-menu-title">本页目录</div>
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#_操作步骤">操作步骤</a></li>
-    <li><a href="#_cas_基本配置">CAS 基本配置</a></li>
-    <li><a href="#_cas_完整配置">CAS 完整配置</a></li>
-    <li><a href="#_cas_参数说明">CAS 参数说明</a></li>
+    <li><a href="#_基于_oidc_实现_sso_的基本流程">基于 OIDC 实现 SSO 的基本流程</a></li>
+    <li><a href="#_部署kubesphere企业版_v4_1_3">部署 KubeSphere 企业版 v4.1.3</a></li>
+    <li><a href="#_新建_oauth_client">新建 OAuth Client</a></li>
+    <li><a href="#_oidc_配置参考">OIDC 配置参考</a></li>
   </ul>
 </nav>
 </div><div class="post-content">
@@ -16921,38 +16988,55 @@
       
       
 <div class="paragraph">
-<p>KubeSphere 支持通过 Central Authentication Service (CAS) 进行外部身份验证，以便使用 CAS 的用户名和密码登录 KubeSphere 企业版 Web 控制台。</p>
-</div>
-<div class="paragraph">
-<p>平台管理员可以通过 secret（保密字典）配置 CAS 身份验证。</p>
+<p>OpenID Connect 是一种基于 OAuth 2.0 规范框架（IETF RFC 6749 和 6750）的可互操作的身份验证协议。KubeSphere v4.1.3 实现了 <a href="https://openid.net/developers/how-connect-works/">OpenID Connect</a> 协议中的授权码认证流程  <a href="https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth">Authorization Code Flow</a>，用于扩展组件向上对接 KubeSphere 的账户系统。本教程使用 <a href="https://goharbor.io/">Harbor</a> 作为 OIDC 客户端，配置完成后将使用 KubeSphere 账户登录 Harbor。</p>
 </div>
 <div class="sect1">
-<h2 id="_操作步骤">操作步骤</h2>
+<h2 id="_基于_oidc_实现_sso_的基本流程">基于 OIDC 实现 SSO 的基本流程</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p><span class="image"><img src="/images/ks-qkcp/zh/v4.2.0/oidc-flow.png" alt="oidc flow" width="70%"/></span></p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>以具有 <strong>platform-admin</strong> 角色的用户登录 KubeSphere 企业版 Web 控制台。</p>
+<p>终端用户通过浏览器访问网站或网络应用。</p>
 </li>
 <li>
-<p>点击<strong>集群管理</strong>，并进入 host 集群。</p>
+<p>终端用户点击登录并输入用户名和密码。</p>
 </li>
 <li>
-<p>在左侧导航栏选择<strong>配置 &gt; 保密字典</strong>。</p>
+<p>依赖方（客户端）向 OpenID 提供商（OP）发送请求。</p>
 </li>
 <li>
-<p>在页面点击<strong>创建</strong>。</p>
+<p>OpenID 提供商验证用户身份并获取授权。</p>
 </li>
 <li>
-<p>在<strong>创建保密字典</strong>对话框，点击右上角的<strong>编辑 YAML</strong> 开关，使用 yaml 创建保密字典。</p>
+<p>OpenID 提供商返回身份令牌（Identity Token），通常会同时返回访问令牌（Access Token）。</p>
 </li>
 <li>
-<p>按照以下示例及参数说明修改 yaml 文件，配置完成后，点击<strong>创建</strong>。</p>
+<p>依赖方可使用该访问令牌向用户设备发送请求。</p>
 </li>
 <li>
-<p>登出 KubeSphere 企业版 Web 控制台，在登录页面，点击<strong>通过 cas 登录</strong>，输入 CAS 用户名和密码进行登录。</p>
+<p>用户信息端点（UserInfo Endpoint）将返回终端用户的相关身份声明信息（Claims）。</p>
 </li>
 </ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_部署kubesphere企业版_v4_1_3">部署 KubeSphere 企业版 v4.1.3</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">chart=oci://hub.kubesphere.com.cn/kse/ks-core
+version=1.1.1
+helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version --debug --wait \
+  --set portal.hostname=172.31.17.16.nip.io \
+  --set portal.https.port=30491 \
+  --set ingress.enabled=true \
+  --set ingress.tls.enabled=true \
+  --set ingress.ingressClassName=kubesphere-router-cluster</code></pre>
+</div>
 </div>
 <table class="tableblock frame-all grid-all stretch admon note">
 <colgroup>
@@ -16966,150 +17050,149 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>多集群环境中，只需要在主集群中进行配置。</p>
+<p>应用配置前需要预先将 ks-console 以 https 方式暴露。此教程中，使用 ingress 方式暴露 ks-console。使用 KubeSphere 网关扩展组件创建集群网关，对应的 IngressClass 为 <code>kubesphere-router-cluster</code>。暴露 HTTPS 端口为 30491，将 <code>portal.https.port</code> 设置为 30491。</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_cas_基本配置">CAS 基本配置</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">apiVersion: v1
-kind: Secret
-metadata:
-  namespace: kubesphere-system  # 请勿修改
-  name: identity-provider-cas  # 确保该 Secret 名称在 Kubernetes 集群中唯一
-  labels:
-    config.kubesphere.io/type: identityprovider # 请勿修改
-    config.kubesphere.io/identityprovider: cas # 与 configuration.yaml 中的 name 字段保持一致
-type: config.kubesphere.io/identityprovider # 请勿修改
-
-stringData:
-  configuration.yaml: |
-    name: cas
-    type: CASIdentityProvider
-    mappingMethod: auto
-    hidden: false
-    disabled: false
-    displayName: &#34;cas&#34;
-    provider:
-      # 必填项
-      redirectURL: &#34;https://your-app.com/cas/callback&#34;
-      casServerURL: &#34;https://cas.example.com/cas&#34;</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_cas_完整配置">CAS 完整配置</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>以下仅展示 <code>stringData:configuration.yaml</code> 下 <code>provider</code> 部分的配置，其他部分请与 <a href="#_cas_基本配置">CAS 基本配置</a>的相应部分保持相同。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">    provider:
-      # 必填项
-      redirectURL: &#34;https://your-app.com/cas/callback&#34;
-      casServerURL: &#34;https://cas.example.com/cas&#34;
-
-      # 可选项
-      insecureSkipVerify: false
-      displayNameAttribute: &#34;displayName&#34;</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_cas_参数说明">CAS 参数说明</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>此为 <code>stringData:configuration.yaml</code> 下 <code>provider</code> 部分的参数说明。保密字典中其他部分的参数说明，请参阅<a href="../01-set-up-external-authentication/#_参数说明">配置外部身份验证</a>。</p>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;"/>
-<col style="width: 12.5%;"/>
-<col style="width: 12.5%;"/>
-<col style="width: 12.5%;"/>
-<col style="width: 37.5%;"/>
+<col style="width: 20%;"/>
+<col style="width: 80%;"/>
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">参数</th>
-<th class="tableblock halign-left valign-top">类型</th>
-<th class="tableblock halign-left valign-top">必填</th>
-<th class="tableblock halign-left valign-top">默认值</th>
 <th class="tableblock halign-left valign-top">说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>redirectURL</p>
+<p><code>portal.hostname</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>是</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CAS 客户端回调地址</p>
+<p>用于访问 KubeSphere Console 的域名或 IP（需替换为实际的节点 IP 地址）</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>casServerURL</p>
+<p><code>portal.https.port</code>
+<code>portal.http.port</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>是</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CAS 服务器的根 URL</p>
+<p>用于访问 KubeSphere Console 的端口</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>insecureSkipVerify</p>
+<p><code>ingress.enabled</code>
+<code>ingress.tls.enabled</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>bool</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>是否跳过 TLS 证书验证</p>
+<p>Ingress、TLS 配置</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>displayNameAttribute</p>
+<p><code>ingress.ingressClassName</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>用户显示名称的属性名称</p>
+<p>Ingress 对应的 IngressClass（需要使用已有的 IngressClass）</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_新建_oauth_client">新建 OAuth Client</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cat &lt;&lt; EOF | kubectl apply -f -
+apiVersion: v1
+stringData:
+  configuration.yaml: |
+    name: harbor
+    secret: password123
+    grantMethod: auto
+    scopeRestrictions:
+      - &#39;openid&#39;
+      - &#39;email&#39;
+      - &#39;profile&#39;
+    redirectURIs:
+      - https://harbor.172.31.19.17.nip.io/c/oidc/callback
+kind: Secret
+metadata:
+  name: oauthclient-harbor
+  namespace: kubesphere-system
+  labels:
+    config.kubesphere.io/type: oauthclient
+type: config.kubesphere.io/oauthclient
+EOF</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;"/>
+<col style="width: 80%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">参数</th>
+<th class="tableblock halign-left valign-top">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>metadata.name</code>
+<code>stringData.configuration.yaml.name</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OAuth Client 的 ID</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>stringData.configuration.yaml.secret</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OAuth Client 的 Secret</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>stringData.configuration.yaml.redirectURIs</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OAuth Client 支持的回调 URL 列表</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_oidc_配置参考">OIDC 配置参考</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>以 Harbor 对接 OIDC 为例
+<span class="image"><img src="/images/ks-qkcp/zh/v4.2.0/configure-harbor.png" alt="configure harbor"/></span></p>
+</div>
+<div class="paragraph">
+<p>使用 OIDC 方式登录 Harbor
+<span class="image"><img src="/images/ks-qkcp/zh/v4.2.0/harbor-login.png" alt="harbor login"/></span></p>
+</div>
+<div class="paragraph">
+<p>登录 KubeSphere Console
+<span class="image"><img src="/images/ks-qkcp/zh/v4.2.0/ks-login.png" alt="ks login"/></span></p>
+</div>
+<div class="paragraph">
+<p>首次登录，关联 Harbor 账号
+<span class="image"><img src="/images/ks-qkcp/zh/v4.2.0/first-login.png" alt="first login"/></span></p>
+</div>
 </div>
 </div>
 
@@ -17130,10 +17213,10 @@ stringData:
   <div class="post-menu-title">本页目录</div>
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#_操作步骤">操作步骤</a></li>
-    <li><a href="#_cas_基本配置">CAS 基本配置</a></li>
-    <li><a href="#_cas_完整配置">CAS 完整配置</a></li>
-    <li><a href="#_cas_参数说明">CAS 参数说明</a></li>
+    <li><a href="#_基于_oidc_实现_sso_的基本流程">基于 OIDC 实现 SSO 的基本流程</a></li>
+    <li><a href="#_部署kubesphere企业版_v4_1_3">部署 KubeSphere 企业版 v4.1.3</a></li>
+    <li><a href="#_新建_oauth_client">新建 OAuth Client</a></li>
+    <li><a href="#_oidc_配置参考">OIDC 配置参考</a></li>
   </ul>
 </nav>
 </div></div>
