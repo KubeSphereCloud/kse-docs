@@ -488,9 +488,41 @@
       
       
       
-          <li class="sidebar-item">
-            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/03-configure-high-availability/">配置高可用性</a>
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a >配置高可用性</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
           </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/02-configure-high-availability/02-configure-k8s-high-availability/">配置 Kubernetes 高可用性</a>
+          </li>
+        
+      
+    
+  
+</ul>
         
       
     
@@ -633,6 +665,12 @@
                 
               
             
+              
+                
+                  
+                
+              
+            
             
               <span
                 class="menu-switch-icon icon-caret_up_fill">
@@ -674,6 +712,18 @@
       
           <li class="sidebar-item">
             <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/">激活 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/04-configure-ks-high-availability/">配置 KubeSphere 高可用性</a>
           </li>
         
       
@@ -997,6 +1047,12 @@
                 
               
             
+              
+                
+                  
+                
+              
+            
             
               <span
                 class="menu-switch-icon icon-caret_down_fill">
@@ -1125,7 +1181,7 @@
         
           <li
             class="sidebar-item collapsed ">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/">外部身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/">外部身份验证</a>
             
             
               
@@ -1168,7 +1224,7 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/01-set-up-external-authentication/">配置外部身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/01-set-up-external-authentication/">配置外部身份验证</a>
           </li>
         
       
@@ -1180,7 +1236,7 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/03-use-ldap/">LDAP/LDAPS 身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/03-use-ldap/">LDAP/LDAPS 身份验证</a>
           </li>
         
       
@@ -1192,7 +1248,7 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/05-use-oidc/">OIDC 身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/05-use-oidc/">OIDC 身份验证</a>
           </li>
         
       
@@ -1204,13 +1260,25 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/07-use-cas/">CAS 身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/07-use-cas/">CAS 身份验证</a>
           </li>
         
       
     
   
 </ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/04-ks-as-oidc-identity-provider/">作为 OIDC 身份提供者</a>
+          </li>
         
       
     
@@ -16894,7 +16962,7 @@
     在线安装 Kubernetes 和 KubeSphere 企业版</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2025-05-06 07:46:54
+      更新时间：2025-05-13 01:29:22
     </div>
     
     
@@ -16941,7 +17009,7 @@
 <p>在生产环境中，为确保集群具有足够的计算和存储资源，建议每台集群节点配置至少 8 个 CPU 核心、16 GB 内存和 200 GB 磁盘空间。除此之外，建议在每台集群节点的 <strong>/var/lib/docker</strong>（对于 Docker）或 <strong>/var/lib/containerd</strong>（对于 containerd） 目录额外挂载至少 200 GB 磁盘空间用于存储容器运行时数据。</p>
 </li>
 <li>
-<p>在生产环境中，建议提前为 KubeSphere 企业版集群配置高可用性以避免单个控制平面节点出现故障时集群服务中断。有关更多信息，请参阅<a href="../../../03-installation-and-upgrade/01-preparations/03-configure-high-availability/">配置高可用性</a>。</p>
+<p>在生产环境中，建议提前为 KubeSphere 企业版集群配置高可用性以避免单个控制平面节点出现故障时集群服务中断。有关更多信息，请参阅<a href="../../../03-installation-and-upgrade/01-preparations/02-configure-high-availability/02-configure-k8s-high-availability/">配置高可用性</a>。</p>
 <div class="openblock">
 <div class="content">
 <table class="tableblock frame-all grid-all stretch admon note">

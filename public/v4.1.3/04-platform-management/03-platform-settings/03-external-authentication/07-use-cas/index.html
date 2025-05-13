@@ -7,15 +7,15 @@
 <html lang="zh"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-<meta name="keywords" content="[Kubernetes, KubeSphere, OIDC, 身份提供者, 身份验证]">
+<meta name="keywords" content="[Kubernetes, KubeSphere, CAS, 身份提供者, 身份验证]">
 
 
 
-<meta name="description" content="了解如何在 KubeSphere 上配置 OIDC 服务。">
+<meta name="description" content="了解如何在 KubeSphere 上配置 CAS 服务。">
 
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<title>OIDC 身份验证 - KubeSphere 企业版</title>
+<title>CAS 身份验证 - KubeSphere 企业版</title>
 <link href="/css/bulma.css" rel="stylesheet">
 <link href="/css/bulma-tooltip.min.css" rel="stylesheet">
 <link href="/css/atom-one-light.css" rel="stylesheet" />
@@ -488,9 +488,41 @@
       
       
       
-          <li class="sidebar-item">
-            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/03-configure-high-availability/">配置高可用性</a>
+        
+          <li
+            class="sidebar-item collapsed ">
+            <a >配置高可用性</a>
+            
+            
+              
+                
+                  
+                
+              
+            
+            
+              <span
+                class="menu-switch-icon icon-caret_down_fill">
+              </span>
+            
           </li>
+          
+          <ul>
+  
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/01-preparations/02-configure-high-availability/02-configure-k8s-high-availability/">配置 Kubernetes 高可用性</a>
+          </li>
+        
+      
+    
+  
+</ul>
         
       
     
@@ -633,6 +665,12 @@
                 
               
             
+              
+                
+                  
+                
+              
+            
             
               <span
                 class="menu-switch-icon icon-caret_down_fill">
@@ -674,6 +712,18 @@
       
           <li class="sidebar-item">
             <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/">激活 KubeSphere 企业版</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/04-configure-ks-high-availability/">配置 KubeSphere 高可用性</a>
           </li>
         
       
@@ -997,6 +1047,12 @@
                 
               
             
+              
+                
+                  
+                
+              
+            
             
               <span
                 class="menu-switch-icon icon-caret_up_fill">
@@ -1125,7 +1181,7 @@
         
           <li
             class="sidebar-item active ">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/">外部身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/">外部身份验证</a>
             
             
               
@@ -1168,7 +1224,7 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/01-set-up-external-authentication/">配置外部身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/01-set-up-external-authentication/">配置外部身份验证</a>
           </li>
         
       
@@ -1180,7 +1236,7 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/03-use-ldap/">LDAP/LDAPS 身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/03-use-ldap/">LDAP/LDAPS 身份验证</a>
           </li>
         
       
@@ -1192,7 +1248,7 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/05-use-oidc/">OIDC 身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/05-use-oidc/">OIDC 身份验证</a>
           </li>
         
       
@@ -1204,13 +1260,25 @@
       
       
           <li class="sidebar-item">
-            <a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/07-use-cas/">CAS 身份验证</a>
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/07-use-cas/">CAS 身份验证</a>
           </li>
         
       
     
   
 </ul>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.1.3/04-platform-management/03-platform-settings/04-ks-as-oidc-identity-provider/">作为 OIDC 身份提供者</a>
+          </li>
         
       
     
@@ -16889,13 +16957,13 @@
       <li class="icon-slash_fill"><a href="/v4.1.3" data-url="/v4.1.3">KubeSphere 企业版</a></li>
       <li class="icon-slash_fill"><a href="/v4.1.3/04-platform-management" data-url="/v4.1.3/04-platform-management">平台管理</a></li>
       <li class="icon-slash_fill"><a href="/v4.1.3/04-platform-management/03-platform-settings" data-url="/v4.1.3/04-platform-management/03-platform-settings">平台设置</a></li>
-      <li class="icon-slash_fill"><a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication" data-url="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication">外部身份验证</a></li>
-      <li class="icon-slash_fill"><a href="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/05-use-oidc" data-url="/v4.1.3/04-platform-management/03-platform-settings/05-external-authentication/05-use-oidc">OIDC 身份验证</a></li></ul><div class="post-wrapper"><div class="post">
+      <li class="icon-slash_fill"><a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication" data-url="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication">外部身份验证</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/07-use-cas" data-url="/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/07-use-cas">CAS 身份验证</a></li></ul><div class="post-wrapper"><div class="post">
   <h1 class="post-title">
-    OIDC 身份验证</h1>
+    CAS 身份验证</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2025-04-23 06:23:46
+      更新时间：2025-05-13 01:29:22
     </div>
     
     
@@ -16911,9 +16979,9 @@
   <nav id="TableOfContents">
   <ul>
     <li><a href="#_操作步骤">操作步骤</a></li>
-    <li><a href="#_oidc_基本配置">OIDC 基本配置</a></li>
-    <li><a href="#_oidc_完整配置">OIDC 完整配置</a></li>
-    <li><a href="#_oidc_参数说明">OIDC 参数说明</a></li>
+    <li><a href="#_cas_基本配置">CAS 基本配置</a></li>
+    <li><a href="#_cas_完整配置">CAS 完整配置</a></li>
+    <li><a href="#_cas_参数说明">CAS 参数说明</a></li>
   </ul>
 </nav>
 </div><div class="post-content">
@@ -16921,10 +16989,10 @@
       
       
 <div class="paragraph">
-<p>KubeSphere 支持通过 <a href="https://openid.net/connect/">OpenID Connect</a> (OIDC) 进行外部身份验证，以便使用 OIDC 的用户名和密码登录 KubeSphere 企业版 Web 控制台。</p>
+<p>KubeSphere 支持通过 Central Authentication Service (CAS) 进行外部身份验证，以便使用 CAS 的用户名和密码登录 KubeSphere 企业版 Web 控制台。</p>
 </div>
 <div class="paragraph">
-<p>平台管理员可以通过 secret（保密字典）配置 OIDC 身份验证。</p>
+<p>平台管理员可以通过 secret（保密字典）配置 CAS 身份验证。</p>
 </div>
 <div class="sect1">
 <h2 id="_操作步骤">操作步骤</h2>
@@ -16950,7 +17018,7 @@
 <p>按照以下示例及参数说明修改 yaml 文件，配置完成后，点击<strong>创建</strong>。</p>
 </li>
 <li>
-<p>登出 KubeSphere 企业版 Web 控制台，在登录页面，点击<strong>通过 oidc 登录</strong>，输入 OpenID Connect 用户名和密码进行登录。</p>
+<p>登出 KubeSphere 企业版 Web 控制台，在登录页面，点击<strong>通过 cas 登录</strong>，输入 CAS 用户名和密码进行登录。</p>
 </li>
 </ol>
 </div>
@@ -16974,7 +17042,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_oidc_基本配置">OIDC 基本配置</h2>
+<h2 id="_cas_基本配置">CAS 基本配置</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -16982,70 +17050,50 @@
 kind: Secret
 metadata:
   namespace: kubesphere-system  # 请勿修改
-  name: identity-provider-oidc  # 确保该 Secret 名称在 Kubernetes 集群中唯一
+  name: identity-provider-cas  # 确保该 Secret 名称在 Kubernetes 集群中唯一
   labels:
     config.kubesphere.io/type: identityprovider # 请勿修改
-    config.kubesphere.io/identityprovider: oidc # 与 configuration.yaml 中的 name 字段保持一致
+    config.kubesphere.io/identityprovider: cas # 与 configuration.yaml 中的 name 字段保持一致
 type: config.kubesphere.io/identityprovider # 请勿修改
 
 stringData:
   configuration.yaml: |
-    name: oidc
-    type: OIDCIdentityProvider
+    name: cas
+    type: CASIdentityProvider
     mappingMethod: auto
     hidden: false
     disabled: false
+    displayName: &#34;cas&#34;
     provider:
-        # 使用自动发现
-        issuer: https://accounts.google.com
-        clientID: &#34;your-client-id&#34;
-        clientSecret: &#34;your-client-secret&#34;
-        redirectURL: &#34;https://your-app.com/oauth/callback&#34;</code></pre>
+      # 必填项
+      redirectURL: &#34;https://your-app.com/cas/callback&#34;
+      casServerURL: &#34;https://cas.example.com/cas&#34;</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_oidc_完整配置">OIDC 完整配置</h2>
+<h2 id="_cas_完整配置">CAS 完整配置</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>以下仅展示 <code>stringData:configuration.yaml</code> 下 <code>provider</code> 部分的配置，其他部分请与 <a href="#_oidc_基本配置">OIDC 基本配置</a>的相应部分保持相同。</p>
+<p>以下仅展示 <code>stringData:configuration.yaml</code> 下 <code>provider</code> 部分的配置，其他部分请与 <a href="#_cas_基本配置">CAS 基本配置</a>的相应部分保持相同。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">    provider:
-        # 基本配置
-        issuer: https://accounts.google.com
-        clientID: &#34;your-client-id&#34;
-        clientSecret: &#34;your-client-secret&#34;
-        redirectURL: &#34;https://your-app.com/oauth/callback&#34;
+      # 必填项
+      redirectURL: &#34;https://your-app.com/cas/callback&#34;
+      casServerURL: &#34;https://cas.example.com/cas&#34;
 
-        # 可选配置
-        scopes:
-            - &#34;openid&#34;
-            - &#34;email&#34;
-            - &#34;profile&#34;
-        getUserInfo: true
-        insecureSkipVerify: false
-
-        # 自定义 claims 配置
-        emailKey: &#34;email&#34;
-        preferredUsernameKey: &#34;preferred_username&#34;
-        displayNameKey: &#34;name&#34;
-
-        # 手动端点配置（当不使用 issuer 时，endpoint 相关配置为必填项）
-        endpoint:
-            authURL: &#34;https://accounts.google.com/o/oauth2/v2/auth&#34;
-            tokenURL: &#34;https://oauth2.googleapis.com/token&#34;
-            userInfoURL: &#34;https://openidconnect.googleapis.com/v1/userinfo&#34;
-            jwksURL: &#34;https://www.googleapis.com/oauth2/v3/certs&#34;
-            endSessionURL: &#34;https://accounts.google.com/logout&#34;</code></pre>
+      # 可选项
+      insecureSkipVerify: false
+      displayNameAttribute: &#34;displayName&#34;</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_oidc_参数说明">OIDC 参数说明</h2>
+<h2 id="_cas_参数说明">CAS 参数说明</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>此为 <code>stringData:configuration.yaml</code> 下 <code>provider</code> 部分的参数说明。保密字典中其他部分的参数说明，请参阅<a href="../01-set-up-external-authentication/#_参数说明">配置外部身份验证</a>。</p>
@@ -17070,51 +17118,6 @@ stringData:
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>issuer</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>OpenID Provider 的发行者 URL，用于动态发现配置</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>clientID</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>是</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>OAuth2 客户端 ID</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>clientSecret</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>是</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>OAuth2 客户端密钥</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>redirectURL</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -17125,37 +17128,22 @@ stringData:
 </div></div></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>OAuth2 回调地址</p>
+<p>CAS 客户端回调地址</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>scopes</p>
+<p>casServerURL</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>[]string</p>
+<p>string</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
+<p>是</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[&#34;openid&#34;]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>请求的权限范围。默认包含 &#34;openid&#34;</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>getUserInfo</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>bool</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>是否使用 userinfo 端点获取额外用户信息</p>
+<p>CAS 服务器的根 URL</p>
 </div></div></td>
 </tr>
 <tr>
@@ -17175,7 +17163,7 @@ stringData:
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>endpoint.authURL</p>
+<p>displayNameAttribute</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>string</p>
@@ -17185,112 +17173,7 @@ stringData:
 </div></div></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>OAuth2 授权端点 URL</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>endpoint.tokenURL</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>OAuth2 令牌端点 URL</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>endpoint.userInfoURL</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>OpenID UserInfo 端点 URL</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>endpoint.jwksURL</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>JSON Web Key Set URL</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>endpoint.endSessionURL</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>登出端点 URL</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>emailKey</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;email&#34;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>邮箱信息的自定义 claim 键名</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>preferredUsernameKey</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;preferred_username&#34;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>用户名信息的自定义 claim 键名</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>displayNameKey</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>string</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>否</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>显示名称的自定义 claim 键名</p>
+<p>用户显示名称的属性名称</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -17316,9 +17199,9 @@ stringData:
   <nav id="TableOfContents">
   <ul>
     <li><a href="#_操作步骤">操作步骤</a></li>
-    <li><a href="#_oidc_基本配置">OIDC 基本配置</a></li>
-    <li><a href="#_oidc_完整配置">OIDC 完整配置</a></li>
-    <li><a href="#_oidc_参数说明">OIDC 参数说明</a></li>
+    <li><a href="#_cas_基本配置">CAS 基本配置</a></li>
+    <li><a href="#_cas_完整配置">CAS 完整配置</a></li>
+    <li><a href="#_cas_参数说明">CAS 参数说明</a></li>
   </ul>
 </nav>
 </div></div>
