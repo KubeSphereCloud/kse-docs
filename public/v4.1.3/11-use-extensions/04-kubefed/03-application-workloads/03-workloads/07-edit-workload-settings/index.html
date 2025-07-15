@@ -39,7 +39,7 @@
     
     <div class="navbar-nav">
       <div
-        class="navbar-nav-item navbar-nav-version "
+        class="navbar-nav-item navbar-nav-version dropdown"
         style="">
         
         <div class="dropdown-trigger">
@@ -47,7 +47,29 @@
             v4.1.3
           </span>
           
+            <span class="icon icon-chevron_down_fill"></span>
+          
         </div>
+        
+          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              
+              <a
+                class=""
+                href="/v4.2.0/"
+              >
+                v4.2.0
+              </a>
+              
+              <a
+                class="active"
+                href="/v4.1.3/"
+              >
+                v4.1.3
+              </a>
+              
+            </div>
+          </div>
         
       </div>
       
@@ -16964,7 +16986,7 @@
     编辑工作负载设置</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2025-04-23 06:23:47
+      更新时间：2025-07-14 07:25:59
     </div>
     
     
@@ -17028,7 +17050,7 @@
 <p>在<strong>部署</strong>或<strong>有状态副本集</strong>页签，点击目标工作负载名称，进入工作负载详情页面。</p>
 </li>
 <li>
-<p>在工作负载详情页面左上角选择<strong>更多操作 &gt; 编辑设置</strong>。</p>
+<p>在工作负载详情页面选择<strong>更多操作 &gt; 编辑设置</strong>。</p>
 </li>
 <li>
 <p>在<strong>编辑设置</strong>对话框，分别设置工作负载的更新策略、容器、存储、容器组调度规则（仅对部署可用）、容器组优雅终止、以及集群差异设置，然后点击<strong>确定</strong>。有关具体的参数设置方法，请参阅<a href="#_参数描述">参数描述</a>。</p>

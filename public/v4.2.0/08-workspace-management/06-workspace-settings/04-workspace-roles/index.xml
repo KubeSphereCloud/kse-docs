@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>企业空间角色 on KubeSphere 企业版</title>
+    <link>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/</link>
+    <description>Recent content in 企业空间角色 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建企业空间角色</title>
+      <link>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/01-create-a-workspace-role/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/01-create-a-workspace-role/</guid>
+      <description>本节介绍如何创建企业空间角色。
+前提条件 您需要加入一个企业空间并在企业空间中具有角色管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+操作步骤 以具有角色管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择企业空间设置 &amp;gt; 企业空间角色。
+在页面点击创建。
+在创建企业空间角色对话框，设置企业空间角色的名称、别名和描述，然后点击编辑权限。
+参数 描述 名称
+企业空间角色的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+别名
+企业空间角色的别名。不同企业空间角色的别名可以相同。
+描述
+企业空间角色的描述信息。描述可包含任意字符，最长 256 个字符。
+在编辑权限对话框，设置企业空间角色的权限，然后点击确定。
+所有企业空间成员都可以查看企业空间基本信息。其他操作所需的权限如下：
+项目
+权限 允许操作 项目创建
+创建项目，并成为所创建的项目的管理员。
+项目管理
+创建、编辑和删除企业空间中的项目。
+项目查看
+查看项目列表、查看项目中的所有资源。
+应用管理
+权限 允许操作 应用仓库管理
+添加应用仓库、编辑应用仓库、删除应用仓库。
+应用仓库查看
+查看应用仓库列表。
+应用/应用版本/应用实例管理
+创建应用模板、编辑应用模板信息、使用应用模板安装应用、上传应用版本、删除应用版本、将应用版本发布到应用商店、删除应用模板。
+应用/应用版本/应用实例查看
+查看应用模板列表、查看应用模板详情、下载 Helm Chart 压缩包。
+访问控制
+权限 允许操作 成员查看
+查看企业空间成员列表、查看企业空间成员详情。
+角色查看
+查看企业空间角色列表、查看企业空间角色详情。</description>
+    </item>
+    
+    <item>
+      <title>查看企业空间角色列表</title>
+      <link>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/02-view-a-workspace-role-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/02-view-a-workspace-role-list/</guid>
+      <description>本节介绍如何查看企业空间角色列表。
+每个企业空间角色都包含特定的企业空间管理或查看权限。您可以将包含特定权限的角色授予企业空间成员，以控制企业空间成员在企业空间中的权限。
+前提条件 您需要加入一个企业空间并在企业空间中具有角色查看权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+操作步骤 以具有角色查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择企业空间设置 &amp;gt; 企业空间角色。
+KubeSphere 企业版平台提供以下预置企业空间角色：
+角色 描述 workspace-admin
+企业空间管理员，在企业空间内具有全部权限。
+workspace-self-provisioner
+企业空间自治用户，在企业空间内可以创建项目、查看企业空间设置，同时对自身创建的项目具有管理权限。
+workspace-viewer
+企业空间观察员，可以查看企业空间内的所有资源。
+workspace-regular
+企业空间普通用户，在企业空间内只具有企业空间设置查看权限。该角色一般授予不需要其他企业空间权限的项目成员。
+您也可以创建自定义企业空间角色。有关更多信息请参阅创建企业空间角色。</description>
+    </item>
+    
+    <item>
+      <title>查看企业空间角色详情</title>
+      <link>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/03-view-workspace-role-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/03-view-workspace-role-details/</guid>
+      <description>本节介绍如何查看企业空间角色详情。
+前提条件 您需要加入一个企业空间并在企业空间中具有角色查看权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+操作步骤 以具有角色查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择企业空间设置 &amp;gt; 企业空间角色。
+在企业空间角色列表点击一个企业空间角色的名称打开其详情页面。
+在企业空间角色详情页面的权限页签查看企业空间角色具有的权限。
+所有企业空间成员都可以查看企业空间基本信息。其他操作所需的权限如下：
+项目
+权限 允许操作 项目创建
+创建项目，并成为所创建的项目的管理员。
+项目管理
+创建、编辑和删除企业空间中的项目。
+项目查看
+查看项目列表、查看项目中的所有资源。
+应用管理
+权限 允许操作 应用仓库管理
+添加应用仓库、编辑应用仓库、删除应用仓库。
+应用仓库查看
+查看应用仓库列表。
+应用/应用版本/应用实例管理
+创建应用模板、编辑应用模板信息、使用应用模板安装应用、上传应用版本、删除应用版本、将应用版本发布到应用商店、删除应用模板。
+应用/应用版本/应用实例查看
+查看应用模板列表、查看应用模板详情、下载 Helm Chart 压缩包。
+访问控制
+权限 允许操作 成员查看
+查看企业空间成员列表、查看企业空间成员详情。
+角色查看
+查看企业空间角色列表、查看企业空间角色详情。
+企业空间设置
+权限 允许操作 企业空间设置管理
+编辑企业空间信息、删除企业空间、编辑企业空间配额。
+企业空间设置查看
+查看企业空间配额。
+在企业空间角色详情页面点击授权用户页签具有当前企业空间角色的用户。
+参数 描述 用户名
+获得授权的用户的名称。
+状态
+获得授权的用户当前的状态。
+活跃：用户当前状态正常。
+等待中：系统正在创建用户。
+已禁用：用户被平台管理员禁用，无法登录 KubeSphere 企业版 Web 控制台。
+限制登录：用户在 10 分钟内连续 10 次登录失败，在 10 分钟内被禁止登录 KubeSphere 企业版 Web 控制台。</description>
+    </item>
+    
+    <item>
+      <title>编辑企业空间角色信息</title>
+      <link>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/04-edit-workspace-role-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/04-edit-workspace-role-information/</guid>
+      <description>本节介绍如何编辑企业空间角色信息。
+您可以编辑由用户创建的企业空间角色的别名和描述。KubeSphere 企业版不支持编辑预置的企业空间角色，同时不支持编辑企业空间角色的名称。
+前提条件 您需要加入一个企业空间并在企业空间中具有角色管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+操作步骤 以具有角色管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择企业空间设置 &amp;gt; 企业空间角色。
+在需要操作的企业空间角色右侧点击，然后在下拉列表中选择编辑信息。
+在编辑信息对话框，设置企业空间角色的别名和描述，然后点击确定。
+参数 描述 别名
+企业空间角色的别名。不同企业空间角色的别名可以相同。
+描述
+企业空间角色的描述信息。描述可包含任意字符，最长 256 个字符。</description>
+    </item>
+    
+    <item>
+      <title>编辑企业空间角色权限</title>
+      <link>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/05-edit-permissions-of-a-workspace-role/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/05-edit-permissions-of-a-workspace-role/</guid>
+      <description>本节介绍如何编辑企业空间角色权限。
+您只能编辑用户创建的企业空间角色权限。预置企业空间角色的权限无法编辑。
+前提条件 您需要加入一个企业空间并在企业空间中具有角色管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+操作步骤 以具有角色管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择企业空间设置 &amp;gt; 企业空间角色。
+在需要操作的企业空间角色右侧点击，然后在下拉列表中选择编辑权限。
+在编辑权限对话框，设置企业空间角色的权限，然后点击确定。
+所有企业空间成员都可以查看企业空间基本信息。其他操作所需的权限如下：
+项目
+权限 允许操作 项目创建
+创建项目，并成为所创建的项目的管理员。
+项目管理
+创建、编辑和删除企业空间中的项目。
+项目查看
+查看项目列表、查看项目中的所有资源。
+应用管理
+权限 允许操作 应用仓库管理
+添加应用仓库、编辑应用仓库、删除应用仓库。
+应用仓库查看
+查看应用仓库列表。
+应用/应用版本/应用实例管理
+创建应用模板、编辑应用模板信息、使用应用模板安装应用、上传应用版本、删除应用版本、将应用版本发布到应用商店、删除应用模板。
+应用/应用版本/应用实例查看
+查看应用模板列表、查看应用模板详情、下载 Helm Chart 压缩包。
+访问控制
+权限 允许操作 成员查看
+查看企业空间成员列表、查看企业空间成员详情。
+角色查看
+查看企业空间角色列表、查看企业空间角色详情。</description>
+    </item>
+    
+    <item>
+      <title>删除企业空间角色</title>
+      <link>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/06-delete-a-workspace-role/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/08-workspace-management/06-workspace-settings/04-workspace-roles/06-delete-a-workspace-role/</guid>
+      <description>本节介绍如何删除企业空间角色。
+您可以删除用户创建的企业空间角色。预置企业空间角色无法删除。
+前提条件 您需要加入一个企业空间并在企业空间中具有角色管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
+如果需要删除的企业空间角色已经分配给企业空间成员，您需要删除企业空间成员或修改其角色。
+操作步骤 以具有角色管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择企业空间设置 &amp;gt; 企业空间角色。
+在需要删除的企业空间角色右侧点击，然后在下拉列表中选择删除。
+在删除角色对话框点击确定。</description>
+    </item>
+    
+  </channel>
+</rss>

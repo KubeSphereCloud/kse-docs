@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>微服务网关 on KubeSphere 企业版</title>
+    <link>/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/</link>
+    <description>Recent content in 微服务网关 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建微服务网关</title>
+      <link>/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/01-create-a-microservice-gateway/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/01-create-a-microservice-gateway/</guid>
+      <description>本节介绍如何创建微服务网关。
+创建微服务网关过程中实际上创建了一个运行 Spring Cloud Gateway 的部署。
+前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。
+您需要加入一个项目并在项目中具有 Spring Cloud 微服务管理权限。有关更多信息，请参阅项目成员和项目角色。
+您需要提前准备 Spring Cloud Gateway 容器镜像。有关更多信息，请参阅 Spring Cloud Gateway 官方文档。本节使用 registry.cn-beijing.aliyuncs.com/kse/spring-cloud-gateway:latest 容器镜像作为示例，您也可以根据需要自行构建容器镜像。
+操作步骤 以具有 Spring Cloud 微服务管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择 Spring Cloud &amp;gt; 微服务网关。
+在页面左上角的下拉列表中选择一个项目。
+在页面点击创建。
+在网关设置页签，设置微服务网关的参数，然后点击下一步。
+在高级设置页签，选择是否启用外部访问和外部访问模式，然后点击创建。
+请参阅参数描述设置微服务网关的参数。
+参数描述 以下介绍如何设置微服务网关的参数。
+基本信息
+参数 描述 名称
+微服务网关的名称，同时也是对应的部署的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+镜像
+用于创建微服务网关的容器镜像。例如 registry.cn-beijing.aliyuncs.com/kse/spring-cloud-gateway:latest。
+副本数量
+微服务网关部署的容器组副本数量。
+资源配额
+设置为微服务网关每个容器的资源预留和资源上限。
+参数 描述 CPU 预留
+为容器预留的 CPU 资源，单位为核。</description>
+    </item>
+    
+    <item>
+      <title>查看微服务网关信息</title>
+      <link>/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/02-view-microservice-gateway-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/02-view-microservice-gateway-information/</guid>
+      <description>本节介绍如何查看微服务网关信息。
+前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。
+您需要加入一个项目并在项目中具有 Spring Cloud 微服务查看权限。有关更多信息，请参阅项目成员和项目角色。
+操作步骤 以具有 Spring Cloud 微服务查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择 Spring Cloud &amp;gt; 微服务网关。
+在页面左上角的下拉列表中选择一个项目。
+微服务网关页面提供以下信息：
+参数 描述 类型
+网关的类型。对于微服务网关参数值为微服务网关。
+状态
+网关当前的状态。
+运行中：微服务网关运行正常。
+更新中：微服务网关正在创建中或正在更新设置。
+创建者
+创建网关的用户。
+创建时间
+网关的创建时间。
+访问模式
+网关的访问模式。
+NodePort：系统将节点的端口映射到服务端口，可通过节点的 IP 地址和节点端口访问服务。
+LoadBalancer：系统在 NodePort 服务的基础上为服务分配一个外部 IP 地址，并将外部 IP 地址与一个外部负载均衡器绑定。外部负载均衡器监听服务对应的节点端口，从而可以通过外部 IP 地址访问服务。为实现上述功能，LoadBalancer 类型的服务需要负载均衡器插件和基础设施环境提供支持，并且需要设置相关注解。有关更多信息，请联系您的基础设施环境提供商。
+ClusterIP：网关不能从集群外部访问，只能在集群内部通过虚拟 IP 地址访问。
+网关地址
+网关的访问地址。
+如果网关的外部访问模式为 NodePort，网关地址为某一个集群节点的 IP 地址。客户端可以通过任意集群节点的 IP 地址和端口访问应用路由的后端服务。
+如果网关的外部访问模式为 LoadBalancer，网关地址为负载均衡器的地址。
+如果网关的访问模式为 ClusterIP，网关不能从集群外部访问，网关地址为网关在集群内部的虚拟 IP 地址。</description>
+    </item>
+    
+    <item>
+      <title>查看微服务网关详情</title>
+      <link>/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/03-view-microservice-gateway-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/03-view-microservice-gateway-details/</guid>
+      <description>本节介绍如何查看微服务网关详情。
+前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。
+您需要加入一个项目并在项目中具有 Spring Cloud 微服务查看权限。有关更多信息，请参阅项目成员和项目角色。
+操作步骤 以具有 Spring Cloud 微服务查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择 Spring Cloud &amp;gt; 微服务网关。
+在页面左上角的下拉列表中选择一个项目。
+在页面右侧选择管理 &amp;gt; 查看详情打开网关详情页面。
+在网关详情页面的属性区域查看网关的资源属性。
+参数 描述 集群
+网关所属的集群。
+创建时间
+网关的创建时间。
+更新时间
+网关的更新时间
+创建者
+启用网关的用户。
+在网关详情页面是的资源状态页签查看网关的容器组副本数量、容器端口和容器组。
+副本区域显示网关的期望容器组副本数量和当前容器组副本数量。
+端口区域显示网关的容器端口名称、协议和端口号。
+容器组区域显示网关的所有容器组副本。
+点击可查看容器组中运行的容器的信息。
+点击容器组的名称可查看容器组详情。
+在容器组列表上方的搜索框中输入关键字，可按名称搜索容器组。
+在容器组列表右上角点击可刷新列表信息。
+在网关详情页面点击元数据页签查看网关的标签和注解。</description>
+    </item>
+    
+    <item>
+      <title>编辑微服务网关</title>
+      <link>/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/04-edit-microservice-gateway-settings/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/04-edit-microservice-gateway-settings/</guid>
+      <description>本节介绍如何编辑微服务网关。
+前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。
+您需要加入一个项目并在项目中具有 Spring Cloud 微服务管理权限。有关更多信息，请参阅项目成员和项目角色。
+操作步骤 以具有 Spring Cloud 微服务管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择 Spring Cloud &amp;gt; 微服务网关。
+在页面左上角的下拉列表中选择一个项目。
+在页面右侧选择管理 &amp;gt; 编辑。
+在编辑微服务网关对话框，修改微服务网关的参数，然后点击确定。
+有关微服务网关参数的更多信息，请参阅参数描述。
+参数描述 以下介绍如何设置微服务网关的参数。
+基本信息
+参数 描述 名称
+微服务网关的名称，同时也是对应的部署的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+镜像
+用于创建微服务网关的容器镜像。例如 registry.cn-beijing.aliyuncs.com/kse/spring-cloud-gateway:latest。
+副本数量
+微服务网关部署的容器组副本数量。
+资源配额
+设置为微服务网关每个容器的资源预留和资源上限。
+参数 描述 CPU 预留
+为容器预留的 CPU 资源，单位为核。
+CPU 上限
+允许容器使用的 CPU 资源上限，单位为核。
+内存预留
+为容器预留的内存资源，单位为 MiB。
+内存上限
+允许容器使用的内存资源上限，单位为 MiB。
+端口设置
+设置用于暴露微服务网关的服务的端口。
+参数 描述 协议</description>
+    </item>
+    
+    <item>
+      <title>删除微服务网关</title>
+      <link>/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/05-delete-a-microservice-gateway/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/18-spring-cloud/03-microservice-gateway/05-delete-a-microservice-gateway/</guid>
+      <description>本节介绍如何删除微服务网关。
+警告 删除微服务网关将导致微服务的业务中断，请谨慎执行此操作。
+前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。
+您需要加入一个项目并在项目中具有 Spring Cloud 微服务管理权限。有关更多信息，请参阅项目成员和项目角色。
+操作步骤 以具有 Spring Cloud 微服务管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+在左侧导航栏选择 Spring Cloud &amp;gt; 微服务网关。
+在页面左上角的下拉列表中选择一个项目。
+在页面右侧选择管理 &amp;gt; 删除。
+在删除微服务网关对话框，输入微服务网关的名称，然后点击确定。</description>
+    </item>
+    
+  </channel>
+</rss>

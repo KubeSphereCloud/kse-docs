@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>添加成员集群 on KubeSphere 企业版</title>
+    <link>/v4.2.0/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/</link>
+    <description>Recent content in 添加成员集群 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>通过直接连接添加成员集群</title>
+      <link>/v4.2.0/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/01-add-a-member-cluster-using-direct-connection/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/01-add-a-member-cluster-using-direct-connection/</guid>
+      <description>本节介绍如何通过直接连接添加成员集群。
+前提条件 您需要在主集群中具有 platform-admin 角色。
+主集群所有节点必须能访问成员集群的 Kubernetes API 服务（默认为成员集群主节点的 6443 端口）。取决于您的网络环境，您可能需要配置防火墙和流量转发规则。
+获取成员集群 kubeconfig 在成员集群的节点上，执行以下命令获取成员集群的 kubeconfig 信息：
+kubectl config view --raw 复制 kubeconfig 信息，并修改其中的 clusters:cluster:server 参数，如下：
+clusters: - cluster: server: https://&amp;lt;member-cluster-node-ip&amp;gt;:6443 添加成员集群 以具有 platform-admin 角色的用户登录主集群的 Web 控制台。
+点击集群管理。
+在集群管理页面，点击添加集群。
+在基本信息页签，设置成员集群的名称、标签、提供商和描述信息，然后点击下一步。
+参数 描述 名称
+成员集群的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 60 个字符。
+标签
+成员集群的标签。您可以在下拉列表中选择标签，也可以手动输入标签。
+提供商
+成员集群的提供商。您可以在下拉列表中选择提供商，也可以手动输入提供商。
+描述
+成员集群的描述信息。描述可包含任意字符，最长 256 个字符。
+在高级设置下，设置集群的用途标识。
+在连接设置页签，将连接方式设置为直接连接，在 kubeconfig 区域输入成员集群的 kubeconfig 信息，然后点击下一步。
+在集群配置页签，设置集群配置，然后点击创建。
+说明 在集群配置中，请将镜像仓库地址修改为实际使用的仓库地址。默认为 KubeSphere 官方在线仓库地址，请确认可访问后使用。
+成员集群添加完成后将显示在集群管理页面的集群列表中。
+注意
+成员集群被纳管后，如果其 KubeSphere 版本与主集群的 KubeSphere 版本不一致，需在成员集群节点上手动升级 KubeSphere。待更新为相同 KubeSphere 版本后，才能在成员集群上进行后续操作。</description>
+    </item>
+    
+  </channel>
+</rss>

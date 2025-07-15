@@ -85,7 +85,7 @@ LoadBalancer：系统在 NodePort 服务的基础上为服务分配一个外部 
 操作步骤 以具有 cluster-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
 在左侧导航栏选择集群设置 &amp;gt; 网关设置。
 在页面右侧选择管理 &amp;gt; 查看详情打开网关详情页面。
-在网关详情页面左侧的属性区域查看网关的资源属性。
+在网关详情页面的属性区域查看网关的资源属性。
 参数 描述 集群
 网关所属的集群。
 创建时间
@@ -94,7 +94,7 @@ LoadBalancer：系统在 NodePort 服务的基础上为服务分配一个外部 
 网关的更新时间
 创建者
 启用网关的用户。
-在网关详情页面右侧点击配置选项查看网关的配置选项。KubeSphere 企业版的网关功能底层基于 Nginx Ingress Controller 实现，有关网关配置选项的更多信息，请参阅 Nginx Ingress Controller 官方文档。
+在网关详情页面点击配置选项查看网关的配置选项。KubeSphere 企业版的网关功能底层基于 Nginx Ingress Controller 实现，有关网关配置选项的更多信息，请参阅 Nginx Ingress Controller 官方文档。
 在页面右侧的监控页签查看网关的请求数据。
 说明 如需使用网关监控功能，KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
 概览区域提供以下信息：
@@ -145,7 +145,7 @@ LoadBalancer：系统在 NodePort 服务的基础上为服务分配一个外部 
       
       <guid>/v4.1.3/11-use-extensions/12-gateway/03-cluster-gateway/05-disable-a-cluster-gateway/</guid>
       <description>本节介绍如何禁用集群网关。
-警告 网关禁用后客户端将无法访问由网关反向代理的服务，相关业务可能会中断，请谨慎执行此操作。
+警告 网关禁用后，客户端将无法访问由网关反向代理的服务，相关业务可能会中断，请谨慎执行此操作。
 前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
 您需要加入一个集群并在集群中具有 cluster-admin 角色。有关更多信息，请参阅集群成员和集群角色。
 操作步骤 以具有 cluster-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
