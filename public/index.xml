@@ -25095,7 +25095,8 @@ false</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/05-appendix/</guid>
-      <description>KubeSphere Helm Chart 参数 全局配置 参数 描述 默认值 global.imageRegistry
+      <description>KubeSphere Helm Chart 参数 全局配置
+参数 描述 默认值 global.imageRegistry
 全局 Docker 镜像仓库地址
 registry.cn-beijing.aliyuncs.com
 global.tag
@@ -25103,7 +25104,9 @@ global.tag
 &amp;#34;&amp;#34;
 global.imagePullSecrets
 全局 Docker 仓库密钥名称数组
-通用参数 参数 描述 默认值 nameOverride
+[]
+通用参数
+参数 描述 默认值 nameOverride
 部分覆盖 common.names.fullname 的字符串
 &amp;#34;&amp;#34;
 fullnameOverride
@@ -25115,13 +25118,15 @@ commonLabels
 commonAnnotations
 添加到所有部署对象的注解
 {}
-多集群配置 参数 描述 默认值 multicluster.role
+多集群配置
+参数 描述 默认值 multicluster.role
 多集群角色 (host/member)
 &amp;#34;&amp;#34;
 multicluster.hostClusterName
 主集群名称
 &amp;#34;&amp;#34;
-Portal 配置 参数 描述 默认值 portal.hostname
+Portal 配置
+参数 描述 默认值 portal.hostname
 ks-console 服务的公开入口域名或 IP 地址
 ks-console.kubesphere-system.svc
 portal.http.port
