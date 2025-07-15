@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>集群网关 on KubeSphere 企业版</title>
+    <link>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/</link>
+    <description>Recent content in 集群网关 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>启用集群网关</title>
+      <link>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/01-enable-a-cluster-gateway/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/01-enable-a-cluster-gateway/</guid>
+      <description>本节介绍如何启用集群网关。
+前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择集群设置 &amp;gt; 网关设置。
+在页面右侧点击启用网关。
+在弹出的对话框，设置网关的参数，然后点击确定。
+参数 描述 Nginx Ingress 版本
+Nginx Ingress 的版本。KubeSphere 网关扩展组件基于 Nginx Ingress 提供网关管理功能。
+IngressClassName
+IngressClass 的名称。
+容器组副本数量
+期望的容器组副本数量。该数值必须在配置的实际运行容器组副本数的最大值与最小值区间范围内。
+实际运行容器组副本数限制
+限制实际运行的容器组副本的最小数量和最大数量，以确保网关性能，同时防止资源耗尽。
+访问模式
+网关服务的外部访问模式。
+NodePort：系统将节点的端口映射到服务端口，可通过节点的 IP 地址和节点端口访问服务。
+LoadBalancer：系统在 NodePort 服务的基础上为服务分配一个外部 IP 地址，并将外部 IP 地址与一个外部负载均衡器绑定。外部负载均衡器监听服务对应的节点端口，从而可以通过外部 IP 地址访问服务。为实现上述功能，LoadBalancer 类型的服务需要负载均衡器插件和基础设施环境提供支持，并且需要设置相关注解。有关更多信息，请联系您的基础设施环境提供商。
+链路追踪
+是否对网关启用链路追踪功能。如需使用链路追踪功能，KubeSphere 企业版平台需要安装并启用 KubeSphere 服务网格扩展组件。
+负载均衡器提供商
+网关的负载均衡器提供商。网关的外部访问模式为 LoadBalancer 时，您需要根据负载均衡器插件和基础设施环境设置网关服务的注解以创建所需的负载均衡器。选择负载均衡器提供商后，设置网关服务注解时系统将提供注解提示。仅在网关服务的外部访问模式为 LoadBalancer 时可用。
+注解
+网关服务的注解。如果已选择负载均衡器提供商，点击键文本框时系统将在下拉列表中显示注解提示。仅在网关服务的外部访问模式为 LoadBalancer 时可用。有关更多信息，请联系您的基础设施环境提供商。</description>
+    </item>
+    
+    <item>
+      <title>查看网关信息</title>
+      <link>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/02-view-gateway-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/02-view-gateway-information/</guid>
+      <description>本节介绍如何查看网关信息。
+前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择集群设置 &amp;gt; 网关设置。
+在集群网关页签，查看集群网关的信息。
+参数 描述 类型
+网关的类型，为集群网关、企业空间网关或项目网关。
+创建者
+启用网关的用户。
+创建时间
+网关的启用时间。
+访问模式
+网关服务的外部访问模式。
+NodePort：系统将节点的端口映射到服务端口，可通过节点的 IP 地址和节点端口访问服务。
+LoadBalancer：系统在 NodePort 服务的基础上为服务分配一个外部 IP 地址，并将外部 IP 地址与一个外部负载均衡器绑定。外部负载均衡器监听服务对应的节点端口，从而可以通过外部 IP 地址访问服务。为实现上述功能，LoadBalancer 类型的服务需要负载均衡器插件和基础设施环境提供支持，并且需要设置相关注解。有关更多信息，请联系您的基础设施环境提供商。
+网关地址
+网关的外部访问地址。
+如果网关的外部访问模式为 NodePort，网关地址为某一个集群节点的 IP 地址。客户端可以通过任意集群节点的 IP 地址和端口访问应用路由的后端服务。
+如果网关的外部访问模式为 LoadBalancer，网关地址为负载均衡器的地址。
+节点端口
+网关服务的 HTTP 和 HTTPS 节点端口。仅在网关的外部访问模式为 NodePort 时显示。
+副本
+网关工作负载的副本数。
+实际运行容器组副本数限制
+限制实际运行的容器组副本的最小数量和最大数量，以确保网关性能，同时防止资源耗尽。
+链路追踪
+网关是否已启用链路追踪功能。</description>
+    </item>
+    
+    <item>
+      <title>查看集群网关详情</title>
+      <link>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/03-view-cluster-gateway-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/03-view-cluster-gateway-details/</guid>
+      <description>本节介绍如何查看集群网关详情。
+前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择集群设置 &amp;gt; 网关设置。
+在页面右侧选择管理 &amp;gt; 查看详情打开网关详情页面。
+在网关详情页面的属性区域查看网关的资源属性。
+参数 描述 集群
+网关所属的集群。
+创建时间
+网关的创建时间。
+更新时间
+网关的更新时间
+创建者
+启用网关的用户。
+在网关详情页面的配置选项页签下，查看网关的配置选项。KubeSphere 企业版的网关功能底层基于 Nginx Ingress Controller 实现，有关网关配置选项的更多信息，请参阅 Nginx Ingress Controller 官方文档。
+在网关详情页面点击监控页签，查看网关的请求数据。
+说明 如需使用网关监控功能，KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
+概览区域提供以下信息：
+参数 描述 总请求数量
+指定时间范围内网关接收的请求总数。
+请求数量
+指定时间范围内响应状态码为 4XX 或 5XX 的请求数量。点击下拉列表可分别查看 4XX 请求和 5XX 请求的数量。
+成功请求
+指定时间范围内成功请求的百分比。
+平均延迟
+指定时间范围内所有请求的平均延迟。</description>
+    </item>
+    
+    <item>
+      <title>编辑集群网关设置</title>
+      <link>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/04-edit-cluster-gateway-settings/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/04-edit-cluster-gateway-settings/</guid>
+      <description>本节介绍如何编辑集群网关设置。
+前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择集群设置 &amp;gt; 网关设置。
+在页面右侧选择管理 &amp;gt; 编辑。
+在弹出的对话框，修改网关的参数，然后点击确定。
+参数 描述 IngressClassName
+IngressClass 的名称。
+容器组副本数量
+期望的容器组副本数量。该数值必须在配置的实际运行容器组副本数的最大值与最小值区间范围内。
+实际运行容器组副本数限制
+限制实际运行的容器组副本的最小数量和最大数量，以确保网关性能，同时防止资源耗尽。
+访问模式
+网关服务的外部访问模式。
+NodePort：系统将节点的端口映射到服务端口，可通过节点的 IP 地址和节点端口访问服务。
+LoadBalancer：系统在 NodePort 服务的基础上为服务分配一个外部 IP 地址，并将外部 IP 地址与一个外部负载均衡器绑定。外部负载均衡器监听服务对应的节点端口，从而可以通过外部 IP 地址访问服务。为实现上述功能，LoadBalancer 类型的服务需要负载均衡器插件和基础设施环境提供支持，并且需要设置相关注解。有关更多信息，请联系您的基础设施环境提供商。
+链路追踪
+是否对网关启用链路追踪功能。如需使用链路追踪功能，KubeSphere 企业版平台需要安装并启用 KubeSphere 服务网格扩展组件。
+负载均衡器提供商
+网关的负载均衡器提供商。网关的外部访问模式为 LoadBalancer 时，您需要根据负载均衡器插件和基础设施环境设置网关服务的注解以创建所需的负载均衡器。选择负载均衡器提供商后，设置网关服务注解时系统将提供注解提示。仅在网关服务的外部访问模式为 LoadBalancer 时可用。
+注解
+网关服务的注解。如果已选择负载均衡器提供商，点击键文本框时系统将在下拉列表中显示注解提示。仅在网关服务的外部访问模式为 LoadBalancer 时可用。有关更多信息，请联系您的基础设施环境提供商。
+配置选项
+网关的配置选项。KubeSphere 企业版的网关功能底层基于 Nginx Ingress Controller 实现，您可以设置网关的配置选项控制网关的行为。有关更多信息，请参阅 Nginx Ingress Controller 官方文档。</description>
+    </item>
+    
+    <item>
+      <title>禁用集群网关</title>
+      <link>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/05-disable-a-cluster-gateway/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/05-disable-a-cluster-gateway/</guid>
+      <description>本节介绍如何禁用集群网关。
+警告 网关禁用后，客户端将无法访问由网关反向代理的服务，相关业务可能会中断，请谨慎执行此操作。
+前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择集群设置 &amp;gt; 网关设置。
+在页面右侧选择管理 &amp;gt; 禁用。
+在弹出的对话框点击确定。</description>
+    </item>
+    
+    <item>
+      <title>附录：member 集群网关日志无数据的解决办法</title>
+      <link>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/07-issue-no-gateway-log-in-member/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/07-issue-no-gateway-log-in-member/</guid>
+      <description>若 member 集群的“集群网关”详情页中，“网关日志”页签不显示数据，可采用以下方法解决。
+启用 host 集群上 whizard-telemetry-apiserver 服务的 NodePort 访问模式。
+在 host 集群的应用负载菜单下，点击服务进入服务页面。
+搜索服务 whizard-telemetry-apiserver，点击 &amp;gt; 编辑外部访问。
+在编辑外部访问对话框，选择 NodePort，然后点击确定。
+修改 KubeSphere 网关的扩展组件配置，将 backend.config.gateway.logSearchEndpoint 设置为 host 集群上 whizard-telemetry-apiserver 服务的访问地址。
+backend: enabled: true config: gateway: namespace: kubesphere-controls-system valuesOverride: controller: image: registry: &amp;#34;&amp;#34; image: kubesphereio/nginx-ingress-controller tag: &amp;#34;v1.4.0&amp;#34; pullPolicy: IfNotPresent digest: &amp;#34;&amp;#34; exposeNodeLabelKey: &amp;#34;node-role.kubernetes.io/control-plane&amp;#34; versionConstraint: &amp;#34;&amp;gt;= 4.3.0, &amp;lt; 4.5.0&amp;#34; logSearchEndpoint: &amp;#34;http://whizard-telemetry-apiserver.extension-whizard-telemetry.svc:9090&amp;#34; # 替换为 http://&amp;lt;node-ip&amp;gt;:&amp;lt;whizard-telemetry-apiserver-nodeport&amp;gt; 在 member 集群上，重启网关 gateway-agent-backend-apiserver。
+kubectl -n extension-gateway rollout restart deploy gateway-agent-backend-apiserver 刷新 member 集群的网关日志页签，即可看到网关日志数据。</description>
+    </item>
+    
+  </channel>
+</rss>

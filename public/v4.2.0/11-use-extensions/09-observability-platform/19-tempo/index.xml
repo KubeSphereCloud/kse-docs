@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Grafana Tempo for WizTelemetry on KubeSphere 企业版</title>
+    <link>/v4.2.0/11-use-extensions/09-observability-platform/19-tempo/</link>
+    <description>Recent content in Grafana Tempo for WizTelemetry on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/19-tempo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Tempo 可视化 WizTelemetry 链路追踪的数据</title>
+      <link>/v4.2.0/11-use-extensions/09-observability-platform/19-tempo/01-display-tempo-data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/09-observability-platform/19-tempo/01-display-tempo-data/</guid>
+      <description>本节介绍如何使用 Grafana Tempo for WizTelemetry（简称为 Tempo） 将 WizTelemetry 链路追踪的分布式追踪数据以可视化的方式呈现在 Grafana 控制台，即，将用户请求在分布式系统中的完整流转过程进行可视化。
+前提条件 已通过 Grafana for WizTelemetry 扩展组件部署一个 Grafana 控制台。
+操作步骤 安装 Grafana Tempo for WizTelemetry 扩展组件到集群。
+进入已安装 Tempo 的集群，在应用负载 &amp;gt; 服务页面，查找服务 tempo-distributor，点击名称进入详情页面。点击操作 &amp;gt; 编辑外部访问，开启 NodePort。然后在此页面获取服务端口 4317 对应的 NodePort。
+说明 取决于您的网络环境，您可能需要配置流量转发规则并在防火墙中放行该 NodePort 端口。
+安装 WizTelemetry 链路追踪扩展组件，并修改扩展组件配置，以便将追踪数据发送到 Tempo。
+collector: collector: config: | exporters: otlp: # tempo-distributor.wiz-telemetry-tracing:4317 endpoint: &amp;lt; tempo distributor grpc endpoint &amp;gt; headers: x-scope-orgid: wiztelemetry-tracing-ks tls: insecure: true service: pipelines: traces: exporters: - otlp - otlphttp 注意将 &amp;lt; tempo distributor grpc endpoint &amp;gt; 替换为 &amp;lt;cluster-node-ip&amp;gt;:&amp;lt;grpc nodeport&amp;gt;。例如，根据上一步获取的 NodePort，应修改为 &amp;lt;cluster-node-ip&amp;gt;:31459。</description>
+    </item>
+    
+  </channel>
+</rss>

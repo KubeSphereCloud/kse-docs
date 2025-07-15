@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>服务帐户 on KubeSphere 企业版</title>
+    <link>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/</link>
+    <description>Recent content in 服务帐户 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建服务帐户</title>
+      <link>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/01-create-a-service-account/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/01-create-a-service-account/</guid>
+      <description>本节介绍如何创建服务帐户。
+前提条件 您需要加入一个集群并在集群中具有 cluster-admin 角色。
+操作步骤 以具有 cluster-admin 角色的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择配置 &amp;gt; 服务帐户。
+在服务帐户列表页面，点击创建。
+在创建服务帐户对话框，设置服务帐户的信息，然后点击创建。
+参数 描述 名称
+服务帐户名称。同一项目中的服务帐户名称不能重复。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+别名
+用户自定义的服务帐户别名。不同服务帐户的别名可以相同。
+项目
+服务帐户所属的项目。
+描述
+服务帐户的描述信息。描述可包含任意字符，最长 256 个字符。
+项目角色
+服务帐户在项目中的角色。服务帐户的角色将决定服务帐户在项目中的权限。
+服务帐户创建完成后将显示在服务帐户列表中。</description>
+    </item>
+    
+    <item>
+      <title>查看服务帐户列表</title>
+      <link>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/02-view-a-service-account-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/02-view-a-service-account-list/</guid>
+      <description>本节介绍如何查看服务帐户的列表。
+前提条件 您需要加入一个集群并在集群中具有 cluster-viewer 角色。
+操作步骤 以具有 cluster-viewer 角色的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择配置 &amp;gt; 服务帐户。
+服务帐户列表提供以下信息：
+参数 描述 名称
+服务帐户的名称和描述。
+项目
+服务帐户所属的项目。
+角色
+服务帐户在所属项目中的角色。服务帐户的项目角色将决定服务帐户在项目中的权限。
+保密字典
+服务帐户对应的保密字典的名称。该保密字典中存储用于认证的证书、项目名称和令牌。
+创建时间
+服务帐户的创建时间。
+在列表左上角的下拉列表中选择一个项目，可以查看特定项目中的服务帐户。
+在列表上方点击搜索框并输入关键字，可按名称搜索服务帐户。
+在列表右上角点击可刷新列表信息。
+在列表右上角点击可定制列表中显示的信息。</description>
+    </item>
+    
+    <item>
+      <title>查看服务帐户详情</title>
+      <link>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/03-view-service-account-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/03-view-service-account-details/</guid>
+      <description>本节介绍如何查看服务帐户详情。
+前提条件 您需要加入一个集群并在集群中具有 cluster-viewer 角色。
+操作步骤 以具有 cluster-viewer 角色的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择配置 &amp;gt; 服务帐户。
+在服务帐户列表中点击一个服务帐户的名称打开其详情页面。
+在服务帐户详情页面的属性区域查看服务帐户的资源属性。
+参数 描述 集群
+服务帐户所属的集群。
+项目
+服务帐户所属的项目。
+角色
+服务帐户在所属项目中的角色。
+创建时间
+服务帐户的创建时间。
+创建者
+创建服务帐户的用户。
+在数据页签查看服务帐户的认证信息和对应的 kubeconfig 信息。
+在数据设置区域右上角点击/可显示/隐藏认证信息明文。
+在 kubeconfig 设置区域右上角点击可复制 kubeconfig 信息，点击可下载 kubeconfig.yaml 文件。
+说明 kubeconfig 信息包含了服务帐户的认证信息。您需要在应用程序中配置 kubeconfig 信息使应用程序可以访问 KubeSphere 企业版集群。有关更多信息，请参阅 Kubernetes 官方文档。</description>
+    </item>
+    
+    <item>
+      <title>编辑服务帐户信息</title>
+      <link>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/04-edit-service-account-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/04-edit-service-account-information/</guid>
+      <description>本节介绍如何编辑服务帐户的信息。
+您可以编辑服务帐户的别名和描述。KubeSphere 企业版不支持编辑服务帐户的名称。
+前提条件 您需要加入一个集群并在集群中具有 cluster-admin 角色。
+操作步骤 以具有 cluster-admin 角色的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择配置 &amp;gt; 服务帐户。
+在需要操作的服务帐户右侧点击，然后在下拉列表中选择编辑信息。
+在编辑信息对话框，编辑服务帐户的别名和描述，然后点击确定。
+参数 描述 别名
+服务帐户的别名。不同服务帐户的别名可以相同。
+描述
+服务帐户的描述信息。描述可包含任意字符，最多包含 256 个字符。</description>
+    </item>
+    
+    <item>
+      <title>修改服务帐户角色</title>
+      <link>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/05-change-the-role-of-a-service-account/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/05-change-the-role-of-a-service-account/</guid>
+      <description>本节介绍如何修改服务帐户角色。
+您可以通过为服务帐户分配角色来控制服务帐户的权限，使服务帐户可以访问特定的资源和进行特定的操作。
+前提条件 您需要加入一个集群并在集群中具有 cluster-admin 角色。
+操作步骤 以具有 cluster-admin 角色的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择配置 &amp;gt; 服务帐户。
+在需要操作的服务帐户右侧点击，然后在下拉列表中选择修改角色。
+在修改角色对话框，从下拉列表中选择一个项目角色，然后点击确定。</description>
+    </item>
+    
+    <item>
+      <title>删除服务帐户</title>
+      <link>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/06-delete-service-accounts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/07-cluster-management/06-configuration/03-service-accounts/06-delete-service-accounts/</guid>
+      <description>本节介绍如何删除服务帐户。
+警告 服务帐户删除后，使用服务帐户的应用程序将不能访问 KubeSphere 企业版集群，请谨慎执行此操作。
+前提条件 您需要加入一个集群并在集群中具有 cluster-admin 角色。
+删除单个服务帐户 以具有 cluster-admin 角色的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择配置 &amp;gt; 服务帐户。
+在需要删除的服务帐户右侧点击，然后在下拉列表中选择删除。
+在删除服务帐户对话框，输入服务帐户的名称，然后点击确定。
+批量删除服务帐户 以具有 cluster-admin 角色的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+在左侧导航栏选择配置 &amp;gt; 服务帐户。
+选择需要删除的服务帐户左侧的复选框，然后在服务帐户列表上方点击删除。
+在批量删除服务帐户对话框，输入服务帐户的名称，然后点击确定。
+说明 请使用半角逗号（,）和空格分隔多个名称。</description>
+    </item>
+    
+  </channel>
+</rss>

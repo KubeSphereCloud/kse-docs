@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>持久卷声明 on KubeSphere 企业版</title>
+    <link>/v4.2.0/11-use-extensions/15-storage/01-persistent-volume-claims/</link>
+    <description>Recent content in 持久卷声明 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/15-storage/01-persistent-volume-claims/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建 NAS 类型的持久卷声明</title>
+      <link>/v4.2.0/11-use-extensions/15-storage/01-persistent-volume-claims/01-create-a-persistent-volume-from-a-nas-volume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/15-storage/01-persistent-volume-claims/01-create-a-persistent-volume-from-a-nas-volume/</guid>
+      <description>本节介绍如何创建 NAS 类型的持久卷声明。持久卷声明创建后，后端存储系统将自动创建对应的持久卷与其绑定。
+有关持久卷声明的其他创建方式，请参阅创建持久卷声明。
+前提条件 您需要加入一个集群或项目，并在集群或项目中具有持久卷声明管理权限。有关更多信息，请参阅集群角色和项目角色。
+操作步骤 以具有持久卷声明管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群或项目。
+在左侧导航栏选择存储 &amp;gt; 持久卷声明。
+在页面点击创建。
+在基本信息页签，设置持久卷声明的基本信息，然后点击下一步。
+参数 描述 名称
+持久卷声明的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 253 个字符。
+项目
+持久卷声明所属的项目。
+别名
+持久卷声明的别名。不同持久卷声明的别名可以相同。
+描述
+持久卷声明的描述信息。描述可包含任意字符，最长 256 个字符。
+在存储设置页签，设置存储空间需求，然后点击下一步。
+创建方式 &amp;gt; 绑定已有 NAS 卷
+参数 描述 NFS 服务器主机名/ IP 地址
+NFS 服务器的主机名或 IP 地址。
+NFS 卷路径
+NFS 服务器上暴露的共享目录路径，如 /mnt/data 或 /share/volume。
+访问模式
+持久卷的读写模式。
+RWO（ReadWriteOnce）：允许单个节点读取持久卷中的数据并向其中写入数据。
+ROX（ReadOnlyMany）：允许多个节点读取持久卷中的数据。
+RWX（ReadWriteMany）：允许多个节点读取持久卷中的数据并向其中写入数据。
+取决于后端的存储系统，某些访问模式类型可能不可用。
+回收机制
+删除持久卷声明时对持久卷采取的策略。默认为 Delete。
+Delete：持久卷声明被删除后，系统自动删除持久卷。
+Retain：持久卷声明被删除后，系统不自动删除持久卷。
+只读
+持久卷声明是否以只读模式挂载。
+挂载选项
+定义 NFS 挂载时的参数，优化性能或控制行为，如 hard、nfsvers=4。</description>
+    </item>
+    
+    <item>
+      <title>通过卷快照创建持久卷声明</title>
+      <link>/v4.2.0/11-use-extensions/15-storage/01-persistent-volume-claims/02-create-a-persistent-volume-from-a-volume-snapshot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/15-storage/01-persistent-volume-claims/02-create-a-persistent-volume-from-a-volume-snapshot/</guid>
+      <description>本节介绍如何通过卷快照创建持久卷声明。除了在卷快照页面创建持久卷声明外，您还可以在创建持久卷声明时选择通过卷快照创建。
+有关持久卷声明的其他创建方式，请参阅创建持久卷声明。
+前提条件 您需要加入一个集群或项目，并在集群或项目中具有持久卷声明管理权限。有关更多信息，请参阅集群角色和项目角色。
+操作步骤 以具有持久卷声明管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群或项目。
+在左侧导航栏选择存储 &amp;gt; 持久卷声明。
+在页面点击创建。
+在基本信息页签，设置持久卷声明的基本信息，然后点击下一步。
+参数 描述 名称
+持久卷声明的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 253 个字符。
+项目
+持久卷声明所属的项目。
+别名
+持久卷声明的别名。不同持久卷声明的别名可以相同。
+描述
+持久卷声明的描述信息。描述可包含任意字符，最长 256 个字符。
+在存储设置页签，设置存储空间需求，然后点击下一步。
+创建方式 &amp;gt; 通过卷快照创建
+参数 描述 卷快照
+用于创建持久卷声明的卷快照。
+访问模式
+持久卷的读写模式。
+RWO（ReadWriteOnce）：允许单个节点读取持久卷中的数据并向其中写入数据。
+ROX（ReadOnlyMany）：允许多个节点读取持久卷中的数据。
+RWX（ReadWriteMany）：允许多个节点读取持久卷中的数据并向其中写入数据。
+取决于后端的存储系统，某些访问模式类型可能不可用。
+在高级设置页签，设置持久卷声明的标签和注解，然后点击创建。
+点击添加可设置多条标签或注解。
+在已创建的标签或注解右侧点击可删除标签或注解。
+持久卷声明创建完成后将显示在持久卷声明列表中。</description>
+    </item>
+    
+  </channel>
+</rss>

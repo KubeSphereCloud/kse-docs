@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>添加和删除集群节点 on KubeSphere 企业版</title>
+    <link>/v4.2.0/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/</link>
+    <description>Recent content in 添加和删除集群节点 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>添加集群节点</title>
+      <link>/v4.2.0/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/01-add-cluster-nodes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/01-add-cluster-nodes/</guid>
+      <description>本节介绍如何添加 KubeSphere 企业版集群节点。
+节点添加过程中将用到开源工具 KubeKey。有关 KubeKey 的更多信息，请访问 GitHub KubeKey 仓库。
+说明 本节介绍的节点添加方式仅适用于 Kubernetes 通过 KubeKey 安装的场景。如果您的 Kubernetes 不是通过 KubeKey 安装，请参阅 Kubernetes 官方文档添加节点。
+前提条件 您需要联系 KubeSphere 企业版的交付服务专家获取 KubeSphere 企业版 v4.2.0 安装包。
+集群节点的操作系统和版本须为 Ubuntu 16.04、Ubuntu 18.04、Ubuntu 20.04、Ubuntu 22.04、Debian 9、Debian 10、CentOS 7、CentOS Stream、RHEL 7、RHEL 8、SLES 15、openSUSE Leap 15 或 Kylin v10。多台服务器的操作系统可以不同。关于其它操作系统和版本支持，请咨询青云科技官方解决方案专家或交付服务专家。
+为确保集群具有足够的计算和存储资源，建议新增节点配置至少 8 个 CPU 核心，16 GB 内存和 200 GB 磁盘空间。除此之外，建议在每台集群节点的 /var/lib/docker（对于 Docker）或 /var/lib/containerd（对于 containerd） 目录额外挂载至少 200 GB 磁盘空间用于存储容器运行时数据。
+如果添加控制平面节点，您需要提前为集群配置高可用性。如果您使用负载均衡器，请确保负载均衡器监听所有控制平面节点的 6443 端口。有关更多信息，请参阅配置高可用性。</description>
+    </item>
+    
+    <item>
+      <title>删除集群节点</title>
+      <link>/v4.2.0/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/02-delete-cluster-nodes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/03-installation-and-upgrade/05-add-and-delete-cluster-nodes/02-delete-cluster-nodes/</guid>
+      <description>本节介绍如何删除 KubeSphere 企业版集群节点。
+节点删除过程中将用到开源工具 KubeKey。有关 KubeKey 的更多信息，请访问 GitHub KubeKey 仓库。
+说明 本节介绍的节点删除方式仅适用于 Kubernetes 通过 KubeKey 安装的场景。如果您的 Kubernetes 不是通过 KubeKey 安装，请参阅 Kubernetes 官方文档删除节点。
+警告 请勿删除控制平面节点，否则集群将出现错误。
+请确保节点删除后，集群中剩余的资源仍然足够运行现有的业务。否则，节点删除后可能会出现业务中断。
+前提条件 您需要联系 KubeSphere 企业版的交付服务专家获取 KubeSphere 企业版 v4.2.0 安装包。
+您需要获取安装配置文件 config-sample.yaml 并将其传输到用于执行本节操作的集群节点。有关更多信息，请参阅安装 KubeSphere 企业版。
++
+警告 如果您无法获取安装配置文件 config-sample.yaml，您需要参阅安装 KubeSphere 企业版 重新创建 config-sample.yaml 文件。重新创建该文件时，请务必确保文件中的集群信息与集群的当前实际情况一致。否则，删除节点后集群可能会出现错误。
+操作步骤 将 KubeSphere 企业版安装包传输到任意集群节点，并登录该集群节点。
+执行以下命令解压安装包，并进入安装包解压后生成的目录（将 &amp;lt;package name&amp;gt; 替换为安装包的实际名称，将 &amp;lt;directory&amp;gt; 替换为安装包解压后生成的目录）：
+tar -zxvf &amp;lt;package name&amp;gt; cd &amp;lt;directory&amp;gt; 执行以下命令为 KubeKey 二进制文件 kk 添加执行权限：
+sudo chmod +x kk 执行以下命令查看需要删除的节点的名称：</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络拓扑 on KubeSphere 企业版</title>
+    <link>/v4.2.0/11-use-extensions/09-observability-platform/12-bpfconductor/00-network-topology/</link>
+    <description>Recent content in 网络拓扑 on KubeSphere 企业版</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/12-bpfconductor/00-network-topology/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>查看网络拓扑</title>
+      <link>/v4.2.0/11-use-extensions/09-observability-platform/12-bpfconductor/00-network-topology/01-view-network-topology/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.0/11-use-extensions/09-observability-platform/12-bpfconductor/00-network-topology/01-view-network-topology/</guid>
+      <description>本节介绍如何查看网络拓扑图和网络流量列表。
+前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+KubeSphere 企业版平台需要安装并启用 WizTelemetry 网络可观测 扩展组件。
+操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+在左侧导航栏选择网络 &amp;gt; 网络拓扑。
+在页面上方的下拉列表中选择集群、源项目、目标项目，查看特定集群中特定项目之间的网络拓扑图和网络流量数据。
+参数 描述 源项目
+数据发送方所在的项目，也就是数据流的起点。
+目标项目
+数据接收方所在的项目，也就是数据流的终点。
+在右上角点击可刷新页面信息。
+在右上角点击可设置数据的时间范围。默认为最近 30 分钟。
+网络拓扑图展示了各个拓扑节点的资源类型（容器组、服务、集群节点或 IP 地址）、资源名称和总传输速率，以及拓扑节点之间的交互关系。您还可通过以下操作获取更多信息。
+将鼠标悬停在拓扑节点上，查看与该拓扑节点通信的相关节点以及数据流走向。
+点击拓扑节点，查看该拓扑节点的资源名称、所属项目、发送速率和接收速率。
+将鼠标悬停在拓扑连线上，查看连线两端的拓扑节点，并且可通过了解数据流走向。
+点击拓扑连线或其上的，查看该段数据流的起点、终点，以及数据传输速率。
+点击以默认视图查看拓扑图。默认视图下，您可以自由拖动拓扑节点。
+点击以排列视图查看拓扑图。拓扑节点将按照一定的方向排列，方便查看。
+点击/放大或缩小拓扑图。
+点击全屏查看拓扑图。
+在网络流量区域，查看选定项目在指定时间范围内的网络流量数据。
+点击表头字段右侧的可按升序/降序排序列表。
+参数 描述 源端
+发起通信请求的网络端点，显示该拓扑节点的资源类型和资源名称。
+目标端
+接收通信请求的网络端点，显示该拓扑节点的资源类型和资源名称。
+发送速率
+源端向目标端传输数据的速率。
+接收速率
+目标端从源端接收数据的速率。
+总速率
+发送速率和接收速率的总和。
+TCP 丢弃
+每秒钟 TCP 丢弃的数据包数量。
+高丢弃率可能表明网络不稳定或设备过载，需优化网络配置或扩容资源。
+TCP 重传</description>
+    </item>
+    
+  </channel>
+</rss>
