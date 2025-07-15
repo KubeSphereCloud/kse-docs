@@ -4,107 +4,37 @@
     <title>微服务 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/18-spring-cloud/01-microservices/</link>
     <description>Recent content in 微服务 on KubeSphere 企业版</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/18-spring-cloud/01-microservices/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.2.0/11-use-extensions/18-spring-cloud/01-microservices/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>创建部署并注册为微服务</title>
       <link>/v4.2.0/11-use-extensions/18-spring-cloud/01-microservices/01-create-a-deployment-and-register-the-deployment-as-a-microservice/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/18-spring-cloud/01-microservices/01-create-a-deployment-and-register-the-deployment-as-a-microservice/</guid>
-      <description>本节介绍如何创建部署（Deployment）并将部署注册为微服务。
-Spring Cloud 微服务实例通过 Kubernetes 部署管理，部署的容器组副本即微服务的实例。
-前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。
-您需要加入一个项目并在项目中具有 Spring Cloud 微服务管理权限。有关更多信息，请参阅项目成员和项目角色。
-创建部署所使用的容器镜像中的应用程序需要符合 Nacos 规范。有关更多信息，请参阅 Nacos 官方文档。
-操作步骤 请参阅参数描述设置部署的参数。
-以具有 Spring Cloud 微服务管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择 Spring Cloud &amp;gt; 微服务。
-在页面左上角的下拉列表中选择一个项目。
-点击启用 Spring Cloud。
-在页面点击创建。
-在基本信息页签，设置部署的基本信息，然后点击下一步。
-在容器组设置页签，为部署管理的容器组设置副本数量、容器、更新策略、安全上下文、调度规则和元数据，然后点击下一步。
-在存储设置页签，为部署管理的容器挂载卷，然后点击下一步。
-在高级设置页签，为部署管理的容器组指定节点，并设置部署的元数据，然后点击创建。
-部署创建完成后将被注册为微服务，并显示在微服务列表中。
-说明 在 Spring Cloud &amp;gt; 微服务页面创建的部署将被自动注册为微服务。如需对微服务实例进行操作（例如调整实例数量），您需要前往工作负载 &amp;gt; 部署页面对微服务对应的部署进行操作。
-参数描述 基本信息
-设置部署的基本信息。
-参数 描述 名称
-部署的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 253 个字符。
-别名
-部署的别名。不同部署的别名可以相同。
-描述
-部署的描述信息。描述可包含任意字符，最长 256 个字符。</description>
+      <description>本节介绍如何创建部署（Deployment）并将部署注册为微服务。&#xA;Spring Cloud 微服务实例通过 Kubernetes 部署管理，部署的容器组副本即微服务的实例。&#xA;前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。&#xA;您需要加入一个项目并在项目中具有 Spring Cloud 微服务管理权限。有关更多信息，请参阅项目成员和项目角色。&#xA;创建部署所使用的容器镜像中的应用程序需要符合 Nacos 规范。有关更多信息，请参阅 Nacos 官方文档。&#xA;操作步骤 请参阅参数描述设置部署的参数。&#xA;以具有 Spring Cloud 微服务管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择 Spring Cloud &amp;gt; 微服务。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;点击启用 Spring Cloud。&#xA;在页面点击创建。&#xA;在基本信息页签，设置部署的基本信息，然后点击下一步。&#xA;在容器组设置页签，为部署管理的容器组设置副本数量、容器、更新策略、安全上下文、调度规则和元数据，然后点击下一步。&#xA;在存储设置页签，为部署管理的容器挂载卷，然后点击下一步。&#xA;在高级设置页签，为部署管理的容器组指定节点，并设置部署的元数据，然后点击创建。&#xA;部署创建完成后将被注册为微服务，并显示在微服务列表中。&#xA;说明 在 Spring Cloud &amp;gt; 微服务页面创建的部署将被自动注册为微服务。如需对微服务实例进行操作（例如调整实例数量），您需要前往工作负载 &amp;gt; 部署页面对微服务对应的部署进行操作。&#xA;参数描述 基本信息&#xA;设置部署的基本信息。&#xA;参数 描述 名称&#xA;部署的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 253 个字符。&#xA;别名&#xA;部署的别名。不同部署的别名可以相同。&#xA;描述&#xA;部署的描述信息。描述可包含任意字符，最长 256 个字符。</description>
     </item>
-    
     <item>
       <title>查看微服务列表</title>
       <link>/v4.2.0/11-use-extensions/18-spring-cloud/01-microservices/02-view-a-microservice-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/18-spring-cloud/01-microservices/02-view-a-microservice-list/</guid>
-      <description>本节介绍如何查看微服务列表。
-前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。
-您需要加入一个项目并在项目中具有 Spring Cloud 微服务查看权限。有关更多信息，请参阅项目成员和项目角色。
-操作步骤 以具有 Spring Cloud 微服务查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择 Spring Cloud &amp;gt; 微服务。
-在页面左上角的下拉列表中选择一个项目。
-微服务列表显示每个微服务的实例数量、健康实例数量和当前微服务是否已触发健康保护机制。
-说明 为了防止因过多实例不健康导致流量全部流向健康实例，继而造成流量压力把健康实例压垮并形成雪崩效应，Nacos 支持设置健康保护阈值。当健康实例数量占微服务总实例数的比例小于该值时，无论实例是否健康，都会将这个实例返回给客户端。
-KubeSphere 的默认健康保护阈值为 0，即默认不使用健康保护机制。您可以参阅 Nacos 官方文档设置 Nacos 的健康保护阈值。
-在列表上方点击搜索框并输入关键字，可按名称搜索微服务。
-在列表右上角点击可刷新列表信息。
-在列表右上角点击可定制列表中显示的信息。
-在微服务右侧点击查看微服务的所有实例。
-参数 描述 名称
-微服务实例的名称。
-权重
-微服务实例在微服务中的权重。发送给微服务的流量将根据微服务实例的权重分配给微服务实例。
-IP 地址
-微服务实例的在 KubeSphere 集群内部的访问地址。
-端口
-微服务实例的访问端口号。
-创建时间
-微服务实例的创建时间。</description>
+      <description>本节介绍如何查看微服务列表。&#xA;前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。&#xA;您需要加入一个项目并在项目中具有 Spring Cloud 微服务查看权限。有关更多信息，请参阅项目成员和项目角色。&#xA;操作步骤 以具有 Spring Cloud 微服务查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择 Spring Cloud &amp;gt; 微服务。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;微服务列表显示每个微服务的实例数量、健康实例数量和当前微服务是否已触发健康保护机制。&#xA;说明 为了防止因过多实例不健康导致流量全部流向健康实例，继而造成流量压力把健康实例压垮并形成雪崩效应，Nacos 支持设置健康保护阈值。当健康实例数量占微服务总实例数的比例小于该值时，无论实例是否健康，都会将这个实例返回给客户端。&#xA;KubeSphere 的默认健康保护阈值为 0，即默认不使用健康保护机制。您可以参阅 Nacos 官方文档设置 Nacos 的健康保护阈值。&#xA;在列表上方点击搜索框并输入关键字，可按名称搜索微服务。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。&#xA;在微服务右侧点击查看微服务的所有实例。&#xA;参数 描述 名称&#xA;微服务实例的名称。&#xA;权重&#xA;微服务实例在微服务中的权重。发送给微服务的流量将根据微服务实例的权重分配给微服务实例。&#xA;IP 地址&#xA;微服务实例的在 KubeSphere 集群内部的访问地址。&#xA;端口&#xA;微服务实例的访问端口号。&#xA;创建时间&#xA;微服务实例的创建时间。</description>
     </item>
-    
     <item>
       <title>编辑微服务实例权重</title>
       <link>/v4.2.0/11-use-extensions/18-spring-cloud/01-microservices/03-edit-the-weight-of-a-microservice/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/18-spring-cloud/01-microservices/03-edit-the-weight-of-a-microservice/</guid>
-      <description>本节介绍如何编辑微服务实例权重。
-微服务实例的权重用于决定微服务实例的流量分配，发送给微服务的流量将根据微服务实例的权重分配给微服务实例。
-前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。
-您需要加入一个项目并在项目中具有 Spring Cloud 微服务管理权限。有关更多信息，请参阅项目成员和项目角色。
-操作步骤 以具有 Spring Cloud 微服务管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择 Spring Cloud &amp;gt; 微服务。
-在页面左上角的下拉列表中选择一个项目。
-在微服务右侧点击打开微服务实例列表。
-在需要操作的微服务实例右侧点击，然后在下拉列表中选择编辑权重。
-在编辑权重对话框，设置微服务实例的权重，然后点击确定。</description>
+      <description>本节介绍如何编辑微服务实例权重。&#xA;微服务实例的权重用于决定微服务实例的流量分配，发送给微服务的流量将根据微服务实例的权重分配给微服务实例。&#xA;前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。&#xA;您需要加入一个项目并在项目中具有 Spring Cloud 微服务管理权限。有关更多信息，请参阅项目成员和项目角色。&#xA;操作步骤 以具有 Spring Cloud 微服务管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择 Spring Cloud &amp;gt; 微服务。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;在微服务右侧点击打开微服务实例列表。&#xA;在需要操作的微服务实例右侧点击，然后在下拉列表中选择编辑权重。&#xA;在编辑权重对话框，设置微服务实例的权重，然后点击确定。</description>
     </item>
-    
     <item>
       <title>下线和上线微服务实例</title>
       <link>/v4.2.0/11-use-extensions/18-spring-cloud/01-microservices/04-take-a-microservice-instance-offline-and-online/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/18-spring-cloud/01-microservices/04-take-a-microservice-instance-offline-and-online/</guid>
-      <description>本节介绍如何下线和上线微服务实例。微服务实例下线后将不再接收业务流量。
-前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。
-您需要加入一个项目并在项目中具有 Spring Cloud 微服务管理权限。有关更多信息，请参阅项目成员和项目角色。
-操作步骤 以具有 Spring Cloud 微服务管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择 Spring Cloud &amp;gt; 微服务。
-在页面左上角的下拉列表中选择一个项目。
-在微服务右侧点击打开微服务实例列表。
-在需要操作的微服务实例右侧点击，然后在下拉列表中选择下线可下线微服务。
-在已下线的微服务实例右侧点击，然后在下拉列表中选择上线可重新上线微服务。</description>
+      <description>本节介绍如何下线和上线微服务实例。微服务实例下线后将不再接收业务流量。&#xA;前提条件 KubeSphere 企业版平台需要安装并启用 KubeSphere Spring Cloud 扩展组件。&#xA;您需要加入一个项目并在项目中具有 Spring Cloud 微服务管理权限。有关更多信息，请参阅项目成员和项目角色。&#xA;操作步骤 以具有 Spring Cloud 微服务管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择 Spring Cloud &amp;gt; 微服务。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;在微服务右侧点击打开微服务实例列表。&#xA;在需要操作的微服务实例右侧点击，然后在下拉列表中选择下线可下线微服务。&#xA;在已下线的微服务实例右侧点击，然后在下拉列表中选择上线可重新上线微服务。</description>
     </item>
-    
   </channel>
 </rss>

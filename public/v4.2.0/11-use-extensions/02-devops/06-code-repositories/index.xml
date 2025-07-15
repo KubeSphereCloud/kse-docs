@@ -4,62 +4,23 @@
     <title>代码仓库 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/02-devops/06-code-repositories/</link>
     <description>Recent content in 代码仓库 on KubeSphere 企业版</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/02-devops/06-code-repositories/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.2.0/11-use-extensions/02-devops/06-code-repositories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>导入代码仓库</title>
       <link>/v4.2.0/11-use-extensions/02-devops/06-code-repositories/01-import-code-repositories/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/02-devops/06-code-repositories/01-import-code-repositories/</guid>
-      <description>KubeSphere 企业版支持导入 GitHub、GitLab、Bitbucket 或其它基于 Git 的代码仓库，如 Gitee。
-下面以 Github 仓库为例，展示如何导入代码仓库。
-前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
-已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
-操作步骤 以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择 DevOps &amp;gt; 代码仓库。
-在页面左上角的下拉列表中选择一个 DevOps 项目。
-在页面点击创建。
-在导入代码仓库对话框，输入代码仓库名称，点击选择代码仓库。
-下表列举了支持导入的代码仓库和参数设置项。
-参数 描述 GitHub
-凭证：选择访问代码仓库的凭证，如 github-id。
-GitLab
-GitLab 服务器地址：选择 GitLab 服务器地址，默认值为 https://gitlab.com。
-项目组/所有者：输入 GitLab 账号。
-凭证：选择访问代码仓库的凭证。
-代码仓库：选择代码仓库。
-Bitbucket
-Bitbucket 服务器地址：设置 Bitbucket 服务器地址。
-凭证：选择访问代码仓库的凭证。
-Git
-代码仓库地址：输入代码仓库地址，如 https://gitee.com。
-凭证：选择访问代码仓库的凭证。</description>
+      <description>KubeSphere 企业版支持导入 GitHub、GitLab、Bitbucket 或其它基于 Git 的代码仓库，如 Gitee。&#xA;下面以 Github 仓库为例，展示如何导入代码仓库。&#xA;前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。&#xA;已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。&#xA;操作步骤 以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择 DevOps &amp;gt; 代码仓库。&#xA;在页面左上角的下拉列表中选择一个 DevOps 项目。&#xA;在页面点击创建。&#xA;在导入代码仓库对话框，输入代码仓库名称，点击选择代码仓库。&#xA;下表列举了支持导入的代码仓库和参数设置项。&#xA;参数 描述 GitHub&#xA;凭证：选择访问代码仓库的凭证，如 github-id。&#xA;GitLab&#xA;GitLab 服务器地址：选择 GitLab 服务器地址，默认值为 https://gitlab.com。&#xA;项目组/所有者：输入 GitLab 账号。&#xA;凭证：选择访问代码仓库的凭证。&#xA;代码仓库：选择代码仓库。&#xA;Bitbucket&#xA;Bitbucket 服务器地址：设置 Bitbucket 服务器地址。&#xA;凭证：选择访问代码仓库的凭证。&#xA;Git&#xA;代码仓库地址：输入代码仓库地址，如 https://gitee.com。&#xA;凭证：选择访问代码仓库的凭证。</description>
     </item>
-    
     <item>
       <title>查看和管理代码仓库</title>
       <link>/v4.2.0/11-use-extensions/02-devops/06-code-repositories/03-view-and-manage-repo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/02-devops/06-code-repositories/03-view-and-manage-repo/</guid>
-      <description>本节介绍如何查看代码仓库详情，并修改仓库中的文件。
-前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
-已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
-操作步骤 以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择 DevOps &amp;gt; 代码仓库。
-在页面左上角的下拉列表中选择一个 DevOps 项目。
-在代码仓库列表中点击一个仓库的名称打开其详情页面。
-在详情页面左上角选择一个分支，查看仓库中的文件。
-点击搜索框，输入关键字查找文件。
-点击刷新目录。
-点击上方的可收起目录树区域。再次点击可展开目录树区域。
-点击或上传文件向代码仓库上传文件或目录（tgz 或 tar.gz 格式的压缩包）。文件或目录会上传到当前所选路径下。
-注意 请确保您在当前仓库具有写入权限。
-在更多操作下，点击复制路径可复制当前所选文件或目录的路径；点击删除可删除当前所选文件或目录。
-若选择对象为文件，还可以编辑文件、复制文件内容、下载文件。</description>
+      <description>本节介绍如何查看代码仓库详情，并修改仓库中的文件。&#xA;前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。&#xA;已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。&#xA;操作步骤 以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择 DevOps &amp;gt; 代码仓库。&#xA;在页面左上角的下拉列表中选择一个 DevOps 项目。&#xA;在代码仓库列表中点击一个仓库的名称打开其详情页面。&#xA;在详情页面左上角选择一个分支，查看仓库中的文件。&#xA;点击搜索框，输入关键字查找文件。&#xA;点击刷新目录。&#xA;点击上方的可收起目录树区域。再次点击可展开目录树区域。&#xA;点击或上传文件向代码仓库上传文件或目录（tgz 或 tar.gz 格式的压缩包）。文件或目录会上传到当前所选路径下。&#xA;注意 请确保您在当前仓库具有写入权限。&#xA;在更多操作下，点击复制路径可复制当前所选文件或目录的路径；点击删除可删除当前所选文件或目录。&#xA;若选择对象为文件，还可以编辑文件、复制文件内容、下载文件。</description>
     </item>
-    
   </channel>
 </rss>

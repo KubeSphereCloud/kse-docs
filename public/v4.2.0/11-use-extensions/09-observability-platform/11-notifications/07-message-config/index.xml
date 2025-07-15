@@ -4,19 +4,16 @@
     <title>通知消息配置 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/07-message-config/</link>
     <description>Recent content in 通知消息配置 on KubeSphere 企业版</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/07-message-config/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/07-message-config/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>配置企业微信的通知消息模板</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/07-message-config/01-wechat-template/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/07-message-config/01-wechat-template/</guid>
-      <description>登录集群节点，创建一个 markdown 模板。
-vi &amp;lt;template-name&amp;gt; 内容如下：
-apiVersion: v1 data: template: | {{- define &amp;#34;nm.default.markdown.test&amp;#34; }} {{- range .Alerts }} {{- $rawStatus := .Status }} {{- if eq $rawStatus &amp;#34;firing&amp;#34; }} ### &amp;lt;font color=&amp;#34;yellow&amp;#34;&amp;gt;{{ template &amp;#34;nm.default.message&amp;#34; . }}&amp;lt;/font&amp;gt; {{- else }} ### &amp;lt;font color=&amp;#34;green&amp;#34;&amp;gt;{{ template &amp;#34;nm.default.message&amp;#34; . }}&amp;lt;/font&amp;gt; {{- end }} {{- range .Labels.SortedPairs }} {{- if eq .Name &amp;#34;severity&amp;#34; }} {{- $color := &amp;#34;&amp;#34; }} {{- if eq .Value &amp;#34;critical&amp;#34; }} {{- $color = &amp;#34;red&amp;#34; }} {{- else if eq .</description>
+      <description>登录集群节点，创建一个 markdown 模板。&#xA;vi &amp;lt;template-name&amp;gt; 内容如下：&#xA;apiVersion: v1 data: template: | {{- define &amp;#34;nm.default.markdown.test&amp;#34; }} {{- range .Alerts }} {{- $rawStatus := .Status }} {{- if eq $rawStatus &amp;#34;firing&amp;#34; }} ### &amp;lt;font color=&amp;#34;yellow&amp;#34;&amp;gt;{{ template &amp;#34;nm.default.message&amp;#34; . }}&amp;lt;/font&amp;gt; {{- else }} ### &amp;lt;font color=&amp;#34;green&amp;#34;&amp;gt;{{ template &amp;#34;nm.default.message&amp;#34; . }}&amp;lt;/font&amp;gt; {{- end }} {{- range .Labels.SortedPairs }} {{- if eq .Name &amp;#34;severity&amp;#34; }} {{- $color := &amp;#34;&amp;#34; }} {{- if eq .Value &amp;#34;critical&amp;#34; }} {{- $color = &amp;#34;red&amp;#34; }} {{- else if eq .</description>
     </item>
-    
   </channel>
 </rss>

@@ -4,52 +4,23 @@
     <title>持续部署 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/02-devops/04-continous-deployment/</link>
     <description>Recent content in 持续部署 on KubeSphere 企业版</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/02-devops/04-continous-deployment/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.2.0/11-use-extensions/02-devops/04-continous-deployment/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用 GitOps 实现应用持续部署</title>
       <link>/v4.2.0/11-use-extensions/02-devops/04-continous-deployment/01-use-gitops-for-continous-deployment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/02-devops/04-continous-deployment/01-use-gitops-for-continous-deployment/</guid>
-      <description>KubeSphere 企业版引入了一种为云原生应用实现持续部署的理念 – GitOps。GitOps 的核心思想是拥有一个 Git 仓库，并将应用系统的申明式基础架构和应用程序存放在 Git 仓库中进行版本控制。GitOps 结合 Kubernetes 能够利用自动交付流水线将更改应用到指定的任意多个集群中，从而解决跨云部署的一致性问题。
-本文档演示如何创建持续部署以实现应用的部署。
-前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
-已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
-已在企业空间的项目管理 &amp;gt; 项目列表中创建一个项目。
-导入代码仓库 以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏，点击 DevOps &amp;gt; 代码仓库。
-在页面左上角的下拉列表中选择一个 DevOps 项目。
-在页面点击创建。
-在导入代码仓库对话框，输入代码仓库名称，如 open-podcasts，然后点击选择代码仓库。您也可以为代码仓库设置别名和添加描述信息。
-在选择代码仓库对话框，点击 Git，在代码仓库地址区域，输入代码仓库地址，如 https://github.com/kubesphere-sigs/open-podcasts，点击确定。
-说明 此处导入的是公共仓库，因此不需要创建凭证。如果您添加的是私有仓库，则需要创建凭证。有关如何添加凭证的更多信息，请参阅凭证。
-创建持续部署 在左侧导航栏，点击持续部署。
-在右侧的持续部署页面，点击创建。
-在基本信息页签，输入持续部署名称，如 open-podcasts。在部署位置区域，选择持续部署的部署集群和项目。点击下一步。
-在代码仓库设置页签，选择上一步创建的代码仓库，设置代码仓库的分支或标签以及 Kustomization 清单文件路径。点击下一步。
-参数 描述 修订版本
-Git 仓库中的 commit ID、分支或标签。例如，master, v1.</description>
+      <description>KubeSphere 企业版引入了一种为云原生应用实现持续部署的理念 – GitOps。GitOps 的核心思想是拥有一个 Git 仓库，并将应用系统的申明式基础架构和应用程序存放在 Git 仓库中进行版本控制。GitOps 结合 Kubernetes 能够利用自动交付流水线将更改应用到指定的任意多个集群中，从而解决跨云部署的一致性问题。&#xA;本文档演示如何创建持续部署以实现应用的部署。&#xA;前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。&#xA;已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。&#xA;已在企业空间的项目管理 &amp;gt; 项目列表中创建一个项目。&#xA;导入代码仓库 以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏，点击 DevOps &amp;gt; 代码仓库。&#xA;在页面左上角的下拉列表中选择一个 DevOps 项目。&#xA;在页面点击创建。&#xA;在导入代码仓库对话框，输入代码仓库名称，如 open-podcasts，然后点击选择代码仓库。您也可以为代码仓库设置别名和添加描述信息。&#xA;在选择代码仓库对话框，点击 Git，在代码仓库地址区域，输入代码仓库地址，如 https://github.com/kubesphere-sigs/open-podcasts，点击确定。&#xA;说明 此处导入的是公共仓库，因此不需要创建凭证。如果您添加的是私有仓库，则需要创建凭证。有关如何添加凭证的更多信息，请参阅凭证。&#xA;创建持续部署 在左侧导航栏，点击持续部署。&#xA;在右侧的持续部署页面，点击创建。&#xA;在基本信息页签，输入持续部署名称，如 open-podcasts。在部署位置区域，选择持续部署的部署集群和项目。点击下一步。&#xA;在代码仓库设置页签，选择上一步创建的代码仓库，设置代码仓库的分支或标签以及 Kustomization 清单文件路径。点击下一步。&#xA;参数 描述 修订版本&#xA;Git 仓库中的 commit ID、分支或标签。例如，master, v1.</description>
     </item>
-    
     <item>
       <title>添加持续部署白名单</title>
       <link>/v4.2.0/11-use-extensions/02-devops/04-continous-deployment/03-add-cd-allowlist/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/02-devops/04-continous-deployment/03-add-cd-allowlist/</guid>
-      <description>KubeSphere 企业版支持通过设置白名单，限制资源持续部署的代码仓库和目标位置。
-本文档介绍如何添加持续部署白名单。
-前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
-已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
-已导入代码仓库。
-操作步骤 以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏，选择 DevOps &amp;gt; 持续部署。
-在持续部署白名单页面，点击编辑白名单。
-在弹出的编辑白名单对话框，选择代码仓库、部署集群和项目，点击确定。
-点击添加可添加多个代码仓库和部署位置。</description>
+      <description>KubeSphere 企业版支持通过设置白名单，限制资源持续部署的代码仓库和目标位置。&#xA;本文档介绍如何添加持续部署白名单。&#xA;前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。&#xA;已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。&#xA;已导入代码仓库。&#xA;操作步骤 以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏，选择 DevOps &amp;gt; 持续部署。&#xA;在持续部署白名单页面，点击编辑白名单。&#xA;在弹出的编辑白名单对话框，选择代码仓库、部署集群和项目，点击确定。&#xA;点击添加可添加多个代码仓库和部署位置。</description>
     </item>
-    
   </channel>
 </rss>

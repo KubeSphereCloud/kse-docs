@@ -4,110 +4,44 @@
     <title>约束 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/</link>
     <description>Recent content in 约束 on KubeSphere 企业版</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>创建约束</title>
       <link>/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/01-create-a-constraint/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/01-create-a-constraint/</guid>
-      <description>本节介绍如何创建约束。
-前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-已创建一个约束模板。
-操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
-在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。
-在页面点击创建。
-在创建约束条件对话框，设置以下参数，然后点击确定。
-参数 描述 约束条件名称
-约束条件的名称。
-约束条件类型
-约束条件使用的约束模板。
-enforcementAction
-enforcementAction 字段定义了处理约束违规的操作。默认设置为 deny，即默认拒绝任何违规的准入请求。有关更多信息，请参阅约束违规处理。
-Match Kinds
-match 字段定义了约束适用的资源。有关更多信息，请参阅 match。
-kinds 接受包含 apiGroups 和 kinds 字段的对象列表，这些字段列出了约束适用对象的 groups/kinds。如果指定了多个 groups/kinds 对象，只需匹配其中一个对象，资源就会在约束的适用范围内。
-命名空间标签
-针对对象所在的命名空间或对象本身（如果对象是一个命名空间）设置的可标识的键值对。
-参数
-用于描述约束的意图。有关更多信息，请参阅 parameters。
-您将在约束页面查看已创建的约束。</description>
+      <description>本节介绍如何创建约束。&#xA;前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。&#xA;KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。&#xA;已创建一个约束模板。&#xA;操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。&#xA;在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。&#xA;在页面点击创建。&#xA;在创建约束条件对话框，设置以下参数，然后点击确定。&#xA;参数 描述 约束条件名称&#xA;约束条件的名称。&#xA;约束条件类型&#xA;约束条件使用的约束模板。&#xA;enforcementAction&#xA;enforcementAction 字段定义了处理约束违规的操作。默认设置为 deny，即默认拒绝任何违规的准入请求。有关更多信息，请参阅约束违规处理。&#xA;Match Kinds&#xA;match 字段定义了约束适用的资源。有关更多信息，请参阅 match。&#xA;kinds 接受包含 apiGroups 和 kinds 字段的对象列表，这些字段列出了约束适用对象的 groups/kinds。如果指定了多个 groups/kinds 对象，只需匹配其中一个对象，资源就会在约束的适用范围内。&#xA;命名空间标签&#xA;针对对象所在的命名空间或对象本身（如果对象是一个命名空间）设置的可标识的键值对。&#xA;参数&#xA;用于描述约束的意图。有关更多信息，请参阅 parameters。&#xA;您将在约束页面查看已创建的约束。</description>
     </item>
-    
     <item>
       <title>查看约束列表</title>
       <link>/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/02-view-a-constraint-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/02-view-a-constraint-list/</guid>
-      <description>本节介绍如何查看约束列表。
-前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
-在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。
-约束列表提供以下信息：
-参数 描述 名称
-约束的名称。
-Kind
-约束使用的约束模板。
-在列表上方点击搜索框并输入关键字，可按名称搜索约束。
-在列表右上角点击可刷新列表信息。
-在列表右上角点击可定制列表中显示的信息。</description>
+      <description>本节介绍如何查看约束列表。&#xA;前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。&#xA;KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。&#xA;操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。&#xA;在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。&#xA;约束列表提供以下信息：&#xA;参数 描述 名称&#xA;约束的名称。&#xA;Kind&#xA;约束使用的约束模板。&#xA;在列表上方点击搜索框并输入关键字，可按名称搜索约束。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。</description>
     </item>
-    
     <item>
       <title>查看约束详情</title>
       <link>/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/03-view-constraint-details/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/03-view-constraint-details/</guid>
-      <description>本节介绍如何查看约束详情。
-前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
-在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。
-在约束列表中点击一个约束的名称打开其详情页面。
-在约束详情页面的属性区域，查看约束的基本信息。
-参数 描述 集群
-约束所属的集群。
-创建时间
-约束的创建时间。
-在约束详情页面的Violations页签，查看违规信息。</description>
+      <description>本节介绍如何查看约束详情。&#xA;前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。&#xA;KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。&#xA;操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。&#xA;在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。&#xA;在约束列表中点击一个约束的名称打开其详情页面。&#xA;在约束详情页面的属性区域，查看约束的基本信息。&#xA;参数 描述 集群&#xA;约束所属的集群。&#xA;创建时间&#xA;约束的创建时间。&#xA;在约束详情页面的Violations页签，查看违规信息。</description>
     </item>
-    
     <item>
       <title>编辑约束配置</title>
       <link>/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/04-edit-constraint-yaml/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/04-edit-constraint-yaml/</guid>
-      <description>本节介绍如何编辑约束的配置。
-前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
-在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。
-在需要编辑的约束右侧点击，然后在下拉列表中选择编辑 YAML。
-在编辑 YAML对话框，修改相关配置，然后点击确定。</description>
+      <description>本节介绍如何编辑约束的配置。&#xA;前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。&#xA;KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。&#xA;操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。&#xA;在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。&#xA;在需要编辑的约束右侧点击，然后在下拉列表中选择编辑 YAML。&#xA;在编辑 YAML对话框，修改相关配置，然后点击确定。</description>
     </item>
-    
     <item>
       <title>删除约束</title>
       <link>/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/07-delete-constraints/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/20-gatekeeper/02-constraints/07-delete-constraints/</guid>
-      <description>本节介绍如何删除约束。
-警告 约束删除后不能恢复，请谨慎执行此操作。
-前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
-在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。
-在需要删除的约束右侧点击，然后在下拉列表中选择删除。
-在删除约束对话框，输入约束的名称，然后点击确定。</description>
+      <description>本节介绍如何删除约束。&#xA;警告 约束删除后不能恢复，请谨慎执行此操作。&#xA;前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。&#xA;KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。&#xA;操作步骤 以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。&#xA;在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。&#xA;在需要删除的约束右侧点击，然后在下拉列表中选择删除。&#xA;在删除约束对话框，输入约束的名称，然后点击确定。</description>
     </item>
-    
   </channel>
 </rss>

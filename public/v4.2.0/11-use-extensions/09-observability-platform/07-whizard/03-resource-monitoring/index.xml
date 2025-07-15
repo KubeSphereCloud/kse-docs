@@ -4,351 +4,93 @@
     <title>全局监控 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/</link>
     <description>Recent content in 全局监控 on KubeSphere 企业版</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>全局概览</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/01-view-monitoring-data-of-multiple-clusters/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/01-view-monitoring-data-of-multiple-clusters/</guid>
-      <description>本节介绍如何查看多集群的监控概览信息。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-host 集群和需要监控的成员集群需要启用 WizTelemetry 全局监控。
-说明 如果成员集群未启用 WizTelemetry 全局监控，WizTelemetry 全局监控将无法获取成员集群的数据。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择全局监控 &amp;gt; 全局概览。
-概览页面默认显示已启用 WizTelemetry 全局监控的所有集群的监控信息。
-功能区 描述 已创建资源数量
-显示被监控的所有集群、节点、项目、容器组、部署、有状态副本集、守护进程集、任务、定时任务、持久卷声明、服务、应用路由的数量。
-资源使用情况
-显示被监控的所有集群的所有节点的 CPU、内存、磁盘使用情况，以及已创建容器组数量占可创建容器组最大数量的百分比。默认情况下每个节点最多可以创建 110 个容器组。
-对于 CPU 和内存，将光标悬停在可查看已分配给容器和项目的资源预留和上限数量。
-全局告警
-显示全局告警规则组产生的告警数量及最近的告警消息。此处显示的告警不包括集群和项目的告警规则组产生的告警。全局告警规则组由平台管理员在全局告警中管理。
-告警级别的类型包括提醒、警告、重要和紧急。
-告警状态的类型包括：
-验证中：监控指标满足预设的条件，但未满足预设的持续时间。
-已触发：监控指标满足预设的条件，并且满足预设的持续时间。
-容器组
-显示被监控的所有集群的各种类型容器组的数量。
-容器组状态类型包括：
-等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。
-运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。
-成功完成：容器组中的所有容器都已成功终止（以 0 退出码终止），并且不再重启。
-失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。
-未知：系统无法获取容器组状态。出现这种状态通常是由于系统与容器组所在的主机通信失败。
-容器组 QoS（服务质量）类型包括：
-Guaranteed：容器组中的每个容器都具有内存上限、内存请求、CPU 上限、CPU 请求，并且内存上限等于内存请求，CPU 上限等于 CPU 请求。</description>
+      <description>本节介绍如何查看多集群的监控概览信息。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;host 集群和需要监控的成员集群需要启用 WizTelemetry 全局监控。&#xA;说明 如果成员集群未启用 WizTelemetry 全局监控，WizTelemetry 全局监控将无法获取成员集群的数据。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择全局监控 &amp;gt; 全局概览。&#xA;概览页面默认显示已启用 WizTelemetry 全局监控的所有集群的监控信息。&#xA;功能区 描述 已创建资源数量&#xA;显示被监控的所有集群、节点、项目、容器组、部署、有状态副本集、守护进程集、任务、定时任务、持久卷声明、服务、应用路由的数量。&#xA;资源使用情况&#xA;显示被监控的所有集群的所有节点的 CPU、内存、磁盘使用情况，以及已创建容器组数量占可创建容器组最大数量的百分比。默认情况下每个节点最多可以创建 110 个容器组。&#xA;对于 CPU 和内存，将光标悬停在可查看已分配给容器和项目的资源预留和上限数量。&#xA;全局告警&#xA;显示全局告警规则组产生的告警数量及最近的告警消息。此处显示的告警不包括集群和项目的告警规则组产生的告警。全局告警规则组由平台管理员在全局告警中管理。&#xA;告警级别的类型包括提醒、警告、重要和紧急。&#xA;告警状态的类型包括：&#xA;验证中：监控指标满足预设的条件，但未满足预设的持续时间。&#xA;已触发：监控指标满足预设的条件，并且满足预设的持续时间。&#xA;容器组&#xA;显示被监控的所有集群的各种类型容器组的数量。&#xA;容器组状态类型包括：&#xA;等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。&#xA;运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。&#xA;成功完成：容器组中的所有容器都已成功终止（以 0 退出码终止），并且不再重启。&#xA;失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。&#xA;未知：系统无法获取容器组状态。出现这种状态通常是由于系统与容器组所在的主机通信失败。&#xA;容器组 QoS（服务质量）类型包括：&#xA;Guaranteed：容器组中的每个容器都具有内存上限、内存请求、CPU 上限、CPU 请求，并且内存上限等于内存请求，CPU 上限等于 CPU 请求。</description>
     </item>
-    
     <item>
       <title>设置组件</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/02-set-alert-components/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/02-set-alert-components/</guid>
-      <description>本节介绍如何设置 WizTelemetry 全局监控的组件。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在全局概览页面右侧，点击进入组件设置页面。
-在数据接入页签，设置以下参数。
-参数 描述 网关设置
-组件副本数量: 设置存储网关组件的副本数量，默认值为 2。
-容器配额: 设置 CPU 预留和限制以及内存预留和上限。
-数据路由
-数据保留副本数量: 设置数据保留组件的副本数量，默认值为 1。
-组件副本数量: 设置数据路由组件的副本数量，默认值为 2。
-容器配额: 设置 CPU 预留和限制以及内存预留和上限。
-本地存储
-本地数据存储时间: 设置本地数据的存储时间，最小时间至少 3 天，默认为 7 天。
-组件副本数量: 设置本地存储组件的副本数量，默认值为 2。
-容器配额: 设置 CPU 预留和限制以及内存预留和上限。
-在数据查询页签，设置以下参数。
-参数 描述 基础设置
-组件副本数量: 设置 Query 组件的副本数量，默认值为 2。
-容器配额: 设置 CPU 预留和限制以及内存预留和上限。</description>
+      <description>本节介绍如何设置 WizTelemetry 全局监控的组件。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在全局概览页面右侧，点击进入组件设置页面。&#xA;在数据接入页签，设置以下参数。&#xA;参数 描述 网关设置&#xA;组件副本数量: 设置存储网关组件的副本数量，默认值为 2。&#xA;容器配额: 设置 CPU 预留和限制以及内存预留和上限。&#xA;数据路由&#xA;数据保留副本数量: 设置数据保留组件的副本数量，默认值为 1。&#xA;组件副本数量: 设置数据路由组件的副本数量，默认值为 2。&#xA;容器配额: 设置 CPU 预留和限制以及内存预留和上限。&#xA;本地存储&#xA;本地数据存储时间: 设置本地数据的存储时间，最小时间至少 3 天，默认为 7 天。&#xA;组件副本数量: 设置本地存储组件的副本数量，默认值为 2。&#xA;容器配额: 设置 CPU 预留和限制以及内存预留和上限。&#xA;在数据查询页签，设置以下参数。&#xA;参数 描述 基础设置&#xA;组件副本数量: 设置 Query 组件的副本数量，默认值为 2。&#xA;容器配额: 设置 CPU 预留和限制以及内存预留和上限。</description>
     </item>
-    
     <item>
       <title>查看集群关键指标排行</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/04-cluster-monitoring-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/04-cluster-monitoring-list/</guid>
-      <description>本节介绍如何基于多维监控指标对集群进行排序。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-host 集群和需要监控的成员集群需要启用 WizTelemetry 全局监控。
-说明 如果成员集群未启用 WizTelemetry 全局监控，WizTelemetry 全局监控将无法获取成员集群的数据。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择全局监控 &amp;gt; 集群。
-查看各集群的状态、节点数量及其他监控指标的数据。
-在列表上方点击下拉列表选择排序字段和排序方式。
-在列表上方点击搜索框并输入关键字，可按名称搜索集群。
-在列表右上角点击可刷新列表信息。
-在列表右上角点击可定制列表中显示的信息。</description>
+      <description>本节介绍如何基于多维监控指标对集群进行排序。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;host 集群和需要监控的成员集群需要启用 WizTelemetry 全局监控。&#xA;说明 如果成员集群未启用 WizTelemetry 全局监控，WizTelemetry 全局监控将无法获取成员集群的数据。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择全局监控 &amp;gt; 集群。&#xA;查看各集群的状态、节点数量及其他监控指标的数据。&#xA;在列表上方点击下拉列表选择排序字段和排序方式。&#xA;在列表上方点击搜索框并输入关键字，可按名称搜索集群。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。</description>
     </item>
-    
     <item>
       <title>查看集群的监控详情</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/05-cluster-monitoring-details/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/05-cluster-monitoring-details/</guid>
-      <description>本节介绍如何查看单个集群的监控详情。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-host 集群和需要监控的成员集群需要启用 WizTelemetry 全局监控。
-说明 如果成员集群未启用 WizTelemetry 全局监控，WizTelemetry 全局监控将无法获取成员集群的数据。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择全局监控 &amp;gt; 集群。
-在集群列表中点击一个集群的名称打开其详情页面。
-在详情页面的上方区域，查看当前集群的基本信息。
-点击管理集群可进入当前集群的管理页面。
-点击可隐藏该区域。
-在详情页面的概览页签下，查看集群的概览信息。
-功能区 描述 资源统计
-当前集群的节点数量及状态信息、已创建的企业空间、项目、部署、有状态副本集、守护进程集、任务、服务、容器组的数量。
-实时资源用量
-当前集群所有节点的 CPU、内存、磁盘的实时用量和总量。
-点击相应区域，可查看该资源的实时用量百分比。
-集群配额统计
-当前集群中容器和项目的 CPU 配额和内存配额，包含预留数量、上限数量和总量。
-集群告警
-当前集群中全局告警规则组产生的告警数量。此处显示的告警不包括集群和项目的告警规则组产生的告警。全局告警规则组由平台管理员在全局告警中管理。
-告警级别的类型包括提醒、警告、重要和紧急。
-告警状态的类型包括：
-验证中：监控指标满足预设的条件，但未满足预设的持续时间。
-已触发：监控指标满足预设的条件，并且满足预设的持续时间。
-容器组
-当前集群的各种类型容器组的数量。
-容器组状态类型包括：
-等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。
-运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。
-成功完成：容器组中的所有容器都已成功终止（以 0 退出码终止），并且不再重启。
-失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。
-未知：系统无法获取容器组状态。出现这种状态通常是由于系统与容器组所在的主机通信失败。
-容器组 QoS（服务质量）类型包括：
-Guaranteed：容器组中的每个容器都具有内存上限、内存请求、CPU 上限、CPU 请求，并且内存上限等于内存请求，CPU 上限等于 CPU 请求。</description>
+      <description>本节介绍如何查看单个集群的监控详情。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;host 集群和需要监控的成员集群需要启用 WizTelemetry 全局监控。&#xA;说明 如果成员集群未启用 WizTelemetry 全局监控，WizTelemetry 全局监控将无法获取成员集群的数据。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择全局监控 &amp;gt; 集群。&#xA;在集群列表中点击一个集群的名称打开其详情页面。&#xA;在详情页面的上方区域，查看当前集群的基本信息。&#xA;点击管理集群可进入当前集群的管理页面。&#xA;点击可隐藏该区域。&#xA;在详情页面的概览页签下，查看集群的概览信息。&#xA;功能区 描述 资源统计&#xA;当前集群的节点数量及状态信息、已创建的企业空间、项目、部署、有状态副本集、守护进程集、任务、服务、容器组的数量。&#xA;实时资源用量&#xA;当前集群所有节点的 CPU、内存、磁盘的实时用量和总量。&#xA;点击相应区域，可查看该资源的实时用量百分比。&#xA;集群配额统计&#xA;当前集群中容器和项目的 CPU 配额和内存配额，包含预留数量、上限数量和总量。&#xA;集群告警&#xA;当前集群中全局告警规则组产生的告警数量。此处显示的告警不包括集群和项目的告警规则组产生的告警。全局告警规则组由平台管理员在全局告警中管理。&#xA;告警级别的类型包括提醒、警告、重要和紧急。&#xA;告警状态的类型包括：&#xA;验证中：监控指标满足预设的条件，但未满足预设的持续时间。&#xA;已触发：监控指标满足预设的条件，并且满足预设的持续时间。&#xA;容器组&#xA;当前集群的各种类型容器组的数量。&#xA;容器组状态类型包括：&#xA;等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。&#xA;运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。&#xA;成功完成：容器组中的所有容器都已成功终止（以 0 退出码终止），并且不再重启。&#xA;失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。&#xA;未知：系统无法获取容器组状态。出现这种状态通常是由于系统与容器组所在的主机通信失败。&#xA;容器组 QoS（服务质量）类型包括：&#xA;Guaranteed：容器组中的每个容器都具有内存上限、内存请求、CPU 上限、CPU 请求，并且内存上限等于内存请求，CPU 上限等于 CPU 请求。</description>
     </item>
-    
     <item>
       <title>查看节点关键指标排行</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/06-node-monitoring-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/06-node-monitoring-list/</guid>
-      <description>本节介绍如何基于多维监控指标对节点进行排序。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择全局监控 &amp;gt; 节点。
-查看各节点的状态、所属集群及其他监控指标的数据。
-在列表上方点击下拉列表选择集群、排序字段和排序方式。
-在列表上方点击搜索框并输入关键字，可按名称搜索节点。
-在列表右上角点击可刷新列表信息。
-在列表右上角点击可定制列表中显示的信息。</description>
+      <description>本节介绍如何基于多维监控指标对节点进行排序。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择全局监控 &amp;gt; 节点。&#xA;查看各节点的状态、所属集群及其他监控指标的数据。&#xA;在列表上方点击下拉列表选择集群、排序字段和排序方式。&#xA;在列表上方点击搜索框并输入关键字，可按名称搜索节点。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。</description>
     </item>
-    
     <item>
       <title>查看节点的监控详情</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/07-node-monitoring-details/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/07-node-monitoring-details/</guid>
-      <description>本节介绍如何查看单个节点的监控详情。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择全局监控 &amp;gt; 节点。
-在节点列表中点击一个节点的名称打开其详情页面。
-在详情页面的上方区域，查看当前节点的基本信息。
-点击管理节点可进入节点详情页面。
-点击可隐藏该区域。
-在详情页面的概览页签下，查看节点的概览信息。
-功能区 描述 节点健康
-显示节点的调度状态、就绪状态、以及网络、内存、磁盘、进程压力。如果显示 则表明状态正常，如果显示 则表明出现告警。
-调度状态：节点是否被正常调度。
-就绪状态：节点是否已经准备好接收容器组。
-网络可用性：节点的网络配置是否正确。
-内存压力：节点剩余内存是否小于阈值，默认阈值为 100 MiB。
-磁盘压力：节点剩余磁盘空间或 inode 数量是否小于阈值，默认磁盘空间阈值为磁盘空间总量的 10%，默认 inode 数量阈值为 inode 最大数量的 5%。
-进程压力：节点上可创建的进程数量是否小于阈值。新安装的 KubeSphere 集群默认未设置进程数量阈值。
-实时资源用量
-当前节点的 CPU、内存、磁盘的实时用量和总量。
-点击相应区域，可查看该资源的实时用量百分比。
-节点配额统计
-当前节点的 CPU 配额、内存配额和临时存储配额，包含预留数量、上限数量和总量。
-容器组
-当前节点上各种类型容器组的数量。
-容器组状态类型包括：
-等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。
-运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。
-成功完成：容器组中的所有容器都已成功终止（以 0 退出码终止），并且不再重启。
-失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。</description>
+      <description>本节介绍如何查看单个节点的监控详情。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择全局监控 &amp;gt; 节点。&#xA;在节点列表中点击一个节点的名称打开其详情页面。&#xA;在详情页面的上方区域，查看当前节点的基本信息。&#xA;点击管理节点可进入节点详情页面。&#xA;点击可隐藏该区域。&#xA;在详情页面的概览页签下，查看节点的概览信息。&#xA;功能区 描述 节点健康&#xA;显示节点的调度状态、就绪状态、以及网络、内存、磁盘、进程压力。如果显示 则表明状态正常，如果显示 则表明出现告警。&#xA;调度状态：节点是否被正常调度。&#xA;就绪状态：节点是否已经准备好接收容器组。&#xA;网络可用性：节点的网络配置是否正确。&#xA;内存压力：节点剩余内存是否小于阈值，默认阈值为 100 MiB。&#xA;磁盘压力：节点剩余磁盘空间或 inode 数量是否小于阈值，默认磁盘空间阈值为磁盘空间总量的 10%，默认 inode 数量阈值为 inode 最大数量的 5%。&#xA;进程压力：节点上可创建的进程数量是否小于阈值。新安装的 KubeSphere 集群默认未设置进程数量阈值。&#xA;实时资源用量&#xA;当前节点的 CPU、内存、磁盘的实时用量和总量。&#xA;点击相应区域，可查看该资源的实时用量百分比。&#xA;节点配额统计&#xA;当前节点的 CPU 配额、内存配额和临时存储配额，包含预留数量、上限数量和总量。&#xA;容器组&#xA;当前节点上各种类型容器组的数量。&#xA;容器组状态类型包括：&#xA;等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。&#xA;运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。&#xA;成功完成：容器组中的所有容器都已成功终止（以 0 退出码终止），并且不再重启。&#xA;失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。</description>
     </item>
-    
     <item>
       <title>查看企业空间关键指标排行</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/08-ws-monitoring-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/08-ws-monitoring-list/</guid>
-      <description>本节介绍如何基于多维监控指标对企业空间进行排序。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择全局监控 &amp;gt; 企业空间。
-查看各企业空间的授权集群数量、已创建的项目数量及其他监控指标的数据。
-在列表上方点击下拉列表选择集群、排序字段和排序方式。
-在列表上方点击搜索框并输入关键字，可按名称搜索企业空间。
-在列表右上角点击可刷新列表信息。
-在列表右上角点击可定制列表中显示的信息。</description>
+      <description>本节介绍如何基于多维监控指标对企业空间进行排序。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择全局监控 &amp;gt; 企业空间。&#xA;查看各企业空间的授权集群数量、已创建的项目数量及其他监控指标的数据。&#xA;在列表上方点击下拉列表选择集群、排序字段和排序方式。&#xA;在列表上方点击搜索框并输入关键字，可按名称搜索企业空间。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。</description>
     </item>
-    
     <item>
       <title>查看企业空间的监控详情</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/09-ws-monitoring-details/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/09-ws-monitoring-details/</guid>
-      <description>本节介绍如何查看单个企业空间的监控详情。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择全局监控 &amp;gt; 企业空间。
-在企业空间列表中点击一个企业空间的名称打开其详情页面。
-在详情页面的上方区域，点击管理企业空间可进入当前企业空间的管理页面。
-在详情页面的概览页签下，查看企业空间的概览信息。
-功能区 描述 资源统计
-当前企业空间的授权集群数量，已创建的项目、部署、有状态副本集、守护进程集、任务、服务、持久卷声明、应用路由、容器组的数量。
-实时资源用量
-当前企业空间 CPU、内存的实时用量和总量；以及持久卷用量和持久卷预留数量。点击全部，可查看不同类型的存储的持久卷用量和持久卷预留数量。
-点击相应区域，可查看该资源的实时用量百分比。
-企业空间配额
-有关参数的更多信息，请参阅查看企业空间配额。
-容器组
-当前企业空间中各种类型容器组的数量。
-容器组状态类型包括：
-等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。
-运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。
-成功完成：容器组中的所有容器都已成功终止（以 0 退出码终止），并且不再重启。
-失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。
-未知：系统无法获取容器组状态。出现这种状态通常是由于系统与容器组所在的主机通信失败。
-容器组 QoS（服务质量）类型包括：
-Guaranteed：容器组中的每个容器都具有内存上限、内存请求、CPU 上限、CPU 请求，并且内存上限等于内存请求，CPU 上限等于 CPU 请求。
-Burstable：容器组中至少有一个容器不满足 Guaranteed 类型的要求。
-BestEffort：容器组中的容器没有配置任何内存上限、内存请求、CPU 上限或CPU 请求。
-容器组的 QoS 类型将决定容器组运行的优先级。当系统中资源不足以运行所有容器组时，系统优先保证运行 QoS 类型为 Guaranteed 的容器组，其次保证运行 QoS 类型为 Burstable 的容器组，最后保证运行 QoS 类型为 BestEffort 的容器组。</description>
+      <description>本节介绍如何查看单个企业空间的监控详情。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择全局监控 &amp;gt; 企业空间。&#xA;在企业空间列表中点击一个企业空间的名称打开其详情页面。&#xA;在详情页面的上方区域，点击管理企业空间可进入当前企业空间的管理页面。&#xA;在详情页面的概览页签下，查看企业空间的概览信息。&#xA;功能区 描述 资源统计&#xA;当前企业空间的授权集群数量，已创建的项目、部署、有状态副本集、守护进程集、任务、服务、持久卷声明、应用路由、容器组的数量。&#xA;实时资源用量&#xA;当前企业空间 CPU、内存的实时用量和总量；以及持久卷用量和持久卷预留数量。点击全部，可查看不同类型的存储的持久卷用量和持久卷预留数量。&#xA;点击相应区域，可查看该资源的实时用量百分比。&#xA;企业空间配额&#xA;有关参数的更多信息，请参阅查看企业空间配额。&#xA;容器组&#xA;当前企业空间中各种类型容器组的数量。&#xA;容器组状态类型包括：&#xA;等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。&#xA;运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。&#xA;成功完成：容器组中的所有容器都已成功终止（以 0 退出码终止），并且不再重启。&#xA;失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。&#xA;未知：系统无法获取容器组状态。出现这种状态通常是由于系统与容器组所在的主机通信失败。&#xA;容器组 QoS（服务质量）类型包括：&#xA;Guaranteed：容器组中的每个容器都具有内存上限、内存请求、CPU 上限、CPU 请求，并且内存上限等于内存请求，CPU 上限等于 CPU 请求。&#xA;Burstable：容器组中至少有一个容器不满足 Guaranteed 类型的要求。&#xA;BestEffort：容器组中的容器没有配置任何内存上限、内存请求、CPU 上限或CPU 请求。&#xA;容器组的 QoS 类型将决定容器组运行的优先级。当系统中资源不足以运行所有容器组时，系统优先保证运行 QoS 类型为 Guaranteed 的容器组，其次保证运行 QoS 类型为 Burstable 的容器组，最后保证运行 QoS 类型为 BestEffort 的容器组。</description>
     </item>
-    
     <item>
       <title>查看项目关键指标排行</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/10-project-monitoring-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/10-project-monitoring-list/</guid>
-      <description>本节介绍如何基于多维监控指标对项目进行排序。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择全局监控 &amp;gt; 项目。
-查看各项目所属的集群、工作负载数量及其他监控指标的数据。
-在列表上方点击下拉列表选择集群、排序字段和排序方式。
-在列表上方点击搜索框并输入关键字，可按名称搜索项目。
-在列表右上角点击可刷新列表信息。
-在列表右上角点击可定制列表中显示的信息。</description>
+      <description>本节介绍如何基于多维监控指标对项目进行排序。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择全局监控 &amp;gt; 项目。&#xA;查看各项目所属的集群、工作负载数量及其他监控指标的数据。&#xA;在列表上方点击下拉列表选择集群、排序字段和排序方式。&#xA;在列表上方点击搜索框并输入关键字，可按名称搜索项目。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。</description>
     </item>
-    
     <item>
       <title>查看项目的监控详情</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/11-project-monitoring-details/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/11-project-monitoring-details/</guid>
-      <description>本节介绍如何查看单个项目的监控详情。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择全局监控 &amp;gt; 项目。
-在项目列表中点击一个项目的名称打开其详情页面。
-在详情页面的上方区域，查看当前项目的基本信息。
-点击管理项目可进入当前项目的详情页面。
-点击可隐藏该区域。
-在详情页面的概览页签下，查看项目的概览信息。
-功能区 描述 资源统计
-当前项目中已创建的部署、有状态副本集、守护进程集、任务、服务、持久卷声明、应用路由、容器组的数量。
-实时资源用量
-当前项目 CPU、内存的实时用量和总量；以及持久卷用量和持久卷预留数量。点击全部，可查看不同类型的存储的持久卷用量和持久卷预留数量。
-点击相应区域，可查看该资源的实时用量百分比。
-项目配额
-有关参数的更多信息，请参阅查看项目配额。
-项目告警
-当前项目中全局告警规则组产生的告警数量。此处显示的告警不包括集群和项目的告警规则组产生的告警。全局告警规则组由平台管理员在全局告警中管理。
-告警级别的类型包括提醒、警告、重要和紧急。
-告警状态的类型包括：
-验证中：监控指标满足预设的条件，但未满足预设的持续时间。
-已触发：监控指标满足预设的条件，并且满足预设的持续时间。
-容器组
-当前项目的各种类型容器组的数量。
-容器组状态类型包括：
-等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。
-运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。
-成功完成：容器组中的所有容器都已成功终止（以 0 退出码终止），并且不再重启。
-失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。
-未知：系统无法获取容器组状态。出现这种状态通常是由于系统与容器组所在的主机通信失败。
-容器组 QoS（服务质量）类型包括：
-Guaranteed：容器组中的每个容器都具有内存上限、内存请求、CPU 上限、CPU 请求，并且内存上限等于内存请求，CPU 上限等于 CPU 请求。
-Burstable：容器组中至少有一个容器不满足 Guaranteed 类型的要求。
-BestEffort：容器组中的容器没有配置任何内存上限、内存请求、CPU 上限或CPU 请求。
-容器组的 QoS 类型将决定容器组运行的优先级。当系统中资源不足以运行所有容器组时，系统优先保证运行 QoS 类型为 Guaranteed 的容器组，其次保证运行 QoS 类型为 Burstable 的容器组，最后保证运行 QoS 类型为 BestEffort 的容器组。</description>
+      <description>本节介绍如何查看单个项目的监控详情。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择全局监控 &amp;gt; 项目。&#xA;在项目列表中点击一个项目的名称打开其详情页面。&#xA;在详情页面的上方区域，查看当前项目的基本信息。&#xA;点击管理项目可进入当前项目的详情页面。&#xA;点击可隐藏该区域。&#xA;在详情页面的概览页签下，查看项目的概览信息。&#xA;功能区 描述 资源统计&#xA;当前项目中已创建的部署、有状态副本集、守护进程集、任务、服务、持久卷声明、应用路由、容器组的数量。&#xA;实时资源用量&#xA;当前项目 CPU、内存的实时用量和总量；以及持久卷用量和持久卷预留数量。点击全部，可查看不同类型的存储的持久卷用量和持久卷预留数量。&#xA;点击相应区域，可查看该资源的实时用量百分比。&#xA;项目配额&#xA;有关参数的更多信息，请参阅查看项目配额。&#xA;项目告警&#xA;当前项目中全局告警规则组产生的告警数量。此处显示的告警不包括集群和项目的告警规则组产生的告警。全局告警规则组由平台管理员在全局告警中管理。&#xA;告警级别的类型包括提醒、警告、重要和紧急。&#xA;告警状态的类型包括：&#xA;验证中：监控指标满足预设的条件，但未满足预设的持续时间。&#xA;已触发：监控指标满足预设的条件，并且满足预设的持续时间。&#xA;容器组&#xA;当前项目的各种类型容器组的数量。&#xA;容器组状态类型包括：&#xA;等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。&#xA;运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。&#xA;成功完成：容器组中的所有容器都已成功终止（以 0 退出码终止），并且不再重启。&#xA;失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。&#xA;未知：系统无法获取容器组状态。出现这种状态通常是由于系统与容器组所在的主机通信失败。&#xA;容器组 QoS（服务质量）类型包括：&#xA;Guaranteed：容器组中的每个容器都具有内存上限、内存请求、CPU 上限、CPU 请求，并且内存上限等于内存请求，CPU 上限等于 CPU 请求。&#xA;Burstable：容器组中至少有一个容器不满足 Guaranteed 类型的要求。&#xA;BestEffort：容器组中的容器没有配置任何内存上限、内存请求、CPU 上限或CPU 请求。&#xA;容器组的 QoS 类型将决定容器组运行的优先级。当系统中资源不足以运行所有容器组时，系统优先保证运行 QoS 类型为 Guaranteed 的容器组，其次保证运行 QoS 类型为 Burstable 的容器组，最后保证运行 QoS 类型为 BestEffort 的容器组。</description>
     </item>
-    
     <item>
       <title>查看容器组关键指标排行</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/12-pod-monitoring-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/12-pod-monitoring-list/</guid>
-      <description>本节介绍如何基于多维监控指标对容器组进行排序。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择全局监控 &amp;gt; 容器组。
-查看各容器组的状态、所属项目、 容器组 IP及其他监控指标的数据。
-在列表上方点击下拉列表选择集群、排序字段和排序方式。
-在列表上方点击搜索框并输入关键字，可按名称搜索容器组。
-在列表右上角点击可刷新列表信息。
-在列表右上角点击可定制列表中显示的信息。</description>
+      <description>本节介绍如何基于多维监控指标对容器组进行排序。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择全局监控 &amp;gt; 容器组。&#xA;查看各容器组的状态、所属项目、 容器组 IP及其他监控指标的数据。&#xA;在列表上方点击下拉列表选择集群、排序字段和排序方式。&#xA;在列表上方点击搜索框并输入关键字，可按名称搜索容器组。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。</description>
     </item>
-    
     <item>
       <title>查看容器组的监控详情</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/13-pod-monitoring-details/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/13-pod-monitoring-details/</guid>
-      <description>本节介绍如何查看单个容器组的监控详情。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择全局监控 &amp;gt; 容器组。
-在容器组列表中点击一个容器组的名称打开其详情页面。
-在详情页面的上方区域，查看当前容器组的基本信息。
-点击管理容器组可进入当前容器组的详情页面。
-点击可隐藏该区域。
-在详情页面的监控页签下，查看容器组的 CPU 配额、内存配额、 以及监控指标在指定时间范围内的详细信息。
-在右上角点击可设置数据的时间范围。
-在右上角点击/可开启/停止实时数据刷新。
-在右上角点击可手动刷新数据。
-点击详情页面的容器页签，查看容器组中所有容器的监控信息。
-在列表上方点击下拉列表选择排序字段和排序方式。
-点击容器名称，进入容器的监控详情页面。</description>
+      <description>本节介绍如何查看单个容器组的监控详情。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择全局监控 &amp;gt; 容器组。&#xA;在容器组列表中点击一个容器组的名称打开其详情页面。&#xA;在详情页面的上方区域，查看当前容器组的基本信息。&#xA;点击管理容器组可进入当前容器组的详情页面。&#xA;点击可隐藏该区域。&#xA;在详情页面的监控页签下，查看容器组的 CPU 配额、内存配额、 以及监控指标在指定时间范围内的详细信息。&#xA;在右上角点击可设置数据的时间范围。&#xA;在右上角点击/可开启/停止实时数据刷新。&#xA;在右上角点击可手动刷新数据。&#xA;点击详情页面的容器页签，查看容器组中所有容器的监控信息。&#xA;在列表上方点击下拉列表选择排序字段和排序方式。&#xA;点击容器名称，进入容器的监控详情页面。</description>
     </item>
-    
   </channel>
 </rss>

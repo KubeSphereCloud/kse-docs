@@ -4,123 +4,44 @@
     <title>企业空间成员 on KubeSphere 企业版</title>
     <link>/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/</link>
     <description>Recent content in 企业空间成员 on KubeSphere 企业版</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>邀请用户加入企业空间</title>
       <link>/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/01-invite-a-user-to-a-workspace/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/01-invite-a-user-to-a-workspace/</guid>
-      <description>本节介绍如何邀请用户加入企业空间。
-前提条件 您需要加入一个企业空间并在企业空间中具有成员管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
-已在用户和角色管理中创建一个用户。
-操作步骤 以具有成员管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择企业空间设置 &amp;gt; 企业空间成员。
-在页面右侧点击邀请。
-在邀请成员对话框，在需要邀请的用户右侧点击，在下拉列表中选择用户在企业空间中的角色，然后点击确定。
-KubeSphere 企业版平台提供以下预置企业空间角色：
-角色 描述 workspace-admin
-企业空间管理员，在企业空间内具有全部权限。
-workspace-self-provisioner
-企业空间自治用户，在企业空间内可以创建项目、查看企业空间设置，同时对自身创建的项目具有管理权限。
-workspace-viewer
-企业空间观察员，可以查看企业空间内的所有资源。
-workspace-regular
-企业空间普通用户，在企业空间内只具有企业空间设置查看权限。该角色一般授予不需要其他企业空间权限的项目成员。
-用户被邀请加入企业空间后将显示在企业空间成员列表中。</description>
+      <description>本节介绍如何邀请用户加入企业空间。&#xA;前提条件 您需要加入一个企业空间并在企业空间中具有成员管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。&#xA;已在用户和角色管理中创建一个用户。&#xA;操作步骤 以具有成员管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择企业空间设置 &amp;gt; 企业空间成员。&#xA;在页面右侧点击邀请。&#xA;在邀请成员对话框，在需要邀请的用户右侧点击，在下拉列表中选择用户在企业空间中的角色，然后点击确定。&#xA;KubeSphere 企业版平台提供以下预置企业空间角色：&#xA;角色 描述 workspace-admin&#xA;企业空间管理员，在企业空间内具有全部权限。&#xA;workspace-self-provisioner&#xA;企业空间自治用户，在企业空间内可以创建项目、查看企业空间设置，同时对自身创建的项目具有管理权限。&#xA;workspace-viewer&#xA;企业空间观察员，可以查看企业空间内的所有资源。&#xA;workspace-regular&#xA;企业空间普通用户，在企业空间内只具有企业空间设置查看权限。该角色一般授予不需要其他企业空间权限的项目成员。&#xA;用户被邀请加入企业空间后将显示在企业空间成员列表中。</description>
     </item>
-    
     <item>
       <title>查看企业空间成员列表</title>
       <link>/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/02-view-a-workspace-member-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/02-view-a-workspace-member-list/</guid>
-      <description>本节介绍如何查看企业空间成员列表。
-前提条件 您需要加入一个企业空间并在企业空间中具有成员查看权限。有关更多信息，请参阅企业空间成员和企业空间角色。
-操作步骤 以具有成员查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择企业空间设置 &amp;gt; 企业空间成员。
-企业空间成员列表提供以下信息：
-参数 描述 名称
-企业空间成员的用户名。
-状态
-企业空间成员当前的状态。
-活跃：用户当前状态正常。
-等待中：系统正在创建用户。
-已禁用：用户被平台管理员禁用，无法登录 KubeSphere 企业版 Web 控制台。
-限制登录：用户在 10 分钟内连续 10 次登录失败，在 10 分钟内被禁止登录 KubeSphere 企业版 Web 控制台。
-角色
-企业空间成员在企业空间中的角色。
-最近登录
-企业空间成员最近一次登录 KubeSphere 企业版 Web 控制台的时间。
-在列表上方点击搜索框并输入关键字，可按用户名搜索企业空间成员。
-在列表右上角点击可刷新列表信息。
-在列表右上角点击可定制列表中显示的信息。</description>
+      <description>本节介绍如何查看企业空间成员列表。&#xA;前提条件 您需要加入一个企业空间并在企业空间中具有成员查看权限。有关更多信息，请参阅企业空间成员和企业空间角色。&#xA;操作步骤 以具有成员查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择企业空间设置 &amp;gt; 企业空间成员。&#xA;企业空间成员列表提供以下信息：&#xA;参数 描述 名称&#xA;企业空间成员的用户名。&#xA;状态&#xA;企业空间成员当前的状态。&#xA;活跃：用户当前状态正常。&#xA;等待中：系统正在创建用户。&#xA;已禁用：用户被平台管理员禁用，无法登录 KubeSphere 企业版 Web 控制台。&#xA;限制登录：用户在 10 分钟内连续 10 次登录失败，在 10 分钟内被禁止登录 KubeSphere 企业版 Web 控制台。&#xA;角色&#xA;企业空间成员在企业空间中的角色。&#xA;最近登录&#xA;企业空间成员最近一次登录 KubeSphere 企业版 Web 控制台的时间。&#xA;在列表上方点击搜索框并输入关键字，可按用户名搜索企业空间成员。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。</description>
     </item>
-    
     <item>
       <title>查看企业空间成员详情</title>
       <link>/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/03-view-workspace-member-details/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/03-view-workspace-member-details/</guid>
-      <description>本节介绍如何查看企业空间成员详情。
-前提条件 您需要加入一个企业空间并在企业空间中具有成员查看权限。有关更多信息，请参阅企业空间成员和企业空间角色。
-操作步骤 以具有成员查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择企业空间设置 &amp;gt; 企业空间成员。
-在企业空间成员列表点击一个企业空间成员的名称打开其详情页面。
-在企业空间成员详情页面的属性区域查看企业空间成员的资源属性。
-参数 描述 企业空间
-当前企业空间的名称。
-企业空间角色
-企业空间成员的角色。
-邮箱
-企业空间成员的邮箱地址。
-在企业空间成员详情页面的项目页签查看企业空间成员所属的项目。
-在左上角点击集群下拉列表然后选择一个集群，可查看特定集群中的项目。</description>
+      <description>本节介绍如何查看企业空间成员详情。&#xA;前提条件 您需要加入一个企业空间并在企业空间中具有成员查看权限。有关更多信息，请参阅企业空间成员和企业空间角色。&#xA;操作步骤 以具有成员查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择企业空间设置 &amp;gt; 企业空间成员。&#xA;在企业空间成员列表点击一个企业空间成员的名称打开其详情页面。&#xA;在企业空间成员详情页面的属性区域查看企业空间成员的资源属性。&#xA;参数 描述 企业空间&#xA;当前企业空间的名称。&#xA;企业空间角色&#xA;企业空间成员的角色。&#xA;邮箱&#xA;企业空间成员的邮箱地址。&#xA;在企业空间成员详情页面的项目页签查看企业空间成员所属的项目。&#xA;在左上角点击集群下拉列表然后选择一个集群，可查看特定集群中的项目。</description>
     </item>
-    
     <item>
       <title>修改企业空间成员的角色</title>
       <link>/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/04-change-the-role-of-a-workspace-member/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/04-change-the-role-of-a-workspace-member/</guid>
-      <description>本节介绍如何修改企业空间成员的角色。
-前提条件 您需要加入一个企业空间并在企业空间中具有成员管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
-操作步骤 以具有成员管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择企业空间设置 &amp;gt; 企业空间成员。
-在需要操作的企业空间成员右侧点击，然后选择修改角色。
-在修改角色对话框，设置企业空间成员的角色，然后在下拉列表中点击确定。
-KubeSphere 企业版平台提供以下预置企业空间角色：
-角色 描述 workspace-admin
-企业空间管理员，在企业空间内具有全部权限。
-workspace-self-provisioner
-企业空间自治用户，在企业空间内可以创建项目、查看企业空间设置，同时对自身创建的项目具有管理权限。
-workspace-viewer
-企业空间观察员，可以查看企业空间内的所有资源。
-workspace-regular
-企业空间普通用户，在企业空间内只具有企业空间设置查看权限。该角色一般授予不需要其他企业空间权限的项目成员。
-您也可以将企业空间成员的角色修改为用户创建的企业空间角色。</description>
+      <description>本节介绍如何修改企业空间成员的角色。&#xA;前提条件 您需要加入一个企业空间并在企业空间中具有成员管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。&#xA;操作步骤 以具有成员管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择企业空间设置 &amp;gt; 企业空间成员。&#xA;在需要操作的企业空间成员右侧点击，然后选择修改角色。&#xA;在修改角色对话框，设置企业空间成员的角色，然后在下拉列表中点击确定。&#xA;KubeSphere 企业版平台提供以下预置企业空间角色：&#xA;角色 描述 workspace-admin&#xA;企业空间管理员，在企业空间内具有全部权限。&#xA;workspace-self-provisioner&#xA;企业空间自治用户，在企业空间内可以创建项目、查看企业空间设置，同时对自身创建的项目具有管理权限。&#xA;workspace-viewer&#xA;企业空间观察员，可以查看企业空间内的所有资源。&#xA;workspace-regular&#xA;企业空间普通用户，在企业空间内只具有企业空间设置查看权限。该角色一般授予不需要其他企业空间权限的项目成员。&#xA;您也可以将企业空间成员的角色修改为用户创建的企业空间角色。</description>
     </item>
-    
     <item>
       <title>移除企业空间成员</title>
       <link>/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/05-remove-a-workspace-member/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/08-workspace-management/06-workspace-settings/03-workspace-members/05-remove-a-workspace-member/</guid>
-      <description>本节介绍如何移除企业空间成员。
-说明 用户被从企业空间中移除后，将失去企业空间角色提供的权限。如果用户已加入企业空间中的项目，也会从项目中移除。
-前提条件 您需要加入一个企业空间并在企业空间中具有成员管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。
-操作步骤 以具有成员管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择企业空间设置 &amp;gt; 企业空间成员。
-在需要移除的企业空间成员右侧点击，然后选择移除。
-在移除成员对话框输入企业空间成员的用户名，然后点击确定。
-企业空间成员被移除后将不再显示在企业空间成员列表中。</description>
+      <description>本节介绍如何移除企业空间成员。&#xA;说明 用户被从企业空间中移除后，将失去企业空间角色提供的权限。如果用户已加入企业空间中的项目，也会从项目中移除。&#xA;前提条件 您需要加入一个企业空间并在企业空间中具有成员管理权限。有关更多信息，请参阅企业空间成员和企业空间角色。&#xA;操作步骤 以具有成员管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择企业空间设置 &amp;gt; 企业空间成员。&#xA;在需要移除的企业空间成员右侧点击，然后选择移除。&#xA;在移除成员对话框输入企业空间成员的用户名，然后点击确定。&#xA;企业空间成员被移除后将不再显示在企业空间成员列表中。</description>
     </item>
-    
   </channel>
 </rss>
