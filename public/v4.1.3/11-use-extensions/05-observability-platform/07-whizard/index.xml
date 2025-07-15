@@ -4,59 +4,23 @@
     <title>Whizard 可观测中心 on KubeSphere 企业版</title>
     <link>/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/</link>
     <description>Recent content in Whizard 可观测中心 on KubeSphere 企业版</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>启用 Whizard 可观测中心</title>
       <link>/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/01-enable-whizard/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/01-enable-whizard/</guid>
-      <description>本节介绍如何配置相关扩展组件，以启用 Whizard 可观测中心。
-为了使用 Whizard 可观测中心的完整功能，您需要安装并启用 WizTelemetry 平台服务、 WizTelemetry 监控以及 WizTelemetry 告警扩展组件，并进行以下配置。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-已安装 WizTelemetry 平台服务、 WizTelemetry 监控以及 WizTelemetry 告警扩展组件。
-已在平台设置 &amp;gt; 许可证页面导入分布式云可观测中心的 license，否则，无法看到 Whizard 可观测中心的入口。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-点击扩展中心。
-点击已安装的组件名称，进入组件详情页。
-点击组件图标下的，选择扩展组件配置。
-WizTelemetry 平台服务
-将配置文件中的 whizard-telemetry.config.observability.enabled 参数设置为 true，然后点击确定。
-whizard-telemetry: config: observability: enabled: true endpoint: &amp;#34;http://query-frontend-whizard-operated.kubesphere-monitoring-system.svc:10902&amp;#34; WizTelemetry 监控
-修改配置文件的以下部分，然后点击确定。
-whizard-monitoring-helper: whizardHelper: enabled: true ## set true to enable whizard whizard: enabled: true frontend: enabled: true whizardAgentProxy: enabled: true whizard-agent-proxy: config: gatewayUrl: &amp;#34;http://172.</description>
+      <description>本节介绍如何配置相关扩展组件，以启用 Whizard 可观测中心。&#xA;为了使用 Whizard 可观测中心的完整功能，您需要安装并启用 WizTelemetry 平台服务、 WizTelemetry 监控以及 WizTelemetry 告警扩展组件，并进行以下配置。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;已安装 WizTelemetry 平台服务、 WizTelemetry 监控以及 WizTelemetry 告警扩展组件。&#xA;已在平台设置 &amp;gt; 许可证页面导入分布式云可观测中心的 license，否则，无法看到 Whizard 可观测中心的入口。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;点击扩展中心。&#xA;点击已安装的组件名称，进入组件详情页。&#xA;点击组件图标下的，选择扩展组件配置。&#xA;WizTelemetry 平台服务&#xA;将配置文件中的 whizard-telemetry.config.observability.enabled 参数设置为 true，然后点击确定。&#xA;whizard-telemetry: config: observability: enabled: true endpoint: &amp;#34;http://query-frontend-whizard-operated.kubesphere-monitoring-system.svc:10902&amp;#34; WizTelemetry 监控&#xA;修改配置文件的以下部分，然后点击确定。&#xA;whizard-monitoring-helper: whizardHelper: enabled: true ## set true to enable whizard whizard: enabled: true frontend: enabled: true whizardAgentProxy: enabled: true whizard-agent-proxy: config: gatewayUrl: &amp;#34;http://172.</description>
     </item>
-    
     <item>
       <title>设置组件</title>
       <link>/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/11-set-alert-components/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/11-set-alert-components/</guid>
-      <description>本节介绍如何设置 Whizard 可观测中心的组件。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 Whizard 可观测中心。
-在多集群监控页面右侧，点击进入组件设置页面。
-在数据接入页签，设置以下参数。
-参数 描述 网关设置
-组件副本数量: 设置存储网关组件的副本数量，默认值为 2。
-容器配额: 设置 CPU 预留和限制以及内存预留和上限。
-数据路由
-数据保留副本数量: 设置数据保留组件的副本数量，默认值为 1。
-组件副本数量: 设置数据路由组件的副本数量，默认值为 2。
-容器配额: 设置 CPU 预留和限制以及内存预留和上限。
-本地存储
-本地数据存储时间: 设置本地数据的存储时间，最小时间至少 3 天，默认为 7 天。
-组件副本数量: 设置本地存储组件的副本数量，默认值为 2。
-容器配额: 设置 CPU 预留和限制以及内存预留和上限。
-在数据查询页签，设置以下参数。
-参数 描述 基础设置
-组件副本数量: 设置 Query 组件的副本数量，默认值为 2。
-容器配额: 设置 CPU 预留和限制以及内存预留和上限。</description>
+      <description>本节介绍如何设置 Whizard 可观测中心的组件。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 Whizard 可观测中心。&#xA;在多集群监控页面右侧，点击进入组件设置页面。&#xA;在数据接入页签，设置以下参数。&#xA;参数 描述 网关设置&#xA;组件副本数量: 设置存储网关组件的副本数量，默认值为 2。&#xA;容器配额: 设置 CPU 预留和限制以及内存预留和上限。&#xA;数据路由&#xA;数据保留副本数量: 设置数据保留组件的副本数量，默认值为 1。&#xA;组件副本数量: 设置数据路由组件的副本数量，默认值为 2。&#xA;容器配额: 设置 CPU 预留和限制以及内存预留和上限。&#xA;本地存储&#xA;本地数据存储时间: 设置本地数据的存储时间，最小时间至少 3 天，默认为 7 天。&#xA;组件副本数量: 设置本地存储组件的副本数量，默认值为 2。&#xA;容器配额: 设置 CPU 预留和限制以及内存预留和上限。&#xA;在数据查询页签，设置以下参数。&#xA;参数 描述 基础设置&#xA;组件副本数量: 设置 Query 组件的副本数量，默认值为 2。&#xA;容器配额: 设置 CPU 预留和限制以及内存预留和上限。</description>
     </item>
-    
   </channel>
 </rss>

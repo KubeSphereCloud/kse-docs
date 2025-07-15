@@ -4,171 +4,51 @@
     <title>镜像构建器 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/03-image-builder/</link>
     <description>Recent content in 镜像构建器 on KubeSphere 企业版</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/03-image-builder/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.2.0/11-use-extensions/03-image-builder/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>查看镜像构建器列表</title>
       <link>/v4.2.0/11-use-extensions/03-image-builder/02-view-an-image-builder-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/03-image-builder/02-view-an-image-builder-list/</guid>
-      <description>本节介绍如何查看镜像构建器列表。
-前提条件 您需要加入一个项目并在项目中具有应用负载查看权限。有关更多信息，请参阅项目成员和项目角色。
-操作步骤 以具有应用负载查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择镜像构建器。
-在页面左上角的下拉列表中选择一个项目。
-镜像构建器列表提供以下信息：
-参数 描述 名称
-镜像构建器的名称。由系统自动生成，格式为 &amp;lt;镜像命名空间&amp;gt;-&amp;lt;镜像名称&amp;gt;-&amp;lt;镜像标签&amp;gt;-&amp;lt;随机码&amp;gt;。
-状态
-镜像构建器的运行状态。
-未运行：镜像构建器创建完成后尚未开始运行。
-构建中：镜像构建器正在构建镜像。
-成功：镜像构建完成并且成功推送到镜像服务。
-失败：镜像构建或推送失败。
-未知：系统出现异常，无法获取镜像构建器状态。
-类型
-镜像构建器的类型。
-s2i：使用源代码构建镜像。
-b2i：使用制品构建镜像。
-服务
-调用镜像构建器的服务。如果镜像构建器是通过创建服务生成的，此处将显示服务的名称。
-创建时间
-镜像构建器的创建时间。
-在列表上方点击搜索框并设置搜索条件，可按名称或类型搜索镜像构建器。
-在列表右上角点击可刷新列表信息。
-在列表右上角点击可定制列表中显示的信息。</description>
+      <description>本节介绍如何查看镜像构建器列表。&#xA;前提条件 您需要加入一个项目并在项目中具有应用负载查看权限。有关更多信息，请参阅项目成员和项目角色。&#xA;操作步骤 以具有应用负载查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择镜像构建器。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;镜像构建器列表提供以下信息：&#xA;参数 描述 名称&#xA;镜像构建器的名称。由系统自动生成，格式为 &amp;lt;镜像命名空间&amp;gt;-&amp;lt;镜像名称&amp;gt;-&amp;lt;镜像标签&amp;gt;-&amp;lt;随机码&amp;gt;。&#xA;状态&#xA;镜像构建器的运行状态。&#xA;未运行：镜像构建器创建完成后尚未开始运行。&#xA;构建中：镜像构建器正在构建镜像。&#xA;成功：镜像构建完成并且成功推送到镜像服务。&#xA;失败：镜像构建或推送失败。&#xA;未知：系统出现异常，无法获取镜像构建器状态。&#xA;类型&#xA;镜像构建器的类型。&#xA;s2i：使用源代码构建镜像。&#xA;b2i：使用制品构建镜像。&#xA;服务&#xA;调用镜像构建器的服务。如果镜像构建器是通过创建服务生成的，此处将显示服务的名称。&#xA;创建时间&#xA;镜像构建器的创建时间。&#xA;在列表上方点击搜索框并设置搜索条件，可按名称或类型搜索镜像构建器。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。</description>
     </item>
-    
     <item>
       <title>查看镜像构建器详情</title>
       <link>/v4.2.0/11-use-extensions/03-image-builder/03-view-image-builder-details/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/03-image-builder/03-view-image-builder-details/</guid>
-      <description>本节介绍如何查看镜像构建器详情。
-前提条件 您需要加入一个项目并在项目中具有应用负载查看权限。有关更多信息，请参阅项目成员和项目角色。
-操作步骤 以具有应用负载查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择镜像构建器。
-在页面左上角的下拉列表中选择一个项目。
-在镜像构建器列表中点击一个镜像构建器的名称打开其详情页面。
-在镜像构建器详情页面的属性区域查看镜像构建器的资源属性。
-参数 描述 名称
-镜像构建器的名称。由系统自动生成，格式为 &amp;lt;镜像命名空间&amp;gt;-&amp;lt;镜像名称&amp;gt;-&amp;lt;镜像标签&amp;gt;-&amp;lt;随机码&amp;gt;。
-项目
-镜像构建器所属的项目。
-类型
-镜像构建器的类型。
-s2i：使用源代码构建镜像。
-b2i：使用制品构建镜像。
-构建器镜像
-构建器本身的镜像地址、名称和标签。
-镜像名称
-构建生成的目标镜像的命名空间和名称。
-代码仓库 URL
-源代码仓库的地址。目前仅支持 Git 仓库。
-拉取策略
-构建过程中拉取基础镜像或依赖镜像的策略。
-优先使用本地镜像（IfNotPresent）：优先使用容器运行时存储在节点的镜像。
-每次都拉取镜像（Always）：每次都尝试从镜像仓库拉取镜像。
-仅使用本地镜像（Never）：仅使用容器运行时存储在节点的镜像。
-远程触发器
-用于触发镜像构建的 URL，向该地址发送 HTTP GET 请求将触发镜像构建。此处显示的地址只能从集群内部访问，如需从集群外部访问，您需要进行以下步骤：
-将 s2ioperator-trigger-service 服务以 NodePort 或 LoadBalancer 方式对外暴露。
-向 s2ioperator-trigger-service 服务的外部访问地址和相同的路径发送 HTTP GET 请求触发镜像构建。
-创建时间
-镜像构建器的创建时间。
-创建者
-创建镜像构建器的用户。
-在镜像构建器详情页面的运行记录页签查看镜像构建器的运行记录。
-参数 描述 最后构建环境
-最后一次镜像构建所使用的构建环境。
-对于通过源代码构建镜像，显示构建器镜像、代码仓库 URL 和代码所在的分支。</description>
+      <description>本节介绍如何查看镜像构建器详情。&#xA;前提条件 您需要加入一个项目并在项目中具有应用负载查看权限。有关更多信息，请参阅项目成员和项目角色。&#xA;操作步骤 以具有应用负载查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择镜像构建器。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;在镜像构建器列表中点击一个镜像构建器的名称打开其详情页面。&#xA;在镜像构建器详情页面的属性区域查看镜像构建器的资源属性。&#xA;参数 描述 名称&#xA;镜像构建器的名称。由系统自动生成，格式为 &amp;lt;镜像命名空间&amp;gt;-&amp;lt;镜像名称&amp;gt;-&amp;lt;镜像标签&amp;gt;-&amp;lt;随机码&amp;gt;。&#xA;项目&#xA;镜像构建器所属的项目。&#xA;类型&#xA;镜像构建器的类型。&#xA;s2i：使用源代码构建镜像。&#xA;b2i：使用制品构建镜像。&#xA;构建器镜像&#xA;构建器本身的镜像地址、名称和标签。&#xA;镜像名称&#xA;构建生成的目标镜像的命名空间和名称。&#xA;代码仓库 URL&#xA;源代码仓库的地址。目前仅支持 Git 仓库。&#xA;拉取策略&#xA;构建过程中拉取基础镜像或依赖镜像的策略。&#xA;优先使用本地镜像（IfNotPresent）：优先使用容器运行时存储在节点的镜像。&#xA;每次都拉取镜像（Always）：每次都尝试从镜像仓库拉取镜像。&#xA;仅使用本地镜像（Never）：仅使用容器运行时存储在节点的镜像。&#xA;远程触发器&#xA;用于触发镜像构建的 URL，向该地址发送 HTTP GET 请求将触发镜像构建。此处显示的地址只能从集群内部访问，如需从集群外部访问，您需要进行以下步骤：&#xA;将 s2ioperator-trigger-service 服务以 NodePort 或 LoadBalancer 方式对外暴露。&#xA;向 s2ioperator-trigger-service 服务的外部访问地址和相同的路径发送 HTTP GET 请求触发镜像构建。&#xA;创建时间&#xA;镜像构建器的创建时间。&#xA;创建者&#xA;创建镜像构建器的用户。&#xA;在镜像构建器详情页面的运行记录页签查看镜像构建器的运行记录。&#xA;参数 描述 最后构建环境&#xA;最后一次镜像构建所使用的构建环境。&#xA;对于通过源代码构建镜像，显示构建器镜像、代码仓库 URL 和代码所在的分支。</description>
     </item>
-    
     <item>
       <title>编辑镜像构建器信息</title>
       <link>/v4.2.0/11-use-extensions/03-image-builder/04-edit-image-builder-information/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/03-image-builder/04-edit-image-builder-information/</guid>
-      <description>本节介绍如何编辑镜像构建器信息。
-您可以编辑镜像构建器的别名和描述。KubeSphere 企业版不支持编辑镜像构建器的名称。
-前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
-操作步骤 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择镜像构建器。
-在页面左上角的下拉列表中选择一个项目。
-在需要操作的镜像构建器右侧点击，然后在下拉列表中选择编辑信息。
-在编辑信息对话框，设置镜像构建器的别名和描述，然后点击确定。
-参数 描述 别名
-镜像构建器的别名。不同镜像构建器的别名可以相同。
-描述
-镜像构建器的描述信息。描述可包含任意字符，最多包含 256 个字符。</description>
+      <description>本节介绍如何编辑镜像构建器信息。&#xA;您可以编辑镜像构建器的别名和描述。KubeSphere 企业版不支持编辑镜像构建器的名称。&#xA;前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。&#xA;操作步骤 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择镜像构建器。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;在需要操作的镜像构建器右侧点击，然后在下拉列表中选择编辑信息。&#xA;在编辑信息对话框，设置镜像构建器的别名和描述，然后点击确定。&#xA;参数 描述 别名&#xA;镜像构建器的别名。不同镜像构建器的别名可以相同。&#xA;描述&#xA;镜像构建器的描述信息。描述可包含任意字符，最多包含 256 个字符。</description>
     </item>
-    
     <item>
       <title>运行镜像构建器</title>
       <link>/v4.2.0/11-use-extensions/03-image-builder/05-run-an-image-builder/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/03-image-builder/05-run-an-image-builder/</guid>
-      <description>本节介绍如何运行镜像构建器。
-镜像构建器开始运行后会将源代码或制品文件构建为容器镜像，并将其推送到指定的镜像服务。
-前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
-操作步骤 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择镜像构建器。
-在页面左上角的下拉列表中选择一个项目。
-在需要操作的镜像构建器右侧点击，然后在下拉列表中选择运行。
-（可选）在运行对话框，根据需要修改镜像构建器的参数。
-说明 有关镜像构建器参数的更多信息，请参阅使用源代码创建镜像构建器和使用制品创建镜像构建器。
-在运行对话框，点击运行。
-镜像构建器将启动镜像构建流程。如果镜像构建成功，访问镜像仓库，您将看到带有预期标签的镜像。</description>
+      <description>本节介绍如何运行镜像构建器。&#xA;镜像构建器开始运行后会将源代码或制品文件构建为容器镜像，并将其推送到指定的镜像服务。&#xA;前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。&#xA;操作步骤 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择镜像构建器。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;在需要操作的镜像构建器右侧点击，然后在下拉列表中选择运行。&#xA;（可选）在运行对话框，根据需要修改镜像构建器的参数。&#xA;说明 有关镜像构建器参数的更多信息，请参阅使用源代码创建镜像构建器和使用制品创建镜像构建器。&#xA;在运行对话框，点击运行。&#xA;镜像构建器将启动镜像构建流程。如果镜像构建成功，访问镜像仓库，您将看到带有预期标签的镜像。</description>
     </item>
-    
     <item>
       <title>配置 S2I 和 B2I Webhooks</title>
       <link>/v4.2.0/11-use-extensions/03-image-builder/06-s2i-and-b2i-webhooks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/03-image-builder/06-s2i-and-b2i-webhooks/</guid>
-      <description>KubeSphere 提供 Source-to-Image (S2I) 和 Binary-to-Image (B2I) 功能，以自动化构建、推送镜像和部署应用程序。您可以配置 S2I 和 B2I Webhook，当代码仓库发生特定事件时，自动触发镜像构建器。
-本教程演示如何配置 S2I 和 B2I webhooks。
-准备工作 已创建一个 S2I 镜像构建器和 B2I 镜像构建器。有关更多信息，请参阅使用源代码创建镜像构建器和使用制品创建镜像构建器。
-配置 S2I Webhook 步骤 1: 暴露 S2I trigger 服务 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
-前往应用负载下的服务，搜索 s2ioperator-trigger-service。
-点击，选择编辑外部访问。
-在弹出的对话框中，从访问模式的下拉菜单中选择 NodePort，然后点击确定。
-提示 根据需要，您也可以选择 LoadBalancer。
-在列表中可以查看该服务的 NodePort。S2I webhook URL 中将包含此 NodePort。
-说明 访问服务前，您可能需要配置端口转发规则并在安全组中放行该端口。
-步骤 2：配置 S2I webhook 进入您的企业空间。
-在镜像构建器中，点击 S2I 镜像构建器，进入详情页面。
-复制远程触发器中的链接，S2I webhook URL 中将包含这个链接。示例：
-http://s2ioperator-trigger-service.extension-s2ibuilder.svc/s2itrigger/v1alpha1/general/namespaces/project1/s2ibuilders/felixnoo-s2i-sample-latest-zhd/ 登录您的 GitHub 帐户，进入用于 S2I 镜像构建器的源代码仓库。点击 Settings &amp;gt; Webhooks，然后点击 Add webhook。</description>
+      <description>KubeSphere 提供 Source-to-Image (S2I) 和 Binary-to-Image (B2I) 功能，以自动化构建、推送镜像和部署应用程序。您可以配置 S2I 和 B2I Webhook，当代码仓库发生特定事件时，自动触发镜像构建器。&#xA;本教程演示如何配置 S2I 和 B2I webhooks。&#xA;准备工作 已创建一个 S2I 镜像构建器和 B2I 镜像构建器。有关更多信息，请参阅使用源代码创建镜像构建器和使用制品创建镜像构建器。&#xA;配置 S2I Webhook 步骤 1: 暴露 S2I trigger 服务 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。&#xA;前往应用负载下的服务，搜索 s2ioperator-trigger-service。&#xA;点击，选择编辑外部访问。&#xA;在弹出的对话框中，从访问模式的下拉菜单中选择 NodePort，然后点击确定。&#xA;提示 根据需要，您也可以选择 LoadBalancer。&#xA;在列表中可以查看该服务的 NodePort。S2I webhook URL 中将包含此 NodePort。&#xA;说明 访问服务前，您可能需要配置端口转发规则并在安全组中放行该端口。&#xA;步骤 2：配置 S2I webhook 进入您的企业空间。&#xA;在镜像构建器中，点击 S2I 镜像构建器，进入详情页面。&#xA;复制远程触发器中的链接，S2I webhook URL 中将包含这个链接。示例：&#xA;http://s2ioperator-trigger-service.extension-s2ibuilder.svc/s2itrigger/v1alpha1/general/namespaces/project1/s2ibuilders/felixnoo-s2i-sample-latest-zhd/ 登录您的 GitHub 帐户，进入用于 S2I 镜像构建器的源代码仓库。点击 Settings &amp;gt; Webhooks，然后点击 Add webhook。</description>
     </item>
-    
     <item>
       <title>删除镜像构建器</title>
       <link>/v4.2.0/11-use-extensions/03-image-builder/08-delete-image-builders/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/03-image-builder/08-delete-image-builders/</guid>
-      <description>本节介绍如何删除镜像构建器。
-警告 镜像构建器删除后无法恢复，请谨慎执行此操作。
-前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
-删除单个镜像构建器 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择镜像构建器。
-在页面左上角的下拉列表中选择一个项目。
-在需要删除的镜像构建器右侧点击，然后在下拉列表中选择删除。
-在删除镜像构建器对话框，输入镜像构建器的名称，然后点击确定。
-批量删除镜像构建器 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
-在左侧导航栏选择镜像构建器。
-在页面左上角的下拉列表中选择一个项目。
-选择需要删除的镜像构建器左侧的复选框，然后在镜像构建器列表上方选择删除。
-在批量删除镜像构建器对话框，输入镜像构建器的名称，然后点击确定。
-说明 请使用半角逗号（,）和空格分隔多个名称。</description>
+      <description>本节介绍如何删除镜像构建器。&#xA;警告 镜像构建器删除后无法恢复，请谨慎执行此操作。&#xA;前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。&#xA;删除单个镜像构建器 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择镜像构建器。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;在需要删除的镜像构建器右侧点击，然后在下拉列表中选择删除。&#xA;在删除镜像构建器对话框，输入镜像构建器的名称，然后点击确定。&#xA;批量删除镜像构建器 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择镜像构建器。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;选择需要删除的镜像构建器左侧的复选框，然后在镜像构建器列表上方选择删除。&#xA;在批量删除镜像构建器对话框，输入镜像构建器的名称，然后点击确定。&#xA;说明 请使用半角逗号（,）和空格分隔多个名称。</description>
     </item>
-    
   </channel>
 </rss>

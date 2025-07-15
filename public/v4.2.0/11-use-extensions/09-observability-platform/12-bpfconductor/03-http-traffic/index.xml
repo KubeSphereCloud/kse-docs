@@ -4,67 +4,23 @@
     <title>HTTP 流量 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/09-observability-platform/12-bpfconductor/03-http-traffic/</link>
     <description>Recent content in HTTP 流量 on KubeSphere 企业版</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/12-bpfconductor/03-http-traffic/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/12-bpfconductor/03-http-traffic/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>流量日志</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/12-bpfconductor/03-http-traffic/01-traffic-log/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/12-bpfconductor/03-http-traffic/01-traffic-log/</guid>
-      <description>本节介绍如何查看集群内 HTTP 请求的详细记录。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-KubeSphere 企业版平台需要安装并启用 WizTelemetry 网络可观测 扩展组件。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择网络 &amp;gt; HTTP 流量。
-在页面上方的下拉列表中选择集群、项目（流量流入的项目），查看选定项目在指定时间范围内的 HTTP 流量日志。
-在右上角点击可设置数据的时间范围。默认为最近 30 分钟。
-在列表上方点击搜索框并设置搜索条件，可快速搜索 HTTP 流量日志。
-在列表右上角点击可刷新列表信息。
-在列表右上角点击可定制列表中显示的信息。
-点击表头字段右侧的可按升序/降序排序列表。
-参数 描述 ​ ​时间​​
-发起请求的时间。 ​
-​客户端​​
-发起 HTTP 请求的源端点，显示其资源类型和资源名称。 ​
-​请求方法​​
-HTTP 方法（如 GET、POST）。
-请求路径
-HTTP 请求的 API 路径（如 /health）。 ​
-​状态码​
-HTTP 状态码（200 表示成功）。 ​
-​延迟​​</description>
+      <description>本节介绍如何查看集群内 HTTP 请求的详细记录。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 WizTelemetry 网络可观测 扩展组件。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择网络 &amp;gt; HTTP 流量。&#xA;在页面上方的下拉列表中选择集群、项目（流量流入的项目），查看选定项目在指定时间范围内的 HTTP 流量日志。&#xA;在右上角点击可设置数据的时间范围。默认为最近 30 分钟。&#xA;在列表上方点击搜索框并设置搜索条件，可快速搜索 HTTP 流量日志。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。&#xA;点击表头字段右侧的可按升序/降序排序列表。&#xA;参数 描述 ​ ​时间​​&#xA;发起请求的时间。 ​&#xA;​客户端​​&#xA;发起 HTTP 请求的源端点，显示其资源类型和资源名称。 ​&#xA;​请求方法​​&#xA;HTTP 方法（如 GET、POST）。&#xA;请求路径&#xA;HTTP 请求的 API 路径（如 /health）。 ​&#xA;​状态码​&#xA;HTTP 状态码（200 表示成功）。 ​&#xA;​延迟​​</description>
     </item>
-    
     <item>
       <title>流量监控</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/12-bpfconductor/03-http-traffic/02-traffic-monitoring/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/12-bpfconductor/03-http-traffic/02-traffic-monitoring/</guid>
-      <description>本节介绍如何查看单个服务或容器组的 HTTP 流量数据。
-前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-KubeSphere 企业版平台需要安装并启用 WizTelemetry 网络可观测 扩展组件。
-操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-在页面右上角点击图标，选择 WizTelemetry 可观测平台。
-在左侧导航栏选择网络 &amp;gt; HTTP 流量。
-点击流量监控页签，然后进入服务流量监控或容器组流量监控页面。
-在页面上方的下拉列表中选择集群、项目、服务或容器组，查看选定服务或容器组在指定时间范围内的 HTTP 流量详情。
-在右上角点击可刷新页面信息。
-在右上角点击可设置数据的时间范围。默认为最近 30 分钟。
-参数 描述 HTTP 请求数
-每秒 HTTP 请求的次数。
-HTTP 错误率
-请求失败的比例（如 0% 表示全部成功）。
-HTTP 延迟
-P99 延迟：指定时间范围内所有请求的 99% 分位延迟，即 99% 的请求的延迟小于或等于该数值。
-P95 延迟：指定时间范围内所有请求的 95% 分位延迟，即 95% 的请求的延迟小于或等于该数值。
-平均延迟：指定时间范围内所有请求的平均延迟。
-HTTP 响应数据吞吐量
-服务器端每秒成功传输给客户端的 HTTP 响应数据的总量​​。</description>
+      <description>本节介绍如何查看单个服务或容器组的 HTTP 流量数据。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 WizTelemetry 网络可观测 扩展组件。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择网络 &amp;gt; HTTP 流量。&#xA;点击流量监控页签，然后进入服务流量监控或容器组流量监控页面。&#xA;在页面上方的下拉列表中选择集群、项目、服务或容器组，查看选定服务或容器组在指定时间范围内的 HTTP 流量详情。&#xA;在右上角点击可刷新页面信息。&#xA;在右上角点击可设置数据的时间范围。默认为最近 30 分钟。&#xA;参数 描述 HTTP 请求数&#xA;每秒 HTTP 请求的次数。&#xA;HTTP 错误率&#xA;请求失败的比例（如 0% 表示全部成功）。&#xA;HTTP 延迟&#xA;P99 延迟：指定时间范围内所有请求的 99% 分位延迟，即 99% 的请求的延迟小于或等于该数值。&#xA;P95 延迟：指定时间范围内所有请求的 95% 分位延迟，即 95% 的请求的延迟小于或等于该数值。&#xA;平均延迟：指定时间范围内所有请求的平均延迟。&#xA;HTTP 响应数据吞吐量&#xA;服务器端每秒成功传输给客户端的 HTTP 响应数据的总量​​。</description>
     </item>
-    
   </channel>
 </rss>

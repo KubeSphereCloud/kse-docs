@@ -4,59 +4,30 @@
     <title>Vector 日志 ETL 方案 - 从 Kafka 到 OpenSearch on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/09-observability-platform/01-vector/02-etl-solution/</link>
     <description>Recent content in Vector 日志 ETL 方案 - 从 Kafka 到 OpenSearch on KubeSphere 企业版</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/01-vector/02-etl-solution/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
+    <atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/01-vector/02-etl-solution/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>步骤 1：使用 Vector 将数据写入 Kafka</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/01-vector/02-etl-solution/01-write-data-to-kafka/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/01-vector/02-etl-solution/01-write-data-to-kafka/</guid>
-      <description>部署 KSE 并安装日志相关组件 KubeSphere 企业版中需要安装的扩展组件：
-RadonDB DMP
-OpenSearch 分布式检索与分析引擎
-WizTelemetry 平台服务
-WizTelemetry 数据流水线
-WizTelemetry 日志
-WizTelemetry 审计
-WizTelemetry 通知
-WizTelemetry 事件
-禁用 OpenSearch Sink 在安装部署 WizTelemetry 日志、WizTelemetry 审计、WizTelemetry 事件以及 WizTelemetry 通知前，需要禁用这些扩展组件配置中 opensearch 的 sink。
-以安装 WizTelemetry 审计扩展组件为例，将 sinks.opensearch.enabled 设置为 false。
-配置 Kafka 在 KubeSphere 企业版中，安装 RadonDB DMP 扩展组件后，点击顶部导航栏上的图标，然后点击 RadonDB DMP 进入数据库管理平台，创建 Kafka 集群以用于收集日志。
-启用自动创建 topic 点击 Kafka 集群名称，进入参数管理页签，启用自动创建 topic 的功能。
-说明 在 Kafka 集群的详情页左侧可获取 Kafka 的读写地址。
-创建 Kafka 用户 在 Kafka 集群的详情页面，进入 Kafka 用户页签，点击创建开始创建 Kafka 用户。</description>
+      <description>部署 KSE 并安装日志相关组件 KubeSphere 企业版中需要安装的扩展组件：&#xA;RadonDB DMP&#xA;OpenSearch 分布式检索与分析引擎&#xA;WizTelemetry 平台服务&#xA;WizTelemetry 数据流水线&#xA;WizTelemetry 日志&#xA;WizTelemetry 审计&#xA;WizTelemetry 通知&#xA;WizTelemetry 事件&#xA;禁用 OpenSearch Sink 在安装部署 WizTelemetry 日志、WizTelemetry 审计、WizTelemetry 事件以及 WizTelemetry 通知前，需要禁用这些扩展组件配置中 opensearch 的 sink。&#xA;以安装 WizTelemetry 审计扩展组件为例，将 sinks.opensearch.enabled 设置为 false。&#xA;配置 Kafka 在 KubeSphere 企业版中，安装 RadonDB DMP 扩展组件后，点击顶部导航栏上的图标，然后点击 RadonDB DMP 进入数据库管理平台，创建 Kafka 集群以用于收集日志。&#xA;启用自动创建 topic 点击 Kafka 集群名称，进入参数管理页签，启用自动创建 topic 的功能。&#xA;说明 在 Kafka 集群的详情页左侧可获取 Kafka 的读写地址。&#xA;创建 Kafka 用户 在 Kafka 集群的详情页面，进入 Kafka 用户页签，点击创建开始创建 Kafka 用户。</description>
     </item>
-    
     <item>
       <title>步骤 2：使用 Vector 从 Kafka 读取数据</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/01-vector/02-etl-solution/02-read-data-from-kafka/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/01-vector/02-etl-solution/02-read-data-from-kafka/</guid>
-      <description>部署 vector aggregator 在 Kafka 所在集群，执行以下命令创建 vector namespace，并在该 namespace 下部署 vector-aggregator。
-说明 请勿将 vector aggregator 部署到 kubesphere-logging-system namespace， 以免与 KubeSphere 企业版内置的 vector aggregator 冲突。
-请联系 KubeSphere 企业版交付服务专家获取 vector aggregator 的 helm 包。
-helm install vector-aggregator aggregator-0.30.0.tgz -n vector --create-namespace --set vectorConfig.image.tag=v0.2.1 --set image.tag=0.36.0-debian 所需镜像：
-docker.io/timberio/vector:0.36.0-debian docker.io/kubesphere/kubectl:v1.26.13 docker.io/kubesphere/vector-config:v0.2.1 获取证书 在 Kafka 所在集群的节点上，执行以下命令。
-说明 kafka cluster 为 Kafka 集群的名称，kafka namespace 为 Kafka 所在的 namespace，kafka user 为之前创建的 Kafka 用户。
-export kafka_cluster=&amp;lt; kafka cluster &amp;gt; export kafka_namespace=&amp;lt; kafka namespace &amp;gt; export kafka_user=&amp;lt; kafka user &amp;gt; echo -e &amp;#34;apiVersion: v1\ndata:&amp;#34; &amp;gt; kafka-aggregator-ca.</description>
+      <description>部署 vector aggregator 在 Kafka 所在集群，执行以下命令创建 vector namespace，并在该 namespace 下部署 vector-aggregator。&#xA;说明 请勿将 vector aggregator 部署到 kubesphere-logging-system namespace， 以免与 KubeSphere 企业版内置的 vector aggregator 冲突。&#xA;请联系 KubeSphere 企业版交付服务专家获取 vector aggregator 的 helm 包。&#xA;helm install vector-aggregator aggregator-0.30.0.tgz -n vector --create-namespace --set vectorConfig.image.tag=v0.2.1 --set image.tag=0.36.0-debian 所需镜像：&#xA;docker.io/timberio/vector:0.36.0-debian docker.io/kubesphere/kubectl:v1.26.13 docker.io/kubesphere/vector-config:v0.2.1 获取证书 在 Kafka 所在集群的节点上，执行以下命令。&#xA;说明 kafka cluster 为 Kafka 集群的名称，kafka namespace 为 Kafka 所在的 namespace，kafka user 为之前创建的 Kafka 用户。&#xA;export kafka_cluster=&amp;lt; kafka cluster &amp;gt; export kafka_namespace=&amp;lt; kafka namespace &amp;gt; export kafka_user=&amp;lt; kafka user &amp;gt; echo -e &amp;#34;apiVersion: v1\ndata:&amp;#34; &amp;gt; kafka-aggregator-ca.</description>
     </item>
-    
     <item>
       <title>步骤 3：配置 WizTelemetry 平台服务</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/01-vector/02-etl-solution/03-configure-platform-service/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/01-vector/02-etl-solution/03-configure-platform-service/</guid>
-      <description>修改 whizard-telemetry-config 如果使用外置 OpenSearch 数据库，需要修改配置文件 whizard-telemetry-config。
-在集群左侧导航栏选择配置 &amp;gt; 配置字典。
-在配置字典页面，查找 whizard-telemetry-config，点击右侧的，然后在下拉列表中选择编辑 yaml。
-修改 notification:history:endpoints、logging:endpoints、auditing:endpoints 和 events:endpoints 为 OpenSearch 地址，点击确定。
-在 KSE 界面查询日志 部署完成后，可以从 OpenSearch 查询到日志，如图所示。</description>
+      <description>修改 whizard-telemetry-config 如果使用外置 OpenSearch 数据库，需要修改配置文件 whizard-telemetry-config。&#xA;在集群左侧导航栏选择配置 &amp;gt; 配置字典。&#xA;在配置字典页面，查找 whizard-telemetry-config，点击右侧的，然后在下拉列表中选择编辑 yaml。&#xA;修改 notification:history:endpoints、logging:endpoints、auditing:endpoints 和 events:endpoints 为 OpenSearch 地址，点击确定。&#xA;在 KSE 界面查询日志 部署完成后，可以从 OpenSearch 查询到日志，如图所示。</description>
     </item>
-    
   </channel>
 </rss>
