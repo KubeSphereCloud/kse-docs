@@ -4,23 +4,54 @@
     <title>创建镜像构建器 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/03-image-builder/01-create-an-image-builder/</link>
     <description>Recent content in 创建镜像构建器 on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.2.0/11-use-extensions/03-image-builder/01-create-an-image-builder/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/03-image-builder/01-create-an-image-builder/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用源代码创建镜像构建器</title>
       <link>/v4.2.0/11-use-extensions/03-image-builder/01-create-an-image-builder/01-create-an-image-builder-using-source-code/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/11-use-extensions/03-image-builder/01-create-an-image-builder/01-create-an-image-builder-using-source-code/</guid>
-      <description>本节介绍如何将源代码构建成容器镜像 (S2I)。&#xA;镜像构建器开始运行后将自动进行以下操作：&#xA;连接用户指定的源代码仓库并获取应用程序的源代码。&#xA;使用镜像构建器将源代码构建为容器镜像。&#xA;将容器镜像推送到用户指定的镜像服务。&#xA;前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。&#xA;您需要具有可用的代码仓库。KubeSphere 企业版默认支持 Git 仓库和 Java、Node.js 和 Python 源代码。&#xA;如果您使用私有代码仓库，您需要提前在项目中创建用于保存代码仓库密钥的保密字典。有关更多信息，请参阅创建保密字典。&#xA;您需要具有可用的容器镜像服务用于保存构建生成的容器镜像。有关更多信息，请参阅 Docker 官方文档。&#xA;您需要提前在项目中创建用于保存镜像服务信息的保密字典。有关更多信息，请参阅创建保密字典。&#xA;操作步骤 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择镜像构建器。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;在页面点击创建。&#xA;在构建模式页签，根据源代码的语言选择 Java、Node.js 或 Python，然后点击下一步。&#xA;在构建设置页签，设置构建环境、代码仓库信息和镜像服务信息，然后点击创建。&#xA;参数 描述 构建环境&#xA;容器镜像的构建环境。请根据源代码的语言和版本选择构建环境。&#xA;代码仓库 URL&#xA;源代码仓库的地址。目前仅支持 Git 仓库。&#xA;代码仓库分支&#xA;源代码所在的分支。&#xA;代码仓库密钥&#xA;如果您的代码仓库需要验证，请选择包含代码仓库密钥的保密字典。&#xA;镜像名称&#xA;构建生成的目标容器镜像名称。名称只能包含小写字母、数字、连字符（-）、句点（.）、斜钱（/）和冒号（:），并以小写字母或数字开头和结尾。&#xA;镜像名称应包含镜像的命名空间，例如 &amp;lt;DOCKERHUB_USERNAME&amp;gt;/&amp;lt;IMAGE NAME&amp;gt;。如果未输入命名空间，系统将自动添加命名空间 library，实际镜像名称为library/&amp;lt;IMAGE NAME&amp;gt;。&#xA;镜像标签&#xA;构建生成的目标容器镜像标签。&#xA;目标镜像服务&#xA;用于存放目标镜像的镜像服务。请选择包含镜像服务信息的保密字典。&#xA;触发令牌&#xA;客户端通过 Webhook 触发 KubeSphere 企业版镜像构建时所使用的认证令牌。如果已设置的令牌，请求需要提供正确令牌才能触发镜像构建。令牌只能包含大写字母、小写字母和数字。&#xA;服务创建完成后，KubeSphere 企业版将创建镜像构建器并提供 URL 可用于第三方应用程序触发镜像构建。您在可以镜像构建器的详情页面获取 URL。</description>
+      <description>本节介绍如何将源代码构建成容器镜像 (S2I)。
+ 镜像构建器开始运行后将自动进行以下操作：
+  连接用户指定的源代码仓库并获取应用程序的源代码。
+  使用镜像构建器将源代码构建为容器镜像。
+  将容器镜像推送到用户指定的镜像服务。
+   前提条件    您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
+     您需要具有可用的代码仓库。KubeSphere 企业版默认支持 Git 仓库和 Java、Node.js 和 Python 源代码。
+  如果您使用私有代码仓库，您需要提前在项目中创建用于保存代码仓库密钥的保密字典。有关更多信息，请参阅创建保密字典。
+     您需要具有可用的容器镜像服务用于保存构建生成的容器镜像。有关更多信息，请参阅 Docker 官方文档。
+  您需要提前在项目中创建用于保存镜像服务信息的保密字典。有关更多信息，请参阅创建保密字典。
+     操作步骤  以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+  在左侧导航栏选择镜像构建器。
+  在页面左上角的下拉列表中选择一个项目。
+  在页面点击创建。</description>
     </item>
+    
     <item>
       <title>使用制品创建镜像构建器</title>
       <link>/v4.2.0/11-use-extensions/03-image-builder/01-create-an-image-builder/02-create-an-image-builder-using-an-artifact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/11-use-extensions/03-image-builder/01-create-an-image-builder/02-create-an-image-builder-using-an-artifact/</guid>
-      <description>本节介绍如何将制品构建成容器镜像 (B2I)。&#xA;镜像构建器开始运行后将自动进行以下操作：&#xA;使用镜像构建器将用户上传的制品文件构建为容器镜像。&#xA;将容器镜像推送到用户指定的镜像服务。&#xA;示例制品 以下是一些示例制品，用于演示和测试：&#xA;制品包 GitHub 仓库 b2i-war-java8.war&#xA;spring-mvc-showcase&#xA;b2i-war-java11.war&#xA;springmvc5&#xA;b2i-binary&#xA;devops-go-sample&#xA;b2i-jar-java11.jar&#xA;java-maven-example&#xA;b2i-jar-java8.jar&#xA;devops-maven-sample&#xA;前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。&#xA;您需要提前准备用于构建镜像的制品文件。KubeSphere 企业版默认支持 JAR、WAR 和二进制格式的制品文件。&#xA;您需要具有可用的容器镜像服务用于保存构建生成的容器镜像。有关更多信息，请参阅 Docker 官方文档。&#xA;您需要提前在项目中创建用于保存镜像服务信息的保密字典。有关更多信息，请参阅创建保密字典。&#xA;操作步骤 以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择镜像构建器。&#xA;在页面左上角的下拉列表中选择一个项目。&#xA;在页面点击创建。&#xA;在构建模式页签，根据制品文件的类型选择 JAR、WAR 或二进制，然后点击下一步。&#xA;在构建设置页签，设置构建环境、制品文件和镜像服务信息，然后点击创建。&#xA;参数 描述 制品文件&#xA;从本地上传用于构建镜像的制品文件。&#xA;构建环境&#xA;容器镜像的构建环境。请根据制品文件的格式和版本选择构建环境。&#xA;镜像名称&#xA;构建生成的目标容器镜像名称。名称只能包含小写字母、数字、连字符（-）、句点（.）、斜钱（/）和冒号（:），并以小写字母或数字开头和结尾。&#xA;镜像名称应包含镜像的命名空间，例如 my-namespace/my-image。如果未输入命名空间，系统将自动添加命名空间 library，实际镜像名称为library/my-image。&#xA;镜像标签&#xA;构建生成的目标容器镜像标签。&#xA;目标镜像服务&#xA;用于存放目标镜像的镜像服务。请选择包含镜像服务信息的保密字典。&#xA;触发令牌&#xA;客户端通过 Webhook 触发 KubeSphere 企业版镜像构建时所使用的认证令牌。如果已设置的令牌，请求需要提供正确令牌才能触发镜像构建。令牌只能包含大写字母、小写字母和数字。&#xA;服务创建完成后，KubeSphere 企业版将创建镜像构建器并提供 URL 可用于第三方应用程序触发镜像构建。您在可以镜像构建器的详情页面获取 URL。</description>
+      <description>本节介绍如何将制品构建成容器镜像 (B2I)。
+ 镜像构建器开始运行后将自动进行以下操作：
+  使用镜像构建器将用户上传的制品文件构建为容器镜像。
+  将容器镜像推送到用户指定的镜像服务。
+   示例制品 以下是一些示例制品，用于演示和测试：
+     制品包 GitHub 仓库     b2i-war-java8.war
+ spring-mvc-showcase
+   b2i-war-java11.war
+ springmvc5
+   b2i-binary
+ devops-go-sample
+   b2i-jar-java11.jar
+ java-maven-example
+   b2i-jar-java8.jar
+ devops-maven-sample
+      前提条件    您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
+     您需要提前准备用于构建镜像的制品文件。KubeSphere 企业版默认支持 JAR、WAR 和二进制格式的制品文件。</description>
     </item>
+    
   </channel>
 </rss>

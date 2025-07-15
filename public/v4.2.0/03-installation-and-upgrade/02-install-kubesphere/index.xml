@@ -4,37 +4,73 @@
     <title>安装{ks_product_left} on KubeSphere 企业版</title>
     <link>/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/</link>
     <description>Recent content in 安装{ks_product_left} on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在线安装 Kubernetes 和 KubeSphere 企业版</title>
       <link>/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/</guid>
-      <description>本节介绍如何在可访问 Internet 的环境下安装 Kubernetes 和 KubeSphere 企业版。&#xA;安装过程中将用到开源工具 KubeKey。有关 KubeKey 的更多信息，请访问 GitHub KubeKey 仓库。&#xA;前提条件 您需要准备至少 1 台 Linux 服务器作为集群节点。在生产环境中，为确保集群具备高可用性，建议准备至少 5 台 Linux 服务器，其中 3 台作为控制平面节点，另外 2 台作为工作节点。如果您在多台 Linux 服务器上安装 KubeSphere 企业版，请确保所有服务器属于同一子网。&#xA;集群节点的操作系统和版本须为 Ubuntu 16.04、Ubuntu 18.04、Ubuntu 20.04、Ubuntu 22.04、Debian 9、Debian 10、CentOS 7、CentOS Stream、RHEL 7、RHEL 8、SLES 15、openSUSE Leap 15 或 Kylin v10。多台服务器的操作系统可以不同。关于其它操作系统和版本支持，请咨询青云科技官方解决方案专家或交付服务专家。&#xA;在生产环境中，为确保集群具有足够的计算和存储资源，建议每台集群节点配置至少 8 个 CPU 核心、16 GB 内存和 200 GB 磁盘空间。除此之外，建议在每台集群节点的 /var/lib/docker（对于 Docker）或 /var/lib/containerd（对于 containerd） 目录额外挂载至少 200 GB 磁盘空间用于存储容器运行时数据。&#xA;在生产环境中，建议提前为 KubeSphere 企业版集群配置高可用性以避免单个控制平面节点出现故障时集群服务中断。有关更多信息，请参阅配置高可用性。</description>
+      <description>本节介绍如何在可访问 Internet 的环境下安装 Kubernetes 和 KubeSphere 企业版。
+ 安装过程中将用到开源工具 KubeKey。有关 KubeKey 的更多信息，请访问 GitHub KubeKey 仓库。
+ 前提条件   您需要准备至少 1 台 Linux 服务器作为集群节点。在生产环境中，为确保集群具备高可用性，建议准备至少 5 台 Linux 服务器，其中 3 台作为控制平面节点，另外 2 台作为工作节点。如果您在多台 Linux 服务器上安装 KubeSphere 企业版，请确保所有服务器属于同一子网。
+  集群节点的操作系统和版本须为 Ubuntu 16.04、Ubuntu 18.04、Ubuntu 20.04、Ubuntu 22.04、Debian 9、Debian 10、CentOS 7、CentOS Stream、RHEL 7、RHEL 8、SLES 15、openSUSE Leap 15 或 Kylin v10。多台服务器的操作系统可以不同。关于其它操作系统和版本支持，请咨询青云科技官方解决方案专家或交付服务专家。
+  在生产环境中，为确保集群具有足够的计算和存储资源，建议每台集群节点配置至少 8 个 CPU 核心、16 GB 内存和 200 GB 磁盘空间。除此之外，建议在每台集群节点的 /var/lib/docker（对于 Docker）或 /var/lib/containerd（对于 containerd） 目录额外挂载至少 200 GB 磁盘空间用于存储容器运行时数据。</description>
     </item>
+    
     <item>
       <title>激活 KubeSphere 企业版</title>
       <link>/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse/</guid>
-      <description>登录 KubeSphere 企业版 Web 控制台后，您需要导入许可证（license），激活 KubeSphere 企业版和扩展组件，以体验所有功能。&#xA;说明 若您是离线安装的 KubeSphere 企业版，请联系交付服务专家直接获取 license。&#xA;步骤 1：购买并获取 license 若您是在线安装的 KubeSphere 企业版，请访问 KubeSphere 企业版官网，点击联系我们，通过微信或 slack 咨询 KubeSphere 企业版和扩展组件 license 的购买方式和获取方式。&#xA;步骤 2：导入 license 待获得 license 后，请参阅添加许可证导入 KubeSphere 企业版和扩展组件的 license。&#xA;步骤 3：验证激活 若许可证页面显示 KubeSphere 企业版和扩展组件已授权，即表示激活成功，可开始使用 KubeSphere 企业版。</description>
+      <description> 登录 KubeSphere 企业版 Web 控制台后，您需要导入许可证（license），激活 KubeSphere 企业版和扩展组件，以体验所有功能。
+     说明     若您是离线安装的 KubeSphere 企业版，请联系交付服务专家直接获取 license。
+    步骤 1：购买并获取 license 若您是在线安装的 KubeSphere 企业版，请访问 KubeSphere 企业版官网，点击联系我们，通过微信或 slack 咨询 KubeSphere 企业版和扩展组件 license 的购买方式和获取方式。
+ 
+   步骤 2：导入 license 待获得 license 后，请参阅添加许可证导入 KubeSphere 企业版和扩展组件的 license。
+   步骤 3：验证激活 若许可证页面显示 KubeSphere 企业版和扩展组件已授权，即表示激活成功，可开始使用 KubeSphere 企业版。
+   </description>
     </item>
+    
     <item>
       <title>配置 KubeSphere 高可用性</title>
       <link>/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/04-configure-ks-high-availability/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/04-configure-ks-high-availability/</guid>
-      <description>本节介绍如何配置 KubeSphere 的高可用性。&#xA;注意 KubeSphere 的高可用性建立在 Kubernetes 控制平面节点高可用的基础上，因此需先确保 Kubernetes 为高可用部署。&#xA;1. 高可用架构概述 KubeSphere 支持高可用部署，可通过 ha.enabled 开启。&#xA;在高可用模式下，Redis 支持两种部署方式：&#xA;Redis 单实例模式&#xA;Redis 高可用模式 (Redis HA)&#xA;2. 版本兼容性 KubeSphere 高可用配置适用于 KubeSphere 企业版 v4.1.2 及之后更新的版本。&#xA;3. KubeSphere 高可用配置 3.1 启用高可用模式 创建 values.yaml 文件，添加如下配置。&#xA;ha: enabled: true 4. Redis 配置 根据需求选择 Redis 单实例模式或 Redis 高可用模式，在上一步创建的 values.yaml 文件中继续添加对应的配置。&#xA;4.1 Redis 单实例模式 适用于小型集群，配置简单，资源消耗较少。&#xA;redis: port: 6379 replicaCount: 1 image: repository: kubesphereio/redis tag: 7.2.4-alpine pullPolicy: IfNotPresent persistentVolume: enabled: true size: 2Gi 4.</description>
+      <description>本节介绍如何配置 KubeSphere 的高可用性。
+     注意     KubeSphere 的高可用性建立在 Kubernetes 控制平面节点高可用的基础上，因此需先确保 Kubernetes 为高可用部署。
+    1. 高可用架构概述 KubeSphere 支持高可用部署，可通过 ha.enabled 开启。
+ 在高可用模式下，Redis 支持两种部署方式：
+  Redis 单实例模式
+  Redis 高可用模式 (Redis HA)
+     2. 版本兼容性 KubeSphere 高可用配置适用于 KubeSphere 企业版 v4.1.2 及之后更新的版本。
+   3. KubeSphere 高可用配置 3.1 启用高可用模式 创建 values.yaml 文件，添加如下配置。
+ ha: enabled: true      4.</description>
     </item>
+    
     <item>
       <title>附录：KubeSphere Core 高级配置</title>
       <link>/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/05-appendix/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/05-appendix/</guid>
-      <description>KubeSphere Helm Chart 参数 全局配置 参数 描述 默认值 global.imageRegistry&#xA;全局 Docker 镜像仓库地址&#xA;registry.cn-beijing.aliyuncs.com&#xA;global.tag&#xA;全局 Docker 镜像标签&#xA;&amp;#34;&amp;#34;&#xA;global.imagePullSecrets&#xA;全局 Docker 仓库密钥名称数组&#xA;[]&#xA;通用参数 参数 描述 默认值 nameOverride&#xA;部分覆盖 common.names.fullname 的字符串&#xA;&amp;#34;&amp;#34;&#xA;fullnameOverride&#xA;完全覆盖 common.names.fullname 的字符串&#xA;&amp;#34;&amp;#34;&#xA;commonLabels&#xA;添加到所有部署对象的标签&#xA;{}&#xA;commonAnnotations&#xA;添加到所有部署对象的注解&#xA;{}&#xA;多集群配置 参数 描述 默认值 multicluster.role&#xA;多集群角色 (host/member)&#xA;&amp;#34;&amp;#34;&#xA;multicluster.hostClusterName&#xA;主集群名称&#xA;&amp;#34;&amp;#34;&#xA;Portal 配置 参数 描述 默认值 portal.hostname&#xA;ks-console 服务的公开入口域名或 IP 地址&#xA;ks-console.kubesphere-system.svc&#xA;portal.http.port&#xA;ks-console 服务通过公开入口暴露的 HTTP 端口号</description>
+      <description>KubeSphere Helm Chart 参数 全局配置     参数 描述 默认值     global.imageRegistry
+ 全局 Docker 镜像仓库地址
+ registry.cn-beijing.aliyuncs.com
+   global.tag
+ 全局 Docker 镜像标签
+ &amp;#34;&amp;#34;
+   global.imagePullSecrets
+ 全局 Docker 仓库密钥名称数组
+ []
+    通用参数     参数 描述 默认值     nameOverride
+ 部分覆盖 common.names.fullname 的字符串
+ &amp;#34;&amp;#34;
+   fullnameOverride</description>
     </item>
+    
   </channel>
 </rss>

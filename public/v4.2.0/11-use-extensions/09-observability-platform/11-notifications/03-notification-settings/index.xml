@@ -4,51 +4,127 @@
     <title>通知设置 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/</link>
     <description>Recent content in 通知设置 on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>创建静默策略</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/01-create-a-silence-policy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/01-create-a-silence-policy/</guid>
-      <description>本节介绍如何创建静默策略。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择通知 &amp;gt; 通知设置。&#xA;在页面点击创建。&#xA;在基本信息页签，设置静默策略的基本信息，然后点击下一步。&#xA;参数 描述 名称&#xA;静默策略的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 63 个字符。&#xA;别名&#xA;静默策略的别名。不同静默策略的别名可以相同。&#xA;描述&#xA;静默策略的描述信息。描述可包含任意字符，最长 256 个字符。&#xA;在静默条件页签，根据需要选择对所有通知静默或自定义静默条件并设置相关参数，然后点击下一步。&#xA;对所有通知静默&#xA;设置静默策略适用于所有通知。&#xA;自定义静默条件&#xA;设置静默策略仅适用于满足指定条件的通知。点击添加可设置通知需要满足的条件。&#xA;参数 描述 键&#xA;通知内容中的键。点击下拉列表可选择预设的键，在下拉列表中可以输入自定义的键。&#xA;操作符&#xA;筛选条件的操作符。&#xA;包含：键对应的值包含特定的字符串。&#xA;不包含：键对应的值不包含特定的字符串。&#xA;存在：通知内容中存在特定的键。&#xA;不存在：通知内容中不存在特定的键。&#xA;正则匹配：通过正则表达式来筛选符合条件的通知。&#xA;值&#xA;键对应的值必须包含的字符串。按 Enter 可设置多个字符串，键对应的值包含其中一个字条串即满足条件。&#xA;在静默时间页签，选择静默时间类型并设置相关参数，然后点击创建。&#xA;参数 描述 持续静默&#xA;满足静默条件的通知在所有时间静默。&#xA;在特定时间范围内静默&#xA;满足静默条件的通知在指定的时间范围内静默。您需要选择静默的开始时间和结束时间。&#xA;周期性静默&#xA;满足静默条件的通知每日、每周或每月在指定的时间范围内静默。您需要选择静默的日期、开始时间和结束时间。&#xA;静默策略创建完成后将显示在静默策略列表中。</description>
+      <description>本节介绍如何创建静默策略。
+ 前提条件   您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+  KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。
+     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择通知 &amp;gt; 通知设置。
+  在页面点击创建。
+  在基本信息页签，设置静默策略的基本信息，然后点击下一步。
+    参数 描述     名称
+ 静默策略的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 63 个字符。
+   别名
+ 静默策略的别名。不同静默策略的别名可以相同。
+   描述</description>
     </item>
+    
     <item>
       <title>编辑静默策略信息</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/02-edit-silence-policy-information/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/02-edit-silence-policy-information/</guid>
-      <description>本节介绍如何编辑静默策略信息。&#xA;您可以编辑静默策略的别名和描述。KubeSphere 企业版不支持编辑已创建静默策略的名称。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择通知 &amp;gt; 通知设置。&#xA;在需要操作的静默策略右侧点击，然后在下拉列表中选择编辑信息。&#xA;在编辑信息对话框，设置静默策略的别名和描述，然后点击确定。&#xA;参数 描述 别名&#xA;静默策略的别名。不同静默策略的别名可以相同。&#xA;描述&#xA;静默策略的描述信息。描述可包含任意字符，最长 256 个字符。</description>
+      <description>本节介绍如何编辑静默策略信息。
+ 您可以编辑静默策略的别名和描述。KubeSphere 企业版不支持编辑已创建静默策略的名称。
+ 前提条件   您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+  KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。
+     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择通知 &amp;gt; 通知设置。
+  在需要操作的静默策略右侧点击，然后在下拉列表中选择编辑信息。
+  在编辑信息对话框，设置静默策略的别名和描述，然后点击确定。
+    参数 描述     别名
+ 静默策略的别名。不同静默策略的别名可以相同。
+   描述
+ 静默策略的描述信息。描述可包含任意字符，最长 256 个字符。</description>
     </item>
+    
     <item>
       <title>编辑静默条件</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/03-edit-silence-conditions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/03-edit-silence-conditions/</guid>
-      <description>本节介绍如何编辑通知静默条件。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择通知 &amp;gt; 通知设置。&#xA;在需要操作的静默策略右侧点击，然后在下拉列表中选择编辑静默条件。&#xA;在编辑静默条件对话框，设置静默条件，然后点击确定。&#xA;对所有通知静默&#xA;设置静默策略适用于所有通知。&#xA;自定义静默条件&#xA;设置静默策略仅适用于满足指定条件的通知。点击添加可设置通知需要满足的条件。&#xA;参数 描述 键&#xA;通知内容中的键。点击下拉列表可选择预设的键，在下拉列表中可以输入自定义的键。&#xA;操作符&#xA;筛选条件的操作符。&#xA;包含：键对应的值包含特定的字符串。&#xA;不包含：键对应的值不包含特定的字符串。&#xA;存在：通知内容中存在特定的键。&#xA;不存在：通知内容中不存在特定的键。&#xA;正则匹配：通过正则表达式来筛选符合条件的通知。&#xA;值&#xA;键对应的值必须包含的字符串。按 Enter 可设置多个字符串，键对应的值包含其中一个字条串即满足条件。</description>
+      <description>本节介绍如何编辑通知静默条件。
+ 前提条件   您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+  KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。
+     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择通知 &amp;gt; 通知设置。
+  在需要操作的静默策略右侧点击，然后在下拉列表中选择编辑静默条件。
+  在编辑静默条件对话框，设置静默条件，然后点击确定。
+  对所有通知静默
+设置静默策略适用于所有通知。
+     自定义静默条件
+设置静默策略仅适用于满足指定条件的通知。点击添加可设置通知需要满足的条件。
+     参数 描述     键</description>
     </item>
+    
     <item>
       <title>编辑静默时间</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/04-edit-silence-time/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/04-edit-silence-time/</guid>
-      <description>本节介绍如何编辑通知静默时间。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择通知 &amp;gt; 通知设置。&#xA;在需要操作的静默策略右侧点击，然后在下拉列表中选择编辑静默时间。&#xA;在编辑静默时间对话框，选择静默时间类型并设置相关参数，然后点击确定。&#xA;参数 描述 持续静默&#xA;满足静默条件的通知在所有时间静默。&#xA;在特定时间范围内静默&#xA;满足静默条件的通知在指定的时间范围内静默。您需要选择静默的开始时间和结束时间。&#xA;周期性静默&#xA;满足静默条件的通知每日、每周或每月在指定的时间范围内静默。您需要选择静默的日期、开始时间和结束时间。</description>
+      <description>本节介绍如何编辑通知静默时间。
+ 前提条件   您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+  KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。
+     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择通知 &amp;gt; 通知设置。
+  在需要操作的静默策略右侧点击，然后在下拉列表中选择编辑静默时间。
+  在编辑静默时间对话框，选择静默时间类型并设置相关参数，然后点击确定。
+    参数 描述     持续静默
+ 满足静默条件的通知在所有时间静默。
+   在特定时间范围内静默
+ 满足静默条件的通知在指定的时间范围内静默。您需要选择静默的开始时间和结束时间。
+   周期性静默</description>
     </item>
+    
     <item>
       <title>删除静默策略</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/05-delete-silence-policies/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/05-delete-silence-policies/</guid>
-      <description>本节介绍如何删除静默策略。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。&#xA;删除单个静默策略 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择通知 &amp;gt; 通知设置。&#xA;在需要删除的静默策略右侧点击，然后在下拉列表中选择删除。&#xA;在删除静默策略对话框，输入静默策略的名称，然后点击确定。&#xA;批量删除静默策略 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择通知 &amp;gt; 通知设置。&#xA;选择需要删除的静默策略左侧的复选框，然后在列表上方点击删除。&#xA;在批量删除静默策略对话框，输入静默策略的名称，然后点击确定。&#xA;说明 请使用半角逗号（,）和空格分隔多个名称。</description>
+      <description>本节介绍如何删除静默策略。
+ 前提条件   您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+  KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。
+     删除单个静默策略  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择通知 &amp;gt; 通知设置。
+  在需要删除的静默策略右侧点击，然后在下拉列表中选择删除。
+  在删除静默策略对话框，输入静默策略的名称，然后点击确定。
+     批量删除静默策略  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择通知 &amp;gt; 通知设置。</description>
     </item>
+    
     <item>
       <title>修改通知语言</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/06-change-the-notification-language/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/11-notifications/03-notification-settings/06-change-the-notification-language/</guid>
-      <description>本节介绍如何修改通知语言。&#xA;发送给用户的通知包含键值对信息，您可以设置通知的键的语言。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 WizTelemetry 可观测平台。&#xA;在左侧导航栏选择通知 &amp;gt; 通知设置。&#xA;在通知设置页面，点击通知语言页签，然后在下拉列表中选择通知语言。</description>
+      <description> 本节介绍如何修改通知语言。
+ 发送给用户的通知包含键值对信息，您可以设置通知的键的语言。
+ 前提条件   您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+  KubeSphere 企业版平台需要安装并启用 WizTelemetry 通知扩展组件。
+     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择通知 &amp;gt; 通知设置。
+  在通知设置页面，点击通知语言页签，然后在下拉列表中选择通知语言。
+     </description>
     </item>
+    
   </channel>
 </rss>

@@ -4,16 +4,24 @@
     <title>WizTelemetry 审计 on KubeSphere 企业版</title>
     <link>/v4.1.3/11-use-extensions/05-observability-platform/04-auditing/</link>
     <description>Recent content in WizTelemetry 审计 on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.1.3/11-use-extensions/05-observability-platform/04-auditing/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.3/11-use-extensions/05-observability-platform/04-auditing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用审计日志查询工具</title>
       <link>/v4.1.3/11-use-extensions/05-observability-platform/04-auditing/01-use-audit-query-tools/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/11-use-extensions/05-observability-platform/04-auditing/01-use-audit-query-tools/</guid>
-      <description>本节介绍如何查询审计日志。&#xA;审计日志：KubeSphere 企业版 API 服务器接收请求的记录，即 KubeSphere 企业版平台上用户的操作行为。&#xA;前提条件 您需要获得平台、集群、企业空间或项目的资源查看权限，以查看特定范围的日志。&#xA;KubeSphere 企业版平台需要安装并启用 WizTelemetry 审计扩展组件。&#xA;启用审计 为获取审计日志数据，您需要启用 Kubernetes 和 KubeSphere 审计，即启用审计日志收集。&#xA;启用 Kubernetes 审计 在集群的 master 节点上创建审计目录。&#xA;mkdir /etc/kubernetes/audit 创建 policy 文件。&#xA;vi /etc/kubernetes/audit/audit-policy.yaml apiVersion: audit.k8s.io/v1 kind: Policy rules: - level: Metadata 编辑 kube-apiserver.yaml 文件，添加以下内容。&#xA;vi /etc/kubernetes/manifests/kube-apiserver.yaml spec: containers: - command: - kube-apiserver - --audit-policy-file=/etc/kubernetes/audit/audit-policy.yaml - --audit-log-path=/etc/kubernetes/audit/audit.log - --audit-log-maxbackup=10 - --audit-log-maxsize=100 volumeMounts: - mountPath: /etc/kubernetes/audit name: audit volumes: - hostPath: path: /etc/kubernetes/audit type: DirectoryOrCreate name: audit 启用 KubeSphere 审计 编辑 KubeSphere Core (ks-core) chart 包中的 values.</description>
+      <description>本节介绍如何查询审计日志。
+ 审计日志：KubeSphere 企业版 API 服务器接收请求的记录，即 KubeSphere 企业版平台上用户的操作行为。
+ 前提条件   您需要获得平台、集群、企业空间或项目的资源查看权限，以查看特定范围的日志。
+  KubeSphere 企业版平台需要安装并启用 WizTelemetry 审计扩展组件。
+     启用审计 为获取审计日志数据，您需要启用 Kubernetes 和 KubeSphere 审计，即启用审计日志收集。
+ 启用 Kubernetes 审计  在集群的 master 节点上创建审计目录。
+mkdir /etc/kubernetes/audit     创建 policy 文件。
+vi /etc/kubernetes/audit/audit-policy.yaml   apiVersion: audit.k8s.io/v1 kind: Policy rules: - level: Metadata       编辑 kube-apiserver.yaml 文件，添加以下内容。
+vi /etc/kubernetes/manifests/kube-apiserver.</description>
     </item>
+    
   </channel>
 </rss>

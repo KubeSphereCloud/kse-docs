@@ -4,37 +4,80 @@
     <title>外部身份验证 on KubeSphere 企业版</title>
     <link>/v4.2.0/04-platform-management/05-platform-settings/03-external-authentication/</link>
     <description>Recent content in 外部身份验证 on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.2.0/04-platform-management/05-platform-settings/03-external-authentication/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/04-platform-management/05-platform-settings/03-external-authentication/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>配置外部身份验证</title>
       <link>/v4.2.0/04-platform-management/05-platform-settings/03-external-authentication/01-set-up-external-authentication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/04-platform-management/05-platform-settings/03-external-authentication/01-set-up-external-authentication/</guid>
-      <description>KubeSphere 企业版支持设置外部身份验证，平台管理员可以通过 secret（保密字典）配置身份提供者。&#xA;配置外部身份提供者后，允许使用 LDAP、CAS、GitHub、阿里云 IDaas、或 OpenID Connect 的用户名和密码登录 KubeSphere 企业版 Web 控制台。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;点击集群管理，并进入 host 集群。&#xA;在左侧导航栏选择配置 &amp;gt; 保密字典。&#xA;在页面点击创建。&#xA;在创建保密字典对话框，点击右上角的编辑 YAML 开关，使用 yaml 创建保密字典。&#xA;按照以下示例及配置说明修改 yaml 文件，配置完成后，点击创建。&#xA;登出 KubeSphere 企业版 Web 控制台，在登录页面，根据配置的外部身份验证类型，输入 LDAP、CAS、GitHub、阿里云 IDaas、或 OpenID Connect 的用户名和密码登录。&#xA;说明 多集群环境中，只需要在主集群中进行配置。&#xA;OpenLDAP 示例 yaml apiVersion: v1 kind: Secret metadata: namespace: kubesphere-system # 请勿修改 name: identity-provider-ldap # 确保该 Secret 名称在 Kubernetes 集群中唯一 labels: config.</description>
+      <description>KubeSphere 企业版支持设置外部身份验证，平台管理员可以通过 secret（保密字典）配置身份提供者。
+ 配置外部身份提供者后，允许使用 LDAP、CAS、GitHub、阿里云 IDaas、或 OpenID Connect 的用户名和密码登录 KubeSphere 企业版 Web 控制台。
+ 操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  点击集群管理，并进入 host 集群。
+  在左侧导航栏选择配置 &amp;gt; 保密字典。
+  在页面点击创建。
+  在创建保密字典对话框，点击右上角的编辑 YAML 开关，使用 yaml 创建保密字典。
+  按照以下示例及配置说明修改 yaml 文件，配置完成后，点击创建。
+  登出 KubeSphere 企业版 Web 控制台，在登录页面，根据配置的外部身份验证类型，输入 LDAP、CAS、GitHub、阿里云 IDaas、或 OpenID Connect 的用户名和密码登录。
+       说明     多集群环境中，只需要在主集群中进行配置。</description>
     </item>
+    
     <item>
       <title>LDAP/LDAPS 身份验证</title>
       <link>/v4.2.0/04-platform-management/05-platform-settings/03-external-authentication/03-use-ldap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/04-platform-management/05-platform-settings/03-external-authentication/03-use-ldap/</guid>
-      <description>KubeSphere 支持通过 LDAP 和 LDAPS 两种方式进行外部身份验证，以便使用 LDAP 或 LDAPS 用户名和密码登录 KubeSphere 企业版 Web 控制台。&#xA;平台管理员可以通过 secret（保密字典）配置 LDAP/LDAPS 身份验证。&#xA;LDAP 与 LDAPS 的区别 认证方式 连接方式 安全性 LDAP&#xA;使用明文传输，默认端口 389&#xA;数据传输未加密，不适合生产环境。&#xA;LDAPS&#xA;使用 SSL/TLS 加密传输，默认端口 636&#xA;数据传输加密，提供更高的安全性，建议在生产环境中使用。&#xA;LDAPS (SSL/TLS)&#xA;端口：636，使用 SSL/TLS 加密通道，URL 格式：ldaps://hostname:636，类似 HTTPS，在建立连接时就进行 SSL/TLS 握手。&#xA;STARTTLS&#xA;端口：389（与普通 LDAP 相同），先建立普通连接，然后升级为加密连接，URL 格式：ldap://hostname:389，在建立连接后通过 STARTTLS 命令升级为加密连接。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;点击集群管理，并进入 host 集群。&#xA;在左侧导航栏选择配置 &amp;gt; 保密字典。&#xA;在页面点击创建。&#xA;在创建保密字典对话框，点击右上角的编辑 YAML 开关，使用 yaml 创建保密字典。</description>
+      <description>KubeSphere 支持通过 LDAP 和 LDAPS 两种方式进行外部身份验证，以便使用 LDAP 或 LDAPS 用户名和密码登录 KubeSphere 企业版 Web 控制台。
+ 平台管理员可以通过 secret（保密字典）配置 LDAP/LDAPS 身份验证。
+ LDAP 与 LDAPS 的区别     认证方式 连接方式 安全性     LDAP
+ 使用明文传输，默认端口 389
+ 数据传输未加密，不适合生产环境。
+   LDAPS
+ 使用 SSL/TLS 加密传输，默认端口 636
+ 数据传输加密，提供更高的安全性，建议在生产环境中使用。
+ LDAPS (SSL/TLS)
+   端口：636，使用 SSL/TLS 加密通道，URL 格式：ldaps://hostname:636，类似 HTTPS，在建立连接时就进行 SSL/TLS 握手。
+   STARTTLS</description>
     </item>
+    
     <item>
       <title>OIDC 身份验证</title>
       <link>/v4.2.0/04-platform-management/05-platform-settings/03-external-authentication/05-use-oidc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/04-platform-management/05-platform-settings/03-external-authentication/05-use-oidc/</guid>
-      <description>KubeSphere 支持通过 OpenID Connect (OIDC) 进行外部身份验证，以便使用 OIDC 的用户名和密码登录 KubeSphere 企业版 Web 控制台。&#xA;平台管理员可以通过 secret（保密字典）配置 OIDC 身份验证。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;点击集群管理，并进入 host 集群。&#xA;在左侧导航栏选择配置 &amp;gt; 保密字典。&#xA;在页面点击创建。&#xA;在创建保密字典对话框，点击右上角的编辑 YAML 开关，使用 yaml 创建保密字典。&#xA;按照以下示例及参数说明修改 yaml 文件，配置完成后，点击创建。&#xA;登出 KubeSphere 企业版 Web 控制台，在登录页面，点击通过 oidc 登录，输入 OpenID Connect 用户名和密码进行登录。&#xA;说明 多集群环境中，只需要在主集群中进行配置。&#xA;OIDC 基本配置 apiVersion: v1 kind: Secret metadata: namespace: kubesphere-system # 请勿修改 name: identity-provider-oidc # 确保该 Secret 名称在 Kubernetes 集群中唯一 labels: config.</description>
+      <description>KubeSphere 支持通过 OpenID Connect (OIDC) 进行外部身份验证，以便使用 OIDC 的用户名和密码登录 KubeSphere 企业版 Web 控制台。
+ 平台管理员可以通过 secret（保密字典）配置 OIDC 身份验证。
+ 操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  点击集群管理，并进入 host 集群。
+  在左侧导航栏选择配置 &amp;gt; 保密字典。
+  在页面点击创建。
+  在创建保密字典对话框，点击右上角的编辑 YAML 开关，使用 yaml 创建保密字典。
+  按照以下示例及参数说明修改 yaml 文件，配置完成后，点击创建。
+  登出 KubeSphere 企业版 Web 控制台，在登录页面，点击通过 oidc 登录，输入 OpenID Connect 用户名和密码进行登录。
+       说明     多集群环境中，只需要在主集群中进行配置。</description>
     </item>
+    
     <item>
       <title>CAS 身份验证</title>
       <link>/v4.2.0/04-platform-management/05-platform-settings/03-external-authentication/07-use-cas/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/04-platform-management/05-platform-settings/03-external-authentication/07-use-cas/</guid>
-      <description>KubeSphere 支持通过 Central Authentication Service (CAS) 进行外部身份验证，以便使用 CAS 的用户名和密码登录 KubeSphere 企业版 Web 控制台。&#xA;平台管理员可以通过 secret（保密字典）配置 CAS 身份验证。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;点击集群管理，并进入 host 集群。&#xA;在左侧导航栏选择配置 &amp;gt; 保密字典。&#xA;在页面点击创建。&#xA;在创建保密字典对话框，点击右上角的编辑 YAML 开关，使用 yaml 创建保密字典。&#xA;按照以下示例及参数说明修改 yaml 文件，配置完成后，点击创建。&#xA;登出 KubeSphere 企业版 Web 控制台，在登录页面，点击通过 cas 登录，输入 CAS 用户名和密码进行登录。&#xA;说明 多集群环境中，只需要在主集群中进行配置。&#xA;CAS 基本配置 apiVersion: v1 kind: Secret metadata: namespace: kubesphere-system # 请勿修改 name: identity-provider-cas # 确保该 Secret 名称在 Kubernetes 集群中唯一 labels: config.</description>
+      <description>KubeSphere 支持通过 Central Authentication Service (CAS) 进行外部身份验证，以便使用 CAS 的用户名和密码登录 KubeSphere 企业版 Web 控制台。
+ 平台管理员可以通过 secret（保密字典）配置 CAS 身份验证。
+ 操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  点击集群管理，并进入 host 集群。
+  在左侧导航栏选择配置 &amp;gt; 保密字典。
+  在页面点击创建。
+  在创建保密字典对话框，点击右上角的编辑 YAML 开关，使用 yaml 创建保密字典。
+  按照以下示例及参数说明修改 yaml 文件，配置完成后，点击创建。
+  登出 KubeSphere 企业版 Web 控制台，在登录页面，点击通过 cas 登录，输入 CAS 用户名和密码进行登录。
+       说明     多集群环境中，只需要在主集群中进行配置。</description>
     </item>
+    
   </channel>
 </rss>
