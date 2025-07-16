@@ -4,30 +4,73 @@
     <title>扩展组件管理 on KubeSphere 企业版</title>
     <link>/v4.2.0/06-extension-management/</link>
     <description>Recent content in 扩展组件管理 on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.2.0/06-extension-management/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/06-extension-management/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>安装扩展组件</title>
       <link>/v4.2.0/06-extension-management/01-install-extensions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/06-extension-management/01-install-extensions/</guid>
-      <description>本节介绍如何安装扩展组件。&#xA;有关如何访问、配置及使用各个扩展组件，请参阅扩展组件使用指南。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;安装步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;点击扩展中心，搜索您要安装的扩展组件。&#xA;点击扩展组件名称，然后点击安装，进入组件安装页面。&#xA;在组件安装对话框的版本选择页签，选择扩展组件的版本号，并安装好所有必装组件（若有），点击下一步。&#xA;说明 安装检测时，会识别扩展组件是否有依赖组件。依赖组件分为必装组件和选装组件。&#xA;若必装组件的状态为未就绪，您需要先行安装正确版本的必装组件，以确保扩展组件的正常使用。而选装组件不会影响扩展组件的安装。&#xA;在扩展组件配置页签，在中间的自定义配置框中输入您需要的配置。查看最终配置确认后，点击下一步。&#xA;点击右上角的可全屏查看配置信息。&#xA;点击上传自定义的配置文件。&#xA;点击复制配置信息。&#xA;点击下载配置文件。&#xA;在扩展组件安装页签，点击开始安装，开始安装扩展组件。&#xA;待安装完成后，点击下一步。&#xA;在集群选择页签，根据名称、标识选择集群（可选择多个集群），以便在目标集群中开启扩展组件。&#xA;在差异化配置页签，点击编辑集群的 Agent 配置，也可不修改，使用初始默认配置。点击确定，开始安装集群 Agent，等待完成即可。&#xA;安装完成后，默认启用扩展组件。&#xA;说明 部分扩展组件不需要安装集群 Agent（即没有集群选择和差异化配置页签），请以实际页面为准。</description>
+      <description>本节介绍如何安装扩展组件。
+ 有关如何访问、配置及使用各个扩展组件，请参阅扩展组件使用指南。
+ 前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   安装步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  点击扩展中心，搜索您要安装的扩展组件。
+  点击扩展组件名称，然后点击安装，进入组件安装页面。
+  在组件安装对话框的版本选择页签，选择扩展组件的版本号，并安装好所有必装组件（若有），点击下一步。
+    说明     安装检测时，会识别扩展组件是否有依赖组件。依赖组件分为必装组件和选装组件。
+ 若必装组件的状态为未就绪，您需要先行安装正确版本的必装组件，以确保扩展组件的正常使用。而选装组件不会影响扩展组件的安装。
+      在扩展组件配置页签，在中间的自定义配置框中输入您需要的配置。查看最终配置确认后，点击下一步。
+
+   点击右上角的可全屏查看配置信息。
+  点击上传自定义的配置文件。
+  点击复制配置信息。
+  点击下载配置文件。
+       在扩展组件安装页签，点击开始安装，开始安装扩展组件。</description>
     </item>
+    
     <item>
       <title>升级扩展组件</title>
       <link>/v4.2.0/06-extension-management/03-upgrade-extensions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/06-extension-management/03-upgrade-extensions/</guid>
-      <description>本节介绍如何升级扩展组件。&#xA;当组件有新版本时，您可以在扩展中心的组件详情页升级组件。&#xA;注意事项&#xA;在 KubeSphere 企业版 v4.2.0 之前的版本中，在扩展组件安装时显式配置了镜像标签（image tag），而在 KubeSphere 企业版 v4.2.0 及之后的版本中，镜像标签会跟随扩展组件的版本，优先使用默认值，无需您手动配置。&#xA;因此，在升级扩展组件时，请务必确认镜像标签配置是否符合预期。新版本通常会使用新的镜像标签，如果您在配置中显式指定了旧的镜像标签，可能会导致升级后仍拉取旧版本镜像，无法获得最新功能或修复。&#xA;为确保升级顺利进行，请遵循以下建议：&#xA;检查并移除手动设置的镜像标签，或将其更新为新版本所需的镜像标签。&#xA;推荐使用默认配置，以自动获取与当前版本匹配的镜像标签。&#xA;各个扩展组件的镜像标签的配置路径，请参阅扩展中心各扩展组件详情页的升级说明。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;点击扩展中心。&#xA;点击已安装的组件名称，进入组件详情页。&#xA;点击组件图标下的，选择更新。&#xA;在更新对话框中，参照组件安装流程，完成升级。</description>
+      <description> 本节介绍如何升级扩展组件。
+ 当组件有新版本时，您可以在扩展中心的组件详情页升级组件。
+  注意事项
+ 在 KubeSphere 企业版 v4.2.0 之前的版本中，在扩展组件安装时显式配置了镜像标签（image tag），而在 KubeSphere 企业版 v4.2.0 及之后的版本中，镜像标签会跟随扩展组件的版本，优先使用默认值，无需您手动配置。
+ 因此，在升级扩展组件时，请务必确认镜像标签配置是否符合预期。新版本通常会使用新的镜像标签，如果您在配置中显式指定了旧的镜像标签，可能会导致升级后仍拉取旧版本镜像，无法获得最新功能或修复。
+ 为确保升级顺利进行，请遵循以下建议：
+  检查并移除手动设置的镜像标签，或将其更新为新版本所需的镜像标签。
+  推荐使用默认配置，以自动获取与当前版本匹配的镜像标签。
+   各个扩展组件的镜像标签的配置路径，请参阅扩展中心各扩展组件详情页的升级说明。
+ 前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  点击扩展中心。
+  点击已安装的组件名称，进入组件详情页。
+  点击组件图标下的，选择更新。
+  在更新对话框中，参照组件安装流程，完成升级。
+     </description>
     </item>
+    
     <item>
       <title>卸载扩展组件</title>
       <link>/v4.2.0/06-extension-management/05-uninstall-extensions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/06-extension-management/05-uninstall-extensions/</guid>
-      <description>本节介绍如何卸载扩展组件。&#xA;您可以在扩展中心的组件详情页中卸载扩展组件。&#xA;对于配置了集群 Agent 的扩展组件，卸载时会先卸载集群 Agent，再卸载组件。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;点击扩展中心，进入扩展中心页面。&#xA;点击已安装的组件名称，进入组件详情页。&#xA;点击组件图标下的，选择卸载。&#xA;输入扩展组件的名称，点击确定开始卸载。</description>
+      <description> 本节介绍如何卸载扩展组件。
+ 您可以在扩展中心的组件详情页中卸载扩展组件。
+ 对于配置了集群 Agent 的扩展组件，卸载时会先卸载集群 Agent，再卸载组件。
+ 前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  点击扩展中心，进入扩展中心页面。
+  点击已安装的组件名称，进入组件详情页。
+  点击组件图标下的，选择卸载。
+  输入扩展组件的名称，点击确定开始卸载。
+     </description>
     </item>
+    
   </channel>
 </rss>

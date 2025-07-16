@@ -4,16 +4,20 @@
     <title>Grafana Alloy for WizTelemetry on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/09-observability-platform/18-alloy/</link>
     <description>Recent content in Grafana Alloy for WizTelemetry on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/18-alloy/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/18-alloy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>可视化 Alloy 收集的指标</title>
       <link>/v4.2.0/11-use-extensions/09-observability-platform/18-alloy/01-display-alloy-data/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/18-alloy/01-display-alloy-data/</guid>
-      <description>Alloy 内置了众多可以导出指标的 Exporters，例如 Blackbox Exporter、Elasticsearch Exporter、Kafka Exporter、Redis Exporter、Postgres Exporter 等。安装 Alloy 后用户无需再分别安装单独的 Exporter，使用 prometheus.remote_write 组件即可将上述 Exporters 暴露的指标写入 Prometheus 及其兼容的存储后端。然后借助 Grafana 控制台可视化 Alloy 收集的指标。&#xA;下面是一个使用 Alloy 内置的 Blackbox Exporter 导出指标并写入 Prometheus 的示例。&#xA;步骤 1：创建配置字典 在 Grafana Alloy for WizTelemetry 的扩展组件配置中，可以直接提供 Alloy 配置，也可以指定外部 ConfigMap 提供配置。建议先创建 ConfigMap，然后在扩展组件配置中指定。&#xA;以 Blackbox Exporter 为例，在集群节点上，执行以下命令，创建配置字典 blackbox-modules。&#xA;cat &amp;lt;&amp;lt;EOF | kubectl apply -f - apiVersion: v1 kind: ConfigMap metadata: name: blackbox-modules namespace: kubesphere-monitoring-system data: blackbox_modules: | modules: http_2xx: prober: http timeout: 5s EOF 步骤 2：修改扩展组件配置 修改 Grafana Alloy for WizTelemetry 的扩展组件配置，以抓取并导出 Blackbox Exporter 的指标并写入 Prometheus。</description>
+      <description>Alloy 内置了众多可以导出指标的 Exporters，例如 Blackbox Exporter、Elasticsearch Exporter、Kafka Exporter、Redis Exporter、Postgres Exporter 等。安装 Alloy 后用户无需再分别安装单独的 Exporter，使用 prometheus.remote_write 组件即可将上述 Exporters 暴露的指标写入 Prometheus 及其兼容的存储后端。然后借助 Grafana 控制台可视化 Alloy 收集的指标。
+ 下面是一个使用 Alloy 内置的 Blackbox Exporter 导出指标并写入 Prometheus 的示例。
+ 步骤 1：创建配置字典 在 Grafana Alloy for WizTelemetry 的扩展组件配置中，可以直接提供 Alloy 配置，也可以指定外部 ConfigMap 提供配置。建议先创建 ConfigMap，然后在扩展组件配置中指定。
+ 以 Blackbox Exporter 为例，在集群节点上，执行以下命令，创建配置字典 blackbox-modules。
+ cat &amp;lt;&amp;lt;EOF | kubectl apply -f - apiVersion: v1 kind: ConfigMap metadata: name: blackbox-modules namespace: kubesphere-monitoring-system data: blackbox_modules: | modules: http_2xx: prober: http timeout: 5s EOF     步骤 2：修改扩展组件配置 修改 Grafana Alloy for WizTelemetry 的扩展组件配置，以抓取并导出 Blackbox Exporter 的指标并写入 Prometheus。</description>
     </item>
+    
   </channel>
 </rss>

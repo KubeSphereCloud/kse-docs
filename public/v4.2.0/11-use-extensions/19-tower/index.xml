@@ -4,16 +4,24 @@
     <title>KubeSphere 多集群代理连接 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/19-tower/</link>
     <description>Recent content in KubeSphere 多集群代理连接 on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.2.0/11-use-extensions/19-tower/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/19-tower/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>通过代理连接添加成员集群</title>
       <link>/v4.2.0/11-use-extensions/19-tower/02-add-a-member-cluster-using-proxy-connection/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/11-use-extensions/19-tower/02-add-a-member-cluster-using-proxy-connection/</guid>
-      <description>本节介绍如何通过代理连接添加成员集群。&#xA;如果主集群无法访问成员集群的 Kubernetes API 服务，您可以设置成员集群连接到主集群对外暴露的 tower 服务从而添加成员集群。&#xA;前提条件 您需要在主集群中具有 platform-admin 角色。&#xA;KubeSphere 企业版平台需要安装并启用 KubeSphere 多集群代理连接扩展组件。&#xA;成员集群所有节点必须能访问主集群 tower 服务的外部访问地址。取决于您的网络环境，您可能需要配置防火墙和流量转发规则。&#xA;步骤 1：设置代理服务地址 在主集群安装“KubeSphere 多集群代理连接”扩展组件后，将在系统项目 kubesphere-system 中自动创建一个名为 tower 的服务，服务类型为 LoadBalancer。&#xA;集群中有可用的 LoadBalancer 在主集群节点执行以下命令。&#xA;kubectl -n kubesphere-system get svc 若主集群中有可用的 LoadBalancer，其输出结果可能如下所示。&#xA;NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE tower LoadBalancer 10.233.63.191 139.198.110.23 8080:30721/TCP 16h tower 服务有相应的 EXTERNAL-IP 地址。该地址将由 KubeSphere 自动获取并配置代理服务地址，这意味着您可以跳过设置代理服务地址这一步。&#xA;说明 主流公网云厂商一般会提供 LoadBalancer 解决方案，并且负载均衡器可以自动分配外部 IP。如果您的集群运行在本地环境中，尤其是在裸机环境中，可以使用 OpenELB 作为负载均衡器解决方案。&#xA;集群中没有可用的 LoadBalancer 在主集群节点执行以下命令。&#xA;kubectl -n kubesphere-system get svc 若主集群中没有可用的 LoadBalancer，其输出结果可能如下所示。在此示例中，可以看出 NodePort 为 30721。</description>
+      <description>本节介绍如何通过代理连接添加成员集群。
+ 如果主集群无法访问成员集群的 Kubernetes API 服务，您可以设置成员集群连接到主集群对外暴露的 tower 服务从而添加成员集群。
+ 前提条件   您需要在主集群中具有 platform-admin 角色。
+  KubeSphere 企业版平台需要安装并启用 KubeSphere 多集群代理连接扩展组件。
+  成员集群所有节点必须能访问主集群 tower 服务的外部访问地址。取决于您的网络环境，您可能需要配置防火墙和流量转发规则。
+     步骤 1：设置代理服务地址 在主集群安装“KubeSphere 多集群代理连接”扩展组件后，将在系统项目 kubesphere-system 中自动创建一个名为 tower 的服务，服务类型为 LoadBalancer。
+ 集群中有可用的 LoadBalancer 在主集群节点执行以下命令。
+ kubectl -n kubesphere-system get svc   若主集群中有可用的 LoadBalancer，其输出结果可能如下所示。
+ NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE tower LoadBalancer 10.233.63.191 139.198.110.23 8080:30721/TCP 16h   tower 服务有相应的 EXTERNAL-IP 地址。该地址将由 KubeSphere 自动获取并配置代理服务地址，这意味着您可以跳过设置代理服务地址这一步。</description>
     </item>
+    
   </channel>
 </rss>

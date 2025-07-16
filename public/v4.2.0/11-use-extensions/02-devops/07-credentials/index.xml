@@ -4,16 +4,26 @@
     <title>凭证 on KubeSphere 企业版</title>
     <link>/v4.2.0/11-use-extensions/02-devops/07-credentials/</link>
     <description>Recent content in 凭证 on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.2.0/11-use-extensions/02-devops/07-credentials/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/02-devops/07-credentials/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>凭证管理</title>
       <link>/v4.2.0/11-use-extensions/02-devops/07-credentials/01-credential-management/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.2.0/11-use-extensions/02-devops/07-credentials/01-credential-management/</guid>
-      <description>凭证是包含敏感信息的对象，例如用户名和密码、SSH 密钥和令牌 (Token)。当 DevOps 流水线运行时，会与外部环境中的对象进行交互，以执行一系列任务，包括拉取代码、推送和拉取镜像以及运行脚本等。此过程中需要提供相应的凭证，而这些凭证不会明文出现在流水线中。&#xA;具有必要权限的 DevOps 项目用户可以为 Jenkins 流水线配置凭证。用户在 DevOps 项目中添加或配置这些凭证后，便可以在 DevOps 项目中使用这些凭证与第三方应用程序进行交互。&#xA;目前，您可以在 DevOps 项目中创建以下类型的凭证：&#xA;用户名和密码：用户名和密码，可以作为单独的组件处理，或者作为用冒号分隔的字符串（格式为 username:password）处理，例如 GitHub 和 GitLab 账户。&#xA;SSH 密钥：带有私钥的用户名，SSH 公钥/私钥对。&#xA;访问令牌：具有访问权限的令牌。&#xA;kubeconfig：用于配置跨集群认证。&#xA;本文档演示如何在 DevOps 项目中创建和管理凭证。有关如何使用凭证的更多信息，请参阅使用 Jenkinsfile 创建流水线和使用图形编辑面板创建流水线。&#xA;前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。&#xA;已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。&#xA;创建凭证 以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。&#xA;在左侧导航栏选择 DevOps &amp;gt; 凭证。&#xA;在页面左上角的下拉列表中选择一个 DevOps 项目。&#xA;在页面点击创建。&#xA;在弹出的创建凭证对话框，输入凭证名称，并选择凭证类型。不同的凭证类型需要设置的参数不同，具体请参考以下内容。&#xA;创建用户名和密码凭证&#xA;以创建 GitHub 用户凭证为例，您需要设置以下参数：</description>
+      <description>凭证是包含敏感信息的对象，例如用户名和密码、SSH 密钥和令牌 (Token)。当 DevOps 流水线运行时，会与外部环境中的对象进行交互，以执行一系列任务，包括拉取代码、推送和拉取镜像以及运行脚本等。此过程中需要提供相应的凭证，而这些凭证不会明文出现在流水线中。
+ 具有必要权限的 DevOps 项目用户可以为 Jenkins 流水线配置凭证。用户在 DevOps 项目中添加或配置这些凭证后，便可以在 DevOps 项目中使用这些凭证与第三方应用程序进行交互。
+ 目前，您可以在 DevOps 项目中创建以下类型的凭证：
+   用户名和密码：用户名和密码，可以作为单独的组件处理，或者作为用冒号分隔的字符串（格式为 username:password）处理，例如 GitHub 和 GitLab 账户。
+  SSH 密钥：带有私钥的用户名，SSH 公钥/私钥对。
+  访问令牌：具有访问权限的令牌。
+  kubeconfig：用于配置跨集群认证。
+   本文档演示如何在 DevOps 项目中创建和管理凭证。有关如何使用凭证的更多信息，请参阅使用 Jenkinsfile 创建流水线和使用图形编辑面板创建流水线。
+ 前提条件   KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
+  已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
+     创建凭证  以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。</description>
     </item>
+    
   </channel>
 </rss>

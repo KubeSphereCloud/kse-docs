@@ -4,51 +4,130 @@
     <title>部署管理 on KubeSphere 企业版</title>
     <link>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/</link>
     <description>Recent content in 部署管理 on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>查看应用列表</title>
       <link>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/01-view-an-app-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/01-view-an-app-list/</guid>
-      <description>本节介绍如何查看已部署的应用列表。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。&#xA;操作步骤 以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择应用商店管理。&#xA;在左侧导航栏选择部署管理。&#xA;应用列表提供以下信息：&#xA;参数 描述 名称&#xA;应用的名称。&#xA;状态&#xA;应用当前的状态。&#xA;创建中：系统正在创建应用。&#xA;已创建：应用已创建但还未运行。&#xA;运行中：应用运行正常。&#xA;升级中：系统正在升级应用版本。&#xA;删除中：系统正在删除应用。&#xA;失败：应用创建失败。&#xA;应用类型&#xA;应用模板的类型，如 helm 应用或 yaml 应用。&#xA;应用模板&#xA;创建应用所使用的应用模板。仅对基于模板的应用显示。&#xA;版本&#xA;应用的版本号。&#xA;对于基于模板的应用，显示 Helm Chart 的版本。&#xA;更新时间&#xA;应用的更新时间。&#xA;在列表上方点击搜索框并输入关键字，可按名称搜索应用。&#xA;在列表右上角点击可刷新列表信息。&#xA;在列表右上角点击可定制列表中显示的信息。</description>
+      <description>本节介绍如何查看已部署的应用列表。
+ 前提条件    您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。
+     KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+     操作步骤  以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择应用商店管理。
+  在左侧导航栏选择部署管理。
+  应用列表提供以下信息：
+    参数 描述     名称
+ 应用的名称。
+   状态
+ 应用当前的状态。
+   创建中：系统正在创建应用。
+  已创建：应用已创建但还未运行。
+  运行中：应用运行正常。
+  升级中：系统正在升级应用版本。</description>
     </item>
+    
     <item>
       <title>查看应用详情</title>
       <link>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/02-view-app-instance-details/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/02-view-app-instance-details/</guid>
-      <description>本节介绍如何查看已部署应用的详情。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。&#xA;操作步骤 以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择应用商店管理。&#xA;在左侧导航栏选择部署管理。&#xA;在部署管理页面，点击一个应用的名称打开其详情页面。&#xA;在应用详情页面左侧的属性区域查看应用的资源属性。&#xA;参数 描述 集群&#xA;应用所属的集群。&#xA;项目&#xA;应用所属的项目。&#xA;状态&#xA;应用当前的状态。&#xA;创建中：系统正在创建应用。&#xA;已创建：应用已创建但还未运行。&#xA;运行中：应用运行正常。&#xA;升级中：系统正在升级应用版本。&#xA;删除中：系统正在删除应用。&#xA;失败：应用创建失败。&#xA;应用&#xA;应用所使用的应用模板。&#xA;版本&#xA;应用的版本。&#xA;创建时间&#xA;应用的创建时间。&#xA;更新时间&#xA;应用的更新时间。&#xA;创建者&#xA;创建应用的用户。&#xA;在应用详情页面的资源状态页签查看组成应用的服务和工作负载。&#xA;服务区域提供以下信息：&#xA;参数 描述 名称&#xA;服务的名称。&#xA;项目&#xA;服务所属的项目。&#xA;内部访问&#xA;服务供集群内部访问的虚拟 IP 地址。&#xA;外部访问&#xA;服务供集群外部访问的端口号。&#xA;工作负载区域提供以下信息：&#xA;参数 描述 名称&#xA;工作负载的名称。&#xA;项目&#xA;工作负载所属的项目。&#xA;状态&#xA;工作负载当前的状态。&#xA;运行中：工作负载运行正常。&#xA;更新中：工作负载正在更新容器组副本。&#xA;已停止：工作负载的期望容器组副本数和当前容器组副本数都为 0。</description>
+      <description>本节介绍如何查看已部署应用的详情。
+ 前提条件    您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。
+     KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+     操作步骤  以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择应用商店管理。
+  在左侧导航栏选择部署管理。
+  在部署管理页面，点击一个应用的名称打开其详情页面。
+  在应用详情页面左侧的属性区域查看应用的资源属性。
+    参数 描述     集群
+ 应用所属的集群。
+   项目
+ 应用所属的项目。
+   状态
+ 应用当前的状态。
+   创建中：系统正在创建应用。</description>
     </item>
+    
     <item>
       <title>编辑应用信息</title>
       <link>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/04-edit-an-app-information/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/04-edit-an-app-information/</guid>
-      <description>本节介绍如何编辑已部署应用的信息。&#xA;您可以编辑应用的别名和描述。KubeSphere 企业版不支持编辑已部署应用的名称。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。&#xA;操作步骤 以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择应用商店管理。&#xA;在左侧导航栏选择部署管理。&#xA;在需要编辑的应用右侧点击，然后在下拉列表中选择编辑信息。&#xA;在编辑信息对话框设置应用的别名和描述，然后点击确定。</description>
+      <description> 本节介绍如何编辑已部署应用的信息。
+ 您可以编辑应用的别名和描述。KubeSphere 企业版不支持编辑已部署应用的名称。
+ 前提条件    您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。
+     KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+     操作步骤  以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择应用商店管理。
+  在左侧导航栏选择部署管理。
+  在需要编辑的应用右侧点击，然后在下拉列表中选择编辑信息。
+  在编辑信息对话框设置应用的别名和描述，然后点击确定。
+     </description>
     </item>
+    
     <item>
       <title>删除应用</title>
       <link>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/06-delete-an-app-instance/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/06-delete-an-app-instance/</guid>
-      <description>本节介绍如何删除已部署的应用实例。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。&#xA;操作步骤 以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择应用商店管理。&#xA;在左侧导航栏选择部署管理。&#xA;在需要删除的应用右侧点击，然后在下拉列表中选择删除。&#xA;在删除应用对话框输入应用名称，然后点击确定。</description>
+      <description> 本节介绍如何删除已部署的应用实例。
+ 前提条件    您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。
+     KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+     操作步骤  以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择应用商店管理。
+  在左侧导航栏选择部署管理。
+  在需要删除的应用右侧点击，然后在下拉列表中选择删除。
+  在删除应用对话框输入应用名称，然后点击确定。
+     </description>
     </item>
+    
     <item>
       <title>从应用商店部署应用</title>
       <link>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/08-deploy-an-app-from-the-app-store/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/08-deploy-an-app-from-the-app-store/</guid>
-      <description>本节介绍如何在应用商店管理页面从应用商店部署应用。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。&#xA;操作步骤 以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择应用商店管理。&#xA;在左侧导航栏选择部署管理。&#xA;在页面点击创建。&#xA;在创建应用对话框点击从应用商店。&#xA;在应用商店中，点击需要使用的应用模板，然后在右上角点击部署。&#xA;说明 如果弹出部署须知对话框，请仔细阅读相关内容，然后点击同意。&#xA;在弹出的位置对话框，选择应用的安装位置，然后点击确定。&#xA;在基本信息页签，设置应用的基本信息，然后点击下一步。&#xA;参数 描述 名称&#xA;用户自定义的应用名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 32 个字符。&#xA;版本&#xA;应用的版本。&#xA;描述&#xA;应用的描述信息。描述可包含任意字符，最长 256 个字符。&#xA;位置&#xA;应用所属的企业空间、集群和项目。&#xA;在应用设置页签，根据需要设置应用的功能参数，然后点击安装。&#xA;说明 应用商店中的应用由具有相关权限的企业空间成员发布或由第三方提供。有关应用功能参数的更多信息，请联系相关企业空间成员或应用的提供方。&#xA;应用创建完成后将显示在应用列表中。</description>
+      <description>本节介绍如何在应用商店管理页面从应用商店部署应用。
+ 前提条件    您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。
+     KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+     操作步骤  以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择应用商店管理。
+  在左侧导航栏选择部署管理。
+  在页面点击创建。
+  在创建应用对话框点击从应用商店。
+  在应用商店中，点击需要使用的应用模板，然后在右上角点击部署。
+    说明     如果弹出部署须知对话框，请仔细阅读相关内容，然后点击同意。
+        在弹出的位置对话框，选择应用的安装位置，然后点击确定。
+  在基本信息页签，设置应用的基本信息，然后点击下一步。
+    参数 描述     名称</description>
     </item>
+    
     <item>
       <title>从应用模板部署应用</title>
       <link>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/10-deploy-an-app-using-an-app-template/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/11-use-extensions/02-app-store/03-app-store-management/05-app-deployment/10-deploy-an-app-using-an-app-template/</guid>
-      <description>本节介绍如何在应用商店管理页面从应用模板部署应用。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。&#xA;KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。&#xA;操作步骤 以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择应用商店管理。&#xA;在左侧导航栏选择部署管理。&#xA;在页面点击创建。&#xA;在创建应用对话框点击从应用模板。&#xA;在应用模板页面，点击当前企业空间下拉列表，选择当前企业空间或一个应用仓库。&#xA;点击需要使用的应用模板，然后点击安装。&#xA;说明 应用模板由具有相关权限的企业空间成员创建，应用仓库由应用商店管理员创建。 有关更多信息，请参阅创建应用模板和添加应用仓库。&#xA;在基本信息页签，设置应用的基本信息，然后点击下一步。&#xA;参数 描述 名称&#xA;用户自定义的应用名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 32 个字符。&#xA;版本&#xA;应用的版本。&#xA;描述&#xA;应用的描述信息。描述可包含任意字符，最长 256 个字符。&#xA;位置&#xA;应用所属的企业空间、集群和项目。&#xA;在应用设置页签，根据需要设置应用的功能参数，然后点击安装。&#xA;说明 有关应用功能参数的更多信息，请联系相关企业空间成员或应用的提供方。&#xA;应用创建完成后将显示在应用列表中。</description>
+      <description>本节介绍如何在应用商店管理页面从应用模板部署应用。
+ 前提条件    您需要在 KubeSphere 企业版平台具有应用商店管理权限。有关更多信息，请参阅用户和平台角色。
+     KubeSphere 企业版平台需要安装并启用 KubeSphere 应用商店管理扩展组件。
+     操作步骤  以具有应用商店管理权限的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择应用商店管理。
+  在左侧导航栏选择部署管理。
+  在页面点击创建。
+  在创建应用对话框点击从应用模板。
+  在应用模板页面，点击当前企业空间下拉列表，选择当前企业空间或一个应用仓库。
+  点击需要使用的应用模板，然后点击安装。
+    说明     应用模板由具有相关权限的企业空间成员创建，应用仓库由应用商店管理员创建。 有关更多信息，请参阅创建应用模板和添加应用仓库。
+        在基本信息页签，设置应用的基本信息，然后点击下一步。
+    参数 描述     名称</description>
     </item>
+    
   </channel>
 </rss>

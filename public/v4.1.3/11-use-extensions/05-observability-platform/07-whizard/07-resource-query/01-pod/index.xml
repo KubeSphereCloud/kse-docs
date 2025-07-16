@@ -4,16 +4,24 @@
     <title>容器组 on KubeSphere 企业版</title>
     <link>/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/07-resource-query/01-pod/</link>
     <description>Recent content in 容器组 on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/07-resource-query/01-pod/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/07-resource-query/01-pod/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>跨集群查询容器组</title>
       <link>/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/07-resource-query/01-pod/01-query-pod/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/11-use-extensions/05-observability-platform/07-whizard/07-resource-query/01-pod/01-query-pod/</guid>
-      <description>本节介绍如何在 Whizard 可观测中心跨集群查询容器组。&#xA;对于单个集群，可在集群的容器组页面根据容器组名称和容器组 IP 地址查询容器组。&#xA;对于多集群环境，可在 Whizard 可观测中心根据容器组名称或容器组 IP 地址跨集群查询特定容器组的信息。&#xA;前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。&#xA;host 集群和需要监控的成员集群需要启用 Whizard 可观测中心。&#xA;说明 如果成员集群未启用 Whizard 可观测中心，Whizard 可观测中心将无法获取成员集群的数据。&#xA;操作步骤 以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击图标，选择 Whizard 可观测中心。&#xA;在左侧导航栏选择资源查询 &amp;gt; 容器组。&#xA;容器组列表提供以下信息：&#xA;参数 描述 名称&#xA;容器组的名称。&#xA;状态&#xA;容器组的状态。&#xA;等待中：容组器已被系统接受，但有至少一个容器尚未创建也未运行。此状态下，容器组可能正在等待调度，或等待容器镜像下载完成。&#xA;运行中：容器组已分配给某个节点，容器组中的所有容器都已被创建，至少有一个容器正在运行、启动或重启。&#xA;成功完成：容器组中的所有容器都已成功终止（以 0 退出码终止），并且不再重启。&#xA;失败：容器组中的所有容器都已终止，并且至少有一个容器以非 0 退出码终止。&#xA;未知：系统无法获取容器组状态。出现这种状态通常是由于系统与容器组所在的主机通信失败。&#xA;节点&#xA;容器组所在的节点和节点的 IP 地址。&#xA;容器组 IP 地址&#xA;容器组在集群内部的虚拟 IP 地址。&#xA;项目&#xA;容器组所属的项目。&#xA;集群</description>
+      <description>本节介绍如何在 Whizard 可观测中心跨集群查询容器组。
+ 对于单个集群，可在集群的容器组页面根据容器组名称和容器组 IP 地址查询容器组。
+ 对于多集群环境，可在 Whizard 可观测中心根据容器组名称或容器组 IP 地址跨集群查询特定容器组的信息。
+ 前提条件   您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+  host 集群和需要监控的成员集群需要启用 Whizard 可观测中心。
+    说明     如果成员集群未启用 Whizard 可观测中心，Whizard 可观测中心将无法获取成员集群的数据。
+           操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击图标，选择 Whizard 可观测中心。
+  在左侧导航栏选择资源查询 &amp;gt; 容器组。</description>
     </item>
+    
   </channel>
 </rss>

@@ -4,58 +4,140 @@
     <title>快速入门 on KubeSphere 企业版</title>
     <link>/v4.1.3/02-quickstart/</link>
     <description>Recent content in 快速入门 on KubeSphere 企业版</description>
-    <generator>Hugo</generator>
-    <language>zh</language>
-    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright>
-    <atom:link href="/v4.1.3/02-quickstart/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.3/02-quickstart/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>安装并使用扩展组件</title>
       <link>/v4.1.3/02-quickstart/02-install-an-extension/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/02-quickstart/02-install-an-extension/</guid>
-      <description>自 v4.1 开始，KubeSphere 解耦了一些核心功能组件，它们以扩展组件的方式无缝融入到 KubeSphere 控制台中，并独立维护版本，真正实现即插即用的应用级云原生操作系统。&#xA;原有的功能模块，如 DevOps，服务网格，可观测（包括监控、告警、日志、事件、通知），应用商店，边缘计算，网络与存储管理等，现由扩展组件提供。因此，为了充分利用这些功能，建议您根据实际需求选择要安装的扩展组件，定制您专属的 KubeSphere 容器管理平台。&#xA;了解扩展组件 请参照下表了解扩展组件的功能，以便选择合适的扩展组件进行安装。&#xA;WizTelemetry 可观测平台 WizTelemetry 平台服务：是 WizTelemetry 可观测平台各扩展组件的公共服务。是各个可观测性扩展组件通用的 APIServer，为所有可观测性扩展组件提供公共的后端平台服务。&#xA;WizTelemetry 数据流水线: 提供可观测性数据的收集、转换和路由能力。&#xA;OpenSearch 分布式检索与分析引擎：KubeSphere 内置的日志存储扩展组件，用于存储日志、审计、事件、通知历史等可观测数据。&#xA;WizTelemetry 日志：提供多租户视角的云原生应用实时及历史日志收集、查询、导出、存储等功能，可对接如 ElasticSearch、OpenSearch、Kafka 等日志接收器。&#xA;WizTelemetry 事件：可长期保存 Kubernetes 相关对象产生的事件，并提供多租户视角的事件检索和查看功能。&#xA;WizTelemetry 审计：实时记录 KubeSphere 企业版平台上的用户相关操作行为，并提供多租户视角的审计历史的检索及查看功能，可快速回溯相关用户的操作行为。&#xA;WizTelemetry 监控：提供多租户视角的云原生资源监控能力，包括针对集群，节点，工作负载、GPU、K8s 控制面等对象的核心监控指标进行实时和历史数据展示等功能。其中包含了 Whizard 可观测中心。&#xA;WizTelemetry 告警：基于 KubeSphere 采集的监控数据，可针对不同资源类型和监控指标，提供平台及租户视角的告警及告警规则管理功能。&#xA;WizTelemetry 事件告警：为 Kubernetes/KubeSphere 审计事件、Kubernetes 原生事件、以及 Kubernetes 日志定义告警规则，对传入的事件数据和日志数据进行评估，并将告警发送到指定的接收器如 HTTP 端点等。&#xA;WizTelemetry 通知：管理多租户 Kubernetes 环境中的通知。它能够接收来自不同发送者的告警、云事件以及其他类型的事件（例如审计和 Kubernetes 事件），并根据租户标签（如命名空间或用户）将通知发送给相应的租户接收器。&#xA;Grafana for WizTelemetry：一个开放且可组合的数据可视化和监控分析平台，内置众多仪表盘（Dashboard）来增强 WizTelemetry 可观测平台的可视化能力。&#xA;Grafana Loki for WizTelemetry：支持在 Grafana 控制台查看存储到 Loki 的 KubeSphere 日志、审计、事件及通知历史数据。</description>
+      <description>自 v4.1 开始，KubeSphere 解耦了一些核心功能组件，它们以扩展组件的方式无缝融入到 KubeSphere 控制台中，并独立维护版本，真正实现即插即用的应用级云原生操作系统。
+ 原有的功能模块，如 DevOps，服务网格，可观测（包括监控、告警、日志、事件、通知），应用商店，边缘计算，网络与存储管理等，现由扩展组件提供。因此，为了充分利用这些功能，建议您根据实际需求选择要安装的扩展组件，定制您专属的 KubeSphere 容器管理平台。
+ 了解扩展组件 请参照下表了解扩展组件的功能，以便选择合适的扩展组件进行安装。
+ WizTelemetry 可观测平台 WizTelemetry 平台服务：是 WizTelemetry 可观测平台各扩展组件的公共服务。是各个可观测性扩展组件通用的 APIServer，为所有可观测性扩展组件提供公共的后端平台服务。
+ WizTelemetry 数据流水线: 提供可观测性数据的收集、转换和路由能力。
+ OpenSearch 分布式检索与分析引擎：KubeSphere 内置的日志存储扩展组件，用于存储日志、审计、事件、通知历史等可观测数据。
+ WizTelemetry 日志：提供多租户视角的云原生应用实时及历史日志收集、查询、导出、存储等功能，可对接如 ElasticSearch、OpenSearch、Kafka 等日志接收器。
+ WizTelemetry 事件：可长期保存 Kubernetes 相关对象产生的事件，并提供多租户视角的事件检索和查看功能。
+ WizTelemetry 审计：实时记录 KubeSphere 企业版平台上的用户相关操作行为，并提供多租户视角的审计历史的检索及查看功能，可快速回溯相关用户的操作行为。
+ WizTelemetry 监控：提供多租户视角的云原生资源监控能力，包括针对集群，节点，工作负载、GPU、K8s 控制面等对象的核心监控指标进行实时和历史数据展示等功能。其中包含了 Whizard 可观测中心。
+ WizTelemetry 告警：基于 KubeSphere 采集的监控数据，可针对不同资源类型和监控指标，提供平台及租户视角的告警及告警规则管理功能。
+ WizTelemetry 事件告警：为 Kubernetes/KubeSphere 审计事件、Kubernetes 原生事件、以及 Kubernetes 日志定义告警规则，对传入的事件数据和日志数据进行评估，并将告警发送到指定的接收器如 HTTP 端点等。
+ WizTelemetry 通知：管理多租户 Kubernetes 环境中的通知。它能够接收来自不同发送者的告警、云事件以及其他类型的事件（例如审计和 Kubernetes 事件），并根据租户标签（如命名空间或用户）将通知发送给相应的租户接收器。</description>
     </item>
+    
     <item>
       <title>控制用户权限</title>
       <link>/v4.1.3/02-quickstart/03-control-user-permissions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/02-quickstart/03-control-user-permissions/</guid>
-      <description>本节介绍如何创建用户，并使用企业空间、项目和角色控制用户的访问权限。有关用户权限控制的更多信息，请参阅用户和角色管理。&#xA;作为多租户系统，KubeSphere 企业版支持在平台、集群、企业空间和项目级别基于角色对用户的权限进行控制，实现逻辑层面的资源隔离。&#xA;前提条件 您需要准备一个 Kubernetes 集群，并已安装 KubeSphere 企业版。&#xA;创建用户 使用默认用户 admin 和密码 P@88w0rd 登录 KubeSphere 企业版 Web 控制台。&#xA;说明 为了您的账户安全，首次登录时系统会提示您修改密码。密码修改后，后续请使用新密码登录。&#xA;点击用户和角色管理。&#xA;在左侧导航栏，选择用户。&#xA;在用户列表页面，点击创建。&#xA;在创建用户对话框，输入以下必填参数：&#xA;用户名：用户的名称。&#xA;邮箱：用户的邮箱地址。&#xA;密码：用户的密码。&#xA;点击确定。用户创建后将显示在用户列表中。&#xA;创建企业空间 登录 KubeSphere 企业版 Web 控制台。&#xA;点击企业空间管理，点击创建。&#xA;在创建企业空间的基本信息页面，输入企业空间的名称（例如 demo-workspace）。&#xA;说明 对于多集群环境，设置企业空间的基本信息后，点击下一步。在集群设置页面，选择企业空间需要使用的集群。&#xA;点击确定。企业空间创建后将显示在企业空间列表中。&#xA;创建企业空间角色 在企业空间列表页面，点击企业空间的名称 demo-workspace 进入该企业空间。&#xA;在左侧导航栏，选择企业空间设置 &amp;gt; 企业空间角色。&#xA;企业空间角色列表页面默认列出以下四个内置角色。&#xA;角色 描述 workspace-viewer&#xA;企业空间观察员，可以查看企业空间中的所有资源。&#xA;workspace-self-provisioner&#xA;企业空间普通成员，可以查看企业空间设置、管理应用模板、创建项目。&#xA;workspace-regular&#xA;企业空间普通成员，可以查看企业空间设置。&#xA;workspace-admin&#xA;企业空间管理员，可以管理企业空间中的所有资源。&#xA;说明 企业空间内置角色的名称以 &amp;lt;企业空间名称&amp;gt;-&amp;lt;角色名称&amp;gt; 格式显示。例如，在名称为 demo-workspace 的企业空间中，角色 admin 的实际角色名称为 demo-workspace-admin。&#xA;在企业空间角色列表页面，点击创建。</description>
+      <description>本节介绍如何创建用户，并使用企业空间、项目和角色控制用户的访问权限。有关用户权限控制的更多信息，请参阅用户和角色管理。
+ 作为多租户系统，KubeSphere 企业版支持在平台、集群、企业空间和项目级别基于角色对用户的权限进行控制，实现逻辑层面的资源隔离。
+ 前提条件 您需要准备一个 Kubernetes 集群，并已安装 KubeSphere 企业版。
+   创建用户  使用默认用户 admin 和密码 P@88w0rd 登录 KubeSphere 企业版 Web 控制台。
+    说明     为了您的账户安全，首次登录时系统会提示您修改密码。密码修改后，后续请使用新密码登录。
+        点击用户和角色管理。
+  在左侧导航栏，选择用户。
+  在用户列表页面，点击创建。
+  在创建用户对话框，输入以下必填参数：
+  用户名：用户的名称。
+  邮箱：用户的邮箱地址。
+  密码：用户的密码。
+       点击确定。用户创建后将显示在用户列表中。</description>
     </item>
+    
     <item>
       <title>创建并部署 WordPress</title>
       <link>/v4.1.3/02-quickstart/05-deploy-wordpress/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/02-quickstart/05-deploy-wordpress/</guid>
-      <description>本节以安装 WordPress 为例，演示如何在 KubeSphere 企业版 Web 控制台部署应用程序，并在集群外进行访问。有关应用资源管理的更多信息，请参阅项目管理。&#xA;WordPress 简介 WordPress 是一款基于 PHP 的免费、开源内容管理系统，您可以使用 WordPress 搭建自己的网站。完整的 WordPress 应用程序包括以下 Kubernetes 对象，由 MySQL 作为后端数据库。&#xA;前提条件 准备一个项目（例如 demo-project）和一个已邀请到该项目的用户（例如 project-regular）。该用户在项目中应具有 operator 角色。有关更多信息，请参阅控制用户权限。&#xA;KubeSphere 企业版平台需要安装并启用 KubeSphere 服务网格扩展组件。&#xA;操作步骤 1. 创建保密字典 创建两个保密字典，分别用于设置 MySQL 和 WordPress 的 root 密码。&#xA;使用 project-regular 用户登录 KubeSphere 企业版 Web 控制台，点击企业空间管理并进入项目所在的企业空间，在项目列表中点击 demo-project。&#xA;在左侧导航栏，选择配置 &amp;gt; 保密字典，在页面右侧点击创建。&#xA;在基本信息页签，输入保密字典的基本信息（例如，将名称设置为 mysql-secret），点击下一步。&#xA;在数据配置页签，点击添加数据添加键值对。&#xA;将键和值分别设置为 MYSQL_ROOT_PASSWORD 和 123456，在页面右下角点击保存设置。&#xA;点击创建以创建保密字典，用于为 MySQL 提供 root 密码。&#xA;重复以上步骤创建一个名为 wordpress-secret 的保密字典，将键和值分别设置为 WORDPRESS_DB_PASSWORD 和 123456，用于为 WordPress 提供 root 密码。</description>
+      <description>本节以安装 WordPress 为例，演示如何在 KubeSphere 企业版 Web 控制台部署应用程序，并在集群外进行访问。有关应用资源管理的更多信息，请参阅项目管理。
+ WordPress 简介 WordPress 是一款基于 PHP 的免费、开源内容管理系统，您可以使用 WordPress 搭建自己的网站。完整的 WordPress 应用程序包括以下 Kubernetes 对象，由 MySQL 作为后端数据库。
+ 
+   前提条件   准备一个项目（例如 demo-project）和一个已邀请到该项目的用户（例如 project-regular）。该用户在项目中应具有 operator 角色。有关更多信息，请参阅控制用户权限。
+  KubeSphere 企业版平台需要安装并启用 KubeSphere 服务网格扩展组件。
+     操作步骤 1. 创建保密字典 创建两个保密字典，分别用于设置 MySQL 和 WordPress 的 root 密码。
+  使用 project-regular 用户登录 KubeSphere 企业版 Web 控制台，点击企业空间管理并进入项目所在的企业空间，在项目列表中点击 demo-project。
+  在左侧导航栏，选择配置 &amp;gt; 保密字典，在页面右侧点击创建。</description>
     </item>
+    
     <item>
       <title>部署并访问 Bookinfo</title>
       <link>/v4.1.3/02-quickstart/06-deploy-bookinfo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/02-quickstart/06-deploy-bookinfo/</guid>
-      <description>作为开源的服务网格解决方案，Istio 为微服务提供了强大的流量管理功能。KubeSphere 服务网格扩展组件集成了 Istio，为用户提供一致的微服务管理体验。&#xA;本节演示了如何部署由四个独立的微服务组成的示例应用程序 Bookinfo，以及如何通过 NodePort 访问该应用。&#xA;Bookinfo 简介 Bookinfo 应用会显示一本书的信息页面，类似于在线书店的一个品类。 此页面上会显示一本书的描述、书籍的细节（ISBN、页数等）以及这本书相关的几条评论。&#xA;Bookinfo 应用由以下四个独立的微服务组成。&#xA;productpage 微服务会调用 details 和 reviews 用来生成页面。&#xA;details 微服务中包含了书籍的信息。&#xA;reviews 微服务中包含了书籍相关的评论，它还会调用 ratings 微服务。&#xA;ratings 微服务中包含了由书籍评价组成的评级信息。&#xA;reviews 微服务有 3 个版本：&#xA;v1 版本不会调用 ratings 服务。&#xA;v2 版本会调用 ratings 服务，并使用 1 到 5 个黑色星形图标来显示评分信息。&#xA;v3 版本会调用 ratings 服务，并使用 1 到 5 个红色星形图标来显示评分信息。&#xA;下图展示了这个应用的端到端架构。有关更多详细信息，请参见 Bookinfo 应用。&#xA;前提条件 准备一个项目（例如 demo-project）和一个已邀请到该项目的用户（例如 project-regular）。该用户在项目中应具有 operator 角色。有关更多信息，请参阅控制用户权限。&#xA;KubeSphere 企业版平台需要安装并启用 KubeSphere 服务网格和 KubeSphere 网关扩展组件。&#xA;启用项目网关，并为项目网关启用链路追踪功能。有关更多信息，请参阅启用项目网关。</description>
+      <description>作为开源的服务网格解决方案，Istio 为微服务提供了强大的流量管理功能。KubeSphere 服务网格扩展组件集成了 Istio，为用户提供一致的微服务管理体验。
+ 本节演示了如何部署由四个独立的微服务组成的示例应用程序 Bookinfo，以及如何通过 NodePort 访问该应用。
+ Bookinfo 简介 Bookinfo 应用会显示一本书的信息页面，类似于在线书店的一个品类。 此页面上会显示一本书的描述、书籍的细节（ISBN、页数等）以及这本书相关的几条评论。
+ Bookinfo 应用由以下四个独立的微服务组成。
+   productpage 微服务会调用 details 和 reviews 用来生成页面。
+  details 微服务中包含了书籍的信息。
+  reviews 微服务中包含了书籍相关的评论，它还会调用 ratings 微服务。
+  ratings 微服务中包含了由书籍评价组成的评级信息。
+   reviews 微服务有 3 个版本：
+   v1 版本不会调用 ratings 服务。
+  v2 版本会调用 ratings 服务，并使用 1 到 5 个黑色星形图标来显示评分信息。
+  v3 版本会调用 ratings 服务，并使用 1 到 5 个红色星形图标来显示评分信息。</description>
     </item>
+    
     <item>
       <title>金丝雀发布实践</title>
       <link>/v4.1.3/02-quickstart/07-canary-release-example/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/02-quickstart/07-canary-release-example/</guid>
-      <description>在金丝雀发布中，您可以引入应用的新版本，并向其发送一小部分流量来进行测试。同时，旧版本负责处理其余的流量。如果一切顺利，您就可以逐渐增加向新版本发送的流量，同时逐步停用旧版本。如果出现任何问题，您可以更改流量比例，回滚至先前版本。&#xA;该方法能够高效地测试服务性能和可靠性，有助于在实际环境中发现潜在问题，同时不影响系统整体稳定性。&#xA;前提条件 准备一个项目（例如 demo-project）和一个已邀请到该项目的用户（例如 project-regular）。该用户在项目中应具有 operator 角色。有关更多信息，请参阅控制用户权限。&#xA;KubeSphere 企业版平台需要安装并启用 KubeSphere 服务网格和 KubeSphere 网关扩展组件。&#xA;启用项目网关，并为项目网关启用链路追踪功能。有关更多信息，请参阅启用项目网关。&#xA;说明 如果启用链路追踪后无法访问路由(Ingress)，请在路由中添加注解 nginx.ingress.kubernetes.io/service-upstream: true。&#xA;已创建一个可用的自制应用，并且在创建时开启了应用治理，以便实现该应用的金丝雀发布。本教程中使用的示例应用是 Bookinfo。有关更多信息，请参见部署并访问 Bookinfo。&#xA;操作步骤 1. 创建金丝雀发布任务 使用 project-regular 用户登录 KubeSphere 企业版 Web 控制台，点击企业空间管理并进入项目所在的企业空间，在项目列表中点击 demo-project。&#xA;在左侧导航栏，选择服务网格 &amp;gt; 灰度发布，在发布模式页签下，点击金丝雀发布右侧的创建。&#xA;设置任务名称，点击下一步。&#xA;在服务设置页签，从下拉列表中选择您的应用和要实现金丝雀发布的服务。如果您同样使用示例应用 Bookinfo，请选择 reviews 并点击下一步。&#xA;在新版本设置页签，设置新版本号 v2，并修改 reviews 的容器镜像地址（例如 kubesphere/examples-bookinfo-reviews-v2:1.16.2；将 v1 改为 v2），点击下一步。&#xA;您可以使用具体比例或者使用请求内容（例如 Http Header、Cookie 和 URI）分别向这两个版本（v1 和 v2）发送流量。选择指定流量分配，并拖动中间的滑块来更改向这两个版本分别发送的流量比例（例如设置为各 50%）。操作完成后，点击创建。&#xA;该发布任务也会同时创建新的部署，可在应用负载 &amp;gt; 工作负载页面查看新版本对应的部署。&#xA;2. 验证金丝雀发布 现在您有两个可用的应用版本，请访问该应用以验证金丝雀发布。&#xA;访问 Bookinfo 网站，重复刷新浏览器。您会看到 Book Reviews 板块以 50% 的比例在 v1 版本和 v2 版本之间切换，即不展示或展示 5 个黑色星标的评级。</description>
+      <description>在金丝雀发布中，您可以引入应用的新版本，并向其发送一小部分流量来进行测试。同时，旧版本负责处理其余的流量。如果一切顺利，您就可以逐渐增加向新版本发送的流量，同时逐步停用旧版本。如果出现任何问题，您可以更改流量比例，回滚至先前版本。
+ 该方法能够高效地测试服务性能和可靠性，有助于在实际环境中发现潜在问题，同时不影响系统整体稳定性。
+ 前提条件   准备一个项目（例如 demo-project）和一个已邀请到该项目的用户（例如 project-regular）。该用户在项目中应具有 operator 角色。有关更多信息，请参阅控制用户权限。
+  KubeSphere 企业版平台需要安装并启用 KubeSphere 服务网格和 KubeSphere 网关扩展组件。
+  启用项目网关，并为项目网关启用链路追踪功能。有关更多信息，请参阅启用项目网关。
+    说明     如果启用链路追踪后无法访问路由(Ingress)，请在路由中添加注解 nginx.ingress.kubernetes.io/service-upstream: true。
+      已创建一个可用的自制应用，并且在创建时开启了应用治理，以便实现该应用的金丝雀发布。本教程中使用的示例应用是 Bookinfo。有关更多信息，请参见部署并访问 Bookinfo。
+     操作步骤 1. 创建金丝雀发布任务  使用 project-regular 用户登录 KubeSphere 企业版 Web 控制台，点击企业空间管理并进入项目所在的企业空间，在项目列表中点击 demo-project。
+  在左侧导航栏，选择服务网格 &amp;gt; 灰度发布，在发布模式页签下，点击金丝雀发布右侧的创建。
+  设置任务名称，点击下一步。</description>
     </item>
+    
     <item>
       <title>从集群外访问服务</title>
       <link>/v4.1.3/02-quickstart/08-access-a-service/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/02-quickstart/08-access-a-service/</guid>
-      <description>服务（Service）将运行在容器组（pod）上的应用程序公开为网络服务，提供了固定的地址（域名或 IP 地址）供客⼾端访问。访问服务即可访问部署在集群中的应用程序。&#xA;KubeSphere 企业版支持通过 NodePort、LoadBalancer、Ingress 或端口转发的方式，从集群外访问服务。&#xA;本节以应用程序 Bookinfo 为例，介绍如何从集群外访问服务。在进行以下步骤之前，请先在项目中部署 Bookinfo 或其他应用程序。&#xA;通过 NodePort 访问服务 NodePort：系统将节点的端口映射到服务端口，可通过节点的 IP 地址和节点端口访问服务。&#xA;在集群或项目的左侧导航栏，选择应用负载 &amp;gt; 服务。&#xA;点击应用相应服务（如 productpage）右侧的，选择编辑外部访问。&#xA;在访问模式中选择 NodePort，点击确定。&#xA;在服务列表的外部访问列，查看暴露的节点端口。&#xA;在浏览器中输入 &amp;lt;节点 IP&amp;gt;:&amp;lt;节点端口&amp;gt;，即可从集群外访问服务。&#xA;说明 访问服务前，您可能需要配置端口转发规则并在安全组中放行该端口。&#xA;通过 LoadBalancer 访问服务 LoadBalancer：系统在 NodePort 服务的基础上为服务分配一个外部 IP 地址，并将外部 IP 地址与一个外部负载均衡器绑定。外部负载均衡器监听服务对应的节点端口，从而可以通过外部 IP 地址访问服务。为实现上述功能，LoadBalancer 类型的服务需要负载均衡器插件和基础设施环境提供支持，并且需要设置相关注解。有关更多信息，请联系您的基础设施环境提供商。&#xA;前提条件 请提前创建好用于绑定服务的外部负载均衡器。可使用云服务商提供的负载均衡器，或开源负载均衡方案，如 OpenELB。&#xA;负载均衡器与 KubeSphere 集群在同一私有网络下，且负载均衡器已绑定公网 IP。&#xA;说明 有关具体操作，请参阅云环境的用户指南或联系您的云服务提供商。&#xA;操作步骤 在集群或项目的左侧导航栏，选择应用负载 &amp;gt; 服务。&#xA;点击应用相应服务（如 productpage）右侧的，选择编辑外部访问。&#xA;在访问模式中选择 LoadBalancer，选择负载均衡器提供商并添加相应注解，点击确定。&#xA;说明 如果已选择负载均衡器提供商，点击键文本框时系统将在下拉列表中显示注解提示。&#xA;在服务列表的外部访问列，查看通过负载均衡器暴露的外部 IP 地址。&#xA;点击服务名称进入详情页，在资源状态页签下的端口区域，查看服务端口。&#xA;在浏览器中输入 &amp;lt;外部 IP 地址&amp;gt;:&amp;lt;服务端口&amp;gt;，即可从集群外访问服务。</description>
+      <description>服务（Service）将运行在容器组（pod）上的应用程序公开为网络服务，提供了固定的地址（域名或 IP 地址）供客⼾端访问。访问服务即可访问部署在集群中的应用程序。
+ KubeSphere 企业版支持通过 NodePort、LoadBalancer、Ingress 或端口转发的方式，从集群外访问服务。
+ 本节以应用程序 Bookinfo 为例，介绍如何从集群外访问服务。在进行以下步骤之前，请先在项目中部署 Bookinfo 或其他应用程序。
+ 通过 NodePort 访问服务 NodePort：系统将节点的端口映射到服务端口，可通过节点的 IP 地址和节点端口访问服务。
+  在集群或项目的左侧导航栏，选择应用负载 &amp;gt; 服务。
+  点击应用相应服务（如 productpage）右侧的，选择编辑外部访问。
+  在访问模式中选择 NodePort，点击确定。
+  在服务列表的外部访问列，查看暴露的节点端口。
+  在浏览器中输入 &amp;lt;节点 IP&amp;gt;:&amp;lt;节点端口&amp;gt;，即可从集群外访问服务。
+    说明     访问服务前，您可能需要配置端口转发规则并在安全组中放行该端口。
+           通过 LoadBalancer 访问服务 LoadBalancer：系统在 NodePort 服务的基础上为服务分配一个外部 IP 地址，并将外部 IP 地址与一个外部负载均衡器绑定。外部负载均衡器监听服务对应的节点端口，从而可以通过外部 IP 地址访问服务。为实现上述功能，LoadBalancer 类型的服务需要负载均衡器插件和基础设施环境提供支持，并且需要设置相关注解。有关更多信息，请联系您的基础设施环境提供商。</description>
     </item>
+    
     <item>
       <title>修改界面语言</title>
       <link>/v4.1.3/02-quickstart/10-change-display-language/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
       <guid>/v4.1.3/02-quickstart/10-change-display-language/</guid>
-      <description>本节介绍如何修改 KubeSphere 企业版 Web 控制台的界面语言。&#xA;前提条件 已获取 KubeSphere 企业版 Web 控制台的用户名和密码。&#xA;操作步骤 登录 KubeSphere 企业版 Web 控制台。&#xA;在页面右上角点击当前用户名，然后在下拉列表中选择用户设置。&#xA;在基本信息页签设置用户的邮箱和语言。&#xA;参数 描述 邮箱&#xA;用户的邮箱地址。邮箱地址可用于登录 KubeSphere 企业版 Web 控制台。&#xA;语言&#xA;KubeSphere 企业版 Web 控制台对当前用户显示的语言。当前支持简体中文和英文。</description>
+      <description> 本节介绍如何修改 KubeSphere 企业版 Web 控制台的界面语言。
+ 前提条件 已获取 KubeSphere 企业版 Web 控制台的用户名和密码。
+   操作步骤  登录 KubeSphere 企业版 Web 控制台。
+  在页面右上角点击当前用户名，然后在下拉列表中选择用户设置。
+  在基本信息页签设置用户的邮箱和语言。
+    参数 描述     邮箱
+ 用户的邮箱地址。邮箱地址可用于登录 KubeSphere 企业版 Web 控制台。
+   语言
+ KubeSphere 企业版 Web 控制台对当前用户显示的语言。当前支持简体中文和英文。
+           </description>
     </item>
+    
   </channel>
 </rss>
