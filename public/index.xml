@@ -20182,19 +20182,19 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.1.3/03-installation-and-upgrade/02-install-kubesphere/05-appendix/</guid>
-      <description>KubeSphere Helm Chart 选项 常用选项     选项 默认值 描述     adminPassword
+      <description>KubeSphere Helm Chart 参数 全局配置     参数 描述 默认值     global.imageRegistry
+ 全局 Docker 镜像仓库地址
+ registry.cn-beijing.aliyuncs.com
+   global.tag
+ 全局 Docker 镜像标签
+ v4.1.3
+   global.imagePullSecrets
+ 全局 Docker 仓库密钥名称数组
+ []
+    通用参数     参数 描述 默认值     nameOverride
+ 部分覆盖 common.names.fullname 的字符串
  &amp;#34;&amp;#34;
- string - 为第一个管理员用户设置引导密码。登录后，管理员需要重置密码。如不设置，会使用内置默认密码 P@88w0rd。
-   hostname
- &amp;#34;example.com&amp;#34;
- string - KubeSphere Server 完全限定的域名。
-   ingress.enabled
- false
- bool - 如果值为 true, 创建 KubeSphere Ingress 网关。
-   ingress.tls.enabled
- true
- bool - 如果值为 true, 则为 KubeSphere Ingress 网关启用 HTTPS。
-   ingress.</description>
+   fullnameOverride</description>
     </item>
     
     <item>
