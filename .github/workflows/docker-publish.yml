@@ -7,7 +7,6 @@ on:
       - staging
     tags:
       - v*
-  pull_request:
 
 env:
   IMAGE_NAME: kse-docs
@@ -28,7 +27,7 @@ jobs:
           images: |
             dockerhub.qingcloud.com/ks_ns/$IMAGE_NAME
           tags: |
-            type=raw,value=$IMAGE_TAG
+            type=raw,value=${{ env.IMAGE_TAG }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
