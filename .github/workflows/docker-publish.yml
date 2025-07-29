@@ -43,7 +43,7 @@ jobs:
         run: |
           echo "::set-output name=platforms::linux/amd64"
           echo "::set-output name=push::true"
-          echo "::set-output name=load::false"
+          echo "::set-output name=load::true"
           echo "::set-output name=ref::${{github.ref_name}}"
           echo "::set-output name=short_sha::${GITHUB_SHA::7}"
       - name: Build and push Docker images
