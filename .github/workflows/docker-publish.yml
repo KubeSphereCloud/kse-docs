@@ -25,7 +25,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            dockerhub.qingcloud.com/ks_ns/$IMAGE_NAME
+            dockerhub.qingcloud.com/ks_ns/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=${{ env.IMAGE_TAG }}
       - name: Set up QEMU
