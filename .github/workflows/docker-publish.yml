@@ -1,0 +1,80 @@
+name: Docker
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+    tags:
+      - v*
+  pull_request:
+
+env:
+  IMAGE_NAME: kse-docs
+  NAMESPACE: kse-docs
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get image tag
+        id: get-image-tag
+        run: echo "IMAGE_TAG=$(date '+%Y%m%d-%H%M%S')" >> $GITHUB_ENV
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            dockerhub.qingcloud.com/ks_ns/$IMAGE_NAME
+          tags: |
+            type=raw,value=$IMAGE_TAG
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          registry: dockerhub.qingcloud.com
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASS }}
+      - name: Build env
+        id: build_env
+        run: |
+          echo "::set-output name=platforms::linux/amd64"
+          echo "::set-output name=push::true"
+          echo "::set-output name=load::false"
+          echo "::set-output name=ref::${{github.ref_name}}"
+          echo "::set-output name=short_sha::${GITHUB_SHA::7}"
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v6
+        with:
+          tags: ${{ steps.meta.outputs.tags }}
+          push: ${{ steps.build_env.outputs.push }}
+          load: ${{ steps.build_env.outputs.load }}
+          platforms: ${{ steps.build_env.outputs.platforms }}
+      - name: delete old configmap on cluster
+        uses: appleboy/ssh-action@v1
+        with:
+          host: 139.198.41.76
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          envs: NAMESPACE
+          script: kubectl delete configmap nginx-config -n $NAMESPACE --ignore-not-found
+      - name: deploy new configmap on cluster
+        uses: appleboy/ssh-action@v1
+        with:
+          host: 139.198.41.76
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          envs: NAMESPACE
+          script: kubectl create configmap nginx-config -n $NAMESPACE --from-file=nginx-config.conf=deploy/nginx-config.conf
+      - name: deploy
+        uses: appleboy/ssh-action@v1
+        with:
+          host: 139.198.41.76
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          envs: IMAGE_NAME,IMAGE_TAG,NAMESPACE
+          script: kubectl set image --record -n $NAMESPACE deployment/nginx website=dockerhub.qingcloud.com/ks_ns/$IMAGE_NAME:$IMAGE_TAG
