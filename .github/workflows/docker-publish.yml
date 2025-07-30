@@ -38,22 +38,6 @@ jobs:
           push: true
           platforms: linux/amd64
           provenance: false
-      - name: delete old configmap on cluster
-        uses: appleboy/ssh-action@v1
-        with:
-          host: 139.198.41.76
-          username: root
-          key: ${{ secrets.SSH_KEY }}
-          envs: NAMESPACE
-          script: kubectl delete configmap nginx-config -n $NAMESPACE --ignore-not-found
-      - name: deploy new configmap on cluster
-        uses: appleboy/ssh-action@v1
-        with:
-          host: 139.198.41.76
-          username: root
-          key: ${{ secrets.SSH_KEY }}
-          envs: NAMESPACE
-          script: kubectl create configmap nginx-config -n $NAMESPACE --from-file=nginx-config.conf=deploy/nginx-config.conf
       - name: deploy
         uses: appleboy/ssh-action@v1
         with:
@@ -61,4 +45,4 @@ jobs:
           username: root
           key: ${{ secrets.SSH_KEY }}
           envs: IMAGE_NAME,IMAGE_TAG,NAMESPACE
-          script: kubectl set image --record -n $NAMESPACE deployment/nginx website=dockerhub.qingcloud.com/ks_ns/$IMAGE_NAME:$IMAGE_TAG
+          script: kubectl set image --record -n $NAMESPACE deployment/nginx nginx=dockerhub.qingcloud.com/ks_ns/$IMAGE_NAME:$IMAGE_TAG

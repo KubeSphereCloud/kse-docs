@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  nginx-config.conf: |
+    http {
+      server {
+        listen 80;
+        location /latest {
+          return 302 /v4.2.0;
+        }
+      }
+    }
+kind: ConfigMap
+metadata:
+  name: nginx-config
