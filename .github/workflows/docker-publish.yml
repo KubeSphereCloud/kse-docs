@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           tags: |
-            dockerhub.qingcloud.com/ks_ns/kse-docs:aaa
+            dockerhub.qingcloud.com/ks_ns/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           push: true
           platforms: linux/amd64
           provenance: false
