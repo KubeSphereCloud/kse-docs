@@ -51,8 +51,6 @@ jobs:
         with:
           tags: ${{ steps.meta.outputs.tags }}
           push: ${{ steps.build_env.outputs.push }}
-          load: ${{ steps.build_env.outputs.load }}
-          platforms: ${{ steps.build_env.outputs.platforms }}
       - name: delete old configmap on cluster
         uses: appleboy/ssh-action@v1
         with:
