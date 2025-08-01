@@ -17159,8 +17159,8 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">chart=oci://hub.kubesphere.com.cn/kse/ks-core
-version=1.1.1
-helm upgrade --install -n kubesphere-system ks-core $chart --version $version -f kse-v4.1.3-host-custom-values.yaml --wait --debug</code></pre>
+version=1.1.1-20250717-1
+helm upgrade --install -n kubesphere-system ks-core $chart --version $version -f kse-v4.1.3-host-custom-values.yaml --set global.tag=v4.1.3-20250717-1,cloud.enabled=false --wait --debug</code></pre>
 </div>
 </div>
 </div>
@@ -17277,8 +17277,8 @@ EOF</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">chart=oci://hub.kubesphere.com.cn/kse/ks-core
-version=1.1.1
-helm upgrade --install -n kubesphere-system ks-core $chart --version $version -f kse-v4.1.3-member-custom-values.yaml --wait --debug</code></pre>
+version=1.1.1-20250717-1
+helm upgrade --install -n kubesphere-system ks-core $chart --version $version -f kse-v4.1.3-member-custom-values.yaml --set global.tag=v4.1.3-20250717-1 --wait --debug</code></pre>
 </div>
 </div>
 </div>
