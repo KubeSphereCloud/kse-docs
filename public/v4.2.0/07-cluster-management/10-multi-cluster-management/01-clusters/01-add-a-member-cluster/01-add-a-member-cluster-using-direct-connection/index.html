@@ -100,6 +100,19 @@
       </div>
     </div>
     
+      
+      
+        
+          <a class="navbar-item-right btn primary-btn navbar-btn "
+            target="_blank"
+            data-url="https://docs.kubesphere.co"
+            data-text="英文文档"
+            href="https://docs.kubesphere.co">
+            英文文档
+          </a>
+        
+      
+    
   </nav>
 </header><script id="search-result-total-template" type="text/x-js-template">
   <div class="search-result-total">
@@ -18376,7 +18389,7 @@
     通过直接连接添加成员集群</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2025-07-16 08:24:25
+      更新时间：2025-08-28 07:52:34
     </div>
     
     
@@ -18403,6 +18416,23 @@
 <div class="paragraph">
 <p>本节介绍如何通过直接连接添加成员集群。</p>
 </div>
+<table class="tableblock frame-all grid-all stretch admon attention">
+<colgroup>
+<col style="width: 100%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>成员集群被纳管之前仅需安装 Kubernetes，无需安装 KubeSphere 企业版。若已安装 KubeSphere 企业版，请迁移数据并卸载 KubeSphere 企业版后再进行纳管。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="sect1">
 <h2 id="_前提条件">前提条件</h2>
 <div class="sectionbody">
@@ -18546,12 +18576,12 @@
 <colgroup>
 <col style="width: 100%;"/>
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>注意</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">注意</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>成员集群被纳管后，如果其 KubeSphere 版本与主集群的 KubeSphere 版本不一致，需在成员集群节点上手动<a href="../../../../../03-installation-and-upgrade/03-upgrade-kubesphere/">升级 KubeSphere</a>。待更新为相同 KubeSphere 版本后，才能在成员集群上进行后续操作。</p>
