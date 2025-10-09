@@ -18531,7 +18531,7 @@
     在线安装 Kubernetes 和 KubeSphere</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2025-10-09 02:55:07
+      更新时间：2025-10-09 06:38:51
     </div>
     
     
@@ -19353,6 +19353,14 @@ spec:
 <pre class="highlight"><code class="language-bash" data-lang="bash">chart=oci://hub.kubesphere.com.cn/kse/ks-core
 version=1.2.2
 helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --debug --wait --version $version --reset-values</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果您访问 Docker Hub 受限，请在命令后添加如下配置，修改扩展组件镜像的拉取地址。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">--set extension.imageRegistry=swr.cn-north-9.myhuaweicloud.com/ks</code></pre>
 </div>
 </div>
 <div class="paragraph">
