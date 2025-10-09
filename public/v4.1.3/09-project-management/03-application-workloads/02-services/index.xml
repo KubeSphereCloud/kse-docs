@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>服务 on KubeSphere 企业版</title>
+    <title>服务 on KubeSphere</title>
     <link>/v4.1.3/09-project-management/03-application-workloads/02-services/</link>
-    <description>Recent content in 服务 on KubeSphere 企业版</description>
+    <description>Recent content in 服务 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.1.3/09-project-management/03-application-workloads/02-services/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,7 +13,7 @@
       
       <guid>/v4.1.3/09-project-management/03-application-workloads/02-services/02-view-a-service-list/</guid>
       <description>本节介绍如何查看服务列表。
- 操作步骤  以具有应用负载查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+ 操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的项目。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   服务列表提供以下信息：
     参数 描述     名称
@@ -37,7 +37,7 @@
       <guid>/v4.1.3/09-project-management/03-application-workloads/02-services/04-view-service-details/</guid>
       <description>本节介绍如何查看服务详情。
  前提条件 您需要加入一个项目并在项目中具有应用负载查看权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的项目。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在服务列表中点击一个服务的名称打开其详情页面。
   在服务详情页面的属性区域查看服务的资源属性。
@@ -58,9 +58,9 @@
       
       <guid>/v4.1.3/09-project-management/03-application-workloads/02-services/05-edit-service-information/</guid>
       <description> 本节介绍如何编辑任务信息。
- 您可以编辑任务的别名和描述。KubeSphere 企业版不支持编辑已创建任务的名称。
+ 您可以编辑任务的别名和描述。KubeSphere 不支持编辑已创建任务的名称。
  前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的项目。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要操作的服务右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置服务的别名和描述，然后点击确定。
@@ -79,7 +79,7 @@
       <guid>/v4.1.3/09-project-management/03-application-workloads/02-services/06-edit-service-settings/</guid>
       <description>本节介绍如何编辑任务设置。
  前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的项目。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要操作的服务右侧点击，然后在下拉列表中选择编辑服务。
   在编辑服务对话框修改服务的设置，然后点击确定。
@@ -88,7 +88,7 @@
     参数 描述     内部访问模式
  从集群内部访问服务的方式。
    内部域名：系统不为服务分配虚拟 IP 地址，可通过 &amp;lt;service name&amp;gt;.&amp;lt;namespace&amp;gt;.svc.cluster.local 或 &amp;lt;service name&amp;gt;.&amp;lt;namespace&amp;gt; 格式的域名从集群内部访问。
-  虚拟 IP 地址：系统为服务分配一个虚拟 IP 地址供集群内部访问，同时也支持通过 &amp;lt;service name&amp;gt;.&amp;lt;namespace&amp;gt;.svc.cluster.local 或 &amp;lt;service name&amp;gt;.</description>
+  虚拟 IP 地址：系统为服务分配一个虚拟 IP 地址供集群内部访问，同时也支持通过 &amp;lt;service name&amp;gt;.&amp;lt;namespace&amp;gt;.svc.cluster.local 或 &amp;lt;service name&amp;gt;.&amp;lt;namespace&amp;gt; 格式的域名从集群内部访问。</description>
     </item>
     
     <item>
@@ -100,7 +100,7 @@
       <description>本节介绍如何编辑服务外部访问设置。
      说明     此操作仅支持内部访问模式为 VirtualIP 的服务，不支持内部访问模式为 Headless 或 ExternalName 的服务。
     前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的项目。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要操作的服务右侧点击，然后在下拉列表中选择编辑外部访问。
   在编辑外部访问对话框，设置服务的外部访问模式，然后点击确定。
@@ -121,11 +121,11 @@
       <description>本节介绍如何删除服务。
      警告     删除服务后将无法通过服务访问其后端的容器组，请谨慎执行此操作。
     前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
-   删除单个服务  以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+   删除单个服务  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的项目。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要删除的服务右侧点击，然后在下拉列表中选择删除。
   在删除服务对话框，选择需要同时删除的工作负载，然后点击确定。
-     批量删除服务  以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的项目。
+     批量删除服务  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的项目。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   选择需要删除的服务左侧的复选框，然后在服务列表上方点击删除。
   在批量删除服务对话框，确认并选择要删除的相关资源，然后点击确定。

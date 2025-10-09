@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>节点 on KubeSphere 企业版</title>
+    <title>节点 on KubeSphere</title>
     <link>/v4.2.0/07-cluster-management/03-nodes/</link>
-    <description>Recent content in 节点 on KubeSphere 企业版</description>
+    <description>Recent content in 节点 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/07-cluster-management/03-nodes/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -14,7 +14,7 @@
       <guid>/v4.2.0/07-cluster-management/03-nodes/01-view-a-node-list/</guid>
       <description>本节介绍如何查看节点列表。
  前提条件 您需要加入一个集群并在集群中具有节点查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+   操作步骤  以具有节点查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   节点列表提供以下信息：
     参数 描述     名称
@@ -37,7 +37,7 @@
       <guid>/v4.2.0/07-cluster-management/03-nodes/02-view-node-details/</guid>
       <description>本节介绍如何查看节点详情。
  前提条件 您需要加入一个集群并在集群中具有节点查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+   操作步骤  以具有节点查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在节点列表中点击一个节点的名称打开其详情页面。
   在节点详情页面的属性区域查看节点的资源属性。
@@ -62,7 +62,7 @@
       <guid>/v4.2.0/07-cluster-management/03-nodes/03-prevent-and-allow-pod-scheduling/</guid>
       <description> 本节介绍如何阻止和允许容器组调度到节点。
  前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在需要操作的节点右侧点击，然后在下拉列表中选择停止调度。操作完成后节点状态将变为无法调度。
   在状态为无法调度的节点右侧点击，然后在下拉列表中选择启用调度可以允许容器组调度到该节点。
@@ -77,9 +77,9 @@
       
       <guid>/v4.2.0/07-cluster-management/03-nodes/04-access-a-node-terminal/</guid>
       <description> 本节介绍如何使用节点的终端。
- 您可以使用 KubeSphere 企业版提供的命令行终端对节点进行操作。
+ 您可以使用 KubeSphere 提供的命令行终端对节点进行操作。
  前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在需要操作的节点右侧点击，然后在下拉列表中选择打开终端。
     说明     初次打开节点终端时，由于相关服务尚未启动，系统可能会提示缺少相关权限。如果遇到此情况，您可以稍后重试。
@@ -95,9 +95,9 @@
       <description>本节介绍如何编辑节点污点。
  污点是用户在节点上创建的标记，与容器组上创建的容忍度配合使用。当节点存在污点时，根据设置的污点效果，所有缺少与污点匹配的容忍度的容器组都将被阻止调度到节点或被尽可能阻止调度到节点。
  一个污点由键、值和效果三部分组成。容器组容忍度必须与污点的键、值和效果匹配，容器组才能不受污点影响。
-     说明     KubeSphere 企业版 Web 控制台目前暂不支持编辑容器组容忍度，因而默认情况下节点污点对所有容器组生效。
+     说明     KubeSphere Web 控制台目前暂不支持编辑容器组容忍度，因而默认情况下节点污点对所有容器组生效。
     前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   选择需要操作的节点左侧的复选框，然后在节点列表上方点击编辑污点。
   在编辑污点对话框，设置污点的键、值和效果，然后点击确定。
@@ -106,7 +106,8 @@
  缺少与污点匹配的容忍度的容器组将被阻止调度到节点，节点上原本运行的容器组不受影响。
    尽可能阻止调度
  缺少与污点匹配的容忍度的容器组将被尽可能阻止调度到节点，节点上原本运行的容器组不受影响。
-   阻止调度并驱逐现有容器组</description>
+   阻止调度并驱逐现有容器组
+ 缺少与污点匹配的容忍度的容器组将被阻止调度到节点，节点上原本运行的容器组如果缺少与污点匹配的容忍度会被立即驱逐。</description>
     </item>
     
     <item>
@@ -118,7 +119,7 @@
       <description> 本节介绍如何编辑节点标签。
  节点标签是用户在节点上设置的键值对，可用于选择节点。例如，在创建工作负载时，您可以指定容器组调度到具有特定标签的节点上。
  前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在节点列表中，点击需要操作的节点的名称打开节点详情页面。
   在节点详情页面，点击操作 &amp;gt; 编辑标签。

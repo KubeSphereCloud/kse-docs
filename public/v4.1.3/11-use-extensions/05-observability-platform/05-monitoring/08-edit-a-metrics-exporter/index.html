@@ -15,7 +15,7 @@
 
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<title>编辑监控导出器 - KubeSphere 企业版</title>
+<title>编辑监控导出器 - KubeSphere</title>
 <link href="/css/bulma.css" rel="stylesheet">
 <link href="/css/bulma-tooltip.min.css" rel="stylesheet">
 <link href="/css/atom-one-light.css" rel="stylesheet" />
@@ -34,7 +34,7 @@
       <a href="/" class="navbar-logo-wrapper">
         <img class="navbar-logo" src="/images/qingcloud-logo.svg" />
         <div class="navbar-split navbar-left-split">|</div>
-        <div class="navbar-logo-text">KubeSphere 企业版</div>
+        <div class="navbar-logo-text">KubeSphere</div>
       </a>
     
     <div class="navbar-nav">
@@ -16989,7 +16989,7 @@
 <div class="content-card-wrapper">
   <div class="content-card">
     <div class="content-wrapper"><ul class="content-breadcrumb">
-      <li class="icon-slash_fill"><a href="/v4.1.3" data-url="/v4.1.3">KubeSphere 企业版</a></li>
+      <li class="icon-slash_fill"><a href="/v4.1.3" data-url="/v4.1.3">KubeSphere</a></li>
       <li class="icon-slash_fill"><a href="/v4.1.3/11-use-extensions" data-url="/v4.1.3/11-use-extensions">扩展组件使用</a></li>
       <li class="icon-slash_fill"><a href="/v4.1.3/11-use-extensions/05-observability-platform" data-url="/v4.1.3/11-use-extensions/05-observability-platform">WizTelemetry 可观测平台</a></li>
       <li class="icon-slash_fill"><a href="/v4.1.3/11-use-extensions/05-observability-platform/05-monitoring" data-url="/v4.1.3/11-use-extensions/05-observability-platform/05-monitoring">WizTelemetry 监控</a></li>
@@ -16998,7 +16998,7 @@
     编辑监控导出器</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2025-08-28 07:43:52
+      更新时间：2025-10-09 02:55:07
     </div>
     
     
@@ -17025,7 +17025,7 @@
 <p>本节介绍如何编辑监控导出器。</p>
 </div>
 <div class="paragraph">
-<p>监控导出器用于对应用程序进行监控。KubeSphere 企业版平台的监控告警功能底层通过 Prometheus 实现。为监控应用程序的运行状况，您需要进行以下操作：</p>
+<p>监控导出器用于对应用程序进行监控。KubeSphere 平台的监控告警功能底层通过 Prometheus 实现。为监控应用程序的运行状况，您需要进行以下操作：</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -17033,10 +17033,10 @@
 <p>配置运行在容器中的应用程序，将符合 Prometheus 规范的监控指标暴露在某个服务端路径下。有关更多信息，请参阅 <a href="https://prometheus.io/docs/instrumenting/clientlibs/">Prometheus 官方文档</a>。</p>
 </li>
 <li>
-<p>在 KubeSphere 企业版 Web 控制台，在用于暴露工作负载的服务上设置监控导出器，以声明提供应用程序监控指标的路径。KubeSphere 企业版将根据监控导出器的相关参数获取应用程序的监控指标。</p>
+<p>在 KubeSphere Web 控制台，在用于暴露工作负载的服务上设置监控导出器，以声明提供应用程序监控指标的路径。KubeSphere 将根据监控导出器的相关参数获取应用程序的监控指标。</p>
 </li>
 <li>
-<p>在 KubeSphere 企业版 Web 控制台，使用监控指标创建规则组或自定义监控面板，从而对应用程序的运行状况进行监控。</p>
+<p>在 KubeSphere Web 控制台，使用监控指标创建规则组或自定义监控面板，从而对应用程序的运行状况进行监控。</p>
 </li>
 </ol>
 </div>
@@ -17057,7 +17057,7 @@
 <p>您需要配置目标应用程序将符合 Prometheus 规范的监控指标暴露在某个服务端路径下。有关更多信息，请参阅 <a href="https://prometheus.io/docs/instrumenting/clientlibs/">Prometheus 官方文档</a>。</p>
 </li>
 <li>
-<p>如果监控指标采集过程需要认证，您还需要在目标应用程序中配置相关认证逻辑，并在 KubeSphere 企业版平台提前创建包含认证信息的保密字典。</p>
+<p>如果监控指标采集过程需要认证，您还需要在目标应用程序中配置相关认证逻辑，并在 KubeSphere 平台提前创建包含认证信息的保密字典。</p>
 </li>
 </ul>
 </div>
@@ -17085,7 +17085,7 @@
 <div class="openblock">
 <div class="content">
 <div class="paragraph">
-<p>KubeSphere 企业版的监控告警模块将根据此处设置的参数访问服务并收集应用程序的监控指标。</p>
+<p>KubeSphere 的监控告警模块将根据此处设置的参数访问服务并收集应用程序的监控指标。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -17185,7 +17185,7 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>监控导出器创建完成后，您还需要在 KubeSphere 企业版 Web 控制台使用监控指标进一步创建规则组或自定义监控面板，以对应用程序的运行状态进行监控。</p>
+<p>监控导出器创建完成后，您还需要在 KubeSphere Web 控制台使用监控指标进一步创建规则组或自定义监控面板，以对应用程序的运行状态进行监控。</p>
 </div></div></td>
 </tr>
 </tbody>

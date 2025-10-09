@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>镜像构建器 on KubeSphere 企业版</title>
+    <title>镜像构建器 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/03-image-builder/</link>
-    <description>Recent content in 镜像构建器 on KubeSphere 企业版</description>
+    <description>Recent content in 镜像构建器 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/03-image-builder/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -14,7 +14,7 @@
       <guid>/v4.2.0/11-use-extensions/03-image-builder/02-view-an-image-builder-list/</guid>
       <description>本节介绍如何查看镜像构建器列表。
  前提条件 您需要加入一个项目并在项目中具有应用负载查看权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择镜像构建器。
   在页面左上角的下拉列表中选择一个项目。
   镜像构建器列表提供以下信息：
@@ -40,7 +40,7 @@
       <guid>/v4.2.0/11-use-extensions/03-image-builder/03-view-image-builder-details/</guid>
       <description>本节介绍如何查看镜像构建器详情。
  前提条件 您需要加入一个项目并在项目中具有应用负载查看权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择镜像构建器。
   在页面左上角的下拉列表中选择一个项目。
   在镜像构建器列表中点击一个镜像构建器的名称打开其详情页面。
@@ -65,9 +65,9 @@
       
       <guid>/v4.2.0/11-use-extensions/03-image-builder/04-edit-image-builder-information/</guid>
       <description> 本节介绍如何编辑镜像构建器信息。
- 您可以编辑镜像构建器的别名和描述。KubeSphere 企业版不支持编辑镜像构建器的名称。
+ 您可以编辑镜像构建器的别名和描述。KubeSphere 不支持编辑镜像构建器的名称。
  前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择镜像构建器。
   在页面左上角的下拉列表中选择一个项目。
   在需要操作的镜像构建器右侧点击，然后在下拉列表中选择编辑信息。
@@ -88,7 +88,7 @@
       <description> 本节介绍如何运行镜像构建器。
  镜像构建器开始运行后会将源代码或制品文件构建为容器镜像，并将其推送到指定的镜像服务。
  前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择镜像构建器。
   在页面左上角的下拉列表中选择一个项目。
   在需要操作的镜像构建器右侧点击，然后在下拉列表中选择运行。
@@ -108,7 +108,7 @@
       <description>KubeSphere 提供 Source-to-Image (S2I) 和 Binary-to-Image (B2I) 功能，以自动化构建、推送镜像和部署应用程序。您可以配置 S2I 和 B2I Webhook，当代码仓库发生特定事件时，自动触发镜像构建器。
  本教程演示如何配置 S2I 和 B2I webhooks。
  准备工作 已创建一个 S2I 镜像构建器和 B2I 镜像构建器。有关更多信息，请参阅使用源代码创建镜像构建器和使用制品创建镜像构建器。
-   配置 S2I Webhook 步骤 1: 暴露 S2I trigger 服务  以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+   配置 S2I Webhook 步骤 1: 暴露 S2I trigger 服务  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   前往应用负载下的服务，搜索 s2ioperator-trigger-service。
   点击，选择编辑外部访问。
   在弹出的对话框中，从访问模式的下拉菜单中选择 NodePort，然后点击确定。
@@ -125,12 +125,12 @@
       <description>本节介绍如何删除镜像构建器。
      警告     镜像构建器删除后无法恢复，请谨慎执行此操作。
     前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
-   删除单个镜像构建器  以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+   删除单个镜像构建器  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择镜像构建器。
   在页面左上角的下拉列表中选择一个项目。
   在需要删除的镜像构建器右侧点击，然后在下拉列表中选择删除。
   在删除镜像构建器对话框，输入镜像构建器的名称，然后点击确定。
-     批量删除镜像构建器  以具有应用负载管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+     批量删除镜像构建器  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择镜像构建器。
   在页面左上角的下拉列表中选择一个项目。
   选择需要删除的镜像构建器左侧的复选框，然后在镜像构建器列表上方选择删除。

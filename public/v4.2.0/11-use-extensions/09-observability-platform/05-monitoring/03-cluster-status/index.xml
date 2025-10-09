@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>集群监控 on KubeSphere 企业版</title>
+    <title>集群监控 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/09-observability-platform/05-monitoring/03-cluster-status/</link>
-    <description>Recent content in 集群监控 on KubeSphere 企业版</description>
+    <description>Recent content in 集群监控 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/05-monitoring/03-cluster-status/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -14,8 +14,8 @@
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/05-monitoring/03-cluster-status/01-view-cluster-status-overview/</guid>
       <description>本节介绍如何查看集群状态概览。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
+     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面的概览页签，查看集群节点、集群资源、etcd 和服务组件的状态。
     参数 描述     集群节点状态
@@ -35,8 +35,8 @@
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/05-monitoring/03-cluster-status/02-view-physical-resource-status/</guid>
       <description>本节介绍如何查看物理资源状态。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
+     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面，点击物理资源监控查看集群物理资源的使用情况。
   物理资源监控页签提供以下信息：
@@ -55,13 +55,14 @@
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/05-monitoring/03-cluster-status/03-view-etcd-status/</guid>
       <description>本节介绍如何查看 etcd 数据库状态。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
+     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面，点击 etcd 监控页签查看 etcd 数据库的运行状态。
   etcd 监控页签提供以下信息：
     参数 描述     服务状态
- 显示 etcd 集群的 Leader 节点、每个节点的 IP 地址和 1 小时内 Leader 变更次数。</description>
+ 显示 etcd 集群的 Leader 节点、每个节点的 IP 地址和 1 小时内 Leader 变更次数。
+   数据库大小</description>
     </item>
     
     <item>
@@ -72,8 +73,8 @@
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/05-monitoring/03-cluster-status/04-view-api-server-status/</guid>
       <description>本节介绍如何查看 Kubernetes API 服务器状态。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
+     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面，点击 API Server 监控页签查看 API 服务器的运行状态。
   API Server 监控页签提供以下信息：
@@ -91,8 +92,8 @@
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/05-monitoring/03-cluster-status/05-view-scheduler-monitoring-data/</guid>
       <description>本节介绍如何查看调度器状态。调度器根据容器组的资源需求、节点可用资源和其他约束条件决定容器组运行在哪些节点上。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
+     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面，点击调度器监控页签查看调度器的运行状态。
   调度器监控页签提供以下信息：
@@ -113,8 +114,8 @@
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/05-monitoring/03-cluster-status/06-view-nodes-ranked-by-resource-usage/</guid>
       <description> 本节介绍如何按照特定资源的用量对节点进行排序。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
+     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面，点击资源用量排行页签查看各节点的资源使用情况。
   在左上角点击下拉列表可选择按照 CPU 用量、CPU 平均负载、内存用量、磁盘用量、Inode 用量或容器组用量对节点进行排序。

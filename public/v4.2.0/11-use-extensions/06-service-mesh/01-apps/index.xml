@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>自制应用 on KubeSphere 企业版</title>
+    <title>自制应用 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/06-service-mesh/01-apps/</link>
-    <description>Recent content in 自制应用 on KubeSphere 企业版</description>
+    <description>Recent content in 自制应用 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/06-service-mesh/01-apps/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -15,15 +15,16 @@
       <description>本节介绍如何创建自制应用。
  您可以自定义应用的服务、工作负载和路由以创建自制应用。相比基于模板的应用，自制应用支持应用治理，您可以为自制应用启用应用治理从而使用流量监控、灰度发布和链路追踪功能。
  前提条件    您需要加入一个项目并在项目中具有 Service Mesh 管理权限。有关更多信息，请参阅项目成员和项目角色。
-     KubeSphere 企业版平台需要安装并启用 KubeSphere 服务网格扩展组件。
-     操作步骤  以具有 Service Mesh 管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+     KubeSphere 平台需要安装并启用 KubeSphere 服务网格扩展组件。
+     操作步骤  以具有 Service Mesh 管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择灰度发布 &amp;gt; 自制应用。
   在页面左上角的下拉列表中选择一个项目。
   在页面点击创建。
   在基本信息页签，设置应用的基本信息，然后点击下一步。
     参数 描述     名称
  应用的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
-   版本</description>
+   版本
+ 用户自定义的应用版本。版本只能包含小写字母和数字，最长 16 个字符。</description>
     </item>
     
     <item>
@@ -34,7 +35,7 @@
       <guid>/v4.2.0/11-use-extensions/06-service-mesh/01-apps/04-view-an-app-list/</guid>
       <description>本节介绍如何查看自制应用列表。
  前提条件 您需要加入一个项目并在项目中具有 Service Mesh 查看权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有 Service Mesh 查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+   操作步骤  以具有 Service Mesh 查看权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择灰度发布 &amp;gt; 自制应用。
   在页面左上角的下拉列表中选择一个项目。
   在自制应用页面，查看应用列表。
@@ -47,7 +48,8 @@
   已创建：应用已创建但还未运行。
   运行中：应用运行正常。
   升级中：系统正在升级应用版本。
-  删除中：系统正在删除应用。</description>
+  删除中：系统正在删除应用。
+  失败：应用创建失败。</description>
     </item>
     
     <item>
@@ -58,7 +60,7 @@
       <guid>/v4.2.0/11-use-extensions/06-service-mesh/01-apps/05-view-composed-app-details/</guid>
       <description>本节介绍如何查看自制应用详情。
  前提条件 您需要加入一个项目并在项目中具有 Service Mesh 查看权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有 Service Mesh 查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+   操作步骤  以具有 Service Mesh 查看权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择灰度发布 &amp;gt; 自制应用。
   在页面左上角的下拉列表中选择一个项目。
   在自制应用页面，点击一个应用的名称打开其详情页面。
@@ -71,7 +73,8 @@
  应用当前的状态。
    创建中：系统正在创建应用。
   运行中：应用运行正常。
-  升级中：系统正在升级应用版本。</description>
+  升级中：系统正在升级应用版本。
+  删除中：系统正在删除应用。</description>
     </item>
     
     <item>
@@ -81,9 +84,9 @@
       
       <guid>/v4.2.0/11-use-extensions/06-service-mesh/01-apps/06-edit-app-information/</guid>
       <description> 本节介绍如何编辑自制应用信息。
- 您可以编辑应用的别名和描述。KubeSphere 企业版不支持编辑已创建应用的名称。
+ 您可以编辑应用的别名和描述。KubeSphere 不支持编辑已创建应用的名称。
  前提条件 您需要加入一个项目并在项目中具有 Service Mesh 管理权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有 Service Mesh 管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+   操作步骤  以具有 Service Mesh 管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择灰度发布 &amp;gt; 自制应用。
   在页面左上角的下拉列表中选择一个项目。
   在需要操作的应用右侧点击，然后在下拉列表中选择编辑信息。
@@ -103,7 +106,7 @@
       <guid>/v4.2.0/11-use-extensions/06-service-mesh/01-apps/08-add-an-app-route/</guid>
       <description>本节介绍如何为自制应用添加应用路由。
  前提条件 您需要加入一个项目并在项目中具有 Service Mesh 管理权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有 Service Mesh 管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+   操作步骤  以具有 Service Mesh 管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择灰度发布 &amp;gt; 自制应用。
   在页面左上角的下拉列表中选择一个项目。
   在自制应用页面，点击一个应用的名称打开其详情页面。
@@ -126,7 +129,7 @@
       <guid>/v4.2.0/11-use-extensions/06-service-mesh/01-apps/07-add-a-service/</guid>
       <description>本节介绍如何为自制应用添加有状态或无状态服务。
  前提条件 您需要加入一个项目并在项目中具有 Service Mesh 管理权限。有关更多信息，请参阅项目成员和项目角色。
-   操作步骤  以具有 Service Mesh 管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+   操作步骤  以具有 Service Mesh 管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择灰度发布 &amp;gt; 自制应用。
   在页面左上角的下拉列表中选择一个项目。
   在自制应用页面，点击一个应用的名称打开其详情页面。
@@ -146,18 +149,19 @@
       <guid>/v4.2.0/11-use-extensions/06-service-mesh/01-apps/10-delete-apps/</guid>
       <description>本节介绍如何删除自制应用。
  前提条件 您需要加入一个项目并在项目中具有 Service Mesh 管理权限。有关更多信息，请参阅项目成员和项目角色。
-   删除单个应用  以具有 Service Mesh 管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+   删除单个应用  以具有 Service Mesh 管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择灰度发布 &amp;gt; 自制应用。
   在页面左上角的下拉列表中选择一个项目。
   在自制应用页面，查看应用列表。
   在需要删除的应用右侧点击，然后在下拉列表中选择删除。
   在删除应用对话框，输入应用的名称，然后点击确定。
-     批量删除应用  以具有 Service Mesh 管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+     批量删除应用  以具有 Service Mesh 管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择灰度发布 &amp;gt; 自制应用。
   在页面左上角的下拉列表中选择一个项目。
   在自制应用页面，查看应用列表。
   选择需要删除的应用左侧的复选框，然后在应用列表上方点击删除。
-  在批量删除应用对话框，输入应用的名称，然后点击确定。</description>
+  在批量删除应用对话框，输入应用的名称，然后点击确定。
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
     </item>
     
   </channel>

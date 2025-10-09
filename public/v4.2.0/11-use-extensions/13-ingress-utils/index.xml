@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>KubeSphere 应用路由工具 on KubeSphere 企业版</title>
+    <title>KubeSphere 应用路由工具 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/13-ingress-utils/</link>
-    <description>Recent content in KubeSphere 应用路由工具 on KubeSphere 企业版</description>
+    <description>Recent content in KubeSphere 应用路由工具 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/13-ingress-utils/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -15,13 +15,14 @@
       <description>本节介绍如何使用应用路由工具添加域名，以便在创建或编辑应用路由时对域名进行唯一性校验。
  检验规则：同一网关下的应用路由可以使用同一域名及其子域名。不同网关下的应用路由不能使用同一域名。
      说明     “域名重用校验”仅对当前集群生效，且不作用于之前已存在的应用路由。
-    前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
+    前提条件   KubeSphere 平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由工具。
   在页面点击添加域名。
   在添加域名对话框，设置域名信息。
-    参数 描述     名称</description>
+    参数 描述     名称
+ 域名的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。</description>
     </item>
     
     <item>
@@ -31,9 +32,9 @@
       
       <guid>/v4.2.0/11-use-extensions/13-ingress-utils/02-view-a-domain-list/</guid>
       <description>本节介绍如何查看已启用“域名重用校验”的域名列表。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由工具。
   域名列表提供以下信息：
     参数 描述     名称
@@ -51,10 +52,10 @@
       
       <guid>/v4.2.0/11-use-extensions/13-ingress-utils/03-edit-domain-information/</guid>
       <description> 本节介绍如何编辑域名信息。
- 您可以编辑域名的描述。KubeSphere 企业版不支持编辑已添加域名的名称和域名。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
+ 您可以编辑域名的描述。KubeSphere 不支持编辑已添加域名的名称和域名。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由工具。
   在需要操作的域名右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置域名的描述，然后点击确定。
@@ -68,13 +69,13 @@
       
       <guid>/v4.2.0/11-use-extensions/13-ingress-utils/06-delete-domains/</guid>
       <description>本节介绍如何删除域名，以便在创建或编辑应用路由时停止对域名进行重用校验。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由工具。
   在需要删除的域名右侧点击，然后在下拉列表中选择删除。
   在删除域名对话框，输入域名的名称，然后点击确定。
-     批量删除域名  以具有 cluster-admin 角色的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     批量删除域名  以具有 cluster-admin 角色的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由工具。
   选择需要删除的域名左侧的复选框，然后在域名列表上方点击删除。
   在批量删除域名对话框，输入域名的名称，然后点击确定。

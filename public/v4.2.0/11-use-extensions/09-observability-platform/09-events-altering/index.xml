@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>WizTelemetry 事件告警 on KubeSphere 企业版</title>
+    <title>WizTelemetry 事件告警 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/09-observability-platform/09-events-altering/</link>
-    <description>Recent content in WizTelemetry 事件告警 on KubeSphere 企业版</description>
+    <description>Recent content in WizTelemetry 事件告警 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/09-events-altering/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,8 +13,8 @@
       
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/09-events-altering/01-create-rules-for-auditing/</guid>
       <description>本节介绍如何为 Kubernetes 原生事件和 Kubernetes/KubeSphere 审计事件定义告警规则。
- 前提条件   您需要在 KubeSphere 企业版平台具有 platform-admin 角色。
-  KubeSphere 企业版平台需要安装并启用 WizTelemetry 事件告警扩展组件。
+ 前提条件   您需要在 KubeSphere 平台具有 platform-admin 角色。
+  KubeSphere 平台需要安装并启用 WizTelemetry 事件告警扩展组件。
      操作步骤  在任意集群节点上，创建一个 yaml 文件，为该集群定义事件和审计的告警规则。
 点击此处查看完整的告警规则示例。请参阅参数描述设置告警规则的参数。
  简单示例如下：
@@ -39,8 +39,8 @@
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/09-events-altering/03-create-rules-for-logs/</guid>
       <description>本节介绍如何为 Kubernetes 日志定义告警规则。
      说明     WizTelemetry 事件告警默认接收 Kubernetes 集群的日志。如果想要接收其他日志，需要修改 WizTelemetry 数据流水线的配置，或新建保密字典进行配置，请参阅 Vector 官方文档进行配置。
-    前提条件   您需要在 KubeSphere 企业版平台具有 platform-admin 角色。
-  KubeSphere 企业版平台需要安装并启用 WizTelemetry 事件告警扩展组件。
+    前提条件   您需要在 KubeSphere 平台具有 platform-admin 角色。
+  KubeSphere 平台需要安装并启用 WizTelemetry 事件告警扩展组件。
   已在 WizTelemetry 事件告警的扩展组件配置中，启用日志告警，即设置 loggingAlerting.enabled 为 true。
      操作步骤  在任意集群节点上，创建一个 yaml 文件，为该集群定义日志的告警规则。有关参数配置的更多信息，请参阅参数描述。
   基于关键字的告警

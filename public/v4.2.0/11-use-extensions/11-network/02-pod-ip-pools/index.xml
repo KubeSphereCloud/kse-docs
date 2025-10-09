@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>容器组 IP 池 on KubeSphere 企业版</title>
+    <title>容器组 IP 池 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/11-network/02-pod-ip-pools/</link>
-    <description>Recent content in 容器组 IP 池 on KubeSphere 企业版</description>
+    <description>Recent content in 容器组 IP 池 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/11-network/02-pod-ip-pools/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -14,8 +14,8 @@
       <guid>/v4.2.0/11-use-extensions/11-network/02-pod-ip-pools/01-create-a-pod-ip-pool/</guid>
       <description>本节介绍如何创建容器组 IP 池。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
+     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在页面点击创建。
   在创建容器组 IP 池对话框，设置容器组 IP 池的参数，然后点击下一步。
@@ -33,15 +33,16 @@
       <guid>/v4.2.0/11-use-extensions/11-network/02-pod-ip-pools/02-view-a-pod-ip-pool-list/</guid>
       <description>本节介绍如何查看容器组 IP 池列表。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源查看权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
+     操作步骤  以具有集群网络资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   容器组 IP 池列表提供以下信息：
     参数 描述     名称
  容器组 IP 池的名称。
    状态
  容器组 IP 池的状态。
-   网段</description>
+   网段
+ 容器组 IP 池包含的网段。</description>
     </item>
     
     <item>
@@ -52,14 +53,15 @@
       <guid>/v4.2.0/11-use-extensions/11-network/02-pod-ip-pools/03-view-pod-ip-pool-details/</guid>
       <description>本节介绍如何查看容器组 IP 池详情。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源查看权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
+     操作步骤  以具有集群网络资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在容器组 IP 池列表中点击一个容器组 IP 池的名称打开其详情页面。
   在容器组 IP 池详情页面的属性区域查看容器组 IP 池的基本信息。
     参数 描述     状态
  容器组 IP 池的状态。
-   网段</description>
+   网段
+ 容器组 IP 池包含的网段。</description>
     </item>
     
     <item>
@@ -73,8 +75,8 @@
  若项目未分配到容器组 IP 池（项目未与任何容器组 IP 池绑定），且在该项目中创建工作负载和任务时不指定容器组 IP 池，则项目中的容器组将被分配到任一可用的容器组 IP 池。
  一个 IP 池可以分配给多个项目，一个项目可以绑定多个 IP 池。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
+     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在容器组 IP 池列表中点击一个容器组 IP 池的名称打开其详情页面。
   在项目页签下点击新增项目，在下拉列表中选择一个项目，然后点击确定。</description>
@@ -87,10 +89,10 @@
       
       <guid>/v4.2.0/11-use-extensions/11-network/02-pod-ip-pools/05-edit-pod-ip-pool-information/</guid>
       <description>本节介绍如何编辑容器组 IP 池信息。
- 您可以编辑容器组 IP 池的别名和描述。KubeSphere 企业版不支持编辑容器组 IP 池的名称。
+ 您可以编辑容器组 IP 池的别名和描述。KubeSphere 不支持编辑容器组 IP 池的名称。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
+     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置容器组 IP 池的别名和描述，然后点击确定。
@@ -107,8 +109,8 @@
       <description>本节介绍如何编辑 Overlay 模式。
  Overlay 模式可以实现容器的跨主机互相通信，而无需对宿主机的物理网络进行改动。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
+     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择编辑 Overlay 模式。
   在编辑 Overlay 模式对话框，选择 IPIP 模式或 VXLAN 模式，然后点击确定。
@@ -125,8 +127,8 @@
       <description>本节介绍如何编辑容器组 IP 池的自动分配节点，以便为容器组 IP 池自动匹配合适的节点。
  创建容器组 IP 池时，默认其 IP 地址可分配给所有节点的容器组。您可以设置节点选择器，以限制符合特定条件的节点上的容器组才能使用该 IP 池的 IP 地址。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
+     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择编辑 yaml。
   在 spec.nodeSelector 参数下输入表达式，通过自定义表达式来筛选符合条件的节点。有关表达式的更多信息，请参阅节点选择器。
@@ -143,9 +145,10 @@
  容器组 IP 池禁用后将不会继续 IP 地址的分配，也不会影响已经分配 IP 地址的容器组的网络，但禁用容器组 IP 池会自动解除其绑定的项目。迁移容器组 IP 池时，新 IP 池可用地址数量不能少于当前 IP 池使用的 IP 地址。
      警告     迁移完成后，将重启工作负载。请谨慎执行此操作。
     前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
-  在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。</description>
+     KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
+     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
+  在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择禁用。</description>
     </item>
     
     <item>
@@ -157,9 +160,9 @@
       <description>本节介绍如何删除容器组 IP 池。
      警告     容器组 IP 池删除后不能恢复，请谨慎执行此操作。
     前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
+     KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
      容器组 IP 池未被任何容器组使用。如果存在正在使用容器组 IP 池的容器组，您需要为容器组指定其他容器组 IP 池或删除容器组。
-     删除单个容器组 IP 池  以具有集群网络资源管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     删除单个容器组 IP 池  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要删除的容器组 IP 池右侧点击，然后在下拉列表中选择删除。</description>
     </item>
