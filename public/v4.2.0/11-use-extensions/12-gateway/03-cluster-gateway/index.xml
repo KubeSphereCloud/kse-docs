@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>集群网关 on KubeSphere 企业版</title>
+    <title>集群网关 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/</link>
-    <description>Recent content in 集群网关 on KubeSphere 企业版</description>
+    <description>Recent content in 集群网关 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,9 +13,9 @@
       
       <guid>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/01-enable-a-cluster-gateway/</guid>
       <description>本节介绍如何启用集群网关。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 网关设置。
   在页面右侧点击启用网关。
   在弹出的对话框，设置网关的参数，然后点击确定。
@@ -32,9 +32,9 @@
       
       <guid>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/02-view-gateway-information/</guid>
       <description>本节介绍如何查看网关信息。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 网关设置。
   在集群网关页签，查看集群网关的信息。
     参数 描述     类型
@@ -43,7 +43,8 @@
  启用网关的用户。
    创建时间
  网关的启用时间。
-   访问模式</description>
+   访问模式
+ 网关服务的外部访问模式。</description>
     </item>
     
     <item>
@@ -53,9 +54,9 @@
       
       <guid>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/03-view-cluster-gateway-details/</guid>
       <description>本节介绍如何查看集群网关详情。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 网关设置。
   在页面右侧选择管理 &amp;gt; 查看详情打开网关详情页面。
   在网关详情页面的属性区域查看网关的资源属性。
@@ -64,7 +65,8 @@
    创建时间
  网关的创建时间。
    更新时间
- 网关的更新时间</description>
+ 网关的更新时间
+   创建者</description>
     </item>
     
     <item>
@@ -74,9 +76,9 @@
       
       <guid>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/04-edit-cluster-gateway-settings/</guid>
       <description>本节介绍如何编辑集群网关设置。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 网关设置。
   在页面右侧选择管理 &amp;gt; 编辑。
   在弹出的对话框，修改网关的参数，然后点击确定。
@@ -84,7 +86,8 @@
  IngressClass 的名称。
    容器组副本数量
  期望的容器组副本数量。该数值必须在配置的实际运行容器组副本数的最大值与最小值区间范围内。
-   实际运行容器组副本数限制</description>
+   实际运行容器组副本数限制
+ 限制实际运行的容器组副本的最小数量和最大数量，以确保网关性能，同时防止资源耗尽。</description>
     </item>
     
     <item>
@@ -95,9 +98,9 @@
       <guid>/v4.2.0/11-use-extensions/12-gateway/03-cluster-gateway/05-disable-a-cluster-gateway/</guid>
       <description> 本节介绍如何禁用集群网关。
      警告     网关禁用后，客户端将无法访问由网关反向代理的服务，相关业务可能会中断，请谨慎执行此操作。
-    前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+    前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 网关设置。
   在页面右侧选择管理 &amp;gt; 禁用。
   在弹出的对话框点击确定。

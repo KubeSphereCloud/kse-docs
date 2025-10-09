@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>流水线 on KubeSphere 企业版</title>
+    <title>流水线 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/02-devops/03-pipelines/</link>
-    <description>Recent content in 流水线 on KubeSphere 企业版</description>
+    <description>Recent content in 流水线 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/02-devops/03-pipelines/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,8 +13,8 @@
       
       <guid>/v4.2.0/11-use-extensions/02-devops/03-pipelines/01-create-a-pipeline-using-graphical-editing-panel/</guid>
       <description>DevOps 中的图形编辑面板包含用于 Jenkins 阶段 (Stage) 和步骤 (Step) 的所有必要操作。DevOps 支持直接在交互式面板上定义这些阶段和步骤，无需创建任何 Jenkinsfile。
- 本文档演示如何在 KubeSphere 企业版中使用图形编辑面板创建流水线。在整个过程中，DevOps 将根据编辑面板上的设置自动生成 Jenkinsfile，您无需手动创建 Jenkinsfile。待流水线成功运行，它会在您的开发环境中创建一个部署和一个服务，并将镜像推送至 Docker Hub。
- 前提条件   KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
+ 本文档演示如何在 KubeSphere 中使用图形编辑面板创建流水线。在整个过程中，DevOps 将根据编辑面板上的设置自动生成 Jenkinsfile，您无需手动创建 Jenkinsfile。待流水线成功运行，它会在您的开发环境中创建一个部署和一个服务，并将镜像推送至 Docker Hub。
+ 前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已有一个 Docker Hub 账户。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
   已创建一个用户（例如 project-admin），其在企业空间中具有项目创建权限。
@@ -34,7 +34,7 @@
  本文档演示如何基于 GitHub 仓库中的 Jenkinsfile 创建流水线，并使用该流水线将示例应用程序分别部署到可从外部访问的开发环境和生产环境。
      说明     DevOps 支持创建两种类型的流水线：一种是本文档中介绍的基于 SCM 中 Jenkinsfile 创建的流水线，另一种是通过图形编辑面板创建的流水线。
  Jenkinsfile in SCM 需要源代码管理 (SCM) 中有内置 Jenkinsfile，换句话说，Jenkinsfile 必须是 SCM 的一部分。DevOps 系统会根据代码仓库的现有 Jenkinsfile 自动构建 CI/CD 流水线。通过定义工作流，例如 stage 和 step 可以满足特定的构建、测试和部署要求。
-    前提条件   KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
+    前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已有一个 Docker Hub 账户和一个 GitHub 账户。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。</description>
     </item>
@@ -45,13 +45,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/11-use-extensions/02-devops/03-pipelines/03-use-pipeline-templates/</guid>
-      <description>本文档演示如何在 KubeSphere 企业版上使用流水线模板创建流水线。
+      <description>本文档演示如何在 KubeSphere 上使用流水线模板创建流水线。
  DevOps 提供图形编辑面板，支持通过交互式操作来定义 Jenkins 流水线的阶段和步骤。内置多个流水线模板，如 Node.js、Maven 以及 Golang，使用户能够快速创建对应模板的流水线。DevOps 还提供 CI 以及 CI &amp;amp; CD 流水线模板，但是这两个模板难以满足定制化需求，建议您采用其它内置模板或直接自定义流水线。
    CI 流水线模板
 CI 流水线模板包含两个阶段。clone code 阶段用于检出代码，build &amp;amp; push 阶段用于构建镜像并将镜像推送至 Docker Hub。先为代码仓库和 Docker Hub 仓库创建凭证，然后在相应的步骤中设置仓库的 URL 以及凭证。完成编辑后，流水线即可开始运行。
      CI &amp;amp; CD 流水线模板
 CI &amp;amp; CD 流水线模板包含六个阶段。有关每个阶段的更多信息，请参阅使用 Jenkinsfile 创建流水线。先为代码仓库、Docker Hub 仓库和集群的 kubeconfig 创建凭证，然后在相应的步骤中设置仓库的 URL 以及凭证。完成编辑后，流水线即可开始运行。
-      前提条件   KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。</description>
+      前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。</description>
     </item>
     
     <item>
@@ -61,11 +61,11 @@ CI &amp;amp; CD 流水线模板包含六个阶段。有关每个阶段的更多�
       
       <guid>/v4.2.0/11-use-extensions/02-devops/03-pipelines/04-gitlab-multibranch-pipeline/</guid>
       <description>GitLab 是一款基于 web 的 Git 仓库管理工具，支持公开和私有仓库，并提供了全面的 DevOps 功能，包括源代码管理、代码审查、问题跟踪、持续集成等。通过 GitLab，团队能够在一个平台上高效协作，完成从代码编写到部署的整个软件开发过程。
- KubeSphere 企业版支持在 DevOps 项目中使用 GitLab 创建多分支流水线。本文档演示如何使用 GitLab 创建多分支流水线。
- 前提条件   KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
+ KubeSphere 支持在 DevOps 项目中使用 GitLab 创建多分支流水线。本文档演示如何使用 GitLab 创建多分支流水线。
+ 前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
   已有一个 GitLab 账户以及一个 Docker Hub 账户。
-     步骤 1：创建凭证  以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+     步骤 1：创建凭证  以 project-regular 用户登录 KubeSphere制台并进入您的企业空间。
   在左侧导航栏选择 DevOps &amp;gt; 凭证。
   在页面左上角的下拉列表中选择一个 DevOps 项目。</description>
     </item>
@@ -79,7 +79,7 @@ CI &amp;amp; CD 流水线模板包含六个阶段。有关每个阶段的更多�
       <description>创建流水线时，可以通过各种设置来自定义流水线配置。
  流水线创建后，进入流水线详情页，点击操作中的编辑信息和编辑设置，也可以编辑流水线的配置。
  本文档详细介绍如何设置流水线。
- 前提条件   KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
      基本信息 创建流水线时，在基本信息页签，您可以自定义以下信息：
    名称：流水线的名称，同一个 DevOps 项目内的流水线不能重名。
@@ -100,13 +100,14 @@ CI &amp;amp; CD 流水线模板包含六个阶段。有关每个阶段的更多�
       <guid>/v4.2.0/11-use-extensions/02-devops/03-pipelines/06-pipeline-webhook/</guid>
       <description>若要通过远程代码仓库创建基于 Jenkinsfile 的流水线，可以在远程仓库中配置 webhook，以便在远程仓库变更时，自动触发流水线。
  本文档演示如何在 GitHub 仓库中用 webhook 触发流水线。
- 前提条件   KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
   已通过远程代码仓库创建一个基于 Jenkinsfile 的流水线。有关更多信息，请参阅使用 Jenkinsfile 创建流水线。
-     配置 Webhook 获取 webhook URL  以 project-regular 用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+     配置 Webhook 获取 webhook URL  以 project-regular 用户登录 KubeSphere制台并进入您的企业空间。
   在左侧导航栏选择 DevOps &amp;gt; 流水线。
   在页面左上角的下拉列表中选择一个 DevOps 项目。
-  在流水线页面，点击一个流水线（例如 jenkins-in-scm）以查看其详情页面。</description>
+  在流水线页面，点击一个流水线（例如 jenkins-in-scm）以查看其详情页面。
+  点击操作，在下拉菜单中选择编辑设置。</description>
     </item>
     
     <item>
@@ -116,7 +117,7 @@ CI &amp;amp; CD 流水线模板包含六个阶段。有关每个阶段的更多�
       
       <guid>/v4.2.0/11-use-extensions/02-devops/03-pipelines/07-access-jenkins-console/</guid>
       <description>安装 DevOps 时，默认情况下也会安装 Jenkins 仪表板。
- 前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
+ 前提条件 KubeSphere 平台需要安装并启用 DevOps 扩展组件。
    操作步骤  查看 jenkins 仪表盘对应的服务，然后参阅如何访问服务，访问 Jenkins 仪表板。
 kubectl -n kubesphere-devops-system get svc devops-jenkins       获取 jenkins 管理员的用户名和密码。
 kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出示例：
@@ -131,11 +132,11 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
       
       <guid>/v4.2.0/11-use-extensions/02-devops/03-pipelines/08-jenkins-setting/</guid>
       <description>DevOps 系统提供基于 Jenkins 的容器化 CI/CD 功能。Jenkins 作为 CI/CD 工作流的事实标准，具备强大而灵活的特性。然而，许多插件要求用户在使用 Jenkins 之前必须进行系统级配置。
- 为了提供可调度的 Jenkins 环境，KubeSphere 企业版采用了 Configuration as Code 的方式进行 Jenkins 系统设置。用户需要登录 Jenkins 仪表板，修改配置后再重新加载。
+ 为了提供可调度的 Jenkins 环境，KubeSphere 采用了 Configuration as Code 的方式进行 Jenkins 系统设置。用户需要登录 Jenkins 仪表板，修改配置后再重新加载。
  本文档演示如何设置 Jenkins 并重新加载配置。
- 前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
-   Jenkins Configuration as Code KubeSphere 企业版默认安装 Jenkins Configuration as Code 插件，支持通过 YAML 文件定义 Jenkins 的期望状态，便于再现 Jenkins 的配置（包括插件配置）。请参阅该目录查看具体的 Jenkins 配置和示例 YAML 文件。
-   修改 ConfigMap 建议通过 Configuration as Code (CasC) 在 KubeSphere 企业版中配置 Jenkins。将内置 Jenkins CasC 文件存储为 ConfigMap。</description>
+ 前提条件 KubeSphere 平台需要安装并启用 DevOps 扩展组件。
+   Jenkins Configuration as Code KubeSphere 默认安装 Jenkins Configuration as Code 插件，支持通过 YAML 文件定义 Jenkins 的期望状态，便于再现 Jenkins 的配置（包括插件配置）。请参阅该目录查看具体的 Jenkins 配置和示例 YAML 文件。
+   修改 ConfigMap 建议通过 Configuration as Code (CasC) 在 KubeSphere 中配置 Jenkins。将内置 Jenkins CasC 文件存储为 ConfigMap。</description>
     </item>
     
     <item>
@@ -146,7 +147,7 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
       <guid>/v4.2.0/11-use-extensions/02-devops/03-pipelines/10-jenkins-shared-library/</guid>
       <description>对于包含相同阶段或步骤的 Jenkins 流水线，可以在 Jenkinsfile 中使用 Jenkins 共享库避免流水线代码重复。
  本文档演示如何在 DevOps 流水线中使用 Jenkins 共享库。
- 前提条件   KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
   已有一个可用 Jenkins 共享库。本教程以 GitHub 仓库中的 Jenkins 共享库为例。
      步骤 1：在 Jenkins 仪表板配置共享库  登录 Jenkins 仪表板并点击左侧导航栏中的系统管理。
@@ -162,10 +163,10 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/11-use-extensions/02-devops/03-pipelines/11-jenkins-email/</guid>
-      <description>内置 Jenkins 无法与 KubeSphere 企业版的通知系统共享相同的电子邮件配置。因此，您需要单独为 DevOps 流水线配置电子邮件服务器。
- 前提条件   KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
-  您需要在 KubeSphere 企业版平台具有集群管理权限。
-     操作步骤  以具有集群管理权限的账户登录 KubeSphere 企业版 Web 控制台。
+      <description>内置 Jenkins 无法与 KubeSphere 的通知系统共享相同的电子邮件配置。因此，您需要单独为 DevOps 流水线配置电子邮件服务器。
+ 前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
+  您需要在 KubeSphere 平台具有集群管理权限。
+     操作步骤  以具有集群管理权限的账户登录 KubeSphere Web 控制台。
   点击集群管理，进入一个集群。
   在左侧导航栏中选择应用负载下的工作负载，从下拉列表中选择 kubesphere-devops-system 项目。点击 devops-jenkins 右侧的，并选择编辑 YAML。
   在 YAML 文件中编辑如下所示的字段。完成修改后，点击确定。
@@ -182,7 +183,7 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
       <description>agent 部分指定整个流水线或特定阶段 (Stage) 将在 Jenkins 环境中执行的位置，具体取决于该 agent 部分的放置位置。该部分必须在 pipeline 块的顶层进行定义，但是阶段级别的使用是可选的。有关更多信息，请参阅 Jenkins 官方文档。
  内置 podTemplate podTemplate 是一种 Pod 模板，用于创建 Agent。您可以定义在 Kubernetes 插件中使用的 podTemplate。
  在流水线运行期间，每个 Jenkins Agent Pod 必须具有一个名为 jnlp 的容器，以便实现 Jenkins Controller 与 Jenkins Agent 之间的通信。此外，您可以在 podTemplate 中添加容器，以满足个性化需求。可选择使用自定义的 Pod YAML 来灵活控制运行时环境（Runtime），并通过 container 命令来切换容器。以下是相关示例。
- pipeline { agent { kubernetes { //cloud &amp;#39;kubernetes&amp;#39; label &amp;#39;mypod&amp;#39; yaml &amp;#34;&amp;#34;&amp;#34; apiVersion: v1 kind: Pod spec: containers: - name: maven image: maven:3.3.9-jdk-8-alpine command: [&amp;#39;cat&amp;#39;] tty: true &amp;#34;&amp;#34;&amp;#34; } } stages { stage(&amp;#39;Run maven&amp;#39;) { steps { container(&amp;#39;maven&amp;#39;) { sh &amp;#39;mvn -version&amp;#39; } } } } }   在当前版本中，KubeSphere 企业版内置了一类 podTemplate：base，并且在 Pod 中提供隔离的 Docker 环境。</description>
+ pipeline { agent { kubernetes { //cloud &amp;#39;kubernetes&amp;#39; label &amp;#39;mypod&amp;#39; yaml &amp;#34;&amp;#34;&amp;#34; apiVersion: v1 kind: Pod spec: containers: - name: maven image: maven:3.3.9-jdk-8-alpine command: [&amp;#39;cat&amp;#39;] tty: true &amp;#34;&amp;#34;&amp;#34; } } stages { stage(&amp;#39;Run maven&amp;#39;) { steps { container(&amp;#39;maven&amp;#39;) { sh &amp;#39;mvn -version&amp;#39; } } } } }   在当前版本中，KubeSphere 内置了一类 podTemplate：base，并且在 Pod 中提供隔离的 Docker 环境。</description>
     </item>
     
     <item>
@@ -191,10 +192,10 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/11-use-extensions/02-devops/03-pipelines/13-customize-jenkins-agent/</guid>
-      <description>若要使用运行特定环境（例如 JDK 11）的 Jenkins Agent，可以在 KubeSphere 企业版上自定义 Jenkins Agent。
- 本文档描述如何在 KubeSphere 企业版上自定义 Jenkins Agent。
- 前提条件 KubeSphere 企业版平台需要安装并启用 DevOps 扩展组件。
-   自定义 Jenkins Agent  以 admin 用户登录 KubeSphere 企业版 Web 控制台。
+      <description>若要使用运行特定环境（例如 JDK 11）的 Jenkins Agent，可以在 KubeSphere 上自定义 Jenkins Agent。
+ 本文档描述如何在 KubeSphere 上自定义 Jenkins Agent。
+ 前提条件 KubeSphere 平台需要安装并启用 DevOps 扩展组件。
+   自定义 Jenkins Agent  以 admin 用户登录 KubeSphere Web 控制台。
   点击集群管理，进入一个集群。
   在左侧导航栏选择配置下的配置字典。
   在配置字典页面的搜索框中输入 jenkins-casc-config 并按回车键。
@@ -210,9 +211,9 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
       
       <guid>/v4.2.0/11-use-extensions/02-devops/03-pipelines/15-set-ci-node/</guid>
       <description>构建应用程序通常需要拉取不同的依赖项。拉取过程中可能会遇到某些问题，例如拉取时间长、网络不稳定，进而导致构建失败。为了提供更可靠和稳定的环境，可以配置节点或节点组，专门用于持续集成 (CI)，并通过使用缓存来加快构建过程。
- 本文档演示如何设置 CI 节点，以便 KubeSphere 企业版将流水线的任务调度到这些节点。
- 前提条件 您需要在 KubeSphere 企业版平台具有集群管理权限。
-   标记 CI 节点  以具有集群管理权限的账户登录 KubeSphere 企业版 Web 控制台。
+ 本文档演示如何设置 CI 节点，以便 KubeSphere 将流水线的任务调度到这些节点。
+ 前提条件 您需要在 KubeSphere 平台具有集群管理权限。
+   标记 CI 节点  以具有集群管理权限的账户登录 KubeSphere Web 控制台。
   点击集群管理，进入一个集群。
   在左侧导航栏中选择节点下的集群节点，查看当前集群中的现有节点。
   从列表中选择一个节点用来运行 CI 任务。点击节点名称转到其详情页面，点击操作 &amp;gt; 编辑标签。
@@ -220,7 +221,7 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
      给 CI 节点添加污点 流水线一般会根据节点亲和性来确定是否调度任务到某一节点。如果要将节点专用于 CI 任务，即不允许将其他工作负载调度到该节点，可以在该节点上添加污点。
   点击操作 &amp;gt; 编辑污点。
   点击添加，输入键 node.kubernetes.io/ci 而不指定值。根据需要选择阻止调度、尽可能阻止调度或阻止调度并驱逐现有容器组 。
-  点击确定。KubeSphere 企业版将根据您设置的污点调度任务。</description>
+  点击确定。KubeSphere 将根据您设置的污点调度任务。</description>
     </item>
     
   </channel>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>平台角色 on KubeSphere 企业版</title>
+    <title>平台角色 on KubeSphere</title>
     <link>/v4.2.0/05-users-and-roles/02-platform-roles/</link>
-    <description>Recent content in 平台角色 on KubeSphere 企业版</description>
+    <description>Recent content in 平台角色 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/05-users-and-roles/02-platform-roles/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,15 +13,15 @@
       
       <guid>/v4.2.0/05-users-and-roles/02-platform-roles/01-create-a-platform-role/</guid>
       <description>本节介绍如何创建平台角色。
- KubeSphere 企业版平台提供以下预置平台角色，您也可以创建角色以自定义角色权限。
+ KubeSphere 平台提供以下预置平台角色，您也可以创建角色以自定义角色权限。
      参数 描述     platform-admin
- 平台管理员，在 KubeSphere 企业版平台具有所有权限，包括平台角色管理、用户管理、集群和企业空间管理、扩展组件管理等。
+ 平台管理员，在 KubeSphere 平台具有所有权限，包括平台角色管理、用户管理、集群和企业空间管理、扩展组件管理等。
    platform-regular
  平台普通用户，被邀请加入企业空间之前无法访问任何资源。该角色一般授予不需要其他平台权限的企业空间成员。
    platform-self-provisioner
  创建企业空间并成为所创建的企业空间的管理员。
-    前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+    前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
   点击用户和角色管理。
   在左侧导航栏选择平台角色。
   在页面点击创建。
@@ -36,8 +36,8 @@
       
       <guid>/v4.2.0/05-users-and-roles/02-platform-roles/02-view-a-platform-role-list/</guid>
       <description> 本节介绍如何查看平台角色列表。
- 前提条件 您需要在 KubeSphere 企业版平台具有角色查看权限。有关更多信息，请参阅用户和平台角色。
-   操作步骤  以具有角色查看权限的用户登录 KubeSphere 企业版 Web 控制台。
+ 前提条件 您需要在 KubeSphere 平台具有角色查看权限。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有角色查看权限的用户登录 KubeSphere Web 控制台。
   点击用户和角色管理。
   在左侧导航栏选择平台角色。平台角色列表提供角色的名称、描述和创建时间。
   在列表上方点击搜索框并输入关键字，可按名称搜索用户。
@@ -53,8 +53,8 @@
       
       <guid>/v4.2.0/05-users-and-roles/02-platform-roles/03-view-platform-role-details/</guid>
       <description>本节介绍如何查看平台角色详情。
- 前提条件 您需要在 KubeSphere 企业版平台具有角色查看权限。有关更多信息，请参阅用户和平台角色。
-   操作步骤  以具有角色查看权限的用户登录 KubeSphere 企业版 Web 控制台。
+ 前提条件 您需要在 KubeSphere 平台具有角色查看权限。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有角色查看权限的用户登录 KubeSphere Web 控制台。
   点击用户和角色管理。
   在左侧导航栏选择平台角色。
   在平台角色列表点击一个平台角色的名称打开其详情页面。
@@ -67,8 +67,8 @@
  获得授权的用户当前的状态。
    活跃：用户当前状态正常。
   等待中：系统正在创建用户。
-  已禁用：用户被平台管理员禁用，无法登录 KubeSphere 企业版 Web 控制台。
-  限制登录：用户在 10 分钟内连续 10 次登录失败，在 10 分钟内被禁止登录 KubeSphere 企业版 Web 控制台。</description>
+  已禁用：用户被平台管理员禁用，无法登录 KubeSphere Web 控制台。
+  限制登录：用户在 10 分钟内连续 10 次登录失败，在 10 分钟内被禁止登录 KubeSphere Web 控制台。</description>
     </item>
     
     <item>
@@ -78,9 +78,9 @@
       
       <guid>/v4.2.0/05-users-and-roles/02-platform-roles/04-edit-platform-role-information/</guid>
       <description> 本节介绍如何编辑平台角色信息。
- 您可以编辑由用户创建的平台角色的别名和描述。KubeSphere 企业版不支持编辑预置的平台角色，同时不支持编辑平台角色的名称。
- 前提条件 您需要在 KubeSphere 企业版平台具有角色管理权限。有关更多信息，请参阅用户和平台角色。
-   操作步骤  以具有角色管理权限的用户登录 KubeSphere 企业版 Web 控制台。
+ 您可以编辑由用户创建的平台角色的别名和描述。KubeSphere 不支持编辑预置的平台角色，同时不支持编辑平台角色的名称。
+ 前提条件 您需要在 KubeSphere 平台具有角色管理权限。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有角色管理权限的用户登录 KubeSphere Web 控制台。
   点击用户和角色管理。
   在左侧导航栏选择平台角色。
   在需要操作的平台角色右侧点击，然后在下拉列表中选择编辑信息。
@@ -100,8 +100,8 @@
       <guid>/v4.2.0/05-users-and-roles/02-platform-roles/05-edit-permissions-of-a-platform-role/</guid>
       <description>本节介绍如何编辑平台角色权限。
  您只能编辑用户创建的平台角色的权限。预置平台角色的权限无法编辑。
- 前提条件 您需要在 KubeSphere 企业版平台具有角色管理权限。有关更多信息，请参阅用户和平台角色。
-   操作步骤  以具有角色管理权限的用户登录 KubeSphere 企业版 Web 控制台。
+ 前提条件 您需要在 KubeSphere 平台具有角色管理权限。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有角色管理权限的用户登录 KubeSphere Web 控制台。
   点击用户和角色管理。
   在左侧导航栏选择平台角色。
   在需要操作的平台角色右侧点击，然后在下拉列表中选择编辑权限。
@@ -109,7 +109,7 @@
 平台角色可设置的权限如下：
    应用商店管理
     权限 允许操作     应用商店管理
- 管理 KubeSphere 企业版平台的应用商店，如应用审核、上架、下架等。
+ 管理 KubeSphere 平台的应用商店，如应用审核、上架、下架等。
       企业空间
     权限 允许操作     企业空间创建
  创建企业空间。</description>
@@ -123,9 +123,9 @@
       <guid>/v4.2.0/05-users-and-roles/02-platform-roles/06-delete-platform-roles/</guid>
       <description> 本节介绍如何删除平台角色。
  您可以删除用户创建的平台角色。预置平台角色无法删除。
- 前提条件   您需要在 KubeSphere 企业版平台具有角色管理权限。有关更多信息，请参阅用户和平台角色。
+ 前提条件   您需要在 KubeSphere 平台具有角色管理权限。有关更多信息，请参阅用户和平台角色。
   如果需要删除的平台角色已经分配给用户，您需要删除用户或修改其角色。
-     操作步骤  以具有角色管理权限的用户登录 KubeSphere 企业版 Web 控制台。
+     操作步骤  以具有角色管理权限的用户登录 KubeSphere Web 控制台。
   点击用户和角色管理。
   在左侧导航栏选择平台角色。
   在需要删除的平台角色右侧点击，然后在下拉列表中选择删除。

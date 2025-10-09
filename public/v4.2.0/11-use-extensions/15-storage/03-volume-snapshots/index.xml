@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>卷快照 on KubeSphere 企业版</title>
+    <title>卷快照 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/15-storage/03-volume-snapshots/</link>
-    <description>Recent content in 卷快照 on KubeSphere 企业版</description>
+    <description>Recent content in 卷快照 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/15-storage/03-volume-snapshots/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -14,12 +14,12 @@
       <guid>/v4.2.0/11-use-extensions/15-storage/03-volume-snapshots/01-create-a-volume-snapshot/</guid>
       <description>本节介绍如何创建卷快照。
  卷快照保存了存储卷的当前数据，可用于创建持久卷声明以及对应的持久卷。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群或项目，并在集群或项目中具有卷快照管理权限。有关更多信息，请参阅集群角色和项目角色。
      请确保系统已为持久卷声明创建持久卷。
      请确保后端存储系统支持卷快照功能，并已在持久卷声明对应的存储类上启用卷快照功能。操作方法：存储类 &amp;gt; 操作 &amp;gt; 设置卷操作 &amp;gt; 启用卷快照创建。
      方法 1：卷快照 &amp;gt; 创建卷快照 在集群中，可在卷快照菜单下直接为持久卷声明创建卷快照。
-  以具有卷快照管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+  以具有卷快照管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在页面点击创建。
   在创建快照对话框，设置需要创建快照的持久卷声明、卷快照的名称和卷快照类，然后点击确定。
@@ -33,9 +33,9 @@
       
       <guid>/v4.2.0/11-use-extensions/15-storage/03-volume-snapshots/02-view-a-volume-snapshot-list/</guid>
       <description>本节介绍如何查看卷快照列表。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群或项目，并在集群或项目中具有卷快照查看权限。有关更多信息，请参阅集群角色和项目角色。
-     操作步骤  以具有卷快照查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群或项目。
+     操作步骤  以具有卷快照查看权限的用户登录 KubeSphere Web 控制台并进入您的集群或项目。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   卷快照列表提供以下信息：
     参数 描述     名称
@@ -55,9 +55,9 @@
       
       <guid>/v4.2.0/11-use-extensions/15-storage/03-volume-snapshots/03-view-volume-snapshot-details/</guid>
       <description>本节介绍如何查看卷快照的详情。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群或项目，并在集群或项目中具有卷快照查看权限。有关更多信息，请参阅集群角色和项目角色。
-     操作步骤  以具有卷快照查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群或项目。
+     操作步骤  以具有卷快照查看权限的用户登录 KubeSphere Web 控制台并进入您的集群或项目。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照列表中点击一个卷快照的名称打开其详情页面。
   在卷快照详情页面的属性区域查看卷快照的资源属性。
@@ -78,9 +78,9 @@
       <guid>/v4.2.0/11-use-extensions/15-storage/03-volume-snapshots/04-create-a-persistent-volume-from-a-volume-snapshot/</guid>
       <description>本节介绍如何使用卷快照创建持久卷。
  卷快照创建后，您可以使用卷快照创建持久卷声明和持久卷。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群或项目，并在集群或项目中具有卷快照管理权限。有关更多信息，请参阅集群角色和项目角色。
-     操作步骤  以具有卷快照管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群或项目。
+     操作步骤  以具有卷快照管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或项目。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照列表中点击一个卷快照的名称打开其详情页面。
   在卷快照详情页面，点击操作 &amp;gt; 创建卷。
@@ -100,14 +100,15 @@
       <guid>/v4.2.0/11-use-extensions/15-storage/03-volume-snapshots/05-delete-volume-snapshots/</guid>
       <description>本节介绍如何删除卷快照。
      警告     卷快照删除后不能恢复，请谨慎执行此操作以免数据丢失。
-    前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
+    前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群或项目，并在集群或项目中具有卷快照管理权限。有关更多信息，请参阅集群角色和项目角色。
-     删除单个卷快照  以具有卷快照管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群或项目。
+     删除单个卷快照  以具有卷快照管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或项目。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在需要删除的卷快照右侧点击，然后在下拉列表中选择删除。
   在删除卷快照对话框，输入卷快照的名称，然后点击确定。
-     批量删除卷快照  以具有卷快照管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群或项目。
-  在左侧导航栏选择存储 &amp;gt; 卷快照。</description>
+     批量删除卷快照  以具有卷快照管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或项目。
+  在左侧导航栏选择存储 &amp;gt; 卷快照。
+  选择需要删除的卷快照左侧的复选框，然后在卷快照列表上方点击删除。</description>
     </item>
     
     <item>
@@ -117,9 +118,9 @@
       
       <guid>/v4.2.0/11-use-extensions/15-storage/03-volume-snapshots/06-view-a-volume-snapshot-content-list/</guid>
       <description>本节介绍如何查看卷快照内容列表。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容查看权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照内容查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照内容查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容打开卷快照内容列表。
   卷快照列表提供以下信息：
@@ -139,9 +140,9 @@
       
       <guid>/v4.2.0/11-use-extensions/15-storage/03-volume-snapshots/07-view-volume-snapshot-content-details/</guid>
       <description>本节介绍如何查看卷快照内容详情。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容查看权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照内容查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照内容查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容，然后点击一个卷快照内容的名称打开其详情页面。
   在卷快照内容详情页面的属性区域查看卷快照的资源属性。
@@ -161,10 +162,10 @@
       
       <guid>/v4.2.0/11-use-extensions/15-storage/03-volume-snapshots/08-edit-volume-snapshot-content-information/</guid>
       <description> 本节介绍如何编辑卷快照内容的信息。
- 您可以编辑卷快照内容的别名和描述。KubeSphere 企业版不支持编辑卷快照内容的名称。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
+ 您可以编辑卷快照内容的别名和描述。KubeSphere 不支持编辑卷快照内容的名称。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容管理权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照内容管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照内容管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容打开卷快照内容列表。
   在需要操作的卷快照内容右侧点击，然后在下拉列表中选择编辑信息。
@@ -185,13 +186,14 @@
       <description>本节介绍如何删除卷快照内容。
      说明     当卷快照和卷快照内容绑定的时候，卷快照内容不允许删除。若要删除卷快照内容，必须首先删除卷快照。卷快照被删除后，系统将根据卷快照内容的删除策略，决定是否自动删除卷快照内容。
         警告     卷快照内容删除后无法恢复，并且后端存储系统中保存的快照数据也将被删除，请谨慎执行此操作以避免快照数据丢失。
-    前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
+    前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容管理权限。有关更多信息，请参阅集群成员和集群角色。
-     删除单个卷快照内容  以具有卷快照内容管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群。
+     删除单个卷快照内容  以具有卷快照内容管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容打开卷快照内容列表。
   在需要删除的卷快照内容右侧点击，然后在下拉列表中选择删除。
-  在删除卷快照内容对话框，输入卷快照内容的名称，然后点击确定。</description>
+  在删除卷快照内容对话框，输入卷快照内容的名称，然后点击确定。
+     批量删除卷快照内容  以具有卷快照内容管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或项目。</description>
     </item>
     
   </channel>

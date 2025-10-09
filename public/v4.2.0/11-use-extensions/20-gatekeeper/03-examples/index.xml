@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>操作示例 on KubeSphere 企业版</title>
+    <title>操作示例 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/20-gatekeeper/03-examples/</link>
-    <description>Recent content in 操作示例 on KubeSphere 企业版</description>
+    <description>Recent content in 操作示例 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/20-gatekeeper/03-examples/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -14,7 +14,7 @@
       <guid>/v4.2.0/11-use-extensions/20-gatekeeper/03-examples/01-prohibit-the-creation-of-privileged-containers/</guid>
       <description>本节介绍如何配置约束模板和约束，以便禁止在某些项目中创建特权容器，以拦截高风险操作，避免特权容器被滥用。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
+     KubeSphere 平台需要安装并启用 Gatekeeper 扩展组件。
      步骤 1：创建约束模板 登录集群节点，执行以下命令创建约束模板。
  cat &amp;lt;&amp;lt;EOF | kubectl apply -f - apiVersion: templates.gatekeeper.sh/v1 kind: ConstraintTemplate metadata: name: k8spspprivilegednamespace spec: crd: spec: names: kind: K8sPSPPrivilegedNamespace validation: openAPIV3Schema: type: object properties: excludedNamespaces: type: array items: type: string targets: - target: admission.k8s.gatekeeper.sh rego: | package k8spspprivilegednamespace violation[{&amp;#34;msg&amp;#34;: msg}] { input.</description>
     </item>

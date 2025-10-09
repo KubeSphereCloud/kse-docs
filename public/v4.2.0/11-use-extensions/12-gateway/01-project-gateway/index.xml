@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>项目网关 on KubeSphere 企业版</title>
+    <title>项目网关 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/12-gateway/01-project-gateway/</link>
-    <description>Recent content in 项目网关 on KubeSphere 企业版</description>
+    <description>Recent content in 项目网关 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/12-gateway/01-project-gateway/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,9 +13,9 @@
       
       <guid>/v4.2.0/11-use-extensions/12-gateway/01-project-gateway/01-enable-a-project-gateway/</guid>
       <description>本节介绍如何启用项目网关。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个项目并在项目中具有项目网关管理权限。有关更多信息，请参阅项目成员和项目角色。
-     操作步骤  以具有项目网关管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+     操作步骤  以具有项目网关管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择企业空间设置 &amp;gt; 网关设置。
   点击项目网关页签进入项目网关页面。
   在页面左上角的下拉列表中选择一个项目。
@@ -33,9 +33,9 @@
       
       <guid>/v4.2.0/11-use-extensions/12-gateway/01-project-gateway/02-view-project-gateway-information/</guid>
       <description>本节介绍如何查看项目网关信息。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个项目并在项目中具有项目网关查看权限。有关更多信息，请参阅项目成员和项目角色。
-     操作步骤  以具有项目网关查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+     操作步骤  以具有项目网关查看权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择企业空间设置 &amp;gt; 网关设置。
   点击项目网关页签进入项目网关页面。
   在页面左上角的下拉列表中选择一个项目。
@@ -56,9 +56,9 @@
       
       <guid>/v4.2.0/11-use-extensions/12-gateway/01-project-gateway/03-view-project-gateway-details/</guid>
       <description>本节介绍如何查看项目网关详情。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个项目并在项目中具有项目网关查看权限。有关更多信息，请参阅项目成员和项目角色。
-     操作步骤  以具有项目网关查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+     操作步骤  以具有项目网关查看权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择企业空间设置 &amp;gt; 网关设置。
   点击项目网关页签进入项目网关页面。
   在页面左上角的下拉列表中选择一个项目。
@@ -79,9 +79,9 @@
       
       <guid>/v4.2.0/11-use-extensions/12-gateway/01-project-gateway/04-edit-project-gateway-settings/</guid>
       <description>本节介绍如何编辑项目网关设置。
- 前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个项目并在项目中具有项目网关管理权限。有关更多信息，请参阅项目成员和项目角色。
-     操作步骤  以具有项目网关管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+     操作步骤  以具有项目网关管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择企业空间设置 &amp;gt; 网关设置。
   点击项目网关页签进入项目网关页面。
   在页面左上角的下拉列表中选择一个项目。
@@ -91,7 +91,8 @@
  IngressClass 的名称。
    容器组副本数量
  期望的容器组副本数量。该数值必须在配置的实际运行容器组副本数的最大值与最小值区间范围内。
-   实际运行容器组副本数限制</description>
+   实际运行容器组副本数限制
+ 限制实际运行的容器组副本的最小数量和最大数量，以确保网关性能，同时防止资源耗尽。</description>
     </item>
     
     <item>
@@ -102,9 +103,9 @@
       <guid>/v4.2.0/11-use-extensions/12-gateway/01-project-gateway/05-disable-a-project-gateway/</guid>
       <description> 本节介绍如何禁用项目网关。
      警告     网关禁用后，客户端将无法访问由网关反向代理的服务，相关业务可能会中断，请谨慎执行此操作。
-    前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 网关扩展组件。
+    前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个项目并在项目中具有项目网关管理权限。有关更多信息，请参阅项目成员和项目角色。
-     操作步骤  以具有项目网关管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的企业空间。
+     操作步骤  以具有项目网关管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
   在左侧导航栏选择企业空间设置 &amp;gt; 网关设置。
   点击项目网关页签进入项目网关页面。
   在页面左上角的下拉列表中选择一个项目。

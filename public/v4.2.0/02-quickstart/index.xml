@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>快速入门 on KubeSphere 企业版</title>
+    <title>快速入门 on KubeSphere</title>
     <link>/v4.2.0/02-quickstart/</link>
-    <description>Recent content in 快速入门 on KubeSphere 企业版</description>
+    <description>Recent content in 快速入门 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/02-quickstart/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -35,8 +35,8 @@
       
       <guid>/v4.2.0/02-quickstart/03-control-user-permissions/</guid>
       <description>本节介绍如何创建用户，并使用企业空间、项目和角色控制用户的访问权限。有关用户权限控制的更多信息，请参阅用户和角色管理。
- 作为多租户系统，KubeSphere 企业版支持在平台、集群、企业空间和项目级别基于角色对用户的权限进行控制，实现逻辑层面的资源隔离。
- 创建用户  使用默认用户 admin 和密码 P@88w0rd 登录 KubeSphere 企业版 Web 控制台。
+ 作为多租户系统，KubeSphere 支持在平台、集群、企业空间和项目级别基于角色对用户的权限进行控制，实现逻辑层面的资源隔离。
+ 创建用户  使用默认用户 admin 和密码 P@88w0rd 登录 KubeSphere Web 控制台。
     说明     为了您的账户安全，首次登录时系统会提示您修改密码。密码修改后，后续请使用新密码登录。
         点击用户和角色管理。
   在左侧导航栏，选择用户。
@@ -46,7 +46,8 @@
   邮箱：用户的邮箱地址。
   密码：用户的密码。
        点击确定。用户创建后将显示在用户列表中。
-     创建企业空间  进入企业空间管理页面，点击创建。</description>
+     创建企业空间  进入企业空间管理页面，点击创建。
+  在基本信息页签，输入企业空间的名称（例如 demo-workspace），然后点击下一步。</description>
     </item>
     
     <item>
@@ -55,7 +56,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/02-quickstart/04-install-an-app-from-the-app-store/</guid>
-      <description>本节介绍如何从 KubeSphere 企业版平台的应用商店安装应用。
+      <description>本节介绍如何从 KubeSphere 平台的应用商店安装应用。
  前提条件 您需要加入一个项目并在项目中具有应用实例创建权限。有关更多信息，请参阅项目成员和项目角色。
    操作步骤  在页面右上角点击，然后点击应用商店。
   在应用商店中，点击需要使用的应用模板，然后在右上角点击部署。
@@ -77,12 +78,12 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/02-quickstart/05-deploy-wordpress/</guid>
-      <description>本节以安装 WordPress 为例，演示如何在 KubeSphere 企业版 Web 控制台部署应用程序，并在集群外进行访问。有关应用资源管理的更多信息，请参阅应用负载。
+      <description>本节以安装 WordPress 为例，演示如何在 KubeSphere Web 控制台部署应用程序，并在集群外进行访问。有关应用资源管理的更多信息，请参阅应用负载。
  WordPress 简介 WordPress 是一款基于 PHP 的免费、开源内容管理系统，您可以使用 WordPress 搭建自己的网站。完整的 WordPress 应用程序包括以下 Kubernetes 对象，由 MySQL 作为后端数据库。
  
    前提条件   准备一个项目（例如 demo-project）和一个已邀请到该项目的用户（例如 project-regular）。该用户在项目中应具有 operator 角色。有关更多信息，请参阅控制用户权限。
      操作步骤 1. 创建保密字典 创建两个保密字典，分别用于设置 MySQL 和 WordPress 的 root 密码。
-  使用 project-regular 用户登录 KubeSphere 企业版 Web 控制台。
+  使用 project-regular 用户登录 KubeSphere Web 控制台。
   点击企业空间管理，并进入项目所在的企业空间。
   在左侧导航栏，选择配置 &amp;gt; 保密字典。
   在页面左上角的下拉列表中选择项目 demo-project，然后点击创建。</description>
@@ -117,11 +118,11 @@
       <description>在金丝雀发布中，您可以引入应用的新版本，并向其发送一小部分流量来进行测试。同时，旧版本负责处理其余的流量。如果一切顺利，您就可以逐渐增加向新版本发送的流量，同时逐步停用旧版本。如果出现任何问题，您可以更改流量比例，回滚至先前版本。
  该方法能够高效地测试服务性能和可靠性，有助于在实际环境中发现潜在问题，同时不影响系统整体稳定性。
  前提条件   准备一个项目（例如 demo-project）和一个已邀请到该项目的用户（例如 project-regular）。该用户在项目中应具有 operator 角色。有关更多信息，请参阅控制用户权限。
-  KubeSphere 企业版平台需要安装并启用 KubeSphere 服务网格和 KubeSphere 网关扩展组件。
+  KubeSphere 平台需要安装并启用 KubeSphere 服务网格和 KubeSphere 网关扩展组件。
   启用项目网关，并为项目网关启用链路追踪功能。有关更多信息，请参阅启用项目网关。
     说明     如果启用链路追踪后无法访问路由(Ingress)，请在路由中添加注解 nginx.ingress.kubernetes.io/service-upstream: true。
       已创建一个可用的自制应用，并且在创建时开启了应用治理，以便实现该应用的金丝雀发布。本教程中使用的示例应用是 Bookinfo。有关更多信息，请参见部署并访问 Bookinfo。
-     操作步骤 1. 创建金丝雀发布任务  使用 project-regular 用户登录 KubeSphere 企业版 Web 控制台。
+     操作步骤 1. 创建金丝雀发布任务  使用 project-regular 用户登录 KubeSphere Web 控制台。
   点击企业空间管理，并进入项目所在的企业空间。
   在左侧导航栏，选择灰度发布 &amp;gt; 灰度发布。
   在发布模式页签下，在页面左上角的下拉列表中选择项目 demo-project，点击金丝雀发布右侧的创建。</description>
@@ -134,7 +135,7 @@
       
       <guid>/v4.2.0/02-quickstart/08-access-a-service/</guid>
       <description>服务（Service）将运行在容器组（pod）上的应用程序公开为网络服务，提供了固定的地址（域名或 IP 地址）供客⼾端访问。访问服务即可访问部署在集群中的应用程序。
- KubeSphere 企业版支持通过 NodePort、LoadBalancer、Ingress 或端口转发的方式，从集群外访问服务。
+ KubeSphere 支持通过 NodePort、LoadBalancer、Ingress 或端口转发的方式，从集群外访问服务。
  本节以应用程序 Bookinfo 为例，介绍如何从集群外访问服务。在进行以下步骤之前，请先在项目中部署 Bookinfo 或其他应用程序。
  通过 NodePort 访问服务 NodePort：系统将节点的端口映射到服务端口，可通过节点的 IP 地址和节点端口访问服务。
   在集群或企业空间的左侧导航栏，选择应用负载 &amp;gt; 服务。
@@ -152,15 +153,15 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/02-quickstart/10-change-display-language/</guid>
-      <description> 本节介绍如何修改 KubeSphere 企业版 Web 控制台的界面语言。
- 前提条件 已获取 KubeSphere 企业版 Web 控制台的用户名和密码。
-   操作步骤  登录 KubeSphere 企业版 Web 控制台。
+      <description> 本节介绍如何修改 KubeSphere Web 控制台的界面语言。
+ 前提条件 已获取 KubeSphere Web 控制台的用户名和密码。
+   操作步骤  登录 KubeSphere Web 控制台。
   在页面右上角点击当前用户名，然后在下拉列表中选择用户设置。
   在基本信息页签设置用户的邮箱和语言。
     参数 描述     邮箱
- 用户的邮箱地址。邮箱地址可用于登录 KubeSphere 企业版 Web 控制台。
+ 用户的邮箱地址。邮箱地址可用于登录 KubeSphere Web 控制台。
    语言
- KubeSphere 企业版 Web 控制台对当前用户显示的语言。当前支持简体中文和英文。
+ KubeSphere Web 控制台对当前用户显示的语言。当前支持简体中文和英文。
            </description>
     </item>
     

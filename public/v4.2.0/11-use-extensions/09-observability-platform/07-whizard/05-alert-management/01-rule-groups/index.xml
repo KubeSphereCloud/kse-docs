@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>规则组 on KubeSphere 企业版</title>
+    <title>规则组 on KubeSphere</title>
     <link>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/05-alert-management/01-rule-groups/</link>
-    <description>Recent content in 规则组 on KubeSphere 企业版</description>
+    <description>Recent content in 规则组 on KubeSphere</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/05-alert-management/01-rule-groups/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,14 +13,15 @@
       
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/05-alert-management/01-rule-groups/01-create-a-rule-group/</guid>
       <description>本节介绍如何创建告警规则组。
- KubeSphere 企业版的监控告警功能底层基于 Promtheus 实现，每个规则组可包含多条告警规则。您可以使用系统提供的规则模板创建告警规则，也可手动输入 PromQL 表达式创建告警规则。有关更多信息，请参阅 Prometheus 官方文档。
-     说明     KubeSphere 企业版仅支持创建自定义规则组，不支持创建内置规则组。
-    前提条件   您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+ KubeSphere 的监控告警功能底层基于 Promtheus 实现，每个规则组可包含多条告警规则。您可以使用系统提供的规则模板创建告警规则，也可手动输入 PromQL 表达式创建告警规则。有关更多信息，请参阅 Prometheus 官方文档。
+     说明     KubeSphere 仅支持创建自定义规则组，不支持创建内置规则组。
+    前提条件   您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
      如需对应用程序的指标进行监控，您需要配置运行在容器中的应用程序，将符合 Prometheus 规范的监控指标暴露在某个服务端路径下，并在用于暴露工作负载的服务上设置监控导出器，以声明提供应用程序监控指标的路径。有关更多信息，请参阅编辑监控导出器。
-     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
   在页面右上角点击图标，选择 WizTelemetry 可观测平台。
   在左侧导航栏选择全局告警 &amp;gt; 自定义规则组。
-  在页面点击创建。</description>
+  在页面点击创建。
+  在基本信息页签，设置规则组的基本信息，然后点击下一步。</description>
     </item>
     
     <item>
@@ -30,8 +31,8 @@
       
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/05-alert-management/01-rule-groups/02-view-a-rule-group-list/</guid>
       <description>本节介绍如何查看告警规则组列表。
- 前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
   在页面右上角点击图标，选择 WizTelemetry 可观测平台。
   在左侧导航栏选择全局告警 &amp;gt; 内置规则组/自定义规则组。
   规则组列表提供以下信息：
@@ -54,8 +55,8 @@
       
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/05-alert-management/01-rule-groups/03-view-rule-group-details/</guid>
       <description>本节介绍如何查看告警规则组详情。
- 前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
   在页面右上角点击图标，选择 WizTelemetry 可观测平台。
   在左侧导航栏选择全局告警 &amp;gt; 内置规则组/自定义规则组。
   在列表中点击一个规则组的名称打开其详情页面。
@@ -78,9 +79,9 @@
       
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/05-alert-management/01-rule-groups/04-edit-rule-group-information/</guid>
       <description>本节介绍如何编辑告警规则组信息。
- 您可以编辑告警规则组的别名、检查周期和描述。KubeSphere 企业版不支持编辑规则组的名称。
- 前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+ 您可以编辑告警规则组的别名、检查周期和描述。KubeSphere 不支持编辑规则组的名称。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
   在页面右上角点击图标，选择 WizTelemetry 可观测平台。
   在左侧导航栏选择全局告警 &amp;gt; 内置规则组/自定义规则组。
   在需要编辑的规则组右侧点击，然后在下拉列表中选择编辑信息。
@@ -101,8 +102,8 @@
       
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/05-alert-management/01-rule-groups/05-edit-alert-rules/</guid>
       <description> 本节介绍如何编辑规则组中的告警规则。
- 前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
   在页面右上角点击图标，选择 WizTelemetry 可观测平台。
   在左侧导航栏选择全局告警 &amp;gt; 内置规则组/自定义规则组。
   在需要编辑的规则组右侧点击，然后在下拉列表中选择编辑告警规则。
@@ -122,18 +123,19 @@
       
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/05-alert-management/01-rule-groups/06-disable-and-enable-rule-groups/</guid>
       <description>本节介绍如何启用和禁用告警规则组。规则组禁用后，系统将不再根据规则组生成告警。
- 前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-   禁用和启用单个规则组  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   禁用和启用单个规则组  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
   在页面右上角点击图标，选择 WizTelemetry 可观测平台。
   在左侧导航栏选择全局告警 &amp;gt; 内置规则组/自定义规则组。
   在需要禁用的规则组右侧点击，然后在下拉列表中选择禁用。
   在禁用规则组对话框，输入规则组的名称，然后点击确定。
   在已禁用的规则组右侧点击，然后在下拉列表中选择启用可启用规则组。
-     批量禁用和启用规则组  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+     批量禁用和启用规则组  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
   在页面右上角点击图标，选择 WizTelemetry 可观测平台。
   在左侧导航栏选择全局告警 &amp;gt; 内置规则组/自定义规则组。
   勾选需要禁用的规则组左侧的复选框，然后在规则组列表上方点击禁用。
-  在批量禁用规则组对话框，输入规则组的名称，然后点击确定。</description>
+  在批量禁用规则组对话框，输入规则组的名称，然后点击确定。
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
     </item>
     
     <item>
@@ -143,15 +145,15 @@
       
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/05-alert-management/01-rule-groups/07-delete-rule-groups/</guid>
       <description>本节介绍如何删除告警规则组。
-     说明     KubeSphere 企业版仅支持删除自定义规则组，不支持删除内置规则组。您可以重置内置规则组。
+     说明     KubeSphere 仅支持删除自定义规则组，不支持删除内置规则组。您可以重置内置规则组。
         警告     规则组删除后不能恢复，请谨慎执行此操作。
-    前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-   删除单个规则组  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+    前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   删除单个规则组  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
   在页面右上角点击图标，选择 WizTelemetry 可观测平台。
   在左侧导航栏选择全局告警 &amp;gt; 自定义规则组。
   在需要删除的规则组右侧点击，然后在下拉列表中选择删除。
   在删除规则组对话框，输入规则组的名称，然后点击确定。
-     批量删除规则组  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。</description>
+     批量删除规则组  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。</description>
     </item>
     
     <item>
@@ -161,10 +163,10 @@
       
       <guid>/v4.2.0/11-use-extensions/09-observability-platform/07-whizard/05-alert-management/01-rule-groups/08-reset-built-in-rule-groups/</guid>
       <description> 本节介绍如何重置内置规则组。
-     说明     KubeSphere 企业版仅支持重置内置规则组，不支持重置自定义规则组。
+     说明     KubeSphere 仅支持重置内置规则组，不支持重置自定义规则组。
         警告     规则组重置后不能恢复，请谨慎执行此操作。
-    前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
-   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
+    前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
   在页面右上角点击图标，选择 WizTelemetry 可观测平台。
   在左侧导航栏选择全局告警 &amp;gt; 内置规则组。
   在需要重置的规则组右侧点击，然后在下拉列表中选择重置。
