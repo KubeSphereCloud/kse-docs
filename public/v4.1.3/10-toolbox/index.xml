@@ -17,7 +17,7 @@
  本节演示如何使用 Web kubectl 进行集群资源操作和管理。
  前提条件 您需要在 KubeSphere 企业版平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
    使用 Web Kubectl  以具有 platform-admin 角色的用户登录 KubeSphere 企业版 Web 控制台。
-  将光标悬停在页面右下角的图标，然后在菜单中选择 kubectl。
+  将鼠标悬停在页面右下角的图标，然后在菜单中选择 kubectl。
   在弹出窗口中看到 kubectl 界面，如下图所示。如果有多个集群，则需要先在右上角的下拉列表中选择目标集群。如果只有一个集群，则该下拉列表不可见。
 
    在命令行工具中输入 kubectl 命令，查询并管理 Kubernetes 集群资源。例如，执行以下命令查询集群中所有 pod 的状态。
@@ -34,7 +34,7 @@ kubectl get pods -A     在终端窗口中使用以下语法运行 kubectl 命�
  kubeconfig 文件包含集群的认证信息，用于向其他应用程序提供集群的访问权限。KubeSphere 支持自动根据当前登录用户生成 kubeconfig 文件，可向其他应用程序提供当前登录用户相同的访问权限。有关更多信息，请参阅 Kubernetes 官方文档。
  前提条件 您需要获取 KubeSphere 用户名和密码。
    操作步骤  登录 KubeSphere Web 控制台。
-  将光标悬停在页面右下角的图标，然后在菜单中选择 kubeconfig。
+  将鼠标悬停在页面右下角的图标，然后在菜单中选择 kubeconfig。
   在弹出的对话框查看 kubeconfig 配置信息。
   clusters:cluster:server 字段显示的访问地址为虚拟 IP 地址，只能从集群内部部访问。如需从集群外部访问，请将该地址修改为 kube-apiserver 对外暴露的地址。
   contexts:cluster:namespace 字段默认显示的项目名称为 default。请将该字段取值修改为当前用户实际具有访问权限的项目名称。
