@@ -774,6 +774,12 @@
                 
               
             
+              
+                
+                  
+                
+              
+            
             
               <span
                 class="menu-switch-icon icon-caret_up_fill">
@@ -791,6 +797,18 @@
       
           <li class="sidebar-item">
             <a href="/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/">在线安装 Kubernetes 和 KubeSphere</a>
+          </li>
+        
+      
+    
+  
+    
+      
+      
+      
+      
+          <li class="sidebar-item">
+            <a href="/v4.2.0/03-installation-and-upgrade/02-install-kubesphere/02-offline-install-kubernetes-and-kubesphere/">离线安装 Kubernetes 和 KubeSphere</a>
           </li>
         
       
@@ -18531,7 +18549,7 @@
     在线安装 Kubernetes 和 KubeSphere</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2025-10-21 09:46:43
+      更新时间：2025-10-30 06:24:18
     </div>
     
     
@@ -18652,16 +18670,18 @@
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 16.6666%;"/>
-<col style="width: 16.6666%;"/>
-<col style="width: 16.6666%;"/>
-<col style="width: 16.6666%;"/>
-<col style="width: 33.3336%;"/>
+<col style="width: 15.3846%;"/>
+<col style="width: 15.3846%;"/>
+<col style="width: 15.3846%;"/>
+<col style="width: 15.3846%;"/>
+<col style="width: 15.3846%;"/>
+<col style="width: 23.077%;"/>
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">服务</th>
 <th class="tableblock halign-left valign-top">协议</th>
+<th class="tableblock halign-left valign-top">行为</th>
 <th class="tableblock halign-left valign-top">起始端口</th>
 <th class="tableblock halign-left valign-top">结束端口</th>
 <th class="tableblock halign-left valign-top">备注</th>
@@ -18676,10 +18696,17 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>22</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -18689,12 +18716,17 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>2379</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>2380</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -18704,10 +18736,17 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>6443</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -18717,12 +18756,17 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>9099</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>9100</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -18732,10 +18776,17 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>179</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -18745,12 +18796,17 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>30000</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>32767</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -18760,12 +18816,17 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>10250</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>10258</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -18775,10 +18836,17 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>10250</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -18788,10 +18856,17 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>53</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -18801,10 +18876,17 @@
 <p>UDP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>53</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -18814,9 +18896,14 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>5000</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>离线环境需要</p>
 </div></div></td>
@@ -18829,9 +18916,14 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>5080</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>离线环境需要</p>
 </div></div></td>
@@ -18844,9 +18936,14 @@
 <p>TCP</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>111</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>使用 NFS 作为持久化存储时需要</p>
 </div></div></td>
@@ -18856,10 +18953,17 @@
 <p>ipip</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>IPENCAP/IPIP</p>
+<p>IPENCAP / IPIP</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>allow</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>使用 Calico 时需要</p>
 </div></div></td>
