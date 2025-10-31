@@ -9710,9 +9710,11 @@ KubeSphere 提供以下预置项目角色：
  安装过程中将用到开源工具 KubeKey 的 v4.x 版本。有关 KubeKey 的更多信息，请访问 GitHub KubeKey 仓库。
      注意     KubeSphere 社区版用户需要在联网状态下自行构建离线安装包，KubeSphere 其他版本的用户可联系 KubeSphere 交付服务专家获取最新的离线安装包，即，可跳过离线安装包的构建过程。
     准备工作 参考如下最低配置要求，准备 Linux 主机。
-     说明     若无需构建离线安装包，则无需准备打包节点。
-        角色 主机数量 最低要求（每个节点） 网络要求     打包节点
- 1</description>
+     角色 主机数量 最低要求（每个节点） 网络要求     打包节点
+ 1
+ CPU：1 核，内存：1 GB，硬盘：150 GB
+ 需能访问：github.com、docker.io、quay.io
+   部署节点（运行 Web Installer 服务）</description>
     </item>
     
     <item>

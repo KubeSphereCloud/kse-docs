@@ -18549,7 +18549,7 @@
     离线安装 Kubernetes 和 KubeSphere</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2025-10-30 07:26:06
+      更新时间：2025-10-31 01:54:40
     </div>
     
     
@@ -18567,7 +18567,7 @@
     <li><a href="#_准备工作">准备工作</a></li>
     <li><a href="#_前提条件">前提条件</a></li>
     <li><a href="#_配置防火墙规则">配置防火墙规则</a></li>
-    <li><a href="#_步骤_1构建离线安装包可选">步骤 1：构建离线安装包（可选）</a>
+    <li><a href="#_步骤_1构建离线安装包">步骤 1：构建离线安装包</a>
       <ul>
         <li><a href="#_1_创建配置文件">1. 创建配置文件</a></li>
         <li><a href="#_2_获取_kk_与_web_installer">2. 获取 kk 与 Web Installer</a></li>
@@ -18626,23 +18626,6 @@
 <div class="paragraph">
 <p>参考如下最低配置要求，准备 Linux 主机。</p>
 </div>
-<table class="tableblock frame-all grid-all stretch admon note">
-<colgroup>
-<col style="width: 100%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>若无需构建离线安装包，则无需准备打包节点。</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;"/>
@@ -19116,7 +19099,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_步骤_1构建离线安装包可选">步骤 1：构建离线安装包（可选）</h2>
+<h2 id="_步骤_1构建离线安装包">步骤 1：构建离线安装包</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>登录<code>打包节点</code>，然后参照以下步骤构建离线安装包。</p>
@@ -19292,7 +19275,7 @@ curl -sfL https://get-kk.kubesphere.io | sh -</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>package.json</code></p>
+<p><code>package.sh</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>离线安装包的构建脚本。</p>
@@ -19980,7 +19963,7 @@ spec:
     <li><a href="#_准备工作">准备工作</a></li>
     <li><a href="#_前提条件">前提条件</a></li>
     <li><a href="#_配置防火墙规则">配置防火墙规则</a></li>
-    <li><a href="#_步骤_1构建离线安装包可选">步骤 1：构建离线安装包（可选）</a>
+    <li><a href="#_步骤_1构建离线安装包">步骤 1：构建离线安装包</a>
       <ul>
         <li><a href="#_1_创建配置文件">1. 创建配置文件</a></li>
         <li><a href="#_2_获取_kk_与_web_installer">2. 获取 kk 与 Web Installer</a></li>
