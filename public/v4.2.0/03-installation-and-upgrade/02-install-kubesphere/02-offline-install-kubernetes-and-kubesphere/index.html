@@ -18549,7 +18549,7 @@
     离线安装 Kubernetes 和 KubeSphere</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2025-10-31 01:54:40
+      更新时间：2025-11-11 05:55:06
     </div>
     
     
@@ -18776,7 +18776,7 @@
 <p>请确保所有集群节点上 <strong>/etc/resolv.conf</strong> 文件中配置的 DNS 服务器地址可用。否则，KubeSphere 集群可能会出现域名解析问题。</p>
 </li>
 <li>
-<p>请确保在所有集群节点上都可以使用 <strong>sudo</strong>、<strong>curl</strong> 和 <strong>openssl</strong> 命令。</p>
+<p>请确保在所有集群节点上都可以使用 <strong>sudo</strong>、<strong>tar</strong>、<strong>curl</strong> 和 <strong>openssl</strong> 命令。</p>
 </li>
 <li>
 <p>请确保所有集群节点时间同步。</p>
@@ -19201,9 +19201,9 @@ spec:
   cri:
     registry:
       auths:
-        - repo: &lt;镜像仓库地址&gt;
-          username: &lt;镜像仓库账号&gt;
-          password: &lt;镜像仓库密码&gt;
+        - repo: &lt;镜像仓库地址&gt; # 拉取镜像时需访问的镜像仓库，如 docker.io
+          username: &lt;镜像仓库账号&gt; # 如 docker.io 的登录账户
+          password: &lt;镜像仓库密码&gt; # 如 docker.io 的登录密码
 EOF</code></pre>
 </div>
 </div>
@@ -19219,14 +19219,14 @@ EOF</code></pre>
 <p><code>kk</code> 是 ​​KubeKey​​ 的命令行可执行文件，用于快速部署和管理 Kubernetes 集群及相关组件，<code>Web Installer</code> 是 ​​KubeKey​​ 的图形化界面，用于部署 Kubernetes 和 KubeSphere。</p>
 </div>
 <div class="paragraph">
-<p>执行以下命令安装 kk 和 Web Installer。请先确保打包节点上已经安装了解压缩工具 <code>tar</code>。</p>
+<p>执行以下命令安装 kk 和 Web Installer。请先确保打包节点上已经安装了 <code>tar</code> 工具。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">export KKZONE=cn
 export VERSION=v4.0.0
 export WEB_INSTALLER_VERSION=v1.0.0
-curl -sfL https://get-kk.kubesphere.io | sh -</code></pre>
+curl -sfL https://get-kk.kubesphere.io | VERSION=latest sh -</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -19357,6 +19357,23 @@ curl -sfL https://get-kk.kubesphere.io | sh -</code></pre>
 <div class="paragraph">
 <p>当没有私有镜像仓库时，可使用 kk 创建 harbor 镜像仓库。</p>
 </div>
+<table class="tableblock frame-all grid-all stretch admon note">
+<colgroup>
+<col style="width: 100%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>私有镜像仓库节点需要预安装 tar 工具。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -19603,7 +19620,12 @@ spec:
 <p>Web Installer 是 Kubekey 的图形化页面，用于部署 Kubernetes 和 Kubesphere。</p>
 </div>
 <div class="paragraph">
-<p>登录<code>部署节点</code>，执行以下命令启动 Web Installer：</p>
+<p>登录<code>部署节点</code>并进入离线包解压后的目录，执行以下命令启动 Web Installer：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cd offline  #注意替换为实际目录名称</code></pre>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -19626,6 +19648,23 @@ spec:
 <div class="paragraph">
 <p>在<strong>基本信息</strong>页面，添加 Kubernetes 节点。支持通过手动添加、文件上传和节点扫描的方式添加节点。</p>
 </div>
+<table class="tableblock frame-all grid-all stretch admon attention">
+<colgroup>
+<col style="width: 100%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>如果只添加一个节点，节点角色必须为 <code>Master &amp; Worker</code>。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="ulist">
 <ul>
 <li>
