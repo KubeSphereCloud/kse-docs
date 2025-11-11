@@ -31,9 +31,10 @@ kubectl delete installplan {InstallPlan Name}       说明     可根据第一�
       <guid>/v4.2.0/03-installation-and-upgrade/04-uninstall-kubesphere/02-uninstall-kubernetes-and-kubesphere/</guid>
       <description>本节介绍如何卸载 Kubernetes 和 KubeSphere。
      说明     本节介绍的 Kubernetes 卸载方式仅适用于 Kubernetes 通过 KubeKey 安装的场景。如果您的 Kubernetes 不是通过 KubeKey 安装，请参阅 Kubernetes 官方文档卸载 Kubernetes。
-        警告     此操作将导致 KubeSphere 集群业务中断，并且无法撤销，请谨慎执行此操作。
-    前提条件   您需要获取安装配置文件 config-sample.yaml 并将其传输到用于执行本节操作的集群节点。有关更多信息，请参阅安装 KubeSphere 。
-    警告     如果您无法获取安装配置文件 config-sample.yaml，您需要参阅安装 KubeSphere 重新创建 config-sample.</description>
+        警告       此操作将导致 KubeSphere 集群业务中断，并且无法撤销，请谨慎执行此操作。
+   为避免数据丢失，请提前备份所有重要数据。
+      若 KubeSphere 为在线安装 若 KubeSphere 为在线安装，请按照以下步骤卸载 Kubernetes 和 KubeSphere。
+ 准备工作 您需要获取安装配置文件 config-sample.yaml 并将其传输到用于执行本节操作的集群节点。</description>
     </item>
     
   </channel>

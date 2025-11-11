@@ -18549,7 +18549,7 @@
     添加集群节点</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2025-10-30 06:24:18
+      更新时间：2025-11-11 05:55:06
     </div>
     
     
@@ -18565,7 +18565,18 @@
   <nav id="TableOfContents">
   <ul>
     <li><a href="#_前提条件">前提条件</a></li>
-    <li><a href="#_操作步骤">操作步骤</a></li>
+    <li><a href="#_若_kubesphere_为在线安装">若 KubeSphere 为在线安装</a>
+      <ul>
+        <li><a href="#_准备工作">准备工作</a></li>
+        <li><a href="#_操作步骤">操作步骤</a></li>
+      </ul>
+    </li>
+    <li><a href="#_若_kubesphere_为离线安装">若 KubeSphere 为离线安装</a>
+      <ul>
+        <li><a href="#_准备工作_2">准备工作</a></li>
+        <li><a href="#_操作步骤_2">操作步骤</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div><div class="post-content">
@@ -18601,9 +18612,6 @@
 <div class="ulist">
 <ul>
 <li>
-<p>您需要联系 KubeSphere 的交付服务专家获取 KubeSphere v4.2.0 安装包。</p>
-</li>
-<li>
 <p>集群节点的操作系统和版本须为 Ubuntu 16.04、Ubuntu 18.04、Ubuntu 20.04、Ubuntu 22.04、Debian 9、Debian 10、CentOS 7、CentOS Stream、RHEL 7、RHEL 8、SLES 15、openSUSE Leap 15 或 Kylin v10。多台服务器的操作系统可以不同。关于其它操作系统和版本支持，请咨询青云科技官方解决方案专家或交付服务专家。</p>
 </li>
 <li>
@@ -18612,11 +18620,21 @@
 <li>
 <p>如果添加控制平面节点，您需要提前为集群配置高可用性。如果您使用负载均衡器，请确保负载均衡器监听所有控制平面节点的 6443 端口。有关更多信息，请参阅<a href="../../../03-installation-and-upgrade/01-preparations/02-configure-high-availability/02-configure-k8s-high-availability/">配置高可用性</a>。</p>
 </li>
-<li>
-<p>如果您的集群节点无法连接互联网，您还需要准备一台 Linux 服务器用于创建私有镜像服务，该服务器必须与 KubeSphere 集群节点网络连通并且在 <strong>/mnt/registry</strong> 目录挂载至少 100 GB 磁盘空间。</p>
-</li>
-<li>
-<p>您需要获取安装配置文件 <strong>config-sample.yaml</strong> 并将其传输到用于执行本节操作的集群节点。有关更多信息，请参阅<a href="../../02-install-kubesphere/">安装 KubeSphere</a> 。</p>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_若_kubesphere_为在线安装">若 KubeSphere 为在线安装</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>若 KubeSphere 为<a href="../../02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/">在线安装</a>，请按照以下步骤添加集群节点。</p>
+</div>
+<div class="sect2">
+<h3 id="_准备工作">准备工作</h3>
+<div class="paragraph">
+<p>您需要获取安装配置文件 <strong>config-sample.yaml</strong> 并将其传输到用于执行本节操作的集群节点。</p>
+</div>
 <table class="tableblock frame-all grid-all stretch admon warning">
 <colgroup>
 <col style="width: 100%;"/>
@@ -18634,39 +18652,41 @@
 <p>添加节点过程中不支持在 <strong>config-sample.yaml</strong> 配置文件中修改原有的集群配置。</p>
 </li>
 <li>
-<p>如果您无法获取安装配置文件 <strong>config-sample.yaml</strong>，您需要参阅<a href="../../02-install-kubesphere/">安装 KubeSphere</a> 重新创建 <strong>config-sample.yaml</strong> 文件。重新创建该文件时，请务必确保文件中的集群信息与集群的当前实际情况一致。否则，添加节点后集群可能会出现错误。</p>
+<p>如果您无法获取安装配置文件 <strong>config-sample.yaml</strong>，您需要参阅<a href="../../02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/">在线安装 KubeSphere</a> 重新创建 <strong>config-sample.yaml</strong> 文件。重新创建该文件时，请务必确保文件中的集群信息与集群的当前实际情况一致。否则，添加节点后集群可能会出现错误。</p>
 </li>
 </ul>
 </div></div></td>
 </tr>
 </tbody>
 </table>
-</li>
-</ul>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_操作步骤">操作步骤</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_操作步骤">操作步骤</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>将 KubeSphere 安装包传输到任意集群节点，并登录该集群节点。</p>
-</li>
-<li>
-<p>执行以下命令解压安装包，并进入安装包解压后生成的目录（将 &lt;package name&gt; 替换为安装包的实际名称，将 &lt;directory&gt; 替换为安装包解压后生成的目录）：</p>
+<p>如果您访问 GitHub/Googleapis 受限，请登录任意集群节点，执行以下命令设置下载区域：</p>
 <div class="openblock">
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">tar -zxvf &lt;package name&gt;</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">export KKZONE=cn</code></pre>
 </div>
 </div>
+</div>
+</div>
+</li>
+<li>
+<p>执行以下命令下载 KubeKey 最新版本：</p>
+<div class="openblock">
+<div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">cd &lt;directory&gt;</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">curl -sfL https://get-kk.kubesphere.io | sh -</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>下载完成后当前目录下将生成 KubeKey 二进制文件 <strong>kk</strong>。</p>
 </div>
 </div>
 </div>
@@ -18954,7 +18974,7 @@
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell"> ./kk add nodes -f config-sample.yaml -a kubekey-artifact.tar.gz</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash"> ./kk add nodes -f config-sample.yaml</code></pre>
 </div>
 </div>
 </div>
@@ -18979,6 +18999,352 @@
 </div>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_若_kubesphere_为离线安装">若 KubeSphere 为离线安装</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>若 KubeSphere 使用 Web Installer <a href="../../02-install-kubesphere/02-offline-install-kubernetes-and-kubesphere/">离线安装</a>，请按照以下步骤添加集群节点。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch admon note">
+<colgroup>
+<col style="width: 100%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>暂不支持在 Web Installer 页面添加节点。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_准备工作_2">准备工作</h3>
+<div class="paragraph">
+<p>登录部署节点，进入离线包目录，获取节点信息和安装配置文件，用于后续执行 kk 命令。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cd offline</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch admon attention">
+<colgroup>
+<col style="width: 100%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>后续步骤必须在离线包解压后的目录（如 <code>offline</code>）中执行，否则会导致操作失败。</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>一、获取节点信息: kkv4-inventory.yaml</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>获取节点信息文件。</p>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cp kubekey/runtime/kubekey.kubesphere.io/v1/inventories/default/default.yaml kkv4-inventory.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>节点信息示例如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">apiVersion: kubekey.kubesphere.io/v1
+kind: Inventory
+metadata:
+  name: default
+  namespace: default
+spec:
+  groups:
+    etcd:
+      hosts:
+      - scan-cqxbav3
+      vars: null
+    image_registry:
+      hosts: []
+      vars: null
+    k8s_cluster:
+      groups:
+      - kube_control_plane
+      - kube_worker
+      hosts: null
+      vars: null
+    kube_control_plane:
+      hosts:
+      - scan-cqxbav3
+      vars: null
+    kube_worker:
+      hosts:
+      - scan-cqxbav3
+      vars: null
+    nfs:
+      hosts: []
+      vars: null
+  hosts:
+    scan-cqxbav3:
+      connector:
+        host: 172.16.0.4
+        password: &#34;&#34;
+        port: &#34;22&#34;
+        user: root
+      internal_ipv4: 172.16.0.4
+      kubernetes:
+        custom_labels: {}
+  vars: null
+status: {}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>二、获取安装配置文件: kkv4-config.json</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>安装 <code>jq</code>。</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>在 Ubuntu 操作系统上，执行以下安装命令：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo apt install jq</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果部署节点使用其他操作系统，请将 <strong>apt</strong> 替换为操作系统对应的软件包管理工具。</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>获取安装集群时的配置文件 <code>kkv4-config.json</code>。</p>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cat web/schema/config.json | jq &#39;{spec: .[&#34;kubernetes.json&#34;]}&#39; &gt; kkv4-config.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>配置信息示例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">{
+  &#34;spec&#34;: {
+    &#34;kubernetes&#34;: {
+      &#34;cluster_name&#34;: &#34;cluster-01&#34;,
+      &#34;kube_version&#34;: &#34;v1.33.3&#34;,
+      &#34;control_plane_endpoint&#34;: {
+        &#34;host&#34;: &#34;lb.kubesphere.local&#34;,
+        &#34;port&#34;: 6443,
+        &#34;type&#34;: &#34;local&#34;
+      }
+    },
+    &#34;cri&#34;: {
+      &#34;container_manager&#34;: &#34;containerd&#34;
+    },
+    &#34;cni&#34;: {
+      &#34;type&#34;: &#34;calico&#34;,
+      &#34;max_pods&#34;: 110,
+      &#34;service_cidr&#34;: &#34;10.233.0.0/18&#34;,
+      &#34;pod_cidr&#34;: &#34;10.233.64.0/18&#34;,
+      &#34;ipv4_mask_size&#34;: 24,
+      &#34;ipv6_mask_size&#34;: 64
+    },
+    &#34;image_registry&#34;: {
+      &#34;auth&#34;: {
+        &#34;registry&#34;: &#34;dockerhub.kubekey.local&#34;,
+        &#34;username&#34;: &#34;admin&#34;,
+        &#34;password&#34;: &#34;Harbor12345&#34;,
+        &#34;insecure&#34;: true
+      }
+    },
+    &#34;storage_class&#34;: {
+      &#34;local&#34;: {
+        &#34;enabled&#34;: true,
+        &#34;default&#34;: true,
+        &#34;path&#34;: &#34;/var/openebs/local&#34;
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_操作步骤_2">操作步骤</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>在<code>部署节点</code>，进入离线包解压后的目录（如 offline），添加新增节点的信息到 <code>kkv4-inventory.yaml</code> 文件。</p>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cd offline</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">vi kkv4-inventory.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <code>spec.host</code> 字段中的原有节点信息后，加入将要添加的节点信息。示例如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">spec:
+  hosts:
+    scan-cqxbav3: # 原有节点
+      connector:
+        host: 172.16.0.4
+        password: &#34;&#34;
+        port: &#34;22&#34;
+        user: &#34;root&#34;
+      internal_ipv4: 172.16.0.4
+      kubernetes:
+        custom_labels: {}
+    node1: # 新增节点的名称
+      connector: # 节点连接信息
+        host: 172.16.0.5 # 节点的 ssh 连接地址
+        password: &#34;&#34; # 节点的 ssh 连接密码
+        private_key_content: &#34;&#34; # 节点 ssh 连接的密钥内容
+        port: &#34;&#34; # 节点的 ssh 连接端口
+        user: &#34;&#34; # 节点的 ssh 连接用户
+      internal_ipv4: 172.16.0.5 # 节点内部通信的 IP
+      kubernetes:
+        custom_labels: {} # 为节点设置的自定义 label</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <code>spec.groups</code> 字段中对应节点角色下的 <code>hosts</code> 中加入新增节点的名称。示例如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">spec:
+  groups:
+    etcd:
+      hosts:
+      - scan-cqxbav3
+      vars: null
+    image_registry:
+      hosts: []
+      vars: null
+    k8s_cluster:
+      groups:
+      - kube_control_plane
+      - kube_worker
+      hosts: null
+      vars: null
+    kube_control_plane:
+      hosts:
+      - scan-cqxbav3
+      vars: null
+    kube_worker:
+      hosts:
+      - scan-cqxbav3
+      - node1 # 新增节点的名称
+      vars: null
+    nfs:
+      hosts: []
+      vars: null</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>spec.groups.etcd</code>: 将新增节点作为 etcd 节点。暂不支持。</p>
+</li>
+<li>
+<p><code>spec.groups.kube_control_plane</code>: 将新增节点作为 Kubernetes 集群的控制平面节点。</p>
+</li>
+<li>
+<p><code>spec.groups.worker</code>: 将新增节点作为 Kubernetes 集群的工作节点。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>使用 <code>kkv4-inventory.yaml</code> 和 <code>kkv4-config.json</code> 添加节点。</p>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>需将 &lt;nodename1&gt; &lt;nodename2&gt; 替换为 kkv4-inventory.yaml 中添加的节点名称。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">./kk add nodes &lt;nodename1&gt; &lt;nodename2&gt; -i kkv4-inventory.yaml -c kkv4-config.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果显示如下信息，则表明节点添加成功。</p>
+</div>
+<div class="paragraph">
+<p>回显示例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">[Playbook default/add-nodes-p44cg] finish. total: 229,success: 219,ignored: 10,failed: 0</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>登录<code>集群节点</code>，执行以下命令查看当前集群的节点：</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">kubectl get node</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果显示新增节点的信息，也表明节点添加成功。</p>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
 
     
 
@@ -18998,7 +19364,18 @@
   <nav id="TableOfContents">
   <ul>
     <li><a href="#_前提条件">前提条件</a></li>
-    <li><a href="#_操作步骤">操作步骤</a></li>
+    <li><a href="#_若_kubesphere_为在线安装">若 KubeSphere 为在线安装</a>
+      <ul>
+        <li><a href="#_准备工作">准备工作</a></li>
+        <li><a href="#_操作步骤">操作步骤</a></li>
+      </ul>
+    </li>
+    <li><a href="#_若_kubesphere_为离线安装">若 KubeSphere 为离线安装</a>
+      <ul>
+        <li><a href="#_准备工作_2">准备工作</a></li>
+        <li><a href="#_操作步骤_2">操作步骤</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div></div>
