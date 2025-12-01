@@ -190,12 +190,11 @@ kubectl delete installplan {InstallPlan Name}       说明     可根据第一�
  前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
   已在企业空间的项目管理 &amp;gt; 项目列表中创建一个项目。
-     导入代码仓库  以 project-regular 用户登录 KubeSphere制台并进入您的企业空间。
+     导入代码仓库  以 project-regular 用户登录 KubeSphere 控制台并进入您的企业空间。
   在左侧导航栏，点击 DevOps &amp;gt; 代码仓库。
   在页面左上角的下拉列表中选择一个 DevOps 项目。
   在页面点击创建。
-  在导入代码仓库对话框，输入代码仓库名称，如 open-podcasts，然后点击选择代码仓库。您也可以为代码仓库设置别名和添加描述信息。
-  在选择代码仓库对话框，点击 Git，在代码仓库地址区域，输入代码仓库地址，如 https://github.</description>
+  在导入代码仓库对话框，输入代码仓库名称，如 open-podcasts，然后点击选择代码仓库。您也可以为代码仓库设置别名和添加描述信息。</description>
     </item>
     
     <item>
@@ -361,7 +360,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
    本文档演示如何在 DevOps 项目中创建和管理凭证。有关如何使用凭证的更多信息，请参阅使用 Jenkinsfile 创建流水线和使用图形编辑面板创建流水线。
  前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
-     创建凭证  以 project-regular 用户登录 KubeSphere制台并进入您的企业空间。</description>
+     创建凭证  以 project-regular 用户登录 KubeSphere 控制台并进入您的企业空间。</description>
     </item>
     
     <item>
@@ -463,7 +462,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description>本节介绍如何创建任务。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
    操作步骤 请参阅参数描述设置任务的参数。
-  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务。
   在任务页面，点击任务或定时任务打开任务列表。
   在页面点击创建。
@@ -512,7 +511,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description>本节介绍如何创建任务。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
    操作步骤 请参阅参数描述设置任务的参数。
-  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务或定时任务。
   在页面点击创建。
   在基本信息页签，设置任务的基本信息，以及定时任务策略，然后点击下一步。
@@ -656,7 +655,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <guid>/v4.1.3/07-cluster-management/06-configuration/01-secrets/01-create-a-secret/</guid>
       <description>本节介绍如何创建保密字典。
  前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 保密字典。
   在页面点击创建。
   在基本信息页签，设置保密字典的基本信息，然后点击下一步。
@@ -803,7 +802,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
      请确保系统已为持久卷声明创建持久卷。
      请确保后端存储系统支持卷快照功能，并已在持久卷声明对应的存储类上启用卷快照功能。操作方法：存储类 &amp;gt; 更多操作 &amp;gt; 设置卷操作 &amp;gt; 启用卷快照创建。
      方法 1：卷快照 &amp;gt; 创建卷快照 在集群中，可在卷快照菜单下直接为持久卷声明创建卷快照。
-  以具有卷快照管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+  以具有卷快照管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在页面点击创建。
   在创建快照对话框，设置需要创建快照的持久卷声明、卷快照的名称和卷快照类，然后点击确定。
@@ -823,7 +822,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
      请确保系统已为持久卷声明创建持久卷。
      请确保后端存储系统支持卷快照功能，并已在持久卷声明对应的存储类上启用卷快照功能。操作方法：存储类 &amp;gt; 操作 &amp;gt; 设置卷操作 &amp;gt; 启用卷快照创建。
      方法 1：卷快照 &amp;gt; 创建卷快照 在集群中，可在卷快照菜单下直接为持久卷声明创建卷快照。
-  以具有卷快照管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+  以具有卷快照管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在页面点击创建。
   在创建快照对话框，设置需要创建快照的持久卷声明、卷快照的名称和卷快照类，然后点击确定。
@@ -840,7 +839,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
  前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照类管理权限。有关更多信息，请参阅集群成员和集群角色。
      为使卷快照类可以正常提供存储资源，您需要提前配置存储系统并安装与存储系统对应的存储插件。有关更多信息，请联系您的存储系统提供商。
-     操作步骤  以具有卷快照类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   在页面点击创建。
   在基本信息页签，设置卷快照类的基本信息，然后点击下一步。
@@ -848,8 +847,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
  卷快照类的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
    存储类型
  块存储、对象存储或文件存储。
-   别名
- 卷快照类的别名。不同卷快照类的别名可以相同。别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。</description>
+   别名</description>
     </item>
     
     <item>
@@ -862,7 +860,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照类管理权限。有关更多信息，请参阅集群成员和集群角色。
      为使卷快照类可以正常提供存储资源，您需要提前配置存储系统并安装与存储系统对应的存储插件。有关更多信息，请联系您的存储系统提供商。
-     操作步骤  以具有卷快照类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   在页面点击创建。
   在基本信息页签，设置卷快照类的基本信息，然后点击下一步。
@@ -870,8 +868,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
  卷快照类的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
    存储类型
  块存储、对象存储或文件存储。
-   别名
- 卷快照类的别名。不同卷快照类的别名可以相同。</description>
+   别名</description>
     </item>
     
     <item>
@@ -902,7 +899,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description>本节介绍如何创建存储类。
  前提条件   您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
      为使存储类可以正常提供存储资源，您需要提前配置存储系统并安装与存储系统对应的存储插件。更多相关信息，请联系您的存储系统提供商。
-     操作步骤  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在页面点击创建。
   在基本信息页签，设置存储类的基本信息，然后点击下一步。
@@ -924,7 +921,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description>本节介绍如何创建存储类。
  前提条件    您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
      为使存储类可以正常提供存储资源，您需要提前配置存储系统并安装与存储系统对应的存储插件。更多相关信息，请联系您的存储系统提供商。
-     操作步骤  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在页面点击创建。
   在基本信息页签，设置存储类的基本信息，然后点击下一步。
@@ -947,7 +944,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description>本节介绍如何创建容器组 IP 池。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在页面点击创建。
   在创建容器组 IP 池对话框，设置容器组 IP 池的参数，然后点击下一步。
@@ -966,7 +963,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description>本节介绍如何创建容器组 IP 池。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在页面点击创建。
   在创建容器组 IP 池对话框，设置容器组 IP 池的参数，然后点击下一步。
@@ -985,7 +982,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description>本节介绍如何创建工作负载。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
    操作步骤 请参阅参数描述设置工作负载的参数。
-  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   在页面点击创建。
@@ -1060,7 +1057,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description>本节介绍如何创建工作负载。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
    操作步骤 请参阅参数描述设置工作负载的参数。
-  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   在页面点击创建。
@@ -1135,7 +1132,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description> 本节介绍如何创建工作负载模板。
  您可以直接创建工作负载模版，也可以基于现有的工作负载创建模板。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载模板。
   在页面点击创建。
   选择一个工作负载类型，如部署、有状态副本集、守护进程集。
@@ -1251,7 +1248,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
  前提条件   您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
      如需创建支持 HTTPS 协议的应用路由，您需要创建 TLS 信息类型的保密字典，保密字典中必须包含 Base64 编码的证书和私钥。有关更多信息，请参阅创建保密字典。
   应用路由所属的项目中存在至少一个服务。有关更多信息，请参阅创建服务。
-     操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在页面点击创建。
   在基本信息页签，设置应用路由的基本信息，然后点击下一步。
@@ -1317,7 +1314,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
     前提条件    您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
      如需创建支持 HTTPS 协议的应用路由，您需要创建 TLS 信息类型的保密字典，保密字典中必须包含 Base64 编码的证书和私钥。有关更多信息，请参阅创建保密字典。
   应用路由所属的项目中存在至少一个服务。有关更多信息，请参阅创建服务。
-     操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在页面点击创建。
   在基本信息页签，设置应用路由的基本信息，然后点击下一步。
@@ -1445,7 +1442,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <guid>/v4.1.3/07-cluster-management/08-storage/01-persistent-volume-claims/01-create-a-persistent-volume-claim/</guid>
       <description>本节介绍如何创建持久卷声明。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在页面点击创建。
   在基本信息页签，设置持久卷声明的基本信息，然后点击下一步。
@@ -1513,7 +1510,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <guid>/v4.2.0/07-cluster-management/08-storage/01-persistent-volume-claims/01-create-a-persistent-volume-claim/</guid>
       <description>本节介绍如何创建持久卷声明。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在页面点击创建。
   在基本信息页签，设置持久卷声明的基本信息，然后点击下一步。
@@ -1669,7 +1666,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/04-services/01-create-a-service/</guid>
       <description>本节介绍如何创建服务。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在页面点击创建。
   在基本信息页签，设置服务的基本信息，然后点击下一步。
@@ -1693,7 +1690,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/05-services/01-create-a-service/</guid>
       <description>本节介绍如何创建服务。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在页面点击创建。
   在基本信息页签，设置服务的基本信息，然后点击下一步。
@@ -1717,7 +1714,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <guid>/v4.1.3/07-cluster-management/06-configuration/03-service-accounts/01-create-a-service-account/</guid>
       <description>本节介绍如何创建服务帐户。
  前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 服务帐户。
   在服务帐户列表页面，点击创建。
   在创建服务帐户对话框，设置服务帐户的信息，然后点击创建。
@@ -1910,7 +1907,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
   已创建一个约束模板。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; 约束。
   在页面点击创建。
   在创建约束条件对话框，设置以下参数，然后点击确定。
@@ -1918,8 +1915,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
  约束条件的名称。
    约束条件类型
  约束条件使用的约束模板。
-   enforcementAction
- enforcementAction 字段定义了处理约束违规的操作。默认设置为 deny，即默认拒绝任何违规的准入请求。有关更多信息，请参阅约束违规处理。</description>
+   enforcementAction</description>
     </item>
     
     <item>
@@ -1932,7 +1928,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 Gatekeeper 扩展组件。
   已创建一个约束模板。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。
   在页面点击创建。
   在创建约束条件对话框，设置以下参数，然后点击确定。
@@ -1940,8 +1936,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
  约束条件的名称。
    约束条件类型
  约束条件使用的约束模板。
-   enforcementAction
- enforcementAction 字段定义了处理约束违规的操作。默认设置为 deny，即默认拒绝任何违规的准入请求。有关更多信息，请参阅约束违规处理。</description>
+   enforcementAction</description>
     </item>
     
     <item>
@@ -1953,7 +1948,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description>本节介绍如何创建约束模板。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; 约束模板。
   在页面点击创建。
   在创建约束模板对话框，设置约束模板的名称和目标（Targets），然后点击确定。
@@ -1972,7 +1967,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description>本节介绍如何创建约束模板。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; Constraint Templates。
   在页面点击创建。
   在创建约束模板对话框，设置约束模板的名称和目标（Targets），然后点击确定。
@@ -1991,7 +1986,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <description> 本节介绍如何创建网络策略。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   在页面点击创建。
   在创建网络策略对话框，设置网络策略的配置文件，然后点击确定。
@@ -2013,7 +2008,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
         注意     项目网络策略页面仅支持查看网络策略。如需创建或管理网络策略，请前往集群的“网络策略”页面操作。
     前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   在页面点击创建。
   在创建网络策略对话框，设置网络策略的配置文件，然后点击确定。
@@ -2308,7 +2303,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <guid>/v4.1.3/07-cluster-management/06-configuration/02-configmaps/01-create-a-configmap/</guid>
       <description>本节介绍如何创建配置字典。
  前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 配置字典。
   在页面点击创建。
   在基本信息页签，设置保密字典的基本信息，然后点击下一步。
@@ -2531,7 +2526,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <guid>/v4.1.3/07-cluster-management/04-projects/01-create-a-project/</guid>
       <description>本节介绍如何创建项目。
  前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在页面点击创建。
   在创建项目对话框，设置项目的参数，然后点击确定。
@@ -2578,7 +2573,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
       <guid>/v4.2.0/07-cluster-management/04-projects/01-create-a-project/</guid>
       <description>本节介绍如何创建项目。
  前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在页面点击创建。
   在创建项目对话框，设置项目的参数，然后点击确定。
@@ -2786,7 +2781,7 @@ sinks: loki: endpoint: http://&amp;lt;loki-gateway-ip&amp;gt;:&amp;lt;loki-gatew
  前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
   已导入代码仓库。
-     操作步骤  以 project-regular 用户登录 KubeSphere制台并进入您的企业空间。
+     操作步骤  以 project-regular 用户登录 KubeSphere 控制台并进入您的企业空间。
   在左侧导航栏选择 DevOps &amp;gt; 资源管理。
   在页面左上角的下拉列表中选择一个 DevOps 项目。
   点击自定义资源清单按钮，在目录树或右侧列表中，勾选待同步到代码仓库的资源文件。也可在文件内容详情页点击加入清单。选中的文件将显示在右侧的待同步资源清单下。
@@ -2949,7 +2944,7 @@ logsidecar-injector: enabled: true       说明     由于控制此参数更新�
       <description>本节介绍如何启用集群网关。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 网关设置。
   在页面右侧点击启用网关。
   在弹出的对话框，设置网关的参数，然后点击确定。
@@ -3123,7 +3118,7 @@ logsidecar-injector: enabled: true       说明     由于控制此参数更新�
  下面以 Github 仓库为例，展示如何导入代码仓库。
  前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
-     操作步骤  以 project-regular 用户登录 KubeSphere制台并进入您的企业空间。
+     操作步骤  以 project-regular 用户登录 KubeSphere 控制台并进入您的企业空间。
   在左侧导航栏选择 DevOps &amp;gt; 代码仓库。
   在页面左上角的下拉列表中选择一个 DevOps 项目。
   在页面点击创建。
@@ -3432,10 +3427,10 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/11-use-extensions/02-devops/05-resource-management/01-view-and-download-recources/</guid>
-      <description> 本节介绍如何通过目录树的形式查看项目中的 Kubernetes 资源。
+      <description>本节介绍如何通过目录树的形式查看项目中的 Kubernetes 资源。
  前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
-     操作步骤  以 project-regular 用户登录 KubeSphere制台并进入您的企业空间。
+     操作步骤  以 project-regular 用户登录 KubeSphere 控制台并进入您的企业空间。
   在左侧导航栏选择 DevOps &amp;gt; 资源管理。
   在页面左上角的下拉列表中选择一个 DevOps 项目。
   点击搜索资源文件，或点击目录名称，在右侧窗口查看目录中的文件。
@@ -3443,8 +3438,7 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
   点击全部资源右侧的可收起所有目录，点击刷新目录。
        在右侧窗口点击目录中的文件，查看文件。
   点击上方的可收起目录树区域。再次点击可展开目录树区域。
-  点击右上角的可下载当前资源文件。
-          </description>
+  点击右上角的可下载当前资源文件。</description>
     </item>
     
     <item>
@@ -3518,7 +3512,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <guid>/v4.1.3/07-cluster-management/07-crds/01-view-a-crd-list/</guid>
       <description>本节介绍如何查看定制资源定义列表。
  前提条件 您需要加入一个集群并在集群中具有定制资源定义查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有定制资源定义查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有定制资源定义查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择定制资源定义。
   定制资源定义列表提供以下信息：
     参数 描述     类别
@@ -3542,7 +3536,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <guid>/v4.2.0/07-cluster-management/07-crds/01-view-a-crd-list/</guid>
       <description>本节介绍如何查看定制资源定义列表。
  前提条件 您需要加入一个集群并在集群中具有定制资源定义查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有定制资源定义查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有定制资源定义查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择定制资源定义。
   定制资源定义列表提供以下信息：
     参数 描述     类别
@@ -3566,7 +3560,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/03-pods/01-view-a-pod-list/</guid>
       <description>本节介绍如何查看容器组列表。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 容器组。
   容器组列表提供以下信息：
     参数 描述     名称
@@ -3614,7 +3608,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/04-pods/01-view-a-pod-list/</guid>
       <description>本节介绍如何查看容器组列表。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 容器组。
   容器组列表提供以下信息：
     参数 描述     名称
@@ -3753,7 +3747,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <description>本节介绍如何查看应用资源用量。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 应用资源。
   在应用资源页面，点击资源用量页签查看集群资源用量、应用资源用量和项目数量。
     参数 描述     集群资源用量
@@ -3762,8 +3756,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
  当前集群中已创建的部署、有状态副本集、守护进程集、任务、定时任务、持久卷声明、服务、应用路由、容器组的数量。
    项目数量
  当前集群中的项目数量。
-      点击集群资源用量和应用资源用量中的折线图，查看资源用量随时间变化的详细信息。
-     在右上角点击可设置数据的时间范围。</description>
+      点击集群资源用量和应用资源用量中的折线图，查看资源用量随时间变化的详细信息。</description>
     </item>
     
     <item>
@@ -3775,7 +3768,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <description>本节介绍如何查看应用资源用量。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 应用监控。
   在应用监控页面的资源用量页签，查看集群资源用量、应用资源用量和项目数量。
     参数 描述     集群资源用量
@@ -3784,8 +3777,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
  当前集群中已创建的部署、有状态副本集、守护进程集、任务、定时任务、持久卷声明、服务、应用路由、容器组的数量。
    项目数量
  当前集群中的项目数量。
-      点击集群资源用量和应用资源用量中的折线图，查看资源用量随时间变化的详细信息。选择一个项目，点击确定，查看特定项目的资源用量信息。
-     在右上角点击可设置数据的时间范围。</description>
+      点击集群资源用量和应用资源用量中的折线图，查看资源用量随时间变化的详细信息。选择一个项目，点击确定，查看特定项目的资源用量信息。</description>
     </item>
     
     <item>
@@ -3881,7 +3873,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <guid>/v4.1.3/07-cluster-management/03-nodes/01-view-a-node-list/</guid>
       <description>本节介绍如何查看节点列表。
  前提条件 您需要加入一个集群并在集群中具有节点查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   节点列表提供以下信息：
     参数 描述     名称
@@ -3904,7 +3896,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <guid>/v4.2.0/07-cluster-management/03-nodes/01-view-a-node-list/</guid>
       <description>本节介绍如何查看节点列表。
  前提条件 您需要加入一个集群并在集群中具有节点查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   节点列表提供以下信息：
     参数 描述     名称
@@ -4016,7 +4008,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <guid>/v4.1.3/07-cluster-management/09-cluster-settings/02-cluster-visibility/01-view-cluster-visibility/</guid>
       <description> 本节介绍如何查看集群已授权给哪些企业空间。
  前提条件 您需要加入一个集群并在集群中具有集群设置查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有集群设置查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有集群设置查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群可见性。
     参数 描述     集群可见性
  集群是否对所有企业空间可见。
@@ -4037,7 +4029,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <guid>/v4.2.0/07-cluster-management/09-cluster-settings/02-cluster-visibility/01-view-cluster-visibility/</guid>
       <description> 本节介绍如何查看集群已授权给哪些企业空间。
  前提条件 您需要加入一个集群并在集群中具有集群设置查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有集群设置查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有集群设置查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群可见性。
     参数 描述     集群可见性
  集群是否对所有企业空间可见。
@@ -4058,7 +4050,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <guid>/v4.1.3/07-cluster-management/09-cluster-settings/01-basic-information/01-view-cluster-basic-information/</guid>
       <description> 本节介绍如何查看集群基本信息。
  前提条件 您需要加入一个集群并在集群中具有集群设置查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有集群设置查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有集群设置查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 基本信息。
   在基本信息页签，查看集群的名称、提供商、Kubernetes 版本。
      </description>
@@ -4072,7 +4064,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <guid>/v4.2.0/07-cluster-management/09-cluster-settings/01-basic-information/01-view-cluster-basic-information/</guid>
       <description> 本节介绍如何查看集群基本信息。
  前提条件 您需要加入一个集群并在集群中具有集群设置查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有集群设置查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有集群设置查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 基本信息。
   在基本信息页签，查看集群的名称、提供商、Kubernetes 版本。
      </description>
@@ -4087,7 +4079,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <description>本节介绍如何查看集群状态概览。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群状态。
   在集群状态页面的概览区域查看集群节点、集群资源、etcd 和服务组件的状态。
     参数 描述     集群节点状态
@@ -4108,7 +4100,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <description>本节介绍如何查看集群状态概览。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面的概览页签，查看集群节点、集群资源、etcd 和服务组件的状态。
     参数 描述     集群节点状态
@@ -4130,7 +4122,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
  有关集群概览页面的其他信息，请参阅查看集群概览信息。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择概览。
 概览页面提供以下监控信息：
      功能区 描述     集群配额统计
@@ -4153,7 +4145,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
  有关集群概览页面的其他信息，请参阅查看集群概览信息。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择概览。
 概览页面提供以下监控信息：
      功能区 描述     集群配额统计
@@ -4175,7 +4167,7 @@ Whizard 可观测中心的概览页面显示所有集群的监控信息。
       <guid>/v4.1.3/07-cluster-management/09-cluster-settings/04-cluster-roles/01-view-a-cluster-role-list/</guid>
       <description> 本节介绍如何查看集群角色列表。
  前提条件 您需要加入一个集群并在集群中具有角色查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有角色查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有角色查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群角色。
 KubeSphere 平台提供以下预置集群角色：
      角色 描述     cluster-admin
@@ -4193,7 +4185,7 @@ KubeSphere 平台提供以下预置集群角色：
       <guid>/v4.2.0/07-cluster-management/09-cluster-settings/04-cluster-roles/01-view-a-cluster-role-list/</guid>
       <description> 本节介绍如何查看集群角色列表。
  前提条件 您需要加入一个集群并在集群中具有角色查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有角色查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有角色查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群角色。
 KubeSphere 平台提供以下预置集群角色：
      角色 描述     cluster-admin
@@ -4596,12 +4588,11 @@ vi /etc/kubernetes/audit/audit-policy.yaml   apiVersion: audit.k8s.io/v1 kind: P
      说明     “域名重用校验”仅对当前集群生效，且不作用于之前已存在的应用路由。
     前提条件   KubeSphere 平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由工具。
   在页面点击添加域名。
   在添加域名对话框，设置域名信息。
-    参数 描述     名称
- 域名的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。</description>
+    参数 描述     名称</description>
     </item>
     
     <item>
@@ -4699,7 +4690,7 @@ vi /etc/kubernetes/audit/audit-policy.yaml   apiVersion: audit.k8s.io/v1 kind: P
   KubeSphere 企业版默认未安装 Kafka，并且目前未提供针对 Kafka 的日志分析工具。KubeSphere 企业版仅提供与 Kafka 对接的功能。如需使用 Kafka 作为日志接收器，您需要参阅 Kafka 官方文档安装 Kafka。
    前提条件    您需要加入一个集群并在集群中具有集群设置管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 WizTelemetry 日志、WizTelemetry 事件、WizTelemetry 审计、或 WizTelemetry 通知扩展组件。
-     操作步骤  以具有集群设置管理权限的用户登录KubeSphere Web 控制台并进入您的集群。</description>
+     操作步骤  以具有集群设置管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。</description>
     </item>
     
     <item>
@@ -4715,8 +4706,7 @@ vi /etc/kubernetes/audit/audit-policy.yaml   apiVersion: audit.k8s.io/v1 kind: P
   KubeSphere 默认未安装 Kafka，并且目前未提供针对 Kafka 的日志分析工具。KubeSphere 仅提供与 Kafka 对接的功能。如需使用 Kafka 作为日志接收器，您需要参阅 Kafka 官方文档安装 Kafka。
    前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 WizTelemetry 日志、WizTelemetry 事件、WizTelemetry 审计、或 WizTelemetry 通知扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
-  在左侧导航栏选择日志 &amp;gt; 日志接收器。</description>
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。</description>
     </item>
     
     <item>
@@ -5146,11 +5136,11 @@ hosts: dns files mdns4_minimal [NOTFOUND=return]       执行以下命令在边
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.1.3/11-use-extensions/15-storage/05-storage-classes/01-set-authorization-rules/</guid>
-      <description> 本节介绍如何为存储类设置授权规则。
+      <description>本节介绍如何为存储类设置授权规则。
  设置并启用授权规则后，用户只能在特定项目和企业空间使用存储类。
  前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有存储类访问规则管理权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有存储类访问规则管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有存储类访问规则管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在存储类列表中点击一个存储类的名称打开其详情页面。
   在存储类详情页面的左上角，选择更多操作 &amp;gt; 设置授权规则。
@@ -5158,8 +5148,7 @@ hosts: dns files mdns4_minimal [NOTFOUND=return]       执行以下命令在边
     说明     若要禁用授权规则，在页面右侧点击已启用。
         在授权规则设置区域，设置在特定的项目和企业空间使用该存储类。
 
-   设置完成后，点击确定。
-     </description>
+   设置完成后，点击确定。</description>
     </item>
     
     <item>
@@ -5168,11 +5157,11 @@ hosts: dns files mdns4_minimal [NOTFOUND=return]       执行以下命令在边
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/11-use-extensions/15-storage/05-storage-classes/01-set-authorization-rules/</guid>
-      <description> 本节介绍如何为存储类设置授权规则。
+      <description>本节介绍如何为存储类设置授权规则。
  设置并启用授权规则后，用户只能在特定项目和企业空间使用存储类。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有存储类访问规则管理权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有存储类访问规则管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有存储类访问规则管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在存储类列表中点击一个存储类的名称打开其详情页面。
   在存储类详情页面，点击操作 &amp;gt; 设置授权规则。
@@ -5180,8 +5169,7 @@ hosts: dns files mdns4_minimal [NOTFOUND=return]       执行以下命令在边
     说明     若要禁用授权规则，在页面右侧点击已启用。
         在授权规则设置区域，设置在特定的项目和企业空间使用该存储类。
 
-   设置完成后，点击确定。
-     </description>
+   设置完成后，点击确定。</description>
     </item>
     
     <item>
@@ -5415,7 +5403,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/09-cluster-settings/03-cluster-members/01-invite-a-user-to-a-cluster/</guid>
       <description> 本节介绍如何邀请用户加入集群。
  前提条件 您需要加入一个集群并在集群中具有成员管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有成员管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有成员管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群成员。
   在页面右侧点击邀请。
   在邀请成员对话框，在需要邀请的用户右侧点击，在下拉列表中选择用户在集群中的角色，然后点击确定。
@@ -5437,7 +5425,7 @@ KubeSphere 平台提供以下预置集群角色：
       <description> 本节介绍如何邀请用户加入集群。
  前提条件    您需要加入一个集群并在集群中具有成员管理权限。有关更多信息，请参阅集群成员和集群角色。
      已在用户和角色管理中创建一个用户。
-     操作步骤  以具有成员管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有成员管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群成员。
   在页面右侧点击邀请。
   在邀请成员对话框，在需要邀请的用户右侧点击，在下拉列表中选择用户在集群中的角色，然后点击确定。
@@ -6244,7 +6232,7 @@ vi &amp;lt;template-name&amp;gt;   内容如下：
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/02-jobs/02-view-a-job-list/</guid>
       <description>本节介绍如何查看任务列表。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务。
   在任务页面，点击任务或定时任务打开任务列表。
   任务列表提供以下信息：
@@ -6296,7 +6284,7 @@ vi &amp;lt;template-name&amp;gt;   内容如下：
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/02-jobs/02-view-a-job-list/</guid>
       <description>本节介绍如何查看任务列表。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务或定时任务。
   任务列表提供以下信息：
     参数 描述     名称
@@ -6607,7 +6595,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/06-configuration/01-secrets/02-view-a-secret-list/</guid>
       <description>本节介绍如何查看保密字典列表。
  前提条件 您需要加入一个集群并在集群中具有项目资源查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 保密字典。
   保密字典列表提供以下信息：
     参数 描述     名称
@@ -6799,7 +6787,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看卷快照类列表。
  前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照类查看权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照类查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照类查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   卷快照类列表提供以下信息：
     参数 描述     名称
@@ -6822,7 +6810,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看卷快照类列表。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照类查看权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照类查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照类查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   卷快照类列表提供以下信息：
     参数 描述     名称
@@ -6901,7 +6889,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看已启用“域名重用校验”的域名列表。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由工具。
   域名列表提供以下信息：
     参数 描述     名称
@@ -6920,7 +6908,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/08-storage/02-storage-classes/02-view-a-storage-class-list/</guid>
       <description>本节介绍如何查看存储类列表。
  前提条件 您需要加入一个集群并在集群中具有存储类查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有存储类查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有存储类查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   存储类列表提供以下信息：
     参数 描述     名称
@@ -6944,7 +6932,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/08-storage/02-storage-classes/02-view-a-storage-class-list/</guid>
       <description>本节介绍如何查看存储类列表。
  前提条件 您需要加入一个集群并在集群中具有存储类查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有存储类查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有存储类查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   存储类列表提供以下信息：
     参数 描述     名称
@@ -6969,7 +6957,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/07-crds/02-view-crd-details/</guid>
       <description>本节介绍如何查看定制资源定义详情。
  前提条件 您需要加入一个集群并在集群中具有定制资源定义查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有定制资源定义查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有定制资源定义查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择定制资源定义。
   在定制资源定义列表中点击一个定制资源定义的名称打开其详情页面。
   在定制资源定义详情页面左侧的属性区域查看任务的资源属性。
@@ -6994,7 +6982,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/07-crds/02-view-crd-details/</guid>
       <description>本节介绍如何查看定制资源定义详情。
  前提条件 您需要加入一个集群并在集群中具有定制资源定义查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有定制资源定义查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有定制资源定义查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择定制资源定义。
   在定制资源定义列表中点击一个定制资源定义的名称打开其详情页面。
   在详情页面的属性区域查看定制资源定义的属性。
@@ -7020,7 +7008,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看容器组 IP 池列表。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   容器组 IP 池列表提供以下信息：
     参数 描述     名称
@@ -7040,7 +7028,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看容器组 IP 池列表。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   容器组 IP 池列表提供以下信息：
     参数 描述     名称
@@ -7059,7 +7047,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/03-pods/02-view-pod-details/</guid>
       <description>本节介绍如何查看容器组详情。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 容器组。
   在容器组列表中点击一个容器组的名称打开其详情页面。
   在容器组详情页面的属性区域查看容器组的资源属性。
@@ -7111,7 +7099,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/04-pods/02-view-pod-details/</guid>
       <description>本节介绍如何查看容器组详情。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 容器组。
   在容器组列表中点击一个容器组的名称打开其详情页面。
   在容器组详情页面的属性区域查看容器组的资源属性。
@@ -7163,7 +7151,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/01-workloads/02-view-a-workload-list/</guid>
       <description>本节介绍如何查看工作负载列表。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   工作负载列表提供以下信息：
@@ -7238,7 +7226,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/01-workloads/02-view-a-workload-list/</guid>
       <description>本节介绍如何查看工作负载列表。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   工作负载列表提供以下信息：
@@ -7610,7 +7598,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/05-routes/02-view-a-route-list/</guid>
       <description>本节介绍如何查看应用路由列表。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   应用路由列表提供以下信息：
     参数 描述     名称
@@ -7677,7 +7665,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/06-routes/02-view-a-route-list/</guid>
       <description>本节介绍如何查看应用路由列表。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   应用路由列表提供以下信息：
     参数 描述     名称
@@ -7859,7 +7847,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/08-storage/01-persistent-volume-claims/02-view-a-persistent-volume-claim-list/</guid>
       <description>本节介绍如何查看持久卷声明列表。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   持久卷声明列表提供以下信息：
     参数 描述     名称
@@ -7935,7 +7923,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/08-storage/01-persistent-volume-claims/02-view-a-persistent-volume-claim-list/</guid>
       <description>本节介绍如何查看持久卷声明列表。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   持久卷声明列表提供以下信息：
     参数 描述     名称
@@ -8012,7 +8000,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看日志接收器列表。
  前提条件    您需要加入一个集群并在集群中具有集群设置查看权限。有关更多信息，请参阅集群成员和集群角色。
      已添加一个日志接收器。
-     操作步骤  以具有集群设置查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群设置查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 日志接收器。
   在日志接收器页面，点击容器日志、资源事件、审计日志或通知历史打开日志接收器列表。
   日志接收器列表提供以下信息：
@@ -8021,8 +8009,7 @@ KubeSphere 平台提供以下预置企业空间角色：
    地址
  日志接收器的服务地址和服务端口。KubeSphere 会将日志发送给该地址和端口。KubeSphere 默认使用的 OpenSearch 的服务地址和服务端口为 opensearch-cluster-data.kubesphere-logging-system.svc:9200。
    状态
- 日志接收器是否已启用，取值为已启用或已禁用。
-   类型</description>
+ 日志接收器是否已启用，取值为已启用或已禁用。</description>
     </item>
     
     <item>
@@ -8034,7 +8021,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看日志接收器列表。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      已添加一个日志接收器。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择日志 &amp;gt; 日志接收器。
   在日志接收器页面，点击容器日志、资源事件、审计日志或通知历史打开日志接收器列表。
   日志接收器列表提供以下信息：
@@ -8053,7 +8040,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/04-services/02-view-a-service-list/</guid>
       <description>本节介绍如何查看服务列表。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   服务列表提供以下信息：
     参数 描述     名称
@@ -8120,7 +8107,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/05-services/02-view-a-service-list/</guid>
       <description>本节介绍如何查看服务列表。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   服务列表提供以下信息：
     参数 描述     名称
@@ -8188,7 +8175,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/06-configuration/03-service-accounts/02-view-a-service-account-list/</guid>
       <description>本节介绍如何查看服务帐户的列表。
  前提条件 您需要加入一个集群并在集群中具有项目资源查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 服务帐户。
   服务帐户列表提供以下信息：
     参数 描述     名称
@@ -8306,7 +8293,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/07-templates/02-view-a-template-list/</guid>
       <description>本节介绍如何查看应用负载模板列表。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用负载模板。
   应用负载模板列表提供以下信息：
     参数 描述     名称
@@ -8399,7 +8386,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看物理资源状态。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群状态。
   在集群状态页面，点击物理资源监控查看集群物理资源的使用情况。
   物理资源监控页签提供以下信息：
@@ -8419,7 +8406,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看物理资源状态。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面，点击物理资源监控查看集群物理资源的使用情况。
   物理资源监控页签提供以下信息：
@@ -8484,7 +8471,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看约束列表。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; 约束。
   约束列表提供以下信息：
     参数 描述     名称
@@ -8504,7 +8491,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看约束列表。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。
   约束列表提供以下信息：
     参数 描述     名称
@@ -8546,7 +8533,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看网关信息。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 网关设置。
   在集群网关页签，查看集群网关的信息。
     参数 描述     类型
@@ -8568,7 +8555,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看网络策略列表。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   网络策略列表提供以下信息：
     参数 描述     名称
@@ -8577,8 +8564,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  网络策略所属的项目。
    创建时间
  网络策略的创建时间。
-        在列表左上角的下拉列表中选择一个项目，可以查看特定项目中的网络策略。
-     在列表右上角点击可刷新列表信息。</description>
+        在列表左上角的下拉列表中选择一个项目，可以查看特定项目中的网络策略。</description>
     </item>
     
     <item>
@@ -8590,7 +8576,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看网络策略列表。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   网络策略列表提供以下信息：
     参数 描述     名称
@@ -8599,8 +8585,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  网络策略所属的项目。
    创建时间
  网络策略的创建时间。
-        在列表左上角的下拉列表中选择一个项目，可以查看特定项目中的网络策略。
-  在列表上方点击搜索框并输入关键字，可按名称搜索网络策略。</description>
+        在列表左上角的下拉列表中选择一个项目，可以查看特定项目中的网络策略。</description>
     </item>
     
     <item>
@@ -8749,7 +8734,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/03-nodes/02-view-node-details/</guid>
       <description>本节介绍如何查看节点详情。
  前提条件 您需要加入一个集群并在集群中具有节点查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在节点列表中点击一个节点的名称打开其详情页面。
   在节点详情页面左侧的属性区域查看节点的资源属性。
@@ -8774,7 +8759,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/03-nodes/02-view-node-details/</guid>
       <description>本节介绍如何查看节点详情。
  前提条件 您需要加入一个集群并在集群中具有节点查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在节点列表中点击一个节点的名称打开其详情页面。
   在节点详情页面的属性区域查看节点的资源属性。
@@ -8894,7 +8879,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看边缘节点列表。
  前提条件    您需要加入一个集群并在集群中具有节点查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeEdge 扩展组件。
-     操作步骤  以具有节点查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有节点查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 边缘节点打开节点列表。
   节点列表提供以下信息：
     参数 描述     名称
@@ -8958,7 +8943,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/06-configuration/02-configmaps/02-view-a-configmap-list/</guid>
       <description>本节介绍如何查看配置字典列表。
  前提条件 您需要加入一个集群并在集群中具有项目资源查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 配置字典。
   配置字典列表提供以下信息：
     参数 描述     名称
@@ -9193,7 +9178,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/09-cluster-settings/03-cluster-members/02-view-a-cluster-member-list/</guid>
       <description>本节介绍如何查看集群成员列表。
  前提条件 您需要加入一个集群并在集群中具有成员查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有成员查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有成员查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群成员。
   集群成员列表提供以下信息：
     参数 描述     用户名
@@ -9215,7 +9200,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/09-cluster-settings/03-cluster-members/02-view-a-cluster-member-list/</guid>
       <description>本节介绍如何查看集群成员列表。
  前提条件 您需要加入一个集群并在集群中具有成员查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有成员查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有成员查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群成员。
   集群成员列表提供以下信息：
     参数 描述     用户名
@@ -9237,7 +9222,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/02-overview/01-view-cluster-overall-information/</guid>
       <description> 本节介绍如何查看集群的概览信息。
  前提条件 您需要加入一个集群并在集群中具有集群设置查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有集群设置查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有集群设置查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择概览。
     功能区 描述     名称、标识和描述
  显示当前集群的名称、标识和描述。
@@ -9260,7 +9245,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/02-overview/01-view-cluster-overall-information/</guid>
       <description> 本节介绍如何查看集群的概览信息。
  前提条件 您需要加入一个集群并在集群中具有集群设置查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有集群设置查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有集群设置查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择概览。
     功能区 描述     名称、标识和描述
  右侧显示当前集群的名称、标识和描述。
@@ -9283,7 +9268,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/09-cluster-settings/04-cluster-roles/02-view-cluster-role-details/</guid>
       <description>本节介绍如何查看集群角色详情。
  前提条件 您需要加入一个集群并在集群中具有角色查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有角色查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有角色查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群角色。
   在集群角色列表中点击一个集群角色的名称打开其详情页面。
   在集群角色详情页面右侧的权限页签查看集群角色具有的权限。
@@ -9297,8 +9282,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  查看存储类列表、查看存储类详情。
    存储类管理
  创建存储类、设置默认存储类、启用和禁用卷操作、编辑存储类信息、删除存储类。
-        访问控制
-    参数 描述     角色查看</description>
+        访问控制</description>
     </item>
     
     <item>
@@ -9309,7 +9293,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/09-cluster-settings/04-cluster-roles/02-view-cluster-role-details/</guid>
       <description>本节介绍如何查看集群角色详情。
  前提条件 您需要加入一个集群并在集群中具有角色查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有角色查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有角色查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群角色。
   在集群角色列表中点击一个集群角色的名称打开其详情页面。
   在集群角色详情页面的权限页签查看集群角色具有的权限。
@@ -9323,8 +9307,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  查看存储类列表、查看存储类详情。
    存储类管理
  创建存储类、设置默认存储类、启用和禁用卷操作、编辑存储类信息、删除存储类。
-        访问控制
-    参数 描述     角色查看</description>
+        访问控制</description>
     </item>
     
     <item>
@@ -9335,7 +9318,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.1.3/07-cluster-management/04-projects/02-view-a-project-list/</guid>
       <description>本节介绍如何查看项目列表。
  前提条件 您需要加入一个集群并在集群中具有项目查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在项目页面，点击用户项目或系统项目打开用户项目列表或系统项目列表。
   项目列表提供以下信息：
@@ -9382,7 +9365,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <guid>/v4.2.0/07-cluster-management/04-projects/02-view-a-project-list/</guid>
       <description>本节介绍如何查看项目列表。
  前提条件 您需要加入一个集群并在集群中具有项目查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在项目页面，点击用户项目或系统项目打开用户项目列表或系统项目列表。
   项目列表提供以下信息：
@@ -9606,7 +9589,7 @@ KubeSphere 提供以下预置项目角色：
       <description> 本节介绍如何查看项目资源用量排行。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     查看用量排行  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     查看用量排行  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 应用资源。
   在应用资源页面，点击用量排行页签查看各项目的资源使用情况。
   在列表左上角点击下拉列表可选择按照 CPU 用量、内存用量、容器组数量、出站流量或入站流量对项目进行排序。
@@ -9624,7 +9607,7 @@ KubeSphere 提供以下预置项目角色：
       <description> 本节介绍如何查看资源用量的项目排行。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
-     查看用量排行  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     查看用量排行  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 应用监控。
   在应用监控页面，点击用量排行页签查看各项目的资源使用情况。
   在列表左上角点击下拉列表可选择按照 CPU 用量、内存用量、容器组数量、出站流量或入站流量对项目进行排序。
@@ -9797,7 +9780,7 @@ KubeSphere 提供以下预置项目角色：
       <guid>/v4.1.3/07-cluster-management/09-cluster-settings/02-cluster-visibility/02-edit-cluster-visibility/</guid>
       <description> 本节介绍如何编辑集群可见性。
  前提条件 您需要加入一个集群并在集群中具有集群设置管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有集群设置管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有集群设置管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群可见性。
   在页面右侧点击编辑可见性。
   在编辑可见性对话框对企业空间进行授权或取消授权，然后点击确定。
@@ -9817,7 +9800,7 @@ KubeSphere 提供以下预置项目角色：
       <guid>/v4.2.0/07-cluster-management/09-cluster-settings/02-cluster-visibility/02-edit-cluster-visibility/</guid>
       <description> 本节介绍如何编辑集群可见性。
  前提条件 您需要加入一个集群并在集群中具有集群设置管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有集群设置管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有集群设置管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群可见性。
   在页面右侧点击编辑可见性。
   在编辑可见性对话框对企业空间进行授权或取消授权，然后点击确定。
@@ -9838,7 +9821,7 @@ KubeSphere 提供以下预置项目角色：
       <description> 本节介绍如何编辑集群基本信息。
      说明     KubeSphere 企业版不支持修改已添加的集群的名称。
     前提条件 您需要加入一个集群并在集群中具有集群设置管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有集群设置管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有集群设置管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 基本信息。
   在基本信息页面右侧点击编辑信息。
   在编辑信息对话框，设置集群的标签、提供商和描述，然后点击确定。
@@ -9860,7 +9843,7 @@ KubeSphere 提供以下预置项目角色：
       <description>本节介绍如何编辑集群基本信息。
      说明     KubeSphere 不支持修改已添加的集群的名称。
     前提条件 您需要加入一个集群并在集群中具有集群设置管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有集群设置管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有集群设置管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 基本信息。
   在基本信息页面右侧点击编辑信息。
   在编辑信息对话框，设置集群的别名、提供商、描述、标识，然后点击确定。
@@ -10086,7 +10069,7 @@ KubeSphere 提供以下预置项目角色：
  前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
      请确保后端存储系统支持卷扩展功能，且存储类已启用卷扩展功能。有关更多信息，请参阅启用和禁用卷操作。
-     操作步骤  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在存储类列表中点击一个存储类的名称打开其详情页面。
   在存储类详情页面的左上角，选择更多操作 &amp;gt; 设置自动扩展。
@@ -10106,7 +10089,7 @@ KubeSphere 提供以下预置项目角色：
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
      请确保后端存储系统支持卷扩展功能，且存储类已启用卷扩展功能。有关更多信息，请参阅启用和禁用卷操作。
-     操作步骤  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在存储类列表中点击一个存储类的名称打开其详情页面。
   在存储类详情页面，点击操作 &amp;gt; 设置自动扩展。
@@ -10514,7 +10497,7 @@ CI &amp;amp; CD 流水线模板包含六个阶段。有关每个阶段的更多�
       <guid>/v4.1.3/07-cluster-management/09-cluster-settings/03-cluster-members/03-change-the-role-of-a-cluster-member/</guid>
       <description> 本节介绍如何修改集群成员的角色。
  前提条件 您需要加入一个集群并在集群中具有成员管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有成员管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有成员管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群成员。
   在需要编辑的集群成员右侧点击，然后选择修改角色。
   在修改角色对话框，设置集群成员的角色，然后点击确定。
@@ -10534,7 +10517,7 @@ KubeSphere 平台提供以下预置集群角色：
       <guid>/v4.2.0/07-cluster-management/09-cluster-settings/03-cluster-members/03-change-the-role-of-a-cluster-member/</guid>
       <description> 本节介绍如何修改集群成员的角色。
  前提条件 您需要加入一个集群并在集群中具有成员管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有成员管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有成员管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群成员。
   在需要编辑的集群成员右侧点击，然后选择修改角色。
   在修改角色对话框，设置集群成员的角色，然后点击确定。
@@ -10983,7 +10966,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
      说明     查看 etcd 监控信息需要提前启用 etcd 监控。有关更多信息，请参阅扩展中心 WizTelemetry 监控扩展组件的详情页说明。
     前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群状态。
   在集群状态页面，点击 etcd 监控页签查看 etcd 数据库的运行状态。
   etcd 监控页签提供以下信息：
@@ -10999,7 +10982,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看 etcd 数据库状态。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面，点击 etcd 监控页签查看 etcd 数据库的运行状态。
   etcd 监控页签提供以下信息：
@@ -11016,7 +10999,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/02-jobs/03-view-job-details/</guid>
       <description>本节介绍如何查看任务详情。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务。
   在任务页面，点击任务或定时任务，然后在列表中点击一个任务的名称打开其详情页面。
   在任务详情页面的属性区域查看任务的资源属性。
@@ -11068,7 +11051,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/02-jobs/03-view-job-details/</guid>
       <description>本节介绍如何查看任务详情。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务或定时任务。
   在列表中点击一个任务的名称打开其详情页面。
   在任务详情页面的属性区域查看任务的资源属性。
@@ -11258,7 +11241,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/06-configuration/01-secrets/03-view-secret-details/</guid>
       <description>本节介绍如何查看保密字典详情。
  前提条件 您需要加入一个集群并在集群中具有项目资源查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 保密字典。
   在保密字典列表中点击一个保密字典的名称打开其详情页面。
   在保密字典详情页面的属性区域查看保密字典的资源属性。
@@ -11407,7 +11390,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看卷快照类详情。
  前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照类查看权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照类查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照类查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   在卷快照类列表中点击一个卷快照类的名称打开卷快照类详情页面。
   在卷快照类详情页面左侧的属性区域查看卷快照类的资源属性。
@@ -11429,7 +11412,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看卷快照类详情。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照类查看权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照类查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照类查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   在卷快照类列表中点击一个卷快照类的名称打开卷快照类详情页面。
   在卷快照类详情页面的属性区域查看卷快照类的资源属性。
@@ -11495,7 +11478,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看代码仓库详情，并修改仓库中的文件。
  前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
-     操作步骤  以 project-regular 用户登录 KubeSphere制台并进入您的企业空间。
+     操作步骤  以 project-regular 用户登录 KubeSphere 控制台并进入您的企业空间。
   在左侧导航栏选择 DevOps &amp;gt; 代码仓库。
   在页面左上角的下拉列表中选择一个 DevOps 项目。
   在代码仓库列表中点击一个仓库的名称打开其详情页面。
@@ -11514,7 +11497,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/08-storage/02-storage-classes/03-view-storage-class-details/</guid>
       <description>本节介绍如何查看存储类详情。
  前提条件 您需要加入一个集群并在集群中具有存储类查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有存储类查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有存储类查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在存储类列表中点击一个存储类的名称打开其详情页面。
   在存储类详情页面左侧的属性区域查看存储类的资源属性。
@@ -11526,8 +11509,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
  是否允许用户在 KubeSphere Web 控制台扩展持久卷声明请求的存储容量。
    回收策略
  持久卷的回收策略。KubeSphere 平台默认使用 Delete 回收策略，即在持久卷声明被删除时同时删除持久卷。有关更多信息，请参阅 Kubernetes 官方文档。
-   允许卷快照
- 是否允许用户在 KubeSphere Web 控制台为持久卷声明创建快照。</description>
+   允许卷快照</description>
     </item>
     
     <item>
@@ -11538,7 +11520,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.2.0/07-cluster-management/08-storage/02-storage-classes/03-view-storage-class-details/</guid>
       <description>本节介绍如何查看存储类详情。
  前提条件 您需要加入一个集群并在集群中具有存储类查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有存储类查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有存储类查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在存储类列表中点击一个存储类的名称打开其详情页面。
   在存储类详情页面的属性区域查看存储类的资源属性。
@@ -11562,14 +11544,13 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看容器组 IP 池详情。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在容器组 IP 池列表中点击一个容器组 IP 池的名称打开其详情页面。
   在容器组 IP 池详情页面左侧的属性区域查看容器组 IP 池的基本信息。
     参数 描述     状态
  容器组 IP 池的状态。
-   网段
- 容器组 IP 池包含的网段。</description>
+   网段</description>
     </item>
     
     <item>
@@ -11581,14 +11562,13 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看容器组 IP 池详情。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在容器组 IP 池列表中点击一个容器组 IP 池的名称打开其详情页面。
   在容器组 IP 池详情页面的属性区域查看容器组 IP 池的基本信息。
     参数 描述     状态
  容器组 IP 池的状态。
-   网段
- 容器组 IP 池包含的网段。</description>
+   网段</description>
     </item>
     
     <item>
@@ -11600,7 +11580,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看容器详情。
      说明     KubeSphere 仅支持查看运行中的容器的详情，不支持查看已停止运行的容器的详情。
     前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 容器组。
   在容器组列表中点击一个容器组的名称打开其详情页面。
   在容器组详情页面的资源状态页签，在容器区域点击一个容器的名称打开容器详情页面。
@@ -11646,7 +11626,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看容器详情。
      说明     KubeSphere 仅支持查看运行中的容器的详情，不支持查看已停止运行的容器的详情。
     前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 容器组。
   在容器组列表中点击一个容器组的名称打开其详情页面。
   在容器组详情页面的资源状态页签，在容器区域点击一个容器的名称打开容器详情页面。
@@ -11691,7 +11671,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/01-workloads/03-view-workload-details/</guid>
       <description>本节介绍如何查看工作负载详情。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集，然后在列表中点击一个工作负载的名称打开其详情页面。
   在工作负载详情页面的属性区域查看工作负载的资源属性。
@@ -11770,7 +11750,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/01-workloads/03-view-workload-details/</guid>
       <description>本节介绍如何查看工作负载详情。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集，然后在列表中点击一个工作负载的名称打开其详情页面。
   在工作负载详情页面的属性区域查看工作负载的资源属性。点击属性栏可折叠该区域。
@@ -11786,7 +11766,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
  工作负载的更新时间。
    创建者
  创建工作负载的用户。
-        在工作负载详情页面点击元数据查看工作负载的标签和注解。</description>
+        在工作负载详情页面点击事件查看工作负载相关的事件。</description>
     </item>
     
     <item>
@@ -11940,7 +11920,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/05-routes/03-view-route-details/</guid>
       <description>本节介绍如何查看应用路由详情。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在应用路由列表中点击一个应用路由的名称打开其详情页面。
   在应用路由详情页面的属性区域查看应用路由的详细信息。
@@ -12010,7 +11990,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/06-routes/03-view-route-details/</guid>
       <description>本节介绍如何查看应用路由详情。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在应用路由列表中点击一个应用路由的名称打开其详情页面。
   在应用路由详情页面的属性区域查看应用路由的详细信息。
@@ -12160,7 +12140,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/08-storage/01-persistent-volume-claims/03-view-persistent-volume-claim-details/</guid>
       <description>本节介绍如何查看持久卷声明详情。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明列表中点击一个持久卷声明的名称打开其详情页面。
   在持久卷声明详情页面的属性区域查看持久卷声明的资源属性。
@@ -12237,7 +12217,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.2.0/07-cluster-management/08-storage/01-persistent-volume-claims/03-view-persistent-volume-claim-details/</guid>
       <description>本节介绍如何查看持久卷声明详情。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明列表中点击一个持久卷声明的名称打开其详情页面。
   在持久卷声明详情页面的属性区域查看持久卷声明的资源属性。
@@ -12315,7 +12295,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看日志接收器详情。
  前提条件    您需要加入一个集群并在集群中具有集群设置查看权限。有关更多信息，请参阅集群成员和集群角色。
      已添加一个日志接收器。
-     操作步骤  以具有集群设置查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群设置查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 日志接收器。
   在日志接收器页面，点击容器日志、资源事件、审计日志或通知历史，然后在列表中点击一个日志接收器的名称打开其详情页面。
   在日志接收器详情页面左侧的属性区域查看日志接收器是否已启用。
@@ -12336,7 +12316,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看日志接收器详情。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      已添加一个日志接收器。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择日志 &amp;gt; 日志接收器。
   在日志接收器页面，点击容器日志、资源事件、审计日志或通知历史，然后在列表中点击一个日志接收器的名称打开其详情页面。
   在日志接收器详情页面的属性区域查看日志接收器是否已启用。
@@ -12355,7 +12335,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/06-configuration/03-service-accounts/03-view-service-account-details/</guid>
       <description>本节介绍如何查看服务帐户详情。
  前提条件 您需要加入一个集群并在集群中具有项目资源查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 服务帐户。
   在服务帐户列表中点击一个服务帐户的名称打开其详情页面。
   在服务帐户详情页面的属性区域查看服务帐户的资源属性。
@@ -12456,7 +12436,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/04-services/03-view-service-details/</guid>
       <description>本节介绍如何查看服务详情。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在服务列表中点击一个服务的名称打开其详情页面。
   在服务详情页面的属性区域查看服务的资源属性。
@@ -12467,7 +12447,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
    类型
  服务的内部访问模式。
    Headless：系统不为服务分配虚拟 IP 地址，可通过 &amp;lt;service name&amp;gt;.&amp;lt;project name&amp;gt;.svc.cluster.local 或 &amp;lt;service name&amp;gt;.&amp;lt;project name&amp;gt; 格式的域名从集群内部访问。
-  VirtualIP：系统为服务分配一个虚拟 IP 地址供集群内部访问，同时也支持通过 &amp;lt;service name&amp;gt;.&amp;lt;project name&amp;gt;.</description>
+  VirtualIP：系统为服务分配一个虚拟 IP 地址供集群内部访问，同时也支持通过 &amp;lt;service name&amp;gt;.</description>
     </item>
     
     <item>
@@ -12499,7 +12479,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/05-services/03-view-service-details/</guid>
       <description>本节介绍如何查看服务详情。
  前提条件 您需要加入一个集群并在集群中具有应用负载查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在服务列表中点击一个服务的名称打开其详情页面。
   在服务详情页面的属性区域查看服务的资源属性。
@@ -12510,7 +12490,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
    类型
  服务的内部访问模式。
    Headless：系统不为服务分配虚拟 IP 地址，可通过 &amp;lt;service name&amp;gt;.&amp;lt;project name&amp;gt;.svc.cluster.local 或 &amp;lt;service name&amp;gt;.&amp;lt;project name&amp;gt; 格式的域名从集群内部访问。
-  VirtualIP：系统为服务分配一个虚拟 IP 地址供集群内部访问，同时也支持通过 &amp;lt;service name&amp;gt;.&amp;lt;project name&amp;gt;.</description>
+  VirtualIP：系统为服务分配一个虚拟 IP 地址供集群内部访问，同时也支持通过 &amp;lt;service name&amp;gt;.</description>
     </item>
     
     <item>
@@ -12631,7 +12611,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看约束模板详情。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; 约束模板。
   在约束模板列表中点击一个约束模板的名称打开其详情页面。
   在约束模板详情页面左侧的属性区域，查看约束模板的基本信息。
@@ -12652,7 +12632,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看约束模板详情。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; Constraint Templates。
   在约束模板列表中点击一个约束模板的名称打开其详情页面。
   在约束模板详情页面的属性区域，查看约束模板的基本信息。
@@ -12673,7 +12653,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看约束详情。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; 约束。
   在约束列表中点击一个约束的名称打开其详情页面。
   在约束详情页面左侧的属性区域，查看约束的基本信息。
@@ -12693,7 +12673,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看约束详情。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。
   在约束列表中点击一个约束的名称打开其详情页面。
   在约束详情页面的属性区域，查看约束的基本信息。
@@ -12713,7 +12693,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看网络策略详情。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   在网络策略列表中点击一个网络策略的名称打开其详情页面。
   在网络策略详情页面左侧的属性区域查看网络策略的资源属性。
@@ -12724,8 +12704,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
    创建时间
  网络策略的创建时间。
    创建者
- 创建网络策略的用户。
-        在网络策略详情页面右侧点击出站规则页签查看网络策略的出站规则。</description>
+ 创建网络策略的用户。</description>
     </item>
     
     <item>
@@ -12737,7 +12716,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看网络策略详情。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   在网络策略列表中点击一个网络策略的名称打开其详情页面。
   在网络策略详情页面的属性区域查看网络策略的资源属性。
@@ -12748,8 +12727,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
    创建时间
  网络策略的创建时间。
    创建者
- 创建网络策略的用户。
-        在网络策略详情页面点击出站规则页签查看网络策略的出站规则。</description>
+ 创建网络策略的用户。</description>
     </item>
     
     <item>
@@ -12965,7 +12943,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/06-configuration/02-configmaps/03-view-configmap-details/</guid>
       <description> 本节介绍如何查看配置字典详情。
  前提条件 您需要加入一个集群并在集群中具有项目资源查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 配置字典。
   在配置字典列表中点击一个配置字典的名称打开其详情页面。
   在配置字典详情页面的属性区域查看配置字典的资源属性。
@@ -13184,7 +13162,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description>本节介绍如何查看集群网关详情。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 网关设置。
   在页面右侧选择管理 &amp;gt; 查看详情打开网关详情页面。
   在网关详情页面的属性区域查看网关的资源属性。
@@ -13193,8 +13171,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
    创建时间
  网关的创建时间。
    更新时间
- 网关的更新时间
-   创建者</description>
+ 网关的更新时间</description>
     </item>
     
     <item>
@@ -13325,7 +13302,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/04-projects/03-view-project-details/</guid>
       <description>本节介绍如何查看项目详情。
  前提条件 您需要加入一个集群并在集群中具有项目查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在项目页面，点击用户项目或系统项目打开用户项目列表或系统项目列表。
   在项目列表中点击一个项目的名称打开其详情页面。
@@ -13340,8 +13317,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
  项目所属的企业空间。
    创建时间
  项目的创建时间。
-   创建者
- 创建项目的用户。</description>
+   创建者</description>
     </item>
     
     <item>
@@ -13352,7 +13328,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.2.0/07-cluster-management/04-projects/03-view-project-details/</guid>
       <description>本节介绍如何查看项目详情。
  前提条件 您需要加入一个集群并在集群中具有项目查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在项目页面，点击用户项目或系统项目打开用户项目列表或系统项目列表。
   在项目列表中点击一个项目的名称打开其详情页面。
@@ -13367,8 +13343,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
  项目所属的企业空间。
    创建时间
  项目的创建时间。
-   创建者
- 创建项目的用户。</description>
+   创建者</description>
     </item>
     
     <item>
@@ -13459,7 +13434,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
  前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
   已导入代码仓库。
-     操作步骤  以 project-regular 用户登录 KubeSphere制台并进入您的企业空间。
+     操作步骤  以 project-regular 用户登录 KubeSphere 控制台并进入您的企业空间。
   在左侧导航栏，选择 DevOps &amp;gt; 持续部署。
   在持续部署白名单页面，点击编辑白名单。
   在弹出的编辑白名单对话框，选择代码仓库、部署集群和项目，点击确定。
@@ -13667,7 +13642,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
  您可以编辑域名的描述。KubeSphere 不支持编辑已添加域名的名称和域名。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由工具。
   在需要操作的域名右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置域名的描述，然后点击确定。
@@ -13682,7 +13657,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/07-crds/03-edit-a-custom-resource/</guid>
       <description> 本节介绍如何编辑定制资源。
  前提条件 您需要加入一个集群并在集群中具有定制资源定义管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有定制资源定义管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有定制资源定义管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择定制资源定义。
   在定制资源定义列表中点击一个定制资源定义的名称打开其详情页面。
   在定制资源定义页签，在需要编辑的定制资源右侧点击，然后在下拉列表中选择编辑 YAML。
@@ -13701,7 +13676,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.2.0/07-cluster-management/07-crds/03-edit-a-custom-resource/</guid>
       <description> 本节介绍如何编辑定制资源。
  前提条件 您需要加入一个集群并在集群中具有定制资源定义管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有定制资源定义管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有定制资源定义管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择定制资源定义。
   在定制资源定义列表中点击一个定制资源定义的名称打开其详情页面。
   在定制资源定义页签，在需要编辑的定制资源右侧点击，然后在下拉列表中选择编辑 YAML。
@@ -13846,7 +13821,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <description> 本节介绍如何编辑工作负载模板的设置。
  工作负载模板创建完成后，您可以编辑模板的基本信息、容器组设置、存储设置和高级设置。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载模板。
   在工作负载模板右侧点击，然后在下拉列表中选择编辑模板。
   在编辑设置对话框，分别设置工作负载模板的基本信息、容器组设置、存储设置和高级设置，然后点击确定。
@@ -14276,7 +14251,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.1.3/07-cluster-management/03-nodes/03-prevent-and-allow-pod-scheduling/</guid>
       <description> 本节介绍如何阻止和允许容器组调度到节点。
  前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在需要操作的节点右侧点击，然后在下拉列表中选择停止调度。操作完成后节点状态将变为无法调度。
   在状态为无法调度的节点右侧点击，然后在下拉列表中选择启用调度可以允许容器组调度到该节点。
@@ -14292,7 +14267,7 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
       <guid>/v4.2.0/07-cluster-management/03-nodes/03-prevent-and-allow-pod-scheduling/</guid>
       <description> 本节介绍如何阻止和允许容器组调度到节点。
  前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在需要操作的节点右侧点击，然后在下拉列表中选择停止调度。操作完成后节点状态将变为无法调度。
   在状态为无法调度的节点右侧点击，然后在下拉列表中选择启用调度可以允许容器组调度到该节点。
@@ -14488,7 +14463,7 @@ tar -zxvf &amp;lt;package name&amp;gt;       注意     请确保操作目录有
  前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
   已有一个 GitLab 账户以及一个 Docker Hub 账户。
-     步骤 1：创建凭证  以 project-regular 用户登录 KubeSphere制台并进入您的企业空间。
+     步骤 1：创建凭证  以 project-regular 用户登录 KubeSphere 控制台并进入您的企业空间。
   在左侧导航栏选择 DevOps &amp;gt; 凭证。
   在页面左上角的下拉列表中选择一个 DevOps 项目。</description>
     </item>
@@ -14546,7 +14521,7 @@ tar -zxvf &amp;lt;package name&amp;gt;       注意     请确保操作目录有
       <description> 本节介绍如何使用节点的终端。
  您可以使用 KubeSphere 企业版提供的命令行终端对节点进行操作。
  前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在需要操作的节点右侧点击，然后在下拉列表中选择打开终端。
     说明     初次打开节点终端时，由于相关服务尚未启动，系统可能会提示缺少相关权限。如果遇到此情况，您可以稍后重试。
@@ -14562,7 +14537,7 @@ tar -zxvf &amp;lt;package name&amp;gt;       注意     请确保操作目录有
       <description> 本节介绍如何使用节点的终端。
  您可以使用 KubeSphere 提供的命令行终端对节点进行操作。
  前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在需要操作的节点右侧点击，然后在下拉列表中选择打开终端。
     说明     初次打开节点终端时，由于相关服务尚未启动，系统可能会提示缺少相关权限。如果遇到此情况，您可以稍后重试。
@@ -14629,7 +14604,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  前提条件   您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
      请确保系统已为持久卷声明创建持久卷。
   请确保后端存储系统支持卷克隆功能，并且持久卷声明对应的存储类已启用卷克隆功能。有关更多信息，请参阅启用和禁用卷操作。
-     操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明列表中点击一个持久卷声明的名称打开其详情页面。
   在持久卷声明详情页面，点击操作 &amp;gt; 克隆。
@@ -14669,7 +14644,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  前提条件    您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
      请确保系统已为持久卷声明创建持久卷。
   克隆操作最终由后端存储系统执行，请确保后端存储系统具备卷克隆能力，并且持久卷声明对应的存储类已启用卷克隆功能。有关更多信息，请参阅启用和禁用卷操作。
-     操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明列表中点击一个持久卷声明的名称打开其详情页面。
   在持久卷声明详情页面，点击操作 &amp;gt; 克隆。
@@ -14867,7 +14842,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何删除域名，以便在创建或编辑应用路由时停止对域名进行重用校验。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 应用路由工具扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由工具。
   在需要删除的域名右侧点击，然后在下拉列表中选择删除。
   在删除域名对话框，输入域名的名称，然后点击确定。
@@ -14887,7 +14862,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何删除定制资源。
      警告     删除自定义资源可能会导致相关业务中断，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有定制资源定义管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有定制资源定义管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有定制资源定义管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择定制资源定义。
   在定制资源定义列表中点击一个定制资源定义的名称打开其详情页面。
   在定制资源定义页签，在需要删除的定制资源右侧点击，然后在下拉列表中选择删除。
@@ -14904,7 +14879,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何删除定制资源。
      警告     删除自定义资源可能会导致相关业务中断，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有定制资源定义管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有定制资源定义管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有定制资源定义管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择定制资源定义。
   在定制资源定义列表中点击一个定制资源定义的名称打开其详情页面。
   在定制资源定义页签，在需要删除的定制资源右侧点击，然后在下拉列表中选择删除。
@@ -15015,7 +14990,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  一个 IP 池可以分配给多个项目，一个项目可以绑定多个 IP 池。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在容器组 IP 池列表中点击一个容器组 IP 池的名称打开其详情页面。
   在项目页签下点击新增项目，在下拉列表中选择一个项目，然后点击确定。</description>
@@ -15033,7 +15008,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  一个 IP 池可以分配给多个项目，一个项目可以绑定多个 IP 池。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在容器组 IP 池列表中点击一个容器组 IP 池的名称打开其详情页面。
   在项目页签下点击新增项目，在下拉列表中选择一个项目，然后点击确定。</description>
@@ -15062,7 +15037,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看 Kubernetes API 服务器状态。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群状态。
   在集群状态页面，点击 API Server 监控页签查看 API 服务器的运行状态。
   API Server 监控页签提供以下信息：
@@ -15081,7 +15056,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何查看 Kubernetes API 服务器状态。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面，点击 API Server 监控页签查看 API 服务器的运行状态。
   API Server 监控页签提供以下信息：
@@ -15444,7 +15419,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何移除集群成员。
      说明     从集群中移除用户后，用户将失去集群角色提供的权限。
     前提条件 您需要加入一个集群并在集群中具有成员管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有成员管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有成员管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群成员。
   在需要移除的集群成员右侧点击，然后选择移除。
   在移除成员对话框输出集群成员的用户名，然后点击确定。
@@ -15461,7 +15436,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何移除集群成员。
      说明     从集群中移除用户后，用户将失去集群角色提供的权限。
     前提条件 您需要加入一个集群并在集群中具有成员管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有成员管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有成员管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 集群成员。
   在需要移除的集群成员右侧点击，然后选择移除。
   在移除成员对话框输出集群成员的用户名，然后点击确定。
@@ -15532,7 +15507,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑任务信息。
  您可以编辑任务的别名和描述。KubeSphere 不支持编辑已创建任务的名称。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务。
   在任务页面，点击任务或定时任务打开任务列表。
   在需要操作的任务右侧点击，然后在下拉列表中选择编辑信息。
@@ -15574,7 +15549,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑任务信息。
  您可以编辑任务的别名和描述。KubeSphere 不支持编辑已创建任务的名称。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务或定时任务。
   在需要操作的任务右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置任务的别名和描述，然后点击确定。
@@ -15700,7 +15675,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑保密字典信息。
  您可以编辑保密字典的别名和描述。KubeSphere 不支持编辑保密字典的名称。
  前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 保密字典。
   在需要操作的保密字典右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置保密字典的别名和描述，然后点击确定。
@@ -15824,7 +15799,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  您可以编辑卷快照类的别名和描述。KubeSphere 企业版不支持编辑卷快照类的名称。
  前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照类管理权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   在需要操作的卷快照类右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置卷快照类的别名和描述，然后点击确定。
@@ -15845,7 +15820,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  您可以编辑卷快照类的别名和描述。KubeSphere 不支持编辑卷快照类的名称。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照类管理权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   在需要操作的卷快照类右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置卷快照类的别名和描述，然后点击确定。
@@ -15865,7 +15840,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑工作负载信息。
  您可以编辑工作负载的别名和描述。KubeSphere 不支持编辑已创建工作负载的名称。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   在需要操作的工作负载右侧点击，然后在下拉列表中选择编辑信息。
@@ -15929,7 +15904,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑工作负载信息。
  您可以编辑工作负载的别名和描述。KubeSphere 不支持编辑已创建工作负载的名称。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   在需要操作的工作负载右侧点击，然后在下拉列表中选择编辑信息。
@@ -16316,7 +16291,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何编辑日志接收器设置。
  前提条件    您需要加入一个集群并在集群中具有集群设置管理权限。有关更多信息，请参阅集群成员和集群角色。
      已添加一个日志接收器。
-     操作步骤  以具有集群设置管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群设置管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 日志接收器。
   在日志接收器页面，点击容器日志、资源事件、审计日志或通知历史，然后在列表中点击一个日志接收器的名称打开其详情页面。
   在日志接收器详情页面左上角点击编辑。
@@ -16337,7 +16312,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何编辑日志接收器设置。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      已添加一个日志接收器。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择日志 &amp;gt; 日志接收器。
   在日志接收器页面，点击容器日志、资源事件、审计日志或通知历史，然后在列表中点击一个日志接收器的名称打开其详情页面。
   在日志接收器详情页面点击操作 &amp;gt; 编辑。
@@ -16357,7 +16332,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑任务信息。
  您可以编辑任务的别名和描述。KubeSphere 不支持编辑已创建任务的名称。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要操作的服务右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置服务的别名和描述，然后点击确定。
@@ -16398,7 +16373,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑任务信息。
  您可以编辑任务的别名和描述。KubeSphere 不支持编辑已创建任务的名称。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要操作的服务右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置服务的别名和描述，然后点击确定。
@@ -16439,7 +16414,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑服务帐户的信息。
  您可以编辑服务帐户的别名和描述。KubeSphere 不支持编辑服务帐户的名称。
  前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 服务帐户。
   在需要操作的服务帐户右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，编辑服务帐户的别名和描述，然后点击确定。
@@ -16567,7 +16542,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑约束模板配置。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; 约束模板。
   在需要编辑的约束模板右侧点击，然后在下拉列表中选择编辑 YAML。
   在编辑 YAML对话框，修改相关配置，然后点击确定。
@@ -16583,7 +16558,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑约束模板配置。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; Constraint Templates。
   在需要编辑的约束模板右侧点击，然后在下拉列表中选择编辑 YAML。
   在编辑 YAML对话框，修改相关配置，然后点击确定。
@@ -16599,7 +16574,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑约束的配置。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; 约束。
   在需要编辑的约束右侧点击，然后在下拉列表中选择编辑 YAML。
   在编辑 YAML对话框，修改相关配置，然后点击确定。
@@ -16615,7 +16590,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑约束的配置。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。
   在需要编辑的约束右侧点击，然后在下拉列表中选择编辑 YAML。
   在编辑 YAML对话框，修改相关配置，然后点击确定。
@@ -16632,7 +16607,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  您可以编辑网络策略的别名和描述。KubeSphere 企业版不支持编辑已创建网络策略的名称。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   在需要操作的网络策略右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置网络策略的别名和描述，然后点击确定。
@@ -16653,7 +16628,7 @@ KubeSphere 平台提供以下预置企业空间角色：
  您可以编辑网络策略的别名和描述。KubeSphere 不支持编辑已创建网络策略的名称。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   在需要操作的网络策略右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置网络策略的别名和描述，然后点击确定。
@@ -16849,7 +16824,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑配置字典信息。
  您可以编辑配置字典的别名和描述。KubeSphere 不支持编辑配置字典的名称。
  前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 配置字典。
   在需要操作的配置字典右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置配置字典的别名和描述，然后点击确定。
@@ -17014,7 +16989,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description>本节介绍如何编辑集群网关设置。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 网关设置。
   在页面右侧选择管理 &amp;gt; 编辑。
   在弹出的对话框，修改网关的参数，然后点击确定。
@@ -17078,7 +17053,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑项目信息。
  您可以编辑项目的别名和描述。KubeSphere 不支持编辑已创建项目的名称。
  前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在需要操作的项目右侧点击，然后在下拉列表中选择编辑。
   在编辑信息对话框，设置项目的别名和描述，然后点击确定。
@@ -17098,7 +17073,7 @@ KubeSphere 平台提供以下预置企业空间角色：
       <description> 本节介绍如何编辑项目信息。
  您可以编辑项目的别名和描述。KubeSphere 不支持编辑已创建项目的名称。
  前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在需要操作的项目右侧点击，然后在下拉列表中选择编辑。
   在编辑信息对话框，设置项目的别名和描述，然后点击确定。
@@ -17366,7 +17341,7 @@ Webhook URL: 企业微信群机器人的 webhook 地址。
       <guid>/v4.1.3/07-cluster-management/08-storage/02-storage-classes/04-set-a-default-storage-class/</guid>
       <description> 本节介绍如何设置默认存储类。设置默认存储类后，如果没有特殊指定，系统将使用默认存储类创建持久卷声明。每个 KubeSphere 企业版集群中仅允许设置一个默认存储类。
  前提条件 您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在存储类列表中点击一个存储类的名称打开其详情页面。
   在存储类详情页面的左上角，选择更多操作 &amp;gt; 设为默认存储类。
@@ -17382,7 +17357,7 @@ Webhook URL: 企业微信群机器人的 webhook 地址。
       <guid>/v4.2.0/07-cluster-management/08-storage/02-storage-classes/04-set-a-default-storage-class/</guid>
       <description> 本节介绍如何设置默认存储类。设置默认存储类后，如果没有特殊指定，系统将使用默认存储类创建持久卷声明。每个 KubeSphere 集群中仅允许设置一个默认存储类。
  前提条件 您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在存储类列表中点击一个存储类的名称打开其详情页面。
   在存储类详情页面，点击操作 &amp;gt; 设为默认存储类。
@@ -17399,7 +17374,7 @@ Webhook URL: 企业微信群机器人的 webhook 地址。
       <description> 本节介绍如何访问容器终端。
      说明     KubeSphere 仅支持访问正在运行中容器的终端。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 容器组。
   在容器组列表中点击一个容器组的名称打开其详情页面。
   在资源状态页签的容器区域，在容器名称右侧点击打开容器终端。您可以使用容器终端在容器内部执行命令。
@@ -17433,7 +17408,7 @@ Webhook URL: 企业微信群机器人的 webhook 地址。
       <description> 本节介绍如何访问容器终端。
      说明     KubeSphere 仅支持访问正在运行中容器的终端。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 容器组。
   在容器组列表中点击一个容器组的名称打开其详情页面。
   在资源状态页签的容器区域，在容器名称右侧点击打开容器终端。您可以使用容器终端在容器内部执行命令。
@@ -17474,8 +17449,7 @@ Webhook URL: 企业微信群机器人的 webhook 地址。
      KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件，然后启用集群网关或项目网关。有关更多信息，请参阅 KubeSphere 网关。
      客户端必须通过本地 hosts 文件或 DNS 服务将域名解析为网关 IP 地址。
   客户端必须与网关 IP 地址网络连通。有关更多信息，请联系您的网络环境管理员。
-     操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
-  在左侧导航栏选择应用负载 &amp;gt; 应用路由。</description>
+     操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。</description>
     </item>
     
     <item>
@@ -17511,7 +17485,7 @@ Webhook URL: 企业微信群机器人的 webhook 地址。
      KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件，然后启用集群网关或项目网关。有关更多信息，请参阅 KubeSphere 网关。
      客户端必须通过本地 hosts 文件或 DNS 服务将域名解析为网关 IP 地址。
   客户端必须与网关 IP 地址网络连通。有关更多信息，请联系您的网络环境管理员。
-     操作步骤  以具有应用负载查看权限的用户登录KubeSphere Web 控制台并进入您的集群。</description>
+     操作步骤  以具有应用负载查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。</description>
     </item>
     
     <item>
@@ -17786,7 +17760,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description> 本节介绍如何修改服务帐户角色。
  您可以通过为服务帐户分配角色来控制服务帐户的权限，使服务帐户可以访问特定的资源和进行特定的操作。
  前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 服务帐户。
   在需要操作的服务帐户右侧点击，然后在下拉列表中选择修改角色。
   在修改角色对话框，从下拉列表中选择一个项目角色，然后点击确定。
@@ -17884,12 +17858,12 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description>本节介绍如何删除任务。
      警告     此操作将删除任务及其管理的所有容器组，如果任务正在运行，运行中的业务将中断，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个任务  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个任务  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务。
   在任务页面，点击任务或定时任务打开任务列表。
   在需要删除的任务右侧点击，然后在下拉列表中选择删除。
   在删除任务对话框，输入任务的名称，然后点击确定。
-     批量删除任务  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除任务  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务。
   在任务页面，点击任务或定时任务打开任务列表。
   选择需要删除的任务左侧的复选框，然后在任务列表上方点击删除。
@@ -17944,11 +17918,11 @@ vi collect-node-info.sh   粘贴以下内容并保存：
      警告     卷快照类删除后，基于卷快照类创建的卷快照和卷快照内容不会被删除，但用户将无法再通过该卷快照类将快照数据保存到后端存储系统。
     前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照类管理权限。有关更多信息，请参阅集群成员和集群角色。
-     删除单个卷快照类  以具有卷快照类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     删除单个卷快照类  以具有卷快照类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   在需要删除的卷快照类右侧点击，然后在下拉列表中选择删除。
   在删除卷快照类对话框，输入卷快照类的名称，然后点击确定。
-     批量删除卷快照类  以具有卷快照类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除卷快照类  以具有卷快照类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   选择需要删除的卷快照类左侧的复选框，然后在列表上方点击删除。</description>
     </item>
@@ -17963,11 +17937,11 @@ vi collect-node-info.sh   粘贴以下内容并保存：
      警告     卷快照类删除后，基于卷快照类创建的卷快照和卷快照内容不会被删除，但用户将无法再通过该卷快照类将快照数据保存到后端存储系统。
     前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照类管理权限。有关更多信息，请参阅集群成员和集群角色。
-     删除单个卷快照类  以具有卷快照类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     删除单个卷快照类  以具有卷快照类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   在需要删除的卷快照类右侧点击，然后在下拉列表中选择删除。
   在删除卷快照类对话框，输入卷快照类的名称，然后点击确定。
-     批量删除卷快照类  以具有卷快照类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除卷快照类  以具有卷快照类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照类。
   选择需要删除的卷快照类左侧的复选框，然后在列表上方点击删除。</description>
     </item>
@@ -17983,12 +17957,11 @@ vi collect-node-info.sh   粘贴以下内容并保存：
   如果您直接删除容器组，取决于容器组管理资源的策略，系统可能会重新创建容器组。
           警告     删除正在运行的容器组可能会导致业务中断，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个容器组  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个容器组  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 容器组。
   在需要删除的容器组右侧点击，然后在下拉列表中选择删除。
   在删除容器组对话框，输入容器组的名称，然后点击确定。
-     批量删除容器组  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
-  在左侧导航栏选择应用负载 &amp;gt; 容器组。</description>
+     批量删除容器组  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。</description>
     </item>
     
     <item>
@@ -18020,12 +17993,11 @@ vi collect-node-info.sh   粘贴以下内容并保存：
   如果您直接删除容器组，取决于容器组管理资源的策略，系统可能会重新创建容器组。
           警告     删除正在运行的容器组可能会导致业务中断，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个容器组  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个容器组  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 容器组。
   在需要删除的容器组右侧点击，然后在下拉列表中选择删除。
   在删除容器组对话框，输入容器组的名称，然后点击确定。
-     批量删除容器组  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
-  在左侧导航栏选择应用负载 &amp;gt; 容器组。</description>
+     批量删除容器组  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。</description>
     </item>
     
     <item>
@@ -18404,7 +18376,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
      说明     本节介绍的步骤仅控制是否允许用户在 KubeSphere 企业版 Web 控制台使用相关操作，持久卷是否实际支持这些操作取决于后端存储系统。
     前提条件   您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
      如需启用某个功能，请确保后端存储系统实际支持该功能。
-     操作步骤  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在存储类列表中点击一个存储类的名称打开其详情页面。
   在存储类详情页面的左上角，选择更多操作 &amp;gt; 设置卷操作。
@@ -18423,7 +18395,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
      注意     本节介绍的步骤仅控制是否允许用户在 KubeSphere Web 控制台使用相关操作，持久卷声明是否实际支持这些操作取决于后端存储系统。
     前提条件    您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
      如需启用某个功能，请确保后端存储系统实际支持该功能。
-     操作步骤  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在存储类列表中点击一个存储类的名称打开其详情页面。
   在存储类详情页面，点击操作 &amp;gt; 设置卷操作。
@@ -18440,7 +18412,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description> 本节介绍如何启用和禁用日志接收器。
  前提条件    您需要加入一个集群并在集群中具有集群设置管理权限。有关更多信息，请参阅集群成员和集群角色。
      已添加一个日志接收器。
-     操作步骤  以具有集群设置管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群设置管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 日志接收器。
   在日志接收器页面，点击容器日志、资源事件、审计日志或通知历史，然后在列表中点击一个日志接收器的名称打开其详情页面。
   在日志接收器详情页面左上角点击更多操作 &amp;gt; 更改状态。
@@ -18457,7 +18429,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description> 本节介绍如何启用和禁用日志接收器。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      已添加一个日志接收器。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择日志 &amp;gt; 日志接收器。
   在日志接收器页面，点击容器日志、资源事件、审计日志或通知历史，然后在列表中点击一个日志接收器的名称打开其详情页面。
   在日志接收器详情页面点击操作 &amp;gt; 更改状态。
@@ -18514,7 +18486,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
  前提条件   您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
      请确保系统已为持久卷声明创建持久卷。
   请确保后端存储系统支持卷扩展功能，并已在持久卷声明对应的存储类上启用卷扩展功能。有关更多信息，请参阅启用和禁用卷操作。
-     操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明列表中点击一个持久卷声明的名称打开其详情页面。
   在持久卷声明详情页面，点击操作 &amp;gt; 扩展。
@@ -18533,7 +18505,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
  前提条件    您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
      请确保系统已为持久卷声明创建持久卷。
   扩展操作最终由后端存储系统执行，请确保后端存储系统具备卷扩展能力，并且持久卷声明对应的存储类已启用卷扩展功能。有关更多信息，请参阅启用和禁用卷操作。
-     操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明列表中点击一个持久卷声明的名称打开其详情页面。
   在持久卷声明详情页面，点击操作 &amp;gt; 扩展。
@@ -18682,7 +18654,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description>本节介绍如何查看调度器状态。调度器根据容器组的资源需求、节点可用资源和其他约束条件决定容器组运行在哪些节点上。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群状态。
   在集群状态页面，点击调度器监控页签查看调度器的运行状态。
   调度器监控页签提供以下信息：
@@ -18704,7 +18676,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description>本节介绍如何查看调度器状态。调度器根据容器组的资源需求、节点可用资源和其他约束条件决定容器组运行在哪些节点上。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面，点击调度器监控页签查看调度器的运行状态。
   调度器监控页签提供以下信息：
@@ -18841,7 +18813,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
      警告     网关禁用后，客户端将无法访问由网关反向代理的服务，相关业务可能会中断，请谨慎执行此操作。
     前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
       您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 网关设置。
   在页面右侧选择管理 &amp;gt; 禁用。
   在弹出的对话框点击确定。
@@ -18977,7 +18949,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description>本节介绍如何编辑保密字典的设置。
  您可以编辑密码字典的数据。KubeSphere 不支持编辑保密字典的类型。
  前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 保密字典。
   在需要编辑的保密字典右侧点击，然后在下拉列表中选择编辑设置。
   在编辑设置对话框，根据保密字典的类型设置保密字典的数据，然后点击确定。
@@ -19201,7 +19173,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
  您可以编辑容器组 IP 池的别名和描述。KubeSphere 企业版不支持编辑容器组 IP 池的名称。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置容器组 IP 池的别名和描述，然后点击确定。
@@ -19219,7 +19191,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
  您可以编辑容器组 IP 池的别名和描述。KubeSphere 不支持编辑容器组 IP 池的名称。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置容器组 IP 池的别名和描述，然后点击确定。
@@ -19285,7 +19257,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description> 本节介绍如何编辑应用路由信息。
  您可以编辑应用路由的别名和描述。KubeSphere 不支持编辑已创建应用路由的名称。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在需要操作的应用路由右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置应用路由的别名和描述，然后点击确定。
@@ -19325,7 +19297,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description> 本节介绍如何编辑应用路由信息。
  您可以编辑应用路由的别名和描述。KubeSphere 不支持编辑已创建应用路由的名称。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在需要操作的应用路由右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置应用路由的别名和描述，然后点击确定。
@@ -19459,7 +19431,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/04-services/05-edit-service-settings/</guid>
       <description>本节介绍如何编辑任务设置。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要操作的服务右侧点击，然后在下拉列表中选择编辑服务。
   在编辑服务对话框修改服务的设置，然后点击确定。
@@ -19500,7 +19472,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/05-services/05-edit-service-settings/</guid>
       <description>本节介绍如何编辑任务设置。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要操作的服务右侧点击，然后在下拉列表中选择编辑服务。
   在编辑服务对话框修改服务的设置，然后点击确定。
@@ -19542,7 +19514,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description> 本节介绍如何编辑网络策略的配置。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   在需要操作的网络策略右侧点击，然后在下拉列表中选择编辑 YAML。
   在编辑 YAML对话框，修改网络策略的配置，然后点击确定。
@@ -19559,7 +19531,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description> 本节介绍如何编辑网络策略的配置。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   在需要操作的网络策略右侧点击，然后在下拉列表中选择编辑 YAML。
   在编辑 YAML对话框，修改网络策略的配置，然后点击确定。
@@ -19578,7 +19550,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
  一个污点由键、值和效果三部分组成。容器组容忍度必须与污点的键、值和效果匹配，容器组才能不受污点影响。
      说明     KubeSphere 企业版 Web 控制台目前暂不支持编辑容器组容忍度，因而默认情况下节点污点对所有容器组生效。
     前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   选择需要操作的节点左侧的复选框，然后在节点列表上方点击编辑污点。
   在编辑污点对话框，设置污点的键、值和效果，然后点击确定。
@@ -19601,7 +19573,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
  一个污点由键、值和效果三部分组成。容器组容忍度必须与污点的键、值和效果匹配，容器组才能不受污点影响。
      说明     KubeSphere Web 控制台目前暂不支持编辑容器组容忍度，因而默认情况下节点污点对所有容器组生效。
     前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   选择需要操作的节点左侧的复选框，然后在节点列表上方点击编辑污点。
   在编辑污点对话框，设置污点的键、值和效果，然后点击确定。
@@ -19610,8 +19582,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
  缺少与污点匹配的容忍度的容器组将被阻止调度到节点，节点上原本运行的容器组不受影响。
    尽可能阻止调度
  缺少与污点匹配的容忍度的容器组将被尽可能阻止调度到节点，节点上原本运行的容器组不受影响。
-   阻止调度并驱逐现有容器组
- 缺少与污点匹配的容忍度的容器组将被阻止调度到节点，节点上原本运行的容器组如果缺少与污点匹配的容忍度会被立即驱逐。</description>
+   阻止调度并驱逐现有容器组</description>
     </item>
     
     <item>
@@ -19668,7 +19639,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <guid>/v4.1.3/07-cluster-management/06-configuration/02-configmaps/05-edit-configmap-settings/</guid>
       <description> 本节介绍如何编辑配置字典数据设置。
  前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 配置字典。
   在需要编辑的配置字典右侧点击，然后在下拉列表中选择编辑设置。
   在编辑设置对话框，设置配置字典的键值对数据，然后点击确定。
@@ -19814,7 +19785,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description> 本节介绍如何编辑项目注解。
  项目注解是为项目添加额外的元数据或描述性信息的键值对。
  前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在需要操作的项目右侧点击，然后在下拉列表中选择编辑注解。
   在编辑注解对话框，设置注解键值对，然后点击确定。
@@ -19832,7 +19803,7 @@ vi collect-node-info.sh   粘贴以下内容并保存：
       <description> 本节介绍如何编辑项目注解。
  项目注解是为项目添加额外的元数据或描述性信息的键值对。
  前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在需要操作的项目右侧点击，然后在下拉列表中选择编辑注解。
   在编辑注解对话框，设置注解键值对，然后点击确定。
@@ -20198,7 +20169,7 @@ KubeSphere 发送的通知以键值对的形式呈现。当此处填写的键和
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/07-templates/05-create-workload-by-templates/</guid>
       <description> 本节介绍如何通过模板创建工作负载。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载模板。
   在工作负载模板右侧点击，然后在下拉列表中选择通过模板创建。
   在通过模板创建对话框，分别设置工作负载的基本信息、容器组设置、存储设置和高级设置，然后点击确定。
@@ -20323,7 +20294,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何重新创建工作负载。
      警告     此操作将删除并重新创建工作负载中的所有容器组。新容器组创建完成前，工作负载中的业务将中断。请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   在需要操作的工作负载右侧点击，然后在下拉列表中选择重新创建。
@@ -20550,7 +20521,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
  前提条件   KubeSphere 平台需要安装并启用 DevOps 扩展组件。
   已创建一个企业空间、一个 DevOps 项目和一个用户（例如 project-regular），并已邀请该用户至 DevOps 项目且授予 operator 角色。请参阅邀请用户加入 DevOps 项目。
   已通过远程代码仓库创建一个基于 Jenkinsfile 的流水线。有关更多信息，请参阅使用 Jenkinsfile 创建流水线。
-     配置 Webhook 获取 webhook URL  以 project-regular 用户登录 KubeSphere制台并进入您的企业空间。
+     配置 Webhook 获取 webhook URL  以 project-regular 用户登录 KubeSphere 控制台并进入您的企业空间。
   在左侧导航栏选择 DevOps &amp;gt; 流水线。
   在页面左上角的下拉列表中选择一个 DevOps 项目。
   在流水线页面，点击一个流水线（例如 jenkins-in-scm）以查看其详情页面。
@@ -20711,19 +20682,18 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.1.3/07-cluster-management/06-configuration/01-secrets/06-delete-secrets/</guid>
-      <description> 本节介绍如何删除保密字典。
+      <description>本节介绍如何删除保密字典。
      警告     保密字典删除后不能恢复，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个保密字典  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个保密字典  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 保密字典。
   在需要删除的保密字典右侧点击，然后在下拉列表中选择删除。
   在删除保密字典对话框，输入保密字典的名称，然后点击确定。
-     批量删除保密字典  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除保密字典  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 保密字典。
   选择需要删除的保密字典左侧的复选框，然后在保密字典列表上方点击删除。
   在批量删除保密字典对话框，输入保密字典的名称，然后点击确定。
-    说明     请使用半角逗号（,）和空格分隔多个名称。
-           </description>
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
     </item>
     
     <item>
@@ -20907,7 +20877,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何删除日志接收器。
  前提条件    您需要加入一个集群并在集群中具有集群设置管理权限。有关更多信息，请参阅集群成员和集群角色。
      已添加一个日志接收器。
-     操作步骤  以具有集群设置管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群设置管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择集群设置 &amp;gt; 日志接收器。
   在日志接收器页面，点击容器日志、资源事件、审计日志或通知历史，然后在列表中点击一个日志接收器的名称打开其详情页面。
   在日志接收器详情页面左上角点击更多操作 &amp;gt; 删除。
@@ -20924,7 +20894,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何删除日志接收器。
  前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      已添加一个日志接收器。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择日志 &amp;gt; 日志接收器。
   在日志接收器页面，点击容器日志、资源事件、审计日志或通知历史，然后在列表中点击一个日志接收器的名称打开其详情页面。
   在日志接收器详情页面点击操作 &amp;gt; 删除。
@@ -20941,11 +20911,11 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description>本节介绍如何删除服务帐户。
      警告     服务帐户删除后，使用服务帐户的应用程序将不能访问 KubeSphere 集群，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个服务帐户  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个服务帐户  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 服务帐户。
   在需要删除的服务帐户右侧点击，然后在下拉列表中选择删除。
   在删除服务帐户对话框，输入服务帐户的名称，然后点击确定。
-     批量删除服务帐户  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除服务帐户  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 服务帐户。
   选择需要删除的服务帐户左侧的复选框，然后在服务帐户列表上方点击删除。
   在批量删除服务帐户对话框，输入服务帐户的名称，然后点击确定。
@@ -21024,11 +20994,11 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
      说明     网络策略删除后无法恢复，请谨慎执行此操作。
     前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     删除单个网络策略  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     删除单个网络策略  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   在需要删除的网络策略右侧点击，然后在下拉列表中选择删除。
   在删除网络策略对话框，输入网络策略的名称，然后点击确定。
-     批量删除网络策略  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除网络策略  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   选择需要删除的网络策略左侧的复选框，然后在网络策略列表上方点击删除。</description>
     </item>
@@ -21043,11 +21013,11 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
      说明     网络策略删除后无法恢复，请谨慎执行此操作。
     前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     删除单个网络策略  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     删除单个网络策略  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   在需要删除的网络策略右侧点击，然后在下拉列表中选择删除。
   在删除网络策略对话框，输入网络策略的名称，然后点击确定。
-     批量删除网络策略  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除网络策略  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 网络策略。
   选择需要删除的网络策略左侧的复选框，然后在网络策略列表上方点击删除。</description>
     </item>
@@ -21099,11 +21069,11 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       
       <guid>/v4.1.3/07-cluster-management/06-configuration/02-configmaps/06-delete-configmaps/</guid>
       <description> 前提条件 您需要加入一个集群并在集群中具有项目资源管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个配置字典  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个配置字典  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 配置字典。
   在需要删除的配置字典右侧点击，然后在下拉列表中选择删除。
   在删除配置字典对话框，输入配置字典的名称，然后点击确定。
-     批量删除配置字典  以具有项目资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除配置字典  以具有项目资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择配置 &amp;gt; 配置字典。
   选择需要删除的配置字典左侧的复选框，然后在配置字典列表上方点击删除。
   在批量删除配置字典对话框，输入配置字典的名称，然后点击确定。
@@ -21444,7 +21414,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description>本节介绍如何查看卷快照内容列表。
  前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容查看权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照内容查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照内容查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容打开卷快照内容列表。
   卷快照列表提供以下信息：
@@ -21466,7 +21436,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description>本节介绍如何查看卷快照内容列表。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容查看权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照内容查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照内容查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容打开卷快照内容列表。
   卷快照列表提供以下信息：
@@ -21507,7 +21477,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何按照特定资源的用量对节点进行排序。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群状态。
   在集群状态页面，点击资源用量排行页签查看各节点的资源使用情况。
   在左上角点击下拉列表可选择按照 CPU 用量、CPU 平均负载、内存用量、磁盘用量、Inode 用量或容器组用量对节点进行排序。
@@ -21525,7 +21495,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何按照特定资源的用量对节点进行排序。
  前提条件    您需要加入一个集群并在集群中具有监控查看权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 WizTelemetry 监控扩展组件。
-     操作步骤  以具有监控查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有监控查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择监控告警 &amp;gt; 集群监控。
   在集群监控页面，点击资源用量排行页签查看各节点的资源使用情况。
   在左上角点击下拉列表可选择按照 CPU 用量、CPU 平均负载、内存用量、磁盘用量、Inode 用量或容器组用量对节点进行排序。
@@ -21632,7 +21602,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
  Overlay 模式可以实现容器的跨主机互相通信，而无需对宿主机的物理网络进行改动。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择编辑 Overlay 模式。
   在编辑 Overlay 模式对话框，选择 IPIP 模式或 VXLAN 模式，然后点击确定。
@@ -21650,7 +21620,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
  Overlay 模式可以实现容器的跨主机互相通信，而无需对宿主机的物理网络进行改动。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择编辑 Overlay 模式。
   在编辑 Overlay 模式对话框，选择 IPIP 模式或 VXLAN 模式，然后点击确定。
@@ -21667,7 +21637,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何编辑存储类的别名和描述。
  您可以编辑存储类的别名和描述。KubeSphere 企业版不支持编辑存储类的名称。
  前提条件 您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在需要操作的存储类右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置存储类的别名和描述，然后点击确定。
@@ -21687,7 +21657,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何编辑存储类的别名和描述。
  您可以编辑存储类的别名和描述。KubeSphere 不支持编辑存储类的名称。
  前提条件 您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在需要操作的存储类右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置存储类的别名和描述，然后点击确定。
@@ -21786,7 +21756,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description>本节介绍如何编辑服务外部访问设置。
      说明     此操作仅支持内部访问模式为 VirtualIP 的服务，不支持内部访问模式为 Headless 或 ExternalName 的服务。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要操作的服务右侧点击，然后在下拉列表中选择编辑外部访问。
   在编辑外部访问对话框，设置服务的外部访问模式，然后点击确定。
@@ -21828,7 +21798,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description>本节介绍如何编辑服务外部访问设置。
      说明     此操作仅支持内部访问模式为 VirtualIP 的服务，不支持内部访问模式为 Headless 或 ExternalName 的服务。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要操作的服务右侧点击，然后在下拉列表中选择编辑外部访问。
   在编辑外部访问对话框，设置服务的外部访问模式，然后点击确定。
@@ -22010,7 +21980,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何编辑节点标签。
  节点标签是用户在节点上设置的键值对，可用于选择节点。例如，在创建工作负载时，您可以指定容器组调度到具有特定标签的节点上。
  前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在节点列表中，点击需要操作的节点的名称打开节点详情页面。
   在节点详情页面左上角选择更多操作 &amp;gt; 编辑标签。
@@ -22028,7 +21998,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何编辑节点标签。
  节点标签是用户在节点上设置的键值对，可用于选择节点。例如，在创建工作负载时，您可以指定容器组调度到具有特定标签的节点上。
  前提条件 您需要加入一个集群并在集群中具有节点管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有节点管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有节点管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
   在节点列表中，点击需要操作的节点的名称打开节点详情页面。
   在节点详情页面，点击操作 &amp;gt; 编辑标签。
@@ -22045,7 +22015,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/05-routes/06-edit-routing-rules/</guid>
       <description>本节介绍如何编辑路由规则。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在需要操作的应用路由右侧点击，然后在下拉列表中选择编辑路由规则。
   在编辑路由规则对话框，设置路由规则，然后点击确定。
@@ -22091,7 +22061,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/06-routes/06-edit-routing-rules/</guid>
       <description>本节介绍如何编辑路由规则。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在需要操作的应用路由右侧点击，然后在下拉列表中选择编辑路由规则。
   在编辑路由规则对话框，设置路由规则，然后点击确定。
@@ -22143,7 +22113,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
   存储资源配额：可以对项目下的存储资源总量进行限制，包括存储资源总量和存储类关联资源。
   应用资源配额：项目中可创建的容器组、部署、有状态副本集、守护进程集、任务、定时任务、持久卷声明、服务、应用路由、保密字典、配置字典的数量上限。
    前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在项目列表中点击一个项目的名称打开其详情页面。
   在项目详情页面左上角选择更多操作 &amp;gt; 编辑项目配额。
@@ -22166,7 +22136,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
   存储资源配额：可以对项目下的存储资源总量进行限制，包括存储资源总量和存储类关联资源。
   应用资源配额：项目中可创建的容器组、部署、有状态副本集、守护进程集、任务、定时任务、持久卷声明、服务、应用路由、保密字典、配置字典的数量上限。
    前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在项目列表中点击一个项目的名称打开其详情页面。
   在项目详情页面，点击操作 &amp;gt; 编辑项目配额。
@@ -22283,7 +22253,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/01-workloads/06-adjust-the-number-of-pod-replicas/</guid>
       <description> 本节介绍如何调整工作负载的容器组副本数量。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集，然后在列表中点击一个工作负载的名称打开其详情页面。
   在工作负载详情页面，点击或调整容器组副本的数量，然后在右上角的调整副本数量对话框点击确定。
@@ -22315,7 +22285,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/01-workloads/06-adjust-the-number-of-pod-replicas/</guid>
       <description> 本节介绍如何调整工作负载的容器组副本数量。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集，然后在列表中点击一个工作负载的名称打开其详情页面。
   在工作负载详情页面，点击或调整容器组副本的数量，然后在右上角的调整副本数量对话框点击确定。
@@ -22389,7 +22359,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description>KubeSphere 提供 Source-to-Image (S2I) 和 Binary-to-Image (B2I) 功能，以自动化构建、推送镜像和部署应用程序。您可以配置 S2I 和 B2I Webhook，当代码仓库发生特定事件时，自动触发镜像构建器。
  本教程演示如何配置 S2I 和 B2I webhooks。
  准备工作 已创建一个 S2I 镜像构建器和 B2I 镜像构建器。有关更多信息，请参阅使用源代码创建镜像构建器和使用制品创建镜像构建器。
-   配置 S2I Webhook 步骤 1: 暴露 S2I trigger 服务  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   配置 S2I Webhook 步骤 1: 暴露 S2I trigger 服务  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   前往应用负载下的服务，搜索 s2ioperator-trigger-service。
   点击，选择编辑外部访问。
   在弹出的对话框中，从访问模式的下拉菜单中选择 NodePort，然后点击确定。
@@ -22406,7 +22376,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何重新运行任务。此操作仅对普通任务可用。
      说明     KubeSphere 仅允许重新运行已结束的任务。正在运行中的任务不支持此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务。
   在需要操作的任务右侧点击，然后在下拉列表中选择重新运行。任务将按照用户设置的策略重新开始运行。
      </description>
@@ -22421,7 +22391,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何重新运行任务。此操作仅对普通任务可用。
      说明     KubeSphere 仅允许重新运行已结束的任务。正在运行中的任务不支持此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务。
   在需要操作的任务右侧点击，然后在下拉列表中选择重新运行。任务将按照用户设置的策略重新开始运行。
      </description>
@@ -22622,7 +22592,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何停止工作负载。
      警告     此操作将把工作负载中运行的容器组副本数量调整到 0，工作负载中运行的业务将中断。请谨慎执以操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   选择需要操作的工作负载左侧的复选框，然后在工作负载列表上方点击停止。
@@ -22742,19 +22712,18 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.1.3/07-cluster-management/08-storage/02-storage-classes/07-delete-a-storage-class/</guid>
-      <description> 本节介绍如何删除存储类。
+      <description>本节介绍如何删除存储类。
      警告     存储类删除后，基于存储类创建持久卷声明和持久卷不会被删除，容器仍然可以使用已挂载的持久卷，但将用户将无法使用卷克隆、卷快照和卷扩展功能，并且无法再通过该存储类在后端存储系统中创建存储区域。
     前提条件 您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个存储类  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个存储类  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在需要删除的存储类右侧点击，然后在下拉列表中选择删除。
   在删除存储类对话框，输入存储类的名称，然后点击确定。
-     批量删除存储类  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除存储类  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   选择需要删除的存储类左侧的复选框，然后在存储类列表上方点击删除。
   在批量删除存储类对话框，输入存储类的名称，然后点击确定。
-    说明     请使用半角逗号（,）和空格分隔多个名称。
-           </description>
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
     </item>
     
     <item>
@@ -22763,19 +22732,18 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/07-cluster-management/08-storage/02-storage-classes/07-delete-a-storage-class/</guid>
-      <description> 本节介绍如何删除存储类。
+      <description>本节介绍如何删除存储类。
      警告     存储类删除后，基于存储类创建持久卷声明和持久卷不会被删除，容器仍然可以使用已挂载的持久卷，但将用户将无法使用卷克隆、卷快照和卷扩展功能，并且无法再通过该存储类在后端存储系统中创建存储区域。
     前提条件 您需要加入一个集群并在集群中具有存储类管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个存储类  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个存储类  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   在需要删除的存储类右侧点击，然后在下拉列表中选择删除。
   在删除存储类对话框，输入存储类的名称，然后点击确定。
-     批量删除存储类  以具有存储类管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除存储类  以具有存储类管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 存储类。
   选择需要删除的存储类左侧的复选框，然后在存储类列表上方点击删除。
   在批量删除存储类对话框，输入存储类的名称，然后点击确定。
-    说明     请使用半角逗号（,）和空格分隔多个名称。
-           </description>
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
     </item>
     
     <item>
@@ -22786,11 +22754,11 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/07-templates/07-delete-templates/</guid>
       <description> 本节介绍如何删除工作负载模板。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个工作负载模板  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个工作负载模板  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载模板。
   在需要删除的工作负载模板右侧点击，然后在下拉列表中选择删除。
   在删除工作负载模板对话框，输入模板名称，然后点击确定。
-     批量删除工作负载模板  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除工作负载模板  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载模板。
   选择需要删除的工作负载模板左侧的复选框，然后在模板列表上方点击删除。
   在批量删除工作负载模板对话框，输入模板名称，然后点击确定。
@@ -22983,7 +22951,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
      警告     约束删除后不能恢复，请谨慎执行此操作。
     前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; 约束。
   在需要删除的约束右侧点击，然后在下拉列表中选择删除。
   在删除约束对话框，输入约束的名称，然后点击确定。
@@ -23000,7 +22968,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
      警告     约束删除后不能恢复，请谨慎执行此操作。
     前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; Constraints。
   在需要删除的约束右侧点击，然后在下拉列表中选择删除。
   在删除约束对话框，输入约束的名称，然后点击确定。
@@ -23017,7 +22985,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
      警告     约束模板删除后不能恢复，请谨慎执行此操作。
     前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; 约束模板。
   在需要删除的约束模板右侧点击，然后在下拉列表中选择删除。
   在删除约束模板对话框，输入约束模板的名称，然后点击确定。
@@ -23034,7 +23002,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
      警告     约束模板删除后不能恢复，请谨慎执行此操作。
     前提条件    您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 Gatekeeper 扩展组件。
-     操作步骤  以具有 cluster-admin 权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择 Gatekeeper &amp;gt; Constraint Templates。
   在需要删除的约束模板右侧点击，然后在下拉列表中选择删除。
   在删除约束模板对话框，输入约束模板的名称，然后点击确定。
@@ -23142,7 +23110,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何暂停定时任务。
  定时任务暂停后，系统将不会在未来计划的时间点创建任务并运行，正在运行的任务不受影响。此操作仅对定时任务可用。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务。
   在任务页面，点击定时任务打开定时任务列表。
   在需要操作的定时任务右侧点击，然后在下拉列表中选择暂停。
@@ -23159,7 +23127,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description> 本节介绍如何暂停定时任务。
  定时任务暂停后，系统将不会在未来计划的时间点创建任务并运行，正在运行的任务不受影响。此操作仅对定时任务可用。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 定时任务。
   在需要操作的定时任务右侧点击，然后在下拉列表中选择暂停。
   如需恢复定时任务运行，在需要操作的定时任务右侧点击，然后在下拉列表中选择启动。
@@ -23211,7 +23179,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description>本节介绍如何查看卷快照内容详情。
  前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容查看权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照内容查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照内容查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容，然后点击一个卷快照内容的名称打开其详情页面。
   在卷快照内容详情页面左侧的属性区域查看卷快照的资源属性。
@@ -23233,7 +23201,7 @@ sudo apt update   sudo apt install nfs-kernel-server       执行以下命令创
       <description>本节介绍如何查看卷快照内容详情。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容查看权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照内容查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照内容查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容，然后点击一个卷快照内容的名称打开其详情页面。
   在卷快照内容详情页面的属性区域查看卷快照的资源属性。
@@ -23352,7 +23320,7 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/05-routes/07-edit-route-annotations/</guid>
       <description> 本节介绍如何编辑应用路由注解。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在需要操作的应用路由右侧点击，然后在下拉列表中选择编辑注解。
   在编辑注解对话框，设置注解键值对，然后点击确定。
@@ -23388,7 +23356,7 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/06-routes/07-edit-route-annotations/</guid>
       <description> 本节介绍如何编辑应用路由注解。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在需要操作的应用路由右侧点击，然后在下拉列表中选择编辑注解。
   在编辑注解对话框，设置注解键值对，然后点击确定。
@@ -23446,7 +23414,7 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
       <description> 本节介绍如何编辑持久卷声明的基本信息。
  您可以编辑持久卷声明的别名和描述。KubeSphere 不支持编辑持久卷声明的名称。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在需要操作的持久卷声明右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置持久卷声明的别名和描述，然后点击确定。
@@ -23530,7 +23498,7 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
  创建容器组 IP 池时，默认其 IP 地址可分配给所有节点的容器组。您可以设置节点选择器，以限制符合特定条件的节点上的容器组才能使用该 IP 池的 IP 地址。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择编辑 yaml。
   在 spec.nodeSelector 参数下输入表达式，通过自定义表达式来筛选符合条件的节点。有关表达式的更多信息，请参阅节点选择器。
@@ -23547,7 +23515,7 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
  创建容器组 IP 池时，默认其 IP 地址可分配给所有节点的容器组。您可以设置节点选择器，以限制符合特定条件的节点上的容器组才能使用该 IP 池的 IP 地址。
  前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择编辑 yaml。
   在 spec.nodeSelector 参数下输入表达式，通过自定义表达式来筛选符合条件的节点。有关表达式的更多信息，请参阅节点选择器。
@@ -23566,7 +23534,7 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
    资源预留：系统为容器预留的资源。
   资源上限：容器可使用的资源上限。
    前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在项目列表中点击一个项目的名称打开其详情页面。
   在项目详情页面左上角选择更多操作 &amp;gt; 编辑默认容器配额。
@@ -23590,7 +23558,7 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
    资源预留：系统为容器预留的资源。
   资源上限：容器可使用的资源上限。
    前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在项目列表中点击一个项目的名称打开其详情页面。
   在项目详情页面，点击操作 &amp;gt; 编辑默认容器配额。
@@ -23669,7 +23637,7 @@ kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml   输出�
       <description> 本节介绍如何重新创建工作负载。
      警告     此操作将删除并重新创建工作负载中的所有容器组。新容器组创建完成前，工作负载中的业务将中断。请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   在需要操作的工作负载右侧点击，然后在下拉列表中选择重新创建。
@@ -23936,19 +23904,18 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/05-routes/08-delete-routes/</guid>
-      <description> 本节介绍如何删除应用路由。
+      <description>本节介绍如何删除应用路由。
      警告     删除应用路由后将无法通过应用路由访问其后端的服务，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个应用路由  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个应用路由  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在需要删除的应用路由右侧点击，然后在下拉列表中选择删除。
   在删除应用路由对话框，输入应用路由的名称，然后点击确定。
-     批量删除应用路由  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除应用路由  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   选择需要删除的应用路由左侧的复选框，然后在应用路由列表上方点击删除。
   在批量删除应用路由对话框，输入应用路由的名称，然后点击确定。
-    说明     请使用半角逗号（,）和空格分隔多个名称。
-           </description>
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
     </item>
     
     <item>
@@ -23977,19 +23944,18 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/06-routes/08-delete-routes/</guid>
-      <description> 本节介绍如何删除应用路由。
+      <description>本节介绍如何删除应用路由。
      警告     删除应用路由后将无法通过应用路由访问其后端的服务，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个应用路由  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个应用路由  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   在需要删除的应用路由右侧点击，然后在下拉列表中选择删除。
   在删除应用路由对话框，输入应用路由的名称，然后点击确定。
-     批量删除应用路由  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除应用路由  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 应用路由。
   选择需要删除的应用路由左侧的复选框，然后在应用路由列表上方点击删除。
   在批量删除应用路由对话框，输入应用路由的名称，然后点击确定。
-    说明     请使用半角逗号（,）和空格分隔多个名称。
-           </description>
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
     </item>
     
     <item>
@@ -24044,11 +24010,11 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
      警告     持久卷声明删除后不能恢复，并且默认情况下持久卷声明对应的持久卷也将被删除，请谨慎执行此操作以避免数据丢失。
     前提条件    您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
      请提前备份后端存储区域中的数据以避免数据丢失。
-     删除单个持久卷声明  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     删除单个持久卷声明  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在需要删除的持久卷声明右侧点击，然后在下拉列表中选择删除。
   在删除持久卷声明对话框，输入持久卷声明的名称，然后点击确定。
-     批量删除持久卷声明  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除持久卷声明  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   选择需要删除的持久卷声明左侧的复选框，然后在持久卷声明列表上方点击删除。
   在批量删除持久卷声明对话框，输入持久卷声明的名称，然后点击确定。</description>
@@ -24080,19 +24046,18 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.1.3/07-cluster-management/05-application-workloads/04-services/08-delete-services/</guid>
-      <description> 本节介绍如何删除服务。
+      <description>本节介绍如何删除服务。
      警告     删除服务后将无法通过服务访问其后端的容器组，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个服务  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个服务  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要删除的服务右侧点击，然后在下拉列表中选择删除。
   在删除服务对话框，确认并选择要删除的相关资源，然后点击确定。
-     批量删除服务  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除服务  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   选择需要删除的服务左侧的复选框，然后在服务列表上方点击删除。
   在批量删除服务对话框，确认并选择要删除的相关资源，然后点击确定。
-    说明     请使用半角逗号（,）和空格分隔多个名称。
-           </description>
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
     </item>
     
     <item>
@@ -24101,19 +24066,18 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/05-services/08-delete-services/</guid>
-      <description> 本节介绍如何删除服务。
+      <description>本节介绍如何删除服务。
      警告     删除服务后将无法通过服务访问其后端的容器组，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个服务  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个服务  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   在需要删除的服务右侧点击，然后在下拉列表中选择删除。
   在删除服务对话框，确认并选择要删除的相关资源，然后点击确定。
-     批量删除服务  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除服务  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 服务。
   选择需要删除的服务左侧的复选框，然后在服务列表上方点击删除。
   在批量删除服务对话框，确认并选择要删除的相关资源，然后点击确定。
-    说明     请使用半角逗号（,）和空格分隔多个名称。
-           </description>
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
     </item>
     
     <item>
@@ -24147,11 +24111,11 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
       <description> 本节介绍如何删除项目。
      警告     项目删除后不能恢复，同时项目中的所有的资源也将被删除，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个项目  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个项目  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在需要删除的项目右侧点击，然后在下拉列表中选择删除。
   在删除项目对话框，输入项目的名称，然后点击确定。
-     批量删除项目  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除项目  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   选择需要删除的项目左侧的复选框，然后在项目列表上方点击删除。
   在批量删除项目对话框，输入项目的名称，然后点击确定。
@@ -24168,11 +24132,11 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
       <description> 本节介绍如何删除项目。
      警告     项目删除后不能恢复，同时项目中的所有的资源也将被删除，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有项目管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个项目  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个项目  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在需要删除的项目右侧点击，然后在下拉列表中选择删除。
   在删除项目对话框，输入项目的名称，然后点击确定。
-     批量删除项目  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除项目  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   选择需要删除的项目左侧的复选框，然后在项目列表上方点击删除。
   在批量删除项目对话框，输入项目的名称，然后点击确定。
@@ -24229,7 +24193,7 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
      警告     此操作将根据用户选择的修改记录重新创建工作负载，工作负载中运行的业务将中断，请谨慎执行此操作。
     前提条件   您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
      需要回退的工作负载必须被编辑过，从而系统中保存有可回退的修改记录。
-     操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集，然后在列表中点击一个工作负载的名称打开其详情页面。
   在工作负载详情页面选择更多操作 &amp;gt; 回退。
@@ -24267,7 +24231,7 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
      警告     此操作将根据用户选择的修改记录重新创建工作负载，工作负载中运行的业务将中断，请谨慎执行此操作。
     前提条件    您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
      需要回退的工作负载必须被编辑过，从而系统中保存有可回退的修改记录。
-     操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集，然后在列表中点击一个工作负载的名称打开其详情页面。
   在工作负载详情页面，点击操作 &amp;gt; 回退。
@@ -24323,7 +24287,7 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
  1. 解绑项目 在项目所在的集群中，执行以下命令，解除项目和所属企业空间的关系。
  kubectl label ns &amp;lt;namespace&amp;gt; kubesphere.io/workspace- &amp;amp;&amp;amp; kubectl patch ns &amp;lt;namespace&amp;gt; -p &amp;#39;{&amp;#34;metadata&amp;#34;:{&amp;#34;ownerReferences&amp;#34;:[]}}&amp;#39; --type=merge       说明     以上命令会移除项目与企业空间关联的标签并移除 ownerReferences。
       2. 移除项目成员 在项目所在的集群中，执行以下命令，移除项目下所有的成员。
- kubectl delete rolebindings.iam.kubesphere.io -n &amp;lt;namespace&amp;gt; --all     3. 纳管到新的企业空间  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+ kubectl delete rolebindings.iam.kubesphere.io -n &amp;lt;namespace&amp;gt; --all     3. 纳管到新的企业空间  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在项目列表中，在项目右侧点击，然后在下拉列表中选择分配企业空间。
   在分配企业空间对话框，设置项目所属的企业空间，并选择一个企业空间成员作为项目管理员，然后点击确定。
@@ -24340,7 +24304,7 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
  1. 解绑项目 在项目所在的集群中，执行以下命令，解除项目和所属企业空间的关系。
  kubectl label ns &amp;lt;namespace&amp;gt; kubesphere.io/workspace- &amp;amp;&amp;amp; kubectl patch ns &amp;lt;namespace&amp;gt; -p &amp;#39;{&amp;#34;metadata&amp;#34;:{&amp;#34;ownerReferences&amp;#34;:[]}}&amp;#39; --type=merge       说明     以上命令会移除项目与企业空间关联的标签并移除 ownerReferences。
       2. 移除项目成员 在项目所在的集群中，执行以下命令，移除项目下所有的成员。
- kubectl delete rolebindings.iam.kubesphere.io -n &amp;lt;namespace&amp;gt; --all     3. 纳管到新的企业空间  以具有项目管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+ kubectl delete rolebindings.iam.kubesphere.io -n &amp;lt;namespace&amp;gt; --all     3. 纳管到新的企业空间  以具有项目管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择项目。
   在项目列表中，在项目右侧点击，然后在下拉列表中选择分配企业空间。
   在分配企业空间对话框，设置项目所属的企业空间，并选择一个企业空间成员作为项目管理员，然后点击确定。
@@ -24397,7 +24361,7 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
      警告     迁移完成后，将重启工作负载。请谨慎执行此操作。
     前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择禁用。</description>
     </item>
@@ -24413,7 +24377,7 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
      警告     迁移完成后，将重启工作负载。请谨慎执行此操作。
     前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
-     操作步骤  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要操作的容器组 IP 池右侧点击，然后在下拉列表中选择禁用。</description>
     </item>
@@ -24428,7 +24392,7 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
  您可以编辑卷快照内容的别名和描述。KubeSphere 企业版不支持编辑卷快照内容的名称。
  前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容管理权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照内容管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照内容管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容打开卷快照内容列表。
   在需要操作的卷快照内容右侧点击，然后在下拉列表中选择编辑信息。
@@ -24450,7 +24414,7 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
  您可以编辑卷快照内容的别名和描述。KubeSphere 不支持编辑卷快照内容的名称。
  前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容管理权限。有关更多信息，请参阅集群成员和集群角色。
-     操作步骤  以具有卷快照内容管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有卷快照内容管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容打开卷快照内容列表。
   在需要操作的卷快照内容右侧点击，然后在下拉列表中选择编辑信息。
@@ -24506,7 +24470,7 @@ backend: enabled: true config: gateway: namespace: kubesphere-controls-system va
       <description> 本节介绍如何编辑持久卷声明的基本信息。
  您可以编辑持久卷声明的别名和描述。KubeSphere 不支持编辑持久卷声明的名称。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在需要操作的持久卷声明右侧点击，然后在下拉列表中选择编辑信息。
   在编辑信息对话框，设置持久卷声明的别名和描述，然后点击确定。
@@ -24719,7 +24683,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <guid>/v4.2.0/07-cluster-management/08-storage/01-persistent-volume-claims/09-create-persistent-volumes/</guid>
       <description>持久卷（PV）作为集群存储资源的核心载体，除了通过持久卷声明动态创建外，还可以直接手动创建。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明页面点击持久卷打开持久卷列表。
   在页面点击创建。
@@ -24741,19 +24705,18 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/02-jobs/09-delete-jobs/</guid>
-      <description> 本节介绍如何删除任务。
+      <description>本节介绍如何删除任务。
      警告     此操作将删除任务及其管理的所有容器组，如果任务正在运行，运行中的业务将中断，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个任务  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个任务  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务或定时任务。
   在需要删除的任务右侧点击，然后在下拉列表中选择删除。
   在删除任务对话框，输入任务的名称，然后点击确定。
-     批量删除任务  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除任务  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 任务或定时任务。
   选择需要删除的任务左侧的复选框，然后在任务列表上方点击删除。
   在批量删除任务对话框，输入任务的名称，然后点击确定。
-    说明     请使用半角逗号（,）和空格分隔多个名称。
-           </description>
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
     </item>
     
     <item>
@@ -24767,12 +24730,11 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
         警告     卷快照内容删除后无法恢复，并且后端存储系统中保存的快照数据也将被删除，请谨慎执行此操作以避免快照数据丢失。
     前提条件   KubeSphere 企业版平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容管理权限。有关更多信息，请参阅集群成员和集群角色。
-     删除单个卷快照内容  以具有卷快照内容管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     删除单个卷快照内容  以具有卷快照内容管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容打开卷快照内容列表。
   在需要删除的卷快照内容右侧点击，然后在下拉列表中选择删除。
-  在删除卷快照内容对话框，输入卷快照内容的名称，然后点击确定。
-     批量删除卷快照内容  以具有卷快照内容管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入您的集群或项目。</description>
+  在删除卷快照内容对话框，输入卷快照内容的名称，然后点击确定。</description>
     </item>
     
     <item>
@@ -24786,12 +24748,11 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
         警告     卷快照内容删除后无法恢复，并且后端存储系统中保存的快照数据也将被删除，请谨慎执行此操作以避免快照数据丢失。
     前提条件   KubeSphere 平台需要安装并启用 KubeSphere 存储扩展组件。
       您需要加入一个集群并在集群中具有卷快照内容管理权限。有关更多信息，请参阅集群成员和集群角色。
-     删除单个卷快照内容  以具有卷快照内容管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     删除单个卷快照内容  以具有卷快照内容管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 卷快照。
   在卷快照页面点击卷快照内容打开卷快照内容列表。
   在需要删除的卷快照内容右侧点击，然后在下拉列表中选择删除。
-  在删除卷快照内容对话框，输入卷快照内容的名称，然后点击确定。
-     批量删除卷快照内容  以具有卷快照内容管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。</description>
+  在删除卷快照内容对话框，输入卷快照内容的名称，然后点击确定。</description>
     </item>
     
     <item>
@@ -24805,7 +24766,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
     前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 企业版平台需要安装并启用 KubeSphere 网络扩展组件。
      容器组 IP 池未被任何容器组使用。如果存在正在使用容器组 IP 池的容器组，您需要为容器组指定其他容器组 IP 池或删除容器组。
-     删除单个容器组 IP 池  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     删除单个容器组 IP 池  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要删除的容器组 IP 池右侧点击，然后在下拉列表中选择删除。</description>
     </item>
@@ -24821,7 +24782,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
     前提条件    您需要加入一个集群并在集群中具有集群网络资源管理权限。有关更多信息，请参阅集群成员和集群角色。
      KubeSphere 平台需要安装并启用 KubeSphere 网络扩展组件。
      容器组 IP 池未被任何容器组使用。如果存在正在使用容器组 IP 池的容器组，您需要为容器组指定其他容器组 IP 池或删除容器组。
-     删除单个容器组 IP 池  以具有集群网络资源管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     删除单个容器组 IP 池  以具有集群网络资源管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择网络 &amp;gt; 容器组 IP 池。
   在需要删除的容器组 IP 池右侧点击，然后在下拉列表中选择删除。</description>
     </item>
@@ -24870,15 +24831,14 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
      警告     持久卷声明删除后不能恢复，并且默认情况下持久卷声明对应的持久卷也将被删除，请谨慎执行此操作以避免数据丢失。
     前提条件   您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
      请提前备份后端存储区域中的数据以避免数据丢失。
-     删除单个持久卷声明  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     删除单个持久卷声明  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在需要删除的持久卷声明右侧点击，然后在下拉列表中选择删除。
   在删除持久卷声明对话框，输入持久卷声明的名称，然后点击确定。
-     批量删除持久卷声明  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除持久卷声明  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   选择需要删除的持久卷声明左侧的复选框，然后在持久卷声明列表上方点击删除。
-  在批量删除持久卷声明对话框，输入持久卷声明的名称，然后点击确定。
-    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
+  在批量删除持久卷声明对话框，输入持久卷声明的名称，然后点击确定。</description>
     </item>
     
     <item>
@@ -25351,7 +25311,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <guid>/v4.1.3/07-cluster-management/08-storage/01-persistent-volume-claims/10-view-a-persistent-volume-list/</guid>
       <description>本节介绍如何查看持久卷列表。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明页面点击持久卷打开持久卷列表。
   持久卷列表提供以下信息：
@@ -25377,7 +25337,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <guid>/v4.2.0/07-cluster-management/08-storage/01-persistent-volume-claims/10-view-a-persistent-volume-list/</guid>
       <description>本节介绍如何查看持久卷列表。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明页面点击持久卷打开持久卷列表。
   持久卷列表提供以下信息：
@@ -25423,7 +25383,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <description>本节介绍如何编辑已创建的工作负载的设置。
  工作负载创建完成后，您可以编辑工作负载的更新策略、容器、存储、容器组优雅终止和容器组调度规则。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集，然后在列表中点击一个工作负载的名称打开其详情页面。
   在工作负载详情页面选择更多操作 &amp;gt; 编辑设置。
@@ -25473,7 +25433,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <description>本节介绍如何编辑已创建的工作负载的设置。
  工作负载创建完成后，您可以编辑工作负载的更新策略、容器、存储、容器组优雅终止和容器组调度规则。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集，然后在列表中点击一个工作负载的名称打开其详情页面。
   在工作负载详情页面，点击操作 &amp;gt; 编辑设置。
@@ -25553,7 +25513,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <description> 本节介绍如何停止工作负载。
      警告     此操作将把工作负载中运行的容器组副本数量调整到 0，工作负载中运行的业务将中断。请谨慎执以操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   选择需要操作的工作负载左侧的复选框，然后在工作负载列表上方点击停止。
@@ -25626,7 +25586,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <guid>/v4.1.3/07-cluster-management/08-storage/01-persistent-volume-claims/11-view-persistent-volume-details/</guid>
       <description>本节介绍如何查看集群中持久卷的详情。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明页面点击持久卷打开持久卷列表，然后点击一个持久卷的名称打开其详情页面。
   在持久卷详情页面左侧的属性区域查看持久卷的资源属性。
@@ -25652,7 +25612,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <guid>/v4.2.0/07-cluster-management/08-storage/01-persistent-volume-claims/11-view-persistent-volume-details/</guid>
       <description>本节介绍如何查看集群中持久卷的详情。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明查看权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明查看权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明查看权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明页面点击持久卷打开持久卷列表，然后点击一个持久卷的名称打开其详情页面。
   在持久卷详情页面的属性区域查看持久卷的资源属性。
@@ -25765,12 +25725,12 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <description> 本节介绍如何删除工作负载。
      警告     此操作将删除工作负载及其管理的所有容器组，工作负载中运行的业务将中断，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个工作负载  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个工作负载  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   在需要删除的工作负载右侧点击，然后在下拉列表中选择删除。
   在删除工作负载对话框，确认并选择要删除的相关资源，然后点击确定。
-     批量删除工作负载  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除工作负载  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   选择需要删除的工作负载左侧的复选框，然后在工作负载列表上方点击删除。
@@ -25840,7 +25800,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <description> 本节介绍如何编辑持久卷的信息。
  您可以编辑持久卷的别名和描述。KubeSphere 企业版不支持编辑持久卷的名称。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明页面点击持久卷打开持久卷列表。
   在需要操作的持久卷右侧点击，然后在下拉列表中选择编辑信息。
@@ -25861,7 +25821,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <description> 本节介绍如何编辑持久卷的信息。
  您可以编辑持久卷的别名和描述。KubeSphere 不支持编辑持久卷的名称。
  前提条件 您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明页面点击持久卷打开持久卷列表。
   在需要操作的持久卷右侧点击，然后在下拉列表中选择编辑信息。
@@ -25897,7 +25857,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
     前提条件   您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
      持久卷的状态为可用、已释放或失败。
   请提前备份后端存储区域中的数据以避免数据丢失。
-     操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明页面点击持久卷打开持久卷列表。
   在需要删除的持久卷右侧点击，然后在下拉列表中选择删除。
@@ -25917,7 +25877,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
     前提条件    您需要加入一个集群并在集群中具有持久卷声明管理权限。有关更多信息，请参阅集群成员和集群角色。
      持久卷的状态为可用、已释放或失败。
   请提前备份后端存储区域中的数据以避免数据丢失。
-     操作步骤  以具有持久卷声明管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     操作步骤  以具有持久卷声明管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择存储 &amp;gt; 持久卷声明。
   在持久卷声明页面点击持久卷打开持久卷列表。
   在需要删除的持久卷右侧点击，然后在下拉列表中选择删除。
@@ -25955,7 +25915,7 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <guid>/v4.2.0/07-cluster-management/05-application-workloads/01-workloads/13-generate-template/</guid>
       <description> 本节介绍如何基于现有工作负载生成模板。
  前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   操作步骤  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   在需要操作的工作负载右侧点击，然后在下拉列表中选择生成模板。
@@ -26027,12 +25987,12 @@ passwordPolicy: expireEnabled: false maxAgeDays: 90 reminderDays: 7       参数
       <description> 本节介绍如何删除工作负载。
      警告     此操作将删除工作负载及其管理的所有容器组，工作负载中运行的业务将中断，请谨慎执行此操作。
     前提条件 您需要加入一个集群并在集群中具有应用负载管理权限。有关更多信息，请参阅集群成员和集群角色。
-   删除单个工作负载  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+   删除单个工作负载  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   在需要删除的工作负载右侧点击，然后在下拉列表中选择删除。
   在删除工作负载对话框，确认并选择要删除的相关资源，然后点击确定。
-     批量删除工作负载  以具有应用负载管理权限的用户登录KubeSphere Web 控制台并进入您的集群。
+     批量删除工作负载  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
   在左侧导航栏选择应用负载 &amp;gt; 工作负载。
   在工作负载页面，点击部署、有状态副本集或守护进程集打开工作负载列表。
   选择需要删除的工作负载左侧的复选框，然后在工作负载列表上方点击删除。
