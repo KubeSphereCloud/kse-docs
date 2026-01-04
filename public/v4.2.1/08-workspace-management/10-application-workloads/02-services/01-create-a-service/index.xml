@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>创建服务 on KubeSphere</title>
+    <link>/v4.2.1/08-workspace-management/10-application-workloads/02-services/01-create-a-service/</link>
+    <description>Recent content in 创建服务 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/08-workspace-management/10-application-workloads/02-services/01-create-a-service/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建有状态或无状态服务</title>
+      <link>/v4.2.1/08-workspace-management/10-application-workloads/02-services/01-create-a-service/01-create-a-stateful-or-stateless-service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/08-workspace-management/10-application-workloads/02-services/01-create-a-service/01-create-a-stateful-or-stateless-service/</guid>
+      <description>本节介绍如何创建有状态或无状态服务。
+ 前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
+   操作步骤 请参阅参数描述设置服务的参数。
+  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
+  在左侧导航栏选择应用负载 &amp;gt; 服务。
+  在页面左上角的下拉列表中选择一个项目。
+  在页面点击创建。
+  在创建服务对话框，根据需要选择有状态服务或无状态服务。
+    说明       有状态服务：服务的内部访问模式为 Headless，后端工作负载为有状态副本集。
+  无状态服务：服务的内部访问模式为 VirtualIP，后端工作负载为部署。
+          在基本信息页签，设置服务的基本信息，然后点击下一步。
+  在容器组设置页签，为服务后端工作负载管理的容器组设置副本数量、容器、更新策略、安全上下文、调度规则和元数据，然后点击下一步。
+  在存储设置页签，为服务后端工作负载管理的容器挂载卷，然后点击下一步。
+  在高级设置页签，为服务后端工作负载管理的容器组指定节点，设置服务的外部访问模式、会话保持设置和元数据，然后点击创建。服务创建完成后将显示在服务列表中。
+     参数描述 以下介绍如何设置有状态服务和无状态服务的参数。</description>
+    </item>
+    
+    <item>
+      <title>创建外部服务</title>
+      <link>/v4.2.1/08-workspace-management/10-application-workloads/02-services/01-create-a-service/02-create-an-external-service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/08-workspace-management/10-application-workloads/02-services/01-create-a-service/02-create-an-external-service/</guid>
+      <description> 本节介绍如何创建外部服务。
+ 外部服务将业务流量转发给集群外部的其他服务，在集群内部可以通过 &amp;lt;service name&amp;gt;.&amp;lt;project name&amp;gt;.svc.cluster.local 格式的域名访问。
+ 前提条件 您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
+   操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
+  在左侧导航栏选择应用负载 &amp;gt; 服务。
+  在页面左上角的下拉列表中选择一个项目。
+  在页面点击创建。
+  在创建服务对话框，选择外部服务。
+  在基本信息页签，设置服务的基本信息，然后点击下一步。
+  在外部服务页签，设置目标服务的地址，然后点击创建。
+    说明       目标服务的地址必须为域名，如果您输入 IP 地址，该地址将被视为由数字组成的域名而不是真正的 IP 地址。
+  为使业务流量可以被正常转发到目标服务，请确保目标服务的域名可以通过域名服务器解析为实际的 IP 地址。
+             </description>
+    </item>
+    
+    <item>
+      <title>通过现有工作负载创建服务</title>
+      <link>/v4.2.1/08-workspace-management/10-application-workloads/02-services/01-create-a-service/05-create-a-service-using-existing-workloads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/08-workspace-management/10-application-workloads/02-services/01-create-a-service/05-create-a-service-using-existing-workloads/</guid>
+      <description>本节介绍如何创建服务并使用现有工作负载作为后端的工作负载。
+ 前提条件    您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
+     您需要提前在项目创建工作负载。有关更多信息，请参阅创建工作负载。
+     操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
+  在左侧导航栏选择应用负载 &amp;gt; 服务。
+  在页面左上角的下拉列表中选择一个项目。
+  在页面点击创建。
+  在创建服务对话框，选择指定工作负载。
+  在基本信息页签，设置服务的基本信息，然后点击下一步。
+    参数 描述     名称
+ 服务的名称。同一项目中的服务名称不能重复。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 63 个字符。
+   别名
+ 服务的别名。不同服务的别名可以相同。
+   描述
+ 服务的描述信息。描述可包含任意字符，最长 256 个字符。</description>
+    </item>
+    
+  </channel>
+</rss>

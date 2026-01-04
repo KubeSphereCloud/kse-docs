@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>全局监控 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/</link>
+    <description>Recent content in 全局监控 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>全局概览</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/01-view-monitoring-data-of-multiple-clusters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/01-view-monitoring-data-of-multiple-clusters/</guid>
+      <description>本节介绍如何查看多集群的监控概览信息。
+ 前提条件   您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+  host 集群和需要监控的成员集群需要启用 WizTelemetry 全局监控。
+    说明     如果成员集群未启用 WizTelemetry 全局监控，WizTelemetry 全局监控将无法获取成员集群的数据。
+           操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择全局监控 &amp;gt; 全局概览。
+概览页面默认显示已启用 WizTelemetry 全局监控的所有集群的监控信息。
+     功能区 描述     已创建资源数量</description>
+    </item>
+    
+    <item>
+      <title>设置组件</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/02-set-alert-components/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/02-set-alert-components/</guid>
+      <description>本节介绍如何设置 WizTelemetry 全局监控的组件。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在全局概览页面右侧，点击进入组件设置页面。
+  在数据接入页签，设置以下参数。
+    参数 描述     网关设置
+   组件副本数量: 设置存储网关组件的副本数量，默认值为 2。
+  容器配额: 设置 CPU 预留和限制以及内存预留和上限。
+     数据路由
+   数据保留副本数量: 设置数据保留组件的副本数量，默认值为 1。
+  组件副本数量: 设置数据路由组件的副本数量，默认值为 2。</description>
+    </item>
+    
+    <item>
+      <title>查看集群关键指标排行</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/04-cluster-monitoring-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/04-cluster-monitoring-list/</guid>
+      <description>本节介绍如何基于多维监控指标对集群进行排序。
+ 前提条件   您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+  host 集群和需要监控的成员集群需要启用 WizTelemetry 全局监控。
+    说明     如果成员集群未启用 WizTelemetry 全局监控，WizTelemetry 全局监控将无法获取成员集群的数据。
+           操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择全局监控 &amp;gt; 集群。
+查看各集群的状态、节点数量及其他监控指标的数据。
+   在列表上方点击下拉列表选择排序字段和排序方式。
+  在列表上方点击搜索框并输入关键字，可按名称搜索集群。
+     在列表右上角点击可刷新列表信息。</description>
+    </item>
+    
+    <item>
+      <title>查看集群的监控详情</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/05-cluster-monitoring-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/05-cluster-monitoring-details/</guid>
+      <description>本节介绍如何查看单个集群的监控详情。
+ 前提条件   您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+  host 集群和需要监控的成员集群需要启用 WizTelemetry 全局监控。
+    说明     如果成员集群未启用 WizTelemetry 全局监控，WizTelemetry 全局监控将无法获取成员集群的数据。
+           操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择全局监控 &amp;gt; 集群。
+  在集群列表中点击一个集群的名称打开其详情页面。
+  在详情页面的上方区域，查看当前集群的基本信息。
+  点击管理集群可进入当前集群的管理页面。
+  点击可隐藏该区域。</description>
+    </item>
+    
+    <item>
+      <title>查看节点关键指标排行</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/06-node-monitoring-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/06-node-monitoring-list/</guid>
+      <description> 本节介绍如何基于多维监控指标对节点进行排序。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择全局监控 &amp;gt; 节点。
+查看各节点的状态、所属集群及其他监控指标的数据。
+   在列表上方点击下拉列表选择集群、排序字段和排序方式。
+  在列表上方点击搜索框并输入关键字，可按名称搜索节点。
+     在列表右上角点击可刷新列表信息。
+     在列表右上角点击可定制列表中显示的信息。
+          </description>
+    </item>
+    
+    <item>
+      <title>查看节点的监控详情</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/07-node-monitoring-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/07-node-monitoring-details/</guid>
+      <description>本节介绍如何查看单个节点的监控详情。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择全局监控 &amp;gt; 节点。
+  在节点列表中点击一个节点的名称打开其详情页面。
+  在详情页面的上方区域，查看当前节点的基本信息。
+  点击管理节点可进入节点详情页面。
+  点击可隐藏该区域。
+       在详情页面的概览页签下，查看节点的概览信息。
+    功能区 描述     节点健康
+ 显示节点的调度状态、就绪状态、以及网络、内存、磁盘、进程压力。如果显示 则表明状态正常，如果显示 则表明出现告警。
+   调度状态：节点是否被正常调度。
+  就绪状态：节点是否已经准备好接收容器组。</description>
+    </item>
+    
+    <item>
+      <title>查看企业空间关键指标排行</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/08-ws-monitoring-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/08-ws-monitoring-list/</guid>
+      <description> 本节介绍如何基于多维监控指标对企业空间进行排序。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择全局监控 &amp;gt; 企业空间。
+查看各企业空间的授权集群数量、已创建的项目数量及其他监控指标的数据。
+   在列表上方点击下拉列表选择集群、排序字段和排序方式。
+  在列表上方点击搜索框并输入关键字，可按名称搜索企业空间。
+     在列表右上角点击可刷新列表信息。
+     在列表右上角点击可定制列表中显示的信息。
+          </description>
+    </item>
+    
+    <item>
+      <title>查看企业空间的监控详情</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/09-ws-monitoring-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/09-ws-monitoring-details/</guid>
+      <description>本节介绍如何查看单个企业空间的监控详情。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择全局监控 &amp;gt; 企业空间。
+  在企业空间列表中点击一个企业空间的名称打开其详情页面。
+  在详情页面的上方区域，点击管理企业空间可进入当前企业空间的管理页面。
+  在详情页面的概览页签下，查看企业空间的概览信息。
+    功能区 描述     资源统计
+ 当前企业空间的授权集群数量，已创建的项目、部署、有状态副本集、守护进程集、任务、服务、持久卷声明、应用路由、容器组的数量。
+   实时资源用量
+ 当前企业空间 CPU、内存的实时用量和总量；以及持久卷用量和持久卷预留数量。点击全部，可查看不同类型的存储的持久卷用量和持久卷预留数量。
+ 点击相应区域，可查看该资源的实时用量百分比。
+   企业空间配额
+ 有关参数的更多信息，请参阅查看企业空间配额。
+   容器组</description>
+    </item>
+    
+    <item>
+      <title>查看项目关键指标排行</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/10-project-monitoring-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/10-project-monitoring-list/</guid>
+      <description> 本节介绍如何基于多维监控指标对项目进行排序。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择全局监控 &amp;gt; 项目。
+查看各项目所属的集群、工作负载数量及其他监控指标的数据。
+   在列表上方点击下拉列表选择集群、排序字段和排序方式。
+  在列表上方点击搜索框并输入关键字，可按名称搜索项目。
+     在列表右上角点击可刷新列表信息。
+     在列表右上角点击可定制列表中显示的信息。
+          </description>
+    </item>
+    
+    <item>
+      <title>查看项目的监控详情</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/11-project-monitoring-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/11-project-monitoring-details/</guid>
+      <description>本节介绍如何查看单个项目的监控详情。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择全局监控 &amp;gt; 项目。
+  在项目列表中点击一个项目的名称打开其详情页面。
+  在详情页面的上方区域，查看当前项目的基本信息。
+  点击管理项目可进入当前项目的详情页面。
+  点击可隐藏该区域。
+       在详情页面的概览页签下，查看项目的概览信息。
+    功能区 描述     资源统计
+ 当前项目中已创建的部署、有状态副本集、守护进程集、任务、服务、持久卷声明、应用路由、容器组的数量。
+   实时资源用量
+ 当前项目 CPU、内存的实时用量和总量；以及持久卷用量和持久卷预留数量。点击全部，可查看不同类型的存储的持久卷用量和持久卷预留数量。</description>
+    </item>
+    
+    <item>
+      <title>查看容器组关键指标排行</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/12-pod-monitoring-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/12-pod-monitoring-list/</guid>
+      <description> 本节介绍如何基于多维监控指标对容器组进行排序。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择全局监控 &amp;gt; 容器组。
+查看各容器组的状态、所属项目、 容器组 IP及其他监控指标的数据。
+   在列表上方点击下拉列表选择集群、排序字段和排序方式。
+  在列表上方点击搜索框并输入关键字，可按名称搜索容器组。
+     在列表右上角点击可刷新列表信息。
+     在列表右上角点击可定制列表中显示的信息。
+          </description>
+    </item>
+    
+    <item>
+      <title>查看容器组的监控详情</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/13-pod-monitoring-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/03-resource-monitoring/13-pod-monitoring-details/</guid>
+      <description>本节介绍如何查看单个容器组的监控详情。
+ 前提条件 您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+   操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  在页面右上角点击图标，选择 WizTelemetry 可观测平台。
+  在左侧导航栏选择全局监控 &amp;gt; 容器组。
+  在容器组列表中点击一个容器组的名称打开其详情页面。
+  在详情页面的上方区域，查看当前容器组的基本信息。
+  点击管理容器组可进入当前容器组的详情页面。
+  点击可隐藏该区域。
+       在详情页面的监控页签下，查看容器组的 CPU 配额、内存配额、 以及监控指标在指定时间范围内的详细信息。
+  在右上角点击可设置数据的时间范围。
+     在右上角点击/可开启/停止实时数据刷新。
+     在右上角点击可手动刷新数据。
+       点击详情页面的容器页签，查看容器组中所有容器的监控信息。</description>
+    </item>
+    
+  </channel>
+</rss>
