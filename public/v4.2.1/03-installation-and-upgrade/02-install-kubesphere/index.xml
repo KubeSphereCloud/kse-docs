@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>安装 KubeSphere  on KubeSphere</title>
+    <link>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/</link>
+    <description>Recent content in 安装 KubeSphere  on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在线安装 Kubernetes 和 KubeSphere</title>
+      <link>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/</guid>
+      <description>本节介绍如何在可访问 Internet 的环境下安装 Kubernetes 和 KubeSphere。
+ 安装过程中将用到开源工具 KubeKey。有关 KubeKey 的更多信息，请访问 GitHub KubeKey 仓库。
+ 前提条件   您需要准备至少 1 台 Linux 服务器作为集群节点。在生产环境中，为确保集群具备高可用性，建议准备至少 5 台 Linux 服务器，其中 3 台作为控制平面节点，另外 2 台作为工作节点。如果您在多台 Linux 服务器上安装 KubeSphere，请确保所有服务器属于同一子网。
+  集群节点的操作系统和版本须为 Ubuntu 16.04、Ubuntu 18.04、Ubuntu 20.04、Ubuntu 22.04、Debian 9、Debian 10、CentOS 7、CentOS Stream、RHEL 7、RHEL 8、SLES 15、openSUSE Leap 15 或 Kylin v10。多台服务器的操作系统可以不同。关于其它操作系统和版本支持，请咨询青云科技官方解决方案专家或交付服务专家。
+  在生产环境中，为确保集群具有足够的计算和存储资源，建议每台集群节点配置至少 8 个 CPU 核心、16 GB 内存和 200 GB 磁盘空间。除此之外，建议在每台集群节点的 /var/lib/docker（对于 Docker）或 /var/lib/containerd（对于 containerd） 目录额外挂载至少 200 GB 磁盘空间用于存储容器运行时数据。</description>
+    </item>
+    
+    <item>
+      <title>离线安装 Kubernetes 和 KubeSphere</title>
+      <link>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/02-offline-install-kubernetes-and-kubesphere/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/02-offline-install-kubernetes-and-kubesphere/</guid>
+      <description>本节介绍如何在不能访问 Internet 的环境下使用离线安装包部署 Kubernetes 和 KubeSphere。
+ 安装过程中将用到开源工具 KubeKey 的 v4.x 版本。有关 KubeKey 的更多信息，请访问 GitHub KubeKey 仓库。
+     注意     KubeSphere 社区版用户需要在联网状态下自行构建离线安装包，KubeSphere 其他版本的用户可联系 KubeSphere 交付服务专家获取最新的离线安装包，即，可跳过离线安装包的构建过程。
+    准备工作 参考如下最低配置要求，准备 Linux 主机。
+     角色 主机数量 最低要求（每个节点） 网络要求     打包节点
+ 1
+ CPU：1 核，内存：1 GB，硬盘：150 GB
+ 需能访问：github.com、docker.io、quay.io
+   部署节点（运行 Web Installer 服务）</description>
+    </item>
+    
+    <item>
+      <title>激活 KubeSphere 社区版</title>
+      <link>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/03-activate-ks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/03-activate-ks/</guid>
+      <description> 登录 KubeSphere Web 控制台后，您需要导入许可证（license），激活 KubeSphere 和扩展组件，以体验所有功能。
+ 操作步骤  登录 KubeSphere Web 控制台，点击组件坞 &amp;gt; 平台设置 &amp;gt; 许可证，进入许可证页面，获取当前集群的集群 ID。
+
+   申请 KubeSphere 社区版的免费许可。填入个人信息和集群 ID，提交申请。
+
+ 随后会将 KubeSphere 社区版的许可证发放至您的邮箱中（邮件可能会被拦截，如长时间未收到邮件，请尝试在垃圾箱中查找）。
+     说明     在申请许可证时，提供了有效期选项。许可证到期后，如需继续使用，可再次申请免费许可。
+        收到邮件后，复制邮件中的 license，在 KubeSphere Web 控制台的许可证页面，点击添加许可证，将 license 填入即可。
+
+   若许可证页面显示 KubeSphere 和扩展组件已授权，即表示激活成功，可开始使用 KubeSphere。
+     </description>
+    </item>
+    
+    <item>
+      <title>激活 KubeSphere</title>
+      <link>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/04-activate-kse/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/04-activate-kse/</guid>
+      <description> 登录 KubeSphere Web 控制台后，您需要导入许可证（license），激活 KubeSphere 和扩展组件，以体验所有功能。
+     说明     若您是离线安装的 KubeSphere，请联系交付服务专家直接获取 license。
+    步骤 1：购买并获取 license 若您是在线安装的 KubeSphere，请访问 KubeSphere 官网，点击联系我们，通过微信或 slack 咨询 KubeSphere 和扩展组件 license 的购买方式和获取方式。
+ 
+   步骤 2：导入 license 待获得 license 后，请参阅添加许可证导入 KubeSphere 和扩展组件的 license。
+   步骤 3：验证激活 若许可证页面显示 KubeSphere 和扩展组件已授权，即表示激活成功，可开始使用 KubeSphere。
+   </description>
+    </item>
+    
+    <item>
+      <title>配置 KubeSphere 高可用性</title>
+      <link>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/04-configure-ks-high-availability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/04-configure-ks-high-availability/</guid>
+      <description>本节介绍如何配置 KubeSphere 的高可用性。
+     注意     KubeSphere 的高可用性建立在 Kubernetes 控制平面节点高可用的基础上，因此需先确保 Kubernetes 为高可用部署。
+    1. 高可用架构概述 KubeSphere 支持高可用部署，可通过 ha.enabled 开启。
+ 在高可用模式下，Redis 支持两种部署方式：
+  Redis 单实例模式
+  Redis 高可用模式 (Redis HA)
+     2. 版本兼容性 KubeSphere 高可用配置适用于 KubeSphere v4.1.2 及之后更新的版本。
+   3. KubeSphere 高可用配置 3.1 启用高可用模式 创建 values.yaml 文件，添加如下配置。
+ ha: enabled: true      4.</description>
+    </item>
+    
+    <item>
+      <title>附录：KubeSphere Core 高级配置</title>
+      <link>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/05-appendix/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/05-appendix/</guid>
+      <description>KubeSphere Helm Chart 参数 全局配置     参数 描述 默认值     global.imageRegistry
+ 全局 Docker 镜像仓库地址
+ registry.cn-beijing.aliyuncs.com
+   global.tag
+ 全局 Docker 镜像标签
+ &amp;#34;&amp;#34;
+   global.imagePullSecrets
+ 全局 Docker 仓库密钥名称数组
+ []
+    通用参数     参数 描述 默认值     nameOverride
+ 部分覆盖 common.names.fullname 的字符串
+ &amp;#34;&amp;#34;
+   fullnameOverride</description>
+    </item>
+    
+  </channel>
+</rss>

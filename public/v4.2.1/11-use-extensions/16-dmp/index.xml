@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RadonDB DMP on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/16-dmp/</link>
+    <description>Recent content in RadonDB DMP on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/16-dmp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>升级后，原 Redis Sentinel 实例的密码处理方案</title>
+      <link>/v4.2.1/11-use-extensions/16-dmp/01-fix-sentinel-issue/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/16-dmp/01-fix-sentinel-issue/</guid>
+      <description> 从 KubeSphere v4.1.2 升级到 v4.1.3 后，redis-operator 的版本发生了变化，对 Redis 密码的存储位置进行了调整：从原先的 Secret 迁移到了 ConfigMap。
+ 对于之前创建的 Redis 实例，这一调整会导致原先设置的 default 用户密码无法生效。
+ 解决办法  点击顶部导航栏上的图标，点击 RadonDB DMP，进入数据库管理平台。
+  在左侧导航栏选择 Redis Sentinel。
+  在 Redis Sentinel 实例列表中，点击一个实例名称打开其详情页面。
+  在页面右侧点击数据库用户页签，然后点击创建。
+  在创建用户对话框，输入用户名 default 和原有的密码，然后点击确定。
+     </description>
+    </item>
+    
+    <item>
+      <title>升级后，针对原 Redis Cluster 实例的建议</title>
+      <link>/v4.2.1/11-use-extensions/16-dmp/02-fix-rediscluster-issue/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/16-dmp/02-fix-rediscluster-issue/</guid>
+      <description> 从 KubeSphere v4.1.2 升级到 v4.1.3 后，redis-operator 的版本发生了变化，不再管理由旧版本 redis-operator 创建的 Redis Cluster 实例。
+ 在数据库管理平台，仍可以查看原有的 Redis Cluster 实例，但无法通过控制台执行扩容、增减节点等操作，新版本 redis-operator 也不会维护旧 Redis Cluster 实例的状态。
+ 建议  备份旧 Redis Cluster 集群的数据。
+  重新创建 Redis Cluster 集群来替换旧集群。
+     </description>
+    </item>
+    
+  </channel>
+</rss>

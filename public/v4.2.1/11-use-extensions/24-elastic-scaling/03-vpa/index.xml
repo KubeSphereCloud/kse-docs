@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>容器垂直伸缩 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/</link>
+    <description>Recent content in 容器垂直伸缩 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建容器垂直伸缩</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/01-create-vpa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/01-create-vpa/</guid>
+      <description>本节介绍如何创建容器垂直伸缩（VPA）。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器垂直伸缩管理权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Vertical Pod Autoscaler 扩展组件。
+     操作步骤  以具有容器垂直伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器垂直伸缩。
+  在页面点击创建。
+  在基本信息页签，设置容器垂直伸缩的基本信息和伸缩对象，然后点击下一步。
+    参数 描述     名称
+ 容器垂直伸缩的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+   别名
+ 容器垂直伸缩的别名。不同 VPA 的别名可以相同。
+   描述
+ 容器垂直伸缩的描述信息。描述可包含任意字符，最长 256 个字符。</description>
+    </item>
+    
+    <item>
+      <title>查看 VPA 列表</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/02-view-vpa-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/02-view-vpa-list/</guid>
+      <description>本节介绍如何查看容器垂直伸缩的列表信息。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器垂直伸缩查看权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Vertical Pod Autoscaler 扩展组件。
+     操作步骤  以具有容器垂直伸缩查看权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器垂直伸缩。
+  在页面左上角的下拉列表中选择一个项目。
+  容器垂直伸缩列表提供以下信息：
+    参数 描述     策略名称
+ 容器垂直伸缩（VPA）的名称。
+   状态
+ VPA 的当前状态。若状态异常，鼠标悬停于图标上可查看错误详情。
+   更新模式
+   自动更新模式：自动更新 Pod 资源请求，并通过重建的方式应用新的资源配置。</description>
+    </item>
+    
+    <item>
+      <title>查看 VPA 详情</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/03-view-vpa-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/03-view-vpa-details/</guid>
+      <description>本节介绍如何查看 VPA 的详情信息。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器垂直伸缩查看权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Vertical Pod Autoscaler 扩展组件。
+     操作步骤  以具有容器垂直伸缩查看权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器垂直伸缩。
+  在页面左上角的下拉列表中选择一个项目。
+  在 VPA 列表中点击一个 VPA 的名称打开其详情页面。
+  在属性区域，查看 VPA 的资源属性，如当前状态、所属集群和项目、更新模式。
+  在资源状态页签，查看 VPA 的详细状态信息和伸缩对象信息。
+  状态信息
+    说明     如果显示则表明状态正常，如果显示则表明出现异常，如果显示则表明因信息不足无法确定状态。</description>
+    </item>
+    
+    <item>
+      <title>编辑 VPA 信息</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/04-edit-vpa-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/04-edit-vpa-information/</guid>
+      <description>本节介绍如何编辑 VPA 的信息。
+ 您可以编辑 VPA 的别名和描述。KubeSphere 不支持编辑 VPA 的名称。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器垂直伸缩管理权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Vertical Pod Autoscaler 扩展组件。
+     操作步骤  以具有容器垂直伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器垂直伸缩。
+  在页面左上角的下拉列表中选择一个项目。
+  在需要操作的 VPA 右侧点击，然后在下拉列表中选择编辑信息。
+  在编辑信息对话框，设置 VPA 的别名和描述，然后点击确定。
+    参数 描述     别名
+ VPA 的别名。不同 VPA 的别名可以相同。</description>
+    </item>
+    
+    <item>
+      <title>编辑 VPA 设置</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/05-edit-vpa-settings/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/05-edit-vpa-settings/</guid>
+      <description> 本节介绍如何编辑 VPA 的伸缩设置。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器垂直伸缩管理权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Vertical Pod Autoscaler 扩展组件。
+     操作步骤  以具有容器垂直伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器垂直伸缩。
+  在页面左上角的下拉列表中选择一个项目。
+  在需要操作的 VPA 右侧点击，然后在下拉列表中选择编辑伸缩设置。
+  在编辑伸缩设置对话框，设置资源策略和更新模式，然后点击确定。
+有关各参数的说明，请参阅创建容器垂直伸缩。
+        </description>
+    </item>
+    
+    <item>
+      <title>在工作负载页面管理 VPA 资源</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/06-manage-vpa-on-workload-pages/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/06-manage-vpa-on-workload-pages/</guid>
+      <description> 本节介绍如何在工作负载的详情页面管理与其绑定的 VPA（容器垂直伸缩）资源。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器垂直伸缩管理权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Vertical Pod Autoscaler 扩展组件。
+     操作步骤  以具有容器垂直伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择工作负载 &amp;gt; 部署/有状态副本集。
+  在列表中点击一个工作负载的名称打开其详情页面。
+  在工作负载详情页面点击容器垂直伸缩。
+  在容器垂直伸缩页面，点击创建。VPA 创建步骤请参阅创建容器垂直伸缩。
+  若已有与当前工作负载绑定的 VPA 资源，点击 VPA 名称查看详情，并可对其进行编辑信息、编辑伸缩设置和删除操作。
+     </description>
+    </item>
+    
+    <item>
+      <title>删除 VPA 资源</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/08-delete-vpa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/08-delete-vpa/</guid>
+      <description>本节介绍如何删除 VPA 资源。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器垂直伸缩管理权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Vertical Pod Autoscaler 扩展组件。
+     删除单个 VPA  以具有容器垂直伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器垂直伸缩。
+  在页面左上角的下拉列表中选择一个项目。
+  在需要删除的 VPA 右侧点击，然后在下拉列表中选择删除。
+  在删除容器垂直伸缩对话框，输入 VPA 的名称，然后点击确定。
+     批量删除 VPA  以具有容器垂直伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器垂直伸缩。
+  在页面左上角的下拉列表中选择一个项目。</description>
+    </item>
+    
+    <item>
+      <title>容器垂直伸缩 (VPA) 最佳实践</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/10-vpa-best-practice/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/03-vpa/10-vpa-best-practice/</guid>
+      <description>如果您希望根据 Pod 实际的资源使用情况，动态调整和优化资源配置，以确保 Pod 能够调度到资源充足的节点上，建议您为业务容器开启垂直伸缩 VPA（Vertical Pod Autoscaler）功能。VPA 能够监控 Pod 的资源消耗模式，灵活推荐 CPU 和内存资源分配的配置，并在适当的情况下自动进行调整，而不调整 Pod 的副本数量。这种能力更适用于需要稳定资源配置的有状态应用的扩容等场景。
+ 使用容器垂直伸缩 (VPA) 创建 VerticalPodAutoscaler 资源并关联工作负载，稍后即可通过 status.recommendation 获取推荐值，VPA 将根据 spec.updatePolicy 执行更新策略。
+ 操作步骤：在创建容器垂直伸缩对话框中，点击编辑 YAML，输入以下内容并保存。
+ apiVersion: autoscaling.k8s.io/v1 kind: VerticalPodAutoscaler metadata: name: nginx-vpa spec: targetRef: apiVersion: &amp;#34;apps/v1&amp;#34; kind: Deployment name: nginx updatePolicy: updateMode: &amp;#34;Auto&amp;#34; status: conditions: - lastTransitionTime: &amp;#34;2025-08-21T07:11:28Z&amp;#34; status: &amp;#34;True&amp;#34; type: RecommendationProvided recommendation: containerRecommendations: - containerName: nginx lowerBound: cpu: 100m memory: 250Mi target: cpu: 100m memory: 250Mi uncappedTarget: cpu: 25m memory: 250Mi upperBound: cpu: 100m memory: 250Mi   关于 updateMode 字段:</description>
+    </item>
+    
+  </channel>
+</rss>
