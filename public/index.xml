@@ -7,6 +7,45 @@
     <generator>Hugo -- gohugo.io</generator>
     <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>1. 创建 NFS 数据集</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/01-create-nfs-dataset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/01-create-nfs-dataset/</guid>
+      <description>本节介绍如何创建 NFS 数据集，用于连接 NFS。
+ 前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已配置完成 NFS 存储系统，且已获取 NFS 的挂载路径。
+     操作步骤  以具有数据集加速管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择数据集 &amp;gt; 数据集。
+  在页面点击创建。
+  在基本信息页签，设置数据集的基本信息，然后点击下一步。
+    参数 描述     名称
+ 数据集的名称。
+   别名</description>
+    </item>
+    
+    <item>
+      <title>1. 创建 S3 数据集</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/01-s3-accelerate/01-create-s3-dataset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/01-s3-accelerate/01-create-s3-dataset/</guid>
+      <description>本节介绍如何创建 S3 数据集，用于连接对象存储。 更多信息，请参阅 Fluid 官方文档。
+ 前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已配置完成 S3 bucket，且已获取访问该 bucket 的证书等信息。
+     步骤 1：创建保密字典 为了保证数据的安全，建议使用 Secret（保密字典）来配置创建数据集时需要的敏感信息，如 accessKeyId, accessKeySecret。
+  以具有 cluster-admin 角色的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择配置 &amp;gt; 保密字典。
+  在页面点击创建。
+  在基本信息页签，设置保密字典的基本信息，然后点击下一步。
+  在数据设置页签，在类型下拉列表中选择默认，添加键值对数据，然后点击创建。
+此为示例：
+     键 值     access_key_id</description>
+    </item>
+    
+    <item>
       <title>KubeSphere LuBan</title>
       <link>/v4.1.3/01-intro/01-introduction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -149,16 +188,17 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.1/01-intro/01-introduction/</guid>
-      <description> KubeSphere，是基于 Kubernetes 的分布式多租户商用云原生操作系统。在开源能力的基础上，在多云集群管理、微服务治理、应用管理、可观测等多个核心业务场景进行功能延伸。各功能实现高度模块化，满足不同场景的业务需求。以强大的企业级云原生底座，完善的专家级解决方案和服务支持，赋能企业数字化转型和规模化运营。
+      <description>KubeSphere，是基于 Kubernetes 的分布式多租户商用云原生操作系统。在开源能力的基础上，在多云集群管理、微服务治理、应用管理、可观测等多个核心业务场景进行功能延伸。各功能实现高度模块化，满足不同场景的业务需求。以强大的企业级云原生底座，完善的专家级解决方案和服务支持，赋能企业数字化转型和规模化运营。
  自 KubeSphere v4.0 起，引入扩展机制，推出了全新的架构：KubeSphere LuBan，它构建在 Kubernetes 之上，支持高度可配置和可扩展。KubeSphere 在 KubeSphere LuBan 云原生可扩展开放架构的基础之上，能轻松实现应用的上下游联动、随时随地集成各类优质扩展组件，并提供无缝融合的业务能力与高度一致的产品体验。
  新特性 KubeSphere v4.2.1 不仅提升了容器管理的效率和灵活性，还通过引入新的功能和优化现有功能，为企业提供了一个更加强大和灵活的容器平台。
-   网关优化：提供集群级网关的一键升级与批量升级功能，旨在简化网关管理流程并提升操作效率。
-  多集群管理优化：提供 member 集群的一站式升级管理，支持快速更新至最新版本。通过直观易用的操作流程，显著降低升级复杂度，提升管理效率。同时，提供日志记录，完整追踪升级关键节点，为状态监控、问题排查与运营审计提供可靠依据。
-  算力设备管理：用于在 Kubernetes 集群中统一纳管 NVIDIA GPU、Ascend NPU 等多种异构计算设备，提供资源共享、资源隔离、智能调度、实时监控告警等功能。
-  Volcano：通过引入队列、组调度等高级机制，专门用于高效运行和管理批处理与高性能计算任务的工作负载调度器。
+   多集群管理优化：提供 member 集群的一站式升级管理，支持快速更新至最新版本。通过直观易用的操作流程，显著降低升级复杂度，提升管理效率。同时，提供日志记录，完整追踪升级关键节点，为状态监控、问题排查与运营审计提供可靠依据。
+  网关优化：提供集群级网关的一键升级与批量升级功能，旨在简化网关管理流程并提升操作效率。用户可以通过直观的界面，轻松实现单个或多个网关实例的快速升级，无需复杂的手动干预。
   弹性伸缩：支持容器水平扩容（HPA）、垂直扩容（VPA）、事件驱动伸缩（KEDA），简化了自动扩容策略，提高了资源利用率。
-   点击此处查看当前版本的更新详情，包括新特性、功能增强以及问题修复。
-   </description>
+  算力设备管理：用于在 Kubernetes 集群中统一纳管 NVIDIA GPU、Ascend NPU 等多种异构计算设备。该扩展组件通过提供资源共享与隔离、智能调度、实时监控与告警，以及算力设备配额管理，提高设备利用率并简化 AI 集群的运维与调度复杂度。
+  Volcano：是 Kubernetes 上专为批处理与高性能计算（HPC）场景打造的高性能工作负载调度器。它扩展了 Kubernetes 原生调度能力，引入队列（Queue）、组调度（Gang Scheduling）、资源配额、优先级与抢占等高级机制，确保计算密集型任务能够高效、成组地调度运行，显著提升集群资源利用率和任务执行效率。
+  节点组：一个专为简化 Kubernetes 集群节点管理而设计的扩展组件。它通过直观的图形化界面，允许管理员根据节点的硬件属性、业务角色或环境逻辑，灵活地对集群内大量异构节点进行可视化分组与标记。
+  对象存储加速：Fluid 通过将远端对象存储中的数据抽象为 Kubernetes 可调度的资源，在计算集群内自动构建分布式缓存层。该缓存层对应用透明，能将热点数据缓存在计算节点本地，并通过数据亲和性调度，让计算任务就近访问数据，从而显著降低访问延迟、提升 I/O 性能并减少对后端存储的直接依赖与带宽成本。
+  NFS 加速：Fluid 支持为 Kubernetes 环境中的网络文件系统（NFS）提供加速功能。该组件通过在集群内构建高效的分布式缓存层，实现将热点数据缓存至各节点本地，从而增强了数据的本地访问速度。Fluid 结合了 Alluxio 的先进缓存机制与智能调度策略，有效减轻了后端 NFS 服务器的负载，显著降低了网络延迟，优化了整体的输入/输出（I/O）性能。</description>
     </item>
     
     <item>
@@ -3409,6 +3449,23 @@ vi /etc/kubernetes/manifests/kube-apiserver.</description>
     </item>
     
     <item>
+      <title>创建节点组</title>
+      <link>/v4.2.1/11-use-extensions/25-node-group/01-node-groups/01-create-a-node-group/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/25-node-group/01-node-groups/01-create-a-node-group/</guid>
+      <description> 本节介绍如何创建节点组。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 节点组扩展组件。
+      您需要加入一个集群并在集群中具有节点组管理权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有节点组管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择节点组。
+  在页面点击创建。
+  在创建节点组对话框中，输入节点组名称，然后点击确定。
+节点组创建完成后将显示在节点组列表中。
+      </description>
+    </item>
+    
+    <item>
       <title>创建规则组</title>
       <link>/v4.1.3/11-use-extensions/05-observability-platform/06-alerting/03-rule-groups/01-create-a-rule-group/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -4747,6 +4804,23 @@ logsidecar-injector: enabled: true       说明     由于控制此参数更新�
  前提条件   您需要准备至少 1 台 Linux 服务器作为集群节点。在生产环境中，为确保集群具备高可用性，建议准备至少 5 台 Linux 服务器，其中 3 台作为控制平面节点，另外 2 台作为工作节点。如果您在多台 Linux 服务器上安装 KubeSphere 企业版，请确保所有服务器属于同一子网。
   集群节点的操作系统和版本须为 Ubuntu 16.04、Ubuntu 18.04、Ubuntu 20.04、Ubuntu 22.04、Debian 9、Debian 10、CentOS 7、CentOS Stream、RHEL 7、RHEL 8、SLES 15 或 openSUSE Leap 15。多台服务器的操作系统可以不同。关于其它操作系统和版本支持，请咨询青云科技官方解决方案专家或交付服务专家。
   在生产环境中，为确保集群具有足够的计算和存储资源，建议每台集群节点配置至少 8 个 CPU 核心、16 GB 内存和 200 GB 磁盘空间。除此之外，建议在每台集群节点的 /var/lib/docker（对于 Docker）或 /var/lib/containerd（对于 containerd） 目录额外挂载至少 200 GB 磁盘空间用于存储容器运行时数据。</description>
+    </item>
+    
+    <item>
+      <title>基本信息</title>
+      <link>/v4.2.1/11-use-extensions/25-node-group/04-manage-node-groups/07-nodegroup-settings/01-basic-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/25-node-group/04-manage-node-groups/07-nodegroup-settings/01-basic-information/</guid>
+      <description> 本节介绍如何在节点组设置页面，查看、编辑节点组信息，和删除节点组。
+ 前提条件 您需要加入一个集群并在集群中具有节点组管理权限。有关更多信息，请参阅集群成员和集群角色。
+   操作步骤  以具有节点组管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入节点组管理页面。
+  在左侧导航栏选择节点组设置 &amp;gt; 基本信息。
+  查看分配到节点组的节点数量和绑定的企业空间数量。
+  点击操作&amp;gt; 编辑信息可编辑节点组的别名和描述。
+  点击操作&amp;gt; 删除节点组可删除节点组。
+    注意     删除节点组时，请确保节点组下没有节点。若有，请先将节点从该节点组中移除。
+         </description>
     </item>
     
     <item>
@@ -7805,6 +7879,24 @@ hosts: dns files mdns4_minimal [NOTFOUND=return]       执行以下命令在边
     </item>
     
     <item>
+      <title>绑定企业空间到节点组</title>
+      <link>/v4.2.1/11-use-extensions/25-node-group/04-manage-node-groups/05-workspaces/01-bind-to-a-workspace/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/25-node-group/04-manage-node-groups/05-workspaces/01-bind-to-a-workspace/</guid>
+      <description> 本节介绍如何将企业空间绑定到节点组。
+ 前提条件    您需要加入一个集群并在集群中具有节点组管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已创建一个企业空间。
+     操作步骤  以具有节点组管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入节点组管理页面。
+  在左侧导航栏选择企业空间。
+  点击绑定。
+  在企业空间对话框中，勾选要绑定的企业空间，然后点击确定。
+  在列表上方点击搜索框并输入关键字，可按名称搜索企业空间。
+     在列表右上角点击可刷新列表信息。
+          </description>
+    </item>
+    
+    <item>
       <title>编辑企业空间配额</title>
       <link>/v4.1.3/08-workspace-management/06-workspace-settings/02-workspace-quotas/01-edit-workspace-quotas/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -8236,6 +8328,21 @@ KubeSphere 发送的通知以键值对的形式呈现。当此处填写的键和
            操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
   在页面右上角点击图标，选择 Whizard 可观测中心。
   在左侧导航栏选择资源查询 &amp;gt; 容器组。</description>
+    </item>
+    
+    <item>
+      <title>进入节点组管理页面</title>
+      <link>/v4.2.1/11-use-extensions/25-node-group/04-manage-node-groups/01-access-a-node-group/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/25-node-group/04-manage-node-groups/01-access-a-node-group/</guid>
+      <description> 本节介绍如何进入节点组的资源管理页面。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 节点组扩展组件。
+      您需要加入一个集群并在集群中具有节点组管理权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有节点组管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择节点组。
+  点击节点组的名称，进入节点组的资源管理页面。
+     </description>
     </item>
     
     <item>
@@ -8895,6 +9002,42 @@ vi &amp;lt;template-name&amp;gt;   内容如下：
  在 WizTelemetry 日志的扩展组件配置中，编辑如下参数：
  vector-logging: filter: extraLabelSelector: &amp;#34;app.kubernetes.io/name!=kube-events-exporter&amp;#34; extraNamespaceLabelSelector: &amp;#34;&amp;#34; # When includeNamespaces and excludeNamespaces are set at the same time, only excludeNamespaces will take effect. includeNamespaces: [] excludeNamespaces: []     extraLabelSelector：只收集带此标签的 pod 的日志。
   extraNamespaceLabelSelector：只收集带此标签的 namespace 下的 pod 日志。</description>
+    </item>
+    
+    <item>
+      <title>2. 创建 AlluxioRuntime</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/01-s3-accelerate/02-create-alluxioruntime/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/01-s3-accelerate/02-create-alluxioruntime/</guid>
+      <description> 本节介绍如何创建 AlluxioRuntime，以实现对象存储加速。
+ 前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已创建 S3 数据集。
+     操作步骤  以具有数据集加速管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择数据集 &amp;gt; 数据加速运行时。
+  在页面点击创建。
+  在基本信息页签，选择已创建的 S3 数据集，然后点击下一步。
+  在 Runtime 配置页签，Runtime 类型选择为 Alluxio，选择存储类型（Mem/Disk），设置缓存配额等参数，然后点击下一步。
+  在高级设置页签，点击创建。
+若创建成功，对象存储 Bucket 将作为 Alluxio 的底层存储接入。当数据加速运行时状态显示为`就绪`（Ready）时，表示对象存储已成功接入并具备数据加速能力，后续数据访问将按需触发缓存与加速。
+      </description>
+    </item>
+    
+    <item>
+      <title>2. 创建 ThinRuntime</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/02-create-thinruntime/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/02-create-thinruntime/</guid>
+      <description>本节介绍如何创建 ThinRuntime，用于生成连接 NFS 的 PVC，供后续 NFS 加速使用。
+     说明     如果您创建 NFS 数据集时在数据源页签中勾选了自动创建 ThinRuntime，则无需再次创建，可以跳过该文档。
+    前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已创建 NFS 数据集。
+     操作步骤  以具有数据集加速管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择数据集 &amp;gt; 数据加速运行时。
+  在页面点击创建。</description>
     </item>
     
     <item>
@@ -16073,6 +16216,24 @@ KubeSphere 提供以下预置项目角色：
     </item>
     
     <item>
+      <title>3. 创建 PVC 数据集</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/03-create-pvc-dataset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/03-create-pvc-dataset/</guid>
+      <description>本节介绍如何创建 PVC 数据集，以配置需要加速的 PVC。
+ 前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已创建 NFS 数据集、创建 ThinRuntime。
+     操作步骤  以具有数据集加速管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择数据集 &amp;gt; 数据集。
+  在页面点击创建。
+  在基本信息页签，设置数据集的基本信息，然后点击下一步。
+    注意     PVC 数据集与已创建的 NFS 数据集所属的项目必须相同。
+      在数据源页签，配置数据源信息，然后点击下一步。</description>
+    </item>
+    
+    <item>
       <title>LDAP/LDAPS 身份验证</title>
       <link>/v4.1.3/04-platform-management/03-platform-settings/03-external-authentication/03-use-ldap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -16426,6 +16587,23 @@ KubeSphere 提供以下预置项目角色：
    viewer
  项目观察员，在项目中具有资源查看权限。
            </description>
+    </item>
+    
+    <item>
+      <title>分配节点到节点组</title>
+      <link>/v4.2.1/11-use-extensions/25-node-group/01-node-groups/03-add-nodes-to-a-group/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/25-node-group/01-node-groups/03-add-nodes-to-a-group/</guid>
+      <description> 本节介绍如何将集群节点分配到节点组。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 节点组扩展组件。
+      您需要加入一个集群并在集群中具有节点组管理权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有节点组管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
+  在需要操作的节点右侧点击，然后在下拉列表中选择分配到节点组。
+  在分配到节点组对话框，选择一个节点组，然后点击确定。
+节点列表中将显示该节点所属的节点组。
+      </description>
     </item>
     
     <item>
@@ -19961,6 +20139,29 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
     </item>
     
     <item>
+      <title>查看节点组中的节点</title>
+      <link>/v4.2.1/11-use-extensions/25-node-group/04-manage-node-groups/03-nodes-in-node-groups/03-view-nodes-in-node-groups/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/25-node-group/04-manage-node-groups/03-nodes-in-node-groups/03-view-nodes-in-node-groups/</guid>
+      <description>本节介绍如何查看节点组中的节点。
+ 前提条件    您需要加入一个集群并在集群中具有节点组查看权限。有关更多信息，请参阅集群成员和集群角色。
+     已分配节点到节点组。
+     操作步骤  以具有节点组查看权限的用户登录 KubeSphere 企业版 Web 控制台并进入节点组管理页面。
+  在左侧导航栏选择节点管理。
+  节点列表提供以下信息：
+    参数 描述     名称
+ 节点的主机名称和在子网内部的 IP 地址。
+   状态
+ 各节点的运行状态。
+   运行中：节点运行正常。
+  无法调度：节点被用户手动设置为不可调度。如果节点处在此状态，容器组将不能被调度到该节点。
+  告警：节点上存在告警。您可以在节点详情页面的运行状态 &amp;gt; 健康状态区域查看节点的告警类型。
+   如果节点上存在污点，状态列还将显示节点上污点的数量。将光标悬停在污点数字上查看污点的具体信息。
+   已分配 CPU/已分配内存</description>
+    </item>
+    
+    <item>
       <title>查看规则组详情</title>
       <link>/v4.1.3/11-use-extensions/05-observability-platform/06-alerting/03-rule-groups/03-view-rule-group-details/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -22066,6 +22267,27 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
     </item>
     
     <item>
+      <title>解绑企业空间</title>
+      <link>/v4.2.1/11-use-extensions/25-node-group/04-manage-node-groups/05-workspaces/03-unbind-a-workspace/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/25-node-group/04-manage-node-groups/05-workspaces/03-unbind-a-workspace/</guid>
+      <description> 本节介绍如何解除企业空间与节点组的绑定关系。
+ 前提条件    您需要加入一个集群并在集群中具有节点组管理权限。有关更多信息，请参阅集群成员和集群角色。
+     节点组已经与一个企业空间绑定。
+     解绑单个企业空间  以具有节点组管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入节点组管理页面。
+  在左侧导航栏选择企业空间。
+  在需要删除的企业空间右侧点击。
+  在删除企业空间对话框，输入企业空间的名称，然后点击确定。
+     批量解绑企业空间  以具有节点组管理权限的用户登录 KubeSphere 企业版 Web 控制台并进入节点组管理页面。
+  在左侧导航栏选择企业空间。
+  选择需要删除的企业空间左侧的复选框，然后在企业空间列表上方点击删除。
+  在删除企业空间对话框，输入企业空间的名称，然后点击确定。
+    说明     请使用半角逗号（,）和空格分隔多个名称。
+           </description>
+    </item>
+    
+    <item>
       <title>设置钉钉通知</title>
       <link>/v4.1.3/11-use-extensions/05-observability-platform/11-notifications/01-notification-channels/03-set-dingtalk-notification/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -22242,6 +22464,25 @@ kubectl get node   如果命令回显中没有显示需要删除的边缘节点�
     </item>
     
     <item>
+      <title>4. 创建 AlluxioRuntime</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/04-create-alluxioruntime/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/04-create-alluxioruntime/</guid>
+      <description>本节介绍如何创建 AlluxioRuntime，以实现 NFS 加速。
+ 前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已创建 NFS 数据集、创建 ThinRuntime、创建 PVC 数据集。
+     操作步骤  以具有数据集加速管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择数据集 &amp;gt; 数据加速运行时。
+  在页面点击创建。
+  在基本信息页签，选择已创建的 PVC 数据集，然后点击下一步。
+  在 Runtime 配置页签，Runtime 类型选择为 Alluxio，选择存储类型（Mem/Disk），设置缓存配额等参数，然后点击下一步。
+  在高级设置页签，点击创建。
+若创建成功，NFS 将作为 Alluxio 的底层存储接入。当数据加速运行时状态显示为`就绪`（Ready）时，表示 NFS 存储已成功接入并具备数据加速能力，后续数据访问将按需触发缓存与加速。</description>
+    </item>
+    
+    <item>
       <title>下线和上线微服务实例</title>
       <link>/v4.1.3/11-use-extensions/18-spring-cloud/01-microservices/04-take-a-microservice-instance-offline-and-online/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -22390,6 +22631,23 @@ tar -zxvf &amp;lt;package name&amp;gt;       注意     请确保操作目录有
    描述
  应用的描述信息。描述可包含任意字符，最长 256 个字符。
    位置</description>
+    </item>
+    
+    <item>
+      <title>从节点组中移除节点</title>
+      <link>/v4.2.1/11-use-extensions/25-node-group/01-node-groups/04-remove-nodes-from-a-group/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/25-node-group/01-node-groups/04-remove-nodes-from-a-group/</guid>
+      <description> 本节介绍如何从节点组中移除已添加的节点。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 节点组扩展组件。
+      您需要加入一个集群并在集群中具有节点组管理权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有节点组管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择节点 &amp;gt; 集群节点打开节点列表。
+  在节点列表中，点击需要操作的节点的名称打开节点详情页面。
+  在节点详情页面，点击操作 &amp;gt; 脱离节点组。
+  在脱离节点组对话框，输入节点名称，然后点击确定。
+     </description>
     </item>
     
     <item>
@@ -30544,6 +30802,27 @@ vi collect-node-info.sh   粘贴以下内容并保存：
    尽可能阻止调度
  缺少与污点匹配的容忍度的容器组将被尽可能阻止调度到节点，节点上原本运行的容器组不受影响。
    阻止调度并驱逐现有容器组</description>
+    </item>
+    
+    <item>
+      <title>编辑节点组信息</title>
+      <link>/v4.2.1/11-use-extensions/25-node-group/01-node-groups/05-edit-node-group-info/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/25-node-group/01-node-groups/05-edit-node-group-info/</guid>
+      <description> 本节介绍如何编辑节点组信息。
+ 节点组创建后，仅支持编辑节点组的别名和描述。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 节点组扩展组件。
+      您需要加入一个集群并在集群中具有节点组管理权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有节点组管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择节点组。
+  在需要操作的节点组右侧点击，然后在下拉列表中选择编辑信息。
+  在编辑信息对话框，设置节点组的别名和描述，然后点击确定。
+    参数 描述     别名
+ 别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。
+   描述
+ 节点组的描述信息。描述可包含任意字符，最长 256 个字符。
+           </description>
     </item>
     
     <item>
@@ -41051,6 +41330,23 @@ Volcano 作业将重新开始运行，并自动生成一条新的运行记录。
   在批量删除用户对话框，输入用户的名称，然后点击确定。
     说明     请使用半角逗号（,）和空格分隔多个名称。
          </description>
+    </item>
+    
+    <item>
+      <title>删除节点组</title>
+      <link>/v4.2.1/11-use-extensions/25-node-group/01-node-groups/15-delete-node-groups/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/25-node-group/01-node-groups/15-delete-node-groups/</guid>
+      <description> 本节介绍如何删除节点组。
+     注意     删除节点组时，请确保节点组下没有节点。若有，请先将节点从该节点组中移除。
+    前提条件   KubeSphere 平台需要安装并启用 KubeSphere 节点组扩展组件。
+      您需要加入一个集群并在集群中具有节点组管理权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有节点组管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择节点组。
+  在需要操作的节点组右侧点击，然后在下拉列表中选择删除。
+  在删除节点组对话框，输入节点组名称，然后点击确定。
+     </description>
     </item>
     
     <item>
