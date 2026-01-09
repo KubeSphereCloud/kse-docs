@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>配置高可用性 on KubeSphere</title>
+    <link>/v4.2.1/03-installation-and-upgrade/01-preparations/02-configure-high-availability/</link>
+    <description>Recent content in 配置高可用性 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/03-installation-and-upgrade/01-preparations/02-configure-high-availability/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置 Kubernetes 高可用性</title>
+      <link>/v4.2.1/03-installation-and-upgrade/01-preparations/02-configure-high-availability/02-configure-k8s-high-availability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/03-installation-and-upgrade/01-preparations/02-configure-high-availability/02-configure-k8s-high-availability/</guid>
+      <description>本节介绍如何在生产环境中为 KubeSphere 集群配置多个控制平面节点，以防止单个控制平面节点故障时集群服务中断，从而实现高可用性。如果您的 KubeSphere 集群没有高可用性需求，您可以跳过本节。
+ 本节介绍以下高可用性配置方式：
+   使用本地负载均衡配置。您可以在安装 KubeSphere 的过程中，设置 KubeKey 工具在工作节点上安装 HAProxy 作为各控制平面节点的反向代理，所有工作节点的 Kubernetes 组件将通过 HAProxy 连接各控制平面节点。这种方式需要额外的健康检查机制，所以相较其他方式运行效率有所降低，但可以用于没有专用负载均衡器且服务器数量有限的场景。
+  使用专用负载均衡器。您可以使用云环境提供的负载均衡器作为各控制平面节点的反向代理。这种方式要求 KubeSphere 集群安装在云环境中，并且云环境可以提供专用负载均衡器。
+  使用通用服务器作为负载均衡器。您可以在集群节点以外的 Linux 服务器上安装 Keepalived 和 HAProxy 作为负载均衡器。这种方式需要至少 2 台额外的 Linux 服务器。
+   使用本地负载均衡配置 如需使用 HAProxy 实现高可用性，只需要在安装 KubeSphere 时在安装配置文件 config-sample.yaml 中设置以下参数：
+ spec: controlPlaneEndpoint: internalLoadbalancer: haproxy domain: lb.kubesphere.local address: &amp;#34;&amp;#34; port: 6443   KubeKey 将自动在工作节点上安装 HAProxy 并完成高可用配置，您无需进行其他操作。有关更多信息请参阅安装 KubeSphere 。</description>
+    </item>
+    
+  </channel>
+</rss>

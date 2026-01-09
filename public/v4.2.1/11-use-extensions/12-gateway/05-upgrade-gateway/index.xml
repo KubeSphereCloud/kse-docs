@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网关升级 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/</link>
+    <description>Recent content in 网关升级 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>查看网关升级列表</title>
+      <link>/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/01-view-gateway-upgrade-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/01-view-gateway-upgrade-list/</guid>
+      <description>本节介绍网关升级列表，其展示了集群中所有网关实例的信息。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关升级。
+  在网关升级页签，查看集群中所有网关实例的信息。
+    参数 描述     名称
+ 网关的名称。启用网关后，系统自动设置网关名称。
+   状态
+ 网关的状态：创建中、运行中、警告、或故障。
+   网关版本
+ kubesphere-nginx-ingress 的版本。
+   类型</description>
+    </item>
+    
+    <item>
+      <title>升级网关实例</title>
+      <link>/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/03-upgrade-gateway-instance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/03-upgrade-gateway-instance/</guid>
+      <description>本节介绍如何升级网关实例。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     升级单个网关实例  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关升级。
+  在网关升级页签，可升级的网关实例后会显示升级字样。
+  点击升级，在弹出的对话框中，点击确定。
+将在“升级任务”页签自动创建一个对应的升级任务。
+      批量升级网关实例  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关升级。
+  在网关升级页签，可升级的网关实例后会显示升级字样。
+  选择需要升级的网关实例左侧的复选框，然后在列表上方点击升级。
+  点击升级，在弹出的对话框中，点击确定。</description>
+    </item>
+    
+    <item>
+      <title>查看升级任务列表</title>
+      <link>/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/05-view-upgrade-task-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/05-view-upgrade-task-list/</guid>
+      <description>本节介绍如何查看升级任务列表。一个升级任务可包含一个或多个网关实例的升级。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关升级。
+  在升级任务页签，查看集群中所有升级任务的信息。
+    参数 描述     名称
+ 自动生成的升级任务名称。
+   状态
+ 任务的状态：等待中、运行中、已完成、失败。
+   上次运行时间
+ 升级任务的上次运行结束时间。
+      在列表上方点击搜索框并设置搜索条件，可按名称、状态搜索升级任务。</description>
+    </item>
+    
+    <item>
+      <title>查看升级任务日志</title>
+      <link>/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/07-view-gateway-upgrade-logs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/07-view-gateway-upgrade-logs/</guid>
+      <description> 本节介绍如何查看升级任务列表。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关升级。
+  在升级任务页签，点击任务右侧的，选择查看日志。
+     </description>
+    </item>
+    
+    <item>
+      <title>删除升级任务</title>
+      <link>/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/10-delete-upgrade-task/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/12-gateway/05-upgrade-gateway/10-delete-upgrade-task/</guid>
+      <description>本节介绍如何删除升级任务。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     删除单个升级任务  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关升级。
+  在升级任务页签，在需要删除的任务右侧点击，然后在下拉列表中选择删除。
+  在删除升级任务对话框，输入任务的名称，然后点击确定。
+     批量删除升级任务  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关升级。
+  在升级任务页签，选择需要删除的任务左侧的复选框，然后在列表上方点击删除。
+  在批量删除升级任务对话框，输入任务的名称，然后点击确定。
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
+    </item>
+    
+  </channel>
+</rss>

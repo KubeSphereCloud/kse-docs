@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>创建镜像构建器 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/03-image-builder/01-create-an-image-builder/</link>
+    <description>Recent content in 创建镜像构建器 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/03-image-builder/01-create-an-image-builder/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用源代码创建镜像构建器</title>
+      <link>/v4.2.1/11-use-extensions/03-image-builder/01-create-an-image-builder/01-create-an-image-builder-using-source-code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/03-image-builder/01-create-an-image-builder/01-create-an-image-builder-using-source-code/</guid>
+      <description>本节介绍如何将源代码构建成容器镜像 (S2I)。
+ 镜像构建器开始运行后将自动进行以下操作：
+  连接用户指定的源代码仓库并获取应用程序的源代码。
+  使用镜像构建器将源代码构建为容器镜像。
+  将容器镜像推送到用户指定的镜像服务。
+   前提条件    您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
+     您需要具有可用的代码仓库。KubeSphere 默认支持 Git 仓库和 Java、Node.js 和 Python 源代码。
+  如果您使用私有代码仓库，您需要提前在项目中创建用于保存代码仓库密钥的保密字典。有关更多信息，请参阅创建保密字典。
+     您需要具有可用的容器镜像服务用于保存构建生成的容器镜像。有关更多信息，请参阅 Docker 官方文档。
+  您需要提前在项目中创建用于保存镜像服务信息的保密字典。有关更多信息，请参阅创建保密字典。
+     操作步骤  以具有应用负载管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
+  在左侧导航栏选择镜像构建器。
+  在页面左上角的下拉列表中选择一个项目。
+  在页面点击创建。
+  在构建模式页签，根据源代码的语言选择 Java、Node.</description>
+    </item>
+    
+    <item>
+      <title>使用制品创建镜像构建器</title>
+      <link>/v4.2.1/11-use-extensions/03-image-builder/01-create-an-image-builder/02-create-an-image-builder-using-an-artifact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/03-image-builder/01-create-an-image-builder/02-create-an-image-builder-using-an-artifact/</guid>
+      <description>本节介绍如何将制品构建成容器镜像 (B2I)。
+ 镜像构建器开始运行后将自动进行以下操作：
+  使用镜像构建器将用户上传的制品文件构建为容器镜像。
+  将容器镜像推送到用户指定的镜像服务。
+   示例制品 以下是一些示例制品，用于演示和测试：
+     制品包 GitHub 仓库     b2i-war-java8.war
+ spring-mvc-showcase
+   b2i-war-java11.war
+ springmvc5
+   b2i-binary
+ devops-go-sample
+   b2i-jar-java11.jar
+ java-maven-example
+   b2i-jar-java8.jar
+ devops-maven-sample
+      前提条件    您需要加入一个项目并在项目中具有应用负载管理权限。有关更多信息，请参阅项目成员和项目角色。
+     您需要提前准备用于构建镜像的制品文件。KubeSphere 默认支持 JAR、WAR 和二进制格式的制品文件。</description>
+    </item>
+    
+  </channel>
+</rss>

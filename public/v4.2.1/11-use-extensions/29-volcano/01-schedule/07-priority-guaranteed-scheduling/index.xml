@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>优先级保障调度 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/29-volcano/01-schedule/07-priority-guaranteed-scheduling/</link>
+    <description>Recent content in 优先级保障调度 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/29-volcano/01-schedule/07-priority-guaranteed-scheduling/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>优先级与抢占</title>
+      <link>/v4.2.1/11-use-extensions/29-volcano/01-schedule/07-priority-guaranteed-scheduling/01-priority-and-preemption/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/29-volcano/01-schedule/07-priority-guaranteed-scheduling/01-priority-and-preemption/</guid>
+      <description>优先级表示一个作业相对于其他作业的重要性，Volcano 兼容 Kubernetes 中的 Pod 优先级定义（PriorityClass）。启用该能力后，调度器将优先保障高优先级业务调度。集群资源不足时，调度器主动驱逐低优先级业务，保障高优先级业务可以正常调度。
+ 优先级调度与抢占介绍 用户在集群中运行的业务丰富多样，包括核心业务、非核心业务，在线业务、离线业务等，根据业务的重要程度和 SLA 要求，可以对不同业务类型设置相应的高优先级。比如对核心业务和在线业务设置高优先级，可以保证该类业务优先获取集群资源。当集群资源被非核心业务占用，整体资源不足时，如果有新的核心业务提交部署请求，可以通过抢占的方式驱逐部分非核心业务，释放集群资源用于核心业务的调度运行。
+     调度类型 说明     基于优先级调度
+ 调度器优先保障高优先级业务运行，但不会主动驱逐已运行的低优先级业务。
+   基于优先级抢占调度
+ 当集群资源不足时，调度器主动驱逐低优先级业务，保障高优先级业务正常调度。
+    基于优先级调度需要在调度器的 Plugin 中配置 priority
+ apiVersion: v1 data: volcano-scheduler.conf: | actions: &amp;#34;enqueue, allocate, backfill&amp;#34; tiers: - plugins: - name: priority - name: gang - name: conformance - plugins: - name: drf - name: predicates - name: nodeorder - name: binpack kind: ConfigMap metadata: name: volcano-scheduler-configmap namespace: volcano-system     基于优先级调度示例 Volcano 插件内置了三个优先级定义：</description>
+    </item>
+    
+  </channel>
+</rss>

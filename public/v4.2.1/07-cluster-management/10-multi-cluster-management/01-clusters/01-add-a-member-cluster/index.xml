@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>添加成员集群 on KubeSphere</title>
+    <link>/v4.2.1/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/</link>
+    <description>Recent content in 添加成员集群 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>通过直接连接添加成员集群</title>
+      <link>/v4.2.1/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/01-add-a-member-cluster-using-direct-connection/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/01-add-a-member-cluster-using-direct-connection/</guid>
+      <description>本节介绍如何通过直接连接添加成员集群。
+     注意     成员集群被纳管之前仅需安装 Kubernetes，无需安装 KubeSphere。若已安装 KubeSphere，请迁移数据并卸载 KubeSphere 后再进行纳管。
+    前提条件   您需要在主集群中具有 platform-admin 角色。
+  主集群所有节点必须能访问成员集群的 Kubernetes API 服务（默认为成员集群主节点的 6443 端口）。取决于您的网络环境，您可能需要配置防火墙和流量转发规则。
+     获取成员集群 kubeconfig  在成员集群的节点上，执行以下命令获取成员集群的 kubeconfig 信息：
+kubectl config view --raw     复制 kubeconfig 信息，并修改其中的 clusters:cluster:server 参数，如下：
+clusters: - cluster: server: https://&amp;lt;member-cluster-node-ip&amp;gt;:6443        添加成员集群  以具有 platform-admin 角色的用户登录主集群的 Web 控制台。</description>
+    </item>
+    
+    <item>
+      <title>添加集群的常见问题</title>
+      <link>/v4.2.1/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/05-solutions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/07-cluster-management/10-multi-cluster-management/01-clusters/01-add-a-member-cluster/05-solutions/</guid>
+      <description>添加成员集群时，若遇到异常提示，可参照下文进行处理。
+ 若使用 kubeconfig 直接连接集群 报错：managed by another host cluster 问题描述：current cluster is managed by another host cluster &amp;#39;host&amp;#39;
+ 解决办法：
+   场景 1
+若成员集群想要被新的集群纳管，请在成员集群上卸载 KubeSphere 后，重新添加该集群。
+   场景 2
+若成员集群被意外移除，需要被原 host 集群重新纳管，可编辑成员集群的 kubesphere-system 项目，删除以下注解，然后重新添加即可。
+ kubectl edit ns kubesphere-system   annotations: cluster.kubesphere.io/host-cluster: host # 删除此行 cluster.kubesphere.io/name: member # 删除此行         报错：connect: connection refused 问题描述：Get &amp;#34;https://172.18.0.3:6443/api/v1/namespaces/kube-system?timeout=10s&amp;#34;: dial tcp 172.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>容器水平伸缩 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/</link>
+    <description>Recent content in 容器水平伸缩 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建容器水平伸缩</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/01-create-hpa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/01-create-hpa/</guid>
+      <description>本节介绍如何创建容器水平伸缩（HPA）。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器水平伸缩管理权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Metrics Server 扩展组件。
+     操作步骤  以具有容器水平伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器水平伸缩。
+  在页面点击创建。
+  在基本信息页签，设置容器水平伸缩的基本信息和伸缩对象，然后点击下一步。
+    参数 描述     名称
+ 容器水平伸缩的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+   别名
+ 容器水平伸缩的别名。不同 HPA 的别名可以相同。
+   描述
+ 容器水平伸缩的描述信息。描述可包含任意字符，最长 256 个字符。</description>
+    </item>
+    
+    <item>
+      <title>查看 HPA 列表</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/02-view-hpa-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/02-view-hpa-list/</guid>
+      <description>本节介绍如何查看容器水平伸缩的列表信息。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器水平伸缩查看权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Metrics Server 扩展组件。
+     操作步骤  以具有容器水平伸缩查看权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器水平伸缩。
+  在页面左上角的下拉列表中选择一个项目。
+  容器水平伸缩列表提供以下信息：
+    参数 描述     策略名称
+ 容器水平伸缩（HPA）的名称。
+   状态
+ HPA 的当前状态。若状态异常，鼠标悬停于图标上可查看错误详情。
+   伸缩对象
+ HPA 所管理的工作负载，通常是部署或有状态副本集。
+   目标 CPU/内存用量</description>
+    </item>
+    
+    <item>
+      <title>查看 HPA 详情</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/03-view-hpa-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/03-view-hpa-details/</guid>
+      <description>本节介绍如何查看 HPA 的详情信息。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器水平伸缩查看权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Metrics Server 扩展组件。
+     操作步骤  以具有容器水平伸缩查看权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器水平伸缩。
+  在页面左上角的下拉列表中选择一个项目。
+  在 HPA 列表中点击一个 HPA 的名称打开其详情页面。
+  在属性区域，查看 HPA 的资源属性，如当前状态、所属集群和项目。
+若状态异常，鼠标悬停于图标上可查看错误详情。
+   在资源状态页签，查看 HPA 的详细状态信息和伸缩对象信息。
+  状态信息
+    说明     如果显示则表明状态正常，如果显示则表明出现异常，如果显示则表明因信息不足无法确定状态。</description>
+    </item>
+    
+    <item>
+      <title>编辑 HPA 信息</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/04-edit-hpa-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/04-edit-hpa-information/</guid>
+      <description>本节介绍如何编辑 HPA 的信息。
+ 您可以编辑 HPA 的别名和描述。KubeSphere 不支持编辑 HPA 的名称。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器水平伸缩管理权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Metrics Server 扩展组件。
+     操作步骤  以具有容器水平伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器水平伸缩。
+  在页面左上角的下拉列表中选择一个项目。
+  在需要操作的 HPA 右侧点击，然后在下拉列表中选择编辑信息。
+  在编辑信息对话框，设置 HPA 的别名和描述，然后点击确定。
+    参数 描述     别名
+ HPA 的别名。不同 HPA 的别名可以相同。</description>
+    </item>
+    
+    <item>
+      <title>编辑 HPA 设置</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/05-edit-hpa-settings/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/05-edit-hpa-settings/</guid>
+      <description> 本节介绍如何编辑 HPA 的伸缩设置。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器水平伸缩管理权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Metrics Server 扩展组件。
+     操作步骤  以具有容器水平伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器水平伸缩。
+  在页面左上角的下拉列表中选择一个项目。
+  在需要操作的 HPA 右侧点击，然后在下拉列表中选择编辑伸缩设置。
+  在编辑伸缩设置对话框，设置最小最大副本数、伸缩指标和伸缩行为，然后点击确定。
+有关各参数的说明，请参阅创建容器水平伸缩。
+        </description>
+    </item>
+    
+    <item>
+      <title>在工作负载页面管理 HPA 资源</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/06-manage-hpa-on-workload-pages/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/06-manage-hpa-on-workload-pages/</guid>
+      <description> 本节介绍如何在工作负载的详情页面管理与其绑定的 HPA（容器水平伸缩）资源。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器水平伸缩管理权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Metrics Server 扩展组件。
+     操作步骤  以具有容器水平伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择工作负载 &amp;gt; 部署/有状态副本集。
+  在列表中点击一个工作负载的名称打开其详情页面。
+  在工作负载详情页面点击容器水平伸缩。
+  在容器水平伸缩页面，点击创建。HPA 创建步骤请参阅创建容器水平伸缩。
+  若已有与当前工作负载绑定的 HPA 资源，点击 HPA 名称查看详情，并可对其进行编辑信息、编辑伸缩设置和删除操作。
+     </description>
+    </item>
+    
+    <item>
+      <title>删除 HPA 资源</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/08-delete-hpa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/08-delete-hpa/</guid>
+      <description>本节介绍如何删除 HPA 资源。
+ 前提条件    您需要加入一个集群或项目，并在集群或项目中具有容器水平伸缩管理权限。有关更多信息，请参阅集群角色和项目角色。
+     KubeSphere 平台需要安装并启用 Metrics Server 扩展组件。
+     删除单个 HPA  以具有容器水平伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器水平伸缩。
+  在页面左上角的下拉列表中选择一个项目。
+  在需要删除的 HPA 右侧点击，然后在下拉列表中选择删除。
+  在删除容器水平伸缩对话框，输入 HPA 的名称，然后点击确定。
+     批量删除 HPA  以具有容器水平伸缩管理权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+  在左侧导航栏选择弹性伸缩 &amp;gt; 容器水平伸缩。
+  在页面左上角的下拉列表中选择一个项目。</description>
+    </item>
+    
+    <item>
+      <title>容器水平伸缩 (HPA) 最佳实践</title>
+      <link>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/10-hpa-best-practice/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/24-elastic-scaling/01-hpa/10-hpa-best-practice/</guid>
+      <description>如果您想基于 CPU 使用率、内存使用率或其他自定义指标实现 Pod 的自动扩缩，建议您为业务容器开启容器水平伸缩 HPA（Horizontal Pod Autoscaler）功能。HPA 能够在业务负载急剧飙升时快速扩容多个 Pod 副本来缓解压力，也可以在业务负载变小时根据实际情况适当缩容以节省资源，无需您人为干预。HPA 适用于服务波动较大、服务数量多且需要频繁扩缩容的业务场景。
+ 使用容器水平伸缩 (HPA) 创建 HorizontalPodAutoscaler 资源并关联工作负载，设定触发条件，如下方配置。当 HPA 创建成功且达到伸缩条件时，工作负载副本数将按算法调整，进行水平扩缩。
+ 操作步骤：在创建容器水平伸缩对话框中，点击编辑 YAML，输入以下内容并保存。
+ apiVersion: autoscaling/v2 kind: HorizontalPodAutoscaler metadata: name: nginx-hpa spec: scaleTargetRef: apiVersion: apps/v1 kind: Deployment name: nginx minReplicas: 1 # Deployment 可缩容的容器数量下限，需设置为大于等于 1 的整数 maxReplicas: 10 # 该 Deployment 可扩容的容器数量上限，需大于 minReplicas metrics: - type: Resource resource: name: cpu target: type: Utilization averageUtilization: 50 # 目标资源的平均使用率，即资源使用量的平均值与其请求量之间的比例 - type: Resource resource: name: memory target: type: AverageValue averageValue: 500Mi # 目标资源的平均用量     调节扩缩容灵敏度 如果默认的扩缩容行为无法满足业务需求，您可以通过 behavior 字段更细粒度地配置缩容（scaleDown）和扩容（scaleUp）行为。更多信息，请参阅配置扩缩行为。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>对象存储加速 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/14-fluid/01-s3-accelerate/</link>
+    <description>Recent content in 对象存储加速 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/14-fluid/01-s3-accelerate/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1. 创建 S3 数据集</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/01-s3-accelerate/01-create-s3-dataset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/01-s3-accelerate/01-create-s3-dataset/</guid>
+      <description>本节介绍如何创建 S3 数据集，用于连接对象存储。 更多信息，请参阅 Fluid 官方文档。
+ 前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已配置完成 S3 bucket，且已获取访问该 bucket 的证书等信息。
+     步骤 1：创建保密字典 为了保证数据的安全，建议使用 Secret（保密字典）来配置创建数据集时需要的敏感信息，如 accessKeyId, accessKeySecret。
+  以具有 cluster-admin 角色的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择配置 &amp;gt; 保密字典。
+  在页面点击创建。
+  在基本信息页签，设置保密字典的基本信息，然后点击下一步。
+  在数据设置页签，在类型下拉列表中选择默认，添加键值对数据，然后点击创建。
+此为示例：
+     键 值     access_key_id</description>
+    </item>
+    
+    <item>
+      <title>2. 创建 AlluxioRuntime</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/01-s3-accelerate/02-create-alluxioruntime/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/01-s3-accelerate/02-create-alluxioruntime/</guid>
+      <description> 本节介绍如何创建 AlluxioRuntime，以实现对象存储加速。
+ 前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已创建 S3 数据集。
+     操作步骤  以具有数据集加速管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择数据集 &amp;gt; 数据加速运行时。
+  在页面点击创建。
+  在基本信息页签，选择已创建的 S3 数据集，然后点击下一步。
+  在 Runtime 配置页签，Runtime 类型选择为 Alluxio，选择存储类型（Mem/Disk），设置缓存配额等参数，然后点击下一步。
+  在高级设置页签，点击创建。
+若创建成功，对象存储 Bucket 将作为 Alluxio 的底层存储接入。当数据加速运行时状态显示为`就绪`（Ready）时，表示对象存储已成功接入并具备数据加速能力，后续数据访问将按需触发缓存与加速。
+      </description>
+    </item>
+    
+  </channel>
+</rss>

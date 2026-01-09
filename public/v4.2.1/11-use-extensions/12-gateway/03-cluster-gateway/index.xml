@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>集群网关 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/</link>
+    <description>Recent content in 集群网关 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>启用集群网关</title>
+      <link>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/01-enable-a-cluster-gateway/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/01-enable-a-cluster-gateway/</guid>
+      <description>本节介绍如何启用集群网关。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关设置。
+  在页面右侧点击启用网关。
+  在弹出的对话框，设置网关的参数，然后点击确定。
+    参数 描述     Nginx Ingress 版本
+ Nginx Ingress 的版本。KubeSphere 网关扩展组件基于 Nginx Ingress 提供网关管理功能。
+   IngressClassName
+ IngressClass 的名称。</description>
+    </item>
+    
+    <item>
+      <title>查看网关信息</title>
+      <link>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/02-view-gateway-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/02-view-gateway-information/</guid>
+      <description>本节介绍如何查看网关信息。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关设置。
+  在集群网关页签，查看集群网关的信息。
+    参数 描述     状态
+ 网关的状态：创建中、运行中、更新中、或故障。
+   类型
+ 网关的类型，为集群网关、企业空间网关或项目网关。
+   创建者
+ 启用网关的用户。
+   创建时间
+ 网关的启用时间。</description>
+    </item>
+    
+    <item>
+      <title>查看集群网关详情</title>
+      <link>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/03-view-cluster-gateway-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/03-view-cluster-gateway-details/</guid>
+      <description>本节介绍如何查看集群网关详情。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关设置。
+  在页面右侧选择管理 &amp;gt; 查看详情打开网关详情页面。
+  在网关详情页面的属性区域查看网关的资源属性。
+    参数 描述     集群
+ 网关所属的集群。
+   状态
+ 网关的状态：创建中、运行中、更新中、或故障。
+   创建时间
+ 网关的创建时间。</description>
+    </item>
+    
+    <item>
+      <title>编辑集群网关设置</title>
+      <link>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/04-edit-cluster-gateway-settings/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/04-edit-cluster-gateway-settings/</guid>
+      <description>本节介绍如何编辑集群网关设置。
+ 前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关设置。
+  在页面右侧选择管理 &amp;gt; 编辑。
+  在弹出的对话框，修改网关的参数，然后点击确定。
+    参数 描述     IngressClassName
+ IngressClass 的名称。
+   容器组副本数量
+ 期望的容器组副本数量。该数值必须在配置的实际运行容器组副本数的最大值与最小值区间范围内。
+   实际运行容器组副本数限制
+ 限制实际运行的容器组副本的最小数量和最大数量，以确保网关性能，同时防止资源耗尽。</description>
+    </item>
+    
+    <item>
+      <title>禁用集群网关</title>
+      <link>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/05-disable-a-cluster-gateway/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/05-disable-a-cluster-gateway/</guid>
+      <description> 本节介绍如何禁用集群网关。
+     警告     网关禁用后，客户端将无法访问由网关反向代理的服务，相关业务可能会中断，请谨慎执行此操作。
+    前提条件   KubeSphere 平台需要安装并启用 KubeSphere 网关扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择网关 &amp;gt; 网关设置。
+  在页面右侧选择管理 &amp;gt; 禁用。
+  在弹出的对话框点击确定。
+     </description>
+    </item>
+    
+    <item>
+      <title>附录：member 集群网关日志无数据的解决办法</title>
+      <link>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/07-issue-no-gateway-log-in-member/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/07-issue-no-gateway-log-in-member/</guid>
+      <description>若 member 集群的“集群网关”详情页中，“网关日志”页签不显示数据，可采用以下方法解决。
+  启用 host 集群上 whizard-telemetry-apiserver 服务的 NodePort 访问模式。
+ 在 host 集群，点击服务与网络 &amp;gt; 服务进入服务页面。
+  搜索服务 whizard-telemetry-apiserver，点击 &amp;gt; 编辑外部访问。
+  在编辑外部访问对话框，选择 NodePort，然后点击确定。
+     修改 KubeSphere 网关的扩展组件配置，将 backend.config.gateway.logSearchEndpoint 设置为 host 集群上 whizard-telemetry-apiserver 服务的访问地址。
+backend: enabled: true config: gateway: namespace: kubesphere-controls-system valuesOverride: controller: image: registry: &amp;#34;&amp;#34; image: kubesphereio/nginx-ingress-controller tag: &amp;#34;v1.4.0&amp;#34; pullPolicy: IfNotPresent digest: &amp;#34;&amp;#34; exposeNodeLabelKey: &amp;#34;node-role.kubernetes.io/control-plane&amp;#34; versionConstraint: &amp;#34;&amp;gt;= 4.3.0, &amp;lt; 4.5.0&amp;#34; logSearchEndpoint: &amp;#34;http://whizard-telemetry-apiserver.</description>
+    </item>
+    
+  </channel>
+</rss>

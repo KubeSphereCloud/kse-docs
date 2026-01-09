@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>队列 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/29-volcano/02-queue/</link>
+    <description>Recent content in 队列 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/29-volcano/02-queue/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建队列</title>
+      <link>/v4.2.1/11-use-extensions/29-volcano/02-queue/01-create-a-queue/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/29-volcano/02-queue/01-create-a-queue/</guid>
+      <description>本节介绍如何创建队列。
+     说明     安装 Volcano 扩展组件后，会自动创建名为 root 和 default 的两个队列。
+   root 队列是所有队列的根队列。
+  default 队列是 Volcano 作业默认使用的队列。
+      前提条件   KubeSphere 平台需要安装并启用 Volcano 扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择 Volcano 调度 &amp;gt; 队列。</description>
+    </item>
+    
+    <item>
+      <title>查看队列列表</title>
+      <link>/v4.2.1/11-use-extensions/29-volcano/02-queue/03-view-a-queue-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/29-volcano/02-queue/03-view-a-queue-list/</guid>
+      <description>本节介绍队列列表的信息。
+ 前提条件   KubeSphere 平台需要安装并启用 Volcano 扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择 Volcano 调度 &amp;gt; 队列。
+    说明     在企业空间左侧导航栏，也可查看其所属集群下的 Volcano 队列列表。
+    队列列表提供以下信息：
+     参数 描述     名称
+ 队列的名称和别名。</description>
+    </item>
+    
+    <item>
+      <title>编辑队列信息</title>
+      <link>/v4.2.1/11-use-extensions/29-volcano/02-queue/05-edit-queue-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/29-volcano/02-queue/05-edit-queue-information/</guid>
+      <description> 本节介绍如何编辑队列的基本信息。
+ 您可以编辑队列的别名和描述。KubeSphere 不支持编辑已创建队列的名称。
+ 前提条件   KubeSphere 平台需要安装并启用 Volcano 扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择 Volcano 调度 &amp;gt; 队列。
+  在需要操作的队列右侧点击，然后在下拉列表中选择编辑信息。
+  在编辑信息对话框，设置队列的别名和描述，然后点击确定。
+    参数 描述     别名
+ 队列的别名。不同队列的别名可以相同。
+   描述
+ 队列的描述信息。描述可包含任意字符，最多包含 256 个字符。
+           </description>
+    </item>
+    
+    <item>
+      <title>编辑队列配置</title>
+      <link>/v4.2.1/11-use-extensions/29-volcano/02-queue/07-edit-queue-config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/29-volcano/02-queue/07-edit-queue-config/</guid>
+      <description> 队列创建完成后，可通过 yaml 文件修改队列的配置。
+ 前提条件   KubeSphere 平台需要安装并启用 Volcano 扩展组件。
+      您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+     操作步骤  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择 Volcano 调度 &amp;gt; 队列。
+  在需要操作的队列右侧点击，然后在下拉列表中选择编辑 YAML。
+  在编辑 YAML对话框，查看、编辑队列的配置。
+有关队列的更多信息，请参阅 Volcano 官方文档。
+      </description>
+    </item>
+    
+    <item>
+      <title>删除队列</title>
+      <link>/v4.2.1/11-use-extensions/29-volcano/02-queue/10-delete-queues/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/29-volcano/02-queue/10-delete-queues/</guid>
+      <description>本节介绍如何删除队列。
+     注意     删除队列前，请确保该队列未被 Volcano 作业使用。否则，Volcano 作业将运行失败。
+    前提条件 您需要加入一个集群并在集群中具有 cluster-admin 权限。有关更多信息，请参阅集群成员和集群角色。
+   删除单个队列  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择 Volcano 调度 &amp;gt; 队列。
+  在需要删除的队列右侧点击，然后在下拉列表中选择删除。
+  在删除队列对话框，输入队列的名称，然后点击确定。
+     批量删除队列  以具有 cluster-admin 权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择 Volcano 调度 &amp;gt; 队列。
+  选择需要删除的队列左侧的复选框，然后在队列列表上方点击删除。</description>
+    </item>
+    
+  </channel>
+</rss>

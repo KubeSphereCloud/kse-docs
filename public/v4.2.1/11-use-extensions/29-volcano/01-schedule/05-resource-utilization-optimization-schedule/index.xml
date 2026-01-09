@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>资源利用率优化调度 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/29-volcano/01-schedule/05-resource-utilization-optimization-schedule/</link>
+    <description>Recent content in 资源利用率优化调度 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/29-volcano/01-schedule/05-resource-utilization-optimization-schedule/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>装箱调度 (BinPack)</title>
+      <link>/v4.2.1/11-use-extensions/29-volcano/01-schedule/05-resource-utilization-optimization-schedule/01-binpack/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/29-volcano/01-schedule/05-resource-utilization-optimization-schedule/01-binpack/</guid>
+      <description>装箱调度（Binpack）是一种优化算法，以最小化资源使用量为目标，将资源合理地分配给每个任务，使所有资源都可以实现最大化的利用价值。在集群工作负载的调度过程中使用 Binpack 调度策略，调度器会优先将 Pod 调度到资源消耗较多的节点，减少各节点空闲资源碎片，提高集群资源利用率。
+ Binpack 功能介绍 Binpack 调度算法的目标是最大限度地填满现有节点，尽量避免将 Pod 调度至空闲节点。具体实现中，调度器会对所有满足条件的节点进行打分，资源利用率越高，得分越高，调度优先级也越高。Binpack 算法能够尽可能填满节点，将应用负载靠拢在部分节点，这非常有利于集群节点的自动扩缩容功能。
+ Binpack 为 Volcano 调度器的多个调度插件之一，与其他调度插件协同工作，共同影响节点的最终得分。用户可自定义 Binpack 插件的全局权重，并分别为 CPU、内存基础资源以及 GPU、NPU 等扩展资源配置打分权重，从而控制 Binpack 在调度决策中的影响程度。在计算 Binpack 得分时，调度器会综合考虑 Pod 所请求的各类资源，并基于各资源的打分权重进行加权平均，以确定节点的最终得分。
+   Binpack 算法原理 在对节点打分时，Binpack 会结合插件的全局权重和各资源维度（如 CPU、内存、GPU 等）的权重值，计算出节点 Binpack 得分。节点 Binpack 得分的计算流程如下：
+ 首先，对 Pod 请求资源中的每类资源依次打分，以 CPU 为例，CPU 资源在待调度节点的得分信息如下：
+ CPU.weight * (request + used) / allocatable   即 CPU 权重值越高，得分越高，节点资源使用量越满，得分越高。Memory、GPU 等资源原理类似。其中：
+   CPU.weight 为用户设置的 CPU 权重</description>
+    </item>
+    
+    <item>
+      <title>重调度</title>
+      <link>/v4.2.1/11-use-extensions/29-volcano/01-schedule/05-resource-utilization-optimization-schedule/02-rescheduling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/29-volcano/01-schedule/05-resource-utilization-optimization-schedule/02-rescheduling/</guid>
+      <description>集群中的调度是将 pending 状态的 Pod 分配到节点运行的过程，在集群之中，Pod 的调度依赖于集群中的调度器（kube-scheduler 或者 Volcano 调度器）。调度器是通过一系列算法计算出 Pod 运行的最佳节点，但是 Kubernetes 集群环境是存在动态变化的，例如某一个节点需要维护，这个节点上的所有 Pod 会被驱逐到其他节点，但是当维护完成后，之前被驱逐的 Pod 并不会自动回到该节点上来，因为 Pod 一旦被绑定了节点是不会触发重新调度的。由于这些变化，集群在一段时间之后就可能会出现不均衡的状态。
+ 为了解决上述问题，Volcano 调度器可以根据设置的策略，驱逐不符合配置策略的 Pod，让其重新进行调度，达到均衡集群负载、减少资源碎片化的目的。
+ 负载感知重调度（LoadAware） 在 K8s 集群治理过程中，常常会因 CPU、内存等高使用率状况而形成热点，既影响了当前节点上 Pod 的稳定运行，也会导致节点发生故障的几率的激增。为了应对集群节负载不均衡等问题，动态平衡各个节点之间的资源使用率，需要基于节点的相关监控指标，构建集群资源视图，在集群治理阶段，通过实时监控，在观测到节点资源率较高、节点故障、Pod 数量较多等情况时，可以自动干预，迁移资源使用率高的节点上的一些 Pod 到利用率低的节点上。
+   使用该插件时，highThresholds 需要大于 lowThresholds，否则重调度器无法启用。
+   正常节点：资源利用率大于等于 30%且小于等于 80%的节点。此节点的负载水位区间是期望达到的合理区间范围。
+  热点节点：资源利用率高于 80%的节点。热点节点将驱逐一部分 Pod，降低负载水位，使其不超过 80%。重调度器会将热点节点上面的 Pod 调度到空闲节点上面。
+  空闲节点：资源利用率低于 30%的节点。
+     CPU 和内存资源碎片率整理策略（HighNodeUtilization） 从分配率低的节点上驱逐 Pod。这个策略必须与 Volcano 调度器的 binpack 策略或者 kube-scheduler 调度器的 MostAllocated 策略一起使用。阈值可以分为 CPU 和内存两种资源角度进行配置。</description>
+    </item>
+    
+  </channel>
+</rss>
