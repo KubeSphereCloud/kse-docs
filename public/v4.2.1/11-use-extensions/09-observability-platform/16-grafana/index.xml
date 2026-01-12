@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Grafana for WizTelemetry on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/09-observability-platform/16-grafana/</link>
+    <description>Recent content in Grafana for WizTelemetry on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/09-observability-platform/16-grafana/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>查看内置 Dashboard</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/16-grafana/01-built-in-dashboards/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/16-grafana/01-built-in-dashboards/</guid>
+      <description>Grafana for WizTelemetry 扩展组件内置了多个 Grafana Dashboard 模板，可供直接查询 Kubernetes 和 KubeSphere 的监控数据，而无需自行配置 Grafana Dashboard。
+ 操作步骤  登录 Grafana 控制台后，点击左侧导航栏的 Dashboards，查看所有内置的 Dashboard 模板。包含 kube-prometheus-stack, whizard-loki, whizard-monitoring 等目录。
+    目录 模板介绍     kube-prometheus-stack
+ 可视化 Kubernetes 的监控数据。
+   whizard-loki
+ 可视化存储到 Loki 的 KubeSphere 日志、审计、事件及通知历史。
+   whizard-monitoring
+ 适配 Whizard 与 KubeSphere 后的多集群监控。
+        注意       安装 WizTelemetry 监控扩展组件后，kube-prometheus-stack 和 whizard-monitoring 中的 Dashboard 才会显示监控数据。</description>
+    </item>
+    
+    <item>
+      <title>添加数据源</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/16-grafana/05-add-data-source/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/16-grafana/05-add-data-source/</guid>
+      <description>本节简要介绍如何添加、配置和查询数据源。有关更多信息，请参阅 Grafana data sources。
+ 创建 Dashboard 前，必须先添加数据源。Grafana for WizTelemetry 扩展组件默认添加了 Prometheus 的服务器地址为数据源。您也可以自行添加数据源，如 Loki、Elasticsearch、InfluxDB、PostgreSQL、MySQL 等。
+ 添加数据源后，您可以：
+   使用 Explore 查询数据。
+  在面板中将数据可视化。
+  创建告警规则。
+   前提条件 只有在 Grafana 控制台具有 admin 角色的用户才能添加或删除数据源。
+   添加数据源  登录 Grafana 控制台后，点击左侧导航栏的 Connections。
+  搜索数据源，如 loki。
+  点击数据源名称，进入数据源概览页面。
+  点击右上角的 Add new data source，进入数据源配置页面。
+  输入数据源的服务器地址，点击最下方的 Save &amp;amp; test，完成数据源的添加和配置。
+
+      查询数据源数据 设置查询条件，查询数据源中特定指标一段时间范围内的数据。</description>
+    </item>
+    
+    <item>
+      <title>创建 Dashboard</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/16-grafana/07-create-dashboards/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/16-grafana/07-create-dashboards/</guid>
+      <description>添加数据源后，创建 Dashboard， 以便将数据源中的数据可视化。
+ Dashboard 由一个或多个 Panel（面板）组成，按行组织和排列。Panel 显示可视化内容并提供各种控制选项。
+ 本节简要介绍如何创建 Dashboard。有关更多信息，请参阅 Grafana dashboards。
+ 操作步骤  点击 Grafana 控制台左侧导航栏的 Dashboards。
+  点击 New &amp;gt; New Dashboard。
+  在空白 Dashboard 页面，点击 + Add visualization。
+  在弹出的对话框中，选择已添加的数据源，将自动打开 Panel 编辑页面。
+
+  使用数据源的查询语言设置查询条件。
+  点击查询数据。
+  点击右侧的图表类型（如 Time series），选择一个图表样式。数据将以该样式展示。
+  在 Panel options 区域，设置 Panel 的名称，描述等。
+  编辑完成后，点击 Apply 保存 Panel，点击 Save 保存 Dashboard。</description>
+    </item>
+    
+  </channel>
+</rss>
