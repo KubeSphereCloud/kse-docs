@@ -21029,7 +21029,7 @@
     离线升级到 v4.2.1</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2026-01-07 09:02:45
+      更新时间：2026-01-14 06:02:58
     </div>
     
     
@@ -21358,7 +21358,7 @@ EOF</code></pre>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install ks-core charts/ks-core -n kubesphere-system -f kse-v4.2.1-host-custom-values.yaml --wait --debug</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install ks-core charts/ks-core -n kubesphere-system -f kse-v4.2.1-host-custom-values.yaml --wait --debug --take-ownership</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch admon attention">
@@ -21372,8 +21372,15 @@ EOF</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><a href="https://helm.sh/zh/docs/intro/install/">helm</a> 版本需要 &gt;= 3.17.0</p>
+</li>
+<li>
 <p>替换 <code>charts/ks-core</code> 为当前环境下 ks-core chart 的真实路径。</p>
+</li>
+</ul>
 </div></div></td>
 </tr>
 </tbody>
@@ -21483,7 +21490,7 @@ EOF</code></pre>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install ks-core charts/ks-core -n kubesphere-system -f kse-v4.2.1-member-custom-values.yaml --wait --debug</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install ks-core charts/ks-core -n kubesphere-system -f kse-v4.2.1-member-custom-values.yaml --wait --debug --take-ownership</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch admon attention">
@@ -21497,8 +21504,15 @@ EOF</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><a href="https://helm.sh/zh/docs/intro/install/">helm</a> 版本需要 &gt;= 3.17.0</p>
+</li>
+<li>
 <p>替换 <code>charts/ks-core</code> 为当前环境下 ks-core chart 的真实路径。</p>
+</li>
+</ul>
 </div></div></td>
 </tr>
 </tbody>
