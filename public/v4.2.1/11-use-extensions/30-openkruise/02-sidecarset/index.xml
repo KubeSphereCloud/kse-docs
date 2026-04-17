@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SidecarSet on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/</link>
+    <description>Recent content in SidecarSet on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建 SidecarSet</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/01-create-sidecarset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/01-create-sidecarset/</guid>
+      <description>本节介绍如何创建 SidecarSet。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。
+  在页面右上角点击创建。
+  在基本信息页签，填写以下参数后点击下一步。
+       参数 描述     名称
+ SidecarSet 的名称。只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+   别名
+ SidecarSet 的别名。支持中文、字母、数字和连字符（-），不得以连字符（-）开头和结尾，最长 63 个字符。
+   描述
+ SidecarSet 的描述信息。可包含任意字符，最长 256 个字符。
+     在 SidecarSet 设置页签，配置 SidecarSet 的生效范围和注入策略，然后点击下一步。
+       参数 描述     项目设置（spec.</description>
+    </item>
+    
+    <item>
+      <title>查看 SidecarSet</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/02-view-sidecarset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/02-view-sidecarset/</guid>
+      <description>查看 SidecarSet 列表  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。
+   SidecarSet 列表提供以下信息：
+     参数 描述     名称
+ SidecarSet 的名称。
+   更新策略
+ SidecarSet 当前配置的更新方式。
+   暂停注入
+ 是否已暂停向新容器组注入 Sidecar 容器。
+   更新时间
+ SidecarSet 最近一次更新的时间。
+      在列表上方点击搜索框并输入关键字，可按名称搜索 SidecarSet。
+  在列表右上角点击刷新图标可刷新列表，点击自定义列图标可定制显示的列。
+     查看 SidecarSet 详情  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。</description>
+    </item>
+    
+    <item>
+      <title>管理 Sidecar 注入</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/03-manage-sidecar-injection/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/03-manage-sidecar-injection/</guid>
+      <description> 本节介绍如何暂停或恢复 SidecarSet 的 Sidecar 注入。
+ 暂停注入后，SidecarSet 将不再向新创建的容器组注入 Sidecar 容器；恢复注入后，新创建的符合生效范围条件的容器组将重新自动注入 Sidecar 容器。
+ 暂停或恢复注入操作仅影响新创建的容器组，不会对已完成注入的存量容器组产生影响。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。
+  在需要操作的 SidecarSet 右侧点击操作图标，在下拉列表中选择 暂停注入 或 恢复注入。
+  在弹出的确认对话框中点击 确定。
+     编辑 YAML 在需要操作的 SidecarSet 右侧点击操作图标，选择 编辑 YAML，在编辑器中修改配置后点击 确定 即可。
+ 建议优先通过页面向导操作；仅在需要批量调整或配置高级字段时使用 YAML 编辑方式，以降低配置出错的风险。
+   </description>
+    </item>
+    
+    <item>
+      <title>在工作负载中引用 SidecarSet</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/04-use-sidecarset-in-workload/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/04-use-sidecarset-in-workload/</guid>
+      <description> 本节介绍如何在创建其他工作负载时引用 SidecarSet，以实现 Sidecar 容器的自动注入。
+ 前提条件   已完成 SidecarSet 的创建，且目标 SidecarSet 未处于暂停注入状态。
+  SidecarSet 的生效范围包含目标工作负载所在的项目。
+  KubeSphere 平台需要安装并启用 OpenKruise 扩展组件。
+     操作步骤  登录 KubeSphere Web 控制台，进入目标集群的目标项目，在左侧导航栏选择 工作负载 &amp;gt; 部署。
+  点击 创建，按照向导填写基本信息后，进入 容器组设置 页签。
+  在 容器组设置 页签中，点击 注入 Sidecar 容器。
+  在弹出的列表中选择目标 SidecarSet，然后继续完成工作负载的创建。
+   若目标 SidecarSet 处于暂停注入状态，或其生效范围不包含当前项目，则该 SidecarSet 不会出现在可选列表中。
+   </description>
+    </item>
+    
+    <item>
+      <title>删除 SidecarSet</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/05-delete-sidecarset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/05-delete-sidecarset/</guid>
+      <description> 本节介绍如何删除 SidecarSet。SidecarSet 删除后不能恢复。已通过该 SidecarSet 注入至存量容器组的 Sidecar 容器不会自动移除，请谨慎执行此操作。
+ 删除单个 SidecarSet  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。
+  在需要删除的 SidecarSet 右侧点击操作图标，选择删除。
+  在删除 SidecarSet 对话框中输入 SidecarSet 的名称，然后点击确定。
+     批量删除 SidecarSet  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。
+  勾选需要删除的 SidecarSet 左侧的复选框，在列表上方点击删除。
+  在批量删除 SidecarSet 对话框中输入 SidecarSet 的名称，然后点击确定。
+     </description>
+    </item>
+    
+  </channel>
+</rss>

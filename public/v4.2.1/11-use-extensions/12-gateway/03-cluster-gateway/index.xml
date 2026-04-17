@@ -106,20 +106,5 @@
      </description>
     </item>
     
-    <item>
-      <title>附录：member 集群网关日志无数据的解决办法</title>
-      <link>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/07-issue-no-gateway-log-in-member/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/v4.2.1/11-use-extensions/12-gateway/03-cluster-gateway/07-issue-no-gateway-log-in-member/</guid>
-      <description>若 member 集群的“集群网关”详情页中，“网关日志”页签不显示数据，可采用以下方法解决。
-  启用 host 集群上 whizard-telemetry-apiserver 服务的 NodePort 访问模式。
- 在 host 集群，点击服务与网络 &amp;gt; 服务进入服务页面。
-  搜索服务 whizard-telemetry-apiserver，点击 &amp;gt; 编辑外部访问。
-  在编辑外部访问对话框，选择 NodePort，然后点击确定。
-     修改 KubeSphere 网关的扩展组件配置，将 backend.config.gateway.logSearchEndpoint 设置为 host 集群上 whizard-telemetry-apiserver 服务的访问地址。
-backend: enabled: true config: gateway: namespace: kubesphere-controls-system valuesOverride: controller: image: registry: &amp;#34;&amp;#34; image: kubesphereio/nginx-ingress-controller tag: &amp;#34;v1.4.0&amp;#34; pullPolicy: IfNotPresent digest: &amp;#34;&amp;#34; exposeNodeLabelKey: &amp;#34;node-role.kubernetes.io/control-plane&amp;#34; versionConstraint: &amp;#34;&amp;gt;= 4.3.0, &amp;lt; 4.5.0&amp;#34; logSearchEndpoint: &amp;#34;http://whizard-telemetry-apiserver.</description>
-    </item>
-    
   </channel>
 </rss>
