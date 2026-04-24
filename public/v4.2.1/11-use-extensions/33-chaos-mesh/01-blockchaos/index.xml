@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>块存储故障模拟 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/33-chaos-mesh/01-blockchaos/</link>
+    <description>Recent content in 块存储故障模拟 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/33-chaos-mesh/01-blockchaos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>准备测试环境</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/01-blockchaos/01-prepare-environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/01-blockchaos/01-prepare-environment/</guid>
+      <description>本节介绍在注入块设备故障前需要完成的准备工作，包括安装 chaos-driver、挂载块设备以及创建测试工作负载。
+ 前提条件 在注入故障前，需完成以下准备工作。
+ 安装 chaos-driver 在目标节点上执行以下命令安装 chaos-driver 内核模块：
+ # 下载源码包 curl -fsSL -o chaos-driver-v0.2.1.tar.gz \ https://github.com/chaos-mesh/chaos-driver/archive/refs/tags/v0.2.1.tar.gz tar xvf chaos-driver-v0.2.1.tar.gz # 安装内核头文件（二选一） # CentOS/Fedora yum install kernel-devel-$(uname -r) # Ubuntu/Debian apt install linux-headers-$(uname -r) # 编译并加载内核模块 cd chaos-driver-0.2.1 make driver/chaos_driver.ko insmod ./driver/chaos_driver.ko    挂载块设备 如无物理块设备，可使用虚拟块设备进行模拟：
+ # 创建空的磁盘镜像文件 dd if=/dev/zero of=loopfile.img bs=512 count=2880 # 将镜像文件虚拟成块设备 sudo losetup /dev/loop1 loopfile.img # 格式化并挂载 sudo mkfs -t ext4 /dev/loop1 sudo mkdir -p /root/chaosmesh/test sudo mount /dev/loop1 /root/chaosmesh/test # 验证块设备及调度器 lsblk -f cat /sys/block/loop1/queue/scheduler    创建测试部署 将块设备通过 hostPath 挂载到 Pod 中。以下示例中，请将 &amp;lt;nodeName&amp;gt; 替换为实际节点名称：</description>
+    </item>
+    
+    <item>
+      <title>注入块存储延迟（delay）</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/01-blockchaos/02-inject-delay/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/01-blockchaos/02-inject-delay/</guid>
+      <description>本节介绍如何为块设备的 I/O 调用注入延迟。
+ 故障注入期间，在目标 Pod 中通过 fio 命令进行读写测试，将出现明显的 I/O 延迟。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 BlockChaos。
+  配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 delay，为块设备 I/O 注入延迟。
+   延迟时间（latency）
+ I/O 延迟的基准值，例如 5s。
+   抖动时间（jitter）
+ 在基准延迟基础上叠加的随机抖动范围，例如 5s。
+   持续时间（duration）
+ 故障持续时间，例如 10m。</description>
+    </item>
+    
+  </channel>
+</rss>
