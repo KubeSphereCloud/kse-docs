@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gateway API 应用路由 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/</link>
+    <description>Recent content in Gateway API 应用路由 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建 Gateway API 应用路由</title>
+      <link>/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/01-create-an-application-route/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/01-create-an-application-route/</guid>
+      <description>本节介绍如何创建 Gateway API 应用路由。
+ 前提条件 您需要加入一个项目并在项目中具有 Gateway API 应用路由的管理权限。
+   操作步骤  以具有 Gateway API 应用路由管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
+  在左侧导航栏选择 服务与网格 &amp;gt; Gateway API 应用路由。
+  根据您需要创建的路由类型，在相应的页签下点击 创建。
+    类型 描述     HTTPRoute
+ 用于将 HTTP/HTTPS 流量路由到后端服务，支持基于路径、主机名、请求头等条件进行流量分发。
+   GRPCRoute
+ 用于将 gRPC 流量路由到后端服务，支持基于 gRPC 方法、服务名等条件进行流量分发。
+   TLSRoute
+ 用于将 TLS 加密流量（基于 SNI）路由到后端服务，支持基于服务器名称指示进行路由决策。
+   TCPRoute</description>
+    </item>
+    
+    <item>
+      <title>查看 Gateway API 应用路由信息</title>
+      <link>/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/02-view-application-route-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/02-view-application-route-information/</guid>
+      <description> 本节介绍如何查看 Gateway API 应用路由的信息。
+ 前提条件 您需要加入一个项目并在项目中具有 Gateway API 应用路由的查看权限。
+   操作步骤  以具有 Gateway API 应用路由的查看权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
+  在左侧导航栏选择 服务与网格 &amp;gt; Gateway API 应用路由。
+  根据您需要查看的路由类型，点击相应的页签。切换项目查看当前企业空间下不同项目的路由。
+       参数 描述     名称
+ 路由名称。
+   域名
+ 配置的域名限制。
+   网关
+ 路由所使用的网关。
+   创建时间
+ 路由的创建时间。
+      </description>
+    </item>
+    
+    <item>
+      <title>查看 Gateway API 应用路由详情</title>
+      <link>/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/03-view-application-route-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/03-view-application-route-details/</guid>
+      <description>本节介绍如何查看 Gateway API 应用路由的详情。
+ 前提条件 您需要加入一个项目并在项目中具有 Gateway API 应用路由的查看权限。
+   操作步骤  以具有 Gateway API 应用路由的查看权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
+  在左侧导航栏选择 服务与网格 &amp;gt; Gateway API 应用路由。
+  根据您需要查看的路由类型，点击相应的页签。切换项目查看当前企业空间下不同项目的路由。
+  点击路由名称进入详情页。
+  在属性区域查看应用路由的属性。
+  下方显示资源状态
+       区域 描述     网关
+ 路由所使用的网关。
+   域名
+ 包含可访问的域名、端口。
+   规则
+ 显示路由中配置的所有规则。</description>
+    </item>
+    
+    <item>
+      <title>修改 Gateway API 应用路由</title>
+      <link>/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/04-edit-application-route/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/04-edit-application-route/</guid>
+      <description>本节介绍如何修改 Gateway API 应用路由。
+ 前提条件 您需要加入一个项目并在项目中具有 Gateway API 应用路由的管理权限。
+   操作步骤  以具有 Gateway API 应用路由的管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
+  在左侧导航栏选择 服务与网格 &amp;gt; Gateway API 应用路由。
+  根据您需要修改的路由类型，切换到相应的页签。
+    类型 描述     HTTPRoute
+ 用于将 HTTP/HTTPS 流量路由到后端服务，支持基于路径、主机名、请求头等条件进行流量分发。
+   GRPCRoute
+ 用于将 gRPC 流量路由到后端服务，支持基于 gRPC 方法、服务名等条件进行流量分发。
+   TLSRoute
+ 用于将 TLS 加密流量（基于 SNI）路由到后端服务，支持基于服务器名称指示进行路由决策。
+   TCPRoute</description>
+    </item>
+    
+    <item>
+      <title>删除 Gateway API 应用路由</title>
+      <link>/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/05-view-application-route-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/31-gatewayapi/07-application-route/05-view-application-route-details/</guid>
+      <description>本节介绍如何删除 Gateway API 应用路由的信息。
+ 前提条件 您需要加入一个项目并在项目中具有 Gateway API 应用路由的管理权限。
+   操作步骤  以具有 Gateway API 应用路由的管理权限的用户登录 KubeSphere Web 控制台并进入您的企业空间。
+  在左侧导航栏选择 服务与网格 &amp;gt; Gateway API 应用路由。
+  根据您需要删除的路由类型，点击相应的页签。切换项目查找不同项目的路由。
+       参数 描述     名称
+ 路由名称。
+   域名
+ 配置的域名限制。
+   网关
+ 路由所使用的网关。
+   创建时间
+ 路由的创建时间。
+      找到您需要删除的路由条目，在最右侧一列，选择删除，然后点击确定。</description>
+    </item>
+    
+  </channel>
+</rss>
