@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pod故障模拟 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/33-chaos-mesh/07-podchaos/</link>
+    <description>Recent content in Pod故障模拟 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/33-chaos-mesh/07-podchaos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>准备测试环境</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/07-podchaos/01-prepare-environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/07-podchaos/01-prepare-environment/</guid>
+      <description>本节介绍如何创建测试部署，用于后续验证 Pod 故障注入效果。
+ 创建测试部署
+ apiVersion: apps/v1 kind: Deployment metadata: name: nginx-pod namespace: default spec: replicas: 1 selector: matchLabels: app: nginx-pod template: metadata: labels: app: nginx-pod spec: containers: - name: nginx image: nginx:stable-perl ports: - containerPort: 80   </description>
+    </item>
+    
+    <item>
+      <title>Pod 不可用</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/07-podchaos/02-pod-failure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/07-podchaos/02-pod-failure/</guid>
+      <description>本节介绍如何使指定 Pod 在一段时间内处于不可用状态。
+ 故障注入期间，目标 Pod 将无法正常处理请求，但 Pod 本身不会被删除或重建。故障结束后 Pod 自动恢复。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 PodChaos，配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 pod-failure，使 Pod 不可用。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）
+ 选择故障注入的目标命名空间和 Pod。
+    验证故障效果：
+ kubectl get pod &amp;#34;{{podID}}&amp;#34; -o wide curl &amp;#34;{{podIP}}&amp;#34;   正常情况下返回 `index.</description>
+    </item>
+    
+    <item>
+      <title>强制删除 Pod</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/07-podchaos/03-pod-kill/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/07-podchaos/03-pod-kill/</guid>
+      <description>本节介绍如何强制删除指定 Pod。
+ 故障注入时，目标 Pod 将被立即删除，Deployment 控制器随后自动创建新的 Pod 以维持副本数。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 PodChaos，配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 pod-kill，强制删除 Pod。
+   生效范围（selector）
+ 选择故障注入的目标命名空间和 Pod。
+        说明     Pod Kill 为一次性操作，无需设置持续时间。Pod 被删除后将由 Deployment 控制器自动重建。
+    验证故障效果：</description>
+    </item>
+    
+    <item>
+      <title>终止容器</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/07-podchaos/04-container-kill/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/07-podchaos/04-container-kill/</guid>
+      <description> 本节介绍如何终止 Pod 中的指定容器。
+ 故障注入时，目标 Pod 中指定的容器将被强制停止，Pod 随即触发重启流程。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 PodChaos，配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 container-kill，终止指定容器。
+   容器名称（containerNames）
+ 需要终止的容器名称，例如 nginx。
+   生效范围（selector）
+ 选择故障注入的目标命名空间和 Pod。
+    验证故障效果：
+ kubectl get pod -n default   故障注入后，`nginx-pod` 的重启次数将增加。     </description>
+    </item>
+    
+  </channel>
+</rss>

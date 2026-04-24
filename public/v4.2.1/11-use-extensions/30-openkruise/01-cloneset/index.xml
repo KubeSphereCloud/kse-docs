@@ -81,5 +81,17 @@
      </description>
     </item>
     
+    <item>
+      <title>CloneSet 最佳实践</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/05-usage-and-best-practices-of-cloneset-parameters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/05-usage-and-best-practices-of-cloneset-parameters/</guid>
+      <description>本节介绍 CloneSet 最佳实践,以下示例参考 OpenKruise CloneSet 官方文档，展示常用参数的典型用法。
+ 基础部署 以下示例展示了一个最基础的 CloneSet 配置：
+ apiVersion: apps.kruise.io/v1alpha1 kind: CloneSet metadata: name: sample spec: replicas: 5 selector: matchLabels: app: sample template: metadata: labels: app: sample spec: containers: - name: nginx image: nginx:alpine   示例 1：原地升级与优雅等待 将 updateStrategy.type 设置为 InPlaceIfPossible，并配置 gracePeriodSeconds，可以实现优雅原地升级。控制器会先将 Pod 状态改为 NotReady，等待一段时间后，再修改 Pod 中的镜像版本，从而为流量摘除预留缓冲时间。
+ apiVersion: apps.kruise.io/v1alpha1 kind: CloneSet metadata: name: sample spec: replicas: 5 selector: matchLabels: app: sample template: metadata: labels: app: sample spec: containers: - name: nginx image: nginx:alpine updateStrategy: type: InPlaceIfPossible inPlaceUpdateStrategy: gracePeriodSeconds: 10    示例 2：分批灰度发布 使用 partition 控制保留旧版本 Pod 的数量或百分比。以下示例保留 3 个旧版本 Pod，仅升级 2 个 Pod 到新版本。</description>
+    </item>
+    
   </channel>
 </rss>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络故障模拟 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/</link>
+    <description>Recent content in 网络故障模拟 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>准备测试环境</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/01-prepare-environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/01-prepare-environment/</guid>
+      <description>本节介绍如何创建测试部署，用于后续验证网络故障注入效果。
+ 创建测试部署
+ 网络故障模拟需要两个 Pod 相互通信，分别作为服务端和客户端：
+ # 服务端 apiVersion: apps/v1 kind: Deployment metadata: name: nginx-network-server namespace: default spec: replicas: 1 selector: matchLabels: app: nginx-network-server template: metadata: labels: app: nginx-network-server spec: containers: - name: nginx image: nginx:stable-perl ports: - containerPort: 80 --- # 客户端 apiVersion: apps/v1 kind: Deployment metadata: name: nginx-network-client namespace: default spec: replicas: 1 selector: matchLabels: app: nginx-network-client template: metadata: labels: app: nginx-network-client spec: containers: - name: nginx image: nginx:stable-perl ports: - containerPort: 80   </description>
+    </item>
+    
+    <item>
+      <title>网络分区</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/02-partition/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/02-partition/</guid>
+      <description>本节介绍如何模拟网络分区，切断两个 Pod 之间的双向通信。
+ 故障注入期间，nginx-network-server 与 nginx-network-client 之间的网络完全断开，两者访问其他目标不受影响。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 NetworkChaos，配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 partition，切断网络连接。
+   方向（direction）
+ 故障生效的流量方向，选择 both 表示双向断开。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）
+ 选择注入故障的源 Pod（如服务端 Pod）。
+   目标（target）
+ 选择通信对端 Pod（如客户端 Pod）。</description>
+    </item>
+    
+    <item>
+      <title>网络丢包</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/03-loss/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/03-loss/</guid>
+      <description>本节介绍如何模拟网络丢包。
+ 故障注入期间，nginx-network-server 与 nginx-network-client 之间的双向流量将有 50% 的概率发生丢包。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 NetworkChaos，配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 loss，注入网络丢包。
+   丢包率（loss.loss）
+ 丢包的概率百分比，例如 50.0 表示 50%。
+   方向（direction）
+ 故障生效的流量方向，选择 both 表示双向生效。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）
+ 选择注入故障的源 Pod。</description>
+    </item>
+    
+    <item>
+      <title>网络延迟</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/04-delay/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/04-delay/</guid>
+      <description>本节介绍如何为指定 Pod 之间的网络通信注入延迟。
+ 故障注入期间，nginx-network-server 与 nginx-network-client 之间的双向通信将出现 5 秒延迟。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 NetworkChaos，配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 delay，注入网络延迟。
+   延迟时间（delay.latency）
+ 网络延迟的基准值，例如 5s。
+   抖动时间（delay.jitter）
+ 在基准延迟基础上叠加的随机抖动范围，例如 0s。
+   方向（direction）
+ 故障生效的流量方向，选择 both 表示双向生效。
+   持续时间（duration）
+ 故障持续时间，例如 10m。</description>
+    </item>
+    
+    <item>
+      <title>网络包重复</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/05-duplicate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/05-duplicate/</guid>
+      <description>本节介绍如何模拟网络包重复。
+ 故障注入期间，nginx-network-server 与 nginx-network-client 之间的双向流量将有 50% 的概率出现重复包，可能导致请求异常。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 NetworkChaos，配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 duplicate，注入重复包。
+   重复率（duplicate.duplicate）
+ 数据包被重复发送的概率百分比，例如 50.0。
+   方向（direction）
+ 故障生效的流量方向，选择 both 表示双向生效。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）
+ 选择注入故障的源 Pod。
+   目标（target）</description>
+    </item>
+    
+    <item>
+      <title>网络包错误</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/06-corrupt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/06-corrupt/</guid>
+      <description>本节介绍如何模拟网络包内容损坏。
+ 故障注入期间，nginx-network-server 与 nginx-network-client 之间的双向流量将有 50% 的概率出现数据包内容损坏，导致请求失败。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 NetworkChaos，配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 corrupt，注入错误包。
+   损坏率（corrupt.corrupt）
+ 数据包内容被损坏的概率百分比，例如 50.0。
+   方向（direction）
+ 故障生效的流量方向，选择 both 表示双向生效。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）
+ 选择注入故障的源 Pod。
+   目标（target）</description>
+    </item>
+    
+    <item>
+      <title>带宽限制</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/07-bandwidth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/06-networkchaos/07-bandwidth/</guid>
+      <description>本节介绍如何限制指定 Pod 之间的网络通信带宽。
+ 故障注入期间，nginx-network-server 与 nginx-network-client 之间的双向通信带宽将被限制在 5 kbps。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 NetworkChaos，配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 bandwidth，限制通信带宽。
+   带宽速率（bandwidth.rate）
+ 带宽上限，例如 5kbps。
+   方向（direction）
+ 故障生效的流量方向，选择 both 表示双向生效。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）
+ 选择注入故障的源 Pod。</description>
+    </item>
+    
+  </channel>
+</rss>
