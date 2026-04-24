@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DNS 故障模拟 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/33-chaos-mesh/02-dnschaos/</link>
+    <description>Recent content in DNS 故障模拟 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/33-chaos-mesh/02-dnschaos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>准备测试环境</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/02-dnschaos/01-prepare-environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/02-dnschaos/01-prepare-environment/</guid>
+      <description>本节介绍如何创建测试部署，用于后续验证 DNS 故障注入效果。
+ 创建测试部署
+ apiVersion: apps/v1 kind: Deployment metadata: name: nginx-dns namespace: default spec: replicas: 1 selector: matchLabels: app: nginx-dns template: metadata: labels: app: nginx-dns spec: containers: - name: nginx image: nginx:stable-perl ports: - containerPort: 80       说明     如需在 Pod 内执行 DNS 查询验证，可在容器中安装 dnsutils 工具包。
+    </description>
+    </item>
+    
+    <item>
+      <title>注入 DNS 解析错误</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/02-dnschaos/02-inject-error/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/02-dnschaos/02-inject-error/</guid>
+      <description>本节介绍如何使指定域名的 DNS 解析返回错误。
+ 故障注入期间，对 ci-bot.kubesphere.io 执行 DNS 查询将返回 SERVFAIL 错误，而非正常的 IP 地址。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 DNSChaos。
+  配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 error，使 DNS 解析返回错误。
+   匹配域名（patterns）
+ 触发故障的域名，支持通配符，例如 ci-bot.kubesphere.io。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）
+ 选择故障注入的目标命名空间和 Pod。</description>
+    </item>
+    
+    <item>
+      <title>注入 DNS 随机响应</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/02-dnschaos/03-inject-random/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/02-dnschaos/03-inject-random/</guid>
+      <description>本节介绍如何使指定域名的 DNS 解析返回随机 IP 地址。
+ 故障注入期间，对 ci-bot.kubesphere.io 执行 DNS 查询将返回一个随机生成的 IP 地址，而非真实地址。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 DNSChaos。
+  配置以下参数后点击*创建*。
+       参数 描述     故障类型（action）
+ 选择 random，使 DNS 解析返回随机 IP。
+   匹配域名（patterns）
+ 触发故障的域名，例如 ci-bot.kubesphere.io。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）
+ 选择故障注入的目标命名空间和 Pod。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTTP 故障模拟 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/</link>
+    <description>Recent content in HTTP 故障模拟 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>准备测试环境</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/01-prepare-environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/01-prepare-environment/</guid>
+      <description>本节介绍如何创建测试部署，用于后续验证 HTTP 故障注入效果。
+ 创建测试部署
+ apiVersion: apps/v1 kind: Deployment metadata: name: nginx-http-server namespace: default spec: replicas: 1 selector: matchLabels: app: nginx-http-server template: metadata: labels: app: nginx-http-server spec: containers: - name: nginx image: nginx:stable-perl ports: - containerPort: 80   </description>
+    </item>
+    
+    <item>
+      <title>中断请求</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/02-request-abort/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/02-request-abort/</guid>
+      <description>本节介绍如何在故障注入期间中断满足条件的 HTTP 请求。
+ 故障注入期间，通过 GET 方法访问注入 Pod 的 IP 地址时，请求将被中断，Pod 日志中不会记录该请求。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 HTTPChaos。
+  配置以下参数后点击 创建。
+       参数 描述     目标（target）
+ 选择 Request，对请求生效。
+   端口（port）
+ 监听端口，例如 80。
+   请求方法（method）
+ 触发故障的 HTTP 方法，例如 GET。
+   中断（abort）
+ 设置为 true，中断匹配的请求。</description>
+    </item>
+    
+    <item>
+      <title>延迟请求</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/03-request-delay/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/03-request-delay/</guid>
+      <description>本节介绍如何为满足条件的 HTTP 请求注入延迟。
+ 故障注入期间，通过 GET 方法访问注入 Pod 时，响应将延迟 5 秒返回。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 HTTPChaos，配置以下参数后点击 创建。
+       参数 描述     目标（target）
+ 选择 Request，对请求生效。
+   端口（port）
+ 监听端口，例如 80。
+   请求方法（method）
+ 触发故障的 HTTP 方法，例如 GET。
+   延迟时间（delay）
+ 注入的延迟值，例如 5s。
+   持续时间（duration）</description>
+    </item>
+    
+    <item>
+      <title>替换请求</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/04-request-replace/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/04-request-replace/</guid>
+      <description>本节介绍如何将满足条件的 HTTP 请求路径替换为指定路径。
+ 故障注入期间，通过 GET 方法访问注入 Pod 的根路径 / 时，请求路径将被替换为 /50x.html。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 HTTPChaos，配置以下参数后点击 创建。
+       参数 描述     目标（target）
+ 选择 Request，对请求生效。
+   端口（port）
+ 监听端口，例如 80。
+   请求方法（method）
+ 触发故障的 HTTP 方法，例如 GET。
+   替换路径（replace.path）
+ 替换后的请求路径，例如 50x.html。
+   持续时间（duration）</description>
+    </item>
+    
+    <item>
+      <title>补丁请求</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/05-request-patch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/05-request-patch/</guid>
+      <description>本节介绍如何为满足条件的 HTTP 请求添加额外的查询参数。
+ 故障注入期间，通过 GET 方法访问注入 Pod 时，请求路径将自动附加查询参数 a=b。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 HTTPChaos，配置以下参数后点击 创建。
+       参数 描述     目标（target）
+ 选择 Request，对请求生效。
+   端口（port）
+ 监听端口，例如 80。
+   请求方法（method）
+ 触发故障的 HTTP 方法，例如 GET。
+   追加参数（patch.queries）
+ 以键值对形式追加的查询参数，例如键 a、值 b。
+   持续时间（duration）</description>
+    </item>
+    
+    <item>
+      <title>中断响应</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/06-response-abort/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/06-response-abort/</guid>
+      <description>本节介绍如何中断满足条件的 HTTP 响应。
+ 故障注入期间，Pod 接收到请求后将在返回响应前中断连接。与 request-abort 不同，中断响应时 Pod 日志中*有*请求记录。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 HTTPChaos，配置以下参数后点击 创建。
+       参数 描述     目标（target）
+ 选择 Response，对响应生效。
+   端口（port）
+ 监听端口，例如 80。
+   请求方法（method）
+ 触发故障的 HTTP 方法，例如 GET。
+   中断（abort）
+ 设置为 true，中断响应。
+   持续时间（duration）
+ 故障持续时间，例如 10m。</description>
+    </item>
+    
+    <item>
+      <title>延迟响应</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/07-response-delay/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/07-response-delay/</guid>
+      <description>本节介绍如何为满足条件的 HTTP 响应注入延迟。
+ 故障注入期间，响应码为 404 的请求（如访问不存在的路径）将延迟 5 秒返回，响应码为 200 的请求不受影响。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 HTTPChaos，配置以下参数后点击 创建。
+       参数 描述     目标（target）
+ 选择 Response，对响应生效。
+   端口（port）
+ 监听端口，例如 80。
+   请求方法（method）
+ 触发故障的 HTTP 方法，例如 GET。
+   响应码（code）
+ 触发故障的 HTTP 响应码，例如 404。
+   延迟时间（delay）</description>
+    </item>
+    
+    <item>
+      <title>替换响应</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/08-response-replace/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/08-response-replace/</guid>
+      <description>本节介绍如何将满足条件的 HTTP 响应体替换为指定内容。
+ 故障注入期间，响应码为 200 的响应体将被替换为 hello。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 HTTPChaos，配置以下参数后点击 创建。
+       参数 描述     目标（target）
+ 选择 Response，对响应生效。
+   端口（port）
+ 监听端口，例如 80。
+   响应码（code）
+ 触发故障的 HTTP 响应码，例如 200。
+   替换响应体（replace.body）
+ 替换后的响应体内容，以 Base64 编码传入，例如 aGVsbG8=（即 hello）。
+   持续时间（duration）</description>
+    </item>
+    
+    <item>
+      <title>补丁响应</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/09-response-patch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/04-httpchaos/09-response-patch/</guid>
+      <description>本节介绍如何为满足条件的 HTTP 响应追加额外的响应头。
+ 故障注入期间，响应码为 200 的响应将自动追加响应头 a: b。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 HTTPChaos，配置以下参数后点击 创建。
+       参数 描述     目标（target）
+ 选择 Response，对响应生效。
+   端口（port）
+ 监听端口，例如 80。
+   响应码（code）
+ 触发故障的 HTTP 响应码，例如 200。
+   追加响应头（patch.headers）
+ 以键值对形式追加的响应头，例如键 a、值 b。
+   持续时间（duration）
+ 故障持续时间，例如 10m。</description>
+    </item>
+    
+  </channel>
+</rss>

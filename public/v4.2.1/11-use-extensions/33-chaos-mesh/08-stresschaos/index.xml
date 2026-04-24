@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>压力测试模拟 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/33-chaos-mesh/08-stresschaos/</link>
+    <description>Recent content in 压力测试模拟 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/33-chaos-mesh/08-stresschaos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>准备测试环境</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/08-stresschaos/01-prepare-environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/08-stresschaos/01-prepare-environment/</guid>
+      <description>本节介绍如何创建测试部署，用于后续验证压力故障注入效果。
+ 创建测试部署
+ apiVersion: apps/v1 kind: Deployment metadata: name: nginx-stress namespace: default spec: replicas: 1 selector: matchLabels: app: nginx-stress template: metadata: labels: app: nginx-stress spec: containers: - name: nginx image: nginx:stable-perl ports: - containerPort: 80   </description>
+    </item>
+    
+    <item>
+      <title>CPU 压力模拟</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/08-stresschaos/02-cpu-stress/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/08-stresschaos/02-cpu-stress/</guid>
+      <description>本节介绍如何在容器内模拟 CPU 资源抢占。
+ 故障注入期间，目标容器内将创建 10 个进程，每个进程持续抢占约 20% 的 CPU（资源不足时占用最大可分配量）。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 StressChaos，配置以下参数后点击 创建。
+       参数 描述     CPU 工作进程数（stressors.cpu.workers）
+ 抢占 CPU 的进程数量，例如 10。
+   CPU 负载百分比（stressors.cpu.load）
+ 每个进程抢占的 CPU 百分比，例如 20。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）
+ 选择故障注入的目标命名空间和 Pod。
+    验证故障效果：</description>
+    </item>
+    
+    <item>
+      <title>内存压力模拟</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/08-stresschaos/03-memory-stress/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/08-stresschaos/03-memory-stress/</guid>
+      <description> 本节介绍如何在容器内模拟内存资源抢占。
+ 故障注入期间，目标容器内将创建 10 个进程，所有进程合计持续占用约 10 MiB 内存。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 StressChaos，配置以下参数后点击 创建。
+       参数 描述     内存工作进程数（stressors.memory.workers）
+ 抢占内存的进程数量，例如 10。
+   内存占用总量（stressors.memory.size）
+ 所有进程合计占用的内存大小，例如 10MiB。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）
+ 选择故障注入的目标命名空间和 Pod。
+    验证故障效果：
+ kubectl exec &amp;#34;{{podID}}&amp;#34; -- top   故障注入期间，`top` 命令中可观察到 10 个新增进程合计占用约 10 MiB 内存。     </description>
+    </item>
+    
+  </channel>
+</rss>

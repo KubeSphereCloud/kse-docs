@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>内核故障模拟 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/33-chaos-mesh/05-kernelchaos/</link>
+    <description>Recent content in 内核故障模拟 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/33-chaos-mesh/05-kernelchaos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>模拟内核路径上的 I/O 或内存故障</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/05-kernelchaos/01-inject-kernel-fault/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/05-kernelchaos/01-inject-kernel-fault/</guid>
+      <description>本节介绍如何模拟内核路径上的内存分配故障。
+ 故障注入期间，目标 Pod 内容器的物理页面分配将 100% 失败，最多失败 10 次。如果该事件在短时间内频繁触发，将触发系统 OOM Killer 回收内存。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 KernelChaos，配置以下参数后点击 创建。
+       参数 描述     故障类型（failtype）
+ 内核故障类型，1 表示内存页面分配失败。
+   触发概率（probability）
+ 触发故障的概率，例如 100 表示 100%。
+   最大失败次数（times）
+ 单次注入周期内最多触发故障的次数，例如 10。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）</description>
+    </item>
+    
+  </channel>
+</rss>
