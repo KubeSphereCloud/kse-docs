@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WizTelemetry 全局监控 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/</link>
+    <description>Recent content in WizTelemetry 全局监控 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>启用 WizTelemetry 全局监控</title>
+      <link>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/01-enable-whizard/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/09-observability-platform/07-whizard/01-enable-whizard/</guid>
+      <description>为了使用 WizTelemetry 全局监控的完整功能，您需要安装 WizTelemetry 平台服务、 WizTelemetry 监控、WizTelemetry 告警以及 WizTelemetry 全局监控扩展组件，并进行以下配置。
+ 前提条件   您需要在 KubeSphere 平台具有 platform-admin 角色。有关更多信息，请参阅用户和平台角色。
+  已安装 WizTelemetry 平台服务、 WizTelemetry 监控、WizTelemetry 告警以及 WizTelemetry 全局监控扩展组件。
+     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  点击扩展中心。
+  点击已安装的组件名称，进入组件详情页。
+  点击组件图标下的，选择扩展组件配置。
+WizTelemetry 全局监控
+ 将扩展组件配置中的 whizard-agent-proxy.config.gatewayUrl 参数设置为 http://{host_cluster_node_ip}:30990，然后点击确定。
+ gatewayUrl 是 WizTelemetry 全局监控中 whizard Gateway 组件的对外访问地址，默认使用 NodePort 30990 端口暴露，可以使用 host 集群任一节点 IP 及 30990 端口进行配置。</description>
+    </item>
+    
+  </channel>
+</rss>

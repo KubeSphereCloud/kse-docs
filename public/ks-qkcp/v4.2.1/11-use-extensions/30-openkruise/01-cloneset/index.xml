@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CloneSet on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/</link>
+    <description>Recent content in CloneSet on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建 CloneSet</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/01-create-cloneset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/01-create-cloneset/</guid>
+      <description>本节介绍如何创建 CloneSet。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏选择工作负载 &amp;gt; CloneSet。
+  在页面左上角的项目下拉列表中选择目标项目，然后点击右上角创建。
+  在基本信息页签，填写以下参数后点击下一步。
+       参数 描述     名称
+ CloneSet 的名称。只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 253 个字符。
+   别名
+ CloneSet 的别名。支持中文、字母、数字和连字符（-），不得以连字符（-）开头和结尾，最长 63 个字符。
+   项目
+ CloneSet 所属的项目，必填。
+   描述
+ CloneSet 的描述信息。可包含任意字符，最长 256 个字符。
+    依次完成容器组设置、存储设置、高级设置，然后点击创建。创建过程中可点击右上角编辑 YAML 按钮，直接以 YAML 格式完成配置。</description>
+    </item>
+    
+    <item>
+      <title>查看 CloneSet</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/02-view-cloneset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/02-view-cloneset/</guid>
+      <description>本节介绍如何查看 CloneSet 列表和详情。
+ 查看 CloneSet 列表  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏选择工作负载 &amp;gt; CloneSet。
+  在页面左上角的项目下拉列表中选择目标项目。
+   CloneSet 列表提供以下信息：
+     参数 描述     名称
+ CloneSet 的名称。
+   状态
+ CloneSet 当前的状态。 * 运行中：所有容器组均已正常运行。 * 更新中：正在执行滚动更新或原地升级。 * 已停止：副本数为 0。
+   项目
+ CloneSet 所属的项目。
+   更新时间
+ CloneSet 最近一次更新的时间。
+      在列表上方搜索框中输入关键字，可按名称搜索 CloneSet。</description>
+    </item>
+    
+    <item>
+      <title>编辑 CloneSet</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/03-edit-cloneset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/03-edit-cloneset/</guid>
+      <description>编辑 CloneSet 信息 本节介绍如何编辑 CloneSet 的别名和描述。KubeSphere 不支持编辑已创建 CloneSet 的名称。
+  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏选择 工作负载 &amp;gt; CloneSet。
+  在需要操作的 CloneSet 右侧点击操作图标，在下拉列表中选择 编辑信息。
+  修改别名或描述后，点击 确定。
+     编辑扩缩容策略 本节介绍如何编辑 CloneSet 的扩缩容策略。
+  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏选择 工作负载 &amp;gt; CloneSet。
+  在需要操作的 CloneSet 右侧点击操作图标，在下拉列表中选择 编辑扩缩容策略。
+  设置相关参数后，点击 确定。
+       参数 描述     容器组删除顺序</description>
+    </item>
+    
+    <item>
+      <title>删除 CloneSet</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/04-delete-cloneset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/04-delete-cloneset/</guid>
+      <description> 本节介绍如何删除 CloneSet。CloneSet 删除后不能恢复，其管理的所有容器组也将被删除，请谨慎执行此操作。
+ 删除单个 CloneSet  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏选择 工作负载 &amp;gt; CloneSet。
+  在需要删除的 CloneSet 右侧点击操作图标，选择 删除。
+  在 删除 CloneSet 对话框中输入 CloneSet 的名称，然后点击 确定。
+     批量删除 CloneSet  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏选择 工作负载 &amp;gt; CloneSet。
+  勾选需要删除的 CloneSet 左侧的复选框，在列表上方点击 删除。
+  在 批量删除 CloneSet 对话框中输入 CloneSet 的名称，然后点击 确定。
+     </description>
+    </item>
+    
+    <item>
+      <title>CloneSet 最佳实践</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/05-usage-and-best-practices-of-cloneset-parameters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/01-cloneset/05-usage-and-best-practices-of-cloneset-parameters/</guid>
+      <description>本节介绍 CloneSet 最佳实践,以下示例参考 OpenKruise CloneSet 官方文档，展示常用参数的典型用法。
+ 基础部署 以下示例展示了一个最基础的 CloneSet 配置：
+ apiVersion: apps.kruise.io/v1alpha1 kind: CloneSet metadata: name: sample spec: replicas: 5 selector: matchLabels: app: sample template: metadata: labels: app: sample spec: containers: - name: nginx image: nginx:alpine   示例 1：原地升级与优雅等待 将 updateStrategy.type 设置为 InPlaceIfPossible，并配置 gracePeriodSeconds，可以实现优雅原地升级。控制器会先将 Pod 状态改为 NotReady，等待一段时间后，再修改 Pod 中的镜像版本，从而为流量摘除预留缓冲时间。
+ apiVersion: apps.kruise.io/v1alpha1 kind: CloneSet metadata: name: sample spec: replicas: 5 selector: matchLabels: app: sample template: metadata: labels: app: sample spec: containers: - name: nginx image: nginx:alpine updateStrategy: type: InPlaceIfPossible inPlaceUpdateStrategy: gracePeriodSeconds: 10    示例 2：分批灰度发布 使用 partition 控制保留旧版本 Pod 的数量或百分比。以下示例保留 3 个旧版本 Pod，仅升级 2 个 Pod 到新版本。</description>
+    </item>
+    
+  </channel>
+</rss>

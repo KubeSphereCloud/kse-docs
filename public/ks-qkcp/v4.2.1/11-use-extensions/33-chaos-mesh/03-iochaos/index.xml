@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>文件系统故障模拟 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/33-chaos-mesh/03-iochaos/</link>
+    <description>Recent content in 文件系统故障模拟 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/33-chaos-mesh/03-iochaos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>准备测试环境</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/03-iochaos/01-prepare-environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/03-iochaos/01-prepare-environment/</guid>
+      <description>本节介绍如何创建测试部署，用于后续验证 I/O 故障注入效果。
+ 创建测试部署
+ 以下示例通过 ConfigMap 挂载静态 HTML 文件，并使用 nginx 提供访问：
+ apiVersion: apps/v1 kind: Deployment metadata: name: nginx-io namespace: default spec: replicas: 1 selector: matchLabels: app: nginx-io template: metadata: labels: app: nginx-io spec: volumes: - name: nginx-html configMap: name: nginx-io-html containers: - name: nginx image: nginx:stable-perl ports: - containerPort: 80 volumeMounts: - name: nginx-html mountPath: /usr/share/nginx/html/   </description>
+    </item>
+    
+    <item>
+      <title>注入文件系统延迟</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/03-iochaos/02-inject-latency/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/03-iochaos/02-inject-latency/</guid>
+      <description>本节介绍如何为文件系统调用注入延迟。
+ 故障注入期间，对 /usr/share/nginx/html/ 目录下文件的读取操作将 100% 出现 10 秒延迟，访问 Pod 提供的页面时将明显感知延迟。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 IOChaos。
+  配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 latency，为文件系统调用注入延迟。
+   延迟时间（delay）
+ 文件系统调用的延迟值，例如 10s。
+   挂载路径（volumePath）
+ 注入故障的目标目录，例如 /usr/share/nginx/html/。
+   触发概率（percent）
+ 触发故障的概率，例如 100 表示 100%。
+   影响方法（methods）</description>
+    </item>
+    
+    <item>
+      <title>注入文件系统错误</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/03-iochaos/03-inject-fault/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/03-iochaos/03-inject-fault/</guid>
+      <description>本节介绍如何使文件系统调用返回错误。
+ 故障注入期间，对 /usr/share/nginx/html/ 目录下文件的读取操作将 100% 返回错误，nginx 无法正常读取页面内容。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 IOChaos。
+  配置以下参数后点击 创建。
+       参数 描述     故障类型（action）
+ 选择 fault，使文件系统调用返回错误。
+   错误码（errno）
+ 文件系统调用返回的错误码，例如 1（表示 EPERM，操作不允许）。
+   挂载路径（volumePath）
+ 注入故障的目标目录，例如 /usr/share/nginx/html/。
+   触发概率（percent）
+ 触发故障的概率，例如 100 表示 100%。
+   影响方法（methods）</description>
+    </item>
+    
+  </channel>
+</rss>
