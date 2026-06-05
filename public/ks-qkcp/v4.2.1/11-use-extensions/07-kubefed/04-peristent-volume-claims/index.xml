@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>持久卷声明 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/</link>
+    <description>Recent content in 持久卷声明 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建持久卷声明</title>
+      <link>/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/01-create-a-persistent-volume-claim/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/01-create-a-persistent-volume-claim/</guid>
+      <description>本节介绍如何创建持久卷声明。
+ 前提条件   KubeSphere 平台需要安装并启用联邦集群应用管理扩展组件。
+   您需要加入一个联邦项目并在对应企业空间中具有联邦项目管理权限。
+     操作步骤  以具有联邦项目管理权限的用户登录 KubeSphere Web 控制台并进入您的联邦项目。
+  在左侧导航栏选择持久卷声明。
+  在页面点击创建。
+  在基本信息页签，设置持久卷声明的基本信息，然后点击下一步。
+    参数 描述     名称
+ 持久卷声明的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 253 个字符。
+   别名
+ 持久卷声明的别名。不同持久卷声明的别名可以相同。
+   描述
+ 持久卷声明的描述信息。描述可包含任意字符，最长 256 个字符。
+        在存储设置页签，设置存储空间需求，然后点击下一步。</description>
+    </item>
+    
+    <item>
+      <title>查看持久卷声明列表</title>
+      <link>/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/02-view-a-persistent-volume-claim-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/02-view-a-persistent-volume-claim-list/</guid>
+      <description>本节介绍如何查看持久卷声明列表。
+ 前提条件   KubeSphere 平台需要安装并启用联邦集群应用管理扩展组件。
+   您需要加入一个联邦项目并在对应企业空间中具有联邦项目查看权限。
+     操作步骤  以具有联邦项目查看权限的用户登录 KubeSphere Web 控制台并进入您的联邦项目。
+  在左侧导航栏选择持久卷声明。
+  持久卷声明列表提供以下信息：
+    参数 描述     名称
+ 持久卷声明的名称和存储类。
+   状态
+ 持久卷声明当前的状态。
+   已绑定：系统已根据持久卷声明创建持久卷，并且已将持久卷声明和持久卷绑定。
+  等待中：系统已创建持久卷声明，但未创建对应的持久卷。
+  更新中：持久卷声明的设置发生变化，系统正在更新持久卷声明。
+  删除中：系统正在删除持久卷声明。
+  丢失：系统已将持久卷声明和一个持久卷绑定，但是没有找到被绑定的持久卷。此状态下持久卷可能已被删除。
+     访问模式</description>
+    </item>
+    
+    <item>
+      <title>查看持久卷声明详情</title>
+      <link>/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/03-view-persistent-volume-claim-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/03-view-persistent-volume-claim-details/</guid>
+      <description>本节介绍如何查看持久卷声明详情。
+ 前提条件   KubeSphere 平台需要安装并启用联邦集群应用管理扩展组件。
+   您需要加入一个联邦项目并在对应企业空间中具有联邦项目查看权限。
+     操作步骤  以具有联邦项目查看权限的用户登录 KubeSphere Web 控制台并进入您的联邦项目。
+  在左侧导航栏选择持久卷声明。
+  在持久卷声明列表中点击一个持久卷声明的名称打开其详情页面。
+  在持久卷声明详情页面的属性区域查看持久卷声明的资源属性。
+    参数 描述     项目
+ 持久卷声明所属的项目。
+   容量
+ 持久卷声明请求的存储容量大小。
+   访问模式
+ 持久卷的读写模式。
+   RWO（ReadWriteOnce）：允许单个节点读取持久卷中的数据并向其中写入数据。
+  ROX（ReadOnlyMany）：允许多个节点读取持久卷中的数据。
+  RWX（ReadWriteMany）：允许多个节点读取持久卷中的数据并向其中写入数据。
+     存储类</description>
+    </item>
+    
+    <item>
+      <title>编辑持久卷声明信息</title>
+      <link>/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/04-edit-persistent-volume-claim-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/04-edit-persistent-volume-claim-information/</guid>
+      <description> 本节介绍如何编辑持久卷声明的基本信息。
+ 您可以编辑持久卷声明的别名和描述。KubeSphere 不支持编辑持久卷声明的名称。
+ 前提条件   KubeSphere 平台需要安装并启用联邦集群应用管理扩展组件。
+   您需要加入一个联邦项目并在对应企业空间中具有联邦项目管理权限。
+     操作步骤  以具有联邦项目管理权限的用户登录 KubeSphere Web 控制台并进入您的联邦项目。
+  在左侧导航栏选择持久卷声明。
+  在需要操作的持久卷声明右侧点击，然后在下拉列表中选择编辑信息。
+  在编辑信息对话框，设置持久卷声明的别名和描述，然后点击确定。
+    参数 描述     别名
+ 持久卷声明的别名。不同持久卷声明的别名可以相同。
+   描述
+ 持久卷声明的描述信息。描述可包含任意字符，最多包含 256 个字符。
+           </description>
+    </item>
+    
+    <item>
+      <title>删除持久卷声明</title>
+      <link>/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/05-delete-persistent-volume-claims/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/07-kubefed/04-peristent-volume-claims/05-delete-persistent-volume-claims/</guid>
+      <description>本节介绍如何删除持久卷声明。
+     警告     持久卷声明删除后不能恢复，并且默认情况下持久卷声明对应的持久卷也将被删除，请谨慎执行此操作以避免数据丢失。
+    前提条件   KubeSphere 平台需要安装并启用联邦集群应用管理扩展组件。
+   您需要加入一个联邦项目并在对应企业空间中具有联邦项目管理权限。
+  请提前备份后端存储区域中的数据以避免数据丢失。
+     删除单个持久卷声明  以具有联邦项目管理权限的用户登录 KubeSphere Web 控制台并进入您的联邦项目。
+  在左侧导航栏选择持久卷声明。
+  在需要删除的持久卷声明右侧点击，然后在下拉列表中选择删除。
+  在删除持久卷声明对话框，输入持久卷声明的名称，然后点击确定。
+     批量删除持久卷声明  以具有联邦项目管理权限的用户登录 KubeSphere Web 控制台并进入您的联邦项目。
+  在左侧导航栏选择持久卷声明。
+  选择需要删除的持久卷声明左侧的复选框，然后在持久卷声明列表上方点击删除。
+  在批量删除持久卷声明对话框，输入持久卷声明的名称，然后点击确定。
+    说明     请使用半角逗号（,）和空格分隔多个名称。</description>
+    </item>
+    
+  </channel>
+</rss>

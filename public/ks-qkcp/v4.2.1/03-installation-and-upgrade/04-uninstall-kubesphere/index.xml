@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>卸载 KubeSphere  on KubeSphere</title>
+    <link>/v4.2.1/03-installation-and-upgrade/04-uninstall-kubesphere/</link>
+    <description>Recent content in 卸载 KubeSphere  on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/03-installation-and-upgrade/04-uninstall-kubesphere/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>仅卸载 KubeSphere </title>
+      <link>/v4.2.1/03-installation-and-upgrade/04-uninstall-kubesphere/01-uninstall-kubesphere-only/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/03-installation-and-upgrade/04-uninstall-kubesphere/01-uninstall-kubesphere-only/</guid>
+      <description>本节介绍如何卸载 KubeSphere。当前集群中运行的 Kubernetes 将不会被卸载。
+     警告       虽然此操作不会卸载 Kubernetes，如果当前集群中运行的业务使用了 KubeSphere 提供的功能，此操作仍然可能导致业务中断。
+  此操作不能撤销，请谨慎执行此操作。
+      前提条件 为避免数据丢失，请提前备份所有重要数据。
+   卸载扩展组件  登录任意集群节点，执行以下命令查看集群中已安装的扩展组件。
+kubectl get installplan     卸载指定扩展组件或所有扩展组件。
+  卸载指定扩展组件。
+kubectl delete installplan {InstallPlan Name}       说明     可根据第一步的命令获取扩展组件的 InstallPlan Name。
+    如果显示如下信息，表明该扩展组件卸载成功。</description>
+    </item>
+    
+    <item>
+      <title>卸载 Kubernetes 和 KubeSphere </title>
+      <link>/v4.2.1/03-installation-and-upgrade/04-uninstall-kubesphere/02-uninstall-kubernetes-and-kubesphere/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/03-installation-and-upgrade/04-uninstall-kubesphere/02-uninstall-kubernetes-and-kubesphere/</guid>
+      <description>本节介绍如何卸载 Kubernetes 和 KubeSphere。
+     说明     本节介绍的 Kubernetes 卸载方式仅适用于 Kubernetes 通过 KubeKey 安装的场景。如果您的 Kubernetes 不是通过 KubeKey 安装，请参阅 Kubernetes 官方文档卸载 Kubernetes。
+        警告       此操作将导致 KubeSphere 集群业务中断，并且无法撤销，请谨慎执行此操作。
+   为避免数据丢失，请提前备份所有重要数据。
+      若 KubeSphere 为在线安装 若 KubeSphere 为在线安装，请按照以下步骤卸载 Kubernetes 和 KubeSphere。
+ 准备工作 您需要获取安装配置文件 config-sample.yaml 并将其传输到用于执行本节操作的集群节点。</description>
+    </item>
+    
+  </channel>
+</rss>

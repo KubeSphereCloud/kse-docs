@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NFS 加速 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/</link>
+    <description>Recent content in NFS 加速 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1. 创建 NFS 数据集</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/01-create-nfs-dataset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/01-create-nfs-dataset/</guid>
+      <description>本节介绍如何创建 NFS 数据集，用于连接 NFS。
+ 前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已配置完成 NFS 存储系统，且已获取 NFS 的挂载路径。
+     操作步骤  以具有数据集加速管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择数据集 &amp;gt; 数据集。
+  在页面点击创建。
+  在基本信息页签，设置数据集的基本信息，然后点击下一步。
+    参数 描述     名称
+ 数据集的名称。
+   别名</description>
+    </item>
+    
+    <item>
+      <title>2. 创建 ThinRuntime</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/02-create-thinruntime/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/02-create-thinruntime/</guid>
+      <description>本节介绍如何创建 ThinRuntime，用于生成连接 NFS 的 PVC，供后续 NFS 加速使用。
+     说明     如果您创建 NFS 数据集时在数据源页签中勾选了自动创建 ThinRuntime，则无需再次创建，可以跳过该文档。
+    前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已创建 NFS 数据集。
+     操作步骤  以具有数据集加速管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择数据集 &amp;gt; 数据加速运行时。
+  在页面点击创建。</description>
+    </item>
+    
+    <item>
+      <title>3. 创建 PVC 数据集</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/03-create-pvc-dataset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/03-create-pvc-dataset/</guid>
+      <description>本节介绍如何创建 PVC 数据集，以配置需要加速的 PVC。
+ 前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已创建 NFS 数据集、创建 ThinRuntime。
+     操作步骤  以具有数据集加速管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择数据集 &amp;gt; 数据集。
+  在页面点击创建。
+  在基本信息页签，设置数据集的基本信息，然后点击下一步。
+    注意     PVC 数据集与已创建的 NFS 数据集所属的项目必须相同。
+      在数据源页签，配置数据源信息，然后点击下一步。</description>
+    </item>
+    
+    <item>
+      <title>4. 创建 AlluxioRuntime</title>
+      <link>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/04-create-alluxioruntime/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/14-fluid/03-nfs-accelerate/04-create-alluxioruntime/</guid>
+      <description>本节介绍如何创建 AlluxioRuntime，以实现 NFS 加速。
+ 前提条件   KubeSphere 平台需要安装并启用 Fluid 和 Fluid Console 扩展组件。
+      您需要加入一个集群并在集群中具有数据集加速管理权限。有关更多信息，请参阅集群成员和集群角色。
+     已创建 NFS 数据集、创建 ThinRuntime、创建 PVC 数据集。
+     操作步骤  以具有数据集加速管理权限的用户登录 KubeSphere Web 控制台并进入您的集群。
+  在左侧导航栏选择数据集 &amp;gt; 数据加速运行时。
+  在页面点击创建。
+  在基本信息页签，选择已创建的 PVC 数据集，然后点击下一步。
+  在 Runtime 配置页签，Runtime 类型选择为 Alluxio，选择存储类型（Mem/Disk），设置缓存配额等参数，然后点击下一步。
+  在高级设置页签，点击创建。
+若创建成功，NFS 将作为 Alluxio 的底层存储接入。当数据加速运行时状态显示为`就绪`（Ready）时，表示 NFS 存储已成功接入并具备数据加速能力，后续数据访问将按需触发缓存与加速。</description>
+    </item>
+    
+  </channel>
+</rss>
