@@ -13,9 +13,9 @@
       
       <guid>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/</guid>
       <description>本节介绍如何在可访问 Internet 的环境下安装 Kubernetes 和 KubeSphere。
- 安装过程中将用到开源工具 KubeKey。有关 KubeKey 的更多信息，请访问 GitHub KubeKey 仓库。
+ 安装过程中将用到开源工具 KubeKey 的 v4.x 版本。有关 KubeKey 的更多信息，请访问 GitHub KubeKey 仓库。
  前提条件   您需要准备至少 1 台 Linux 服务器作为集群节点。在生产环境中，为确保集群具备高可用性，建议准备至少 5 台 Linux 服务器，其中 3 台作为控制平面节点，另外 2 台作为工作节点。如果您在多台 Linux 服务器上安装 KubeSphere，请确保所有服务器属于同一子网。
-  集群节点的操作系统和版本须为 Ubuntu 16.04、Ubuntu 18.04、Ubuntu 20.04、Ubuntu 22.04、Debian 9、Debian 10、CentOS 7、CentOS Stream、RHEL 7、RHEL 8、SLES 15、openSUSE Leap 15 或 Kylin v10。多台服务器的操作系统可以不同。关于其它操作系统和版本支持，请咨询青云科技官方解决方案专家或交付服务专家。
+  集群节点的操作系统和版本须为 Ubuntu 18.04、Ubuntu 20.04、Ubuntu 22.04、Ubuntu 24.04、Debian 10、Debian 11、CentOS 8、AlmaLinux 9.0 或 Kylin v10。多台服务器的操作系统可以不同。关于其它操作系统和版本支持，请咨询青云科技官方解决方案专家或交付服务专家。
   在生产环境中，为确保集群具有足够的计算和存储资源，建议每台集群节点配置至少 8 个 CPU 核心、16 GB 内存和 200 GB 磁盘空间。除此之外，建议在每台集群节点的 /var/lib/docker（对于 Docker）或 /var/lib/containerd（对于 containerd） 目录额外挂载至少 200 GB 磁盘空间用于存储容器运行时数据。</description>
     </item>
     
@@ -27,13 +27,12 @@
       <guid>/v4.2.1/03-installation-and-upgrade/02-install-kubesphere/02-offline-install-kubernetes-and-kubesphere/</guid>
       <description>本节介绍如何在不能访问 Internet 的环境下使用离线安装包部署 Kubernetes 和 KubeSphere。
  安装过程中将用到开源工具 KubeKey 的 v4.x 版本。有关 KubeKey 的更多信息，请访问 GitHub KubeKey 仓库。
-     注意     KubeSphere 社区版用户需要在联网状态下自行构建离线安装包，KubeSphere 其他版本的用户可联系 KubeSphere 交付服务专家获取最新的离线安装包，即，可跳过离线安装包的构建过程。
-    准备工作 参考如下最低配置要求，准备 Linux 主机。
+     注意     KubeSphere 社区版用户需要在联网状态下自行构建离线安装包，KubeSphere 其他版本的用户可联系 KubeSphere 交付服务专家获取最新的离线安装包，即可跳过离线安装包的构建过程。
+    前置依赖： 安装过程依赖 tar 工具完成软件包的压缩和解压，请提前确认系统环境已预装该命令。若 config.yaml 中配置了 charts 参数，请确保打包节点已提前安装 Helm。
+ 准备工作 参考如下最低配置要求，准备 Linux 主机。
      角色 主机数量 最低要求（每个节点） 网络要求     打包节点
  1
- CPU：1 核，内存：1 GB，硬盘：150 GB
- 需能访问：github.com、docker.io、quay.io
-   部署节点（运行 Web Installer 服务）</description>
+ CPU：1 核，内存：1 GB，硬盘：150 GB</description>
     </item>
     
     <item>

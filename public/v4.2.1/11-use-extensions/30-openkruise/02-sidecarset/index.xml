@@ -14,16 +14,16 @@
       <guid>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/01-create-sidecarset/</guid>
       <description>本节介绍如何创建 SidecarSet。
  操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。
-  在页面右上角点击创建。
-  在基本信息页签，填写以下参数后点击下一步。
-       参数 描述     名称
+  在页面右上角点击 创建。
+  在 基本信息 页签，填写以下参数后点击 下一步。
+    参数 描述     名称
  SidecarSet 的名称。只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
    别名
  SidecarSet 的别名。支持中文、字母、数字和连字符（-），不得以连字符（-）开头和结尾，最长 63 个字符。
    描述
  SidecarSet 的描述信息。可包含任意字符，最长 256 个字符。
-     在 SidecarSet 设置页签，配置 SidecarSet 的生效范围和注入策略，然后点击下一步。
-       参数 描述     项目设置（spec.</description>
+      在 SidecarSet 设置 页签，配置 SidecarSet 的生效范围和注入策略，然后点击 下一步。
+    参数 描述     项目设置（spec.</description>
     </item>
     
     <item>
@@ -32,8 +32,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/02-view-sidecarset/</guid>
-      <description>查看 SidecarSet 列表  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。
-   SidecarSet 列表提供以下信息：
+      <description>查看 SidecarSet 列表 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。 SidecarSet 列表提供以下信息：
      参数 描述     名称
  SidecarSet 的名称。
    更新策略
@@ -42,8 +41,10 @@
  是否已暂停向新容器组注入 Sidecar 容器。
    更新时间
  SidecarSet 最近一次更新的时间。
-      在列表上方点击搜索框并输入关键字，可按名称搜索 SidecarSet。
-  在列表右上角点击刷新图标可刷新列表，点击自定义列图标可定制显示的列。
+    您可以在列表中执行以下操作：
+   在列表上方点击搜索框并输入关键字，按名称搜索 SidecarSet。
+  在列表右上角点击刷新图标，刷新列表信息。
+  在列表右上角点击自定义列图标，自定义显示的列。
      查看 SidecarSet 详情  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。</description>
     </item>
     
@@ -88,14 +89,29 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/05-delete-sidecarset/</guid>
-      <description> 本节介绍如何删除 SidecarSet。SidecarSet 删除后不能恢复。已通过该 SidecarSet 注入至存量容器组的 Sidecar 容器不会自动移除，请谨慎执行此操作。
+      <description> 本节介绍如何删除 SidecarSet。SidecarSet 删除后无法恢复。已通过该 SidecarSet 注入到存量容器组中的 Sidecar 容器不会自动移除，请谨慎执行此操作。
  删除单个 SidecarSet  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。
-  在需要删除的 SidecarSet 右侧点击操作图标，选择删除。
-  在删除 SidecarSet 对话框中输入 SidecarSet 的名称，然后点击确定。
+  在目标 SidecarSet 右侧点击操作图标，然后选择 删除。
+  在 删除 SidecarSet 对话框中输入 SidecarSet 的名称，然后点击 确定。
      批量删除 SidecarSet  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 SidecarSet。
-  勾选需要删除的 SidecarSet 左侧的复选框，在列表上方点击删除。
-  在批量删除 SidecarSet 对话框中输入 SidecarSet 的名称，然后点击确定。
-     </description>
+  勾选需要删除的 SidecarSet 左侧复选框，然后在列表上方点击 删除。
+  在 批量删除 SidecarSet 对话框中输入 SidecarSet 的名称，然后点击 确定。
+注意：批量删除时，请确认输入的名称与待删除的 SidecarSet 完全一致。
+      </description>
+    </item>
+    
+    <item>
+      <title>SidecarSet 日志采集与复用实践</title>
+      <link>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/06-practices-for-log-collection-and-reuse-in-sidecarset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/30-openkruise/02-sidecarset/06-practices-for-log-collection-and-reuse-in-sidecarset/</guid>
+      <description>本节介绍 SidecarSet 日志采集与复用实践。对于大型 Kubernetes 集群，或作为 PaaS 平台为多业务方服务的场景，推荐采用 SidecarSet 管理日志采集 Agent，例如 FileBeat 或 Fluent Bit。KubeSphere 扩展组件同时支持在创建 Deployment 时直接注入已创建的 SidecarSet，实现一键复用。
+ 场景对比   DaemonSet 方式：资源占用较低，但难以实现强租户隔离和灵活配置。
+  业务 Pod 硬编码 Sidecar：会增加配置复杂度，且 Sidecar 升级通常会触发业务 Pod 重建，导致运维与研发团队耦合较深。
+  SidecarSet 方式：将日志采集容器与业务工作负载解耦，由平台团队统一运维，业务侧无需感知底层实现。
+     实践建议   统一注入配置：平台团队可统一定义 FileBeat SidecarSet，并通过 selector.matchLabels（例如 kruise.io/inject-filebeat: &amp;#34;true&amp;#34;）标记需要采集日志的业务 Pod。
+  共享日志卷：可在 SidecarSet 中配置 shareVolumePolicy.type: enabled，使 FileBeat 容器自动挂载业务容器的日志目录；也可以在 SidecarSet 的 volumes 中定义共享卷，并通过 volumeMounts 挂载到 Sidecar。这样业务开发者无需在 Deployment 中重复声明日志卷。</description>
     </item>
     
   </channel>
