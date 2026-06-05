@@ -23360,7 +23360,7 @@
     删除集群节点</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2026-04-24 03:03:30
+      更新时间：2026-06-04 10:56:14
     </div>
     
     
@@ -23375,18 +23375,15 @@
   <div class="post-menu-title">本页目录</div>
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#_若_kubesphere_为在线安装">若 KubeSphere 为在线安装</a>
+    <li><a href="#_获取当前集群配置文件">获取当前集群配置文件</a>
       <ul>
-        <li><a href="#_准备工作">准备工作</a></li>
-        <li><a href="#_操作步骤">操作步骤</a></li>
+        <li><a href="#_获取_inventory_yaml">获取 inventory.yaml</a></li>
+        <li><a href="#_获取_config_yaml">获取 config.yaml</a></li>
       </ul>
     </li>
-    <li><a href="#_若_kubesphere_为离线安装">若 KubeSphere 为离线安装</a>
-      <ul>
-        <li><a href="#_准备工作_2">准备工作</a></li>
-        <li><a href="#_操作步骤_2">操作步骤</a></li>
-      </ul>
-    </li>
+    <li><a href="#_删除节点">删除节点</a></li>
+    <li><a href="#_参数说明">参数说明</a></li>
+    <li><a href="#_注意事项">注意事项</a></li>
   </ul>
 </nav>
 </div><div class="post-content">
@@ -23394,10 +23391,10 @@
       
       
 <div class="paragraph">
-<p>本节介绍如何删除 KubeSphere 集群节点。</p>
+<p>本节介绍如何使用 KubeKey 从 Kubernetes 集群中安全移除指定节点，包括从 Kubernetes 中驱逐和删除节点、清理 etcd 成员、卸载容器运行时及清理 DNS 配置。</p>
 </div>
 <div class="paragraph">
-<p>节点删除过程中将用到开源工具 KubeKey。有关 KubeKey 的更多信息，请访问 <a href="https://github.com/kubesphere/kubekey">GitHub KubeKey 仓库</a>。</p>
+<p>节点删除过程中将用到开源工具 KubeKey 的 v4.x 版本。有关 KubeKey 的更多信息，请访问 <a href="https://github.com/kubesphere/kubekey">GitHub KubeKey 仓库</a>。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch admon note">
 <colgroup>
@@ -23440,430 +23437,136 @@
 </tr>
 </tbody>
 </table>
-<div class="sect1">
-<h2 id="_若_kubesphere_为在线安装">若 KubeSphere 为在线安装</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>若 KubeSphere 为<a href="../../02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/">在线安装</a>，请按照以下步骤删除集群节点。</p>
-</div>
-<div class="sect2">
-<h3 id="_准备工作">准备工作</h3>
-<div class="paragraph">
-<p>您需要获取安装配置文件 <strong>config-sample.yaml</strong> 并将其传输到用于执行本节操作的集群节点。</p>
-</div>
-<table class="tableblock frame-all grid-all stretch admon warning">
-<colgroup>
-<col style="width: 100%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">警告</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>如果您无法获取安装配置文件 <strong>config-sample.yaml</strong>，您需要参阅<a href="../../02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/">在线安装 KubeSphere</a> 重新创建 <strong>config-sample.yaml</strong> 文件。重新创建该文件时，请务必确保文件中的集群信息与集群的当前实际情况一致。否则，删除节点后集群可能会出现错误。</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_操作步骤">操作步骤</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>如果您访问 GitHub/Googleapis 受限，请登录任意集群节点，执行以下命令设置下载区域：</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">export KKZONE=cn</code></pre>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>执行以下命令下载 KubeKey 最新版本：</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">curl -sfL https://get-kk.kubesphere.io | sh -</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>下载完成后当前目录下将生成 KubeKey 二进制文件 <strong>kk</strong>。</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>执行以下命令为 KubeKey 二进制文件 <strong>kk</strong> 添加执行权限：</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">sudo chmod +x kk</code></pre>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>执行以下命令查看需要删除的节点的名称：</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">kubectl get node</code></pre>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>执行以下命令将需要删除的节点上运行的容器组驱逐到其他节点（将 &lt;nodename&gt; 替换为需要删除的节点的名称）：</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">kubectl drain &lt;nodename&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>将安装配置文件 <strong>config-sample.yaml</strong> 传输到当前目录。</p>
-</li>
-<li>
-<p>执行以下命令开始删除节点：</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell"> ./kk delete node &lt;nodename&gt; -f config-sample.yaml</code></pre>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>执行以下命令查看当前集群节点：</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">kubectl get node</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>如果没有显示已删除节点的信息，则表明节点删除成功。</p>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
+<p><strong>注意：</strong> 当前 Web Installer 暂不支持删除集群节点，请通过命令行操作。</p>
 </div>
 <div class="sect1">
-<h2 id="_若_kubesphere_为离线安装">若 KubeSphere 为离线安装</h2>
+<h2 id="_获取当前集群配置文件">获取当前集群配置文件</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>若 KubeSphere 使用 Web Installer <a href="../../02-install-kubesphere/02-offline-install-kubernetes-and-kubesphere/">离线安装</a>，请按照以下步骤删除集群节点。</p>
+<p>如果集群是通过 Web Installer 安装的，可通过以下方式获取当前集群的配置文件。</p>
 </div>
-<table class="tableblock frame-all grid-all stretch admon note">
-<colgroup>
-<col style="width: 100%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>暂不支持在 Web Installer 页面删除节点。</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 <div class="sect2">
-<h3 id="_准备工作_2">准备工作</h3>
-<div class="paragraph">
-<p>登录部署节点，进入离线包目录，获取节点信息和安装配置文件，用于后续执行 kk 命令。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">cd offline</code></pre>
-</div>
-</div>
-<table class="tableblock frame-all grid-all stretch admon attention">
-<colgroup>
-<col style="width: 100%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">注意</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>后续步骤必须在离线包解压后的目录（如 <code>offline</code>）中执行，否则会导致操作失败。</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p><strong>一、获取节点信息: kkv4-inventory.yaml</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>获取节点信息文件。</p>
-<div class="exampleblock">
-<div class="content">
+<h3 id="_获取_inventory_yaml">获取 inventory.yaml</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">cp kubekey/runtime/kubekey.kubesphere.io/v1/inventories/default/default.yaml kkv4-inventory.yaml</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>节点信息示例如下：</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">apiVersion: kubekey.kubesphere.io/v1
-kind: Inventory
-metadata:
-  name: default
-  namespace: default
-spec:
-  groups:
-    etcd:
-      hosts:
-      - scan-cqxbav3
-      vars: null
-    image_registry:
-      hosts: []
-      vars: null
-    k8s_cluster:
-      groups:
-      - kube_control_plane
-      - kube_worker
-      hosts: null
-      vars: null
-    kube_control_plane:
-      hosts:
-      - scan-cqxbav3
-      vars: null
-    kube_worker:
-      hosts:
-      - scan-cqxbav3
-      vars: null
-    nfs:
-      hosts: []
-      vars: null
-  hosts:
-    scan-cqxbav3:
-      connector:
-        host: 172.16.0.4
-        password: &#34;&#34;
-        port: &#34;22&#34;
-        user: root
-      internal_ipv4: 172.16.0.4
-      kubernetes:
-        custom_labels: {}
-  vars: null
-status: {}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>二、获取安装配置文件: kkv4-config.json</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>安装 <code>jq</code>。</p>
-<div class="openblock">
-<div class="content">
-<div class="paragraph">
-<p>在 Ubuntu 操作系统上，执行以下安装命令：</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">sudo apt install jq</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>如果部署节点使用其他操作系统，请将 <strong>apt</strong> 替换为操作系统对应的软件包管理工具。</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>获取安装集群时的配置文件 <code>kkv4-config.json</code>。</p>
-<div class="exampleblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">cd schema/config.json | jq &#39;{spec: .[&#34;kubernetes.json&#34;]}&#39; &gt; kkv4-config.json</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>配置信息示例：</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">{
-  &#34;spec&#34;: {
-    &#34;kubernetes&#34;: {
-      &#34;cluster_name&#34;: &#34;cluster-01&#34;,
-      &#34;kube_version&#34;: &#34;v1.33.3&#34;,
-      &#34;control_plane_endpoint&#34;: {
-        &#34;host&#34;: &#34;lb.kubesphere.local&#34;,
-        &#34;port&#34;: 6443,
-        &#34;type&#34;: &#34;local&#34;
-      }
-    },
-    &#34;cri&#34;: {
-      &#34;container_manager&#34;: &#34;containerd&#34;
-    },
-    &#34;cni&#34;: {
-      &#34;type&#34;: &#34;calico&#34;,
-      &#34;max_pods&#34;: 110,
-      &#34;service_cidr&#34;: &#34;10.233.0.0/18&#34;,
-      &#34;pod_cidr&#34;: &#34;10.233.64.0/18&#34;,
-      &#34;ipv4_mask_size&#34;: 24,
-      &#34;ipv6_mask_size&#34;: 64
-    },
-    &#34;image_registry&#34;: {
-      &#34;auth&#34;: {
-        &#34;registry&#34;: &#34;dockerhub.kubekey.local&#34;,
-        &#34;username&#34;: &#34;admin&#34;,
-        &#34;password&#34;: &#34;Harbor12345&#34;,
-        &#34;insecure&#34;: true
-      }
-    },
-    &#34;storage_class&#34;: {
-      &#34;local&#34;: {
-        &#34;enabled&#34;: true,
-        &#34;default&#34;: true,
-        &#34;path&#34;: &#34;/var/openebs/local&#34;
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_操作步骤_2">操作步骤</h3>
+<h3 id="_获取_config_yaml">获取 config.yaml</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">cat schema/config.json | jq &#39;{spec: .[&#34;kubernetes.json&#34;]}&#39; &gt; kkv4-config.json</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_删除节点">删除节点</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>执行以下命令删除指定节点：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">./kk delete nodes node1 node2 -i inventory.yaml -c config.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其中 <code>node1</code> <code>node2</code> 为待删除节点的名称，需与 <code>inventory.yaml</code> 中定义的 host 名称一致。</p>
+</div>
+<div class="paragraph">
+<p>KubeKey 会依次执行以下操作：</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>登录<code>集群节点</code>，执行以下命令查看需要删除的节点的名称：</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">kubectl get node</code></pre>
-</div>
-</div>
-</div>
-</div>
+<p>若节点属于 etcd 集群且配置了 <code>--all</code> 或相关删除选项，先将该 etcd 成员下线。</p>
 </li>
 <li>
-<p>将需要删除的节点上运行的容器组驱逐到其他节点（将 &lt;nodename&gt; 替换为需要删除的节点的名称）：</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">kubectl drain &lt;nodename&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
+<p>对 Kubernetes 节点执行 <code>cordon</code> 禁止新 Pod 调度，<code>drain</code> 驱逐现有的工作负载。</p>
 </li>
 <li>
-<p>在<code>部署节点</code>，进入离线包解压后的目录（如 offline），使用 <code>kkv4-inventory.yaml</code> 和 <code>kkv4-config.json</code> 删除节点。</p>
-<div class="exampleblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">cd offline</code></pre>
+<p>若使用 Calico，执行 <code>calicoctl delete node</code> 清理网络资源。</p>
+</li>
+<li>
+<p>从 Kubernetes 集群中删除该节点。</p>
+</li>
+<li>
+<p>卸载 Kubernetes 组件和容器运行时（根据配置）。</p>
+</li>
+<li>
+<p>清理本地 DNS hosts 配置（根据配置）。</p>
+</li>
+</ol>
 </div>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">./kk delete nodes &lt;nodename&gt; -i kkv4-inventory.yaml -c kkv4-config.json</code></pre>
 </div>
-</div>
-<table class="tableblock frame-all grid-all stretch admon note">
+<div class="sect1">
+<h2 id="_参数说明">参数说明</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 100%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 71.4286%;"/>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">说明</th>
+<th class="tableblock halign-left valign-top">参数</th>
+<th class="tableblock halign-left valign-top">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>暂不支持删除 etcd 节点。</p>
-</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-i, --inventory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inventory 文件路径，定义节点连接信息</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-c, --config</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Config 文件路径，定义集群关键配置</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--with-kubernetes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">指定 Kubernetes 版本</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--all</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">删除所有集群组件，包括 cri、etcd、dns 和 image_registry</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--with-data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">同时删除数据目录（如 harbor 数据、registry 数据等），请谨慎使用</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--override</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">执行成功后从 inventory.yaml 中移除已删除的节点</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-a, --artifact</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">离线包路径，离线环境时使用</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>如果显示如下信息，则表明节点删除成功。</p>
-</div>
-<div class="paragraph">
-<p>回显示例：</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">[Playbook default/delete-nodes-qpmzs] finish. total: 74,success: 68,ignored: 6,failed: 0</code></pre>
 </div>
 </div>
-</div>
-</div>
+<div class="sect1">
+<h2 id="_注意事项">注意事项</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>业务迁移：</strong> 删除节点前，请确保该节点上的业务已迁移或备份，避免数据丢失。</p>
 </li>
 <li>
-<p>在<code>集群节点</code>上，执行以下命令查看当前集群的节点：</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">kubectl get node</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>如果没有显示已删除节点的信息，也表明节点删除成功。</p>
-</div>
-</div>
-</div>
+<p><strong>控制平面节点：</strong> 删除控制平面节点会触发额外的安全校验，防止误删导致集群失控。请务必保证删除后集群中仍有可用的控制平面节点。</p>
 </li>
-</ol>
-</div>
+<li>
+<p><strong>etcd 节点缩容：</strong> 当使用 external etcd 模式时，删除 etcd 节点需确保剩余的 etcd 成员数量为奇数，以维持集群高可用。</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -23885,18 +23588,15 @@ status: {}</code></pre>
   <div class="post-menu-title">本页目录</div>
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#_若_kubesphere_为在线安装">若 KubeSphere 为在线安装</a>
+    <li><a href="#_获取当前集群配置文件">获取当前集群配置文件</a>
       <ul>
-        <li><a href="#_准备工作">准备工作</a></li>
-        <li><a href="#_操作步骤">操作步骤</a></li>
+        <li><a href="#_获取_inventory_yaml">获取 inventory.yaml</a></li>
+        <li><a href="#_获取_config_yaml">获取 config.yaml</a></li>
       </ul>
     </li>
-    <li><a href="#_若_kubesphere_为离线安装">若 KubeSphere 为离线安装</a>
-      <ul>
-        <li><a href="#_准备工作_2">准备工作</a></li>
-        <li><a href="#_操作步骤_2">操作步骤</a></li>
-      </ul>
-    </li>
+    <li><a href="#_删除节点">删除节点</a></li>
+    <li><a href="#_参数说明">参数说明</a></li>
+    <li><a href="#_注意事项">注意事项</a></li>
   </ul>
 </nav>
 </div></div>
