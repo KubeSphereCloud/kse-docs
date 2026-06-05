@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>时钟故障模拟 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/33-chaos-mesh/09-timechaos/</link>
+    <description>Recent content in 时钟故障模拟 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/33-chaos-mesh/09-timechaos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>准备测试环境</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/09-timechaos/01-prepare-environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/09-timechaos/01-prepare-environment/</guid>
+      <description>本节介绍如何创建测试部署，用于后续验证时钟故障注入效果。
+ 创建测试部署
+ apiVersion: apps/v1 kind: Deployment metadata: name: nginx-time namespace: default spec: replicas: 1 selector: matchLabels: app: nginx-time template: metadata: labels: app: nginx-time spec: containers: - name: nginx image: nginx:stable-perl ports: - containerPort: 80   </description>
+    </item>
+    
+    <item>
+      <title>注入时钟偏移</title>
+      <link>/v4.2.1/11-use-extensions/33-chaos-mesh/09-timechaos/02-time-offset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/33-chaos-mesh/09-timechaos/02-time-offset/</guid>
+      <description>本节介绍如何向容器的系统时钟注入偏移量。
+ 故障注入期间，目标容器内的时钟将向后偏移 5 秒，容器打印的日志时间戳将晚于实际时间。
+ 操作步骤  登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 混沌工程。
+  点击 创建，选择故障类型为 TimeChaos，配置以下参数后点击 创建。
+       参数 描述     时钟偏移量（timeOffset）
+ 容器时钟的偏移量，正值表示向后偏移，例如 5s。
+   持续时间（duration）
+ 故障持续时间，例如 10m。
+   生效范围（selector）
+ 选择故障注入的目标命名空间和 Pod。
+    对应 YAML 示例如下：   apiVersion: chaos-mesh.org/v1alpha1 kind: TimeChaos metadata: name: time namespace: default spec: duration: 10m timeOffset: 5s containerNames: [] mode: all selector: namespaces: - default pods: default: - &amp;#34;{{podID}}&amp;#34;   验证故障效果：</description>
+    </item>
+    
+  </channel>
+</rss>

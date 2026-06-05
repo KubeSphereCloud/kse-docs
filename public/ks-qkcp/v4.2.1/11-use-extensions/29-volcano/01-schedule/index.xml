@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Volcano 调度 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/29-volcano/01-schedule/</link>
+    <description>Recent content in Volcano 调度 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/29-volcano/01-schedule/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Volcano 调度概述</title>
+      <link>/v4.2.1/11-use-extensions/29-volcano/01-schedule/01-overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/29-volcano/01-schedule/01-overview/</guid>
+      <description>Volcano 是一个基于 Kubernetes 的批处理平台，提供了机器学习、深度学习、生物信息学、基因组学及其他大数据应用所需要而 Kubernetes 当前缺失的一系列特性，提供了高性能任务调度引擎、高性能异构芯片管理、高性能任务运行管理等通用计算能力。
+ Volcano Scheduler Volcano Scheduler 是负责 Pod 调度的组件，它由一系列 action 和 plugin 组成。action 定义了调度各环节中需要执行的动作；plugin 根据不同场景提供了 action 中算法的具体实现细节。Volcano Scheduler 具有高度的可扩展性，您可以根据需要实现自己的 action 和 plugin。
+   Volcano Scheduler 的工作流程如下：
+  客户端提交的 Job 被调度器识别到并缓存起来。
+  周期性开启会话，一个调度周期开始。
+  将没有被调度的 Job 发送到会话的待调度队列中。
+  遍历所有的待调度 Job，按照定义的次序依次执行 enqueue、allocate、preempt、reclaim、backfill 等动作，为每个 Job 找到一个最合适的节点。将该 Job 绑定到这个节点。action 中执行的具体算法逻辑取决于注册的 plugin 中各函数的实现。
+  关闭本次会话。
+     Volcano 自定义资源   Pod 组（PodGroup）：Pod 组是 Volcano 自定义资源类型，代表一组强关联 Pod 的集合，主要用于批处理工作负载场景，比如 Tensorflow 中的一组 ps 和 worker。</description>
+    </item>
+    
+    <item>
+      <title>使用 Volcano 调度工作负载</title>
+      <link>/v4.2.1/11-use-extensions/29-volcano/01-schedule/03-use-volcano-to-schedule-workloads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/29-volcano/01-schedule/03-use-volcano-to-schedule-workloads/</guid>
+      <description>限制 调度大量工作负载的场景下，Volcano 会打印较多的日志。可能导致日志过多占满所在节点磁盘。
+   使用 Volcano 调度工作负载  创建 Queue
+apiVersion: scheduling.volcano.sh/v1beta1 kind: Queue metadata: name: q1 spec: reclaimable: true weight: 1     在 spec 中设置 schedulerName 参数并指定参数值为 volcano
+apiVersion: apps/v1 kind: Deployment metadata: name: nginx labels: app: nginx annotations: # 对成组调度至关重要：此注解告知 Volcano 将此 Deployment 视为一个组， # 要求至少 2 个 Pod 能够一起调度，然后才会启动任何 Pod。 # scheduling.volcano.sh/group-min-member: &amp;#34;2&amp;#34; spec: replicas: 4 selector: matchLabels: app: nginx template: metadata: annotations: # 指定作业到 q1 队列 scheduling.</description>
+    </item>
+    
+  </channel>
+</rss>

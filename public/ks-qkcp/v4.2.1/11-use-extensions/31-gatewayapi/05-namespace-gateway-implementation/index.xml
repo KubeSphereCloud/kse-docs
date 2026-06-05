@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>项目网关实现 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/</link>
+    <description>Recent content in 项目网关实现 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>启用项目网关实现</title>
+      <link>/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/01-enable-a-namespace-gateway-implementation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/01-enable-a-namespace-gateway-implementation/</guid>
+      <description>本节介绍如何启用项目层级的 Gateway API 网关实现。
+ 前提条件   KubeSphere 平台需要安装并启用 Gateway API 网关 扩展组件。
+  您需要加入一个项目并在项目中具有 项目 Gateway API 网关管理 权限。
+     操作步骤  以具有 项目 Gateway API 网关管理 权限的用户登录 KubeSphere Web 控制台并进入您的项目。
+  在左侧导航栏选择 Gateway API 网关 &amp;gt; 网关实现。
+  在 项目网关实现 页签，选择一个项目，点击启用。
+  在弹出的对话框，设置网关实现的参数，然后点击确定。
+       参数 描述     容器组副本数量
+ 期望的容器组副本数量。设置容器组副本数限制时，该配置项不生效。</description>
+    </item>
+    
+    <item>
+      <title>查看项目网关实现信息</title>
+      <link>/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/02-view-gateway-implementation-information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/02-view-gateway-implementation-information/</guid>
+      <description>本节介绍如何查看项目网关实现的信息。
+ 前提条件   KubeSphere 平台需要安装并启用 Gateway API 网关扩展组件。
+  您需要加入一个项目并在项目中具有 项目 Gateway API 网关查看 权限。
+     操作步骤  以具有 项目 Gateway API 网关查看 权限的用户登录 KubeSphere Web 控制台并进入您的项目。
+  在左侧导航栏选择 Gateway API 网关 &amp;gt; 网关实现。
+  在项目网关实现页签，选择一个项目，表格显示该项目的网关实现。
+       参数 描述     状态
+ 网关实现的状态：正常、处理中、异常。
+   访问模式
+ 网关实现服务的外部访问模式：
+   NodePort：将节点端口映射到服务端口，可通过节点 IP 和节点端口访问服务。</description>
+    </item>
+    
+    <item>
+      <title>查看项目网关实现的详情</title>
+      <link>/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/03-view-namespace-gateway-implementation-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/03-view-namespace-gateway-implementation-details/</guid>
+      <description>本节介绍如何查看项目网关实现的详情。
+ 前提条件   KubeSphere 平台需要安装并启用 Gateway API 网关 扩展组件。
+  您需要加入一个项目并在项目中具有 项目 Gateway API 网关查看 权限。
+     操作步骤  以具有 项目 Gateway API 网关查看 权限的用户登录 KubeSphere Web 控制台并进入您的项目。
+  在左侧导航栏选择 Gateway API 网关 &amp;gt; 网关实现。
+  在 项目网关实现 页签，选择一个项目，表格显示该项目的网关实现。点击网关实现名称进入详情页。
+  在 属性 区域查看网关实现的属性。
+    参数 描述     状态
+ 网关的状态：正常、处理中、异常。
+   控制器</description>
+    </item>
+    
+    <item>
+      <title>修改项目网关实现的设置</title>
+      <link>/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/04-edit-namespace-gateway-implementation-settings/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/04-edit-namespace-gateway-implementation-settings/</guid>
+      <description>本节介绍如何修改项目网关实现的设置。
+ 前提条件   KubeSphere 平台需要安装并启用 Gateway API 网关 扩展组件。
+  您需要加入一个项目并在项目中具有 项目 Gateway API 网关管理 权限。
+     操作步骤  以具有 项目 Gateway API 网关管理 权限的用户登录 KubeSphere Web 控制台并进入您的项目。
+  在左侧导航栏选择 Gateway API 网关 &amp;gt; 网关实现。
+  在 项目网关实现 页签，选择一个项目，表格显示该项目的网关实现。在表格最右侧列，选择 编辑配置。
+  在弹出的对话框，修改网关实现的参数，然后点击确定。
+       参数 描述     容器组副本数量
+ 期望的容器组副本数量。设置容器组副本数限制时，该配置项不生效。
+   实际运行容器组副本数限制</description>
+    </item>
+    
+    <item>
+      <title>禁用项目网关实现</title>
+      <link>/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/05-disable-namespace-gateway-implementation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/31-gatewayapi/05-namespace-gateway-implementation/05-disable-namespace-gateway-implementation/</guid>
+      <description>  警告：网关实现禁用后，客户端将无法访问由网关反向代理的服务，相关业务可能会中断，请谨慎执行此操作。
+   本节介绍如何禁用项目网关实现。
+ 前提条件   KubeSphere 平台需要安装并启用 Gateway API 网关 扩展组件。
+  您需要加入一个项目并在项目中具有 项目 Gateway API 网关管理 权限。
+     操作步骤  以具有 项目 Gateway API 网关管理 权限的用户登录 KubeSphere Web 控制台并进入您的项目。
+  在左侧导航栏选择 Gateway API 网关 &amp;gt; 网关实现。
+  在 项目网关实现 页签，表格显示该项目的网关实现。在表格最右侧列，选择 禁用。
+  在弹出的对话框点击确定。
+     </description>
+    </item>
+    
+  </channel>
+</rss>

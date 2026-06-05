@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>巡检规则组 on KubeSphere</title>
+    <link>/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/</link>
+    <description>Recent content in 巡检规则组 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建巡检规则</title>
+      <link>/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/01-create-inspect-rules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/01-create-inspect-rules/</guid>
+      <description>本节介绍如何创建巡检规则，以便后续创建巡检任务。
+ 目前支持的规则类型有：
+   OPA 规则
+  PromQL 规则
+  文件变更规则
+  内核参数配置规则
+  Systemd 服务状态规则
+  节点基本信息规则
+  文件内容检查规则
+  服务连通性检查规则
+   前提条件   您需要在 KubeSphere 平台具有 platform-admin 角色。
+  KubeSphere 平台需要安装并启用 KubeEye 扩展组件。
+     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  点击组件坞 &amp;gt; 集群巡检，进入集群巡检页面。
+  在左侧导航栏选择巡检规则组。</description>
+    </item>
+    
+    <item>
+      <title>查看巡检规则组列表</title>
+      <link>/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/03-view-rule-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/03-view-rule-list/</guid>
+      <description>本节介绍巡检规则组列表的信息。
+ 前提条件   您需要在 KubeSphere 平台具有 platform-admin 角色。
+  已创建巡检规则。
+     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  点击组件坞 &amp;gt; 集群巡检，进入集群巡检页面。
+  在左侧导航栏选择巡检规则组。
+巡检规则组列表提供以下信息：
+     参数 描述     名称
+ 巡检规则的名称。
+   风险等级
+ 巡检规则中定义的风险等级（危险、警告、可忽略）及其对应的规则数量。
+   关联巡检任务
+ 使用当前巡检规则的巡检任务数量。
+      在列表上方点击搜索框并输入关键字，可按名称搜索巡检规则。
+     在列表右上角点击可刷新列表信息。</description>
+    </item>
+    
+    <item>
+      <title>查看巡检规则组详情</title>
+      <link>/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/05-view-rule-details/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/05-view-rule-details/</guid>
+      <description> 本节介绍如何查看巡检规则组的详细信息。
+ 前提条件   您需要在 KubeSphere 平台具有 platform-admin 角色。
+  已创建巡检规则。
+     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  点击组件坞 &amp;gt; 集群巡检，进入集群巡检页面。
+  在左侧导航栏选择巡检规则组。
+  点击一个巡检规则组的名称打开其详情页面。
+  关联巡检任务页签展示了使用当前巡检规则的巡检任务。点击即时巡检下拉框，选择定时巡检可查看关联的定时巡检任务。 有关更多信息，请参阅巡检任务。
+  点击 YAML 页签，查看巡检规则的 yaml 配置，不支持修改。
+     </description>
+    </item>
+    
+    <item>
+      <title>使用巡检规则创建巡检任务</title>
+      <link>/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/07-create-tasks-by-rules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/07-create-tasks-by-rules/</guid>
+      <description> 本节介绍如何使用巡检规则创建巡检任务。
+ 前提条件   您需要在 KubeSphere 平台具有 platform-admin 角色。
+  已创建巡检规则。
+     操作步骤  以具有 platform-admin 角色的用户登录 KubeSphere Web 控制台。
+  点击组件坞 &amp;gt; 集群巡检，进入集群巡检页面。
+  在左侧导航栏选择巡检规则组。
+  在需要使用的巡检规则组右侧点击，然后在下拉列表中创建巡检任务。
+  在基本信息页签，输入名称和描述，然后点击下一步。
+  在巡检策略页签，选择即时巡检或定时巡检，然后点击下一步。
+    说明     若选择定时巡检，需配置巡检策略。有关更多信息，请参阅创建巡检任务。
+      在巡检范围页签，选择被巡检的目标集群，然后点击创建。
+创建完成的巡检任务将显示在巡检任务页面。
+      </description>
+    </item>
+    
+    <item>
+      <title>删除巡检规则</title>
+      <link>/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/09-delete-inspect-rules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/11-use-extensions/26-kubeeye/03-rule-groups/09-delete-inspect-rules/</guid>
+      <description> 本节介绍如何删除已创建的巡检规则。
+     注意     删除巡检规则前，请确保巡检规则未被巡检任务使用，即关联巡检任务数量为 0。否则，删除巡检规则后，巡检任务将执行失败。
+    操作步骤 登录集群节点，查看用于创建巡检规则的 yaml 文件，然后执行以下命令删除巡检规则。
+     提示     若集群节点上找不到用于创建巡检规则的 yaml 文件，也可根据巡检规则的 yaml 配置重新创建 yaml 文件。
+    kubectl delete -f xxx.yaml       说明     将 xxx.yaml 替换为实际的规则文件名称，如 kubeeye_nodeInfo_inspect.yaml。
+      </description>
+    </item>
+    
+  </channel>
+</rss>

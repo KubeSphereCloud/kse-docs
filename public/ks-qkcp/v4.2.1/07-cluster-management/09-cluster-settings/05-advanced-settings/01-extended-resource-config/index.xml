@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>扩展资源配置 on KubeSphere</title>
+    <link>/v4.2.1/07-cluster-management/09-cluster-settings/05-advanced-settings/01-extended-resource-config/</link>
+    <description>Recent content in 扩展资源配置 on KubeSphere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>©2022 QingCloud, Inc. All rights reserved</copyright><atom:link href="/v4.2.1/07-cluster-management/09-cluster-settings/05-advanced-settings/01-extended-resource-config/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在 KubeSphere UI 中启用扩展资源管理</title>
+      <link>/v4.2.1/07-cluster-management/09-cluster-settings/05-advanced-settings/01-extended-resource-config/01-enable-extended-resource-manage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/v4.2.1/07-cluster-management/09-cluster-settings/05-advanced-settings/01-extended-resource-config/01-enable-extended-resource-manage/</guid>
+      <description>KubeSphere 支持通过集群级配置，将 Kubernetes 的扩展资源（Extended Resources）纳入 UI 的统一管理与配额控制能力。
+ 该机制不仅适用于 NPU，也可用于 GPU、FPGA、RDMA、自定义硬件资源等多种资源扩展场景。
+ 该方式无需修改 KubeSphere 源码，通过配置即可灵活扩展 UI 对新资源类型的支持。
+ 前置条件   已成功部署 KubeSphere。
+  具备集群管理员权限。
+  集群节点中已注册对应的 Kubernetes 扩展资源（可通过 kubectl describe node 查看）。
+     配置说明 通过创建一个集群配置 Secret，向 KubeSphere 注入扩展资源定义，从而在 UI 中展示并管理这些资源。
+ 示例配置说明了如何为 KubeSphere 增加 NPU 资源配额管理能力，并对不同类型的 NPU 进行区分展示和限制。
+ piVersion: v1 kind: Secret metadata: name: io.kubesphere.config.clusterconfig.extendedresources namespace: kubesphere-system type: config.kubesphere.io/generic-cluster-config stringData: configuration.yaml: | extendedResources: - group: &amp;#34;NPU&amp;#34; icon: &amp;#34;computing&amp;#34; title: zh: &amp;#34;NPU 配额&amp;#34; en: &amp;#34;NPU quota&amp;#34; description: zh: &amp;#34;对不同类型的 NPU 分别进行限制&amp;#34; en: &amp;#34;Limit different types of NPU separately&amp;#34; resources: - name: &amp;#34;huawei.</description>
+    </item>
+    
+  </channel>
+</rss>
