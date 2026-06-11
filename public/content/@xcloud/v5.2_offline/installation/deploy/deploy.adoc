@@ -1,0 +1,79 @@
+---
+title: "安装企业云平台"
+weight: 50
+---
+
+以上操作执行完成后即可开始安装。
+
+== 操作步骤
+
+. 登录 FirstBox。
++
+[source]
+----
+ssh root@<firstbox ip address>
+----
++
+参数说明如下：
++
+**<firstbox ip address>**：安装 FirstBox 时配置的管理 IP。
+. 执行以下命令，开始部署企业云平台。
++
+[source]
+----
+/pitrix/cli/deploy-qingcloud.py -I /root/ip_list
+----
++
+回显如下信息，表示安装任务下发成功。
++
+image::/images/ep_offline/installation/deploy_deploy_01.png[]
+
+. 执行以下命令，查看部署企业云平台的当前状态。
++
+[source]
+----
+/pitrix/cli/get-deploy-qingcloud-status.py
+----
++
+安装时间会较长，期间服务器会不断重启，请耐心等待。
++
+
+include::../../../../_components/attention.adoc[]
+* 状态为 step1 时，会重启 FirstBox 所在物理服务器（5 次），FirstBox 会断开连接，等服务器完成重启操作后，重新连接 FirstBox 即可。
+* 若网络不稳定，或使用 VPN 断开了，也会导致 FirstBox 断开连接，重新连接 FirstBox 即可。
+
+include::../../../../_components/table_footer.adoc[]
++
+**安装状态说明**：
++
+[cols='1,4'] 
+|===
+| status	| 说明
+
+| step0	| 校验配置文件，构建安装程序包。
+| step1	| 安装物理节点，对所有物理节点进行初始化。
+| step2	| 在KS节点上创建并启动角色虚拟机。
+| step3	| 安装虚拟机节点，包括更新操作系统内核、安装依赖包、挂载磁盘等。
+| step4	| 部署所有服务；配置License。
+| step5	| 解析域名，生成hosts文件；生成VBC路由。
+| successful	| 安装成功。
+| failed	| 安装失败。
+|===
++
+回显如下信息，表示安装成功。
++
+image::/images/ep_offline/installation/deploy_deploy_02.png[]
+
+== 安装日志说明
+
+若安装任务失败，请查看如下日志 ，检查报错原因并修复。若仍不能解决，请联系技术支持。
+
+* 简略日志：执行命令 `/pitrix/cli/get-deploy-qingcloud-log.py`，查看任务的简略日志。
+* 详细日志：/pitrix/log/deploy 目录下对应 job 的日志。
+* build 包的日志目录：/pitrix/log/build_pkgs/。
+* 如何确认 build 包失败的位置：pitrix/log/build_pkgs/build_pkgs.log。
+* 每一个 build 包对应详细的日志：/pitrix/log/build_pkgs/build_ks_proxy.log。
+* install 节点的日志目录：/pitrix/log/install_nodes/。
++
+更为详细的节点日志在对应节点的日志目录：/opt/install/{os,network,disk,post}。
+* deploy 包的日志目录：/pitrix/log/update_nodes/。

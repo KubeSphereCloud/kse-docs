@@ -1,0 +1,60 @@
+---
+title: "删除 RadonDB Redis Sentinel"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Redis Sentinel, 删除 RadonDB Redis Sentinel"
+description: "介绍如何删除 RadonDB Redis Sentinel。"
+weight: 11
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 9491885b5b104821ba28f9788f80bee2
+:ks_xref_id: a5d48355412342df8c2cb2b999892ea3
+:ks_comp: ../../../components/
+:ks_title: 删除 RadonDB Redis Sentinel
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB Redis Sentinel, 删除 RadonDB Redis Sentinel
+:ks_description: 介绍如何删除 RadonDB Redis Sentinel。
+:ks_weight: 11
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何删除 RadonDB Redis Sentinel 应用。
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+此操作将删除 RadonDB Redis Sentinel 数据库和数据库中的所有数据，请谨慎执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=e051ed6a9200490187964976a2fb2585]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+* 您需要获取 RadonDB Redis Sentinel 应用授权。有关更多信息，请联系{ks_product_both}技术支持。
+
+* 为避免数据丢失，请提前备份数据。
+
+
+== 操作步骤link:[id=4a61f49f02b54149a2f96bb74367267d]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在 RadonDB Redis Sentinel 应用右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除**。
+
+. 在**删除应用**对话框，输入 RadonDB Redis Sentinel 应用的名称，然后点击**确定**。

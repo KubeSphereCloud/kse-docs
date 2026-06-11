@@ -1,0 +1,19 @@
+---
+title: "enter_maintenance 相关"
+weight: 4
+---
+
+== 命令格式
+
+[,shell]
+----
+curl "http://$(qfcip):2600/qfa?op=enter_maintenance&store_id=<STORE_ID>"
+----
+
+== 相关说明
+
+* 执行 enter_maintain，当前 Store 节点状态会由 OK 变为 MAINTAIN。节点进入维护状态下后，节点上已 OPEN 的卷不受影响。未 OPEN 的卷则不能再 OPEN，新创建的卷副本无法落到 MAINTAIN 状态所在节点。
+* enter_maintenance 命令适用于在硬件或网卡不稳定，需要对硬件进行观察的场景下。进入 MAINTAIN 状态的节点，该节点上已 OPEN 的卷，若由硬件问题导致卷降级可自行恢复，同时可保护未 OPEN 卷的副本状态，避免由于硬件不稳定导致副本 ERROR，从而导致卷降级。新卷副本也不会落入到 MAINTAIN 状态节点，保障新卷数据安全性。
+
+
+

@@ -1,0 +1,54 @@
+---
+title: "OpenFunction"
+linkTitle: "{ks_title}"
+keywords: ""
+description: ""
+weight: 07
+logo: "{ks_logo}"
+downloadUrl: "{ks_download_url}"
+---
+
+// :ks_include_id: 8bd6af94e1964109abef318ed1fb2ac5
+:ks_xref_id: 78c12aac7ef34404aa895b21658e9f20
+:ks_comp: ../../components/
+:ks_title: OpenFunction
+:ks_description: 
+:ks_keywords: 
+:ks_weight: 07
+
+
+Serverless technology has become a  trend in the cloud native era. OpenFunction is a cloud native open source Function as a Service (FaaS) platform aiming to let you focus on your business logic without having to maintain the underlying runtime environment and infrastructure. You can concentrate on developing business-related source code in the form of functions.
+
+In April 2022, the OpenFunction project entered the CNCF sandbox and was selected as "Best Practices of Trusted Cloud Technology Service" in July.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Featureslink:[id=3f33227598bf4ec99b4a705462bb8409]
+
+OpenFunction provides the following key features:
+
+* Cloud agnostic and decoupled from cloud providers' BaaS
+* Pluggable architecture that allows multiple function runtimes
+* Support for sync and async functions
+* Unique async functions support that can consume events directly from event sources
+* Support for generating OCI-compliant container images directly from function source code
+* Auto scaling between 0 and N
+* Advanced async function auto scaling based on event sources' specific metrics
+* Simplified BaaS integration for both sync and async functions by introducing Dapr
+* Advanced function ingress and traffic management powered by Kubernetes Gateway API
+* Flexible and easy-to-use events management framework
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Architecture and design link:[id=dc9eb799fce34b09af66fdd0b7fff180]
+
+image::{ks_image}{f128ff001dc44ca78dc8ed618c412a85}[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Scenarioslink:[id=328e1a34d4d5430a8d93ac02c1892fd1]
+
+OpenFunction is applicable to a wide range of scenarios, covering telecom carriers, autonomous driving, and other fields. In the future, with the enrichment and evolution of product features, it will extend to many other scenarios such as loT, streaming data processing, data integration, and Backend for Frontend.

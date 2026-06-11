@@ -1,0 +1,274 @@
+---
+title: Vdbench
+weight: 3
+---
+
+//Vdbench 是一个 I/O 工作负载生成器，用于验证数据完整性和度量直接附加或网络连接的存储性能，常用于测试和基准测试，也可用于测试磁盘和文件系统的读写性能。{product_name} 建议使用 Vdbench 进行测试。
+
+// == 概述
+
+Vdbench 是一个针对文件存储的性能测试工具，可对通过 `nas_v3`、`nas_v4`、`smb` 协议挂载的目录进行性能测试。{product_name} v5.0 版本已集成 Vdbench，并内置了默认的测试用例，实施人员无需自行安装，可直接进行测试。
+
+//推荐使用 Vdbench 对文件存储功能进行测试。
+
+
+
+
+
+== 工具介绍
+
+{product_name} 集成的 Vdbench 工具使用方法如下。
+
+[source,shell]
+----
+./qs_installer deploy --vdbench -e run_type=auto -e only_once=true -e nas_type=nfs_v3
+----
+
+=== 参数说明
+
+[cols="1,3a", options="header"]
+|===
+| 参数 | 说明
+
+| run_type | 运行模式，可取值为 `custom` 与 `auto`。
+
+* `custom` 仅创建挂载点并在容器中 `mount`，不执行测试用例。
+* `auto` 创建挂载点并运行测试用例。默认值为 `auto`，无需更改。
+| only_once |是否只运行当前的挂载模式。
+
+* `ture` 仅运行参数 `nas_type` 中指定的协议类型的测试用例。
+* `false` 运行所有测试用例。
+| nas_type a| 指定待测试的协议类型。支持的协议类型包括 `nas_v3`、`nas_v40`、`nas_v41`、`nas_v42`、`smb`。
+
+include::../../../../../../../_components/note_in_table.adoc[]
+
+如需修改 `nas_type`，需等上一轮测试用例运行结束后，再修改参数下发命令行。
+
+include::../../../../../../../_components/footer_in_table.adoc[]
+
+| is_skip |是否强制重新运行已完成的测试任务。
+
+* `1` 不重新运行已完成的测试任务。默认值为 `1`，无需更改。
+* `0` 强制重新运行已完成的测试任务。
+|===
+
+
+
+=== 测试用例
+
+{product_name} 封装的 Vdbench 工具，将 `nas_type`、`io_type`、`bs`、`file_size` 等参数进行组合，内置了丰富的测试用例。
+
+
+[cols="1,1,3a", options="header"]
+|===
+| 参数 | 说明 | 取值
+
+| nas_type | 协议类型| nas_v3、nas_v40、nas_v41、nas_v42、smb
+| io_type |IO 类型| read、write、randread、randwrite、randrw(7:3)
+| bs |IO 块的 Size| 4k、64k、1m
+| file_size |文件的 Size| 4k、1m、10m
+|===
+
+如上表所示，针对 `nas_v3` 协议类型，内置的测试用例有以 `4k`、`64k` 以及 `1m` 的 Block Size 读写 `4k`、`1m`、`10m` 的文件等。读写模式分别为 `read`、`write`、`randread`、`randwrite`、`randrw(7:3)`。
+
+实施人员可根据实际需求，选择使用。
+
+
+
+
+== 测试步骤
+
+. 登录当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
++
+include::../../../../../../../_components/note.adoc[]
+
+* 命令行中的 `<firstbox ip>` 为配置文件 `ip.ini` 中 `role` 字段下的第一个节点的 IP 地址。
+* 登录密码为 `zhu88jie`。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 进入脚本所在目录。
++
+[source,shell]
+----
+cd qs-installer/
+----
+
+. 执行如下命令行，运行测试用例。
++
+include::../../../../../../../_components/note.adoc[]
+
+
+{product_name} 集成的 Vdbench 工具使用方法，可参考link:#_工具介绍[工具介绍]。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+* 运行默认测试用例
++
+[source,shell]
+----
+./qs_installer deploy --vdbench
+----
++
+include::../../../../../../../_components/note.adoc[]
+
+默认测试用例使用的是 `nfs_v42` 协议。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+* 测试 `nfs_v3` 协议
++
+[source,shell]
+----
+./qs_installer deploy --vdbench -e run_type=auto -e only_once=true -e nas_type=nfs_v3
+----
+
+* 测试 `smb` 协议
++
+[source,shell]
+----
+./qs_installer deploy --vdbench -e run_type=auto -e only_once=true -e nas_type=smb
+----
+
+* 运行单个测试用例
+
+.. 执行如下命令行，在容器内挂载 `nfs_v42` 的共享目录，并在容器内的 `/mnt/vdbench50407/vdtest/` 目录下，生成 `nfs_v42` 协议的相关测试用例。
++
+[source,shell]
+----
+./qs_installer deploy --vdbench -e run_type=custom -e only_once=true -e nas_type=nfs_v42
+----
+
+.. 执行如下命令行，进入容器内部。
++
+[source,shell]
+----
+docker exec -it vdbench bash
+----
+
+.. 执行如下命令行，进入测试用例目录 `/mnt/vdbench50407/vdtest/`。
++
+[source,shell]
+----
+cd /mnt/vdbench50407/vdtest/
+----
+
+.. 执行如下命令行，运行单个测试用例。
++
+[source,shell]
+----
+../vdbench -f nas_v42_4k_4k_read_sequential
+----
+
+. 在测试用例运行过程中，关注以下内容。
++
+* 观察 Vdbench 工具有无报错，有无运行异常，有无异常退出。
+* 执行如下命令行，观察当前环境中的磁盘使用率、网卡带宽的使用情况、CPU 内存的负载。若负载不够，可增加线程数量，持续加压。
++
+[source,shell]
+----
+iostat -mx 1
+ifstat
+htop
+free
+----
+
+. 收集最终的性能结果，并参考link:#_结果分析[结果分析]，对性能测试数据进行分析。
++
+include::../../../../../../../_components/note.adoc[]
+
+最终的性能结果与当前环境的硬件配置以及参数配置息息相关。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 测试完毕，执行以下命令行，移除 Vdbench 容器，清理 Vdbench。
++
+[source,shell]
+----
+./qs_installer deploy --vdbench   --tags remove -e remove=yes
+----
+
+== 结果分析
+
+=== 查看测试过程
+
+. 登录当前环境的 FirstBox 节点。
+. 跳转至 `gateway0` 节点。
++
+[source,shell]
+----
+ssh gateway0
+----
+. 查看测试过程。
++
+[source,shell]
+----
+docker logs -f vdbench
+----
++
+image::/images/u10000_v5.0/poc_1.png[poc_1]
+
+=== 查看测试结果
+
+. 登录当前环境的 FirstBox 节点。
+. 跳转至 `gateway0` 节点。
++
+[source,shell]
+----
+ssh gateway0
+----
+
+. 列举测试结果。
++
+[source,shell]
+----
+ls /qingstor/vdbench/vdtest/
+----
++
+image::/images/u10000_v5.0/poc_2.png[poc_2]
+
+. 进入目标测试结果目录，并查看测试结果。
++
+[source,shell]
+----
+cd /qingstor/vdbench/vdtest/
+cat vdb_output_summary
+----
++
+include::../../../../../../../_components/note.adoc[]
+
+每运行完一组 `io_type` 后，系统才会将数据写入到 `vdb_output_summary`。因此，测试用例中的每行数据都执行完成后，才能在 `vdb_output_summary` 文件中查看到结果。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+
+=== 测试结果说明
+
+image::/images/u10000_v5.0/poc_3.png[poc_3]
+
+上图中，各参数说明如下。
+
+
+[cols="1,3a", options="header"]
+|===
+| 参数 | 说明 
+
+| time | 测试用例开始执行的时间。
+| bs |每笔 IO 的大小。
+| size | 文件大小。
+| nas_type| 协议类型。
+| iops| 每秒钟的 IO 个数。
+| bw| 每秒的带宽大小，单位是 `mb/s`。
+| read| 顺序读。
+| randread| 随机读。
+| write| 顺序写。
+| randwrite| 随机写。
+| randrw| 随机读写，读写比为 `7:3`。
+
+|===
+

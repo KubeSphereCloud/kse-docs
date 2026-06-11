@@ -1,0 +1,71 @@
+---
+title: "添加日志接收器"
+keywords: "Kubernetes, {ks_product}, 集群管理, 集群设置, 日志接收器, 添加日志接收器"
+description: "介绍如何添加日志接收器。"
+weight: 01
+---
+
+// :ks_include_id: 23e7648679c14dc4bf9ff249cf0df5d9
+:ks_xref_id: 0f61684377bc4d908d104caad3e78034
+:ks_comp: ../../../../components/
+:ks_title: 添加日志接收器
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 集群设置, 日志接收器, 添加日志接收器
+:ks_description: 介绍如何添加日志接收器。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **监控信息管理**
+:ks_navigation: **集群设置 > 日志接收器**
+
+
+本节介绍如何添加日志接收器。
+
+{ks_product_right}支持使用 Elasticsearch、Kafka 和 Fluentd 作为日志接收器。
+
+ifeval::["{file_output_type}" == "html"]
+
+* {ks_product_right}默认安装 Elasticsearch 并提供日志分析工具，您可以在{ks_product_left} Web 控制台使用日志分析工具查询 Elasticsearch 收集的日志。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+* {ks_product_right}默认安装 Elasticsearch 并提供日志分析工具，您可以在{ks_product_left} Web 控制台使用日志分析工具查询 Elasticsearch 收集的日志。有关更多信息，请参阅link:../../../13-toolbox/[工具箱]章节。
+
+endif::[]
+
+* {ks_product_right}默认未安装 Kafka 和 Fluentd，并且目前未提供针对 Kafka 和 Fluentd 的日志分析工具。{ks_product_right}仅提供与 Kafka 和 Fluentd 对接的功能。如需使用 Kafka 或 Fluentd 作为日志接收器，您需要参阅 link:https://kafka.apache.org/documentation/[Kafka 官方文档]或 link:https://docs.fluentd.org/[Fluentd 官方文档]安装 Kafka 或 Fluentd。
+
+
+== 前提条件link:[id=7008f5e7e329468b822d34e8980862ce]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+== 操作步骤link:[id=a5c8810a4b9c482f8cb5fdd824553245]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/logReceivers/logReceivers-oper-openListPage.adoc[]
+
++
+
+. 在页面右侧点击**添加日志接收器**。
+
+. 在**添加日志接收器**对话框，选择 **Elasticsearch**、 **Opensearch**、**Kafka** 或 **Fluentd**。
+
+. 设置日志接收器的参数，然后点击**确定**。
++
+--
+include::../../../../_custom/clusterManagement/logReceivers/logReceivers-para-addLogReceiver.adoc[]
+--

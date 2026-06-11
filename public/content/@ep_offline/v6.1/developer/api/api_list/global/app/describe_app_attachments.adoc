@@ -1,0 +1,159 @@
+---
+title: 查询应用附件信息（截图/icon）（DescribeAppAttachments）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_ids
+| Array
+| true
+| app_id列表
+
+| attachment_ids
+| Array
+| false
+| 应用附件id
+
+| categories
+| Array
+| false
+| 文件类型
+
+| content_key
+| Array
+| false
+| 附件子文件名
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| attachment_set
+| Array
+| false
+| 文件集合
+
+| attachment_set[].attachment_content
+| String
+| false
+| 配置文件内容
+
+| attachment_set[].attachment_id
+| String
+| false
+| 配置包id
+
+| attachment_set[].attachment_type
+| String
+| false
+| 配置文件存储类型
+
+| attachment_set[].category
+| String
+| false
+| 文件类型
+
+| attachment_set[].console_id
+| String
+| false
+| 平台id
+
+| attachment_set[].create_time
+| String
+| false
+| 创建时间
+
+| attachment_set[].filename
+| String
+| false
+| 文件名
+
+| attachment_set[].filesize
+| Int
+| false
+| 文件大小
+
+| attachment_set[].resource_id
+| String
+| false
+| 对应资源id
+
+| attachment_set[].resource_type
+| String
+| false
+| 所属资源类型
+
+| attachment_set[].source
+| String
+| false
+| 
+
+| attachment_set[].sub_category
+| String
+| false
+| 
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app_ids": [
+    "app-p6au3oyq"
+  ],
+  "categories": [
+    "screenshot"
+  ],
+  "content_keys": [
+    "config.json"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAppAttachmentsResponse",
+  "attachment_set": [
+    {
+      "attachment_content": "iVBORw0KGgoAAAANSUhEUgAABAAAAAMACAYAAAC6uhUNAAAgAElEQVR4Xuzdd3wU1drA8d9s7+kk9Coggkq1V2xYUBQRbIBYuYoiimBDbNiww+Wigtfeu167YnltICAdQaSmt+115v3MbgJJSCCoIDHP/CPC7syc7zmzu+c5zzlHCYSiGnKIgAiIgAiIgAiIgAiIgAiIgAiIgAj8owUUCQD8o+tXCicCIiACIiACIiACIiACIiACIiACSQEJAEhDEAEREAEREAEREAEREAEREAEREIFmICABgGZQyVJEERABERABERABERABERABERABEagVANC01HIA+n+q/qj/nyiJgAiIgAiIgAiIgAiIgAiIgAiIgAg0cYFkAEDv+Cc7/WgoyQgAJGr8uYmXUW5f",
+      "attachment_id": "ca-c1582d1z",
+      "attachment_type": "raw",
+      "category": "screenshot",
+      "console_id": "testingcloud",
+      "create_time": "2020-01-09T02:03:27Z",
+      "filename": "2020-01-09.png",
+      "filesize": 115633,
+      "owner": "admin",
+      "resource_id": "app-0jcy7q9u",
+      "resource_type": "app",
+      "root_user_id": "admin",
+      "source": "",
+      "sub_category": ""
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

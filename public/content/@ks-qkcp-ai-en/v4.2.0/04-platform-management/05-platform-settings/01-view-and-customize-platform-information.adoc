@@ -1,0 +1,70 @@
+---
+title: "View and Customize Platform Information"
+keywords: "Kubernetes, {ks_product}, Platform Settings, Platform Information, View and Customize Platform Information"
+description: "Introduces how to view and customize platform information."
+weight: 01
+---
+
+
+:ks_navigation: **Platform Information**
+:ks_permission: **Platform Settings Management**
+
+
+This section describes how to view and customize the information of the KubeSphere web console.
+
+// [.admon.note,cols="a"]
+// |===
+// |Note
+
+// |The ``Customize Platform Information`` feature is only available in the KubeSphere ``Standard, Advanced, and Enterprise Editions``.
+// |===
+
+== Prerequisites
+
+:relfileprefix: ../../../
+
+include::../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
+. In the upper-right corner of the page, click **Component Dock > Platform Settings**.
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
++
+--
+The **Platform Information** page displays the platform's access address, title, description, logo, browser favicon, and login page background image.
+--
+
+. In the upper-right corner of the page, click **Customize Platform Information**.
+
+. In the **Customize Platform Information** dialog box, configure the platform information and then click **OK**.
++
+--
+After customization, you can reset the platform information to restore it to the default state.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Platform Title
+|The name of the platform. The platform title can contain any characters and is up to 63 characters long.
+
+|Platform Description
+|The description can contain any characters and is up to 256 characters long.
+
+|Platform Logo
+|The logo displayed at the top of the web console interface. The image format can be SVG, PNG, or JPG, the file size must not exceed 2 MB, and the recommended image resolution is 200 x 40 pixels.
+
+|Browser Favicon
+|The icon on the browser tab. The image format can be ICO, SVG, PNG, or JPG, the file size must not exceed 2 MB, the recommended image resolution is 40 x 40 pixels, and a 1:1 aspect ratio is recommended.
+
+|Login Page Background Image
+|The background image of the platform login page. The image format can be SVG, PNG, or JPG, the file size must not exceed 2 MB, and the recommended image resolution is 1920 x 1080 pixels.
+|===
+--

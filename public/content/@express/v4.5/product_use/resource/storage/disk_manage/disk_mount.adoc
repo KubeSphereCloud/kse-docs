@@ -1,0 +1,132 @@
+---
+title: "挂载/卸载硬盘"
+draft: false
+weight: 3
+---
+
+== 挂载硬盘
+
+. 登录{product_console_name_en}。
+. 在顶部导航栏，选择**资源** > *存储* > *硬盘*，进入**硬盘**列表页面。
+. 点击待加载至虚拟主机的硬盘所在行右侧的更多操作，选择**加载硬盘到主机**，在弹出的**选择主机**的窗口中选择指定主机，点击**确定**即可。
++
+
+include::../../../../../../_components/note.adoc[]
+* 同一块硬盘可加载至不同的主机上。
+* 若平台内主机数量过多，可在选择主机窗口的搜索框中输入关键词对主机列表进行筛选。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/disk_manage_2.png[,60%]
+
+. 登录至硬盘所在的虚拟主机。
++
+
+include::../../../../../../_components/note.adoc[]
+* 使用 ``mount`` 命令进行物理挂载。
+* 参考link:../../../vm/express_vm/vm_login/express_web_login[连接主机]相关内容，登录硬盘所在虚拟主机。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，查看磁盘设备名，其中 /dev/vdc 为新增盘。
++
+[source,shell]
+----
+# lsblk -l
+NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+vda   252:0    0   20G  0 disk
+vda1  252:1    0 19.9G  0 part /
+vda14 252:14   0    4M  0 part
+vda15 252:15   0  106M  0 part /boot/efi
+vdb   252:16   0    4G  0 disk [SWAP]
+vdc   252:32   0   20G  0 disk
+----
+
+. 执行如下命令，对磁盘进行格式化。
++
+[source,shell]
+----
+# mkfs.ext4 /dev/vdc
+----
++
+
+include::../../../../../../_components/note.adoc[]
+/dev/vdc：为待格式化的磁盘盘符，需根据实际情况进行修改。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/disk_manage_3.png[]
+
+. 执行如下命令，查看格式化后磁盘的文件系统信息。
++
+[source,shell]
+----
+# lsblk -f
+----
++
+image::/images/express/console/disk_manage_4.png[]
+
+. 执行如下命令，创建新的磁盘挂载目录。
++
+[source,shell]
+----
+# mkdir /mnt/data
+----
++
+
+include::../../../../../../_components/note.adoc[]
+/mnt/data：为新创建的磁盘挂载目录，需根据实际情况进行修改。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，将磁盘挂载到步骤 5 创建的系统目录下。
++
+[source,shell]
+----
+# mount /dev/vdc /mnt/data
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* /dev/vdc：为待挂载磁盘的盘符，需根据实际情况进行修改。
+* /mnt/data：为磁盘挂载的系统目录，需根据实际情况进行修改。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 使用 `df` 命令，查看磁盘是否挂载成功.
++
+[source,shell]
+----
+# df -h
+
+Filesystem      Size  Used Avail Use% Mounted on
+udev            2.0G     0  2.0G   0% /dev
+tmpfs           394M  672K  393M   1% /run
+/dev/vda1        20G  1.3G   18G   7% /
+tmpfs           2.0G     0  2.0G   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           2.0G     0  2.0G   0% /sys/fs/cgroup
+/dev/vda15      105M  3.9M  101M   4% /boot/efi
+tmpfs           394M     0  394M   0% /run/user/0
+tmpfs           394M     0  394M   0% /run/user/1000
+/dev/vdc         20G   45M   19G   1% /mnt/data
+----
+
+== 卸载硬盘
+
+. 登录虚拟主机，使用 `ummount` 命令进行物理卸载。
++
+[source,shell]
+----
+# unmount  -v /dev/vdc
+----
++
+
+include::../../../../../../_components/note.adoc[]
+/dev/vdc：为待挂载磁盘的盘符，需根据实际情况进行修改。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 进入**硬盘**列表页面，点击待卸载硬盘所在行右侧的更多操作，选择**卸载硬盘**，在弹出的**卸载硬盘**的窗口点击**确定**即可。
+//+
+//image::/images/express/console/disk_manage_5.png[,50%]

@@ -1,0 +1,58 @@
+---
+title: DeleteLoginAccounts
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_accounts
+| Array
+| true
+| 待删除账户列表
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_accounts
+| Array
+| false
+| 删除账户列表
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "login_accounts": [
+    "login_account_1",
+    "login_account_2"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteLoginAccountsResponse",
+  "login_accounts": [
+    "login_account_1",
+    "login_account_2"
+  ],
+  "ret_code": 0
+}
+----

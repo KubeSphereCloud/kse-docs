@@ -1,0 +1,52 @@
+---
+title: "绑定弹性 IP"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 弹性 IP, 绑定"
+description: "介绍如何使用{ks_product_both}Web 控制台绑定弹性 IP。"
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: cd171b38ca1442b280df9e1de54fa32a
+:ks_xref_id: 1cb6fcecd86145839bfa48aa755d2adb
+:ks_comp: ../../../../components/
+:ks_title: 绑定弹性 IP
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台绑定弹性 IP。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 弹性 IP, 绑定
+:ks_weight: 06
+:ks_logo: 
+:ks_download_url: 
+
+
+您可以根据业务需求，将弹性 IP 和 VPC 网络或虚拟机绑定。绑定完成后，您便可以通过弹性 IP 访问对应的 VPC 网络或虚拟机。
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台绑定弹性 IP。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=68a159e63e4643b8984f7b478c14b462]
+
+include::../../../../_custom/networks/eip-manage-prerequisites.adoc[]
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=f3ada0089408412db27f81bbffd3ac90]
+
+include::../../../../_custom/networks/eip-steps.adoc[]
+
+. 找到目标弹性 IP，点击右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**绑定 VPC **或**绑定虚拟机**。
+
+. 在弹出的对话框中，选择需要绑定的 VPC 或虚拟机，然后点击**确定**。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+每个弹性 IP 可对应绑定一台虚拟机或一个 VPC 网络。如果当前列表无可用的弹性 IP，您可以点击页面右上角的**申请**以创建新的弹性 IP。有关更多信息，请参阅 link:../01-apply-for-eip/[申请弹性 IP]。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

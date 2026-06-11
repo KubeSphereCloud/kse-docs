@@ -1,0 +1,101 @@
+---
+title: "访问 Kibana"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB ECK, 访问, 连接, 数据库"
+description: "介绍如何访问 RadonDB ECK 数据库。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 653c7383f3cd4ffbb96e3023190def1a
+:ks_xref_id: 6df399c1f84341c082f0eeeaca3a0122
+:ks_comp: ../../../../components/
+:ks_title: 访问 Kibana
+:ks_keywords: Kubernetes, {ks_product}, RadonDB ECK, 访问, 连接, 数据库
+:ks_description: 介绍如何访问 RadonDB ECK 数据库。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+Kibana 是 Elasticsearch 的可视化工具，提供面向用户的 Elasticsearch 插件管理服务，包括安全性、警报、索引状态管理、SQL 管理等插件。
+
+本节主要介绍如何访问 Kibana。
+
+
+== 前提条件link:[id=9e19feb309e946c5aa4e38fba51f1889]
+
+* 请确保已获取{ks_product_both}平台登录用户帐号和密码，且已获取平台操作管理权限。
+
+* 请确保已安装 RadonDB ECK 应用，且已安装 Kibana 节点。
+
+
+== 操作步骤link:[id=a04b259a25624e14ad87984984d727dd]
+
+
+=== 配置外部访问link:[id=38b681d37c834b4abf3c2747128727d2]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
+. 在左侧导航栏选择**应用负载** > **服务**。
+
+. 在**服务**页面的搜索框中输入 **kb** 并按**回车键**，在搜索结果中找到新建的 ECK 应用对应的服务。
+
+. 在服务右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑外部访问**。
+
+. 将服务的访问模式设置为 **NodePort**，点击**确定**。
+
+
+
+=== 查看访问地址link:[id=c1de61d45f644c8884bb9c24b60200e8]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbEck/radondbeck-oper-openDetailsPage.adoc[]
+
+. 在页面左侧的**访问地址**区域，查看 **Kibana 地址**，如 `172.31.73.64:30708`。
+
+
+=== 查看登录账号link:[id=ca2eeb43ec3c472b9578f32b588e0fa9]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
+. 在左侧导航栏选择**配置** > **保密字典**。
+
+. 在**保密字典**页面的搜索框中输入 **elastic** 并按**回车键**。
+
+. 在搜索结果中找到新建的 ECK 应用对应的字典，点击字典的名称进入其详情页面。
+
+. 右侧的**数据**区域显示用户名和密码。
++
+密码默认显示为密文，可通过右上角的图标进行切换。
++
+下图表示用户名为 **elastic**，密码为 **aa42B3G44i5jK8jTT88A3UHw**。
++
+image::/images/ks-qkcp/zh/radondb-management/elastic-user.png[elastic-user]
+
+
+=== 访问 Kibanalink:[id=296ee05fa8864481bd00e87e5a2c1d36]
+
+. 在浏览器输入 Kibana 地址，进入 Kibana 登录页面。
++
+请使用 https 协议进行访问。例如 Kibana 地址为 172.31.73.64:30708，则在浏览器中输入 \https://172.31.73.64:30708。
+. 输入用户名和密码。
++
+--
+image::/images/ks-qkcp/zh/radondb-management/kibana-login.png[kibana-login]
+
+--
+

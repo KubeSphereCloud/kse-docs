@@ -1,0 +1,106 @@
+---
+title: 升级简介
+weight: 1
+---
+
+本文主要介绍如何在{product_name}上对已安装部署的 QKE Plus、KSE、KS 等进行升级。因此，在进行操作之前，请确保{product_name}正常运行。
+
+
+include::../../../../_components/note.adoc[]
+
+实施人员可分别登录 Console、BOSS 确认环境状态，如有异常，需先解决后，再进行升级操作。
+
+include::../../../../_components/table_footer.adoc[]
+
+== 概述
+
+QKE Plus 的版本与{product_name}版本有关联，每个 QKE Plus 的软件包里都会内置某个版本的 KSE 安装包，但 QKE Plus 的版本不与 KSE 的版本互相关联依赖。
+
+因此升级过程中，
+
+* 若仅升级 KSE 或 KS 组件时，无需关注 QKE Plus 的版本与{product_name}的版本，升级后，不会存在不兼容的问题。
+* 若升级 QKE Plus 的版本，则需要关注{product_name}的版本，以及 QKE Plus 自身的版本。
+
+QKE Plus 各版本与{product_name}版本的关联关系，以及内置的 KSE 或 KS 组件的版本信息可参考下表，明确当前版本是否支持升级至 QKE Plus v3.1.0。
+
+== QKE Plus 版本说明
+
+
+//tag::qke_iaas[]
+=== 版本关联
+
+[cols='1,1,1,1']
+|===
+| QKE Plus 版本	| {product_name}版本 | 内置的 KS 版本 | 内置的 KSE 版本 
+
+| v3.1.0	| v6.1、v6.2 | v3.3.1	| v3.4.1 
+| v3.1.0 麒麟 ARM	| v6.2 |v3.4.1	| v3.4.1
+| v3.1.0 麒麟 x86	| v6.2 |v3.4.1 | v3.4.1
+
+| v3.0.0	| v6.1、v6.0 |v3.3.1	| v3.3.1
+| v3.0.0 Ubuntu	ARM | v6.1、v6.0 |v3.3.1	| v3.3.1 
+| v3.0.0 麒麟 ARM    | v6.1、v6.0 |	v3.3.1| v3.3.1
+| v3.0.0 麒麟 x86 | v6.1、v6.0 |v3.3.1	| v3.3.1 
+
+| v2.3.1	| v5.*、v6.0、v6.1 |v3.3.0	| v3.2.1
+| v2.0.0	| v5.*、v6.0、v6.1 |v3.2.1	| v3.2.1
+| v2.0.0-ARM| v5.*、v6.0、v6.1 |v3.2.1	| v3.2.1
+|===
+
+//end::qke_iaas[]
+
+=== QKE Plus AppvID
+
+//tag::qke_appvid[]
+[cols='1,1']
+|===
+| QKE Plus AppvID | QKE Plus 版本号
+
+| appv-1i0kn269| v2.0.0
+| appv-eepv21hi| ARM v2.0.0
+| appv-opj5rz6z| v2.3.1
+| appv-7290ketz| v3.0.0
+| appv-fez6wl9i| ARM v3.0.0
+| appv-jya830ht| 麒麟 x86 v3.0.0
+| appv-lbqehysv| 麒麟 ARM v3.0.0
+| appv-hr1rhbqz| v3.1.0
+| appv-kl5bo33e| 麒麟 x86 v3.1.0
+| appv-p305cdt6| 麒麟 ARM v3.1.0
+|===
+//end::qke_appvid[]
+
+
+== QKE Plus 升级说明
+
+[cols='1,2']
+|===
+| QKE Plus 版本	| 是否支持升级至 QKE Plus v3.1.0
+
+| v3.0.0 | 支持
+| v3.0.0 Ubuntu	ARM  | 支持
+| v3.0.0 麒麟 ARM  | 支持
+| v3.0.0 麒麟 x86 | 支持
+
+| v2.3.1 | 不支持
+| v2.0.0 | 不支持
+| v2.0.0-ARM | 不支持
+|===
+
+
+== KSE & KS 升级说明
+
+{product_name}支持单独升级 KS 或者 KSE 组件，对应的 QKE Plus 版本均需进行特别开发支持。目前，我们支持升级 KSE & KS 的目标版本如下表所示。
+
+//目前已支持的版本信息如下所示。
+
+[cols='1,1,1']
+|===
+| KS 版本	| KSE 版本 | QKE Plus 版本
+
+| v3.3.2 | - | v3.0.1
+| - | v3.5.0  | v3.1.1
+|===
+
+
+
+

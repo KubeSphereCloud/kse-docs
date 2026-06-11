@@ -1,0 +1,89 @@
+---
+title: 关联IAM策略（AttachIAMPolicy）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| ignore_policy_type
+| Integer
+| false
+| 忽略策略类型，需超级管理员
+
+| owner
+| String
+| false
+| 所有者，需超级管理员
+
+| policies
+| Array
+| true
+| IAM策略ID
+
+| resources
+| Array
+| true
+| IAM用户或身份ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| policy_binding
+| Array
+| false
+| IAM策略ID
+
+| policy_binding[].entity_urn
+| String
+| false
+| 关联IAM身份或用户QRN
+
+| policy_binding[].policy_id
+| String
+| false
+| IAM策略ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "AttachIAMPolicy",
+  "policies": [
+    "iamp-m8r7qhwn"
+  ],
+  "resources": [
+    "iamr-yd9lhi1a"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "AttachIAMPolicyResponse",
+  "policy_binding": [
+    {
+      "entity_urn": "qrn:qingcloud:iam::usr-ZiEgnuY1:role/iamr-yd9lhi1a",
+      "policy_id": "iamp-m8r7qhwn"
+    }
+  ],
+  "ret_code": 0
+}
+----

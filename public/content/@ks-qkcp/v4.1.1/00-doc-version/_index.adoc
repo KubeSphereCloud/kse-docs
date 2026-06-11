@@ -1,0 +1,72 @@
+---
+title: "阅读须知"
+keywords: "{ks_product}, KubeSphere, KubeSphere Enterprise, 订阅版, 私有化部署"
+description: 介绍本文档的适用{ks_product_both}版本。
+weight: 01
+---
+
+== 适用版本
+
+本文档仅适用于 KubeSphere 企业版 v4.1.1（订阅版），请勿按照此文档安装离线版的 KubeSphere 企业版，以免出现问题。
+
+若要查看离线版的 KubeSphere 企业版用户指南，请联系 KubeSphere 企业版交付团队获取。
+
+[%header,cols="1a,1a"]
+|===
+|产品版本 |交付版本
+
+|v3.5.0 及以下版本 |离线版
+|v4.0.0 |订阅版
+|v4.1.0 |离线版
+|v4.1.1 |订阅版
+|===
+
+
+== 订阅版 vs 离线版
+
+自 KubeSphere 企业版 v4 起，KubeSphere 企业版提供两种交付形式，分别是：(1) “在线订阅制”的订阅版，(2) “私有化部署“的离线版。两者的区别如下：
+
+
+[%header,cols="1a,4a,4a"]
+|===
+|区别 |订阅版 |离线版
+
+
+|安装包内容
+|提供未预装任何扩展组件的 KubeSphere 企业版安装包。	
+|KubeSphere 企业版与扩展组件打包式一体化交付。
+
+|安装部署	
+|客户环境需要能访问外网，以便联网安装 KubeSphere 企业版和扩展组件。
+|客户环境无需访问外网，可选择完全离线部署 KubeSphere 企业版和扩展组件。也可根据自身需要开放外部网络访问。
+
+|License 获取方式	
+|在线订阅 KubeSphere 企业版及各个扩展组件，即可自动获取 license。无需手动导入 license。
+
+注意：订阅版和离线版的 license 不能混用。	
+
+|通过 KubeSphere 企业版交付团队获取 license。需要手动导入 license。
+
+注意：订阅版和离线版的 license 不能混用。
+
+|订阅	
+|您需要使用 KubeSphere 云账号订阅 KubeSphere 企业版，并按需订阅需要的扩展组件，以激活 KubeSphere 企业版与各扩展组件。
+|无需订阅。
+
+|在线支持	
+|点击控制台的右下角图标，填写表单后获取 5*8 小时在线专家支持。	
+|通过青云工单系统提交技术工单，获取 7*24 小时全天候省心支持。
+|===
+
+
+== 确认版本
+
+可通过以下方式确认您当前使用的 KubeSphere 企业版为订阅版还是离线版。
+
+* 若 KubeSphere 企业版 Web 控制台右下角提供在线支持入口，即为订阅版。反之，为离线版。
++
+image:/images/ks-qkcp/zh/v4.1.1/confirmversion-1.png[, 50%]
+
+* 若 Web 控制台的扩展市场展示扩展组件的**订阅**按钮，即为订阅版。反之，为离线版。
++
+image:/images/ks-qkcp/zh/v4.1.1/confirmversion-2.png[, 70%]

@@ -1,0 +1,179 @@
+---
+title: "修改配置文件"
+weight: 10
+---
+
+== scs 服务
+
+1. 登录云平台 FirstBox。
+2. 执行以下命令，查看 scs 服务需要修改的参数。
++
+[source,shell]
+----
+sic-deploy -s show-config --script_opts="--zone_id=uat1a;--server_code=scs"
+----
++
+image::/images/ep_offline/scs_install/cfw_global_config_scs.png[]
+3. 执行以下命令，修改 server.yaml.uat1a 文件。
++
+[source]
+----
+vi /pitrix/conf/variables/global/server.yaml.uat1a
+----
++
+修改如下 ``zmq: "uat1a-srp0:7114"`` 参数：
++
+* 如果配置了 Haproxy，此参数的 IP 请配置为云平台 proxy 节点的 VIP，端口请配置为 listen srp 的 bind 端口（默认为 17114）。
+* 如果未配置 Haproxy，此参数的 IP 请配置为 srp0 节点的 IP，端口保持默认值 7114 不变。
++
+[source,yaml]
+----
+security_center:
+  enable_user_realname: 0
+  
+  # product setting
+  product_spec_settings:
+    ahvedr:    # edr no need volume.
+      topology:
+        instance:
+          Property:
+            volume: {}
+
+  # access zone
+  /: # key is zone_id.
+    uat1a: # key is protocol, value is address.
+      zmq: "uat1a-srp0:7114" # ip:port, we can configure it to proxy node.
+----
+
+== srp 服务
+
+1. 登录云平台 FirstBox。
+2. 执行以下命令，查看 srp 服务需要修改的参数。
++
+[source]
+----
+sic-deploy -s show-config --script_opts="--zone_id=uat1a;--server_code=srp"
+----
++
+image::/images/ep_offline/scs_install/cfw_global_config_srp.png[]
+3. 执行以下命令，修改 server.yaml.uat1a 文件。
++
+[source]
+----
+vi /pitrix/conf/variables/global/server.yaml.*
+----
++
+修改如下 ``zmq: "{zone_proxy}:7114"`` 参数：
++
+* 如果配置了 Haproxy，此参数的 IP 请配置为云平台 proxy 节点的 VIP，端口请配置为 listen srp 的 bind 端口（默认为 17114）。
+* 如果未配置 Haproxy，此参数的 IP 请配置为 srp0 节点的 IP，端口保持默认值 7114 不变。
++
+[source,yaml]
+----
+security_center:
+  # access zone
+  sc_fg_server: # key is zone_id.
+    uat1a: # key is protocol, value is address.
+      zmq: "{zone_proxy}:7114" # ip:port, we can configure it to proxy node.
+----
+4. 执行以下命令，修改 server.yaml.uat1a 文件。
++
+[source]
+----
+vi /pitrix/conf/variables/global/server.yaml.uat1a
+----
++
+修改如下安恒相关参数 `security_resource_pool > trusteeship > objects > dasvpn > vxnet`、`security_copartner > anheng_cmp`：
++
+[source,yaml]
+----
+security_center:
+  enable_user_realname: 0
+  
+  # product setting
+  product_spec_settings:
+    ahvedr:    # edr no need volume.
+      topology:
+        instance:
+          Property:
+            volume: {}
+
+# zone角色的配置
+security_resource_pool:
+  si_reserved_number: 1
+  enable_si_auto_route_of_base_networks: 1    # 设置基础网络的路由走管理网络
+  si_tolerable_failure_time: 60         # 安全实例可能出现故障，此为容忍时间，单位秒。
+  trusteeship:
+    mode: auto                          # ‘auto‘将使用以下objects的资源，‘manual’需要管理员人工做资源池托管配置的注册。
+    objects:
+      # cfw
+      dasvpn:                           # 产品代号，安恒的ngfw为dasvpn。
+        vxnet:    # 到托管账户对应的vpc里头创建vxnet来填入，注意vxnet是"多可用区"模式
+        - "vxnet-xw93le9"
+        place_group:    # 设定安放组，iaas部署来提供，一般是plg-00000scs, 可共用mcn节点的plg
+        - "None"
+ 
+  product_route_table:                      # 可配置所有si的路由规则
+    # cfw
+    dasvpn:
+      - cidr: "114.118.6.116/32"            # 配置规则库从外网升级的路由
+        gateway: "manager_ip"               # 表达路由走上述vxnet-xw93le9网关。
+        weight: 32                          # 权重越大，路由优先级越高
+        description: "upgradeserver.com.cn"
+      #- cidr: {base_network}             # 配置iaas基础网络的路由
+      #  gateway: manager_ip
+ 
+# zone角色的配置
+security_copartner:
+  # oem, cfw
+  openapi_anheng:                   # security-openapi-x 的配置信息，这里是对接安恒
+    url: "http://127.0.0.1:7104"      # security_openapi_anheng 的服务地址, 可以直接使用本地地址
+  # integration, sintg
+  anheng_cmp:    # 获取方式参考 https://cwiki.yunify.com/pages/viewpage.action?pageId=123645481
+    url: "https://{ahcmp_ip_address}" # “https://ip地址”或者 “http://IP地址”，参考wiki文档中页面所示的 API Endpoint，注意：只需要“协议://ip地址”
+    api_key: "{ahcmp_api_key}"
+    api_secret: "{ahcmp_api_secret}"
+
+# zone角色的配置
+# MCN的所有配置由MCN部署提供，注意若有重复mcn配置项,需要合并
+mcn:
+  mcn_ctl_host: "None"        # 使用域名
+  mcn_ctl_port: "None"
+  mcn_ctl_protocol: "http"        # http or https
+  mcn_ctl_zone_id: "uat1a"
+  mcn_ctl_qy_access_key_id: "KTUEJGDWVNXFILVDIRJK"
+  mcn_ctl_qy_secret_access_key: "hsUiN6VnMlqtYLE8E73Nx1RySF86mpq7fvWBEVtu"
+  scenarios:
+    RouteTraffic:
+      ver_id: "None"
+----
+
+== sintg 服务
+
+1. 登录云平台 FirstBox。
+2. 执行以下命令，查看 sintg 服务需要修改的参数。
++
+[source]
+----
+sic-deploy -s show-config --script_opts="--zone_id=uat1a;--server_code=sintg"
+----
++
+image::/images/ep_offline/scs_install/sintg_global_config_sintg.png[]
+3. 执行以下命令，修改 server.yaml.uat1a 文件。
++
+[source]
+----
+vi /pitrix/conf/variables/global/server.yaml.uat1a
+----
++
+修改如下 **url**、**external_ip** 参数：
++
+[source,yaml]
+----
+security_integration:
+  zone_settings:
+    uat1a:
+      third_party_server:
+        url: 'https://{ip}'    # 安恒cmp的管理地址
+        external_ip: '{ip}'    # 基础网络可以访问到的IP地址, 如果和url地址一致，可以注释不配
+----

@@ -1,0 +1,57 @@
+---
+title: 应用提交审核（SubmitApps）
+weight: 26
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| apps
+| Array
+| true
+| 应用
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| apps
+| Array
+| false
+| 应用
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "apps": [
+    "app-xxxxxx"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SubmitAppsResponse",
+  "apps": [
+    "app-xxxxxx"
+  ],
+  "ret_code": 0
+}
+----

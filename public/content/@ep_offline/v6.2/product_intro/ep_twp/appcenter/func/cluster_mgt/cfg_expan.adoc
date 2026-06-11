@@ -1,0 +1,18 @@
+---
+title: "纵向扩容/更改主机类型"
+weight: 15
+---
+
+纵向扩容与更改主机类型的实现逻辑相同，如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_08.png[]
+
+功能流程说明：
+
+. 注册扩容角色到 vertical-scaling-roles。
+. 如果只扩容硬盘则直接并行执行在线扩容，然后执行最后两步。
+. 如果待扩容节点定义了 stop service，则执行第 4 步和最后两步，否则执行第 5 步和最后两步。
+. 按照 vertical_scaling_policy 的定义顺序执行 （sequential）或 并行执行（parallel）以下操作：待扩容节点上执行 stop cmd；待扩容节点上执行扩容操作；扩容节点执行 start cmd。
+. 非扩容节点上执行 stop cmd，然后待扩容节点上执行扩容操作，最后非扩容节点执行 start cmd。
+. 更新扩容节点的信息到 metadata service 中，并删除 vertical-scaling-roles。　
+. 由于 metadata service 中集群信息发生改变，因此所有节点可能会同时更新配置。如果 toml 文件里定义 reload_cmd 且配置确实发生变更则执行该命令。

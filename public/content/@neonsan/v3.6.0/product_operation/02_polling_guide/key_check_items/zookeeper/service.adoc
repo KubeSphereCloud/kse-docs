@@ -1,0 +1,22 @@
+---
+title: "查看 ZooKeeper 服务状态"
+weight: 2
+---
+
+. 登录 NeonSAN 集群任一节点，执行如下命令查看 ZooKeeper 集群信息。
++
+[,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts|grep zookeeper"
+----
+
+. 逐个登录 ZooKeeper 集群的每个节点。
+
+. 执行如下命令，查询本节点 ZooKeeper 服务状态。如下所示，``RUNNING`` 即为正常运行状态。
++
+[,shell]
+----
+supervisorctl status zookeeper
+----
++
+image::/images/neonsan/polling_guide_23.png[]

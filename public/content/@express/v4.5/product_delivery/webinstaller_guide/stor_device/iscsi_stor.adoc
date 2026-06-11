@@ -1,0 +1,53 @@
+---
+title: "iSCSI 存储"
+weight: 3
+---
+
+云易捷支持 iSCSI 存储作为外置存储，将虚拟资源存储至 iSCSI 外置存储上。在物理机上完成 iSCSI 外置存储的添加后，可登录 {product_installer_name} ，在**存储设备**功能模块查看或配置 iSCSI 存储相关信息。
+
+== 前提条件
+
+* 云易捷集群节点与 iSCSI 存储服务器通信正常。
+* 配置 iSCSI 外置存储，需获取计算节点的的 IQN 值，且需保证每一个计算节点的 IQN 值唯一。
+
+== 配置 iSCSI 存储
+
+. link:../../login[登录 {product_installer_name}]。
+. 点击左侧导航栏中的**存储设备**，并选择**iSCSI 存储**页签。
+. 点击**添加 iSCSI 存储**按钮。
++
+image::/images/express/installer/stor_device_iscsi_1.png[]
+
+. 在弹出的**添加 iSCSI 存储**窗口中，配置各项参数，点击**确定**。
++
+image::/images/express/installer/stor_device_iscsi_2.png[,60%]
++
+参数说明：
++
+* ``节点``：选择当前云易捷集群中任一计算节点，作为 iSCSI 外置存储的挂载点。
+* ``IP 地址``：输入 iSCSI 存储服务器的 IP 地址，根据实际情况进行填写。
+* ``端口``：默认为 3260，无需修改。
+* ``DHAP 用户名``：连接 iSCSI 服务器时使用的认证用户名，由 iSCSI 服务器提供，根据实际情况进行修改。
+* ``DHAP 密码``：与 DHAP 用户名相对应的密码，需根据实际情况进行修改。
+
+. iSCSI 存储添加完成后，外置存储设备将显示在列。
++
+image::/images/express/installer/stor_device_iscsi_3.png[]
+
+. 至少勾选列表中 2 个 iSCSI 存储设备，点击**配置多路径**按钮，在弹出的**配置多路径**提示窗口中，点击**确定**，进行二次确认后即可。
++
+include::../../../../../_components/attention.adoc[]
+执行多路径配置时，会对存储空问执行格式化操作，请确认存储空间内无可用数据。
+include::../../../../../_components/table_footer.adoc[]
+
+. 至此，iSCSI 存储配置完成，可登录{product_console_name_en}，在顶部导航栏选择**资源** > **存储** > **远端存储**，进行硬盘的创建操作进行验证。
+
+== 删除多路径
+
+针对配置了多路径策略的 iSCSI 存储设备，云易捷支持删除相应多路径策略的操作。
+
+. link:../../login[登录 {product_installer_name}]。
+. 点击左侧导航栏中的**存储设备**，并选择**iSCSI 存储**页签。
+. 点击已配置了多路径策略的 iSCSI 存储设备所在行右侧的更多操作，选择**删除多路径**。
+. 在弹出的提示窗口中，点击**删除**即可。
+

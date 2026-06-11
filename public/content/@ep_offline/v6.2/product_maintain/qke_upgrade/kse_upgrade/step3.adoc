@@ -1,0 +1,99 @@
+---
+title: 步骤三：推送 KSE & KS 镜像包
+weight: 4
+---
+
+. 将link:../step1/[前文]下载的 KSE 或 KS 软件包上传至{product_name}。
++
+include::../../../../../_components/attention.adoc[]
+
+确保上传软件包的节点服务器能访问 QKE Plus 用的 Harbor 镜像仓库。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录{product_name}中，上传有 KSE 或 KS 软件包的节点服务器。
+
+. 执行如下命令行，解压软件包。其中，软件包名称根据实际情况进行修改。
++
+[source,shell]
+----
+tar -zxvf kse-all-v3.5.0-offline-linux-amd64.tar.gz 
+----
++
+解压后目录如下所示。
++
+image::/images/ep_offline/qke_upgrade/qke_upgrade_8.png[qke_upgrade_8]
+
+. 执行如下命令行，修改解压后的脚本文件 `create_project_harbor.sh`，将其中的 `url` 参数修改为{product_name}部署的 QKE Plus 用的 Harbor 镜像仓库地址。
++
+[source,shell]
+----
+vim create_project_harbor.sh
+----
+
+. 执行如下命令行，创建项目。
++
+[source,shell]
+----
+chmod  a+x create_project_harbor.sh && ./create_project_harbor.sh
+----
++
+include::../../../../../_components/note.adoc[]
+
+执行该命令行，若报错原因是已经存在待创建项目，则无需处理。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令行，修改解压后的配置文件 `config-sample.yaml`。
++
+[source,shell]
+----
+vim config-sample.yaml
+----
++
+将以下注释内容放开，并将其中的 `dockerhub.kubekey.local` 修改为 QKE Plus 用的 Harbor 镜像仓库地址。
++
+[source,shell]
+----
+......
+  registry:
+    type: harbor
+    # privateRegistry: "dockerhub.kubekey.local"
+    # auths:
+    #   "dockerhub.kubekey.local":
+    #     skipTLSVerify: true
+    #     plainHTTP: true
+    #     username: admin
+    #     password: Harbor12345
+......
+----
++
+修改示例
++
+[source,shell]
+----
+......
+  registry:
+    type: harbor
+    privateRegistry: "192.168.1.2:8080"
+    auths:
+      "192.168.1.2:8080":
+        skipTLSVerify: true
+        plainHTTP: true
+        username: admin
+        password: Harbor12345
+    # namespaceOverride: "kse"
+......
+----
+
+
+. 执行如下命令行，推送镜像至 QKE Plus 用的 Harbor 镜像仓库。
++
+[source,shell]
+----
+./kk artifact image push -f config-sample.yaml -a kubekey-artifact.tar.gz
+----
+
+. 观察命令回显，输出内容如下，则说明镜像推送成功。
++
+image::/images/ep_offline/qke_upgrade/qke_upgrade_9.png[qke_upgrade_9]

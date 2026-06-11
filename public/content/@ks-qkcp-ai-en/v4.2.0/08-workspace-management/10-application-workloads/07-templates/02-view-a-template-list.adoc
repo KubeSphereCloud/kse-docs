@@ -1,0 +1,65 @@
+---
+title: "View Template List"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Application Workloads, Application Workload Templates, View Application Workload Template List"
+description: "Describes how to view the application workload template list."
+weight: 02
+---
+
+:ks_permission: **Application Workload View**
+:ks_navigation: **Application Workloads > Application Workload Templates**
+
+
+This section describes how to view the application workload template list.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
++
+====
+* The application workload template list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name and description of the application workload template.
+
+|Type
+|The type of the application workload template.
+
+|Project
+|The project to which the application workload template belongs.
+
+|Creation Time
+|The creation time of the application workload template.
+|===
+--
+
+* Click the search box above the list and set search criteria to search for application workload templates by name and type.
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

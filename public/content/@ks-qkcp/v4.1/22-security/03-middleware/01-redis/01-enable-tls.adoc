@@ -1,0 +1,61 @@
+---
+title: "启用 TLS"
+weight: 01
+---
+
+. 使用官方生成 TLS 证书的办法，请下载 link:https://github.com/redis/redis/blob/6.2/utils/gen-test-certs.sh[gen-test-certs.sh] 文件。
+
+. 运行 gen-test-certs.sh 生成 redis 必要的证书，如 ca.cert、redis.key、redis.crt、redis.dh 等文件。
+
+. 如下列所示，创建 secret 并 apply 到 k8s。
++
+--
+[,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-cluster-tls
+  namespace: redis-cluster
+type: kubernetes.io/tls
+data:
+  ca.crt: | # 上述步骤生成的 ca.crt 的 base64 格式
+    ca.crt 的 base64
+  tls.key: | # 上述步骤生成的 redis.key 的 base64 格式
+    redis.key 的 base64
+  tls.crt: | # 上述步骤生成的 redis.crt 的 base64 格式
+    redis.crt 的 base64
+  redis.dh: | # [可选]上述步骤生成的 redis.dh 的 base64 格式
+    redis.dh 的 base64
+----
+--
+
+. 在 RedisCluster 的 yaml 中开启 TLS。
++
+--
+[,yaml]
+----
+TLS:
+    port: 15489 # 自定义
+    secret:
+      secretName: redis-cluster-tls # 自定义，要和上述 secret name 保持一致，否则会找不到该内容
+----
+--
+
+. 访问 redis 服务（tls 服务端口：6380）。
++
+--
+[,bash]
+----
+redis-cli -a 'radondb@123&qingcloud' --tls --cert /etc/redis/tls/tls.crt --key /etc/redis/tls/tls.key --cacert /etc/redis/tls/ca.crt -p 6380 -h <reids-node-ip> cluster nodes
+----
+[.admon.attention,cols="a"]
+|===
+|注意
+
+|
+需要在创建集群时配置 tls，不支持在已创建集群中开启/关闭 tls。
+
+|===
+--
+

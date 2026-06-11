@@ -1,0 +1,136 @@
+---
+title: 创建IAM身份（CreateIAMRole）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| controller
+| String
+| false
+| 控制器类型self,pitrix
+
+| duration_seconds
+| Integer
+| false
+| ID_TOKEN有效/刷新时间
+
+| owner
+| String
+| false
+| 所有者，需超级管理员
+
+| principal
+| String
+| true
+| 信任载体ID
+
+| role_name
+| String
+| true
+| IAM身份名称
+
+| role_type
+| String
+| true
+| 身份信任载体类型
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| false
+| 控制台ID
+
+| create_time
+| String
+| false
+| 创建时间
+
+| duration_seconds
+| String
+| false
+| token有效/刷新时间
+
+| owner
+| String
+| false
+| 所有者
+
+| qrn
+| String
+| false
+| IAM身份唯一资源标识
+
+| role_id
+| String
+| false
+| IAM身份ID
+
+| role_name
+| String
+| false
+| IAM身份名称
+
+| role_type
+| String
+| false
+| 身份信任载体类型
+
+| root_user
+| String
+| false
+| 主账户ID
+
+| status
+| String
+| false
+| 状态
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateIAMRole",
+  "owner": "usr-ZiEgnuY1",
+  "principal": "usr-rnY7bk7w",
+  "role_name": "testrole",
+  "role_type": "account"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateIAMRoleResponse",
+  "console_id": "testingcloud",
+  "create_time": "2023-03-02T16:11:15",
+  "duration_seconds": 21600,
+  "owner": "usr-ZiEgnuY1",
+  "qrn": "qrn:qingcloud:iam::usr-ZiEgnuY1:role/iamr-e655blsx",
+  "ret_code": 0,
+  "role_id": "iamr-xv3xwskt",
+  "role_name": "testrole",
+  "role_type": "account",
+  "root_user_id": "usr-ZiEgnuY1",
+  "status": "active"
+}
+----

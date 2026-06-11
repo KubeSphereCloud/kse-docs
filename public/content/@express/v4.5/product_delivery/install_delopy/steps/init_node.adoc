@@ -1,0 +1,42 @@
+---
+title: "节点初试化"
+weight: 2
+draft: true
+---
+
+. 使用直连网线，将个人电脑与云易捷一体机的 eth0 端口直连，并将个人电脑 IP 设置为 100.100.100.111。
++
+include::../../../../../_components/note.adoc[]
+eth0 通常为电口的左侧第一个端口。
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/delivery/install_delopy_29.png[,50%]
+
+. 使用个人电脑浏览器访问 ``http://100.100.100.100:9998/bootsetting/``， 无需登录，直接进入一体机初始化界面。
++
+include::../../../../../_components/note.adoc[]
+推荐使用最新版本的 Chrome 或 Firefox 浏览器。
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 点击**网络接口检查**，相应的网口提示灯会进行闪烁，找到已接入管理/业务 VLAN 的两个万兆端口，用于接入交换机上的管理/业务 VLAN。
+
+. 勾选已接入管理/业务 VLAN 的 2 个万兆网口，并按照提示设置相应参数，点击**设置**按钮。
++
+image::/images/express/delivery/install_delopy_30.png[]
++
+**参数说明**
++
+* 主机名：当前云易捷节点服务器的 Hostname，请根据部署规划中的服务器命名规则进行填写，例如 testsanc01n01。
+* IP 地址：当前节点服务器的 IP 地址，请根据实际规划进行填写，如 192.168.1.101。
+* 子网掩码：当前节点服务器的子网掩码，根据实际规划进行填写，如 255.255.255.255。
+* 网关：为当前节点服务器管理 IP 地址的网关，请根据实际规划进行填写，如 192.168.1.1。
+* 开启 BOND：须勾选。
+* 开启 VLAN：须勾选，并设置 VLAN ID，请根据实际规划进行填写，如 24。
+* 是否设置为启动节点：即是否将当前节点设置为 FirstBox 节点。集群中仅需要设置一个启动节点，一般第一台节点服务器勾选即可，并设置相应的虚拟 IP 作为 Installer 的登录入口，请根据实际规划进行填写，如虚拟 IP 为 192.168.1.100。
+
+. 其他一体机参考上述步骤完成节点初始化。
++
+include::../../../../../_components/attention.adoc[]
+集群中仅一个节点勾选**是否设置为启动节点**。
+include::../../../../../_components/table_footer.adoc[]

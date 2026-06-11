@@ -1,0 +1,99 @@
+---
+title: "融合部署模式，/pitrix 目录空间不足"
+weight: 60
+---
+
+== 问题现象
+
+IaaS 融合部署模式（fusion 模式）下，执行部署命令时，提示 /pitrix 目录空间不足。
+
+== 问题原因
+
+IaaS 融合部署模式，由于不存在单独的物理 KS 节点，seed、vbr、snapshot 服务均部署在 Hyper 节点上，可能会造成 /pitrix 目录空间不足。
+
+== 解决方法
+
+=== 方法一（推荐）：使用 Installer 提供的工具
+
+在 FirstBox 节点，执行以下命令，转移 /pitrix 数据。
+
+[source,shell]
+----
+/pitrix/bin/transfer_pitrix_data.sh hyper
+----
+
+include::../../../../../../_components/note.adoc[]
+若命令执行失败，请查看日志 `/pitrix/log/deploy/transfer_pitrix_data.log`，检查报错原因并修复。若仍不能解决，请联系技术支持。
+include::../../../../../../_components/table_footer.adoc[]
+
+=== 方法二：手动处理
+
+* hyper-local/hyper-pair 节点
++
+--
+采用软链接形式处理：
+
+* seed/vbr 角色
++
+[source,shell]
+----
+rm -rf /pitrix/images-repo
+mkdir -p /pitrix/data/container/images-repo
+ln -sf /pitrix/data/container/images-repo /pitrix/images-repo
+
+mkdir -p /pitrix/data/container/image
+ln -sf /pitrix/data/container/image /pitrix/data/image
+
+mkdir -p /pitrix/data/container/image_nbd
+ln -sf /pitrix/data/container/image_nbd /pitrix/data/image_nbd
+
+mkdir -p /pitrix/data/container/vbr
+ln -sf /pitrix/data/container/vbr /pitrix/vbr
+----
+* snapshot 角色
++
+[source,shell]
+----
+rm -rf /pitrix/snapshot
+mkdir -p /pitrix/data/container/snapshot
+ln -sf /pitrix/data/container/snapshot /pitrix/snapshot
+----
+--
+
+* hyper-repl 节点
++
+--
+采用软链接配合 zfs dataset 的形式处理（默认 Installer 已经处理）：
+
+* seed/vbr 角色
++
+[source,shell]
+----
+rm -rf /pitrix/images-repo
+mkdir -p /pitrix/data/container/images-repo
+ln -sf /pitrix/data/container/images-repo /pitrix/images-repo
+zfs create -o mountpoint=/pitrix/data/container/images-repo -o atime=off -o xattr=sa vpool/images-repo
+
+mkdir -p /pitrix/data/container/image
+ln -sf /pitrix/data/container/image /pitrix/data/image
+zfs create -o mountpoint=/pitrix/data/container/image -o atime=off -o xattr=sa vpool/image
+
+mkdir -p /pitrix/data/container/image_nbd
+ln -sf /pitrix/data/container/image_nbd /pitrix/data/image_nbd
+zfs create -o mountpoint=/pitrix/data/container/image_nbd -o atime=off -o xattr=sa vpool/image_nbd
+
+mkdir -p /pitrix/data/container/vbr
+ln -sf /pitrix/data/container/vbr /pitrix/vbr
+zfs create -o mountpoint=/pitrix/data/container/vbr -o atime=off -o xattr=sa vpool/vbr
+----
+
+* snapshot 角色
++
+[source,shell]
+----
+rm -rf /pitrix/snapshot
+mkdir -p /pitrix/data/container/snapshot
+ln -sf /pitrix/data/container/snapshot /pitrix/snapshot
+zfs create -o mountpoint=/pitrix/data/container/snapshot -o atime=off -o xattr=sa vpool/snapshot
+----
+--

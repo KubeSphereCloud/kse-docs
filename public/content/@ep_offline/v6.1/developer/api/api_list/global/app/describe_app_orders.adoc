@@ -1,0 +1,340 @@
+---
+title: 查询license/saas订单（DescribeAppOrders）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_type
+| String
+| false
+| 应用类型
+
+| apps
+| Array
+| false
+| 应用id数组
+
+| debug
+| Integer
+| false
+| 是否是调试
+
+| deliver_deadline_end_time
+| String
+| false
+| 订单生效结束时间范围起始时间
+
+| deliver_deadline_start_time
+| String
+| false
+| 订单生效结束时间范围起始时间
+
+| end_time
+| String
+| false
+| 订单创建时间范围终止时间
+
+| limit
+| Integer
+| false
+| 分页数量
+
+| nb_order_ins_id
+| String
+| false
+| 
+
+| offset
+| Integer
+| false
+| 
+
+| order_id
+| String
+| false
+| 订单id
+
+| owner
+| String
+| false
+| 应用拥有者
+
+| project_id
+| String
+| false
+| 
+
+| repair_end_time
+| String
+| false
+| 订单创建时间范围起始时间
+
+| repair_start_time
+| String
+| false
+| 订单创建时间范围起始时间
+
+| reverse
+| Integer
+| false
+| 是否倒序
+
+| role
+| String
+| false
+| 当前用户角色
+
+| saas_ins_id
+| String
+| false
+| 
+
+| search_word
+| String
+| false
+| 查询关键字
+
+| sort_key
+| String
+| false
+| 排序字段
+
+| spi_id
+| String
+| false
+| 
+
+| start_time
+| String
+| false
+| 订单创建时间范围起始时间
+
+| status
+| String
+| false
+| 订单状态
+
+| status_list
+| Array
+| false
+| 订单状态
+
+| user_id
+| String
+| false
+| 订单拥有者
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| order_set
+| Array
+| false
+| 订单集合
+
+| order_set[].app_id
+| String
+| false
+| 应用id
+
+| order_set[].app_name
+| String
+| false
+| 应用名称
+
+| order_set[].app_type
+| String
+| false
+| 应用类型
+
+| order_set[].comp_id
+| String
+| false
+| 
+
+| order_set[].console_id
+| String
+| false
+| 平台id
+
+| order_set[].coupon_price
+| String
+| false
+| 优惠券价格
+
+| order_set[].create_time
+| String
+| false
+| 创建时间
+
+| order_set[].deliver
+| String
+| false
+| 
+
+| order_set[].deliver_deadline
+| String
+| false
+| 
+
+| order_set[].deliver_period
+| String
+| false
+| 
+
+| order_set[].deliver_time
+| String
+| false
+| 
+
+| order_set[].deliver_type
+| String
+| false
+| 
+
+| order_set[].nb_order_id
+| String
+| false
+| 
+
+| order_set[].nb_order_ins_id
+| String
+| false
+| 
+
+| order_set[].order_id
+| String
+| false
+| 订单id
+
+| order_set[].owner
+| String
+| false
+| 应用拥有者
+
+| order_set[].price
+| String
+| false
+| 订单价格
+
+| order_set[].resource_project_info
+| String
+| false
+| 
+
+| order_set[].saas_ins_id
+| String
+| false
+| 
+
+| order_set[].service_content
+| String
+| false
+| 服务内容
+
+| order_set[].spec
+| String
+| false
+| 
+
+| order_set[].spi_id
+| String
+| false
+| 
+
+| order_set[].status
+| String
+| false
+| 订单状态
+
+| order_set[].status_time
+| String
+| false
+| 状态更新时间
+
+| order_set[].strategy_id
+| String
+| false
+| 策略id
+
+| order_set[].title
+| String
+| false
+| 订单名称
+
+| order_set[].user_id
+| String
+| false
+| 订单状态
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "owner": "admin",
+  "status": "active"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAppOrdersResponse",
+  "order_set": [
+    {
+      "app_id": "app-p02qr292",
+      "app_name": "license测试用",
+      "app_type": "license",
+      "comp_id": "comp_N2mMqAOylgD0",
+      "console_id": "testingcloud",
+      "coupon_price": "0",
+      "create_time": "2022-11-22T17:35:02",
+      "deliver": "",
+      "deliver_deadline": null,
+      "deliver_period": 1,
+      "deliver_time": null,
+      "deliver_type": "",
+      "nb_order_id": "ord_opZQG2Zkv1p1",
+      "nb_order_ins_id": "license_ki2gb0l2qfqo",
+      "order_id": "appor-kl8egfwpqs",
+      "owner": "admin",
+      "price": "1",
+      "resource_project_info": [],
+      "saas_ins_id": "",
+      "service_content": "{\"count\":\"2\",\"mode\":\"month\"}",
+      "spec": "12",
+      "spi_id": "",
+      "status": "active",
+      "status_time": "2022-11-24T14:39:46",
+      "strategy_id": "stg_AolLw7omYjWM",
+      "title": "121",
+      "user_id": "admin"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 7
+}
+----

@@ -1,0 +1,113 @@
+---
+title: "View Node Details"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Node, View Node Details"
+description: "Describes how to view node details."
+weight: 02
+---
+
+:ks_permission: **Node Viewing**
+
+This section describes how to view node details.
+
+== Prerequisites
+
+:relfileprefix: ../../../
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/nodes/nodes-oper-openListPage_new.adoc[]
+
++
+
+. In the node list, click the name of a node to open its details page.
+
+. On the node details page, view the node's resource attributes in the **Attributes** area.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Status
+|
+include::../../../_custom/clusterManagement/nodes/nodes-para-nodeStatus_new.adoc[]
+
+|IP Address
+|The IP address of the node.
+
+|Role
+|
+include::../../../_custom/clusterManagement/nodes/nodes-para-nodeRole_new.adoc[]
+
+|OS Version
+|The operating system distribution and version of the node.
+
+|OS Type
+|The operating system type of the node.
+
+|Kernel Version
+|The kernel version of the node.
+
+|Container Runtime
+|The type and version of the container runtime used by the node.
+
+|Kubelet Version
+|The version of kubelet running on the node.
+
+|Kube-proxy Version
+|The version of kube-proxy running on the node.
+
+|System Architecture
+|The CPU architecture of the node.
+
+|Creation Time
+|The time when the node joined the current cluster.
+|===
+--
+
+. On the **Running Status** tab, view the node's health status and taints.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Area |Description
+
+|Health Status
+|Displays the node's network, memory, disk, process pressure, and readiness status. If image:/images/ks-qkcp/zh/icons/check-healthy.svg["healthy",15px,15px] is displayed, the status is normal. If image:/images/ks-qkcp/zh/icons/substract-unhealthy.svg["unhealthy",15px,15px] is displayed, an alert has been triggered.
+
+* **Network Availability**: Whether the node's network configuration is correct.
+
+* **Memory Pressure**: Whether the node's remaining memory is less than the threshold. The default threshold is 100 MiB.
+
+* **Disk Pressure**: Whether the node's remaining disk space or number of inodes is less than the threshold. The default disk space threshold is 10% of the total disk space, and the default inode threshold is 5% of the maximum number of inodes.
+
+* **Process Pressure**: Whether the number of processes that can be created on the node is less than the threshold. Newly installed KubeSphere clusters do not have a process count threshold set by default.
+
+* **Readiness Status**: Whether the node is ready to receive pods.
+
+|Taints
+|The taints currently configured on this node. For more information, please refer to link:../05-edit-node-taints/[Edit Node Taints].
+|===
+--
+
+. Click the **Pods** tab to view all pods running on the node.
++
+--
+include::../../../_custom/clusterManagement/nodes/nodes-para-podList.adoc[]
+--
+
+. Click the **Metadata** tab to view the node's labels and annotations.
+
+. Click the **Events** tab to view the node's event records.
++
+--
+include::../../../_custom/clusterManagement/clusterManagement-para-eventsTab.adoc[]
+--

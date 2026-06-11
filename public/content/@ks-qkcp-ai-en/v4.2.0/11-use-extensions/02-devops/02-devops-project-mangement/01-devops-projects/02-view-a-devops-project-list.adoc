@@ -1,0 +1,72 @@
+---
+title: "View DevOps Project List"
+keywords: "Kubernetes, {ks_product}, Workspace, DevOps Project, View DevOps Project List"
+description: "Describes how to view the DevOps project list."
+weight: 02
+---
+
+
+:ks_permission:  **DevOps Project View**
+:ks_navigation:  **DevOps > DevOps Project Management**
+
+
+This section describes how to view the DevOps project list.
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../../
+
+* {empty}
+include::../../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+* The DevOps project list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the DevOps project.
+
+|Status
+|The current status of the DevOps project.
+
+* **Successful**: The DevOps project has been created successfully and is available.
+
+* **Pending**: The DevOps project is being created.
+
+* **Deleting**: The DevOps project is being deleted.
+
+|Creator
+|The user who created the DevOps project.
+
+|Creation Time
+|The creation time of the DevOps project.
+|===
+--
+
+* Click the search box above the list and enter a keyword to search for DevOps projects by name and alias.
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+
+// * Click the name of a DevOps project in the list to open the DevOps Project Management page. You can view and manage resources within the DevOps project on the DevOps Project Management page.
+====

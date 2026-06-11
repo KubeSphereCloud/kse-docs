@@ -1,0 +1,60 @@
+---
+title: "获取 VBC 回程路由（SDN 模式）"
+weight: 50
+---
+
+* 若网络模式为 SDN 模式，需要配置静态路由，外部访问才能访问基础网络内的虚拟资源。
+* 若网络模式为 VLAN 模式，无需配置此回程路由。
+
+== 操作步骤
+
+为 Hyper 节点获取 VBC 回程路由，可以同时包含 SDS1.0 和 SDS2.0 节点。
+
+1. 登录 FirstBox。
+2. 获取 VBC 回程路由信息。
+ ** 方式一（推荐）：通过 installer 提供的工具。
++
+执行以下命令，获取路由信息。
++
+[source]
+----
+/pitrix/bin/dump_vbc_route.sh hyper
+----
++
+image::/images/ep_offline/installation/initialize_vbc_route_01.png[]
+ ** 方式二：查看文件 /pitrix/log/deploy/vbc_route_JOB_ID。
+  ... 执行以下命令，获取 vbc_route_JOB_ID 文件名称。
++
+[source]
+----
+cd /pitrix/log/deploy/
+ls -al
+----
++
+如下示例中，文件名称为 vbc_route_j-ygSvX8AW。
++
+image::/images/ep_offline/installation/initialize_vbc_route_02.png[]
+  ... 执行以下命令，获取VBC路由信息。
++
+[source]
+----
+cat /pitrix/log/deploy/vbc_route_JOB_ID
+----
++
+示例：
++
+[source]
+----
+cat /pitrix/log/deploy/vbc_route_j-ygSvX8AW
+----
+
+3. 在 Hyper 节点管理网络连接的交换机上，添加获取到的静态路由。
++
+[source]
+----
+// route 示例：
+ip route add 10.20.1.0/24 via 10.10.0.201 
+ip route add 10.20.2.0/24 via 10.10.0.202 
+ip route add 10.20.3.0/24 via 10.10.0.203
+ip route add 10.20.4.0/24 via 10.10.0.204
+----

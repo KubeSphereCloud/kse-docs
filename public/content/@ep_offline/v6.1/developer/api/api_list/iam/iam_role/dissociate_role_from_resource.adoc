@@ -1,0 +1,63 @@
+---
+title: 为资源解绑IAM身份（DissociateIAMRoleFromResource）
+weight: 9
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resources
+| String
+| true
+| 资源ID
+
+| zone
+| String
+| true
+| ZONE
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resources
+| Array
+| false
+| 资源ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DissociateIAMRoleFromResource",
+  "resources": [
+    "i-07cdxc0x"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DissociateIAMRoleFromResourceResponse",
+  "resources": [
+    "i-07cdxc0x"
+  ],
+  "ret_code": 0
+}
+----

@@ -1,0 +1,61 @@
+// :ks_include_id: c4590bcc1e7e440b8eaf162491107dc0
+. On the **Resource Status** tab of the application details page, view the services and workloads that make up the application.
+
+* The **Services** area provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the service.
+
+|Project
+|The project to which the service belongs.
+
+|Internal Access
+|The virtual IP address for accessing the service from within the cluster.
+
+|External Access
+|The port number for accessing the service from outside the cluster.
+
+// |Internal Access Mode
+// |
+// include::../../clusterManagement/services/services-para-internalAccess.adoc[]
+
+// include::../../clusterManagement/services/services-para-virtualip-headless.adoc[]
+
+// |Application Governance
+// |Whether application governance is enabled for the application. After application governance is enabled, you can use the traffic monitoring, grayscale release, and tracing features provided by KubeSphere.
+
+// |Virtual IP Address
+// |The virtual IP address for accessing the service from within the cluster. This is displayed only when the service's internal access type is **VirtualIP**.
+|===
+--
+
+* The **Workloads** area provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the workload.
+
+|Project
+|The project to which the workload belongs.
+
+// |Type
+// |The type of workload.
+
+|Status
+|The current status of the workload.
+
+include::../../clusterManagement/workloads/workloads-para-workloadStatus.adoc[]
+
+// |Modification Records
+// |The current modification records of the workload.
+|===
+--

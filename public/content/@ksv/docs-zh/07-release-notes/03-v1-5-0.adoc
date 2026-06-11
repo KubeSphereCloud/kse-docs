@@ -1,0 +1,54 @@
+---
+title: "v1.5.0 版本说明"
+linkTitle: "{ks_title}"
+keywords: "版本说明, {ks_product_full}, {ks_product}, v1.5.0"
+description: ""
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: d028bceb33254445aaabcf09fba480de
+:ks_xref_id: 316131b8b7844738a245959794204c46
+:ks_comp: ../../components/
+:ks_title: v1.5.0 版本说明
+:ks_description: 
+:ks_keywords: 版本说明, {ks_product_full}, {ks_product}, v1.5.0
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 新增功能link:[id=0d0fbe7b3124471482bc185d6c4df2b4]
+
+* 新增虚拟机模板功能，支持基于模板创建虚拟机。
+* 新增克隆虚拟机功能，支持基于虚拟机创建虚拟机。
+* 新增支持查看历史资源监控数据。可查看**最近 1 小时**、**最近 6 小时**、**最近 12 小时**和**最近 24 小时**的历史资源监控数据。
+* 新增虚拟机强制关闭和强制重启功能。
+* 新增定时器功能。
+* CPU 超卖比设置范围变更为 1-10。
+* 告警日志模块整合到主安装包中，无需单独下载功能包。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 功能优化link:[id=56c30bbc239b416ab9ca9eeca14ef514]
+
+* 支持系统镜像。
+* 调整某些资源的命名规则。部分资源名称支持含有大写字母。
+* 调整用户账号的密码强度规则。
+* 虚拟机网卡增加了**默认**标识。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 问题修复link:[id=6d3f9be46661467e9e87f910e8845e47]
+
+* 修复了最小化配置 4c8G 安装时无法导入镜像的问题。
+* 修复了创建虚拟机选取自定义配置时，右侧配置汇总不同步变更的问题。
+* 修复了虚拟机重启后 SSH 密钥失效的问题。
+* 修复了镜像名称格式异常导致无法保存的问题。
+* 修复了输入数据盘大小为 1024（或其倍数）时扩容单位显示异常的问题。

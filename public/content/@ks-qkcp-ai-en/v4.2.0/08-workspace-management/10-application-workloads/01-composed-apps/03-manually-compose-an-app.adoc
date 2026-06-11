@@ -1,0 +1,76 @@
+---
+title: "Create a Composed App"
+keywords: "Kubernetes, {ks_product}, Project Management, App, Create a Composed App"
+description: "Describes how to create a composed app."
+weight: 03
+---
+
+:ks_permission: **App Instance Creation**
+:ks_navigation: **Application Workloads > Composed Apps**
+
+
+This section describes how to create a composed app.
+
+// include::../../../../_custom/projectManagement/apps/apps-compose-description.adoc[]
+You can customize the services, workloads, and routes of an app to create a composed app.
+
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. On the **Basic Information** tab, configure the basic information for the app and then click **Next**.
++
+--
+include::../../../../_custom/projectManagement/apps/apps-basic-para.adoc[]
+
+[.admon.note,cols="a"]
+|===
+|Description
+
+|App governance can only be enabled after installing the "KubeSphere Service Mesh" extension.
+|===
+--
+
+. On the **Service Settings** tab, click **Create Service**, select **Stateful Service** or **Stateless Service** to create a service for the app, and then click **Next**.
++
+--
+include::../../../../_custom/clusterManagement/services/services-para-statelessStatefulExternal.adoc[]
+
+ifeval::["{file_output_type}" == "html"]
+For the parameter settings of **Stateful Service** and **Stateless Service**, see link:../../../../08-workspace-management/10-application-workloads/02-services/01-create-a-service/01-create-a-stateful-or-stateless-service/#_parameter-description[Create a Stateful Service or a Stateless Service].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For the parameter settings of **Stateful Service** and **Stateless Service**, refer to the "Create a Stateful Service or a Stateless Service" chapter in the *KubeSphere Workspace and Project Management Guide*.
+endif::[]
+--
+
+. On the **Route Settings** tab, click **Add Routing Rule** to create a routing rule for the app, and then click **Create**.
++
+--
+include::../../../../_custom/clusterManagement/routes/routes-para-routingRules.adoc[]
+
+After the app is created, it will be displayed on the **Composed Apps** page.
+--

@@ -1,0 +1,66 @@
+---
+title: "元数据错误的磁盘恢复方法"
+weight: 2
+---
+
+经过换盘，磁盘下线又重新上线等操作后，集群中出现若干个状态为 ERROR 或 OFFLINE 的磁盘，其原因可能在于频繁拔盘插盘操作造成 SSD 元数据错误。其恢复方式如下。
+
+. 登录 NeonSAN 集群，关闭自动恢复功能。
++
+[,shell]
+----
+neonsan set_parameter -parameter auto_recovery -value 0
+----
+. 查看集群中的磁盘状态，记录状态为 ERROR 或 OFFLINE 的磁盘 UUID。
++
+[,shell]
+----
+neonsan list_ssd
+----
+
+. 执行如下命令将状态为 ERROR 或 OFFLINE 的磁盘 remove 掉。
++
+[,shell]
+----
+neonsan remove_ssd -ssd_uuid XXXXXX -evacuate_data no
+----
++
+include::../../../../../../_components/note.adoc[]
+* ssd_uuid 为步骤 2 返回结果中状态为 ERROR 或 OFFLINE 的磁盘 UUID，需根据实际情况进行修改。
+* 执行该命令后，系统会生成异步任务，可通过 neonsan list_job 查看任务执行状态。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 查看集群中各磁盘状态。
++
+[,shell]
+----
+neonsan list_ssd
+----
++
+include::../../../../../../_components/note.adoc[]
+此时步骤 3 中被 remove 的磁盘状态可能为 REMOVE 或 OFFLINE。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令磁盘重新添加至集群。
++
+[,shell]
+----
+neonsan add_ssd -store_id ${store_id} -dev ${dev_name}
+----
+* ``-store_id`` 为磁盘所在节点的 ID，需根据实际情况进行修改。
+* ``-dev`` 指定磁盘盘符需根据实际情况进行修改。
+* 执行该命令后，系统会生成异步任务，可通过 ``neonsan list_job`` 查看任务执行状态。
+
+. 重新上线磁盘之后需再次查看集群中磁盘状态，所有磁盘需均为 OK 状态。
++
+[,shell]
+----
+neonsan list_ssd
+----
+. 开启集群自动恢复功能。
++
+[,shell]
+----
+neonsan set_parameter -parameter auto_recovery -value 1
+----
+

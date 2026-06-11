@@ -1,0 +1,100 @@
+---
+title: "禁用和启用规则组"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ECK, 管理告警规则组, 禁用和启用规则组"
+description: "介绍如何禁用和启用规则组。"
+weight: 06
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 5e492475756a481fb64d7d767cb3b4df
+:ks_xref_id: 259f2c3dafd14fd3a5cef37adf68986e
+:ks_comp: ../../../../components/
+:ks_title: 禁用和启用规则组
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ECK, 管理告警规则组, 禁用和启用规则组
+:ks_description: 介绍如何禁用和启用规则组。
+:ks_weight: 06
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-disableAndEnablerRuleGroups.adoc[]
+
+
+== 前提条件link:[id=79cedffbbd7b4377af07f8bf708fb64c]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbEck/radondbEck-prer-installRadondbEck.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbEck/radondbeck-prer-createAlertGroup.adoc[]
+
+
+
+== 禁用和启用单个规则组link:[id=3100e0467dcd4705be2e4f43f5f0ce35]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbEck/radondbeck-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+// include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-disableAndEnableASingleRuleGroup.adoc[]
+
+
+== 批量启用和禁用规则组link:[id=6429a2a2c49c42798be3465eed5b6d2e]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbEck/radondbeck-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+// include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-disableAndEnableMultipleRuleGroups.adoc[]

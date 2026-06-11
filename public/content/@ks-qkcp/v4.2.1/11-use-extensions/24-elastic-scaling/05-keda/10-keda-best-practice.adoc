@@ -1,0 +1,238 @@
+---
+title: "事件驱动伸缩 (KEDA) 最佳实践"
+weight: 10
+---
+
+== 什么是 KEDA？
+
+KEDA（Kubernetes Event-driven Autoscaling）是一个基于 Kubernetes 的事件驱动自动伸缩组件，能够根据各种外部事件和指标动态调整应用程序的副本数量。与传统的基于 CPU/内存使用率的 HPA 不同，KEDA 支持 70+ 种触发器类型，包括消息队列（Kafka、RabbitMQ）、数据库（MySQL、PostgreSQL）、监控系统（Prometheus）、云服务（AWS CloudWatch）等。
+
+KEDA 的核心优势包括：**零副本伸缩**（可缩容到 0 个副本实现按需使用）、**快速响应**（事件驱动比轮询方式更快）、**精确控制**（基于业务指标如队列长度、错误率等）。它特别适用于微服务架构、数据处理管道、Web 应用、批处理任务等场景，能够根据消息队列长度、数据库连接数、自定义指标等外部事件进行智能伸缩，实现真正的按需使用和成本优化。
+
+== 使用事件驱动伸缩 (KEDA)
+
+创建 `ScaledObject` 资源并关联工作负载，设定触发条件，如下方配置。当 ScaledObject 创建成功且达到伸缩条件时，工作负载副本数将按算法调整，进行水平扩缩。
+
+操作步骤：在**创建事件驱动伸缩**对话框中，点击**编辑 YAML**，输入以下内容并保存。
+
+[source,yaml]
+----
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: sample-scaledobject
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sample-app
+  minReplicaCount: 1  # 最小副本数，需设置为大于等于 0 的整数
+  maxReplicaCount: 10 # 最大副本数，需大于 minReplicaCount
+  pollingInterval: 30 # 指标轮询间隔，单位为秒
+  triggers:
+    - type: cpu
+      metadata:
+        type: Utilization
+        value: "50"  # CPU 使用率阈值
+----
+
+=== 调节扩缩容行为
+
+如需自定义扩缩容行为，可通过 `advanced.horizontalPodAutoscalerConfig.behavior` 字段配置，与 Kubernetes HPA 完全兼容：
+
+[source,yaml]
+----
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: sample-scaledobject
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sample-app
+  minReplicaCount: 1
+  maxReplicaCount: 100
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 300
+          policies:
+            - type: Pods
+              value: 10
+              periodSeconds: 15
+        scaleUp:
+          stabilizationWindowSeconds: 0
+          policies:
+            - type: Percent
+              value: 100
+              periodSeconds: 15
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus:9090
+        query: sum(rate(http_requests_total[1m]))
+        threshold: "50"
+----
+
+更多详细配置请参考 link:https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#configurable-scaling-behavior[Kubernetes HPA 扩缩容行为配置文档]。
+
+== 触发器类型与最佳实践
+
+KEDA 支持多种触发器类型，以下介绍三种常用的触发器及其最佳实践：
+
+=== 1. Cron 触发器
+
+Cron 触发器适用于具有周期性流量波动的业务场景，例如每天固定时间点的秒杀活动、定时报表生成、批量数据处理等。通过配置 Cron 表达式，您可以在特定时间段内调整副本数量。
+
+[source,yaml]
+----
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: seckill-scaledobject
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: seckill-app
+  minReplicaCount: 2
+  maxReplicaCount: 1000
+  pollingInterval: 15
+  triggers:
+    # 上午秒杀活动
+    - type: cron
+      metadata:
+        timezone: Asia/Shanghai
+        start: 30 9 * * *
+        end: 30 10 * * *
+        desiredReplicas: "200"
+    # 下午秒杀活动
+    - type: cron
+      metadata:
+        timezone: Asia/Shanghai
+        start: 30 17 * * *
+        end: 30 18 * * *
+        desiredReplicas: "200"
+    # 非活动时间基于资源使用率伸缩
+    - type: memory
+      metadata:
+        type: Utilization
+        value: "60"
+    - type: cpu
+      metadata:
+        type: Utilization
+        value: "60"
+----
+
+=== 2. Prometheus 触发器
+
+Prometheus 触发器允许您根据自定义的 PromQL 查询结果进行弹性伸缩，适用于需要基于特定指标进行伸缩的场景，如基于 QPS、响应时间、错误率等指标。
+
+[source,yaml]
+----
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: web-app-scaledobject
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-app
+  minReplicaCount: 1
+  maxReplicaCount: 100
+  pollingInterval: 15
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: http://monitoring-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
+        query: |
+          sum(rate(http_requests_total{job="web-app"}[1m]))
+        threshold: "100"           # 扩容阈值：QPS 超过 100 时扩容
+        activationThreshold: "50"  # 激活阈值：QPS 超过 50 时开始监控
+----
+
+**字段说明：**
+
+- `threshold`：扩容阈值，当 PromQL 查询结果超过此值时触发扩容。
+- `activationThreshold`：激活阈值，当查询结果超过此值时才开始监控和伸缩，避免在低负载时频繁检查。
+
+=== 3. MySQL 触发器
+
+MySQL 触发器适用于需要基于数据库状态进行伸缩的场景，如基于任务队列长度、连接数、查询队列长度等指标。以下示例展示如何基于任务队列长度进行伸缩。
+
+[source,yaml]
+----
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: mysql-scaledobject
+  namespace: my-project
+spec:
+  scaleTargetRef:
+    name: worker
+  triggers:
+  - type: mysql
+    metadata:
+      queryValue: "4.4"
+      activationQueryValue: "5.4"
+      query: "SELECT CEIL(COUNT(*) / 6) FROM task_instance WHERE state='running' OR state='queued'"
+    authenticationRef:
+      name: keda-trigger-auth-mysql-secret
+---
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: keda-trigger-auth-mysql-secret
+  namespace: my-project
+spec:
+  secretTargetRef:
+  - parameter: connectionString
+    name: mysql-secrets
+    key: mysql_conn_str
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secrets
+  namespace: my-project
+type: Opaque
+data:
+  mysql_conn_str: dXNlckB0Y3AobXlzcWw6MzMwNikvc3RhdHNfZGI= # base64 encoded value of mysql connectionString of format user:password@tcp(mysql:3306)/stats_db
+----
+
+**字段说明：**
+
+- `query`：SQL 查询语句，计算需要多少个工作实例（总任务数除以每个实例处理的任务数）。
+- `queryValue`：扩容阈值，当查询结果超过此值时触发扩容。
+- `activationQueryValue`：激活阈值，当查询结果超过此值时才开始监控。
+- `authenticationRef`：引用 TriggerAuthentication 资源，安全地提供数据库连接信息。
+
+**TriggerAuthentication 说明：**
+
+TriggerAuthentication（触发器认证）是 KEDA 提供的认证资源，用于安全地管理外部系统的连接凭据。它支持多种认证方式：
+
+- `Secret 引用`：从 Kubernetes Secret 中获取连接信息
+- `环境变量`：从 Pod 环境变量中获取凭据
+- `Pod 身份`：使用 Pod 的 ServiceAccount 进行认证
+
+=== 更多触发器类型
+
+KEDA 支持 70+ 种触发器类型，涵盖消息队列（Apache Kafka、RabbitMQ、Redis、AWS SQS、Azure Service Bus）、数据库（MySQL、PostgreSQL、MongoDB、Cassandra、MSSQL）、监控系统（Prometheus、Datadog、New Relic、Azure Monitor）、云服务（AWS CloudWatch、Azure Event Hubs、GCP Pub/Sub）以及定时任务（Cron）、资源使用率（CPU/Memory）、外部 API（External）等多个类别。
+
+更多触发器类型的详细配置说明，请参考 link:https://keda.sh/docs/2.18/scalers/[KEDA 触发器官方文档]。
+
+
+== 总结
+
+通过合理配置 KEDA 的 ScaledObject 和扩缩容行为，您可以根据不同的业务场景和指标，实现灵活、高效的事件驱动伸缩。关键要点包括：
+
+1. **选择合适的触发器**：根据业务特点选择 Cron、Prometheus、MySQL 等触发器。
+2. **合理设置阈值**：避免过于敏感或迟钝的伸缩行为。
+3. **配置扩缩容行为**：根据业务需求调整扩容和缩容策略。
+4. **监控和调优**：持续监控伸缩效果，根据实际情况调整配置。
+5. **多触发器组合**：结合多种触发器实现更智能的伸缩策略。
+
+通过以上最佳实践，您可以构建一个稳定、高效的事件驱动伸缩系统，为您的应用提供更好的性能和资源利用率。

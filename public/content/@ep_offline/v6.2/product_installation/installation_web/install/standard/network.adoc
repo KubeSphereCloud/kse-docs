@@ -1,0 +1,245 @@
+---
+title: "第三步：网络规划"
+weight: 4
+---
+
+网络规划分管理网络与业务网络。在进行网络配置前，需要根据前期规划，选择{product_name}所使用的网络模式后，再填写相关配置参数。
+
+
+include::../../../../../../_components/note.adoc[]
+
+* 在 `标准部署` 模式下，可选择 `SDN 3.0 网络模式` 和 `VLAN 网络模式`；`融合部署` 模式下，可选择 `SDN 2.0 网络模式` 和 `VLAN 网络模式`。
+* 网络模式的选择，和前期规划紧密相连。**环境准备**阶段，{product_name}使用的网络模式已经确定，不可更改。实施人员需根据实际规划内容进行选择。
+* 网络规划页面的参数，需根据提示信息正确填写，否则部署流程无法进入下一步。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+各网络模式下，所配置参数稍有不同，详细说明，参考下文。
+
+== SDN 3.0 网络模式
+
+=== 管理网络
+
+//tag::mg_network[]
+
+管理网络用于各管理虚机、各物理机之间通信。同时，在安装部署阶段，管理网络也用于下发安装包以及各配置内容。
+
+. 根据页面内容，填写相关参数。
++
+image::/images/ep_offline/installation/webinstaller_16.png[webinstaller_16,100%]
++
+参数说明
++
+[cols='1,3a']
+|===
+| 参数 | 说明
+
+| 管理网络 IP 范围 | 管理网络地址池。
+
+* 包括各物理服务器 IP、各管理虚机 IP、以及各服务组件的浮动 IP。
+* 需包含link:../../../prepare/prepare_hardware/#_配置管理网络[环境准备]阶段给各物理服务器分配的 IP 地址。
+
+| 服务组件 IP 范围 | 可选参数。若不勾选，后续部署过程中，系统将自动分配各服务组件的 IP 以及各管理虚机 IP，且不能手动更改。若勾选，则填写规则如下。
+
+* `管理虚机 IP 范围` 与 `组件浮动 IP 范围` 均取自 `管理网络 IP 范围`，两者不能重叠，也不能与各物理服务器的 IP 重叠。
+* `管理虚机 IP 范围` 用于各部署服务组件的虚拟机地址分配，不少于 50个 IP 地址。
+* `组件浮动 IP 范围` 用于各服务组件的浮动 IP 地址分配，不少于 10个 IP 地址。
+
+|===
+//end::mg_network[]
+. 点击物理网络关系中的**开始收集**。
++
+image::/images/ep_offline/installation/webinstaller_17.png[webinstaller_17,100%]
+
+. 弹出**收集交换机**对话框，用户根据前期规划内容，填写交换机登录方式与交换机 IP 列表后，点击**开始收集**。
++
+image::/images/ep_offline/installation/webinstaller_18.png[webinstaller_18,100%]
++
+include::../../../../../../_components/note.adoc[]
+
+交换机的登录方式以及 IP 地址，在前期环境规划阶段，已经配置完成。若各交换机的登录方式不一致，为确保能够顺利使用 WebInstaller 完成部署，请修改交换机的身份验证方式，并设为一致。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 收集操作执行完成后，确认对话框页面的统计信息，若无失败节点，点击对话框上的**校验并配置交换机**。
+
+. 进入交换机与计算节点绑定界面。
++
+image::/images/ep_offline/installation/webinstaller_22.png[webinstaller_22,100%]
++
+include::../../../../../../_components/note.adoc[]
+
+交换机与计算节点的配对关系，已经在前期规划阶段确定，实施人员需根据实际配对关系进行绑定。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+* 若当前页面上显示的交换机数量，不符合预期，可点击** + 收集交换机**，添加交换机。
+* 若当前列表中的交换机信息，不符合预期，或已收集的交换机信息存在变更，可选择具体交换机后，点击**重新收集信息**。
+* 选择相应交换机后，点击** + 选取节点**，将计算节点按照前期规划阶段的内容，与交换机进行绑定。
+* 若交换机与计算节点的绑定关系出错，可选择具体的交换机后，在右侧计算节点列表页面，点击移除对应的计算节点。
+
+
+=== 业务网络
+
+//tag::business_network[]
+
+该部分内容用于配置业务网络。业务网络用于{product_name}内部 API 通信，与管理网络是否分开部署，需根据前期规划内容进行选择。
+
+* **划分业务网段**
+** 选择 `共用管理网络`，即管理网络与业务网络不分离，此时，无需配置业务网络网段，系统自动使用上面**管理网络**配置的 IP 地址池进行分配。
+//+
+//image::/images/ep_offline/installation/webinstaller_19.png[webinstaller_19,100%]
+//end::business_network[]
+** 选择 `使用独立业务网络` 时，需要手动输入业务网络网段。
++
+image::/images/ep_offline/installation/webinstaller_20.png[webinstaller_20,100%]
+
+
+//tag::platform_network_1[]
+
+* **划分基础网络**
++
+基础网络用于设置{product_name}租户的资源所使用的网络地址段，如创建云服务器时可选用的网络，以及租户多台云服务器之间通信的网络等。实施人员根据页面内容，填写{product_name}的基础网络网段，又称 VBC 网络地址段，用于后期租户创建资源时使用。
++
+image::/images/ep_offline/installation/webinstaller_23.png[webinstaller_23,100%]
++
+include::../../../../../../_components/note.adoc[]
+
+网络设置内容为联动的，此处修改或填写了 `基础网络网段` 后，需点击**保存**，才能继续后续操作。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+如上图所示，基础网络的规划方式可 `手动规划`，也可 `自动规划`。两种方式填写内容，稍有差异，详细说明如下。
++
+** 手动规划
++
+选择 `手动规划` 的模式后，需要手动将上一步填写的 `基础网络网段` 划分为若干个子网段。
++
+//end::platform_network_1[]
+.. 点击**添加网络**，弹出网段填写对话框，用户填写基础网络的子网段后，点击**确认**。
+//tag::platform_network_2[]
+.. 选中成功创建的基础网络的子网段，点击**选取节点**，弹出节点选择对话框，实施人员根据前期规划，选择相应的计算节点添加至当前基础网络的子网段中。
+.. 手动规划后的基础网络配置如下图所示。再次确认基础网络的规划是否符合预期，如需调整，可选择相应的基础网络的子网段，移除或增加相应的计算节点。
++
+image::/images/ep_offline/installation/webinstaller_27.png[webinstaller_27,100%]
+
++
+** 自动规划
++
+选择 `自动规划` 的模式后，VBC 网络的初始网段默认取自 `基础网络网段` 的第一个 `/24` 子网段，可以手动修改为其他子网段。
++
+image::/images/ep_offline/installation/webinstaller_25.png[webinstaller_25,100%]
+
+
+* **划分私有网络**
++
+填写私有网络 VPC 网络的默认网段，填写格式参考页面示例。
++
+include::../../../../../../_components/note.adoc[]
+
+建议多填几个，以适配更多业务场景，方便租户使用。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/ep_offline/installation/webinstaller_28.png[webinstaller_28,100%]
+
+//. 再次确认当前页面填写的各参数，并与前期规划内容进行比对，正确填写无误后，点击**下一步**。
+
+//end::platform_network_2[]
+
+== SDN 2.0 网络模式
+
+
+=== 管理网络
+
+include::network.adoc[tag=mg_network]
+
+. 确认填写的各参数，并与前期规划内容进行比对。
+
+=== 业务网络
+
+include::network.adoc[tag=business_network]
++
+需填写基础网络回程路由 IP 范围。
++
+image::/images/ep_offline/installation/webinstaller_29.png[webinstaller_29,100%]
++
+include::../../../../../../_components/note.adoc[]
+
+* 此处的基础网络回程路由的 IP 范围取自于管理网络的 IP 范围，且与管理虚机 IP 范围、服务组件浮动 IP 范围、物理服务器管理 IP 等均不重叠。
+* 基础网络回程路由的 IP 范围可根据需求，添加多个。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+** 选择 `使用独立业务网络` 时，需要手动输入业务网络网段，并填写基础网络回程路由 IP 范围。
++
+image::/images/ep_offline/installation/webinstaller_30.png[webinstaller_30,100%]
++
+include::../../../../../../_components/note.adoc[]
+
+* 此处的基础网络回程路由的 IP 范围取自于手动输入的**用户网络网段**。
+* 基础网络回程路由的 IP 范围可根据需求，添加多个。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+include::network.adoc[tag=platform_network_1]
+.. 点击**添加网络**，弹出网段填写对话框，用户填写基础网络的子网段以及回程路由 IP 后，点击**确认**。
++
+include::../../../../../../_components/note.adoc[]
+
+此处填写的回程路由 IP 取自于上面基础网回程路由 IP 范围里面的一个 IP 地址。
+
+include::../../../../../../_components/table_footer.adoc[]
+include::network.adoc[tag=platform_network_2]
+
+== VLAN 网络模式
+
+
+=== 管理网络
+
+
+include::network.adoc[tag=mg_network]
+
+. 确认填写的各参数，并与前期规划内容进行比对。
+
+
+=== 业务网络
+
+include::network.adoc[tag=business_network]
+
+** 选择 `使用独立业务网络` 时，需要填写业务网所在的网卡名，如 `eth1`、`bond1`。
++
+image::/images/ep_offline/installation/webinstaller_32.png[webinstaller_32,100%]
++
+include::../../../../../../_components/note.adoc[]
+
+不能填写管理网络所使用的网卡名。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+* **划分基础网络**
++
+基础网络用于设置{product_name}租户的资源所使用的网络地址段，如创建云服务器时可选用的网络，以及租户多台云服务器之间通信的网络等。实施人员根据页面内容，填写{product_name}的基础网络网段，又称 VBC 网络地址段，用于后期租户创建资源时使用。
++
+image::/images/ep_offline/installation/webinstaller_41.png[webinstaller_41,100%]
++
+参数说明
++
+[cols='1,3a']
+|===
+| 参数 | 说明
+
+| 基础网络网段 | 基础网络 VBC 的网段。
+| 初始网络网段 | 用于自动规划 VBC。{product_name}会从这个网段开始，按照顺序，每 4 个 计算节点将自动创建一个 VBC 网络。
+| 私有网络默认网段 | 填写私有网络 VPC 网络的默认网段，填写格式参考页面示例。
+
+include::../../../../../../_components/note_in_table.adoc[]
+
+建议多填几个，以适配更多业务场景，方便租户使用。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+|===

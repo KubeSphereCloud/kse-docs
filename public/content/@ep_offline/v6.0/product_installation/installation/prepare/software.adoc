@@ -1,0 +1,58 @@
+---
+title: 安装包准备
+weight: 1
+---
+
+安装部署工作开展之前，我们需要准备整个过程中需要使用到的各软件安装包与工具包。不同安装包的获取方式以及用途均不同，详细内容说明如下。
+
+== 云平台安装包
+
+企业云平台安装包均存储于 FTP 服务器上。安装包信息如下表所示，包名中携带的 x.x.x 为包的版本号。无特殊需求，建议使用最新的版本即可。
+
+include::../../../../../_components/note.adoc[]
+若下载路径不能访问，请联系技术支持。
+
+include::../../../../../_components/table_footer.adoc[]
+
+[cols='3,2,3']
+|===
+| 安装包 | 描述 | 下载路径
+
+| QingCloud-X.X.X.X-AutoInstall.iso
+| 操作系统自动安装镜像
+| \ftp://ins.qingcloud.com/isos/
+
+| QingCloud-X.X.X.X-NoAutoInstall.iso
+| 操作系统手动安装镜像
+| \ftp://ins.qingcloud.com/isos/
+
+| qingcloud-installer_6.1.x-20221230_XXXX_amd64.tar.gz
+| 企业云平台基础软件安装包
+| \ftp://ins.qingcloud.com/qingcloud/
+
+| images-repo
+| VM 镜像
+| \ftp://ins.qingcloud.com/images-repo/
+|===
+
+
+== 软件工具包
+
+安装部署过程中，我们需要用到一些工具，辅助我们完成相关工作。
+
+[cols="1,2,2"]
+|===
+| 用途 | 工具 | 描述
+
+| SSH 连接工具
+| 例如：Xshell、MobaXtem、SCRT 等。
+| 用于执行远程调试命令。
+
+| 介质传输工具
+| 例如：Sftp 或移动硬盘。
+| 用于传输安装包镜像等。
+
+| KVM 工具
+| 服务器厂商的 KVM 工具或显示器键盘。
+| 用于调试 BIOS 安装系统等。
+|===

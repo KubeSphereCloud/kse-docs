@@ -1,0 +1,41 @@
+---
+title: "Create a Custom Monitoring Dashboard"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Custom Monitoring Dashboard, Create a Custom Monitoring Dashboard"
+description: "Describes how to create a custom monitoring dashboard."
+weight: 01
+---
+
+:ks_permission: **Monitoring Management**
+:ks_navigation: **Monitoring & Alerting > Custom Monitoring**
+
+
+include::../../../../../_custom/clusterManagement/customMonitoringDashboards/customMonitoringDashboards-desc-createACustomMonitoringDashboard.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+include::../../../../../_custom/clusterManagement/customMonitoringDashboards/customMonitoringDashboards-prer-exposeMetrics.adoc[]
+
+* You need to set up a metrics exporter on the service used to expose the workload to declare the path that provides application monitoring metrics. KubeSphere will obtain the application's monitoring metrics based on the relevant parameters of the metrics exporter. For more information, please refer to link:../../08-edit-a-metrics-exporter/[Edit a Metrics Exporter].
+
+== Steps
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and enter your cluster or workspace.
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/customMonitoringDashboards/customMonitoringDashboards-oper-createACustomMonitoringDashboard.adoc[]

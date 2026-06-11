@@ -1,0 +1,117 @@
+---
+title: "Galera_Cluster 数据库"
+weight: 1
+---
+
+. 登录 NeonSAN 的数据库节点，查询数据库集群状态。
++
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
++
+include::../../../../../../../_components/note.adoc[]
+若数据库集群状态异常，需调查原因并解决后，再次执行该步骤。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 登录 leader center 节点，查看其数据库配置。
++
+[,shell]
+----
+cat /etc/neonsan/center.conf
+
+... ...
+[mysql]
+user="neonsan"
+pass="zhu88jie"
+ip="192.168.101.25"
+db_name="neonsan"
+... ...
+----
++
+include::../../../../../../../_components/note.adoc[]
+leader center 节点 IP 地址可在集群任一节点上，执行 ``qfcip`` 进行查看。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 登录非 leader center 节点所连接的数据库节点。
+. 停止该节点的数据库服务。
++
+[,shell]
+----
+supervisorctl stop galera_cluster
+----
+
+. 查看数据库集群状态。
++
+[,shell]
+----
+/opt/galera/bin/galera_cluster status 
+----
+. 确认 mysqld 状态。
++
+[,shell]
+----
+ps -ef | grep mysqld
+----
+
+. 确认数据库目录没有使用。
++
+[,shell]
+----
+lsof +d /data/galera/
+----
+
+. 迁数据目录到/pitrix 目录下。
++
+[,shell]
+----
+mv /data/galera/ /pitrix/data/
+mv /data/galera /pitrix/data/galera 
+----
+. 在原数据目录下创建软链接。
++
+[,shell]
+----
+ln -s /pitrix/data/galera /data/galera 
+----
+. 启动 galera_cluster 服务。
++
+[,shell]
+----
+supervisorctl start galera_cluster 
+----
+
+. 查看数据库集群状态。
++
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
+
+. 登录下一个非 leader center 节点所连接的数据库节点，执行步骤 4~ 步骤 11。直至所有非 leader center 节点所连接的数据库节点操作完成。
+
+. 登录 leader center 节点，重启 center 服务
++
+[,shell]
+----
+supervisorctl restart neoncenter 
+----
+. 登录最后一个数据库节点，执行步骤 4~步骤 11。
+. 确认集群各服务状态。
++
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+neonsan list_store
+neonsan list_ssd
+neonsan list_volume -detail
+----
+
+
+
+
+
+
+
+
+

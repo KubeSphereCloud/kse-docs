@@ -1,0 +1,106 @@
+---
+title: "Select Jenkins Agent"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Using DevOps, Pipeline"
+description: "Introduces how to select a Jenkins Agent."
+weight: 12
+---
+
+
+The **agent** section specifies where the entire pipeline or a specific stage will be executed within the Jenkins environment, depending on where this **agent** section is placed. This section must be defined at the top level of the **pipeline** block, but its use at the stage level is optional. For more information, please refer to the link:https://www.jenkins.io/zh/doc/book/pipeline/syntax/#代理[Jenkins official documentation].
+
+
+== Built-in podTemplate
+
+A podTemplate is a Pod template used to create an Agent. You can define a podTemplate for use with the Kubernetes plugin.
+
+During pipeline execution, each Jenkins Agent Pod must have a container named **jnlp** to enable communication between the Jenkins Controller and the Jenkins Agent. Additionally, you can add containers to the podTemplate to meet personalized requirements. You can optionally use a custom Pod YAML to flexibly control the runtime environment and switch containers using the **container** command. Here is a related example.
+
+[,json]
+----
+pipeline {
+  agent {
+    kubernetes {
+      //cloud 'kubernetes'
+      label 'mypod'
+      yaml """
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: maven
+    image: maven:3.3.9-jdk-8-alpine
+    command: ['cat']
+    tty: true
+"""
+    }
+  }
+  stages {
+    stage('Run maven') {
+      steps {
+        container('maven') {
+          sh 'mvn -version'
+        }
+      }
+    }
+  }
+}
+----
+
+In the current version, KubeSphere has a built-in podTemplate: **base**, which provides an isolated Docker environment within the Pod.
+
+You can use the built-in podTemplate by specifying the Agent's label. For example, to use the podTemplate for nodejs, specify the label as **nodejs** when creating the pipeline. Please refer to the following example.
+
+[,json]
+----
+pipeline {
+  agent {
+    node {
+      label 'nodejs'
+    }
+  }
+
+  stages {
+    stage('nodejs hello') {
+      steps {
+        container('nodejs') {
+          sh 'yarn -v'
+          sh 'node -v'
+          sh 'docker version'
+          sh 'docker images'
+        }
+      }
+    }
+  }
+}
+----
+
+
+* podTemplate base
++
+--
+[%header,cols="1a,4a"]
+|===
+|Name |Type/Version
+
+|Jenkins Agent Label
+|base, go, java, jdk, maven, nodejs, etc.
+
+|Container Name
+|base
+
+|Operating System
+|Ubuntu 24.04
+
+|Docker
+|Latest stable version
+
+|Helm
+|Latest stable version
+
+|Kubectl
+|Latest stable version
+
+|Built-in Tools
+|unzip, which, make, wget, zip, bzip2, git
+|===
+--

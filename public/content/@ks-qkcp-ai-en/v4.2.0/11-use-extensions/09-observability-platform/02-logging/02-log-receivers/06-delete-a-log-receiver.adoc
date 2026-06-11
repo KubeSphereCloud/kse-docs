@@ -1,0 +1,40 @@
+---
+title: "Delete Log Receiver"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Cluster Settings, Log Receiver, Enable, Disable"
+description: "Describes how to delete a log receiver."
+weight: 06
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **Logging > Log Receiver**
+
+This section describes how to delete a log receiver.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* A log receiver has been added.
+
+== Steps
+
+include::../../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Log Receiver** page, click **Container Logs**, **Resource Events**, **Audit Logs**, or **Notification History**, then click the name of a log receiver in the list to open its details page.
+
++
+
+. On the log receiver details page, click **Operation > Delete**.
+
+. In the dialog box that appears, enter the name of the log receiver, then click **OK**.

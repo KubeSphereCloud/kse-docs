@@ -1,0 +1,197 @@
+---
+title: "Elasticsearch 与对象存储集成"
+description: 本小节主要介绍 Elasticsearch 与对象存储集成。
+keywords: Elasticsearch 对象存储
+weight: 25
+collapsible: false
+draft: false
+---
+
+== 概述
+
+Elasticsearch 可以通过快照的方式将指定的索引数据甚至整个集群的数据存储到某远端仓库，并能从该远端仓库中存储的快照恢复数据。将 Elasticsearch 通过 S3 Repository Plugin 与对象存储进行集成，以实现将对象存储作为远端仓库，用于存储快照数据。
+
+
+
+
+== 操作步骤
+
+=== 创建 `repository`
+
+参考如下配置，创建一个远端仓库 `repository`。
+
+[source,bash]
+----
+PUT _snapshot/repository
+{
+  "type": "s3",
+  "settings": 
+  {
+    "endpoint": "s3.pek3a.stor.com",
+    "access_key": "<YourAccessKey>",
+    "secret_key": "<YourSecretKey>",
+    "bucket": "my_stor_bucket"
+  }
+}
+----
+
+详细参数说明请参考link:https://www.elastic.co/guide/en/elasticsearch/plugins/current/repository-s3-client.html[官方文档]，这里给出简要说明如下。
+
+[cols='1,3a']
+|===
+| 参数 | 说明
+
+| repository| 远端仓库名称。
+| type| 协议类型，固定填写 `s3`。
+| settings| 所有支持 `s3` 协议的对象存储。不限于 QingStor 对象存储。
+| settings.endpoint| 填写对象存储的端点信息。
+
+include::../../../../../_components/note_in_table.adoc[]
+
+若指定对象存储为 QingStor 对象存储，则可根据实际情况指定距离较近的区域。QingStor 对象存储支持的区域可参考link:../../../../storage/object_storage/intro/product/#_endpoint[文档]。
+
+include::../../../../../_components/footer_in_table.adoc[]
+
+| settings.access_key| 用于访问 `settings.endpoint` 参数指定的对象存储的 Access Key。
+| settings.secret_key| 用于访问 `settings.endpoint` 参数指定的对象存储的 Secret Key。
+| settings.bucket| `settings.endpoint` 参数指定的对象存储中，用于存储快照数据的 Bucket 名。若不存在当前设置的 Bucket，则系统会自动创建。
+|===
+
+集成 QingStor 对象存储的配置示例如下。
+
+[source,bash]
+----
+PUT _snapshot/repo-stor
+{
+  "type": "s3",
+  "settings": 
+  {
+    "endpoint": "s3.pek3a.qingstor.com",
+    "access_key": "<YourAccessKey>",
+    "secret_key": "<YourSecretKey>",
+    "bucket": "my_bucket"
+  }
+}
+----
+
+=== 删除 `repository`
+
+通过如下命令查看、删除已有的 `repository`。
+
+[source,bash]
+----
+
+# 获取名为 `repo-stor` 的 Repository 信息
+curl $ES_IP:9200/_snapshot/repo-stor
+
+# 获取名字以 `repo` 为前缀或名字中含有 `backup` 字符串的 Repository 信息
+curl "$ES_IP:9200/_snapshot/repo*,*backup*" 
+
+# 获取所有 Repository 信息
+curl $ES_IP:9200/_snapshot/_all             
+
+# 删除名为 `repo-stor` 的 Repository
+curl -XDELETE $ES_IP:9200/_snapshot/repo-stor 
+----
+
+=== 创建快照
+
+通过如下命令创建快照。创建的快照将会存放在link:#_创建_repository[前文配置]中指定的对象存储的 Bucket 中。
+
+[source,bash]
+----
+# 创建名为 `backup-2019.05.13` 且包含集群所有索引数据的 Snapshot
+curl -H "Content-Type: application/json" -XPUT "$ES_IP:9200/_snapshot/repo-stor/backup-2019.05.13?wait_for_completion=true"
+
+# 创建名为 `backup-2019.05.13` 且包含集群指定索引数据，如 `index_1`、`index_2` 的 Snapshot
+curl -H "Content-Type: application/json" -XPUT "$ES_IP:9200/_snapshot/repo-stor/backup-2019.05.13?wait_for_completion=true" -d'
+{
+  "indices": "index_1,index_2",
+  "ignore_unavailable": true,
+  "include_global_state": false
+}
+'
+----
+
+include::../../../../../_components/note.adoc[]
+
+命令行中的参数 `wait_for_completion` 设置为 `true` 时，表示该命令将会在快照**创建**完成后返回；设置为 `false` 表示该命令将会在快照**初始化**完成后返回。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+=== 删除快照
+
+通过如下命令查看、删除快照。
+
+[source,bash]
+----
+# 查看名为 `repo-stor` 的 Repository 中名为 `backup-2019.05.13` 的快照信息
+curl "$ES_IP:9200/_snapshot/repo-stor/backup-2019.05.13"
+
+# 查看名为 `repo-stor` 的 Repository 中所有的快照信息
+curl "$ES_IP:9200/_snapshot/repo-stor/_all"
+
+# 删除名为 `repo-stor` 的 Repository 中名为 `backup-2019.05.13` 的快照
+curl -XDELETE "$ES_IP:9200/_snapshot/repo-stor/backup-2019.05.13"
+----
+
+=== 恢复快照
+
+通过如下命令恢复存储在对象存储的快照至 Elasticsearch 集群。
+
+[source,bash]
+----
+# 根据名为 `repo-stor` 的 Repository 中的快照 `backup-2019.05.13` 恢复所有索引数据。
+curl -H "Content-Type: application/json" -XPOST "$ES_IP:9200/_snapshot/repo-stor/backup-2019.05.13/_restore"
+
+# 根据名为 `repo-stor` 的 Repository 中的快照 `backup-2019.05.13` 恢复 `index_1`、`index_2` 的索引数据。
+curl -H "Content-Type: application/json" -XPOST "$ES_IP:9200/_snapshot/repo-stor/backup-2019.05.13/_restore" -d'
+{
+  "indices": "index_1,index_2",
+  "ignore_unavailable": true,
+  "include_global_state": false,
+  "rename_pattern": "index_(.+)",
+  "rename_replacement": "restored_index_$1"
+}
+'
+----
+
+include::../../../../../_components/note.adoc[]
+
+* 命令行中待恢复的 `index` 必须是集群中处于**关闭状态**的 `index`。
+* 命令行中指定待恢复的 `index` 处于**打开状态**时，系统将会提示无法恢复。
+
+include::../../../../../_components/table_footer.adoc[]
+
+=== 恢复快照至其他集群
+
+快照由于并没有和具体的集群信息绑定，因此，可恢复到另一个不同的集群。用户可以通过这种方式，在不同集群之间导入导出数据。具体做法如下。
+
+include::../../../../../_components/note.adoc[]
+
+新集群的版本必须和老集群一致或者更新。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 先在目标集群中创建与源集群同样的 `repository`。
++
+include::../../../../../_components/note.adoc[]
+
+目标集群中创建 `repository` 的参数需与源集群中创建 `repository` 的参数保持一致。可参考link:#_创建_repository[前文]。
+
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 通过link:#_恢复快照[恢复快照]的命令，修改 URL 地址为新集群的节点地址，即可将老集群的数据恢复到新集群上去。
++
+include::../../../../../_components/note.adoc[]
+
+更详细的有关集群快照的生成和恢复的信息请参考link:https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html[ Elasticsearch 官方文档]。
+
+//* 若使用的 QingStor 对象存储，创建的 ES 集群和对象存储位于同一区域，则进行数据迁移时，不耗公网流量，如果不在同一区域则需要消耗公网流量。因此，青云建议比如位于 `北京3区-A` 的 ES 集群可以选择同一区域的 QingStor 对象存储，从而避免产生公网流量。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+

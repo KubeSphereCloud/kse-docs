@@ -1,0 +1,58 @@
+---
+title: 删除第三方APP（DeleteThirdApps）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| client_ids
+| Array
+| true
+| 客户端ID列表
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| client_ids
+| Array
+| false
+| 客户端ID列表
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "client_ids": [
+    "client_id1",
+    "client_id2"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteThirdAppsResponse",
+  "client_ids": [
+    "client_id1",
+    "client_id2"
+  ],
+  "ret_code": 0
+}
+----

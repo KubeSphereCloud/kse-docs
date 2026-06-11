@@ -1,0 +1,70 @@
+---
+title: "扩展数据库集群"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB ClickHouse, 扩展数据库集群"
+description: "介绍如何扩展 ClickHouse 数据库集群（增加数据库分片的数量）。"
+weight: 07
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: b642cb50ad6f4d90827ef2e0bec993ba
+:ks_xref_id: 0aa6d5aff33548b0ac166468bb571d10
+:ks_comp: ../../../components/
+:ks_title: 扩展数据库集群
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB ClickHouse, 扩展数据库集群
+:ks_description: 介绍如何扩展 ClickHouse 数据库集群（增加数据库分片的数量）。
+:ks_weight: 07
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何扩展 ClickHouse 数据库集群（增加数据库分片的数量）。
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+目前仅支持增加数据库分片的数量，不支持减少数据库分片的数量。此外，不支持调整副本数量。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=2066a3063c0e47bb8db2160abc563105]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/radondb/radondbClickhouse/radondbClickhouse-prer-installRadondbClickHouse.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../_custom/radondb/radondbClickhouse/radondbClickhouse-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=bf636ba820d4455e90c6ee5d3da0673c]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbClickhouse/radondbClickhouse-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 扩展**。
+
+. 在**扩展**对话框，设置分片的数量，然后点击**确定**。

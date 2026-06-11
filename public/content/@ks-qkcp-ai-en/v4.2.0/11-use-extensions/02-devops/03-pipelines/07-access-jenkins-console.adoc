@@ -1,0 +1,55 @@
+---
+title: "Log in to Jenkins Dashboard"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Using DevOps, Access Jenkins"
+description: "Describes how to log in to the Jenkins dashboard."
+weight: 07
+---
+
+
+When DevOps is installed, the Jenkins dashboard is also installed by default.
+
+== Prerequisites
+
+The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+
+. View the service corresponding to the Jenkins dashboard, then refer to link:../../../../02-quickstart/08-access-a-service/[How to Access a Service] to access the Jenkins dashboard.
++
+--
+[source,bash]
+----
+kubectl -n kubesphere-devops-system get svc devops-jenkins
+----
+--
+
+. Obtain the username and password for the Jenkins administrator.
++
+--
+[source,bash]
+----
+kubectl -n kubesphere-devops-system get secret devops-jenkins -o yaml
+----
+
+Example output:
+[source,yaml]
+----
+data:
+  jenkins-admin-password: aXMxZno1Z3lnQWFTaGRIU2EwUDZkbg==
+  jenkins-admin-token: MTE5NTQ4NDY3MTE4MDQ4ODAzMDI1MTc3MDk1OTUwNTM2MQ==
+  jenkins-admin-user: YWRtaW4=
+----
+
+Decode the content corresponding to `jenkins-admin-user` and `jenkins-admin-password` using base64 to obtain the Jenkins administrator's username and password.
+--
+
+. Use the obtained username and password to log in to the Jenkins dashboard.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+If you want to log in to the Jenkins dashboard via LDAP or OpenId Connect, please refer to the description on the details page of the DevOps extension in the Extensions Center.
+|===

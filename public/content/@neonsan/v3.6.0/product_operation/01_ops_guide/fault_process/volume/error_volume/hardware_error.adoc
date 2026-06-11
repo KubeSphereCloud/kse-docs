@@ -1,0 +1,167 @@
+---
+title: "硬盘异常"
+weight: 2
+---
+根据前文步骤，判断出主副本所在存储节点或磁盘状态异常，针对多副本卷的恢复，此时需从从副本强制恢复数据。**需注意的是，强制恢复后，由于该卷数据是从从副本恢复的，故恢复后的数据是不可信的**。
+
+. 关闭 NeonSAN 集群的自动恢复与自动均衡功能。
++
+[,shell]
+----
+neonsan set_parameter -parameter auto_recovery -value 0
+neonsan set_parameter -parameter auto_balance -value 0
+----
+. 确认 NeonSAN 集群中有无正在执行的异步任务。若当前集群中有状态为 waiting，processing，pending 的任务，需等待这些任务执行完毕。
++
+[,shell]
+----
+neonsan list_job
+----
+
+. 备份数据库。
+.. 查看数据库自动备份配置。
++
+[,shell]
+----
+crontab -e
+
+0 2 * * * sh /opt/neonsan/backup-db.sh 192.168.101.25 > /dev/null 2>&1
+----
+.. 手动执行数据库自动备份配置中的备份脚本，节点 IP 需根据实际情况进行修改。
++
+[,shell]
+----
+sh /opt/neonsan/backup-db.sh 192.168.101.25
+----
+
+. 登录数据库。
++
+--
+* QinStor MySQL 数据库
++
+可参考本文。“Qingstor 融合部署运维 > 登录数据库”相关章节内容。
+* Galera 数据库
++
+[,shell]
+----
+mysql -uneonsan -pzhu88jie neonsan
+----
+--
+
+. 关闭自动提交。
++
+[,sql]
+----
+mysql> set autocommit=0;
+----
+
+. 查找待恢复卷所有状态为 ERROR 的**从副本**。
++
+[,sql]
+----
+mysql> select * from replica_ext where vid=4479516672 and status!='OK' and is_primary=0;
+----
++
+image::/images/neonsan/ops_guide_11.png[]
++
+include::../../../../../../../_components/note.adoc[]
+* 命令行中，vid 的值，为卷的 ID，可通过 ``neonsan list_volume -detail`` 获取。
+* 重点关注并记录回显结果中的 ``sid``，``rid``，``rindex``，``store_id`` 与 ``ssd_uuid``。
+include::../../../../../../../_components/table_footer.adoc[]
+
+.  退出数据库，输入如下命令，查看上一步骤中返回的 store_id 与 ssd_uuid 值所对应的存储节点和磁盘的状态。
++
+[,shell]
+----
+neonsan list_store
+
+neonsan list_ssd
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 关注返回结果中的 ``STATUS``，若不为 ``OK``，则说明从副本所在节点或磁盘状态异常。
+* 若所有从副本所在节点或磁盘**状态异常**，则该卷无法恢复。**操作至此结束**。
+* 若存在从副本所在节点**状态正常**，且所在磁盘状态正常，则选择从该从副本恢复数据。**继续后续步骤**。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 若上一步中，从副本所在节点状态正常，则登录数据库后，执行如下命令，更新从副本状态为 OK。
++
+[,sql]
+----
+mysql> update replica set status='OK' where id=4479516672;
+----
++
+include::../../../../../../../_components/note.adoc[]
+命令行中，``id`` 的值，为副本的 ID，是步骤 6 中输出的 ``rid``。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 将从副本设置为主副本。
++
+[,sql]
+----
+mysql> update shard set primary_rep_index=1 where id=4479516688;
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 命令行中，``primary_rep_index`` 的值，为副本的 ``index``，即步骤 6 中输
+出的 ``rindex``。
+* ``id`` 为 ``shard ID``，是步骤 6 中输出的 ``sid`` 值。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 重复执行步骤 8~步骤 9，直至步骤 6 中所有 shard 的主副本更新完成。
+
+. 输入如下命令，确认待恢复卷所有主副本的状态均为 OK。
++
+无查询结果输出，即表示该卷所有主副本状态均为 OK。
++
+[,sql]
+----
+mysql> select * from replica_ext where is_primary=1 and vid=4479516672 and status!='OK';
+----
+
+. 提交修改。
++
+[,sql]
+----
+mysql> commit;
+----
+
+. 打开自动提交。
++
+[,sql]
+----
+mysql> set autocommit=1;
+----
+. 确认自动提交是否打开。
++
+[,sql]
+----
+mysql> show variables like 'autoco%';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| autocommit | ON |
++---------------+-------+
+----
+. 退出数据库。
++
+[,sql]
+----
+mysql> quit;
+----
+
+. 查询待恢复卷状态。至此，卷的状态应为 ``DEGRADED``。
++
+[,sql]
+----
+neonsan list_volume -volume <volume_full_name> -detail
+----
+
+. 执行如下命令，恢复卷。
++
+[,shell]
+----
+neonsan recovery_volume -volume <volume_full_name>
+----
+
+

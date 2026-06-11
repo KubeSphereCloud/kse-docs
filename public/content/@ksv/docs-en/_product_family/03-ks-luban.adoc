@@ -1,0 +1,51 @@
+---
+title: "KubeSphere Luban"
+linkTitle: "{ks_title}"
+keywords: ""
+description: ""
+weight: 03
+logo: "{ks_logo}"
+downloadUrl: "{ks_download_url}"
+---
+
+// :ks_include_id: 5b9b7fcd81f84a2aaaafbf1ed2fc09a1
+:ks_xref_id: 9005ad4e62304e5f8dba10e7f9b3c76a
+:ks_comp: ../../components/
+:ks_title: KubeSphere Luban
+:ks_description:
+:ks_keywords:
+:ks_weight: 03
+
+
+云原生生态发展极快，基于 Kubernetes 之上的场景多种多样，客户业务的发展阶段不一样，对产品提的要求就不一样。KubeSphere 只是一个产品，它必须按照版本的时间线去演进，客户的需求只能排进 pipline，进行评估和排期，而持续的需求迭代，也让 KubeSphere 产品变得越来越复杂、越来越臃肿。越来越多的合作伙伴希望和 KubeSphere 做集成做整合，而现在已有的 app store 这个集成的入口，只是解决了应用的 provison，并没有给客户带来更多的价值增值，体验是割裂的，只是 1+1 =2，客户期望的是 1+1 > 2。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 什么是 KubeSphere Lubanlink:[id=edb542a65c444a02a69d2fb5bc6cd4d1]
+
+KubeSphere Luban，是在上面这些背景下的产物，实现了以下目标：
+
+* 产品核心组件进行了架构重构，极大降低了复杂度，产品完成了瘦身
+* KubeSphere Luban 前后端实现了插件管理、插件热更新。同时，基于此插件架构，衍生出来全新的“插件中心”的能力。由此，KubeSphere 自己的功能模块可以基于插件开发，客户和合作伙伴的需求也可以基于插件开发，然后注入到 KubeSphere 平台上。
+* 通过 KubeSphere Luban，任何插件的 API 可以动态注入到 KubeSphere 的后台 API 服务中，任何插件的前端逻辑也可以动态更新到 KubeSphere 控制台。由此，插件可以拥有和 KubeSphere 平台公有账户管理、权限管理等公共能力。
+* KubeSphere 4.0 基于 Luban 这个全新产品内核实现，实现了产品内核版本和产品上层功能组件的版本开发解耦，举例来说：假设 KubeSphere 计划在 2024 年发布 4.1 和 4.2 两个 feature pack，时间分别是 5 月和 9 月，但 KubeSphere 之上的 DevOps 插件无需等待 KubeSphere 的版本发布时间点，可以安排自己的 roadmap
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== KubeSphere Luban 的价值是什么link:[id=5833d097addb4f87825e498a78085b9a]
+
+* 基于 KubeSphere Luban，KubeSphere 产品实现了瘦身式的技术迭代，从之前的一个“云原生平台”定位的单品类产品，向多品类生态模式转型。
+* KubeSphere 的客户可以获取到更好体验的云原生相关服务，真正感受到 1+1 > 2 的价值。
+* KubeSphere 的合作伙伴可以借助 KubeSphere 的平台和品牌，双方互相促进，实现 double win。
+* 通过插件中心这种全新的商业模式，KubeSphere 可以形成全新的商业生态，建立在云原生领域的领导地位。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 基于 KubeSphere Luban，我们正在推进什么工作link:[id=8fb21aa76ebe4046bca3bb4c84d4a54d]
+
+* 推进 GA 版本在今年五月份发布；
+* 积极联系和拓展插件合作伙伴，国内已经有一些潜在合作伙伴愿意参与插件开发，涵盖了网关、服务网格、安全、灾备等领域。同时，我们也期望能在海外寻找到优质的合作伙伴一起发展 Luban 的生态。
+* 在 kubesphere.cloud 上，推进全球插件中心的上线，全球的开发者可以在这个平台上基于 Luban 为全球用户提供丰富的云原生插件，每个插件的 id 是全球唯一的，且必须通过 kubesphere.cloud 来进行授权。

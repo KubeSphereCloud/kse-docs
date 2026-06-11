@@ -1,0 +1,42 @@
+---
+title: "修改主机 Hostname"
+weight: 1
+---
+
+. 登录新的管理节点，依次执行如下命令，修改当前节点的 Hostname。
++
+[source,shell]
+----
+hostname <node_name>
+----
++
+[source,shell]
+----
+echo <node_name> > /etc/hostname
+----
+
++
+include::../../../../../_components/note.adoc[]
+若是替换管理节点则 Hostname 必须和被替换的节点保持一致，即命名风格与其他管理节点相同。
+include::../../../../../_components/table_footer.adoc[]
+
+. 修改 hosts 文件。该文件中应包含所有管理节点信息。
++
+[source,shell]
+----
+vi /etc/hosts
+----
++
+----
+192.168.2.6 node_1   
+192.168.2.7 node_2  
+192.168.2.5 node_3   
+----
+
+. 修改完成后，断开连接，并重新连接，Hostname 生效。
+
+. 逐一登录其他管理节点，检查并修改 ``/etc/hosts`` 文件。
+
+
+
+

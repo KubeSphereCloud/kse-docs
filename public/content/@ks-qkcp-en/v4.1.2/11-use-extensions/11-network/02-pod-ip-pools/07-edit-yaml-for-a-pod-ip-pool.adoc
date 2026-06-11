@@ -1,0 +1,47 @@
+---
+title: "Edit Node Selection"
+keywords: "Kubernetes, {ks_product-en}, cluster management, network, pod IP pool, prohibit automatic allocation"
+description: "Introduce how to set the automatic node allocation for pod IP pools."
+weight: 07
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Pod IP Pools**
+
+
+This section introduces how to edit the automatic node allocation for pod IP pools to automatically match appropriate nodes for the pod IP pool.
+
+When creating a pod IP pool, by default, its IP addresses can be allocated to pods on all nodes. You can set node selectors to restrict that only pods on nodes that meet specific conditions can use the IP addresses of the IP pool.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeSphere Network** should have been installed and enabled.
+
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the pod IP pool you want to operate, and then select **Edit YAML** from the dropdown list.
+
+. Enter the expression under the **spec.nodeSelector** parameter to filter nodes through custom expressions. For more information about expressions, please refer to link:https://docs.tigera.io/calico/latest/reference/resources/ippool#node-selector[Node Selector].
+
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+* The CIDR of the pod IP pool must not overlap with the CIDR of the nodes and the CIDR of the services.
+* When modifying related fields, you must clearly understand the impact of the operation, please proceed with caution.
+|===

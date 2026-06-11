@@ -1,0 +1,31 @@
+---
+title: "建立节点间的免密访问"
+weight: 2
+---
+
+建立新部署的管理节点与集群中其他所有节点间的 SSH 免密访问。
+
+. 登录新的管理节点，执行如下命令生成相应的密钥对。
++
+[source,shell]
+----
+ssh-keygen
+----
++
+include::../../../../../_components/note.adoc[]
+若无特殊要求，出现提示信息直接回车即可。
+include::../../../../../_components/table_footer.adoc[]
+
+. 查看生成的公私钥对。返回结果中 ``id_rsa`` 为私钥，``id_rsa.pub`` 为公钥。
++
+[source,shell]
+----
+ls .ssh/
+----
+
+. 将本节点的公钥，添加至集群中其他所有节点上的 ``.ssh/authorized_keys`` 文件中。
+
+. 逐一登录集群中的其他所有节点，将其相应的 ``id_rsa.pub`` 公钥全部添加至新管理节点的 ``.ssh/authorized_keys`` 文件中。
+
+. 验证节点间的 SSH 登录访问是否可用。
+

@@ -1,0 +1,18 @@
+---
+title: "备份恢复集群"
+weight: 21
+---
+
+集群备份恢复功能的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_12.png[]
+
+功能流程说明：
+
+. 如果配置包中 backup_policy 定义为 device：
+.. 根据备份是集群的配置信息（cpu、内存、硬盘、环境变量等）创建集群。
+.. 注册集群信息到 metadata service。
+.. 启动每个节点的 confd agent 服务。
+. 如果配置包中 backup_policy 定义不是 device，不同角色的节点按照 order 升序执行 stop cmd 脚本。
+. 如果定义了 restore cmd，不同角色的节点按照 order 升序执行 restore cmd 脚本。
+. 如果没有定义 restore cmd，不同角色的节点按照 order 升序执行 start cmd 脚本。

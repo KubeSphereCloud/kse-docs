@@ -1,0 +1,56 @@
+---
+title: "查看边缘集群列表"
+weight: 03
+---
+
+
+本节介绍如何查看边缘集群列表。
+
+
+== 前提条件
+
+* 您需要在{ks_product_both}平台具有 **platform-admin** 角色。
+
+* 已创建一个边缘集群。
+
+
+== 操作步骤
+
+. 以具有 **platform-admin** 角色的用户登录{ks_product_left} Web 控制台。
+
+. 点击顶部导航栏上的image:/images/edgewize/zh/icons/grid.svg[grid,18,18]，然后点击 **edgewize-io** 图标进入**边缘集群管理**页面。
++
+====
+* 边缘集群列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称、别名和描述
+|集群的名称、别名和描述信息。
+
+|节点数量
+|集群中服务器节点的数量。
+
+|Kubernetes 版本
+|集群中运行的 Kubernetes 版本。
+
+|托管集群
+|边缘集群被托管给特定的{ks_product_both}集群。
+
+|创建时间
+|集群加入{ks_product_left} Web 控制台的时间。
+|===
+--
+
+* 在列表上方点击搜索框并输入关键字，可按名称搜索集群。
+
+include::../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../_ks_components/oper-customizeColumns.adoc[]
+
+* 点击集群名称可进入集群，管理集群中的资源。
+
+====

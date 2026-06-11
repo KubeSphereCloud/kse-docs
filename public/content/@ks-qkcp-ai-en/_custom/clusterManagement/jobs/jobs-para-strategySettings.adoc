@@ -1,0 +1,22 @@
+// :ks_include_id: fefe006cd58c414c825a62b8b3066867
+* Policy Settings
++
+--
+Configure the policy for each run of the Job.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Max Retries
+|The maximum number of times a pod in the Job can be restarted. If the maximum retry count is reached without meeting the Job completion conditions, the Job will be marked as failed.
+
+|Completions
+|The number of successfully completed pods required to mark the Job as complete.
+
+|Parallelism
+|The number of pod replicas running in parallel within the Job.
+
+|Active Deadline Seconds
+|The maximum running time for the Job, in seconds. If the maximum running time is reached without meeting the Job completion conditions, the Job will be terminated and marked as failed.
+|===

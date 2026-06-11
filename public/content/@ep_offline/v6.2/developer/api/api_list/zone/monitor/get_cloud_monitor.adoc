@@ -1,0 +1,211 @@
+---
+title: 获取云监控数据（GetCloudMonitor）
+weight: 8
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| cloud_monitor_type
+| String
+| false
+| 云监控类型
+
+| end_time
+| String
+| false
+| 结束时间
+
+| event_name
+| String
+| false
+| 事件名称
+
+| event_type
+| String
+| false
+| 事件类型
+
+| limit
+| Integer
+| false
+| 每页数量
+
+| offset
+| Integer
+| false
+| 页数
+
+| owner
+| String
+| false
+| 用户Id
+
+| range
+| Integer
+| false
+| 时间间隔
+
+| resource_type
+| String
+| false
+| 资源类型
+
+| reverse
+| Integer
+| false
+| 反转
+
+| sort_key
+| String
+| false
+| 排序字段
+
+| start_time
+| String
+| false
+| 开始时间
+
+| step
+| String
+| false
+| 时间粒度
+
+| verbose
+| Integer
+| false
+| 详情
+
+| viewType
+| String
+| false
+| 视图类型
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| GetCloudMonitor
+
+| cloud_monitor
+| Object
+| false
+| 告警详情
+
+| cloud_monitor.events
+| Object
+| false
+| 事件数据
+
+| cloud_monitor.events.count
+| Integer
+| false
+| 个数
+
+| cloud_monitor.events.event_name
+| String
+| false
+| 事件名称
+
+| cloud_monitor.events.resource_type
+| String
+| false
+| 资源类型
+
+| cloud_monitor.total_count
+| Integer
+| false
+| 总数
+
+| host
+| String
+| false
+| 节点
+
+| port
+| Integer
+| false
+| 端口号
+
+| ret_code
+| Integer
+| false
+| 返回码
+
+| trace_id
+| String
+| false
+| 追踪Id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetCloudMonitor",
+  "cloud_monitor_type": "event",
+  "end_time": "2023-06-02T03:29:28.546Z",
+  "event_name": "",
+  "event_type": "",
+  "limit": 100,
+  "offset": 0,
+  "owner": "usr-rrPKHDpJ",
+  "range": 24,
+  "resource_type": "",
+  "reverse": 1,
+  "sort_key": "create_time",
+  "start_time": "2023-06-01T03:29:28.546Z",
+  "step": "2h",
+  "verbose": 0,
+  "viewType": "summary",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetCloudMonitorResponse",
+  "cloud_monitor": {
+    "events": [
+      {
+        "count": 1,
+        "event_name": "ResetLoginPasswd:Completed",
+        "resource_type": "instance"
+      }
+    ],
+    "total_count": 1
+  },
+  "host": "s-webservice0",
+  "port": 9995,
+  "ret_code": 0,
+  "trace_id": "RW2XhK7A"
+}
+----

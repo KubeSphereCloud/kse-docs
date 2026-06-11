@@ -1,0 +1,346 @@
+---
+title: "更换 cache 盘（支持热插拔）"
+weight: 1
+---
+
+
+== 注意事项
+
+
+该操作步骤仅限支持热插拔的 cache 盘，且必须在服务器开机状态下进行。若当前服务器除处于关机状态，则支持热插拔的 cache 盘也需link:../cache_hot_plugt/[参考其他章节内容]进行更换。
+
+== 操作步骤
+
+. 参考前文内容，link:../../move_disk/[移除待下线的磁盘]。
++
+include::../../../../../../_components/note.adoc[]
+移除磁盘的过程中，**仅需迁移待更换的 cache 盘上的所有数据**即可。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 收集 CAS 盘的 Cache Line 信息，稍后启动时按照这个参数启动。
+.. 查看 CAS 盘 ID 信息。
++
+[,shell]
+----
+casadm -L
+----
+
+.. 查看指定 CAS 盘的 Cache Line 信息
++
+--
+[,shell]
+----
+casadm -P -i 1
+----
+
+回显示例
+
+[,shell]
+----
+... ...
+Cache line size 4 [KiB]
+... ...
+----
+--
++
+include::../../../../../../_components/note.adoc[]
+* ``-i`` 指定 CAS 盘 ID。
+* 若该 CAS 盘异常，可查询本节点其他 CAS 或登录至其他节点查看 CAS 盘的 ``Cache Line`` 信息。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 停 store 服务。
++
+[,shell]
+----
+supervisorctl stop neonstore
+----
+. 修改 iCAS 配置，即
++
+--
+[,shell]
+----
+vi /etc/neonsan/store.conf
+----
+注释掉待下线磁盘的配置。
+[,shell]
+----
+... ....
+#[ssd.3]
+trim_on_reclaim=1
+zero_on_reclaim=0
+#dev="/dev/intelcas1-1" //仅注释掉 dev 字段
+type="CachedHDD
+... ...
+----
+--
+. 停 iCAS。
+* 若 iCAS 正常。
++
+.. 查看待下线 cache 的 ID 信息。
++
+--
+[,shell]
+----
+casadm -L
+----
+回显示例。
+
+image::/images/neonsan/ops_guide_22.png[]
+--
+
+.. 停止 iCAS。
++
+[,shell]
+----
+casadm -T -i xxx  //xxx修改为对应的cache ID
+----
++
+include::../../../../../../_components/note.adoc[]
+``-i`` 用于指定 ``cache id``。
+include::../../../../../../_components/table_footer.adoc[]
+
+* 若 iCAS 盘异常。
++
+.. 查看待下线 cache 的 ID 信息。
++
+--
+[,shell]
+----
+casadm -L
+----
+回显示例。
+[,shell]
+----
+WARNING: Intel(R) CAS is running on a non-validated OS!
+type        id   disk       status     write policy   device
+core pool   -    -          -          -              -
+└core       -    /dev/sdb   Detached   -              -
+----
+--
+
+.. 则需执行如下操作。
++
+[,shell]
+----
+casadm --remove-detached --device /dev/sdb
+----
++
+include::../../../../../../_components/note.adoc[]
+``--device`` 用于指定 ``status`` 异常的 ``disk`` 所对应的盘符。
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 再次查看 iCAS 信息。
++
+[,shell]
+----
+casadm -L
+----
+
+. 对待下线盘进行下电操作。
+.. 查看系统中磁盘信息。
++
+[,shell]
+----
+ls -l /sys/block/
+----
++
+image:/images/neonsan/ops_guide_19.png[]
+
+.. 确认待下线磁盘的 ``bus device function``。
++
+[,shell]
+----
+lspci | grep -i non
+----
++
+image:/images/neonsan/ops_guide_20.png[]
+
+.. 根据待下线磁盘的 ``bus device function``，确认待下线磁盘的槽位
++
+[,shell]
+----
+lspci -vvv -s 84:00.0
+----
++
+image:/images/neonsan/ops_guide_21.png[]
+
+.. 依次执行如下命令，对待下线磁盘进行下电操作。
++
+--
+[,shell]
+----
+cat /sys/bus/pci/slots/17/power
+----
+回显示例。
+[,shell]
+----
+1
+----
+进行下电操作。
+[,shell]
+----
+echo 0 > /sys/bus/pci/slots/17/power
+----
+再次检查，返回结果为 ``0``，则表示下电成功。
+[,shell]
+----
+cat /sys/bus/pci/slots/17/power
+----
+--
+
+. 拔盘。
+. 插入新盘。
+. 修改 iCAS 的配置文件，添加新的 CAS 盘的 by-id。
+.. 查看新添加盘的 by-id。
++
+--
+[,shell]
+----
+ls -l /dev/disk/by-id/*
+----
+回显示例
+[,shell]
+----
+lrwxrwxrwx 1 root root  9 Jan 20 12:09 /dev/disk/by-id/virtio-vol-j3fz88pt -> ../../vdc
+----
+--
+.. 将新添加盘的 by-id 写进配置文件中。
++
+--
+[,shell]
+----
+vi /etc/intelcas/intelcas.conf
+----
+修改内容
+[,shell]
+----
+... ....
+[caches]
+## Cache ID     Cache device            Cache mode Extra fields (optional)
+1  /dev/disk/by-id/virtio-vol-j3fz88pt  WB
+
+[cores]
+## Cache ID     Core ID         Core device
+1              1               /dev/disk/by-id/virtio-vol-ltpuq6if
+... ...
+----
+--
++
+include::../../../../../../_components/note.adoc[]
+* ``[caches]``字段，为新添加盘的 ``by-id``。
+* ``[cores]``字段，根据格式，将已下线 cache 盘上添加的 HDD 对应的 ``cache id`` 更新为新添加 cache 盘的 ``cache id``。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 启动 iCAS 并添加 core。
+.. 启动 iCAS。
++
+[,shell]
+----
+casadm --start-cache --cache-line-size 4 --cache-device /dev/vdc –force --cache-mode wb
+----
++
+include::../../../../../../_components/note.adoc[]
+启动 iCAS 的命令行中，``cache-line-size`` 的值，需根据步骤 2 中收集的信息进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+. 添加 core。
++
+[,shell]
+----
+casadm --add-core --cache-id 1 --core-device /dev/vdd
+----
++
+include::../../../../../../_components/note.adoc[]
+``--cache-id``指定的 cache id 和 ``--core-device`` 指定的盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+. 查看新的 iCAS 盘的盘符信息。
++
+--
+[,shell]
+----
+casadm -L
+----
+回显示例
+[,shell]
+----
+type id disk status write policy device
+cache 1 /dev/vdc Running wb - └core 1 /dev/vdd Active - /dev/intelcas1-1
+----
+--
+. 设置 cut-off 策略。
++
+[,shell]
+----
+casadm --set-param --name seq-cutoff --cache-id <cache_id> --core-id <core_id> --policy always --threshold 4096
+----
++
+include::../../../../../../_components/note.adoc[]
+``cache-id`` 和 ``core-id`` 需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 对新的 cas 盘的盘头前 20G 进行写零操作。
++
+[,shell]
+----
+dd if=/dev/zero of=/dev/intelcas1-1 bs=10M count=2048 oflag=direct
+----
++
+include::../../../../../../_components/note.adoc[]
+``of`` 指定的参数为新插入盘的盘符。为上一步骤中，``casadm -L`` 命令查询到的盘符。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 添加新盘信息至配置文件中。
++
+--
+[,shell]
+----
+vi /etc/neonsan/store.conf
+----
+
+添加新插入盘符相关信息。
+[,shell]
+----
+... ...
+[ssd.4]
+trim_on_reclaim=1
+zero_on_reclaim=0
+dev="/dev/intelcas1-1"
+type="SSD"
+... ....
+----
+--
++
+include::../../../../../../_components/note.adoc[]
+根据如上格式添加新插入磁盘的信息，若集群中用的是 by-id，则 ``dev`` 参数后面添加该磁盘的 by-id 信息。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 启动 store 服务。
++
+[,shell]
+----
+supervisorctl start neonstore
+----
+
+. 确认卷的状态，SSD 状态，以及 Store 的状态。
++
+[,shell]
+----
+neonsan list_volume -detail
+neonsan list_ssd
+neonsan list_store
+----
++
+include::../../../../../../_components/note.adoc[]
+若磁盘信息中存在无效磁盘记录，可参考。link:../../../fault_process/disk/clear_disk_record[清理磁盘记录]进行处理。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令对集群内的 SSD 进行负载均衡。
++
+[,shell]
+----
+neonsan rebalance_ssd
+----
++
+include::../../../../../../_components/note.adoc[]
+该命令为异步执行，可以通过 ``neonsan list_job`` 查看进程。
+include::../../../../../../_components/table_footer.adoc[]
+

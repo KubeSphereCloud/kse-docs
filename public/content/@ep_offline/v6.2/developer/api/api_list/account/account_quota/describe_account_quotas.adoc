@@ -1,0 +1,110 @@
+---
+title: 查询配额（DescribeAccountQuotas）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Integer
+| false
+| 
+
+| offset
+| Integer
+| false
+| 
+
+| search_word
+| String
+| false
+| 搜索关键字段
+
+| users
+| Array
+| false
+| 用户id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| account_quota_set
+| Array
+| false
+| 配额详情
+
+| account_quota_set[].access_key
+| Integer
+| false
+| 总数
+
+| account_quota_set[].account_api
+| Integer
+| false
+| account服务api请求数
+
+| account_quota_set[].session_api
+| Integer
+| false
+| session通道api请求
+
+| account_quota_set[].sub_user
+| Integer
+| false
+| 子账号数
+
+| account_quota_set[].user_id
+| String
+| false
+| 用户id
+
+| total_count
+| Integer
+| false
+| 总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAccountQuotas",
+  "users": [
+    "usr-KmJmFe0V"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "account_quota_set": [
+    {
+      "access_key": 27,
+      "account_api": 2000,
+      "session_api": 10000,
+      "sub_user": 15,
+      "user_id": "usr-KmJmFe0V"
+    }
+  ],
+  "action": "DescribeAccountQuotasResponse",
+  "ret_code": 0,
+  "total_count": 1
+}
+----

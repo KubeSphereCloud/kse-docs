@@ -1,0 +1,24 @@
+---
+title: "系统逻辑架构"
+draft: false
+weight: 10
+---
+
+QKE 基于 QingCloud 云平台创建，用户无需担心网络连通性以及是否支持容器运行环境。QKE 整体逻辑架构由资源虚拟化层、容器调度层以及应用服务平台组成。
+
+image::/images/cloud_service/container/qke/qke_structure_q.png[]
+
+
+* *资源虚拟化*
++
+通过云平台管理底层计算资源，包括主机、存储、网络，依托于 QingCloud 云平台 IaaS 层能力，并针对资源调用和管理的对接进行了优化处理。
+
+* *基于 Kubernetes 的容器调度层*
++
+QKE 基于 Kubernetes 完成对容器的编排、调度，并基于原生 Kubernetes 能力进行了增强和扩展，支持集群管理、资源管理、应用管理等功能的可视化控制。
+
+* *应用服务平台*
+
+** 通过 QKE 统一平台，整合并集成了不同的业务功能模块，构建了完整的容器平台。
+** 可扩展安装 KubeSphere、Kubernetes Dashboard 等可视化管理工具，并支持对接云平台服务及第三方开源服务。
+** CI/CD、微服务治理、配置管理、监控、日志、告警等模块提供了从代码提交、测试、发布等一整套完整的、易用的 DevOps 平台。

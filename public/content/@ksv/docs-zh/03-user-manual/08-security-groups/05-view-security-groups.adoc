@@ -1,0 +1,69 @@
+---
+title: "查看安全组列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台,安全组, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看安全组列表。"
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 598f08d444b64de0aa8e47194372bbc6
+:ks_xref_id: e7dc263363324a2aaf4144f5429d2625
+:ks_comp: ../../../components/
+:ks_title: 查看安全组列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看安全组列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台,安全组, 列表, 查看
+:ks_weight: 05
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看安全组列表。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=742a1ad4c8534a578b9c35b1a63a4054]
+
+include::../../../_custom/security-groups/security-group-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=0b23fe063039456d95b960c52d27ff40]
+
+include::../../../_custom/security-groups/security-group-steps.adoc[]
++
+--
+安全组列表展示项目中所有已创建的安全组。具体参数信息如下表所示。
+
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|安全组的名称。
+
+include::../../../_custom/security-groups/naming-convention.adoc[]
+
+|ID
+|安全组在系统中的通用唯一标识符，由系统自动分配。
+
+|关联资源
+|已加入到该安全组中的资源数量。
+
+|规则数量
+|安全组中已添加的规则数量。
+
+|所属用户
+|创建安全组的用户名称。
+
+|创建时间
+|创建安全组的时间。
+|===
+--
+
+. （可选）点击安全组列表上方的搜索框并设置搜索条件，可按名称或 ID 搜索安全组。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的安全组。
+
+. （可选）在安全组列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。

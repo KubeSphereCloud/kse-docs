@@ -1,0 +1,46 @@
+---
+title: "激活 KubeSphere 企业版"
+keywords: "激活，KubeSphere 企业版，Kubernetes，KubeSphere，云账号"
+description: "介绍如何激活 KubeSphere 企业版。"
+weight: 03
+---
+
+登录{ks_product_left} Web 控制台后，您需要绑定 KubeSphere 云账号，订阅{ks_product_left}，以使用它的全部功能。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+{ks_product_right} v4.1.1 为每位用户提供了单个集群 24 vCPU 30 天的免费试用许可。到期后，您需要付费订阅{ks_product_left}。
+|===
+
+== 操作步骤
+
+. 以具有 **platform-admin** 角色的用户登录{ks_product_left} Web 控制台。
+
+. 点击顶部的**绑定 KubeSphere 云账号**提示，输入云账号信息并授权，完成账号绑定。
+
+. 在**平台设置 > 云账号**页面，点击**前往订阅**。
+
+. 选择**订阅方案**和**订阅时长**，确认**集群 ID**，点击**提交订单**，并完成支付。
++
+--
+image:/images/ks-qkcp/zh/v4.1.1/activate-kse.png[activate-kse]
+--
+
+. 在支付成功页面，下拉到页面底部，点击**返回**按钮回到{ks_product_left} Web 控制台。
+
+== 激活成功
+
+如看到{ks_product_both}许可证状态显示数字，即表示激活成功，可开始使用{ks_product_left}。
+
+image:/images/ks-qkcp/zh/v4.1.1/activate-successful.png[activate-successful]
+
+== 激活失败
+
+* 每个云账号只能免费获取一个集群的免费订阅授权，如尝试在其他集群中激活，会提示{ks_product_both}激活失败。请点击**前往订阅**，订阅成功后，集群将自动获得授权。
+
+* 网络问题导致云账号绑定时数据同步失败，会提示{ks_product_both}激活失败。请点击**重新授权**，手动触发数据同步，重试激活。
+
+* 检测到云账号中此集群的许可证已过期，会提示{ks_product_both}激活失败。请点击**前往续订**，续订成功后，即可自动恢复使用。

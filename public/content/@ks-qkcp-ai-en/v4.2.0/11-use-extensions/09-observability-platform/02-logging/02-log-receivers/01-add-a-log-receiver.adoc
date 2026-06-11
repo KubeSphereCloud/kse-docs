@@ -1,0 +1,54 @@
+---
+title: "Add Log Receiver"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Cluster Settings, Log Receiver, Add Log Receiver"
+description: "Introduces how to add a log receiver."
+weight: 01
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **Logging > Log Receivers**
+
+
+This section describes how to add a log receiver.
+
+KubeSphere supports using Elasticsearch, OpenSearch, and Kafka as log receivers.
+
+* Only one log receiver of each type can be added.
+
+* KubeSphere uses OpenSearch as the default log receiver.
+
+* KubeSphere does not install Kafka by default and currently does not provide log analysis tools for Kafka. KubeSphere only provides the functionality to integrate with Kafka. If you need to use Kafka as a log receiver, you need to install Kafka by referring to the link:https://kafka.apache.org/documentation/[Kafka official documentation].
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The KubeSphere platform needs to have the **WizTelemetry Logging**, **WizTelemetry Events**, **WizTelemetry Auditing**, or **WizTelemetry Notification** extension installed and enabled.
+
+
+== Steps
+
+include::../../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+. On the **Log Receivers** page, click **Container Logs**, **Resource Events**, **Audit Logs**, or **Notification History** to open the log receiver list.
+
+. Click **Add Log Receiver** on the right side of the page.
+
+. In the **Add Log Receiver** dialog box, select **Elasticsearch**, **OpenSearch**, or **Kafka**.
+
+. Configure the parameters for the log receiver, then click **OK**.
++
+--
+include::../../../../../_custom/clusterManagement/logReceivers/logReceivers-para-addLogReceiver.adoc[]
+--

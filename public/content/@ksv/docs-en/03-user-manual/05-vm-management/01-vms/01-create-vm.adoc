@@ -1,0 +1,214 @@
+---
+title: "Create a VM"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, images, templates, creation"
+description: "Describes how to create a VM in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 004ddaea6d0d4aaaa5df943624f5cc29
+:ks_xref_id: 01f4249fde9e4b30b779635dae41c4c8
+:ks_comp: ../../../../components/
+:ks_title: Create a VM
+:ks_description: Describes how to create a VM in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, images, templates, creation
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to create a VM in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=9f46e6e14fa046b0ad2ac61dfa17e99e]
+
+* Make sure the number of VMs you want to create does not exceed the resource quota of your {ks_product} cluster.{ks_product} Basic Edition allows you to create up to nine VMs. If you create a VM after the resource quota has been reached, the VM will be locked. To create more VMs, you can subscribe to {ks_product} Developer or Enterprise Edition based on business requirements. For more information about editions and resource quotas, see link:../../../../01-introduction/03-editions/[Editions].
+* The user that you use has been granted the permissions to manage VMs. Only user **admin**, project administrators, and operators can manage VMs. Project viewers can view only VMs in the projects to which they belong.
+
+{ks_product} provides the following methods to create a VM:
+
+* link:#189b0c48c87244bcbc89fe512c41c59e[Create a VM from an image]
+* link:#bcdafbc0126b48a29d351f7cdaf592bc[Create a VM from a template]
+* link:#c131afce11134cf9a1b5d718941df40b[Create a VM from another VM]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Create a VM from an imagelink:[id=189b0c48c87244bcbc89fe512c41c59e]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, click **Create** and select **From Image**. The page for creating a VM appears.
+include::../../../../_custom-en/vms/vm-create-basic-parameters.adoc[]
+. In the **Images** section of the **Configuration** step, select the image type of the VM.
++
+--
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* {ks_product} supports images of major Linux distributions, such as Fedora, CentOS, and Ubuntu.
+* You can select **System Images**, **Private Images**, or **Shared Images** to create a VM. For more information about images of different types, see link:../../03-images/[Images].
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. In the **Configuration** section, configure the CPU and memory specification for the VM.
++
+--
+[cols="1a,3a"]
+|===
+|Parameter |Description
+
+|Default N cores N GiB
+|By default, the configuration is the same as the configuration defined in the image.
+
+|Standard 2 cores 4 GiB
+|2 CPU cores and 4 GiB memory. This configuration can be used for medium-sized business and general data processing.
+
+|Professional 4 cores 8 GiB
+|4 CPU cores and 8 GiB memory. This configuration can be used for enterprise business with high concurrency requirements.
+
+|Custom
+|The custom CPU and memory configuration.
+|===
+--
+
+:relfileprefix: ../../../../
+
+
+:relfileprefix: ../../../../
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom-en/vms/vm-create-parameters.adoc[]
+
+:relfileprefix: ./
+
+
+:relfileprefix: ./
+
+
+:relfileprefix: ./
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Create a VM from a templatelink:[id=bcdafbc0126b48a29d351f7cdaf592bc]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, click **Create** and select **From Template**. The page for creating a VM appears.
+include::../../../../_custom-en/vms/vm-create-basic-parameters.adoc[]
+. In the **Select Template** section, select a template in the project to create a VM.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the template.
+
+|ID
+|The universally unique identifier (UUID) of the template in the system. The UUID is automatically assigned by the system.
+
+|OS
+|The OS of the VM defined in the template. You can place the cursor on the OS to view the specific type and version of the OS.
+
+|CPU
+|The CPU cores of the VM defined in the template.
+
+|Memory
+|The memory size of the VM defined in the template.
+
+|System Disk
+|The system disk size of the VM defined in the template.
+|===
+--
+. In the **Configuration** section, configure the CPU and memory specification for the VM.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|CPU
+|The CPU cores that can be used for the VM.
+
+|Memory
+|The memory size that can be used for the VM.
+|===
+--
+
+:relfileprefix: ../../../../
+
+
+:relfileprefix: ../../../../
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom-en/vms/vm-create-parameters.adoc[]
+
+:relfileprefix: ./
+
+
+:relfileprefix: ./
+
+
+:relfileprefix: ./
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Create a VM from another VMlink:[id=c131afce11134cf9a1b5d718941df40b]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, click **Create** and select **From VM**. The page for creating a VM appears.
+include::../../../../_custom-en/vms/vm-create-basic-parameters.adoc[]
+. In the **VMs** section of the **Configuration** step, select an existing VM in the project to create a VM.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the VM.
+
+|ID
+|The UUID of the VM in the system. The UUID is automatically assigned by the system.
+
+|OS
+|The OS of the VM.  You can place the cursor on the OS to view the specific type and version of the OS.
+
+|IP Address
+|The IP address of the source VM.
+|===
+--
+
+:relfileprefix: ../../../../
+
+
+:relfileprefix: ../../../../
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom-en/vms/vm-create-parameters.adoc[]
+
+:relfileprefix: ./
+
+
+:relfileprefix: ./
+
+
+:relfileprefix: ./

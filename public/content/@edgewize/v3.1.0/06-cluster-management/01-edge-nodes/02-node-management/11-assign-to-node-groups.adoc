@@ -1,0 +1,45 @@
+---
+title: "分配到节点组"
+weight: 11
+---
+
+:ks_permission: **节点管理**
+
+本节介绍如何将边缘节点分配到节点组。
+
+节点组用于管理物理资源，可包含一个或多个边缘节点，支持与项目绑定以控制不同用户的资源管理权限。有关更多信息，请参阅link:../../../03-node-groups/[节点组]。
+
+== 前提条件
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+* link:../../../03-node-groups/01-node-groups-tree/01-create-a-node-group/[已创建一个节点组]。
+
+== 分配单个节点到节点组
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/nodes/nodes-oper-openListPage_new.adoc[]
+
++
+
+. 在需要操作的边缘节点右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**分配到节点组**。
+
+. 在**分配到节点组**对话框，选择一个节点组，点击**确定**，将边缘节点分配到该节点组。
+
+
+== 批量分配节点到节点组
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/nodes/nodes-oper-openListPage_new.adoc[]
+
++
+
+. 选择需要分配的节点左侧的复选框，然后在节点列表上方点击**分配到节点组**。
+
+. 在**分配到节点组**对话框，选择一个节点组，点击**确定**，将多个边缘节点分配到该节点组。

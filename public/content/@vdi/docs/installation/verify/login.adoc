@@ -1,0 +1,33 @@
+---
+title: 登录{product_name}
+weight: 10
+---
+
+== 操作须知
+
+* 登录页面支持中英文语言切换。
+* 首次登录{product_name}时，默认用户名为 ``admin``，默认初始密码为 ``password``。首次登录后请及时修改初始密码。
+
+== 前提条件
+
+* 已成功安装{platform_name_cn}。
+* 已在{platform_name_cn}的每个计算节点上部署 csdp-server。
+* 已在{platform_name_cn}上成功安装{product_name}。
+
+== 操作步骤
+. 在浏览器中输入{product_name}的访问地址。
++
+include::../../../../_components/note.adoc[]
+* 通过内网访问：访问地址是``https://<QingCloud 桌面云主机 IP地址>:8445``。
+* 通过公网访问：访问地址是``https://<QingCloud 桌面云主机所在 VPC 网络的公网 IP>:<8445端口转发后的端口>``。
+include::../../../../_components/table_footer.adoc[]
+
+. 点击回车键，进入{product_name}登录页面。
++
+image::/images/vdi/installation/login.png[,50%]
+. 输入默认用户名和密码。
+. 点击**登录**，即可进入{product_name}首页。
++
+include::../../../../_components/note.adoc[]
+若需要自定义登录页面的 Logo、首页的 Logo 等信息，请参照link:../../appendix/logo[修改品牌信息]进行修改。
+include::../../../../_components/table_footer.adoc[]

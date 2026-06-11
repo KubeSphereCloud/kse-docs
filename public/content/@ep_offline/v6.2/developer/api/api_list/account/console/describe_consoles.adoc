@@ -1,0 +1,134 @@
+---
+title: 查看控制台信息（DescribeConsoles）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_name
+| Array
+| false
+| Console的名称列表
+
+| consoles
+| Array
+| false
+| Console的ID列表
+
+| limit
+| Int
+| false
+| 偏移量
+
+| offset
+| Int
+| false
+| 起始坐标
+
+| search_word
+| String
+| false
+| 搜索关键字
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_set
+| Array
+| false
+| Console信息集合
+
+| console_set[].console_domain
+| String
+| false
+| Console对应的二级域名
+
+| console_set[].console_id
+| String
+| false
+| Console的ID
+
+| console_set[].console_name
+| String
+| false
+| Console的名称
+
+| console_set[].create_time
+| String
+| false
+| Console创建的时间
+
+| console_set[].description
+| String
+| false
+| Console的描述
+
+| console_set[].domain
+| String
+| false
+| Console对应的域名
+
+| console_set[].protocol
+| String
+| false
+| Console的协议
+
+| console_set[].zones
+| String
+| false
+| Console关联的可用区
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeConsoles",
+  "console_name": [
+    "TestingCloud"
+  ],
+  "consoles": [
+    "testingcloud"
+  ],
+  "limit": 20,
+  "offset": 0,
+  "search_word": "cloud"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeConsolesResponse",
+  "console_set": [
+    {
+      "console_domain": "console.testing.com",
+      "console_id": "testingcloud",
+      "console_name": "TestingCloud",
+      "create_time": "2021-07-22T09:39:05Z",
+      "description": "",
+      "domain": "testing.com",
+      "protocol": "http",
+      "zones": "testing,testing1a,testing1b,gamma"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

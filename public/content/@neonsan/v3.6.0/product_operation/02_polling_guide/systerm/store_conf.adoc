@@ -1,0 +1,65 @@
+---
+title: "查看 Store 配置信息"
+weight: 1
+---
+
+. 登录集群任一节点查看存储（Store）节点。
++
+[,shell]
+----
+neonsan list_store
+----
+. 逐个登录 NeonSAN Store 节点。 
+
+. 输入如下命令，查看 Store 的配置信息。
++
+[,shell]
+----
+cat /etc/neonsan/store.conf 
+----
+
+. 部分关键配置信息解释。
++
+[options="header",cols="1,3"]
+|===
+|配置信息 |说明及配置建议
+2+h|[store]
+|objectsize=4 
+a|非 NVMe 盘，objectsize 的值必须为 4。 即 [ssd.<N>].dev= 所指向的设备实际路径如果不是 /dev/nvme*，则 objectsize 必须 为 4M
+
+include::../../../../../_components/note_in_table.adoc[]
+配置文件中的设备路径有可能为软连接，其实际路径需使用 ``readlink`` 命令进行查询。
+include::../../../../../_components/footer_in_table.adoc[]
+
+
+2+h|[ssd.<N>]
+|dev 
+|配置文件中的设备路径应当为不可变名称（即重启后不会改变的路径名称） 
+|trim_on_reclaim 
+a|* NVMe 设备，开启 trim，该值设置为 1。 
+* 其他类型设备，不开启 trim，该值设置为 0。
+
+2+h|[dispatcher]
+|io_timeout 
+a|超时时间应与磁盘介质类型匹配。
+
+* NVMe 设备，该值设置为 3，单位秒。 
+* 其他类型设备，该值设置为 60，单位秒。
+
+2+h|[replicator]
+|rep_io_timeout 
+a|超时时间应与磁盘介质类型匹配。 
+
+* NVMe 设备，该值设置为 7，单位秒。 
+* 其他类型设备，该值设置为 65，单位秒。
+|===
+
+. 检查配置文件中的存储设备路径是否存在。
++
+[,shell]
+----
+cat /etc/neonsan/store.conf|grep -E '^dev='
+----
+
+
+

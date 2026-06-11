@@ -1,0 +1,39 @@
+---
+title: "链路追踪"
+weight: 08
+---
+
+== 核心功能
+
+1. 多协议的链路数据收集。支持通过多种协议（OpenTelemetry、Jaeger、Zipkin）收集链路数据，并进行集中存储，支持通过各种维度对链路数据进行查询。
+2. 零代码监测。支持自动捕获应用的链路数据，无需修改代码。支持 .NET, Java, Node.js, Python,  和 Go 语言。
+3. 服务拓扑。根据链路数据自动生成服务拓扑，支持跨集群的链路追踪，支持自动关联工作负载。
+
+== 架构设计
+
+=== 主要组件
+
+Whizard Telemetry ruler：接收数据并根据规则生成告警。
+
+=== 架构设计
+
+image::/images/ks-qkcp/zh/technical-white-papers/4338.png[]
+
+数据采集层：
+
+   - 基于 OpenTelemetry Collector 扩展，支持：
+     * 数据清洗与标准化
+     * 敏感信息过滤
+     * 基于规则的采样决策
+     * 数据分流转发
+     * 零代码监测，支持对 .NET、Java、Node.js、Python 和 Go 应用进行零代码监测
+
+存储引擎：
+
+   - 针对 OpenSearch 优化的数据模型
+   - 分时索引策略，平衡查询性能与存储效率
+
+分析可视化层：
+
+   - 交互式拓扑图生成引擎
+   - 支持自定义查询

@@ -1,0 +1,97 @@
+---
+title: "更新 Haproxy 配置"
+weight: 2
+---
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是原环境的 FirstBox 节点 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行如下命令行，查看新部署 Zone 的 Proxy 节点的 Hostname。
++
+命令行中的 `<zone_id>` 为新部署 Zone 的 ID，需根据实际情况进行填写。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/<zone_id>-proxy
+----
+
+. 执行如下命令行，登录新部署 Zone 的 Proxy 节点。
++
+命令行中的 `<host_name>` 需根据前文步骤查询结果进行填写。
++
+[source,shell]
+----
+ssh <host_name>
+----
+
+. 执行如下命令行，修改 Haproxy 的配置。
++
+[source,shell]
+----
+vi /etc/haproxy/haproxy.cfg
+----
++
+配置参考如下内容，其中 `<global-proxy0>` 与 `<global-proxy1>` 为原环境 Global Proxy 节点的 Hostname 或者 IP 地址，需根据实际情况进行填写。
++
+[source,shell]
+----
+    listen api-front
+        bind 0.0.0.0:7777
+        mode tcp
+        balance source
+        # 若 Global 为 https，则端口为 443, global-proxy0/1 替换为实际环境对应的节点hostname或者ip
+        server  apiserver_0 <global-proxy0>:443 check
+        server  apiserver_1 <global-proxy1>:443 check
+        # 若 Global 为 http，则端口为 7777
+        server  apiserver_0 <global-proxy0>:7777 check
+        server  apiserver_1 <global-proxy1>:7777 check
+
+    listen ws-front
+        bind 0.0.0.0:8565
+        mode tcp
+        balance roundrobin
+        server  ws_server_0 <global-proxy0>:8565 check
+        server  ws_server_1 <global-proxy1>:8565 check
+
+    listen io-front
+        bind 0.0.0.0:8000
+        mode tcp
+        balance source
+        server  io_server_0 <global-proxy0>:8000 check
+        server  io_server_1 <global-proxy1>:8000 check
+
+    listen tag-front
+        bind 0.0.0.0:8595
+        mode tcp
+        balance roundrobin
+        server tag_server_1 <global-proxy0>:8595 check
+        server tag_server_2 <global-proxy1>:8595 check
+
+    listen hinata-admin-front
+        bind 0.0.0.0:13000
+        mode tcp
+        balance source
+        server hinata_admin_server_0 <global-proxy0>:13000 check
+        server hinata_admin_server_1 <global-proxy1>:13000 check
+
+    listen hinata-api-front
+        bind 0.0.0.0:13001
+        mode tcp
+        balance source
+        server hinata_api_server_0 <global-proxy0>:13001 check
+        server hinata_api_server_1 <global-proxy1>:13001 check
+----
+
+. 执行如下命令行，重启 Haproxy 服务。
++
+[source,shell]
+----
+service haproxy restart
+----
+
+. 逐个登录新 Zone 的 Proxy 节点，重复执行以上步骤，修改 Haproxy 的配置。
+

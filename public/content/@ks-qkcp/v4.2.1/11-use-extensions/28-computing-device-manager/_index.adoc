@@ -1,0 +1,25 @@
+---
+title: "算力设备管理"
+weight:  28
+---
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|此扩展组件仅在 ``KubeSphere 旗舰版``提供。
+|===
+
+“算力设备管理”扩展组件用于在 Kubernetes 集群中统一纳管 NVIDIA GPU、Ascend NPU 等多种异构计算设备，提供资源共享、资源隔离、智能调度、实时监控告警等功能，可提升算力设备资源利用率，降低 AI 集群运维复杂度。
+
+// 参考：https://kubernetes.io/zh-cn/docs/tasks/manage-gpus/scheduling-gpus/
+// https://github.com/kubesphere-extensions/computing-device-manager/tree/main/docs
+
+部署算力设备，确保可被 Kubernetes 正常调度后，再安装“算力设备管理”扩展组件，集群左侧导航栏的**节点**菜单下才会显示**算力节点**选项。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|有关如何部署 GPU、NPU 等算力设备，请联系 KubeSphere 交付服务专家获取支持。
+|===

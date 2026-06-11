@@ -1,0 +1,25 @@
+---
+title: "调整限速"
+weight: 11
+---
+
+== 功能描述
+
+在某些场景下，如对集群进行性能测试时，需要取消虚拟机的 IO 限速，从而能有效的发挥其性能，故云易捷提供调整虚拟机**吞吐量**和 **IOPS** 的功能。
+
+== 操作步骤
+
+. 登录{product_console_name_en}。
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 **ExpressCloud 主机**页签，进入 ExpressCloud 主机列表页面。
+
+. 点击虚拟机所在行右侧的更多操作，选择**调整限速**。
+
+. 在弹出的**调整限速**窗口中，根据实际情况设置**吞吐量**和 **IOPS** 的值，点击**确定**即可。
++
+include::../../../../../../../_components/note.adoc[]
+**吞吐量**和 **IOPS** 支持用户自定义具体值或选择**不限速**。
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vm_manage_io_limit_1.png[,60%]
+

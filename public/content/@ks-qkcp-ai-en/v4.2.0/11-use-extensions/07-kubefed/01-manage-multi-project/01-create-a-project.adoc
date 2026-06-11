@@ -1,0 +1,69 @@
+---
+title: "Create a Federated Project"
+keywords: "Kubernetes, {ks_product}, Workspace Management, Federated Project, Create a Federated Project"
+description: "Describes how to create a federated project."
+weight: 01
+---
+
+
+:ks_permission: **Federated Project Management**
+:ks_navigation: **Federated Projects**
+
+
+This section describes how to create a federated project.
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+ifeval::["{file_output_type}" == "html"]
+For a federated project to run on multiple clusters, the workspace to which the federated project belongs must be authorized to access multiple clusters. For more information, see link:../../../../08-workspace-management/02-workspaces/01-create-a-workspace[Create a Workspace].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For a federated project to run on multiple clusters, the workspace to which the federated project belongs must be authorized to access multiple clusters. For more information, see the "Create a Workspace" chapter in the *KubeSphere Workspace and Project Management Guide*.
+endif::[]
+|===
+
+== Prerequisites
+
+* The **Federated Application Management** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the dialog box that appears, configure the project parameters, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../_custom/clusterManagement/projects/projects-para-name.adoc[]
+
+include::../../../../_custom/clusterManagement/projects/projects-para-aliasDescription.adoc[]
+
+|Cluster
+|The clusters available for the project. Resources in the project run on the clusters selected here. When creating a federated project, you can click **Add** to select multiple clusters so that resources in the project run on different clusters.
+|===
+
+After the project is created, you can invite users to join the project and deploy services in the project.
+--

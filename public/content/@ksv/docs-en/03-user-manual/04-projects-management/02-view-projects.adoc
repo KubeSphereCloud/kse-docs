@@ -1,0 +1,69 @@
+---
+title: "View projects"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, projects, list, view"
+description: "Describes how to view projects in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: dd417ac4135e4fbcb34f9f53f3b01b08
+:ks_xref_id: a4bf30c156584f2aaf985bf7e44ce505
+:ks_comp: ../../../components/
+:ks_title: View projects
+:ks_description: Describes how to view projects in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, projects, list, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view projects in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=df9e44dc1df34c6c9d6f579a69a657ff]
+
+include::../../../_custom-en/projects/project-view-steps.adoc[]
+
++
+
+--
+The following table describes the parameters.
+
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|
+include::../../../_custom-en/projects/project-name-description.adoc[]
+
+|ID
+|
+include::../../../_custom-en/projects/project-alias-description.adoc[]
+
+|Status
+|The status of the project.
+
+|Members
+|The number of project members.
+
+|VMs
+|The number of VMs created in the project.
+
+|CPU Usage
+|The CPU cores used in the project.
+
+|Memory Usage
+|The memory used in the project.
+
+|Role
+|The project role of the current user.
+|===
+--
+
+. (Optional) Click the search box above the project list and specify a condition to search for projects by name. For example, use **Name:ab** to search for projects whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

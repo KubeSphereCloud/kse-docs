@@ -1,0 +1,43 @@
+---
+title: '新增节点配置要求'
+weight: 1
+---
+
+== 硬件要求
+
+* 建议新增节点的 CPU、内存、网卡等硬件配置要求与原集群中节点服务器保持一致即可。
+
+* 混插节点直通模式需部署 NeonSAN v3.1.5 及以上版本。
+
+* 信创平台混插节点部署 Bcache 缓存软件，需使用 NeonSAN V3.5.1 及以后版本。
+
+* 非信创平台混合节点部署 icas/opencas 缓存软件，无 NeonSAN 版本要求。
+
+* 混插节点缓存盘需使用 NVMe SSD，其他类型 SSD 暂不支持。
+
+* icas/opencas 和 bcache 缓存软件不能在同一RG内融合部署使用。
+
+* 混插节点 icas 和 bcache 缓存盘和数据盘的配比 5%-10%，不低于 5%； icas 内存与缓存配比为 1%：即在基准内存 64GB 基础上，每增加 1 个 3.2T 的缓存，则内存需增加 32G。bcache 内存与缓存配比为 0.8%： 即在基准内存 64GB 基础上，每增加 1 个 3.2T 的缓存，则内存需增加 25.6G。
+
+* 同一集群内存在全闪和混插存储池，混插采用 TCP 网络，全闪采用 RDMA 网络。
+
+更加详细的硬件配置指导可参考link:https://box.yunify.com/s/yRkPCFrmHLSRrbC[《{product_name} 存储系统最佳实践指南》]。
+
+== 系统要求
+
+* 新增节点的系统版本建议与原集群节点的操作系统保持一致。
+
+* 原集群使用 qingstor-installer 2.0.0 以上工具部署。 
+
+* 除 SSH 软件之外，安装系统时不勾选任何多余的软件包。安装后需校验是否有 ethtool 包，若无，则需补充安装。 
+
+* 安装系统时，设置用户名和密码，并且建议所有节点的账户名和密码一致。 
+
+* 若环境需安装部署卷性能监控，系统盘要求不低于 480G SATA SSD。Promethus 作为 NeonSAN 的监控
+数据需要单独分区使用，大小为 300G。
+
+* 网卡如需要配置 bond，则需额外手动安装 ifenslave 包（pool/main/i/ifenslave/ifenslave_xxx.deb），且 bond 名必须命名为 bond0 或 bond1。
+
+* 网卡如需配置 vlan，则需额外手动装 vlan 包（pool/main/v/vlan/vlan_xxx.deb），且 vlan 名必须类似于 vlan123 或 vlan234。
+
+* 系统安装完成后，多重启几次服务器，确保网络依旧连通，磁盘顺序不乱。

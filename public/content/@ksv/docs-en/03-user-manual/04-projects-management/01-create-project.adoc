@@ -1,0 +1,59 @@
+---
+title: "Create a project"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, projects, creation"
+description: "Describes how to create a project in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 4f5b020bd5db4153bf6cf9e256b062e4
+:ks_xref_id: 2830ba8cc26f435595b72c7ca2a6ef08
+:ks_comp: ../../../components/
+:ks_title: Create a project
+:ks_description: Describes how to create a project in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, projects, creation
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to create a project in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=78367d03ce7145b7bd7f73bf42978742]
+
+Make sure you are logged in as user **admin**. Project administrators and operators can edit projects, but have no permissions to create a project.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=71e1b7077f3c49f788f573953a7b5aae]
+
+include::../../../_custom-en/projects/project-manage-steps.adoc[]
+
+. In the top navigation bar, click **Projects** to open the **Projects** page.
+. In the dialog box that appears, specify **Name**, **Alias**, and **Description** for the project. The following table describes the parameters. Create a project
++
+--
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|
+include::../../../_custom-en/projects/project-name-description.adoc[]
+
+|Alias
+|
+include::../../../_custom-en/projects/project-manage-prerequisites.adoc[]
+
+|Description
+|
+include::../../../_custom-en/projects/project-description.adoc[]
+|===
+--
+. Click **Create**. The project appears in the project list after it is created.

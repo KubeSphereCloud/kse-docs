@@ -1,0 +1,84 @@
+---
+title: "修改节点间连接方式"
+weight: 4
+---
+
+== 注意事项
+
+* NeonSAN 存储节点间连接方式，不可在线修改。
+* 如需修改，**必须先停止所有业务**，再将所有存储节点做停机处理后，才能手动修改。
+
+== 操作步骤
+
+. 停止所有使用 NeonSAN 服务的相关业务。包括云平台计算服务中的所有虚拟机资源。
+
+. 逐一登录 NeonSAN 存储节点，停止所有存储节点上的 store 服务。
++
+[,shell]
+----
+supervisorctl stop neonstore
+----
+
+. 逐一登录 NeonSAN 存储节点，修改该存储节点上的 store 配置文件。根据实际情况，修改如下 ``type`` 字段为 TCP 或 RDMA
++
+[,shell]
+----
+vi /etc/neonsan/store.conf
+
+... ...
+[connection]
+type="RDMA"
+... ...
+----
+
+. 逐一登录 NeonSAN 存储节点，启动所有存储节点上的 store 服务。
++
+[,shell]
+----
+supervisorctl start neonstore
+----
+
+. 通过如下命令查看所有节点 store 服务是否正常启动。
++
+[,shell]
+----
+neonsan list_store
+----
+
+. 若有节点未正常启动，需排查原因，直至所有节点 store 服务均正常启动后，继续操作下一步操作。
+
+. 检查节点间的连接数。
+
++
+[,shell]
+----
+neonsan list_peer -store_id 4
+----
++
+include::../../../../../../_components/note.adoc[]
+* 每个 store 节点应有（N-1）*2*2 个节点与它建立链接。N 表示该节点所在存储池内状态为 ``OK`` 的存储节点个数。
+* 较低版本的 NeonSAN 可使用 API 查询当前存储节点的连接数：``curl "http://localhost:2601/debug?op=list_peer"``
+include::../../../../../../_components/table_footer.adoc[]
+
+. 节点间的连接方式修改为 RDMA 时，需配置流控，可参考link:https://box.yunify.com/s/9o7pKsHDaACAXS4[《NeonSAN RoCE 流控指南》]，并进行如下检查。
++
+* 查看是否 active，若不是 active，需要排查原因。
++
+[,shell]
+----
+ibv_devinfo | grep stat
+----
++
+回显示例：
++
+[,shell]
+----
+			state:			PORT_ACTIVE (4)
+			state:			PORT_ACTIVE (4)
+			state:			PORT_ACTIVE (4)
+			state:			PORT_ACTIVE (4)
+----
+
+* 执行 check_network.sh 脚本。脚本详细内容可参考附录。
+
+

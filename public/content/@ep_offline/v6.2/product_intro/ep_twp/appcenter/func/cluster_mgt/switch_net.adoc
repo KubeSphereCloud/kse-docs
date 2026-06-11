@@ -1,0 +1,27 @@
+---
+title: "切换网络"
+weight: 17
+---
+
+集群网络切换的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_09.png[]
+
+功能流程说明：
+
+. 将 change-vxnet-audit 注册到 metadata service。
+. 不同角色节点按照 order 升序执行 change_vxnet_pre_check 脚本。
++
+* 如果返回异常（非0），执行步骤 3。
+* 如果返回 0，执行步骤 4。
+
+. 删除注册到 metadata service 内部的 change-vxnet-audit 数据，返回失败，操作结束。
+. 停止服务，不同角色节点按照 order 升序执行 stop cmd 脚本。
+. 从 metadata service 中注销集群数据。
+. 关闭每个节点的 confd agent 服务。
+. 切换网络（修改集群 vpc/vxnet 信息，为集群节点分配新 IP）。
+. 重新注册集群信息到 metadata service。
+. 将 change-vxnet-audit 注册到 metadata service。
+. 启动集群每个节点的 confd agent 服务。
+. 不同角色节点按照 order 升序执行 start cmd 脚本。
+. 删除注册到 metadata service 内部的 change-vxnet-audit 数据。

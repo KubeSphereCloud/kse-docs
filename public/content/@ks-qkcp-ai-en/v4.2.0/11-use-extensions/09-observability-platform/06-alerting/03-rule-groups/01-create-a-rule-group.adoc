@@ -1,0 +1,107 @@
+---
+title: "Create a Rule Group"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Monitoring and Alerting, Rule Group, Create Rule Group"
+description: "Describes how to create an alerting rule group."
+weight: 01
+---
+
+
+:ks_permission: **Rule Group Management**
+:ks_navigation: **Monitoring and Alerting > Rule Groups**
+
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-createAnAlertingPolicy.adoc[]
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+KubeSphere only supports creating custom rule groups and does not support creating built-in rule groups.
+|===
+
+== Prerequisites
+
+* The **WizTelemetry Alerting** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../../
+
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+:relfileprefix: ../../../../../
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-exposeMetrics_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+. Log in to the KubeSphere web console as a user with the pass:a,q[{ks_permission}] permission and enter your cluster or workspace.
++
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+// include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-setBasicInfo.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-addAlertRule.adoc[]
++
+====
+include::../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-commonParameters_new.adoc[]
+
+* Rule Template
++
+--
+Select the monitoring target and trigger condition from the dropdown list.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Resource Type
+|The type of workload to be monitored, such as Deployment, StatefulSet, DaemonSet. Only displayed in project alert rule settings.
+
+|Monitoring Target
+|The target to be monitored, such as cluster nodes, workloads, etc.
+
+include::../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-triggerCondition.adoc[]
+|===
+--
+
+* Custom Rule
++
+--
+Specify the monitoring target and trigger condition using a PromQL expression.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-duration.adoc[]
+
+|Alert Level
+|
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-para-alertLevel.adoc[]
+
+include::../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-ruleExpression.adoc[]
+|===
+--
+====
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-clickOK.adoc[]

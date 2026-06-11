@@ -1,0 +1,26 @@
+---
+title: 部署时有多个 KS-VM 的 IP 冲突
+weight: 01
+---
+
+== 问题现象
+
+KS-VM 的 IP 冲突，例如 pgpool1 和 zoocassa0 这 2 个 KS-VM 的 IP 冲突。
+
+== 问题原因
+
+已提前为每个角色都规划了固定 IP，但和 VIP 地址冲突。
+
+== 解决方法
+
+. 登录 FirstBox。
+. 进入 `/pitrix/conf` 配置文件目录。
+. 修改生成后的 settings 配置文件里冲突 IP 其中一个为正确的目标 IP。
+. 执行以下命令，识别一下修改后的信息。
++
+[source]
+----
+gen_node_list.py
+----
+. 若 VM 已经创建好了，还需要登录到对应的 VM 修改 `/etc/network/interface` 文件里的静态 IP 为正确 IP。
+. 在 FirstBox 上 SSH 连接这两个节点，确保都能正确连接。

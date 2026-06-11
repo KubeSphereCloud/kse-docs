@@ -1,0 +1,100 @@
+---
+title: 修改IAM用户信息（ModifyIAMUserAttributes）
+weight: 8
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| auto_generate_passwd
+| Integer
+| false
+| 自动生成密码
+
+| change_passwd_first_login
+| Integer
+| false
+| 第一次登录是否需要修改密码
+
+| console_access
+| Integer
+| false
+| 允许控制台访问
+
+| description
+| String
+| false
+| 描述
+
+| owner
+| String
+| false
+| 所有者
+
+| passwd
+| String
+| false
+| 密码
+
+| path
+| String
+| false
+| 路径
+
+| programmatic_access
+| Integer
+| false
+| 允许编程访问
+
+| user
+| String
+| true
+| IAM用户ID
+
+| user_name
+| String
+| false
+| IAM用户名称
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| IAM用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMUserAttributes",
+  "passwd": "Abcd#1234",
+  "user": "iamu-6ktnazef"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMUserAttributesResponse",
+  "ret_code": 0,
+  "user_id": "iamu-6ktnazef"
+}
+----

@@ -1,0 +1,155 @@
+---
+title: "Disallow Creation of Privileged Containers in Non-Exempted Projects"
+description: "Describes how to configure constraint templates and constraints to disallow the creation of privileged containers in certain projects."
+weight: 01
+---
+
+:ks_permission: ** cluster-admin **
+
+
+This section describes how to configure constraint templates and constraints to disallow the creation of privileged containers in certain projects, in order to block high-risk operations and prevent the misuse of privileged containers.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **Gatekeeper** extension must be installed and enabled in the KubeSphere platform.
+
+== Step 1: Create a Constraint Template
+
+Log in to a cluster node and execute the following command to create a constraint template.
+
+[source,yaml]
+----
+cat <<EOF | kubectl apply -f -
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8spspprivilegednamespace
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sPSPPrivilegedNamespace
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            excludedNamespaces:
+              type: array
+              items:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8spspprivilegednamespace
+
+        violation[{"msg": msg}] {
+          input.review.kind.kind == "Pod"
+          not namespace_excluded
+          container := input.review.object.spec.containers[_]
+          container.securityContext.privileged == true
+          msg := sprintf("Privileged container is not allowed in namespace %v", [input.review.object.metadata.namespace])
+        }
+
+        namespace_excluded {
+          input.parameters.excludedNamespaces[_] == input.review.object.metadata.namespace
+        }
+EOF
+----
+
+== Step 2: Create a Constraint
+
+Continue by executing the following command to create a constraint.
+
+The `excludedNamespaces` field is used to specify the namespaces where privileged containers are allowed, i.e., exempted projects. You can add more namespaces.
+
+[source,yaml]
+----
+cat <<EOF | kubectl apply -f -
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPPrivilegedNamespace
+metadata:
+  name: disallow-privileged-containers
+spec:
+  parameters:
+    excludedNamespaces:
+      - kube-system
+      - extension-gatekeeper
+      - extension-openpitrix
+      - kube-node-lease
+      - kube-public
+      - kubesphere-controls-system
+      - kubesphere-logging-system
+      - kubesphere-monitoring-federated
+      - kubesphere-monitoring-system
+      - kubesphere-system
+EOF
+----
+
+
+== Step 3: Verify the Result
+
+Through the above configuration, when a user attempts to create a pod using a privileged container and the pod belongs to a project not listed in `excludedNamespaces`, Gatekeeper will block the request.
+
+You can verify this by following the steps below to create privileged pods in both a non-exempted project (the system project `default`) and an exempted project (the system project `kube-system`).
+
+. On a cluster node, create a privileged pod for the non-exempted project `default`.
++
+--
+[source,bash]
+----
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: privileged-pod
+  namespace: default
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      securityContext:
+        privileged: true
+EOF
+----
+
+The expected result is that the privileged container cannot be created in this project.
+
+----
+Error from server (Forbidden): error when creating "STDIN": admission webhook "validation.gatekeeper.sh" denied the request: [disallow-privileged-containers] Privileged container is not allowed in namespace default
+----
+--
+
+. On a cluster node, create a privileged pod for the exempted project `kube-system`.
++
+--
+[source,bash]
+----
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: privileged-pod
+  namespace: kubesphere-system
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      securityContext:
+        privileged: true
+EOF
+----
+
+The expected result is that the privileged container is successfully created in this project.
+
+----
+pod/privileged-pod created
+----
+--

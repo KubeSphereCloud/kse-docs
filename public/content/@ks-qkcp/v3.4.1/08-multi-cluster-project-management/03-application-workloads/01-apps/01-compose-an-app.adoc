@@ -1,0 +1,80 @@
+---
+title: "创建应用"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 多集群项目, 应用, 创建应用"
+description: "介绍如何在多集群项目中创建应用。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 824eae92581d41ebbf23cbc6460d38f3
+:ks_xref_id: 1d9d5bd182c1466f98c8ac900c35e38d
+:ks_comp: ../../../../components/
+:ks_title: 创建应用
+:ks_keywords: Kubernetes, {ks_product}, 多集群项目, 应用, 创建应用
+:ks_description: 介绍如何在多集群项目中创建应用。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何在多集群项目中创建应用。
+
+include::../../../../_custom/projectManagement/apps/apps-compose-description.adoc[]
+
+
+== 前提条件link:[id=6869fd39b5004ae6bcf7cd4af83acf29]
+
+* {empty}
+include::../../../../_custom/multi-clusterProjectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-prer-enableAppManagment.adoc[]
+
+ifeval::["{file_output_type}" == "html"]
+
+* 如需为应用启用应用治理功能，{ks_product_right}平台需要启用应用治理扩展组件。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+* 如需为应用启用应用治理功能，{ks_product_right}平台需要启用应用治理扩展组件。有关更多信息，请参阅《{ks_product_right}平台管理指南》的“扩展组件管理”章节。
+
+endif::[]
+
+
+== 操作步骤link:[id=85d0270b45164811a56ec02dd570f3c3]
+
+include::../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**应用**页面，点击**创建**。
+
+. 在**基本信息**页签，设置应用的基本信息，然后点击**下一步**。
++
+--
+include::../../../../_custom/projectManagement/apps/apps-basic-para.adoc[]
+--
+
+. 在**服务设置**页签，点击**创建服务**，选择**有状态服务**或**无状态服务**为应用创建服务，然后点击**下一步**。
++
+--
+include::../../../../_custom/clusterManagement/services/services-para-statelessStatefulExternal.adoc[]
+--
+
+. 在**路由设置**页签，点击**添加路由规则**为应用创建路由规则，然后点击**创建**。
++
+--
+include::../../../../_custom/multi-clusterProjectManagement/routes/routes-create-ClusterDiff.adoc[]
+
+include::../../../../_custom/clusterManagement/routes/routes-para-routingRules.adoc[]
+
+应用创建完成后将显示在应用列表页面。
+--

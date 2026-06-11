@@ -1,0 +1,71 @@
+---
+title: "删除物理网络"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 物理网络, 删除"
+description: "介绍如何使用{ks_product_both}Web 控制台删除物理网络。"
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 341c2b3a25514c5ea3287fdfa43cf8a9
+:ks_xref_id: dd0c7e16830041a3a69ce662bb409bc2
+:ks_comp: ../../../../components/
+:ks_title: 删除物理网络
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台删除物理网络。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 物理网络, 删除
+:ks_weight: 05
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台删除物理网络。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=e527518cecef480e85b4d8c613612cb1]
+
+* 请确保您有使用{ks_product_both}Web 控制台**物理资源**模块的权限。**物理资源**模块仅对系统 **admin** 用户可见。
+
+* 请确保待删除的物理网络中未创建物理子网。如果物理网络中的子网数不为 0，删除时会报错。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 删除单个物理网络link:[id=0f3c63029dbd43ecb69834b0ce708dc8]
+
+include::../../../../_custom/networks/physical-network-steps.adoc[]
+
+. 找到目标物理网络，点击右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**删除**。
+
+. 在弹出的对话框中点击**确定**可删除目标物理网络。
++
+--
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+物理网络删除后无法恢复，请谨慎操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 批量删除物理网络link:[id=1de00ee126744b91a8dccddde8b01872]
+
+include::../../../../_custom/networks/physical-network-steps.adoc[]
+
+. 在物理网络列表页面，选择需要删除的物理网络名称左侧的复选框，然后在列表上方点击**删除**。
+
+. 在弹出的对话框中点击**确定**可批量删除多个物理网络。
++
+--
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+物理网络删除后无法恢复，请谨慎操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

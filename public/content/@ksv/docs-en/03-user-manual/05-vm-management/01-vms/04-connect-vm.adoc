@@ -1,0 +1,54 @@
+---
+title: "Connect to a VM"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, connection"
+description: "Describes how to connect to a VM in the {ks_product} web console."
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 195b11b36cdb40709d022e9ee1a6c673
+:ks_xref_id: 366d2673b70c482e9960563b0592a2bf
+:ks_comp: ../../../../components/
+:ks_title: Connect to a VM
+:ks_description: Describes how to connect to a VM in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, connection
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to connect to a VM in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=41d7f146429942d2857cad2375ddd8e3]
+
+include::../../../../_custom-en/vms/vm-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=511c98af7250432d859fb9902a363cfc]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, find the VM that you want to manage, right-click on the blank area to open the shortcuts for VM operations, and then select a connection method in **Connect VM** from the drop-down list. {ks_product} provides the following methods to connect to a VM:
++
+--
+* **Terminal**: We recommend that you use Terminal to connect to a VM. This method is applicable only to VMs that are created by using standard images. You cannot use this method to connect to VMs that are created by using ISO images.
+* **VNC**: Use VNC to connect to a VM. This method is applicable to VMs that are created by using standard images and ISO images.
+--
++
+--
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+We recommend that you use Terminal for Linux VMs and use VNC or other clients for Windows VMs.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. In the new window that appears, use VNC or Terminal to connect to the VM.

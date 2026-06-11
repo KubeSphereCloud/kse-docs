@@ -1,0 +1,68 @@
+---
+title: "证书/密钥加密"
+weight: 03
+---
+
+. 在证书目录同一级目录下添加脚本文件，此处以 etcd 为例。
++
+[,bash]
+----
+# etcd / k8s / registry 证书的加解密方式类似
+# /etc/ssl/etcd/ssl/start-pre.sh
+#!/bin/bash
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+filepath=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+dir=$(dirname "$filepath")
+#KEY_PASS=$(systemd-ask-password "Please enter the key pass:")
+if [[ "$KEY_PASS" = "" ]]; then
+  echo "empty key_pass"
+  exit
+fi
+for keyfile in `grep "Proc-Type: 4,ENCRYPTED" --include=*.pem --include=*.key -l $dir/*`
+do
+  echo $keyfile
+  echo $KEY_PASS | /usr/bin/openssl rsa -in $keyfile -out $keyfile -passin stdin
+done
+----
++
+[,bash]
+----
+# /etc/ssl/etcd/ssl/start-post.sh
+
+#!/bin/bash
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+filepath=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+dir=$(dirname "$filepath")
+#KEY_PASS=$(systemd-ask-password "Please enter the key pass:")
+if [[ "$KEY_PASS" = "" ]]; then
+  echo "empty key_pass"
+  exit
+fi
+for keyfile in `egrep "BEGIN (RSA )?PRIVATE KEY" --include=*.pem --include=*.key -l $dir/*`
+do
+  echo $keyfile
+  echo $KEY_PASS | /usr/bin/openssl rsa -in $keyfile -out $keyfile -aes256 -passout stdin
+done
+----
+
+. 证书加解密
+
+* 解密
++
+[,bash]
+----
+KEY_PASS=*** /etc/kubernetes/pki/start-pre.sh
+KEY_PASS=*** /var/lib/kubelet/pki/start-pre.sh
+KEY_PASS=*** /etc/ssl/etcd/ssl/start-pre.sh
+----
+
+* 加密
++
+[,bash]
+----
+KEY_PASS=*** /etc/kubernetes/pki/start-post.sh
+KEY_PASS=*** /var/lib/kubelet/pki/start-post.sh
+KEY_PASS=*** /etc/ssl/etcd/ssl/start-post.sh
+----

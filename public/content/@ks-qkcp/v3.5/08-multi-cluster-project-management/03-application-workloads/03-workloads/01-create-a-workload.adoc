@@ -1,0 +1,280 @@
+---
+title: "创建工作负载"
+keywords: "Kubernetes, {ks_product}, 多集群项目, 应用负载, 工作负载, 创建工作负载"
+description: "介绍如何创建工作负载。"
+weight: 01
+---
+
+// :ks_include_id: 55433e6a6c2a4a079e43990019e1f277
+:ks_xref_id: 9cb94dc077a5455ebc5f5915456f7cf3
+:ks_comp: ../../../../components/
+:ks_title: 创建工作负载
+:ks_keywords: Kubernetes, {ks_product}, 多集群项目, 应用负载, 工作负载, 创建工作负载
+:ks_description: 介绍如何创建工作负载。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 工作负载**
+
+
+include::../../../../_custom/clusterManagement/workloads/workloads-desc-createAWorkload.adoc[]
+
+
+== 前提条件link:[id=83559ef309ea4c108b69bd45a2d34e83]
+
+include::../../../../_custom/multi-clusterProjectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+
+== 操作步骤link:[id=557335dc302846be89415a713204cde2]
+
+请参阅link:#d7cfd5c1366a4118b40a8f9cad1599f7[参数描述]设置工作负载的参数。
+
+include::../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/workloads/workloads-multi-project-oper-openListPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/workloads/workloads-multi-project-oper-createAWorkload-ClusterDiff.adoc[]
+
+
+
+
+== 参数描述link:[id=d7cfd5c1366a4118b40a8f9cad1599f7]
+
+以下介绍如何设置工作负载的参数。
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-basicInformation.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-podReplicas.adoc[]
+
+* 容器组设置 > 添加容器
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-addContainer.adoc[]
+--
+
+* 容器组设置 > 添加容器 > 容器设置
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-setImageNameTypeResource.adoc[]
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerImage.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerName.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerType.adoc[]
+
+include::../../../../_custom/clusterManagement/projects/projects-para-containerQuotas.adoc[]
+|===
+--
+
+* 容器组设置 > 添加容器 > 端口设置
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-Port.adoc[]
+--
+
+* 容器组设置 > 添加容器 > 镜像拉取策略
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-imagePullPolicy.adoc[]
+--
+
+* 容器组设置 > 添加容器 > 健康检查
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-healthCheck.adoc[]
+--
+
+* 容器组设置 > 添加容器 > 健康检查 > 添加探针
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-addProbe.adoc[]
+--
+
+* 容器组设置 > 添加容器 > 生命周期管理
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-lifecycleManagement.adoc[]
+--
+
+* 容器组设置 > 添加容器 > 生命周期管理 > 添加动作
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-addAction.adoc[]
+--
+
+* 容器组设置 > 添加容器 > 启动命令
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-startCommand.adoc[]
+--
+
+* 容器组设置 > 添加容器 > 环境变量
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-environmentVariables.adoc[]
+--
+
+* 容器组设置 > 添加容器 > 容器组安全上下文
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerSecurityContext.adoc[]
+--
+
+* 容器组设置 > 添加容器 > 同步主机时区
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-syncTimeZone.adoc[]
+--
+
+* 容器组设置 > 更新策略
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-updatePolicy.adoc[]
+--
+
+* 容器组设置 > 更新策略 > 滚动更新设置
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-rollingUpdate.adoc[]
+--
+
+* 容器组设置 > 容器组安全上下文
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-podSecurityContext.adoc[]
+--
+
+* 容器组设置 > 容器组调度规则
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-podSchedulingRules.adoc[]
+--
+
+* 容器组设置 > 容器组调度规则 > 自定义规则
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-customRules.adoc[]
+--
+
+* 容器组设置 > 添加元数据
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-PodMetadata.adoc[]
+--
+
+* 容器组设置 > 添加元数据
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-PodMetadata.adoc[]
+--
+
+* 存储设置
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-mountVolume.adoc[]
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-collectLogsOnVolume.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/workloads/workloads-desc-enableLogCollectionProject.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-addPVCTemplate.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountVolume.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountSecretOrConfigmap.adoc[]
+|===
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-oper-editDeleteVolume.adoc[]
+--
+
+* 存储设置 > 添加持久卷声明模板
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-volumeTemplate.adoc[]
+--
+
+* 存储设置 > 挂载卷 > 持久卷
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-persistentVolume.adoc[]
+--
+
+* 存储设置 > 挂载卷 > 临时卷
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-temporaryVolume.adoc[]
+--
+
+* 存储设置 > 挂载卷 > HostPath 卷
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-hostpathVolume.adoc[]
+--
+
+* 存储设置 > 挂载配置字典或保密字典
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountConfigmapSecret.adoc[]
+--
+
+* 高级设置
++
+--
+为工作负载管理的容器组指定 IP 池和节点，并设置工作负载的元数据。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-podIpPool.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-selectNode.adoc[]
+
+|添加元数据
+|
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-setWorkloadMetadata.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-Metadata.adoc[]
+|===
+--
+
+* 集群差异设置
++
+--
+为不同集群中的工作负载基于容器、端口和环境变量进行差异化设置。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../../_custom/multi-clusterProjectManagement/workloads/workloads-oper-setClusterDiff.adoc[]
+
+|===
+--

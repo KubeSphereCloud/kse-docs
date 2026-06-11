@@ -1,0 +1,12 @@
+---
+title: "存储资源管理（CSI）"
+weight: 3
+---
+
+和 CCM 一样，CSI 也属于 Kubernetes 的插件之一。CSI 是容器存储的标准接口，主要负责提供 Pod 的外部存储功能。
+
+QKE 内置了 https://github.com/yunify/qingcloud-csi[qingcloud-csi] 插件，用于和青云 IaaS 存储进行交互。*csi-qingcloud* 主要分为 *csi-qingcoud-controller* 和 *csi-qingcloud-node* 两个部分，前者负责与 IaaS 接口交互，后者负责具体的磁盘挂载。
+
+image::/images/ep_offline/qke_twp/05_csi.png[]
+
+QKE 除了安装 csi-qingcloud-controller 插件外，还会一并创建 StorageClasses 服务（简称 SC）。SC 主要负责为 Pod 创建动态存储 PersistentVolume，随后由 csi-qingcloud-controller 与云平台 API 交互创建存储硬盘，接受由 Pod 对应节点的 csi-qingcloud-node 挂载 Volume 到 Pod 上，完成动态存储的交互。

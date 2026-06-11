@@ -1,0 +1,86 @@
+---
+title: "View Application List"
+keywords: "Kubernetes, {ks_product}, Project Management, Application, View Application List"
+description: "Describes how to view the application list."
+weight: 04
+---
+
+
+:ks_permission: **Application Instance View**
+:ks_navigation: **Application Workloads > Applications**
+
+
+This section describes how to view the application list.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+====
+* The application list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the application.
+
+include::../../../../_custom/projectManagement/apps/apps-para-status_v4.adoc[]
+
+|Workspace
+|The workspace to which the application belongs.
+
+|Project
+|The project to which the application belongs.
+
+|Cluster
+|The cluster to which the application belongs.
+
+|Creator
+|The user who created the application.
+
+|Application Type
+|The type of the application template, such as **Helm Application**, **YAML Application**, or **Operator Application**.
+
+|Application Template
+|The application template used to create the application. Only displayed for template-based applications.
+
+|Version
+|The version number of the application.
+
+* For template-based applications, the Helm Chart version is displayed.
+
+// * For composed apps, the user-defined version number is displayed.
+
+|Update Time
+|The time when the application was updated.
+|===
+--
+
+* Click the search box above the list and enter a keyword to search for applications by name.
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

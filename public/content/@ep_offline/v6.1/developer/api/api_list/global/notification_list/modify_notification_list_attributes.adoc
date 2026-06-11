@@ -1,0 +1,82 @@
+---
+title: 修改通知列表属性（ModifyNotificationListAttributes）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| account_contacts_substitute
+| String
+| false
+| 需要修改的接收人id
+
+| notification_items
+| Array
+| false
+| 联系方式id
+
+| notification_list
+| String
+| false
+| 接收人id
+
+| notification_list_name
+| String
+| false
+| 接收人姓名
+
+| remarks
+| String
+| false
+| 备注
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_list_id
+| String
+| false
+| 接收人id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyNotificationListAttributes",
+  "notification_items": [
+    "ni-xxxxxxxx",
+    "ni-xxxxxxxx"
+  ],
+  "notification_list": "nl-xxxxxxxx",
+  "notification_list_name": "test111",
+  "owner": "usr-xxxxxxxx",
+  "remarks": "test",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyNotificationListAttributesResponse",
+  "notification_list_id": "nl-xxxxxxxx",
+  "ret_code": 0
+}
+----

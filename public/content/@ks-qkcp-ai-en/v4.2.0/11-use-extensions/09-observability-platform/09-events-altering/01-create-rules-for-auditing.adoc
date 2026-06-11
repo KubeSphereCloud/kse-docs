@@ -1,0 +1,78 @@
+---
+title: "Create Alerting Rules for Events/Auditing"
+description: "Introduces how to create alerting rules for events and auditing."
+weight: 01
+---
+
+This section describes how to define alerting rules for Kubernetes native events and Kubernetes/KubeSphere auditing events.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform.
+
+* The **WizTelemetry Events Alerting** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+.   On any cluster node, create a YAML file to define alerting rules for events and auditing for this cluster.
++
+--
+Click link:../02-example-rules-for-auditing[here] to view the complete example of alerting rules. Please refer to the link:../02-example-rules-for-auditing/#_alerting-rule-parameter-description[parameter description] to set the parameters for the alerting rules.
+
+A simple example is as follows:
+
+[,yaml]
+----
+apiVersion: logging.whizard.io/v1alpha1
+kind: ClusterRuleGroup
+metadata:
+  name: example-auditing-rule
+  namespace: kubesphere-logging-system
+spec:
+  type: auditing
+  rules:
+    - desc: all action not need to be audit
+      expr:
+        kind: list
+        list:
+          - get
+          - list
+          - watch
+      name: ignore-action
+    - desc: all operator need to be audit
+      expr:
+        kind: list
+        list:
+          - create
+          - delete
+          - update
+          - patch
+      name: action
+    - desc: pod
+      expr:
+        kind: macro
+        macro: ObjectRef.Resource="pods"
+      name: pod
+    - desc: service
+      expr:
+        kind: macro
+        macro: ObjectRef.Resource="services"
+      name: service
+    - desc: the alias of the user related to audit event
+      expr:
+        alias: User.username
+        kind: alias
+      name: user
+----
+--
+
+. Execute the following command to create the CRD (Custom Resource Definition).
++
+[,bash]
+----
+kubectl apply -f xxx.yaml  # Note to replace the YAML file name
+----
+
+. After successful execution, search for **ClusterRuleGroup** on the cluster's **Custom Resource Definitions** page.
+
+. Click **ClusterRuleGroup** to enter its details page, and view, edit, or delete the alerting rules on the right-hand page.

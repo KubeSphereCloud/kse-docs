@@ -1,0 +1,75 @@
+---
+title: "禁用资源事件"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, 资源事件, 禁用资源事件"
+description: "介绍如何禁用资源事件扩展组件。"
+weight: 02
+---
+
+// :ks_include_id: 1cee6a8c3985450aa30b8b46bc61d0f6
+:ks_xref_id: 4fef63aefbb64b1ea9d7b5df46d10b4d
+:ks_comp: ../../../../components/
+:ks_title: 禁用资源事件
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, 资源事件, 禁用资源事件
+:ks_description: 介绍如何禁用资源事件扩展组件。
+:ks_weight: 02
+:ks_icon:
+
+
+本节介绍如何禁用资源事件扩展组件。
+
+
+== 前提条件link:[id=17862e8eb58340d989a216719dbc2157]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=e6105559ea7f429c88943ff92dd86f3f]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:events:enabled** 参数设置为 **false**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  events:
+    enabled: false
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在 **kubectl** 对话框，执行以下命令删除资源事件相关资源：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+helm delete ks-events -n kubesphere-logging-system
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

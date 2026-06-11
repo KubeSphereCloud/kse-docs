@@ -1,0 +1,55 @@
+---
+title: "密钥创建与使用"
+description: 如何进行密钥管理快速入门
+draft: false
+keywords: 云服务器, QingCloud，安全，密钥管理，kms，快速入门
+---
+
+== 创建密钥
+
+. 在管理控制台菜单栏，选择**产品与服务** > **安全服务** >**密钥管理服务**，进入密钥管理服务页面。
+
++
+image::/images/cloud_service/security/kms/kms_1.png[]
+
+. 点击**创建**，弹出创建用户 CMK 窗口。
++
+
+image::/images/cloud_service/security/kms/create_cmk.png[]
+
+. 填写相应的参数信息，然后点击**提交**。
++
+ ** 名称：用户密钥的名称。
+ ** 密钥别名：用户密钥的别名。对密钥的使用， 您既可以使用密钥ID，也可以使用密钥别名。
+ ** 密钥类型：对称加密。
+ ** 加密算法：SYMMETRIC_DEFAULT
+ ** 密钥轮转：是否打开密钥自动轮换功能。默认每年轮转一次。选项：开启，关闭。
+ ** 描述：用户密钥的描述信息。
+
+== 云服务器加载密钥
+
+您可以在创建云服务器时选择密钥。目前仅云服务器类型为``企业级e2``时支持加密功能。
+
+image::/images/cloud_service/security/kms/create_intance_1.png[]
+
+== 备份制作镜像加载密钥
+
+您可以在备份制作镜像时加载密钥。
+
+. 在管理控制台菜单栏，选择**产品与服务** > **存储服务** >**备份**，进入备份页面。
++
+image::/images/cloud_service/security/kms/backup_list.png[]
+
+. 右键点击要创建镜像的备份，然后点击**制作成新镜像**，进入根据云服务器备份制作镜像页面。
++
+image::/images/cloud_service/security/kms/create_image_1.png[]
+
+. 输入镜像名称并选择加密，然后选择 KMS 密钥，点击**提交**。
+
+image::/images/cloud_service/security/kms/create_image_2.png[]
+
+== SSD企业级硬盘加载密钥
+
+您可以在创建SSD企业级硬盘时加载密钥。
+
+image::/images/cloud_service/security/kms/create_disk_key.png[]

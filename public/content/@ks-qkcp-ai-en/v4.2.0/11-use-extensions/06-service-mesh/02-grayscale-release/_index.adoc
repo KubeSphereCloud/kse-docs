@@ -1,0 +1,26 @@
+---
+title: "Canary Release"
+keywords: "Kubernetes, {ks_product}, Project Management, Canary Release"
+description: "Introduction to managing canary release tasks."
+weight: 02
+layout: "second"
+---
+
+This section describes how to use the canary release feature.
+
+When a container version needs an update, if the new version is released directly to the production environment without sufficient testing, it may pose significant risks to the business. Using the canary release feature allows production traffic to be directed to the new version under test, thereby exposing and fixing any potential issues with the new version before its official release.
+
+KubeSphere supports the following canary release modes:
+
+* Blue-green deployment: Sends business traffic to the new version for testing. If the new version is not functioning properly, business traffic can be immediately switched back to the old version.
+
+* Canary release: Allocates business traffic in a certain proportion between the new and old versions, ensuring business continuity while testing the new version.
+
+* Traffic mirroring: Sends a copy of business traffic to the new version for testing without actually exposing the new version.
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Canary release only supports composed apps and does not support template-based applications.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]

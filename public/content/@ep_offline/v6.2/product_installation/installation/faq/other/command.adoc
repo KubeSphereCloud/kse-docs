@@ -1,0 +1,55 @@
+---
+title: 常用命令
+weight: 110
+---
+
+== 修改硬件信息
+
+=== 命令格式
+
+[source,shell]
+----
+/pitrix/cli/modify-node-attributes.py
+----
+
+=== 参数说明
+
+[cols='1,4'] 
+|===
+| 参数 | 说明 
+
+| -h  | 查询该命令其他各参数及说明。
+| -i  | 待修改硬件信息的物理节点的 IP 地址。
+| -d  | 待修改的磁盘的盘符，需根据实际情况进行修改，多个磁盘用逗号隔开。
+| -t  | 指定磁盘的类型，例如 ssd 类型。
+| -S  | 指定磁盘的 size，需根据实际情况进行修改。
+| -s  | 磁盘的可用状态，1 为可用，0 为不可用。
+|===
+
+=== 常用操作示例
+
+* 修改磁盘类型
++
+若待部署环境中，使用 ICAS 磁盘作为数据盘，收集节点信息时可能会将做了 RAID 的 SSD 盘识别成 SATA 盘，需手动修改磁盘的类型为 SSD。
++
+[source,shell]
+----
+/pitrix/cli/modify-node-attributes.py -i 172.16.80.10 -d sdb -t ssd
+----
+
+* 修改磁盘大小
++
+若需修改磁盘的 size，可以执行如下命令进行修改。
++
+[source,shell]
+----
+/pitrix/cli/modify-node-attributes.py -i 172.16.80.10 -d sdc -S 3200
+----
+* 修改磁盘状态
++
+若收集到了多余的磁盘信息，可以执行如下命令修改对应的磁盘状态为不可用。
++
+[source,shell]
+----
+/pitrix/cli/modify-node-attributes.py -i 172.16.80.10 -d sdd -s 0
+----

@@ -1,0 +1,46 @@
+---
+title: "Release Notes for v1.4.0"
+linkTitle: "{ks_title}"
+keywords: "release notes, {ks_product_full}, {ks_product}, v1.4.0"
+description: ""
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 7b89843bcaa64bd0b491e1fa1700e43c
+:ks_xref_id: 2a0669eb673547108cccd52db6903ae8
+:ks_comp: ../../components/
+:ks_title: Release Notes for v1.4.0
+:ks_description:
+:ks_keywords: release notes, {ks_product_full}, {ks_product}, v1.4.0
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== New featureslink:[id=335f5ec664454c279e13a7611927c681]
+
+* Add support for manually setting an IP address when creating a VM.
+* Add support for exposing VM services.
+* Add support for viewing projects to which a user belongs and roles of the user.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Enhancementslink:[id=ef32dc1b99e94d77ae315d363222937d]
+
+* Add support for modifying network configuration when adjusting VM resources.
+* Add support for displaying VM shortcut operation menu with a right click on the VM list page.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Fixed issueslink:[id=35b0203735f04305996af82786689194]
+
+* Remove the terminal connection method for VMs created using ISO images.
+* Fix the issue of unable to uninstall KSV because the uninstallation is stuck.
+* Fix the issue that the disk information on the list page is not updated after disk extension.

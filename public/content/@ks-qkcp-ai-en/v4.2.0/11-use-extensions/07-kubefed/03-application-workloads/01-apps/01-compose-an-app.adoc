@@ -1,0 +1,67 @@
+---
+title: "Create a Composed App"
+keywords: "Kubernetes, {ks_product}, Federated Project, App, Create App"
+description: "Describes how to create an app in a federated project."
+weight: 01
+---
+
+:ks_permission: **Federated Project Management**
+:ks_navigation: **Application Workloads > Apps**
+
+
+This section describes how to create a composed app in a federated project.
+
+include::../../../../../_custom/projectManagement/apps/apps-compose-description.adoc[]
+
+
+== Prerequisites
+
+* The **Federated Cluster App Management** extension must be installed and enabled on the KubeSphere platform.
+
+* To enable application governance features for the app, the **KubeSphere Service Mesh** extension must be installed and enabled on the KubeSphere platform.
+
+* {empty}
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-prer-requiredPermission_v4.adoc[]
+
+
+== Steps
+
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage_v4.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Apps** page, click **Create**.
+
+. On the **Basic Information** tab, configure the basic information for the app, then click **Next**.
++
+--
+include::../../../../../_custom/projectManagement/apps/apps-basic-para.adoc[]
+--
+
+. On the **Service Settings** tab, click **Create Service**, select **Stateful Service** or **Stateless Service** to create a service for the app, then click **Next**.
++
+--
+include::../../../../../_custom/clusterManagement/services/services-para-statelessStatefulExternal.adoc[]
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more information, please refer to link:../../02-services/01-create-a-stateful-or-stateless-service[Create a Stateful or Stateless Service].
+|===
+--
+
+. On the **Routing Settings** tab, click **Add Routing Rule** to create a routing rule for the app, then click **Create**.
++
+--
+include::../../../../../_custom/multi-clusterProjectManagement/routes/routes-create-ClusterDiff.adoc[]
+
+include::../../../../../_custom/clusterManagement/routes/routes-para-routingRules.adoc[]
+
+After the app is created, it will be displayed on the app list page.
+--

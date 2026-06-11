@@ -1,0 +1,108 @@
+---
+title: DescribeLoginAccounts
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| accounts
+| Array
+| false
+| 账户列表
+
+| console
+| String
+| false
+| 
+
+| limit
+| Integer
+| false
+| 查询条数
+
+| login_accounts
+| Array
+| false
+| 登录账户列表
+
+| login_server
+| String
+| false
+| 登录服务器
+
+| offset
+| Integer
+| false
+| 查询偏移量
+
+| search_word
+| String
+| false
+| 查询关键字
+
+| status
+| Array
+| false
+| 账户状态列表
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_account_set
+| Array
+| false
+| 查询账户结果
+
+| total_count
+| Integer
+| false
+| 查询总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "accounts": [
+    "account_1",
+    "account_2"
+  ],
+  "console": "console",
+  "limit": 20,
+  "login_accounts": [
+    "login_account_1",
+    "login_account_2"
+  ],
+  "login_server": "localhost",
+  "offset": 10,
+  "search_word": "admin",
+  "status": [
+    "activated"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeLoginAccountsResponse",
+  "login_account_set": [],
+  "ret_code": 0,
+  "total_count": 0
+}
+----

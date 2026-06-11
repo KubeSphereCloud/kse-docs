@@ -1,0 +1,46 @@
+---
+title: "Nginx 服务恢复"
+weight: 11
+---
+
+== 运维场景
+
+集群断电异常后，通过服务巡检发现 Nginx 服务异常。
+
+
+== 操作步骤
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 根据巡检结果，登录至 Nginx 服务异常的 KS 节点。
+
+. 执行如下命令，重启 Nginx 服务。
++
+[source,shell]
+----
+/etc/init.d/nginx restart
+----
+
+. 检查 Nginx 服务状态，返回结果为 ``active (running)`` 即可。
++
+[source,shell]
+----
+/etc/init.d/nginx status
+----

@@ -1,0 +1,94 @@
+---
+title: "安装 RadonDB PostgreSQL"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, PostgreSQL, 安装 RadonDB PostgreSQL"
+description: "介绍如何安装 RadonDB PostgreSQL 数据库应用。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: a1bec15f57574d649a44b162f423e910
+:ks_xref_id: f9f2b976328f409ab8860671c68f43e2
+:ks_comp: ../../../components/
+:ks_title: 安装 RadonDB PostgreSQL
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, PostgreSQL, 安装 RadonDB PostgreSQL
+:ks_description: 介绍如何安装 RadonDB PostgreSQL 数据库应用。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何安装 RadonDB PostgreSQL 数据库应用。
+
+
+== 前提条件link:[id=281420ab14124c308dca9dbe682d6224]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+* 您需要获取 RadonDB PostgreSQL 应用授权。有关更多信息，请联系{ks_product_both}技术支持。
+
+
+== 操作步骤link:[id=706d506e9e68410f8061cb2b8e9ae5a2]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在页面右侧选择**安装 > RadonDB PostgreSQL**。
+
+. 在**基本信息**页签，设置 RadonDB PostgreSQL 应用的基本信息和安装位置，然后点击**下一步**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|RadonDB PostgreSQL 应用的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 32 个字符。
+
+|版本
+|RadonDB PostgreSQL 应用的版本。
+
+|描述
+|RadonDB PostgreSQL 应用的描述信息。描述可包含任意字符，最长 256 个字符。
+
+|位置
+|RadonDB PostgreSQL 应用所属的企业空间、集群和项目。
+|===
+--
+
+. 在**应用设置**页签，设置 PostgreSQL 数据库的参数，然后点击**安装**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|内核版本
+|PostgreSQL 数据库的内核版本。目前支持 PostgreSQL 12、PostgreSQL 13、PostgreSQL 14 和 PostgreSQL 15。
+
+|资源
+|系统为 PostgreSQL 数据库预留的 CPU 和内存资源，同时也是 PostgreSQL 数据库可使用的 CPU 和内存资源上限。
+
+|存储类 
+|PostgreSQL 数据库使用的存储系统对应的存储类。如果下拉列表中没有符合需要的存储类，您需要联系平台管理员创建存储类。
+
+|卷
+|PostgreSQL 数据库使用的卷大小，单位为 GiB。
+
+|数据节点数量
+|PostgreSQL 数据库的数据节点数量。取值范围为 2 到 8。
+|===
+
+RadonDB PostgreSQL 安装完成后将显示在 RadonDB 应用列表中。
+--

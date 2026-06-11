@@ -1,0 +1,41 @@
+---
+title: "View Volume Snapshot List"
+keywords: "Kubernetes, {ks_product-en}, cluster management, storage, volume snapshots, view volume snapshot list"
+description: "Learn how to view volume snapshots."
+weight: 02
+---
+
+
+:ks_permission: **Volume Snapshots Viewing**
+:ks_navigation: **Storage > Volume Snapshots**
+
+
+include::../../../../_custom-en/clusterManagement/volumeSnapshots/volumeSnapshots-desc-viewAVolumeSnapshotList.adoc[]
+
+
+== Prerequisites
+
+* **KubeSphere Storage** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject.adoc[]
+
+== Steps
+
+. Log in to the {ks_product-en}  web console with a user who has the pass:a,q[{ks_permission}] permission, and enter your cluster or project.
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
++
+====
+include::../../../../_custom-en/clusterManagement/volumeSnapshots/volumeSnapshots-para-volumeSnapshotList_v4.adoc[]
+
+* Select a project from the dropdown list at the top left of the list to view volume snapshots in a specific project.
+
+include::../../../../_custom-en/clusterManagement/volumeSnapshots/volumeSnapshots-oper-searchForVolumeSnapshots.adoc[]
+
+include::../../../../../_ks_components-en/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components-en/oper-customizeColumns.adoc[]
+====

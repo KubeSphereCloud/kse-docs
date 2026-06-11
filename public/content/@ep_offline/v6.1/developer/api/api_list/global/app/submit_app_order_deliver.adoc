@@ -1,0 +1,61 @@
+---
+title: License订单发货（SubmitAppOrderDeliver）
+weight: 25
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| deliver
+| String
+| true
+| 订单详情
+
+| deliver_type
+| String
+| true
+| 订单类型
+
+| order_id
+| String
+| true
+| 订单id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| order_id
+| String
+| false
+| 订单id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "deliver": "{\"attachment_content\":\"\", \"filext\":\"zip\", \"filename\":\"test\",\"resource_type\":\"app_version\", \"category\":\"\", \"sub_category\":\"\",\"attachment_type\":\"archive\"}",
+  "deliver_type": "license",
+  "order_id": "appor-n8b1xa8c8x"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+null
+----

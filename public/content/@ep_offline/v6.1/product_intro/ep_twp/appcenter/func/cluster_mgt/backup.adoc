@@ -1,0 +1,19 @@
+---
+title: "备份集群"
+weight: 20
+---
+
+备份集群功能的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_11.png[]
+
+功能流程说明：
+
+. 如果配置包定义 backup selector：
+.. 执行 backup selector 获取集群中支持备份的节点列表。
+.. 不同角色的非 replica 节点按照 order 升序排列，执行 backup cmd 脚本。
+. 如果配置包未定义 backup selector：
+.. 如果未定义 backup with replica，集群节点过滤，排除掉 replica 节点，否则使用全部节点。
+.. 按照 order 升序排列，执行 backup cmd 脚本。
+. 节点的硬盘做快照备份（kvm 备份挂载盘，lxc 备份主机），默认增量备份，同时校验备份链长度和个数。
+. 备份完成，不同角色节点按照 order 升序执行 backup cleanup 脚本。

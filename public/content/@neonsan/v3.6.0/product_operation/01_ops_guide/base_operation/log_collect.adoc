@@ -1,0 +1,157 @@
+---
+title: "日志收集"
+weight: 2
+---
+
+NeonSAN 提供脚本工具用于收集相关日志。
+
+== NeonSAN v3.0.2 及之后版本
+
+可在 NeonSAN 集群的任一安装有 neonsan-tool 服务的节点服务器上，输入如下命令查看该工具的使用方法。
+
+[,shell]
+----
+log_collect -h
+----
+
+回显示例：
+
+[,shell]
+----
+Usage of log_collect:
+  -dest string
+    	destination directory to store log,eg:/tmp/ (default "./")
+  -node_list string
+    	node list file
+----
+
+参数说明：
+[options="header",cols="1,2,1"]
+|===
+|参数 |说明 |是否必须
+|-dest	|收集后的日志存放路径	|否
+|-node_list	|待收集日志的节点列表	|否
+|===
+
+=== 使用指南
+
+* 该工具用于收集 NeonSAN集群日志，即各节点服务器上位于：``/var/log/`` 这个目录下的日志文件。
+* 若不指定参数 ``-dest``，则日志存放路径为当前路径。
+* 当收集后的日志存放路径所在磁盘或分区空间小于 5G 时，工具会提醒是否需要继续收集日志。使用者可根据实际情况选择是否需要继续收集日志。
+* 参数 ``-node_list`` 指定的节点列表文件格式如下，节点间用空格隔开：
++
+[,shell]
+----
+cat ip_list.txt
+
+192.168.101.25 192.168.101.26 192.168.101.27 192.168.101.28
+----
+
+* 若不指定参数 ``-node_list``，则默认收集所有 center 节点与 store 节点日志，即如下两个命令输出的节点。
++
+[,shell]
+----
+neonsan list_center
+
+neonsan list_store
+----
+
+=== 使用示例
+
+* 示例一：不指定存放路径与节点列表文件
++
+[,shell]
+----
+log_collect
+----
+
+* 示例二：仅指定节点列表文件
+** 查看节点列表
++
+[,shell]
+----
+cat /root/ip_list.txt 
+
+192.168.101.25 192.168.101.27
+----
+
+** 收集日志
++
+[,shell]
+----
+log_collect -node_list /root/ip_list.txt
+----
+
+* 示例三：仅指定日志存放路径
++
+[,shell]
+----
+log_collect -dest /root/rose
+----
+
+* 示例四：同时指定日志存放路径与节点列表文件
++
+[,shell]
+----
+log_collect -dest /root/rose -node_list /root/ip_list.txt
+----
+
+
+== NeonSAN v3.0.2 以前版本
+
+. 获取日志收集工具 collect-inspect.tar.gz。
++
+[,shell]
+----
+https://box.yunify.com/s/J7qttCJtyDawjWx
+----
+
+. 将该工具包上传至 NeonSAN 集群任一节点服务器。
+
+. 解压该工具包：
++
+[,shell]
+----
+# tar -zxvf collect-inspect.tar.gz
+……
+inspect/
+inspect/cluster_parameter
+inspect/inspection_neonsan.sh
+----
+
+. 修改配置文件参数 cluster_parameter：
++
+[,shell]
+----
+vi inspect/cluster_parameter
+----
++
+回显
++
+[,shell]
+----
+store_ip:192.168.101.25,192.168.101.26
+ips:192.168.101.25,192.168.101.26,192.168.101.27,192.168.101.28
+----
++
+说明：
++
+* ``store_ip`` 字段为 NeonSAN 集群所有 store 节点 IP，以逗号隔开。
+* ``ips`` 字段为 NeonSAN 集群所有节点 IP，以逗号隔开。
+
+. 给 inspection_neonsan.sh 脚本附上可执行权限：
++
+[,shell]
+----
+chmod a+xxx inspect/inspection_neonsan.sh
+----
+
+. 执行 inspection_neonsan.sh 脚本，收集日志。脚本执行完成后，会在当前目录生成生成几个.tar 文件，即为当前收集的日志包。
++
+[,shell]
+----
+./inspection_neonsan.sh
+----
++
+image::/images/neonsan/ops_guide_1.png[]
+

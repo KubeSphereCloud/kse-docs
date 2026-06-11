@@ -1,0 +1,31 @@
+// 登录 FirstBox
+
+
+. 执行如下命令，登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+include::../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie
+include::../../../../_components/table_footer.adoc[]
+
+. 检查当前服务状态。
++
+[source,shell]
+----
+systemctl status installer-server
+----
++
+include::../../../../_components/note.adoc[]
+* 服务状态显示如下，即为正常： +
+``Active: active (running)``
+* 若服务异常，需调查原因并解决后，才能继续。
+include::../../../../_components/table_footer.adoc[]
+
+
+
+

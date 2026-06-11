@@ -1,0 +1,48 @@
+---
+title: "Grafana for WhizardTelemetry"
+keywords: "Kubernetes, {ks_product-en}, Grafana, monitoring, dashboard, observability"
+description: "Learn how to use the Grafana for WhizardTelemetry extension."
+weight: 16
+---
+
+This section describes how to use the "Grafana for WhizardTelemetry" extension.
+
+This extension provides an open and composable data visualization and monitoring analysis platform, with numerous built-in dashboards (Dashboard) to enhance the visualization capabilities of the WhizardTelemetry Observability Platform. It offers rich data display and analysis features, allowing users to explore, query, and visualize metrics, logs, and trace data from various data sources (such as Prometheus, Loki, Elasticsearch, InfluxDB, PostgreSQL, etc.) in an intuitive and interactive manner.
+
+**Configuration Instructions:**
+
+After installing the Grafana for WhizardTelemetry extension, you need to modify the extension configuration to expose the Grafana service to access the Grafana console.
+
+[,yaml]
+----
+  service:
+    enabled: true
+    type: ClusterIP
+    loadBalancerIP: ""
+    loadBalancerClass: ""
+    loadBalancerSourceRanges: []
+    port: 80
+    targetPort: 3000
+    # nodePort: 32000
+----
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+|type: ClusterIP  |Default installation method, accessible only within the cluster via a virtual IP address.
+
+|type: NodePort  |Exposes the service using NodePort, with the port specified by the `nodePort` parameter. If not specified, a random port within the range of 30000 to 32767 is chosen.
+
+After configuration, the Grafana console can be accessed via <NodeIP>:<nodePort>.
+
+|type: LoadBalancer |Exposes the Grafana service externally using a cloud provider's load balancer. To achieve this, the LoadBalancer type service requires a load balancer plugin and infrastructure environment support, and relevant annotations need to be set. For more information, contact your infrastructure environment provider.
+|===
+
+
+[.admon.tip,cols="a"]
+|===
+|Tip
+
+|
+After successfully accessing the Grafana console, you can log in using the default account and password (**admin/admin**).
+|===

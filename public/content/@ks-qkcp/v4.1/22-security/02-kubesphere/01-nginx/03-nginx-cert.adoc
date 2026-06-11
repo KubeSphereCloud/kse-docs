@@ -1,0 +1,39 @@
+---
+title: "nginx 证书"
+weight: 03
+---
+
+. 生成 TLS 证书并创建 secret。
++
+--
+[,yaml]
+----
+kubectl create secret generic ca-secret \
+--from-file=tls.crt=server.crt \
+--from-file=tls.key=server.key \
+--from-file=ca.crt=ca.crt
+----
+--
+
+. 为 ingress 配置 TLS 证书 secret。
++
+--
+[,bash]
+----
+kubectl -n kubesphere-system edit ingress kubesphere
+----
+
+配置文件样例：
+
+[,yaml]
+----
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true" # <- 新增
+    nginx.ingress.kubernetes.io/auth-tls-secret: default/ca-secret            # <- 新增
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"                  # <- 新增
+spec:
+----
+--

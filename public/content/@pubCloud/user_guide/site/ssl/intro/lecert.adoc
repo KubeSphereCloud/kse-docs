@@ -1,0 +1,17 @@
+---
+title: "LE 证书介绍"
+description: LE证书介绍
+draft: false
+enableToc: false
+keywords: 云计算, ssl，LE
+weight: 5
+---
+Let's Encrypt 证书简称 LE 证书，是一种永久免费的 SSL证书。Let's Encrypt 是一个由非营利性组织互联网安全研究小组（ISRG）提供的免费、自动化和开放的证书颁发机构（CA）。借助 Let's Encrypt 颁发的证书可以为我们的网站免费启用 HTTPS(SSL/TLS) 。
+
+为了提高证书密钥的时效性，Let's Encrypt 证书到期时间为 3 个月，每 3 个月需要重新续约。Let's Encrypt 官方提供了几种证书的申请方式方法，可以通过自动化脚本实现证书的自动签发/续签。
+
+申请 LE 证书成功，可将其应用于负载均衡器，或下载到任意云服务器中使用。
+
+当**应用于负载均衡器的 LE 证书**即将到期时，证书服务将自动发起证书续签申请，续签成功后替换证书密钥文件，并自动将新的证书应用于负载均衡等关联服务中。实现证书永久自动续约，无需担心证书到期。
+
+购买及使用 LE 证书，请参考 link:../../manual/lecert_manual/[LE 证书操作]。

@@ -1,0 +1,53 @@
+---
+title: "使应用仓库和 Helm Chart 仓库同步"
+keywords: "Kubernetes, {ks_product}, 企业空间, 应用仓库, 使应用仓库和 Helm Chart 仓库同步"
+description: "介绍如何同步应用仓库和 Helm Chart 仓库。"
+weight: 04
+---
+
+// :ks_include_id: 6ea00a7abd7c43efbb5101b2a68aae08
+:ks_xref_id: 2937c8d0079c4eb49234088966e1a598
+:ks_comp: ../../../../components/
+:ks_title: 使应用仓库和 Helm Chart 仓库同步
+:ks_keywords: Kubernetes, {ks_product}, 企业空间, 应用仓库, 使应用仓库和 Helm Chart 仓库同步
+:ks_description: 介绍如何同步应用仓库和 Helm Chart 仓库。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **应用仓库管理**
+:ks_navigation: **应用管理 > 应用仓库**
+
+
+本节介绍如何使应用仓库和 Helm Chart 仓库同步。
+
+如果您在添加应用仓库时已设置同步周期，系统将根据同步周期自动同步应用仓库和 Helm Chart 仓库。您也可以按照本节介绍的步骤手动使应用仓库和 Helm Chart 仓库同步。
+
+
+== 前提条件link:[id=144ee2d52a8c4eb28895ea3764d0a7ec]
+
+
+:relfileprefix: ../../../../
+* 您需要加入一个企业空间并在企业空间中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:06-workspace-management/06-workspace-settings/03-workspace-members/_index.adoc[企业空间成员]、xref:06-workspace-management/06-workspace-settings/04-workspace-roles/_index.adoc[企业空间角色]和xref:06-workspace-management/06-workspace-settings/05-departments/_index.adoc[部门]。
+
+// include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-prer-enableAppManagment.adoc[]
+
+
+== 操作步骤link:[id=b02d0c13dc9d4e6ba8686ccbfdc7b896]
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 选择需要同步的应用仓库左侧的复选框，然后在列表上方点击**同步**。
++
+--
+系统将根据 Helm Chart 仓库更新应用仓库。
+--

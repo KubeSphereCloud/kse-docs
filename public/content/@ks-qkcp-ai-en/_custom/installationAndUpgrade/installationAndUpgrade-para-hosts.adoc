@@ -1,0 +1,29 @@
+// :ks_include_id: 011f0f1d835947cbb1b37e80036c0b2e
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|name
+|The user-defined server name.
+
+|address
+|The SSH login IP address of the server.
+
+|internalAddress
+|The internal IP address of the server within the subnet.
+
+|port
+|The SSH port number of the server. If using the default port 22, this parameter can be omitted.
+
+|user
+|The SSH login username for the server. This user must be the **root** user or another user with **sudo** command execution privileges. If using the **root** user, this parameter can be omitted.
+
+|password
+|The SSH login password for the server. If **privateKeyPath** is already set, this parameter can be omitted.
+
+|privateKeyPath
+|The path to the SSH login private key for the server. If **password** is already set, this parameter can be omitted.
+
+|arch
+|The hardware architecture of the server. If the server's hardware architecture is arm64, set this parameter to **arm64**; otherwise, do not set it. The installation package by default only supports scenarios where all cluster nodes are of x86_64 or arm64 architecture. If the hardware architecture of cluster nodes is not identical, technical assessment is required for the specific situation. Please consult QingCloud official solution experts or delivery service experts.
+|===

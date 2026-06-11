@@ -1,0 +1,32 @@
+// :ks_include_id: 654fbac8f3b34fdfbdfb17fa841b2b0a
+
+. Transfer the KubeSphere {ks_product_ver} installation package to any cluster node and log in to that node.
+
+. Execute the following command to extract the installation package and enter the directory generated after extraction (replace `<package name>` with the actual name of the installation package and `<directory>` with the directory generated after extraction):
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+tar -zxvf <package name>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+cd <directory>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to grant execute permission to the KubeKey binary file **kk**:
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+sudo chmod +x kk
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--

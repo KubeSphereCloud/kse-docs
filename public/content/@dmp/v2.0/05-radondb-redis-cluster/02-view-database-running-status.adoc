@@ -1,0 +1,126 @@
+---
+title: "查看运行状态"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Redis Cluster, 查看实例的运行状态"
+description: "介绍如何查看 RadonDB Redis Cluster 实例的运行状态。"
+weight: 02
+---
+
+:ks_db_product: Redis Cluster
+
+本节介绍如何查看 RadonDB {ks_db_product} 实例的运行状态。
+
+
+== 前提条件
+
+* 已创建 RadonDB {ks_db_product} 实例。更多信息，请参阅link:../01-install-radondb-redis-cluster[创建 {ks_db_product} 实例]。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
++
+--
+已创建的 {ks_db_product} 实例将显示在 {ks_db_product} 实例列表中。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|{ks_db_product} 实例在{ks_product_both}平台的名称。
+
+|状态
+|{ks_db_product} 实例的运行状态。
+
+* **创建中**：正在创建。
+
+* **更新中**：正在更新配置。
+
+* **已完成**：更新完成，即将开始运行。
+
+* **失败**：创建过程中出现错误。
+
+* **运行中**：运行正常。
+
+|企业空间
+|{ks_db_product} 实例所属的企业空间。
+
+|项目
+|{ks_db_product} 实例所属的项目。
+
+|数据库内核
+|{ks_db_product} 数据库的内核版本。
+
+|创建时间
+|{ks_db_product} 实例的创建时间。
+|===
+--
+
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+
+. 在详情⻚⾯左侧的**详情**区域查看其资源属性。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|集群
+|{ks_db_product} 实例所属的集群。
+
+|企业空间
+|{ks_db_product} 实例所属的企业空间。
+
+|项目
+|{ks_db_product} 实例所属的项目。
+
+|名称
+|{ks_db_product} 实例在{ks_product_both}平台的名称。
+
+|状态
+|{ks_db_product} 实例的运行状态。
+
+|应用模板
+|创建 {ks_db_product} 实例所使用的模板类型。
+
+|数据库内核
+|{ks_db_product} 数据库的内核版本。
+
+|创建时间
+|{ks_db_product} 实例的创建时间。
+
+|访问地址
+|{ks_db_product} 数据库的访问地址。每个数据库可提供多个不同⽤途的访问地址。
+|===
+--
+
+. 在详情页面右侧的**概览**页签，查看数据库的基本信息和节点。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|基本信息
+|显示 {ks_db_product} 数据库的运行状态、主节点和备节点数量、每个节点的 CPU 和内存资源以及挂载的卷容量。
+
+|节点
+|显示 {ks_db_product} 数据库的所有节点及其创建时间、运行状态、容器组 IP 地址、节点类型、CPU 和内存资源、卷容量。
+
+每个节点被创建为一个容器组。
+|===
+
+--
+
+// . 在详情页面右侧点击**监控**页签查看数据库的监控指标。
+// +
+// --
+// * 点击下拉列表可选择需要查看的数据库节点。
+
+// * 在右上角点击image:/images/dmp/icons/timed-task.svg[timed-task,18,18]可设置数据的时间范围。
+
+// * 在右上角点击image:/images/dmp/icons/start-dark.svg[start,18,18]/image:/images/dmp/icons/pause.svg[pause,18,18]可开启/停止实时数据刷新。
+
+// * 在右上角点击image:/images/dmp/icons/refresh-dark.svg[refresh,18,18]可手动刷新数据。
+// --

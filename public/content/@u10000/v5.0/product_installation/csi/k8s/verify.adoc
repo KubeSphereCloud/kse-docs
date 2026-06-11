@@ -1,0 +1,188 @@
+---
+title: 测试验证
+weight: 3
+---
+
+待 HydroFS CSI 插件安装完成后，用户可执行以下步骤，用以验证 HydroFS CSI 插件是否能正常工作或者熟悉 HydroFS CSI 插件的使用流程。
+
+
+详细操作如下。
+
+== 步骤一：创建 StorageClass
+
+
+. 登录 Kubernetes 集群的 Master 节点。
+
+. 执行如下命令行，创建 StorageClass 的配置文件 `storage-class.yaml`。
++
+[source,shell]
+----
+touch storage-class.yaml
+----
+
+. 按照如下内容，填写配置文件 `storage-class.yaml`。
++
+[source,yaml]
+----
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: hydrofs-storage
+  namespace: kube-system
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: csi.hydrofs.com
+----
++
+include::../../../../../_components/note.adoc[]
+
+配置文件中的 `name` 字段即为该 StorageClass 的 Name。如此处 StorageClass 的 Name 为 `hydrofs-storage`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令行，生成 StorageClass。
++
+[source,shell]
+----
+kubectl create -f storage-class.yaml
+----
+
+
+
+== 步骤二：创建 PVC
+
+. 延续前文步骤，执行如下命令行，创建 PVC 配置文件 `pvc.yaml`。
++
+[source,shell]
+----
+touch pvc.yaml
+----
+
+
+. 按照如下内容，填写配置文件 `pvc.yaml`，指定其要使用的 StorageClass 名和容量。
++
+[source,yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hydrofs-fuse
+  namespace: kube-system
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: hydrofs-storage
+  resources:
+    requests:
+      storage: 10Gi
+----
++
+参数说明
++
+[cols="1a,3a", options="header"]
+|===
+| 字段 | 说明 
+
+| resources.requests.storage| 待使用的 StorageClass 的容量。示例中的 `10Gi` 表示 `10GB`。
+| storageClassName| 待使用的 StorageClass 名。需填写link:#_步骤一创建_storageclass[前文配置]的 `metadata.name`。
+| metadata.name| 待创建的 PVC 名。
+|===
+
+
+. 执行如下命令行，创建 PVC。
++
+[source,shell]
+----
+kubectl create -f pvc.yaml
+----
+
+
+== 步骤三：创建 POD
+
+创建 POD，并通过 Volumes 来挂载使用上述创建的 PVC。详细步骤如下。
+
+. 延续前文步骤，执行如下命令行，创建 POD 配置文件 `mytest.yaml`。
++
+[source,shell]
+----
+touch mytest.yaml
+----
+
+. 按照如下内容，填写配置文件 `mytest.yaml`，指定要使用的 CSI 镜像为前文安装的 `hydro_fuse` 镜像。
++
+[source,yaml]
+----
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mytest
+  namespace: kube-system
+spec:
+  containers:
+  - name: mytest
+    image: 139.198.32.245/csi/hydro_fuse:1.0
+    command: ["/bin/bash", "-c", "--"]
+    args: ["while true; do sleep 1; done"]
+    volumeMounts:
+      - name: hydrofs-fuse
+        mountPath: "/mnt/hydrofs"
+  volumes:
+    - name: hydrofs-fuse
+      persistentVolumeClaim:
+        claimName: hydrofs-fuse
+----
++
+include::../../../../../_components/note.adoc[]
+
+* 修改 `spec.containers.image` 字段的值为link:../install_csi/#_步骤三配置镜像[前文]配置的 `hydro_fuse` 镜像地址。
+* `volumes.persistentVolumeClaim.claimName` 为上述创建的 PVC Name，需与link:#_步骤二创建_pvc[前文]保持一致。
+* 如link:../install_csi/#_步骤三配置镜像[前文]配置的 `hydro_fuse` 镜像地址为 `139.198.32.245/csi/hydro_fuse:1.2`，则此处 `spec.containers.image` 字段填写 `139.198.32.245/csi/hydro_fuse:1.2`。
+* 其余参数值，均无需修改。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+. 上述操作完成后，执行如下命令生成 POD。
++
+[source,shell]
+----
+kubectl create -f mytest.yaml
+----
+
+
+
+== 步骤四：测试 POD
+
+操作至此，已经将负载中的 POD 挂载指定 PVC 到 `/mnt/hydrofs` 目录，使得 Kubernetes 可以将 `/mnt/hydrofs` 目录作为后端存储使用。
+
+延续前文步骤，执行如下命令行，来判断 POD 是否成功创建，从而判断整个测试过程是否正常。
+
+[source,shell]
+----
+kubectl get pods -n kube-system |grep mytest
+----
+
+期望输出如下所示：
+
+[source,shell]
+----
+mytest                                      1/1     Running   0          11m
+----
+
+
+* 如果输出结果为 `Running` 状态，则表示 POD 创建成功，CSI 流程正常。
+* 如果输出结果不为 `Runing` 状态，需稍微等待，有可能 POD 还在创建过程中。如果长时间状态仍然不为 `Runing`，则表示 CSI 不能正常对接 {product_name}，需要调查并解决问题。
+
+== 步骤五：环境清理
+
+上述创建的 StorageClass、PVC、POD 均为测试临时使用，待测试完成后，可以逐一将其删除。命令行如下。
+
+
+[source,shell]
+----
+kubectl delete -f mytest.yaml
+kubectl delete -f pvc.yaml
+kubectl delete -f storage-class.yaml
+----

@@ -1,0 +1,66 @@
+---
+title: "Delete VMs"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, deletion"
+description: "Describes how to delete VMs in the {ks_product} web console."
+weight: 11
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 014a18126e6244dfa798cc9a420b3867
+:ks_xref_id: 41c471c5ad2e489992406c59116e7fb4
+:ks_comp: ../../../../components/
+:ks_title: Delete VMs
+:ks_description: Describes how to delete VMs in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, deletion
+:ks_weight: 11
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete VMs in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=671abb66aaa848b4bfecac4cc045414f]
+
+include::../../../../_custom-en/vms/vm-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a VMlink:[id=a0a1804577a647268a59c7197c64ddb2]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, click the name of a VM to view its details.
+. On the left side of the details page, click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+The VM cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple VMs at a timelink:[id=dbb9bd5b69974c56b87b9929b747cc33]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, click the name of a VM to view its details.
+. In the dialog box that appears, click **OK**.
++
+--
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+VMs cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,14 @@
+---
+title: 'QoS 相关'
+weight: 10
+---
+
+[cols="2,2,3,3a",options="header"]
+|===
+|英文词汇|中文/缩略词 |解释说明|应用
+|Quality of Service
+|服务质量（QoS）  
+|网络的一种安全机制， 是用来解决网络延迟和阻塞等问题的一种技术。 +
+{product_name} 支持卷级QoS，包括 IOPS、带宽的上限设置；同时支持 IOPS 及带宽的瞬时冲高（burst）能力，按照一定规则配置某个卷在多长时间内可以提供的最大 IOPS 和带宽，满足一段时间内业务量暴增场景性能诉求。
+|在 {product_name} 存储系统中，可给指定 Volum e 设置QoS 流量控制。例如：`neonsan set_qos -volume neonpool/vol -bps 3000 -burst_bps 30000`
+|===

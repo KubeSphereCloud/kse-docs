@@ -1,0 +1,13 @@
+---
+title: "NFS 加速"
+weight: 03
+---
+
+Fluid 支持为 Kubernetes 环境中的网络文件系统（NFS）提供加速功能。该组件通过在集群内构建高效的分布式缓存层，实现将热点数据缓存至各节点本地，从而增强了数据的本地访问速度。Fluid 结合了 Alluxio 的先进缓存机制与智能调度策略，有效减轻了后端 NFS 服务器的负载，显著降低了网络延迟，优化了整体的输入/输出（I/O）性能。
+
+实现 NFS 加速，需要进行以下步骤：
+
+1. link:01-create-nfs-dataset[创建 NFS 数据集]，用于连接 NFS。
+2. link:02-create-thinruntime[创建 ThinRuntime]（支持在创建数据集时同步创建），用于创建连接 NFS 的 PVC。
+3. link:03-create-pvc-dataset[创建 PVC 数据集]，配置需要加速的 PVC。
+4. link:04-create-alluxioruntime[创建 AlluxioRuntime]，实现 NFS 的加速。

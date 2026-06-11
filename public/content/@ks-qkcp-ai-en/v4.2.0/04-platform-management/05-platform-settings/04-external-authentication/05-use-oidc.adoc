@@ -1,0 +1,151 @@
+---
+title: "OIDC Authentication"
+keywords: "Kubernetes, KubeSphere, OIDC, Identity Provider, Authentication"
+description: "Learn how to configure OIDC service on KubeSphere."
+weight: 05
+---
+
+:ks_navigation: **Configuration > Secrets**
+
+KubeSphere supports external authentication via link:https://openid.net/connect/[OpenID Connect] (OIDC), allowing users to log in to the KubeSphere web console using OIDC usernames and passwords.
+
+Platform administrators can configure OIDC authentication through a Secret.
+
+== Steps
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
+. Click **Cluster Management** and enter the host cluster.
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. In the **Create Secret** dialog, click the **Edit YAML** toggle in the upper right corner to create the secret using YAML.
+
+. Modify the YAML file according to the example and parameter descriptions below. After configuration, click **Create**.
+
+. Log out of the KubeSphere web console. On the login page, click **Log in via OIDC**, and enter your OpenID Connect username and password to log in.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+In a multi-cluster environment, configuration is only required in the host cluster.
+|===
+
+
+== OIDC Basic Configuration
+
+[source,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: kubesphere-system  # Do not modify
+  name: identity-provider-oidc  # Ensure this Secret name is unique within the Kubernetes cluster
+  labels:
+    config.kubesphere.io/type: identityprovider # Do not modify
+    config.kubesphere.io/identityprovider: oidc # Must match the name field in configuration.yaml
+type: config.kubesphere.io/identityprovider # Do not modify
+
+stringData:
+  configuration.yaml: |
+    name: oidc
+    type: OIDCIdentityProvider
+    mappingMethod: auto
+    hidden: false
+    disabled: false
+    provider:
+        # Use auto-discovery
+        issuer: https://accounts.google.com
+        clientID: "your-client-id"
+        clientSecret: "your-client-secret"
+        redirectURL: "https://your-app.com/oauth/callback"
+----
+
+
+== OIDC Full Configuration
+
+The following only shows the configuration of the `provider` section under `stringData:configuration.yaml`. Other parts should remain the same as the corresponding parts in the link:#_oidc_basic_configuration[OIDC Basic Configuration].
+
+[source,yaml]
+----
+    provider:
+        # Basic configuration
+        issuer: https://accounts.google.com
+        clientID: "your-client-id"
+        clientSecret: "your-client-secret"
+        redirectURL: "https://your-app.com/oauth/callback"
+        
+        # Optional configuration
+        scopes: 
+            - "openid"
+            - "email"
+            - "profile"
+ifeval::["{file_output_type}" == "pdf"]
+----
+<<<
+[source,yaml]
+----
+endif::[]
+        getUserInfo: true
+        insecureSkipVerify: false
+        
+        # Custom claims configuration
+        emailKey: "email"
+        preferredUsernameKey: "preferred_username"
+        displayNameKey: "name"
+        
+        # Manual endpoint configuration (endpoint-related configurations are required when issuer is not used)
+        endpoint:
+            authURL: "https://accounts.google.com/o/oauth2/v2/auth"
+            tokenURL: "https://oauth2.googleapis.com/token"
+            userInfoURL: "https://openidconnect.googleapis.com/v1/userinfo"
+            jwksURL: "https://www.googleapis.com/oauth2/v3/certs"
+            endSessionURL: "https://accounts.google.com/logout"
+----
+
+== OIDC Parameter Description
+
+This is the parameter description for the `provider` section under `stringData:configuration.yaml`. For parameter descriptions of other parts in the Secret, please refer to link:../01-set-up-external-authentication/#_parameter_description[Configure External Authentication].
+
+[%header,cols="2a,1a,1a,1,3a"]
+|===
+|Parameter |Type |Required |Default Value |Description
+
+|  issuer                  | string    | No   |  -                   | The issuer URL of the OpenID Provider, used for dynamic discovery configuration
+
+|  clientID                | string    |  Yes  | -                    | OAuth2 client ID
+
+|  clientSecret            | string    |  Yes  | -                    | OAuth2 client secret
+
+|  redirectURL             | string    |  Yes  | -                    | OAuth2 callback address
+
+|  scopes                  |  []string | No   | ["openid"]          | Requested scopes. Default includes "openid"
+
+|  getUserInfo             | bool      | No   | false                | Whether to use the userinfo endpoint to obtain additional user information
+
+|  insecureSkipVerify      | bool      | No   | false                | Whether to skip TLS certificate verification
+
+|  endpoint.authURL        | string    | No   | -                    | OAuth2 authorization endpoint URL
+
+|  endpoint.tokenURL       | string    |  No  | -                    | OAuth2 token endpoint URL
+
+|  endpoint.userInfoURL    | string    |  No  | -                    | OpenID UserInfo endpoint URL
+
+|  endpoint.jwksURL        | string    | No   | -                    | JSON Web Key Set URL
+
+|  endpoint.endSessionURL  | string    | No   | -                    | End session endpoint URL
+
+|  emailKey                | string    | No   | "email"              | Custom claim key name for email information
+
+|  preferredUsernameKey    | string    |  No  | "preferred_username" | Custom claim key name for username information
+
+|  displayNameKey           | string    | No   |  -                   | Custom claim key name for display name
+|===

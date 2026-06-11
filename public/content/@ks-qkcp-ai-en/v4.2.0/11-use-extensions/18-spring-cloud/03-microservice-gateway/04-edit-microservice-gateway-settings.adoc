@@ -1,0 +1,49 @@
+---
+title: "Edit Microservice Gateway"
+keywords: "Kubernetes, {ks_product}, Project Management, Spring Cloud, Edit Microservice Gateway"
+description: "Describes how to edit a microservice gateway."
+weight: 04
+---
+
+:ks_permission: ** Spring Cloud Microservices Management**
+:ks_navigation:  **Spring Cloud > Microservice Gateway**
+
+This section describes how to edit a microservice gateway.
+
+== Prerequisites
+
+* KubeSphere platform needs to have the **KubeSphere Spring Cloud** extension installed and enabled.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the right side of the page, select **Manage > Edit**.
+
+. In the **Edit Microservice Gateway** dialog box, modify the parameters of the microservice gateway, then click **OK**.
++
+--
+For more information about microservice gateway parameters, please refer to link:#_parameter_description[Parameter Description].
+--
+
+
+== Parameter Description
+
+include::../../../../_custom/projectManagement/microserviceGateway/microserviceGateway-para-microserviceGatewaySettings.adoc[]

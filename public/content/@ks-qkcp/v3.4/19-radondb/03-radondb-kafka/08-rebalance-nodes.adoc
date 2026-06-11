@@ -1,0 +1,63 @@
+---
+title: "重平衡 RadonDB Kafka 节点"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Kafka, 平衡节点"
+description: "介绍如何重平衡 RadonDB Kafka 节点。"
+weight: 08
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: e90419324c924d69a1b857f684acd868
+:ks_xref_id: 3e192c51a60b4ee8bd1a75c9eb34b681
+:ks_comp: ../../../components/
+:ks_title: 重平衡 RadonDB Kafka 节点
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB Kafka, 平衡节点
+:ks_description: 介绍如何重平衡 RadonDB Kafka 节点。
+:ks_weight: 08
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+重平衡（rebalance）规定了一个消费组的消费者如何分配订阅主题的分区，同一个消费组不能有多个消费者同时消费同一个分区。本节介绍如何重平衡 RadonDB Kafka 节点。
+
+
+== 前提条件link:[id=10dc3db2b92048f7b2db44801b9ec580]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/radondb/radondbKafka/radondbkafka-prer-installRadondbkafka.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../_custom/radondb/radondbKafka/radondbkafka-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=7b22ba398bb94b3d88b3394266f14566]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 重平衡节点**。
+
+. 在**重平衡节点**对话框，选择节点角色并设置节点的数量，然后点击**确定**。

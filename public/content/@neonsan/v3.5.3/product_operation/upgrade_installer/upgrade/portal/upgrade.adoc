@@ -1,0 +1,106 @@
+---
+title: "Portal 升级操作"
+weight: 2
+---
+
+
+. 升级 Portal 前，已完成节点角色的检查和更新。
+
+
+. 退出 FirstBox，登录 FirstBox 所在节点，进入升级脚本 upgrader.sh 所在目录。
++
+[,shell]
+----
+cd /qingstor-installer
+----
+
+. 执行相应脚本，升级 Portal。
++
+[,shell]
+----
+bash upgrader.sh -u portal
+----
++
+根据回显结果，检查获取到的环境信息。
++
+[,shell]
+----
+===========================================
+Log:      /qingstor/log/upgrade/upgrader.log
+Mode:     Portal
+Step:     1-14
+Start:    Tue May 23 14:19:23 CST 2023
+============================================
+Environment Information Check
+--------------------------------------------
+172.16.90.3:                  ubuntu 16.04.5
+172.16.90.4:                  ubuntu 16.04.5
+172.16.90.5:                  ubuntu 16.04.5
+installer version:            2.0.17.2
+installer upgrade:            2.0.17.2
+installer-neonsan version:    3.5.2
+installer-neonsan upgrade:    3.5.2
+portal version:               3.5.0
+portal upgrade:               3.5.0
+neonsan center version:       2.2.3
+neonsan monitor version:      2.2.3
+neonsan store version:        2.2.3
+--------------------------------------------
+environment information is correct? [y/n]:
+----
+
+. 若确认环境信息无误，根据提示输入 ``y``，升级脚本将会自动依次进行相应的 Portal 操作。
++
+[,shell]
+----
+environment information is correct? [y/n]: y
+============================================
+Step1: 升级预检查                       [ok]
+Step2: 检查角色                         [ok]
+Step3: 更新/etc/hosts                   [ok]
+Step4: 移除Prometheus                   [ok]
+Step5: 检查软连接                       [ok]
+Step6: 部署mysql tools                  [ok]
+Step7: 更新portal mysql tables          [ok]
+Step8: 部署组件redis-cache              [ok]
+Step9: 部署组件node-exporter            [ok]
+Step10: 部署组件prometheus              [ok]
+Step11: 部署组件alerter                 [ok]
+Step12: 部署组件qingstor-zero-web       [ok]
+Step13: 部署组件qingstor-zero-agent     [ok]
+Step14: 升级后检查                      [ok]
+============================================
+End:     Tue May 23 14:38:50 CST 2023
+============================================
+----
+
+. 等待升级完成，登录至 FirstBox。
+
+. 执行如下命令，检查当前环境 Portal 版本。
++
+[,shell]
+----
+/qingstor/install/bin/exec_nodes.sh monitor apt list --installed | grep qingstor-zero-web
+----
+. 执行如下命令，检查集群服务状态，返回结果中各项服务状态均为 ``RUNNING`` 即可。
++
+[,shell]
+----
+/qingstor/install/bin/exec_nodes.sh monitor supervisorctl status
+----
+
+. 登录当前环境 Portal 平台，进入其**总览**页面，查看集群状态，并查看有无告警信息。
+
+. 若 NeonSAN、Instller、Portal 升级无误，建议删除备份目录，释放磁盘空间。
+
+.. 登录 FirstBox 所在节点。
+
+.. 删除备份目录。
++
+[,shell]
+----
+rm -rf /tmp/backup_qs
+----
+
+
+

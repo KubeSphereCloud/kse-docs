@@ -1,0 +1,25 @@
+---
+title: "查看 QBD 配置信息"
+weight: 8
+---
+
+. 逐个登录安装有 QBD 服务的节点服务器。 
+
+. 输入如下命令，查看 QBD 的配置信息。
++
+[,shell]
+----
+cat /etc/neonsan/qbd.conf 
+----
+. 输入如下命令，查看批量挂载的配置信息。
++
+include::../../../../../_components/note.adoc[]
+仅当前节点需要配置自动挂载时，才需要配置 map.conf 文件。否则，无法查到该配置文件。
+include::../../../../../_components/table_footer.adoc[]
++
+[,shell]
+----
+cat /etc/neonsan/map.conf
+----
+
+

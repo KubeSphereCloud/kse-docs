@@ -1,0 +1,59 @@
+---
+title: "启用 OpenSearch Curator"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, 启用 OpenSearch Curator"
+description: "介绍如何启用 OpenSearch Curator 扩展组件。"
+weight: 01
+---
+
+
+本节介绍如何启用 OpenSearch 的 Curator 扩展组件。
+
+
+== 前提条件
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:common:opensearch:curator:enabled** 参数设置为 **true**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  common:
+    opensearch: 
+      curator:
+        enabled: true
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionEnabled.adoc[]
+
+* 启用 OpenSearch Curator 扩展组件后，不支持将其禁用。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

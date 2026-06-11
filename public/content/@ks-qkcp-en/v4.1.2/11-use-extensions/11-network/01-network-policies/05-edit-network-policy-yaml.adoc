@@ -1,0 +1,39 @@
+---
+title: "Edit Network Policy Configuration"
+keywords: "Kubernetes, {ks_product-en}, cluster management, project, edit network policy configuration, yaml"
+description: "Introduce how to edit network policy configuration."
+weight: 05
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Network Policies**
+
+
+This section introduces how to edit the configuration of a network policy.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeSphere Network** should have been installed and enabled.
+
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the network policy you want to operate, and then select **Edit YAML** from the dropdown list.
+
+. In the **Edit YAML** dialog box, modify the configuration of the network policy, and then click **OK**.
++
+--
+For specific parameters of the network policy configuration file, please refer to the link:https://kubernetes.io/zh/docs/concepts/services-networking/network-policies/[Kubernetes Documentation].
+--

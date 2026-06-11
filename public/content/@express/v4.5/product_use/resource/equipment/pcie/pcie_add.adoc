@@ -1,0 +1,48 @@
+---
+title: "添加并使用 PICE 设备"
+weight: 1
+---
+
+== 功能描述
+云易捷为用户提供 PCIE 设备透传服务。用户可将 PCIE 设备添加至任意节点，手动添 加成功后，可以在设备管理界面将 PCIE 设备挂在至虚拟机上使用。
+
+== 操作步骤
+
+. 登录{product_console_name_en}。 
+. 在顶部导航栏，选择**资源** > **设备透传** > **PCIE 设备**，进入 PCIE 设备管理页面。 
+. 点击**添加 PCI 设备**，在弹的**添加 PCI 设备**窗口中，输入或选择相应的参数，点击**创建**。
++
+image::/images/express/console/pice_add_1.png[,70%]
++
+参数说明
++
+[options="header",cols="1,3"]
+|===
+|参数 |详细说明 
+|名称 
+|用户自定义，便于搜索与浏览。 
+
+|选择计算节点 
+|云易捷环境中已存在的计算节点。
+
+|选择 Pcies 设备 
+|相应计算节点上已有的 PCIE 设备。
+|===
+
+. 返回 PCIE 设备管理页面，新添加的 PCI 设备已显示在列，其状态为``可用``则表示 PCIE 设备添加成功。
++
+image::/images/express/console/pice_add_2.png[]
+
+. 点击新添加的 PCI 设备所在行右侧的更多操作，选择**绑定到主机**。
+
++
+image::/images/express/console/pice_add_3.png[]
+
+. 在弹出的**请选择绑定设备的主机窗口**中，选择合适的虚拟机，点击**确定**。
+
++
+image::/images/express/console/pice_add_4.png[,70%]
+
+. 返回 PCIE 设备管理页面，若相应的 PCIE 设备状态变为``已连接``，表示绑定主机成功。
+
+

@@ -1,0 +1,41 @@
+---
+title: "删除节点组"
+weight: 05
+---
+
+:ks_permission: **节点组管理**
+:ks_navigation: **节点组设置 > 基本信息**
+
+
+本节介绍如何删除节点组。
+
+[.admon.attention,cols="a"]
+|===
+|注意
+
+|
+* 删除节点组时，请确保节点组下没有边缘节点。若有，请先将边缘节点从该节点组中移除。
+* 删除节点组后，下一级的节点组会向上移一级，比如，删除二级节点组，之前的三级节点组会自动变为二级节点组。
+|===
+
+
+== 前提条件
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+
+== 操作步骤
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**基本信息**页面，点击**管理**，然后在下拉列表中选择**删除节点组**。
+
+. 在**删除节点组**对话框，输入节点组的名称，然后点击**确定**。
+
+

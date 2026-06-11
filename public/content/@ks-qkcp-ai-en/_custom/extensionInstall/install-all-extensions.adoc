@@ -1,0 +1,38 @@
+. Log in to the KubeSphere web console as a user with the **platform-admin** role.
+
+. Click **Extensions Center** and search for the extension you want to install.
+
+. Click the extension name, then click **Install** to enter the extension installation page.
+
+. On the **Version Selection** tab of the extension installation dialog, select the version number of the extension, install all required extensions (if any), and click **Next**.
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+During the installation check, the system will identify if the extension has any dependencies. Dependencies are divided into required extensions and optional extensions.
+
+If the status of a required extension is **Not Ready**, you need to install the correct version of the required extension first to ensure the normal use of the extension. Optional extensions do not affect the installation of the extension.
+|===
+
+. On the **Extension Installation** tab, modify the configuration of the extension (optional), then click **Start Installation** to begin installing the extension.
++
+image:/images/ks-qkcp/en/v4.0/install-extensions.png[,100%]
+
+. After the installation is complete, click **Next** to configure the cluster Agent.
+
+. On the **Cluster Selection** tab, select clusters by name or identifier (multiple clusters can be selected) to enable the extension in the target clusters.
+
+. On the **Differentiated Configuration** tab, edit the YAML configuration for each selected cluster, or use the initial default configuration without modification. Click **OK** to start installing the cluster Agent and wait for completion.
++
+--
+After installation is complete, the extension is enabled by default.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|Some extensions do not require the installation of a cluster Agent (i.e., there are no **Cluster Selection** and **Differentiated Configuration** tabs). Please refer to the actual page.
+|===
+--

@@ -1,0 +1,28 @@
+---
+title: "操作日志"
+description: 本小节主要介绍对云平台内的操作记录进行管理。
+draft: false
+weight: 4
+---
+== 功能描述
+
+操作日志记录了用户对平台资源的操作行为，记录的是全局的资源对象，包括平台内所有资源的创建、删除、备份、迁移等操作，操作日志支持对资源 ID 进行搜索。
+
+== 操作步骤
+
+. 登录{product_console_name}。
+. 在顶部导航栏，选择**运维工具** > *操作日志*，进入操作日志列表页面。当前页面分别统计了云平台内所有操作日志的总数、成功的操作日志数、等待中的操作日志数、执行中的操作日志数、部分失败的操作日志数以及失败的操作日志数。
++
+image::/images/express/console/log_1.png[log_1]
+
+. 云平台除了支持查询最近一天、最近一周、最近一月、最近半年内的操作日志以外，用户也可自主设置时间范围。
++
+image::/images/express/console/log_2.png[log_2]
+
+. 点击操作日志列表上方的搜索框，可基于状态或所属用户对操作日志列表内容进行筛选。
++
+image::/images/express/console/log_3.png[log_3]
+
+. 点击操作日志列表右上方的下载图标image:/images/express/console/download.png[]，可下载列表内的操作日志，目前最多只支持下载1000 条记录。
++
+image::/images/express/console/log_4.png[log_4]

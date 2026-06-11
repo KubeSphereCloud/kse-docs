@@ -1,0 +1,83 @@
+---
+title: 增加用户登录历史记录（AddUserLoginHistoryRecord）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| error_msg
+| String
+| false
+| 错误信息
+
+| login_device
+| String
+| false
+| 登录设备
+
+| login_ip
+| String
+| false
+| 登录IP地址
+
+| login_platform
+| String
+| true
+| 登录的平台
+
+| login_result
+| String
+| false
+| 登录结果
+
+| user
+| String
+| true
+| 登录的用户
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "error_msg": "",
+  "login_device": "linux",
+  "login_ip": "192.168.3.13",
+  "login_platform": "linux",
+  "login_result": "Success",
+  "user": "user"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "AddUserLoginHistoryRecordResponse",
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

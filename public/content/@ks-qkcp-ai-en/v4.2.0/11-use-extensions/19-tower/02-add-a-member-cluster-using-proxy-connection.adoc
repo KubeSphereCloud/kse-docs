@@ -1,0 +1,170 @@
+---
+title: "Adding Member Clusters via Proxy Connection"
+keywords: "Kubernetes, {ks_product}, Multi-cluster Management, Cluster, Add Member Cluster, Add Member Cluster via Proxy Connection"
+description: "Describes how to add a member cluster via proxy connection."
+weight: 02
+---
+
+
+This section describes how to add a member cluster via proxy connection.
+
+If the host cluster cannot access the Kubernetes API service of the member cluster, you can set up the member cluster to connect to the **tower** service exposed by the host cluster to add the member cluster.
+
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the host cluster.
+
+* The **KubeSphere Multi-cluster Proxy Connection** extension needs to be installed and enabled on the KubeSphere platform.
+
+* All nodes of the member cluster must be able to access the external access address of the host cluster's **tower** service. Depending on your network environment, you may need to configure firewall and traffic forwarding rules.
+
+== Step 1: Set the Proxy Service Address
+
+After installing the "KubeSphere Multi-cluster Proxy Connection" extension in the host cluster, a service named `tower` of type LoadBalancer will be automatically created in the system project `kubesphere-system`.
+
+=== LoadBalancer is Available in the Cluster
+
+Execute the following command on a host cluster node.
+
+[,bash]
+----
+kubectl -n kubesphere-system get svc
+----
+
+If a LoadBalancer is available in the host cluster, the output may look like the following.
+
+[,bash]
+----
+NAME       TYPE            CLUSTER-IP      EXTERNAL-IP     PORT(S)              AGE
+tower      LoadBalancer    10.233.63.191   139.198.110.23  8080:30721/TCP       16h
+----
+
+The `tower` service has a corresponding `EXTERNAL-IP` address. This address will be automatically obtained and configured as the proxy service address by KubeSphere, which means you can skip the step of setting the proxy service address.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Mainstream public cloud providers generally offer LoadBalancer solutions, and the load balancer can automatically assign an external IP. If your cluster runs in an on-premises environment, especially a bare-metal environment, you can use link:https://github.com/kubesphere/openelb[OpenELB] as a load balancer solution.
+|===
+
+=== LoadBalancer is Not Available in the Cluster
+
+. Execute the following command on a host cluster node.
++
+--
+[,bash]
+----
+kubectl -n kubesphere-system get svc
+----
+
+If a LoadBalancer is not available in the host cluster, the output may look like the following. In this example, the NodePort is `30721`.
+
+[,bash]
+----
+NAME       TYPE            CLUSTER-IP      EXTERNAL-IP     PORT(S)              AGE
+tower      LoadBalancer    10.233.63.191   <none>       8080:30721/TCP       16h
+----
+--
+
+. Since the `EXTERNAL-IP` is `<none>`, you need to manually set the proxy address. For example, if the public IP address of your host cluster is `139.198.120.120`, you need to configure a port forwarding rule to forward a port (e.g., 30000) of the public IP to {NodeIP}:{NodePort}, such as `172.31.17.xx:30721`.
+
+. Add `proxyPublishAddress` to the `tower` Secret to access Tower.
++
+--
+[source,bash]
+----
+kubectl -n kubesphere-system edit secret tower
+----
+
+In the Secret, add the following content:
+
+[source,yaml]
+----
+stringData:
+  configuration.yaml: |
+    proxyPublishAddress: http://{Public IP address of the host cluster}:{port}
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|{port} is the port of the public IP you specified in step 2.
+
+|===
+
+A complete configuration example is as follows:
+
+[source,yaml]
+----
+kind: Secret
+apiVersion: v1
+metadata:
+  name: tower
+  namespace: kubesphere-system
+  creationTimestamp: '2025-06-16T02:19:11Z'
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    config.kubesphere.io/type: cluster-connection-config
+    kubesphere.io/extension-ref: tower
+  annotations:
+    meta.helm.sh/release-name: tower
+    meta.helm.sh/release-namespace: extension-tower
+type: config.kubesphere.io/cluster-connection-config
+stringData:   # <========  stringData
+  configuration.yaml: |
+    proxyPublishAddress: http://139.198.120.120:30000
+----
+
+After saving the Secret, the content under `stringData` will be automatically converted to
+
+[source,yaml]
+----
+data:
+  configuration.yaml: <base64 encoded content>
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|If `proxyPublishAddress` was configured in a previous version of the KubeSphere Multi-cluster Proxy Connection extension, and you want to modify the configuration after upgrading to the new version, you need to follow the instructions on the extension details page in the Extensions Center, view the previous configuration in base64, add the original configuration to the Secret, and add the new `proxyPublishAddress` configuration.
+
+|===
+--
+
+
+
+== Step 2: Add a Member Cluster
+
+include::../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-oper-logInToHost.adoc[]
+
++
+
+. Click **Cluster Management**.
++
+include::../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-oper-addClusterBasicInfo.adoc[]
++
+Under **Advanced Settings**, set the cluster's usage identifier.
+
+. On the **Connection Settings** tab, set the **Connection Method** to **tower**, and click **Next**.
+
+. On the **Cluster Configuration** tab, configure the cluster settings as needed, then click **Create**. You will see a "Waiting for cluster to join" page.
+
+. Follow the instructions on the page to create an `agent.yaml` file on a node of the member cluster.
+
+. Copy the information provided on the page into the `agent.yaml` file, then save it. Its content is automatically generated based on the proxy service address configured above.
+
+. On the member cluster node, execute the following command to add the cluster.
++
+--
+[source,bash]
+----
+kubectl create -f agent.yaml
+----
+
+Wait for a while. After the member cluster is added, it will appear in the cluster list on the **Cluster Management** page.
+--

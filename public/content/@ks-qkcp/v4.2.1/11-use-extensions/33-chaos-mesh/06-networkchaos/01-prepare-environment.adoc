@@ -1,0 +1,58 @@
+---
+title: "准备测试环境"
+weight:  01
+---
+
+本节介绍如何创建测试部署，用于后续验证网络故障注入效果。
+
+*创建测试部署*
+
+
+网络故障模拟需要两个 Pod 相互通信，分别作为服务端和客户端：
+
+[source,yaml]
+----
+# 服务端
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: nginx-network-server
+namespace: default
+spec:
+replicas: 1
+selector:
+ matchLabels:
+   app: nginx-network-server
+template:
+ metadata:
+   labels:
+     app: nginx-network-server
+ spec:
+   containers:
+     - name: nginx
+       image: nginx:stable-perl
+       ports:
+         - containerPort: 80
+---
+# 客户端
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: nginx-network-client
+namespace: default
+spec:
+replicas: 1
+selector:
+ matchLabels:
+   app: nginx-network-client
+template:
+ metadata:
+   labels:
+     app: nginx-network-client
+ spec:
+   containers:
+     - name: nginx
+       image: nginx:stable-perl
+       ports:
+         - containerPort: 80
+----

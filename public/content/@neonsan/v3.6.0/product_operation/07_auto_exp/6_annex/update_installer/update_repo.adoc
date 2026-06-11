@@ -1,0 +1,67 @@
+---
+title: '更新 repo'
+weight: 1
+---
+正式升级 qingstor-installer 之前需先更新 repo，详细步骤如下:
+
+. 从如下路径获取安装包：
++
+[,shell]
+----
+ftp://ins.qingcloud.com/neonsan/qingstor-installer-1.0/
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* 安装包的命名形式如：qingstor-installer_2.X.X_neonsan_3.X.X_all_amd64.tar.gz，其中 installer_2.X.X 为 Installer的版本号，neonsan_3.X.X 为 {product_name} 的版本号。
+* 新的安装包中 {product_name} 的版本需与当前集群中 {product_name} 的版本保持一致，即通过命令 `neonsan list_version` 查询到的版本号。
+* 若安装包下载路径不能访问，请与 QingCloud Installer 组联系。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录集群中的任一节点后，执行如下命令，登录 FirstBox 所在的节点。
++
+[,shell]
+----
+# ssh qingstor-firstbox
+----
+
+. 删除集群中原有的 qingstor-instller 安装包。
++
+[,shell]
+----
+# rm -rf /root/qingstor-installer
+----
+. 将新的安装包上传至当前节点。
+. 执行如下命令，将 qingstor-installer 安装博解压至 /root 目录下。
++
+[,shell]
+----
+# tar -zxf /root/qingstor-installer_2.X.X_neonsan_3.X.X_all_amd64.tar.gz -C /root/
+----
+
+. 执行如下命令，解压相应的包，更新公共仓库(包括中间件、Portal 以及 DNS 等)。
++
+[,shell]
+----
+# tar xvf /root/qingstor-installer/repo/qingstor-zero-packages*.tar -C /var/www
+----
++
+
+include::../../../../../../_components/note.adoc[]
+qingstor-zero-packages-xxxxx-xxxx.tar 为公共组件压缩包，其全名需根据实际情况进行修改。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，解压相应的包，更新 {product_name} 仓库。
++
+[,shell]
+----
+# tar xvf /root/qingstor-installer/repo/qingstor-zero-neonsan-packages*.tar -C /var/www
+----
++
+
+include::../../../../../../_components/note.adoc[]
+qingstor-zero-neonsan-packages-x.x.x-xxxxx-xx.tar 为 NeonSAN 组件压缩包，其中，x.x.x 为 NeonSAN 版本号，其全名需根据实际情况进行修改。
+
+include::../../../../../../_components/table_footer.adoc[]

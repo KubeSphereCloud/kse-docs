@@ -1,0 +1,62 @@
+---
+title: 检查 lvmlockd 服务
+weight: 60
+---
+
+== 检查配置
+
+. 登录 tpsc 计算节点。
+. 检查 lvm.conf。
++
+[source,language]
+----
+root@devops1ar01n03:~# cat /etc/lvm/lvm.conf
+use_lvmlockd = 1
+sanlock_lv_extend = 1024
+----
+. 检查 lvmlocal.conf。不同 hyper 的 host_id 不能重复。
++
+[source,language]
+----
+root@devops1ar01n03:/etc/lvm# cat lvmlocal.conf
+local {
+    host_id=2
+}
+----
+
+== 修改配置
+
+若配置不正确，请执行以下步骤进行修改。
+
+. 登录 tpsc 计算节点。
+. 修改 lvm.conf。
++
+[source,language]
+----
+root@devops1ar01n03:~# vi /etc/lvm/lvm.conf
+----
+. 修改 lvmlocal.conf。不同 hyper 的 host_id 不能重复。
++
+[source,language]
+----
+root@devops1ar01n03:/etc/lvm# vi lvmlocal.conf
+----
+. 执行以下命令，启动 lvmlockd 和 sanlock 服务。
++
+[source,shell]
+----
+systemctl start lvmlockd
+systemctl start wdmd sanlock
+----
+
+== 查看服务状态
+
+. 登录 tpsc 计算节点。
+. 执行以下命令，检查服务状态。
++
+[source,shell]
+----
+systemctl status lvmlockd
+systemctl status sanlock
+systemctl status wdmd
+----

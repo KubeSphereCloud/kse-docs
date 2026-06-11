@@ -1,0 +1,122 @@
+---
+title: "Visualizing WizTelemetry Tracing Data with Tempo"
+keywords: "Kubernetes, {ks_product}, Grafana, Tempo, dashboard, Observability"
+description: "Introduces how to visualize distributed tracing data from Tempo in Grafana."
+weight: 01
+---
+
+
+This section describes how to use Grafana Tempo for WizTelemetry (referred to as Tempo) to visualize the distributed tracing data from WizTelemetry Tracing in the Grafana console, i.e., to visualize the complete flow of a user request through the distributed system.
+
+== Prerequisites
+
+A Grafana console has been deployed via the link:../../16-grafana/[Grafana for WizTelemetry] extension.
+
+== Steps
+
+. Install the **Grafana Tempo for WizTelemetry** extension into the cluster.
+
+. Enter the cluster where Tempo is installed. On the **Application Workloads > Services** page, find the service `tempo-distributor`, click its name to enter the details page. Click **Operations > Edit External Access**, enable NodePort. Then, on this page, obtain the NodePort corresponding to service port `4317`.
++
+--
+image:/images/ks-qkcp/zh/v4.2.0/tempo/tempo-distributor-nodeport.png[, 80%]
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Depending on your network environment, you may need to configure traffic forwarding rules and allow this NodePort port in the firewall.
+|===
+--
+
+. Install the **WizTelemetry Tracing** extension, and modify the extension configuration to send trace data to Tempo.
++
+--
+[source,bash]
+----
+collector:
+  collector:
+    config: |
+      exporters:
+        otlp:
+          # tempo-distributor.wiz-telemetry-tracing:4317
+          endpoint: < tempo distributor grpc endpoint >
+          headers:
+            x-scope-orgid: wiztelemetry-tracing-ks
+          tls:
+            insecure: true
+      service:
+        pipelines:
+          traces:
+            exporters:
+              - otlp
+              - otlphttp
+----
+
+Note: Replace `< tempo distributor grpc endpoint >` with `<cluster-node-ip>:<grpc nodeport>`. For example, based on the NodePort obtained in the previous step, it should be modified to `<cluster-node-ip>:31459`.
+--
+
+. Configure the Tempo data source in the Grafana console.
++
+====
+If the Tempo and Grafana for WizTelemetry extensions are deployed in the same cluster, after Tempo installation is complete, the Tempo data source will be automatically added to the Grafana console.
+
+image:/images/ks-qkcp/zh/v4.2.0/tempo/tempo-data-source.png[]
+
+If the Tempo and Grafana for WizTelemetry extensions are deployed in different clusters, you need to link:../../../../02-quickstart/08-access-a-service/[expose the service via NodePort or LoadBalancer] `tempo-query-frontend` to obtain the server address for the Tempo data source, and then manually add the Tempo data source in the Grafana console. Detailed steps are as follows:
+
+* Expose the `tempo-query-frontend` service
++
+--
+The following uses the NodePort method to expose the `tempo-query-frontend` service.
+
+. Enter the cluster where Tempo is installed. On the **Application Workloads > Services** page, find the service `tempo-query-frontend`, click its name to enter the details page.
+
+. Click **Operations > Edit External Access**, enable NodePort. Then, on this page, obtain the NodePort corresponding to service port `3100`.
+
+image:/images/ks-qkcp/zh/v4.2.0/tempo/tempo-query-frontend-nodeport.png[]
+--
+
+* Manually add the Tempo data source
++
+--
+. After logging into the Grafana console, click **Connections** in the left navigation pane.
+. Search for a data source, such as **Tempo**.
+. Click the data source name to enter the data source overview page.
+. Click **Add new data source** in the upper right corner to enter the data source configuration page.
+. Enter the server address for the Tempo data source: `<cluster-node-ip>:<tempo-query-frontend-nodeport>`. For example, based on the NodePort obtained in the previous step, you should enter `<cluster-node-ip>:30835`.
++
+image:/images/ks-qkcp/zh/v4.2.0/tempo/url.png[]
+
+. Add a header. `x-scope-orgid: wiztelemetry-tracing-ks`
++
+image:/images/ks-qkcp/zh/v4.2.0/tempo/http-header.png[]
+
+. Set the **Prometheus** data source for Service graph.
++
+image:/images/ks-qkcp/zh/v4.2.0/tempo/prometheus.png[]
+
+. Click **Save & test** at the bottom to complete adding the data source.
+--
+====
+
+. In the Grafana console, click **Explore** in the left navigation pane to enter the page, and select the **Tempo** data source.
+
+. Click the **TraceQL** tab, then click the image:/images/ks-qkcp/zh/icons/refresh-light.png[refresh-light,18,18] in the upper right corner to run the query and list the latest trace data. Click one of them to view the trace graph.
++
+image:/images/ks-qkcp/zh/v4.2.0/tempo/trace-tab.png[]
+
+. Click the **Service Graph** tab, then click the image:/images/ks-qkcp/zh/icons/refresh-light.png[refresh-light,18,18] in the upper right corner to run the query and view the service topology graph generated by Tempo.
++
+--
+image:/images/ks-qkcp/zh/v4.2.0/tempo/graph.png[]
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|For more information about Tempo, please refer to the link:https://grafana.org.cn/docs/tempo/latest/[Grafana Tempo official documentation].
+
+|===
+--

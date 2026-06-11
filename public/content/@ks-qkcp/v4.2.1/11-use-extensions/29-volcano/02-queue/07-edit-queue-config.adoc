@@ -1,0 +1,38 @@
+---
+title: "编辑队列配置"
+weight: 07
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: ** Volcano 调度 > 队列**
+
+
+队列创建完成后，可通过 yaml 文件修改队列的配置。
+
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Volcano** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要操作的队列右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑 YAML**。
+
+. 在**编辑 YAML**对话框，查看、编辑队列的配置。
++
+有关队列的更多信息，请参阅 link:https://volcano.sh/zh/docs/queue/[Volcano 官方文档]。

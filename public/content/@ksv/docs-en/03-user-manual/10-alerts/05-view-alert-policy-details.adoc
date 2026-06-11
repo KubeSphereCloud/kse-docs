@@ -1,0 +1,90 @@
+---
+title: "View the details of an alert policy"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, alerts, policies, details, view"
+description: "Describes how to view the details of an alert policy in the {ks_product} web console."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 366f4f85713d4e449ace3d3461fa4fdc
+:ks_xref_id: 49f37350fa9949d5b8be7b9d5a758f40
+:ks_comp: ../../../components/
+:ks_title: View the details of an alert policy
+:ks_description: Describes how to view the details of an alert policy in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, alerts, policies, details, view
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of an alert policy in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=bd6ed7dfddc3419a8f839a244817e456]
+
+User **admin** can view all alert policies in your cluster. Common users such as project administrators, operators, and viewers can view the alert policies in the projects to which they belong.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=ef96736ab20540fe8a15da3038fbf66b]
+
+include::../../../_custom-en/alerts/alert-steps.adoc[]
+
+. On the **Alert Policies** tab, click the name of the desired alert policy. The details page of the alert policy appears.
+. On the left side of the details page, view basic information about the alert policy.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Status
+|The status of the alert.  Valid values:
+
+include::../../../_custom-en/alerts/alert-status-description.adoc[]
+
+|Alias
+|The alias of the alert policy.
+
+|Severity
+|The severity of the alert. Valid values:
+
+include::../../../_custom-en/alerts/alert-severity-levels.adoc[]
+
+|Duration (mins)
+|The duration of the alert.
+
+An alert is fired if the duration has been reached.
+
+|Rule
+|The alert rule of the alert policy.
+
+|Activated at
+|The time when the alert was fired.
+
+|Created by
+|The username that is used to create the alert policy.
+|===
+--
+. On the right side of the details page, view the monitoring targets that correspond to the alert policy.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the monitoring target.
+
+|ID
+|The universally unique identifier (UUID) of the monitoring target in the system.
+
+|Status
+|The status of the monitoring target.
+|===
+--

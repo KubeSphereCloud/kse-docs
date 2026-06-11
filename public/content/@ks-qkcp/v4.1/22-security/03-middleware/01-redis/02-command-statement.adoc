@@ -1,0 +1,53 @@
+---
+title: "高危命令禁用方式说明"
+weight: 02
+---
+
+. 查看配置文件。
++
+====
+* 命令行方式：
++
+[,bash]
+----
+kubectl get crd | grep redis
+# redis.redis.radondb.com 2022-08-11T03:51:30Z
+# redisclusters.redis.radondb.com 2022-08-11T03:51:30Z
+# redissentinels.redis.radondb.com 2022-08-11T03:51:30Z
+
+kubectl get redisclusters.redis.radondb.com -n redis-cluster
+# redis-cluster 3 3 3 Running 48d
+
+kubectl get redisclusters.redis.radondb.com/redis-cluster -n redis-cluster -o yaml
+# 后续更新配置调整在该 yaml 文件上调整
+----
+
+* 在 UI 界面的位置如下：
++
+--
+image:/images/ks-qkcp/zh/security-handbook/rediscuste-crd.png[]
+image:/images/ks-qkcp/zh/security-handbook/redis-yaml.png[]
+--
+====
+
+
+. 在 redis 的 yaml 配置文件（redis-sentinel.yaml 或 redis-sentinel-arm.yaml）中，在 `.spec.disableCmd.cmdList` 相关位置自定义如下内容：
++
+--
+[,yaml]
+----
+disableCmd:
+  enabled: true
+  cmdList:
+    - FLUSHALL
+    - FLUSHDB
+    - CONFIG
+    - EVAL
+    - KEYS
+    - SHUTDOWN
+    - SAVE
+    - DEBUG
+----
+--
+
+. 

@@ -1,0 +1,102 @@
+---
+title: "创建消息端点"
+weight: 01
+---
+
+// :ks_permission: **没有**
+:ks_navigation: **云边消息 > 消息端点**
+
+
+本节介绍如何在云端和边缘节点上创建消息端点，用于发送或接收云边消息。
+
+== 前提条件
+
+// include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+您需要加入一个边缘项目并在项目中具有 **project-admin** 角色。
+
+== 操作步骤
+
+// include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+. 以具有 **project-admin** 角色的用户登录{ks_product_left} Web 控制台并进入您的边缘项目。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+
+. 在**创建**对话框，配置消息端点，然后点击**创建**。
++
+====
+* 基本信息
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|消息端点的名称。
+
+名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+|别名
+|消息端点的别名。
+
+不同消息端点的别名可以相同。别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。
+
+|描述
+|消息端点的描述信息。
+
+描述可包含任意字符，最长 256 个字符。
+|===
+
+* 消息端点类型
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|SystemREST
+|云端的 REST 接口。
+
+既可作为源端，发送请求到边缘节点；也可作为目的端，接收边缘节点发来的信息。
+
+需配置：Rest 类型、源端路径或目的端路径。
+
+|Event Bus
+|边缘节点上的接口端点。
+
+既可作为源端，发送数据到云端；也可以作为目的端，接收云端发来的信息。
+
+需配置：Topic 名称。
+
+|Service Bus
+|边缘节点上的 REST 接口端点。
+
+仅作为目的端点。数据可从云端路由传输至注册在 Service Bus 的边缘应用。
+
+需配置：目的端路径。
+|===
+
+* 消息端点配置
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|Rest 类型
+|把此消息端点作为源端或目的端。
+
+|源端路径
+|消息发送方的路径，如 `/msg/rest/servicebus`。
+
+|目的端路径
+|消息接收方的路径，如 `http://<IP>:<Port>/path`。
+
+|Topic 名称
+|发布/订阅模式中的消息主题，定义了消息的分类和路由规则，如 `/msg/receive/eventbus`。
+|===
+====

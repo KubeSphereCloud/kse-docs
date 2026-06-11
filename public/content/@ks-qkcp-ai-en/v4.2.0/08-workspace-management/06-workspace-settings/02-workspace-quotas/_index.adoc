@@ -1,0 +1,25 @@
+---
+title: "Workspace Quotas"
+keywords: "Kubernetes, {ks_product}, Workspace, Workspace Settings, Workspace Quotas"
+description: "Introduces how to view and manage workspace quotas."
+weight: 02
+layout: "second"
+---
+
+
+
+This section describes how to view and manage workspace resource quotas.
+
+// [.admon.note,cols="a"]
+// |===
+// |Note
+
+// |This feature is only available in KubeSphere ``Standard, Advanced, and Ultimate Editions``.
+
+// |===
+
+In the KubeSphere platform, multiple clusters can be authorized to the same workspace. You can set resource quotas for each cluster in the workspace settings. Workspace quotas include two types of settings:
+
+* **Resource Reservation**: Container resource reservation is the resources reserved by the system for a single container. Workspace resource reservation is the maximum sum of resource reservations for all containers running in a single cluster within the workspace. The KubeSphere platform currently supports setting CPU reservation and memory reservation for workspaces.
+
+* **Resource Limits**: Container resource limits are the maximum resources a single container can use. Workspace resource limits are the maximum sum of resource limits for all containers running in a single cluster within the workspace. The KubeSphere platform currently supports setting CPU limits, memory limits, and storage resource limits for workspaces.

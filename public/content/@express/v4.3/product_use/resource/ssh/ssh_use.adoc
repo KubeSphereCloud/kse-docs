@@ -1,0 +1,32 @@
+---
+title: "加载密钥至主机"
+description: 本小节主要指导用户使用已创建好的 SSH 密钥。
+draft: false
+weight: 2
+---
+
+== 场景描述
+
+该章节主要用于指导用户在云平台内将已创建成功的 SSH 密钥加载至虚拟主机。
+
+
+== 操作步骤
+
+. 登录{product_console_name}。
+. 在顶部导航栏，选择**资源** > *SSH 密钥*，进入 SSH 密钥列表页面。
+
+. 点击待使用的密钥所在行右侧的更多操作，选择**已绑定到主机**，点击**绑定**，在弹出的**选择主机**窗口中，选定待绑定的主机，点击**确定**即可。
++
+
+include::../../../../../_components/note.adoc[]
+可选择单个或多个虚拟主机进行加载。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/ssh_use_1.png[]
+
+. 返回 SSH 密钥列表页面，可查看 SSH 密钥上所绑定的资源。
++
+image::/images/express/console/ssh_use_2.png[,70%]
+
+. SSH 密钥加载至虚拟主机成功以后，可通过 SSH 密钥访问虚拟主机，详情可参考link:../../vm/express_vm/vm_login/vm_linux_login[连接主机]相关内容。

@@ -1,0 +1,85 @@
+---
+title: 准备文件服务器
+weight: 3
+---
+
+QKE Plus v3.0.0 及后续版本，需先创建文件服务器，用于存放link:../import_qke#_步骤一下载安装包[序列号为 5、6、7] 的安装包。
+
+== 步骤一：登录 Console
+
+include::../prepare/habor.adoc[tag=web_login]
+
+. 本地主机在 Chrome 或火狐浏览器中输入上一步查询到的 Console 的 Web 地址，登录信息如下。
++
+[source,shell]
+----
+Web 地址: 查询结果中 console 开头的 URL。
+默认用户名：console@<domain>
+默认密码：zhu88jie
+----
+
++
+如前面查询到的 Console 的 Web 地址为 `console.democloud.com`，则登录信息如下。
++
+[source,shell]
+----
+Web 地址：console.democloud.com
+默认用户名：console@democloud.com
+默认密码：zhu88jie
+----
+
+== 步骤二：创建云服务器
+
+. 延续前文步骤，在 Console 页面创建一台 Ubuntu 操作系统的云服务器，作为 QKE Plus 的文件服务器。
++
+include::../../../../../_components/note.adoc[]
+
+* 需确保后续用户创建的 QKE Plus 集群均能访问该云服务器。
+* 需与前文创建的link:../habor/#_步骤三创建_habor_集群[ Harbor 仓库]保持同一网段。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 将link:../import_qke/#_步骤一下载安装包[前文]上传至{product_name}的序列号为 5、6、7 的软件包上传至当前创建的云服务器。
+
+== 步骤三：部署文件服务器
+
+
+. 登录link:#_步骤二创建云服务器[前文]创建的云服务器，进入软件包所在目录。
+
+. 执行如下命令行，解压安装包 `qke_nginx.tar.gz`。
++
+[source,shell]
+----
+tar -zxvf qke_nginx.tar.gz
+----
+
+. 执行如下命令行，部署文件服务器。
++
+[source,shell]
+----
+cd nginx && ./install.sh
+----
+
+. 依次执行如下命令行，将 QKE Plus 资源包拷贝至 `/data/qke` 目录。
++
+[source,shell]
+----
+mkdir /data/qke
+mv qke-cli-v3.1.0.tar.gz  /data/qke
+mv qke-installer-v3.1.0.tar.gz /data/qke
+----
+
+. 执行以下命令行，验证是否能成功下载 QKE Plus 资源包。
++
+[source,shell]
+----
+wget 127.0.0.1:8999/qke-cli-v3.1.0.tar.gz
+wget 127.0.0.1:8999/qke-installer-v3.1.0.tar.gz
+----
+
+
+
+
+
+
+

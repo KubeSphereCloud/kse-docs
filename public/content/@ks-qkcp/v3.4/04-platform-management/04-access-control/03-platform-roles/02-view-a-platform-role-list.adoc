@@ -1,0 +1,66 @@
+---
+title: "查看平台角色列表"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 平台管理, 访问控制, 平台角色, 查看平台角色列表"
+description: "介绍如何查看平台角色列表。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 7bb0bedcff474a4e99bc39ba4a53bc4d
+:ks_xref_id: e4a025b99c154976833180ae2830eced
+:ks_comp: ../../../../components/
+:ks_title: 查看平台角色列表
+:ks_keywords: Kubernetes, {ks_product}, 平台管理, 访问控制, 平台角色, 查看平台角色列表
+:ks_description: 介绍如何查看平台角色列表。
+:ks_weight: 02
+:ks_icon:
+:ks_menu: **平台管理 > 访问控制**
+:ks_permission: **角色查看**
+:ks_navigation: **平台角色**
+
+
+本节介绍如何查看平台角色列表。
+
+
+== 前提条件link:[id=12a6b60489fd40dc9210784061d92e82]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=3fad03124d7447c293ea5419cde1b547]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+--
+{ks_product_right}平台提供以下预置平台角色：
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|platform-admin
+|平台管理员，在{ks_product_both}平台具有所有权限。
+
+|platform-regular
+|平台普通用户，在平台级别只有应用查看权限。该角色一般授予不需要其他平台权限的企业空间成员。
+
+|platform-self-provisioner
+|创建企业空间并成为所创建的企业空间的管理员。
+|===
+--

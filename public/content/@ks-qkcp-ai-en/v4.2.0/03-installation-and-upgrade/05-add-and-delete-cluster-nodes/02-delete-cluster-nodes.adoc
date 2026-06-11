@@ -1,0 +1,182 @@
+---
+title: "Delete Cluster Nodes"
+keywords: "Kubernetes, {ks_product}, Delete Cluster Nodes"
+description: "Describes how to delete KubeSphere cluster nodes."
+weight: 02
+---
+
+
+This section describes how to delete KubeSphere cluster nodes.
+
+The open-source tool KubeKey will be used during the node deletion process. For more information about KubeKey, please visit the link:https://github.com/kubesphere/kubekey[GitHub KubeKey repository].
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+The node deletion method described in this section is only applicable to scenarios where Kubernetes was installed via KubeKey. If your Kubernetes was not installed via KubeKey, please refer to the link:https://kubernetes.io/zh/docs/concepts/architecture/nodes/[Kubernetes official documentation] to delete nodes.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+* Do not delete control plane nodes, otherwise the cluster will encounter errors.
+
+* Ensure that after node deletion, the remaining resources in the cluster are still sufficient to run existing workloads. Otherwise, service interruption may occur after node deletion.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== If KubeSphere Was Installed Online
+
+If KubeSphere was link:../../02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/[installed online], follow the steps below to delete cluster nodes.
+
+=== Prerequisites
+
+You need to obtain the installation configuration file **config-sample.yaml** and transfer it to the cluster node where you will perform the operations in this section.
+
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+If you cannot obtain the installation configuration file **config-sample.yaml**, you need to refer to link:../../02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/[Online Installation of KubeSphere] to recreate the **config-sample.yaml** file. When recreating this file, be sure that the cluster information in the file matches the current actual state of the cluster. Otherwise, the cluster may encounter errors after node deletion.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+=== Steps
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-downloadKubekey.adoc[]
+
+. Execute the following command to view the name of the node to be deleted:
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl get node
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to evict the pods running on the node to be deleted to other nodes (replace `<nodename>` with the name of the node to be deleted):
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl drain <nodename>
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
++
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-transferConfig.adoc[]
+
++
+
+. Execute the following command to start deleting the node:
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+ ./kk delete node <nodename> -f config-sample.yaml
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to view the current cluster nodes:
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl get node
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+If the information of the deleted node is not displayed, it indicates that the node deletion was successful.
+--
+
+== If KubeSphere Was Installed Offline
+
+If KubeSphere was link:../../02-install-kubesphere/02-offline-install-kubernetes-and-kubesphere/[installed offline] using the Web Installer, follow the steps below to delete cluster nodes.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|Deleting nodes on the Web Installer page is not currently supported.
+|===
+
+=== Prerequisites
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-getInfoForOfflineInstall.adoc[]
+
+=== Steps
+
+. Log in to the ``cluster node`` and execute the following command to view the name of the node to be deleted:
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl get node
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Evict the pods running on the node to be deleted to other nodes (replace `<nodename>` with the name of the node to be deleted):
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl drain <nodename>
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. On the ``deployment node``, navigate to the directory where the offline package was extracted (e.g., offline), and use `kkv4-inventory.yaml` and `kkv4-config.json` to delete the node.
++
+====
+[source,bash]
+----
+cd offline
+----
+
+[source,bash]
+----
+./kk delete nodes <nodename> -i kkv4-inventory.yaml -c kkv4-config.json
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|Deleting etcd nodes is not currently supported.
+|===
+
+If the following information is displayed, it indicates that the node deletion was successful.
+
+Example output:
+
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+[Playbook default/delete-nodes-qpmzs] finish. total: 74,success: 68,ignored: 6,failed: 0
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+====
+
+. On the ``cluster node``, execute the following command to view the current cluster nodes:
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl get node
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+If the information of the deleted node is not displayed, it also indicates that the node deletion was successful.
+--

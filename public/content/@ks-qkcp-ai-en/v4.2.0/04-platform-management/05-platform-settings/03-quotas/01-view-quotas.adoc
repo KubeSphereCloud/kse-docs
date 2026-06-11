@@ -1,0 +1,49 @@
+---
+title: "View Resource Quotas"
+weight:  01
+---
+
+:ks_navigation: **Quotas**
+:ks_permission: **Platform Settings Management**
+
+This section describes how to view the resource quotas for the current KubeSphere version. When the amount of used resources reaches the quota limit, the corresponding resources cannot be created.
+
+// [.admon.note,cols="a"]
+// |===
+// |Note
+
+// |
+// ifeval::["{file_output_type}" == "html"]
+// link:../../../../01-intro/04-editions/[click here] to view the resource quotas for different KubeSphere editions.
+
+// endif::[]
+
+// ifeval::["{file_output_type}" == "pdf"]
+// Please refer to *KubeSphere Product Introduction* to view the resource quotas for different KubeSphere editions.
+
+// endif::[]
+// |===
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
+. In the upper right corner of the page, click **Component Dock > Platform Settings**.
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. View the KubeSphere resource quotas, as well as the quantity and percentage of used resources.
+
+. In the upper right corner of the workspace quota, cluster quota, or project quota, select from the drop-down list to view the resource quota and usage for a specific workspace, cluster, or project.
++
+Click image:/images/ks-qkcp/zh/icons/chevron-up.svg[chevron-up,18,18] or image:/images/ks-qkcp/zh/icons/chevron-down.svg[chevron-down,18,18] to collapse/expand the quota area.

@@ -1,0 +1,97 @@
+---
+title: "创建定时任务"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 定时任务, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建定时任务。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: cde470fd8d134a50b0895091eab6b160
+:ks_xref_id: a467ecaca52a4eda886b157e7ec940ef
+:ks_comp: ../../../../components/
+:ks_title: 创建定时任务
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建定时任务。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 定时任务, 创建
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建定时任务。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=b60170a7d5da4bec8ba47f3359e43d52]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/timer/timer-task-manage-prerequisites.adoc[]
+
+:relfileprefix: ./
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=97cfa05691454ce28433393ab377d108]
+
+include::../../../../_custom/timer/timer-task-steps.adoc[]
+
+. 在定时任务列表页面点击**创建**。
+
+. 在**创建定时任务**对话框，为即将创建的定时任务设置基本信息，其中包含以下参数：
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|任务名称
+|用户自定义的定时任务名称。
+
+include::../../../../_custom/networks/naming-convention.adoc[]
+
+|选择项目
+|定时任务所在的项目名称。系统 **admin** 用户可以为所有项目创建定时任务，普通项目管理员和操作员可以为所属项目创建定时任务。
+
+|描述
+|定时任务的描述信息。
+|===
+--
+
+. 基本信息设置完成后，点击**下一步**配置定时策略，其中包含以下参数：
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|执行操作
+|执行定时任务时完成的操作。可按业务需求选择**开启虚拟机**、**关闭虚拟机**、**重启虚拟机**或**创建备份**。
+
+|选择方式
+|定时任务的执行方式。当前支持**重复执行**和**仅执行一次**。
+
+|选择操作对象
+|选择将要执行定时任务的虚拟机。支持选择所属项目中的一台或多台虚拟机。
+
+|策略
+|定时任务的执行策略。如果没有合适的执行策略，可以点击**创建策略**。本参数仅选择方式为**重复执行**时可见。
+
+|时间
+|定时任务执行的时间。本参数仅选择方式为**仅执行一次**时可见。
+
+|允许失败次数
+|允许任务执行失败的最大次数。如果超过了允许失败的次数，系统会执行停止任务或跳过本次任务的操作。有效值范围：3 - 8。
+
+|失败后停止或跳过
+|任务失败次数超过允许失败的最大次数后，将要执行的操作。可选择**跳过**或**停止**当前任务。
+|===
+--
+
+. 参数配置完成后，点击**确定**。定时任务创建完成后将显示在定时任务列表中。
+

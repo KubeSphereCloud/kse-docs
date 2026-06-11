@@ -1,0 +1,29 @@
+---
+title: Bucket 配额调整
+description: 
+weight: 7
+---
+
+
+通过 Portal，用户可对 Bucket 的容量配额进行调整。Bucket 在创建时，默认为无容量限制。
+
+. 成功link:../../../../../login[登录 Portal]。
+
+. 调整 Bucket 配额
++
+* 方式一：
++ 
+点击**对象存储 > Bucket**，进入 Bucket 列表页面后，查询到待操作的 Bucket，点击**更多 > 修改 Bucket 容量配额**。
++
+* 方式二：
++
+在 link:#_查看_bucket_基本信息[Bucket 基本信息]页面，修改 Bucket 的配额后，点击**保存修改**。
++
+image::/images/u10000/stor_bucket_info.png[stor_bucket_info,100%]
++
+**页面信息说明：**
+
+* `不限制`，即对 Bucket 容量配额不做限制。
+* `自定义`，即可根据需求对 Bucket 容量上限做出限制，以便用户更加合理的分配资源。
+* 设置的 Bucket 容量配额如果比当前已使用的容量小，或者 Bucket 已使用容量达到配额后，则用户无法上传新的文件至该 Bucket，但已存储于该 Bucket 内的文件仍然可以正常下载。
+

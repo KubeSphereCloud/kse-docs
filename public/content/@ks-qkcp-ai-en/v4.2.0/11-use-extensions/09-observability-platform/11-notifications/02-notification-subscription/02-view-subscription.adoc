@@ -1,0 +1,57 @@
+---
+title: "View Notification Subscriptions"
+description: "Describes how to view notification subscriptions."
+weight: 02
+---
+
+:ks_navigation: **Notification > Notification Subscriptions**
+// :ks_permission: **Platform Settings Management**
+
+
+
+This section describes how to view notification subscriptions.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Notification** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
++
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
++
+include::../../../../../../_ks_components/oper-navigate.adoc[]
++
+. On the **Notification Subscriptions** page, under the **Email** tab, view the list of created notification subscriptions.
++
+--
+The notification subscription list provides the following information:
+[%header,cols="1a,4a"]
+|===
+|Parameter|Description
+
+|Name
+|The name of the notification subscription.
+
+|Notification Receiving Status
+|Whether the notification subscription is enabled.
+
+|Number of Notification Subscription Accounts
+|The number of accounts receiving notifications.
+
+|Creation Time
+|The creation time of the notification subscription.
+|===
+
+* Click the search box above the list and enter a keyword to search for notification subscriptions by name.
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+--
+. Click the name of a notification subscription to view its details, such as subscribed accounts, filter conditions, etc.

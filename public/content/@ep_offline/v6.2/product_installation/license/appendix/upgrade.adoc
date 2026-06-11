@@ -1,0 +1,35 @@
+---
+title: "升级场景 PaaS License 注册说明"
+weight: 10
+---
+
+== 背景介绍
+
+{product_name}**从低版本升级到 v6.0.0 版本**，若升级前未注册足够授权的 PaaS License（**PaaS License 需要包含{product_name}中已创建实例所使用的配额**），升级后用户将可能无法创建新的 PaaS 实例（包括从备份中创建实例、从回收站恢复实例、扩容实例等）。
+
+include::../../../../../_components/note.adoc[]
+此时已创建的 PaaS 实例仍可正常使用。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 方法一：升级前导入相应的 PaaS License（推荐）
+
+为了避免升级后无法创建新的 PaaS 实例，建议在升级前申请并导入相应的 PaaS License，待导入 PaaS License 操作完成后再进行升级操作。
+
+操作步骤如下：
+
+1. link:../../paas/inquire[查询未注册的 PaaS 应用（见 3.1）]。
+2. link:../../paas/get_id[获取申请信息（见 3.2）]。
+3. link:../../paas/apply[申请 License（见 3.3）]。
+4. link:../../paas/register/cli[通过 CLI 命令导入 License（见 3.4.1）]。
+
+== 方法二：升级后导入相应的 PaaS License
+
+若升级后才发现不能创建新的 PaaS 实例，请立即申请并注册相应的 PaaS License。
+
+操作步骤如下：
+
+1. link:../../paas/inquire[查询未注册的 PaaS 应用（见3.1）]。
+2. link:../../paas/get_id[获取申请信息（见 3.2）]。
+3. link:../../paas/apply[申请 License（见 3.3）]。
+4. link:../../paas/register/boss[通过 BOSS 平台注册 License（见3.4.2）]。

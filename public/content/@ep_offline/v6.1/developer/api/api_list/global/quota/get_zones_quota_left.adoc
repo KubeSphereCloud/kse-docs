@@ -1,0 +1,90 @@
+---
+title: 查询用户配额剩余情况（GetZonesQuotaLeft）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resource_types
+| Array
+| true
+| 资源类型
+
+| user
+| String
+| true
+| 用户编号
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 操作名称
+
+| ret_code
+| Integer
+| false
+| 操作结果
+
+| total_count
+| Integer
+| false
+| 总数
+
+| zone_left_quotas
+| Array
+| false
+| 剩余数
+
+| zone_left_quotas[].TODO
+| String
+| false
+| 待定义（动态结构，参考示例）
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "resource_type": [
+    "instance"
+  ],
+  "user": "usr-xxx"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetZonesQuotaLeftResponsse",
+  "ret_code": 0,
+  "total_count": 100,
+  "zone_left_quotas": [
+    {
+      "pek3": [
+        {
+          "instance": 3
+        }
+      ]
+    }
+  ]
+}
+----

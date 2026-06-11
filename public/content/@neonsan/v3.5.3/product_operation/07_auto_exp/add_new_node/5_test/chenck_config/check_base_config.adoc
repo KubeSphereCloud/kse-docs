@@ -1,0 +1,50 @@
+---
+title: '系统基础检查'
+weight: 1
+---
+. 逐个登录 {product_name} 集群的所有节点，执行如下命令，查看服务状态。返回结果中所服务状态均为 `RUNNING` 则表示服务正常。
++
+[,sheel]
+----
+supervisorctl status
+----
+. 逐个登录 {product_name} 集群所有节点检查 arp 设置。
+.. 检查 arp 配置。
++
+[,shell]
+----
+
+sysctl -a | grep arp_ignore
+
+... ...
+net.ipv4.conf.all.arp_ignore = 1
+net.ipv4.conf.default.arp_ignore = 1 
+----
+
+.. 若无配置或与上显示不同，则执行如下命令配置。
++
+[,shell]
+----
+sysctl -w net.ipv4.conf.default.arp_ignore = 1
+sysctl -w net.ipv4.conf.all.arp_ignore = 1
+----
+
+. 将改动添加至配置文件。
++
+[,shell]
+----
+echo -e "net.ipv4.conf.default.arp_ignore = 1\nnet.ipv4.conf.all.arp_ignore = 1" >> /etc/sysctl.conf
+----
+
+. 检查时间戳是否一致。
++
+[,shell]
+----
+date +%s
+----
+. 开机自启项检查。分别检查新增节点与集群原有节点的开机自启动项，确定新增节点的开机自启动正确配置。
++
+[,shell]
+----
+cat /etc/rc.local
+----

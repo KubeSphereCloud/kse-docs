@@ -1,0 +1,24 @@
+---
+title: "HTTP 故障模拟"
+weight:  04
+---
+
+本节介绍如何模拟 HTTP 故障（HTTPChaos）。
+
+HTTPChaos 通过拦截目标 Pod 的 HTTP 流量，对请求或响应执行中断、延迟、替换、补丁等操作，用于验证业务在 HTTP 异常场景下的容错能力。
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用混沌工程扩展组件。
+
+== 支持的操作
+
+* 准备测试环境
+* 中断请求（request-abort）
+* 延迟请求（request-delay）
+* 替换请求（request-replace）
+* 补丁请求（request-patch）
+* 中断响应（response-abort）
+* 延迟响应（response-delay）
+* 替换响应（response-replace）
+* 补丁响应（response-patch）

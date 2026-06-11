@@ -1,0 +1,28 @@
+---
+title: "KubeEdge"
+keywords: "Kubernetes, {ks_product-en}, cluster management, edge nodes"
+description: "Learn how to use KubeEdge to manage edge nodes in a cluster."
+weight: 17
+layout: "second"
+---
+
+
+This section describes how to use the KubeEdge extension to manage edge nodes in a cluster.
+
+KubeEdge consists of both cloud and edge parts, allowing you to extend containerized application orchestration and management to edge devices. It is built on Kubernetes, providing infrastructure support for networking and applications, and deploying applications and synchronizing metadata between the cloud and edge. With KubeEdge, you can easily deploy applications to the edge and use them. By processing data at the edge, response times are significantly improved, and data privacy is better protected.
+
+After installing the KubeEdge extension, the **Edge Nodes** option will be displayed under the **Nodes** menu in the left navigation pane of the cluster.
+
+KubeSphere supports two types of nodes:
+
+* Cluster Nodes: Nodes local to the KubeSphere cluster, typically all belonging to the same private network.
+
+* Edge Nodes: Nodes deployed in edge environments managed by KubeSphere. Typically, edge nodes are lighter than cluster nodes and belong to different private networks.
+
+ifeval::["{file_output_type}" == "html"]
+Some operations for edge nodes and cluster nodes are the same, such as viewing node details, preventing and allowing pod scheduling, editing node taints and labels. For more information, see link:../../07-cluster-management/03-nodes[Node Management].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+Some operations for edge nodes and cluster nodes are the same, such as viewing node details, preventing and allowing pod scheduling, editing node taints and labels. For more information, see the "Nodes" section in the {ks_product-en} Cluster Management Guide.
+endif::[]

@@ -1,0 +1,79 @@
+---
+title: "查看 VPA 列表"
+weight: 02
+---
+
+:ks_permission: **容器垂直伸缩查看**
+:ks_navigation: **弹性伸缩 > 容器垂直伸缩**
+
+
+本节介绍如何查看容器垂直伸缩的列表信息。
+
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* KubeSphere 平台需要安装并启用 **Vertical Pod Autoscaler** 扩展组件。
+
+
+== 操作步骤
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+ 
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+====
+* 容器垂直伸缩列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|策略名称
+|容器垂直伸缩（VPA）的名称。
+
+|状态
+|VPA 的当前状态。若状态异常，鼠标悬停于图标上可查看错误详情。
+
+|更新模式
+|
+* 自动更新模式：自动更新 Pod 资源请求，并通过重建的方式应用新的资源配置。
+
+* 监控模式：仅对资源进行监控并计算推荐值，不会自动调整 Pod 的资源请求。
+
+* 初始模式：仅在 Pod 首次创建时设置资源请求，之后不做更改。
+
+* 重建模式：当请求的资源与新的推荐值区别很大时，通过驱逐 Pod 的方式来更新现存的 Pod。
+
+* 原地更新模式：首先尝试原地重新调整大小，若当前节点资源不足，则选择其他满足条件的节点重建 Pod。
+
+|伸缩对象
+|VPA 所管理的工作负载，通常是部署或有状态副本集。
+
+|创建时间
+|VPA 资源的创建时间。
+|===
+--
+
+* 在列表上方点击搜索框并设置搜索条件，可按名称和状态搜索 VPA。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+
+====
+
+

@@ -1,0 +1,146 @@
+---
+title: "Component Settings"
+keywords: "Kubernetes, {ks_product-en}, platform management, Whizard Observability Center, set components"
+description: "Describes how to set Whizard components."
+weight: 11
+---
+
+// :ks_menu: **Platform Management > Whizard Observability Center**
+
+
+This section describes how to set components in the Whizard Observability Center.
+
+
+== Prerequisites
+
+You should have the **platform-admin** role on the {ks_product-en} platform. For more information, see link:../../../../05-users-and-roles/01-users/[Users] and link:../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+
+== Steps
+
+include::../../../../_custom-en/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/grid.svg[grid,18,18] in the upper-right corner of the page and click **Whizard Observability Center**.
+
++
+
+. On the **Multi-cluster Monitoring** page, click image:/images/ks-qkcp/zh/icons/cogwheel.svg[cogwheel,18,18] on the right to enter the **Component Settings** page.
+
+
+. On the **Data Access** tab, set the following parameters.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Gateway Settings
+|
+
+* Component Replicas: Set the number of replicas for the storage gateway component, default is 2.
+
+* Container Quotas: Set CPU request and limit, and memory request and limit.
+
+|Router
+|
+* Data Retention Replicas: Set the number of replicas for the data retention component, default is 1.
+
+* Component Replicas: Set the number of replicas for the data router component, default is 2.
+
+* Container Quotas: Set CPU request and limit, and memory request and limit.
+
+|Local Storage
+|
+* Local Data Storage Duration: Set the storage duration of local data. The value at least 3, and the default value is 7.
+
+* Component Replicas: Set the number of replicas for the local storage component, default is 2.
+
+* Container Quotas: Set CPU request and limit, and memory request and limit.
+|===
+--
+
+. On the **Data Query** tab, set the following parameters.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Basic Settings
+|
+
+* Component Replicas: Set the number of replicas for the Query component, default is 2.
+
+* Container Quotas: Set CPU request and limit, and memory request and limit.
+
+|Cache Settings
+|
+
+* Component Replicas: Set the number of replicas for the Cache component, default is 2.
+
+* Container Quota: Set CPU request and limit, and memory request and limit.
+
+|===
+--
+
+. On the **Long-term Storage** tab, click **On** to enable the long-term storage component. After enabling, you can configure the component parameters for object storage, gateway, retention period, and downsampling.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Object Storage
+|
+
+* Bucket: The name of the S3 object storage bucket.
+
+* Region: The geographic region where the bucket is created.
+
+* Endpoint: The AWS S3 object storage address to connect to.
+
+* Access Key: AWS account access key ID.
+
+* Secret Key: The secret associated with the AWS Access Key ID.
+
+**Advanced Settings**
+
+* HTTP Protocol: Decide whether to enable the insecure HTTP protocol.
+
+* Add Storage Class: Add user metadata for the object storage. After enabling, you need to add key-value pairs for the object storage parameters.
+
+* HTTP Configuration: Configure the HTTP client used by the receiver to communicate with HTTP-based API services.
+
+** TLS Certificate: Whether to prove your identity or indicate your access rights to online services by submitting a digital certificate.
+
+** TLS Connection
+
+*** CA Certificate: The CA file used to verify the server certificate.
+
+*** Cert File: The certificate file used for client certificate authentication to the server.
+
+*** Key: The key file used for client certificate authentication to the server.
+
+*** Server Name: The ServerName extension to indicate the server's name.
+
+*** Server Certificate Verification: Whether to prove your identity or indicate your access rights to online services by submitting a digital certificate.
+
+|Storage Gateway
+|Set CPU request and limit, and memory request and limit.
+
+|Compression and Downsampling
+|
+
+* Raw Data Storage Duration: Raw data storage duration. The raw data will be deleted after the duration expires.
+
+* 5m Downsampled Data Storage Duration: Specify the data storage duration for downsampling to 5-minute intervals of data points.
+
+* 1h Downsampled Data Storage Duration: Specify the data storage duration for downsampling to 1-hour intervals of data points.
+
+* Container Quotas: Set CPU request and limit, and memory request and limit.
+|===
+--
+
+. On the **Ruler** tab, set the container quota. After setting, click **OK**.

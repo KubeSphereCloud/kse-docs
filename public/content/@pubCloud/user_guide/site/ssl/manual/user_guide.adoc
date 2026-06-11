@@ -1,0 +1,75 @@
+---
+title: SSL 证书使用流程
+description: 如何购买 ssl 证书
+draft: false
+weight: 1
+keywords: 云计算, SSL，购买指南
+linkkey: domain_ssl_orders_guide
+---
+本文介绍如何购买及获取 SSL 证书。
+
+== 步骤一：创建订单
+
+. 登录管理控制台。
+. 在顶部菜单栏，选择**产品与服务** > **域名与网站** > **SSL 证书服务**，进入 SSL 证书服务控制台。
++
+image::/images/cloud_service/site/ssl/step_1.png[]
+
+. 在**我的证书**页面，点击**购买 SSL 证书**。
+. 选择需要的link:../../intro/introduction/#id3[证书类型]和link:../../intro/introduction/#_证书品牌[证书品牌]，点击**提交**。
++
+image::/images/cloud_service/site/ssl/step_2.png[]
+. 在弹出的提示框中，点击**确认**，创建订单成功。
+
+== 步骤二：补全域名信息
+
+. 在左侧导航栏选择**订单列表**，找到目标订单，点击**操作**列的**补全域名**。
++
+image::/images/cloud_service/site/ssl/step_3.png[]
+
+. 在弹出的**填写域名信息**窗口中，输入需要签发的域名并选择加密算法。
++
+DV 证书需要选择link:../../manual/verify_cert/#valid-domain[域名验证方式]。建议使用 DNS 验证方式，如果没有网站 DNS 权限则使用文件验证。
++
+* 当通用域名为主域名时，如 qingcloud.com，默认会签发出 www.qingcloud.com 和 qingcloud.com（免费赠送不计入数量）。
+* 当通用域名为泛域名时，如 *.qingcloud.com， 默认会签发出 *.qingcloud.com 和 qingcloud.com（免费赠送不计入数量）。
+* 额外的域名：填写额外的子域名到多域名输入框中，即下图所示，提交签发出 qingcloud.com、www.qingcloud.com、api.qingcloud.com 和 docs.qingcloud.com 四个域名，同时建议多个子域名情况下直接购买泛域名证书。
++
+image::/images/cloud_service/site/ssl/step_4.png[,70%]
+
+. 点击**提交**。
+
+== 步骤三：支付订单
+
+在**订单列表**页面，找到目标订单，点击**支付**，弹出**支付订单**窗口，点击**立即支付**即可。
+
+image::/images/cloud_service/site/ssl/step_5.png[,60%]
+
+== 步骤四：补全公司信息
+
+公司信息和个人信息补全后，非签发失败情况下不退款，请核实签发域名和选择的品牌正确与否。
+
+. 在订单列表页面，找到目标订单，点击**补全信息**。
++
+image::/images/cloud_service/site/ssl/step_7.png[]
+
+. 填写公司信息，然后点击**下一步**，填写**负责人信息**。
++
+image::/images/cloud_service/site/ssl/step_8.png[,70%]
+
+. 点击**提交**。
+
+
+== 步骤五：验证证书
+
+* *DV 证书验证*：可以通过 DNS 验证或者文件验证。详细操作方法，请参考link:../../manual/verify_cert/#valid-domain[域名验证方式]。
+* *OV/EV 证书验证*：需要通过上传确认函的方式进行验证。详细操作方法，请参考link:../../manual/verify_cert/#confirm-letter[确认函确认]。
+
+== 步骤六：下载证书
+
+证书签发成功后，订单状态变为**订单完成**。
+
+. 在订单列表，点击**操作**列的**详情**，进入证书详情页。
+. 在**证书信息**区域，点击**下载证书**进行下载使用，也可以直接在负载均衡器中加载使用。
++
+image::/images/cloud_service/site/ssl/download.png[]

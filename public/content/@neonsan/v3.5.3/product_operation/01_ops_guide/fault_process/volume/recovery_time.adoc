@@ -1,0 +1,53 @@
+---
+title: "设置卷恢复任务间的时间间隔"
+weight: 4
+---
+
+== 适用场景
+
+若当前环境中通过 ``neonsan list_job`` 查询到有大量卷恢复任务处于 ``waiting`` 状态，可通过手动设置减少卷恢复任务间的时间间隔，从而缩短所有卷恢复任务完成所需的总时间。
+
+== 注意事项
+
+此方法仅减少卷恢复任务间的间隔时长，并不是减少卷恢复任务本身所需要的时间。
+
+== 操作步骤
+
+. 登录 NeonSAN 集群的任一节点。
+. 获取当前环境中卷恢复任务间的间隔时长。
++
+* 若当前环境开启了卷自动恢复功能，可执行如下命令，查看任务等待时长 auto_recovery_time_interval，该值默认为 5 分钟。
++
+[,shell]
+----
+curl "http://$(qfcip):2600/control?op=get_recovery_time_control_parameter&parameter=auto_recovery_time_interval"
+----
+
+* 执行如下命令，查看任务状态变更轮询时间间隔 recovery_queue_pollig_interval，该值默认为 60 秒。
++
+[,shell]
+----
+curl "http://$(qfcip):2600/control?op=get_recovery_time_control_parameter&parameter=recovery_queue_polling_interval"
+----
+
+. 修改当前环境中卷恢复任务间的时间间隔。
++
+* 若当前环境开启了卷自动恢复功能，执行如下命令，修改任务等待所需的时间间隔 auto_recovery_time_interval。
++
+[,shell]
+----
+curl "http://$(qfcip):2600/control?op=set_recovery_time_control_parameter&parameter=auto_recovery_time_interval&value=60"
+
+// value取值范围为：1~600，单位为秒
+----
+
+* 执行如下命令，修改任务状态变更轮询所需的时间间隔 recovery_queue_pollig_interval。
++
+[,shell]
+----
+curl "http://$(qfcip):2600/control?op=set_recovery_time_control_parameter&parameter=recovery_queue_polling_time&value=1"
+
+// value取值范围为：1~300，单位为秒
+----
+
+

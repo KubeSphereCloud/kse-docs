@@ -1,0 +1,56 @@
+---
+title: 重新加载扣费信息（ReloadLeaseInfo）
+weight: 21
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resource
+| String
+| true
+| 资源ID
+
+| user
+| String
+| true
+| private
+
+| zone
+| String
+| true
+| private
+|===
+
+== 返回数据
+
+此接口仅包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ReloadLeaseInfo",
+  "resource": "wpcon-hx02m069",
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ReloadLeaseInfoResponse",
+  "ret_code": 0
+}
+----

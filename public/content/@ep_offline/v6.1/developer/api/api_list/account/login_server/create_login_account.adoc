@@ -1,0 +1,79 @@
+---
+title: 创建第三方登录账户（CreateLoginAccount）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| auth_pwd
+| String
+| true
+| 认证密码
+
+| auth_user
+| String
+| true
+| 认证用户
+
+| login_server
+| String
+| true
+| 登录服务器
+
+| user
+| String
+| false
+| 用户
+
+| zones
+| Array
+| true
+| 
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_account_id
+| String
+| false
+| 登录账户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "auth_pwd": "*********",
+  "auth_user": "auth_user_1",
+  "login_server": "login_server_1",
+  "user": "admin",
+  "zones": [
+    "pek3"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateLoginAccountResponse",
+  "login_account_id": "login_account_id_1",
+  "ret_code": 0
+}
+----

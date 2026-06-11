@@ -1,0 +1,266 @@
+---
+title: 账号服务巡检（InspectAccount）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_key
+| String
+| true
+| 控制台密钥id
+
+| console_key_name
+| String
+| false
+| 控制台密钥的名称
+
+| description
+| String
+| false
+| 控制台密钥的描述
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| data
+| Object
+| false
+| 巡检结果
+
+| data.inspection_data
+| Array
+| false
+| 时间戳
+
+| data.inspection_data[].detail
+| Array
+| false
+| 巡检详情
+
+| data.inspection_data[].detail[].host
+| String
+| false
+| 巡检的节点host
+
+| data.inspection_data[].detail[].msg
+| String
+| false
+| 巡检API详情
+
+| data.inspection_data[].detail[].port
+| Integer
+| false
+| 巡检服务端口
+
+| data.inspection_data[].detail[].status
+| String
+| false
+| 巡检结果
+
+| data.inspection_data[].detail[].timestamp
+| Integer
+| false
+| 巡检时间戳
+
+| data.inspection_data[].detail[].zone
+| String
+| false
+| 可用区/区域ID
+
+| data.inspection_data[].item
+| String
+| false
+| 英文巡检项
+
+| data.inspection_data[].item_cn
+| String
+| false
+| 中文巡检项
+
+| data.inspection_data[].status
+| String
+| false
+| 巡检结果
+
+| data.service_name
+| String
+| false
+| 巡检服务英文名称
+
+| data.service_name_cn
+| String
+| false
+| 巡检服务中文名称
+
+| data.status
+| String
+| false
+| 巡检结果
+
+| data.time_stamp
+| Integer
+| false
+| 时间戳
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "InspectAccount"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "InspectAccountResponse",
+  "data": {
+    "inspection_data": [
+      {
+        "detail": [
+          {
+            "host": "qa1a-webservice1",
+            "msg": "{\"action\":\"DescribeConsoles\",\"ret_code\":0}, ",
+            "port": 9695,
+            "status": "normal",
+            "time_stamp": 1668483027,
+            "zone": "qa1a"
+          },
+          {
+            "host": "qa1a-webservice0",
+            "msg": "{\"action\":\"DescribeConsoles\",\"ret_code\":0}, ",
+            "port": 9695,
+            "status": "normal",
+            "time_stamp": 1668483027,
+            "zone": "qa1a"
+          }
+        ],
+        "item": "business_capability",
+        "item_cn": "业务功能",
+        "msg": "business_capability service running normal",
+        "status": "normal"
+      },
+      {
+        "detail": [
+          {
+            "host": "qa1a-webservice1",
+            "msg": "memcached service running normal",
+            "port": 9695,
+            "status": "normal",
+            "time_stamp": 1668483026,
+            "zone": "qa1a"
+          },
+          {
+            "host": "qa1a-webservice0",
+            "msg": "memcached service running normal",
+            "port": 9695,
+            "status": "normal",
+            "time_stamp": 1668483028,
+            "zone": "qa1a"
+          }
+        ],
+        "item": "memcached",
+        "item_cn": "memcached分布式内存对象缓存系统",
+        "msg": "memcached service running normal",
+        "status": "normal"
+      },
+      {
+        "detail": [
+          {
+            "host": "qa1a-webservice1",
+            "msg": "ZooKeeper service running normal",
+            "port": 9695,
+            "status": "normal",
+            "time_stamp": 1668483026,
+            "zone": "qa1a"
+          },
+          {
+            "host": "qa1a-webservice0",
+            "msg": "ZooKeeper service running normal",
+            "port": 9695,
+            "status": "normal",
+            "time_stamp": 1668483028,
+            "zone": "qa1a"
+          }
+        ],
+        "item": "ZooKeeper",
+        "item_cn": "ZooKeeper分布式应用程序协调服务",
+        "msg": "ZooKeeper service running normal",
+        "status": "normal"
+      },
+      {
+        "detail": [
+          {
+            "host": "qa1a-webservice1",
+            "msg": "PostgreSQL service error",
+            "port": 9695,
+            "status": "error",
+            "time_stamp": 1668483025,
+            "zone": "qa1a"
+          },
+          {
+            "host": "qa1a-webservice0",
+            "msg": "PostgreSQL service error",
+            "port": 9695,
+            "status": "error",
+            "time_stamp": 1668483027,
+            "zone": "qa1a"
+          }
+        ],
+        "item": "PostgreSQL",
+        "item_cn": "PostgreSQL数据库",
+        "msg": "PostgreSQL service error",
+        "status": "error"
+      },
+      {
+        "detail": [
+          {
+            "host": "qa1a-webservice1",
+            "msg": "Cassandra service running normal",
+            "port": 9695,
+            "status": "normal",
+            "time_stamp": 1668483025,
+            "zone": "qa1a"
+          },
+          {
+            "host": "qa1a-webservice0",
+            "msg": "Cassandra service running normal",
+            "port": 9695,
+            "status": "normal",
+            "time_stamp": 1668483027,
+            "zone": "qa1a"
+          }
+        ],
+        "item": "Cassandra",
+        "item_cn": "Cassandra数据库",
+        "msg": "Cassandra service running normal",
+        "status": "normal"
+      }
+    ],
+    "ret_code": 0,
+    "service_name": "account_server",
+    "service_name_cn": "账号服务",
+    "status": "error",
+    "time_stamp": 1668483027
+  },
+  "ret_code": 0
+}
+----

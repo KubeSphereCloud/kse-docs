@@ -1,0 +1,41 @@
+---
+title: 申请公网 IP
+weight: 1
+---
+
+为方便操作，用户本地机器需通过公网 IP 连接青云QingCloud 云平台上搭建的云服务器。因此申请公网 IP 是第一步。详细操作流程如下。
+
+
+. 登录 link:https://console.qingcloud.com/[Console]，输入正确的用户名密码。
+
+. 选择**产品与服务** > **网络服务** > **公网 IP**，进入公网 IP 的主页面。
++
+image::/images/u10000/public_ip_main.png[public_ip_main,100%]
+
+. 点击**申请**，弹出提示框，点击**继续申请公网 IP**，弹出**申请公网 IP** 的对话框。
++
+image::/images/u10000/public_ip_create.png[public_ip_create, pdfwidth=60%]
++
+**页面参数填写说明**
++
+[cols="2,5", options="header"]
+|===
+| 参数 |说明
+
+| 名称	|待申请的公网 IP 名称，需用户自行定义。
+| 模式	|选择 `按流量计费`。
+| 带宽上限	| 根据需求填写。
+| IP 组 | 无需操作。维持默认即可。
+| 绑定方式| 选择 `外部绑定`。
+| 备案| 选择 `不需要`。
+| 数量 | 填写 `1`。
+
+|===
+
+. 正确填写参数后，点击**提交**即可。
+
+. 可在公网 IP 的主页面，查看已创建的公网 IP。
++
+image::/images/u10000/public_ip_list.png[public_ip_list, pdfwidth=60%]
+
+. 将已创建的公网 IP，这里是 `139.198.3.63` 记录至link:../../prepare/#_环境信息表[环境信息记录表]。

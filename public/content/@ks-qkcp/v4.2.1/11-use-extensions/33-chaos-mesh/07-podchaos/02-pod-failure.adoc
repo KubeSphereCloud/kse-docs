@@ -1,0 +1,38 @@
+---
+title: "Pod 不可用"
+weight: 02
+---
+
+本节介绍如何使指定 Pod 在一段时间内处于不可用状态。
+
+故障注入期间，目标 Pod 将无法正常处理请求，但 Pod 本身不会被删除或重建。故障结束后 Pod 自动恢复。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *PodChaos*，配置以下参数后点击 *创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|故障类型（action）
+|选择 `pod-failure`，使 Pod 不可用。
+
+|持续时间（duration）
+|故障持续时间，例如 `10m`。
+
+|生效范围（selector）
+|选择故障注入的目标命名空间和 Pod。
+|===
+
+
+验证故障效果：
+
+[source,shell]
+----
+kubectl get pod "{{podID}}" -o wide
+curl "{{podIP}}"
+----
+
+
+   正常情况下返回 `index.html` 页面；故障注入期间返回连接错误，例如：`curl: (7) Failed to connect to {{podIP}} port 80: Couldn't connect to server`。

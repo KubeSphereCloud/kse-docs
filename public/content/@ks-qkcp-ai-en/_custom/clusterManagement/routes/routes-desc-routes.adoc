@@ -1,0 +1,4 @@
+// :ks_include_id: c69900173bca4b109a4b8a178ce15e64
+This section describes how to manage Ingress.
+
+Ingress is used to aggregate services and provide external access to the cluster. Each Ingress contains mapping rules from a domain name and its subpaths to different services. Business traffic from clients is first sent to the cluster gateway or project gateway. The cluster gateway or project gateway then forwards the business traffic to different services according to the rules defined in the Ingress, thereby implementing reverse proxy for multiple services.

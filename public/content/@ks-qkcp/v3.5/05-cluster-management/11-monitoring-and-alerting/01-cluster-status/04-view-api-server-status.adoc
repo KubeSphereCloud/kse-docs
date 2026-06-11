@@ -1,0 +1,67 @@
+---
+title: "查看 Kubernetes API 服务器状态"
+keywords: "Kubernetes, {ks_product}, 监控告警, 集群状态，API 服务器状态"
+description: "介绍如何查看 Kubernetes API 服务器监控数据。"
+weight: 04
+---
+
+// :ks_include_id: a902f9dec4ab479894c9bcf3726bc2d7
+:ks_xref_id: 2fae928877e045f09482520fa5fe90a6
+:ks_comp: ../../../../components/
+:ks_title: 查看 Kubernetes API 服务器状态
+:ks_keywords: Kubernetes, {ks_product}, 监控告警, 集群状态，API 服务器状态
+:ks_description: 介绍如何查看 Kubernetes API 服务器监控数据。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **监控信息查看**
+:ks_navigation: **监控告警 > 集群状态**
+
+
+本节介绍如何查看 Kubernetes API 服务器状态。
+
+
+== 前提条件link:[id=9bd6c275020b4f1597a8233c4c66c31e]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=50077903930646a089507c6aa93b2938]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**集群状态**页面，点击 **API Server 监控**页签查看 API 服务器的运行状态。
++
+====
+* **API Server 监控**页签提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|指标 |描述
+
+|请求延迟
+|指定时间范围内 API 服务器的请求延迟。
+
+|每秒请求次数
+|指定时间范围内 API 服务器每秒接受的请求数。
+|===
+--
+
+include::../../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../../_ks_components/oper-refreshData.adoc[]
+====

@@ -1,0 +1,77 @@
+---
+title: "Use web kubectl"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, kubectl"
+description: "Describes how to use kubectl in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 47270bd7161b4adfb55e30b2e45018cb
+:ks_xref_id: de70fb92afe34ab589317e0c7e88eb78
+:ks_comp: ../../../components/
+:ks_title: Use web kubectl
+:ks_description: Describes how to use kubectl in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, kubectl
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+Kubectl is a command line tool for Kubernetes. You can run kubectl commands to deploy applications, query and manage cluster resources, and query logs.
+
+{ks_product_abbr_full} web console provides web kubectl on the console for user convenience. By default, only user **admin** has the permission to use web kubectl for cluster resource O&M.
+
+This topic describes how to use web kubectl to operate on and manage cluster resources.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=f0d8422b6abf46c9adbfe617fef0052e]
+
+. Log in to the {ks_product} web console as user **admin**.
+. In the lower-right corner of the page, hover over image:/images/ksv/en/icons/hammer.svg[18px,18px] and select **Kubectl**.
+. In the CLI that appears, enter kubectl commands to query and manage Kubernetes cluster resources. For example, run the following command to query the status of all PVCs in the cluster:
++
+--
+// Bash
+
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl get pvc --all-namespaces
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+. In the CLI, run kubectl commands based on the following syntax:
++
+--
+// Bash
+
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl [command] [TYPE] [NAME] [flags]
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+The following content describes the parameters **command**, **TYPE**, **NAME**, and **flags** in the commands.
+
+[cols='1a,3a']
+|===
+|Parameter |Description
+
+|command
+|The operation that you want to perform on one or more resources, such as **create**, **get**, **describe**, and **delete**.
+
+|TYPE
+|The type of the resource. Resource types are case-insensitive and you can use the singular, plural, or abbreviated forms.
+
+|NAME
+|The name of the resource. Names are case-sensitive. If the name is omitted, details for all resources are displayed, such as **kubectl get pods**.
+
+|flags
+|指定可选标志。 For example, you can use the **-s** or **--server** flags to specify the address and port of the Kubernetes API server.
+|===
+
+To obtain more information about commands, run **kubectl help** in the CLI or see link:https://kubernetes.io/docs/reference/kubectl/[Kubernetes Kubectl CLI].
+--

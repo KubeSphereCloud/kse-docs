@@ -1,0 +1,44 @@
+---
+title: 创建桌面云服务器
+weight: 20
+---
+
+桌面云镜像注册完成后，基于已注册的桌面云镜像创建一个云服务器，该云服务器即为桌面云服务器。
+
+== 前提条件
+
+* 已成功注册 QingCloud 桌面云镜像。
+* 已安装 QingCloud 云平台，并已获取云平台的访问地址和帐号密码。
+* 已完成桌面云网络规划。
+
+== 操作步骤
+
+. 登录 QingCloud 云平台。
+. 选择**产品与服务** > **计算** > **云服务器**，进入云服务器页面。
+. 点击左侧的**创建**，弹出创建云服务器对话框。
+. 配置云服务器。
++
+--
+* 选择镜像：选择已注册的桌面云镜像。
++
+image::/images/vdi/installation/deploy_create_vm_01.png[,50%]
+
+* 选择规格：选择 **CPU** 和**内存**的规格。规格建议 ``4C8G``，系统盘 ``100G``。
++
+image::/images/vdi/installation/deploy_create_vm_02.png[,50%]
+
+* 配置网络：选择桌面云服务器所在网络。
+* 配置基本信息：输入**云服务器名称**、数量，选择登录方式，本文以登录密码为例。
++
+include::../../../../_components/attention.adoc[]
+
+include::../../../../_components/table_footer.adoc[]
++
+image::/images/vdi/installation/deploy_create_vm_03.png[,50%]
+--
+
+. 点击**创建**，即可创建桌面云服务器。
++
+创建成功后，云服务器的状态为``运行中``。
++
+image::/images/vdi/installation/deploy_create_vm_04.png[,50%]

@@ -1,0 +1,90 @@
+---
+title: "扩展 RadonDB OpenSearch"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB OpenSearch, 扩展 OpenSearch"
+description: "介绍如何扩展 RadonDB OpenSearch 集群。"
+weight: 06
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 65bca23ae82c4bf09b9f9327d57eaebd
+:ks_xref_id: 8fef4f4e44624c4b8dee6403d63194a3
+:ks_comp: ../../../components/
+:ks_title: 扩展 RadonDB OpenSearch
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB OpenSearch, 扩展 OpenSearch
+:ks_description: 介绍如何扩展 RadonDB OpenSearch 集群。
+:ks_weight: 06
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何扩展 RadonDB OpenSearch 集群。
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* 若选择节点数低于当前节点数，将删除超出的节点。
+* 扩展节点可能会造成业务短暂的中断，请在业务低峰时进行。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=178459c7ffa242b0a0707f478fe0bdb0]
+
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/radondb/radondbOpenSearch/radondbopensearch-prer-installRadondbopensearch.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../_custom/radondb/radondbOpenSearch/radondbopensearch-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=2c3d1c1334824cfd8c5fa728b08d280d]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbOpenSearch/radondbopensearch-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 扩展**。
+
+. 在**扩展**对话框，选择节点角色并设置节点的数量，然后点击**确定**。待应用状态切换为**运行中**，则新增节点完成。
+
+. 点击节点名称，进入节点容器组详情页面，可分别查看节点详情、资源状态、调度信息、元数据、监控、环境变量、事件等信息。
++
+--
+* 在**资源状态**页面，可查看节点当前资源配置和状态。
+
+* 在**调度信息**页面，可查看节点可调度资源信息。
+
+* 在**元数据**页面，可查看节点元数据信息。
+
+* 在**监控**页面，可监控节点资源使用状态。
+
+* 在**环境变量**页面，可查看节点环境变量信息。
+
+* 在**事件**页面，记录节点操作事件。
+--
+
+. 在页面左侧，点击**删除**即可删除节点。

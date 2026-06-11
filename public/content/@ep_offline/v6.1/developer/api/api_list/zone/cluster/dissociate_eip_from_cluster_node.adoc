@@ -1,0 +1,68 @@
+---
+title: 集群节点解绑公网（DissociateEipFromClusterNode）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| eips
+| Array
+| true
+| 公网ip
+
+| zone
+| String
+| true
+| 可用区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| job_id
+| String
+| false
+| 任务ID
+
+| ret_code
+| String
+| false
+| 返回状态码
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DissociateEipFromClusterNode",
+  "eips": [
+    "eip-yuqj588s"
+  ],
+  "zone": "sh1"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DissociateEipFromClusterNodeResponse",
+  "job_id": "j-q82syzuiwkw",
+  "ret_code": 0,
+  "trace_id": "xar6wBLm"
+}
+----

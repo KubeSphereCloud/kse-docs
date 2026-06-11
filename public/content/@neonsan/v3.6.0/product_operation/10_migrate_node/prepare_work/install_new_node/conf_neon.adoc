@@ -1,0 +1,187 @@
+---
+title: "配置 NeonSAN"
+weight: 4
+---
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh xx.xx.xx.xx -p 6023
+----
+
+. 分配各项服务所在节点。
+* 分配 Common 服务。
++
+[,shell]
+----
+installer role-node-add common -n <NODE_ID1>,<NODE_ID2>,<NODE_ID3> -p neonsan
+----
+* 分配 NeonSAN 服务。
++
+[,shell]
+----
+installer role-node-add neonsan -n <NODE_ID1>,<NODE_ID2>,<NODE_ID3>
+----
++
+include::../../../../../../_components/note.adoc[]
+* -n 参数，指定节点 ID，多个节点用逗号隔开，此处填写所有新管理节点的 NODE ID。可执行 ``installer node-list`` 命令进行查看 <NODE_ID>。
+* Common 和 NeonSAN 服务均分配给各个新管理节点。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 检查各项服务节点分配是否准确，所有新节点均被分配角色，且 NeonSAN 和 Common 服务均包括所有新节点。
++
+[,shell]
+----
+installer role-list -p neonsan
+
+installer role-list -p common
+----
+
+. 拷贝 common.yaml 示例文件至 /root 目录下。
++
+[source,shell]
+----
+cp /qingstor/install/test/yaml/common.yaml /root/
+----
+. 修改 common.yaml 文件。
++
+[,shell]
+----
+vi /root/common.yaml
+----
++
+待修改配置字段说明：
++
+* ``is_private_cloud``：修改为 true，表示为私有云部署。
+* ``with_iaas``：修改为 false。
+* ``qingstor_mysql_vip``：数据库和 Portal 的虚 IP，修改为与管理节点 IP 地址同一网段未被使用的 IP 即可。
+* 其他配置参数保持默认即可。
+
+. 拷贝 neonsan.yaml 示例文件至 /root 目录下。
++
+[,shell]
+----
+cp /qingstor/install/test/yaml/neonsan.yaml /root/
+----
+
+. 修改 neonsan.yaml 文件。
++
+[,shell]
+----
+vi /root/neonsan.yaml
+----
++
+示例：
++
+[,shell]
+----
+neonsan:
+  cluster_name: "neonsan"
+  client_type: "qbd"
+  # connection type support TCP/RDMA
+  connection_type: "TCP"
+  is_disaster_recovery_site: 0
+  cas_cache_line_size: 8
+  # whether clean the whole disk before deploy neonsan-store, it may take a lot of time
+  clean_the_whole_disk: true
+----
++
+待修改配置字段说明：
++
+* ``cluster_name`` 集群名字，需与原集群名称一样。
+* ``connection_type``：支持 TCP 或 RDMA，与原集群连接类型保持一样。
+* 其他参数保持默认即可。
+
+. 拷贝 neonsan-setting.yaml 示例文件至 /root 目录下。
++
+[,shell]
+----
+cp /qingstor/install/test/yaml/neonsan-settings.yaml /root/
+----
+
+. 修改 neonsan-setting.yaml 文件。
++
+[,shell]
+----
+vi /root/neonsan-settings.yaml
+----
++
+示例：
++
+[,shell]
+----
+repl_networks:
+  - 172.31.0.0/24
+
+neonsan_groups:
+  - hosts:
+      - 172.31.0.5
+      - 172.31.0.6
+      - 172.31.0.7
+      # if empty, will be auto generated from node info
+    ssd_disks:
+
+    rg_name: SSD0
+    use_bcache: false
+    use_icas: false
+    failure_domain:
+----
++
+待修改配置字段说明：
++
+* ``repl_networks``：填写当前部署的管理节点 IP 地址所处网段即可。
+* ``-hosts``：将示例文件中的 IP 地址修改为当前管理节点 IP。
+* ``ssd_disks``：为空即可，如示例。
+* ``rg_name``：存储池名，保持默认即可。
+* ``use_bcache``：修改为 false。
+* ``use_icas``：修改为 false。
+* ``failure_domain``：为空即可，如示例。
+
+. 生成各项配置。
++
+--
+* 生成 common 配置。
++
+[,shell]
+----
+installer product-config common -c /root/common.yaml
+----
+* 生成 NeonSAN 公共配置。
++
+[,shell]
+----
+installer product-config neonsan -c /root/neonsan.yaml
+----
+* 生成 NeonSAN 主机配置。
++
+[,shell]
+----
+installer product-config neonsan-settings -c /root/neonsan-settings.yaml
+----
+--
+
+. 校验配置文件。
+.. 查看各角色主机信息是否正确。
++
+[,shell]
+----
+cat /qingstor/install/deployment/environment/hosts
+----
+
+.. 查看以下目录中配置文件是否符合配置预期。
++
+[,shell]
+----
+cd /qingstor/install/deployment/environment/group_vars/all/
+
+cd /qingstor/install/deployment/environment/group_vars/neonsan/
+----
++
+include::../../../../../../_components/note.adoc[]
+* all 目录下为公共配置。
+* neonsan 目录下为 NeonSAN 存储节点的配置。
+* 若配置有问题，可通过修改相应的 yaml 文件后，再次执行对应的生成配置命令进行矫正。
+* 若配置有问题，也可直接修改上述文件夹中已生成的配置文件。
+include::../../../../../../_components/table_footer.adoc[]
+

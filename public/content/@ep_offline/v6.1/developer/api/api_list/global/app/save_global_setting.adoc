@@ -1,0 +1,90 @@
+---
+title: 保存导入全局配置（SaveGlobalSetting）
+weight: 24
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| hypervisor
+| String
+| true
+| 虚拟化类型
+
+| import_type
+| String
+| true
+| 导入类型
+
+| instance_classes
+| String
+| true
+| 主机类型
+
+| resource_path
+| String
+| true
+| 资源路径
+
+| volume_classes
+| String
+| true
+| 硬盘类型
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| status
+| Integer
+| false
+| 操作执行结果
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "hypervisor": [
+    "KVM"
+  ],
+  "import_type": 2,
+  "instance_classes": [
+    0,
+    1,
+    1202
+  ],
+  "resource_path": "root@10.10.0.10:/pitrix/apps/migrate_appcenter2_apps/migrate_appcenter2_zookeeper",
+  "volume_classes": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SaveGlobalSettingResponse",
+  "ret_code": 0,
+  "status": 0
+}
+----

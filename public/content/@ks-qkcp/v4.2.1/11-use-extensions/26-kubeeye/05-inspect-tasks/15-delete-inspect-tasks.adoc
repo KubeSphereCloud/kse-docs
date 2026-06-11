@@ -1,0 +1,43 @@
+---
+title: "删除巡检任务"
+weight: 15
+---
+
+
+:ks_navigation: **巡检任务**
+
+
+本节介绍如何删除巡检任务。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|删除巡检任务会同时删除任务下的巡检记录。
+|===
+
+== 前提条件
+
+* 您需要在 KubeSphere 平台具有 **platform-admin** 角色。
+
+* 已创建巡检任务。
+
+
+== 操作步骤
+
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+. 点击**组件坞 > 集群巡检**，进入集群巡检页面。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. 在巡检任务页面，点击**即时巡检任务**或**定时巡检任务**打开巡检任务列表。
+
+. 在需要操作的巡检任务右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中**删除**。
+
+. 在**删除巡检任务**对话框，输入巡检任务的名称，然后点击**确定**。

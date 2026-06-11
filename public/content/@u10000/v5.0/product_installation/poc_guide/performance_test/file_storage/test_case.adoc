@@ -1,0 +1,85 @@
+---
+title: 测试用例
+description: 
+weight: 3
+---
+
+这里以 Vdbench 为例，对各参数的修改，均加以说明。Vdbench 工具的使用，可参考link:../test_tool/vdbench/[前文内容]。
+
+== 系统参数
+
+根据协议不同，文件系统参数有三组，依次与 Vdbench 的参数组合测试。
+
+* 文件系统参数
++
+[cols="", options="header"]
+|===
+| 名称 | 协议 | 数据块大小 |预读数据块大小|压缩|配额 
+
+| test | nfs v4 | 自适应 |自适应|否|不限制
+
+| test | nfs v3 | 自适应 |自适应|否|不限制
+| test | smb | 自适应 |自适应|否|不限制
+
+|===
+
+* Vdbench 参数
++
+[cols="", options="header"]
+|===
+| bs | size | rw
+
+| 4k | 4k，10m | read，randread，write，randwrite，randrw(7:3)
+
+| 1m | 1m，100m | read，randread，write，randwrite，randrw(7:3)
+
+|===
+
+== 挂载参数
+
+根据协议不同，挂载参数也分为三组。
+
+[cols="1,1,1,4", options="header"]
+|===
+| 协议 | 客户端 |服务端|挂载命令
+
+| nfs v4 | 172.31.12.114 |172.31.12.117|sudo mount -t nfs 172.31.12.117:/test/nfs /mnt/test_nfs
+
+| nfs v3 | 172.31.12.114 |172.31.12.117|sudo mount -t nfs -o vers=3.0,nocto 172.31.12.117:/test/nfs3 /mnt/test_nfs3
+| smb | 172.31.12.114 |172.31.12.117|mount -t cifs -o soft,mfsymlinks,vers=3.0,username=admin,password=qfs8102@qingstor //172.31.12.117/test-smb /mnt/test_smb
+
+|===
+
+
+== 测试用例
+
+
+[source,shell]
+----
+hd=default，vdbench=/mnt/vdbench50407，user=root，shell=ssh
+hd=hd1，system=172.31.12.114
+hd=hd2，system=172.31.12.115
+hd=hd3，system=172.31.12.116
+# nfs v4
+fsd=default，depth=2，width=10，size=4k，openflags=o_direct，files=100
+fsd=fsd1，anchor=/mnt/test_nfs/test1_4k
+fsd=fsd2，anchor=/mnt/test_nfs/test2_4k
+fsd=fsd3，anchor=/mnt/test_nfs/test3_4k
+# nfs v3
+#fsd=default，depth=2，width=10，size=4k，openflags=o_direct，files=100
+#fsd=fsd1，anchor=/mnt/test_nfs3/test1_4k
+#fsd=fsd2，anchor=/mnt/test_nfs3/test2_4k
+#fsd=fsd3，anchor=/mnt/test_nfs3/test3_4k
+# smb
+#fsd=default，depth=2，width=10，size=4k，openflags=o_direct，files=100
+#fsd=fsd1，anchor=/mnt/test_smb/test1_4k
+#fsd=fsd2，anchor=/mnt/test_smb/test2_4k
+#fsd=fsd3，anchor=/mnt/test_smb/test3_4k
+
+fwd=default，fsd=fsd1，xfersize=4k，threads=128，rdpct=70，fileio=random，fileselect=random
+fwd=fwd1，fsd=fsd1，hd=hd1
+fwd=fwd2，fsd=fsd2，hd=hd2
+fwd=fwd3，fsd=fsd3，hd=hd3
+rd=rd2，fwd=fwd*，fwdrate=max，format=restart，elapsed=60，interval=1
+----
+

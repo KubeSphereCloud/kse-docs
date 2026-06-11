@@ -1,0 +1,69 @@
+---
+title: "Delete images"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, images, deletion"
+description: "Describes how to delete images in the {ks_product} web console."
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e62abaa2a56842a6b1466aab3d1336f1
+:ks_xref_id: 1859cb99e39148d7895b8aeb10d893ea
+:ks_comp: ../../../../components/
+:ks_title: Delete images
+:ks_description: Describes how to delete images in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, images, deletion
+:ks_weight: 07
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete images in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=9767bef8c2c742f7ac8aeff300025fbb]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom-en/vms/vm-image-manage-prerequisites.adoc[]
+
+:relfileprefix: ./
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete an imagelink:[id=2dd5f5ba1b4d4baeb306db631dc7eb4d]
+
+include::../../../../_custom-en/vms/vm-image-steps.adoc[]
+
+. On the **System Images**, **Private Images**, or **Shared Images** tab, view the images of a specific type.
+. Click the name of the image that you want to view. The details page of the image appears.
+. On the left side of the details page, click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+include::../../../../_custom-en/images/image-delete-warn.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple images at a timelink:[id=3071b4a68a0047e780a1c69fd9484ecc]
+
+include::../../../../_custom-en/vms/vm-image-steps.adoc[]
+
+. On the **System Images**, **Private Images**, or **Shared Images** tab, view the images of a specific type.
+. Select the check boxes next to the images that you want to delete, and click **Delete**.
++
+--
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+Images cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

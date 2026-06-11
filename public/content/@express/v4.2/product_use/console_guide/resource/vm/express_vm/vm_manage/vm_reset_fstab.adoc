@@ -1,0 +1,18 @@
+---
+title: "重置 fstab"
+weight: 21
+---
+
+. 登录{product_console_name}。
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 关闭正在运行中的虚拟机，详细操作可参考link:../vm_manage_base/#_关闭主机[关闭主机]相关内容。
+. 点击主机所在行右侧的更多操作，选择**重置 fstab**，在弹出的**重置 fstab** 窗口中，输入主机名，点击**重置**即可。
++
+
+include::../../../../../../../../_components/note.adoc[]
+* 重置 fstab 将会把当前的 fstab 文件恢复到创建虚机时的状态，以解决因为错误配置 fstab 文件导致的无法开机的问题。
+* 虚机重启后，请正确配置 fstab 文件，修改完 fstab 请使用 `mount -a` 检查 fstab 文件是否正确。
+
+include::../../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vm_manage_base_24.png[,50%]

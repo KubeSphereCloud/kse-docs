@@ -1,0 +1,72 @@
+---
+title: "扩展卷"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Kafka, 扩展卷"
+description: "介绍如何扩展挂载到数据库节点的卷。"
+weight: 10
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: a9e00fa48ac24284829634b30af98baa
+:ks_xref_id: 8551a399e73744fe9ccddfb392a68b7c
+:ks_comp: ../../../components/
+:ks_title: 扩展卷
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB Kafka, 扩展卷
+:ks_description: 介绍如何扩展挂载到数据库节点的卷。
+:ks_weight: 10
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何扩展挂载到数据库节点的卷。
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* 目前不支持对使用{ks_product_both}集群本地存储创建的卷（local）进行扩展。
+
+* 目前仅支持增加卷容量，不支持减少卷容量。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=834d17e81fb94c36a0aae6aab6a31614]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/radondb/radondbKafka/radondbkafka-prer-installRadondbkafka.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../_custom/radondb/radondbKafka/radondbkafka-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=9790a62754044c539ad459275d64ef15]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 扩展卷**。
+
+. 在**扩展卷**对话框，设置卷的容量，然后点击**确定**。

@@ -1,0 +1,75 @@
+---
+title: "删除镜像构建器"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 项目管理, 镜像构建器, 删除镜像构建器"
+description: "介绍如何删除镜像构建器。"
+weight: 06
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: a6646b0e3cc14215849e7c02405fa39b
+:ks_xref_id: c13e5e0bc8fc4f0cbc48de36f9082650
+:ks_comp: ../../../components/
+:ks_title: 删除镜像构建器
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 镜像构建器, 删除镜像构建器
+:ks_description: 介绍如何删除镜像构建器。
+:ks_weight: 06
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **镜像构建器**
+
+
+本节介绍如何删除镜像构建器。
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+镜像构建器删除后无法恢度，请谨慎执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=2e51454613474b2f9e5c1bd54545e395]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 删除单个镜像构建器link:[id=3877546df65b4803955cc1f43fdcfed9]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要删除的镜像构建器右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除**。
+
+. 在**删除镜像构建器**对话框，输入镜像构建器的名称，然后点击**确定**。
+
+
+== 批量删除镜像构建器link:[id=a50491fb863d482ea8f81df18b4b2e00]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 选择需要删除的镜像构建器左侧的复选框，然后在镜像构建器列表上方选择**删除**。
+
+. 在**批量删除镜像构建器**对话框，输入镜像构建器的名称，然后点击**确定**。
++
+--
+include::../../../_custom/note-separateNamesByComma.adoc[]
+--

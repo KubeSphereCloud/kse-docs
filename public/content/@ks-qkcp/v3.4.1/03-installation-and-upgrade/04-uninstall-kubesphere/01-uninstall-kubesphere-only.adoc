@@ -1,0 +1,78 @@
+---
+title: "仅卸载{ks_product_left}"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 仅卸载{ks_product_left}"
+description: "介绍如何卸载{ks_product_left}。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 49acb3705c3a432ba6b52caeb37d5c7c
+:ks_xref_id: ecb35c78648344ca9939ec3f4f2dbe96
+:ks_comp: ../../../components/
+:ks_title: 仅卸载{ks_product_left}
+:ks_keywords: Kubernetes, {ks_product}, 仅卸载{ks_product_left}
+:ks_description: 介绍如何卸载{ks_product_left}。
+:ks_weight: 01
+:ks_icon:
+
+
+本节介绍如何卸载{ks_product_left}。当前集群中运行的 Kubernetes 将不会被卸载。
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+* 虽然此操作不会卸载 Kubernetes，如果当前集群中运行的业务使用了{ks_product_both}提供的功能，此操作仍然可能导致业务中断。
+
+* 此操作不能撤销，请谨慎执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=69cd2f740c404b1b9bbeea93796c4c34]
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-prer-backUpData.adoc[]
+
+
+== 操作步骤link:[id=110b7d8f6be040698eb0b3e04861ab37]
+
+. 登录任意集群节点，执行以下命令下载卸载脚本 **kubesphere-delete.sh**：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+curl -L -O https://raw.githubusercontent.com/kubesphere/ks-installer/release-3.3/scripts/kubesphere-delete.sh
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+如果您的集群节点无法连接互联网，您可以从互联网连接正常的设备手动link:https://raw.githubusercontent.com/kubesphere/ks-installer/release-3.3/scripts/kubesphere-delete.sh[下载卸载脚本]然后将其传输到任意集群节点。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 执行以下命令为 **kubesphere-delete.sh** 文件添加执行权限：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+sudo chmod +x kubesphere-delete.sh
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令开始卸载{ks_product_left}：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+ ./kubesphere-delete.sh
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--

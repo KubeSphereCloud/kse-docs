@@ -1,0 +1,58 @@
+---
+title: "View Application Resource Usage"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Monitoring and Alerting, Resource Usage"
+description: "Describes how to view monitoring data for application resource usage."
+weight: 01
+---
+
+:ks_permission: **Monitoring View**
+:ks_navigation: **Monitoring and Alerting > Application Monitoring**
+
+This section describes how to view application resource usage.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **WizTelemetry Monitoring** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Application Monitoring** page, on the **Resource Usage** tab, view the cluster resource usage, application resource usage, and project count.
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster Resource Usage
+|The amount of CPU and memory resources currently used by the cluster.
+
+|Application Resource Usage
+|The number of Deployments, StatefulSets, DaemonSets, Jobs, CronJobs, Persistent Volume Claims, Services, Ingresses, and pods created in the current cluster.
+
+|Project Count
+|The number of projects in the current cluster.
+|===
+
++
+--
+* Click the line charts in **Cluster Resource Usage** and **Application Resource Usage** to view detailed information about resource usage over time. Select a project and click OK to view resource usage information for a specific project.
+
+include::../../../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshData.adoc[]
+--

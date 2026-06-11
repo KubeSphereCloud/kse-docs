@@ -1,0 +1,111 @@
+---
+title: "Add Member Clusters via Agent Connection"
+keywords: "Kubernetes, {ks_product-en}, multi-cluster management, clusters, add member cluster, add member cluster via proxy connection"
+description: "Learn how to add a member cluster via proxy connection."
+weight: 02
+---
+
+
+This section describes how to add a member cluster via agent connection.
+
+If the host cluster cannot access the Kubernetes API service of the member cluster, you can set the member cluster to connect to the **tower** service exposed by the host cluster to add the member cluster.
+
+
+== Prerequisites
+
+* You should have the **platform-admin** role on the host cluster.
+
+* **KubeSphere Multi-Cluster Agent Connection** should have been installed and enabled.
+
+* All nodes of the member cluster must be able to access the external access address of the **tower** service of the host cluster. Depending on your network environment, you may need to configure firewall and traffic forwarding rules.
+
+== Set Proxy Service Address
+
+After installing the "KubeSphere Multi-Cluster Agent Connection" extension on the host cluster, a service named `tower` will be automatically created in the system project `kubesphere-system`.
+
+
+=== If Cluster Has Available LoadBalancer
+
+If there is an available LoadBalancer plugin in the host cluster, executing the following command on the host cluster node will show that the `tower` service has the corresponding `EXTERNAL-IP` address. This address will be automatically obtained and configured by KubeSphere as the proxy service address, which means you can skip the step of setting the proxy service address.
+
+Run the following command to confirm if there is a LoadBalancer plugin.
+
+[,bash]
+----
+kubectl -n kubesphere-system get svc
+----
+
+The output may be as follows:
+
+[,bash]
+----
+NAME       TYPE            CLUSTER-IP      EXTERNAL-IP     PORT(S)              AGE
+tower      LoadBalancer    10.233.63.191   139.198.110.23  8080:30721/TCP       16h
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Mainstream public cloud providers generally provide LoadBalancer solutions, and load balancers can automatically allocate external IPs. If your cluster runs in a local environment, especially in a bare-metal environment, you can use link:https://github.com/kubesphere/openelb[OpenELB] as the load balancer solution.
+|===
+
+=== If Cluster Does Not Have Available LoadBalancer
+
+If there is no available LoadBalancer in the host cluster, executing the `kubectl -n kubesphere-system get svc` command may result in the following output.
+
+[,bash]
+----
+NAME       TYPE            CLUSTER-IP      EXTERNAL-IP     PORT(S)              AGE
+tower      LoadBalancer    10.233.63.191   <pending>       8080:30721/TCP       16h
+----
+
+Since the `EXTERNAL-IP` is in the `pending` state, you need to manually set the proxy address by adding the value of `proxyPublishAddress` to the `kubesphere-config` ConfigMap.
+
+. On the host cluster node, run the following command to open the `kubesphere-config` ConfigMap.
++
+[,bash]
+----
+kubectl -n kubesphere-system edit cm kubesphere-config
+----
+
+. Search for `multicluster` and add a new line to define the external IP address of the tower service for accessing Tower.
++
+--
+[,bash]
+----
+multicluster:
+  clusterRole: host
+  proxyPublishAddress: {Public IP Address}:{Port} # Add this line to set the address to access tower
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+You may need to configure port forwarding rules, such as forwarding Public IP:Port to NodeIP:NodePort.
+|===
+--
+
+== Add Member Cluster
+
+include::../../../_custom-en/platformManagement/multiclusterManagement/clusters/clusters-oper-logInToHost.adoc[]
+
++
+
+. Click **Cluster Management**.
+
++
+include::../../../_custom-en/platformManagement/multiclusterManagement/clusters/clusters-oper-addClusterBasicInfo.adoc[]
++
+Under **Advanced Settings**, set the identifier for the cluster.
+
+. On the **Connection Settings** tab, set the **Connection Method** to **Agent Connection** and click **Next**.
+
+. On the **Cluster Configuration** tab, set the cluster configuration, then click **Create**.
++
+--
+After the member cluster is added, it will be displayed in the cluster list on the **Cluster Management** page.
+--

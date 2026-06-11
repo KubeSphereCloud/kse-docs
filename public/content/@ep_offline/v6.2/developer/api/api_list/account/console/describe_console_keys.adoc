@@ -1,0 +1,140 @@
+---
+title: 查看控制台密钥信息（DescribeConsoleKeys）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| false
+| Console
+
+| console_key_name
+| Array
+| false
+| Console公钥名称的列表
+
+| console_keys
+| Array
+| false
+| Console公钥的列表
+
+| limit
+| Int
+| false
+| 偏移量
+
+| offset
+| Int
+| false
+| 起始坐标
+
+| owner
+| String
+| false
+| Console公钥的所有者ID
+
+| search_word
+| String
+| false
+| 搜索关键字
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_key_set
+| Array
+| false
+| 控制台密钥信息列表
+
+| console_key_set[].console_id
+| String
+| false
+| Console的ID
+
+| console_key_set[].console_key_id
+| String
+| false
+| Console公钥
+
+| console_key_set[].console_key_name
+| String
+| false
+| Console公钥的名称
+
+| console_key_set[].create_time
+| String
+| false
+| Console公钥的创建时间
+
+| console_key_set[].description
+| String
+| false
+| Console公钥的描述
+
+| console_key_set[].owner
+| String
+| false
+| Console公钥的所有者
+
+| console_key_set[].secret_console_key
+| String
+| false
+| Console公钥的私钥
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeConsoleKeys",
+  "console_id": "testingcloud",
+  "console_key_name": [
+    "zzzz"
+  ],
+  "console_keys": [
+    "FSTMGTOMPKSZJHCTHZHC"
+  ],
+  "limit": 20,
+  "offset": 0,
+  "owner": "usr-xCrXIiXv",
+  "search_word": "zzzz"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeConsoleKeysResponse",
+  "console_key_set": [
+    {
+      "console_id": "",
+      "console_key_id": "PNLFEKGIWLNVSAGEDVWT",
+      "console_key_name": "",
+      "create_time": "2021-07-22T09:39:05Z",
+      "description": "",
+      "owner": "admin",
+      "secret_console_key": "okOBPcOk7Z8B9PdpcYTnGdMSRJq6lGdtXyaCAch6"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

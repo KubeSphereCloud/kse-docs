@@ -1,0 +1,170 @@
+---
+title: "安装配置 ZooKeeper"
+weight: 1
+---
+
+. 登录其他任意管理节点，查看 /opt/zookeeper-3.4.13/conf/zoo.cfg 配置文件，并记录各个 ZooKeeper 节点的 ID。
++
+[source,shell]
+----
+cat /opt/zookeeper-3.4.13/conf/zoo.cfg
+----
++
+image::/images/neonsan/install_manage_node_1.png[]
+
+. 将获取的 ZooKeeper 安装包上传至新的管理节点。
+. 登录至新的管理节点解压 ZooKeeper 安装包至 ``/opt`` 目录下。
++
+[source,shell]
+----
+tar -zxvf zookeeper-3.4.13.tar.gz -C /opt/
+----
+
++
+include::../../../../../_components/note.adoc[]
+ZooKeeper 安装包名称需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 配置环境变量，修改 ``/etc/profile``文件。
++
+[source,shell]
+----
+vi /etc/profile
+----
++
+末尾添加如下内容.
++
+[source,shell]
+----
+export ZOOKEEPER_HOME=/opt/zookeeper-3.4.13
+----
+
+. 使环境变量生效。
++
+[source,shell]
+----
+source /etc/profile
+----
+. 修改日志路径。
++
+[source,shell]
+----
+vi /opt/zookeeper-3.4.13/bin/zkEnv.sh
+----
++
+----
+...
+ZOO_LOG_DIR="/var/log"
+...
+----
+. 创建配置文件/opt/zookeeper-3.4.13/conf/zoo.cfg。
++
+[source,shell]
+----
+cp /opt/zookeeper-3.4.13/conf/zoo_sample.cfg /opt/zookeeper-3.4.13/conf/zoo.cfg
+----
+
+. 修改文件 /opt/zookeeper-3.4.13/conf/zoo.cfg。
++
+[source,shell]
+----
+vi /opt/zookeeper-3.4.13/conf/zoo.cfg
+----
++
+内容如下。
++
+[source,conf]
+----
+...
+tickTime=2000
+...
+initLimit=10
+...
+syncLimit=5
+...
+dataDir=/opt/zookeeper-3.4.13/data
+...
+
+//添加管理节点信息
+server.1=172.31.30.26:2888:3888  
+server.2=172.31.30.27:2888:3888 
+server.3=172.31.30.28:2888:3888 
+……
+----
++
+include::../../../../../_components/note.adoc[]
+此处需修改为当前集群内容的所有管理节点 IP 地址。
+include::../../../../../_components/table_footer.adoc[]
+
+. 修改当前 ZooKeeper 节点的 ID。
++
+[source,shell]
+----
+mkdir /opt/zookeeper-3.4.13/data/
+----
++
+[source,shell]
+----
+echo <ID> > /opt/zookeeper-3.4.13/data/myid
+----
++
+include::../../../../../_components/note.adoc[]
+<ID> 须与 zoo.cfg 中配置的 id 保持一致，根据实际情况进行修改。例如 zoo.cfg中，配置为 server.1=172.31.30.26:2888:3888，则主机 172.31.30.26 须配置 id 为 1。
+include::../../../../../_components/table_footer.adoc[]
+
+. 设置 ZooKeeper 开机自启动，并设置 Supervisor 管理 ZooKeeper。
++
+[source,shell]
+----
+vi /etc/supervisor/conf.d/zookeeper.conf
+----
++
+配置内容如下。
++
+[source,shell]
+----
+[program:zookeeper]
+autorestart=true
+autostart=true
+startretries= 1000000
+startsecs=3
+command=/opt/zookeeper-3.4.13/bin/zkServer.sh start-foreground 
+redirect_stderr=true
+stdout_logfile=/var/log/zookeeper/zookeeper.out 
+stopsignal=INT
+----
++
+include::../../../../../_components/note.adoc[]
+ZooKeeper 和日志目录，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 依次执行如下命令，加载 Supervisor 配置文件。
++
+[source,shell]
+----
+supervisorctl reread zookeeper
+supervisorctl add zookeeper
+----
++
+若报错，提示 ``/var/log/zookeeper/zookeeper.out`` 不存在，则需手动创建相应目录，再重新加载 Supervisor 配置文件。
++
+[source,shell]
+----
+mkdir /var/log/zookeeper/
+supervisorctl reread zookeeper
+supervisorctl add zookeeper
+----
++
+更新配置文件后，ZooKeeper 服务会被 Supervisor 启动，可执行如下命令查看。
++
+[source,shell]
+----
+supervisorctl status zookeeper
+----
+. 查看 ZooKeeper 节点的状态。
++
+[source,shell]
+---- 
+/opt/zookeeper-3.4.13/bin/zkServer.sh status
+----
+

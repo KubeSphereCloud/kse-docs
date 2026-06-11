@@ -1,0 +1,138 @@
+---
+title: "配置 QKE"
+weight: 60
+---
+
+还需要在配置中心修改 QKE 相关配置，才能在 Console 上正常使用 QKE 服务。
+
+== 登录配置中心
+
+本地 PC 使用 Chrome 或火狐浏览器根据如下信息，访问企业云平台的配置中心。其中 `<domain>` 为安装企业云平台过程中设置的域名参数。
+
+----
+Web 地址：cadmin.<domain>
+默认用户名：admin@<domain>
+默认密码：zhu88jie
+----
+
+示例：如系统配置 `domain` 为 `democloud.com`，则登录信息为：
+
+----
+Web 地址：cadmin.democloud.com
+默认用户名：admin@democloud.com
+默认密码：zhu88jie
+----
+
+// == QKE 配置说明
+
+// [cols='1,1,2']
+// |===
+// | 应用 | 配置 | 功能说明
+
+// | webconsole
+// | settings
+// | 对接 QKE API。
+
+// | webconsole
+// | product_directories
+// | 打开 Console 开关，即配置 Console 上**产品与服务**显示 QKE 菜单。
+
+// | webconsole
+// | sidebar_navigations
+// | 配置 QKE 控制台侧边栏。
+
+// | webconsole-pass
+// | global_config
+// | 配置 QKE 服务。例如：配置可使用的区域、可用区等。
+
+// | webconsole-pass
+// | zone_config
+// | 配置可用区内 QKE 可使用的磁盘类型。
+// |===
+
+== 对接 QKE API
+
+. 在配置中心的**配置管理**页面，找到如下配置，点击操作列的**管理配置**。
++
+image::/images/ep_offline/qke_install/config_webconsole_settings.png[]
+
+. 在 settings 配置页面，找到 PITRIX_SETTINGS 参数，在里面添加 qke_config 配置。
++
+[source]
+----
+    'qke_config': {
+        'endpoint': '{{ zone_id }}-webservice0',
+        'port': '9102',
+        'verify_ssl': False,
+        'protocol': 'http',
+        'prefix': 'api/v1/qke'
+    },
+----
++
+示例如下：
++
+image::/images/ep_offline/qke_install/config_webconsole_settings_02.png[]
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。
+
+== 打开 Console 开关
+
+在 webconsole 的 product_directories 中配置显示容器引擎 QKE 菜单。
+
+. 在配置中心的**配置管理**页面，找到如下配置，点击操作列的**管理配置**。
++
+image::/images/ep_offline/qke_install/config_webconsole_product_directories.png[]
+
+. 在 product_directories 配置页面，在**容器引擎 QKE** 下添加 ``hide_for_all: false``，显示此菜单。
++
+--
+示例如下：
+
+image::/images/ep_offline/qke_install/config_webconsole_product_directories_02.png[]
+
+include::../../../../../_components/attention.adoc[]
+实际环境中参数顺序和上述示例可能存在一定差异，对功能没有影响。
+
+如果是 PATCH_20221230_20230602 版本，还需要将 QKE 的 **product_code** 配置为 ``app-o6lvbkhm``。
+include::../../../../../_components/table_footer.adoc[]
+--
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。
++
+在 Console 上显示如下：
++
+image::/images/ep_offline/qke_install/install_qke_publish_02.png[]
+
+== 配置 QKE 服务
+
+在 webconsole-pass 的 paas-global 中配置 QKE 应用支持的功能，包括是否支持基础网络、是否支持多可用区部署、是否支持私有网络、是否支持存储插件等。
+
+. 在配置中心的**配置管理**页面，找到如下配置，点击操作列的**管理配置**。
++
+image::/images/ep_offline/qke_install/config_webconsole_paas_global.png[]
+
+. 在 paas-global 配置页面，修改相关参数。
++
+image::/images/ep_offline/qke_install/config_webconsole_paas_global_01.png[]
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。
+
+== 配置磁盘类型
+
+. 在配置中心的**配置管理**页面，找到如下配置，点击操作列的**管理配置**。
++
+image::/images/ep_offline/qke_install/config_webconsole_paas_zone.png[]
+
+. 在 zone_config 配置页面，修改 volume_class 相关参数。
++
+image::/images/ep_offline/qke_install/config_webconsole_paas_zone_01.png[]
++
+**参数说明**：
+
+** 如果 NeonSAN 环境是纯 SSD 环境，则配置 volume_class 5。
+** 如果 NeonSAN 环境为混插型硬盘，则配置 volume_class 6。
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。

@@ -1,0 +1,46 @@
+---
+title: 文件一致性检测
+description: 
+weight: 10
+---
+
+[cols="1,3", options="header"]
+|===
+| 用例编号 | 
+
+|测试目的
+|验证 {product_name} 文件一致性。
+
+|预置条件
+a| 
+* {product_name} 已经安装部署完毕，且运行正常。
+* 成功创建桶 Test01。
+
+
+
+|测试步骤
+a|
+. 使用正确的用户名和密码，通过浏览器登录 Console。
+. 对待上传的文件 file1 进行 MD5 校验。
+. 将该文件 file1 上传至桶 Test01 中。
+. 修改文件名 file1 为文件名 file2。
+. 下载 file2。
+. 取文件 file2 的 MD5 值。
+. 比对文件 file1 与 file2 的 MD5 值。
+
+
+
+|预期结果
+a|
+. 成功登录 Console。
+. 成功获取文件 file1 的 MD5。
+. 文件 file1 成功上传至桶 Test01 中。
+. 成功修改文件名 file1 为文件名 file2。
+. 成功下载 file2。
+. 成功获取文件 file2 的 MD5 值。
+. 文件 file1 与 file2 的 MD5 值一致。
+
+
+|实测结果 |
+
+|===

@@ -1,0 +1,134 @@
+---
+title: "Create a Pipeline Using a Pipeline Template"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Use DevOps, Pipeline"
+description: "Introduces how to create a pipeline using a pipeline template."
+weight: 03
+---
+
+:ks_navigation:  **DevOps > Pipelines**
+
+This document demonstrates how to create a pipeline using a pipeline template on KubeSphere.
+
+DevOps provides a graphical editing panel that supports defining Jenkins pipeline stages and steps through interactive operations. It includes several built-in pipeline templates, such as Node.js, Maven, and Golang, allowing users to quickly create pipelines based on these templates. DevOps also provides CI and CI & CD pipeline templates. However, these two templates may not meet customization needs. It is recommended to use other built-in templates or create a custom pipeline directly.
+
+* CI Pipeline Template
++
+--
+The CI pipeline template contains two stages. The **clone code** stage is used to check out the code, and the **build & push** stage is used to build the image and push it to Docker Hub. First, create credentials for the code repository and the Docker Hub repository. Then, set the repository URLs and credentials in the corresponding steps. After editing is complete, the pipeline can start running.
+--
+
+* CI & CD Pipeline Template
++
+--
+The CI & CD pipeline template contains six stages. For more information about each stage, please refer to link:../02-create-a-pipeline-using-jenkinsfile/[Create a Pipeline Using a Jenkinsfile]. First, create credentials for the code repository, Docker Hub repository, and the cluster's kubeconfig. Then, set the repository URLs and credentials in the corresponding steps. After editing is complete, the pipeline can start running.
+--
+
+
+== Prerequisites
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+* A workspace, a DevOps project, and a user (e.g., **project-regular**) have been created. The user has been invited to the DevOps project and granted the **operator** role. Please refer to link:../../02-devops-project-mangement/03-project-members/01-invite-a-user-to-a-project/[Invite a User to a DevOps Project].
+
+
+== Steps
+
+The following uses Node.js as an example to demonstrate how to use a built-in pipeline template. The operations for using the Maven and Golang pipeline templates are basically the same.
+
+include::../../../../_custom/devops/project-regular-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/devops/devops-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. In the dialog box that appears, enter a pipeline name, click **Next**, and then click **Create**.
+
+. Click the created pipeline. On the **Pipeline Configuration** tab, click **Edit Pipeline**.
+
+. In the **Create Pipeline** dialog box, click **Node.js**, and then click **Next**.
+
+. On the **Parameter Settings** tab, set the following parameters according to the actual situation, and then click **Create**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|GitURL
+|The address of the project repository to be cloned.
+
+|GitRevision
+|The branch to be checked out.
+
+|NodeDockerImage
+|The Docker image version for Node.js.
+
+|InstallScript
+|The Shell script for installing dependencies.
+
+|TestScript
+|The Shell script for project testing.
+
+|BuildScript
+|The Shell script for building the project.
+
+|ArtifactsPath
+|The path where the artifact files are located.
+|===
+--
+
+. On the left-side visual editing page, a series of steps are added by default. Click **Add Step** or **Add Parallel Stage** to make modifications.
+
+. Click a step. On the right side of the page, you can perform the following operations. After editing, click **OK**.
++
+--
+* Modify the stage name.
+
+* Delete the stage.
+
+* Set the agent type.
+
+* Add conditions.
+
+* Edit or delete a task.
+
+* Add steps or nested steps.
+
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Please refer to link:../01-create-a-pipeline-using-graphical-editing-panel/[Create a Pipeline Using the Graphical Editing Panel] to learn how to customize steps and stages in a pipeline template.
+
+|===
+--
+
+. In the **Agent** area on the right, select the agent type. The default value is **kubernetes**. Click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Agent Type|Description
+
+|any
+|Invokes the default base pod template to create a Jenkins agent to run the pipeline.
+
+|node
+|Invokes a specified type of pod template to create a Jenkins agent to run the pipeline. Configurable label tags include base, java, nodejs, maven, go, etc.
+
+|kubernetes
+|Uses a standard Kubernetes pod template defined by a YAML file to run the agent and execute pipeline tasks.
+|===
+--
+
+. Review the details of the created pipeline template, and click **Run** to execute the pipeline.

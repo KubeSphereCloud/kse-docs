@@ -1,0 +1,57 @@
+---
+title: "共享镜像"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 镜像, 共享"
+description: "介绍如何使用{ks_product_both}Web 控制台共享镜像。"
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 34f4640f22a440aca7c8c74db8123ebc
+:ks_xref_id: f0a88641687f46d2863e9bacffd3aaae
+:ks_comp: ../../../../components/
+:ks_title: 共享镜像
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台共享镜像。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 镜像, 共享
+:ks_weight: 05
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台共享镜像。
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=8961ad6d5e4b4d51bbca0f4eb2f30d44]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/vms/vm-image-manage-prerequisites.adoc[]
+
+:relfileprefix: ./
+
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=a84a312eb17c43368ad01562e9eecc8c]
+
+include::../../../../_custom/vms/vm-image-steps.adoc[]
+
+. 在**自有镜像**页签，点击目标镜像名称右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后从下拉列表中选择**共享给项目**。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+本操作默认会将镜像共享给当前用户所在的所有项目。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在弹出的对话框中点击**确定**。

@@ -1,0 +1,104 @@
+---
+title: "View Application Template Details"
+keywords: "Kubernetes, {ks_product}, App Store Management, Application, View Application Template Details"
+description: "Describes how to view application template details."
+weight: 02
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **Applications**
+
+This section describes how to view application template details.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-viewAttributes.adoc[]
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|App ID
+|The name of the application.
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-status_v4.adoc[]
+
+|Category
+|The category to which the application template belongs. Assigning an application template to a category facilitates management. For more information, see link:../../02-app-categories/[Application Categories].
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-type_v42.adoc[]
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-workspace.adoc[]
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-creationTime.adoc[]
+|===
+--
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-viewVersions.adoc[]
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Status
+|The current status of the application version.
+
+* **Not Submitted**: The application version has been uploaded to the workspace but has not been submitted to the KubeSphere platform's App Store administrator for review.
+
+* **Submitted**: The application version has been submitted to the KubeSphere platform's App Store administrator for review.
+
+* **Published**: The application version has been approved by the KubeSphere platform's App Store administrator and can be listed in the App Store.
+
+* **Rejected**: The application version was not approved by the KubeSphere platform's App Store administrator; the review failed.
+
+* **Unpublished**: The application version was unpublished by the App Store administrator after publication, or the application version was delisted from the KubeSphere platform's App Store by the App Store administrator.
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-version.adoc[]
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-developer.adoc[]
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-versionUpdateTime.adoc[]
+|===
+--
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-viewAppInformation.adoc[]
+
++
+
+// include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-viewAppReviewRecords.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-viewAppInstances.adoc[]

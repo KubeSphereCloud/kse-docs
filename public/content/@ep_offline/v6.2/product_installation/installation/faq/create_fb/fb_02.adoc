@@ -1,0 +1,49 @@
+---
+title: 私有云部署在使用 all 包报错找不到 createrepo
+weight: 02
+draft: true
+---
+
+// qingcloud-installer_5.1.1
+
+== 问题现象
+
+私有云部署在使用 qingcloud-installer_5.1.1-20211213_all_all.tar.gz 包安装时，提示“找不到 createrepo”
+
+image::/images/ep_offline/installation/faq_fb_02.png[]
+
+登录 Firstbox，查看 /root/deploy.log。
+
+image::/images/ep_offline/installation/faq_fb_03.png[]
+
+== 问题原因
+
+因为我们适配过麒麟和 centos，需要在 fb 上安装 createrepo，但是 ubuntu1804 以上的版本暂时没有 createrepo 包。
+
+== 解决方法
+
+如果要使用各个版本的 all 的 tar 包，并且物理机系统是 ubuntu1804 或者 ubuntu2004 的情况下，需要在拉起 fb 时指定 -o 16.04.5 才行。
+
+5.1.1 及以下版本指定 -o 参数不生效，需要替换 launch_fb.sh 脚本。
+
+include::../../../../../../_components/note.adoc[]
+https://ins.qingcloud.com/assets/files/2022-06-01/1654072620-412217-launch-fb.bin 下载后将文件名改为 launch_fb.sh。
+include::../../../../../../_components/table_footer.adoc[]
+
+并且修改宿主机（仅fb所在宿主机，其它物理机不需要）的/etc/ssh/sshd_config 脚本，注释掉 Include 那一行。
+
+image::/images/ep_offline/installation/faq_fb_04.png[]
+
+. 重启 sshd 服务。
++
+----
+service sshd restart
+----
+
+. 重新拉起 FirstBox。
++
+拉起时注意加上以下参数：
++
+* -o 16.04.5 指定 fb 的 os 版本。
+* -f 因为已经拉起了 fb 虚拟机，重新拉起需要指定 -f 参数。
+

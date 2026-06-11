@@ -1,0 +1,43 @@
+---
+title: "Delete Constraint"
+description: "Describes how to delete a constraint."
+weight: 07
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: ** Gatekeeper > Constraints**
+
+This section describes how to delete a constraint.
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+Once a constraint is deleted, it cannot be recovered. Please perform this operation with caution.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The KubeSphere platform needs to have the **Gatekeeper** extension installed and enabled.
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the constraint you want to delete, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Delete** from the dropdown list.
+
+. In the **Delete Constraint** dialog box, enter the name of the constraint, and then click **OK**.

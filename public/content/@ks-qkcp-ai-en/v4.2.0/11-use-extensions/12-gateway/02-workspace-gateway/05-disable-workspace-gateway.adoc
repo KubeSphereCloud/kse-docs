@@ -1,0 +1,37 @@
+---
+title: "Disable Workspace Gateway"
+keywords: "Kubernetes, {ks_product}, Workspace Management, Workspace Settings, Gateway Settings, Disable Workspace Gateway"
+description: "Describe how to disable a workspace gateway."
+weight: 05
+---
+
+:ks_permission: **Workspace Gateway Management**
+:ks_navigation: **Workspace Settings > Gateway Settings**
+
+This section describes how to disable a workspace gateway.
+
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-warn-disableGateway.adoc[]
+
+
+== Prerequisites
+
+* The **KubeSphere Gateway** extension needs to be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-oper-disableGateway.adoc[]

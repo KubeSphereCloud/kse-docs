@@ -1,0 +1,99 @@
+---
+title: "删除数据库用户"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, MySQL, 管理告警规则组, 删除数据库用户"
+description: "介绍如何删除数据库用户。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 304824840c814c61b11339df57424867
+:ks_xref_id: bd476d8b01874143964e978ed4ba3466
+:ks_comp: ../../../../components/
+// :ks_include_id: 
+:ks_xref_id: 
+// :ks_include_id: 
+:ks_xref_id: 
+:ks_title: 删除数据库用户
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, MySQL, 管理告警规则组, 删除数据库用户
+:ks_description: 介绍如何删除数据库用户。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何删除数据库用户。
+
+
+== 前提条件link:[id=ce8d95ebed764843abac2ed1c2728e44]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-installRadondbmysql.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-databaseStatusRunning.adoc[]
+
+* 已经创建了数据库用户。
+
+
+
+== 删除单个数据库用户link:[id=6800fe974371486eb10ca93bb04b58cf]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openDatabaseUserList.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/accessControl/users/users-oper-deleteASingleUser.adoc[]
+
+
+
+== 批量删除数据库用户link:[id=800191e29f9f45ea894a9339473465d8]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openDatabaseUserList.adoc[]
+
+
++
+
+include::../../../../_custom/platformManagement/accessControl/users/users-oper-deleteMultipleUsers.adoc[]

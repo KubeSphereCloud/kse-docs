@@ -1,0 +1,125 @@
+---
+title: "修改集群 IP"
+weight: 15
+---
+
+== 运维场景
+
+在云易捷的实际生产环境中，若集群 IP 与其他业务 IP 出现冲突等情况时，可通过以下当时进行集群 IP 的修改。
+
+== 前提条件
+
+* 集群的物理机和虚机正常运行。
+* 准备好需要使用的 IP，如果涉及更换 vlan_id，需要手动编辑网卡文件。
+* 停止使用 Console 管理控制平台，即确保平台内没有运行中的任务，并关闭所有虚拟机。
+
+== 操作步骤
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 登录任一 Hyper 节点，将 ``revert_ip.sh `` 脚本拷贝至 ``/root``目录下。
++
+[source,shell]
+----
+scp /opt/install/data/revert_ip.sh /root
+----
+
+. 运行 ``revert_ip.sh `` 脚本进行初始化，获取平台信息。该命令执行完成后，会生成 ``ori_ip.list`` 文件记录集群中各角色的 IP 信息。
++
+[source,shell]
+----
+./revert_ip.sh -m init
+----
++
+image::/images/express/maintain/change_ip_1.png[]
+
+. 修改 ``ori_ip.list`` 文件。
++
+[source,shell]
+----
+vi /root/ori_ip.list
+----
++
+``ori_ip.list`` 文件中第一列为个节点角色名称，第二列为原 IP 地址，第三列为修改后的 IP 地址。IP 地址必须一一对应，中间用空格分开，若不需要更改某一角色的 IP 地址，删除相应行即可。
++
+[source,shell]
+----
+firstbox        192.168.100.159 192.168.100.139
+cdr00n00        192.168.100.160 192.168.100.140
+cdr00n01        192.168.100.161 192.168.100.141
+cdr00n02        192.168.100.162 192.168.100.142
+pp1a-proxy      192.168.100.163 192.168.100.143
+pp1a-pgpool     192.168.100.164 192.168.100.144
+pp1a-webservice 192.168.100.165 192.168.100.145
+pp1a-zoocassa   192.168.100.166 192.168.100.146
+pp1a-boss       192.168.100.167 192.168.100.147
+pp1a-ks0        192.168.100.168 192.168.100.148
+pp1a-ks1        192.168.100.169 192.168.100.149
+pp1a-ks2        192.168.100.170 192.168.100.150
+gateway         192.168.100.254 192.168.101.254
+dns             192.168.100.125 192.168.100.155
+----
+
+. 运行 ``revert_ip.sh `` 脚本，下发更改 IP 地址的命令。约等待 10 分钟后，集群会自动重启。
++
+[source,shell]
+----
+./revert_ip.sh -m run
+----
++
+image::/images/express/maintain/change_ip_2.png[]
++
+include::../../../../../_components/note.adoc[]
+若各节点间无法互通，需逐一登录物理节点进行步骤 3 至步骤 6 后，再进行后续操作。
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录当前环境的部署管理平台，进行集群状态检查。
+
+. 集群状态正常后，登录具有 ``revert_ip.sh `` 脚本的物理节点，运行脚本后置操作，清理残留信息。
++
+[source,shell]
+----
+./revert_ip.sh -m post
+----
+
+. 登录至 FirstBox 节点，在 root 权限下修改 ``/pitrix/conf/variables/variables.yaml`` 配置文件。
++
+[source,shell]
+----
+vi /pitrix/conf/variables/variables.yaml
+----
++
+将以下字段修改为当前修改后的 ``proxy`` 节点的 IP 地址。
++
+[source,shell]
+----
+  proxy:
+    proxy_floating_ip: '192.168.100.143'
+    proxy_mgmt_network_address:
+      - '192.168.100.149'
+      - '192.168.100.150'
+----
+
+. 执行 ``dump_hosts.py`` 脚本刷新 Hosts 解析文件，更新部署管理平台页面的访问地址信息。
++
+[source,shell]
+----
+/pitrix/bin/dump_hosts.py
+----

@@ -1,0 +1,32 @@
+---
+title: 部分 Hyper 节点提示 disk Failed
+weight: 08
+---
+
+== 问题现象
+
+执行生成配置文件命令时，节点报 “disk Failed”。
+
+== 问题原因
+
+磁盘分区问题。
+
+== 解决方法
+
+. 登录失败的 Hyper 节点。
+. 执行以下命令，确认磁盘 ID。
++
+[source]
+----
+lsblk
+cat /dev/disk/by-id/scsi* 
+----
+
+. 执行以下命令，手工修改配置。
++
+[source]
+----
+parted -s /dev/disk/by-id/scsi-23491496900d00000 rm X
+ctn_pri_disk_create_cmd="parted -a optimal -s /dev/disk/by-id/scsi-23491496900d00000 \"mkpart primary 1G 50%\""
+ctn_sec_disk_create_cmd="parted -a optimal -s /dev/disk/by-id/scsi-23491496900d00000 \"mkpart primary 50% 100%\""
+----

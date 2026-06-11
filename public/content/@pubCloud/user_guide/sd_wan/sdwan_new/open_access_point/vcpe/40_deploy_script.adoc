@@ -1,0 +1,208 @@
+---
+title: "部署软件 VCPE"
+draft: false
+collapsible: false
+weight: 40
+linkkey: new_sdwan_deploy_script_vcpe_manual
+---
+在创建云服务器后，请根据需要选择 VCPE 虚拟机部署方式或者 VCPE 容器部署方式部署 VCPE。
+
+* VCPE 虚拟机
++
+在青云QingCloud 创建云服务器时，基于 SD-WAN vCPE 镜像，部署云服务器并绑定 License，即可成功部署 VCPE。
+
+* VCPE 容器
++
+在虚拟机中运行脚本，完成在容器中部署 VCPE。
+
+== 前提条件
+
+* 已获取控制台的账号和密码。
+* 已创建 VCPE 接入点。
+* 请确保宿主机满足环境要求，更多信息请参见link:../10_vcpe_overview/#环境要求[环境要求]。
+
+== VCPE 虚拟机部署
+
+VCPE 以镜像的模式提供给用户。您需要在云平台上基于 *SD-WAN vCPE* 镜像创建云服务器。镜像在云平台的选择路径为**镜像** > *市场* > *SD-WAN VCPE*。
+
+创建成功后，登录到创建的云服务器绑定 License，即可激活 VCPE。
+
+操作步骤，如下所示。
+
+. 登录管理控制台。
+. 选择**产品与服务** > *计算* > *镜像*，进入**镜像**页面。
++
+image::/images/cloud_service/sd_wan/um_vcpe_image_list.png[]
+
+. 点击**市场**，进入**市场**页面。
++
+image::/images/cloud_service/sd_wan/um_vcpe_image_market.png[]
+
+. 勾选 *SD-WAN VCPE* 镜像，并点击**基于镜像创建云服务器**，进入**购买云服务器**页面。
+. 根据提示信息配置云服务器参数。
++
+image::/images/cloud_service/sd_wan/um_vcpe_image_display.png[]
+
++
+参数说明，如下表所示。
++
+[options="header",cols="1,2"]
+|===
+| 参数 | 参数说明
+
+| 镜像
+| SD-WAN VCPE
+
+| 网络
+| 部署 VCPE 的云服务器与业务所在云服务器在同一 VPC、同一 Vxnet。
+
+| 弹性公网 IP
+| 部署 VCPE 的云服务器需要访问公网。请根据实际需要为该云服务器或者云服务器所在 VPC 绑定公网 IP。
+
+| 其他参数
+| 请根据实际情况配置。
+|===
+
+. 点击**立即购买**，根据提示完成云服务器购买。
+. 在 VCPE 接入点详情页面，获取 VCPE 虚拟机接入点的序列号。
++
+image::/images/cloud_service/sd_wan/vm_vcpe_copy_license.png[]
+
+. 登录已购买的基于 **SD-WAN VCPE 镜像**的云服务器。
++
+
+include::../../../../../../_components/note.adoc[]
+关于如何登录云服务器，请参见link:/user_guide/compute/vm/manual/vm/connect_instance/linux_connect/[连接 Linux 云服务器]。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，绑定 License。
++
+
+include::../../../../../../_components/note.adoc[]
+License 为步骤 7 获取的 VCPE 接入点的序列号。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+[,shell]
+----
+wagent join -l License
+----
++
+若回显信息如下所示，则说明绑定 License 成功。
++
+image::/images/cloud_service/sd_wan/um_bind_image_license.png[]
+
+== VCPE 容器部署
+
+VCPE 容器部署方式可以帮助您实现业务跨云互通。
+
+=== 脚本参数说明
+
+VCPE 镜像的部署脚本提供如下可执行参数，如下所示。
+
+image::/images/cloud_service/sd_wan/script.png[,50%]
+
+参数说明，如下表所示。
+[options="header",cols="1,2"]
+|===
+| 参数 | 参数说明
+
+| -l
+| VCPE 设备的 License 。
+|===
+
+=== 操作步骤
+
+用户需要登录宿主机，根据提示信息下载 VCPE 脚本并安装 VCPE。
+
+. 登录宿主机。
++
+
+include::../../../../../../_components/note.adoc[]
+
+* 宿主机可连接公网。
+* 关于如何登录宿主机，请参考link:/user_guide/compute/vm/manual/vm/connect_instance/linux_connect/[连接 Linux 云服务器]。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 依次执行如下命令，安装 docker （如下命令**以 Ubuntu Server 20.04 操作系统**为例）。
++
+其他操作系统安装 docker 的命令，请参考link:https://docs.docker.com/engine/install/[官网]。
++
+[,shell]
+----
+sudo apt-get update
+----
++
+[,shell]
+----
+sudo apt-get install  apt-transport-https ca-certificates  curl gnupg-agent software-properties-common
+----
++
+[,shell]
+----
+curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+----
++
+[,shell]
+----
+sudo add-apt-repository  "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/  $(lsb_release -cs) stable"
+----
++
+[,shell]
+----
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+----
+
+. 执行以下命令，切换为 `root` 用户。
++
+
+include::../../../../../../_components/note.adoc[]
+若已是 `root` 用户，则跳过此步骤。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+[,shell]
+----
+sudo su
+----
+
+. 执行以下命令，将脚本下载至宿主机的 `/root ` 目录下。
++
+[,shell]
+----
+wget -O /root/deploy.sh https://sd-wan.pek3b.qingstor.com/deploy.sh
+----
+
+. 执行以下命令，为脚本赋予可执行权限。
++
+[,shell]
+----
+chmod +x /root/deploy.sh
+----
+
+. 执行以下命令，安装脚本。
++
+
+include::../../../../../../_components/note.adoc[]
+License 为 VCPE 接入点的序列号。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+[,shell]
+----
+/root/deploy.sh -l License
+----
+
+. 查看部署结果。
++
+部署完成后，若回显信息如下所示，则说明 VCPE 部署成功。若部署失败，请提交工单至 SD-WAN 团队进行处理。
++
+[,shell]
+----
+INFO: Install complete
+----
++
+image::/images/cloud_service/sd_wan/um_deploy_vcpe_success.png[]
+

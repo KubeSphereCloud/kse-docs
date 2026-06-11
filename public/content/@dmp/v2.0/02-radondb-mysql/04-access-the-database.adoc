@@ -1,0 +1,114 @@
+---
+title: "访问 MySQL 数据库"
+keywords: "Kubernetes, {ks_product}, RadonDB MySQL, 访问, 连接, 数据库"
+description: "介绍如何访问 RadonDB MySQL 数据库。"
+weight: 04
+---
+:ks_db_product: MySQL
+
+本节介绍如何访问 RadonDB {ks_db_product} 数据库。
+
+
+== 前提条件
+
+* 已获取{ks_product_both}平台登录账号和密码，且已获取平台操作管理权限。
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+* 已获取 {ks_db_product} 数据库用户名和密码。更多相关信息，请参阅link:../03-manage-database-users/01-create-a-database-user/[创建数据库用户]。
+
+== 通过{ks_product_both}平台访问
+
+以下演示在{ks_product_both}平台访问 RadonDB {ks_db_product} 的方式。
+
+在{ks_product_both}平台右下角工具箱中选择 kubectl 工具，通过 kubectl 工具访问 RadonDB {ks_db_product}。
+
+连接 RadonDB {ks_db_product} 数据库的命令如下：
+
+[,bash]
+----
+kubectl exec -it <pod_name> -c mysql -n <project_name> -- mysql --user=<user_name> --password=<user_password>
+----
+
+参数说明：
+
+* **pod_name** 为 {ks_db_product} 数据库所在的容器组名称
+* **project_name** 为 {ks_db_product} 数据库所在的项目名称
+* **user_name** 为 _radondb_
+* **user_password** 为 _RadonDB@123_
+
+== 通过 mysql-client 访问
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+使用如下方式，需提前安装可用于连接 {ks_db_product} 数据库的客户端工具。
+
+* 当客户端与数据库不在同一{ks_product_both}环境时，可通过配置端口转发、负载均衡等方式连接。
+* 当客户端与数据库在同一{ks_product_both}环境时，默认通过 **service_name** 方式连接。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+以下为客户端与数据库在同一{ks_product_both}环境内，通过 **service_name** 访问 RadonDB {ks_db_product} 数据库的方式。
+
+连接 RadonDB {ks_db_product} 数据库的命令如下：
+
+[,bash]
+----
+mysql -h <leader_service_name>.<project_name> -u <user_name> -p
+----
+
+参数的取值示例如下：
+
+* **leader_service_name** 为 _radondb-63jcri-leader_（请将 _radondb-63jcri_ 替换为 {ks_db_product} 实例的实际名称）
+
+* **project_name** 为 _test_ （请将 _test_ 替换为 {ks_db_product} 实例所在的项目名称）
+
+* **user_name** 为 _radondb_
+
+* **user_password** 为 _RadonDB@123_
+
+命令示例如下：
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+mysql -h radondb-63jcri-leader.test -u radondb -p
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+以上 **service_name** 方式不适用于从{ks_product_both}集群的物理机访问数据库 Pod。若要通过物理机或物理机所在的网络访问 {ks_db_product}，需要用 NodePort 暴露该数据库。
+
+. 进入{ks_product_both}目标项目。
+
+. 点击**应用负载** > **服务**，找到新建的 {ks_db_product} 实例对应的 leader 和 follower 服务，如下图所示。
++
+--
+image::/images/dmp/edit-external-service.png[edit-external-service]
+--
+
+. 点击**更多操作** > **编辑外部访问**。
+
+. 将 leader 和 follower 服务的访问模式设置为 **NodePort**，点击**确定**。
+
+. 进入 DMP 数据库管理平台，在左侧导航栏点击 **{ks_db_product}**，然后点击已创建的 {ks_db_product} 实例进入详情页面。
+
+. 在详情页左侧区域，查看读写地址，输入以下命令访问 RadonDB {ks_db_product} 数据库。
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+mysql -h <leader_service_name>.<project_name> -u <user_name> -p
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+取决于 Kubernetes 集群的部署位置，您可能需要在安全组中放行端口并配置相关的端口转发规则。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+

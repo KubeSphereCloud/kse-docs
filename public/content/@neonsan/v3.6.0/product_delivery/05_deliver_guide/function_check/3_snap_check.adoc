@@ -1,0 +1,87 @@
+---
+title: "快照相关功能"
+weight: 3
+---
+
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统的快照功能
+
+|预置条件	
+a|
+. QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+. 各节点服务配置正确，且状态正常。
+. 系统中已经成功创建卷：vol/test。
+. 已成功将卷挂载于客户端，对应的盘符为：/mnt。
+
+|测试过程
+a|
+. 在服务端查看系统中指定卷的快照。
++
+[source,shell]
+----
+neonsan list_snapshot -volume vol/test
+----
+. 在客户端对卷 vol/test 写入测试数据 A。
+. 在服务端对指定卷创建快照。
++
+[source,shell]
+----
+neonsan create_snapshot -snapshot vol/test@test_snap
+----
+. 在客户端对卷 vol/test 写入测试数据 B。
+. 在服务端对指定卷创建快照。
++
+[source,shell]
+----
+neonsan create_snapshot -snapshot vol/test@test_snap1
+----
+. 在客户端对卷 vol/test 写入测试数据C。
+. 在服务端对指定卷创建快照：
++
+[source,shell]
+----
+neonsan create_snapshot -snapshot vol/test@test_snap2
+----
+. 在客户端对卷 vol/test 写入测试数据 D。
+. 将卷 vol/test 从客户端解除挂载。
+. 将卷回滚至指定快照 vol/test@test_snap。
++
+[source,shell]
+----
+neonsan rollback_snapshot -snapshot vol/test@test_snap
+----
+. 将卷重新挂载至客户端。
+. 在客户端查看卷内数据。
+. 删除快照
++
+[source,shell]
+----
+neonsan delete_snapshot -snapshot vol/test@test_snap
+----
+
+|预期结果	
+a|
+. 查看到指定卷的快照信息。
+. 客户端数据 A 写入成功，无错误返回。
+. 在服务端创建快照 vol/test@test_snap 成功，无错误返回。通过命令 ``list_snapshot`` 查看，新建快照信息显示在列。
+. 客户端数据 B 写入成功，无错误返回。
+. 在服务端创建快照 vol/test@test_snap1 成功，无错误返回。通过命令 ``list_snapshot`` 查看，新建快照信息显示在列。
+. 客户端数据 C 写入成功，无错误返回。
+. 在服务端创建快照 vol/test@test_snap2 成功，无错误返回。通过命令 ``list_snapshot`` 查看，新建快照信息显示在列。
+. 客户端数据 D 写入成功，无错误返回。
+. 卷 vol/test 从客户端卸载成功。
+. 回滚至指定快照后 vol/test@test_snap 后，通过命令 ``list_snapshot`` 查看，快照 test_snap1 与 test_snap2 均被系统删除，不再显示在列。
+. 成功重新挂载卷 vol/test 至客户端。
+. 查看到卷内数据为 A。
+. 删除快照成功后，通过命令 ``list_snapshot`` 查看，快照 test_snap 不再显示在列。
+
+
+|验证结果	
+|
+
+|备注	
+|
+|===

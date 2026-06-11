@@ -1,0 +1,204 @@
+---
+title: "启用 Whizard 可观测中心"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, Whizard 可观测中心, 启用 Whizard 可观测中心"
+description: "介绍如何启用 Whizard 可观测中心扩展组件。"
+weight: 01
+---
+
+:ks_menu: **平台管理 > 集群管理**
+
+
+本节介绍如何在{ks_product}安装前及安装完成后，启用 Whizard 可观测中心扩展组件。
+
+== 在{ks_product}安装前启用 Whizard 可观测中心
+
+. 登录集群节点，执行以下命令编辑 cluster-configuration.yaml 配置文件：
++
+--
+// bash
+[,bash]
+----
+vi cluster-configuration.yaml
+----
+--
+
+. 将 **spec:monitoring:whizard:enabled** 参数设置为 **true**，然后保存⽂件。
++
+--
+// YAML
+[,yaml]
+----
+spec:
+  monitoring:
+    whizard:
+      client:
+        clusterName: ' '
+        gatewayUrl: ' '
+      enabled: true
+      server:
+        nodePort: 30990
+----
+--
+
+== 在{ks_product}安装后启用 Whizard 可观测中心
+
+=== 前提条件
+
+* 您需要在{ks_product_both}平台具有 **platform-admin** 角色。有关更多信息，请参阅link:../../../../04-platform-management/04-access-control/02-users/_index/[用户]和link:../../../../04-platform-management/04-access-control/03-platform-roles/_index/[平台角色]。
+
+* {ks_product_right}平台已启用多集群管理扩展组件。如需使用 Whizard 可观测中心对多个集群进行监控，您需要提前添加成员集群。有关更多信息，请参阅link:../../13-multi-cluster-management/01-enable-multi-cluster-management/[启用多集群管理]和link:../../../02-multi-cluster-management/01-clusters/01-add-a-member-cluster/01-add-a-member-cluster-using-direct-connection/[通过直接连接添加成员集群]。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+如果成员集群使用代理连接，请联系 KubeSphere 交付服务专家。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+
+=== 启用 Whizard 可观测中心
+
+在{ks_product}安装完成后启用 Whizard 可观测中心，您需要先在主集群和成员集群执行以下操作，以便重新部署监控服务。
+
+. 以具有 **platform-admin** 角色的用户登录{ks_product_left} Web 控制台。
+
+. 将光标悬停在页面右下角的image:/images/ks-qkcp/zh/icons/hammer.svg[hammer,18,18] 图标，然后在菜单中选择 **kubectl**。
+
+. 在 **kubectl** 对话框，执行以下命令编辑集群配置文件：
++
+--
+// bash
+[,bash]
+----
+kubectl edit cc ks-installer -n kubesphere-system
+----
+--
+
+. 在集群配置文件中，将 **status:monitoring:status** 参数清空，然后保存文件。
++
+--
+// YAML
+[,yaml]
+----
+status:
+  monitoring:
+    status: ' '            #清除 status 的 enabled 参数，以便重新部署监控服务
+----
+--
+
+**在主集群启用 Whizard 可观测中心**
+
+// 启用 Whizard 可观测中心服务时，服务会通过 NodePort 方式暴露 30990 端口，供成员集群与主集群通信。
+
+. 以具有 **platform-admin** 角色的用户登录主集群的{ks_product_left} Web 控制台。
+. 将光标悬停在页面右下角的image:/images/ks-qkcp/zh/icons/hammer.svg[hammer,18,18] 图标，然后在菜单中选择 **kubectl**。
+. 在 **kubectl** 对话框，执行以下命令编辑集群配置文件：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl edit cc ks-installer -n kubesphere-system
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在集群配置文件中，将 **spec:monitoring:whizard:enabled** 参数设置为 **true**，然后保存⽂件。
++
+--
+// yaml
+[,yaml]
+----
+spec:
+  monitoring:
+    whizard:
+      client:
+        clusterName: ' '
+        gatewayUrl: ' '
+      enabled: true
+      server:
+        nodePort: 30990
+----
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|clusterName
+|集群名称。请勿在主集群设置此参数。
+
+|gatewayUrl
+|主集群主节点的 IP 地址和 Whizard 可观测中心网关的端口号（默认为 30990）。请勿在主集群设置此参数。
+
+|enabled
+|是否启用 Whizard 可观测中心。请对主集群和成员集群都设置为 true。
+
+|nodePort
+|Whizard 可观测中心网关的端口号。默认在主集群开放 30990 端口与成员集群进行通信，可根据实际网络模型自行配置。如果没有特殊需求，请保留默认值 30990。
+|===
+--
+
+**在成员集群启用 Whizard 可观测中心**
+
+. 以具有 **platform-admin** 角色的用户登录成员集群的{ks_product_left} Web 控制台。
+. 将光标悬停在页面右下角的image:/images/ks-qkcp/zh/icons/hammer.svg[hammer,18,18] 图标，然后在菜单中选择 **kubectl**。
+. 在 **kubectl** 对话框，执行以下命令编辑集群配置文件：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl edit cc ks-installer -n kubesphere-system
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在集群配置文件中，将 **spec:monitoring:whizard:enabled** 参数设置为 **true**，并配置 **gatewayUrl** 及 **clusterName**，然后保存⽂件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  monitoring:
+    whizard:
+      client:
+        clusterName: '<member cluster name>'    
+        gatewayUrl: '<host cluster IP address>:30990' 
+      enabled: true
+      server:
+        nodePort: 30990
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|clusterName
+|在主集群的 Web 控制台添加成员集群时，设置的成员集群名称。如果当前集群为成员集群，您需要设置此参数。
+
+|gatewayUrl
+|主集群主节点的 IP 地址和 Whizard 可观测中心网关的端口号（默认为 30990）。如果当前集群为成员集群，您需要设置此参数。
+
+|enabled
+|是否启用 Whizard 可观测中心。请对主集群和成员集群都设置为 true。
+
+|nodePort
+|Whizard 可观测中心网关的端口号。如果没有特殊需求，请保留默认值 30990。
+|===
+
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionEnabled.adoc[]
+
+* Whizard 可观测中心启用后，**平台管理**菜单将显示 **Whizard 可观测中心**选项。如果您在 **Whizard 可观测中心**页面看到监控概览且数据正常，则说明启用成功。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+--

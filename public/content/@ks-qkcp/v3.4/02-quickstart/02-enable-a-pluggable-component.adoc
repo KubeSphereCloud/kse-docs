@@ -1,0 +1,97 @@
+---
+title: "启用可插拔组件"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 快速入门, 可插拔组件"
+description: "以启用{ks_product_both}应用商店为例，演示如何在{ks_product_left} Web 控制台上启用可插拔组件。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 400fb8ad54be4a1295d7910c248b52bb
+:ks_xref_id: 57eabcabc7e64580a4b4942d6c19e3b3
+:ks_comp: ../../components/
+:ks_title: 启用可插拔组件
+:ks_keywords: Kubernetes, {ks_product}, 快速入门, 可插拔组件
+:ks_description: 以启用{ks_product_both}应用商店为例，演示如何在{ks_product_left} Web 控制台上启用可插拔组件。
+:ks_weight: 02
+:ks_icon:
+
+
+本节以启用{ks_product_both}应用商店为例，演示如何在{ks_product_left} Web 控制台启用可插拔组件。
+
+{ks_product_right}应用商店基于 link:https://github.com/openpitrix/openpitrix[OpenPitrix] 为应用生命周期管理提供了一个高效的集成系统，用户可以用最合适的方式快速上传、发布、部署、升级和下架应用。
+
+
+== 前提条件link:[id=7a12be8693cf459dbdb3aea4225adbd5]
+
+您需要准备一个 Kubernetes 集群，并link:../../02-quickstart/01-install-minimal-kubesphere[已安装{ks_product_left}]。
+
+
+== 编辑定制资源 ks-installerlink:[id=8ed1bfffd7ff400684addc5dc0c3c5e7]
+
+. 使用具有 **platform-admin** 角色的用户登录 Web 控制台，在左上角点击**平台管理 > 集群管理**。
+
+. 在左侧导航栏，点击**定制资源定义**。
+
+. 在**定制资源定义**页面的搜索框中输入 **clusterconfiguration** 并按 **Enter** 进行搜索。
+
+. 点击搜索结果中的 **ClusterConfiguration** 进入其详情页面。
++
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+定制资源定义（定制资源定义）可以在不增加额外 API 服务器的情况下创建一种新的资源类型，用户可以像使用其他 Kubernetes 原生对象一样使用这些定制资源。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在**资源状态**页签上，点击 **ks-installer** 右侧的 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，选择**编辑 YAML**。
+
+. 在弹出的对话框，将 **spec.openpitrix.store.enabled** 的值更改为 **true**，然后点击**确定**。
++
+--
+// YAML
+include::../../../_ks_components/code/yaml.adoc[]
+
+openpitrix:
+  store:
+    enabled: true # 将 false 更改为 true。
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 使用 Web kubectl 工具执行以下命令查看安装过程。
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='{.items[0].metadata.name}') -f
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Tip
+include::../../../_ks_components/admonitions/tip.adoc[]
+
+将鼠标悬停至 Web 控制台右下角的 image:/images/ks-qkcp/zh/icons/hammer.svg[hammer,20,25]，点击 **kubectl** 来使用 Web kubectl 工具。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+
+== 验证组件启用结果link:[id=e871760ec69a4ff4a44b3213a06b2819]
+
+在您登录 Web 控制台后，如果页面左上角显示有**应用商店**，并且点击后可查看应用商店中的应用，则说明启用成功。
+
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+* 您可以在不登录 Web 控制台的情况下访问 <node IP address>:**30880/apps** 来进入应用商店。
+
+* {ks_product_right} 3.2.x 中的应用商店启用后，**系统组件**页面不会显示 **OpenPitrix** 页签。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,89 @@
+---
+title: 创建单点登录访问凭证（CreateSsoAccessToken）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| true
+| 
+
+| authorization_code
+| String
+| true
+| 
+
+| token_issuer
+| String
+| false
+| 签发者
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_token
+| String
+| false
+| 
+
+| expires_in
+| String
+| false
+| 过期时间
+
+| lang
+| String
+| false
+| 语言
+
+| token_type
+| String
+| false
+| token类型,有效值为:JWT,Bearer
+
+| user_id
+| String
+| false
+| 用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateSsoAccessToken",
+  "app_id": "app_123",
+  "authorization_code": "zzz_test",
+  "token_issuer": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "access_token": "JZOHGWGENRXLKPMEMZYR",
+  "action": "CreateSsoAccessTokenResponse",
+  "expires_in": "2022-11-20 16:42",
+  "ret_code": 0,
+  "token_type": "JWT",
+  "user_id": "usr-kdsaDLs"
+}
+----

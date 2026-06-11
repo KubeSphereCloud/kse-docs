@@ -1,0 +1,112 @@
+---
+title: "升级 Installer"
+weight: 1
+---
+
+== 提前须知
+
+* FistBox 所在节点可在 NeonSAN 集群任一节点，通过 SSH 免密访问登录。
++
+[,shell]
+----
+ssh qingstor-firstbox 
+----
+
+* FirstBox 可执行如下命令进行登录。
++
+[,shell]
+----
+ssh qingstor-firstbox -p 6023
+----
+
+== 操作步骤
+
+
+. 登录 FirstBox 所在节点，进入升级脚本 upgrader.sh 所在目录。
++
+[,shell]
+----
+cd /qingstor-installer
+----
+
+. 执行相应脚本，升级 Installer。
++
+[,shell]
+----
+bash upgrader.sh -u installer
+----
++
+根据回显结果，检查获取到的集群信息。
++
+[,shell]
+----
+============================================
+Log:      /qingstor/log/upgrade/upgrader.log
+Log(fb):  /qingstor/log/upgrade/upgrade-installer.log
+Backup:   /tmp/backup_qs
+Mode:     Installer
+Step:     1-5
+Start:    Tue May 23 10:50:08 CST 2023
+============================================
+Environment Information Check
+--------------------------------------------
+172.16.90.3:                  ubuntu 16.04.5
+172.16.90.4:                  ubuntu 16.04.5
+172.16.90.5:                  ubuntu 16.04.5
+installer version:            2.0.17.2  # 当前 installer 版本
+installer upgrade:            2.0.17.2  # 升级 installer 目标版本
+installer-neonsan version:    3.5.2  # 当前 installer-neonsan 版本
+installer-neonsan upgrade:    3.5.2  # 升级 installer-neonsan 目标版本
+portal version:               3.5.0  # 当前 portal 版本
+portal upgrade:               3.5.0  # 升级 portal 目标版本
+neonsan center version:       2.2.3
+neonsan monitor version:      2.2.3
+neonsan store version:        2.2.3
+--------------------------------------------
+environment information is correct? [y/n]: 
+----
+
+. 若确认环境信息无误，根据提示输入 ``y``。
++
+升级脚本将会自动依次进行**升级预检查**、**更新仓库**、**升级 Instalelr**、**升级 Installer-NeonSAN** 和**升级后检查**步骤。
++
+[,shell]
+----
+environment information is correct? [y/n]: y
+============================================
+Step1: 升级预检查                        [ok]
+Step2: 更新仓库                         [ok]
+Step3: 升级Installer                  [ok]
+Step4: 升级Installer-NeonSAN          [ok]
+Step5: 升级后检查                        [ok]
+============================================
+End:     Tue May 23 11:01:46 CST 2023
+============================================
+----
+
+. 等待升级完成，登录 FirstBox，执行如下命令，检查当前环境软件版本。
++
+[,shell]
+----
+apt list --installed|grep qingstor-installer; installer version-list
+----
+
+== 回滚操作
+
+若升级过程中出现需要回滚的情况，必须先与 NeonSAN 研发团队进行确认后，再进行回滚操作。
+
+. 登录 FirstBox 所在节点，进入升级脚本 upgrader.sh 所在目录。
++
+[,shell]
+----
+cd /qingstor-installer
+----
+
+. 执行相应脚本，进行回滚。
++
+[,shell]
+----
+bash upgrader.sh -r installer
+----
+
+

@@ -1,0 +1,212 @@
+---
+title: 安装 HydroFS CSI 插件
+weight: 2
+---
+
+待前期准备工作均成功执行完成后，即可登录 Kubernetes 集群的 Master 节点，安装 HydroFS CSI 插件。详细操作如下。
+
+== 步骤一：解压安装包
+
+. 将link:../prepare/package/[前文获取]的 HydroFS CSI 的安装包，上传至 Kubernetes 集群的 Master 节点的 `/root` 目录下。
+
+. 登录 Kubernetes 集群的 Master 节点。
+
+. 在 `/root` 目录执行如下命令行，解压 HydroFS CSI 的安装包。命令行中的 `<version>` 为 HydroFS CSI 的安装包的版本号，需根据实际情况进行填写。
++
+[source,shell]
+----
+tar zxvf csi-img-chart<version>.tar.gz
+----
++
+解压内容如下。
++
+image::/images/u10000_v5.0/csi_3.png[csi_3,60%]
+
+
+== 步骤二：执行安装脚本
+
+. 延续前文步骤，进入脚本所在目录，修改 `load_csi.sh` 脚本中如下参数。
++
+[cols="1a,3a", options="header"]
+|===
+| 字段 | 说明 
+
+| plain_http | 使用 `ctr push` 镜像，且镜像仓库为 Harbor 时生效。
+
+* 设置为 `true` 时，镜像仓库地址使用 `http` 协议。
+* 设置为 `false` 时，镜像仓库地址使用 `https` 协议。
+
+| img_addr | 填写镜像仓库地址。如镜像地址为 `harbor.qingstorage.com/ctr-test1/test_img:v3`，则此处填写内容为 `harbor.qingstorage.com`。
+| path| 镜像仓库项目地址。如镜像地址为 `harbor.qingstorage.com/ctr-test1/test_img:v3`，则此处填写内容为 `ctr-test1`。
+| * user_name
+* user_pass | 分别为镜像仓库用户名与密码。该节点有 `ctr push` 或 `docker push` `img_addr` 参数对应仓库权限时可为空。
+
+|===
+
+
+. 执行 `load_csi.sh` 脚本，完成镜像的加载、配置与推送。
++
+[source,shell]
+----
+./load_csi.sh
+----
+
+. 脚本执行完成后，会在当前用户根目录下生成一个 `csi` 文件夹，内容如下所示。
++
+image::/images/u10000_v5.0/csi_4.png[csi_4,60%]
++
+其中，`chart` 目录下存放 Kubernetes 模板文件，`img` 目录下存放相关镜像。
+
+
+== 步骤三：修改 Chart 模板配置
+
+延续前文步骤，修改执行 `load_csi.sh` 脚本后生成的配置文件 `/root/csi/chart/values.yaml`。
+
+[source,shell]
+----
+vi ./csi/chart/values.yaml
+----
+
+=== 配置文件示例
+
+[source,yaml]
+----
+# hydro-fuse config
+log_dir: /qingstor/log
+log_level: info
+mount_options: default_permissions,allow_other
+
+work_pool:
+  min_workers: 100
+  max_workers: 200
+  buffer_size: 400
+  worker_timeout: 5
+
+rpc_client:
+  thresholds: 128
+  task_timeout: 30
+  read_timeout: 20
+  write_timeout: 20
+  idle_timeout: 120
+
+stor:
+  port: 9392
+  cluster_id_shift: 16
+  confd_config:
+    addrs: "172.22.55.2:9296,172.22.55.3:9296,172.22.55.4:9296"
+    max_retry: 3
+    max_idle: 30
+    idle_timeout: 10
+
+# hydrofs-csi config
+hydrofs_csi:
+  hydrofs_csi_image: 139.198.32.245/csi/hydrofs-csi-driver:1.1
+  hydro_fuse_image: 139.198.32.245/csi/hydro_fuse:1.1
+  csi_resizer: k8s.gcr.io/sig-storage/csi-resizer:v1.2.0
+  csi_provisioner: quay.io/k8scsi/csi-provisioner:v1.6.0
+  livenessprobe: quay.io/k8scsi/livenessprobe:v1.1.0
+  csi_node_driver_registrar: quay.io/k8scsi/csi-node-driver-registrar:v1.3.0
+  user_id: admin
+  access_key_id: GHGHHAVHSJJFIBNMSRBK
+  secret_access_key: FBr1LqvI977gsY9ELW8NFN6Rx2RsEqwl8jbHYysg
+  http_url: nas.test1a.stor.qingstorage.com
+----
+
+=== 部分字段说明
+
+需修改字段说明如下，其余字段无需修改。
+
+[cols="1a,3a", options="header"]
+|===
+| 字段 | 说明 
+
+| confd_config.addrs | 用于定义 {product_name} 的 `hydro_confd` 集群的 IP 地址与端口号。
+
+* 参考link:../prepare/u1w_config/#_hydro_confd_集群信息[前文查询]内容进行填写。
+* 填写格式参考示例，多组 IP 地址之间使用 `,` 隔开。
+
+| hydrofs_csi.user_id | 参考link:../prepare/u1w_config/#_创建_kubernetes_账户[前文内容]进行填写。
+| * hydrofs_csi.access_key_id 
+* hydrofs_csi.secret_access_key| 访问 {product_name} 的密钥，参考link:../prepare/u1w_config/#_创建_kubernetes_账户[前文内容]进行填写。
+
+| * hydrofs_csi.hydrofs_csi_image 
+* hydrofs_csi.hydro_fuse_image
+* hydrofs_csi.csi_resizer
+* hydrofs_csi.csi_provisioner
+* hydrofs_csi.livenessprobe
+* hydrofs_csi.csi_node_driver_registrar| 镜像相关参数，`load_csi.sh` 脚本会自动修改，实施人员需确认该部分配置与 `push` 的目标镜像地址一致。
+
+
+| hydrofs_csi.http_url | HydroFS CSI 插件访问的 {product_name} 的域名。
+
+* 填写格式为 `nas.<zone_id>.<global_domain>`。
+* `<zone_id>`、`<global_domain>` 可参考link:../prepare/u1w_config/#_global_domain[前文内容]进行填写。
+|===
+
+
+== 步骤四：修改防火墙配置
+
+若 Kubernetes 集群的网络与 {product_name} 的网络不在同一网段下，此时需要登录 {product_name} 环境，修改相关配置，开放相应的端口。详细操作如下。
+
+
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，修改配置文件 `/qingstor/etc/iptables.ini`。
++
+[source,shell]
+----
+vi /qingstor/etc/iptables.ini
+----
+
+. 增加如下内容。将 `src_ip` 修改为 Kubernetes 集群的网络所在的网段。假设 Kubernetes 占用网段为 `10.10.0.0/16`，则修改如下。
++
+[source,shell]
+----
+[custom_rules]
+1: src_ip=10.10.0.0/16 dst_port=9296 proto=tcp
+2: src_ip=10.10.0.0/16 dst_port=9392 proto=tcp
+----
++
+include::../../../../../_components/note.adoc[]
+
+规则前的序号递增，不可重复。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 进入脚本所在目录，执行如下命令行，使得 Iptables 的配置生效。 
++
+[source,shell]
+----
+cd /root/qs-installer
+./qs_installer  tools --iptables_exec
+----
+
+. 登录 Kubernetes 集群的任意节点，执行如下命令行，确认存储节点能正常访问。其中 `<stroage_node_ip>` 为存储集群的节点 IP 地址，可参考link:../prepare/u1w_config/#_存储集群_ip[前文内容]进行查询。
++
+[source,shell]
+----
+telnet <stroage_node_ip> 9296
+telnet <stroage_node_ip> 9392
+----
+
+
+
+
+== 步骤五：安装 HydroFS CSI 插件
+
+返回至 Kubernetes 集群的 Master 节点，延续前文步骤，执行以下命令，安装 HydroFS CSI 插件。
+
+[source,shell]
+----
+cd /root/
+helm install csi-hydrofs ./csi/chart/ -n kube-system
+----
+
+命令成功执行，且无报错信息，则说明安装成功。
+

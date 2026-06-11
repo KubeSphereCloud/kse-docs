@@ -1,0 +1,73 @@
+---
+title: "查看告警消息列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 告警, 消息, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看告警消息列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e7e6d1d6fe5e407e8d919bbf2f1cd807
+:ks_xref_id: 00e725689fd14151ba382bd38fc7790d
+:ks_comp: ../../../components/
+:ks_title: 查看告警消息列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看告警消息列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 告警, 消息, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看告警消息列表。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=f2000588801d46c4860e0c1607aef8f2]
+
+系统 **admin** 用户可以查看集群中所有已触发的告警，普通项目管理员、操作员或观察员可以查看各自所属项目中已触发的告警。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=081c059d339244a29b8c24f30ad4e7d3]
+
+include::../../../_custom/alerts/alert-steps.adoc[]
+
+. 在**告警消息**页签，查看告警消息列表。
++
+--
+告警消息列表展示项目中的所有告警消息，并提供以下信息：
+
+[cols="1a,3a"]
+|===
+|参数 |描述
+
+|告警消息
+|告警策略触发后自动生成的告警消息。
+
+|告警状态
+|告警的状态，包括以下状态类型：
+
+include::../../../_custom/alerts/alert-status-description.adoc[]
+
+|告警级别
+|告警的严重程度，包括以下三个级别：
+
+include::../../../_custom/alerts/alert-severity-levels.adoc[]
+
+|告警策略
+|告警策略的名称。点击告警策略的名称可查看告警策略详情页面。有关更多信息，请参阅 link:../05-view-alert-policy-details/[查看告警策略详情]。
+
+|监控目标
+|告警的监控目标。目前支持对节点和虚拟机进行监控。
+
+|告警激活时间
+|触发告警的时间。
+|===
+--
+
+. （可选）点击告警消息列表上方的搜索框并设置搜索条件，可按告警状态或告警级别搜索告警消息。例如，使用**告警状态:触发中**搜索触发中的告警消息。
+
+. （可选）在告警消息列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。

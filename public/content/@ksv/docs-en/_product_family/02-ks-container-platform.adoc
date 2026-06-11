@@ -1,0 +1,94 @@
+---
+title: "KubeSphere"
+linkTitle: "{ks_title}"
+keywords: ""
+description: ""
+weight: 02
+logo: "{ks_logo}"
+downloadUrl: "{ks_download_url}"
+---
+
+// :ks_include_id: 23307d033ad74d948c404502ca87ff7f
+:ks_xref_id: d2ddba575c30421cb46f77fad8b26a78
+:ks_comp: ../../components/
+:ks_title: KubeSphere
+:ks_description:
+:ks_keywords:
+:ks_weight: 02
+
+
+At QingCloud, we launched our open source container platform KubeSphere in 2018. Leveraging Kubernetes at the core, KubeSphere is a cloud native distributed operating system that helps enterprises build a robust container platform at ease.
+
+With rich experience in product design and application, KubeSphere is favored by users from all over the world. As of June 2022, it has reached one million downloads worldwide. KubeSphere features the only open source container platform initiated by a Chinese company with world-class influence and the community ranking of which has reached the second place in the world.
+
+After years of development, KubeSphere has been able to provide developers with a user-friendly wizard interface and rich enterprise-grade functionality, including multi-cluster management, DevSecOps, application lifecycle management, edge computing, microservice governance, multi-tenant management, observability, multi-cluster monitoring, networking and storage. Tens of thousands of enterprises use KubeSphere in production environments, covering finance, carriers, transportation, energy, healthcare, education, manufacturing, and many other industries.
+
+The following figure summarizes the key features of KubeSphere.
+
+image::{ks_image}{f022b0ca72b04b71bd0977c236a58454}[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Features and scenarioslink:[id=78771c1f6db54050a16a9fbcdf46110f]
+
+* Observability
++
+--
+KubeSphere enables cross-cluster and multi-dimensional monitoring based on tenants, integrated with various monitoring panels to diversify monitoring dimensions depending on user roles. At the same time, we collaborate with multiple open source projects and support audits and logging, events, and multi-channel notifications.
+--
+* Microservice governance
++
+--
+Integrated with Istio, KubeSphere features built-in traffic topologies for microservices, fine-grained flow control, and microservice tracing analysis, without having to configure settings manually.
+--
+* Clusters and multi-tenancy
++
+--
+KubeSphere provides Solo and Federation modes to manage clusters, supporting federated architecture, multi-tenant resource isolation, and layered access control.
+--
+* Edge computing
++
+--
+Leveraging KubeEdge, KubeSphere can help you manage edge nodes, deploy component, and collect log data. This feature achieves edge autonomy, cross-cloud cluster management, and edge-cloud collaboration.
+--
+* DevSecOps
++
+--
+Integrated with Jenkins and Argo CD, KubeSphere provides built-in pipeline templates and features source-to-image (S2I) and binary-to-image (B2I) to build container images, without having to write Jenkins pipelines.
+--
+* Full lifecycle management of applications
++
+--
+KubeSphere allows you to manage applications during the whole lifecycle, from application review, rollout, to removal. At the same time, you can have access to multiple built-in applications by default.
+--
+* Security in cloud native
++
+--
+KubeSphere provides out-of-the-box features with enhanced security, covering security compilation, system hardening, application security, sensitive data protection, and O&M security. These capabilities are enhanced to secure continuous application updates during the whole lifecycle.
+--
+* Business operations
++
+--
+KubeSphere powers operations in enterprises, offering self-developed tenant-based workspaces to isolate resources from various dimensions. Our service supports multi-dimensional metering and billing to meet the internal settlement needs of enterprises.
+--
+* Database management
++
+--
+KubeSphere solves the issues of cross-cloud database deployment and management, and helps customers move towards a new era of multivariate mixed databases. Our service realizes database as a service (DBaas) with managed RadonDB databases.
+--
+* RadonDB containerized databases
++
+--
+RadonDB is a database management platform (DMP) that supports major database engines such as MySQL, PostgreSQL, ClickHouse, Redis, MongoDB, OpenSearch, and Kafka. In high availability architecture, RadonDB features security, automatic backup, monitoring and alerts, and auto scaling.
+--
+* Multi-cluster O&M
++
+--
+Unified management of Kubernetes clusters in different environments improves availability, isolation, and scalability. Our service meets business requirements of application deployment in hybrid clouds, achieving O&M integration for large customers in finance, e-commerce, logistics, and other industries.
+--
+* AI
++
+--
+KubeSphere supports containers using vGPU resources across hosts, more cost-effective and flexible than NVIDIA.
+--

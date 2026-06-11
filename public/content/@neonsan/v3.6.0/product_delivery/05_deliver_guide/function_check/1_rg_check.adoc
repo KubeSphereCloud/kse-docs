@@ -1,0 +1,94 @@
+---
+title: "存储池相关功能"
+weight: 1
+---
+
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN  的存储池相关功能。
+
+|预置条件	
+a|
+. QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+. 各节点服务配置正确，且状态正常。
+. 集群中尚无卷分布。
+
+
+|测试过程
+a|
+. 登录 NeonSAN 集群任一节点。
+. 查看集群中的存储池信息。
++
+[source,shell]
+----
+neonsan list_rg -detail
+----
+. 创建集群中不存在的存储池，test_rg。
++
+[source,shell]
+----
+neonsan create_rg -rg test_rg
+----
+. 将节点从 default 存储池中删除。
++
+[source,shell]
+----
+neonsan delete_rg_node -rg default -store_id 2
+----
+. 添加该节点至新创建的存储池。
++
+[source,shell]
+----
+neonsan add_rg_node -rg test_rg -store_id 2
+----
+. 查看集群中的存储池信息。
++
+[source,shell]
+----
+neonsan list_rg -detail
+----
+. 环境恢复。
+* 从 test_rg 中将节点删除。
+* 删除 test_rg 存储池。
++
+[source,shell]
+----
+neonsan delete_rg -rg test_rg
+----
+* 将节点添加至 default 存储池。
+* 查看集群中的存储池信息。
+. 查看 leader center 节点日志。
++
+* 查看 leader center 节点
++
+[source,shell]
+----
+qfcip
+----
+* 登录 leader center 节点，查看如下日志。
++
+[source,shell]
+----
+/var/log/neoncenter.log
+----
+
+|预期结果	
+a|
+. 成功登录 NeonSAN 节点。
+. 可查看到当前集群中的存储池基本信息。
+. 命令成功执行，无错误返回，即创建 test_rg 存储池成功。
+. 命令成功执行，无错误返回，指定节点从 default 存储池删除成功。
+. 命令成功执行，无错误返回，指定节点已添加至 test_rg 存储池。
+. 查看集群中存储池信息时，从 default 存储池删除的节点不在出现在 default 存储池中，成功添加至 test_rg 存储池。
+. 环境恢复后，集群中无 test_rg 存储池，且所有节点均分布在 default 存储池内。
+. leader center 日志内，无异常日志内容。
+
+
+|验证结果	
+|
+
+|备注	
+|
+|===

@@ -1,0 +1,92 @@
+---
+title: "查看告警策略详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 告警, 策略, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看告警策略详情。"
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 366f4f85713d4e449ace3d3461fa4fdc
+:ks_xref_id: 49f37350fa9949d5b8be7b9d5a758f40
+:ks_comp: ../../../components/
+:ks_title: 查看告警策略详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看告警策略详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 告警, 策略, 详情, 查看
+:ks_weight: 05
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看告警策略详情。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=bd6ed7dfddc3419a8f839a244817e456]
+
+系统 **admin** 用户可以查看集群中所有已创建的告警策略，普通项目管理员、操作员或观察员可以查看各自所属项目中已创建的告警策略。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=ef96736ab20540fe8a15da3038fbf66b]
+
+include::../../../_custom/alerts/alert-steps.adoc[]
+
+. 在**告警策略**页签，点击目标告警策略名称，进入告警策略详情页面。
+
+. 在告警策略详情页面的左侧区域，查看告警策略的基本信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|状态
+|告警的状态。包括以下状态类型：
+
+include::../../../_custom/alerts/alert-status-description.adoc[]
+
+|别名
+|告警策略的别名。
+
+|告警级别
+|告警的严重程度，包括以下三个级别：
+
+include::../../../_custom/alerts/alert-severity-levels.adoc[]
+
+|告警持续时间（分钟）
+|告警的持续时间。
+
+告警满足告警规则的时间达到预设值后，告警将变为触发中状态。
+
+|规则
+|为告警策略设置的告警规则。
+
+|激活时间
+|触发告警的时间。
+
+|创建者
+|创建告警策略的用户名称。
+|===
+--
+
+. 在告警策略详情页面的右侧区域，查看告警策略对应的监控目标。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|监控目标的名称。
+
+|ID
+|监控目标在系统中的通用唯一标识符。
+
+|状态
+|监控目标当前的状态。
+|===
+--

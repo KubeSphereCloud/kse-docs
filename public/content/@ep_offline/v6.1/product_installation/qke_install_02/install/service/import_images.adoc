@@ -1,0 +1,78 @@
+---
+title: "导入 QKE 镜像"
+weight: 20
+---
+
+参考 AppCenter 导入方法导入 QKE 应用，企业云平台 v6.0 版本需导入如下两个镜像：
+
+* app-o6lvbkhm | appv-1i0kn269 | Enterprise - v2.0.0 | 自管版本 | qke-plus
+* app-o6lvbkhm | appv-eepv21hi | Enterprise - v2.0.0 for arm | 自管版本 | qke-plus
+
+== 操作步骤
+
+. 下载 QKE 镜像。
++
+下载路径：ftp://ins.qingcloud.com/migrate_appcenter2_apps_dev/
+. 将镜像上传到一台物理机。
++
+例如上传到了 demo1r01n02:/pitrix/migrate_appcenter2_qingcloud 目录。
+. 登录任一 webservice 节点。
+. （可选）执行以下命令，开启 tmux。
++
+[source]
+----
+tmux
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* 因为导入时间较长，若中途网络断连可能会导致操作终止，使用 tmux 方式可以避免此问题。
+* 开启 tmux 后，在命令执行操作过程中，若网络断连，命令会在后台继续执行。恢复连接后，执行 `tmux attach` 即可恢复到之前的操作界面。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，进入 /pitrix/lib/pitrix-scripts/appcenter2/ 目录。
++
+[source]
+----
+cd /pitrix/lib/pitrix-scripts/appcenter2/
+----
+. 执行以下命令，导入 QKE 镜像。
++
+[source]
+----
+./import_apps -s <QKE镜像包路径> -y -c <console_id> -C kvm --isolate_billing 1 --instance_class "INSTANCE_CLASS" --volume_class "VOLUME_CLASS"
+----
++
+参数说明：
++
+[cols='1,4']
+|===
+| 参数 |  说明
+
+| -s | 请填写 QKE 镜像包的完整路径。
+| -c | 请填写环境的 console_id，根据环境规划获取，或在企业云平台的 FirstBox 节点执行命令 ``cat /pitrix/conf/variables/variables.yaml`` 查看。
+| --instance_class | 如果 NeonSAN 环境是纯 SSD 环境，则配置为 6。
+
+如果 NeonSAN 环境为混插型硬盘，则配置为 7。
+| --volume_class | 如果 NeonSAN 环境是纯 SSD 环境，则配置为 5。
+
+如果 NeonSAN 环境为混插型硬盘，则配置为 6。
+|===
++
+示例：
++
+[source]
+----
+./import_apps -s root@demo1r01n02:/pitrix/migrate_appcenter2_qingcloud -y -c democloud -C kvm --isolate_billing 1 --instance_class "6" --volume_class "5"
+----
++
+回显信息类似如下，表示操作成功。
++
+image::/images/ep_offline/qke_install/install_service_import_images.png[]
+. 导入任务完成后，执行以下命令，重启 billing_resource 服务。
++
+[source]
+----
+supervisorctl restart billing_resource
+----

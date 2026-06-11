@@ -1,0 +1,65 @@
+---
+title: 修改一般附件属性（ModifyCommonAttachmentAttributes）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| attachment_content
+| String
+| true
+| 附件内容
+
+| attachment_id
+| String
+| true
+| 附件ID
+
+| filext
+| String
+| true
+| 文件格式
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| attachment_id
+| String
+| false
+| 附件id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "attachment_content": "*",
+  "attachment_id": "ca-6n9q88u9",
+  "filext": "zip"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyCommonAttachmentAttributes",
+  "attachment_id": "ca-6n9q88u9",
+  "ret_code": 0
+}
+----

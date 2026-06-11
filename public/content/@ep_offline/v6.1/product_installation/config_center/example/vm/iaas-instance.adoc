@@ -1,0 +1,51 @@
+---
+title: 修改云服务器系统盘容量
+weight: 21
+---
+
+本小节主要介绍如何修改云服务器的系统盘容量，包括容量最大值、最小值和步幅。
+
+== Console 位置
+
+在创建云服务器时，可以配置系统盘容量：
+
+image::/images/ep_offline/cadmin/example_iaas_instance_00.png[,70%]
+
+== 参数路径
+
+[cols='1,1,2']
+|===
+| 应用 | 配置 | 参数
+
+| webconsole-iaas
+| iaas-instance
+| os_disk_size：系统盘大小。
+|===
+
+== 操作步骤
+
+. link:../../../manual/login[登录配置中心]。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 选择 `webconsole-iaas` 应用，选择 `iaas-instance` 配置。
++
+image::/images/ep_offline/cadmin/example_iaas_instance.png[]
+. 在 iaas-instance 配置所在行，点击右侧的**管理配置**，进入 iaas-instance 配置页面。
++
+
+include::../../../../../../_components/note.adoc[]
+配置页面支持表单模式和文本模式，默认为表单模式（默认值可以自行定义，详细操作请参见link:../../../manual/system[系统设置]），可以通过右侧的按钮临时进行切换。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+找到 os_disk_size 参数：
++
+* windows：配置 Windows 云服务器的系统盘容量大小。
+* linux：配置 Linux 云服务器的系统盘容量大小。
+* unix：配置 Unix 云服务器的系统盘容量大小。
++
+image::/images/ep_offline/cadmin/example_iaas_instance_01.png[]
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。
++
+大约一分钟后生效，登录 Console 可在创建云服务器页面看到修改效果。

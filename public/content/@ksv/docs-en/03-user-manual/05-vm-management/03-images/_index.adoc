@@ -1,0 +1,36 @@
+---
+title: "Images"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, images"
+description: "Describes how to manage images in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 9943b048a60b4f058135ae148879a112
+:ks_xref_id: 2c35b3251ace44d69fc6e5385b09aead
+:ks_comp: ../../../../components/
+:ks_title: Images
+:ks_description: Describes how to manage images in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, images
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+Images are a standard delivery format of VMs. The configuration and dependencies of VMs can be encapsulated into images.  Different images can contain different OSs, such as Fedora, CentOS, and Ubuntu. {ks_product_abbr_full} provides the following types of images: system images, private images, and shared images. The following table compares the images of different types.
+
+[cols='1a,3a']
+|===
+|Type |Description
+
+|System image
+|The official image provided by {ks_product} or the image uploaded by user **admin**.  Other users can use system images to create VMs.
+
+|Private image
+|The image created by replicating an existing image or uploading from a local environment.  You can use, share, replicate, or delete a private image only if the image is created on your own.
+
+|Shared image
+|The image that can be used by other users.
+|===

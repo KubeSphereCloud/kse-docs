@@ -1,0 +1,32 @@
+---
+title: 产品中心上架
+weight: 6
+---
+
+以上操作完成后，还需在产品中心将对象存储或文件存储进行上架操作。详细步骤如下。
+
+. 登录 IaaS 环境的 BOSS。
++
+include::../../../../../../_components/note.adoc[]
+
+* 默认登录方式为：地址 `boss.<domain>`，用户名 `admin@<domain>`，密码 `zhu88jie`。
+* 其中 `<domain>` 为 IaaS 的域名信息，需根据实际情况修改。
+* 登录示例为：地址 `boss.democloud.com`，用户名 `boss@democloud.com`，密码 `zhu88jie`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 在 BOSS 页面，点击**云营管理** > **产品中心** > **产品管理**，进入**产品管理**主页面。
+
+. 点击左侧产品目录中的**云平台** > **存储** > **对象存储**，点击**上架** > **更新至 Console**。
++
+image::/images/u10000_v5.0/boss_1.png[boss_1,100%]
++
+include::../../../../../../_components/note.adoc[]
+
+* 点击**上架**后，一定要点击**更新至 Console**，否则当前更新，不会同步至 Console。
+* 出于性能考虑，Console 在服务端缓存了产品的名称、属性、规格等数据，缓存时间为半小时。因此，产品上架后，需等待半小时，才能在 Console 体现。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 如需上架文件存储产品，可参考以上步骤。

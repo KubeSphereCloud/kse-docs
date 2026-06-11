@@ -1,0 +1,85 @@
+---
+title: AppCenter 应用如何支持非标准资源类型
+weight: 2
+---
+
+== 问题描述
+
+AppCenter 应用如何支持非标准资源类型的主机、硬盘。
+
+== 可能原因
+
+{product_name}需要支持非标准类型的主机或者硬盘，如自定义主机类型、第三方存储等。由于 AppCenter 应用对资源类型以及匹配规则有校验，因此，需要手动调整相关配置，才能支持非标准资源。
+
+== 解决方法
+
+按照如下流程进行操作配置。
+
+. 更新 IaaS 至最新的 Patch 版本。 
++
+include::../../../../../_components/note.adoc[]
+
+IaaS v6.0 版本更新至 patch_20221125 版本。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 将当前环境中的应用导入脚本，更新为最新版本。
++
+include::../../../../../_components/note.adoc[]
+
+最新版本的导入脚本，可咨询 AppCenter 研发。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+. 在 Global 库中新增硬盘和主机类型匹配规则。
+
+.. 查询现有规则
++
+[source,sql]
+----
+select value from appcenter_config where key = 'SUPPORTED_APP_VOLUME_INSTANCE_PAIR'
+----
++
+输出内容为硬盘与主机的匹配规则
++
+[source,sql]
+----
+{"200":[200,300,1003],"10":[1600,1603],"0":[0,100],"3":[1,200,300],"2":[0,1,6,100,200,300,1101,1201,1202,1211],"5":[0,1,6,7,100,200,300,1101,1201,1202,1211],"7":[200],"6":[0,1,6,7,100,200,300,1101,1201,1202,1211],"100":[100]}
+----
+
+.. 新增规则
++
+以新增硬盘类型 `20` 为例，匹配 `101`、`401-405` 类型主机。由于主机类型 `101` 的基础型为 `100`，主机类型 `401-405` 的基础型为 `400`。
++
+因此，这里需要在规则里面增加 `“20”: [100,400]`。我们使用 `save-appcenter-config` 的 CLI 来完成这个操作。
++
+[source,sql]
+----
+save-appcenter-config -z global -k SUPPORTED_APP_VOLUME_INSTANCE_PAIR -v '{"200":[100,200,300,1003],"10":[1600,1603],"0":[0,100],"1":[0,1,100,200],"3":[1,200,300],"2":[0,1,6,100,200,300,1101,1201,1202,1211],"5":[0,1,6,7,100,200,300,1101,1201,1202,1211],"7":[200],"6":[0,1,6,7,100,200,300,1101,1201,1202,1211],"100":[100],"20": [100,400]}' -t dict
+----
+
+. 重启 `ws_server` 服务。
+
+. 修改配置文件 `appcenter.yaml`，增加硬盘与主机的匹配类型。增加内容如下。
++
+[source,yaml]
+----
+instance_class: 101
+volume:
+  size: 20
+  class: 20
+----
++
+
++
+* IaaS v6.1 之前的版本，仍然直接登录{product_name}的 FirstBox 节点修改配置文件 `/pitrix/conf/variables/global/appcenter.yaml.xxx` 并下发即可。
+* IaaS v6.1 及后续版本，均需登录{product_name}的配置中心进行修改。
++
+image::/images/ep_offline/installation/app_import_faq_1.png[]
+
+. 在配置中心中，修改应用 `webconsole` 的 `zone_config` 配置的默认配置中的 `valid_appcluster_instance_classes` 与 `valid_appcluster_volume_classes` 添加前文步骤增加的硬盘类型与主机类型。
++
+image::/images/ep_offline/installation/app_import_faq_3.png[]
+

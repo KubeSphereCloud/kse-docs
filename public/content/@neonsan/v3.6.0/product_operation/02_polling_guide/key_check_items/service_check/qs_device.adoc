@@ -1,0 +1,68 @@
+---
+title: "检查 qs-device 版本"
+weight: 1
+---
+
+== 注意事项
+
+* 使用 QingCloud Installer v2.0.18 部署的 NeonSAN v3.5.2 及以上版本集群，默认使用 v2.0.4 及以上版本的 qs-device，无需进行此检查项。
+* 更新 qs-device 版本之前，需link:../../prometheus[检查 Prometheus 资源限制是否配置]。若未配置，需进行 Prometheus 资源限制后，再升级 qs-device。
+
+== 操作步骤
+
+. 逐个登录集群的存储（Store）节点。
+. 检查并确认当前 Store 节点上 qs-device 的版本号，若当前 qs-device 版本号低于 2.0.4，需执行后续步骤进行更新。
++
+[,shell]
+----
+dpkg -l |grep qs-device
+----
++
+回显示例：
++
+[,shell]
+----
+ii  qs-device                             2.0.2-20230308114457                                 amd64        no description given
+----
+. 获取脚本。
++
+[,shell]
+----
+https://box.yunify.com/s/mpT2MRZCNLR7ork
+----
+
+. 将获取的脚本上传至集群中的任一 Center 节点上。
+
+. 登录至上传有脚本的Center，执行如下命令，将脚本拷贝到 FirstBox 上。
++
+[,shell]
+----
+scp -P 6023 -pr qs-device-patch.tgz qingstor-firstbox:/root/
+----
+
+. 登录 FirstBox。
++
+[,shell]
+----
+ssh qingstor-firstbox -p 6023
+----
+
+. 解压 qs-device-patch 包。
++
+[,shell]
+----
+tar -zxvf qs-device-patch.tgz
+----
+
+. 执行更新脚本。
++
+[,shell]
+----
+cd qs-device-patch
+
+./patch.sh
+----
++
+include::../../../../../../_components/note.adoc[]
+若提示 "Failed to uninstall qs-device !"，则登录到相应的节点上，执行 ``apt-get install qs-devie``，查询并解决具体的报错原因。
+include::../../../../../../_components/table_footer.adoc[]

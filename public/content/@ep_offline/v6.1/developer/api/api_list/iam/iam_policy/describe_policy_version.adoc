@@ -1,0 +1,145 @@
+---
+title: 查询IAM策略版本（DescribeIAMPolicyVersion）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| is_draft
+| String
+| false
+| 是否草稿
+
+| policy
+| String
+| false
+| IAM策略ID
+
+| policy_version
+| String
+| false
+| 策略版本号
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| audit_log
+| String
+| false
+| 审计日志
+
+| create_time
+| String
+| false
+| 创建时间
+
+| effect
+| String
+| false
+| 允许/拒绝
+
+| is_default
+| String
+| false
+| 是否默认
+
+| is_draft
+| String
+| false
+| 是否草稿
+
+| policy_id
+| String
+| false
+| IAM策略ID
+
+| revision_id
+| String
+| false
+| 策略版本ID
+
+| statement
+| Object
+| false
+| 策略内容
+
+| statement.action
+| Array
+| false
+| 操作码列表
+
+| statement.effect
+| String
+| false
+| 效果,allow/deny
+
+| statement.resource
+| String
+| false
+| 资源id
+
+| version
+| Integer
+| false
+| 唯一标识
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMPolicyVersion",
+  "policy": "iamp-dy7mtlyu"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMPolicyVersionResponse",
+  "policy_set": [
+    {
+      "audit_log": "",
+      "create_time": "2023-04-07T17:22:57",
+      "effect": "01",
+      "is_default": "1",
+      "is_draft": "0",
+      "policy_id": "iamp-dy7mtlyu",
+      "revision_id": "iampr-o6ro8ms6",
+      "statement": {
+        "Statement": [
+          {
+            "action": [
+              "ecm:Describe*",
+              "ecm:CreateBrokers",
+              "ecm:DeleteBrokers"
+            ],
+            "effect": "allow",
+            "resource": "*"
+          }
+        ],
+        "Version": "2012-04-01"
+      },
+      "version": 1
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

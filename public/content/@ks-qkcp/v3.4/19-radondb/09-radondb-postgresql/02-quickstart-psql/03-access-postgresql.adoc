@@ -1,0 +1,78 @@
+---
+title: "访问数据库"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB PostgreSQL, 访问, 连接, 数据库"
+description: "介绍如何上访问 RadonDB PostgreSQL 数据库。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: c6113412a1f242dd823bf825cdf0bc7b
+:ks_xref_id: 6292787ec7ea4ce2b19629f68b1027f3
+:ks_comp: ../../../../components/
+:ks_title: 访问数据库
+:ks_keywords: Kubernetes, {ks_product}, RadonDB PostgreSQL, 访问, 连接, 数据库
+:ks_description: 介绍如何上访问 RadonDB PostgreSQL 数据库。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本小节主要介绍如何通过 psql 命令行连接 PostgreSQL 数据库。
+
+
+== 前提条件link:[id=2dccc762ef29403698878cd8272d197d]
+
+* 请确保已获取{ks_product_both}平台登录用户帐号和密码，且已获取平台操作管理权限。
+
+* 请确保已安装 RadonDB PostgreSQL 应用，且应用状态处于运行中。
+
+
+== 操作步骤link:[id=a70cf7f1b3964654b6b8af1746e42203]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondbpq-oper-openDetailsPage.adoc[]
+
+. 在页面左侧的**访问地址**区域，查看访问地址，如 **radondb-2d3d25-readwrite.p1:5432**。
+
+. 执行以下命令访问数据库：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+psql -U <userName> -h <port> -d <serverName>
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+* **username**: 用户名，如 test。
+
+* **ip**：IP 地址或域名。此处填写步骤五中获取到的访问地址中读写地址冒号（:）前的内容，如 radondb-uonx8x-readwrite.p1。
+
+* **port**：服务端口。此处填写步骤五中获取到的访问地址中读写地址冒号（:）后的内容，如 5432。
+
+* **dbname**：要连接的数据库名称，如 postgres。
+
+示例命令如下所示：
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+
+psql -U test -h radondb-uonx8x-readwrite.p1 -p 5432 -d postgres
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--

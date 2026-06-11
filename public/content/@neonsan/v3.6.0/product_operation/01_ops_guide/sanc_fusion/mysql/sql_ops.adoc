@@ -1,0 +1,122 @@
+---
+title: "数据库运维"
+weight: 4
+---
+
+通过管理脚本 `/qingstor/bin/neonsan-mysql list` 出来的 `live nodes` 如果有节点存活就能向外提供服务。
+
+== 场景一
+
+若 live nodes 下，**没有存活节点**，即所有节点均为 unlive 的，此时可能是由于集群在只有 1 个 master 节点的情况下整个被重启了，可能 mysql 不能启动，需要手工  bootstrap。
+
+. 登录数据库集群的任一节点。
++
+[,shell]
+----
+ssh neonsan-mysql0
+----
+. 强行重启数据库服务。
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql restart --bootstrap --force
+----
+
+== 场景二
+
+若 live nodes 下，**有一个未存活节点**，且长时间没有自动恢复，说明该节点出现问题，需要 ssh 到未存活的节点检查服务是否仍在运行，并进行人工干预。详细步骤如下。
+
+. 登录有问题的数据库节点。
+. 查看数据库服务状态。
++
+[,shell]
+----
+supervisorctl status neonsan_mysql
+----
+. 若数据库服务状态显示为**非 RUNNING 状态**，可以尝试启动服务。
++
+--
+[,shell]
+----
+supervisorctl start mysql_neonsan
+----
+若服务启动失败，需查看如下日志，以确定无法启动的原因。
+[,shell]
+----
+/qingstor/log/mysql/neonsan-mysql-error.log
+----
+--
+
+. 若数据库服务状态显示为 **RUNNING 状态**，可以通过 ``ps`` 命令查看数据库进程是否正常。
++
+--
+[,shell]
+----
+ps -aux | grep mysqld | grep neonsan-mysql
+----
+如果进程 PID 一直在发生变化，说明该进程在反复重启，需查看日志文件，以确定无法启动的原因。
+[,shell]
+----
+/qingstor/log/mysql/neonsan-mysql-error.log
+----
+--
+
+. 若通过日志确认问题为数据问题，可对该节点进行数据的清除和重新初始化操作，**该操作可能对数据产生影响，需谨慎执行**。
+.. 停止 mysql 进程。
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql stop
+----
+.. 确认 mysql 进程已经成功退出，即如下命令没有输出。
++
+[,shell]
+----
+ps -aux | grep mysqld | grep neonsan-mysql
+----
+.. 删除 NeonSAN 数据目录。
++
+[,shell]
+----
+rm -rf /qingstor/data/neonsan-mysql /qingstor/data/ssd/neonsan-mysql
+----
+.. 初始化 NeonSAN 数据库实例。
++
+[,shell]
+----
+/qingstor/bin/qs_mysql_mgr initdb --conf /qingstor/etc/xtradb-neonsan.cnf
+----
+.. 登录至另一存活的数据库节点。
++
+[,shell]
+----
+ssh neonsan-mysql1
+----
+
+.. 将该存活节点作为 bootstrap 强行重启。
++
+[,shell]
+----
+/qingstor/bin/qingstor-mysql restart --bootstrap –force
+----
+.. 登录回到问题节点。
+
+.. 启动 mysql 进程。
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql start
+----
+
+.. 通过日志内容，确认数据同步完成。
++
+[,shell]
+----
+tailf /qingstor/log/mysql/neonsan-mysql-error.log
+----
+.. 查看 NeonSAN 数据库集群状态，确认问题节点已经存活。
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----

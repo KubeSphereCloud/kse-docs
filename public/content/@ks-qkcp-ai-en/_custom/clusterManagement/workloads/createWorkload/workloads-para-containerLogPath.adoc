@@ -1,0 +1,9 @@
+// :ks_include_id: 186f24631180443aafb16fad9a46d724
+|Container Log Path
+|The path where container logs are located when the **Collect Logs on Volumes** feature is enabled.
+
+* This path is relative to the volume's mount path. Wildcards are supported, and multiple paths can be separated by commas (,). For example, when the volume mount path is **/data**, **log/*.log** indicates that the log files are all .log format files in the **/data/log** directory.
+
+* To use the **Collect Logs on Volumes** feature, you need to configure the application in the container to export logs to the path set here.
+
+include::workloads-desc-viewContainerLogsOnVolume.adoc[]

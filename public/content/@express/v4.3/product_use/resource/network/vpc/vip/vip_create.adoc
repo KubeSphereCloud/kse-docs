@@ -1,0 +1,32 @@
+---
+title: "创建虚拟 IP"
+weight: 1
+---
+
+== 相关描述
+
+虚拟 IP 是从私有网络 CIDR 分配的一个内网 IP 地址，虚拟主机除了拥有私有 IP 地址外，还可以拥有虚拟 IP 地址，用户可以通过其中任意一个 IP（私有 IP/虚拟 IP）访问此虚拟主机。虚拟 IP 与私网 IP 拥有同样的网络接入能力，还可以与高可用软件配合使用，搭建高可用主备服务，提高业务的可用性。
+
+== 操作步骤
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，选择**资源** > **网络** > **VPC 网络**，默认进入 VPC 网络列表页面。点击指定 VPC 网络的名称/ID，进入其详情页面。
++
+image::/images/express/console/vip_create_1.png[]
+. 在私有网络页面内，选定私有网络后，选择**虚拟 IP**，点击**+创建虚拟 IP**。
++
+image::/images/express/console/vip_create_2.png[]
+. 在弹出**创建虚拟 IP** 窗口中，配置虚拟 IP 的``名称``、``数量``以及``虚拟 IP 地址``，点击**确定**即可。
++
+
+include::../../../../../../../_components/attention.adoc[]
+创建的虚拟IP 必须为私有网络 IP 范围内未被占用的地址。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vip_create_3.png[,60%]
+. 已创建完成的虚拟 IP 会显示在列表内，其状态为``未绑定云服务器``。
+
+
+

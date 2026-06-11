@@ -1,0 +1,79 @@
+---
+title: 删除IAM纳管API绑定标签（DeleteIAMApiActionTag）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| api
+| Array
+| true
+| API
+
+| owner
+| Array
+| true
+| 归属
+
+| tag
+| Array
+| true
+| 标签
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| api
+| String
+| false
+| action
+
+| owner
+| String
+| false
+| 归属
+
+| tag
+| String
+| false
+| 标签
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeleteIAMApiActionTag",
+  "api": "AssociateEip",
+  "owner": "test",
+  "tag": "eip",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteIAMApiActionTagResponse",
+  "api": "AssociateEip",
+  "owner": "test",
+  "ret_code": 0,
+  "tag": "eip"
+}
+----

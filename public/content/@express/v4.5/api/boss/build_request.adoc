@@ -1,0 +1,44 @@
+---
+title: "请求结构"
+weight: 1
+---
+
+由于管理服务类 API 的请求结构稍有不同，本文单独描述其内容。
+
+== 请求方式
+
+本系统对 API 的请求使用 POST 方式，用户直接传入 JSON 数据即可。
+
+* 除了登录认证、文件上传等接口外，其他接口均使用 /api 作为请求路径即可。
+* 在本文档中，部分接口的 path 形式类似于 /api/?action=Boss2DescribeBossUsers，其中 url 参数并无实际功能，仅为了便于调试使用。
+
+== 日期格式
+
+系统中按照需求返回多种日期：
+
+* 时间：返回 UTC 时间，格式为 yyyy-mm-ddThh:MM:ssZ。
+* 时间戳：如有需求可直接返回时间戳。
+
+
+== API 请求结构
+
+[cols="2,4,4", options="header"]
+|===
+| 元素 | 描述 | 备注
+
+| API 入口
+| 向物理资源管理服务 BOSS2-Manager 发送请求的入口。
+| API入口为：https://boss.domain/api，其中 domain 是您的环境域名。
+
+| 公共参数
+| 每个 API 调用都需要包含公共参数。
+| 详情见link:../parameters/[公共参数]说明。
+
+| 指令名称
+| API 指令的名称，例如 `Boss2GetDashboardStats` 等。
+| -
+
+| 指令参数
+| 指令参数请参见每个指令的相关文档。
+|-
+|===

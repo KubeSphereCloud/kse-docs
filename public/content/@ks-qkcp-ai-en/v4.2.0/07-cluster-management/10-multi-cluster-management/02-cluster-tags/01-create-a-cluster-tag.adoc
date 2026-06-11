@@ -1,0 +1,42 @@
+---
+title: "Create Cluster Labels"
+keywords: "Kubernetes, {ks_product}, Multi-cluster Management, Cluster Labels, Create Cluster Labels"
+description: "Describes how to create cluster labels."
+weight: 01
+---
+
+:ks_permission: **Cluster Management**
+
+This section describes how to create cluster labels.
+
+== Prerequisites
+
+You need to have the pass:a,q[{ks_permission}] permission on the KubeSphere platform.
+
+== Steps
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+. Click **Cluster Management**.
+
++
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusterTags/clusterTags-openListPage_v42.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the **Create Label** dialog box, set the key and value for the label, then click **Create**.
++
+--
+* Click **Add** to create multiple labels simultaneously.
+
+* Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] on the right side of an added label to delete it.
+
+After creation, the labels will be displayed in the label list.
+--

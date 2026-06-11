@@ -1,0 +1,62 @@
+---
+title: 创建Console（CreateConsole）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| true
+| Console的ID
+
+| zones
+| String
+| false
+| Console关联的可用区
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| false
+| Console的ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateConsole",
+  "console": "zzzz",
+  "zones": [
+    "testing1a",
+    "testing1b"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateConsoleResponse",
+  "console_id": "zzzz",
+  "ret_code": 0
+}
+----

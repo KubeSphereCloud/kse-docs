@@ -1,0 +1,107 @@
+---
+title: "查看项目详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 项目, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看项目详情。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: fe4a5eb679de40a18cdd38aadb0fdfb1
+:ks_xref_id: cb65bb84bf5f4f46b7b3e51fa8194b17
+:ks_comp: ../../../components/
+:ks_title: 查看项目详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看项目详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 项目, 详情, 查看
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看项目详情。
+
+include::../../../_custom/projects/project-view-limits.adoc[]
+
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=8eed70e179894398ba09c63e6f5e9e26]
+
+include::../../../_custom/projects/project-view-steps.adoc[]
+
+. 在项目列表页面，点击目标项目名称，进入项目详情页面。
+
+. 在项目详情页面的左侧区域，查看项目的基本信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|别名
+|项目的别名。
+
+|状态
+|项目的活跃状态。
+
+|创建时间
+|项目创建的时间。
+
+|创建者
+|创建项目时使用的用户名称。
+|===
+--
+
+. 在项目详情页面的右侧区域，点击**资源概览**页签，查看项目相关的资源概览信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|虚拟机
+|项目中已创建的虚拟机总数，以及处于各状态的虚拟机数量。
+
+|存储
+|已挂载到当前项目的磁盘数量，以及磁盘的总容量和已使用磁盘容量。
+
+|VPC
+|项目中已创建的 VPC 总数以及可用的 VPC 数量。
+
+|子网
+|项目中已创建的子网总数、物理子网数量以及虚拟子网数量。
+|===
+--
+
+
+. 在项目详情页面的右侧区域，点击**成员**页签，查看项目成员列表。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|项目成员的用户名称。
+
+|邮箱
+|项目成员注册用户名时使用的邮箱地址。
+
+|状态
+|项目成员当前的状态。
+// 包括哪几种状态类型？
+
+|角色
+|项目成员在项目中的角色。{ks_product_right}提供**管理员**、**操作员**和**观察员**三种项目角色类型。
+
+|最后登录时间
+|项目成员最近一次登录{ks_product_both}Web 控制台的时间。
+|===
+--
+
+. （可选）点击项目成员列表上方的搜索框并设置搜索条件，可按名称搜索项目成员。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的项目成员。
+
+. （可选）在项目成员列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。

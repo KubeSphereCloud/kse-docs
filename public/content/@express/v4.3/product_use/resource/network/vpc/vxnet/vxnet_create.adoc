@@ -1,0 +1,27 @@
+---
+title: "创建私有网络"
+weight: 1
+---
+
+== 功能描述
+
+私有网络（VxNet）用于 ExpressCloud 虚拟主机之间互联，它类似物理交换机 (L2Switch) 组成的局域网，是组成 VPC 网络的基础网络模块，用来连接不同的云资源。
+
+== 操作步骤
+
+. 登录{product_console_name}。
+. 在顶部导航栏，选择**资源** > **网络** > **VPC 网络**，选择**私有网络**页签，可查看私有网络列表页面。
++
+image::/images/express/console/vxnet_create_1.png[]
+. 点击**+创建私有网络**，在弹出的**创建私有网络**窗口中输入各项参数，即网络``名称``、``数量``以及``工作模式``，点击**确定**即可。
++
+
+include::../../../../../../../_components/note.adoc[]
+工作模式目前仅支持虚拟机。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vxnet_create_2.png[,60%]
+
+
+

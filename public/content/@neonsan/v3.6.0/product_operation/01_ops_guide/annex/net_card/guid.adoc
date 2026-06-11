@@ -1,0 +1,38 @@
+---
+title: "网卡 guid 信息查询"
+weight: 3
+---
+
+. 查看端口对应关系。如示例所示，mlx5_0 与 mlx5_1 为一张网卡的两个口。
++
+[,shell]
+----
+ibdev2netdev -v
+----
++
+image::/images/neonsan/ops_guide_26.png[]
+
+. 查看网卡 PCI 插槽信息。
++
+[,shell]
+----
+mst status -v
+----
++
+image::/images/neonsan/ops_guide_27.png[]
+
+. 查看对应网卡的 guid 信息。
++
+[,shell]
+----
+flint -d 03:00.0 q
+----
++
+image::/images/neonsan/ops_guide_28.png[]
++
+include::../../../../../../_components/note.adoc[]
+* `-d` 用于指定上一步查询到的 PCI 信息。
+* guid 信息应不为 0。
+* 由示例可知，mlx5_0 与 mlx5_1 为一张网卡的两个口，故查询该网卡的 guid 信息，`flint -d 03:00.1 q` 的结果与 `flint -d 03:00.0 q` 的结果是一致的。
+include::../../../../../../_components/table_footer.adoc[]
+

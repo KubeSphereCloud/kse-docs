@@ -1,0 +1,199 @@
+---
+title: "快速入门"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Kafka, 快速入门"
+description: "介绍如何快速创建 RadonDB Kafka 应用并访问 Kafka。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 444eee9ec1e44f3aa091b21402b9e8af
+:ks_xref_id: 2365374f85994afc9cf5ee1dcc412e07
+:ks_comp: ../../../components/
+:ks_title: 快速入门
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB Kafka, 快速入门
+:ks_description: 介绍如何快速创建 RadonDB Kafka 应用并访问 Kafka。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何快速创建 RadonDB Kafka 应用并访问 Kafka。
+
+
+== 前提条件link:[id=a12f00c9592b4aafa55bddf4e3007a2a]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+* 您需要获取 RadonDB Kafka 应用授权。有关更多信息，请联系{ks_product_both}技术支持。
+
+
+
+== 操作步骤link:[id=47367df4d87d4873adb9e2963f9bfdc0]
+
+
+=== 安装 RadonDB Kafka 应用link:[id=b8dcf4021a7e419ca74caec86dee4845]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在页面右侧选择**安装 > RadonDB Kafka**。
++
+
+include::../../../_custom/radondb/radondb-install-app.adoc[]
+
+. 在**基本信息**页签，输入应用名称，如 radondb-kafka，并选择应用的安装位置，然后点击**下一步**。
+
+. 在**应用设置**页签，设置 Kafka 的参数，然后点击**安装**。
+
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+有关参数的具体解释，请参阅link:../02-install-radondb-kafka/[安装 RadonDB Kafka]。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+=== 创建 Kafka 主题link:[id=6a6f8f9f369e440b9b4f8c051ed11387]
+
+include::../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面右侧点击**主题**。
+
+. 在**创建主题**对话框，输入主题名称，如 demo-topic, 并设置分区数量和副本数量，点击**确定**。
+
+image::/images/ks-qkcp/zh/radondb-management/create-topic.png[700,700]
+
+
+=== 创建 Kafka 用户link:[id=ce0aee814fba48c1a1ffec1a480fb61c]
+
+include::../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面右侧点击 **Kafka 用户**页签，然后点击**创建**。
+
+. 在**创建用户**对话框，设置用户名，如 demo-user1，并配置以下两条规则：
++
+--
+规则 1: 允许 主题名称为 demo-topic 的所有操作权限。
+
+规则 2: 允许 消费组名称为 test-consumer-group 的所有操作权限。
+
+image::/images/ks-qkcp/zh/radondb-management/create-kafka-user.png[700,700]
+--
+
+. 点击**确定**。用户创建完成后将显示在用户列表中。
+
+
+
+=== 访问 Kafkalink:[id=4bc92ff8e237402ba30794e7b3f9ad7a]
+
+RadonDB Kafka 支持三种认证类型：TLS、SCRAM-SHA-512 和无需认证。此处以 TLS 为例。关于其它认证类型的登录方式，请参阅link:../06-access-kafka/[访问 RadonDB Kafka]。
+
+. 下载 link:https://archive.apache.org/dist/kafka/3.2.0/kafka_2.13-3.2.0.tgz[Kafka 客户端二进制包]。
+
+. 执行以下命令解压 Kafka 包：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+tar -xzvf https://archive.apache.org/dist/kafka/3.2.0/kafka_2.13-3.2.0.tgz
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
++
+include::../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
+
+. 在页面左侧的**传输加密**区域，下载 CA 证书并保存密码。
+
+. 在页面右侧点击 **Kafka 用户**页签，下载用户证书并保存密码。
++
+--
+image::/images/ks-qkcp/zh/radondb-management/download-CA-user-certificate.png[700,700]
+--
+
++
+. 在 **config/producer.properties** 和 **config/consumer.properties** 文件末尾添加下面的内容。
++
+--
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+#在文件末尾添加以下内容。
+
+security.protocol=ssl
+ssl.truststore.location=<ca.p12>
+ssl.truststore.password=<truststore_password>
+ssl.truststore.type=pkcs12
+ 
+ssl.keystore.location=<user.p12>
+ssl.keystore.password=<keystore_password>
+ssl.keystore.type=pkcs12
+ssl.endpoint.identification.algorithm=
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+参数解释如下：
+
+* <ca.p12>： CA 证书的保存路径。
+
+* <truststore_password>：CA 证书的密码。
+
+* <user.p12>：用户证书的保存路径。
+
+* <keystore_password>：用户证书密码。
+--
+
++
+. 执行以下命令使用 Kafka 客户端生产和消费消息。
++
+--
+生产消息
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+# bin/kafka-console-producer.sh --bootstrap-server 192.168.100.2:31522 --topic demo-topic --producer.config config/producer.properties
+>hello
+>radondb
+>kafka
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+消费消息
+
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+# bin/kafka-console-consumer.sh --bootstrap-server 192.168.100.2:31522 --topic demo-topic --consumer.config config/consumer.properties
+hello
+radondb
+kafka
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+其中，**bootstrap-server** 需要修改为控制台上的访问地址。
+
+image::/images/ks-qkcp/zh/radondb-management/access-kafka.png[access-kafka,700,700]
+
+上图红框中第一个读写地址是使用 Kubernetes 节点网络访问 Kafka 服务时使用的地址，如在 Kubernetes 节点上访问 Kafka，或 Kubernetes 节点同网段主机上访问 Kafka 服务。第二个读写地址是使用 Kubernetes 集群中 pod 访问 kafka 服务时使用的地址。
+
+将 **topic** 修改为实际使用的 topic 地址，**group** 修改为实际使用的 group 值。
+--

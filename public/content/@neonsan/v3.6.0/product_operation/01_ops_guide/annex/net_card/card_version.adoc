@@ -1,0 +1,40 @@
+---
+title: "网卡固件版本查询"
+weight: 1
+---
+
+输入如下命令查看系统中的网卡信息：
+[,shell]
+----
+ibv_devinfo
+----
+回显示例：
+[,shell]
+----
+hca_id:	mlx5_3
+	transport:			InfiniBand (0)
+	fw_ver:				14.25.1020
+	node_guid:			ec0d:9a03:002d:e0b7
+	sys_image_guid:			ec0d:9a03:002d:e0b6
+	vendor_id:			0x02c9
+	vendor_part_id:			4117
+	hw_ver:				0x0
+	board_id:			MT_2420110004
+	phys_port_cnt:			1
+	Device ports:
+		port:	1
+			state:			PORT_ACTIVE (4)
+			max_mtu:		4096 (5)
+			active_mtu:		1024 (3)
+			sm_lid:			0
+			port_lid:		0
+			port_lmc:		0x00
+			link_layer:		Ethernet
+----
+
+include::../../../../../../_components/note.adoc[]
+* `fw_ver` 字段，为固件版本信息。
+* `board_id` 字段，以 `MT` 开头，即为标准网卡，其他均为非标准网卡。
+include::../../../../../../_components/table_footer.adoc[]
+
+

@@ -1,0 +1,12 @@
+---
+title: "网络资源管理（CNI）"
+weight: 4
+---
+
+CNI（Container Network Interface）作为 kubernetes 的重要组件之一，负责为 Pod 的创建和销毁配置网络。
+
+QKE 在创建时默认提供了 3 种 CNI 网络插件： https://github.com/coreos/flannel[Flannel]、 https://www.tigera.io/project-calico/[Calico]、 https://github.com/yunify/hostnic-cni[Hostnic]。其中 Calico 和 Flannel 是使用最为广泛的 CNI 插件，Hostnic 插件是特定于青云平台使用的插件。
+
+image::/images/ep_offline/qke_twp/05_cni.png[]
+
+Hostnic 插件依托于 QKE 集群所在 VPC 下的 Vxnet 网络为 Pod 分配 IP，这样 Pod 就像主机一样，被分配了 Vxnet 范围内的 IP。除此之外，Hostnic 还提供了子网划分、IPAM 映射、Namespace 映射等功能。

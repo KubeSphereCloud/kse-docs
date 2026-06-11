@@ -1,0 +1,17 @@
+---
+title: "iCAS 消耗内存计算"
+weight: 1
+---
+
+
+iCAS 内存使用量计算公式：iCAS 内存使用量=1GiB + N * Cache Device 容量。
+
+其中，N 的取值根据 Cache line size 的不同而不同，对应关系如下：
+
+Cache line size 可选为：4KiB、8KiB、16KiB、 32KiB、 64KiB，分别对应 N 的取值为：N=2%、N=1%、N=0.5%、N=0.25%、N=0.125%。
+
+
+
+
+
+

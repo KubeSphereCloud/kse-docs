@@ -1,0 +1,84 @@
+---
+title: "访问 MongoDB 数据库"
+keywords: "Kubernetes, {ks_product}, RadonDB, MongoDB, 访问数据库"
+description: "介绍如何访问 RadonDB MongoDB 数据库。"
+weight: 03
+---
+
+:ks_db_product: MongoDB
+
+本节主要介绍如何在 Kubesphere 集群内部连接 RadonDB {ks_db_product} 数据库。
+
+
+== 前提条件
+
+* 已获取{ks_product_both}平台登录账号和密码，且已获取平台操作管理权限。
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+== 操作步骤
+
+. 在 Kubesphere 集群内部创建一个 Pod 作为 {ks_db_product} 客户端。
+
+.. 将鼠标悬停至 Web 控制台右下角的image:/images/dmp/icons/hammer.svg[hammer,20,25]，点击 **kubectl**，在弹出的对话框执行以下命令创建一个 client.yaml 文件。
++
+[,bash]
+----
+vi client.yaml
+----
++
+--
+文件内容如下，其中 namespace 的值必须与 {ks_db_product} 数据库所在的企业空间名称一致。
+
+include::../../../_ks_components/code/bash.adoc[]
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongoclient
+  namespace: default
+spec: 
+  containers: 
+  - name: mongo
+    image: radondb/mongodb:4.2.19
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+.. 执行以下命令，创建一个名为 mongoclient 的 Pod。
++
+--
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl apply -f client.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令访问 {ks_db_product} 数据库。
++
+--
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl exec -it mongoclient -n <namespace> -- mongo mongodb://<username>:<password>@<ip:port>/?authSource=admin
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
++
+--
+[%header,cols="1a,2a,2a"]
+|===
+|参数 |描述 |示例
+
+|namespace
+|{ks_db_product} 数据库所在的企业空间名称。 |default
+
+|username
+|{ks_db_product} 数据库用户名。 |默认为 admin
+
+|password
+|{ks_db_product} 数据库密码。 |默认为 admin123
+
+|ip:port
+|{ks_db_product} 数据库的访问地址，可在 {ks_db_product} 实例的详情页左侧查看访问地址。
+|radondb-ukuhdz-svc.p1:27017
+|===
+--

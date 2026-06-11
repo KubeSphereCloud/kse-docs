@@ -1,0 +1,60 @@
+---
+title: 下架应用补丁（SuspendAppPatch）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| patch_id
+| String
+| true
+| 补丁ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| patch_id
+| String
+| false
+| 补丁ID
+
+| ret_code
+| String
+| false
+| 返回状态码
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "SuspendAppPatch",
+  "patch_id": "appp-ctb52rhz"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SuspendAppPatchResponse",
+  "patch_id": "appp-ctb52rhz",
+  "ret_code": 0,
+  "trace_id": "LYMjbO0q"
+}
+----

@@ -1,0 +1,92 @@
+---
+title: "准备测试环境"
+weight:  02
+---
+
+本节介绍在注入块设备故障前需要完成的准备工作，包括安装 chaos-driver、挂载块设备以及创建测试工作负载。
+
+== 前提条件
+
+在注入故障前，需完成以下准备工作。
+
+=== 安装 chaos-driver
+
+在目标节点上执行以下命令安装 `chaos-driver` 内核模块：
+
+[source,bash]
+----
+# 下载源码包
+curl -fsSL -o chaos-driver-v0.2.1.tar.gz \
+  https://github.com/chaos-mesh/chaos-driver/archive/refs/tags/v0.2.1.tar.gz
+tar xvf chaos-driver-v0.2.1.tar.gz
+
+# 安装内核头文件（二选一）
+# CentOS/Fedora
+yum install kernel-devel-$(uname -r)
+
+# Ubuntu/Debian
+apt install linux-headers-$(uname -r)
+
+# 编译并加载内核模块
+cd chaos-driver-0.2.1
+make driver/chaos_driver.ko
+insmod ./driver/chaos_driver.ko
+----
+
+=== 挂载块设备
+
+如无物理块设备，可使用虚拟块设备进行模拟：
+
+[source,bash]
+----
+# 创建空的磁盘镜像文件
+dd if=/dev/zero of=loopfile.img bs=512 count=2880
+
+# 将镜像文件虚拟成块设备
+sudo losetup /dev/loop1 loopfile.img
+
+# 格式化并挂载
+sudo mkfs -t ext4 /dev/loop1
+sudo mkdir -p /root/chaosmesh/test
+sudo mount /dev/loop1 /root/chaosmesh/test
+
+# 验证块设备及调度器
+lsblk -f
+cat /sys/block/loop1/queue/scheduler
+----
+
+=== 创建测试部署
+
+将块设备通过 `hostPath` 挂载到 Pod 中。以下示例中，请将 `<nodeName>` 替换为实际节点名称：
+
+[source,yaml]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-block
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-block
+  template:
+    metadata:
+      labels:
+        app: nginx-block
+    spec:
+      nodeName: "<nodeName>"
+      volumes:
+        - name: host-block
+          hostPath:
+            path: /root/chaosmesh/test
+      containers:
+        - name: nginx
+          image: nginx:stable-perl
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: host-block
+              mountPath: /usr/share/nginx/html/
+----

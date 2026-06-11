@@ -1,0 +1,33 @@
+---
+title: 清理集群
+weight: 3
+---
+
+
+如需清理当前环境，请联系 {product_name} 运维人员进行操作。
+
+//如需清理当前环境，可使用脚本自动清理数据并重建集群。
+
+//. 执行如下命令行，登录 FirstBox。命令行中的 `<firstbox ip>` 可查看link:#_创建_firstbox[前文内容]。
+
+//+
+//[source,shell]
+//----
+//# ssh -p 6023 root@<firstbox ip>
+// ----
+
+//. 进入脚本所在目录：
+
+//+
+//[source,shell]
+//----
+//# cd /root/qs-installer
+//----
+//
+//. 执行如下命令行，根据交互式对话框要求，输入数据库密码和防呆码，清理数据。
+//
+//+
+//[source,shell]
+//----
+//# ./qs_installer deploy --cleanup
+//----

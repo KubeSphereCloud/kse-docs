@@ -1,0 +1,22 @@
+// :ks_include_id: 3c4ccff9b03e44d9bc09a0d109039463
+* To use an external Elasticsearch service, set the **externalElasticsearchHost** and **externalElasticsearchPort** parameters to the address and port number of the Elasticsearch service, respectively.
++
+--
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  common:
+    es:
+      externalElasticsearchHost: "<Elasticsearch address>"
+      externalElasticsearchPort: "<Elasticsearch port number>"
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+If you do not set the address and port number for the external Elasticsearch service, KubeSphere will install and use the built-in Elasticsearch service.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

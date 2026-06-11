@@ -1,0 +1,30 @@
+---
+title: "日志"
+weight: 02
+---
+
+== 核心功能
+
+托管容器集群服务提供多租户日志管理，在日志查询系统中，不同的租户只能看到属于自己的日志信息：
+
+1. 支持中文日志检索，支持日志导出；
+2. 支持多级别的日志查询 (项目/工作负载/容器组/容器以及关键字)、灵活方便的日志收配置选项等；
+3. 支持将日志输出到多种平台，如 Elasticsearch、OpenSearch、Kafka；
+4. 对于将日志以文件形式保存在 Pod 挂盘上的应用，支持开启落盘日志收集功能。
+
+
+== 架构设计
+
+=== 主要组件
+
+1. 开源组件 Vector, OpenSearch
+2. 自研组件 logsidecar-injector, Console
+
+=== 架构设计
+
+日志系统各组件调用关系如下：
+
+1. vector agent 负责收集各个节点 Pod 输出到 stdout 的容器日志并将其转发到 OpenSearch，Kafka, 或 Elasticsearch。
+2. 可通过配置 logsidecar-injector 将 Pod 内没有输出到 stdout，而是输出到 Pod 内挂载盘的日志，转发到 stdout 供 vector agent 收集。Console 通过查询 APIServer，进而查询 OpenSearch 得到要查询的日志返回给前端展现。
+
+image::/images/ks-qkcp/zh/technical-white-papers/4332.png[]

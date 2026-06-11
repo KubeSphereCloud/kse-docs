@@ -1,0 +1,15 @@
+---
+title: "系统物理架构"
+weight: 02
+---
+
+KubeSphere 容器平台基于松耦合的产品设计理念，在各个层面上可以通过不同的部署架构组合交付容器能力，不会给用户带来平台绑定风险。
+
+image::/images/ks-qkcp/zh/technical-white-papers/physical-architecture.png[]
+
+. 冗余与无单点（Redundancy & No Single Point of Failure）：关键组件（API Server、etcd、KubeSphere 核心服务、LB）采用多副本、多节点部署；节点、可用区、机房分散部署以对抗机房级故障。
+. 分层责任与最小信任（Layered Responsibility & Least Privilege）：控制平面、数据平面、管理平面分别分层，网络策略与 RBAC 控制最小权限访问。
+. 松耦合与弹性伸缩（Loose Coupling & Elasticity）：采用 LuBan 微内核/扩展组件机制，按需扩缩，不影响平台核心可用性。
+. 网络安全与可靠互联（Secure & Reliable Networking）：跨区域使用加密隧道/SD-WAN，集群间使用 mTLS/服务网格或专线；对管理通道单独隔离与审计。
+. 边缘自治与中心可控（Edge Autonomy & Central Control）：边缘支持离线/弱网下的本地服务运行、缓存与升级，中心负责统一管理与策略下发。
+

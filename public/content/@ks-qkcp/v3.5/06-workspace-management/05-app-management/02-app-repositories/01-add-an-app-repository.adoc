@@ -1,0 +1,58 @@
+---
+title: "添加应用仓库"
+keywords: "Kubernetes, {ks_product}, 企业空间, 应用仓库, 添加应用仓库"
+description: "介绍如何编辑应用仓库。"
+weight: 01
+---
+
+// :ks_include_id: dd7fb4fb8e1b45af98bca485b94b4721
+:ks_xref_id: 5169b59027244658bc65867e0824ae4f
+:ks_comp: ../../../../components/
+:ks_title: 添加应用仓库
+:ks_keywords: Kubernetes, {ks_product}, 企业空间, 应用仓库, 添加应用仓库
+:ks_description: 介绍如何编辑应用仓库。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用仓库管理**
+:ks_navigation: **应用管理 > 应用仓库**
+
+
+本节介绍如何查看应用仓库详情。
+
+
+== 前提条件link:[id=5ea5389ed9ca4e4e9dad61c783f3521f]
+
+//:relfileprefix: ../../../../
+* 您需要加入一个企业空间并在企业空间中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅link:../../../../06-workspace-management/06-workspace-settings/03-workspace-members/_index/[企业空间成员]、link:../../../../06-workspace-management/06-workspace-settings/04-workspace-roles/_index/[企业空间角色]和link:../../../../06-workspace-management/06-workspace-settings/05-departments/_index/[部门]。
+
+// include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+//:relfileprefix: ./
+
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-prer-enableAppManagment.adoc[]
+
+* 您需要提前创建 Helm Chart 仓库。有关如何创建 Helm Chart 仓库，请参阅 link:https://helm.sh/zh/docs/topics/chart_repository/[Helm 官方文档]。
+
+
+== 操作步骤link:[id=b828a7a16bcd400c962b6c5246e2b5d8]
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. 在**添加应用仓库**对话框，设置应用仓库的参数，然后点击**确定**。
++
+--
+include::../../../../_custom/workspaceManagement/appRepositories/appRepositories-para-createAppRepository.adoc[]
+
+应用仓库创建完成后将显示在应用仓库列表中。
+--

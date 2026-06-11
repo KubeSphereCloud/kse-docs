@@ -1,0 +1,35 @@
+---
+title: "修改容器组 IP 池"
+weight: 05
+---
+
+:ks_permission: **节点组管理**
+:ks_navigation: **节点组设置 > 容器组 IP 池**
+
+
+本节介绍如何修改与节点组已绑定的容器组 IP 池。
+
+在节点组中，只能为每个项目选择一个容器组 IP 池，若要为某个项目选择其他的容器组 IP 池，只能替换已绑定的容器组 IP 池。
+
+
+== 前提条件
+
+* {empty}
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+* 已为节点组添加容器组 IP 池。
+
+
+== 操作步骤
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要操作的容器组 IP 池右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑**。
+
+. 在**编辑**对话框，重新选择一个容器组 IP 池，然后点击**确定**。

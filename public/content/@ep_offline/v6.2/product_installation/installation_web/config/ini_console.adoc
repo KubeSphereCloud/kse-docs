@@ -1,0 +1,313 @@
+---
+title: 配置 Console 导航栏
+weight: 21
+---
+
+
+
+//，webconsole 应用的 global_config 里将show_no_sale_products_in_header 删除或者置为 false
+
+
+
+
+== 隐藏收费产品
+
+Console 导航栏顶部的**产品与服务**中默认展示了所有产品，包括付费产品。
+
+image::/images/ep_offline/installation/initialize_console_main.png[initialize_console_main,80%]
+
+付费产品需要单独购买，点击 Console 的产品目录中的链接后，转到文档页面。如果想隐藏付费产品的链接，请在配置中心进行配置。详细操作如下。
+
+. 登录配置中心。
+
+. 点击**应用管理**，在应用管理页面，输入 `webconsole` 搜索目标应用。
+
+. 点击** webconsole **应用，进入该应用的配置页面。
+
+. 在** webconsole **的配置页面，输入 `global_config` 搜索目标配置文件。
++
+image::/images/ep_offline/installation/initialize_console_1.png[initialize_console_1,80%]
+
+. 点击** global_config**，进入配置详情页面。
+
+. 在** global_config **的配置详情页面，删除参数 `show_no_sale_products_in_header` 或设置为 `false`。
++
+image::/images/ep_offline/installation/initialize_console_2.png[initialize_console_2,80%]
+
+. 点击**启用**。
+
+
+== 调整产品与服务
+
+如需调整顶部产品与服务，如下图所示内容，如增加分组等，可参考如下步骤。
+
+image::/images/ep_offline/installation/initialize_console_3.png[initialize_console_3,80%]
+
+. 登录配置中心。
+. 点击**应用管理**，在应用管理页面，输入 `webconsole` 搜索目标应用。
+
+. 点击** webconsole **应用，进入该应用的配置页面。
+
+. 在** webconsole **的配置页面，输入 `product_directories` 搜索目标配置文件。
+
+. 点击** product_directories**，进入配置详情页面。
+
+. 在** product_directories **的配置详情页面，根据需求，填写配置内容。
++
+image::/images/ep_offline/installation/initialize_console_4.png[initialize_console_4,80%]
++
+字段 `id` 即为产品名，`network` 表示为网络产品。这里以调整网络分组为例，配置内容如下。
++
+[source,yaml]
+----
+id: network
+icon: network-duotone
+title:
+  en: Networks
+  zh-cn: 网络
+menus:
+  - type: divider_label
+    title:
+      en: Networks
+      zh-cn: 网络
+  - type: product_link
+    product_code: router
+    path: '/:zone/routers'
+    icon: vpc-duotone
+    required_iam_actions:
+      - 'vpc:DescribeRouters'
+    title:
+      en: VPC
+      zh-cn: VPC 网络
+  - type: product_link
+    product_code: vxnet
+    path: '/:zone/vxnets'
+    icon: vxnat-duotone
+    required_iam_actions:
+      - 'vpc:DescribeVxnets'
+    title:
+      en: Vxnet
+      zh-cn: 私有网络
+  - type: product_link
+    product_code: nfv
+    path: /iaas/nat
+    icon: nat-duotone
+    self_governed: true
+    required_iam_actions:
+      - 'natgw:DescribeNFVs'
+    title:
+      en: NAT
+      zh-cn: NAT 网关
+  - type: product_link
+    product_code: eip
+    path: '/:zone/eips'
+    icon: eip-duotone
+    required_iam_actions:
+      - 'ecm:DescribeEips'
+    title:
+      en: EIP
+      zh-cn: 公网 IP
+  - type: product_link
+    product_code: loadbalancer
+    path: '/:zone/loadbalancers'
+    icon: loadbalancer-duotone
+    required_iam_actions:
+      - 'elb:DescribeLoadBalancers'
+    title:
+      en: LoadBalancers
+      zh-cn: 负载均衡器
+  - type: product_link
+    product_code: vpc_border
+    path: '/:zone/intranet_routers'
+    icon: intranet-routers-duotone
+    required_iam_actions:
+      - 'vpc:DescribeVpcBorders'
+    title:
+      en: Intranet Router
+      zh-cn: 边界路由器
+  - type: divider_label
+    title:
+      en: 专线网络
+      zh-cn: 专线网络
+  - type: self_link
+    path: /sdwan/
+    icon: cloud-duotone
+    self_governed: true
+    title:
+      en: SD-WAN (New)
+      zh-cn: SD-WAN (新版)
+  - type: self_link
+    path: /wan_nets
+    icon: cloud-duotone
+    title:
+      en: SD-WAN
+      zh-cn: SD-WAN
+  - type: divider_label
+    title:
+      en: Access Control
+      zh-cn: 访问控制
+  - type: product_link
+    product_code: sg
+    path: '/:zone/security_groups/'
+    icon: security-group-duotone
+    required_iam_actions:
+      - 'ecm:DescribeSecurityGroups'
+    title:
+      en: Security Group
+      zh-cn: 安全组
+  - type: self_link
+    path: '/:zone/network_access_control/'
+    icon: web-security-duotone
+    required_iam_actions:
+      - 'vpc:DescribeNetworkACLs'
+    title:
+      en: Network Access Control
+      zh-cn: 网络访问控制
+  - type: divider_label
+    title:
+      en: CDN Service
+      zh-cn: CDN 加速
+  - type: product_link
+    product_code: cdn
+    path: '/cdns'
+    icon: cdn-duotone
+    title:
+      en: CDN Service
+      zh-cn: CDN 服务
+----
+
+. 修改完毕后，点击**启用**，即可至 Console 页面查看修改效果。
+
+
+
+== 调整侧边栏
+
+如需调整侧边栏，如下图所示内容，可参考如下步骤。
+
+image::/images/ep_offline/installation/initialize_console_5.png[initialize_console_5,80%]
+
+
+
+. 登录配置中心。
+. 点击**应用管理**，在应用管理页面，输入 `webconsole` 搜索目标应用。
+
+. 点击** webconsole **应用，进入该应用的配置页面。
+
+. 在** webconsole **的配置页面，输入 `sidebar_navigations` 搜索目标配置文件。
+
+. 点击** sidebar_navigations**，进入配置详情页面。
+
+. 在** sidebar_navigations **的配置详情页面，根据需求，填写配置内容。
++
+image::/images/ep_offline/installation/initialize_console_6.png[initialize_console_6,80%]
++
+这里以调整**运维与管理**的侧边栏为例加以说明。配置内容如下。
++
+[source,yaml]
+----
+id: maintenance_cloudsat
+icon: cloudsat-duotone
+title:
+  en: Maintenance & CloudSat
+  zh-cn: 运维与监控
+menus:
+  - type: divider_label
+    title:
+      en: Monitor Service
+      zh-cn: 监控服务
+  - type: self_link
+    path: '/:zone/monitoring_overview/'
+    icon: cloudsat-duotone
+    title:
+      en: CloudSat
+      zh-cn: 云监控 CloudSat
+  - type: divider_label
+    title:
+      en: Operation & Manage
+      zh-cn: 运维与管理
+  - type: self_link
+    icon: table-chart-duotone
+    path: /topology_templates
+    required_iam_actions:
+      - 'rcm:DescribeTopologyTemplates'
+    title:
+      en: Resource Orchestration
+      zh-cn: 资源编排
+  - type: self_link
+    path: '/:zone/autoscaling_policies/'
+    icon: autoscaling-duotone
+    required_iam_actions:
+      - 'rcm:DescribeAutoScalingPolicies'
+    title:
+      en: AutoScaling
+      zh-cn: 自动伸缩
+  - type: self_link
+    path: '/:zone/schedulers/'
+    icon: schedulers-duotone
+    required_iam_actions:
+      - 'ecm:DescribeSchedulers'
+    title:
+      en: Scheduler
+      zh-cn: 定时器
+  - type: self_link
+    path: '/:zone/activities/'
+    icon: note-pencil-2-duotone
+    required_iam_actions:
+      - 'global:DescribeJobs'
+    title:
+      en: Operation log
+      zh-cn: 操作日志
+  - type: self_link
+    path: /tags
+    icon: tags-duotone
+    required_iam_actions:
+      - 'global:DescribeTags'
+    title:
+      en: Tags
+      zh-cn: 标签
+  - type: self_link
+    path: '/:zone/recyclebin/'
+    icon: trash-duotone
+    title:
+      en: Recycle Bin
+      zh-cn: 回收站
+----
+
+== 新增产品导航
+
+{product_name}安装完成后，配置中心的初始化数据中，已经包含了我们的全量产品的配置。若用户需要在 Console 的导航中，新增额外的导航入口，如重新上架之前已下架的产品等，可参考以下步骤。
+
+. 登录 BOSS。
+. 在 BOSS 页面点击**运营管理** > **产品中心** > **产品管理**，进入产品目录管理页面，选择目标产品进行上架处理。详细操作可参考《{product_name} BOSS 操作指南》。
+
+// 若是用户需要上架自研的产品，则可参考以下步骤。
+
+// . 登录配置中心。
+
+
+// . 点击**应用管理**，在应用管理页面，输入 `webconsole` 搜索目标应用。
+
+// . 点击** webconsole **应用，进入该应用的配置页面。
+
+// . 在** webconsole **的配置页面，输入 `product_directories` 搜索目标配置文件。
+
+// . 点击** product_directories**，进入配置详情页面。
+
+// . 在** product_directories **的配置详情页面，根据需求，填写配置内容。可参考以下步骤进行填写。
+// +
+// image::/images/ep_offline/installation/initialize_console_4.png[initialize_console_4,80%]
+// .. 直接拷贝一份相邻的导航内容。
+// .. 根据实际情况修改如下 `title` 部分。`zh-cn` 与 `cn` 分别为产品的中英文名。
+// +
+// [source,yaml]
+// ----
+
+// - title:
+//     en: Computing
+//     zh-cn: 计算
+
+// ----
+// .. 修改链接的类型 `type` 字段时要谨慎，先明确新链接对应功能是不是产品。如果是产品，`type` 字段的值应该为 `product_link`，product_code 需要符合规范，可以在这里查询；如果不是产品，请将 type 字段改为 self_link。
+
+
+

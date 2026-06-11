@@ -1,0 +1,117 @@
+---
+title: 扣费（Lease）
+weight: 16
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| auto_renew
+| Integer
+| false
+| 自动续费几个月，0则不自动续费
+
+| charge_mode
+| String
+| false
+| 计费模式
+
+| duration
+| String
+| false
+| 租赁时长
+
+| end_time
+| String
+| false
+| private
+
+| is_pre_lease
+| String
+| false
+| private
+
+| next_charge_mode
+| String
+| false
+| 到期后的计费模式
+
+| price_info
+| String
+| false
+| private
+
+| promotion_id
+| String
+| false
+| 促销ID
+
+| resources
+| String
+| true
+| 资源ID
+
+| user
+| String
+| false
+| 用户ID
+
+| zone
+| String
+| true
+| 区域ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resource_set
+| Array
+| false
+| 资源ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "Lease",
+  "price_info": {
+    "bandwidth": 1,
+    "billing_mode": "bandwidth",
+    "media_type": "vm"
+  },
+  "resources": [
+    "nwac-9363a36711684b8f8cf15f525b1e615a"
+  ],
+  "user": "usr-jj8r3F2k",
+  "zone": "beta"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "LeaseResponse",
+  "resource_set": [
+    {
+      "resource_id": "i-rvegpg7h"
+    }
+  ],
+  "ret_code": 0
+}
+----

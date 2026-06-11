@@ -1,0 +1,32 @@
+---
+title: "监听端口"
+weight: 01
+---
+
+. 修改 configmap
++
+--
+[,bash]
+----
+kubectl -n kube-system edit cm kube-proxy
+----
+
+[,yaml]
+----
+apiVersion: v1
+data:
+  config.conf: |-
+    apiVersion: kubeproxy.config.k8s.io/v1alpha1
+bindAddress: 0.0.0.0
+healthzBindAddress: "127.0.0.1:10256"
+nodePortAddresses: ["172.31.50.0/24"]
+----
+--
+
+. 重启 kube-proxy
++
+[,bash]
+----
+kubectl -n kube-system rollout restart ds kube-proxy
+----
+

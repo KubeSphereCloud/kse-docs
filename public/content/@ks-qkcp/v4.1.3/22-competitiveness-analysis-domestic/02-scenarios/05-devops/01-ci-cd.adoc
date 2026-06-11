@@ -1,0 +1,13 @@
+---
+title: "CI/CD & 应用流水线"
+weight: 01
+---
+
+== KubeSphere 企业版
+{ks_product_right}深度集成了 Jenkins 和 Argo CD，同时在用户体验上尽量隐藏底层技术细节。对于需要创建 DevOps 流水线的用户，平台提供图形化编辑流水线，无需编写 Jenkinsfile，并内置多种流水线模板，支持参数管理与静态代码扫描结果直观展示，从而大幅降低使用门槛。在应用部署方面，{ks_product_right}同样集成了 Argo CD，通过页面化管理实现持续部署，并支持 source-to-image 与 binary-to-image，无需编写 Dockerfile，显著提升工作效率。
+
+== DaoCloud
+DaoCloud 支持图形化创建流水线，可自定义代码构建、镜像打包、安全扫描及部署到测试、生产环境等阶段的编排；支持多任务并行运行，具备镜像漏洞检测、版本历史记录与快速回滚功能；支持 Source-to-Image 和 Binary-to-Image，集成 SonarQube 实现静态代码扫描。
+
+== 灵雀云
+灵雀云支持通过可视化界面快速创建流水线，可使用系统自带或用户自定义模板，并支持多种触发方式。集成 Jenkins、GitLab、Harbor、SonarQube 等工具，支持 Source-to-Image 和 Binary-to-Image，同时通过集成 SonarQube 实现静态代码扫描。

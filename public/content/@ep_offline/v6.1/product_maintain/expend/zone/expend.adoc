@@ -1,0 +1,50 @@
+---
+title: "扩容 Region"
+weight: 3
+---
+
+
+待新 Zone 按要求完成部署后，可执行以下步骤，将新 Zone 加入原 Region。
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是原环境的 FirstBox 节点 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，扩容{product_name}。其中 `<zone_id>` 为新部署 Zone 的 ID，需根据实际情况进行修改。
++
+[source,shell]
+----
+/pitrix/cli/scale-qingcloud-zone.py -z <zone_id> -I /root/ip_list
+----
++
+include::../../../../../_components/note.adoc[]
+
+此步骤耗时较长，请耐心等待。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行以下命令，查看扩容任务的执行状态。
++
+[source,shell]
+----
+/pitrix/cli/get-scale-qingcloud-zone-status.py
+----
+
+. 执行以下命令，查看简略日志。
++
+[source,shell]
+----
+/pitrix/cli/get-scale-qingcloud-zone-log.py
+----
++
+详细日志请看目录下对应 `job` 的日志。
+
+** 部署日志目录：`/pitrix/log/deploy`。
+** 安装包的日志目录: `/pitrix/log/build_pkgs/`。
+** 安装节点的日志目录: `/pitrix/log/install_nodes/`。
+** 更为详细的日志在对应节点的日志目录: `/opt/install/<os,network,disk,post>`。
+** 节点的更新日志目录: `/pitrix/log/update_nodes/`。

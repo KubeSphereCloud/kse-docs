@@ -1,0 +1,188 @@
+---
+title: "SDK 使用说明"
+weight: 8
+---
+
+{platform_name_cn} 为开发者提供软件开发包 SDK (Software Development Kit)， 可以利用它对{platform_name_cn} 的资源进行查看、创建和操作，借此开发出更富创造力的产品。
+
+include::../../../../_components/note.adoc[]
+* SDK 的使用受 API 访问配额的限制，具体请查看 link:../precondition/[前置条件] 中的 “API 请求配额限制”
+* 目前 SDK 支持的语言是 python，其他语言您可以在 github 上查找非官方版本。
+include::../../../../_components/table_footer.adoc[]
+
+== 安装 SDK
+
+可使用 pip 安装：
+
+[,shell]
+----
+$ pip install qingcloud-sdk
+----
+
+如果不是在 virtualenv 上安装，则需要 sudo
+
+[,shell]
+----
+$ sudo pip install qingcloud-sdk
+----
+
+如果你已安装 qingcloud-sdk 并需要更新到最新版本，则可以：
+
+[,shell]
+----
+$ pip install --upgrade qingcloud-sdk
+----
+
+通过源码安装：
+
+[,shell]
+----
+$ git clone https://github.com/yunify/qingcloud-sdk-python.git
+$ cd qingcloud-sdk-python
+$ python setup.py install
+----
+
+== 使用范例
+
+下面举几个例子来帮助大家快速上手，全部功能请见后面的指令集列表。
+
+=== 建立连接
+
+发起请求前要先建立连接，虚拟资源类、账号密钥类 API 创建连接方法是相同的，管理服务类则不同。
+
+请先看虚拟资源类：
+
+[,python]
+----
+import qingcloud.iaas
+conn = qingcloud.iaas.connect_to_zone(
+  'test', # 你的资源所在的区域ID
+  'access key id',
+  'secret access key'
+)
+----
+
+这是管理服务类：
+
+[,python]
+----
+from qingcloud.iaas.connection import APIConnection
+from json import dumps
+
+class BOSS2Client(APIConnection):
+  def request(self, request_data):
+    action = request_data.pop('action', '')
+    json_string = dumps(request_data)
+    response = self.send_request(
+      action=action,
+      body={'params': json_string},
+      url='/boss2/',
+      verb='POST',
+    )
+    return response
+
+boss2_client = BOSS2Client(
+  qy_access_key_id='XFJYLXKZMNXPUCEVYYGP',
+  qy_secret_access_key='szxhWblc1P64cF8fGzcAkQ764CUUZbjqUICcE36q',
+  zone='test',
+  host='boss.domain.com',
+  port='80',
+  protocol='http'
+)
+----
+
+上面代码中得到的 conn 是 APIConnection 的实例，在接下来的教程中会继续用到它。APIConnection 中各操作函数的返回值是根据 API 返回的 JSON 数据转换而成的 dict 。 具体返回内容可参见后续各指令具体描述中。
+
+=== 创建主机
+
+创建一台主机至少要提供镜像ID，主机类型或者 cpu/mem 比值。
+
+[,python]
+----
+ret = conn.run_instances(
+  image_id='img-xxxxxx',
+  cpu=1,
+  memory=1024,
+  vxnets=['vxnet-0'],
+  login_mode='passwd',
+  login_passwd='Passw0rd@()'
+)
+----
+
+=== 关闭主机
+
+当你的主机暂时不需要运行时，可将其关闭以减少费用（可同时关闭多台）：
+
+[,python]
+----
+ret = conn.stop_instances(
+  instances=['instance-id-1','instance-id-2', ...]
+)
+----
+
+有时默认关机会失败，特别是 windows 系统，部分运行中的应用会阻止系统关机。 这时需要强制关机：
+
+[,python]
+----
+ret = conn.stop_instances(
+  instances=['instance-id-1','instance-id-2', ...],
+  force=True
+)
+----
+
+=== 获取主机信息
+
+可根据主机ID，状态，主机名称，镜像ID 作过滤条件，来获取主机列表。 如果不指定任何过滤条件，默认返回你所拥有的所有主机：
+
+[,python]
+----
+ret = conn.describe_instances(limit=50)
+all_instances = ret['instance_set']
+
+ret = conn.describe_instances(status=['running'])
+running_instances = ret['instance_set']
+
+ret = conn.describe_instances(search_word='test')
+test_instances = ret['instance_set']
+----
+
+=== 获取计算节点的统计数据
+
+这是管理服务类的 API，请注意构建连接时的不同。
+
+[,python]
+----
+from qingcloud.iaas.connection import APIConnection
+from json import dumps
+
+
+class BOSS2Client(APIConnection):
+    def request(self, request_data):
+        action = request_data.pop('action', '')
+        json_string = dumps(request_data)
+        response = self.send_request(
+            action=action,
+            body={'params': json_string},
+            url='/boss2/',
+            verb='POST',
+        )
+        return response
+
+
+if __name__ == '__main__':
+    boss2_client = BOSS2Client(
+        qy_access_key_id='XFJYLXKZMNXPUCEVYYGP',
+        qy_secret_access_key='szxhWblc1P64cF8fGzcAkQ764CUUZbjqUICcE36q',
+        zone='test',
+        host='boss.domain.com',
+        port='80',
+        protocol='http'
+    )
+    request_data = {
+        "zone": "test",
+        "action": "Boss2GetAggsStats",
+        "topic": "instance_status",
+    }
+    response = boss2_client.request(request_data)
+    print(response)
+----

@@ -1,0 +1,164 @@
+---
+title: "快速入门"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Kafka, 快速入门"
+description: "介绍如何快速创建 RadonDB Kafka 实例并访问 Kafka。"
+weight: 01
+---
+
+:ks_db_product: Kafka
+
+本节介绍如何快速创建 RadonDB {ks_db_product} 实例并访问 {ks_db_product}。
+
+
+== 前提条件
+
+* 在{ks_product_both}平台加入一个企业空间和一个项目。
+* {ks_product_right}平台需要安装 RadonDB DMP 扩展组件。
+
+== 操作步骤
+
+=== 创建 {ks_db_product} 实例
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在页面右侧选择**新建 {ks_db_product} 实例**。
+. 在**基本信息**页签，设置 RadonDB {ks_db_product} 实例的基本信息和位置，然后点击**下一步**。
+. 在**应用设置**页签，设置 {ks_db_product} 的参数，然后点击**确定**。
+
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+有关参数的具体解释，请参阅link:../02-install-radondb-kafka/[创建 {ks_db_product} 实例]。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+=== 创建 {ks_db_product} 主题
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 在页面右侧点击**主题**页签，然后点击**创建**。
+. 在**创建主题**对话框，输入主题名称，如 demo-topic, 并设置分区数量和副本数量，点击**确定**。
++
+image::/images/dmp/create-topic.png[700,700]
+
+
+=== 创建 {ks_db_product} 用户
+
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 在页面右侧点击 **{ks_db_product} 用户**页签，然后点击**创建**。
+. 在**创建用户**对话框，设置用户名，如 demo-user1，并配置以下两条规则：
++
+--
+规则 1: 允许“主题”名称为 demo-topic 的所有操作权限。
+
+规则 2: 允许“组”名称为 test-consumer-group 的所有操作权限。
+
+image::/images/dmp/create-kafka-user.png[700,700]
+--
+
+. 点击**确定**。用户创建完成后将显示在用户列表中。
+
+
+
+=== 访问 {ks_db_product}
+
+RadonDB {ks_db_product} 支持三种认证类型：TLS、SCRAM-SHA-512 和无需认证。此处以 TLS 为例。关于其它认证类型的登录方式，请参阅link:../05-access-kafka/[访问 {ks_db_product}]。
+
+. 下载 link:https://archive.apache.org/dist/kafka/3.5.1/kafka_2.13-3.5.1.tgz[{ks_db_product} 客户端二进制包]。
+
+. 进入 {ks_db_product} 二进制包所在目录，执行以下命令解压 {ks_db_product} 包：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+tar -xzvf <package_name>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+
+. 在页面左侧的**传输密码**区域，下载 CA 证书并保存密码。
+
+. 在页面右侧点击 **{ks_db_product} 用户**页签，下载用户证书并保存密码。
++
+--
+image::/images/dmp/download-CA-user-certificate.png[700,700]
+--
+
++
+. 在解压后的 {ks_db_product} 包中的 **config/producer.properties** 和 **config/consumer.properties** 文件末尾添加下面的内容。
++
+--
+// YAML
+include::../../../_ks_components/code/yaml.adoc[]
+
+#在文件末尾添加以下内容。
+
+security.protocol=ssl
+ssl.truststore.location=<ca.p12>
+ssl.truststore.password=<truststore_password>
+ssl.truststore.type=pkcs12
+ 
+ssl.keystore.location=<user.p12>
+ssl.keystore.password=<keystore_password>
+ssl.keystore.type=pkcs12
+ssl.endpoint.identification.algorithm=
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+参数说明如下：
+
+* <ca.p12>：CA 证书的保存路径。
+
+* <truststore_password>：CA 证书的密码。
+
+* <user.p12>：用户证书的保存路径。
+
+* <keystore_password>：用户证书的密码。
+--
+
++
+. 执行以下命令使用 {ks_db_product} 客户端生产和消费消息。
++
+--
+生产消息
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+# bin/kafka-console-producer.sh --bootstrap-server 192.168.100.2:31522 --topic demo-topic --producer.config config/producer.properties
+>hello
+>radondb
+>kafka
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+消费消息
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+# bin/kafka-console-consumer.sh --bootstrap-server 192.168.100.2:31522 --topic demo-topic --consumer.config config/consumer.properties
+hello
+radondb
+kafka
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+其中，**bootstrap-server**，即命令中的 192.168.100.2:31522，需要修改为 {ks_db_product} 实例详情页左侧的访问地址，如下图所示。**topic**，即命令中的 demo-topic，需要修改为实际使用的主题名称。
+// group 需要修改为实际使用的组名称。
+
+image::/images/dmp/kafka-address.png[,50%]
+
+// note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+上图框中第一个读写地址是使用 Kubernetes 节点网络访问 {ks_db_product} 服务时使用的地址，如在 Kubernetes 节点上访问 {ks_db_product}，或 Kubernetes 节点同网段主机上访问 {ks_db_product} 服务。第二个读写地址是使用 Kubernetes 集群中 pod 访问 kafka 服务时使用的地址。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+--

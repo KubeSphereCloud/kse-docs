@@ -1,0 +1,42 @@
+---
+title: "创建节点组"
+weight:  01
+---
+
+:ks_permission: **节点组管理**
+:ks_menu: **节点组 > 节点组目录**
+
+
+本节介绍如何创建节点组。
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+// include::../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
+
+. 点击image:/images/edgewize/zh/icons/addButton.svg[,18,18]开始创建节点组。
+
+. 输入**名称**，选择**上级节点组**和**节点组管理员**，然后点击**确定**。
++
+--
+[.admon.note,cols="a"]
+|===
+|说明
+
+|若不选择上级节点组，创建的节点组默认处于一级目录。
+
+|===
+
+image:/images/edgewize/zh/v3.0/create-node-groups.png[,80%]
+
+节点组创建完成后将显示在左侧的节点组列表中。
+--

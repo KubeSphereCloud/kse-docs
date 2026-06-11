@@ -1,0 +1,29 @@
+---
+title: 管理顶部右侧菜单
+weight: 03
+---
+
+企业云平台 Console 顶部右侧展示了云平台的一些快捷功能入口。
+
+云平台的管理员可以根据实际情况，对Console 顶部右侧菜单进行自定义，隐藏/显示某些功能。
+
+image::/images/ep_offline/cadmin/example_nav_00.png[,50%]
+
+== 配置参数路径
+
+本小节仅列出功能对应需要修改的参数，用户可以根据下表在配置中心找到对应的应用和配置，然后进入配置详情页面修改对应的参数即可，详细操作步骤此处不再赘述。
+
+Console 顶部右侧菜单通过如下配置进行控制。
+
+|===
+| 功能 | 应用 | 配置 | 参数
+
+| 工单 | webconsole | global_nav | support_tickets
+| 消息中心 | webconsole | global_nav | support_notifications
+| 资源 | webconsole| global_nav | support_resources	
+| 个人中心 | webconsole| global_nav | support_profile	
+| 文档 |webconsole | global_nav | support_documents
+| 企业 | webconsole-common | system_settings | support_vdc
+| 流程审批 | webconsole-common | system_settings | support_process_approve
+|===
+

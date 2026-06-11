@@ -1,0 +1,30 @@
+---
+title: "自定义监控"
+weight: 2
+---
+
+自定义监控允许用户根据自己的业务场景建立特有的可观测性标准。
+
+== 功能特性
+
+* 支持自定义监控指标和监控形式。
+* 支持将常用监控工具集成至云端，如用于 Kubernetes 监控的事实标准工具 Prometheus。
+* 为各类云原生应用提供云上业务支撑，以及细粒度全监控功能，以提前检测出任何可能对业务造成影响的问题。
+
+== 主要组件
+
+监控引擎组件：
+
+* *Prometheus*
+* *Prometheus Operator*
+
+== 架构设计
+
+image::/images/ep_offline/qke_twp/05_define_alert.png[]
+
+
+////
+发布时：namespace、job 有具体值会自动被占位符替换。其他敏感信息需要上传者屏蔽（可以通过 yaml 编辑的形式）。统一格式 <placeholder> 60cluster-admin 可以发布到 kubesphere-monitoring-system 和当前 namespace workspace-manager 可以发布到每个 wk 下的 ns （复制相同的内容，在每个 ns 下都创建相同内容的 ConfigMap） namespace-user 只能发布到当前namespace下。
+校验项： 
+namespace  
+////

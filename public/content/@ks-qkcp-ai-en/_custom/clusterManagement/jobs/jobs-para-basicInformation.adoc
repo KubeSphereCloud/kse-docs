@@ -1,0 +1,45 @@
+// :ks_include_id: b3230b385e724f75b412f086ba00503e
+* Basic Information
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the Job. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, with a maximum length of 63 characters.
+
+|Alias
+|The alias of the Job. Different Jobs can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), with a maximum length of 63 characters.
+
+ifndef::project[]
+|Project
+|The project to which the Job belongs. System projects are typically used for managing system resources. It is recommended to select a user project.
+endif::[]
+
+|Description
+|The description of the Job. The description can contain any characters, with a maximum length of 256 characters.
+
+|Schedule
+|The CRON expression for the run cycle of the CronJob. KubeSphere uses UTC time by default. You need to adjust it according to your time zone. Only available for **CronJobs**.
+
+|Starting Deadline
+|The maximum delay time for starting the Job when it fails to start as scheduled due to some reason. Only available for **CronJobs**.
+
+|Successful Jobs History Limit
+|The number of successful Jobs allowed to be retained, with a default value of **3**. Each run of a CronJob creates a Job. You can specify to retain a certain number of Jobs as historical records. Only available for **CronJobs**.
+
+|Failed Jobs History Limit
+|The number of failed Jobs allowed to be retained, with a default value of **1**. Each run of a CronJob creates a Job. You can specify to retain a certain number of Jobs as historical records. Only available for **CronJobs**.
+
+|Concurrency Policy
+|The strategy the system adopts when multiple Jobs created by a CronJob overlap. Only available for **CronJobs**. Includes the following policy types:
+
+* **Allow**: New Jobs and old Jobs run concurrently.
+
+* **Forbid**: New Jobs are not run.
+
+* **Replace**: Old Jobs are terminated immediately and then new Jobs are run.
+|===
+--

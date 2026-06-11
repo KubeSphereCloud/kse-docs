@@ -1,0 +1,70 @@
+---
+title: "编辑告警规则"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, Redis Sentinel, 管理告警规则组, 编辑告警规则"
+description: "介绍如何编辑规则组中的告警规则。"
+weight: 05
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 1682e488c914491483ca230a44c7ab70
+:ks_xref_id: dcf4c5e77dab4bffa5f083dd384a62bd
+:ks_comp: ../../../../components/
+:ks_title: 编辑告警规则
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, Redis Sentinel, 管理告警规则组, 编辑告警规则
+:ks_description: 介绍如何编辑规则组中的告警规则。
+:ks_weight: 05
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+本节介绍如何编辑规则组中的告警规则。
+
+
+== 前提条件link:[id=6bad851041864297acba448507dac5de]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbRedisSentinel/radondbRedisSentinel-prer-installRadondbRedisSentinel.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-prer-createAlertGroup.adoc[]
+
+
+== 操作步骤link:[id=be67ec2c1e034bc0897b4c83f49b15e8]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbRedisSentinel/radondbRedisSentinel-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-editAnAlertingPolicy.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-editAlertRules.adoc[]

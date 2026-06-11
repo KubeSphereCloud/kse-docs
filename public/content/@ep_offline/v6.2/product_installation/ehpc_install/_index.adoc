@@ -1,0 +1,75 @@
+---
+title: "EHPC 安装指南"
+weight: 50
+pdf_docVersion: '02'
+pdf_releaseDate: 2023-05-06
+---
+
+弹性高性能计算 EHPC 服务的安装部署依赖于企业云平台的搭建和 AppCenter 服务的支持，因此，用户需提前安装部署完成企业云平台以及 AppCenter 服务。一般来说，安装部署企业云平台的过程中默认自动安装 AppCenter 服务。
+
+本文旨在介绍在 v6.1（20221230）版本的企业云平台（IaaS）上安装弹性高性能计算 EHPC 的方法。
+
+== 版本要求
+
+* 青云企业云平台 v6.1（20221230）
+* AppCenter 2.0
+* 弹性高性能计算 EHPC v1.4.8
+
+== 读者对象
+
+本文档主要适用于以下读者：
+
+* 实施工程师
+* 运维工程师
+* 技术支持工程师
+
+== 相关资料
+
+* link:https://box.yunify.com/s/5KLTbcM6f8NYE3f[《青云企业云平台安装指南》]
+* link:https://box.yunify.com/s/x66iEcnK2pwgoXz[《BOSS 用户指南》]
+* link:https://box.yunify.com/s/qodCRzJJdyYkCHS[《企业云平台高性能计算 POC 测试指南》]
+
+== 名词解释
+[options="header",cols="1,3"]
+|===
+|名词|解释说明
+|EHPC 
+|弹性高性能计算 Elastic High Performance Computer 的英文简称。
+
+|EPFS
+|弹性并行文件存储 Elastic Parallel File System 的英文简称。
+
+|Lustre
+|一种平行分布式文件系统，EPFS 是基于该协议的网络共享文件存储服务。
+
+|MinIO
+|一种开源的对象存储，为 EHPC 提供便捷的文件上传与下载功能。
+
+|Console
+|云平台的云计算服务平台。
+
+|BOSS
+|云平台的云计算运维管理平台。
+
+|配置中心
+|云平台用于统一集中化管理 Console 和 BOSS 的配置，同时提供可视化操作界面，降低配置维护难度，提升修改配置的效率。
+
+|===
+
+
+== 修订记录
+
+[options="header",cols="1,3,1"]
+|===
+|版本	|修订内容	|日期
+|01
+|第一次正式发布
+|2023-04-19
+
+|02
+|更新失效链接
+|2023-05-06
+|===
+
+
+

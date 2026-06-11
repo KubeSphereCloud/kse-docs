@@ -1,0 +1,36 @@
+---
+title: "KubeSphere Service Mesh"
+keywords: "Kubernetes, {ks_product}, Service Mesh"
+description: "Introduces how to use the KubeSphere Service Mesh extension."
+weight: 06
+layout: "second"
+---
+
+This section introduces how to use the "KubeSphere Service Mesh" extension.
+
+The "KubeSphere Service Mesh" extension is used to enable the service mesh functionality of the KubeSphere platform. It is built on the open-source project Istio, providing visualization for microservices governance and traffic management. It boasts a powerful toolkit, including circuit breaking, blue-green deployment, canary release, traffic mirroring, distributed tracing, observability, and traffic control.
+
+After installing the "KubeSphere Service Mesh" extension, the **Grayscale Release** option will appear in the left navigation pane of the workspace, supporting the creation of composed apps and the management of grayscale releases for composed apps.
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+Before installing KubeSphere Service Mesh, you need to configure an available Prometheus service and an OpenSearch service in the extension settings. For more information about extension configuration, please refer to the details page of the "KubeSphere Service Mesh" extension in the Extensions Center.
+|===
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+include::../../../_custom/projectManagement/apps/composedapps-desc-syncwithServiceMesh.adoc[]
+ifeval::["{file_output_type}" == "html"]
+For more information, please refer to link:../../08-workspace-management/10-application-workloads/01-composed-apps/[Composed Apps].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For more information, please refer to the "Composed Apps" chapter in the *KubeSphere Workspace and Project Management Guide*.
+endif::[]
+|===

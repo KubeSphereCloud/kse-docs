@@ -1,0 +1,246 @@
+---
+title: 高级功能
+description: '高级功能的概述。'
+weight: 2
+---
+
+ifeval::["{file_output_type}" == "html"]
+file_output_type: html
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+file_output_type: pdf
+endif::[]
+
+ifeval::["{file_output_type}" == "docx"]
+file_output_type: docx
+endif::[]
+
+include::./test.adoc[tag=times]
+
+include::../../../_custom/basics.adoc[]
+
+== 测试功能
+link:../[链接到本节目录]
+
+link:../../../product_use/zhi_nan/[链接到 操作指南目录]
+
+include::../../../_custom/test-xref.adoc[]
+
+== 前提条件
+已创建云服务器
+
+== 软件版本
+
+本操作示例使用如下软件版本，在实际操作时，请以实际软件版本为准。
+
+* 操作系统： CentOS Stream 9 64bit
+* Nginx 版本： 1.20.1
+
+== 操作步骤
+=== 有序列表
+1. 在云服务器列表，点击名称列点击 Web 终端图标，以 root 用户登录云服务器。具体操作方法，请参见通过 http://test.com[Web 终端连接云服务器]。测试  http://test2.com/daea_dea[外部链接,window=_blank]，下载 link:https://s4.qingcloud.com/files/2022/12/hpl-2.3.zip[HPL 软件,window=_blank]和link:https://s4.qingcloud.com/files/2022/12/hpl.sh[测试脚本,window=_blank]，以及link:https://s4.qingcloud.com/files/2022/12/HPL.dat[测试算例,window=_blank]。
+
+
+2. 执行以下命令安装 Nginx。
++
+[source,shell]
+----
+# 安装 Nginx
+yum -y install nginx
+# 查看 Nginx 版本
+nginx -v
+----
+
+== 视频 video
+
+video::https://pek3a.qingstor.com/workshop/webhosting%20feb.16%20v3.mp4[]
+
+=== 三级目录
+
+==== 四级目录
+Wolpertingers are .
+
+== 分隔线
+---
+== 各种字体样式及无序列表
+
+* *粗体* _斜体_ [line-through]#删除线# [underline]#加底线# [overline]#上标线# #高亮度#
+* [yellow]#黄色# [red yellow-background]#红色黄底#
+* [big]#加大# 正常 [small]#缩小# ^上标^ ~下标~
+* Hello world (正常)
+* `Hello world (等宽)`
+* "`双弯引号`" '`单弯引号`'
++
+[source,javascript]
+----
+const ab = document.getElementByTagName('hello');
+console.log(abc);
+function() {
+  var test = 'mok';
+}
+----
++
+[source,html]
+----
+<!DOCTYPE html>
+<title>Title</title>
+
+<style>body {width: 500px;}</style>
+
+<script type="application/javascript">
+  function $init() {return true;}
+</script>
+
+<body>
+  <p checked class="title" id='title'>Title</p>
+  <!-- here goes the rest of the page -->
+</body>
+----
+
+== 行内代码
+这个是行内代码 `i-xxxx` 主机在这里放置，所以，可以在这里直接运行 `sudo reboot` 了。
+
+== 图片
+image::/images/demo/nginx.png[nginx,600px]
+
+[.float-group]
+--
+image:/images/demo/nginx.png[Linux,400,float="left"]
+You can find Linux everywhere these days!You can find Linux everywhere these days!
+--
+
+这个是行内代码 `i-xxxx` 主机在这里放置，所以，可以在这里直接运行 `sudo reboot` 了。
+
+== 表格
+
+[cols="2*", options="header"]
+|===
+|Name of Column 1
+|Name of Column 2
+
+|Cell in column 1, row 1
+|Cell in column 2, `row` 1
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+|===
+
+== 提示
+
+=== 说明
+
+include::../../../../_components/note.adoc[]
+
+告警策略删除后不能恢复，请谨慎执行此操作。
+
+include::../../../../_components/table_footer.adoc[]
+
+=== 警告
+
+include::../../../../_components/warning.adoc[]
+
+告警策略删除后不能恢复，请谨慎执行此操作。
+
+include::../../../../_components/table_footer.adoc[]
+
+=== 注意
+
+include::../../../../_components/attention.adoc[]
+
+告警策略删除后不能恢复，请谨慎执行此操作。
+
+include::../../../../_components/table_footer.adoc[]
+
+=== 危险
+
+include::../../../../_components/danger.adoc[]
+
+告警策略删除后不能恢复，请谨慎执行此操作。
+
+include::../../../../_components/table_footer.adoc[]
+
+=== 嵌套表格提示
+
+[cols="1,1,4"]
+|===
+|参数项 |参数名称 |参数说明
+
+.8+^.^|基本信息 |区域 |创建 VPC 网络的区域。
+
+|名称 |VPC 网络的名称。
+
+支持自动填充及自定义。名称长度为1~64个字符，须由中文、英文字母、数字、下划线（_）、中划线（-）和点（.）组成。
+
+
+|IPv4 地址范围 |VPC 的 IPv4 网段。
+
+VPC 网络创建后，IPv4 网段不可修改。
+|IPv4 地址范围 |VPC 的 IPv4 网段。
+|IPv6 地址范围 a|选择是否为 VPC 网络分配 IPv6 网段。
+
+* *关闭 IPv6*：默认选项，即不分配 IPv6 网段。
+* *系统自动分配*：开启 IPv6 功能，并自动分配 IPv6 网段。
+|类型 a|支持免费型、小型、中型、大型及超大型，不同类型可支持的管理流量转发能力不同。
+
+include::../../../../_components/note_in_table.adoc[]
+
+免费型 VPC 仅具备内网通信功能，不支持绑定公网 IP 和转发公网流量，且暂不支持在免费型 VPC 中创建弹性容器实例(QCI)、AppCenter 集群和边界路由器。 +
+若您的云服务器需要上网，需要给私有网络内的云服务器单独绑定公网 IP。
+
+include::../../../../_components/footer_in_table.adoc[]
+
+|公网 IP a|选择是否立即为 VPC 绑定公网 IP。免费型 VPC 不支持此项。
+
+* *购买并绑定*：购买一个新的公网 IP 并绑定到此 VPC 网络。选择后需要设置公网 IP 的计费模式、带宽上限及 IP 组。
+* *使用已有*：若已购买有公网 IP，可选择绑定已有的公网 IP。
+* *暂不绑定*：此处暂不绑定，可在创建 VPC 网络后根据需要进行绑定。
+|安全组 a|选择 VPC 需要绑定的安全组。
+
+若未创建安全组，可选择默认安全组，也可在下方提示信息中点击新建安全组进行创建。
+
+.8+^.^|初始私有网络 |名称 |私有网络名称。
+|部署方式 a|* *多可用区部署*：表示网络中的云服务器可部署在多个可用区。
+
+* *单可用区部署*：表示网络中的云服务器部署在一个可用区中，但与其它可用区之间的网络互通。
+|IPv4 地址范围 |私有网络的地址范围，需要在 VPC 网络的地址范围内，且私有网络间的 IPv4 网段不可重叠。
+|IPv6 地址范围 a|仅当所属 VPC 网络开启 IPv6 功能，其私有网络才支持开启 IPv6。
+
+* *关闭 IPv6*：默认选项，即不分配 IPv6 网段。
+* *系统自动分配*：开启 IPv6 功能，并自动为子网分配 IPv6 网段。
+
++++<div style="background-color: #D8ECDE;padding: 10px 24px; margin: 10px 0;border-left:3px solid #00a971;">++++++<b>+++说明+++</b><br>+++如需自定义私有网络的 IPv6 网段，可以在创建完成后先关闭 IPv6，再启用 IPv6 并选择手动指定 IPv6。+++</div>+++
+|关联路由表 |表示私有网络关联的路由表。默认情况下，VPC 中所有私有网络均关联默认路由表，若需更换路由表，请在创建 VPC 网络后，解绑该路由表并重新绑定。
+|网络 ACL |网络访问控制规则。您可以自定义设置网络 ACL 规则，然后绑定私有网络。
+|高级选项 |点击**高级选项**，可以设置私有网络的管理地址、边界路由器地址、DHCP 起始地址 及 DHCP 结束地址。一般使用默认设置即可。
+|===
+
+
+=== 块引用
+
+[quote, Abraham Lincoln, Address delivered at the dedication of the Cemetery at Gettysburg]
+____
+Four score and seven years ago our fathers brought forth
+on this continent a new nation...
+____
+
+[quote, Albert Einstein]
+A person who never made a mistake never tried anything new.
+
+____
+A person who never made a mistake never tried anything new.
+____
+
+[quote, Charles Lutwidge Dodgson, 'Mathematician and author, also known as http://en.wikipedia.org/wiki/Lewis_Carroll[Lewis Carroll]']
+____
+If you don't know where you are going, any road will get you there.
+____
+
+=== 简写的块引用（仅Asciidoctor适用）
+
+"I hold it that a little rebellion now and then is a good thing,
+and as necessary in the political world as storms in the physical."
+-- Thomas Jefferson, Papers of Thomas Jefferson: Volume 11
+
+=== Air quotes: the best thing since fenced code blocks (仅Asciidoctor适用)
+

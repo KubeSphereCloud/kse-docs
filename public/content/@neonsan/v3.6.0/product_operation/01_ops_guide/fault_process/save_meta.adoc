@@ -1,0 +1,59 @@
+---
+title: "解决 save metadata 过慢"
+weight: 6
+---
+
+通过开启双日志 zone 功能，解决 save metadata 过慢而阻塞 IO 的问题。
+
+. 登录集群任一节点，查看集群中 Store 节点 IP。
++
+[,shell]
+----
+# neonsan list_store
+----
+
+. 逐个登录集群中的 Store 节点，修改 ``/etc/neonsan/store.conf`` 配置文件，设置 mdst_enable 参数为 1。
++
+[,shell]
+----
+vi /etc/neonsan/store.conf
+
+... ...
+[store]
+#unique ID of store node
+id=25
+#management port
+mngt_ip="192.168.101.25"
+# 1: enable core dump, 0 disable, defualt: 1
+#core_dump_enabled=1
+#SSDs to be used by Neonsan
+mdst_enable=1
+... ...
+----
+
+. 执行如下命令，开启双日志 zone 功能。
++
+[,shell]
+----
+curl -Ls "http:// xx.xx.xx.xx:2601/debug?op=enable_mdst&enable=1"
+----
++
+include::../../../../../_components/note.adoc[]
+xx.xx.xx.xx 为当前 Store 节点的 IP 地址，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令查看双日志 zone 功能是否配置成功。
++
+[,shell]
+----
+curl -Ls "http://xx.xx.xx.xx:2601/debug?op=get_mdst_enable_info" -w "\n"
+----
++
+include::../../../../../_components/note.adoc[]
+xx.xx.xx.xx 为当前 Store 节点的 IP 地址，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 逐个登录集群中的 Store 节点，修改/etc/neonsan/store.conf 配置文件，设置 mdst_enable 参数为 1。
+
+
+

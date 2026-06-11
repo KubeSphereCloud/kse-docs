@@ -1,0 +1,59 @@
+---
+title: 删除第三方登录服务器（DeleteLoginServers）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_servers
+| Array
+| false
+| 
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_server_ids
+| Array
+| false
+| 被删除的登录服务器id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "login_servers": [
+    "login_server_id_1",
+    "login_server_id_2"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteLoginServersResponse",
+  "login_server_ids": [
+    "login_server_id_1",
+    "login_server_id_2"
+  ],
+  "ret_code": 0
+}
+----

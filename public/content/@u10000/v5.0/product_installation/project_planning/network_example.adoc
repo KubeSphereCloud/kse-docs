@@ -1,0 +1,295 @@
+---
+title: IP 规划示例
+weight: 5
+---
+
+不同场景下，网络配置存在差异。用户可参考以下内容，规划 IP 数量与填写部署中的配置文件。
+
+== 三个全能节点
+
+3 台节点服务器，每个节点一张网卡 `bond0`，部署文件存储与对象存储。
+
+当前环境的配置文件 `/root/qs-installer/etc/ip.ini` 可参考以下内容填写。
+
+节点 IP 数为 3，VIP 数为 6。
+
+[source,shell]
+----
+[role]
+192.168.100.2 = oss nas cluster1 global
+192.168.100.3 = oss nas cluster1 global
+192.168.100.4 = oss nas cluster1 global
+ 
+[keepalive_int]
+192.168.100.2: vip=192.168.100.212 inf=bond0
+192.168.100.3: vip=192.168.100.213 inf=bond0
+192.168.100.4: vip=192.168.100.214 inf=bond0
+ 
+[nas_vip]
+192.168.100.2: vip=192.168.100.222 inf=bond0
+192.168.100.3: vip=192.168.100.223 inf=bond0
+192.168.100.4: vip=192.168.100.224 inf=bond0
+----
+
+
+== 三个全能节点，仅部署对象存储
+
+3 台节点服务器，每个节点一张网卡 `bond0`，仅部署对象存储。
+
+当前环境的配置文件 `/root/qs-installer/etc/ip.ini` 可参考以下内容填写。
+
+
+节点 IP 数为 3，VIP 数为 3。
+
+[source,shell]
+----
+[role]
+192.168.100.2 = oss cluster1 global
+192.168.100.3 = oss luster1 global
+192.168.100.4 = oss luster1 global
+ 
+[keepalive_int]
+192.168.100.2: vip=192.168.100.212 inf=bond0
+192.168.100.3: vip=192.168.100.213 inf=bond0
+192.168.100.4: vip=192.168.100.214 inf=bond0
+----
+
+== 三个全能节点，仅部署文件存储
+
+3 台节点服务器，每个节点一张网卡 `bond0`，仅部署文件存储。
+
+当前环境的配置文件 `/root/qs-installer/etc/ip.ini` 可参考以下内容填写。
+
+节点 IP 数为 3，VIP 数为 6。
+
+[source,shell]
+----
+[role]
+192.168.100.2 = nas cluster1 global
+192.168.100.3 = nas cluster1 global
+192.168.100.4 = nas cluster1 global
+ 
+[keepalive_int]
+192.168.100.2: vip=192.168.100.212 inf=bond0
+192.168.100.3: vip=192.168.100.213 inf=bond0
+192.168.100.4: vip=192.168.100.214 inf=bond0
+ 
+[nas_vip]
+192.168.100.2: vip=192.168.100.222 inf=bond0
+192.168.100.3: vip=192.168.100.223 inf=bond0
+192.168.100.4: vip=192.168.100.224 inf=bond0
+----
+
+
+== 三个全能节点，存储与业务网络分离部署
+
+3 台节点服务器，每个节点两张网卡，部署文件存储与对象存储。
+
+当前环境的配置文件 `/root/qs-installer/etc/ip.ini` 可参考以下内容填写。其中存储网段使用 `192.168.100.0/24`，网卡使用 `bond0`；业务网段使用 `192.168.200.0/24`，网卡使用 `bond1`。
+
+节点 IP 数为 6，VIP 数为 6。
+
+[source,shell]
+----
+[role]
+192.168.100.2 = oss nas cluster1 global
+192.168.100.3 = oss nas cluster1 global
+192.168.100.4 = oss nas cluster1 global
+ 
+[keepalive_int]
+192.168.200.2: vip=192.168.200.212 inf=bond1
+192.168.200.3: vip=192.168.200.213 inf=bond1
+192.168.200.4: vip=192.168.200.214 inf=bond1
+ 
+[nas_vip]
+192.168.200.2: vip=192.168.200.222 inf=bond1
+192.168.200.3: vip=192.168.200.223 inf=bond1
+192.168.200.4: vip=192.168.200.224 inf=bond1
+----
+
+
+== 三个全能节点，区分内部网络与外部网络
+
+3 台节点服务器，每个节点两张网卡，部署文件存储与对象存储。
+
+当前环境的配置文件 `/root/qs-installer/etc/ip.ini` 可参考以下内容填写。其中内部网段使用 `192.168.100.0/24`，网卡使用 `bond0`；外部网段使用 `192.168.200.0/24`，网卡使用 `bond1`。
+
+节点 IP 数为 6，VIP 数为 9。
+
+[source,shell]
+----
+[role]
+192.168.100.2 = oss nas cluster1 global
+192.168.100.3 = oss nas cluster1 global
+192.168.100.4 = oss nas cluster1 global
+ 
+[keepalive_int]
+192.168.100.2: vip=192.168.100.212 inf=bond0
+192.168.100.3: vip=192.168.100.213 inf=bond0
+192.168.100.4: vip=192.168.100.214 inf=bond0
+ 
+[keepalive_ext]
+192.168.200.2: vip=192.168.200.212 inf=bond1
+192.168.200.3: vip=192.168.200.213 inf=bond1
+192.168.200.4: vip=192.168.200.214 inf=bond1
+ 
+[nas_vip]
+192.168.100.2: vip=192.168.100.222 inf=bond0
+192.168.100.3: vip=192.168.100.223 inf=bond0
+192.168.100.4: vip=192.168.100.224 inf=bond0
+----
+
+== 三个网关节点 + 三个存储节点
+
+6 台节点服务器，分别部署网关节点与存储节点，每个节点一张网卡，部署文件存储与对象存储。
+
+当前环境的配置文件 `/root/qs-installer/etc/ip.ini` 可参考以下内容填写。
+
+节点 IP 数为 6，VIP 数为 6。
+
+[source,shell]
+----
+[role]
+192.168.100.2 = oss nas global
+192.168.100.3 = oss nas global
+192.168.100.4 = oss nas global
+192.168.100.5 = cluster1
+192.168.100.6 = cluster1
+192.168.100.7 = cluster1
+ 
+[keepalive_int]
+192.168.100.2: vip=192.168.100.212 inf=bond0
+192.168.100.3: vip=192.168.100.213 inf=bond0
+192.168.100.4: vip=192.168.100.214 inf=bond0
+ 
+[nas_vip]
+192.168.100.2: vip=192.168.100.222 inf=bond0
+192.168.100.3: vip=192.168.100.223 inf=bond0
+192.168.100.4: vip=192.168.100.224 inf=bond0
+----
+
+
+== 三个全能节点 + 三个存储节点，一个存储池
+
+6 台节点服务器，每个节点一张网卡，部署文件存储与对象存储。
+
+当前环境的配置文件 `/root/qs-installer/etc/ip.ini` 可参考以下内容填写。
+
+节点 IP 数为 6，VIP 数为 6。
+
+[source,shell]
+----
+[role]
+192.168.100.2 = oss nas cluster1 global
+192.168.100.3 = oss nas cluster1 global
+192.168.100.4 = oss nas cluster1 global
+192.168.100.5 = cluster1
+192.168.100.6 = cluster1
+192.168.100.7 = cluster1
+ 
+[keepalive_int]
+192.168.100.2: vip=192.168.100.212 inf=bond0
+192.168.100.3: vip=192.168.100.213 inf=bond0
+192.168.100.4: vip=192.168.100.214 inf=bond0
+ 
+[nas_vip]
+192.168.100.2: vip=192.168.100.222 inf=bond0
+192.168.100.3: vip=192.168.100.223 inf=bond0
+192.168.100.4: vip=192.168.100.224 inf=bond0
+----
+
+
+== 三个全能节点 + 三个存储节点，二个存储池
+
+6 台节点服务器，每个节点一张网卡，部署文件存储与对象存储。
+
+当前环境的配置文件 `/root/qs-installer/etc/ip.ini` 可参考以下内容填写。
+
+节点 IP 数为 6，VIP 数为 6。
+
+[source,shell]
+----
+[role]
+192.168.100.2 = oss nas cluster1 global
+192.168.100.3 = oss nas cluster1 global
+192.168.100.4 = oss nas cluster1 global
+192.168.100.5 = cluster2
+192.168.100.6 = cluster2
+192.168.100.7 = cluster2
+ 
+[keepalive_int]
+192.168.100.2: vip=192.168.100.212 inf=bond0
+192.168.100.3: vip=192.168.100.213 inf=bond0
+192.168.100.4: vip=192.168.100.214 inf=bond0
+ 
+[nas_vip]
+192.168.100.2: vip=192.168.100.222 inf=bond0
+192.168.100.3: vip=192.168.100.223 inf=bond0
+192.168.100.4: vip=192.168.100.224 inf=bond0
+----
+
+
+== 三个全能节点，使用主机名
+
+3 台节点服务器，每个节点一张网卡 `bond0`，部署文件存储与对象存储，并使用主机名部署。
+
+include::../../../../_components/note.adoc[]
+
+`hostname` 需与各节点服务器的主机名保持一致，否则会导致部署失败。
+
+include::../../../../_components/table_footer.adoc[]
+
+当前环境的配置文件 `/root/qs-installer/etc/ip.ini` 可参考以下内容填写。
+
+节点 IP 数为 3，VIP 数为 6。
+
+[source,shell]
+----
+[role]
+192.168.100.2 hosename1 = oss nas cluster1 global
+192.168.100.3 hostname2 = oss nas cluster1 global
+192.168.100.4 hostname3 = oss nas cluster1 global
+ 
+[keepalive_int]
+192.168.100.2: vip=192.168.100.212 inf=bond0
+192.168.100.3: vip=192.168.100.213 inf=bond0
+192.168.100.4: vip=192.168.100.214 inf=bond0
+ 
+[nas_vip]
+192.168.100.2: vip=192.168.100.222 inf=bond0
+192.168.100.3: vip=192.168.100.223 inf=bond0
+192.168.100.4: vip=192.168.100.224 inf=bond0
+----
+
+
+== 部署第二个 Zone，且需与 Global Zone 对接
+
+3 台节点服务器，每个节点一张网卡 `bond0`，部署文件存储与对象存储。
+
+include::../../../../_components/note.adoc[]
+
+需确保两个 Zone 对应网段之间可互相访问。
+
+include::../../../../_components/table_footer.adoc[]
+
+当前环境的配置文件 `/root/qs-installer/etc/ip.ini` 可参考以下内容填写。
+
+节点 IP 数为 3，VIP 数为 6。
+
+[source,shell]
+----
+[role]
+192.168.100.2 = oss nas cluster1
+192.168.100.3 = oss nas cluster1
+192.168.100.4 = oss nas cluster1
+ 
+[keepalive_int]
+192.168.100.2: vip=192.168.100.212 inf=bond0
+192.168.100.3: vip=192.168.100.213 inf=bond0
+192.168.100.4: vip=192.168.100.214 inf=bond0
+ 
+[nas_vip]
+192.168.100.2: vip=192.168.100.222 inf=bond0
+192.168.100.3: vip=192.168.100.223 inf=bond0
+192.168.100.4: vip=192.168.100.224 inf=bond0
+----

@@ -1,0 +1,60 @@
+---
+title: 删除消息接收人（DeleteNotificationLists）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_lists
+| Array
+| true
+| 接收人id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_lists
+| Array
+| false
+| 接收人id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeleteNotificationLists",
+  "notification_lists": [
+    "nl-xxxxxxxx"
+  ],
+  "owner": "usr-a6KqZcSI",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteNotificationListsResponse",
+  "notification_lists": [
+    "nl-xxxxxxxx"
+  ],
+  "ret_code": 0
+}
+----

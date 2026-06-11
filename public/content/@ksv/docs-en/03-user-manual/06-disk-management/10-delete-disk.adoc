@@ -1,0 +1,74 @@
+---
+title: "Delete Disk"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, disks, deletion"
+description: "Describes how to delete disks in the {ks_product} web console."
+weight: 10
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 156254cf1f1a40cf8629edbda9930aba
+:ks_xref_id: 73dc5a1a677045ecb2462ecc40a18fdb
+:ks_comp: ../../../components/
+:ks_title: Delete Disk
+:ks_description: Describes how to delete disks in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, disks, deletion
+:ks_weight: 10
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete disks in the {ks_product} web console.
+
+{ks_product} allows you to delete only data disks.  Before you delete a disk, make sure the disk is umounted from VMs.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=ad531b8e36314f9cb44e13bc7e59180f]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom-en/disks/disk-manage-prerequisites.adoc[]
+
+:relfileprefix: ./
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a data disklink:[id=8f850b27a93740c7818ea36945aaa17a]
+
+include::../../../_custom-en/disks/disk-steps.adoc[]
+
+. On the **Disks** page, click the name of the data disk that you want to delete. The details page of the data disk appears.
+. On the left side of the details page, click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Delete** from the drop-down list.
+. {ks_product} allows you to delete only data disks.  Before you delete a disk, make sure the disk is umounted from VMs.
++
+--
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+The data disk cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple data disks at a timelink:[id=4d831f3ffd3b4ca7bd5acc18c3feff8b]
+
+include::../../../_custom-en/disks/disk-steps.adoc[]
+
+. On the **Disks** page, click the name of the data disk that you want to delete. The details page of the data disk appears.
+. On the **Disks** page, select the check boxes next to the data disks that you want to delete, and click **Delete**.
++
+--
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+Data disks cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

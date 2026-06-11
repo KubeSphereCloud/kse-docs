@@ -1,0 +1,187 @@
+---
+title: 查询API密钥（DescribeAccessKeys）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_key_name
+| String
+| false
+| API密钥的名称
+
+| access_keys
+| Array
+| false
+| API密钥ID列表
+
+| console
+| String
+| false
+| Console的ID
+
+| controller
+| String
+| false
+| 控制器类型
+
+| iam_user_id
+| String
+| false
+| IAM用户的ID
+
+| limit
+| Int
+| false
+| 偏移量
+
+| offset
+| Int
+| false
+| 起始坐标
+
+| owner
+| String
+| false
+| API密钥的所有者
+
+| root_user
+| String
+| false
+| API密钥的根用户
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| status
+| Array
+| false
+| API密钥的状态
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_key_id
+| String
+| false
+| API密钥的ID
+
+| access_key_name
+| String
+| false
+| API密钥的名称
+
+| console_id
+| String
+| false
+| Console
+
+| controller
+| String
+| false
+| 控制器类型
+
+| create_time
+| String
+| false
+| API密钥的创建时间
+
+| description
+| String
+| false
+| API密钥的描述
+
+| ip_white_list
+| String
+| false
+| IP白名单，限制使用API密钥的源IP
+
+| owner
+| String
+| false
+| API密钥的所有者
+
+| root_user_id
+| String
+| false
+| API密钥的根用户ID
+
+| secret_access_key
+| String
+| false
+| API密钥的私钥
+
+| status
+| String
+| false
+| API密钥的状态
+
+| status_time
+| String
+| false
+| API密钥的状态时间
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "access_key_name": "access_name",
+  "access_keys": [
+    "LTMJGBXPHSEZRANNNNN"
+  ],
+  "action": "DescribeAccessKeys",
+  "console": "testcloud",
+  "controller": "pitrix",
+  "limit": 20,
+  "offset": 0,
+  "owner": "usr-Bzp32eZ1",
+  "root_user": "admin",
+  "search_word": "test",
+  "status": [
+    "active"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "access_key_set": [
+    {
+      "access_key_id": "ZQUAVQVTTGJBSSSSPOWW",
+      "access_key_name": "pitrix access key for mgmt",
+      "console_id": "testingcloud",
+      "controller": "pitrix",
+      "create_time": "2022-09-29T09:11:43Z",
+      "description": "PiFLi9yIcp3vHHWyGWHsGar1JHTFr3YRuaaaPg2Y",
+      "ip_white_list": "",
+      "owner": "usr-Bzp32eZ1",
+      "root_user_id": "usr-Bzp32eZ1",
+      "secret_access_key": "PiFLi9yIcp3vHHWyGWHsGar1JHTFr3YRuaaaPg2Y",
+      "status": "active",
+      "status_time": "2022-09-29T09:11:43Z"
+    }
+  ],
+  "action": "DescribeAccessKeysResponse",
+  "ret_code": 0,
+  "total_count": 1
+}
+----

@@ -1,0 +1,24 @@
+---
+title: 设置卷恢复并发数
+weight: 2
+---
+
+== 功能描述
+
+Portal 管理平台支持修改卷恢复并发数，其中卷恢复并发数是指系统在执行 Recovery Volume 恢复某一副本时，恢复 block 块的并发度。
+
+== 操作步骤
+. 登录 link:../../../login[Portal 管理界面]。
+
+. 在**总览**页面，点击用户名，选择**系统设置**，即可进入系统设置页面。
++
+image::/images/neonsan/portal_system_set.png[]
+
+. 在系统设置页面，选择**集群设置**，点击**卷恢复并发数**旁的下拉框，选择并发数目，目前支持的并发数为 1～4。
++
+image::/images/neonsan/portal_vol_iis_1.png[]
+
+. 修改卷恢复并发数后，在左侧导航栏内选择**运维管理** > **操作记录**，可看到 recovery.parallel 的参数值已被修改。
++
+image::/images/neonsan/portal_vol_iis_2.png[]
+

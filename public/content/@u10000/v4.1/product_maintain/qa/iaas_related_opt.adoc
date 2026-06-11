@@ -1,0 +1,289 @@
+---
+title: IaaS 相关操作
+weight: 1
+---
+
+== 查询 IaaS 节点服务器
+
+. 登录 IaaS 集群的 FirstBox。
+
+. 查看 Webservice 节点服务器。以下命令行回显的字段中：xxx.xx.xx.xx 表示对应的节点服务器 IP。
++
+[source,shell]
+----
+# cat /etc/hosts | grep web
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-webservice
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-webservice0
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-webservice1
+----
+
+. 查看 Proxy 节点服务器。以下命令行回显的字段中：xxx.xx.xx.xx 表示对应的节点服务器 IP。
++
+[source,shell]
+----
+# cat /etc/hosts | grep proxy
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-proxy
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-proxy0
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-proxy1
+----
+
+. 查看 DNS 节点服务器。以下命令行回显的字段中：xxx.xx.xx.xx 表示对应的节点服务器 IP。
++
+[source,shell]
+----
+# cat /etc/hosts | grep dns
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-dnsmaster
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-dnsmaster0
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-dnsmaster1
+----
+
+. 根据以上查询信息，从 FirstBox 节点跳转至相应的节点服务器：
++
+[source,shell]
+----
+# ssh guangd1a-dnsmaster0
+----
+
+== 查看 IaaS 集群配置文件
+
+. 登录 IaaS 集群的 FirstBox。
+
+. 查看如下配置文件。命令行中文件名后缀 `xxxx` 需根据实际情况进行替换。
++
+[source,shell]
+----
+# cat /pitrix/conf/variables/global/server.yaml.xxxx
+----
+
+== 查看 IaaS 日志文件
+
+. 登录 IaaS 集群的 FirstBox。
+
+. 日志文件存放于路径：
++
+[source,shell]
+----
+# ls /pitrix/log/
+……
+fg_server.log 
+fg_server.log.1 
+fg_server.log.wf 
+……
+----
++
+**命令回显说明**
+
+* `.log` 后缀的日志文件为详细日志内容。
+* `.wf` 后缀的日志文件为筛选出来的异常日志。
+
+== 查看 IaaS 的 Region 信息
+
+. 登录 IaaS 集群的 FirstBox。
+
+. 通过 IaaS 的 FirstBox，登录至 IaaS 的 Webservice 节点。可参考link:#_查询_iaas_节点服务器[前文内容]。
+
+. 执行如下命令行，查看 `region_id` 与 `zone_id`：
++
+[source,shell]
+----
+# cd /pitrix/cli/
+# ./describe-zones
+----
+
+. 记录命令回显结果中的 `region_id` 与 `zone_id`。回显内容如下图所示：
++
+image::/images/u10000/iaas_related_1.png[iaas_related_1,100%]
+
+== 获取 QingStor 帐户信息
+
+部署 IaaS 时，默认会创建 QingStor 帐户。如需查看 IaaS 已创建的 QingStor 帐户信息，用于 {product_name} 访问 IaaS，则可执行如下步骤进行查询：
+
+. 登录 IaaS 集群的 FirstBox。执行如下命令行，查看 IaaS 的 Pg Master 节点信息。
++
+[source,shell]
+----
+# cat /etc/hosts | grep pgserver
+----
+
+. 通过 IaaS 的 FirstBox，登录至 IaaS 的 Pg Master 节点。
+
+. 执行如下命令行，查看 `access_key_id`、`secret_access_key` 与 `root_user_id`：
++
+[source,shell]
+----
+># psql -d account
+># select access_key_id,secret_access_key,status,owner,root_user_id from access_key where owner='usr-qingstor';
+ 
+    access_key_id     |                        secret_access_key                         | status |    owner     | root_user_id
+----------------------+------------------------------------------------------------------+--------+--------------+--------------
+ ERRFTAVLxxxxxMSBXFZH | 1tFAi0cpcdoZVLYrAMpzsYm+Lf//cur9xxxxxxxxxxxRcvDHE2frL1yHxJt9sfWd | active | usr-qingstor | usr-qingstor
+----
++
+**命令回显说明：**
++
+[cols="2,6", options="header"]
+|===
+| 参数 | 说明 
+| status | 当前账户状态。参数值为 `active`，说明当前账户可用。
+| secret_access_key | 密钥。 
+| root_user_id | 用户 ID 
+| access_key_id | 访问密钥。 
+| owner | 当前 Access Key 所属账户。参数值为 `usr-qingstor`，说明当前查询内容为 QingStor 账户信息。
+
+|===
+
+. 以上命令行回显内容中，若查询出来多对 `usr-qingstor` 的账号信息，且 status 均为 `active`，那么，用户可任意选用一组账号信息，否则就选 `active` 状态的账号信息。
+
+// . 登录 IaaS 集群的 FirstBox。
+
+// . 通过 IaaS 的 FirstBox，登录至 IaaS 的 Webservice 节点。可参考link:#_查询_iaas_节点服务器[前文内容]。
+
+// . 执行如下命令行，查看 IaaS 创建的 QingStor 帐户信息：
+// +
+// [source,shell]
+// ----
+// # cd /pitrix/cli/
+// # /pitrix/cli/describe-access-keys  -o usr-qingstor 
+// ----
+
+// +
+// **命令行回显：**
+// +
+// [source,shell]
+// ----
+// recv: {
+//        "status":"active",
+//        "secret_access_key":"n0kooofcyJaXQGzvrmBxFKei3z7Mxbvl8LP0TvHa",
+//        "root_user_id":"usr-qingstor",
+//        "access_key_id":"ABBWUWSVMDAMYLGCHMSE",
+//        "owner":"usr-qingstor",
+//     }
+// ----
+
+
+// +
+// **回显字段说明：**
+// +
+
+// [cols="2,6", options="header"]
+// |===
+
+// | 参数 | 说明 
+
+// | status | 当前账户状态。参数值为 `active`，说明当前账户可用。
+// | secret_access_key | 密钥。 
+// | root_user_id | 用户 ID 
+// | access_key_id | 访问密钥。 
+// | owner | 当前 Access Key 所属账户。参数值为 `usr-qingstor`，说明当前查询内容为 QingStor 账户信息。
+
+// |===
+
+// . 以上命令行回显内容中，若查询出来多对 `usr-qingstor` 的账号信息，且 status 都是 `active`，那么，用户可任意选用一组账号信息，否则就选 `active` 状态的账号信息。
+
+// === 未创建 QingStor 帐户
+
+
+// 若在 IaaS 环境查询不到 QingStor 的账号信息，需要我们根据如下流程，创建一个 QingStor 账户。再进行查看该 QingStor 账户信息。
+
+
+// . 登录 IaaS 集群的 FirstBox。
+
+// . 通过 IaaS 的 FirstBox，登录至 IaaS 的 Webservice 节点。可参考link:#_查询_iaas_节点服务器[前文内容]。
+
+// . 执行如下命令行，创建 QingStor 帐户信息：
+// +
+// [source,shell]
+// ----
+// # cd /pitrix/cli/
+// # ./create-user --email qingstor@<iaas domain> --passwd "zhu88jie" --zones "<region id>"
+// ----
+
+// +
+// **命令行参数说明：**
+
+// * 命令行中的 `<iaas domain>` 是 IaaS 环境的域名，需根据实际情况进行填写。
+// * 命令行中的 `<region id>`，是 IaaS 环境的 Region ID，需根据实际情况进行填写。若当前 IaaS 环境不为 Region 模式，则命令行中直接去掉 `"<region id>"` 字段。
+
+// . 记录命令行回显内容中的 `user_id`。
+
+// +
+// [source,shell]
+// ----
+// recv: {
+//     "action":"CreateUserResponse",
+//     "user_id":"usr-WHeUcbFx",
+//     "email":"qingstor@<iaas domain>",
+//     "ret_code":0
+// }
+// ----
+
+// . 将 QingStor 用户标记为最高星级用户，并生成权限信息。
+// +
+// [source,shell]
+// ----
+// # cd /pitrix/cli/
+// # ./modify-user-attributes -u <qingstor user id> -r global_admin -P 10
+// # ./grant-zone-access --user <qingstor user id> --zone <region id>
+// ----
+
+// +
+// **命令行参数说明：**
+
+// * 命令行中的 `<qingstor user id>`，需根据创建用户时返回的 `user_id` 进行填写。
+// * 命令行中的 `<region id>`，是 IaaS 环境的 Region ID，需根据实际情况进行填写。若当前 IaaS 环境不为 Region 模式，则命令行中直接去掉 `"<region id>"` 字段。
+
+
+== 查询 Console 相关信息
+
+. 登录 IaaS 集群的 FirstBox。
+
+. 通过 IaaS 的 FirstBox，登录至 IaaS 的 Pg Master 节点。可参考link:#_查询_iaas_节点服务器[前文内容]。
+
+. 执行如下命令行，查看 `console_id` 与 `console_name`：
++
+[source,shell]
+----
+# su - postgres
+$ psql
+psql (9.3.5)
+Type "help" for help.
+postgres=# \c account;
+account=# select * from console;
+ console_id | console_name | description | protocol |     domain      |   console_domain    |  zones  |        create_time
+------------+--------------+-------------+----------+-----------------+---------------------+---------+----------------------------
+ console    | console      | WebConsole  | http     | www.qingstor.me | console.qingstor.me | example | 2017-11-14 16:27:53.628098
+(1 row)
+----
+
++
+**命令回显说明：**
+
+* 如输出所示，当前环境中，`console_id` 为 `console`。
+* 当前环境中，`console_name` 为 `console`。
+* 当前环境中，`console_domain` 为 `console.qingstor.me`。
+
+. 执行如下命令行，查看 Console Key 相关信息：
++
+[source,shell]
+----
+# su - postgres
+$ psql
+psql (9.3.5)
+Type "help" for help.
+postgres=# \c account;
+account=# select console_key_id,secret_console_key from console_key;
+    console_key_id    |                        secret_console_key
+----------------------+------------------------------------------------------------------
+ VAECBCIGYFHHHGJMZTND | dffbcpx98TzKCpU7EvI47oH86cmmZf6NK6Oh8fZqoD25Zpz3hNuPSn5BOHOtZJmV
+(1 row)
+----
+
++
+**命令回显说明：**
+
+* 如输出所示，当前环境中，`console_key_id` 为 `VAECBCIGYFHHHGJMZTND`。
+* 当前环境中，`secret_console_key` 为 `dffbcpx98TzKCpU7EvI47oH86cmmZf6NK6Oh8fZqoD25Zpz3hNuPSn5BOHOtZJmV`。
+
+
+
+

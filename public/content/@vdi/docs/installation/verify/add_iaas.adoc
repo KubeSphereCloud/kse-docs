@@ -1,0 +1,70 @@
+---
+title: 添加虚拟化平台
+weight: 20
+---
+
+虚拟化平台的作用是对基础设施资源（包括服务器、网络、磁盘等物理资源）进行虚拟化，并供云桌面使用。
+
+在 QingCloud 桌面云平台的**虚拟化平台**中配置{platform_name_cn}后，可使用{platform_name_cn}中的资源创建云桌面。
+
+== 前提条件
+
+* 已在{platform_name_cn}上创建 API 密钥（包含 Access Key ID 和 Access Key Secret）。
+* 已获取{platform_name_cn}的访问 URL 和 API 调用 URL。
+* 已成功登录 QingCloud 桌面云平台。
+
+== 操作步骤
+. 登录 QingCloud 桌面云平台。
+. 在左侧的菜单栏中，选择 **VDI** > **虚拟化平台**，进入虚拟化平台页面。
+. 点击**+虚拟化平台**，进入添加虚拟化平台页面。
++
+image::/images/vdi/installation/verify_add_iaas_01.png[]
+. 按照以下参数说明填写虚拟化平台信息。
++
+[cols='1,1,2a,2a'] 
+|===
+| 参数 | 是否必选 | 说明 | 填写示例
+
+| 虚拟化平台名称 | 必选 | 自定义虚拟化平台名称，以供创建云桌面时选择。 | 青云
+| 虚拟化平台类型 | 必选 | 选择 QingCloud。 | QingCloud
+
+| 管理平台URL 
+| 必选 |{platform_name_cn}的访问 URL。
+
+include::../../../../_components/note_in_table.adoc[]
+若已link:../../deploy/hosts[添加 hosts]，则可填写域名。反之，则填写 IP。 
+include::../../../../_components/footer_in_table.adoc[]
+
+| 域名填写示例：http://console.pekdemo.com
+
+IP 填写示例：http://36.x.x.36:80
+
+| API 调用 URL 
+| 必选 |{platform_name_cn}的 API 调用 URL。
+
+include::../../../../_components/note_in_table.adoc[]
+若已link:../../deploy/hosts[添加 hosts]，则可填写域名。反之，则填写 IP。 
+include::../../../../_components/footer_in_table.adoc[]
+
+| 域名填写示例：http://api.pekdemo.com
+
+IP 填写示例：http://36.x.x.36:7777
+
+| Access Key ID 
+| 必选 |{platform_name_cn}的访问密钥 ID。
+
+include::../../../../_components/note_in_table.adoc[]
+生成 API 密钥的账户在{platform_name_cn}中的资源权限是桌面云平台中创建云桌面所能使用的资源范围。
+include::../../../../_components/footer_in_table.adoc[]
+ 
+| -
+
+| Access Key Secret | 必选 |{platform_name_cn}的访问密钥 Secret。 | -
+| 所属区域 | 必选 |{platform_name_cn}所属区域。 | default_domain
+| 备注 | 可选 | 虚拟化平台的描述信息。 | -
+|===
+
+. 点击 **Access Key Secret** 右侧的**连接测试**，验证 URL 和密钥是否配置正确。
+. 验证通过后，点击左下方的**立即创建**，成功添加虚拟化平台。
++
+image::/images/vdi/installation/verify_add_iaas_02.png[]

@@ -1,0 +1,29 @@
+---
+title: "执行更新命令时报错"
+weight: 80
+---
+
+== 问题现象
+
+执行以下命令时，提示“updating [poc1a-proxy0 ] with [pitrix-global-conf ] .. Error !”。
+[source,language,attributes]
+----
+/pitrix/upgrade/build_global_conf.sh
+/pitrix/upgrade/update.sh -f all pitrix-global-conf 
+----
+
+image::/images/ep_offline/installation/faq_faq_08.png[]
+
+== 可能原因
+
+FirstBox 节点的 root 权限被修改，导致从其他节点无法免密登录 FirstBox 节点。
+
+可以在 webservice 节点，执行 `apt-get update` 命令访问 FirstBox 节点，检测节点是否可以正常免密连接 FirstBox 节点。
+
+== 解决方法
+
+执行以下命令，修改权限。
+[source,shell]
+----
+root@qingcloud-firstbox:~# chmod 700 /root
+----

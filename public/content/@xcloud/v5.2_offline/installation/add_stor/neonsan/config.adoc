@@ -1,0 +1,80 @@
+---
+title: "配置 NeonSAN"
+weight: 30
+---
+
+== 获取 NeonSAN 的配置信息
+. 登录 NeonSAN 的任一物理节点。
+. 执行以下命令，获取 NeonSAN 的 zookeeper 地址和集群名称。
++
+[source]
+----
+cat /etc/neonsan/center.conf
+----
++
+回显示例如下：
++
+image::/images/ep_offline/installation/add_stor_neonsan_config_01.png[,60%]
+
+== 修改 NeonSAN 配置
+
+. 登录企业云平台的 FirstBox。
+. 执行以下命令，修改 /pitrix/conf/variables/variables.yaml，配置 NeonSAN 参数。
++
+[source]
+----
+vi /pitrix/conf/variables/variables.yaml
+----
++
+**修改如下参数**：
++
+[cols='1,2'] 
+|===
+| 参数 | 说明 
+
+| support_neonsan | 配置为 1。
+| neonsan_zookeeper_ips | 配置 NeonSAN 的 zookeeper 地址。
+| neonsan_cluster_name | 配置 NeonSAN 集群名称，默认为 neonsan。
+|===
++
+
+include::../../../../../_components/note.adoc[]
+* 若没有对应参数，则按照如下配置示例的格式添加对应参数。
+* 若安装企业云平台时已配置 NeonSAN 参数，此步骤仅需查看并确保 neonsan_zookeeper_ips 和 neonsan_cluster_name 都配置正确即可。
+
+include::../../../../../_components/table_footer.adoc[]
++
+**配置示例**：
++
+[source,yaml]
+----
+ZONE_ID:
+  support_neonsan: 1
+  ...
+  neonsan:
+    neonsan_zookeeper_ips:
+      - '172.30.80.3'
+      - '172.30.80.4'
+      - '172.30.80.5'
+    neonsan_cluster_name: 'neonsan'
+----
+. 执行以下命令，刷新 NeonSAN 配置到 hyper、vbr、webservice 节点。
++
+[source]
+----
+/pitrix/build/build_pkgs.py -p pitrix-neonsan-conf
+/pitrix/upgrade/update.sh webservice,vbr,hyper pitrix-neonsan-conf,pitrix-neonsan-tool
+----
+. 登录任意几个 Hyper 或 VBR 节点，执行以下命令，检查配置是否正确。
++
+[source]
+----
+qbd --version
+neonsan list_store && neonsan list_ssd && neonsan list_port && neonsan list_pool && neonsan list_parameter
+----
+回显信息如下，表示配置正确。
++
+image::/images/ep_offline/installation/add_stor_neonsan_config_02.png[,60%]
++
+image::/images/ep_offline/installation/add_stor_neonsan_config_03.png[]
+

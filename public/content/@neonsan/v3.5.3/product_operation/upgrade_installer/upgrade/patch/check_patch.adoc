@@ -1,0 +1,45 @@
+---
+title: "Patch 升级后检查"
+weight: 2
+---
+
+. 登录至 FirstBox。
+. 查看已升级成功的补丁脚本列表。
++
+[,shell]
+----
+cat /qingstor/log/upgrade/patched_history
+----
++
+回显示例：
++
+[,shell]
+----
+2023-07-25 11:33:13.659021 [setup_ring_buffer_20230710.sh]
+2023-07-25 12:38:04.684708 [patch_prometheus_20230711.sh]
+----
+
+. 查看需手动重启相关服务和节点。
++
+include::../../../../../../_components/note.adoc[]
+某些补丁可能会更新集群某些服务或节点配置，为使其生效需重启相应服务或节点。
+include::../../../../../../_components/table_footer.adoc[]
++
+[,shell]
+----
+cat /qingstor/log/upgrade/restart_required
+----
++
+回显示例：
++
+[,shell]
+----
+[2024-01-23 17:47:14] [create_mysql_tmp_dir_20240123.sh] required: restart qingstor-mysql takes effect
+[2024-01-23 17:47:21] [create_mysql_tmp_dir_20240123.sh] required: restart neonsan-mysql takes effect
+----
+
+. 根据上一步查询结果，对相应的服务或节点进行重启操作。
+
+
+
+

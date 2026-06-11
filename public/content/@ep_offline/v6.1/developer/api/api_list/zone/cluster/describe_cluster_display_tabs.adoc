@@ -1,0 +1,106 @@
+---
+title: 查询集群详情页展示（DescribeClusterDisplayTabs）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cluster
+| String
+| true
+| 集群ID
+
+| display_tabs
+| String
+| true
+| tab
+
+| zone
+| String
+| true
+| 可用区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cluster_set
+| Array
+| false
+| 集群信息
+
+| display_tabs
+| Object
+| false
+| 展示的tab
+
+| display_tabs.data
+| Array
+| false
+| 数据
+
+| display_tabs.labels
+| Array
+| false
+| 标签
+
+| ret_code
+| String
+| false
+| 返回状态码
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeClusterDisplayTabs",
+  "cluster": "cl-qafows1c",
+  "display_tabs": "node_details",
+  "zone": "pek3"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeClusterDisplayTabsResponse",
+  "cluster_set": [],
+  "display_tabs": {
+    "data": [
+      [
+        "cln-ryml6okz",
+        "Slave",
+        "Main Instance"
+      ],
+      [
+        "cln-8cdv7e1u",
+        "Master",
+        "Main Instance"
+      ]
+    ],
+    "labels": [
+      "node-id",
+      "node-role",
+      "instance-role"
+    ]
+  },
+  "ret_code": 0,
+  "trace_id": "KuXZnUJN"
+}
+----

@@ -1,0 +1,84 @@
+---
+title: 创建应用补丁（CreateAppPatch）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| true
+| 应用ID
+
+| content
+| String
+| true
+| 补丁内容
+
+| description
+| String
+| true
+| 补丁描述
+
+| name
+| String
+| true
+| 补丁名称
+
+| version_id
+| String
+| true
+| 版本ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| patch_id
+| String
+| false
+| 补丁ID
+
+| ret_code
+| String
+| false
+| 返回状态码
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateAppPatch",
+  "app_id": "app-aj1lvarc",
+  "content": "{\"resource_type\":\"app_patch\",\"filext\":\"zip\",\"category\":\"resource_kit\",\"sub_category\":\"\",\"attachment_type\":\"archive\",\"attachment_content\":\"文件base64编码，省略。。。\",\"filename\":\"newtesting02.zip\",\"filesize\":2500}",
+  "description": "test patch",
+  "name": "test",
+  "version_id": "appv-1ida8dsl"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateAppPatchResponse",
+  "patch_id": "appp-ctb52rhz",
+  "ret_code": 0,
+  "trace_id": "JvNos0Bg"
+}
+----

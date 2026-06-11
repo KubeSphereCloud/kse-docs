@@ -1,0 +1,92 @@
+---
+title: "查看用户详情"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 访问控制, 用户, 查看用户详情"
+description: "介绍如何查看用户详情。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 7572c94899ca45b79c796bcc793b4962
+:ks_xref_id: 3324e5a9bcda4d559b9c3276e404d11c
+:ks_comp: ../../../../components/
+:ks_title: 查看用户详情
+:ks_keywords: Kubernetes, {ks_product}, 访问控制, 用户, 查看用户详情
+:ks_description: 介绍如何查看用户详情。
+:ks_weight: 03
+:ks_icon:
+:ks_menu: **平台管理 > 访问控制**
+:ks_navigation: **用户**
+:ks_permission: **用户查看**
+
+
+本节介绍如何查看用户详情。
+
+
+== 前提条件link:[id=b60d198d61f549aba4ae71fe099219de]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=35c760462b9449a0973c5019f5483eef]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/accessControl/users/users-para-openDetailsPage.adoc[]
+
++
+
+. 在用户详情页面左侧的**属性**区域查看用户的资源属性。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|平台角色
+|用户的平台角色。
+
+|邮箱
+|用户的邮箱地址。
+
+include::../../../../_custom/platformManagement/accessControl/users/users-para-lastLogin.adoc[]
+|===
+--
+
+. 在用户详情页面右侧的**登录历史**页签查看用户的登录历史记录。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|时间
+|用户的登录时间。
+
+|状态
+|用户是否登录成功。
+
+|源 IP 地址
+|用户登录{ks_product_left} Web 控制台的客户端 IP 地址。
+
+|原因
+|如果用户登录失败，显示登录失败的原因。
+|===
+--

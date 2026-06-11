@@ -1,0 +1,43 @@
+---
+title: "Assign Pod IP Pools to Projects"
+keywords: "Kubernetes, {ks_product-en}, cluster management, network, pod IP pool, prohibit automatic allocation"
+description: "Introduce how to assign pod IP pools to projects."
+weight: 04
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Pod IP Pools**
+
+
+This section introduces how to assign pod IP pools to projects.
+
+If a project is assigned to a pod IP pool, when creating workloads and jobs in the project, if a pod IP pool is not specified, the pods in the project will be assigned to the default pod IP pool.
+
+If a project is not assigned to any pod IP pool, i.e., the project is not bound to any pod IP pool, when creating workloads and jobs in the project, if a pod IP pool is not specified, the pods in the project will be assigned to any available pod IP pool.
+
+One IP pool can be assigned to multiple projects, and one project can be bound to multiple IP pools.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeSphere Network** should have been installed and enabled.
+
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
+. Click the name of a pod IP pool in the pod IP pool list to open its details page.
+
+. Click **Add Project** under the **Projects** tab, select a project from the dropdown list, and then click **OK**.
+
+. Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash,18,18] on the right side of the project to unbind the pod IP pool from the project. Click **Remove All** in the upper right corner to unbind the pod IP pool from all assigned projects.
++
+After removing a project, the project will no longer be subject to the resource allocation restrictions of the IP pool, and the pods in the project that have already been assigned IP addresses will not be affected.

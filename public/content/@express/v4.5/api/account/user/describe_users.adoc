@@ -1,0 +1,240 @@
+---
+title: 获取账户信息（DescribeUsers）
+weight: 19
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| activated
+| Integer
+| false
+| 是否激活
+
+| channel
+| Array
+| false
+| 
+
+| console
+| String
+| false
+| 控制台ID
+
+| currency
+| Array
+| false
+| 货币
+
+| display_attributes
+| Array
+| false
+| 
+
+| email
+| Array
+| false
+| 邮件
+
+| end_create_time
+| String
+| false
+| 结束创建时间
+
+| end_rating
+| Integer
+| false
+| 最高优惠价格
+
+| excluded_users
+| Array
+| false
+| 排除的用户
+
+| limit
+| Integer
+| false
+| 查询个数
+
+| offset
+| Integer
+| false
+| 偏移量
+
+| paid_mode
+| Array
+| false
+| 付款方式
+
+| phone
+| Array
+| false
+| 电话
+
+| preference
+| Integer
+| false
+| 
+
+| rating
+| Array
+| false
+| 优惠价格列表
+
+| reverse
+| Integer
+| false
+| 是否倒序排序
+
+| role
+| Array
+| false
+| 角色
+
+| root_user
+| Array
+| false
+| 根用户
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| sort_key
+| String
+| false
+| 排序字段
+
+| start_create_time
+| String
+| false
+| 开始创建时间
+
+| start_rating
+| Integer
+| false
+| 最低优惠价格
+
+| status
+| Array
+| false
+| 状态
+
+| user_name
+| String
+| false
+| 用户名称
+
+| user_type
+| Array
+| false
+| 用户类型
+
+| users
+| Array
+| false
+| 用户列表
+
+| verbose
+| Integer
+| false
+| 是否展示冗余信息
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| total_count
+| String
+| false
+| 查询总数
+
+| user_set
+| String
+| false
+| 查询用户结果列表
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "activated": 0,
+  "channel": [
+    "channel_0"
+  ],
+  "console": "console_id_0",
+  "currency": [
+    "USD"
+  ],
+  "display_attributes": [
+    "phone"
+  ],
+  "email": [
+    "474********"
+  ],
+  "end_create_time": "2022-08-17T06:16:59Z",
+  "end_rating": 1,
+  "excluded_users": [
+    "nobody"
+  ],
+  "limit": 10,
+  "offset": 0,
+  "paid_mode": [
+    "pre-paid"
+  ],
+  "phone": [
+    "157********"
+  ],
+  "preference": 0,
+  "rating": [],
+  "reverse": 0,
+  "role": [
+    "administrator"
+  ],
+  "root_user": [
+    "root_user"
+  ],
+  "search_word": "phone_143",
+  "sort_key": "user_name",
+  "start_create_time": "2022-08-17T06:15:59Z",
+  "start_rating": 0,
+  "status": [
+    "active"
+  ],
+  "user_name": "admin",
+  "user_type": [
+    "root_user",
+    "normal_user"
+  ],
+  "users": [
+    "admin",
+    "normal_user"
+  ],
+  "verbose": 0
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeUsersResponse",
+  "ret_code": 0,
+  "total_count": 0,
+  "user_set": []
+}
+----

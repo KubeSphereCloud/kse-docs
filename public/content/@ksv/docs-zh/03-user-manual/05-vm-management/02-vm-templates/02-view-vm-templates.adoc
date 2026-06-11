@@ -1,0 +1,74 @@
+---
+title: "查看虚拟机模板列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 模板, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看虚拟机模板列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 8f6f29e4164f4fb792d9bb90e38a1ee6
+:ks_xref_id: aac06af55a724377b44c46a86cb4688a
+:ks_comp: ../../../../components/
+:ks_title: 查看虚拟机模板列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看虚拟机模板列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 模板, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看虚拟机模板列表。
+
+include::../../../../_custom/vms/vm-template-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=dfb8c87d91014734b31dfe678ea57024]
+
+include::../../../../_custom/vms/vm-template-steps.adoc[]
++
+--
+虚拟机模板列表展示当前项目中的所有虚拟机模板，并提供以下信息：
+
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|虚拟机模板的自定义名称。
+
+include::../../../../_custom/networks/naming-convention.adoc[]
+
+|ID
+|虚拟机模板在系统中的通用唯一标识符，由系统自动分配。
+
+|操作系统
+|虚拟机模板对应的操作系统。将光标移动到操作系统图标上可查看操作系统的具体类型和版本。
+
+|CPU
+|模板定义的虚拟机 CPU 核心数。
+
+|内存
+|模板定义的虚拟机内存配置。
+
+|系统盘
+|模板定义的虚拟机系统盘大小。
+
+|是否共享
+|虚拟机模板的共享属性。开启共享后，其他项目的用户可复制该模板。
+
+|所属项目
+|虚拟机模板所在的项目名称。
+
+|创建时间
+|虚拟机模板的创建时间。
+|===
+--
+
+. （可选）点击虚拟机模板列表上方的搜索框并设置搜索条件，可按名称或 ID 搜索虚拟机模板。例如，**名称:ab** 表示搜索名称包含字符串 **ab** 的虚拟机模板。
+
+. （可选）在虚拟机模板列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。
+

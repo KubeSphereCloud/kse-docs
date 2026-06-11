@@ -1,0 +1,31 @@
+---
+title: "查看 QBD 日志文件"
+weight: 8
+---
+
+
+. 逐个登录安装有 QBD 客户端的节点。 
+
+. 内核态日志在 kernel 日志里。如 ubuntu 系统，执行如下命令查看。 
++
+[,shell]
+----
+vi /var/log/kern.log
+----
++
+include::../../../../../_components/note.adoc[]
+部分错误日志关机字解释及建议，请参考“本手册：查看内核日志文件”相关内容。 
+include::../../../../../_components/table_footer.adoc[]
+
+. 用户态日志在 syslog 日志里。如 ubuntu 系统，执行如下命令查看。 
++
+[,shell]
+----
+vi /var/log/syslog
+----
++
+include::../../../../../_components/note.adoc[]
+部分错误日志关机字解释及建议，请参考“本手册：查看服务日志”相关内容。 
+include::../../../../../_components/table_footer.adoc[]
+
+

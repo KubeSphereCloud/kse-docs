@@ -1,0 +1,24 @@
+---
+title: "技术架构"
+weight: 2
+---
+
+AppCenter 包含开发者控制台、用户控制台及调度系统三大部分，其技术架构图如下。
+
+image::/images/ep_offline/ep_twp/appcenter_archit.png[]
+
+个人用户和企业用户可以在 AppCenter 开发者控制台开发供自己内部使用的 App，最终用户可以在 AppCenter 应用中心浏览、购买服务商提供的应用并创建集群。
+
+AppCenter 从云化一个应用到应用部署为集群，其实现原理如下：
+
+. 应用开发。
++
+开发应用时，除了填写必要的应用信息外，还需要上传一个配置包，该配置包含 `config.json`，`cluster.json.mustache` 和``国际化语言包``。这些文件用于描述集群实例信息。
+
+. 应用创建。
++
+使用者创建 App 实例时，青云的调度系统会根据配置包定义的信息创建基础资源，然后注册集群信息到青云为每个 VPC 或者 VBC 环境下部署的 metadata service 中。
+
+. 应用管理。
++
+集群云服务器通过 confd （配合 toml，tmpl 模板配置文件系统）进程检查 metadata service 的变化，来刷新应用配置文件，并执行相应的 reload 操作（比如启动/重启应用服务）。

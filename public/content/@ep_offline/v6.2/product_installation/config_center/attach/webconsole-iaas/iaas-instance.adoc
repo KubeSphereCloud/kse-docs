@@ -1,0 +1,73 @@
+---
+title: iaas-instance
+weight: 10
+---
+
+
+[cols='1,2,2'] 
+|===
+| 参数名称  | 参数说明 | 
+
+
+
+
+| max_count	| 最大创建数量	| 默认为10
+| cpu_filters	| cpu的过滤选项	| 
+
+
+
+| memory_filters	| 内存的过滤选项	
+
+
+| 配置的值为M，显示的值为G
+| default_login_type	| 默认登陆方式	
+
+
+| 登录方式的第一优先级是判断所选镜像是否支持设置某个登陆方式，在所选镜像支持的情况下才会启用配置的默认登录方式。
+
+如果镜像两个登录方式都不支持设置，则创建时默认参数为passwd，且采用镜像自身的默认密码。
+
+此配置默认值为 passwd。
+
+| os_disk_size	| 系统盘大小配置，可配置系统盘最小值、最大值、默认值以及调整时的步长。	
+
+
+| 系统盘大小的调整逻辑第一优先级为当前选择的镜像，可调整的最小值必须大于等于所选镜像的size字段（如果配置中心配置的最小值小于当前镜像的size字段，则取镜像的size字段值，否则取配置值）。
+
+当所选镜像的features_supported.root_fs_rw_offline===1时，不允许调整系统盘大小，系统盘大小为镜像的size字段值。
+
+| unsupport_bm1_os_disk	| bm1 规格不支持调整系统盘大小（不显示系统盘）	| bm1裸金属的系统盘是固定的，没有调整的意义
+| tag_background	| 配置产品中心定义的规格标签的背景色（详细见用例）	| 
+
+
+
+| show_instance_bandwidth	是否显示规格列表的带宽列	
+
+
+
+support_repl_count_classes	主机规格的副本配置（系统盘）	
+
+
+系统盘的副本数量和数据盘的副本数量配置是独立的，此处仅为系统盘的副本数量配置
+max_volume_count	支持挂载的最大数据盘数量	
+
+
+
+max_nic_count	支持挂载的最大附加网卡数量	
+
+
+
+default_eip_bandwidth	默认带宽	
+
+
+默认4
+default_eip_group	默认创建的eip所在的eip组	
+默认eipg-00000000
+support_cpu_topology	是否支持调整cpu拓扑结构	
+
+
+
+default_cpu_topology_rule
+
+默认的cpu拓扑结构规则	同上	在开启cpu拓扑接口功能时才生效
+|===

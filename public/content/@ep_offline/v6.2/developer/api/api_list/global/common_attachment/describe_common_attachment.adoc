@@ -1,0 +1,179 @@
+---
+title: 查询一般附件（DescribeCommonAttachment）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| attachment_ids
+| Array
+| false
+| 附件id列表
+
+| category
+| String
+| false
+| 目录
+
+| content_keys
+| Array
+| false
+| 内容关键字
+
+| limit
+| Integer
+| false
+| 
+
+| offset
+| Integer
+| false
+| 
+
+| owner
+| String
+| false
+| 拥有者
+
+| resource_id
+| String
+| false
+| 资源ID
+
+| resource_type
+| String
+| false
+| 资源类型
+
+| reverse
+| Integer
+| false
+| 是否反转结果
+
+| sort_key
+| String
+| false
+| 排序键
+
+| sub_category
+| String
+| false
+| 子目录
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| attachment_set
+| Array
+| false
+| 附件详情集合
+
+| attachment_set[].attachment_id
+| String
+| false
+| 附件id
+
+| attachment_set[].attachment_type
+| String
+| false
+| 附件类型
+
+| attachment_set[].category
+| String
+| false
+| 目录
+
+| attachment_set[].console_id
+| String
+| false
+| 控制台ID
+
+| attachment_set[].filename
+| String
+| false
+| 文件名称
+
+| attachment_set[].filesize
+| Integer
+| false
+| 文件大小
+
+| attachment_set[].owner
+| String
+| false
+| 拥有者
+
+| attachment_set[].resource_id
+| String
+| false
+| 资源id
+
+| attachment_set[].resource_type
+| String
+| false
+| 资源类型
+
+| attachment_set[].root_user_id
+| String
+| false
+| 主账户id
+
+| attachment_set[].sub_category
+| String
+| false
+| 子目录
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeCommonAttachment",
+  "attachment_ids": [
+    "ca-6n9q88u9"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeCommonAttachment",
+  "attachment_set": [
+    {
+      "attachment_id": "ca-6n9q88u9",
+      "attachment_type": "thumbnail",
+      "category": "screenshot",
+      "filename": "QKE.png",
+      "filesize": 0,
+      "owner": "admin",
+      "resource_id": "app-cmgbd5k2",
+      "resource_type": "app_approved",
+      "sub_category": ""
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

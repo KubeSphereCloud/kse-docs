@@ -1,0 +1,147 @@
+---
+title: "创建 FirstBox"
+weight: 1
+---
+
+FirstBox 是平台安装节点，用于下发配置和安装包至各节点服务器。用户可以选择任一 KS 节点作为 FirstBox 宿主机。
+
+== 配置免密访问
+
+安装企业云平台过程中，会自动关闭所有节点的密码登录，请在首次安装时，配置本地主机与待部署环境的节点服务器之间的免密访问。具体操作步骤如下。
+
+// include::../../../../../_components/attention.adoc[]
+
+// 若用户需要保留该 KS 节点的密码登录方式，请在成功创建 FirstBox 后修改 `/etc/ssh/sshd_config` 文件，把 `PasswordAuthentication no` 改为 `PasswordAuthentication yes`，然后执行命令 `systemctl restart ssh`，重启 ssh 服务。**请注意，开启密码登录方式为高危操作，将带来安全风险，请谨慎操作。**
+
+// include::../../../../../_components/table_footer.adoc[]
+
+. 在本地主机，执行如下命令行，创建密钥。若用户已有密钥，可略过本步骤。
++
+[source,shell]
+----
+# cd /root/.ssh
+# ssh-keygen -t rsa -P "" -f '/root/.ssh/id_rsa'
+----
+
+. 登录待部署环境的 FirstBox 的宿主机。
++
+include::../../../../../_components/note.adoc[]
+用户名密码为安装操作系统时设置的用户名和密码，默认为 `yop/zhu1241jie`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，切换到 root 用户。
++
+[source,shell]
+----
+# sudo su
+----
+. 将本地主机的公钥 `/root/.ssh/id_rsa.pub` 添加到文件 `/root/.ssh/authorized_keys` 中。
++
+[source,shell]
+----
+# vim /root/.ssh/authorized_keys
+----
+
+
+== 创建 FirstBox
+
+. 使用传输工具将link:../../prepare/software[前文]获取的企业云平台基础软件安装包上传到选定的 KS 节点的 `/root` 目录下。
+
+
+. 本地机通过 SSH 登录该 KS 节点。
++
+[source,shell]
+----
+# ssh root@x.x.x.x
+----
+
+. 执行以下命令，解压安装包。
++
+[source,shell]
+----
+# tar -zxvf /root/qingcloud-installer_6.1.x-20221230_XXXX_amd64.tar.gz -C /root/
+----
+. 因为安装时间较长，若中途网络断连可能会导致操作终止，开启 tmux 方式可以避免此问题。执行以下命令，开启 tmux。
++
+[source,shell]
+----
+# tmux
+----
++
+include::../../../../../_components/note.adoc[]
+
+* 开启 tmux 后，在命令执行操作过程中，若网络断连，命令会在后台继续执行。恢复连接后，执行 `tmux attach` 即可恢复到之前的操作界面。
+* 用户可根据需求，选择是否开启 tmux。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行以下 `ip a`，查看 KS 节点的管理网卡状态。如下图所示，状态需为 `UP`。
++
+image::/images/ep_offline/installation/deploy_create_firstbox_01.png[]
+
+. 执行以下命令，安装 FirstBox。该命令行执行过程较长，大约需要 30 分钟，请耐心等待。
++
+
+include::../../../../../_components/attention.adoc[]
+安装时，请勿强制中断安装进程，否则可能导致未知错误。
+
+include::../../../../../_components/table_footer.adoc[]
++
+[source,shell]
+----
+# /root/qingcloud-installer/bootstrap/bootstrap_allinone.sh -m <mgmt_interface > -a <firstbox ip address>
+----
++
+**参数说明**
++
+[cols="1,3,1"]
+|===
+| 参数 | 说明 | 是否必须
+
+| -a a| * 指定 FirstBox 的管理 IP。
+* 该 IP 需要和各节点服务器的管理网络处于同一个网段。可以从管理网络地址池中选择一个未被使用的 IP 地址分配给 FirstBox。 | 是
+
+| -m a| 指定当前 KS 节点的管理网卡。请根据环境规划进行配置。| 否
+| -p a| 用于挂载 `/pitrix` 目录到系统盘。仅融合部署场景，需要该参数。不要选择数据盘。| 否
+
+|===
++
+**示例**
++
+[source,shell]
+----
+# /root/qingcloud-installer/bootstrap/bootstrap_allinone.sh -m ens3f1 -a 172.31.60.190
+----
+
+
+. 命令行执行完成，回显如下信息，表示安装成功。
++
+image::/images/ep_offline/installation/deploy_create_firstbox_02.png[]
++
+
+include::../../../../../_components/note.adoc[]
+若命令行执行失败，请查看如下日志文件，检查报错原因并修复。若仍不能解决，请联系技术支持。
+
+* KS 节点日志：`/root/enable_vt.log`、`/root/launch_fb.log`。
+* FirstBox 节点日志：`/root/deploy.log`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. FirstBox 成功创建后，执行以下命令行，登录 FirstBox。其中，`<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，检查服务状态。
++
+[source,shell]
+----
+# supervisorctl status
+----
++
+回显信息如下，服务状态均为 `RUNNING`，表示服务正常运行，可继续执行后续操作。
++
+image::/images/ep_offline/installation/deploy_create_firstbox_03.png[]

@@ -1,0 +1,42 @@
+---
+title: "检查 kdump 配置（2 级）"
+weight: 6
+---
+
+//tag::kdump[]
+. 逐个登录集群内的各节点。
+
+. 执行如下命令，查看当前节点的 kdump 配置状态。返回结果需与以下内容类似，其中 ``kexec command`` 的内容需根据实际情况而定。
++
+[,shell]
+----
+kdump-config show
+----
++
+回显示例：
++
+[,shell]
+----
+DUMP_MODE:        kdump
+USE_KDUMP:        1
+KDUMP_SYSCTL:     kernel.panic_on_oops=1
+KDUMP_COREDIR:    /var/crash
+crashkernel addr: 
+   /var/lib/kdump/vmlinuz
+kdump initrd: 
+   /var/lib/kdump/initrd.img
+current state:    ready to kdump
+kexec command:
+  /sbin/kexec -p --command-line="..." --initrd=...
+----
+
+//end::kdump[]
+
+. 若 kdump 配置未打开，则需手动进行配置，可参考“《NeonSAN 运维手册》：基本操作 > 检查和配置 kdump > 安装配置 kdump”相关内容。
++
+include::../../../../../_components/attention.adoc[]
+* 在配置 kdump 的过程中需安装 linux-crashdump，安装过程中会进行重启，可能会导致此节点卷副本 ERROR 进而引起卷降级，需提前告知客户。
+* 若出现卷降级，可参考“《NeonSAN 运维手册》：异常处理 > 卷的恢复”相关内容进行处理，待卷恢复正常后再进行下一个节点的 kdump 配置。
+include::../../../../../_components/table_footer.adoc[]
+
+

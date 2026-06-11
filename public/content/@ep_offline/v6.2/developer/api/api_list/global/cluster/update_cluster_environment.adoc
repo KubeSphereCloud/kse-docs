@@ -1,0 +1,97 @@
+---
+title: 更新集群环境变量（UpdateClusterEnvironment）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cluster
+| String
+| true
+| 集群ID
+
+| env
+| String
+| true
+| 修改的环境变量
+
+| zone
+| String
+| true
+| 可用区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cluster_id
+| String
+| false
+| 集群ID
+
+| job_id
+| String
+| false
+| 任务ID
+
+| ret_code
+| Integer
+| false
+| 返回状态码
+
+| role
+| String
+| false
+| 节点角色
+
+| updated_env
+| String
+| false
+| 更新的环境变量
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "UpdateClusterEnvironment",
+  "cluster": "cl-2kogt3ly",
+  "env": "{\"port\":3307}",
+  "zone": "pek3"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "UpdateClusterEnvironmentResponse",
+  "cluster_id": "cl-2kogt3ly",
+  "job_id": "j-8mnmbr3dr35",
+  "ret_code": 0,
+  "role": "maininstance",
+  "trace_id": "DhIN6KiZ",
+  "updated_env": [
+    {
+      "env": {
+        "port": 3307
+      },
+      "role": "maininstance"
+    }
+  ]
+}
+----

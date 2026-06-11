@@ -1,0 +1,35 @@
+---
+title: "查询存储池信息"
+weight: 8
+---
+
+. 登录 NeonSAN 集群任一节点。 
+
+. 执行如下命令，查询整个 NeonSAN 集群中所有的存储池。
++
+[,shell]
+----
+neonsan list_rg -detail -H 
+----
++
+image::/images/neonsan/polling_guide_30.png[]
+
+. 执行如下命令，查询单个存储池的详细信息。 
++
+[,shell]
+----
+neonsan list_rg -detail -rg default -H
+----
++
+image::/images/neonsan/polling_guide_31.png[]
++
+回显说明：
++
+* ``RG NAME``：对应存储池名。
+* ``LABELS``：对应存储池的标签。
+* ``STORES``：对应存储池内的存储节点 ID。
+* ``USED``：对应存储池已使用的容量。
+* ``TOTAL``：对应存储池的总容量。
+* ``AUTO BALANCE``： 该存储池是否开启负载均衡，1 表示是，0 表示否。
+
+

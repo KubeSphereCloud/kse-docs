@@ -1,0 +1,78 @@
+---
+title: 修改告警行为（ModifyAlarmPolicyActionAttributes）
+weight: 16
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy_action
+| String
+| true
+| 告警行为id
+
+| owner
+| String
+| false
+| 用户
+
+| trigger_action
+| String
+| true
+| 通知人id
+
+| trigger_status
+| String
+| true
+| 告警状态
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy_action_id
+| String
+| false
+| 告警行为id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyAlarmPolicyActionAttributes",
+  "alarm_policy_action": "alpa-e0wpe6xl",
+  "owner": "usr-rrPKHDpJ",
+  "trigger_action": "nl-ia8kfkuv",
+  "trigger_status": "alarm",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyAlarmPolicyActionAttributesResponse",
+  "alarm_policy_action_id": "alpa-e0wpe6xl",
+  "ret_code": 0
+}
+----

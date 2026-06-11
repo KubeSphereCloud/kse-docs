@@ -1,0 +1,90 @@
+---
+title: 安装包准备
+weight: 2
+---
+
+{product_name} 安装包位于 ftp://ins.qingcloud.com[FTP 服务器]的 `/qingstor/u10000/v5.0/` 目录下。
+
+
+== 安装包信息
+安装包信息如下表所示，包名中携带的 `yyyymmdd` 为包上传日期，`x.x.x` 为包的版本号。无特殊需求，建议均使用最新的安装包即可。
+
+[cols="1,3,6", options="header"]
+|===
+|安装包序号 |安装包名称 |说明
+
+|1 |os-yyyymmdd.tgz |与操作系统相关的软件包。
+
+|2 |qingstor-docker-vx.x.x-yyyymmdd.tar.gz |基础包，其内容包括 FirstBox 镜像、Docker 安装程序以及一些通用组件。
+
+|3 |qingstor-vx.x.x.tgz |{product_name} 服务包。
+
+|4 |qs-installer-yyyymmdd.tar.gz |Installer 安装包。
+
+|5 |registry-vx.x.x-yyyymmdd.tar.gz |镜像包，其内容包括私有镜像仓库以及具体的镜像包。
+
+|===
+
+== 上传安装包
+
+. 选择任一台网关节点作为 FirstBox 的宿主机。登录至该节点服务器。
++
+include::../../../../../_components/note.adoc[]
+
+修改配置文件时，网关节点中填写的第一个节点 IP，必须为该节点服务器 IP。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令行，创建安装目录，并将序号为 1、2、3、5 的压缩包上传至该目录下。
++
+[source,shell]
+----
+mkdir -pv /var/www/repo
+----
+
+. 执行如下命令行，解压已上传的安装包。
++
+[source,shell]
+----
+cd /var/www/repo
+tar xf qingstor-docker-vx.x.x-yyyymmdd.tar.gz
+tar xf os-yyyymmdd.tgz -C ./qingstor-docker
+tar xf qingstor-vx.x.x.tgz -C ./qingstor-docker/u1w-v5.0
+tar xf registry-vx.x.x-yyyymmdd.tar.gz -C ./qingstor-docker/u1w-v5.0
+----
+
+. 执行如下命令行，查看解压后 `qingstor-docker` 的目录层级。
++
+[source,shell]
+----
+tree /var/www/repo/qingstor-docker -C -L 3
+----
++
+回显结果示例
++
+[source,shell]
+----
+qingstor-docker
+├── docker-binary
+├── misc
+├── os
+│   ├── kylin
+│   │   └── v10
+│   └── ubuntu
+│       └── 20.04
+├── qs-firstbox-py3.tgz
+└── u1w-v5.0
+    ├── qingstor
+    ├── registry
+----
+
+. 将序号为 4 的压缩包上传至该节点服务器的 `/root` 目录下，然后执行如下命令行解压。
++
+[source,shell]
+----
+cd /root
+tar -xf qs-installer-yyyymmdd-xxxxxx.tgz
+----
+
+. 至此，安装包准备完成。
+

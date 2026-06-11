@@ -1,0 +1,79 @@
+---
+title: 用户关联应用（安装）（InstallUserApp）
+weight: 18
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app
+| String
+| true
+| 应用id
+
+| app_iam_policy
+| String
+| false
+| 
+
+| comp_id
+| String
+| false
+| 
+
+| debug
+| Integer
+| false
+| 是否是调试
+
+| dry_run
+| Integer
+| false
+| 
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_api_id
+| String
+| false
+| 
+
+| license_id
+| String
+| false
+| licenseID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app": "app-xxxxxxx"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "InstallUserAppResponse",
+  "app_api_id": "",
+  "license_id": "lc-xxxx",
+  "ret_code": 0
+}
+----

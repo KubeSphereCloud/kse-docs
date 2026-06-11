@@ -1,0 +1,21 @@
+---
+title: 如何批量修改云平台服务器密码
+weight: 90
+---
+
+. 登录 FirstBox。
+. 执行以下命令，修改所有云平台物理服务器的密码。
++
+--
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh all ' echo "<username>:<password>" | chpasswd'
+----
+
+示例：修改 yop 的密码为 zhu1241jie
+
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh all ' echo "yop:zhu1241jie" | chpasswd'
+----
+--

@@ -1,0 +1,49 @@
+---
+title: "启用和禁用网络隔离"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 企业空间, 企业空间设置, 基本信息, 启用和禁用网络隔离"
+description: "介绍如何为授权给企业空间的集群启用和禁用网络隔离。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 4be8424e0fc74974a0d49be43d1061fa
+:ks_xref_id: cdef4059051a4663b0340887e892dac3
+:ks_comp: ../../../../components/
+:ks_title: 启用和禁用网络隔离
+:ks_keywords: Kubernetes, {ks_product}, 企业空间, 企业空间设置, 基本信息, 启用和禁用网络隔离
+:ks_description: 介绍如何为授权给企业空间的集群启用和禁用网络隔离。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **企业空间设置管理**
+:ks_navigation: **企业空间设置 > 基本信息**
+
+
+本节介绍如何为授权给企业空间的集群启用和禁用网络隔离。
+
+当授权给企业空间的集群启用网络隔离后，属于该企业空间且运行在该集群中的容器组将不能被企业空间外部的客户端访问，也不能被集群外部的客户端访问。属于该企业空间且运行在该集群中的容器组的出站流量不受限制。
+
+
+== 前提条件link:[id=669e299471d14d77a6f6d9f4fb09eed3]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=9cfc4a649de54d9094c07f739cd949d8]
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**网络隔离**区域，点击集群右侧的开关为集群启用或禁用网络隔离。

@@ -1,0 +1,56 @@
+---
+title: "查看项目角色详情"
+keywords: "Kubernetes, {ks_product}, 项目管理, 项目设置, 项目角色, 查看项目角色详情"
+description: "介绍如何查看项目角色详情。"
+weight: 03
+---
+
+// :ks_include_id: f184100ac6fe4ea29588d6fbcbe5d453
+:ks_xref_id: f44bf7a736ab4499a6062422f4cee1d6
+:ks_comp: ../../../../components/
+:ks_title: 查看项目角色详情
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 项目设置, 项目角色, 查看项目角色详情
+:ks_description: 介绍如何查看项目角色详情。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **角色查看**
+:ks_navigation: **项目设置 > 项目角色**
+
+
+本节介绍如何查看项目角色详情。
+
+
+== 前提条件link:[id=d82346365224480c8051f3eed865ff9f]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=9c15808f7b864944ba8d8a7eaf678f43]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在项目角色列表中点击一个项目角色的名称打开其详情页面。
+
+. 在集群角色详情页面右侧的**权限**页签查看集群角色具有的权限。
++
+====
+include::../../../../_custom/projectManagement/projectRoles/projectRoles-para-permissions.adoc[]
+====
+
+. 在项目角色详情页面右侧点击**授权用户**页签具有当前项目角色的用户。
++
+--
+include::../../../../_custom/clusterManagement/clusterRoles/clusterRoles-para-authorizedUsers.adoc[]
+--

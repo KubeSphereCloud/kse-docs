@@ -1,0 +1,73 @@
+// :ks_include_id: 54a483bb55aa44d8ac2635c12c503512
+// update:2025-04-16
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|CPU Limit
+|The maximum sum of CPU limits for all containers in the project, in cores.
+
+|CPU Request
+|The maximum sum of CPU requests for all containers in the project, in cores.
+
+|Memory Limit
+|The maximum sum of memory limits for all containers in the project, in MiB.
+
+|Memory Request
+|The maximum sum of memory requests for all containers in the project, in MiB.
+
+|GPU Limit
+|The number of GPUs currently used in the project, and the maximum number of GPUs that can be used, in GPUs.
+
+|Persistent Volume Claim Limit
+// |Persistent Volume Claim Total Capacity Limit
+|The total capacity of Persistent Volume Claims currently created in the workspace, and the capacity limit for Persistent Volume Claims that can be created.
+
+|Persistent Volume Claim
+// |Persistent Volume Claim Quantity Limit
+|The total number of Persistent Volume Claims currently created in the workspace, and the quantity limit for Persistent Volume Claims that can be created.
+
+|Storage Class Resource Limit
+// |Storage Class Associated Persistent Volume Claim Total Capacity Limit
+|The capacity limit for Persistent Volume Claims that can be created for the storage class.
+
+|Storage Class Resource
+// |Storage Class Associated Persistent Volume Claim Quantity Limit
+|The quantity limit for Persistent Volume Claims that can be created for the storage class.
+
+// |Volume
+// |The number of volumes currently created in the project, and the maximum number of volumes that can be created.
+
+|Pod
+|The number of pods currently created in the project, and the maximum number of pods that can be created.
+
+|Deployment
+|The number of deployments currently created in the project, and the maximum number of deployments that can be created.
+
+|StatefulSet
+|The number of StatefulSets currently created in the project, and the maximum number of StatefulSets that can be created.
+
+|DaemonSet
+|The number of DaemonSets currently created in the project, and the maximum number of DaemonSets that can be created.
+
+|Job
+|The number of Jobs currently created in the project, and the maximum number of Jobs that can be created.
+
+|CronJob
+|The number of CronJobs currently created in the project, and the maximum number of CronJobs that can be created.
+
+|Service
+|The number of services currently created in the project, and the maximum number of services that can be created.
+
+|Ingress
+|The number of Ingresses currently created in the project, and the maximum number of Ingresses that can be created.
+
+|Secret
+|The number of Secrets currently created in the project, and the maximum number of Secrets that can be created.
+
+|ConfigMap
+|The number of ConfigMaps currently created in the project, and the maximum number of ConfigMaps that can be created.
+|===
+
+// Storage-related text not modified https://github.com/kubesphere/project/issues/6101

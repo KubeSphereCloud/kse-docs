@@ -1,0 +1,53 @@
+---
+title: "编辑定时任务"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 定时任务, 编辑"
+description: "介绍如何使用{ks_product_both}Web 控制台编辑定时任务信息。"
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 45a78b22241140069d48c37d36d6ce86
+:ks_xref_id: d99a04a36e524cf38daa9057ff17cc5e
+:ks_comp: ../../../../components/
+:ks_title: 编辑定时任务
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台编辑定时任务信息。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 定时任务, 编辑
+:ks_weight: 04
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台编辑定时任务信息。您可以通过编辑操作修改定时任务的基本信息和策略信息。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=58f9d575d5f942ddbb823db00d8eaf7c]
+
+系统 **admin** 用户可以编辑集群中所有已创建的定时任务，普通项目管理员和操作员可以编辑自身创建的定时任务，项目观察员没有编辑权限。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 在定时任务列表页面编辑link:[id=5f7a9b5e10434b85822f1e96cffd61e9]
+
+include::../../../../_custom/timer/timer-task-steps.adoc[]
+
+. 找到目标定时任务，点击右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**编辑**。
+
+. 在弹出的对话框中修改定时任务的基本信息和策略信息，然后点击**确定**。有关更多参数信息，请参阅 link:../01-create-timer-task/[创建定时任务]。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 在定时任务详情页面编辑link:[id=86810236d7e749128df419d12604e1d6]
+
+include::../../../../_custom/timer/timer-task-steps.adoc[]
+
+. 在定时任务列表页面，点击目标定时任务名称，进入定时任务详情页面。
+
+. 在定时任务详情页面的**基本信息**区域，点击 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**编辑**。
+
+. 在弹出的对话框中修改定时任务的基本信息和策略信息，然后点击**确定**。有关更多参数信息，请参阅 link:../01-create-timer-task/[创建定时任务]。

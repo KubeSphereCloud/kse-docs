@@ -1,0 +1,77 @@
+---
+title: "查看系统组件详情"
+keywords: "Kubernetes, {ks_product}, 集群管理, 系统组件, 查看系统组件详情"
+description: "介绍如何查看系统组件详情。"
+weight: 02
+---
+
+// :ks_include_id: 372611af559c4433b630e507774ce85e
+:ks_xref_id: b912a5b3d7cc4e40a8581394207cac74
+:ks_comp: ../../../components/
+:ks_title: 查看系统组件详情
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 系统组件, 查看系统组件详情
+:ks_description: 介绍如何查看系统组件详情。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **系统组件查看**
+:ks_navigation: **系统组件**
+
+
+本节介绍如何查看系统组件详情。
+
+
+== 前提条件link:[id=7524d61622ba4bb48d636a29b83a0ce1]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=ce8b8e5ef4444436b8dd252a6d32a2f4]
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在系统组件列表中，点击一个系统组件的名称打开其详情页面。
+
+. 在系统组件详情页面左侧的**属性**区域查看系统组件的资源属性。
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|状态
+|
+include::../../../_custom/clusterManagement/systemComponents/systemComponents-para-status.adoc[]
+
+|集群
+|系统组件所属的集群。
+
+|项目
+|系统组件所属的项目。
+
+|副本数量
+|
+include::../../../_custom/clusterManagement/systemComponents/systemComponents-para-replica-count.adoc[]
+
+|创建时间
+|系统组件的创建时间。
+|===
+--
+
+. 在系统组件详情页面右侧的**容器组**页签查看当前系统组件对应的容器组。
++
+--
+include::../../../_custom/clusterManagement/nodes/nodes-para-podList.adoc[]
+--

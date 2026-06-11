@@ -1,0 +1,158 @@
+---
+title: 添加IAM纳管API服务信息（AddIAMApiService）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| description
+| String
+| false
+| 描述
+
+| gateway
+| String
+| false
+| 网关
+
+| permission
+| String
+| false
+| 默认权限
+
+| service_name
+| String
+| true
+| 服务名（英文）
+
+| translated_name
+| String
+| false
+| 服务名（中文）
+
+| visible
+| String
+| false
+| 是否可见
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action_group
+| String
+| false
+| API分组
+
+| attributes
+| String
+| false
+| 属性
+
+| audit_log
+| String
+| false
+| 审计日志
+
+| create_time
+| String
+| false
+| 创建时间
+
+| gateway
+| String
+| false
+| 网关
+
+| id
+| String
+| false
+| 服务ID
+
+| keys
+| String
+| false
+| 必选可选参数
+
+| permission
+| String
+| false
+| 默认权限
+
+| service_name
+| String
+| false
+| 服务名
+
+| status
+| String
+| false
+| 状态
+
+| translated_name
+| String
+| false
+| 服务名（中文）
+
+| type
+| String
+| false
+| 类型（服务,接口）
+
+| visible
+| String
+| false
+| 是否可见
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "AddIAMApiService",
+  "permission": "deny",
+  "service_code": "ecm",
+  "service_name": "弹性云主机",
+  "visible": "visible"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "AddIAMApiServiceResponse",
+  "ecm": {
+    "action_group": "Other",
+    "attributes": {
+      "actions": "ecm"
+    },
+    "audit_log": "",
+    "create_time": "2023-04-03T14:49:49",
+    "gateway": "",
+    "id": "ecm",
+    "keys": {},
+    "permission": "deny",
+    "service_name": "ecm",
+    "status": "active",
+    "translated_name": "弹性云主机",
+    "type": "service",
+    "visible": "visible"
+  },
+  "ret_code": 0
+}
+----

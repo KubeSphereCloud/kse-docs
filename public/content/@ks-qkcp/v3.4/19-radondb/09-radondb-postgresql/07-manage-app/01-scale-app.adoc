@@ -1,0 +1,64 @@
+---
+title: "扩展 RadonDB PostgreSQL 数据库"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB PostgreSQL, 应用管理,扩容"
+description: "如何在{ks_product_both}上扩展 RadonDB PostgreSQL 数据库。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 2a8e0519fdf643d2b8ee385a7dda8e6c
+:ks_xref_id: 7b257881b21942788d33bb358492a577
+:ks_comp: ../../../../components/
+:ks_title: 扩展 RadonDB PostgreSQL 数据库
+:ks_keywords: Kubernetes, {ks_product}, RadonDB PostgreSQL, 应用管理,扩容
+:ks_description: 如何在{ks_product_both}上扩展 RadonDB PostgreSQL 数据库。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本小节主要介绍了如何在{ks_product_both}上扩展 RadonDB PostgreSQL 数据库。
+
+
+== 前提条件link:[id=aa4c55ed8cfb46859ab45e074384f8fa]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondpq-prer-installRadondbpq.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=3cee828da14641b5b1890846d7f5ef1d]
+
+RadonDB PostgreSQL 创建成功后，可在{ks_product_both}应用管理页面调整数据节点数量。
+
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondbpq-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 扩展**。
+
+. 在**扩展**对话框，修改数据库节点数量，然后点击**确定**。

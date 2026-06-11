@@ -1,0 +1,19 @@
+// :ks_include_id: 9cc1c0abc4d6458bb0cfc67f88dc1f32
+Mount files or directories from the node where the pod is located to the container.
+
+* Files or folders at the same path on different nodes may differ, so pod replicas on different nodes may read different data from the HostPath volume.
+
+* You need to ensure that the mounted path exists on the node where the pod is located and that the pod process has the necessary permissions. Otherwise, the pod process will be unable to read data from or write data to the HostPath volume.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Volume Name
+|The name of the HostPath volume.
+
+|Host Path
+|The path of the file or folder on the node that needs to be mounted.
+
+include::workloads-para-volumeMountModePath.adoc[]
+|===

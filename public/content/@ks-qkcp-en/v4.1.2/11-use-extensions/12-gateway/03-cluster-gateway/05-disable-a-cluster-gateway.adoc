@@ -1,0 +1,42 @@
+---
+title: "Disable Cluster Gateway"
+keywords: "Kubernetes, {ks_product-en}, cluster management, cluster settings, gateway settings, disable cluster gateway"
+description: "Learn how to disable the cluster gateway."
+weight: 05
+---
+
+
+// :ks_permission: **Cluster Settings Management**
+:ks_navigation: **Cluster Settings > Gateway Settings**
+
+
+This section describes how to disable the cluster gateway.
+
+include::../../../../_custom-en/clusterManagement/gatewaySettings/gatewaySettings-warn-disableGateway.adoc[]
+
+
+== Prerequisites
+
+* **KubeSphere Gateway** should have been installed and enabled.
+
+// // * {empty}
+// include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+// 
+
+* You should be a member of a cluster and have the **cluster-admin** role in the cluster. For more information, see link:../../../../07-cluster-management/09-cluster-settings/03-cluster-members/[Cluster Members] and link:../../../../07-cluster-management/09-cluster-settings/04-cluster-roles/[Cluster Roles].
+
+
+== Steps
+
+// include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
+. Log in to the {ks_product-en} web console with a user who has the **cluster-admin** role.
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom-en/clusterManagement/gatewaySettings/gatewaySettings-oper-disableGateway.adoc[]

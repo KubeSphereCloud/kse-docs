@@ -1,0 +1,92 @@
+---
+title: "查询 SSD 盘状态（2 级）"
+weight: 1
+---
+
+. 登录 NeonSAN 集群任一节点。
+. 执行如下命令，获取存储系统各节点上 SSD 盘的状态信息，使用寿命及使用率等。
++
+[,shell]
+----
+neonsan list_ssd -H
+----
++
+image::/images/neonsan/polling_guide_1.png[]
++
+回显说明：
++
+* 结果中在列 SSD 的 ``STATUS`` 均为 ``OK``，即表示正常。
+* ``USED%`` 字段为 SSD 磁盘使用率，若超过 80%，系统如果已经打开了 ``auto_balance``，则会自主触发负载均衡，若没有，需打开 ``auto_balance``。均衡后，SSD 盘使用率仍然超过 80%，需要对集群进行扩容操作。若没有及时处理，当SSD 物理空间写满时，会导致相应的卷降级。
+* ``WEAR DEGREE`` 字段为 SSD 磁盘写寿命，若达到 80%，建议换盘，降低磁盘故障带来的卷降级。
+
+. 逐个登录 NeonSAN 集群各存储（Store）节点，查看本节点 SSD 繁忙状态。
++
+[,shell]
+----
+iostat -x 1
+----
++
+image::/images/neonsan/polling_guide_2.png[]
++
+回显说明：
++
+* ``rkB/s`` 与 ``wkB/s`` 字段分别为读写所占带宽。
+* ``%util`` 字段为 SSD 繁忙程度。
+* 若带宽使用率不高，``%util`` 使用率达到 90% 以上，建议查看磁盘状态是否异常。
+
+. 逐个登录 NeonSAN 集群各存储（Store）节点，查看本节点 SSD 有无异常。
++
+* **NVMe 盘**：
++
+NVMe 盘的命名规则一般形如 ``nvme0n1``，需根据实际情况进行修改。
++
+[,shell]
+----
+nvme smart-log /dev/nvme0n1
+----
++
+image::/images/neonsan/polling_guide_3.png[]
++
+回显说明：
++
+** ``media_errors`` 字段，表示介质错误个数。若该值不为 0，则说明出现 Media error，则需将该盘下线。
+** 磁盘下线步骤，参考《NeonSAN 运维手册》。
+
+* **RAID 盘信息**：
++
+仅适用于混插环境，且采用了 RAID 模式。
++
+** 查看 RAID 虚拟磁盘
++
+[,shell]
+----
+/opt/qs-device/tools/storcli /call/vall show
+----
++
+image::/images/neonsan/polling_guide_4.png[]
+
+** 查看 RAID 物理磁盘
++
+image::/images/neonsan/polling_guide_4_1.png[]
++
+回显说明：
++
+重点关注返回结果中的 ``State`` 和 ``Sp`` 参数值，对照返回结果中相应缩写的说明，查看相应参数值是否正常。一般如图所示即为正常。
+
+* **iCAS 信息**：
++
+仅适用于混插环境，且使用 iCAS 缓存方案。
++
+[,shell]
+----
+casadm -P -i 1
+----
++
+image::/images/neonsan/polling_guide_5.png[]
++
+参数及回显说明：
++
+** ``-i`` 用于指定 CAS 盘的 ID，可执行 ``casadm -L`` 进行查看。
+** 返回结果中需关注 ``errors`` 的统计数，不为 0，即表示异常。
+
+

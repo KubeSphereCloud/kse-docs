@@ -1,0 +1,56 @@
+---
+title: "Create Volume Snapshots"
+keywords: "Kubernetes, {ks_product-en}, cluster management, storage, volume snapshots, create volume snapshot"
+description: "Learn how to create a volume snapshot."
+weight: 01
+---
+
+:ks_permission: **Volume Snapshots Management**
+:ks_navigation: **Storage > Volume Snapshots**
+
+
+include::../../../../_custom-en/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-desc-createAVolumeSnapshot.adoc[]
+
+include::../../../../_custom-en/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-para-volumeSnapshot.adoc[]
+
+
+== Prerequisites
+
+* **KubeSphere Storage** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject.adoc[]
+
+include::../../../../_custom-en/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-prer-persistentVolumeCreated.adoc[]
+
+* Ensure that the backend storage system supports volume snapshot functionality and that volume snapshot creation is enabled on the storage class corresponding to the persistent volume claim. Operation method: **Storage Class > More > Set Volume Operations** > Enable **Volume Snapshot Creation**.
+
+== Method 1: Volume Snapshots > Create Volume Snapshot
+
+In the cluster, you can directly create a volume snapshot for a persistent volume claim under the **Volume Snapshots** menu.
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom-en/clusterManagement/volumeSnapshots/volumeSnapshots-oper-createAVolumeSnapshot.adoc[]
+
+== Method 2: Persistent Volume Claims > Create Volume Snapshot
+
+In the cluster or project, you can create a volume snapshot for a persistent volume claim under the **Persistent Volume Claims** menu.
+
+. Log in to the {ks_product-en}  web console with a user who has the **Persistent Volume Claim Management** permission and the pass:a,q[{ks_permission}] permission, and enter your cluster or project.
+
+. Select **Storage > Persistent Volume Claims** in the left navigation pane.
+
+. Click the name of a persistent volume claim in the persistent volume claim list to open its details page.
++
+include::../../../../_custom-en/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-oper-createAVolumeSnapshot.adoc[]

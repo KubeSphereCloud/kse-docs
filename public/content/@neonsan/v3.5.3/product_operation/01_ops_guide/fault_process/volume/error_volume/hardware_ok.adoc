@@ -1,0 +1,181 @@
+---
+title: "硬件正常"
+weight: 2
+---
+
+根据前文步骤，判断出主副本所在存储节点或磁盘状态均正常。则可以从主副本恢复数据。
+
+根据 NeonSAN 版本的不同，恢复 ERROR 卷的操作步骤略有区别。
+
+* NeonSAN V2.1.15 及以后的版本，NeonSAN 提供 CLI 可用于 ERROR 卷的恢复。
+
+* NeonSAN V2.1.15 以前的版本，需手动操作数据库，恢复数据。
+
+== NeonSAN v2.1.15 及以后版本的恢复
+
+. 获取所有 ERROR 状态的卷。
++
+[,shell]
+----
+neonsan list_volume --detail | grep ERROR
+----
+
+. 先将该 ERROR 的卷恢复为 DEGARDED 状态。
++
+[,shell]
+----
+neonsan repair_volume --volume pool/vol_name
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 命令行输入的卷名为步骤 1 中查询出来的异常卷，需根据实际情况修改。
+* 针对多副本 ERROR 卷，若该命令执行成功，则直接进行步骤 3。
+* 针对单副本 ERROR 卷，该命令执行成功后，可直接将单副本 ERROR 卷状态恢复为 OK，无需进行步骤 3。
+* 若该命令执行失败，可直接采用 “NeonSAN V2.1.15 以前版本的恢复方法”，从数据库中对 ERROR 的卷进行恢复。待卷状态恢复完成后，还原 auto_balance 与 auto_recovery 的设置。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 再将该 DEGARDED 状态的卷恢复为 OK。命令行中的卷名为上一步骤异常卷，需根据实际情况进行修改。
++
+[,shell]
+----
+neonsan recovery_volume -volume pool/vol_name
+----
+
+. 重复以上步骤，直到所有卷状态均为 OK 即可。
+
+== NeonSAN v2.1.15 以前版本的恢复
+
+. 关闭 NeonSAN 集群的自动恢复与自动均衡功能。
++
+[,shell]
+----
+neonsan set_parameter -parameter auto_recovery -value 0
+neonsan set_parameter -parameter auto_balance -value 0
+----
+. 确认 NeonSAN 集群中有无正在执行的异步任务。若当前集群中有状态为 waiting，processing，pending 的任务，需等待这些任务执行完毕。
++
+[,shell]
+----
+neonsan list_job
+----
+
+. 备份数据库。
+.. 查看数据库自动备份配置。
++
+[,shell]
+----
+crontab -e
+
+0 2 * * * sh /opt/neonsan/backup-db.sh 192.168.101.25 > /dev/null 2>&1
+----
+.. 手动执行数据库自动备份配置中的备份脚本，节点 IP 需根据实际情况进行修改。
++
+[,shell]
+----
+sh /opt/neonsan/backup-db.sh 192.168.101.25
+----
+
+. 登录数据库。
++
+--
+* QinStor MySQL 数据库
++
+可参考本文。“Qingstor 融合部署运维 > 登录数据库”相关章节内容。
+* Galera 数据库
++
+[,shell]
+----
+mysql -uneonsan -pzhu88jie neonsan
+----
+--
+
+. 关闭自动提交。
++
+[,sql]
+----
+mysql> set autocommit=0;
+----
+
+. 查找待恢复卷所有状态为 ERROR 的主副本，并记录相应的 ``sid`` 和 ``rid``。
++
+[,sql]
+----
+mysql> select * from replica_ext where is_primary=1 and vid=4479516672 and status!='OK';
+----
++
+image::/images/neonsan/ops_guide_10.png
++
+include::../../../../../../../_components/note.adoc[]
+命令行中，``vid`` 的值，为卷的 ``ID``，可通过 ``neonsan list_volume -detail`` 命令查看。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，依次更新待恢复卷所有主副本的状态为 OK。
++
+[,sql]
+----
+mysql> update replica set status='OK' where id=4479516672;
+----
++
+include::../../../../../../../_components/note.adoc[]
+命令行中的 id 为上一步骤中查询到的 rid。
+include::../../../../../../../_components/table_footer.adoc[]
+. 执行如下命令，确认待恢复卷所有主副本的状态均为 OK。若无返回结果，则证明该卷所有主副本状态均为 OK。
++
+[,sql]
+----
+mysql> select * from replica_ext where is_primary=1 and vid=4479516672 and status!='OK';
+----
+
+. 提交修改.
++
+[,sql]
+----
+mysql> commit;
+----
+. 打开自动提交。
++
+[,sql]
+----
+mysql> set autocommit=1;
+----
+. 确认自动提交是否打开。
++
+[,sql]
+----
+mysql> show variables like 'autoco%';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| autocommit | ON |
++---------------+-------+
+----
+
+. 退出数据库。
++
+[,sql]
+----
+mysql> quit;
+----
+
+. 查询待恢复卷状态。
++
+[,shell]
+----
+neonsan list_volume -volume <volume_full_name> -detail
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 至此，多副本卷的状态应为 DEGRADED，需进行后续步骤恢复卷的状态。
+* 至此，单副本卷的状态应为 OK，无需进行后续步骤。
+* 卷名需根据实际情况进行修改。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，恢复卷。
++
+[,shell]
+----
+neonsan recovery_volume -volume <volume_full_name>
+----
+
+
+

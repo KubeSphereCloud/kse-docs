@@ -1,0 +1,163 @@
+---
+title: 准备私有仓库
+weight: 2
+---
+
+== 步骤一：登录 Console
+
+//tag::web_login[]
+
+通过 Web 浏览器访问{product_name}的环境，需要配置本地主机的 Hosts 文件，指定{product_name}的域名地址。
+
+. 登录{product_name} Global Zone 的 FirstBox 节点。
++
+include::../../../../../_components/note.adoc[]
+
+登录方式可咨询{product_name}安装部署人员。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，获取{product_name}的 Hosts 信息。
++
+[source,shell]
+----
+/pitrix/bin/dump_hosts.py
+----
++
+image::/images/ep_offline/installation/login_01.png[]
+
+. 打开本地主机的 Hosts 文件，将上一步获取到的 Hosts 信息，追加其中。
++
+** Linux 系统 Hosts 文件路径为 `/etc/hosts`。
+** Windows 系统 Hosts 文件路径为 `C:\Windows\System32\drivers\etc\hosts`。
+//end::web_login[]
+. 本地主机在 Chrome 或火狐浏览器中输入上一步查询到的 Console 的 Web 地址，登录信息如下。
++
+[source,shell]
+----
+Web 地址: 查询结果中 console 开头的 URL。
+默认用户名：console@<domain>
+默认密码：zhu88jie
+----
+
++
+如前面查询到的 Console 的 Web 地址为 `console.democloud.com`，则登录信息如下。
++
+[source,shell]
+----
+Web 地址：console.democloud.com
+默认用户名：console@democloud.com
+默认密码：zhu88jie
+----
+
+
+
+== 步骤二：创建负载均衡器
+
+在 Console 创建负载均衡器，并给负载均衡器绑定监听器。详细步骤如下。
+
+. 延续前文步骤，实施人员成功登录 Console。
+
+. 点击**产品与服务** > **网络服务** > **负载均衡器**，进入负载均衡器列表页面。
+
+. 在负载均衡器列表页面，点击**创建**，弹出**创建负载均衡**对话框，实施人员根据页面提示信息，填写相关参数后，点击**提交**。
++
+include::../../../../../_components/attention.adoc[]
+
+* `网络` 需与link:../file_vm/#_步骤二创建云服务器[文件服务器]保持同一网段，且需确保后期用户创建的 QKE Plus 集群能成功访问当前设置的网络。
+
+* 由于 Harbor 内部的容器网络默认使用 `172.18.0.0/16` 与 `172.19.0.0/16` 两个网段，创建 Harbor 集群时使用的网段不能与这两个网段冲突。因此此处创建负载均衡时，使用的网段也不能与这两个网段冲突。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 在负载均衡器列表页面，查看成功创建的负载均衡器。点击上一步创建的负载均衡器的名称，进入负载均衡器详情页面。
+
+. 在负载均衡器详情页面，点击**创建监听器**。`监听协议`、`端口` 以及 `负载方式` 按下图填写。
++
+image::/images/ep_offline/qke_install/qke_install_17.png[]
+
+. 确认参数无误后，点击**提交**。
+
+. 在负载均衡器详情页面，监听器列表中，点击**应用修改**。
+
+. 在负载均衡器列表页面，确认成功创建的负载均衡器显示在列。
++
+image::/images/ep_offline/qke_install/qke_install_18.png[]
+
+== 步骤三：创建 Habor 集群
+
+在 Console 的 AppCenter 控制台创建 Habor 集群。详细步骤如下。
+
+. 延续前文步骤，实施人员成功登录 Console。
+
+. 点击**产品与服务** > **AppCenter 控制台** > **应用中心**，进入应用列表页面。
+
+. 在应用列表页面，选择 **Habor 镜像仓库**，点击**立即部署**，进入 Habor 集群创建页面，实施人员根据页面提示信息，输入相关参数。
+
+.. **第1步: 基本设置**中，`快速配置` 选择 `自定义`。
+
+.. **第2步: 主服务节点设置**中，`负载均衡器` 添加link:#_步骤二创建负载均衡器[前文创建]的负载均衡器与监听器。`节点数量` 填写 `1`。
+
+.. **第5步: 存储节点设置**中，`节点数量` 填写 `1`。`磁盘大小` 填写 `500 G`。
+
+.. **第6步: 任务节点设置**中，`节点数量` 填写 `1`。
+
+.. **第7步: 日志节点设置**中，`磁盘大小` 填写 `100 G`。
+
+.. **第8步: 网络设置**中，当前的网络设置需与link:#_步骤二创建负载均衡器[前文创建]的负载均衡器所在网络相同。
++
+include::../../../../../_components/attention.adoc[]
+
+由于 Harbor 内部的容器网络默认使用 `172.18.0.0/16` 与 `172.19.0.0/16` 两个网段，创建 Harbor 集群时使用的网段不能与这两个网段冲突。
+
+include::../../../../../_components/table_footer.adoc[]
+
+.. **第9步: 服务环境参数设置**中，`Harbor 地址` 填写link:#_步骤二创建负载均衡器[前文创建]的负载均衡器的 IP 地址与监听器的端口号。如根据前文内容，这里填写 `http://192.168.0.252:80`。
+
+.. 确认参数按照以上要求填写，上文未提及的参数维持默认。
+
+.. 参数确认无误后，点击**提交**，完成 Harbor 集群的创建。
+
+
+== 步骤四：推送镜像包
+
+//tag::hpbor_send[]
+
+. 登录{product_name} Global Zone 的 FirstBox 节点。
++
+include::../../../../../_components/note.adoc[]
+
+登录方式可咨询{product_name}安装部署人员。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 从 FirstBox 节点跳转至上传有安装包的物理服务器，进入安装包 `qke_harbor.tar.gz` 所在目录。
+
+. 执行如下命令行，解压安装包。
++
+[source,shell]
+----
+tar -zxvf qke_harbor.tar.gz
+----
+
+. 执行如下命令行，上传镜像包。其中 `<harbor_url>` 为 Harbor 地址，根据link:#_步骤三创建_habor_集群[前文内容]进行填写。
++
+[source,shell]
+----
+cd harbor && ./init_harbor.sh <harbor_url>
+----
++
+include::../../../../../_components/note.adoc[]
+
+* `<harbor_url>` 无需携带 `http://` 前缀。
+* 如前文创建的 Harbor 地址为 `http://192.168.0.252:80`，则此处命令行为 `cd harbor && ./init_harbor.sh 192.168.0.252:80`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 命令行回显内容如下所示，最终输出 `excute successfully` 表示镜像上传成功。
++
+image::/images/ep_offline/qke_install/qke_install_19.png[]
+
+//end::hpbor_send[]

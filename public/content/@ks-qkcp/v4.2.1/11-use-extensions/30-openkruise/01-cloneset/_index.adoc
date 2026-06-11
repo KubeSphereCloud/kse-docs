@@ -1,0 +1,49 @@
+---
+title: "CloneSet"
+weight:  01
+---
+
+=== 什么是 CloneSet
+
+CloneSet 是 OpenKruise 中直接管理 Pod 的 Set 类型工作负载，主要用于高效管理无状态应用。它不仅支持类似 Deployment 的基础功能，还提供了大量面向生产环境的增强能力，例如原地升级、PVC 模板、精细化灰度发布和生命周期钩子。
+
+=== 核心特性
+
+* *原地升级（In-Place Update）*：支持 `InPlaceIfPossible`（优先原地升级，无法原地升级时重建）和 `InPlaceOnly`（只允许原地升级）两种策略。原地升级仅重建 Pod 中的特定容器，不影响 Pod 网络、存储及其他容器，可避免 IP 漂移和重新调度开销，发布速度更快，对 CNI、CSI、DNS 等周边设施影响更小。
+* *PVC 模板支持*：支持配置 `volumeClaimTemplates`，为每个 Pod 生成独享的 PVC。扩缩容时，关联 PVC 会随 Pod 智能处理，例如缩容时可保留复用或删除，重建时会重新创建，原地升级时则持续使用。这是原生 Deployment 不支持的能力。
+* *灵活的扩缩容策略*：支持指定 Pod 缩容，例如通过 `podsToDelete` 或 `apps.kruise.io/specified-delete`，并支持 Pod Deletion Cost 缩容顺序、基于 Topology Spread Constraints 的打散缩容，以及流式扩容 `ScaleStrategy.MaxUnavailable`，满足精细化运维需求。
+* *灰度发布与发布控制*：支持通过 `partition` 控制保留旧版本 Pod 的数量或百分比；通过 `maxUnavailable` 限制发布或缩容过程中最大不可用 Pod 数量；通过 `maxSurge` 在发布时先扩容额外 Pod，再发布存量 Pod，降低服务中断风险；同时支持 `priorityStrategy` 和 `scatterStrategy` 自定义升级顺序，满足金丝雀发布、按节点打散等场景。
+* *生命周期钩子（Lifecycle Hook）*：支持在 Pod 创建后准备就绪（`PreNormal`）、原地升级前后（`InPlaceUpdate`，包括升级前和升级后两个阶段）以及删除前（`PreDelete`）插入自定义逻辑。结合 `markPodNotReady` 能力，可在升级或删除前先将 Pod 置为 NotReady，以实现优雅摘流。
+* *镜像自动预热*：在灰度发布新版本镜像时，控制器可自动在旧版本 Pod 所在节点上预拉取新镜像，从而加速发布过程。
+
+=== 页面功能
+
+CloneSet 页面提供以下功能：
+
+* 查看 CloneSet 列表
+* 按项目过滤 CloneSet
+* 创建 CloneSet
+* 编辑基本信息
+* 编辑 YAML
+* 编辑扩缩容策略
+* 指定缩容 Pod
+* 重建工作负载
+* 回滚历史版本
+* 删除 CloneSet 
+
+=== 状态说明
+
+CloneSet 列表支持按名称、状态、更新时间等维度检索和排序，状态包括：
+
+* `running`：运行中
+* `updating`：更新中
+* `stopped`：已停止
+
+
+=== 前提条件
+
+执行本栏目下的操作前，请确保：
+
+* 您在目标集群中具有 CloneSet 资源的相应权限。
+* KubeSphere 平台已安装并启用 OpenKruise 扩展组件。
+

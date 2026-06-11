@@ -1,0 +1,49 @@
+---
+title: "View Project Quota"
+keywords: "Kubernetes, {ks_product}, Federated Project, Project Settings, Project Quota, View Project Quota"
+description: "Describes how to view project quota."
+weight: 03
+---
+
+:ks_permission: **Project Settings View**
+:ks_navigation: **Project Management > Project Quota**
+
+This section describes how to view project quota.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. In the drop-down list in the upper-left corner, select a project to view the quota information of a specific project.
++
+--
+The **Default Container Quota** area provides the following resource information:
+
+[options="header",cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../_custom/clusterManagement/projects/projects-para-containerQuotas.adoc[]
+|===
+
+The **Project Quota** area provides the following resource information (displayed after the resource quota is configured):
+
+include::../../../../_custom/multi-clusterProjectManagement/project-config/project-quota-para_v42.adoc[]
+
+--

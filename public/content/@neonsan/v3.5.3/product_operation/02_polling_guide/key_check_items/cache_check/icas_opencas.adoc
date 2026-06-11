@@ -1,0 +1,52 @@
+---
+title: "iCAS/OpenCAS 缓存方案"
+weight: 1
+---
+
+== 适用范围
+
+NeonSAN 集群为**混插环境**，且使用 iCAS 或 OpenCAS 缓存方案，节点服务器要求：
+
+CPU 为 x86/海光 ，且操作系统为 Ubuntu。
+
+== 操作步骤
+
+. 逐个登录 NeonSAN 集群各存储（Store）节点。
+
+. 输入如下命令，查看当前 Store 节点的缓存盘 ID。
++
+[,shell]
+----
+casadm -L
+----
++
+include::../../../../../../_components/note.adoc[]
+后续步骤中，``-i`` 参数均用于指定当前查询到的缓存盘 ID。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 检查并清理缓存盘脏数据。
+.. 查看缓存盘脏数据情况。
++
+[,shell]
+----
+casadm -P -i <i> | grep Dirty
+----
+
+.. 若脏数据比例超过 85%，可执行如下命令将脏数据下刷至数据盘。
++
+[,shell]
+----
+casadm -F -i <i>
+----
+.. 若下刷数据 30min 后，脏数据比例仍然超过 85%，可迁移当前节点数据。节点数据迁移可参考《NeonSAN 运维手册》。
+
+. 查看缓存盘 errors 数据情况。若返回结果大于 0，则表示 cache 和 core 出现读写错误，可联系 NeonSAN 产研团队进行排查。
++
+[,shell]
+----
+casadm -P -i <i> | grep errors
+----
+
+
+
+

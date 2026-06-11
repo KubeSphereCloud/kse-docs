@@ -1,0 +1,121 @@
+---
+title: 查询IAM用户组成员（DescribeIAMGroupMembers）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| group_id
+| String
+| false
+| IAM用户组ID
+
+| limit
+| Integer
+| false
+| 偏移量
+
+| offset
+| Integer
+| false
+| 起始坐标
+
+| reverse
+| Integer
+| false
+| 是否降序查询
+
+| root_user
+| String
+| false
+| 主账户ID
+
+| user_ids
+| Array
+| false
+| 用户ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| group_member_set
+| Array
+| false
+| IAM用户组成员列表
+
+| group_member_set[].console_id
+| String
+| false
+| 控制台ID
+
+| group_member_set[].create_time
+| String
+| false
+| 创建时间
+
+| group_member_set[].group_id
+| String
+| false
+| IAM用户组ID
+
+| group_member_set[].owner
+| String
+| false
+| 所有者ID
+
+| group_member_set[].root_user_id
+| String
+| false
+| 主账户ID
+
+| group_member_set[].user_id
+| String
+| false
+| 用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMGroupMembers",
+  "group_id": "iamg-6sysj1u7",
+  "limit": 20,
+  "offset": 0
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMGroupMembersResponse",
+  "group_member_set": [
+    {
+      "console_id": "testing",
+      "create_time": "2023-06-02T16:53:52",
+      "group_id": "iamg-6sysj1u7",
+      "owner": "admin",
+      "root_user_id": "admin",
+      "user_id": "usr-asfsa"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

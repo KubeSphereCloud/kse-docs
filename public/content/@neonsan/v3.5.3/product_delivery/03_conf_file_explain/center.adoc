@@ -1,0 +1,78 @@
+---
+title: "center.conf"
+weight: 2
+---
+
+
+该配置文件用于配置 neoncenter 服务，其参数说明如下所示。
+
+[options="header",cols="2,2,3,1"]
+|===
+|参数名|类型 |说明 |是否必须 
+4+h|[zookeeper]
+|ip
+|IP 列表
+|ZooKeeper 集群节点 IP，以逗号分开，建议配置 3~5 个节点。
+|是
+
+|cluster_name	
+|字符串	
+|ZooKeeper 集群名	
+|是
+
+4+h|[center]：本节点信息
+|mngt_ip	|字符串	|本地节点 IP	|是
+|location	|字符串	|该 center 节点在远端还是本地	|否
+|priority_leaders	|字符串	|可优先选为主 center 的节点 IP 列表	|否
+|volume_policy	|字符串	|volume 策略	|否
+
+4+h|[local_dc]：本地数据中心
+|name	|字符串	|本地数据中心的名字	|是
+|domains	|字符串	|该数据中心的 domain 列表，用逗号隔开	|是
+
+4+h|[remote_dc]：远程数据中心
+|name	|字符串	|本地数据中心的名字	|是
+|domains	|字符串	|该数据中心的 domain 列表，用逗号隔开	|是
+
+4+h|[mysql]：数据库信息
+|user	|字符串	|数据库用户名	|是
+|pass	|字符串	|数据库密码	|是
+|ip	|IP 格式	|浮动 IP	|是
+|db_name	|字符串	|数据库名	|是
+|logsql	|数字	|是否保存 sql 日志，1：保存，0：不保存	|是
+
+4+h|[async_queue.gc]：异步操作，gc 队列信息
+|capacity	|数字	|gc 队列容量	|是
+
+4+h|[async_queue.recovery]：异步操作，recovery 队列信息
+|capacity	|数字	|recovery 队列容量	|是
+|auto_flag	|布尔	
+a|是否自动 recovery 
+
+* false：手动 recovery
+* true：自动 recovery	
+|是
+
+|auto_concurrency_num	|数字	|recovery 并发执行数量	|是
+|auto_time_interval	|数字	|查询 recovery 队列的时间间隔	|是
+
+4+h|[async_queue.rebalance]：异步操作，rebalance 队列信息
+|capacity	|数字	|队列容量	|是
+
+4+h|[async_queue.scrub]：异步操作，scrub 队列信息
+|capacity	|数字	|队列容量	|是
+
+4+h|[policy.volume_name_aware_policy]
+|prefix_match	|字符串	|volume 前缀	|否
+|===
+
+**注意事项**：
+
+* 与 store.conf 里的 zookeeper 信息保持一致。
+* 同步灾备需添加 location 字段和 priority_leaders 字段，并修改 volume_policy 为stretch_cluster。
+* 同步灾备的情况下，需配置该部分参数。
+* 同步灾备的情况下，需配置该部分参数。
+* 本地 domain 和远端 domain 需设置不同
+
+
+

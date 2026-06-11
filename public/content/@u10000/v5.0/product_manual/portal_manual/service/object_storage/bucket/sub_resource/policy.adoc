@@ -1,0 +1,56 @@
+---
+title: Policy
+weight: 5
+---
+
+
+通过设置存储空间策略，可以向其他用户赋予相应 Bucket 及其对象的访问权限。
+
+== 添加 Policy
+
+//. 成功link:../../../../../login[登录 Portal]。
+
+. 进入link:../../sub_resource/[子资源详情]页面，在**存储空间策略**卡片，点击**添加规则**。
+
+. 弹出**添加规则**对话框，用户可根据页面提示信息，填写相关参数后，点击**提交**。
++
+image::/images/u10000/stor_bucket_policy.png[stor_bucket_policy,50%]
++
+**页面信息说明**
+
+* `ID`：规则标识符。
+* `行为`：设置该 Bucket 策略支持的 API 操作。
+* `资源`：设置该 Bucket 策略生效的资源范围。
+ ** 缺损时，说明该规则对 Bucket 列表页的所有 Bucket 生效。
+ ** 以 `bucket-name/` 为前缀，说明该规则仅对 `bucket-name/` 所指定的 Bucket 内相应资源生效。
+ ** 如需针对指定 Bucket 内所有资源生效，需填写 `bucket-name/*`。
+* `响应动作`：当策略成功匹配用户的请求时，是允许还是拒绝该请求。
+* `Referer`：指定请求来源。
+* `IP`：指定请求的源地址匹配值，以 CIDR 格式表示。
+
+. 成功设置的 Policy，在link:../../sub_resource/[子资源详情]页面的**存储空间策略**卡片列表显示。
+
+== 修改 Policy
+
+//. 成功link:../../../../../login[登录 Portal]。
+
+. 进入link:../../sub_resource/[子资源详情]页面，在**存储空间策略**卡片，点击待修改的规则条目的**更多 > 修改**。
++
+image::/images/u10000/stor_bucket_policy_m.png[stor_bucket_policy_m,100%]
+
+. 在弹出的对话框内，修改相应的参数后，点击**提交**，即可完成修改。
+
+. 更新后的存储空间策略，在link:../../sub_resource/[子资源详情]页面的**存储空间策略**卡片列表显示。
+
+== 删除 Policy
+
+//. 成功link:../../../../../login[登录 Portal]。
+
+. 进入link:../../sub_resource/[子资源详情]页面，在**存储空间策略**卡片，点击待删除的规则条目的**更多 > 删除**。
++
+image::/images/u10000/stor_bucket_policy_m.png[stor_bucket_policy_m,100%]
+
+. 在弹出的对话框内，确认操作无误后，点击**确定**。
+
+. 成功删除的存储空间策略，不在link:../../sub_resource/[子资源详情]页面的**存储空间策略**卡片列表显示。
+ 

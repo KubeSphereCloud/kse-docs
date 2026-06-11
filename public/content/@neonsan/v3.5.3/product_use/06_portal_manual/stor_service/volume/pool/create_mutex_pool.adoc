@@ -1,0 +1,36 @@
+---
+title: '创建/删除互斥卷组'
+weight: 2
+draft: false
+---
+
+. 登录 link:../../../../login[Portal 管理界面]。
+
+. 点击左侧导航栏**存储服务** > **块存储** > **卷管理**，进入卷管理页面。
+
+. 点击当前页面内的**更多操作** > **卷组管理**，弹出**卷组管理**新窗口，并选择**互斥卷组**页签。
+
++
+image::/images/neonsan/portal_create_mutex_pool_1.png[,70%]
+
+. 在卷组管理窗口，点击**创建互斥卷组**，在弹出的新窗口中输入``名称``、卷组所属``存储池``以及卷组内``最大卷数量``，点击**保存**即可。
++
+include::../../../../../../../_components/note.adoc[]
+* 卷组名集群全局唯一。
+* 最大卷数量不能为空，需大于 1 且小于存储池节点数，如 rg 存储池的节点数为 3，则此处最大卷数量的范围为 1～3。
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_create_mutex_pool_2.png[,50%]
+
+. 创建成功的新卷组会显示在**卷组管理**列表，该页面会展示集群中已存在的所有互斥卷组的``名称``、所属``存储池``、``卷数量\卷总数``以及卷组``创建时间``。点击指定卷组所在行右侧的更多操作，可对卷组进行``删除卷组``操作。
+
++
+
+include::../../../../../../../_components/attention.adoc[]
+待删除的互斥卷组中``卷数量``应为 0。若不为 0，需先删除对应的卷后再删除卷组。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
++
+image::/images/neonsan/portal_create_mutex_pool_3.png[,70%]
+

@@ -1,0 +1,52 @@
+---
+title: "升级 QKE"
+weight: 40
+---
+
+== 操作场景
+
+QKE 支持从 v2.0.0、v2.3.1 版本升级到 v3.0.0 版本。
+
+当环境中已经部署了 QKE 低版本，可以再部署 v3.0.0 版本，然后通过 Console 对 QKE 集群进行升级。
+
+== 操作步骤
+
+. 完成准备工作，包括：link:../prepare/import/import_images[导入 QKE 镜像]、link:../prepare/import/upload_docker_image[上传 docker 镜像]、link:../prepare/import/qke_cli[上传 QKE 安装包]。
+. 更新 qke_apiserver，详细操作请参见link:../install/qke_apiserver#_追加部署[安装 qke_apiserver]。
++
+或者手动更新 qke_apiserver 包。
++
+.. 下载将最新的 deb 包，并上传到 Global Zone 的 Webservice 节点。
+.. 登录 Global Zone 的 Webservice 节点。
+.. 执行以下命令，升级 qke_apiserver。
++
+[source]
+----
+dpkg -i pitrix-qke-apiserver_1.0_amd64.deb
+----
+. link:../install/init_data[导入初始化数据]。
+. 检查 SQL 是否符合新版本。
++
+如下命令表示仅打印对应版本的 SQL，并没有真正运行。
++
+[source]
+----
+python qke.py -u 1
+----
++
+如下 SQL 表示是新的 QKE_PLUS 版本。
++
+[source]
+----
+# python  qke.py -u 1
+INSERT INTO qke_db_version (created_at, updated_at, qke_version, qke_api_server_version, qke_cli_version, app_id, app_version, app_name, resource_kit, kubesphere_version, qkcp_version, kubernetes_version, install_url, cli_url, hide_master, zone, compatibility_k8s, compatibility_ks,compatibility_qkcp, mirror,private_registry, feature, qke_debug, app_debug, deleted) VALUES (NOW(), NOW(), 'v2.4.0', 'v0.0.1', 'v2.4.0', 'app-o6lvbkhm', 'appv-1i0kn269', 'self', 'ca-yy7803b7', 'v3.3.1', 'v3.3.1', 'v1.23.8', 'http://127.0.0.1:8999', 'http://127.0.0.1:8999/qke-cli-v2.4.0.tar.gz', false, 'pek3b,pek3c,pek3d', 'v1.21.5,v1.22.10', 'v1.21.5,v1.22.10,v1.23.8', 'v1.21.5,v1.22.10,v1.23.8', NULL, 'http://127.0.0.1:8999','<div>1. 新增裸金属节点作为集群工作 节点，支持添加、删除操作，提供更强算力。<br/></div><div>2. 支持对接云平台IAM，提升集群组织级账号权限管理能力。<br/></div><div>3. 支持使用U10000作为后端存储，并提供页面展示及管理能力，满足多读多写场景要求。<br/></div><div>4. 修复了一些问题，提升集群稳定性与资源管理能力。<br/></div>', false, false, false);
+----
+
+. 执行以下命令，插入 SQL 数据。
++
+[source]
+----
+./qke -e -u ./conf/config.yaml -d 插入sql。
+----
+
+. 登录{product_name} Console，即可在 QKE 创建页面看到新版本；还可以对已有低版本 QKE 集群进行升级。

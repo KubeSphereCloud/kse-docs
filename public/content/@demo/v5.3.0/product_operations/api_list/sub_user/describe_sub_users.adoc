@@ -1,0 +1,144 @@
+---
+title: 查看子用户信息（DescribeSubUsers）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| email
+| String
+| false
+| 电子邮件地址
+
+| limit
+| Int
+| false
+| 偏移量
+
+| offset
+| Int
+| false
+| 起始坐标
+
+| owner
+| String
+| false
+| 子用户的所有者
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| status
+| Array
+| false
+| 子用户的状态
+
+| users
+| Array
+| false
+| 子用户的用户ID的集合
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| change_passwd_first_login
+| Int
+| false
+| 子用户第一次登录是否需要修改密码
+
+| create_time
+| String
+| false
+| 子用户的创建时间
+
+| email
+| String
+| false
+| 子用户的电子邮件地址
+
+| nologin
+| Int
+| false
+| 子用户是否禁止登录
+
+| notify_email
+| String
+| false
+| 子用户的告警电子邮件地址
+
+| preference
+| Int
+| false
+| 子用户优选项
+
+| status
+| String
+| false
+| 子用户的状态
+
+| user_id
+| String
+| false
+| 子用户的用户ID
+
+| user_name
+| String
+| false
+| 子用户的用户名称
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeSubUsers",
+  "email": "v2v@testing.com#xx",
+  "limit": 20,
+  "offset": 0,
+  "owner": "usr-xSSSIiXv",
+  "search_word": "xxx",
+  "status": "active",
+  "users": [
+    "usr-NwQn9l7u"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeSubUsersResponse",
+  "ret_code": 0,
+  "total_count": 1,
+  "user_set": [
+    {
+      "change_passwd_first_login": 0,
+      "create_time": "2021-12-07T03:05:09Z",
+      "email": "xxx@testing.com#aa",
+      "nologin": 0,
+      "notify_email": "xxx@testing.com",
+      "preference": 1,
+      "status": "active",
+      "user_id": "usr-KAAAUAgG",
+      "user_name": "aa"
+    }
+  ]
+}
+----

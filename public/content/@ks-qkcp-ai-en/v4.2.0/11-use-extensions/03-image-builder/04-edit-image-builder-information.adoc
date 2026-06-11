@@ -1,0 +1,59 @@
+---
+title: "Edit Image Builder Information"
+keywords: "Kubernetes, {ks_product}, Image Builder, Edit Image Builder Information"
+description: "Describes how to edit image builder information."
+weight: 04
+---
+
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Image Builder**
+
+
+This section describes how to edit image builder information.
+
+You can edit the alias and description of an image builder. KubeSphere does not support editing the name of an image builder.
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the right side of the target image builder, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Edit Information** from the dropdown list.
+
+. In the **Edit Information** dialog box, set the alias and description for the image builder, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Alias
+|The alias of the image builder. Different image builders can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-). It cannot start or end with a hyphen (-) and has a maximum length of 63 characters.
+
+|Description
+|The description of the image builder. The description can contain any characters, with a maximum of 256 characters.
+|===
+--

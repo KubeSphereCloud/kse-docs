@@ -1,0 +1,71 @@
+---
+title: "Edit Node Taints"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Node, Edit Node Taints"
+description: "Describes how to edit node taints."
+weight: 05
+---
+
+:ks_permission: **Node Management**
+
+This section describes how to edit node taints.
+
+A taint is a label created by a user on a node, used in conjunction with tolerations created on pods. When a node has a taint, depending on the set taint effect, all pods lacking a toleration that matches the taint will be prevented from being scheduled onto the node or will be scheduled onto the node as little as possible.
+
+A taint consists of three parts: a key, a value, and an effect. A pod's toleration must match the taint's key, value, and effect for the pod to be unaffected by the taint.
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+The KubeSphere web console currently does not support editing pod tolerations. Therefore, by default, node taints are effective for all pods.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/nodes/nodes-oper-openListPage_new.adoc[]
+
++
+
+. Select the checkbox to the left of the node you want to operate on, then click **Edit Taints** above the node list.
+
+. In the **Edit Taints** dialog box, set the taint's key, value, and effect, then click **OK**.
++
+--
+You can choose one of the following effects for a taint:
+
+[%header,cols="1a,4a"]
+|===
+|Taint Effect |Description
+
+|Prevent Scheduling
+|Pods lacking a toleration that matches the taint will be prevented from being scheduled onto the node. Pods already running on the node are not affected.
+
+|Schedule as Little as Possible
+|Pods lacking a toleration that matches the taint will be scheduled onto the node as little as possible. Pods already running on the node are not affected.
+
+|Prevent Scheduling and Evict Existing Pods
+|Pods lacking a toleration that matches the taint will be prevented from being scheduled onto the node. Pods already running on the node that lack a matching toleration will be evicted immediately.
+|===
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* Click **Add Taint** to set multiple taints for a node.
+
+* If you are editing taints for multiple nodes simultaneously, you can set common taints for all selected nodes as well as individual taints for each node.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,43 @@
+---
+title: "Enable Collect Logs on Volumes"
+keywords: "Kubernetes, {ks_product-en}, project management, project settings, log collection, collect logs on volume"
+description: "This section introduces how to enable collect logs on volumes."
+weight: 03
+---
+
+:ks_permission: **Application Workload Management**
+
+ifeval::["{file_output_type}" == "html"]
+This section introduces how to enable collect logs on volumes when creating workloads, services, or Jobs. For more information, see link:../../../../../09-project-management/03-application-workloads/03-workloads/01-create-a-workload/[Create a Workload] or link:../../../../../09-project-management/03-application-workloads/04-jobs/01-create-a-job/[Create a Job].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+This section introduces how to enable collect logs on volumes when creating workloads, services, or Jobs. For more information, see the “Application Workloads” chapter of the {ks_product-en} Project Management Guide to create a workload or create a Job.
+endif::[]
+
+== Prerequisites
+
+* {empty}
+include::../../../../../_custom-en/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+* **WhizardTelemetry Logging** should have been installed and enabled, and link:../02-enable-project-log-collection/[the log collection feature must be enabled in the project].
+
+== Steps
+
+include::../../../../../_custom-en/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+. In the left navigation pane, select **Application Workloads > Workloads** or **Application Workloads > Jobs**.
+
+. On the workloads page, click **Deploy**, **StatefulSet**, or **DaemonSet** to open the workload list, or on the Jobs page, click **Job** or **CronJob** to open the Job list.
+
+. Click **Create** on the page.
+
+. On the **Storage Settings** tab, click the **Collect Logs on Volumes** switch to enable the feature.
+
+. Click **Mount Volume** to mount a persistent volume or temporary volume in **ReadWrite** mode for the container, and set the **Container Log Path**.
+
+. Set the application in the container to export logs to the container log path under the volume mount directory.
++
+After the log collection is completed, it will be printed to the standard output of the container, and you can query the container logs using the toolbox provided by {ks_product-en}. For more information, see link:../../03-use-log-query-tools/[Use the Container Log Query Tool].

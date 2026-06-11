@@ -1,0 +1,128 @@
+---
+title: "混插环境"
+weight: 3
+---
+
+
+[cols="^1h,5"]
+|===
+|验收目的
+|验证 QingStor NeonSAN 存储系统的性能。
+
+|预置条件
+a|. QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+. 各节点服务配置正确，且状态正常。
+
+|预置检查
+a|
+//include::check.adoc[]
+link:../check[检查并设置集群节点的 CPU 工作模式。]
+
+|测试过程
+a|
+. 设定参数。
+.. 查看 seq-cutoff 参数。
++
+[source,shell]
+----
+casadm --get-param --name seq-cutoff --cache-id 1 --core-id 1 --output-format csv
+----
+.. 将 seq-cutoff 参数设置为full。
+* 节点上只有一个 icas 盘
++
+[source,shell]
+----
+casadm -X -n seq-cutoff -i 1 -j 1 -t 1024 -p full
+----
+* 若一个节点上存在两个 icas 盘，则需要分别设置（i 为 cache ID，j 为 core ID）。
++
+[source,shell]
+----
+casadm -X -n seq-cutoff -i 1 -j 1 -t 1024 -p full
+----
++
+[source,shell]
+----
+casadm -X -n seq-cutoff -i 1 -j 2 -t 1024 -p full
+----
+.. 查看 seq-cutoff 参数。
++
+[source,shell]
+----
+casadm --get-param --name seq-cutoff --cache-id 1 --core-id 1 --output-format csv
+----
+. 创建一个 128 GB、2 副本的卷。
++
+[source,shell]
+----
+neonsan create_volume -volume vol_test128 -pool vol -size 128G  -repcount 2
+----
+. 在 hyper 节点上挂载步骤 2 创建的卷。
++
+[source,shell]
+----
+qbd -m vol/vol_test128
+----
+. 在客户端使用 FIO 工具，对步骤 2 创建的卷进行预热，忽略性能。
++
+[source,shell]
+----
+fio -name=my_test -filename=/dev/qbd/vol/vol_test128 -size=128G -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -bs=1MB -rw=write -iodepth=32 -numjobs=1
+----
+ifeval::["{file_output_type}" == "pdf"]
+|===
+<<<
+[cols="^1h,5"]
+|===
+|测试过程
+a|
+[start=5]
+endif::[]
+. 预热后，在客户端使用 FIO 工具测试各场景下集群性能：
+* 4K 随机读。
++
+[source,shell]
+----
+fio -name=my_test -filename=/dev/qbd/vol/vol_test128 -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=120 -time_based=1 -bs=4k -rw=randread -iodepth=32 -numjobs=1
+----
+* 4K 随机写。
++
+[source,shell]
+----
+fio -name=my_test -filename=/dev/qbd/vol/vol_test128 -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=120 -time_based=1 -bs=4k -rw=randwrite -iodepth=32 -numjobs=1
+----
+* 1024K 顺序读。
++
+[source,shell]
+----
+fio -name=my_test -filename=/dev/qbd/vol/vol_test128 -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=120 -time_based=1 -bs=1024k -rw=read -iodepth=32 -numjobs=1
+----
+* 1024K 顺序写。
++
+[source,shell]
+----
+fio -name=my_test -filename=/dev/qbd/vol/vol_test128 -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=120 -time_based=1 -bs=1024k -rw=write -iodepth=32 -numjobs=1
+----
+. 测试完成后，将 seq-cutoff 参数设置为 always。
++
+[source,shell]
+----
+casadm -X -n seq-cutoff -i 1 -j 1 -t 1024 -p always
+----
+
+|预期结果
+a|NVMe SSD 作为缓存盘，预热后， 存储端 RDMA，TCP client 4k 随机写的单卷性能区间：
+
+* 命中率为 10% 时，在 2 ~ 5K IOPS。
+* 命中率为 50% 时，在 5 ~ 40K IOPS。
+* 命中率为100% 时，在40 ~ 80K IOPS。
+
+由于硬件环境差异，该性能结果仅供参考。
+
+
+|验证结果
+|可填写至附录内测试报告表格内。
+
+|备注
+|
+|===

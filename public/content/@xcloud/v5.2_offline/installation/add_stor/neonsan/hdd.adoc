@@ -1,0 +1,163 @@
+---
+title: "混插型环境配置"
+weight: 50
+---
+
+如果 NeonSAN 环境为纯 SSD 环境，请跳过此步骤。
+
+== 设置安置组
+
+混插型环境需要为计算节点设置这四个安置组：sas,ssd,sata,sanc。
+
+* 方式一：通过 BOSS 平台设置
++
+详细操作请参见link:../../../initialize/plg/config_plg[设置安置组]。
+
+* 方式二：通过 CLI 添加
+
+ .. 登录 FirstBox。
+ .. 执行以下命令，设置安置组。
++
+[source]
+----
+/pitrix/bin/modify_hyper_plgs.sh hyper add sas,ssd,sata,sanc
+----
+
+== 修改后端配置
+
+. 登录 FirstBox。
+. 执行以下命令，修改 server.yaml.ZONE_ID 文件。
++
+[source]
+----
+vi /pitrix/conf/variables/global/server.yaml.ZONE_ID
+----
+. 修改如下 default 参数。
++
+
+include::../../../../../_components/attention.adoc[]
+default 默认为 SSD，如果是混插节点需要要修改为 HDD。
+
+include::../../../../../_components/table_footer.adoc[]
++
+[source]
+----
+common:
+  volume_type_label:
+    !!int 5: 'SSD'
+    !!int 6: 'HDD'
+    !!int 7: 'SSD2'
+    default: 'HDD'
+  instance_class_label:
+    !!int 6: 'SSD'
+    !!int 7: 'HDD'
+    default: 'HDD'
+----
+
+. 执行以下命令，刷新 server.yaml.ZONE_ID 到节点。
++
+[source]
+----
+/pitrix/upgrade/build_global_conf.sh
+/pitrix/upgrade/update.sh -f all pitrix-global-conf
+----
+
+== 添加前端配置
+
+NeonSAN 环境为混插型硬盘，用到 volume type 6 和 instance class 7，需要执行此步骤。
+
+. 登录配置中心。
+. 在左侧导航栏，选择**应用管理**，进入应用管理页面。
+. 选择 **webconsole** 应用，进入 webconsole 配置管理页面。
++
+image::/images/ep_offline/installation/add_stor_neonsan_hdd_01.png[]
+. 在 zone_config 所在行，点击右侧的管理配置，进入 zone_config 配置页面。
++
+image::/images/ep_offline/installation/add_stor_neonsan_hdd_02.png[]
+. 添加前端硬盘类型。
++
+找到 **valid_volume_types** 参数。
++
+[source]
+----
+valid_volume_types:
+{enable: false, max: 1000, max_io: 128 MB/s, min: 10, step: 10, type: 0}
+{enable: false, max: 5000, max_io: 36 MB/s, min: 100, step: 50, type: 1}
+{enable: false, max: 10000, max_io: 36 MB/s, min: 100, step: 50, type: 2}
+{enable: false, max: 1000, max_io: 200 MB/s, min: 10, step: 10, type: 3}
+{enable: false, max: 5000, max_io: 36 MB/s, min: 100, step: 50, type: 4}
+{enable: false, max: 50000, max_io: 200 MB/s, min: 100, step: 100, type: 5}
+----
+
+ ** 把不需要的磁盘类型改为 enable: false。
+ ** 并在下方添加如下内容，与上一行对齐。
++
+[source]
+----
+{enable: true, max: 50000, max_io: 36 MB/s, min: 10, step: 10, type: 6}
+----
+. 添加前端备份盘类型。
++
+找到 **valid_snapshot_volume_type_map** 参数。
++
+[source]
+----
+valid_snapshot_volume_type_map: 
+  volume_type_0: [0, 3]
+  volume_type_2: [2]
+  volume_type_3: [0, 3]
+  volume_type_5: [5]
+----
++
+添加如下内容，与上一行对齐。
++
+[source]
+----
+volume_type_6: [6] 
+----
+. 添加前端主机类型。
++
+找到 **valid_instance_classes** 参数，在中括号内增加 7，如没有其他类型存储则只保留 7。
++
+示例：
++
+[source]
+----
+valid_instance_classes: [0, 1, 6, 7]
+----
+. （可选）修改磁盘副本规格。
++
+
+include::../../../../../_components/note.adoc[]
+如果用户没有特殊要求，使用默认配置即可。
+
+include::../../../../../_components/table_footer.adoc[]
+
+ ** 修改 NeonSAN HDD 盘副本数。
++
+找到如下参数，根据实际情况进行修改。
++
+[source]
+----
+min_replice_count_of_volume_type_6: 2 #修改此行，设置最小副本数
+max_replice_count_of_volume_type_6: 3 #修改此行，设置最大副本数
+default_replica_count_of_volume_type_6: 2 #修改此行，设置默认副本数
+----
+ ** 修改 NeonSAN SSD 盘副本数。
++
+找到 default_replica_count_of_volume_type_6 参数。
++
+[source]
+----
+default_replica_count_of_volume_type_6: 2
+----
++
+在下方添加如下内容，与上一行对齐。
++
+[source]
+----
+min_replice_count_of_volume_type_5: 2 #添加此行，设置最小副本数
+max_replice_count_of_volume_type_5: 3 #添加此行，设置最大副本数
+default_replica_count_of_volume_type_5: 2 #添加此行，设置默认副本数
+----
+. 配置完成后，点击**保存**。

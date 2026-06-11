@@ -1,0 +1,29 @@
+---
+title: '从存储池中删除节点'
+weight: 2
+draft: false
+---
+
+== 注意事项
+
+存储池内待删除的存储节点上，不应有卷分布。若有卷分布，则需先link:../../../stor_service/volume/vol/vol_delete[删除卷]后，再删除存储节点。
+
+== 操作流程
+
+. 登录 link:../../../login[Portal 管理界面]。
+
+. 点击左侧导航栏**存储资源** > **存储池**，进入存储池管理页面，点击对应存储池所在行的**更多操作** > **移除服务器**。
++
+image::/images/neonsan/portal_del_rg_node_1.png[]
+
+. 在弹出的**移除服务器**对话框内，勾选需要移除的服务器，点击**移除服务器**即可。
++
+image::/images/neonsan/portal_del_rg_node_2.png[,60%]
+
+. 返回存储池管理页面，对应存储池的管理服务器台数减少。
+
+//image::/images/neonsan/portal_del_rg_node_3.png[]
+
+. 点击右侧导航栏**存储资源** > **服务器**，进入服务器管理页面，选择**存储节点**页签，可以看到步骤 3 中移除的服务器已不在相应的存储池内。 
+
+//image::/images/neonsan/portal_del_rg_node_4.png[]

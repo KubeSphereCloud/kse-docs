@@ -1,0 +1,52 @@
+---
+title: "移除容器组 IP 池"
+weight: 09
+---
+
+:ks_permission: **节点组管理**
+:ks_navigation: **节点组设置 > 容器组 IP 池**
+
+
+本节介绍如何从节点组中移除容器组 IP 池，即将节点组与容器组 IP 池解绑。
+
+
+== 前提条件
+
+* {empty}
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+* 已为节点组添加容器组 IP 池。
+
+
+== 移除单个容器组 IP 池
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要移除的容器组 IP 池右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**移除**。
+
+. 在**移除容器组 IP 池**对话框，输入容器组 IP 池的名称，然后点击**确定**。
+
+
+== 批量移除容器组 IP 池
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 选择需要移除的容器组 IP 池左侧的复选框，然后在容器组 IP 池列表上方点击**删除**。
+
+. 在**批量删除容器组 IP 池**对话框，输入容器组 IP 池的名称，然后点击**确定**。
++
+--
+include::../../../../../../_custom/note-separateNamesByComma.adoc[]
+--

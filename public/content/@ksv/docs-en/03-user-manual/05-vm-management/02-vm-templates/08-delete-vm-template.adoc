@@ -1,0 +1,66 @@
+---
+title: "Delete VM templates"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, templates, deletion"
+description: "Describes how to delete VM templates in the {ks_product} web console."
+weight: 08
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 3c286bd16b2048bc8e08c244b05b6e68
+:ks_xref_id: ca08cb66092a4508b13df36e683f8a4d
+:ks_comp: ../../../../components/
+:ks_title: Delete VM templates
+:ks_description: Describes how to delete VM templates in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, templates, deletion
+:ks_weight: 08
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete VM templates in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=8f49f801172940b58cccd6adcd5a8f00]
+
+include::../../../../_custom-en/vms/vm-template-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a VM templatelink:[id=dfcbd4e6f3104d5b9678cf28ff8e543f]
+
+include::../../../../_custom-en/vms/vm-template-steps.adoc[]
+
+. On the **Templates** page, click the name of a VM template to view its details.
+. On the left side of the details page, click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+The VM template cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple VM templates at a timelink:[id=a4a36ecb4c994fbbbbdda4051f12ee4a]
+
+include::../../../../_custom-en/vms/vm-template-steps.adoc[]
+
+. On the **VM Templates** page, select the check boxes next to the VM templates that you want to delete, and click **Delete**.
+. In the dialog box that appears, click **OK**.
++
+--
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+VM templates cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

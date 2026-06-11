@@ -1,0 +1,68 @@
+---
+title: "绑定/解绑弹性 IP"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 弹性 IP, 绑定, 解绑"
+description: "介绍如何使用{ks_product_both}Web 控制台将弹性 IP 绑定到 VPC 或解除 VPC 和弹性 IP 的绑定。"
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 17a718d0c1954bb7afaa6ba003d32f53
+:ks_xref_id: e5528a47217143dfa48d1c45e561a6e4
+:ks_comp: ../../../../components/
+:ks_title: 绑定/解绑弹性 IP
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台将弹性 IP 绑定到 VPC 或解除 VPC 和弹性 IP 的绑定。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 弹性 IP, 绑定, 解绑
+:ks_weight: 07
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台将弹性 IP 地址绑定到 VPC 或解除 VPC 和弹性 IP 地址的绑定。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=834688ad50284ce4a7447376acab50c8]
+
+include::../../../../_custom/networks/vpc-manage-prerequisites.adoc[]
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 在 VPC 列表页面绑定/解绑link:[id=dd1fe444f5274c46836710eb84d1a837]
+
+include::../../../../_custom/networks/vpc-steps.adoc[]
+
+. 找到目标 VPC，点击右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**绑定弹性 IP** 或**解绑弹性 IP**。
++
+--
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+弹性 IP 解绑后无法恢复，请谨慎操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 在 VPC 详情页面绑定/解绑link:[id=4bdc4d8d75ce4acf96db753072e657f5]
+
+include::../../../../_custom/networks/vpc-steps.adoc[]
+
+. 在 VPC 列表页面，点击目标 VPC 名称，进入 VPC 详情页面。
+
+. 在 VPC 详情页面的左侧区域，点击右上角的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**绑定弹性 IP** 或**解绑弹性 IP**。
++
+--
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+弹性 IP 解绑后无法恢复，请谨慎操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

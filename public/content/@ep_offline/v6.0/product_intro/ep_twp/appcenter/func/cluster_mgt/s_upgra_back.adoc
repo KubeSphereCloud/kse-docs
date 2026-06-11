@@ -1,0 +1,24 @@
+---
+title: "原地升级失败恢复"
+weight: 27
+---
+
+集群原地升级失败后的恢复逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_18.png[]
+
+功能流程说明：
+
+. 配置包中是否支持 rollback：
++
+* 不支持，执行步骤 2。
+* 支持，执行步骤 3。
+. 关闭集群，再次启动集群（使用旧版本镜像），退出流程，操作结束。
+. 将 upgrade-audit 注册到 metadata service
+. 不同角色节点按照 order 升序执行 upgrade pre_check 脚本：
++
+* 如果返回报错（非 0），降级失败，删除 upgrade-audit，退出流程，操作结束。
+* 如果返回 0，继续执行步骤 5。
+
+. 根据升级策略并行或者串行执行 rollback cmd 脚本。
+. 删除注册到 metadata service 中的 upgrade-audit 数据，降级恢复完成。

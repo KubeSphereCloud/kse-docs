@@ -1,0 +1,24 @@
+---
+title: "退出维护模式"
+weight: 1
+---
+
+升级 neonstore 过程中，会有节点进入维护模式的操作。若此时升级操作意外终止，则需手动操作，使节点退出维护模式。具体操作如下。
+
+. 运行升级脚本，进入升级脚本操作界面。
++
+[source,shell]
+----
+./upgrade_v1.20.sh
+----
+. 根据提示信息，输入 ``n``。
+. 在操作界面输入 ``13`` 后，根据提示信息，输入待退出维护模式的节点 Store ID 即可。
++
+[source,shell]
+----
+please input 1-15 number: 13
+----
+//+
+//image::/images/neonsan/upgrade_neonsan_12.png[]
+
+

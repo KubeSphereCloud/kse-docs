@@ -1,0 +1,184 @@
+---
+title: "PostgreSQL 数据库快速恢复"
+weight: 4
+---
+
+== 运维场景
+
+在进行服务巡检的过程中，若 KS 节点上的数据库出现异常，可通过如下操作进行快速恢复。
+
+== 操作步骤
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 登录任一计算节点，执行如下命令。
++
+[source,shell]
+----
+/opt/recovery_hyper_power_shutdown_abnormal.sh
+----
+
+. 退出计算节点，在 FirstBox 节点上，执行如下命令，再次检查 KS 节点数据库服务是否正常。
+
++
+[source,shell]
+----
+/pitrix/check/check.py -n all
+----
++
+include::../../../../../../_components/note.adoc[]
+* 若返回结果中，KS 节点上数据库服务正常，则处理完成。
+* 若返回结果中，KS 节点上数据库服务依旧异常，则进行后续步骤。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在 FirstBox 节点上，执行如下命令，查看 KS 节点基本信息。
++
+[source,shell]
+----
+cat /etc/hosts | grep ks
+----
+. 登录至 ks1 节点，执行如下命令，查看配置文件内容。
++
+[source,shell]
+----
+grep -rn -A 5 <zone_id>-ks0 /etc/pgpool2/pgpool.conf
+----
++
+include::../../../../../../_components/note.adoc[]
+``<zone_id>-ks0`` 为 pg_master 主节点，一般为 ks0 节点，<zone_id> 需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 重启 PostgreSQL 服务。
++
+[source,shell]
+----
+/etc/init.d/postgresql restart
+----
++
+检查 PostgreSQL 服务状态。
++
+[source,shell]
+----
+/etc/init.d/postgresql status
+----
+
+. 依次执行以下操作，重启 pgpool2 服务。
+.. 关闭 pgpool2 服务。
++
+[source,shell]
+----
+/etc/init.d/pgpool2 stop
+----
+.. 删除 ``.s.PGSQL.5432`` 文件。
++
+[source,shell]
+----
+rm -r /var/run/pgpool/.s.PGSQL.5432
+----
+.. 启动 pgpool2 服务。
++
+[source,shell]
+----
+/etc/init.d/pgpool2 start
+----
+.. 检查 pgpool2 服务状态。
++
+[source,shell]
+----
+/etc/init.d/pgpool2 status
+----
++
+include::../../../../../../_components/note.adoc[]
+此时查询状态会异常 ``failed``，属于正常现象
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录至 ks0 主节点。
+
+. 重启 PostgreSQL 服务。
++
+[source,shell]
+----
+/etc/init.d/postgresql restart
+----
+
+. 检查 postgresql 服务状态。
++
+[source,shell]
+----
+/etc/init.d/postgresql status
+----
+. 检查 pgpool2 服务状态。
++
+[source,shell]
+----
+/etc/init.d/pgpool2 status
+----
+
+. 将 ks1 节点设置为 pg_master 主节点。
++
+[source,shell]
+----
+/pitrix/postgresql-10.4/work/pg_upmaster <zone_id>-ks1
+----
++
+include::../../../../../../_components/note.adoc[]
+``<zone_id>`` 需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 检查 PostgreSQL 集群状态。有如下返回结果，则证明 PostgreSQL 集群正常。
++
+[source,shell]
+----
+/pitrix/postgresql-10.4/work/pg_overview | grep -w 'sync'
+----
++
+image::/images/express/maintain/pg_recover_fast_1.png[]
+
+. 登录至 ks1 节点，检查 pgpool2 服务状态是否恢复正常。
++
+[source,shell]
+----
+/etc/init.d/pgpool2 status
+----
++
+返回结果如下，则证明当前节点的 pgpool2 服务已正常。
++
+[source,shell]
+----
+Mar 21 14:49:06 expr1a-ks1 systemd[1]: Started pgpool-II.
+Mar 21 14:49:06 expr1a-ks1 pgpool[17970]: [1-1] 2022-03-21 14:49:06: pid 17970: LOG: Setting up socket for 0.0.0.0:5432
+Mar 21 14:49:06 expr1a-ks1 pgpool[17970]: [2-1] 2022-03-21 14:49:06: pid 17970: LOG: Setting up socket for :::5432
+Mar 21 14:49:06 expr1a-ks1 pgpool[17970]: 2022-03-21 14:49:06: pid 17970: LOG: Setting up socket for 0.0.0.0:5432
+Mar 21 14:49:06 expr1a-ks1 pgpool[17970]: 2022-03-21 14:49:06: pid 17970: LOG: Setting up socket for :::5432
+Mar 21 14:49:06 expr1a-ks1 pgpool[17970]: [3-1] 2022-03-21 14:49:06: pid 17970: LOG: pgpool-II successfully started. version 3.4.3 (tataraboshi)
+Mar 21 14:49:06 expr1a-ks1 pgpool[17970]: 2022-03-21 14:49:06: pid 17970: LOG: pgpool-II successfully started. version 3.4.3 (tataraboshi)
+----
+
+. 退出 ks1 节点，登录至 FirstBox 节点上，执行如下命令，对集群进行全面检查。
+
++
+[source,shell]
+----
+/pitrix/check/check.py -n all
+----
+
+
+
+

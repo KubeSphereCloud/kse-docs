@@ -1,0 +1,51 @@
+---
+title: "上传应用版本"
+keywords: "Kubernetes, {ks_product}, 企业空间, 应用模板, 上传应用版本"
+description: "介绍如何在应用模板创建后上传应用版本。"
+weight: 06
+---
+
+
+:ks_permission: **应用/应用版本/应用实例管理**
+:ks_navigation: **边缘管理 > 边缘模板管理**
+
+
+本节介绍如何在应用模板创建后上传应用版本。
+
+
+== 前提条件
+
+* {empty}
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+* {ks_product_right}平台需要安装并启用 **KubeSphere 应用商店管理**扩展组件。
+
+
+
+== 操作步骤
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
+. 在应用模板详情页面右侧的**版本**页签，点击**上传版本**。
+
+. 在弹出的对话框中，再次创建一个边缘应用模板，然后点击**创建**。
++
+--
+边缘应用模板创建完成后将显示在应用模板详情页面的**版本**页签。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+有关创建边缘应用模板的更多信息，请参阅link:../01-create-an-app-template[创建应用模板]。
+|===
+--

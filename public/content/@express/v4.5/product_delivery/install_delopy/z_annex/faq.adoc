@@ -1,0 +1,38 @@
+---
+title: "常见问题"
+weight: 9
+---
+
+. ``节点初始化完毕后，无法访问 web Installer 页面？`` 
++
+请确认 PC 本机是否已接入交换机的管理/业务 VLAN，请确认初始化时勾选的两个管理网口是否接入管理/业务 VLAN。 
+
+. ``Web Installer 中扫描节点时，未扫描到可添加的节点？`` 
++
+请检查新增的节点与原有集群间的网络通信是否正常，是否已接入原有的管理/业务 VLAN。
+
+. ``节点添加完毕，但进入 Console 平台后无法创建虚拟机？`` 
++
+请检查是否已经在 web Installer 中导入新的云易捷授权。
+
+
+. ``点击创建虚拟机时，系统镜像页面显示暂无数据？`` 
++
+请前往 Web Installer 中上传镜像，如果没有镜像，请联系 QingCloud 销售人员索取。 
+
+
+. ``如果在安装云易捷 ISO 时出现以下提示，如何解决？``
++
+image::/images/express/delivery/install_delopy_51.png[,60%]
++
+检查服务器 RAID 是否配置，小容量硬盘的指示灯是否正常。
+
+. ``在 Web Installer 平台添加节点时，未找到 SSD 或 NVMe 硬盘，如何解决？``
++
+image::/images/express/delivery/install_delopy_52.png[,60%]
++
+终止节点添加，检查服务器 SSD 或 NVMe 闪存是否正常。
+
+
+
+

@@ -1,0 +1,56 @@
+---
+title: "查看 SSH 密钥列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, SSH, 密钥, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看 SSH 密钥列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e3926231fbf84a679a454079fcab264f
+:ks_xref_id: 5b373e419657421fa9977726cb306d32
+:ks_comp: ../../../components/
+:ks_title: 查看 SSH 密钥列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看 SSH 密钥列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, SSH, 密钥, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看 SSH 密钥列表。为安全起见，每个用户仅能查看自己创建的 SSH 密钥。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=585409efec5b453ba49e5b0c7e5c1008]
+
+include::../../../_custom/ssh/ssh-key-steps.adoc[]
+
++
+--
+SSH 密钥列表展示当前用户创建的所有 SSH 密钥。具体参数信息如下表所示。
+
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|SSH 密钥的名称。
+
+include::../../../_custom/networks/naming-convention.adoc[]
+
+|加密方式
+|SSH 密钥的加密方式。默认采用 RSA 加密方式。
+
+|创建者
+|SSH 密钥的创建者。
+|===
+--
+
+. （可选）点击 SSH 密钥列表上方的搜索框并设置搜索条件，可按名称搜索 SSH 密钥。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的 SSH 密钥。
+
+. （可选）在 SSH 密钥列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。
+
+

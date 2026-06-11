@@ -1,0 +1,35 @@
+---
+title: "TensorBoard"
+weight: 3
+---
+
+== 前提条件
+
+* 训练任务已创建。
+* 训练任务的状态为``运行中``或``运行完成``。
+* 用户已编写代码将相关日志写入环境变量 ``TENSORBOARD_LOG_PATH`` 所对应路径。
+
+== 单个任务 TensorBoard
+
+. 登录 {console_name}。
+. 在顶部导航栏，点击**产品与服务** > **{coreshub_name_cn}** > **{coreshub_name_cn}**，进入其**总览**页面。
+. 在左侧导航栏，选择**分布式训练**，默认进入分布式训练任务列表页面。
+. 在分布式训练列表页面，点击指定任务所在行右侧**操作**列中的 **TensorBoard**。
++
+include::../../../../../../_components/attention.adoc[]
+* 待查看的任务状态必须处于``运行中``，或已运行完成。
+* 若无法打开 TensorBoard 页面，请检查浏览器弹窗拦截是否关闭。
+include::../../../../../../_components/table_footer.adoc[]
+
+== 多个任务 TensorBoard 对比
+
+. 在分布式训练列表页面，勾选多个训练任务。
+. 点击列表上方的**启动 TensorBoard 对比**，在弹出的 TensorBoard 页面即可查看。
++
+image::/images/cloud_service/compute/coreshub/develop_training_job_tensorboard_1.png[]
++
+include::../../../../../../_components/note.adoc[]
+更多相关信息，可查阅 link:https://www.tensorflow.org/tensorboard/get_started?hl=zh-cn[TensorBoard 官方教程]。
+include::../../../../../../_components/table_footer.adoc[]
+
+

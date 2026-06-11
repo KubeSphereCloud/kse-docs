@@ -1,0 +1,24 @@
+---
+title: "事件驱动伸缩"
+weight: 05
+---
+
+// https://keda.sh/docs/2.18/concepts/
+
+link:https://keda.sh/[KEDA]（Kubernetes Event-driven Autoscaling）是一个基于 Kubernetes 事件驱动自动扩缩的组件，能够为 Kubernetes 中运行的任何容器提供事件驱动的扩缩功能。
+
+KEDA 支持 70+ 种触发器类型，包括消息队列（Kafka、RabbitMQ）、数据库（MySQL、PostgreSQL）、监控系统（Prometheus）、云服务（AWS CloudWatch）等。它特别适用于微服务架构、数据处理管道、Web 应用、批处理任务等场景，能够根据消息队列长度、数据库连接数、自定义指标等外部事件进行智能伸缩，实现真正的按需使用和成本优化。
+
+// KEDA 是一个单一用途的轻量级组件，可以添加到任何 Kubernetes 集群中。KEDA 与标准 Kubernetes 组件如 Horizo​​ntal Pod Autoscaler 协同工作并且可以在不覆盖或重复的情况下扩展功能。使用 KEDA，您可以明确映射要使用事件驱动扩展的应用程序，而其他应用程序则继续运行。这使得 KEDA 成为一种灵活且安全的选项，可以与任意其他 Kubernetes 应用程序或框架一起运行。
+
+KEDA for KubeSphere 扩展组件支持在 KubeSphere 平台使用事件驱动伸缩（KEDA）功能。
+
+安装 KEDA for KubeSphere 扩展组件后，集群和企业空间左侧导航栏的**弹性伸缩**菜单下将显⽰**事件驱动伸缩**选项。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+有关组件的更多信息，请参阅扩展中心 KEDA for KubeSphere 扩展组件的详情页说明。
+|===

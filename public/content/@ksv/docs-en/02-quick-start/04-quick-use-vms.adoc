@@ -1,0 +1,145 @@
+---
+title: "Get started with a VM"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, quick, start"
+description: "Describes how to get started with a VM."
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: aead45e0c1224add85b381b6d37fb625
+:ks_xref_id: 69e83b35a22844a0b9bc9611babb2748
+:ks_comp: ../../components/
+:ks_title: Get started with a VM
+:ks_description: Describes how to get started with a VM.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, quick, start
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to get started with a VM in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=e76a572a84cd496b96afa68ec167343c]
+
+* {ks_product} is installed. For information about how to install {ks_product}, see link:../01-install-ksv-in-single-node-mode/[Install {ks_product} in single-node mode] and link:../02-install-ksv-in-multi-node-mode/[Install {ks_product} in multi-node mode].
+* The user that you use has been granted the permissions to manage VMs. Only user **admin**, project administrators, and operators can manage VMs. Project viewers can view only VMs in the projects to which they belong.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Step 1: Create a VMlink:[id=6e5e1fc16af7428d89388c93a9c865cb]
+
+include::../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, click **Create** and select **From Image**, **From Template**, or **From VM** as needed.
++
+--
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+This tutorial describes how to create a VM from an image. For information about how to create a VM from a template or VM, see link:../../03-user-manual/05-vm-management/01-vms/01-create-vm/[Create a VM].
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+include::../../_custom-en/vms/vm-create-basic-parameters.adoc[]
+. In the **Images** section of the **Configuration** step, select the image type of the VM.
++
+--
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+* {ks_product} supports images of major Linux distributions, such as Fedora, CentOS, and Ubuntu.
+* You can select **System Images**, **Private Images**, or **Shared Images** to create a VM. For more information about images of different types, see link:../../03-user-manual/05-vm-management/03-images/[Images].
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. In the **Configuration** step, configure the CPU and memory specification for the VM.
++
+--
+[cols="1a,3a"]
+|===
+|Parameter |Description
+
+|Default _N_ cores _N_ GiB
+|By default, the configuration is the same as the configuration defined in the image.
+
+|Standard 2 cores 4 GiB
+|2 CPU cores and 4 GiB memory. This configuration can be used for medium-sized business and general data processing.
+
+|Professional 4 cores 8 GiB
+|4 CPU cores and 8 GiB memory. This configuration can be used for enterprise business with high concurrency requirements.
+
+|Custom
+|The custom CPU and memory configuration.
+|===
+--
+
+:relfileprefix: ../../
+
+include::../../_custom-en/vms/vm-create-parameters.adoc[]
+
+:relfileprefix: ./
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Step 2: Associate an EIP with the VMlink:[id=99e73819a74048f19aff1d7a032a4dbe]
+
+If the VM is created in a virtual subnet, perform the following steps to associate an elastic IP address (EIP) with the VM. This way, you can enable Internet access for the VM.
+
+. In the left-side navigation pane, choose **Networks** > **EIPs** to go to the EIP management page.
+. Find the EIP that you want to associate, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Associate VM** from the drop-down list.
+. In the dialog box that appears, select the VM that you create in step 1, and click **OK**. After this step is performed, you can use the EIP to connect to the VM over the Internet.
++
+--
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+Each EIP can be associated with one VM. If no EIP is available, you can click **Apply** in the upper-right corner of the page to apply for an EIP. For more information, see link:../../03-user-manual/03-network-management/05-eips/01-apply-for-eip/[Apply for an EIP].
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Step 3: Connect to the VMlink:[id=60791547e02d46b1b4535b7b2fc10b2e]
+
+. In the left-side navigation pane, choose **VMs** > **VMs** to go to the VM management page.
+. On the **VMs** page, find the VM that you create in step 1 and click image:/images/ksv/en/icons/terminal.svg[18px,18px] next to the VM to open the Terminal.
+. In the Terminal, enter the username and password to log in to the VM.
++
+--
+* Username: Enter **root**.
+* Password: the password that you configure when you create the VM. By default, the value is **123456**.
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Step 4: Delete the VMlink:[id=60791547e02d46b1b4535b7b2fc10b2e]link:[id=8cb59ee6d7654b4397ac0be00e3016c5]
+
+If the VM is no longer needed, you can delete the VM to release resources. The VM data cannot be restored after the VM is deleted.
+
+. In the left-side navigation pane, choose **VMs** > **VMs** to go to the VM management page.
+. On the **VMs** page, find the VM that you create in step 1, click image:/images/ksv/en/icons/terminal.svg[18px,18px] next to the VM, and then select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../_ks_components/admonitions/warning.adoc[]
+
+The VM cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--

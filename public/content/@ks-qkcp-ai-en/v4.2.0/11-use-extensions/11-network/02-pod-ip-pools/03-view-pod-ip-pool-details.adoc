@@ -1,0 +1,89 @@
+---
+title: "View Pod IP Pool Details"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Network, Pod IP Pool, View Pod IP Pool Details"
+description: "Describes how to view pod IP pool details."
+weight: 03
+---
+
+:ks_permission: **Cluster Network Resource View**
+:ks_navigation: **Network > Pod IP Pools**
+
+
+This section describes how to view pod IP pool details.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere Network** extension must be installed and enabled on the KubeSphere platform.
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. In the pod IP pool list, click the name of a pod IP pool to open its details page.
+
+. On the pod IP pool details page, view the basic information of the pod IP pool in the **Properties** area.
++
+--
+
+[%header,cols="2,5"]
+|===
+|Parameter |Description
+
+|Status
+|The status of the pod IP pool.
+
+|CIDR
+|The CIDR block contained in the pod IP pool.
+
+|Used IP Addresses
+|The number of IP addresses in use.
+
+|IP Pool Block Size
+|The CIDR size of the block used by the IP pool for IP allocation.
+
+|NAT Outgoing
+|Whether cross-pool communication via NAT is allowed.
+
+|Overlay Mode
+|The communication mode between pods. Supports IPIP mode and VXLAN mode.
+
+|Mask
+|The subnet mask bits for the CIDR block corresponding to the pod IP pool.
+
+|Network
+|The IP address of the network corresponding to the pod IP pool.
+
+|Start IP Address/End IP Address
+|The IP address range contained in the pod IP pool.
+
+|Creation Time
+|The creation time of the pod IP pool.
+
+|Creator
+|The user who created the pod IP pool.
+|===
+--
+
+. On the **Projects** tab of the pod IP pool details page, view the project names that can use the pod IP pool, the number of IP addresses used, and the project administrators.
+
+. On the **Pods** tab on the right side of the pod IP pool details page, view all pods using the pod IP pool.
++
+--
+include::../../../../_custom/clusterManagement/nodes/nodes-para-podList.adoc[]
+--

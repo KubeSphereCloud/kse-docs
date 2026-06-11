@@ -1,0 +1,22 @@
+
+// 备份 FirstBox 配置
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+include::../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+include::../../../_components/table_footer.adoc[]
+
+
+. 部署完成后，在 FirstBox 节点上对相关配置进行备份。
++
+[source,shell]
+----
+/qingstor/install/bin/backup_fb.sh
+----

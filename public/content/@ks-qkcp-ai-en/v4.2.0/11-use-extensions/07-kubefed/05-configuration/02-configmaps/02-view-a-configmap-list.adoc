@@ -1,0 +1,39 @@
+---
+title: "View ConfigMap List"
+keywords: "Kubernetes, {ks_product}, Federated Project, Configuration, ConfigMap, View ConfigMap List"
+description: "Introduces how to view the ConfigMap list."
+weight: 02
+---
+
+:ks_permission: **Federated Project View**
+:ks_navigation: **Configuration > ConfigMaps**
+
+
+include::../../../../../_custom/clusterManagement/configmaps/configmaps-desc-viewAConfigmapList.adoc[]
+
+
+== Prerequisites
+
+* The KubeSphere platform needs to have the **Federated Cluster Application Management** extension installed and enabled.
+
+* {empty}
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-prer-requiredPermission_v4.adoc[]
+
+
+== Steps
+
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage_v4.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+include::../../../../../_custom/multi-clusterProjectManagement/configmaps/configmaps-para-configmapList.adoc[]
+
+include::../../../../../_custom/clusterManagement/configmaps/configmaps-oper-searchForConfigmaps.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

@@ -1,0 +1,152 @@
+---
+title: "修改配置文件"
+weight: 10
+---
+
+== 操作步骤
+
+. 登录云平台 FirstBox。
++
+[source]
+----
+ssh root@<firstbox ip address>
+----
++
+参数说明如下：
+
+** <firstbox ip address>：安装 FirstBox 时配置的管理 IP。
+** 用户名密码：若没有配置免密访问，请输入 root 账号密码。
+. 执行以下命令，进入模板文件目录。
++
+[source]
+----
+cd /pitrix/lib/pitrix-sic-deployment/conf
+----
+. 执行以下命令，从模版创建配置文件，文件名为 scs.yaml.ZONE_ID。
++
+[source]
+----
+cp -f example.yaml scs.yaml.ZONE_ID
+----
++
+示例：
++
+[source]
+----
+cp -f example.yaml scs.yaml.uat1a
+----
++
+
+include::../../../../../../_components/note.adoc[]
+模板配置文件路径：/pitrix/lib/pitrix-sic-deployment/conf/example.yaml。
+
+文件名中的 ZONE_ID 为可用区 ID，请根据环境规划中的信息进行替换。
+
+示例中以 scs.yaml.uat1a 为例（即 ZONE_ID 为 uat1a）。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，修改配置文件 variables.ZONE_ID.yaml。
++
+[source]
+----
+vi scs.yaml.ZONE_ID
+----
++
+示例：
++
+[source]
+----
+vi scs.yaml.uat1a
+----
+. 按照参数说明，按需为待部署的 ZONE 填入相关信息。
+
+== 配置示例
+
+[source,yaml]
+----
+zone_id: "{ZONE_ID}"
+ 
+sic_deployment:
+  product_line: "scs"
+ 
+  server_codes:
+  - scs
+  - srp
+  - sintg
+ 
+  trusteeship_cloud_user: ""
+ 
+  server_settings:
+    _default:
+      vm_spec:
+        image_id: "xenial5x64b"
+        cpu: 8
+        memory: 8192
+        os_disk_size: 50
+        #auto_volumes:
+        #  - volume_type: 5
+        #    volume_size: 200
+        #    volume_filesystem_type: "ext4"
+        #    volume_mount_point: "/pitrix"
+ 
+    logw_cfw:
+      logc_count: 1
+      #logc_vm_spec:
+      #  cpu: 4
+      #  memory: 4096
+      #  volume_type: 6
+      #  volume_size: 200
+      ## es, elasticsearch, 1 for low performance mode
+      es_hot_count: 1
+      #es_hot_vm_spec:
+      #  cpu: 8
+      #  memory: 8192
+      #  volume_type: 5
+      #  volume_size: 500
+ 
+  #network:
+  #  ks_networks:    # ip or cidr such as 192.168.1.1 or 192.168.0.0/24
+  #  - "{KS_CIDR}"
+----
+
+== 参数说明
+
+[cols='1,4']
+|===
+| 参数 | 说明
+
+| zone_id | 可用区 ID，请根据环境规划进行修改。
+
+SCS 部署为 region 级别，所以多 zone 情况下选择任意一个 zone_id 就行。
+
+多 region 场景，每个 region 下都需要部署。
+| product_line | 产品线名称。默认为 `scs`，保持默认值即可。
+
+若未配置 **trusteeship_cloud_user** 时，系统将以该产品线名称自动创建云平台子账号，账号名称默认为 ``admin@yunify.com#scs``。
+| server_codes a| 配置需要安装的服务。一次可部署多个服务，部署多个服务时请注意安装顺序。
+
+* 多 region 部署时，单次仅配置需要安装的服务。
+.. 在 global 区先部署好 scs 服务。
+.. 在其它 region 部署好 srp 服务。
+.. 在 global 区部署 sintg 服务。
+* 单 region 部署时，建议配置为：
++
+sic_deployment: +
+  product_line: "scs" +
+  server_codes: +
+  - scs +
+  - srp +
+  - sintg
+| trusteeship_cloud_user（可选） | 配置云平台子账号名称，用于部署时创建安全角色虚拟机。
+
+如果不配置，系统将会以 **PRODUCT_LINE** 创建一个子账号 `\admin@yunify.com#{PRODUCT_LINE}`，例如 `admin@yunify.com#scs`。
+| server_settings（可选） a| 配置安全虚拟机规格。可以使用默认值，也可以根据实际情况进行修改。
+
+* **_default** 下可以配置 scs、srp、sintg 服务的规格。
+* **image_id**：如果企业云平台软件包的 OS 是 20.04.1 版本，请配置为 focal1x64；如果企业云平台软件包的 OS 是 16.04.5，请配置为 xenial5x64b。
+* 各服务若需要单独的规格，key 配置为 {SERVER_CODE}。
+| network（可选） | 配置安全虚拟机所使用的网络，该网络需要与云平台管理网络互通。
+
+如果不配置，系统默认自动获取云平台 FirstBox 所属的网段。
+|===

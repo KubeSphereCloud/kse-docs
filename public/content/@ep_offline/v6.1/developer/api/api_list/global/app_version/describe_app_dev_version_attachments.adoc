@@ -1,0 +1,169 @@
+---
+title: 查询应用版本附件（配置包、截图等）（DescribeAppDevVersionAttachments）
+weight: 8
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| attachment_ids
+| Array
+| false
+| 配置包id
+
+| content_keys
+| Array
+| false
+| 配置包子文件名
+
+| version_id
+| String
+| true
+| app_version_id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| attachment_set
+| Array
+| false
+| 配置包集合
+
+| attachment_set[].attachment_content
+| Object
+| false
+| 配置包内容
+
+| attachment_set[].attachment_content.cluster.json.mustache
+| String
+| false
+| 该文件是在用户创建应用时需要传给云平台
+
+| attachment_set[].attachment_content.config.json
+| String
+| false
+| 此配置文件定义用户在创建应用的时候需填入的参数信息
+
+| attachment_set[].attachment_content.replace_policy.json
+| String
+| false
+| 替换策略
+
+| attachment_set[].attachment_id
+| String
+| false
+| 配置包id
+
+| attachment_set[].attachment_type
+| String
+| false
+| 配置包文件存储类型
+
+| attachment_set[].category
+| String
+| false
+| 配置文件类型
+
+| attachment_set[].create_time
+| String
+| false
+| 创建时间
+
+| attachment_set[].filename
+| String
+| false
+| 配置包文件名
+
+| attachment_set[].filesize
+| String
+| false
+| 配置包大小
+
+| attachment_set[].owner
+| String
+| false
+| 拥有者
+
+| attachment_set[].resource_id
+| String
+| false
+| 配置包对应资源id
+
+| attachment_set[].resource_type
+| String
+| false
+| 配置包对应资源类型
+
+| attachment_set[].source
+| String
+| false
+| 配置包存储方式
+
+| attachment_set[].sub_category
+| String
+| false
+| 
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "attachment_ids": [
+    "ca-01t3w03z"
+  ],
+  "content-keys": [
+    "config.json"
+  ],
+  "version_id": "appv-pglst2ll"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAppDevVersionAttachmentsResponse",
+  "attachment_set": [
+    {
+      "attachment_content": {
+        "config.json": ""
+      },
+      "attachment_id": "ca-01t3w03z",
+      "attachment_type": "archive",
+      "category": "resource_kit",
+      "console_id": "testingcloud",
+      "create_time": "2022-06-21T01:55:45Z",
+      "filename": "app1.zip",
+      "filesize": 86249,
+      "owner": "admin",
+      "resource_id": "appv-pglst2ll",
+      "resource_type": "app_version",
+      "root_user_id": "admin",
+      "source": "",
+      "sub_category": ""
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

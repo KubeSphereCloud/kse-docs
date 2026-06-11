@@ -1,0 +1,104 @@
+---
+title: 创建定时器（CreateScheduler）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| hhmm
+| String
+| false
+| 时分
+
+| notification_lists
+| Array
+| false
+| 通知列表
+
+| notify_event
+| Integer
+| false
+| 通知事件1通知/0不通知
+
+| owner
+| String
+| false
+| 资源的所有者
+
+| period
+| String
+| false
+| 周期
+
+| repeat
+| Integer
+| false
+| 重复次数
+
+| scheduler_name
+| String
+| false
+| 定时器名称
+
+| ymd
+| String
+| false
+| 年月日
+
+| zone
+| String
+| true
+| 请求区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| scheduler_id
+| String
+| false
+| 定时器id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateScheduler",
+  "hhmm": "00:25",
+  "notification_lists": [
+    "nl-x3u8y13n"
+  ],
+  "notify_event": 1,
+  "owner": "usr-BnnisHWR",
+  "period": "daily",
+  "repeat": "1",
+  "scheduler_name": "afdsfdsfds",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateSchedulerResponse",
+  "ret_code": 0,
+  "scheduler_id": "schd-wgvyfj9d",
+  "trace_id": "L8KocYRT"
+}
+----

@@ -1,0 +1,19 @@
+---
+title: "挂载 FC-SAN 存储"
+weight: 30
+---
+
+1. 依次登录所有计算节点（Hyper 节点）。
+2. 检查磁盘是否格式化过，若没有，需要执行以下命令进行格式化。
++
+[source]
+----
+dd if=/dev/zero of=/dev/mapper/mpath-xxx
+----
+3. 重启 Hyper 节点服务器，验证存储是否能自动挂载上，且盘符不变。
++
+
+include::../../../../../../_components/note.adoc[]
+FC-SAN 的 tpsc_dev 地址为：/dev/mapper/mpath-xxx。
+
+include::../../../../../../_components/table_footer.adoc[]

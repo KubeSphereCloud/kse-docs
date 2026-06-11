@@ -1,0 +1,373 @@
+---
+title: 查询应用版本列表（上架）（DescribeAppVersions）
+weight: 13
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_ids
+| Array
+| false
+| 应用
+
+| display_columns
+| Array
+| false
+| 返回字段
+
+| edition_ids
+| Array
+| false
+| 系列
+
+| limit
+| Integer
+| false
+| 个数
+
+| name
+| String
+| false
+| 版本名称
+
+| offset
+| Integer
+| false
+| 偏移
+
+| owner
+| String
+| false
+| 应用所有者
+
+| reverse
+| Integer
+| false
+| 是否倒序
+
+| shared
+| Integer
+| false
+| 是否共享
+
+| sort_key
+| String
+| false
+| 排序字段
+
+| status
+| Array
+| false
+| 状态
+
+| verbose
+| Integer
+| false
+| 冗余字段级别
+
+| version_ids
+| Array
+| false
+| 版本
+
+| visibility
+| String
+| false
+| 可见状态
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_set
+| Array
+| false
+| 应用列表
+
+| app_set[].app_id
+| String
+| false
+| 应用ID
+
+| app_set[].available_zones
+| String
+| false
+| 可用区域
+
+| app_set[].console_id
+| String
+| false
+| 平台ID
+
+| app_set[].create_time
+| String
+| false
+| 创建时间
+
+| app_set[].description
+| String
+| false
+| 描述
+
+| app_set[].edition
+| Array
+| false
+| 系列信息
+
+| app_set[].edition[].app_id
+| String
+| false
+| 应用ID
+
+| app_set[].edition[].create_time
+| String
+| false
+| 创建时间
+
+| app_set[].edition[].description
+| String
+| false
+| 描述
+
+| app_set[].edition[].edition_id
+| String
+| false
+| 系列ID
+
+| app_set[].edition[].is_default
+| Integer
+| false
+| 是否默认
+
+| app_set[].edition[].name
+| String
+| false
+| 系列名称
+
+| app_set[].name
+| String
+| false
+| 版本名称
+
+| app_set[].prices
+| Array
+| false
+| public
+
+| app_set[].prices[].app_id
+| String
+| false
+| public
+
+| app_set[].prices[].charge_mode
+| String
+| false
+| public
+
+| app_set[].prices[].currency
+| String
+| false
+| public
+
+| app_set[].prices[].price
+| String
+| false
+| public
+
+| app_set[].prices[].start_time
+| String
+| false
+| public
+
+| app_set[].prices[].status
+| String
+| false
+| public
+
+| app_set[].prices[].version_id
+| String
+| false
+| public
+
+| app_set[].resource_kit
+| String
+| false
+| 配置包ID
+
+| app_set[].seq
+| Integer
+| false
+| 排序
+
+| app_set[].service_version
+| String
+| false
+| 服务版本
+
+| app_set[].status
+| String
+| false
+| 版本状态
+
+| app_set[].status_time
+| String
+| false
+| 状态时间
+
+| app_set[].upgrade_policy
+| Array
+| false
+| 升级策略信息
+
+| app_set[].upgrade_policy[].app_version_id
+| String
+| false
+| 版本ID
+
+| app_set[].upgrade_policy[].create_time
+| String
+| false
+| 创建时间
+
+| app_set[].upgrade_policy[].name
+| String
+| false
+| 版本名称
+
+| app_set[].upgrade_policy[].resource_kit
+| String
+| false
+| 版本配置包ID
+
+| app_set[].upgrade_policy[].status
+| String
+| false
+| 版本状态
+
+| app_set[].upgrade_policy[].upgrade_status
+| String
+| false
+| 允许升级状态
+
+| app_set[].upgrade_policy[].upgrading_policy
+| String
+| false
+| 升级策略
+
+| app_set[].version_id
+| String
+| false
+| 版本ID
+
+| app_set[].version_type
+| String
+| false
+| 版本类型
+
+| app_set[].visibility
+| String
+| false
+| 公开可见
+
+| total_count
+| Integer
+| false
+| 总数量
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "limit": 50,
+  "offset": 0,
+  "verbose": 10
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAppVersionsResponse",
+  "ret_code": 0,
+  "total_count": 1,
+  "version_set": [
+    {
+      "app_id": "app-00r26u27",
+      "available_zones": "testing1a,testing1b",
+      "console_id": "testingcloud",
+      "create_time": "2022-09-19T01:14:39Z",
+      "description": "描述信息",
+      "edition": {
+        "app_id": "app-00r26u27",
+        "create_time": "2019-08-13T22:17:06",
+        "description": "",
+        "edition_id": "appe-mpooqbmy",
+        "is_default": 0,
+        "name": "高可用版"
+      },
+      "name": "高可用版-1.1.2",
+      "prices": [
+        {
+          "app_id": "app-00r26u27",
+          "charge_mode": "elastic",
+          "currency": "cny",
+          "end_time": null,
+          "price": "0",
+          "start_time": "2023-01-11",
+          "status": "active",
+          "status_time": "2023-01-11T16:52:21",
+          "upset_price": "0",
+          "version_id": "appv-jdc6f8nw"
+        },
+        {
+          "app_id": "app-00r26u27",
+          "charge_mode": "contract",
+          "currency": "cny",
+          "end_time": null,
+          "price": "0",
+          "start_time": "2023-04-12",
+          "status": "active",
+          "status_time": "2023-04-12T15:04:33",
+          "upset_price": "0",
+          "version_id": "appv-jdc6f8nw"
+        }
+      ],
+      "resource_kit": "ca-uohztl0r",
+      "seq": 0,
+      "service_version": "",
+      "status": "active",
+      "status_time": "2022-09-19T01:14:39Z",
+      "upgrade_policy": [
+        {
+          "app_version_id": "appv-6v5kop39",
+          "create_time": "2023-02-10T11:17:13",
+          "name": "高可用版-1.2.0",
+          "resource_kit": "ca-xxxxxx",
+          "status": "released",
+          "upgrade_status": "active",
+          "upgrading_policy": "sequential"
+        }
+      ],
+      "version_id": "appv-jdc6f8nw",
+      "version_type": "cluster",
+      "visibility": "public"
+    }
+  ]
+}
+----

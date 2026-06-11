@@ -1,0 +1,19 @@
+// :ks_include_id: 5c07b382dc7041a6b8d89f45dadfad06
+Set rules for scheduling pod replicas to nodes.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Default Rule
+|Do not specify a particular rule; let the system decide which node to schedule the pod replicas to.
+
+|Scatter Scheduling
+|Try to schedule pod replicas to different nodes as much as possible.
+
+|Concentrate Scheduling
+|Try to schedule pod replicas to the same node as much as possible.
+
+|Custom Rule
+|Schedule pod replicas to nodes according to user-defined rules. If you select this option, you need to further customize the scheduling rules.
+|===

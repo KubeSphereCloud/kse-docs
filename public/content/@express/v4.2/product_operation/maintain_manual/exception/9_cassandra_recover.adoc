@@ -1,0 +1,149 @@
+---
+title: "Cassandra 服务恢复"
+weight: 9
+---
+
+== 运维场景
+
+在云易捷集群巡检过程中，若出现 Cassandra 服务异常情况，可参考如下步骤进行恢复。通常情况下，Cassandra 服务异常的可能原因为 KS 节点负载过高。
+
+== 操作步骤
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+. 执行如下命令，查看 KS 节点基本信息。
++
+[source,shell]
+----
+cat /etc/hosts | grep ks
+----
+
+. 登录任一 KS 节点，执行如下命令，查看各个 KS 节点 Cassandra 服务的状态。
++
+[source,shell]
+----
+nodetool status
+----
++
+image::/images/express/maintain/cassandra_recover_1.png[]
++
+include::../../../../../_components/note.adoc[]
+返回结果中，``UN`` 表示当前节点 Cassandra 服务正常，``DN`` 表示当前节点 Cassandra 服务异常。
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录至 Cassandra 服务异常的 KS 节点。
+
+. 执行如下命令，查看 ``load average`` 负载值是否超过 10。若该值均超过 10，则表明当前 KS 节点负载过高导致 Cassandra 服务异常。
++
+[source,shell]
+----
+top
+----
++
+如下返回结果中，``load average`` 值均超过 10，其中 ``celery`` 对应 Boss 服务，表示 Boss 服务导致当前节点负载过高。
++
+image::/images/express/maintain/cassandra_recover_2.png[]
+
+. 根据上一步返回结果，执行如下命令，检查 Boss 服务状态。
++
+[source,shell]
+----
+rabbitmqctl list_users
+----
++
+若返回结果如下，则证明当前 Boss 服务没有 Boss2 用户，需重新添加。
++
+[source,shell]
+----
+Listing users ...
+user    tags
+guest   [administrator]
+----
+
+. 添加 Boss2 用户。
++
+[source,shell]
+----
+rabbitmqctl add_user boss2 zhu88jie
+----
+
+. 重新设置 Boss2 用户权限。
++
+[source,shell]
+----
+rabbitmqctl set_permissions -p / boss2 '.*' '.*' '.*'
+----
+
+. 重新设置 Boss 缓存。
++
+[source,shell]
+----
+boss2 rebuild_cache --yes
+----
+
+. 等待 2 分钟左右，再次查看 ``load average`` 值，均已下降至 10 以下。
++
+[source,shell]
+----
+top
+----
+
+. 依次执行如下命令，手动恢复当前 KS 节点的 Cassandra 服务。
++
+[source,shell]
+----
+/etc/init.d/cassandra stop
+----
++
+[source,shell]
+----
+rm -fr  /var/lib/cassandra/data/*
+----
++
+[source,shell]
+----
+/etc/init.d/cassandra start
+----
++
+[source,shell]
+----
+sleep 60
+----
+
+. 检查 Cassandra 服务的状态，各个 KS 节点均正常。
++
+[source,shell]
+----
+nodetool status
+----
++
+image::/images/express/maintain/cassandra_recover_3.png[]
+
+. 登录至 FirstBox 节点，再次进行巡检，检查集群各项服务状态需均为正常。
++
+[source,shell]
+----
+/pitrix/check/check.py -n all
+----
+
+
+
+
+
+

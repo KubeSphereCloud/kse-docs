@@ -1,0 +1,71 @@
+---
+title: "查看规则组列表"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, PostgreSQL, 管理告警规则组, 查看规则组列表"
+description: "介绍如何查看规则组列表。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: f928b43b157a443e9c3d72ab1443b61f
+:ks_xref_id: 5f6d5a498243411d97251adfe672abb1
+:ks_comp: ../../../../components/
+:ks_title: 查看规则组列表
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, PostgreSQL, 管理告警规则组, 查看规则组列表
+:ks_description: 介绍如何查看规则组列表。
+:ks_weight: 02
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+
+
+== 前提条件link:[id=e6a650ea94bf4fb2add5f5eef6469b27]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondpq-prer-installRadondbpq.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-createAlertGroup.adoc[]
+
+
+== 操作步骤link:[id=c75f5621d5dd4a35849220164d749105]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondbpq-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
++
+====
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-para-alertingPolicyList.adoc[]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-searchForAlertingPolicies.adoc[]
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

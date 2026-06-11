@@ -1,0 +1,111 @@
+---
+title: "可观测性中心常见问题"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, FAQ, 常见问题"
+description: "介绍如何处理 KubeSphere 企业版可观测性中心常见问题。"
+weight: 02
+layout: "second"
+icon: "/images/docs/docs.svg"
+---
+
+// :ks_include_id: 8538b6e4032a4634a4a9b3e62ae1c02f
+:ks_xref_id: 8319c466540a4b4a87ddc105228561dc
+:ks_comp: ../../../components/
+:ks_title: 可观测性中心常见问题
+:ks_keywords: Kubernetes, {ks_product}, FAQ, 常见问题
+:ks_description: 介绍如何处理 KubeSphere 企业版可观测性中心常见问题。
+:ks_weight: 02
+:ks_icon: /images/docs/docs.svg
+
+
+本节介绍如何处理可观测性中心常见问题。
+
+
+== 监控页面无数据，数据无法写入link:[id=f2e6a224745148ffb308d43007377a46]
+
+**根因分析**
+
+KubeSphere 企业版安装完成后，Prometheus 已经正常运行一段时间，此时重启并切换 Prometheus 为 Agent 模式，在 **/prometheus/wal** 目录下仍有历史的 WAL（Write-Ahead Log）日志，Whizard 无法接收 WAL 日志，导致整体数据无法写入。
+
+**解决方案**
+
+. 登录到运行 Prometheus 的主机或集群中，运行以下命令进入 Prometheus 容器。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl exec -it <prometheus-pod-name> -- /bin/sh
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+
+将 **prometheus-pod-name** 替换为 Prometheus Pod 的名称。
+--
+
+. 在 Prometheus 容器中，运行以下命令以删除 `/prometheus/wal` 目录下的所有文件。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+rm -rf /prometheus/wal/*
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+这将递归地删除 `/prometheus/wal` 目录下的所有文件。请谨慎操作，确保您执行此命令的环境和目录是正确的，并且您已备份重要的数据或配置文件。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 运行以下命令以重新启动 Prometheus。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kill -HUP 1
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+
+. 确认 Prometheus 是否成功重启，并验证 WAL 目录是否为空。您可以通过查看 Prometheus 日志或检查 `/prometheus/wal` 目录下的文件列表来进行验证。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+ls /prometheus/wal
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+如果输出为空，则表示 WAL 目录已被清空。
+--
+
+## 监控概览页数据出现较大偏差
+
+**根因分析**
+
+由于旧 Prometheus 的 WAL 日志无法正常接收，导致查询到垃圾数据，致使数据不准确且不可用。
+
+**解决方案**
+
+. 参考link:#f2e6a224745148ffb308d43007377a46[监控页面无数据，数据无法写入]确保数据能够正常写入。
+
+. 重启运行 Prometheus 的集群的 ruler。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete pod -n kubesphere-monitoring-system ruler-<clusterName>-xx-xx
+
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+请将 **clusterName** 替换为您的集群名称，并将 **xx-xx** 替换为实际的 Ruler Pod 标识符。这将删除当前的 Ruler Pod，然后 Kubernetes 将会自动创建一个新的 Pod 来代替它。
+--

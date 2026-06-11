@@ -1,0 +1,91 @@
+---
+title: 用户安装（部署）应用统计（DescribeUserAppStatistics）
+weight: 13
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_type
+| String
+| false
+| 应用类型
+
+| exclude_apps
+| Array
+| false
+| 排除的app
+
+| owner
+| String
+| true
+| app拥有者
+
+| project_id
+| String
+| false
+| 
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| statistic
+| Object
+| false
+| 统计数据
+
+| statistic.dev_app_count
+| Integer
+| false
+| 用户创建的应用数量
+
+| statistic.shared_app_count
+| Integer
+| false
+| 分享给该用户的应用数量
+
+| statistic.use_app_count
+| Integer
+| false
+| 用户安装的应用数量
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app_type": "cluster",
+  "exclude_apps": [
+    "app-xxx1"
+  ],
+  "owner": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeUserAppStatisticsResponse",
+  "ret_code": 0,
+  "statistics": {
+    "dev_app_count": 69,
+    "shared_app_count": 1,
+    "use_app_count": 39
+  }
+}
+----

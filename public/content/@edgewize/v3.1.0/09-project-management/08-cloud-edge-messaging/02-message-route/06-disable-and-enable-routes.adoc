@@ -1,0 +1,58 @@
+---
+title: "禁用和启用消息路由"
+keywords: "Kubernetes, {ks_product}, 项目管理, 云边消息, 消息路由, 禁用和启用消息路由"
+description: "介绍如何禁用和启用消息路由。"
+weight: 06
+---
+
+
+// :ks_permission: **没有**
+:ks_navigation: **云边消息 > 消息路由**
+
+
+本节介绍如何启用和禁用消息路由。消息路由禁用后，系统将不再根据路由规则转发消息。
+
+== 前提条件
+
+// include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+您需要加入一个边缘项目并在项目中具有 **project-admin** 角色。
+
+
+== 禁用和启用单个消息路由
+
+// include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+. 以具有 **project-admin** 角色的用户登录{ks_product_left} Web 控制台并进入您的边缘项目。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要禁用的消息路由右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**禁用**。
+
+. 在**禁用消息路由**对话框，输入消息路由的名称，然后点击**确定**。
+
+. 在已禁用的消息路由右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**启用**可启用消息路由。
+
+
+== 批量禁用和启用消息路由
+
+// include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+. 以具有 **project-admin** 角色的用户登录{ks_product_left} Web 控制台并进入您的边缘项目。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 勾选需要禁用的消息路由左侧的复选框，然后在消息路由列表上方点击**禁用**。
+
+. 在**批量禁用消息路由**对话框，输入消息路由的名称，然后点击**确定**。
++
+--
+include::../../../../_custom/note-separateNamesByComma.adoc[]
+--
+
+. 勾选已禁用的消息路由左侧的复选框，然后在消息路由列表上方点击**启用**可批量启用消息路由。

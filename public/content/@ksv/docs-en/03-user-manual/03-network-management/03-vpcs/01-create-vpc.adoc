@@ -1,0 +1,65 @@
+---
+title: "Create a VPC"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VPCs, creation"
+description: "Describes how to create a VPC in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: d16a7740b4ae4c2080ec18856256ec7a
+:ks_xref_id: b2f37a1386834ea892288a4a780e7dbc
+:ks_comp: ../../../../components/
+:ks_title: Create a VPC
+:ks_description: Describes how to create a VPC in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VPCs, creation
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to create a virtual private cloud (VPC) in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=2ae5fdee503d426aaffffe2b3f9d304f]
+
+// 待修改
+
+include::../../../../_custom-en/networks/vpc-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=bd32502168064f6b91947e4bb2b070e7]
+
+include::../../../../_custom-en/networks/vpc-steps.adoc[]
+
+. On the **VPCs** page, click **Create** in the upper-right corner.
+. In the dialog box that appears, configure parameters for the VPC.  The following table describes the parameters.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the VPC.
+
+include::../../../../_custom-en/networks/naming-convention.adoc[]
+
+|IP Range
+|The description of the VPC. The IP address range cannot be modified after the VPC is created.
+
+|Default Virtual Subnet
+|The default virtual subnet of the VPC.
+
+|Description
+|The description of the VPC.
+
+include::../../../../_custom-en/networks/description-convention.adoc[]
+|===
+--
+. Click **OK**.  The VPC appears in the VPC list after it is created.

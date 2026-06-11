@@ -1,0 +1,80 @@
+---
+title: "验证 SSL 证书"
+description: SSL 证书验证
+keywords: SSL, DNS, 证书, 域名
+draft: false
+weight: 10
+linkkey: domain_ssl_valid_domain_manual[[valid-domain]]
+---
+
+* *DV 证书验证*：可以通过 DNS 验证或者文件验证。
+* *OV/EV 证书验证*：需要通过上传确认函的方式进行验证。
+
+[#valid-domain]
+== 域名验证方式
+
+可以使用 **DNS 验证**或者**文件验证**方式。建议使用 DNS 验证方式，如果没有网站 DNS 权限，也可使用文件验证。
+
+=== DNS 验证
+
+. 在证书订单列表页面，点击**验证**。
++
+image::/images/cloud_service/site/ssl/domain_valid.png[]
+
+. 根据提示，前往域名提供商为签发的域名配置 CNAME 记录。
++
+image::/images/cloud_service/site/ssl/domain_valid_dns.png[]
++
+以 https://www.qingcloud.com/products/dns/[QingCloud DNS] 为例，在控制台中，选择**产品与服务** > *域名与网站* > *云解析DNS*，进入**域名解析**页面，添加域名并配置解析记录。具体操作方法，可参见link:../../../dns/best-practices/configure_cname/[配置域名解析记录]。
++
+image::/images/cloud_service/site/ssl/dnspod_valid.png[]
+. 配置后，等待审核通过，签发证书。
+
+=== 文件验证
+
+. 在证书订单列表页面，点击**验证**。
++
+image::/images/cloud_service/site/ssl/domain_valid_file_1.png[]
+
+. 根据提示信息进行验证。
++
+需要在签发的域名下的服务器，添加指定内容的静态内容来确定域名的所属权。
+
+.. 创建认证文件。
++
+在网站根目录新建 txt 文件： `\{domain}/.well-known/pki-validation/\{fileauth}.txt`，内容以界面提示信息为准。以下为文件内容示例:
++
+[source]
+----
+E516C95EF9E8EFDB44F95CAD6FE129D32304BEB2AB84334C47A0876567376434
+trust-provider.com
+TTDvmHbc1z
+----
+.. 测试验证。
++
+在浏览器中访问 `http(s)://qingcloud.com/.well-known/pki-validation/fileauth.txt` ，若能正常返回填写内容，则验证完成。
++
+image::/images/cloud_service/site/ssl/domain_valid_file.png[]
+
+[#confirm-letter]
+== 确认函确认
+
+*下载确认函*
+
+. 在订单列表页面，点击**上传**。
++
+image::/images/cloud_service/site/ssl/confirm0.png[]
+
+. 在**下载上传确认函**窗口中，下载确认函。
+
+. 将下载的确认函填写完成后，加盖公司公章，并保存为一张 png 文件。
+
+. **下载上传确认函**窗口中，上传确认函，成功后等待工作人员联系并核实信息，确认后等待签发。
++
+确认函文件示例：
++
+image::/images/cloud_service/site/ssl/confirm1.jpg[,70%]
++
+image::/images/cloud_service/site/ssl/confirm2.jpg[,70%]
++
+image::/images/cloud_service/site/ssl/confirm3.jpg[,70%]

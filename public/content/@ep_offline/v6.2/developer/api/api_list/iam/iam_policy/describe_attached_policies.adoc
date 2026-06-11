@@ -1,0 +1,215 @@
+---
+title: 查询IAM策略（DescribeAttachedIAMPolicies）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| false
+| ConsoleID
+
+| controller
+| Array
+| false
+| 控制器类型
+
+| entity_urn
+| String
+| false
+| IAM用户或身份ID的QRN
+
+| limit
+| Integer
+| false
+| 偏移量
+
+| offset
+| Integer
+| false
+| 起始坐标
+
+| owner
+| String
+| false
+| 所有者
+
+| policy
+| String
+| false
+| IAM策略ID
+
+| resource
+| String
+| false
+| IAM用户或身份ID
+
+| resource_type
+| String
+| false
+| 类型
+
+| reverse
+| Integer
+| false
+| 是否降序查询
+
+| root_user
+| String
+| false
+| 根用户ID
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| sort_key
+| String
+| false
+| 排序使用的列
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| policy_binding
+| Array
+| false
+| 策略内容
+
+| policy_binding[].console_id
+| String
+| false
+| 控制台ID
+
+| policy_binding[].controller
+| String
+| false
+| 控制器类型
+
+| policy_binding[].entity_urn
+| String
+| false
+| IAM用户或身份ID的QRN
+
+| policy_binding[].owner
+| String
+| false
+| 所有者
+
+| policy_binding[].policy_id
+| String
+| false
+| IAM策略ID
+
+| policy_binding[].policy_name
+| String
+| false
+| IAM策略名称
+
+| policy_binding[].resource_id
+| String
+| false
+| IAM用户或身份ID
+
+| policy_binding[].resource_name
+| String
+| false
+| IAM用户或身份名称
+
+| policy_binding[].resource_type
+| String
+| false
+| public
+
+| policy_binding[].root_user_id
+| String
+| false
+| 主账号ID
+
+| policy_binding[].statements
+| Object
+| false
+| 策略内容
+
+| policy_binding[].statements.action
+| Array
+| false
+| 操作码列表
+
+| policy_binding[].statements.effect
+| String
+| false
+| 效果,allow/deny
+
+| policy_binding[].statements.resource
+| String
+| false
+| 资源id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAttachedIAMPolicies",
+  "limit": 20,
+  "offset": 0,
+  "owner": "usr-ZiEgnuY1",
+  "policy": "iamp-dy7mtlyu"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAttachedIAMPoliciesResponse",
+  "policy_binding": [
+    {
+      "console_id": "testingcloud",
+      "controller": "pitrix",
+      "entity_urn": "qrn:qingcloud:iam::usr-ZiEgnuY1:role/iamr-yd9lhi1a",
+      "owner": "usr-ZiEgnuY1",
+      "policy_id": "iamp-lzetjrjj",
+      "policy_name": "iamtest",
+      "resource_id": "iamr-yd9lhi1a",
+      "resource_name": "test",
+      "resource_type": "iam_role",
+      "root_user_id": "usr-ZiEgnuY1",
+      "statements": {
+        "Statement": [
+          {
+            "action": [
+              "ecm:Describe*",
+              "ecm:CreateBrokers",
+              "ecm:DeleteBrokers"
+            ],
+            "effect": "allow",
+            "resource": "*"
+          }
+        ],
+        "Version": "2012-04-01"
+      }
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

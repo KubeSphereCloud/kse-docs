@@ -1,0 +1,20 @@
+---
+title: '克隆相关'
+weight: 9
+---
+
+[cols="2,2,3,3a",options="header"]
+|===
+|英文词汇|中文/缩略词|解释说明|应用
+|link clone 
+|链接克隆
+|-
+|针对集群中的某一个卷创建链接克隆：`neonsan clone_volume -source_volume pool/src@snapshot -target_volume pool/tgt -link_clone ` +
+创建链接克隆需要用到快照。
+
+|full clone 
+|全量克隆  
+|针对克隆卷的一个全量数据的拷贝。
+|创建集群中某一个卷的全量克隆：`neonsan clone_to_newvolume -source_volume pool/vol5 -target_volume pool/vol7`
+|===
+

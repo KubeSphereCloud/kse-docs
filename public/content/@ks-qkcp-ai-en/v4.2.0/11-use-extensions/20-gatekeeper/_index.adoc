@@ -1,0 +1,21 @@
+---
+title: "Gatekeeper"
+description: "Introduces how to use Gatekeeper."
+weight: 20
+layout: "second"
+---
+
+link:https://github.com/open-policy-agent/gatekeeper[Gatekeeper] is a flexible policy enforcement admission controller for Kubernetes, utilizing link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)] to validate requests for creating and updating resources on a Kubernetes cluster.
+
+The link:https://open-policy-agent.github.io/gatekeeper-library/website/[OPA Gatekeeper Library] provides some commonly used security admission policies, including a series of ConstraintTemplates and Constraints that can be used with Gatekeeper. ConstraintTemplates can be directly applied to the cluster, and Constraints can be used to customize policies to meet your specific requirements.
+
+Leverage Gatekeeper to flexibly define admission policies and enforce security admission reviews at the cluster level, thereby ensuring the stability and security compliance of Kubernetes clusters.
+
+Key features of Gatekeeper include:
+
+*   **Flexible**: Gatekeeper allows users to declaratively define admission policies that apply to selected namespaces and selected resource types.
+*   **Programmable**: Gatekeeper uses Open Policy Agent (OPA) as its decision engine, enabling the definition of complex security policies using Rego.
+*   **Rolling Release**: Supports gradually enforcing admission policies in a step-by-step manner to mitigate the risk of disrupting workloads.
+*   **Pre-Release Mechanism**: Gatekeeper provides mechanisms to test the impact and scope of security policies before enforcement.
+
+After installing the Gatekeeper extension, the **Gatekeeper** menu will appear in the cluster's left navigation pane.

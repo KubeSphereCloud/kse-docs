@@ -1,0 +1,22 @@
+---
+title: "导入镜像"
+weight: 30
+---
+
+. 下载镜像。
++
+[source]
+----
+ftp://ins.qingcloud.com/sic-deploy/secrity/images/cfw
+ftp://ins.qingcloud.com/sic-deploy/secrity/images/sintg
+----
+. 将镜像包存放到云平台任意 seed 节点指定路径下。
++
+
+include::../../../../../_components/note.adoc[]
+部署程序会把镜像 SQL 自动注册到数据库中，因此只需要将 images/{cfw,sintg} 目录下的 ah 目录同步到云平台任意 seed 节点 /pitrix/images-repo/ 目录中即可。
+
+include::../../../../../_components/table_footer.adoc[]
+
+.. 登录云平台任意 seed 节点。
+.. 将镜像上传到 /pitrix/images-repo/ 目录中。

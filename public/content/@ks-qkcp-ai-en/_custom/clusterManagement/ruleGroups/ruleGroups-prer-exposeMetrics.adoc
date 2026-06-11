@@ -1,0 +1,2 @@
+// :ks_include_id: 6c8ebb4ccf2948f99cfe15add7134ae5
+* To monitor application metrics, you need to configure the application running in the container to expose monitoring metrics that comply with the link:https://prometheus.io/docs/instrumenting/clientlibs/[Prometheus specification] at a specific server path. Additionally, you need to xref:05-cluster-management/06-application-workloads/04-services/07-edit-a-metrics-exporter.adoc[set up a metrics exporter] on the service used to expose the workload to declare the path that provides the application monitoring metrics.

@@ -1,0 +1,29 @@
+---
+title: "前提条件"
+weight: 2
+---
+
+弹性高性能计算 EHPC 服务的安装依赖于企业云平台的搭建以及 AppCenter 服务的支持，在进行 EHPC 服务的安装部署之前，须满足以下前提条件。
+
+* 企业云平台 v6.1 已经以标准部署（standard）模式安装完成，且可正常登录 Console 平台、BOSS 平台以及配置中心。企业云平台的搭建可参考《青云企业云平台安装指南》。
++
+
+include::../../../../_components/attention.adoc[]
+* 企业云平台的 Installer 安装包必须为 v6.1 版本。
+* 企业云平台的安装模式必须为：标准部署（standard）模式，即 KS 节点与 Hyper 节点分别独立部署。
+
+include::../../../../_components/table_footer.adoc[]
+
+* AppCenter 2.0 已安装完成，且可正常使用。
++
+
+include::../../../../_components/note.adoc[]
+AppCenter 服务一般在搭建企业云平台的过程中默认自动安装。
+
+include::../../../../_components/table_footer.adoc[]
+
+* EHPC 相关服务需单独部署于企业云平台内的 KS 节点上，要求如下：
+** 所需 KS 节点数量至少 2 个。
+** 每个 KS 节点的规格要求至少 CPU 4 核，内存 8G，硬盘 100G。
+
+

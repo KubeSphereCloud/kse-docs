@@ -1,0 +1,43 @@
+---
+title: "查看 SidecarSet"
+weight: 02
+---
+
+== 查看 SidecarSet 列表
+
+登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *SidecarSet*。
+SidecarSet 列表提供以下信息：
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|SidecarSet 的名称。
+
+|更新策略
+|SidecarSet 当前配置的更新方式。
+
+|暂停注入
+|是否已暂停向新容器组注入 Sidecar 容器。
+
+|更新时间
+|SidecarSet 最近一次更新的时间。
+|===
+
+您可以在列表中执行以下操作：
+
+* 在列表上方点击搜索框并输入关键字，按名称搜索 SidecarSet。
+* 在列表右上角点击刷新图标，刷新列表信息。
+* 在列表右上角点击自定义列图标，自定义显示的列。
+
+== 查看 SidecarSet 详情
+
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *SidecarSet*。
+. 在 SidecarSet 列表中，点击目标 SidecarSet 的名称，进入详情页面。
++
+详情页面包含以下页签：
++
+* *项目*：显示 SidecarSet 当前生效的项目（命名空间）及注入状态。
+* *元数据*：显示标签和注解信息。
+* *事件*：显示相关 Kubernetes 事件记录。

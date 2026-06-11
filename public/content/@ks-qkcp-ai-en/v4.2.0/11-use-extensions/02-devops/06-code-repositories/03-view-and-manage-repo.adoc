@@ -1,0 +1,62 @@
+---
+title: "View and Manage Code Repositories"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Code Repository"
+description: "Describes how to view and manage code repositories."
+weight: 03
+---
+
+:ks_navigation:  **DevOps > Code Repositories**
+
+
+This section describes how to view code repository details and modify files within a repository.
+
+
+== Prerequisites
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+* A workspace, a DevOps project, and a user (e.g., **project-regular**) have been created. The user has been invited to the DevOps project and granted the **operator** role. Refer to link:../../02-devops-project-mangement/03-project-members/01-invite-a-user-to-a-project/[Invite a User to a DevOps Project].
+
+
+== Steps
+
+include::../../../../_custom/devops/project-regular-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/devops/devops-oper-dropdownList.adoc[]
+
++
+
+. In the code repository list, click the name of a repository to open its details page.
+
+. On the details page, select a branch in the upper-left corner to view the files in the repository.
++
+--
+* Click the search box and enter keywords to search for files.
+
+* Click image:/images/ks-qkcp/zh/icons/refresh-new.png[,18,18] to refresh the directory.
+
+* Click image:/images/ks-qkcp/zh/icons/collapse1.svg[,18,18] at the top to collapse the directory tree area. Click image:/images/ks-qkcp/zh/icons/expand1.svg[,18,18] again to expand the directory tree area.
+--
+
+. Click image:/images/ks-qkcp/zh/icons/update.svg[,18,18] or **Upload File** to upload a file or directory (a compressed package in tgz or tar.gz format) to the code repository. The file or directory will be uploaded to the currently selected path.
++
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+Ensure you have write permissions for the current repository.
+|===
+
+
+. Under **More Actions**, click **Copy Path** to copy the path of the currently selected file or directory; click **Delete** to delete the currently selected file or directory.
++
+--
+If the selected object is a file, you can also edit the file, copy the file content, and download the file.
+--

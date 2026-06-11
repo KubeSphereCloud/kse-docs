@@ -1,0 +1,109 @@
+---
+title: 查询资源目录（DescribeTagDirectoryResources）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| owner
+| String
+| false
+| 资源目录所有者
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| directory
+| Object
+| false
+| 资源目录详情
+
+| directory.directory_name
+| String
+| false
+| 资源目录名称
+
+| directory.sub_dirs
+| Array
+| false
+| 子目录
+
+| directory.sub_dirs[].directory_name
+| String
+| false
+| 资源目录名称
+
+| directory.sub_dirs[].sub_dirs
+| String
+| false
+| 子目录
+
+| directory.sub_dirs[].tag_index
+| Integer
+| false
+| 资源目录序号
+
+| directory.tag_index
+| Integer
+| false
+| 资源目录序号
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeTagDirectoryResources",
+  "directories": [
+    "dir-gli5lx31"
+  ],
+  "owner": "",
+  "resource_type": "instance"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeTagDirectoryResourcesResponse",
+  "resources": {
+    "i-ja5y6nlq": {
+      "dir_path": [
+        {
+          "directory_id": "dir-gli5lx31",
+          "directory_name": "ROOT"
+        },
+        {
+          "directory_id": "dir-tnrxvww3",
+          "directory_name": "ok"
+        },
+        {
+          "directory_id": "dir-y3hszsal",
+          "directory_name": "123"
+        }
+      ],
+      "resource_id": "i-ja5y6nlq",
+      "resource_type": "instance"
+    },
+    "ret_code": 0,
+    "root_directory": "dir-gli5lx31"
+  },
+  "total_count": 1
+}
+----

@@ -1,0 +1,79 @@
+---
+title: "安装服务"
+weight: 20
+---
+
+== 操作步骤
+
+. 登录云平台 FirstBox。
+. （可选）开启 tmux。
+. 执行以下命令，安装配置文件中配置的服务。大约需要 1 个小时，请耐心等待。
++
+[source]
+----
+export enable_interactive=0; sic-deploy -f /pitrix/lib/pitrix-sic-deployment/conf/scs.yaml.{zone_id}
+----
+
++
+示例：
++
+[source]
+----
+export enable_interactive=0; sic-deploy -f /pitrix/lib/pitrix-sic-deployment/conf/scs.yaml.uat1a
+----
++
+
+include::../../../../../../_components/note.adoc[]
+如果需要定位问题或调试，也可以执行命令 ``sic-deploy -f /pitrix/lib/pitrix-sic-deployment/conf/scs.yaml.{zone_id}`` 进行安装。
+
+include::../../../../../../_components/table_footer.adoc[]
+. 执行以下命令，检查服务是否部署成功。
++
+工作目录有 Done 文件标记，表示部署成功。
++
+[source]
+----
+cat /pitrix/conf/sic_deployment/{zone_id}/{server_code}/Done
+----
++
+
+include::../../../../../../_components/note.adoc[]
+如果部署失败，可以先排查日志定位问题后再重试，如果仍未解决，请联系技术支持。
+
+工作目录：/pitrix/conf/sic_deployment/{ZONE_ID}/{SERVER_CODE}。
+
+日志文件：/pitrix/log/sic_deployment.log。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+== 查看云帐号
+
+首次部署时，只要成功创建资源后就可以看到云平台账号（默认为 `scs`），该账号用于创建安全产品所需要的资源。
+
+执行以下命令，查看云平台账号的邮箱和密码。
+
+[source]
+----
+cat /pitrix/conf/sic_deployment/scs.user | grep -E '^email:|^passwd:'
+----
+image::/images/ep_offline/scs_install/cfw_security_deploy_01.png[]
+
+include::../../../../../../_components/attention.adoc[]
+重复部署后在 scs.user 文件中密码可能会显示为 `*`，因此请保存好账号信息。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+== 查看服务主机资源
+
+1. 使用 scs 账号，登录云平台 Console。
+2. 进入云服务器页面，查看服务对应的主机资源。
++
+image::/images/ep_offline/scs_install/cfw_security_deploy_02.png[]
++
+
+include::../../../../../../_components/note.adoc[]
+点击镜像图标，可以查看主机的默认账号：
+
+默认管理员 ubuntu，密码 p12cHANgepwD。新建主机后为了安全请务必修改密码！
+
+include::../../../../../../_components/table_footer.adoc[]

@@ -1,0 +1,179 @@
+---
+title: "手动清理 Store 节点记录"
+weight: 1
+---
+
+== 运维场景
+
+云易捷使用的 NeonSAN 分布式块存储系统，在进行集群升级或节点下线操作后，数据库集群或 Zookeeper 中可能会存在不需要的 Store 节点记录。若在进行检查时发现多余的 Store 节点记录，可通过以下操作进行清除。
+
+== 操作步骤
+
+. 登录当前环境的任一 NeonSAN 节点，查看待清除的 Store 节点 ID。
++
+[source,shell]
+----
+neosnan list_store
+----
+
+. 执行如下命令，查看 NeonSAN Leader Center 节点 IP 地址。
++
+[source,shell]
+----
+qfcip
+----
+
+. 登录 NeonSAN Leader Center 节点，查看数据库信息。
++
+[souece,shell]
+----
+cat /etc/neonsan/center.conf
+----
++
+[source,config]
+----
+... ...
+[mysql]
+user="neonsan"
+pass="zhu88jie"
+#floating IP of mysql-plus
+ip="172.31.30.25"
+db_name="neonsan"
+logsql=1
+... ...
+----
+
+. 登录数据库。
++
+[source,shell]
+----
+mysql -uneonsan -pzhu88jie
+----
+
+. 关闭自动提交。
++
+[source,sql]
+----
+mysql> use neonsan;
+mysql> set autocommit=0;
+----
+
+. 查看数据库中待清理的 Store 节点所有信息 。
++
+[source,sql]
+----
+mysql> select * from store where id=<store_id>;
+mysql> select * from ssd where store_id=<store_id>;
+mysql> select * from candidate_disk where store_id=<store_id>;
+mysql> select * from port where store_id=<store_id>;
+----
++
+include::../../../../../_components/note.adoc[]
+<store_id> 为待清理的 Store 节点的 ID，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 删除节点遗留信息。
++
+[source,sql]
+----
+mysql> delete from candidate_disk where store_id=<store_id>;
+mysql> delete from port where store_id=<store_id>;
+mysql> delete from ssd where store_id=<store_id>;
+mysql> delete from store where id=<store_id>;
+----
++
+include::../../../../../_components/note.adoc[]
+<store_id> 为待清理的 Store 节点的 ID，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 确认已将待清除的节点信息删除。各项查询结果中均为待清除的节点信息。
++
+[source,sql]
+----
+mysql> select * from store;
+mysql> select * from ssd;
+mysql> select * from candidate_disk;
+mysql> select * from port;
+----
+
+. 查看 center 数据表中，是否存在待清除的节点信息。
++
+[source,sql]
+----
+mysql> select * from center;
+----
+
+. 若待清除的节点信息保存于 center 表中，则将其从 center 表中删除。
++
+[source,sql]
+----
+mysql> delete from center where mngt_ip="xx.xx.xx.xx";
+----
++
+include::../../../../../_components/note.adoc[]
+xx.xx.xx.xx 为待清理的 Store 节点 IP 地址，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 查看 neonsan_version 数据表中，是否存在待清除的节点信息。
++
+[source,sql]
+----
+mysql> select * from neonsan_version;
+----
+
+. 若待清除的节点信息保存于 neonsan_version 表中，则将其从 neonsan_version 表中删除。
++
+[source,sql]
+----
+mysql> delete from neonsan_version where mgnt_ip='<role_name>_xx.xx.xx.xx';
+----
++
+include::../../../../../_components/note.adoc[]
+<role_name>_xx.xx.xx.xx 为待清理的节点信息，其中 <role_name> 值为 ``montior``、``store``、``center``，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 确认以上操作正确后，提交改动。
++
+[source,mysql]
+----
+mysql> commit;
+----
+
+. 设置自动提交。
++
+[source,sql]
+----
+mysql> set autocommit=1;
+----
+
+. 检查 Zookeeper 中对应待清除信息的节点 id 是否存在。
++
+[source,shell]
+----
+/opt/zookeeper-3.4.13/bin/zkCli.sh
+----
++
+[source,shell]
+----
+get /neonsan/<cluster_name>/stores/<store_id>
+----
++
+include::../../../../../_components/note.adoc[]
+* 根据实际情况，修改 zookeeper 服务的路径。
+* <cluster_name> 为 NeonSAN 集群名，需根据实际情况修改。
+* <store_id> 为待清除信息的节点 ID，需根据实际情况修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 若待清除信息的节点 ID 仍存在于 Zookeeper 中，则删除该节点。
++
+[source,shell]
+----
+rmr /neonsan/<cluster_name>/stores/<store_id>
+----
++
+include::../../../../../_components/note.adoc[]
+根据实际情况，修改 NeonSAN 集群名与清除信息的节点 ID。
+include::../../../../../_components/table_footer.adoc[]
+
+
+

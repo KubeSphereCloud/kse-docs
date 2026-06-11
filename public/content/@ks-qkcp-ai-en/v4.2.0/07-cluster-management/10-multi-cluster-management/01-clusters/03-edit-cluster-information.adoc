@@ -1,0 +1,50 @@
+---
+title: "Edit Cluster Information"
+keywords: "Kubernetes, {ks_product}, Multi-cluster Management, Cluster, Edit Cluster Information"
+description: "Describes how to edit cluster information."
+weight: 03
+---
+
+
+:ks_menu: **Cluster Management**
+:ks_permission: **Cluster Management**
+
+This section introduces how to edit cluster information.
+
+You can edit a cluster's alias, provider, description, and labels. KubeSphere does not support editing the name of an added cluster.
+
+
+== Prerequisites
+
+You need to have thepass:a,q[{ks_permission}] permission on the KubeSphere platform.
+
+
+
+== Steps
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
+. Click **Cluster Management**.
+
+. To the right of the cluster you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Edit Information** from the dropdown list.
+
+. In the **Edit Information** dialog box, set the cluster's alias, provider, description, and labels, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Alias
+|The alias of the cluster.
+
+|Provider
+|The provider of the cluster. Select a provider from the dropdown list.
+
+|Description
+|Description information for the cluster. The description can contain any characters, with a maximum of 256 characters.
+
+|Labels
+|Labels indicating the purpose of the cluster.
+|===
+--

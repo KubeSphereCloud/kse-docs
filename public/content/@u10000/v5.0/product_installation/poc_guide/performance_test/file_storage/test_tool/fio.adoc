@@ -1,0 +1,64 @@
+---
+title: FIO
+description: 
+weight: 2
+---
+
+FIO 是目前主流的第三方 IO 测试工具。该工具在 Linux 系统下使用比较方便，可用来对磁盘进行压力测试和验证。在使用 FIO 时，建议配合使用 libaio 的 I/O 引擎进行测试。
+
+FIO 的测试一般测试的是单文件/单盘的，可以用来测试裸盘的性能或单文件的读写性能，不建议用于测试多并发多文件的集群性能。
+
+== 安装配置
+
+官网下载 FIO 工具，进行安装。下载链接：https://github.com/axboe/fio。
+
+== 测试步骤
+
+**准备工作**
+
+. 使用正确的用户名和密码登录 Portal。
+. 点击**创建文件系统**，输入合法参数后点击**确定**，创建文件系统。
++
+
+include::../../../../../../../_components/note.adoc[]
+
+用户可通过设置文件系统数据块大小以达到最优效果。测试 `bs=4k` 时，数据块大小设置为 `4k`；测试 `bs=16k` 时，数据块大小设置为 `16k`；测试 `bs=64k` 和 `1M` 时，数据块大小设置为 `64k`。预读数据块大小均设置为 `自动`。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 进入文件系统详情页面，点击**创建共享**，输入合法参数创建共享。
+. 在客户端上挂载文件系统下的共享点，进行性能测试。
+
+**性能测试**
+
+在客户端直接使用 FIO 工具测试性能。
+
+[source,shell]
+----
+# fio --randrepeat=1 --ioengine=libaio --direct=1 --name=qfs_fio --iodepth=128 --numjobs=16 --size=1g --bs=4k --group_reporting=1 --readwrite=write --time_based=1 --runtime=60 --sync=0 --fdatasync=0 --filename=test_file
+----
+
+include::../../../../../../../_components/note.adoc[]
+
+若无特殊需求，可参考如上配置。如需对参数进行配置，参数说明可参考link:../../../../additional/fio_para/[附录]相关内容。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+
+
+== 结果分析
+
+由于服务器的配置不同，网络等各种原因，历史测试的结果以及得出的最优性能对应的配置参数等，只能作为参考。本章内容主要介绍如何查看测试结果。如下所示。
+
+
+image::/images/u10000/fio.png[fio,100%]
+
+include::../../../../../../../_components/note.adoc[]
+
+如图所示测试结果为：IOPS 为 7370，BW 为 28.8 MiB/s，lat 总延迟平均值为 17257.14 usec。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+
+
+

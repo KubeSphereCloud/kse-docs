@@ -1,0 +1,84 @@
+---
+title: 批量创建API密钥（MultiCreateAccessKeys）
+weight: 9
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| users
+| Array
+| true
+| 创建API密钥的用户集合
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_key_set
+| Object
+| false
+| 用户ID和创建的API密钥的映射表
+
+| access_key_set.access_key_id
+| String
+| false
+| API密钥的ID
+
+| access_key_set.msg
+| String
+| false
+| 错误消息
+
+| access_key_set.secret_access_key
+| String
+| false
+| API密钥的私钥
+
+| access_key_set.status
+| String
+| false
+| API密钥的状态
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "MultiCreateAccessKeys",
+  "users": [
+    "user1",
+    "user2"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "access_key_set": {
+    "usr-xCrXIiXv": {
+      "access_key_id": "ZQUPUJHZRCFVYVWCCCC",
+      "message": "",
+      "secret_access_key": "pHCkOsBg165abcdeGaGmetque6jwZ6YdNNuB8kr1",
+      "status": true
+    }
+  },
+  "action": "MultiCreateAccessKeysResponse",
+  "ret_code": 0
+}
+----

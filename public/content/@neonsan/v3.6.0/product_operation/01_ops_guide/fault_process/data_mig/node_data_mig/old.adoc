@@ -1,0 +1,144 @@
+---
+title: "NeonSAN v3.5.0 之前版本操作步骤"
+weight: 2
+---
+
+
+. 查看集群中剩余空间。
++
+[,shell]
+----
+neonsan list_store
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 集群剩余空间需大于集群总容量的 20%。
+* 除待迁移数据磁盘所在节点之外的其他节点的剩余空间，需大于待迁移数据磁盘已使用空间的两倍。
+* 若存在状态不为 OK 的节点，需调查原因后，再继续数据迁移操作。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 检查集群中卷的状态。
++
+若存在状态不为 OK 的卷，需link:../../../volume/[对相应卷进行恢复]后，再继续数据迁移操作。
++
+[,shell]
+----
+neonsan list_volume -detail
+----
+
+. 检查集群中磁盘状态
++
+[,shell]
+----
+neonsan list_ssd
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 若存在状态不为 OK 的磁盘，需调查原因后，再继续数据迁移操作。
+* 若已知磁盘为坏盘，则参考link:../../disk_data_mig/old.adoc[迁移磁盘数据操作中的步骤 5~7]，迁移数据并恢复卷。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 迁移节点上的全部数据，需逐个将当前节点上的所有磁盘上的数据迁移至其它存储节点。
++
+[,shell]
+----
+neonsan remove_ssd -ssd_uuid <ssd_uuid> -evacuate_data yes
+----
++
+include::../../../../../../../_components/note.adoc[]
+-ssd_uuid 为待迁移数据的节点上的磁盘的 UUID，根据实际情况进行修改。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 查看异步任务队列里 remove_ssd 任务执行状态。
++
+[,shell]
+----
+neonsan list_job | head
+----
+* 根据下线任务执行时间，查看相应的异步任务 ID。
+* ``PERCENT`` 为 100%，``STATUS`` 为 ``succeeded`` 则表示执行成功。
+
+. 查询数据库，确认该存储节点的磁盘上是否存在状态为 OK 的副本分布。
++
+--
+QingStor MySQL 数据库
+
+[,sql]
+----
+mysql -uqingstor -p'QS!ows%0923' -h192.168.101.251 neonsan -e " select * from replica where ssd_uuid='xxxxx' and status='OK';"
+----
+Galera 数据库
+[,sql]
+----
+mysql -uneonsan -pzhu88jie neonsan -e "select * from replica where ssd_uuid='xxxxx' and status='OK';"
+----
+Xenondb 数据库
+
+[,shell]
+----
+mysql -uneonsan -pzhu88jie -h192.168.101.251 neonsan -e "select * from replica where ssd_uuid='xxxxx' and status='OK';"
+----
+--
+
+* 命令行中的 xxxxx 均为待迁移节点上磁盘的 UUID，需根据实际情况进行修改。
+* QingStor MySQL 数据库密码需使用单引号。
+* 针对 Xenondb 数据库，``-h`` 参数需要指定其虚 IP，需根据实际情况进行修改。
+* 若经查询数据库，**待迁移数据的节点的磁盘上无状态为 OK 的副本**，则可直接**进行步骤 8**。
+* 若经查询数据库，**待迁移数据的节点的磁盘上上仍有状态为 OK 的副本**，则需**从步骤 7 开始**。
+
+. 若待迁移数据的存储节点仍有状态为 OK 的副本存在，需再次迁移。
++
+* NeonSAN v2.2 及以上版本，直接使用 ``remove_ssd`` 命令进行迁移。所有磁盘数据迁移完成后，再进行后续操作。
+** OK 副本所在**磁盘状态 OK**
++
+[,shell]
+----
+neonsan remove_ssd -ssd_uuid ${ssd_uuid} -evacuate_data yes
+----
+** OK 副本所在**磁盘状态不为 OK**
++
+[,shell]
+----
+neonsan remove_ssd -ssd_uuid ${ssd_uuid} -evacuate_data no
+----
+
+* NeonSAN v2.2 之前版本，需切换 Leader Center，使 store 状态恢复 OK 后，再执行 remove_ssd，将 OK 状态的副本进行迁移。所有磁盘数据迁移完成后，再进行后续操作。
++
+[,shell]
+----
+qfcip
+----
+.. 登录 leader center 节点，重启 center 服务。
++
+[,shell]
+----
+supervisorctl restart neoncenter
+----
+.. 确认待下线磁盘所在存储节点的状态为 OK。
++
+[,shell]
+----
+neonsan list_store
+----
+.. 再次执行 remove_ssd 迁移所有磁盘上的数据
++
+[,shell]
+----
+neonsan remove_ssd -ssd_uuid <ssd_uuid> -evacuate_data yes
+----
+
+. 查看集群中卷的状态，并对降级卷进行恢复。
++
+[,shell]
+----
+neonsan list_volume --detail
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 若系统中设置了 auto_recovery，则无需手动操作。
+* 若系统没有设置 auto_recovery，需link:../../../volume/degraded_recovery/[手动对降级卷进行恢复]。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 重复步骤 6~8，直至该节点上无 OK 状态的副本存在。
+
+

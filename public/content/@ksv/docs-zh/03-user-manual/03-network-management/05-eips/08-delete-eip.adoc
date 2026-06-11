@@ -1,0 +1,86 @@
+---
+title: "删除弹性 IP"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 弹性 IP, 删除"
+description: "介绍如何使用{ks_product_both}Web 控制台删除弹性 IP。"
+weight: 08
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: a40cf4be2777460cb9c9c7a6a84357e3
+:ks_xref_id: b519763bee4c4c518d91e5b410d3ec32
+:ks_comp: ../../../../components/
+:ks_title: 删除弹性 IP
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台删除弹性 IP。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 弹性 IP, 删除
+:ks_weight: 08
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台删除弹性 IP。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=0f743366c65141d085012057a16ffb10]
+
+include::../../../../_custom/networks/eip-manage-prerequisites.adoc[]
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 删除单个弹性 IPlink:[id=1926356447cd4e619d8ad4a45890ccd5]
+
+include::../../../../_custom/networks/eip-steps.adoc[]
+
+. 找到目标弹性 IP，点击右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**删除**。
+
+. 点击**确定**即可删除目标弹性 IP。
++
+--
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+弹性 IP 删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+请确保待删除的弹性 IP 未和任何资源关联，否则弹性 IP 将无法删除。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 批量删除弹性 IPlink:[id=0810bb12bc6f407db16632f5a4bb46a9]
+
+include::../../../../_custom/networks/eip-steps.adoc[]
+
+. 在弹性 IP 列表页面，选择需要删除的弹性 IP 名称左侧的复选框，然后在列表上方点击**删除**。
+
+. 在弹出的对话框中点击**确定**可批量删除多个弹性 IP。
++
+--
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+弹性 IP 删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+请确保待删除的弹性 IP 未和任何资源关联，否则弹性 IP 将无法删除。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,66 @@
+---
+title: "清理 binlog"
+weight: 2
+---
+
+清理 Xenondb 数据库目录下的 binlog 步骤如下。
+
+. 登录数据库节点。
+. 确认 Xenondb 集群状态正常：
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
++
+image::/images/neonsan/ops_guide_14.png[]
++
+include::../../../../../../_components/note.adoc[]
+返回结果中 ``Mysqld`` 字段均为 ``RUNNING``；``IO/SQL_RUNNING`` 字段均为 ``[true/true]`` 即表示正常。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 确认Xenondb集群数据已经同步完成：
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster gtid
+----
++
+image::/images/neonsan/ops_guide_15.png[]
++
+include::../../../../../../_components/note.adoc[]
+* 比较 GTID SET，若两个节点的所有 GTID 都相同，就表示两个节点数据一致。
+* 需等待数据完成同步后，再继续清理 bin log。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录所有 Xenondb 数据库节点，逐个执行如下命令，清理 binlog。
+.. 登录数据库。
++
+[,shell]
+----
+mysql -uneonsan -pzhu88jie -hx.x.x.x
+----
+.. 清理 binlog。
++
+[,sql]
+----
+mysql> show binary logs;
+mysql> purge binary logs to 'mysql-bin.000075';
+mysql> show binary logs;nondb/bin/xenoncli cluster gtid
+----
++
+特殊说明：
++
+* 命令行中的 000075 为清理截止序号，即：将此序号之前的 binlog 都
+清理掉。
+* 清理 Leader 节点的 binlog 之前，执行如下命令，查看 Follower 节点的 ``Master_Log_File`` 序号，清理截止序号要小于 ``Master_Log_File`` 的序号，这里建议保留最近几个 binlog，即：若查询到 Master_Log_File 序号位 79，建议从 75 开始清理。
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster mysql
+----
++
+image::/images/neonsan/ops_guide_16.png[]
+
+
+

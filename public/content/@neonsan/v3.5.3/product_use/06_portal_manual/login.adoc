@@ -1,0 +1,37 @@
+---
+title: 登录 Portal
+description: 
+weight: 1
+---
+
+在使用 Portal 之前，用户需提前知晓安装有 Portal 服务的节点服务器的 IP 地址，并使用正确的用户名和密码进行登录。
+
+. 打开浏览器，输入“<安装 Portal 服务的节点 IP 地址>:3000”，即可进入登录页面。
++
+[,shell]
+----
+http://xx.xx.xx.xx:3000/login
+----
++
+
+include::../../../../_components/note.adoc[]
+* 推荐使用 Chrome，Safari，Firefox 等浏览器，不建议使用 IE 内核浏览器。
+* xx.xx.xx.xx 为集群中安装了 Portal 服务的节点的 IP 地址，需根据实际情况进行修改。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 在 Portal 登录界面输入正确的用户名和密码，点击登录即可。
++
+
+include::../../../../_components/note.adoc[]
+* 默认用户名：admin@qingstor.com，其角色为超级管理员。
+* 默认密码：zhu88jie。
+* 若用户名和密码进行过修改，请根据实际情况进行填写。
+
+include::../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_login_1.png[,70%]
+
+. 成功登录 Portal 后，系统会默认显示**总览**页面，其内容主要包括当前集群容量、物理资源的使用情况、存储池、存储服务和后台任务的状态、当前环境中待处理的告警统计、集群读\写 IOPS、集群出\入吞吐量以及最近平台访问者等信息。
++
+image::/images/neonsan/portal_login_2.png[]

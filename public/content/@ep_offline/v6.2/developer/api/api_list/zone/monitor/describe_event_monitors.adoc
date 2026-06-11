@@ -1,0 +1,174 @@
+---
+title: 获取云监控数据（DescribeEventMonitors）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| cloud_monitor_type
+| String
+| false
+| 云监控类型
+
+| end_time
+| String
+| false
+| 结束时间
+
+| event_name
+| String
+| false
+| 事件名称
+
+| event_type
+| String
+| false
+| 事件类型
+
+| owner
+| String
+| false
+| 用户Id
+
+| range
+| Integer
+| false
+| 时间间隔
+
+| resource_type
+| String
+| false
+| 资源类型
+
+| start_time
+| String
+| false
+| 开始时间
+
+| step
+| String
+| false
+| 时间粒度
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| cloud_monitor
+| Object
+| false
+| 告警详情
+
+| cloud_monitor.events
+| Object
+| false
+| 事件数据
+
+| cloud_monitor.events.count
+| Integer
+| false
+| 个数
+
+| cloud_monitor.events.start_time
+| String
+| false
+| 结束时间
+
+| cloud_monitor.total_count
+| Integer
+| false
+| 总数
+
+| host
+| String
+| false
+| 节点
+
+| port
+| Integer
+| false
+| 端口号
+
+| ret_code
+| Integer
+| false
+| 返回码
+
+| trace_id
+| String
+| false
+| 追踪Id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeEventMonitors",
+  "cloud_monitor_type": "event",
+  "end_time": "2023-06-02T03:55:42.252Z",
+  "event_name": "",
+  "event_type": "",
+  "owner": "usr-rrPKHDpJ",
+  "range": 24,
+  "resource_type": "",
+  "start_time": "2023-06-01T03:55:42.252Z",
+  "step": "2h",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeEventMonitorsResponse",
+  "cloud_monitor": {
+    "events": [
+      {
+        "count": 0,
+        "end_time": "2023-06-01T12:00:00",
+        "start_time": "2023-06-01T10:00:00"
+      },
+      {
+        "count": 10,
+        "end_time": "2023-06-02T12:00:00",
+        "start_time": "2023-06-02T10:00:00"
+      }
+    ]
+  },
+  "host": "s-webservice0",
+  "port": 9995,
+  "ret_code": 0,
+  "trace_id": "2sObWuMv"
+}
+----

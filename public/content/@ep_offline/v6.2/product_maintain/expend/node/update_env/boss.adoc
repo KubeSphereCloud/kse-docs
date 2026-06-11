@@ -1,0 +1,35 @@
+---
+title: "刷新 BOSS 缓存"
+weight: 3
+---
+
+扩容后，需重建 BOSS 服务的缓存，避免统计信息更新不及时。
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是原环境的 FirstBox 节点 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行如下命令行，查看 BOSS 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/boss
+----
+
+. 执行如下命令行，从 FirstBox 节点跳转至 BOSS 节点。其中 `<x.x.x.x>` 为 BOSS 节点 IP，需根据前一步查询结果进行修改。
++
+[source,shell]
+----
+ssh <x.x.x.x>
+----
+
+. 在 BOSS 节点上，执行如下命令行，重建 BOSS 缓存。
++
+[source,shell]
+----
+/pitrix/bin/boss2-manager/django_manage.sh rebuild_cache
+----
+

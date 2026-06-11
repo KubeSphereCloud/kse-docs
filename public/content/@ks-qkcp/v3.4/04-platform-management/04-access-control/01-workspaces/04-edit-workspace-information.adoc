@@ -1,0 +1,67 @@
+---
+title: "编辑企业空间信息"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 访问控制, 企业空间, 编辑企业空间信息"
+description: "介绍如何编辑企业空间信息。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: b35a16c3033f4807a165f2468e1a195e
+:ks_xref_id: 9994e0260f1940ddab8cb498dd6e1174
+:ks_comp: ../../../../components/
+:ks_title: 编辑企业空间信息
+:ks_keywords: Kubernetes, {ks_product}, 访问控制, 企业空间, 编辑企业空间信息
+:ks_description: 介绍如何编辑企业空间信息。
+:ks_weight: 04
+:ks_icon:
+:ks_menu: **平台管理 > 访问控制**
+:ks_navigation: **企业空间**
+:ks_permission: **企业空间管理**
+
+
+本节介绍如何编辑企业空间信息。
+
+您可以编辑企业空间的别名和描述。{ks_product_right}不支持编辑已创建企业空间的名称。
+
+
+== 前提条件link:[id=ea0034c76949440c83b58a3bc3b14af5]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=dc5df7061f584b87b6e46d4e04a011af]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要操作的企业空间右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑信息**。
+
+. 在**编辑信息**对话框设置企业空间的别名和描述，然后点击**确定**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../../_custom/platformManagement/accessControl/workspaces/workspaces-para-alias.adoc[]
+
+include::../../../../_custom/platformManagement/accessControl/workspaces/workspaces-para-description.adoc[]
+|===
+--

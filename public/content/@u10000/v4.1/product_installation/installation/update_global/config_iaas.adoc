@@ -1,0 +1,59 @@
+---
+title: 启用 iaas 配置
+weight: 1
+---
+
+
+. 登录 Global Zone 的 FirstBox。
+
+. 进入配置文件所在目录，查看 `iaas.ini`，若当前路径下不存在配置文件 `iaas.ini`，则需手动创建配置文件 `iaas.ini`。
++
+[source,shell]
+----
+# ls /qingstor/etc
+base.ini  gateways  ip.ini  iptables.ini
+
+# touch iaas.ini
+----
+
+. 修改配置文件 `iaas.ini`，增加以下内容。
+//`iaas_domain` 与 `regions` 填写内容与当前 Zone 的 `iaas.ini` 保持一致。
++
+[source,shell]
+----
+# vi iaas.ini 
+
+[base]
+iaas_domain = qingstorage.com
+regions = AA:A1,A2 
+----
++
+参数说明
++
+[cols="1,3a", options="header"]
+|===
+|参数 |说明
+
+|iaas_domain | 
+// * 若已存在该参数，则无需修改。
+// * 若新增该参数，则填写 Global Zone 的 `global_domain` 字段去掉第一级后的内容。
+// +
+// 例如：Global Zone 的 `global_domain = stor.qingstorage.com`，则此处填写 `qingstorage.com`。
+
+* 对接 IaaS 的情况下，用于填写 IaaS 的域名。
+* 独立部署的情况下，无需填写。
+
+// 将 Global Zone 的 `global_domain` 字段去掉第一级后的内容填写在此处。如，Global Zone 的 `global_domain = stor.qingstorage.com`，则此处填写 `qingstorage.com`。
+
+|regions | 填写 Region 与 Zone 的对应关系。按实际情况进行填写。
+
+// * 若已存在该参数，则添加当前 Zone 与 Region 的对应关系。
+// +
+// 如原参数为 `regions = AA:A1`，修改后为 `regions = AA:A1 BB:B1`，其中 `B1` 与 `BB` 为新部署的 Zone ID，与其所属的 Region ID
+// * 若新增该参数，填写格式为 `regions = AA:A1,A2`。
+// +
+// 其中 `AA` 为 Global Zone 的 Region ID，若 Global Zone 没有配置 Region ID，则为 Global Zone 的 Zone ID，`A1` 与 `A2` 分别为 Global Zone 与 Zone 的 Zone ID。
+
+|===
+
+

@@ -1,0 +1,201 @@
+---
+title: "SSD 不支持热插拔"
+weight: 2
+---
+
+不支持热插拔的磁盘，若要进行换盘或下线操作，需**将该盘所在的节点做下线处理后，再进行插拔盘操作**。
+
+. 参考前文内容，link:../../move_disk/[移除待下线的磁盘]。
+
++
+include::../../../../../../_components/note.adoc[]
+移除磁盘的过程中，需**迁移待下线磁盘所在节点的所有数据**。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 检查数据库状态，根据实际环境中的数据库类型，选择相应的查看命令。
++
+若存在状态不为 OK 的数据库节点，需调查原因并解决后，再继续磁盘下线操作。
++
+--
+QingStor MySQL 数据库
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
+
+Galera 数据库
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
+
+Xenondb 数据库
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
+--
+
+. 登录 Zookeeper 集群各节点，执行如下命令查看 Zookeeper 状态。
++
+[,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
++
+include::../../../../../../_components/note.adoc[]
+* 根据实际环境上 Zookeeper 路径，修改命令行。
+* 若存在状态不为 OK 的 Zookeeper 节点，需调查原因后，再继续磁盘下线操作。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 停止待下线磁盘所在存储节点上的所有服务。
+.. 查询该节点上部署的服务
++
+[,shell]
+----
+supervisorctl status
+----
+.. 逐一停止该节点上的各项服务
++
+[,shell]
+----
+supervisorctl stop xxxxx
+----
++
+include::../../../../../../_components/note.adoc[]
+* xxxxx 为服务名称需根据实际情况进行修改。
+* 若集群中使用的数据库为 Xenondb，则通过 ``/opt/xenondb/bin/xenon_service.py stop`` 命令停止 Xenondb 服务
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录查看其它 Zookeeper 节点与数据库节点，检查服务是否正常。
++
+若数据库服务与 Zookeeper 服务异常，需调查原因并恢复。直至其他节点上的数据库服务与 Zookeeper 服务正常，再继续以下步骤。
++
+* Zookeeper 服务
++
+[,shell]
+----
+supervisorctl status zookeeper
+----
+
+* 数据库服务，根据集群中的数据库类型选择相应查看命令。
++
+--
+QingStor MySQL 数据库
+[,shell]
+----
+supervisorctl status mysql_neonsan
+----
+
+Galera 数据库
+[,shell]
+----
+supervisorctl status galera_cluster
+----
+
+Xenondb 数据库
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
+--
+
+. 待下线磁盘信息从配置文件中删除。
++
+[,shell]
+----
+vi /etc/neonsan/store.conf
+
+... ...
+# 待下线盘符相关信息
+[ssd.4]
+trim_on_reclaim=1
+zero_on_reclaim=0
+dev="/dev/nvme1n1"
+type="SSD"
+... ...
+----
+
+. 将待下线磁盘所在存储节点进行断电，下线，拔盘操作。
++
+* 若该磁盘不再使用且无需更换新的磁盘，可直接执行步骤 12 及后续操作，**完成 SSD 下线**操作。
+* 若需更换新的磁盘则需执行步骤 8 及后续操作，完成 SSD 换盘操作。
+
+. 插入新盘，开机。
+. . 对新插入盘的盘头前 20G 进行写零操作。
++
+[,shell]
+----
+dd if=/dev/zero of=/dev/nvme4n1 bs=10M count=2048 oflag=direct
+----
++
+* of 指定的参数为新插入盘的盘符，需根据实际情况进行修改。
+* 写零操作之前，确认一下新插入盘的序列号，与步骤 7 中的序列号对比，避免盘符输入错误，导致对其他盘进行了写零操作。
+
+. 将新盘添加到对应节点。
++
+--
+* NeonSAN v3.0.0 及以后版本。
++
+[,shell]
+----
+neonsan add_ssd -dev <dev_name> -store_id <storeid>
+----
+
+* NeonSAN v3.0.0 之前版本。
++
+[,shell]
+----
+neonsan add_ssd -dev <dev_name> -store_ip <storeIp> 
+----
+
+include::../../../../../../_components/note.adoc[]
+``-dev`` 参数指定的 dev_name 需要与原有的磁盘盘符格式保持一致。
+include::../../../../../../_components/table_footer.adoc[]
+--
+
+. 查看配置文件。
++
+[,shell]
+----
+vi /etc/neonsan/store.conf
+
+... ...
+# 添加新插入盘符相关信息
+
+[ssd.4]
+trim_on_reclaim=1
+zero_on_reclaim=0
+dev="${dev_name}"
+type="SSD"
+... ...
+----
++
+include::../../../../../../_components/note.adoc[]
+NeonSAN v3.0.0 及之后版本，``add_ssd`` 命令执行成功后，配置文件中会自动添加新插入磁盘的信息，无需手动添加。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 确认卷的状态，SSD 状态，以及 Store 的状态。
++
+[,shell]
+----
+neonsan list_volume -detail
+neonsan list_ssd
+neonsan list_store
+----
++
+include::../../../../../../_components/note.adoc[]
+若磁盘信息中存在无效磁盘记录，可参考。link:../../../fault_process/disk/clear_disk_record[清理磁盘记录]进行处理。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令对集群内的 SSD 进行负载均衡。
++
+[,shell]
+----
+neonsan rebalance_ssd
+----
++
+include::../../../../../../_components/note.adoc[]
+该命令为异步执行，可以通过 ``neonsan list_job`` 查看进程。
+include::../../../../../../_components/table_footer.adoc[]
+

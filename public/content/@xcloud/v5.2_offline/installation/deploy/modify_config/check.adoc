@@ -1,0 +1,28 @@
+---
+title: "校验配置文件"
+weight: 50
+---
+
+配置文件生成后，请手动检查目录中的文件是否符合配置预期。
+
+include::../../../../../_components/attention.adoc[]
+若配置文件不符合预期，可以按需修改部分字段。
+
+修改配置文件后，请执行命令 `/pitrix/bin/gen_node_list.py`，以通知 installer 感知 role 的变更。若需要强制重新配置平台，请执行命令 `/pitrix/bin/gen_node_list.py -f`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 检查 /pitrix/conf/variables/variables.yaml 文件
+
+重点检查：
+
+* 配置信息是否和配置 variables.ZONE_ID.yaml 时一致。
+* 环境配置参数是否正确。
+* 各角色 IP 地址是否正确获取。
+
+== 检查 /pitrix/conf/settings/ 目录中的文件
+
+重点检查：
+
+* 配置信息是否和配置 setting.ZONE_ID.yaml 时一致。
+* 配置文件中各计算节点镜像关系（IP 和 hostname 是否正确），如果 hostname 命名不标准可能生成镜像关系不合理。

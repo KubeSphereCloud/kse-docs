@@ -1,0 +1,131 @@
+---
+title: 更新 Proxy 配置
+weight: 5
+---
+
+
+某些情况下，IaaS 的服务器不能直接访问 {product_name} 的服务器，因此需要通过 Proxy 去间接访问。此步骤的目的是在 IaaS 的 Proxy 节点配置 {product_name} 的域名解析，从而实现 IaaS 的节点服务器访问 {product_name} 的目的。
+
+
+include::../../../../../../_components/note.adoc[]
+
+若 IaaS 的 Webconsole 服务没有配置开启 Proxy，则无需修改 Proxy 配置，可跳过该章节内容。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+. 登录 IaaS 的 FirstBox。
+
+. 执行如下命令行，查看 IaaS 的 Proxy 节点。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/proxy
+----
+
+
+. 根据查询结果，逐个登录 IaaS 的 Proxy 节点服务器，在配置文件 `/etc/nginx/sites-available/qs_proxy` 中增加 Nginx 配置。
++
+[source,yaml]
+----
+
+server {
+    listen 8900;
+    server_name *.<zone_id>.<qingstor_global_domain> *.<qingstor_global_domain>;
+    resolver <iaas_dns_master_ip> <iaas_dns_slave_ip> valid=30s;   // 此处填写 iaas dns 节点 ip 地址
+ 
+    set $qs_gateway_http_<zone_id> "http://<zone_id>.<qingstor_global_domain>";
+    set $qs_gateway_http_global "http://<qingstor_global_domain>";
+ 
+    location / {  // proxy dynamic request to apache
+        set $url $host$request_uri;
+ 
+        if ($url ~* <zone_id>.<qingstor_global_domain>) {
+            proxy_pass $qs_gateway_http_<zone_id>;
+            break;
+        }
+ 
+        proxy_pass $qs_gateway_http_global;
+ 
+        proxy_redirect     off;
+        proxy_set_header   Host             $host;
+        proxy_set_header   X-Real-IP        $remote_addr;
+        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+    }
+}
+ 
+server {
+    listen 8943;
+    server_name *.<zone_id>.<qingstor_global_domain> *.<qingstor_global_domain>;
+ 
+    # 此处填写 iaas dns 节点 ip 地址, 如果域名使用外网 dns 解析 那就使用114.114.114.114
+    resolver <iaas_dns_master_ip> <iaas_dns_slave_ip> valid=30s;
+ 
+    set $qs_gateway_https__<zone_id> "http://<zone_id>.<qingstor_global_domain>";
+    set $qs_gateway_https_global "http://<qingstor_global_domain>";
+ 
+    # proxy dynamic request to apache
+    location / {
+        set $url $host$request_uri;
+ 
+        if ($url ~* <zone_id>.<qingstor_global_domain>) {
+            proxy_pass $qs_gateway_https_<zone_id>;
+            break;
+        }
+ 
+        proxy_pass $qs_gateway_https_global;
+ 
+        proxy_redirect     off;
+        proxy_set_header   Host             $host;
+        proxy_set_header   X-Real-IP        $remote_addr;
+        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+    }
+}
+----
++
+
+include::../../../../../../_components/note.adoc[]
+
+* 以上配置中使用到的 `<zone_id>` 与 `<qingstor_global_domain>` 需根据 link:../../../config/base/[{product_name} 的配置]进行填写。
+* 以上配置中使用到的 `<iaas_dns_master_ip>` 与 `<iaas_dns_slave_ip>`，需根据 IaaS 的 DNS 节点 IP 地址进行填写。如果 IaaS 的域名使用外网的 DNS 服务解析，那就直接填写 `114.114.114.114`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+
+. 执行如下命令行，加载 IaaS 的 Proxy 节点配置，使其生效。
++
+[source,shell]
+----
+ln -s /etc/nginx/sites-available/qs_proxy /etc/nginx/sites-enabled/
+----
+
+. 执行如下命令行，重启 Nginx 服务，使配置生效。
++
+[source,shell]
+----
+service nginx reload
+----
+
+. 逐个登录 IaaS 的 Proxy 节点服务器，完成以上操作。
+
+. 在 IaaS 的 FirstBox 节点上，执行如下命令行，下发配置至各节点服务器。
++
+[source,shell]
+----
+/pitrix/build/build_pkgs.py -p pitrix-global-conf
+/pitrix/upgrade/update.sh all pitrix-global-conf
+----
+
+. 逐个登录 IaaS 的 Webservice 节点服务器，行如下命令，重启 Webservice 服务，从而使配置生效。
++
+[source,shell]
+----
+supervisorctl restart ws_server
+----
+
+
+
+

@@ -1,0 +1,126 @@
+// :ks_include_id: cb41056b42b540b999804717abfd497a
+. On the pod details page, view the resource attributes of the pod in the **Attributes** area.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the pod belongs.
+
+|Project
+|The project to which the pod belongs.
+
+|Application
+|The application to which the pod belongs.
+
+|Status
+|The status of the pod.
+
+include::pods-para-podStatus.adoc[]
+
+include::pods-para-podIpPool.adoc[]
+
+|Node Name
+|The name of the node where the pod is located.
+
+|Node IP Address
+|The IP address of the node where the pod is located.
+
+|Restart Count
+|The number of times the pod has been restarted.
+
+|QoS Type
+|The Quality of Service type of the pod, determined by the user-configured container memory limit, memory request, CPU limit, and CPU request.
+
+include::pods-para-qosTypes.adoc[]
+
+|Creation Time
+|The time when the pod was created.
+
+|Creator
+|The creator of the pod.
+|===
+--
+
+. On the pod details page, view the containers and volumes within the pod on the **Resource Status** tab.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Containers
+|Displays the name, status, restart count, and container ports of the containers running in the pod. Container status types include:
+
+include::../workloads/workloads-para-containerStatus.adoc[]
+
+Click image:/images/ks-qkcp/zh/icons/log.svg[log,18,18] to the right of the container name to view container logs. Hover over **Probes** to view the probes configured on the container.
+
+|Volumes
+|Displays the names of all volumes in the pod, the containers to which volumes are mounted, and the mount paths of the volumes on the containers.
+|===
+--
+
+. On the pod details page, click the **Scheduling Information** tab to view the pod's scheduling results and status information.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Scheduling Result
+|Displays the name of the node that received the pod.
+
+|Status Information
+|Displays whether the pod has successfully completed all startup steps. If image:/images/ks-qkcp/zh/icons/success.svg[success,18,18] is displayed, it indicates the pod has completed the startup steps. If image:/images/ks-qkcp/zh/icons/error.svg[error,18,18] is displayed, it indicates the startup steps are not yet complete.
+
+* **Running**: Whether the pod's current status is **Running**.
+
+* **Pod Scheduled**: Whether the pod has been scheduled to a node.
+
+* **Pod Initialized**: Whether all init containers in the pod have started successfully.
+
+* **Containers Ready**: Whether all containers in the pod have started successfully.
+
+* **Pod Ready**: Whether the pod is ready.
+|===
+--
+
+. On the pod details page, click the **Metadata** tab to view the pod's labels and annotations.
+
+. On the pod details page, click the **Monitoring** tab to view the pod's real-time resource usage.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|CPU Usage
+|The real-time CPU usage of the pod.
+
+|Memory Usage
+|The real-time memory usage of the pod.
+
+|Outbound Traffic
+|The outbound traffic of the pod.
+
+|Inbound Traffic
+|The inbound traffic of the pod.
+|===
+
+include::../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../_ks_components/oper-refreshData.adoc[]
+--
+
+. On the pod details page, click the **Environment Variables** tab to view the environment variables of all containers in the pod.
+
+. On the pod details page, click the **Events** tab to view events related to the pod.
++
+--
+include::../clusterManagement-para-eventsTab.adoc[]
+--

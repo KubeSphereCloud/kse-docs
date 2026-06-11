@@ -1,0 +1,37 @@
+---
+title: "Edit Workspace Gateway Settings"
+keywords: "Kubernetes, {ks_product}, Workspace Management, Workspace Settings, Gateway Settings, Edit Workspace Gateway Settings"
+description: "Describes how to edit workspace gateway settings."
+weight: 04
+---
+
+:ks_permission: **Workspace Gateway Management**
+:ks_navigation: **Workspace Settings > Gateway Settings**
+
+This section describes how to edit workspace gateway settings.
+
+== Prerequisites
+
+* The **KubeSphere Gateway** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the page, select **Manage > Edit**.
+
+. In the dialog box that appears, modify the gateway parameters, and then click **OK**.
++
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-para-enableGateway_v42.adoc[]

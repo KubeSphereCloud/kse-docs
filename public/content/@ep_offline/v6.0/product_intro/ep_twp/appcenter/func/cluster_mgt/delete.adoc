@@ -1,0 +1,28 @@
+---
+title: "删除集群"
+weight: 8
+---
+
+集群删除的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_03.png[]
+
+include::../../../../../../../_components/note.adoc[]
+新增角色节点需应用支持横向伸缩，即在 “advanced_actions” 中定义了 “scale_horizontal”。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+功能流程说明：
+
+. 如果待删除的节点定义了 destroy service，则从第 3 步开始执行。如果没有则执行第 2 步和最后一步。
+. 不同角色节点按照 order 升序执行 stop cmd。
+. 如果待删除节点 destroy service 里定义了 post_stop_service 为 False，则从第 5 步开始执行。否则执行第 4 步和最后一步。
+. 待删除的不同角色按照 order 升序执行 stop cmd，然后按照 order 升序执行 destroy cmd。
+. 待删除的不同角色按照 order 升序执行 destroy cmd，依据返回值正常（0）或非正常（非０）决定下一步。
++
+此处如此设置是为了提供一种保护措施，您可以在 destroy 命令里查看能否删除该节点或集群，以防数据丢失。
++
+* 如果 destroy cmd 返回非正常且用户不选择强行删除，则此任务失败且终止。
+* 如果 destroy cmd 返回正常或者在不正常情况下用户选择强行删除，则不同角色节点按照 order 升序执行 stop cmd。
+
+. 删除当前集群所有资源，并且将本集群中所有信息从 metadata service 中注销。

@@ -1,0 +1,957 @@
+---
+title: 安装 qke_apiserver 服务
+weight: 20
+---
+
+== 注意事项
+
+qke_apiserver 服务只需要部署在{product_name} Global Zone 的 Webservice 节点。
+
+== 配置数据库
+
+. 登录{product_name} FirstBox 节点。
+. 执行以下命令，修改 `postgresql.yaml.<zone_id>` 文件。其中，`<zone_id>` 为 Global Zone 的 ID。
++
+[source]
+----
+vim /pitrix/conf/variables/global/postgresql.yaml.<zone_id>
+----
+
+. 添加如下配置。其中 `host`、`user`、`password`、`port` 需要与配置文件中其他已有的服务保持一致。
++
+[source,yaml]
+----
+'qke_plus':
+  host: '<db_host>'
+  user: '<db_user>'
+  password: '<db_password>'
+  port: <db_port>
+----
+. 执行以下命令，将配置刷新到其他节点。
++
+[source]
+----
+fb build_pkgs -p pitrix-global-conf
+fb update all pitrix-global-conf
+----
+
+. 检查 Global Zone 的 Webservice 节点上是否有新增上述配置，如有上述配置，表示操作成功。
+
+== 创建 qke_plus 数据库以及对应的表
+
+. 登录{product_name}任一 Pgserver 节点。
++
+include::../../../../../_components/note.adoc[]
+可以在 FirstBox 节点上执行 ``cat /etc/hosts \| grep pgserver`` 命令查看 Pgserver 节点名称。
+include::../../../../../_components/table_footer.adoc[]
+. 执行以下命令，找到 Pgserver 的 Master 节点。
++
+[source]
+----
+cat /pitrix/run/pg_master
+----
+. 登录 Pgserver 的 Master 节点。
+. 执行以下命令，创建并填写 `/tmp/qke/public.sql` 文件。
++
+[source]
+----
+vim /tmp/qke/public.sql
+----
++
+`public.sql` 文件内容如下：
++
+[source,sql]
+----
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : 本地测试
+ Source Server Type    : PostgreSQL
+ Source Server Version : 140000
+ Source Host           : localhost:5432
+ Source Catalog        : qke_plus
+ Source Schema         : public
+
+ Target Server Type    : PostgreSQL
+ Target Server Version : 140000
+ File Encoding         : 65001
+
+ Date: 03/03/2023 14:08:18
+*/
+
+
+-- ----------------------------
+-- Sequence structure for qke_db_cluster_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."qke_db_cluster_id_seq";
+CREATE SEQUENCE "public"."qke_db_cluster_id_seq"
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for qke_db_cluster_ks_plugin_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."qke_db_cluster_ks_plugin_id_seq";
+CREATE SEQUENCE "public"."qke_db_cluster_ks_plugin_id_seq"
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for qke_db_cluster_log_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."qke_db_cluster_log_id_seq";
+CREATE SEQUENCE "public"."qke_db_cluster_log_id_seq"
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for qke_db_env_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."qke_db_env_id_seq";
+CREATE SEQUENCE "public"."qke_db_env_id_seq"
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for qke_db_job_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."qke_db_job_id_seq";
+CREATE SEQUENCE "public"."qke_db_job_id_seq"
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for qke_db_node_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."qke_db_node_id_seq";
+CREATE SEQUENCE "public"."qke_db_node_id_seq"
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for qke_db_role_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."qke_db_role_id_seq";
+CREATE SEQUENCE "public"."qke_db_role_id_seq"
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for qke_db_spec_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."qke_db_spec_id_seq";
+CREATE SEQUENCE "public"."qke_db_spec_id_seq"
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for qke_db_version_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."qke_db_version_id_seq";
+CREATE SEQUENCE "public"."qke_db_version_id_seq"
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for qke_db_zone_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."qke_db_zone_id_seq";
+CREATE SEQUENCE "public"."qke_db_zone_id_seq"
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Table structure for qke_db_cluster
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."qke_db_cluster";
+CREATE TABLE "public"."qke_db_cluster" (
+  "id" int8 NOT NULL DEFAULT nextval('qke_db_cluster_id_seq'::regclass),
+  "created_at" timestamptz(6),
+  "updated_at" timestamptz(6),
+  "app_id" int8,
+  "zone" text COLLATE "pg_catalog"."default",
+  "owner" text COLLATE "pg_catalog"."default",
+  "cluster_id" text COLLATE "pg_catalog"."default",
+  "cluster_type" text COLLATE "pg_catalog"."default",
+  "name" text COLLATE "pg_catalog"."default",
+  "description" text COLLATE "pg_catalog"."default",
+  "master" int8,
+  "node_perf" int8,
+  "node_super_perf" int8,
+  "node_gpu" int8,
+  "client" int8,
+  "node_bm" int8,
+  "vxnet" text COLLATE "pg_catalog"."default",
+  "vpc" text COLLATE "pg_catalog"."default",
+  "resource_group" text COLLATE "pg_catalog"."default",
+  "global_uuid" text COLLATE "pg_catalog"."default",
+  "loadbalancer_id" text COLLATE "pg_catalog"."default",
+  "loadbalancer_sg_id" text COLLATE "pg_catalog"."default",
+  "security_group_id" text COLLATE "pg_catalog"."default",
+  "add_port_to_sg" int8,
+  "etcd_service" text COLLATE "pg_catalog"."default",
+  "elk_service" text COLLATE "pg_catalog"."default",
+  "env" int8,
+  "charge_mode" text COLLATE "pg_catalog"."default",
+  "months" int4,
+  "auto_renew" int4,
+  "state" text COLLATE "pg_catalog"."default",
+  "msg" text COLLATE "pg_catalog"."default",
+  "service_status" text COLLATE "pg_catalog"."default",
+  "console_status" text COLLATE "pg_catalog"."default",
+  "job_id" text COLLATE "pg_catalog"."default",
+  "job_status" text COLLATE "pg_catalog"."default",
+  "qke_version" text COLLATE "pg_catalog"."default",
+  "kubernetes_version" text COLLATE "pg_catalog"."default",
+  "kubesphere_version" text COLLATE "pg_catalog"."default",
+  "qkcp_version" text COLLATE "pg_catalog"."default",
+  "qke_debug" bool,
+  "deleted" bool
+)
+;
+
+-- ----------------------------
+-- Table structure for qke_db_cluster_ks_plugin
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."qke_db_cluster_ks_plugin";
+CREATE TABLE "public"."qke_db_cluster_ks_plugin" (
+  "id" int8 NOT NULL DEFAULT nextval('qke_db_cluster_ks_plugin_id_seq'::regclass),
+  "created_at" timestamptz(6),
+  "updated_at" timestamptz(6),
+  "zone" text COLLATE "pg_catalog"."default",
+  "owner" text COLLATE "pg_catalog"."default",
+  "cluster_id" text COLLATE "pg_catalog"."default",
+  "metrics_server" text COLLATE "pg_catalog"."default",
+  "network_policy" text COLLATE "pg_catalog"."default",
+  "ks_auditing" text COLLATE "pg_catalog"."default",
+  "ks_events" text COLLATE "pg_catalog"."default",
+  "ks_logging" text COLLATE "pg_catalog"."default",
+  "ks_openpitrix" text COLLATE "pg_catalog"."default",
+  "ks_devops" text COLLATE "pg_catalog"."default",
+  "ks_servicemesh" text COLLATE "pg_catalog"."default",
+  "ks_alerting" text COLLATE "pg_catalog"."default",
+  "metrics_server_unix" int8,
+  "network_policy_unix" int8,
+  "ks_auditing_unix" int8,
+  "ks_events_unix" int8,
+  "ks_logging_unix" int8,
+  "ks_openpitrix_unix" int8,
+  "ks_devops_unix" int8,
+  "ks_servicemesh_unix" int8,
+  "ks_alerting_unix" int8,
+  "deleted" bool
+)
+;
+
+-- ----------------------------
+-- Table structure for qke_db_cluster_log
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."qke_db_cluster_log";
+CREATE TABLE "public"."qke_db_cluster_log" (
+  "id" int8 NOT NULL DEFAULT nextval('qke_db_cluster_log_id_seq'::regclass),
+  "created_at" timestamptz(6),
+  "updated_at" timestamptz(6),
+  "operator" text COLLATE "pg_catalog"."default",
+  "cluster_id" text COLLATE "pg_catalog"."default",
+  "action" text COLLATE "pg_catalog"."default",
+  "context" text COLLATE "pg_catalog"."default",
+  "type" text COLLATE "pg_catalog"."default"
+)
+;
+
+-- ----------------------------
+-- Table structure for qke_db_env
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."qke_db_env";
+CREATE TABLE "public"."qke_db_env" (
+  "id" int8 NOT NULL DEFAULT nextval('qke_db_env_id_seq'::regclass),
+  "created_at" timestamptz(6),
+  "updated_at" timestamptz(6),
+  "access_key" text COLLATE "pg_catalog"."default",
+  "install_ks" bool,
+  "install_qkcp" bool,
+  "extra_modules" text COLLATE "pg_catalog"."default",
+  "kubesphere_eip_id" text COLLATE "pg_catalog"."default",
+  "kubesphere_eip_addr" text COLLATE "pg_catalog"."default",
+  "kubesphere_eip_port" int4,
+  "kubernetes_eip_id" text COLLATE "pg_catalog"."default",
+  "kubernetes_eip" text COLLATE "pg_catalog"."default",
+  "kubernetes_eip_port" int4,
+  "node_name_human_readable" bool,
+  "proxy_mode" text COLLATE "pg_catalog"."default",
+  "network_plugin" text COLLATE "pg_catalog"."default",
+  "hostnic_vxnets" text COLLATE "pg_catalog"."default",
+  "hostnic_networkpolicy" text COLLATE "pg_catalog"."default",
+  "hostnic_autoassign" bool,
+  "hostnic_ipam" text COLLATE "pg_catalog"."default",
+  "hostnic_blocksize" int8,
+  "host_aliases" text COLLATE "pg_catalog"."default",
+  "registry_mirrors" text COLLATE "pg_catalog"."default",
+  "insecure_registry" text COLLATE "pg_catalog"."default",
+  "docker_auths" text COLLATE "pg_catalog"."default",
+  "docker_bip" text COLLATE "pg_catalog"."default",
+  "docker_prune_days" int4,
+  "pod_subnet" text COLLATE "pg_catalog"."default",
+  "service_subnet" text COLLATE "pg_catalog"."default",
+  "api_external_domain" text COLLATE "pg_catalog"."default",
+  "cluster_port_range" text COLLATE "pg_catalog"."default",
+  "max_pods" int4,
+  "kube_log_level" int4,
+  "keep_log_days" int4,
+  "kube_audit_policy" text COLLATE "pg_catalog"."default",
+  "kube_audit_weebhook" text COLLATE "pg_catalog"."default",
+  "keep_audit_days" int4,
+  "kube_audit_log_max_size" int4,
+  "kube_audit_log_max_backup" int4,
+  "controller_manager_params" text COLLATE "pg_catalog"."default",
+  "apiserver_params" text COLLATE "pg_catalog"."default",
+  "scheduler_params" text COLLATE "pg_catalog"."default",
+  "proxy_iptables_params" text COLLATE "pg_catalog"."default",
+  "kubelet_params" text COLLATE "pg_catalog"."default",
+  "user_ssh_key" text COLLATE "pg_catalog"."default",
+  "user_ssh_passwd" text COLLATE "pg_catalog"."default",
+  "open_ssh" bool,
+  "cluster_id" text COLLATE "pg_catalog"."default",
+  "kcp_license" text COLLATE "pg_catalog"."default",
+  "deleted" bool,
+  "kubesphere_eip_auto" bool,
+  "kubernetes_eip_auto" bool,
+  "qkcp_eip_auto" bool,
+  "storage_plugins" text COLLATE "pg_catalog"."default",
+  "default_pv_plugin" text COLLATE "pg_catalog"."default",
+  "open_kubelet_reserved" bool,
+  "bm_vxnet_id" text COLLATE "pg_catalog"."default"
+)
+;
+
+-- ----------------------------
+-- Table structure for qke_db_job
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."qke_db_job";
+CREATE TABLE "public"."qke_db_job" (
+  "id" int8 NOT NULL DEFAULT nextval('qke_db_job_id_seq'::regclass),
+  "created_at" timestamptz(6),
+  "updated_at" timestamptz(6),
+  "job_id" text COLLATE "pg_catalog"."default",
+  "cluster_id" text COLLATE "pg_catalog"."default",
+  "status" text COLLATE "pg_catalog"."default",
+  "action" text COLLATE "pg_catalog"."default",
+  "owner" text COLLATE "pg_catalog"."default",
+  "zone" text COLLATE "pg_catalog"."default",
+  "attache" text COLLATE "pg_catalog"."default"
+)
+;
+
+-- ----------------------------
+-- Table structure for qke_db_node
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."qke_db_node";
+CREATE TABLE "public"."qke_db_node" (
+  "id" int8 NOT NULL DEFAULT nextval('qke_db_node_id_seq'::regclass),
+  "created_at" timestamptz(6),
+  "updated_at" timestamptz(6),
+  "node_id" text COLLATE "pg_catalog"."default",
+  "role" int8,
+  "cluster_id" text COLLATE "pg_catalog"."default",
+  "deleted" bool
+)
+;
+
+-- ----------------------------
+-- Table structure for qke_db_role
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."qke_db_role";
+CREATE TABLE "public"."qke_db_role" (
+  "id" int8 NOT NULL DEFAULT nextval('qke_db_role_id_seq'::regclass),
+  "created_at" timestamptz(6),
+  "updated_at" timestamptz(6),
+  "role" text COLLATE "pg_catalog"."default",
+  "type" text COLLATE "pg_catalog"."default",
+  "instance_class" int4,
+  "instance_type" text COLLATE "pg_catalog"."default",
+  "cpu" int4,
+  "cpu_model" text COLLATE "pg_catalog"."default",
+  "memory" int4,
+  "volume_class" int4,
+  "volume_type" int4,
+  "volume_size" int4,
+  "gpu" int4,
+  "gpu_class" int4,
+  "count" int4,
+  "cluster_id" text COLLATE "pg_catalog"."default",
+  "deleted" bool
+)
+;
+
+-- ----------------------------
+-- Table structure for qke_db_spec
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."qke_db_spec";
+CREATE TABLE "public"."qke_db_spec" (
+  "id" int8 NOT NULL DEFAULT nextval('qke_db_spec_id_seq'::regclass),
+  "name" text COLLATE "pg_catalog"."default",
+  "instance_class" int4,
+  "instance_type" text COLLATE "pg_catalog"."default",
+  "cpu" int4,
+  "cpu_model" text COLLATE "pg_catalog"."default",
+  "memory" int4,
+  "volume_class" int4,
+  "volume_type" int4,
+  "volume_size" int4,
+  "gpu" int4,
+  "gpu_class" int4,
+  "zone" text COLLATE "pg_catalog"."default",
+  "role" text COLLATE "pg_catalog"."default",
+  "default" bool,
+  "os_volume_class" int4,
+  "os_volume_size" int4,
+  "deleted" bool
+)
+;
+
+-- ----------------------------
+-- Table structure for qke_db_version
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."qke_db_version";
+CREATE TABLE "public"."qke_db_version" (
+  "id" int8 NOT NULL DEFAULT nextval('qke_db_version_id_seq'::regclass),
+  "created_at" timestamptz(6),
+  "updated_at" timestamptz(6),
+  "qke_version" text COLLATE "pg_catalog"."default",
+  "qke_api_server_version" text COLLATE "pg_catalog"."default",
+  "qke_cli_version" text COLLATE "pg_catalog"."default",
+  "app_id" text COLLATE "pg_catalog"."default",
+  "app_version" text COLLATE "pg_catalog"."default",
+  "app_name" text COLLATE "pg_catalog"."default",
+  "resource_kit" text COLLATE "pg_catalog"."default",
+  "kubesphere_version" text COLLATE "pg_catalog"."default",
+  "qkcp_version" text COLLATE "pg_catalog"."default",
+  "kubernetes_version" text COLLATE "pg_catalog"."default",
+  "install_url" text COLLATE "pg_catalog"."default",
+  "cli_url" text COLLATE "pg_catalog"."default",
+  "hide_master" bool,
+  "zone" text COLLATE "pg_catalog"."default",
+  "feature" text COLLATE "pg_catalog"."default",
+  "compatibility_k8s" text COLLATE "pg_catalog"."default",
+  "compatibility_ks" text COLLATE "pg_catalog"."default",
+  "compatibility_qkcp" text COLLATE "pg_catalog"."default",
+  "mirror" text COLLATE "pg_catalog"."default",
+  "private_registry" text COLLATE "pg_catalog"."default",
+  "qke_debug" bool,
+  "app_debug" bool,
+  "deleted" bool
+)
+;
+
+-- ----------------------------
+-- Table structure for qke_db_zone
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."qke_db_zone";
+CREATE TABLE "public"."qke_db_zone" (
+  "id" int8 NOT NULL DEFAULT nextval('qke_db_zone_id_seq'::regclass),
+  "created_at" timestamptz(6),
+  "updated_at" timestamptz(6),
+  "zone" text COLLATE "pg_catalog"."default",
+  "region" text COLLATE "pg_catalog"."default",
+  "deleted" bool
+)
+;
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."qke_db_cluster_id_seq"
+OWNED BY "public"."qke_db_cluster"."id";
+SELECT setval('"public"."qke_db_cluster_id_seq"', 2, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."qke_db_cluster_ks_plugin_id_seq"
+OWNED BY "public"."qke_db_cluster_ks_plugin"."id";
+SELECT setval('"public"."qke_db_cluster_ks_plugin_id_seq"', 2, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."qke_db_cluster_log_id_seq"
+OWNED BY "public"."qke_db_cluster_log"."id";
+SELECT setval('"public"."qke_db_cluster_log_id_seq"', 2, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."qke_db_env_id_seq"
+OWNED BY "public"."qke_db_env"."id";
+SELECT setval('"public"."qke_db_env_id_seq"', 2, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."qke_db_job_id_seq"
+OWNED BY "public"."qke_db_job"."id";
+SELECT setval('"public"."qke_db_job_id_seq"', 2, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."qke_db_node_id_seq"
+OWNED BY "public"."qke_db_node"."id";
+SELECT setval('"public"."qke_db_node_id_seq"', 2, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."qke_db_role_id_seq"
+OWNED BY "public"."qke_db_role"."id";
+SELECT setval('"public"."qke_db_role_id_seq"', 2, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."qke_db_spec_id_seq"
+OWNED BY "public"."qke_db_spec"."id";
+SELECT setval('"public"."qke_db_spec_id_seq"', 2, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."qke_db_version_id_seq"
+OWNED BY "public"."qke_db_version"."id";
+SELECT setval('"public"."qke_db_version_id_seq"', 2, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."qke_db_zone_id_seq"
+OWNED BY "public"."qke_db_zone"."id";
+SELECT setval('"public"."qke_db_zone_id_seq"', 2, false);
+
+-- ----------------------------
+-- Primary Key structure for table qke_db_cluster
+-- ----------------------------
+ALTER TABLE "public"."qke_db_cluster" ADD CONSTRAINT "qke_db_cluster_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table qke_db_cluster_ks_plugin
+-- ----------------------------
+ALTER TABLE "public"."qke_db_cluster_ks_plugin" ADD CONSTRAINT "qke_db_cluster_ks_plugin_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table qke_db_cluster_log
+-- ----------------------------
+ALTER TABLE "public"."qke_db_cluster_log" ADD CONSTRAINT "qke_db_cluster_log_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table qke_db_env
+-- ----------------------------
+ALTER TABLE "public"."qke_db_env" ADD CONSTRAINT "qke_db_env_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table qke_db_job
+-- ----------------------------
+ALTER TABLE "public"."qke_db_job" ADD CONSTRAINT "qke_db_job_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table qke_db_node
+-- ----------------------------
+ALTER TABLE "public"."qke_db_node" ADD CONSTRAINT "qke_db_node_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table qke_db_role
+-- ----------------------------
+ALTER TABLE "public"."qke_db_role" ADD CONSTRAINT "qke_db_role_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table qke_db_spec
+-- ----------------------------
+ALTER TABLE "public"."qke_db_spec" ADD CONSTRAINT "qke_db_spec_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table qke_db_version
+-- ----------------------------
+ALTER TABLE "public"."qke_db_version" ADD CONSTRAINT "qke_db_version_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table qke_db_zone
+-- ----------------------------
+ALTER TABLE "public"."qke_db_zone" ADD CONSTRAINT "qke_db_zone_pkey" PRIMARY KEY ("id");
+----
+
+. 执行以下命令，在数据库的 Master 节点创建 qke_plus 数据库。
++
+[source,sql]
+----
+psql -p 5433 -c 'CREATE DATABASE qke_plus;'
+psql -p 5433 -c 'ALTER DATABASE qke_plus OWNER TO yunify;'
+psql -p 5433 -c 'GRANT ALL ON DATABASE qke_plus TO yunify;'
+----
+. 执行以下命令，在 qke_plus 数据库中创建表。
++
+[source,sql]
+----
+psql -d qke_plus -f /tmp/qke/public.sql
+----
+
+. 执行以下命令，修改表权限。
++
+如下内容也可以写成 shell 脚本，然后即可直接在终端执行。
++
+[source,sql]
+----
+export LD_LIBRARY_PATH="/opt/postgresql/lib:${LD_LIBRARY_PATH}";
+for tbl in $(psql -U postgres -p 5433 -qAt -c "select tablename from pg_tables where schemaname = 'public';" qke_plus);
+do
+    psql -U postgres -p 5433 -c "alter table ${tbl} owner to yunify;" -d qke_plus
+done
+----
+
+. 登录{product_name}任一 Pgserver 节点。
+. 执行以下命令，连接 qke_plus 数据库。
++
+[source,shell]
+----
+psql -d qke_plus
+----
+. 执行以下命令，查看数据表是否创建成功。
++
+[source,sql]
+----
+\d
+----
++
+回显信息中有如下列表，表示数据表创建成功。
++
+----
+public | qke_db_cluster                  | table    | yunify
+public | qke_db_cluster_id_seq           | sequence | yunify
+public | qke_db_cluster_ks_plugin        | table    | yunify
+public | qke_db_cluster_ks_plugin_id_seq | sequence | yunify
+public | qke_db_cluster_log              | table    | yunify
+public | qke_db_cluster_log_id_seq       | sequence | yunify
+public | qke_db_env                      | table    | yunify
+public | qke_db_env_id_seq               | sequence | yunify
+public | qke_db_job                      | table    | yunify
+public | qke_db_job_id_seq               | sequence | yunify
+public | qke_db_node                     | table    | yunify
+public | qke_db_node_id_seq              | sequence | yunify
+public | qke_db_role                     | table    | yunify
+public | qke_db_role_id_seq              | sequence | yunify
+public | qke_db_spec                     | table    | yunify
+public | qke_db_spec_id_seq              | sequence | yunify
+public | qke_db_version                  | table    | yunify
+public | qke_db_version_id_seq           | sequence | yunify
+public | qke_db_zone                     | table    | yunify
+public | qke_db_zone_id_seq              | sequence | yunify
+----
+
+== 插入初始化数据
+
+. 登录 Global Zone 的 Webservice 节点。
+. 执行以下命令，进入 `/pitrix/lib/pitrix-scripts/qke` 目录。
++
+[source]
+----
+cd /pitrix/lib/pitrix-scripts/qke
+----
+. 执行以下命令，修改 `/conf/config.yaml` 文件。
++
+[source]
+----
+vi conf/config.yaml
+----
+. 根据实际环境修改 **regions** 和 **roles** 里面的字段。
++
+配置示例：
++
+[source,yaml]
+----
+regions:
+  pek3:                                # region 名称
+    - pek3b                            # zone 名称
+    - pek3c
+    - pek3d
+  sh1:
+    - sh1a
+    - sh1b
+
+roles:
+  - master:                            # 主节点
+      - prefix: s1                     # 主机规格的前缀名称，此处默认为 s1，可以根据实际情况修改，例如 s1.2xlarge.r1
+        instance_class: 101            # 主机规格示例类型，可根据实际情况修改
+        volume_type: 100               # 主机规格对应的数据盘类型，可根据实际情况修改，可参考主机与磁盘关系表，查看支持的主机类型的磁盘列表
+      - prefix: ec3
+        instance_class: 203
+        volume_type: 200
+  - node_perf:                         # 工作节点-基础型
+      - prefix: s1
+        instance_class: 101
+        volume_type: 100
+  - node_super_perf:                   # 工作节点-企业型
+      - prefix: ec3
+        instance_class: 203
+        volume_type: 200
+----
++
+参数说明：
++
+[cols='1,4a']
+|===
+| 参数 | 说明
+
+| regions | 配置 Region 名称和 Zone 名称。
+
+上述示例中，表示当前环境中有两个 Region，分别为 pek3 与 sh1，其中 pek3 中部署有 pek3b、pek3c、pek3d 三个 Zone，sh1 中部署有 sh1a、sh1b 两个 Zone。
+
+| roles | 用于配置主节点（master）、工作节点（node_perf、node_super_perf）的主机规格和磁盘规格。
+
+如果只有一种主机类型，master 中可只保留一个，node_perf、node_super_perf 中可以填写一样的。
+
+根据实际环境，填写对应的 instance_class 和 volume_type。
+
+* 基础型主机，请配置 instance_class 101，volume_type 100。
+* 企业型主机，请配置 instance_class 203，volume_type 200。
+* 如果使用纯 SSD 的 NeonSAN 存储，则配置 instance_class 6，volume_type 5。
+* 如果使用混插的 NeonSAN 存储，则配置为 instance_class 7，volume_type 6。
+* 更多主机类型、磁盘类型请参见link:../../faq/02[支持的主机类型和硬盘类型]。
+|===
+. 修改 **qke_version_info** 字段。
++
+[source,yaml]
+----
+qke_version_info:
+  normal:                                                   # X86 版本配置
+    appid: app-o6lvbkhm                                     # App ID，固定不变，保持默认值即可
+    appv: appv-opj5rz6z                                     # App 版本，对照“QKE 版本信息”表格
+    resource_kit: ca-koty3lcl                               # 资源包，对照“QKE 版本信息”表格
+    qke_version: v2.3.1                                     # 导入的 QKE 版本，例如 v2.3.1
+    qke_cli_version: v2.3.1                                 # 导入的 QKE 版本，例如 v2.3.1
+    kubesphere_version: v3.2.1                              # KubeSphere 的版本，根据 QKE 版本填入支持的 KubeSphere 版本，对照“QKE 版本信息”表格
+    kubernetes_version: v1.23.8                             # K8s 的版本，根据 QKE 版本填入 KSE 的版本，对照“QKE 版本信息”表格
+    compatibility_k8s: ''                                   # 暂不提供 QKE 升级
+    compatibility_ks: 'v1.21.5,v1.22.10,v1.23.8'            # 支持 KubeSphere 升级
+    compatibility_qkcp: 'v1.21.5,v1.22.10,v1.23.8'          # 支持 KSE 升级
+    install_url: 'http://127.0.0.1:8999'                    # 保持默认值即可
+    cli_url: 'http://127.0.0.1:8999/qke-cli-v2.3.1.tar.gz'  # 示例为 v2.3.1 版本。需根据实际情况，替换示例中的版本号
+
+
+ #arm:                                                      # ARM 版本配置
+    #appid: app-o6lvbkhm
+    #appv: appv-eepv21hi
+    #resource_kit: ca-5famtl8o
+    #qke_version: v2.0.0-arm
+    #qke_cli_version: v2.0.0-arm
+    #kubesphere_version: v3.2.1
+    #kubernetes_version: v1.21.5
+    #compatibility_k8s: ''
+    #compatibility_ks: ''
+    #compatibility_qkcp: ''
+    #install_url: 'http://127.0.0.1:8999'
+    #cli_url: 'http://127.0.0.1:8999/qke-cli-v2.0.0-arm.tar.gz
+----
++
+参数说明：
++
+[cols='1,2a']
+|===
+| 参数 | 说明
+
+|
+
+* appid
+* appv
+* resource_kit
+* qke_version
+* qke_cli_version
+* kubesphere_version
+* kse_version
+* kubernetes_version
+
+| 可参考 link:../../intro/version#_qke_版本信息[QKE 版本信息]。
+
+include::../../../../../_components/attention_in_table.adoc[]
+如果使用 KSE，部署成功后，需要登录 KSE 控制台输入 License 激活 KSE 产品。
+include::../../../../../_components/footer_in_table.adoc[]
+
+| install_url | qke-installer 包所在路径，默认为 `http://127.0.0.1:8999`，保持默认值即可。
+| cli_url | qke-cli 包的全路径，例如 v2.3.1 版本的 qke-cli 包的全路径为 `http://127.0.0.1:8999/qke-cli-v2.3.1.tar.gz`。
+|===
+. 执行以下命令，检查初始化数据是否正确。此步骤仅打印数据，并没有真正执行。
++
+[source]
+----
+./qke -e ./conf/config.yaml
+----
++
+回显信息示例如下：
++
+image::/images/ep_offline/qke_install/install_service_init_data_01.png[]
+. 确保初始化数据无误后，执行以下命令，插入初始化数据。
++
+--
+** 不插入 ARM 版本
++
+[source]
+----
+./qke -e ./conf/config.yaml -d 0
+----
+** 插入 ARM 版本
++
+[source]
+----
+./qke -e ./conf/config.yaml -d 0 -a 1
+----
+** 只插入升级的版本，即相当于只插入数据库版本
++
+[source]
+----
+./qke -e ./conf/config.yaml --upgrade=true  -d 0
+----
+--
++
+回显信息类似如下，表示操作成功。
++
+image::/images/ep_offline/qke_install/install_service_init_data.png[]
+
+== 配置并启动 qke_apiserver
+
+. 分别登录{product_name} Global Zone 的两个 Webservice 节点。
+. 执行以下命令，创建并编辑 `qke_apiserver.yaml` 文件。
++
+[source]
+----
+vim /pitrix/conf/qke_apiserver.yaml
+----
++
+. 按如下示例填写 `qke_apiserver.yaml` 文件内容。
++
+请根据实际情况替换示例中的 <zone_id>、<access_key_id>、<access_secret_key>、<site_protocol>、<domain>。
++
+示例：
++
+[source,yaml]
+----
+database:
+  migrate: false
+  name: "qke_plus"
+  port: 5432
+
+server:
+  addr: "0.0.0.0:9102" # 监听 qke_apiserver 的地址和端口，端口需根据实际情况配置，和前端配置保持一致
+  workers: 3 ## qke_apiserver 并发线程数
+
+log:
+  level: "info"
+  path: "/pitrix/log"
+
+appcenter:
+  url: "tcp://<zone_id>-proxy:8565"     # appcenter 的地址，请根据实际环境进行修改
+  ws_url: "tcp://<zone_id>-proxy:9365"     # 推送消息的地址，请根据实际环境进行修改
+  ws_enable: true  # 开启消息推送
+  console_id: "admin"  # 消息推送通道相关参数，保持默认值即可
+  role: "partner"
+  privilege: 10
+  channel: "session"
+
+iaasapi:
+  ak: "<access_key_id>"     # 请根据实际环境进行修改
+  sk: "<access_secret_key>"     # 请根据实际环境进行修改
+  endpoint: "<site_protocol>://api.<domain>/iaas"     # 请根据实际环境进行修改
+
+zk:
+  url: "<zone_id>-zoocassa:2181"     # 请根据实际环境进行修改
+  root: "/qke_plus"
+  master: "/master"
+  enable: true
+
+auto_resize:
+  enable: false
+
+csi_hydrofs:
+  enable: true
+  confd_addrs: ""
+  qfs_gateway: ""
+  hydrofs_csi_image: "qingcloud/hydrofs-csi-driver:1.3"
+  hydro_fuse_image: "qingcloud/hydro_fuse:1.1"
+  global_domain: ""
+
+csi_qingcloud:
+  volume_type: "6"
+----
++
+主要参数说明如下：
++
+[cols='1,4a']
+|===
+| 参数 | 说明
+
+| database| 配置 QKE 数据库相关参数。
+
+// * migrate：
+* **name**：数据库的名称，需要与前文创建的数据库名称保持一致，请填写为 `qke_plus`。
+* **port**：数据库的端口号，请填写为 `5432`。
+
+| server|
+// server
+**addr**：请根据实际环境配置要使用的端口，默认为 `9102`。
+| log| 配置 qke_apiserver 的日志级别和日志路径。
+
+* **level**：日志级别，支持 `debug` 和 `info`。
+* **path**：日志路径，例如 /pitrix/log。
+| appcenter| 配置项中的 **url** 和 **ws_url**，请根据实际环境，改成真实地址。
+| iaasapi| 用于验签，如果不开启验签，可以不用配置此项；如果要开启，需要根据实际环境配置此项。
+| zk| 用于多副本选主。
+
+* **enable**：如果只是单实例运行 qke_apiserver 服务，将 **enable** 配置为 `false`；如果是多实例部署，将 **enable** 配置为 `true`。
+* **url**：ZooKeeper 服务的地址，格式为 `<zone_id>-zoocassa:2181`。可登录任意 Webservice 节点，查看 ``/pitrix/conf/global/zookeeper.yaml`` 文件获取 ZooKeeper 服务的地址。
++
+当 **enable** 配置为 `true` 时，需要配置该参数。
+| auto_resize| 该参数仅对托管版集群生效。
+
+* **enable**：表示是否需要根据 QKE 集群中 Worker 节点的数量自动调整 QKE 集群中 Master 节点的规格。
+| csi_hydrofs| 用于配置 U10000 存储插件相关参数。如果云平台环境不支持 U10000 类型的存储，无需配置该参数。
+
+* **enable**：表示是否支持 U10000 存储插件。
+* 其他相关参数需联系 U10000 实施人员获取。
+| csi_qingcloud| 用于配置云平台存储插件相关参数。
+
+* **volume_type**：配置集群中 PV 和 PVC 使用的磁盘类型，需要和环境实际情况保持一致。
++
+默认为 `6`，表示云平台环境的存储类型为混插的 NeonSAN 存储，硬盘类型为容量型云盘。详细的磁盘类型说明请参见link:../../faq/02[支持的主机类型和硬盘类型]。
+|===
+. 执行以下命令，启动 qke_apiserver 服务。
++
+[source]
+----
+supervisorctl start qke_apiserver
+----

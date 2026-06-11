@@ -1,0 +1,56 @@
+---
+title: "Add Clusters to a Federated Project"
+keywords: "Kubernetes, {ks_product}, Workspace Management, Federated Project, Add Clusters to a Federated Project"
+description: "Describes how to add clusters to a federated project."
+weight: 05
+---
+
+:ks_permission: **Federated Project Management**
+:ks_navigation: **Federated Project**
+
+This section describes how to add clusters to a federated project.
+
+A federated project is a project created based on multiple clusters. Resources in a federated project can run on different clusters.
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+ifeval::["{file_output_type}" == "html"]
+For a federated project to run on multiple clusters, the workspace to which the federated project belongs must be authorized to access multiple clusters. For more information, see link:../../../../08-workspace-management/02-workspaces/01-create-a-workspace[Create a Workspace].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For a federated project to run on multiple clusters, the workspace to which the federated project belongs must be authorized to access multiple clusters. For more information, see the "Create a Workspace" chapter in the *KubeSphere Workspace and Project Management Guide*.
+endif::[]
+|===
+
+== Prerequisites
+
+* The **Federated Cluster Application Management** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. On the right side of the project you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Add Cluster** from the drop-down list.
+
+. In the **Add Cluster** dialog box, select clusters from the drop-down list, and then click **OK**.
++
+--
+* Click **Add** to add multiple clusters.
+
+* On the right side of an added cluster, click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] to cancel adding that cluster.
+--

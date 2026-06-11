@@ -1,0 +1,94 @@
+---
+title: "基于 PyTorch 的 LLaMA 2 模型微调"
+weight: 4
+linkkey: bp_llama_adjust_job
+---
+
+LLaMA 是比较常用的开源模型，此最佳实践介绍如何在{coreshub_name_cn}基于 LLaMA 2 7B 的中文预训练模型（Atom-7B-Chat）使用提交分布式训练任务的方式进行模型微调。
+
+== 准备工作
+
+* link:https://github.com/Siriusmm/Llama-Chinese[获取 LLaMA 2 模型微调代码]。
+* link:https://huggingface.co/FlagAlpha/Atom-7B-Chat[获取 Atom-7B-Chat 训练模型]。
+* 已link:../../res_manage/stor_data/stor_create/[创建文件存储用户目录]。
+
+== 操作步骤
+
+. 登录{console_name}。
+. 将获取到的训练模型和代码文件在本地进行解压后，采用 link:../../res_manage/stor_data/large_file_upload/[SFTP 方式]上传至文件存储的指定目录下。
++
+如下示例，已创建名称如 ``xxxx0002`` 的用户目录，将训练模型和相应代码分别上传至 ``/xxxx0002/Atom-7B-Chat`` 和 ``/xxxx0002/Llama-Chinese`` 文件夹下。
++
+image::/images/cloud_service/compute/coreshub/bp_llama_adjust_pytorch_1.png[]
+
+. link:../../develop_training/train_job/train_job_create/[创建分布式训练任务]，配置参数要求如下。
++
+[options="header",cols="1,1,3"]
+|===
+| 配置项 | 参数 | 说明
+.8+| 任务信息
+| 任务名称 
+| 用户根据实际情况自定义即可。
+
+| 镜像
+a| 本示例中选择``镜像地址``，并输入正确的镜像地址（如 ``sjz-dockerhub.qingcloud.com/public/llama2-train:pytorch-2.1.2-cuda12.1-cudnn8``，其中 ``sjz-dockerhub.qingcloud.com`` 为**镜像仓库地址**）后，选择``无密码``以获取镜像。
+
+include::../../../../../_components/note_in_table.adoc[]
+各个**可用区**内的**镜像仓库地址**和**私有镜像仓库密码**需根据实际情况进行修改，用户可在平台左侧导航栏选择**资源管理** > **镜像仓库** > **自定义镜像仓库**，查看镜像**镜像仓库地址**和相应的**账号密码**。
+include::../../../../../_components/footer_in_table.adoc[]
+
+| 存储与数据
+| 选择上一步上传了代码文件的**用户目录**即可。
+
+| 代码
+| 此示例中无需再上传代码文件。
+
+| 环境变量
+| 此示例中无需设置。
+
+| 启动命令
+| 根据上一步上传的代码文件路径，此处应为：``bash /root/epfs/Llama-Chinese/train/sft/torchrun_finetune_lora.sh``，其中脚本所在路径需根据实际情况进行修改。
+
+| 自动重试 
+| 选择``关闭``即可。
+
+| 超时配置
+| 选择``关闭``即可。
+
+.2+| 计算资源
+| 框架
+| 选择 ``Pytorch``。
+
+| 资源组
+| 选择 ``公共资源池``，建议选择 ``GPU 型号``为 NVIDIA 4090，``GPU 数量``为 4 的资源，并设置节点``数量``为 2。
+|===
+
+. 训练任务参数配置完成，点击**确定**，返回分布式训练任务列表，等待任务训练完成即可。
+
+. 训练完成并成功后，根据训练任务link:#_示例启动脚本说明[启动脚本内容]，可在**存储与数据服务**页面的 ``/Llama-Chinese/train/sft/save_folder`` 路径下获取训练成功的模型。
++
+image::/images/cloud_service/compute/coreshub/bp_llama_adjust_pytorch_3.png[]
+
+
+== 附录
+
+=== 示例启动脚本说明
+
+本示例训练任务启动命令中使用的启动脚本为 torchrun_finetune_lora.sh，其内容可在存储与数据服务页面进行link:../../res_manage/stor_data/file_manage/#_查看文件[查看]。
+
+image::/images/cloud_service/compute/coreshub/bp_llama_adjust_pytorch_2.png[]
+
+启动脚本中部分参数说明：
+
+* ``output_model``：微调模型输出路径，此示例中为 ``/Llama-Chinese/train/sft/save_folder``，支持用户自定义。
+
+* ``model_name_or_path``： 预训练模型路径，此示例中为 ``/root/epfs/Atom-7B-Chat``，即训练模型上传至文件存储中的路径。
+
+* ``train_files``：训练数据集。
+
+* ``validation_files``：验证数据集。
+
+
+
+
+

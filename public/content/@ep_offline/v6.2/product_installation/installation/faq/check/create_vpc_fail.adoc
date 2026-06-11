@@ -1,0 +1,71 @@
+---
+title: 在 Console 上创建 VPC 失败
+weight: 40
+---
+
+== 查看操作日志
+
+. link:../../../deploy/check_env/#_登录_boss[登录 BOSS]。
+. 选择**运维工具** > **操作日志**，进入操作日志页面。
++
+image::/images/ep_offline/installation/faq_create_vpc_fail.png[]
+. 查看创建失败的 job_id（操作 ID）。
+. 登录 Webservice 节点，执行以下命令，查找 distributed_server 日志。
++
+[source,shell]
+----
+cd /pitrix/log
+grep <job_id> distributed_server.log
+----
++
+回显信息中会显示执行 job 的节点。
+. 登录到执行 job 的节点，执行以下命令，查看 compute_server.log.wf 日志。
++
+[source,shell]
+----
+cd /pitrix/log
+grep <job_id> compute_server.log.wf
+----
+. 如下列出常见错误的解决方法，若仍不能解决问题，请联系技术支持。
+
+== ERROR1
+
+*** **日志信息**：没有 job 相关日志。
+*** **问题原因**：未上传 VPC 所需的 VM 镜像。
+*** **解决方法**：上传对应 VM 镜像即可。
+
+== ERROR2
+
+*** **日志信息**
++
+compute_server.log.wf 日志里有如下提示：
++
+----
+reason：Failed to choose volume place, err: label SSD not exist for create volume\n
+----
+*** **问题原因**
++
+只有 SANC 模式的混插集群，没有全闪存节点，但默认使用的是 SSD 这个标签。
+*** **解决方法**
++
+需要在 FirstBox 修改 `/pitrix/conf/variables/global/server.yaml.<zone>` 里的默认值。
++
+include::../../../../../../_components/note.adoc[]
+- default 默认为 SSD，如果只有混插节点需要修改为 HDD。
+
+- 从{product_name} v6.1 版本开始，需要在配置中心修改，server.yaml.<zone> 文件在配置中心对应的是 **global 应用** > **server 配置**。
+include::../../../../../../_components/table_footer.adoc[]
++
+[source,yaml]
+----
+common:
+  volume_type_label:
+    !!int 5: 'SSD'
+    !!int 6: 'HDD'
+    !!int 7: 'SSD2'
+    default: 'HDD'
+  instance_class_label:
+    !!int 6: 'SSD'
+    !!int 7: 'HDD'
+    default: 'HDD'
+----

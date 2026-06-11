@@ -1,0 +1,50 @@
+---
+title: "使用巡检规则创建巡检任务"
+weight: 07
+---
+
+
+:ks_navigation: **巡检规则组**
+
+
+本节介绍如何使用巡检规则创建巡检任务。
+
+== 前提条件
+
+* 您需要在 KubeSphere 平台具有 **platform-admin** 角色。
+
+* 已创建巡检规则。
+
+
+== 操作步骤
+
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+. 点击**组件坞 > 集群巡检**，进入集群巡检页面。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要使用的巡检规则组右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中**创建巡检任务**。
+
+. 在**基本信息**页签，输入名称和描述，然后点击**下一步**。
+
+. 在**巡检策略**页签，选择**即时巡检**或**定时巡检**，然后点击**下一步**。
++
+[.admon.note,cols="a"]
+|===
+|说明
+
+|若选择**定时巡检**，需配置巡检策略。有关更多信息，请参阅link:../../05-inspect-tasks/01-create-inspect-tasks/[创建巡检任务]。
+
+|===
+
+. 在**巡检范围**页签，选择被巡检的目标集群，然后点击**创建**。
++
+创建完成的巡检任务将显示在**巡检任务**页面。

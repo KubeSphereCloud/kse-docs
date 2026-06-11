@@ -1,0 +1,53 @@
+---
+title: 运维手册
+description: 
+weight: 6
+pdf_docVersion: '01'
+---
+
+本文档从 {product_name} 的服务、工作节点、磁盘等多方面详细介绍其运维操作，适用于 {product_name} v5.0 及后续版本。
+
+== 读者对象
+
+本文档适用于以下工程师：
+
+* 实施工程师
+* 技术支持工程师
+* 运维工程师
+
+== 名词说明
+
+便于用户更好地阅读理解本文档，现对文档中出现的专有名词进行如下说明。
+
+[cols="2,8", options="header"]
+|===
+|名词 |说明
+
+|融合部署 |{product_name} 的网关与存储服务部署于相同的物理节点。
+|分离部署 |{product_name} 的网关与存储服务分别部署于不同的物理节点。
+|全能节点 |同时部署有 {product_name} 网关服务与存储服务的节点。
+|存储节点 |部署有 {product_name} 存储服务的节点。
+|网关节点 |部署有 {product_name} 网关服务的节点。
+|对接 IaaS |{product_name} 环境需与 IaaS 平台进行对接。
+|独立部署 |{product_name} 不与 IaaS 平台进行对接。
+|Global Zone |部署有 QingStor Global 服务的 Zone
+|Region |{product_name} 的数据中心所在的地理位置。称为区域。
+|Zone |{product_name} 的每个区域有多个相互隔离的机房组成。称为可用区。
+|Console |用户操作控制台
+|Portal |{product_name} 统一运维管理平台
+
+|===
+
+
+== 参考资料
+
+[cols="2a,3a"]
+|===
+|文档名称 | 获取链接
+
+|QingStor U10000 环境规划指南 | https://box.yunify.com/s/R3nWZXj43krkqNi
+|QingStor U10000 安装部署指南 | https://box.yunify.com/s/Mz9ygp8JG8HJ2Ta
+|QingStor U10000 巡检指南 | https://box.yunify.com/s/WRW2XLyF5gSK54W
+
+
+|===

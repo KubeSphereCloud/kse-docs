@@ -1,0 +1,44 @@
+---
+title: "Edit Silence Conditions"
+keywords: "Kubernetes, {ks_product}, Platform Settings, Notification Management, Notification Settings, Silence Policy, Edit Silence Conditions"
+description: "This section describes how to edit notification silence conditions."
+weight: 03
+---
+
+
+:ks_navigation: **Notification > Notification Settings**
+// :ks_permission: **Platform Settings Management**
+
+
+This section describes how to edit notification silence conditions.
+
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, see link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Notification** extension needs to be installed and enabled on the KubeSphere platform.
+
+
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the silence policy you want to operate on, and then select **Edit Silence Conditions** from the drop-down list.
+
+. In the **Edit Silence Conditions** dialog box, set the silence conditions, and then click **OK**.
++
+====
+include::../../../../../_custom/platformManagement/platformSettings/platformSettings/platformSettings-para-silenceConditions_new.adoc[]
+====

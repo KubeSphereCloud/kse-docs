@@ -1,0 +1,150 @@
+---
+title: "前端配置 EHPC"
+weight: 7
+---
+
+EHPC 服务在 BOSS 平台上架后，需登录至当前企业云平台的配置中心进行前端配置修改，从而实现在 Console 平台上正常显示和使用 EHPC 服务。
+
+. 登录当前环境的配置中心。
+
+. 在左侧导航栏中选择**配置管理**。
+
+. 在配置管理页面，**应用**搜索框中输入 ``webconsole``，**配置**搜索框中输入 ``settings`` 后，点击**搜索**。
++
+image::/images/ep_offline/ehpc_install/ehpc_14.png[]
+
+. 选择**配置名称**为 **settings** 的配置文件，点击其所在行右侧**操作**中的**管理配置**，对**配置内容**进行修改。主要是在 ``PITRIX_SETTINGS`` 中添加 ``hpc_config`` 和 ``nas_config`` 配置内容。
++
+[source,pyhon]
+----
+PITRIX_SETTINGS = {
+    'hpc_config': {
+        'endpoint': 'hpc.api.{{ domain }}',
+        'port': '80',
+        'verify_ssl': False,
+        'protocol': 'http',
+        'prefix': 'api'
+    },
+    'nas_config': {
+        'endpoint': '{{ zone_id }}-proxy',
+        'port': '8119',
+        'verify_ssl': False,
+        'protocol': 'http',
+        'objects_endpoint': 'minio-host',
+        'objects_port': '9000',
+        'objects_access_key': 'access_key',
+        'objects_secret_key': 'secret_key',
+        'objects_secure': False,
+    },
+}
+----
++
+
+include::../../../../_components/note.adoc[]
+* {{domain}} 需修改为当前环境的域名，请根据实际环境规划进行修改。当前环境的域名也可登录云平台的 FirstBox 节点，执行 ``grep domain /pitrix/conf/variables/variables.yaml`` 进行查看。
+* {{zone_id}} 为当前环境中安装部署了 EHPC 服务的 ZONE 的 zone_id，请根据实际环境规划进行修改。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+. 返回**配置管理**页面，**应用**搜索框中输入 ``boss2``，**配置**搜索框中输入 ``boss2`` 后，点击**搜索**。
++
+image::/images/ep_offline/ehpc_install/ehpc_15.png[]
+
+. 点击配置文件所在行右侧**操作**中的**管理配置**，对**配置内容**进行修改。
+.. 在 ``modules`` 部分，启用 EHPC 组件。
++
+[source,yaml]
+----
+modules:
+  enable:
+    - warehouse
+    - grafana
+    - boss2
+    - hpc  //在 enable 字段下添加此句即可。
+----
+.. 在该配置文件末尾添加 EHPC 配置，内容如下。
++
+[source,yaml]
+----
+# hpc 配置
+hpc:
+  url: 'http://hpc.api.{{domain}}.com/api/'
+  access_key_id: 'OCZKXSQ'
+  secret_access_key: '0d6Ovg5ew30KM6Xvmb9XAozaAh'
+----
++
+
+include::../../../../_components/note.adoc[]
+* ``url`` 中的 {{domain}} 需替换成当前环境的域名，请根据实际环境规划进行修改。
+* ``access_key_id`` 和 ``secret_access_key`` 需替换成当前环境中 Iaas API 的 access key 和 secret_access_key，可查看该配置文件中的 ``iaas_setting`` 配置内容。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 返回**配置管理**页面，点击**+添加新配置**，在弹出的**添加配置**窗口中，新增 ``webconsole-hpc`` 配置，填写各项参数后，点击**提交**即可。
++
+image::/images/ep_offline/ehpc_install/ehpc_16.png[,60%]
++
+**参数说明**:
++
+[options="header",cols="1,2"]
+|===
+|参数|说明
+|应用
+|webconsole-hpc
+
+|模块
+|WebconsoleHpcZone
+
+|配置名称
+|zone_config
+
+|内容格式
+|选择 **yaml**
+
+|是否加密
+|选择**不保密**
+
+|命名空间
+|填写当前环境中配置了 EHPC 服务的 ZONE 名称
+
+|简介
+|针对当前配置的介绍，可根据需要进行填写
+|===
+
+. 返回**配置管理**页面，点击**+添加新配置**，在弹出的**添加配置**窗口中，新增 ``webconsole-epfs`` 配置，填写各项参数后，点击**提交**即可。
++
+image::/images/ep_offline/ehpc_install/ehpc_17.png[,60%]
++
+**参数说明**:
++
+[options="header",cols="1,2"]
+|===
+|参数|说明
+|应用
+|webconsole-epfs
+
+|模块
+|WebconsoleEpfsZone
+
+|配置名称
+|zone_config
+
+|内容格式
+|选择 **yaml**
+
+|是否加密
+|选择**否**
+
+|命名空间
+|填写当前环境中配置了 EHPC 服务的 ZONE 名称
+
+|简介
+|针对当前配置的介绍，可根据需要进行填写
+|===
+
+
+
+
+
+

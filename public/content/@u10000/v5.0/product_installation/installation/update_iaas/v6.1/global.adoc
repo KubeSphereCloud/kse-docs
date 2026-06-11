@@ -1,0 +1,73 @@
+---
+title: 更新 Global 配置
+weight: 4
+---
+
+== 更新 server
+
+. 使用浏览器登录 IaaS 的配置中心。
++
+include::../../../../../../_components/note.adoc[]
+
+* 默认登录方式为：地址 `cadmin.<domain>`，用户名 `admin@<domain>`，密码 `zhu88jie`。
+* 其中 `<domain>` 为 IaaS 的域名信息，需根据实际情况修改。
+* 登录示例为：地址 `cadmin.democloud.com`，用户名 `admin@democloud.com`，密码 `zhu88jie`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在配置中心，点击**配置管理**，进入**配置管理**主页面，在搜索框中输入 `global`，点击**搜索**后，找到配置文件 `server`，点击**管理配置**。
+
+
+. 在** server **的配置页面，修改 `qingstor` 相关配置参数。
++
+image::/images/u10000_v5.0/install_webconsole_6.png[install_webconsole_6,100%]
++
+**填写说明**
++
+[cols="3a,5a", options="header"]
+|===
+| 参数 | 说明 
+
+| qs_billing|
+
+* 如需开启基于 ws 的计费功能，则改为 `True`。
+* 如计费已经迁移至 Billing Http API，则需改为 `False`。
+|qs_zones  |填写对象存储的 `zone_id`。若有多个 Zone，填写格式为 `beta,delta,gamma`。
+|qs_proxy_host  |废弃参数，为兼容，可随便填写一个 IP 地址或维持默认即可。
+|global_qs_host  |填写对象存储的 Global 域名。
+|global_qs_port  |维持默认即可。
+|global_qs_protocol  |对象存储使用的协议类型，根据实际情况进行填写。
+|global_qs_proxy  |
+
+* 若 IaaS 的 Webservice 服务，能直接访问对象存储，则填写空字符串。
+* 若 IaaS 的 Webservice 服务不能直接访问对象存储时，需填写 IaaS 的主机名。
+|global_qs_access_key_id  |{product_name} 中查询到的 `qs_secret_access_key_id`，无需加密。可参考link:../u1w/#_密钥信息[前文]查询内容进行填写。
+|global_qs_secret_access_key  |{product_name} 中查询到的 `qs_secret_access_key`，无需加密。可参考link:../u1w/#_密钥信息[前文]查询内容进行填写。
+
+|===
+
+. 点击**启用**即可。
+
+== 更新防火墙配置
+
+. 登录 IaaS 的配置中心。
++
+include::../../../../../../_components/note.adoc[]
+
+* 默认登录方式为：地址 `cadmin.<domain>`，用户名 `admin@<domain>`，密码 `zhu88jie`。
+* 其中 `<domain>` 为 IaaS 的域名信息，需根据实际情况修改。
+* 登录示例为：地址 `cadmin.democloud.com`，用户名 `admin@democloud.com`，密码 `zhu88jie`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在配置中心，点击**配置管理**，进入**配置管理**主页面，在搜索框中输入 `global`，点击**搜索**后，找到配置文件 `server`，点击**管理配置**。
+
+
+. 在** server **的配置页面，将 {product_name} 节点服务器所在网段添加到到 `public_user_services` 字段下。
++
+image::/images/u10000_v5.0/install_webconsole_7.png[install_webconsole_7,100%]
+
+. 点击**启用**即可。
+
+
+

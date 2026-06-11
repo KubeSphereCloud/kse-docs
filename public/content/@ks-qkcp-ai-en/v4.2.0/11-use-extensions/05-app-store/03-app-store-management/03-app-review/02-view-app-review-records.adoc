@@ -1,0 +1,74 @@
+---
+title: "View Application Version Review Records"
+keywords: "Kubernetes, {ks_product}, App Store, Application Review, View Application Version Review Records"
+description: "Describes how to view application version review records."
+weight: 02
+---
+
+:ks_menu: **Platform Management > App Store Management**
+:ks_navigation: **Application Review**
+:ks_permission: **App Store Management**
+
+This section describes how to view application version review records.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Application Review** page, click the **New Submissions**, **Completed**, or **All** tab to view the review records of application versions.
++
+====
+* The **Application Review** page provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|Application version name, icon, and Helm Chart version.
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-workspace.adoc[]
+
+|Submitter
+|The user who submitted the application version.
+
+|Status
+|The current review status of the application version.
+
+* **Pending Review**: A workspace member has submitted the application version, and the App Store administrator has not yet reviewed it.
+
+* **Published**: The App Store administrator has approved the application for release.
+
+* **Rejected**: The App Store administrator has rejected the application release.
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-versionUpdateTime.adoc[]
+|===
+--
+
+* Click the search box above the list and enter keywords to search for application versions by name.
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

@@ -1,0 +1,26 @@
+---
+title: "WhizardTelemetry Logging"
+keywords: "Kubernetes, {ks_product-en}, logging"
+description: "This section introduces how to use the 'WhizardTelemetry Logging' extension."
+weight: 03
+---
+
+This section introduces how to use the "WhizardTelemetry Logging" extension.
+
+This extension provides multi-tenant perspective cloud-native application real-time and historical log collection, query, export, storage, and other functions, which can be connected to log receivers such as ElasticSearch, OpenSearch, Kafka, etc. It collects logs from Calico by default, including information about the allocation and release of Calico pod IP addresses.
+
+After installing the "WhizardTelemetry Logging" extension,
+
+* The **Container Log Search** option will be displayed in the toolbox at the bottom right of the page, allowing users to query container logs within their permissions.
+* The **Log Receivers** option will be displayed under the **Cluster Settings** menu in the left navigation pane, and the **Log Receivers** page will display the **Container Logs** tab, supporting the addition of various types of log receivers.
+
+//attention
+[.admon.attention,cols="a"]
+|===
+| Note
+
+|
+- WhizardTelemetry Logging depends on WhizardTelemetry Platform Service and WhizardTelemetry Data Pipeline. Therefore, before installing WhizardTelemetry Logging, you must first install and configure the WhizardTelemetry Platform Service and WhizardTelemetry Data Pipeline extensions, otherwise, the log-related functions will not work properly!
+
+- If logs are not collected, ensure that Docker's root directory is under `/var/lib`, otherwise, you need to modify the mount configuration of the agent in WhizardTelemetry Data Pipeline. For more information, see the details page of the "WhizardTelemetry Data Pipeline" extension in the Extensions Center.
+|===

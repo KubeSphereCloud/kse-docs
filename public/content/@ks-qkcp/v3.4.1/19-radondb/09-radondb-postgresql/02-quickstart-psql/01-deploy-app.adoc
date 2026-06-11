@@ -1,0 +1,62 @@
+---
+title: "安装 RadonDB PostgreSQL"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB PostgreSQL, 安装, 创建, 应用"
+description: "介绍如何在 KubeSphere 中安装 RadonDB PostgreSQL {ks_product_left_none}。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 4c3cd2a1692d434b9565867fe24c95cb
+:ks_xref_id: d23ba6a91fa64d9a872e845f174e338b
+:ks_comp: ../../../../components/
+:ks_title: 安装 RadonDB PostgreSQL
+:ks_keywords: Kubernetes, {ks_product}, RadonDB PostgreSQL, 安装, 创建, 应用
+:ks_description: 介绍如何在 KubeSphere 中安装 RadonDB PostgreSQL {ks_product_left_none}。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何安装 RadonDB PostgreSQL 数据库应用。
+
+
+== 前提条件link:[id=ed3e6a8478f540ff9950c6779aac89c5]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+* 您需要获取 RadonDB PostgreSQL 应用授权。有关更多信息，请联系{ks_product_both}技术支持。
+
+
+== 操作步骤link:[id=7fd7f72f69db479c92b3b85aeb170733]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在页面右侧选择**安装 > RadonDB PostgreSQL**。
+
+. 在**基本信息**页签，设置 RadonDB PostgreSQL 应用的基本信息和安装位置，然后点击**下一步**。
+
+. 在**应用设置**页签，设置 PostgreSQL 数据库的参数，然后点击**安装**。
++
+--
+安装完成的 RadonDB PostgreSQL 将显示在 RadonDB 应用列表中。
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+有关参数的详细解释，请参阅link:../../03-install-radondb-postgresql/[安装 RadonDB PostgreSQL]。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

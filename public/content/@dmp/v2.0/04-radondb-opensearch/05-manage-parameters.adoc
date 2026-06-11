@@ -1,0 +1,69 @@
+---
+title: "修改数据库配置参数"
+keywords: "Kubernetes, {ks_product}, RadonDB OpenSearch, 配置参数, 修改数据库参数"
+description: "介绍如何修改 RadonDB OpenSearch 数据库配置参数。"
+weight: 05
+---
+
+:ks_db_product: OpenSearch
+
+本节介绍如何修改 RadonDB {ks_db_product} 数据库的配置参数。
+
+RadonDB {ks_db_product} 实例支持编辑配置参数，通过管理配置参数可调优数据库性能，并可启用数据库高可用性能。
+
+// Warning
+include::../../../_ks_components/admonitions/warning.adoc[]
+
+修改部分配置参数后，{ks_db_product} 服务会重启，造成业务中断。请谨慎操作。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+== 修改配置参数
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 点击页面右侧的**参数管理**页签，点击**编辑**即可修改配置参数。
+. 点击**确定**保存。
+
+== 参数简介
+
+[%header,cols="1,4"]
+|===
+|参数 |说明
+
+|thread_pool.write.queue_size
+a|线程池写队列的大小。取值范围为 1000 ~ 20000， 默认值为 **10000**。
+
+|thread_pool.search.queue_size
+a|线程池搜索队列的大小。取值范围为 1000 ~ 20000， 默认值为 **1000**。
+
+|action.destructive_requires_name
+a|是否在删除索引时禁止使用通配符和 _all 。您可以将此参数设置为 false，以允许使用通配符和 _all。默认值为 **true**。
+
+|http.cors.enabled
+a|是否启用跨域资源共享（CORS）。默认值为 **false**。
+
+|http.cors.allow-origin
+a|可用于跨域资源共享（CORS）的域（origin）。
+
+|indices.fielddata.cache.size
+a|可用作字段数据缓存的最大堆内存。默认值为 **-1b**。
+
+|indices.memory.index_buffer_size
+a|分配给节点并由所有分片作为索引缓冲区共享的堆内存大小。参数值可以为百分比或字节数。默认值为 **10%**。
+
+|indices.queries.cache.size
+a|过滤器缓存的内存大小。取值可以为百分比（例如 5%）或确切值（例如 512mb）。默认值为10%。默认值为 **10%**。
+
+|indices.requests.cache.size
+a|在节点级管理的分片请求缓存大小。默认值为堆内存的 1%。
+
+|reindex.remote.whitelist
+a|列入白名单以进行 Reindex 操作的远程节点的地址。您可以用使用半角逗号（,）分隔多个地址（例如 otherhost:9200, 192.168.1.*:9200, localhost:*）。
+|===
+

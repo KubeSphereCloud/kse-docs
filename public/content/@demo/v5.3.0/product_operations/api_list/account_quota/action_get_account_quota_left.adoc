@@ -1,0 +1,83 @@
+---
+title: 查询用户账户配额剩余（ACTION_GET_ACCOUNT_QUOTA_LEFT）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resource_types
+| Array
+| false
+| 查询的资源类型
+
+| user
+| String
+| false
+| 用户id
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| account_quota_left_set
+| Array
+| false
+| 配额剩余详情
+
+| user_id
+| String
+| false
+| 用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetAccountQuotaLeft",
+  "user": "usr-KmJmFe0V"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "account_quota_left_set": [
+    {
+      "left": 25,
+      "resource_type": "access_key"
+    },
+    {
+      "left": 9975,
+      "resource_type": "session_api"
+    },
+    {
+      "left": 2000,
+      "resource_type": "account_api"
+    },
+    {
+      "left": 7,
+      "resource_type": "sub_user"
+    }
+  ],
+  "action": "GetAccountQuotaLeftResponse",
+  "ret_code": 0,
+  "root_user_id": "usr-KmJmFe0V",
+  "total_count": 4,
+  "user_id": "usr-KmJmFe0V"
+}
+----

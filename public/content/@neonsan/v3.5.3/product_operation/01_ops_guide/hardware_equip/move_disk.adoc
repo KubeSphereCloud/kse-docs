@@ -1,0 +1,39 @@
+---
+title: "移除磁盘"
+weight: 1
+---
+
+任何换盘和删盘的行为都必须通过移除磁盘操作，将指定磁盘从 NeonSAN 环境中移除之后，再进行拔盘以及换盘操作，否则会造成数据丢失或错误。
+
+. 参考前文内容，link:../../fault_process/data_mig/disk_data_mig/new/[迁移磁盘数据]。
+. 查看磁盘状态及信息，记录待下线磁盘的 UUID。
++
+[,shell]
+----
+neonsan list_ssd
+----
+
+. 移除磁盘。
++
+[,shell]
+----
+neonsan remove_ssd -ssd_uuid <ssd_uuid>
+----
++
+include::../../../../../_components/note.adoc[]
+``-ssd_uuid`` 指定的为上一步中查询到的待下线磁盘的 UUID。
+include::../../../../../_components/table_footer.adoc[]
+
+. 再次查看集群中所有磁盘状态，确保待下线磁盘已被移除。
++
+[,shell]
+----
+neonsan list_ssd
+----
++
+include::../../../../../_components/note.adoc[]
+返回结果中不应包含待下线磁盘的信息。
+include::../../../../../_components/table_footer.adoc[]
+
+
+

@@ -1,0 +1,101 @@
+---
+title: "创建预热任务"
+keywords: "Kubernetes, {ks_product}, 集群管理, 应用负载, 任务, 创建任务"
+description: "介绍如何创建任务。"
+weight: 01
+---
+
+
+:ks_permission: **节点组管理**
+:ks_navigation: **镜像管理 > 镜像预热**
+
+
+本节介绍如何创建即时预热任务和定时预热任务。
+
+
+== 前提条件
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+
+== 操作步骤
+
+请参阅link:#_参数描述[参数描述]设置任务的参数。
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**镜像预热**页面，点击**即时预热**或**定时预热**打开任务列表。
+
++
+
+include::../../../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. 在**基本信息**页签，设置任务的基本信息，以及定时计划，然后点击**下一步**。
+
+. 在**镜像**页签，搜索需要预热的镜像，点击image:/images/ks-qkcp/zh/icons/check-light.svg[check,18,18]添加镜像，然后点击**下一步**。
+
+. 在**预热范围**页签，选择镜像预热的目标节点，然后点击**创建**。
++
+预热任务创建完成后将显示在任务列表中，并立即运行。
+
+
+
+== 参数描述
+以下介绍如何设置任务的参数。
+
+* 基本信息
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|任务的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+|别名
+|任务的别名。不同任务的别名可以相同。别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。
+
+|描述
+|任务的描述信息。描述可包含任意字符，最长 256 个字符。
+
+|定时计划
+|定时任务的运行周期的 CRON 表达式。{ks_product_right}默认使用 UTC 时间，您需要根据您所在的时区进行调整。仅对**定时预热任务**可用。
+|===
+--
+
+* 镜像
++
+--
+添加需要预加载的镜像。支持添加多个镜像。
+
+* 点击**添加镜像**可添加镜像。
+
+* 将光标悬停在已添加的镜像上，然后在右侧点击image:/images/ks-qkcp/zh/icons/pen-light.svg[pen,18,18]可编辑镜像的设置。
+
+* 将光标悬停在已添加的镜像上，然后在右侧点击image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18]可删除镜像。
+--
+
+* 镜像 > 添加镜像
++
+--
+* 输入镜像的名称（例如 **nginx:latest**）或路径（例如 **docker.io/nginx:latest**），然后按 **Enter** 键可搜索镜像。
+
+* 如果您只输入镜像的名称，默认情况下将从 Docker Hub 拉取镜像。如需使用私有镜像服务，您需要创建包含私有镜像服务信息的保密字典，然后在**镜像**文本框左侧选择私有镜像服务。
+
+* 点击image:/images/ks-qkcp/zh/icons/templet.svg[template,18,18]可浏览当前镜像服务中的镜像。
+--
+
+* 预热范围
++
+--
+选择镜像预热的目标节点。
+--

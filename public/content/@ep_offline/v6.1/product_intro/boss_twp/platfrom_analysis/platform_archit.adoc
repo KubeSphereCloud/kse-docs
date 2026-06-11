@@ -1,0 +1,71 @@
+---
+title: "平台逻辑架构"
+weight: 1
+---
+
+青云云计算管理平台的架构分为 *Global* 和 *Zone*，Global 负责青云平台的全局服务，对青云平台外部提供 API，并将资源请求转发到不同的 Zone，Global 中没有物理资源节点。每个 Zone 有各自的核心服务，为本区域内的资源服务。
+
+image::/images/ep_offline/boss_twp/20_01.png[]
+
+下文为各服务组件介绍。
+
+*全局 Global 服务*：
+
+[cols="1,4"]
+|===
+|服务名称|说明
+
+|Global KS
+a|Global KS 服务为云平台内部核心处理服务，每个云平台默认都会部署 Global KS 服务，无论是在单个 AZ 内，还是在多个 AZ 组成的 Region 中。
+
+北向，Global KS 服务提供多种用户侧接口，如 Console、SDKs、CLI；南向，Global KS 服务对接 AZ 或者 Region（实际为多个 AZ 组成）内的 KS 服务以管理与调度 Region/Zone 级别消息。
+
+Region/Zone KS 服务会把对实际 IaaS 资源层的处理请求交给 Bot 服务处理。Global KS 服务自身也会处理 Global 级别的请求，例如用户认证、计量计费等。在 BOSS 平台的逻辑架构中，各管理服务均需向可用区（机房）内的 zk 进行注册和发现。在机房内各服务均为多点高可用部署，以达到如下效果：
+
+** 系统内的无状态的服务能实现多点高可用及负载均衡。
+** 系统内的有状态的服务可利用 zk 来选取主 active 服务节点，在主节点故障不可用时，原 slave 节点切换新主节点，继而实现多点高可用。
+
+|Externl Service
+|用于将集群外部的服务引入到集群内部，在集群内部可直接访问来获取服务。 +
+
+该值必须是 FQDN，此 FQDN 为集群内部的 FQDN，即 `ServiceName.Namespace.Domain.LTD`。CoreDNS 接受到 FQDN 后，能解析出一个 CNAME 记录，该别名记录为真正互联网上的域名，然后 CoreDNS 再向互联网上的根域 DNS 解析该域名，获得其真实互联网 IP。
+
+|Cronus Gateway
+|Cronus Gateway 主要提供对 Iaas 平台的基本监控以及告警。
+
+|IaaS API Service
+|对外提供 API 服务，API server 是青云核心系统的接入层，用户的所有请求，包括控制台的请求以及 API 的请求都会经过 API server，再由 API server 下发到后端服务。
+
+|BI2.0
+a|云计算管理平台中的 BI 能提供支撑分析第三方应用的收入及用户量，BI 系统由数据仓库和 BI 两部分构成：
+
+** 数据仓库部分通过离线同步技术，离线获取线上的数据库的内容，并对数据进行 ETL、存储以及简单的处理。
+** BI 在数据仓库的数据基础上，定时对数据进行加工，得出各种维度的统计数据，并对外提供 API，最终在云计算管理平台前端界面展示。
+
+|V2V
+|Virtual Machine to Virtual Machine 的简称，指虚机跨不同虚拟化平台迁移。可对云平台上的云服务器进行迁移。
+
+|NeonSAN
+|NeonSAN 是一个集群，其 API 服务器只在集群的 Master 节点上提供服务，云计算管理平台直接读取 zookeeper 获取 Master 节点 IP，实现 BOSS 与 NeonSAN 对接。
+
+
+|===
+
+*区域级 Zone 服务*：
+
+[cols="1,4"]
+|===
+|服务名称|说明
+
+|KSnode
+|存储每个 zone 的 ks node 列表。
+
+|Hypernode
+|计算节点。
+
+|Alert Agent
+|负责对接云计算管理平台和云平台的监控告警。
+
+|Crouns Daemon
+|BOSS 系统中用于监控计算节点的服务，部署于每个 Hypernode 中，收集物理机的 CPU、内存、磁盘等数据。
+|===

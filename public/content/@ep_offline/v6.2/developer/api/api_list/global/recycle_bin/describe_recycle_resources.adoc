@@ -1,0 +1,215 @@
+---
+title: 查询回收资源（DescribeRecycleResources）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| controller
+| Array
+| false
+| 控制器类型
+
+| limit
+| Int
+| false
+| 偏移量
+
+| offset
+| Int
+| false
+| 起始坐标
+
+| owner
+| String
+| false
+| 回收资源的所有者
+
+| recycle_status
+| String
+| false
+| 当前回收状态
+
+| resource_types
+| Array
+| false
+| 通过资源类型过滤查询
+
+| resources
+| Array
+| false
+| 通过资源列表过滤查询
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| status
+| Array
+| false
+| 回收资源的状态
+
+| user
+| String
+| false
+| 需要查询回收资源的所有者
+
+| zone
+| String
+| true
+| 请求区ID
+
+| zones
+| Array
+| false
+| 可用区ID列表
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| controller
+| String
+| false
+| 
+
+| create_time
+| String
+| false
+| 
+
+| recycle_status
+| String
+| false
+| 
+
+| resource_id
+| String
+| false
+| 
+
+| resource_type
+| String
+| false
+| 
+
+| root_user_id
+| String
+| false
+| 
+
+| scheduler_id
+| String
+| false
+| 
+
+| status
+| String
+| false
+| 
+
+| status_time
+| String
+| false
+| 
+
+| update_time
+| String
+| false
+| 
+
+| user_id
+| String
+| false
+| 
+
+| zone_id
+| String
+| false
+| 
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeRecycleResources",
+  "controller": [
+    "pitrix",
+    "self"
+  ],
+  "limit": 10,
+  "offset": 0,
+  "owner": "admin",
+  "resource_types": [
+    "instance",
+    "image"
+  ],
+  "resources": [
+    "i-xxxxx",
+    "img-xxxxx"
+  ],
+  "search_word": "test",
+  "status": [
+    "ceased",
+    "deleted"
+  ],
+  "user": "admin",
+  "zone": "testbm",
+  "zones": [
+    "testbm1a",
+    "testbm1b"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeRecycleResourcesResponse",
+  "recycle_info": {
+    "cluster": [
+      {
+        "alias_id": "",
+        "alias_name": "",
+        "controller": "self",
+        "create_time": "2023-04-24T07:18:09Z",
+        "owner": "admin",
+        "recycle_status": "is_recycled",
+        "recycle_time": "2023-06-02T23:19:52",
+        "resource_id": "cl-z9yvwi29",
+        "resource_name": "QingCloud MySQL Plus",
+        "resource_type": "cluster",
+        "root_user_id": "admin",
+        "scheduler_id": "schd-gugpti39",
+        "service_type": 0,
+        "status": "deleted",
+        "status_time": "2023-06-02T15:19:51Z",
+        "transition_status": "",
+        "update_time": "2023-06-09T12:32:38",
+        "user_id": "admin",
+        "zone": "testbm",
+        "zone_id": "testbm"
+      }
+    ]
+  },
+  "ret_code": 0,
+  "total_count": 1
+}
+----

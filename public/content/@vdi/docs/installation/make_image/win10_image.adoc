@@ -1,0 +1,115 @@
+---
+title: 制作 Win10 桌面镜像（X86）
+weight: 10
+---
+
+在制作 Win10 桌面镜像前，请先获取 ISO 格式的 Win10 基础镜像和 Virtio 驱动，并上传到 QingCloud 管理平台。
+
+== 前提条件
+
+* 请在 Microsoft 官网自行获取 Windows 10 的 ISO 镜像文件，并遵守相关授权许可。
+* 已获取 iso 格式的 Virtio 驱动。
+* 已完成 QingCloud 云平台和管理平台的安装和基础配置。
+* 已获取 guest-tools 插件安装包。
+
+== 注册 Win10 基础镜像
+
+在 QingCloud 管理平台上注册 Win10 基础镜像，操作步骤如下：
+
+. 登录{platform_name_cn}的 BOSS 平台。
+. 在左侧的菜单栏中，点击**资源管理**，选择**计算** > **镜像**，进入镜像页面。
+. 点击右侧的**注册**，弹出注册镜像对话框。
++
+image::/images/vdi/installation/win10_image_01.png[,50%]
+. 设置镜像参数，从本地选择 Windows10 镜像文件并上传。
++
+include::../../../../_components/note.adoc[]
+* 注册镜像中的平台类型决定了创建云主机时是否使用 KVM Virtio 驱动（包括磁盘驱动和网卡驱动），请根据镜像的驱动类型正确选择平台类型。
+* 制作 Windows 普通镜像时，请选择 Windows Virtio，使用 Virtio 驱动。镜像操作系统是已安装 Virtio 驱动（包括磁盘驱动和网卡驱动）的 Windows。
+include::../../../../_components/table_footer.adoc[]
+
+. 点击右下方的**注册**，镜像注册成功后，镜像状态变为``可用``。
++
+image::/images/vdi/installation/win10_image_02.png[]
+. 登录{platform_name_cn}的 Console，进入**镜像**页面，可查看到已在 BOSS 平台上注册成功的镜像。
++
+image::/images/vdi/installation/win10_image_03.png[]
+
+== 基于 Win10 基础镜像创建云服务器
+
+参考link:../../deploy/create_vm[创建桌面云主机]的步骤创建 Windows10 云服务器。
+
+== 安装 Win10 模版系统
+
+. 远程登录已创建的 Windows10 云服务器，显示云主机镜像安装页面。
++
+image::/images/vdi/installation/win10_image_04.png[]
+. 加载 Virtio 驱动。
+.. 选择基本信息，点击**下一步**，弹出 Windows 安装程序对话框。
++
+image::/images/vdi/installation/win10_image_05.png[]
+.. 点击加载驱动程序，弹出浏览文件夹对话框。
++
+image::/images/vdi/installation/win10_image_06.png[]
+.. 选择 CD 驱动器的 viostor\w10\arm64 路径，加载网卡驱动程序。
+.. 点击**确定**和**下一步**，完成驱动程序安装。
+. 点击**下一步**，开始安装 Win10 系统。系统安装完成后会自动重启，重启后会自动进行一系列 Windows 相关设置，至此 Windows 10 系统安装完成。
++
+image::/images/vdi/installation/win10_image_07.png[]
+
+== 安装 guest-tools 插件
+
+guest-tools 是 QingCloud 桌面云平台为 Windows 云桌面提供的性能优化工具，该工具必须安装，否则云桌面将无法正常使用。
+
+. 在浏览器访问 `https://<桌面云服务器 IP 地址>`，下载 guest-tools 插件。
+. 将 guest-tools 插件上传到刚才已安装好 Win10 系统的云服务器中。
+. 登录已安装好 Win10 系统的云服务器，双击 QingCloud-guest-tools_xxx.exe（其中 xxx 为版本号），进入安装向导，按照安装向导完成 guest-tools 插件的安装。
+
+== 模版转为镜像
+
+在 Windows10 云服务器上安装 guest-tools 插件后，可将该虚拟机制作为镜像，并使用该镜像创建云桌面。
+
+include::../../../../_components/attention.adoc[]
+只有``已关机``状态的云服务器，才能被制作成镜像。
+include::../../../../_components/table_footer.adoc[]
+
+. 登录 QingCloud 云平台，进入云服务器页面。
+. 在云服务器列表中，把 Windows 10 云服务器关机。
+. 右击该云服务器，选择**制作成新镜像**，弹出镜像制作对话框。
+. 输入镜像的名称，点击**提交**，即可基于该云服务器制作新镜像。
++
+新镜像即是云桌面使用的镜像。
+
+== 修改镜像字段
+
+镜像制作成功后，为了使用 **Spice** 协议远程访问云桌面（由 Win10 桌面镜像创建），需要在{platform_name_cn}的数据库中修改 Win10 桌面镜像的 **ui_type** 和 **video_type** 字段。
+
+include::../../../../_components/note.adoc[]
+{platform_name_cn}默认的远程访问方式是 VNC，云桌面是 Spice 方式。
+include::../../../../_components/table_footer.adoc[]
+
+. 远程登录到{platform_name_cn}的 FirstBox 节点。
+. 执行以下命令，查看 Pgserver 节点名称。
++
+[source]
+----
+cat /etc/hosts | grep pgserver
+----
+. 远程登录到{platform_name_cn}的任一 Pgserver 数据库节点。
+. 执行以下命令，将镜像中的 **ui_type** 的值修改成 ``gui``，**video_type** 的值修改成 ``qxl``。
++
+[source,sql]
+----
+update image set ui_type='gui',video_type='qxl' WHERE image_id='xxxxxxxx';
+----
+
+. 执行以下命令，确认修改结果。
++
+[source,sql]
+----
+select * from image where image_id='xxxxxxxx'
+----
++
+修改成功如下：
++
+image::/images/vdi/installation/win10_image_08.png[]

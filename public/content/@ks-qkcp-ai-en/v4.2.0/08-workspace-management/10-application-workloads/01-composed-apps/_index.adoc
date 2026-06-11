@@ -1,0 +1,42 @@
+---
+title: "Composed Apps"
+keywords: "Kubernetes, {ks_product}, Project Management, Apps"
+description: "Introduces how to manage apps installed in a project."
+weight: 01.5
+layout: "second"
+---
+
+
+include::../../../../_custom/projectManagement/apps/apps-types_v42.adoc[]
+
+This section describes how to manage composed apps. For more information about template-based apps, refer to link:../01-apps[Apps].
+
+// [.admon.note,cols="a"]
+// |===
+// |Note
+
+// |``Composed apps`` are only available in KubeSphere ``Standard, Advanced, and Enterprise editions``.
+
+// |===
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|When creating a composed app, if you need to enable application governance to use traffic monitoring, canary release, and link tracing features, you need to install the "KubeSphere Service Mesh" extension.
+|===
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+include::../../../../_custom/projectManagement/apps/composedapps-desc-syncwithServiceMesh.adoc[]
+ifeval::["{file_output_type}" == "html"]
+For more information, refer to link:../../../11-use-extensions/06-service-mesh/[KubeSphere Service Mesh].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For more information, refer to the "KubeSphere Service Mesh" chapter in the *KubeSphere Extensions User Guide*.
+endif::[]
+|===

@@ -1,0 +1,18 @@
+---
+title: "迁移管理服务"
+weight: 4
+---
+
+迁移说明：
+
+* 原集群中管理节点上的所有管理相关服务及配置需全部一起迁移，主要包括：
+** mysql_neonsan，mysql_qingstor，zookeeper 服务。
+** mysqld_exporter_neonsan，mysqld_exporter_qingstor，prometheus，qingstor-zero-agent，qingstor-zero-web，qs_alerter,redis_exporter，vire_redis 服务。
+** 系统 ntp，hosts，pip.conf，qingstor.list 配置。
+
+* 迁移原则：
+** 原集群管理节点逐一迁移，即迁移完成一个管理节点后再迁移另一个，直至所有管理节点均迁移完成。
+** **若待迁移节点上有 FirstBox，则需迁移至新管理集群中的 FirstBox 节点上，并且最后迁移。**
+
+
+

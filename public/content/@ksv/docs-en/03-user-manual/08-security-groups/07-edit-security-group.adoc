@@ -1,0 +1,50 @@
+---
+title: "Edit a security group"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, security groups, edit"
+description: "Describes how to edit a security group in the {ks_product} web console."
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 39197f3a5a31443db00471b10920b92d
+:ks_xref_id: aa19b3616f4f430c8afee3830f1c5369
+:ks_comp: ../../../components/
+:ks_title: Edit a security group
+:ks_description: Describes how to edit a security group in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, security groups, edit
+:ks_weight: 07
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to edit a security group in the {ks_product_abbr_full} web console. The edit operation allows you to modify the name and description of a security group. 
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=1b4e6a8bc3b24870aed67d7211c6b644]
+
+User **admin** can edit all security groups in your cluster. Project administrators and operators can edit the security groups created on their own, and project viewers cannot edit security groups.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Edit from the list of security groupslink:[id=b9c9490c3be74fbd8b12e491740014e0]
+
+include::../../../_custom-en/security-groups/security-group-steps.adoc[]
+
+. Find the security group that you want to edit, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Edit** from the drop-down list.
+. In the dialog box that appears, modify **Name** and **Description** of the security group, and click **Update**.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Edit from the security group details pagelink:[id=684495a9d3b9435287725fef39e436ec]
+
+include::../../../_custom-en/security-groups/security-group-steps.adoc[]
+
+. On the **Security Groups** page, click the name of a security group to view its details.
+. On the left side of the security group details page, click **Edit** in the upper-left corner.
+. In the dialog box that appears, modify **Name** and **Description** of the security group, and click **Update**.

@@ -1,0 +1,9 @@
+---
+title: "业务恢复"
+weight: 3
+---
+
+
+* 如 qbd volume 挂载为文件系统使用，则需停止用户业务并 umount volume，重新 mount 后可恢复业务。
+* 如 qbd volume 直接以裸盘方式使用，由于 qbd 有健全的重连机制，可直接恢复业务运行。
+

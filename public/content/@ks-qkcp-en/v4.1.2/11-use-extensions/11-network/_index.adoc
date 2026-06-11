@@ -1,0 +1,19 @@
+---
+title: "KubeSphere Network"
+keywords: "Kubernetes, {ks_product-en}, cluster management, project management, network, network policy, pod IP pool, network isolation"
+description: "Introduce how to manage network policies and pod IP pools."
+weight: 11
+layout: "second"
+---
+
+
+This section introduces how to use the "KubeSphere Network" extension to manage network policies and pod IP pools for a cluster, as well as network isolation configurations for workspaces and projects.
+
+The "KubeSphere Network" extension includes two components: network policy and pod IP pool. Using this extension, you can control access to and from pods in the cluster and projects; when creating workloads or jobs, by selecting a **Pod IP Pool**, you can allocate IP addresses to pods, ensuring that each pod has a unique IP address.
+
+After installing the "KubeSphere Network" extension,
+
+- The **Network** menu in the left navigation pane of the cluster will display **Network Policies** and **Pod IP Pools** options;
+- The **Basic Info** page in the left navigation pane of the workspace will support enabling workspace network isolation;
+- The **Project Settings** menu in the left navigation pane of the project will display the **Network Isolation** option;
+- When creating workloads or jobs, the **Advanced Settings** tab will display the **Pod IP Pool** option.

@@ -1,0 +1,208 @@
+---
+title: 查询定时器历史（DescribeSchedulerHistory）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| history_type
+| Array
+| false
+| 历史类型notification/task_success/task_fail
+
+| limit
+| Integer
+| false
+| 返回数量
+
+| offset
+| Integer
+| false
+| 偏移量
+
+| owner
+| String
+| false
+| 资源的所有者
+
+| scheduler
+| String
+| false
+| 定时器id
+
+| verbose
+| Integer
+| false
+| 是否返回详细信息
+
+| zone
+| String
+| true
+| 请求区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 
+
+| create_time
+| String
+| false
+| 创建时间
+
+| description
+| String
+| false
+| 
+
+| history_data
+| Array
+| false
+| 历史数据
+
+| history_type
+| String
+| false
+| 历史类型
+
+| items
+| Array
+| false
+| 
+
+| logs
+| Array
+| false
+| 
+
+| scheduler_history_id
+| String
+| false
+| 定时器历史id
+
+| scheduler_history_set
+| Array
+| false
+| 定时器历史列表
+
+| scheduler_id
+| String
+| false
+| 定时器id
+
+| scheduler_task
+| String
+| false
+| 
+
+| scheduler_task_id
+| String
+| false
+| 
+
+| scheduler_task_name
+| String
+| false
+| 
+
+| task_type
+| String
+| false
+| 
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeSchedulerHistory",
+  "history_type": [
+    "notification",
+    "task_success",
+    "task_fail"
+  ],
+  "limit": 100,
+  "offset": 0,
+  "owner": "usr-BnnisHWR",
+  "scheduler": "schd-0g60lk75",
+  "verbose": 1,
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeSchedulerHistoryResponse",
+  "ret_code": 0,
+  "scheduler_history_set": [
+    {
+      "create_time": "2023-07-05T00:41:58Z",
+      "description": "",
+      "history_data": {
+        "history_type": "task_fail",
+        "logs": [],
+        "scheduler_task": {
+          "scheduler_task_id": "st-vy8dwhzo",
+          "scheduler_task_name": "a",
+          "task_type": "restart_instances"
+        }
+      },
+      "history_type": "task_fail",
+      "scheduler_history_id": "sh-0e9xxqv8",
+      "scheduler_id": "schd-0g60lk75",
+      "scheduler_task_id": "st-vy8dwhzo"
+    },
+    {
+      "create_time": "2023-07-05T00:41:59Z",
+      "description": "",
+      "history_data": {
+        "action": {
+          "create_time": "2021-12-28T09:48:18Z",
+          "is_account_contacts": 1,
+          "items": [
+            {
+              "content": "66-15123123",
+              "create_time": "2022-08-03T16:06:10",
+              "notification_item_id": "ni-gesu2bio",
+              "notification_item_type": "phone",
+              "remarks": "",
+              "verified": 1
+            }
+          ],
+          "notification_list_id": "nl-x3u8y13n",
+          "notification_list_name": "Account Contacts",
+          "owner": "usr-BnnisHWR",
+          "remarks": "",
+          "visibility": "private"
+        }
+      },
+      "history_type": "notification",
+      "scheduler_history_id": "sh-hdoww9s6",
+      "scheduler_id": "schd-0g60lk75",
+      "scheduler_task_id": "st-vy8dwhzo"
+    }
+  ],
+  "total_count": 2,
+  "trace_id": "lTZJOtXn"
+}
+----

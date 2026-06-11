@@ -1,0 +1,139 @@
+---
+title: "什么是{ks_product_left}？"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, 虚拟机, 管理平台, 介绍"
+description: "介绍{ks_product_both}的功能特性和优势场景。"
+weight: 01
+logo: "{ks_logo}"
+downloadUrl: "{ks_download_url}"
+---
+
+// :ks_include_id: 9a890b0106ff4f0e9537e0cceae4d9b2
+:ks_xref_id: 550b43252140473b94324cadf032c233
+:ks_comp: ../../components/
+:ks_title: 什么是{ks_product_left}？
+:ks_description: 介绍{ks_product_both}的功能特性和优势场景。
+:ks_keywords: {ks_product_full}, {ks_product}, 虚拟机, 管理平台, 介绍
+:ks_weight: 01
+
+
+{ks_product_abbr_full_right}是由 KubeSphere 衍生的轻量化虚拟机管理平台，⽀持单节点部署和多节点部署，可⽀撑个⼈⽤户和企业⽤户多种场景下的虚拟化业务需求。{ks_product_right}可帮助您减少前期的硬件投入，您可以使用{ks_product_both}创建所需数量的虚拟机，快速开发和部署应用。
+
+{ks_product_right}基于 Kubernetes 云原⽣架构，相较于传统虚拟化服务更加轻量、灵活、开放，并且能够实现服务自愈、快速弹性伸缩、灵活调度等能力。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 为什么选择{ks_product_left}link:[id=e054f4aee3ad4d92baee4f2f0a9eb9e5]
+
+选择{ks_product_left}，您可以轻松构建具有以下优势的计算存储资源：
+
+* **超低门槛**：单节点 4 核 8 GB 内存即可部署，同时⽀持多节点集群部署；
+
+* **极简操作**：提供便捷易⽤的可视化 Web 控制台，⼀键掌控企业硬件虚拟化所需的⼀切资源，并提供自修复能力；
+
+* **快速安装**：20 分钟之内完成平台部署和更新；
+
+* **⾼速运⾏**：秒级创建虚拟机和调整虚拟机配置；
+
+* **卓越兼容**：⽆底层基础设施依赖，可部署在任何⽀持虚拟化的主机之上；
+
+* **对接容器**：与 KubeSphere 容器平台⽆缝衔接，虚拟化和容器化完美融合。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 功能架构link:[id=ee18416cd47e4ca3bb1baec5805d5675]
+
+{ks_product_right}是基于 Kubernetes 云原生架构，从底层为用户屏蔽了复杂的基础设施架构和 Kubernetes 基础配置。您可以将{ks_product_both}运行在私有云、公有云、虚拟机、物理机、边缘节点等各类开发或生产环境。在功能层面，{ks_product_right}主要包含物理节点、网络、存储、虚拟机、镜像、硬盘、安全组等组件。
+
+具体功能架构图如下图所示。
+
+image::/images/ksv/zh/introduction/architecture.png[35px, architecture]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 底层原理link:[id=62a2ab6421074eea9a35382520c8bc1f]
+
+{ks_product_right}各模块的底层原理描述如下表所示：
+
+[cols='1a,4a']
+|===
+|名称 |描述
+
+|虚拟机
+|{ks_product_right}底层使用 KubeVirt 插件，支持对虚拟机的生命周期管理、状态管理和连接管理。
+
+|网络
+|{ks_product_right}运行在容器环境之上，所以容器需要支持更多的网卡，多余的网卡可以插入到容器中的虚拟机上。{ks_product_right}底层使用 Multus 插件实现容器对多网卡的支持。虚拟机继续保留了对 Macvtap 的支持，同时集成了 Kube-OVN 实现对 SDN 网络的支持，Kube-OVN 提供了 Underlay 和 Overlay 网络类型的支持，用户可以根据实际网络情况和对网络的述求选择合适的网络类型。
+
+|镜像
+|{ks_product_right}底层使用 CDI 插件将镜像导入到持久卷中，通过持久卷的克隆实现系统盘创建。
+
+|存储
+|{ks_product_right}运行在 Kubernetes 底座上，基于 Kubernetes 的 CSI 插件实现存储相关资源的管理。{ks_product_right}主要是使用块存储，自动开源 Ceph 存储，如果提供了支持 CSI 的商业存储，{ks_product_right}也是可以无缝接入的。
+
+|安全组
+|{ks_product_right}集成了 Kube-OVN，由 Kube-OVN 创建的网卡提供了安全组的支持。
+
+|带宽限制
+|{ks_product_right}集成了 Kube-OVN，由 Kube-OVN 创建的网卡提供了带宽限制的支持。
+
+|指标监控
+|{ks_product_right}基于 Kubernetes 生态的 Prometheus 监控系统实现了集群监控指标的配置、收集、存储和查询。
+
+|告警与监控
+|{ks_product_right}基于 Kubernetes 生态的 Prometheus Alertmanager 实现集群告警的配置、收集、存储和查询。
+
+|日志查询
+|{ks_product_right}基于 Kubernetes 生态的 Fluent Bit 与 Elasticsearch 实现日志的收集、存储和查询。
+|===
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 产品计费link:[id=618711fb374d4b6a9cea0a57f96f8935]
+
+{ks_product_right}目前提供个人免费版、开发者版和企业版三种模式的虚拟化服务。个人免费版用于助力个人用户和微型团队，提供 3 个节点内的免费虚拟化服务。开发者版和企业版为中小型团队和大型企业用户提供更多节点数、更全面的虚拟化服务体验。详细的计费规则及各版本服务能力对比，请参阅 link:../03-editions/[版本选型]。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 部署建议link:[id=15b938d2fdec4a78a9626d9ecc6293fd]
+
+您可以从以下维度考虑如何部署并使用{ks_product_left}：
+
+* 节点服务器
++
+--
+{ks_product_right}支持 Linux 操作系统，内核版本需要在 4 以上。推荐您使用 Ubuntu 18.04、Ubuntu 20.04、CentOS 7.9、CentOS 8.5、统信UOS、银河麒麟 V10 或华为 EulerOS 操作系统。
+--
+
+* 网络规划
++
+--
+{ks_product_right}建议您规划 2 个网络段，具体如下：
+
+* 管理网络：{ks_product_right}节点服务器所在的网络，建议采用专有 VLAN，以 trunk 方式接入。
+
+* 业务网络：虚拟化资源所在的网络，可以根据业务需求配置多个 VLAN，以 trunk 方式接入。
+--
+
+* 安全方案
++
+--
+{ks_product_right}提供安全组功能，控制安全组内虚拟机的进出口流量和端口监听状态，从而提高虚拟化服务的安全性。有关更多信息，请参阅 link:../../03-user-manual/08-security-groups/[安全组]。
+
+为保证业务处理的正确性，{ks_product_right}还提供快照备份功能。建议您通过为磁盘、虚拟机创建快照，实现应用容灾。
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 技术支持link:[id=bec9a93fb75e4452b3a6e5a426dc26ea]
+
+{ks_product_right}目前处于生产可用阶段。您可以将有关问题提交到 link:https://kubesphere.com.cn/forum/t/virtualization[KubeSphere 开发者社区]。
+
+
+

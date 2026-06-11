@@ -1,0 +1,41 @@
+// :ks_include_id: b8f433f8547944029075f5bec8d36efe
+. On the volume snapshot details page, view the resource attributes of the volume snapshot in the **Attributes** area.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Project
+|The project to which the volume snapshot belongs.
+
+|Status
+|
+include::volumeSnapshots-para-volumeSnapshotStatus.adoc[]
+
+|Capacity
+|
+include::volumeSnapshots-para-capacity.adoc[]
+
+|Snapshot Class
+|The volume snapshot class corresponding to the storage system used to store the snapshot data.
+
+|Creation Time
+|The creation time of the volume snapshot.
+
+|Creator
+|The user who created the volume snapshot.
+|===
+--
+
+. On the volume snapshot details page, view the information of the persistent volume claim used to create the snapshot on the **Data Source** tab.
++
+--
+include::../persistentVolumes/persistentVolumes-para-pvcInformation.adoc[]
+--
+
+. On the volume snapshot details page, click the **Events** tab to view the events of the volume snapshot.
++
+--
+include::../clusterManagement-para-eventsTab.adoc[]
+--

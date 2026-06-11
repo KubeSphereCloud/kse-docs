@@ -1,0 +1,40 @@
+---
+title: "基本信息"
+weight:  01
+---
+
+:ks_permission: **节点组管理**
+:ks_menu: **节点组设置 > 基本信息**
+
+
+本节介绍如何在节点组设置页面，查看、编辑节点组信息，和删除节点组。
+
+== 前提条件
+
+:relfileprefix: ../../../../../
+
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
+
+. 查看分配到节点组的节点数量和绑定的企业空间数量。
+
+. 点击**操作> 编辑信息**可编辑节点组的别名和描述。
+
+. 点击**操作> 删除节点组**可删除节点组。
++
+[.admon.attention,cols="a"]
+|===
+|注意
+
+|
+删除节点组时，请确保节点组下没有节点。若有，请先link:../../../01-node-groups/04-remove-nodes-from-a-group/[将节点从该节点组中移除]。
+|===

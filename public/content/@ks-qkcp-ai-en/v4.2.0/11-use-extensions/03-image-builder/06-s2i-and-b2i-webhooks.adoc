@@ -1,0 +1,96 @@
+---
+title: "Configure S2I and B2I Webhooks"
+keywords: 'KubeSphere, Kubernetes, S2I, Source-to-Image, B2I, Binary-to-Image, Webhook'
+description: 'Learn how to configure S2I and B2I webhooks.'
+weight: 06
+---
+
+:ks_permission: **Application Workloads Management**
+
+KubeSphere provides Source-to-Image (S2I) and Binary-to-Image (B2I) capabilities to automate building, pushing images, and deploying applications. You can configure S2I and B2I Webhooks to automatically trigger image builders when specific events occur in the code repository.
+
+This tutorial demonstrates how to configure S2I and B2I webhooks.
+
+== Prerequisites
+
+An S2I image builder and a B2I image builder have been created. For more information, please refer to link:../01-create-an-image-builder/01-create-an-image-builder-using-source-code/[Create an Image Builder Using Source Code] and link:../01-create-an-image-builder/02-create-an-image-builder-using-an-artifact/[Create an Image Builder Using an Artifact].
+
+== Configure S2I Webhook
+
+=== Step 1: Expose the S2I Trigger Service
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
+. Go to **Services** under **Application Workloads** and search for **s2ioperator-trigger-service**.
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] and select **Edit External Access**.
+
+. In the dialog box that appears, select **NodePort** from the **Access Mode** drop-down menu, then click **OK**.
++
+[.admon.tip,cols="a"]
+|===
+|Tip
+
+|You can also choose **LoadBalancer** as needed.
+
+|===
+
+. You can view the **NodePort** of this service in the list. This NodePort will be included in the S2I webhook URL.
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Before accessing the service, you may need to configure port forwarding rules and allow the port in the security group.
+|===
+
+=== Step 2: Configure the S2I Webhook
+
+. Enter your workspace.
+
+. In **Image Builders**, click the S2I image builder to enter its details page.
+
+. Copy the link in **Remote Trigger**. The S2I webhook URL will contain this link. Example:
++
+[source,html]
+----
+http://s2ioperator-trigger-service.extension-s2ibuilder.svc/s2itrigger/v1alpha1/general/namespaces/project1/s2ibuilders/felixnoo-s2i-sample-latest-zhd/
+----
+
+. Log in to your GitHub account and go to the source code repository used for the S2I image builder. Click **Settings > Webhooks**, then click **Add webhook**.
+
+. In **Payload URL**, modify the IP address, Service NodePort, and remote trigger link according to the following link, then enter the actual link. Example:
++
+--
+[source,html]
+----
+http://<IP>:<Service NodePort>/s2ioperator-trigger-service.extension-s2ibuilder.svc/s2itrigger/v1alpha1/general/namespaces/project1/s2ibuilders/felixnoo-s2i-sample-latest-zhd/
+----
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|You need to add `<IP>:<Service NodePort>/` to the remote trigger link. Here,
+`<IP>` is your own IP address, and `<Service NodePort>` is the NodePort you obtained in Step 1.
+|===
+--
+
+. Select the trigger event as needed, for example, select **Just the push event**, then click **Add webhook**.
+
+. After adding the webhook, click the webhook to view the delivery details in **Recent Deliveries**. If the Payload URL is valid, you will see a green checkmark.
+
+. After completing all the above operations, if a push event occurs in the source code repository, the S2I image builder will be triggered automatically.
+
+== Configure B2I Webhook
+
+Follow the same steps to configure the B2I webhook.
+
+. Expose the **s2ioperator-trigger-service** service.
+
+. View the **Remote Trigger** in the B2I image builder's details page.
+
+. Add a webhook in the source code repository. The Payload URL format for B2I is the same as that for S2I.
+
+. If a specified event occurs in the source code repository, the B2I image builder will be triggered automatically.

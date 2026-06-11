@@ -1,0 +1,38 @@
+---
+title: "查看资源用量排行"
+keywords: "Kubernetes, {ks_product}, 集群管理, 资源用量, 排行"
+description: "介绍如何查看节点和项目的资源用量排行。"
+weight: 02
+---
+
+:ks_permission: **监控查看**
+:ks_navigation: **边缘资源告警 > 资源用量**
+
+
+本节介绍如何查看节点和项目的资源用量排行。
+
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+
+== 查看用量排行
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**资源用量**页面，点击**节点用量排行**和**项目用量排行**页签查看各节点和项目的资源使用情况。
++
+--
+* 在列表左上角点击下拉列表可选择按照 CPU 用量、内存用量、容器组数量、出站流量或入站流量对节点和项目进行排序。
+
+// include::../../../../_custom/clusterManagement/clusterStatus/clusterStatus-oper-sortAscendingDescending.adoc[]
+
+include::../../../../_custom/clusterManagement/clusterStatus/clusterStatus-oper-exportJsonData.adoc[]
+--

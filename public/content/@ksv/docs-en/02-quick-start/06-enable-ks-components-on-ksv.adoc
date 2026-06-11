@@ -1,0 +1,69 @@
+---
+title: "Enable KubeSphere components in {ks_product}"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, KubeSphere, components, enabling"
+description: "Describes how to enable KubeSphere components in {ks_product}."
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 545e841ae1ac412aa66c149e656d4830
+:ks_xref_id: f784f7016cd1468c8e87dc8d63ccdad7
+:ks_comp: ../../components/
+:ks_title: Enable KubeSphere components in {ks_product}
+:ks_description: Describes how to enable KubeSphere components in {ks_product}.
+:ks_keywords: {ks_product_full}, {ks_product}, KubeSphere, components, enabling
+:ks_weight: 06
+:ks_logo:
+:ks_download_url:
+
+
+In {ks_product_abbr_full} v1.6.0 or later, you can deploy {ks_product_abbr_full} and KubeSphere in hybrid mode. This way, you can manage containers and VM workloads at the same time.This topic describes how to enable KubeSphere components in {ks_product}.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=bdfea0e9fdf84e31b06958a0660c4523]
+
+* Make sure the current version of {ks_product} is v1.6.0.
+* By default, KubeSphere components for monitoring, logging, audits, and events are integrated into {ks_product}.To enable other components, you can use the open source tool KubeKey to build images and import the components.To obtain more information about KubeKey, visit link:https://github.com/kubesphere/kubekey[GitHub KubeKey].
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=c691ad4a27fa4f898b73d9e27f0a0d43]
+
+. Log in to the {ks_product} web console as user **admin**.
+. In the lower-right corner of the page, hover over image:/images/ksv/en/icons/hammer.svg[18px,18px] and select **Kubectl**.
+. In the **kubectl** dialog box, run the following command to enable KubeSphere components:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl -n kubesphere-system patch cc ks-installer -p '{"spec": {"common": {"core": {"console": {"enabled": true}}}}}' --type='merge'
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Run the following command to query logs:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l 'app in (ks-install, ks-installer)' -o jsonpath='{.items[0].metadata.name}') -f
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+* Enabling components may take a while. Wait until all processes are complete.
+* After the components are enabled, you can view the components in the **System Components** section on the **Overview** page.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--

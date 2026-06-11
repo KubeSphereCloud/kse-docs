@@ -1,0 +1,29 @@
+---
+title: 下线节点
+weight: 1
+---
+
+在进行节点下线前，用户需根据《{product_name} 巡检手册》对当前环境进行检查，确认当前环境所有服务均正常运行，才可以下线目标节点。
+
+由于 {product_name} 具有高可用性，无论下线网关节点还是存储节点，均可以直接对其进行关机操作，详细步骤如下。
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，从 FirstBox 节点跳转至待下线节点。命令行中的 `<host_name>` 为待下线的节点的 Host Name，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh <host_name>
+----
+
+. 执行如下命令行，将待下线节点关机。
++
+[source,shell]
+----
+shutdown -h now
+----

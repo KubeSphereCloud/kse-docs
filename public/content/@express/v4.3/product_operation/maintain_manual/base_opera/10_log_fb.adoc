@@ -1,0 +1,76 @@
+---
+title: '查看 FirstBox 节点安装进度与日志'
+weight: 10
+---
+
+== 运维场景
+
+在云易捷的安装部署过程中，可参考以下步骤查看相应的安装进度和日志。
+
+== 操作步骤
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 登录至 Hyper 节点。(hyber节点如何查询)
+
+. 进入 Hyper 节点下用于监控部署进度的脚本所在目录。
++
+[source,shell]
+----
+cd /root/qingcloud-installer/bootstrap/
+----
+
+. 执行脚本。
++
+[source,shell]
+----
+./watch_bootstrap_main.sh
+----
+. 查看安装进度。
+.. 根据脚本运行提示，输入菜单栏中的数字选项 `1`。
++
+image::/images/express/maintain/base_opera_log_fb_1.png[]
+
+.. 回车确认后，即可查看到实时刷新的部署进度。
++
+image::/images/express/maintain/base_opera_log_fb_2.png[]
++
+include::../../../../../_components/note.adoc[]
+* 若返回结果中，相应步骤的部署进度为 ``100%``，则表示安装完成。
+* 若返回结果中，相应步骤的部署进度提示 ``failed``，则表示部署失败。
+* 使用 ``ctrl + C`` 快捷键即可结束部署进度的查看。
+include::../../../../../_components/table_footer.adoc[]
+
+. 查看安装日志。
+.. 根据脚本运行提示，输入菜单栏中的数字选项 `2`。
++
+image::/images/express/maintain/base_opera_log_fb_3.png[]
+
+.. 回车确认后，即可查看到实时刷新的部署日志。
++
+image::/images/express/maintain/base_opera_log_fb_4.png[]
++
+include::../../../../../_components/note.adoc[]
+* 若返回结果中，相应步骤的部署日志输出提示为 ``successfully``，则表示该步骤安装完成。
+* 若返回结果中，相应步骤的部署日志输出提示为 ``Error``，则表示部署失败。
+* 使用 ``ctrl + C`` 快捷键即可结束当前查看。
+include::../../../../../_components/table_footer.adoc[]
+
+

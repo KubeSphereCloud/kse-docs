@@ -1,0 +1,68 @@
+---
+title: "节点架构不同部署指南"
+weight: 9
+pdf_docVersion: '02'
+pdf_releaseDate: 2023-08-07
+pdf_coverDocName: QingStor NeonSAN 安装部署指南
+---
+
+本文旨在介绍当待部署环境中存在 x86 和 ARM 两种架构节点时，NeonSAN 分布式存储系统的安装方法，主要包括安装前的准备工作、安装与验证步骤等。 +
+
+本文适用的 NeonSAN 版本范围：v3.0.0 至 v3.5.3。
+
+== 修订记录
+
+修改记录累积了每次文档更新的说明。详细内容如下表所示：
+
+[options="header",cols="1,3,1"]
+|===
+|版本	|修订内容	|日期
+|02
+|适配 NeonSAN v3.5.3 及 Installer v2.0.18	
+|2023-08-07
+
+|01
+|新建	
+|2023-03-29
+|===
+
+== 读者对象
+
+本文档主要适用于以下工程师：
+
+* 最终客户项目管理及技术人员
+* 合作伙伴项目管理及技术人员
+* 原厂项目管理及技术人员
+
+
+== 名词解释
+
+[options="header",cols="1,3"]
+|===
+|名词	|意义
+|存储池
+|为了资源合理利用以及管理的方便性，可将集群的存储节点划分为多个存储池，每个存储池最多支持 24 个存储节点。 目前 NeonSAN 支持 3 ~ 4096 个存储节点（Store 节点）
+
+|neonsan-center	
+|NeonSAN 管理控制服务
+
+|neonsan-store	
+|NeonSAN 存储服务
+
+|neonsan-monitor	
+|NeonSAN 告警服务
+
+|Common 服务	
+|数据库、Zookeeper 和 Portal 等
+
+|NTP	
+|Network Time Protocol，一种使计算机时间同步化的协议
+|===
+
+更多专业术语名词解释，可参考link:https://box.yunify.com/s/Xw99az7CSfTmFZP[《NeonSAN 术语手册》]。
+
+
+== 相关文档链接
+
+* link:https://box.yunify.com/s/yRkPCFrmHLSRrbC[《NeonSAN 存储系统最佳实践指南》] 
+* link:https://box.yunify.com/s/McLnzcYbDccawAW[《NeonSAN 自动化安装部署指南》]

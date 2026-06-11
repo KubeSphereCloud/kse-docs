@@ -1,0 +1,37 @@
+---
+title: "Switch Online Version (Blue-Green Deployment)"
+keywords: "Kubernetes, {ks_product}, Project Management, Canary Release, Switch Online Version (Blue-Green Deployment)"
+description: "Introduces how to switch the online version for a blue-green deployment task."
+weight: 04
+---
+
+:ks_permission: ** Service Mesh Management**
+:ks_navigation: **Canary Release > Canary Release**
+
+This section describes how to switch the online version for a blue-green deployment task.
+
+Based on business needs, you can set the new or old version in a blue-green deployment task to immediately take over all business traffic with one click.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere Service Mesh** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Canary Release** page, click **Release Task**, and then click the name of a blue-green deployment task to open its details page.
+
+. In the **Version** area, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] in the upper-right corner of a version, and then select **Take Over** from the drop-down list to set this version to immediately take over all business traffic.

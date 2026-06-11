@@ -1,0 +1,60 @@
+// :ks_include_id: 8517e102a81e4402a8f9784a7931ff0c
+. On the pod details page, under the **Resource Status** tab, in the **Containers** section, click the name of a container to open the container details page.
+
+. On the container details page, view the container's resource attributes in the **Properties** section.
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the container belongs.
+
+|Project
+|The project to which the container belongs.
+
+|Application
+|The application to which the container belongs.
+
+|Status
+|The status of the container.
+
+include::../workloads/workloads-para-containerStatus.adoc[]
+
+|Image
+|The image used by the container.
+
+|Image ID
+|The ID of the image used by the container.
+
+|Port
+|The port of the container.
+
+|Command
+|The command executed inside the container when it starts.
+
+|Resource Reservation
+|The CPU and memory resources reserved by the system for the container.
+
+|Resource Limit
+|The upper limit of CPU and memory resources that the container can use.
+
+|Image Pull Policy
+|The image pull policy of the container.
+
+* **IfNotPresent**: When the pod is created or updated, the image file stored on the node by the container runtime is used first.
+
+* **Always**: When the pod is created or updated, an attempt is made to pull the image from the image service every time.
+
+* **Never**: When the pod is created or updated, only the image stored on the node by the container runtime is used. If the required image does not exist locally, container creation will fail.
+
+|Restart Count
+|The number of times the container has been restarted.
+|===
+--
+
+. Under the **Resource Status** tab, view the container's health check configuration, the volumes mounted in the container, the mount paths of the volumes, and the access modes.
+
+. Click the **Environment Variables** tab to view the container's environment variables.

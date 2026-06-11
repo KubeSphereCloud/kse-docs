@@ -1,0 +1,42 @@
+---
+title: "主机目录"
+weight: 1
+---
+
+== 功能描述
+为方便对平台内的所有 ExpressCloud 主机进行管理，云易捷提供目录管理功能。用户可以根据实际情况创建不同层级的目录，对平台内的虚拟主机进行分级管理。支持用户创建、删除和重命名目录，同时平台内已创建好的虚拟主机可根据需要移动到指定的目录下。
+
+== 操作步骤
+. {product_console_name}。
+. 在顶部导航栏，选择**资源** > **虚拟机**，点击 **ExpressCloud 主机**，进入 ExpressCloud 主机列表页面，点击**目录**图标，即可在列表左侧显示相应的目录结构。其中，主目录名默认为 ROOT，可新建自定义名称的子目录。
++
+
+include::../../../../../../../_components/note.adoc[]
+* 在 ROOT 目录下支持新建子目录。
+* 不支持删除或重命名 ROOT 目录。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vm_manage_dir_1.png[]
+
+. 在目录结构框中，点击指定目录名称，即可查看当前目录下所有的 ExpressCloud 主机信息。在当前目录下，点击**创建虚拟机**，则新创建的主机也将默认属于该目录。
++
+image::/images/express/console/vm_manage_dir_2.png[]
+
+. 在目录结构框中，右键点击指定目录名，在弹出的选择栏中点击**新建子目录**。
++
+image::/images/express/console/vm_manage_dir_3.png[]
+
+. 出现新的**未命名目录**，用户根据实际情况修改名称即可。
++
+image::/images/express/console/vm_manage_dir_4.png[]
+
+. 在目录结构框中，右键点击指定目录名，在弹出的选择栏中点击**重命名**，待目录名变为可输入框时，直接修改目录名称即可。
+
+. 在目录结构框中，右键点击指定目录名，在弹出的选择栏中点击**删除**。若确定无误后，在弹出的提示窗口中点击**删除**即可。
++
+
+include::../../../../../../../_components/note.adoc[]
+被删除的目录下的资源会自动被归类到上一级目录中。
+
+include::../../../../../../../_components/table_footer.adoc[]

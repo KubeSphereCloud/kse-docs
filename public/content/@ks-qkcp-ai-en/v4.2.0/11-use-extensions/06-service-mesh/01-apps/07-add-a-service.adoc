@@ -1,0 +1,75 @@
+---
+title: "Add a Service to a Composed App"
+keywords: "Kubernetes, {ks_product}, Project Management, Application Workloads, App, Edit App Settings"
+description: "Describes how to add a service to a composed app."
+weight: 07
+---
+
+:ks_permission: ** Service Mesh Management**
+:ks_navigation: **Grayscale Release > Composed Apps**
+
+
+This section describes how to add a stateful or stateless service to a composed app.
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the **Composed Apps** page, click the name of an app to go to its details page.
+
+. On the app details page, click **Operation > Add Service**.
+
+. In the **Create Service** dialog box, select **Stateful Service** or **Stateless Service** as needed.
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/clusterManagement/services/services-para-statelessStatefulExternal.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
++
+
+include::../../../../_custom/projectManagement/services/services-oper-setBasicInformation.adoc[]
+
++
+
+. On the **Pod Settings** tab, configure the number of replicas, containers, update strategy, security context, scheduling rules, and metadata for the pods managed by the service's backend workload, and then click **Next**.
+
++
+
+include::../../../../_custom/projectManagement/services/services-oper-setStorageAdvanced.adoc[]
++
+--
+ifeval::["{file_output_type}" == "html"]
+For parameter settings of **Stateful Service** and **Stateless Service**, refer to link:../../../../08-workspace-management/10-application-workloads/02-services/01-create-a-service/01-create-a-stateful-or-stateless-service/#_parameter-description[Create a Stateful or Stateless Service].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For parameter settings of **Stateful Service** and **Stateless Service**, refer to the "Create a Stateful or Stateless Service" chapter in the *KubeSphere Workspace and Project Management Guide*.
+endif::[]
+--

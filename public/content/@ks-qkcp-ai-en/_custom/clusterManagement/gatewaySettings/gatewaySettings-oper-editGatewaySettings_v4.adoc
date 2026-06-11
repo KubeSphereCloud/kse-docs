@@ -1,0 +1,34 @@
+// :ks_include_id: 17ab622bc96f45e68b3581c076cb1223
+. On the right side of the page, select **Manage > Edit**.
+
+. In the dialog box that appears, modify the gateway parameters, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|IngressClassName
+|The name of the IngressClass.
+
+|Pod Replicas
+|The desired number of pod replicas.
+
+|External Access Mode
+|The external access mode for the gateway service.
+
+include::../services/services-para-externalAccess.adoc[tag=bullets]
+
+|Tracing
+|Whether to enable the tracing feature for the gateway. To use the tracing feature, the **KubeSphere Service Mesh** extension must be installed and enabled on the KubeSphere platform.
+
+|Configuration Options
+|The configuration options for the gateway. The gateway functionality in KubeSphere is implemented based on the Nginx Ingress Controller. You can set the gateway's configuration options to control its behavior. For more information, refer to the link:https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/[Nginx Ingress Controller official documentation].
+
+|Load Balancer Provider
+|The load balancer provider for the gateway. When the gateway's external access mode is LoadBalancer, you need to set annotations for the gateway service based on the load balancer plugin and infrastructure environment to create the required load balancer. After selecting a load balancer provider, the system will provide annotation hints when setting the gateway service annotations. Available only when the gateway service's external access mode is LoadBalancer.
+
+|Annotations
+|Annotations for the gateway service. If a load balancer provider has been selected, the system will display annotation hints in a dropdown list when you click the **Key** text box. Available only when the gateway service's external access mode is LoadBalancer. For more information, contact your infrastructure environment provider.
+|===
+--

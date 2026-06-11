@@ -1,0 +1,112 @@
+---
+title: "创建 Lustre 云服务器"
+weight: 2
+---
+
+Lustre 镜像上传至企业云平台的环境中后，可登录云平台的 Console 平台创建基于 Lustre 镜像的主机以验证 Lustre 的可用性。操作步骤如下。
+
+. 登录当前环境的 Console 平台。
+. 在顶部导航栏中，选择**产品与服务** > **计算** > **镜像**，默认进入系统镜像列表页面。
++
+image::/images/ep_offline/ehpc_install/ehpc_1.png[]
+
+. 在镜像列表页面，选择**自有**页签，勾选 Lustre 的镜像（ID 为 img-gdadx1o3），点击**+基于镜像创建云服务器**。
++
+image::/images/ep_offline/ehpc_install/ehpc_2.png[]
+
+. 在**创建云服务器**页面，创建 4 个云服务器，分别命名为 lustre-mdt（lustre-mgs）、lustre-ost1、lustre-ost2 和 lustre-client。云服务各项配置如下表所示。
++
+
+include::../../../../../../_components/note.adoc[]
+lustre-mdt 和 lustre-mgs 共用一台云服务器。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+[options="header",cols="1,1,2"]
+|===
+|配置类型|参数|说明
+.4+|基础配置
+|区域
+|根据实际情况选择。
+
+|当前规格
+|满足 CPU 4 核，内存 8G 的要求即可。
+
+|系统盘
+|至少 20G。
+
+|数据盘
+|暂不绑定。
+
+.4+|网络配置
+|网络
+|选择**基础网络**即可。当前步骤创建的 4 个云服务器需在同一个基础网络下。
+
+|附加网卡
+|暂不添加。
+
+|弹性公网 IP
+|选择**暂不绑定**。
+
+|安全组
+|选择**暂不绑定**。
+
+.2+|系统配置
+|云服务器名称
+|根据实际情况自行修改。
+
+|登录方式
+|选择**密码**，其用户名默认为 root，密码根据系统要求自行设置即可。
+|===
+
+. 返回云服务器列表页面，查看云服务器状态为``运行中``，即表示创建成功。
++
+image::/images/ep_offline/ehpc_install/ehpc_3.png[]
+
+
+. 在顶部导航栏中，选择**产品与服务** > **存储服务** > **云硬盘**，进入硬盘列表页面。
+
+. 点击**+创建**，在弹出的创建硬盘页面，分别创建 2 个大小为 200G 和 1 个大小为 50G 的 SSD 类型云硬盘。云硬盘各参数配置如下。
++
+[options="header",cols="1,2"]
+|===
+|参数|说明
+|区域及可用区
+|选择创建云服务器时所选区域即可。**取消挂载云服务器**的勾选。
+
+|硬盘类型
+|选择**通用型 SSD**
+
+|硬盘容量
+|200G 或 50G
+
+|存储池
+|默认
+
+|副本数量
+|根据实际情况进行选择
+
+|置备方式
+|精简置备
+
+|硬盘名称
+|根据实际情况自行修改
+
+|附加功能
+|无需开启
+|===
+
+. 硬盘创建成功后，分别加载至 lustre-mdt、lustre-ost1 和 lustre-ost2 云服务器上。
++
+
+include::../../../../../../_components/note.adoc[]
+50G 的云硬盘加载至 lustre-mdt 云服务器上，200G 云硬盘分别加载至 lustre-ost1 和 lustre-ost2。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/ep_offline/ehpc_install/ehpc_4.png[]
+
+
+
+
+

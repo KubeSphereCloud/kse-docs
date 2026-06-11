@@ -1,0 +1,338 @@
+---
+title: "Environment Requirements"
+weight: 01
+---
+
+This section introduces the environment requirements for KubeSphere Enterprise.
+
+== System Requirements
+
+[%header,cols="3a,4a,4a"]
+|===
+|OS |Minimum Requirements (per node)| Requirements for Production Environment (per node)
+
+|Ubuntu 16.04, 18.04, 20.04, 22.04
+|CPU: 2 cores, Memory: 4 GB, Disk: 40 GB
+|CPU: 8 cores, Memory: 16 GB, Disk: 200 GB
+
+|Debian Buster, Stretch
+|CPU: 2 cores, Memory: 4 GB, Disk: 40 GB
+|CPU: 8 cores, Memory: 16 GB, Disk: 200 GB
+
+|CentOS 7.x, CentOS Stream 
+|CPU: 2 cores, Memory: 4 GB, Disk: 40 GB
+|CPU: 8 cores, Memory: 16 GB, Disk: 200 GB
+
+|Red Hat Enterprise Linux 7.x, 8.x
+|CPU: 2 cores, Memory: 4 GB, Disk: 40 GB
+|CPU: 8 cores, Memory: 16 GB, Disk: 200 GB
+
+|SUSE Linux Enterprise Server 15/openSUSE Leap 15.2
+|CPU: 2 cores, Memory: 4 GB, Disk: 40 GB
+|CPU: 8 cores, Memory: 16 GB, Disk: 200 GB
+|===
+
+== Dependency Requirements
+
+[%header,cols="1a,4a,4a"]
+|===
+|Dependency |Kubernetes Version ≥ 1.18|Kubernetes Version < 1.18
+
+|socat
+|Required
+|Optional, but recommended
+
+|conntrack
+|Required
+|Optional, but recommended
+
+|ebtables
+|Optional, but recommended
+|Optional, but recommended
+
+|ipset
+|Optional, but recommended
+|Optional, but recommended
+|===
+
+== Container Runtime Requirements
+
+[%header,cols="4a,4a"]
+|===
+|Supported Container Runtimes |Version
+
+|Docker
+|20.10.0+
+
+|containerd
+|Latest version
+
+|CRI-O (Experimental, not fully tested)
+|Latest version
+
+|iSula (Experimental, not fully tested)
+|Latest version
+|===
+
+== Network Requirements
+
+* Ensure that the DNS addresses in **/etc/resolv.conf** are accessible; otherwise, it may cause DNS issues in the cluster.
+
+* If your network configuration uses firewall rules or security groups, make sure that the infrastructure components can communicate with each other through specific ports. It is recommended to disable the firewall.
+
+* Supported CNI plugins: Calico and Flannel. Other plugins such as Cilium and Kube-OVN are also compatible, but note that they have not been fully tested.
+
+== Port Requirements
+
+Certain ports are used for communication between services. If you have firewall rules in your network configuration, ensure that the infrastructure components can communicate with each other through specific ports. These ports serve as communication endpoints for certain processes or services.
+
+[%header,cols="2a,2a,2a,2a,2a,3a"]
+|===
+|Service
+|Protocol
+|Action
+|Start Port
+|End Port
+|Remarks
+
+|ssh
+|TCP
+|Allow
+|22
+|N/A
+|N/A
+
+|etcd
+|TCP
+|Allow
+|2379
+|2380
+|N/A
+
+|apiserver
+|TCP
+|Allow
+|6443
+|N/A
+|N/A
+
+|calico
+|TCP
+|Allow
+|9099
+|9100
+|N/A
+
+|bgp
+|TCP
+|Allow
+|179
+|N/A
+|N/A
+
+|nodeport
+|TCP
+|Allow
+|30000
+|32767
+|N/A
+
+|master
+|TCP
+|Allow
+|10250
+|10258
+|N/A
+
+|dns
+|TCP
+|Allow
+|53
+|N/A
+|N/A
+
+|dns
+|UDP
+|Allow
+|53
+|N/A
+|N/A
+
+|local-registry
+|TCP
+|Allow
+|5000
+|N/A
+|Required for offline environments
+
+|local-apt
+|TCP
+|Allow
+|5080
+|N/A
+|Required for offline environments
+
+|rpcbind
+|TCP
+|Allow
+|111
+|N/A
+|Required when using NFS
+
+|ipip
+|IPENCAP / IPIP
+|Allow
+|N/A
+|N/A
+|Calico requires IPIP protocol
+
+|metrics-server
+|TCP
+|Allow
+|8443
+|N/A
+|N/A
+|===
+
+== Support Matrix of Extensions
+
+KubeSphere Enterprise v4.1.1 supports Kubernetes versions 1.21~1.28 by default. This section provides detailed information about the Kubernetes versions supported by each component of KubeSphere Enterprise. To avoid compatibility issues during usage, please use the supported Kubernetes version.
+
+[%header,cols="2a,2a,3a,2a"]
+|===
+|Component |Component Version |Supported Kubernetes Versions |Supported Architectures
+
+|ks-core
+|4.1.x
+|1.21~1.28
+|amd64、arm64
+
+|DevOps
+|1.1.0
+|1.21~1.28
+|amd64、arm64
+
+|Storage-utils
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|Vector
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|OpenSearch
+|2.11.1
+|1.21~1.28
+|amd64、arm64
+
+|Monitoring
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|Logging
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|Auditing
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|Events
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|Alerting
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|WhizardTelemetry Platform Service
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|WhizardTelemetry Events Alerting
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|Notification
+|2.5.x
+|1.21~1.28
+|amd64、arm64
+
+|MetricServer
+|0.7.0
+|1.21~1.28
+|amd64、arm64
+
+|Tower
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|OpenPitrix
+|2.0.0
+|1.21~1.28
+|amd64、arm64
+
+|KubeFed
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|Gateway
+|1.0.x
+|1.22~1.25
+|amd64、arm64
+
+|ServiceMesh
+|1.0.x
+|1.22~1.25
+|amd64、arm64
+
+|KubeEdge
+|1.13.1
+|1.21-1.23
+|amd64、arm64
+
+|RadonDB DMP
+|2.1.3
+|
+* DMP: 1.21~1.28
+* MySQL: 1.21~1.28
+* PostgreSQL: 1.21~1.28
+* Redis Cluster: 1.21~1.28
+* Redis Sentinel: 1.21~1.28
+* MongoDB: 1.21~1.28
+* OpenSearch: 1.21~1.28
+* Kafka: 1.21~1.28
+* RabbitMQ: 1.21~1.28
+|amd64、arm64
+
+|SpringCloud
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|Gatekeeper
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|Network
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+
+|Ingress-utils
+|1.0.x
+|1.21~1.28
+|amd64、arm64
+|===

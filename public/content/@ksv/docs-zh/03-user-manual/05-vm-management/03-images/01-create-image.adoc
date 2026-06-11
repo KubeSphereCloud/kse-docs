@@ -1,0 +1,141 @@
+---
+title: "创建镜像"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 镜像, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建镜像。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 3864e6c892d04ecabb52ee8e604cde3d
+:ks_xref_id: bbc8438e30e64979966bfca86c93ec88
+:ks_comp: ../../../../components/
+:ks_title: 创建镜像
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建镜像。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 镜像, 创建
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建镜像。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=b543bfc97cd4470da97794ef2391e1bc]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/vms/vm-image-manage-prerequisites.adoc[]
+
+:relfileprefix: ./
+
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=2fd50d34d13a4487931d2c4f0197c4b0]
+
+include::../../../../_custom/vms/vm-image-steps.adoc[]
+
+. 选择**系统镜像**或**自有镜像**页签，然后点击页面右上角的**创建**。有关各镜像类型的区别，请参阅 link:../[镜像]。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+仅系统 **admin** 用户可以创建系统镜像。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在弹出的对话框中，设置镜像相关参数。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|镜像名称
+|用户自定义的镜像名称。名称只能包含大小写字母、数字、点（.）和连字符（-），必须以字母或数字开头和结尾，最长 16 个字符。
+
+|镜像文件
+|虚拟机镜像文件。您可以选择上传镜像文件或通过 URL 上传。
+
+* 选择文件上传：选择或拖动镜像文件上传。支持 IMG、QCOW2、XZ、TAR、GZ、ISO 或 RAW 格式的镜像文件。
+
+* 通过 URL 上传：指定镜像文件所在的 URL。有关常用镜像的 URL 地址，请参阅 link:#e1a3f729e3484f3396a57d1e49f745f9[常用镜像]。
+
+|操作系统
+|镜像的操作系统类型。您可以点击下拉列表选择系统内置的操作系统类型，或选择**自定义**然后手动输入操作系统类型和版本。
+
+|版本
+|镜像的操作系统版本。
+
+|默认配置
+|镜像定义的虚拟机的默认 CPU、内存和系统盘配置。
+
+|描述
+|用户自定义的镜像描述信息。描述可包含任意字符，最长 256 个字符。
+|===
+--
+
+. 点击**创建**。镜像创建后将显示在镜像列表中。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+将光标放置在页面右下角的 image:/images/ksv/zh/icons/hammer.svg[18px,18px] 以打开工具箱，点击**上传进度**并选择**镜像**可查看镜像的操作进度。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 常用镜像link:[id=e1a3f729e3484f3396a57d1e49f745f9]
+
+下表提供常用镜像的下载地址。
+[cols='1a,3a']
+|===
+|镜像 |下载地址
+
+|CentOS
+|
+link:https://virtualization.kubesphere.cloud/images/centOS-7-x86_64-GenericCloud-2111.qcow2[CentOS 7]
+
+link:https://virtualization.kubesphere.cloud/images/centOS-8-x86_64-GenericCloud-8.4.21053.qcow2[CentOS 8]
+
+|Ubuntu
+|
+link:https://virtualization.kubesphere.cloud/images/ubuntu_16.04_LTS_server-cloudimg-amd64.img[Ubuntu 16.04]
+
+link:https://virtualization.kubesphere.cloud/images/ubuntu_18.04_LTS_server-cloudimg-amd64.img[Ubuntu 18.04]
+
+link:https://virtualization.kubesphere.cloud/images/ubuntu_20.04_LTS_server-cloudimg-amd64.img[Ubuntu 20.04]
+
+link:https://virtualization.kubesphere.cloud/images/ubuntu-22.04-server-cloudimg-amd64.img[Ubuntu 22.04]
+
+|Fedora
+|
+link:https://virtualization.kubesphere.cloud/images/fedora-Cloud-Base-35-1.2.x86_64.qcow2[Fedora 35]
+
+|Windows
+|
+link:https://virtualization.kubesphere.cloud/images/win/cn_windows_10_consumer_editions_version_21h1_x64_dvd_1baf479d.iso[Windows 10]
+
+link:https://virtualization.kubesphere.cloud/images/win/zh-cn_windows_server_2022_x64_dvd_6c73507d.iso[Windows Server 2022]
+|===
+
+
+
+
+
+
+

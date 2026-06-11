@@ -1,0 +1,19 @@
+---
+title: "查看 qs_device 日志文件"
+weight: 9
+---
+
+. 逐个登录集群节点。 
+
+. 执行如下命令，查看完整的 qs_device 的日志文件。
++
+[,shell]
+----
+vi /qingstor/log/qs_device-out.log 
+----
+
+. 部分错误日志关键字解释，其他未列出错误可联系 NeonSAN 产研团队进行排查。
++
+若日志中出现 ``no such table``，则说明旧环境升级后 qs-device 部署不正确，建议执行 ``apt purge qs-device`` 删除当前 qs-device 后，执行 ``apt install qs-device`` 重新部署 qs-device。
+
+

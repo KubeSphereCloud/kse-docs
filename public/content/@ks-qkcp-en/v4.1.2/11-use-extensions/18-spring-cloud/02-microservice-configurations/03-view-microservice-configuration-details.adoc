@@ -1,0 +1,50 @@
+---
+title: "View Microservice Configuration Details"
+keywords: "Kubernetes, {ks_product-en}, project management, Spring Cloud, view microservice configuration details"
+description: "Learn how to view the microservice configuration details."
+weight: 03
+---
+
+:ks_permission: **Spring Cloud Microservices Viewing**
+:ks_navigation: **Spring Cloud > Microservice Configurations**
+
+This section describes how to view the microservice configuration details.
+
+== Prerequisites
+
+* **KubeSphere Spring Cloud** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+== Steps
+
+include::../../../../_custom-en/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom-en/projectManagement/microserviceConfiguration/microserviceConfiguration-oper-openDetailsPage.adoc[]
++
+--
+* The **Attributes** area on the left side of the details page displays the project, cluster, and creation time of the microservice configuration.
+
+* The **Data** tab on the right side of the details page displays the data contained in the microservice configuration.
+--
+
+. Click the **Historical Versions** tab on the right side of the details page to view the revision records of the microservice configuration.
++
+--
+* Each edit of the microservice configuration generates a revision record, which can be used to roll back the microservice configuration.
+
+* Click on a revision record to view the data of the microservice configuration.
+--
+
+. Click the **Events** tab on the right side of the details page to view the events of the microservice configuration.
++
+--
+include::../../../../_custom-en/clusterManagement/clusterManagement-para-eventsTab.adoc[]
+--

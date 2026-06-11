@@ -1,0 +1,41 @@
+---
+title: '创建 VIP'
+weight: 2
+draft: false
+---
+
+. 登录 link:../../../login[Portal 管理界面]。
+
+. 选择左侧导航栏**存储服务** > **块存储** > **iSCSI**，进入 iSCSI 页面。
++
+
+include::../../../../../../_components/note.adoc[]
+创建 VIP 需保证集群中 ``Target servers`` 正常数量至少为 3，如下图所示。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_iscsi_create_vip_1.png[]
+
+. 在 iSCSI 页面，选择 **VIP** 页签，点击**创建 VIP**，弹出创建 VIP 的窗口，输入提前规划好的 VIP，并点击**创建**。
++
+
+include::../../../../../../_components/note.adoc[]
+VIP 需与 Portal 服务器保持同一网段。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_iscsi_create_vip_2.png[,40%]
+
+. VIP 创建成功后，会显示在 VIP 列表内，且系统会将 VIP 与 3 个 Portal 服务器进行绑定。
++
+
+include::../../../../../../_components/note.adoc[]
+根据实际需求可创建多个 VIP。
+
+include::../../../../../../_components/table_footer.adoc[]
+
++
+image::/images/neonsan/portal_iscsi_create_vip_3.png[]
+
+
+

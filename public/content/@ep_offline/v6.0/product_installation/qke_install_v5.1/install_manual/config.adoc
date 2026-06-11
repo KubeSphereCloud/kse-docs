@@ -1,0 +1,300 @@
+---
+title: 前端配置 QKE
+weight: 30
+---
+
+== Nginx 配置
+
+. 登录{product_name} FirstBox 节点。
+. 执行以下命令，查看 Webservice 节点信息。
++
+[source]
+----
+cat /etc/hosts | grep webservice
+----
+. 分别登录{product_name} Global Zone 的两个 Webservice 节点。
+. 执行以下命令，修改 `webconsole.conf` 文件。
++
+[source]
+----
+vim /etc/nginx/sites-available/webconsole.conf
+----
++
+. 按如下说明新增相关参数。
++
+[source]
+----
+  # 新增：
+   location /paas/ {
+       alias /pitrix/lib/pitrix-webconsole-paas/;
+       try_files $uri /paas/index.html;
+   }
+
+  # 新增一个 paas 路径
+   location ~ ^/(notify|iaas|hpc|epfs|cfw|iam|resources|accounts|nat|finance|paas|apig|smc)/static/(.*)$ {
+       alias /pitrix/lib/pitrix-webconsole-$1/static/$2;
+       expires 30d;
+   }
+----
+
+== Python 配置
+
+include::../../../../../_components/attention.adoc[]
+该操作会刷新 Webservice 节点数据，请提前备份好 Webservice 节点 /pitrix/lib/pitrix-webconsole 数据，避免定制化内容被覆盖而无法找回。
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录{product_name} FirstBox 节点。
+. 执行以下命令，修改 `settings.py` 文件。
++
+[source]
+----
+vim /pitrix/conf/variables/webs/webconsole/settings.py
+----
++
+. 在 `PITRIX_SETTINGS` 字段下新增如下 `qke_config` 配置。其中，**endpoint** 参数中 `<zone_id>` 为环境 Golbal Zone 的 ID，其他参数保持默认值即可。
++
+[source,py]
+----
+    'qke_config': {
+        'endpoint': '<zone_id>-webservice', # 代理的后端服务节点有 proxy，配置 proxy 节点，可以在配置之前使用 nc -zv <zone_id>-webservice 9102 检查一下
+        'port': 9102,
+        'verify_ssl': False,
+        'protocol': 'http',
+        'prefix': 'api/v1/qke'
+    },
+----
+
+. 执行以下命令，刷新配置到 Global Zone 的 Webservice 节点。其中， `<global_zone_id>` 为环境 Golbal Zone 的 ID。
++
+[source,py]
+----
+fb build_pkgs -p pitrix-ks-webservice-webconsole
+fb update <global_zone_id>-webservice pitrix-ks-webservice-webconsole
+----
+
+== 前端配置
+
+. 登录{product_name} FirstBox 节点。
+. 执行以下命令，查看 Webservice 节点信息。
++
+[source]
+----
+cat /etc/hosts | grep webservice
+----
+. 分别登录 Global Zone 的两个 Webservice 节点。以下所有操作均需在两个 Webservice 节点执行。
+. 执行以下命令，进入 configs 目录。
++
+[source]
+----
+cd /pitrix/lib/pitrix-webconsole-paas/configs
+----
+. 执行以下命令，创建并编辑 `local_config.yaml` 文件。
++
+[source]
+----
+vim local_config.yaml
+----
+内容参考如下示例：
++
+[source,yaml]
+----
+GLOBAL_CONFIG:
+  # AZ 组，主要用于创建集群时选择 AZ；这里的zone是全部的可用区范围！
+  zone_groups:
+    abroad: [xxx] # 海外AZ配置，若确认不支持海外，可以删除该字段及其配置
+    domestic: [xxx] # 国内AZ
+
+  support_base_network: true # 基础网络
+  support_muti_create: false # 是否支持多可用区部署
+  support_private_network: true # 私有网络
+  support_security_group: true # 安全组
+  support_storage_plugin: true # 存储插件
+  support_after_sale: false # 售后服务
+  support_abroad: false # 是否支持海外AZ
+  support_voucher: false # 快速入门——代金券
+  support_quickly_video: false # 快速入门——视频演示
+  support_quickly_create: false # 快速入门——快速创建入门集群
+  support_wechat_group: false # 快速入门——微信交流群
+
+  private_cloud_env: true       # 企业云环境
+
+  support_billing: false # 计费相关配置
+  support_order: false # 订单
+  support_subscription: false # 包年包月
+
+  charge_options:
+    renew_duration: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60] # 续费周期，若环境确认不支持计费，可删除该字段及其配置
+
+  qke_app_id: app-o6lvbkhm
+  qke_plus_edtions: # qke 版本
+    - edition_id: appe-plezercv # 版本 id
+      name: Hosting cluster # 版本名称
+      type: hosting-edition # 版本类型
+      support: false # 具体详见开关字段说明
+    - edition_id: appe-afcm87o7
+      name: Self-Managed cluster
+      type: self-edition
+      support: true
+    - name: Serverless cluster
+      type: serverless-edition
+      support: false
+
+  # 可视化工具控制
+  cluster_visualizer:
+    - key: install_kubesphere # 免费的kubesphere服务
+      support: false # 1.这里默认用户购买了 QKCP，所以隐藏了KS；2.若用户未购买QKCP，就开放并选中KS，让QKCP可选（引导用户购买）
+    - key: install_qkcp
+      support: true # 为 true 表示支持改功能
+      checked: true # checked true 表示创建时默认选中的工具，有且只有一个对象添加该字段，且该对象support 必须是 true ！
+    - key: install_kubernetes
+      support: false
+
+  # 文档
+  docs_url:
+    guide_href: /container/qke_plus/intro/introduction/
+    self_href: /container/qke_plus/quickstart/create_selfmgt_cluster/
+
+
+ZONE_CONFIG:
+  default:
+    valid_sider_features:
+      - name: paas
+        title: KubeSphere®(QKE)
+        portal_name: paas #此属性名是为了和主portal的菜单进行区分的字段，子portal的收藏功能显示会加上此前缀，用来区分是不是子项目
+        icon: fuse #子portal 标题对应的 lego-ui中 icon name
+        related_names: [] # 为空表示：不设置关联服务
+        items:
+          - {
+              name: quickstart,
+              title: 快速入门,
+              icon: guidepost,
+              zh-cn: 快速入门,
+              en: Quick Start,
+            }
+          - {
+              name: clusters,
+              title: 集群管理,
+              icon: cluster-service,
+              zh-cn: 集群管理,
+              en: Cluster List,
+            }
+      - name: cluster
+        title: Cluster Detail
+        portal_name: paas
+        icon: fuse
+        related_names: []
+        items:
+          - {
+              name: overview,
+              title: 集群概览,
+              icon: dashboard,
+              zh-cn: 集群概览,
+              disabled: 0,
+              en: Cluster Overview,
+            }
+          - {
+              name: info,
+              title: 集群信息,
+              icon: details,
+              zh-cn: 集群信息,
+              disabled: 0,
+              en: Cluster Info,
+            }
+          - name: sourcemanage
+            title: 资源管理
+            icon: resource-management
+            zh-cn: 资源管理
+            disabled: 0
+            en: Source Management
+            items:
+              - {
+                  name: nodes,
+                  title: 节点管理,
+                  icon: node-management,
+                  zh-cn: 节点管理,
+                  disabled: 0,
+                  en: Node Management,
+                }
+              - {
+                  name: resources,
+                  title: 挂载资源,
+                  icon: resource,
+                  zh-cn: 挂载资源,
+                  disabled: 0,
+                  en: Hang Source,
+                }
+              - {
+                  name: workloads,
+                  title: 工作负载,
+                  icon: apps-duotone,
+                  zh-cn: 工作负载,
+                  disabled: 0,
+                  en: Workloads,
+                }
+              - {
+                  name: services,
+                  title: 服务,
+                  icon: service,
+                  zh-cn: 服务,
+                  disabled: 0,
+                  en: Service,
+                }
+          - {
+              name: console,
+              title: 可视化控制台,
+              icon: visualization,
+              zh-cn: 可视化控制台,
+              disabled: 0,
+              en: Visual Console,
+            }
+          - name: clustermaintenance
+            title: 集群运维
+            icon: maintain
+            zh-cn: 集群运维
+            disabled: 0
+            en: Cluster Maintenance
+            items:
+              - {
+                  name: logs,
+                  title: 日志管理,
+                  icon: pen-log,
+                  zh-cn: 日志管理,
+                  disabled: 0,
+                  en: Cluster log,
+                }
+              - {
+                  name: monitors,
+                  title: 监控管理,
+                  icon: web-monitor,
+                  zh-cn: 监控管理,
+                  disabled: 0,
+                  en: Monitor Management,
+                }
+              - {
+                  name: alarms,
+                  title: 告警管理,
+                  icon: notification,
+                  zh-cn: 告警管理,
+                  disabled: 0,
+                  en: Alarm Management,
+                }
+              - {
+                  name: upgradecheck,
+                  title: 升级检查,
+                  icon: update,
+                  zh-cn: 升级检查,
+                  disabled: 0,
+                  en: Upgrade Check,
+                }
+    default_volume_class: 6
+    default_volume_class_config: { key: "volume_class", default: 6, range: [6] }
+    default_volume_size_config: { min: 100, max: 2000, step: 10 }
+----
+
+. 配置完成后，执行以下命令，重启 Apache 服务。
++
+[source]
+----
+service apache2 restart
+----
+

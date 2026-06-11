@@ -1,0 +1,88 @@
+---
+title: 测试准备
+description: 
+weight: 2
+---
+
+在开始测试前期，需将影响到 I/O 性能的因素，尽量提前排除。详细操作如下。
+
+== 日志设置
+
+需逐个登录当前环境中的存储节点，检查各模块日志级别为 INFO，避免因为系统打日志而影响到 I/O 速度。
+
+include::../../../../../../_components/note.adoc[]
+
+* 日志配置文件路径为：`/qingstor/etc`
+* 日志文件路径为：`/qingstor/log`
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录至当前环境中的 FB 节点。
+
+. 从 FB 节点依次跳转至存储节点。
+. 进入配置文件路径。
++
+[source,shell]
+----
+# cd /qingstor/etc
+----
+
+. 查看各模块日志文件的配置信息，修改 `log_level` 字段为 `INFO`。
++
+[source,shell]
+----
+# cat {module_name}.yaml
+......
+log_level = INFO
+......
+----
++
+
+include::../../../../../../_components/note.adoc[]
+
+* 日志文件名为：`{module_name}.yaml`，其中 `{module_name}` 为模块名，需根据实际情况进行修改。
+* `log_level` 字段是 `INFO`，则无需修改。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 修改 `log_level` 字段后，需重启相应的模块。
++
+[source,shell]
+----
+# docker restart {module_name}
+----
+
+
+== 操作系统优化
+
+性能表现不光和服务器强相关，跟客户端的优化配置也有密切关系。一般情况下，压测工具比如 FIO 可能会大量消耗 CPU，建议对系统进行优化后，再进行性能测试。
+
+如将 cpu profile 设置为高性能，一些服务器默认出厂设置就是节能模式，可能会导致性能减半。详细操作如下。
+
+include::../../../../../../_components/note.adoc[]
+
+建议服务端与客户端均进行以下操作。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 安装 CPU 模式无图形化切换器
++
+[source,shell]
+----
+# apt install cpufrequtils
+----
+
+. 使用 cpupower 将 CPU 模式设置为 performance。
++
+[source,shell]
+----
+# cpupower frequency-set -g performance
+----
+
+. 查看当前的调节器
++
+[source,shell]
+----
+# cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+----
+

@@ -1,0 +1,163 @@
+---
+title: 查询共享单元资源（GetResourceShareAssociations）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Integer
+| false
+| 分页大小
+
+| offset
+| Integer
+| false
+| 分页偏移量
+
+| owner
+| String
+| false
+| 资源的所有者
+
+| resource_share_id
+| String
+| false
+| 共享单元id
+
+| resource_type
+| String
+| false
+| 资源类型
+
+| zone
+| String
+| true
+| 请求区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| current_count
+| Integer
+| false
+| 当前返回的共享单元数量
+
+| resource_types
+| Array
+| false
+| 资源类型
+
+| resources
+| Array
+| false
+| 共享单元资源
+
+| resources[].create_time
+| String
+| false
+| 共享资源添加时间
+
+| resources[].res_relation
+| Object
+| false
+| 资源关系
+
+| resources[].res_relation.resource_id
+| String
+| false
+| 关联资源id
+
+| resources[].res_relation.resource_name
+| String
+| false
+| 关联资源id
+
+| resources[].resource_id
+| String
+| false
+| 资源id
+
+| resources[].resource_name
+| String
+| false
+| 资源名称
+
+| resources[].resource_share_id
+| String
+| false
+| 共享单元id
+
+| resources[].resource_type
+| String
+| false
+| 资源类型
+
+| resources[].status
+| String
+| false
+| 共享单元资源状态
+
+| total_count
+| Integer
+| false
+| 共享单元总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetResourceShareAssociations",
+  "limit": 10,
+  "offset": 0,
+  "owner": "admin",
+  "resource_share_id": "rsg-7d3vqp5i",
+  "resource_type": "",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetResourceShareAssociationsResponse",
+  "current_count": 2,
+  "resource_types": [
+    "vxnet"
+  ],
+  "resources": [
+    {
+      "create_time": "2023-07-04T15:30:42",
+      "res_relation": {
+        "resource_id": "rtr-otvwgmak",
+        "resource_name": "vpc-yec8"
+      },
+      "resource_id": "vxnet-9ll660z",
+      "resource_name": "vxnet-ndzh",
+      "resource_share_id": "rsg-7d3vqp5i",
+      "resource_type": "vxnet",
+      "status": "true"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 2,
+  "trace_id": "IiVlvo7A"
+}
+----

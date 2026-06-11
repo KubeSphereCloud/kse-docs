@@ -1,0 +1,79 @@
+---
+title: "创建数据库用户"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, MySQL, 管理告警规则组, 创建数据库用户"
+description: "介绍如何创建数据库用户。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 8aa7b1e305334094992d799b731be283
+:ks_xref_id: 30f7a1583ccb497792eaf02e7bb6b675
+:ks_comp: ../../../../components/
+:ks_title: 创建数据库用户
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, MySQL, 管理告警规则组, 创建数据库用户
+:ks_description: 介绍如何创建数据库用户。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何创建数据库用户。
+
+
+== 前提条件link:[id=f5518fa6831c4d2d88d4534c06037227]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-installRadondbmysql.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=ba8aa8e54c564a89a71b0fef04b94bab]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面右侧点击**数据库用户**页签，然后点击**创建**。
+
++
+
+. 在**创建用户**对话框，设置用户名和密码，然后点击**确定**。用户创建完成后将显示在用户列表中。
++
+--
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-para-usernamePassword.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* 不支持创建 **root** 或以 **radondb**_ 开头的名称。
+
+* 不支持创建同名用户。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
++

@@ -1,0 +1,90 @@
+---
+title: 修改子用户的属性（ModifySubUserAttributes）
+weight: 23
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| change_passwd_first_login
+| Int
+| false
+| 子用户第一次登录是否需要修改密码
+
+| email
+| String
+| false
+| 子用户的电子邮件地址
+
+| nologin
+| Int
+| false
+| 子用户是否禁止登录
+
+| notify_email
+| String
+| false
+| 子用户的告警电子邮件地址
+
+| passwd
+| String
+| false
+| 子用户的密码
+
+| user
+| String
+| true
+| 子用户的用户ID
+
+| user_name
+| String
+| false
+| 子用户的用户名称
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 子用户的用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifySubUserAttributes",
+  "change_passwd_first_login": 0,
+  "email": "xxx@testing.com#aa",
+  "nologin": 0,
+  "notify_email": "xxx@testing.com",
+  "pssswd": "Atom@666",
+  "user": "usr-xqm5ieFD",
+  "user_name": "aa"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifySubUserAttributesResponse",
+  "ret_code": 0,
+  "user_id": "usr-xqm5ieFD"
+}
+----

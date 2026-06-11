@@ -1,0 +1,71 @@
+---
+title: 修改用户区域权限（ModifyZonePrivilege）
+weight: 26
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| privilege
+| Integer
+| false
+| 特权
+
+| role
+| String
+| false
+| 角色
+
+| user
+| String
+| true
+| 用户
+
+| zone
+| String
+| true
+| 区域ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 用户DI
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "privilege": 0,
+  "role": "root_user",
+  "user": "admin",
+  "zone": "pk3"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyZonePrivilegeResponse",
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

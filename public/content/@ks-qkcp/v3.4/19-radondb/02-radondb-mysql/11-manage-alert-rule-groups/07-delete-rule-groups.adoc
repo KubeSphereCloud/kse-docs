@@ -1,0 +1,93 @@
+---
+title: "删除规则组"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 删除规则组"
+description: "介绍如何删除规则组。"
+weight: 07
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: f7e3cbc0d3f540a1b584da72d3ad6f58
+:ks_xref_id: 6dac6bda878d4ebe8616b56cc71cc21d
+:ks_comp: ../../../../components/
+// :ks_include_id: 
+:ks_xref_id: 
+:ks_title: 删除规则组
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 删除规则组
+:ks_description: 介绍如何删除规则组。
+:ks_weight: 07
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+本节介绍如何删除告警规则组。
+
+
+== 前提条件link:[id=27b4478dc76346a8ab0df9d01f3118f7]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-installRadondbmysql.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-createAlertGroup.adoc[]
+
+
+== 删除单个规则组link:[id=8a9aaa42ff71452f92391bc4516667c3]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-deleteASingleAlertingPolicy.adoc[]
+
+
+== 批量删除规则组link:[id=c4fe5615f3724e01b364852ddf683243]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-deleteMultipleAlertingPolicies.adoc[]

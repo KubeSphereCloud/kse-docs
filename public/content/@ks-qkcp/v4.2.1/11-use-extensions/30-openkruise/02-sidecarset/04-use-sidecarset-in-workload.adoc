@@ -1,0 +1,21 @@
+---
+title: "在工作负载中引用 SidecarSet"
+weight: 04
+---
+本节介绍如何在创建其他工作负载时引用 SidecarSet，以实现 Sidecar 容器的自动注入。
+
+== 前提条件
+
+* 已完成 SidecarSet 的创建，且目标 SidecarSet 未处于暂停注入状态。
+* SidecarSet 的生效范围包含目标工作负载所在的项目。
+* KubeSphere 平台需要安装并启用 OpenKruise 扩展组件。
+
+== 操作步骤
+
+. 登录 KubeSphere Web 控制台，进入目标集群的目标项目，在左侧导航栏选择 *工作负载 > 部署*。
+. 点击 *创建*，按照向导填写基本信息后，进入 *容器组设置* 页签。
+. 在 *容器组设置* 页签中，点击 *注入 Sidecar 容器*。
+. 在弹出的列表中选择目标 SidecarSet，然后继续完成工作负载的创建。
+
+若目标 SidecarSet 处于暂停注入状态，或其生效范围不包含当前项目，则该 SidecarSet 不会出现在可选列表中。
+

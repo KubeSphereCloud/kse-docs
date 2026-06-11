@@ -1,0 +1,88 @@
+---
+title: 升级集群（UpgradeClusters）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_version
+| String
+| true
+| 应用版本ID
+
+| clusters
+| Array
+| false
+| 集群ID
+
+| zone
+| String
+| true
+| 可用区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cluster_ids
+| Array
+| false
+| 集群ID
+
+| job_id
+| String
+| false
+| 任务ID
+
+| resize_info
+| Array
+| false
+| 规格调整信息
+
+| ret_code
+| Integer
+| false
+| 返回状态码
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "UpgradeClusters",
+  "app_version": "appv-d2y26t9e",
+  "clusters": [
+    "cl-2kogt3ly"
+  ],
+  "zone": "pek3b"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "UpgradeClustersResponse",
+  "cluster_ids": [
+    "cl-2kogt3ly"
+  ],
+  "job_id": "j-blzcimhpvy6",
+  "resize_info": [],
+  "ret_code": 0,
+  "trace_id": "ezAIS04H"
+}
+----

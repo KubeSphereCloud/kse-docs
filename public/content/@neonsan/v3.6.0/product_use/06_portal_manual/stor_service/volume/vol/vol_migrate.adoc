@@ -1,0 +1,25 @@
+---
+title: '在线迁移卷'
+weight: 12
+draft: false
+---
+
+. 登录 link:../../../../login[Portal 管理界面]。
+
+. 选择左侧导航栏**存储服务** > **块存储** > **卷管理**，进入卷管理页面。
+
+. 点击待迁移的卷右侧的更多操作，在弹出的选项列表中选择 **在线迁移卷**。
++
+image::/images/neonsan/portal_vol_more_opera.png[]
+
+. 在弹出的**在线迁移卷**窗口中，选择**目标存储池**后，点击**迁移**。
++
+
+include::../../../../../../../_components/attention.adoc[]
+* 目标存储池的剩余空间需大于容量的 20%；
+* 单副本卷、互斥卷、异步及同步灾备卷暂不支持在线迁移；
+* 卷的在线迁移过程为异步任务，可通过 “存储服务 > 后台任务” 查看相关进度和结果。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_vol_migrate_1.png[,40%]

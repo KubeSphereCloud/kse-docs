@@ -1,0 +1,87 @@
+---
+title: "检查 NeonSAN 各服务状态"
+weight: 4
+---
+
+
+. 逐个登录 NeonSAN 存储节点。 
+. 在 NeonSAN 存储节点上使用 ``supervisor`` 命令，查看当前节点上各服务状态。返回结果中，各服务状态为 ``RUNNING``，即为正常。
++
+* 方式一：查询所有服务的状态。
++
+[,shell]
+----
+supervisorctl status 
+----
++
+image::/images/neonsan/polling_neon_service_1.png[,70%]
+
+* 方式二：指定服务名称，查询指定服务的状态。
++
+[,shell]
+----
+supervisorctl status neonstore
+----
++
+image::/images/neonsan/polling_neon_service_2.png[,70%]
++
+include::../../../../../_components/note.adoc[]
+`neonstore` 为服务名称，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+
+////
+== 分别查看各项 NeonSAN 服务状态
+
+. 逐个登录 NeonSAN 存储节点。 
+. 在 NeonSAN 存储节点上使用 ``supervisor`` 命令查看各服务运行状态，状态为 ``RUNNING``，即表示服务正常。  
++
+* 查看 store 服务运行状态
++
+[,shell]
+----
+supervisorctl status neonstore 
+----
++
+
+* 查看 center 服务运行状态
++
+[,shell]
+----
+supervisorctl status neoncenter 
+----
+* 查看 monitor 服务运行状态
++
+[,shell]
+----
+supervisorctl status neonmonitor 
+----
+* 查看 prometheus 服务运行状态
++
+[,shell]
+----
+supervisorctl status prometheus
+----
+* 查看 alertmanager 服务运行状态
++
+[,shell]
+----
+supervisorctl status alertmanager 
+----
+* 查看 Alerter 服务运行状态
++
+[,shell]
+----
+supervisorctl status alerter 
+----
+* 查看 galera 服务运行状态
++
+[,shell]
+----
+supervisorctl status galera_cluster
+----
+////
+
+

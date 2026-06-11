@@ -1,0 +1,9 @@
+---
+title: "配置 NeonSAN 服务"
+weight: 3
+---
+
+
+当节点服务器充足时，neonsan-center 服务与 Common 服务要尽量分配在不同的节点上，其中 Common 服务主要包括 ZooKeeper 服务、数据库服务以及 Portal 服务等。Common 服务需部署于 3 个节点上。与 IaaS 融合部署场景下，Commom 部署在 IaaS KS 节点上拉起的 3 个虚机上。 +
+
+NeonSAN 服务主要包括 neonsan-center 和 neonsan-store 等服务，至少需要 3 个节点。

@@ -1,0 +1,17 @@
+---
+title: "日志文件开启说明"
+weight: 03
+---
+
+查看上一节了解如何查看和编辑配置文件，然后配置日志输出。
+
+需要在 `.spec.kubernetesConfig.logOutput` 中定义相关内容，默认为空，输出到标准输出（注意：修改后会滚动更新）。
+
+[,yaml]
+----
+kubernetesConfig:
+  ...
+  logOutput: stdout  # stdout 或 logfile
+----
+
+

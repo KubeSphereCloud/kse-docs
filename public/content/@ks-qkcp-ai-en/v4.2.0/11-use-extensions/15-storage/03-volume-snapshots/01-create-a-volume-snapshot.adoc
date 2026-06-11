@@ -1,0 +1,66 @@
+---
+title: "Create a Volume Snapshot"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Volume Snapshot, Create a Volume Snapshot"
+description: "Describes how to create a volume snapshot."
+weight: 01
+---
+
+:ks_permission: **Volume Snapshot Management**
+:ks_navigation: **Storage > Volume Snapshots**
+
+
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-desc-createAVolumeSnapshot.adoc[]
+
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-para-volumeSnapshot.adoc[]
+
+
+== Prerequisites
+
+* The **KubeSphere Storage** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-prer-persistentVolumeCreated.adoc[]
+
+// :relfileprefix: ../../../../
+// * Ensure the backend storage system supports volume snapshot functionality and that volume snapshot is enabled on the storage class corresponding to the PersistentVolumeClaim. For more information, refer to xref:07-cluster-management/08-storage/02-storage-classes/05-enable-and-disable-volume-operations.adoc[Enable and Disable Volume Operations].
+
+// :relfileprefix: ./
+
+* Ensure the backend storage system supports volume snapshot functionality and that volume snapshot is enabled on the storage class corresponding to the PersistentVolumeClaim. How to: Storage Class > Operations > Set Volume Operations > Enable Volume Snapshot Creation.
+
+== Method 1: Volume Snapshots > Create a Volume Snapshot
+
+In a cluster, you can directly create a volume snapshot for a PersistentVolumeClaim under the **Volume Snapshots** menu.
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-oper-createAVolumeSnapshot.adoc[]
+
+== Method 2: PersistentVolumeClaims > Create a Volume Snapshot
+
+In a cluster or project, you can create a volume snapshot for a PersistentVolumeClaim under the **PersistentVolumeClaims** menu.
+
+. Log in to the KubeSphere web console as a user with **PersistentVolumeClaim Management** and pass:a,q[{ks_permission}] permissions, and enter your cluster or workspace.
+
+. Select **Storage > PersistentVolumeClaims** from the left navigation pane.
+
+. In the PersistentVolumeClaim list, click the name of a PersistentVolumeClaim to open its details page.
++
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-oper-createAVolumeSnapshot.adoc[]

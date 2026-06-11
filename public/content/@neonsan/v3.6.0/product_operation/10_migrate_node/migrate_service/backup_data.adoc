@@ -1,0 +1,34 @@
+---
+title: "迁移并备份数据"
+weight: 1
+---
+
+. 逐一登录至原集群管理节点。
+. 迁移当前节点上的数据。
++
+include::../../../../../_components/note.adoc[]
+可参考“《NeonSAN 运维手册》：异常处理 > 数据迁移 > 迁移节点数据”相关内容。
+include::../../../../../_components/table_footer.adoc[]
+
+. 备份数据库。 
+.. 备份 mysql_neonsan。
++
+[,shell]
+----
+mysqldump -R -u$user -p$passwd -P 3306 -h $mysql_ip neonsan --set-gtid-purged=off --skip-add-locks --skip-lock-tables > /var/log/db_bak_neonsan$(date "+%Y%m%d")
+----
+
+.. 备份 mysql_qingstor。
++
+[,shell]
+----
+mysqldump -R -u$user -p$passwd -P 3307 -h $mysql_ip qingstor-zero-web--set-gtid-purged=off --skip-add-locks --skip-lock-tables > /var/log/db_bak_web$(date "+%Y%m%d")
+----
++
+参数说明：
++
+* ``-u``：用于指定数据库的用户名，需根据实际情况进行修改。
+* ``-p``：用于指定数据库相应用户名的密码，需根据实际情况进行修改。
+* ``-h``：用于指定当前管理节点 IP 地址，需根据实际情况进行修改。
+
+

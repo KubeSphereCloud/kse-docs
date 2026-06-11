@@ -1,0 +1,86 @@
+---
+title: Console 页面不显示导入的 AppCenter 应用
+weight: 3
+---
+
+== 问题描述
+
+AppCenter 应用导入{product_name}后，Console 页面不显示导入的应用版本。
+
+== 可能原因
+
+配置出错，根据解决方法，逐步排除。
+
+== 解决方法
+
+=== 步骤一：确认 `console_id`
+
+确认使用导入脚本时，`console_id` 是否正确配置或默认 `console_id` 是否为预期值。
+
+* 若 `console_id` 不为预期值，可修改后，使用脚本再次导入 AppCenter 应用镜像包后，再次登录 Console 页面查看。
+* 若 `console_id` 正常配置，继续下一步。
+
+
+=== 步骤二：确认 BOSS 设置
+
+登录 BOSS，确认应用版本是否设置为 `公开`。
+
+. 登录 BOSS。
+. 点击**资源管理** > **AppCenter** > **云应用**，进入**云应用**列表页面。
+. 在**云应用**列表页面，检索已导入但未展示的 AppCenter 应用，点击应用名称，进入应用详情页面。
+. 在应用详情页面点击未显示的目标版本，进入版本详情页面。
+. 在版本详情页面，确认 `可见范围` 字段设置为 `公开`。
++
+image::/images/ep_offline/installation/app_import_faq_4.png[]
+
+. 若版本详情页面的 `可见范围` 字段为 `私有`，可登录{product_name}后台，更新 `app_approved_version` 表中的字段 `visibility` 的值更新为 `public`。
+. 再次登录 Console 页面查看。
+
+=== 步骤三：确认镜像是否导入
+
+确认当前环境中，镜像是否导入成功。
+
+. 登录 BOSS。
+
+. 点击**资源管理** > **AppCenter** > **云应用**，进入**云应用**列表页面。
+. 在**云应用**列表页面，检索已导入但未展示的 AppCenter 应用，点击应用名称，进入应用详情页面。
+. 在应用详情页面点击未显示的目标版本，进入版本详情页面。
+. 在版本详情页面，点击**配置文件** > **关联资源** > **镜像**，查看镜像列表中的 `镜像 ID`。
++
+image::/images/ep_offline/installation/app_import_faq_4.png[]
+
+. 登录{product_name}后台，在 Zone 数据库的 `image` 表的 `img-id` 字段中查询上一步获取到的 `镜像 ID`。
++
+* 若不存在，在 Global 中执行 CLI `open_app_version_image`。
+* 若存在，需要登录 Seed 节点确认镜像文件是否真实存在。 若 Seed 节点上未查询到镜像，则需要在当前 Seed 节点对应的 Zone 中再次执行导入脚本并携带 `--image-only` 参数。
+
+. 再次登录 Console 页面查看。
+
+=== 步骤四：修改后台配置
+
+include::../../../../../_components/note.adoc[]
+
+
+如果对接了配置中心，可直接在配置中心进行修改。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录{product_name}后台，在配置文件 `/pitrix/lib/pitrix-webconsole/mysite/local_config.yaml` 中修改或增加如下配置内容。
++
+[source,yaml]
+----
+GLOBAL_CONFIG:
+ 
+     appcenter_support_new_zones: ['sh1a', 'sh1b', 'sh1']    # 添加私有云所有 Zone ID 与 Region ID。
+----
+
+. 修改完所有节点后执行以下命令行，重启 `apache` 服务。
++
+[source,shell]
+----
+systemctl restart apache2
+----
+
+
+
+

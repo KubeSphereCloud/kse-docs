@@ -1,0 +1,40 @@
+---
+title: 查看 qs_global_gateway 日志
+weight: 3
+---
+
+`qs_global_gateway` 用于处理转发至 Global 的请求。如，与 IaaS 和 Portal 的交互，以及来自用户的 List Buckets 请求等。 
+
+include::../../../../../../_components/note.adoc[]
+
+多 Zone 环境中，Global Zone 才会部署 `qs_global_gateway` 服务。查看该服务需登录至 Global Zone 执行以下操作。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，跳转至 {product_name} 任一网关节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，查看 `qs_global_gateway` 日志。
++
+[source,shell]
+----
+less /qingstor/log/qs_global_gateway2.log
+less /qingstor/log/qs_global_gateway2.log.wf
+----
++
+include::../../../../../../_components/note.adoc[]
+
+运维人员严禁使用 `vi` 查看日志文件。`less` 用法参考link:../less[前文内容]
+
+include::../../../../../../_components/table_footer.adoc[]

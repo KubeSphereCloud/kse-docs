@@ -1,0 +1,44 @@
+---
+title: "View and Download Resource Files"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Resource Management"
+description: "Introduces how to view k8s resources in a project through a File-tree format."
+weight: 01
+---
+
+:ks_navigation:  **DevOps > Resource Management**
+
+This section describes how to view Kubernetes resources in a project through a directory tree format.
+
+== Prerequisites
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+* A workspace, a DevOps project, and a user (e.g., **project-regular**) have been created. The user has been invited to the DevOps project and granted the **operator** role. Please refer to link:../../02-devops-project-mangement/03-project-members/01-invite-a-user-to-a-project/[Invite a User to a DevOps Project].
+
+== Steps
+
+include::../../../../_custom/devops/project-regular-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/devops/devops-oper-dropdownList.adoc[]
+
+. Click to search for resource files, or click a directory name to view the files within that directory in the right pane.
++
+--
+* Click the image:/images/ks-qkcp/zh/icons/triangle-right.svg[,18,18] to the left of a directory to expand that single directory.
+
+* Click the image:/images/ks-qkcp/zh/icons/fold.png[,18,18] to the right of **All Resources** to collapse all directories. Click image:/images/ks-qkcp/zh/icons/refresh-new.png[,18,18] to refresh the directories.
+--
+
+. In the right pane, click a file within a directory to view it.
++
+--
+* Click the image:/images/ks-qkcp/zh/icons/collapse1.svg[,18,18] at the top to collapse the directory tree area. Click image:/images/ks-qkcp/zh/icons/expand1.svg[,18,18] again to expand the directory tree area.
+
+* Click the image:/images/ks-qkcp/zh/icons/download-light.png[,18,18] in the top right corner to download the current resource file.
+--

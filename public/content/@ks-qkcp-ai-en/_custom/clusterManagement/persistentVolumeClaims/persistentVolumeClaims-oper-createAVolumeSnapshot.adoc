@@ -1,0 +1,20 @@
+// :ks_include_id: f523ebef727d479488a3ad33a373f462
+. On the Persistent Volume Claim details page, click **Operation > Create Snapshot**.
+
+. In the **Create Snapshot** dialog box, set the name and volume snapshot class for the volume snapshot, then click **OK**.
++
+--
+[%header,cols="1,4"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the volume snapshot. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and can be up to 253 characters long.
+
+|Volume Snapshot Class
+|
+include::persistentVolumeClaims-para-volumeSnapshotClass.adoc[]
+|===
+
+After creation, the volume snapshot will appear in the volume snapshot list on the **Volume Snapshots** page.
+--

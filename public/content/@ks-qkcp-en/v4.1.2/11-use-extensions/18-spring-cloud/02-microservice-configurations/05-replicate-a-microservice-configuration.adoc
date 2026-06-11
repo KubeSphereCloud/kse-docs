@@ -1,0 +1,45 @@
+---
+title: "Replicate Microservice Configuration"
+keywords: "Kubernetes, {ks_product-en}, project management, Spring Cloud, Replicate microservice configuration"
+description: "Learn how to replicate a microservice configuration."
+weight: 05
+---
+
+:ks_permission: **Spring Cloud Microservices Management**
+:ks_navigation: **Spring Cloud > Microservice Configurations**
+
+This section describes how to replicate a microservice configuration.
+
+You can use an existing microservice configuration to create a new microservice configuration with a different name but identical data.
+
+== Prerequisites
+
+* **KubeSphere Spring Cloud** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+== Steps
+
+include::../../../../_custom-en/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the microservice configuration you want to operate, and then select **Replicate** from the drop-down list.
+
+. In the **Replicate Microservice Configuration** dialog, set the name of the new microservice configuration, and then click **OK**.
++
+--
+// Note
+include::../../../../../_ks_components-en/admonitions/note.adoc[]
+
+You can also modify the configuration data as needed.
+
+include::../../../../../_ks_components-en/admonitions/admonEnd.adoc[]
+
+After replication, the newly generated microservice configuration will be displayed in the list.
+--

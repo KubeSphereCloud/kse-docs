@@ -1,0 +1,115 @@
+---
+title: "服务器 BIOS 检查及修改"
+weight: 2
+---
+
+不同机型的服务器，其 BIOS 配置不同，需根据实际情况进行配置，以下仅供参考：
+
+* 系统启动引导模式设置为 BIOS。
+* 系统时间为 UTC+8（建议设置时间为当前北京时间 -8 小时，每台云易捷服务器的时间误差 < 3 秒）。
+* 开启 CPU 虚拟化设置。
+* 开启 CPU 超线程。
+* 关闭 NUMA 设置。
+* 选择最大性能（Maximum Performance）。
+* IPMI 配置。
+* 系统盘组 RAID 1 模式，数据盘采用直通模式。
+
+
+////
+以浪潮 M6 服务器为例，对各个服务器的 BIOS 进行检查和修改，具体操作如下。
+
+. 服务器开机后，根据提示按 ``DEL`` 键，进入服务器 BIOS 设置页面。
++
+image::/images/express/delivery/install_delopy_3.png[,50%]
+
+. **修改 BIOS 时间，将 BIOS 时间调整为北京时间 -8 小时**。使用 ``Tab`` 键或 ``Enter`` 键在系统日期和时间各项进行切换，直接输入相应数值进行修改。
++
+例如，当前时间为 13:33，则北京时间 -8 小时即为早上 5:33。
++
+include::../../../../../../_components/note.adoc[]
+操作系统识别的 BIOS 时间会误认为 UTC 时间时区为 0，安装选择的区域若是中国 CST 时间，则时区为 8，所以操作系统会自动把 UTC 时间转换成 CST 时间，从而导致快 8 个小时，为了规避此问题，需要进行此设置。
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/delivery/install_delopy_4.png[,50%]
+
+. 在 BIOS 的 **Advanced** 页面，选择 ``CSM configuration``。
++
+include::../../../../../../_components/note.adoc[]
+浪潮 M6 机器，在 UEFI 模式下，才能看到 RAID 卡。此操作是为了配置 RAID 组。
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/delivery/install_delopy_5.png[,50%]
+
+. 将服务器启动方式由 ``Legacy only`` 修改为 ``UEFI only``，按 ``F10`` 保存，服务器将会重启。
++
+image::/images/express/delivery/install_delopy_6.png[,50%]
+
+. 返回 Advanced 页面，选择 ``Avago <INSPUR 3408 IMR> Configuration Utility``，按 ``Enter`` 键，进入 RAID 卡设置页面，需**将服务器的系统盘设置为 RAID 1 模式，数据盘为直通模式**。
++
+image::/images/express/delivery/install_delopy_7.png[,50%]
+
+. 进入 ``Create Virtual Drive`` 界面。
+.. 在 RAID 卡设置主界面，选择 ``Main Menu`` 并按 ``Enter``。
++
+image::/images/express/delivery/install_delopy_8.png[,50%]
+
+.. 选择 ``Configuration Management`` 并按 ``Enter``。
++
+image::/images/express/delivery/install_delopy_9.png[,50%]
+
+.. 选择 ``Create Virtual Drive`` 并按 ``Enter``。
++
+image::/images/express/delivery/install_delopy_10.png[,50%]
+
+. 确定 RAID 级别。 
+.. RAID 卡设置页面，选择 ``Select RAID Level`` 并按 ``Enter``。
+.. 在弹出的 RAID 级别选择框中选择 ``RAID1``。
++
+image::/images/express/delivery/install_delopy_11.png[,50%]
+
+. 添加并配置系统盘。
+.. 选择 ``Select Drives``，并按 ``Enter``。
++
+image::/images/express/delivery/install_delopy_12.png[,50%]
+.. 在 ``CHOOSE UNCONFIGURED DIVES`` 列表中，选择相应的磁盘（系统盘），并设置成 ``Disabled``，并按 ``Enter``。
++
+image::/images/express/delivery/install_delopy_13.png[,50%]
+
+.. 选择 ``Apply Changes``，并按 ``Enter``。
++
+image::/images/express/delivery/install_delopy_14.png[,50%]
+
+.. 弹出相应的提示框后，选择 ``OK``，并按 ``Enter``，完成系统盘 RAID 1 模式的配置。
+
+. 保存配置。
+.. 选择 ``Save Configuration``，并按 ``Enter``。
++
+image::/images/express/delivery/install_delopy_15.png[,50%]
+
+.. 选择 ``Confirm`` 并按 ``Enter``，并选择 ``No``。 
++
+image::/images/express/delivery/install_delopy_16.png[,50%]
+
+. 返回 ``Main Menu`` 界面，选择 ``Controller Management``，并按 ``Enter``。
++
+image::/images/express/delivery/install_delopy_17.png[,50%]
+
+. 选择 ``Advanced Controller Properties``，并按 ``Enter``。
++
+image::/images/express/delivery/install_delopy_18.png[,50%]
+
+. 选择 ``JBOD Mode``，并按 ``Enter``。
++
+image::/images/express/delivery/install_delopy_19.png[,50%]
+
+. 选择 ``Apply Change``，并按 ``Enter``。 
++
+image::/images/express/delivery/install_delopy_20.png[,50%]
+
+. 返回至 BIOS 的 **Advanced** 页面，选择 ``CSM configuration``，将服务器启动方式修改会 ``Legacy only``。
+
+. 其他服务器也参考上述步骤进项 BIOS 的修改与配置。
+////
+
+
+

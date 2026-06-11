@@ -1,0 +1,83 @@
+---
+title: 获取账户锁（DescribeUserLocks）
+weight: 16
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| true
+| console
+
+| limit
+| Int
+| true
+| 
+
+| offset
+| Int
+| true
+| 
+
+| users
+| Array
+| true
+| 用户id列表
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_lock_set
+| Array
+| false
+| 账户锁列表
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "console_id": "",
+  "limit": 20,
+  "offset": 0,
+  "users": [
+    "admin"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeUserLocksResponse",
+  "ret_code": 0,
+  "total_count": 1,
+  "user_lock_set": [
+    {
+      "api": 1,
+      "console_id": "devopscloud",
+      "passwd": "$2b$12$Lo/RSWn9FQmqqny9ufRV8.IXex2mVL2VYSy1QPl.tqehGNFrbVzze",
+      "root_user_id": "admin",
+      "session": 1,
+      "status": "locked",
+      "user_id": "admin"
+    }
+  ]
+}
+----

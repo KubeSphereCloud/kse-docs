@@ -1,0 +1,68 @@
+---
+title: "调整 RadonDB PostgreSQL 数据库资源"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB PostgreSQL, 应用管理, 调整资源"
+description: "如何在{ks_product_both}上调整 RadonDB PostgreSQL 数据库资源。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: ba6f29297e4a4f249990fa41bab7a2b8
+:ks_xref_id: c7324e939db943159e2e8fc938dc69c0
+:ks_comp: ../../../../components/
+:ks_title: 调整 RadonDB PostgreSQL 数据库资源
+:ks_keywords: Kubernetes, {ks_product}, RadonDB PostgreSQL, 应用管理, 调整资源
+:ks_description: 如何在{ks_product_both}上调整 RadonDB PostgreSQL 数据库资源。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本小节主要介绍了如何在{ks_product_both}上调整 RadonDB PostgreSQL 数据库资源。
+
+
+== 前提条件link:[id=a0d61334c5ab4f66b3ed178ba745093e]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondpq-prer-installRadondbpq.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=0f1501324df1428396f7b67a312af1e1]
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+此操作可能会中断数据库服务，请在非高峰时段执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondbpq-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 调整资源**。
+
+. 在**调整资源**对话框，修改分配给数据库服务的 CPU 和内存资源，然后点击**确定**。

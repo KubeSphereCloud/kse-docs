@@ -1,0 +1,74 @@
+---
+title: "Install Apps from the App Store"
+keywords: "Kubernetes, {ks_product}, Project Management, App, View Project Overview Information"
+description: "Describes how to install apps from the App Store."
+weight: 01
+---
+
+
+:ks_permission: **App Instance Creation**
+:ks_navigation: **Application Workloads > Apps**
+
+
+This section describes how to install apps from the KubeSphere platform's App Store.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+// include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
+// +
+
+// include::../../../../../_ks_components/oper-navigate.adoc[]
+
+// +
+
+// include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
+// +
+
+// include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+// +
+
+// . In the **Create App** dialog box, click **From App Store**.
+
+. In the upper right corner of the page, click image:/images/ks-qkcp/zh/icons/grid.svg[grid,18,18], and then click **App Store**.
+
+. In the App Store, click the app template you want to use, and then click **Deploy** in the upper right corner.
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+If the **Deployment Notice** dialog box pops up, please read the relevant content carefully, and then click **Agree**.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. In the pop-up **Location** dialog box, select the installation location for the app, and then click **OK**.
+
++
+
+include::../../../../_custom/projectManagement/apps/apps-oper-installApp.adoc[]
+
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Apps in the App Store are published by workspace members with relevant permissions or provided by third parties. For more information about app feature parameters, please contact the app provider.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+After the app is created, it will be displayed in the app list of the project it belongs to.
+--

@@ -1,0 +1,35 @@
+---
+title: "WhizardTelemetry Observability Platform"
+keywords: "Kubernetes, {ks_product-en}, observability center, monitoring, alerting, events, notifications, logs, auditing, events, data pipeline, OpenSearch"
+description: "Learn how to use the WhizardTelemetry Observability Platform."
+weight: 06
+---
+
+The WhizardTelemetry Observability Platform is an enterprise-grade multi-cluster monitoring and alerting product, focusing on providing integrated cloud-native observability services. The platform offers multi-level, multi-dimensional, and multi-tenant metric monitoring and alerting capabilities from infrastructure to applications. Additionally, by the pluggable Whizard Observability Center, it achieves unified multi-cluster management capabilities for monitoring and alerting, as well as lightweight support for member and edge clusters.
+
+The WhizardTelemetry Observability Platform consists of the following extensions:
+// Below content is the same as extension-intro-ks.adoc
+
+- **WhizardTelemetry Platform Service**: It is the common service for all observability extensions of WhizardTelemetry Observability Platform. It is a common APIServer that providing backend platform services for all observability extensions.
+
+- **WhizardTelemetry Data Pipeline**: Provides the ability to collect, transform, and route observability data.
+
+- **OpenSearch Distributed Search and Analytics Engine**: KubeSphere's built-in log storage extension, used to store, search and analyze observability data including logs, auditing events, K8s events, and notification history etc.
+
+- **WhizardTelemetry Logging**: Provides multi-tenant real-time and historical log collection, query, export, storage, etc., for cloud-native applications, and can connect to log receivers such as ElasticSearch, OpenSearch, Kafka, etc.
+
+- **WhizardTelemetry Events**: Stores events of Kubernetes resources and provides multi-tenant event query and viewing functions.
+
+// - **WhizardTelemetry Auditing**: Provides auditing management for Kubernetes and KubeSphere: records user behaviors on the {ks_product-en} platform in real-time, and provides audit history query and viewing functions, which can quickly trace back the behaviors of users.
+
+- **WhizardTelemetry Monitoring**: Provides multi-tenant monitoring capabilities for cloud-native resources, including real-time and historical data display of core monitoring indicators for objects such as clusters, nodes, workloads, GPU, K8s control plane, etc. It includes the Whizard Observability Center.
+
+- **WhizardTelemetry Alerting**: Based on the monitoring data collected by KubeSphere, it manages alerting and alerting rules for different resource types and metrics data.
+
+// - **WhizardTelemetry Events Alerting**: Defines alerting rules for Kubernetes/KubeSphere auditing events, Kubernetes native events, and Kubernetes logs, evaluate incoming event data and log data, and send alerts to specified receivers such as HTTP endpoints.
+
+- **WhizardTelemetry Notification**: Manages notifications in multi-tenant Kubernetes environments. It can receive alerts, cloud events, and other types of events (such as audits and Kubernetes events) from different senders and send notifications to corresponding tenant receivers based on tenant labels (such as namespaces or users). Supports multiple notification channels such as email, Feishu, DingTalk, WeChat Work, Slack, Webhook, etc.
+
+- **Grafana for WhizardTelemetry**: An open and composable observability and data visualization platform, with many built-in dashboards to enhance the visualization capabilities of the WhizardTelemetry Observability Platform.
+
+- **Grafana Loki for WhizardTelemetry**: Supports viewing KubeSphere logs, audits, events, and notification history data stored in Loki on the Grafana console.

@@ -1,0 +1,52 @@
+---
+title: "Delete security group rules"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, security groups, rules, deletion"
+description: "Describes how to delete security group rules in the {ks_product} web console."
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 5d49c1423e4a48ba90f40d92c768ddef
+:ks_xref_id: 3e3aa3bbd20243d7aacd93268b08c374
+:ks_comp: ../../../components/
+:ks_title: Delete security group rules
+:ks_description: Describes how to delete security group rules in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, security groups, rules, deletion
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete security group rules in the {ks_product_abbr_full} web console.
+
+User **admin** can delete all security group rules in your cluster. Project administrators and operators can delete the security group rules created on their own, and project viewers cannot delete security group rules.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=3e20c415766d4843b6aa27411cddf422]
+
+include::../../../_custom-en/security-groups/security-group-rule-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=fce2078b5bda4d02a4566aa60e6e0e62]
+
+include::../../../_custom-en/security-groups/security-group-steps.adoc[]
+
+. On the **Security Groups** page, click the name of a security group to view its details.
+. On the **Inbound Traffic** or **Outbound Traffic** tab, find the security group rule that you want to delete, click image:/images/ksv/en/icons/more.svg[operation-menu,13], and then select **Delete** from the drop-down list.
+. Click **OK**.
++
+--
+// Warning
+
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+The security group rule cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

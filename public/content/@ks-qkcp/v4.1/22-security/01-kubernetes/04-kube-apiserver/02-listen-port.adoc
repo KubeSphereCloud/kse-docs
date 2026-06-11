@@ -1,0 +1,15 @@
+---
+title: "通信端口"
+weight: 02
+---
+
+编辑配置文件，修改监听地址。
+
+[,bash]
+----
+vim /etc/kubernetes/manifests/kube-apiserver.yaml
+
+# 修改监听地址为当前节点 IP，例如：172.31.73.241
+--advertise-address=172.31.73.241
+--bind-address=172.31.73.241
+----

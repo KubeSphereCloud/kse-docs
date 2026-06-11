@@ -1,0 +1,62 @@
+---
+title: 功能检查
+description: 
+weight: 3
+---
+
+确认当前环境能正常提供服务。
+
+== 检查 Console 功能
+
+在 Console 页面，确认能正常创建或删除 Bucket，能成功进行上传、下载、删除文件操作，确认 Console 页面其他功能都能正常使用。
+
+
+详细操作步骤如下。
+
+. 通过浏览器登录 Console。
++
+include::../../../../_components/note.adoc[]
+
+* 如果当前环境对接了云平台，直接登录云平台的 Console。
+* 若当前环境为独立部署，不对接云平台，直接登录 {product_name} 的 Console。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 创建或删除 Bucket 操作成功，上传、下载、删除文件操作成功，Console 页面其他功能，均能正常使用。
++
+include::../../../../_components/note.adoc[]
+
+详细操作步骤可参考《{product_name} Console 操作指南》。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+== 检查 Portal 功能
+
+在 Portal 页面，确认 Portal 首页以及其他子页面功能均正常，且页面能正常显示相关信息。确认文件存储功能和对象存储功能在页面能够正常操作。
+
+. 通过浏览器登录 Portal。
++
+include::../../../../_components/note.adoc[]
+Portal 登录信息可参考：
+
+* Portal 链接：`portal.<zone_id>.<global_domain>`
+
+* 默认用户名：`qingstor@<iaas_domain>`
+* 默认密码：`zhu88jie`
+
+include::../../../../_components/table_footer.adoc[]
+
+. 参考《{product_name} v5.0 Portal 操作指南》，确认 Portal 首页以及其他子页面功能均正常，且页面能正常显示相关信息。确认文件存储功能和对象存储功能在页面能够正常操作。
+
+. 查看 Portal 存储资源页面中，存储池，服务器，硬盘子页面，确保显示数量与当前环境中的硬件一致，并且无异常节点。
+
+. 在总览页面查看集群可用容量，确认集群剩余容量足够未来三个月使用。
++
+include::../../../../_components/note.adoc[]
+
+若集群剩余容量较少，不足以支撑未来三个月的使用，则需要申请扩容。
+
+include::../../../../_components/table_footer.adoc[]
+
+

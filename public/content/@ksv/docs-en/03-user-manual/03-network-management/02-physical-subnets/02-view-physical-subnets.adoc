@@ -1,0 +1,79 @@
+---
+title: "View physical subnets"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, physical subnets, list, view"
+description: "Describes how to view physical subnets in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 82c4fc8ae338494fba80946036fe1488
+:ks_xref_id: f25b3072e0244d08931e5572e7577fdb
+:ks_comp: ../../../../components/
+:ks_title: View physical subnets
+:ks_description: Describes how to view physical subnets in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, physical subnets, list, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view physical subnets in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=3a46165bd5c545eb93a0cf1681e9dd99]
+
+include::../../../../_custom-en/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=656f88a6a3da4b08af87d3c54e33a0b1]
+
+include::../../../../_custom-en/networks/physical-subnet-steps.adoc[]
+
++
+
+--
+You can view all the physical subnets in the system. The following table describes the parameters.
+
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the physical subnet.
+
+include::../../../../_custom-en/networks/physical-network-naming-convention.adoc[]
+
+|ID
+|The UUID of the physical subnet in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the physical subnet.
+
+|VLAN ID
+|The VLAN ID that corresponds to the physical subnet.
+
+|Physical Network
+|The physical network in which the subnet is created.
+
+|IP Range
+|The IP address range in which the physical subnet resides.
+
+|Gateway
+|The gateway address of the physical subnet.
+
+|Available IPs
+|The number of IP addresses available in the physical subnet.
+
+|Used IPs
+|The number of IP addresses used in the physical subnet.
+|===
+--
+
+. (Optional) Click the search box above the physical subnet list and set query conditions to search for physical subnets by name or ID. For example, use **Name:ab** to search for physical subnets whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

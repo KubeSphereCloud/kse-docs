@@ -1,0 +1,62 @@
+---
+title: "Gateway API 网关"
+weight: 31
+---
+
+本节介绍如何使用 Gateway API 网关扩展组件，以启用和管理集群、企业空间和项目三层级的 Gateway API 网关实现和网关，并配置 Gateway API 应用路由，为 KubeSphere 平台上的服务提供代理。
+
+== 核心概念
+
+Gateway API 网关扩展基于 https://gateway-api.sigs.k8s.io/[Gateway API] 标准实现，提供以下核心概念：
+
+=== 网关实现
+
+网关实现用于配置 Gateway API 实现组件的工作负载和 GatewayClass 实例，是实际发生流量转发的地方。通过服务暴露的工作负载支持 NodePort 和 LoadBalancer 两种外部访问模式。
+
+=== 网关
+
+网关对应 Gateway API 所定义的 Gateway 实例。它通过监听器配置引用同层级网关实现的 entrypoints 流量入口，并根据网关层级自动限制该网关允许的路由配置。网关层级和网关实现层级一一对应。
+
+=== 应用路由
+
+应用路由对应 Gateway API 所定义的路由资源，用于将流量路由到后端服务。通过绑定网关配置路由规则，将流量转发到具体的后端服务。目前支持以下类型：
+
+* *HTTPRoute*：HTTP/HTTPS 流量路由
+* *GRPCRoute*：gRPC 流量路由
+* *TLSRoute*：TLS 加密流量路由（基于 SNI）
+* *TCPRoute*：原始 TCP 流量路由
+
+== 层级划分
+
+Gateway API 网关扩展按以下三个层级对网关实现和网关进行划分：
+
+[%header,cols="1,2,4"]
+|===
+|层级 |范围 |说明
+
+|集群
+|整个集群
+|为整个集群提供代理服务，允许来自整个集群范围内 Gateway API 应用路由的绑定。
+
+|企业空间
+|单个企业空间
+|为整个企业空间提供代理服务，允许来自特定企业空间内 Gateway API 应用路由的绑定。
+
+|项目
+|单个项目
+|为整个项目提供代理服务，允许来自特定项目内 Gateway API 应用路由的绑定。
+|===
+
+
+// note
+[.admon.note,cols="a"]
+|===
+|版本说明
+
+|
+* 如需使用网关实现的监控功能，KubeSphere 平台需要安装并启用 *WizTelemetry 监控* 扩展组件。
+* 如需使用网关实现的日志搜索功能，KubeSphere 平台需要安装并启用 *WizTelemetry 日志* 扩展组件。
+|===
+
+
+

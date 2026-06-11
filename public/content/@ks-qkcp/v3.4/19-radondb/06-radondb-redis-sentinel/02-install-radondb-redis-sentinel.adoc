@@ -1,0 +1,82 @@
+---
+title: "安装 RadonDB Redis Sentinel"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Redis Sentinel, 安装 RadonDB Redis Sentinel"
+description: "介绍如何安装 RadonDB Redis Sentinel。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 84fa1462d3e144778c292931c3c38fb2
+:ks_xref_id: ab272dab3590451c866d46bd74563320
+:ks_comp: ../../../components/
+:ks_title: 安装 RadonDB Redis Sentinel
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB Redis Sentinel, 安装 RadonDB Redis Sentinel
+:ks_description: 介绍如何安装 RadonDB Redis Sentinel。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何安装 RadonDB Redis Sentinel。
+
+
+== 前提条件link:[id=42073030c09949f3b6b920c52bca833b]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+* 您需要获取 RadonDB Redis Sentinel 应用授权。有关更多信息，请联系{ks_product_both}技术支持。
+
+
+== 操作步骤link:[id=ae4a42ab2ca14cf89b1e870ee76cf308]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在页面右侧选择**安装 > RadonDB Redis Sentinel**。
+
+. 在**基本信息**页签，设置 RadonDB Redis Sentinel 应用的基本信息和安装位置，然后点击**下一步**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|RadonDB Redis Sentinel 应用的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 32 个字符。
+
+|版本
+|RadonDB Redis Sentinel 应用的版本。
+
+|描述
+|RadonDB Redis Sentinel 应用的描述信息。描述可包含任意字符，最长 256 个字符。
+
+|位置
+|RadonDB Redis Sentinel 应用所属的企业空间、集群和项目。
+|===
+--
+
+. 在**应用设置**页签，设置 Redis Sentinel 数据库的参数，然后点击**安装**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../_custom/radondb/radondbRedisSentinel/radondbRedisSentinel-para-redisSettings.adoc[]
+
+|===
+
+RadonDB Redis Sentinel 安装完成后将显示在 RadonDB 应用列表中。
+--

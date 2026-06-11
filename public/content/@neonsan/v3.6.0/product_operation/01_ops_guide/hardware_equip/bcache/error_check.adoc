@@ -1,0 +1,73 @@
+---
+title: "Bcache 设备异常排查"
+weight: 1
+---
+
+== 注意事项
+
+若遇需格式化并重建 bcache 的情况，需先link:../../move_disk/[移除磁盘]后，再进行相应的操作。
+
+== 排查方法
+
+. 使用 `lsblk` 确认当前系统中的盘符对应关系，确认所有的 bcache 设备是否存在。
++
+include::../../../../../../_components/attention.adoc[]
+bcache 盘符在数据盘和缓存盘下同时存在，若只有数据盘下存在 bcache 盘符，则说明缓存盘出现异常，可重新进行数据盘与缓存盘的绑定。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 若 bcache 设备有丢失，需执行如下命令，确认硬盘上的 superblock 是否完整可用。
++
+[,shell]
+----
+bcache-super-show -f /dev/bcache*
+----
++
+如果返回结果中出现 `bad` 字样，则说明该设备上的 superblock 已经不可用，则需进行以下操作。
++
+.. 格式化 bcache 盘。
++
+[,shell]
+----
+wipefs -a <dev_name>
+----
+.. 重新创建 bcache 设备。
++
+[,shell]
+----
+make-bcache -B <backing_dev_name>
+----
+
+
+. 针对数据盘，确认 `/sys/block/bcache*/bcache/` 或 `/sys/block/sd*/bcache/` 目录是否存在。针对缓存盘，检查 `/sys/fs/<cset.uuid>/bcache/` 目录是否存在。
++
+--
+若数据盘或缓存盘的相应目录不存在，则需手动注册 bcache。
+
+若手动注册失败，则说明 bcache 设备异常，需格式化并重建 bcache 盘：
+
+格式化 bcache 盘。
+[,shell]
+----
+wipefs -a <dev_name>
+----
+
+重新创建 bcache 设备。
+[,shell]
+----
+make-bcache -B <backing_dev_name>
+----
+--
+
+. 尝试使用如下命令，手动注册 bcache 盘。
++
+--
+[,shell]
+----
+echo /dev/sd* > /sys/fs/bcache/register
+----
+若依旧不出现 bcache 盘符，则使用 `dmesg -T | grep sd*` 查看是否会出现 "I/O error" 或 "Information unit iuCRC error detected" 的异常提示。 +
+若有，则说明硬盘或者相关硬件接口有问题，需要对硬件进行排查和替换。
+--
+
+
+

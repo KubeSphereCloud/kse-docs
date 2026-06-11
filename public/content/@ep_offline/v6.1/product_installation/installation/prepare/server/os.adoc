@@ -1,0 +1,46 @@
+---
+title: 安装操作系统
+weight: 3
+---
+
+
+
+安装操作系统的详细步骤请参考《QingCloud 企业云 Ubuntu 操作系统安装指南》，这里简要说明如下。
+
+
+
+. 登录 FTP 服务器，获取操作系统自动安装镜像包，并暂存于移动存储设备。
++
+include::../../../../../../_components/note.adoc[]
+
+安装包下载路径为 `ftp://ins.qingcloud.com/isos/`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 如下图所示，以 `QingCloud` 为前缀的安装包为青云QingCloud 官方改版操作系统，实施人员只需要下载以 `QingCloud` 为前缀的安装包即可。
++
+image::/images/ep_offline/installation/install_6_1_1.png[install_6_1_1,80%]
++
+include::../../../../../../_components/note.adoc[]
+
+* {product_name}推荐使用 `QingCloud-20.04.1-AutoInstall_orig_20230807.iso`。
+* 安装包名中的 `20.04.1` 为 Ubuntu 的版本号，`orig` 表示未单独添加 RAID 卡驱动，`P460-B4` 表示添加了版本 `P460-B4` 的 RAID 卡驱动。`20230807` 为 Patch 版本号。
+* `Ubuntu` 为前缀的安装包是 Ubuntu 官网原始操作系统安装包。
+* 实施人员根据实际情况下载相应的安装包。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 下载后，比对文件的 MD5，以免下载内容不全。 
+
+. 将存有自动安装镜像包的移动存储设备逐一与物理服务器连接，等待操作系统安装完成。
+
+// . 点击运行镜像文件，安装操作系统。
+// +
+// image::/images/ep_offline/installation/deploy_server_conf_os_auto.png[,60%]
+// +
+// include::../../../../../../_components/note.adoc[]
+
+// 由于自动化安装镜像脚本，默认系统盘盘符为 `sda`，若操作系统安装失败，可尝试拔掉所有数据盘后，再进行操作系统的安装。待操作系统安装完成后，再插上数据盘。
+
+// include::../../../../../../_components/table_footer.adoc[]

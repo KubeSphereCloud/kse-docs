@@ -1,0 +1,183 @@
+---
+title: "安装依赖扩展组件"
+weight: 03
+---
+
+本节介绍如何安装 EdgeWize 依赖的扩展组件。登录{ks_product_left} Web 控制台，在扩展中心安装并配置以下依赖的扩展组件。
+
+EdgeWize 的监控数据依赖可观测模块进行存储和查询展示，因此需要确保可观测模块启用且配置正确。WizTelemetry 可观测平台的各个组件安装并配置完成后，可实现以下功能：
+
+* 边缘监控页面展示
+* 边缘节点容器日志查询
+* 边缘集群 ksAPIserver 审计
+* 边缘集群告警规则配置和触发
+
+== 前提条件
+
+您需要在{ks_product_both}平台具有 **platform-admin** 角色。
+
+== 1. 安装 WizTelemetry 平台服务
+
+WizTelemetry 平台服务负责在 host 集群中统一处理多集群监控查询。
+
+由于 EdgeWize 需要启用 ``WizTelemetry 全局监控`` 扩展组件，因此需修改 WizTelemetry 平台服务的**扩展组件配置**，将 `whizard-telemetry.config.observability.enabled` 设置为 `true`。
+
+[,yaml]
+----
+whizard-telemetry:
+  config:
+    observability:
+      enabled: true
+      endpoint: "http://query-frontend-whizard-operated.kubesphere-monitoring-system.svc:10902"
+----
+
+== 2. 安装 OpenSearch 分布式检索与分析引擎
+
+OpenSearch 用于存储多集群日志和审计日志。
+
+安装时，在**集群选择**页面勾选 host 集群，将 OpenSearch 部署到 host 集群即可。
+
+== 3. 安装 WizTelemetry 数据流水线
+
+由于 EdgeWize 需要作为 member 集群向 OpenSearch 写入数据，因此需要在安装 WizTelemetry 数据流水线时，配置 sinks。
+
+[,yaml]
+----
+sinks:
+ opensearch:
+   api_version: v8
+   auth:
+     strategy: basic
+     user: admin
+     password: admin
+   endpoints:
+     - https://<service-ip>:<nodeport> # 替换为 opensearch-cluster-data 服务的对外暴露 IP（默认为 host 集群节点 IP）和 NodePort 端口（默认为 30920）
+   tls:
+     verify_certificate: false
+----
+
+安装时，在**集群选择**页面勾选 host 集群。边缘集群会自动安装该扩展组件并调整配置。
+
+== 4. 安装 WizTelemetry 监控
+
+WizTelemetry 监控会对 prometheus 监控栈组件进行安装，负责处理监控数据的搜集和存储。在启动安装之前，需要修改扩展组件配置。
+
+=== a. 关闭 etcd 监控
+
+WizTelemetry 监控最新版本默认启用 etcd 监控，将尝试自行创建并生成 etcd 客户端证书，寻找并设置 etcd 端点。
+
+由于被托管的边缘集群使用的是宿主集群的 etcd, 不需要单独监控 etcd, 因此建议在安装 edgewize 时将 etcd 监控关闭。
+
+修改扩展组件配置，如下：
+
+[source,yaml]
+----
+# 关闭 etcd 监控，避免在边缘集群中安装失败
+wiztelemetry-monitoring-helper:
+  etcdMonitoringHelper:
+    enabled: false
+ 
+kube-prometheus-stack:
+  prometheus:
+    agentMode: true
+    prometheusSpec:
+      # 将 secrets 置空
+      secrets: []
+            
+  kubeEtcd:
+    enabled: false
+    endpoints: []
+----
+
+=== b. 配合启用 WizTelemetry 全局监控
+
+由于 EdgeWize 需要启用 ``WizTelemetry 全局监控`` 扩展组件，因此需修改 WizTelemetry 监控的**扩展组件配置**，将 `kube-prometheus-stack.prometheus.agentMode` 设置为 `true`。
+
+[,yaml]
+----
+kube-prometheus-stack:
+  prometheus:
+    # agentMode need to be set to true when enable whizard
+    agentMode: true
+----
+
+安装时，在**集群选择**页面勾选 host 集群。边缘集群会自动安装该扩展组件并调整配置。
+
+== 5. 安装 WizTelemetry 全局监控
+
+WizTelemetry 全局监控是 WizTelemetry 可观测平台中提供跨集群资源监控、多集群告警的扩展组件，包含原有 Whizard 可观测中心的功能。
+
+修改其扩展组件配置，如下：
+
+[source,yaml]
+----
+whizardAgentProxy:
+  enabled: true
+
+whizard-agent-proxy:
+  config:
+    # set whizard gateway url，default is http://{host_cluster_node_ip}:30990
+    gatewayUrl: "http://172.31.73.206:30990"
+
+whizard:
+  enabled: true
+----
+
+`gatewayUrl` 是 WizTelemetry 全局监控中 `whizard` Gateway 组件的对外访问地址，默认使用 NodePort 30990 端口暴露，可以使用 host 集群任一节点 IP 及 30990 端口进行配置。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|安装 ``WizTelemetry 全局监控`` 后，会自动暴露一个名为 `gateway-whizard-operated` 的服务（其地址和端口即为设置的 gatewayUrl），该服务用于上报和查询数据。EdgeWize 作为 member 集群将向其写入数据，所以 gatewayUrl 必须配置正确。
+
+|===
+
+安装时，在**集群选择**页面勾选 host 集群。边缘集群会自动安装该扩展组件并调整配置。
+
+== 6. 安装 WizTelemetry 告警
+
+由于 EdgeWize 需要启用 ``WizTelemetry 全局监控`` 扩展组件，因此需修改 WizTelemetry 告警的**扩展组件配置**，将 `global.rules.distributionMode` 设置为 `none`。
+
+[,yaml]
+----
+global:
+  rules:
+    distributionMode: None
+----
+
+安装时，在**集群选择**页面勾选 host 集群。边缘集群会自动安装该扩展组件并调整配置。
+
+== 7. 安装 WizTelemetry 日志
+
+修改**扩展组件配置**如下：
+
+[,yaml]
+----
+vector-logging:
+  sinks:
+    opensearch:
+      enabled: true
+      metadata:
+        api_version: v8
+        auth:
+          strategy: basic
+          user: admin
+          password: admin
+        batch:
+          timeout_secs: 5
+        buffer:
+          max_events: 10000
+        endpoints:
+         - https://<service-ip>:<nodeport> # 替换为 opensearch-cluster-data 服务的对外暴露 IP（默认为 host 集群节点 IP）和 NodePort 端口（默认为 30920）
+        tls:
+          verify_certificate: false
+----
+
+安装时，在**集群选择**页面勾选 host 集群。边缘集群会自动安装该扩展组件并调整配置。
+
+== 8. 安装 WizTelemetry 审计（可选）
+
+为获取审计日志数据，您需要启用 Kubernetes 和 KubeSphere 审计，即启用审计日志收集。有关组件配置的更多信息，请参阅扩展中心“WizTelemetry 审计”扩展组件的详情页说明。
+
+安装时，在**集群选择**页面勾选 host 集群。边缘集群会自动安装该扩展组件并调整配置。

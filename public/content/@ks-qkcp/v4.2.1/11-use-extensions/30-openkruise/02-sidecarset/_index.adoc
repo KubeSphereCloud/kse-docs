@@ -1,0 +1,48 @@
+---
+title: "SidecarSet"
+weight: 03
+---
+
+SidecarSet 主要用于管理无状态辅助容器，例如监控、日志采集和代理等 Agent。通过 SidecarSet，您无需修改业务工作负载模板，即可为符合条件的 Pod 自动注入 Sidecar 容器，并统一管理 Sidecar 的配置和升级。
+
+== 核心特性
+
+* *自动注入与生效范围控制*：通过 `selector` 精确匹配目标 Pod，并通过 `namespace` 或 `namespaceSelector` 限定生效的命名空间范围。在 Pod 创建阶段自动注入 Sidecar 容器、Init 容器、共享卷和环境变量，无需修改业务工作负载模板。
+* *原地升级与更新策略*：无需重建 Pod，仅更新 Sidecar 容器镜像，对业务容器无影响。支持 `RollingUpdate`（滚动更新）和 `NotUpdate`（仅注入，不更新）两种更新方式，并提供灰度发布能力：
+** `partition`：分批发布，用于控制保留旧版本 Pod 的数量或百分比。
+** `maxUnavailable`：限制发布过程中同一时间内最大不可用 Pod 数量，默认值为 `1`，支持设置为绝对值或百分比。
+** `spec.updateStrategy.selector`：基于 Pod Label 发布特定标签的 Pod，实现金丝雀灰度发布。
+* *发布顺序控制*：支持 `priorityStrategy` 和 `scatterStrategy`，可按权重、序号或打散策略控制升级顺序，使符合特定标签的 Pod 在整个发布过程中均匀分布。
+* *Sidecar 热升级*：对于代理类 Sidecar（例如 Istio Envoy、Mosn），支持热升级机制。通过双容器切换、`postStart` 状态迁移脚本以及 `hotUpgradeEmptyImage`，可以在不停服的情况下完成 Sidecar 的平滑升级。
+* *注入控制与版本管理*：
+** `injectionStrategy.paused`：暂停为新创建的 Pod 注入 Sidecar。
+** `revision`：支持按历史版本（ControllerRevision）或自定义版本标识注入，以规避 SidecarSet 灰度期间因 Workload 扩容带来的发布风险。
+* *Pod Metadata 注入*：支持在注入 Sidecar 时同步注入 Pod Annotations，例如容器启动优先级、OOM 分值等。注入策略支持 `Retain`、`Overwrite` 和 `MergePatchJson`。
+* *数据共享与兼容*：
+** `shareVolumePolicy`：自动挂载业务容器卷到 Sidecar，适用于日志采集等场景。
+** `transferEnv`：从业务容器复制环境变量到 Sidecar。
+
+== 页面功能
+
+SidecarSet 页面提供以下功能：
+
+* 查看 SidecarSet 列表
+* 创建 SidecarSet
+* 查看 SidecarSet 详情
+* 设置生效范围
+* 设置 Sidecar 容器
+* 暂停或恢复 Sidecar 注入
+* 编辑 YAML
+* 删除 SidecarSet 
+
+== 使用价值
+
+SidecarSet 的核心价值在于将 Sidecar 容器配置从业务工作负载中独立出来，便于多个业务工作负载复用，并降低业务侧的维护成本。
+
+
+== 前提条件
+
+执行本栏目下的所有操作前，请确保：
+
+* 您需要在目标集群中具有 SidecarSet 资源的相应权限。
+* KubeSphere 平台需要安装并启用 OpenKruise 扩展组件。

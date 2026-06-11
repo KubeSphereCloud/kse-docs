@@ -1,0 +1,57 @@
+---
+title: "替换应用版本"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 企业空间, 应用模板, 替换应用版本"
+description: "介绍如何在应用模板创建后替换应用版本的 Helm Chart。"
+weight: 07
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: af7982b149084252a5d7d472eb62d892
+:ks_xref_id: 5efb22ec050a4c01aedb748e1999f646
+:ks_comp: ../../../../components/
+:ks_title: 替换应用版本
+:ks_keywords: Kubernetes, {ks_product}, 企业空间, 应用模板, 替换应用版本
+:ks_description: 介绍如何在应用模板创建后替换应用版本的 Helm Chart。
+:ks_weight: 07
+:ks_icon:
+:ks_permission: **应用模板管理**
+:ks_navigation: **应用管理 > 应用模板**
+
+
+本节介绍如何在应用模板创建后替换应用版本的 Helm Chart。
+
+
+== 前提条件link:[id=2ade960660bf4a7080832f4a86af6e71]
+
+//:relfileprefix: ../../../../
+* 您需要加入一个企业空间并在企业空间中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅link:../../../../06-workspace-management/06-workspace-settings/03-workspace-members/_index/[企业空间成员]、link:../../../../06-workspace-management/06-workspace-settings/04-workspace-roles/_index/[企业空间角色]和link:../../../../06-workspace-management/06-workspace-settings/05-departments/_index/[部门]。
+
+// include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+//:relfileprefix: ./
+
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-prer-enableAppManagment.adoc[]
+
+* 您需要准备用于替换的 .tar.gz 或 .tgz 格式的 Helm Chart 压缩包。有关更多信息，请参阅 link:https://helm.sh/zh/docs/topics/charts/[Helm 官方文档]。
+
+
+== 操作步骤link:[id=c5a2387fa4a4434d966f281234fc8095]
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. 在应用模板详情页面右侧的**版本**页签，点击需要替换的应用版本，在展开的区域中在应用版本名称右侧点击**上传**。
+
+. 在弹出的对话框，选择本地存储的 .tar.gz 或 .tgz 格式 Helm Chart 压缩包，然后点击**确定**。

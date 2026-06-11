@@ -1,0 +1,32 @@
+---
+title: 创建云服务器
+weight: 1
+---
+
+
+[cols='^1h,4a']
+|===
+| 验收目的 | {platform_name_cn}上创建云服务器。
+| 预置条件 | * {platform_name_cn}已部署完成，且当前运行状态正常，所有 Hyper 节点状态均正常。
+* {platform_name_cn}已导入默认镜像包。
+* 已创建好测试用户 User-1 并分配适当资源配额。
+
+| 操作步骤 | 
+. 使用 User-1 的账户密码登录{platform_name_cn}的 Web Console。
+. 创建 `分散` 安置策略组 Group-1。
+. 按如下要求，创建多台云服务器：
+** 创建云服务器的数量等于当前环境中 Hyper 节点的数量。
+** 分别选择现有镜像创建云服务器，包括 Windows、Linux 以及客户指定模板、自有镜像等。
+** 将这些云服务器加入安置策略组 Group-1 中。
+. 在 Web Console 上确认云服务器创建结果。
+. 登录各云服务器。
+. 从{platform_name_cn}内外部 `ping` 各云服务器。
+
+| 预期结果 | . 各云服务器均成功创建，且正常分配到 IP 地址。
+. 可以通过 Web Console 上的入口分别登录各云服务器。
+. 从{platform_name_cn}内外部均能 `ping` 通各云服务器。
+
+| 验证结果 | 
+| 备注 | 
+|===
+

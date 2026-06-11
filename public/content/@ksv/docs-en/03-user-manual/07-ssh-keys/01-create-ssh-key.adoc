@@ -1,0 +1,82 @@
+---
+title: "Create an SSH key"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, SSH, keys, creation"
+description: "Describes how to create an SSH key in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 44b84ae6f42a4a0f867274f1b71cbbd2
+:ks_xref_id: 2bc3dd96920e4d8596f6da96a9e5c06e
+:ks_comp: ../../../components/
+:ks_title: Create an SSH key
+:ks_description: Describes how to create an SSH key in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, SSH, keys, creation
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to create an SSH key in the {ks_product_abbr_full} web console.
+
+A public key and a private key constitute an SSH key pair. A public key is used to encrypt sessions and verify digital signatures, and its paired private key is used to decrypt the session data. This secures data transmission. After an SSH key is created, the system automatically downloads the private key to your local environment. We recommend that you keep it properly. If you associate an SSH key with a VM, you cannot log in to the VM without the private key.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=fca54c4733e64898a600dfed8681f65a]
+
+The user that you use has been granted permissions to create SSH keys. Only user **admin**, project administrators, and project operators have permissions to create SSH keys.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=f155fd8e79cf40f38d1c50e0897a0a1d]
+
+include::../../../_custom-en/ssh/ssh-key-steps.adoc[]
+
+. On the **SSH Keys** page, click **Create** in the upper-right corner.
+. In the dialog box that appears, configure parameters for the SSH key. The following table describes the parameters.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Select Method
+|You can select one of the methods to create a key pair.  We recommend that you select **Create New Key Pair** and keep the generated private key properly.
+
+* **Create New Key Pair**: creates a new SSH key.  After an SSH key is created, the system automatically downloads the private key to your local environment. This is the only chance you can download the private key. We recommend that you keep it properly. 
+* **Use Existing Public Key**: imports a Base64-encoded public key on your own.
+
+|Name
+|The name of the SSH key.
+
+include::../../../_custom-en/security-groups/naming-convention.adoc[]
+
+|Alias
+|The alias of the SSH key.
+
+include::../../../_custom-en/alerts/alias-naming-convention.adoc[]
+
+|Public Key
+|Enter the public key that is used to generate the private key. This parameter is available only when **Select Method** is set to **Use Existing Public Key**.
+
+|Description
+|The description of the SSH key.
+
+include::../../../_custom-en/networks/description-convention.adoc[]
+|===
+--
+. Click **OK**.  The SSH key appears in the SSH key list after it is created.
+
+// 这部分待补充
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== What to do nextlink:[id=c4b3e60ad58c47b790d261acfedf29da]
+
+After an SSH key is created, you can associate the key with a VM for SSH login. For more information, see link:../../05-vm-management/01-vms/01-create-vm/[Create a VM].

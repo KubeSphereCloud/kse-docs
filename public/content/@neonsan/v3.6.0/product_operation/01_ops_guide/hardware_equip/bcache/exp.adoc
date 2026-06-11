@@ -1,0 +1,234 @@
+---
+title: "新增 Bcache 设备"
+weight: 9
+---
+
+## 仅新增数据盘
+
+只增加机械盘，缓存盘保持不变。例如，新增数据盘的盘符为 `/dev/sdc`，原缓存盘为 `nvme0n1`。
+
+. 插入新盘。
+. 创建 bcache 信息。
++
+[,shell]
+----
+make-bcache -B /dev/sdc 
+----
++
+include::../../../../../../_components/note.adoc[]
+`-B` 用于指定新增的作为数据盘的盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 获取待与新增数据盘进行绑定的缓存盘的 cset.uuid。
++
+[,shell]
+----
+bcache-show /dev/nvme0n1 
+----
+
+. 将新增的数据盘和现有的缓存盘进行绑定。
++
+[,shell]
+----
+echo "<cset.uuid>" > /sys/block/bcache*/bcache/attach
+----
++
+include::../../../../../../_components/note.adoc[]
+* <cset.uuid> 为上一步的查询结果。
+* bcache* 为步骤 2 创建的数据盘的 bcache 信息，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 设置缓存模式为 writeback。
++
+[,shell]
+----
+echo writeback > /sys/block/bcache*/bcache/cache_mode
+----
+
+. 对新增数据盘的盘头前 20G 进行写零操作。
+
++
+[,shell]
+----
+dd if=/dev/zero of=/dev/bcache* bs=10M count=2048 oflag=direct
+----
+
+. 将新盘添加至集群。
++
+执行如下命令，查看当前集群中磁盘的盘符格式。根据返回结果中，`DEV NAME` 格式选择相应的添加方式。
++
+[,shell]
+----
+neonsan list_ssd
+----
++
+* 若返回结果中，磁盘 `DEV NAME` 形如 `/dev/disk/by-id/neon-bcache-*`，则需要执行如下步骤进行新盘的添加。
+.. 查看新盘的 by-id。
++
+[,shell]
+----
+ls -l /dev/disk/by-id
+----
+.. 修改系统启动文件 ``rc.local``，即用新盘的盘符和 by-id 替换旧盘信息。
+.. 手动执行 rc.local 文件中修改过的命令行。
+.. 添加新盘至集群中。
++
+[,shell]
+----
+neonsan add_ssd -dev /dev/disk/by-id/neon-bcache-* -store_id <STORE_ID> -trim_support false -type CachedHDD
+----
++
+include::../../../../../../_components/note.adoc[]
+* `/dev/disk/by-id/neon-bcache-*` 为新添加数据盘的 bcache，需根据实际情况进行修改。
+* `<STORE_ID>` 为更换磁盘所在的 Store 节点 ID，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+* 若返回结果中，磁盘 `DEV NAME` 形如 `/dev/bcache*`
++
+可执行如下命令直接进行新盘的添加。
++
+[,shell]
+----
+neonsan add_ssd -dev /dev/bcache* -store_id <STORE_ID> -trim_support false -type CachedHDD
+----
++
+include::../../../../../../_components/note.adoc[]
+* `/dev/bcache*` 为新添加数据盘的 bcache，需根据实际情况进行修改。
+* `<STORE_ID>` 为更换磁盘所在的 Store 节点 ID，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+## 新增数据盘和缓存盘
+
+同时新增机械盘和缓存盘。例如，新增数据盘的盘符为 `/dev/sdc`，新增缓存盘为 `nvme1n1`。
+
+. 插入新盘。
+. 创建 bcache 信息，设置数据盘。
++
+[,shell]
+----
+make-bcache -B /dev/sdc 
+----
++
+include::../../../../../../_components/note.adoc[]
+`-B` 用于指定新增的作为数据盘的盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 创建 bcache 信息，设置缓存盘。
++
+[,shell]
+----
+make-bcache -C /dev/nvme1n1
+----
++
+include::../../../../../../_components/note.adoc[]
+* `-C` 用于指定新增的作为缓存盘的盘符，需根据实际情况进行修改。
+* Bcache 的缓存盘类型必须为 NVMe 盘。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 获取新增缓存盘的 cset.uuid。
++
+[,shell]
+----
+bcache-show /dev/nvme1n1 
+----
+
+. 将新增的数据盘和缓存盘进行绑定。
++
+[,shell]
+----
+echo "<cset.uuid>" > /sys/block/bcache*/bcache/attach
+----
++
+include::../../../../../../_components/note.adoc[]
+* <cset.uuid> 为上一步的查询结果。
+* bcache* 为步骤 2 创建的数据盘的 bcache 信息，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 设置缓存模式为 writeback。
++
+[,shell]
+----
+echo writeback > /sys/block/bcache*/bcache/cache_mode
+----
+
+. 依次执行如下命令，关闭旁路以提升性能。
++
+[,shell]
+----
+echo 0 > /sys/fs/bcache/<cset.uuid>/congested_write_threshold_us
+echo 0 > /sys/fs/bcache/<cset.uuid>/congested_read_threshold_us
+----
++
+include::../../../../../../_components/note.adoc[]
+<cset.uuid> 为步骤 4 获取的缓存盘 cset.uuid 值，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 对新增数据盘的盘头前 20G 进行写零操作。
+
++
+[,shell]
+----
+dd if=/dev/zero of=/dev/bcache* bs=10M count=2048 oflag=direct
+----
+
+. 将新盘添加至集群。
++
+执行如下命令，查看当前集群中磁盘的盘符格式。根据返回结果中，`DEV NAME` 格式选择相应的添加方式。
++
+[,shell]
+----
+neonsan list_ssd
+----
++
+* 若返回结果中，磁盘 `DEV NAME` 形如 `/dev/disk/by-id/neon-bcache-*`，则需要执行如下步骤进行新盘的添加。
+.. 查看新盘的 by-id。
++
+[,shell]
+----
+ls -l /dev/disk/by-id
+----
+.. 修改系统启动文件 ``rc.local``，即用新盘的盘符和 by-id 替换旧盘信息。
+.. 手动执行 rc.local 文件中修改过的命令行。
+.. 添加新盘至集群中。
++
+[,shell]
+----
+neonsan add_ssd -dev /dev/disk/by-id/neon-bcache-* -store_id <STORE_ID> -trim_support false -type CachedHDD
+----
++
+include::../../../../../../_components/note.adoc[]
+* `/dev/disk/by-id/neon-bcache-*` 为新添加数据盘的 bcache，需根据实际情况进行修改。
+* `<STORE_ID>` 为更换磁盘所在的 Store 节点 ID，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+* 若返回结果中，磁盘 `DEV NAME` 形如 `/dev/bcache*`
++
+可执行如下命令直接进行新盘的添加。
++
+[,shell]
+----
+neonsan add_ssd -dev /dev/bcache* -store_id <STORE_ID> -trim_support false -type CachedHDD
+----
++
+include::../../../../../../_components/note.adoc[]
+* `/dev/bcache*` 为新添加数据盘的 bcache，需根据实际情况进行修改。
+* `<STORE_ID>` 为更换磁盘所在的 Store 节点 ID，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在相应的系统启动脚本中新增或修改如下设置。
++
+--
+[,shell]
+----
+vi /etc/tmpfiles.d/my-bcache.conf
+----
+增加如下内容。
+[,shell]
+----
+w  /sys/fs/bcache/80c897f7-2256-4965-a96e-73191950ab51/congested_write_threshold_us - - - - 0
+w  /sys/fs/bcache/80c897f7-2256-4965-a96e-73191950ab51/congested_read_threshold_us - - - - 0
+w  /sys/block/bcache0/bcache/cache_mode - - - - writeback
+w  /sys/block/bcache0/bcache/sequential_cutoff - - - - 1m
+----
+--

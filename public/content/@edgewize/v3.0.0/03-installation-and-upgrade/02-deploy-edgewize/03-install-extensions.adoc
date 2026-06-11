@@ -1,0 +1,140 @@
+---
+title: "安装依赖扩展组件"
+weight: 03
+---
+
+本节介绍如何安装 EdgeWize 依赖的扩展组件。登录{ks_product_left} Web 控制台，在扩展中心安装并配置以下依赖的扩展组件。
+
+EdgeWize 的监控数据依赖可观测模块进行存储和查询展示，因此需要确保 ``WhizardTelemetry 可观测平台``启用且配置正确。WhizardTelemetry 可观测平台的各个组件安装并配置完成后，可实现以下功能：
+
+* 边缘监控页面展示
+* 边缘节点容器日志查询
+* 边缘集群 ksApiserver 审计
+* 边缘集群告警规则配置和触发
+
+在 EdgeWize 边缘计算平台部署边缘应用，还需要安装 ``KubeSphere 应用商店管理``扩展组件。
+
+
+== 1. 安装 WhizardTelemetry 平台服务
+
+WhizardTelemetry 平台服务负责在 host 集群中统一处理多集群监控查询。
+
+由于 EdgeWize 需要启用 Whizard 可观测中心，因此需修改 WhizardTelemetry 平台服务的**扩展组件配置**，将 `whizard-telemetry.config.observability.enabled` 设置为 `true`。
+
+[,yaml]
+----
+whizard-telemetry:
+  config:
+    observability:
+      enabled: true
+      endpoint: "http://query-frontend-whizard-operated.kubesphere-monitoring-system.svc:10902"
+----
+
+== 2. 安装 OpenSearch 分布式检索与分析引擎
+
+OpenSearch 用于存储多集群日志和审计日志。
+
+安装时，在**集群选择**页面勾选 host 集群，将 OpenSearch 部署到 host 集群即可。
+
+== 3. 安装 WhizardTelemetry 数据流水线
+
+由于 EdgeWize 需要作为 member 集群向 OpenSearch 写入数据，因此需要在安装 WhizardTelemetry 数据流水线时，配置 sinks。
+
+[,yaml]
+----
+sinks:
+ opensearch:
+   api_version: v8
+   auth:
+     strategy: basic
+     user: admin
+     password: admin
+   endpoints:
+     - https://<service-ip>:<nodeport> # 替换为 opensearch-cluster-data 服务的对外暴露 IP（默认为 host 集群节点 IP）和 NodePort 端口（默认为 30920）
+   tls:
+     verify_certificate: false
+----
+
+安装时，在**集群选择**页面勾选需要部署的集群，至少勾选 host 集群。
+
+== 4. 安装 WhizardTelemetry 监控
+
+WhizardTelemetry 监控会对 prometheus 监控栈组件进行安装，负责处理监控数据的搜集和存储。
+
+点击开始安装前，需修改**扩展组件配置**。
+
+[,yaml]
+----
+whizard-monitoring-helper:
+  whizardHelper:
+    enabled: true   ## set true to enable whizard
+ 
+whizard:
+  enabled: true
+ 
+whizardAgentProxy:
+  enabled: true
+ 
+whizard-agent-proxy:
+  config:
+    gatewayUrl: "http://<service-ip>:30990" # 替换为 gateway-whizard-operated 服务的对外暴露 IP（默认为 host 集群节点 IP）和 NodePort 端口（默认为 30990） 
+kube-prometheus-stack:
+  prometheus:
+    # agentMode need to be set to true when enable whizard
+    agentMode: true
+----
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+安装 WhizardTelemetry 监控组件之后，会自动暴露一个名为 gateway-whizard-operated 的服务，用于上报和查询数据，EdgeWize 作为 member 集群将向其写入数据，所以 gatewayUrl 必须配置正确。
+|===
+
+安装时，在**集群选择**页面勾选需要部署的集群，至少勾选 host 集群。
+
+== 5. 安装 WhizardTelemetry 告警
+
+由于 EdgeWize 需要启用 Whizard 可观测中心，因此需修改 WhizardTelemetry 告警的**扩展组件配置**，将 `global.rules.distributionMode` 设置为 `none`。
+
+[,yaml]
+----
+global:
+  rules:
+    distributionMode: None
+----
+
+安装时，在**集群选择**页面勾选需要部署的集群，至少勾选 host 集群。
+
+== 6. 安装 WhizardTelemetry 日志
+
+点击开始安装前，需修改**扩展组件配置**。
+
+[,yaml]
+----
+vector-logging:
+  sinks:
+    opensearch:
+      enabled: true
+      metadata:
+        api_version: v8
+        auth:
+          strategy: basic
+          user: admin
+          password: admin
+        batch:
+          timeout_secs: 5
+        buffer:
+          max_events: 10000
+        endpoints:
+         - https://<service-ip>:<nodeport> # 替换为 opensearch-cluster-data 服务的对外暴露 IP（默认为 host 集群节点 IP）和 NodePort 端口（默认为 30920）
+        tls:
+          verify_certificate: false
+----
+
+安装时，在**集群选择**页面勾选需要部署的集群，至少勾选 host 集群。
+
+== 7. 安装 KubeSphere 应用商店管理
+
+安装该扩展组件后，才能在边缘集群中部署边缘应用。

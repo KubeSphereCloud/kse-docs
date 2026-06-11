@@ -1,0 +1,115 @@
+---
+title: "创建规则组"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 项目管理, 监控告警, 规则组, 创建规则组"
+description: "介绍如何创建告警规则组。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 509d50733afd413881497abe4de9d4a0
+:ks_xref_id: 72b50a31c63a4e8bb83f7596614b6ce6s
+:ks_comp: ../../../../components/
+:ks_title: 创建规则组
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 监控告警, 规则组, 创建规则组
+:ks_description: 介绍如何创建告警规则组。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **规则组管理**
+:ks_navigation: **监控告警 > 规则组**
+
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-createAnAlertingPolicy.adoc[]
+
+
+== 前提条件link:[id=2fb1e47bafe3412281bb16239547fdff]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+:relfileprefix: ../../../../
+* 您需要加入一个项目并在项目中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:07-project-management/10-project-settings/04-project-members/_index.adoc[项目成员]和xref:07-project-management/10-project-settings/03-project-roles/02-view-a-project-role-list.adoc[项目角色]。
+
+// include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-exposeMetrics.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=97508014538e41ff96c91e786565a357]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-setBasicInfo.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-addAlertRule.adoc[]
++
+====
+
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-commonParameters.adoc[]
+
+* 规则模板
++
+--
+通过下拉列表选择监控目标和触发条件。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|资源类型
+|需要监控的工作负载的类型。
+
+|监控目标
+|需要监控的工作负载。
+
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-triggerCondition.adoc[]
+|===
+--
+
+* 自定义规则
++
+--
+通 PromQL 表达式指定监控目标和触发条件。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-duration.adoc[]
+
+|告警级别
+|
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-para-alertLevel.adoc[]
+
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-ruleExpression.adoc[]
+|===
+--
+====
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-clickOK.adoc[]

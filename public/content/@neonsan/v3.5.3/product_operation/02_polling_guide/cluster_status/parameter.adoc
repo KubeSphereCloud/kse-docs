@@ -1,0 +1,16 @@
+---
+title: "查询系统参数配置信息"
+weight: 13
+---
+
+. 登录 NeonSAN 集群任一节点。 
+
+. 执行如下命令，查询集群的配置参数。``auto_recovery``，``auto_balance`` 需要设置为 1，表示开启自动恢复 降级卷和自动负载均衡。此示例 auto_recovery，auto_balance 的值为 0，需要进行修改。
++
+[,shell]
+----
+neonsan list_parameter
+----
++
+image::/images/neonsan/polling_guide_38.png[,50%]
+

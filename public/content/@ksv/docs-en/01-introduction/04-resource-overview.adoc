@@ -1,0 +1,99 @@
+---
+title: "Resource overview"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, clusters, resources, types, introduction"
+description: "Describes resource types in {ks_product}."
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 3b8db08d4e6541f580661d7f3061a3ac
+:ks_xref_id: c47957883eea404aad89246f8368200d
+:ks_comp: ../../components/
+:ks_title: Resource overview
+:ks_description: Describes resource types in {ks_product}.
+:ks_keywords: {ks_product_full}, {ks_product}, clusters, resources, types, introduction
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+Resources are entity objects required for running workloads in {ks_product_abbr_full} clusters. Each time you perform an operation to create an object, the corresponding resources are generated. This includes nodes, VMs, and networks. In {ks_product}, resources are categorized into two types: physical resources and virtual resources. Physical resources are infrastructure devices, such as server nodes, physical networks, and storage devices. Virtual resources exist at the logical level. These resources are easy to use and can be obtained by virtualizing physical resources. Virtual resources include virtual private clouds (VPCs), VMs, disks, and snapshots.
+
+This topic describes resource types in {ks_product}.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Physical resourceslink:[id=c69404ad5b24466cb4cba1f3f264e468]
+
+The following table lists the types of common physical resources in {ks_product}.
+
+[cols="1a,3a"]
+|===
+|Resource type |Description
+
+|Physical nodes
+|Infrastructure servers in {ks_product}. You can create VMs on physical nodes.  {ks_product} provides the following node types:
+
+* Control node: runs in the management plane and manages the workflow in {ks_product}.
+* Worker node: runs business workloads.
+
+|Physical CPUs
+|CPUs that are installed on physical nodes.
+
+|CPU cores
+|Chips on physical CPUs for data processing.
+
+|Memory
+|Memory provided by the memory cards on physical nodes.
+
+|Physical disks
+|Physical disks on storage devices.
+
+|Physical subnets
+|Unit of a physical network. A physical network can be divided into multiple subnets.
+|===
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Virtual resourceslink:[id=50467fdb8e2b4f5ba10acfdc1c556235]
+
+The following table lists the types of common virtual resources in {ks_product}.
+
+[cols="1a,3a"]
+|===
+|Resource type |Description
+
+|Projects
+|Objects that help you manage resources by group.  You can assign users to projects and specify their roles in the projects to implement role-based access control.
+
+|VMs
+|Virtual machines that are created on cluster nodes and can run business workloads.
+
+|VM templates
+|Primary copies of VMs. Each template contains the specific configuration of a VM.
+
+|Images
+|Standard delivery format of VMs. The configuration and dependencies of VMs can be encapsulated into images.
+
+|Virtual disks
+|Block-level virtual storage resources for VMs. Each virtual disk exists on its server in the form of a folder.
+
+|Elastic IP addresses (EIPs)
+|Independent public IP addresses that enable Internet access.
+
+|VPCs
+|Private cloud networks. VPCs are logically isolated from each other.
+
+|Virtual subnets
+|CIDR blocks in VPCs.
+
+|SSH keys
+|Key pairs that are generated based on encryption algorithms. Each SSH key contains a pair of public and private keys.
+
+|Security groups
+|Virtual firewalls that are used to control inbound and outbound traffic of associated resources.
+|===

@@ -1,0 +1,32 @@
+---
+title: "重平衡 Kafka 节点"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Kafka, 平衡节点"
+description: "介绍如何重平衡 RadonDB Kafka 节点。"
+weight: 10
+---
+
+:ks_db_product: Kafka
+
+本节介绍如何重平衡 RadonDB {ks_db_product} 节点。
+
+重平衡（rebalance）规定了一个消费组的消费者如何分配订阅主题的分区，同一个消费组不能有多个消费者同时消费同一个分区。
+
+include::../../../_ks_components/admonitions/warning.adoc[]
+
+此操作可能会中断 {ks_db_product} 服务，请在非高峰时段执行此操作。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 在页面左上角选择**更多操作 > 重平衡节点**。
+. 在**重平衡节点**对话框，点击**开始重平衡**。

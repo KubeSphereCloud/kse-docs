@@ -1,0 +1,96 @@
+---
+title: "管理私有网络"
+weight: 2
+---
+
+== 功能描述
+
+云易捷支持用户对已创建的私有网络进行管理，包括修改属性、加入 VPC 网络、添加虚拟机、绑定/解绑标签、离开 VPC 网络、删除操作。
+
+== 修改属性
+. 登录{product_console_name_en}。
+. 在顶部导航栏，选择**资源** > **网络** > **VPC 网络**，选择**私有网络**页签，进入私有网络列表页面。
+
+. 点击指定私有网络所在行右侧的更多操作，选择**修改**。
++
+image::/images/express/console/vxnet_modify_1.png[]
+
+. 在弹出的**修改属性**的窗口中，支持修改当前私有网络的名称及相关描述。修改完成后，点击**修改**进行确认即可。
+//+
+//image::/images/express/console/vxnet_modify_2.png[,60%]
+
+== 加入 VPC 网络
+
+. 在私有网络列表页面，点击指定私有网络所在行右侧的更多操作，选择 **VPC 网络** > **加入 VPC 网络**。
+
++
+image::/images/express/console/vxnet_link_vpc_1.png[]
+
+. 在弹出的**加入 VPC 网络**窗口中，选择待加入的 VPC 网络，配置各项参数， 包括 IPv4 网络地址、管理地址、DHCP 起始地址、DHCP 结束地址。
++
+image::/images/express/console/vxnet_link_vpc_2.png[,60%]
+
+. 点击**确定**即可。
+
+== 添加虚拟机
+
+. 在私有网络列表页面，点击指定私有网络所在行右侧的更多操作，选择**添加虚拟机**。
+
++
+image::/images/express/console/vxnet_add_vm_1.png[]
+
+. 在弹出的**选择主机**窗口中，勾选待添加至当前私有网络内的虚拟主机，点击**确定**即可。
++
+
+include::../../../../../../../_components/note.adoc[]
+未加入 VPC 网络的私有网络不可以添加虚拟主机。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vxnet_add_vm_2.png[,60%]
+
+== 绑定/解绑标签
+
+. 在私有网络列表页面，点击指定私有网络所在行右侧的更多操作，选择**标签** > **绑定**。
+
++
+image::/images/express/console/vxnet_bind_label_1.png[]
+
+. 在弹出**绑定标签**的窗口中，勾选单个或多个标签后，点击**绑定**即可。
++
+
+include::../../../../../../../_components/note.adoc[]
+若无合适的标签，点击当前窗口中的创建，以创建新的标签。
+
+include::../../../../../../../_components/table_footer.adoc[]
+//+
+//image::/images/express/console/vxnet_bind_label_2.png[,50%]
+. 点击指定私有网络所在行右侧的更多操作，选择**标签** > **解绑**。
+//+
+//image::/images/express/console/vxnet_bind_label_3.png[]
+
+. 在弹出的新窗口中，删除待解绑的标签后，点击**确定**即可
+
+== 离开 VPC 网络
+
+. 在私有网络列表页面，点击指定私有网络所在行右侧的更多操作，选择**VPC 网络** > **离开 VPC 网络**。
++
+image::/images/express/console/vxnet_unlink_vpc_1.png[]
+
+. 在弹出的提示窗口中，若确定无误，点击**离开**即可。
+
+== 删除私有网络
+
+. 在私有网络列表页面，点击指定私有网络所在行右侧的更多操作，选择**删除**。
++
+
+include::../../../../../../../_components/note.adoc[]
+待删除的私有网络须要提前离开 VPC 网络。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vxnet_delete_1.png[]
+
+. 在弹出的提示窗口中，若确定无误，点击**删除**即可。
+
+

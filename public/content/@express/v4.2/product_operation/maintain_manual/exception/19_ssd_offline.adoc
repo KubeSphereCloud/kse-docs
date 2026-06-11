@@ -1,0 +1,142 @@
+---
+title: "避免和解决盘符漂移导致的磁盘异常"
+weight: 19
+---
+
+== 运维场景
+
+对于不支持热扩容的环境中，关机扩容后，重启服务器后，物理机可能出现磁盘盘符漂移的问题，从而导致 NeonSAN 磁盘状态 OFFLINE，进而造成云易捷 Console 管理控制平台上创建的虚拟机无法启动等问题。可参考以下操作步骤，避免和解决由盘符漂移导致的磁盘异常。
+
+== 操作步骤
+
+=== 避免盘符漂移导致的磁盘异常
+
+在进行关闭物理服务器前，可将配置文件中的磁盘信息修改为 by-id 的形式。
+
+. 登录集群中部署了 NeonSAN 的物理节点。
+
+. 执行如下命令，查看磁盘 by-id。
++
+[source,shell]
+----
+ll /dev/disk/by-id/
+----
++
+image::/images/express/maintain/ssd_offline_1.png[]
+
+. 修改 ``/etc/neonsan/store.conf`` 配置文件。将如下字段中的 ``dev`` 替换成磁盘的 by-id。
++
+[source,shell]
+----
+vi /etc/neonsan/store.conf
+----
++
+[source,shell]
+----
+......
+[ssd.0]
+trim_on_reclaim=0
+zero_on_reclaim=0
+dev="/dev/disk/by-id/nvme-eui.cfe00003b24bd100"
+type="SSD"
+......
+----
+
+. 依次执行如下命令，重启相应节点上的 neonstore 和 neoncenter 服务。
++
+[source,shell]
+----
+supervisorctl restart neonstore
+----
+
++
+[source,shell]
+----
+supervisorctl restart neoncenter
+----
+
+=== 解决盘符漂移导致的磁盘异常
+
+可参考如下方式排查并解决，当前环境中由盘符漂移导致的磁盘异常的问题。
+
+. 登录集群中部署了 NeonSAN 的物理节点。
+. 查看集群中的磁盘信息，并记录状态为 OFFLINE 的磁盘盘符和 UUID。
++
+[source,shell]
+----
+neonsan list_ssd
+----
+
+. 依次执行如下步骤确认磁盘 OFFLINE 是否由盘符漂移导致。若确认磁盘异常是由盘符漂移导致的，则可进行后续操作步骤。
+.. 登录步骤 1 磁盘所在的节点。
+.. 执行如下命令，查看磁盘的实际盘符。
++
+[source,shell]
+----
+fdisk -l
+----
+
+.. 查看 ``store.conf`` 配置文件中 ``dev`` 字段对应的盘符信息。
++
+[source,shell]
+----
+cat /etc/neonsan/store.conf
+----
++
+[source,shell]
+----
+......
+[ssd.0]
+trim_on_reclaim=0
+zero_on_reclaim=0
+dev="/dev/vda"
+type="SSD"
+......
+----
+.. 对比上述步骤中查询到的磁盘盘符信息是否一致，若一致，则证明该磁盘 OFFLINE 的原因不是由盘符漂移导致的，需排查其他原因。若**不一致**，则该磁盘该磁盘 OFFLINE 的原因是由盘符漂移导致的。
+
+. 依次执行如下命令，移除 OFFLINE 的卷。
++
+[source,shell]
+----
+neonsan evict_ssd -ssd_uuid <SSD_UUID>
+----
++
+[source,shell]
+----
+neonsan remove_ssd -ssd_uuid <SSD_UUID>
+----
++
+include::../../../../../_components/note.adoc[]
+``-ssd_uuid`` 用于指定前文步骤中查询到的状态为 OFFLINE 的磁盘的 UUID，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 重新将该磁盘加入集群。
++
+[source,shell]
+----
+neonsan add_ssd -store_id <STORE_ID> -dev <dev_NAME>
+----
++
+include::../../../../../_components/note.adoc[]
+* ``-store_id`` 用于指定磁盘所在的 NeonSAN 存储节点，需根据实际情况进行修改。
+* ``-dev`` 需指定步骤 3 中使用 ``fdisk -l`` 查询到的磁盘的实际盘符，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 依次执行如下命令，查看 NeonSAN 集群状态。
++
+[source,shell]
+----
+neonsan list_ssd
+----
++
+[source,shell]
+----
+neonsan list_volume -detail -H |grep -v OK
+----
++
+include::../../../../../_components/note.adoc[]
+* 返回结果中，磁盘和卷的状态均为 OK。
+* 若集群中还存在其他 OFFLINE 的磁盘，可参考步骤 2~6 进行恢复。
+include::../../../../../_components/table_footer.adoc[]
+

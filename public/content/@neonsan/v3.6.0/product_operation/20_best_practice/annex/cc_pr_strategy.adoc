@@ -1,0 +1,163 @@
+---
+title: "设置 CC 和 PR 配置策略"
+weight: 5
+---
+
+若混合节点使用了 RAID 模式，为了保证 NeonSAN 存储系统的性能，需合理设置 CC 和 PR 配置策略。 +
+
+其中，CC（Consistency Check）是 LSI RAID 卡的一致性检查机制，其对 RAID 1、5、6、10、50、60 类型的 RAID 逻辑盘的镜像数据和校验数据的正确性进行校验。如果是 RAID 1，则会对镜像数据的一致性进行校验，对于 RAID5，则会对校验数据进行校验。默认情况下，会每隔 168 小时（一周）执行一次，起始时间是每周六的凌晨 3:00（此时间为控制器时间，对应的服务器时间是 11:00），执行方式是并行地对所有的 RAID 逻辑盘进行检查。一旦启用 CC 或 PR，则其对磁盘性能的影响无法避免。 +
+
+== 缓解 CC 和 PR 对磁盘性能的影响
+
+目前可采取以下几种方缓解 RAID 模式下 CC 和 PR 对磁盘性能的影响。
+include::../../../../../_components/note.adoc[]
+* NeonSAN 管理节点部署的 qs-device 服务中内置 storcli，位于 /opt/qs-device/tools/storcli 目录，若混合节点与管理节点架构（x86_64/aarch64）相同，可直接将管理节点上的该目录复制到混合节点上使用。否则，可通过link:https://docs.broadcom.com/docs/1232743081[官网]下载 storcli 工具包。
+* ``storcli`` 命令行中 ``/cx`` 参数表示对当前节点上的第 x+1 个 RAID 卡进行操作。如 ``/c0`` 表示第一个 RAID 卡。
+* storcli 详细使用，可参考link:https://docs.broadcom.com/doc/12352476[官方使用手册]。
+include::../../../../../_components/table_footer.adoc[]
+
+* 调整 CC 和 PR 的执行时间到业务空闲时。
++
+[source,shell]
+----
+storcli /c0 set cc starttime="yyyy/mm/dd hh"
+----
++
+[source,shell]
+----
+storcli /c0 set pr starttime="yyyy/mm/dd hh"
+----
+* 调整 CC 和 PR 的执行间隔，比如从一周一次延长到 2-3 周一次。
++
+[source,shell]
+----
+storcli /c0 set cc delay=336
+----
++
+[source,shell]
+----
+storcli /c0 set pr delay=336
+----
+* 调整 CC 和 PR 的执行强度，比如从默认的 30% 调整到 5%-15%。
++
+[source,shell]
+----
+storcli /c0 set ccrate=10
+----
++
+[source,shell]
+----
+storcli /c0 set prrate=10
+----
++
+include::../../../../../_components/attention.adoc[]
+调整 CC 或 PR 执行强度会延长其影响时间，且只能减少 I/O 写延迟增大的频率与次数，并不能做到彻底避免其对磁盘性能的影响。
+include::../../../../../_components/table_footer.adoc[]
+
+* 将 RAID 卡的 CC 校验从并行改为串行。
++
+[source,shell]
+----
+storcli /c0 set cc=seq
+----
+
+
+== storcli 常用操作
+
+=== 通用操作 
+
+* 查询 RAID 卡控制器时间。
++
+[source,shell]
+----
+storcli /c0 show time 
+----
+
+* 查询 LD 相关信息。
++
+[source,shell]
+----
+storcli /c0/vall show
+----
+
+=== CC 相关
+* 查询 CC 执行计划和执行状态.
++
+[source,shell]
+----
+storcli /c0 show  cc
+----
+
+* 查询 LD  CC 执行状态。
++
+[source,shell]
+----
+storcli /c0/v0 show cc
+----
+
+* 暂停 LD CC。
++
+[source,shell]
+----
+storcli /c0/v0 pause cc
+----
+
+* 停止 LD CC。
++
+[source,shell]
+----
+storcli /c0/v0 stop cc
+----
+
+* 禁用 CC。
++
+[source,shell]
+----
+storcli /c0 set cc=off
+----
+
+* 继续 LD CC。
++
+[source,shell]
+----
+storcli /c0/v0 resume cc
+----
+
+=== PR 相关
+
+PR 是针对整个 RAID 卡级别的，因此所有命令都只针对 RAID 卡。
+
+* 查询 PR。
++
+[source,shell]
+----
+storcli /c0 show pr
+----
+
+* 暂停 PR
++
+[source,shell]
+----
+storcli /c0 pause pr
+----
+
+* 停止 PR。
++
+[source,shell]
+----
+storcli /c0 stop pr
+----
+
+* 禁用 PR。
++
+[source,shell]
+----
+storcli /c0 set pr=off
+----
+* 继续 PR。
++
+[source,shell]
+----
+storcli /c0 resume cc
+----
+

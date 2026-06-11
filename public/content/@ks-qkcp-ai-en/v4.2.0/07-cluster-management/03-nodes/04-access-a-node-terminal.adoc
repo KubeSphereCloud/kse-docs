@@ -1,0 +1,41 @@
+---
+title: "Using Node Terminal"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Node, Using Node Terminal"
+description: "Introduces how to access and use the node terminal."
+weight: 04
+---
+
+:ks_permission: **Node Management**
+
+This section describes how to use the node terminal.
+
+You can use the command-line terminal provided by KubeSphere to operate on nodes.
+
+== Prerequisites
+
+:relfileprefix: ../../../
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/nodes/nodes-oper-openListPage_new.adoc[]
+
++
+
+. On the right side of the node you want to operate on, click image:/images/ks-qkcp/zh/icons/more.svg["more",18,18], then select **Open Terminal** from the dropdown list.
++
+--
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+When opening the node terminal for the first time, the system may prompt about missing permissions because the related service has not started yet. If you encounter this situation, you can try again later.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

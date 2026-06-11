@@ -1,0 +1,26 @@
+---
+title: "注意事项"
+weight: 2
+---
+
+* 升级脚本 upgrade_v1.20 新增一键升级功能。
+* 按模块升级时，该脚本对升级 NeonSAN 集群各服务模块，有先后顺序的要求。目前建议按照如下顺序执行升级操作： +
+neoncenter -> neontool -> neonstore -> neonmonitor ->galera。
+* neoncenter，neonstore，与 galera 服务，是逐个节点升级，需手动多次输入相应节点 IP，直至所有节点均操作完成，即表明集群内该服务升级完成。
+* neontool 与 neonmonitor 为自动安装于集群内所有节点，无需手动多次输入节点 IP。
+* 升级 neoncenter 服务时，建议先升级 Follower Center 节点，最后升级 Leader Center 节点，以减少切换 Leader Center 节点引起的服务中断。操作界面中在进行 neoncenter 服务升级时，会有如下提示信息。
++
+[source,shell]
+----
+upgrade neoncenter TIPS: follower neoncenter first, neoncenter leader last 
+----
+* 升级脚本可以在 NeonSAN 集群中任一安装了 neontool 服务的节点上执行。
+* 整个升级过程成功执行后，NeonSAN 集群中所有 Center，Store，Monitor，tool 模块均为同一版本。可通过如下命令查询版本信息。
++
+[source,shell]
+----
+neonsan list_version -deatil
+----
+
+
+

@@ -1,0 +1,92 @@
+---
+title: "创建规则组"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 创建规则组"
+description: "介绍如何创建规则组。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 2f373632e64e439f855d1a200d8ab5e9
+:ks_xref_id: 05493d51af5d402093a71ddaa9061e62
+:ks_comp: ../../../../components/
+:ks_title: 创建规则组
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 创建规则组
+:ks_description: 介绍如何创建规则组。
+:ks_weight: 01
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+
+本节介绍如何创建告警规则组。
+
+
+== 前提条件link:[id=bfb5b4257840479db7500af03d380575]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbClickhouse/radondbClickhouse-prer-installRadondbClickHouse.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=80d290eaded74856ad85006fbf187137]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbClickhouse/radondbClickhouse-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面右侧点击**告警规则组**页签，然后点击**创建**。
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-setBasicInfo.adoc[]
+
++
+
+. 在**告警规则**页签，点击**添加告警规则**设置告警规则。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|规则名称
+|告警规则的名称。规则名称可包含任意字符，最长 63 个字符。
+
+|触发条件
+|触发告警指标、持续时间和告警级别。
+
+|概要
+|告警消息的内容概要。消息概要可包含任意字符，最长 63 个字符。
+
+|详情
+|告警消息的详细描述。消息详情可包含任意字符，最长 256 个字符。
+|===
+--
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-clickOK.adoc[]

@@ -1,0 +1,117 @@
+---
+title: "创建容器垂直伸缩"
+weight:  01
+---
+
+:ks_permission: **容器垂直伸缩管理**
+:ks_navigation: **弹性伸缩 > 容器垂直伸缩**
+
+
+本节介绍如何创建容器垂直伸缩（VPA）。
+
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* KubeSphere 平台需要安装并启用 **Vertical Pod Autoscaler** 扩展组件。
+
+
+== 操作步骤
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. 在**基本信息**页签，设置容器垂直伸缩的基本信息和伸缩对象，然后点击**下一步**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|容器垂直伸缩的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+|别名
+|容器垂直伸缩的别名。不同 VPA 的别名可以相同。
+
+|描述
+|容器垂直伸缩的描述信息。描述可包含任意字符，最长 256 个字符。
+
+|伸缩对象
+|选择部署和有状态副本集作为伸缩对象。
+|===
+--
+
+. 在**伸缩设置**页签，设置资源策略和更新模式，然后点击**创建**。
++
+====
+* 资源策略 > 添加策略
++
+--
+为所有容器或指定容器设置资源请求值的允许范围。
+
+* **最小/最大允许值**：​VPA 可以为容器​​推荐的资源请求值的范围​。
+
+* 添加策略后，在右侧点击image:/images/ks-qkcp/zh/icons/pen-light.svg[pen,18,18]可编辑策略的设置，点击image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18]可删除策略，点击切换开关，启用或禁用该条策略。
+--
+
+* 更新模式 > 选择模式
++
+--
+更多信息，可参阅 link:../10-vpa-best-practice[VPA 最佳实践]。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|自动更新模式（Auto）	|自动更新 Pod 资源请求，并通过重建的方式应用新的资源配置。
+
+|监控模式（Off）	|仅对资源进行监控并计算推荐值，不会自动调整 Pod 的资源请求。
+
+|初始模式（Initial）	|仅在 Pod 首次创建时设置资源请求，之后不做更改。
+
+|重建模式（Recreate）	|当请求的资源与新的推荐值区别很大时，通过驱逐 Pod 的方式来更新现存的 Pod。
+
+|原地更新模式（InPlaceOrRecreate）	|首先尝试原地重新调整大小，若当前节点资源不足，则选择其他满足条件的节点重建 Pod。
+|===
+--
+
+* 更新模式 > 高级设置
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|最小副本数
+|只有当工作负载正在运行的 Pod 副本数量不低于此值时，VPA 才会执行扩缩操作，以防止因重建 Pod 导致的服务中断。​
+
+|驱逐条件
+|当 Pod 的 CPU/内存的推荐请求值与当前请求值差异较大时，可根据驱逐条件调整或重建 Pod。
+
+* 推荐值高于请求值：当 VPA 计算出的推荐请求值​​​高于​​ Pod 当前设置的请求值时，满足驱逐条件。
+
+* 推荐值低于请求值：当 VPA 计算出的推荐请求值​​​低于​​ Pod 当前设置的请求值时，满足驱逐条件。
+|===
+
+* 点击**添加**可设置多条驱逐条件。
+
+* 在已创建的驱逐条件右侧点击image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18]可删除驱逐条件。
+--
+====
+
+

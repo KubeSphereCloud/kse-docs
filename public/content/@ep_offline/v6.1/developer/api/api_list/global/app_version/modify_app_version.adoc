@@ -1,0 +1,134 @@
+---
+title: 修改应用版本信息（未上架）（ModifyAppVersion）
+weight: 16
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| description
+| String
+| false
+| 版本描述
+
+| detailed_description
+| String
+| false
+| 版本详情
+
+| edition_id
+| String
+| false
+| 系列
+
+| name
+| String
+| false
+| 版本名称
+
+| prices
+| Array
+| false
+| 价格信息
+
+| prices[].charge_mode
+| String
+| false
+| 计费周期
+
+| prices[].currency
+| String
+| false
+| 币种
+
+| prices[].discount
+| Integer
+| false
+| 折扣，默认100
+
+| prices[].price
+| Integer
+| false
+| 价格（元）
+
+| prices[].start_time
+| String
+| false
+| 价格起始日期
+
+| resource_kit
+| String
+| false
+| 配置包ID
+
+| seq
+| Integer
+| false
+| 排序
+
+| service_version
+| String
+| false
+| 应用服务版本
+
+| version_id
+| String
+| true
+| 应用版本ID
+
+| version_type
+| String
+| false
+| 版本类型
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| version_id
+| String
+| false
+| 应用版本ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "description": "测试版本",
+  "name": "版本1",
+  "prices": [
+    {
+      "charge_mode": "elastic",
+      "currency": "cny",
+      "discount": 100,
+      "price": 1,
+      "start_time": "2021-10-20"
+    }
+  ],
+  "version_id": "appv-xxxxxx"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyAppVersionResponse",
+  "ret_code": 0,
+  "version_id": "appv-xxxxxx"
+}
+----

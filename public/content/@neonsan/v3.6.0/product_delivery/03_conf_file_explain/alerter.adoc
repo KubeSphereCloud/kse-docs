@@ -1,0 +1,39 @@
+---
+title: "alerter.conf"
+weight: 6
+---
+
+NeonSAN v3.0 及以上版本使 用自研的 Alerter，配置文件可参考 alerter.conf。
+
+[options="header",cols="2,2,3,1"]
+|===
+|参数名|类型 |说明 |是否必须 
+|run_mode	|字符串	|运行模式，默认为 production	|是
+|interval	|数字	|告警规则检查周期，默认间隔：60s	|否
+|promtheus	|字符串	|promtheus 数据源	|是
+|loki	|字符串	|loki 数据源，目前仅第一个有效	|是
+|members	|字符串	|若多节点运行，则填写各节点 IP	|单节点运行，可省略
+|webhooks	|字符串	|输出到 wehooks，多个同时有效	|是
+
+4+h|listen： 监听设置，可省略
+|address	|字符串	|告警监控节点 IP	|否
+|port	|数字	|端口号	|否
+
+4+h|database： 输出到数据库相关配置，可省略
+|type	|字符串	|数据库类型	|否
+|dsn	|字符串	|数据源	|否
+|table	|字符串	|历史记录的数据库名	|否
+|expire	|数字	|更新时间间隔，默认值为 7	|否
+
+4+h|smtp: 配置告警就收邮箱，可省略
+|host	|字符串	|邮件服务器地址	|否
+|port	|数字	|端口号	|否
+|user	|字符串	|邮箱账号	|否
+|password	|字符串	|邮箱授权密码	|否
+|subject	|字符串	|邮件标题前缀	|否
+|labels	|布尔	|是否输出labels	|否
+|to	|字符串	|告警邮件接收邮箱	|否
+|===
+
+
+

@@ -1,0 +1,79 @@
+---
+title: "部署 NeonSAN 服务"
+weight: 2
+---
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，在 ARM 架构节点上部署 {product_name} 服务。
++
+[source,shell]
+----
+installer product-deploy neonsan -I scale_ip_list
+----
+
++
+
+include::../../../../../../_components/note.adoc[]
+此步骤耗时较长，请耐心等待。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令查看部署任务执行状态。
++
+[source,shell]
+----
+installer task-show <TASK_ID>
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* <TASK_ID> 需根据实际情况进行修改，可执行 ``installer task-list`` 命令进行查看。
+* 返回结果中，关注 ``status`` 字段，需为 ``successful``，即证明服务部署成功，方可进行后续部署。
+
+include::../../../../../../_components/table_footer.adoc[]
+	
+. 若部署失败，执行如下命令，获取当前部署日志查看失败原因。
++
+[source,shell]
+----
+installer deploy-log-get -t <TASK_ID>
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* <TASK_ID> 需根据实际情况进行修改，可执行 ``installer task-list`` 命令进行查看。
+* 也可在 ``/qingstor/log/`` 目录中查看相应的部署日志。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 问题解决后，需执行下列命令对任务进行重试。
++
+[source,shell]
+----
+installer task-operate <TASK_ID> --action retry
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* 重试之后需再次执行步骤 3，查看任务状态，直至返回结果中 ``status`` 字段为 ``successful`` 。
+* <TASK_ID> 需根据实际情况进行修改，可执行 ``installer task-list`` 命令进行查看。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+

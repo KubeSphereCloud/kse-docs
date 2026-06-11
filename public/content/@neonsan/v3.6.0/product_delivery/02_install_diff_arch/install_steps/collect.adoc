@@ -1,0 +1,103 @@
+---
+title: 收集节点信息
+weight: 2
+---
+
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+
+include::../../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 生成添加 ARM 节点所需的 ip_list 文件，该文件中应包含所有 ARM 架构节点的管理 IP 地址，逐行填写即可。
++
+[source,shell]
+----
+vim  scale_ip_list
+xx.xx.xx.xx
+xx.xx.xx.xx
+xx.xx.xx.xx
+----
+
+. 拷贝节点配置文件至 /root/ 目录。
++
+[source,shell]
+----
+cp /qingstor/install/test/yaml/nodes.yaml /root/scale_nodes.yaml
+----
+. 修改 scale_nodes.yaml 文件。
++
+[source,shell]
+----
+vi /root/scale_nodes.yaml
+----
++
+[source]
+----
+# nodes only deploy qingstor
+nodes:
+  - 172.31.30.194
+  - 172.31.30.195
+  - 172.31.30.196
+----
++
+
+include::../../../../../_components/note.adoc[]
+* 将 ARM 架构节点的管理 IP 地址，逐行填写在 nodes 字段下，IP 地址根据实际情况进行填写。
+* 删除 fused_node 和 vm_node 字段相关内容。
+
+include::../../../../../_components/table_footer.adoc[]
++ 
+
+. 执行如下命令，收集新增节点的硬件信息。
++
+[source,shell]
+----
+installer node-add -c scale_nodes.yaml --auto-collect
+----
++
+[source,shell]
+----
++----------+----------+
+| Property | Value    |
++----------+----------+
+|  nodes   | n-w0SUpU |
++----------+----------+
+| task_id  | t-jLI91P |
++----------+----------+
+----
+
+. 执行如下命令，查看新增节点的硬件信息是否收集成功。
++
+[source,shell]
+----
+installer task-show <task_id>
+----
++
+
+include::../../../../../_components/note.adoc[]
+* <task_id> 为步骤 6 返回结果中 `task_id` 所对应的 `Value` 值，需根据实际情况进行修改.
+* 返回结果中 `status` 字段对应 `successful` 即证明硬件收集成功。
+* 若硬件信息收集失败，可登录至相应的 ARM 架构节点查看 ``/qingstor-installer/collect/collect.log`` 日志文件。
+* 若问题无法解决，可联系 QingCloud Installer 小组。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，检查所有 ARM 节点的硬件信息，重点确认节点上的数据磁盘信息以及网络配置信息是否准确。
++
+[source,shell]
+----
+installer node-list -s available -a data_disks,networks
+----
+
+
+

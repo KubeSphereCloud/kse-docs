@@ -1,0 +1,24 @@
+---
+title: "Log Collection"
+keywords: "Kubernetes, {ks_product}, Project Management, Project Settings, Log Collection"
+description: "Introduces how to enable and disable the log collection feature for container logs on volumes."
+weight: 05
+layout: "second"
+---
+
+
+This section describes how to use the log collection feature.
+
+After the log collection feature is enabled, KubeSphere reads the log files saved on volumes by containers and then prints the content of the log files to the container's standard output. To use the log collection feature, perform the following steps:
+
+. Install and enable the "WizTelemetry Logging" extension.
+
+. Enable `logsidecar-injector` in the configuration of the "WizTelemetry Logging" extension. For more information, see link:01-enable-logsidecar/[Enable Log Collection].
+
+. Enable log collection in the project.
+
+. When creating a workload, service, or Job, enable **Collect Logs on Volumes**, mount a readable and writable volume for the container, and set the container log path.
+
+. Configure the application in the container to export logs to the container log path under the volume mount directory. For more information, contact the developer of the container image.
+
+. Use the log query tool to query container logs. For more information, see link:../03-log-query/[Log Query].

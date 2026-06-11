@@ -1,0 +1,94 @@
+---
+title: "查看 Volcano 作业详情"
+weight: 05
+---
+
+:ks_permission: ** project-viewer **
+:ks_navigation: ** Volcano 调度 > Volcano 作业**
+
+
+本节介绍 Volcano 作业详情页面的信息。
+
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Volcano** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. 在 Volcano 作业列表中点击一个作业的名称打开其详情页面。
+
+. 在作业详情页面的**属性**区域查看作业的资源属性。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|状态
+|Volcano 作业的运行状态。更多信息，请参阅link:https://volcano.sh/zh/docs/vcjob/#%E8%B5%84%E6%BA%90%E7%8A%B6%E6%80%81[资源状态]。
+
+|集群
+|作业所属的集群。
+
+|项目
+|作业所属的项目。
+
+|调度器
+|该作业的容器组所使用的调度器。
+
+|队列
+|作业所属的队列，决定了其有资格使用的资源范围。
+
+|最少容器组数量
+|定义了 Volcano 作业进入正常运行状态所需达到的最低要求。只有当作业中处于运行状态的容器组数量不小于最少容器组数量时，该作业才被视为运行正常。
+
+|最大重试次数
+|超过最大重试次数后，作业将标记为失败。
+
+|优先级
+|作业优先级：高、中、低。更高优先级的作业将会优先分配/抢占资源。
+
+|创建时间
+|作业的创建时间。
+
+|创建者
+|创建作业的用户。
+|===
+--
+
+. 在**运行记录**页签查看作业的运行记录。
+
+. 点击**资源状态**页签查看作业中运行的所有容器组。
++
+--
+include::../../../../_custom/clusterManagement/nodes/nodes-para-podList.adoc[]
+--
+
+. 点击**元数据**页签查看作业的标签和注解。
+
+. 点击**环境变量**页签查看容器的环境变量。
+
+. 点击**事件**页签查看作业的事件记录。
++
+--
+include::../../../../_custom/clusterManagement/clusterManagement-para-eventsTab.adoc[]
+--

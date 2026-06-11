@@ -1,0 +1,64 @@
+---
+title: "调整节点数量"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB MongoDB, 应用管理,扩容"
+description: "如何在{ks_product_both}上扩展 RadonDB MongoDB 数据库。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: aacd5ebf6c964e31a747281788aa4fc2
+:ks_xref_id: 3cc2813f93a0490b9d75979d34fa2535
+:ks_comp: ../../../../components/
+:ks_title: 调整节点数量
+:ks_keywords: Kubernetes, {ks_product}, RadonDB MongoDB, 应用管理,扩容
+:ks_description: 如何在{ks_product_both}上扩展 RadonDB MongoDB 数据库。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本小节主要介绍了如何在{ks_product_both}上扩展 RadonDB MongoDB 数据库。
+
+
+== 前提条件link:[id=387e2f7f937b41e2af5b22f46d318df6]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbMongoDB/radondbmongodb-prer-installRadondbmongodb.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=2ddf8f68e1c54faf823166fefa287201]
+
+RadonDB MongoDB 创建成功后，可在{ks_product_both}应用管理页面调整节点数量。
+
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMongoDB/radondbmongodb-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 扩展**。
+
+. 在**扩展**对话框，修改数据库节点数量，然后点击**确定**。

@@ -1,0 +1,73 @@
+---
+title: "中断请求"
+weight:  02
+---
+
+本节介绍如何在故障注入期间中断满足条件的 HTTP 请求。
+
+故障注入期间，通过 GET 方法访问注入 Pod 的 IP 地址时，请求将被中断，Pod 日志中不会记录该请求。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *HTTPChaos*。
+. 配置以下参数后点击 *创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|目标（target）
+|选择 `Request`，对请求生效。
+
+|端口（port）
+|监听端口，例如 `80`。
+
+|请求方法（method）
+|触发故障的 HTTP 方法，例如 `GET`。
+
+|中断（abort）
+|设置为 `true`，中断匹配的请求。
+
+|持续时间（duration）
+|故障持续时间，例如 `10m`。
+
+|生效范围（selector）
+|选择故障注入的目标命名空间和 Pod。
+|===
+
+
+   对应 YAML 示例如下：
+
+[source,yaml]
+----
+apiVersion: chaos-mesh.org/v1alpha1
+kind: HTTPChaos
+metadata:
+  name: http-request-abort
+  namespace: default
+spec:
+  mode: all
+  target: Request
+  port: 80
+  method: GET
+  duration: 10m
+  abort: true
+  selector:
+    namespaces:
+      - default
+    pods:
+      default:
+        - "{{podID}}"
+----
+
+
+验证故障效果：
+
+[source,shell]
+----
+kubectl get pod "{{podID}}" -o wide
+curl "{{podIP}}"
+----
+
+
+   正常情况下立即返回页面；故障注入期间返回错误：`curl: (52) Empty reply from server`，且 Pod 日志中无请求记录。

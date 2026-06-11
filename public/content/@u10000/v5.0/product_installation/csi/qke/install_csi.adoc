@@ -1,0 +1,22 @@
+---
+title: 安装 HydroFS CSI 插件
+weight: 2
+---
+
+QKE 支持在创建集群时，安装 HydroFS CSI 插件。QKE 集群安装完成后，暂不提供单独的 HydroFS CSI 插件安装接口。
+
+. 登录 QKE 所在 IaaS 的 Console。
+
+. 点击**产品与服务** > **容器服务** > **容器引擎 QKE**，进入容器引擎 QKE 主页面。
++
+image::/images/u10000_v5.0/csi_qke_main.png[csi_qke_main,100%]
+
+. 点击**创建集群**，弹出创建集群对话框。
+
+. 在**创建集群**对话框内，点击展开**环境配置参数**，在**存储插件**下拉框内，勾选 `csi-u10000`。
++
+image::/images/u10000_v5.0/csi_qke_1.png[csi_qke_1,90%]
+
+. 其余参数填写，可参考link:https://docsv4.qingcloud.com/user_guide/container/qke_plus/quickstart/create_selfmgt_cluster/[官方文档]。
+
+. 至此，用户创建的 QKE 集群完成安装 HydroFS CSI 插件。

@@ -1,0 +1,68 @@
+---
+title: 步骤四：创建并挂载硬盘（可选）
+weight: 40
+---
+若您需要为云服务器挂载硬盘，您可以参照如下操作步骤为云服务器添加硬盘（块级存储设备）。
+
+== 前提条件
+
+* 已获取 {console_name}的账号和密码。
+* 已创建云服务器
+
+== 方式一：创建并挂载硬盘
+
+. 登录 {console_name}。
+. 选择 *产品与服务* > *计算* > *云服务器*，进入云服务器列表页面。
++
+image::/images/cloud_service/compute/vm/qs_mount_disk_1.png[]
+
+. 在左侧导航栏中，选择 *存储* > *硬盘*，进入硬盘列表页面。
++
+image::/images/cloud_service/compute/vm/qs_mount_disk_2.png[]
+
+. 点击 *创建*，进入 *购买硬盘* 页面。
++
+image::/images/cloud_service/compute/vm/vm_create_disk_win.png[]
+
+. 在**区域及可用区**选择云服务器所在区域，并勾选**挂载云服务器**，选择**当前区域的云服务器**。
++
+
+include::../../../../../_components/note.adoc[]
+硬盘只能挂载到同一可用区的云服务器内，创建后不支持更换可用区，请谨慎选择。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 根据实际情况配置相关参数，点击**立即购买**，弹出**确认配置**窗口。
+. 点击**确认**，进入硬盘列表页面。
++
+若创建的硬盘的状态为 *可用*，则说明硬盘创建并挂载硬盘成功。
+
+. 登录云服务器，执行以下命令，即可看到挂载的硬盘。
++
+[source,shell]
+----
+fdisk -l
+----
++
+或者
++
+[source,shell]
+----
+parted -l
+----
+
+== 方式二：加载硬盘到云服务器
+
+若您在创建硬盘时，没有将硬盘挂载到云服务器，您可以通过如下操作将硬盘加载到云服务器。
+
+. 进入硬盘列表页面。
++
+image::/images/cloud_service/compute/vm/qs_mount_disk_4.png[]
+
+. 勾选可用状态的硬盘，选择 *更多操作* > *加载硬盘到云服务器*，弹出 *选择云服务器* 窗口。
++
+image::/images/cloud_service/compute/vm/qs_mount_disk_5.png[]
+
+. 点击 *提交*，磁盘即可挂载到云服务器。
++
+硬盘的状态变更为使用中，则说明硬盘挂载云服务器成功。

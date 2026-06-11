@@ -1,0 +1,51 @@
+---
+title: "SSL/TLS 加密套件"
+weight: 01
+---
+
+. 修改配置文件 `/etc/kubekey/registry/config.yaml`
++
+[,bash]
+----
+vim /etc/kubekey/registry/config.yaml
+
+# 在 http.tls.ciphersuites 下新增
+http:
+addr: 0.0.0.0:443
+tls:
+certificate: /etc/ssl/registry/ssl/dockerhub.kubekey.local.pem
+key: /etc/ssl/registry/ssl/dockerhub.kubekey.local-key.pem
+ciphersuites:
+- TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+- TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+
+# 重启服务
+systemctl daemon-reload
+systemctl restart registry
+----
+
+. 验证加密套配置。
++
+[,bash]
+----
+curl \
+--cacert /etc/ssl/registry/ssl/ca.pem \
+--cert /etc/ssl/registry/ssl/dockerhub.kubekey.local.pem \
+--key /etc/ssl/registry/ssl/dockerhub.kubekey.local-key.pem \
+-L https://192.168.200.2 \
+--ciphers ECDHE-RSA-AES128-GCM-SHA256
+----
+
+. 验证未配置的加密套。
++
+[,bash]
+----
+curl \
+--cacert /etc/ssl/registry/ssl/ca.pem \
+--cert /etc/ssl/registry/ssl/dockerhub.kubekey.local.pem \
+--key /etc/ssl/registry/ssl/dockerhub.kubekey.local-key.pem \
+-L https://192.168.200.2 \
+--ciphers ECDHE-ECDSA-CHACHA20-POLY1305-SHA256
+----

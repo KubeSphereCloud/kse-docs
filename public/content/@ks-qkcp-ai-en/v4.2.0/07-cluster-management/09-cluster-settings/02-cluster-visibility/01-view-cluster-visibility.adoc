@@ -1,0 +1,46 @@
+---
+title: "View Cluster Visibility"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Cluster Visibility, View Cluster Visibility"
+description: "Describes how to view which workspaces the cluster has been authorized to."
+weight: 01
+---
+
+:ks_permission: **Cluster Settings View**
+:ks_navigation: **Cluster Settings > Cluster Visibility**
+
+This section describes how to view which workspaces the cluster has been authorized to.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster Visibility
+|Whether the cluster is visible to all workspaces.
+
+|Workspace
+|The workspaces that have been authorized.
+
+|Administrator
+|The administrator of the workspace.
+
+|Authorization Time
+|The time when the workspace was authorized.
+|===
+--

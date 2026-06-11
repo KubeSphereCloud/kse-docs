@@ -1,0 +1,53 @@
+---
+title: "Edit Project Role Information"
+keywords: "Kubernetes, {ks_product}, Project Management, Project Settings, Project Roles, Edit Project Role Information"
+description: "Describes how to edit project role information."
+weight: 04
+---
+
+:ks_permission: **Project Role Management**
+:ks_navigation:  **DevOps > DevOps Project Management**
+
+
+This section describes how to edit project role information.
+
+You can edit the alias and description of project roles created by users. KubeSphere does not support editing built-in project roles, nor does it support editing the name of a project role.
+
+
+== Prerequisites
+
+
+include::../../../../../_custom/devops/projectManagement-prer-requiredPermission.adoc[]
+
+
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/devops/projectRoles/roles-oper-openListPage.adoc[]
+
++
+
+include::../../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. To the right of the project role you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Edit Information** from the dropdown list.
+
+. In the **Edit Information** dialog box, set the alias and description for the project role, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../../_custom/projectManagement/projectRoles/projectRoles-para-aliasAndDescription.adoc[]
+|===
+--

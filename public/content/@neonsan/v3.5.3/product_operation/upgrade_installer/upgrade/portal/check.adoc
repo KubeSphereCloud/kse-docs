@@ -1,0 +1,165 @@
+---
+title: "升级 Portal 前检查及更新工作"
+weight: 1
+---
+
+## 检查节点角色
+
+. 登录至 FirstBox。
+. 依次执行如下命令，检查集群中 monitor、zero-web、redis-cache 角色的节点数是否均为 3 个。
++
+* 若所有角色均为 3 个节点，则直接进行后续的 link:../upgrade[Portal 升级操作]。
+* 若 Monitor 角色小于 3 个节点，则需link:#_更新节点角色[更新节点角色]后，再进行后续的 link:../upgrade[Portal 升级操作]。
++
+[,shell]
+----
+installer role-node-list monitor
+installer role-node-list zero-web
+installer role-node-list redis-cache
+----
++
+image::/images/neonsan/upgrade_installer_3.png[]
+
+## 更新 Monitor 节点数
+
+一般情况下，使用 Installer v2.0.18 以下版本工具部署的 NeonSAN 集群中，Monitor 节点有 2 个，升级至 Portal v3.5.3 及以上需要 3 个 Monitor节点，故在升级 Portal 必须检查 Monitor 角色节点的个数，并确保必须有 3 个相应节点。
+
+
+. 登录至 FirstBox，执行如下命令，查看角色的最大数量限制是否为 3。
++
+[,shell]
+----
+installer role-show monitor
+----
++
+image::/images/neonsan/upgrade_installer_4.png[]
+
+. 执行如下命令，添加新的 Monitor 节点，使得 Monitor 节点有 3 个。
++
+[,shell]
+----
+installer role-node-add -n <NODE_ID> monitor
+----
++
+参数说明：
+
+* ``-n`` 用于指定节点 ID，可执行 ``installer node-list`` 查看环境内所有节点的 ID 信息。
+* 此处指定的节点必须为集群中另外一个未被分配 Monitor 角色的管理节点。
+
+. 执行如下命令，检查新的 Monitor 是否添加成功。
++
+[,shell]
+----
+installer role-node-list monitor
+----
+
+////
+=== 升级至 Installer v2.0.17.x 所对应的 Portal 版本
+
+. 登录至 FirstBox，执行如下命令，修改源代码。
++
+[,shell]
+----
+vim /qingstor/install/installer_server/modules/role_manager.py +118
+----
++
+新增一行 `` "num": "",``，如下：
++
+[,python]
+----
+def upgrade_role(self, role_name, role_info, update_nodes):
+        with role_lock:
+            role_doc = self.get_role(role_name)
+            changed = False
+            update_dict = {
+                "num": "",  #新增一行
+                "parent": "",
+                "products": [],
+                "description": "",
+                "mutex": [],
+                "extra_args": []
+            }
+            for item in update_dict:
+----
+
+. 修改 common.yaml 配置文件。
++
+[,shell]
+----
+vim /qingstor/install/conf/role/common.yaml +33
+----
++
+将配置文件中 Monitor 对应的 ``num`` 值修改为 ``3``。
++
+[,yaml]
+----
+monitor:
+  num: 3 
+  parent: common
+  description: "monitoring system"
+  components:
+    - name: node-exporter
+----
+
+. 重启 installer-server 服务。
++
+[,shell]
+----
+systemctl restart installer-server.service
+----
+
+. 查看 Monitor 角色最大数量限制。
++
+[,shell]
+----
+installer role-show monitor
+----
++
+回显示例，查询结果，若最大限制数为 2。
++
+[,shell]
+----
++---------+---------------------------------------+
+|   role  | role info                             |
++---------+---------------------------------------+
+| monitor | {                                     |
+|         |   ...                                 |
+|         |   "num": 2,                           |
+|         |   ...                                 |
+|         | }                                     |
++---------+---------------------------------------+
+----
+
+. 执行如下命令，自动导入角色配置信息。
++
+[,shell]
+----
+installer role-import --update-nodes
+----
+
+. 再次查看 Monitor 角色最大数量限制，返回结果中，``num`` 值应为 3。
++
+[,shell]
+----
+installer role-show monitor
+----
+. 执行如下命令，添加新的 Monitor 节点，使得 Monitor 节点有 3 个。
++
+[,shell]
+----
+installer role-node-add -n <NODE_ID> monitor
+----
++
+参数说明：
+
+* ``-n`` 用于指定节点 ID，可执行 ``installer node-list`` 查看环境内所有节点的 ID 信息。
+* 此处指定的节点必须为集群中另外一个未被分配 Monitor 角色的管理节点。
+
+. 执行如下命令，检查新的 Monitor 是否添加成功。
++
+[,shell]
+----
+installer role-node-list monitor
+----
+////
+

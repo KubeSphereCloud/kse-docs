@@ -1,0 +1,50 @@
+---
+title: "Edit Network Policy Information"
+keywords: "Kubernetes, {ks_product-en}, cluster management, project, edit network policy information"
+description: "Introduce how to edit network policy information."
+weight: 04
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Network Policies**
+
+
+This section introduces how to edit network policy information.
+
+You can edit the alias and description of a network policy. KubeSphere does not support editing the name of a created network policy.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeSphere Network** should have been installed and enabled.
+
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the network policy you want to edit, and then select **Edit Information** from the dropdown list.
+
+. In the **Edit Information** dialog box, set the alias and description of the network policy, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Alias
+|The alias of the network policy. Network policies in different projects can have the same alias. The alias can only contain Chinese characters, letters, numbers, and hyphens (-), and cannot start or end with a hyphen (-), with a maximum length of 63 characters.
+
+|Description
+|The description information of the network policy. The description can contain any characters, with a maximum of 256 characters.
+|===
+--

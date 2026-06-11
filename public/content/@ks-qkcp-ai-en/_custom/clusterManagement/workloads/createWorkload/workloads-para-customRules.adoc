@@ -1,0 +1,31 @@
+// :ks_include_id: 3bea77d96c69484c89893f226380c3c4
+Set custom pod scheduling rules.
+
+* Click **Add** to set multiple rules.
+
+* Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] on the right side of a created rule to delete it.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Type
+|
+The type of the rule.
+
+* **Schedule with Target**: Pod replicas will be scheduled onto the same node as pods with specific labels in the current project.
+
+* **Away from Target**: Pod replicas will be scheduled onto different nodes from pods with specific labels in the current project.
+
+|Strategy
+|
+The enforcement strategy of the rule.
+
+* **Prefer Matching**: Try to meet the rule requirements as much as possible. If the rule requirements cannot be met, pod replicas will be scheduled onto nodes that do not meet the requirements.
+
+* **Must Match**: The rule requirements must be met. If the rule requirements cannot be met, pod replicas cannot be scheduled onto any node.
+
+|Target
+|
+The target of the rule. Pod replicas will be scheduled onto the same node or different nodes as pods with the **app=**<target> label (<target> is the value selected here), depending on the rule's type and strategy.
+|===

@@ -1,0 +1,28 @@
+---
+title: "BGP 路由对接方式"
+weight: 20
+---
+
+== 组网架构
+
+image::/images/ep_offline/ep_twp/vbc_5.png[]
+
+该架构下，路由逻辑如下：
+
+. KS 管理节点部署 2台 或 4台 RS-server VM，与物理网络 CSW/leaf 交换机建立 BGP IPv4 邻居。
+. 云平台控制器将 VBC VM 转发规则进行全网同步，在 RS-server 上以 BGP IPv4 路由形式同步给 CSW/leaf 交换机，同步的路由包括所有 VBC VM 32 位掩码长度的主机路由及 VBC 网段路由。
+. RS-server 基于 community 属性将路由传递给 Hyper 上联的 CSW/leaf。
+. CSW/leaf 基于 BGP 学习到下联 Hyper 的 VM host 路由及 VBC 网段路由，并同步给其他交换机。
+
+== 流量转发逻辑
+
+如下图所示，VM1 和 VM2 属于不同计算节点，加入了同一个 VBC 基础网络，VM1 所在的 Hyper 为 DVR master。
+
+image::/images/ep_offline/ep_twp/vbc_6.png[]
+
+云外网络的主机 PC1 访问 VM1 和 VM2 的数据转发逻辑如下：
+
+. PC1发送数据包，通过数据中心网络设备转发至 CSW。
+. CSW 根据目标 IP 查询路由表，匹配到 VBC 网段静态路由 10.101.101.101/32 和 10.101.101.102/32，分别转发至下一跳 10.88.1.1（即 Hyper1）和 10.88.1.2（即 Hyper2）进行处理。
+. Hyper1 和 Hyper2 收到数据包，根据目标 IP 查询路由表，匹配到 VBC 网段路由，转发至出接口 DVR bridge 处理。
+. Hyper1 和 Hyper2 的 DVR 查询 ARP 表，得到 VM MAC 地址，根据 MAC 地址查询 bridge FDB 表，将数据包发送至 VM。

@@ -1,0 +1,18 @@
+---
+title: Kubernetes 创建 pv 失败
+weight: 3
+draft: true
+---
+
+== 问题原因
+
+NeonSAN 步长默认为 `100G`，需要修改为 `10G`。
+
+== 解决方法
+
+进入配置中心，将 `global` 应用的 `server` 配置内容中的 `hps_volume_step`，点击配置名称。
+
+进入配置中心，将 **global** 应用 > **server** 配置的 ****（步长）改为 ``10``。
+
+image::/images/ep_offline/qke_install/faq_01.png[,70%]
+

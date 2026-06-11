@@ -1,0 +1,96 @@
+---
+title: 角色划分
+weight: 2
+
+---
+
+根据各节点服务器的用途，企业云平台将其划分为多个不同的角色。包括 KS、Hyper、VBR、SNAPSHOT、以及 VG 节点。如下图所示：
+
+image::/images/ep_offline/installation/intro_architecture_01.jpg[,60%]
+
+各角色节点服务器部署的服务以及承担的作用分别说明如下。
+
+== KS 节点
+
+KS 节点，又称为管理节点，全称为：Kernel Service，简称 KS。为企业云平台提供基础管理功能，包括内部数据库、Web 界面、API 接口、租户信息管理、计费管理、BOSS 系统、VM 镜像库、VM 备份服务等。
+
+KS 节点上运行的服务包括但不限于下表。
+
+[cols="1,3a,1"]
+|===
+| 服务 | 描述 | 是否必须
+
+
+| zoocassa	a| zoocassa 为一组服务的统称，包含如下 4 个服务：
+
+* Zookeeper 服务：用于节点的集群管理。
+* Cassandra 数据库：用于存放监控数据。
+* Redis 数据库：用于计费服务缓存。
+* Memcache 数据库：用于前端数据缓存。
+| 是
+
+| pgserver	| PostgreSQL 数据库，用于存放云平台管理信息。| 是
+
+| webservice	| WebConsole 服务。| 是
+| seed	| 镜像模板服务。| 是
+| pgpool	| 数据库连接池。| 是
+| boss	| BOSS 服务。| 是
+| cronus（influxdb）	| 监控组件数据库。| 是
+| warehouse	| 计费功能相关服务。如需使用计费功能，需部署该服务。| 否
+| hpc	| 超性能计算服务。| 否
+| smc	| 迁移中心。比如将虚拟机从 VMware 平台迁移到企业云平台。| 否
+| cloudsat	| 云监控服务。| 是
+
+|===
+
+== VBR 节点
+
+VBR 节点，又称为备份节点，主要用于数据备份。可根据规模和客户备份数据量的大小来决定是否需要独立部署。
+
+include::../../../../../_components/note.adoc[]
+
+若无独立的节点服务器用于部署 VBR 服务，则以下服务可部署于 KS 节点上。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+[cols="1,3,1",options="header"]
+|===
+| 服务 | 描述 | 是否必须
+
+| snapshot	| 数据备份服务。| 是
+| vbr	| 虚拟备份恢复节点。| 是
+
+|===
+
+== Hyper 节点
+
+又称之为计算节点，为企业云平台提供计算、网络、存储等云资源。Hyper 节点上需要运行 hyper 服务。
+
+== VG 节点
+
+又称为虚拟网关节点，提供内部网络的基本安全保护，以及负载均衡器的流量转发控制。VG 节点上运行的服务包括但不限于下表。
+
+include::../../../../../_components/note.adoc[]
+
+若无独立的 VG 节点，则 proxy 和 dnsmaster 服务可部署于 KS 节点上。
+
+include::../../../../../_components/table_footer.adoc[]
+
+[cols="1,3,1",options="header"]
+|===
+| 服务 | 描述 | 是否必须
+
+| vgateway | 虚拟网关服务。| 否
+
+| proxy | Web Console接入代理。| 是
+
+| dnsmaster | DNS 服务，为云平台提供内网域名服务。| 是
+
+|===
+
+
+
+== 存储节点
+
+可根据需求，在企业云平台中增加专门的存储节点，用于海量冷数据的低价存储。

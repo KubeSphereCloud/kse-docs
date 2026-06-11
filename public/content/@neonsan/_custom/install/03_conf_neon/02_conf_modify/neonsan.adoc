@@ -1,0 +1,67 @@
+// neonsan.yaml 配置修改"
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+
+include::../../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 拷贝示例文件至/root 目录下。
++
+[source,shell]
+----
+cp /qingstor/install/test/yaml/neonsan.yaml /root/
+----
+. 修改 neonsan.yaml。
++
+[source,shell]
+----
+vi /root/neonsan.yaml
+----
++
+[source]
+----
+neonsan:
+  cluster_name: "neonsan"
+  client_type: "qbd"
+  # connection type support TCP/RDMA
+  connection_type: "TCP"
+  is_disaster_recovery_site: 0
+  cas_cache_line_size: 8
+  # whether clean the whole disk before deploy neonsan-store, it may take a lot of time
+  clean_the_whole_disk: true
+----
++
+**主要配置字段说明如下所示**，需根据实际情况进行修改。
++
+[options="header",cols="1,3"]
+|===
+|字段	|说明
+|cluster_name	
+|集群名称，默认值为 neonsan，如无特殊要求，保持默认即可
+
+|client_type	
+|NeonSAN 客户端类型，默认值为 qbd，若无特殊要求，保持默认即可
+
+|connection_type	
+|连接类型，可选 TCP 或 RDMA。混插默认配置为 TCP，全闪默认配置为 RDMA
+
+|is_disaster_recovery_site	
+|是否为灾备集群，1 为灾备集群，0 为非灾备集群
+
+|cas_cache_line_size	
+|使用 icas 时 cache_line_size 的大小，默认值为 8k，无特殊要求，保持默认即可
+
+|clean_the_whole_disk	
+a|是否清理整个磁盘，建议提前清理。
+
+* 若是，则设置为 true 即全部写 0，会比较耗时。
+* 若否，则设置为 false，即只清理磁盘的前 20G。
+|===

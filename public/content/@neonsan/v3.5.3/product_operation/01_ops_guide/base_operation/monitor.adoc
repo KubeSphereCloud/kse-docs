@@ -1,0 +1,52 @@
+---
+title: "检查监控相关配置"
+weight: 5
+---
+
+监控配置可参考《NeonSAN 存储系统配置指南》相关内容。
+
+. 登录 NeonSAN 的每个 Store 节点，查看 monitor 的配置信息。
++
+[,shell]
+----
+cat /etc/neonsan/monitor.conf
+----
++
+include::../../../../../_components/note.adoc[]
+* 确认 zookeeper 信息是否配置正确，数据库信息是否配置正确。
+* 若不正确，需确认后，再手动修改相关配置。
+include::../../../../../_components/table_footer.adoc[]
+
+. 查看 prometheus 的配置信息：
++
+[,shell]
+----
+cat /opt/prometheus-1.8.0.linux-amd64/prometheus.yml
+
+……
+alerting:
+   alerters:
+     - scheme: http
+       static_configs:
+       - targets:
+         - "192.168.101.25:9093"
+……
+----
++
+include::../../../../../_components/note.adoc[]
+192.168.101.25 为安装 alerte r服务的节点 IP，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 查看 alerter 的配置信息：
++
+[,shell]
+----
+cat /opt/alerter-0.9.1.linux-amd64/alerter.yml
+----
++
+include::../../../../../_components/note.adoc[]
+* 确认邮件系统是否配置正确，邮箱是否配置正确。
+* 若没有正确配置，需确认后，再手动修改相关配置。
+include::../../../../../_components/table_footer.adoc[]
+
+. 确保 alerter 服务能通外网。

@@ -1,0 +1,19 @@
+---
+title: "DNS 故障模拟"
+weight:  02
+---
+
+本节介绍如何模拟 DNS 故障（DNSChaos）。
+
+DNSChaos 通过干预 Pod 内的 DNS 解析结果，模拟域名解析异常场景，用于验证业务在 DNS 不可用时的降级与容错能力。
+
+== 前提条件
+
+* chaos-dns-server 需已安装（安装混沌工程扩展组件时默认部署）。
+* KubeSphere 平台需要安装并启用混沌工程扩展组件。
+
+== 支持的操作
+
+* 准备测试环境
+* 注入 DNS 解析错误（error）
+* 注入 DNS 随机响应（random）

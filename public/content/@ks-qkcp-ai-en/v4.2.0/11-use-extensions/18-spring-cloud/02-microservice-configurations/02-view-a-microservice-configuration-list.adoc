@@ -1,0 +1,69 @@
+---
+title: "View Microservice Configuration List"
+keywords: "Kubernetes, {ks_product}, Project Management, Spring Cloud, View Microservice Configuration List"
+description: "Describes how to view the microservice configuration list."
+weight: 02
+---
+
+:ks_permission: ** Spring Cloud Microservice View**
+:ks_navigation:  **Spring Cloud > Microservice Configuration**
+
+
+This section describes how to view the microservice configuration list.
+
+
+== Prerequisites
+
+* The **KubeSphere Spring Cloud** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
++
+====
+* The microservice configuration list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the microservice configuration.
+
+|Status
+|The status of the microservice configuration.
+
+* **Running**: The microservice configuration was created successfully and is available for use by microservices.
+
+* **Failed**: A system error occurred during the creation of the microservice configuration, causing the creation to fail.
+
+|Data ID
+|The globally unique identifier of the microservice configuration, composed of <microservice configuration name>.<format>.
+
+|Creation Time
+|The creation time of the microservice configuration.
+|===
+--
+
+* Click the search box above the list and enter a keyword to search for microservice configurations by name.
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

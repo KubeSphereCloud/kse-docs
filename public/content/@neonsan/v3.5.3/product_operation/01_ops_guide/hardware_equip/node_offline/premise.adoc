@@ -1,0 +1,28 @@
+---
+title: "下线前提"
+weight: 1
+---
+
+NeonSAN 节点下线需满足如下条件才能正常下线。
+
+
+* 条件 1：需要集群节点大于等于 4 节点，且剩余空间足够承载待下线节点上的数据，才可以进行正常的维护；若集群为三节点或空间不足，需对集群先进行扩容。
+* 条件 2：维护期间，未挂载的卷，不能挂载，已经挂载的卷不受影响。
+* 条件 3：检查是否存在降级，ERROR 的卷，若有，需要将其先恢复，然后才可以将节点下线。
++
+[,shell]
+----
+neonsan list_volume --detail | grep -v OK
+----
+* 检查 zookeeper、Galera_cluster 的状态，需要这两个集群状态正常，才可以进行下线操作。针对 Zookeeper，需确认 center/store 在 Zookeeper 中的信息是
+否完整。
++
+[,shell]
+----
+/opt/zookeeper/bin/zkCli.sh
+ls /neonsan/cluster_24_31_32/stores/
+ls /neonsan/cluster_24_31_32/centers/
+//需根据实际情况修改 neonsan 集群名
+----
+
+根据待下线节点上部署的服务不同，具体的操作步骤会有区别。详细步骤如下文所示。

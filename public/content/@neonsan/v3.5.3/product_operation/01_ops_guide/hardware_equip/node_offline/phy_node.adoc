@@ -1,0 +1,119 @@
+---
+title: "物理节点下线"
+weight: 4
+---
+
+. 将该节点存储服务做下线处理。参考内容。link:../stor_server[存储服务下线]。
+. 将该节点管理服务做下线处理。参考内容。link:../manage_node/[管理服务下线]。
+. 登录该节点，查看该节点服务状态。
++
+--
+[,shell]
+----
+supervisorctl status
+----
+* 若该节点部署了 center 服务，需停掉 center 服务。
++
+[,shell]
+----
+supervisorctl stop neoncenter
+----
+* 若该节点安装了 prometheus 服务，需查看集群中是否有其他节点安装了该服务，若没有，需要先在其他节点安装并配置 prometheus 服务后，再停掉待下线节点上的 prometheus 服务。prometheus 服务的安装与配置，可参考《NeonSAN 存储系统手动安装部署文档》中相关内容。
++
+[,shell]
+----
+supervisorctl stop prometheus
+----
+
+* 若该节点安装了 alerter 服务，需查看集群中是否有其他节点安装了该服务，若没有，需先在其他节点安装并配置 alerter 服务后，再停掉待下线节点上的 alerter 服务。alerter 服务的安装与配置，可参考《NeonSAN 存储系统手动安装部署文档》中相关内容。
++
+[,shell]
+----
+supervisorctl stop alerter
+----
+* 若待下线节点没有安装与配置 alerter 与 prometheus 服务，节点下线，则无需重新安装配置 alerter 与 prometheus 服务，仅需修改集群中原 alerter 与 prometheus 的配置，剔除待下线节点的相关信息后，再停掉待下线节点上的 monitor 服务即可。
+
+* 若该节点的 monitor 服务中，将如下三个参数。``monitor_store``，``monitor_status``，``monitor_alert`` 均配置为 ``true``，则需另选其他节点，将其节点上的 neonmonitor 服务做如下修改，即。将 ``monitor_store``，``monitor_status``，``monitor_alert`` 三个参数修改为 ``true``，且重启 neonmonitor 服务，使其配置生效后，再停掉待下线节点 neonmonitor 服务。
++
+[,shell]
+----
+supervisorctl stop neonmonitor
+----
+--
+
+. 依次执行如下命令，查看集群状态。
++
+返回结果中，数据库状态与 Zookeeper 状态正常。除下线节点外，其他节点状态均正常。卷状态正常。
++
+* 查看存储节点、磁盘和卷的状态。
++
+[,shell]
+----
+neonsan list_store
+neonsan list_ssd
+neonsan list_volume -detail
+----
+
+* 查看 ZooKeeper 状态。
++
+[,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
+
+* 查看数据库状态，根据实际环境中的数据库类型，选择相应的查看命令。
++
+--
+QingStor MySQL 数据库
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
+
+Galera 数据库
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
+
+Xenondb 数据库
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
+--
+
+. 参考前文内容，link:../../../fault_process/node/[清理下线节点遗留信息]。
+
+. 删除或注释 rc.local 中的如下配置。
++
+[,shell]
+----
+... ...
+if [ ! -S /var/run/supervisor.sock ]; then
+    ulimit -c unlimited
+    echo "/var/crash/core-%p-%e-%t" > /proc/sys/kernel/core_pattern
+    ulimit -n 65535
+    ulimit -l unlimited
+... ...
+----
++
+include::../../../../../../_components/attention.adoc[]
+若该节点重新上线时，上述配置内容仍需添加至 rc.local 中。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 将该节点断电，下线。
+. 对现集群内的 SSD 进行负载均衡。
++
+[,shell]
+----
+neonsan rebalance_ssd
+----
++
+include::../../../../../../_components/note.adoc[]
+该命令为异步执行，可以通过 ``neonsan list_job`` 查看进程。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+

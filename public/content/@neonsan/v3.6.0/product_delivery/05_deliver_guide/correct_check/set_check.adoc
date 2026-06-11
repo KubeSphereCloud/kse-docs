@@ -1,0 +1,47 @@
+---
+title: "集群设置检查"
+weight: 4
+---
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证QingStor NeonSAN集群设置正确。
+
+|预置条件	
+a|. QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+. 各节点服务配置正确，且状态正常。
+
+
+|测试过程
+a|
+. 登录 NeonSAN 任一节点服务器。
+. 检查如下输出内容。
++
+[source,shell]
+----
+neonsan list_store && neonsan list_ssd && neonsan list_port && neonsan list_pool && neonsan  list_parameter && neonsan list_rg -detail
+----
+. 公有云 NeonSAN 集群，需查看如下标签信息。
++
+[source,shell]
+----
+neonsan list_label
+----
+
+|预期结果	
+a|
+. 成功登录 NeonSAN 节点。
+. 返回结果中包含 NeonSAN 节点各项信息，其状态均为 ``OK``。
+* ``list_store`` 命令输出中，包含各存储节点信息，且状态均为 ``OK``。
+* ``list_ssd`` 命令输出中，包含各存储节点上的磁盘信息，且状态均为 ``OK``。
+* ``list_port`` 命令输出中，包含各存储节点上的业务端口，且状态均为 ``OK``。
+. 可查看到相应的公有云的标签。
+
+
+|验证结果	
+|
+
+|备注	
+|
+|===

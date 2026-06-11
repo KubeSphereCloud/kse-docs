@@ -1,0 +1,240 @@
+---
+title: 查询自动伸缩策略规则（DescribeAutoScalingPolicyRules）
+weight: 8
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| autoscaling_policy
+| String
+| true
+| 自动伸缩策略ID
+
+| limit
+| Integer
+| true
+| 查询数量
+
+| offset
+| Integer
+| true
+| 查询偏移量
+
+| owner
+| String
+| true
+| 所有者
+
+| zone
+| String
+| true
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 操作名称
+
+| autoscaling_policy_rule_set
+| Array
+| false
+| 自动伸缩策略规则
+
+| autoscaling_policy_rule_set[].autoscaling_policy_id
+| String
+| false
+| 自动伸缩ID
+
+| autoscaling_policy_rule_set[].autoscaling_policy_rule_id
+| String
+| false
+| 自动伸缩规则ID
+
+| autoscaling_policy_rule_set[].autoscaling_policy_rule_name
+| String
+| false
+| 自动伸缩规则名称
+
+| autoscaling_policy_rule_set[].console_id
+| String
+| false
+| 控制台ID
+
+| autoscaling_policy_rule_set[].controller
+| String
+| false
+| 控制者ID
+
+| autoscaling_policy_rule_set[].cooldown_time
+| String
+| false
+| 冷却时间
+
+| autoscaling_policy_rule_set[].create_time
+| String
+| false
+| 创建时间
+
+| autoscaling_policy_rule_set[].description
+| String
+| false
+| 描述
+
+| autoscaling_policy_rule_set[].last_time
+| String
+| false
+| 最后操作时间
+
+| autoscaling_policy_rule_set[].owner
+| String
+| false
+| 拥有者
+
+| autoscaling_policy_rule_set[].role
+| String
+| false
+| 角色
+
+| autoscaling_policy_rule_set[].root_user_id
+| String
+| false
+| 根用户ID
+
+| autoscaling_policy_rule_set[].scale_direction
+| String
+| false
+| 自动伸缩方向
+
+| autoscaling_policy_rule_set[].scale_params
+| Object
+| false
+| 自动伸缩策略规则参数
+
+| autoscaling_policy_rule_set[].scale_params.TODO
+| String
+| false
+| 待定义
+
+| autoscaling_policy_rule_set[].scale_script
+| String
+| false
+| 自动伸缩策略规则脚本
+
+| autoscaling_policy_rule_set[].status
+| String
+| false
+| 状态
+
+| autoscaling_policy_rule_set[].trigger
+| Object
+| false
+| 触发器
+
+| autoscaling_policy_rule_set[].trigger.trigger_id
+| String
+| false
+| 触发器ID
+
+| autoscaling_policy_rule_set[].trigger.trigger_type
+| String
+| false
+| 触发器类型
+
+| autoscaling_policy_rule_set[].update_time
+| String
+| false
+| 更新时间
+
+| ret_code
+| Integer
+| false
+| 操作结果
+
+| total_count
+| Integer
+| false
+| 数量
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAutoScalingPolicyRules",
+  "autoscaling_policy": "asp-5nezjmtm",
+  "limit": 10,
+  "offset": 0,
+  "owner": "usr-DnmqVpLq",
+  "zone": "qa"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAutoScalingPolicyRulesResponse",
+  "autoscaling_policy_rule_set": [
+    {
+      "autoscaling_policy_id": "asp-5nezjmtm",
+      "autoscaling_policy_rule_id": "aspr-pjx1epnp",
+      "autoscaling_policy_rule_name": "",
+      "console_id": "qacloud",
+      "controller": "self",
+      "cooldown_time": 300,
+      "create_time": "2023-07-05T07:15:58Z",
+      "description": "",
+      "last_time": "2023-07-05T07:10:58Z",
+      "owner": "usr-DnmqVpLq",
+      "role": "",
+      "root_user_id": "usr-DnmqVpLq",
+      "scale_direction": "increase",
+      "scale_params": "",
+      "scale_script": "",
+      "status": "ready",
+      "trigger": {},
+      "update_time": "2023-07-05T07:15:58Z"
+    },
+    {
+      "autoscaling_policy_id": "asp-5nezjmtm",
+      "autoscaling_policy_rule_id": "aspr-pb9rxk6b",
+      "autoscaling_policy_rule_name": "",
+      "console_id": "qacloud",
+      "controller": "self",
+      "cooldown_time": 300,
+      "create_time": "2023-07-05T07:15:58Z",
+      "description": "",
+      "last_time": "2023-07-05T07:10:58Z",
+      "owner": "usr-DnmqVpLq",
+      "role": "",
+      "root_user_id": "usr-DnmqVpLq",
+      "scale_direction": "decrease",
+      "scale_params": "",
+      "scale_script": "",
+      "status": "ready",
+      "trigger": {},
+      "update_time": "2023-07-05T07:15:58Z"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 2
+}
+----

@@ -1,0 +1,27 @@
+---
+title: "Network Isolation"
+keywords: "Kubernetes, {ks_product-en}, workspace, network policy, project settings, network isolation"
+description: "Introduce how to enable network isolation for workspaces and projects."
+weight: 07
+layout: "second"
+---
+
+
+This section introduces how to enable network isolation for workspaces and projects.
+
+The network isolation feature is used to control the egress and ingress traffic of pods in a workspace and project. You can use the network isolation feature to achieve the following:
+
+* Allow pods in the current workspace and project to access only specific other pods or network segments.
+
+* Allow pods in the current workspace and project to be accessed only by specific other pods or network segments.
+
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Enabling workspace network isolation will automatically create network policies for all projects under the workspace in the corresponding cluster. If a new project is added to the workspace, a network policy will be automatically created for the project. If a project is removed from the workspace, the network policy for the project will also be automatically removed.
+
+Enabling project network isolation will automatically create a network policy for the project in the corresponding cluster.
+|===

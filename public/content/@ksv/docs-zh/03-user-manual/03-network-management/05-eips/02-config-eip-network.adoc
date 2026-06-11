@@ -1,0 +1,55 @@
+---
+title: "配置弹性网络"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, 弹性, 网络, Web 控制台, 配置"
+description: "介绍如何使用{ks_product_both}Web 控制台配置弹性网络。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: a4cd53cc374f45269701f8b2a5687ea2
+:ks_xref_id: b58944031a0548548bcdd51da176c7ac
+:ks_comp: ../../../../components/
+:ks_title: 配置弹性网络
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台配置弹性网络。
+:ks_keywords: {ks_product_full}, {ks_product}, 弹性, 网络, Web 控制台, 配置
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+如果您在安装{ks_product_abbr_full_both}时未配置弹性网络，可以在安装完成后通过{ks_product_both}Web 控制台手动配置。本节介绍如何使用{ks_product_both}Web 控制台配置弹性网络。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=682cc0ea27114621922f7b3cd1a96a0f]
+
+include::../../../../_custom/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=eef769b7c497423f83c08ff5abf46a57]
+
+include::../../../../_custom/networks/eip-network-config-steps.adoc[]
+
+. 在**弹性网络**页面，点击**创建**。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+配置弹性网络前，请确认您已创建物理网络。如果当前集群还未创建物理网络，点击**去创建**。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在弹出的对话框中，配置弹性网络相关参数。
++
+--
+include::../../../../_custom/networks/eip-network-config-parameters.adoc[]
+--
+
+. 点击**创建**。

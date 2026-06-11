@@ -1,0 +1,68 @@
+---
+title: "网络连通性检查"
+weight: 3
+---
+
+. 登录任一待部署云易捷的节点服务器。
++
+include::../../../../../_components/note.adoc[]
+默认用户名和密码为 yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，切换至 ``root`` 用户。
++
+[,shell]
+----
+sudo -i
+----
+
+. 检查节点间的网络连通性。
+.. 使用 ``ping`` 命令检查网关是否连通、节点间的网络是否正常、以及是否有丢包现象。
+.. 执行 ``ethtool bond0`` 检查 bond 配置是否准确。返回结果中，显示带宽应为 20000Mb/s。
++
+image::/images/express/delivery/install_delopy_31.png[,50%]
+
+.. 若网络通信异常，需检查物理链路连接及交换机端口配置。
+
+. 检查 FirstBox 的启动状态。
+.. 登录至 FirstBox。
++
+[,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+.. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+.. 查看 FirstBox 日志。
++
+[source,shell]
+----
+tail /root/deploy.log
+----
++
+若返回结果如下所示，即表示 FirstBox 已经准备完成。
++
+[source,shell]
+----
+The installer is bootstrapped successfully. Reboot please!
+----
++
+include::../../../../../_components/note.adoc[]
+FirstBox 创建完成后，为了方便将来访问，可以复制出 FirstBox 的 /root/.ssh/id_rsa 密钥文件备用。
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+
+

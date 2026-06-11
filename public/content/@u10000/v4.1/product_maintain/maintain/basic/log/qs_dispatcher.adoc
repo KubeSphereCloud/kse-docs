@@ -1,0 +1,27 @@
+---
+title: 查看 qs_dispatcher 日志
+weight: 8
+---
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，跳转至 {product_name} 任一网关节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，查看 `qs_dispatcher` 日志。
++
+[source,shell]
+----
+vi /qingstor/log/qs_dispatcher.log
+vi /qingstor/log/qs_dispatcher.log.wf
+----
+

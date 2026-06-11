@@ -1,0 +1,53 @@
+---
+title: "View Service Topology of a Cluster"
+keywords: "Kubernetes, {ks_product}, Tracing, Network, Observability"
+description: "Introduce how to view the invocation relationships between services within a cluster."
+weight: 04
+---
+
+:ks_navigation: **Tracing > Service Topology**
+
+This section describes how to view the invocation relationships and performance metrics between services within a cluster, helping you understand the system architecture, perform troubleshooting, and optimize performance.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../05-users-and-roles/01-users/[Users] and link:../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Tracing** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+
+. In the drop-down list at the top of the page, select a cluster to view the service topology of a specific cluster.
++
+--
+// include::../../../../../_ks_components/oper-refreshListData.adoc[]
+* Click image:/images/ks-qkcp/zh/icons/refresh-light.svg[refresh,18,18] in the upper right corner to refresh the page information.
+
+// include::../../../../../_ks_components/oper-selectTimeRange.adoc[]
+* Click image:/images/ks-qkcp/zh/icons/clock-2.svg[clock-2,18,18] in the upper right corner to set the time range for the data. The default is **Last 5 hours**.
+--
+
+. The **Service Topology** diagram displays the name of each topology node (i.e., service), the total time the service takes to process requests, and the invocation relationships between services. You can also perform the following operations to obtain more information.
++
+--
+* Hover over a topology node to view the nodes that invoke or are invoked by this node, and the direction of the invocations.
+
+* Click a topology node to view its basic information, RPS (Requests Per Second), Error Rate (the proportion of failed requests), and Duration (the total time the service takes to process requests). Click **View Traces** to further analyze the request traces for this service.
+
+* Hover over a topology connection line to view the topology nodes at both ends of the line, and use image:/images/ks-qkcp/zh/icons/left-right-button.svg[left-right-button,18,18] to understand the invocation direction.
+
+* Click a topology connection line or the image:/images/ks-qkcp/zh/icons/left-right-button.svg[left-right-button,18,18] on it to view the start point (client) and end point (server) of the service invocation, their respective total request processing times, and RPS (Requests Per Second). Click **View Traces** to further analyze the detailed trace information for this invocation relationship.
+
+include::../../../../_custom/WizTelemetry/view-topology-tools.adoc[]
+--

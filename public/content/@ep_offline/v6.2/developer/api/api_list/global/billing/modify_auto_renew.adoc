@@ -1,0 +1,86 @@
+---
+title: 修改自动续费（ModifyAutoRenew）
+weight: 18
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| auto_renew
+| Integer
+| true
+| 
+
+| console
+| String
+| true
+| 控制台ID
+
+| resource
+| String
+| true
+| 
+
+| user
+| String
+| true
+| 
+
+| zone
+| String
+| true
+| 
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| failed
+| Array
+| false
+| 失败未处理的资源ID
+
+| success
+| Array
+| false
+| 成功处理的资源ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyAutoRenew",
+  "auto_renew": 2,
+  "console": "qingcloud",
+  "resource": "i-kr7ifxp5",
+  "user": "usr-w9XhbDCL",
+  "zone": "sh1a"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyAutoRenewResponse",
+  "failed": [],
+  "ret_code": 0,
+  "success": [
+    "i-kr7ifxp5"
+  ]
+}
+----

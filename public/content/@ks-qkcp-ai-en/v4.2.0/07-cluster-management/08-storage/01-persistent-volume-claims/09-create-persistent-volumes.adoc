@@ -1,0 +1,150 @@
+---
+title: "Create Persistent Volume"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Persistent Volume Claim, Persistent Volume, Create Persistent Volume"
+description: "Describes how to create a persistent volume."
+weight: 09
+---
+
+:ks_permission: **Persistent Volume Claim Management**
+:ks_navigation: **Storage > Persistent Volume Claims**
+
+
+Persistent Volumes (PVs) are the core carriers of cluster storage resources. In addition to being dynamically created through Persistent Volume Claims, they can also be created manually.
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+include::../../../../_custom/clusterManagement/persistentVolumes/persistentVolumes-oper-openListPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. On the **Basic Information** tab, set the basic information for the persistent volume, then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the persistent volume. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and can be up to 253 characters long.
+
+|Alias
+|The alias of the persistent volume. Different persistent volumes can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), and can be up to 63 characters long.
+
+|Description
+|The description of the persistent volume. The description can contain any characters and can be up to 256 characters long.
+|===
+--
+
+. On the **Advanced Settings** tab, set the storage requirements, then click **Create**.
++
+--
+* General Parameters
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Storage Class
+|The storage class used to create the persistent volume.
+
+|Access Mode
+|
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-para-accessMode.adoc[]
+
+Depending on the backend storage system, some access mode types may not be available.
+
+|Volume Capacity
+|The capacity size of the persistent volume.
+
+|Volume Mode
+|The device type of the persistent volume.
+
+* **Filesystem**: The persistent volume is mounted to the container as a filesystem for the container to use.
+
+* **Block Device**: The persistent volume is provided to the container as a block device.
+
+|Reclaim Policy
+|
+include::../../../../_custom/clusterManagement/persistentVolumes/persistentVolumes-para-reclaimPolicy.adoc[]
+
+|===
+
+* Volume Type > CSI
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Driver
+|A string value specifying the name of the volume driver to use.
+
+|Volume Handle
+|The unique identifier of the persistent volume in the backend storage system.
+
+|Filesystem Type
+|If the volume mode of the persistent volume is Filesystem, this field specifies the filesystem that should be used when mounting the volume.
+
+|Read Only
+|Whether to set the volume as read-only.
+
+|Volume Attributes
+|A key-value pair used to set static properties of the volume.
+|===
++
+For more information about the parameters, please refer to the link:https://kubernetes.io/zh-cn/docs/concepts/storage/volumes/#csi[Kubernetes official documentation].
+
+* Volume Type > HostPath
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Host Path
+|The path of the file or folder on the node that needs to be mounted.
+
+|Path Type
+|For more information about the parameters, please refer to the link:https://kubernetes.io/zh-cn/docs/concepts/storage/volumes/#hostpath-%E5%8D%B7%E7%B1%BB%E5%9E%8B[Kubernetes official documentation].
+|===
+
+* Volume Type > NFS
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Path
+|The path of the shared directory exposed on the NFS server, such as `/mnt/data` or `/share/volume`.
+
+|Server IP Address
+|The IP address of the NFS server.
+
+|Read Only
+|Whether the persistent volume is mounted in read-only mode.
+|===
+
+After creation, the persistent volume will appear in the persistent volume list.
+--

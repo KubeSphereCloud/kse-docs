@@ -1,0 +1,141 @@
+// 与 IaaS 融合部署场景
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+include::../../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 拷贝示例文件至 /root 目录下。
++
+[source,shell]
+----
+cp /qingstor/install/test/yaml/nodes.yaml /root/nodes.yaml
+----
+
+. 修改 nodes.yaml 文件。
++
+include::../../../../../_components/note.adoc[]
+需提前规划 3 个或以上 IaaS 端 KS 节点上的 vm 用于部署 NeonSAN 的 Common 服务。
+include::../../../../../_components/table_footer.adoc[]
++
+[source,shell]
+----
+vi /root/nodes.yaml
+----
++
+[source]
+----
+# Physical nodes that deploy QingStor and do not deploy IAAS.
+nodes:
+  - 172.16.0.30
+# Physical nodes that deploy QingStor and IAAS.
+fused_nodes:
+  - 172.16.0.20
+# NeonSAN management vm nodes running in the IAAS environment.
+vm_nodes:
+  mgmt_netmask: 255.255.255.0
+  mgmt_gateway: 172.16.0.254
+  vms:
+    - hostname: neonsan-ks0
+      # Management IP assigned to the vm.
+      mgmt_ip: 172.16.0.200
+      # Physical node IP running the vm.
+      host_ip: 172.16.0.10
+      # OS disk must be greater than 200G
+      os_disk_size: 200
+      # Specify the OS version for the VM:
+      #   Require the same OS arch as the physical machine.
+      #   It is recommended to fill in the same version as the physical machine.
+      #   If the corresponding image file does not exist, a compatible image file will be used.
+      #   Options: 16.04.3/16.04.5/18.04.1-arm/20.04.1/kylin-V10/kylin-V10-arm.
+      os_version: 16.04.5
+----
++
+*主要配置字段说明*
++
+[options="header",cols="1,3"]
+|===
+|字段 |说明
+|nodes	
+|仅独立部署 NeonSAN 场景下使用的配置字段，与 IaaS 融合部署场景下，可删除
+
+|fused_nodes	
+|与 IaaS 融合部署场景下使用的配置字段，该字段下填写待部署 NeonSAN 服务的节点 IP 地址，即待部署 NeonSAN 的 IaaS Hyper 节点 IP，需参考示例逐行填写各节点 IP
+
+|vm_nodes	
+|在与 IaaS 融合部署场景下，用于部署 NeonSAN Common 服务的 vm 节点
+
+|mgmt_netmask	
+|部署 IaaS 时规划并配置好的 netmask，需在 IaaS 端进行查看
+
+|mgmt_gateway	
+|部署 IaaS 时规划并配置好的 gateway 网关地址，需在 IaaS 端进行查看
+
+|vms	
+|用于配置待部署 NeonSAN Common 服务的 vm 节点信息
+
+|hostname	
+|用于部署 NeonSAN Common 服务的 vm 的 hostname，可参考示例根据实际情况进行修改
+
+|mgmt_ip	
+|分配给 vm 节点的管理 IP 地址，根据实际规划中未被使用的虚机地址
+
+|host_ip	
+|该 vm 节点所在的 IaaS 端物理节点的管理 IP 地址
+
+|os_disk_size	
+|配置该 vm 节点的系统盘的容量，必须不低于 200G
+
+|os_version
+a|vm 节点的操作系统版本。
+
+* 要求架构必须与其所在的物理节点保持一致。
+* 建议版本号与其所在的物理节点保持一致。
+* 若相应的镜像文件不存在，可使用兼容的镜像文件。
+|===
+
+. 删除不需要的节点类型，如示例中的 nodes。修改后，配置内容如下所示。
++
+[source,shell]
+----
+cat /root/nodes.yaml
+----
++
+[source]
+----
+# nodes deploy qingcloud and qingstor
+fused_nodes:
+  - 172.31.60.200
+  - 172.31.60.202
+  - 172.31.60.205
+# neonsan ks vm nodes on iaas
+vm_nodes:
+  mgmt_netmask: 255.255.255.0
+  mgmt_gateway: 172.16.0.254
+  vms:
+    - hostname: neonsan-ks0
+      mgmt_ip: 172.31.60.161
+      host_ip: 172.31.60.199
+      # os_disk_size must be greater than 200G
+      os_disk_size: 200
+      os_version: 16.04.5
+    - hostname: neonsan-ks1
+      mgmt_ip: 172.31.60.162
+      host_ip: 172.31.60.204
+      os_disk_size: 200
+      os_version: 16.04.5
+    - hostname: neonsan-ks02
+      mgmt_ip: 172.31.60.163
+      host_ip: 172.31.60.204
+      os_disk_size: 200
+      os_version: 16.04.5
+----
+

@@ -1,0 +1,78 @@
+---
+title: SANC 性能型云服务器--不限速
+weight: 4
+---
+
+
+[cols='^1h,4a']
+|===
+| 验收目的 | 在系统不限速的前提下，验证 SANC 超高性能型云服务器的性能。
+| 预置条件 | * {platform_name_cn}已部署完成，且当前运行状态正常，所有 Hyper 节点状态均正常。
+* 已创建好测试用户 User-1 并分配适当资源配额。
+* 清除系统默认设置限速参数。
++
+[source,ini]
+----
+  iotune:
+    read_bytes_sec_mass_vol: 0
+    read_bytes_sec_vos_vol: 0
+    read_iops_sec_flash_vol: 0
+    read_iops_sec_vos_vol: 0
+    total_iops_sec: 0
+    total_iops_sec_vos_vol: 0
+    write_bytes_sec: 0
+    write_bytes_sec_flash_vol: 0
+    write_bytes_sec_mass_vol: 0
+    write_bytes_sec_vos_vol: 0
+    write_iops_sec_flash_vol: 0
+    write_iops_sec_vos_vol: 0
+----
+
+
+| 操作步骤 | 
+
+. 使用 User-1 的账户密码登录{platform_name_cn}的 Web Console。
+. 创建一台操作系统为 `ubuntu14.04.3` 的 SANC 性能型云服务器 VM-1，并加入基础网络。
+. 创建容量型6 云盘 Disk-1，并挂载至云服务器 VM-1。
+. 使用 SSH 工具登录云服务器 VM-1，针对 Disk-1 创建分区，并格式化为 `ext4` 文件系统，挂载至 `/mnt` 目录。
+. 在 VM-1 上执行如下命令行，开启 FIO 性能测试，并记录测试结果。
++
+4K 随机读
++
+[source,ini]
+----
+fio -name=my_test -filename=/mnt/ -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=120 -time_based=1 -bs=4k -rw=randread -iodepth=32 -numjobs=1
+----
++
+4K 随机写
++
+[source,ini]
+----
+fio -name=my_test -filename=/mnt/ -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=120 -time_based=1 -bs=4k -rw=randwrite -iodepth=32 -numjobs=1
+----
++
+1024K 顺序读
++
+[source,ini]
+----
+fio -name=my_test -filename=/mnt/ -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=120 -time_based=1 -bs=1024k -rw=read -iodepth=32 -numjobs=1
+----
++
+1024K 顺序写
++
+[source,ini]
+----
+fio -name=my_test -filename=/mnt/ -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=120 -time_based=1 -bs=1024k -rw=write -iodepth=32 -numjobs=1
+----
+
+. 观察 VM-1 上命令行的返回结果。
+
+| 预期结果 | 
+* 命中率为 10% 时，性能区间为 2 ~ 5K IOPS。
+* 命中率为 50% 时，性能区间为 5 ~ 40K IOPS。
+* 命中率为 100% 时，性能区间为 40 ~ 80K IOPS。
+
+| 验证结果 | 
+| 备注 | 由于硬件环境差异，该性能结果仅供参考。
+
+|===

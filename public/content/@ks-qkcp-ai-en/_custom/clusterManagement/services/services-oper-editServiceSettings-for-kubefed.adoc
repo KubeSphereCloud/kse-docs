@@ -1,0 +1,18 @@
+// :ks_include_id: f0f32c026c8a44b7ac18acbadf465ea5
+. On the right side of the service you need to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Edit Settings** from the dropdown list.
+
+. On the **Service Settings** tab of the **Edit Settings** dialog box, modify the service settings.
+
+* For services with an internal access mode of ExternalName, you can modify the external service address.
+
+* For other services, you can modify the service's internal access mode, workload selector, and ports.
++
+--
+include::services-para-serviceSettings.adoc[]
+--
+
+. On the **Cluster Differential Settings** tab of the **Edit Settings** dialog box, configure differential settings for the service in different clusters based on ports, then click **OK**.
++
+--
+// include::../../../multi-clusterProjectManagement/services/services-oper-setClusterDiff.adoc[]
+--

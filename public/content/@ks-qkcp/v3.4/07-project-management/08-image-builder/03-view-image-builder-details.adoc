@@ -1,0 +1,120 @@
+---
+title: "查看镜像构建器详情"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 项目管理, 镜像构建器, 查看镜像构建器详情"
+description: "介绍如何查看镜像构建器详情。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: fdc1833743b744a0b3cb11b7475c4a23
+:ks_xref_id: 83f2b205df154df9bb05fa902da277b3
+:ks_comp: ../../../components/
+:ks_title: 查看镜像构建器详情
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 镜像构建器, 查看镜像构建器详情
+:ks_description: 介绍如何查看镜像构建器详情。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载查看**
+:ks_navigation: **镜像构建器**
+
+
+本节介绍如何查看镜像构建器详情。
+
+
+== 前提条件link:[id=d73ee5a8a99047cf9ed1ad1d53ce3e8c]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=67f9da7b01f34d7ca7c04ae3726654cd]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/projectManagement/imageBuilders/imageBuilders-oper-openDetailsPage.adoc[]
+
++
+
+. 在镜像构建器详情页面左侧的**属性**区域查看镜像构建器的资源属性。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../_custom/projectManagement/imageBuilders/imageBuilders-para-imageName.adoc[]
+
+|项目
+|镜像构建器所属的项目。
+
+include::../../../_custom/projectManagement/imageBuilders/imageBuilders-para-type.adoc[]
+
+|构建器镜像
+|构建器本身的镜像地址、名称和标签。
+
+|镜像名称
+|构建生成的目标镜像的命名空间和名称
+
+include::../../../_custom/projectManagement/services/services-para-codeRepositoryURL.adoc[]
+
+|远程触发器
+|用于触发镜像构建的 URL，向该地址发送 HTTP GET 请求将触发镜像构建。此处显示的地址只能从集群内部访问，如需从集群外部访问，您需要进行以下步骤：
+
+* 联系 **kubesphere-devops-system** 项目的管理员，将 **kubesphere-devops-system** 项目中的 **s2ioperator-trigger-service** 服务以 NodePort 或 LoadBalancer 方式对外暴露。
+
+* 向 **s2ioperator-trigger-service** 服务的外部访问地址和相同的路径发送 HTTP GET 请求触发镜像构建。
+
+include::../../../_custom/projectManagement/imageBuilders/imageBuilders-para-creationTime.adoc[]
+
+|创建者
+|创建镜像构建器的用户。
+|===
+--
+
+. 在镜像构建器详情页面右侧的**运行记录**页签查看镜像构建器的运行记录。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|最后构建环境
+|最后一次镜像构建所使用的构建环境。
+
+* 对于通过源代码构建镜像，显示构建器镜像、代码仓库 URL 和代码所在的分支。
+
+* 对于通过制品构建镜像，显示构建器镜像、制品文件名称和制品文大小。
+
+|运行记录
+|镜像构建的运行记录，显示序列号、状态、镜像名称、开始时间和最后消息。在运行记录右侧点击 image:/images/ks-qkcp/zh/icons/chevron-down.svg["chevron-down",18,18] 可查看镜像构建日志。
+|===
+--
+
+. 在镜像构建器详情页面右侧点击**资源状态**页签查看镜像构建器的容器组运行状态。
++
+--
+include::../../../_custom/clusterManagement/nodes/nodes-para-podList.adoc[]
+--
+
+. 在镜像构建器详情页面右侧点击**镜像制品**页签查看构建生成的容器镜像。
++
+--
+**镜像制品**页签显示容器镜像的名称、大小、拉取命令和发布时间。
+--
+
+. 在镜像构建器详情页面右侧点击**环境变量**页签查看镜像构建器的容器环境变量。
+
+. 在镜像构建器详情页面右侧点击**事件**页签查看镜像构建器的资源事件。

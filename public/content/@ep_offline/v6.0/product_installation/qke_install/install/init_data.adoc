@@ -1,0 +1,251 @@
+---
+title: 插入初始化数据
+weight: 35
+---
+
+== 操作步骤
+
+. 登录 Global Zone 的 Webservice 节点。
+. 执行以下命令，进入 `/pitrix/lib/pitrix-scripts/qke` 目录。
++
+[source]
+----
+cd /pitrix/lib/pitrix-scripts/qke
+----
+. 执行以下命令，修改 `/conf/config.yaml` 文件。
++
+[source]
+----
+vi conf/config.yaml
+----
+. 根据实际环境修改 **regions** 和 **roles** 里面的字段。
++
+配置示例：
++
+[source,yaml]
+----
+regions:
+  pek3:                                # region 名称
+    - pek3b                            # zone 名称
+    - pek3c
+    - pek3d
+  sh1:
+    - sh1a
+    - sh1b
+
+roles:
+  - master:                            # 主节点
+      - prefix: s1                     # 主机规格的前缀名称，此处默认为 s1，可以根据实际情况修改，例如 s1.2xlarge.r1
+        instance_class: 101            # 主机规格示例类型，可根据实际情况修改
+        volume_type: 100               # 主机规格对应的数据盘类型，可根据实际情况修改，可参考主机与磁盘关系表，查看支持的主机类型的磁盘列表
+      - prefix: ec3
+        instance_class: 203
+        volume_type: 200
+  - node_perf:                         # 工作节点-基础型
+      - prefix: s1
+        instance_class: 101
+        volume_type: 100
+  - node_super_perf:                   # 工作节点-企业型
+      - prefix: ec3
+        instance_class: 203
+        volume_type: 200
+----
++
+参数说明：
++
+[cols='1,4a']
+|===
+| 参数 | 说明
+
+| regions | 配置 Region 名称和 Zone 名称。
+
+上述示例中，表示当前环境中有两个 Region，分别为 pek3 与 sh1，其中 pek3 中部署有 pek3b、pek3c、pek3d 三个 Zone，sh1 中部署有 sh1a、sh1b 两个 Zone。
+
+| roles | 用于配置主节点（master）、工作节点（node_perf、node_super_perf）的主机规格和磁盘规格。
+
+如果只有一种主机类型，master 中可只保留一个，node_perf、node_super_perf 中可以填写一样的。
+
+根据实际环境，填写对应的 instance_class 和 volume_type。
+
+* 基础型主机，请配置 instance_class 101，volume_type 100。
+* 企业型主机，请配置 instance_class 203，volume_type 200。
+* 如果使用纯 SSD 的 NeonSAN 存储，则配置 instance_class 6，volume_type 5。
+* 如果使用混插的 NeonSAN 存储，则配置为 instance_class 7，volume_type 6。
+* 更多主机类型、磁盘类型请参见link:../../faq/02[支持的主机类型和硬盘类型]。
+
+|===
+. 修改 **qke_version_info** 字段。
++
+[source,yaml]
+----
+qke_version_info:
+  normal:
+    appid: app-o6lvbkhm                                     # App ID，固定不变，保持默认值即可
+    appv: appv-7290ketz                                    # App 版本，对照“QKE 版本信息”表格
+    resource_kit: ca-nx165q95                           # 资源包，对照“QKE 版本信息”表格
+    qke_version: v3.0.0                                     # 导入的 QKE 版本，例如 v3.0.0
+    qke_cli_version: v3.0.0                                 # 导入的 QKE 版本，例如 v3.0.0
+    kubesphere_version: v3.3.1                              # KubeSphere 的版本，根据 QKE 版本填入支持的 KubeSphere 版本，对照“QKE 版本信息”表格
+    kse_version: v3.3.1                                     # KSE 的版本，根据 QKE 版本填入 KSE 的版本，对照“QKE 版本信息”表格
+    kubernetes_version: v1.23.8                             # K8s 的版本，根据 QKE 版本填入 KSE 的版本，对照“QKE 版本信息”表格
+    compatibility_k8s: ''                                   # 暂不提供 QKE 升级
+    compatibility_ks: 'v1.21.5,v1.22.10,v1.23.8'            # 支持 KubeSphere 升级
+    compatibility_qkcp: 'v1.21.5,v1.22.10,v1.23.8'          # 支持 KSE 升级
+    install_url: 'http://127.0.0.1:8999'                    # QKE v3.0.0 版本及其以后 需要填写上传的 qke-installer 地址，注意请根据实际情况进行修改
+    cli_url: 'http://127.0.0.1:8999/qke-cli-v3.0.0.tar.gz'  # QKE v3.0.0 版本及其以后 需要填写上传的 qke-cli 地址，注意请根据实际情况进行修改
+    private_registry: 'http://127.0.0.1:8999'               # QKE v3.0.0 版本及其以后 需要填写创建的 Harbor 地址列表，例如：http://139.80.22.10:8080
+    feature: ${feature}                                     # 根据 QKE 版本，填写对应的版本的更新记录，对照“QKE 版本特性”表格
+----
++
+参数说明：
++
+[cols='1a,3a']
+|===
+| 参数 | 说明
+
+|
+
+* appid
+* appv
+* resource_kit
+* qke_version
+* qke_cli_version
+* kubesphere_version
+* kse_version
+* kubernetes_version
+
+| 可参考 link:../../intro/version#_qke_版本信息[QKE 版本信息]。
+
+include::../../../../../_components/attention_in_table.adoc[]
+如果使用 KSE，部署成功后，需要登录 KSE 控制台输入 License 激活 KSE 产品。
+include::../../../../../_components/footer_in_table.adoc[]
+
+| install_url | qke-installer 包所在路径。请填写在 link:../../prepare/import/qke_cli[上传 QKE 集群安装包]章节上传的 qke-installer 包的地址。
+| cli_url | qke-cli 包的全路径。请填写在 link:../../prepare/import/qke_cli[上传 QKE 集群安装包]章节上传的 qke-cli 包的地址。
+| private_registry | Harbor 镜像仓库的地址。请填写在 link:../../prepare/import/upload_docker_image[上传 Docker 镜像]章节创建的 Harbor 镜像仓库的地址。
+| feature | 填写对应的版本的更新记录，请保持如下格式，直接复制即可。
+
+* QKE v3.0.0 版本
++
+``<div>1. 新增裸金属节点作为集群工作节点，支持添加、删除操作，提供更强算力。<br/></div><div>2. 支持对接云平台IAM，提升集群组织级账号权限管理能力。<br/></div><div>3. 支持使用U10000作为后端存储，并提供页面展示及管理能力，满足多读多写场景要求。<br/></div><div>4. 修复了一些问题，提升集群稳定性与资源管理能力。<br/></div>``
+
+* QKE v2.3.1 版本
++
+``<div>1. 新增集群节点资源预留。<br/></div><div>2. 重构了可视化控制台的访问功能，支持集群内部访问和外部访问两种方式。<br/></div><div>3. 其他问题和修复，提升产品安全性和资源管理。<br/></div>``
+|===
+
+. 执行以下命令，检查初始化数据是否正确。此步骤仅打印数据，并没有真正执行。
++
+[source]
+----
+./qke -e ./conf/config.yaml
+----
++
+回显信息示例如下：
++
+image::/images/ep_offline/qke_install/install_service_init_data_01.png[]
+. 确保初始化数据无误后，执行以下命令，插入初始化数据。
+
+** 不插入 arm 版本
++
+[source]
+----
+./qke -e ./conf/config.yaml -d 0
+----
+** 插入 arm 版本
++
+[source]
+----
+./qke -e ./conf/config.yaml -d 0 -a 1
+----
+** 只插入升级的版本，即相当于只插入数据库版本
++
+[source]
+----
+./qke -e ./conf/config.yaml --upgrade=true  -d 0
+----
++
+回显信息类似如下，表示操作成功。
++
+image::/images/ep_offline/qke_install/install_service_init_data.png[]
+
+== 完整配置示例
+
+[source,yaml]
+----
+regions:                    # region
+  pek3:                     # region 下的zone根据实际情况填写
+    - pek3b
+    - pek3c
+    - pek3d
+  sh1:
+    - sh1a
+    - sh1b
+
+roles:
+  - master:
+      - prefix: s1          # 主机规格的前缀 列如：
+        instance_class: 101
+        volume_type: 100
+      - prefix: ec3
+        instance_class: 203
+        volume_type: 200
+  - node_perf:
+      - prefix: s1
+        instance_class: 101
+        volume_type: 100
+  - node_super_perf:
+      - prefix: ec3
+        instance_class: 203
+        volume_type: 200
+  # - node_gpu:
+      # - prefix: g2ntp100     # p100
+      #  instance_class: 203
+      #  volume_type: 200
+      #  gpu_count: 1         # every node have gpu p100 number
+      #  gpu_class: 0         # p100 class
+      #  cpu_model: ""        # cpu_model
+      # - prefix: g2nta100    # a100
+      #  instance_class: 203
+      #  volume_type: 200
+      #  gpu_count: 1
+      #  gpu_class: 0
+      #  cpu_model: Broadwell
+  # - node_bm:
+  #    - instance: "bm1.16xlarge.r8" # bm node
+  #      instance_class: 1601
+
+qke_version_info:
+  normal:
+    appid: app-o6lvbkhm
+    appv: appv-7290ketz
+    resource_kit: ca-nx165q95
+    qke_version: v3.0.0
+    qke_cli_version: v3.0.0
+    kubesphere_version: v3.3.1
+    kse_version: v3.3.1
+    kubernetes_version: v1.23.8
+    compatibility_k8s: 'v1.21.5,v1.22.10'
+    compatibility_ks: 'v1.21.5,v1.22.10,v1.23.8'
+    compatibility_qkcp: 'v1.21.5,v1.22.10,v1.23.8'
+    install_url: 'http://127.0.0.1:8999'
+    cli_url: 'http://127.0.0.1:8999/qke-cli-v2.4.0.tar.gz'
+    private_registry: 'http://127.0.0.1:8999'
+    feature: '<div>1. 新增裸金属节点作为集群工作节点，支持添加、删除操作，提供更强算力。<br/></div><div>2. 支持对接云平台IAM，提升集群组织级账号权限管理能力。<br/></div><div>3. 支持使用U10000作为后端存储，并提供页面展示及管理能力，满足多读多写场景要求。<br/></div><div>4. 修复了一些问题，提升集群稳定性与资源管理能力。<br/></div>'
+  #arm:
+    #appid: app-o6lvbkhm
+    #appv: appv-eepv21hi
+    #resource_kit: ca-5famtl8o
+    #qke_version: v2.0.0-arm
+    #qke_cli_version: v2.0.0-arm
+    #kubesphere_version: v3.2.1
+    #kse_version: v3.3.1
+    #kubernetes_version: v1.21.5
+    #compatibility_k8s: 'v1.21.5,v1.22.10'
+    #compatibility_ks: 'v1.21.5,v1.22.10,v1.23.8'
+    #compatibility_qkcp: 'v1.21.5,v1.22.10,v1.23.8'
+    #install_url: 'http://127.0.0.1:8999'
+    #cli_url: 'http://127.0.0.1:8999/qke-cli-v2.0.0-arm.tar.gz'
+    #private_registry: 'http://127.0.0.1:8999'
+    #feature: ""
+----

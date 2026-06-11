@@ -1,0 +1,78 @@
+---
+title: "Create a user"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, users, creation"
+description: "Describes how to create a user in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 1aeedb8ccce74335b857075786c314d4
+:ks_xref_id: ee115630d79c40f88b3cfa2075bcebbb
+:ks_comp: ../../../components/
+:ks_title: Create a user
+:ks_description: Describes how to create a user in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, users, creation
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to create a user in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=65770d17a48d468887c5bca7066b6942]
+
+include::../../../_custom-en/users/user-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=c1e6567eea124f888a17ceb2895b8edf]
+
+include::../../../_custom-en/users/user-steps.adoc[]
+
+. On the ** Local Users** page, click **Create** in the upper-right corner.
+. In the dialog box that appears, configure the user information.
++
+--
+[cols='1a,3a']
+|===
+|Parameter |Description
+
+|Username
+|The name of the user.
+
+include::../../../_custom-en/security-groups/naming-convention.adoc[]
+
+|Email
+|The email address of the user.
+
+The email address can be used to log in to the {ks_product} web console.
+
+|Password
+|The password of the user.
+
+include::../../../_custom-en/users/password-rule.adoc[]
+
+|Confirm Password
+|Enter your password again to confirm.
+
+|Project
+|The project to which the user belongs.
+
+If you do not specify a project when you create the user, the user is not allowed to view or perform operations on any resource.  You can add the user to a project after it is created. For more information, see link:../../04-projects-management/05-add-project-member/[Add a member to a project] and link:../../04-projects-management/07-remove-project-member/[Remove a member from a project].
+
+|Role
+|The role of the user in the project.
+
+|Description
+|The description of the user.
+
+include::../../../_custom-en/networks/description-convention.adoc[]
+|===
+--
+. Click **OK**.  The user appears in the user list after it is created.

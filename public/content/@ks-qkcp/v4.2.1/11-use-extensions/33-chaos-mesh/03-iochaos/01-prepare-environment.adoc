@@ -1,0 +1,42 @@
+---
+title: "准备测试环境"
+weight:  01
+---
+
+本节介绍如何创建测试部署，用于后续验证 I/O 故障注入效果。
+
+*创建测试部署*
+
+
+以下示例通过 ConfigMap 挂载静态 HTML 文件，并使用 nginx 提供访问：
+
+[source,yaml]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: nginx-io
+namespace: default
+spec:
+replicas: 1
+selector:
+ matchLabels:
+   app: nginx-io
+template:
+ metadata:
+   labels:
+     app: nginx-io
+ spec:
+   volumes:
+     - name: nginx-html
+       configMap:
+         name: nginx-io-html
+   containers:
+     - name: nginx
+       image: nginx:stable-perl
+       ports:
+         - containerPort: 80
+       volumeMounts:
+         - name: nginx-html
+           mountPath: /usr/share/nginx/html/
+----

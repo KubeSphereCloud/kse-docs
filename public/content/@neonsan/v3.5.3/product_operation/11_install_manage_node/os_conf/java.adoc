@@ -1,0 +1,37 @@
+---
+title: "安装 JAVA"
+weight: 3
+---
+
+. 将提前获取的 JDK 安装包：jdk-8u92-linux-x64.tar.gz 上传至当前新的管理节点，并
+解压，默认解压至如下路径：/opt/jdk1.8.0_92。
++
+[source,shell]
+----
+tar -zxvf jdk-8u92-linux-x64.tar.gz -C /opt/
+----
+
+. 配置环境变量，在文件 ``/etc/profile`` 末尾添加如下内容
++
+[source,shell]
+----
+vi /etc/profile
+----
++
+[source,conf]
+----
+……
+export JAVA_HOME=/opt/jdk1.8.0_92
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+……
+----
+
+. 执行如下命令，是环境变量生效。
++
+[source,shell]
+----
+source /etc/profile
+----
+
+

@@ -1,0 +1,86 @@
+---
+title: "Zookeeper 检查"
+weight: 2
+---
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统 Zookeeper 正确配置。
+
+|预置条件	
+|QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+
+|测试过程
+a|
+. 登录集群的 FirstBox，查看 Zookeeper 集群节点信息。
++
+[source,shell] 
+----
+cat /etc/hosts \| grep zookeeper
+----
+. 逐一登录 NeonSAN 集群的 Zookeeper 节点服务器。
+. 查看如下配置文件。
++
+[source,shell]
+----
+cat /opt/zookeeper/conf/zoo.cfg
+----
++
+[source,shell]
+----
+cat /qingstor/data/zookeeper/myid
+----
+
+.  执行如下命令，查看 Zookeeper 节点服务状态。
++
+[source,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
+. 执行如下命令，查看 Zookeeper 服务。
++
+[source,shell]
+----
+supervisorctl status zookeeper
+----
+. 执行如下命令，查看 Zookeeper 服务的启动设置。
++
+[source,shell]
+----
+cat /etc/rc.local
+----
+
+|预期结果	
+a|
+. 成功登录 NeonSAN 集群的 FirstBox 节点，并查看相应的 Zookeeper 集群信息。
+. 成功登录各 Zookeeper 节点。
+
+. 检查各节点配置文件内容如下。
++
+* zoo.cfg 文件中，各 IP 地址为集群节点管理 IP。
++
+[source,shell]
+----
+server.1=172.16.0.2:2888:3888
+server.2=172.16.0.3:2888:3888
+server.3=172.16.0.4:2888:3888  
+----
+* zoo.cfg 文件中，有如下两个参数配置。
++
+[source,shell]
+----
+minSessionTimeout=1000
+maxSessionTimeout=40000
+----
+* myid 的配置与 zoo.cfg 中配置保持一致，即 zoo.cfg 中配置为：``server.1=172.16.0.2:2888:3888``，则主机 172.16.0.2 须配置 myid 为 1。
+. Zookeeper 集群中，只有一个节点的状态为 leader，其他节点状态均为 follower。
+. Zookeeper 受 supervisor 服务监管，通过 supervisor 命令，可查看 Zookeeper 服务运行状态为 ``RUNNING``。
+. rc.local 中，无 Zookeeper 相关配置。
+
+|验证结果	
+|
+
+|备注	
+|
+|===

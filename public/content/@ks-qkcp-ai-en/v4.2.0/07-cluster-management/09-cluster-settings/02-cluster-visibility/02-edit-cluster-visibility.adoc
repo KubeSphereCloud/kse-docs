@@ -1,0 +1,50 @@
+---
+title: "Edit Cluster Visibility"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Cluster Visibility, Edit Cluster Visibility"
+description: "Describes how to edit cluster visibility."
+weight: 02
+---
+
+:ks_permission: **Cluster Settings Management**
+:ks_navigation: **Cluster Settings > Cluster Visibility**
+
+This section describes how to edit cluster visibility.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the page, click **Edit Visibility**.
+
+. In the **Edit Visibility** dialog box, authorize or deauthorize workspaces, then click **OK**.
++
+--
+* Click a workspace in the **Unauthorized** list to authorize the cluster to that workspace.
+
+* Click a workspace in the **Authorized** list to deauthorize the cluster from that workspace.
+
+* Toggle the **Set as Public Cluster** switch to authorize the cluster to all workspaces on the KubeSphere platform.
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+* Avoid authorizing the host cluster to workspaces whenever possible, as high load on the host cluster can lead to decreased stability of the multi-cluster system.
+
+* After removing a cluster's authorization from a workspace, all resources belonging to that workspace in the current cluster will be deleted.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

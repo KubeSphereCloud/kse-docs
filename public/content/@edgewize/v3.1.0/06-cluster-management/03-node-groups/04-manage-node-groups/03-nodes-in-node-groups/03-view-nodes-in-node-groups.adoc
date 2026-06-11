@@ -1,0 +1,68 @@
+---
+title: "查看节点组中的节点"
+weight:  03
+---
+
+
+:ks_permission: **节点组查看**
+:ks_menu: **节点管理**
+
+
+本节介绍如何查看节点组中的边缘节点。
+
+== 前提条件
+
+include::../../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+
+== 操作步骤
+
+include::../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
+
++
+====
+* 节点列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|节点的主机名称和在子网内部的 IP 地址。
+// 各节点的主机名称由用户安装集群时在安装配置文件 **config-sample.yaml** 中设置。
+
+|状态
+|
+include::../../../../../_custom/clusterManagement/nodes/nodes-para-nodeStatus_new.adoc[]
+
+如果节点上存在污点，**状态**列还将显示节点上污点的数量。将光标悬停在污点数字上查看污点的具体信息。
+
+|CPU
+|各节点的 CPU 核总数、已使用 CPU 核数量和已使用 CPU 核百分比。已使用 CPU 核数量包含底层系统使用的 CPU 核数量。
+
+|内存
+|各节点的内存总大小、已使用内存大小和已使用内存的百分比。已使用内存大小包含底层系统使用的内存大小。
+
+|容器组
+|各节点上可创建容器组的总数、已创建容器组的数量和已创建容器组的百分比。
+
+|已分配 CPU/已分配内存
+|各节点预留给容器组的 CPU 和内存资源，以及预留资源相对可分配资源的百分比。将光标悬停到数据单元格中可以查看各节点的容器组资源上限，以及资源上限相对可分配资源的百分比。
+
+// 节点上一部分 CPU 和内存资源已经分配给底层系统，所以可分配资源略小于节点实际资源总数。
+|===
+--
+
+* 在列表上方点击搜索框并设置搜索条件，可按名称、状态或角色搜索节点。
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+
+* 点击节点名称，可进入节点的详情页面。有关更多信息，请参阅link:../../../../../06-cluster-management/01-edge-nodes/02-node-management/03-view-node-details[查看节点详情]。
+====

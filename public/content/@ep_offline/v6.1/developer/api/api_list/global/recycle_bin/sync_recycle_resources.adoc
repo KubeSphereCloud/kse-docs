@@ -1,0 +1,74 @@
+---
+title: 同步采集可回收资源（SyncRecycleResources）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| controller
+| String
+| false
+| 控制器
+
+| zone
+| String
+| true
+| 请求区ID
+
+| zones
+| Array
+| false
+| 需要同步的区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| job_ids
+| Array
+| false
+| 
+
+| resource_ids
+| Array
+| false
+| 
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "SyncRecycleResources",
+  "owner": "usr-ei6RFhNN",
+  "zone": "pek3",
+  "zones": [
+    "pek3"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SyncRecycleResourcesResponse",
+  "msg": "sync recycle resources task has been sent",
+  "ret_code": 0,
+  "trace_id": "nkoAgya4"
+}
+----

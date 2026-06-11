@@ -1,0 +1,101 @@
+---
+title: "View VPC details"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VPCs, details, view"
+description: "Describes how to view the details of a VPC in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 846f7a38961a42149423e50a57659d51
+:ks_xref_id: 01a78b8c94984de3be3f4633703165b3
+:ks_comp: ../../../../components/
+:ks_title: View VPC details
+:ks_description: Describes how to view the details of a VPC in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VPCs, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of a virtual private cloud (VPC) in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=38d73c11dcbd422c9adebae8ec436ec5]
+
+include::../../../../_custom-en/networks/vpc-steps.adoc[]
+
+. On the **VPCs** page, click the name of a VPC to view its details.
+. On the left side of the details page, view basic information about the VPC.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the VPC in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the VPC.
+
+|IP Range
+|The IP address range in which the VPC resides.
+
+|Created at
+|The time when the VPC was created.
+
+|Created by
+|The username that is used to create the VPC.
+|===
+--
+. In the **Associated Resources** section, view the elastic IP address (EIP) that is associated with the VPC.
+. On the right side of the details page, click the **Subnets** tab to view the subnets created in the VPC.
+. Click the name of the subnet that you want to view. In the **Associated Resources** area, view the resources that are associated with the subnet.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the associated resource.
+
+|ID
+|The UUID of the resource in the system.
+
+|Status
+|The status of the associated resource.
+
+|IP Address
+|The IP address of the associated resource.
+|===
+--
+. On the right side of the details page, click the **Port Forwarding** tab to view the port forwarding rules created for the VPC.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the port forwarding rule.
+
+include::../../../../_custom-en/networks/naming-convention.adoc[]
+
+|Protocol
+|The protocol type for data transfer. {ks_product} supports the **TCP** and **UDP** protocols.
+
+|Internal Port
+|The port used for the VPC to enable external access.
+
+|Internal IP Address
+|The internal IP address assigned to the VPC.
+
+|Source Port
+|The port used for the VPC to enable external access.
+|===
+--

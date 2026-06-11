@@ -1,0 +1,68 @@
+---
+title: "查看物理网络列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 物理网络, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看物理网络列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 47baffa8303b41be9e4a85fe1f36eb82
+:ks_xref_id: 4acfd60877094e24ae91c9a3de3b3a76
+:ks_comp: ../../../../components/
+:ks_title: 查看物理网络列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看物理网络列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 物理网络, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看物理网络列表。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=7fa5232628cd45638a36f47ea29ce011]
+
+include::../../../../_custom/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=de388af561e64b02b44b66d6c88434d7]
+
+include::../../../../_custom/networks/physical-network-steps.adoc[]
++
+--
+物理网络列表展示系统中的所有物理网络。具体参数信息如下表所示。
+
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|物理网络的名称。
+
+include::../../../../_custom/networks/physical-network-naming-convention.adoc[]
+
+|ID
+|物理网络在系统中的通用唯一标识符，由系统自动分配。
+
+|状态
+|物理网络当前的状态。
+
+|类型
+|物理网络的类型。
+
+include::../../../../_custom/networks/network-type-description.adoc[]
+
+|子网数量
+|物理网络中的子网数量。
+|===
+--
+
+. （可选）点击物理网络列表上方的搜索框并设置搜索条件，可按名称或 ID 搜索物理网络。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的物理网络。
+
+. （可选）在物理网络列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。

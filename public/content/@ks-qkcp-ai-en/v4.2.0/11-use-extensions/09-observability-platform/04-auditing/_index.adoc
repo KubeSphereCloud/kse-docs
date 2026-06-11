@@ -1,0 +1,27 @@
+---
+title: "WizTelemetry Auditing"
+keywords: "Kubernetes, {ks_product}, Auditing"
+description: "Introduces how to use the WizTelemetry Auditing extension."
+weight: 04
+layout: "second"
+---
+
+
+This section introduces how to use the WizTelemetry Auditing extension.
+
+This extension records user-related operational behaviors on the KubeSphere platform in real-time, and provides retrieval and viewing functions for audit history from a multi-tenant perspective, enabling quick backtracking of related user operations.
+
+After installing the WizTelemetry Auditing extension,
+
+* The WizTelemetry Observability Platform in the Component Dock will display the **Logging** menu, and the **Audit Query** option will appear under the **Logging** menu.
+* The **Logging** menu will appear in the cluster's left navigation pane, and the **Log Receivers** and **Audit Query** options will appear under the **Logging** menu. The **Log Receivers** page will display the **Audit Logs** tab, supporting the addition of various types of log receivers. For more information, please refer to link:../02-logging/02-log-receivers/[Log Receivers]. The **Audit Query** page allows users to query audit logs within their permission scope.
+
+//attention
+[.admon.attention,cols="a"]
+|===
+| Note
+
+|
+WizTelemetry Auditing depends on the WizTelemetry Platform Service and WizTelemetry Data Pipeline. Therefore, before installing WizTelemetry Auditing, you must first install and configure these two extensions. Otherwise, the auditing functionality will not work properly!
+
+|===

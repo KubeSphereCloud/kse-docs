@@ -1,0 +1,46 @@
+---
+title: "Appendix: Gateway Logs Not Showing Data in Member Clusters"
+description: "Troubleshoot the issue where gateway logs are not showing data in member clusters."
+weight: 07
+---
+
+If the "Gateway Logs" tab in the "Cluster Gateway" details page of a member cluster does not display data, you can resolve the issue using the following methods.
+
+. Enable the NodePort access mode for the `whizard-telemetry-apiserver` service on the host cluster.
+
+.. Under the **application workloads** menu on the host cluster, click **Services** to enter the services page.
+
+.. Search for the service `whizard-telemetry-apiserver`, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] > **Edit External Access**.
+
+.. In the **Edit External Access** dialog, select **NodePort**, and then click **OK**.
+
+. Modify the configuration of the KubeSphere Gateway extension, set `backend.config.gateway.logSearchEndpoint` to the access address of the `whizard-telemetry-apiserver` service on the host cluster.
++
+[,yaml]
+----
+backend:
+  enabled: true
+  config:
+    gateway:
+      namespace: kubesphere-controls-system
+      valuesOverride:
+        controller:
+          image:
+            registry: ""
+            image: kubesphereio/nginx-ingress-controller
+            tag: "v1.4.0"
+            pullPolicy: IfNotPresent
+            digest: ""
+      exposeNodeLabelKey: "node-role.kubernetes.io/control-plane"
+      versionConstraint: ">= 4.3.0, < 4.5.0"
+      logSearchEndpoint: "http://whizard-telemetry-apiserver.extension-whizard-telemetry.svc:9090" # Replace it with http://<node-ip>:<whizard-telemetry-apiserver-nodeport>
+----
+
+. On the member cluster, restart the gateway `gateway-agent-backend-apiserver`.
++
+[,bash]
+----
+kubectl -n extension-gateway rollout restart deploy gateway-agent-backend-apiserver
+----
+
+. Refresh the **Gateway Logs** tab on the member cluster to see the gateway log data.

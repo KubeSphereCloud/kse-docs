@@ -1,0 +1,25 @@
+---
+title: "原地升级"
+weight: 26
+---
+
+集群原地升级的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_17.png[]
+
+功能流程说明：
+
+. 将 upgrade-audit 注册到 metadata service
+. 不同角色节点按照 order 升序执行 upgrade pre_check 脚本：
++
+* 如果返回报错（非 0），升级失败，删除 upgrade-audit，退出流程，操作结束。
+* 如果返回 0，继续执行步骤 3。
+
+. 使用配置包中定义的 snapshot 创建硬盘并挂载到正在运行的节点虚拟机上。
+. 根据升级策略并行或者串行执行 upgrade cmd 脚本。
+. 解绑新挂载的硬盘并销毁。
+. 删除注册到 metadata service 中的 upgrade-audit 数据。
+. 根据步骤 4 的执行结果判断升级是否成功：
++
+* 如果返回报错（非 0），升级失败。
+* 如果返回 0，升级完成。

@@ -1,0 +1,115 @@
+---
+title: 查看当天日志
+weight: 10
+---
+
+== Nginx 日志
+
+=== 批量搜索
+
+使用 {product_name} 的运维工具，可批量搜索相关日志。
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，搜索 Nginx 日志。
++
+[source,shell]
+----
+/qingstor/bin/search_nginx_log <keyword>
+----
++
+include::../../../../../../_components/note.adoc[]
+
+* 命令行中的 `<keyword>` 是搜索关键字，可以是 HTTP 的错误码，如 `400`、`500`、`502` 等，也可以是 `request-id` 的值，也可以是 Bucket 名，对象名等。 
+* 该命令行回显内容会包括当天所有符合条件的请求，如果请求量大，则会大量刷屏。因此，可在执行该命令行时，将结果重定向到一个文件后，再进行查看看。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+=== 手工搜索
+
+如果正在处理故障，想要查看相应服务是否成功恢复，系统中是否还在继续报错，是否还存在新的 `500`、`499` 错误码等，此时可以执行以下步骤。
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 从 FirstBox 节点，逐个跳转至网关节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 在每个网关节点上，执行如下命令行，查看日志信息。
++
+[source,shell]
+----
+tail -f /var/log/nginx/access.log | grep '" 499 '
+tail -f /var/log/nginx/access.log | grep '" 500 '
+----
++
+include::../../../../../../_components/note.adoc[]
+
+Status Code `499` 前面有双引号和空格。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+== Gateway 日志
+
+=== 批量搜索
+
+使用 {product_name} 的运维工具，可批量搜索相关日志。
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，搜索 Gateway 日志。
++
+[source,shell]
+----
+/qingstor/bin/search_gateway_log <keyword>
+----
++
+include::../../../../../../_components/note.adoc[]
+
+* 该命令行，主要用于查找 {product_name} 的服务组件 `qs_gateway*`、`qs_cache*`、`qs_global_gateway*` 的日志。
+* 命令行中的 `<keyword>` 是搜索关键字，可以是 `request-id` 的值，也可以是 Bucket 名，对象名等。 
+
+include::../../../../../../_components/table_footer.adoc[]
++
+命令行回显示例
++
+image::/images/u10000_v5.0/maintain_5.png[maintain_5,100%]
+
+. 根据以上命令回显内容中的主机名，登录到对应节点进行详细日志查询。
++
+[source,shell]
+----
+ssh gateway0
+cd /qingstor/log/
+grep -r `<关键字>` .
+----
++
+include::../../../../../../_components/note.adoc[]
+
+* 命令行中的 `<keyword>` 是搜索关键字，可以是 `request-id` 的值，也可以是 Bucket 名，对象名等。
+* 如果根据 `request-id` 能在 Nginx 里搜索到相关日志，但是在 Gateway 里没有搜索到相关日志，那么可能是签名出现了问题，可以先登录到对应节点后，用关键字搜索 `/var/log/nginx/error.log`。 
+
+include::../../../../../../_components/table_footer.adoc[]
++
+命令行回显示例
++
+image::/images/u10000_v5.0/maintain_6.png[maintain_6,100%]

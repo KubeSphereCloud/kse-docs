@@ -1,0 +1,104 @@
+---
+title: 配置管理网络
+weight: 5
+---
+
+
+
+操作系统安装完成，且主机名成功修改后，用户需要根据环境规划，依次登录每台物理服务器，为其配置管理网络。
+
+
+
+== 网卡配置要求
+
+{product_name}要求将同一网卡的两口做 Bond，以避免网卡的交叉使用。
+
+* 对于 VG 节点，还需要配置两对 Bond，一对用于连接管理网络，一对用于连接公网。
+
+* 对于 Hyper-Sanc 的融合节点，配置一对 Bond 用于连接物理网络。另外两条私网线路配置存储私网。
+
+
+== SDN 模式网卡配置
+
+若选择 SDN 网络模式，请参照如下配置说明进行修改。
+
+[source,yaml]
+----
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto ens2f0                  # 同一张网卡的一个网口名。
+iface ens2f0 inet manual
+bond-master bond0
+
+auto ens7f0                 # 同一张网卡的另一个网口名。
+iface ens7f0 inet manual
+bond-master bond0
+
+# mgmt network
+auto bond0
+iface bond0 inet static
+address 10.10.0.11        # 需根据前期规划的管理网络进行填写。
+netmask 255.255.255.0
+gateway 10.10.0.254       # 需根据前期规划的网关节点 IP 进行填写。
+bond-mode 4
+bond-miimon 100
+bond-lacp-rate 1
+bond-slaves ens2f0 ens7f0  # 两网口做 Bond。
+----
+
+
+== VLAN 模式网卡配置
+
+若选择 VLAN 网络模式，请参照如下配置说明进行修改。
+
+[source,yaml]
+----
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto enp175s0f0                   # 同一张网卡的一个网口名。
+iface enp175s0f0 inet manual
+bond-master bond0
+
+auto enp175s0f1                   # 同一张网卡的另一个网口名。
+iface enp175s0f1 inet manual
+bond-master bond0
+
+auto bond0
+iface bond0 inet manual
+bond-mode 4
+bond-miimon 100
+bond-lacp-rate 1
+bond-slaves enp175s0f0 enp175s0f1  # 两网口做 Bond。
+
+# mgmt network
+
+auto vlan11                        # vlan11 为 VLAN ID，应与交换机上规划的 VLAN ID 匹配。
+
+iface vlan11 inet static
+address 10.10.1.11                 # 需根据前期规划的管理网络进行填写。
+netmask 255.255.255.0
+gateway 10.10.1.254                # 需根据前期规划的网关节点 IP 进行填写。
+vlan_raw_device bond0
+----
+
+
+== 操作步骤
+
+
+. 依次登录各物理服务器。
+. 执行以下命令，参考 link:#_sdn_模式网卡配置[SDN 模式网卡配置]与 link:#_vlan_模式网卡配置[VLAN 模式网卡配置]，修改配置文件 `/etc/network/interfaces`。
++
+[source,shell]
+----
+vi /etc/network/interfaces
+----

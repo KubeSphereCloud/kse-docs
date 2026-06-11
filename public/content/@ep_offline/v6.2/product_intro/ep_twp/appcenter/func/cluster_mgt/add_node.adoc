@@ -1,0 +1,27 @@
+---
+title: "增加节点"
+weight: 12
+---
+增加节点的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_06.png[]
+
+include::../../../../../../../_components/note.adoc[]
+新增角色节点需应用支持横向伸缩，即在 “advanced_actions” 中定义了 “scale_horizontal”。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+功能流程说明：
+
+. 创建新增节点的资源，如云服务器、硬盘、IP 地址等。
+. 注册新增节点的信息到 metadata service 中（即 `/hosts` 目录下），同时注册到 `/adding-hosts` 这个临时目录下。
++
+应用的云服务器可以从 `/adding-hosts` 目录获取信息并执行横向扩容之前预处理操作等。
+. 由于 metadata service 中集群信息发生改变，因此非新增节点可能会同时更新配置。如果 toml 文件里定义 reload_cmd 且配置确实发生变更则执行该命令。
+. 启动新增节点的 confd agent，同时更新自身配置信息并执行 reload_cmd。　
+. 执行新增节点 init 和 start 中定义的 cmd，按照 init 中 post_start_service 的定义顺序执行。
++
+不同角色节点相同命令的执行顺序，按照 order 的定义从小到大依次执行，默认为 0（最早执行），相同 order 的节点并行执行。　
+. 执行非新增节点（即集群中除新增节点外的其他节点，通过nodes_to_execute_on 指定在某几个节点上执行）scale_out 中定义的 cmd。　
+. 删除 metadata service 中 `/adding-hosts` 这个临时目录下的内容。
+. 由于 metadata service 中集群信息发生改变，因此各个节点可能会同时更新配置。如果 toml 文件里定义 reload_cmd 且配置确实发生变更则执行该命令。

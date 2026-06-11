@@ -1,0 +1,115 @@
+---
+title: 修改告警规则（ModifyAlarmPolicyRuleAttributes）
+weight: 18
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_level_id
+| String
+| true
+| 规则级别
+
+| alarm_policy_rule
+| String
+| true
+| 告警规则id
+
+| condition_type
+| String
+| true
+| 条件
+
+| consecutive_periods
+| Integer
+| true
+| 连续周期
+
+| data_processor
+| String
+| true
+| 数据类型
+
+| meter
+| String
+| true
+| 规则指标
+
+| owner
+| String
+| false
+| 用户
+
+| period_end_hhmm
+| String
+| true
+| 规则生效截至时间
+
+| period_start_hhmm
+| String
+| true
+| 规则生效开始时间
+
+| thresholds
+| String
+| true
+| 阈值
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy_rule_id
+| String
+| false
+| 规则id数组
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyAlarmPolicyRuleAttributes",
+  "alarm_level_id": "level-00000000",
+  "alarm_policy_rule": "alpr-pbzthd6r",
+  "condition_type": "gt",
+  "consecutive_periods": 1,
+  "data_processor": "raw",
+  "meter": "disk-inode",
+  "owner": "usr-rrPKHDpJ",
+  "period_end_hhmm": "23:59",
+  "period_start_hhmm": "00:00",
+  "thresholds": "95",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyAlarmPolicyRuleAttributesResponse",
+  "alarm_policy_rule_id": "alpr-pbzthd6r",
+  "ret_code": 0,
+  "trace_id": "9vm71OTF"
+}
+----

@@ -1,0 +1,98 @@
+---
+title: "View the details of a disk"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, disks, details, view"
+description: "Describes how to view the details of a disk in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: a218e96574b4455fbb0e09cd511f8bdb
+:ks_xref_id: e345797aeb8b4e96adaaa4ad76b44096
+:ks_comp: ../../../components/
+:ks_title: View the details of a disk
+:ks_description: Describes how to view the details of a disk in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, disks, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of a disk in the {ks_product_abbr_full} web console.
+
+include::../../../_custom-en/disks/disk-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=44f3534d556743edb8fc4a569390f2f8]
+
+include::../../../_custom-en/disks/disk-steps.adoc[]
+
+. On the **Disks** page, click the name of the disk that you want to view. The details page of the disk appears.
+. In the **Basic Info** section, view basic information about the disk. The following table describes the parameters.
++
+--
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the disk in the system.
+
+|Status
+|The status of the disk.
+
+|Size
+|The toal size of the disk specified when you create the disk.
+
+|Project
+|The project name in which the disk is created.
+
+|Created at
+|The time when the disk was created.
+
+|Created by
+|The username that is used to create the disk.
+|===
+--
+. In the **VM** section, view the VM to which the disk is mounted.
++
+--
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* You can click image:/images/ksv/en/icons/add-light.svg[18px,18px] to mount the disk to a VM.
+* To unbind the disk from a VM, click image:/images/ksv/en/icons/close-light.svg[close,14] next to the VM ID.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. On the right side of the details page, view disk snapshots. The following table describes the parameters.
++
+--
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the snapshot.
+
+include::../../../_custom-en/disks/disk-snapshot-naming-convention.adoc[]
+
+|ID
+|The UUID of the snapshot in the system.
+
+|Description
+|The description of the snapshot.
+
+include::../../../_custom-en/networks/description-convention.adoc[]
+
+|Size
+|The available disk size when the snapshot is created.
+
+|Created at
+|The time when the snapshot was created.
+|===
+--

@@ -1,0 +1,77 @@
+---
+title: '集群性能测试'
+weight: 3
+---
+
+. 登录集群中的任一节点，查看集群中存储池，并记录包含所有扩容节点的存储池名。
++
+[,shell]
+----
+neonsan list_rg -detail
+----
+
+. 在步骤 1 查询到的新存储池中创建 Voulme 。
++
+[,shell]
+----
+neonsan create_volume -volume vol -pool pool -size 128G  -repcount 3 -rg <rg_name>
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* `<rg_name>` 为步骤 1 查询到的包含新增节点的存储池名，需根据实际情况进行填写。
+* 根据存储池中节点个数，修改卷的副本数。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 将卷挂载至客户端，并查看相应的盘符。
++
+[,shell]
+----
+qbd -m <volume_fullname>
+qbd -l
+----
++
+
+include::../../../../../../_components/note.adoc[]
+`<volume_fullname>` 为步骤 2 创建的新卷的全名（pool_name/volme_name），需根据实际情况进行修改。其中，步骤 2 创建的卷名为 pool/vol。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在客户端使用 fio 工具进行性能测试。 +
+全闪环境下，可直接执行如下命令进行 4K 随机写的性能测试：
++
+[,shell]
+----
+fio -name=test_1 -filename=/dev/qbd0 -bs=4k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=600 -time_based -rw=randwrite -iodepth=32 -numjobs=2
+----
++ 
+混插环境下，需先进行预热，然后再进行性能测试，可参考如下步骤：
++
+[,shell]
+----
+Step1：忽略性能，进行预热。
+fio -name=test_2 -filename=/dev/qbd1 -size=128G -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -bs=1MB -rw=write -iodepth=32-numjobs=1
+
+Step2：执行如下命令进行 4K 随机写的性能测试。
+fio -name=test_2 -filename=/dev/qbd1 -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=120 -time_based=1 -bs=4k -rw=randwrite -iodepth=32 -numjobs=1
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* 全闪环境下，客户端 TCP 4K 随机写性能  区间在40 ~ 70K IOPS。
+* 混插环境下，NVMe SSD 作为缓存盘，预热后，存储端 RDMA，客户端 TCP 4K 随机写的单卷性能区间：命中率为 10% 时，在 2 ~ 5K IOPS；命中率为 50%时，在 5 ~ 40K IOPS；命中率为 100% 时，在 40 ~ 80K IOPS。
+* 由于硬件环境差异，上述性能结果仅供参考。
+* 详细的性能测试方法，可参考link:https://box.yunify.com/s/M9TQnExmk2anTpJ[《{product_name} 存储系统交付验证指南》]。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 性能测试完成后，对环境进行恢复，即删除测试卷即可。
+
+
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+---
+title: "ModifyKeyAttributes"
+description: 
+draft: false
+weight: 75
+---
+修改密钥的信息。
+
+*Request Parameters*
+
+|===
+| Parameter name | Type | Description | Required
+
+| key_id
+| string
+| 密钥 ID
+| Yes
+
+| name
+| string
+| 密钥名称
+| No
+
+| description
+| string
+| 密钥描述
+| No
+|===
+
+link:../../parameters/[_公共参数_]
+
+*Response Elements*
+
+|===
+| Name | Type | Description
+
+| message
+| string
+| 响应消息
+
+| ret_code
+| int
+| 返回码
+|===
+
+*Example*
+
+_Example Request_:
+[source,url]
+----
+https://kms.api.qingcloud.com/?action=ModifyKeyAttributes
+&key_id=
+&COMMON_PARAMS
+----
+
+_Example Response_:
+[source,json]
+----
+{
+"message":"",
+"ret_code":0
+}
+----

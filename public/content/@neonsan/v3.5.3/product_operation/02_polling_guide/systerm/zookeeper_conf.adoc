@@ -1,0 +1,41 @@
+---
+title: "查看 ZooKeeper 配置信息"
+weight: 4
+---
+
+. 登录集群任一节点查看 ZooKeeper 节点信息。
++
+[,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts | grep zookeeper"
+----
++
+回显示例：
++
+[,shell]
+----
+172.31.30.26 zookeeper0
+172.31.30.27 zookeeper1
+172.31.30.28 zookeeper2
+----
+
+. 逐个登录 ZooKeeper 节点。 
+
+. 输入如下命令，查看 ZooKeeper 的配置信息。
++
+[,shell]
+----
+cat /opt/zookeeper-3.4.13/conf/zoo.cfg
+----
++ 
+include::../../../../../_components/note.adoc[]
+根据实际情况修改 ZooKeeper 路径。
+include::../../../../../_components/table_footer.adoc[]
+
+. 检查关键配置信息。
++
+[,shell]
+----
+maxClientCnxns= -> 建议至少 2000
+----
+

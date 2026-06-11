@@ -1,0 +1,175 @@
+---
+title: "查看数据库监控"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB PostgreSQL, 数据库服务监控, 资源监控, 查看监控"
+description: "介绍在{ks_product_both}中 RadonDB PostgreSQL 监控指标，以及监控指标说明。"
+weight: 08
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 1f654b369e7243b8b9aa41d2b09cdb32
+:ks_xref_id: b8c672d5d8bc4bd484bd51c3863a7254
+:ks_comp: ../../../components/
+:ks_title: 查看数据库监控
+:ks_keywords: Kubernetes, {ks_product}, RadonDB PostgreSQL, 数据库服务监控, 资源监控, 查看监控
+:ks_description: 介绍在{ks_product_both}中 RadonDB PostgreSQL 监控指标，以及监控指标说明。
+:ks_weight: 08
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+{ks_product_right}提供对 RadonDB PostgreSQL 应用运行状态进行日常监控，您可以通过{ks_product_both}平台，一站式监控 RadonDB PostgreSQL 数据库服务和容器资源指标。本小节主要介绍如何查看在{ks_product_both}中提供的 RadonDB PostgreSQL 监控指标。
+
+
+== 监控指标简介link:[id=9f3c66af1c1c4c9db006df324906c45d]
+
+
+=== 服务监控指标link:[id=2bf140c786d4488bb354d6d0d1837b17]
+
+[%header,cols="1,5"]
+|===
+|监控项 |说明
+
+|未同步节点数量
+|未同步主节点数据的从节点数量。
+
+|无效节点数量
+|查询不到状态的节点数量。
+
+|未运行节点数量
+|处于未运行状态的节点数量。
+
+|不健康节点数量
+|处于不健康状态的节点数量。
+
+|连接数量
+|统计数据库活动连接、空闲事务连接数和空闲连接与总连接数比值，单位为 %。
+
+|活跃会话
+|当前活跃会话和总会话数的比值，单位为 %。
+
+|缓存命中率
+|数据从缓存中读取的次数与总读取次数的比率。缓存命中率低，会导致频繁的磁盘 I/O 操作，从而降低数据库性能.
+
+|各数据库缓存命中率
+|数据从各个数据库缓存中读取的次数与总读取次数的比率。
+
+|每秒获取行数
+|平均每秒从数据库获取的数据行数。
+
+|每秒插入行数
+|平均每秒往数据库写入的数据行数。
+
+|每秒更新行数
+|平均每秒数据库更新的数据行数。
+
+|每秒删除行数
+|平均每秒数据库删除的数据行数。
+
+|每秒返回行数
+|平均每秒数据库返回的数据行数。
+
+|每秒冲突行数
+|平均每秒数据库有冲突数据的行数。
+
+|每秒死锁数量
+|每秒检测到的死锁数。
+
+|每秒提交数量
+|平均每秒的事务提交数量。
+
+|每秒回滚数量
+|平均每秒回滚的事务数量。
+
+|锁
+|统计数据库锁数量。
+
+|最大事务持续时间
+|每三十分钟统计最大事务持续时间。
+
+|数据库大小
+|统计数据库容量大小，单位为 MB。
+
+|===
+
+
+=== 资源监控指标link:[id=1ebeab0676d04c268394fe48192c775f]
+
+[%header,cols="1,5"]
+|===
+|监控项 |说明
+
+|CPU 用量
+|统计节点资源 CPU 资源使用量，单位为 m。
+
+|内存用量
+|统计节点内存资源使用量，单位为 Mi。
+
+|出站流量
+|统计节点网络流出速率，单位为 Kbps。
+
+|入站流量
+|统计节点网络流入速率，单位为 Kbps。
+
+|===
+
+
+
+== 查看监控link:[id=04f4bddb8d9c49b4a690d32208ff697d]
+
+RadonDB PostgreSQL 在{ks_product_both}平台查看数据库服务和容器资源状态。
+
+本小节主要介绍如何中查看 RadonDB PostgreSQL 应用服务和资源状态。
+
+
+=== 前提条件link:[id=07f8ad9cb1814d69881a230e15a2b1bc]
+
+* 请确保已获取{ks_product_both}平台登录用户帐号和密码，且已获取平台管理权限。
+
+* 请确保已创建 RadonDB PostgreSQL 应用，且应用状态处于运行中。
+
+
+=== 查看节点服务监控link:[id=be30ddba37b9427a801885bcc8b1273c]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbPostgreSQL/radondbpq-oper-openDetailsPage.adoc[]
+
+. 在**概览**页面**节点**列表区域，选择目标节点，并点击**监控**图标，进入服务监控页面，即可查看服务状态。
+
+. 在时间过滤框，选择监控时间范围，点击**确定**，即可查看指定时间范围的服务监控。
+
+
+=== 查看节点资源监控link:[id=b4ecebb793c8425881373b0feaa60901]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbPostgreSQL/radondbpq-oper-openDetailsPage.adoc[]
+
+. 在**概览**页面**节点**列表区域，点击目标节点名称，进入节点容器组详情页面。
+
+. 选择**监控**页签，进入资源监控页面，查看资源状态。
+
+. 在时间过滤框，选择监控时间范围，点击**确定**，即可查看指定时间范围的资源监控。

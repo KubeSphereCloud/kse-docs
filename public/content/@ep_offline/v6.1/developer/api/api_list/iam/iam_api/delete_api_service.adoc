@@ -1,0 +1,59 @@
+---
+title: 删除IAM纳管服务（DeleteIAMApiService）
+weight: 9
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| audit_log
+| String
+| false
+| 审计日志
+
+| service_name
+| String
+| false
+| 纳管服务英文名
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| service_name
+| String
+| false
+| 纳管服务英文名
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeleteIAMApiService",
+  "service_name": "ecm"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteIAMApiServiceResponse",
+  "ret_code": 0,
+  "service_name": "ecm"
+}
+----

@@ -1,0 +1,81 @@
+---
+title: "检查节点或磁盘状态"
+weight: 1
+---
+
+确认该卷所在节点或磁盘是否正常。
+
+. 查看待恢复卷的 ID。
++
+[,shell]
+----
+neonsan list_volume -detail
+----
++
+image::/images/neonsan/ops_guide_5.png[]
+
+. 查看待恢复卷的主副本分布，根据版本的不同，操作步骤存在差异，具体参考如下内容。
++
+--
+* NeonSAN v2.2.0 及以后版本
++
+执行如下命令，根据步骤 1 中查询到的卷名，查看该卷的主副本分布。返回结果中 ``IS PRIMARY`` 字段为 ``true`` 的即为**主副本**，并记
+录其 ``STORE ID`` 与 ``SSD UUID`` 字段。
++
+[,shell]
+----
+neonsan list_replica_location -volume <pool_name/volume_name>
+----
++
+image::/images/neonsan/ops_guide_6.png[]
++
+include::../../../../../../../_components/note.adoc[]
+-volume 参数为待恢复卷的全名。
+include::../../../../../../../_components/table_footer.adoc[]
+
+* NeonSAN v2.2.0 之前版本
++
+登录数据库。
++
+[,shell]
+----
+mysql -uneonsan -pzhu88jie neonsan
+----
++
+根据步骤 1 中查询的卷 ID，查看该卷的主副本分布。
++
+[,sql]
+----
+mysql> select * from replica_ext where is_primary=1 and vid=4479516672;
+----
++
+image::/images/neonsan/ops_guide_7.png[]
++
+include::../../../../../../../_components/note.adoc[]
+命令中输入的参数 ``vid``，为步骤 1 中查询的卷对应的 ID 字段。
+include::../../../../../../../_components/table_footer.adoc[]
+--
+
+. 输入如下命令，查看集群中各存储节点状态。
++
+重点查看待恢复卷主副本所在存储节点状态是否为 ``OK``。
++
+[,shell]
+----
+neonsan list_store
+----
++
+image::/images/neonsan/ops_guide_8.png[]
+
+. 输入如下命令，查看集群中各磁盘状态。
++
+重点查看待恢复卷主副本所在磁盘的状态是否为 ``OK``。
++
+[,shell]
+----
+neonsan list_ssd
+----
++
+image::/images/neonsan/ops_guide_9.png[]
+
+. 根据以上步骤，确定主副本所在磁盘或存储节点状态是否正常后，再根据不同情形，对卷进行恢复。

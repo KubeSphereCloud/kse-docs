@@ -1,0 +1,43 @@
+---
+title: "查看节点组概览"
+weight:  09
+---
+
+:ks_permission: **节点组管理**
+:ks_menu: **节点组 > 节点组目录**
+
+
+本节介绍如何查看节点组的概览信息。
+
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
+
+. 点击左侧任一节点组，右侧将展示该节点组的概览信息，如节点组位置、所用 IP 池、边缘节点信息等。
++
+====
+* 若节点组中没有边缘节点，可添加已有边缘节点到节点组，即将节点分配到节点组。
+
+* 若节点组中已有边缘节点，节点列表将显示边缘节点的名称、状态、CPU、内存、容器组、所在节点组等信息。
++
+--
+* 在列表上方点击搜索框并设置搜索条件，可按名称或状态搜索节点。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+
+* 在列表右上角点击**添加**可添加边缘节点。
+
+* 在节点右侧点击image:/images/ks-qkcp/zh/icons/more.svg["more",18,18]，然后在下拉列表中选择**脱离节点组**，可将边缘节点从该节点组中移除。
+--
+====

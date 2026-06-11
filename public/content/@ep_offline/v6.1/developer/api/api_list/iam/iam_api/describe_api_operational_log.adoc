@@ -1,0 +1,215 @@
+---
+title: 查询IAM操作日志（DescribeIAMApiOperationalLog）
+weight: 14
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action_name
+| String
+| false
+| API
+
+| action_result
+| String
+| false
+| 执行结果
+
+| end_time
+| String
+| false
+| 截止时间
+
+| limit
+| Integer
+| false
+| 偏移量
+
+| offset
+| Integer
+| false
+| 起始坐标
+
+| resource_id
+| String
+| false
+| 资源ID
+
+| reverse
+| Integer
+| false
+| 是否降序查询
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| sort_key
+| String
+| false
+| 排序使用的列
+
+| start_time
+| String
+| false
+| 开始时间
+
+| user_id
+| Array
+| false
+| 操作日志
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| log_set
+| Array
+| false
+| 操作日志
+
+| log_set[].action_err_msg
+| String
+| false
+| 操作错误消息
+
+| log_set[].action_name
+| String
+| false
+| 操作名称
+
+| log_set[].action_result
+| String
+| false
+| 操作结果
+
+| log_set[].action_ret_code
+| String
+| false
+| 操作的返回码
+
+| log_set[].create_time
+| String
+| false
+| 创建时间
+
+| log_set[].executor
+| String
+| false
+| 执行者
+
+| log_set[].log_id
+| String
+| false
+| 日志ID
+
+| log_set[].resource_extra
+| String
+| false
+| 资源的其他信息,json字符串
+
+| log_set[].resource_ids
+| Array
+| false
+| 资源列表
+
+| log_set[].resources
+| Object
+| false
+| 创建时间
+
+| log_set[].resources.iam_policy
+| Array
+| false
+| IAM策略
+
+| log_set[].resources.iam_user
+| Array
+| false
+| IAM用户
+
+| log_set[].user_id
+| String
+| false
+| 状态
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMApiOperationalLog",
+  "limit": 20,
+  "offset": 0,
+  "reverse": 1,
+  "sort_key": "create_time"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMApiOperationalLogResponse",
+  "log_set": [
+    {
+      "action_err_msg": "",
+      "action_name": "AttachIAMPolicy",
+      "action_result": "COMPLETED",
+      "action_ret_code": "0",
+      "create_time": "2023-06-02T14:55:19",
+      "executor": "admin",
+      "log_id": "iamol-om0wwucb",
+      "resource_extra": "{}",
+      "resource_ids": [
+        "iamp-uu98xwrw",
+        "iamu-xko3dbah"
+      ],
+      "resources": {
+        "iam_policy": [
+          "iamp-uu98xwrw"
+        ],
+        "iam_user": [
+          "iamu-xko3dbah"
+        ]
+      },
+      "user_id": "admin"
+    },
+    {
+      "action_err_msg": "",
+      "action_name": "CreateIAMUser",
+      "action_result": "COMPLETED",
+      "action_ret_code": "0",
+      "create_time": "2023-06-02T14:55:19",
+      "executor": "admin",
+      "log_id": "iamol-umh0gk2g",
+      "resource_extra": "{}",
+      "resource_ids": [
+        "usr-gXQcoKqx"
+      ],
+      "resources": {
+        "user": [
+          "usr-gXQcoKqx"
+        ]
+      },
+      "user_id": "admin"
+    }
+  ],
+  "ret_code": 0
+}
+----

@@ -1,0 +1,105 @@
+---
+title: 修改 QKE Plus 初始化数据
+weight: 2
+---
+
+== 问题描述
+
+若在link:../../install/set_apiserver/#_步骤二插入初始化数据[初始化数据]过程中，某个字段的值填写错误时，该如何修改？
+
+== 解决方法
+
+=== 使用 qke 脚本
+
+{product_name}在 v6.0 以及 v6.1 的 20230928 之后完善了 qke 脚本命令，新增了清除初始化数据的操作。参考 link:../../install/set_apiserver/#_qke_命令行[qke 命令行]，实施人员可执行清除初始化数据的命令行。
+
+. 执行如下命令行，清楚初始化数据。其中配置文件目录 `/conf/config.yaml` 需根据实际情况进行修改。
++
+[source,shell]
+----
+./qke -e ./conf/config.yaml -c logic -d 0
+----
+
+. 修改配置文件 `/conf/config.yaml`。
++
+[source,shell]
+----
+vi conf/config.yaml
+----
+
+. 执行如下命令行，重新运行脚本导入数据。
++
+[source,shell]
+----
+./qke -e ./conf/config.yaml -d 0
+----
+
+. 重新创建 QKE Plus 集群。
+
+
+=== 手动修改
+
+若当前环境中没有清除初始化数据的脚本 `./qke -c logic`，则参考以下步骤。
+
+
+
+. 登录 Postgress 数据库节点。
+. 执行如下命令行，查找 Master 节点。
++
+[source,shell]
+----
+cat /pitrix/run/pg_master
+----
+. 根据以上查询信息，登录数据库的 Master 节点。
+. 执行以下命令行，进入 `qke_plus` 数据库。
++
+[source,shell]
+----
+psql -d qke_plus
+----
+
+. 执行以下步骤，更新数据。
++
+* 全新环境
++
+若当前环境目前暂时没有任何用户创建的集群，实施人员可手动删除初始化数据。详细操作如下。
++
+.. 执行如下命令行，删除初始化数据。
++
+[source,shell]
+----
+delete from qke_db_zone; delete from qke_db_version;delete from qke_db_spec;
+----
+.. 修改配置文件 `config.yaml`。
+.. 执行如下命令行，重新运行脚本导入数据。
++
+[source,shell]
+----
+./qke -e ./conf/config.yaml -d 0
+----
+
++
+* 使用 `update` 命令
++
+直接使用 `update` 命令修改指定表的字段。这里给出参考命令。
++
+.. 如私有仓库地址 `private_registry` 字段填写错误。
++
+[source,shell]
+----
+update qke_db_version set private_registry='' where id=${id};
+----
+
+.. `install_url` 字段填写错误。
++
+[source,shell]
+----
+update qke_db_version set installer_url='' where id=${id};
+----
+
+.. `cli_url` 字段填写错误。
++
+[source,shell]
+----
+update qke_db_version set cli_url ='' where id=${id};
+----

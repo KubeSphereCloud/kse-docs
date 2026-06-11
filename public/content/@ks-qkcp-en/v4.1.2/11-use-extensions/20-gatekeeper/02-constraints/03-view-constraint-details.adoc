@@ -1,0 +1,51 @@
+---
+title: "View Constraint Details"
+description: "Learn how to view constraint details."
+weight: 03
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: ** Gatekeeper > Constraints**
+
+
+This section describes how to view constraint details.
+
+
+== Prerequisites
+
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **Gatekeeper** should have been installed and enabled.
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. Click the name of a constraint in the constraint list to open its details page.
+
+. In the **Attributes** area on the left side of the constraint details page, view the basic information of the constraint.
++
+--
+
+[%header,cols="2,5"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the constraint belongs.
+
+|Creation Time
+|The creation time of the constraint.
+
+|===
+--
+
+. In the **Violations** tab on the right side of the constraint details page, view the violation information.

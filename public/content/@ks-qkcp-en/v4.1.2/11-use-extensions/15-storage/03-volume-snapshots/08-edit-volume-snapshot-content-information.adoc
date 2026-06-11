@@ -1,0 +1,53 @@
+---
+title: "Edit Volume Snapshot Content Information"
+keywords: "Kubernetes, {ks_product-en}, cluster management, volume snapshot content"
+description: "Learn how to edit the information of a volume snapshot content."
+weight: 08
+---
+
+:ks_permission: **Volume Snapshot Contents Management**
+:ks_navigation: **Storage > Volume Snapshots**
+
+
+This section describes how to edit the information of a volume snapshot content.
+
+You can edit the alias and description of a volume snapshot content. KubeSphere does not support editing the name of a volume snapshot content.
+
+
+== Prerequisites
+
+* **KubeSphere Storage** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom-en/clusterManagement/volumeSnapshotContents/volumeSnapshotContents-oper-openListPage.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the volume snapshot content you want to operate, then select **Edit Information** from the dropdown list.
+
+. In the **Edit Information** dialog, set the alias and description of the volume snapshot content, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Alias
+|The alias of the volume snapshot content. Different volume snapshot contents can have the same alias. The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), and can be up to 63 characters long.
+
+|Description
+|The description of the volume snapshot content. The description can contain any characters and can be up to 256 characters long.
+|===
+--

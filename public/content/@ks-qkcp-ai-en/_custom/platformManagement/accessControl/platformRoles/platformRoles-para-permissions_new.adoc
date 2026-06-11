@@ -1,0 +1,71 @@
+// :ks_include_id: 175d7d7252294a048ca2f385318a9c7a
+Platform roles can be configured with the following permissions:
+
+* Access Control
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Workspace Viewing
+|View the workspace list.
+
+|Workspace Management
+|Create workspaces, edit workspace information, delete workspaces.
+
+|User Viewing
+|View the user list, view user details.
+
+|User Management
+|Create users, edit user information, enable and disable users, modify user roles, delete users.
+
+|Role Viewing
+|View the role list, view role details.
+
+|Role Management
+|Create platform roles, edit platform role information, edit platform role permissions, delete platform roles.
+|===
+--
+
+* Cluster Management
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Cluster Viewing
+|View the cluster list.
+
+|Cluster Management
+|Add member clusters, edit cluster information, update kubeconfig, remove member clusters.
+|===
+--
+
+* Application Management
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Application Viewing
+|View the application template list, view application template details, view application review records.
+
+|Application Template Management
+|Take down and publish applications, take down and publish application versions, manage application categories, set the category an application belongs to, review application versions.
+|===
+--
+
+* Platform Settings Management
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Platform Settings Management
+|Set platform information, notifications, etc.
+|===
+--

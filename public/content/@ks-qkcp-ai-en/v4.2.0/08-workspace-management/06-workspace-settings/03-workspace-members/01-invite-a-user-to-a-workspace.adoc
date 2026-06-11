@@ -1,0 +1,43 @@
+---
+title: "Invite Users to a Workspace"
+keywords: "Kubernetes, {ks_product}, Workspace Management, Workspace Settings, Workspace Members, Invite Users to Workspace"
+description: "Describes how to invite users to a workspace."
+weight: 01
+---
+
+:ks_permission: **Member Management**
+:ks_navigation: **Workspace Settings > Workspace Members**
+
+This section describes how to invite users to a workspace.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* A user has been created in **Users and Roles Management**.
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickInvite.adoc[]
+
++
+
+. In the **Invite Member** dialog box, click image:/images/ks-qkcp/zh/icons/add-dark.svg[add-dark,18,18] on the right side of the user you want to invite, select the user's role in the workspace from the dropdown list, and then click **OK**.
++
+--
+include::../../../../_custom/workspaceManagement/workspaceRoles/workspaceRoles-para-presetRoles_v4.adoc[]
+
+The invited user will appear in the workspace member list after being successfully invited.
+--

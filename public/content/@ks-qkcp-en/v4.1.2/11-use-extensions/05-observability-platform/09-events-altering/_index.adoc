@@ -1,0 +1,35 @@
+---
+title: "WhizardTelemetry Events Alerting"
+keywords: "Kubernetes, {ks_product-en}, events, auditing, alerting"
+description: "Describes how to use the 'WhizardTelemetry Events Alerting' extension."
+weight: 09
+---
+
+This section describes how to use the "WhizardTelemetry Events Alerting" extension.
+
+WhizardTelemetry Events Alerting supports audit alerting, event alerting, and log alerting features. It allows defining alert rules for Kubernetes/KubeSphere audit events, Kubernetes native events, and Kubernetes logs, evaluates incoming event and log data, and sends alerts to specified receivers such as HTTP endpoints.
+
+Among them, log alerting supports keyword-based alerting and sliding window alerting.
+
+- Keyword-based alerting: Triggers an alert when a specific keyword appears in the logs.
+
+- Sliding window alerting: Triggers an alert when the amount of log data meeting the conditions reaches a user-specified number within a sliding time window.
+
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+- WhizardTelemetry Events Alerting relies on event, audit, and log data sent by the WhizardTelemetry Data Pipeline extension. Before using it, please ensure that this extension is installed and configured.
+- Audit alerting and event alerting features are enabled by default. Please ensure that the WhizardTelemetry Events and WhizardTelemetry Auditing extensions are installed and configured.
+- Log alerting feature is disabled by default and can be enabled by modifying the "Extension Config" of WhizardTelemetry Events Alerting.
+|===
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more information about extension configuration, please refer to the details page of the "WhizardTelemetry Events Alerting" extension in the Extensions Center.
+|===

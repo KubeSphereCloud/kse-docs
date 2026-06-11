@@ -1,0 +1,106 @@
+---
+title: 修改配额（UpdateAccountQuotas）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_key
+| Integer
+| false
+| access_key配额
+
+| account_api
+| Integer
+| false
+| account_api配额
+
+| account_duration
+| Integer
+| false
+| account_duration配额
+
+| department
+| Integer
+| false
+| department配额
+
+| session_api
+| Integer
+| false
+| session_api配额
+
+| session_duration
+| Integer
+| false
+| session_duration配额
+
+| sub_user
+| Integer
+| false
+| sub_user配额
+
+| user
+| String
+| false
+| 用户id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| account_quota_set
+| Array
+| false
+| 配额详情
+
+| total_count
+| Integer
+| false
+| 总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "access_key": 25,
+  "account_api": 3600,
+  "account_duration": 3600,
+  "action": "UpdateAccountQuotas",
+  "department": 70,
+  "position": 25,
+  "session_api": 10000,
+  "session_cnt": 5,
+  "session_duration": "",
+  "sub_user": 20,
+  "user": "usr-KmJmFe0V",
+  "users": [
+    "usr-KmJmFe0V"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "UpdateAccountQuotasResponse",
+  "ret_code": 0,
+  "user_id": "usr-KmJmFe0V"
+}
+----

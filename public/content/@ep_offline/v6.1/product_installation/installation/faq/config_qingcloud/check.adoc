@@ -1,0 +1,21 @@
+---
+title: 调整完配置文件 role 后如何生效
+weight: 99
+---
+
+== 问题现象
+
+生成 settings 后，手动调整了 settings 里的 `role` 信息，但没有生效。
+
+== 问题原因
+
+需要让 Installer 感知到修改信息。
+
+== 解决方法
+
+手动修改 settings 后，在 FirstBox 执行以下命令，将变更同步到 Installer。
+
+[source]
+----
+/pitrix/bin/gen_node_list.py
+----

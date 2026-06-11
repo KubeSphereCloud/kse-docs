@@ -1,0 +1,45 @@
+---
+title: "Release Notes for v1.3.0"
+linkTitle: "{ks_title}"
+keywords: "release notes, {ks_product_full}, {ks_product}, v1.3.0"
+description: ""
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 64653856ab274121adc40fd28d1fa850
+:ks_xref_id: 7207d8d3414f40c29f3b345297694b65
+:ks_comp: ../../components/
+:ks_title: Release Notes for v1.3.0
+:ks_description:
+:ks_keywords: release notes, {ks_product_full}, {ks_product}, v1.3.0
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== New featureslink:[id=d324ea519e184d2284f602034a41f238]
+
+* Add the operation log management feature.
+* Add support for deleting image files with the same name in the file server.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Enhancementslink:[id=62eaacd9e02745119c596ecc1845c832]
+
+* Split the Edit VM feature to Edit and Adjust Resource features.
+* Optimize the shortcut operation menu in the VM details page.
+* Add support for creating VMs after a maximum of 9 VMs is created when KSV is not activated, but the excess VMs will be locked.
+* Add a feature to connect to VMs created from ISO images through VNC.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Fixed issueslink:[id=68a11cb4583e447ca4372cf9e2d9852f]
+
+* Fix the issue of disk extension caused by incorrect overcommit algorithms.

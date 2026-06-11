@@ -1,0 +1,76 @@
+---
+title: "Add Domain Reuse Validation"
+description: "Describes how to add domain reuse validation."
+weight: 01
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **Application Workloads > Route Tool**
+
+
+ifeval::["{file_output_type}" == "html"]
+This section describes how to use the Route Tool to add domains, so that domain uniqueness validation can be performed when link:../../../08-workspace-management/10-application-workloads/05-routes/[creating or editing an Ingress].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+This section describes how to use the Route Tool to add domains, so that domain uniqueness validation can be performed when creating or editing an Ingress. For more information about Ingress, refer to the "Ingress" chapter in the *KubeSphere Workspace and Project Management Guide*.
+endif::[]
+
+Validation Rule: Ingresses under the same gateway can use the same domain and its subdomains. Ingresses under different gateways cannot use the same domain.
+
+// The following operations on the KubeSphere platform support domain uniqueness validation:
+
+// * Cluster > Application Workloads > Ingress > Create/Edit routing rule
+// * Project > Application Workloads > Ingress > Create/Edit routing rule
+// * Project > Service Mesh > composed app > Add Ingress > Create/Edit routing rule
+// * Federated Project > Application Workloads > Ingress > Create/Edit routing rule
+// * Federated Project > Application Workloads > composed app > Create composed app > Create/Edit routing rule
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|"Domain Reuse Validation" only takes effect for the current cluster and does not apply to previously existing Ingresses.
+|===
+
+
+== Prerequisites
+
+* The **KubeSphere Route Tool** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../
+* {empty}
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
+. On the page, click **Add Domain**.
+
+. In the **Add Domain** dialog box, configure the domain information.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the domain. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and has a maximum length of 63 characters.
+
+|Domain
+|The domain address. Wildcards are supported for matching.
+
+The wildcard * matches all but only one level of subdomain. That is: *.qingcloud.com matches all domains with the suffix .qingcloud.com, but does not match *.xxx.qingcloud.com.
+
+|Description
+|The description of the domain. The description can contain any characters and has a maximum length of 256 characters.
+|===
+--

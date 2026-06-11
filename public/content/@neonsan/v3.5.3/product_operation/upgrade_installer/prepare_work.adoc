@@ -1,0 +1,87 @@
+---
+title: "准备工作"
+weight: 2
+---
+
+## 升级前检查
+
+. 升级 NeonSAN 集群，将当前集群升级至目标 Installer 所对应的版本。
++
+include::../../../../_components/note.adoc[]
+可参考link:https://box.yunify.com/s/QmpTgS2Xtemjcig[《NeonSAN 升级脚本 v1.20 使用指南》]完成集群升级。
+include::../../../../_components/table_footer.adoc[]
+
+. 登录当前集群 Portal 平台，进入其**总览**页面，查看当前集群是否有告警，若有需将告警处理后，再进行后续操作。
++
+image::/images/neonsan/upgrade_installer_1.png[]
+
+. 登录集群 FirstBox 所在节点，检查 ``/var/www/installer/`` 目录是否存在，并查看该目录下是否有 qingstor-installer_2.0.xx_xxxxxxx_xx_xx.deb 安装包。
++
+若无 ``/var/www/installer/`` 目录，则需手动创建，并将当前集群所对应的旧版本 qingstor-installer deb 安装包放至该目录。
++
+image::/images/neonsan/upgrade_installer_2.png[,80%]
+
+. 检查 ``/qingstor/etc/qingstor-zero-web.yaml`` 配置文件中 MySQL 数据库密码。
+
+.. 登录 FirstBox 所在节点，执行如下命令，查看 zero-web 节点信息。
++
+[,shell]
+----
+cat /etc/hosts | grep zero-web
+----
+
+.. 登录任一 zero-web 节点，查看 ``/qingstor/etc/qingstor-zero-web.yaml`` 文件中配置的 MySQL 密码。
++
+* 若为明文密码，则需将配置文件中的 ``password``，修改为密文密码。其中，QS!ows%0923 对应密文密码为 TwMenZX+aYdJ+rj9LcXXYg==，zhu88jie 对应的密文密码为 0kK2jr7JUCiHB2t6YVhhTw==。
+
+* 若检查结果中，MySQL 的密码并非 QS!ows%0923，则需登录 FirstBox，将 ``/qingstor/install/deployment/environment/group_vars/all/databases`` 配置的密码更新为实际密码。
++
+[,shell]
+----
+vim /qingstor/install/deployment/environment/group_vars/all/databases
+----
++
+将以下参数修改为实际密码。
++
+[,shell]
+----
+... ...
+mysql_enc_passwd: TwMenZX+aYdJ+rj9LcXXYg==
+mysql_passwd: 
+... ...
+----
++
+include::../../../../_components/note.adoc[]
+* ``mysql_enc_passwd``：密文密码，需根据实际情况进行修改。
+* ``mysql_passwd``：明文密码，需根据实际情况进行修改。
+include::../../../../_components/table_footer.adoc[]
+
+. 逐一登录 NeonSAN 集群的所有节点，检查 ``/etc/supervisor/supervisord.conf`` 文件是否存在。
++
+对于旧版本的 supervisor 服务，其配置文件为 ``/etc/supervisord.conf``，此时需建立软连接：``ln -s /etc/supervisord.conf /etc/supervisor/supervisord.conf``。
+
+## 准备安装包
+
+. 从以下 FTP 路径下，获取对应版本的 Installer 安装包。
++
+[,shell]
+----
+ftp://ins.qingcloud.com/neonsan/qingstor-installer-1.0/
+----
+
+. 将新的目标版本的 Installer 软件包上传至 FirstBox 所在节点，并解压至 ``/root`` 目录下。
+
+.. 删除节点上原有的 ``/qingstor-installer`` 目录。
++
+[,shell]
+----
+rm -r /root/qingstor-installer
+----
+
+.. 解压新安装包至 ``/root`` 目录。
++
+[,shell]
+----
+tar -zxf /root/qingstor-installer_x.x.x_neonsan_x.x.x_all_xxxxx.tar.gz -C /root/
+----
+

@@ -1,0 +1,247 @@
+---
+title: SSL 证书
+weight: 1
+draft: true
+---
+
+== 概述
+
+SSL 数字证书提供了一种互联网身份验证的方式，是超文本传输安全协议 HTTPS 的基石，保证用户和服务器间的信息交换的保密性和安全性。若用户需开启 HTTPS 访问 {product_name} 的对象存储，操作流程为：
+
+. 申请证书
+. 部署证书
+. 证书验证
+
+
+详细操作可参考下文。
+
+
+== 申请证书
+
+由于 HTTPS 证书服务商参差不齐，域名数量，泛域名，一级泛域名或者多级泛域名的费用可能不同。而 {product_name} 的对象存储对域名及其数量，有一定的要求。若用户申请的证书不符合要求，会导致重新购买证书，从而导致新的费用产生。
+为避免用户申请证书错误，而导致反复购买证书浪费时间与金钱。本章节将详细说明 QingStor 对象存储对域名的要求。请仔细阅读本章节内容。
+
+=== 注意事项：
+
+. QingStor 对象存储公有云原使用免费的 Let's Encrypt，因 Let's Encrypt 跨平台兼容性不友好，现已更新为 `https://www.globalsign.cn/` 的商业证书。
+. 用户申请的 SSL 证书应该是多域名证书，即一个证书文件能包含所有域名。
++
+* 多域名证书只需要一个证书包含 5 个域名，而单域名证书需要购买 4 个证书文件。
+* 对于 `globalsign.cn` 来说，无论一个证书加签多少个域名，价钱都一样。对于多 Zone 的情况，比较合适。
+* 证书中的泛域名如：`*.global_domain`，并不会囊括非泛域名：`global_domain`。
+
+=== 域名要求：
+
+**要求一：**
+
+用户需确定 {product_name} 对象存储的域名，包括 Global Domain，Zone ID。
+
+**备注：**
+* 可参考部署时配置文件中相关配置项：
++
+[source,shell]
+----
+# cat /root/qs-installer/etc/base.ini
+......
+zone_id = xxx
+global_domain = stor.qingstorage.com
+......
+----
+
+**要求二：**
+
+若是推荐用户购买一个证书文件包含多个域名。由于泛域名的覆盖可以减少域名数量。若是部署多 Zone 环境，这种方式具备优势。对域名的要求说明如下：
+
+* 最基础的使用 {product_name} 对象存储的方式，即对接 Console。此时，HTTPS 需包括 3 个域名，若为多 Zone 环境，域名需增加。
+
+  <global_domain>
+  *.<global_domain>
+  *.<zone_id>.<global_domain>
+
+* 若用户需使用 AWS S3 兼容生态来访问 QingStor 对象存储，除以上基础域名外，还需要额外两个域名来识别 AWS 的协议。
+
+  *.s3.<global_domain>
+  *.s3.<zone_id>.<global_domain>
+
+
+* 一般用户使用 {product_name} 对象存储要求证书必须包括 5 个域名，否则平台功能不能正常使用：
+  <global_domain>
+  *.<global_domain>
+  *.<zone_id>.<global_domain>
+  *.s3.<global_domain>
+  *.s3.<zone_id>.<global_domain>
+
+* 管理和配置一个证书比多个证书更加方便，只需要将一个证书拷贝重命名为多个文件即可。比如，我们用浏览器打开 https://qingstor.com 查看证书信息，会看到如下域名：
+ 
+**要求三：**
+
+若用户购买分开的通配符证书，需要购买 4 个证书文件。每个证书文件包含两个域名：非泛域名与泛域名。如下所示：
+
+* global_domain.crt: 
++
+包含 <global_domain> 和 *.<global_domain>
+
+* zone_id.global_domain.crt: 
++
+包含 <zone_id>.<global_domain> 和 *.<zone_id>.<global_domain> 
+
+* s3_global_domain.crt: 
++
+包含 s3.<global_domain> 和 *.s3.<global_domain>
+
+* s3_zone_id_global_domain.crt: 
++
+包含 <zone_id>.s3.<global_domain> 和 *.<zone_id>.s3.<global_domain>
+
+
+另外，我们可以查看一下阿里云的证书，也是包含了多个域名。这也是当前大部分公有云厂商的做法。
+ 
+== 部署证书
+当用户正确申请了 SSL 证书后，可根据如下步骤来部署证书。
+
+. 登录 {product_name} 对象存储的 FirstBox。
+
+. 执行如下命令行，确认配置文件中已开启 HTTPS 开关：
++
+[source,shell]
+----
+# grep enable_https /qingstor/etc/qs_installer_env_config.yml
+enable_https: true
+----
+
+
+. 下载准备好的证书。
++
+* 下载生成的证书时，需选择 Nginx 证书。
+* 每个证书应该有 2 个文件，文件名后缀分别为：`.crt` 和 `.key`。有些 Nginx 证书提供的文件名后缀分别为：`.pem` 和 `.key`，此时需手动修改 `.pem` 文件的后缀为 `.crt`。
+* 证书的命名规则为：
+** global gateway 域名的证书名称：
+
+   <global_domain>.crt
+   <global_domain>.key
+   s3.<global_domain>.crt
+   s3.<global_domain>.key
+
+** gateway 域名的证书名称：
+
+   <zone_id>.<global_domain>.crt
+   <zone_id>.<global_domain>.key
+   s3.<zone_id>.<global_domain>.crt
+   s3.<zone_id>.<global_domain>.key
+
+. 将准备好的证书上传至如下目录：`/qingstor/etc/cert/`。
++
+* 若该目录不存在，需执行如下命令行，创建该目录：
++
+[source,shell]
+----
+# mkdir -p /qingstor/etc/cert/
+----
+
+. 查看并确认已上传的证书列表。以下输出结果是在 Zone ID 为 `gd2`，Global Domain 为 `qingstor.com` 的环境中获取的。
++
+[source,shell]
+----
+# ll /qingstor/etc/cert/
+-rw-r--r-- 1 root root 4091 Oct 29 20:44 qingstor.com.crt
+-rw------- 1 root root 1679 Oct 29 20:44 qingstor.com.key
+-rw-r--r-- 1 root root 4091 Oct 29 20:44 s3.qingstor.com.crt
+-rw------- 1 root root 1679 Oct 29 20:44 s3.qingstor.com.key
+-rw-r--r-- 1 root root 4091 Oct 29 20:44 gd2.qingstor.com.crt
+-rw------- 1 root root 1679 Oct 29 20:45 gd2.qingstor.com.key
+-rw-r--r-- 1 root root 4091 Oct 29 20:45 s3.gd2.qingstor.com.crt
+-rw------- 1 root root 1679 Oct 29 20:45 s3.gd2.qingstor.com.key
+----
+
+
+. 若用户的环境为多 Zone 环境，并且当前部署的区域是子 Zone，则只需要上传 Zone 域名的证书即可。如下所示：
++
+[source,shell]
+----
+-rw-r--r-- 1 root root 4091 Oct 29 20:44 gd2.qingstor.com.crt
+-rw------- 1 root root 1679 Oct 29 20:45 gd2.qingstor.com.key
+-rw-r--r-- 1 root root 4091 Oct 29 20:45 s3.gd2.qingstor.com.crt
+-rw------- 1 root root 1679 Oct 29 20:45 s3.gd2.qingstor.com.key
+----
+
+. 证书正确上传后，执行如下命令行更新配置，下发证书：
++
+[source,shell]
+----
+# cd /root/qs-installer
+# ./qs_installer deploy --qs-gateway --tags nginx
+# ./qs_installer deploy --qs-global-gateway --tags nginx
+----
++
+**备注：**
+* 以上命令行，为当前环境中已经部署完了qs-gateway 后，所需执行的命令行。
+* 若当前环境中，尚未部署 qs-gateway，则无需执行以上命令行，继续前文部署流程即可。
+* 已经部署完了qs-gateway 是指成功执行过以下命令行：
++
+[source,shell]
+----
+# cd /root/qs-installer
+# ./qs_installer deploy --qs-gateway
+# ./qs_installer deploy --access-node
+----
+
+. 证书下发完成后，需逐个登陆网关节点，重新加载证书。以下两种方式，选择一种即可。若客户端有 `retry` 机制，可以采用 `restart` 的方法。
++
+* 方式一：使用reload 重新加载，不会影响请求, 但证书更新不会立马观察到效果, 需要等一会老进程销毁之后才能看到效果
++
+[source,shell]
+----
+# nginx -t && systemctl reload nginx 
+----
+
++
+* 方式二：使用restart重新加载，会中断正在处理的请求, 导致正在处理的请求失败。但是可以立马观察到效果, 证书是否更新成功。
++
+[source,shell]
+----
+# nginx -t && systemctl restart nginx 
+----
+
+
+== 证书验证
+
+. 登录 QingStor 对象存储的 FirstBox.
+
+. 通过 QingStor 对象存储的 FirstBox 登陆至任意一台网关：
++
+[source,shell]
+----
+# ssh gateway0
+----
+
+. 依次执行如下命令行，检查证书是否生效：
++
+[source,shell]
+----
+# curl https://<global_domain>
+# curl https://aaa.<global_domain>
+# curl https://s3.<global_domain>
+# curl https://aaa.s3.<global_domain>
+# curl https://<zone_id>.<global_domain>
+# curl https://aaa.<zone_id>.<global_domain>
+# curl https://s3.<zone_id>.<global_domain>
+# curl https://aaa.s3.<zone_id>.<global_domain>
+----
+
++
+**备注：**
+
+* 若上述请求，能返回 QingStor 对象存储的相关信息，则说明请求正常。
+* 若上述请求被拒绝，或者返回证书报错，则说明证书部署错误。需查明原因后，再次部署证书并验证其有效。
+
+. 也可使用 Openssl 查看证书说包含的域名信息：
++
+[source,shell]
+----
+# curl openssl x509 -in <证书名称>.crt -noout -text|grep DNS
+----
++
+**备注：**
+
+* 输出结果如下图所示，即为证书部署正确：
+* 返回其他信息，则说明证书部署错误，需查明原因后，再次部署证书并验证其有效。

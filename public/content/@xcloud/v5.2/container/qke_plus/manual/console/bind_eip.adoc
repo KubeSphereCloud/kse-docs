@@ -1,0 +1,42 @@
+---
+title: "设置控制台 EIP"
+description: 介绍如何为控制台绑定 EIP。
+draft: false
+weight: 6
+keyword: 容器,QKE,KubeSphere,QKCP
+---
+== 操作场景
+
+当您需要通过公网访问可视化控制台时，则需要为控制台设置一个公网 IP。
+
+== 前提条件
+
+* 已安装可视化控制台。
+* 已创建或已有可用的公网 IP。公网 IP 须为``外部绑定``的公网 IP。
+
+== 操作步骤
+
+. 登录管理控制台。
+. 在控制台顶部的导航菜单中，选择**产品与服务** > *容器服务* > *{k8s_engine_fullname}*，进入 QKE 集群列表页面。
+. 在集群列表，点击目标集群名称，进入**集群概览**页面。
+. 可通过如下两种方式设置控制台 EIP。
++
+以 KubeSpere 可视化控制台为例，其他控制台操作方法类似。
+
+ ** *方式一*：在**集群概览**页面的**可视化管理工具**区域，点击**选择 EIP**。
+
+ ** *方式二*：在左侧导航栏，选择**可视化控制台**，在**可视化控制台**页面，点击**选择 EIP**。
++
+image::/images/cloud_service/container/qke/select_ks_eip_2.png[]
+
+. 在弹出的**选择 EIP** 窗口中，选择需要绑定的 EIP，点击**确定**。
+
+== 后续操作
+
+* 更换 EIP
++
+为控制台绑定 EIP 后，如果您需要更换 EIP，可在**可视化控制台**页面点击image:/images/cloud_service/container/qke/edit_icon.png[]图标，修改 EIP。
++
+image::/images/cloud_service/container/qke/bind_eip_done.png[]
+
+* link:../access_ks/[登录控制台]

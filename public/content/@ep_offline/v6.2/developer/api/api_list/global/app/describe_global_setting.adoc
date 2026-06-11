@@ -1,0 +1,95 @@
+---
+title: 查询导入全局设置（DescribeGlobalSetting）
+weight: 11
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| zone
+| String
+| true
+| 可用区
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| setting
+| Object
+| false
+| 全局设置
+
+| setting.hypervisor
+| String
+| false
+| 虚拟化类型
+
+| setting.import_type
+| Integer
+| false
+| 导入类型
+
+| setting.instance_class
+| Array
+| false
+| 主机类型
+
+| setting.resource
+| String
+| false
+| 资源路径
+
+| setting.volume_classes
+| Array
+| false
+| 
+|===
+
+== 请求示例
+[,javascript]
+----
+null
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeGlobalSettingResponse",
+  "ret_code": 0,
+  "setting": {
+    "hypervisor": [
+      "KVM"
+    ],
+    "import_type": 2,
+    "instance_classes": [
+      0,
+      1,
+      1202
+    ],
+    "resource_path": "root@10.10.0.10:/pitrix/apps/migrate_appcenter2_apps/migrate_appcenter2_zookeeper",
+    "volume_classes": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      7
+    ]
+  }
+}
+----

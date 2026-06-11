@@ -1,0 +1,15 @@
+---
+title: 用户管理
+weight: 4
+---
+
+{product_name} 的用户可以分为超级管理员、Console 用户和 Portal 用户。
+
+* 超级管理员是在 {product_name} 部署时内置的初始用户，用于内部运维人员登录 Portal 与 Console。出于安全考虑，不开放用户使用。
+* Console 用户是指 Console 平台注册的用户，用于登录 Console 平台并操作相关资源。
+** 独立部署的场景中，{product_name} 需部署 Console 服务，并创建相应的 Console 用户用于操作 {product_name} 对象存储资源。
+** 对接 IaaS 的环境中，由于 {product_name} 不部署 Console 服务，而直接使用 IaaS 的 Console 服务，因此 IaaS 的 Console 用户也可直接操作对象存储资源。
+* Portal 用户是指管理员用户，用于登录与操作 Portal。用户使用超级管理员用户或 Portal 用户登录 Portal 后，可将系统中已创建的 Console 用户赋予管理员的权限后，使其可以登录操作 Portal。因此 Portal 用户是指具有管理员权限的 Console 用户。
+
+
+在该页面，创建与管理的用户，均为 Console 用户。对 Console 用户的管理功能包括重置密码、禁用用户以及设置用户权限等功能。详细操作如下。

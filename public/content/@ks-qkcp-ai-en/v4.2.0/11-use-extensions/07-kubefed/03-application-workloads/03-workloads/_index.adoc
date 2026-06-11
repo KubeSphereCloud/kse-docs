@@ -1,0 +1,26 @@
+---
+title: "Workloads"
+keywords: "Kubernetes, {ks_product}, Project Management, Application Workloads, Workloads"
+description: "Introduces how to manage workloads in a federated project."
+weight: 03
+layout: "second"
+---
+
+// include::../../../../../_custom/clusterManagement/workloads/workloads-desc-workloads.adoc[]
+
+This section introduces how to manage workloads.
+
+In the KubeSphere platform, applications run in pods. To ensure business continuity when a single pod fails, it is usually necessary to create multiple replicas of an application. A workload is a resource used to manage pod replicas, responsible for managing multiple replicas of an application, and mainly provides the following functions:
+
+* Monitor pod status, automatically restart or replace unhealthy pods.
+* Allocate and limit resources such as CPU and memory for pods.
+* Automatically update pods according to the update strategy specified by the user.
+* Roll back pods to a previous version.
+
+Federated projects support the following workload types:
+
+* Deployment: Used to manage stateless applications. Multiple pod replicas managed by a Deployment share a single volume. When a pod replica is recreated, the name of the new pod replica is different from the old one.
+
+* StatefulSet: Used to manage stateful applications. Multiple pod replicas managed by a StatefulSet can use independent volumes respectively. Each pod replica has a fixed ordinal name. When a pod replica is recreated, the new pod replica has the same name as the old one.
+
+// * DaemonSet: Used to manage daemon processes. A DaemonSet ensures that all or specific nodes run a pod replica. When a new node is added to the cluster, if the new node meets the pod scheduling rules, the DaemonSet will automatically create a pod replica on the new node.

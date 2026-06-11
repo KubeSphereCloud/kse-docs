@@ -1,0 +1,38 @@
+---
+title: 查询 AK SK
+weight: 3
+---
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 从 FirstBox 节点跳转至 {product_name} 任一网关节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 查询配置文件 `/qingstor/etc/qs_gateway3.yaml` 中的 `access_key_id` 与 `secret_access_key` 字段内容。
++
+[source,shell]
+----
+cat /qingstor/etc/qs_gateway3.yaml
+----
++
+回显内容如下所示。
++
+[source,shell]
+----
+......
+admin:
+  user_id:           "usr-HppAJmRg"
+  access_key_id:     "WFZOIOXBJTWFYDESGLSF"
+  secret_access_key: "JSY5ae2sLtiLcIKLQ47i77ZZtLzStVvvp9KDQDRF5EGG2s+IDwHPbQ0u11P3AnHu"
+......
+----
+

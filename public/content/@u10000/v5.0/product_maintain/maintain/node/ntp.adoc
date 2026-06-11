@@ -1,0 +1,263 @@
+---
+title: NTP 校时
+weight: 2
+---
+
+默认情况下，{product_name} 的 NTP 服务器会通过公网同步时间，或通过配置文件中指定的 NTP 服务器同步时间。若是与 IaaS 对接的环境中，则会从 IaaS 的 NTP 服务器同步时间。 
+
+若 {product_name} 是独立部署且不能访问公网，用户需确认 {product_name} 的服务器时间是否与现实时间一致。两者之间的误差超过 `一分钟`，就需参考本文内容，手动调整 {product_name} NTP 服务器的时间。
+
+== 操作步骤
+
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+
+. 执行如下命令行，从 FirstBox 节点跳转至 NTP 服务器。{product_name} 环境中的第一台服务器就是 NTP 服务器。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，查看当前时间。
++
+[source,shell]
+----
+date
+----
++
+命令行回显示例
++
+[source,shell]
+----
+Fri Oct 27 12:35:20 CST 2017
+----
+
+
+. 执行如下命令行，修改系统时间。其中 `2017-09-09 09:09:09` 为目标时间，需要根据实际情况进行修改。
++
+[source,shell]
+----
+date -s '2017-09-09 09:09:09'
+----
+
+
+. 执行如下命令行，更新硬件时钟，否则重启后，以上修改将失效。
++
+[source,shell]
+----
+hwclock -w
+----
+
+. 返回 FirstBox 节点，在 FirstBox 节点上执行如下命令行，重新部署 NTP 服务器。
++
+[source,shell]
+----
+./qs_installer deploy --ntp
+----
+
+
+. 成功部署 NTP 服务器后，需在各节点服务器上，执行如下命令行，检查 NTP 时间是否已经同步。
++
+[source,shell]
+----
+ntpq -pn
+----
+
+
+== 同步结果说明
+
+
+
+=== 没有设置上游
+
+* 在 `core0` 节点上执行 `ntpq -pn`，命令回显内容如下，`remote` 为 `127.127.1.0`，`st` 的值小于 `16`，为正常结果。
++
+[source,shell]
+----
+  remote          refid          st t when poll reach   delay   offset  jitter
+==============================================================================
+*127.127.1.0     .LOCL.          10 l   59   64  377    0.000    0.000   0.000
+----
+
+* 在 `core0` 以外的节点上执行 `ntpq -pn`，命令回显内容如下，`remote` 为 `core0` 节点服务器的 IP 地址，`st` 的值小于 `16`，为正常结果。
++
+[source,shell]
+----
+  remote          refid          st t when poll reach   delay   offset  jitter
+==============================================================================
+*101.100.11.236  LOCAL(0)        11 u  285 1024  377    0.046    0.102   0.112
+----
+
+=== 与公网或 IaaS 同步
+
+
+
+// * 在 `core0` 节点上执行 `ntpq -pn`，命令回显内容如下，`remote` 为配置文件中所填写的 NTP 服务器的 IP 地址，即公网 或 IaaS 的 NTP 服务器地址； `st` 的值小于 `16`，为正常结果。
+// +
+// [source,shell]
+// ----
+//      remote           refid      st t when poll reach   delay   offset  jitter
+// ==============================================================================
+// *172.31.47.40    192.168.7.29     4 u  616 1024  377    0.066    1.527   0.522
+// +172.31.47.41    192.168.7.29     4 u   32 1024  377    0.079    2.156   0.740
+// ----
+
+// * 在 `core0` 以外的节点上执行 `ntpq -pn`，命令回显内容如下，`remote` 为 `core0` 节点服务器的 IP 地址；`st` 的值小于 `16`，为正常结果。
+// +
+// [source,shell]
+// ----
+//   remote          refid          st t when poll reach   delay   offset  jitter
+// ==============================================================================
+// *101.100.11.236  LOCAL(0)        11 u  285 1024  377    0.046    0.102   0.112
+// ----
+
+在任意节点上执行 `ntpq -pn`，命令回显内容如下，`remote` 为配置文件中所填写的 NTP 服务器的 IP 地址，即公网 或 IaaS 的 NTP 服务器地址； `st` 的值小于 `16`，为正常结果。
+
+[source,shell]
+----
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+*172.31.47.40    192.168.7.29     4 u  616 1024  377    0.066    1.527   0.522
++172.31.47.41    192.168.7.29     4 u   32 1024  377    0.079    2.156   0.740
+----
+
+假如有两个或多个 NTP 源，那么 NTP 客户端会把本地时间调教为几个源的平均。公网的 NTP 由于不同的源之间距离较远，服务器负载不同或者网络的延迟等，都会产生误差。因此，输出结果中的 `delay` 和 `offset` 差很多的情况是正常的，NTP 算法会进行处理。
+
+=== 同步结果异常
+
+
+若执行 `ntpq -pn`，命令行回显结果中，`refid` 一直为 `.INIT.` 或 `st` 的值为 `16`，如下所示。
+
+
+[source,shell]
+----
+     remote       refid          st t when poll reach   delay   offset  jitter
+==============================================================================
+ 172.31.47.200   .INIT.          16 u    -   64    0    0.000    0.000   0.000
+----
+
+* 与 IaaS 或外部 NTP 服务器同步
++
+. 若 NTP 与公网或 IaaS 同步，可检查 NTP 与外部 NTP 源之间网络是否正常，外部源服务状态是否正常。确认网络以及服务状态均正常，可继续后续步骤。
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+
+. 执行如下命令行，从 FirstBox 节点跳转至 NTP 服务器。
+// {product_name} 环境中的第一台服务器就是 NTP 服务器。
++
+[source,shell]
+----
+ssh ntp-server0
+----
+
+. 执行如下命令行，停止 `ntpd` 服务。 
++
+[source,shell]
+----
+systemctl stop ntpd
+----
+
+. 执行如下命令行，进行调试。
++
+[source,shell]
+----
+ntpdate -d <iaas ntp ip or upstram ntp ip>
+----
++
+正常结果
++
+[source,shell]
+----
+transmit<xxx.xxx.xxx.xxx>
+receive<yyy.yyy.yyy.yyy>
+----
++
+异常结果
++
+[source,shell]
+----
+receive: server not found
+----
+
+. 若收到的 `yyy.yyy.yyy.yyy` 跟上游的 NTP 服务器的 IP 地址 不同，可尝试以下步骤。
+.. 执行以下命令行，其中 `<yyy.yyy.yyy.yyy>` 需根据上一步的返回结果进行修改。
++
+[source,shell]
+----
+ntpdate <yyy.yyy.yyy.yyy>
+----
+
+.. 若没有报错，需修改配置文件中的 `ntp_servers` 为这个 `yyy.yyy.yyy.yyy`。再返回至 {product_name} 的 FirstBox 节点上执行以下命令行。
++
+[source,shell]
+----
+./qs_installer deploy --ntp
+----
+
+* 无 IaaS 或外部 NTP 服务器
++
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+
+. 执行如下命令行，从 FirstBox 节点跳转至问题节点。如这里的问题节点为 `gatewayxxx`。
++
+[source,shell]
+----
+ssh gatewayxxx
+----
+
+
+. 执行如下命令行，进行调试。
++
+[source,shell]
+----
+ntpdate -d core0
+----
++
+正常结果
++
+[source,shell]
+----
+transmit<xxx.xxx.xxx.xxx>
+receive<yyy.yyy.yyy.yyy>
+----
++
+异常结果
++
+[source,shell]
+----
+receive: server not found
+----
+
+. 若收到的 `yyy.yyy.yyy.yyy` 跟上游的 NTP 服务器的 IP 地址 不同，可尝试以下步骤。
+.. 执行以下命令行，其中 `<yyy.yyy.yyy.yyy>` 需根据上一步的返回结果进行修改。
++
+[source,shell]
+----
+ntpdate <yyy.yyy.yyy.yyy>
+----
+
+.. 若没有报错，需修改配置文件中的 `ntp_servers` 为这个 `yyy.yyy.yyy.yyy`。再返回至 {product_name} 的 FirstBox 节点上执行以下命令行。
++
+[source,shell]
+----
+./qs_installer deploy --ntp
+----

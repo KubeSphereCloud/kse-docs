@@ -1,0 +1,138 @@
+---
+title: "访问数据库"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ClickHouse, 访问数据库"
+description: "介绍如何访问 ClickHouse 数据库。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: c2797dc0cdf04f7dab1fe626ca7b4fac
+:ks_xref_id: c86500c1ce55420d8645b85c74f9f47e
+:ks_comp: ../../../components/
+:ks_title: 访问数据库
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ClickHouse, 访问数据库
+:ks_description: 介绍如何访问 ClickHouse 数据库。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何访问 ClickHouse 数据库。
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+{ks_product_right} Web 控制台提供的 ClickHouse 数据库访问地址仅适用于 HTTP 协议客户端，不支持 TCP 协议客户端（例如 clickhouse-client）。同时，为避免 TCP 连接导致数据倾斜，不建议使用 TCP 协议客户端。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=c325f6dc23784d7885410b5bb718a2ff]
+
+* 您需要获取 ClickHouse 数据库的访问地址。有关更多信息，请参阅link:../02-view-database-running-status/[查看数据库运行状态]。
+
+* 如果使用外部读写地址，取决于您的网络环境，您可能需要配置流量转发和防火墙规则。有关具体操作请联系您的网络环境管理员。
+
+* 您需要准备 HTTP 客户端。本节使用 curl 作为示例。
+
+* 您需要获取 ClickHouse 数据库用户名和密码。有关更多信息，请参阅link:../09-manage-database-users/[管理数据库用户]。
+
+
+
+== 从{ks_product_both}集群内部访问数据库link:[id=75038f896a414820b012621a368b2583]
+
+以下示例如何手动从{ks_product_both}集群内部访问数据库。在生产环境中，可由部署在{ks_product_both}集群内的容器化应用程序访问数据库，用户不需要手动登录{ks_product_left} Web 控制台。
+
+include::../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+. 在 **kubectl** 对话框，执行以下命令向数据库发送请求：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+echo 'SELECT 1' | curl 'http://<username>:<password>@<internal address>' -d @-
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+请将以下参数替换为实际值：
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|<username>
+|ClickHouse 数据库的访问用户名，例如 **clickhouse**。
+
+|<password>
+|ClickHouse 数据库的访问密码，例如 **C1ickh0use-0perator**。
+
+|<internal address>
+|ClickHouse 数据库的内部读写地址（含端口号），例如 **clickhouse-radondb-llmnf8.p1:8123**。
+|===
+
+如果命令回显 **1** 则表明数据库可以正常访问。
+
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+bash-5.1# echo 'SELECT 1' | curl 'http://clickhouse:C1ickh0use-0perator@clickhouse-radondb-llmnf8.p1:8123' -d @-
+1
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+
+== 从{ks_product_both}集群外部访问数据库link:[id=c099cfb1e81241d29aec4b9900f1751c]
+
+1. 登录与{ks_product_both}集群网络连通的 Linux 主机。
+
+2. 执行以下命令向数据库发送请求：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+echo 'SELECT 1' | curl 'http://<username>:<password>@<external address>' -d @-
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+请将以下参数替换为实际值：
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|<username>
+|ClickHouse 数据库的访问用户名，例如 **clickhouse**。
+
+|<password>
+|ClickHouse 数据库的访问密码，例如 **C1ickh0use-0perator**。
+
+|<external address>
+|ClickHouse 数据库的外部读写地址（含端口号），例如 **192.168.100.14:32667**。
+|===
+
+如果命令回显 **1** 则表明数据库可以正常访问。
+
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+bash-5.1# echo 'SELECT 1' | curl 'http://clickhouse:C1ickh0use-0perator@192.168.100.14:32667' -d @-
+1
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+
+
+

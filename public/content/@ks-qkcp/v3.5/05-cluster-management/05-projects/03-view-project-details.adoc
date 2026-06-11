@@ -1,0 +1,156 @@
+---
+title: "查看项目详情"
+keywords: "Kubernetes, {ks_product}, 集群管理, 项目, 查看项目详情"
+description: "介绍如何查看项目详情。"
+weight: 03
+---
+
+// :ks_include_id: 13d3f3e56936447f8439e6e13d885138
+:ks_xref_id: 3cbdd77ed4434c23b29863f635de19f1
+:ks_comp: ../../../components/
+:ks_title: 查看项目详情
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 项目, 查看项目详情
+:ks_description: 介绍如何查看项目详情。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **项目查看**
+:ks_navigation: **项目**
+
+
+本节介绍如何查看项目详情。
+
+
+== 前提条件link:[id=e6d68902b0eb46ee84ee75fb5228b78b]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=77fa7a2f5bdf413f8363afce642f019a]
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/projects/projects-oper-openListPage.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/projects/projects-oper-openDetailsPage.adoc[]
+
++
+
+. 在项目详情页面左侧的**属性**区域查看项目的资源属性。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|状态
+|
+include::../../../_custom/clusterManagement/projects/projects-para-status.adoc[]
+
+|集群
+|项目所属的集群。
+
+|企业空间
+|项目所属的企业空间。
+
+|创建时间
+|项目的创建时间。
+
+|创建者
+|创建项目的用户。
+|===
+--
+
+. 在项目详情页面右侧的**概览**页签查看当前项目中的应用资源和项目占用的物理资源。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|应用资源
+|当前项目中的容器组、部署、有状态副本集、守护进程集、任务、定时任务、卷、服务和路由的数量及其变化曲线。
+
+|物理资源
+|当前项目占用的 CPU 和内存资源。
+|===
+
+在右上角的下拉列表中可选择显示最近 1 小时、2 小时、5 小时、12 小时、1 天、2 天或 3 天的数据。
+--
+
+. 在项目详情页面右侧点击**容器组**页签查看项目中运行的所有容器组。
++
+--
+include::../../../_custom/clusterManagement/nodes/nodes-para-podList.adoc[]
+--
+
+. 在项目详情页面右侧点击**网关**页签查看项目的网关信息。
++
+--
+[%header,cols="1a,4a"]]
+|===
+|参数 |描述
+
+|类型
+|网关的类型，可以为**企业空间网关**、**集群网关**或**项目网关**。
+
+|创建者
+|创建网关的用户。
+
+|创建时间
+|网关的创建时间。
+
+|访问模式
+|网关的访问模式，可以为 **NodePort** 或 **LoadBalancer**。
+
+|网关地址
+|
+include::../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-para-address.adoc[]
+
+有关更多信息，请参阅link:../../12-cluster-settings/06-gateway-settings/[网关设置]。
+
+|负载均衡器提供商
+|**LoadBalancer** 模式下负载均衡器的提供商。此参数仅在网关的访问模式为 **LoadBalancer** 时显示。
+
+|节点端口
+|网关的 HTTP 和 HTTPS 节点端口。
+
+|副本
+|网关的容器组副本数量。
+
+|链路追踪
+|是否已启用链路追踪功能。
+|===
+
+// 在**网关**页签右上角点击**查看详情**可打开网关的详情页面。
+--
+
+. 在项目详情页面右侧点击**配额**查看项目的配额信息。
++
+--
+[%header,cols="1a,4a"]
+|===
+|功能区 |描述
+
+include::../../../_custom/clusterManagement/projects/projects-para-defaultContainerQuotas.adoc[]
+
+include::../../../_custom/clusterManagement/projects/projects-para-projectQuotas.adoc[]
+|===
+
+有关如何设置默认容器配额和项目配额，请参阅link:../06-edit-default-container-quotas/[编辑默认容器配额]和link:../05-edit-project-quotas/[编辑项目配额]。
+--
+
+. 在项⽬详情⻚⾯右侧点击**元数据**⻚签查看项⽬的标签和注解。

@@ -1,0 +1,15 @@
+---
+title: "Post-Upgrade Recommendations for Existing Redis Cluster Instances"
+description: "Describes how to handle management issues for Redis Cluster instances after an upgrade."
+weight: 02
+---
+
+After upgrading from KubeSphere v4.1.2 to v4.1.3, the version of `redis-operator` has changed. The new version no longer manages Redis Cluster instances created by the old version of redis-operator.
+
+In the database management platform, you can still view the existing Redis Cluster instances, but you cannot perform operations such as scaling or adding/removing nodes through the web console. The new version of redis-operator will also not maintain the state of the old Redis Cluster instances.
+
+== Recommendations
+
+. Back up the data of the old Redis Cluster.
+
+. Recreate a Redis Cluster to replace the old one.

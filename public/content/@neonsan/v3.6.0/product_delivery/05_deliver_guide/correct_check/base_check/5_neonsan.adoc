@@ -1,0 +1,56 @@
+---
+title: "NeonSAN 配置检查"
+weight: 5
+---
+
+[cols="^1h,5"]
+|===
+|验收目的	 
+|验证 QingStor NeonSAN 存储系统 NeonSAN 服务正常配置
+
+|预置条件	
+|QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+
+|测试过程
+a|
+. 逐一登录 NeonSAN Center 节点服务器。
+. 查看 store.conf 配置文件中的 Zookeeper 配置，replicating port，data port 配置，管理 IP 配置。
++
+[source,shell]
+----
+cat /etc/neonsan/store.conf
+----
+. 查看 center.conf 配置文件中的 Zookeeper 配置，数据库配置。
++
+[source,shell]
+----
+cat /etc/neonsan/center.conf
+----
+. 查看 monitor.conf 配置文件中的 Zookeeper 配置，数据库配置及当前 store 节点管理 IP 配置。
++
+[source,shell]
+----
+cat /etc/neonsan/monitor.conf
+----
+. 查看 qbd.conf 配置文件中的 Zookeeper 配置。
++
+[source,shell]
+----
+cat /etc/neonsan/qbd.conf
+----
+
+|预期结果	
+a|
+. 成功登录各 Center 节点。
+. 各配置文件中，与 NeonSAN 的 Zookeeper 集群配置保持一致。
+. store.conf 文件中, replicating port， data port 配置，管理 IP 配置正确配置。
+. center.conf 文件中，数据库 IP，用户名密码正确配置，与 NeonSAN 集群的数据库配置保持一致。
+. monitor.conf 文件中，local_storeip 配置为当前节点的管理 IP，数据库 IP，用户名密码正确配置，与 NeonSAN 集群的数据库配置保持一致。监控更新时间间隔，默认为 300 秒。
+
+|验证结果	
+|
+
+|备注	
+|
+|===
+

@@ -1,0 +1,53 @@
+---
+title: "View Pod Monitoring Details"
+keywords: "Kubernetes, {ks_product}, WizTelemetry Global Monitoring, Pod, Resource Usage Ranking"
+description: "Describes how to view the resource usage details of a pod."
+weight: 13
+---
+
+:ks_navigation: **Global Monitoring > Pod**
+
+This section describes how to view the monitoring details of a single pod.
+
+== Prerequisites
+
+You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
+. In the pod list, click the name of a pod to open its details page.
+
+. In the upper area of the details page, view the basic information of the current pod.
++
+--
+* Click **Manage Pod** to go to the details page of the current pod.
+* Click image:/images/ks-qkcp/zh/icons/chevron-down.svg[chevron-down,18,18] to hide this area.
+--
+
+. Under the **Monitoring** tab of the details page, view the detailed information of the pod's CPU quota, memory quota, and monitoring metrics within the specified time range.
++
+--
+include::../../../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshData.adoc[]
+--
+
+. Click the **Containers** tab on the details page to view the monitoring information of all containers within the pod.
++
+--
+include::../../../../../_custom/WizTelemetry/sort-by-fields-and-order.adoc[]
+
+* Click the container name to go to the container's monitoring details page.
+--

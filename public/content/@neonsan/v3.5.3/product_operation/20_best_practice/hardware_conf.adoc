@@ -1,0 +1,102 @@
+---
+title: "硬件配置指导"
+weight: 2
+---
+
+下表为 NeonSAN 存储一体机的配置。
+[options="header",cols="1,2,2,2,2"]
+|===
+|节点类型 |混合（混插）节点 |全闪节点 |全闪高密度节点 |独立管理节点
+|型号	|QingStor DS21（2U）	|QingStor DS21F（2U）	|QingStor F24 （2U4节点）|N/A
+
+|CPU/节点	|2 x Intel Silver4310_12 Cores CPU	|2 x Intel Silver4314_16 Cores CPU	|2 x Intel Gold6219R_16 Cores CPU	|2 x Intel Silver4210_10 Cores CPU
+
+|内存/节点	|128G	|64G	|64G	|64G
+
+|系统盘	|2 x 480G SATA SSD	|2 x 480G SATA SSD	|2 x 480G SATA SSD	|2 x 480G SATA SSD
+
+|存储/节点	
+a|* 数据：12 x HDD 
+* 缓存：1 x NVMe SSD，可扩展至 2 个	
+|1～8 x U.2NVMe闪存	|4 x U.2 NVMe 闪存，可扩展至6个	|N/A
+
+|单盘容量	
+a|* HDD：4T/6T/8T/10T
+* 缓存盘：3.2T NVMe SSD （DWPD=3）
+|NVMe SSD: 3.84T/4T/7.68T/8T	
+|NVMe SSD: 3.84T/4T/7.68T/8T	|N/A
+
+|RAID 卡
+|LSI 9361-8i 2G 缓存(必须配置电容)，支持 RAID 0/1/10/5/50/6/60     	
+|PM8204 支持 RAID 0/1/10	
+|PM8204 支持 RAID 0/1/10	
+|PM8204 支持 RAID 0/1/10
+
+|网卡/节点
+|2*Mellanox CX5 10/25GB 2 port，支持 TCP	
+|2*Mellanox CX5 10/25GB 2 port，支持 RDMA
+|2*Mellanox CX5 10/25GB 2 port，支持 RDMA	
+|2*Mellanox CX5 10/25GB 2 port，支持 TCP
+
+|集群规模 |3～4096 个节点	|3～4096 个节点	|4～4096 个节点	|3 节点
+
+|扩展单位 |单节点（若要求机柜级别高可用，则需按照故障域进行扩展）|单节点（若要求机柜级别高可用，则需按照故障域进行扩展）	|单节点（若要求机柜级别高可用，则需按照故障域进行扩展）	|N/A
+|===
+
+include::../../../../_components/note.adoc[]
+硬件配置可能因技术和市场原因发生变化。
+include::../../../../_components/table_footer.adoc[]
+
+**注意事项**
+
+* **全闪节点相关**
+** 全闪数据盘默认使用 NVMe SSD 介质，若使用 SATA 或 SAS SSD，单盘容量要求不低于 1.92TB，若使用低于 1.92TB SATA 或 SAS SSD 需要做 RAID（RAID5 或 RAID6）。
+** 全闪数据盘默认使用 NVMe SSD 介质，若使用 SATA 或 SAS SSD，存储（Store）节点的 ``/etc/neonsan/store.conf`` 配置文件须按以下**超时参数**进行修改后并重启存储节点。
++
+image::/images/neonsan/bp_1.png[]
+
+* **混合（混插）节点相关**
+** 混合节点数据盘默认使用直通模式，需部署 NeonSAN v3.1.5 及以上版本。直通模式下若出现坏盘，卷会降级重建。若考虑到其他运维需求，用户可自主选择使用高级 RAID 模式（RAID 本身机制，RAID5/RAID6 可容忍坏 1 或 2 块盘，可直接换盘卷不会降级），使用 RAID 模式必须配置缓存和电容，写策略设置为 WB，否则影响存储性能。
+** 混合节点 RAID 卡 cache 大于 2Gb，且需配置 BBU 电池。RAID 卡推荐型号：LSI 9361-8i/LSI 9364-8i/LSI 9400 series/LSI 9500 series。
+** 混合节点数据盘使用 RAID 模式需要合理设置 CC 和 PR 策略，否则会影响存储性能，具体配置方法和策略见本文档link:../annex/cc_pr_strategy[附录]。
+** 混合节点做 RAID 后单 RAID 组容量不得超过 50TB。
+** 暂不支持混合环境 RAID 模式升级到直通模式。
+** 不同应用场景下，缓存软件与平台对应关系。**注意**：icas/opencas 和 bcache 缓存软件不能在同一 RG 内融合部署使用。
++
+[options="header",cols="1,1,2,1"]
+|===
+|应用场景|操作系统|版本/平台|缓存软件
+.4+|云易捷
+
+|Ubuntu	|ubuntu x86 16.04/Intel/海光	|bcache
+
+|Ubuntu |ubuntu x86 20.04/Intel/海光	|bcache
+
+|Ubuntu	|ubuntu arm 18.04/鲲鹏/飞腾	|bcache
+
+|Kylin	|kylin v10 sp2/海光/鲲鹏/飞腾	|bcache
+
+.4+|企业云（SANC 融合/分离）
+|Ubuntu	|ubuntu x86 16.04/Intel/海光	|icas/opencas
+
+|Ubuntu	|ubuntu x86 20.04/Intel/海光	|icas/opencas
+
+|Ubuntu	|ubuntu arm 18.04/鲲鹏/飞腾	|bcache
+
+|Kylin	|kylin v10 sp2/海光/鲲鹏/飞腾	|bcache
+|===
+
+
+* **硬件及缓存配比**
+** 对于严肃的企业级用户，推荐经过线上长时间验证的闪存盘（参见link:../annex/disk_list[附录硬件兼容性列表]）进行配置。原因在于硬件的长时间稳定运行对存储的稳定性至关重要，即使存储软件对硬件错误具备兼容能力，但可靠的硬件也是对存储系统稳定运行和服务质量的有效保障。
+** 纯软部署不推荐使用利旧设备作为存储硬件，即相关品牌型号非最近两年内发布。
+** 混合节点缓存盘需使用 NVMe SSD，其他类型 SSD 暂不支持(具体要求见硬件规格)。
+** 混合节点 icas 和 bcache 缓存盘和数据盘的配比 5%-10%，不低于 5%； icas 内存与缓存配比为 1%：即在基准内存 64GB 基础上，每增加 1 个 3.2T 的缓存，则内存需增加 32G。bcache 内存与缓存配比为 0.8%：即在基准内存 64GB 基础上，每增加 1 个 3.2T 的缓存，则内存需增加 25.6G。
+
+* **网卡建议**
+** 网卡选用原则：
+*** 全闪节点默认配置 RDMA 网络，故网卡需支持 RDMA。注意：此处为配置建议，无强制要求，但是全闪节点无 RDMA 网卡会对性能有明显影响。
+*** 混合节点默认配置 TCP 网络，网卡可按需选择。
+** 同一集群内存在全闪和混合 RG，混合采用 TCP 网络，全闪采用 RDMA 网络。
+** 网卡可选用 Mellanox CX4 10G 或 Mellanox CX5 25G 以及光模块，推荐使用 Mellanox CX5 25G，也可选用 Intel、华为同类型网卡 (Intel Corporation 82599ES 2-Port 10-Gigabitbe，该网卡不支持 RDMA)。
+

@@ -1,0 +1,66 @@
+---
+title: "启用 Metrics Server"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, Metrics Server, 启用 Metrics Server"
+description: "介绍如何启用 Metrics Server 扩展组件。"
+weight: 01
+---
+
+// :ks_include_id: db4e3fe5f480423da9b7208a96a89951
+:ks_xref_id: 2b1ccaeb33c2467a98571279e916dd49
+:ks_comp: ../../../../components/
+:ks_title: 启用 Metrics Server
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, Metrics Server, 启用 Metrics Server
+:ks_description: 介绍如何启用 Metrics Server 扩展组件。
+:ks_weight: 01
+:ks_icon:
+
+
+本节介绍如何启用 Metrics Server 扩展组件。
+
+
+== 前提条件link:[id=30391e96c7ae40718f8855aef540af66]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=2eafb60aa7274ad39226ec4d7f3aefca]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:metrics_server:enabled** 参数设置为 **true**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  metrics_server:
+    enabled: true
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionEnabled.adoc[]
+
+* Metrics Server 为工作负载自动扩缩功能提供指标数据。Metrics Server 启用后您可以使用工作负载自动扩缩功能。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,57 @@
+---
+title: 检查 Galera 集群
+weight: 2
+---
+
+仅适用于 Galera 数据库。
+
+## 查看 Galera 服务状态
+
+. 逐个登录 Galera 集群的每个节点。
+
+. 执行如下命令，查询本节点 Galera 服务状态。返回结果，为 ``RUNING`` 即表示正常运行状态。
++
+[,shell]
+----
+supervisorctl status galera_cluster
+----
+
+
+## 检查 Galera 集群状态
+
+Galera 集群版本不同，操作步骤会有差异，具体操作步骤如下。
+
+=== Galera v1.1.0及以上版本
+
+. 登录 Galera 集群的任一节点。
+. 执行如下命令，查询 Galera 集群信息。
++
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
++
+image::/images/neonsan/polling_guide_19.png[]
++
+include::../../../../../../_components/note.adoc[]
+* ``STATUS`` 为 ``synced``，``CONNECTED`` 为 on，``READY`` 为 on，``CLUSTER SIZE`` 为集群节点数，即为正常运行状态。
+* 如上所示，即为集群正常运行状态。
+include::../../../../../../_components/table_footer.adoc[]
+
+=== Galera v1.1.0 以下版本
+
+. 逐个登录 Galera 集群的每个节点。
+. 执行如下命令，查询 galera 集群状态信息。
++
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
++
+image::/images/neonsan/polling_guide_20.png[]
++
+include::../../../../../../_components/note.adoc[]
+* ``local node status`` 表示当前节点状态须为 ``OK``，``local_state`` 表示当前节点数据同步状态须为 ``synced``，``active_nodes`` 表示活动节点列表须为 Galera 集群所有节点列表，``cluster_size`` 为 Galera 集群节点数，则表明集群状态正常。
+* 如上，即表明 Galera 集群状态正常。
+include::../../../../../../_components/table_footer.adoc[]
+

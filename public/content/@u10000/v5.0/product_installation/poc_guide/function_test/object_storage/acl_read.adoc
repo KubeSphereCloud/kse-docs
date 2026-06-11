@@ -1,0 +1,41 @@
+---
+title: 桶 ACL 权限控制（读）
+description: 
+weight: 3
+---
+
+[cols="1,3", options="header"]
+|===
+| 用例编号 |  
+
+|测试目的
+|验证 {product_name} 对象存储桶读权限控制。拥有桶的 `读` 权限的用户，能查询桶内对象列表，但不能删除对象或写入新的对象。
+
+
+|预置条件
+a| 
+. {product_name} 已经安装部署完毕，且运行正常。
+. 用户侧 s3cmd 工具能正常使用。s3cmd 工具的使用，参考link:../../../additional/s3_cmd/[附录]相关内容。
+. 已创建用户 testuser 、testuser02、testuser03。
+
+
+|测试步骤
+a|
+. 使用 testuser  的用户名和密码，通过浏览器登录 Console。
+. testuser  用户创建存储桶 TSETUSER-BU，并上传测试文件至该存储桶。
+. 对存储桶 TSETUSER-BU 配置 testuser02 用户的访问权限为 `可读`。
+. testuser02 用户通过 s3cmd 工具查询存储桶 TSETUSER-BU 中的对象列表信息并进行上传、下载、删除文件等操作。
+. testuser03 用户通过 s3cmd 工具查询存储桶 TSETUSER-BU 中的对象列表信息并进行上传、下载、删除文件等操作。
+
+|预期结果
+a|
+. 用户 testuser 成功登录 Console。
+. testuser 用户成功创建存储桶 TSETUSER-BU，并成功上传测试文件至该存储桶。
+. 存储桶 TSETUSER-BU 成功配置 ACL 规则：testuser02 用户的访问权限为 `可读`。
+. testuser02 用户通过 s3cmd 工具能成功查询存储桶 TSETUSER-BU 中的对象列表信息，但是上传、下载、删除文件等操作均失败。
+. testuser03 用户通过 s3cmd 工具查询存储桶 TSETUSER-BU 中的对象列表信息失败，上传、下载、删除文件等操作均失败。
+
+
+|实测结果 |
+
+|===

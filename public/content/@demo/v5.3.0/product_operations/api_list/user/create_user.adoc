@@ -1,0 +1,216 @@
+---
+title: create（CreateUser）
+weight: 12
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| address
+| String
+| false
+| 地址
+
+| change_passwd_first_login
+| Integer
+| false
+| 初次登录是否需要更改密码
+
+| channel
+| String
+| false
+| 
+
+| company_code
+| String
+| false
+| 公司编号
+
+| company_name
+| String
+| false
+| 公司名称
+
+| company_phone
+| String
+| false
+| 公司电话
+
+| console
+| String
+| false
+| 控制台ID
+
+| currency
+| String
+| false
+| 货币
+
+| email
+| String
+| false
+| 邮箱
+
+| industry_category
+| String
+| false
+| 分类
+
+| lang
+| String
+| false
+| 语言
+
+| need_confirm
+| Integer
+| false
+| 是否需要确认
+
+| paid_mode
+| String
+| false
+| 付款模式
+
+| passwd
+| String
+| false
+| 密码
+
+| personal_code
+| String
+| false
+| 身份证
+
+| personal_name
+| String
+| false
+| 姓名
+
+| phone
+| String
+| false
+| 电话
+
+| remarks
+| String
+| false
+| 备注
+
+| sale_type
+| String
+| false
+| 销售类型
+
+| send_init_pwd
+| Integer
+| false
+| 是否发送初始化密码
+
+| source
+| String
+| false
+| 来源
+
+| support_engineer
+| String
+| false
+| 支撑工程师
+
+| user
+| String
+| false
+| 用户
+
+| user_name
+| String
+| false
+| 用户名
+
+| user_verify
+| String
+| false
+| 
+
+| verify_type
+| String
+| false
+| 验证类型
+
+| zones
+| Array
+| true
+| 区域
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| email
+| String
+| false
+| 邮箱
+
+| user_id
+| String
+| false
+| 用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "address": "ChinaChengDu",
+  "change_passwd_first_login": 0,
+  "channel": "channel_0",
+  "company_code": "135*****",
+  "company_name": "company_name_0",
+  "company_phone": "157*******",
+  "console": "console_0",
+  "currency": "USD",
+  "email": "4743******",
+  "industry_category": "Education",
+  "lang": "ZH_CN",
+  "need_confirm": 0,
+  "paid_mode": "pre_paid",
+  "passwd": "******",
+  "personal_code": "622727*******",
+  "personal_name": "TomJackson",
+  "phone": "157*******",
+  "remarks": "",
+  "sale_type": "public",
+  "send_init_pwd": 0,
+  "source": "source",
+  "support_engineer": "engineer_0",
+  "user": "admin",
+  "user_name": "admin",
+  "user_verify": "user_verify",
+  "verify_type": "personal",
+  "zones": [
+    "pk3"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateUserResponse",
+  "email": "4743******",
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

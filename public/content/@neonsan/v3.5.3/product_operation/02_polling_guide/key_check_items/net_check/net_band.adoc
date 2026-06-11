@@ -1,0 +1,48 @@
+---
+title: "检查网络带宽占用率"
+weight: 2
+---
+
+. 逐个登录 NeonSAN 服务器节点。
+. 查看网络总带宽情况。
+.. 查看网卡名。
++
+[,shell]
+----
+ifconfig
+----
+
+.. 查看指定网卡带宽。
++
+[,shell]
+----
+ethtool eth0
+----
++
+image::/images/neonsan/polling_guide_14.png[]
++
+include::../../../../../../_components/note.adoc[]
+* ``Speed`` 字段表示网卡带宽。
+* ethtool 工具包安装：
+** Rhel 和 Centos 系统：``yum install -y ethtool``。
+** Ubuntu 和 Debian 系统：``apt-get install  ethtool``。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 查看网络实时带宽情况。
++
+[,shell]
+----
+ifsat
+----
++
+image::/images/neonsan/polling_guide_15.png[]
++
+include::../../../../../../_components/note.adoc[]
+* 根据实时带宽清况与上一步骤中查出的总带宽，计算``带宽使用率=(in 带宽 + out 带宽）/总带宽``达到 80% 以上，需持续观察一段时间，若使用率经常性的高达 80% 及以上，需反馈给NeonSAN 研发团队进行评估。
+* ifstat 工具包安装：
+** Rhel 和 Centos 系统：``yum install -y ifstat``。
+** Ubuntu 和 Debian 系统：``apt-get install  ifstat``。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+

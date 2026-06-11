@@ -1,0 +1,79 @@
+---
+title: "Add a port forwarding rule"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, ports, forwarding, rules, add"
+description: "Describes how to add a port forwarding rule for a VPC in the {ks_product} web console."
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: ec04ab1f93be46ba9b94605bedec2259
+:ks_xref_id: 2c5f4e1c30064768b1fb2b707528b4c7
+:ks_comp: ../../../../components/
+:ks_title: Add a port forwarding rule
+:ks_description: Describes how to add a port forwarding rule for a VPC in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, ports, forwarding, rules, add
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to add a port forwarding rule for a virtual private cloud (VPC) in the {ks_product_abbr_full} web console.
+
+You can add port forwarding rules to manage inbound and outbound traffic of VPCs.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=0be2a1452c84476ba3ea7bb809e5224c]
+
+include::../../../../_custom-en/networks/vpc-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=50c40e9dde344302b7a6825a305b89b0]
+
+include::../../../../_custom-en/networks/vpc-steps.adoc[]
+
+. On the **VPCs** page, click the name of a VPC to view its details.
+. On the **Port Forwarding** tab, click **Add Rule** in the upper-right corner. The endpoint of the VPC.
++
+--
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Before you add a rule, make sure an elastic IP address (EIP) is associated with the VPC. Otherwise, the rule cannot be added.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. In the dialog box that appears, configure parameters for the port forwarding rule.  The following table describes the parameters.
++
+// 下表需和 1ad20662ddb6499b8fe7efdfcc7896fd 小节保持一致
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the port forwarding rule.
+
+include::../../../../_custom-en/networks/naming-convention.adoc[]
+
+|Protocol
+|The protocol type for data transfer.  {ks_product} supports the **TCP** and **UDP** protocols.
+
+|Source Port
+|The port used for external access.
+
+|Destination Port
+|The internal IP address assigned to the VPC.
+
+|Destination Port
+|The port used for the VPC to provide external services.
+|===
+--
+. Click **OK**.  The rule appears in the rule list after it is added.

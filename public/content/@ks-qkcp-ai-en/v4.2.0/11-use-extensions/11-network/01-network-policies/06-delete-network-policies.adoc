@@ -1,0 +1,63 @@
+---
+title: "Delete Network Policy"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Network, Network Policy, Delete Network Policy"
+description: "Describes how to delete a network policy."
+weight: 06
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Network Policy**
+
+This section describes how to delete a network policy.
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+A deleted network policy cannot be recovered. Please perform this operation with caution.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+* The **KubeSphere Network** extension must be installed and enabled on the KubeSphere platform.
+
+
+== Delete a Single Network Policy
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. On the right side of the network policy you want to delete, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Delete** from the dropdown list.
+
+. In the **Delete Network Policy** dialog box, enter the name of the network policy, and then click **OK**.
+
+
+== Batch Delete Network Policies
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Select the checkboxes to the left of the network policies you want to delete, and then click **Delete** above the network policy list.
+
+. In the **Batch Delete Network Policies** dialog box, enter the names of the network policies, and then click **OK**.
++
+--
+include::../../../../_custom/note-separateNamesByComma.adoc[]
+--

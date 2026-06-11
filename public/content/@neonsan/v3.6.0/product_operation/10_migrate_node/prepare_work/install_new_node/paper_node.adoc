@@ -1,0 +1,51 @@
+---
+title: "准备安装节点"
+weight: 1
+---
+
+
+. 从以下 FTP 路径，获取名称形如 ``qingstor-installer_2.0.xx.x_neonsan_3.5.2_xxxx_xxx.tar.gz`` 的最新版本的 NeonSAN v3.5.2 的安装包。
++
+[,shell]
+----
+ftp://ins.qingcloud.com/neonsan/qingstor-installer-1.0/
+----
+
+. 将安装包上传至任一新的管理节点上，并解压至 ``/root`` 目录。
++
+[,shell]
+----
+tar -zxf /root/qingstor-installer_2.0.17.2_neonsan_3.5.2_18.04.1_noarch.tar.gz -C /root/
+----
+
+. 创建并登录 FirstBox。
+.. 创建 FirstBox。
++
+[,shell]
+----
+/root/qingstor-installer/bootstrap/launch_fb.sh -a xx.xx.xx.xx
+----
++
+include::../../../../../../_components/note.adoc[]
+* ``-a`` 参数用于指定 qingstor-firstbox 的管理地址，需替换为当前所在节点的管理 IP 地址，无需另外指定。
+* 若创建失败，可查看 ``/root/launch_fb.log`` 日志文件。
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 登录 FirstBox。
++
+[source,shell]
+----
+ssh xx.xx.xx.xx -p 6023
+----
++
+include::../../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为上一步指定的 IP 地址。
+* 用户名密码为 root/zhu88jie
+* 登录后可执行 ``systemctl status installer-server`` 查看状态为 ``Active: active (running)`` 即可。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+
+
+

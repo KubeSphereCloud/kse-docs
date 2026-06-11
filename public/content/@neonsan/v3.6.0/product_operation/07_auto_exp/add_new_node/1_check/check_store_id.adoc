@@ -1,0 +1,76 @@
+---
+title: "检查原集群 Store ID"
+weight: 2
+---
+
+== 适用范围
+
+**仅针对使用 Installer v2.0.18 之前版本**部署的 NeonSAN 集群。
+
+
+== 原因描述
+
+Installer v2.0.18 之前版本部署的 NeonSAN 集群，在使用 Installer 工具进行扩容时，可能导致分配给新增存储节点的 Store ID 与集群中原有的存储节点的 Store ID 一样，进而导致严重的数据问题。为避免此类问题出现，扩容前需做以下检查。
+
+== 操作步骤
+
+. 登录当前 NeonSAN 集群的 FirestBox 节点。
+. 执行如下命令，查看当前集群中所有存储节点的 ID。
++
+[,shell]
+----
+neonsan list_store
+----
+. 执行如下命令查看[neonsan-store]组的配置信息。对比查询出的 Store ID 与上一步查询的 Store ID 结果是否保持一致或存在缺失。
++
+[,shell]
+----
+cat /qingstor/install/deployment/environment/hosts
+----
++
+image::/images/neonsan/auto_exp_8.png[]
+
+. 逐一登录集群内的各个存储（Store）节点，查看 ``/etc/neonsan/store.conf`` 配置文件下 [store] 配置组内的 id 信息是否与上一步骤中 [neonsan-store] 组的配置信息一致。
++
+[,shell]
+----
+cat /etc/neonsan/store.conf
+----
++
+image::/images/neonsan/auto_exp_9.png[]
+
+. 若通过步骤 3 和步骤 4 检查，发现节点的 Store ID 存在错误，可通过以下方式进行修订。
++
+* 若检查结果为存储节点缺失
++
+--
+.. 执行如下命令，重新添加节点。
++
+[,shell]
+----
+installer role-node-add -n <node_id> neonsan-store
+----
+
+.. 节点添加成功后，登录至新添加节点查看/etc/neonsan/store.conf 文件中 [store] 配置组内的 id 信息是否与 [neonsan-store] 内的 ``store=<id>`` 值一样。
+--
+
+* 若检查发现 Store ID 不一致
++
+则登录至集群 Firstbox 执行如下命令，修改 [neonsan-store] 组配置信息中的 node_id 值，使其与 ``/etc/neonsan/store.conf`` 配置文件下 [store] 配置组内的 id 信息保持一致。
++
+[,shell]
+----
+vi /qingstor/install/deployment/environment/hosts
+----
+
+. 在 FirstBox 上执行如下命令，更新 mongodb 内的 Store ID 信息。
++
+[,shell]
+----
+mongo qingstor --port 27017 --eval 'db.Inventory.update({"node_id":"n-EqjSIC","_role":"neonsan-store"},{$set:{"store":"4"}})
+----
++
+include::../../../../../../_components/attention.adoc[]
+node_id 和 store 的 ID 值需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+

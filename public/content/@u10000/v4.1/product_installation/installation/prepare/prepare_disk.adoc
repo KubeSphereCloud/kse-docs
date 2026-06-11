@@ -1,0 +1,126 @@
+---
+title: 硬盘准备
+weight: 3
+---
+
+
+根据用途的不同，{product_name} 的硬盘可分为索引盘与数据盘。
+
+== 索引盘
+
+索引盘位于 {product_name} 的全能节点或网关节点上，用于储存 {product_name} 的索引数据，以及网关节点上产生的其他需要持久化储存的数据。
+
+针对全能节点或网关节点，需将索引盘格式化后挂载至 `/qingstor` 目录下。操作步骤如下。
+
+. 逐个登录待部署环境中的全能节点或网关节点。
+
+. 执行如下命令行，查看系统中索引盘盘符。
+
++
+[source,shell]
+----
+ # lsblk 
+NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+......
+sda       8:0    0   3.7T  0 disk 
+sdb       8:16   0   3.7T  0 disk
+sdc       8:32   0   3.7T  0 disk
+sdd       8:48   0   3.7T  0 disk
+sde       8:64   0   3.7T  0 disk
+......
+nvme0n1 259:0    0   3.5T  0 disk 
+----
+
++
+
+include::../../../../../_components/note.adoc[]
+
+* 如上所示，查询出来的索引盘盘符为：`nvme0n1`。后文使用该盘符为例加以说明，用户需根据实际情形修改盘符参数。
+* 所有全能节点或网关节点上的索引盘盘符需保持一致。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 格式化索引盘。
+
++
+[source,shell]
+----
+# mkfs.xfs -f -n ftype=1 /dev/nvme0n1
+----
+
+. 查看索引盘 `UUID`。
+
++
+[source,shell]
+----
+# blkid /dev/nvme0n1
+/dev/nvme0n1: UUID="5b82b140-b230-442c-932a-e3f5e7d92b73" TYPE="xfs"
+----
+
+. 添加索引盘信息至开机自动挂载配置。将上一步查询到的 `UUID` 写入 `/etc/fstab` 文件。
+
++
+[source,shell]
+----
+# vi /etc/fstab
+……
+UUID=5b82b140-b230-442c-932a-e3f5e7d92b73  /qingstor  xfs  defaults 0 0
+……
+----
+
+. 创建挂载目录 `/qingstor`。若该目录已存在，则无需执行该步骤再次创建。
+
++
+[source,shell]
+----
+# mkdir /qingstor
+----
+
+. 挂载索引盘。
+
++
+[source,shell]
+----
+# mount -a
+----
+
+. 查看挂载结果，命令行回显结果如下所示，即为挂载成功。
+
++
+[source,shell]
+----
+# lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+……
+nvme0n1 259:0    0   1.8T  0 disk /qingstor
+……
+----
+
+. 需确保待部署环境中的全能节点或网关节点均完成以上操作。
+
+== 数据盘
+
+由于在安装部署过程中，安装脚本会格式化各节点服务器上所有的数据盘。因此，在安装部署之前，需要确认所有存储节点的数据盘上均无数据、无分区，且所有存储节点上的数据盘均需保持盘符及硬盘顺序一致。
+
+
+用户可使用 `lsblk` 或 `parted -l` 检查目标硬盘是否存在分区，如果存在，需删除分区再对硬盘进行格式化。
+
+操作步骤如下。
+
+. 逐个登录待部署环境中的存储节点，执行如下命令行，根据命令行回显内容，核对硬盘信息是否正确。若硬盘尚有数据，用户可根据实际情况决定是否将数据进行手动转移。
+
++
+[source,shell]
+----
+# lsblk
+
+----
+
+. 执行如下命令行，删除硬盘的分区信息并进行格式化。硬盘格式化后，硬盘内数据将无法恢复。
+
++
+[source,shell]
+----
+# parted -s /dev/sdc mklabel gpt
+----

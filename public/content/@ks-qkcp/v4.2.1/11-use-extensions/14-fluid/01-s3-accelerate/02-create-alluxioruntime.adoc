@@ -1,0 +1,44 @@
+---
+title: "2. 创建 AlluxioRuntime"
+weight: 02
+---
+
+:ks_permission: **数据集加速管理**
+:ks_navigation: **数据集 > 数据加速运行时**
+
+
+本节介绍如何创建 AlluxioRuntime，以实现对象存储加速。
+
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Fluid** 和 **Fluid Console** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* 已link:../01-create-s3-dataset[创建 S3 数据集]。
+
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. 在**基本信息**页签，选择已创建的 S3 数据集，然后点击**下一步**。
+
+. 在 **Runtime 配置**页签，Runtime 类型选择为 **Alluxio**，选择存储类型（Mem/Disk），设置缓存配额等参数，然后点击**下一步**。
+
+. 在**高级设置**页签，点击**创建**。
++
+若创建成功，对象存储 Bucket 将作为 Alluxio 的底层存储接入。当数据加速运行时状态显示为`就绪`（Ready）时，表示对象存储已成功接入并具备数据加速能力，后续数据访问将按需触发缓存与加速。

@@ -1,0 +1,65 @@
+---
+title: "Delete Microservice Configuration"
+keywords: "Kubernetes, {ks_product}, Project Management, Spring Cloud, Delete Microservice Configuration"
+description: "Introduces how to delete microservice configurations."
+weight: 07
+---
+
+:ks_permission: ** Spring Cloud Microservice Management**
+:ks_navigation:  **Spring Cloud > Microservice Configuration**
+
+
+This section describes how to delete microservice configurations.
+
+
+== Prerequisites
+
+* The **KubeSphere Spring Cloud** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Delete a Single Microservice Configuration
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the right side of the microservice configuration you want to delete, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Delete** from the drop-down list.
+
+. In the **Delete Microservice Configuration** dialog box, enter the name of the microservice configuration, and then click **OK**.
+
+
+== Batch Delete Microservice Configurations
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. Select the checkboxes on the left of the microservice configurations you want to delete, and then click **Delete** above the list.
+
+. In the **Batch Delete Microservice Configurations** dialog box, enter the name of the microservice configuration, and then click **OK**.
++
+--
+include::../../../../_custom/note-separateNamesByComma.adoc[]
+--

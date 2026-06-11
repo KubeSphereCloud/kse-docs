@@ -1,0 +1,95 @@
+---
+title: "配置 WAN"
+draft: false
+collapsible: false
+weight: 20
+---
+当有多个运营商线路时，可以设置 SD-WAN 的 WAN 口并根据优先级来让数据走其中的一条，其它线路做为备份。我们将这种策略叫做 MWAN。
+
+SD-WAN 的 WAN 口设置优先级，可决定业务流量优先使用的 WAN 口。优先级数字越小，WAN 口使用优先级越高。当两个 WAN 口的优先级数字相同，则根据 WAN 口名称决定优先级，WAN 口名称字幕越靠前优先，字母越小月优先。例如：优先级数字相同的 eth0 和 eth1则优先级 eth0 大于 eth1。
+
+本章节介绍如何配置 WAN。
+
+== 前提条件
+
+* 已获取管理控制台的账号和密码。
+* 已创建连接云网。
+* 已创建接入点。
+
+== 操作步骤
+
+. 登录管理控制台。
+. 选择**产品与服务** > *网络服务* > *SD-WAN（新版）*，进入**连接云网**页面。
++
+image::/images/cloud_service/sd_wan/qs_cloud_network.png[]
+
+. 在左侧导航栏中，点击**接入点**，进入**接入点**页面。
++
+image::/images/cloud_service/sd_wan/qs_light_access.png[]
+
+
+. 点击已创建的接入点的名称，进入接入点详细信息页面。
+. 选择**设备管理** > *WAN 配置*，进入 **WAN 配置**页面。
++
+显示 **HA 配置**和 **WAN 配置**两个区域。
++
+image::/images/cloud_service/sd_wan/config_wan_01.png[]
+
+. 在 **WAN 配置**区域，将鼠标悬停于待修改WAN 口的卡片上，显示编辑图标image:/images/cloud_service/sd_wan/wan_icon.png[]。
++
+image::/images/cloud_service/sd_wan/config_wan_02.png[]
+
+
+. 点击编辑图标image:/images/cloud_service/sd_wan/wan_icon.png[]，显示端口修改界面。
++
+
+include::../../../../../../../_components/note.adoc[]
+仅支持修改**网卡状态**为``在线``的 WAN 口信息。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 修改 WAN 配置，如下表所示。
++
+[options="header",cols="1,3"]
+|===
+| 参数 | 参数说明
+
+| 连接类型
+| 可选择：动态 IP、静态 IP、PPPoE
+
+| IP地址
+| 设备的 IP 地址，**连接类型**为``静态IP``时，需填写此项。
+
+| 网关
+| 设备的网关，**连接类型**为``静态IP``时，需填写此项。
+
+| 账号
+| 设备的账号，**连接类型**为``PPPoE``时，需填写此项。
+
+| 密码
+| 设备的密码，**连接类型**为``PPPoE``时，需填写此项。
+
+| 优先级
+| 端口按优先级排序，值越小优先级越高。 +
+优先级可输入范围：1-255
+
+| 跟踪IP
+| 跟踪IP用于检查该端口网络是否畅通， 若输入多个IP以英文逗号分隔。 +
+最多可填写 5 个 IP。
+
+| MTU
+| 最大传输单元，用于通知对方所能接受数据服务单元的最大尺寸，说明发送方能够接受的有效载荷大小。 +
+默认值为1500。
+|===
+
+. 修改完成后，点击**确定修改**，完成 WAN 配置修改操作。
++
+若页面弹出**编辑成功**提示信息，则说明修改 WAN 配置信息成功。
+
+. 点击**应用修改**，使配置生效。
+
+== 相关操作
+
+* link:../30_config_ha/[HA 配置（软件 VCPE）]
+* link:../21_define_busi_group/[自定义业务组]
+* link:../50_config_port/[端口角色配置]

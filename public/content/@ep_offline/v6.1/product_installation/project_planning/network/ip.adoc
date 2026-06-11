@@ -1,0 +1,81 @@
+---
+title: IP 规划
+weight: 31
+---
+
+== 网段规划
+
+|===
+| 用途	| IP 网段
+
+| 物理网络（管理网络）	| x.x.x.0/24
+| 基础网络	| x.x.1.0/24
+
+x.x.2.0/24
+| VPC网络	| 192.168.0.0/16
+
+172.16.0.0/16
+|===
+
+== 管理网络 IP 地址清单
+
+若需要手动分配各节点的管理网 IP，可以提前为每个节点规划好 IP 地址，然后在部署 IaaS 时即可根据该规划信息配置各节点的 IP。
+
+=== 物理节点管理网 IP
+
+示例如下，实际规划时需按照节点数量进行添加或删除：
+
+|===
+| Hostname | IP 地址 | IPMI	
+
+| xx1r01n00	| x.x.x.10	| x.x.249.10	
+| xx1r01n01	| x.x.x.11	| x.x.249.11	
+| xx1r01n02	| x.x.x.12	| x.x.249.12	
+| xx1r01n03	| x.x.x.13	| x.x.249.13	
+| xx1r02n00	| x.x.x.20	| x.x.249.20	
+| xx1r02n01	| x.x.x.21	| x.x.249.21	
+| xx1r02n02	| x.x.x.22	| x.x.249.22	
+| xx1r02n03	| x.x.x.23	| x.x.249.23	
+|===
+
+=== 虚拟机节点管理网 IP
+
+示例如下，其中 xx 为 Zone ID，以下仅列出部分必选角色的管理网 IP，实际规划时需要根据客户需求对角色进行补充，例如 smc、cloudsat 等角色。
+
+|===
+| Hostname | IP 地址
+
+| qingcloud-firstbox	| x.x.x.2	
+| xx1-proxy0	| x.x.x.210	
+| xx1-proxy1	| x.x.x.211	
+| xx1-dnsmaster0	| x.x.x.212	
+| xx1-dnsmaster1	| x.x.x.213	
+| xx1-webservice0	| x.x.x.214	
+| xx1-webservice1	| x.x.x.215	
+| xx1-boss0	| x.x.x.216	
+| xx1-boss1	| x.x.x.217	
+| xx1-warehouse0	| x.x.x.218	
+| xx1-warehouse1	| x.x.x.219	
+| xx1-influxdb0	| x.x.x.220	
+| xx1-pgpool0	| x.x.x.222	
+| xx1-pgpool1	| x.x.x.223	
+| xx1-zoocassa0	| x.x.x.224	
+| xx1-zoocassa1	| x.x.x.225	
+| xx1-zoocassa2	| x.x.x.226	
+|===
+
+=== 虚拟机角色浮动 IP
+
+示例如下，以下仅列出部分必选角色的浮动 IP，实际规划时需要根据客户需求对角色进行补充，例如 smc、cloudsat 等角色。
+
+|===
+| 角色	| VIP
+
+| proxy	| x.x.x.200
+| dnsmaster	| x.x.x.201
+| pgpool	| x.x.x.202
+| webservice	| x.x.x.203
+| zoocassa	| x.x.x.204
+| boss	| x.x.x.205
+|===
+

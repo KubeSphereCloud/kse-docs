@@ -1,0 +1,116 @@
+---
+title: 修改IAM纳管服务属性（ModifyIAMApiServiceAttributes）
+weight: 19
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action_group
+| String
+| false
+| 分组
+
+| description
+| String
+| false
+| 描述
+
+| gateway
+| String
+| false
+| 网关
+
+| permission
+| String
+| false
+| 默认允许或放行
+
+| service_name
+| String
+| false
+| 纳管服务英文名
+
+| translated_name
+| String
+| false
+| 纳管服务中文名
+
+| visible
+| String
+| false
+| 是否可见
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action_group
+| String
+| false
+| 分组
+
+| description
+| String
+| false
+| 描述
+
+| gateway
+| String
+| false
+| 网关
+
+| permission
+| String
+| false
+| 默认允许或放行
+
+| service_name
+| String
+| false
+| 纳管服务英文名
+
+| translated_name
+| String
+| false
+| 纳管服务中文名
+
+| visible
+| String
+| false
+| 是否可见
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMApiServiceAttributes",
+  "service_name": "ecm",
+  "translated_name": "弹性云主机"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMApiServiceAttributesResponse",
+  "ret_code": 0,
+  "service_name": "ecm",
+  "translated_name": "弹性云主机"
+}
+----

@@ -1,0 +1,42 @@
+---
+title: 基础测试
+weight: 2
+---
+
+. 执行如下命令行，登录 FirstBox。命令行中的 `<firstbox ip>` 可查看link:../../firstbox[前文内容]。
+
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 进入脚本所在目录。
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，对当前环境进行基础检查。
++
+[source,shell]
+----
+./qs_installer tools --check-u1w
+----
++
+命令行返回结果如下图所示，则说明环境检查通过。若有异常输出，需根据输出内容进行排查并解决相关异常。
++
+image::/images/u10000/install_1.png[install_1,50%]
+
+. 分别登录 Portal 与 Console 页面，确认服务可用。详细登录信息参考前文获取的link:../hosts/[ Hosts 信息]。
+
+. 成功创建 Bucket，并上传下载文件成功。成功创建文件系统和文件系统共享，挂载后根据设置的权限操作文件成功。
++
+include::../../../../../_components/note.adoc[]
+
+* Portal 详细操作可参考link:../../../../product_manual/portal_manual/service/file_storage/[《Portal 操作手册》]。
+* Console 详细操作可参考link:../../../../product_manual/console/bucket_manage/basic_opt/[《Console 操作手册》]。
+
+include::../../../../../_components/table_footer.adoc[]
+

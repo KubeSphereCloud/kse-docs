@@ -1,0 +1,39 @@
+---
+title: "在工作负载页面管理 HPA 资源"
+weight:  06
+---
+
+:ks_permission: **容器水平伸缩管理**
+:ks_navigation: **工作负载 > 部署/有状态副本集**
+
+本节介绍如何在工作负载的详情页面管理与其绑定的 HPA（容器水平伸缩）资源。
+
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* KubeSphere 平台需要安装并启用 **Metrics Server** 扩展组件。
+
+
+== 操作步骤
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在列表中点击一个工作负载的名称打开其详情页面。
+
+. 在工作负载详情页面点击**容器水平伸缩**。
+
+. 在**容器水平伸缩**页面，点击**创建**。HPA 创建步骤请参阅link:../01-create-hpa/[创建容器水平伸缩]。
+
+. 若已有与当前工作负载绑定的 HPA 资源，点击 HPA 名称查看详情，并可对其进行编辑信息、编辑伸缩设置和删除操作。

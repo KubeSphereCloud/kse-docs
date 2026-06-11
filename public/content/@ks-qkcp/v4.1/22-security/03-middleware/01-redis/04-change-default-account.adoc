@@ -1,0 +1,145 @@
+---
+title: "修改 default 用户密码"
+weight: 04
+---
+
+== 需修改的对象（secret、configmap）
+
+default 用户密码存放在 secret 中，secret 的名称从 cr 获取。
+
+. 获取 cr 列表。
++
+--
+[,bash]
+----
+kubectl -n test get redisclusters.redis.radondb.com
+----
+
+image:/images/ks-qkcp/zh/security-handbook/change-default-314/01.png[]
+--
+
+. 获取 cr 的 yaml。
++
+--
+[,bash]
+----
+kubectl -n test get redisclusters.redis.radondb.com radondb-ysy9gz -o yaml
+----
+
+对应的字段如下：
+[,yaml]
+----
+kubernetesConfig:
+    ...
+redisSecret: 
+      key: password
+      name: redis-secret-password-secret
+----
+
+image:/images/ks-qkcp/zh/security-handbook/change-default-314/02.png[]
+--
+
+. 同时，在相同的命名空间中，还存在一个 configmap，名称为 `<cr 名称>-env`，其中存放了 base64 解码后的密码文本。
++
+--
+image:/images/ks-qkcp/zh/security-handbook/change-default-314/03.png[]
+
+对应字段如下：
+
+[,yaml]
+----
+apiVersion: v1
+data:
+  ...
+  REDIS_PASSWORD: <base64 decoded string>
+  REDIS_PASSWORD_ENCRYPT: "1"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2024-05-29T07:33:16Z"
+  name: radondb-ysy9gz-env
+  namespace: test
+----
+--
+
+== 密码工具
+
+下载 link:https://yunify-qingcloud-docs.pek3b.qingstor.com/package/redis-pass-tool.zip[redis 加解密工具]。
+
+使用示例：
+
+[,bash]
+----
+# 加密明文
+./redis-pass-tool-arm64 -t e -cluster radondb-ysy9gz -ns test abcdefg
+ 
+# 解密密文
+./redis-pass-tool-arm64 -t d -cluster radondb-ysy9gz -ns test GNjAQExMtborsCqOkEFfEw==
+----
+
+== 修改步骤
+
+. 获取密码文本。
++
+--
+使用密码工具，从明文密码获取加密后的密码文本 A。
+[,bash]
+----
+# 加密明文，获取密码文本 A
+./redis-pass-tool-arm64 -t e -cluster radondb-ysy9gz -ns test 密码明文
+----
+
+使用 base64 工具，从密码文本 A 获取 base64 编码的密码文本 B。
+[,bash]
+----
+# 使用 base64 工具，获取密码文本 B
+echo -n 密码文本 A | base64
+----
+--
+
+. 修改 configmap。
++
+--
+configmap 的命名规则是 `<cr 名称>-env`，使用 kubectl edit 编辑该 configmap。使用密码文本 A 修改 REDIS_PASSWORD 字段。
+
+image:/images/ks-qkcp/zh/security-handbook/change-default-314/04.png[]
+
+[,yaml]
+----
+apiVersion: v1
+data:
+  ...
+  REDIS_PASSWORD: 密码文本 A
+----
+--
+
+. 修改 secret。
++
+--
+使用 kubectl edit 编辑该 secret。使用密码文本 B 修改 password 字段。
+
+image:/images/ks-qkcp/zh/security-handbook/change-default-314/05.png[]
+
+[,yaml]
+----
+apiVersion: v1
+data:
+  ...
+  password: 密码文本 B
+  ...
+----
+--
+
+. 重启有状态副本集。
++
+--
+重启 leader 和 follower 对应的 statefulset。
+
+image:/images/ks-qkcp/zh/security-handbook/change-default-314/06.png[]
+
+[,bash]
+----
+kubectl rollout restart sts <cr-名称>-leader
+
+kubectl rollout restart sts <cr-名称>-follower
+----
+--

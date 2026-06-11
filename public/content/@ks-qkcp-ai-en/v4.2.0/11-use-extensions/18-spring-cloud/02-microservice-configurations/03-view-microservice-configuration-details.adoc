@@ -1,0 +1,60 @@
+---
+title: "View Microservice Configuration Details"
+keywords: "Kubernetes, {ks_product}, Project Management, Spring Cloud, View Microservice Configuration Details"
+description: "Describes how to view microservice configuration details."
+weight: 03
+---
+
+:ks_permission: ** Spring Cloud Microservice View**
+:ks_navigation:  **Spring Cloud > Microservice Configuration**
+
+
+This section describes how to view microservice configuration details.
+
+
+== Prerequisites
+
+* The **KubeSphere Spring Cloud** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/microserviceConfiguration/microserviceConfiguration-oper-openDetailsPage.adoc[]
++
+--
+* The **Attributes** area on the microservice configuration details page displays the project, cluster, and creation time to which the microservice configuration belongs.
+
+* The **Data** tab on the microservice configuration details page displays the data contained in the microservice configuration.
+--
+
+. On the microservice configuration details page, click the **History** tab to view the modification records of the microservice configuration.
++
+--
+* Each time a microservice configuration is edited, a modification record is generated, which can be used to roll back the microservice configuration.
+
+* Click a modification record to view the data content of the microservice configuration.
+--
+
+. On the microservice configuration details page, click the **Events** tab to view the events of the microservice configuration.
++
+--
+include::../../../../_custom/clusterManagement/clusterManagement-para-eventsTab.adoc[]
+--

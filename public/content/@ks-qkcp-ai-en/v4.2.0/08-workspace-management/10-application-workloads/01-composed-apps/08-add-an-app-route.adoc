@@ -1,0 +1,46 @@
+---
+title: "Add an Ingress for a Composed App"
+keywords: "Kubernetes, {ks_product}, Project Management, Application Workloads, App, Edit App Settings"
+description: "Introduces how to add an Ingress for a composed app."
+weight: 07
+---
+
+:ks_permission: **App Instance Management**
+:ks_navigation: **Application Workloads > Composed Apps**
+
+
+This section describes how to add an Ingress for a composed app.
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the **Composed Apps** page, click the name of an app to go to its details page.
+
+. On the app details page, click **Operation > Add Ingress**.
+
++
+
+include::../../../../_custom/clusterManagement/routes/routes-oper-createARoute_v42.adoc[]

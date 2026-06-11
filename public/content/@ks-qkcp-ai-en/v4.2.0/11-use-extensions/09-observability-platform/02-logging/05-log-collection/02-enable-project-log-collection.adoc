@@ -1,0 +1,61 @@
+---
+title: "Enable Log Collection in a Project"
+keywords: "Kubernetes, {ks_product}, Project Management, Project Settings, Log Collection, Enable Log Collection"
+description: "Describes how to enable log collection."
+weight: 02
+---
+
+
+:ks_permission: ** project-admin **
+:ks_navigation: **Project Management > Project List**
+
+
+This section describes how to enable log collection in a project.
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Once enabled, the **Collect Logs on Volumes** feature will be available on the **Storage Settings** tab when creating workloads, services, and Jobs in the project.
+|===
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+* The KubeSphere platform needs to have the **WizTelemetry Logging** extension installed and enabled, and link:../01-enable-logsidecar/[log collection] must be enabled.
+
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the project you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Enable Log Collection** from the drop-down list.
+
+. In the **Enable Log Collection** dialog box, click **OK**.
+
+// Note
+include::../../../../../../_ks_components/admonitions/note.adoc[]
+
+ifeval::["{file_output_type}" == "html"]
+After enabling log collection, you need to restart the pods for it to take effect on existing pods. For more information, please refer to link:../../../../../08-workspace-management/10-application-workloads/03-workloads/05-re-create-a-workload/[Re-create a Workload], link:../../../../../08-workspace-management/10-application-workloads/04-jobs/05-rerun-a-job/[Rerun a Job], or link:../../../../../08-workspace-management/10-application-workloads/06-pods/05-delete-pods/[Delete Pods].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+After enabling log collection, you need to restart the pods for it to take effect on existing pods. For more information, please refer to the "Application Workloads" chapter in the *KubeSphere Workspace and Project Management Guide*, on re-creating workloads, rerunning Jobs, or deleting pods.
+endif::[]
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]

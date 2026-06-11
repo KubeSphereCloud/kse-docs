@@ -1,0 +1,70 @@
+---
+title: "启用服务拓扑"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, 服务拓扑, 启用服务拓扑"
+description: "介绍如何启用服务拓扑扩展组件。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 962e7c7a3bab4d67b0c0e9fb13906d50
+:ks_xref_id: 764f4ec24f6441f6a6931e984c9fdfae
+:ks_comp: ../../../../components/
+:ks_title: 启用服务拓扑
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, 服务拓扑, 启用服务拓扑
+:ks_description: 介绍如何启用服务拓扑扩展组件。
+:ks_weight: 01
+:ks_icon:
+
+
+本节介绍如何启用服务拓扑扩展组件。
+
+
+== 前提条件link:[id=e1deb7cc5dee4d578faefe9083535a74]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=30029dfb24124126a786199a25b17bf2]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:network:topology:type** 参数设置为 **weave-scope**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  network:
+    topology:
+      type: weave-scope
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionEnabled.adoc[]
+
+* 服务拓扑启用后，**服务**页面将显示**服务拓扑**页签。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

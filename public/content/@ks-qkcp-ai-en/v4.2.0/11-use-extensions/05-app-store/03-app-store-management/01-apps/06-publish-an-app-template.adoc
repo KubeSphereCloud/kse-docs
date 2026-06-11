@@ -1,0 +1,48 @@
+---
+title: "Publish an App Template"
+description: "Describes how to publish an app template."
+weight: 06
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **Apps**
+
+This section describes how to publish an app template.
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+Before publishing an app template, at least one of its included app versions must be in the **Published** state.
+|===
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
+. On the app template details page, click **Operation** and select **Publish**.
++
+After the app is successfully published, you can view it on the **App Store** page. The app can be installed by all projects on the KubeSphere platform.

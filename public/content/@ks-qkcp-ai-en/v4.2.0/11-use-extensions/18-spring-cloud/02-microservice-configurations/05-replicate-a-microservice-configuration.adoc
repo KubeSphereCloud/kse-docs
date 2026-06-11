@@ -1,0 +1,55 @@
+---
+title: "Copy Microservice Configuration"
+keywords: "Kubernetes, {ks_product}, Project Management, Spring Cloud, Copy Microservice Configuration"
+description: "Describes how to copy a microservice configuration."
+weight: 05
+---
+
+:ks_permission: ** Spring Cloud Microservice Management**
+:ks_navigation:  **Spring Cloud > Microservice Configuration**
+
+
+This section describes how to copy a microservice configuration.
+
+You can use an existing microservice configuration to create a new one with a different name but identical data.
+
+
+== Prerequisites
+
+* The **KubeSphere Spring Cloud** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the right side of the microservice configuration you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Copy** from the dropdown list.
+
+. In the **Copy Microservice Configuration** dialog box, set the name for the new microservice configuration, then click **OK**.
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+If needed, you can also modify the configuration data.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+After the copy is complete, the newly created microservice configuration will appear in the list.
+--

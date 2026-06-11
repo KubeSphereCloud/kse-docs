@@ -1,0 +1,269 @@
+---
+title: 查询IAM策略（DescribeIAMPolicies）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| base_type
+| String
+| false
+| 类型
+
+| console
+| String
+| false
+| ConsoleID
+
+| controller
+| Array
+| false
+| 控制器类型
+
+| has_draft
+| String
+| false
+| 是否存在草稿
+
+| is_draft
+| String
+| false
+| 是否草稿
+
+| limit
+| Integer
+| false
+| 偏移量
+
+| offset
+| Integer
+| false
+| 起始坐标
+
+| owner
+| String
+| false
+| 所有者
+
+| policies
+| Array
+| false
+| IAM策略ID列表
+
+| policy_name
+| String
+| false
+| 策略名称
+
+| reverse
+| Integer
+| false
+| 是否降序查询
+
+| root_user
+| String
+| false
+| 根用户ID
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| sort_key
+| String
+| false
+| 排序使用的列
+
+| status
+| Array
+| false
+| 状态
+
+| tag
+| String
+| false
+| 标签
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| policy_set
+| Array
+| false
+| IAM策略详情列表
+
+| policy_set[].bindings
+| Integer
+| false
+| 策略引用数
+
+| policy_set[].console_id
+| String
+| false
+| 控制台ID
+
+| policy_set[].controller
+| String
+| false
+| 控制器类型
+
+| policy_set[].create_time
+| String
+| false
+| 创建时间
+
+| policy_set[].effect
+| String
+| false
+| 允许/拒绝
+
+| policy_set[].has_draft
+| String
+| false
+| 是否存在草稿
+
+| policy_set[].is_default
+| String
+| false
+| 是否默认
+
+| policy_set[].is_draft
+| String
+| false
+| 是否草稿
+
+| policy_set[].owner
+| String
+| false
+| 所有者
+
+| policy_set[].policy_id
+| String
+| false
+| IAM策略ID
+
+| policy_set[].policy_name
+| String
+| false
+| IAM策略名称
+
+| policy_set[].qrn
+| String
+| false
+| 唯一资源标识
+
+| policy_set[].revision_id
+| String
+| false
+| 策略版本ID
+
+| policy_set[].root_user
+| String
+| false
+| 主账号
+
+| policy_set[].statement
+| Object
+| false
+| 策略内容
+
+| policy_set[].statement.action
+| Array
+| false
+| 操作码列表
+
+| policy_set[].statement.effect
+| String
+| false
+| 效果,allow/deny
+
+| policy_set[].statement.resource
+| String
+| false
+| 资源id
+
+| policy_set[].status
+| String
+| false
+| 状态
+
+| total_count
+| Integer
+| false
+| IAM策略总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMPolicies",
+  "limit": 20,
+  "offset": 0,
+  "owner": "usr-ZiEgnuY1",
+  "reverse": 1,
+  "sort_key": "create_time",
+  "status": [
+    "active"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMPoliciesResponse",
+  "policy_set": [
+    {
+      "bindings": 2,
+      "console_id": "testingcloud",
+      "controller": "pitrix",
+      "create_time": "2023-03-02T16:11:15",
+      "effect": "01",
+      "has_draft": "0",
+      "is_default": "1",
+      "is_draft": "0",
+      "owner": "usr-ZiEgnuY1",
+      "policy_id": "iamp-lzetjrjj",
+      "policy_name": "iamtest",
+      "qrn": "qrn:qingcloud:iam::admin:policy/iamp-lzetjrjj",
+      "revision_id": "iampr-chlpnmau",
+      "root_user_id": "usr-ZiEgnuY1",
+      "statement": {
+        "Statement": [
+          {
+            "action": [
+              "ecm:Describe*",
+              "ecm:CreateBrokers",
+              "ecm:DeleteBrokers"
+            ],
+            "effect": "allow",
+            "resource": "*"
+          }
+        ],
+        "Version": "2012-04-01"
+      },
+      "status": "active"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

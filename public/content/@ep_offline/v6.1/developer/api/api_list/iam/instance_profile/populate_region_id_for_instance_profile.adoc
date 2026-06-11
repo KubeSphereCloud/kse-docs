@@ -1,0 +1,70 @@
+---
+title: 设置主机IAM配置区域ID（PopulateRegionIdForInstanceProfile）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| instances
+| Array
+| true
+| 主机ID列表
+
+| zone
+| String
+| true
+| 区域ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| instances
+| Array
+| false
+| 主机ID列表
+
+| region_id
+| Integer
+| false
+| 区域ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "PopulateRegionIdForInstanceProfile",
+  "instances": [
+    "i-pb3n66x1"
+  ],
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "PopulateRegionIdForInstanceProfileResponse",
+  "instances": [
+    "i-pb3n66x1"
+  ],
+  "region_id": "testing",
+  "ret_code": 0
+}
+----

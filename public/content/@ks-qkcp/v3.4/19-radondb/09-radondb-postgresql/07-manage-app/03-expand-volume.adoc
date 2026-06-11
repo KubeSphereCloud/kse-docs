@@ -1,0 +1,71 @@
+---
+title: "扩容应用卷"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB PostgreSQL, 应用管理,扩容应用卷"
+description: "如何在{ks_product_both}上扩容应用卷。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: b2504b975dad42b1b3dc127f8c25ca08
+:ks_xref_id: 77061acebac6436ea99ea7d4a5df1d68
+:ks_comp: ../../../../components/
+:ks_title: 扩容应用卷
+:ks_keywords: Kubernetes, {ks_product}, RadonDB PostgreSQL, 应用管理,扩容应用卷
+:ks_description: 如何在{ks_product_both}上扩容应用卷。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本小节主要介绍了如何在{ks_product_both}上扩容应用卷。
+
+
+== 前提条件link:[id=5a71f8f078764aaf8fc07518afddfc60]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondpq-prer-installRadondbpq.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=2a0e0da277af403390d688f9d18ac0a2]
+
+RadonDB PostgreSQL 创建成功后，可在{ks_product_both}应用管理页面扩容应用卷。支持选择卷范围 10 Gi～2048 Gi。只有当您的存储类支持扩容时，您才可以扩容应用卷。
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+此操作可能会中断数据库服务，请在非高峰时段执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondbpq-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 扩展卷**。
+
+. 在**扩展卷**对话框，修改卷容量，然后点击**确定**。

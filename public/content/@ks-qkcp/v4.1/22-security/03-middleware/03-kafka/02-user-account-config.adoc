@@ -1,0 +1,26 @@
+---
+title: "用户账号配置"
+weight: 02
+---
+
+. 查询 kafka 相关的 crd。
++
+[,bash]
+----
+kubectl get crd | grep kafka
+----
+
+. 查询 kafka cluster 配置文件 crd。
++
+[,bash]
+----
+kubectl get kafkas.kafka.strimzi.io
+----
+
+. 按以下方式调整用户，样例见下图。
++
+image:/images/ks-qkcp/zh/security-handbook/332-account-config/config.png[]
+
+.. 编辑 `spec.kafka.listeners.authentication.listenerConfig`，在 org.apache.kafka.common.security.plain.PlainLoginModule required user_saas="dms@kafka" 后面添加 user_test="test"(即 user_用户名=密码)。
+.. 在 `spec.kafka.authorization.superUsers` 下面增加 test 用户。
+

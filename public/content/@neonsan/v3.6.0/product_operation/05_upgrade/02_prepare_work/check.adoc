@@ -1,0 +1,52 @@
+---
+title: "配置检查"
+weight: 3
+---
+
+. 检查配置。
+
+*  若待升级环境为混插环境，
++
+逐一登录集群中的 Store 节点，检查 ``/etc/neonsan/store.conf`` 配置文件中 ``[dispatcher]`` 和 ``[replicator]`` 字段下是否分别配置 ``conn_close_wait_time`` 和 ``rep_io_timeout`` 参数。根据如下形式，添加或修改相应参数后，保存即可，**无需重启 Store 服务**。
++
+[source,shell]
+----
+vi /etc/neonsan/store.conf
+
+......
+[dispatcher]
+conn_close_wait_time=650
+[replicator]
+rep_io_timeout=65
+......
+----
+
+* 若升级至 NeonSAN v3.5.1 及以上版本。
++
+逐一登录集群中的 Center 节点，检查 ``/etc/neonsan/center.conf`` 配置文件中 ``[mysql]`` 字段的 IP 地址是否为多个，若是，则需要将其修改为单个 IP 地址，形式如下。
++
+[source,shell]
+----
+vi /etc/neonsan/center.conf
+
+......
+[mysql]
+user="neonsan"
+pass="zhu88jie"
+#floating IP of mysql-plus
+ip="192.168.2.251" 
+......
+----
+
+. 将目标版本的 NeonSAN 安装包和升级脚本上传至待升级集群中的任一节点的指定路径下。
++
+include::../../../../../_components/note.adoc[]
+* 升级脚本上传至 ``/root`` 目录下即可。
+* 所有安装包建议单独存放于一独立目录下，后续有安装包的拷贝操作，例如 ``/root/V3.5.1``。
+include::../../../../../_components/table_footer.adoc[]
+
+. 开启升级日志收集工具，方便查询升级过程中的相关问题。例如，Xshell 工具操作流程：点击**文件** > **日志** > **启动**。
+
+
+
+

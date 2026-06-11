@@ -1,0 +1,58 @@
+---
+title: "Delete a disk snapshot"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, disks, snapshots, deletion"
+description: "Describes how to delete a disk snapshot in the {ks_product} web console."
+weight: 09
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: b0c04c4ce5d64de0b96225e5a6a2a9f6
+:ks_xref_id: f0cdaca42f194af5ae3a2e9449e3f11e
+:ks_comp: ../../../components/
+:ks_title: Delete a disk snapshot
+:ks_description: Describes how to delete a disk snapshot in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, disks, snapshots, deletion
+:ks_weight: 09
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete a disk snapshot in the {ks_product} web console.
+
+When you delete a snapshot of a VM, {ks_product} removes the snapshot from the snapshot list and retains the current state of the VM. This operation does not affect the VM or other VM snapshots.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=ad03a04eb846420396779073f9b5911b]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom-en/disks/disk-manage-prerequisites.adoc[]
+
+:relfileprefix: ./
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=f17b7812525947eeacfba26d457ac113]
+
+include::../../../_custom-en/disks/disk-steps.adoc[]
+
+. On the **Disks** page, click the name of the desired disk. The details page of the disk appears.
+. On the **Snapshots** tab, find the snapshot that you want to delete, click image:/images/ksv/en/icons/more.svg[operation-menu,13], and then select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+Snapshots cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

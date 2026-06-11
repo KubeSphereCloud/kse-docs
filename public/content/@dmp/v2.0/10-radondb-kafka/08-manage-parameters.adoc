@@ -1,0 +1,148 @@
+---
+title: "修改配置参数"
+keywords: "Kubernetes, {ks_product}, RadonDB Kafka, 配置参数, 修改参数"
+description: "介绍如何修改 RadonDB Kafka 配置参数。"
+weight: 08
+---
+
+:ks_db_product: Kafka
+
+本节介绍如何修改 RadonDB {ks_db_product} 的配置参数。
+
+RadonDB {ks_db_product} 实例支持编辑配置参数，通过管理配置参数可调优服务性能，并可启用高可用性能。
+
+// Warning
+include::../../../_ks_components/admonitions/warning.adoc[]
+
+修改部分配置参数后，{ks_db_product} 服务会重启，造成业务中断。请谨慎操作。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 点击页面右侧的**参数管理**页签，在左上角的下拉框中切换 {ks_db_product} 和 ZooKeeper，点击**编辑**即可修改配置参数。
+. 点击**确定**保存。
+
+
+== 参数简介
+
+=== {ks_db_product} 参数
+
+[%header,cols="1,5"]
+|===
+|参数 |说明
+
+|num.partitions
+|主题分区默认值。默认值为 **3**。
+
+|TLS
+|是否启用 TLS 加密。默认值为 **true**。
+
+|认证类型
+|{ks_db_product} 的认证类型。默认采用 **TLS**。
+
+|节点端口
+|是否启用 KubeSphere 节点端口用于从集群外部访问。默认值为 **true**。
+
+|log.retention.bytes
+|分区大小上限，单位为字节。分区大小超过上限将触发删除策略。默认值为 **-1**。
+
+|log.retention.hours
+|日志文件的最大保留时间。超过最大保留时间的日志文件将被删除。默认值为 **168**。
+
+|log.segment.bytes
+|段文件的大小上限，单位为字节。默认值为 **1073741824**。
+
+|log.segment.delete.delay.ms
+|删除段文件之前等待的时间。默认值为 **60000**。
+
+|log.roll.hours
+|段文件轮滚前的最大时间，单位为小时。默认值为 **168**。
+
+|offsets.topic.replication.factor
+|偏移主题的复制因子（设置较大的值可确保可用性）。在集群大小符合此参数要求前，内部主题创建将失败。默认值为 **3**。
+
+|log.cleanup.policy
+|超过保留窗口后，段的默认清理策略。参数值可以为 delete 和 compact。您可以同时设置两个值并用半角逗号（,）分隔。默认值为 **delete**。
+
+|log.cleaner.enable
+|是否在服务器上启用日志清理器进程。默认值为 **true**。
+
+|compression.type
+|DBPARAM_COMPRESSION_TYPE_DESC。默认值为 **producer**。
+
+|message.max.bytes
+|记录批次的大小上限，单位为字节。取值范围为 1024~2147483647，默认值为 **1000000**。
+
+|num.network.threads
+|服务器用于接收网络请求和向网络发送响应的线程数。默认值为 **3**。
+
+|num.io.threads
+|服务器用于处理请求的线程数量，可能包括磁盘 I/O。取值范围为 1~20，默认值为 **8**。
+
+|num.recovery.threads.per.data.dir
+|每个数据目录用于启动时日志恢复和关闭时刷写的线程数。默认值为 **1**。
+
+|num.replica.fetchers
+|用于从源 Broker 复制消息的 Fetcher 线程数。取值范围为 1~10，默认值为 **1**。
+
+|queued.max.requests
+|阻止网络线程之前允许排队的请求数量。取值范围为 1~5000，默认值为 **500**。
+
+|replica.lag.time.max.ms
+|如果跟随者没有发送任何 Fetch 请求或没有消费领导者日志结束偏移达到此参数指定的时间，领导者将把跟随者从 ISR 中移除。取值范围为 6000~99999，默认值为 **10000**。
+
+|group.max.session.timeout.ms
+|注册消费者的最大会话超时。取值范围为 0~9999999，默认值为 **1800000**。
+
+|group.min.session.timeout.ms
+|注册消费者的最小会话超时。取值范围为 0~60000，默认值为 **6000**。
+
+|auto.create.topics.enable
+|是否启用自动主题创建。默认值为 **false**。
+
+|min.insync.replicas
+|ISR 集的最小副本数量。取值范围为 1~6，默认值为 **2**。
+
+|default.replication.factor
+|默认复制因子。取值范围为 1~6，默认值为 **3**。
+|===
+
+
+
+=== ZooKeeper 参数
+
+[%header,cols="1,5"]
+|===
+|参数 |说明
+
+|tickTime
+|ZooKeeper 使用的基本单位时间，单位为毫秒。此参数值用于心跳信号，并且最小会话超时将是 tickTime 的两倍。取值范围为 1~1000000，默认值为 **2000**。
+
+|initLimit
+|允许追随者连接并领导者并与领导者同步数据的最大 tick 数。取值范围为 1~1000000，默认值为 **5**。
+
+|syncLimit
+|允许跟随者同步数据的最 tick 数。如果同步进程超过限制，跟随者将被丢弃。取值范围为 1~1000000，默认值为 **2**。
+
+|maxClientCnxns
+|单个客户端（由 IP 地址标识）可以在套接字级别对 ZooKeeper 的单个成员建立的最大并发连接数量。此参数用于防止某些类别的 DoS 攻击，例如文件描述符耗尽。取值范围为 1~1000000，默认值为 **1000**。
+
+|autopurge.snapRetainCount
+|启用 ZooKeeper 自动清除功能时保留的最新快照和相应事务日志的数量。取值范围为 3~100000000，默认值为 **3**。
+
+|autopurge.purgeInterval
+|自动清除操作的时间间隔，单位为小时。参数值 0 表示自动清除功能已禁用。取值范围为 0~720，默认值为 **1**。
+
+|===
+
+

@@ -1,0 +1,89 @@
+---
+title: "查看虚拟机列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看虚拟机列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 7a94aaa418c44dcfbd88d10e66ab0f1e
+:ks_xref_id: 2b3707e2a26348549c275a16b8f42b36
+:ks_comp: ../../../../components/
+:ks_title: 查看虚拟机列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看虚拟机列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看虚拟机列表。
+
+include::../../../../_custom/vms/vm-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=9e454cef6f024766baaf294274a23f9a]
+
+include::../../../../_custom/vms/vm-view-steps.adoc[]
++
+--
+具体参数描述如下表所示。
+
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|用户自定义的虚拟机名称。
+
+include::../../../../_custom/vms/vm-naming-convention.adoc[]
+
+|ID
+|虚拟机在系统中的通用唯一标识符，由系统自动分配。
+
+|状态
+|虚拟机当前的运行状态。
+
+|操作系统
+|虚拟机的操作系统类型和版本，以操作系统图标显示。将光标移动到操作系统图标上可查看操作系统的具体类型和版本。
+
+|IP 地址
+|虚拟机的 IP 地址。对于添加多张网卡的虚拟机，会为其分配多个 IP 地址。
+
+|CPU 用量
+|显示虚拟机的 CPU 用量。将光标移动到圆环上可查看已使用的 CPU 核心数和可用的 CPU 核心总数。
+
+include::../../../../_custom/vms/resource-usage-ring-description.adoc[]
+
+|内存用量
+|显示虚拟机的内存用量。将光标移动到圆环上可查看已使用的内存大小和可用的内存总量。
+
+include::../../../../_custom/vms/resource-usage-ring-description.adoc[]
+
+|系统盘
+|虚拟机的系统盘容量。
+
+|绑定资源
+|已和虚拟机绑定的资源信息。将光标移动到资源图标上可查看对应资源详情。
+
+|所属节点
+|运行虚拟机的节点。此列信息仅对 **admin** 用户可见。
+
+|所属项目
+|虚拟机所在的项目名称。
+|===
+--
+// 所有后面的需要等开发完成后验证
+. （可选）在虚拟机列表的空白区域点击右键可打开虚拟机操作菜单。
+
+
+. （可选）在虚拟机名称右侧点击 image:/images/ksv/zh/icons/terminal.svg[terminal,14] 或 image:/images/ksv/zh/icons/vnc.svg[vnc,14]，可使用终端或 VNC 远程连接虚拟机。
+
+. （可选）点击虚拟机列表上方的搜索框并设置搜索条件，可按名称、ID 或状态搜索虚拟机。例如，**名称:ab** 表示搜索名称包含字符串 **ab** 的虚拟机。
+
+. （可选）在虚拟机列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。
+

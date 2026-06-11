@@ -1,0 +1,47 @@
+---
+title: "Delete Rule Groups"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Monitoring & Alerting, Rule Groups, Edit Rule Groups"
+description: "Describes how to delete rule groups."
+weight: 07
+---
+
+:ks_permission: **Rule Group Management**
+:ks_navigation: **Monitoring & Alerting > Rule Groups**
+
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-deleteAlertingPolicies.adoc[]
+
+
+== Prerequisites
+
+* The **WizTelemetry Alerting** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../../
+
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+== Delete a Single Rule Group
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and navigate to your cluster or workspace.
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-deleteASingleAlertingPolicy.adoc[]
+
+
+== Delete Rule Groups in Batches
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and navigate to your cluster or workspace.
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-deleteMultipleAlertingPolicies.adoc[]

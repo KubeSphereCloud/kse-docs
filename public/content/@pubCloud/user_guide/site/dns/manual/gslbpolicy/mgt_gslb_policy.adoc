@@ -1,0 +1,48 @@
+---
+title: "管理实例列表"
+description: 介绍 GSLB 实例管理操作，包括查看实例信息、修改实例备注、删除实例等。
+keywords: DNS, GSLB 实例
+weight: 1
+draft: false
+---
+本小节主要介绍如何管理 GSLB 实例列表，包括查看实例信息、修改实例备注、删除实例等。
+
+== 查看实例信息
+
+. 登录管理控制台。
+. 选择**产品与服务** > *域名与网站* > *云解析 DNS*，进入域名列表页。
+. 在左侧导航栏选择**全局负载均衡**，进入实例列表页面。
++
+在实例列表页，可查看实例基本参数信息。
++
+image::/images/cloud_service/site/dns/gslb_policy_list.png[GSLB 实例列表]
+
+. 点击实例名称，进入实例详情页面。
++
+可查看实例详细信息，包括基本详情、实例解析概览、监控策略、告警日志等。
++
+image::/images/cloud_service/site/dns/gslb_instance_detail.png[GSLB 实例列表]
+
+== 删除实例
+
+include::../../../../../../_components/attention.adoc[]
+
+删除实例后不可找回，请谨慎操作。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 进入实例列表页面。
++
+image::/images/cloud_service/site/dns/gslb_policy_list.png[GSLB 实例列表]
+
+. 勾选状态为关闭中实例，点击**更多操作** > *删除*。
+. 在删除实例确认窗口，点击**确认**，删除实例。
+
+== 修改实例备注
+
+. 进入实例列表页面。
++
+image::/images/cloud_service/site/dns/gslb_policy_list.png[GSLB 实例列表]
+. 勾选状态为关闭中实例，点击**更多操作** > *修改备注*。
+. 在实例备注编辑窗口，输入实例备注。
+. 点击**确认**，添加实例备注。

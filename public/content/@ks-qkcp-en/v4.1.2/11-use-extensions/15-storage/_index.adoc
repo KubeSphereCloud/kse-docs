@@ -1,0 +1,32 @@
+---
+title: "KubeSphere Storage"
+keywords: "Kubernetes, {ks_product-en}, storage, volume snapshots"
+description: "Learn how to use the KubeSphere Storage extension."
+weight: 15
+layout: "second"
+---
+
+
+This section describes how to use the "KubeSphere Storage" extension.
+
+This extension includes multiple storage-related utilities:
+
+* snapshot-controller: Used to create snapshots for PVCs.
+* snapshotclass-controller: Used to count snapshots.
+* pvc-auto-resizer: Used to automatically expand PVCs when they are running out of capacity.
+* storageclass-accessor: Provides an admission controller to verify whether it is allowed to create PVCs in a specific namespace or workspace.
+
+
+After installing the "KubeSphere Storage" extension,
+
+* The **Storage** menu in the left navigation pane of the cluster will display **Volume Snapshots** and **Volume Snapshot Classes** options, and **Storage Classes** will support **Set Authorization Rules** and **Set Auto Expansion**.
+* The **Storage** menu in the left navigation pane of the project will display the **Volume Snapshots** option.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+* The auto-expansion feature of storage classes supports automatically expanding PVCs when they are running out of capacity. It only controls whether users are allowed to use the related operations in the {ks_product-en} web console. Whether the storage class actually supports these operations depends on the backend storage system.
+* Setting auto-expansion requires connecting to the prometheus service. For more information, see the details page of the "KubeSphere Storage" extension in the Extensions Center.
+|===

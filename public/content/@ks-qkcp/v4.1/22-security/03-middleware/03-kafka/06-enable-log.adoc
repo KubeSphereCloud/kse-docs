@@ -1,0 +1,41 @@
+---
+title: "启用日志"
+weight: 06
+---
+
+. Kafka 默认日志会打印到标准输出中，通过 KubeSphere 的容器日志页面，或者统一的日志查询页面可查看日志。
++
+image:/images/ks-qkcp/zh/security-handbook/336-enable-log/01.png[]
+image:/images/ks-qkcp/zh/security-handbook/336-enable-log/02.png[]
+
+. 默认 Kafka 日志级别为 INFO，如需修改为其他，如 DEBUG，请进行如下修改。
+
+.. 在 Kafka 日志的 `spec.kafka` 下增加 logging 配置。
++
+[,bash]
+----
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+spec:
+  kafka:
+    logging:
+      type: inline
+      loggers:
+        kafka.root.logger.level: "DEBUG"
+----
+
+.. 在 Zookeeper 日志的 `spec.zookeeper` 下增加 logging 配置。
++
+[,bash]
+----
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+spec:
+  zookeeper:
+    logging:
+      type: inline
+      loggers:
+        zookeeper.root.logger: "DEBUG"
+----
+
+.. 修改后，operator 会热更新 kafka 和 zookeeper 的 pod 使之生效。

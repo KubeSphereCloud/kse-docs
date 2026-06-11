@@ -1,0 +1,51 @@
+---
+title: "Assign a Project to Another Workspace"
+keywords: "Kubernetes, {ks_product}, Workspace Management, Project, Unbind Project"
+description: "Describes how to unbind a project and assign it to another workspace."
+weight: 08
+---
+
+:ks_permission: **Project Management**
+:ks_navigation: **Project**
+
+This section describes how to unbind a project from its current workspace and reassign it to another workspace.
+
+== 1. Unbind the Project
+
+In the cluster where the project resides, execute the following command to remove the relationship between the project and its workspace.
+
+[,bash]
+----
+kubectl label ns <namespace> kubesphere.io/workspace- && kubectl patch ns <namespace>   -p '{"metadata":{"ownerReferences":[]}}' --type=merge
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+The above command removes the label associating the project with the workspace and clears the ownerReferences.
+|===
+
+== 2. Remove Project Members
+
+In the cluster where the project resides, execute the following command to remove all members from the project.
+
+[,bash]
+----
+kubectl delete rolebindings.iam.kubesphere.io -n <namespace> --all
+----
+
+== 3. Assign to a New Workspace
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. In the project list, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the project, then select **Assign Workspace** from the dropdown list.
+
+. In the **Assign Workspace** dialog box, set the workspace to which the project belongs, select a workspace member as the project administrator, and then click **OK**.
+
+. Navigate to the selected workspace, and you will see the project on the **Project Management > Project List** page.

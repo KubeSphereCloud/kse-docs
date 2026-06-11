@@ -1,0 +1,67 @@
+---
+title: "迁移虚拟机"
+weight: 6
+---
+
+== 功能描述
+
+管理控制平台内创建的 ExpressCloud 虚拟机支持在线迁移，即将虚拟机从当前计算节点上迁移至其他计算节点。用户可以根据实际情况进行单个或批量虚拟机迁移。
+
+== 前提条件
+
+* 已获得{product_console_name}的登录账户和密码。
+* 平台中已存在 **ExpressCloud 主机**。
+* 目标计算节点空间充足。
+
+== 迁移单个虚拟机
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+
+. 点击主机所在行右侧的更多操作，选择**迁移虚拟机**。
++
+* *方式一：* 手动指定计算节点
+*
+.. 在弹出的**迁移虚拟机**的窗口中，选择**手动指定计算节点**。
++
+image::/images/express/console/vm_manage_migrate_1.png[,70%]
++
+.. 在**迁移虚拟机**的窗口中，点击**选择**，选定当前虚拟机待迁移至的目标计算节点，并点击**确定**。
++
+image::/images/express/console/vm_manage_migrate_2.png[,70%]
++
+.. 返回迁移虚拟机界面，点击**迁移**即可。
++
+image::/images/express/console/vm_manage_migrate_3.png[,70%]
++
+
+* *方式二：* 系统指定计算节点
+
+.. 在弹出的**迁移虚拟机**的窗口中，选择**系统指定计算节点**，点击**迁移**即可。
++
+image::/images/express/console/vm_manage_migrate_4.png[,70%]
+
+.. 系统根据各计算节点上资源使用情况，自动将相应的虚拟机迁移至资源充足的计算节点上。
+
+== 批量迁移虚拟机
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，选择**物理资源** > **计算节点**，点击待批量迁移虚拟机的计算节点 ID，进入其详情页面，并选择**主机**页签。
+
+. 勾选待迁移的虚拟机，并点击**批量迁移虚拟机**。
++
+image::/images/express/console/vm_manage_migrate_5.png[]
+
+. 在弹出的迁移虚拟机的窗口中，选择手动指定计算节点或系统指定计算节点进行虚拟机迁移。
++
+
+include::../../../../../../../../_components/note.adoc[]
+手动或系统指定计算节点的虚拟机迁移详细流程可参考前文相关内容。
+
+include::../../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vm_manage_migrate_6.png[]
+
+

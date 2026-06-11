@@ -1,0 +1,129 @@
+---
+title: "部署 MinIO 服务"
+weight: 5
+---
+
+MinIO 服务可为用户提供便捷的文件上传和下载功能。
+
+. 登录至 Lustre 客户端节点（即 lustre-client），执行如下命令，查看 Lustre 挂载目录 ``/public``。
++
+[source,shell]
+----
+# df -h
+----
++
+
+include::../../../../../../_components/note.adoc[]
+Lustre 客户端节点可在企业云平台部署规划中查看。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在 Lustre 客户端节点（即 lustre-client），执行如下命令，创建 ``/public/epfs`` 目录，即为所有云平台用户 EPFS 文件存储的根目录。
++
+[source,shell]
+----
+# mkdir /public/epfs
+----
+
+. 将 MinIO 服务安装包上传至 Lustre 客户端节点的根目录中。
+
+. 登录 Lustre 客户端节点，解压 MinIO 服务的安装包至根目录中。
++
+[source,shell]
+----
+# tar -xf minio.tar
+----
+
+. 执行如下命令，修改相应脚本文件，主要修改 ``MINIO_ACCESS_KEY`` 和 ``MINIO_SECRET_KEY``。
++
+[source,shell]
+----
+# vi /minio/auto_start.sh
+
+# !/bin/bash
+
+rt=`ps -xua | grep 'minio gateway fs' | grep -v 'grep'`
+path='/minio'
+
+if [ -z "$rt" ]; then
+  MINIO_ACCESS_KEY=admin MINIO_SECRET_KEY=admin12345678 $path/minio gateway fs /public/epfs 2>&1 >> $path/minio.log &
+echo `date`' start minio ok' >> $path/auto_start.log
+fi
+----
++
+字段说明：
++
+* ``MINIO_ACCESS_KEY``：账户名，用于与 EPFS 服务进行对接，根据实际情况进行修改。
+* ``MINIO_SECRET_KEY``：账户 MINIO_ACCESS_KEY 所对应的密码，用于与 EPFS 服务进行对接，根据实际情况进行修改。
+* ``/public/epfs``：所有云平台用户 EPFS 文件存储的根目录，即文件上传与下载的根目录。
+
+. 依次执行如下命令，进入 ``/minio`` 目录，执行启动 MinIO 服务的脚本。
++
+[source,shell]
+----
+# cd /minio
+# ./auto_start.sh
+----
+
+. 登录至企业云平台环境的 FirstBox 节点，执行如下命令查看 webservice 节点。
++
+[source,shell]
+----
+# cat /etc/hosts | grep webservice
+----
+
+. 逐个登录 zone-webservice 节点，修改 ``/pitrix/conf/web_console_settings.py`` 配置文件的相应字段，实现 MinIO 服务与 EPFS 的对接。
++
+[source,python3]
+----
+# vi /pitrix/conf/web_console_settings.py
+......
+397     'nas_config': {
+398         'endpoint': '172.31.60.123',
+399         'port': '8119',
+400         'verify_ssl': False,
+401         'protocol': 'http',
+402         'objects_endpoint': '192.168.27.146',
+403         'objects_port': '9000',
+404         'objects_access_key': 'admin',
+405         'objects_secret_key': 'admin123456',
+406         'objects_secure': False,
+407         'jn1a':{
+408           'objects_access_key': 'gc6QQvs3zLmfphom93cCfmCbmARrYyis',
+409           'objects_secret_key': 'aEdwshHbqjsbsf8vjWGbK3PcjJZKRgsz',
+410           'objects_secure': False, # True
+411           'objects_endpoint': 'nas.shanhe.com',
+412           'objects_port': '443',
+413         },
+414     },
+
+......
+----
++
+**待修改字段说明**：
++
+* ``objects_endpoint``：MinIO 服务的部署地址，若 MinIO 服务器地址不通外网，则需要将此地址配置成 proxy 的公网地址，使用 nginx 做反向代理。
+* ``objects_port``：端口号默认为 ``9000``，无需修改。若使用 nginx 做反向代理或域名解析，则需要换成反向代理的端口。
+* ``objects_access_key``：修改 ``/minio/auto_start.sh`` 脚本时所设置的账户名。
+* ``objects_secret_key``：修改 ``/minio/auto_start.sh`` 脚本时所设置的账户密码。
+* ``objects_secure``：若 ``protocol`` 字段设置为 ``https``，则该字段为 ``True``。若 ``protocol`` 字段设置为 ``http``，则该字段为 ``False``。
+
+. 逐个登录 webservice 节点，执行如下命令，安装版本号为 6.0.0 的 MinIO SDK。
+.. 安装 MinIO SDK。
++
+[source,shell]
+----
+pip install Minio==6.0.0
+----
+
+.. 检查 MinIO SDK 是否安装成功。
++
+[source,shell]
+----
+# pip list | grep minio
+minio (6.0.0)
+----
+
+
+
+

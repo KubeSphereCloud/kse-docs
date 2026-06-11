@@ -1,0 +1,85 @@
+---
+title: "Delete virtual subnets"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, virtual subnets, deletion"
+description: "Describes how to delete virtual subnets in the {ks_product} web console."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e019b0961518403e9375a60b75e2344b
+:ks_xref_id: 4c1111b4628a41deb92dfe1b76244580
+:ks_comp: ../../../../components/
+:ks_title: Delete virtual subnets
+:ks_description: Describes how to delete virtual subnets in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, virtual subnets, deletion
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete virtual subnets in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=a92efd149eb24f4b9ee4bb480eff61e2]
+
+include::../../../../_custom-en/networks/virtual-subnet-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a virtual subnetlink:[id=c81f34d2d6da44fdb384c815a014615e]
+
+include::../../../../_custom-en/networks/virtual-subnet-steps.adoc[]
+
+. Find the virtual subnet that you want to delete, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Delete** from the drop-down list.
+. Click **OK**.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+The virtual subnet cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Make sure no resources are associated with the virtual subnets that you want to delete. Otherwise, the subnets cannot be deleted.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple virtual subnets at a timelink:[id=6ed0ae36079e42dc8a348275c97ca6e9]
+
+include::../../../../_custom-en/networks/virtual-subnet-steps.adoc[]
+
+. On the **Subnets** page, select the check boxes next to the virtual subnets that you want to delete, and click **Delete**.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+Virtual subnets cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Make sure no resources are associated with the virtual subnet that you want to delete. Otherwise, the subnet cannot be deleted.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,46 @@
+---
+title: "扩展组件管理"
+weight: 10
+---
+
+== 核心功能
+
+为了提高 KubeSphere 的灵活性和可扩展性，KubeSphere 4.0 采用了微内核+扩展组件的架构。在这个架构中，微内核部分仅包含系统运行所需的基础功能，而各个独立的业务模块则被封装在各个扩展组件中。这允许在系统运行时动态地安装、卸载、启用或禁用扩展组件。
+
+KubeSphere 提供了全面的扩展 API，从前端 UI 到后端 API，几乎覆盖了每个部分，使得每个部分都可以进行个性化定制和功能增强。事实上，KubeSphere 的核心功能也是基于这些扩展 API 构建的。
+
+使用扩展 API，可以实现以下功能：
+
+* 在导航栏中插入新的菜单：可以在项目、集群、企业空间等管理页面的左侧导航栏中插入新的菜单按钮，以支持更多类型的资源管理。
+* 在模块化的功能页面中插入新的入口：除了导航栏，KubeSphere 还提供了众多模块化的功能页面，以便轻松扩展。例如，通过卡片方式在用户首页添加新的扩展入口。
+* 通过 iframe 嵌入外部页面：通过 iframe 技术将已有的第三方功能组件页面嵌入到 KubeSphere 中，有效地降低开发成本。
+* 覆盖 KubeSphere 已有的页面路由：覆盖 KubeSphere 已有的页面路由，从而实现独有的业务逻辑，使 KubeSphere 更好地适应特定业务场景。
+* 对 KubeSphere 的 API 进行扩展：扩展 KubeSphere 的后端 API，复用 KubeSphere 提供的认证和鉴权功能。
+
+在完成前端功能开发后，需要将代码打包生成 JS Bundle 文件，并通过 JSBundle 资源声明将扩展组件注入到 ks-console。
+
+KubeSphere 提供了一种类似于 Kubernetes API Aggregation Layer 的 API 扩展机制，使用声明式的 API 注册机制。
+
+APIService 是一种严格的声明式 API 定义方式，通过 API Group、API Version、Resource，以及 API 路径中定义的资源层级，与 KubeSphere 的访问控制和多租户权限管理体系紧密结合。对于那些可以抽象成声明式资源的 API，这是一种非常适用的扩展方式。
+
+ReverseProxy 提供灵活的 API 反向代理声明，支持 rewrite、redirect、请求头注入、熔断、限流等配置。
+
+针对 CRD 的 API 扩展,如果您已经借助 K8s CRD 定义了 API，在 KubSphere 中可以直接使用 K8s 提供的 API。此外，还可以利用 KubeSphere 增强您的 API。
+
+KubeSphere 扩展组件是遵循 KubeSphere 扩展组件开发规范的 Helm Chart，用于扩展 KubeSphere 的功能，并利用 Helm 进行编排。
+
+== 架构设计
+
+总体架构如下图所示：
+
+image::/images/ks-qkcp/zh/technical-white-papers/4310-1.png[]
+
+在解耦巨石应用和实现动态扩展时，不可避免会考虑到近年来备受欢迎的微前端解决方案。著名的微前端实现，如 qiankun 和 micro-app，为了应对子应用的技术栈独立性和样式侵入问题，采取了大量措施，包括实施 JavaScript 沙箱和样式隔离等。然而，这种隔离通常是为了解决特定技术栈问题或团队协作问题而做出的妥协。如果将多个框架，如 React、Vue 和 Angular，融合到同一前端系统中，用户界面体验可能会不一致，而前端包的大小可能显著增加。此外，各个子应用在各自独立的运行时中运行，可能与主应用的集成度不够紧密。
+
+在这种背景下，我们希望减轻对隔离性的需求，以实现一种更轻量的"微前端"，或者可以称之为微模块。在微模块架构中，子应用和主应用共享相同的技术栈，可以共享运行时。这有助于实现更一致的用户体验、更高的集成度和更便捷的依赖共享，从而提高运行效率。如上面的架构图所示，扩展组件的开发依赖通用的 KubeDesign、@ks-console/shared 等库。然后，使用脚手架、CLI 等工具打包和发布扩展组件。在 Core（基座）的部分注册和运行扩展组件。
+
+KubeSphere 构建在 K8s 之上，和 K8s 一样也具备高度可配置和可扩展的特性，除了可以借助 K8s 的扩展机制来扩展 KubeSphere 的平台能力之外，KubeSphere 还提供了更为灵活的扩展方式。
+
+ks-apiserver 是 KubeSphere 的 API 网关，提供了统一的认证、鉴权和请求代理能力，借助 ks-apiserver 的聚合层，可以对 KubeSphere 的 API 进行扩展：
+
+image::/images/ks-qkcp/zh/technical-white-papers/4310-2.png[]

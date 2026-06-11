@@ -1,0 +1,60 @@
+---
+title: "删除 RadonDB OpenSearch"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB OpenSearch, 删除 RadonDB OpenSearch"
+description: "介绍如何删除 RadonDB OpenSearch。"
+weight: 12
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 38b94d9173944df6b8a9d1fbc17fd3ed
+:ks_xref_id: 92ad96912edf4db3836998c3e0252e80
+:ks_comp: ../../../components/
+:ks_title: 删除 RadonDB OpenSearch
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB OpenSearch, 删除 RadonDB OpenSearch
+:ks_description: 介绍如何删除 RadonDB OpenSearch。
+:ks_weight: 12
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何删除 RadonDB OpenSearch 应用。
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+此操作将删除 RadonDB OpenSearch 数据库和数据库中的所有数据，请谨慎执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=9cf7bf025be547e38d4dd9076373af55]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+* 您需要获取 RadonDB OpenSearch 应用授权。有关更多信息，请联系{ks_product_both}技术支持。
+
+* 为避免数据丢失，请提前备份数据。
+
+
+== 操作步骤link:[id=bfd65543afc84d4f8a7fb8a9586615ca]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在 RadonDB OpenSearch 应用右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除**。
+
+. 在**删除应用**对话框，输入 RadonDB OpenSearch 应用的名称，然后点击**确定**。

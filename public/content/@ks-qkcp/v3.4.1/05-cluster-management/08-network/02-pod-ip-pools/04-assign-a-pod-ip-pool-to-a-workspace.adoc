@@ -1,0 +1,67 @@
+---
+title: "将容器组 IP 池分配给企业空间"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 网络, 容器组 IP 池, 将容器组 IP 池分配给企业空间"
+description: "介绍如何将容器组 IP 池分配给企业空间。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: cd7131c232f0469da652ee8df929c294
+:ks_xref_id: e649dfeb42094d59b6a07c93a1d693c1
+:ks_comp: ../../../../components/
+:ks_title: 将容器组 IP 池分配给企业空间
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 网络, 容器组 IP 池, 将容器组 IP 池分配给企业空间
+:ks_description: 介绍如何将容器组 IP 池分配给企业空间。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **网络资源管理**
+:ks_navigation: **网络 > 容器组 IP 池**
+
+
+本节介绍如何将容器组 IP 池分配给企业空间。
+
+将容器组 IP 池分配给企业空间后，在企业空间的项目中创建工作负载、服务、任务和定时任务时，可以为容器组指定容器组 IP 池。
+
+
+== 前提条件link:[id=d2e8598efc7248b39ae062eb00b40360]
+
+:relfileprefix: ../../../../
+* 您需要加入一个集群并在集群中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:05-cluster-management/12-cluster-settings/03-cluster-members/_index.adoc[集群成员]和xref:05-cluster-management/12-cluster-settings/04-cluster-roles/_index.adoc[集群角色]。
+
+// include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/podIpPools/podIpPools-prer-enablePodIpPool.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/clusterManagement/podIpPools/podIpPools-prer-notUsed.adoc[]
+
+
+== 操作步骤link:[id=9762992ecc2a4d08a341821c0d70419f]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要操作的容器组 IP 池右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**分配企业空间**。
+
+. 在**分配企业空间**对话框，设置容器组 IP 池所属的企业空间，然后点击**确定**。
++
+--
+* 从下拉列表中选择一个企业空间可将容器组 IP 池分配到该企业空间。
+
+* 从下拉列表中选择**全部**可将容器组 IP 池分配给当前集群中的所有企业空间。
+--

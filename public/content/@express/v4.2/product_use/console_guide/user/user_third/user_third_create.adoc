@@ -1,0 +1,43 @@
+---
+title: "创建第三方服务器"
+draft: false
+weight: 1
+---
+== 功能描述
+
+云易捷控制台提供第三方登录接入管理功能。用户在以第三方服务的方式接入云易捷环境时，需用户输入相关属性信息。之后，系统会自动创建一个与该用户关联的本地用户，便于环境的安全接入登录。
+
+== 前提条件
+
+已安装和准备了 AD/LDAP 服务器，若还未准备可参考 https://auth0.com/docs/customize/extensions/ad-ldap-connector[Auth0 Docs] 自行搭建服务。
+
+== 操作步骤
+
+. 登录{product_console_name}。
+. 在顶部导航栏，选择**用户管理** > *第三方登录*，进入本地用户列表页面。
++
+image::/images/express/console/user_third_create_1.png[create_third_user_1]
+
+. 点击**创建第三方服务器**。
++
+image::/images/express/console/user_third_create_2.png[create_third_user_2]
+
+. 在弹出的创建第三方服务器的窗口中，输入名称、服务器类型、服务器地址、服务器端口、基准等必要信息，点击**创建**即可。
+
++
+image::/images/express/console/user_third_create_3.png[,60%]
++
+
+include::../../../../../../_components/note.adoc[]
+* 名称：为第三方服务器命名，便于用户浏览或搜索；
+* 类型：服务器类型，目前支持 LDAP 服务器和 AD 服务器；
+* 服务器地址：第三方服务器的 IP 地址；
+* 服务器端口：第三方服务器对外包漏的端口号；
+* 基准：例如 ou=People，dc=yunify,dc=com；
+* 管理员账户/密码：选填项，需根据实际情况进行填写，并确保登录账号密码的准确性。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 第三方服务器创建完成后显示在**第三方登录**列表中， 且平台将自动导入该第三方服务器用户目录中的所有用户，用户可通过 AD/LDAP 的方式进行登录。
+
+image::/images/express/console/user_third_create_4.png[create_third_user_4]

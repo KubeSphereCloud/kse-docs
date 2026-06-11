@@ -1,0 +1,41 @@
+---
+title: "Add License"
+keywords: "Kubernetes, {ks_product}, Platform Settings, License, Manage License"
+description: "Describes how to manage licenses."
+weight: 03
+---
+
+:ks_navigation: **License**
+:ks_permission: **Platform Settings Management**
+
+This section describes how to add a KubeSphere license. To update a license, follow the same steps below to add a new one.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
+. In the upper right corner of the page, click **Component Dock > Platform Settings**.
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. Click **Add License**, enter the activation code, and click **OK** to complete the addition.
++
+--
+// * After the license is added, it will be displayed in the license management list.
+
+* Click the search box at the top of the list and set search criteria to search for license information of extensions by extension name.
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+--

@@ -1,0 +1,76 @@
+---
+title: "创建数据库用户"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, PostgreSQL, 管理告警规则组, 创建数据库用户"
+description: "介绍如何创建数据库用户。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 99fe52e8d9644d7fa41c7bc58baf8e7f
+:ks_xref_id: b8ae8ce6b37049c0a998a672e4864dc0
+:ks_comp: ../../../../components/
+:ks_title: 创建数据库用户
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, PostgreSQL, 管理告警规则组, 创建数据库用户
+:ks_description: 介绍如何创建数据库用户。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何创建数据库用户。
+
+
+== 前提条件link:[id=bd977b6c98c443e0903a35c4a2234df5]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondpq-prer-installRadondbpq.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondpq-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=39e9b1ad7d0f4ae6b4a1eef1558120bd]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondbpq-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面右侧点击**数据库用户**页签，然后点击**创建**。
+
++
+
+. 在**创建用户**对话框，设置用户名和密码，设置用户权限，然后点击**确定**。用户创建完成后将显示在用户列表中。
++
+--
+include::../../../../_custom/radondb/radondbPostgreSQL/radondbpg-para-usernamePassword.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+不支持创建 **postgres**、**pgautofailover_replicator**、**pgautofailover_monitor** 开头的名称。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

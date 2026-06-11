@@ -1,0 +1,380 @@
+---
+title: 通过 CLI 方式导入
+weight: 1
+---
+
+== 步骤一：下载镜像包
+
+参考link:../../export/directory/#_导出示例[参考前文内容]，下载目标镜像文件包。
+
+
+== 步骤二：上传镜像包
+
+将下载好的 AppCenter 应用镜像文件包，上传至{product_name}中任一物理机服务器上。
+
+== 步骤三：导入镜像包
+
+{product_name}部署完成后，AppCenter 应用的导入脚本已存放于{product_name}的 Webservice 节点上的 `/pitrix/lib/pitrix-scripts/appcenter2/import_apps` 目录下。该脚本适用于{product_name} v5.0 及以上版本。
+
+
+
+=== 通用导入流程
+
+
+
+详细操作流程如下。
+
+. 将下载好的 AppCenter 应用镜像文件包，上传至{product_name}中 FirstBox 节点所在的物理机上。
+
+. 登录{product_name}的 FirstBox 节点。
++
+include::../../../../../_components/note.adoc[]
+
+登录方式可咨询{product_name}安装部署人员。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令行，查看{product_name}的 Webservice 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/webservice
+----
++
+命令回显示例
++
+[source,shell]
+----
+nodes=( testbm1a-webservice0 testbm1a-webservice1 testbm2a-webservice0 testbm2a-webservice1 );
+----
+
+. 根据查询结果，登录 Webservice 节点。这里以登录 `testbm1a-webservice0` 节点为例。
++
+[source,shell]
+----
+ssh testbm1a-webservice0
+----
+
+. 执行如下命令行，进入脚本所在目录。
++
+[source,shell]
+----
+cd /pitrix/lib/pitrix-scripts/appcenter2/
+----
+
+. 执行如下命令行，导入 AppCenter 应用镜像文件包。
++
+[source,shell]
+----
+./import_apps -s <AppCenter 应用镜像文件包路径>
+----
++
+include::../../../../../_components/note.adoc[]
+
+
+* `<AppCenter 应用镜像文件包路径>` 根据前文上传安装包的步骤进行修改。
+* 命令行的详细使用方法，可参考本文link:#_导入脚本用法介绍[相关章节]内容。
+* 不同架构导入稍有区别，详细内容参考link:#_不同架构导入流程[不同架构导入流程]章节内容。
+
+// 开启 tmux 后，在命令执行操作过程中，若网络断连，命令会在后台继续执行。恢复连接后，执行 `tmux attach` 即可恢复到之前的操作界面。
+
+include::../../../../../_components/table_footer.adoc[]
++
+命令行示例
++
+* 导入全部 AppCenter 应用镜像
++
+[source,shell]
+----
+./import_apps -s root@testing1a-proxy0:/root/export_apps/test/all_app/6_0
+----
+* 导入单个 AppCenter 应用镜像
++
+[source,shell]
+----
+./import_apps -s root@testing1a-proxy0:/root/export_apps/test/all_app/6_0/app-fdyvu2wk_etcd
+----
+
+* 导入单个 AppCenter 应用镜像的单个版本
++
+[source,shell]
+----
+./import_apps -s root@testing1a-proxy0:/root/export_apps/test/all_app/6_0/app-fdyvu2wk_etcd/appv-52759jdc
+----
+
+. 命令行回显内容如下所示，即可视为 AppCenter 应用镜像文件包导入成功。
++
+[source,shell]
+----
+########################################################################
+#############Import successful, please test on the console########################
+#############Import successful, please test on the console########################
+#############Import successful, please test on the console########################
+########################################################################
+----
+
+=== 不同架构导入流程
+
+根据前文说明，我们知道 AppCenter 应用分为应用数据与镜像文件。导入时，脚本会根据文件类型，分别存放于{product_name}不同地方。
+
+* `应用数据` 在导入应用时，需上传至 Global 的 Webservice 节点上的 Global 数据库中。
+* `镜像文件` 在导入应用时，需要上传至 Zone 的 Seed 节点上。
+
+{product_name}的架构不同，导致 Global 的 Webservice 节点与 Zone 的 Seed 节点部署方式存在差异，两者之间的网络，可能存在壁垒。因此，导入方式也存在差异。
+
+
+. Global 与 Zone 融合部署。
++
+如下图所示，Global 服务部署于 Region-1 的 Zone_A 服务器上。因此 Global 的 Webservice 节点与 Region-1 的 Zone_A 的 Seed 节点在同一个 Zone。Region-2 的 Zone 则仅有 Seed 节点。
++
+image::/images/ep_offline/installation/app_import_1.png[]
++
+导入方式如下。
++
+* Global Zone 导入 整个目录。如上图的 Region-1 的 Zone_A 导入整个目录。
++
+[source,shell]
+----
+./import_apps -s root@testing1a-proxy0:/root/export_apps/test/all_app/6_0
+----
++
+* 其他 Region 下任一个 Zone 导入 `镜像文件`。如 Region-2 的 Zone_A 导入 `镜像文件`。
++
+[source,shell]
+----
+./import_apps -s root@testing1a-proxy0:/root/export_apps/test/all_app/6_0 --image_only
+----
++
+include::../../../../../_components/note.adoc[]
+
+若当前{product_name}中仅一个 Region，则无需执行该步骤。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. Global 与 Zone 分离部署。
++
+如下图所示，Global 服务部署于单独的物理服务器且与各个 Zone 物理隔离，因此 Global 的 Webservice 节点以及各 Zone 的 Seed 节点，需要分开操作上传文件。
++
+image::/images/ep_offline/installation/app_import_2.png[]
++
+导入方式如下。
++
+* Global Zone 导入 `应用数据`。如上图的 Global 导入 `应用数据`。
++
+[source,shell]
+----
+./import_apps -s root@testing1a-proxy0:/root/export_apps/test/all_app/6_0 --app_only
+----
++
+* 其他 Region 下任一个 Zone 导入 `镜像文件`。如 Region-1 的 Zone_A 与 Region-2 的 Zone_A 分别导入 `镜像文件`。
++
+[source,shell]
+----
+./import_apps -s root@testing1a-proxy0:/root/export_apps/test/all_app/6_0 --image_only
+----
++
+include::../../../../../_components/note.adoc[]
+
+若当前{product_name}中仅一个 Region，则无需在 Region-2 的 Zone_A 执行导入 `镜像文件` 的步骤。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 分布式 Global。
++
+当前环境中有多个 Global，则每个 Global 分别执行以上操作。
+
+
+
+=== ARM 导入流程
+
+这里以导入应用 Redis_Standalone 为例进行说明。
+
+根据link:../../export/directory/#_导出示例[前文]说明，实施人员已按照要求导出目录 `app-zydumbxo_Redis_Standalone` 与元数据镜像文件 `img-mfm5vwla.lz4` 并上传至相应的节点服务器。
+
+image::/images/ep_offline/installation/app_dir_6.png[]
+
+. 登录{product_name}中上传有以上内容的节点服务器。
+
+. 进入存放安装包的目录。
+
+. 执行如下命令行，将元数据镜像文件 `img-mfm5vwla.lz4` 重命名为 `metadataarm.lz4`。
++
+[source,shell]
+----
+mv img-mfm5vwla.lz4 metadataarm.lz4
+----
+
+. 将重命名后的文件 `metadataarm.lz4` 同步至 Seed 节点的 `/pitrix/images-repo/me` 目录下。
+
+.. 登录{product_name}的 FirstBox 节点。
+.. 执行如下命令行，查看{product_name}的 Seed 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/seed
+----
++
+命令回显示例
++
+[source,shell]
+----
+nodes=( testbm2ar01n00 testbm2ar01n01 testbmr01n01 testbmr01n02 );
+----
+
+.. 根据查询结果，登录 Seed 节点。这里以登录 `testbm2ar01n00` 节点为例。
++
+[source,shell]
+----
+ssh testbm2ar01n00
+----
+
+
+.. 执行以下命令行，拷贝文件 `metadataarm.lz4` 至 Seed 节点的 `/pitrix/images-repo/me` 目录下。
++
+[source,shell]
+----
+scp <镜像文件路径>/metadataarm.lz4 /pitrix/images-repo/me/
+----
++
+include::../../../../../_components/note.adoc[]
+`<镜像文件路径>` 根据前文上传安装包的步骤进行修改。
+
+include::../../../../../_components/table_footer.adoc[]
++
+命令行示例
++
+[source,shell]
+----
+scp root@testing1a-proxy0:/root/export_apps/test/ram/metadataarm.lz4 /pitrix/images-repo/me/
+----
+
+. 登录{product_name}的 Webservice 节点服务器。
+
+. 执行如下命令行，进入脚本所在目录。
++
+[source,shell]
+----
+cd /pitrix/lib/pitrix-scripts
+----
+
+. 执行如下命令行，朝数据库中写入镜像数据。
++
+[source,shell]
+----
+./exec_sql.py -d zone -c "INSERT INTO image (nic_type, features, init_owner, sound_type, console_id, owner, default_passwd, block_bus, size, root_partition_number, f_resetpwd, image_type, image_encryption, sub_code, root_id, video_ram, platform, agent_type, md5, status, ui_type, description, format, app_billing_id, transition_status, image_name, visibility, image_id, controller, os_family, video_type, base_id, default_user, lang, processor_type, order_name, hypervisor, recommended_type, baremetal, root_user_id, architecture, billing_id, swap_64, boot_loader, root_partition_fs) VALUES
+('virtio', 0, '', 'ac97', 'qingcloud', 'system', 'p12cHANgepwD', 'vd', 20, 2, 1, 0, 0, 0, 'xenial6arm64', 9126, 'linux', 'pitrix', '', 'available', 'tui', '', 'qcow2', '', '', 'metadata-arm', 'private', 'metadataarm', 'self', 'ubuntu', 'vga', 'xenial6arm64', 'ubuntu', 'en-us', '64bit', '00metadata-arm0', 'kvm', 'c1m1', True, 'system', 'aarch64', 'xenial6arm64', 0, '', '');"
+----
+
+. 登录{product_name}的配置中心，修改相关配置。
++
+include::../../../../../_components/note.adoc[]
+
+登录方式可咨询{product_name}安装部署人员。
+
+include::../../../../../_components/table_footer.adoc[]
+
+.. 在配置中心，点击**配置管理**，进入配置管理页面。
+.. 在配置管理页面，搜索应用 `global`，配置 `appcenter`，点击**搜索**。
++
+image::/images/ep_offline/installation/app_import_3.png[]
+
+.. 在应用列表中，`命名空间` 即为 Zone 名称字段，实施人员根据实际情况，选择目标应用，点击**管理配置**，打开 `appcenter` 的配置内容页面。
+
+.. 在 `appcenter` 的配置内容页面，修改 `cfgmgmt.default.nodes.container.image` 的值为 `metadataarm`，如下图所示。
++
+image::/images/ep_offline/installation/app_import_4.png[]
+
+.. 确认修改内容无误后，点击**启用**。
+
+. 返回{product_name}的 Webservice 节点服务器。
+
+. 在脚本目录下，执行如下命令行，查找数据。
++
+[source,shell]
+----
+./exec_sql.py -d zone -c "select image_id from cluster_common where app_id like '%meta%'"
+----
++
+* 若无相关数据，可直接执行后续插入数据的步骤。
+* 若查找到相关数据，需将查找到的数据逐一删除后，再执行后续插入数据的步骤。删除数据的命令行如下。
++
+[source,shell]
+----
+./exec_sql.py -d zone -c "delete from cluster_common where image_id=xxxx"
+----
+
+. 执行如下命令行，插入数据。
++
+[source,shell]
+----
+./exec_sql.py -d zone -c "INSERT INTO cluster_common ("app_id", "app_version", "role", "debug", "server_id_upper_bound", "advanced_actions", "init_service", "start_service", "stop_service", "scale_out_service", "scale_in_service", "restart_service", "destroy_service", "custom_service", "health_check", "monitor", "user_access", "passphraseless", "vertical_scaling_policy", "agent_installed", "custom_metadata_script", "image_id", "hypervisor", "repl", "single_node_repl", "backup_service", "backup_policy", "restore_service", "delete_snapshot_service", "incremental_backup_supported", "upgrade_service", "display_tabs", "eip_class", "auto_scale_step", "iaas_agent_installed", "rollback_service", "get_nodes_order_service", "multi_zone_policy", "unsupported_actions", "change_vxnet_service", "exchange_reserved_ips_service", "scale_vertical_service", "app_patch", "os_reset", "rebuild_service", "sriov_nic") VALUES ('app-qingcloud-appcenter-metadataarm', '2.0', '', 'f', NULL, NULL, '', '', '', '', '', '', '', '', '', '', 0, NULL, 'parallel', 't', '', 'metadataarm', 'kvm', 'rpp-00000000', '', '', NULL, '', '', 'f', '', '', NULL, '', 't', '', '', 'unsupported', NULL, '', '', '', '', 't', NULL, 'f');"
+----
+
+. 在{product_name}的 Webservice 节点上，执行如下命令行进行导入。
++
+[source,shell]
+----
+cd /pitrix/lib/pitrix-scripts/appcenter2/
+./import_apps -s root@testing1a-proxy0:/root/export_apps/test/all_app/arm
+----
++
+include::../../../../../_components/attention.adoc[]
+
+* 由于 ARM 环境不能执行 `so` 文件，需下载源码包后，再执行上述命令行进行导入。
+* 源码包可联系 AppCenter 研发组获取。
+* 删除原有 `/pitrix/lib/pitrix-scripts/appcenter2` 目录下的内容，将获取的源码包解压至 `/pitrix/lib/pitrix-scripts/appcenter2` 目录下。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 附录
+
+=== 导入脚本用法介绍
+
+
+* 导入命令
++
+导入脚本已支持交互式参数填充，在使用过程中只需填入导入文件所在的目录 `-s` 即可，其余参数可根据提示进行补全。
++
+[source,shell]
+----
+./import_apps -s <AppCenter 应用镜像文件包路径>
+----
+
+* 查看命令详情
++
+[source,shell]
+----
+./import_apps -h
+----
+其他参数的详情可通过 -h参数进行查看，正常导入流程几乎不会用到。
+
+* 参数说明
++
+[cols='1,1,4a']
+|===
+| 参数 | 是否必须| 说明
+
+| -c  | 否| {product_name}的 `console_id`，默认无需填写。若填写错误，会导致 Console 中无法正常使用 AppCenter 应用。
+| -C  | 否| AppCenter 应用支持的虚拟机类型，可选项为 `KVM`、`LXC`。
+| -S  | 否| AppCenter 应用 ID 或 AppCenter 应用版本 ID。导入多个 AppCenter 应用或 AppCenter 应用版本时，可以 `,` 隔开。
+| -s  | 是| 
+
+* 仅支持从 `migrate_appcenter2_recommend` 目录下载的文件路径。
+
+* [todo]从其他目录下载的文件只能配置到包含meta_data.json文件的目录，再通过-S参数来指定具体需要导入的app或appv
+| -r  | 否| {product_name}的 Region ID。
+| -z | 否| {product_name}的 Zone ID。
+| --instance_class  | 否| 创建 AppCenter 应用时，可选用的主机类型。
+| --volume_class  | 否| 创建 AppCenter 应用时，可选用的磁盘类型。
+| --isolate_billing  | 否| 
+
+* {product_name} v5.0 之前版本，需设置该参数 `--isolate_billing 0`。
+* {product_name} v5.0 以及后续版本，无需设置该参数。
+
+| --app_only  | 否| 仅导入 AppCenter 应用数据，不导入镜像。
+| --image_only  | 否| 仅导入 AppCenter 应用镜像，不导入数据。
+|===
+
+
+

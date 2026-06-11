@@ -1,0 +1,50 @@
+---
+title: "查看系统日志详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 日志, 系统日志, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看系统日志详情。"
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e6f585bbed154ad493a41efc2b4b628b
+:ks_xref_id: af2b29a404cb4963ae41c406f631b76f
+:ks_comp: ../../../components/
+:ks_title: 查看系统日志详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看系统日志详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 日志, 系统日志, 详情, 查看
+:ks_weight: 05
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看系统日志详情。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=425ea5794b174aeab53eba74160b6e4b]
+
+系统 **admin** 用户可以查看集群中所有项目中的系统日志，普通项目管理员、操作员或观察员可以查看各自所属项目中的系统日志。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=9775cc5be9c74edfbecc25e943e2e3f4]
+
+include::../../../_custom/logs/logs-steps.adoc[]
+
+. 在**系统日志**页签，双击待查看详情的系统日志条目。
+
+. 在弹出的对话框中查看系统日志详情。
+
+. （可选）点击左上角的 image:/images/ksv/zh/icons/timed-task.svg[18px,18px]，然后选择时间范围或自定义时间范围，点击**确定**可查看特定时间范围内的系统日志。
+
+. （可选）点击上方的 image:/images/ksv/zh/icons/close-dark.svg[18px,18px] 可清空当前搜索框中的日志。点击搜索框并输入关键字，可按关键字搜索日志。例如，输入 **failed** 搜索名称包含字符串 **failed** 的系统日志。
+
+. （可选）点击上方的 image:/images/ksv/zh/icons/start.svg[18px,18px] / image:/images/ksv/zh/icons/stop-dark-white.svg[18px,18px] 可以开始或停止查看实时系统日志。
+
+. （可选）点击 image:/images/ksv/zh/icons/chevron-down.svg[18px,18px] 并设置刷新频率可按照刷新频率刷新实时系统日志。
+
+. （可选）点击上方的 image:/images/ksv/zh/icons/export.svg[18px,18px] 以 .txt 格式导出当前页面的系统日志。

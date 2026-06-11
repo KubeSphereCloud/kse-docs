@@ -1,0 +1,44 @@
+---
+title: "Edit Node Labels"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Node, Edit Node Labels"
+description: "Describes how to edit node labels."
+weight: 06
+---
+
+:ks_permission: **Node Management**
+
+This section describes how to edit node labels.
+
+Node labels are key-value pairs set by users on nodes, which can be used to select nodes. For example, when creating a workload, you can specify that pods be scheduled onto nodes with specific labels.
+
+== Prerequisites
+
+:relfileprefix: ../../../
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+== Steps
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/nodes/nodes-oper-openListPage_new.adoc[]
+
++
+
+. In the node list, click the name of the node you want to operate on to open its details page.
+
+. On the node details page, click **Operation > Edit Labels**.
+
+. In the **Edit Labels** dialog box, set the key and value for the node label, then click **OK**.
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+Click **Add** to set multiple labels for the node.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

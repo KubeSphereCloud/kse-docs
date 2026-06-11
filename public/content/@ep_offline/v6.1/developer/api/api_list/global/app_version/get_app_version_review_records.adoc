@@ -1,0 +1,140 @@
+---
+title: 查询应用版本审核记录（GetAppVersionReviewRecords）
+weight: 14
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Integer
+| false
+| 个数
+
+| offset
+| Integer
+| false
+| 偏移
+
+| version_id
+| String
+| true
+| 应用版本ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_version_review_record_set
+| Array
+| false
+| 审核列表
+
+| app_version_review_record_set[].action
+| String
+| false
+| 审核操作
+
+| app_version_review_record_set[].create_time
+| String
+| false
+| 记录创建时间
+
+| app_version_review_record_set[].operator
+| String
+| false
+| 操作人
+
+| app_version_review_record_set[].operator_email
+| String
+| false
+| 操作人邮箱
+
+| app_version_review_record_set[].operator_name
+| String
+| false
+| 操作人名字
+
+| app_version_review_record_set[].remarks
+| String
+| false
+| 备注
+
+| app_version_review_record_set[].review_role
+| String
+| false
+| 审核渠道
+
+| app_version_review_record_set[].review_time
+| String
+| false
+| 审核时间
+
+| app_version_review_record_set[].submit_time
+| String
+| false
+| 提交审核时间
+
+| app_version_review_record_set[].version_id
+| String
+| false
+| 版本ID
+
+| app_version_review_record_set[].version_review_id
+| String
+| false
+| 审核记录ID
+
+| total_count
+| Integer
+| false
+| 总数量
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app_id": "appv-xxxxxx",
+  "limit": 50,
+  "offset": 0
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetAppVersionReviewRecordsResponse",
+  "app_version_review_record_set": [
+    {
+      "action": "pass",
+      "create_time": "2023-07-05T12:34:23Z",
+      "operator": "usr-xxxxxx",
+      "operator_email": "",
+      "operator_name": "",
+      "remarks": "",
+      "review_role": "dev",
+      "review_time": "2023-07-05T12:34:23Z",
+      "submit_time": "2023-07-05T12:34:21Z",
+      "version_id": "appv-xxxxxx",
+      "version_review_id": "appvr-oc8iaag1"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

@@ -1,0 +1,63 @@
+---
+title: "View Edge Node List"
+keywords: "Kubernetes, {ks_product-en}, cluster management, edge nodes, view edge node list"
+description: "Learn how to view the edge node list."
+weight: 02
+---
+
+:ks_permission: **Node Viewing**
+
+
+This section describes how to view the edge node list.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeEdge** should have been installed and enabled.
+
+== Steps
+
+include::../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
+. Select **Nodes > Edge Nodes** in the left navigation pane to open the node list.
+
++
+
+====
+* The node list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The host name and internal IP address of each node in the subnet.
+
+|Status
+|
+include::../../../_custom-en/clusterManagement/nodes/nodes-para-nodeStatus_new.adoc[]
+
+ifeval::["{file_output_type}" == "html"]
+If there are taints on the node, the **Status** column will also display the number of taints on the node. Hover the cursor over the taint number to view the specific information of the taint. For more information, see link:../../../07-cluster-management/03-nodes/05-edit-node-taints/[Set Node Taints].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+If there are taints on the node, the **Status** column will also display the number of taints on the node. Hover the cursor over the taint number to view the specific information of the taint. For more information, see the "Nodes" section in the {ks_product-en} Cluster Management Guide.
+endif::[]
+
+|Role
+|
+The role of each node in the cluster, which can be **Agent/Edge Node**.
+|===
+--
+
+* Click the search box above the list to search for nodes by name, status, or role.
+
+include::../../../../_ks_components-en/oper-refreshListData.adoc[]
+
+include::../../../../_ks_components-en/oper-customizeColumns.adoc[]
+====

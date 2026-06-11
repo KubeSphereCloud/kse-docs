@@ -1,0 +1,57 @@
+---
+title: Error：The hyper repl node has not enough ssd data disks
+weight: 03
+---
+
+== 问题现象
+
+生成 `variables` 文件及 `settings` 文件报错：“Error: The hyper repl node[xxx] has not enough ssd data disks”。
+
+image::/images/ep_offline/installation/faq_config_qingcloud_02.png[]
+
+== 问题原因
+
+磁盘有脏数据或者磁盘状态不对。
+
+== 解决方法
+
+. 执行以下命令，查看单个 node 信息。查看磁盘的状态、大小和类型是否正确。
++
+[source,shell]
+----
+/pitrix/cli/describe-nodes.py –i IP
+----
+
+. 若磁盘信息不对，根据实际情况，修改磁盘信息。
++
+--
+* 修改磁盘类型
++
+[source,shell]
+----
+/pitrix/cli/modify-node-attributes.py -i 172.16.80.10 -d sdb -t ssd
+----
+* 修改磁盘大小
++
+[source,shell]
+----
+/pitrix/cli/modify-node-attributes.py -i 172.16.80.10 -d sdc -S 3200
+----
+* 修改磁盘状态
++
+[source,shell]
+----
+/pitrix/cli/modify-node-attributes.py -i 172.16.80.10 -d sdd -s 1
+----
+--
+. 若数据磁盘有脏数据，用 Installer 提供的批量工具 `/pitrix/bin/erase_data_disks.sh` 清除脏数据。
++
+----
+/pitrix/bin/erase_data_disks.sh -i /root/hyper_ip_list -d nvme0n1
+----
++
+或手工清脏数据。
++
+----
+dd if=/dev/zero of=/dev/nvme0n1 bs=10M count=10
+----

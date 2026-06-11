@@ -1,0 +1,68 @@
+---
+title: "调整节点 CPU 和内存资源"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB MongoDB, 应用管理, 调整资源"
+description: "如何在{ks_product_both}上调整 RadonDB MongoDB 数据库资源。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 6d007f3167314ebe8e031ec63bcb8df8
+:ks_xref_id: a449053ecb12409b9964dc020c60c8e8
+:ks_comp: ../../../../components/
+:ks_title: 调整节点 CPU 和内存资源
+:ks_keywords: Kubernetes, {ks_product}, RadonDB MongoDB, 应用管理, 调整资源
+:ks_description: 如何在{ks_product_both}上调整 RadonDB MongoDB 数据库资源。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本小节主要介绍了如何在{ks_product_both}上调整 RadonDB MongoDB 数据库的 CPU 和内存资源。
+
+
+== 前提条件link:[id=c63ecd59726b4bd19ac8ec32b32dd2ef]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbMongoDB/radondbmongodb-prer-installRadondbmongodb.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=9d3a11b46be0437483d32a84dc2287e1]
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+此操作可能会中断数据库服务，请在非高峰时段执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMongoDB/radondbmongodb-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 调整资源**。
+
+. 在**调整资源**对话框，修改分配给数据库服务的 CPU 和内存资源，然后点击**确定**。

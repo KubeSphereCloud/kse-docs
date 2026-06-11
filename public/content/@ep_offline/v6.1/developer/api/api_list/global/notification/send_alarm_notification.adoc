@@ -1,0 +1,84 @@
+---
+title: 发送告警通知（SendAlarmNotification）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_data
+| Array
+| true
+| 通知数据
+
+| notification_data[].rules
+| String
+| true
+| 告警规则
+
+| notification_list_id
+| String
+| true
+| 接收人id
+
+| resource_id
+| String
+| true
+| 资源id
+
+| resource_name
+| String
+| true
+| 资源名称
+
+| resource_type
+| String
+| true
+| 资源类型
+
+| zone
+| String
+| true
+| 资源所在区
+|===
+
+== 返回数据
+
+此接口仅包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "SendAlarmNotification",
+  "notification_data": [
+    {
+      "rules": ""
+    }
+  ],
+  "notification_list_id": "nl-xxxxxxxx",
+  "resource_id": "i-xxxxxxxx",
+  "resource_name": "test instance",
+  "resource_type": "instance",
+  "zone": "test"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SendAlarmNotificationResponse",
+  "ret_code": 0
+}
+----

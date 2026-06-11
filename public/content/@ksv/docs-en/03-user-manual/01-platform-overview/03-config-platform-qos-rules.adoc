@@ -1,0 +1,74 @@
+---
+title: "Configure QoS rules"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, QoS, rules, configuration"
+description: "Describes how to configure QoS rules in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 804a55268ba44c378e760dd6b2cb9a02
+:ks_xref_id: 16a4134503e8491fb58a5890226ddc98
+:ks_comp: ../../../components/
+:ks_title: Configure QoS rules
+:ks_description: Describes how to configure QoS rules in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, QoS, rules, configuration
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+{ks_product_abbr_full} supports custom quality of service (QoS) rules. This feature can help you identify different business traffic, ensure the network bandwidth for data transmission, and reduce network latency. This way, you can improve the network resource usage.  This topic describes how to configure QoS rules in the {ks_product} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Create a QoS rulelink:[id=b97c78e779624fe29a3af3f064ddb36f]
+
+{ks_product} allows you to create a maximum of five QoS rules based on network performance metrics. You can perform the following steps to create a QoS rule:
+
+. Log in to the {ks_product} web console.
+. In the upper-right corner of the page, click image:/images/ksv/en/icons/cogwheel.svg[18px,18px] and select **Platform Management**.
+. In the dialog box that appears, select the **Networks** tab to create a QoS rule based on network performance metrics.
++
+--
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* {ks_product} provides a default QoS rule. If you want to use the QoS rule created, click **Set as Default** next to the rule to use it as the default rule.
+* If a rule is deleted, VMs that apply the rule will use the default rule on the next reboot.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a QoS rulelink:[id=69216978869d4853a5ba1a3482391719]
+
+If a QoS rule is no longer needed, perform the following steps to delete the rule:
+
+. Log in to the {ks_product} web console.
+. In the upper-right corner of the page, click image:/images/ksv/en/icons/cogwheel.svg[18px,18px] and select **Platform Management**.
+. In the dialog box that appears, select the **Networks** tab to view the QoS rules created based on network performance metrics.
+. Find the QoS rule that you want to delete and click image:/images/ksv/en/icons/trash-light.svg[18px,18px] on the right side.
+. In the dialog box that appears, click **OK** to delete the QoS rule.
++
+--
+// Warning
+
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+After the rule is deleted, all VMs that apply the rule will use the default rule on the next reboot.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== What to do nextlink:[id=dfd33036975b41b9840f349aad218791]
+
+You can enable the QoS feature and specify a QoS rule to take effect when you create a VM. For more information, see link:../../05-vm-management/01-vms/01-create-vm/[Create a VM].

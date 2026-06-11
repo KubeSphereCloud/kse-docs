@@ -1,0 +1,44 @@
+---
+title: "检查数据库表（2 级）"
+weight: 13
+---
+
+== 注意事项
+
+每个 NeonSAN 仅包含一种数据库类型，请根据查询结果选择适当的数据库表检查方式。
+
+== 操作步骤
+
+. 执行如下命令，查看集群各节点角色信息。
++
+[,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts"
+----
++
+include::../../../../../_components/note.adoc[]
+返回结果中需注意当前集群中使用的数据库类型，一般为 Galera 或 QingStor MySQL 数据库。
+include::../../../../../_components/table_footer.adoc[]
+
+. 根据上一步骤中查询到的数据库类型及节点信息，登录集群的任一数据库节点，执行如下命令，查询当前集群的数据库表。
++
+返回结果中 ``max_blocksize`` 值需不小于65536。若 max_blocksize 值设置过小，可能会影响卷性能，建议取消已映射的卷，并在数据库中修改 max_blocksize 值后，重新映射卷。
++
+* Galera 数据库： 
++
+[,shell]
+----
+mysql -uneonsan -pzhu88jie neonsan -e "SELECT distinct max_blocksize FROM volume;" 
+----
++
+* QingStor MySQL 数据库： 
++
+[,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' neonsan -e "SELECT distinct max_blocksize FROM volume;" 
+----
+ 
+
+
+
+

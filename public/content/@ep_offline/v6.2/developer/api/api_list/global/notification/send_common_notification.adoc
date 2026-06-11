@@ -1,0 +1,87 @@
+---
+title: 发送通用通知到通知列表（SendCommonNotification）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| lang
+| String
+| false
+| 通知语言类型
+
+| notification_args
+| String
+| false
+| 变量字典,
+
+| notification_list_id
+| String
+| true
+| 接收人id
+
+| notification_type
+| String
+| true
+| 通知类型
+
+| user_center_email_conf
+| String
+| false
+| 用户邮件配置
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_list_id
+| String
+| false
+| 接收人id
+
+| notification_type
+| String
+| false
+| 通知类型
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "SendCommonNotification",
+  "notification_args": {
+    "date_time": "2019-08-02 14:33",
+    "flow": "800Mbps",
+    "sdwan_info": "test_guanghe1 (ID: wacc-xxxxxxxx)",
+    "sdwan_path": "/test/wan_cpes/wan_cpes/wacc-3e2dnejd/"
+  },
+  "notification_list_id": "nl-xxxxxxxx",
+  "notification_type": "sdwan_flow"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SendCommonNotificationResponse",
+  "notification_list_id": "nl-xxxxxxxx",
+  "notification_type": "sdwan-flow",
+  "ret_code": 0
+}
+----

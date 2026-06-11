@@ -1,0 +1,69 @@
+---
+title: "View physical networks"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, physical networks, list, view"
+description: "Describes how to view physical networks in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 47baffa8303b41be9e4a85fe1f36eb82
+:ks_xref_id: 4acfd60877094e24ae91c9a3de3b3a76
+:ks_comp: ../../../../components/
+:ks_title: View physical networks
+:ks_description: Describes how to view physical networks in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, physical networks, list, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view physical networks in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=7fa5232628cd45638a36f47ea29ce011]
+
+include::../../../../_custom-en/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=de388af561e64b02b44b66d6c88434d7]
+
+include::../../../../_custom-en/networks/physical-network-steps.adoc[]
+
++
+
+--
+You can view all the physical networks in the system.  The following table describes the parameters.
+
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the physical network.
+
+include::../../../../_custom-en/networks/physical-network-naming-convention.adoc[]
+
+|ID
+|The universally unique identifier (UUID) of the physical network in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the physical network.
+
+|Type
+|The type of the physical network.
+
+include::../../../../_custom-en/networks/network-type-description.adoc[]
+
+|Subnets
+|The number of subnets in the physical network.
+|===
+--
+
+. (Optional) Click the search box above the physical network list and set query conditions to search for physical networks by name or ID.  For example, use **Name:ab** to search for physical networks whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

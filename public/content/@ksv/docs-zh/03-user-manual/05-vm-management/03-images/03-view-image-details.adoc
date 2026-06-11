@@ -1,0 +1,84 @@
+---
+title: "查看镜像详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 镜像, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看镜像详情。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 5b7757744ac947ff940bded7a3b9751c
+:ks_xref_id: 58bc94b88f5147f9a8424206b84bd336
+:ks_comp: ../../../../components/
+:ks_title: 查看镜像详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看镜像详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 镜像, 详情, 查看
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看镜像详情。
+
+include::../../../../_custom/vms/vm-image-view-limits.adoc[]
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=236d45dabd8e474793c312c01e628b00]
+
+include::../../../../_custom/vms/vm-image-steps.adoc[]
+
+. 选择**系统镜像**、**自有镜像**或**共享镜像**页签，查看对应类型的镜像列表。有关各镜像类型的区别，请参阅 link:../[镜像]。
+
+. 在镜像列表页面，点击目标镜像名称，进入镜像详情页面。
+
+. 在镜像详情页面的左侧区域，查看镜像的基本信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|ID
+|镜像在系统中的通用唯一标识符。
+
+|状态
+|镜像当前的状态。
+
+|操作系统
+|镜像的操作系统类型。
+
+|版本
+|镜像的操作系统版本。
+
+|创建时间
+|镜像的创建时间。
+
+|创建者
+|镜像的创建者。
+|===
+--
+
+. 在页面右侧的**资源概览**页签，查看镜像的默认配置。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|CPU
+|镜像定义的 CPU 核心数。
+
+|内存
+|镜像定义的内存大小。
+
+|系统盘
+|镜像定义的系统盘大小。
+|===
+--
+
+
+. 在页面右侧的**虚拟机**页签，查看基于该镜像创建的虚拟机列表。有关更多参数信息，请参阅 link:../../01-vms/01-create-vm/[创建虚拟机]。

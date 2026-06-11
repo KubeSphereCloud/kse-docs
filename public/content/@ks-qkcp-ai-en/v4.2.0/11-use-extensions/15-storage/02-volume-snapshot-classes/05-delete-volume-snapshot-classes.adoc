@@ -1,0 +1,65 @@
+---
+title: "Delete Volume Snapshot Class"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Volume Snapshot Class, Delete Volume Snapshot Class"
+description: "Introduces how to delete a volume snapshot class."
+weight: 05
+---
+
+:ks_permission: **Volume Snapshot Class Management**
+:ks_navigation: **Storage > Volume Snapshot Classes**
+
+
+This section describes how to delete a volume snapshot class.
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+After a volume snapshot class is deleted, the volume snapshots and volume snapshot contents created based on it will not be deleted. However, users will no longer be able to use this volume snapshot class to save snapshot data to the backend storage system.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+* The **KubeSphere Storage** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Delete a Single Volume Snapshot Class
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right of the volume snapshot class you want to delete, and then select **Delete** from the drop-down list.
+
+. In the **Delete Volume Snapshot Class** dialog box, enter the name of the volume snapshot class, and then click **OK**.
+
+
+== Delete Volume Snapshot Classes in Batches
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Select the checkboxes on the left of the volume snapshot classes you want to delete, and then click **Delete** above the list.
+
+. In the **Delete Volume Snapshot Classes in Batches** dialog box, enter the name of the volume snapshot, and then click **OK**.
++
+--
+include::../../../../_custom/note-separateNamesByComma.adoc[]
+--

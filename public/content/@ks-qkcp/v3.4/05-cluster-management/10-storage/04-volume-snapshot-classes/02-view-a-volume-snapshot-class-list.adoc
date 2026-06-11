@@ -1,0 +1,94 @@
+---
+title: "查看卷快照类列表"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 存储, 卷快照类, 查看卷快照类列表"
+description: "介绍如何查看卷快照类列表。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 0bf93df850e641fda4c3df20f0ed254e
+:ks_xref_id: 3687dfad855b47e1827ec14483ddb3f2
+:ks_comp: ../../../../components/
+:ks_title: 查看卷快照类列表
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 存储, 卷快照类, 查看卷快照类列表
+:ks_description: 介绍如何查看卷快照类列表。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **卷快照类查看**
+:ks_navigation: **存储 > 卷快照类**
+
+
+本节介绍如何查看卷快照类列表。
+
+
+== 前提条件link:[id=b69e46070ca14a66bd75dc4905e94377]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=6002cabb8138479cb7c18d1084157d6c]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+====
+* 卷快照类列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|卷快照类的名称、别名和描述信息。
+
+|持久卷声明数量
+|通过卷快照类创建的持久卷声明的数量。
+
+|默认卷快照类
+|
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-para-defaultStorageClass.adoc[]
+
+|允许卷克隆
+|
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-para-allowVolumeCloning.adoc[]
+
+|允许卷快照
+|
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-para-allowVolumeSnapshot.adoc[]
+
+|允许卷扩展
+|
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-para-allowVolumeExpansion.adoc[]
+
+|供应者
+|
+include::../../../../_custom/clusterManagement/persistentVolumes/persistentVolumes-para-provisioner.adoc[]
+|===
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+**允许卷克隆**、**允许卷快照**和**允许卷扩展**仅表明是否允许用户在{ks_product_left} Web 控制台上执行上述操作，持久卷声明是否实际支持这些操作取决于后端存储系统。有关更多信息，请参阅 link:../../02-storage-classes/05-enable-and-disable-volume-operations/[设置卷权限]。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+* 在列表上方点击搜索框并设置搜索条件，可搜索名称搜索卷快照类。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

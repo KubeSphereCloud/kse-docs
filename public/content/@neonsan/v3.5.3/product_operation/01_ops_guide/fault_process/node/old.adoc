@@ -1,0 +1,151 @@
+---
+title: "NeonSAN v3.6.0 之前版本"
+weight: 2
+---
+
+节点进行下线操作后，数据库集群与 Zookeeper 集群中关于该节点的记录需手动对其进行清理。操作步骤如下。
+
+. 检查 Zookeeper 中对应节点的 id 是否存在。
++
+[,shell]
+----
+/opt/zookeeper-3.4.13/bin/zkCli.sh
+get /neonsan/cluster1/stores/41
+----
++
+include::../../../../../../_components/note.adoc[]
+* 根据实际情况，修改 zookeeper 服务的路径。
+* cluster1 为 NeonSAN 集群名，需根据实际情况修改。
+* 41 为下线节点 ID，需根据实际情况修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 若待下线节点 ID 仍存在于 Zookeeper 中，则删除该节点。
++
+[,shell]
+----
+rmr /neonsan/cluster1/stores/41
+----
++
+include::../../../../../../_components/note.adoc[]
+根据实际情况，修改 NeonSAN 集群名与下线节点 ID。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录数据库，删除下线节点相关记录。
++
+include::../../../../../../_components/note.adoc[]
+命令行中的存储节点 ID 和 IP 地址需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+.. 登录数据库。
++
+* QingStor MySQL 数据库
++
+[,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h neonsan-mysql0 -P 3306
+----
+* Galera 数据库
++
+[,shell]
+----
+mysql -uneonsan -pzhu88jie
+----
+
+* Xenondb 数据库
++
+[,shell]
+----
+mysql -uneonsan -pzhu88jie -hx.x.x.x   
+----
++
+include::../../../../../../_components/note.adoc[]
+``-h`` 需指定 Xenondb 数据库虚 IP
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 关闭自动提交。
++
+[,sql]
+----
+mysql> use neonsan;
+mysql> set autocommit=0;
+----
+
+.. 查看下线节点遗留信息。
++
+[,sql]
+----
+mysql> select * from store where id=41;
+mysql> select * from ssd where store_id=41;
+mysql> select * from candidate_disk where store_id=41;
+mysql> select * from port where store_id=41;
+----
+.. 删除下线节点遗留信息。
++
+[,sql]
+----
+mysql> delete from candidate_disk where store_id=41;
+mysql> delete from port where store_id=41;
+mysql> delete from ssd where store_id=41;
+mysql> delete from store where id=41;
+----
+
+.. 确认正确删除下线节点信息。
++
+[,sql]
+----
+mysql> select * from store;
+mysql> select * from ssd;
+mysql> select * from candidate_disk;
+mysql> select * from port;
+mysql> select * from neonsan_version
+----
+
+.. 查看该节点是否保存于 center 表中。
++
+[,sql]
+----
+mysql> select * from center;
+----
+
+.. 若该节点保存于 center 表中，则将其从 center 表中删除。
++
+[,sql]
+----
+mysql> delete from center where mngt_ip="192.168.101.41"; 
+----
++
+include::../../../../../../_components/note.adoc[]
+192.168.101.41 为下线节点 IP，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 查看该节点是否存在于 neonsan_version 表中。
++
+[,sql]
+----
+mysql> select * from neonsan_version where mngt_ip like "store_192.168.101.41";
+----
+
+.. 若该节点存在于 neonsan_version 表中，则将其从该表中删除。
++
+[,sql]
+----
+mysql> delete from neonsan_version where mngt_ip like "store_192.168.101.41";
+----
+
+.. 确认以上操作正确后，提交改动。
++
+[,sql]
+----
+mysql> commit;
+----
+
+.. 设置自动提交。
++
+[,sql]
+----
+mysql> set autocommit=1;
+----
+
+
+
+
+

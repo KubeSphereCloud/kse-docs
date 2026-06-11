@@ -1,0 +1,50 @@
+---
+title: 跨区域复制
+weight: 10
+---
+
+
+{product_name} 对象存储提供跨不同区域的 Bucket 对象自动异步复制功能。开启此功能后，对源 Bucket 中对象的新建、更新和删除等操作会同步至目标 Bucket。目标 Bucket 中的对象是源 Bucket 中对象的精确副本，他们具有相同的对象名、元数据以及数据实体。比如他们拥有相同的创建时间、所有者、自定义元数据等。
+
+
+== 设置跨区域复制规则
+
+//. 成功link:../../../../../login[登录 Portal]。
+
+. 进入link:../../sub_resource/[子资源详情]页面，在**跨区域复制**卡片，点击**设置**。
+
+. 弹出**设置复制规则**对话框，用户可根据页面提示信息，填写相关参数后，点击**提交**。
++
+image::/images/u10000/stor_bucket_replication.png[stor_bucket_replication,50%]
++
+**页面信息说明**
+
+* `目标 Bucket` 所在区域需与源 Bucket 不一致。
+* `复制范围`：若选择指定前缀对象，则需添加相应的前缀规则。
+
+. 成功设置的设置跨区域复制规则，在link:../../sub_resource/[子资源详情]页面的**跨区域复制**卡片显示。
+
+== 禁用跨区域复制规则
+
+设置禁用后，复制规则立马生效，但对正在复制中的任务无影响。
+
+//. 成功link:../../../../../login[登录 Portal]。
+
+. 进入link:../../sub_resource/[子资源详情]页面，在**跨区域复制**卡片，选择待禁用的规则，点击**禁用**。
++
+image::/images/u10000/stor_bucket_replication_m.png[stor_bucket_replication_m,100%]
+
+. 弹出确认对话框，用户确认操作无误后，点击**确定**。
+
+== 删除跨区域复制规则
+
+复制规则删除后，立马生效，但对正在复制中的任务无影响。
+
+//. 成功link:../../../../../login[登录 Portal]。
+
+. 进入link:../../sub_resource/[子资源详情]页面，在**跨区域复制**卡片，选择待删除的规则，点击**删除**。
++
+image::/images/u10000/stor_bucket_replication_m.png[stor_bucket_replication_m,100%]
+
+. 弹出确认对话框，用户确认操作无误后，点击**确定**。
+ 

@@ -1,0 +1,35 @@
+---
+title: "基于镜像创建主机"
+description: 本小节主要介绍基于镜像创建主机的具体操作流程。
+draft: false
+weight: 2
+---
+
+== 功能描述
+
+主机是以虚拟机的形式运行在管理控制平台中的镜像副本。基于一个镜像，用户可以创建任意数量的主机。在创建主机时，用户需要指明 CPU、内存和系统盘等配置。
+
+== 前提条件
+
+{product_console_name}内已存在可用镜像。
+
+== 操作步骤
+
+. 登录{product_console_name}。
+. 在顶部导航栏，选择**资源** > *镜像*，进入镜像列表页面。
+. 点击指定镜像所在行的更多操作，选择**基于镜像创建主机**，
++
+
+include::../../../../../_components/note.adoc[]
+基于镜像创建之前，需要先注册用户上传的本地镜像，或者预先将主机制作成镜像。
+
+include::../../../../../_components/table_footer.adoc[]
+
++
+image::/images/express/console/image_create_host_1.png[]
+
+. 在弹出**创建新虚拟主机**的页面，填写待创建虚拟机的基本信息，支持自定义虚拟机配置，可参考link:../../vm/express_vm/vm_create[创建 ExpressCloud 主机]相关内容。
++
+image::/images/express/console/image_create_host_2.png[]
+
+. 完成基本信息配置后，点击**创建**即可基于当前镜像创建新的虚拟机。

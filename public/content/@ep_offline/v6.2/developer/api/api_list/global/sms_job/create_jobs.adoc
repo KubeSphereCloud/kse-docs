@@ -1,0 +1,74 @@
+---
+title: 创建短信任务（CreateSMSJobs）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| false
+| 控制台
+
+| content
+| String
+| false
+| 短信内容
+
+| notify_channel
+| String
+| false
+| 通知渠道，默认default
+
+| phones
+| Array
+| false
+| 手机号
+
+| sms_type
+| String
+| false
+| 短信类型
+
+| voice
+| String
+| false
+| 是否发送语音短信，仅支持sms_type为register的场景
+|===
+
+== 返回数据
+
+此接口仅包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateSMSJobs",
+  "content": "您正在启用账号二次认证功能，验证码是: (5207)，请在30分钟内完成验证。",
+  "phones": [
+    "189****5678"
+  ],
+  "sms_type": "enable_2fa"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateSMSJobsResponse",
+  "ret_code": 0
+}
+----

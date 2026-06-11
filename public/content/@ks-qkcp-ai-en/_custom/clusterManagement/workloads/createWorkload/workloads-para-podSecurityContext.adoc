@@ -1,0 +1,9 @@
+// :ks_include_id: 3156e518c97e495ebdd0028761edc427
+Set the permissions of all container processes in the pod within the Linux system. If both the pod security context and the container security context have set the user, user group, and SELinux context, the settings in the container security context will override those in the pod security context.
+
+[options="header",cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::workloads-para-uidGidSelinux.adoc[]
+|===

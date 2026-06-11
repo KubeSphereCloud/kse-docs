@@ -1,0 +1,158 @@
+---
+title: 创建告警策略（CreateAlarmPolicy）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| actions
+| Object
+| false
+| 告警行为
+
+| actions.trigger_action
+| String
+| false
+| 触发行为
+
+| actions.trigger_status
+| String
+| false
+| 触发状态
+
+| alarm_policy_category
+| String
+| true
+| 指标告警或事件告警
+
+| alarm_policy_type
+| String
+| true
+| 告警策略类型
+
+| notice_count
+| Integer
+| true
+| 通知次数
+
+| operator
+| String
+| true
+| 分页起始索引
+
+| owner
+| String
+| false
+| 用户
+
+| period
+| String
+| true
+| 监控周期
+
+| rules
+| Object
+| true
+| 告警规则列表
+
+| rules.alarm_level_id
+| String
+| true
+| 告警等级
+
+| rules.alarm_policy_rule_name
+| String
+| true
+| 规则名称
+
+| rules.condition_type
+| String
+| true
+| 比较方法
+
+| rules.data_processor
+| String
+| true
+| 数据类型
+
+| rules.meter
+| String
+| true
+| 指标
+
+| rules.thresholds
+| Integer
+| true
+| 阈值
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy_id
+| String
+| false
+| 告警策略id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateAlarmPolicy",
+  "actions": [
+    {
+      "trigger_action": "nl-1i077nsg",
+      "trigger_status": "alarm"
+    }
+  ],
+  "alarm_policy_category": "threshold",
+  "alarm_policy_name": "test111111111",
+  "alarm_policy_type": "instance",
+  "notice_count": 1,
+  "operator": "or",
+  "owner": "usr-rrPKHDpJ",
+  "period": "1m",
+  "rules": [
+    {
+      "alarm_level_id": "level-00000000",
+      "alarm_policy_rule_name": "",
+      "condition_type": "gt",
+      "consecutive_periods": 1,
+      "data_processor": "raw",
+      "meter": "cpu",
+      "thresholds": 90
+    }
+  ],
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateAlarmPolicyResponse",
+  "alarm_policy_id": "alp-yqugoish",
+  "ret_code": 0
+}
+----

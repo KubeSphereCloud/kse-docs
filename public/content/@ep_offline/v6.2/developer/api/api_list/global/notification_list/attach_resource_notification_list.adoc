@@ -1,0 +1,87 @@
+---
+title: 绑定资源通知列表（AttachResourceNotificationList）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_list
+| String
+| true
+| 通知列表id
+
+| owner
+| String
+| false
+| 资源所属用户id
+
+| resource_type
+| String
+| true
+| 资源类型
+
+| resources
+| Array
+| true
+| 资源id列表
+
+| zone
+| String
+| true
+| 资源所在的zone
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_list
+| String
+| false
+| 通知列表id
+
+| resources
+| Array
+| false
+| 资源id列表
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "AttachResourceNotificationList",
+  "notification_list": "nl-xxxxxxxx",
+  "resource_type": "cluster",
+  "resources": [
+    "cl-ue6p82xl"
+  ],
+  "zone": "test"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "AttachResourceNotificationListResponse",
+  "notification_list": "nl-xxxxxxx",
+  "resources": [
+    "cl-xxxxxxxx"
+  ],
+  "ret_code": 0
+}
+----

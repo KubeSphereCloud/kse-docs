@@ -1,0 +1,75 @@
+---
+title: "禁用告警系统"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, 告警系统, 禁用告警系统"
+description: "介绍如何禁用告警系统扩展组件。"
+weight: 02
+---
+
+// :ks_include_id: 7e67992a48e24b1986fe6b7cb708b32e
+:ks_xref_id: e001debcb7bb408aa2afc9663ccd76ad
+:ks_comp: ../../../../components/
+:ks_title: 禁用告警系统
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, 告警系统, 禁用告警系统
+:ks_description: 介绍如何禁用告警系统扩展组件。
+:ks_weight: 02
+:ks_icon:
+
+
+本节介绍如何禁用告警系统扩展组件。
+
+
+== 前提条件link:[id=d70f04f36c0a41bb8cb0643194fe7f5d]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=da844a8ab7ce49099c2c25945427f7e9]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:alerting:enabled** 参数设置为 **false**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  alerting:
+    enabled: false
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在 **kubectl** 对话框，执行以下命令删除告警系统相关资源：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl -n kubesphere-monitoring-system delete thanosruler kubesphere
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

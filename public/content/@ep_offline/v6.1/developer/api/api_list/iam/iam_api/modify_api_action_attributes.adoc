@@ -1,0 +1,141 @@
+---
+title: 修改IAM纳管API属性（ModifyIAMApiActionAttributes）
+weight: 18
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action_groups
+| String
+| false
+| 分组
+
+| action_name
+| String
+| false
+| 纳管Api
+
+| description
+| String
+| false
+| 描述
+
+| keys
+| String
+| false
+| 资源接口参数名
+
+| optional_resource_keys
+| String
+| false
+| 可选资源参数名
+
+| optional_resources
+| String
+| false
+| 可选资源
+
+| required_resource_keys
+| String
+| false
+| 必选资源参数名
+
+| required_resources
+| String
+| false
+| 必选资源
+
+| service_name
+| String
+| false
+| 纳管服务英文名
+
+| translated_name
+| String
+| false
+| 纳管API中文名
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action_name
+| String
+| false
+| action
+
+| description
+| String
+| false
+| 描述
+
+| keys
+| String
+| false
+| 分组
+
+| optional_resource_keys
+| String
+| false
+| 可选资源接口参数名
+
+| optional_resources
+| String
+| false
+| 可选资源
+
+| required_resource_keys
+| String
+| false
+| 必选资源接口参数名
+
+| required_resources
+| String
+| false
+| 必选资源
+
+| service_name
+| String
+| false
+| 纳管服务英文名
+
+| translated_name
+| String
+| false
+| 纳管API中文名
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMApiActionAttributes",
+  "action_name": "DescribeInstances",
+  "translated_name": "查询弹性云主机"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMApiActionAttributesResponse",
+  "action_name": "DescribeInstances",
+  "ret_code": 0,
+  "translated_name": "查询弹性云主机"
+}
+----

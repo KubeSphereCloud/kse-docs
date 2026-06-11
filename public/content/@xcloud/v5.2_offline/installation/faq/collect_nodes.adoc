@@ -1,0 +1,53 @@
+---
+title: "收集硬件信息失败"
+weight: 10
+---
+
+== 步骤一：确定失败的阶段
+
+1. 查看日志 /pitrix/log/service/node_server.log，翻到最后查看失败的报错。
+ ** 如果是“The node ids is empty when collect nodes! ”，说明指定的节点列表不对，请检查 ip_list 文件、重新添加节点后再次收集。
+ ** 如果是 /pitrix/node/collect/collect.py 命令执行失败，请执行<<_步骤二排查初始化节点失败的原因,步骤二>>。
+2. 查看日志/pitrix/log/node/collect.log，翻到最后查看失败的报错。
+ ** 如果是“inited failed! ”，说明初始化节点失败了，请执行<<_步骤二排查初始化节点失败的原因,步骤二>>。
+ ** 如果是“collect failed! ”，说明收集脚本执行失败了，请执行<<_步骤三初始化成功但是_collect_报错缺少依赖,步骤三>>。
+
+== 步骤二：排查初始化节点失败的原因
+
+1. 查看初始化节点的日志 /pitrix/log/node/init_nodes_${date}.log，失败的节点列表会记录到 /pitrix/log/node/init_failed_list 中。
+2. 查看失败节点对应的详细日志 /pitrix/log/node/initialize_${ip}.log。
+
+== 步骤三：初始化成功但是 collect 报错缺少依赖
+
+1. 登录 FirstBox。
+2. 修改文件 /pitrix/node/collect/_init_on_node.sh。
+3. 找到 mv -f /etc/apt/sources.list.bak /etc/apt/sources.list，将其注释掉或删除。
+4. 重新执行 collect 操作，如果还失败，到节点手动执行，查看具体失败原因。
++
+[source]
+----
+apt-get update
+apt-get --yes --allow-unauthenticated install python python-dev parted ntfs-3g bash-completion python-netaddr screen
+----
+
+== 步骤四：排查收集脚本执行失败的原因
+
+. 登录失败的节点。
+. 查看日志 /root/collect/collect.log。
++
+如果日志不存在，一般是脚本异常退出了，可以在节点上手动执行以下命令，查看报错信息。
++
+[soruce]
+----
+python /root/collect/collect_on_node.py n-test
+----
+
+== 步骤五：查看节点是否注册成功
+
+执行 /pitrix/cli/describe-nodes.py 报如下错误，说明节点注册异常。
+
+image::/images/ep_offline/installation/faq_collect_nodes.png[]
+
+需要重新执行节点收集命令 /pitrix/node/collect/collect.py。
+
+若仍不能解决问题，请联系技术支持。

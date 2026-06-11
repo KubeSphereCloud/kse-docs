@@ -1,0 +1,1560 @@
+---
+title: variables.<zone_id>.yaml
+weight: 20
+---
+
+该文件用于配置{product_name}基本信息、网络信息和需要部署的服务信息。修改配置文件步骤如下。
+
+
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，从模版创建配置文件，并修改文件名为 `variables.<zone_id>.yaml`。
++
+[source,shell]
+----
+cp -f /pitrix/config/templates/variables.template.yaml /pitrix/config/variables.<zone_id>.yaml
+----
++
+include::../../../../../../_components/note.adoc[]
+
+* 文件名中的 `<zone_id>` 为可用区 ID，请根据环境规划中的信息进行替换。
+* 与配置文件 `settings.<zone_id>.yaml` 名中的 `<zone_id>` 保持一致。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，修改配置文件 `variables.<zone_id>.yaml` 内容。
++
+[source,shell]
+----
+vi /pitrix/config/variables.<zone_id>.yaml
+----
+
+
+配置文件中，各字段详细说明如下。
+
+== common
+
+用于配置{product_name}的基础信息。必填字段。
+
+=== 示例
+
+[source,shell]
+----
+common:
+  ssh_port: 22
+  firstbox_address: ''
+  cloud_type: 'private'
+  domain: 'democloud.com'
+  region_id: 'testcloud'
+  console_id: 'democloud'
+  console_name: 'democloud'
+  site_protocol: 'http'
+  is_poc: 0
+----
+
+=== 参数说明
+
+[cols='1,3']
+|===
+| 参数 | 说明
+
+| ssh_port | SSH 使用的端口号，默认为 `22`，无需修改。
+| firstbox_address | FirstBox 节点 IP，系统自动获取，无需手动填写。
+| cloud_type | 云类型，支持 `public`、`private`、`express` 三种类型，默认为 `private`，无需修改。
+| domain | 域名，用于访问 Console 等 Web 环境。请根据环境规划进行配置。
+| region_id  a| 区域 ID，填写资源所在的区域。请根据环境规划进行配置。
+
+include::../../../../../../_components/note_in_table.adoc[]
+* 区域通过地理位置划分，不同区域间内网隔离，不能互相访问。
+* 一个区域可以包括多个可用区，每个可用区都相互独立但网络互通，同一可用区内的主机网络延时更小。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| console_id | Console ID，Console 的唯一标识。请根据环境规划进行配置。
+| console_name | Console 名称。请根据环境规划进行配置。
+| site_protocol a| Web 使用的网络协议，支持 `http`、`https`，默认为 `http`。请根据环境规划进行配置。
+
+include::../../../../../../_components/note_in_table.adoc[]
+如果使用 `https 协议`，还需要预先上传 SSL 证书。详细操作请参见link:../../../faq/other/https/https[配置 HTTPS 支持]。
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| is_poc a| 是否用于 POC。开启 POC 场景后，会获得部分未经全面测试的实验性功能，正式生产环境不建议启用。
+
+* `1` 表示开启 POC。
+* `0` 表示不开启 POC。默认为 `0`。
+
+|===
+
+== base
+
+配置{product_name}安装模式。必填字段。
+
+=== 示例
+
+[source,shell]
+----
+base:
+    deploy_mode: 'standard'
+----
+
+=== 参数说明
+
+`deploy_mode` 为安装模式，目前支持 `standard` 与 `fusion` 两种模式，默认为 `standard`。
+
+* `standard` 表示标准部署，KS 节点与 Hyper 节点分别为独立的物理服务器。当物理资源足够时，建议选择当前部署模式。
+* `fusion` 表示融合部署，KS 节点与 Hyper 节点为同一物理服务器。
+
+== advanced
+
+=== 环境配置
+
+**配置示例**
+
+[source,shell]
+----
+cluster_scale: 'medium'
+valid_instance_classes: '0,1,6,7,1003,1601'
+valid_volume_types: '0,3,5,6'
+hyper_mtu: 1550
+zone_name: '测试一区'
+zone_code: 1
+is_global_zone: 1
+is_sub_zone: 1
+is_vlan_mode: 0
+sdn_version: 2
+----
+
+**参数说明**
+
+[cols='1,3']
+|===
+| 参数 | 说明
+
+| cluster_scale a| 设置{product_name}的部署规模，用以控制 postgres/pgpool 的最大连接数。可设置为 `small`、`medium`、`large`，默认为 `medium`。
+
+* `small`：较小规模，Hyper 节点数量小于 200。
+* `medium`：中等规模，Hyper 节点数量大于 200，小于 500。
+* `large`：较大规模，Hyper 节点数量大于 500。
+* 云平台规模越大，数据库 postgres/pgpool 的最大连接数越大。
+
+| valid_instance_classes a| 可用区内支持的主机类型，用于初始化产品中心的主机规格、主机类型。默认支持如下主机类型。
+
+* 0：性能型
+* 1：超高性能型
+* 6：SAN 存储超高性能型
+* 7：SAN 存储性能型
+* 1003：GPU 加速型
+* 1601：弹性裸金属
+
+更多主机类型请参见link:../../../faq/other/instance_class/#_主机类型_instance_class[支持的主机类型]。
+| valid_volume_types a| 可用区内支持的硬盘类型，用于初始化产品中心的硬盘类型。默认支持如下硬盘类型。
+
+* 0：性能型
+* 3：超高性能型
+* 5：SAN 存储超高性能型
+* 6：SAN 存储性能型
+
+更多主机类型请参见link:../../../faq/other/instance_class/#_硬盘类型_volume_type[支持的硬盘类型]。
+| hyper_mtu a| 计算节点 MTU，默认值为 `1550`，无特殊要求，维持默认即可。同时，对应的交换机侧的 MTU 需要配置为 `9216`。
+
+include::../../../../../../_components/note_in_table.adoc[]
+多 Zone 环境，该参数在每个 Zone 中需要保持一致。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| zone_name | 可用区中文名称。请根据环境规划进行配置。
+| zone_code | 取值范围为 `1~999`，默认值为 `1`。多 Zone 环境，取值应保持不同。
+| is_global_zone a| 若当前待部署的环境为 Global Zone，此参数配置为 `1`。
+| is_sub_zone a| 若当前待部署的环境为 Sub Zone，此参数配置为 `1`。
+
+
+| is_vlan_mode a|
+
+* 是否配置 VLAN 模式，默认为 `0`，不配置 VLAN。
+* 如果使用 VLAN 模式，此参数需要配置为 `1`。
+
+| sdn_version a| 配置 SDN 版本。
+
+默认值为 `2`，表示 SDN 模式使用 SDN2.0 版本，无特殊要求，保持默认值即可。
+// * 若使用 SDN1.0 版本，需修改配置为 `1`，表示 SDN 模式使用 SDN1.0 版本。
+
+|===
+
+=== 网络配置
+
+用于配置各服务组件的管理虚拟机地址、浮动 IP 等信息。请根据环境规划进行填写。
+
+* 若用户希望系统能 `自动` 为各服务分配 IP 地址，需填写带 `_pools` 的参数来设置地址池。部署过程中，系统将根据当前设置的地址池，自动给各服务组件分配 IP 地址。因此，填写各 IP 地址池时，请勿重叠。
+* 若用户需要 `手动` 为各服务分配 IP 地址，则无需填写带 `_pools` 的参数，而是在<<_服务配置,后续>>服务配置中，手动给各服务组件分配 IP。
+* 如果同时配置了 `_pools` 参数和各服务组件的 `mgmt_network_address`，则部署过程中，系统以各服务配置中的 `mgmt_network_address` 内容为准。
+
+
+**配置示例**
+
+[source,shell]
+----
+mgmt_network_pools: ['10.10.0.1/24-10.10.0.253/24']
+vm_mgmt_network_pools: ['10.10.0.211/24-10.10.0.229/24']
+ks_floating_ip_pools: ['10.10.0.231/24-10.10.0.239/24']
+eip_network_pools: []
+vg_mgmt_network_gateway: '10.10.0.254'
+installer_allocate_vbc: 0
+installer_allocate_vbc_ipv6_mgmt: 1
+vm_base_network: '10.20.0.0/16'
+vm_base_network_start: '10.20.1.0/24'
+vm_private_networks:
+- '172.16.0.0/16'
+- '172.18.0.0/16'
+network_separated: 0
+user_networks: []
+user_network_interface: ''
+----
+
+**参数说明**
+
+[cols='1,2,1']
+|===
+| 参数名称 | 参数说明 | 示例
+
+| mgmt_network_pools
+a| 管理网络地址池。包含各物理服务器 IP、各管理虚机 IP、以及各服务组件的浮动 IP。
+
+* 参考示例进行填写。
+* 需包含各物理服务器已分配的 IP 地址。
+
+| mgmt_network_pools: ['10.10.0.1/24-10.10.0.253/24']
+
+
+| vm_mgmt_network_pools
+a| 用于部署服务组件的虚拟机地址分配。
+
+* 取自 `mgmt_network_pools`，不能与物理服务器 IP 地址以及 `ks_floating_ip_pools` 重叠。
+* 根据环境规划进行配置，IP 地址数量需大于 30。
+* 参考示例进行填写。
+
+
+| vm_mgmt_network_pools: ['10.10.0.211/24-10.10.0.229/24']
+
+
+| ks_floating_ip_pools
+a| 用于各服务组件的浮动 IP 地址分配。
+
+* 取自 `mgmt_network_pools`，不能与物理服务器 IP 地址以及 `vm_mgmt_network_pools` 重叠。
+* 参考示例进行填写。
+
+
+| ks_floating_ip_pools: ['10.10.0.231/24-10.10.0.239/24']
+
+
+| eip_network_pools
+a| EIP 地址池，用于配置公网 IP 访问。
+
+* 如不需要 VG 及公网 IP，则无需配置，维持默认即可。
+* 参考示例进行填写。
+
+a|
+eip_network_pools: ['20.0.0.1/24-20.0.0.253/24']
+
+
+| vg_mgmt_network_gateway
+a| VG 节点物理网段网关地址，默认为 `10.10.0.254`。
+
+* 如不需要 VG 及公网 IP，则无需配置，维持默认即可。
+* 参考示例进行填写。
+
+| vg_mgmt_network_gateway: '10.10.0.254'
+
+| installer_allocate_vbc
+a| 是否自动分配 VBC 网络。
+
+* 默认为 `0`，系统不会自动分配 VBC 网络。
+* 配置为 `1`，系统将自动分配 VBC 网络。若为 POC 环境，此处推荐设置为 `1`。
+
+
+| installer_allocate_vbc: 0
+
+
+| installer_allocate_vbc_ipv6_mgmt
+ a| 是否自动分配 IPv6 格式的 VBC 网络。
+
+* 默认为 `1`，系统将自动分配 IPv6 格式的 VBC 网络。
+* 如需手动分配 IPv6 格式的 VBC 网络，此参数配置为 `0`。
+
+| installer_allocate_vbc_ipv6_mgmt: 1
+
+| vm_base_network
+a| 基础网络 VBC 网段。
+
+* 当 `installer_allocate_vbc` 设置为 `1` 时，该参数有效。
+* 当该参数有效时，请根据环境规划进行配置，若用户无指定要求，可以使用默认值。
+| vm_base_network: '10.0.0.0/8'
+
+| vm_base_network_start
+a| 基础网络 VBC 网段的起始地址段。
+
+* 当 `installer_allocate_vbc` 设置为 `1` 时，该参数有效。
+* 请根据环境规划进行配置，若用户无指定要求，可以使用默认值。
+| vm_base_network_start: '10.10.10.0/24'
+
+| vm_private_networks
+| 私有网络 VPC 网段。
+
+请根据环境规划进行配置，若用户无指定要求，可以使用默认值。
+|
+vm_private_networks: +
+- '172.20.0.0/16' +
+- '172.21.0.0/16'
+
+| network_separated
+a| 是否配置管理网、业务网、存储网三网分离模式。
+
+* 默认值为 `0`，表示不部署三网分离模式。
+* 如需部署三网分离模式，需修改配置为 `1`，再填写参数 `user_networks` 或者 `user_network_interface`。
+
+include::../../../../../../_components/note_in_table.adoc[]
+
+目前该参数可以支持管理网、业务网分离，存储网络仍需在服务器的网卡上进行配置。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| network_separated: 0
+
+
+| user_networks
+a| 用于配置业务网络的网段。
+
+* 当使用三网分离模式，且业务网络模式为 SDN 时，需要配置此参数。
+* 参考示例进行填写。
+
+| user_networks: []
+
+
+| user_network_interface
+a| 用于填写业务网所在的网卡。如 `bond1` 或者 `eth1`。
+
+* 当使用三网分离模式，且业务网络模式为 VLAN 时，需要配置此参数。
+* 参考示例进行填写。
+
+| user_network_interface: 'eth1'
+
+|===
+
+=== NTP&DNS
+
+用于配置 NTP 服务器和 DNS 服务器的相关信息。
+
+**配置示例**
+
+参考参数说明。
+
+**参数说明**
+
+[cols='1,2a,1']
+|===
+| 参数名称 | 参数说明 | 示例
+
+| external_ntp_servers
+| 配置 NTP 服务的 IP 地址。
+
+* 若待部署环境有单独的 NTP 服务器，请参考示例填写 NTP 服务器的 IP 地址列表。
+* 若待部署环境没有单独的 NTP 服务器，保持留空即可。
+| external_ntp_servers: +
+- '10.10.0.11' +
+- '10.10.0.21'
+
+| external_dns_servers
+| DNS 服务器地址。
+
+* 若待部署环境有单独的 DNS 服务器，请参考示例填写 DNS 服务器的 IP 地址列表。
+* 若待部署环境没有单独的 NDS 服务器，维持默认即可。
+
+| external_dns_servers: +
+- '119.29.29.29' +
+- '114.114.114.114'
+|===
+
+=== 第三方存储
+
+用于配置第三方存储的相关信息。
+
+当云平台使用第三方存储，即计算存储的部署模式为 Hyper-Tpsc 模式时，需要配置该部分内容；若使用 Hyper-Sanc 模式时，无需配置该部分内容。
+
+**配置示例**
+
+参考参数说明。
+
+**参数说明**
+
+[cols='1,3,3']
+|===
+| 参数名称 | 参数说明 | 示例
+
+| tpsc_dev
+a| 填写第三方存储驱动器名称，多个驱动器之间使用空格分开。不同存储模式，填写说明如下。
+
+* FC-SAN 存储
++
+. 在存储服务器上通过命令 `lsblk` 查看驱动器名称。
+. 驱动器名称输出格式为 `/dev/mapper/mpath-xxx`。
+. 按照输出内容填写参数。
+
+* iSCSI 存储
++
+. 在存储服务器上通过命令 `ls -l /dev/disk/by-uuid/*` 或 `ls -l /dev/disk/by-id/*` 查看驱动器名称。
+. 驱动器名称输出格式为 `/dev/disk/by-uuid/xxx` 或 `/dev/disk/by-id/xxx`。
+. 按照输出内容填写参数。
+
+a|
+
+* tpsc_dev: '/dev/mapper/mpath-a /dev/mapper/mpath-b /dev/mapper/mpath-c'
+* tpsc_dev: '/dev/disk/by-id/scsi-3600140544f4ecf7c49b4ae1875ca4c8d /dev/disk/by-id/scsi-36001405677ff2a8cd4c4282a3048bda3'
+* tpsc_dev: '/dev/disk/by-uuid/094f480c-be33-41d3-8eb8-576acf24f657 /dev/disk/by-uuid/8b4bdcfa-d32b-4d60-b746-76d07cf59b5e'
+
+| vg-name
+| 保持默认值即可，无需修改。
+| vg_lvm
+|===
+
+=== 服务开关配置
+
+用于设置是否开启某些服务，需根据前期规划进行填写。各服务开关，均可填写 `0` 或 `1`。
+
+* 配置为 `0` 表示不安装当前服务。
+* 配置为 `1` 表示需要安装当前服务，至于服务的具体配置内容，参考<<_服务配置>>和link:../settings[配置 setting.Zone_ID.yaml]。
+
+**配置示例**
+
+参考参数说明。
+
+**参数说明**
+
+[cols='2,6,1']
+|===
+| 参数名称 | 参数说明 | 默认值
+
+| enable_vpc_ipv6
+| 是否启用私有网络 IPV6。
+| 0
+
+| enable_vbc_ipv6
+| 是否启用基础网络 IPV6。
+| 0
+
+| deploy_bm
+| 是否安装 BM。
+| 0
+
+| deploy_v2v
+a| 废弃参数，维持默认即可。
+
+| 0
+
+| deploy_vdi
+| 是否安装 VDI 云桌面。
+| 0
+
+| deploy_boss
+| 是否安装 BOSS。
+| 1
+
+| deploy_warehouse
+a| 是否安装 Warehouse。
+
+include::../../../../../../_components/attention_in_table.adoc[]
+
+如果需要使用计费模块，必须安装 Warehouse，即此处需配置为 1。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| 0
+
+| deploy_eipctl
+| 是否安装 Eipctl。
+| 0
+
+| deploy_rsserver
+a| 是否安装 Rsserver。
+
+include::../../../../../../_components/note_in_table.adoc[]
+
+Rsserver 服务用于与交换机做 BGP 通信。是部署 SND 3.0、h3c-vg、no-vg 必须的一个组件。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+
+| 0
+
+| deploy_cronus
+a| 是否安装 Cronus，保持默认值即可。
+
+include::../../../../../../_components/attention_in_table.adoc[]
+
+如果需要使用 BOSS 的监控功能，必须安装 Cronus。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| 1
+
+| deploy_iam
+a| 是否安装 IAM。
+
+//安装 IAM ，修改配置为 1，且无需进行额外的服务配置和角色配置。
+
+| 0
+
+| is_cronus_master_zone
+a| 是否安装 InfluxDB。
+
+* 当一个 Region 里有多个 Zone 时，建议第一个 Zone 设置该参数为 1，其他 Zone 设置为 0。
+* 每个 Region 有且仅有一个 Zone 安装该服务。
+
+| 1
+
+| deploy_hpc
+| 是否安装 HPC。
+| 0
+
+| deploy_apigateway
+a| 是否安装 API 网关。安装 API 网关，修改配置为 1，且需进行额外的服务配置和角色配置。
+| 0
+
+| deploy_qkeapi
+a| 是否安装 QKE。安装 QKE，修改配置为 1，且需进行额外的服务配置和角色配置。
+
+| 0
+
+| deploy_smc
+| 是否安装 SMC 迁移中心。
+| 0
+
+| deploy_cloudsat
+| 是否安装 CloudSat 服务。
+| 1
+
+| support_neonsan
+a| 是否安装 NeonSAN。如果计算存储节点使用 Hyper-Sanc 的部署模式，则需要安装 NeonSAN。
+
+* **使用 Hyper-Sanc 融合部署模式**
++
+修改配置为 0，此时还未安装 NeonSAN。待{product_name}基础软件安装完成后，再对接 NeonSAN。
+* **使用 Hyper-Sanc 分离部署模式，且此时已经安装 NeonSAN**
++
+修改配置为 1。且还需在 NeonSAN 对应的模块中完成相应的配置（详细操作请参见 <<_neonsan_配置,NeonSAN 配置>>），否则将导致{product_name}安装失败。
+* **使用 Hyper-Sanc 分离部署模式，且此时还未安装 NeonSAN**
++
+修改配置为 0。待{product_name}基础软件安装完成后，再对接 NeonSAN。
+| 0
+
+| support_qingstor
+a| 是否安装对象存储。
+| 0
+
+| enable_nic_offload
+a| 是否启用网卡 SR-IOV 功能。
+
+include::../../../../../../_components/note_in_table.adoc[]
+
+* SR-IOV 功能可将单个物理网口虚拟成多个虚拟网口。每个虚拟机可以占用一个或多个虚拟网口，虚拟机通过相应的驱动程序直接访问虚拟网口，从而提升网络吞吐性能。
+* SR-IOV 功能需要物理网卡硬件支持。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| 1
+
+| deploy_mcnctl
+a| 是否安装 MCN。
+
+include::../../../../../../_components/note_in_table.adoc[]
+仅支持在 `deploy_mode` 参数配置为 `standard` 的前提下部署 MCN 服务。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| 0
+
+| deploy_vmwaremanager
+| 是否安装 VMware 纳管功能。
+| 0
+
+| deploy_grafana
+a| 是否安装 Grafana。
+
+include::../../../../../../_components/note_in_table.adoc[]
+* Grafana 为 BOSS 端的**监控面板**功能。
+* 每个 Zone 都需要部署该服务，无特殊要求，维持默认值即可。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| 1
+
+| deploy_vdc
+a| 是否安装**企业管理**功能。
+
+* 该功能依赖 IAM 功能。
+* 如需安装**企业管理**功能，需同时设置 `deploy_iam` 参数为 1。
+
+| 0
+|===
+
+
+
+== 服务配置
+
+该部分参数用于配置各服务管理角色的 IP 地址、VIP 地址等信息。该部分内容填写说明如下：
+
+* 若为融合部署模式，即上文参数 `deploy_mode` 配置为 `fusion`，则该部分配置内容，仅需填写 zoocassa 相关参数即可。
+* 若实施人员已在<<_网络配置>>中填写了带 `_pools` 的相关参数，则无需填写该部分内容，可以跳过此步骤。
+
+=== BM 配置
+
+当 `deploy_bm` 参数设置为 `1` 时，该部分参数有效。
+
+**配置示例**
+
+[source,yaml]
+----
+bm:
+  bm_mgmt_network_address:
+    - ''
+    - ''
+  bm_network_mode: 'vlan_trunk'
+  bm_switch_loopback_ip: '127.0.0.1'
+  bm_pxe_network_pools:
+    - '198.18.244.2/22-198.18.244.9/22'
+  bm_pxe_network_address:
+    - ''
+    - ''
+  bm_pxe_subnets:
+    - '198.18.244.10/22-198.18.247.250/22'
+  os_provision_subnet: '10.100.100.0/24'
+  os_provision_subnet_gateway: '10.100.100.1'
+  os_provision_subnet_vlan_id: 0
+  bm_ipmi_network_pools:
+    - '198.18.240.2/22-198.18.240.9/22'
+  bm_ipmi_network_address:
+    - ''
+    - ''
+----
+
+**参数说明**
+
+[cols='2,6a,3']
+|===
+| 参数名称 | 参数说明 | 示例
+
+| bm_mgmt_network_address
+| 配置 BM 虚拟机 IP 地址。默认为空。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配。维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+| bm_mgmt_network_address: +
+- '192.168.2.3' +
+- '192.168.2.4'
+
+| bm_network_mode
+a| 配置 BM 网络模式，默认值为 `VLAN_TRUNK`。请根据实际情况进行修改。
+
+* 使用 `VLAN_TRUNK` 模式部署基础网络时，不限交换机型号，但是交换机需要支持 VLAN 配置。当前部署模式下，只支持 VBC 基础网络。
+* 使用 `VLAN` 模式部署基础网络时，只支持 H3C6800 交换机。当前部署模式下，支持 VPC 私有网络也支持 VBC 基础网络。
+* `VXLAN` 模式无法私有部署，请勿选择该网络模式。
+
+| bm_network_mode: 'vlan_trunk'
+
+| bm_switch_loopback_ip
+| BM 回环 IP，默认值为 `127.0.0.1`。维持默认即可，无需修改。
+| bm_switch_loopback_ip: '127.0.0.1'
+
+| bm_pxe_network_pools
+| BM PXE 网络地址池。
+
+* 默认值为 `198.18.244.2/22-198.18.244.9/22`。
+* 若默认网段和用户其他私有业务没有冲突，维持默认即可，无需修改。
+| bm_pxe_network_pools: +
+- '198.18.244.2/22-198.18.244.9/22'
+
+| bm_pxe_network_address
+| 配置 BM 虚拟机 PXE 地址。
+
+* 当已配置 `bm_pxe_network_pools`，则系统会进行自动分配。维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+| bm_pxe_network_address: +
+- '198.18.30.2' +
+- '198.18.30.3'
+
+| bm_pxe_subnets
+| BM PXE 网络子网。
+
+* 填写内容需在 `bm_pxe_network_pools` 配置的网段范围内。
+* 默认为 `192.18.244.10/22-198.18.247.250/22`。
+| bm_pxe_subnets: +
+- '198.18.244.10/22-198.18.247.250/22'
+
+| os_provision_subnet
+| BM 服务子网。根据前期规划进行填写，若无规划，维持默认即可。
+| os_provision_subnet: '10.100.100.0/24'
+
+| os_provision_subnet_gateway
+| BM 服务子网网关。根据前期规划进行填写，若无规划，维持默认即可。
+| os_provision_subnet_gateway: '10.100.100.1'
+
+| os_provision_subnet_vlan_id
+| BM 服务子网 VLAN ID。根据前期规划进行填写，若无规划，维持默认即可。
+| os_provision_subnet_vlan_id: 0
+
+| installer_allocate_ipmi
+a| 是否分配 IPMI 网络。
+
+* `0`，不分配 IPMI 网络，默认值为 `0`。
+* `1`，分配 IPMI 网络。
+| installer_allocate_ipmi: 0
+
+| bm_ipmi_network_pools
+| BM IPMI 网络地址池。
+
+* 当 `installer_allocate_ipmi` 设置为 `1` 时，该参数有效。
+* 根据前期规划进行填写，若无规划，维持默认即可。
+| bm_ipmi_network_pools: +
+- '198.18.240.2/22-198.18.240.9/22'
+
+| bm_ipmi_network_address
+| 手动配置 BM 虚拟机 IMPI 地址。
+
+* 当 `installer_allocate_ipmi` 设置为 `1` 时，该参数有效。
+* 当已配置 `bm_ipmi_network_pools`，则系统会进行自动分配。维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+| bm_ipmi_network_address: +
+- '198.18.244.2' +
+- '198.18.244.4'
+|===
+
+
+
+=== V2V 配置
+
+废弃参数，无需配置。
+
+=== VDI 配置
+
+云桌面相关配置。当 `deploy_vdi` 参数设置 `1` 时，该部分参数有效。
+
+**配置示例**
+
+[source,yaml]
+----
+vdi:
+  vdi_floating_ip: ''
+  vdi_mgmt_network_address:
+    - ''
+    - ''
+----
+
+**参数说明**
+
+[cols='2,6a,3']
+|===
+| 参数名称 | 参数说明 | 示例
+
+| vdi_floating_ip
+| 配置 VDI 服务的 VIP 地址。
+
+* 当已配置 `ks_floating_ip_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+| vdi_floating_ip: '192.168.3.4'
+
+| vdi_mgmt_network_address
+| 配置 VDI 虚拟机 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+| vdi_mgmt_network_address: +
+- '192.168.3.4' +
+- '192.168.3.5'
+|===
+
+
+=== BOSS 配置
+
+用于配置 BOSS 服务相关参数。当 `deploy_boss` 参数设置 `1` 时，该部分参数有效。
+
+**配置示例**
+
+[source,yaml]
+----
+boss:
+  boss_floating_ip: '10.10.0.234'
+  boss_mgmt_network_address:
+    - '10.10.0.215'
+    - '10.10.0.216'
+  boss_smsmsg_type: ''
+  boss_smsmst_url: ''
+----
+
+**参数说明**
+
+[cols='2,6a,3']
+|===
+| 参数名称 | 参数说明 | 示例
+
+| boss_floating_ip
+| 配置 BOSS 服务的 VIP 地址。
+
+* 当已配置 `ks_floating_ip_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+| boss_floating_ip: '10.10.0.234'
+
+| boss_mgmt_network_address
+| 配置 BOSS 虚拟机 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+| boss_mgmt_network_address: +
+- '192.168.3.4' +
+- '192.168.3.5'
+
+| boss_smsmsg_type
+| 默认值为 `nf`，无需修改。
+| boss_smsmsg_type: 'nf'
+
+| boss_smsmsg_url
+| 废弃参数，无需修改，维持默认即可。
+| boss_smsmst_url: ''
+|===
+
+
+=== Warehouse 配置
+
+计费相关配置。当 `deploy_warehouse` 参数设置 `1` 时，该部分参数有效。
+
+**配置示例**
+
+[source,yaml]
+----
+warehouse:
+  remote_warehouse_proxy_host: '127.0.0.1'
+  remote_warehouse_proxy_port: 22
+  warehouse_mgmt_network_address:
+    - '10.10.0.217'
+    - '10.10.0.218'
+----
+
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| remote_warehouse_proxy_host
+| Global Zone 的代理服务器的 IP 地址。默认为 `127.0.0.1`，无需修改。
+
+| remote_warehouse_proxy_port
+| Global Zone 的代理服务器的端口号。默认为 `22`，无需修改。
+
+| warehouse_mgmt_network_address
+| 配置 Warehouse 虚拟机 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+|===
+
+
+=== Eipctl 配置
+
+当 `deploy_eipctl` 参数设置 `1` 时，该部分参数有效。
+
+**配置示例**
+
+[source,yaml]
+----
+eipctl:
+  eipctl_switch_loopback_ip: '127.0.0.1'
+  eipctl_mgmt_network_address:
+    - ''
+    - ''
+    - ''
+    - ''
+----
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| eipctl_switch_loopback_ip| Eipctl 回环地址。维持默认即可。
+| eipctl_mgmt_network_address| 配置 Eipctl 虚拟机 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+|===
+
+
+
+=== Cronus 配置
+
+当 `deploy_cronus` 参数设置 `1` 时，该部分参数有效。
+
+**配置示例**
+
+[source,yaml]
+----
+cronus:
+  influxdb_mgmt_network_address:
+    - '10.10.0.220'
+----
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| influxdb_mgmt_network_address| 配置 InfluxDB 虚拟机 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+|===
+
+
+
+
+=== Rsserver 配置
+
+当 `deploy_rsserver` 参数设置 `1` 时，该部分参数有效。
+
+**配置示例**
+
+[source,yaml]
+----
+rsserver:
+  rs_as_number:
+    - ''
+    - ''
+  rsserver_mgmt_network_address:
+    - ''
+    - ''
+  switch:
+    name:
+      - 'sw01'
+      - 'sw02'
+    as_number:
+      - ‘10000’
+      - ‘10001’
+    loopback_ip:
+      - '1.1.1.1'
+      - '2.2.2.2'
+----
+
+**参数说明**
+
+[cols='1,3a']
+|===
+| 参数名称 | 参数说明
+
+| rs_as_number
+| Rsserver 服务的 ASN。
+
+* 部署过程中，系统将为每个 Rsserver 虚拟机自动生成 ASN。
+* 默认为空，无需手动填写。
+
+| rsserver_mgmt_network_address
+| 配置 Rsserver 虚拟机 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+| switch
+a| 填写交换机信息，需根据实际情况进行填写。若当前待部署环境，使用 Spine Leaf 的组网模式，则该部分参数无效，无需填写。
+
+* name：交换机的名称。
+* as_number：交换机的 ASN。
+* loopback_ip：交换机的回环 IP。
+
+|===
+
+
+
+=== IPv6 配置
+
+用于配置 IPv6 VPC 私有网络、IPv6 VBC 基础网络。
+
+include::../../../../../../_components/note.adoc[]
+
+* 当 `enable_vpc_ipv6` 或 `enable_vbc_ipv6` 设置为 `1` 时，该部分参数有效。
+* IPv6 地址配置时需配置掩码，例如 `2402:e7c0::/48`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+**配置示例**
+
+[source,yaml]
+----
+ipv6:
+  vxnet_ipv6_subnets:
+    - '2402:e7c0::/48'
+  vxnet_ipv6_prefixlen: 64
+  mgmt_ipv6_network: ''
+  vm_base_ipv6_network: ''
+  vm_base_ipv6_network_start: ''
+----
+
+**参数说明**
+
+|===
+| 参数名称 | 参数说明
+
+| vxnet_ipv6_subnets| IPv6 私有网络地址段。
+| vxnet_ipv6_prefixlen| IPv6 私有网络地址段前缀。
+| mgmt_ipv6_network| IPv6 管理网络。
+| vm_base_ipv6_network| IPv6 基础网络地址段。
+| vm_base_ipv6_network_start| IPv6 基础网络起始地址段。
+|===
+
+
+
+=== NeonSAN 配置
+
+用于配置 NeonSAN 集群信息。当 `support_neonsan` 设置为 `1` 时，该部分参数有效。
+
+
+include::../../../../../../_components/note.adoc[]
+
+需根据 NeonSAN 环境的真实信息，配置该部分参数。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+**配置示例**
+
+[source,yaml]
+----
+neonsan:
+  neonsan_zookeeper_ips:
+    - '10.10.0.XX'
+    - '10.10.0.XX'
+    - '10.10.0.XX'
+  neonsan_center_ips:
+    - '10.10.0.XX'
+    - '10.10.0.XX'
+    - '10.10.0.XX'
+  neonsan_cluster_name: 'cluster1'
+----
+
+**参数说明**
+
+[cols='1,2']
+|===
+| 参数名称 | 参数说明
+
+| neonsan_zookeeper_ips| 填写 NeonSAN 的 Zookeeper 集群各节点 IP 地址。
+| neonsan_center_ips| 填写 NeonSAN 的 Center 节点的 IP 地址。
+| neonsan_cluster_name| 填写 NeonSAN 的集群名称。
+|===
+
+
+
+=== 对象存储配置
+
+用于配置对象存储相关参数。当 `support_qingstor` 设置为 `1` 时，该部分参数有效。
+
+include::../../../../../../_components/note.adoc[]
+
+需根据对像存储环境的真实信息，配置该部分参数。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+**配置示例**
+
+[source,yaml]
+----
+qingstor:
+  dns_trusted_segments:
+    - '172.16.0.0/24'
+    - '192.168.0.0/24'
+  qs_networks:
+    - '172.16.0.2/24-172.16.0.20/24'
+  qs_bridge_vip: '172.16.0.100'
+  qs_public_key: '/pitrix/conf/variables/qs_public_key.pub'
+  qs_dns_master: '172.16.0.2'
+  qs_dns_slave: '172.16.0.3'
+----
+
+
+**参数说明**
+
+[cols='1,2']
+|===
+| 参数名称 | 参数说明
+
+| dns_trusted_segments| 对象存储和 IaaS 互通的网段。
+| qs_networks| 对象存储所有网段。
+| qs_bridge_vip| 对象存储网桥 VIP。
+| qs_public_key| 访问对象存储的公钥，Public Key。
+| qs_dns_master| 对象存储 DNS 服务器地址。
+| qs_dns_slave| 对象存储 DNS 服务器地址。
+|===
+
+
+
+=== Proxy 配置
+
+Proxy 服务器相关配置。
+
+**配置示例**
+
+[source,yaml]
+----
+proxy:
+  proxy_floating_ip: '10.10.0.231'
+  proxy_mgmt_network_address:
+    - '10.10.0.211'
+    - '10.10.0.212'
+  proxy_eip_network_address:
+    - '20.0.0.4'
+    - '20.0.0.5'
+----
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| proxy_floating_ip
+| 配置 Proxy 服务 VIP 地址。
+
+* 当已配置 `ks_floating_ip_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+| proxy_mgmt_network_address
+| 配置 Proxy 节点 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+| proxy_eip_network_address
+| 配置 Proxy 节点的公网 IP 地址，根据实际情况进行填写。
+|===
+
+
+
+=== Dnsmaster 节点配置
+
+**配置示例**
+
+[source,yaml]
+----
+dnsmaster:
+  dnsmaster_floating_ip: '10.10.0.7'
+  dnsmaster_mgmt_network_address:
+    - '10.10.0.8'
+    - '10.10.0.9'
+----
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| dnsmaster_floating_ip
+| 配置 Dnsmaster 服务的 VIP 地址。
+
+* 当已配置 `ks_floating_ip_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+
+| dnsmaster_mgmt_network_address
+| 配置 Dnsmaster 节点 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+|===
+
+
+
+=== Webservice 节点配置
+
+**配置示例**
+
+[source,yaml]
+----
+webservice:
+  webservice_floating_ip: '10.10.0.233'
+  webservice_mgmt_network_address:
+    - '10.10.0.213'
+    - '10.10.0.214'
+----
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| webservice_floating_ip
+| 配置 Webservice 服务 VIP 地址。
+
+* 当已配置 `ks_floating_ip_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+
+| webservice_mgmt_network_address
+| 配置 Webservice 节点 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+|===
+
+
+
+=== Pgpool 节点配置
+
+**配置示例**
+
+[source,yaml]
+----
+pgpool:
+  pgpool_floating_ip: '10.10.0.235'
+  pgpool_mgmt_network_address:
+    - ''
+    - ''
+----
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| pgpool_floating_ip
+| 配置 Pgpool 服务 VIP 地址。
+
+* 当已配置 `ks_floating_ip_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+| pgpool_mgmt_network_address
+| 配置 Pgpool 节点 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+|===
+
+
+
+=== Pgserver 节点配置
+
+**配置示例**
+
+[source,yaml]
+----
+pgserver:
+  pgserver_mgmt_network_address:
+    - ''
+    - ''
+----
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| pgserver_mgmt_network_address| 配置 Pgserver 节点 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+|===
+
+
+
+=== Zoocassa 节点配置
+
+**配置示例**
+
+[source,yaml]
+----
+zoocassa:
+  oocassa_floating_ip: '10.10.0.236'
+  zoocassa_mgmt_network_address:
+    - ''
+    - ''
+    - ''
+----
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| zoocassa_floating_ip
+| 配置 Zoocassa 服务 VIP 地址。
+
+* 当已配置 `ks_floating_ip_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+
+| zoocassa_mgmt_network_address
+| 配置 Zoocassa 节点 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+|===
+
+
+
+=== HPC 配置
+
+HPC 相关配置参数。当 `deploy_hpc` 设置为 `1` 时，该部分参数有效。
+
+**配置示例**
+
+[source,yaml]
+----
+hpc:
+  hpc_mgmt_network_address:
+    - ''
+    - ''
+----
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| hpc_mgmt_network_address| 配置 HPC 虚拟机 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+|===
+
+
+
+=== SMC 配置
+
+虚机迁移相关配置参数。当 `deploy_smc` 设置为 `1` 时，该部分参数有效。
+
+**配置示例**
+
+[source,yaml]
+----
+smc:
+  smc_mgmt_network_address:
+    - ''
+    - ''
+----
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| smc_mgmt_network_address| 配置 SMC 虚拟机 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+|===
+
+
+
+=== CloudSat 配置
+
+监控服务相关配置。当 `deploy_cloudsat` 设置为 `1` 时，该部分参数有效。
+
+**配置示例**
+
+[source,yaml]
+----
+cloudsat:
+  cloudsat_mgmt_network_address:
+    - ''
+    - ''
+----
+
+**参数说明**
+
+[cols='1,3a']
+|===
+| 参数名称 | 参数说明
+
+| cloudsat_mgmt_network_address| 配置 CloudSat 虚拟机 IP 地址。
+
+* CloudSat 初始部署时需部署 2 个节点，主备模式。后续扩容 Zone 时，在扩容的 Zone 中，仅需配置 1 个节点。
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+|===
+
+
+
+=== MCN 配置
+
+当 `deploy_mcnctl` 设置为 `1` 时，该部分参数有效。
+
+**配置示例**
+
+[source,yaml]
+----
+mcnctl:
+  mcnctl_mgmt_network_address:
+    - ''
+    - ''
+  mcnctl_sfc_net_card_name: ''
+  mcnctl_mgmt_network_pools: ''
+  mcnctl_tpn_gw_ip: ''
+  mcnctl_tpn_vlan_id: ''
+  mcnctl_sfc_vlan_id: ''
+  mcnctl_zone_sfc_network_pools: '100.64.0.0/16'
+  mcnctl_loopback_sfc_network_pools: '100.65.0.0/16'
+  mcnctl_arp_tunnel_network: '100.65.0.0/30'
+  mcnctl_region_sfc_network_pools: '100.66.0.0/16'
+----
+
+
+**参数说明**
+
+[cols='1,3a']
+|===
+| 参数名称 | 参数说明
+
+| mcnctl_mgmt_network_address
+| 配置 MCN 服务 IP 地址。
+
+* 当已配置 `vm_mgmt_network_pools`，则系统会进行自动分配，维持默认即可。
+* 当需要手动配置时，可根据前期规划内容，按照示例格式进行填写。
+
+| mcnctl_sfc_net_card_name
+| MCN 中流量业务流经的物理网卡，即 MCN Hyper 节点的业务网卡名。例如 `enp3s0f0`、`enp3s0f1`。
+
+| mcnctl_mgmt_network_pools
+|用于配置 MCN 中 `er_node` 和 `sfc_node` 的管理网段。多 Zone 环境中，每个 Zone 需配置不同的网段。
+
+| mcnctl_tpn_gw_ip
+| MCN 控制节点 MCN Hyper 所在的管理网络的网关地址。
+
+| mcnctl_tpn_vlan_id
+| MCN 控制节点所在的管理网络的 VLAN ID，即 MCN Hyper 的 管理网 VLAN ID。
+
+| mcnctl_sfc_vlan_id
+| MCN 区分业务流量的 VLAN ID，即 MCN Hyper 的业务网 VLAN ID。
+
+
+| mcnctl_zone_sfc_network_pools
+|
+
+* 用于配置多个业务节点之间进行通信的网段。默认为 `100.64.0.0/16`。
+* 多 Zone 环境中，每个 Zone 需配置不同的网段。
+
+| mcnctl_loopback_sfc_network_pools
+|
+
+* 用于配置业务节点 loopback IP 所使用的网段。默认为 `100.65.0.0/16`。
+* 多 Zone 环境中，每个 Zone 需配置需保持相同。
+
+| mcnctl_arp_tunnel_network
+|
+
+* 默认为 `100.65.0.0/30`。
+* 与 `mcnctl_loopback_sfc_network_pools` 在同一个大网段。
+* 多 Zone 环境中，每个 Zone 需配置需保持相同。
+
+| mcnctl_region_sfc_network_pools
+|
+
+* 用于配置 MCN 跨 Zone 业务节点之间的通信网段。默认为 `100.66.0.0/16`。
+* 多 Zone 环境中，每个 Zone 需配置需保持相同。
+
+|===
+
+
+
+=== Installer 配置
+
+配置 Installer 服务的 Proxy 转发代理。
+
+* 单 Zone 环境无需配置。
+
+* 多 Zone 环境中，因为 BOSS 是 Global 服务，当 Global zone 和 Sub zone 之间网络无法直接连通时，需要在 Proxy 上配置转发代理，将相应端口的服务代理到实际业务上，否则 BOSS 上将无法展示当前 Zone 的相关信息。
+
+**配置示例**
+
+[source,yaml]
+----
+installer:
+  enable_proxy_forward: 0
+  installer_proxy_port: 9999
+----
+
+**参数说明**
+
+[cols='1,2a']
+|===
+| 参数名称 | 参数说明
+
+| enable_proxy_forward a| 是否配置 Proxy 转发代理。默认配置为 `0`。
+
+* 多 Zone 环境，Global Zone 和 Sub Zone 网络无法直接连通时，需修改配置为 `1`。
+* 其余情况下，保持默认即可。
+
+| installer_proxy_port | * Installer 的代理端口，默认为 `9999`。
+
+* 保持默认值即可，无需修改。
+
+|===
+
+
+
+=== Grafana 配置
+
+配置 Grafana 服务的 Proxy 转发代理。
+
+Grafana 为 BOSS 提供监控功能。当 `deploy_grafana` 设置为 `1` 时，该部分参数有效。
+
+
+**配置示例**
+
+[source,yaml]
+----
+grafana:
+  enable_proxy_forward: 0
+  grafana_proxy_port: 3000
+----
+
+**参数说明**
+
+[cols='1,2']
+|===
+| 参数名称 | 参数说明
+
+| enable_proxy_forward a| 是否配置 Proxy 转发代理。默认配置为 `0`。
+
+* 当 `enable_proxy_forward` 配置为 `1` 时，需修改该参数为 `1`。
+* 其余情况下，保持默认即可。
+
+| grafana_proxy_port | Grafana 的代理端口，默认为 `3000`，保持默认值即可，不用修改。
+|===
+

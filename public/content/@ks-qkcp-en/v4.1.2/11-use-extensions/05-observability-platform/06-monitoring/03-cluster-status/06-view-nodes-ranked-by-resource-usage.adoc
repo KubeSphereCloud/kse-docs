@@ -1,0 +1,39 @@
+---
+title: "View Node Resource Usage Ranking"
+keywords: "Kubernetes, {ks_product-en}, cluster management, monitoring & alerting, cluster status, resource usage"
+description: "This section introduces how to sort nodes by the usage of specific resources."
+weight: 06
+---
+
+:ks_permission: **Monitoring Viewing**
+:ks_navigation: **Monitoring & Alerting > Cluster Status**
+
+This section introduces how to sort nodes by the usage of specific resources.
+
+== Prerequisites
+
+* {empty}
+include::../../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **WhizardTelemetry Monitoring** should have been installed and enabled.
+
+
+== Steps
+
+include::../../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. On the **Cluster Status** page, click the **Resource Usage Ranking** tab to view the resource usage of each node.
++
+--
+* Click the dropdown list in the upper left corner to select sorting by CPU usage, CPU average load, memory usage, disk usage, Inode usage, or pod usage.
+
+include::../../../../../_custom-en/clusterManagement/clusterStatus/clusterStatus-oper-sortAscendingDescending.adoc[]
+
+include::../../../../../_custom-en/clusterManagement/clusterStatus/clusterStatus-oper-exportJsonData.adoc[]
+--

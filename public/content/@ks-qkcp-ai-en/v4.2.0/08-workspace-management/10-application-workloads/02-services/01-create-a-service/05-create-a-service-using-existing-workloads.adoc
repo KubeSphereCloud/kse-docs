@@ -1,0 +1,66 @@
+---
+title: "Create a Service from an Existing Workload"
+keywords: "Kubernetes, {ks_product}, Project Management, Workload, Service, Create Service, Create a Service from an Existing Workload"
+description: "Describes how to create a service and use an existing workload as the backend workload."
+weight: 05
+---
+
+// :ks_include_id: d0a59bd6df0241ea81fc1cb510b9156e
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Application Workloads > Services**
+
+
+This section describes how to create a service and use an existing workload as the backend workload.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+* You need to create a workload in the project in advance. For more information, see link:../../../03-workloads/01-create-a-workload/[Create a Workload].
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the **Create Service** dialog box, select **Specify Workload**.
+
++
+
+include::../../../../../_custom/projectManagement/services/services-oper-setBasicInformation.adoc[]
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../../_custom/clusterManagement/services/services-para-serviceName.adoc[]
+
+include::../../../../../_custom/clusterManagement/services/services-para-serviceAlias.adoc[]
+
+include::../../../../../_custom/clusterManagement/services/services-para-serviceDescription.adoc[]
+|===
+--
+
++
+
+include::../../../../../_custom/clusterManagement/services/services-oper-createAService.adoc[]

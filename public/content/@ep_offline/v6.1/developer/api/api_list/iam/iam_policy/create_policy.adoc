@@ -1,0 +1,101 @@
+---
+title: 创建IAM策略（CreateIAMPolicy）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| controller
+| String
+| false
+| 控制器类型
+
+| effect
+| String
+| false
+| 权限
+
+| path
+| String
+| false
+| 路径
+
+| policy_name
+| String
+| true
+| IAM策略名称
+
+| resources
+| Array
+| false
+| 资源qrn
+
+| statement
+| Array
+| false
+| 策略内容
+
+| tag
+| String
+| false
+| 标签
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| controller
+| String
+| false
+| 控制器类型
+
+| policy_id
+| String
+| false
+| IAM策略ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateIAMPolicy",
+  "effect": "allow",
+  "owner": "usr-ZiEgnuY1",
+  "policy_name": "test",
+  "statement": [
+    {
+      "action": [
+        "ecm:DescribeEips"
+      ],
+      "effect": "allow",
+      "resource": "*"
+    }
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateIAMPolicyResponse",
+  "controller": "self",
+  "policy_id": "iamp-dy7mtlyu",
+  "ret_code": 0
+}
+----

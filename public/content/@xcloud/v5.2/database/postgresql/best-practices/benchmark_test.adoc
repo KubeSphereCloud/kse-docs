@@ -1,0 +1,14 @@
+---
+title: "基准测试"
+description: 本小节主要介绍如何进行 PostgreSQL 集群基准测试。 
+keyword: 基准测试,PostgreSQL,关系型数据库,数据库
+weight: 05
+collapsible: false
+---
+测试模型：TPC-C
+
+采用满足 TPC-C 基准测试规范的 PostgreSQL 测试工具 BenchmarkSQL 进行基准测试。
+
+在 2核4G 规格的数据库下，5 个仓库，每个仓库 10 个销售端，tpmC 测试结果为 19888，详情见下图：
+
+image::/images/cloud_service/database/postgresql/benchmarksql1.png[benchmarksqlTestResult]

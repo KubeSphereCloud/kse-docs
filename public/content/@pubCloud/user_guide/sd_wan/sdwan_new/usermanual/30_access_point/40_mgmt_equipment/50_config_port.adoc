@@ -1,0 +1,57 @@
+---
+title: "端口角色配置"
+draft: false
+collapsible: false
+weight: 50
+---
+本章节介绍如何配置端口角色。
+
+== 前提条件
+
+* 已获取管理控制台的账号和密码。
+* 已创建连接云网。
+* 已创建接入点。
+
+== 注意事项
+
+* 将角色设置为 WAN 口时，默认绑定**内网流量组**。
+* 当端口角色发生变化时，控制器需要重下端口组并配置。
+
+== 修改端口角色
+
+. 登录管理控制台。
+. 选择**产品与服务** > *网络服务* > *SD-WAN（新版）*，进入**连接云网**页面。
++
+image::/images/cloud_service/sd_wan/qs_cloud_network.png[]
+
+
+. 在左侧导航栏中，点击**接入点**，进入**接入点**页面。
++
+image::/images/cloud_service/sd_wan/qs_light_access.png[]
+
+. 点击已创建的接入点的名称，进入接入点详细信息页面。
+. 选择**设备管理** > *端口角色配置*，进入**端口角色配置**页面。
++
+image::/images/cloud_service/sd_wan/um_port_role_config.png[]
++
+或者在**设备管理** > **WAN 配置**页面，点击右上角的**自定义端口角色**，进入**端口角色配置**页面。
++
+image::/images/cloud_service/sd_wan/create_port_group_01.png[自定义端口角色]
+
+. 勾选待修改端口角色的端口，点击**修改端口角色**，**端口角色**变更为可编辑状态。
++
+
+include::../../../../../../../_components/note.adoc[]
+您也可以在端口所在行的**操作**列中，点击**修改**，修改端口的角色。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 在**端口角色**下拉列表中，选择端口角色，可选择为 *WAN* 或 *LAN*。
++
+image::/images/cloud_service/sd_wan/um_port_role_choose.png[]
+
+. 选择完成后，点击**确定**，完成端口角色修改。
++
+若页面弹出**编辑成功**提示信息，则说明修改端口角色成功。
+
+. 点击**应用修改**，使修改生效。

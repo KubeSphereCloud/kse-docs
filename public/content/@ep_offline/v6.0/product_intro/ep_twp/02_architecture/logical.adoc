@@ -1,0 +1,123 @@
+---
+title: "软件逻辑架构"
+weight: 20
+---
+
+//https://cwiki.yunify.com/pages/viewpage.action?pageId=145933216
+
+image::/images/ep_offline/ep_twp/platform_logical_struc.png[]
+
+青云企业云采用多区域多可用区的全局统一管理架构，平台从逻辑上主要分为应用层、Global 服务层和 Zone 服务层：
+
+* 应用层为企业云提供 BOSS、Console、VNC 等用户侧交互界面。
+
+* Global 为逻辑上划分的区。Global 提供了云平台全局的 API 服务，并负责云平台的全局管理。Global 接收用户侧的资源请求，并将资源请求转发到不同的 Zone 进行处理。同时，Global 服务自身也会处理 Global 级别的请求，例如监控服务、告警通知、账户管理和计费系统等，保障每个租户在整个云平台有统一的监控信息，账户信息、计费信息等。
+
+* Zone 表示可用区，根据物理区域进行划分。云平台支持多个区域（Region），每个区域下可以有多个 Zone。Zone 具有独立的管理服务器，只为本 Zone 内的资源进行服务。Zone 通过 fg 网关服务接收 Global 的消息，对实际 IaaS 资源层的处理请求交给 bot 服务处理。bot 是部署在每个计算节点的具有数据采集、计算和分析的软件机器人程序，可以 7x24 小时监控着云中所有资源，为调度决策提供数据依据。
+
+
+Global 服务和 Zone 服务均包含若干子服务，各服务正常工作需要依赖不少中间件与数据库，根据不同的云平台部署场景，各服务或组件会还可能存在不同程度的共用。例如，在小规模数据中心单 Zone 部署时，通常 Global 与 Zone会共用 PostgreSQL、Zookeeper、Cassandra 等服务组件；多 Zone 组成 Region 部署时，两个 Zone 会共用 PostgreSQL 数据库。
+
+Global 及 Zone 服务在平台整体架构中所处位置以及服务之间的依赖关系如下图所示。
+
+image::/images/ep_offline/ep_twp/platform_service_struc.png[]
+
+
+
+*Global 服务说明：*
+
+[cols="1,3"]
+|===
+|服务名称 |说明
+
+|api_server
+|对外提供 HTTP API 服务。API Server 是云平台核心系统的接入层，用户的所有请求，包括控制台以及 API 请求都会经由 API Server，然后 API Server 通过 ZMQ 下发到后端服务。
+
+|ws_server
+|云平台 API 网关，Global 服务入口，提供参数检查、访问控制、请求转换和转发，并提供工单、全局配额、通知列表、消息中心等全局资源的业务处理。
+
+|distributed_server
+|全局分布式锁服务。为防止资源操作冲突，每次对资源的操作都会对资源加锁。
+
+|account_server
+|处理账户相关的业务逻辑，包括：账户和子账户以及用户认证的功能，会话管理，API 密钥管理和第三方登录。
+
+|io_server
+|与用户客户端建立 websocket 连接，与 Region/Zone 中的 push server 配合，提供资源状态变化等推送服务。
+
+|nf_server
+|通过站内信、短信、邮件、Webhook 等方式发送产品通知或告警通知给用户。
+
+|billing_broker
+|计费服务前置网关，转发计费接口给后面子服务。
+
+|billing_delegator
+|上报 EIP 流量数据给计费。
+
+|billing_daemon
+|异步执行扣费。
+
+|billing_resource
+|价格和计费资源任务队列管理。
+
+|billing_user
+|处理账户余额查询、充值、账单等功能。  
+
+|===
+
+*Zone 服务：*
+
+[cols="1,3"]
+|===
+|服务名称 |说明
+
+|fg_server
+|Region/Zone 服务入口，是 Zone 和 Global 消息交互的唯一通道。 +
+主要功能是为用户界面和 API 服务提供接口，处理所有 Zone 内资源相关的业务逻辑。
+
+|nf_server
+|处理系统硬件和服务相关相关告警，将消息转发到 Global 的 nf_server。
+
+|scheduler_server
+|提供控制台上的**定时器**功能，可在指定的周期重复执行一系列任务，也可仅执行一次，每个任务支持指定多个资源批量处理。
+
+|autoscaling_server
+|提供控制台上**自动伸缩**的功能，可以帮助用户基于资源的监控告警规则动态调节配置或集群规模。
+
+|alarm_server
+|提供监控告警功能，可基于资源层面的监控数据，设置告警条件和通知列表，还可以用来对特定事件监控。
+
+|cb_server
+|提供控制台上云服务器的 VNC 功能，使用户可以通过浏览器访问云服务器。
+
+|push_server
+|配合 Global 的 io_server 完成消息推动功能。
+
+|name_server
+|提供内网域名服务。
+
+|===
+
+*中间件及数据库组件：*
+
+[cols="1,3"]
+|===
+|组件名称 |说明
+
+|PostgreSQL
+|提供连接池、主备流复制、高可用切换等功能。
+
+|Zookeeper
+|用于集群节点管理，服务注册与发现，以及提供分布式锁服务。
+
+|Memcache
+|用于存放前端各类缓存数据。
+
+|Cassandra
+|用于存储用户附件、自定义数据和监控数据等。
+
+|Redis
+|用于存放计费服务的缓存数据。
+
+|===
+

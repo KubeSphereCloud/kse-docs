@@ -1,0 +1,59 @@
+---
+title: '建立节点间免密访问'
+weight: 2
+---
+. 逐一登录新增节点。
+
+. 执行如下命令，在新增节点上生成一个公私钥对。
++
+[,shell]
+----
+ssh-keygen
+----
++
+include::../../../../../../_components/note.adoc[]
+出现提示信息时直接回车即可。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 查看生成的公私钥对，查询结果中 id_rsa.pub 为公钥。
++
+[,shell]
+----
+ls .ssh/
+authorized_keys  id_rsa  id_rsa.pub 
+
+cat id_rsa.pub
+----
+. 逐一登录 {product_name} 集群原有节点，将步骤 3 中查询到的新增节点的公钥添加至原 NeonAN 集群节点的 authorized_keys 文件里。
++
+[,shell]
+----
+vi .ssh/authorized_keys
+----
+
+. 将 {product_name} 集群中其他所有节点的公钥，添加至新增节点的 authorized_keys 文件里。
+.. 逐一登录原集群节点，查看原集群各节点公钥。
++
+[,shell]
+----
+cat .ssh/id_rsa.pub
+----
+
+.. 登录新增节点，将原集群节点的公钥添加至新增节点。
++
+[,shell]
+----
+vi .ssh/authorized_keys
+----
+
+. 新增节点和原 {product_name} 集群上所有节点间互相通过 ssh 登录访问。
++
+[,shell]
+----
+ssh xx.xx.xx.xx
+----
++
+include::../../../../../../_components/note.adoc[]
+命令中的 IP 地址为集群中任意节点的管理 IP，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+

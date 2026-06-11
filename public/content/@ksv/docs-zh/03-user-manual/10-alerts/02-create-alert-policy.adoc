@@ -1,0 +1,102 @@
+---
+title: "创建告警策略"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 告警, 策略, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建告警策略。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 0b4dd8e0389a429ea09c85b1c51c2477
+:ks_xref_id: 3225a50baa6e41de81648e56f0064dc7
+:ks_comp: ../../../components/
+:ks_title: 创建告警策略
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建告警策略。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 告警, 策略, 创建
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建告警策略。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=cd59c4bea4704ad2a2f1ba6c4449a70c]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/alerts/alert-manage-prerequisites.adoc[]
+
+:relfileprefix: ./
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=6f969d23e8514f209560b5e15132a6b3]
+
+include::../../../_custom/alerts/alert-steps.adoc[]
+
+. 在**告警策略**页签，点击右上角的**创建**。
+
+. 在弹出的对话框中为告警策略配置基本信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|用户自定义的告警策略名称。
+
+include::../../../_custom/security-groups/naming-convention.adoc[]
+
+|别名
+|告警策略的别名。
+
+include::../../../_custom/alerts/alias-naming-convention.adoc[]
+
+|告警持续时间（分钟）
+|告警的持续时间。
+
+告警满足告警规则的时间达到预设值后，告警将变为触发中状态。
+
+|告警级别
+|告警的严重程度，包括以下三个级别：
+
+include::../../../_custom/alerts/alert-severity-levels.adoc[]
+
+|描述
+|告警策略的描述信息。
+
+include::../../../_custom/networks/description-convention.adoc[]
+|===
+--
+
+. 基本信息设置完成后，点击**下一步**为告警策略配置告警规则。
++
+--
+[cols='1a,3a']
+|===
+|参数 |描述
+
+|监控目标类别
+|需要监控的目标类别。目前支持对节点和虚拟机进行监控。
+
+|告警规则
+|为告警策略设置的告警规则。根据监控目标类别的不同，支持的告警规则也有所不同。
+
+* 对于**节点**，可以基于以下指标设置规则：CPU 利用率、可用内存、内存利用率、本地磁盘可用空间、本地磁盘空间利用率、本地磁盘读取 IOPS、本地磁盘写入 IOPS、本地磁盘读取吞吐量和本地磁盘写入吞吐量。
+
+* 对于**虚拟机**，可以基于以下指标设置规则：CPU 利用率、内存利用率、本地磁盘读取 IOPS、本地磁盘写入 IOPS、网络发送数据速率和网络接收数据速率
+
+|监控目标
+|需要进行监控的节点或虚拟机名称。您可以对一个或多个目标进行监控。
+|===
+--
+
+. 点击**确定**。告警策略创建后将显示在告警策略列表中。

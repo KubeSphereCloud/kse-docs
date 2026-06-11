@@ -1,0 +1,74 @@
+---
+title: "Install Demo Extensions"
+keywords: "Kubernetes, {ks_product}, Quick Start, Installation, Extensions, Example, DevOps"
+description: "Show how to install extensions in KubeSphere Enterprise with DevOps as an example."
+weight: 02
+---
+
+KubeSphere extensions run on KubeSphere Core to extend and enhance the capabilities of KubeSphere, further meeting different business requirements of enterprises.
+
+This section demonstrates how to subscribe to and install extensions in the KubeSphere Enterprise web console, taking DevOps as an example.
+// For more information on managing extensions, please refer to the link:../../06-extension-user-guide/[Extension Management] section.
+
+After the DevOps installation is complete, you can create DevOps projects in a workspace. 
+// For more information on DevOps projects, please refer to link:../../11-use-extensions/01-devops/[DevOps].
+
+
+== Prerequisites
+
+* You can log in to the {ks_product-en} web console with the **platform-admin** role. 
+// For more information, please refer to link:../../05-users-and-roles/01-users/[Users] and link:../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* Register a link:https://kubesphere.cloud/en/sign-up/[KubeSphere cloud] account.
+
+== Subscription Steps
+
+. Log in to the {ks_product-en} web console with a user having the **platform-admin** role.
+
+. Click **KubeSphere Marketplace** in the upper-left corner of the {ks_product-en} web console to enter the KubeSphere Marketplace page.
+
+. Search for **DevOps** and click **Subscribe**.
++
+--
+* Click on the extension name to access the extension's details page and view basic information, overview, changelog, permission requirements, etc.
+
+* Click image:/images/ks-qkcp/zh/icons/chevron-down.svg[chevron-down,18,18] on the left side of the page to select the version of the extension.
+
+* Click **View Files** to see all files in the Helm Chart package of this extension. Click image:/images/ks-qkcp/zh/icons/copy.svg[copy,18,18] on the right side of the page to copy the content of the currently viewed file, and click image:/images/ks-qkcp/zh/icons/download-dark.svg[download-dark,18,18] to download the file to your local machine.
+--
+
+. If you haven't bound your https://kubesphere.cloud/login/[KubeSphere cloud account], bind your it first, and then proceed with the subscription process.
+
+. On the Order Confirmation and Payment page, select the **Plan** and **Duration**, then submit the order for payment.
+
+. After the payment is completed, on the extension details page in the KubeSphere Marketplace, click **Manage > Install** to enter the installation process.
+
+
+== Installation Steps
+
+. On the **Version Selection** tab of the installation dialog, select the version number of DevOps and install all required dependencies (if any). Then click **Next**.
+
++
+--
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+During the installation, it detects whether the extension has dependencies. Dependencies are categorized as required and optional.
+
+If a required dependency is **Not Ready**, you need to install the required version first to ensure the normal use of the extension. Optional dependencies do not affect the installation of the extension.
+|===
+--
+
+. On the **Extensions Installation** tab, make optional modifications to the configuration of DevOps (if needed), and then click **Start Installation**.
+
++
+image:/images/ks-qkcp/en/v4.0/install-extensions.png[,100%]
+
+. On the **Cluster Selection** tab, select clusters by name or label. Multiple clusters can be selected.
+
+. On the **Diff Config** tab, edit the selected cluster's YAML file, or leave it unchanged to use the default configuration. Then click **OK** to start configuring the cluster agent.
+
+Once the installation is complete, the extension is enabled by default. You can configure, upgrade, disable, or uninstall extensions in the extensions center.

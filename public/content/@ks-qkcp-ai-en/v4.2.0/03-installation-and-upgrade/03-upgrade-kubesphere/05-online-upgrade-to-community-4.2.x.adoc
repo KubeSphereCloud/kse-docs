@@ -1,0 +1,230 @@
+---
+title: "Upgrade from KubeSphere Open Source Edition to Community Edition v4.2.0"
+weight: 05
+---
+
+This section describes how to upgrade from KubeSphere Open Source Edition v3.x or v4.x to KubeSphere Community Edition v4.2.0.
+
+== Prerequisites
+
+* Ensure the current Kubernetes version is v1.23.x ~ v1.32.x.
+
+* If any extensions have special configurations, back up the extension configurations. In the "Extension Configuration" dialog box, download the file for backup.
+
+* {empty}
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-prer-backUpData.adoc[]
+
+== Step 1: Pre-upgrade Environment Check
+
+. Check the current cluster scale.
++
+The total cluster scale for KubeSphere Community Edition **must not exceed 128 vCPUs**. Once the cluster exceeds this scale, you can only view resources but cannot create or modify them. Run the following script before upgrading to check the current cluster scale.
+
+.. Create the `collect-node-info.sh` script file.
++
+--
+[source,bash]
+----
+vi collect-node-info.sh
+----
+
+Paste the following content and save:
+
+[source,bash]
+----
+#!/bin/bash
+t=0
+printf "┌────────────────────┬─────────────────────────┬────────────┐\n│ %-18s │ %-23s │ %-10s │\n├────────────────────┼─────────────────────────┼────────────┤\n" "Cluster" "Node" "CPU(cores)"
+while IFS=$'\t' read -r c k; do
+  [[ -n $k ]] && f=$(mktemp) && echo "$k"|base64 -d>"$f" && a="--kubeconfig=$f"
+  cc=0
+  while read -r n cpu; do
+    [[ $cpu == *m ]] && v=$(awk "BEGIN{print ${cpu%m}/1000}") || v=$cpu
+    printf "│ %-18s │ %-23s │ %-10s │\n" "$c" "$n" "$v"
+    cc=$(awk "BEGIN{print $cc+$v}")
+  done < <(kubectl $a get nodes -o jsonpath='{range .items[*]}{.metadata.name}{" "}{.status.capacity.cpu}{"\n"}{end}')
+  printf "│ %-18s │ %-23s │ %-10s │\n" "$c" "Cluster Total" "$cc"
+  t=$(awk "BEGIN{print $t+$cc}")
+  [[ -n $f ]] && rm -f "$f"
+done < <(
+  if [[ $(kubectl get clusters -o json 2>/dev/null | jq '.items|length') -eq 0 ]]; 
+    then echo -e "\t"
+  else
+    kubectl get clusters -o json | jq -r '.items[] | [.metadata.name,.spec.connection.kubeconfig] | @tsv'
+  fi
+)
+printf "├────────────────────┼─────────────────────────┼────────────┤\n│ %-18s │ %-23s │ %-10s │\n└────────────────────┴─────────────────────────┴────────────┘\n" "All Clusters" "" "$t"
+----
+--
+
+.. Run the script.
++
+====
+[.admon.note,cols="a"]
+|===
+|Note
+
+|Before executing the script, you need to install the `jq` JSON processor. Please choose the corresponding installation method based on your operating system.
+|===
+
+[source,bash]
+----
+bash collect-node-info.sh
+----
+====
+
+.. Check the CPU data in the last column.
+
+. Confirm that the extensions to be upgraded are within the support list of the Community Edition.
++
+--
+include::../../../_custom/extensionSupported/community-supported.adoc[]
+--
+
+. Check if the current deployment environment meets the link:../../01-preparations/01-supported-k8s/[KubeSphere Environment Requirements].
+
+== Step 2: Data Backup
+
+. Install the KubeSphere command-line tool on a cluster node.
++
+[source,bash]
+----
+IMAGE=registry.cn-beijing.aliyuncs.com/kse/cli:latest
+POD=kubesphere-cli
+NS=default
+
+kubectl run "$POD" -n "$NS" --image="$IMAGE" -- sleep 120 \
+  && kubectl wait --for=condition=Ready pod/"$POD" -n "$NS" --timeout=60s \
+  && kubectl cp "$NS/$POD":/usr/local/bin/ks /usr/local/bin/ks \
+  && chmod +x /usr/local/bin/ks \
+  && ln -sf /usr/local/bin/ks /usr/local/bin/kubectl-ks \
+  && kubectl delete pod "$POD" -n "$NS" --wait=false
+----
+
+
+. Check the running status of KubeSphere components.
++
+--
+[source,bash]
+----
+ks status
+----
+
+If the following information is displayed at the end, it indicates that all components are running normally.
+
+----
+✅ All components are running normally. Review any warning messages above if applicable.
+----
+--
+
+. Back up the CR (Custom Resource) data of KubeSphere and its extensions.
++
+--
+[source,bash]
+----
+ks backup
+----
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|This command only backs up CR data. To avoid data loss, please back up all important data before uninstallation.
+
+|===
+
+If the following information is displayed at the end, it indicates a successful backup.
+
+----
+✅ Backup completed. File saved at: 20250925/backup.tgz
+----
+--
+
+== Step 3: Uninstallation and Data Cleanup
+
+Uninstall KubeSphere and its extensions and clean up the data.
+
+[source,bash]
+----
+ks uninstall --purge
+----
+
+If the following information is displayed at the end, it indicates successful uninstallation and cleanup.
+
+----
+✅ Uninstallation completed successfully.
+----
+
+== Step 4: Install KubeSphere Community Edition
+
+Refer to the link:../../02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/#_install_kubesphere[deployment documentation] to install KubeSphere.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|The installation commands for KubeSphere Community Edition and KubeSphere Enterprise Edition are the same.
+
+|===
+
+== Step 5: Install Extensions
+
+ifeval::["{file_output_type}" == "html"]
+In the KubeSphere web console, link:../../../06-extension-management/01-install-extensions/[install the extensions you need]. For extensions with backed-up special configurations, you can upload the configuration file with one click.
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+In the KubeSphere web console, install the extensions you need. For extensions with backed-up special configurations, you can upload the configuration file with one click.
+
+endif::[]
+
+== Step 6: Data Migration
+
+Migrate data from KubeSphere or its extensions, restore backup data, and achieve cross-cluster data migration.
+
+**Currently, only the following three types of data migration are supported:**
+
+* `ks-core`: Includes users, RBAC rules, and workspaces.
+
+* `DevOps`: Includes credentials, pipelines, and continuous deployment.
+
+* Data of the ``KubeSphere Gateway`` (gateway).
+
+**Migration Steps:**
+
+. Migrate ks-core data.
++
+--
+[source,bash]
+----
+ks migrate ks-core
+----
+
+After executing the command, follow the prompt to enter `y` and press Enter. You will see that ks-core related resources have been automatically created. Example output:
+----
+15:44:29 INFO  Found 2 users to migrate
+15:44:29 INFO  iam.kubesphere.io/v1beta1, Kind=User/admin in cluster unchanged
+15:44:29 INFO  iam.kubesphere.io/v1beta1, Kind=User/cindy in cluster created
+15:44:29 INFO  Found 2 workspacetemplates to migrate
+15:44:29 INFO  tenant.kubesphere.io/v1beta1, Kind=WorkspaceTemplate/system-workspace in cluster unchanged
+15:44:29 INFO  tenant.kubesphere.io/v1beta1, Kind=WorkspaceTemplate/ws1 in cluster created
+----
+
+Check in the KubeSphere web console, and you will find that users, workspaces, etc., have been successfully migrated.
+--
+
+. Migrate extension data, using DevOps as an example.
++
+--
+[source,bash]
+----
+ks migrate devops
+----
+
+After executing the command, follow the prompt to enter `y` and press Enter. You will see that DevOps related resources have been automatically created.
+
+Check in the KubeSphere web console, and you will find that credentials, pipelines, and continuous deployment have been successfully migrated.
+--
+
+At this point, the KubeSphere upgrade is complete.

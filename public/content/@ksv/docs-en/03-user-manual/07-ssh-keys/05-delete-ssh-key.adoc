@@ -1,0 +1,69 @@
+---
+title: "Delete SSH keys"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, SSH, keys, deletion"
+description: "This topic describes how to delete SSH keys in the {ks_product} web console."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 62fe90625c644e98ae50c157884f7d0c
+:ks_xref_id: 3fa175a8502b4f308fcca0d76b77eabc
+:ks_comp: ../../../components/
+:ks_title: Delete SSH keys
+:ks_description: This topic describes how to delete SSH keys in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, SSH, keys, deletion
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete SSH keys in the {ks_product_abbr_full} web console. For security purposes, each user can delete only the SSH keys created on their own.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=1e396e9d123142a99392460b75ed75fb]
+
+include::../../../_custom-en/ssh/ssh-key-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete an SSH keylink:[id=6a3653f8f5bb45839b5e29abf84808e3]
+
+include::../../../_custom-en/ssh/ssh-key-steps.adoc[]
+
+. Find the SSH key that you want to delete, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Delete** from the drop-down list.
+. Click **OK**.
++
+--
+// Warning
+
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+The SSH key cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple SSH keys at a timelink:[id=0ff2bebb0b2b4e408e66cd0c7ae9ffc8]
+
+include::../../../_custom-en/ssh/ssh-key-steps.adoc[]
+
+. On the **SSH Keys** page, select the check boxes next to the SSH keys that you want to delete and click **Delete**.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+SSH keys cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

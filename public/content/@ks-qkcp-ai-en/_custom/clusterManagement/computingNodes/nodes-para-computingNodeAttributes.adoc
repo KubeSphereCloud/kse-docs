@@ -1,0 +1,39 @@
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Status
+|
+include::nodes-para-computingNodeStatus.adoc[]
+
+|IP Address
+|The IP address of the node.
+
+|Role
+|
+include::../nodes/nodes-para-nodeRole_new.adoc[]
+
+|GPU Model
+|The model of the GPU installed on the node.
+
+|Video Memory
+|The capacity of the GPU's video memory.
+
+|Type
+|The type of GPU.
+
+|Scheduling Policy
+|
+* **Exclusive GPU**: A task exclusively occupies all computing and video memory resources of a physical GPU, thereby achieving optimal and stable performance.
+
+* **Isolated Sharing**: A physical GPU is partitioned into multiple vGPUs through virtualization technology, allowing multiple tasks to share the GPU simultaneously while providing resource isolation between tasks.
+
+|GPU Count
+|The number of GPUs installed on the node.
+
+|GPU Status
+|The number of GPUs in normal and abnormal status.
+
+|Creation Time
+|The time when the node joined the current cluster.
+|===

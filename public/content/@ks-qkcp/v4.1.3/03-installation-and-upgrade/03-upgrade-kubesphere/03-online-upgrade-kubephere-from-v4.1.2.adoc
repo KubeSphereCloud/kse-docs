@@ -1,0 +1,294 @@
+---
+title: "从 v4.1.2 在线升级到 v4.1.3"
+keywords: "Kubernetes, {ks_product}, 安装, 升级{ks_product_left}"
+description: "介绍如何升级 KubeSphere 企业版。"
+weight: 03
+---
+
+本节介绍如何在可访问 Internet 的情况下从{ks_product_left} v4.1.2 升级到{ks_product_left} v4.1.3。
+
+
+== 前提条件
+
+* 请确保当前{ks_product_both}版本为 v4.1.2。
+
+* 请确保当前 Kubernetes 版本为 v1.21.x ~ v1.30.x。
+
+* 若扩展组件有特殊配置，需备份扩展组件配置。在“扩展组件配置”对话框中，下载文件备份。
+
+* {empty}
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-prer-backUpData.adoc[]
+
+
+== 升级{ks_product_left}
+
+{ks_product_right} v4.1 及后续版本采用 helm chart 方式升级 ks-core。
+
+=== 升级 host 集群
+
+. 确认当前集群为待升级集群。
++
+[source,bash]
+----
+kubectl get node -o wide
+----
+
+. {ks_product_right} v4.1.3 移除了 `kse-extensions-publish`，将其整合到了 `ks-core` 的 chart 中，因此在升级至 v4.1.3 之前，应该对{ks_product_both}历史版本创建的扩展组件资源进行补丁操作。
+
+.. 创建 `extension-resources-patch.sh` 脚本。该脚本主要用于处理 v4.1.2 及之前版本通过 kse-extension-publish 创建扩展组件资源产生的冲突。
++
+--
+[source,bash]
+----
+vi extension-resources-patch.sh
+----
+
+粘贴以下内容并保存：
+
+[source,bash]
+----
+#!/bin/bash
+ 
+# 解决资源模板冲突
+kubectl -n kubesphere-system label deploy extensions-museum app.kubernetes.io/managed-by=Helm
+kubectl -n kubesphere-system annotate deploy extensions-museum meta.helm.sh/release-name=ks-core
+kubectl -n kubesphere-system annotate deploy extensions-museum meta.helm.sh/release-namespace=kubesphere-system
+ 
+kubectl -n kubesphere-system label service extensions-museum app.kubernetes.io/managed-by=Helm
+kubectl -n kubesphere-system annotate service extensions-museum meta.helm.sh/release-name=ks-core
+kubectl -n kubesphere-system annotate service extensions-museum meta.helm.sh/release-namespace=kubesphere-system
+ 
+kubectl -n kubesphere-system label secret extensions-museum-certs app.kubernetes.io/managed-by=Helm
+kubectl -n kubesphere-system annotate secret extensions-museum-certs meta.helm.sh/release-name=ks-core
+kubectl -n kubesphere-system annotate secret extensions-museum-certs meta.helm.sh/release-namespace=kubesphere-system
+ 
+# 解决 repository reference 冲突
+for item in `kubectl get extensionversions.kubesphere.io -o jsonpath="{.items[*].metadata.name}"`;do kubectl patch extensionversions.kubesphere.io $item --type merge -p '{"spec":{"repository":"extensions-museum"}}';kubectl label extensionversions.kubesphere.io $item kubesphere.io/repository-ref=extensions-museum;done
+for item in `kubectl get extensions.kubesphere.io -o jsonpath="{.items[*].metadata.name}"`;do kubectl label extensions.kubesphere.io $item kubesphere.io/repository-ref=extensions-museum;done
+----
+--
+
+.. 运行脚本。
++
+[source,bash]
+----
+bash extension-resources-patch.sh
+----
+
+
+
+. 检查当前集群的 ks-core 配置。
++
+--
+[source,bash]
+----
+helm get values -n kubesphere-system ks-core
+----
+--
+
+. 创建升级配置文件，输入以下内容。
++
+--
+如果上一步中有除镜像仓库、镜像版本、cloud 和 upgrade 之外的其它参数，请一并添加至以下配置文件中。
+
+[source,bash]
+----
+cat <<EOF > kse-v4.1.3-host-custom-values.yaml
+----
+
+[source,bash]
+----
+# 注意集群角色参数由 role 变更为 multicluster.role
+multicluster:
+  role: host
+
+# 开启 ks-core 组件（ks-apiserver、ks-controller-manager、ks-console）的高可用
+# 请根据集群实际情况配置
+ha:
+  enabled: false
+
+# 开启 redis 高可用，ks-apiserver 高可用依赖 redis
+# 如该参数为 false，默认 kubesphere-system 下的 redis 为单副本，请根据集群实际情况配置
+redisHA:
+  enabled: false
+EOF
+----
+--
+
+. 执行以下命令开始升级。
++
+--
+[source,bash]
+----
+chart=oci://hub.kubesphere.com.cn/kse/ks-core
+version=1.1.1
+helm upgrade --install -n kubesphere-system ks-core $chart --version $version -f kse-v4.1.3-host-custom-values.yaml --wait --debug
+----
+--
+
+. 参考以下步骤，检查 host 集群是否升级成功。
+
+.. 执行以下命令，upgrade job 应该是成功完成的状态，如下所示。
++
+[source,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get job | grep upgrade
+ks-core-post-upgrade    1/1           16s        28m
+ks-core-pre-upgrade     1/1           58s        31m
+prepare-upgrade         1/1           26s        32m
+----
+
+.. 执行以下命令，pod（ks-apiserver, ks-console, ks-controller-manager）应该为 running 状态，如下所示。
++
+[source,bash]
+----
+root@xxx:~# watch kubectl get pod -n kubesphere-system
+NAME                                     READY   STATUS      RESTARTS        AGE
+ks-apiserver-594bb884db-phrlv            1/1     Running     0               28m
+ks-console-7cd55dd9f9-f2jl9              1/1     Running     0               28m
+ks-controller-manager-785fc676dc-9d9j2   1/1     Running     0               28m
+----
+
+. 使用原有的 Web 控制台的 IP 地址、管理员用户名和管理员密码，并使用网页浏览器登录 v4.1.3 的{ks_product_left} Web 控制台。
+
+. 根据激活提示点击**激活**，导入{ks_product_left}的 license。
+
+. 检查 host 集群各项功能和数据是否正常。
+
+=== 升级 member 集群
+
+升级 member 集群与升级 host 集群的步骤基本一致，但需注意 member 集群中的特殊参数配置。
+
+. 确认当前 member 集群为待升级集群。
++
+[source,bash]
+----
+kubectl get node -o wide
+----
+
+. 检查 member 集群的 ks-core 配置。
++
+--
+[source,bash]
+----
+helm get values -n kubesphere-system ks-core
+----
+--
+
+. 获取 member 集群的 jwtSecret 值。
++
+[source,bash]
+----
+kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v "apiVersion" | grep jwtSecret
+----
+
+. 创建升级配置文件，输入以下内容。
++
+====
+如果上一步中有除镜像仓库、镜像版本、cloud 和 upgrade 之外的其它参数，请一并添加至以下配置文件中。
+
+[source,bash]
+----
+cat <<EOF > kse-v4.1.3-member-custom-values.yaml
+----
+
+[source,bash]
+----
+authentication:
+  issuer:
+    jwtSecret: <REPLACE_ME> # 注意替换
+
+# 注意集群角色参数由 role 变更为 multicluster.role
+multicluster:
+  role: member
+EOF
+----
+====
+
+. 执行以下命令开始升级。
++
+--
+[source,bash]
+----
+chart=oci://hub.kubesphere.com.cn/kse/ks-core
+version=1.1.1
+helm upgrade --install -n kubesphere-system ks-core $chart --version $version -f kse-v4.1.3-member-custom-values.yaml --wait --debug
+----
+--
+
+. 参考以下步骤，检查 member 集群是否升级成功。
+
+.. 执行以下命令，upgrade job 应该是成功完成的状态，如下所示。
++
+[source,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get job | grep upgrade
+ks-core-post-upgrade    1/1           16s        28m
+ks-core-pre-upgrade     1/1           58s        31m
+prepare-upgrade         1/1           26s        32m
+----
+
+.. 执行以下命令，ks-agent pod 应该为 running 状态，如下所示。
++
+[source,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get pod
+NAME                          READY   STATUS      RESTARTS        AGE
+ks-agent-5dc5b57977-4x6mf     2/2     Running     0               59m
+----
+
+. 如果您在以上升级命令中增加了自定义配置（如，--set a=b），需在 Web 控制台同步添加 member 集群的自定义配置。
++
+--
+方法：在**集群管理**页面，在需要操作的集群右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑配置**。在弹窗中，输入 `a: b`。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|如果您在升级命令中未加入自定义的配置，则无需在 Web 控制台添加集群配置。
+|===
+--
+
+=== 升级扩展组件
+
+在扩展中心升级所需的扩展组件。对于已备份特殊配置的扩展组件，需先修改配置后再升级。
+
+. 在扩展中心点击组件名称，进入组件详情页。
+
+. 点击组件图标下的image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，选择**扩展组件配置**。
+
+. 在**扩展组件配置**对话框中，点击**恢复推荐配置**，然后在默认配置中手动修改为定制化的配置，点击**确定**。
+
+. 再次点击组件图标下的image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，选择**更新**。
+
+. 在**扩展组件更新**对话框中，点击**开始更新**等待升级完成。
+
+至此，{ks_product_right}完成全部升级。
+
+
+**可升级扩展组件列表**
+
+[%header,cols="1,1,1"]
+|===
+|扩展组件 |KSE v4.1.2 | KSE v4.1.3
+
+| devops | 1.1.1 | 1.1.2
+| dmp | 2.1.3 | 2.1.4
+| gatekeeper | 1.0.1 | 1.0.3
+| gateway | 1.0.2 | 1.0.3
+| grafana | 10.4.3 | 10.4.14
+| openpitrix | 2.0.1 | 2.0.2
+| servicemesh | 1.0.0 | 1.0.1
+| whizard-alerting | 1.0.3 | 1.0.4
+| whizard-auditing | 1.2.0 | 1.2.1
+| whizard-events | 1.2.0 | 1.2.1
+| whizard-logging | 1.2.2 | 1.2.3
+| whizard-notification | 2.5.9 | 2.6.0
+| whizard-telemetry | 1.2.2 | 1.3.0
+
+|===
+
+
+
+

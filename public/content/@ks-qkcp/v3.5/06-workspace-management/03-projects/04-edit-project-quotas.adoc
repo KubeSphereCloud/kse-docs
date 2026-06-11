@@ -1,0 +1,58 @@
+---
+title: "编辑项目配额"
+keywords: "Kuberentes, {ks_product}, 企业空间管理, 项目, 编辑项目配额"
+description: "介绍如何编辑项目配额。"
+weight: 04
+---
+
+// :ks_include_id: 76f272ffe9a140a78c9626c72ace696c
+:ks_xref_id: 9dcbc550f72b48e7ab22d9eb5113efb1
+:ks_comp: ../../../components/
+:ks_title: 编辑项目配额
+:ks_keywords: Kuberentes, {ks_product}, 企业空间管理, 项目, 编辑项目配额
+:ks_description: 介绍如何编辑项目配额。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **项目管理**
+:ks_navigation: **项目**
+
+
+include::../../../_custom/clusterManagement/projects/projects-desc-editQuotas.adoc[]
+
+
+== 前提条件link:[id=26d4625bb59543659e2c056d7748dd70]
+
+
+:relfileprefix: ../../../
+
+* 您需要加入一个企业空间并在企业空间中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:06-workspace-management/06-workspace-settings/03-workspace-members/_index.adoc[企业空间成员]、xref:06-workspace-management/06-workspace-settings/04-workspace-roles/_index.adoc[企业空间角色]和xref:06-workspace-management/06-workspace-settings/05-departments/_index.adoc[部门]。
+
+// include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+ifeval::["{file_output_type}" == "html"]
+
+* 如需编辑多集群项目配额，您需要启用多集群管理功能，并确保企业空间中存在多集群项目。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+* 如需编辑多集群项目配额，您需要启用多集群管理功能，并确保企业空间中存在多集群项目。有关更多信息，请参阅《{ks_product_right}平台管理指南》的“扩展组件管理”章节。
+
+endif::[]
+
+
+== 操作步骤link:[id=8f2c306d55964f81ad6b9f92e04afd8f]
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/projects/projects-oper-editProjectQuotas.adoc[]

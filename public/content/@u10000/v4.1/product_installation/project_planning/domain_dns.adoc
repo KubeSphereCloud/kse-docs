@@ -1,0 +1,171 @@
+---
+title: 域名 & DNS
+weight: 4
+---
+
+{product_name} 的存储服务须配置域名和 DNS 服务器。
+
+
+
+== 域名规划
+
+根据用户使用 {product_name} 的场景的不同，所需域名格式与数量也不同。
+
+
+详细说明如下：
+
+=== Global 域名
+
+{product_name} 的 Global 服务，需配置单独的域名，我们称之为 QingStor Global Domain，用户可自行在配置文件中进行定义。
+
+include::../../../../_components/note.adoc[]
+
+QingStor Global Domain 至少为二级域名。
+
+include::../../../../_components/table_footer.adoc[]
+
+内容如下：
+
+[source,shell]
+----
+# cat /root/qs-installer/etc/base.ini
+[base]
+global_domain = stor.qingstorage.com
+----
+
+=== Zone 域名
+
+{product_name} 所有 Zone 的域名均使用 QingStor Global Domain 的子域名。格式如下:
+
+[source,shell]
+----
+<zone_id>.<global_domain>
+----
+
+用户可自行在配置文件中定义 `zone_id`，内容如下：
+
+[source,shell]
+----
+# cat /root/qs-installer/etc/base.ini
+[base]
+zone_id = testzone
+----
+
+
+=== Portal & Console 域名
+
+Portal 与 Console 域名无需用户自行定义。{product_name} 系统会根据 QingStor Global Domain 的域名格式生成 Portal 与 Console 服务所需域名。
+
+== 示例
+
+=== 配置示例
+
+[source,shell]
+----
+# cat /root/qs-installer/etc/base.ini
+[base]
+global_domain = stor.qingstorage.com
+zone_id = testzone
+----
+
+=== 域名示例
+
+**Global 域名**
+
+[source,shell]
+----
+stor.qingstorage.com
+----
+
+**Zone 域名**
+
+[source,shell]
+----
+testzone.stor.qingstorage.com
+----
+
+**Portal 域名**
+
+[source,shell]
+----
+portal.testzone.stor.qingstorage.com
+----
+
+**Console 域名**
+
+[source,shell]
+----
+console.qingstorage.com
+----
+
+== DNS 规划
+
+{product_name} 自带 DNS 服务，客户端可以直接使用，只需在相应配置中添加客户端网段的权限即可。
+
+* 与 IaaS 对接部署的环境中，需将 IaaS 的 DNS 服务器中，用于对象存储的域名解析的服务器 Forward 到 {product_name} 的 DNS 服务器。
+
+* 用户如需使用自主搭建的 DNS 服务器，也需将用于对象存储的域名解析的服务器 Forward 到 {product_name} 的 DNS 服务器。
+
+=== 说明
+
+如客户提供的 Global 域名为 `stor.aa.com`。
+
+当用户使用自建的 DNS 服务器时，需要将如下域名在用户自建的 DNS 服务器上做域名转发：
+
+* `stor.aa.com`
+* `console.aa.com`
+
+当用户没有自建的 DNS 服务器或不方便做转发时，此时需要在客户端做本地解析配置。
+
+* 方式一，配置 `/etc/hosts` 解析。
++
+其优点是简单。 其缺点是只能指向一个 VIP，且指定的 VIP 需要解析的域名较多，负载较高。
+
+* 方式二，配置 `/etc/resolv.conf` 的 `nameserver`。
++
+只配置两个 {product_name} 的 DNS 服务器，另外配置一个 `nameserver` 为公共 DNS，如 `114.114.114.114`。
++
+其优点是可以配置多个 DNS 服务器。缺点是某些操作系统重启后，其 `nameserver` 设置会失效，因此，用户需根据不同的操作系统，使用不同的方式来设置 `nameserver`，并使其永久生效。
+
+=== 示例
+
+* Forward 转发
++
+[source,shell]
+----
+# vi /etc/bind/named.conf
+……
+ zone "<qingstor_global_domain>" {
+    type forward;
+    forward only;
+    forwarders { 101.100.11.193; 101.100.11.194; };
+ };
+
+ zone "<zone_id>.<qingstor_global_domain>" {
+    type forward;
+    forward only;
+    forwarders { 101.100.11.193; 101.100.11.194; };
+};
+……
+----
+
+* 配置 /etc/hosts
++
+[source,shell]
+----
+# vi /etc/hosts
+192.168.100.210 console.qingcloud.com portal.test.stor.qingstorage.com test.stor.qingstorage.com stor.qingstorage.com
+----
+
+* 配置 nameserver
++
+[source,shell]
+----
+# cat /etc/resolv.conf
+nameserver 101.100.11.78
+nameserver 101.100.11.79
+nameserver 114.114.114.114
+----
+
+
+

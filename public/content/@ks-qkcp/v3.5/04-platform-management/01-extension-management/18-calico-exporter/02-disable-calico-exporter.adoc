@@ -1,0 +1,55 @@
+---
+title: "禁用 Calico Exporter"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, Calico Exporter, 禁用 Calico Exporter"
+description: "介绍如何禁用 Calico Exporter 扩展组件。"
+weight: 02
+---
+
+
+
+本节介绍如何禁用 Calico Exporter 扩展组件。
+
+
+== 前提条件
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+== 操作步骤
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:monitoring:calico-exporter:enabled** 参数设置为 **false**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  springcloud:
+    enabled: false
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

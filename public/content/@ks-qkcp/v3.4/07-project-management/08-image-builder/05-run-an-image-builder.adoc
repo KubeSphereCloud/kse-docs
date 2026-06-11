@@ -1,0 +1,66 @@
+---
+title: "运行镜像构建器"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 项目管理, 镜像构建器, 运行镜像构建器"
+description: "介绍如何运行镜像构建器。"
+weight: 05
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: d84e1ad8a64b4aa484421c4282ced868
+:ks_xref_id: 6f00bb56d9504860a765b14c8e59cd2f
+:ks_comp: ../../../components/
+:ks_title: 运行镜像构建器
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 镜像构建器, 运行镜像构建器
+:ks_description: 介绍如何运行镜像构建器。
+:ks_weight: 05
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **镜像构建器**
+
+
+本节介绍如何运行镜像构建器。
+
+
+== 前提条件link:[id=ef7dbe6b4a46441aad6877b7f670fd83]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=143cb06c8e3d47979549fccbd52ac89e]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/projectManagement/imageBuilders/imageBuilders-oper-openDetailsPage.adoc[]
+
+. 在镜像构建器详情页面左上角点击**运行**。
+
+. （可选）在**运行**对话框，根据需要修改镜像构建器的参数。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+有关镜像构建器参数的更多信息，请参阅link:../01-create-an-image-builder/01-create-an-image-builder-using-source-code/[使用源代码创建镜像构建器]和link:../01-create-an-image-builder/02-create-an-image-builder-using-an-artifact/[使用制品创建镜像构建器]。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在**运行**对话框，点击**运行**。
++
+--
+镜像构建器将启动镜像构建流程。如果镜像构建成功，生成的镜像将被推送到指定的镜像服务。
+--

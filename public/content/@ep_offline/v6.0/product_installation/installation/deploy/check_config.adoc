@@ -1,0 +1,63 @@
+---
+title: "校验配置文件"
+weight: 5
+---
+
+配置文件生成后，需人为检查相应的配置文件是否符合配置预期。
+
+== 检查 /pitrix/conf/variables/variables.yaml 文件
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+. 查看配置文件 `/pitrix/conf/variables/variables.yaml`。
++
+[source,shell]
+----
+# cat /pitrix/conf/variables/variables.yaml
+----
++
+include::../../../../../_components/note.adoc[]
+
+重点检查内容如下：
+
+* 配置信息是否和前期填写的配置文件 `variables.<zone_id>.yaml` 一致。
+* 环境配置参数是否正确。
+* 各角色 IP 地址是否正确获取。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+== 检查 /pitrix/conf/settings/ 目录中的文件
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+. 查看目录 `/pitrix/conf/settings/` 的配置文件。
++
+
+include::../../../../../_components/note.adoc[]
+
+重点检查内容如下：
+
+* 配置信息是否和前期填写的配置文件 `setting.<zone_id>.yaml` 一致。
+* 配置文件中各计算节点的 IP 和 Hostname 是否正确匹配。若 Hostname 命名不规划，可能导致生成的匹配关系不合理。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 若配置文件不符合预期，可以按需修改部分字段。
++
+include::../../../../../_components/attention.adoc[]
+
+修改配置文件后，请执行命令 `/pitrix/bin/gen_node_list.py`，以通知 installer 感知 role 的变更。
+
+include::../../../../../_components/table_footer.adoc[]
+

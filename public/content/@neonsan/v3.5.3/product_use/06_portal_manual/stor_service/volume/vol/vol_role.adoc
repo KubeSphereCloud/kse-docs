@@ -1,0 +1,32 @@
+---
+title: '修改角色'
+weight: 5
+draft: false
+---
+
+. 登录 link:../../../../login[Portal 管理界面]。
+
+. 选择左侧导航栏**存储服务** > **块存储** > **卷管理**，进入卷管理页面。
+
+. 点击待修改角色的卷右侧的更多操作，在弹出的选项列表中选择**修改角色**。
++
+image::/images/neonsan/portal_vol_more_opera.png[]
+. 在弹出的**修改角色**窗口中，选择当前卷的角色，点击**保存**。
++
+
+include::../../../../../../../_components/note.adoc[]
+* 卷的角色包括：master，alone，slave。
+* 默认创建卷的角色为 alone。
+* 卷的角色用于灾备环境中。
+* master 与 slave 之间不可直接转换。
+* 若需将 master 角色修改为 slave 角色，首先需将卷角色从 master 修改为 alone，再将卷角色从 alone 修改为 slave。
+* 若需将 slave 角色修改为 master 角色，首先需将卷角色从 slave 修改为 alone，再将卷角色从 alone 修改为 master。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_vol_role_1.png[,40%]
+
+. 在卷管理页面点击已修改角色的卷的名称，进入其详情页面，可查看当前卷的角色。
++
+image::/images/neonsan/portal_vol_role_2.png[]
+

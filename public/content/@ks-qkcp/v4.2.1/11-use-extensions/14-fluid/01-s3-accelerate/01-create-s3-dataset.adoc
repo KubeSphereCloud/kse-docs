@@ -1,0 +1,122 @@
+---
+title: "1. 创建 S3 数据集"
+weight:  01
+---
+
+:ks_permission: **数据集加速管理**
+:ks_navigation: **数据集 > 数据集**
+
+
+本节介绍如何创建 S3 数据集，用于连接对象存储。
+更多信息，请参阅 link:https://github.com/fluid-cloudnative/fluid/blob/master/docs/zh/samples/s3_configuration.md[Fluid 官方文档]。
+
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Fluid** 和 **Fluid Console** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* 已配置完成 S3 bucket，且已获取访问该 bucket 的证书等信息。
+
+== 步骤 1：创建保密字典
+
+为了保证数据的安全，建议使用 Secret（保密字典）来配置创建数据集时需要的敏感信息，如 `accessKeyId`, `accessKeySecret`。
+
+. 以具有 **cluster-admin** 角色的用户登录 KubeSphere Web 控制台并进入您的集群。
+
+. 在左侧导航栏选择**配置 > 保密字典**。
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. 在**基本信息**页签，设置保密字典的基本信息，然后点击**下一步**。
+
+. 在**数据设置**页签，在**类型**下拉列表中选择**默认**，添加键值对数据，然后点击**创建**。
++
+--
+此为示例：
+
+[%header,cols="1a,4a"]
+|===
+|键 |值
+
+|access_key_id
+|用于访问 S3 bucket 的密钥 ID。
+
+|secret_access_key
+|用于访问 S3 bucket 的秘密访问密钥。
+|===
+--
+
+
+== 步骤 2：创建数据集
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. 在**基本信息**页签，设置**数据集**的基本信息，然后点击**下一步**。
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|数据集的名称。
+
+|别名
+|数据集的别名。不同数据集的别名可以相同。
+
+|项目
+|数据集与保密字典所属的项目必须相同。
+
+|描述
+|数据集的描述信息。描述可包含任意字符，最长 256 个字符。
+|===
+--
+
+. 在**数据源**页签，配置数据源信息，然后点击**下一步**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |操作
+
+|数据源类型
+|选择 S3。
+
+|名称
+|输入自定义名称。
+
+// |读写模式
+// |选择对数据源的读写模式：**只读**或**读写**。
+
+|数据源
+|输入 S3 bucket 的名称。
+
+|访问配置
+|
+* **region**: 输入 S3 bucket 所在的 region 信息，如 `pek3b`。
+* **endpoint**: 输入 S3 bucket 的访问地址，如 `s3.pek3b.qingstor.com`。
+* **accessKeyId**: 选择刚才创建的**保密字典**以及对应的**键**，如 `access_key_id`。
+* **accessKeySecret**: 选择刚才创建的**保密字典**以及对应的**键**，如 `secret_access_key`。
+|===
+--
+
+. 在**高级设置**页签，点击**创建**。
++
+创建完成的数据集将显示在数据集列表中。

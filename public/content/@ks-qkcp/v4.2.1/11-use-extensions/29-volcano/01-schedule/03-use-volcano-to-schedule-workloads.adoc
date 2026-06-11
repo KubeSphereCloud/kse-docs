@@ -1,0 +1,133 @@
+---
+title: "使用 Volcano 调度工作负载"
+weight: 03
+---
+
+== 限制
+调度大量工作负载的场景下，Volcano 会打印较多的日志。可能导致日志过多占满所在节点磁盘。
+
+== 使用 Volcano 调度工作负载
+
+. 创建 Queue
++
+[source,yaml]
+----
+apiVersion: scheduling.volcano.sh/v1beta1
+kind: Queue
+metadata:
+  name: q1
+spec:
+  reclaimable: true
+  weight: 1
+----
+
+. 在 `spec` 中设置 `schedulerName` 参数并指定参数值为 volcano
++
+[source,yaml]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+  annotations:
+    # 对成组调度至关重要：此注解告知 Volcano 将此 Deployment 视为一个组，
+    # 要求至少 2 个 Pod 能够一起调度，然后才会启动任何 Pod。
+    # scheduling.volcano.sh/group-min-member: "2"
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      annotations:
+        # 指定作业到 q1 队列
+        scheduling.volcano.sh/queue-name: "q1"
+        volcano.sh/preemptable: "true"
+      labels:
+        app: nginx
+    spec:
+      # 指定调度器为 Volcano
+      schedulerName: volcano
+      containers:
+      - name: nginx
+        image: nginx
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 1
+            memory: 100Mi
+          requests:
+            cpu: 1
+            memory: 100Mi
+        ports:
+        - containerPort: 80
+----
+
+Volcano 还支持设置负载所属队列和抢占属性等，可通过 Pod 的注解实现。
+
+[%header,cols="1a,4a"]
+|===
+|Pod 注解	|说明
+
+|scheduling.volcano.sh/queue-name: "<queue-name>"	|指定负载所在队列，其中<queue-name>为队列名称。
+|volcano.sh/preemptable: "true"	
+|表示作业是否可抢占。开启后，认为该作业可以被抢占。
+
+取值范围：
+
+* true：开启抢占。（默认为开启状态）
+* false：关闭抢占。
+
+|scheduling.volcano.sh/group-min-member: "2"	|对成组调度至关重要：此注解告知 Volcano 将此 Deployment 视为一个组，要求至少 2 个 Pod 能够一起调度，然后才会启动任何 Pod。
+|===
+
+可通过查询 Pod 详情查看 Pod 是否由 Volcano 调度，以及被分配的队列：
+
+* 使用以下命令查询 Pod 详情并获取 `scheduling.k8s.io/group-name` 的值：
++
+--
+[source,yaml]
+----
+kubectl describe pod <pod_name>
+----
+
+结果示例：
+
+image::/images/ks-qkcp/zh/v4.2.1/volcano/describe-pod.png[]
+--
+
+* 查看 Pod 是否由 Volcano 调度，以及被分配的队列：
++
+--
+[source,yaml]
+----
+kubectl describe pg <group_name>
+----
+
+结果如下：
+
+[source,yaml]
+----
+Spec:
+  Min Member:  1
+  Min Resources:
+    Cpu:     100m
+    Memory:  100Mi
+  Queue:     q1
+Status:
+  Conditions:
+    Last Transition Time:  2023-05-30T01:54:43Z
+    Reason:                tasks in gang are ready to be scheduled
+    Status:                True
+    Transition ID:         70be1d7d-3532-41e0-8324-c7644026b38f
+    Type:                  Scheduled
+  Phase:                   Running
+Events:
+  Type    Reason     Age              From     Message
+  ----    ------     ----             ----     -------
+  Normal  Scheduled  0s (x3 over 2s)  volcano  pod group is ready
+----
+--

@@ -1,0 +1,88 @@
+---
+title: "View etcd Database Status"
+keywords: "Kubernetes, {ks_product-en}, monitoring & alerting, cluster status, etcd status"
+description: "This section introduces how to view etcd database status."
+weight: 03
+---
+
+:ks_permission: **Monitoring Viewing**
+:ks_navigation: **Monitoring & Alerting > Cluster Status**
+
+This section introduces how to view etcd database status.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Viewing etcd monitoring information requires enabling etcd monitoring in advance. For more information, see the details page of the **WhizardTelemetry Monitoring** extension in the Extensions Center.
+|===
+
+== Prerequisites
+
+* {empty}
+include::../../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **WhizardTelemetry Monitoring** should have been installed and enabled.
+
+
+== Steps
+
+include::../../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. On the **Cluster Status** page, click the **etcd Monitoring** tab to view the running status of the etcd database.
++
+====
+* The **etcd Monitoring** tab provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Service Status
+|Displays the Leader node of the etcd cluster, the IP address of each node, and the number of Leader changes in the last hour.
+
+|DB Size
+|The size of the etcd database over the specified time range.
+
+|Client Traffic
+|Displays the data traffic sent to and received from gRPC clients.
+
+|gRPC Stream Message
+|Displays the number of gRPC streaming messages received and sent per second by the server.
+
+|WAL Fsync
+|Displays the latency of WAL calling fsync. Before applying log entries, etcd calls **wal_fsync** when persisting log entries to disk.
+
+|DB Fsync
+|Displays the distribution of backend commit latency. When etcd commits its latest delta snapshot to disk, it calls **backend_commit**. High disk operation latency (long WAL log sync time or database sync time) usually indicates disk issues, which can cause high request latency or cluster instability.
+
+|Raft Proposal
+|
+Displays the current etcd Raft proposals per second. Hover over the line chart to view proposal data at a specific time point.
+
+* **Committed**: The commit rate of consensus proposals. This gauge should increase over time if the cluster is healthy. Several healthy members of an etcd cluster may have different total committed proposals at once. This discrepancy may be due to recovering from peers after starting, lagging behind the leader, or being the leader and therefore having the most commits. It is important to monitor this metric across all the members in the cluster; a consistently large lag between a single member and its leader indicates that member is slow or unhealthy.
+
+* **Applied**: The total apply rate of consensus proposals. The etcd server applies every committed proposal asynchronously. The difference between `Committed` and `Applied` should usually be small (within a few thousands even under high load). If the difference between them continues to rise, it indicates that the etcd server is overloaded. This might happen when applying expensive queries like heavy range queries or large txn operations.
+
+* **Failed**: The total failure rate of proposals. This value is affected by two factors: temporary failures related to a leader election or longer downtime caused by a loss of quorum in the cluster.
+
+* **Pending**: It indicates how many proposals are queued to commit. Rising pending proposals suggests there is a high client load or the member cannot commit proposals.
+|===
+
+For more information about etcd database parameters, see the link:https://etcd.io/docs/v3.5/metrics/[etcd documentation].
+--
+
+include::../../../../../../_ks_components-en/oper-selectTimeRange.adoc[]
+
+include::../../../../../../_ks_components-en/oper-Autorefresh.adoc[]
+
+include::../../../../../../_ks_components-en/oper-refreshData.adoc[]
+====

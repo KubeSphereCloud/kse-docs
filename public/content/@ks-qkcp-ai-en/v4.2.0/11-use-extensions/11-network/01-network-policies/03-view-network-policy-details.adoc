@@ -1,0 +1,111 @@
+---
+title: "View Network Policy Details"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Network, Network Policy, View Network Policy Details"
+description: "Describes how to view network policy details."
+weight: 03
+---
+
+:ks_permission: **Cluster Network Resource View**
+:ks_navigation: **Network > Network Policies**
+
+
+This section describes how to view network policy details.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+* The **KubeSphere Network** extension must be installed and enabled on the KubeSphere platform.
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. In the network policy list, click the name of a network policy to open its details page.
+
+. On the network policy details page, view the resource attributes of the network policy in the **Attributes** area.
++
+--
+[options="header",cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the network policy belongs.
+
+|Project
+|The project to which the network policy belongs.
+
+|Creation Time
+|The creation time of the network policy.
+
+|Creator
+|The user who created the network policy.
+|===
+--
+
+. On the network policy details page, click the **Egress Rules** tab to view the egress rules of the network policy.
++
+--
+Egress rules are used to restrict pods to only access specific other pods or network segments.
+
+[%header,cols="1a,4a"]
+|===
+
+|Parameter
+|Description
+
+|Target
+|Information about the pods to which the rule applies.
+
+* **Project**: The project to which the rule belongs. Rules in a network policy only apply to pods in the project to which the network policy belongs.
+
+* **Label**: The label that the pods to which the rule applies must have. If no label is set, the rule applies to all pods in the project to which the network policy belongs.
+
+
+|Destination
+|Information about other pods or network segments that the target pods can access.
+
+* **Project**: The project to which the other pods that the target pods can access belong.
+* **Label**: The label that the other pods that the target pods can access must have. If no label is set, the target pods can access all pods in the project.
+* **CIDR**: The network segment that the target pods can access.
+* **Port**: The port of the other pods or network segments that the target pods can access. If no port is set, the target pods can access all ports of the other pods or network segments.
+|===
+--
+
+. On the network policy details page, click the **Ingress Rules** tab to view the ingress rules of the network policy.
++
+--
+Ingress rules are used to restrict pods to only be accessed by specific other pods or network segments.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Target
+|
+include::../../../../_custom/clusterManagement/networkPolicies/networkPolicies-para-target.adoc[]
+
+|Destination
+|Information about other pods or network segments that can access the target pods.
+
+* **Project**: The project to which the other pods that can access the target pods belong.
+* **Label**: The label that the other pods that can access the target pods must have. If no label is set, all pods in the project can access the target pods.
+* **CIDR**: The network segment that can access the target pods.
+* **Port**: The port of the target pods that other pods or network segments can access. If no port is set, other pods or network segments can access all ports of the target pods.
+|===
+--

@@ -1,0 +1,64 @@
+---
+title: "创建数据库用户"
+keywords: "Kubernetes, {ks_product}, RadonDB, PostgreSQL, 管理告警规则组, 创建数据库用户"
+description: "介绍如何创建数据库用户。"
+weight: 01
+---
+
+:ks_db_product: PostgreSQL
+
+本节介绍如何创建数据库用户。
+
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+
+. 在左侧导航栏选择 **{ks_db_product}**。
+
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+
+. 在页面右侧点击**数据库用户**页签，然后点击**创建**。
+
+. 在**创建用户**对话框，设置用户名、密码和权限，然后点击**确定**。用户创建完成后将显示在用户列表中。
++
+--
+[%header,cols="1,5"]
+|===
+|参数 |说明
+
+|用户名
+a|自定义用户名称。
+
+配置要求：用户名只能包含小写字母、数字和下划线（_），必须以小写字母开头，长度为 2 到 26 个字符。
+
+|密码  
+a|输入用户密码。
+
+配置要求：密码必须包含至少一个大写字母、一个小写字母、一个数字和一个特殊字符（!@#$%^&*_+-=），长度为 8 到 32 个字符。
+
+
+|权限  
+a|可选择普通权限或高级权限。支持创建多个具有相同权限的用户。
+
+* **普通权限**用户具备创建表、索引、Schema 等数据库对象的管理权限。不能创建和管理其他账号。
+
+* **高级权限**用户具备 Superuser、CREATEDB、CREATEROLE 权限，以及 REPLICATION 等创建数据库的管理权限。
+
+|===
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* 不支持创建名为 **postgres**、**pgautofailover_replicator** 和 **pgautofailover_monitor** 的用户账号。
+
+* 不支持创建同名用户。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+--

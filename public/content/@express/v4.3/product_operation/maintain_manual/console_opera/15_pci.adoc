@@ -1,0 +1,73 @@
+---
+title: "手动添加 PCI 设备"
+weight: 15
+---
+
+== 运维场景
+
+云易捷环境需要用到 PCI 透传设备时，可参考以下步骤手动添加。
+
+== 操作步骤
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+. 执行如下命令，查看 KS 节点信息。
++
+[source,shell]
+----
+cat /etc/hosts | grep ks
+----
+
+. 登录至任一计算节点（Hyper 节点），执行如下命令查看 PCI 设备。根据示例查询结果，PCI 设备的 bus，slot，funtion 值分别为 bus:0x00, slot:0x04, function:0x00
++
+[source,shell]
+----
+lspci
+----
++
+[source,shell]
+----
+......
+00:04.0 Communication controller: Red Hat, Inc. Virtio console
+......
+----
+
+. 登录任一 KS 节点，依次执行如下命令，添加 PCI 设备。
++
+[source,shell]
+----
+cd /pitrix/cli/
+----
++
+[source,shell]
+----
+./create-devices  -t 2 --device_name pci-test-02 -a '{"bus":"0x41","slot":"0x00","function":"0x00"}' -o admin -z hza
+----
++
+参数说明：
++
+* ``-t`` 用于指定设备类型，0 表示远程 USB，1 表示本地 USB，2 表示本地 PCI 设备。
+* ``--device_name`` 用于指定设备名称，用户自定义。
+* ``-a`` 用于指定设备参数，其与设备类型有关。若设备类型为 2 时，此处必须指定 bus，slot，funtion 的值。
+* ``-o`` 用于指定当前设备用户的 ID。
+* ``-z`` 用于指定当前设备所在的可用区，即 Zone 名。
+
+
+
+
+

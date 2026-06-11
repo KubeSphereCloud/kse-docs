@@ -1,0 +1,14 @@
+---
+title: "创建集群（kubeKey）"
+weight: 1
+---
+
+QKE 底层对集群的管理，如创建集群、集群扩缩容、集群升级主要使用 KubeKey 工具。 
+
+https://github.com/kubesphere/kubekey[KubeKey]（由 Go 语言开发）是一种全新的安装工具，对于以前使用的 ansible 方式，减少了环境依赖，同时 KubeKey 支持多种安装方式，如 All-in-One、多节点安装以及离线安装。KubeKey 使用 Kubeadm 在节点上最大化并行安装 Kubernetes 集群，使安装更简便、高效。
+
+image::/images/ep_offline/qke_twp/05_kubekey.png[]
+
+当 IaaS 资源准备完成后，KubeKey 会下载对应的资源包，包含容器运行（如 Docker 和 Containerd） 以及 Kubernetes 的二进制信息等。
+
+

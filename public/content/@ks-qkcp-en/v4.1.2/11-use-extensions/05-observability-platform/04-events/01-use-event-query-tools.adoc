@@ -1,0 +1,36 @@
+---
+title: "Use the Resource Event Query Tool"
+keywords: "Kubernetes, {ks_product-en}, cluster management, toolbox, query resource events"
+description: "This section introduces how to use the resource event query tool."
+weight: 02
+---
+
+This section introduces how to query resource events.
+
+Resource events: Events of various resources such as workloads, Jobs, pods, services, and Ingresses.
+
+== Prerequisites
+
+* You should have resource viewing permissions for the platform, cluster, workspace, or project to view events within a specific scope.
+
+* **WhizardTelemetry Events** should have been installed and enabled.
+
+== Steps
+
+. Log in to the {ks_product-en} web console with a user who has the resource viewing permissions.
+
+. Hover the cursor over image:/images/ks-qkcp/zh/icons/hammer.svg[hammer,18,18] at the bottom right of the page, then select **Resource Event Search** from the menu.
+
+. In the pop-up dialog, set the search conditions to query events.
++
+--
+* If there are multiple clusters, click the **Cluster** dropdown list to query events in a specific cluster.
+
+* Click the search box, set the search conditions, then press **Enter** to view events that meet specific conditions. You can set multiple search conditions at the same time.
+
+* On the query results page, you can view the time distribution chart of the events. Click the histogram to switch to the event list for that time period. Click image:/images/ks-qkcp/zh/icons/start-dark.svg[start-dark,18,18]/image:/images/ks-qkcp/zh/icons/stop-dark-white.svg[stop-dark-white,18,18] to start/stop real-time data refresh, click the **Refresh Rate** time to select the data refresh frequency.
+
+* Click image:/images/ks-qkcp/zh/icons/cogwheel.svg[cogwheel,18,18] in the upper right corner of the query results list to customize the information displayed in the list.
+
+* Click on an event entry in the query results to view the detailed information of the event.
+--

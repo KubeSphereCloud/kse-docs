@@ -1,0 +1,97 @@
+---
+title: "禁用 KubeEdge"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, KubeEdge, 禁用 KubeEdge"
+description: "介绍如何禁用 KubeEdge 扩展组件。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: ef7e9fb56b35462d935fde139fb7bf7b
+:ks_xref_id: 7dced0c970a74ce698c91f62b9259920
+:ks_comp: ../../../../components/
+:ks_title: 禁用 KubeEdge
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, KubeEdge, 禁用 KubeEdge
+:ks_description: 介绍如何禁用 KubeEdge 扩展组件。
+:ks_weight: 02
+:ks_icon:
+
+
+本节介绍如何禁用 KubeEdge 扩展组件。
+
+
+== 前提条件link:[id=9d296ebae66845469124666397364308]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=8c6cad0db22f497295acda52aa109b40]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:edgeruntime:kubeedge:enabled** 设置为 **false**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  edgeruntime:
+    kubedge:
+      enabled: false
+      cloudCore:
+        cloudHub:
+          advertiseAddress:
+            - "<external IP address>"
+        service:
+          cloudhubQuicNodePort: "30001"
+          cloudhubHttpsNodePort: "30002"
+          cloudstreamNodePort: "30003"
+          tunnelNodePort: "30004"
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
++
+
+. 在 **kubectl** 对话框，执行以下命令删除 KubeEdge 功能相关资源：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+helm uninstall kubeedge -n kubeedge
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete ns kubeedge
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

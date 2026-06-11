@@ -1,0 +1,46 @@
+---
+title: "Create Microservice Gateway"
+keywords: "Kubernetes, {ks_product-en}, project management, Spring Cloud, create microservice gateway"
+description: "Learn how to create a microservice gateway."
+weight: 01
+---
+
+:ks_permission: **Spring Cloud Microservices Management**
+:ks_navigation: **Spring Cloud > Microservice Gateways**
+
+This section describes how to create a microservice gateway.
+
+During the creation of a microservice gateway, a deployment running Spring Cloud Gateway is actually created.
+
+== Prerequisites
+
+* **KubeSphere Spring Cloud** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+* You should prepare the Spring Cloud Gateway container image in advance. For more information, see the link:https://spring.io/projects/spring-cloud-gateway#overview[Spring Cloud Gateway] documentation. This section uses the `registry.cn-beijing.aliyuncs.com/kse/spring-cloud-gateway:latest` container image as an example. You can also build your own container image as needed.
+
+== Steps
+
+Refer to the link:#_parameter_description[Parameter Description] to set the parameters for the microservice gateway.
+
+include::../../../../_custom-en/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-clickCreate.adoc[]
+
++
+
+. On the **Gateway Settings** tab, set the parameters for the microservice gateway, and then click **Next**.
+
+. On the **Advanced Settings** tab, select whether to enable external access and the external access mode, and then click **Create**.
+
+== Parameter Description
+
+include::../../../../_custom-en/projectManagement/microserviceGateway/microserviceGateway-para-microserviceGatewaySettings.adoc[]

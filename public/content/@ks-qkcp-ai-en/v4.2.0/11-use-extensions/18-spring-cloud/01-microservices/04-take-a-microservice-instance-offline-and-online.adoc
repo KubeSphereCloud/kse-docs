@@ -1,0 +1,47 @@
+---
+title: "Take Down and Bring Up Microservice Instances"
+keywords: "Kubernetes, {ks_product}, Project Management, Spring Cloud, Take Down Microservice Instances"
+description: "Describes how to take down and bring up microservice instances."
+weight: 04
+---
+
+
+:ks_permission: ** Spring Cloud Microservice Management**
+:ks_navigation:  **Spring Cloud > Microservices**
+
+
+This section describes how to take down and bring up microservice instances. A taken-down microservice instance will no longer receive business traffic.
+
+
+== Prerequisites
+
+* The **KubeSphere Spring Cloud** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/microservices/microservices-oper-openInstanceList.adoc[]
+
++
+
+. To take down a microservice, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the target microservice instance, and then select **Take Down** from the dropdown list.
+
+. To bring up a taken-down microservice, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the target microservice instance, and then select **Bring Up** from the dropdown list.

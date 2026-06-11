@@ -1,0 +1,70 @@
+---
+title: "查看定时策略列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 定时策略, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看定时策略列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: a3381b299c6a40d9998aa7c6e53aa1a8
+:ks_xref_id: 94cf4c80c37f49f6a07776dc665db720
+:ks_comp: ../../../../components/
+:ks_title: 查看定时策略列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看定时策略列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 定时策略, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看定时策略列表。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=e7b74413786d486c9d22c56a29bd6aa3]
+
+include::../../../../_custom/timer/timer-policy-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=7847693ae6234c3696553fb41d96f100]
+
+include::../../../../_custom/timer/timer-policy-steps.adoc[]
++
+--
+定时策略列表展示当前项目中的所有定时策略，并提供以下信息：
+
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|用户自定义的定时策略名称。
+
+|ID
+|定时策略在系统中的通用唯一标识符。
+
+|周期
+|定时策略定义的执行周期。目前支持每天、每 N 天、每 N 小时、每周或每月执行。
+
+|周期时间
+|定时策略定义的任务执行的具体时间点。
+
+|所属项目
+|定时策略所在的项目名称。
+
+|创建时间
+|定时策略的创建时间。
+|===
+--
+
+. （可选）点击定时策略列表上方的搜索框并设置搜索条件，可按名称、 ID 或周期搜索定时策略。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的定时策略。
+
+. （可选）在定时策略列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。
+
+
+

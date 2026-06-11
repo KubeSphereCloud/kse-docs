@@ -1,0 +1,43 @@
+---
+title: "BOSS 上有 DNS 告警"
+weight: 50
+---
+
+== 问题现象
+
+BOSS 上有如下告警。
+
+image::/images/ep_offline/installation/faq_alarm_dns.jpg[]
+
+== 可能原因
+
+server.yaml 配置文件中有 test_domains 配置参数，用于测试域名访问。
+如果不能访问互联网，将会上报 DNS 相关告警。
+
+== 解决方法
+
+* 恢复互联网访问。
+* 如果是私有云环境不能访问互联网，需要删除 server.yaml 文件中的 test_domains 配置。
+ .. 登录 FirstBox。
+ .. 执行以下命令，修改 server.yaml.ZONE_ID 文件。
++
+[source]
+----
+vi /pitrix/conf/variables/global/server.yaml.ZONE_ID
+----
++
+删除如下内容。
++
+[source,yaml]
+----
+  test_domains:
+    - 'www.baidu.com'
+    - 'www.taobao.com'
+----
+ .. 执行以下命令，刷新 server.yaml.ZONE_ID 到节点。
++
+[source,shell]
+----
+/pitrix/build/build_pkgs.py -p pitrix-global-conf
+/pitrix/upgrade/update.sh all pitrix-global-conf
+----

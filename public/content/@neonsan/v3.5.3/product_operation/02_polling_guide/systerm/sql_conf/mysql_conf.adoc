@@ -1,0 +1,23 @@
+---
+title: "查看 MySQL 数据库配置信息"
+weight: 1
+---
+
+若当前 NeonSAN 环境使用的为 QingStor MySQL 数据库，可参考以下步骤进行配置信息的查看。其他数据库类型，请参考其他章节内容。
+
+. 登录 NeonSAN 集群任一节点，执行如下命令，查看数据库节点信息。
++
+[,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts|grep neonsan-mysql"
+----
+
+. 逐个登录 MySQL 数据库节点。
+
+. 查看数据库服务配置信息。
++
+[,shell]
+----
+cat /qingstor/etc/xtradb-neonsan.cnf
+----
+

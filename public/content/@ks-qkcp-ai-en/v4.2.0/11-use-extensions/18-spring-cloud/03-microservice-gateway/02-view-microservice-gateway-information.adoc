@@ -1,0 +1,82 @@
+---
+title: "View Microservices Gateway Information"
+keywords: "Kubernetes, {ks_product}, Project Management, Spring Cloud, View Microservices Gateway Information"
+description: "Describes how to view microservices gateway information."
+weight: 02
+---
+
+:ks_permission: ** Spring Cloud Microservices View**
+:ks_navigation:  **Spring Cloud > Microservices Gateway**
+
+
+This section describes how to view microservices gateway information.
+
+
+== Prerequisites
+
+* The **KubeSphere Spring Cloud** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
++
+--
+The **Microservices Gateway** page provides the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Type
+|The type of the gateway. For a microservices gateway, the parameter value is **Microservices Gateway**.
+
+|Status
+|The current status of the gateway.
+
+* **Running**: The microservices gateway is running normally.
+
+* **Updating**: The microservices gateway is being created or its settings are being updated.
+
+|Creator
+|The user who created the gateway.
+
+|Creation Time
+|The time when the gateway was created.
+
+|Access Mode
+|The access mode of the gateway.
+
+include::../../../../_custom/clusterManagement/services/services-para-externalAccess.adoc[tag=bullets]
+
+* **ClusterIP**: The gateway cannot be accessed from outside the cluster and can only be accessed within the cluster via a virtual IP address.
+
+|Gateway Address
+|
+The access address of the gateway.
+
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-para-address.adoc[tag=bullets]
+
+* If the gateway's access mode is ClusterIP, the gateway cannot be accessed from outside the cluster, and the **Gateway Address** is the virtual IP address of the gateway within the cluster.
+
+|Node Port
+|The HTTP and HTTPS node ports for the gateway service. Displayed only when the gateway's external access mode is NodePort.
+
+|Replicas
+|The number of pod replicas for the gateway workload.
+|===
+--

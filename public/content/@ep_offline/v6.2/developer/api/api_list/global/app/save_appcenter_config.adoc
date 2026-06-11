@@ -1,0 +1,71 @@
+---
+title: 保存Appcenter配置（SaveAppcenterConfig）
+weight: 23
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| key
+| String
+| true
+| 配置参数名
+
+| value
+| String
+| true
+| 配置参数值
+
+| value_type
+| String
+| true
+| value类型
+
+| zone_id
+| String
+| false
+| 可用区
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| data
+| String
+| false
+| 操作执行结果
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "key": "iaas_versions",
+  "value": "[\"release4_5_20200323\",\"release4_6_20200807\",\"release4_7_20210104\",\"release5_0_20210628\"]",
+  "value_type": "list",
+  "zone_id": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SaveAppcenterConfigResponse",
+  "data": 0,
+  "ret_code": 0
+}
+----

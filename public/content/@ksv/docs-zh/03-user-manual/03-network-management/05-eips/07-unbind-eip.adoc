@@ -1,0 +1,52 @@
+---
+title: "解绑弹性 IP"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 弹性 IP, 解绑"
+description: "介绍如何使用{ks_product_both}Web 控制台解绑弹性 IP。"
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 660d219417bf435f8332a40c76529127
+:ks_xref_id: eeb669b8d04d43d4becf0c2a8efddc7b
+:ks_comp: ../../../../components/
+:ks_title: 解绑弹性 IP
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台解绑弹性 IP。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 弹性 IP, 解绑
+:ks_weight: 07
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台解绑弹性 IP。
+
+您可以根据业务需求，将弹性 IP 和 VPC 网络或虚拟机解绑。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=ac69a427955d496ba10fd1cfa3767f75]
+
+include::../../../../_custom/networks/eip-manage-prerequisites.adoc[]
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=8bcc76297312433dabcda9a5d10f2ad9]
+
+include::../../../../_custom/networks/eip-steps.adoc[]
+
+. 找到目标弹性 IP，点击右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**解绑**。
+
+. 在弹出的对话框中，点击**确定**。
++
+--
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+解绑弹性 IP 后 VPC 中的资源或虚拟机将不能转发来自公网的请求，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

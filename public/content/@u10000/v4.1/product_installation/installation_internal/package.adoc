@@ -1,0 +1,229 @@
+---
+title: 上传安装包
+weight: 2
+---
+
+
+
+{product_name} 安装包位于 ftp://ins.qingcloud.com[FTP 服务器] 的 `/qingstor/u10000/v4.1-docker/` 目录下。
+
+
+== 安装包信息
+安装包信息如下表所示，包名中携带的 `yyyymmdd` 为包上传日期，`x.x.x` 为包的版本号。无特殊需求，建议均使用最新的安装包即可。
+
+[cols="1,3,6", options="header", ]
+|===
+|安装包序号
+|安装包名称
+|说明
+
+|1
+|os-20220913.tgz
+|与操作系统相关的软件包。
+
+|2
+|qingstor-docker-v4.1.0-20221026.tar.gz
+|基础包，其内容包括：FirstBox 镜像、Docker 安装程序以及一些通用组件。
+
+|3
+|qingstor-v4.1.0.tar.gz
+|{product_name} 服务包
+
+|4
+|qs-installer-v4.1.0-2022111.tgz
+|Installer 安装包
+
+|5
+|registry-v4.1.0-20221119.tar.gz
+|镜像包，其内容包括：私有镜像仓库以及具体的镜像包
+
+|===
+
+== 上传安装包
+
+. 选择任一台云服务节点作为 FirstBox 的宿主机。这里选择 `192.168.100.2` 这台云服务器。
+
+. 从本机登录至该节点服务器。
++
+[source,shell]
+----
+ssh root@139.198.3.63 -p 1002
+
+----
+
+. 执行如下命令行，创建安装目录，并将序号为 1、2、3、5 的压缩包上传至该目录下：
+
++
+[source,shell]
+----
+# mkdir -pv /var/www/repo
+----
+
+. 执行如下命令行，解压已上传的安装包：
+
++
+[source,shell]
+----
+# cd /var/www/repo
+# tar xf qingstor-docker-v4.1.0-20221026.tar.gz
+# tar xf os-20220913.tgz -C ./qingstor-docker
+# tar xf qingstor-v4.1.0.tar.gz -C ./qingstor-docker/u1w-v4.1
+# tar xf registry-v4.1.0-20221119.tar.gz -C ./qingstor-docker/u1w-v4.1
+----
+
+. 执行如下命令行，查看解压后 `qingstor-docker` 的目录层级：
+
++
+[source,shell]
+----
+# tree /var/www/repo/qingstor-docker -C -L 3
+
+----
+
+. 将序号为 4 的压缩包上传至该节点服务器的 `/root` 目录下，然后执行如下命令行解压：
+
++
+[source,shell]
+----
+# cd /root
+# tar -xf qs-installer-v4.1.0-20221119.tgz
+----
+
+. 至此，安装包准备完成。
+
+== 硬盘准备
+
+前文link:../prepare/vm/[创建云服务器]时，每台云服务器均加载了 3 块硬盘。一块用作索引盘，另外两块用作数据盘。
+
+由于云服务器绑定硬盘时，会自动将云硬盘 mount 至云服务器。在进行以下操作前，需逐个将云硬盘 umount。
+
+[source,shell]
+----
+# lsblk
+......
+vdc    252:32   0   300G  0 disk /mnt/1235qsfsghh
+vdd    252:48   0   300G  0 disk /mnt/1235qsfsgds
+vde    252:64   0   300G  0 disk /mnt/1235qsopykk
+......
+
+# umount /mnt/1235qsfsghh
+# umount /mnt/1235qsfsgds
+# umount /mnt/1235qsopykk
+----
+
+=== 索引盘
+
+. 逐个登录云服务器。
++
+[source,shell]
+----
+ssh root@139.198.3.63 -p 1002
+ssh root@139.198.3.63 -p 1003
+ssh root@139.198.3.63 -p 1004
+
+----
+
+
+. 执行如下命令行，查看系统中索引盘盘符。
+
++
+[source,shell]
+----
+# fdisk -l
+……
+Disk /dev/vdc: 300 GiB, 322122547200 bytes, 629145600 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/vdd: 300 GiB, 322122547200 bytes, 629145600 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+……
+----
+
+. 三台云服务器均格式化索引盘 `/dev/vdc`。
+
++
+[source,shell]
+----
+# mkfs.xfs -f -n ftype=1 /dev/vdc
+----
+
+. 查看索引盘的 `UUID`。
+
++
+[source,shell]
+----
+# blkid /dev/vdc
+/dev/nvme0n1: UUID="5b82b140-b230-442c-932a-e3f5e7d92b73" TYPE="xfs"
+----
+
+. 添加索引盘信息至开机自动挂载配置。将上一步查询到的 `UUID` 写入 `/etc/fstab` 文件。
+
++
+[source,shell]
+----
+# vi /etc/fstab
+……
+UUID=5b82b140-b230-442c-932a-e3f5e7d92b73  /qingstor  xfs  defaults 0 0
+……
+----
+
+. 创建挂载目录 `/qingstor`。若该目录已存在，则无需执行该步骤再次创建。
+
++
+[source,shell]
+----
+# mkdir /qingstor
+----
+
+. 挂载索引盘。
+
++
+[source,shell]
+----
+# mount -a
+----
+
+. 查看挂载结果，命令行回显结果如下所示，即为挂载成功。
+
++
+[source,shell]
+----
+# lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+……
+nvme0n1 259:0    0   1.8T  0 disk /qingstor
+……
+----
+
+. 需确保待部署环境中的全能节点或网关节点均完成以上操作。
+
+=== 数据盘
+
+由于在安装部署过程中，安装脚本会格式化各节点服务器上所有的数据盘。因此，在安装部署之前，需要确认所有存储节点的数据盘上均无数据、无分区，且所有存储节点上的数据盘均需保持盘符及硬盘顺序一致。
+
+
+用户可使用 `lsblk` 或 `parted -l` 检查目标硬盘是否存在分区，如果存在，需删除分区再对硬盘进行格式化。
+
+操作步骤如下。
+
+. 逐个登录待部署环境中的存储节点，执行如下命令行，根据命令行回显内容，核对硬盘信息是否正确。若硬盘尚有数据，用户可根据实际情况决定是否将数据进行手动转移。
+
++
+[source,shell]
+----
+# lsblk
+
+----
+
+. 执行如下命令行，删除硬盘的分区信息并进行格式化。硬盘格式化后，硬盘内数据将无法恢复。
+
++
+[source,shell]
+----
+# parted -s /dev/vdd mklabel gpt
+----

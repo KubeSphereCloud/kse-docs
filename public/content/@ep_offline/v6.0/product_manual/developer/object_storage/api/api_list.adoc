@@ -1,0 +1,119 @@
+---
+title: "API 列表"
+description: 
+collapsible: false
+draft: false
+weight: 2
+---
+
+
+
+本文将详细介绍对象存储提供的 API，以及指导用户如何使用该 API。
+
+== Service 操作
+
+[cols="1,3"]
+|===
+| API | 说明 
+
+| link:../service/get/[GET Service]| 用于获取请求者名下的所有 Bucket 列表。
+
+| link:../service/location/[List Locations]| 用于获取当前环境中，对象存储所有部署区域的列表。
+
+|===
+
+== Bucket 操作
+
+[cols="1,1,3"]
+|===
+| 分类 |API | 说明 
+
+.5+^.^| 基础操作 | link:../bucket/basic_opt/put/[PUT Bucket]| 创建 Bucket。
+| link:../bucket/basic_opt/delete[Delete Bucket] | 删除 Bucket。
+| link:../bucket/basic_opt/head[Head Bucket] | 用于判断一个 Bucket 是否存在，以及用户是否有权限访问这个 Bucket。
+| link:../bucket/basic_opt/get[GET Bucket] | 获取 Bucket 的对象列表。
+| link:../bucket/basic_opt/get_stats[GET Bucket Statistics] |获取 Bucket 的统计信息。
+
+.3+^.^| 访问策略（Policy） | link:../bucket/policy/put_policy/[PUT Bucket Policy]| 该接口用于设置 Bucket 的访问策略。
+| link:../bucket/policy/get_policy/[Delete Bucket Policy]| 该接口用于删除 Bucket 的已设置的访问策略。
+| link:../bucket/policy/get_policy/[GET Bucket Policy]| 该接口用于获取 Bucket 的已设置的访问策略。
+
+.3+^.^| 事件通知（Notification） | link:../bucket/notification/put_notification/[PUT Bucket Notification]| 用于设置 Bucket 的事件通知及处理策略。
+| link:../bucket/notification/delete_notification/[Delete Bucket Notification]| 用于删除 Bucket 已设置的事件通知及处理策略。
+| link:../bucket/notification/get_notification/[GET Bucket Notification]| 用于获取 Bucket 已设置的事件通知及处理策略。
+
+.3+^.^| 外部镜像（External Mirror） | link:../bucket/external_mirror/put_external_mirror/[PUT Bucket External Mirror]| 用于设置 Bucket 的外部镜像源站。
+| link:../bucket/external_mirror/delete_external_mirror/[Delete Bucket External Mirror]| 用于删除 Bucket 已设置的外部镜像源站。
+| link:../bucket/external_mirror/get_external_mirror/[GET Bucket External Mirror]| 用于获取 Bucket 已设置的外部镜像源站。
+
+.2+^.^| 访问控制（ACL） | link:../bucket/acl/put_acl/[PUT Bucket ACL]| 用于设置或修改 Bucket 的存储空间访问控制。
+| link:../bucket/acl/get_acl/[GET Bucket ACL]| 用于获取 Bucket 已设置的存储空间访问控制。
+
+.3+^.^| 日志管理（Logging） | link:../bucket/logging/put_logging/[Put Bucket Logging]| 用于开启并设置 Bucket 的日志功能，也可用于更新 Bucket 的日志功能相关设置。
+|link:../bucket/logging/delete_logging/[Delete Bucket Logging]| 用于删除 Bucket 的日志功能相关设置，并关闭该 Bucket 的日志功能。
+| link:../bucket/logging/get_logging/[GET Bucket Logging]| 用于获取 Bucket 的日志功能相关设置。
+
+.3+^.^| 版本管理（Versioning） | link:../bucket/version/put_version/[Put Bucket Version]| 用于开启或暂停 Bucket 的版本管理功能。
+| link:../bucket/version/list_object_version/[List Object Version]| 用于列取指定 Bucket 下所有 Object 的版本。
+| link:../bucket/version/get_version/[GET Bucket Version]| 用于获取 Bucket 的版本管理功能状态。
+
+.3+^.^| 生命周期（Lifecycle） | link:../bucket/lifecycle/put_lifecycle/[PUT Bucket Lifecycle]| 用于创建或更新 Bucket 的生命周期设置。
+| link:../bucket/lifecycle/delete_lifecycle/[Delete Bucket Lifecycle]| 用于删除 Bucket 的生命周期设置。
+| link:../bucket/lifecycle/get_lifecycle/[GET Bucket Lifecycle]| 用于获取 Bucket 的生命周期设置。
+
+.3+^.^| 自定义域名（CNAME） | link:../bucket/cname/put_cname/[PUT Bucket CNAME]| 用于设置 Bucket 的域名别名。
+| link:../bucket/cname/delete_cname/[Delete Bucket CNAME]| 用于删除 Bucket 的域名别名设置。
+| link:../bucket/cname/get_cname/[GET Bucket CNAME]| 用于获取 Bucket 的域名别名设置。
+
+.3+^.^| 跨区域复制（Replication） | link:../bucket/replication/put_replication/[PUT Bucket Replication]| 用于创建或更新 Bucket 的跨区域复制规则的相关设置。
+|link:../bucket/replication/delete_replication/[Delete Bucket Replication]| 用于删除 Bucket 的跨区域复制相关设置。
+|link:../bucket/replication/get_replication/[GET Bucket Replication]| 用于获取 Bucket 的跨区域复制规则列表。
+
+.3+^.^| 跨资源共享（CORS） | link:../bucket/cors/put_cors/[PUT CORS]| 用于设置 Bucket 的跨源资源共享策略。
+| link:../bucket/cors/delete_cors/[Delete CORS]| 用于删除 Bucket 的跨源资源共享策略。
+| link:../bucket/cors/get_cors/[GET CORS]| 用于获取 Bucket 的跨源资源共享策略。
+
+|===
+
+
+== Object 操作
+
+[cols="1,1,3"]
+|===
+| 分类 |API | 说明 
+
+.10+^.^| 基础操作 | link:../object/basic_opt/put/[PUT Object]| 用于向指定 Bucket 上传一个 Object。
+| link:../object/basic_opt/delete/[Delete Object] | 用于从指定 Bucket 中删除一个 Object。
+| link:../object/basic_opt/get/[GET Object] | 用于从指定 Bucket 获取一个 Object。
+| link:../object/basic_opt/head/[Head Object] | 用于从指定 Bucket 获取一个 Object 的元数据，对象存储仅返回该 Object 的元数据信息，不返回该 Object 的内容。
+| link:../object/basic_opt/copy/[PUT Object-Copy]| 用于从源 Bucket 复制一个 Object 到目标 Bucket。
+| link:../object/basic_opt/move/[PUT Object-Move]| 用于从源 Bucket 移动一个 Object 到目标 Bucket。
+| link:../object/basic_opt/fetch/[PUT Object-Fetch]| 用于从指定的源链接抓取资源，保存到指定的 Object 中。
+| link:../object/basic_opt/options_object/[Options Object]| 用于向对象存储的 Object 发起预检请求，以确定是否能向该跨源请求发出回应。
+| link:../object/append/[Append Object]| 以追加写的方式上传对象到对象存储。
+| link:../object/post/[Post Object]| 通过 HTML 表单上传的方式向 Bucket 上传一个 Object。
+
+.7+^.^| 分段上传（MultipartUpload） | link:../object/multipart/initiate/[Initiate Multipart Upload] | 初始化分段上传。
+| link:../object/multipart/upload/[Upload Multipart Part] | 上传对象分段。
+| link:../object/multipart/copy/[Copy Multipart Part] | 复制对象分段。
+| link:../object/multipart/list/[List Multipart Parts] | 用于列出已经上传的分段信息。
+| link:../object/multipart/abort/[Abort Multipart Upload] | 用于终止一个分段上传，并删除已经上传的分段。
+| link:../object/multipart/complete/[Complete Multipart Upload] | 用于结束一个分段上传，合并对象分段，从而获得一个完整的 Object。
+| link:../bucket/basic_opt/list_multipart_uploads/[List Multipart Uploads] | 用于获取指定 Bucket 内正在进行的分段上传对象的列表。
+
+.4+^.^| 对象元数据 | link:../metadata/#_创建元数据[创建元数据] | 当创建对象的时候，相应的该对象的元数据也跟随创建。
+| link:../metadata/#_获取元数据[获取元数据] | 通过下载对象或获取对象信息的方式来获取该对象携带的元数据信息。
+| link:../metadata/#_复制修改元数据[复制修改元数据] | 通过复制对象的方式，来复制或修改对象元数据。
+| link:../metadata/#_移动元数据[移动元数据] | 通过移动对象的方式来移动该对象携带的元数据信息。
+
+.8+^.^| 图片处理 | link:../object/image_process/info[获取图片信息] | 获取图片的基本信息和部分 Exif 信息。
+| link:../object/image_process/crop/[图片裁剪] | 对图片进行裁剪。
+| link:../object/image_process/rotate/[图片旋转] | 对图片进行旋转。
+| link:../object/image_process/resize/[图片缩放] | 对图片进行缩放。
+| link:../object/image_process/watermark/[文字水印] | 对图片增加文字水印。
+| link:../object/image_process/watermark_image/[图片水印] | 对图片增加图片水印。
+| link:../object/image_process/save/[图片另存] | 将图片另存到对象存储的 Bucket 中，主要用于方便用户保存各种处理后的图片。
+| link:../object/image_process/format/[图片格式转换] | 将原始图片转换为目标格式。
+
+
+|===

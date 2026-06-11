@@ -1,0 +1,61 @@
+---
+title: "VSCode 使用"
+weight: 22
+---
+
+== 前提条件
+
+* 容器实例已创建成功，且状态为``运行中``。
+
+* 已配置link:../ssh_login[容器实例 SSH 公钥访问]。
+
+== 云端 VSCode 使用
+
+. 登录 {console_name}。
+. 在顶部导航栏，点击**产品与服务** > **{coreshub_name_cn}** > **{coreshub_name_cn}**，进入其**总览**页面。
+. 在左侧导航栏，选择**开发与训练** > **容器实例**，默认进入容器实例列表页面。
+. 在指定容器实例所在行中，点击**快捷访问**列中的 **vscode**，进入 vscode UI 页面。
++
+image::/images/cloud_service/compute/coreshub/develop_training_vscode_login_1.png[]
+
+. 在 vscode UI 页面，点击右上角 **Toggle Panel**，打开 VSCode 底部的 Terminal 面板，用于输入并执行 Terminal 命令。
++
+image::/images/cloud_service/compute/coreshub/develop_training_vscode_login_2.png[]
+. 在左侧 **EXPLORER 区域**的空白处，点击鼠标右键，加载文件管理相关菜单栏，可进行**新建文件**等操作。
++
+image::/images/cloud_service/compute/coreshub/develop_training_vscode_login_3.png[]
+
+. 在左侧导航栏中，点击**扩展**，进入扩展列表，用户可根据实际需要安装相应扩展组件。
++
+* 在线安装扩展
+.. 用户可点击扩展列表内的筛选按钮选择，筛选 VSCode 平台上的扩展类型。
++
+image::/images/cloud_service/compute/coreshub/develop_training_vscode_login_4.png[]
+.. 在扩展列表中，选择待安装的组件（以 Python 扩展为例），打开其介绍页面，点击 **Install**，等待组件安装完成即可。
++
+image::/images/cloud_service/compute/coreshub/develop_training_vscode_login_5.png[]
+
+* 离线安装扩展
+.. 点击相应组件的 **Install** 按钮，若由于网络连接问题，提示错误时，可点击右下角提示窗口中的 **Try Downloading Manually**，进行离线安装。
++
+image::/images/cloud_service/compute/coreshub/develop_training_vscode_login_6.png[]
+.. 进入浏览器，通过将 vsix 包，下载至用户本地主机。如 ``ms-python.python-2024.4.1.vsix`` 包。
+.. 完成离线包的下载后，使用 link:../jupyter/#_上传文件[JupiterLab 上传安装包]或link:../ssh_login[建立本地主机与容器实例的 SSH 公钥访问]后，使用 ``scp`` 命令上传安装包。
+
+== 本地 VSCode 使用
+
+若用户本地主机已安装 VSCode，可直接在 VSCode 上使用 SSH 连接至容器实例。
+
+. 容器实例link:../ssh_login[已完成 SSH 公钥访问]配置。在容器实例列表页面，点击相应容器实例所在行右侧的更多操作，选择**复制 SSH 命令**。
+. 打开本地 VSCode，在欢迎页面，选择 **Connect to**。
++
+image::/images/cloud_service/compute/coreshub/develop_training_vscode_login_7.png[,80%]
+
+. 若 VSCode 未安装 SSH 访问组件，则需点击顶部弹窗中的 **SSH** 进行安装。安装完成后，点击 **Add New SSH Host**。
++
+image::/images/cloud_service/compute/coreshub/develop_training_vscode_login_8.png[,80%]
+
+. 输入第一步复制的 SSH 命令，并选择已配置到容器实例内的本地主机的公钥，在右下角的弹窗中选择 **Connect** 即可。
++
+image::/images/cloud_service/compute/coreshub/develop_training_vscode_login_9.png[,40%]
+

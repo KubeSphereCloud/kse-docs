@@ -1,0 +1,44 @@
+---
+title: iptables.ini
+weight: 3
+---
+
+
+
+该配置文件用于配置网络防火墙规则。
+
+== 示例
+
+[source,ini]
+----
+[trust_network]
+192.168.111.0/24
+
+[custom_rules]
+# src_ip:unnecessary, dst_port:unnecessary, proto:necessary
+# src_ip or dst_port at least one
+1: src_ip=10.10.0.0/16 dst_port=8090 proto=tcp
+2: dst_port=8091 proto=tcp
+3: src_ip=10.10.0.0/16 proto=tcp
+----
+
+== 参数说明
+
+[cols="1,3", options="header"]
+|===
+| 参数 | 说明 
+
+| trust_network a| 
+
+* 防火墙需要放行的网段，需将存储集群内节点网段放行，包括配置文件 link:../ip[ip.ini] 中所提及的所有 IP 所在网段，否则部署完成后，当前环境不能访问。
+* 若与 IaaS 环境进行对接时，此处还需添加 IaaS 相关网段。IaaS 网段查询，可参考 FAQ 相关章节内容。
+
+|custom_rules a|填写各种额外的 iptables 放行需求，每一行代表一个规则。详细要求如下：
+
+* `src_ip`: 来源 IP，非必填项，不填则表示放行所有来源 IP。
+* `dst_port`: 目的端口，非必填项，不填表示放行所有端口。
+* `proto`: 协议类型，必填项，取值为：`tcp` 与 `udp`。
+* 每条规则中 `src_ip` 与 `dst_port` 二者必填其一。
+
+|===
+

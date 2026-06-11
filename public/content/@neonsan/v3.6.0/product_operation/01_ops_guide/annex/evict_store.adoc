@@ -1,0 +1,21 @@
+---
+title: "evict_store 相关"
+weight: 3
+---
+
+== 命令格式
+
+[,shell]
+----
+neonsan evict_store -store_id id [-c neonconfile] -evacuate_data yes|no
+----
+
+== 相关说明
+
+* 可通过设置 `-evacuate_data` 参数，指定执行该命令时是否迁移当前节点的数据。
+* 执行该命令会使节点进入 maintain 状态，数据迁移完成或者选择不迁移数据，均需要手动执行 quit_maintenance，退出节点的维护状态。
+* `-evacuate_data` 参数设置为 `yes`，保留数据，将该 Store 节点上 OK 状态的副本全部迁移至其他节点。数据迁移过程中，副本不会被置为 ERROR，则副本所在的卷不会降级。已 OPEN 或未 OPEN 的卷均可继续使用，不受影响。
+* `-evacuate_data` 参数设置为 `no`，不保留数据，对该节点上的数据不做处理。命令执行后，副本会被置为 ERROR，该副本所在的卷会降级或 ERROR。已 OPEN 或未 OPEN 的降级卷均可正常使用。ERROR 卷不可使用，需要通过 `repair_volume` 进行修复。
+* 执行硬件更换、节点下线、节点重启等操作，需要先执行 evict_store 迁移数据，避免残留未 OPEN 卷的副本，上线后 OPEN 由于硬件故障导致卷降级。若客户非核心数据或数据敏感度不高，可以执行 evict_store 不迁移数据选项，但需要保障冗余一台节点用作数据恢复。
+
+

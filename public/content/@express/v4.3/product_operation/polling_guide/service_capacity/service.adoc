@@ -1,0 +1,35 @@
+---
+title: "平台服务检查"
+weight: 1
+---
+
+[cols="1h,4a"]
+|===
+|巡检目的
+|对平台节点上的所有服务进程进行健康检查
+
+|巡检条件
+|云平台可正常稳定运行
+
+|巡检过程
+|. admin 用户登录云易捷 Console 平台 （http://<firstbox IP>:9998, admin/zhu88jie 登录）。
+. 点击左侧导航栏服务巡检，在右侧页面点检再次检查。
+. 检查会持续一段时间，观察巡检结果，看是否全部正常。
+
+|预期结果
+|. 可正常登录云易捷运维管理平台。
+. 服务巡检可正常进行。
+. 可输出巡检结果，且各项服务均正常。
++
+include::../../../../../_components/note_in_table.adoc[]
+只有当节点各项服务均为健康状态时云平台才可以正常使用。
+include::../../../../../_components/footer_in_table.adoc[]
+
+|检查结果示例(正常)
+|
+image::/images/express/polling/polling_service_1.png[]
+
+|检查结果示例(异常)
+|
+image::/images/express/polling/polling_service_2.png[]
+|===

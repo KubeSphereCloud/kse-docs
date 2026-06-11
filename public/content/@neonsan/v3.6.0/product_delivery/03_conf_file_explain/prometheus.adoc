@@ -1,0 +1,50 @@
+---
+title: "prometheus.yml"
+weight: 5
+---
+
+该配置文件用于保存 monitor 相关配置信息，其参数说明如下所示。
+
+[options="header",cols="2,2,3,1"]
+|===
+|参数名|类型 |说明 |是否必须 
+|rule_files	|字符串	|告警规则文件目录	|是
+
+4+h|global： 全局配置
+|scrape_interval	
+|字符串	
+|抓取数据间隔，默认值为 1min，可用单位：ms，smhdwy	
+|否
+
+|scrape_timeout	
+|字符串	
+|抓取超时时间，默认值为 10s	
+|否
+
+|evaluation_interval	
+|字符串	
+|告警评估周期，默认值为 1min	
+|否
+
+|external_labels	
+|字符串	
+|外部标签	
+|是
+
+4+h|scrape_configs: 配置列表
+|job_name	|字符串	|默认情况下分配给抓取目标的 job 名称	|是
+|scrape_interval	|字符串	|抓取数据间隔，默认继承 global 值	|否
+|scrape_timeout	|字符串	|抓取超时时间，默认继承 global 值	|否
+|metrics_path	|字符串	|抓取路径	|否
+|static_configs	|字符串	|根据不同 job_name 静态配置节点列表	|是
+|targets	|字符串	|需要监控的所有节点的 IP	|是
+
+4+h|alerting: 告警配置
+4+h|alertmanagers：
+|scheme	|字符串|指定推动告警使用的协议，一般为 http 或 https	|是
+
+4+h|static_configs：
+|targets	|字符串	|推送告警服务的地址	|是
+|===
+
+

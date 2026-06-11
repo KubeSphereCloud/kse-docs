@@ -1,0 +1,69 @@
+---
+title: "查看规则组详情"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 查看规则组详情"
+description: "介绍如何查看规则组详情。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 493e6b6a2f0a45bbb2e18ebef1f92ac2
+:ks_xref_id: 6b32aa2f365c4f64a242b73128bcc455
+:ks_comp: ../../../../components/
+:ks_title: 查看规则组详情
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 查看规则组详情
+:ks_description: 介绍如何查看规则组详情。
+:ks_weight: 03
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-viewAlertingPolicyDetails.adoc[]
+
+
+== 前提条件link:[id=1ac43bb3b9484f28bb33074672cc0cb4]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsView.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbClickhouse/radondbClickhouse-prer-installRadondbClickHouse.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=45ea9283994c4b5b86baa989688bd913]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbClickhouse/radondbClickhouse-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-viewAlertingPolicyDetails.adoc[]

@@ -1,0 +1,31 @@
+---
+title: '创建存储池'
+weight: 3
+draft: false
+---
+
+. 登录 link:../../../login[Portal 管理界面]。
+
+. 点击左侧导航栏**存储资源** > **存储池**，进入存储池管理页面。
+
+. 在存储池管理页面，点击**创建存储池**。
++
+image::/images/neonsan/portal_create_rg_1.png[]
+
+. 在弹出的**创建存储池**的窗口中，在相应的输入栏内填写存储池名称，选择加入该存储池内的存储节点服务器，点击**创建**即可。
++
+
+include::../../../../../../_components/note.adoc[]
+* 同一个存储节点，不能从属于两个不同的存储池。
+* 在存储系统部署完成初期，所有存储节点已经添加至 default 存储池。
+* 若需要创建新的存储池，则需将存储节点从 default 存储池中删除，可参考link:../del_rg_node[前文内容]。
+
+include::../../../../../../_components/table_footer.adoc[]
+
++
+image::/images/neonsan/portal_create_rg_2.png[,60%]
+
+
+
+
+

@@ -1,0 +1,31 @@
+// 创建 FirstBox
+
+
+. 登录待部署集群中上传有 Installer 包的节点。
+. 执行如下命令，创建 FirstBox 节点。
++
+[source,shell]
+----
+/root/qingstor-installer/bootstrap/launch_fb.sh -a x.x.x.x
+----
++
+include::../../../../_components/note.adoc[]
+* ``-a`` 参数用于指定 qingstor-firstbox 的管理地址，需替换为当前所在节点的管理 IP 地址，无需另外指定。
+* 若环境为 spine-leaf(ecmp)，需要使用 ``-s`` 参数，命令如下： +
+``/root/qingstor-installer/bootstrap/launch_fb.sh -a x.x.x.x -s``
+* 若环境为 spine-leaf，创建 FirstBox 时，没有添加 -s 参数，需在 FirstBox 启动后执行如下命令: +
+``mkdir -p /opt/installer && touch /opt/installer/.is_spine_leaf``
+include::../../../../_components/table_footer.adoc[]
+
+. 若 FirstBox 创建失败，可登录当前所在节点，并查看如下日志。
++
+[source,shell]
+----
+cat /root/launch_fb.log
+----
++
+include::../../../../_components/note.adoc[]
+修改相关错误后，再次执行步骤 2。
+include::../../../../_components/table_footer.adoc[]
+
+. 耐心等待上一步执行完成。

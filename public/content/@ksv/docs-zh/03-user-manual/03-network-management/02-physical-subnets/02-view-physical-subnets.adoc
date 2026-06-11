@@ -1,0 +1,78 @@
+---
+title: "查看物理子网列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 物理子网, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看物理子网列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 82c4fc8ae338494fba80946036fe1488
+:ks_xref_id: f25b3072e0244d08931e5572e7577fdb
+:ks_comp: ../../../../components/
+:ks_title: 查看物理子网列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看物理子网列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 物理子网, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看物理子网列表。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=3a46165bd5c545eb93a0cf1681e9dd99]
+
+include::../../../../_custom/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=656f88a6a3da4b08af87d3c54e33a0b1]
+
+include::../../../../_custom/networks/physical-subnet-steps.adoc[]
++
+--
+物理子网列表展示当前项目中的所有物理子网。具体参数信息如下表所示。
+
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|物理子网的名称。
+
+include::../../../../_custom/networks/physical-network-naming-convention.adoc[]
+
+|ID
+|物理子网在系统中的通用唯一标识符，由系统自动分配。
+
+|状态
+|物理子网当前的状态。
+
+|物理 VLAN
+|物理子网所在的 VLAN ID。
+
+|物理网络
+|物理子网所在的物理网络。
+
+|网段
+|物理子网所在的网段范围。
+
+|网关
+|物理子网对应的网关地址。
+
+|可用 IP
+|物理子网中当前可用的 IP 地址数。
+
+|已用 IP
+|物理子网中当前已用的 IP 地址数。
+|===
+--
+
+. （可选）点击物理子网列表上方的搜索框并设置搜索条件，可按名称或 ID 搜索物理子网。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的物理子网。
+
+. （可选）在物理子网列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。

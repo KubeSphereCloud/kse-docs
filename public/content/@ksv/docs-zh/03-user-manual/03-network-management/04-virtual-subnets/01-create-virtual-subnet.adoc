@@ -1,0 +1,71 @@
+---
+title: "创建虚拟子网"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟子网, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建虚拟子网。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 62f641b86d5e48f49181e2d1065fa3bc
+:ks_xref_id: 96c88e66942e400cab10b4c94f86cd20
+:ks_comp: ../../../../components/
+:ks_title: 创建虚拟子网
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建虚拟子网。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟子网, 创建
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建虚拟子网。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=c6bea0e0206648bfb9e07e5587766ee5]
+
+include::../../../../_custom/networks/virtual-subnet-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=ea1f56ec102c42f5ab6a03b8de5281d9]
+
+include::../../../../_custom/networks/virtual-subnet-steps.adoc[]
+
+. 在虚拟子网列表页面，点击右上角的**创建**。
+
+. 在弹出的对话框中配置虚拟子网的相关参数。具体参数描述请参见下表。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|虚拟子网的名称。
+
+include::../../../../_custom/networks/naming-convention.adoc[]
+
+|VPC
+|虚拟子网所在的 VPC 网络。
+
+|子网网段
+|虚拟子网的网段范围，它是虚拟子网所在的 VPC 网段的子集。
+
+|描述
+|用户自定义的描述信息。
+
+include::../../../../_custom/networks/description-convention.adoc[]
+
+|带宽
+|点击**高级设置**可以为子网设置带宽限制。
+
+|域名服务器
+|点击**高级设置**可以指定域名服务器的 IP 地址。
+|===
+--
+
+. 点击**创建**。虚拟子网创建后将显示在虚拟子网列表中。

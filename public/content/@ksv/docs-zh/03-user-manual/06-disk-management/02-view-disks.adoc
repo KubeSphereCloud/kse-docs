@@ -1,0 +1,67 @@
+---
+title: "查看磁盘列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 磁盘, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看磁盘列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 851fe8387a3144048e8c6b727b2b199f
+:ks_xref_id: ba080e32060345289e4d82d71cc368b9
+:ks_comp: ../../../components/
+:ks_title: 查看磁盘列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看磁盘列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 磁盘, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看磁盘列表。
+
+include::../../../_custom/disks/disk-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=b1e0eb3eb9d548e0bed1e6792e51f20a]
+
+include::../../../_custom/disks/disk-steps.adoc[]
++
+--
+磁盘列表展示当前项目中的所有磁盘。具体参数描述如下表所示。
+
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|磁盘的自定义名称。
+
+include::../../../_custom/vms/vm-naming-convention.adoc[]
+
+|ID
+|磁盘在系统中的通用唯一标识符。
+
+|状态
+|磁盘当前的状态。
+
+|容量
+|磁盘的容量大小。
+
+|所属虚拟机
+|磁盘所挂载的虚拟机的名称。
+
+|所属项目
+|磁盘所在的项目名称。
+
+|创建者
+|创建磁盘时使用的用户名称。
+|===
+--
+
+. （可选）点击磁盘列表上方的搜索框并设置搜索条件，可按名称或 ID 搜索磁盘。例如，**名称:ab** 表示搜索名称包含字符串 **ab** 的磁盘。
+
+. （可选）在磁盘列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。

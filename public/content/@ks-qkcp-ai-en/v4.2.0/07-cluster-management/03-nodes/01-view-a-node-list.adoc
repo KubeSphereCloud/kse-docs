@@ -1,0 +1,59 @@
+---
+title: "View Node List"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Node, View Node List"
+description: "Describes how to view the node list."
+weight: 01
+---
+
+:ks_permission: **Node Viewing**
+
+This section describes how to view the node list.
+
+== Prerequisites
+
+:relfileprefix: ../../../
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/nodes/nodes-oper-openListPage_new.adoc[]
+
++
+
+====
+* The node list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The hostname and internal IP address of each node within the subnet. The hostname for each node is set by the user in the installation configuration file **config-sample.yaml** when installing the cluster.
+
+|Status
+|
+include::../../../_custom/clusterManagement/nodes/nodes-para-nodeStatus_new.adoc[]
+
+If taints exist on the node, the **Status** column will also display the number of taints on the node. Hover over the taint number to view specific taint information. For more information, refer to link:../05-edit-node-taints/[Set Node Taints].
+
+|Role
+|
+include::../../../_custom/clusterManagement/nodes/nodes-para-nodeRole_new.adoc[]
+
+|===
+--
+
+* Click the search box above the list and enter a keyword to search for nodes by name.
+
+include::../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../_ks_components/oper-customizeColumns.adoc[]
+====

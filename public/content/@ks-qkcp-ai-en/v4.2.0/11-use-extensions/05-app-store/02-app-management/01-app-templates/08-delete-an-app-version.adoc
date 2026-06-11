@@ -1,0 +1,49 @@
+---
+title: "Delete App Version"
+keywords: "Kubernetes, {ks_product}, Workspace, App Template, Delete App Version"
+description: "Describes how to delete an app version in an app template."
+weight: 08
+---
+
+:ks_permission: **App/App Version/App Instance Deletion**
+:ks_navigation: **App Management > App Templates**
+
+This section describes how to delete an app version in an app template.
+
+// Warning
+include::../../../../../../_ks_components/admonitions/warning.adoc[]
+
+Once an app version is deleted, it cannot be recovered. Please perform this operation with caution.
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+* If the app version you need to delete has been published to the App Store, you need to contact the App Store administrator to unpublish the app version.
+
+
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. On the **Versions** tab of the app template details page, click the app version you want to delete. In the expanded area, click **Delete**, then click **OK** in the pop-up dialog.

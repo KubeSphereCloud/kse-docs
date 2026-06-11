@@ -1,0 +1,47 @@
+---
+title: "View Domain List"
+description: "Learn how to view the domain list."
+weight: 02
+---
+
+:ks_navigation: **Application Workloads > Ingress Utils**
+
+This section describes how to view the list of domains that have "Domain Reuse Validation" enabled.
+
+== Prerequisites
+
+* **KubeSphere Ingress Utils** should have been installed and enabled.
+
+* You should have the **cluster-viewer** role on the {ks_product-en} platform.
+
+== Steps
+
+. Log in to the {ks_product-en} web console and enter your cluster.
+
++
+
+include::../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+====
+* The domain list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name and description of the domain.
+
+|Domain
+|The domain address, supports wildcard matching.
+|===
+--
+
+* Click the search box at the top of the list to search by name or domain. The name supports fuzzy queries, while the domain only supports equal queries and does not support fuzzy queries.
+
+include::../../../../_ks_components-en/oper-refreshListData.adoc[]
+
+include::../../../../_ks_components-en/oper-customizeColumns.adoc[]
+====

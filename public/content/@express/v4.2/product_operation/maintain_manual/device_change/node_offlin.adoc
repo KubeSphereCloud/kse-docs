@@ -1,0 +1,253 @@
+---
+title: "物理节点下线"
+weight: 1
+---
+
+== 运维场景
+
+在先下线再扩容或需永久下线某一物理节点的运维场景中，可参考以下操作步骤。
+
+== 注意事项
+
+若集群中某一物理节点下线，需将当前节点上的资源和数据迁移至集群中的其他物理节点上，此时须确保目标物理节点有足够的空间承载相应的数据。
+
+== 操作步骤
+
+=== 步骤 1：迁移 IaaS 资源
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 登录 ks0 节点。
+
+. 依次执行如下命令，将待下线的物理节点（expressr01n01）上所有 IaaS 资源迁移至目标物理机（expressr01n02）上。
++
+[source,shell]
+----
+cd /pitrix/cli/
+----
++
+[source,shell]
+----
+./describe-instances -H expressr01n01 -s terminated,running,stopped
+----
++
+[source,shell]
+----
+./describe-volumes -H expressr01n01 -s terminated,available,in-use
+----
++
+[source,shell]
+----
+./migrate-hyper-node -H expressr01n01 -t expressr01n02
+----
++
+**参数说明**：
++
+* ``-H`` 用于指定待下线的物理节点的 Hostname，需根据实际情况进行修改。
+* ``-s`` 用于指定虚拟资源的状态，使用命令行中的默认值即可。
+* ``-t`` 用于指定资源迁移的目标物理节点的 Hostname，即待迁移节点上的所有 IaaS 资源均会迁移至该节点上，需根据实际情况进行修改。
+
+=== 步骤 2：下线 NeonSAN
+
+若当前环境使用的为 NeonSAN 块存储，需参考以下步骤迁移数据后，下线相应服务。可参考“link:https://box.yunify.com/s/SLLiAiJ5azgHDrB[《NeonSAN 运维手册》]：物理设备变更 > 物理节点下线”相关操作步骤。
+
+=== 步骤 3：下线节点
+
+. 登录 FirstBox 节点，并切换成 Root 用户。
+. 执行如下命令，查看待下线节点的管理虚机（即 KS 节点）的信息。
++
+[source,shell]
+----
+grep xx.xx.xx.xx /pitrix/conf/settings/*
+----
++
+image::/images/express/maintain/node_offline_1.png[]
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为待下线物理节点的 IP 地址。
+include::../../../../../_components/table_footer.adoc[]
+
+. 依次执行如下操作，手动迁移待下线节点的管理虚机（wuhan-ks0）至目标物理节点（expressr01n02）上。
+.. 登录至待下线的物理节点。
+.. 将 wuhan-ks0 相应的 ``img`` 和 ``xml`` 文件（命名格式如图）同步至 expressr01n02 上。
++
+[source,shell]
+---
+cd /pitrix/kernels
+---
++
+[source,shell]
+----
+scp -r ksnode20041a.img wuhana-ks0.img wuhana-ks0.xml root@expressr01n02:/pitrix/kernels/
+----
++
+image::/images/express/maintain/node_offline_2.png[]
++
+include::../../../../../_components/note.adoc[]
+* 目标物理节点的 Hostname，需根据实际情况进行修改。
+* ``img`` 和 ``xml`` 文件名形如 ``ksnodexxxx.img``，``<zone_id>-ks.img``，``<zone_id>-ks.xml``，可参考示例根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+.. 关闭并销毁待下线节点的管理虚机（wuhan-ks0）。
++
+[source,shell]
+----
+virsh destroy wuhan-ks0
+----
++
+[source,shell]
+----
+virsh undefine wuhan-ks0
+----
++
+include::../../../../../_components/note.adoc[]
+wuhan-ks0 为待下线的物理节点上的管理虚机，其名称规则一般为 <zone_id>-ks<N>，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+.. 登录至目标物理节点（expressr01n02）。
+.. 备份 ``wuhan-ks0.xml`` 文件。
++
+[source,shell]
+----
+cd /pitrix/kernels
+----
++
+[source,shell]
+----
+ cp -fr wuhan-ks0.xml wuhan-ks0.xml.bak
+----
+
+.. 修改 ``wuhan-ks0.xml`` 文件中的 vnc 监听地址为目标物理节点（expressr01n02）的 IP。
++
+[source,shell]
+----
+vi wuhan-ks0.xml
+----
++
+image::/images/express/maintain/node_offline_3.png[]
+
+.. 在目标物理节点 expressr01n02 上，定义新的管理虚拟机。
++
+[source,shell]
+----
+virsh define /pitrix/kernels/wuhan-ks0.xml
+----
+
+.. 启动虚拟机。
++
+[source,shell]
+----
+virsh start wuhan-ks0
+----
+
+.. 设置物理机开机自动启动当前虚拟机。
++
+[source,shell]
+----
+virsh autostart wuhan-ks0
+----
+
+.. 查看虚拟机状态，返回结果中上一步骤中启动的虚拟机为 ``running`` 即可。
++
+[source,shell]
+----
+virsh list
+----
+
+.. 登录 FirstBox 节点，修改待下线物理节点上虚拟管理节点的相关信息，将 ``physical_host`` 修改为目标物理节点（expressr01n02）的 IP。
++
+[source,shell]
+----
+vi /pitrix/conf/settings/wuhan-ks0
+----
++
+image::/images/express/maintain/node_offline_4.png[]
+
+.. 登录任意物理节点检查 wuhan-ks0 网络状态。
++
+[source,shell]
+----
+ping -w 1 wuhan-ks0
+----
+
+. 若待下线的节点上有 qingcloud-firstbox 管理虚拟机，则须参考上一步骤，将该管理虚拟机迁移至目标物理节点（expressr01n02）上。其中，qingcloud-firstbox 管理虚拟机的 ``img`` 和 ``xml`` 文件名称为 ``qingcloud-firstbox.img`` 和 ``qingcloud-firstbox.xml``。
++
+image::/images/express/maintain/node_offline_5.png[]
+
+. 登录 FirstBox 节点，Root 权限下。
+. 查看待下线节点 ID，记录放回结果中的 ``node_ids`` 的值。
++
+[source,shell]
+----
+/pitrix/cli/describe-nodes.py -i "xx.xx.xx.xx"
+----
++
+image::/images/express/maintain/node_offline_6.png[]
++
+include::../../../../../_components/note.adoc[]
+xx.xx.xx.xx 为待下线节点的 IP 地址。
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 删除下线物理节点（expressr01n01）相关信息。
++
+[source,shell]
+----
+/pitrix/cli/delete-nodes.py  -n '<node_ids>' -f
+----
++
+include::../../../../../_components/note.adoc[]
+``-n`` 用于指定下线节点的 ID。
+include::../../../../../_components/table_footer.adoc[]
+
+. 删除 ``/pitrix/conf/settings`` 目录下，下线物理节点（expressr01n01）的信息。
++
+[source,shell]
+----
+rm /pitrix/conf/settings/expressr01n01
+----
++
+include::../../../../../_components/note.adoc[]
+expressr01n01 为示例，根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 重新生成 node 文件。
++
+[source,shell]
+----
+/pitrix/bin/gen_node_list.py
+----
+
+. 校验 ``/pitrix/conf/nodes/`` 节点信息中是否已删除下线物理节点。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/all
+----
+
+. 节点成功下线后，可执行如下命令，检查所有服务状态。
++
+[source,shell]
+----
+/pitrix/check/check.py -n all
+----
+
+
+

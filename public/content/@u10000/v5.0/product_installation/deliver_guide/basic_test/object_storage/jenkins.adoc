@@ -1,0 +1,145 @@
+---
+title: Jenkins 测试
+weight: 4
+draft: true
+---
+
+
+== 测试目的
+
+{product_name} 的对象存储部署完成后，相应的 Jenkins 环境也搭建完成。用户可通过如下步骤来部署 Jenkins，以确保该环境的各项功能均部署正确且能正常提供服务。
+
+
+== 测试过程
+
+. 登录 {product_name} 的 FirstBox。
+
+. 进入脚本所在目录。
++
+[source,shell]
+----
+# cd /root/qs-installer
+----
+
+. 执行如下命令行，部署 Jenkins 服务。
++
+[source,shell]
+----
+
+# ./qs_installer deploy --jenkins
+----
++
+**命令回显说明**
+
+* 若该命令执行失败，需调查原因并解决后，再次执行该命令。
+* 命令行输出最后一行内容显示 `unreachable=0 failed=0`，即为部署成功。
+
+. Jenkins 成功部署完成后，可以通过浏览器访问 Jenkins 管理页面。
+.. 查询 Jenkins 服务所在节点 IP，由于 Jenkins 默认部署在第一个网关节点上，因此可执行如下命令行查询：
++
+[source,shell]
+----
+# cat /etc/hosts | grep core0
+xxx.xx.xx.xx core0
+
+----
+
+.. 打开浏览器，输入如下地址访问 Jenkins 管理页面。并输入：用户名 `qingstor`，密码：`Zhu1241jie!`。
++
+[source,shell]
+----
+xxx.xx.xx.xx:8888
+
+----
+
+. 运行测试脚本。
+.. 登录 Jenkins 节点服务器。
++
+[source,shell]
+----
+# ssh core0
+
+----
+
+.. 进入 Jenkins 容器。
++
+[source,shell]
+----
+# docker exec -it jenkins /bin/bash
+
+----
+
+.. 运行测试脚本。
++
+[source,shell]
+----
+# /qingstor/bin/enable_all_jobs.sh
+
+----
+
+. 打开浏览器访问 Jenkins 管理页面，点击**Manage Jenkins** > **System Configuration**，将下图红框内数值调整为 100，点击保存：
++
+image::/images/u10000/jenkins_1.png[jenkins_1,100%]
+
+. 待脚本运行 3 次以上后，查看测试结果，以 `base_` 和 `compat_` 为任务名前缀的任务成功率为 100%，则说明测试结果均成功。
+
+. 停掉 Jenkins 服务。具体操作如下：
+.. 登录 Jenkins 节点服务器
++
+[source,shell]
+----
+#ssh jenkins0
+----
+
+.. 停掉 Jenkins 服务。本步骤执行完后，Jenkins 服务已卸载。如需再次使用 Jenkins 服务，则需重新部署。
++
+[source,shell]
+----
+# docker stop jenkins
+# docker rm jenkins
+# docker rmi qs-jenkins
+----
+
+
+
+== FAQ
+
+部署 Jenkins 失败，输出结果如下所示：
+
+[source,shell]
+----
+#./qs_installer deploy –jenkins
+……
+jenkins0                   : ok=24   changed=12   unreachable=0    failed=1
+
+----
+
+查看错误详细信息为 Account 服务器创建 test_users 失败。则可以通过如下步骤解决：
+
+
+. 手动创建 3 个账号，3 个 API 密钥。
+
+. 手动创建如下文件，并写入新创建的账号与密钥：
++
+[source,shell]
+----
+# touch /qingstor/etc/qs_test_users.json
+# vi /qingstor/etc/qs_test_users.json
+[{"index": 0, "secret_access_key": "OqKfdn25FiPSe3lwDNIz2snjxr1I9uz8x6y3BRDf", "user_id": "usr-qMZ3TUi1", "access_key_id": "GNFQNXCSPSAKOUPILJIC"}, {"index": 1, "secret_access_key": "MHwGZCCoYQXINmZ6X5R0NVGUQKVzSFW1HiLzXzUv", "user_id": "usr-5fXxkjaX", "access_key_id": "LZYJVBLKQPYCQBLVVGVG"}, {"index": 2, "secret_access_key": "jsQkBhoWqvMJ1Z1ognYcHAP222M85mVYGYyfhoAY", "user_id": "usr-N3qejT9T", "access_key_id": "JNQSAMKPHCDDDRSQZLYQ"}]
+----
+
+. 手动导入 Jobs
++
+[source,shell]
+----
+# python /qingstor/lib/qs-test/scripts/jenkins_import_all_jobs.py
+----
+
+. 使能 Jobs
++
+[source,shell]
+----
+# /qingstor/bin/enable_all_jobs.sh
+----
+
+

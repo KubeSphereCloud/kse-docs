@@ -1,0 +1,49 @@
+---
+title: 'NeonSAN 配置检查'
+weight: 2
+---
+
+. 新增节点上执行如下命令，检查如下配置文件内的 Zookeeper 集群信息是否正确，replicating port，data port 配置是否正确。
++
+其中，Zookeeper 集群信息可遵循原集群配置即可。端口号、IP 地址以及磁盘信息需与新增节点实际配置信息保持一致。
++
+[,shell]
+----
+cat /etc/neonsan/store.conf
+cat /etc/neonsan/qbd.conf
+cat /etc/neonsan/center.conf
+----
+.  重启新增节点的主机，查看服务是否正常重启，若没有重启，检查原因并修改，直至服务都能正常启动。
+
++
+[,shell]
+----
+supervisorctl status
+...
+neonstore      RUNNING    pid 28577, uptime 9:10:59
+neonmonitor    RUNNING   pid 4360, uptime 4 days, 19:14:14
+...
+----
+
+. 登录到集群任一节点上，检查各输出是否符合实际情况。
++
+[,shell]
+----
+neonsan list_store && neonsan list_ssd && neonsan list_port && neonsan  list_parameter
+----
++
+
+include::../../../../../../../_components/note.adoc[]
+* list_parameter 中，auto_recovery 为 1，auto_balance 为 1。
+* list_store 中，新增节点应显示在列。
+* list_ssd 中，新增节点对应的 SSD 应显示在列。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 登录到新增节点上，检查 SSD 空间，与实际情况需相符。
++
+[,shell]
+----
+curl "http://localhost:2601/stat?ssd"
+----
+

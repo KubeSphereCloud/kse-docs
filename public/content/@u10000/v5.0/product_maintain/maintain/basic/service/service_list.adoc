@@ -1,0 +1,147 @@
+---
+title: 服务列表
+weight: 1
+---
+
+== 网关节点
+
+
+
+// [cols='1,2,2,2']
+// |===
+// | 服务名 | 启动命令 | 暂停命令 | 重启命令
+
+// | etcd | serviceTool.sh start etcd | serviceTool.sh stop etcd | serviceTool.sh restart etcd
+
+// | vire-redis | serviceTool.sh start vire-redis | serviceTool.sh stop vire-redis | serviceTool.sh restart vire-redis
+
+// |===
+
+=== 服务列表
+
+
+部署于网关节点上的服务可参考下表内容。
+
+[cols='1,3']
+|===
+| 服务名 | 服务说明
+
+| etcd | 高可用键值存储服务，主要用于提供注册服务，配置服务等功能。
+| vire-redis | 多线程 Redis 服务。
+| tipd_server_0 | TiKV 集群的管理模块。
+| tikv_server_0 | TiKV Server，分布式的提供事务的 Key-Value 存储引擎，负责存储数据。
+| tidb_server | 分布式数据库。
+| tipd_server | 分布式数据库管理模块。
+| tikv_server | 分布式数据库索引模块。
+| memcache | 前端数据缓存。
+| qs_index | 对象存储索引服务。
+| hydro_confd | 底层存储管理服务。
+| hydro_nas | 负责对外提供 `nfs` 或 `samba` 协议的挂载服务。
+| qs_dns | 存储域名解析。
+| nginx | Web 服务。
+| qs_global_gateway | 对象存储全局网关服务。
+| qs_gateway3 | 对象存储网关服务。
+| nginx_log_parser | 管理与归档 Bucket 日志。
+| prometheus2 | 服务监控系统。
+| qs_alerter | 告警服务，用于发送告警信息。
+| loki | 用于存储和查询日志，为 `promethus` 服务提供日志告警能力。
+| promtail | 用于采集和发送日志。
+| qs_webconsole | Console 前端服务。
+| qingstor_zero_web | 前端系统的 Web 端，用于通过 Web 展示集群信息。
+| qingstor_zero_agent | 前端系统的 Agent 端，用于机器信息采集。
+| node_exporter2 | 监控信息采集服务。
+| keepalived | 高可用组件。
+
+|===
+
+=== 服务启停
+
+{product_name} 提供脚本，用于启停各服务，使用方式如下，其中 `<service_name>` 为待操作的服务名，可参考link:#_服务列表[服务列表]中的内容进行填写。
+
+[source,shell]
+----
+serviceTool.sh start <service_name>
+serviceTool.sh stop <service_name>
+serviceTool.sh restart <service_name>
+----
+
+需要注意的是，link:#_服务列表[服务列表]中的 `node_exporter2` 与 `keepalived` 由 `systemctl` 监管，因此，这两个服务的启停，需使用 `systemctl` 相关命令行。具体如下所示。
+
+[source,shell]
+----
+systemctl start keepalived
+systemctl stop keepalived
+systemctl restart keepalived
+----
+
+这里以启停 `etcd` 服务为例，详细说明操作步骤。
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 从 FirstBox 节点跳转至目标网关节点。命令行中的 `<gateway_name>` 为 {product_name} 的网关节点的 Hostname。
++
+[source,shell]
+----
+ssh <gateway_name>
+----
+
+. 执行如下命令行，操作服务。
++
+* 启动服务
++
+[source,shell]
+----
+serviceTool.sh start etcd
+----
++
+* 暂停服务
++
+[source,shell]
+----
+serviceTool.sh stop etcd
+----
++
+* 重启服务
++
+[source,shell]
+----
+serviceTool.sh restart etcd
+----
+
+
+== 存储节点
+
+=== 服务列表
+
+部署于存储节点上的服务可参考下表内容。
+
+[cols='1,3']
+|===
+| 服务名 | 服务说明
+
+| hydro_stor | 存储底层服务。
+| qs_device | 用于收集节点磁盘信息。
+| promtail | 用于采集和发送日志。
+| qingstor_zero_agent | 用于机器信息采集。
+| node_exporter2 | 用于收集节点信息。
+
+|===
+
+=== 服务启停
+
+可参考link:#_服务启停[网关节点]中的操作，唯一不同的地方是，需登录存储节点执行服务的启停操作。
+
+
+另外，link:#_服务列表_2[服务列表]中的 `node_exporter2` 由 `systemctl` 监管，因此，该服务的启停，需使用 `systemctl` 相关命令行。具体如下所示。
+
+[source,shell]
+----
+systemctl start node_exporter2
+systemctl stop node_exporter2
+systemctl restart node_exporter2
+----

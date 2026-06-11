@@ -1,0 +1,49 @@
+---
+title: "Remove Workspace Members"
+keywords: "Kubernetes, {ks_product}, Workspace Management, Workspace Settings, Workspace Members, Remove Workspace Members"
+description: "Describes how to remove workspace members."
+weight: 05
+---
+
+:ks_permission: **Member Management**
+:ks_navigation: **Workspace Settings > Workspace Members**
+
+
+This section describes how to remove workspace members.
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+After a user is removed from a workspace, they will lose the permissions granted by the workspace role. If the user has joined projects within the workspace, they will also be removed from those projects.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. To the right of the workspace member you want to remove, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Remove**.
+
+. In the **Remove Member** dialog box, enter the username of the workspace member, and then click **OK**.
++
+--
+The removed workspace member will no longer appear in the workspace member list.
+--

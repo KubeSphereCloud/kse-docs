@@ -1,0 +1,58 @@
+---
+title: "复制微服务配置"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 项目管理, Spring Cloud, 复制微服务配置"
+description: "介绍如何复制微服务配置。"
+weight: 05
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: a8636981177449eda19853ecb9ff4feb
+:ks_xref_id: cdbb824ab7e04e37a20a1ddcd8569d4e
+:ks_comp: ../../../components/
+:ks_title: 复制微服务配置
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, Spring Cloud, 复制微服务配置
+:ks_description: 介绍如何复制微服务配置。
+:ks_weight: 05
+:ks_icon:
+:ks_permission: **工作负载管理**
+:ks_navigation:  **Spring Cloud > 微服务配置**
+
+
+本节介绍如何复制微服务配置。
+
+您可以使用已有的微服务配置创建一个名称不同但数据完全相同的微服务配置。
+
+
+== 前提条件link:[id=2cb350d0da02488d8c6853b646f9a9da]
+
+include::../../../_custom/projectManagement/microservices/microservices-prer-enableSpringCloud.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+
+== 操作步骤link:[id=50c23665eb994d87b235663de93f9a34]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要操作的微服务配置右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**复制**。
+
+. 在**复制微服务配置**对话框，设置新微服务配置的名称，然后点击**确定**。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+根据需要，您也可以修改配置数据。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+复制完成后，复制生成的微服务配置将显示在列表中。
+--

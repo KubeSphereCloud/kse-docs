@@ -1,0 +1,13 @@
+// :ks_include_id: 6d48b5a3f3c74e7f958661364e5294d0
+Set the strategy for pod updates.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Rolling Update (Recommended)
+|Gradually replace old pod replicas with new ones. During the upgrade, traffic will be load-balanced between old and new pod replicas, ensuring no service interruption. If you choose this strategy, you need to further configure the **Maximum Unavailable Pods** and **Maximum Surge Pods**.
+
+|Simultaneous Update
+|Delete all old pod replicas before creating new ones. Service will be interrupted during the upgrade.
+|===

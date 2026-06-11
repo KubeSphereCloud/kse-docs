@@ -1,0 +1,148 @@
+---
+title: "查看数据库监控"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB MongoDB, 数据库服务监控, 资源监控, 查看监控"
+description: "介绍在{ks_product_both}中 RadonDB MongoDB 监控指标，以及监控指标说明。"
+weight: 08
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 148039719b4a4992ab99a531218d09e6
+:ks_xref_id: 28bd670ee4af4d53b46dc9f86610f303
+:ks_comp: ../../../components/
+:ks_title: 查看数据库监控
+:ks_keywords: Kubernetes, {ks_product}, RadonDB MongoDB, 数据库服务监控, 资源监控, 查看监控
+:ks_description: 介绍在{ks_product_both}中 RadonDB MongoDB 监控指标，以及监控指标说明。
+:ks_weight: 08
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+{ks_product_right}提供对 RadonDB MongoDB 应用运行状态进行日常监控，您可以通过{ks_product_both}平台，一站式监控 RadonDB MongoDB 数据库服务和容器资源指标。本小节主要介绍如何查看在{ks_product_both}中提供的 RadonDB MongoDB 监控指标。
+
+== 监控指标简介link:[id=380ec9f591394939ad6f720aacf0b73f]
+
+
+=== 服务监控指标link:[id=b503b959d5c4470a89470fae5f8b76e2]
+
+[%header,cols="1,5"]
+|===
+|监控项 |说明
+
+|操作数量
+|统计命令操作次数，包括插入、查询、更新、删除、返回游标的次数以及总次数。
+
+|副本集操作数量
+|统计副本集环境命令操作次数，包括插入、查询、更新、删除、返回游标的次数以及总次数。
+
+|连接数量
+|统计数据库连接数，包括当前连接数量、已创建连接总数、可用连接数量和活跃连接数量。
+
+|游标数量
+|统计数据库游标数量，包括超时游标数量、永不超时游标数量、固定打开游标数量和游标总数。
+
+|网络流量
+a|统计数据库网络流量。单位为 Bytes。
+
+* 入站流量：表示数据库接收的数据量。
+* 出站流量：表示数据库发送的数据量。
+
+|WiredTiger 操作数量
+|统计数据库并发操作数量，包括并发写操作数量、可用并发写操作数量、并发读操作数量、可用并发读操作数量。
+
+|文档数量
+|统计数据库文档数量，包括已删除文档数量、已插入文档数量、已返回文档数量、已更新文档数量。
+
+|查询执行器指标
+|统计数据库已扫描的键数量和文档总数。
+
+|活跃客户端数量
+|统计活跃客户端数量，包括活跃的客户端总数、活跃的读客户端数量、活跃的写客户端数量。
+
+|队列中请求数量
+|统计当前队列中的请求数量，包括排队的总数、队列中读请求数量、队列中写请求数量。
+
+|WiredTiger 缓存
+|统计 wiredTiger 缓存用量和缓存中脏数据比例。
+|===
+
+
+=== 资源监控指标link:[id=7d2b0e10b4484cc4ae08ba4c8f75c2b4]
+
+[%header,cols="1,5"]
+|===
+|监控项 |说明
+
+|CPU 用量
+|统计节点资源 CPU 资源使用量，单位为 core。
+
+|内存用量
+|统计节点内存资源使用量，单位为 Mi。
+
+|出站流量
+|统计节点网络流出速率，单位为 Kbps。
+
+|入站流量
+|统计节点网络流入速率，单位为 Kbps。
+
+|===
+
+
+== 查看监控link:[id=f8eb2992696d4afe8311f1b3c79e8904]
+
+RadonDB MongoDB 在{ks_product_both}平台查看数据库服务和容器资源状态。
+
+本小节主要介绍如何中查看 RadonDB MongoDB 应用服务和资源状态。
+
+
+=== 前提条件link:[id=661e14c31ae94d87ad3d6cbbf7b9df80]
+
+* 请确保已获取{ks_product_both}平台登录用户帐号和密码，且已获取平台管理权限。
+
+* 请确保已创建 RadonDB MongoDB 应用，且应用状态处于运行中。
+
+
+=== 查看节点服务监控link:[id=f48fca9faec04c0295a805092555c7bf]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbMongoDB/radondbmongodb-oper-openDetailsPage.adoc[]
+
+. 在**概览**页面**节点**列表区域，选择目标节点，并点击**监控**图标，进入服务监控页面，即可查看服务状态。
+
+. 在时间过滤框，选择监控时间范围，点击**确定**，即可查看指定时间范围的服务监控。
+
+
+=== 查看节点资源监控link:[id=6d5154e9aa7a494d99ce14d8111ebbc0]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbMongoDB/radondbmongodb-oper-openDetailsPage.adoc[]
+
+. 在**概览**页面**节点**列表区域，点击目标节点名称，进入节点容器组详情页面。
+
+. 选择**监控**页签，进入资源监控页面，查看资源状态。
+
+. 在时间过滤框，选择监控时间范围，点击**确定**，即可查看指定时间范围的资源监控。

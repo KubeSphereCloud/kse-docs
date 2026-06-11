@@ -1,0 +1,53 @@
+---
+title: "Release Notes for v1.6.0"
+linkTitle: "{ks_title}"
+keywords: "release notes, {ks_product_full}, {ks_product}, v1.6.0"
+description: ""
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 54db08e8ce1a4a7d846c59c74b6cc6c7
+:ks_xref_id: 20e7f2d8082a44c5a4134dba3edff55a
+:ks_comp: ../../components/
+:ks_title: Release Notes for v1.6.0
+:ks_description:
+:ks_keywords: release notes, {ks_product_full}, {ks_product}, v1.6.0
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== New featureslink:[id=4b8b9151509840acb5a789ae83db2417]
+
+* Add modules for physical networks. You can configure physical networks for VMs and elastic IP addresses (EIPs) to improve network performance.
+* Add modules for virtual networks. You can create VMs in virtual private clouds (VPCs) and virtual subnets to achieve security isolation. You can also associate an EIP with a VPC or VM to enable public access.
+* Add modules for SSH keys. You can use SSH keys to log in to Linux-based VMs in a secure and easy manner.
+* Add modules for security groups. You can create a separate set of rules to control inbound and outbound traffic for the VMs associated with security groups. This improves the security of resources.
+* Add a feature to configure bandwidth limits. You can create custom quality of service (QoS) rules to ensure data transmission bandwidth and reduce network latency. This can improve resource usage.
+* Integrate {ks_product} into KubeSphere to provide a unified console to manage pods and VMs at the same time.
+* Support NeonSAN, an enterprise-grade distributed storage system.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Enhancementslink:[id=582778c4ca7f4ab6a40dc7a8d310fbf3]
+
+* Optimize the overview feature. {ks_product} provides an enhanced console to help you view cluster resource statistics in real time, including VMs, disks, networks, physical nodes, CPUs, and memory.
+* Optimize the VM management feature. {ks_product} provides an enhanced console to help you monitor and manage the status and resource usage of VMs. You can create VMs from VMs, templates, and images.
+* Optimize the feature for physical node management. {ks_product} provides an enhanced console to help you monitor and manage the status and resource usage of physical nodes. You can add nodes to your cluster in the web console.
+* Optimize the feature for VM image management. {ks_product} provides an enhanced console to help you create and manage images. You can enable the sharing feature for an image in the web console so that the image can be accessible to other project members.
+* Optimize the feature for alerting and logging. {ks_product} provides an enhanced console to help you view alerts and logs in the system. You can analyze and handle alerts in real time.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Fixed issueslink:[id=f1e6cc2d12a1471e88915f45a35bbda9]
+
+* Fix the issue that image upload is prone to be interrupted.
+* Fix the issue that common users have no permissions on the images of the selected VM templates.
+* Fix the issue that VMs cannot be forcibly restarted during disk mount.

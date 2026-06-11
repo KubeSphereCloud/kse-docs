@@ -1,0 +1,77 @@
+---
+title: "View Microservices Gateway Details"
+keywords: "Kubernetes, {ks_product}, Project Management, Spring Cloud, View Microservices Gateway Details"
+description: "Describes how to view microservices gateway details."
+weight: 03
+---
+
+:ks_permission: ** Spring Cloud Microservices View**
+:ks_navigation:  **Spring Cloud > Microservices Gateway**
+
+
+This section describes how to view microservices gateway details.
+
+
+== Prerequisites
+
+* The **KubeSphere Spring Cloud** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the right side of the page, select **Manage > View Details** to open the gateway details page.
+
+. In the **Properties** area of the gateway details page, view the gateway's resource properties.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the gateway belongs.
+
+|Creation Time
+|The creation time of the gateway.
+
+|Update Time
+|The update time of the gateway.
+
+|Creator
+|The user who enabled the gateway.
+|===
+--
+
+. On the **Resource Status** tab of the gateway details page, view the gateway's pod replicas, container ports, and pods.
++
+====
+* The **Replicas** area displays the desired and current number of pod replicas for the gateway.
+
+* The **Ports** area displays the container port name, protocol, and port number for the gateway.
+
+* The **Pods** area displays all pod replicas for the gateway.
++
+--
+include::../../../../_custom/clusterManagement/nodes/nodes-para-podList.adoc[]
+--
+====
+
+. On the gateway details page, click the **Metadata** tab to view the gateway's labels and annotations.

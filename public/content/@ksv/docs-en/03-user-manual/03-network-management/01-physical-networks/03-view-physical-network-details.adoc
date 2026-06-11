@@ -1,0 +1,121 @@
+---
+title: "View physical network details"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, physical networks, details, view"
+description: "Describes how to view physical network details in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 0d7cd70accbb414689f7afca1ee52844
+:ks_xref_id: 5be058e02ec242d8a2aeebea2533b941
+:ks_comp: ../../../../components/
+:ks_title: View physical network details
+:ks_description: Describes how to view physical network details in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, physical networks, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view physical network details in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=0b67ffc6870d495fa16c0957da212dc9]
+
+include::../../../../_custom-en/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=695ad9f2ffd743fcbc2b4cf94b6c21f1]
+
+include::../../../../_custom-en/networks/physical-network-steps.adoc[]
+
+. On the **Physical Networks** page, click the name of the physical network that you want to view. The details page of the physical network appears.
+. The IP address range in which the physical subnet resides.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the physical network in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the physical network.
+
+|Type
+|The type of the physical network.
+
+include::../../../../_custom-en/networks/network-type-description.adoc[]
+
+|Created at
+|The time when the physical network was created.
+
+|Created by
+|The username that is used to create the physical network.
+|===
+--
+. On the left side of the details page, view basic information about the physical network. The following table describes the parameters.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the physical subnet.
+
+|ID
+|The UUID of the physical subnet in the system. The UUID is automatically assigned by the system.
+
+|VLAN ID
+|The VLAN ID in which the physical subnet resides.
+
+|IP Range
+|The IP address range in which the physical subnet resides.
+
+|Gateway
+|The gateway address of the physical subnet.
+
+|Available IPs
+|The number of IP addresses available in the physical subnet.
+
+|Used IPs
+|The number of IP addresses used in the physical subnet.
+|===
+--
+. On the right side of the details page, click the **NICs** tab to view information about NICs. The following table describes the parameters.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the NIC.
+
+|MAC Address
+|The physical address of the NIC, which is the unique identifier of the NIC in the network.
+
+|Status
+|The status of the NIC.
+
+|Node
+|The name of the node on which the NIC resides.
+
+|IP Address
+|The node IP address where the NIC resides.
+
+|MTU
+|The maximum transmission unit (MTU) of the NIC.
+
+|Rate
+|The transmission rate of the NIC.
+|===
+--

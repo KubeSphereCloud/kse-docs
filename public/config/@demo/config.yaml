@@ -1,0 +1,55 @@
+title: "Demo 文档"
+
+markup:
+  asciidocExt:
+    attributes:
+      toc:
+      toclevels: 2
+      file_output_type: html
+      relfilesuffix: /
+
+
+params:
+  description: "这里是 Demo 文档中心页面"
+  favicon: "/images/favicon.ico"
+  keywords: "云计算,青云,QingCloud,文档"
+  logo: "/images/qingcloud-logo.svg"
+  logoInfo: "Demo"
+  logoLink: /v5.3.0/        # 当前项目默认版本
+  docHostPort: http://demo.doccenter.dev.com:8000 # 内嵌版必填
+  homeLink: https://www.qingcloud.com/
+  footer: |-
+    <a href="https://beian.miit.gov.cn/" target="_blank">京ICP备13019086号</a>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502030190">
+      <img src="https://www.qingcloud.com/static/assets/images/ghs.png" style="vertical-align: middle">
+      &nbsp;
+      <span>京公网安备11010502030190</span>
+    </a>
+    &nbsp;代理域名注册服务机构：新网
+  navLink:
+    - title: 旧版文档
+      url: https://docsv3.qingcloud.com
+    - title: 备案
+      url: https://www.qingcloud.com/icp
+    - title: 登录
+      url: https://console.qingcloud.com/
+    - title: 注册
+      url: https://console.qingcloud.com/signup/
+
+  # PDF 配置
+  pdf:
+    pdf_projectName: Demo
+    pdf_coverDocName: QingCloud Demo
+    # pdf_only:
+    #   -
+    #     - /v5.1.0/product/youshi
+    #     - /v5.1.0/product/youshi/deploy.adoc
+    #     - /v5.1.0/product/youshi/install.adoc
+    #   - /v5.1.0/guide/adventure
+    # pdf_include:
+    #   -
+    #     - /v5.1.0/product/youshi
+    #     - /v5.1.0/product/youshi/deploy.adoc
+    #   - /v5.1.0/guide/adventure
+    # pdf_exclude:
+    #   - /v5.1.0/zhi_nan/doc.adoc

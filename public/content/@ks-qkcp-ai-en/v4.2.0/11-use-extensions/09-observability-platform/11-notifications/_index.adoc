@@ -1,0 +1,29 @@
+---
+title: "WizTelemetry Notification"
+keywords: "Kubernetes, {ks_product}, Platform Settings, Notification Management"
+description: "Introduces how to use the 'WizTelemetry Notification' extension."
+weight: 10
+layout: "second"
+---
+
+
+This section introduces how to use the "WizTelemetry Notification" extension.
+
+This extension is used to manage notifications in a multi-tenant Kubernetes environment. It can receive alerts, cloud events, and other types of events (such as auditing and Kubernetes events) from different senders, and send notifications to the corresponding tenants based on tenant labels (such as namespace or user). It supports various notification channels such as email, Feishu, DingTalk, WeCom, Slack, and Webhook.
+
+After installing the "WizTelemetry Notification" extension,
+
+* The **Notification** menu will be displayed in the WizTelemetry Observability Platform within the Component Dock.
+* The **Logging** menu will be displayed in the cluster's left navigation pane. Under the **Logging** menu, **Log Receivers** will be displayed. The **Log Receivers** page will display the **Notification History** tab, supporting the addition of various types of log receivers. For more information, please refer to link:../02-logging/02-log-receivers/[Log Receivers].
+* **Notification Settings** will be displayed in the dropdown list of the currently logged-in user.
+
+//attention
+[.admon.attention,cols="a"]
+|===
+| Note
+
+|
+- WizTelemetry Notification only needs to be deployed in the host cluster. An `alertmanager proxy` is added to the host cluster and exposed as a NodePort (default 31093). When configuring WizTelemetry Alerting and WizTelemetry Events Alerting, if you use the WizTelemetry Notification extension to send alert messages, corresponding configurations are required. For more information, please refer to the description on the details page of the "WizTelemetry Alerting" and "WizTelemetry Events Alerting" extensions in the Extensions Center.
+
+- WizTelemetry Notification depends on WizTelemetry Platform Service and WizTelemetry Data Pipeline. Therefore, before installing WizTelemetry Notification, you must first install and configure these two extensions: WizTelemetry Platform Service and WizTelemetry Data Pipeline. Otherwise, notification-related functions will not work properly!
+|===

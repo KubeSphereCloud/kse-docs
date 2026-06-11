@@ -1,0 +1,123 @@
+---
+title: 'Installer v3.0.0 及之后版本'
+weight: 1
+---
+
+. 登录集群中的任一节点。
+
+. 执行如下命令，登录集群的 FirstBox。
++
+[,shell]
+----
+ssh qingstor-firstbox -p 6023
+----
+
+. 为新增节点添加新 neonsan-store 角色。
++
+[,shell]
+----
+installer role-node-add neonsan-store -I scale_ip_list
+----
+
+. 拷贝 {product_name} 配置文件至 /root/ 目录。
++
+[,shell]
+----
+cp /qingstor/install/test/yaml/neonsan-settings.yaml /root/scale_neonsan-settings.yaml
+----
+
+. 修改 {product_name} 扩容节点配置。
++
+--
+[,shell]
+----
+vim /root/scale_neonsan-settings.yaml
+----
+
+配置文件各字段说明:
+
+[cols="1,4",options="header"]
+|===
+|字段|说明
+|repl_network
+|参考原 {product_name} 集群的存储网络的网段，进行填写即可。
+
+|data_networks
+|参考原 {product_name} 集群的前端网络的网段，进行填写即可。
+
+|host
+|填写新增节点的管理 IP。
+
+|ssd_disks
+|填写新增节点上使用的 SSD 盘的盘符，若各节点的盘符不一致时，可选择清空内容，只保留该字段即可。 +
+若有多个磁盘，需根据示例格式采用一行一个的形式进行填写
+
+|sata_disks
+|混插配置中，新增节点上 SATA 盘的盘符，也可清空只保留该字段，系统会自动使用节点上全部未使用的 SATA 盘。若为全闪配置，保持该配置项为空或者删除该配置项。
+
+|test_rg_name
+a| * 集群中不存在的存储池名称，是将新增节点扩容到指定目标存储池前的临时存储池。
+* 命名格式必须形如为 ``testXXX``，如 test_rg100。
+* installer 会自动把新增节点加入该临时存储池。
+
+|target_rg_name
+a| * 扩容时，新增节点预期加入的目标存储池名称，可以为集群中已存在的存储池名称，也可是集群中不存在的新的存储池名称。 
+* 使用已有存储池，需待通过link:../../check_rg[存储池检查]操作后，由实施人员手动将新增节点从 ``test_rg_name`` 存储池中移除并添加至目标存储池。
+* 使用尚不存在的存储池，需通过link:../../check_rg[存储池检查]操作后，由实施人员手动创建相应名称的存储池，并将新增节点从 ``test_rg_name`` 存储池中移除并添加至目标存储池。
+
+|use_icas
+|是否使用 intelcas，即是否开启 icas 混插部署，ture 表示开启，false 表示关闭.
+
+|use_bcache
+|NeonSAN v3.5.1 版本安装包新增字段，其他 NeonSAN 版本无此配置字段。
+表示是否使用 bcache，即是否开启 bcache 混插部署，ture 表示开启，false 表示关闭。（如果use_bcache，use_icas 均为 true，则默认使用 bcache）
+
+|failure_domain
+a|存储节点所属故障域的名称，即根据节点所在机架名称进行配置，如节点在 rack01 机架，则failure_domain 配置为 ``rack01``。
+
+include::../../../../../../../_components/note_in_table.adoc[]
+若扩容时选择将新增节点添加至集群中已存在的存储池中，则如果目标存储池中的所有节点均规划了故障域，则本次扩容的新增节点建议仍进行故障域规划；如果目标存储池中的节点未进行故障域规划，则此处保持默认即可，默认值为 `defaultdom`。
+include::../../../../../../../_components/footer_in_table.adoc[]
+
+|connection_type
+|节点间网络连接方式，支持 TCP 或 RDMA，根据实际情况进行填写。
+|===
+
+--
+. 生成新增节点的配置。
++
+[,shell]
+----
+installer product-config neonsan-settings -c scale_neonsan-settings.yaml
+----
+. 检查生成的配置。
++
+--
+* 检查集群中各节点角色信息，新增节点应添加至 [neonsan-store] 列。
++
+[,shell]
+----
+less /qingstor/install/deployment/environment/hosts
+----
++ 
+image::/images/neonsan/auto_exp_6.png[auto_exp_6]
+
+* 检查新增存储节点的配置信息。
++
+[.shell]
+----
+cd /qingstor/install/deployment/environment/group_vars/neonsan/
+less neonsan-store3
+----
++
+image::/images/neonsan/auto_exp_7.png[auto_exp_7]
++
+include::../../../../../../../_components/note.adoc[]
+* neonsan-store3 为新增的 {product_name} 存储节点，需根据实际情况进行修改。
+include::../../../../../../../_components/table_footer.adoc[]
+--
+
+
+
+
+

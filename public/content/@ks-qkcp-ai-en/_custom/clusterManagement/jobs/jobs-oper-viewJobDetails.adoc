@@ -1,0 +1,144 @@
+// :ks_include_id: ae48f9c2af1e46bca4bede49d4447413
+. On the Job details page, view the resource attributes of the Job in the **Attributes** area.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the Job belongs.
+
+|Project
+|The project to which the Job belongs.
+
+|Status
+|
+The current status of the Job.
+
+include::jobs-para-jobStatus.adoc[]
+
+|Max Retries
+|The maximum number of times pods in the Job can be restarted. If the Job completion condition is not met after reaching the maximum number of retries, the Job will be marked as failed. Displayed only for regular Jobs.
+
+|Pods Completed
+|The number of pods that must successfully complete to mark the Job as completed. Displayed only for regular Jobs.
+
+|Parallel Pods
+|The number of pod replicas running in parallel in the Job. Displayed only for regular Jobs.
+
+|Max Run Time
+|The maximum running time of the Job, in seconds. If the Job completion condition is not met after reaching the maximum running time, the Job will be terminated and marked as failed. Displayed only for regular Jobs.
+
+|Schedule
+|The CRON expression for the CronJob's running cycle. Displayed only for CronJobs.
+
+|Max Start Delay
+|The maximum delay time for starting the Job when it fails to start as scheduled for some reason. Displayed only for CronJobs.
+
+|Successful Jobs History Limit
+|The number of successful Jobs allowed to be retained. The default value is 3. Displayed only for CronJobs.
+
+|Failed Jobs History Limit
+|The number of failed Jobs allowed to be retained. The default value is 1. Displayed only for CronJobs.
+
+|Concurrency Policy
+|The strategy the system adopts when multiple Jobs created by a CronJob overlap.
+
+* **Run Jobs Concurrently**: New Jobs and old Jobs run concurrently.
+
+* **Skip New Job**: Do not run the new Job.
+
+* **Skip Old Job**: Terminate the old Job immediately and then run the new Job.
+
+Displayed only for CronJobs.
+
+|Creation Time
+|The creation time of the Job.
+
+|Creator
+|The user who created the Job.
+|===
+--
+
+. On the Job details page, view the Job's run records on the **Run Records** tab.
++
+--
+When a user manually reruns a regular Job or a CronJob runs according to its schedule, the system generates run records.
+
+For CronJobs, the **Run Records** tab displays the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Sequence
+|The sequence number of the Job run, indicating which run the record corresponds to.
+
+|Status
+|The status result of each Job run.
+
+include::jobs-para-jobStatus.adoc[]
+
+* **Incomplete**: The user manually reran the Job during its execution.
+
+|Message
+|The message returned by the Job run.
+
+|Start Time
+|The time when the Job started running.
+
+|End Time
+|The time when the Job run ended.
+|===
+
+For regular Jobs, the **Run Records** tab displays the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Job
+|The name of the regular Job created by the CronJob.
+
+|Status
+|The status of the regular Job created by the CronJob.
+
+include::jobs-para-jobStatus.adoc[]
+
+|Start Time
+|The time when the regular Job started running.
+
+|End Time
+|The time when the regular Job run ended.
+|===
+--
+
+. For regular Jobs, click the **Resource Status** tab on the Job details page to view the container ports and pods in the Job.
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Ports
+|The port name, protocol, and port number of the containers in the Job.
+
+|Pods
+|
+The pods in the Job.
+
+include::../nodes/nodes-para-podList.adoc[]
+|===
+--
+
+. Click the **Metadata** tab on the Job details page to view the labels and annotations of the Job.
+
+. For regular Jobs, click the **Environment Variables** tab on the Job details page to view the environment variables of all containers in the Job.
+
+. Click the **Events** tab on the Job details page to view events related to the Job.
++
+--
+include::../clusterManagement-para-eventsTab.adoc[]
+--

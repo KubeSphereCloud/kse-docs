@@ -1,0 +1,53 @@
+---
+title: VM 间性能测试--私有网络
+weight: 3
+---
+
+
+[cols='^1h,4a']
+|===
+| 验收目的 | 验证 VM 基于私有网络间的性能。
+| 预置条件 | * {product_name}已部署完成。
+
+* 内置 `ubuntu14.04.3` 操作系统镜像。
+
+
+| 操作步骤 | . 通过浏览器登录{product_name}的 Web Console。
+
+. 在 Web Console 相应页面创建 VPC 网络 VPC-1。
+. 在 Web Console 相应页面创建私有网络 Private-1。
+. 将私有网络 Private-1 加入 VPC-1。
+. 创建两台 `ubuntu14.04.3` 的云服务器 VM-1，VM-2，分别加入该私有网络 Private-1。
+. 防火墙下行放开 `5000` 端口。
+. 使用 SSH 工具登录 VM-1，执行命令行启动 Iperf Server 端。
++
+[source,shell]
+----
+iperf -s -p 5000
+----
+
+. 使用 SSH 工具登录 VM-2，执行命令行启动 Iperf Client 端。
++
+[source,shell]
+----
+iperf -c <server端 IP> -p 5000 -f M -i 1
+----
+
+. 分别观察 VM-1 与 VM-2 上的返回结果。
+
+| 预期结果 | 500M
+
+
+
+| 验证结果 | 
+
+// * Iperf Server 端
+// +
+// image::/images/ep_offline/delivery_guidelines/iperf_server_3.png[iperf_server_3,40%]
+
+// * Iperf Client 端
+// +
+// image::/images/ep_offline/delivery_guidelines/iperf_client_5.png[iperf_client_5,40%]
+
+| 备注 | 
+|===

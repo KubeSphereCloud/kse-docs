@@ -1,0 +1,90 @@
+---
+title: "Visualizing Metrics Collected by Alloy"
+keywords: "Kubernetes, {ks_product}, Grafana, alloy, dashboard, Observability"
+description: "Describes how to visualize metrics collected by Alloy in Grafana."
+weight: 01
+---
+
+Alloy has built-in link:https://grafana.com/docs/alloy/latest/reference/components/prometheus/[Exporters] that can export metrics, such as Blackbox Exporter, Elasticsearch Exporter, Kafka Exporter, Redis Exporter, Postgres Exporter, etc. After installing Alloy, users no longer need to install separate Exporters individually. Using the link:https://grafana.com/docs/alloy/latest/reference/components/prometheus/prometheus.remote_write/[prometheus.remote_write] component, metrics exposed by the aforementioned Exporters can be written to Prometheus and its compatible storage backends. Then, use the Grafana console to visualize the metrics collected by Alloy.
+
+The following is an example of using Alloy's built-in Blackbox Exporter to export metrics and write them to Prometheus.
+
+== Steps 1: Create a ConfigMap
+
+In the extension configuration for Grafana Alloy for WizTelemetry, you can directly provide the Alloy configuration or specify an external ConfigMap to provide the configuration. It is recommended to create a ConfigMap first and then specify it in the extension configuration.
+
+Taking Blackbox Exporter as an example, execute the following command on a cluster node to create the ConfigMap `blackbox-modules`.
+
+[source,bash]
+----
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blackbox-modules
+  namespace: kubesphere-monitoring-system
+data:
+  blackbox_modules: |
+    modules:
+      http_2xx:
+        prober: http
+        timeout: 5s
+EOF
+----
+
+== Steps 2: Modify the Extension Configuration
+
+// Configuration still has issues
+Modify the extension configuration for Grafana Alloy for WizTelemetry to scrape and export metrics from the Blackbox Exporter and write them to Prometheus.
+
+[source,yaml]
+----
+alloy:
+  alloy:
+    configMap:
+      # Whether to automatically create the configmap
+      create: true
+      # Configuration content
+      content: |
+        // Specify the configmap for blackbox exporter configuration.
+        remote.kubernetes.configmap "blackbox" {
+          namespace = "kubesphere-monitoring-system"
+          name = "blackbox-modules"
+        }
+
+        prometheus.exporter.blackbox "example" {
+          config = remote.kubernetes.configmap.blackbox.data["blackbox_modules"]
+          // Specify the target configuration for the blackbox exporter, using labels to specify custom tags.
+          target {
+            name    = "prometheus"
+            address = "https://www.prometheus.io"              
+            module  = "http_2xx"
+            labels = {
+              "address" = "https://www.prometheus.io",
+            }
+          }
+        }
+        
+        // Metric forwarding
+        prometheus.scrape "exporter" {
+          targets    = prometheus.exporter.blackbox.example.targets
+          forward_to = [prometheus.remote_write.default_storage_backend.receiver]
+        }        
+
+        // Specify remote write configuration for Prometheus
+        prometheus.remote_write "default_storage_backend" {
+          endpoint {
+            url = "http://prometheus-k8s.kubesphere-monitoring-system.svc:9090/api/v1/write"
+          }
+        }
+      # When using an external configmap, specify the name of the configmap. Enabled when create is false.
+      name: null
+      # The key for the config map
+      key: null
+----
+
+== Steps 3: View Blackbox Exporter Metrics
+
+image:/images/ks-qkcp/zh/v4.1.3/blackbox-exporter-dashboard.png[blackbox-exporter]
+
+Log in to the link:../../16-grafana/[Grafana console] provided by the Grafana for WizTelemetry extension, access the built-in Blackbox Exporter Dashboard, and view the corresponding metrics.

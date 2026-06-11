@@ -1,0 +1,82 @@
+---
+title: "Delete Volume Snapshot Content"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Volume Snapshot Content, Delete Volume Snapshot Content"
+description: "Introduces how to delete volume snapshot content."
+weight: 09
+---
+
+
+:ks_permission: **Volume Snapshot Content Management**
+:ks_navigation: **Storage > Volume Snapshots**
+
+
+This section describes how to delete volume snapshot content.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+When a volume snapshot is bound to a volume snapshot content, the volume snapshot content cannot be deleted. To delete the volume snapshot content, you must first delete the volume snapshot. After the volume snapshot is deleted, the system will decide whether to automatically delete the volume snapshot content based on its deletion policy.
+|===
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+Once deleted, volume snapshot content cannot be recovered, and the snapshot data stored in the backend storage system will also be deleted. Please perform this operation with caution to avoid snapshot data loss.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+* The **KubeSphere Storage** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Delete a Single Volume Snapshot Content
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/volumeSnapshotContents/volumeSnapshotContents-oper-openListPage.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right of the volume snapshot content you want to delete, and then select **Delete** from the drop-down list.
+
+. In the **Delete Volume Snapshot Content** dialog box, enter the name of the volume snapshot content, and then click **OK**.
+
+
+== Batch Delete Volume Snapshot Content
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and go to your cluster or workspace.
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/volumeSnapshotContents/volumeSnapshotContents-oper-openListPage.adoc[]
+
++
+
+. Select the checkboxes on the left of the volume snapshot content you want to delete, and then click **Delete** above the list.
+
+. In the **Batch Delete Volume Snapshot Content** dialog box, enter the name of the volume snapshot, and then click **OK**.
++
+--
+include::../../../../_custom/note-separateNamesByComma.adoc[]
+--

@@ -1,0 +1,56 @@
+---
+title: "Invite Users to a Project"
+keywords: "Kubernetes, {ks_product}, Project Management, Project Settings, Project Members, Invite Users to a Project"
+description: "Describes how to invite users to a project."
+weight: 01
+---
+
+:ks_permission: **Project Member Management**
+:ks_navigation:  **DevOps > DevOps Project Management**
+
+
+This section describes how to invite users to a project.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/devops/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+* The user to be invited must first join the workspace to which the project belongs.
+
+
+
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/devops/projectMembers/members-oper-openListPage.adoc[]
+
++
+
+include::../../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-clickInvite.adoc[]
+
++
+
+. In the **Invite Member** dialog box, click image:/images/ks-qkcp/zh/icons/add-dark.svg[add-dark,18,18] on the right side of the user you want to invite, select the user's role in the project from the drop-down list, and then click **OK**.
++
+--
+include::../../../../../_custom/projectManagement/projectRoles/projectRoles-para-presetRoles.adoc[]
+
+The invited user will appear in the project member list.
+--

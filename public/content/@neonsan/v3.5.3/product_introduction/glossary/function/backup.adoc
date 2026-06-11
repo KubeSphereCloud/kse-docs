@@ -1,0 +1,30 @@
+---
+title: '备份相关'
+weight: 11
+---
+
+[cols="2,2,3,3a",options="header"]
+|===
+|英文词汇|中文/缩略词|解释说明|应用
+
+|backup_point 
+|备份点 
+|指当前备份的时间节点。 
+|为制定卷创建当前备份点：`neonsan create_backup_point pool1/vol1@bp0`
+
+|-
+|全量备份
+|将数据对象的所有定义集合都进行备份，不论数据对象自上次备份后是否进行过修改。一般情况下，对一个新资源的第一次备份为全量备份。
+|-
+
+|-
+|增量备份
+|指在一次全量备份或上一次增量备份后，以后每次的备份只需备份与前一次相比增加或者被修改的文件。
+|-
+
+|backup_diff
+|备份数据
+|针对某一个卷的全量/增量备份数据，可使用 `neonsan export_backup_diff` 命令导出相应的全量/增量备份数据。
+|导出全量备份数据：`neonsan export_backup_diff -now_backup vol/vol_test0@bp_inc0 -of backup_inc0 -t TCP` +
+导出增量备份数据：`neonsan export_backup_diff -from_backup vol/vol_test0@bp0 -now_backup vol/vol_test0@bp_inc0 -of backup_inc0 -t TCP`
+|===

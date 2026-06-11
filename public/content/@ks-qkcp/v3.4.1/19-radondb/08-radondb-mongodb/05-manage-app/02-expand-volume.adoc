@@ -1,0 +1,76 @@
+---
+title: "扩展卷"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB MongoDB, 应用管理,扩展卷"
+description: "如何在{ks_product_both}上扩容应用卷。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: e1a64f97ef7d46238b5f3844f7f55f6a
+:ks_xref_id: 6a6cc75c4f264e40a0483fa23b4cface
+:ks_comp: ../../../../components/
+:ks_title: 扩展卷
+:ks_keywords: Kubernetes, {ks_product}, RadonDB MongoDB, 应用管理,扩展卷
+:ks_description: 如何在{ks_product_both}上扩容应用卷。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+RadonDB MongoDB 创建成功后，可在{ks_product_both}应用管理页面扩展卷。
+
+本节介绍如何扩展挂载到 RadonDB MongoDB 节点的卷。
+
+// note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* 目前不支持对使用{ks_product_both}集群本地存储（存储类为 local）创建的卷进行扩展。
+
+* 目前仅支持增加卷容量，不支持减少卷容量。
+
+* 扩容卷可能会造成业务短暂的中断，请在业务低峰时进行。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=ff5150f0a7da422f80cbbfe50b42da40]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbMongoDB/radondbmongodb-prer-installRadondbmongodb.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbMongoDB/radondbmongodb-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=60a9ff2adc7649b7978a635fa7b38aaf]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMongoDB/radondbmongodb-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 扩展卷**。
+
+. 在**扩展卷**对话框，修改卷容量，然后点击**确定**。

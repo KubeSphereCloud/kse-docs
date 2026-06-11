@@ -1,0 +1,44 @@
+---
+title: "View the details of a system log entry"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, logs, system logs, details, view"
+description: "Describes how to view the details of a system log entry in the {ks_product} web console."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e6f585bbed154ad493a41efc2b4b628b
+:ks_xref_id: af2b29a404cb4963ae41c406f631b76f
+:ks_comp: ../../../components/
+:ks_title: View the details of a system log entry
+:ks_description: Describes how to view the details of a system log entry in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, logs, system logs, details, view
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of a system log entry in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=425ea5794b174aeab53eba74160b6e4b]
+
+User **admin** can view all system logs in your cluster. Common users such as project administrators, operators, and viewers can view the system logs in the projects to which they belong.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=9775cc5be9c74edfbecc25e943e2e3f4]
+
+include::../../../_custom-en/logs/logs-steps.adoc[]
+
+. On the **System Logs** tab, find the system log entry that you want to view and double-click to view its details.
+. In the dialog box that appears, view the details of the system log entry.
+. (Optional) In the upper-left corner of the dialog box, click image:/images/ksv/en/icons/timed-task.svg[18px,18px], select or customize a time range, and then click **OK** to view the system log entries generated during a specific period of time.
+. (Optional) Click image:/images/ksv/en/icons/close-dark.svg[18px,18px] to clear the log entries in the search box.  You can also click the search box and enter a keyword to search for log entries by keyword.  For example, enter **failed** to search for system log entries whose name contains the string **failed**.
+. (Optional) click image:/images/ksv/en/icons/start.svg[18px,18px] or image:/images/ksv/en/icons/stop-dark-white.svg[18px,18px] to start or stop the display of the real-time system log entries.
+. (Optional) Click image:/images/ksv/en/icons/chevron-down.svg[18px,18px] and select a refresh frequency to update real-time system log entries at a specified interval.
+. (Optional) Click image:/images/ksv/en/icons/export.svg[18px,18px] to export the system log entries in the TXT format.

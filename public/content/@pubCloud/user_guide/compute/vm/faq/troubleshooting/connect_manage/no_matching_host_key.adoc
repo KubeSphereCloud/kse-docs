@@ -1,0 +1,29 @@
+---
+title: SSH 访问 Centos 6.8 云服务器时提示无适配密钥
+weight: 75
+---
+
+== 操作背景
+
+Centos 6.8 操作系统下生成的 SSH Key，下载并添加至客户端，使用 OpenSSH v7.0 及以上的版本的 Linux 客户端进行访问时，提示如下内容：``Unable to negotiate with xx.xx.xx.xx port 22: no matching host key type found. Their offer: ssh-rsa,ssh-dss``。
+
+其主要原因在于 OpenSSH v7.0 及以上的版本 不再支持 ssh-dss 加密算法，导致 Centos 6.8 操作系统下生成的 SSH 密钥在较高版本的 Linux 操作系统中无法适配。可参考以下操作步骤进行解决。
+
+
+== 操作步骤
+
+. 登录客户端主机的终端。
+
+. 修改 ``/etc/ssh/ssh_config`` 配置文件。
++
+[source,shell]
+----
+vi /etc/ssh/ssh_config
+
+// 在配置文件末添加以下内容：
+HostKeyAlgorithms +ssh-dss
+----
+
+
+
+

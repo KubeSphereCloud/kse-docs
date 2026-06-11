@@ -1,0 +1,90 @@
+---
+title: 添加告警行为（AddAlarmPolicyActions）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| actions
+| Object
+| true
+| 告警行为
+
+| actions.trigger_action
+| String
+| true
+| 告警通知人
+
+| actions.trigger_status
+| String
+| true
+| 告警状态
+
+| alarm_policy
+| String
+| true
+| 告警策略id
+
+| owner
+| String
+| false
+| 用户
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy_actions
+| Array
+| false
+| 告警行为id数组
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "AddAlarmPolicyActions",
+  "actions": [
+    {
+      "trigger_action": "nl-1i077nsg",
+      "trigger_status": "alarm"
+    }
+  ],
+  "alarm_policy": "alp-f0t3obl0",
+  "owner": "usr-rrPKHDpJ",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "AddAlarmPolicyActionsResponse",
+  "alarm_policy_actions": [
+    "alpa-0lsixfn5"
+  ],
+  "ret_code": 0,
+  "trace_id": "coCylrRF"
+}
+----

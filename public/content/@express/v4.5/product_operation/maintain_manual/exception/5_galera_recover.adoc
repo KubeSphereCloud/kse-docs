@@ -1,0 +1,114 @@
+---
+title: "Galera 集群恢复"
+weight: 5
+---
+
+== 运维场景
+
+以下问题可能造成 Galera 集群异常，均可参考章节操作步骤进行恢复。
+
+* 不正常关机，导致 Galera 集群异常。
+* 磁盘写满，造成 Zookeeper 选主出现问题，导致 Galera 集群异常。
+
+== 前提条件
+
+Galera 集群依赖于 Zookeeper，需要确保 Zookeeper 正常的前提下进行 Galera 集群的恢复。
+
+== 操作步骤
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，查看各个 Galera 集群节点最后的状态，用于确定 Galera 集群第一个启动的节点。
++
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh -f neonsan-db 'cat /data/galera/mysql/grastate.dat'
+----
++
+image::/images/express/maintain/galera_recover_1.png[]
++
+返回结果中参数说明：
++
+* ``safe_to_bootstrap`` 表示是否可以作为第一个节点启动。若该值为 1， 表示该节点为集群中最后关闭的节点，则可以作为第一个节点启动。若为 0，则不可作为第一个节点启动。
+* 若所有节点上的 ``safe_to_bootstrap`` 值均为 0，则此时需比对 ``seqno`` 的值，选择所有节点中 ``seqno`` 值最大的那个节点作为第一个启动的节点。
+
+. 逐个登录 Galera 节点，进行如下操作，已确定启动节点前，galera_cluster 和 mysql 服务均全部停止。
+.. 停止相应的 galera_cluster 服务
++
+[source,shell]
+----
+supervisorctl stop galera_cluster
+----
+.. kill 掉所有节点上正在启动的 mysql 进程。
++
+[source,shell]
+----
+kill -9 `ps -ef |grep "mysqld --defaults" |grep -v grep |awk '{print $2}'`
+----
+
+. 登录 Galera 集群的第一个启动节点，执行如下命令，启动服务。
++
+[source,shell]
+----
+/opt/galera/bin/galera_cluster start --bootstrap --force
+----
+
+. 另起终端窗口，依次登录其他 Galera 节点，启动服务。
++
+[source,shell]
+----
+supervisorctl start galera_cluster
+----
+
+. 等待所有节点的 galera_cluster 服务均启动后，在任一 Galera 节点上，执行如下命令，检查集群状态。
++
+[source,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
++
+image::/images/express/maintain/galera_recover_1.png[]
++
+include::../../../../../_components/note.adoc[]
+返回结果中，各字段需显示如下 ：``local node status`` 为 ``OK``。 ``STATUS`` 字段为 ``synced``， ``CLUSTER STATUS`` 字段为 ``primary`` 且 ``UUID`` 与 ``CLUSTER UUID`` 一致。
+include::../../../../../_components/table_footer.adoc[]
+
+. 返回结果中所有节点正常后，需重新登录第一个启动的 Galera 节点，进行以下操作。
+.. kill 第一个启动 Galera 节点的 galera_cluster 服务。
++
+[source,shell]
+----
+kill -SIGUSR1 `pidof galera_cluster`
+----
+
+.. 使用 supervisor 启动并接管 galera_cluster 服务，以便后期运维。
++
+[source,shell]
+----
+supervisorctl start galera_cluster
+----
+
+.. 检查当前节点 galera_cluster 服务已被 supervisor 接管。
++
+[source,shell]
+----
+supervisorctl status galera_cluster
+----
+

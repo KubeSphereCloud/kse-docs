@@ -1,0 +1,82 @@
+---
+title: "View VM template details"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, templates, list, details, view"
+description: "Describes how to view VM template details in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 0ee50a7fd889402882cd68f1d507894c
+:ks_xref_id: 13eba367eec34a95a70ffad7f83cf552
+:ks_comp: ../../../../components/
+:ks_title: View VM template details
+:ks_description: Describes how to view VM template details in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, templates, list, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view VM template details in the {ks_product_abbr_full} web console.
+
+include::../../../../_custom-en/vms/vm-template-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=17ebe6734c8346dc910d86dcfdab38d8]
+
+include::../../../../_custom-en/vms/vm-template-steps.adoc[]
+
+. On the **Templates** page, click the name of a VM template to view its details.
+. On the left side of the details page, view basic information about the VM template.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the template in the system. The UUID is automatically assigned by the system.
+
+|Project
+|The project name in which the template is created.
+
+|Created at
+|The time when the template was created.
+
+|Shared
+|Specifies whether the template can be shared with other users. If this feature is enabled, users in other projects can replicate the template.
+
+|Created by
+|The username that is used to create the template.
+|===
+--
+. On the right side of the details page, view the configuration of the template.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Image
+|The VM image defined in the template.
+
+|CPU
+|The number of CPU cores defined in the template.
+
+|Memory
+|The memory size defined in the template.
+
+|System Disk
+|The system disk size defined in the template.
+
+|IP Range
+|The IP address range of the VM defined in the template.
+
+|Gateway
+|The gateway address that corresponds to the VM.
+|===
+--

@@ -1,0 +1,101 @@
+// :ks_include_id: b53ca408cc88447789f75df42c73bcc7
+All workspace members can view basic workspace information. The permissions required for other operations are as follows:
+
+* Project
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Project Management
+|Edit project information, delete project, edit project quota.
+
+|Project Creation
+|Create project, and become the administrator of the created project.
+
+|Project Viewing
+|View project list, view all resources in the project.
+|===
+--
+
+* DevOps Project
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|DevOps Project Management
+|Edit DevOps project information, delete DevOps project.
+
+|DevOps Project Creation
+|Create DevOps project, and become the administrator of the created DevOps project.
+
+|DevOps Project Viewing
+|View DevOps project list, view all resources in the DevOps project.
+|===
+--
+
+* Application
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|App Repository Management
+|Add app repository, edit app repository, sync app repository and Helm Chart repository, delete app repository.
+
+|App Repository Viewing
+|View app repository list.
+
+|App Template Management
+|Create app template, edit app template information, install app using app template, upload app version, replace app version, delete app version, publish app version to App Store, delete app template.
+
+|App Template Viewing
+|View app template list, view app template details, download Helm Chart archive.
+|===
+--
+
+* Access Control
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Department Management
+|Set department organizational structure, assign users to departments, remove department members.
+
+|Department Viewing
+|View department organizational structure.
+
+|Member Management
+|Invite users to join workspace, modify workspace member roles, remove workspace members.
+
+|Member Viewing
+|View workspace member list, view workspace member details.
+
+|Role Management
+|Create workspace role, edit workspace role information, edit workspace role permissions, delete workspace role.
+
+|Role Viewing
+|View workspace role list, view workspace role details.
+|===
+--
+
+* Workspace Settings
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Workspace Settings Management
+|Edit workspace information, enable and disable network isolation, delete workspace, edit workspace quota.
+
+|Workspace Settings Viewing
+|View cluster resource usage, view project resource usage ranking, view workspace resource usage, view workspace quota.
+|===
+--

@@ -1,0 +1,53 @@
+---
+title: "Create Constraint Template"
+description: "Describes how to create a constraint template."
+weight: 01
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: ** Gatekeeper > Constraint Templates**
+
+This section describes how to create a constraint template.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The KubeSphere platform needs to have the **Gatekeeper** extension installed and enabled.
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the **Create Constraint Template** dialog box, set the name and Targets for the constraint template, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+| CRD Name
+| The CRD name corresponding to the constraint template.
+
+|Targets
+| Targets are the target objects of the constraint, i.e., the resource objects to which the constraint rules need to be applied. Targets can be various resources in the Kubernetes cluster, such as pods, Deployments, Namespaces, etc. The constraint will be applied to these target objects to ensure they meet the requirements of the constraint rules.
+
+|===
+
+You can view the created constraint template on the **Constraint Templates** page.
+--

@@ -1,0 +1,23 @@
+---
+title: "安装说明"
+weight: 2
+---
+
+
+
+QKE 或原生的 Kubernetes 使用 HydroFS CSI 的前提是，{product_name} 已成功部署。对于如何部署 {product_name}，用户可参考《{product_name} 安装部署指南》，本文将不作详细说明，只是列出如下几点注意事项。
+
+* Kubernetes 或 QKE 使用的是 {product_name} 的文件存储能力，因此部署 {product_name} 时，一定得得启用文件存储功能。
+* HydroFS CSI 的基本原理是在 Kubernetes 集群的主机上启动一个客户端，而该客户端需直接与 {product_name} 的 Stor 服务进行交互。若 {product_name} 的存储网络和业务网络分离部署，将会导致这个客户端无法访问到 {product_name} 的 Stor 服务。
++
+include::../../../../_components/note.adoc[]
+
+因此部署 {product_name} 时，存储网络和业务网络不能分离部署。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+
+
+
+下文将详细说明如何在原生 Kubernetes 或 QKE 集群安装使用 HydroFS CSI。

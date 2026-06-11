@@ -1,0 +1,51 @@
+---
+title: "创建安置策略组"
+description: 本小节主要介绍如何创建安置策略组。
+draft: false
+weight: 2
+---
+
+. 登录{product_console_name}。
+. 在顶部导航栏，选择**运维工具** > *安置策略组*，进入**安置策略组**列表页面。
++
+image::/images/express/console/strategy_create_1.png[create_strategy_1]
+
+. 点击**创建安置策略组**，在弹出的**创建安置策略组**窗口中，设置各项参数后，点击**创建**即可。
++
+image::/images/express/console/strategy_create_2.png[,60%]
+
+* *参数说明*
++
+[options="header",cols="1,3a"]
+|===
+|参数	|详细说明
+
+|名称
+|用户自定义，便于搜索与浏览。
+
+|安置策略组关系
+|* 分散：组内的主机趋向于部署/迁移到不同的物理节点上。
+* 集中：组内的主机趋向于部署/迁移到相同的物理节点上。
+
+|描述
+|选填项，针对当前安置策略组的备注信息。
+|===
+
+. 返回**安置策略组**列表，点击创建成功的安置策略组的名称，进入其详情页面。在该页面可查看当前安置策略组的名称、ID、所属用户、关系、标签等基本信息以及其绑定的资源和操作日志。
++
+image::/images/express/console/strategy_create_3.png[create_strategy_3]
+
+. 在当前安置策略组详情页面，选择**绑定资源**，点击**加入虚拟机**，在弹出的**选择需要加入安置策略组的虚拟机**窗口中，勾选相应的主机，点击**确定**即可。
++
+
+include::../../../../../_components/note.adoc[]
+* 加入安置策略组之后，若组内的虚拟机多于 1 台，虚拟机可能会根据分散策略发生迁移。
+* 仅状态为``运行中``的主机可加入至安置策略组内。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/strategy_create_4.png[,60%]
+
+. 主机加入安置策略组成功后，返回详情页面，在**绑定资源**页签内，新添加的主机已显示在列。
++
+image::/images/express/console/strategy_create_5.png[create_strategy_5]

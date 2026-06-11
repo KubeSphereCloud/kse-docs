@@ -1,0 +1,43 @@
+---
+title: "Enable Workspace Gateway"
+keywords: "Kubernetes, {ks_product}, Workspace Management, Workspace Settings, Enable Workspace Gateway"
+description: "Describes how to enable a workspace gateway."
+weight: 01
+---
+
+:ks_permission: **Workspace Gateway Management**
+:ks_navigation: **Workspace Settings > Gateway Settings**
+:enable-gateway:
+
+This section describes how to enable a workspace gateway.
+
+
+== Prerequisites
+
+* The **KubeSphere Gateway** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the page, click **Enable Gateway**.
+
+. In the **Enable Gateway** dialog box that appears, configure the gateway parameters, then click **OK**.
++
+--
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-para-enableGateway_v42.adoc[]
+--

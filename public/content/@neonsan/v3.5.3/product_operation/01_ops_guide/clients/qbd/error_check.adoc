@@ -1,0 +1,74 @@
+---
+title: "qemu 与 qbd 错误排查"
+weight: 2
+---
+
+
+## 场景一
+
+=== 场景描述
+
+当 vm 或 hyper 出现诸如 I/O 错误或文件系统异常时，这种情况一般是由于 NeonSAN 连接异常，从而导致的重连失败所引起的。根据不同的场景，用户可以通过查询相关日志，从而明确引起该异常的根本原因。
+
+=== 排查步骤
+
+. 发生问题的磁盘是由 qemu 直接挂载使用的 NeonSAN volume，则在该故障磁盘所在系统上，检查如下文件内是否有连接异常的相关日志。
++
+[,shell]
+----
+/var/log/libvirt/qemu/instance.log*
+----
+
+. 发生问题的磁盘是 sanc hyper 上的磁盘，如 sanc vm 使用的系统盘，可在故障盘所在系统上，输入如下命令查看是否有重连失败的相关日志。
++
+[,shell]
+----
+egrep -a "open_volume_common|qbd_remap_volume" /var/log/syslog*
+----
+
+. open_volume_common 部分错误码及其解释如下。
++
+[options="headers",cols="1,3a"]
+|===
+|错误代码 |说明
+|1 
+|not enough replication
+
+|2 
+|deny acl，一般为灾难触发导致，可通过 ``neonsan permit_acl`` 命令处理
+
+|7 
+|NA
+
+|28 
+|no space，可通过 ``neonsan list_ssd -H`` 查看磁盘使用情况
+
+|101 
+|NA
+
+|102 
+|NA
+
+|104 
+|volume in error state
+|===
+
+. 如果以上日志文件内，有上述提到的错误信息，则为 NeonSAN 系统问题，可咨询 NeonSAN Team，如没有上述错误信息，请联系 Kernel Team 进行处理。
+
+## 场景二
+
+=== 场景描述
+
+采用 QBD 挂载方式进行挂载的磁盘，设置 QoS 时不起作用，这种情况一般是安装的 QBD 版本过低。目前，QBD v2.1.0 及以上版本支持 QoS。
+
+=== 操作步骤
+
+. 执行如下命令，查看已安装的 QBD 版本。若版本低于 v2.1.0，请升级 QBD。
++
+[,shell]
+----
+qbd -v
+----
+
+. 升级 QBD，可参考link:https://box.yunify.com/s/ATNDLTS2zEw2Qx3[《QingStor QBD 安装部署及使用说明》]
+

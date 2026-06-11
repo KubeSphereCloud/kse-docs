@@ -1,0 +1,77 @@
+---
+title: "查看安全组详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台,安全组, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看安全组详情。"
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 87a37f19bd5b4e7bb1680d60c9fc3608
+:ks_xref_id: 19df5d878c164ad5bcd8c8b02d793e71
+:ks_comp: ../../../components/
+:ks_title: 查看安全组详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看安全组详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台,安全组, 详情, 查看
+:ks_weight: 06
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看安全组详情。
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=d938f7c8d3124c689f3e0026c7d8ef72]
+
+include::../../../_custom/security-groups/security-group-steps.adoc[]
+
+. 在安全组列表页面，点击目标安全组名称，进入安全组详情页面。
+
+. 在安全组详情页面的左侧区域，查看安全组的基本信息。
++
+--
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|ID
+|安全组在系统中的通用唯一标识符，由系统自动分配。
+
+|状态
+|安全组的活跃状态。
+
+|创建时间
+|创建安全组的时间。
+
+|创建者
+|创建安全组的用户名称。
+|===
+--
+
+. 在页面右侧的**上行规则**或**下行规则**页签，查看安全组中添加的上行或下行规则。有关更多规则信息，请参阅 link:../02-add-security-group-rule/[添加安全组规则]。
+
+
+. 在页面右侧的**关联资源**页签，查看安全组的关联资源。
++
+--
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|已关联资源的名称。
+
+|ID
+|已关联资源在系统中的通用唯一标识符，由系统自动分配。
+
+|状态
+|已关联资源的状态。
+
+|IP 地址
+|已关联资源的 IP 地址。
+|===
+--

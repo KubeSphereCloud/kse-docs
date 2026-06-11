@@ -1,0 +1,70 @@
+---
+title: "3. 创建 PVC 数据集"
+weight: 03
+---
+
+:ks_permission: **数据集加速管理**
+:ks_navigation: **数据集 > 数据集**
+
+本节介绍如何创建 PVC 数据集，以配置需要加速的 PVC。
+
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Fluid** 和 **Fluid Console** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* 已link:../01-create-nfs-dataset[创建 NFS 数据集]、link:../02-create-thinruntime[创建 ThinRuntime]。
+
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. 在**基本信息**页签，设置**数据集**的基本信息，然后点击**下一步**。
++
+[.admon.attention,cols="a"]
+|===
+|注意
+
+|PVC 数据集与已创建的 NFS 数据集所属的项目必须相同。
+|===
+
+
+. 在**数据源**页签，配置数据源信息，然后点击**下一步**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |操作
+
+|数据源类型
+|选择 PVC。
+// 支持选择 S3、NFS、PVC、JuiceFS 等类型的数据源。
+
+|名称
+|输入自定义名称。
+
+|数据源
+|PVC 的挂载路径。
+
+输入创建 ThinRuntime 时生成的 PVC 的名称。
+|===
+--
+
+. 在**高级设置**页签，点击**创建**。
++
+创建完成的数据集将显示在数据集列表中。

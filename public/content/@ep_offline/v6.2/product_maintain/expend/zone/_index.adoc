@@ -1,0 +1,25 @@
+---
+title: Region 扩容 Zone
+weight: 2
+---
+
+本章节用于介绍 Region 扩容 Zone 的场景，不适用于分布式 Global 的场景。如果您需要以``节点``为单位进行扩容，请参考link:../node/[节点扩容]。
+
+
+
+扩容完成后，新扩容的 Zone 没有 Global 服务，当前 Region 中的 Global 服务仍然存在于之前的 Zone 中。
+
+
+
+
+操作流程如下：
+
+. 准备环境。
+. 部署新 Zone。
+. 将新 Zone 添加至当前 Region。
+. 更新 Region 配置。
+
+
+
+
+

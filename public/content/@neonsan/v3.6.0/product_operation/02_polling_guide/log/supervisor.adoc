@@ -1,0 +1,22 @@
+---
+title: "查看 Supervisor 日志"
+weight: 1
+---
+
+. 逐个登录集群节点。
+
+. 执行如下命令，查看完整的 Supervisor 日志文件，检查有无反复重启的服务。
++
+[,shell]
+----
+vi /var/log/supervisor/supervisord.log
+----
++
+若观察如下特特征的日志，即相关服务反复重启 3 次，需联系 NeonSAN 产研团队。
++
+[,shell]
+----
+INFO exited: neoncenter (terminated by SIGINT/SIGTERM/SIGKILL; not expected) 
+INFO exited: neoncenter (exit status <exit_status_code>; not expected) 
+INFO exited: neonstore (terminated by SIGSEGV (core dumped); not expected)
+----

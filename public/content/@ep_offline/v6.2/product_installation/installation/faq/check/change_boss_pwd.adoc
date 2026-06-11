@@ -1,0 +1,26 @@
+---
+title: 如何通过后台修改 BOSS 用户的密码
+weight: 90
+---
+
+== 操作场景
+
+有底层 boss0 节点的登录权限，可以直接重置密码，无需知道当前 boss 用户的密码。主要适用于运维管理员重置密码的场景。
+
+== 操作步骤
+
+. 登录任一 boss 节点。
+. 执行以下命令，重置 boss 用户的密码。
++
+[source]
+----
+boss2 change_password --email <username> --password <password>
+----
++
+示例：
++
+[source]
+----
+root@xxxx-boss0:~# boss2 change_password --email boss@xxx.com --password xxx@123456
+Password changed successfully for user:[boss@xxx.com]
+----

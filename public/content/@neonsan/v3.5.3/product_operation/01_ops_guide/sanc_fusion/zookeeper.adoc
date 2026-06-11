@@ -1,0 +1,65 @@
+---
+title: "Zookeeper 服务"
+weight: 1
+---
+
+
+可登录集群任一节点，执行如下命令，可查看各 Zookeeper 节点 IP 地址。
+[,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts|grep zookeeper"
+----
+
+. 逐个登录 Zookeeper 集群节点。
+. Zookeeper 服务的 supervisor 配置。
++
+[,shell]
+----
+/qingstor/etc/supervisord.d/zookeeper.ini
+----
+
+. 启停 Zookeeper 服务。
++
+* 通过 supervisor 来监管 Zookeeper 服务。
++
+--
+查看状态:``supervisorctl status zookeeper`` 
+
+启动服务:``supervisorctl start zookeeper``
+
+重启服务:``supervisorctl restart zookeeper``
+
+停止服务:``supervisorctl stop zookeeper``
+--
+
+* 通过 Zookeeper 命令来启停 Zookeeper 服务。
++
+--
+查看状态:``/opt/zookeeper/bin/zkServer.sh status`` 
+
+启动服务:``/opt/zookeeper/bin/zkServer.sh start``
+
+重启服务:``/opt/zookeeper/bin/zkServer.sh restart``
+
+停止服务:``/opt/zookeeper/bin/zkServer.sh stop``
+--
++
+include::../../../../../_components/note.adoc[]
+查看 zookeeper 服务状态时，集群中仅一个节点的 Mode 为 leader，其他节点的 Mode 均为 follower 状态。
+include::../../../../../_components/table_footer.adoc[]
+
+. Zookeeper 日志文件存放路径：
++
+[,shell]
+----
+/var/log/zookeeper/zookeeper.log
+----
+
+. Zookeeper 的配置文件所在路径：
++
+[,shell]
+----
+/opt/zookeeper/conf/zoo.cfg
+----
+
+

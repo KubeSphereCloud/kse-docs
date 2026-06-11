@@ -1,0 +1,90 @@
+---
+title: "View Project Details"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Project, View Project Details"
+description: "Describes how to view project details."
+weight: 03
+---
+
+:ks_permission: **Project Viewing**
+:ks_navigation: **Project**
+
+
+This section describes how to view project details.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/projects/projects-oper-openListPage.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/projects/projects-oper-openDetailsPage.adoc[]
+
++
+
+. On the project details page, in the **Attributes** area, view the resource attributes of the project.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Status
+|
+include::../../../_custom/clusterManagement/projects/projects-para-status.adoc[]
+
+|Cluster
+|The cluster to which the project belongs.
+
+|Workspace
+|The workspace to which the project belongs.
+
+|Creation Time
+|The creation time of the project.
+
+|Creator
+|The user who created the project.
+|===
+--
+
+. On the **Overview** tab, view the resource status of the current project, such as the number of pods, Deployments, StatefulSets, DaemonSets, Jobs, CronJobs, Persistent Volumes, Services, and Ingresses.
+
+. Click the **Pods** tab to view all pods running in the project.
++
+--
+include::../../../_custom/clusterManagement/nodes/nodes-para-podList.adoc[]
+--
+
+. Click the **Quotas** tab to view the quota information of the project.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Functional Area |Description
+
+include::../../../_custom/clusterManagement/projects/projects-para-defaultContainerQuotas.adoc[]
+
+|Project Quotas
+|The amount of available resources and the actual usage in the project, including: CPU Reservation, CPU Limit, Memory Reservation, Memory Limit, Pod Reservation, Pod Limit, etc.
+|===
+
+For information on how to set default container quotas and project quotas, refer to link:../../../08-workspace-management/08-projects/05-project-quotas/01-edit-default-container-quotas/[Edit Default Container Quotas] and link:../../../08-workspace-management/08-projects/05-project-quotas/02-edit-project-quotas/[Edit Project Quotas].
+--
+
+. Click the **Metadata** tab to view the labels and annotations of the project.

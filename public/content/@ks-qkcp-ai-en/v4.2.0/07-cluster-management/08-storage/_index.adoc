@@ -1,0 +1,25 @@
+---
+title: "Storage"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage"
+description: "Introduces how to manage storage resources."
+weight: 08
+layout: "second"
+---
+
+
+
+This section introduces how to manage storage resources.
+
+KubeSphere supports the management of the following storage resources:
+
+* Storage Class: Defines a class of Persistent Volume Claims available for containers to use.
+
+* Persistent Volume Claim (PVC): Defines the storage space requirements for a Persistent Volume.
+
+* Persistent Volume (PV): Represents a storage area in the backend storage system. The system creates storage areas available for containers in the backend storage system based on the parameters in the Persistent Volume Claim. Each storage area corresponds to a Persistent Volume on the KubeSphere platform.
+
+// * Volume Snapshot Class: Defines a class of Volume Snapshots that can save snapshot data.
+
+// * Volume Snapshot: Defines the storage requirements for snapshot data.
+
+// * Volume Snapshot Content: Represents snapshot data in the backend storage system. The system saves snapshot data in the backend storage system based on the parameters in the Volume Snapshot. Each snapshot data unit corresponds to a Volume Snapshot Content on the KubeSphere platform.

@@ -1,0 +1,39 @@
+---
+title: 内网环境配置
+weight: 1
+---
+
+
+
+若当前部署的私有云环境不能访问互联网，此时，需人为删除 `server.yaml` 文件中的 `test_domains` 配置，否则 BOSS 会有 DNS 相关告警。操作步骤如下。
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，修改 `server.yaml.<zone_id>` 文件。
++
+[source,shell]
+----
+vi /pitrix/conf/variables/global/server.yaml.<zone_id>
+----
++
+删除如下内容。
++
+[source,shell]
+----
+  test_domains:
+    - 'www.baidu.com'
+    - 'www.taobao.com'
+----
+
+. 执行以下命令，刷新 `server.yaml.<zone_id>` 到各节点。
++
+[source,shell]
+----
+/pitrix/build/build_pkgs.py -p pitrix-global-conf
+/pitrix/upgrade/update.sh all pitrix-global-conf
+----

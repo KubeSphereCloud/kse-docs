@@ -1,0 +1,53 @@
+---
+title: 删除Console（DeleteConsole）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| true
+| Console的ID
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| false
+| Console的ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeleteConsole",
+  "console": "zzzz"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteConsoleResponse",
+  "console_id": "zzzz",
+  "ret_code": 0
+}
+----

@@ -1,0 +1,31 @@
+---
+title: 查看配置信息
+weight: 1
+draft: true
+---
+
+. 登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 是 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 进入配置文件所在目录，查看配置文件列表。
++
+[source,shell]
+----
+cd /qingstor/etc
+ls
+----
++
+配置文件列表
++
+image::/images/u10000_v5.0/maintain_1.png[maintain_1,40%]
++
+include::../../../../../../_components/note.adoc[]
+
+该目录下的配置文件根据用户部署时填写内容生成。可用于检查用户部署时所填参数是否与预期相符。
+
+include::../../../../../../_components/table_footer.adoc[]
+

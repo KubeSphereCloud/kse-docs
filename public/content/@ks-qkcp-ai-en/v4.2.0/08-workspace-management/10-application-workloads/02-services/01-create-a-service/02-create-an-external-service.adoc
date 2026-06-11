@@ -1,0 +1,61 @@
+---
+title: "Create External Service"
+keywords: "Kubernetes, {ks_product}, Project Management, Workload, Service, Create Service, Create External Service"
+description: "Introduces how to create an external service."
+weight: 02
+---
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Application Workloads > Services**
+
+
+This section describes how to create an external service.
+
+An external service forwards business traffic to services outside the cluster. Within the cluster, it can be accessed using a domain name in the format `<service name>.<project name>**.svc.cluster.local**`.
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../../
+
+include::../../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the **Create Service** dialog box, select **External Service**.
+
+. On the **Basic Information** tab, configure the basic information for the service, and then click **Next**.
+
+. On the **External Service** tab, configure the address of the target service, and then click **Create**.
++
+--
+// Note
+include::../../../../../../_ks_components/admonitions/note.adoc[]
+
+* The address of the target service must be a domain name. If you enter an IP address, it will be treated as a domain name consisting of numbers, not a real IP address.
+
+* To ensure business traffic can be correctly forwarded to the target service, make sure the domain name of the target service can be resolved to an actual IP address by the DNS server.
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

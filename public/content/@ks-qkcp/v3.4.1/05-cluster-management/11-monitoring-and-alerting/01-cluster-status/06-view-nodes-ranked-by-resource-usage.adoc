@@ -1,0 +1,55 @@
+---
+title: "查看节点资源用量排行"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 监控告警, 集群状态, 资源用量"
+description: "介绍如何按照特定资源的用量对节点进行排序。"
+weight: 06
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: e93a315bd45446b0a36698c42120aab1
+:ks_xref_id: d41fdfea202c4eeeb4a1fd2f0c5ae0cd
+:ks_comp: ../../../../components/
+:ks_title: 查看节点资源用量排行
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 监控告警, 集群状态, 资源用量
+:ks_description: 介绍如何按照特定资源的用量对节点进行排序。
+:ks_weight: 06
+:ks_icon:
+:ks_permission: **监控信息查看**
+:ks_navigation: **监控告警 > 集群状态**
+
+
+本节介绍如何按照特定资源的用量对节点进行排序。
+
+
+== 前提条件link:[id=db1dde81b2f1466aae6e6a532b1d3518]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=8bcffba92ebb44469bc96b46a5028d85]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**集群状态**页面，点击**资源用量排行**页签查看各节点的资源使用情况。
++
+--
+* 在左上角点击下拉列表可选择按照 CPU 用量、CPU 平均负载、内存用量、磁盘用量、Inode 用量或容器组用量对节点进行排序。
+
+include::../../../../_custom/clusterManagement/clusterStatus/clusterStatus-oper-sortAscendingDescending.adoc[]
+
+include::../../../../_custom/clusterManagement/clusterStatus/clusterStatus-oper-exportJsonData.adoc[]
+--

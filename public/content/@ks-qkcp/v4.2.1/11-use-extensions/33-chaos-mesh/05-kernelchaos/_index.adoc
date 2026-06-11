@@ -1,0 +1,29 @@
+---
+title: "内核故障模拟"
+weight: 05
+---
+
+本节介绍如何模拟内核故障（KernelChaos）。
+
+KernelChaos 通过 eBPF 机制拦截内核函数调用，模拟内核路径上的 I/O 或内存分配故障，用于验证业务在底层资源受限时的稳定性。
+
+
+// note
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+KernelChaos 对内核有较强侵入性，建议不要在生产环境中使用。
+|===
+
+== 前提条件
+
+* 节点内核版本需高于 4.18。
+* 宿主机 Linux 内核需开启 `CONFIG_BPF_KPROBE_OVERRIDE` 配置项。
+* 部署混沌工程扩展组件时需启用 bpfki（helm 部署时指定参数 `bpfki.create=true`）。
+* KubeSphere 平台需要安装并启用混沌工程扩展组件。
+
+== 支持的操作
+
+* 模拟内核路径上的 I/O 或内存故障

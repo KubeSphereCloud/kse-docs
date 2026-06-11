@@ -1,0 +1,97 @@
+---
+title: 前期准备
+weight: 1
+---
+
+
+
+== 步骤一：{product_name} 对接 IaaS
+
+详细步骤，可参考《{product_name} 安装指南》中**更新 IaaS 配置**相关章节内容，此处不做赘述。
+
+== 步骤二：{product_name} 对接 QKE
+
+{product_name} 对接 IaaS 后，还需修改 QKE 后端服务的配置文件，将待使用的 {product_name} 的相关信息添加至 QKE 后端服务中。详细操作如下。
+
+. 登录 QKE 所在 IaaS 的 FirstBox 节点。
+
+. 执行如下命令行，查看 IaaS 的 Webservice 节点。
++
+[source,shell]
+----
+cat /etc/hosts | grep web
+----
++
+命令回显示例
++
+[source,shell]
+----
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-webservice
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-webservice0
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-webservice1
+----
+
+. 根据查询结果，逐个登录 IaaS 的 Webservice 节点。执行后续操作。这里以登录 `guangd1a-webservice0` 节点为例。
++
+[source,shell]
+----
+ssh guangd1a-webservice0
+----
++
+include::../../../../../_components/note.adoc[]
+
+* QKE 的后端服务，均部署于 IaaS 的 Webservice 节点。因此，修改 QKE 后端服务配置需登录 Webservice 节点进行操作。
+* 需逐个登录 IaaS 的 Webservice 节点修改 QKE 后端服务配置。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，修改 QKE 后端服务配置文件 `qke_apiserver.yaml`。
++
+[source,shell]
+----
+vim /pitrix/conf/qke_apiserver.yaml
+----
++
+修改以下配置内容
++
+[source,yaml]
+----
+......
+# 是否开启u10000存储插件支持，具体的参数(confd_addrs,qfs_gateway,global_domain)咨询u10000
+
+csi_hydrofs:
+  enable: true
+  confd_addrs: "192.168.100.2:9296, 192.168.100.3:9296, 192.168.100.4:9296"
+  hydrofs_csi_image: "139.198.32.245/csi/hydrofs-csi-driver:1.0"
+  hydro_fuse_image: "139.198.32.245/csi/hydro_fuse:1.0"
+  global_domain: "stor.qingstorage.com"
+......
+----
++
+配置参数说明
++
+[cols="1a,3a", options="header"]
+|===
+| 字段 | 说明 
+
+| enable| 是否使用 HydroFS CSI 插件。需修改为 `true`。
+| confd_addrs | 填写 {product_name} 的集群管理服务 Confd 的节点 IP。根据link:../../k8s/prepare/u1w_config/#_hydro_confd_集群信息[前文查询]内容进行填写。
+| hydrofs_csi_image | HydroFS CSI 插件的 Docker 镜像 `hydrofs-csi-driver` 的地址和版本。
+
+* 填写格式为 `139.198.32.245/csi/hydrofs-csi-driver:1.4`。
+* 其中 IP 地址 `139.198.32.245` 为私有镜像仓库地址，需根据实际情况进行修改，其余内容保持不变。
+| hydro_fuse_image | HydroFS 客户端的 Docker 镜像 `hydro_fuse` 的地址和版本。
+
+* 填写格式为 `139.198.32.245/csi/hydro_fuse:1.2`。
+* 其中 IP 地址 `139.198.32.245` 为私有镜像仓库地址，需根据实际情况进行修改，其余内容保持不变。
+| global_domain | {product_name} 的 Global 域名。根据link:../../k8s/prepare/u1w_config/#_global_domain[前文查询]内容进行填写。
+
+|===
+
+
+. 保存修改后，执行以下命令，重启 QKE 后端服务，使配置生效。
++
+[source,shell]
+----
+supervisorctl restart qke_apiserver
+----

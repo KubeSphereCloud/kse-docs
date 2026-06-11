@@ -1,0 +1,44 @@
+---
+title: "访问实例"
+weight: 3
+---
+
+容器实例创建成功后，用户可通过 **jupyter**、**web 连接**或 **SSH 免密**方式进行访问。
+
+== 前提条件
+
+容器实例已创建成功，且状态为``运行中``。
+
+== jupyter 访问
+
+. 登录 {console_name}。
+. 在顶部导航栏，点击**产品与服务** > **{coreshub_name_cn}** > **{coreshub_name_cn}**，进入其**总览**页面。
+. 在左侧导航栏，选择**容器实例**，默认进入容器实例列表页面。
+//tag::jupter_login[]
+. 点击指定容器实例**快捷访问**列中的 **jupyter**，跳转至 JupyterLab 页面。JupyterLab 的详细使用方法，可参考 link:../jupyter[JupyterLab 使用介绍]相关内容。
++
+include::../../../../../../_components/attention.adoc[]
+* 若使用自定义镜像创建容器实例，则需确保该镜像文件包含 JupyterLab 服务，否则无法打开 JupyterLab 页面。
+* 若无法打开 JupyterLab 页面，请检查是否关闭浏览器的弹窗拦截。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在 JupyterLab 的工作区域，点击 **Other > Terminal** 打开终端，登录至容器实例后台，输入各项命令。
+
++
+image::/images/cloud_service/compute/coreshub/develop_training_k8s_login_2.png[]
+//end::jupter_login[]
+
+
+== web 连接
+
+. 在容器列表页面，点击指定容器实例**快捷访问**列中的 **web 连接**。
+. 弹出 **web 连接**窗口，用户可输入 ``/bin/bash``，切换至 shell 类型为 bash，获取更好的 shell 体验。即登录至容器实例后台。
++
+image::/images/cloud_service/compute/coreshub/develop_training_k8s_login_3.png[,80%]
+
+== SSH 访问
+
+创建成功的容器实例，可通过加载用户本地主机的 SSH 公钥后，从本地 SSH 访问容器实例。具体方法可参考 link:../ssh_login[SSH 访问容器实例]相关内容。
+
+
+

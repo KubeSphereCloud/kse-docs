@@ -1,0 +1,42 @@
+---
+title: "邀请用户加入节点组"
+weight: 01
+---
+
+:ks_permission: **节点组管理**
+:ks_navigation: **节点组设置 > 节点组成员**
+
+
+本节介绍如何邀请用户加入节点组。
+
+
+== 前提条件
+
+* {empty}
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+* 在{ks_product_both}平台的**用户和角色管理**中创建一个用户，并邀请该用户加入节点组所属的边缘集群，即成为边缘集群成员。
+
+
+
+== 操作步骤
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-clickInvite.adoc[]
+
++
+
+. 在**邀请成员**对话框，在需要邀请的用户右侧点击image:/images/ks-qkcp/zh/icons/add-dark.svg[add-dark,18,18]，在下拉列表中选择用户在节点组中的角色，然后点击**确定**。
++
+--
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-para-presetNodeGroupRoles.adoc[]
+
+用户被邀请加入节点组后将显示在节点组成员列表中。
+--

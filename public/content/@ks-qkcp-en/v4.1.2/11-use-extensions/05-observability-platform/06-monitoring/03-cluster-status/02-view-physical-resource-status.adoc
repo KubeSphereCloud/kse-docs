@@ -1,0 +1,74 @@
+---
+title: "View Physical Resource Status"
+keywords: "Kubernetes, {ks_product-en}, monitoring & alerting, cluster status, physical resource status"
+description: "This section introduces how to view physical resource status."
+weight: 02
+---
+
+:ks_permission: **Monitoring Viewing**
+:ks_navigation: **Monitoring & Alerting > Cluster Status**
+
+This section introduces how to view physical resource status.
+
+== Prerequisites
+
+* {empty}
+include::../../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **WhizardTelemetry Monitoring** should have been installed and enabled.
+
+== Steps
+
+include::../../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. On the **Cluster Status** page, click **Physical Resource Monitoring** to view the usage of cluster physical resources.
++
+====
+* The **Physical Resource Monitoring** tab provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|CPU Usage
+|Displays the cluster CPU usage percentage over the specified time range.
+
+|Average CPU Load
+|Displays the cluster CPU average load over the specified time range. CPU average load is a dimensionless value representing the average number of active processes on the CPU per unit time.
+
+|Memory Usage
+|Displays the cluster memory usage percentage over the specified time range.
+
+|Disk Usage
+|Displays the cluster disk usage over the specified time range.
+
+|Inode Usage
+|Displays the cluster Inode usage percentage over the specified time range.
+
+|Disk Throughput
+|Displays the cluster disk read and write rates over the specified time range.
+
+|IOPS
+|Displays the cluster disk read and write operations per second over the specified time range.
+
+|Network Traffic
+|Displays the cluster network inbound and outbound rates over the specified time range.
+
+|Pod Status
+|Displays the number of running, completed, and failed pods in the cluster over the specified time range.
+|===
+--
+
+include::../../../../../../_ks_components-en/oper-selectTimeRange.adoc[]
+
+include::../../../../../../_ks_components-en/oper-Autorefresh.adoc[]
+
+include::../../../../../../_ks_components-en/oper-refreshData.adoc[]
+====

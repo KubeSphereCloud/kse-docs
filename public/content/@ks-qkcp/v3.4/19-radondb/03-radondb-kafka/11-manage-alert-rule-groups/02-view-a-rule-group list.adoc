@@ -1,0 +1,64 @@
+---
+title: "查看规则组列表"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 查看规则组列表"
+description: "介绍如何查看规则组列表。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: d539d3e5cd8a483f8deed49c3a7d513e
+:ks_xref_id: f762092662df454b9397d55b84e89061
+:ks_comp: ../../../../components/
+:ks_title: 查看规则组列表
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 查看规则组列表
+:ks_description: 介绍如何查看规则组列表。
+:ks_weight: 02
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+
+== 前提条件link:[id=f12371b5929c4c728c129b815e6c05dc]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+* 您需要获取 RadonDB Kafka 应用授权，并已安装 RadonDB Kafka。有关更多信息，请参阅link:../../02-install-radondb-kafka/[安装 RadonDB Kafka]。
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-createAlertGroup.adoc[]
+
+
+== 操作步骤link:[id=3d52f67aa34c4966bc0700e211b2108c]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在 RadonDB 应用列表中，点击 RadonDB Kafka 应用的名称打开其详情页面。
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
++
+====
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-para-alertingPolicyList.adoc[]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-searchForAlertingPolicies.adoc[]
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

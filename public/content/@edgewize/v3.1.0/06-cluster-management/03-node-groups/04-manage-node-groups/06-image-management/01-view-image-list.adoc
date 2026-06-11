@@ -1,0 +1,51 @@
+---
+title: "查看镜像列表"
+weight: 01
+---
+
+:ks_permission: **节点组查看**
+:ks_menu: **镜像管理 > 镜像列表**
+
+
+本节介绍节点组内所有节点的镜像列表。
+
+
+== 前提条件
+
+include::../../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+
+== 操作步骤
+
+include::../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
+
++
+====
+* 镜像列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|镜像的路径和 sha256 值。
+
+|节点
+|镜像所在的边缘节点。
+
+|大小
+|镜像的磁盘占用大小。
+|===
+--
+
+* 在列表上方点击搜索框并设置搜索条件，可按名称或节点搜索镜像。
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+// include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

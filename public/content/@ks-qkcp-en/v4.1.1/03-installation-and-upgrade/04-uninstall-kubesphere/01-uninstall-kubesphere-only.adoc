@@ -1,0 +1,31 @@
+---
+title: "Uninstall KubeSphere Enterprise Only"
+keywords: "Kubernetes, KubeSphere Enterprise, Uninstall KubeSphere Enterprise Only"
+description: "This section explains how to uninstall KubeSphere Enterprise."
+weight: 01
+---
+
+This section explains how to uninstall KubeSphere Enterprise. The Kubernetes running in the current cluster will not be uninstalled.
+
+// Warning
+include::../../../../_ks_components-en/admonitions/warning.adoc[]
+
+* Although Kubernetes will not be uninstalled, the uninstallation may still cause service interruption if the business running in the current cluster relies on the functionalities provided by KubeSphere Enterprise.
+
+* The uninstallation is irreversible. Please proceed with caution.
+
+include::../../../../_ks_components-en/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+include::../../../_custom-en/installationAndUpgrade/installationAndUpgrade-prer-backUpData.adoc[]
+
+== Steps
+
+Run the following command to uninstall KubeSphere Enterprise.
+
+[,bash]
+----
+helm -n kubesphere-system uninstall ks-core
+----

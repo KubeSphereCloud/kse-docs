@@ -1,0 +1,138 @@
+. On the gateway details page, view the resource attributes of the gateway in the **Attributes** area.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the gateway belongs.
+
+|Status
+|The status of the gateway: Creating, Running, Warning, or Error.
+
+|Creation Time
+|The time when the gateway was created.
+
+|Update Time
+|The time when the gateway was updated.
+
+|Creator
+|The user who enabled the gateway.
+|===
+--
+
+. On the gateway details page, click the **Configuration Options** tab to view the configuration options of the gateway. The gateway functionality in KubeSphere is implemented based on the Nginx Ingress Controller. For more information about gateway configuration options, refer to the link:https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/[Nginx Ingress Controller official documentation].
+
+. On the gateway details page, click the **Monitoring** tab to view the request data of the gateway.
++
+====
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+To use the gateway monitoring feature, the **WizTelemetry Monitoring** extension must be enabled in KubeSphere.
+|===
+
+* The **Overview** area provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Total Requests
+|The total number of requests received by the gateway within the specified time range.
+
+|Request Errors
+|The number of requests with response status codes 4XX or 5XX within the specified time range. Click the dropdown list to view the number of 4XX requests and 5XX requests separately.
+
+|Success Rate
+|The percentage of successful requests within the specified time range.
+
+|Average Latency
+|The average latency of all requests within the specified time range.
+
+|P50 Latency
+|The median latency of all requests within the specified time range.
+
+|P95 Latency
+|The 95th percentile latency of all requests within the specified time range, meaning 95% of requests have a latency less than or equal to this value.
+
+|P99 Latency
+|The 99th percentile latency of all requests within the specified time range, meaning 99% of requests have a latency less than or equal to this value.
+|===
+--
+
+* The area below the page displays dynamic request data received by the currently selected pod in a line chart.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Request Rate
+|The number of requests per second received by the gateway within the specified time range.
+
+|Connection Rate
+|The number of connections per second received by the gateway within the specified time range.
+
+|Request Latency
+|The median, 95th percentile, 99th percentile, and average latency of all requests within the specified time range.
+
+|Failed Requests
+|The number of failed requests received by the gateway within the specified time range.
+
+|Network Traffic
+|The inbound traffic per second of the gateway within the specified time range.
+|===
+--
+
+include::../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../_ks_components/oper-refreshData.adoc[]
+====
+
+. On the gateway details page, click the **Gateway Logs** tab to view the logs of the gateway.
++
+--
+// [.admon.note,cols="a"]
+// |===
+// |Note
+
+// |To use the gateway log search feature, the **WizTelemetry Logging** extension must be installed and enabled on the KubeSphere platform.
+// |===
+
+// * Click the search box above the **Gateway Logs** tab and set search conditions to search log data by keyword, pod, or time range.
+
+// * Click image:/images/ks-qkcp/zh/icons/start-dark.svg[start-dark,18,18]/image:/images/ks-qkcp/zh/icons/stop-dark-white.svg[stop-dark-white,18,18] above the **Gateway Logs** tab to start/stop real-time data refresh.
+
+// * Click **Refresh Interval** above the **Gateway Logs** tab to set the data refresh interval to 5s, 10s, or 20s.
+
+// * Click image:/images/ks-qkcp/zh/icons/export.svg[export,18,18] above the **Gateway Logs** tab to download the log file to your local machine.
+
+* Click image:/images/ks-qkcp/zh/icons/start-dark.svg[start-dark,18,18]/image:/images/ks-qkcp/zh/icons/stop-dark-white.svg[stop-dark-white,18,18] in the upper right corner to start/stop real-time data refresh.
+
+* Click image:/images/ks-qkcp/zh/icons/refresh-dark.svg[refresh,18,18] in the upper right corner to manually refresh the logs.
+
+* Click image:/images/ks-qkcp/zh/icons/download-dark-white.svg[download-dark-white,18,18] in the upper right corner to download the log file to your local machine.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For long-term storage of gateway logs or to use the log search feature, the **WizTelemetry Logging** extension must be installed and enabled on the KubeSphere platform.
+|===
+--
+
+. On the gateway details page, click the **Resource Status** tab to view the pod replicas, ports, and pods of the gateway workload.
++
+--
+include::../../para-replicasPortsPods.adoc[]
+--
+
+. On the gateway details page, click the **Metadata** tab to view the annotations of the gateway service.

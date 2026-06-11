@@ -1,0 +1,61 @@
+---
+title: "Modify user settings"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, users, settings, modification"
+description: "Describes how to modify user settings in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 2ae4395edb664adab214a8a0707bd4dd
+:ks_xref_id: aaa7c8b5236b47d2be6d0ca285a2a6b6
+:ks_comp: ../../../components/
+:ks_title: Modify user settings
+:ks_description: Describes how to modify user settings in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, users, settings, modification
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to modify user settings in the {ks_product_abbr_full} web console. You can perform operations to change the email address and password of the current user, and the language used in the web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=1eb466b6fb1340168dbd66d2f24a784b]
+
+. Log in to the {ks_product} web console.
+. Log in to the {ks_product} web console, click image:/images/ksv/en/icons/cogwheel.svg[set-login-user,18,18] in the upper-right corner, and then select **User Settings**.
+. In the dialog box that appears, select the **Basic Info** and **Password** tabs to change the email address and password of the current user, and the language used in the web console.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Username
+|The original password of the current user. You cannot modify the username after the user is created.
+
+include::../../../_custom-en/security-groups/naming-convention.adoc[]
+
+|Email
+|The email address of the current user.
+
+|Language
+|The language used in the web console. Currently, simplified Chinese and English are supported.
+
+|Current Password
+|The original password of the current user.
+
+include::../../../_custom-en/users/password-rule.adoc[]
+
+|New Password
+|The new password of the current user.
+
+|Confirm Password
+|Enter your new password again to confirm.
+|===
+--
+. Click image:/images/ksv/en/icons/check-dark.svg[18px,18px] to save changes.

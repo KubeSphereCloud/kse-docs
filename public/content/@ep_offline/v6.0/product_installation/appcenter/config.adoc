@@ -1,0 +1,54 @@
+---
+title: "配置 AppCenter"
+weight: 10
+---
+
+include::../../../../_components/note.adoc[]
+如果环境中所有计算节点都使用 NeonSAN 作为存储（即所有计算节点的角色都为 hyper-sanc），需要执行此步骤。
+
+include::../../../../_components/table_footer.adoc[]
+
+== 修改 metadata 主机类型
+
+. 登录 FirstBox。
+. 执行以下命令，编辑 /pitrix/conf/variables/global/appcenter.yaml.ZONE_ID 文件。
++
+[source]
+----
+vim /pitrix/conf/variables/global/appcenter.yaml.ZONE_ID
+----
++
+修改 **instance_class**：如果 NeonSAN 环境是纯 SSD 环境，则配置 instance class 6；如果 NeonSAN 环境为混插型硬盘，则配置 instance class 7。
++
+示例如下：
++
+[source,yaml]
+----
+cfgmgmt:
+  zones: "ehpca"
+  default:
+    app_id: "app-qingcloud-appcenter-metadata"
+    app_version: "2.0"
+    name: "App Metadata Cluster"
+    description: "QingCloud AppCenter V2.0 built-in metadata service"
+    owner: "admin" # 需要填入云平台的 appcenter 账户
+    unhealthy_threshold: 2
+    healthy_threshold: 2
+    nodes:
+      container:
+        type: "kvm" # sdn 2.0 uses lxc and 3 nodes, sdn 1.0 use kvm
+        image: "metadataehpca"
+      count: 3
+      cpu: 1
+      memory: 1024
+      instance_class: 6
+----
+. 执行以下命令，下发配置。
++
+[source]
+----
+# 编译 pitrix-global-conf 配置
+/pitrix/build/build_pkgs.py -p pitrix-global-conf
+# 将 pitrix-global-conf 配置更新到所有节点
+/pitrix/upgrade/update.sh all pitrix-global-conf
+----

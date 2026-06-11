@@ -1,0 +1,98 @@
+---
+title: "Activate {ks_product}"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, activation, license, activation code"
+description: "Describes how to activate {ks_product} in the web console."
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e29bea6fa70f445889d0e4036b13a896
+:ks_xref_id: b51f3f2b04404bcf885738a430b747ca
+:ks_comp: ../../../components/
+:ks_title: Activate {ks_product}
+:ks_description: Describes how to activate {ks_product} in the web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, activation, license, activation code
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+{ks_product_abbr_full} provides the following license types:
+
+* License for Basic Edition: After {ks_product} is installed, the service is not activated and the license for Basic Edition is used by default. The license for Basic Edition allows you to deploy a maximum of three nodes and nine VMs. The license for Basic Edition never expires.
+* License for Developer Edition: allows you to deploy a maximum of 10 nodes and 90 VMs. The license for Developer Edition provides all features based on the resource management scale and validity period you purchase.
+* License for Enterprise Edition: allows you to deploy nodes and VMs without limits and provides all features and technical support.
+
+This topic describes how to activate {ks_product}.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=bf7c3b939c9c47a5b3f5690416b1d038]
+
+Only user **admin** can activate {ks_product}. Make sure you have logged in to the {ks_product} web console as user **admin**.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Obtain your cluster IDlink:[id=5cf4ce5b3b454f34a138951b1dd5dc5e]
+
+. Log in to the {ks_product} web console.
+. In the upper-right corner of the page, click image:/images/ksv/en/icons/cogwheel.svg[18px,18px] and select ** Activate**.
+. In the **Activate** dialog box, click **Replicate** next to **Cluster ID**.
++
+--
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+If you place an online order to subscribe to {ks_product}, replicate the cluster ID you obtain to the **Cluster ID** field on the buy page.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Use your license to activate {ks_product}link:[id=1453637858214345ad2eabe28ee32570]
+
+After the subscription of {ks_product} is complete, you can obtain an activation code. To activate {ks_product} using your license, perform the following steps:
+
+. In the **Activation Code** section of the **Activate** dialog box, enter the activation code and click **Submit**.
++
+--
+After {ks_product} is activated, the information about the license appears in the dialog box.
+
+// 下表介绍{ks_product_both}许可证的相关参数：
+
+// [cols='1a,3a']
+
+// |===
+
+// |参数 |描述
+
+// |集群 ID
+
+// |许可证对应的集群的 ID。每个{ks_product_both}激活码都与特定的集群绑定，如果激活码与集群 ID 不匹配则{ks_product_both}无法激活成功。
+
+// |授权用户
+
+// |许可证授予的用户的名称。
+
+// |CPU 数量上限
+
+// |许可证允许虚拟化的 CPU 数量。根据您的实际购买情况，每个商业版许可证都支持对特定数量的 CPU 进行虚拟化。
+
+// |签发时间
+
+// |许可证的签发时间。许可证的有效期从许可证的签发时间而非{ks_product_both}的激活时间开始计算。许可证到期后，无论许可证是否已经用于激活{ks_product_left}，许可证都将失效。
+
+// |到期时间
+
+// |许可证的到期时间。商业版许可证到期后将自动转变为试用版许可证。
+
+// |===
+--
+. Click **Close** to complete the activation.

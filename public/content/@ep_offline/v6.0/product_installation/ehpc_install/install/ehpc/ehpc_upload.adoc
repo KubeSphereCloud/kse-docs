@@ -1,0 +1,90 @@
+---
+title: "导入 EHPC 应用包"
+weight: 1
+---
+
+. 登录当前待部署 EHPC 服务集群的 BOSS 平台，注册用于导入和部署 EHPC 应用的开发者账号，并记录 <developer_user_id>。
++
+
+include::../../../../../../_components/note.adoc[]
+注册开发者账户，可参考link:https://box.yunify.com/s/x66iEcnK2pwgoXz[《BOSS 用户指南》]中**创建云用户**相关内容。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 将下载的的 EHPC 应用安装包上传至待部署的集群中的任一物理节点上并解压，记录节点 IP 地址与安装包所在路径。
+
+. 登录至企业云平台的 FirstBox 节点，执行如下命令，查看 webservice 节点。
++
+[source,shell]
+----
+cat /etc/hosts | grep webservice
+----
+
+. 登录至任一 webservice 节点。
+
+
+. 执行如下命令，切换至指定路径。
++
+[source.shell]
+----
+cd /pitrix/lib/pitrix-scripts/appcenter2
+----
+
+. 执行如下命令，导入 EHPC 应用安装包。
++
+[source,shell]
+----
+# ./import_apps -s root@xx.xx.xx.xx:/path -S app-3nfkjxro  -o <developer_user_id>
+----
++
+**参数说明**：
++
+* ``-s`` 用于指定安装包所在路径，xx.xx.xx.xx:/path 需根据实际情况进行修改。
+* ``-S`` 用于指定 EHPC 的应用 ID，保持不变。
+* ``-o`` 用于指定 EHPC 所对应的开发者账号，<developer_user_id> 需根据实际情况进行修改，即为步骤 1 中创建的开发者账号。
+
++
+
+include::../../../../../../_components/note.adoc[]
+若导入失败，可尝试参考link:../../../annex/update_app[附录内容]更新 AppCenter 后，再执行该命令。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 命令执行后，系统开始进行应用导入，用户需根据实际情况配置各项参数。
++
+
+include::../../../../../../_components/note.adoc[]
+* 应用导入过程耗时较长，请耐心等待。
+* 应用导入成功后，会返回**导入成功**提示语。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/ep_offline/ehpc_install/ehpc_upload_2.png[]
++
+[options="header",cols="1,2"]
+|===
+|参数|说明
+|[console_id]
+|云平台的 Console ID，根据实际环境规划进行选择。
+
+|[导入类型]
+|选择 0，全部导入。
+
+|[是否覆盖导入]
+|选择 2，覆盖配置包和镜像。
+
+|[region 非当前 region 需要手动导入镜像]
+|云平台的 region_id，根据实际环境规划进行选择。默认值为全部 region，若保持默认，直接回车确认即可。
+
+|[zone_id]
+|待部署 EHPC 服务的 zone id，若云平台内有多个 zone 需根据实际环境规划进行选择。默认值为全部 zone，若保持默认，直接回车确认即可。
+
+|[主机类型（来自产品中心）]
+|需根据实际规划进行选择。默认值为全部主机类型，若保持默认，直接回车确认即可。
+
+|[硬盘类型（来自产品中心）]
+|需根据实际规划进行选择。默认值为全部硬盘类型，若保持默认，直接回车确认即可。
+|===
+
+

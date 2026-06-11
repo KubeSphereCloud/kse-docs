@@ -1,0 +1,83 @@
+title: "文档中心"
+
+# 扩展配置
+externalConfigs: brand.json # 相对于当前位置的文件位置，用,作为分隔符的字符串
+externalConfigsMap:
+  params.brand: zh-cn.VENDOR_BRAND
+  params.company_full: zh-cn.VENDOR_COMPANY_FULL
+  markup.asciidocExt.attributes.platform_name_okr: VENDOR_TITLE
+
+# 扩展样式
+externalStyles: theme.json # 相对于当前位置的文件位置，用,作为分隔符的字符串
+externalStylesMap:
+  $active-color: primary
+  $icon-dark-color: primary
+  $primary-btn-hover-color: primary-hover
+  $active-light-color: secondary
+  $icon-light-color: secondary-hover
+  $font-title-color: title1
+  $menu-switch-active-color: title3
+  $banner-description-color: title3
+  $font-light-color: help2
+  $input-placeholder-color: help2
+  $theme-background-color: light-background
+  $table-header-background-color: light-background
+  $normal-background-color: white-background
+
+markup:
+  asciidocExt:
+    attributes:
+      toc:
+      toclevels: 2
+      file_output_type: html
+      # 全局变量
+      platform_name_cn: 云平台
+      brand_name_cap:
+      brand_name_low: qingcloud
+      api_url: https://api.qingcloud.com/iaas/
+      console_name: 管理控制台
+      # 产品变量
+      qingstor_cap: QingStor
+      qingstor_low: qingstor
+      k8s_engine_fullname: 容器引擎 QKE
+      k8s_engine_shortname: QKE
+
+
+params:
+  description: "这里是企业云文档页面"
+  favicon: "/images/favicon.ico"
+  keywords: "云计算,青云,QingCloud,文档"
+  logo: "/images/qingcloud-logo.svg"
+  logoInfo: "企业云"
+  logoLink: /v5.2/
+  docHostPort: http://enterprise.doccenter.staging.com:8000 # 内嵌版必填
+
+  # PDF 配置
+  pdf:
+    # 设置封面信息
+    pdf_coverDocName: 企业云平台（信创版）v5.2
+    pdf_projectVersion: v5.2
+    # pdf_Title: 不用设置，根据“版本下首个index文件（通常这个和coverDocName会有重复，所以可以不设置） - 文档的首个index文件”格式自动生成
+    # pdf_docVersion: 01  不用在此设置，在版本下首个index文件进行设置
+    # pdf_releaseDate: 2023-01-31   不用在此设置，在版本下首个index文件进行设置
+    pdf_coverDocLogo: /images/pdf/qingcloud-logo-color.png
+    pdf_coverDocImage: /images/pdf/cover_doc_image.svg
+
+    # 设置版权说明
+    pdf_legalInfo: 版权所有 © 北京青云科技股份有限公司 2023。保留所有权利。
+    pdf_companyFullName: 北京青云科技股份有限公司
+    pdf_companyName: 青云
+    pdf_companyUrl: https://www.qingcloud.com
+    pdf_companyIcon: /images/pdf/qingcloud-logo-icon.png
+
+    # 设置页眉页脚
+    pdf_projectName: 企业云平台（信创版）
+    # pdf_Title: 不用设置，根据“版本下首个index文件（通常这个和projectName会有重复，所以可以不设置） - 文档的首个index文件”格式自动生成
+    # pdf_docVersion: 01  在版本下首个index文件进行设置
+    pdf_copyright: 版权所有 © 北京青云科技股份有限公司
+
+    # 设置目录显示等级和内容标题编号等级
+    toclevels: 3   # 目录等级（pdf标签和目录保持一致）
+    sectnumlevels: 4   # 内容等级（word导航和内容保持一致）
+    pdf_only:
+      - v5.2

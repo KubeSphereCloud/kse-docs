@@ -1,0 +1,50 @@
+---
+title: "创建应用路由"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 多集群项目, 应用负载, 应用路由, 创建应用路由"
+description: "介绍如何创建应用路由。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 147037a344ff492290eb3e2be2437f4d
+:ks_xref_id: 01b274af6c1c440992e718be5e9f6c81
+:ks_comp: ../../../../components/
+:ks_title: 创建应用路由
+:ks_keywords: Kubernetes, {ks_product}, 多集群项目, 应用负载, 应用路由, 创建应用路由
+:ks_description: 介绍如何创建应用路由。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用路由**
+
+
+include::../../../../_custom/clusterManagement/routes/routes-desc-createARoute.adoc[]
+
+
+== 前提条件link:[id=9c7c85c66e28462ea6b193947280b42d]
+
+* {empty}
+include::../../../../_custom/multi-clusterProjectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+* 如需创建支持 HTTPS 协议的应用路由，您需要创建 **TLS 信息**类型的保密字典，保密字典中必须包含 Base64 编码的证书和私钥。有关更多信息，请参阅link:../../../05-configuration/01-secrets/01-create-a-secret/[创建保密字典]。
+
+* 应用路由所属的项目中存在至少一个服务。有关更多信息，请参阅link:../../02-services/01-create-a-stateful-or-stateless-service/[创建有状态或无状态服务]。
+
+
+== 操作步骤link:[id=5611f38d788e42ef899299d909347f54]
+
+include::../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/routes/routes-oper-createARoute.adoc[]

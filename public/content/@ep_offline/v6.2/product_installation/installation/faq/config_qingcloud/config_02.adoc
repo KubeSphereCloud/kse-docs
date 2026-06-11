@@ -1,0 +1,16 @@
+---
+title: Error：The ip [['']] is invalid,please check it!
+weight: 02
+---
+
+== 问题现象
+
+image::/images/ep_offline/installation/faq_config_qingcloud_01.png[]
+
+== 问题原因
+
+yaml 配置文件格式不规范。
+
+== 解决方法
+
+删除 `setting.<zone_id>.yaml` 配置文件中 IP 地址行多余的空格。

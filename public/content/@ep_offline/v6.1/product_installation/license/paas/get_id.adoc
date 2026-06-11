@@ -1,0 +1,26 @@
+---
+title: "获取申请信息"
+weight: 10
+---
+
+
+
+
+获取 platform id、console id、zone id 或 region id，并以此向 License 管理员申请 license_code。
+
+. 登录任一 Webservice 节点。
+. 执行以下命令，获取申请信息。
++
+[source]
+----
+/pitrix/lib/pitrix-scripts/license/gen_platform_id 
+----
++
+获取到的信息示例如下：
++
+[source]
+----
+The cloud platform console id is [maxrienycloud].
+The cloud platform zone id (or region id if is region mode) is [yc].
+The cloud platform id is [09c1ce34522abc19c7fa1c4854a991d1].
+----

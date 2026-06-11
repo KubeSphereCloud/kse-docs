@@ -1,0 +1,54 @@
+---
+title: "编辑 Volcano 作业信息"
+weight: 07
+---
+
+:ks_permission: ** project-admin **
+:ks_navigation: ** Volcano 调度 > Volcano 作业**
+
+
+本节介绍如何编辑 Volcano 作业的基本信息。
+
+您可以编辑 Volcano 作业的别名和描述。KubeSphere 不支持编辑已创建 Volcano 作业的名称。
+
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Volcano** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. 在需要操作的 Volcano 作业右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑信息**。
+
+. 在**编辑信息**对话框，设置 Volcano 作业的别名和描述，然后点击**确定**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|别名
+| Volcano 作业的别名。不同 Volcano 作业的别名可以相同。
+
+|描述
+| Volcano 作业的描述信息。描述可包含任意字符，最多包含 256 个字符。
+|===
+--

@@ -1,0 +1,27 @@
+---
+title: "为什么无法注册 License？"
+weight: 10
+---
+
+== 可能原因
+
+注册 License 的操作入口不正确。
+
+== 原因分析
+
+IaaS License 和 PaaS License 都可以通过 BOSS 平台进行注册，但操作入口不同。
+
+如果进错了注册页面（比如在 IaaS License 注册页面注册 PaaS License，或在 PaaS License 注册页面注册 IaaS License）将无法成功注册。
+
+== 解决方法
+
+* IaaS License 注册入口
++
+在 BOSS 平台的左侧菜单栏中选择**系统管理** > **{product_name}设置** > **License 管理**，进入 License 管理页面，然后点击**注册**。
++
+image::/images/ep_offline/license/iaas_register_01.png[]
+* PaaS License 注册入口
++
+在 BOSS 平台的左侧菜单栏中选择**系统管理** > **{product_name}设置** > **应用 License 管理**，进入应用 License 管理页面，然后点击**注册**。
++
+image::/images/ep_offline/license/paas_register_01.png[]

@@ -1,0 +1,172 @@
+---
+title: "添加节点"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 添加, 节点"
+description: "介绍如何在{ks_product_both}集群中添加节点。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 27f44010172c4b3ab7a80ffccaa387a2
+:ks_xref_id: 85efd7b29b284ee5848b27d342184903
+:ks_comp: ../../../components/
+:ks_title: 添加节点
+:ks_description: 介绍如何在{ks_product_both}集群中添加节点。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 添加, 节点
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何在{ks_product_abbr_full_both}集群中添加节点。
+
+目前，{ks_product_right}只支持添加节点，不支持删除节点。{ks_product_right}支持通过以下两种方式添加节点：
+
+--
+* link:#1a56cf34095244ae9a18894c77b57d55[通过{ks_product_both}Web 控制台添加节点]
+
+* link:#fe1ceee33752481ba72a862d674c103b[通过终端添加节点]
+--
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=5bdf9c7178714377a3ac1ba5349166c5]
+
+请确保您的{ks_product_both}集群可添加足够多的节点数。单节点模式下，{ks_product_right}个人免费版支持再添加最多 2 个节点。如需添加更多节点，需购买{ks_product_both}开发者版或{ks_product_both}企业版。有关更多的版本信息和配额限制，请参阅 link:../../../01-introduction/03-editions/[版本选型]。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 通过{ks_product_both}Web 控制台添加节点link:[id=1a56cf34095244ae9a18894c77b57d55]
+
+. 以系统 **admin** 用户登录{ks_product_both}Web 控制台。
+
+. 在页面顶部的导航栏中点击**物理资源**以打开物理资源管理页面。
+
+. 在左侧导航栏，选择**节点管理** > **物理节点**。
+
+. 在**物理节点**页面，点击右上角的**添加**以打开添加节点的向导页面。
+
+. 在弹出的对话框中，为即将添加的节点设置以下参数：
++
+--
+[cols="1a,3a"]
+|===
+|参数 |描述
+
+|名称
+|用户自定义的节点名称。
+
+include::../../../_custom/security-groups/naming-convention.adoc[]
+
+|SSH 认证方式
+|节点的 SSH 登录方式。{ks_product_right}支持以下登录方式：
+
+* **用户名和密码**：使用用户名和密码登录服务器节点。
+* **SSH 密钥**：使用 SSH 密钥登录服务器节点。
+
+|用户名
+|SSH 登录服务器节点的用户名。此参数仅**SSH 认证方式**设置为**用户名和密码**时可见。默认使用 **root** 用户登录服务器节点。
+
+|密码
+|SSH 登录服务器节点的密码。此参数仅**SSH 认证方式**设置为**用户名和密码**时可见。
+
+|内网IP
+|节点的内网 IP 地址，集群内的各节点可访问该内网 IP 地址。
+
+点击**添加**可配置多个内网 IP 地址。
+|===
+--
+
+. 点击**添加**。节点添加完成后将显示在节点列表中。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+将光标放置在页面右下角的 image:/images/ksv/zh/icons/hammer.svg[18px,18px] 以打开工具箱，点击**上传进度**并选择**节点**可查看节点添加的进度。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. （可选）节点添加完成后，执行以下命令开启高可用：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+ksv set-ceph-ha
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
++
+--
+如果显示如下信息则高可用开启成功：
+--
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+set pool 2 size to 3
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+执行命令开启高可用前，需要以 **root** 用户登录服务器节点并进入安装包解压后生成的目录。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 通过终端添加节点link:[id=fe1ceee33752481ba72a862d674c103b]
+
+. 以 **root** 用户登录安装{ks_product_both}时所使用的服务器节点。
+
+. 进入安装包解压后生成的目录。
+
+. 执行以下命令编辑 **config-sample.yaml** 文件：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+vi config-sample.yaml
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 修改 **config-sample.yaml** 文件中的 **hosts** 和 **roleGroups** 参数配置节点信息：
++
+--
+include::../../../_custom/nodes/add-node-config-parameters.adoc[]
+--
+
+. 执行以下命令开始添加节点：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+ ./add-nodes.sh
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+如果显示如下信息则节点添加成功：
+
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+Congratulations! Scaling cluster is successful.
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--

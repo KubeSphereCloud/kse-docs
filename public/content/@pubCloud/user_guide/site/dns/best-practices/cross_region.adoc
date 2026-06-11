@@ -1,0 +1,100 @@
+---
+title: "GSLB 跨区域负载均衡"
+description: 本小节主要介绍如何使用 GSLB 实现跨地域负载均衡。 
+keywords: DNS, GSLB 跨区域负载均衡, 流量平均分配, 流量加权分配 
+weight: 1
+draft: true
+---
+
+//全局负载均衡（GSLB）暂时下线
+== 应用场景
+
+企业应用服务在多个 IP，且多个 IP 地址分布于不同区域、不同运营商、不同厂商。在单个 IP 地址不足以承担用户的访问压力，针对企业应用服务的负载均衡架构设计也更加困难。
+
+GSLB 针对企业应用服务多 IP 地址管理，可通过实时监控 IP 地址可用状态、IP 地址自动切换故障容灾，实现跨区域、多 IP 地址的负载均衡，能够给企业在做服务架构设计时带来帮助。
+
+== 前提条件
+
+域名已被解析托管。
+
+== 负载平均分配
+
+在多个 IP 地址的服务能力、计算能力以及网络宽带**相同**时，可选择**负载平均分配**方式，对多个 IP 地址进行负载均摊，即用户访问同一个应用服务域名时多个 IP 地址同时承担访问请求。
+
+. 添加应用服务站点。 +
+自定义站点名称，一般为域名。
++
+image::/images/cloud_service/site/dns/gslb_station.png[添加站点]
+
+. 配置**轮询模式**解析策略。 +
+选择解析模式为**轮询模式**，并选择解析线路和配置主备 IP 地址。
++
+image::/images/cloud_service/site/dns/gslb_pollingmode.png[配置轮询模式]
+
+. 配置监控方式、监控参数。 +
+选择 HTTP 监控方式，并根据实际情况配置监控参数。
++
+image::/images/cloud_service/site/dns/gslb_monitor.png[配置健康监控]
+
+. 配置调度策略。 +
+勾选**智能跌宕**和**主备切换**，并根据实际情况配置**主 IP 池在线率**阈值范围。
++
+image::/images/cloud_service/site/dns/gslb_scheduling_policy.png[配置调度策略]
+
+. 获取 *CNAME 接入域名*。 +
+提交配置后，在信息确认页面，获取**CNAME 接入域名**。
++
+image::/images/cloud_service/site/dns/gslb_cname.png[获取 CNAME]
+
+. CNAME 接入域名。 +
+选择**域名解析**，并进入目标域名管理页面。将**CNAME 接入域名**添加为 CNAME 记录。应用服务即可接入 GSLB 管理。
++
+image::/images/cloud_service/site/dns/gslb_cname_dns.png[CNAME 接入域名]
++
+
+include::../../../../../_components/note.adoc[]
+
+若域名托管在其他解析服务商，则需要登录到相应解析管理控制台，添加 CNAME 记录。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 负载权重分配
+
+在多 IP 地址的服务能力、计算能力以及网络宽带各**不相同**时，可选择**负载权重分配**方式，对多个 IP 地址设置不同的权重比例，即用户访问同一个应用服务域名时多个 IP 地址按照比例权重承担访问请求。
+
+. 添加应用服务站点。 +
+自定义站点名称，一般为域名。
++
+image::/images/cloud_service/site/dns/gslb_station2.png[添加站点]
+
+. 配置**权重模式**解析策略。 +
+选择解析模式为**权重模式**。选择解析线路，配置主备 IP 地址，并根据 IP 地址负载能力设置权重值。
++
+image::/images/cloud_service/site/dns/gslb_weightmode.png[配置轮询模式]
+
+. 配置监控方式、监控参数。 +
+选择 HTTP 监控方式，并根据实际情况配置监控参数。
++
+image::/images/cloud_service/site/dns/gslb_monitor.png[配置健康监控]
+
+. 配置调度策略。 +
+勾选**智能跌宕**和**主备切换**，并根据实际情况配置**主 IP 池在线率**阈值范围。
++
+image::/images/cloud_service/site/dns/gslb_scheduling_policy.png[配置调度策略]
+
+. 获取 *CNAME 接入域名*。 +
+提交配置后，在信息确认页面，获取**CNAME 接入域名**。
++
+image::/images/cloud_service/site/dns/gslb_cname2.png[获取 CNAME]
+
+. CNAME 接入域名。 +
+选择**域名解析**，并进入目标域名管理页面。将**CNAME 接入域名**添加为 CNAME 记录。应用服务即可接入 GSLB 管理。
++
+
+include::../../../../../_components/note.adoc[]
+
+若域名托管在其他解析服务商，则需要登录到相应解析管理控制台，添加 CNAME 记录。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/cloud_service/site/dns/gslb_cname_dns2.png[CNAME 接入域名]

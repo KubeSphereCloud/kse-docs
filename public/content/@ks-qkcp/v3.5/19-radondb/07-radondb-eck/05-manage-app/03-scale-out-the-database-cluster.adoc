@@ -1,0 +1,87 @@
+---
+title: "调整节点数量"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB ECK,"
+description: "介绍如何扩展 RadonDB ECK 集群。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 63cf676e2f4a411abbecad73d9f6967b
+:ks_xref_id: a5fab5f9bcf9444cb6688217082a43fc
+:ks_comp: ../../../../components/
+:ks_title: 调整节点数量
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB ECK,
+:ks_description: 介绍如何扩展 RadonDB ECK 集群。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何扩展 RadonDB ECK 集群的节点数量。
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+若选择节点数低于当前节点数，将删除超出的节点。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=9b1d78f7ae7d4d10b02160bfb6450e6c]
+
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbEck/radondbEck-prer-installRadondbEck.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbEck/radondbeck-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=726c8cd0ca294553b7d98986762cceb5]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbEck/radondbeck-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 扩展**。
+
+. 在**扩展**对话框，选择节点角色，设置对应角色的节点数量，然后点击**确定**。待应用状态切换为**运行中**，则新增节点完成。
+
+. 点击节点名称，进入节点容器组详情页面，可分别查看节点详情、资源状态、调度信息、元数据、监控、环境变量、事件等信息。
++
+--
+* 在**资源状态**页面，可查看节点当前资源配置和状态。
+
+* 在**调度信息**页面，可查看节点可调度资源信息。
+
+* 在**元数据**页面，可查看节点元数据信息。
+
+* 在**监控**页面，可查看节点资源使用状态。
+
+* 在**环境变量**页面，可查看节点环境变量信息。
+
+* 在**事件**页面，记录节点操作事件。
+--

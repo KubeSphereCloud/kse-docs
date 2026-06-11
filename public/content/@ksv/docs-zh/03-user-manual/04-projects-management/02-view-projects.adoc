@@ -1,0 +1,73 @@
+---
+title: "查看项目列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 项目, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看项目列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: dd417ac4135e4fbcb34f9f53f3b01b08
+:ks_xref_id: a4bf30c156584f2aaf985bf7e44ce505
+:ks_comp: ../../../components/
+:ks_title: 查看项目列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看项目列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 项目, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看项目列表。
+
+include::../../../_custom/projects/project-view-limits.adoc[]
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=df9e44dc1df34c6c9d6f579a69a657ff]
+
+include::../../../_custom/projects/project-view-steps.adoc[]
++
+--
+项目列表展示当前用户所属的项目，并提供以下信息：
+
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|
+include::../../../_custom/projects/project-name-description.adoc[]
+
+|ID
+|
+include::../../../_custom/projects/project-alias-description.adoc[]
+
+|状态
+|项目的活跃状态。
+
+|成员
+|项目所拥有的成员数量。
+
+|虚拟机
+|项目中已创建的虚拟机数量。
+
+|CPU 用量
+|项目的 CPU 用量。
+
+|内存用量
+|项目的内存用量。
+
+|角色
+|当前登录用户在项目中的角色类型。
+|===
+--
+
+. （可选）点击项目列表上方的搜索框并设置搜索条件，可按名称搜索项目。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的项目。
+
+. （可选）在项目列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。
+
+

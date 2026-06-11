@@ -1,0 +1,99 @@
+---
+title: 通过 CLI 方式导入
+weight: 20
+---
+
+导入企业云平台提供的 AppCenter 镜像后，用户才可以在 Console 上成功创建相应 APP。
+
+== 前提条件
+
+已获取 AppCenter 镜像包：
+
+* 完整镜像：ftp://ins.qingcloud.com/migrate_appcenter2_qingcloud。
+* 按需下载：ftp://ins.qingcloud.com/migrate_appcenter2_apps。
+
+== 操作步骤
+
+1. 将 migrate_appcenter2_qingcloud 上传到一台物理机。
++
+例如上传到了 testcloud1r01n02:/pitrix/migrate_appcenter2_qingcloud 目录。
+2. 登录任一 Webservice 节点。
+3. （可选）执行以下命令，开启 tmux。
++
+[source]
+----
+tmux
+----
++
+
+include::../../../../../_components/note.adoc[]
+因为导入时间较长，若中途网络断连可能会导致操作终止，使用 tmux 方式可以避免此问题。
+
+开启 tmux 后，在命令执行操作过程中，若网络断连，命令会在后台继续执行。恢复连接后，执行 `tmux attach` 即可恢复到之前的操作界面。
+
+include::../../../../../_components/table_footer.adoc[]
+
+4. 执行以下命令，进入 /pitrix/lib/pitrix-scripts/appcenter2/ 目录。
++
+[source]
+----
+cd /pitrix/lib/pitrix-scripts/appcenter2/
+----
+5. 执行以下命令，开始导入 AppCenter 镜像。
++
+[source]
+----
+./import_apps -s <AppCenter镜像包路径> -y -c <console_id> -C kvm --isolate_billing 1 --instance_class "INSTANCE_CLASS" --volume_class "VOLUME_CLASS"
+----
++
+**参数说明**：
++
+[cols='1,3']
+|===
+| 参数 | 说明
+
+| -s| 请填写 AppCenter 镜像包的完整路径。
+| -c| 请填写环境的 console_id，根据环境规划获取，或在企业云平台的 FirstBox 节点执行命令 `cat /pitrix/conf/variables/variables.yaml` 查看。
+
+| --instance_class
+a|
+
+* 如果 NeonSAN 环境是纯 SSD 环境，则配置为6。
+* 如果 NeonSAN 环境为混插型硬盘，则配置为7。
+
+| --volume_class
+a|
+
+* 如果 NeonSAN 环境是纯 SSD 环境，则配置为5。
+* 如果 NeonSAN 环境为混插型硬盘，则配置为6。
+|===
++
+**示例**：
+
+ ** 按需导入
++
+[source]
+----
+./import_apps -s root@testcloud1r01n02:/pitrix/migrate_appcenter2_apps/migrate_appcenter2_mysql -y -c uatdemo -C kvm --isolate_billing 1 --instance_class "6" --volume_class "5"
+----
+
+ ** 完整导入
++
+[source]
+----
+./import_apps -s root@testcloud1r01n02:/pitrix/migrate_appcenter2_qingcloud -y -c democloud -C kvm --isolate_billing 1 --instance_class "6" --volume_class "5"
+----
+
++
+
+include::../../../../../_components/note.adoc[]
+若导入过程中报错，请link:../../update_script[更新 AppCenter 导入脚本]或联系技术支持。
+
+include::../../../../../_components/table_footer.adoc[]
+
+6. 导入任务完成后，执行以下命令，重启 billing_resource 服务。
++
+[source]
+----
+supervisorctl restart billing_resource
+----

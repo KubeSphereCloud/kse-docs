@@ -1,0 +1,36 @@
+---
+title: 验证 VPC 路由器
+weight: 3
+draft: true
+---
+
+
+
+
+[cols='^1h,4a']
+|===
+| 验收目的 | 验证 VPC 路由器功能。
+| 预置条件 | * {platform_name_cn}已部署完成，且当前运行状态正常，所有 Hyper 节点状态均正常。
+* {platform_name_cn}已导入默认镜像包。
+* 已创建好测试用户 User-1 并分配适当资源配额。
+* 已成功创建 VPC 网络 VPC-1。
+* 已成功创建私有网络 Private-1，并加入 VPC-1 网络。
+* 已成功创建云服务器 VM-1，并绑定 Private-1 网络。
+
+
+| 操作步骤 | 
+. 使用 User-1 的账户密码登录{platform_name_cn}的 Web Console。
+. 在 Web Console 相应页面选中私有网络 Private-1，进行关闭 DHCP 服务与打开 DHCP 服务操作。
+. 确认云服务器 VM-1 的详情。
+. 测试通过 VPC 基础网络地址或 VPC 绑定的 EIP 地址加源端口号，可访问虚拟机。
+. 测试 Gre 和 Ipsec 隧道。
+. 测试 VPN 服务。
+
+
+
+| 预期结果 | 
+. 关闭 DHCP 时云服务器不会自动分配 IP，开启 DHCP 时云服务器会自动分配 IP 地址。
+
+| 验证结果 | 
+| 备注 | 
+|===

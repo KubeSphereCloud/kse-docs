@@ -1,0 +1,16 @@
+---
+title: "SSL/TLS 加密套件"
+weight: 01
+---
+
+修改 metrics-server 的 tls 加密套件。
+
+[,bash]
+----
+kubectl -n kubesphere-monitoring-system edit deploy metrics-server
+----
+
+[,yaml]
+----
+'--tls-cipher-suites=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384'
+----

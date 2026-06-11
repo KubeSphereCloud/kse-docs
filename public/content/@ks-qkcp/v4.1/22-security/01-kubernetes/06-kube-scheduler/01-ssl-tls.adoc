@@ -1,0 +1,18 @@
+---
+title: "SSL/TLS 加密套件"
+weight: 01
+---
+
+. 修改宿主机 /etc/kubernetes/manifests/kube-scheduler.yaml 配置文件，在镜像的启动命令中添加参数。
++
+[,bash]
+----
+- --tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+----
+
+. 验证加密套件。
++
+[,bash]
+----
+openssl s_client -connect 192.168.200.2:10259
+----

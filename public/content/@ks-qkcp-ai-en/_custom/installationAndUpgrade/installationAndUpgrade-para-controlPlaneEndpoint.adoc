@@ -1,0 +1,17 @@
+// :ks_include_id: d52c19a289c447d1ad5ec4114ecd814a
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|internalLoadbalancer
+|The type of the local load balancer. If using a local load balancer configuration, set this parameter to **haproxy**. Otherwise, comment out this parameter.
+
+|domain
+|The internal access domain name of the load balancer. Set this parameter to **lb.kubesphere.local**.
+
+|address
+|The IP address of the load balancer. If using a local load balancer configuration, leave this parameter empty; if using a dedicated load balancer, set this parameter to the IP address of the load balancer; if using a general server as a load balancer, set this parameter to the floating IP address of the load balancer.
+
+|port
+|The port number the load balancer listens on, which is the port number of the apiserver service. Set this parameter to **6443**.
+|===

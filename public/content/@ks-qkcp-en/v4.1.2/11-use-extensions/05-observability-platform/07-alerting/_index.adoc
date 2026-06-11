@@ -1,0 +1,92 @@
+---
+title: "WhizardTelemetry Alerting"
+keywords: "Kubernetes, {ks_product-en}, cluster management, monitoring & alerting"
+description: "This section introduces how to use the 'WhizardTelemetry Alerting' extension."
+weight: 07
+---
+
+This section introduces how to use the "WhizardTelemetry Alerting" extension.
+
+WhizardTelemetry Alerting is based on the monitoring data collected by KubeSphere and provides alerting and alert rule management functions for different resource types and monitoring metrics from the platform, cluster, and project perspectives.
+
+After installing the "WhizardTelemetry Alerting" extension, the **Alerts** and **Rule Groups** options will be displayed under the **Monitoring & Alerting** menu in the left navigation pane of the cluster and project.
+
+//attention
+[.admon.attention,cols="a"]
+|===
+| Note
+
+|
+- WhizardTelemetry Alerting depends on WhizardTelemetry Platform Service and WhizardTelemetry Monitoring. Therefore, before installing WhizardTelemetry Alerting, you must first install the WhizardTelemetry Platform Service and WhizardTelemetry Monitoring extensions, otherwise, the alerting-related functions will not work properly!
+
+- To receive alert messages in a timely manner, it is recommended to install the WhizardTelemetry Notification extension simultaneously.
+|===
+
+**Configuration Instructions:**
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+After installing WhizardTelemetry Alerting, if you enabled or disabled Whizard Observability Center in the WhizardTelemetry Monitoring extension, please update the configuration of WhizardTelemetry Alerting as follows.
+|===
+
+* When the **WhizardTelemetry Monitoring** extension does not enable the Whizard Observability Center:
+
+. When installing the **WhizardTelemetry Alerting** extension, set `global.rules.distributionMode` to `Member`.
+
+. Configure `agent.ruler.alertmanagersUrl` to the alertmanager-proxy service address (provided by WhizardTelemetry Notification, installed on the host cluster, and can be accessed by default at http://<host-node-ip>:31093).
++
+--
+[,yaml]
+----
+global:
+  rules:
+    distributionMode: Member
+
+agent:
+  ruler:
+    alertmanagersUrl:
+    - 'http://<host node ip>:31093'
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+If WhizardTelemetry Notification is not enabled and you want to send alerts to an external alertmanager, configure `agent.ruler.alertmanagersUrl` to the external service address.
+|===
+--
+
+* When the **WhizardTelemetry Monitoring** extension has enabled the Whizard Observability Center:
++
+====
+When installing the **WhizardTelemetry Alerting** extension, keep `global.rules.distributionMode` as `None`.
+
+[,yaml]
+----
+global:
+  rules:
+    distributionMode: None
+----
+
+In this scenario, alerts are sent directly to the alertmanager service (provided by WhizardTelemetry Notification, installed on the host cluster). Keep the following default configuration.
+
+[,yaml]
+----
+extension:
+  ruler:
+    alertmanagersUrl:
+    - 'dnssrv+http://whizard-notification-alertmanager-headless.kubesphere-monitoring-system.svc:9093'
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+If WhizardTelemetry Notification is not enabled and you want to send alerts to an external alertmanager, configure `extension.ruler.alertmanagersUrl` to the external service address.
+|===
+====

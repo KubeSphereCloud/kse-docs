@@ -1,0 +1,21 @@
+---
+title: "检查虚拟 IP 状态"
+wieght: 19
+---
+
+== 适用范围
+
+仅适用于配置了 iSCSI 服务的 NeonSAN 集群。
+
+== 操作步骤
+
+. 登录 NeonSAN 集群任一节点。
+
+. 执行如下命令，获取当前集群内的虚拟 IP 状态。若返回结果中，有状态为 ``DOWN`` 的虚拟 IP，需联系 NeonSAN 产研团队。
++
+[,shell]
+----
+neonsan list_vips
+----
+
+

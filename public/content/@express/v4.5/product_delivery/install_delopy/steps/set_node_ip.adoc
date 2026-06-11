@@ -1,0 +1,49 @@
+---
+title: "设置节点 IP"
+weight: 2
+---
+
+. 云易捷 ISO 安装完成后，使用 ``yop`` 用户登录节点，使用快捷键 ``ALT+A``，调用 Express init box 欢迎界面。
++
+image::/images/express/delivery/install_delopy_set_node_ip_1.png[,70%]
+
+. 在 Express init box 欢迎界面，点击 ``Enter``，进入节点名配置页面，根据规划设置当前节点名称，并回车确认。
++
+image::/images/express/delivery/install_delopy_set_node_ip_2.png[,70%]
+
+. 进入 Express init box 的 **Edit** 模式，使用 ``空格键`` 选择相应的网卡。
++
+若选择两个网卡，则将自动做 Bond。
++
+image::/images/express/delivery/install_delopy_set_node_ip_3.png[,70%]
+
+. 选定网卡后，点击 ``Enter``，进入网络配置页面，根据界面提示填写网络 IP、子网掩码、网关、VLAN ID 等，并选择 ``<Confirm>``，进行确认。
++
+include::../../../../../_components/note.adoc[]
+* 若 ``vlan_id`` 为空，则表示不配置 VLAN ID。
+* 选择 ``<View>``可查看 interface 文件。
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/delivery/install_delopy_set_node_ip_4.png[,70%]
+
+. 若需配置多个网卡，重复步骤 3~4 即可。
+
+. 网络配置完成后，进入 FirstBox 节点启动页面。
++
+image::/images/express/delivery/install_delopy_set_node_ip_5.png[,70%]
++
+* 若启动 FirstBox 节点。
+
+.. 在 FirstBox 节点启动页面选择 ``<Yes>``，则系统自动解压 tar 包，并持续输出相应日志如下。
++
+image::/images/express/delivery/install_delopy_set_node_ip_6.png[,70%]
+
+.. 等待设置完成即可。
++
+image::/images/express/delivery/install_delopy_set_node_ip_7.png[,70%]
+
+* 若不启动 FirstBox 节点。
++
+在 FirstBox 节点启动页面选择 ``<No>``，则系统不启动 FirstBox 节点，直接完成设置。
++
+image::/images/express/delivery/install_delopy_set_node_ip_8.png[,70%]

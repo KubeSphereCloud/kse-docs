@@ -1,0 +1,89 @@
+---
+title: 修改Console的属性（ModifyConsoleAttributes）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| true
+| Console的ID
+
+| console_domain
+| String
+| false
+| Console对应的二级域名
+
+| console_name
+| String
+| false
+| Console的名称
+
+| description
+| String
+| false
+| Console的描述
+
+| domain
+| String
+| false
+| Console对应的域名
+
+| protocol
+| String
+| false
+| Console的协议
+
+| zones
+| String
+| false
+| Console关联的可用区
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| false
+| Console的ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyConsoleAttributes",
+  "console": "zzzz",
+  "console_domain": "",
+  "console_name": "",
+  "description": "xxxxxxxxx",
+  "protocol": "https",
+  "zones": "testing1a,testing1b"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyConsoleAttributesResponse",
+  "console_id": "zzzz",
+  "ret_code": 0
+}
+----

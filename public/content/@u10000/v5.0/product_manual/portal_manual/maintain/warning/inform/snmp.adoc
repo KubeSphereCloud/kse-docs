@@ -1,0 +1,24 @@
+---
+title: 配置 SNMP
+description: 
+weight: 2
+---
+
+用户如需配置 SNMP 告警服务，可参考如下步骤。
+
+. 成功登录 Portal。
+
+. 点击**运维管理 > 告警管理 > 告警通知 > SNMP**，进入 SNMP 服务配置页面。填写相关参数后，点击**配置**。
++
+image::/images/u10000/maintain_warning_snmp.png[maintain_warning_snmp,100%]
++
+**页面信息说明**
+
+* 如图所示，用户需先开启 SNMP 服务，才能进入配置页面。
+* `SNMP 服务主机` 即通过 SNMP 方式接收告警的服务器节点 IP 地址。
+* `对象标识符` 即 Portal 所在节点的 OID。
+* `端口` 即通过 SNMP 方式接收告警的端口。
+
+. SNMP 服务配置完成后，如需修改，重复以上步骤即可。如无需开启 SNMP 服务，可直接关闭。
+
+ 

@@ -1,0 +1,47 @@
+---
+title: "Delete Volume Snapshots"
+keywords: "Kubernetes, {ks_product-en}, cluster management, storage, volume snapshots, delete volume snapshot"
+description: "Learn how to delete a volume snapshot."
+weight: 05
+---
+
+
+:ks_permission: **Volume Snapshots Management**
+:ks_navigation: **Storage > Volume Snapshots**
+
+
+include::../../../../_custom-en/clusterManagement/volumeSnapshots/volumeSnapshots-desc-deleteVolumeSnapshots.adoc[]
+
+
+== Prerequisites
+
+* **KubeSphere Storage** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject.adoc[]
+
+
+== Delete a Single Volume Snapshot
+
+. Log in to the {ks_product-en}  web console with a user who has the pass:a,q[{ks_permission}] permission, and enter your cluster or project.
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom-en/clusterManagement/volumeSnapshots/volumeSnapshots-oper-deleteASingleVolumeSnapshot.adoc[]
+
+
+== Delete Multiple Volume Snapshots
+
+. Log in to the {ks_product-en}  web console with a user who has the pass:a,q[{ks_permission}] permission, and enter your cluster or project.
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom-en/clusterManagement/volumeSnapshots/volumeSnapshots-oper-deleteMultipleVolumeSnapshots.adoc[]

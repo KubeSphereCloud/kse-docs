@@ -1,0 +1,30 @@
+// :ks_include_id: a1136d082b9243c99e434b23d986907a
+
+安装前，请阅读并遵循以下注意事项：
+
+* 安装前，建议使用以下脚本清理为 Ceph 预留的磁盘。执行时请注意替换脚本中的盘符。清理完成后，请重启服务器。
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+DISK="/dev/sdX" 
+
+# Zap the disk to a fresh, usable state (zap-all is important, b/c MBR has to be clean)
+sgdisk --zap-all $DISK
+
+# Wipe a large portion of the beginning of the disk to remove more LVM metadata that may be present
+dd if=/dev/zero of="$DISK" bs=1M count=100 oflag=direct,dsync
+
+# SSDs may be better cleaned with blkdiscard instead of dd
+blkdiscard $DISK
+
+# Inform the OS of partition table changes
+partprobe $DISK
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+* 若条件允许或当前环境为生产环境，建议在 etcd 中使用 SSD 盘。默认 etcd 的数据目录为 **/var/lib/etcd**。
+
+* 若系统盘空间较小或当前环境为生产环境，建议在 **/var/lib/rancher** 目录下挂载 100 GB 及以上的硬盘。

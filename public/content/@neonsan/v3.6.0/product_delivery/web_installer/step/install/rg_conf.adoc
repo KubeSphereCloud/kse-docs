@@ -1,0 +1,36 @@
+---
+title: "步骤四：存储池配置"
+weight: 5
+---
+
+存储池配置基本流程为：**创建存储池** > **分配节点**。
+
+. 进入在**存储池配置**页面。
++
+image::/images/neonsan/web_installer_rg_conf_1.png[,80%]
+
+. 点击**开始创建**，弹出的**创建存储池**窗口。
++
+image::/images/neonsan/web_installer_rg_conf_2.png[,60%]
+ 
+. 根据实际情况，在**创建存储池**窗口中，选择存储池类型，以**创建全闪存储池**为例。输入**存储池名称**，默认**类型**为``全闪``，**链接协议**为 ``RDMA``，点击**确定**。
++
+若集群中存在两种存储池类型，则在创建存储池窗口中，再点击**创建混插存储池**进行新增即可。混插存储池，默认**链接协议**为 ``TCP``。
++
+image::/images/neonsan/web_installer_rg_conf_3.png[,60%]
+
+. 为新增存储池分配存储节点。
+
+.. 在**存储池配置**页面，选择待分配节点的存储池，点击**分配存储节点**。
++
+image::/images/neonsan/web_installer_rg_conf_4.png[,90%]
+
+.. 在弹出**分配存储节点**窗口，勾选相应的节点，点击**确定**。每个存储池中至少需要 3 个存储节点，最佳实践中至多 12 个存储节点。
++
+include::../../../../../../_components/attention.adoc[]
+在分配存储节点的过程中，需重点检查每个节点的硬盘总容量是否正确。
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/web_installer_rg_conf_5.png[,90%]
+
+. 点击**下一步**，进入下一阶段。

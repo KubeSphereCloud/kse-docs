@@ -1,0 +1,61 @@
+// :ks_include_id: 4527bd133db04495b10cf1930a58d5f9
+. On the **Basic Information** tab, set the basic information for the PersistentVolumeClaim, then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the PersistentVolumeClaim. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and can be up to 253 characters long.
+
+|Alias
+|The alias of the PersistentVolumeClaim. Different PersistentVolumeClaims can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), and can be up to 63 characters long.
+
+|Description
+|The description of the PersistentVolumeClaim. The description can contain any characters and can be up to 256 characters long.
+|===
+--
+
+. On the **Storage Settings** tab, set the storage requirements, then click **Next**.
++
+--
+* Creation Method > Create via StorageClass
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+
+|StorageClass
+|The StorageClass used to create the PersistentVolumeClaim.
+
+|Access Mode
+|
+include::persistentVolumeClaims-para-accessMode.adoc[]
+
+Depending on the backend storage system, some access mode types may not be available.
+
+|Volume Capacity
+|The capacity size of the volume corresponding to the PersistentVolumeClaim.
+|===
+
+* Creation Method > Bind to an existing PersistentVolume
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|PersistentVolume
+|Select an existing PersistentVolume to create the PersistentVolumeClaim.
+|===
+--
+
+. On the **Advanced Settings** tab, set the labels and annotations for the PersistentVolumeClaim, then click **Create**.
++
+--
+include::../workloads/createWorkload/workloads-para-Metadata.adoc[]
+
+After creation, the PersistentVolumeClaim will appear in the PersistentVolumeClaim list.
+--

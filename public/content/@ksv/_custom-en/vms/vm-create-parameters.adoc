@@ -1,0 +1,50 @@
+// :ks_include_id: 7797e30478954a8b905cdfd573101713
+
+. In the **Storage** section, configure the system disk and data disks for the VM.
++
+--
+[cols="1a,3a"]
+|===
+|Parameter |Description
+
+|System Disk
+|The custom system disk size must be greater than or equal to the default system disk size of the image.
+
+|Data Disk
+|(Optional) The data disk that you want to mount to the VM.  You can mount up to 5 data disks to each VM.
+|===
+--
+. The username for VM login. By default, the value is **root**. You can use a username and its password or an SSH key to log in to the VM.
++
+--
+[cols="1a,3a"]
+|===
+|Parameter |Description
+
+|Username
+|The username for VM login.Parameter
+
+|Password
+|The password for VM login. By default, the value is **123456**.
+
+|SSH
+|Select **SSH** to bind an SSH key for VM login. For more information about SSH keys, see xref:03-user-manual/07-ssh-keys/02-view-ssh-keys.adoc[View SSH keys].
+|===
+--
+. In the **Network** section, expand the first drop-down list to specify a network in which the VM resides.
++
+--
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+You can create a VM in a physical or virtual subnet. In default settings, a VM created in a physical subnet can access the Internet. If you want to connect to a VM created in a virtual subnet over the Internet, you must associate an EIP with the VM. Otherwise, Internet access is disabled for the VM. For more information about how to enable Internet access for a VM, see xref:03-user-manual/03-network-management/05-eips/06-bind-eip.adoc[Associate an EIP].
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. In the **Network** section, expand the second drop-down list to specify a method for IP address allocation.
++
+--
+include::vm-ip-allocation-parameters.adoc[]
+--
+. In the **Summary** section on the right side, verify the VM configuration and click **OK** in the lower-right corner. The VM appears in the VM list after it is created.

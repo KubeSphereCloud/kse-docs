@@ -1,0 +1,157 @@
+---
+title: "升级 Kubernetes 和{ks_product_left}"
+keywords: "Kubernetes, {ks_product}, 安装, 升级 Kubernetes, 升级{ks_product_left}"
+description: "介绍如何将{ks_product_both}升级到 v3.5.0，并将 Kubernetes 升级到指定版本。"
+weight: 02
+---
+
+// :ks_include_id: d713f6d579fc4bd3ab54f36ea2969784
+:ks_xref_id: f029ef4de5f247fd9e9524b453bf4390
+:ks_comp: ../../../components/
+:ks_title: 升级 Kubernetes 和{ks_product_left}
+:ks_keywords: Kubernetes, {ks_product}, 安装, 升级 Kubernetes, 升级{ks_product_left}
+:ks_description: 介绍如何将{ks_product_both}升级到 v3.5.0，并将 Kubernetes 升级到指定版本。
+:ks_weight: 02
+:ks_icon:
+
+
+本节介绍如何将{ks_product_both}升级到 v3.5.0，并将 Kubernetes 升级到指定版本。如果您只需要升级{ks_product_left}，请参阅link:../01-upgrade-kubephere-only/[仅升级{ks_product_left}]。
+
+升级过程中将用到开源工具 KubeKey。有关 KubeKey 的更多信息，请访问 link:https://github.com/kubesphere/kubekey[GitHub KubeKey 仓库]。
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+本节介绍的 Kubernetes 升级方式仅适用于 Kubernetes 通过 KubeKey 安装的场景。如果您的 Kubernetes 不是通过 KubeKey 安装，请参阅 link:https://kubernetes.io/zh/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/[Kubernetes 官方文档]升级 Kubernetes.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=641e8864bd844c95aae645b27f885fa2]
+
+* 您需要联系{ks_product_both}的交付服务专家获取{ks_product_left} v3.5.0 安装包。如实施现场条件允许在线拉取公开仓库，具备在线安装条件，可联系 KubeSphere 产品团队获取在线安装文件及相关信息。
+
+* 请确保当前{ks_product_both}版本为 v3.4.x。如果您的{ks_product_both}版本低于 v3.4.x，请先将{ks_product_both}版本升级到 v3.4.x。
+
+* 请确保当前 Kubernetes 版本为 v1.21.x、v1.22.x、v1.23.x, v1.24.x, v1.25.x 和 v1.26.x。
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-prer-offlineInstallation.adoc[]
+
+:relfileprefix: ./
+
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-prer-obtainConfigSample.adoc[]
+
+:relfileprefix: ./
+
+
+--
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+* 升级过程中不支持在安装配置文件 **config-sample.yaml** 中修改原有的集群配置。
+
+* 如果您无法获取安装配置文件 **config-sample.yaml**，您需要参阅link:../../02-install-kubesphere/02-install-kubernetes-and-kubesphere/[安装 Kubernetes 和{ks_product_both}]重新创建 **config-sample.yaml** 文件。重新创建该文件时，请务必确保文件中的集群配置与集群的当前实际情况一致。否则，升级版本后集群可能会出现错误。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+* {empty}
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-prer-backUpData.adoc[]
+
+
+== 创建私有镜像服务link:[id=bb6e9604483744e4870524994d5436af]
+
+ifeval::["{file_output_type}" == "html"]
+如果您的集群节点无法连接互联网，请执行以下步骤使用 KubeKey 创建私有镜像服务。
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-downloadKubekey.adoc[]
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-decompressInstallationPackage_new.adoc[]
+endif::[]
+
+
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-transferConfig.adoc[]
+
++
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-initializeRegistry.adoc[]
+
+
+== 开始升级link:[id=9c41eb08a57e4829b7fdd703f03ba47c]
+
+ifeval::["{file_output_type}" == "html"]
+. 执行以下命令开始升级 Kubernetes 和{ks_product_left}：
+
+* 对于互联网连接正常的环境：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+ ./kk upgrade --with-kubernetes <Kubernetes version> --with-kubesphere <product version> -f config-sample.yaml
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+* 对于无法连接互联网的环境：
++
+--
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-code-startUpgradeOffline.adoc[]
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-para-targetKsK8sVersions_new.adoc[]
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* {empty}
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-note-123EdgeNodes.adoc[]
+
+* {empty}
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-note-rollbackNotSupported.adoc[]
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-desc-upgradeSuccess.adoc[]
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-desc-installationSuccessOutput.adoc[]
+--
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+. 执行以下命令开始升级 Kubernetes 和{ks_product_left}：
++
+--
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-code-startUpgradeOffline.adoc[]
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-para-targetKsK8sVersions_new.adoc[]
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* {empty}
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-note-123EdgeNodes.adoc[]
+
+* {empty}
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-note-rollbackNotSupported.adoc[]
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-desc-upgradeSuccess.adoc[]
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-desc-installationSuccessOutput.adoc[]
+--
+endif::[]
+
+
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-obtainLoginInfo.adoc[]

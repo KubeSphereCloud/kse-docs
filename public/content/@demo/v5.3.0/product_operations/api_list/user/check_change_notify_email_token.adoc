@@ -1,0 +1,52 @@
+---
+title: check（CheckChangeNotifyEmailToken）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| token
+| String
+| true
+| 
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "token": "token_0"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CheckChangeNotifyEmailTokenResponse",
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

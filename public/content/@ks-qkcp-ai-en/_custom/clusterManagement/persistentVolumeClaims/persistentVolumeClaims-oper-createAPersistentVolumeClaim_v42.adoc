@@ -1,0 +1,132 @@
+// :ks_include_id: 4527bd133db04495b10cf1930a58d5f9
+. On the **Basic Information** tab, set the basic information for the PersistentVolumeClaim, then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the PersistentVolumeClaim. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and is up to 253 characters long.
+
+ifndef::project[]
+|Project
+|The project to which the PersistentVolumeClaim belongs.
+endif::[]
+
+|Alias
+|An alias for the PersistentVolumeClaim. Different PersistentVolumeClaims can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), and is up to 63 characters long.
+
+|Description
+|Descriptive information for the PersistentVolumeClaim. The description can contain any characters and is up to 256 characters long.
+|===
+--
+
+. On the **Storage Settings** tab, set the storage requirements, then click **Next**.
++
+--
+ifdef::default[]
+* Creation Method > Create via StorageClass
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|StorageClass
+|The StorageClass used to create the PersistentVolumeClaim.
+
+|Access Mode
+|
+include::persistentVolumeClaims-para-accessMode.adoc[]
+
+Depending on the backend storage system, some access mode types may not be available.
+
+|Volume Capacity
+|The volume capacity corresponding to the PersistentVolumeClaim.
+|===
+
+* Creation Method > Bind to an Existing PersistentVolume
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|PersistentVolume
+|Select an existing PersistentVolume to use for creating the PersistentVolumeClaim.
+|===
+endif::[]
+
+ifdef::snapshot[]
+* Creation Method > Create via VolumeSnapshot
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|VolumeSnapshot
+|The VolumeSnapshot used to create the PersistentVolumeClaim.
+
+|Access Mode
+|
+include::persistentVolumeClaims-para-accessMode.adoc[]
+
+Depending on the backend storage system, some access mode types may not be available.
+|===
+endif::[]
+
+ifdef::nas[]
+* Creation Method > Bind to an Existing NAS Volume
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|NFS Server Hostname / IP Address
+|The hostname or IP address of the NFS server.
+
+|NFS Volume Path
+|The path of the shared directory exposed on the NFS server, e.g., `/mnt/data` or `/share/volume`.
+
+|Access Mode
+|
+include::persistentVolumeClaims-para-accessMode.adoc[]
+
+Depending on the backend storage system, some access mode types may not be available.
+
+|Reclaim Policy
+|The policy applied to the PersistentVolume when the PersistentVolumeClaim is deleted. Default is Delete.
+
+* **Delete**: After the PersistentVolumeClaim is deleted, the system automatically deletes the PersistentVolume.
+
+* **Retain**: After the PersistentVolumeClaim is deleted, the system does not automatically delete the PersistentVolume.
+
+|Read Only
+|Whether the PersistentVolumeClaim is mounted in read-only mode.
+
+|Mount Options
+|Defines parameters for NFS mounting to optimize performance or control behavior, such as `hard`, `nfsvers=4`.
+
+|Volume Capacity
+|The volume capacity corresponding to the PersistentVolumeClaim.
+|===
++
+For more information on the parameters, please refer to the link:https://kubernetes.io/zh-cn/docs/concepts/storage/persistent-volumes/#persistent-volumes[Kubernetes Official Documentation].
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|After the PersistentVolume corresponding to the PersistentVolumeClaim is created, you will not be able to modify the NFS server hostname/IP address, NFS volume path, and volume capacity. To modify them, please delete and recreate the PersistentVolumeClaim.
+
+|===
+endif::[]
+--
+
+. On the **Advanced Settings** tab, set the labels and annotations for the PersistentVolumeClaim, then click **Create**.
++
+--
+include::../workloads/createWorkload/workloads-para-Metadata.adoc[]
+
+Once created, the PersistentVolumeClaim will appear in the PersistentVolumeClaim list.
+--

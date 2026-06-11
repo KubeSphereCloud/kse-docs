@@ -1,0 +1,166 @@
+---
+title: 获取资源价格（GetPrice）
+weight: 15
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| currency
+| String
+| true
+| 货币类型
+
+| duration
+| Integer
+| false
+| 时长，不传默认为3600小时，支持1～60，单位月
+
+| promotion_id
+| String
+| false
+| 促销活动ID
+
+| promotion_ignore_user
+| Integer
+| false
+| 获取促销价格时是否忽略用户
+
+| resources
+| Array
+| true
+| 资源配置列表
+
+| resources[].duration
+| Integer
+| true
+| 时长，这里传了会覆盖请求参数的duration
+
+| resources[].sequence
+| Integer
+| true
+| 请求序号，依据此映射返回的价格参数
+
+| resources[].type
+| String
+| true
+| 资源类型
+
+| start_time
+| String
+| false
+| 价格生效的时间
+
+| user
+| String
+| false
+| 用户ID
+
+| zone
+| String
+| true
+| 区域ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| price_set
+| Array
+| false
+| 价格信息的列表
+
+| price_set[].available_coupon
+| String
+| false
+| 序号对应产品配置可用优惠券金额
+
+| price_set[].available_coupon_set
+| Array
+| false
+| 	序号对应产品配置可用优惠券列表
+
+| price_set[].available_coupon_set[].TODO
+| String
+| false
+| 待定义
+
+| price_set[].discount
+| Integer
+| false
+| 折扣
+
+| price_set[].normal_price
+| String
+| false
+| 普惠价
+
+| price_set[].original_price
+| String
+| false
+| 原价
+
+| price_set[].price
+| String
+| false
+| 实际价格，仅当有促销价时，normal_price!=price
+
+| price_set[].sequence
+| Integer
+| false
+| 序号，与请求的resources对应
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "currency": "cny",
+  "duration": 3600,
+  "resources": [
+    {
+      "bandwidth": 1,
+      "billing_mode": "bandwidth",
+      "media_type": "vm",
+      "sequence": 0,
+      "type": "new_wan_access"
+    }
+  ],
+  "user": "usr-AebiPgK3",
+  "zone": "devops"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetPriceResponse",
+  "price_set": [
+    {
+      "available_coupon": "0",
+      "available_coupon_set": [],
+      "discount": 100,
+      "discount_details": {},
+      "normal_price": "1468.8",
+      "original_price": "1468.8",
+      "price": "1468.8",
+      "sequence": 0
+    }
+  ],
+  "ret_code": 0
+}
+----

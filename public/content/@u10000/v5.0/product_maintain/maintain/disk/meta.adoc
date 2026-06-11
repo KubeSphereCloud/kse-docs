@@ -1,0 +1,107 @@
+---
+title: 更换索引盘
+weight: 2
+---
+
+当环境中存在异常索引盘时，Portal 会报警，操作人员可以根据告警信息里面的内容，获取异常索引盘所在的网关节点 Hostname，确认索引盘所在网关节点，并将该故障磁盘从节点上拔下，换上新盘后，再对其进行数据恢复。
+
+本文以网关节点 `gateway1` 为例，详细说明如何进行数据恢复操作。
+
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，获取故障索引盘所在节点的 IP。
++
+[source,shell]
+----
+cat /etc/hosts | grep gateway1
+----
+
+. 进入脚本所在目录，执行如下命令行，重建节点配置文件及服务。命令行中的 `<gateway1_IP>` 为 故障磁盘所在节点 IP，根据上一步查询结果进行填写。
++
+[source,shell]
+----
+cd /root/qs-installer
+./qs_installer tools --rebuild <gateway1_IP>
+----
+
+. 执行如下命令行，查看 Etcd 集群状态，若有异常，则重建 Etcd 节点。
++
+[source,shell]
+----
+./qs_installer tools --etcd status
+./qs_installer tools --etcd rebuild
+----
++
+include::../../../../../_components/note.adoc[]
+
+若第一条命令行回显中无异常，则无需执行第二条命令行。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令行，查看 Tipd 集群状态，若有异常，则重建 Tipd 节点。
++
+[source,shell]
+----
+./qs_installer tools --tipd0 status
+./qs_installer tools --tipd0 rebuild
+----
++
+include::../../../../../_components/note.adoc[]
+
+若第一条命令行回显中无异常，则无需执行第二条命令行。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令行，查看 Tikv 集群状态，若有异常，则重建 Tikv 节点。
++
+[source,shell]
+----
+./qs_installer tools --tikv0 status
+./qs_installer tools --tikv0 rebuild
+----
++
+include::../../../../../_components/note.adoc[]
+
+若第一条命令行回显中无异常，则无需执行第二条命令行。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+
+. 执行如下命令行，查看 Tipd 集群状态，若有异常，则重建 Tipd 节点。
++
+[source,shell]
+----
+./qs_installer tools --tipd status
+./qs_installer tools --tipd rebuild
+----
++
+include::../../../../../_components/note.adoc[]
+
+若第一条命令行回显中无异常，则无需执行第二条命令行。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令行，查看 Tikv 集群状态，若有异常，则重建 Tikv 节点。
++
+[source,shell]
+----
+./qs_installer tools --tikv status
+./qs_installer tools --tikv rebuild
+----
++
+include::../../../../../_components/note.adoc[]
+
+若第一条命令行回显中无异常，则无需执行第二条命令行。
+
+include::../../../../../_components/table_footer.adoc[]

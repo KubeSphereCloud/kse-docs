@@ -1,0 +1,77 @@
+---
+title: "克隆相关功能"
+weight: 4
+---
+
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统的克隆功能
+|预置条件	
+a|. QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+. 各节点服务配置正确，且状态正常。
+. 系统中已经成功创建卷：vol/test。
+
+
+|测试过程
+a|
+. 查看系统中的克隆卷信息。
++
+[source,shell]
+----
+neonsan list_clone
+----
+. 针对指定卷，创建克隆卷。
++
+[source,shell]
+----
+neonsan clone_to_newvolume -source_volume vol/test -target_volume vol/test_clone
+----
+. 查看系统中卷的详细信息。
++
+[source,shell]
+----
+neonsan list_volume -detail
+----
+. 查看指定卷的克隆卷信息。
++
+[source,shell]
+----
+neonsan list_clone -source_volume vol/test
+----
+. 解除克隆卷与源卷的克隆关系。
++
+[source,shell]
+----
+neonsan detach_clone -source_volume vol/test -target_volume vol/test_clone
+----
+. 查看指定卷的克隆卷信息。
++
+[source,shell]
+----
+neonsan list_clone -source_volume vol/test
+----
+. 删除克隆卷。
++
+[source,shell]
+----
+neonsan delete_volume -volume vol/test_clone
+----
+
+|预期结果	
+a|
+. 集群中克隆卷的信息显示在列，无错误返回。
+. 创建克隆卷成功，无错误返回。
+. 新创建的克隆卷，显示在列，无错误返回。
+. 命令执行成功，显示两个克隆关系的卷。
+. 成功解除克隆关系，无错误返回。
+. 返回结果中，不再显示指定卷的克隆关系。
+. 指定卷删除成功，通过 ``list_volume`` 命令不在显示 vol/test 卷信息。
+
+|验证结果	
+|
+
+|备注	
+|
+|===

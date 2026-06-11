@@ -1,0 +1,66 @@
+---
+title: 修改用户偏好（ModifyUserPreference）
+weight: 27
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| indep_quota
+| String
+| true
+| 
+
+| user
+| String
+| true
+| 用户id
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 用户id
+
+| user_preference
+| Dict
+| false
+| 用户偏好
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "indep_quota": "vpn",
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyUserPreferenceResponse",
+  "ret_code": 0,
+  "user_id": "admin",
+  "user_preference": {
+    "indep_quota": "vpn"
+  }
+}
+----

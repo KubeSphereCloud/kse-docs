@@ -1,0 +1,147 @@
+---
+title: "永久下线"
+weight: 2
+---
+
+若该节点下线后，影响到集群中提供管理服务的节点个数，即导致提供管理服务的节点个数不足 3 个，此时，需另寻其他节点，部署管理服务。对于另选其他节点，部署管理服务，提供两种方案。
+
+* 方案一。新增节点，安装部署管理服务。
+* 方案二。在集群原有节点上安装部署管理服务。
+
+由于 Zookeeper 集群的变更，会影响到 NeonSAN 配置的变更；若需该变更生效，需重启 NeonSAN 存储服务；重启 NeonSAN 存储服务，会导致业务的中断。**因此，我们建议，采用方案一，即新增节点，用来安装部署管理服务，该新增节点配置，需与下线节点配置保持一致，包括 IP 等信息**。
+
+== 方案一操作步骤
+
+. 将该节点管理服务先做link:../temporary.adoc[临时下线处理]。
+
+. 若选择新增节点,用来安装部署管理服务，则需将该节点的 IP 配置与下线节点的 IP 配置保持一致。
++
+include::../../../../../../../_components/note.adoc[]
+* 可参考 《NeonSAN 手动安装部署文档》，安装部署 Zookeeper 服务。
+* 管理服务配置均需与下线节点的配置保持一致。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 部署完成后，需验证管理服务状态是否正常。
+.. 逐个登录 zookeeper 集群节点，查看 zookeeper 服务状态.
++
+[,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
+
+.. 逐个登录数据库集群节点，查看数据库集群状态。
++
+--
+* Qingstor Mysql 数据库
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
+* Galera 数据库
++
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
+
+* Xenondb 数据库
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
+--
+
+. 登录 NeonSAN 集群，查看各节点的服务状态。
++
+[,shell]
+----
+supervisorctl status
+----
++
+include::../../../../../../../_components/note.adoc[]
+返回结果中，各服务状态应为 ``RUNNING``，若存在状态异常的服务，需调查原因并解决后，再次执行该步骤。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 登录 NeonSAN 集群，查看集群状态。
++
+[,shell]
+----
+neonsan list_store
+neonsan list_ssd
+neonsan list_volume
+----
++
+include::../../../../../../../_components/note.adoc[]
+集群服务正常，无降级卷。
+include::../../../../../../../_components/table_footer.adoc[]
+
+== 方案二操作步骤
+
+. 将该节点管理服务先做link:../temporary.adoc[临时下线处理]。
+. 若另选集群原有节点，则直接安装部署管理服务后，执行如下操作。
+.. 停业务。
+.. 修改管理服务配置，将新部署的管理服务加入集群。
+.. 重启各节点管理服务。
+.. 确认各节点管理服务正常。
+.. 逐个登录 NeonSAN 集群节点，修改 NeonSAN 相应服务的配置文件。
++
+[,shell]
+----
+/etc/neonsan/center.conf
+/etc/neonsan/store.conf
+/etc/neonsan/monitor.conf
+/etc/neonsan/qbd.conf
+/etc/neonsan/iscsi.conf
+----
++
+修改上述配置文件中的以下内容，即 [zookeeper] 的 IP 地址该成新管理节点的 IP。
++
+[,shell]
+----
+... ...
+[zookeeper]
+ip="192.168.101.25:2181,192.168.101.26:2181,192.168.101.27:2181"
+cluster_name="cluster1"
+... ...
+----
++
+include::../../../../../../../_components/note.adoc[]
+NeonSAN 配置文件中的 Zookeeper 信息需与最新的集群信息保持一致。
+include::../../../../../../../_components/table_footer.adoc[]
+
+
+.. 逐个登录 NeonSAN 集群节点，重启 NeonSAN 相关服务。
++
+[,shell]
+----
+supervisorctl restart neonstore
+supervisorctl restart neoncenter
+supervisorctl restart neonmonitor
+----
+
+. 登录 NeonSAN 集群，查看各节点的服务状态。
++
+[,shell]
+----
+supervisorctl status
+----
++
+include::../../../../../../../_components/note.adoc[]
+返回结果中，各服务状态应为 ``RUNNING``，若存在状态异常的服务，需调查原因并解决后，再次执行该步骤。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 登录 NeonSAN 集群，查看集群状态。
++
+[,shell]
+----
+neonsan list_store
+neonsan list_ssd
+neonsan list_volume
+----
+
+
+
+

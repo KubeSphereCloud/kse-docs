@@ -1,0 +1,104 @@
+---
+title: "创建工作负载时使用算力资源"
+weight:  21
+---
+
+:ks_permission: **应用负载管理**
+:ks_navigation: **工作负载**
+
+
+配置算力节点后，在创建工作负载时，支持设置算力资源的类型和上限，还可以在容器组的注解中配置算力资源的调度策略。
+
+== 前提条件
+
+* 已部署算力节点。
+
+* KubeSphere 平台需要安装并启用**算力设备管理**扩展组件。
+
+:relfileprefix: ../../../
+* {empty}
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== 操作步骤
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/workloads/workloads-oper-openListPage_v421.adoc[]
+
++
+
+include::../../../../_ks_components/oper-clickCreate.adoc[]
+
+. 在**基本信息**页签，设置工作负载的基本信息，然后点击**下一步**。
+
+. 在**容器组设置**页签，为工作负载管理的容器组设置 GPU/NPU 类型、GPU/NPU 使用数量上限。
++
+--
+image::/images/ks-qkcp/zh/v4.2.1/use-computing-node-1.png[, 90%]
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|当 “GPU 类型”设置为 GPU 虚拟卡时，方可配置算力和显存上限。
+|===
+--
+
+. 在**容器组设置**页签，还可以添加注解以配置 GPU/NPU 资源的调度策略。
++
+--
+image::/images/ks-qkcp/zh/v4.2.1/use-computing-node-2.png[, 90%]
+
+注解示例：
+
+[%header,cols="2a,1a,4a"]
+|===
+|键 |值 |说明
+
+|`hami.io/node-scheduler-policy` 或
+`hami.io/gpu-scheduler-policy`
+|binpack 或 spread
+|
+* `binpack`: 优先填满单卡/单节点，多个 Pod 会优先使用同一个节点。适用于提高利用率的场景。
+
+* `spread`: 多个 Pod 会分散在不同节点、不同显卡上，优先选择资源剩余量较多的节点。适用于高可用场景。
+
+|`nvidia.com/use-gputype`
+|A100,V100
+|指定 GPU 卡的类型，使用逗号分隔，不会在未指定的卡上启动作业
+
+|`nvidia.com/nouse-gputype`
+|1080,2080
+|指定黑名单中 GPU 卡的类型，使用逗号分隔，不会在指定的卡上启动作业
+
+|`nvidia.com/use-gpuuuid`
+|GPU-123456
+|任务将被分配到 UUID 为 GPU-123456 的设备上
+|===
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|更多信息，可参阅 link:https://project-hami.io/zh/docs/userguide/NVIDIA-device/specify-device-type-to-use[HAMi 官方文档]。
+
+|===
+--
+
+ifeval::["{file_output_type}" == "html"]
+有关创建工作负载的更多信息，请参阅link:../../../08-workspace-management/10-application-workloads/03-workloads/01-create-a-workload/[创建工作负载]。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+有关创建工作负载的更多信息，请参阅《KubeSphere 企业空间和项目管理指南》的“工作负载”章节。
+endif::[]

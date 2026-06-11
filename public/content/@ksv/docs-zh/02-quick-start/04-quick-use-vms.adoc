@@ -1,0 +1,156 @@
+---
+title: "快速创建和使用虚拟机"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, 控制台, web, 虚拟机, 快速, 使用"
+description: "介绍如何快速创建和使用虚拟机。"
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: aead45e0c1224add85b381b6d37fb625
+:ks_xref_id: 69e83b35a22844a0b9bc9611babb2748
+:ks_comp: ../../components/
+:ks_title: 快速创建和使用虚拟机
+:ks_description: 介绍如何快速创建和使用虚拟机。
+:ks_keywords: {ks_product_full}, {ks_product}, 控制台, web, 虚拟机, 快速, 使用
+:ks_weight: 04
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何通过{ks_product_abbr_full_both}Web 控制台快速使用虚拟机。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=e76a572a84cd496b96afa68ec167343c]
+
+* 请确保{ks_product_both}已安装完成。有关如何安装{ks_product_left}，请参阅 link:../01-install-ksv-in-single-node-mode/[单节点模式安装]和 link:../02-install-ksv-in-multi-node-mode/[多节点模式安装]。
+
+* 请确保您有虚拟机管理权限。仅系统 **admin** 用户、项目管理员或操作员可以对虚拟机执行管理操作，项目观察员只能查看项目中的虚拟机。
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 步骤一：创建虚拟机link:[id=6e5e1fc16af7428d89388c93a9c865cb]
+
+include::../../_custom/vms/vm-view-steps.adoc[]
+
+. 在虚拟机列表页面，点击**创建**，然后选择**基于镜像**、**基于模板**或**基于虚拟机**，进入对应的虚拟机创建页面。
++
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+本入门教程采用基于镜像创建虚拟机。有关基于模板和基于虚拟机创建的更多信息，请参阅 link:../../03-user-manual/05-vm-management/01-vms/01-create-vm/[创建虚拟机]。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
++
+include::../../_custom/vms/vm-create-basic-parameters.adoc[]
++
+. 在**配置信息**页签的**镜像**区域，选择虚拟机使用的镜像类型。
++
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+* {ks_product_right}目前支持各种主流的 Linux 发行版镜像，如 Fedora、CentOS 和 Ubuntu 等。
+
+* 您可以根据业务需求，选择基于**系统镜像**、**自有镜像**或**共享镜像**创建虚拟机。有关各镜像类型的具体信息，请参阅 link:../../03-user-manual/05-vm-management/03-images/[镜像]。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在**配置**区域，选择虚拟机的 CPU 和内存配置。
++
+--
+[cols="1a,3a"]
+|===
+|配置名称 |描述
+
+|默认配置 _N_ 核 _N_ GiB
+|此处的默认配置与镜像的配置相同。
+
+|普通级配置 2 核 4 GiB
+|2 核 CPU 和 4 GiB 内存，适用于中等规模并发业务和通用数据处理。
+
+|专业级 4 核 8 GiB
+|4 核 CPU 和 8 GiB 内存，适用于企业高并发业务场景。
+
+|自定义配置
+|自定义 CPU 和内存配置。
+|===
+--
++
+
+:relfileprefix: ../../
+
+include::../../_custom/vms/vm-create-parameters.adoc[]
+
+:relfileprefix: ./
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 步骤二：绑定弹性 IPlink:[id=99e73819a74048f19aff1d7a032a4dbe]
+
+如果创建虚拟机时您指定的是在虚拟子网中创建，请按以下步骤继续操作，为虚拟机绑定弹性 IP 以开启公网访问。
+
+. 在左侧导航栏，点击**网络** > **弹性 IP **以打开弹性 IP 列表页面。
+
+. 在弹性 IP 列表页面，点击目标弹性 IP 右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，选择**绑定 VM**。
+
+. 在弹出的对话框中，选择步骤一中创建的虚拟机，然后点击**确定**。绑定完成后您便可以通过弹性 IP 从公网访问虚拟机。
++
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+每个弹性 IP 对应一台虚拟机。如果当前列表无可用的弹性 IP，您可以点击页面右上角的**申请**以创建新的弹性 IP。有关更多信息，请参阅 link:../../03-user-manual/03-network-management/05-eips/01-apply-for-eip/[申请弹性 IP]。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 步骤三：连接虚拟机link:[id=60791547e02d46b1b4535b7b2fc10b2e]
+
+. 在左侧导航栏，点击**虚拟机** > **虚拟机**以返回虚拟机列表页面。
+
+. 在虚拟机列表页面，点击目标虚拟机名称右侧的 image:/images/ksv/zh/icons/terminal.svg[18px,18px] 以打开终端连接至虚拟机。
+
+. 在弹出的终端窗口中，输入登录的用户名和密码，完成登录凭证验证。
++
+--
+* 用户名：填写 **root**。
+* 密码：创建虚拟机时，在**登录设置**区域设置的登录密码，默认值为 **123456**。
+--
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 步骤四：删除虚拟机link:[id=60791547e02d46b1b4535b7b2fc10b2e]link:[id=8cb59ee6d7654b4397ac0be00e3016c5]
+
+如果您不再需要这台虚拟机，可以将其删除以释放资源，删除后虚拟机相关数据不可恢复。
+
+. 在左侧导航栏，点击**虚拟机** > **虚拟机**以返回虚拟机列表页面。
+
+. 在虚拟机列表页面，点击目标虚拟机名称右侧的 image:/images/ksv/zh/icons/terminal.svg[18px,18px]，然后从下拉列表中选择**删除**。
+
+. 在弹出的对话框中点击**确定**。
++
+--
+// Warning
+include::../../../_ks_components/admonitions/warning.adoc[]
+
+虚拟机删除后无法恢复，请谨慎执行此操作。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--

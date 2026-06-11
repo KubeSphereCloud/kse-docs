@@ -1,0 +1,43 @@
+---
+title: "查看监控配置信息"
+weight: 3
+---
+
+
+. 逐个登录 NeonSAN Store 节点。 
+
+. 输入如下命令，查看 Monitor 的配置信息。
++
+[,shell]
+----
+cat /etc/neonsan/monitor.conf
+----
+
+. 登录 Prometheus 节点输入如下命令，查看 Prometheus 的配置信息。集群部署方式不同，其配置文件所处路径有所区别，具体如下。
++
+[,shell]
+----
+cat /opt/prometheus/prometheus.yml
+----
++
+或
++
+[,shell]
+----
+cat /opt/prometheus-1.8.0.linux-amd64/prometheus.yml 
+----
+
+. 登录 Alerter 节点输入如下命令，查看相关配置信息。
++
+[,shell]
+----
+cat /qingstor/etc/alerter.conf
+----
++ 
+include::../../../../../_components/note.adoc[]
+手动部署或旧版本的集群可能为 Alertmanager 节点，其配置信息为 ``/opt/alertmanager-0.9.1.linux-amd64/alertmanager.yml``。
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+

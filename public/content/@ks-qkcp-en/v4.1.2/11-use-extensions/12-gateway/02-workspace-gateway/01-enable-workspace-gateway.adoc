@@ -1,0 +1,48 @@
+---
+title: "Enable Workspace Gateway"
+keywords: "Kubernetes, {ks_product-en}, workspace management, workspace settings, enable workspace gateway"
+description: "Introduce how to enable workspace gateways."
+weight: 01
+---
+
+:ks_permission: **Workspace Gateway Management**
+:ks_navigation: **Workspace Settings > Gateway Settings**
+
+
+This section introduces how to enable workspace gateways.
+
+
+== Prerequisites
+
+* **KubeSphere Gateway** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+
+== Steps
+
+include::../../../../_custom-en/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. On the right side of the **Gateway Settings** page, click **Enable Gateway**.
++
+--
+// Note
+include::../../../../../_ks_components-en/admonitions/note.adoc[]
+
+Enabling project gateways on the workspace's **Gateway Settings** page is not supported. If you need to enable a project gateway, please go to the corresponding project.
+
+include::../../../../../_ks_components-en/admonitions/admonEnd.adoc[]
+--
+
+. In the pop-up **Enable Gateway** dialog box, set the parameters for the gateway, and then click **OK**.
++
+--
+include::../../../../_custom-en/clusterManagement/gatewaySettings/gatewaySettings-para-enableGateway_v4.adoc[]
+--

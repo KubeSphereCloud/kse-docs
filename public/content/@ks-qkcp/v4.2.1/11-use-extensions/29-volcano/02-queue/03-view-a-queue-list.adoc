@@ -1,0 +1,86 @@
+---
+title: "查看队列列表"
+weight:  03
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: ** Volcano 调度 > 队列**
+
+
+本节介绍队列列表的信息。
+
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Volcano** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+--
+[.admon.note,cols="a"]
+|===
+|说明
+
+|在企业空间左侧导航栏，也可查看其所属集群下的 Volcano 队列列表。
+|===
+
+队列列表提供以下信息：
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|队列的名称和别名。
+
+|状态
+|
+* **可用**：可接收新的 podgroup。
+
+* **不可用**：不可接收新的 podgroup。
+
+* **关闭中**：正在转化为不可用状态，不可接收新的 podgroup。
+
+* **未知**：网络或其他原因导致队列处于不可知状态。
+
+有关 podgroup 的更多信息，请参阅 link:https://volcano.sh/zh/docs/podgroup/[Volcano 官方文档]。
+
+|资源预留
+|为队列内所有 podgroup 预留的资源，其他队列无法使用该部分资源。
+
+|资源上限
+|队列内所有 podgroup 使用资源量之和的上限。
+
+|资源应得
+|队列内所有 podgroup 的资源应得量。
+
+当队列已分配的资源量超过此值时，其超额部分可被回收以供其他队列使用；反之，若未超此值且集群有空闲资源，该队列则可继续借用其他队列的资源。
+
+|比重
+|队列在集群资源划分中所占的相对比重。仅在 proportion 插件开启时生效。
+
+|优先级
+|队列的优先级。在资源分配/抢占/回收时，更高优先级的队列将会优先分配/抢占/回收资源。
+
+|创建时间
+|队列的创建时间。
+|===
+
+* 在列表上方点击搜索框并输入关键字，可按名称或状态搜索队列。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+--

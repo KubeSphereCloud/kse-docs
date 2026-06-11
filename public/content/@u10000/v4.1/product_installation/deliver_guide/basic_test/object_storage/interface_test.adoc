@@ -1,0 +1,266 @@
+---
+title: 工具测试
+weight: 4
+---
+
+
+== 测试目的
+
+
+
+验证 {product_name} 对象存储支持接口调用。用户可通过 qsctl 或者 s3cmd 工具进行相应的接口测试。
+
+
+== qsctl
+
+=== 安装配置
+
+. 根据客户端操作系统版本，用户下载 link:https://releases.qingstor.dev/#qsctl[qsctl 安装包]。若无特殊要求，{product_name} 建议下载最新版本。
+
+. 本地终端进入 qsctl 安装包存放路径，解压安装包。
++
+image::/images/cloud_service/storage/object_storage/qsctl_install2.png[]
+
+
+
+. 依次查看是否存在默认配置文件。
++
+
+include::../../../../../../_components/note.adoc[]
+
+在使用 qsctl 工具前，用户需修改相应的配置文件，从而使其能正常工作。在载入配置文件时，qsctl 会按照如下顺序进行尝试，一旦读取成功便不再尝试下一个配置文件。
+
+. 读取命令行中，用户通过 `-c` 参数指定的配置文件。
+. 读取配置文件：`~/.qingstor/config.yaml`。
+. 读取配置文件：`~/.config/qingstor/config.yaml`。
+. 读取配置文件：`/etc/qingstor/config.yaml`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 若以上文件均不存在，即说明无默认配置文件，用户需按照如下步骤手动创建配置文件。
++
+[source,shell]
+----
+touch qsctl_config.yaml
+----
+
+. 按如下格式填写配置文件相关信息：
++
+[source,shell]
+----
+access_key_id: 'ACCESS_KEY_ID_EXAMPLE'
+secret_access_key: 'SECRET_ACCESS_KEY_EXAMPLE'
+
+zone: 'zone_name'
+host: 'qingstor.com'
+port: 443
+protocol: 'https'
+----
++
+**参数说明**
++
+[cols="2,8", options="header"]
+|===
+|参数
+|说明
+
+|access_key_id
+|需根据 Console 中申请的 API 密钥进行填写。
+
+|secret_access_key
+|需根据 Console 中申请的 API 密钥进行填写。
+
+|zone
+| 填写待访问的 {product_name} 对象存储 `zone_id` 字段。
+
+|host
+|填写待访问的 {product_name} 对象存储的域名信息。URL 中不包含 `zone_id` 字段。
+
+|port
+|填写待访问的 {product_name} 对象存储的协议的端口号。默认使用 HTTPS 访问方式，对应的端口号为 `443`。若需修改为 HTTP 访问方式，则需修改为 `80`。
+|protocol
+|填写待访问的 {product_name} 对象存储的协议类型。默认使用 HTTPS 访问方式，若需修改为 HTTP 访问方式，则修改为 `http`。
+
+|===
+
+
+=== 测试步骤
+
+. 执行如下命令行，创建 Bucket。
++
+[source,shell]
+----
+> qsctl mb qs://maxtest --zone gd2
+Bucket <maxtest> created.
+
+----
+
+. 执行如下命令行，获取 Bucket 下的 Object 列表。
++
+[source,shell]
+----
+> qsctl ls qs://maxtest
+tmp.txt
+
+----
+
+. 执行如下命令行，上传 Object。
++
+[source,shell]
+----
+> qsctl cp tmp.txt qs://maxtest/
+File </home/max/tmp.txt> copied to </tmp.txt>.
+
+
+
+----
+
+. 执行如下命令行，查询 Object。
++
+[source,shell]
+----
+> qsctl stat qs://maxtest/tmp.txt
+         Key: tmp.txt
+        Size: 706B
+        Type: text/plain
+        ETag: "e455e26c5896b85ec012facbddd47459"
+StorageClass: STANDARD
+   UpdatedAt: 2023-03-07 06:52:02 +0000 UTC
+
+----
+
+. 执行如下命令行，下载 Object。
++
+[source,shell]
+----
+> qsctl cp qs://maxtest/tmp.txt tmp1.txt
+File </tmp.txt> copied to </home/max/tmp1.txt>.
+
+----
+
+. 执行如下命令行，删除 Object。
++
+[source,shell]
+----
+> qsctl rm qs://maxtest/tmp.txt
+File </tmp.txt> removed.
+
+----
+
+. 执行如下命令行，删除 Bucket。
++
+[source,shell]
+----
+> qsctl rb qs://maxtest
+Bucket <maxtest> removed.
+
+----
+
+== s3cmd
+
+=== 安装配置
+
+. 本地执行如下命令行，安装 s3cmd 工具。
++
+[source,shell]
+----
+pip install s3cmd
+
+----
+
+
+. 本地成功安装 s3cmd 工具后，需正确修改配置文件 `~/.s3cfg`。
++
+[source,shell]
+----
+> cat ~/.s3cfg
+[default]
+access_key = PLLZOBTTZXGBNOWUFHZZ
+secret_key = MnIjI58zC8AX07xotHXcm6grwFgOXhaJQHkTCX2X
+bucket_location = pek3a
+host_base = s3.pek3a.qingstor.com
+host_bucket = %(bucket)s.s3.pek3a.qingstor.com
+
+----
++
+配置文件各参数说明如下：
++
+[cols="1,5", options="header"]
+|===
+| 参数 | 说明 
+
+|access_key | 填写 {product_name} 的 `access_key`，需提前在 {product_name} 环境中申请。
+|secret_key | 填写 {product_name} 的 `secret_key`，需提前在 {product_name} 环境中申请。
+|bucket_location |填写 {product_name} 对象存储的 `zone_id`。
+|host_base |填写格式为 `s3.zone_id.global_domain`。其中 `zone_id` 与 `global_domain` 需根据 {product_name} 配置文件 `base.ini` 中的内容进行填写。
+|host_bucket a| 
+
+* 待操作的 Bucket 名。填写格式为 `%(bucket)s.host_base`，其中 `host_base` 根据实际情况进行替换。
+* `host_bucket` 的填写格式需注意，`%(bucket)s` 为固定字段，域名根据实际情况进行修改。
+
+|===
+
+
+
+
+
+
+=== 测试步骤
+
+. 执行如下命令行，创建 Bucket。
++
+[source,shell]
+----
+
+
+> s3cmd mb s3://maxtest
+Bucket 's3://maxtest/' created
+----
+
+. 执行如下命令行，上传 Object。
++
+[source,shell]
+----
+> s3cmd put tmp.txt s3://maxtest
+upload: 'tmp.txt' -> 's3://maxtest/tmp.txt'  [1 of 1]
+ 706 of 706   100% in    0s     5.28 KB/s  done
+
+----
+
+. 执行如下命令行，查询 Object。
++
+[source,shell]
+----
+> s3cmd ls s3://maxtest
+2023-03-03 05:59          706  s3://maxtest/tmp.txt
+2023-03-03 06:00          111  s3://maxtest/tmp1.txt
+
+----
+
+. 执行如下命令行，下载 Object。
++
+[source,shell]
+----
+> s3cmd get s3://maxtest/tmp.txt tmp2.txt
+download: 's3://maxtest/tmp.txt' -> 'tmp2.txt'  [1 of 1]
+ 706 of 706   100% in    0s    26.06 KB/s  done
+
+----
+
+. 执行如下命令行，删除 Object。
++
+[source,shell]
+----
+> s3cmd del s3://maxtest/tmp.txt
+delete: 's3://maxtest/tmp.txt'
+
+----
+
+. 执行如下命令行，删除 Bucket。
++
+[source,shell]
+----
+> s3cmd rb s3://maxtest
+Bucket 's3://maxtest/' removed
+
+----

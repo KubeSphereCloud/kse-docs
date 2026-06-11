@@ -1,0 +1,60 @@
+---
+title: "查看 RAID 日志"
+weight: 12
+---
+
+== 适用范围
+
+仅适用于混插环境，且采用了 RAID 模式。
+
+== 操作步骤
+
+. 逐个登录集群节点。 
+
+. 执行如下命令，筛选 RAID 卡的告警。 
++
+[,shell]
+----
+/opt/qs-device/tools/storcli /call show events filter=warning,critica l,fatal 
+----
+
+. 执行如下命令，查看 CV 或 BBU 状态。 
++
+[,shell]
+----
+/opt/qs-device/tools/storcli /c<N> /cv show J # /opt/qs-device/tools/storcli /call/bbu show J 
+----
++
+include::../../../../../_components/note.adoc[]
+* CV 或 BBU 至少存在一个。 
+* c<N> 中的 <N> 值需根据实际情况进行修改，可执行 ``storcli show`` 命令查看。
+include::../../../../../_components/table_footer.adoc[]
+
+. 查看缓存策略。
+.. 使用 ``storcli`` 相关命令，依次查看 c<N> 和 v<N> 的值。详细的 storcli 使用方法可参考link:https://docs.broadcom.com/doc/12352476[其官方文档]。
++
+查看 c<N> 值。
++
+[,shell]
+----
+storcli show
+----
++
+根据查询到的 c<N> 值，查看相应的 v<N> 值。
++
+[,shell]
+----
+storcli /c0 /vall show
+----
+
+.. 执行如下命令，查看相应 RAID 的缓存策略。
++
+[,shell]
+----
+/opt/qs-device/tools/storcli /c<N>/v<N> show J
+----
++
+include::../../../../../_components/note.adoc[]
+返回结果中 Cache 为 RWBD，若为 WT，则说明缓存策略不正确，需确保 CV 或 BBU 至少存在一个。
+include::../../../../../_components/table_footer.adoc[]
+

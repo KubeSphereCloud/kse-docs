@@ -1,0 +1,17 @@
+---
+title: "注意事项"
+weight: 20
+---
+
+* 企业云平台的服务器操作系统仅支持 Ubuntu 20.04.1。
++
+可执行以下命令查看操作系统版本，确保 **DISTRIB_DESCRIPTION** 值为 `Ubuntu 20.04.1`。
++
+[source]
+----
+cat /etc/lsb-release
+----
++
+image::/images/ep_offline/installation/add_stor_other_attention.png[]
+
+* 需要在第三方存储部署完成后，再部署企业云平台基础软件（IaaS）。

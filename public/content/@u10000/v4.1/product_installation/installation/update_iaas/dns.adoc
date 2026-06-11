@@ -1,0 +1,125 @@
+---
+title: 更新 DNS 配置
+weight: 1
+---
+
+. 登录 IaaS 的 FirstBox。
+
+. 在 IaaS 的 FirstBox 上执行如下命令，查看所有的 DNS 节点服务器：
++
+[source,shell]
+----
+# cat /pitrix/conf/nodes/dns
+nodes=( guangd1a-dnsmaster0 guangd1a-dnsmaster1 );
+----
+
+. 根据以上查询结果，逐个登录 IaaS 的 DNS 节点服务器：
++
+[source,shell]
+----
+# ssh guangd1a-dnsmaster0
+----
+
+
+. 将 {product_name} 的 DNS 服务器节点 IP 地址，添加至 IaaS 环境：
+.. 登录 {product_name} 的 FirstBox：
++
+[source,shell]
+----
+# ssh -p 6023 root@<firstbox ip address>
+----
+
+.. 执行如下命令行，查找 {product_name} 的 DNS 服务器信息：
++
+[source,shell]
+----
+# grep core /etc/hosts
+101.100.11.2 core0
+101.100.11.3 core1
+101.100.11.4 core2
+----
++
+
+include::../../../../../_components/note.adoc[]
+
+由于 core 节点上部署有 DNS 服务，因此查询 core 节点服务器即为 DNS 节点服务器。
+
+include::../../../../../_components/table_footer.adoc[]
+
+.. 将查询到的 {product_name} 的 DNS 服务器信息添加至 IaaS 的 DNS 节点服务器上的如下配置文件中。如上查询结果为：`101.100.11.193` 与 `101.100.11.194`，修改配置文件为：
++
+[source,shell]
+----
+# vi /etc/bind/named.conf
+……
+ zone "<qingstor_global_domain>" {
+    type forward;
+    forward only;
+    forwarders { 101.100.11.193; 101.100.11.194; };
+ };
+
+ zone "<zone_id>.<qingstor_global_domain>" {
+    type forward;
+    forward only;
+    forwarders { 101.100.11.193; 101.100.11.194; };
+};
+……
+----
++
+
+include::../../../../../_components/note.adoc[]
+
+* 需将上述配置文件中的 `<qingstor_global_domain>` 与 `<zone_id>` 根据 {product_name} 的link:../../config/base/[ zone_id 与 global_domain ]进行修改。
+* `forwarders` 字段填写的内容为查询出来的 {product_name} 的 DNS 节点服务器 IP 地址。查询结果若有多个，则以分号分隔，并根据示例形式进行填写。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 将 {product_name} 节点服务器 IP 地址所在的网段，添加至 IaaS 环境：
+.. 登录 {product_name} 的 FirstBox：
++
+[source,shell]
+----
+# ssh -p 6023 root@<firstbox ip address>
+----
+
+.. 查看配置文件中各节点服务器 IP 地址：
++
+[source,shell]
+----
+# cat /root/qs-installer/etc/ip.ini
+[role]
+192.168.100.2 = oss nas cluster1 global
+192.168.100.3 = oss nas cluster1 global
+192.168.100.4 = oss nas cluster1 global
+
+----
+
+.. 将 {product_name} 节点服务器所在的网段，添加至 IaaS 环境的 DNS 服务器如下配置文件中。如上，查询出的 IP 地址所在网段为 `192.168.100.0/24`。
++
+[source,shell]
+----
+# vi /etc/bind/named.conf.options
+……
+acl "trusted" { 192.168.100.0/24}
+……
+----
++
+
+include::../../../../../_components/note.adoc[]
+
+* 根据 {product_name} link:../../config/ip/[配置文件]中的 IP 地址所在网段进行填写。
+* 查询结果若有多个，则以分号分隔，并根据示例形式进行填写。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 重启 IaaS 各 DNS 节点服务器上的 bind 服务，使配置生效：
++
+[source,shell]
+----
+# service bind9 restart
+----
+
+. 需逐个登录 IaaS 环境的 DNS 节点服务器执行以上操作。
+

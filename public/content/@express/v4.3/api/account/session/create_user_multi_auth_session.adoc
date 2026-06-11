@@ -1,0 +1,223 @@
+---
+title: 创建用户多重认证会话（CreateUserMultiAuthSession）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| account_id
+| String
+| false
+| 账户id
+
+| account_name
+| String
+| false
+| 账户名
+
+| address
+| String
+| false
+| 地址
+
+| auth_type
+| String
+| true
+| 认证类型
+
+| change_passwd_first_login
+| Integer
+| false
+| 是否首次登录修改密码
+
+| channel
+| String
+| false
+| 通道
+
+| company_code
+| String
+| false
+| 企业编码
+
+| company_name
+| String
+| false
+| 企业名
+
+| company_phone
+| String
+| false
+| 企业电话
+
+| console
+| String
+| false
+| 控制台
+
+| currency
+| String
+| false
+| 货币类型
+
+| email
+| String
+| false
+| 邮箱
+
+| industry_category
+| String
+| false
+| 所属行业
+
+| login_device
+| String
+| false
+| 登录设备
+
+| login_ip
+| String
+| false
+| 登录ip
+
+| login_platform
+| String
+| false
+| 登录平台
+
+| need_confirm
+| Integer
+| false
+| 是否需要确认
+
+| paid_mode
+| String
+| false
+| 付费模式
+
+| passwd
+| String
+| false
+| 密码
+
+| personal_code
+| String
+| false
+| 个人编码
+
+| personal_name
+| String
+| false
+| 个人姓名
+
+| phone
+| String
+| false
+| 电话号
+
+| remarks
+| String
+| false
+| 备注
+
+| sale_type
+| String
+| false
+| 促销类型
+
+| send_init_pwd
+| Integer
+| false
+| 是否重置密码
+
+| source
+| String
+| false
+| 来源
+
+| support_engineer
+| String
+| false
+| 支持工程师
+
+| user
+| String
+| false
+| 用户id
+
+| verify_type
+| String
+| false
+| 认证类型
+
+| zones
+| Array
+| true
+| 区域列表
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| code
+| Integer
+| false
+| 状态码
+
+| currency
+| String
+| false
+| 货币类型
+
+| sk
+| String
+| false
+| 
+
+| user
+| Dict
+| false
+| 用户信息
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateUserMultiAuthSession",
+  "auth_type": "",
+  "user": "usr-dQFUel6D",
+  "zones": [
+    "testing"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateUserMultiAuthSessionResponse",
+  "code": 2000,
+  "currency": "CNY",
+  "ret_code": 0,
+  "sk": "7jU85RMTIWLwhsMwHjrhBfxRlEgr9GIYQhhrYRz5",
+  "user": {
+    "lang": "zh-cn",
+    "user_id": "usr-dQFUel6D"
+  }
+}
+----

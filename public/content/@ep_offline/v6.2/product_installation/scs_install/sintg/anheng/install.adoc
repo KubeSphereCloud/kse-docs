@@ -1,0 +1,59 @@
+---
+title: "安装安恒云"
+weight: 30
+---
+
+1. 通过 VNC 登录上一步创建的安恒云虚拟机。
++
+若本地 PC 与虚拟机网络网络互通，也可以通过 ssh 远程连接工具，执行以下命令登录虚拟机。
++
+[source]
+----
+ssh root@<IP地址>
+或
+ssh -v <IP地址> -o PasswordAuthentication=yes -o GSSAPIAuthentication=no
+----
+
++
+
+include::../../../../../../_components/note.adoc[]
+* root 账号默认密码为 1qazcde3!@#。
+* <IP 地址>为安恒云虚拟机 IP 地址。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+2. 执行以下命令，加载 nginx。
++
+[source]
+----
+echo > /etc/resolv.conf
+sed -i "38s/65/0/g" /etc/nginx/nginx.conf && service nginx reload
+----
+3. 执行以下命令，开始安装。
++
+[source]
+----
+init_run
+----
++
+回显如下信息，表示服务已经启动，脚本继续执行。
++
+[source]
+----
+[root@localhost ~]# init_run
+init license
+cloudbility product has been initialized
+ahcloud restart
+0
+Application is running as root (UID 0). This is considered insecure.
+Stopped [4881]
+Started [16856]
+0
+Application is running as root (UID 0). This is considered insecure.
+Stopped [4890]
+Started [17035]
+----
++
+回显如下信息，表示安装成功。如下示例表示可以通过 ``https://10.30.1.8/console`` 访问安恒云管理控制台。``10.30.1.8`` 为虚拟机的 IP 地址。
++
+image::/images/ep_offline/scs_install/sintg_anheng_04.png[]

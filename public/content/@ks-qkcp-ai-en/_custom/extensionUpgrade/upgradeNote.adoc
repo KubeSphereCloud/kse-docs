@@ -1,0 +1,14 @@
+// Extension Upgrade Instructions
+image:/images/ks-qkcp/zh/icons/warning_fill.svg[attention,18,18] **Attention**
+
+In versions prior to KubeSphere v4.2.0, the image tag was explicitly configured during extension installation. However, starting from KubeSphere v4.2.0, the image tag follows the extension version, using the default value by default, and does not require manual configuration.
+
+Therefore, when upgrading an extension, it is crucial to confirm whether the image tag configuration meets expectations. New versions typically use new image tags. If you explicitly specify an old image tag in your configuration, it may result in pulling the old version image after the upgrade, preventing you from obtaining the latest features or fixes.
+
+To ensure a smooth upgrade, please follow these recommendations:
+
+. **Check and remove manually set image tags**, or update them to the image tags required for the new version.
+
+. **It is recommended to use the default configuration** to automatically obtain the image tag matching the current version.
+
+For the configuration paths of image tags for each extension, please refer to the upgrade instructions on the details page of each extension in the Extensions Center.

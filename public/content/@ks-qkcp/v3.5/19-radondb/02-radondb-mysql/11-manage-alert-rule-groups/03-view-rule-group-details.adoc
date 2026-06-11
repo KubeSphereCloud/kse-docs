@@ -1,0 +1,72 @@
+---
+title: "查看规则组详情"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, MySQL, 管理告警规则组, 查看规则组详情"
+description: "介绍如何查看规则组详情。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 23b19e35feac44399822e7608a19c39c
+:ks_xref_id: bffdf1239cae4af19696a9b92f564e5f
+:ks_comp: ../../../../components/
+// :ks_include_id: 
+:ks_xref_id: 
+:ks_title: 查看规则组详情
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, MySQL, 管理告警规则组, 查看规则组详情
+:ks_description: 介绍如何查看规则组详情。
+:ks_weight: 03
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-viewAlertingPolicyDetails.adoc[]
+
+
+== 前提条件link:[id=ab3857b3a557423eb691a9769cfd5e86]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-installRadondbmysql.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-createAlertGroup.adoc[]
+
+
+== 操作步骤link:[id=5ae0f1dd006e475b895fd202d2ba2930]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-viewAlertingPolicyDetails.adoc[]

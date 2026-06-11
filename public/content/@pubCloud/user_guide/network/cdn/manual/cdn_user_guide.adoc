@@ -1,0 +1,207 @@
+---
+title: "CDN 管理"
+description: 介绍如何创建和使用 CDN。
+keywords: CDN 服务, 域名, 缓存
+draft: false
+weight: 2
+---
+
+使用 CDN 服务的域名必须进行备案。从创建 CDN 到可以使用该 CDN 服务，大概需要 30 分钟左右的时间，请用户耐心等待。
+
+== 购买 CDN 服务
+
+. 登录管理控制台，选择**产品与服务** > *网络服务* > *CDN 服务*，默认进入 CDN 服务列表页面。
+
+. 点击**购买**，弹出**购买 CDN 服务**窗口。在弹出的对话框内，根据提示信息进行操作，操作完成后，点击**提交**。
++
+image::/images/cloud_service/network/cdn/create_cdn_1.png[create_cdn_1,50%]
++
+[cols="1,4", options="header"]
+|===
+|参数 |说明
+
+| 域名 a| 填写待使用 CDN 服务的域名，须进行备案。
+
+* 例如，用户要为域名 `cdnexample.qingcloud.com` 加速，则填写 `qingcloud.com`。
+* 若**域名**列表框内，无目标域名，则需点击页面的 **+ 添加域名**，将待使用的自定义域名添加至当前环境中。详细操作参考link:../domain_guide/#_创建域名[域名管理]。
+
+|域名记录 a| 填写域名记录。
+
+* 例如，用户要为域名 `cdnexample.qingcloud.com` 加速，则填写 `cdnexample`。
+* 若**域名记录**列表框内，无目标域名记录，则需点击页面的 **+ 创建域名记录**，给待使用的自定义域名添加域名记录。详细操作参考link:../domain_guide/#_创建域名记录[域名管理]。
+
+| Origin Host | 配置源站信息。
+| 节点类型 a| 不同类型的节点背后对应不同的资源池，用户可根据业务需求，选择合适的节点类型。需注意的是，节点类型选择后不可修改。取值如下：
+
+* `网页`：该类型适用于加速图片、JS、CSS 和 Fonts 等小文件。
+* `下载`：适用于加速大体积文件。
+* `点播`：适用于加速视频。
+
+| 服务区域 | 目前仅支持中国大陆。
+
+|===
+
+. 在 CDN 服务列表页面查看成功购买的 CDN 服务。
+
+== 配置缓存策略
+
+. 登录管理控制台，选择**产品与服务** > *网络服务* > *CDN 服务*，默认进入 CDN 服务列表页面。
+
+. 点击待设置缓存策略的域名记录，进入 CDN 详情页面。
+
+. 在**缓存策略**区域，点击** + 创建**，弹出**创建 CDN 缓存策略**对话框。
++
+image::/images/cloud_service/network/cdn/create_cache_rule_1.png[create_cache_rule_1,50%]
++
+[cols="1,4", options="header"]
+|===
+|参数 |说明
+
+| 名称 | 填写缓存策略名称。非必填项。
+| 路径 a| 应用缓存规则的文件路径。常见的缓存规则填写格式如下：
+
+* 如果要缓存 `cdnexample.qingcloud.com/image` 下的 png、jpg、gif，则可以填写 `/image/.*(png\|jpg\|gif)`。
+* 如果要缓存 `cdnexample.qingcloud.com` 下的所有 mp4、js、png、jpg、html，则可以填写 `/.*(png\|jpg\|gif\|mp4\|js\|html)`。
+* 最多只允许配置一个 `*`。
+
+| 缓存时间 | 缓存过期时间，超过该时间，则回源站请求最新的资源。单位：秒。
+| 优先级| 如果有多条缓存规则，`路径` 可能存在冲突，此时，优先级高的规则优先生效。优先级数字越小，说明优先级越高。
+| 附加选项 a|
+
+* `不遵循源站缓存`：如果 header 中的 `Cache Control` 是 `private`，则 CDN 默认不缓存该文件。但如果勾选此参数，CDN 会忽略 `Cache Control` 字段，从而强制进行缓存。
+* `忽略 URL 中的查询字符串`：如果带有查询串，CDN 默认不缓存该资源。但如果勾选此参数，则会强制缓存。
+
+|===
+
+. 创建完成后，点击**应用修改**，使配置生效。
+
+
+. 选择创建的 CDN 缓存策略，点击**右键**。可进行 CDN 缓存策略的**删除**与**修改**操作。
++
+image::/images/cloud_service/network/cdn/create_cache_rule_2.png[create_cache_rule_2]
+
+
+
+== 配置访问控制规则
+
+. 登录管理控制台，选择**产品与服务** > *网络服务* > *CDN 服务*，默认进入 CDN 服务列表页面。
+
+. 点击待设置访问控制规则的域名记录，进入 CDN 详情页面。
+
+. 在**访问控制**区域，点击**设置**，弹出**设置 CDN 访问规则**对话框。
++
+image::/images/cloud_service/network/cdn/create_access_rule_1.png[create_access_rule_1,50%]
++
+[cols="1,4", options="header"]
+|===
+|参数 |说明
+
+| 名称 | 填写访问控制规则名称。
+| 行为 a| 使用黑名单还是白名单来进行访问控制。
+
+* `黑名单` 表示列表中的 `referer` 禁止访问。
+* `白名单` 表示只允许 `referer` 列表中的站点访问。
+
+| Referers | 从一个页面请求资源或跳转，会存在一个 `referer` 信息，用来表示当前请求是从哪个页面发起。可以用 `\*` 表示所有子域名，如 `*.baiud.cm`、`*.google.com`。
+| 允许请求头中 Referer 为空的请求| 当用户访问该路径时， `referer` 字段为空，是否允许访问。
+
+
+|===
+
+. 配置完成后，点击**应用修改**使配置生效。
+
+
+. 选择创建的访问控制策略，点击**右键**。可进行**删除**与**修改**配置操作。
++
+image::/images/cloud_service/network/cdn/create_access_rule_2.png[create_access_rule_2]
+
+
+== 使用 CDN 为站点进行加速
+
+对于已购买 CDN 服务的域名，可以使用 CDN 为站点进行加速。用户只需要在使用的 DNS 服务商处配置当前域名的 CNAME 即可。CNAME 信息可在 CDN 服务详情页查看。
+
+image::/images/cloud_service/network/cdn/use_cdn.png[]
+
+
+== 查看监控
+
+. 登录管理控制台，选择**产品与服务** > *网络服务* > *CDN 服务*，默认进入 CDN 服务列表页面。
++
+image::/images/cloud_service/network/cdn/cdn_list.png[]
+
+. 点击目标域名记录，进入 CDN 详情页面。
++
+image::/images/cloud_service/network/cdn/create_access_rule_2.png[]
+
+. 点击**监控**，进入 CDN 监控页面。当前页面为用户提供各类数据报表业务，包括流量，访问次数，带宽，热门访问地区，热门访问资源等。
++
+
+include::../../../../../_components/note.adoc[]
+各项统计信息会有 10 分钟左右的延时。
+
+* 带宽：单位 Mbps，该带宽为 5 分钟为粒度的峰值带宽。
+* 流量：单位 MB，为 5 分钟粒度的总流量。 
+* 访问次数：用户请求 CDN 的次数。
+* 热门访问地区：统计各地区的请求次数。
+* 热门访问资源：统计用户该记录下访问次数最多的文件。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+== 查看日志
+
+. 登录管理控制台，选择**产品与服务** > *网络服务* > *CDN 服务*，默认进入 CDN 服务列表页面。
++
+image::/images/cloud_service/network/cdn/cdn_list.png[]
+
+. 点击目标域名记录，进入 CDN 详情页面。
++
+image::/images/cloud_service/network/cdn/create_access_rule_2.png[]
+
+. 点击**日志**，进入 CDN 日志页面。当前页面为用户提供了从 CDN 缓存服务器中得到的原始访问数据，默认提供的分析维度比较少。用户可以下载原始日志进行更多维度的分析。默认保存 10 天的日志。
+
+
+== 清除 CDN 缓存
+
+当用户更新了文件，但是该文件的旧版本可能已经被 CDN 缓存，这时就需要手动清除 CDN 的缓存，重新回源去获取最新的文件。
+
+. 登录管理控制台，选择**产品与服务** > *网络服务* > *CDN 服务*，默认进入 CDN 服务列表页面。
++
+image::/images/cloud_service/network/cdn/cdn_list.png[]
+
+. 在左侧菜单栏，点击**清除 CDN 缓存**。进入清除 CDN 缓存页面。
++
+image::/images/cloud_service/network/cdn/refresh_1.png[]
+
+. 点击** + 创建**，弹出**清除 CDN 缓存**对话框。填写需要刷新的文件或者目录的 URL，点击**提交**。
++
+
+include::../../../../../_components/note.adoc[]
+
+URL 需要以 `http://` 或 `https://` 开头。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== CDN 内容预取
+
+当用户有较大的文件需要提前缓存到 CDN 的节点上时，可以使用预取功能，该功能会模拟用户请求使文件提前缓存到 CDN 中。
+
+. 登录管理控制台，选择**产品与服务** > *网络服务* > *CDN 服务*，默认进入 CDN 服务列表页面。
++
+image::/images/cloud_service/network/cdn/cdn_list.png[]
+
+. 在左侧菜单栏，点击**内容预取**。进入内容预取页面。
+
+. 点击** + 创建**，弹出** CDN 内容预取**对话框。填写需要预取的文件 URL，点击**提交**即可。
++
+
+include::../../../../../_components/note.adoc[]
+
+URL 需要以 `http://` 或 `https://` 开头。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 内容预取状态，可在内容预取页面查看。
++
+image::/images/cloud_service/network/cdn/purge_1.png[]
+

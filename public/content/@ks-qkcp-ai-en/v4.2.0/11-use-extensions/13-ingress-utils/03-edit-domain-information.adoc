@@ -1,0 +1,37 @@
+---
+title: "Edit Domain Information"
+description: "This section describes how to edit domain information."
+weight: 03
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **Application Workloads > Application Routing Tool**
+
+
+This section describes how to edit domain information.
+
+You can edit the description of a domain. KubeSphere does not support editing the name and domain of an already added domain.
+
+
+== Prerequisites
+
+* The **KubeSphere Application Routing Tool** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../
+* {empty}
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
+. To the right of the domain you want to operate on, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Edit Information** from the dropdown list.
+
+. In the **Edit Information** dialog box, set the description for the domain, and then click **OK**.

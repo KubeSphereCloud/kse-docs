@@ -1,0 +1,124 @@
+---
+title: "Configure WhizardTelemetry Platform Service"
+description: "Learn how to configure the WhizardTelemetry Platform Service."
+weight: 01
+---
+
+The WhizardTelemetry Platform Service is the common service for all extensions of WhizardTelemetry Observability Platform. It is a common APIServer that providing backend platform services for all observability extensions.
+
+**Configuration:**
+
+* Modify the extension configuration of WhizardTelemetry Platform Service in conjunction with WhizardTelemetry Monitoring to enable the Whizard Observability Center. For more information, see link:../../08-whizard/01-enable-whizard/[Whizard Observability Center].
+
+* When configuring the OpenSearch log receivers for WhizardTelemetry Logging, WhizardTelemetry Auditing, WhizardTelemetry Events, and notification history, if you need to use multiple OpenSearch databases, configure them as follows.
++
+[,yaml]
+----
+whizard-telemetry:
+  config:
+    monitoring:
+      enabled: true
+      kind: 0
+      endpoint: http://prometheus-k8s.kubesphere-monitoring-system.svc:9090
+    observability:
+      enabled: false
+      endpoint: "http://query-frontend-whizard-operated.kubesphere-monitoring-system.svc:10902"
+    notification:
+      endpoint: http://notification-manager-svc.kubesphere-monitoring-system.svc:19093
+      history:
+        enable: true
+        server:
+          elasticsearch:
+            endpoints:
+              - https://<the opensearch cluster url>:<port>
+            version: opensearchv2
+            indexPrefix: notification-history
+            basicAuth: true
+            username: admin
+            password: admin
+    auditing:
+      enable: true
+      servers:
+        - elasticsearch:
+            cluster:
+            - cluster1
+            - cluster2
+            endpoints:
+              - https://<the opensearch cluster url>:<port>
+            version: opensearchv2
+            indexPrefix: auditing
+            basicAuth: true
+            username: admin
+            password: admin
+        - elasticsearch:
+            cluster:
+            - cluster3
+            - cluster4
+            endpoints:
+              - https://<the opensearch cluster url>:<port>
+            version: opensearchv2
+            indexPrefix: auditing
+            basicAuth: true
+            username: admin
+            password: admin
+    events:
+      enable: true
+      servers:
+        - elasticsearch:
+            cluster:
+            - cluster1
+            - cluster2
+            endpoints:
+              - https://opensearch-cluster-data.kubesphere-logging-system:9200
+            version: opensearchv2
+            indexPrefix: events
+            basicAuth: true
+            username: admin
+            password: admin
+        - elasticsearch:
+            cluster:
+            - cluster3
+            - cluster4
+            endpoints:
+              - https://opensearch-cluster-data.kubesphere-logging-system:9200
+            version: opensearchv2
+            indexPrefix: events
+            basicAuth: true
+            username: admin
+            password: admin
+    logging:
+      enable: true
+      servers:
+        - elasticsearch:
+            cluster:
+            - cluster1
+            - cluster2
+            endpoints:
+              - https://<the opensearch cluster url>:<port>
+            version: opensearchv2
+            indexPrefix: logs
+            basicAuth: true
+            username: admin
+            password: admin
+        - elasticsearch:
+            cluster:
+            - cluster3
+            - cluster4
+            endpoints:
+              - https://<the opensearch cluster url>:<port>
+            version: opensearchv2
+            indexPrefix: logs
+            basicAuth: true
+            username: admin
+            password: admin
+----
+
+
+// //note
+// [.admon.note,cols="a"]
+// |===
+// |说明
+
+// |
+// 修改 WhizardTelemetry 平台服务的扩展组件配置，可配合 WhizardTelemetry 监控扩展组件，启用 Whizard 可观测中心。有关更多信息，请参阅 link:../../08-whizard/01-enable-whizard/[Whizard 可观测中心]。
+// |===

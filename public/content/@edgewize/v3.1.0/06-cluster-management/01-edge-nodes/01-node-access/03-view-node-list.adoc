@@ -1,0 +1,54 @@
+---
+title: "查看节点列表"
+weight:  03
+---
+
+
+:ks_permission: **节点查看**
+:ks_navigation: **边缘节点 > 节点接入**
+
+
+本节介绍“节点接入”页面的边缘节点列表。
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+
++
+====
+* 节点列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|节点的主机名称和在子网内部的 IP 地址。
+// 各节点的主机名称由用户安装集群时在安装配置文件 **config-sample.yaml** 中设置。
+
+|状态
+|
+include::../../../../_custom/clusterManagement/nodes/nodes-para-nodeStatus_all.adoc[]
+|===
+--
+
+* 在列表上方点击搜索框并设置搜索条件，可按名称或状态搜索节点。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+// include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+
+* 勾选右侧的**未纳管**，可一键筛选未纳管状态的边缘节点。
+====
+

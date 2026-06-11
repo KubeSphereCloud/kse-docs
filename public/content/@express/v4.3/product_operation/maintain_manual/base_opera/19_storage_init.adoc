@@ -1,0 +1,155 @@
+---
+title: "第三方存储集群初始化"
+weight: 19
+---
+
+== 运维场景
+
+云易捷对接第三方存储，需对第三方存储集群进行初始化操作。
+
+== 前提条件
+
+* 计算节点（Hyper 节点）已对接好第三方存储。
+* 已清空所有磁盘数据，并重启物理服务器。清空磁盘数据可执行如下命令。
++
+[source,shell]
+----
+wipefs -a <dev_name>
+----
++
+include::../../../../../_components/note.adoc[]
+<dev_name> 为待清除数据的磁盘的盘符，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+== 操作步骤
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 运行脚本，进行第三方存储集群初始化。
++
+[source,shell]
+----
+/pitrix/deploy/deploy_express_tpsc_config.sh -m deploy -n <hostname_1>,<hostname_2>,<hostname_3> -j <task_name>  -d <device_name>
+----
+**参数说明**：
+* ``-m`` 用于指定脚本执行的模式，一般为 ``deploy``。
+* ``-n`` 用于指定待部署的物理节点名称，指定多个节点是需要用逗号隔开。
+* ``-j`` 用于指定任务名称，默认填写为 ``j-tpsc`` 即可。
+* ``-d`` 用于指定设备名称，
+
+. 在 FirstBox 节点上，执行如下命令，查看 Snapshot 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/snapshot
+----
+. 依次登录各 Snapshot 节点，执行如下步骤，验证相应 IaaS 目录是否创建成功。
+.. 执行如下命令，若有返回结果，即表示 IaaS 目录创建成功。
++
+[source,shell]
+----
+df -h /pitrix/snapshot
+----
+
+.. 查看 ``/pitrix/snapshot`` 软链接所对应的实际路径为 `` /pitrix/express_storage/snapshot``。
++
+[source,shell]
+----
+ls -lh /pitrix/snapshot
+----
+
+. 在 FirstBox 节点上，执行如下命令，查看 Seed 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/seed
+----
+
+. 依次登录各 Snapshot 节点，执行如下步骤，验证相应 IaaS 目录是否创建成功。
+.. 执行如下命令，若有返回结果，即表示 IaaS 目录创建成功。
++
+[source,shell]
+----
+df -h /pitrix/images-repo
+----
++
+[source,shell]
+----
+df -h /pitrix/data/image_nbd
+----
+
+.. 查看 ``/pitrix/images-repo`` 和 ``/pitrix/data/image_nbd`` 软链接所对应的实际路径分别为 ``/pitrix/express_storage/images-repo``、``/pitrix/express_storage/image_nbd``。
++
+[source,shell]
+----
+ls -lh /pitrix/images-repo
+----
++
+[source,shell]
+----
+ls -lh /pitrix/data/image_nbd
+----
+
+. 在 FirstBox 节点上，执行如下命令，查看 Var 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/var
+----
+. 依次登录各 Var 节点，执行如下步骤，验证相应 IaaS 目录是否创建成功。
+.. 执行如下命令，若有返回结果，即表示 IaaS 目录创建成功。
++
+[source,shell]
+----
+df -h /pitrix/data/container/vbr
+----
+
+.. 查看 ``/pitrix/data/container/vbr`` 软链接所对应的实际路径为 ``/pitrix/express_storage/vbr``。
++
+[source,shell]
+----
+ls -lh /pitrix/data/container/vbr
+----
+
+. 在 FirstBox 节点上，执行如下命令，查看 Hyper 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/hyper
+----
+
+. 依次登录各 Hyper 节点，执行如下步骤，验证相应 IaaS 目录是否创建成功。
+.. 执行如下命令，若有返回结果，即表示 IaaS 目录创建成功。
++
+[source,shell]
+----
+df -h /pitrix/data/container/image
+----
+
+.. 查看 ``/pitrix/data/container/image`` 软链接所对应的实际路径为 ``/pitrix/express_storage/image``。
++
+[source,shell]
+----
+ls -lh /pitrix/data/container/image
+----
+
+
+
+

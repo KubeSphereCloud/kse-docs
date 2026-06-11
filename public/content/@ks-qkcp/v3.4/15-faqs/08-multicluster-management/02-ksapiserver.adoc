@@ -1,0 +1,89 @@
+---
+title: "如何解决访问成员集群时 ks-apiserver 报错"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, FAQ, 常见问题"
+description: "介绍如何处理访问成员集群时 ks-apiserver 报错。"
+weight: 02
+layout: "second"
+icon: "/images/docs/docs.svg"
+---
+
+// :ks_include_id: 7f5d17278e9e40c38e68421d20358b25
+:ks_xref_id: 2cd8e36a7af14bfb982c005ba1f3a287
+:ks_comp: ../../../components/
+:ks_title: 如何解决访问成员集群时 ks-apiserver 报错
+:ks_keywords: Kubernetes, {ks_product}, FAQ, 常见问题
+:ks_description: 介绍如何处理访问成员集群时 ks-apiserver 报错。
+:ks_weight: 01
+:ks_icon: /images/docs/docs.svg
+
+
+当通过 host 集群访问成员集群时报错 **service unavailable no endpoints available for service**。本节介绍如何处理该报错。
+
+
+== 根因分析link:[id=3e1ff18f8fe94b3c93e6cdc4b6787da8]
+
+多集群直连模式代理会忽略协议和端口，如果您修改了端口的名称，即设置了 **ports.name**，会导致解析失败，从而报错 **service unavailable no endpoints available for service**。
+
+
+
+== 解决方案link:[id=99e6da9b95aa4a0bb9a565fcf8e859d8]
+
+. 进入成员集群，在页面左侧导航栏点击**应用负载 > 服务**。
+
+. 在页面右侧的**服务**区域，输入 **ks-apiserver**，点击 **Enter**。
+
+. 在 **ks-apiserver** 右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑 YAML** 查看成员集群的 ks-apiserver YAML 文件。
+
+. 在 **ports** 区域，如果设置了 **name**，删除 **name** 参数。
++
+--
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: ks-apiserver
+  namespace: kubesphere-system
+  labels:
+    app: ks-apiserver
+    app.kubernetes.io/managed-by: Helm
+    tier: backend
+    version: v3.1.0
+  annotations:
+    kubernetes.io/created-by: kubesphere.io/ks-apiserver
+    meta.helm.sh/release-name: ks-core
+    meta.helm.sh/release-namespace: kubesphere-system
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9090
+      nodePort: 30881
+  selector:
+    app: ks-apiserver
+    tier: backend
+  clusterIP: 10.233.58.138
+  clusterIPs:
+    - 10.233.58.138
+  type: NodePort
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+请勿在成员集群的 ks-apiserver YAML 文件中添加 **port** 参数。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+--
+
+

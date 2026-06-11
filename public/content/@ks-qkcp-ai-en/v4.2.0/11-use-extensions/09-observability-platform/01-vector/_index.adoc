@@ -1,0 +1,28 @@
+---
+title: "WizTelemetry Data Pipeline"
+keywords: "Kubernetes, {ks_product}, Platform Settings, Notification Management"
+description: "Introduction on how to use the WizTelemetry Data Pipeline."
+weight: 1.5
+layout: "second"
+---
+
+The WizTelemetry Data Pipeline is an extension within the WizTelemetry Observability Platform that provides capabilities for collecting, transforming, and routing observability data.
+
+//attention
+[.admon.attention,cols="a"]
+|===
+| Attention
+
+|
+* The WizTelemetry Data Pipeline is a foundational extension shared by WizTelemetry Logging, WizTelemetry Events, WizTelemetry Auditing, WizTelemetry Notification, and others. Therefore, you **must** install the WizTelemetry Data Pipeline extension **before** installing the aforementioned extensions. Failure to do so will cause the logging, notification, auditing, and events functionalities to be unavailable.
+
+* The WizTelemetry Observability Platform supports querying data (such as logs, audits, events, and notification history) from OpenSearch. Consequently, you need to configure the information for the OpenSearch service that will receive this data uniformly within the WizTelemetry Data Pipeline extension settings. This can be an OpenSearch service you set up yourself or the one installed via the "OpenSearch Distributed Search and Analytics Engine" extension.
+|===
+
+[.admon.note,cols="a"]
+|===
+| Note
+
+|
+For more detailed information about configuring this extension, please refer to the description page for the "WizTelemetry Data Pipeline" extension in the Extensions Center.
+|===

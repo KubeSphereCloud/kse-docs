@@ -1,0 +1,125 @@
+---
+title: "登录企业云平台"
+weight: 50
+---
+
+安装成功后，即可登录 Console、BOSS 和配置中心。
+
+include::../../../_components/attention.adoc[]
+此时还未对云平台进行初始化，还不能在 Console 上创建虚拟机。
+
+include::../../../_components/table_footer.adoc[]
+
+== 配置 hosts 文件
+
+访问环境需要配置本地 PC 的 hosts 文件，指定域名地址。
+
+. 登录 FirstBox。
++
+[source]
+----
+ssh root@<firstbox ip address>
+----
++
+参数说明如下：
++
+**<firstbox ip address>**：安装 FirstBox 时配置的管理 IP。
+. 获取 hosts 信息。
+
+ ** 方式一（推荐）：通过 installer 提供的工具。
++
+执行以下命令，获取 hosts 信息。
++
+[source]
+----
+/pitrix/bin/dump_hosts.py
+----
++
+image::/images/ep_offline/installation/login_01.png[]
+ ** 方式二：查看文件 /pitrix/log/deploy/hosts_JOB_ID。
+  ... 执行以下命令，获取 hosts_JOB_ID 文件名称。
++
+[source]
+----
+cd /pitrix/log/deploy/
+ls -al
+----
++
+如下示例中，文件名称为 host_j-ygSvX8AW。
++
+image::/images/ep_offline/installation/login_02.png[]
+
+  ... 执行以下命令，获取 hosts 信息。
++
+[source]
+----
+cat /pitrix/log/deploy/hosts_JOB_ID
+----
++
+示例：
++
+[source]
+----
+cat /pitrix/log/deploy/host_j-ygSvX8AW
+----
+image::/images/ep_offline/installation/login_03.png[]
+
+. 打开本地 PC 的 hosts 文件，写入获取到的 hosts 信息。
+
+ ** Linux 系统 hosts 文件路径：/etc/hosts。
+ ** Windows 系统 hosts 文件路径：C:\Windows\System32\drivers\etc\hosts
+
++
+[source]
+----
+// hosts 示例： 
+10.10.0.231 console.democloud.com appcenter.democloud.com api.democloud.com docs.democloud.com 
+10.10.0.211 cb0zcsf1.democloud.com
+10.10.0.212 cb1zcsf1.democloud.com
+10.10.0.231 boss.democloud.com
+----
+
+== 登录 Console
+
+**访问方式**：使用 Chrome 或火狐浏览器。
+
+**地址**：console.<domain>，例如 console.democloud.com。
+
+**默认用户名**：admin@<domain>，例如 \admin@democloud.com。
+
+**默认密码**：zhu88jie
+
+include::../../../_components/note.adoc[]
+<domain> 为前文配置的云平台域名。
+
+include::../../../_components/table_footer.adoc[]
+
+== 登录 BOSS
+
+**访问方式**：使用 Chrome 或火狐浏览器。
+
+**地址**：boss.<domain>，例如 boss.democloud.com。
+
+**默认用户名**：boss@<domain>，例如 \boss@democloud.com。
+
+**默认密码**：zhu88jie
+
+include::../../../_components/note.adoc[]
+<domain> 为前文配置的云平台域名。
+
+include::../../../_components/table_footer.adoc[]
+
+== 登录配置中心
+
+**访问方式**：使用 Chrome 或火狐浏览器。
+
+**地址**：cadmin.<domain>，例如 cadmin.democloud.com。
+
+**默认用户名**：admin@<domain>，例如 \admin@democloud.com。
+
+**默认密码**：zhu88jie
+
+include::../../../_components/note.adoc[]
+<domain> 为前文配置的云平台域名。
+
+include::../../../_components/table_footer.adoc[]

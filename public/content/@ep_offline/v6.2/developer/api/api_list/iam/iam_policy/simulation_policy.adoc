@@ -1,0 +1,94 @@
+---
+title: 策略模拟（SimulationIAMPolicy）
+weight: 13
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| payloads
+| Array
+| true
+| 资源ID
+
+| policies
+| Array
+| true
+| 资源ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| results
+| Object
+| false
+| 策略模拟结果详情
+
+| results.from
+| String
+| false
+| 请求来源
+
+| results.status
+| String
+| false
+| 策略模拟结果,
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "SimulationIAMPolicy",
+  "payloads": [
+    {
+      "action": "ecm:DescribeSnapshots",
+      "resource": [
+        "*"
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "Statement": [
+        {
+          "action": "*",
+          "effect": "allow",
+          "resource": "*"
+        }
+      ],
+      "Version": "2012-04-01",
+      "id": "iamp-9rp8it8s"
+    }
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SimulationIAMPolicyResponse",
+  "results": {
+    "ecm:DescribeSnapshots": {
+      "from": "testing1a-webservice0",
+      "status": "Allow"
+    }
+  },
+  "ret_code": 0
+}
+----

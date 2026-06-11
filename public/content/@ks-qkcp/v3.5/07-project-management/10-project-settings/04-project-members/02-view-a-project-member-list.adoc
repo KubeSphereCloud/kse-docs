@@ -1,0 +1,73 @@
+---
+title: "查看项目成员列表"
+keywords: "Kubernetes, {ks_product}, 项目管理, 项目设置, 项目成员, 查看项目成员列表"
+description: "介绍如何查看项目成员列表。"
+weight: 02
+---
+
+// :ks_include_id: 0d019f2be74a4fa48d483fc2dd80075c
+:ks_xref_id: 0d4b94070aed4aa1b16257667a5a3cec
+:ks_comp: ../../../../components/
+:ks_title: 查看项目成员列表
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 项目设置, 项目成员, 查看项目成员列表
+:ks_description: 介绍如何查看项目成员列表。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **成员查看**
+:ks_navigation: **项目设置 > 项目成员**
+
+
+本节介绍如何查看项目成员列表。
+
+
+== 前提条件link:[id=2300a20141c0426eac835f4ceb1e55ef]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=fa82a46696034bd9a5de077b0ab53cda]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+* 项目成员列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|用户名
+|项目成员的用户名。
+
+|状态
+|
+项目成员当前的状态。
+
+include::../../../../_custom/clusterManagement/clusterMembers/clusterMembers-para-userStatus.adoc[]
+
+|角色
+|项目成员在项目中的角色。
+
+|最近登录
+|项目成员最近一次登录{ks_product_left} Web 控制台的时间。
+|===
+--
+
+* 在列表上方点击搜索框并输入关键字，可搜索用户名包含特定关键字的项目成员。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====
+

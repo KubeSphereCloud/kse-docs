@@ -1,0 +1,315 @@
+---
+title: "Online Upgrade from KubeSphere Enterprise v4.1.x to v4.2.0"
+keywords: "Kubernetes, {ks_product}, Installation, Upgrade KubeSphere"
+description: "Describes how to upgrade KubeSphere."
+weight: 03
+---
+
+This section describes how to upgrade from KubeSphere Enterprise v4.1.2 or v4.1.3 to KubeSphere Enterprise v4.2.0 when Internet access is available.
+
+== Prerequisites
+
+* Ensure the current KubeSphere version is v4.1.2 or v4.1.3.
+
+* Ensure the current Kubernetes version is v1.23.x ~ v1.32.x.
+
+* If an extension has special configurations, back up the extension configurations. In the **Extension Configuration** dialog box, download the file for backup.
+
+* {empty}
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-prer-backUpData.adoc[]
+
+== Notes
+
+. If you have customized the nodeShell image configuration in version 4.1.x, note that you need to specify the nodeShell image in the upgrade configuration file `kse-v4.2.0-host-custom-values.yaml` as follows during the upgrade. Example:
++
+--
+If configured in v4.1.x as:
+
+[source,yaml]
+----
+nodeShell:
+  image:
+    registry: ""
+    repository: kubesphereio/kubectl
+    tag: "v1.27.12"
+    pullPolicy: IfNotPresent
+----
+
+Configure in `kse-v4.2.0-host-custom-values.yaml` as:
+
+[source,bash]
+----
+terminal:
+  kubectl:
+    enabled: true
+    image:
+      registry: ""
+      repository: kubesphereio/kubectl
+      tag: "v1.33.1"
+      pullPolicy: IfNotPresent
+  node:
+    enabled: true
+    image:
+      registry: ""
+      repository: kubesphereio/kubectl
+      tag: "v1.33.1"
+      pullPolicy: IfNotPresent
+  pod:
+    enabled: true
+    uploadFileLimit: "100Mi"
+    uploadFileEnabled: true
+    downloadFileEnabled: true
+----
+--
+
+. Starting from v4.1.3, the cluster role and host cluster name configurations in the ks-core chart have changed. Therefore, when upgrading from v4.1.2, pay attention to configuring according to the instructions in the upgrade configuration file (v4.1.3 is not affected).
++
+[source,bash]
+----
+multicluster:
+  # Cluster role name
+  role: ""
+  # Host cluster name (Priority: direct specification > read from kubesphere-config > default name host)
+  hostClusterName: ""
+----
+
+. Starting from v4.1.3, the following parameter is deprecated. During the upgrade, note to delete this parameter or set it to `false` in the upgrade configuration file `kse-v4.2.0-host-custom-values.yaml`.
++
+[source,bash]
+----
+upgrade:
+  enabled: false
+----
+
+== Upgrade KubeSphere
+
+KubeSphere v4.1 and later versions use the helm chart method to upgrade ks-core.
+
+=== Upgrade the Host Cluster
+
+. Confirm the current cluster is the host cluster to be upgraded.
++
+[source,bash]
+----
+kubectl get node -o wide
+----
+
+. KubeSphere v4.1.3 removed `kse-extensions-publish` and integrated it into the `ks-core` chart. Therefore, before upgrading from v4.1.2 to v4.2.0, a patch operation should be performed on the extension resources created by the historical version of KubeSphere.
++
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|This step is only for the upgrade scenario from v4.1.2 to v4.2.0. It can be skipped for v4.1.3 to v4.2.0.
+|===
+
+.. Create the `extension-resources-patch.sh` script. This script is mainly used to handle conflicts caused by extension resources created via kse-extension-publish in v4.1.2 and earlier versions.
++
+--
+[source,bash]
+----
+vi extension-resources-patch.sh
+----
+
+Paste the following content and save:
+
+[source,bash]
+----
+#!/bin/bash
+
+# Resolve resource template conflicts
+kubectl -n kubesphere-system label deploy extensions-museum app.kubernetes.io/managed-by=Helm
+kubectl -n kubesphere-system annotate deploy extensions-museum meta.helm.sh/release-name=ks-core
+kubectl -n kubesphere-system annotate deploy extensions-museum meta.helm.sh/release-namespace=kubesphere-system
+
+kubectl -n kubesphere-system label service extensions-museum app.kubernetes.io/managed-by=Helm
+kubectl -n kubesphere-system annotate service extensions-museum meta.helm.sh/release-name=ks-core
+kubectl -n kubesphere-system annotate service extensions-museum meta.helm.sh/release-namespace=kubesphere-system
+
+kubectl -n kubesphere-system label secret extensions-museum-certs app.kubernetes.io/managed-by=Helm
+kubectl -n kubesphere-system annotate secret extensions-museum-certs meta.helm.sh/release-name=ks-core
+kubectl -n kubesphere-system annotate secret extensions-museum-certs meta.helm.sh/release-namespace=kubesphere-system
+
+# Resolve repository reference conflicts
+for item in `kubectl get extensionversions.kubesphere.io -o jsonpath="{.items[*].metadata.name}"`;do kubectl patch extensionversions.kubesphere.io $item --type merge -p '{"spec":{"repository":"extensions-museum"}}';kubectl label extensionversions.kubesphere.io $item kubesphere.io/repository-ref=extensions-museum;done
+for item in `kubectl get extensions.kubesphere.io -o jsonpath="{.items[*].metadata.name}"`;do kubectl label extensions.kubesphere.io $item kubesphere.io/repository-ref=extensions-museum;done
+----
+--
+
+.. Run the script.
++
+[source,bash]
+----
+bash extension-resources-patch.sh
+----
+
+. Check the current cluster's ks-core configuration.
++
+--
+[source,bash]
+----
+helm get values -n kubesphere-system ks-core
+----
+--
+
+. Create the upgrade configuration file and enter the following content.
++
+--
+If there are parameters other than image registry, image version, cloud, and upgrade in the previous step, please add them to the following configuration file as well.
+
+[source,bash]
+----
+cat <<EOF > kse-v4.2.0-host-custom-values.yaml
+
+# The following parameters are used to specify the image registry address for the images used by ks-core and the images used by extensions.
+# Please modify according to the actual environment information.
+global:
+  imageRegistry: registry.cn-beijing.aliyuncs.com
+extension:
+  imageRegistry: ""
+
+# Note the cluster role parameter has changed from role to multicluster.role
+multicluster:
+  role: host
+
+# Enable high availability for ks-core components (ks-apiserver, ks-controller-manager, ks-console)
+# Please configure according to the actual cluster situation.
+ha:
+  enabled: false
+
+# Enable Redis high availability. ks-apiserver high availability depends on Redis.
+# If this parameter is false, the default redis in kubesphere-system is single-replica. Please configure according to the actual cluster situation.
+redisHA:
+  enabled: false
+EOF
+----
+--
+
+. Execute the following command to start the upgrade.
++
+--
+[source,bash]
+----
+chart=oci://hub.kubesphere.com.cn/kse/ks-core
+version=1.2.3-20251118
+helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version -f kse-v4.2.0-host-custom-values.yaml --wait --debug
+----
+--
+
+. Check if the host cluster upgrade was successful.
++
+--
+Execute the following command. The pods should be in the Running state, as shown below.
+
+[source,bash]
+----
+root@xxx:~# kubectl get pod -n kubesphere-system
+NAME                                         READY   STATUS      RESTARTS   AGE
+extensions-museum-85f846dbbd-6xtst           1/1     Running     0          16h
+helm-install-ks-console-embed-tnwmf7-wcfjf   0/1     Completed   0          16h
+ks-apiserver-7f875b8654-zvhrd                1/1     Running     0          16h
+ks-console-997fc9658-dnrqr                   1/1     Running     0          16h
+ks-console-embed-775f757548-9vd2s            1/1     Running     0          16h
+ks-controller-manager-5f69675d48-qnxv7       1/1     Running     0          16h
+----
+--
+
+. Use the original web console IP address, administrator username, and administrator password to log in to the KubeSphere web console v4.2.0 using a web browser.
+
+. Check if all functions and data of the host cluster are normal.
+
+=== Upgrade the Member Cluster
+
+The steps to upgrade a member cluster are basically the same as upgrading the host cluster, but special parameter configurations in the member cluster need to be noted.
+
+. Confirm the current member cluster is the cluster to be upgraded.
++
+[source,bash]
+----
+kubectl get node -o wide
+----
+
+. Check the member cluster's ks-core configuration.
++
+--
+[source,bash]
+----
+helm get values -n kubesphere-system ks-core
+----
+--
+
+. Get the jwtSecret value of the member cluster.
++
+[source,bash]
+----
+kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v "apiVersion" | grep jwtSecret
+----
+
+. Create the upgrade configuration file and enter the following content.
++
+====
+If there are parameters other than image registry, image version, cloud, and upgrade in the previous step, please add them to the following configuration file as well.
+
+[source,bash]
+----
+cat <<EOF > kse-v4.2.0-member-custom-values.yaml
+
+# The following parameter is used to specify the image registry address for the images used by ks-core.
+# Please modify according to the actual environment information.
+global:
+  imageRegistry: registry.cn-beijing.aliyuncs.com
+
+# Replace with the member cluster's jwtSecret value
+authentication:
+  issuer:
+    jwtSecret: <REPLACE_ME>
+
+# Note the cluster role parameter has changed from role to multicluster.role
+multicluster:
+  role: member
+EOF
+----
+====
+
+. Execute the following command to start the upgrade.
++
+--
+[source,bash]
+----
+chart=oci://hub.kubesphere.com.cn/kse/ks-core
+version=1.2.3-20251118
+helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version -f kse-v4.2.0-member-custom-values.yaml --wait --debug
+----
+--
+
+. Check if the member cluster upgrade was successful.
++
+--
+Execute the following command. The ks-agent pod should be in the Running state, as shown below.
+
+[source,bash]
+----
+root@xxx:~# kubectl get pod -n kubesphere-system
+NAME                          READY   STATUS      RESTARTS        AGE
+ks-agent-5dc5b57977-4x6mf     2/2     Running     0               59m
+----
+--
+
+. If you added custom configurations (e.g., --set a=b) in the above upgrade command, you need to synchronize the member cluster's custom configurations in the web console.
++
+--
+Method: On the **Cluster Management** page, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the cluster you want to operate, then select **Edit Configuration** from the drop-down list. In the pop-up window, enter `a: b`.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|If you did not add custom configurations in the upgrade command, you do not need to add cluster configurations in the web console.
+|===
+--
+
+=== Upgrade Extensions
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-updateExtensions.adoc[]
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-updateExtensionList_v420.adoc[]

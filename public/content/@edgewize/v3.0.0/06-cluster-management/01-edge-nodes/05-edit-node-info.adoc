@@ -1,0 +1,39 @@
+---
+title: "编辑节点信息"
+weight:  05
+---
+
+:ks_permission: **节点管理**
+
+本节介绍如何编辑边缘节点的信息。
+
+边缘节点被添加后，仅支持编辑节点的别名和描述。
+
+== 前提条件
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+== 操作步骤
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/nodes/nodes-oper-openListPage_new.adoc[]
+
+. 在需要操作的节点右侧点击image:/images/ks-qkcp/zh/icons/more.svg["more",18,18]，然后在下拉列表中选择**编辑**。
+
+. 在**编辑信息**对话框，设置节点的别名和描述，然后点击**确定**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|别名
+|别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。
+
+|描述
+|节点的描述信息。描述可包含任意字符，最长 256 个字符。
+|===
+--

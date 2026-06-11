@@ -1,0 +1,29 @@
+---
+title: "平台高可用设计"
+weight: 5
+draft: true
+---
+
+云计算运维管理平台在云平台管理面是一个独立而完整的应用系统，作为全局的运营运维大平台，其重要性毋庸置疑。
+
+在系统高可用设计上，BOSS 采用的方案为：将系统部署于两台虚拟机的 Global 层，与 KS 节点同级别，以实现高可用。在数据中心容灾场景中，负责云平台全局管理的 Global KS 服务会部署在多个 AZ，为了实现 BOSS 系统跨 AZ 高可靠，可在多个 AZ 中部署 BOSS 及依赖服务组件，只要全局有一个 AZ 管理面存活可用，BOSS 系统便对外正常服务。
+
+image::/images/ep_offline/boss_twp/20_02.png[]
+
+
+如下图，为三个 AZ 数据中心组成 Region 时，BOSS 系统在三个 AZ 的部署架构。
+
+image::/images/ep_offline/boss_twp/20_03.png[]
+
++++<br/>+++
+
+首先需要部署一个跨 AZ 的 PostgreSQL 数据库集群供 BOSS 系统专享使用，不限于 KS 服务共用 PostgreSQL 数据库，该数据库一主两从，之间采用同步流复制。如果资源紧张，可使用 Recovery PostgreSQL 数据库集群，而 RabbitMQ，Memcached 仍使用各个 AZ 中自有的服务组件，无需连接为一个集群。
+
+include::../../../../../_components/attention.adoc[]
+当某个 AZ 遇到灾难时，由于 BOSS 系统在该 AZ 内依赖的组件突然失效，可能导致如下不良反应：
+
+* RabbitMQ 中如果存在积压任务时会导致这些任务数据丢失。目前使用 RabbitMQ 执行的任务有：告警数据入库、定时监控数据、报表导出的异步任务，这些任务的丢失不会影响 BOSS 系统的使用，但会导致某些任务可能需要重新进行。
+
+* BOSS 系统切换到新的主 AZ 后，由于该 AZ 的 BOSS 应用节点缺少 Memcached 缓存数据，部分页面访问会有减慢，但随后缓存会重建。由于新的 AZ 中未存储历史的报表数据，用户通过 BOSS 界面的报表中心，会无法下载历史的报表数据，尽管系统默认设置了报表 30 天后自动删除。
+
+include::../../../../../_components/table_footer.adoc[]

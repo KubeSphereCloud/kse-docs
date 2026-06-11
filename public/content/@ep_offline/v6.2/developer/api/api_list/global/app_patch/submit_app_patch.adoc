@@ -1,0 +1,193 @@
+---
+title: 应用补丁提交审核（SubmitAppPatch）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_ids
+| Array
+| true
+| 应用ID
+
+| content
+| String
+| true
+| 补丁内容
+
+| limit
+| Integer
+| false
+| 展示数量限制
+
+| patchId
+| String
+| false
+| 补丁ID
+
+| version_ids
+| Array
+| true
+| 应用版本ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| false
+| 应用ID
+
+| console_id
+| String
+| false
+| 环境控制台ID
+
+| controller
+| Integer
+| false
+| 控制权限
+
+| create_time
+| String
+| false
+| 创建时间
+
+| description
+| String
+| false
+| 补丁描述
+
+| message
+| String
+| false
+| 信息
+
+| name
+| String
+| false
+| 补丁名称
+
+| owner
+| String
+| false
+| 补丁所有者
+
+| patch_id
+| String
+| false
+| 补丁ID
+
+| resource_kit
+| String
+| false
+| 补丁资源包ID
+
+| ret_code
+| String
+| false
+| 返回状态码
+
+| reviews
+| Integer
+| false
+| 是否审核
+
+| root_user_id
+| String
+| false
+| 主账号ID
+
+| status
+| String
+| false
+| 补丁状态
+
+| status_time
+| String
+| false
+| 状态改变时间
+
+| total_count
+| Integer
+| false
+| 补丁信息
+
+| transition_status
+| String
+| false
+| 中间状态
+
+| version_id
+| String
+| false
+| 版本ID
+
+| visibility
+| String
+| false
+| 可见状态
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAppPatches",
+  "app_ids": [
+    "app-aj1lvarc"
+  ],
+  "limit": 100,
+  "patchId": "appp-ctb52rhz",
+  "version_ids": [
+    "appv-1ida8dsl"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAppPatchesResponse",
+  "patch_set": [
+    {
+      "app_id": "app-aj1lvarc",
+      "console_id": "testingcloud",
+      "controller": "self",
+      "create_time": "2023-07-18T07:35:04Z",
+      "description": "test patch11112312",
+      "message": "",
+      "name": "test111",
+      "owner": "admin",
+      "patch_id": "appp-ctb52rhz",
+      "resource_kit": "ca-xx0jc0rn",
+      "reviews": 0,
+      "root_user_id": "admin",
+      "status": "submitted",
+      "status_time": "2023-07-18T07:47:15Z",
+      "transition_status": "",
+      "version_id": "appv-1ida8dsl",
+      "visibility": "public"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1,
+  "trace_id": "Ts5Ul8ef"
+}
+----

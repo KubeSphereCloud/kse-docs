@@ -1,0 +1,28 @@
+---
+title: "部署 NeonSAN"
+weight: 20
+---
+
+== 版本支持情况说明
+
+企业云平台 v6.0 版本支持对接的 NeonSAN 版本有 v3.4.0、v3.5.0、v3.5.1。
+
+== 前提条件
+
+在部署 NeonSAN 的过程中，可能需要用到如下参数。
+
+[cols='1,1,2'] 
+|===
+| 任务	| 参数	| 获取方式
+
+.3+|common.yaml 配置修改	
+| **netconsole_server**
+| 在企业云平台的 FirstBox 节点上 /pitrix/conf/variables/variables.yaml 文件的 **netconsole_server** 字段。
+
+| **proxy_floating_ip**	
+| 在企业云平台的 FirstBox 节点上 /pitrix/conf/variables/variables.yaml 文件中的 **proxy_floating_ip** 字段。
+|===
+
+== 操作步骤
+
+详细请参考《NeonSAN 存储系统自动化部署指南》。

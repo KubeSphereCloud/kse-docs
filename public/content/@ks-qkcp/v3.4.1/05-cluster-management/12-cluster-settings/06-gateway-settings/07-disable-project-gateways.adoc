@@ -1,0 +1,70 @@
+---
+title: "禁用项目网关"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 集群设置, 网关设置, 禁用项目网关"
+description: "介绍如何禁用项目网关。"
+weight: 07
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 344c6321c38242409f8e49d39123ee40
+:ks_xref_id: b4c0393f0b054d8b96bd6d6f076113b5
+:ks_comp: ../../../../components/
+:ks_title: 禁用项目网关
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 集群设置, 网关设置, 禁用项目网关
+:ks_description: 介绍如何禁用项目网关。
+:ks_weight: 07
+:ks_icon:
+:ks_permission: **集群设置管理**
+:ks_navigation: **集群设置 > 网关设置**
+
+
+本节介绍如何禁用项目网关。
+
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-warn-disableGateway.adoc[]
+
+
+== 前提条件link:[id=7d797ef883a44f5f9c60367f8bff96df]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 禁用单个项目网关link:[id=f339ebb13f394185b26736229c7cbf79]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**网关设置**页面点击**项目网关**，在需要编辑的项目网关右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**禁用**。
+
+. 在**禁用项目网关**对话框，输入项目网关的名称，然后点击**确定**。
+
+
+== 批量禁用项目网关link:[id=5e58398f456449e09cfc9888fb0f22bd]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**网关设置**页面点击**项目网关**，选择需要禁用的项目网关左侧的复选框，然后在列表上方点击**禁用**。
+
+. 在**批量禁用项目网关**对话框，输入项目网关的名称，然后点击**确定**。
++
+--
+include::../../../../_custom/note-separateNamesByComma.adoc[]
+--

@@ -1,0 +1,22 @@
+---
+title: "检查 NeonSAN 版本"
+weight: 1
+---
+
+. 登录 NeonSAN 集群任一节点。
+. 执行如下命令，获取 NeonSAN 相关服务版本信息。如下所示，当前集群各节点各项服务的版本均为 2.1.5。
++
+[,shell]
+----
+neonsan list_version -detail
+----
++
+image::/images/neonsan/polling_guide_25.png[]
+
++
+include::../../../../../_components/note.adoc[]
+* 该命令是 NeonSAN v2.1 及以后的版本新增，针对 v1.X.X 的版本，可通过 ``dpkg -l \| grep "neon"`` 命令进行查看。
+
+* 若检查结果中包含 v3.2.3 版本，建议升级。
+include::../../../../../_components/table_footer.adoc[]
+

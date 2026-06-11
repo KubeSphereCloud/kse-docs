@@ -1,0 +1,105 @@
+---
+title: "配置计算大屏"
+weight: 1
+---
+
+. 大屏组件安装完成后，登录{product_console_name_en}。
+
+. 在顶部导航栏，点击**运维工具** > **计算大屏**，进入**计算大屏**列表页面。
++
+image::/images/express/console/gui_conf_1.png[]
+
+. 首次点击**配置大屏**按钮，跳转至大屏信息配置页面，进行**应用基本信息配置**。
++
+
+include::../../../../../_components/note.adoc[]
+* 大屏信息配置页面地址一般为 \http://xx.xx.xx.xx:8088/deployer/。
+
+* 其中 xx.xx.xx.xx 为安装部署大屏组件的物理服务器的 IP 地址。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/gui_conf_2.png[]
++
+参数说明
++
+[options="header",cols="1,2"]
+|===
+|参数 |说明
+|应用访问端口设置
+|使用 8089 端口即可
+
+|应用名称设置
+|根据用户需要，自定义名称
+
+|上传图片存储路径设置
+|/deployer/app/infoview
+
+|应用登录页面展示 logo 设置
+|推荐尺寸：573x143，用户可自定义设置
+
+|应用管理页面展示 logo 设置
+|推荐尺寸：327x149，用户可自定义设置
+|===
+
+. 应用基本信息配置完成后，点击**下一步**，进行**数据库**配置。
++
+
+include::../../../../../_components/attention.adoc[]
+* 是否新装数据库，务必选择**否**。
+* 无特殊情况，数据库各项参数务必保持默认。
+
+include::../../../../../_components/table_footer.adoc[]
+
++
+image::/images/express/console/gui_conf_3.png[]
+
+. 点击**测试数据库**，进行数据库连接测试。数据库连接成功后，点击**下一步**。
++
+image::/images/express/console/gui_conf_4.png[,50%]
+
+. 进行管理员账户初始化页面，根据实际情况修改参数，点击**下一步**。
++
+image::/images/express/console/gui_conf_5.png[]
++
+[options="header",cols="1,2"]
+|===
+|参数 |说明
+|企业名称
+|根据实际情况进行填写
+
+|企业英文名
+|根据实际情况进行填写
+
+|应用的管理员用户名
+|用户自定义，该用户名为登录大屏组件的用户名，需牢记
+
+|应用的管理员用户密码
+|用户自定义，该用户密码为登录大屏组件的用户密码，需牢记
+
+|邮箱
+|根据实际情况进行填写
+
+|电话
+|根据实际情况进行填写
+|===
+
+. 进入完成配置页面，点击**启动应用**。
++
+image::/images/express/console/gui_conf_6.png[]
+
+. 完成计算大屏的应用部署，并记录页面中的**访问地址**。
++
+
+include::../../../../../_components/note.adoc[]
+* 访问地址地址一般为 http://xx.xx.xx.xx :8089/express。
+* xx.xx.xx.xx 为安装部署大屏组件的物理服务器的 IP 地址。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/gui_conf_7.png[]
+
+. 打开浏览器输入上一步骤的访问地址，进入计算大屏登录页面。
++
+image::/images/express/console/gui_conf_8.png[]
+

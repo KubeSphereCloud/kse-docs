@@ -1,0 +1,24 @@
+---
+title: "VPC 内不同 vxnet 间通信"
+weight: 15
+---
+
+如下图所示，云服务器 VM1 与 VM5 属于不同计算节点，加入了同一个 VPC 不同 vxnet 内，两台 VM 可以进行跨三层通信。
+
+image::/images/ep_offline/ep_twp/vpc_dif_vxnet_forward.png[]
+
+VM1 访问 VM5 的流量转发逻辑如下：
+
+. VM1 与 VM5 属于不同的网段，VM1 发送数据包（目的 IP 为 VM5 10.101.102.102，目的 MAC 为vRouter11 的 KR-MAC）通过 bridge 转发至 vRouter 11 的 KR 接口进行处理。
+. vRouter11 收到数据包，根据目标 IP 查询路由表，匹配到 10.101.102.102/32 主机路由，下一跳为 10.101.254.2（vRouter15-KX），出接口为 KX 接口。
+. vRouter11 查询 ARP 表得到 10.101.254.2 的 MAC 地址，转发数据包至 KX 出接口处理。
+. DVR11-Bridge 从 KX 接口接收到数据包，根据 MAC 地址查询 bridge FDB 表，将数据包发送至 VTEP 接口处理。
+. DVR11 查询 VXLAN FDB 表，对数据包进行 VXLAN 封装，VXLAN 封包目标 IP 为 Hyper4 的 IP 地址 10.88.1.4，VNI 为对端 VTEP VNI ID。
+. Hyper1 根据 10.88.1.4 查询路由/ARP 表信息，从 ETH 口发送后进入 CSW（物理交换机）。
+. CSW 根据数据包 MAC 地址信息，转发至 Hyper4。
+. Hyper4 收到 VXLAN 数据包后，根据 VNI ID 交给对应的 VTEP 设备处理，对数据数据包进行 VXLAN 解封装，进入 DVR15 进行转发处理。
+. DVR15-Bridge 根据 MAC 地址查询 bridge FDB 表，将数据包转发至 KX 接口。
+. VRouter15 KX 接口接收到数据包之后，根据目标 IP 查询路由表，匹配到 10.101.102.0/24 路由，出接口为 KR。
+. vRouter15 查询 ARP 表，得到 VM5 MAC 地址，转发至 KR 接口处理。
+. DVR15-Bridge 根据 MAC 地址查询 bridge FDB 表，将数据包发送至 VM5。
+

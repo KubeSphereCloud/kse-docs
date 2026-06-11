@@ -1,0 +1,78 @@
+---
+title: "View resource statistics"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, resources, overview, view"
+description: "Describes how to view resource statistics in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 186b81e4273f4d86a8adb990cfe4302e
+:ks_xref_id: 44f5816f72ae4563a41e1a78a9e0a4b9
+:ks_comp: ../../../components/
+:ks_title: View resource statistics
+:ks_description: Describes how to view resource statistics in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, resources, overview, view
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+The Overview module of the {ks_product_abbr_full} web console provides cluster resource statistics in real time, including VMs, disks, networks, physical nodes, CPUs, and memory. This topic describes how to view resource statistics in the {ks_product} web console.
+
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+In the **Overview** module, statistics about physical resources are available to user **admin** only. Common users can view statistics about virtual resources in the projects to which they belong. In this example, assume that you have logged in to the console as user **admin** to view cluster resource statistics.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=62ebd4e7cc9f472d802e6cbbc2f6d2f8]
+
+. Log in to the {ks_product} web console.
+. In the top navigation bar, click **Overview** to go to the resource overview page.
+. In the **VMs**, **Disks**, **Networks**, and **Alerts** sections, view the number of VMs and disks in different status, virtual subnets, virtual private clouds (VPCs), physical subnets, and alerts.
+. In the **Virtual Resources** section, view the usage of CPU, memory, and storage resources.
++
+--
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../_custom-en/nodes/resource-usage-color-description.adoc[]
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. In the **Physical Nodes** section, view the number of control nodes and worker nodes in different status and the overcommit ratio of the cluster.
++
+--
+include::../../../_custom-en/nodes/node-type-description.adoc[]
+--
+. In the **Physical Resources** section, view the usage of physical CPUs, memory, and disks.
++
+--
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+To view resource usage of a specific node, expand the drop-down list next to **Physical Resources**.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. In the **System Components** section, view the running status of each system component.
+. In the **Top 5 by CPU Usage**, **Top 5 by Memory Usage**, and **Top 5 Nodes by Resource Usage** sections, view top 5 VMs and nodes that are sorted by resource usage, respectively.
++
+--
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+To view top 5 nodes that are sorted by CPU, memory, or disk usage, expand the drop-down list next to **Top 5 Nodes by Resource Usage** and select the metric as needed.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

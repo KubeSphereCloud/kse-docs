@@ -1,0 +1,97 @@
+---
+title: "配置 multipath"
+weight: 50
+---
+
+. 依次登录所有计算节点（Hyper 节点）。
+. 执行以下命令，获取 wwid 号。
++
+[source]
+----
+multipath -v3
+----
++
+回显示例如下：
++
+[source,language]
+----
+===== paths list =====
+uuid                              hcil    dev dev_t pri dm_st chk_st vend/prod
+36001405a8dc6cb30baa45138ae4e0ff6 2:0:0:0 sda 8:0   50  undef undef  LIO-ORG,l
+36001405a90a6b7d2db64822976c2dfbf 3:0:0:0 sdb 8:16  50  undef undef  LIO-ORG,l
+36001405ef8af7a514164e178166b3d9c 4:0:0:0 sdc 8:32  50  undef undef  LIO-ORG,l
+36001405bc58600107b34f1d9fc7320e3 5:0:0:0 sdd 8:48  50  undef undef  LIO-ORG,l
+Dec 07 16:37:14 | sda: udev property ID_WWN whitelisted
+Dec 07 16:37:14 | wwid 36001405a8dc6cb30baa45138ae4e0ff6 not in wwids file, skipping sda
+Dec 07 16:37:14 | sda: orphan path, only one path
+Dec 07 16:37:14 | sdb: udev property ID_WWN whitelisted
+Dec 07 16:37:14 | wwid 36001405a90a6b7d2db64822976c2dfbf not in wwids file, skipping sdb
+Dec 07 16:37:14 | sdb: orphan path, only one path
+Dec 07 16:37:14 | sdc: udev property ID_WWN whitelisted
+Dec 07 16:37:14 | wwid 36001405ef8af7a514164e178166b3d9c not in wwids file, skipping sdc
+Dec 07 16:37:14 | sdc: orphan path, only one path
+Dec 07 16:37:14 | sdd: udev property ID_WWN whitelisted
+Dec 07 16:37:14 | wwid 36001405bc58600107b34f1d9fc7320e3 not in wwids file, skipping sdd
+----
+. 执行以下命令，修改 /etc/multipath/wwids 文件。把 wwid 添加到该文件中。
++
+[source]
+----
+vim /etc/multipath/wwids
+----
++
+示例：
++
+[source,language]
+----
+/36001405a8dc6cb30baa45138ae4e0ff6/
+/36001405a90a6b7d2db64822976c2dfbf/
+/36001405ef8af7a514164e178166b3d9c/
+/36001405bc58600107b34f1d9fc7320e3/
+----
+. 执行以下命令，修改配置文件 vim /etc/multipath.conf。添加 multipath 信息。
++
+[source]
+----
+vim /etc/multipath.conf
+----
++
+示例：
++
+[source,language]
+----
+defaults {
+    user_friendly_names yes
+}
+...
+multipaths {
+        multipath {
+        wwid 36001405a8dc6cb30baa45138ae4e0ff6
+        alias mpath-a
+        }
+        multipath {
+        wwid 36001405a90a6b7d2db64822976c2dfbf
+        alias mpath-b
+        }
+        multipath {
+        wwid 36001405ef8af7a514164e178166b3d9c
+        alias mpath-c
+        }
+        multipath {
+        wwid 36001405bc58600107b34f1d9fc7320e3
+        alias mpath-d
+       }
+}
+----
+. 执行以下命令，重启服务。
++
+[source]
+----
+systemctl restart multipathd
+----
+. 执行以下命令，检查每个节点是否都配置了 multipathd。
++
+[source]
+----
+multipath -ll
+----

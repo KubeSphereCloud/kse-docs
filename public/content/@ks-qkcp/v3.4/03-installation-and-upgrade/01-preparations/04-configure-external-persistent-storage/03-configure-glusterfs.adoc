@@ -1,0 +1,798 @@
+---
+title: "配置 GlusterFS"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 安装, 准备, 持久化存储, GlusterFS"
+description: "介绍如何在生产环境中为{ks_product_both}集群配置 GlusterFS 存储系统。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: c94f80c4a79141499885498b8cc7376a
+:ks_xref_id: 87162f1336344daf962f1355b06388d4
+:ks_comp: ../../../../components/
+:ks_title: 配置 GlusterFS
+:ks_keywords: Kubernetes, {ks_product}, 安装, 准备, 持久化存储, GlusterFS
+:ks_description: 介绍如何在生产环境中为{ks_product_both}集群配置 GlusterFS 存储系统。
+:ks_weight: 03
+:ks_icon:
+
+
+本节介绍如何在生产环境中为{ks_product_both}集群配置 GlusterFS 存储系统。
+
+
+== 前提条件link:[id=7591a6c240614173ae8e59955caf3aa1]
+
+您需要创建 GlusterFS 集群并安装 Heketi 用于提供 RESTful API。有关更多信息，请参阅 link:https://docs.gluster.org/en/latest/[GlusterFS 官方文档]和 link:https://github.com/heketi/heketi/tree/master/docs/[Heketi 官方文档]。
+
+
+== 安装 GlusterFS 客户端link:[id=422ad5ca13df4fbd825c99baa6b56c93]
+
+您需要为{ks_product_both}集群节点安装客户端工具，并创建配置文件供后续安装{ks_product_both}时使用。{ks_product_right}安装完成后将使用配置文件指定的 GlusterFS 服务端作为持久化存储。以下以 Ubuntu 操作系统为例介绍如何安装客户端和创建配置文件。
+
+. 登录{ks_product_both}集群节点，执行以下命令安装 software-properties-common：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+apt install software-properties-common
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令安装 GlusterFS 客户端：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+add-apt-repository ppa:gluster/glusterfs-7
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+apt update
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+apt install glusterfs-server -y
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令检查 GlusterFS 客户端是否安装成功：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+glusterfs -V
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+如果显示 GlusterFS 版本号，则表明 GlusterFS 客户端安装成功。
+--
+
+. 重复以上步骤在所有{ks_product_both}集群节点上安装 GlusterFS 客户端。
+
+
+== 创建 GlusterFS 配置文件link:[id=e9c17e232fa741b390fa947b392ae754]
+
+. 登录用于执行{ks_product_both}安装操作的集群节点，执行以下命令创建 GlusterFS 存储类配置文件：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+vi glusterfs-sc.yaml
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 将以下信息添加到配置文件中，并保存文件供后续安装{ks_product_both}时使用：
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: heketi-secret
+  namespace: kube-system
+type: kubernetes.io/glusterfs
+data:
+  key: "<key>"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    storageclass.beta.kubernetes.io/is-default-class: "true"
+    storageclass.kubesphere.io/supported-access-modes: '["ReadWriteOnce","ReadOnlyMany","ReadWriteMany"]'
+  name: glusterfs
+parameters:
+  clusterid: "<GlusterFS cluster ID>"
+  gidMax: "50000"
+  gidMin: "40000"
+  restauthenabled: "true"
+  resturl: "<RESTful service URL>"
+  restuser: admin
+  secretName: heketi-secret
+  secretNamespace: kube-system
+  volumetype: "<volume type>"
+provisioner: kubernetes.io/glusterfs
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+将以下参数替换为实际值：
+
+[%header,cols="1a,2a"]
+|===
+|参数 |描述
+
+|<key>
+|Heketi 服务的访问密钥。
+
+|<GlusterFS cluster ID>
+|GlusterFS 集群的 ID。
+
+|<RESTful service URL>
+|Heketi 服务地址和端口号，例如 **\http://192.168.0.2:8080**。
+
+|<volume type>
+|卷类型和冗余设置。例如，将此参数设置为 **replicate:3** 以使用复制卷，其中 **3** 表示副本的数量。有关更多信息，请参阅 link:https://docs.gluster.org/en/v3/Administrator%20Guide/Setting%20Up%20Volumes/[GlusterFS 官方文档]。
+|===
+--
+
+
+
+
+
+
+////
+== 创建 GlusterFS 集群link:[id=46cb235f6d414afa8571718af12891f5]
+
+为{ks_product_both}配置 GlusterFS 前，您需要先创建 GlusterFS 集群并安装 link:https://github.com/heketi/heketi[Heketi] 用于管理 GlusterFS 集群。如果您已经有可用的 GlusterFS 集群，您可以跳过此步骤。以下以 Ubuntu 操作系统为例介绍如何创建 GlusterFS 集群。
+
+
+=== 前提条件link:[id=505e54059bf14e10abd8315bdab26d92]
+
+* 您需要准备 3 台 Linux 服务器（本教程以 Ubuntu 操作系统为例）。
+
+* 每台服务器必须与{ks_product_both}集群节点网络连通。
+
+* 每台服务器必须具有一个未分区或格式化的存储设备（原始块设备）供 GlusterFS 使用。
+
+* 建议每台 Linux 服务器具有至少 4 个 CPU 核心、4 GB 内存和 300 GB 原始块设备空间。
+
+本教程使用以下服务器作为示例。
+
+[%header,cols="1a,1a,2a,2a"]
+|===
+|主机名 |IP 地址 |系统规格 |存储设备
+
+|server1
+|192.168.0.2
+|Ubuntu 16.04，4 核，4 GB 内存
+|/dev/vdd 300 GB
+
+|server2
+|192.168.0.4
+|Ubuntu 16.04，4 核，4 GB 内存
+|/dev/vdd 300 GB
+
+|server3
+|192.168.0.4
+|Ubuntu 16.04，4 核，4 GB 内存
+|/dev/vdd 300 GB
+|===
+--
+
+
+=== 设置无密码 SSH 登录link:[id=a74f0ace9a8f41909ee98d1f4f3a8b50]
+
+. 分别登录每台服务器，执行以下命令编辑 **/etc/hosts** 文件：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+vi /etc/hosts
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 将以下信息添加到 **/etc/hosts** 文件中并保存文件：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+# hostname loopback address
+192.168.0.2  server1
+192.168.0.3  server2
+192.168.0.4  server3
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+以上 IP 地址和主机名仅为示例。请将 **192.168.0.2**、**192.168.0.3**、**192.168.0.4** 分别三台服务器的实际 IP 地址，并将 **server1**、**server2**、**server3** 分别替换为三台服务器的实际主机名。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 登录 server1，执行以下命令并按 **Enter** 键跳过所有提示创建密钥：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+ssh-keygen
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令将公钥分别复制到所有服务器：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+ssh-copy-id root@server1
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+ssh-copy-id root@server2
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+ssh-copy-id root@server3
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令验证可以从 server1 无密码登录所有服务器：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+ssh root@server1
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+ssh root@server2
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+ssh root@server3
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+
+=== 安装 GlusterFS 服务端link:[id=cd7fd22a8e2c4ffabd13dcd1e998baac]
+
+以下操作适用于 Ubuntu 操作系统。有关其他操作系统的具体操作，请参阅 link:https://docs.gluster.org/en/latest/Install-Guide/Install/#installing-gluster[GlusterFS 官方文档]。
+
+. 登录 server1 并执行以下命令安装 software-properties-common：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+apt-get install software-properties-common
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令安装 GlusterFS 服务端：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+add-apt-repository ppa:gluster/glusterfs-7
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+apt-get update
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+apt-get install glusterfs-server -y
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令检查 GlusterFS 服务端是否安装成功：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+glusterfs -V
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+如果显示 GlusterFS 版本号，则表明 GlusterFS 服务端安装成功。
+--
+
+. 执行以下命令加载三个必要的内核模块：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+echo dm_thin_pool | sudo tee -a /etc/modules
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+echo dm_snapshot | sudo tee -a /etc/modules
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+echo dm_snapshot | sudo tee -a /etc/modules
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令安装 thin-provisioning-tools：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+apt-get -y install thin-provisioning-tools
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 重复以上步骤在 server2 和 server3 上安装 GlusterFS 服务端。
+
+
+=== 创建 GlusterFS 集群link:[id=18512f55bb814d30b7befc49fe1a0477]
+
+. 登录 server1，执行以下命令添加其他节点并创建集群：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+gluster peer probe server2
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+include::../../../../../_ks_components/code/bash.adoc[]
+
+gluster peer probe server3
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令验证集群中的所有节点都已连接成功：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+gluster peer status
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+如果显示如下信息，则所有节点都已连接成功：
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+Number of Peers: 2
+   
+Hostname: server2
+Uuid: e1192d6a-b65e-4ce8-804c-72d9425211a6
+State: Peer in Cluster (Connected)
+   
+Hostname: server3
+Uuid: 9bd733e4-96d4-49d5-8958-6c947a2b4fa6
+State: Peer in Cluster (Connected)
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+
+=== 安装 Heketilink:[id=c3c75c2c840c4ff6bd0367a80f6326bd]
+
+GlusterFS 本身不提供 API 调用的方法，您需要安装 Heketi 从而为 Kubernetes 提供 RESTful API 用于管理 GlusterFS 卷的生命周期。本节演示如何安装 Heketi 7.0.0。有关 Heketi 其他版本的更多信息，请访问 link:https://github.com/heketi/heketi/releases/[Heketi 版本发布页面]。
+
+. 登录 server1 并执行以下命令下载 Heketi 安装包：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+wget https://github.com/heketi/heketi/releases/download/v7.0.0/heketi-v7.0.0.linux.amd64.tar.gz
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令解压安装包并将二进制文件复制到 **/usr/bin** 目录：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+tar -xf heketi-v7.0.0.linux.amd64.tar.gz
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+cd heketi
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+cp heketi /usr/bin
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+cp heketi-cli /usr/bin
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令创建 Heketi 服务文件：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+vi /lib/systemd/system/heketi.service
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+将以下信息添加到文件中并保存文件：
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+[Unit]
+Description=Heketi Server
+[Service]
+Type=simple
+WorkingDirectory=/var/lib/heketi
+ExecStart=/usr/bin/heketi --config=/etc/heketi/heketi.json
+Restart=on-failure
+StandardOutput=syslog
+StandardError=syslog
+[Install]
+WantedBy=multi-user.target
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令创建 Heketi 文件夹：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+mkdir -p /var/lib/heketi
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+mkdir -p /etc/heketi
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令创建 Heketi 配置文件：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+vi /etc/heketi/heketi.json
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+将以下信息添加到配置文件中并保存文件：
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+{
+  "_port_comment": "Heketi Server Port Number",
+  "port": "8080",
+   
+  "_use_auth": "Enable JWT authorization. Please enable for deployment",
+  "use_auth": false,
+   
+  "_jwt": "Private keys for access",
+  "jwt": {
+    "_admin": "Admin has access to all APIs",
+    "admin": {
+      "key": "123456"
+    },
+    "_user": "User only has access to /volumes endpoint",
+    "user": {
+      "key": "123456"
+    }
+  },
+   
+  "_glusterfs_comment": "GlusterFS Configuration",
+  "glusterfs": {
+    "_executor_comment": [
+      "Execute plugin. Possible choices: mock, ssh",
+      "mock: This setting is used for testing and development.",
+      "      It will not send commands to any node.",
+      "ssh:  This setting will notify Heketi to ssh to the nodes.",
+      "      It will need the values in sshexec to be configured.",
+      "kubernetes: Communicate with GlusterFS containers over",
+      "            Kubernetes exec api."
+    ],
+    "executor": "ssh",
+   
+    "_sshexec_comment": "SSH username and private key file information",
+    "sshexec": {
+      "keyfile": "/root/.ssh/id_rsa",
+      "user": "root"
+    },
+   
+    "_kubeexec_comment": "Kubernetes configuration",
+    "kubeexec": {
+      "host" :"https://kubernetes.host:8443",
+      "cert" : "/path/to/crt.file",
+      "insecure": false,
+      "user": "kubernetes username",
+      "password": "password for kubernetes user",
+      "namespace": "Kubernetes namespace",
+      "fstab": "Optional: Specify fstab file on node.  Default is /etc/fstab"
+    },
+   
+    "_db_comment": "Database file name",
+    "db": "/var/lib/heketi/heketi.db",
+    "brick_max_size_gb" : 1024,
+    "brick_min_size_gb" : 1,
+    "max_bricks_per_volume" : 33,
+   
+   
+    "_loglevel_comment": [
+      "Set log level. Choices are:",
+      "  none, critical, error, warning, info, debug",
+      "Default is warning"
+    ],
+    "loglevel" : "debug"
+  }
+}
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+您需要根据实际情况设置配置文件中的参数值。有关更多信息，请参阅 link:https://github.com/heketi/heketi/blob/master/docs/admin/server.md[Heketi 官方文档]。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 执行以下命令启动 Heketi：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+systemctl start heketi
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令检查 Heketi 的状态：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+systemctl status heketi
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+如果显示 **active (running)**，则 Heketi 安装成功，如下所示：
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+● heketi.service - Heketi Server
+   Loaded: loaded (/lib/systemd/system/heketi.service; disabled; vendor preset: enabled)
+   Active: active (running) since Tue 2021-03-09 13:04:30 CST; 4s ago
+   Main PID: 9282 (heketi)
+   Tasks: 8
+   Memory: 6.5M
+   CPU: 62ms
+   CGroup: /system.slice/heketi.service
+           └─9282 /usr/bin/heketi --config=/etc/heketi/heketi.json
+   
+Mar 09 13:04:30 server1 systemd[1]: Started Heketi Server.
+Mar 09 13:04:30 server1 heketi[9282]: Heketi v7.0.0
+Mar 09 13:04:30 server1 heketi[9282]: [heketi] INFO 2021/03/09 13:04:30 Loaded ssh executor
+Mar 09 13:04:30 server1 heketi[9282]: [heketi] INFO 2021/03/09 13:04:30 Adv: Max bricks per volume set to 33
+Mar 09 13:04:30 server1 heketi[9282]: [heketi] INFO 2021/03/09 13:04:30 Adv: Max brick size 1024 GB
+Mar 09 13:04:30 server1 heketi[9282]: [heketi] INFO 2021/03/09 13:04:30 Adv: Min brick size 1 GB
+Mar 09 13:04:30 server1 heketi[9282]: [heketi] INFO 2021/03/09 13:04:30 GlusterFS Application Loaded
+Mar 09 13:04:30 server1 heketi[9282]: [heketi] INFO 2021/03/09 13:04:30 Started Node Health Cache Monitor
+Mar 09 13:04:30 server1 heketi[9282]: Listening on port 8080
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令设置开机自动启动 Heketi：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+systemctl enable heketi
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令创建拓扑配置文件：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+vi /etc/heketi/topology.json
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+将以下信息添加到拓扑配置文件中并保存文件：
+
+// JSON
+include::../../../../../_ks_components/code/json.adoc[]
+
+   {
+    "clusters": [
+       {
+         "nodes": [
+           {
+             "node": {
+               "hostnames": {
+                 "manage": [
+                   "192.168.0.2" 
+                ],
+                "storage": [
+                  "192.168.0.2" 
+                ]
+              },
+              "zone": 1
+            },
+            "devices": [
+              "/dev/vdd" 
+            ]
+          },
+          {
+            "node": {
+              "hostnames": {
+                "manage": [
+                  "192.168.0.3" 
+                ],
+                "storage": [
+                  "192.168.0.3"
+                ]
+              },
+              "zone": 1
+            },
+            "devices": [
+              "/dev/vdd" 
+            ]
+          },
+          {
+             "node": {
+               "hostnames": {
+                 "manage": [
+                   "192.168.0.4"
+                ],
+                "storage": [
+                  "192.168.0.4"  
+                ]
+              },
+              "zone": 1
+            },
+            "devices": [
+              "/dev/vdd"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+以上 IP 地址和磁盘名称仅为示例。请将 **192.168.0.2**、**192.168.0.3**、**192.168.0.4** 分别三台服务器的实际 IP 地址，并将 **/dev/vdd** 替换为三台服务器的实际磁盘名称。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 执行以下命令加载拓扑配置文件：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+export HEKETI_CLI_SERVER=http://localhost:8080
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+heketi-cli topology load --json=/etc/heketi/topology.json
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+如配置成功，命令回显中将显示集群 ID、各节点 IP 地址和各节点 ID，如下所示：
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+Creating cluster ... ID: 2d9e11adede04fe6d07cb81c5a1a7ea4
+    Allowing file volumes on cluster.
+    Allowing block volumes on cluster.
+    Creating node 192.168.0.2 ... ID: 0a9f240ab6fd96ea014948c5605be675
+        Adding device /dev/vdd ... OK
+    Creating node 192.168.0.3 ... ID: 2468086cadfee8ef9f48bc15db81c88a
+        Adding device /dev/vdd ... OK
+    Creating node 192.168.0.4 ... ID: 4c21b33d5c32029f5b7dc6406977ec34
+        Adding device /dev/vdd ... OK
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+////

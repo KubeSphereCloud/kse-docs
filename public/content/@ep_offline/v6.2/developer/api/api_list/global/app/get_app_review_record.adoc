@@ -1,0 +1,144 @@
+---
+title: 查询应用审核记录（GetAppReviewRecord）
+weight: 15
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| true
+| 应用ID
+
+| limit
+| Integer
+| false
+| 个数
+
+| offset
+| Integer
+| false
+| 偏移
+
+| operator_email
+| String
+| false
+| 操作人邮箱
+
+| operator_name
+| String
+| false
+| 操作人
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| record_set
+| Array
+| false
+| 审核列表
+
+| record_set[].action
+| String
+| false
+| 审核操作
+
+| record_set[].app_id
+| String
+| false
+| 应用ID
+
+| record_set[].app_review_id
+| String
+| false
+| 审核记录ID
+
+| record_set[].operator
+| String
+| false
+| 操作人
+
+| record_set[].operator_email
+| String
+| false
+| 操作人邮箱
+
+| record_set[].operator_name
+| String
+| false
+| 操作人名字
+
+| record_set[].remarks
+| String
+| false
+| 备注
+
+| record_set[].review_role
+| String
+| false
+| 审核渠道
+
+| record_set[].review_time
+| String
+| false
+| 审核时间
+
+| record_set[].submit_time
+| String
+| false
+| 提交审核时间
+
+| total_count
+| Integer
+| false
+| 总数量
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app_id": "app-xxxxxx",
+  "limit": 50,
+  "offset": 0
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetAppReviewRecordResponse",
+  "record_set": [
+    {
+      "action": "approved",
+      "app_id": "app-xxxxxx",
+      "app_review_id": "apprv-m2dgozpe",
+      "operator": "usr-xxxxxx",
+      "operator_email": "test@yunify.com",
+      "operator_name": "test",
+      "remarks": "test",
+      "review_role": "channel",
+      "review_time": "2021-03-09T20:59:12",
+      "submit_time": "2021-03-09T20:39:04"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

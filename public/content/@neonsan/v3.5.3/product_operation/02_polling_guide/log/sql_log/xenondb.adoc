@@ -1,0 +1,27 @@
+---
+title: "查看 Xenondb 日志文件"
+weight: 6
+---
+
+. 逐个登录 Xenondb 集群的每个节点。 
+
+. 输入如下命令，查看 Xenondb 的异常日志。 
++
+[,shell]
+----
+cat /data/xenondb/mysql/error.txt |grep Warning 
+cat /data/xenondb/mysql/error.txt |grep ERROR 
+cat /data/xenondb/log/xenon.log |grep ERROR 
+cat /data/xenondb/log/checkme |grep ERROR 
+----
+. 若步骤 2 有内容输出，说明服务异常，需要输入如下命令，查看数据库日志。
++
+[,shell]
+----
+vi /data/xenondb/mysql/error.txt 
+vi /data/xenondb/log/xenon.log 
+vi /data/xenondb/log/checkme
+----
+
+
+

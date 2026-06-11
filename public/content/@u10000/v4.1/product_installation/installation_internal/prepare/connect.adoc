@@ -1,0 +1,57 @@
+---
+title: 云服务器建立互信
+weight: 7
+---
+
+
+本地登录云服务器，可使用 WindTerm 或 Putty 等支持 SSH 的终端工具，输入 `公网 IP + 端口号` 即可完成登录。
+
+. 登录 link:https://console.qingcloud.com/[Console]，输入正确的用户名密码。
+
+. 选择**产品与服务** > **网络服务** > **VPC 网络**，进入 VPC 网络主页面。
+
+. 查看已创建的云服务器的 VPC 网络的公网 IP 地址，这里为 `139.198.3.63`。
++
+image::/images/u10000/vpc_list.png[vpc_list,100%]
+
+. 查看已创建的 VPC 端口转发规则。
++
+image::/images/u10000/vpc_port_transfer_list.png[vpc_port_transfer_list,100%]
+
+. 根据以上内容，可知，本地登录逐个云服务器的方式为：
++
+[source,shell]
+----
+ssh root@139.198.3.63 -p 1002
+ssh root@139.198.3.63 -p 1003
+ssh root@139.198.3.63 -p 1004
+
+----
+
+. 本地使用 `公网 IP + 端口号` 的方式登录云服务器：
++
+image::/images/u10000/vm_login.png[vm_login,100%]
+
+. 修改云服务器 `root` 用户密码为 `zhu88jie`：
++
+image::/images/u10000/vm_update_pw.png[vm_update_pw,100%]
+
+. 按照以下内容修改云服务器配置文件 `/etc/ssh/sshd_config`，使其允许通过 `root` 账户的密码登陆：
++
+image::/images/u10000/vm_update_sshd.png[vm_update_sshd,100%]
+
+. 执行如下命令行，重启云服务器上的 SSHD 服务：
++
+[source,shell]
+----
+# systemctl restart sshd
+----
+
+. 重复以上步骤，直至 3 台云服务器均操作完成。
+
+. 确认 3 台服务器彼此之间可通过 root 账号密码互相访问。
++
+[source,shell]
+----
+# ssh root@192.168.100.3
+----

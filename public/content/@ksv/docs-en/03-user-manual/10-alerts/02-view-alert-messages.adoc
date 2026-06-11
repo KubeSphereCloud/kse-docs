@@ -1,0 +1,71 @@
+---
+title: "View alert messages"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, alerts, messages, list, view"
+description: "Describes how to view alert messages in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e7e6d1d6fe5e407e8d919bbf2f1cd807
+:ks_xref_id: 00e725689fd14151ba382bd38fc7790d
+:ks_comp: ../../../components/
+:ks_title: View alert messages
+:ks_description: Describes how to view alert messages in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, alerts, messages, list, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view alert messages in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=f2000588801d46c4860e0c1607aef8f2]
+
+User **admin** can view all alert messages in your cluster. Common users such as project administrators, operators, and viewers can view the alert messages in the projects to which they belong.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=081c059d339244a29b8c24f30ad4e7d3]
+
+include::../../../_custom-en/alerts/alert-steps.adoc[]
+
+. On the **Alert Messages** tab, view alert messages.
++
+--
+You can view all alert messages in the project. The following table describes the parameters.
+
+[cols="1a,3a"]
+|===
+|Parameter |Description
+
+|Alert Message
+|The alert message that is automatically generated after the alert is fired.
+
+|Status
+|The status of the alert. Valid values:
+
+include::../../../_custom-en/alerts/alert-status-description.adoc[]
+
+|The severity of the alert. Valid values:
+|The severity of the alert. Valid values:
+
+include::../../../_custom-en/alerts/alert-severity-levels.adoc[]
+
+|Alert Policy
+|The name of the alert policy. You can click the name of the alert policy to view its details. For more information about parameters, see link:../05-view-alert-policy-details/[Create alert policy details].
+
+|Monitoring Target
+|The monitoring target of the alert. {ks_product} can monitor nodes and VMs.
+
+|Fired at
+|The time when the alert was fired.
+|===
+--
+. (Optional) Click the search box above the alert message list and specify a condition to search for alert messages by status or severity.  For example, use **Status:Firing** to search for alerts that are fired.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

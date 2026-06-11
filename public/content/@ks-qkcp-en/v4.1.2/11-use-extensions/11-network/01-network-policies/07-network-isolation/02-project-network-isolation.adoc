@@ -1,0 +1,145 @@
+---
+title: "Enable Project Network Isolation"
+keywords: "Kubernetes, {ks_product-en}, project management, project settings, network isolation, enable network isolation"
+description: "Introduce how to enable project network isolation."
+weight: 02
+---
+
+:ks_permission: **Namespace NetworkPolicy Management**
+:ks_navigation: **Project Settings > Network Isolation**
+
+
+This section introduces how to enable project network isolation, as well as add and delete isolation whitelist entries.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../../../_custom-en/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeSphere Network** should have been installed and enabled.
+
+== Steps
+
+=== Enable Network Isolation
+
+include::../../../../../_custom-en/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. On the **Network Isolation** page, click **Enable**.
++
+--
+// Note
+include::../../../../../../_ks_components-en/admonitions/note.adoc[]
+
+After enabling network isolation, pods in other projects, other node host environments, and all network segments outside the cluster will not be able to access pods in the current project. There is no restriction on egress traffic by default, meaning that if no whitelist entries are set, pods in the current project can communicate with pods in other projects, other node host environments, and all network segments outside the cluster. After adding whitelist entries, pods in the current project are only allowed to communicate with pods in specific projects, specific node host environments, and specific network segments outside the cluster.
+
+include::../../../../../../_ks_components-en/admonitions/admonEnd.adoc[]
+--
+
+=== Add Whitelist
+
+. After enabling network isolation, click the **Internal Whitelist** or **External Whitelist** tab.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Internal Whitelist
+|Allow pods in the current project to communicate with pods in other projects within the same workspace.
+
+|External Whitelist
+|Allow pods in the current project to communicate with specific network segments and ports outside the workspace.
+|===
+--
+
+. On the **Internal Whitelist** or **External Whitelist** tab, click **Add Whitelist Entry**.
+
+. In the **Add Whitelist Entry** dialog box, set the parameters for the whitelist entry, and then click **OK**.
++
+====
+* For internal whitelist entries, set the following parameters:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Traffic Direction
+|The direction of traffic allowed by the whitelist entry.
+
+* **Egress**: From the current project to other projects.
+
+* **Ingress**: From other projects to the current project.
+
+|Type
+|The method by which the whitelist entry matches pods in other projects.
+
+* **Project**: Pods in the current project can communicate with all pods in the specified project.
+
+* **Service**: Pods in the current project can communicate with the backend pods of the specified service.
+|===
+--
+
+* For external whitelist entries, set the following parameters:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the whitelist entry.
+
+|Traffic Direction
+|The direction of traffic allowed by the whitelist entry.
+
+* **Egress**: From the current project to outside the workspace.
+
+* **Ingress**: From outside the workspace to the current project.
+
+|Network Segment
+|The network address and subnet mask outside the workspace. Supports Classless Inter-Domain Routing (CIDR).
+
+* Click image:/images/ks-qkcp/zh/icons/copy-light.svg[copy-light,18,18] on the right side of an added network segment to create a network segment copy.
+* Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] on the right side of an added network segment to delete the network segment.
+* Click **Add** to set multiple network segments.
+
+|Port
+|The port number allowed by the whitelist entry.
+
+* For egress whitelist entries, the port here is the port of the address outside the workspace.
+
+* For ingress whitelist entries, the port here is the port of the pods in the current project.
+
+* Click image:/images/ks-qkcp/zh/icons/copy-light.svg[copy-light,18,18] on the right side of an added port to create a port copy.
+* Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] on the right side of an added port to delete the port.
+* Click **Add Port Range** to set multiple port ranges, and click **Add Port** to set multiple ports.
+|===
+--
+
+After the whitelist entry is created, it will be displayed in the internal whitelist or external whitelist list.
+====
+
+. In the **External Whitelist** list, click the entry name to view the entry details, and click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] > **Edit** on the right side of the entry to edit the whitelist entry details.
+
+=== Delete Whitelist
+
+// Warning
+include::../../../../../../_ks_components-en/admonitions/warning.adoc[]
+
+Deleting a whitelist entry may cause network connection interruptions for pods in the current project, so please proceed with caution.
+
+include::../../../../../../_ks_components-en/admonitions/admonEnd.adoc[]
+
+. On the **Network Isolation** page, click the **Internal Whitelist** or **External Whitelist** tab.
+
+. Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] on the right side of the internal whitelist entry you want to delete; click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the external whitelist entry you want to delete, and then select **Delete** from the dropdown list.
+
+. In the **Delete Whitelist Entry** dialog box, enter the name of the whitelist entry, and then click **OK**.

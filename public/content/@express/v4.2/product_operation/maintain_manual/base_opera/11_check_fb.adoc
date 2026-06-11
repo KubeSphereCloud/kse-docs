@@ -1,0 +1,85 @@
+---
+title: 检查 FirstBox
+weight: 11
+---
+
+== 运维场景
+
+在云易捷安装部署的过程中，可参考以下步骤进行 FirstBox 安装检查。
+
+== 操作步骤
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 检查 FirstBox 是否已拉起。
++
+[source,shell]
+----
+tail /root/launch_fb.log
+----
++
+若返回结果如下所示，即表示 FirstBox 节点已拉起成功。
++
+[source,shell]
+----
+2022-07-13 09:58:10 The VM [qingcloud-firstbox] is already running.
+2022-07-13 09:58:10 Exec the function [launch_firstbox_vm] OK.
+2022-07-13 09:59:36 The qingcloud-firstbox vm has been launched successfully!
+----
+
+. 登录至 qingcloud-firstbox 虚拟机。
+
+. 查看 FirstBox 是否已准备好。
++
+[source,shell]
+----
+tail /root/deploy.log
+----
++
+若返回结果如下所示，即表示 FirstBox 已经准备完成。
++
+[source,shell]
+----
+2022-07-13 10:09:16 Exec the function [install_config_webinstaller] OK.
+2022-07-13 10:09:16 The installer is bootstrapped successfully. Reboot please!
+----
+
+. 检查各项服务状态。
++
+[source,shell]
+----
+supervisorctl status
+----
++
+[source,shell]
+----
+installer_server                 RUNNING   pid 691, uptime 0:46:15
+node_proxy                       RUNNING   pid 692, uptime 0:46:15
+node_server                      RUNNING   pid 693, uptime 0:46:15
+push_server                      RUNNING   pid 694, uptime 0:46:15
+qingcloud_proxy                  RUNNING   pid 695, uptime 0:46:15
+qingcloud_server                 RUNNING   pid 696, uptime 0:46:15
+telegraf                         RUNNING   pid 697, uptime 0:46:15
+----
++
+include::../../../../../_components/note.adoc[]
+返回结果中各项服务均为 ``RUNNING``，表示服务状态正常。
+include::../../../../../_components/table_footer.adoc[]
+
+

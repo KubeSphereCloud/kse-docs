@@ -1,0 +1,18 @@
+---
+title: 黄河麒麟服务器安装系统时黑屏
+weight: 30
+---
+
+== 问题现象
+
+安装 Ubuntu 18.04.1 系统时，界面一直黑屏。
+
+== 问题原因
+
+对 SAS3408I RAID 卡，BIOS 设置有要求。
+
+== 解决方法
+
+当服务器配置了 SAS3408I RAID 卡时，确保 **Advanced** 界面中，**SPCR** 参数为 **Disable** 状态。
+
+将 **Advanced** > **MISC Configuration** 页面的 **Support SPCR** 配置为 **Disable**，保存退出。

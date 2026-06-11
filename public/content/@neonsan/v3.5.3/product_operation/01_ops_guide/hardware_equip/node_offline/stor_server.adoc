@@ -1,0 +1,75 @@
+---
+title: "存储服务下线"
+weight: 2
+---
+
+对于存储服务来说，出于数据安全的考虑，**不再区分永久下线与临时下线**。即，只要涉及到节点下线操作，该存储节点上的数据全部做迁移处理。
+
+
+. 参考前文内容，link:../../../fault_process/data_mig/node_data_mig/new[迁移节点数据]。
+
+. 移除待下线节点上的磁盘。
++
+* NeonSAN v3.5.0 及之后版本，采用 evict_store 迁移节点数据，故需执行如下命令，完成磁盘信息的移除。
++
+[,shell]
+----
+neonsan remove_ssd -ssd_uuid <ssd_uuid>
+----
+
+* NeonSAN v3.5.0 之前版本，采用 remove_ssd 逐一迁移磁盘数据的方式完成节点数据的迁移，无需进行磁盘信息的移除。
+
+. 停止该节点的 store 服务。
++
+[,shel]
+----
+supervisorctl stop neonstore
+----
+
+. 依次执行如下命令，查看集群状态。
++
+返回结果中，数据库状态与 Zookeeper 状态正常。除下线节点外，其他节点状态均正常。卷状态正常。
++
+* 查看存储节点、磁盘和卷的状态。
++
+[,shell]
+----
+neonsan list_store
+neonsan list_ssd
+neonsan list_volume -detail
+----
+
+* 查看 ZooKeeper 状态。
++
+[,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
+
+* 查看数据库状态，根据实际环境中的数据库类型，选择相应的查看命令。
++
+--
+QingStor MySQL 数据库
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
+
+Galera 数据库
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
+
+Xenondb 数据库
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
+--
+
+
+
+
+
+

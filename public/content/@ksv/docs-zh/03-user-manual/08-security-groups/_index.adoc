@@ -1,0 +1,40 @@
+---
+title: "安全组"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 安全组, 管理"
+description: "介绍{ks_product_both}Web 控制台的安全组管理功能。"
+weight: 08
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 68f2a7bdff36403d97547216200affb7
+:ks_xref_id: 700ba3ce4e964f8cba07684e2cf1b773
+:ks_comp: ../../../components/
+:ks_title: 安全组
+:ks_description: 介绍{ks_product_both}Web 控制台的安全组管理功能。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 安全组, 管理
+:ks_weight: 08
+:ks_logo: 
+:ks_download_url: 
+
+
+安全组是一种虚拟防火墙，用于控制与其关联资源的入流量和出流量，从而提高关联资源的安全性。每台虚拟机至少需要属于一个安全组。
+
+您可以为每个安全组添加流量规则。入站流量和出站流量具有单独的规则集。
+
+**安全组**模块对所有用户可见。**admin** 用户可以查看系统中的所有安全组，并且可以对安全组执行所有操作。其他具有不同角色的普通用户在**安全组**模块中的权限如下：
+
+[cols='1a,3a']
+|===
+|项目角色 |权限
+
+|管理员
+|查看所属项目中的安全组，并且可以对安全组执行所有操作。
+
+|操作员
+|查看所属项目中的安全组，并且可以对安全组执行所有操作。
+
+|观察员
+|只能查看所属项目中的安全组，不能对安全组执行任何操作。
+|===

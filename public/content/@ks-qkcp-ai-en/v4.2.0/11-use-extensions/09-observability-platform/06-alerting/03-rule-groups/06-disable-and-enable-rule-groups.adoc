@@ -1,0 +1,55 @@
+---
+title: "Disable and Enable Rule Groups"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Monitoring and Alerting, Rule Groups, Disable and Enable Rule Groups"
+description: "Describes how to disable and enable alert rule groups."
+weight: 06
+---
+
+:ks_permission: **Rule Group Management**
+:ks_navigation: **Monitoring & Alerting > Rule Groups**
+
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-disableAndEnablerRuleGroups.adoc[]
+
+
+== Prerequisites
+
+* The **WizTelemetry Alerting** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../../
+
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+== Disable and Enable a Single Rule Group
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and enter your cluster or workspace.
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-disableAndEnableASingleRuleGroup.adoc[]
+
+
+== Batch Disable and Enable Rule Groups
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and enter your cluster or workspace.
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-disableAndEnableMultipleRuleGroups.adoc[]

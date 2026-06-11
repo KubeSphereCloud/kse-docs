@@ -1,0 +1,69 @@
+---
+title: "Delete Cluster Labels"
+keywords: "Kubernetes, {ks_product}, Multi-cluster Management, Cluster Labels, Delete Labels"
+description: "Describes how to delete cluster labels."
+weight: 05
+---
+
+:ks_permission: **Cluster Management**
+
+This section describes how to delete cluster labels.
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+If a label has been added to a cluster, it will be removed from the cluster after deletion.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+You need to have the pass:a,q[{ks_permission}] permission on the KubeSphere platform.
+
+
+== Delete a Single Label
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+. Click **Cluster Management**.
+
++
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusterTags/clusterTags-openListPage_v42.adoc[]
+
++
+
+. On the right side of the label you want to delete, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Delete** from the dropdown list.
+
+. In the **Delete Label** dialog box, enter the label's key-value pair, and then click **OK**.
+
+
+== Batch Delete Labels
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+. Click **Cluster Management**.
+
++
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusterTags/clusterTags-openListPage.adoc[]
+
++
+
+. Select the checkboxes to the left of the labels you want to delete, and then click **Delete** above the list.
+
+. In the **Batch Delete Labels** dialog box, enter the key-value pair for each label, and then click **OK**.
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Please use half-width commas (,) and spaces to separate multiple label key-value pairs.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

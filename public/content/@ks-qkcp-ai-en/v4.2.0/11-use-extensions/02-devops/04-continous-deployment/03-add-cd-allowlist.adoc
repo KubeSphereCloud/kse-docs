@@ -1,0 +1,34 @@
+---
+title: "Add Continuous Deployment Whitelist"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Use DevOps"
+description: "Introduces how to add a continuous deployment whitelist."
+weight: 03
+---
+
+:ks_navigation:  **DevOps > Continuous Deployment**
+
+KubeSphere supports restricting the code repositories and target locations for resource continuous deployment by setting up a whitelist.
+
+This document describes how to add a continuous deployment whitelist.
+
+== Prerequisites
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+* A workspace, a DevOps project, and a user (e.g., **project-regular**) have been created. The user has been invited to the DevOps project and granted the **operator** role. Please refer to link:../../02-devops-project-mangement/03-project-members/01-invite-a-user-to-a-project/[Invite a User to a DevOps Project].
+
+* Code repositories have been link:../../06-code-repositories/01-import-code-repositories/[imported].
+
+== Steps
+
+include::../../../../_custom/devops/project-regular-oper-logIn.adoc[]
+
++
+
+. In the left navigation pane, select **DevOps > Continuous Deployment**.
+
+. On the **Continuous Deployment Whitelist** page, click **Edit Whitelist**.
+
+. In the **Edit Whitelist** dialog box that appears, select the code repository, deployment cluster, and project, then click **OK**.
++
+Click **Add** to add multiple code repositories and deployment locations.

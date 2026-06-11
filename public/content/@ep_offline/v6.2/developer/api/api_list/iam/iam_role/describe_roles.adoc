@@ -1,0 +1,196 @@
+---
+title: 查询IAM身份（DescribeIAMRoles）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| false
+| ConsoleID
+
+| controller
+| Array
+| false
+| 控制器类型
+
+| limit
+| Integer
+| false
+| 偏移量
+
+| offset
+| Integer
+| false
+| 起始坐标
+
+| owner
+| String
+| false
+| 所有者
+
+| reverse
+| Integer
+| false
+| 是否降序查询
+
+| role_name
+| String
+| false
+| 身份名称
+
+| role_type
+| String
+| false
+| 身份类型
+
+| roles
+| Array
+| false
+| IAM身份ID列表
+
+| root_user
+| String
+| false
+| 根用户ID
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| sort_key
+| String
+| false
+| 排序使用的列
+
+| status
+| Array
+| false
+| 状态
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| role_set
+| Array
+| false
+| IAM身份详情列表
+
+| role_set[].console_id
+| String
+| false
+| public
+
+| role_set[].controller
+| String
+| false
+| 控制器类型
+
+| role_set[].owner
+| String
+| false
+| 所有者
+
+| role_set[].policy_count
+| Integer
+| false
+| 已绑定策略数
+
+| role_set[].qrn
+| String
+| false
+| IAM身份唯一标识
+
+| role_set[].role_id
+| String
+| false
+| IAM身份ID
+
+| role_set[].role_name
+| String
+| false
+| IAM身份名称
+
+| role_set[].role_type
+| String
+| false
+| IAM身份类型
+
+| role_set[].root_user_id
+| String
+| false
+| 根用户ID
+
+| role_set[].status
+| String
+| false
+| 状态
+
+| role_set[].user_id
+| String
+| false
+| 用户ID
+
+| total_count
+| Integer
+| false
+| IAM身份详情总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMRoles",
+  "limit": 20,
+  "offset": 0,
+  "owner": "usr-ZiEgnuY1",
+  "reverse": 1,
+  "sort_key": "create_time",
+  "status": [
+    "active"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMRolesResponse",
+  "ret_code": 0,
+  "role_set": [
+    {
+      "console_id": "testingcloud",
+      "create_time": "2023-03-02T16:11:15",
+      "owner": "usr-ZiEgnuY1",
+      "policy_count": 0,
+      "qrn": "qrn:qingcloud:iam::usr-ZiEgnuY1:role/iamr-e655blsx",
+      "role_id": "iamr-e655blsx",
+      "role_name": "iamtest",
+      "role_type": "account",
+      "root_user_id": "usr-ZiEgnuY1",
+      "status": "active",
+      "user_id": "usr-tVYNKSdM"
+    }
+  ],
+  "total_count": 1
+}
+----

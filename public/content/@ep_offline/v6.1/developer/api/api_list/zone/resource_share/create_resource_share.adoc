@@ -1,0 +1,181 @@
+---
+title: 创建共享单元（CreateResourceShare）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| owner
+| String
+| false
+| 资源的所有者
+
+| resource_share_name
+| String
+| false
+| 共享单元名称
+
+| resource_share_user
+| Array
+| false
+| 需要共享的用户
+
+| resources
+| Array
+| false
+| 需要共享的资源
+
+| zone
+| String
+| true
+| 请求区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resource_share
+| Object
+| false
+| 共享单元信息
+
+| resource_share.console_id
+| String
+| false
+| 共享单元控制台id
+
+| resource_share.controller
+| String
+| false
+| 共享单元控制者
+
+| resource_share.create_time
+| String
+| false
+| 共享单元创建时间
+
+| resource_share.owner
+| String
+| false
+| 共享单元所有者
+
+| resource_share.resource_share_id
+| String
+| false
+| 共享单元id
+
+| resource_share.resource_share_name
+| String
+| false
+| 共享单元名称
+
+| resource_share.resource_share_user
+| Array
+| false
+| 共享单元用户
+
+| resource_share.resource_share_user[].email
+| String
+| false
+| 共享单元成员邮箱
+
+| resource_share.resource_share_user[].iam_role_id
+| String
+| false
+| 共享单元成员角色id
+
+| resource_share.resource_share_user[].status
+| String
+| false
+| 共享单元成员状态
+
+| resource_share.resource_share_user[].user_id
+| String
+| false
+| 共享单元成员id
+
+| resource_share.resource_share_user[].user_name
+| String
+| false
+| 共享单元成员名称
+
+| resource_share.resource_share_user[].user_type
+| String
+| false
+| 共享单元成员类型
+
+| resource_share.root_user_id
+| String
+| false
+| 共享单元所有者主账户id
+
+| resource_share.status
+| String
+| false
+| 共享单元状态
+
+| resource_share.zone
+| String
+| false
+| 共享区ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateResourceShare",
+  "owner": "admin",
+  "resource_share_name": "fdafdsfds",
+  "resource_share_user": [
+    "usr-gqn3h1yJ"
+  ],
+  "resources": [],
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateResourceShareResponse",
+  "resource_share": {
+    "console_id": "testingcloud",
+    "controller": "self",
+    "create_time": "2023-07-03T13:49:27",
+    "owner": "admin",
+    "resource_share_id": "rsg-cd89eiuy",
+    "resource_share_name": "fdafdsfds",
+    "resource_share_user": [
+      {
+        "email": "welwei@yunify.com",
+        "iam_role_id": "iamr-a9ijqved",
+        "status": "active",
+        "user_id": "usr-gqn3h1yJ",
+        "user_name": "welwei",
+        "user_type": 0
+      }
+    ],
+    "root_user_id": "admin",
+    "status": "false",
+    "zone": "testing1a"
+  },
+  "ret_code": 0,
+  "trace_id": "9W5o2kjx"
+}
+----

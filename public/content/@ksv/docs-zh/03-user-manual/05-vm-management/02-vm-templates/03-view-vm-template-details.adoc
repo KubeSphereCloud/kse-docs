@@ -1,0 +1,85 @@
+---
+title: "查看虚拟机模板详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 模板, 列表, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看虚拟机模板详情。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 0ee50a7fd889402882cd68f1d507894c
+:ks_xref_id: 13eba367eec34a95a70ffad7f83cf552
+:ks_comp: ../../../../components/
+:ks_title: 查看虚拟机模板详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看虚拟机模板详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 模板, 列表, 详情, 查看
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看虚拟机模板详情。
+
+include::../../../../_custom/vms/vm-template-view-limits.adoc[]
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=17ebe6734c8346dc910d86dcfdab38d8]
+
+include::../../../../_custom/vms/vm-template-steps.adoc[]
+
+. 在虚拟机模板列表页面，点击目标虚拟机模板名称，进入虚拟机模板详情页面。
+
+. 在虚拟机模板详情页面的左侧区域，查看虚拟机模板的基本信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|ID
+|虚拟机模板在系统中的通用唯一标识符，由系统自动分配。
+
+|所属项目
+|虚拟机模板所在的项目名称。
+
+|创建时间
+|虚拟机模板的创建时间。
+
+|是否共享
+|虚拟机模板的共享属性。开启共享后，其他项目的用户可复制该模板。
+
+|创建者
+|创建虚拟机模板的用户名称。
+|===
+--
+
+. 在虚拟机模板详情页面的右侧区域，查看虚拟机模板的配置信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|镜像
+|模板定义的虚拟机镜像。
+
+|CPU
+|模板定义的虚拟机 CPU 核心数。
+
+|内存
+|模板定义的虚拟机内存配置。
+
+|系统盘
+|模板定义的虚拟机系统盘大小。
+
+|网段
+|模板定义的虚拟机网段范围。
+
+|网关
+|虚拟机网关地址。
+|===
+--

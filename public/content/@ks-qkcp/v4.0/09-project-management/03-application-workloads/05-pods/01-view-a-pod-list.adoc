@@ -1,0 +1,53 @@
+---
+title: "查看容器组列表"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 项目管理, 应用负载, 容器组, 查看容器组列表"
+description: "介绍如何查看容器组列表。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 16f2a7080c7841129c07e20df5078147
+:ks_xref_id: dc9eb8d4b2b745669f93d4cfe5543efe
+:ks_comp: ../../../../components/
+:ks_title: 查看容器组列表
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 应用负载, 容器组, 查看容器组列表
+:ks_description: 介绍如何查看容器组列表。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载查看**
+:ks_navigation: **应用负载 > 容器组**
+
+
+include::../../../../_custom/clusterManagement/pods/pods-desc-viewAPodList.adoc[]
+
+
+== 前提条件
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+include::../../../../_custom/clusterManagement/pods/pods-para-podList.adoc[]
+
+include::../../../../_custom/clusterManagement/pods/pods-oper-searchForPods.adoc[]
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

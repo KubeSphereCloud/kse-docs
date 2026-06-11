@@ -1,0 +1,87 @@
+---
+title: "快速入门"
+weight: 3
+linkkey: coreshub_quick_start,coreshub_quick_start_develop,coreshub_quick_start_file,coreshub_quick_start_create_k8s
+---
+
+== 创建存储
+
+include::res_manage/stor_data/stor_create.adoc[tag=create_stor]
+
+== 上传文件
+
+include::res_manage/stor_data/file_upload.adoc[tag=upload_file]
+
+== 创建容器实例
+
+. 在左侧导航栏，选择**容器实例**，默认进入容器实例列表页面。
++
+image::/images/cloud_service/compute/coreshub/develop_training_k8s_create_1.png[]
+. 点击**创建容器实例**，在弹出创建容器实例页面，配置各项参数，点击**确定**。
++
+参考以下参数说明进行配置。
++
+[options="header",cols="1,3"]
+|===
+|参数|说明
+|实例名称
+|用户自定义名称，便于区分。
+
+.2+|资源
+a|若选择**新购**，需配置以下参数。
+
+* 计费模式：默认为按需计费。
+* 资源类型：支持选择高速训练、共享 GPU 或 CPU 计算类型。根据资源类型的不同，其 GPU 型号、CPU 型号、内存等具有一定的差异，用户根据实际需要选择相应资源即可。
+
+a|若选择**我的资源组**，需配置以下参数。
+
+* 资源组：平台内已创建完成的，且申请了计算资源的可用资源组。
+* 指定节点：根据所选资源组，指定相应计算节点，并设置其 vCPU 核数、内存、系统盘大小、GPU 个数（选填）、数据盘大小（选填）。
+
+|存储与数据（选填）
+|选择数据集所处的**用户目录**，以及相应的挂载目录。
+
+|镜像
+a|支持选择公共镜像、自定义镜像或私有镜像地址。
+
+* 公共镜像：平台内的link:../res_manage/img/img_intro/#_预置镜像[预置镜像]，支持 TensorFlow、Pytorch、Jupyter 等。
+* 自定义镜像：用户link:../res_manage/img/img_pri[基于预置镜像或 Dockerfile 构建的镜像]。
+* 镜像地址：公有或用户私有镜像地址，若设置有密码，则需勾选**有密码**并输入用户名和密码，获取相应镜像。
+|===
+
+. 返回容器实例页面，等待容器实例创建完成。已创建成功的实例显示在列，且状态为``运行中``。
++
+image::/images/cloud_service/compute/coreshub/develop_training_k8s_create_3.png[]
+
+== 登录容器实例并适配环境
+
+. 点击指定容器实例**快捷访问**列中的 **jupyter**，跳转至 JupyterLab 页面。JupyterLab 的详细使用方法，可参考 link:../develop_training/k8s/jupyter[JupyterLab 使用介绍]相关内容。
++
+include::../../../../_components/attention.adoc[]
+* 若使用自定义镜像创建容器实例，则需确保该镜像文件包含 JupyterLab 服务，否则无法打开 JupyterLab 页面。
+* 若无法打开 JupyterLab 页面，请检查是否关闭浏览器的弹窗拦截。
+include::../../../../_components/table_footer.adoc[]
+
+. 在 JupyterLab 的工作区域，点击 **Other > Terminal** 打开终端，登录至容器实例后台。
+
++
+image::/images/cloud_service/compute/coreshub/develop_training_k8s_login_2.png[]
+
+. 用户可执行如下命令，查看系统默认源。
++
+[,shell]
+----
+cat /etc/apt/sources.list
+----
+
+. 可使用 ``apt`` 命令，安装相应工具以适配训练任务所需的软件环境。
++
+--
+如安装网络工具集，可依次执行如下命令。用户可根据实际训练任务所需的软件环境安装相应工具，此处只做示例。
+[,shell]
+----
+apt install net-tools
+apt install iproute2 
+----
+--
+

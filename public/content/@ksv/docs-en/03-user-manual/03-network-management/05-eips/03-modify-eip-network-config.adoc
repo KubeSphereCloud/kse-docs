@@ -1,0 +1,45 @@
+---
+title: "Modify the network configuration for EIPs"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, EIPs, networks, configuration, web console, modification"
+description: "Describes how to modify the network configuration for EIPs in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 195b753313f041d4914f102d4f91195a
+:ks_xref_id: e2269d0b2f5245e9adc6fbf54e70b29b
+:ks_comp: ../../../../components/
+:ks_title: Modify the network configuration for EIPs
+:ks_description: Describes how to modify the network configuration for EIPs in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, EIPs, networks, configuration, web console, modification
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to modify the network configuration for elastic IP addresses (EIPs) in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=87d63641985941b0bcd48052b221ad4e]
+
+* The user that you use has been granted the permissions to use the **Physical Resources** module.  The **Physical Resources** module is available only to user **admin**.
+* Make sure no subnets are created. Otherwise, the network configuration of EIPs cannot be modified.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=1918537407fd43a59878e3f69e624fdc]
+
+include::../../../../_custom-en/networks/eip-network-config-steps.adoc[]
+
+. On the **EIP Networks** page, click **Modify** in the upper-right corner.
+. In the dialog box that appears, modify the network configuration for EIPs.  The following table describes the parameters.
++
+--
+include::../../../../_custom-en/networks/eip-network-config-parameters.adoc[]
+--
+. Click **OK**.

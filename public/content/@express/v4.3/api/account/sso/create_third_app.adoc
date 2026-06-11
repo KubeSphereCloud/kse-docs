@@ -1,0 +1,100 @@
+---
+title: 创建第三方APP（CreateThirdApp）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| client_id
+| String
+| false
+| 客户端ID
+
+| client_name
+| String
+| true
+| 客户端Name
+
+| description
+| String
+| false
+| 第三方APP的描述信息
+
+| logo_uri
+| String
+| false
+| logo对应的uri地址
+
+| logout_uri
+| String
+| false
+| 登出对应的uri地址
+
+| redirect_uri
+| String
+| true
+| 重定向的uri地址
+
+| token_issuer
+| String
+| false
+| 
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| client_id
+| String
+| false
+| 客户端ID
+
+| client_name
+| String
+| false
+| 客户端名称
+
+| redirect_uri
+| String
+| false
+| 重定向的rui地址
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "client_id": "client_id",
+  "client_name": "client_name",
+  "description": "this is thrid app description",
+  "logo_uri": "https://logo_uri.com",
+  "logout_uri": "https://logout_uri.com",
+  "redirect_uri": "https://redirect_uri.com",
+  "token_issuer": "sso"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateThirdAppResponse",
+  "client_id": "client_id",
+  "client_name": "client_name",
+  "redirect_uri": "https://redirect_uri.com",
+  "ret_code": 0
+}
+----

@@ -1,0 +1,94 @@
+---
+title: 获取监控数据（GetResourceMonitor）
+weight: 22
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| owner
+| String
+| false
+| 用户Id
+
+| resources
+| Array
+| false
+| 资源Id
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| meter_set
+| Object
+| false
+| 监控详情
+
+| resource_type
+| String
+| false
+| 资源类型
+
+| ret_code
+| Integer
+| false
+| 返回码
+
+| trace_id
+| String
+| false
+| 追踪Id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetResourceMonitor",
+  "resources": [
+    "i-mjcfqat0"
+  ],
+  "zone": "beta"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetResourceMonitorResponse",
+  "meter_set": {},
+  "resource_type": "instance",
+  "ret_code": 0,
+  "trace_id": "ucQz4wTs"
+}
+----

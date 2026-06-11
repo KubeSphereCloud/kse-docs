@@ -1,0 +1,14 @@
+---
+title: "收集硬件信息"
+weight: 1
+---
+
+可参考《企业云 v6.1 安装部署指南》的**收集硬件信息**相关章节内容。需注意的是 `ip_list` 文件内容的差别。
+
+include::../../../../../../_components/note.adoc[]
+
+* 原环境的 FirstBox 节点上，若存在 `/root/ip_list` 文件，则清空该文件。
+* 将待扩容的所有节点 IP，以每行一个 IP 地址的方式，写入 `ip_list` 文件。
+
+include::../../../../../../_components/table_footer.adoc[]
+

@@ -1,0 +1,59 @@
+---
+title: "View Scheduler Status"
+keywords: "Kubernetes, {ks_product}, Monitoring and Alerting, Cluster Status, Scheduler Status"
+description: "Describes how to view the scheduler status."
+weight: 05
+---
+
+:ks_permission: **Monitoring View**
+:ks_navigation: **Monitoring and Alerting > Cluster Monitoring**
+
+This section describes how to view the scheduler status. The scheduler determines which nodes pods run on based on pod resource requirements, node available resources, and other constraints.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **WizTelemetry Monitoring** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Cluster Monitoring** page, click the **Scheduler Monitoring** tab to view the operational status of the scheduler.
++
+====
+* The **Scheduler Monitoring** tab provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Metric |Description
+
+|Scheduling Count
+|The cumulative count of successful, erroneous, and failed pod scheduling events within the specified time range.
+
+|Scheduling Rate
+|The number of successful, erroneous, and failed pod scheduling events per second within the specified time range.
+
+|Scheduling Latency
+|The 99th percentile, 90th percentile, median, and average pod scheduling latency within the specified time range.
+|===
+--
+
+include::../../../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshData.adoc[]
+====

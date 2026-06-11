@@ -1,0 +1,30 @@
+---
+title: "查看 ZooKeeper 集群状态"
+weight: 3
+---
+
+. 登录 NeonSAN 集群任一节点，执行如下命令查看 ZooKeeper 集群信息。
++
+[,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts|grep zookeeper"
+----
+
+. 逐个登录 ZooKeeper 集群的每个节点。
+
+. 输入如下命令，查看 ZooKeeper 集群状态信息。
++
+[,shell]
+----
+/opt/zookeeper-3.4.13/bin/zookeeperServer.sh status
+----
++
+image::/images/neonsan/polling_guide_24.png[,70%]
++
+include::../../../../../../_components/note.adoc[] 
+* 整个 ZooKeeper 集群中，就一个 leader 节点，其余均为 follower 节点。
+* 如上所示，该节点为 follower 节点。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+

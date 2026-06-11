@@ -1,0 +1,79 @@
+---
+title: "Installing Apps Using App Templates"
+keywords: "Kubernetes, {ks_product}, workspace, App Template, Installing Apps Using App Templates"
+description: "Describes how to install apps using app templates."
+weight: 05
+---
+
+:ks_permission: **App/App Version/App Instance Management**
+:ks_navigation: **App Management > App Templates**
+
+This section describes how to install apps using app templates in a workspace.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. On the **Versions** tab of the app template details page, click the desired app version, then click **Deploy** in the expanded area.
+
+. In the pop-up **Location** dialog box, select the installation location for the app, then click **OK**.
+
+. On the **Basic Information** tab, configure the basic information for the app, then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|User-defined app name. The name can only contain lowercase letters, numbers, and hyphens (-), must start with a lowercase letter and end with a lowercase letter or number, with a maximum length of 32 characters.
+
+|Version
+|The app version to install.
+
+|Description
+|Description of the app. The description can contain any characters, with a maximum length of 256 characters.
+
+|Location
+|The cluster and project to which the app belongs. The app's workspace defaults to the workspace to which the app template belongs.
+|===
+--
+
+. On the **App Settings** tab, modify the app's parameter settings as needed, then click **Install**.
++
+--
+// Note
+include::../../../../../../_ks_components/admonitions/note.adoc[]
+
+The app template functionality in KubeSphere is built on Helm Chart. The parameter settings on the **App Settings** tab should comply with the Helm Chart Values file specification. For more information, please refer to link:https://helm.sh/zh/docs/chart_template_guide/values_files/[Helm Official Documentation].
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+ifeval::["{file_output_type}" == "html"]
+After the app is installed, you can view the installed app in the target project.
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+After the app is installed, you can view the installed app in the target project. For more information, please refer to the "Apps" chapter in the *KubeSphere Workspace and Project Management Guide*.
+endif::[]
+--

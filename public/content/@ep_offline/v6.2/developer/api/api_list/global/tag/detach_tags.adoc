@@ -1,0 +1,147 @@
+---
+title: 解绑资源标签（DetachTags）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resource_ids
+| Array
+| false
+| 资源id集合
+
+| resource_tag_pairs
+| Array
+| false
+| 资源标签对
+
+| resource_tag_pairs[].resource_id
+| String
+| false
+| 资源id
+
+| resource_tag_pairs[].resource_type
+| String
+| false
+| 资源类型
+
+| resource_tag_pairs[].tag_id
+| String
+| false
+| 标签id
+
+| resource_type
+| String
+| false
+| 资源类型
+
+| scope
+| String
+| false
+| 范围
+
+| system
+| Boolean
+| false
+| 是否是系统标签
+
+| tag_dicts
+| Array
+| false
+| 资源类型
+
+| tag_dicts[].tag_key
+| String
+| false
+| 标签key
+
+| tag_dicts[].tag_name
+| String
+| false
+| 标签名称
+
+| zone
+| String
+| false
+| 区域ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resource_tag_pairs
+| Array
+| false
+| 资源标签对
+
+| resource_tag_pairs[].resource_id
+| String
+| false
+| 资源id
+
+| resource_tag_pairs[].resource_type
+| String
+| false
+| 资源类型
+
+| resource_tag_pairs[].tag_id
+| String
+| false
+| 标签id
+
+| tag_id
+| String
+| false
+| 标签id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DetachTags",
+  "resource_ids": [],
+  "resource_tag_pairs": [
+    {
+      "resource_id": "i-12345",
+      "resource_type": "instance",
+      "tag_id": "tag_12345"
+    }
+  ],
+  "resource_type": null,
+  "scope": "zone",
+  "system": false,
+  "tag_dicts": []
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DetachTagsResponse",
+  "resource_tag_pairs": [
+    {
+      "resource_id": "i-12345",
+      "resource_type": "instance",
+      "tag_id": "tag_12345"
+    }
+  ],
+  "ret_code": 0,
+  "tag_id": "tag_12345"
+}
+----

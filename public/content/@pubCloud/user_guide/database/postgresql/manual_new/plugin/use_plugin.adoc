@@ -1,0 +1,74 @@
+---
+title: "插件使用说明"
+weight: 2
+---
+
+本章节主要介绍 PostgreSQL 插件的通用性使用方法。
+
+
+== 普通插件
+
+普通插件无需进行设置，链接数据库后，直接创建即可。例如：
+
+[,sql]
+----
+CREATE EXTENSION plpython3u;
+----
+
+== 需重启 PostgreSQL 的插件
+
+部分插件需要修改 ``shared_preload_libraries`` 参数才可支持，且该参数修改完成后需重启 PostgreSQL 方可生效。
+
+include::../../../../../../_components/note.adoc[]
+所用插件是否需要重启 PostgreSQL 集群，需用户自行查询相应插件的使用方法。
+include::../../../../../../_components/table_footer.adoc[]
+
+以使用  passwordcheck 插件为例，修改 ``shared_preload_libraries`` 参数步骤如下。
+
+. 登录 PostgreSQL 集群的节点。
+. 执行如下命令，查询当前 ``shared_preload_libraries`` 的设置。
++
+[,sql]
+----
+select setting from pg_settings where name = 'shared_preload_libraries';
+----
+
+. 将 passwordcheck 插件名称加入到配置参数中。
++
+include::../../../../../../_components/note.adoc[]
+参数无需添加 ``'`` 或 ``"`` 等字符。
+include::../../../../../../_components/table_footer.adoc[]
++
+[,sql]
+----
+alter system set shared_preload_libraries to citus,pg_stat_statements,pgaudit,passwordcheck;   
+----
+
+. 逐一登录 PostgreSQL 集群中的其他节点进行上述操作步骤。
+
+. 登录管理控制台，重启 PostgreSQL 集群。
+
+
+== 修改插件参数
+
+部分插件，有其自己特有的参数，且未在控制台上显示，可通过以下步骤进行修改。
+
+以修改 ``citus.enable_ddl_propagation`` 参数为例：
+
+. 登录 PostgreSQL 集群的节点。
+. 执行如下命令，将 ``citus.enable_ddl_propagation`` 参数设置为 ``true``。
++
+[,sql]
+----
+alter system set citus.enable_ddl_propagation to true;   
+----
+. 重新加载配置文件。
++
+[,sql]
+----
+select pg_reload_conf();
+----
+
+. 逐一登录 PostgreSQL 集群中的其他节点进行上述操作步骤。
+
+. 若需重启 PostgreSQL 集群，可登录管理控制台，进行重启操作。

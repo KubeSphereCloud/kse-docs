@@ -1,0 +1,37 @@
+---
+title: "Edit Constraint Configuration"
+description: "Describes how to edit constraint configuration."
+weight: 04
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: ** Gatekeeper > Constraints**
+
+
+This section describes how to edit the configuration of a constraint.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **Gatekeeper** extension must be installed and enabled on the KubeSphere platform.
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the constraint you want to edit, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Edit YAML** from the drop-down list.
+
+. In the **Edit YAML** dialog box, modify the relevant configuration, and then click **OK**.

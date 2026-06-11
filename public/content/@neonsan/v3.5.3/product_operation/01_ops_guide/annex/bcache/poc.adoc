@@ -1,0 +1,20 @@
+---
+title: "POC 性能调优"
+weight: 2
+---
+
+Bcache 可调整的优化项目不多，经过正确的 Bcache 安装配置之后，将缓存策略设置为 writeback，即可发挥 cache 盘的性能。在 POC 性能测试过程中，可尝试以下方式优化性能：
+
+. 关闭 cutoff，可以把预写的数据全部缓存到 SSD 中。
+
+. 增加脏数据的缓存比，默认是 10%，可以提高到 30%。
++
+[,shell]
+----
+echo 30 > /sys/block/bcache*/bcache/writeback_percent
+----
+. 实际测试前使用 1m 块顺序预写数据。
+
+. 测试前尽量把脏数据全部下刷到 HDD 中。
+
+

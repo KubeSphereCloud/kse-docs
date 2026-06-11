@@ -1,0 +1,587 @@
+---
+title: "Upgrade {ks_product}"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, upgrade"
+description: "If the following command output appears, {ks_product} is upgraded:"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 0dbcdeb8dc9a4adaa9d5debd8c797d9f
+:ks_xref_id: 826a4fbc87cf41fdb12549bf8fd6e732
+:ks_comp: ../../components/
+:ks_title: Upgrade {ks_product}
+:ks_description: If the following command output appears, {ks_product} is upgraded:
+:ks_keywords: {ks_product_full}, {ks_product}, upgrade
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to upgrade {ks_product_abbr_full}. {ks_product} uses the open-source tool KubeKey to create a private registry during upgrade. For more information about KubeKey, visit link:https://github.com/kubesphere/kubekey[GitHub KubeKey repository].
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=acc1540e15e14dcbba7063ae425cb981]
+
+* Make sure the current version of {ks_product} is v1.5.0. If you use {ks_product} in a version earlier than v1.5.0, upgrade it to v1.5.0 before you perform the following steps.
+* Upgrading {ks_product} to {ks_product_ver} will replace the CNI with Kube-OVN, during which the networks for pods will be refactored. To prevent data loss, make sure you have backed up all critical data, such as network data, users, and VMs.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Step 1: Push an image to a local registrylink:[id=2e5d954525e04adb8c1dc25a971368ed]
+
+. Transfer the installation package of {ks_product} {ks_product_ver} to a node on which you want to perform upgrade, and log in to the node.
+. Decompress the package and go to the directory generated. Replace **<package name>** with the actual name of the installation package and **<directory>**  with the actual directory generated after the package is decompressed.
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+tar -zxvf <package name>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cd <directory>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Grant **kk** permissions to execute the binary file:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+sudo chmod +x kk
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Edit the configuration file **config-sample.yaml**:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+vi config-sample.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. In **spec:hosts**, specify the server nodes on which {ks_product} is to be upgraded.
++
+--
+include::../../_custom-en/nodes/add-node-config-parameters.adoc[]
+--
+. In **spec:registry:privateRegistry**, configure the registry as follows, and save the file.
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+registry:
+    privateRegistry: "dockerhub.kubekey.local:5000"
+    auths:
+      "dockerhub.kubekey.local:5000":
+        skipTLSVerify: true
+    namespaceOverride: ""
+    registryMirrors: []
+    insecureRegistries: []
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Run the following command to push the installation image to the registry:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+bin/kk artifact images push -f config-sample.yaml -a kubekey-artifact.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+If image push failed due to unarchive failure of **kubekey-artifact.tar.gz**, run the following command to clear **bin/kubekey**:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+rm -rf bin/kubekey/*
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+If the following command output appears, the image is pushed:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+_  __ _______      __
+| |/ // ____\ \    / /
+| ' /| (___  \ \  / /
+|  <  \___ \  \ \/ /
+| . \ ____) |  \  /
+|_|\_\_____/    \/
+
+19:49:26 CST [GreetingsModule] Greetings
+19:49:26 CST message: [node3]
+Greetings, KubeKey!
+19:49:26 CST message: [node1]
+Greetings, KubeKey!
+19:49:27 CST message: [node2]
+Greetings, KubeKey!
+19:49:27 CST success: [node3]
+19:49:27 CST success: [node1]
+19:49:27 CST success: [node2]
+19:49:27 CST [UnArchiveArtifactModule] Check the KubeKey artifact md5 value
+19:49:27 CST success: [LocalHost]
+19:51:16 CST success: [LocalHost]
+19:51:16 CST [ChownWorkerModule] Chown ./kubekey dir
+19:51:16 CST success: [LocalHost]
+19:51:16 CST Pipeline[ArtifactImagesPushPipeline] execute successfully
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Step 2: Delete Calicolink:[id=19810827b247473cb78e5e05232b8379]
+
+. Delete the network resources on Kubernetes:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl delete -f /etc/kubernetes/network-plugin.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Verify that Calico is deleted:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl get pod -n kube-system
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+If no pod related to Calico is returned, Calico is deleted:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+NAME                         READY   STATUS    RESTARTS   AGE
+coredns-7448499f4d-974cv     1/1     Running   0          11h
+kube-multus-ds-amd64-9cclk   1/1     Running   0          11h
+kube-multus-ds-amd64-f5ksq   1/1     Running   0          11h
+kube-multus-ds-amd64-wxb87   1/1     Running   0          11h
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Clear Calico-related configuration:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+rm -f /etc/cni/net.d/10-calico.conflist /etc/cni/net.d/calico-kubeconfig
+rm -f /opt/cni/bin/calico /opt/cni/bin/calico-ipam
+rm -rf /etc/cni/net.d/00-multus.conf
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+If {ks_product} is installed in multi-node mode, run the preceding command on each node to clear Calico configuration.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Step 3: Install Kube-OVNlink:[id=59e03a99a2f543dba079cb4e8d93acf1]
+
+. Download the installation script of Kube-OVN:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+wget https://raw.githubusercontent.com/kubeovn/kube-ovn/release-1.10/dist/images/install.sh
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Edit the file **install.sh**:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+vim install.sh
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Modify **REGISTRY** and **VERSION** based on the following settings:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+REGISTRY="dockerhub.kubekey.local:5000/kubeovn"
+VERSION="v1.10.7"
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Run the following script to install Kube-OVN:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+bash install.sh
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+In step 4, run the following command to restart Multus:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl -n kube-system rollout restart ds kube-multus-ds-amd64
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Step 4: Modify the ks-installer imagelink:[id=efbed933615147e89e29eb6834802fe2]
+
+. Modify the ks-installer image:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl edit deploy ks-installer -n kubesphere-system
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Modify **spec:containers:image** based on the following settings:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+spec:
+      containers:
+      - image: dockerhub.kubekey.local:5000/kubespheredev/ksv-installer:{ks_product_ver}
+        imagePullPolicy: Always
+        name: ks-installer
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+The upgrade may require a long period of time. Wait until all processes are complete.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. After {ks_product} is upgraded, run the following command to query the upgrade logs:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+ksv logs
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+If the following command output appears, {ks_product} is upgraded:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+****
+Waiting for all tasks to be completed ...
+task openpitrix status is successful (1/5)
+task network status is successful (2/5)
+task multicluster status is successful (3/5)
+task virtualization status is successful (4/5)
+task monitoring status is successful (5/5)
+****
+
+Collecting installation results ...
+#####################################################
+###   Welcome to Kubesphere Virtualization!       ###
+#####################################################
+
+Console: http://172.31.50.23:30880
+Username: admin
+Password: P@88wOrd
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. In the command output, obtain **Console**, **Account**, and **Password** values to log in to the {ks_product} web console.
++
+--
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+Depending on your network environment, you may need to configure traffic forwarding rules and enable port 30880 in firewalls.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. On the **VMs** page, view the status of each VM.On the **VMs** page, view the status of each VM. In normal cases, each VM is in the **KsVmUpgradeProcess** state.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Step 5: Create subnet mappingslink:[id=d07ce8cc33b94038a7c17c3eba2ff817]
+
+After {ks_product} is upgraded, you must create subnet mappings to ensure network connections. If you use physical subnets for IP pools in v1.5.0, you must configure physical subnets in the new version. If you use virtual subnets for IP pools in v1.5.0, you must configure virtual subnets in the new version. You can perform the following steps as needed:
+
+* link:#b26b5ec50db544a1b6c448e2aef34bb5[Configure virtual subnets]
+* link:#30a95f36a3c24ed78fc04b6e8dcec444[Configure physical subnets]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Configure virtual subnetslink:[id=b26b5ec50db544a1b6c448e2aef34bb5]
+
+In this example, the virtual subnet **vxnet-w6vks5m0: 172.50.10.0/24** is used in {ks_product} v1.5.0. The subnet does not fall in the range of available VPCs. In this case, you must configure an IP range for VPCs. In this case, you must configure an IP range for VPCs.
+
+. Configure an IP range for VPCs on the node on which {ks_product} {ks_product_ver} is installed.
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl edit ksv ksv-config -n kubesphere-virtualization-system
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Modify **spec:configuration:cidrBlocks** based on the following settings, and save the file.
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+spec:
+  configuration:
+    accessMode: ReadWriteMany
+    cidrBlocks:
+    - 10.10.0.0/16
+    - 10.20.0.0/16
+    - 10.30.0.0/16
+    - 10.40.0.0/16
+    - 10.50.0.0/16
+    - 10.60.0.0/16
+    - 10.70.0.0/16
+    - 10.80.0.0/16
+    - 10.90.0.0/16
+    - 172.16.0.0/16
+    - 172.17.0.0/16
+    - 172.18.0.0/16
+    - 172.19.0.0/16
+    - 172.20.0.0/16
+    - 192.168.0.0/16
+    - 172.50.0.0/16
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Restart **ksv-apiserver** to apply the new configuration:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl rollout restart deploy ksv-apiserver -n kubesphere-virtualization-system
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. In the {ks_product} web console, go to the list of VPCs, and click **Create** in the upper-right corner.
+. In the dialog box that appears, configure parameters for the VPC.
++
+--
+* **IP Range**: Set the value to **172.50.0.0/16** that you configure in previous steps.
+* **Default Virtual Subnet**: The third part of the IP address range of virtual subnets must be the same as that in v1.5.0. In this example, use **172.50.10.0/24**.
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+For more information, see link:../../03-user-manual/03-network-management/03-vpcs/01-create-vpc/[Create a VPC].
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. Associate the IP pool with the virtual subnets in Kube-OVN:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+# Delete webhook configuration
+kubectl delete  validatingwebhookconfigurations network.kubesphere.io
+
+# Modify IP pool mappings (record the ID of the IP pool in v1.5.0 or press F12 on the VMs page to query)
+kubectl edit ippool.network.kubesphere.io -n kubesphere-system vxnet-w6vks5m0
+
+# Add annotations to associate the IP pool with new virtual subnets
+subnet.network.kubesphere.io: net-yqmrrfta
+
+# Restart ksv-controller-manager
+kubectl -n kubesphere-virtualization-system rollout restart deploy ksv-controller-manager
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Return to the {ks_product} web console and verify that the virtual subnets in v1.5.0 are mapped to those in Kube-OVN. In normal cases, the IP addresses of the VMs are the same as those in v1.5.0.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Configure physical subnetslink:[id=30a95f36a3c24ed78fc04b6e8dcec444]
+
+If you use physical subnets in {ks_product} v1.5.0, you can perform the following steps to create physical subnets after {ks_product} is upgraded:
+
+. In the {ks_product} web console, go to the list of physical subnets, and click **Create** in the upper-right corner.
+. In the dialog box that appears, configure parameters for the physical subnet.
++
+--
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+The IP range of physical subnets in the new version remains the same as that in v1.5.0.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. Associate the IP pool with the physical subnets in Kube-OVN:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+# Delete webhook configuration
+kubectl delete  validatingwebhookconfigurations network.kubesphere.io
+
+# Modify IP pool mappings (record the ID of the IP pool in v1.5.0 or press F12 on the VMs page to query)
+kubectl edit ippool.network.kubesphere.io -n kubesphere-system vxnet-3i9y4tq3
+
+# Add annotations to associate the IP pool with new virtual subnets
+subnet.network.kubesphere.io: net-ox3vg6fa
+
+# Restart ksv-controller-manager
+kubectl -n kubesphere-virtualization-system rollout restart deploy ksv-controller-manager
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Return to the {ks_product} web console and verify that the physical subnets in v1.5.0 are mapped to those in Kube-OVN. In normal cases, the IP addresses of the VMs are the same as those in v1.5.0.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Step 6: Modify the user kindlink:[id=82449014936e40ed80c1d72ec4c4bb13]
+
+. Generate the user configuration for v1.5.0:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl get user -o yaml > new_user.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Replace the script and delete redundant fields:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+#!/bin/bash
+sed -i "s/User/KsvUser/g"  new_user.yaml
+sed -i "/creationTimestamp/d"  new_user.yaml
+sed -i "/finalizers:/d"  new_user.yaml
+sed -i "/finalizers.kubesphere.io/d"  new_user.yaml
+sed -i "/generation:/d"  new_user.yaml
+sed -i "/resourceVersion:/d"  new_user.yaml
+sed -i "/uid:/d"  new_user.yaml
+sed -i "/lastTransitionTime:/d"  new_user.yaml
+sed -i "/lastLoginTime:/d"  new_user.yaml
+sed -i "/state:/d"  new_user.yaml
+sed -i "/status:/d"  new_user.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Run and apply the script:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+# Run the script
+sh user.sh
+
+# Apply the script
+kubectl apply -f new_user.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Step 7: Migrate the activation codelink:[id=d4a2c69fe57e4a4689845598a30b1403]
+
+Assume that the preceding steps have been performed. If you have activated {ks_product} v1.5.0 and the license has not expired, perform the following steps to query the original activation code, and use the activation code returned to activate {ks_product} {ks_product_ver}:
+
+. Query the original activation code:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl -n kubesphere-system get secrets ks-license -ojsonpath='{.data.license}'
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Replicate the activation code returned to the {ks_product} web console and activate {ks_product} {ks_product_ver}. For information about how to activate the license, see link:../../03-user-manual/01-platform-overview/04-activate-license/[Activate the license].

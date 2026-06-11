@@ -1,0 +1,41 @@
+---
+title: "审计日志中记录真实 IP"
+weight: 04
+---
+
+. 编辑服务中的 `spec.externalTrafficPolicy` 为 Local。
++
+--
+[,bash]
+----
+kubectl edit svc cluster-ingress-nginx-controller
+----
+--
+
+. 如果服务使用了自签证书，使用 dns 访问 ks-console 时，需要修改本地 DNS 解析。
+
+. 获取网关 pod 的节点。
++
+--
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# kubectl get pods -o wide |grep cluster-ingress-nginx-controller
+cluster-ingress-nginx-controller-55dcf5d99-xcp7q   1/1     Running     0          27h    10.233.81.151    qyicsl-isdp-master-001       <none>           <none>
+----
+--
+
+. 修改访问机器的本地 hosts 文件，修改解析地址为 qyicsl-isdp-master-001 的 IP。
++
+--
+[,bash]
+----
+vim /etc/hosts
+----
+
+添加：
+
+[,yaml]
+----
+172.31.50.140 ks-console.kubesphere-system.svc
+----
+--

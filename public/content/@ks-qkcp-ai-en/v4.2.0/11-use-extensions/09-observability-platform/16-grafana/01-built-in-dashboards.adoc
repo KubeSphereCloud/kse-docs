@@ -1,0 +1,64 @@
+---
+title: "View Built-in Dashboards"
+keywords: "Kubernetes, {ks_product}, Grafana, Monitoring, Built-in Dashboard, Observability"
+description: "Describes how to view the built-in Dashboards provided by the extension."
+weight:  01
+---
+
+The Grafana for WizTelemetry extension includes multiple built-in Grafana Dashboard templates. These allow you to directly query monitoring data for Kubernetes and KubeSphere without needing to configure Grafana Dashboards yourself.
+
+== Steps
+
+. After logging into the Grafana console, click **Dashboards** in the left navigation pane to view all built-in Dashboard templates. This includes directories such as kube-prometheus-stack, whizard-loki, whizard-monitoring, etc.
++
+--
+// image:/images/ks-qkcp/zh/v4.1.2/grafana/dashboard-list.png[dashboard-list]
+// 4.2.0 adds an exporters directory
+
+[%header,cols="1a,3a"]
+|===
+|Directory |Template Description
+
+// |aicp
+// |For QingCloud AI Computing Operations Management. Monitoring panels need to be viewed within the "AI Computing Management" platform.
+
+// |exporters
+// |Visualizes metrics from Blackbox Exporter. Used for alloy.
+
+|kube-prometheus-stack
+|Visualizes Kubernetes monitoring data.
+
+|whizard-loki
+|Visualizes KubeSphere logs, audits, events, and notification history stored in Loki.
+
+|whizard-monitoring
+|Multi-cluster monitoring adapted for Whizard and KubeSphere.
+|===
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+* The Dashboards in the **kube-prometheus-stack** and **whizard-monitoring** directories will only display monitoring data after the **WizTelemetry Monitoring** extension is installed.
+* To have the Dashboards in **whizard-loki** display monitoring data, please refer to link:../../17-loki/01-display-loki-data[
+Grafana Loki for WizTelemetry].
+|===
+--
+
+. Click on a Dashboard template within a directory to view the monitoring data for the corresponding metrics.
++
+image:/images/ks-qkcp/zh/v4.1.2/grafana/node-dashboard.png[node-dashboard]
+
+. Click on **data source**, **cluster**, or **node** at the top to select and view data related to a specific data source, cluster, or node.
+. Click the image:/images/ks-qkcp/zh/icons/time-light.png[time-light,18,18] icon in the top right corner to set the time range for data display, supporting custom time periods.
+. Click the image:/images/ks-qkcp/zh/icons/refresh-light.png[refresh-light,18,18] icon in the top right corner to refresh the data on the dashboard. Click image:/images/ks-qkcp/zh/icons/chevron-down.svg[chevron-down,18,18] to set the automatic refresh interval for the data.
+. Click the image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] icon in the top right corner of each Panel to perform independent operations on that specific Panel, such as viewing, editing, sharing, inspecting, or deleting.
++
+[.admon.note,cols="a"]
+|===
+|Info
+
+|For more information about Dashboards, please refer to the link:https://grafana.com/docs/grafana/latest/dashboards/[Grafana official documentation].
+
+|===

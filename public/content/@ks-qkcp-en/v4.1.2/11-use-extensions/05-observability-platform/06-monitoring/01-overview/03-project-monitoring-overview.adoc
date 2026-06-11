@@ -1,0 +1,63 @@
+---
+title: "Project Monitoring Overview"
+description: "This section introduces how to view monitoring information on the project overview page."
+weight: 03
+---
+
+:ks_permission: **Monitoring Viewing**
+:ks_navigation: **Overview**
+
+This section introduces how to view monitoring information on the project overview page.
+
+ifeval::["{file_output_type}" == "html"]
+For other information on the project overview page, see link:../../../../../09-project-management/02-overview/01-view-project-overall-information/[Project Overview].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For other information on the project overview page, see the “Overview” chapter of the {ks_product-en} Project Management Guide.
+endif::[]
+
+== Prerequisites
+
+* {empty}
+include::../../../../../_custom-en/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+* **WhizardTelemetry Monitoring** should have been installed and enabled.
+
+== Steps
+
+include::../../../../../_custom-en/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
++
+--
+The **Overview** page provides the following monitoring information:
+
+[%header,cols="1a,4a"]
+|===
+|Area |Description
+
+|Resource Usage
+|The total and real-time usage of CPU, memory, and disk for the current project.
+
+|Pods
+|The number of various types of pods in the current project.
+
+Pod status includes:
+
+include::../../../../../_custom-en/clusterManagement/pods/pods-para-podStatus_overview.adoc[]
+
+Pod QoS (Quality of Service) types include:
+
+include::../../../../../_custom-en/clusterManagement/pods/pods-para-qosTypes.adoc[]
+
+|Resource Usage Ranking
+|The top 5 workloads with the highest resource usage in the current project. Click the dropdown list to select sorting by CPU, memory, outbound traffic, or inbound traffic.
+
+* Click image:/images/ks-qkcp/zh/icons/sort-ascending.svg[sort-ascending,18,18]/image:/images/ks-qkcp/zh/icons/sort-descending.svg[sort-descending,18,18] above the list to sort in ascending/descending order.
+
+* Click **View More** below to view the resource usage details of workloads.
+|===
+--

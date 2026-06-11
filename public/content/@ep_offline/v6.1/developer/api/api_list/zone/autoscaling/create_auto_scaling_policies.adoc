@@ -1,0 +1,120 @@
+---
+title: 创建自动伸缩策略（CreateAutoScalingPolicies）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| autoscaling_policy_name
+| String
+| true
+| 自动伸缩策略名称
+
+| notification_lists
+| Array
+| true
+| 通知列表
+
+| notify_event
+| Integer
+| true
+| 通知事件
+
+| owner
+| String
+| true
+| 所有者
+
+| related_resource
+| String
+| true
+| 自动伸缩相关资源
+
+| resource
+| String
+| true
+| 自动伸缩相关资源
+
+| resource_type
+| String
+| true
+| 自动伸缩资源类型
+
+| scale_type
+| String
+| true
+| 自动伸缩策略类型
+
+| strategy
+| String
+| true
+| 自动伸缩类型
+
+| zone
+| String
+| true
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 操作名称
+
+| autoscaling_policy_id
+| Integer
+| false
+| 自动伸缩策略ID
+
+| ret_code
+| Integer
+| false
+| 操作结果
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateAutoScalingPolicy",
+  "autoscaling_policy_name": "123",
+  "notification_lists": [
+    "nl-ggjkqqce"
+  ],
+  "notify_event": 3,
+  "owner": "usr-DnmqVpLq",
+  "related_resource": "",
+  "resource": "eip-in2wr771",
+  "resource_type": "eip",
+  "scale_type": "eip_bandwidth",
+  "strategy": "dynamic",
+  "zone": "qa"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateAutoScalingPolicyResponse",
+  "autoscaling_policy_id": "asp-5nezjmtm",
+  "ret_code": 0
+}
+----

@@ -1,0 +1,182 @@
+---
+title: 安装 qke_apiserver 服务
+weight: 20
+---
+
+qke_apiserver 服务可以在安装{product_name}时一起部署，也可以在{product_name}安装完成后再部署。
+
+== 注意事项
+
+qke_apiserver 服务只需要部署在{product_name} Global Zone 的 Webservice 节点。
+
+== 新环境部署
+
+新环境指在安装{product_name}过程中，将 `variables.<zone_id>.yaml` 文件中的 **deploy_qkeapi** 参数设置为 `1` 即可。
+
+== 旧环境部署
+
+旧环境指{product_name}已安装完成，未设置 **deploy_qkeapi** 参数，此时需要执行以下步骤追加部署 qke_apiserver 服务。
+
+. 登录{product_name}的 FirstBox 节点。
+. 执行以下命令，从模版创建配置文件，文件名为 `vm_variables.<zone_id>.yaml`。
++
+include::../../../../../_components/note.adoc[]
+其中，`<zone_id>` 为 Global Zone 的 ID，执行命令 ``cat /pitrix/conf/variables/variables.yaml`` 查看配置文件，找到 is_global_zone 为 1 的 Zone，对应的 ID 就是 Global Zone 的 ID。
+include::../../../../../_components/table_footer.adoc[]
++
+[source]
+----
+cp -f /pitrix/config/templates/vm_variables.template.yaml /pitrix/config/vm_variables.<zone_id>.yaml。
+----
+. 将 **deploy_qkeapi** 参数设置为 `1`。
+. 执行以下命令，开始部署组件管理节点。
++
+[source]
+----
+/pitrix/cli/deploy-qingcloud-component.py -v /pitrix/config/vm_variables.<zone_id>.yaml。
+----
+. 执行以下命令，查看部署状态。
++
+[source]
+----
+/pitrix/cli/get-deploy-qingcloud-component-status.py。
+----
++
+
+include::../../../../../_components/note.adoc[]
+此步骤耗时较长，耐心等待完成。
+
+若状态异常，请查看如下日志，检查报错原因并修复。若仍不能解决，请联系技术支持。
+
+* 查看部署管理节点的简略日志：``/pitrix/cli/get-deploy-qingcloud-component-log.py``。
+* 详细日志请看目录下对应 job 的日志：/pitrix/log/deploy。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 检查服务状态
+
+. 登录{product_name}的 Firstbox 节点。
+. 执行以下命令，检查 qke_apiserver 服务状态。其中，`<global_zone_id>` 为 Global Zone 的 ID。
++
+[source]
+----
+fb exec_nodes <global_zone_id>-webservice 'supervisorctl status qke_apiserver'
+----
++
+示例：
++
+[source]
+----
+fb exec_nodes uat1a-webservice 'supervisorctl status qke_apiserver'
+----
++
+当 qke_apiserver 服务状态均为 `running`，才可以继续执行后续步骤。
++
+image::/images/ep_offline/qke_install/install_service_qke_apiserver.png[,80%]
+
+== 配置支持的磁盘类型
+
+默认用的是 volume_type 6 类型，即使用混插的 NeonSAN 存储。若环境中没有该类型的存储，请执行以下步骤进行修改。
+
+. 分别登录{product_name}的两个 Webservice 节点。
+. 执行以下命令，修改 `qke_apiserver.yaml` 文件。
++
+[source]
+----
+vim /pitrix/conf/qke_apiserver.yaml
+----
++
+修改 volume_type 参数：
++
+[source,yaml]
+----
+csi_qingcloud:
+  volume_type: "6"
+----
++
+* 如果使用纯 SSD 的 NeonSAN 存储，则配置 volume_type 5。
+* 如果使用混插的 NeonSAN 存储，则配置 volume_type 6。
+* 更多磁盘类型请参见link:../../faq/02[支持的主机类型和硬盘类型]。
+* 若 volume_type 参数已被注释，请删除参数前的注释符号。
+* 若没有对应参数，则在文件末尾按照以上格式添加参数。
+
++
+
+include::../../../../../_components/attention.adoc[]
+本地存储只能挂载到同类型的主机上。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 修改完成后，执行以下命令，重启 qke_apiserver 服务。
++
+[source,shell]
+----
+supervisorctl restart qke_apiserver
+----
+
+== 附录
+
+=== 完整 qke_apiserver.yaml 示例
+
+[source,yaml]
+----
+database:
+  migrate: false
+  name: "qke_plus"
+  port: 5432
+
+server:
+  addr: "0.0.0.0:9102"
+  workers: 3
+
+log:
+  level: "debug"
+  path: "/pitrix/log"
+
+appcenter:
+  url: "tcp://{{ zone_id }}-proxy:8565"
+  ws_url: "tcp://{{ zone_id }}-proxy:9365"
+  ws_enable: true
+  console_id: "admin"
+  role: "partner"
+  privilege: 10
+  channel: "session"
+
+#开启鉴权之后需要写
+iaasapi:
+  ak: "{{ access_key_id }}"
+  sk: "{{ access_secret_key }}"
+  endpoint: "{{ site_protocol }}://api.{{ domain }}/iaas"
+
+# 用于多副本选主。
+zk:
+  url: "{{ zone_id }}-zoocassa:2181"
+  root: "/qke_plus"
+  master: "/master"
+  enable: true
+
+# 托管版参数，表示是否需要根据 worker 节点的数量自动调整 master 节点的规格，默认为 false。
+auto_resize:
+  enable: false
+
+# 是否开启 U10000 存储插件支持，具体的参数(confd_addrs,qfs_gateway,global_domain)咨询 U10000
+csi_hydrofs:
+  enable: true
+  confd_addrs: "172.22.55.2:9296,172.22.55.4:9296,172.22.55.3:9296"
+  qfs_gateway: "172.22.55.2:8180,172.22.55.3:8180,172.22.55.4:8180"
+  hydrofs_csi_image: "docker.io/qingcloud/hydrofs-csi-driver:1.0"
+  hydro_fuse_image: "docker.io/qingcloud/hydro_fuse:1.1"
+
+# 控制 PVC 磁盘类型
+csi_qingcloud:
+  volume_type: "6"
+----
+
+=== qke_apiserver 日志
+
+qke_apiserver 的运行日志在 FirstBox 的 /pitrix/log/ 目录下，且日志按天做了分割。
+
+包括两类日志文件：
+
+* qke_apiserver.log：debug 和 info 日志。
+* qke_apiserver.log.wf：error 日志。

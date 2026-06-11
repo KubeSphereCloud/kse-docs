@@ -1,0 +1,13 @@
+---
+title: "文件存储 vNAS"
+weight: 5
+---
+
+文件存储 vNAS（Virtual Network Attached Storage）是云平台为用户提供的面向云服务器、HPC 集群、容器服务等计算节点的文件存储服务，基于标准的 NFS 和 Samba（CIFS）网络协议实现的数据传输。它是一种可共享访问、弹性扩展、高可靠以及高性能的分布式文件系统。
+
+[discrete]
+=== 应用架构
+
+vNAS 服务通过创建 NAS 服务器，使用户可以在多个云服务器客户端以及不同的操作系统间进行数据共享。同时，vNAS 提供权限组和账号配置功能，便于用户对云服务器客户端进行访问控制和管理配置。
+
+image::/images/ep_offline/ep_twp/vnas_01.png[,70%]

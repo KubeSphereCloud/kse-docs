@@ -1,0 +1,22 @@
+---
+title: "并行升级"
+weight: 22
+---
+
+并行升级实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_13.png[]
+
+功能流程说明：
+
+. 关闭集群节点。
+. 以新版本镜像启动节点。
+. 启动所有节点的 confd agent，监控 metadata service 中本集群信息的变化并按照 /etc/confd 下的模板（toml、tmpl）定义刷新配置。如果 toml 文件里定义 reload_cmd 且配置确实发生变更则相应地执行该命令。
+. 执行 start 和 upgrade 中定义的 cmd，按照 upgrade 中 post_start_service 的定义顺序执行。
++
+* 如果 post_start_service 为 true，则表示 upgrade 在 start 后执行。
+* 不同 role 节点相同命令的执行顺序，按照 order 的定义从小到大依次执行，默认为 0（最早执行），相同 order 的节点并行执行。
+. 如果第 4 步中的命令执行后的返回值非 0，则此次升级任务失败，需要手动关闭集群并执行第 6 步降级操作。
+. 集群节点以旧版本镜像启动。
+. 启动所有节点的 confd agent，监控 metadata service 中本集群信息的变化并按照 /etc/confd 下的模板（toml、tmpl）定义刷新配置。如果 toml 文件里定义 reload_cmd 且配置确实发生变更则相应地执行该命令。
+. 不同的角色节点按 order 升序执行 start 中定义的 cmd。

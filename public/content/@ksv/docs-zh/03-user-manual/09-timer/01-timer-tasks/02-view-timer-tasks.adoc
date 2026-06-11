@@ -1,0 +1,73 @@
+---
+title: "查看定时任务列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 定时任务, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看定时任务列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 75c893d7b8224b4bb38b7a0ea7b30a84
+:ks_xref_id: f31d532e18984c3abda609a0ddbb3c62
+:ks_comp: ../../../../components/
+:ks_title: 查看定时任务列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看定时任务列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 定时任务, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看定时任务列表。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=d1b2bb539dfe4fb093ddf0aa189f7b68]
+
+include::../../../../_custom/timer/timer-task-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=a45419e5edd44b03af21cf7c8ec00262]
+
+include::../../../../_custom/timer/timer-task-steps.adoc[]
++
+--
+定时任务列表展示当前项目中的所有定时任务，并提供以下信息：
+
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|用户自定义的定时任务名称。
+
+|ID
+|定时任务在系统中的通用唯一标识符。
+
+|状态
+|定时任务当前的状态，包括**已启用**和**停用**两种状态类型。
+
+|执行操作
+|执行定时任务时需要完成的操作。目前包含以下几种操作类型：**开启虚拟机**、**关闭虚拟机**、**重启虚拟机**及**创建备份**。
+
+|策略
+|定时任务的执行策略。目前包含以下两种策略类型：**重复执行**和**仅执行一次**。
+
+|成功/失败次数
+|统计定时任务执行成功和失败的次数。
+
+|所属项目
+|定时任务所在的项目名称。
+|===
+--
+
+. （可选）点击定时任务列表上方的搜索框并设置搜索条件，可按名称或 ID 搜索定时任务。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的定时任务。
+
+. （可选）在定时任务列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。
+
+
+

@@ -1,0 +1,39 @@
+---
+title: "View Rule Group List"
+keywords: "Kubernetes, {ks_product-en}, cluster management, monitoring & alerting, rule groups, view rule group list"
+description: "This section introduces how to view the alert rule group list."
+weight: 02
+---
+
+:ks_permission: **Rule Group Viewing**
+:ks_navigation: **Monitoring & Alerting > Rule Groups**
+
+include::../../../../../_custom-en/clusterManagement/ruleGroups/ruleGroups-desc-viewAnAlertingPolicyList.adoc[]
+
+== Prerequisites
+
+* The **WhizardTelemetry Alerting** extension must be installed and enabled on the {ks_product-en} platform.
+
+* {empty}
+include::../../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject.adoc[]
+
+== Steps
+
+. Log in to the {ks_product-en} web console with a user who has the pass:a,q[{ks_permission}] permission and enter your cluster or project.
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom-en/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
++
+====
+include::../../../../../_custom-en/clusterManagement/ruleGroups/ruleGroups-para-alertingPolicyList.adoc[]
+
+include::../../../../../_custom-en/clusterManagement/ruleGroups/ruleGroups-oper-searchForAlertingPolicies.adoc[]
+
+include::../../../../../../_ks_components-en/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components-en/oper-customizeColumns.adoc[]
+====

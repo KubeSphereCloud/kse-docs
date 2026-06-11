@@ -1,0 +1,81 @@
+---
+title: "对接 NeonSAN 告警"
+weight: 40
+---
+
+. 登录企业云平台的 FirstBox。
+. 执行以下命令，修改 /pitrix/conf/variables/boss2/boss2.yaml.ZONE_ID。
++
+[source]
+----
+vim /pitrix/conf/variables/boss2/boss2.yaml.ZONE_ID
+----
+. 在 neonsan 中添加 NeonSAN 相关配置。
++
+**示例**：如下示例为多 zone，单 zone 场景只保留一个 zone 即可。
++
+[source,yaml]
+----
+neonsan:
+  ZONE1:
+    zk_hosts: '172.30.80.3:2181,172.30.80.4:2181,172.30.80.5:2181'
+    cluster_name: 'neonsan'
+    monitor_url: 'http://172.30.80.3:9090/'
+    nic_pattern: 'bond[0-9]|eth[0-9]|en[*]'
+  ZONE2:
+    zk_hosts: 'NEONSAN_ZK_HOSTS'
+    cluster_name: 'NEONSAN_CLUSTER_NAME'
+    monitor_url: 'NEONSAN_MONITOR_URL'
+    nic_pattern: 'bond[0-9]|eth[0-9]'
+----
++
+**参数说明**：
+
+ ** zk_hosts：NeonSAN ZooKeeper hosts。
+ ** cluster_name：配置 NeonSAN 集群名称。
+ ** monitor_url：NeonSAN 监控 API 的 URL。IP 为 monitor 服务的 IP 地址，端口默认为 9090。
++
+在 NeonSAN 的 FirstBox 上，执行以下命令获取 monitor 服务的 IP 地址。
+
+  ... 查看 monitor 服务所在节点。
++
+[source]
+----
+Installer role-node-list monitor
+----
+  ... 查看节点的 IP 地址。
++
+[source]
+----
+Installer node-list
+----
++
+image::/images/ep_offline/installation/add_stor_neonsan_alarm_01.png[,60%]
+
+ ** nic_pattern：获取监控时使用的网卡名称规则，若不配置，将默认获取 bond0-bond9 或 eth0-eth9 的监控数据。
+. 在 modules 中，把如下两行放到 enable 下，或在 disable 下注释掉，以在 BOSS 界面上展示出 NeonSAN 菜单。
++
+示例：
++
+[source,yaml]
+----
+modules:
+  enable:
+    ...
+    - boss2.storage_pools   # 存储池
+    - boss2.storage_nodes   # 存储节点
+...
+  disable:
+#    - boss2.storage_pools   # 存储池
+#    - boss2.storage_nodes   # 存储节点
+----
+. 执行以下命令，刷新配置到 boss 节点。
++
+[source]
+----
+/pitrix/build/build_pkgs.py -p pitrix-ks-boss2-conf
+/pitrix/upgrade/update.sh boss pitrix-ks-boss2-conf
+----
+. 配置完成后，即可登录 BOSS，选择**基础设施** > *存储* > **存储池管理**/**存储节点**，查看存储相关信息。
++
+image::/images/ep_offline/installation/add_stor_neonsan_alarm_02.png[]

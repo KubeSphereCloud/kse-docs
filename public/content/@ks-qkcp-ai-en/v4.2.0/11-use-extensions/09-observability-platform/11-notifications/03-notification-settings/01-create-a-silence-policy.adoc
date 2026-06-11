@@ -1,0 +1,63 @@
+---
+title: "Create a Silence Policy"
+keywords: "Kubernetes, {ks_product}, Platform Settings, Notification Management, Notification Settings, Silence Policy, Create a Silence Policy"
+description: "This section describes how to create a silence policy."
+weight: 01
+---
+
+:ks_navigation: **Notification > Notification Settings**
+// :ks_permission: **Platform Settings Management**
+
+This section describes how to create a silence policy.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, see link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Notification** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. On the **Basic Information** tab, configure the basic information for the silence policy, then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the silence policy. The name can only contain lowercase letters, numbers, and hyphens (-), must start with a lowercase letter and end with a lowercase letter or number, with a maximum length of 63 characters.
+
+include::../../../../../_custom/platformManagement/platformSettings/platformSettings/platformSettings-para-aliasDescription.adoc[]
+|===
+--
+
+. On the **Silence Conditions** tab, select **Silence All Notifications** or **Custom Silence Conditions** as needed and configure the relevant parameters, then click **Next**.
++
+====
+include::../../../../../_custom/platformManagement/platformSettings/platformSettings/platformSettings-para-silenceConditions_new.adoc[]
+====
+
+. On the **Silence Time** tab, select the silence time type and configure the relevant parameters, then click **Create**.
++
+--
+include::../../../../../_custom/platformManagement/platformSettings/platformSettings/platformSettings-para-silenceTime.adoc[]
+
+After the silence policy is created, it will be displayed in the silence policy list.
+--

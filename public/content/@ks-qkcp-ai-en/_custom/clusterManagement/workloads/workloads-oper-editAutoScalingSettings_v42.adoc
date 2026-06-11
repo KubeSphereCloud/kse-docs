@@ -1,0 +1,25 @@
+// :ks_include_id: d77f09013e3f495b8bea4d8b7300d5e0
+. On the workload details page, click **Horizontal Pod Autoscaling**.
+
+. On the **Horizontal Pod Autoscaling** page, click **Create**.
+
+. In the **Create Horizontal Pod Autoscaling** dialog box, set the autoscaling parameters for the workload, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Target CPU Utilization
+|The target CPU utilization for all pod replicas in the workload, in percentage. When the actual CPU utilization is greater/less than the target value, the system automatically decreases/increases the number of pod replicas.
+
+|Target Memory Utilization
+|The target memory utilization for all pod replicas in the workload, in MiB. When the actual CPU utilization is greater/less than the target value, the system automatically decreases/increases the number of pod replicas.
+
+|Min Replicas
+|The minimum allowed number of pod replicas. The default value is **1**.
+
+|Max Replicas
+|The maximum allowed number of pod replicas. The default value is **1**.
+|===
+--

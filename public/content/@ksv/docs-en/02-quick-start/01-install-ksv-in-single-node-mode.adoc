@@ -1,0 +1,303 @@
+---
+title: "Install {ks_product} in single-node mode"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, installation, single-node"
+description: "Describes how to install {ks_product_abbr_full} in single-node mode."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: bebf7c55638148aca930eb01293a0a05
+:ks_xref_id: 1522e7a00e894c94a03c50108aed89b0
+:ks_comp: ../../components/
+:ks_title: Install {ks_product} in single-node mode
+:ks_description: Describes how to install {ks_product_abbr_full} in single-node mode.
+:ks_keywords: {ks_product_full}, {ks_product}, installation, single-node
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to install {ks_product_abbr_full} in single-node mode.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Precautionslink:[id=9ad5695606a14c2d9cb6cd0ebc389ae6]
+
+include::../../_custom-en/installation/precautions.adoc[]
+
+* The server node on which {ks_product} is installed must run on Linux, and the kernel version of Linux must be 4.0 or later. We recommend that you use one of the following OSs: Ubuntu 18.04, Ubuntu 20.04, CentOS 7.9, Unity Operating System (UOS), Kylin V10, and EulerOS. Some unknown issues may exist if you use an OS other than the preceding ones. More OSs will be supported in later versions.
++
+--
+Query the OS version:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cat /etc/issue
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+* Make sure your server node meets the following conditions:
++
+--
+[cols="1a,1a,1a"]
+|===
+|Hardware |Minimum |Recommended
+
+|CPU
+|4 cores
+|8 cores
+
+|Memory
+|8 GB
+|16 GB
+
+|System disk
+|100 GB
+|200 GB
+|===
+
+Query the number of CPU cores of your server:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cat /proc/cpuinfo | grep "processor" | sort | uniq | wc -l
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Query the memory size:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cat /proc/meminfo | grep MemTotal
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Query the available disk size:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+df -hl
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+* The server node must have at least one disk that is unformatted and unpartitioned, or one unformatted partition. The minimum size of the disk or partition is 100 GB and the recommended size is 200 GB. The minimum size of the disk or partition is 100 GB and the recommended size is 200 GB.
++
+--
+Query the disk partition of the server node:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+lsblk -f
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+For example, the following command output indicates that **vdb** meets the requirements:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+NAME                  FSTYPE      LABEL UUID                                   MOUNTPOINT
+vda
+└─vda1                LVM2_member       >eSO50t-GkUV-YKTH-WsGq-hNJY-eKNf-3i07IB
+ ├─ubuntu--vg-root    ext4              c2366f76-6e21-4f10-a8f3-6776212e2fe4   /
+ └─ubuntu--vg-swap_1  swap              9492a3dc-ad75-47cd-9596-678e8cf17ff9   [SWAP]
+vdb
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+* The server node must support virtualization.如果服务器节点不支持虚拟化，安装过程将报错，{ks_product_right}也无法成功安装。
++
+--
+Query whether the server node supports virtualization. If the command output is empty, the server node does not support virtualization.
+
+* x86 architecture
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+grep -E '(svm|vmx)' /proc/cpuinfo
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+* ARM64 architecture
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+ls /dev/kvm
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=f250205ff6ed4b74bc89f0e1f06e74e2]
+
+. Log in to the server node as user **root**.
+. Query the architecture of the server node:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+uname -m
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Download the installation package based on the architecture of the server node:
++
+--
+* x86 architecture
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+curl -OL https://virtualization.kubesphere.cloud/v1.6.1/kubesphere-virtualization-x86_64-v1.6.1.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+* ARM64 architecture
+
+// Bash
+
+// URL 待替换
+
+include::../../../_ks_components/code/bash.adoc[]
+
+curl -OL https://virtualization.kubesphere.cloud/v1.6.1/kubesphere-virtualization-arm64-v1.6.1.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Decompress the installation package:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+tar -zxvf kubesphere-virtualization-<package name>.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+In the preceding command, replace <package name> with the name of the installation package you download.
+
+* x86 architecture: Replace <package name> with **x86_64-{ks_product_ver}**.
+* ARM64 architecture: Replace <package name> with **arm64-{ks_product_ver}**.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. Go to the directory generated after the installation package is decompressed:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cd kubesphere-virtualization-<file path>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+In the preceding command, replace <file path> with the name of the directory generated.
+
+* x86 architecture: Replace <file path> with **x86_64-**.
+* ARM64 architecture: Replace <file path> with **arm64**.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. Install {ks_product}:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+./install.sh -a --ratio <overcommit ratio>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+* **--ratio** is an optional parameter that specifies the overcommit ratio of your {ks_product} cluster. The overcommit ratio specifies the number of vCPUs supported by each physical CPU. You can configure <overcommit ratio> based on business requirements. The value must be an integer ranging from 1 to 10. If you leave this parameter empty, the default value is **2**.
+* The overcommit ratio determines the maximum number of VMs that can be created on {ks_product}. Use the following formula to calculate: Maximum number of VMs = Number of CPU cores x Overcommit ratio.
+* You can configure the overcommit ratio only when you install {ks_product}. You cannot modify the overcommit ratio when you upgrade {ks_product}.
+* The installation may require a long period of time. Wait until all processes are complete.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+If the following command output appears, {ks_product} is installed:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+#####################################################
+###    Welcome to KubeSphere Virtualization!      ###
+#####################################################
+
+Console: http://172.16.0.59:30880
+Username: admin
+Password: P@88w0rd
+
+NOTE:
+Please change the default password of the admin user
+after login.
+
+#####################################################
+https://kubesphere.cloud/ksv/     2022-12-01 14:03:45
+#####################################################
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Obtain the URL of the {ks_product} web console, and the username and password of the system administrator from the **Console**, **Username**, and **Password** parameters.
++
+--
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+By default, {ks_product} provides the following users:
+
+系统管理员：用户名 **admin**，密码 **P@88w0rd**
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. (Optional) After {ks_product} is installed, run the following command to query the installation logs:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+ksv logs
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--

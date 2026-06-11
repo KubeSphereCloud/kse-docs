@@ -1,0 +1,118 @@
+---
+title: "View License Information"
+keywords: "Kubernetes, {ks_product}, Platform Settings, License, View License Information"
+description: "Describes how to view license information."
+weight: 01
+---
+
+:ks_navigation: **License**
+:ks_permission: **Platform Settings Management**
+
+This section describes how to view license information.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
+. In the upper-right corner of the page, click **Component Dock > Platform Settings**.
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+. View the licenses for KubeSphere and extensions.
++
+====
+* KubeSphere License
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Authorized Organization
+|The organization authorized to use KubeSphere.
+
+|Authorization Status
+|
+* **Unauthorized**: No KubeSphere license is obtained.
+* **Authorization Expired**: The KubeSphere license has expired.
+* **Insufficient Authorization Quantity**: The current cluster scale exceeds the authorized cluster scale for using KubeSphere.
+* **Authorized**: KubeSphere authorization is normal.
+
+// |Maintenance Status
+// |
+// * **No Maintenance**: No maintenance service is available.
+// * **Expired**: The maintenance service has expired.
+// * **Under Maintenance**: Within the maintenance service period.
+
+|Cluster ID
+|The current cluster ID, used to determine if the cluster is authorized.
+
+|Authorization Type
+|There are two types of authorization: Subscription Authorization and Perpetual Authorization.
+
+**Subscription Authorization**: Community Edition-Subscription, Standard Edition-POC, Advanced Edition-POC, Enterprise Edition-POC, Standard Edition-Subscription, Advanced Edition-Subscription, Enterprise Edition-Subscription.
+
+**Perpetual Authorization**: Standard Edition-Perpetual, Advanced Edition-Perpetual, Enterprise Edition-Perpetual.
+
+|Authorized Scale
+|The authorized cluster scale for using KubeSphere, measured in **vCPU**.
+
+|Subscription Start Time
+|The effective time of the product license. Displayed only when the Authorization Type is Subscription Authorization.
+
+|Subscription End Time
+|The expiration time of the product license. Displayed only when the Authorization Type is Subscription Authorization.
+
+|Maintenance Expiration Time
+|The expiration time of the maintenance service. Displayed only when the Authorization Type is Perpetual Authorization.
+|===
+
+* Extension License
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Extension Name
+|The name of the extension.
+
+|Authorization Status
+|
+* **Authorization Expired**: The license has expired.
+* **Insufficient Authorization Quantity**: The current resource requirement exceeds the authorized resource limit.
+* **Authorized**: Authorization is normal.
+
+|Authorization Type
+|There are two types of authorization: Subscription Authorization and Perpetual Authorization.
+
+**Subscription Authorization**: Community Edition-Subscription, Standard Edition-POC, Advanced Edition-POC, Enterprise Edition-POC, Standard Edition-Subscription, Advanced Edition-Subscription, Enterprise Edition-Subscription.
+
+**Perpetual Authorization**: Standard Edition-Perpetual, Advanced Edition-Perpetual, Enterprise Edition-Perpetual.
+
+|Subscription Start Time
+|The effective time of the product license. Displayed only when the Authorization Type is Subscription Authorization.
+
+|Subscription End Time
+|The expiration time of the product license. Displayed only when the Authorization Type is Subscription Authorization.
+
+|Maintenance Expiration Time
+|The expiration time of the maintenance service. Displayed only when the Authorization Type is Perpetual Authorization.
+|===
+
+* Click the search box above the list and set search criteria to search for extension license information by extension name.
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+--
+====

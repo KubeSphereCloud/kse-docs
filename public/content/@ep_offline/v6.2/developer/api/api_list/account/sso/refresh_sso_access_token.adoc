@@ -1,0 +1,88 @@
+---
+title: 刷新单点登录访问凭证（RefreshSsoAccessToken）
+weight: 11
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_token
+| String
+| true
+| 
+
+| refresh_token
+| String
+| true
+| 
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_token
+| String
+| false
+| 
+
+| expires_in
+| String
+| false
+| 过期时间
+
+| lang
+| String
+| false
+| 用户语言
+
+| refresh_token
+| String
+| false
+| 
+
+| token_type
+| String
+| false
+| token类型
+
+| user_id
+| String
+| false
+| 用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "access_token": "JZOHGWGENRXLKPMEMZYR",
+  "refresh_token": "WSOHGWGENRXLKPMEMZYR"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "access_token": "JZOHGWGENRXLKPMEMZYR",
+  "action": "RefreshSsoAccessTokenResponse",
+  "expires_in": "2022-11-20 16:42",
+  "refresh_token": "WSOHGWGENRXLKPMEMZYR",
+  "ret_code": 0,
+  "token_type": "JWT",
+  "user_id": "usr-kdsaDLs"
+}
+----

@@ -1,0 +1,47 @@
+---
+title: "Enable Log Collection"
+description: "This section introduces how to modify the configuration of the extension to enable the log collection feature."
+weight: 01
+---
+
+This section introduces how to modify the configuration of the "WhizardTelemetry Logging" extension to enable the log collection feature.
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+After enabling, the **Log Collection** option will be displayed under the **Project Settings** menu in the left navigation pane.
+|===
+
+== Prerequisites
+
+* You should have the **platform-admin** role on the {ks_product-en}  platform. For more information, see link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* **WhizardTelemetry Logging** should have been installed and enabled.
+
+== Steps
+
+. Log in to the {ks_product-en} web console with a user who has the **platform-admin** role.
+. Click **Extensions Center**.
+. Click the installed **WhizardTelemetry Logging** extension to enter the details page.
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] under the icon, and select **Extension Config**.
+. In the extension configuration file, set the `logsidecar-injector.enabled` parameter to `true`, then save the file.
++
+--
+[,yaml]
+----
+logsidecar-injector:
+  enabled: true
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Since the job that updates this parameter only runs on the host cluster, setting `logsidecar-injector.enabled` in member clusters will not take effect if you only want to enable or disable the log collection feature for certain member clusters. Each time you modify this parameter, you need to modify the parameter in the host cluster at the same time to trigger the parameter update.
+
+For example, when you need to turn off the log collection feature of a certain member cluster, just set `logsidecar-injector.enabled: false` in the configuration of that member cluster, and then add `logsidecar-injector.updateVersion: 1` in the configuration of the host cluster. For subsequent operations, you only need to update `logsidecar-injector.updateVersion` to trigger the update.
+|===
+--

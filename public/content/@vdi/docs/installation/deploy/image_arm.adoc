@@ -1,0 +1,54 @@
+---
+title: 注册桌面云镜像（ARM）
+weight: 11
+---
+
+在创建 QingCloud 桌面云主机前，需要先在 QingCloud 管理平台上注册桌面云镜像。本小节主要介绍如何注册 ARM 架构的桌面云镜像。
+
+== 前提条件
+
+* 已获取 QingCloud 桌面云平台的安装镜像 `xview-server_xxx.09.1-ga_arm64.img`。
+* 已安装 QingCloud 云平台和管理平台，并已获取云平台和管理平台的访问地址和帐号密码。
+
+== 注册镜像
+
+. 登录 QingCloud 管理平台。
+. 在左侧的菜单栏中，点击**资源管理**，选择**计算** > **镜像**，进入镜像页面。
+. 点击右侧的**注册**，弹出注册镜像对话框。
++
+image::/images/vdi/installation/deploy_image_01.png[,50%]
+. 设置镜像参数，并从本地选择 QingCloud 桌面云镜像文件并上传。
+. 点击右下方的注册，镜像注册成功后，镜像状态变为可用。
++
+image::/images/vdi/installation/deploy_image_02.png[]
+. 登录 QingCloud 云平台，进入镜像页面，可查看到已在 QingCloud 管理平台上注册成功的镜像。
++
+image::/images/vdi/installation/deploy_image_03.png[]
+
+== 修改镜像字段
+
+ARM 架构的桌面云镜像注册成功后，还需要在云平台的数据库中修改镜像字段，否则创建桌面云服务器会失败。
+
+修改镜像字段的步骤如下：
+
+. 远程登录到{platform_name_cn}的 FirstBox 节点。
+. 执行以下命令，查看 Pgserver 节点名称。
++
+[source]
+----
+cat /etc/hosts | grep pgserver
+----
+. 远程登录到{platform_name_cn}的任一 Pgserver 数据库节点。
+. 执行以下命令，修改镜像字段。
++
+[source,sql]
+----
+update image set boot_kernel='/boot/vmlinuz-4.19.0-20-arm64',boot_initrd='/boot/initrd.img-4.19.0-20-arm64',features='4',boot_loader='AAVMF_CODE.fd' where image_id='img-xxxxxxxx';
+----
+
+. 执行以下命令，确认修改结果。
++
+[source,sql]
+----
+select * from image where image_id='xxxxxxxx'
+----

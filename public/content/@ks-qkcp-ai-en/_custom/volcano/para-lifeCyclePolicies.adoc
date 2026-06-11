@@ -1,0 +1,24 @@
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Events
+|
+* **PodPending**: Pod is waiting to be created.
+* **PodRunning**: Pod is running.
+* **PodFailed**: Pod failed to run.
+* **PodEvicted**: Pod was evicted.
+* **Unknown**: Pod status is unknown.
+* **TaskCompleted**: The number of Pods that have successfully completed in the Task has reached the preset completion requirements for that Task.
+
+|Actions
+
+|
+* **RestartJob**: Restart the entire Job.
+* **RestartTask**: Restart the Task.
+* **RestartPod**: Restart the Pod.
+* **AbortJob**: Pause the Job; it will not clean up the created Pod resources.
+* **TerminateJob**: Terminate the Job and clean up/delete all related Pods.
+* **CompleteJob**: Forcefully mark the Job status as "Completed" to end the entire Job.
+* **ResumeJob**: Resume a paused Job.
+|===

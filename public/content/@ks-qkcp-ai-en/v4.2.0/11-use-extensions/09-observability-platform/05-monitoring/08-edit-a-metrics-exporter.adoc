@@ -1,0 +1,45 @@
+---
+title: "Edit Monitoring Exporter"
+keywords: "Kubernetes, {ks_product}, Project Management, Workloads, Service, Edit Monitoring Exporter"
+description: "Describes how to edit a monitoring exporter."
+weight: 08
+---
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Application Workloads > Services**
+
+
+include::../../../../_custom/clusterManagement/services/services-desc-editAMetricsExporter.adoc[]
+
+include::../../../../_custom/clusterManagement/customMonitoringDashboards/customMonitoringDashboards-desc-exposeMetrics.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/services/services-oper-exposeMetrics.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+include::../../../../_custom/clusterManagement/services/services-prer-exposeMetrics.adoc[]
+
+
+== Steps
+
+. Log in to the KubeSphere web console as a user with the pass:a,q[{ks_permission}] permission and enter your cluster or workspace.
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/services/services-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/services/services-oper-editAMetricsExporter.adoc[]

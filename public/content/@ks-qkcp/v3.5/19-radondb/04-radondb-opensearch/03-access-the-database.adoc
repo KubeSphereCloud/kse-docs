@@ -1,0 +1,72 @@
+---
+title: "访问数据库"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, OpenSearch, 访问数据库"
+description: "介绍如何访问 RadonDB OpenSearch 数据库。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 64863e67f93c4bf0a2dd7a3d534e3e27
+:ks_xref_id: 6e70821010cd46428261693ea626365f
+:ks_comp: ../../../components/
+:ks_title: 访问数据库
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, OpenSearch, 访问数据库
+:ks_description: 介绍如何访问 RadonDB OpenSearch 数据库。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+Dashboards 是 OpenSearch 的可视化工具，提供面向用户的 OpenSearch 插件管理服务，包括安全性、警报、索引状态管理、 SQL 管理等插件。本节介绍如何访问 OpenSearch Dashboards。
+
+
+== 前提条件link:[id=4483c1405ca948b7a7e7d0249c9a74dd]
+
+* 如果使用外部读写地址，取决于您的网络环境，您可能需要配置流量转发和防火墙规则。有关具体操作请联系您的网络环境管理员。
+
+* 您需要安装 RadonDB OpenSearch，并获取 RadonDB OpenSearch 数据库用户名和密码。如果您在安装 RadonDB OpenSearch 时未修改过用户名和密码，此处默认用户名为 **admin**，默认密码为 **RadonDB@123**。如果您修改过用户名和密码，请使用修改后的用户名和密码登录。
+
+
+
+== 操作步骤link:[id=f44ea4832568474cbab6a9b287182dbd]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
+. 点击**应用负载** > **服务**，找到并点击新建的 OpenSearch 应用 Dashboards 服务进入详情页面。
+
+. 点击**更多操作** > **编辑外部访问**。
+
+. 将 Dashboards 服务的访问模式设置为 **NodePort**，点击**确定**。
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbOpenSearch/radondbopensearch-oper-openDetailsPage.adoc[]
+
+. 在页面左侧的**访问地址**区域，查看控制面板地址。
+
+
+. 在浏览器输入 link:http://dashboard_IP:dashboard_port/[] 进入 OpenSearch Dashboards 登录页面，输入帐户名和密码。
++
+--
+image::/images/ks-qkcp/zh/radondb-management/os-login.png[opensearch-login]
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* 请将 **dashboard_IP** 和 **dashboard_port** 替换成实际的值。
+
+* 取决于您的 Kubernetes 集群的部署位置，您可能需要在安全组中放行端口并配置相关的端口转发规则。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

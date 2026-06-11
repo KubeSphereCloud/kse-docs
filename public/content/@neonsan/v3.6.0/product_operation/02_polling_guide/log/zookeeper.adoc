@@ -1,0 +1,54 @@
+---
+title: "查看 ZooKeeper 日志文件"
+weight: 7
+---
+
+. 登录 NeonSAN 集群任一节点，执行如下命令查看 ZooKeeper 集群信息。
++
+[,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts|grep zookeeper"
+----
+
+. 逐个登录 ZooKeeper 集群的每个节点。 
+
+. 执行如下命令，查看 ZooKeeper 日志所占存储空间。
++
+[,shell]
+----
+du -sh /var/log/zookeeper
+----
++
+include::../../../../../_components/note.adoc[]
+若返回结果中所有日志内容所占存储空间大于 5G，则说明 ZooKeeper 日志未正确分割导致其日志占用较大磁盘空间，建议删除多余日志。
+include::../../../../../_components/table_footer.adoc[]
+
+. 输入如下命令，查看 ZooKeeper 的完整日志。
++
+[,shell]
+----
+vi /var/log/zookeeper/zookeeper.log.* 
+----
+
+. 部分错误日志关键字解释及建议，其他未列出错误可联系 NeonSAN 产研团队进行排查。
++
+[options="header",cols="1,1,3"]
+|===
+|关键字 | 含义 |建议
+|Expiring session 
+|由于网络或 I/O 原因，导致 ZooKeeper 会话超时 
+|建议检查 dataDir 是否为 HDD 或 CAS/bcache 盘，检查网络连 通性和质量 
+
+|Read timed out zookeeper 
+|通信发生网络超时 
+|检查网络连通性和网络质量 
+
+|shutdown Leader! reason: Not sufficient followers synced 
+|ZooKeeper 通信发生网络超时 
+|ZooKeeper 主从不同步 
+
+|fsync-ing the write ahead log 
+|ZooKeeper 本地写耗时过长 
+|建议检查 dataDir 是否为 HDD 或 CAS/bcache 盘，RAID 卡是否在做 cc 或 pr，LD 状态、是否存在坏盘
+|===
+

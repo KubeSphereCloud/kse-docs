@@ -1,0 +1,152 @@
+---
+title: COSBench 测试用例
+description: 
+weight: 5
+---
+
+当 {product_name} 对象存储内置的 COSBench 测试用例，不足以覆盖客户的需求，此时，就需要您根据本文内容，自定义测试用例。
+
+== 安装部署 COSBench
+
+可参考 link:../../performance_test/object_storage/cosbench/[COSBench 工具安装配置]。
+
+== 测试用例说明
+
+每个测试用例的配置文件格式相同，下面以 `4k.xml` 文件为例加以说明。
+
+
+
+
+=== 示例文件
+
+一个测试用例由一个工作流 `workflow` 组成。
+
+[source,shell]
+----
+# cat /tmp/workloads/4k.xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<workload name="qs-benchmark-RW-4K" description="benchmark for qingstor with s3 api">
+
+  <storage type="s3" config="accesskey=HJEBVKMZPXKLFQHLFQJH;secretkey=kUHD5orRJfZaVMqYtSHptLtaSOc1FebjV958TQeJ;endpoint=http://s3.gd2b.stor.yunify.com;path_style_access=true;timeout=60000;" />
+
+  <workflow>
+
+    <workstage name="init">
+      <work type="init" workers="1" config="cprefix=benchmark;containers=r(1,3)" />
+    </workstage>
+<!-- 4KB RW Begin -->
+    <workstage name="4K-prepare">
+      <work type="prepare" workers="1000" config="cprefix=benchmark;containers=r(1,3);objects=r(1,10000);sizes=c(4096)B" />
+    </workstage>
+
+    <workstage name="4K-read">
+      <work name="main" workers="3000" runtime="60">
+        <operation type="read" ratio="100" config="cprefix=benchmark;containers=u(1,3);objects=u(1,10000)" />
+      </work>
+    </workstage>
+
+    <workstage name="4K-write">
+      <work name="main" workers="3000" runtime="60">
+        <operation type="write" ratio="100" config="cprefix=benchmark;containers=u(1,3);objects=u(10001,20000);sizes=c(4096)B" />
+      </work>
+    </workstage>
+<!-- 4KB RW End -->
+  </workflow>
+
+</workload>
+
+----
+
+=== 参数说明
+
+* 分段一
++
+[source,shell]
+----
+
+  <storage type="s3" config="accesskey=HJEBVKMZPXKLFQHLFQJH;secretkey=kUHD5orRJfZaVMqYtSHptLtaSOc1FebjV958TQeJ;endpoint=http://s3.gd2b.stor.yunify.com;path_style_access=true;timeout=60000;" />
+
+----
++
+以上内容为对象存储相关配置内容。COSBench 部署配置完成后，无需手动修改。
+
+* 分段二
++
+[source,shell]
+----
+
+    <workstage name="4K-read">
+      <work name="main" workers="3000" runtime="60">
+        <operation type="read" ratio="100" config="cprefix=benchmark;containers=u(1,3);objects=u(1,10000)" />
+      </work>
+    </workstage>
+
+----
+
++
+参数说明如下。
++
+[cols="1,5", options="header"]
+|===
+| 参数 | 说明 
+|workstage a| 测试阶段。一个工作流可由多个 workstage 组成的，分别包含不同的 `type`。
+
+* 初始化阶段。`type` 设置为 `init`。用于创建测试用 Bucket。必选测试阶段。
+* 准备阶段 `type` 设置为 `prepare`。用于创建测试用读文件。可选测试阶段。如果后续测试 `read` 用例，则为必选测试阶段。
+* 测试读阶段 `type` 设置为 `read`。可选测试阶段。与 `write` 阶段需至少选一个。
+* 测试写阶段 `type` 设置为 `write`。可选测试阶段。与 `read` 阶段需至少选一个。
+
+|workers | 指定并发数量。可根据实际需求修改。
+|runtime | 运行时间。可根据实际需求修改。
+|type a| 操作类型。可选值为：
+
+* `init`：初始化操作。用于创建测试用 Bucket。
+* `prepare`：准备操作。用于创建测试用读文件。
+* `read`：测试读操作。
+* `write`：测试写操作。
+
+
+|config a| 
+* cprefix: 指定待创建的测试用 Bucket 名称的前缀。
+* containers: 指定待创建的测试用 Bucket 的数量。
+|objects | 指定待创建的测试用 Object 的命名范围，默认以 `myobjects` 为前缀。
+|sizes | 指定 `read` 或 `write` 的 Object 大小。单位可以是 `B`、`KB`、`MB`、`GB` 等。因为 COSBench 的单位换算是以 1000 为进制，为避免歧义，默认使用 `B` 为单位。
+
+|===
+
+
+== 测试用例设计
+
+若用户需测试如下情形：30% 写，写文件为大小：4KB-4MB；70% 读，读文件建议为：4KB-4MB。则根据前文说明可知，测试用例文件为：
+
+[source,shell]
+----
+# cat /tmp/workloads/4k-rw.xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<workload name="qs-benchmark-RW-4K" description="benchmark for qingstor with s3 api">
+
+  <storage type="s3" config="accesskey=HJEBVKMZPXKLFQHLFQJH;secretkey=kUHD5orRJfZaVMqYtSHptLtaSOc1FebjV958TQeJ;endpoint=http://s3.gd2b.stor.yunify.com;path_style_access=true;timeout=60000;" />
+
+  <workflow>
+
+    <workstage name="init">
+      <work type="init" workers="1" config="cprefix=benchmark;containers=r(1,3)" />
+    </workstage>
+<!-- 4KB RW Begin -->
+    <workstage name="4K-prepare">
+      <work type="prepare" workers="1000" config="cprefix=benchmark;containers=r(1,3);objects=r(1,10000);sizes=c(4096)B" />
+    </workstage>
+
+    <workstage name="4K-read">
+      <work name="main" workers="3000" runtime="60">
+        <operation type="read" ratio="30" config="cprefix=benchmark;containers=u(1,3);objects=u(1,10000)" />
+        <operation type="write" ratio="70" config="cprefix=benchmark;containers=u(1,3);objects=u(10001,20000);sizes=c(4096)B" />
+      </work>
+    </workstage>
+
+<!-- 4KB RW End -->
+  </workflow>
+
+</workload>
+
+----

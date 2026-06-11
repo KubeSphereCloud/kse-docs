@@ -1,0 +1,62 @@
+---
+title: "View and Customize Platform Information"
+keywords: "Kubernetes, {ks_product-en}, Platform Settings, Platform Information, View and Customize Platform Information"
+description: "Introduce how to view and customize platform information."
+weight: 01
+---
+
+:ks_navigation: Platform Information
+:ks_permission: Platform Settings Management
+
+This section explains how to view and customize information of the KubeSphere Enterprise web console.
+
+== Prerequisites
+
+:relfileprefix: ../../../
+
+include::../../../_custom-en/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../_custom-en/platformManagement/platformManagement-oper-logIn.adoc[]
+
+. Click image:/images/ks-qkcp/zh/icons/cogwheel.svg[cogwheel,18,18] in the top right corner of the {ks_product-en} web console to access the **Platform Settings** page.
+
++
+
+include::../../../../_ks_components-en/oper-navigate.adoc[]
++
+--
+The **Platform Information** page displays the platform's access address, title, description, logo, browser icon, and the background image on the login page.
+--
+
+. Click **Customize Platform Information** in the top-right corner of the page.
+
+. In the **Customize Platform Information** dialog box, set the platform's information as desired, and then click **OK**.
++
+--
+
+After customization, you can reset the platform information to the default state.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Platform Title
+|The name of the platform. The platform title can contain any characters and can be up to 63 characters long.
+
+|Platform Description
+|A description of the platform. The description can contain any characters and can be up to 256 characters long.
+
+|Platform Logo
+|The logo displayed at the top of the web console interface. The logo can be in SVG, PNG, or JPG format and should not exceed 2 MB. Recommended resolution is 200 x 40 pixels.
+
+|Browser Favicon
+|The icon displayed on the browser tab. The icon can be in ICO, SVG, PNG, or JPG format and should not exceed 2 MB. Recommended resolution is 40 x 40 pixels with a 1:1 aspect ratio.
+
+|Login Page Background
+|The background image for the platform's login page. The image can be in SVG, PNG, or JPG format and should not exceed 2 MB. Recommended resolution is 1920 x 1080 pixels.
+|===
+--

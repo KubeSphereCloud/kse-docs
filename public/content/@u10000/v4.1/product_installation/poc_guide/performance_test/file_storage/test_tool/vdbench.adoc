@@ -1,0 +1,203 @@
+---
+title: Vdbench
+description: 
+weight: 1
+---
+
+Vdbench 是一个 I/O 工作负载生成器，用于验证数据完整性和度量直接附加或网络连接的存储性能，常用于测试和基准测试，也可用于测试磁盘和文件系统的读写性能。{product_name} 建议使用 Vdbench 进行测试。
+
+== 安装配置
+
+. 官网下载 Vdbench 工具，官网链接如下：
++
+[source,shell]
+----
+https://www.oracle.com/technetwork/cn/server-storage/vdbench-downloads-1901681-zhs.html
+----
+
+. Linux 环境配置 Vdbench 工具，操作如下：
+
+.. Vdbench 的运行依赖于 Java 环境，执行如下命令行，安装 Java。
++
+[source,shell]
+----
+# apt-get update
+# apt-get install java
+# java -version
+----
+
+.. Vdbench 的运行需 Csh 支撑。执行如下命令行，安装 Csh。
++
+[source,shell]
+----
+# apt-get install csh   // 安装
+# ls /bin/ | grep csh   // 查看 csh
+----
+
+.. 进入 Vdbench 目录，测试 Vdbench 的可用性。
++
+[source,shell]
+----
+# ./vdbench -t
+----
++
+
+include::../../../../../../../_components/note.adoc[]
+
+* 如果命令行报错，则需要修改 Vdbench 的权限：`chmod 777 vdbench`。
+* 如果命令行成功，则会在 Vdbench 目录下自动生成一个 output 目录。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+. Windows 环境配置 Vdbench 工具，操作如下：
+
+.. 解压 Vdbench 包。
+
+.. 下载并安装 32 位的 Java。
+
+.. 配置 Java 的环境变量。
+
+.. 打开 DOS 窗口，切换到 Vdbench 目录，执行以下命令来测试 Vdbench 的可用性。
++
+[source,shell]
+----
+# ./vdbench -t
+----
++
+
+include::../../../../../../../_components/note.adoc[]
+
+* 如果命令行报错，则需要修改 Vdbench 的权限：`chmod 777 vdbench`。
+* 如果命令行成功，则会在 Vdbench 目录下自动生成一个 output 目录。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+
+== 测试步骤
+
+**准备工作**
+
+. 使用正确的用户名和密码登录 Portal。
+. 点击**创建文件系统**，输入合法参数后点击**确定**，创建文件系统。
+. 进入文件系统详情页面，点击**创建共享**，输入合法参数创建共享。
+. 在客户端上挂载文件系统下的共享点，进行性能测试。
+
+**性能测试**
+
+. 在客户端执行如下命令行，查询 Vdbench 工具所在目录。
++
+[source,shell]
+----
+# find / -name vdbench
+----
+. 进入 Vdbench 工具所在目录。
++
+[source,shell]
+----
+# cd ${/root/xm/vdbench50407}
+----
+
+. 编辑测试文件。
++
+[source,shell]
+----
+# vim filesystem_test
+----
++
+* 单客户端测试文件示例：
++
+[source,shell]
+----
+fsd=fsd1，anchor=/mnt/test_vdbench，depth=8，width=3，files=100，size=64k，distribution=all，openflags=directio
+fwd=fwd1，fsd=fsd1，xfersize=64k，fileio=random，fileselect=random，threads=100，operation=read，rdpct=66
+rd=rd1，fwd=fwd*，fwdrate=max，format=yes，elapsed=100，interval=5
+----
++
+* 多客户端测试文件示例：
++
+[source,shell]
+----
+hd=default，vdbench=/mnt/vdbench/vdbench50407/，user=root，shell=ssh
+hd=hd1，system=172.31.12.114
+hd=hd2，system=172.31.12.115
+hd=hd3，system=172.31.12.116
+
+fsd=default，depth=8，width=3，files=160，size=(4k，50，8k，50)，openflags=o_direct
+fsd=fsd1，anchor=/mnt/test_a1
+fsd=fsd2，anchor=/mnt/test_a2
+fsd=fsd3，anchor=/mnt/test_a3
+
+fwd=default，fileio=random，fileselect=random，xfersize=(4k，50，8k，50)，threads=32
+fwd=fwd1，host=hd1，fsd=fsd1
+fwd=fwd2，host=hd2，fsd=fsd2
+fwd=fwd3，host=hd3，fsd=fsd3
+
+rd=rd1，fwd=(fwd1-fwd3)，fwdrate=max，format=restart，forrdpct=70，foroperations=read，elapsed=900，interval=1
+----
++
+
+include::../../../../../../../_components/note.adoc[]
+
+根据实际情况对参数进行配置，参数说明详见link:../../../../additional/vdbench_par/[附录]相关内容。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令进行性能测试。`${filesystem_test}` 为前面步骤创建的测试脚本文件名。
++
+[source,shell]
+----
+# ./vdbench -f ${filesystem_test}
+----
+
+. 命令行回显内容如下所示，说明测试完成。记录 Output 目录为：`/root/xm/vdbench50407/output`。
++
+[source,shell]
+----
+Vdbench execution completed successfully. Output directory: /root/xm/vdbench50407/output
+----
+
+. 进入 Output 目录，查看测试结果。如，这里的 Output 目录为：`/root/xm/vdbench50407/output`，则操作如下。
++
+[source,shell]
+----
+# cd /root/xm/vdbench50407/output
+# cat summary.html
+# cat totals.html
+----
+
++
+
+include::../../../../../../../_components/note.adoc[]
+
+* `summary.html` 是主要报告文件，显示的是每个报告间隔的每次运行生成的总工作负载，以及除第一个间隔外的所有间隔的加权平均值。
+* `totals.html` 记录所有数据计算之后的平均数据。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+
+
+== 结果分析
+
+由于服务器的配置不同，网络等各种原因，历史测试的结果以及得出的最优性能对应的配置参数等，只能作为参考。本章内容主要介绍如何查看测试结果。
+
+image::/images/u10000/vdbench.png[vdbench,100%]
+
+**相关参数说明**
+
+[cols="1,3", options="header"]
+|===
+| 参数 | 说明
+
+| interval | 报告间隔序号
+
+| reqstdops | 请求的操作总数
+| read | 总读取数据量和平均响应时间(以毫秒为单位)
+| write | 总写入数据量和平均响应时间(以毫秒为单位)
+| mb/sec | 单位时间内读取、写入以及读取写入总和的传输数据量，Mb/s
+| xfer | 读写操作的平均传输大小
+
+
+|===
+
+

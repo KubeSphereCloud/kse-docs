@@ -1,0 +1,53 @@
+---
+title: "调整虚拟机资源"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 资源, 调整"
+description: "介绍如何使用{ks_product_both}Web 控制台调整虚拟机资源。"
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 63e7e6aa23fe4cfc913f2b4fda5a13f4
+:ks_xref_id: 7198a466f6d2468785f57ae5a17803e2
+:ks_comp: ../../../../components/
+:ks_title: 调整虚拟机资源
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台调整虚拟机资源。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 资源, 调整
+:ks_weight: 07
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台调整虚拟机资源。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=2689839ee95a42348e97615c07dba9af]
+
+include::../../../../_custom/vms/vm-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=33e179accc064a86bff540d8052913cf]
+
+include::../../../../_custom/vms/vm-view-steps.adoc[]
+
+. 在虚拟机列表页面，点击目标虚拟机名称，进入虚拟机详情页面。
+
+. 在虚拟机详情页面左上角点击**调整资源**。
+
+. 在**调整资源**对话框，修改虚拟机的默认配置和磁盘容量，然后点击**确定**。默认配置包括虚拟机的 CPU 核心数和内存大小。有关更多参数信息，请参阅 link:../01-create-vm/[创建虚拟机]。
+
+. 在弹出的对话框中，点击**重启**可重启虚拟机使新配置生效，点击**取消**可保存配置。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+新配置需要在重启虚拟机后生效。虚拟机重启需要一定时间，期间无法对虚拟机进行操作。请根据您的业务需求选择**重启**或**取消**。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,50 @@
+---
+title: "Linux 系统虚拟机"
+weight: 2
+---
+
+== 用户名密码登录
+
+除了通过 VNC 连接外，用户也可以通过第三方软件连接至虚拟主机，常见的软件有 PuTTY 或 Xshell。
+
+以使用 Putty 软件为例，操作步骤如下。
+
+. 在 `Session` 页面输入需访问的虚拟机的 IP 地址，点击**Open**。
++
+image::/images/express/console/express_code_login_1.png[,50%]
+
+. 按照提示输入用户名和密码，按 ``Enter``键，即可登录。
+
+== SSH 密钥登录
+
+相对于用户名密码方式，密钥方式拥有更强的安全性，也可以很大程度阻止暴力破解的发生。目前常用的密钥都是非对称性的加密方式，主机内置公钥，而用户则拥有私钥。由于采用非对称加密，入侵者试图通过公钥去破解私钥难度会远远超出密码的破解。
+
+. 确保 Linux 虚拟机和本地终端设备在同一内网环境中。
+
+. 在顶部导航栏点击**资源** > *虚拟机*，进入 ExpressCloud 主机列表页面。
++
+image::/images/express/console/express_ssh_login_1.png[]
+
+. 点击待连接的虚拟机所在行右侧的更多操作，点击 **SSH 密钥**，选择**绑定 SSH 密钥**，将本地设备的公钥绑定至当前虚拟主机上。
++
+
+include::../../../../../../../_components/note.adoc[]
+将本地设备的公钥添加至管理控制平台内进行管理，可参考link:../../../../ssh/ssh_create/#_使用已有公钥[创建 SSH 密钥]使用已有公钥相关内容。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/express_ssh_login_2.png[]
+
+. 本地设备公钥绑定虚拟主机成功后，在本地设备的 SSH Terminal 终端内输入如下命令，即可建立连接。
++
+[source,shell]
+----
+# ssh root@xx.xx.xx.xx -p 22
+----
++
+
+include::../../../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为虚拟主机的 IP 地址。
+* 若为 ubuntu 主机，则默认登录用户为 ubuntu，即 ``ssh ubuntu@xx.xx.xx.xx -p 22``
+
+include::../../../../../../../_components/table_footer.adoc[]

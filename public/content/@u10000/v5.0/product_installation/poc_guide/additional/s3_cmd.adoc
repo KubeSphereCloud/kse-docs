@@ -1,0 +1,111 @@
+---
+title: S3 CMD 配置
+description: 
+weight: 4
+---
+
+使用 s3cmd 工具来测试对象存储前，需正确安装并配置 s3cmd 工具。
+
+== 安装配置
+
+. 本地执行如下命令行，安装 s3cmd 工具:
++
+[source,shell]
+----
+pip install s3cmd
+
+----
+
+
+. 本地成功安装 s3cmd 工具后，需正确修改配置文件 `~/.s3cfg`。
++
+[source,shell]
+----
+> cat ~/.s3cfg
+[default]
+access_key = PLLZOBTTZXGBNOWUFHZZ
+secret_key = MnIjI58zC8AX07xotHXcm6grwFgOXhaJQHkTCX2X
+bucket_location = pek3a
+host_base = s3.pek3a.qingstor.com
+host_bucket = %(bucket)s.s3.pek3a.qingstor.com
+
+----
++
+配置文件各参数说明如下：
++
+[cols="1,5", options="header"]
+|===
+| 参数 | 说明 
+
+|access_key | 填写 {product_name} 的 `access_key`，需提前在 {product_name} 环境中申请。
+|secret_key | 填写 {product_name} 的 `secret_key`，需提前在 {product_name} 环境中申请。
+|bucket_location |填写 {product_name} 对象存储的 `zone_id`。
+|host_base |填写格式为 `s3.zone_id.global_domain`。其中 `zone_id` 与 `global_domain` 需根据 {product_name} 配置文件 `base.ini` 中的内容进行填写。
+|host_bucket | 待操作的 Bucket 名。填写格式为 `%(bucket)s.host_base`，其中 `host_base` 根据实际情况进行替换。
+
+|===
++
+
+include::../../../../../_components/note.adoc[]
+
+`host_bucket` 的填写格式需注意，`%(bucket)s` 为固定字段，域名根据实际情况进行修改。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 本地终端上传文件至 {product_name} 的对象存储，用以验证 s3cmd 工具可用。
+
+
+== 使用示例
+
+以下命令行中的 Bucket 名与文件名，需根据实际情况修改。
+
+* 上传文件至 {product_name} 的对象存储。
++
+[source,shell]
+----
+s3cmd put tmp.txt s3://maxtest
+
+----
++
+返回结果：
++
+[source,shell]
+----
+upload: 'tmp.txt' -> 's3://maxtest/tmp.txt'  [1 of 1]
+706 of 706   100% in    0s     5.28 KB/s  done
+
+----
+
+* 从 {product_name} 的对象存储下载文件。
++
+[source,shell]
+----
+s3cmd get s3://maxtest/tmp.txt tmp2.txt
+
+----
++
+返回结果：
++
+[source,shell]
+----
+download: 's3://maxtest/tmp.txt' -> 'tmp2.txt'  [1 of 1]
+706 of 706   100% in    0s    26.06 KB/s  done 
+
+----
+
+* 列取 {product_name} 的对象存储 Bucket 中的文件。
++
+[source,shell]
+----
+s3cmd ls s3://maxtest
+
+----
++
+返回结果：
++
+[source,shell]
+----
+2023-03-03 05:59          706 s3://maxtest/tmp.txt 
+2023-03-03 06:00          111 s3://maxtest/tmp1.txt
+
+----

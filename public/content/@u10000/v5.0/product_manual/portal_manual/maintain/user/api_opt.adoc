@@ -1,0 +1,51 @@
+---
+title: API 密钥相关操作
+description: 
+weight: 3
+---
+
+
+用户如需使用 {product_name} 对象存储提供的 API，需创建相应的 API 密钥。需注意的是，创建完成的 API 密钥，用户需及时进行下载，对象存储服务端不对其进行保存。
+
+== 查看 API 密钥列表
+
+用户如需查看系统中已创建的 API 列表，可在link:../user_opt/#_查看用户详情[用户详情页面]，点击** API 密钥**，进入 API 密钥列表页面。该页面列表显示当前用户创建的所有 API。
+
+image::/images/u10000/maintain_user_api_list.png[maintain_user_api_list,100%]
+
+== 创建 API 密钥
+
+. 在link:#_查看_api_密钥列表[ API 密钥列表]页面，点击**创建 API 密钥**。
+
+. 弹出**创建 API 密钥**对话框，用户填写相关参数后，点击**提交**。
++
+image::/images/u10000/maintain_user_api_create.png[maintain_user_api_create,50%]
++
+**页面信息说明**
+
+* `名称`：该 API 密钥名称，便于区别已创建的 API 密钥。
+* `描述`：可填写 API 密钥相关信息，如用途，权限，目的等。用户根据实际情况进行填写。
+
+. 弹出**下载 API 密钥**对话框，根据页面提示信息，及时下载并妥善保管私钥。
++
+image::/images/u10000/maintain_user_api_download.png[maintain_user_api_download,50%]
+
+. 成功创建的 API 密钥，在link:#_查看_api_密钥列表[ API 密钥列表]显示。
+
+
+== 暂停/删除 API 密钥
+
+对于已创建的 API 密钥，系统为了保障用户的安全，不再支持再次下载与查看。若用户在创建 API 密钥时，没有及时下载，可将当前密钥进行删除或者暂停操作后，重新创建 API 密钥并使用。
+
+. 在link:#_查看_api_密钥列表[ API 密钥列表]页面，选择待操作的 API 密钥，点击**更多**。
++
+image::/images/u10000/maintain_user_api_delete.png[maintain_user_api_delete,100%]
+
+. 用户根据实际需求，点击**暂停密钥**或**删除密钥**。
+
+. 弹出确认对话框，用户确认操作无误后，点击确认按钮即可。
+
+. 删除的密钥，不在link:#_查看_api_密钥列表[ API 密钥列表]显示。暂停的密钥，在link:#_查看_api_密钥列表[ API 密钥列表]查看时，状态显示为 `暂停`。
+
+
+

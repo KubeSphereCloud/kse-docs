@@ -1,0 +1,72 @@
+---
+title: "View virtual subnets"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, virtual subnets, list, view"
+description: "Describes how to view virtual subnets in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e62a3addd9da4e0fa9d96feb032bca7f
+:ks_xref_id: 46306d599ba340fdaa2a30b419c05ee2
+:ks_comp: ../../../../components/
+:ks_title: View virtual subnets
+:ks_description: Describes how to view virtual subnets in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, virtual subnets, list, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view virtual subnets in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=193918007dbb471784f05ab62cdf0ad2]
+
+include::../../../../_custom-en/networks/virtual-subnet-steps.adoc[]
+
++
+
+--
+You can view all virtual subnets in the project, including the default subnet and the subnets created on your own.  The following table describes the parameters.
+
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the virtual subnet.
+
+include::../../../../_custom-en/networks/naming-convention.adoc[]
+
+|ID
+|The universally unique identifier (UUID) of the virtual subnet in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the virtual subnet.
+
+|VPC
+|The virtual private cloud (VPC) where the virtual subnet resides.
+
+|IP Range
+|The IP address range in which the virtual subnet resides. The value is the subset of the IP address range in which the VPC resides.
+
+|Available IPs
+|The number of IP addresses available in the virtual subnet.
+
+|Used IPs
+|The number of IP addresses used in the virtual subnet.
+
+|Created by
+|The username that is used to create the virtual subnet.
+
+|Created at
+|The time when the virtual subnet was created.
+|===
+--
+
+. (Optional) Click the search box above the virtual subnet list and set query conditions to search for virtual subnets by name, ID, or VPC.  For example, use **Name:ab** to search for virtual subnets whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

@@ -1,0 +1,74 @@
+---
+title: "View VM templates"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, templates, list, view"
+description: "Describes how to view VM templates in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 8f6f29e4164f4fb792d9bb90e38a1ee6
+:ks_xref_id: aac06af55a724377b44c46a86cb4688a
+:ks_comp: ../../../../components/
+:ks_title: View VM templates
+:ks_description: Describes how to view VM templates in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, templates, list, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view VM templates in the {ks_product_abbr_full} web console.
+
+include::../../../../_custom-en/vms/vm-template-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=dfb8c87d91014734b31dfe678ea57024]
+
+include::../../../../_custom-en/vms/vm-template-steps.adoc[]
+
++
+
+--
+You can view all VM templates in the project. The following table describes the parameters.
+
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the VM template.
+
+include::../../../../_custom-en/networks/naming-convention.adoc[]
+
+|ID
+|The universally unique identifier (UUID) of the template in the system. The UUID is automatically assigned by the system.
+
+|OS
+|The OS defined in the VM template. You can place the cursor on the OS to view the specific type and version of the OS.
+
+|CPU
+|The number of CPU cores defined in the template.
+
+|Memory
+|The memory size defined in the template.
+
+|System Disk
+|The system disk size defined in the template.
+
+|Shared
+|Specifies whether the template can be shared with other users. If this feature is enabled, users in other projects can replicate the template.
+
+|Project
+|The project name in which the template is created.
+
+|Created at
+|The time when the template was created.
+|===
+--
+
+. (Optional) Click the search box above the VM template list and set query conditions to search for VM templates by name or ID.  For example, use **Name:ab** to search for VM templates whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

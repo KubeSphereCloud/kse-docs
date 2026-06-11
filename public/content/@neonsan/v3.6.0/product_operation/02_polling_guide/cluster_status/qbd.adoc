@@ -1,0 +1,20 @@
+---
+title: "检查 NeonSAN 与 QBD 的版本兼容性"
+weight: 2
+---
+
+. 登录安装有 QBD 的节点。
+. 执行如下命令，查看 QBD 所安装的 NeonSAN Lib 库。返回结果中，客户端的的 NeonSAN Lib 库版本要小于等于 NeonSAN 版本
++
+[,shell]
+----
+qbd -v
+----
++
+image::/images/neonsan/polling_guide_26.png[,70%]
++
+include::../../../../../_components/note.adoc[]
+* 安装有 QBD 的节点均会有 NeonSAN Lib 库。
+* NeonSAN 版本可执行 ``neonsan list_version`` 查询，如果 NeonSAN Lib 库版本大于 NeonSAN 版本，说明客户端比服务端版本高，需要升级 NeonSAN 版本。
+* NeonSAN 升级请参考《NeonSAN 升级脚本使用手册》。
+include::../../../../../_components/table_footer.adoc[]

@@ -1,0 +1,228 @@
+---
+title: "修改集群名称"
+weight: 1
+---
+
+
+修改集群名称无法做到在线操作。故整体思路为：收集当前集群信息->关闭 NeonSAN 相关服务->修改集群名称->启动 NeonSAN 相关服务。操作过程中涉及到删除卷的相关操作，故不建议在部署业务后再修改集群名。详细操作步骤如下：
+
+. 查看并收集集群的状态信息  
++
+[,shell]
+----
+neonsan list_store  
+neonsan list_ssd  
+neonsan list_volume -detail  
+neonsan list_rg -detail  
+neonsan list_job
+----
++
+include::../../../../../../_components/note.adoc[]
+* store 状态，磁盘状态，volume 状态，均为 OK。  
+* 异步任务队列中，无正在执行的任务。  
+* 收集以上信息，用于集群名更换后确认集群是否正常。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 删除存储池信息。
++
+include::../../../../../../_components/note.adoc[]
+* 根据实际环境，修改命令行中的各项参数。
+* 由于待删除的存储池中不能有卷分布，若有卷存在，会报错，需先删除
+该存储池内的卷。
+* 待删除的存储池中不能有存储节点，需先删除存储节点。
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 删除存储池中的 volume
++
+[,shell]
+----
+neonsan delete_volume -volume pool/vol
+----
+.. 删除存储池中的节点
++
+[,shell]
+----
+neonsan delete_rg_node -rg default -store_id 2
+----
+.. 删除存储池
++
+[,shell]
+----
+neonsan delete_rg -rg xxxx
+----
+. 确认集群中无存储池，无卷分布。若有内容输出，继续执行上一步。
++
+[,shell]
+----
+neonsan list_rg -detail
+neonsan list_volume -detail
+----
+
+. 逐个登录集群中的节点，停掉 NeonSAN 的相关服务。
++
+[,shell]
+----
+supervisorctl stop neoncenter
+supervisorctl stop neonstore
+supervisorctl stop neonmonitor
+----
+
+. 逐个登录集群中的节点，修改配置文件中的集群名。
++
+--
+* center.conf 
++
+[,shell]
+----
+vi /etc/neonsan/center.conf
+
+... ...
+cluster_name=\"cluster_newName\"**  
+... ...
+----
+
+* store.cof
++
+[,shell]
+----
+vi /etc/neonsan/store.conf
+
+... ... 
+
+cluster_name="cluster_newName"
+... ...
+----
+
+* monitor.conf
++
+[,shell]
+----
+vi /etc/neonsan/monitor.conf
+
+... ... 
+
+cluster_name="cluster_newName"
+... ...
+----
+* qbd.conf
++
+[,shell]
+----
+vi /etc/neonsan/qbd.conf
+
+... ... 
+
+cluster_name="cluster_newName"
+... ...
+----
+
+* iscsi.conf
++
+[,shell]
+----
+vi /etc/neonsan/iscsi.conf
+
+... ... 
+
+cluster_name="cluster_newName"
+... ...
+----
+--
+
+. 将旧的集群名从 zookeeper 中删除。
++
+[,shell]
+----
+/opt/zookeeper-3.4.13/bin/zkCli.sh
+rmr /neonsan/upgrade_cluster
+----
++
+include::../../../../../../_components/note.adoc[]
+* 根据实际情况修改 zookeeper 的路径。
+
+* 删除命令中，需将 upgrade_cluster 替换为实际环境中的 NeonSAN 集群名。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 逐个登录集群中的节点，按如下顺序，启动 NeonSAN 集群中的各服务。
+.. center 服务。
++
+[,shell]
+----
+supervisorctl start neoncenter
+----
+.. store 服务。
++
+[,shell]
+----
+supervisorctl start neonstore
+----
+
+.. monitor 服务。
++
+[,shell]
+----
+supervisorctl start neonmonitor
+----
+
+. 查看集群的状态信息。
++
+[,shell]
+----
+neonsan list_store 
+neonsan list_ssd
+neonsan list_volume -detail
+neonsan list_rg -detail 
+neonsan list_job 
+----
+
+. 切换 leader center，再次确认集群的状态信息。
+.. 查看 leader center。
++
+[,shell]
+----
+qdcip
+----
+
+.. 登录 leader center 节点，重启 center 服务。
++
+[,shell]
+----
+supervisorctl restart neoncenter
+----
+
+.. 查看集群状态。
++
+[,shell]
+----
+neonsan list_store 
+neonsan list_sdd
+----
++
+include::../../../../../../_components/note.adoc[]
+若集群状态异常，需调查原因并解决后，再继续后续步骤
+include::../../../../../../_components/table_footer.adoc[]
+
+. 根据之前收集的存储池与卷的信息，重新创建存储池与卷。
++
+include::../../../../../../_components/note.adoc[]
+以下步骤中命令行参数，需根据步骤 1 收集的信息进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+.. 创建存储池.
++
+[,shell]
+----
+neonsan create_rg -rg rg_name
+----
+
+.. 添加节点至存储池。
++
+[,shell]
+----
+neonsan add_rg_node -rg rg_name -store_id xx
+----
+.. 创建卷。
++
+[,shell]
+----
+neonsan create_volume -volume vol -pool pool -size 150G -repcount 3
+----

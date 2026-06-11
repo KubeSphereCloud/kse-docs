@@ -1,0 +1,15 @@
+---
+title: "卷相关"
+weight: 1
+---
+
+NeonSAN 存储系统会将用户创建的卷，划分为若干个 64G 的 Shard，每个 Sahrd 有若干个副本。该副本数为用户创建卷时指定的副本数。如下图所示：
+
+image::/images/neonsan/ops_guide_4.png[]
+
+当卷的一个 Shard 的副本，或若干个 Shard 的副本状态异常了，则说明该
+卷异常，系统会将该卷置上对应的异常状态。
+* DEGRADED：当 volume 的 Shard 对应的副本出现异常，且至少有一个状态是 OK 的，如：3 副本卷，其中 1 个 Shard 的 2 副本 ERROR 了，该
+卷做降级处理，状态被置为 DEGRADED。
+* ERROR：当 volume 的 Shard 对应的所有副本均出现异常，无状态 OK 的副本。该卷状态被为 ERROR。对异常状态的卷，NeonSAN 提供相应的恢复方法。
+

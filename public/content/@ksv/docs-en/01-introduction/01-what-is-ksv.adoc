@@ -1,0 +1,130 @@
+---
+title: "What is {ks_product}?"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, VMs, management platform, introduction"
+description: "Describes the features and scenarios of {ks_product}."
+weight: 01
+logo: "{ks_logo}"
+downloadUrl: "{ks_download_url}"
+---
+
+// :ks_include_id: 9a890b0106ff4f0e9537e0cceae4d9b2
+:ks_xref_id: 550b43252140473b94324cadf032c233
+:ks_comp: ../../components/
+:ks_title: What is {ks_product}?
+:ks_description: Describes the features and scenarios of {ks_product}.
+:ks_keywords: {ks_product_full}, {ks_product}, VMs, management platform, introduction
+:ks_weight: 01
+
+
+{ks_product_abbr_full} is a lightweight VM management platform built on top of KubeSphere. KSV supports deployment in single-node and multi-node modes and provides an enterprise-grade service of virtualization to meet business needs of individual and enterprise users in diverse scenarios.  {ks_product} can help you reduce hardware costs in early stages and allows you to create VMs based on business requirements. This way, you can develop and deploy applications in an efficient manner.
+
+On top of the cloud-native architecture Kubernetes, {ks_product} is more lightweight, flexible, and open than legacy virtualization services. {ks_product} can also provide capabilities of service self-healing, auto scaling, and flexible scheduling.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Benefitslink:[id=e054f4aee3ad4d92baee4f2f0a9eb9e5]
+
+{ks_product} can provide compute and storage resources with the following benefits:
+
+* **Low cost**: supports a minimum specification of 4 CPU cores and 8 GB memory and multi-node clusters.
+* **Simple operation**: provides an easy-to-use web console to help you monitor all resources for enterprise hardware virtualization and enables service self-healing.
+* **Quick installation**: allows you to deploy and update a cluster in 20 minutes.
+* **Quick response**: allows you to create and resize VMs within seconds.
+* **Excellent compatibility**: frees you from the dependency of the underlying infrastructure. You can create VMs on any servers that suppport virtualization.
+* **Connection to containers**: seamlessly connects to KubeSphere and integrates VMs and containers.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Architecturelink:[id=ee18416cd47e4ca3bb1baec5805d5675]
+
+On top of the cloud-native architecture of Kubernetes, {ks_product} abstracts away the complexities of the infrastructure and basic configuration. You can run {ks_product} in development or testing environments of various types, from private clouds, public clouds, VMs, physical servers, to edge nodes. {ks_product} provides a range of functional modules, such as physical nodes, networks, storage, VMs, images, disks, and security groups.
+
+ The following figure shows the architecture.
+
+image::/images/ksv/en/introduction/architecture.png[35px, architecture]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Underlying logiclink:[id=62a2ab6421074eea9a35382520c8bc1f]
+
+The following table describes the underlying logic of {ks_product}.
+
+
+[cols='1a,4a']
+|===
+|Module |Description
+
+|VM
+|By using the KubeVirt plug-in, {ks_product} allows you to manage the lifecycle, status, and connection of each VM.
+
+
+|Network
+|{ks_product} runs on top of containers, which requires more NICs for networking. {ks_product} allows you to use NICs on VMs in containers. At the underlying layer, {ks_product} uses Multus to enable multiple NICs for containers. {ks_product} supports Macvtap for VMs and integrates Kube-OVN to enable software-defined networking (SDN). Kube-OVN provides underlay and overlay network types. You can select a network type based on business requirements.
+
+|Image
+|{ks_product} uses Contexts and Dependency Injection (CDI) to import images into persistent volumes (PVs) and creates system disks by cloning PVs.
+
+|Storage
+|{ks_product} can integrate into the Kubernetes Container Storage Interface (CSI) for storage resource management. {ks_product} uses open-source Ceph block devices and can connect to commercial storage systems by using CSI.
+
+|Module
+|{ks_product} integrates Kube-OVN and enables security groups by using the NICs powered by Kube-OVN.
+
+|Bandwidth limits
+|{ks_product} integrates Kube-OVN and enables bandwidth limits by using the NICs powered by Kube-OVN.
+
+|Monitoring metrics
+|On top of the native Kubernetes Prometheus monitoring system, {ks_product} allows you to configure, collect, store, and query cluster monitoring data.
+
+|Alerts and monitoring
+|On top of the native Kubernetes Prometheus monitoring system, {ks_product} allows you to configure, collect, store, and query cluster alert data.
+
+|Log queries
+|On top of the native Kubernetes Fluent Bit and Elasticsearch, {ks_product} allows you to collect, store, and query log data.
+|===
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Billinglink:[id=618711fb374d4b6a9cea0a57f96f8935]
+
+{ks_product} provides the following types of editions: Basic, Developer, and Enterprise. The Basic Edition is suitable for individual and micro enterprises. In this edition, you can deploy up to 3 nodes free of charge. The Developer and Enterprise editions provide more comprehensive virtualization services and allow middle and large enterprises to deploy more nodes. For more information about billing and capabilities of each edition, see link:../03-editions/[Editions].
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Pre-deployment checklistslink:[id=15b938d2fdec4a78a9626d9ecc6293fd]
+
+Before you deploy a {ks_product} cluster, use the following checklists to ensure you have a prepared environment:
+
+* Server nodes
++
+--
+{ks_product} supports Linux and the kernel version must be 4.0 or later. We recommend that you use one of the following OSs: Ubuntu 18.04, Ubuntu 20.04, CentOS 7.9, Unity Operating System (UOS), Kylin V10, and EulerOS. We recommend that you use one of the following OSs: Ubuntu 18.04, Ubuntu 20.04, CentOS 7.9, Unity Operating System (UOS), Kylin V10, and EulerOS.
+--
+* Network planning
++
+--
+We recommend that you plan two networks for the following use:
+
+* Management network: the network where the server nodes of {ks_product} resides. We recommend that you use private VLANs and connect switches using trunks.
+* Business network: the network where virtual resources reside. You can configure multiple VLANs based on business requirements and connect vSwitches using trunks.
+--
+* Security
++
+--
+{ks_product} provides security groups to control inbound and outbound traffic of VMs in the security groups. This improves the security of virtualization services. For more information, see link:../../03-user-manual/08-security-groups/[Security groups].
+
+To ensure business continuity, {ks_product} also provides snapshots for backup. We recommend that you create snapshots for disks and VMs to enable disaster recovery.
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Technical supportlink:[id=bec9a93fb75e4452b3a6e5a426dc26ea]
+
+{ks_product} is available for production environments. {ks_product} is available for production environments.  To submit issues, visit link:https://kubesphere.com.cn/forum/t/virtualization[KubeSphere developer community].

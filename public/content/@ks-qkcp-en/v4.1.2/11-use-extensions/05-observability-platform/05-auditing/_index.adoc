@@ -1,0 +1,25 @@
+---
+title: "WhizardTelemetry Auditing"
+keywords: "Kubernetes, {ks_product-en}, auditing"
+description: "This section introduces how to use the 'WhizardTelemetry Auditing' extension."
+weight: 05
+---
+
+This section introduces how to use the "WhizardTelemetry Auditing" extension.
+
+This extension records user behaviors on the {ks_product-en} platform in real-time and provides multi-tenant perspective audit history retrieval and viewing functions, allowing for quick traceability of user operations.
+
+After installing the "WhizardTelemetry Auditing" extension,
+
+* The **Audit Log Search** option will be displayed in the toolbox at the bottom right of the page, allowing users to query audit logs within their permissions.
+* The **Log Receivers** option will be displayed under the **Cluster Settings** menu in the left navigation pane, and the **Log Receivers** page will display the **Audit Logs** tab, supporting the addition of various types of log receivers. For more information, see link:../03-logging/06-log-receivers/_index/[Log Receivers].
+
+//attention
+[.admon.attention,cols="a"]
+|===
+| Note
+
+|
+WhizardTelemetry Auditing depends on WhizardTelemetry Platform Service and WhizardTelemetry Data Pipeline. Therefore, before installing WhizardTelemetry Auditing, you must first install and configure the WhizardTelemetry Platform Service and WhizardTelemetry Data Pipeline extensions, otherwise, the auditing functions will not work properly!
+
+|===

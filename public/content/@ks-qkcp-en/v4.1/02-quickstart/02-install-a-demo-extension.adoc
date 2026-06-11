@@ -1,0 +1,43 @@
+---
+title: "Install Demo Extensions"
+keywords: "Kubernetes, {ks_product}, Quick Start, Installation, Extensions, Example, DevOps"
+description: "Show how to install extensions in the {ks_product-en} web console with DevOps as an example."
+weight: 02
+---
+
+KubeSphere extensions run on KubeSphere Core to extend and enhance the capabilities of KubeSphere, further meeting different business requirements of enterprises.
+
+This section demonstrates how to install link:https://kubesphere.co/marketplace/extensions/devops/[DevOps] as an example in the KubeSphere Enterprise web console. Once DevOps installation is completed, you can create a DevOps project in the workspace. For more information on how to use extensions, please refer to the "KubeSphere Enterprise Extension User Guide".
+
+
+== Prerequisites
+
+You should have the **platform-admin** role on the KubeSphere Enterprise platform. For more information, please refer to the "Users and Roles" guide.
+
+== Installation Steps
+
+. Log in to the {ks_product-en} web console with a user having the **platform-admin** role.
+. Click **Extensions Center** to view the list of extensions.
+. Click the **Install** button on the right side of DevOps to go to the extension installation page.
+. On the **Version Selection** tab of the installation dialog, select the version number of DevOps and install all required dependencies (if any). Then click **Next**.
++
+include::../../../_ks_components-en/admonitions/note.adoc[]
+
+During the installation, it detects whether the extension has dependencies. Dependencies are categorized as required and optional.
+
+If a required dependency is **Not Ready**, you need to install the required version first to ensure the normal use of the extension. Optional dependencies do not affect the installation of the extension.
+
+include::../../../_ks_components-en/admonitions/admonEnd.adoc[]
+
+
+. On the **Extensions Installation** tab, make optional modifications to the configuration of DevOps (if needed), and then click **Start Installation**.
++
+image:/images/ks-qkcp/en/v4.0/install-extensions.png[,100%]
+
+. On the **Cluster Selection** tab, select clusters by name or label.
+
+. On the **Diff Config** tab, edit the selected cluster's YAML file, or leave it unchanged to use the default configuration. Then click **OK** to start configuring the cluster agent.
+
+Once the installation is complete, the extension is enabled by default. You can configure, upgrade, disable, or uninstall extensions in the extensions center.
+
+

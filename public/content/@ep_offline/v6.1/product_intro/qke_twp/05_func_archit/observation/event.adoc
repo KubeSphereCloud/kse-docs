@@ -1,0 +1,44 @@
+---
+title: "事件"
+weight: 10
+---
+
+KubeSphere 事件系统使用户能够跟踪集群内部发生的事件。
+
+== 功能特性
+
+事件（Event）是 K8s 的一种特殊资源，记录了一个事件的最早产生时间、最后重现时间、重复次数、事件涉及者、事件上报者、类型及导致此次事件的原因等诸多信息。事件涉及者通常是某个资源对象，该资源对象的描述信息上一般都会有 Event 记录。
+
+Event 存储在 Etcd 里，记录了集群运行所遇到的各种大事件。出于性能与容量压力，Etcd 默认只存储最近 1h 的 Event。
+
+== 主要组件
+
+事件系统包含事件管理与事件告警。
+
+事件管理涉及的主要组件如下：
+
+* *Fluent Bit*：扩展 fluentbit 服务配置，以收集事件到 Elasticsearch 等.
+* *ks apiserver*：事件查询。
+* *eventrouter*：程序日志与 events 分离。
+
+事件告警涉及的主要组件如下：
+
+* *eventalerter*：事件告警程序，用于监听获取 events，将之与 rules 进行匹配以产生告警。
+* *RuleManager*：实现 rules 自动重载，将 alerts 发送到 alertmanager。
+* *ks apiserver*：实现自定义 rules 规则的 CRUD，基于 alertmanager api 提供与告警相关的接口。
+
+
+== 架构设计
+
+
+* eventrouter 通过 K8s 的 EventInformer 监听 Event 的创建和更新等，并适配实现 ResourceEventHandlerFuncs 将 Event 导出到指定的 sink。
++
+
+include::../../../../../../_components/note.adoc[]
+ResyncPeriod 规定每隔多久，控制器遍历缓存中所有对象，并调用 OnUpdate。如果控制器可能错过对象更新事件，或者先前的事件处理回调可能执行失败，则此配置参数很重要。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+* labels 用于标识告警的相同实例。
+* annotations 是 labels 所标识告警的最新实例的消息。
+* 事件查询方法可参考 https://prometheus.io/docs/alerting/latest/alertmanager/[AlertManager] 官方提供的 HTTP API 以及源码中的相关 API。

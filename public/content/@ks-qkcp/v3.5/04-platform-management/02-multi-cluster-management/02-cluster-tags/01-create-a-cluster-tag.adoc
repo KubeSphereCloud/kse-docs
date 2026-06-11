@@ -1,0 +1,67 @@
+---
+title: "创建集群标签"
+keywords: "Kubernetes, {ks_product}, 多集群管理, 集群标签, 创建集群标签"
+description: "介绍如何创建集群标签。"
+weight: 01
+---
+
+// :ks_include_id: ffa9e7836f5a4a33932221c76e6dce31
+:ks_xref_id: 31c8f97a1cf84aefbc59c5c31f04c618
+:ks_comp: ../../../../components/
+:ks_title: 创建集群标签
+:ks_keywords: Kubernetes, {ks_product}, 多集群管理, 集群标签, 创建集群标签
+:ks_description: 介绍如何创建集群标签。
+:ks_weight: 01
+:ks_icon:
+:ks_menu: **平台管理 > 集群管理**
+:ks_permission: **集群管理**
+
+
+本节介绍如何创建集群标签。
+
+
+== 前提条件link:[id=aa58ecd16a09474d84f34fe536dc8f7b]
+
+
+//:relfileprefix: ../../../../
+* 您需要在{ks_product_both}平台具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅link:../../../../04-platform-management/04-access-control/02-users/_index/[用户]和link:../../../../04-platform-management/04-access-control/03-platform-roles/_index/[平台角色]。
+// include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+//:relfileprefix: ./
+
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-prer-enableMulticlusterManagement.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=e6ab1be8b214486689d1883506c0c8a4]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusterTags/clusterTags-openListPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. 在**创建标签**对话框，设置标签的键和值，然后点击**确定**。
++
+--
+* 点击**添加**可同时创建多个标签。
+
+* 在已添加的标签右侧点击 image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] 可删除标签。
+
+标签创建完成后将显示在标签列表中。
+--

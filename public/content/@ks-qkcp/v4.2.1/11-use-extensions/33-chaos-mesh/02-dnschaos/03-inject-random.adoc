@@ -1,0 +1,65 @@
+---
+title: "注入 DNS 随机响应"
+weight:  03
+---
+
+本节介绍如何使指定域名的 DNS 解析返回随机 IP 地址。
+
+故障注入期间，对 `ci-bot.kubesphere.io` 执行 DNS 查询将返回一个随机生成的 IP 地址，而非真实地址。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *DNSChaos*。
+. 配置以下参数后点击*创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|故障类型（action）
+|选择 `random`，使 DNS 解析返回随机 IP。
+
+|匹配域名（patterns）
+|触发故障的域名，例如 `ci-bot.kubesphere.io`。
+
+|持续时间（duration）
+|故障持续时间，例如 `10m`。
+
+|生效范围（selector）
+|选择故障注入的目标命名空间和 Pod。
+|===
+
+
+   对应 YAML 示例如下：
+
+[source,yaml]
+----
+apiVersion: chaos-mesh.org/v1alpha1
+kind: DNSChaos
+metadata:
+  name: dns-random
+  namespace: default
+spec:
+  action: random
+  duration: 10m
+  patterns:
+    - ci-bot.kubesphere.io
+  mode: all
+  selector:
+    namespaces:
+      - default
+    pods:
+      default:
+        - "{{podID}}"
+----
+
+
+验证故障效果：
+
+[source,shell]
+----
+kubectl exec "{{podID}}" -- nslookup ci-bot.kubesphere.io
+----
+
+
+   正常情况下返回真实 IP 地址；故障注入期间每次解析将返回不同的随机 IP 地址。

@@ -1,0 +1,24 @@
+// :ks_include_id: 6883b8e230774b5085de676f53fe897b
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Key
+|The key in the notification content. Click the dropdown list to select a preset key, or you can enter a custom key in the dropdown list.
+
+|Operator
+|The operator for the filter condition.
+
+* **Contains**: The value corresponding to the key contains a specific string.
+
+* **Does Not Contain**: The value corresponding to the key does not contain a specific string.
+
+* **Exists**: The specified key exists in the notification content.
+
+* **Does Not Exist**: The specified key does not exist in the notification content.
+
+* **Regex Match**: Filters notifications that meet the condition through a regular expression.
+
+|Value
+|The string that the value corresponding to the key must contain. Press **Enter** to set multiple strings; the condition is satisfied if the value corresponding to the key contains any one of these strings.
+|===

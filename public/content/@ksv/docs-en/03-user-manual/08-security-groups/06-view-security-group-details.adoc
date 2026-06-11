@@ -1,0 +1,72 @@
+---
+title: "View security group details"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, security groups, details, view"
+description: "Describes how to view the details of a security group in the {ks_product} web console."
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 87a37f19bd5b4e7bb1680d60c9fc3608
+:ks_xref_id: 19df5d878c164ad5bcd8c8b02d793e71
+:ks_comp: ../../../components/
+:ks_title: View security group details
+:ks_description: Describes how to view the details of a security group in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, security groups, details, view
+:ks_weight: 06
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of a security group in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=d938f7c8d3124c689f3e0026c7d8ef72]
+
+include::../../../_custom-en/security-groups/security-group-steps.adoc[]
+
+. On the **Security Groups** page, click the name of a security group to view its details.
+. On the left side of the details page, view basic information about the security group.
++
+--
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the security group in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the security group.
+
+|Created at
+|The time when the security group was created.
+
+|Created by
+|The username that is used to create the security group.
+|===
+--
+. On the **Inbound Traffic** or **Outbound Traffic** tab, view the inbound or outbound rules. For more information, see link:../02-add-security-group-rule/[Add a security group rule].
+. On the **Associated Resources** tab, view the resources that are associated with the security group.
++
+--
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the associated resource.
+
+|ID
+|The UUID of the associated resource in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the associated resource.
+
+|IP Address
+|The IP address of the associated resource.
+|===
+--

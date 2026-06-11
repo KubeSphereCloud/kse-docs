@@ -1,0 +1,62 @@
+---
+title: "View Workspace Member Details"
+keywords: "Kubernetes, {ks_product}, Workspace Management, Workspace Settings, Workspace Members, View Workspace Member Details"
+description: "Describes how to view workspace member details."
+weight: 03
+---
+
+:ks_permission: **Member View**
+:ks_navigation: **Workspace Settings > Workspace Members**
+
+
+This section describes how to view workspace member details.
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. In the workspace member list, click the name of a workspace member to open its details page.
+
+. On the workspace member details page, view the resource attributes of the workspace member in the **Attributes** area.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Workspace
+|The name of the current workspace.
+
+|Workspace Role
+|The role of the workspace member.
+
+|Email
+|The email address of the workspace member.
+|===
+--
+
+. On the workspace member details page, view the projects the workspace member belongs to on the **Projects** tab.
++
+--
+Click the **Cluster** drop-down list in the upper left corner and select a cluster to view projects in a specific cluster.
+
+// * The workspace member details page currently does not provide information about federated projects.
+--

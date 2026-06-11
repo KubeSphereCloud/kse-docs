@@ -1,0 +1,54 @@
+---
+title: 环境信息规划
+weight: 55
+---
+
+
+[cols='1,2a,2a'] 
+|===
+| 项目	| 说明	| 规划示例
+
+| Global 服务模式	| 新建环境时默认为单 Region 单 Zone 模式，无需配置。| 单 Region 单 Zone 	
+| region_id	| 
+
+* 配置后不可修改。
+* 不能为 global 这几个字符。
+* 不能和 console_id、zone_id 重复。
+| demo1
+
+| console_id	| 
+
+* 配置后不可修改。
+* 不能为 global 这几个字符。
+* 不能和 region_id、zone_id 重复。
+| demo	
+
+| zone_id	| 
+
+* 配置后不可修改。
+* 不能为 global 这几个字符。
+* 不能和 region_id、console_id 重复。
+| demo1a 
+
+| Web 协议	| http 和 https二选一，是 Webconsole 管理控制台的访问协议。如果需要从公网访问，必选 https, 否则可选 http。
+
+选择 https，还需要购买 SSL 证书。
+
+| http/https
+| SSL 证书	| 使用 https 协议时，需要购买 SSL 证书。
+
+建议购买通配符证书，例如域名为 `qcloud.gome.com.cn`，可购买证书 `*.qcloud.gome.com.cn`。 | -
+| 域名	| 青云管理控制台等服务需要域名访问，需要和客户确定主域名，不能和其他域名冲突，且配置后不可更改。
+
+例如配置域名为 democloud.com，部署完成后的访问域名如下:
+
+console.democloud.com
+
+boss.democloud.com	
+
+| 主域名：democloud.com
+
+| ntp server	| 一般指向客户的 NTP 服务器或者外网 NTP 服务器。若不指定，系统会自动选择 VG 节点或 KS 节点作为 NTP 服务器。	| -
+| 邮件服务器	| 用于邮件通知、邮件告警等。配置后可以修改。	| 邮件服务器地址、用户名和密码。
+| DNS转发	| 根据实际需求进行规划。	| 一般指向客户 DNS 服务器。
+|===

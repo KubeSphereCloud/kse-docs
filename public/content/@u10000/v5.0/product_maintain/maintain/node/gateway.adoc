@@ -1,0 +1,63 @@
+---
+title: 下线网关节点
+weight: 1
+draft: true
+---
+
+在进行节点下线前，用户需根据《{product_name} 巡检手册》对当前环境进行检查，确认当前环境运行正常，才可执行以下操作。
+
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，从 FirstBox 节点跳转至待下线节点。命令行中的 `<host_name>` 为待下线的节点的 Host Name，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh <host_name>
+----
+
+. 在待下线节点上，执行如下命令行，停止 Keepalived 服务。
++
+[source,shell]
+----
+systemctl stop keepalived
+----
+
+. 执行如下命令行，防止 Keepalived 服务开机重启。
++
+[source,shell]
+----
+systemctl disable keepalived
+----
+
+. 执行如下命令行，停止 Docker 服务。
++
+[source,shell]
+----
+docker stop $(docker ps -a | grep -v "firstbox" | awk '{print $1}')
+----
+
+. 执行如下命令行，将待下线节点关机。
++
+[source,shell]
+----
+shutdown -h now
+----
+
++
+include::../../../../../_components/note.adoc[]
+
+域名变更完成后，账号信息如下。
+
+* 原管理员账号不能使用，系统自动创建新管理员账号。
+* 原账号不能使用，新账号需新建。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+

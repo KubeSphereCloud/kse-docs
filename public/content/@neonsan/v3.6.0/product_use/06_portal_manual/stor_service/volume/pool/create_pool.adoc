@@ -1,0 +1,37 @@
+---
+title: '创建/删除普通卷组'
+weight: 1
+draft: false
+---
+
+
+. 登录 link:../../../../login[Portal 管理界面]。
+
+. 点击左侧导航栏**存储服务** > **块存储** > **卷管理**，进入卷管理页面。
+
+. 点击当前页面内的**更多操作** > **卷组管理**，弹出**卷组管理**新窗口，并选择**卷组**页签。
++
+image::/images/neonsan/portal_create_pool_2.png[,70%]
+
+. 在卷组管理窗口，点击**创建卷组**，在弹出的新窗口中输入``卷组名``，点击**保存**即可。
++
+
+include::../../../../../../../_components/note.adoc[]
+卷组名集群内全局唯一。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_create_pool_3.png[,50%]
+
+. 创建成功的新卷组会显示在**卷组管理**列表，该页面会展示集群中已存在的所有普通卷组的``名称``、卷组内的``卷数量``以及卷组``创建时间``。点击指定卷组所在行右侧的更多操作，可对卷组进行``删除卷组``操作。
++
+
+include::../../../../../../../_components/attention.adoc[]
+待删除的卷组，对应的卷数量应为 0。若不为 0，需先删除对应的卷后再删除卷组。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_create_pool_4.png[,70%]
+
+
+

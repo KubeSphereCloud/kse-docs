@@ -1,0 +1,83 @@
+---
+title: "Query Trace Information"
+keywords: "Kubernetes, {ks_product}, Tracing, Network, Observability"
+description: "Describes how to query request trace information."
+weight: 01
+---
+
+:ks_navigation: **Tracing > Trace Query**
+
+This section describes how to query request trace information.
+
+WizTelemetry Tracing aggregates request traces by service dimension, enabling layered analysis for observability.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../05-users-and-roles/01-users/[Users] and link:../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Tracing** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. In the dropdown lists at the top of the page, select the cluster and service. View the request trace information for the selected service within the specified time range through the visual chart and trace list.
++
+--
+// include::../../../../../_ks_components/oper-selectTimeRange.adoc[]
+* Click image:/images/ks-qkcp/zh/icons/clock-2.svg[clock-2,18,18] in the upper right corner to set the time range for the data. The default is **Last 30 minutes**.
+
+* Click the **Last 20 records** dropdown list to select viewing the last 10, 50, or 100 records.
+
+* Click the search box and set search criteria to search for trace information by Trace ID, Span name, tags, minimum duration, or maximum duration.
+--
+
+. In the chart area, the horizontal axis represents the request initiation time, and the vertical axis represents the total time taken from request initiation to completion. The size of the bubbles is achieved by mapping the duration value to the bubble area; the longer the duration, the larger the bubble.
++
+--
+* Click a bubble to view the corresponding service name, Span name, and duration.
+
+* Click **Hide Chart/Show Chart** at the bottom right of the chart to hide or show the chart.
+--
+
+. In the trace list area, view the trace information for the selected service within the specified time range. You can sort by Start Time/Duration.
++
+--
+The trace list displays the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Trace ID
+|The unique identifier of the trace, used to track the complete request lifecycle in a distributed system (typically a 32-bit hash value), e.g., `c76049d283c30cdfdf26e2485ba5fae32`.
+
+|<Service Name>:<Root Span Name>
+|Displayed below the Trace ID. Used to identify the entry service and its initial operation for the entire trace, e.g., `loadgenerator:GET`.
+
+|Total Span Count
+|The total number of Spans in the trace, e.g., `8 Spans`.
+
+Each Span represents an independent operational unit within the trace (e.g., microservice call, database query).
+
+|Service & Span Count
+|Following the total Span count, each service involved in the trace and its corresponding Span count are displayed, e.g., `loadgenerator 2`.
+The Span count reflects the number of times the service was invoked within the trace.
+
+If there are Spans with an error status under the trace, the total number of error data is also displayed here, e.g., `3 Error`.
+
+|Duration
+|The total time taken from request initiation to completion.
+
+|Start Time
+|The time the request was initiated.
+|===
+--

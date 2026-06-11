@@ -1,0 +1,90 @@
+---
+title: "服务器时间不正确"
+weight: 70
+---
+
+== 可能原因
+
+没有外网 NTP 服务器，且部署企业云平台之前，未手动配置服务器时间。
+
+== 解决方法 
+
+. 登录 FirstBox。
+. 执行以下命令，查看企业云平台内部 ntpserver。
++
+[source]
+----
+cat /pitrix/conf/variables/variables.yaml | grep ntp
+----
++
+回显信息如下，可以看到 ntp 节点地址。
++
+[source]
+----
+  ntp_server_address: '10.16.11.91'
+  ntp_secondary_address: 
+----
+
+. 确认并调整 ntp_server 时间。
+ .. 通过 ntp_server_address 登录 ntp_server。
+ .. 执行以下命令，查看服务器时间是否正确。
++
+[source]
+----
+date
+----
+ .. 若时间不正确，请执行以下命令，修改服务器时间。
++
+[source]
+----
+date -s “yyyymmdd hh:mm:ss”
+----
++
+示例：
++
+[source]
+----
+date -s “20220831 12:00:00”
+----
+ .. 修改时间后，执行以下命令，保存配置。
++
+[source]
+----
+hwclock --systohc
+----
+. 确认并调整 ntp_secondary 时间。
+ .. 通过 ntp_secondary_address 登录 ntp_secondary。
+ .. 执行以下命令，查看服务器时间是否正确。
++
+[source]
+----
+date
+----
+ .. 若时间不正确，请执行以下命令，修改服务器时间。
++
+[source]
+----
+date -s “yyyymmdd hh:mm:ss”
+----
+示例：
++
+[source]
+----
+date -s “20220831 12:00:00”
+----
+ .. 修改时间后，执行以下命令，保存配置。
++
+[source]
+----
+hwclock --systohc
+----
+. 如果时间误差很大，ntp 可能会失去自动调节能力，此时请执行以下命令，手动配置其他节点的时间。
++
+[source]
+----
+fb exec_nodes non-ntp 'ntpdate -u <ntp_server_address>;hwclock -w'
+----
++
+**参数说明**：
++
+ntp_server_address：请填写步骤2获取到的 ntp 节点地址。

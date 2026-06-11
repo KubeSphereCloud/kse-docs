@@ -1,0 +1,57 @@
+---
+title: "View EIP details"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, EIPs, details, view"
+description: "Describes how to view the details of elastic IP addresses (EIPs) in the {ks_product} web console."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 174e131f440d479c87f695436b8f1acd
+:ks_xref_id: 527572d774724bbcb8c794ffe47c1129
+:ks_comp: ../../../../components/
+:ks_title: View EIP details
+:ks_description: Describes how to view the details of elastic IP addresses (EIPs) in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, EIPs, details, view
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of elastic IP addresses (EIPs) in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=0cd294d364d6469e90033ca691020891]
+
+include::../../../../_custom-en/networks/eip-steps.adoc[]
+
+. On the **EIPs** page, click the name of the EIP that you want to view. The details page of the EIP appears.
+. On the left side of the details page, view basic information and associated resources of the EIP.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the EIP in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the EIP.
+
+|IP Address
+|The EIP.
+
+|Created at
+|The time when the EIP was created.
+
+|Created by
+|The username that is used to create the EIP.
+
+|Associated Resources
+|The resources that are associated with the EIP.  You can associate EIPs with virtual private clouds (VPCs) or VMs.
+|===
+--

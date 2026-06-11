@@ -1,0 +1,70 @@
+---
+title: "Delete physical networks"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, physical networks, deletion"
+description: "Describes how to delete physical networks in the{ks_product_both}web console."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 341c2b3a25514c5ea3287fdfa43cf8a9
+:ks_xref_id: dd0c7e16830041a3a69ce662bb409bc2
+:ks_comp: ../../../../components/
+:ks_title: Delete physical networks
+:ks_description: Describes how to delete physical networks in the{ks_product_both}web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, physical networks, deletion
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete physical networks in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=e527518cecef480e85b4d8c613612cb1]
+
+* The user that you use has been granted the permissions to use the **Physical Resources** module.  The **Physical Resources** module is available only to user **admin**.
+* No subnets are created in the physical network that you want to delete.  If you delete a physical network in which subnets are created, an error can occur.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a physical networklink:[id=0f3c63029dbd43ecb69834b0ce708dc8]
+
+include::../../../../_custom-en/networks/physical-network-steps.adoc[]
+
+. Find the physical network that you want to delete, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+The physical networks cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple physical networks at a timelink:[id=1de00ee126744b91a8dccddde8b01872]
+
+include::../../../../_custom-en/networks/physical-network-steps.adoc[]
+
+. On the **Physical Networks** page, select the check boxes next to the physical networks that you want to delete, and click **Delete**.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+Physical networks cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

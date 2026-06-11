@@ -1,0 +1,389 @@
+---
+title: settings.<zone_id>.yaml
+weight: 30
+---
+
+该文件用于配置各个物理服务器节点上需要运行的角色，以及各角色的部署方式。修改配置文件步骤如下。
+
+// 本文以 settings.testcloud1.yaml 为例（即 Zone_ID 为 testcloud1）。
+
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+
+. 执行以下命令，从模版创建配置文件，文件名为 `settings.<zone_id>.yaml`。
++
+[source,shell]
+----
+cp -f /pitrix/config/templates/settings.template.yaml /pitrix/config/settings.<zone_id>.yaml
+----
++
+
+include::../../../../../../_components/note.adoc[]
+
+* 文件名中的 <zone_id> 为可用区 ID，请根据环境规划中的信息进行替换。
+* 与配置文件 `variables.<zone_id>.yaml` 名中的 `<zone_id>` 保持一致。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，修改配置文件 `settings.<zone_id>.yaml` 内容。
++
+[source,shell]
+----
+vi /pitrix/config/settings.<zone_id>.yaml
+----
+
+
+配置文件中，各字段详细说明如下。
+
+== 配置文件示例
+
+[source,yaml]
+----
+roles:
+  10.10.0.11:
+    role: 'ks-vm'
+    sub_roles: 'seed,snapshot,vbr'
+    vms: 'pgpool0,pgserver0,webservice0,boss0,proxy0,dnsmaster0,zoocassa0,zoocassa1,cloudsat0'
+  10.10.0.21:
+    role: 'ks-vm'
+    sub_roles: 'seed,snapshot,vbr'
+    vms: 'pgpool1,pgserver1,webservice1,boss1,proxy1,dnsmaster1,zoocassa2,cloudsat1,influxdb0'
+  10.10.0.51:
+    role: 'hyper-sanc'
+    sub_roles: 'hyper'
+    vms: ''
+    plg: ''
+  10.10.0.61:
+    role: 'hyper-sanc'
+    sub_roles: 'hyper'
+    vms: ''
+    plg: ''
+  10.10.0.52:
+    role: 'hyper-sanc'
+    sub_roles: 'hyper'
+    vms: ''
+    plg: ''
+
+# 如果环境没有 VG 节点，则不需要配置 EIP，可以删除或注释如下eip参数
+eip:
+  10.10.0.10:
+    - '20.0.0.0/24|.1'
+  10.10.0.20:
+    - '20.0.0.0/24|.1|HA0'
+
+# 如果variables.Zone_ID.yaml文件中installer_allocate_vbc参数配置为1了，则不需要手动配置VBC，可以删除或注释如下vbc参数
+vbc:
+  - mgmt_ips: ['10.10.0.13', '10.10.0.23', '10.10.0.31', '10.10.0.41']
+    ipv4_vbc: '10.20.1.0/24'
+    ipv4_vip: '10.10.0.201|10.10.0.13'
+  - mgmt_ips: ['10.10.0.32', '10.10.0.42']
+    ipv4_vbc: '10.20.2.0/24'
+    ipv4_vip: '10.10.0.202|10.10.0.14'
+----
+
+== 参数说明
+
+=== roles 配置
+
+用于配置节点角色。节点类型包括：VG 节点、KS 节点、Hyper 节点，各类型节点上配置的角色不同。角色分类，可参考link:#_节点角色说明[附录]相关内容。
+
+**配置示例**
+
+[source,yaml]
+----
+roles:
+  10.10.0.11:  # 可以填写物理节点的 IP 段或者物理节点的主机名称。
+    role: 'ks-vm'
+    sub_roles: 'seed,snapshot,vbr'
+    vms: 'pgpool0,pgserver0,webservice0,boss0,proxy0,dnsmaster0,zoocassa0,zoocassa1,cloudsat0'
+  10.10.0.21:
+    role: 'ks-vm'
+    sub_roles: 'seed,snapshot,vbr'
+    vms: 'pgpool1,pgserver1,webservice1,boss1,proxy1,dnsmaster1,zoocassa2,cloudsat1,influxdb0'
+  10.10.0.51:
+    role: 'hyper-sanc'
+    sub_roles: 'hyper'
+    vms: ''
+    plg: ''
+  10.10.0.61:
+    role: 'hyper-sanc'
+    sub_roles: 'hyper'
+    vms: ''
+    plg: ''
+  10.10.0.52:
+    role: 'hyper-sanc'
+    sub_roles: 'hyper'
+    vms: ''
+    plg: ''
+
+----
+
+**参数说明**
+
+[cols='1,3a,2a']
+|===
+| 参数 | 说明 | 示例
+
+| 10.10.0.11:
+| 指定待配置角色的物理节点，依次为各物理节点配置角色。填写方式说明如下：
+
+* 可指定单个物理节点的 IP，依次为各物理节点配置角色。
+* 可通过单个主机名称，依次为各节点配置角色。
+* 可通过物理节点 IP 段批量指定物理节点，系统将会随机部署相应角色到指定范围的物理主机上。
+|
+* 10.10.0.10:
+* testoem05n00:
+* 10.10.0.11/24-10.10.0.13/24:
+
+| role | 物理机角色。
+
+* VG 节点请配置为 `vg`。
+* KS 节点请配置为 `ks-vm`。
+* 计算节点使用 SDS1.0 存储，配置为 `hyper-pair`。
+* 计算节点使用 SDS2.0 存储，配置为 `hyper-repl`。
+* 计算节点使用 NeonSAN，配置为 `Hyper-sanc`。
+* 计算节点使用远端存储（非青云存储系统），配置为 `hyper-tpsc`。
+| -
+
+| sub_roles
+| 需要部署在该物理机上的服务。| -
+
+| vms
+| 需要部署在该物理机上的虚拟机角色。| -
+
+| plg
+| 填写安置组 ID，为 Hyper 节点绑定安置组。常用安置组 ID 请参见link:../../initialize/ini_hyper/#_默认安置组[默认安置组] 。| -
+
+| is_over_sale | Hyper 节点的 CPU、内存是否超卖。
+
+* `1` 表示超卖：如果超卖，这个 Hyper 节点的每个网卡需配置 64 个 VF。
+* `0` 表示不超卖：如果不超卖，这个 Hyper 节点的每个网卡需配置 32 个 VF。
+| -
+
+|===
+
+
+=== EIP 配置
+
+若当前环境中，不部署 VG 节点，则无需配置该部分参数，可以删除或注释该部分参数。
+
+**配置格式**
+
+[source,yaml]
+----
+eip:
+  10.10.0.10:
+    - '20.0.0.0/24|.1'
+    - '10.0.0.0/24|.1'
+  10.10.0.20:
+    - '20.0.0.0/24|.1|HA0'
+----
+
+**参数说明**
+
+[cols='1,3a']
+|===
+| 参数 | 说明
+
+| 10.10.0.10:| VG 节点管理网 IP。依次填写 VG 所在物理节点的 IP 地址。
+| 20.0.0.0/24\|.1 | 填写公网网段以及网关。
+
+* 格式为：公网网段\|网关
+* 允许指定多段公网网段。多段填写格式，参考示例。
+
+| 20.0.0.0/24\|.1\|HA0|
+
+* 填写公网网段、网关以及绑定网卡。
+* `\|HA0` 为当前公网网段绑定网卡。需根据实际情况进行填写。
+|===
+
+
+
+=== VBC 配置
+
+网络模式为 SDN 模式，且未自动分配 VBC 网络时，才需要配置该部分参数。
+
+**配置说明**
+
+* 当配置文件link:../variables/#_环境配置[ variables.<zone_id>.yaml] 中，参数 `is_vlan_mode` 配置为 `1` 时，无需配置该部分参数。
+* 当配置文件link:../variables/#_环境配置[ variables.<zone_id>.yaml] 中，参数 `is_vlan_mode` 配置为 `0`，且link:../variables/#_网络配置[ variables.<zone_id>.yaml] 中，参数 `installer_allocate_vbc` 配置为 `0` 时，需要配置该部分参数。
+
+**配置格式**
+
+* 配置一个 VBC 网段
++
+[source,yaml]
+----
+vbc:
+  - mgmt_ips: ['10.10.0.13', '10.10.0.23', '10.10.0.31', '10.10.0.41']
+    ipv4_vbc: '10.20.1.0/24'
+    ipv4_vip: '10.10.0.201|10.10.0.13'
+----
+
+* 配置多个 VBC 网段
++
+[source,yaml]
+----
+vbc:
+  - mgmt_ips: ['10.10.0.13', '10.10.0.23', '10.10.0.31', '10.10.0.41']
+    ipv4_vbc: '10.20.1.0/24'
+    ipv4_vip: '10.10.0.201|10.10.0.13'
+  - mgmt_ips: ['10.10.0.32', '10.10.0.42']
+    ipv4_vbc: '10.20.2.0/24'
+    ipv4_vip: '10.10.0.202|10.10.0.32'
+  - mgmt_ips: ['10.10.0.14', '10.10.0.24', '10.10.0.51', '10.10.0.61']
+    ipv4_vbc: '10.20.3.0/24'
+    ipv4_vip: '10.10.0.203|10.10.0.51'
+  - mgmt_ips: ['10.10.0.52', '10.10.0.62']
+    ipv4_vbc: '10.20.4.0/24'
+    ipv4_vip: '10.10.0.204|10.10.0.52'
+----
+
+
+**参数说明**
+
+[cols='1,3,2']
+|===
+| 参数 | 说明 | 示例
+
+| mgmt_ips
+a| VBC 所在的 Hyper 节点的管理地址。多个 IP 地址之间以逗号分隔。
+
+|
+- mgmt_ips: ['10.10.0.13', '10.10.0.23', '10.10.0.31', '10.10.0.41']
+
+| ipv4_vbc
+| 承载 IPv4 的 VBC 网段。
+| -
+
+| ipv4_vip
+a|
+
+* 格式为：IPV4_VIP\|IPV4_VIP_LOCATION
+* IPV4_VIP 为 Hyper 节点的 VIP，手动填写，需与管理网络在同一网段。
+* IPV4_VIP_LOCATION 为 Hyper 的 Master 节点的管理地址，填写 `mgmt_ips` 中的一个。
+
+|
+ipv4_vip: '10.10.0.201\|10.10.0.13'
+
+表示 Master 节点为 `10.10.0.13` 节点，该节点上 VBC 对外的 VIP 为 `10.10.0.201`。
+
+| ipv6_vbc
+| 承载 IPv6 的 VBC 网段。
+| -
+
+| ipv6_vip
+a|
+
+* 格式为：IPV6_VIP\|IPV6_VIP_LOCATION
+* IPV6_VIP 为 承载 IPv6 的 VBC 的对外的 VIP。
+* IPV6_VIP_LOCATION 为 Hyper 的 Master 节点的管理地址，填写 `mgmt_ips` 中的一个。
+|
+ipv6_vip: '2402:e7c0:84:7::1e\|10.10.0.13'
+
+表示 Master 节点为 `10.10.0.13` 节点，该节点上 VBC 对外的 VIP 为 `2402:e7c0:84:7::1e`。
+|===
+
+
+
+=== IPv6 配置
+
+用于填写 IPv6 的管理地址。当配置文件link:../variables/#_环境配置[ variables.<zone_id>.yaml] 中，参数 `installer_allocate_vbc_ipv6_mgmt` 配置为 `1` 时，无需配置该部分参数。
+
+
+**配置示例**
+
+[source,yaml]
+----
+ipv6_mgmt:
+  172.16.80.10: '2402:e7c0:84:7::11'
+  172.16.80.11: '2402:e7c0:84:7::12'
+  172.16.80.12: '2402:e7c0:84:7::13'
+----
+
+**参数说明**
+
+* 填写格式参考示例。其中 `172.16.80.12:` 为 Hyper 节点的管理 IP，`'2402:e7c0:84:7::13'` 为相应的 ipv6 格式地址。
+
+* 每个 Hyper 节点均需指定 IPv6 管理地址，多个 Hyper 节点的填写格式，参考示例。
+
+== 附录
+
+=== 节点角色说明
+
+[cols='1,1,1,3a,1']
+|===
+| 角色	| 部署节点	| 是否必须部署	| 部署方式	| 初始部署角色数量
+
+| vgateway
+| VG
+| 否
+
+|
+* 物理机上部署。
+* 若没有 VG 节点，则无需部署。
+| >=2
+
+| proxy +
+dnsmaster
+a| VG 或 KS
+
+| 是
+|
+* 虚拟机部署。
+* 若有 VG 节点：部署在 VG 节点。
+* 若没有 VG 节点：部署在 KS 节点。
+| 2
+
+| seed +
+snapshot +
+vbr
+| KS
+| 是
+| 物理机部署。
+| 2
+
+| pgpool +
+pgserver
+| KS
+| 是
+a|
+
+* 可使用物理机或虚拟机进行部署。建议部署在物理机上。
+* 两者可以部署于相同的节点上。但禁止一个部署于物理机，一个部署于虚拟机。
+* 若管理节点不多，只有 2 个 KS 节点，可以使用虚拟机部署。
+* 若物理管理节点足够多，4 个以上 KS 节点，建议两者分开部署。
+| 2
+
+| zoocassa
+| KS
+| 是
+|
+* 可使用物理机或虚拟机进行部署。建议部署在物理机上。
+* 若物理管理节点不够，只有 2 个 KS 节点，可以使用虚拟机部署。
+| 3
+
+| webservice +
+boss
+| KS	| 是	| 虚拟机部署。	| 2
+
+| warehouse	| KS	| 否	| 虚拟机部署。	| 2
+
+| influxdb	| KS	| 是	| 虚拟机部署。	| 1
+
+| smc +
+hpc
+| KS	| 否	| 虚拟机部署。	| 2
+
+| cloudsat	| KS	| 是	| 虚拟机部署。
+
+* 初始部署时第一个 Zone 部署 2 个节点
+* 后续每扩容一个 Zone，在新扩容的 Zone 內部署 1 个节点即可。| 2
+| hyper	| Hyper	| 是	| 物理机部署。	| >=2
+|===

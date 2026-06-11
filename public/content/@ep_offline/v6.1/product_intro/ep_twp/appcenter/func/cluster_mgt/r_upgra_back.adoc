@@ -1,0 +1,31 @@
+---
+title: "滚动升级失败恢复"
+weight: 25
+---
+
+集群滚动升级失败后的恢复逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_16.png[]
+
+功能流程说明：
+
+. 配置包中是否支持 rollback：
++
+* 不支持，执行步骤 2。
+* 支持，执行步骤 3。
+
+. 关闭集群，再次启动集群（使用新版本镜像），退出流程，操作结束。
+. 将 upgrade-audit 注册到 metadata service。
+. 不同角色节点按照 order 升序执行 upgrade_pre_check 脚本：
++
+* 如果返回报错（非 0），降级失败，删除 upgrade-audit，退出流程，操作结束。
+* 如果返回 0，继续执行步骤 5。
+
+. 执行 get_nodes_order 脚本，获取角色对应的节点降级顺序。
+. 每个节点按照顺序依次执行如下操作：
+.. 执行 stop_cmd 脚本，关闭服务。
+.. 关闭 confd agent 服务。
+.. 关闭节点虚拟机，替换旧版本镜像并启动虚拟机，启动 confd agent 服务。
+.. 执行 start cmd，启动服务。
+
+. 所有节点降级成功后，删除注册到 metadata service 中的 upgrade-audit 数据，降级恢复完成。

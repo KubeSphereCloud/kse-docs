@@ -1,0 +1,186 @@
+---
+title: 创建集群（DeployAppVersion）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| auto_renew
+| Integer
+| false
+| 自动续费
+
+| charge_mode
+| String
+| false
+| 计费模式
+
+| conf
+| String
+| true
+| 集群详细配置
+
+| config_type
+| String
+| false
+| 配置类型
+
+| coupon_id
+| String
+| false
+| 优惠券ID
+
+| debug
+| Integer
+| false
+| 开发者模式
+
+| dry_run
+| String
+| false
+| 试运行
+
+| hypervisor
+| String
+| false
+| 物理机ID
+
+| months
+| Integer
+| false
+| 续费时长（月）
+
+| multi_deploy_zones
+| Array
+| false
+| 多可用区域部署
+
+| next_charge_mode
+| String
+| false
+| 续费时计费模式
+
+| order_id
+| String
+| false
+| 订单ID
+
+| region
+| String
+| false
+| 可用区所属区域ID
+
+| version_id
+| String
+| true
+| 应用版本ID
+
+| zone
+| String
+| true
+| 可用区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| false
+| 应用ID
+
+| app_version
+| String
+| false
+| 应用版本
+
+| cluster_id
+| String
+| false
+| 集群ID
+
+| cluster_name
+| String
+| false
+| 集群名称
+
+| job_id
+| String
+| false
+| 任务ID
+
+| node_count
+| String
+| false
+| 节点数量
+
+| node_ids
+| Array
+| false
+| 节点id
+
+| ret_code
+| Integer
+| false
+| 返回状态码
+
+| vxnet_id
+| String
+| false
+| 私有网络ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeployAppVersion",
+  "app_id": "app-fdyvu2wk",
+  "app_type": "cluster",
+  "charge_mode": "elastic",
+  "conf": "{\"cluster\":{\"name\":\"etcd 3.4.16\",\"description\":\"\",\"auto_backup_time\":\"0\",\"etcd_node\":{\"cpu\":2,\"memory\":4096,\"count\":3,\"instance_class\":0,\"volume_size\":10,\"volume_class\":0},\"etcd_proxy\":{\"cpu\":1,\"memory\":2048,\"count\":0,\"instance_class\":0},\"vxnet\":\"vxnet-inepcbd\",\"global_uuid\":\"65592299801796932\"},\"version\":\"appv-52759jdc\",\"resource_group\":\"Prod\",\"zone\":\"testing\",\"network_type\":\"private\",\"vpc\":\"rtr-ctkd8ddu\",\"env\":{\"etcd_node.autocompact\":0,\"etcd_node.quotabytes\":2147483648,\"etcd_node.etcd_heartbeat_interval\":100,\"etcd_node.etcd_election_timeout\":1000,\"etcd_node.nodeexporter\":\"false\",\"etcd_node.enable_TLS\":\"false\"}}",
+  "debug": 0,
+  "multi_deploy_zones": [
+    "testing1a",
+    "testing1b"
+  ],
+  "version_id": "appv-52759jdc",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateClusterResponse",
+  "app_id": "app-fdyvu2wk",
+  "app_version": "appv-52759jdc",
+  "cluster_id": "cl-80ewl2po",
+  "cluster_name": "etcd 3.4.16",
+  "job_id": "j-gf2v2nquh0j",
+  "node_count": 3,
+  "node_ids": [
+    "cln-llh2eou7",
+    "cln-ugm810vi",
+    "cln-au7fsf1j"
+  ],
+  "ret_code": 0,
+  "trace_id": "vqjVr7WJ",
+  "vxnet_id": "vxnet-inepcbd"
+}
+----

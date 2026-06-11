@@ -1,0 +1,70 @@
+---
+title: "Delete timer tasks"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, timer tasks, deletion"
+description: "Describes how to delete timer tasks in the {ks_product} web console."
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 6e532a90a3c54fffa8533288b19f276d
+:ks_xref_id: a08e9dd095004147872f7ad2d9e95e6a
+:ks_comp: ../../../../components/
+:ks_title: Delete timer tasks
+:ks_description: Describes how to delete timer tasks in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, timer tasks, deletion
+:ks_weight: 06
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete timer tasks in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=5b72b316a560454ab8449c7f41f6fd19]
+
+User **admin** can delete all timer tasks in your cluster. Project administrators and operators can delete the timer tasks created on their own, and project viewers cannot delete timer tasks.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a timer tasklink:[id=a35b7d14eeeb4556994998fb7eba8e2e]
+
+include::../../../../_custom-en/timer/timer-task-steps.adoc[]
+
+. On the **Timer Tasks** tab, click the name of the task that you want to delete. The details page of the timer task appears.
+. On the left side of the details page, click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Delete** from the drop-down list.
+. On the **Timer Tasks** tab, click the name of the task that you want to delete. The details page of the timer task appears.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+The timer task cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple timer tasks at a timelink:[id=0c5682eda71f470a86a9d7b7d77ea07e]
+
+include::../../../../_custom-en/timer/timer-task-steps.adoc[]
+
+. On the **Timer Tasks** tab, select the check boxes next to the tasks that you want to delete and click **Delete** in the upper-left corner.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+Timer tasks cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

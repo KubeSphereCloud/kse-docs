@@ -1,0 +1,27 @@
+---
+title: "编辑 Kafka 用户"
+keywords: "Kubernetes, {ks_product}, RadonDB, Kafka, 管理告警规则组, 编辑 Kafka 用户"
+description: "介绍如何编辑 Kafka 用户。"
+weight: 02
+---
+
+:ks_db_product: Kafka
+
+本节介绍如何编辑 {ks_db_product} 用户。
+
+{ks_db_product} 不支持编辑已创建用户的名称。
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+* 已创建 {ks_db_product} 用户。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 在页面右侧点击** {ks_db_product} 用户**页签打开 {ks_db_product} 用户列表。
+. 在需要编辑的用户右侧点击image:/images/dmp/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑信息**。
+. 在**编辑用户**对话框，您可以修改认证模式和权限规则。修改完成后点击**确定**。

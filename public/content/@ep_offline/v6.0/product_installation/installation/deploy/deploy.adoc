@@ -1,0 +1,98 @@
+---
+title: "安装企业云平台"
+weight: 50
+---
+
+待确认配置文件内容均符合预期后，可进行企业云平台基础功能安装。
+
+== 操作步骤
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+
+. 执行以下命令，开始部署企业云平台。
++
+[source,shell]
+----
+# /pitrix/cli/deploy-qingcloud.py -I /root/ip_list
+----
++
+回显如下信息，`ret_code` 为 `0`，表示安装任务下发成功。
++
+image::/images/ep_offline/installation/deploy_deploy_01.png[,60%]
+
+. 执行以下命令，查看部署任务的执行状态。安装时间持续较长，期间服务器会不断重启，请耐心等待。必要时，本机重新连接 FirstBox 即可。
++
+[source,shell]
+----
+# /pitrix/cli/get-deploy-qingcloud-status.py
+----
++
+**安装状态说明**：
++
+[cols='1,4a']
+|===
+| status	| 说明
+
+| step0	| 校验配置文件，构建安装程序包。
+| step1	| * 安装物理节点，对所有物理节点进行初始化。
+* 该过程会重启 FirstBox 所在物理服务器若干次。因此，本机与 FirstBox 的连接会断开，等服务器完成重启操作后，本机重新登录 FirstBox 即可。
+| step2	| 在 KS 节点上创建并启动角色虚拟机。
+| step3	| 安装虚拟机节点，包括更新操作系统内核、安装依赖包、挂载磁盘等。
+| step4	| 部署所有服务；配置 License。
+| step5	| 解析域名，生成 hosts 文件；生成 VBC 路由。
+| successful	| 安装成功。
+| failed	| 安装失败。可参考link:#_安装日志[安装日志]说明，查看相关日志信息。
+|===
+
+. 多次查看部署任务，待命令行回显如下信息，`status` 为 `successful` 时，表示安装任务下发成功。
++
+image::/images/ep_offline/installation/deploy_deploy_02.png[,60%]
+
+== 安装日志
+
+若安装任务失败，即查看部署任务状态时，`status` 为 `failed`，表示安装任务失败。
+
+此时，可在 FirstBox 节点上，查看如下日志文件，检查报错原因并修复。若仍不能解决，请联系技术支持。
+
+* 简略日志
++
+可执行命令 `/pitrix/cli/get-deploy-qingcloud-log.py`，查看任务的简略日志。
+* 详细日志
++
+可在目录 `/pitrix/log/deploy` 下，查看对应 job 的执行日志。
+* build 日志
++
+. 执行如下命令行，进入 build 包的日志目录
++
+[source,shell]
+----
+# /pitrix/log/build_pkgs/
+----
++
+. 根据如下日志文件，确认具体的部署失败的包名。
++
+[source,shell]
+----
+# pitrix/log/build_pkgs/build_pkgs.log
+----
++
+. 根据查询出来的失败的包名，查看对应包的详细 build 日志文件。这里以 `build_ks_proxy` 为例说明。
++
+[source,shell]
+----
+# /pitrix/log/build_pkgs/build_ks_proxy.log
+----
+
+
+* install 节点的日志目录
++
+可在目录 `/pitrix/log/install_nodes/` 下，查看对应节点的安装日志。更为详细的节点日志在对应节点的日志目录：/opt/install/{os,network,disk,post}。
+* deploy 包的日志目录
++
+可在目录 `/pitrix/log/update_nodes/` 下查看 deploy 包的日志目录。

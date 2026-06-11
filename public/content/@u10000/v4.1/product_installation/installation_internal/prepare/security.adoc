@@ -1,0 +1,21 @@
+---
+title: 修改安全组
+weight: 6
+---
+
+安全组需要依次放开端口号：22、6023、80、8888，以及前期创建的link:../port[端口转发]中涉及到的端口号。并且还需允许组内互信。
+
+
+. 登录 link:https://console.qingcloud.com/[Console]，输入正确的用户名密码。
+
+. 选择**产品与服务** > **安全服务** > **安全组**，进入安全组主页面。如下图所示，默认安全组的组内互信已关闭。
++
+image::/images/u10000/security_main.png[security_main,100%]
+
+. 双击默认安全组，弹出**修改安全组属性**对话框，组内互信，选择 `打开`，点击**修改**。
++
+image::/images/u10000/security_modify.png[security_modify,100%]
+
+. 点击默认安全组 ID，进入其详情页面。依次放行相应的端口号，点击**应用修改**：
++
+image::/images/u10000/security_22_6023.png[security_22_6023,100%]

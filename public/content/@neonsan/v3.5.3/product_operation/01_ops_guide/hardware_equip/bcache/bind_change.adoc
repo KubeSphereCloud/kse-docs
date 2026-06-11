@@ -1,0 +1,70 @@
+---
+title: "更换缓存盘绑定关系"
+weight: 4
+---
+
+== 适用场景
+
+在实际使用过程中，若需要更换数据盘和缓存盘的绑定关系。例如，新增缓存盘，或者缓存盘绑定错误。此时可以在使用过程中直接更换数据盘与缓存盘的绑定关系。
+
+== 注意事项
+
+若已知缓存盘已坏，可直接从步骤 4 开始进行后续操作。
+
+
+== 操作步骤
+
+. 登录相应节点。执行如下命令，直接修改待更改缓存盘的 Bcache 设备的缓存策略。
++
+[,shell]
+----
+echo "writearound" > /sys/block/bcache*/bcache/cache_mode
+----
++
+include::../../../../../../_components/note.adoc[]
+`bcache*` 为待更改缓存盘的 bcache 设备信息，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 查看脏数据下刷情况，直至返回结果为 `clean`，再进行后续操作。
++
+[,shell]
+----
+cat /sys/block/bcache*/bcache/state
+----
++
+include::../../../../../../_components/attention.adoc[]
+此处返回结果必须为 `clean`，否则将会造成数据不完整。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 解除缓存盘与数据盘之间的绑定关系。
++
+[,shell]
+----
+echo "<old_cset.uuid>" > /sys/block/bcache*/bcache/detach
+----
++
+include::../../../../../../_components/note.adoc[]
+`<old_cset.uuid>` 为待更换的缓存盘的 cset.uuid 值，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 重新绑定缓存盘。
++
+[,shell]
+----
+echo "<new_cset.uuid>" > /sys/block/bcache*/bcache/attach
+----
++
+include::../../../../../../_components/note.adoc[]
+* `<new_cset.uuid>` 为新缓存盘的 cset.uuid 值，需根据实际情况进行修改。
+* 若无法找到 `/sys/block/bcache*` 目录，则直接使用 `/sys/block/sd*`。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 恢复缓存策略。
++
+[,shell]
+----
+echo "writeback" > /sys/block/bcache*/bcache/cache_mode
+----
+
+
+

@@ -1,0 +1,54 @@
+---
+title: "编辑 SSH 密钥"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, SSH, 密钥, 编辑"
+description: "介绍如何使用{ks_product_both}Web 控制台编辑 SSH 密钥。"
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 1a13fcb45aa0488490ff7ddb9a676934
+:ks_xref_id: b213ba229c5b4e569af0dffc71b2e998
+:ks_comp: ../../../components/
+:ks_title: 编辑 SSH 密钥
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台编辑 SSH 密钥。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, SSH, 密钥, 编辑
+:ks_weight: 04
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台编辑 SSH 密钥。为安全起见，每个用户仅能编辑自己创建的 SSH 密钥。您可以通过编辑操作修改 SSH 密钥的别名和描述。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=02a7825063ee46379d8dbb8eeb34f547]
+
+include::../../../_custom/ssh/ssh-key-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 在 SSH 密钥列表页面编辑link:[id=cde14d1f72084ea9b2f8a0cad6cfdd77]
+
+include::../../../_custom/ssh/ssh-key-steps.adoc[]
+
+. 在 SSH 密钥列表页面，找到目标 SSH 密钥，点击右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**编辑**。
+
+. 在弹出的对话框中修改 SSH 密钥的别名和描述，然后点击**确定**。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 在 SSH 密钥详情页面编辑link:[id=62d845cdd9a8455aa6668e888d3bbb08]
+
+include::../../../_custom/ssh/ssh-key-steps.adoc[]
+
+. 在 SSH 密钥列表页面，点击目标 SSH 密钥名称，进入 SSH 密钥详情页面。
+
+. 在 SSH 密钥详情页面的左侧区域，点击左上角的**编辑**。
+
+. 在弹出的对话框中修改 SSH 密钥的别名和描述，然后点击**确定**。
+

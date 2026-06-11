@@ -1,0 +1,71 @@
+---
+title: "删除虚拟机"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 删除"
+description: "介绍如何使用{ks_product_both}Web 控制台删除虚拟机。"
+weight: 11
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 014a18126e6244dfa798cc9a420b3867
+:ks_xref_id: 41c471c5ad2e489992406c59116e7fb4
+:ks_comp: ../../../../components/
+:ks_title: 删除虚拟机
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台删除虚拟机。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 删除
+:ks_weight: 11
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台删除虚拟机。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=671abb66aaa848b4bfecac4cc045414f]
+
+include::../../../../_custom/vms/vm-manage-prerequisites.adoc[]
+
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 删除单台虚拟机link:[id=a0a1804577a647268a59c7197c64ddb2]
+
+include::../../../../_custom/vms/vm-view-steps.adoc[]
+
+. 在虚拟机列表页面，点击目标虚拟机名称，进入虚拟机详情页面。
+
+. 在虚拟机详情页面左上角点击 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**删除**。
+
+. 在弹出的对话框中点击**确定**可删除虚拟机。
++
+--
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+虚拟机删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 批量删除虚拟机link:[id=dbb9bd5b69974c56b87b9929b747cc33]
+
+include::../../../../_custom/vms/vm-view-steps.adoc[]
+
+. 在虚拟机列表页面，选择需要删除的虚拟机名称左侧的复选框，然后在列表上方点击**删除**。
+
+. 在弹出的对话框中点击**确定**可批量删除多台虚拟机。
++
+--
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+虚拟机删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,312 @@
+---
+title: 服务器准备
+weight: 1
+collapsible: true
+---
+
+
+== RAID 配置
+
+若当前环境使用机械盘做系统盘或数据盘，则需将各磁盘做 RAID。磁盘做 RAID 的过程，不在这里描述，这里仅列举说明各物理服务器的 RAID 配置要求。
+
+=== KS 节点
+
+KS 节点的数据盘需要做成一个 RAID。在数据盘足够的情况下，建议做 `RAID5` 或 `RAID50`。
+
+[cols="1,2,2"]
+|===
+| 磁盘用途	| 存储介质	| RAID
+
+| 系统盘	| -	| RAID1
+| 数据盘    | SAS 盘 | RAID5/RAID50
+|===
+
+
+=== Hyper 节点
+
+Hyper 节点上，系统盘均配置 `RAID1`。数据盘与缓存盘则根据存储类型与存储介质的不同，RAID 配置要求稍有区别，详细内容如下。
+
+如 SDS1.0 场景下，缓存盘使用 NVMe 时，则采用直通模式，若使用 SSD 时，则采用 RAID1 模式。
+
+[cols='1,1,1,2']
+|===
+| 存储类型	| 磁盘用途  |  存储介质 | RAID
+
+.3+| SDS1.0
+| 数据盘| SAS 盘	| RAID50/RAID5
+.2+| 缓存盘
+| NVMe	| -
+| SSD	| RAID1
+
+.2+| SDS2.0
+
+| 数据盘| NVMe	| -
+| 数据盘| SSD	| -
+
+.2+| Sanc-HDD
+
+| 数据盘| SAS	| NeonSAN 混插场景默认采用数据盘直通模式。如果有多重数据冗余等需求可以做 RAID5/RAID50，要求单个 RAID 组容量不大于 50TB。
+| 缓存盘| NVMe	| -
+
+.2+| Sanc-SSD
+| 数据盘 | NVMe	| -
+| 数据盘	| SSD	| -
+
+|===
+
+
+
+
+== 安装操作系统
+
+物理服务器投入使用之前，需安装操作系统。安装操作系统的详细步骤请参考《QingCloud 企业云 Ubuntu 操作系统安装指南》。这里简要说明如下。
+
+. 获取自动安装镜像包 `QingCloud-20.04.1-AutoInstall_orig_20230807.iso` 或 `QingCloud-20.04.1-AutoInstall_raid9560-8i_20230807.iso`。并暂存于移动存储设备。
++
+include::../../../../../_components/note.adoc[]
+
+
+* 自动安装镜像包名中的 `20.04.1` 为 ISO 的版本号，架构为 AMD64，`raid9560-8i` 为 RAID 卡驱动版本号，`20230807` 为 Patch 版本号。
+* 安装包下载路径为 `ftp://ins.qingcloud.com/isos/`。
+* {product_name}推荐使用 `Ubuntu 20.04.1`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 将存有自动安装镜像包的移动存储设备逐一与各物理服务器连接。
+
+. 点击运行镜像文件，安装操作系统。
++
+image::/images/ep_offline/installation/deploy_server_conf_os_auto.png[,60%]
++
+include::../../../../../_components/note.adoc[]
+
+* 由于自动化安装镜像脚本，默认系统盘盘符为 `sda`，若操作系统安装失败，实施人员可尝试拔掉所有数据盘后，再进行操作系统的安装。待操作系统安装完成后，再插上数据盘。
+* 为方便管理与后期运维，{product_name}要求各物理服务器的用户名密码保持一致。
+* 系统默认的用户名密码是 `yop/zhu1241jie`，若无特殊要求，无需修改。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 确认所有物理服务器均完成操作系统的安装。
+
+== 配置 Hostname
+
+操作系统成功安装完成后，用户需逐一登录各物理服务器，修改或配置主机名。为方便管理与后期运维，{product_name}要求主机名称中应包含待部署环境的 Zone ID、逻辑机柜号以及逻辑机位号。
+
+* 主机名格式
++
+[source,shell]
+----
+<Zone ID><逻辑机柜号><逻辑机位号>
+
+----
+
+* 示例
++
+待部署环境的 Zone ID 为 `testcloud1`，当前主机所在的逻辑机柜号为 `r01`，逻辑机位号为 `n00`。那么，对应的主机名应如下所示。
++
+[source,shell]
+----
+testcloud1r01n00
+
+----
+
+**操作步骤**
+
+. 逐一登录待部署环境的各物理服务器。
+
+. 执行以下操作，修改主机名。主机名需遵循前文规定的格式。
+* 方式一：使用命令行进行修改，其中 `<hostname>` 为待使用的主机名。
++
+[source,shell]
+----
+hostnamectl set-hostname <hostname>
+
+----
+* 方式二：直接修改 `/etc/hostname`，写入待使用的主机名。
++
+[source,shell]
+----
+vi /etc/hostname
+----
+
+. 确认所有物理服务器均完成主机名的修改。
+
+== 配置管理网络
+
+操作系统安装完成，且主机名成功修改后，用户需要根据环境规划，依次登录每台物理服务器，为其配置管理网络。
+
+
+**配置要求**
+
+{product_name}要求做 Bond 时，需将同一网卡的两口做 Bond，以避免网卡的交叉使用。除此之外，还有如下要求。
+
+* 对于 VG 节点，需要配置两对 Bond，一对用于连接管理网络，一对用于连接公网。
+* 对于 Hyper-Sanc 的融合节点，配置一对 Bond 用于连接物理网络，另外两条私网线路用于存储私网。
+
+
+**操作步骤**
+
+. 逐一登录待部署环境的各物理服务器。
+. 执行以下命令，修改 `/etc/network/interfaces` 配置。
++
+[source,shell]
+----
+vi /etc/network/interfaces
+----
++
+include::../../../../../_components/note.adoc[]
+
+不同网络模式下，配置文件的内容填写，稍有区别。详情可参考 link:#_sdn_模式网卡配置[SDN 模式网卡配置]与 link:#_vlan_模式网卡配置[VLAN 模式网卡配置]。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+. 确认各物理服务器均完成网络配置。
+
+=== SDN 模式网卡配置
+
+若选择 SDN 网络模式，请参照如下配置说明进行修改。
+
+[source,yaml]
+----
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto ens2f0                  # 同一张网卡的一个网口名。
+iface ens2f0 inet manual
+bond-master bond0
+
+auto ens7f0                 # 同一张网卡的另一个网口名。
+iface ens7f0 inet manual
+bond-master bond0
+
+# mgmt network
+auto bond0
+iface bond0 inet static
+address 10.10.0.11        # 需根据前期规划的管理网络进行填写。
+netmask 255.255.255.0
+gateway 10.10.0.254       # 需根据前期规划的网关节点 IP 进行填写。
+bond-mode 4
+bond-miimon 100
+bond-lacp-rate 1
+bond-slaves ens2f0 ens7f0  # 两网口做 Bond。
+----
+
+
+=== VLAN 模式网卡配置
+
+若选择 VLAN 网络模式，请参照如下配置说明进行修改。
+
+include::../../../../../_components/note.adoc[]
+
+为方便管理与后期运维，{product_name}要求待部署环境中所有 VLAN 的用户名密码保持一致。
+
+include::../../../../../_components/table_footer.adoc[]
+
+[source,yaml]
+----
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto enp175s0f0                   # 同一张网卡的一个网口名。
+iface enp175s0f0 inet manual
+bond-master bond0
+
+auto enp175s0f1                   # 同一张网卡的另一个网口名。
+iface enp175s0f1 inet manual
+bond-master bond0
+
+auto bond0
+iface bond0 inet manual
+bond-mode 4
+bond-miimon 100
+bond-lacp-rate 1
+bond-slaves enp175s0f0 enp175s0f1  # 两网口做 Bond。
+
+# mgmt network
+
+auto vlan11                        # vlan11 为 VLAN ID，应与交换机上规划的 VLAN ID 匹配。
+
+iface vlan11 inet static
+address 10.10.1.11                 # 需根据前期规划的管理网络进行填写。
+netmask 255.255.255.0
+gateway 10.10.1.254                # 需根据前期规划的网关节点 IP 进行填写。
+vlan_raw_device bond0
+----
+
+== 配置系统时间
+
+为确保操作系统能正常运行，我们需要对各物理服务器进行时间同步操作。
+
+**注意事项**
+
+* 若待部署环境已经规划了单独的 NTP 服务器，则无需执行此步骤。
+* 若待部署环境没有规划单独的 NTP 服务器，则在部署过程中，系统会自动选择 VG 节点或 KS 节点作为时钟同步的服务器，并对其他的物理服务器和管理虚机做时间同步。因此，为确保环境时间的准确性，实施人员需参考以下步骤手动配置 VG 节点或 KS 节点的时间。
+
+**操作步骤**
+
+. 根据前期规划内容，逐个登录 VG 或 KS 节点。
+
+. 执行以下命令，查看服务器当前系统时间。
++
+[source,shell]
+----
+date
+----
+. 若系统时间不正确，与实际时间有偏差，执行以下命令，修改服务器时间。
++
+[source,shell]
+----
+date -s “yyyymmdd hh:mm:ss”
+----
++
+如修改系统时间为 `20220831 12:00:00`，则命令行示例如下。
++
+[source,shell]
+----
+date -s “20220831 12:00:00”
+----
+. 系统时间成功修改后，执行以下命令，保存修改。
++
+[source,shell]
+----
+hwclock --systohc
+----
+
+
+
+. 确认所有 VG 或 KS 节点，均完成系统时间的配置。
+
+== 校验服务器信息
+
+以上操作执行完成后，需对每个物理服务器进行重启，检验以上配置修改是否成功。
+
+* **重启方式**
+
+** 方式一：通过服务器管理页面进行重启。我们推荐该方式。
+** 方式二：登录各个物理服务器，执行 `reboot` 命令重启。
+** 方式三：直接对各物理服务器进行下电再上电操作。
+
+
+* **确认硬件配置**
+** 各物理服务器的主机名称配置正确。
+** 各物理服务器的网络配置信息，如网卡 IP 和子网掩码等均配置正确。
+** 各物理服务器上硬盘盘符、容量、型号识别等信息均正确。
+** 各物理服务器之间网络互通，执行 `ping` 操作，返回网络连接正常。
+** 各 VG 或 KS 节点时间配置正确。
+
+
+* **确认网络配置**
++
+登录各服务服务器，执行 `ip a` 命令行，查看管理网卡状态。如下图所示，状态需为 `UP`。
++
+image::/images/ep_offline/installation/deploy_create_firstbox_01.png[]

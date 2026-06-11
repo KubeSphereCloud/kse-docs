@@ -1,0 +1,41 @@
+---
+title: "Import a VM template"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, templates, import"
+description: "Describes how to import a VM template in the {ks_product} web console."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 341efbbc9bdc47c6bcdf567d683deb00
+:ks_xref_id: cbef4ea25131466ab6ddd38369fa6f09
+:ks_comp: ../../../../components/
+:ks_title: Import a VM template
+:ks_description: Describes how to import a VM template in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, templates, import
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to import a VM template in the {ks_product_abbr_full} web console.
+
+{ks_product} allows you to import or export VM templates in YAML files.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=d8c53606eef441e4bac3646571c71a51]
+
+include::../../../../_custom-en/vms/vm-template-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=d657477df25c4cbcb5d4c9b6c2476962]
+
+include::../../../../_custom-en/vms/vm-template-steps.adoc[]
+
+. In the upper-right corner of the **VM Templates** page, click **Import**.
+. In the dialog box that appears, select the project to which you want to import the template, and then upload a local VM template. The template appears in the VM template list after it is imported.

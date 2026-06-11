@@ -1,0 +1,30 @@
+---
+title: '卷扩容'
+weight: 2
+draft: false
+---
+
+. 登录 link:../../../../login[Portal 管理界面]。
+
+. 选择左侧导航栏**存储服务** > **块存储** > **卷管理**，进入卷管理页面。
+
+. 点击待扩容的卷右侧的更多操作，在弹出的选项列表中选择**扩容卷**。
++
+image::/images/neonsan/portal_vol_more_opera.png[]
+
+. 在弹出的**卷扩容**窗口中，输入扩容后容量，点击**保存**。
++
+
+include::../../../../../../../_components/note.adoc[]
+* 默认情况下，卷扩容操作需在卷没有使用的前提下进行。
+* 勾选``强制扩容``，可在卷的使用过程中对卷进行扩容。
+* 扩容后卷的容量需大于扩容前卷的容量。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_vol_exp_1.png[,40%]
+
+
+
+
+

@@ -1,0 +1,87 @@
+// :ks_include_id: 8517e102a81e4402a8f9784a7931ff0c
+. On the pod details page, under the **Resource Status** tab, in the **Containers** section, click the name of a container to open the container details page.
+
+. On the container details page, view the container's resource attributes in the **Attributes** section.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the container belongs.
+
+|Project
+|The project to which the container belongs.
+
+|Application
+|The application to which the container belongs.
+
+|Status
+|The status of the container.
+
+include::../workloads/workloads-para-containerStatus.adoc[]
+
+|Image ID
+|The ID of the image used by the container.
+
+|Port
+|The port of the container.
+
+|Command
+|The command executed inside the container when it starts.
+
+|Resource Reservation
+|The CPU and memory resources reserved by the system for the container.
+
+|Resource Limit
+|The maximum CPU and memory resources the container can use.
+
+|Image Pull Policy
+|The image pull policy for the container.
+
+* **IfNotPresent**: When the pod is created or updated, it preferentially uses the image file stored on the node by the container runtime.
+
+* **Always**: When the pod is created or updated, it always attempts to pull the image from the image service.
+
+* **Never**: When the pod is created or updated, it only uses the image stored on the node by the container runtime. If the required image does not exist locally, container creation will fail.
+
+|Restart Count
+|The number of times the pod has been restarted.
+|===
+--
+
+. On the container details page, under the **Resource Status** tab, view the volumes mounted in the container, their mount paths, and access modes.
+
+. On the container details page, click the **Monitoring** tab to view the container's real-time resource usage.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|CPU Usage
+|The real-time CPU usage of the container.
+
+|Memory Usage
+|The real-time memory usage of the container.
+|===
+
+include::../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../_ks_components/oper-refreshData.adoc[]
+--
+
+. On the container details page, click the **Environment Variables** tab to view the container's environment variables.
+
+. On the container details page, click the **Container Logs** tab to view the container's standard output logs.
++
+--
+* Click image:/images/ks-qkcp/zh/icons/start-dark.svg[start-dark,18,18]/image:/images/ks-qkcp/zh/icons/stop-dark-white.svg[stop-dark-white,18,18] in the upper right corner to start/stop real-time data refresh.
+
+* Click image:/images/ks-qkcp/zh/icons/refresh-dark-white.svg[refresh-dark-white,18,18] in the upper right corner to manually refresh the data.
+
+* Click image:/images/ks-qkcp/zh/icons/download-dark-white.svg[download-dark-white,18,18] in the upper right corner to download the log file.
+--

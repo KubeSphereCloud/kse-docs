@@ -1,0 +1,11 @@
+// :ks_include_id: f3350225a1bf47a3872722fd47af4d1d
+The current status of a Persistent Volume.
+
+* **Available**: The Persistent Volume is not bound to a PersistentVolumeClaim.
+// The KubeSphere web console currently does not support creating Persistent Volumes directly. If you create a Persistent Volume directly via the backend command line, a Persistent Volume with the status **Available** will appear. For more information, please refer to link:https://kubernetes.io/zh/docs/concepts/storage/persistent-volumes/[Kubernetes official documentation].
+
+* **Bound**: The Persistent Volume is already bound to a PersistentVolumeClaim.
+
+* **Released**: The PersistentVolumeClaim bound to the Persistent Volume has been deleted, but the Persistent Volume itself has not been deleted.
+
+* **Failed**: The Persistent Volume has an unknown error.

@@ -1,0 +1,127 @@
+---
+title: "SSH 访问容器实例"
+weight: 21
+---
+
+
+== 前期条件
+
+* 容器实例已创建成功，且状态为``运行中``。
+* 本地主机已生成 SSH 密钥对。若未生成，可参考link:#_生成_ssh_密钥对[生成 SSH 密钥对]相关内容。
+
+== 操作步骤
+
+. 查看并记录本地主机的 SSH 公钥。
++
+include::../../../../../../_components/note.adoc[]
+* Windows 系统 SSH 公钥文件目录为 ``c:\user\<user_name>\.ssh\id_rsa.pub``。
+* Linux 或 Mac OS 系统 SSH 公钥文件可直接执行 ``cat ~/.ssh/id_rsa.pub`` 查看。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 通过 link:../k8s_login/#_jupyter_访问[jupyter 方式]登录至相应容器实例。
+. 在打开的 Terminal 终端中，执行如下命令，安装 openssh-server 服务。
++
+[,shell]
+----
+apt-get update && apt install openssh-server
+----
+. 检查安装是否成功。
+.. 检查 ssh 进程，无返回结果即可。
++
+[,shell]
+----
+ps -e | grep ssh
+----
+.. 检查安装包。
++
+--
+[,shell]
+----
+dpkg -l | grep ssh
+----
+返回结果如下，即说明已安装成功。
+
+image::/images/cloud_service/compute/coreshub/develop_training_ssh_login_1.png[]
+--
+
+. 执行如下命令，启动 openssh-server 服务。
++
+[,shell]
+----
+service ssh start
+----
+. 执行如下命令，检查 openssh-server 服务状态，返回结果为 ``RUNNING`` 即可。
++
+[,shell]
+----
+service ssh  status
+----
+. 执行如下命令，检查 SSH 路径是否存在。
++
+[,shell]
+----
+mkdir ~/.ssh
+----
++
+include::../../../../../../_components/note.adoc[]
+返回结果提示相应目录已经存在。
+include::../../../../../../_components/table_footer.adoc[]
+. 执行如下命令，将第一步查看并记录的本地主机 SSH 公钥写入当前实例的 ``authorized_keys`` 中。
++
+--
+[,shell]
+----
+echo "ssh-rsa AAAA***************UOeArE= xxxxxx@mac1.local" >> ~/.ssh/authorized_keys
+----
+include::../../../../../../_components/note.adoc[]
+引号中的内容为用户本地主机 id_rsa.pub 的内容，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+检查公钥内容是否成功写入。
+[,shell]
+----
+cat ~/.ssh/authorized_keys
+----
+--
+. 返回容器实例列表页面，点击相应容器实例所在行右侧的更多操作，选择**复制 SSH 命令**。
++
+image::/images/cloud_service/compute/coreshub/develop_training_k8s_more_operation.png[]
+
+. 用户打开本地主机的终端，输入上一步复制的 SSH 命令，即可访问容器实例。
++
+image::/images/cloud_service/compute/coreshub/develop_training_ssh_login_2.png[,60%]
+
+. 使用 SSH 执行训练任务时，为避免 SSH 连接中断，可安装 screen 和 tmux 守护进程。
++
+[,shell]
+----
+apt-get update && apt-get install -y screen && apt install tmux
+----
+
+== 附录
+=== 生成 SSH 密钥对
+
+. 登录本地主机终端，查看是否有 ``id_rsa.pub `` 文件。
++
+include::../../../../../../_components/note.adoc[]
+* Windows 系统 SSH 公钥文件目录为 ``c:\user\{user_name}\.ssh\id_rsa.pub``。
+* Linux 系统 SSH 公钥文件目录为 ``~/.ssh/id_rsa.pub``。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 若无上述文件，则在终端中，执行如下命令生成。
++
+[,shell]
+----
+ssh-keygen
+----
++
+include::../../../../../../_components/note.adoc[]
+回显交互中的所有参数均可为空，即一直回⻋确认即可。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 进入 SSH 公钥所在目录，查看并复制公钥内容。
++
+[,shell]
+----
+cat id_rsa.pub
+----
+

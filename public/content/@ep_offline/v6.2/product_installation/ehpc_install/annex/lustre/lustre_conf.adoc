@@ -1,0 +1,88 @@
+---
+title: "配置 Lustre 云服务器"
+weight: 3
+---
+
+. 登录 lustre-mdt 云服务器的 Web 终端，执行如下命令，创建 Lustre 文件系统。
++
+[source,shell]
+----
+# mkfs.lustre --fsname=lustrefs --mgs --mdt --index=0 --servicenode=xx.xx.xx.xx@tcp0 --reformat /dev/vdc
+----
++
+image::/images/ep_offline/ehpc_install/ehpc_5.png[]
++
+**参数说明**：
++
+* ``--fsname``：用于指定生成后的 lustre 系统文件名，保持默认即可。
+* ``--mgs``：用于指定 MGS 分区。
+* ``--mdt``：用于指定 MDT 分区，创建 OST 时使用。
+* ``--index``：指定索引，保持默认即可。
+* ``--servicenode``：指定本节点失效时，接受提供服务的节点。此处需配置成 xx.xx.xx.xx@tcp0 或 xx.xx.xx.xx@2ib，其中 xx.xx.xx.xx 为当前节点的 IP 地址，@tcp0 表示使用的为以太网，@2ib 表示使用 IB 网络。
+* ``/dev/vdc``：为挂载硬盘目录，需根据实际情况进行修改，即数据盘的盘符。
+
+. 在 lustre-mdt 云服务器的 Web 终端，依次执行如下命令，创建 ``/mnt/mdt`` 挂载目录并挂载数据盘。
++
+[source,shell]
+----
+# mkdir -p /mnt/mdt
+
+# mount -t lustre /dev/vdc /mnt/mdt
+----
+
+. 在 lustre-mdt 云服务器的 Web 终端，依次执行如下命令，打开 Lustre 的 project 配额。
++
+[source,shell]
+----
+# lctl conf_param lustrefs.quota.ost=ugp
+# lctl conf_param lustrefs.quota.mdt=ugp
+----
+
+. 在 lustre-mdt 云服务器的 Web 终端，执行如下命令，关闭身份验证。
++
+[source,shell]
+----
+# lctl set_param mdt.lustrefs-MDT0000.identity_upcall=NONE
+----
+. 在 lustre-mdt 云服务器的 Web 终端，执行如下命令，全局开启 nodemap 功能。
++
+[source,shell]
+----
+# lctl nodemap_activate 1
+----
+
+. 登录至 lustre-ost1 云服务器，依次执行如下命令，进行相应配置。
++
+[source,shell]
+----
+# mkfs.lustre --fsname=lustrefs --mgsnode=xx.xx.xx.xx@tcp0 --ost --reformat --index=1 /dev/vdc
+
+# mkdir -p /mnt/ost
+
+# mount -t lustre /dev/vdc /mnt/ost
+----
++
+
+include::../../../../../../_components/note.adoc[]
+其中，xx.xx.xx.xx 需替换成 lustre-mgs （即 lustre-mdt）云服务器的 IP 地址。@tcp0 表示使用的为以太网，若使用 IB 网络需替换为 @2ib。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录至 lustre-ost2 云服务器，依次执行如下命令，进行相应配置。
++
+[source,shell]
+----
+# mkfs.lustre --fsname=lustrefs --mgsnode=xx.xx.xx.xx@tcp0 --ost --reformat --index=2 /dev/vdc
+
+# mkdir -p /mnt/ost1
+
+# mount -t lustre /dev/vdc /mnt/ost1
+----
++
+
+include::../../../../../../_components/note.adoc[]
+其中，xx.xx.xx.xx 需替换成 lustre-mgs （即 lustre-mdt）云服务器的 IP 地址。@tcp0 表示使用的为以太网，若使用 IB 网络需替换为 @2ib。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+

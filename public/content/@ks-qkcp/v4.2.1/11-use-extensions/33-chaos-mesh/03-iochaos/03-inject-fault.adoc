@@ -1,0 +1,78 @@
+---
+title: "注入文件系统错误"
+weight: 03
+---
+
+本节介绍如何使文件系统调用返回错误。
+
+故障注入期间，对 `/usr/share/nginx/html/` 目录下文件的读取操作将 100% 返回错误，nginx 无法正常读取页面内容。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *IOChaos*。
+. 配置以下参数后点击 *创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|故障类型（action）
+|选择 `fault`，使文件系统调用返回错误。
+
+|错误码（errno）
+|文件系统调用返回的错误码，例如 `1`（表示 EPERM，操作不允许）。
+
+|挂载路径（volumePath）
+|注入故障的目标目录，例如 `/usr/share/nginx/html/`。
+
+|触发概率（percent）
+|触发故障的概率，例如 `100` 表示 100%。
+
+|影响方法（methods）
+|触发故障的系统调用类型，例如 `read`。
+
+|持续时间（duration）
+|故障持续时间，例如 `10m`。
+
+|生效范围（selector）
+|选择故障注入的目标命名空间和 Pod。
+|===
+
+
+   对应 YAML 示例如下：
+
+[source,yaml]
+----
+apiVersion: chaos-mesh.org/v1alpha1
+kind: IOChaos
+metadata:
+  name: io-fault
+  namespace: default
+spec:
+  action: fault
+  duration: 10m
+  errno: 1
+  volumePath: /usr/share/nginx/html/
+  percent: 100
+  methods:
+    - read
+  mode: all
+  selector:
+    namespaces:
+      - default
+    pods:
+      default:
+        - "{{podID}}"
+----
+
+
+验证故障效果：
+
+[source,shell]
+----
+kubectl get pod "{{podID}}" -o wide
+curl "{{podIP}}"
+----
+
+
+   正常情况下立即返回页面；故障注入期间返回错误：`curl: (18) transfer closed with 615 bytes remaining to read`。

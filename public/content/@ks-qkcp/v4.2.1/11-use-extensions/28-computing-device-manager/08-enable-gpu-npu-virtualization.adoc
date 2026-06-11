@@ -1,0 +1,46 @@
+---
+title: "开启 GPU/NPU 虚拟化"
+weight: 08
+---
+
+
+:ks_permission: **算力节点管理**
+:ks_navigation: **集群 > 算力节点**
+
+
+开启 GPU/NPU 虚拟化后，单张物理 GPU/NPU 卡可被划分为多个独立的虚拟算力单元（vGPU/vNPU），每个单元具备专属的计算核心与显存资源。
+
+虚拟化技术突破“一卡一任务”的传统限制，支持多任务并行共享同一硬件，大幅提升资源利用率，降低算力成本。同时，虚拟化实现了任务间的资源隔离与弹性调度，有效避免性能干扰，提升整体运行效率与资源管理灵活性。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|仅调度策略为``整卡独占``的 GPU/NPU 节点支持开启 GPU/NPU 虚拟化。
+|===
+
+== 前提条件
+
+* 已部署算力节点。
+
+* KubeSphere 平台需要安装并启用**算力设备管理**扩展组件。
+
+:relfileprefix: ../../../
+* {empty}
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要操作的 GPU/NPU 节点右侧点击image:/images/ks-qkcp/zh/icons/more.svg["more",18,18]，然后在下拉列表中选择**开启 GPU/NPU 虚拟化**。
++
+操作完成后，**算力节点**页签下该节点的调度策略将从“整卡独占”变为“隔离共享”；**vGPU/vNPU 节点**页签下将显示节点信息。

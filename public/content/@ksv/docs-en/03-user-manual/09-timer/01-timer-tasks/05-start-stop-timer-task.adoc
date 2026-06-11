@@ -1,0 +1,50 @@
+---
+title: "Enable or disable a timer task"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, timer tasks, enable, disable"
+description: "Describes how to enable or disable a timer task in the {ks_product} web console."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: b48bb0bf5c4148eb89b4114eea682ead
+:ks_xref_id: c680a49704bf4f0b88cb5ee5754ccc0e
+:ks_comp: ../../../../components/
+:ks_title: Enable or disable a timer task
+:ks_description: Describes how to enable or disable a timer task in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, timer tasks, enable, disable
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to enable or disable a timer task in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=bafa731fad3c47868b11a185293450b1]
+
+User **admin** can enable or disable all timer tasks in your cluster. Project administrators and operators can enable or disable the timer tasks created on their own, and project viewers cannot enable or disable timer tasks.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Enable or disable from the list of timer taskslink:[id=ea81c0be70a44217838d3c25e1750687]
+
+include::../../../../_custom-en/timer/timer-task-steps.adoc[]
+
+. Find the timer task that you want to manage, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Enable** or **Disable** from the drop-down list.
+. In the dialog box that appears, click **OK**.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Enable or disable from the timer task details pagelink:[id=9de7bfa307d8436f954d35f2e4925d23]
+
+include::../../../../_custom-en/timer/timer-task-steps.adoc[]
+
+. On the **Timer Tasks** tab, click the name of the task that you want to manage. The details page of the timer task appears.
+. On the details page of the timer task, click **Enable** or **Disable** in the upper-left corner.
+. In the dialog box that appears, click **OK**.

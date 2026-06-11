@@ -1,0 +1,58 @@
+---
+title: DeleteLoginServers
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_servers
+| Array
+| false
+| 
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_server_ids
+| Array
+| false
+| 被删除的login
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "login_servers": [
+    "login_server_id_1",
+    "login_server_id_2"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteLoginServersResponse",
+  "login_server_ids": [
+    "login_server_id_1",
+    "login_server_id_2"
+  ],
+  "ret_code": 0
+}
+----

@@ -1,0 +1,88 @@
+---
+title: "Add a Member Cluster via Direct Connection"
+keywords: "Kubernetes, {ks_product}, Multi-cluster Management, Cluster, Add Member Cluster"
+description: "Describes how to add a member cluster via direct connection."
+weight: 01
+---
+
+
+
+This section describes how to add a member cluster via direct connection.
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+Before being managed, a member cluster only needs to have Kubernetes installed; KubeSphere installation is not required. If KubeSphere is already installed, please migrate the data and uninstall KubeSphere before proceeding with management.
+|===
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the host cluster.
+
+* All nodes in the host cluster must be able to access the Kubernetes API service of the member cluster (default is port 6443 on the master node of the member cluster). Depending on your network environment, you may need to configure firewall and traffic forwarding rules.
+
+== Obtain the Member Cluster kubeconfig
+
+. On a node of the member cluster, execute the following command to obtain the kubeconfig information of the member cluster:
++
+[,bash]
+----
+kubectl config view --raw
+----
+
+. Copy the kubeconfig information and modify the **clusters:cluster:server** parameter as follows:
++
+[,yaml]
+----
+clusters:
+- cluster:
+    server: https://<member-cluster-node-ip>:6443
+----
+
+
+== Add a Member Cluster
+
+include::../../../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-oper-logInToHost.adoc[]
+
++
+
+. Click **Cluster Management**.
+
++
+
+include::../../../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-oper-addClusterBasicInfo.adoc[]
++
+Under **Advanced Settings**, set the usage identifier for the cluster.
+
+
+. On the **Connection Settings** tab, set **Connection Mode** to **Direct Connection**, enter the member cluster's kubeconfig information in the **kubeconfig** area, and then click **Next**.
+
+. On the **Cluster Configuration** tab, configure the cluster settings, and then click **Create**.
++
+--
+[.admon.note,cols="a"]
+|===
+|Note
+
+|In the cluster configuration, please change the image registry address to the actual registry address in use. The default is the official KubeSphere online registry address; please confirm it is accessible before using it.
+
+|===
+
+After the member cluster is added, it will appear in the cluster list on the **Cluster Management** page.
+
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+ifeval::["{file_output_type}" == "html"]
+|After a member cluster is managed, if its KubeSphere version is inconsistent with the host cluster's KubeSphere version, you need to manually link:../../../../../03-installation-and-upgrade/03-upgrade-kubesphere/[upgrade KubeSphere] on the member cluster nodes. Only after updating to the same KubeSphere version can subsequent operations be performed on the member cluster.
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+|After a member cluster is managed, if its KubeSphere version is inconsistent with the host cluster's KubeSphere version, you need to manually upgrade KubeSphere on the member cluster nodes. Only after updating to the same KubeSphere version can subsequent operations be performed on the member cluster. For information on how to upgrade KubeSphere, please refer to the *KubeSphere Installation Guide*.
+endif::[]
+|===
+--

@@ -1,0 +1,50 @@
+---
+title: "View Grayscale Release Task List"
+keywords: "Kubernetes, {ks_product}, Project Management, Grayscale Release, View Grayscale Release Task List"
+description: "Describes how to view the grayscale release task list."
+weight: 02
+---
+
+:ks_permission: ** View Service Mesh**
+:ks_navigation: **Grayscale Release > Grayscale Release**
+
+This section describes how to view the grayscale release task list.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere Service Mesh** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Grayscale Release** page, click **Release Tasks** to open the grayscale release task list.
++
+--
+The grayscale release task list provides the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name, application, release mode, and service of the grayscale release task.
+
+|Version
+|The version numbers and pod replica counts for the old and new versions.
+
+include::../../../../_custom/projectManagement/grayscaleRelease/grayscaleRelease-para-trafficSuccessLatency.adoc[]
+|===
+--

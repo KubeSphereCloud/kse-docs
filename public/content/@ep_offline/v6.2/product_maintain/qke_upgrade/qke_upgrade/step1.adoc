@@ -1,0 +1,32 @@
+---
+title: 步骤一：升级 qke_apiserver
+weight: 1
+---
+
+若{product_name}已经安装了 20230928 PATCH 或以后的版本，则 `qke_apiserver` 无需单独升级。实施人员可参考以下步骤，确认 `qke_apiserver` 的版本。
+
+. 登录{product_name}的 Global Zone 的 Webservice 节点。
++
+include::../../../../../_components/note.adoc[]
+
+根据link:../../../../product_installation/qke_install/install/installe_apiserver/[安装部署]文档中的说明，我们知道 `qke_apiserver` 服务部署在{product_name}的 Global Zone 的 Webservice 节点。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令行，查看 `qke_apiserver` 服务的版本信息。
++
+[source,shell]
+----
+dpkg -l |grep qke-apiserver
+----
++
+//命令行回显如下所示，关注 `tag` 信息，确认其日期是否满足{product_name}的 PATCH 要求。即 `tag` 中的日期需晚于 `20230928`。 
+命令行回显如下所示，关注 `tag` 信息，确认其日期为 `20231128` 及以后版本即可。 
++
+image::/images/ep_offline/qke_upgrade/qke_upgrade_2.png[qke_upgrade_2]
++
+include::../../../../../_components/attention.adoc[]
+
+若 `qke_apiserver` 服务的版本不符合预期，则需先对{product_name}升级至目标版本后，再执行后续操作。
+
+include::../../../../../_components/table_footer.adoc[]

@@ -1,0 +1,144 @@
+---
+title: "配置中心操作"
+weight: 2
+---
+
+
+
+== 步骤一：登录配置中心
+
+include::../prepare/habor.adoc[tag=web_login]
+
+. 本地主机在 Chrome 或火狐浏览器中输入上一步查询到的配置中心的 Web 地址，登录信息如下。
++
+[source,plain]
+----
+Web 地址: 查询结果中 cadmin 开头的 URL。
+默认用户名：admin@<domain>
+默认密码：zhu88jie
+----
++
+如前面查询到的配置中心的 Web 地址为 `cadmin.democloud.com`，则登录信息如下。
++
+[source,txt]
+----
+Web 地址：cadmin.democloud.com
+默认用户名：admin@democloud.com
+默认密码：zhu88jie
+----
+
+
+
+== 步骤二：修改 `settings` 配置
+
+. 延续前文步骤，成功登录配置中心。
+
+. 点击**配置管理**，进入配置管理主页面。
+
+. 在配置管理主页面，搜索 `webconsole` 应用的 `settings` 配置，点击配置名称。
++
+image::/images/ep_offline/qke_install/qke_install_9.png[]
+
+. 进入配置内容详情页面，查找 `PITRIX_SETTINGS`，并按下图格式追加 `qke_config` 相关配置，其中 `<zone_id>` 为 Global Zone ID，需根据实际情况进行填写，其余内容保持默认即可。
++
+image::/images/ep_offline/qke_install/qke_install_11.png[]
++
+配置内容示例。
++
+[source,yaml]
+----
+    'qke_config': {
+        'endpoint': 'testbm1a-webservice0',
+        'port': '9102',
+        'verify_ssl': False,
+        'protocol': 'http',
+        'prefix': 'api/v1/qke'
+    },
+----
+
+. 确认追加内容无误后，点击**启用**。
+
+
+== 步骤三：修改 `pass-zone` 配置
+
+. 延续前文步骤，成功登录配置中心。
+
+. 点击**配置管理**，进入配置管理主页面。
+
+. 在配置管理主页面，搜索 `webconsole-pass` 应用的 `pass-zone` 配置，点击配置名称。
++
+image::/images/ep_offline/qke_install/qke_install_13.png[]
+
+. 进入配置内容详情页面，追加 `tpsc_vg` 与 `neonsan_rg` 内容，参考下图内容。
++
+image::/images/ep_offline/qke_install/qke_install_14.png[]
++
+**参数说明**
++
+* `tpsc_vg` 是用于配置 TPSC 第三方存储的相关参数。默认无需修改，按上图内容填写即可。
+* `neonsan_rg` 是用于配置 NeonSAN 存储的相关参数。默认无需修改，按上图内容填写即可。
+* 其余参数维持默认即可。
+* 配置示例内容如下。
++
+[source,yaml]
+----
+tpsc_vg:
+  instance_class: [101, 400, 401, 402, 403, 404, 405]
+  volume_class: [20]
+neonsan_rg:
+  instance_class: [6, 7]
+  volume_class: [5, 6, 7]
+----
++
+include::../../../../../_components/note.adoc[]
+
+//若有其他需求，需要修改此处的主机与磁盘类型，实施人员可参考link:todo[主机&磁盘类型]进行修改。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 确认追加内容无误后，点击**启用**。
+
+
+== 步骤四：修改 `paas-global` 配置
+
+. 延续前文步骤，成功登录配置中心。
+
+. 点击**配置管理**，进入配置管理主页面。
+
+. 在配置管理主页面，搜索 `webconsole-pass` 应用的 `pass-global` 配置，点击配置名称。
+
+
+. 进入配置内容详情页面，修改参数 `support_resource_pool` 为 `false`。
++
+image::/images/ep_offline/qke_install/qke_install_15.png[]
+
+. 确认配置内容无误后，点击**启用**。
+
+
+
+== 步骤五：修改 `product_directories` 配置
+
+. 延续前文步骤，成功登录配置中心。
+
+. 点击**配置管理**，进入配置管理主页面。
+
+. 在配置管理主页面，搜索 `webconsole` 应用的 `product_directories` 配置，点击配置名称，进入 `product_directories` 配置内容页面。
++
+image::/images/ep_offline/qke_install/qke_install_12.png[]
+
+
+. 按照以下内容，修改 `容器引擎 QKE` 的配置。
++
+[source,yaml]
+----
+    - title:
+        en: KubeSphere®(QKE)
+        zh-cn: 容器引擎 QKE
+      type: product_link
+      product_code: app-o6lvbkhm
+      path: /:zone/qke
+      icon: qke-service-duotone
+      doc: container_qke_guide
+----
+
+. 确认配置内容无误后，点击**启用**。

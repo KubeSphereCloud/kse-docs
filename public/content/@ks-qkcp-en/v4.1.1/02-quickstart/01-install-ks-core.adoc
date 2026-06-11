@@ -1,0 +1,140 @@
+---
+title: "Install KubeSphere Enterprise"
+keywords: "Kubernetes, KubeSphere, Quick Start, Installation, KubeSphere Core"
+description: "This guide explains how to install KubeSphere Enterprise in a minimal way."
+weight: 01
+---
+
+This section explains how to install KubeSphere Enterprise in a minimal way. This installation method is only suitable for testing. For installing KubeSphere Enterprise in a production environment, please refer to link:../../03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/[Install Kubernetes and KubeSphere Enterprise].
+
+== Install KubeSphere Enterprise
+
+=== Prerequisites
+
+* Your linux machine meets the minimum hardware requirements: CPU > 2 cores, memory > 2 GB, disk space > 40 GB.
+
+* Helm should have been installed in advance. For specific instructions, please refer to link:https://helm.sh/docs/intro/[Helm Installation].
+
+=== Steps
+
+. (Optional) If you don't have an available Kubernetes cluster, run the following command to quickly create one.
+
+.. If you are accessing GitHub/Googleapis from a restricted location, please log in to any cluster node and run the following command to set the download region.
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+export KKZONE=cn
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+
+.. Run the following command to install KubeKey.
++
+--
+After the download is complete, a KubeKey binary file **kk** will be generated in the current directory.
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+curl -sfL https://get-kk.kubesphere.io | sh -
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+.. Run the following command to install dependencies.
++
+[,bash]
+----
+apt install socat conntrack -y
+----
+
+.. Run the following command to quickly create a Kubernetes cluster.
++
+[,bash]
+----
+./kk create cluster --skip-pull-images --with-local-storage  --with-kubernetes v1.27.4 --container-manager containerd  -y
+----
+
+. If you already have an available Kubernetes cluster, run the following command to install KubeSphere Core (the core component of KubeSphere Enterprise) using `helm`.
++
+[,bash]
+----
+helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-0.4.0.tgz --set apiserver.nodePort=30881 --debug --wait
+----
+
+. After the installation is complete, the output will display the IP address and port of the web console, with the default NodePort being 30880.
++
+--
+[,yaml]
+----
+NOTES:
+Thank you for choosing KubeSphere Helm Chart.
+
+Please be patient and wait for several seconds for the KubeSphere deployment to complete.
+
+1. Wait for Deployment Completion
+
+    Confirm that all KubeSphere components are running by executing the following command:
+
+    kubectl get pods -n kubesphere-system
+
+2. Access the KubeSphere Console
+
+    Once the deployment is complete, you can access the KubeSphere console using the following URL:
+
+    http://192.168.6.10:30880
+
+3. Login to KubeSphere Console
+
+    Use the following credentials to log in:
+
+    Account: admin
+    Password: P@88w0rd
+
+NOTE: It is highly recommended to change the default password immediately after the first login.
+
+For additional information and details, please visit https://kubesphere.io.
+----
+
+Run the following command to check the status of the pods. 
+
+[,bash]
+----
+kubectl get pod -n kubesphere-system
+----
+
+When the pod status is **Running**, you can access the {ks_product-en} web console at <NodeIP>:30880 using the default account and password (admin/P@88w0rd).
+
+include::../../../_ks_components-en/admonitions/note.adoc[]
+
+Depending on your network environment, you may need to configure traffic forwarding rules and allow port 30880 in the firewall.
+
+include::../../../_ks_components-en/admonitions/admonEnd.adoc[]
+--
+
+== Activate KubeSphere Enterprise
+
+After logging into the web console of KubeSphere Enterprise, you need to bind your KubeSphere cloud account, subscribe to KubeSphere Enterprise to access all its features.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+KubeSphere Enterprise v4.1.1 provides each user with a free trial license for a single cluster with 24 vCPUs for 30 days. After the trial period expires, you will need to subscribe to KubeSphere Enterprise for continued access.
+|===
+
+
+=== Steps
+
+. Log in to the {ks_product-en} web console with the **admin** user. 
+
+. Click the **Bind KubeSphere cloud account** prompt at the top, enter your cloud account information, authorize it, and complete the account binding.
+
+. Navigate to **Platform Settings > Cloud Accounts** page, then click on **Go to Subscription**.
+
+. Choose the **Plan** and **Duration**, confirm the **Cluster ID**, click on **Submit Order**, and proceed with the payment.
+
+. On the payment success page, scroll down to the bottom, and click on the **Back** button to return to the web console.

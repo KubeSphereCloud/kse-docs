@@ -1,0 +1,541 @@
+---
+title: "在线安装 Kubernetes 和 KubeSphere"
+keywords: "Kubernetes, {ks_product}, 安装, 安装 KubeSphere , 安装 Kubernetes"
+description: "介绍如何安装 Kubernetes 和 KubeSphere。"
+weight: 01
+---
+
+
+本节介绍如何在可访问 Internet 的环境下安装 Kubernetes 和 KubeSphere。 
+
+安装过程中将用到开源工具 KubeKey  的 v4.x 版本。有关 KubeKey 的更多信息，请访问 link:https://github.com/kubesphere/kubekey[GitHub KubeKey 仓库]。
+
+
+
+== 前提条件
+
+* 您需要准备至少 1 台 Linux 服务器作为集群节点。在生产环境中，为确保集群具备高可用性，建议准备至少 5 台 Linux 服务器，其中 3 台作为控制平面节点，另外 2 台作为工作节点。如果您在多台 Linux 服务器上安装 KubeSphere，请确保所有服务器属于同一子网。
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-desc-systemRequirements.adoc[]
+
+* 在生产环境中，为确保集群具有足够的计算和存储资源，建议每台集群节点配置至少 8 个 CPU 核心、16 GB 内存和 200 GB 磁盘空间。除此之外，建议在每台集群节点的 **/var/lib/docker**（对于 Docker）或 **/var/lib/containerd**（对于 containerd） 目录额外挂载至少 200 GB 磁盘空间用于存储容器运行时数据。
+
+* 在生产环境中，建议提前为 KubeSphere 集群配置高可用性以避免单个控制平面节点出现故障时集群服务中断。有关更多信息，请参阅link:../../../03-installation-and-upgrade/01-preparations/02-configure-high-availability/02-configure-k8s-high-availability/[配置高可用性]。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+如果您规划了多个控制平面节点，请务必提前为集群配置高可用性。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+* 默认情况下，KubeSphere 使用集群节点的本地磁盘空间作为持久化存储。在生产环境中，建议提前配置外部存储系统作为持久化存储。有关更多信息，请参阅link:../../../03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/[配置外部持久化存储]。
+
+* 如果集群节点未安装容器运行时，安装工具 KubeKey 将在安装过程中自动为每个集群节点安装 Docker 作为容器运行时。您也可以提前手动安装 containerd、CRI-O 或 iSula 作为容器运行时。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+CRI-O 和 iSula 与 KubeSphere 的兼容性尚未经过充分测试，可能存在未知问题。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+* 请确保所有集群节点上 **/etc/resolv.conf** 文件中配置的 DNS 服务器地址可用。否则，KubeSphere 集群可能会出现域名解析问题。
+
+* 请确保在所有集群节点上都可以使用 **sudo**、**tar**、**curl** 和 **openssl** 命令。
+
+* 请确保所有集群节点时间同步。
+
+安装过程中，KubeKey 依赖 `tar` 工具完成软件包的压缩和解压处理，请提前确认系统环境已安装该命令。
+
+== 配置防火墙规则
+
+KubeSphere 需要特定端口和协议用于服务之间的通信。如果您的基础设施环境已启用防火墙，您需要在防火墙设置中放行所需的端口和协议。如果您的基础设施环境未启用防火墙，您可以跳过此步骤。
+
+下表列出需要在防火墙中放行的端口和协议。
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-para-portRequirement.adoc[]
+
+
+== 选择安装方式
+
+支持通过以下两种方式安装 Kubernetes 和 KubeSphere：
+
+* *Web 页面安装*：适用于希望通过图形化界面完成节点添加、参数配置和安装校验的场景。
+* *命令行安装*：适用于熟悉命令行操作、需要精细化配置集群参数的场景。
+
+=== Web 页面安装
+
+==== 1. 下载 KubeKey 和 Web Installer
+
+如果您访问 GitHub/GoogleAPIs 受限，请设置如下环境变量：
+
+[source,shell]
+----
+export KKZONE=cn
+----
+
+执行以下命令下载 KubeKey 最新版本（含 Web Installer）：
+
+[source,shell]
+----
+curl -sfL https://get-kk.kubesphere.io | SKIP_PACKAGE=true sh -
+----
+
+执行完成后，会在当前目录生成以下文件：
+
+[cols="1,2",options="header"]
+|===
+|原文件 |解压后文件
+
+|`kubekey-v4.x.x-linux-amd64.tar.gz`
+|`kk`：KubeKey 二进制文件
+
+|`web-installer.tgz`
+|`dist`：Web 页面资源 +
+`host-check.yaml`、`kubernetes`、`kubesphere`：任务模板文件 +
+`schema`：配置文件 +
+`README.md`：安装说明文档
+|===
+
+==== 2. 启动 Web Installer
+
+执行以下命令启动 Web Installer 页面：
+
+[source,shell]
+----
+./kk web --port 8080 --schema-path web-installer/schema --ui-path web-installer/dist
+----
+
+如果显示如下信息，表示 Web Installer 启动成功：
+
+[source,text]
+----
+Web server started successfully on port 8080
+----
+
+请勿关闭命令终端。
+
+==== 3. 打开 Web Installer 页面
+
+在浏览器中访问 `+http://<启动节点 IP 地址>:8080+`，打开 KubeKey 的 Web Installer 页面。
+
+在页面中点击 *开始安装*，进入安装流程。
+
+==== 4. 添加集群节点
+
+在 *基本信息* 页面，添加 Kubernetes 节点。Web Installer 支持以下三种节点添加方式：
+
+* 手动添加
+* 文件上传
+* 节点扫描
+
+*注意：* 如果只添加一个节点，节点角色必须为 `Master & Worker`。
+
+===== 手动添加节点
+
+手动添加适用于添加单个节点。您需要填写主机名、IP 地址、SSH 地址、SSH 认证等信息。
+
+image::/images/ks-qkcp/zh/v4.2.0/web-installer/add-node-manual.png[,80%]
+
+===== 文件上传节点
+
+文件上传适用于批量添加节点。请根据模板填写节点信息后上传文件。
+
+image::/images/ks-qkcp/zh/v4.2.0/web-installer/add-node-upload.png[,90%]
+
+===== 扫描节点
+
+节点扫描适用于自动发现节点。您可以通过 IP CIDR 扫描节点，并根据扫描结果选择需要添加的节点。
+
+image::/images/ks-qkcp/zh/v4.2.0/web-installer/add-node-ip-range.png[,80%]
+
+==== 5. 修改配置参数
+
+配置部署 Kubernetes 和 KubeSphere 所需的参数。
+
+Kubernetes 和 KubeSphere Core 标签页均支持 *表单模式* 和 *YAML 模式*。您可以在表单中填写配置信息，也可以直接编辑 YAML 文件。如需了解更多配置参数，请参阅 https://github.com/kubesphere/kubekey/blob/master/docs/config-example.md[配置示例]。
+
+image::/images/ks-qkcp/zh/v4.2.0/web-installer/install-config.png[,80%]
+
+===== Kubernetes 配置
+
+[cols="1,1,4",options="header"]
+|===
+|分类 |参数 |描述
+
+|集群配置
+|集群名称
+|输入集群名称。
+
+|集群配置
+|Kubernetes 版本
+|选择需要安装的 Kubernetes 版本。
+
+|集群配置
+|集群访问地址
+|集群的统一访问入口地址，通常为负载均衡器的域名或 IP 地址。
+
+|集群配置
+|端口
+|集群的访问端口。
+
+|集群配置
+|路由方式
+|支持 `local` 和 `haproxy` 两种方式。
+
+|容器运行时
+|类型
+|容器运行时类型，支持 `docker` 和 `containerd`。
+
+|网络设置
+|网络插件
+|网络插件类型，例如 `calico`、`cilium`、`flannel`、`hybridnet` 和 `kubeovn`。
+
+|网络设置
+|每节点最大 Pod 数
+|每个节点可运行 Pod 的最大数量。默认值：`110`。
+
+|网络设置
+|Service CIDR
+|集群内部 Service 可用的 IP 地址范围。Service CIDR 支持 IPv4 和 IPv6，不能与同一集群中的其他网络地址范围重复，例如 Pod CIDR 和节点 IP 地址。
+
+|网络设置
+|Pod CIDR
+|集群内部 Pod 可用的 IP 地址范围。Pod CIDR 支持 IPv4 和 IPv6，不能与同一集群中的其他网络地址范围重复，例如节点 IP 地址。
+
+|网络设置
+|IPv4/IPv6 掩码大小
+|IP 地址中用于标识网络部分的位数。
+
+|镜像仓库配置
+|仓库地址
+|填写私有镜像仓库的实际地址。
+
+|镜像仓库配置
+|用户名和密码
+|填写私有镜像仓库的登录用户名和密码。
+
+|存储设置
+|启用
+|启用集群节点的本地存储系统。
+
+|存储设置
+|设置为默认存储
+|将本地存储设置为默认存储类。
+
+|存储设置
+|存储路径
+|存储卷在宿主机上的存储路径。
+|===
+
+===== KubeSphere Core 配置
+
+[cols="1,4",options="header"]
+|===
+|参数 |描述
+
+|全局镜像仓库
+|填写全局镜像仓库地址。
+
+|扩展组件镜像仓库
+|填写扩展组件镜像仓库地址。
+|===
+
+配置完成后，点击 *下一步*。
+
+==== 6. 预览安装配置
+
+在 *安装预览* 页面，确认版本、节点、网络、存储等信息无误后，点击 *下一步：执行安装* 开始安装。
+
+如需修改配置，可返回上一步重新编辑配置参数。
+
+==== 7. 执行安装
+
+等待安装完成。安装完成后，系统会自动进入安装校验流程。
+
+如果安装过程中出现异常，可点击 *查看日志* 查看日志详情，并根据日志信息排查问题。必要时，可退出安装流程或初始化后重新安装。
+
+image::/images/ks-qkcp/zh/v4.2.0/web-installer/installing.png[]
+
+*说明：* 如需在 Web Installer 页面重新安装、修改配置参数或清除配置，可点击左侧的 *初始化* 按钮。初始化操作会重置 Kubernetes 节点上的所有任务，并回到基本信息页面。该操作不可逆，请谨慎执行。
+
+==== 8. 安装校验
+
+. 在 *安装校验* 页面，点击 *开始检测* ，系统将自动运行检测脚本验证系统可用性。
+
+. 如果系统检测通过，点击 *完成* ，即可查看 KubeSphere 的访问地址、管理员用户名和默认密码。
+
+. 在浏览器中输入访问地址，登录 KubeSphere Web 控制台，即可开始使用 KubeSphere。
++
+*说明：* 取决于您的网络环境，您可能需要配置流量转发规则，并在防火墙中放行 30880 端口。
+
+=== 命令行安装
+
+==== 1. 下载 KubeKey
+
+如果您访问 GitHub/GoogleAPIs 受限，请设置如下环境变量：
+
+[source,shell]
+----
+export KKZONE=cn
+----
+
+执行以下命令下载 KubeKey 最新版本：
+
+[source,shell]
+----
+curl -sfL https://get-kk.kubesphere.io | SKIP_WEB_INSTALLER=true SKIP_PACKAGE=true sh -
+----
+
+执行完成后，会在当前目录生成以下文件：
+
+[cols="1,2",options="header"]
+|===
+|原文件 |解压后文件
+
+|`kubekey-v4.x.x-linux-amd64.tar.gz`
+|`kk`：KubeKey 二进制文件
+|===
+
+==== 2. 创建节点配置文件
+
+执行以下命令创建节点配置文件 `inventory.yaml`：
+
+[source,shell]
+----
+./kk create inventory -o .
+----
+
+`inventory.yaml` 主要设置集群中各节点的连接信息。命令执行完毕后，将生成节点配置文件，示例如下：
+
+[source,yaml]
+----
+apiVersion: kubekey.kubesphere.io/v1
+kind: Inventory
+metadata:
+  name: default
+spec:
+  hosts:
+    # localhost:
+    #   connector:
+    #     password: 123456
+    # node1:
+    #   connector:
+    #     type: ssh
+    #     host: node1
+    #     port: 22
+    #     user: root
+    #     password: 123456
+    #   internal_ipv4: 1.1.1.1
+  groups:
+    # 所有 Kubernetes 节点
+    k8s_cluster:
+      groups:
+        - kube_control_plane
+        - kube_worker
+    # 控制平面节点
+    kube_control_plane:
+      hosts:
+        - localhost
+    # 工作节点
+    kube_worker:
+      hosts:
+        - localhost
+    # etcd 节点（仅当 etcd_deployment_type 为 external 时）
+    etcd:
+      hosts:
+        - localhost
+#    image_registry:
+#      hosts:
+#        - localhost
+    # NFS 节点（用于镜像仓库存储和 Kubernetes NFS 存储）
+#    nfs:
+#      hosts:
+#        - localhost
+----
+
+`spec.hosts` 用于配置各节点的连接参数。每个节点以节点名称作为键，例如 `localhost` 或 `node1`。
+
+[cols="1,3",options="header"]
+|===
+|参数 |描述
+
+|`+<key>+`
+|节点名称
+
+|`+<key>:connector+`
+|节点连接信息
+
+|`+<key>:connector:type+`
+|节点连接类型。支持 `local`（本地连接）和 `ssh`（远程连接）。会根据节点名称或 IP 自动识别
+
+|`+<key>:connector:host+`
+|使用 SSH 连接节点时的地址
+
+|`+<key>:connector:port+`
+|使用 SSH 连接节点时的端口。默认值：`22`
+
+|`+<key>:connector:user+`
+|使用 SSH 连接节点时的用户名。默认值：`root`
+
+|`+<key>:connector:password+`
+|连接节点时的密码。`local` 连接时对应 sudo 密码，`ssh` 连接时对应 SSH 密码
+
+|`+<key>:connector:private_key+`
+|SSH 连接节点时的私钥文件路径。密码和密钥任选其一
+
+|`+<key>:connector:private_key_content+`
+|SSH 连接节点时的私钥文件内容。可使用密钥内容替代密钥文件路径
+
+|`+<key>:internal_ipv4+`
+|节点在集群中通信时的 IPv4 地址
+
+|`+<key>:internal_ipv6+`
+|节点在集群中通信时的 IPv6 地址
+|===
+
+`spec.groups` 用于配置节点的角色信息。
+
+[cols="1,3",options="header"]
+|===
+|参数 |描述
+
+|`k8s_cluster`
+|Kubernetes 集群组织节点。包含 `kube_control_plane` 和 `kube_worker`，无需额外配置
+
+|`kube_control_plane`
+|Kubernetes 集群中的控制平面节点。在 `kube_control_plane:hosts` 中配置 `spec:hosts` 中定义的节点名称
+
+|`kube_worker`
+|Kubernetes 集群中的工作节点。在 `kube_worker:hosts` 中配置 `spec:hosts` 中定义的节点名称
+
+|`etcd`
+|Kubernetes 集群中的 etcd 节点。在 `etcd:hosts` 中配置 `spec:hosts` 中定义的节点名称
+
+|`image_registry`
+|用于创建私有镜像仓库的节点。在线安装时通常无需配置
+|===
+
+==== 3. 创建安装配置文件
+
+执行以下命令创建安装配置文件 `config.yaml`：
+
+[source,shell]
+----
+./kk create config --with-kubernetes <Kubernetes version> -o .
+----
+
+将 `+<Kubernetes version>+` 替换为实际需要的版本，例如 `v1.27.4`。KubeSphere 默认支持 Kubernetes `v1.23~v1.34`。
+
+命令执行完毕后将生成安装配置文件 `+config-<Kubernetes version>.yaml+`。
+
+==== 4. 配置集群参数
+
+在 `+config-<Kubernetes version>.yaml+` 中配置 Kubernetes 集群的信息：
+
+[cols="1,3",options="header"]
+|===
+|参数 |描述
+
+|`zone`
+|文件及镜像的下载区域。如果您访问 GitHub/GoogleAPIs 受限，请将该值设置为 `cn`
+
+|`kubernetes`
+|Kubernetes 相关配置
+
+|`etcd`
+|etcd 相关配置
+
+|`image_registry`
+|私有镜像仓库相关配置
+
+|`cri`
+|容器运行时相关配置
+
+|`cni`
+|网络插件相关配置
+
+|`storage_class`
+|存储插件相关配置
+
+|`dns`
+|域名解析相关配置
+
+|`image_manifests`
+|需要下载的额外镜像
+|===
+
+*注意：* 完整的配置参数说明请参考 *https://github.com/kubesphere/kubekey/blob/main/docs/zh/reference/config.md[配置参考]*。
+
+==== 5. 安装 Kubernetes
+
+执行以下命令安装 Kubernetes：
+
+[source,shell]
+----
+./kk create cluster -i inventory.yaml -c config-<Kubernetes version>.yaml
+----
+
+如果已将安装配置文件重命名为 `config.yaml`，则可使用以下命令：
+
+[source,shell]
+----
+./kk create cluster -i inventory.yaml -c config.yaml
+----
+
+==== 6. 安装 KubeSphere
+
+执行以下命令安装 KubeSphere：
+
+[source,shell]
+----
+chart=oci://hub.kubesphere.com.cn/kse/ks-core
+version=1.2.4
+helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart \
+  --debug --wait --version $version --reset-values --take-ownership \
+  --set global.imageRegistry=hub.kubesphere.com.cn,extension.imageRegistry=hub.kubesphere.com.cn
+----
+
+*注意：* Helm 版本需要 >= 3.17.0。
+
+如果显示如下信息，则表示 KubeSphere 安装成功：
+
+[source,text]
+----
+NOTES:
+Thank you for choosing KubeSphere Helm Chart.
+
+Please be patient and wait for several seconds for the KubeSphere deployment to complete.
+
+1. Wait for Deployment Completion
+
+    Confirm that all KubeSphere components are running by executing the following command:
+
+    kubectl get pods -n kubesphere-system
+
+2. Access the KubeSphere Console
+
+    Once the deployment is complete, you can access the KubeSphere console using the following URL:
+
+    http://192.168.6.10:30880
+
+3. Login to KubeSphere Console
+
+    Use the following credentials to log in:
+
+    Account: admin
+    Password: P@88w0rd
+
+NOTE: It is highly recommended to change the default password immediately after the first login.
+----
+
+== 访问 KubeSphere Web 控制台
+
+安装完成后，在浏览器中访问安装结果中显示的 KubeSphere 控制台地址。
+
+使用安装结果中显示的管理员用户名和默认密码登录 KubeSphere Web 控制台。首次登录后，建议立即修改默认密码。

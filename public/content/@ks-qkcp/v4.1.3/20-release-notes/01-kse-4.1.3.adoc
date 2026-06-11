@@ -1,0 +1,213 @@
+---
+title: "KubeSphere 企业版 v4.1.3 版本说明"
+keywords: "v4.1.3 版本说明, KubeSphere 企业版"
+description: "介绍 KubeSphere 企业版新特性、功能增强以及问题修复。"
+weight: 01
+---
+
+
+== KubeSphere Core v4.1.3
+
+=== 新特性
+
+- 支持使用 ChartMuseum 统一交付扩展组件
+- 新增特殊授权 License
+- 支持同步第三方登录平台用户别名
+
+=== 优化
+
+- 在应用路由页面展示 IngressClass 名称
+- 优化应用路由详情页
+- 优化网络隔离策略规则配置
+- 优化移除集群的流程
+- 优化集群配置页面
+- 优化扩展中心详情页面
+- 优化添加成员集群引导页面
+- 优化 License 管理功能
+- 优化自定义平台信息功能
+
+
+=== 缺陷修复
+
+- 修复应用路由创建过程中非预期的异常
+- 修复有状态副本集关联容器组显示异常的问题
+- 修复镜像仓库验证失败导致非预期登出的问题
+- 修复选择项目弹窗中项目无法加载更多的问题
+- 修复企业空间角色描述显示错误的问题
+- 修复容器组列表页的状态和详情页的调度状态显示错误的问题  
+- 修复无法搜索 DockerHub 镜像的问题
+- 修复部分 CSI 存储无法开启克隆和快照的问题
+- 修复资源监控的时间选择框中自定义时间无法编辑的问题
+- 修复自定义日期后监控数据展示不正确的问题
+- 修复 POC License 显示问题
+- 修复 OIDC 协议用户登出重定向异常问题
+- 修复成员集群客户端证书自动轮换过程中的潜在的更新不及时的问题
+- 修复移除成员集群过程中潜在的资源清理安全问题
+- 修复 OAuth2-Proxy 登录成功的跳转地址错误
+- 修复创建工作负载时 GPU 配置无法生效
+
+== WizTelemetry 可观测平台 v1.3.0
+
+重要更新如下：
+
+- 新增扩展组件 `Grafana Alloy for WizTelemetry`，不仅支持收集指标、日志和链路追踪等可观测信号，它还提供了许多功能，帮助您在复杂的环境中快速查找和处理数据。其中包括自定义组件、GitOps 兼容性、集群支持、安全性和调试实用程序。
+
+- 扩展组件名称中的 `WhizardTelemetry` 都改为 `WizTelemetry`.
+
+- `WizTelemetry 审计`、`WizTelemetry 事件`、`WizTelemetry 日志`、`WizTelemetry 通知` 新增 OpenSearch ISM 索引管理配置。OpenSearch Curator 功能已被废弃，并将在未来版本中删除。建议采用 ISM（Index State Management）功能进行索引管理。
+
+=== WizTelemetry 平台服务 v1.3.0
+
+==== **优化**
+
+- 支持设置 KubeSphere Client 的 QoS 和 Burst
+
+==== **缺陷修复**
+
+- 修复监控 API 越权访问漏洞
+
+=== Grafana Alloy for WizTelemetry v1.0.0
+
+这是该扩展组件的第一个版本，可用于收集 Kubernetes 日志、Prometheus 指标、OpenTelemetry 数据，还可以用作导出各种指标的 Exporter。
+
+=== WizTelemetry 告警 v1.0.4
+
+==== **优化**
+
+- 在未启用可观测中心的场景下，避免安装不必要的内置规则组。
+
+=== WizTelemetry 审计 v1.2.1
+
+==== **新特性**
+
+- 增加 OpenSearch ISM 索引管理配置
+
+=== WizTelemetry 事件 v1.2.1
+
+==== **新特性**
+
+- 增加 OpenSearch ISM 索引管理配置
+
+=== WizTelemetry 日志 v1.2.3
+
+==== **新特性**
+
+- 增加 OpenSearch ISM 索引管理配置
+
+==== **缺陷修复**
+
+- 修复容器日志查询中开启实时日志后显示异常的问题
+
+=== WizTelemetry 通知 v2.6.0
+
+==== **新特性**
+
+- 增加 OpenSearch ISM 索引管理配置
+
+=== Grafana for WizTelemetry v10.4.14
+
+==== **优化**
+
+- 更新同步上游 link:https://github.com/prometheus-operator/kube-prometheus/[kube-prometheus] 监控面板
+- 对 AI 基础设施 (AI Infra) 监控更好支持，新增多款 GPU 监控面板
+
+==== **其他**
+
+- 升级 grafana 至 v10.4.14
+
+== 平台管理
+
+=== 应用商店管理 v2.0.2
+
+==== **优化**
+
+- 修改应用模板 chart 包上传方式为 formdata
+- 应用商店页面新增使用说明
+
+==== **缺陷修复**
+
+- 修复在应用模板详情页无法上传新版本应用的问题
+- 修复应用商店管理的分类展示不完整的问题
+- 修复应用详情中资源状态展示不完整的问题
+- 修复上传 chart 应用时重复发送请求的问题
+- 修复应用商店页面 logo 和其他页面不一致的问题，支持 logo 定制
+- 修复无法升级 helm 应用的问题
+
+=== 服务网格 v1.0.1
+
+==== **优化**
+
+- 升级应用部署示例 bookinfo 的版本到 1.17.0 以提供 arm64 架构镜像
+
+==== **缺陷修复**
+
+- 修复了卸载组件时需要等到卸载任务超时才能完全卸载的问题
+- 修复了服务器重启后无法连接到 kiali 的问题
+
+== 数据库与中间件
+
+=== RadonDB DMP v2.1.4
+
+==== **优化**
+
+- 升级 redis-operator 到 v1.3.4
+  
+==== **缺陷修复**
+
+- 修复在 DMP 离线包中创建 RabbitMQ 实例时，镜像拉取失败
+- 修复成员集群的 dmp-agent 安装失败
+
+==== **已知问题**
+
+- Redis Sentinel 集群在从 DMP v2.1.3 升级到 v2.1.4 后，需要重新设置 default 用户密码，详情请参考用户文档
+
+- 新版本 redis-operator 不再管理由旧版本 redis-operator 创建的 Redis Cluster 集群，详情请参考用户文档
+
+== DevOps
+
+=== DevOps v1.1.2
+
+==== **优化**
+
+- Jenkins 控制台默认登录方式修改为本地数据库，简化登录流程
+- DevOps GC CronJob 中添加了终止长久未结束的流水线的功能
+- DevOps agent pod 的 activeDeadlineSeconds 默认配置为6小时，防止 pod 长久占用资源
+
+==== **缺陷修复**
+
+- 修复图形化编辑 Groovy 脚本失败的问题
+- 修复更新扩展组件 agent 配置不生效的问题
+- 修复 pipelinerun 的标签或注解更新失败的问题
+- 修复流水线 CD 步骤运行失败的问题
+- 修复添加 Gitlab 仓库失败的问题
+- 修复升级时删除 Jenkins plugin 失败的问题
+- 修复升级时 kubesphere-devops-worker 项目下用户 PVC 被误删除的问题
+
+== 网络
+
+=== 网关 v1.0.3
+
+==== **优化**
+
+- 升级 ingress-nginx 版本到 4.10.3
+
+==== **缺陷修复**
+
+- 修复网关输出异常日志的问题
+- 修复网关监控无法显示平均延迟的问题
+
+== 安全
+
+=== Gatekeeper v1.0.3
+
+==== **新特性**
+
+- 新增 Gatekeeper 内置模板管理功能
+  - 支持通过 `values.yaml` 配置模板安装选项
+  - 新增 `templates.fullInstall` 参数控制是否安装所有模板
+  - 新增 `templates.customInstall` 参数支持选择性安装指定模板
+  - 新增 `templates.txt` 文件记录所有可用模板列表
+
+==== **优化**
+
+- 修复列表分页异常

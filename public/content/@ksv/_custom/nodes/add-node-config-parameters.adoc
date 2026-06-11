@@ -1,0 +1,69 @@
+// :ks_include_id: 267b7ca8422b4498b61de1061123bca4
+
+以下为示例配置：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+hosts:
+- {name: node1, address: 172.31.50.23, internalAddress: 172.31.50.23, user: yop, password: "zhu1241jie"}
+- {name: node2, address: 172.31.50.24, internalAddress: 172.31.50.24, user: yop, password: "zhu1241jie"}
+- {name: node3, address: 172.31.50.25, internalAddress: 172.31.50.25, user: yop, password: "zhu1241jie"}
+
+roleGroups:
+  etcd:
+  - node1
+  - node2
+  - node3
+  control-plane:
+  - node1
+  - node2
+  - node3
+  worker:
+  - node1
+  - node2
+  - node3
+  registry:
+  - node1
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+相关参数描述如下：
+
+[cols=".^1a,.^4a"]
+|===
+|参数 |描述
+
+|hosts
+|节点列表信息。
+
+|name
+|节点名称。
+
+|address
+|节点的 SSH 登录 IP 地址。
+
+|internalAddress
+|节点在子网内部的 IP 地址。
+
+|user
+|节点的 SSH 登录用户名，该用户必须为 **root** 用户或其他具有 **sudo** 命令执行权限的用户。如果使用 **root** 用户可不设置此参数。
+
+|password
+|节点的 SSH 登录密码。
+
+|roleGroups
+|节点角色信息。
+
+|etcd
+|安装 etcd 数据库的节点，一般设置为集群控制节点。
+
+|control-plane
+|集群控制节点。集群中可设置多个控制节点。
+
+|worker
+|集群工作节点。工作节点上可以创建虚拟机。多节点模式下集群中必须至少有 3 个工作节点，控制节点同时也可以是工作节点。
+
+|registry
+|定义集群中使用的镜像仓库部署在哪个节点上。一般情况下，指定为第一个节点的名称即可。
+|===

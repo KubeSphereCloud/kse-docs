@@ -1,0 +1,91 @@
+---
+title: "基础型云服务器"
+date: 2020-01-30T00:40:25+09:00
+description: 入门级云服务器介绍
+draft: false
+weight: 1
+keywords: 云计算, 青云, QingCloud, 入门级云服务器, 基础型, 云服务器
+---
+
+基础型云服务器实例是面向个人或中小团队推出的新一代入门型云服务器，均衡的计算、内存和网络资源，以极高的性价比满足低负载应用、轻量 Web 应用、开发测试环境、轻量级企业服务等使用场景需求。其特点：
+
+* 计算
+** 处理器与内存配比支持 1:1、1:2、1:4。
+** vCPU 数量范围 1~8。
+
+* 网络：
+** 网络性能与规格对应，规格越高网络转发性能强，最高可支持 1.2Gbps 内网带宽
+** 支持 VPC 私有网络和基础网络
+
+* 存储：支持使用增强型 SSD、容量型、基础型以及通用型 SSD，详细内容可参考link:../../../../../storage/disk/intro/introduction/#_硬盘类型[硬盘介绍]相关内容。
+
+include::../../../../../../_components/note.adoc[]
+基础型实例在资源利用上更强调资源性能的共享，采用非绑定 CPU 调度模式，高负载时可能会出现计算性能波动不稳定，有可用性 SLA 保证，但无性能 SLA 保证。
+include::../../../../../../_components/table_footer.adoc[]
+
+基础型云服务器包括的实例规格和性能指标如下：
+
+[options="header",cols="1,1,1,1"]
+|===
+| 实例类型 | CPU | 内存 | 内网带宽
+
+| s1.small.r1
+| 1 核
+| 1G
+| 0.2 Gbps
+
+| s1.small.r2
+| 1 核
+| 2G
+| 0.2 Gbps
+
+| s1.small.r4
+| 1 核
+| 4G
+| 0.2 Gbps
+
+| s1.large.r1
+| 2 核
+| 2G
+| 0.5 Gbps
+
+| s1.large.r2
+| 2 核
+| 4G
+| 0.5 Gbps
+
+| s1.large.r4
+| 2 核
+| 8G
+| 0.5 Gbps
+
+| s1.xlarge.r1
+| 4 核
+| 4G
+| 0.8 Gbps
+
+| s1.xlarge.r2
+| 4 核
+| 8G
+| 0.8 Gbps
+
+| s1.xlarge.r4
+| 4 核
+| 16G
+| 0.8 Gbps
+
+| s1.2xlarge.r1
+| 8 核
+| 8G
+| 1.2 Gbps
+
+| s1.2xlarge.r2
+| 8 核
+| 16G
+| 1.2 Gbps
+
+| s1.2xlarge.r4
+| 8 核
+| 32G
+| 1.2 Gbps
+|===

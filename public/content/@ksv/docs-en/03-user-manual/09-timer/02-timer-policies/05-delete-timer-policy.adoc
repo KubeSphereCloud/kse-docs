@@ -1,0 +1,70 @@
+---
+title: "Delete timer policies"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, timer policies, deletion"
+description: "Describes how to delete timer policies in the {ks_product} web console."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 2338c4e939d04f3ab8889d92f10261ac
+:ks_xref_id: e0ba5e2589614983b15888fd3db54c5f
+:ks_comp: ../../../../components/
+:ks_title: Delete timer policies
+:ks_description: Describes how to delete timer policies in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, timer policies, deletion
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete timer policies in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=beaee008205443abb1b38bc6f36c4ca6]
+
+User **admin** can delete all timer policies in your cluster. Project administrators and operators can delete the timer policies created on their own, and project viewers cannot delete timer policies.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a timer policylink:[id=31897d7694cf4c95b12f2d0a2d072490]
+
+include::../../../../_custom-en/timer/timer-policy-steps.adoc[]
+
+. On the **Timer Policies** tab, click the name of the timer policy that you want to delete. The details page of the timer policy appears.
+. On the left side of the details page, click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+The timer policy cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple timer policies at a timelink:[id=a7d264fe587345acb66d27948e5a32f0]
+
+include::../../../../_custom-en/timer/timer-policy-steps.adoc[]
+
+. On the **Timer Policies** tab, click the name of the timer policy that you want to delete. The details page of the timer policy appears.
+. On the **Timer Policies** tab, select the checkboxes next to the policies that you want to delete and click **Delete** in the upper-left corner.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+Timer policies cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

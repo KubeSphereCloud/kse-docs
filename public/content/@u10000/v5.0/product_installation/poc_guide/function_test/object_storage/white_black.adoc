@@ -1,0 +1,48 @@
+---
+title: 黑白名单
+description: 
+weight: 13
+---
+
+[cols="1,3", options="header"]
+|===
+| 用例编号 | 
+
+|测试目的
+|验证 {product_name} 支持配置桶级别的存储空间策略
+
+|预置条件
+a| 
+* {product_name} 已经安装部署完毕，且运行正常。
+* 成功创建用户 user1。
+* 用户侧 s3cmd 工具能正常使用。s3cmd 工具的使用，参考link:../../../additional/s3_cmd/[附录]相关内容。
+* 获取当前环境的 Zone 域名，用来替换以下 curl 命令行中的 `zone_domain`。
+
+
+
+|测试步骤
+a|
+. 使用 user1 登录 Console。
+. 在 Console 上创建桶 test1。
+. 上传文件 file1 至存储桶 test1。
+. 将存储桶 test1 设置为所有人可读。
+. 客户端使用 curl 来获取文件：`curl -s -o /dev/null -D - 'https://zone_domain/test1/file1'`
+. 在 Console 页面对该存储桶 test1 设置安全策略，如：拒绝 `*.example.com` 为请求头的访问。
+. 客户端加上被禁用的请求头来 curl 同样的文件：`curl -s -o /dev/null -D - --header 'Referer: a.example.com' 'https://zone_domain/test1/file1'`
+
+
+
+|预期结果
+a|
+. 成功登录 Console。
+. Console 上创建桶成功。
+. 上传文件 file1 至存储桶 test1 成功。
+. 成功设置存储桶 test1 为所有人可读。
+. curl 命令行返回 `200 OK` 的响应。说明匿名用户访问成功。
+. 对该存储桶 test1 成功设置拒绝 `*.example.com` 为请求头的访问。
+. curl 命令行返回 `403 Forbidden` 的响应。
+
+
+|实测结果 |
+
+|===

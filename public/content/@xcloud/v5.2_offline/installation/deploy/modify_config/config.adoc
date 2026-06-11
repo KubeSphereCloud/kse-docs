@@ -1,0 +1,81 @@
+---
+title: "生成配置文件"
+weight: 40
+---
+
+Variables.ZONE_ID.yaml 及 setting.ZONE_ID.yaml 配置完成后，请在 FirstBox 上执行以下操作，生成 conf 文件。
+
+== 操作步骤
+
+. 登录 FirstBox。
++
+[source]
+----
+ssh root@<firstbox ip address>
+----
++
+参数说明如下：
++
+**<firstbox ip address>**：安装 FirstBox 时配置的管理 IP。
+. 执行以下命令，生成 conf 文件。
++
+仅配置了单个 ZONE：
++
+[source]
+----
+/pitrix/cli/config-qingcloud.py -v '/pitrix/config/variables.ZONE_ID.yaml' -s '/pitrix/config/settings.ZONE_ID.yaml'
+----
++
+需要配置多个 ZONE：配置文件之前使用英文逗号(,)隔开。
++
+[source]
+----
+/pitrix/cli/config-qingcloud.py -v '/pitrix/config/variables.ZONE_ID1.yaml,/pitrix/config/variables.ZONE_ID2.yaml' -s '/pitrix/config/settings.ZONE_ID1.yaml,/pitrix/config/settings.ZONE_ID2.yaml'
+----
++
+回显如下信息，表示任务下发成功。
++
+image::/images/ep_offline/installation/deploy_modify_config_config_01.png[,40%]
+
+. 执行以下命令，查看配置任务的当前状态。
++
+[source]
+----
+/pitrix/cli/get-config-qingcloud-status.py
+----
++
+回显如下，状态为 `successful` 时，表示任务执行成功。
++
+image::/images/ep_offline/installation/deploy_modify_config_config_02.png[]
++
+
+include::../../../../../_components/note.adoc[]
+若状态为 step1，表示任务正在执行中，请耐心等待，稍后重新执行命令查看状态。
+
+若状态异常，请查看如下日志 ，检查报错原因并修复。若仍不能解决，请联系技术支持。
+
+* 详细日志文件路径：/pitrix/log/config。
+* 简略日志：执行命令 `/pitrix/cli/get-config-qingcloud-log.py`，查看任务的简略日志。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 命令执行成功，在 /pitrix/conf/variables 和 /pitrix/conf/settings 目录可以看到生成的配置文件。
++
+
+include::../../../../../_components/attention.adoc[]
+* 生成配置文件后，若需要修改配置信息，请手动修改生成之后的配置文件。
+* 手动调整了setting目录下配置文件里的 role 信息后，请执行命令 `/pitrix/bin/gen_node_list.py`，以通知 installer 感知 role 的变更。若需要强制重新配置平台，请执行命令 `/pitrix/bin/gen_node_list.py -f`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+ ** variables 目录下的配置文件
++
+variables.yaml 文件中包括在 variables.ZONE_ID.yaml 中配置的所有信息，以及各服务角色的管理 IP 及 VIP。
++
+image::/images/ep_offline/installation/deploy_modify_config_config_03.png[]
+
+ ** setting 目录下的配置文件
++
+该目录下的文件为各服务角色的基本信息，包括网络信息、主机信息等。
++
+image::/images/ep_offline/installation/deploy_modify_config_config_04.png[]

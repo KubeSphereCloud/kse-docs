@@ -1,0 +1,84 @@
+---
+title: 标签
+draft: false
+weight: 1
+keywords: 标签, 创建和管理标签, 云计算
+linkkey: management_tags_guide
+---
+
+
+== 快速上手
+
+下面以一组云服务器贴标签为例，来描述标签的使用方式。
+
+video::https://pek3b.qingstor.com/yunify-qingcloud-docs/video/qs_qingcloud_label.mp4[标签的使用]
+
+
+
+== 创建标签
+
+
+. 登录 QingCloud 管理控制台，选择**产品与服务** > **运维与管理** > **标签**，进入标签列表页面。
++
+image::/images/cloud_service/operation/tools/tag_main.png[tag_main,100%]
+
+. 点击**创建**，弹出**创建标签**对话框。
++
+image::/images/cloud_service/operation/tools/create_tag_1.png[create_tag_1,60%]
+
+. 用户根据对话框信息，填写相关参数后，点击**提交**即可。
+
+. 用户可在标签列表，查看成功创建的标签。
+
+
+
+== 使用标签
+
+标签成功创建后，需要将其先绑定至相应的资源后，用户才能通过标签来过滤查找目标资源，减少检索时间。
+
+这里以云服务器为例，详细介绍如何给云服务器绑定标签以及如何通过标签来过滤云服务器。
+
+. 登录 QingCloud 管理控制台，选择**产品与服务** > **计算** > **云服务器**，进入云服务器列表页面。
+
+. 选中目标云服务器，点击**更多操作** > **绑定标签**，弹出**选择标签**对话框。
++
+image::/images/cloud_service/operation/tools/bonding_tag.png[bonding_tag,60%]
+
+. 在**选择标签**对话框内，勾选目标标签后，点击**提交**。
+
+. 用户可点击目标云服务器名称，进入云服务器详情页面，查看成功绑定的标签。
++
+image::/images/cloud_service/operation/tools/bonding_tag_2.png[bonding_tag_2,60%]
+
+
+. 在云服务器列表页面，点击搜索框旁的**标签**按钮，通过标签来过滤想要的资源。
++
+image::/images/cloud_service/operation/tools/fliter_tag_based.png[fliter_tag_based,80%]
+
+== 解绑标签
+
+资源与标签之间的绑定关系，可以随时进行解除。这里以云服务器为例，介绍如何将云服务器与标签进行解绑。
+
+. 登录 QingCloud 管理控制台，选择**产品与服务** > **计算** > **云服务器**，进入云服务器列表页面。
+
+. 选择目标云服务器，点击**右键** > **标签** > **解绑**，弹出解绑标签对话框。
++
+image::/images/cloud_service/operation/tools/bonding_tag_3.png[bonding_tag_3,60%]
+
+. 用户在对话框内勾选待解绑的标签后，点击**提交**，云服务器资源与标签解绑完成。
+
+. 用户可至云服务器列表页面确认标签解绑成功。
+
+== 删除标签
+
+删除标签时，无需进行资源解绑操作，所有绑定的资源会自动从该标签解绑。
+
+. 登录 QingCloud 管理控制台，选择**产品与服务** > **运维与管理** > **标签**，进入标签列表页面。
++
+image::/images/cloud_service/operation/tools/tag_main.png[tag_main,100%]
+
+. 勾选目标标签，点击**更多操作** > **删除**。
+
+. 弹出确认对话框，用户确认操作无误后，点击**确认**。
+
+. 用户可至标签列表页面，确认成功删除的标签，不在列表显示。

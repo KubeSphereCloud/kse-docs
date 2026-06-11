@@ -1,0 +1,699 @@
+---
+title: "配置 OpenSearch 集群服务端证书"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB OpenSearch,证书"
+description: "介绍如何配置 OpenSearch 集群服务端证书。"
+weight: 02
+---
+
+
+
+本节介绍如何配置 OpenSearch 集群服务端证书。
+
+服务端证书有以下两种生成方式：
+
+* OpenSearch 集群内部自动生成证书(默认)，具有以下特点：
++
+--
+
+** 有效期为 10 年。
+
+** 暂不支持证书更换或续签。
+
+** 该证书仅能在 Kubernetes 集群内部使用，无法用于 Kubernetes 外部访问。
+--
+
+* 用户自定义证书，具有以下特点：
++
+--
+
+** 自定义有效期。
+
+** 暂不支持证书更换或续签。
+
+** 该证书可用于从 Kubernetes 集群外部访问 OpenSearch 集群。
+--
+
+== 配置 OpenSearch
+
+设置 OpenSearch CR:.spec.confMgmt.updateConfigOnly 的值为 true。
+
+[,yaml]
+----
+spec:
+  confMgmt:
+    forceRestart: true
+    smartScaler: true
+    updateConfigOnly: true
+----
+//note
+[.admon.note,cols="a"]
+|===
+|备注
+
+|
+请务必把该值设为 true。否则，后续操作将还原所有 OpenSearch 集群的用户、角色、密码等设置。
+
+修改该配置不会触发 pod 重建。
+
+|===
+
+
+== OpenSearch 集群内部自动生成证书
+
+. 在 OpenSearch Dashboards 上开启 TLS 认证。
++
+--
+* 将 **spec.dashboards.tls.enable** 的值设置为 **true**。
+* 将 **spec.dashboards.tls.generate** 的值设置为 **true**。
+--
+
+. 在 OpenSearch 集群上开启 TLS 认证。
+
++
+--
+* 将 **spec.security.tls.transport.generate** 的值设置为 **true**。
+* 将 **spec.security.tls.http.generate** 的值设置为 **true**。
+
+配置文件如下所示：
+
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+apiVersion: opensearch.opster.io/v1
+kind: OpenSearchCluster
+metadata:
+  name: os-001
+spec:
+  general:
+    version: 2.3.0
+    httpPort: 9200
+    vendor: opensearch
+    serviceName: os-001
+
+  dashboards:
+    version: 2.3.0
+    enable: true
+    replicas: 1
+    resources:
+      requests:
+         memory: "1Gi"
+         cpu: "500m"
+      limits:
+         memory: "1Gi"
+         cpu: "500m"
+    tls:
+      enable: true
+      generate: true
+
+  confMgmt:
+    smartScaler: true
+  security:
+    config:
+      securityConfigSecret:
+# Pre create this secret with required security configs, to override the default settings
+        name: securityconfig-secret
+      adminCredentialsSecret:
+        name: admin-credentials-secret
+    tls:
+      transport:
+        generate: true
+
+      http:
+        generate: true
+
+  nodePools:
+    - component: masters
+      replicas: 3
+      diskSize: "50Gi"
+      persistence:
+        pvc:
+          storageClass: csi-qingcloud
+          accessModes:
+            - ReadWriteOnce
+      nodeSelector:
+      resources:
+         requests:
+            memory: "1Gi"
+            cpu: "500m"
+         limits:
+            memory: "1Gi"
+            cpu: "500m"
+      roles:
+        - "cluster_manager"
+
+    - component: data-hot
+      replicas: 2
+      diskSize: "80Gi"
+      persistence:
+        pvc:
+          storageClass: csi-qingcloud
+          accessModes:
+            - ReadWriteOnce
+      additionalConfig:
+        node.attr.datatier: "hot" # warm, cold
+      resources:
+         requests:
+            memory: "1Gi"
+            cpu: "500m"
+         limits:
+            memory: "1Gi"
+            cpu: "500m"
+      roles:
+        - "data"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-credentials-secret
+type: Opaque
+data:
+  username: c2h1YWliMTIz
+  password: c2h1YWliMTIz
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在 master 节点上执行以下命令创建集群。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@master1:/home/ubuntu/opensearch# kubectl -n opensearch apply -f ./os-ssl-true.yaml
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+--
+
+. 在 master 节点执行以下命令，并访问 link:https://cluster-name.namespace:9200[] 验证 OpenSearch 证书是否可用。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@master1:/home/ubuntu/opensearch# kubectl -n opensearch exec -it pod/os-001-masters-0 -c opensearch -- /bin/bash [opensearch@os-001-masters-0 ~]$ curl https://os-001.opensearch.svc:9200/_cat/nodes -u root:U61yyB86o2QbyyFo --cacert /usr/share /opensearch/config/tls-http/ca.crt
+10.10.194.117 40 93 7 1.03 1.04 1.02 d data - os-001-data-hot-1
+10.10.215.129 46 88 9 0.52 0.65 0.84 m cluster_manager - os-001-masters-1 10.10.215.128 51 94 5 0.52 0.65 0.84 d data - os-001-data-hot-0 10.10.2.137 45 100 8 1.98 1.21 1.12 m cluster_manager * os-001-masters-0 10.10.194.118 44 88 17 1.03 1.04 1.02 m cluster_manager - os-001-masters-2
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+此处 **--cacert** 指定了 CA 证书的路径 **/usr/share/opensearch/config/tls-http/ca.crt**。
+--
+
+. 在 Dashboard 节点执行以下命令，并访问 link:https://cluster-name-dashboards:5601[] 验证 Dashboard 证书是否可用。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@master1:/home/ubuntu/opensearch# kubectl -n opensearch exec -it os-001-dashboards-7d9886689d-zd7jb -- /bin/bash
+[opensearch-dashboards@os-001-dashboards-7d9886689d-zd7jb ~]$ curl https://os-001-dashboards:5601 -u dashboarduser:dashboarduser
+curl: (60) SSL certificate problem: unable to get local issuer certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+[opensearch-dashboards@os-001-dashboards-7d9886689d-zd7jb ~]$ curl https://os-001-dashboards:5601 -u dashboarduser:dashboarduser --cacert /usr/share/opensearch-dashboards/certs/tls.crt
+[opensearch-dashboards@os-001-dashboards-7d9886689d-zd7jb ~]$ 
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+此处 **--cacert** 指定了 CA 证书的路径 **/usr/share/opensearch/config/tls-http/ca.crt**。
+
+集群内部生成的证书名称为 <cluster-name>-ca  和 <cluster-name>-dashboards-cert，如下图所示。
+
+image::/images/dmp/os-certificate.png[]
+--
+
+. 执行以下命令获取 OpenSearch 集群 CA 证书并保存到 **ca-test.cert** 文件中。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@master1:/home/ubuntu# kubectl -n opensearch get secrets os-001-ca  -ojsonpath='{.data}' | jq -r '."ca.crt"' | base64 -d > test-ca.crt
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+image::/images/dmp/certificate-details.png[]
+
+--
+
+
+== 用户自定义证书
+
+. 使用 OpenSSL 签发 Dashboard 和 OpenSearch 证书。
+
+.. 规划证书。
++
+[%header,cols="1a,4a"]
+|===
+|项目 |内容
+
+|CN
+|*.<cluster-name>.<namespace>.svc.cluster.local
+
+|SAN
+|*.<cluster-name>.<namespace>.svc.cluster.local
+
+*.<cluster-name>-dashboards.*
+
+|===
+
+.. 创建 CA 证书 **root-ca.pem** 和 **root-ca-key.pem**。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+openssl genrsa -out root-ca-key.pem 2048
+openssl req -new -x509 -sha256 -key root-ca-key.pem -subj "/C=CN/ST=STATE/L=CITY/O=ORG/OU=UNIT/CN=demo@nowhere.com" -out root-ca.pem -days 3650
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+.. 创建证书配置文件 **san.cnf**。
++
+--
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+[req]
+distinguished_name = req_distinguished_name
+req_extensions = req_ext
+prompt = no
+[req_distinguished_name]
+CN = *.os002.opensearch.svc.cluster.local
+[req_ext]
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = *.os002.opensearch.svc.cluster.local
+DNS.2 = *.os002-dashboards.*
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+此处集群名称 os002，namespace 名称 opensearch 仅为示例，请根据实际情况替换。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+.. 创建证书 **my.crt** 和 **my.key**。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+openssl req -out my.csr -newkey rsa:2048 -nodes -keyout my.key -config san.cnf
+openssl x509 -req -in my.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out my.crt -days 36 50 -extensions req_ext -extfile san.cnf
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+.. 验证证书，含 CN 和 SAN 项。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+ openssl x509 -in my.crt -noout -text
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+image::/images/dmp/verify-certificate.png[]
+--
+
+. 通过 **my.crt** 和 **my.key** 创建 HTTP 证书。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+
+root@master1:/home/ubuntu/opensearch/certs# kubectl -n opensearch create secret tls cluster-http-cert --cert=my.crt --key=my.key
+secret/cluster-http-cert created
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 通过 **root-ca.pem** 创建 CA 证书。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@master1:/home/ubuntu/opensearch/certs# kubectl -n opensearch create secret generic cluster-ca --from-file=ca.crt=./root-ca.pem -- from-file=ca.key=./root-ca-key.pem
+secret/cluster-ca created
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 参照以下内容配置 CR 文件。
++
+--
+* 开启 Dashboard TLS 认证
+
+** 将 **spec.dashboards.tls.enable** 设置为 **true**。
+
+** **spec.dashboards.tls.generate**设置为 **false**。
+
+** **spec.dashboards.tls.secret** 设置为 HTTP 证书名称， 此处为 **cluster-http-cert**。
+** **spec.dashboards.tls.caSecret** 设置为 CA  证书名称， 此处为 **cluster-ca**。
+
+* 开启 OpenSearch 集群 TLS 认证
+** **spec.security.tls.transport.generate** 设置为 **true**。
+** **spec.security.tls.transport.caSecret** 设置为 CA 证书名称， 此处为 **cluster-ca**。
+** **spec.security.tls.http.generate** 设置为 **false**。
+** **spec.security.tls.http.caSecret** 设置为 CA 证书名称， 此处为 **cluster-ca**。
+** **spec.security.tls.http.secret** 设置为 HTTP 证书名称， 此处为 **cluster-http-cert**。
+--
++
+--
+配置文件如下所示：
+
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+apiVersion: opensearch.opster.io/v1
+kind: OpenSearchCluster
+metadata:
+  name: os002
+spec:
+  general:
+    version: 2.3.0
+    httpPort: 9200
+    vendor: opensearch
+    serviceName: os002
+ 
+  dashboards:
+    version: 2.3.0
+    enable: true
+    replicas: 1
+    resources:
+      requests:
+         memory: "1Gi"
+         cpu: "500m"
+      limits:
+         memory: "1Gi"
+         cpu: "500m"
+    tls:
+      enable: true
+      generate: false
+      secret:
+        name: cluster-http-cert
+      caSecret:
+        name: cluster-ca
+  confMgmt:
+    smartScaler: true
+  security:
+    config:
+      securityConfigSecret:
+# Pre create this secret with required security configs, to override the default settings
+        name: securityconfig-secret
+      adminCredentialsSecret:
+        name: admin-credentials-secret
+    tls:
+      transport:
+        generate: true
+        caSecret:
+          name: cluster-ca
+      http:
+        generate: false
+        secret:
+          name: cluster-http-cert
+        caSecret:
+          name: cluster-ca
+ 
+  nodePools:
+    - component: masters
+      replicas: 3
+      diskSize: "50Gi"
+      persistence:
+        pvc:
+          storageClass: csi-qingcloud
+          accessModes:
+            - ReadWriteOnce
+      nodeSelector:
+      resources:
+         requests:
+            memory: "1Gi"
+            cpu: "500m"
+         limits:
+            memory: "1Gi"
+            cpu: "500m"
+      roles:
+        - "cluster_manager"
+ 
+    - component: data-hot
+      replicas: 2
+      diskSize: "80Gi"
+      persistence:
+        pvc:
+          storageClass: csi-qingcloud
+          accessModes:
+            - ReadWriteOnce
+      additionalConfig:
+        node.attr.datatier: "hot" # warm, cold
+      resources:
+         requests:
+            memory: "1Gi"
+            cpu: "500m"
+         limits:
+            memory: "1Gi"
+            cpu: "500m"
+      roles:
+        - "data"
+ 
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-credentials-secret
+type: Opaque
+data:
+  username: c2h1YWliMTIz
+  password: c2h1YWliMTIz
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 创建 OpenSearch 集群。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@master1:/home/ubuntu/opensearch# kubectl -n opensearch apply -f os-ssl-false.yaml
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 验证 OpenSearch 集群证书。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@master1:/home/ubuntu/opensearch# kubectl -n opensearch exec -it os002-masters-0 -- /bin/bash
+Defaulted container "opensearch" out of: opensearch, init (init)
+[opensearch@os002-masters-0 ~]$ curl https://os002-masters-0.os002.opensearch.svc.cluster.local:9200/_cat/nodes --cacert /usr/share /opensearch/config/tls-http/ca.crt -u root:x804NqPd3tz7HBzr
+10.10.2.138 63 95 17 2.16 1.68 1.42 m cluster_manager * os002-masters-0 10.10.194.120 49 94 6 4.88 2.75 1.75 d data - os002-data-hot-1 10.10.194.121 35 87 7 4.88 2.75 1.75 m cluster_manager - os002-masters-2 10.10.215.132 53 94 13 1.58 0.93 0.86 d data - os002-data-hot-0 10.10.215.133 28 88 8 1.58 0.93 0.86 m cluster_manager - os002-masters-1 [opensearch@os002-masters-0 ~]$
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 外部验证 OpenSearch 集群证书。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* 在 2.0.16 之前的 operator 版本，OpenSearch 集群 Service 类型默认为 ClusterIP，且不支持修改，故无法修改 service 类型为 NodePort 供外部访问集群。若需要外部访问，可以通过额外增加一个 NodePort 类型的 service 实现。
+
+* 在 2.0.16 及以后的 operator 版本，service 默认类型已调整为 NodePort。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+.. 获取 **service/opensearch** 的 YAML 配置，并重命名。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@master1:~# kubectl -n opensearch get service/opensearch -oyaml > opensearch-external.yaml
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+.. 修改 **opensearch-external.yaml**。
++
+--
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/service: opensearch
+    opster.io/exporter-monitor: "yes"
+    opster.io/opensearch-cluster: opensearch
+  name: opensearch-external
+  namespace: opensearch
+  ownerReferences:
+  - apiVersion: opensearch.opster.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: OpenSearchCluster
+    name: opensearch
+    uid: 5f16ee6c-35ba-460f-910a-fa88f4f32f86
+spec:
+  clusterIP: 10.96.220.19
+  clusterIPs:
+  - 10.96.220.19
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 9200
+    protocol: TCP
+    targetPort: 9200
+  - name: transport
+    port: 9300
+    protocol: TCP
+    targetPort: 9300
+  - name: metrics
+    port: 9600
+    protocol: TCP
+    targetPort: 9600
+  - name: rca
+    port: 9650
+    protocol: TCP
+    targetPort: 9650
+  selector:
+    opster.io/opensearch-cluster: opensearch
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+* metadata 里保留 **labels**、**name**、**namespace**、**ownerReferences** 属性。
+* 修改 **metadata.name** 字段，自定义 service 名称。
+* 删除 **spec.clusterIP** 和 **spec.clusterIPs** 字段，防止 IP 冲突。
+* 修改 **spec.type** 为 **NodePort**。
++
+可参考以下示例：
+
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/service: opensearch
+    opster.io/exporter-monitor: "yes"
+    opster.io/opensearch-cluster: opensearch
+  name: opensearch-external
+  namespace: opensearch
+  ownerReferences:
+  - apiVersion: opensearch.opster.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: OpenSearchCluster
+    name: opensearch
+    uid: 5f16ee6c-35ba-460f-910a-fa88f4f32f86
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 9200
+    protocol: TCP
+    targetPort: 9200
+  - name: transport
+    port: 9300
+    protocol: TCP
+    targetPort: 9300
+  - name: metrics
+    port: 9600
+    protocol: TCP
+    targetPort: 9600
+  - name: rca
+    port: 9650
+    protocol: TCP
+    targetPort: 9650
+  selector:
+    opster.io/opensearch-cluster: opensearch
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+.. 创建 **opensearch-external** 服务。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+
+root@master1:~# kubectl -n opensearch apply -f ./opensearch-external.yaml
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+.. 检查服务是否创建成功。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@master1:~# kubectl -n opensearch get svc
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+如果您能够在回显中找到 **opensearch-external** 服务，则该服务创建成功。
+
+image::/images/dmp/os-external.png[]
+--
+
+. 配置 **/etc/hosts** 文件。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+echo "172.22.9.17 os002-masters-0.os002.os002.opensearch.svc.cluster.local" >> /etc/hosts
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+其中，**172.22.9.17** 为任意节点名称，**os002-masters-0.os002.os002.opensearch.svc.cluster.local** 为其中一个 master 节点名称，可任意配置。
+--
+
+. 执行以下命令进行外部访问。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@i-abmm2sr0:~/test# curl https://os002-masters-0.os002.opensearch.svc.cluster.local:30255/_cat/nodes --cacert ./root-ca.pem -u root:x804NqPd3tz7HBzr
+10.10.194.121 61 88 6 0.49 0.80 1.28 m cluster_manager - os002-masters-2
+10.10.215.133 57 89 7 0.35 0.60 0.79 m cluster_manager - os002-masters-1
+10.10.194.120 57 94 4 0.49 0.80 1.28 d data - os002-data-hot-1 10.10.2.138 34 95 5 3.41 2.13 1.80 m cluster_manager * os002-masters-0 10.10.215.132 57 95 8 0.35 0.60 0.79 d data - os002-data-hot-0
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--

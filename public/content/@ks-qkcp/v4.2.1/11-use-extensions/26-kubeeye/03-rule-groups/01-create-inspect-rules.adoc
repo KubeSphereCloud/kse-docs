@@ -1,0 +1,131 @@
+---
+title: "创建巡检规则"
+weight:  01
+---
+
+:ks_navigation: **巡检规则组**
+
+
+本节介绍如何创建巡检规则，以便后续创建巡检任务。
+
+目前支持的规则类型有：
+
+- OPA 规则
+- PromQL 规则
+- 文件变更规则
+- 内核参数配置规则
+- Systemd 服务状态规则
+- 节点基本信息规则
+- 文件内容检查规则
+- 服务连通性检查规则
+
+== 前提条件
+
+* 您需要在 KubeSphere 平台具有 **platform-admin** 角色。
+
+* KubeSphere 平台需要安装并启用 **KubeEye** 扩展组件。
+
+
+== 操作步骤
+
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+. 点击**组件坞 > 集群巡检**，进入集群巡检页面。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 登录集群节点，下载示例规则 https://github.com/kubesphere/kubeeye/tree/release-1.0/sample/rules[kubeeye-rules]，或编写自定义规则。
++
+====
+[.admon.note,cols="a"]
+|===
+|说明
+
+|编写规则时，请注意以下示例中注释的说明。
+|===
+
+* OPA 示例规则说明： 使用 Rego 语言编写，用于检查 Kubernetes 资源的配置是否符合预期。
++
+[source,yaml]
+----
+apiVersion: kubeeye.kubesphere.io/v1alpha2
+kind: InspectRule
+metadata:
+  name: deployment-inspect-rules
+spec:
+  opas:
+    - name: imagePullPolicyRuleForDeployment
+      # 风险等级，枚举值："danger"， "warning"，"ignore"
+      level: danger
+      rule: |-
+        package inspect.kubeeye
+        import rego.v1
+
+        deny contains msg if {
+          # 必须指定待检查资源的类型和版本
+          input.kind == "Deployment"
+          input.apiVersion == "apps/v1"
+
+          level := "WARNING"
+
+          container := input.spec.template.spec.containers[_]
+          container.imagePullPolicy != "IfNotPresent"
+          
+          # 必须返回一个包含 Name, Namespace, Type, Message, Reason, Level 的结构体
+          msg := {
+              "Name": sprintf("%v", [input.metadata.name]),
+              "Namespace": sprintf("%v", [input.metadata.namespace]),
+              "Type": sprintf("%v", [input.kind]),
+              "Message": "ControllersImagePullPolicyRule",
+              "Reason": sprintf("当前资源镜像拉取策略为: %v , 需要修改为 IfNotPresent", [container.imagePullPolicy]),
+              "Level": sprintf("%v", [level])
+          }
+        }
+----
+
+* PromQL 规则示例说明：使用 PromQL 语言编写，用于检查 Prometheus 监控指标是否符合预期。
++
+[source,yaml]
+----
+apiVersion: kubeeye.kubesphere.io/v1alpha2
+kind: InspectRule
+metadata:
+  name: promql-inspect-rules
+spec:
+  # 必须指定目标集群所使用的 Prometheus endpoint 地址
+  prometheusEndpoint: http://prometheus-k8s.kubesphere-monitoring-system.svc.cluster.local:9090
+  prometheus:
+    - name: filesystem-less-20
+      desc: Filesystem inode where less 20 %
+      rule: (node_filesystem_files_free{fstype!="",job="node-exporter"} / node_filesystem_files{fstype!="",job="node-exporter"} * 100 < 20 and node_filesystem_readonly{fstype!="",job="node-exporter"} == 0)
+    - name: NodeFilesystemSpaceFillingUp
+      desc: Filesystem is predicted to run out of space within the next 24 hours.
+      rule: (node_filesystem_avail_bytes{fstype!="",job="node-exporter"} / node_filesystem_size_bytes{fstype!="",job="node-exporter"} * 100 < 20 and predict_linear(node_filesystem_avail_bytes{fstype!="",job="node-exporter"}[6h], 24 * 60 * 60) < 0 and node_filesystem_readonly{fstype!="",job="node-exporter"} == 0)
+----
+
+====
+
+. 执行命令创建巡检规则。
++
+--
+[source,bash]
+----
+kubectl apply -f xxx.yaml
+----
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|将 `xxx.yaml` 替换为实际的规则文件名称，如 `kubeeye_nodeInfo_inspect.yaml`。
+|===
+
+创建完成的巡检规则将显示在**巡检规则组**页面。
+--

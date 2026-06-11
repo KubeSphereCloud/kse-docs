@@ -1,0 +1,46 @@
+---
+title: "View Alert List"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Alert, View Alert List"
+description: "Describes how to view the alert list."
+weight: 01
+---
+
+:ks_permission: **Alert Viewing**
+:ks_navigation: **Monitoring & Alerting > Alerts**
+
+
+include::../../../../../_custom/clusterManagement/alerts/alerts-desc-viewAnAlertingMessageList.adoc[]
+
+
+== Prerequisites
+
+* The **WizTelemetry Alerting** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and enter your cluster or workspace.
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../..//_custom/clusterManagement/alerts/alerts-oper-openListPage.adoc[]
+
++
+====
+include::../../../../../_custom/clusterManagement/alerts/alerts-para-alertingMessageList.adoc[]
+
+include::../../../../../_custom/clusterManagement/alerts/alerts-oper-searchForAlertingMessages_new.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

@@ -1,0 +1,120 @@
+---
+title: "Create an Image Builder Using Artifacts"
+keywords: "Kubernetes, {ks_product}, Create Image Builder, Create Image Builder Using Artifacts"
+description: "Describes how to create an image builder to build artifacts into container images."
+weight: 02
+---
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Image Builder**
+
+
+This section describes how to build artifacts into container images (B2I).
+
+include::../../../../_custom/projectManagement/imageBuilders/imageBuilders-desc-imageBuilderCreated.adoc[]
+
+include::../../../../_custom/projectManagement/services/services-oper-buildImageUsingArtifact.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/services/services-oper-pushPullImage.adoc[]
+
+
+== Example Artifacts
+
+The following are some example artifacts for demonstration and testing:
+
+[%header,cols="1a,1a"]
+|===
+|Artifact Package |GitHub Repository
+
+| link:https://github.com/kubesphere/tutorial/raw/master/tutorial%204%20-%20s2i-b2i/b2i-war-java8.war[b2i-war-java8.war]
+| link:https://github.com/spring-projects/spring-mvc-showcase[spring-mvc-showcase]
+
+| link:https://github.com/kubesphere/tutorial/raw/master/tutorial%204%20-%20s2i-b2i/b2i-war-java11.war[b2i-war-java11.war]
+| link:https://github.com/kubesphere/s2i-java-container/tree/master/tomcat/examples/springmvc5[springmvc5]
+
+| link:https://github.com/kubesphere/tutorial/raw/master/tutorial%204%20-%20s2i-b2i/b2i-binary[b2i-binary]
+| link:https://github.com/runzexia/devops-go-sample[devops-go-sample]
+
+| link:https://github.com/kubesphere/tutorial/raw/master/tutorial%204%20-%20s2i-b2i/b2i-jar-java11.jar[b2i-jar-java11.jar]
+| link:https://github.com/kubesphere/s2i-java-container/tree/master/java/examples/maven[java-maven-example]
+
+| link:https://github.com/kubesphere/tutorial/raw/master/tutorial%204%20-%20s2i-b2i/b2i-jar-java8.jar[b2i-jar-java8.jar]
+| link:https://github.com/kubesphere/devops-maven-sample[devops-maven-sample]
+|===
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+include::../../../../_custom/projectManagement/services/services-prer-artifact.adoc[]
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/services/services-prer-imageRegistry_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. On the **Build Mode** tab, select **JAR**, **WAR**, or **Binary** based on the type of the artifact file, and then click **Next**.
+
++
+
+. On the **Build Settings** tab, configure the build environment, artifact file, and image service information, and then click **Create**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../_custom/projectManagement/services/services-para-artifactFile.adoc[]
+
+include::../../../../_custom/projectManagement/services/services-para-buildEnvironmentArtifact.adoc[]
+
+|Image Name
+|The name of the target container image to be built. The name can only contain lowercase letters, numbers, hyphens (-), periods (.), slashes (/), and colons (:), and must start and end with a lowercase letter or number.
+
+The image name should include the image's namespace, for example, **my-namespace/my-image**. If no namespace is entered, the system will automatically add the namespace **library**, and the actual image name will be **library/my-image**.
+
+|Image Tag
+|The tag of the target container image to be built.
+
+|Target Image Service
+|The image service used to store the target image. Please select a Secret containing the image service information.
+
+|Trigger Token
+|The authentication token used by the client to trigger KubeSphere image builds via webhook. If a token is set, requests must provide the correct token to trigger the image build. The token can only contain uppercase letters, lowercase letters, and numbers.
+
+After the service is created, KubeSphere will create the image builder and provide a URL that can be used by third-party applications to trigger image builds. You can obtain the URL on the details page of the image builder.
+
+// include::../../../../_custom/projectManagement/services/services-para-buildSettings.adoc[]
+
+include::../../../../_custom/projectManagement/services/services-para-environmentVariablesArtifact.adoc[]
+|===
+
+include::../../../../_custom/projectManagement/imageBuilders/imageBuilders-desc-creationComplete.adoc[]
+--

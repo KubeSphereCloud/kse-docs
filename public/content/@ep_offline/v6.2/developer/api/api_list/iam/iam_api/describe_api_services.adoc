@@ -1,0 +1,186 @@
+---
+title: 查询IAM纳管API服务信息（DescribeIAMApiServices）
+weight: 16
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Integer
+| false
+| 偏移量
+
+| offset
+| Integer
+| false
+| 起始坐标
+
+| permission
+| String
+| false
+| 默认权限
+
+| reverse
+| Integer
+| false
+| 是否降序查询
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| service_name
+| String
+| false
+| 服务名（英文）
+
+| sort_key
+| String
+| false
+| 排序使用的列
+
+| status
+| Array
+| false
+| 状态
+
+| visible
+| String
+| false
+| 是否可见
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| services
+| Object
+| false
+| IAM纳管的服务详情
+
+| services.action_group
+| String
+| false
+| API分组
+
+| services.attributes
+| String
+| false
+| 属性
+
+| services.audit_log
+| String
+| false
+| 审计日志
+
+| services.create_time
+| String
+| false
+| 创建时间
+
+| services.gateway
+| String
+| false
+| 网关
+
+| services.id
+| String
+| false
+| 服务ID
+
+| services.keys
+| String
+| false
+| 必选可选参数
+
+| services.permission
+| String
+| false
+| 默认权限
+
+| services.service_name
+| String
+| false
+| 服务名
+
+| services.status
+| String
+| false
+| 状态
+
+| services.translated_name
+| String
+| false
+| 服务名（中文）
+
+| services.type
+| String
+| false
+| 类型（服务，接口）
+
+| services.visible
+| String
+| false
+| 是否可见
+
+| total_count
+| Integer
+| false
+| IAM纳管的服务总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMApiServices",
+  "limit": 20,
+  "offset": 0,
+  "reverse": 1,
+  "sort_key": "create_time"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMApiServicesResponse",
+  "ret_code": 0,
+  "services": {
+    "ecm": {
+      "action_group": "Other",
+      "attributes": {
+        "actions": "ecm"
+      },
+      "audit_log": "",
+      "create_time": "2023-04-03T14:49:49",
+      "gateway": "",
+      "id": "ecm",
+      "keys": {},
+      "permission": "deny",
+      "service_name": "ecm",
+      "status": "active",
+      "translated_name": "弹性云主机",
+      "type": "service",
+      "visible": "visible"
+    }
+  },
+  "total_count": 1
+}
+----

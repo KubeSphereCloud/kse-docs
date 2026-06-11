@@ -1,0 +1,43 @@
+---
+title: "Delete Domains to Stop Reuse Validation"
+description: "Learn how to delete a domain to stop domain reuse validation."
+weight: 04
+---
+
+:ks_navigation: **Application Workloads > Ingress Utils**
+
+This section describes how to delete a domain to stop domain reuse validation.
+
+== Prerequisites
+
+* **KubeSphere Ingress Utils** should have been installed and enabled.
+
+* You should have the **cluster-admin** role on the {ks_product-en} platform.
+
+== Delete a Single Domain
+
+. Log in to the {ks_product-en} web console with a user who has the **cluster-admin** role and enter your cluster.
+
++
+
+include::../../../../_ks_components-en/oper-navigate.adoc[]
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the domain you want to delete, and then select **Delete** from the drop-down list.
+
+. In the **Delete Domain** dialog, enter the name of the domain, and then click **OK**.
+
+== Delete Multiple Domains
+
+. Log in to the {ks_product-en} web console with a user who has the **cluster-admin** role and enter your cluster.
+
++
+
+include::../../../../_ks_components-en/oper-navigate.adoc[]
+
+. Select the checkboxes on the left side of the domains you want to delete, and then click **Delete** above the domain list.
+
+. In the **Delete Multiple Domains** dialog, enter the names of the domains, and then click **OK**.
++
+--
+include::../../../_custom-en/note-separateNamesByComma.adoc[]
+--

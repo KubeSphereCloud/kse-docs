@@ -1,0 +1,95 @@
+---
+title: "修改数据库配置参数"
+keywords: "Kubernetes, {ks_product}, RadonDB MongoDB, 配置参数, 修改数据库参数"
+description: "介绍如何修改 RadonDB MongoDB 数据库配置参数。"
+weight: 05
+---
+
+:ks_db_product: MongoDB
+
+本节介绍如何修改 RadonDB {ks_db_product} 数据库的配置参数。
+
+RadonDB {ks_db_product} 实例支持编辑配置参数，通过管理配置参数可调优数据库性能，并可启用数据库高可用性能。
+
+// Warning
+include::../../../_ks_components/admonitions/warning.adoc[]
+
+修改部分配置参数后，{ks_db_product} 服务会重启，造成业务中断。请谨慎操作。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+== 修改配置参数
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 点击页面右侧的**参数管理**页签，点击**编辑**即可修改配置参数。
+. 点击**确定**保存。
+
+== 参数简介
+
+[%header,cols="1,5"]
+|===
+|参数 |说明
+
+|port
+|{ks_db_product} 服务器监听的端口号。默认值为 27017。
+
+|oplogSizeMB
+|oplog 文件的大小上限，单位为 MB。默认值为 10240 MB。
+
+|maxIncomingConnections
+|mongos 或 mongod 接受的最大同时连接数量。
+
+// |cursorTimeoutMillis	
+// |闲置游标的超时时间，单位为毫秒。闲置游标超时后将被 {ks_db_product} 移除。
+		
+|profilingMode	
+a|是否启用性能分析（Profiling）模式，即是否开启慢查询检测。
+
+* 默认值为 off，表示不收集任何慢查询。
+* slowOp：表示根据 slowOpThresholdMs 参数收集慢查询数据。
+* all：表示开启全局慢查询检测，即收集任何操作记录的数据。
+	
+|slowOpThresholdMs	
+|慢操作时间阈值。花费时间大于此参数值的操作将被视为慢操作。
+	
+|enableMajorityReadConcern	
+|是否使用安全读取策略。默认为 **true**，表示只能读取到成功写入到大多数节点的数据。
+
+修改此参数值将导致数据库服务重启。
+
+|systemLog.component.command.verbosity
+a|命令相关组件的日志记录级别。
+
+* 默认值为 0，记录 Informational 级别日志。
+* 设置为 1，会记录所有的请求日志。
+	
+|systemLog.component.indexVerbosity	
+a|索引操作相关组件的日志记录级别。
+
+* 默认值为 0，记录 Informational 级别日志。
+* 设置为 1，会记录所有的请求日志。
+	
+|systemLog.component.queryVerbosity	
+a|查询操作相关组件的日志记录级别。
+
+* 默认值为 0，记录 Informational 级别日志。
+* 设置为 1，会记录所有的请求日志。
+	
+|systemLog.component.networkVerbosity	
+a|组网操作相关组件的日志记录级别。
+
+* 默认值为 0，记录 Informational 级别日志。
+* 设置为 1，会记录所有的请求日志。
+	
+|systemLog.component.writeVerbosity	
+a|写入操作相关组件的日志记录级别。
+
+* 默认值为 0，记录 Informational 级别日志。
+* 设置为 1，会记录所有的请求日志。
+|===

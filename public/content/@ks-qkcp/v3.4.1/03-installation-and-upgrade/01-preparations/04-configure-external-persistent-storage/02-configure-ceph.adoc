@@ -1,0 +1,144 @@
+---
+title: "配置 Ceph"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 安装, 准备, 持久化存储, Ceph"
+description: "介绍如何在生产环境中为{ks_product_both}集群配置 Ceph 存储系统。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 68c6e0fb44ee42e9bf195b42ca0ea20d
+:ks_xref_id: c1df4ad0d8aa4d778fc3c6a1a557f66d
+:ks_comp: ../../../../components/
+:ks_title: 配置 Ceph
+:ks_keywords: Kubernetes, {ks_product}, 安装, 准备, 持久化存储, Ceph
+:ks_description: 介绍如何在生产环境中为{ks_product_both}集群配置 Ceph 存储系统。
+:ks_weight: 02
+:ks_icon:
+
+
+
+本节介绍如何在生产环境中为{ks_product_both}集群配置 Ceph 存储系统。
+
+
+== 前提条件link:[id=d262e0d80c5c492283c46410fd835457]
+
+您需要创建 Ceph RBD 服务端，并确保 Ceph 版本为 14.0.0 或以上。有关更多信息，请参阅 link:https://docs.ceph.com/en/pacific/[Ceph 官方文档]。
+
+
+== 操作步骤link:[id=6cb30c61f2fd4c71b4aaf50268d508c9]
+
+您需要创建 2 个配置文件，分别用于配置 Ceph 存储插件和存储类。
+
+. 登录用于执行{ks_product_both}安装操作的集群节点，执行以下命令创建 Ceph 存储插件配置文件：
+
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+vi ceph-csi-rbd.yaml
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 将以下信息添加到 Ceph 存储插件配置文件中，并保存文件供后续安装{ks_product_both}时使用：
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+csiConfig:
+  - clusterID: "<cluster ID>"
+    monitors:
+      - "<Ceph monitor address>"
+      - "<Ceph monitor address>"
+      - "<Ceph monitor address>"
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+将以下参数替换为实际值：
+
+[%header,cols="1a,2a"]
+|===
+|参数 |描述
+
+|<cluster ID>
+|Ceph 集群 ID，例如 **7809ed59-390c-48e7-a818-d6c2b4f489cb**。
+
+|<Ceph monitor address>
+|Ceph Monitor 的 IP 地址和端口号，例如 **192.168.0.10:6789**。
+|===
+
+以上配置文件仅包含必须设置的参数。如需设置其他参数，请参阅 link:https://github.com/ceph/ceph-csi/blob/devel/charts/ceph-csi-rbd/values.yaml[Ceph CSI RBD 配置]。
+--
+
+. 执行以下命令创建存储类配置文件：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+vi ceph-csi-rbd-sc.yaml
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 将以下信息添加到存储类配置文件中，并保存文件供后续安装{ks_product_both}时使用：
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: csi-rbd-secret
+  namespace: kube-system
+stringData:
+  userID: admin
+  userKey: "<key>"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+   name: csi-rbd-sc
+   annotations:
+     storageclass.beta.kubernetes.io/is-default-class: "true"
+     storageclass.kubesphere.io/supported-access-modes: '["ReadWriteOnce","ReadOnlyMany","ReadWriteMany"]'
+provisioner: rbd.csi.ceph.com
+parameters:
+   clusterID: "<cluster ID>"
+   pool: "<RBD pool name>"
+   imageFeatures: layering
+   csi.storage.k8s.io/provisioner-secret-name: csi-rbd-secret
+   csi.storage.k8s.io/provisioner-secret-namespace: kube-system
+   csi.storage.k8s.io/controller-expand-secret-name: csi-rbd-secret
+   csi.storage.k8s.io/controller-expand-secret-namespace: kube-system
+   csi.storage.k8s.io/node-stage-secret-name: csi-rbd-secret
+   csi.storage.k8s.io/node-stage-secret-namespace: kube-system
+   csi.storage.k8s.io/fstype: ext4
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+mountOptions:
+   - discard
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+将以下参数替换为实际值：
+
+[%header,cols="1a,2a"]
+|===
+|参数 |描述
+
+|<key>
+|Ceph 集群的访问密钥。
+
+|<cluster ID>
+|Ceph 集群的 ID，例如 **7809ed59-390c-48e7-a818-d6c2b4f489cb**。
+
+|<RBD pool name>
+|RBD 池的名称，例如 **rbd**。
+|===
+--

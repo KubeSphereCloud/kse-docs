@@ -1,0 +1,26 @@
+---
+title: "TensorBoard 使用"
+weight: 20
+#draft: true
+---
+
+TensorBoard 用于可视化模型的训练过程、模型结构、数据分布等信息，帮助用户更好地理解和调试他们的模型。
+
+== 注意事项
+
+用户需要编写代码将日志写入环境变量 ``TENSORBOARD_LOG_PATH`` 所对应的路径，TensorBoard 将自行获取相应目录的数据。``TENSORBOARD_LOG_PATH`` 所对应的路径如下。
+
+image::/images/cloud_service/compute/coreshub/develop_training_k8s_tensorboard_2.png[]
+
+
+== 操作步骤 
+
+在容器列表页面，点击指定容器实例所在行右侧的更多操作，选择 **TensorBoard**，弹出 **TensorBoard** 窗口即可查看。
+
+image::/images/cloud_service/compute/coreshub/develop_training_k8s_tensorboard_1.png[]
+
+include::../../../../../../_components/attention.adoc[]
+若无法打开 TensorBoard 页面，请检查是否关闭浏览器的弹窗拦截。
+include::../../../../../../_components/table_footer.adoc[]
+
+

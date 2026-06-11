@@ -1,0 +1,87 @@
+---
+title: 刷新单点登录（RefreshSsoAccessToken）
+weight: 8
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_token
+| String
+| true
+| 
+
+| refresh_token
+| String
+| true
+| 
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_token
+| String
+| false
+| 
+
+| expires_in
+| String
+| false
+| 过期时间
+
+| lang
+| String
+| false
+| 语言
+
+| refresh_token
+| String
+| false
+| 
+
+| token_type
+| String
+| false
+| enums{JWT,
+
+| user_id
+| String
+| false
+| 用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "access_token": "JZOHGWGENRXLKPMEMZYR",
+  "refresh_token": "WSOHGWGENRXLKPMEMZYR"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "access_token": "JZOHGWGENRXLKPMEMZYR",
+  "action": "RefreshSsoAccessTokenResponse",
+  "expires_in": "2022-11-20 16:42",
+  "refresh_token": "WSOHGWGENRXLKPMEMZYR",
+  "ret_code": 0,
+  "token_type": "JWT",
+  "user_id": "usr-kdsaDLs"
+}
+----

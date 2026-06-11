@@ -1,0 +1,260 @@
+---
+title: "KubeSphere Cloud"
+linkTitle: "{ks_title}"
+keywords: ""
+description: ""
+weight: 06
+logo: "{ks_logo}"
+downloadUrl: "{ks_download_url}"
+---
+
+// :ks_include_id: 2396d4a7c80c4547a8076a51aaa907d0
+:ks_xref_id: f769e15be24c4be7838b363127aef011
+:ks_comp: ../../components/
+:ks_title: KubeSphere Cloud
+:ks_description:
+:ks_keywords:
+:ks_weight: 06
+
+
+KubeSphere Cloud is a one-stop SaaS with high quality standards, offering a range of cloud native services such as KubeSphere Backup, KubeSphere Inspector, and KubeSphere Lite.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== KubeSphere Backuplink:[id=5110430affcb44e38f569db2480557a7]
+
+KubeSphere Backup is a Disaster-Recovery-as-a-Service (DRaaS) service designed for hybrid cloud Kubernetes environments. It features vendor-agnostic security, reliable migration, flexible management, and more. With the ability to back up and recover data across Kubernetes clusters, you can create data protection solutions for your core business.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Benefitslink:[id=0063aa0a69854fcfb6536c1548462f6b]
+
+KubeSphere Backup delivers the following benefits:
+
+* Designed for Kubernetes
++
+--
+Back up and restore containerized applications running on Kubernetes. Meet your data protection demands in fine-grained business environments.
+--
+* Vendor-agnostic security
++
+--
+Ensure enterprise-grade data consistency with reliable troubleshooting mechanisms to maintain business security and stability in production. Support various Kubernetes distributions and S3 standard object storage with no vendor lock-in.
+--
+* Reliable migration
++
+--
+Migrate data across clouds and heterogeneous environments without building and maintaining any local backup infrastructure. Achieve on-demand data protection and application high availability.
+--
+* Flexible management
++
+--
+Focus on managing and protecting your application data and resources through several clicks on a user-friendly console.
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Featureslink:[id=6c94929c173e4dab92f762e4fdfb27df]
+
+KubeSphere Backup provides the following key features:
+
+* Intuitive UI
++
+--
+Create and execute data protection tasks with a few clicks. No need to have expertise in Kubernetes backup tools like Velero.
+--
+* Multi-cloud Backup and disaster recovery
++
+--
+Use a unified protection solution to support backup and disaster recovery across clouds and different Kubernetes versions. No need to consider the differences of technology stacks.
+--
+* Business assurance
++
+--
+Support CSI snapshot backup to ensure data consistency of stateful applications like MySQL, MongoDB, and Redis. Achieve high availability of your critical applications across different locations.
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Scenarioslink:[id=f2fec03d62d54281afdcde0fdcced2e1]
+
+KubeSphere Backup protects cloud native data in various scenarios.
+
+* System or hardware malfunction
++
+--
+Mitigate business interruption risks due to malfunctions and secure the continuity of core business running in Kubernetes clusters.
+--
+* Configuration errors
++
+--
+Recover data backups at any time when configuration errors occur in development or testing environments.
+--
+* Malicious or improper operations
++
+--
+Prevent data loss due to malicious or improper operations and ensure data integrity with on-premises or cloud backups.
+--
+* Multi-cluster protection
++
+--
+Implement on-demand backup and disaster recovery among infrastructures across different clusters, cloud providers, and zones.
+--
+* Data migration across clouds
++
+--
+Migrate data to different cloud providers to avoid vendor lock-in.
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== KubeSphere Inspectorlink:[id=f07e227e8fdb46b1b4bac8d1d0e5b501]
+
+Built on top of KubeEye, KubeSphere Inspector is a cluster inspection SaaS designed for multi clouds. It helps users identify whether configurations of Kubernetes resources, components, and nodes conform to best practices, makes resource optimization recommendations, scans cluster for vulnerabilities, and enhances cluster security to ensure that Kubernetes clusters can run in a secure, stable, and efficient manner.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Benefitslink:[id=98736e02cdfd47bd9062b6c6448c31d6]
+
+KubeSphere Inspector delivers the following benefits:
+
+* Designed for Kubernetes
++
+--
+Apply to complex business environments and meet security, stability, and efficiency requirements in the cloud native era.
+--
+* Multi-cluster management across clouds
++
+--
+Manage multiple clusters on one platform and support scheduled inspection plans.
+--
+* Intuitive result display
++
+--
+Score clusters and intuitively display the inspection results, letting users understand the cluster's health status and optimize the cluster configurations accordingly.
+--
+* Easy to use
++
+--
+Provide a quick way to import and inspect clusters in a few clicks.
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Featureslink:[id=985fc6288b8d41c997b7ba82f1f89913]
+
+KubeSphere Inspector provides the following key features:
+
+* Cluster inspection
++
+--
+Inspect cluster components and nodes in an all-round manner and offer an effective inspection result to help users analyze and optimize cluster configurations.
+--
+* Vulnerability scanning
++
+--
+Detect container's Common Vulnerabilities and Exposures (CVEs) in time to protect Kubernetes clusters against network attacks.
+--
+* Enhanced security
++
+--
+Make recommendations on Kubernetes security risks and audit roles and permissions of clusters to prevent permission leakages.
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Scenarioslink:[id=cde5c1dc9b254a9b8a0faf35aac590b3]
+
+KubeSphere Inspector is applicable to various scenarios.
+
+* Security assurance
++
+--
+Eliminate Kubernetes vulnerabilities and blind spots and leverage DevSecOps to ensure Kubernetes and container security.
+--
+* Compliance and security audit
++
+--
+Detect whether security configurations and permission management comply with regulations to prevent potential problems from affecting security audit.
+--
+* Abnormality diagnosis
++
+--
+Detect cluster abnormalities and service latency, check whether cluster configurations are appropriate, and make suggestions accordingly.
+--
+* Cost optimization
++
+--
+Locate the most resource-intensive service and make resource optimization suggestions to reduce the cost of using Kubernetes and maximize the efficiency of Kubernetes computing resources.
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== KubeSphere Litelink:[id=ad3a80a55a56474fbe5b24455f90674b]
+
+KubeSphere Lite is an out-of-the-box managed service for Kubernetes clusters. It offers a quick way to start a Kubernetes cluster and build a lightweight container platform in a few clicks. Ready-to-use cluster resources help users easily handle learning, teaching, training, testing, demonstration, and more scenarios.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Features and Benefitslink:[id=f0eff688231f4e16a8c87b96de99150a]
+
+Using KubeSphere Lite, you can enjoy diverse features and benefits.
+
+* Second-level startup
++
+--
+Help you create a minimal, ready-to-use Kubernetes cluster in a minimum of 5 seconds.
+--
+* Simple setup
++
+--
+Deploy an industry-leading container management platform on top of KubeSphere to efficiently manage clusters and containers.
+--
+* Easy to use
++
+--
+Save the effort to set up and maintain basic cluster resources, and users can quickly get started with containerized applications.
+--
+* Reliable services
++
+--
+Provide users with professional services and technical support as a Kubernetes Certified Service Provider (KCSP) by CNCF.
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Scenarioslink:[id=5829d9a69ba5437e852a9c4bf3eb4483]
+
+KubeSphere Lite is applicable to various scenarios.
+
+* Learning
++
+--
+Learn about Kubernetes fundamentals and leverage the cluster as an interactive hands-on tool, which is applicable to Kubernetes beginners and students majoring in computer science and software.
+--
+* Teaching and training
++
+--
+Design Kubernetes-related development and O&M courses and leverage the cluster as a teaching tool, which is applicable to teachers and curriculum developers from training institutions, colleges, and universities.
+--
+* Testing
++
+--
+Build automatic testing environments, deploy applications to containers, and test usability of applications, which is applicable to developers and test and O&M personnel.
+--
+* Demonstration
++
+--
+Build a demo environment to demonstrate product features to customers, which is applicable to product managers, customer success managers, and sales personnel.
+--

@@ -1,0 +1,80 @@
+---
+title: "查看 VPA 详情"
+weight: 03
+---
+
+
+:ks_permission: **容器垂直伸缩查看**
+:ks_navigation: **弹性伸缩 > 容器垂直伸缩**
+
+
+本节介绍如何查看 VPA 的详情信息。
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* KubeSphere 平台需要安装并启用 **Vertical Pod Autoscaler** 扩展组件。
+
+
+== 操作步骤
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
+
+. 在 VPA 列表中点击一个 VPA 的名称打开其详情页面。
+
+. 在**属性**区域，查看 VPA 的资源属性，如当前状态、所属集群和项目、更新模式。
+
+. 在**资源状态**页签，查看 VPA 的详细状态信息和伸缩对象信息。
++
+--
+* 状态信息
++
+[.admon.note,cols="a"]
+|===
+|说明
+
+|如果显示image:/images/ks-qkcp/zh/icons/check-healthy.svg["healthy",15px,15px]则表明状态正常，如果显示image:/images/ks-qkcp/zh/icons/failure.svg["unhealthy",20px,20px]则表明出现异常，如果显示image:/images/ks-qkcp/zh/icons/question-colorful.svg["question",20px,20px]则表明因信息不足无法确定状态。
+|===
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|正在获取历史数据
+|是否正在获取目标 Pod 的历史资源使用情况。
+
+|推荐置信度高
+|推荐值​是否可靠​​。当 VPA 所依据的 Pod ​​历史资源使用量​​的数据不充分或不可靠时，会导致置信度低。
+
+|已匹配到 Pod
+|VPA 是否找到了它应该管理的 Pod。
+
+|已生成推荐值
+|是否已经为 Pod 提供了资源推荐值。
+|===
+
+
+* 伸缩对象
++
+查看 VPA 所管理的容器的伸缩信息，如受限于推荐范围的实际推荐值、允许的最小/大推荐值，以及未受限于推荐范围的推荐值​。
+--
+
+. 点击**事件**页签，查看 VPA 相关的事件。
++
+--
+include::../../../../_custom/clusterManagement/clusterManagement-para-eventsTab.adoc[]
+--

@@ -1,0 +1,65 @@
+---
+title: "查看 Volcano 作业列表"
+weight: 03
+---
+
+
+:ks_permission: ** project-viewer **
+:ks_navigation: ** Volcano 调度 > Volcano 作业**
+
+
+本节介绍 Volcano 作业列表的信息。
+
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Volcano** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+====
+
+*  Volcano 作业列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|Volcano 作业的名称和描述信息。
+
+|状态
+|Volcano 作业的运行状态。更多信息，请参阅link:https://volcano.sh/zh/docs/vcjob/#%E8%B5%84%E6%BA%90%E7%8A%B6%E6%80%81[资源状态]。
+
+|项目
+|Volcano 作业所属的项目。
+
+|上次运行时间
+|Volcano 作业上次运行的时间。
+|===
+--
+
+* 在列表上方点击搜索框并设置搜索条件，可按名称和状态搜索 Volcano 作业。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

@@ -1,0 +1,40 @@
+---
+title: "Security groups"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, security groups, management"
+description: "Describes how to manage security groups in the {ks_product} web console."
+weight: 08
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 68f2a7bdff36403d97547216200affb7
+:ks_xref_id: 700ba3ce4e964f8cba07684e2cf1b773
+:ks_comp: ../../../components/
+:ks_title: Security groups
+:ks_description: Describes how to manage security groups in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, security groups, management
+:ks_weight: 08
+:ks_logo:
+:ks_download_url:
+
+
+Security groups are virtual firewalls that are used to control inbound and outbound traffic of associated resources. This secures the resources. Each VM must be added to at least one security group.
+
+You can add traffic rules for each security group. The rules for inbound and outbound traffic are separate.
+
+The **Security Groups** module is available to all users.  User **admin** can view and manage all security groups in all projects. The following table compares the permissions granted to non-admin users of different project roles.
+
+[cols='1a,3a']
+|===
+|Project role |Permission
+
+|Administrator
+|View and manage all security groups in the projects to which they belong.
+
+|Operator
+|View and manage all security groups in the projects to which they belong.
+
+|Viewer
+|View only all security groups in the projects to which they belong.
+|===

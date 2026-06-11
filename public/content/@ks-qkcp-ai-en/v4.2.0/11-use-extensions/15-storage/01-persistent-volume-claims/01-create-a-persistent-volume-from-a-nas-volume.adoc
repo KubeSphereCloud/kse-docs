@@ -1,0 +1,48 @@
+---
+title: "Create a NAS-Type PersistentVolumeClaim"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, PersistentVolumeClaim, PersistentVolume, Create a PersistentVolumeClaim, NAS"
+description: "Describes how to create a NAS-type PersistentVolumeClaim."
+weight: 01
+---
+
+:ks_permission: **PersistentVolumeClaim Management**
+:ks_navigation: **Storage > PersistentVolumeClaims**
+:nas:
+
+
+This section describes how to create a NAS-type PersistentVolumeClaim. After the PersistentVolumeClaim is created, the backend storage system will automatically create a corresponding PersistentVolume and bind it.
+
+ifeval::["{file_output_type}" == "html"]
+For other methods of creating a PersistentVolumeClaim, please refer to link:../../../../07-cluster-management/08-storage/01-persistent-volume-claims/01-create-a-persistent-volume-claim/[Create a PersistentVolumeClaim].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For other methods of creating a PersistentVolumeClaim, please refer to the "PersistentVolumeClaims" chapter in the *KubeSphere Cluster Management Guide*.
+endif::[]
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and enter your cluster or workspace.
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-oper-createAPersistentVolumeClaim_v42.adoc[]

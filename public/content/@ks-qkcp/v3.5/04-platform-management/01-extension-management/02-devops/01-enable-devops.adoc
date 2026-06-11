@@ -1,0 +1,67 @@
+---
+title: "启用 DevOps"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, DevOps, 启用 DevOps"
+description: "介绍如何启用 DevOps 扩展组件。"
+weight: 01
+---
+
+// :ks_include_id: 8aedffbdf0ad49f1a3a3fdee54b07ccf
+:ks_xref_id: dffa242df9494f33a1058e6c7b2c57d3
+:ks_comp: ../../../../components/
+:ks_title: 启用 DevOps
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, DevOps, 启用 DevOps
+:ks_description: 介绍如何启用 DevOps 扩展组件。
+:ks_weight: 01
+:ks_icon:
+
+
+
+本节介绍如何启用 DevOps 扩展组件。
+
+
+== 前提条件link:[id=dbddf5c88b264ffcad431f84b16b4860]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=3abd5b31c3a543d292b3e9af832df431]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:devops:enabled** 参数设置为 **true**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  devops:
+    enabled: true
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionEnabled.adoc[]
+
+* DevOps 启用后，企业空间的左侧导航栏将显示 **DevOps 项目**选项，项目的左侧导航栏将显示**镜像构建器**选项。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

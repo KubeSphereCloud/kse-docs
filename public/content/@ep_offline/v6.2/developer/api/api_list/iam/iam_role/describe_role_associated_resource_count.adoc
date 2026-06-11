@@ -1,0 +1,69 @@
+---
+title: 查询IAM身份关联资源（DescribeIAMRoleAssociatedResourceCount）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| role
+| String
+| true
+| IAM身份ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| counts
+| Array
+| false
+| IAM身份关联资源统计情况
+
+| counts[].count
+| Integer
+| false
+| 关联资源总数
+
+| counts[].region_id
+| String
+| false
+| 区域ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMRoleAssociatedResourceCount",
+  "role": "iamr-13sd9s6E"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMRoleAssociatedResourceCountResponse",
+  "counts": [
+    {
+      "count": 1,
+      "region_id": "testing"
+    }
+  ],
+  "ret_code": 0
+}
+----

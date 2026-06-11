@@ -1,0 +1,60 @@
+---
+title: "Set Up Email Notification"
+keywords: "Kubernetes, {ks_product-en}, platform settings, notification management, notification settings, set up email notification"
+description: "Describes how to set up email notification."
+weight: 01
+---
+
+// :ks_menu: **Platform Management > Platform Settings**
+:ks_navigation: **Notification Management > Notification Channels**
+:ks_permission: **Platform Settings Management**
+
+
+This section describes how to set up email notification.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../../../_custom-en/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+* **WhizardTelemetry Notification** should have been installed and enabled.
+
+== Steps
+
+include::../../../../../_custom-en/platformManagement/platformManagement-oper-logIn.adoc[]
+
+. Click image:/images/ks-qkcp/zh/icons/cogwheel.svg[cogwheel,18,18] in the upper-right corner of the {ks_product-en} web console to enter the **Platform Settings** page.
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. On the **Notification Channels** page, click the **Email** tab, set the email notification parameters, and then click **OK**.
++
+--
+* Server Settings
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|SMTP Server Address
+|The address and port number of the SMTP server.
+
+|Use SSL Secure Connection
+|Whether to enable SSL secure connection.
+
+|SMTP Username
+|The login username for the SMTP server.
+
+|SMTP Password
+|The login password for the SMTP server.
+
+|Sender Email
+|The email address used to send notifications.
+|===
+
+The recipient settings for emails can be set on the **Notification Subscription** page.
+--

@@ -1,0 +1,89 @@
+---
+title: "查看卷快照类详情"
+keywords: "Kubernetes, {ks_product}, 集群管理, 存储, 卷快照类, 查看卷快照类详情"
+description: "介绍如何查看卷快照类详情。"
+weight: 03
+---
+
+// :ks_include_id: d027dc5cd8d941858e23bc6511fbb43a
+:ks_xref_id: e8f247090f434a01a90545f03755fade
+:ks_comp: ../../../../components/
+:ks_title: 查看卷快照类详情
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 存储, 卷快照类, 查看卷快照类详情
+:ks_description: 介绍如何查看卷快照类详情。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **卷快照类查看**
+:ks_navigation: **存储 > 卷快照类**
+
+
+本节介绍如何查看卷快照类详情。
+
+
+== 前提条件link:[id=fd95d59350ec4f0384a075800a3dd3f8]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=e6dbbc33bf8447468c7a94f674800cf3]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在卷快照类列表中点击一个卷快照类的名称打开卷快照类详情页面。
+
+. 在卷快照类详情页面左侧的**属性**区域查看卷快照类的资源属性。
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|供应者
+|
+卷快照类对应的存储插件。
+
+|删除策略
+|
+include::../../../../_custom/clusterManagement/volumeSnapshotContents/volumeSnapshotContents-para-deletionPolicy.adoc[]
+
+|创建时间
+|卷快照类的创建时间。
+|===
+--
+
+. 在卷快照类详情页面右侧的**卷快照**区域查看使用卷快照类创建的卷快照。
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|卷快照的名称。
+
+|状态
+|
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-para-volumeSnapshotStatus.adoc[]
+
+|容量
+|
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-para-capacity.adoc[]
+
+|创建时间
+|卷快照的创建时间。
+|===
+--

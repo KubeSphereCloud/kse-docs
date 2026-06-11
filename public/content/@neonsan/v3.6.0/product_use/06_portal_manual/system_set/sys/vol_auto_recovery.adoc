@@ -1,0 +1,25 @@
+---
+title: 设置卷自动恢复
+weight: 1
+---
+
+== 功能描述
+
+Portal 管理平台支持一键开启卷自动恢复功能，其中卷自动恢复是指将集群中状态为降级的卷自动恢复到 OK 状态。
+
+== 操作步骤
+. 登录 link:../../../login[Portal 管理界面]。
+
+. 在**总览**页面，点击用户名，选择**系统设置**，即可进入系统设置页面。
++
+image::/images/neonsan/portal_system_set.png[]
+
+. 在系统设置页面，选择**集群设置**，点击**卷自动恢复**的开关，开启集群的卷自动恢复设置。
++
+image::/images/neonsan/portal_vol_auto_recovery_1.png[]
+
+. 在左侧导航栏内选择**运维管理** > **操作记录**，可看到 auto_recovery 的参数值已被设定为 1 ，即开启集群的卷自动恢复设置。
++
+image::/images/neonsan/portal_vol_auto_recovery_2.png[]
+
+

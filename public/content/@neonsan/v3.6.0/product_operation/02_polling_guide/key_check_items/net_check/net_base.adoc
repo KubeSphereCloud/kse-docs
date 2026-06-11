@@ -1,0 +1,58 @@
+---
+title: "基础检查"
+weight: 1
+---
+
+
+. 逐个登录 NeonSAN 节点。
+. 执行如下命令，查看网络检查工具是否安装。
++
+[,shell]
+----
+netstat -v
+----
++
+include::../../../../../../_components/note.adoc[]
+* 若返回结果有相应的版本信息，则可直接进行后续操作步骤。
+* 若返回结果中无相应版本信息，可执行如下命令进行安装。
+** Ubuntu 系统：``apt-get install net-tools``。
+** Centos/rhel/kylin v10 SP2 系统在线安装：yum install net-tools
+** Centos/rhel/kylin v10 SP2 系统离线安装：在 ``http://rpm.pbone.net/`` 查询并下载对应 OS 版本最新的 net-tools  rpm 包，上传至相应节点进行安装，如 rpm -ivh net-tools-2.0-0.22.20131004git.el7.x86_64.rpm
+include::../../../../../../_components/table_footer.adoc[]
+
+. 检查网络质量。
+.. 查看网络接口。若 ``RX-ERR`` 和 ``TX-ERR`` 持续增长，表明网络质量较差，建议使用 ``ethtool -S <interface>`` 进一步排查具体问题，协调客户排查网络。
++
+[,shell]
+----
+netstat -i
+----
++
+image::/images/neonsan/polling_guide_13.png[]
+
+.. 查看网络统计信息。若 ``packet reassembles faild`` 持续增长，表明网络质量较差，建议协调客户排查网络。
++
+[,shell]
+----
+netstat -s
+----
+
+. 执行如下命令，检查是否存在 br_bgp_nnet 路由 linkdown 的情况。
++
+[,shell]
+----
+ip -r
+----
++
+若返回结果中，存在 br_bgp_nnet 路由 linkdown 的情况，则需执行如下命令，删除相应的接口，再重启 compute_server。
++
+[,shell]
+----
+ip link del dev vtep_bgp_net
+
+ip link del dev br_bgp_net
+----
+
+. 检查各节点是否能互相 ``ping`` 通。
+
+

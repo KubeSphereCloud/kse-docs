@@ -1,0 +1,71 @@
+---
+title: FTP 目录详解
+weight: 2
+---
+
+QKE Plus 的软件包分为用于后台安装部署 QKE Plus 服务的应用包与用于 Console 用户创建 QKE Plus 集群的资源包，均统一存放于内部link:ins.qingcloud.com[ FTP 服务器]。
+
+在安装部署前，我们对 QKE Plus 软件包的存放格式与路径，进行说明，以便实施人员能更为准确地获取到目标安装包，避免因安装包的问题而引发的异常。
+
+== 目录层级说明
+
+* 应用包
++
+应用包目录为 `/pitrix/migrate_appcenter2_recommend`，镜像文件目录按照 `iaas_version/app_id-app_name/app_version_id` 的格式进行存储，如下图所示。
++
+image::/images/ep_offline/qke_install/qke_install_1.png[]
++
+QKE Plus 应用包单独存放至目录 `/pitrix/installer/k8s/QKE/app_version_package`。如下图所示，以 `appv` 命名。
++
+image::/images/ep_offline/qke_install/qke_install_21.png[qke_install_21]
+
+* 资源包
++
+资源包目录为 `/pitrix/installer/k8s/QKE/`，目录层级如下图所示。
++
+image::/images/ep_offline/qke_install/qke_install_20.png[]
+
+
+== 应用版本说明
+
+这里以 QKE Plus 应用包为例，介绍如何对应用包的版本进行查看。QKE Plus 应用包单独存放至目录 `/pitrix/installer/k8s/QKE/app_version_package`。
+
+image::/images/ep_offline/qke_install/qke_install_21.png[qke_install_21]
+
+如上图所示，QKE Plus 应用包以 `appv` 命名，实施人员可查看版本目录下的 `meta_data.json` 文件内容，获取 QKE Plus 的版本信息。
+
+[source,shell]
+----
+cat /appv-hr1rhbqz/meta_data.json
+----
+
+输出结果如下图所示。
+
+image::/images/ep_offline/qke_install/qke_install_2.png[]
+
+=== QKE Plus AppvID
+
+根据以上方式，我们可以知道 FTP 目录 `/pitrix/installer/k8s/QKE/app_version_package` 下，各目录对应的 QKE Plus 对应的版本号如下。
+
+include::../../../product_maintain/qke_upgrade/overview.adoc[tag=qke_appvid]
+
+include::../../../product_maintain/qke_upgrade/overview.adoc[tag=qke_iaas]
+
+// [cols='1,1']
+// |===
+// | 目录名 | QKE Plus 版本号
+
+// | appv-1i0kn269| v2.0.0
+// | appv-eepv21hi| ARM v2.0.0
+// | appv-opj5rz6z| v2.3.1
+// | appv-7290ketz| v3.0.0
+// | appv-fez6wl9i| ARM v3.0.0
+// | appv-jya830ht| 麒麟 x86 v3.0.0
+// | appv-lbqehysv| 麒麟 ARM v3.0.0
+// | appv-hr1rhbqz| v3.1.0
+// | appv-kl5bo33e| 麒麟 x86 v3.1.0
+// | appv-p305cdt6| 麒麟 ARM v3.1.0
+
+// |===
+
+

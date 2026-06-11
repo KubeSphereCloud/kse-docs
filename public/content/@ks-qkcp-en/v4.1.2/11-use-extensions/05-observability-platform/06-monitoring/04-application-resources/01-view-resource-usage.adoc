@@ -1,0 +1,55 @@
+---
+title: "View Application Resource Usage"
+keywords: "Kubernetes, {ks_product-en}, cluster management, monitoring & alerting, resource usage"
+description: "This section introduces how to view application resource usage."
+weight: 01
+---
+
+:ks_permission: **Monitoring Viewing**
+:ks_navigation: **Monitoring & Alerting > Application Resources**
+
+This section introduces how to view application resource usage.
+
+== Prerequisites
+
+* {empty}
+include::../../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **WhizardTelemetry Monitoring** should have been installed and enabled.
+
+== Steps
+
+include::../../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. On the **Application Resources** page, click the **Resource Usage** tab to view cluster resource usage, application resource usage, and the number of projects.
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster Resource Usage
+|The amount of CPU and memory resources used in the current cluster.
+
+|Application Resource Usage
+|The number of deployments, StatefulSets, DaemonSets, Jobs, CronJobs, persistent volume claims, services, Ingresses, and pods created in the current cluster.
+
+|Number of Projects
+|The number of projects in the current cluster.
+|===
+
++
+--
+* Click the line charts in **Cluster Resource Usage** and **Application Resource Usage** to view detailed information about resource usage over time.
+
+include::../../../../../../_ks_components-en/oper-selectTimeRange.adoc[]
+
+include::../../../../../../_ks_components-en/oper-Autorefresh.adoc[]
+
+include::../../../../../../_ks_components-en/oper-refreshData.adoc[]
+--

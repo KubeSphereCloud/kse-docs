@@ -1,0 +1,94 @@
+---
+title: "扩容 NeonSAN 管理节点内存"
+weight: 4
+---
+
+SANC 融合部署。NeonSAN 的部分管理组件，如 ZooKeeper、数据库等，部署在云平台的 KS 物理节点上拉起的虚拟机。扩容 NeonSAN管理服务所在虚拟机的内存，可参考如下步骤。
+
+. link:../../hardware_equip/node_offline/manage_node/temporary/[临时下线待扩容节点上的 NeonSAN 管理服务]。
+. 登录虚拟机所在的 Hyper 节点。
+
+. 关闭待扩容内存的 NeonSAN 管理节点。
++
+[,shell]
+----
+virsh shutdown <vm_name>
+----
++
+include::../../../../../_components/note.adoc[]
+`<vm_name>` 为待扩容的管理节点（虚拟机）的名称，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，为待扩容的管理节点设置最大内存。
++
+[,shell]
+----
+virsh setmaxmem <vm_name> 16G –config –live
+----
++
+include::../../../../../_components/note.adoc[]
+* `<vm_name>` 为待扩容的管理节点（虚拟机）的名称，需根据实际情况进行修改。
+* `16G` 表示为当前节点最大的内存值，需根据实际情况进行调整。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，为待扩容的管理节点设置当前使用内存。
++
+[,shell]
+----
+virsh setmem <vm_name> 16G –config –live
+----
++
+include::../../../../../_components/note.adoc[]
+* `<vm_name>` 为待扩容的管理节点（虚拟机）的名称，需根据实际情况进行修改。
+* `16G` 表示当前节点使用内存，需根据实际情况进行调整。
+include::../../../../../_components/table_footer.adoc[]
+
+. 启动待扩容的管理节点，使新配置的内存值生效。
++
+[,shell]
+----
+virsh start <vm_name>
+----
++
+include::../../../../../_components/note.adoc[]
+`<vm_name>` 为修改了内存大小的管理节点（虚拟机）的名称，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 检查已扩容过内存的管理节点的内存配置。
++
+[,shell]
+----
+virsh dominfo <vm_name>
+----
++
+include::../../../../../_components/note.adoc[]
+* `<vm_name>` 为管理节点（虚拟机）的名称，需根据实际情况进行修改。
+* 关注返回结果中的` Max memory` 是否为上述步骤中设置的值。
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录已扩容内存的虚拟机，检查实际分配给当前虚拟机的内存大小。
++
+[,shell]
+----
+free -h
+----
++
+include::../../../../../_components/note.adoc[]
+返回结果中应满足上述步骤中设置的内存值。
+include::../../../../../_components/table_footer.adoc[]
+
+. 检查当前管理节点的各项服务状态，返回结果中各项服务状态均为 `RUNNING` 即可。
++
+[,shell]
+----
+supervisorctl status 
+----
+. 确认 NeonSAN 集群状态正常。返回结果中，各节点、磁盘和卷均为 OK 状态。
++
+[,shell]
+----
+neonsan list_store
+neonsan list_ssd
+neonsan list_volume
+----
+

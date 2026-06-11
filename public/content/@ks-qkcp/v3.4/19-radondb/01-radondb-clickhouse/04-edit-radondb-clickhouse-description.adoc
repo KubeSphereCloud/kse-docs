@@ -1,0 +1,57 @@
+---
+title: "编辑 RadonDB ClickHouse 描述信息"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ClickHouse, 编辑 RadonDB ClickHouse 描述信息"
+description: "介绍如何编辑 RadonDB ClickHouse 应用的描述信息。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 304c20319c854e00b7d36efcd6c0fd70
+:ks_xref_id: 1afa9dd11aba41f1a1cf7843cd14e7d9
+:ks_comp: ../../../components/
+:ks_title: 编辑 RadonDB ClickHouse 描述信息
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ClickHouse, 编辑 RadonDB ClickHouse 描述信息
+:ks_description: 介绍如何编辑 RadonDB ClickHouse 应用的描述信息。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何编辑 RadonDB ClickHouse 应用的描述信息。
+
+
+== 前提条件link:[id=84878988dc9d4c67a4962a5eaf437c69]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/radondb/radondbClickhouse/radondbClickhouse-prer-installRadondbClickHouse.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=1a7dd2bde49e4da3b6d27660c84d3edb]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在 RadonDB ClickHouse 应用右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑信息**。
+
+. 在**编辑信息**对话框，设置 RadonDB ClickHouse 的描述信息，然后点击**确定**。

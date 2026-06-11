@@ -1,0 +1,193 @@
+---
+title: "Integrate Harbor into Pipeline"
+keywords: "Kubernetes, {ks_product}, DevOps Project"
+description: "Introduces how to integrate Harbor into a pipeline."
+weight: 02
+---
+
+This document demonstrates how to integrate Harbor into a KubeSphere pipeline.
+
+== Prerequisites
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+* You need to have created a workspace, a DevOps project, and a user (for example, **project-regular**), and have invited this user to the DevOps project and granted the **operator** role. Refer to link:../../02-devops-project-mangement/03-project-members/01-invite-a-user-to-a-project/[Invite a User to a DevOps Project].
+
+== Install Harbor
+
+Execute the following command to install Harbor using Helm 3.
+
+[,bash]
+----
+helm repo add harbor https://helm.goharbor.io
+# For a quick installation, you can expose Harbor via NodePort and disable tls.
+# Set externalURL to one of your node IPs and ensure Jenkins can access it.
+helm install harbor-release harbor/harbor --set expose.type=nodePort,externalURL=http://$ip:30002,expose.tls.enabled=false
+----
+
+== Obtain Harbor Credentials
+
+. After installing Harbor, access **<NodeIP>:30002** and log in to the web console using the default account and password (**admin/Harbor12345**).
+
+. In the left navigation pane, click **Projects**, then click **New Project**.
+
+. In the dialog box that appears, set the project name to **ks-devops-harbor** and click **OK**.
+
+. Click the project you just created, go to the **Robot Accounts** tab, and click **Add Robot Account**.
+
+. In the dialog box that appears, set the robot account name to **robot-test** and the **Expiration Time**. Then, under **Permissions**, check all permissions for artifacts and repositories. Click **Finish**.
+
+. In the dialog box that appears, click **Export to file** to save the Harbor token.
+
+== Enable Insecure Registry
+
+Configure Docker to ignore the security of your Harbor registry.
+
+. Run the command **vim /etc/docker/daemon.json** on all cluster nodes to edit the **daemon.json** file, add the following content, and save the changes.
++
+====
+[,json]
+----
+  "insecure-registries" : ["103.61.38.55:30002"]
+----
+
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+* Replace **103.61.38.55:30002** with your own Harbor registry address.
+
+* For Linux, the path of the **daemon.json** file is **/etc/docker/daemon.json**; for Windows, the path of this file is **C:\ProgramData\docker\config\daemon.json**.
+|===
+
+
+The file content should look like this:
+
+[source,json]
+----
+{
+  "log-opts": {
+    "max-size": "5m",
+    "max-file": "3"
+  },
+  // Note to add a comma
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "insecure-registries": ["103.61.38.55:30002"]
+}
+----
+====
+
+. Run the following commands to restart Docker for the changes to take effect.
++
+--
+[,bash]
+----
+sudo systemctl daemon-reload
+
+sudo systemctl restart docker
+----
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+It is recommended to use this solution in an isolated test environment or a strictly controlled offline environment. For more information, please refer to link:https://docs.docker.com/registry/insecure/#deploy-a-plain-http-registry[Deploy a plain HTTP registry].
+
+After completing the above operations, you can use images from your Harbor registry when deploying workloads in the project. You need to create an image secret for your Harbor registry, then when adding a container during workload deployment, click **Docker Hub**, select your Harbor registry, and enter the absolute path of the image to search for your image.
+|===
+
+--
+
+== Create Credential
+
+include::../../../../_custom/devops/project-regular-oper-logIn.adoc[]
+
++
+
+. In the left navigation pane, select **DevOps > Credentials**.
+
++
+
+include::../../../../_custom/devops/devops-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. On the **Create Credential** page, set the name (**robot-test**), select **Username and password** for **Type**, enter the value of **name** from the exported Harbor token file in **Username**, and enter the value of **secret** from the Harbor token file in **Password/Token**.
+. Click **OK** to save.
+
+== Create Pipeline
+
+. Go to the **Pipelines** page and click **Create**.
+
+. On the **Basic Information** tab, enter the name **demo-pipeline**, then click **Next**.
+
+. Use the default values in **Advanced Settings** and click **Create**.
+
+== Edit Jenkinsfile
+
+. Click the pipeline to enter its details page, then click **Edit Jenkinsfile**.
+
+. Copy and paste the following content into the Jenkinsfile. Note that you must replace **REGISTRY**, **HARBOR_NAMESPACE**, **APP_NAME**, and **HARBOR_CREDENTIAL** with your own values.
++
+--
+[,yaml]
+----
+pipeline {
+  agent {
+    node {
+      label 'maven'
+    }
+  }
+
+  environment {
+    // The address of your Harbor registry.
+    REGISTRY = '103.61.38.55:30002'
+    // Project name.
+    // Ensure your robot account has sufficient access permissions to the project.
+    HARBOR_NAMESPACE = 'ks-devops-harbor'
+    // Docker image name.
+    APP_NAME = 'docker-example'
+    // 'robot-test' is the credential ID you created on the KubeSphere web console.
+    HARBOR_CREDENTIAL = credentials('robot-test')
+  }
+
+  stages {
+    stage('docker login') {
+      steps{
+        container ('maven') {
+          // Replace the parameter after -u with the value of name from the Harbor token file, don't forget to add ''
+          sh '''echo $HARBOR_CREDENTIAL_PSW|docker login $REGISTRY -u 'robot$robot-test' --password-stdin'''
+        }
+      }
+    }
+
+     stage('build & push') {
+       steps {
+         container ('maven') {
+           sh 'git clone https://github.com/kstaken/dockerfile-examples.git'
+           sh 'cd dockerfile-examples/rethinkdb && docker build -t $REGISTRY/$HARBOR_NAMESPACE/$APP_NAME:devops-test .'
+           sh 'docker push$REGISTRY/$HARBOR_NAMESPACE/$APP_NAME:devops-test'
+         }
+       }
+     }
+  }
+}
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+You can pass parameters to **docker login -u** using Jenkins credentials with environment variables. However, the username of each Harbor robot account contains a **$** character, which Jenkins converts to **$$** when used in environment variables (Harbor v2.2+ allows customizing the robot suffix to avoid this issue). link:https://number1.co.za/rancher-cannot-use-harbor-robot-account-imagepullbackoff-pull-access-denied/[Learn more].
+|===
+--
+
+== Run Pipeline
+
+After saving the Jenkinsfile, KubeSphere will automatically create all stages and steps on the graphical editing panel. Click **Run** to run the pipeline. If everything runs smoothly, Jenkins will push the image to your Harbor registry.

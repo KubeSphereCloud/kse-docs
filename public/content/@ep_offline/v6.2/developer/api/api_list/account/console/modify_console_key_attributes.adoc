@@ -1,0 +1,66 @@
+---
+title: 修改控制台密钥的属性（ModifyConsoleKeyAttributes）
+weight: 8
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_key
+| String
+| true
+| 控制台密钥id
+
+| console_key_name
+| String
+| false
+| 控制台密钥的名称
+
+| description
+| String
+| false
+| 控制台密钥的描述
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_key_id
+| String
+| false
+| 控制台密钥id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyConsoleKeyAttributes",
+  "console_key": "FSTMGTOMPKSZJHCTHZHC",
+  "console_key_name": "zzzz",
+  "description": "zzzz desc"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyConsoleKeyAttributesResponse",
+  "console_key_id": "FSTMGTOMPKSZJHCTHZHC",
+  "ret_code": 0
+}
+----

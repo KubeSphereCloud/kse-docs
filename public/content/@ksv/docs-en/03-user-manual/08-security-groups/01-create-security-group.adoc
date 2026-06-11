@@ -1,0 +1,71 @@
+---
+title: "Create a security group"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, security groups, creation"
+description: "Describes how to create a security group in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 93ef9b3407cb4d41aee9bf0acd43f5ba
+:ks_xref_id: d1bc6be076cf431b939d068a3a24d8f8
+:ks_comp: ../../../components/
+:ks_title: Create a security group
+:ks_description: Describes how to create a security group in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, security groups, creation
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to create a security group in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Precautionslink:[id=348ee91007ca4fc78d3f58c1a53f138b]
+
+In the initial state, the newly created security group does not contain any rules.  Before you add security group rules, the system allows all outbound traffic and denies all inbound traffic by default.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=a7c1a3888d054efc84e28bfb4241cca2]
+
+include::../../../_custom-en/security-groups/security-group-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=194d8ac52dbc49fb873d75708e08b939]
+
+include::../../../_custom-en/security-groups/security-group-steps.adoc[]
+
+. On the **Security Groups** page, click **Create** in the upper-right corner.
+. In the dialog box that appears, configure parameters for the security group. The following table describes the parameters.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the security group.
+
+include::../../../_custom-en/security-groups/naming-convention.adoc[]
+
+|Description
+|The description of the security group.
+
+include::../../../_custom-en/networks/description-convention.adoc[]
+|===
+--
+. Click **Create**.  The security group appears in the security group list after it is created.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== What to do nextlink:[id=58f7e245cc8c409c97214a2f2225211c]
+
+After you create a security group, you must add rules to the security group. The rules define whether to allow Internet access for the resources in the security group. For more information, see link:../02-add-security-group-rule/[Add a security group rule].

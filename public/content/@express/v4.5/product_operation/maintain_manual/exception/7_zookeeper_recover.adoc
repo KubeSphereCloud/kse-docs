@@ -1,0 +1,91 @@
+---
+title: "Zookeeper 集群恢复"
+weight: 7
+---
+
+== 运维场景
+
+巡检过程中，查看到 Zookeeper 状态异常，可参考以下方式进行恢复。在进行 Zookeeper 集群恢复前，需检查各物理服务器的 CPU、内存、网络是否正常。
+
+== 操作步骤
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 逐一登录 Zookeeper 节点，执行如下命令，查看当前节点是否为 Zookeeper 集群的 leader 节点。
++
+[source,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
++
+若返回结果，如下所示，则当前节点为 leader。
++
+[source,shell]
+----
+ZooKeeper JMX enabled by default
+Using config: /opt/zookeeper/bin/../conf/zoo.cfg
+Mode: leader
+----
+
+. 执行如下命令，重启 Zookeeper 集群的 leader 节点。
++
+[source,shell]
+----
+supervisorctl restart zookeeper
+----
+
+. 登录其他 Zookeeper 节点，执行如下命令查看 leader 节点是否切换。若 Zookeeper 集群正确切换 leader 节点，则有可能是磁盘写满导致 Zookeeper 集群假死，可通过释放磁盘空间，恢复 Zookeeper 集群状态。
++
+[source,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
+
+. 若 Zookeeper 集群无法正常切换 leader 节点，可逐一登录 Zookeeper 节点，并关闭 Zookeeper 服务。
++
+[source,shell]
+----
+supervisorctl stop zookeeper
+----
+
+. 逐一登录 Zookeeper 节点，启动 Zookeeper 服务。
++
+[source,shell]
+----
+supervisorctl start zookeeper
+----
+
+. 对于无法正常启动 Zookeeper 服务的节点，执行如下命令，查看相应的日志信息，并解决问题后重新启动即可。
++
+[source,shell]
+----
+less /var/log/zookeeper/zookeeper.out
+----
+. 逐一检查各节点上 Zookeeper 服务的状态。
++
+[source,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
+
+
+
+
+

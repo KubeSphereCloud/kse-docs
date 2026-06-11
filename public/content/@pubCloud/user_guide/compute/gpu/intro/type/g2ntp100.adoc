@@ -1,0 +1,45 @@
+---
+title: "GPU 加速型 g2ntp100"
+weight: 15
+draft: false
+---
+
+GPU 加速型 g2ntp100 类型的云服务器采用 Intel Xeon(Cascade Lake) Gold 6240 处理器，同时搭载 NVIDIA Tesla P100 GPU 卡，专门为计算加速场景优化设计，可提供 3584 个并行计算核心，单精度浮点运算能力达 9.3TFLOPS，双精度浮点运算能力达 4.7TFLOPS。
+
+include::../../../../../../_components/note.adoc[]
+该类型 GPU 云服务器仅支持在北京 3 区进行创建。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+GPU 加速型 g2na100 云服务器特点：
+
+* 计算： 
+** 采用 NVIDIA Tesla P100 GPU 卡，其运用 NVIDIA Pascal™ 架构。
+** 配有全新的 Intel Advanced Vector Extension (AVX-512) 指令集，在深度学习的多种场景性能提升 4 倍。
+** 处理器采用 2.6 GHz 主频的 Intel Xeon(Cascade Lake) Gold 6240 处理器，全核睿频 3.9 GHz。
+** CPU 核数：支持选择 16、32 核。
+** 内存：随 CPU 核数的不同，支持 60 G ~ 128 G。
+** 支持选配 1 个或 2 个 GPU 显卡数。 
+
+* 存储：支持使用通用型 SSD 云盘和容量型云盘，详细内容可参考link:../../../../../storage/disk/intro/introduction/#_硬盘类型[硬盘介绍]相关内容。
+* 网络：内网带宽支持 6 Gbps ~ 12 Gbps，各实例的网络性能与实际规格对应，规格越高网络性能越好。
+* 适用场景：配备高性能的 CPU、内存、GPU，可适用于人工智能深度学习、高性能计算、图形图像处理等领域。
+
+GPU 加速型 g2ntp100 类型云服务器实例规格列表如下：
+
+[options="hader",cols="3,2,2,3,2"]
+|===
+| 实例类型 | CPU | 内存 | GPU | 内网带宽
+
+| g2ntp100.4xlarge.r4
+| 16 核
+| 64G
+| 1 * NVIDIA TESLA P100
+| 6 Gbps
+
+| g2ntp100.8xlarge.r4
+| 32 核
+| 128G
+| 2 * NVIDIA TESLA P100
+| 12 Gbps
+|===

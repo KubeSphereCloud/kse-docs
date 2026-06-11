@@ -1,0 +1,429 @@
+---
+title: "常见问题"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, 常见问题, 问题排查"
+description: "汇总{ks_product_both}平台的常见问题。"
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 37db71d493e54f6dbf8365832cdf42ed
+:ks_xref_id: e88cf7b8d97346eaa222e167ce617f72
+:ks_comp: ../../components/
+:ks_title: 常见问题
+:ks_description: 汇总{ks_product_both}平台的常见问题。
+:ks_keywords: {ks_product_full}, {ks_product}, 常见问题, 问题排查
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+本节汇总{ks_product_abbr_full_both}平台的常见问题。
+
+** link:#eba9db5993a74d64896db4d0ef8182be[安装{ks_product_both}时，OpenSSL 出现报错信息该如何处理？]
+** link:#2b75c5c620e143f0a3c87063769ee42e[安装{ks_product_both}时，磁盘出现报错信息该如何处理？]
+** link:#b4d3a37901204ebfbeb90051b5710e7f[安装{ks_product_both}时，CoreDNS 无法正常运行该如何处理？]
+** link:#e9c26995b7374840b7fb7018d394889b[安装{ks_product_both}时，进度流程卡在 MinIO 该如何处理？]
+** link:#2e42a6197dfb4a439a37df137cd6b862[安装{ks_product_both}时，为什么提示服务器不支持虚拟化？]
+** link:#6f4b309b9443425d940cb71c45a9785c[如何重置用户密码？]
+** link:#b0e3ed476c6a40edbc232f467c680ebe[为什么虚拟机状态消息一直显示为等待资源中？]
+** link:#6a7f82f8c0b847ef8a9dc06b763b0dd6[为什么虚拟机状态消息一直显示为调度错误？]
+** link:#72e93063e3cd4c4cb57e3f299d758a2e[{ks_product_right}支持上传哪些格式的镜像文件？]
+** link:#89615faab0aa4b94b653400813a48b2b[镜像文件较大时，可以使用其他方式上传吗？]
+** link:#40969a5797d146d9aa5a22482657aeb4[为什么挂载的磁盘没有生效？]
+** link:#a6d11232828d4adcb5c2009200e9ae6e[{ks_product_right}平台能否对接第三方存储？]
+** link:#fb0ca43a2e7149d594aacb6bed83f7b1[如何设置统一的外网出口？]
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 安装{ks_product_both}时，OpenSSL 出现报错信息该如何处理？link:[id=eba9db5993a74d64896db4d0ef8182be]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 问题描述link:[id=bab9b2d5b71241e29488199b6b145327]
+
+安装{ks_product_both}时，OpenSSL 出现如下报错信息：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+error: openssl: /usr/lib/x86_64-linux-gnu/libssl.so.1.1: version `OPENSSL_1_1_1' not found (required by openssl)
+openssl: /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1: version `OPENSSL_1_1_1' not found (required by openssl)
+: exit status 1
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+此问题是由于系统软件版本过低导致。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 解决方案link:[id=7e2167d0c0cc48b0aca9ec01d83e5570]
+
+执行命令 **apt update** 和 **apt upgrade** 更新系统软件包，更新完成后重新安装{ks_product_both}即可。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 安装{ks_product_both}时，磁盘出现报错信息该如何处理？link:[id=2b75c5c620e143f0a3c87063769ee42e]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 问题描述link:[id=30b4e1510d1a4f34b1c23fb1a05ced27]
+
+安装{ks_product_both}时，磁盘出现报错信息，导致{ks_product_both}安装失败。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 解决方案link:[id=5e89ade5ff0f4a43b09e42eca5b93f4f]
+
+. 执行以下脚本，清理 Ceph 磁盘：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+DISK="/dev/sdX"
+
+# Zap the disk to a fresh, usable state (zap-all is important, b/c MBR has to be clean)
+sgdisk --zap-all $DISK
+
+# Wipe a large portion of the beginning of the disk to remove more LVM metadata that may be present
+dd if=/dev/zero of="$DISK" bs=1M count=100 oflag=direct,dsync
+
+# SSDs may be better cleaned with blkdiscard instead of dd
+blkdiscard $DISK
+
+# Inform the OS of partition table changes
+partprobe $DISK
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 脚本执行完成后，重新安装{ks_product_left}。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 安装{ks_product_both}时，CoreDNS 无法正常运行该如何处理？link:[id=b4d3a37901204ebfbeb90051b5710e7f]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 问题描述link:[id=1b5ae4d4b4ce43e1b8fdf55ac78c65a5]
+安装{ks_product_both}时，CoreDNS 运行出错，不处于 **Running** 状态。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 解决方案link:[id=06d807e109b84d59be7b2552f43c375e]
+
+. 执行 **kubectl get pod -n kube-system** 查看 CoreDNS 的状态。若 CoreDNS 的状态不是 **Running**，则需要修改 CoreDNS 的配置。
+
+. 执行 **kubectl edit cm -n kube-system coredns** 修改 CoreDNS 的配置。
+
+. 将配置项 **forward . /etc/resolv.conf** 修改为 **forward .8.8.8.8**。修改完成后，保存并退出。
+
+. 执行 **kubectl rollout restart deploy -n kube-system coredns** 重启 CoreDNS。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 安装{ks_product_both}时，进度流程卡在 MinIO 该如何处理？link:[id=e9c26995b7374840b7fb7018d394889b]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 问题描述link:[id=ce6e9b98465a498695e2e6f64ef3261b]
+
+安装流程卡在 MinIO，导致{ks_product_both}安装失败。本问题一般是由于 CoreDNS 或存储异常导致，可检查环境中 CoreDNS 和存储的状态进行问题排查。请注意，存储系统应该为裸设备或裸分区，即未分区或未格式化的存储系统。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 解决方案link:[id=53607b8d48b94cf8b7f87484a311803d]
+
+. 执行 **ksv logs** 查看日志信息。若是由于 MinIO 导致的安装失败，会返回如下信息：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+1. check the storage configuration and storage server
+2. make sure the DNS address in /etc/resolv.conf is available
+3. execute 'kubectl logs -n kubesphere-system -l job-name=minio-make-bucket-job' to watch logs
+4. execute 'helm -n kubesphere-system uninstall ks-minio && kubectl -n kubesphere-system delete job minio-make-bucket-job'
+5. Restart the installer pod in kubesphere-system namespace
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 检查 CoreDNS 状态。若 CoreDNS 状态异常，可参考 link:#b4d3a37901204ebfbeb90051b5710e7f[安装{ks_product_both}时，CoreDNS 无法正常运行该如何处理] 进行问题排查。
+
+. 检查存储状态。若存储状态异常，执行以下操作进行问题排查：
+
+. 执行 **kubectl get pod -n rook-ceph** 查看 Ceph 组件状态。
+
+. 检查是否存在 **rook-ceph-osd-x-xxxxx** 相关的 pod。若存在，检查 pod 是否处于 **Running** 状态。
+
+. 若上述步骤中不存在处于 **Running** 状态的 pod，请确定服务器是否为 Ceph 预留了未格式化的磁盘。
+
+. 如果存在满足上述要求的磁盘，执行@@@xref@@@:{ks_xref}{e8139fa61e6b4d6081b9f85bbf9b82d5}[安装注意事项]中的脚本对磁盘进行清理。磁盘清理完成后，重启服务器。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 安装{ks_product_both}时，为什么提示服务器不支持虚拟化？link:[id=2e42a6197dfb4a439a37df137cd6b862]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 问题描述link:[id=cd2b316098eb4ab8971f939896072aa6]
+
+安装{ks_product_both}时，系统返回如下信息，提示安装程序未识别到服务器虚拟化支持：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+Some nodes do not support virtualization. KSV will run in emulation mode. The emulation mode may occupy more resources and may affect performance.
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+目前发现某些国产 ARM64 CPU 服务器无法识别服务器虚拟化，但其虚拟化是正常且可使用的。由于安装时开启的是模拟虚拟化，导致创建虚拟机失败。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 解决方案link:[id=19fd3f6be1684a80a12d53f370a1ca53]
+
+. 编辑集群配置文件 **kubectl edit cc -n kubesphere-system ks-installer**，将配置 **spec.virtualization** 中的 **useEmulation** 设置为 **false**。
+
+. 保存并退出，查看日志，等待运行完成即可。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 如何重置用户密码？link:[id=6f4b309b9443425d940cb71c45a9785c]
+
+. 登录安装了{ks_product_both}的服务器节点。
+
+. 执行以下命令重置用户的密码：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl patch users <username> -p '{"spec":{"password":"<new password>"}}' --type='merge' && kubectl annotate users <username> iam.kubesphere.io/password-encrypted-
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+* 您需要将命令中的__<username>__参数替换为实际的用户名，将__<new password>__参数修改为新的密码。
+* 建议在新的密码中包含数字、大写字母和小写字母，长度设置为 6 至 64 个字符。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 为什么虚拟机状态消息一直显示为等待资源中？link:[id=b0e3ed476c6a40edbc232f467c680ebe]
+
+**等待资源中**意味着系统正在等待创建虚拟机所需的资源。您可以查看对应的磁盘是否创建成功。磁盘创建失败通常是因为设置的容量过大，这时可以删除虚拟机，在重新创建虚拟机时降低磁盘容量大小。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 为什么虚拟机状态消息一直显示为调度错误？link:[id=6a7f82f8c0b847ef8a9dc06b763b0dd6]
+
+**调度错误**意味着虚拟机调度失败，可能原因及解决方法如下：
+
+[cols='1a,3a']
+|===
+|可能原因 |解决方法
+
+|虚拟机 CPU 或内存参数设置过大，导致虚拟机调度失败。
+|您可以删除虚拟机，并在重新创建虚拟机时降低 CPU 或内存大小。
+
+|某些服务器节点不支持虚拟化。
+|使用 **root** 用户登录任意服务器节点，执行 **grep -E '(svm\|vmx)' /proc/cpuinfo** 命令，若无回显则不支持虚拟化。
+
+|===
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== {ks_product_right}支持上传哪些格式的镜像文件？link:[id=72e93063e3cd4c4cb57e3f299d758a2e]
+
+{ks_product_right}支持上传 IMG、QCOW2、XZ、TAR、GZ、ISO 和 RAW 格式的镜像文件。如果服务器节点有外部访问权限，也支持 HTTP 方式上传镜像文件。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 镜像文件较大时，可以使用其他方式上传吗？link:[id=89615faab0aa4b94b653400813a48b2b]
+
+{ks_product_right}支持从本地或通过 URL 上传镜像。当镜像文件较大时，也支持 FTP 上传。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 解决方案link:[id=244ed907fe634c28801fd8a02f04568a]
+
+. 以 **root** 用户登录集群中的任意服务器节点。
+
+. 执行以下命令获取 FTP 登录的用户名和密码：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ksv ftp-server
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令 FTP 连接集群中的任意服务器节点：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ftp <node IP address>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+您需要将 __<node IP address>__ 替换为您自己的服务器节点的 IP 地址。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 使用步骤 2 返回的用户名和密码登录 FTP 服务器。
+
+. 执行以下命令将本地镜像文件上传到 FTP 服务器：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+put <local image path>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+您需要将 __<local image path>__ 替换为实际的本地镜像文件路径。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+例如：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+put /pitrix/img/ubuntu_16.04_LTS_server-cloudimg-amd64.img
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在{ks_product_both}Web 控制台的**上传镜像**页面，通过 URL **http://minio.kubesphere-system.svc:9000/qingcloud-images/ubuntu_16.04_LTS_server-cloudimg-amd64.img** 上传镜像。
++
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+您需要将 __ubuntu_16.04_LTS_server-cloudimg-amd64.img__ 替换为将要上传的镜像文件名称。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 为什么挂载的磁盘没有生效？link:[id=40969a5797d146d9aa5a22482657aeb4]
+
+对于单独创建的磁盘，第一次进行动态挂载时，需要重启虚拟机才能生效。后续的热插拔则无须重启虚拟机。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== {ks_product_right}平台能否对接第三方存储？link:[id=a6d11232828d4adcb5c2009200e9ae6e]
+
+可以对接。第三方的存储服务器需要支持 CSI 接口，若支持 CSI 接口，青云可以根据第三方的 CSI 接口规则进行适配和测试。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 如何设置统一的外网出口？link:[id=fb0ca43a2e7149d594aacb6bed83f7b1]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 操作场景link:[id=86868e4778d5435c8437cfa5f4db9c19]
+
+在多节点集群中，只开放了一台节点服务器用于外网访问，其他节点服务器上的虚拟机需要通过已开放外网的节点服务器访问外网。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 原理说明link:[id=3fc2b094ae8f43348fd2a8003ee5286b]
+
+已开放外网的节点服务器有两张网卡（例如，**网卡 A** 和**网卡 B**），**网卡 A** 只连接内网。在{ks_product_both}中使用**网卡 A** 创建内网网络，通过以下命令将内网的 IP 地址转换为**网卡 B** 的 IP 地址用于外网访问。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 解决方案link:[id=94e854c62a0e494fba444ce8024910f1]
+
+. 使用 **root** 用户登录已开放外网的节点服务器。
+
+. 执行以下命令：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+iptables -t nat -A POSTROUTING -s <内网网段> -o <网卡 B 名称> -j MASQUERADE
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+您需要将__<内网网段>__和__<网卡 B 名称>__替换为您自己的网段和网卡名称，例如：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+iptables -t nat -A POSTROUTING -s 192.168.0.0/16 -o eno2 -j MASQUERADE
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 登录需要访问外网的节点服务器，执行以下命令：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ip r add default via <内网地址>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+您需要将__<内网地址>__替换为已开放外网访问的节点服务器的内网 IP 地址，例如：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ip r add default via 192.168.0.1
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--

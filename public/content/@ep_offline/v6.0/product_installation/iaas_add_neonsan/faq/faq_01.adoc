@@ -1,0 +1,60 @@
+---
+title: SANC 架构执行 NeonSAN CLI 报错
+weight: 10
+---
+
+== 问题现象
+
+执行 NeonSAN CLI 报错：
+
+[source]
+----
+root@demo1ar01n04:~# neonsan list_store
+neonsan: /lib/libibverbs.so.1: version `IBVERBS_1.8' not found (required by neonsan)
+root@demo1ar01n04:~# neonsan list_version
+neonsan: /lib/libibverbs.so.1: version `IBVERBS_1.8' not found (required by neonsan)
+----
+
+== 问题原因
+
+IaaS 部署包里 pitrix-neonsan-tool-3.5.1.0.0.1.deb 有问题。
+
+== 解决方法
+
+从 qingstor-firstbox 上找到 neonsan-tool 包，上传到 qingcloud-firstbox 上，并安装新包。
+
+. 从 qingstor-firstbox 上找到 neonsan-tool 包。
++
+----
+root@qingstor-firstbox:/var/www/20.04.1/pitrix#md5sum var/www/neonsan/20.04.1/pitrix-neonsan-tool-3.5.1.0.0.1.deb
+432c2440d9be682c9faf0b9316fff2fe  /var/www/neonsan/20.04.1/pitrix-neonsan-tool-3.5.1.0.0.1.deb
+----
+
+. 放到 qingcloud-firstbox 的 qingcloud-firstbox:/pitrix/repo/20.04.1/neonsan/ 目录。
++
+----
+root@qingstor-firstbox:/var/www/neonsan/20.04.1# scp pitrix-neonsan-tool-3.5.1.0.0.1.deb 172.16.80.2:/pitrix/repo/20.04.1/neonsan/
+
+pitrix-neonsan-tool-3.5.1.0.0.1.deb
+
+root@qingcloud-firstbox:/pitrix/repo/20.04.1/neonsan# ls
+
+pitrix-neonsan-tool-3.5.1.0.0.1.deb
+
+root@qingcloud-firstbox:/pitrix/repo/20.04.1/neonsan# /pitrix/bin/scan_all.sh
+----
+
+. 在 qingcloud-firstbox 执行以下命令，分别对 webservice、vbr、hyper-sanc 安装新包。
++
+----
+apt remove pitrix-neonsan-tool
+apt update
+apt install pitrix-neonsan-tool
+neonsan list_version
+----
+
+. 检查 neonsan list_version 是否能正常输出版本信息。
++
+----
+root@qingcloud-firstbox:~# /pitrix/upgrade/exec_nodes.sh vbr,webservice,hyper "neonsan list_version"
+----

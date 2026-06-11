@@ -1,0 +1,69 @@
+---
+title: "Delete security groups"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, security groups, deletion"
+description: "Describes how to delete security groups in the {ks_product} web console."
+weight: 08
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: cad0e5e73d5b425ebdf2c6bc6719cb5b
+:ks_xref_id: b8bc9ad8a298497c8a446c7019c22c10
+:ks_comp: ../../../components/
+:ks_title: Delete security groups
+:ks_description: Describes how to delete security groups in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, security groups, deletion
+:ks_weight: 08
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete security groups in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=8e65ded3dd7141e89fd1114556110eb0]
+
+User **admin** can delete all security groups in your cluster. Project administrators and operators can delete the security groups created on their own, and project viewers cannot delete security groups.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a security grouplink:[id=f7a3c43c384d45eca3882f07ec785b81]
+
+include::../../../_custom-en/security-groups/security-group-steps.adoc[]
+
+. Find the security group that you want to delete, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+The security group cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple security groups at a timelink:[id=e464a5458ac8407baae1021748cee4c0]
+
+include::../../../_custom-en/security-groups/security-group-steps.adoc[]
+
+. On the **Security Groups** page, select the check boxes next to the security groups that you want to delete, and click **Delete**.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+Security groups cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

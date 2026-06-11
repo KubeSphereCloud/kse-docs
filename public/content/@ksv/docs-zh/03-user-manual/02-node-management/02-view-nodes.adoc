@@ -1,0 +1,91 @@
+---
+title: "查看节点列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 节点, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看节点列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 1b135f08e14e4f61a1d7be8b2207e0da
+:ks_xref_id: f47fd1ac2f2b4c34b52155da7ee6a04d
+:ks_comp: ../../../components/
+:ks_title: 查看节点列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看节点列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 节点, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看节点列表。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=b905e582cd67490b90f683084ae7a1e4]
+
+include::../../../_custom/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=d96f7e0dc5b149978693f201faeea4fc]
+
+include::../../../_custom/nodes/steps-view.adoc[]
+
++
+--
+节点列表页面展示集群中所有的节点，并提供以下信息：
+
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|节点总数
+|当前集群中的节点总数量。
+
+|控制节点
+|当前集群中的控制节点数量，负责整个集群的管理和调度。
+
+|工作节点
+|当前集群中的工作节点数量，负责承担集群中的工作负载。
+
+|名称
+|节点的名称。
+
+在单节点模式下，节点名称由系统自动分配。在多节点模式下，节点名称由用户在安装{ks_product_both}时指定。
+
+|IP 地址
+|节点的 IP 地址。同一集群内的节点可通过 IP 地址互通。
+
+|状态
+|节点的健康状态。
+
+|角色
+|节点在集群中的角色。{ks_product_right}提供工作节点和控制节点两种节点类型。
+
+include::../../../_custom/nodes/node-type-description.adoc[]
+
+|CPU
+|节点的 CPU 用量。
+
+|内存
+|节点的内存用量。
+
+|系统盘
+|节点的系统盘用量情况。
+
+|已分配 CPU
+|节点的可用 CPU 限制和用量统计。
+
+|已分配内存
+|节点的可用内存限制和用量统计。
+|===
+--
+
+. （可选）点击节点列表上方的搜索框并设置搜索条件，可按名称或健康状态搜索节点。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的节点。
+
+. （可选）在节点列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。
+

@@ -1,0 +1,103 @@
+---
+title: "概述"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, 概述"
+description: ""
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 66ca7a5887854cb6b12705b607106089
+:ks_xref_id: 8a6a447d2492403fb6d07c72ac2d3d89
+:ks_comp: ../../components/
+:ks_title: 概述
+:ks_description: 
+:ks_keywords: {ks_product_full}, {ks_product}, 概述
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 项目背景link:[id=5a347845b6424c8995d08f9cdbd23139]
+
+Kubernetes 的诞生与普及为云原生基础设施带来了革命性的变化。它强大的分布式调度能力、简单易用的集群资源抽象，以及丰富的第三方扩展能力使其成为各云原生服务的事实标准。在当今云计算和容器化的大浪潮下，企业上云、应⽤容器化改造逐渐成为企业 IT 的核⼼需求。越来越多的个人开发者和企业开始将虚拟机运行在容器上，并对应用进行全面改造甚至重写以适应 Kubernetes 平台。但由于代码复杂度高或是工作量大等原因，仍有相当一部分的应用未被容器化，从而未能利用 Kubernetes 强大能力。‍
+
+KubeSphere 容器平台作为这一领域的先驱者，洞察到容器和虚拟机可以共存但无法共管的情形会成为应用容器化改造的巨大挑战。为实现容器和虚拟机共存共管并解决传统虚拟化平台运行虚拟机的资源浪费，青云 KubeSphere 团队基于 Kubernetes 云原生架构，结合最新的虚拟化技术打造了{ks_product_abbr_full_both}，为个人和企业用户提供面向云负载的更轻量、灵活的虚拟化服务。您可以将{ks_product_both}广泛应用于开发测试、边缘计算、物联网、人工智能等场景。
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 技术特点link:[id=4c2b6eb3c12441d694e9d0d01fb71ce7]
+
+{ks_product_right}各模块的底层原理描述如下表所示：
+
+[cols='1a,4a']
+|===
+|名称 |描述
+
+|虚拟机
+|{ks_product_right}底层使用 KubeVirt 插件，支持对虚拟机的生命周期管理、状态管理和连接管理。
+
+|网络
+|{ks_product_right}运行在容器环境之上，所以容器需要支持更多的网卡，多余的网卡可以插入到容器中的虚拟机上。{ks_product_right}底层使用 Multus 插件实现容器对多网卡的支持。虚拟机继续保留了对 Macvtap 的支持，同时集成了 Kube-OVN 实现对 SDN 网络的支持，Kube-OVN 提供了 Underlay 和 Overlay 网络类型的支持，用户可以根据实际网络情况和对网络的述求选择合适的网络类型。
+
+|镜像
+|{ks_product_right}底层使用 CDI 插件将镜像导入到持久卷中，通过持久卷的克隆实现系统盘创建。
+
+|存储
+|{ks_product_right}运行在 Kubernetes 底座上，基于 Kubernetes 的 CSI 插件实现存储相关资源的管理。{ks_product_right}主要是使用块存储，自动开源 Ceph 存储，如果提供了支持 CSI 的商业存储，{ks_product_right}也是可以无缝接入的。
+
+|安全组
+|{ks_product_right}集成了 Kube-OVN，由 Kube-OVN 创建的网卡提供了安全组的支持。
+
+|带宽限制
+|{ks_product_right}集成了 Kube-OVN，由 Kube-OVN 创建的网卡提供了带宽限制的支持。
+
+|指标监控
+|{ks_product_right}基于 Kubernetes 生态的 Prometheus 监控系统实现了集群监控指标的配置、收集、存储和查询。
+
+|告警与监控
+|{ks_product_right}基于 Kubernetes 生态的 Prometheus Alertmanager 实现集群告警的配置、收集、存储和查询。
+
+|日志查询
+|{ks_product_right}基于 Kubernetes 生态的 Fluent Bit 与 Elasticsearch 实现日志的收集、存储和查询。
+|===
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 应用场景link:[id=36e8bc519e734e3381789fa51da80a56]
+
+{ks_product_right}具有广泛的应用场景。作为企业级虚拟化平台，{ks_product_right}可支撑个人用户、中小团队和大型企业的多种虚拟化业务需求，为边缘计算、虚拟化资源池、容器化应用混合部署、国产化替代提供解决方案。
+
+* 边缘计算
++
+--
+对于边缘站点多、资金有限的企业虚拟化需求，{ks_product_right}提供轻量级虚拟化平台，支持单节点 4 核 8 GB 的最小化配置，极大地为您降低了业务基础设施部署、管理和运维成本。
+
+此外，{ks_product_right}提供良好的兼容性，支持 PC、工控机、服务器利旧。对业务分布广，强依赖网络的业务需求，{ks_product_right}提供多节点部署安装，实现就近计算、实时响应，可广泛应用于⼯业物联⽹、智慧城市、智慧交通等⾏业数据采集、实时数据分析应⽤场景。
+--
+
+* 虚拟化资源池
++
+--
+作为自主研发云原⽣虚拟化平台，{ks_product_right}完美适配国产芯⽚和操作系统，支持对接第三方存储，大幅提高资源利用率，可广泛应用于国产化替代、虚拟化建设、测试环境、实训课堂等场景。
+--
+
+* 容器虚拟机混合部署
++
+--
+{ks_product_right}是基于 Kubernetes 构建的超融合基础架构软件，支持虚拟机和容器逻辑并存。通过 KubeSphere 和{ks_product_both}混合部署，您可以在前端统一资源申请界面上申请虚拟机资源或容器资源，从而简化基础设施和提高运维效率。
+--
+
+* 国产化替代
++
+--
+基于超融合基础架构的优势，{ks_product_right}实现无缝兼容异构芯片，为您提供软硬解耦的中立虚拟化解决方案。目前，{ks_product_right}兼容主流的 x86 和 ARM 架构，配备国产云管理平台，可用于支撑生产环境的虚拟化业务需求。
+--

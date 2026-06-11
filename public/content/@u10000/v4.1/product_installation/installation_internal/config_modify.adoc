@@ -1,0 +1,64 @@
+---
+title: 修改配置
+weight: 3
+---
+
+待云服务器准备完成后，可以修改配置文件。
+
+. 登录上传有安装包的节点服务器。
++
+[source,shell]
+----
+# ssh root@139.198.3.63 -p 1002
+----
+
+
+. 按照如下内容，修改配置文件 `base.ini` 
++
+[source,shell]
+----
+# vi /root/qs-installer/etc/base.ini
+[base]
+allow_passwd_login = false
+is_instance_on_iaas = true
+zone_id = rose
+global_domain = stor.qingstorage.com
+
+[cluster1]
+vol_type = replica 3
+storage_class = standard
+block = vdd
+block_count = 1
+----
+
+. 按照如下内容，修改配置文件 `ip.ini` 
++
+[source,shell]
+----
+# vi /root/qs-installer/etc/ip.ini
+[role]
+192.168.100.2 = oss nas cluster1 global
+192.168.100.3 = oss nas cluster1 global
+192.168.100.4 = oss nas cluster1 global
+
+[keepalive_int]
+192.168.100.2: vip=192.168.100.212 inf=eth0
+192.168.100.3: vip=192.168.100.213 inf=eth0
+192.168.100.4: vip=192.168.100.214 inf=eth0
+
+[nas_vip]
+192.168.100.2: vip=192.168.100.222 inf=eth0
+192.168.100.3: vip=192.168.100.223 inf=eth0
+192.168.100.4: vip=192.168.100.224 inf=eth0
+----
+
+. 按照如下内容，修改配置文件 `iptables.ini`，加入云服务器节点 IP 所在网段以及虚网 IP 所在网段。
++
+[source,shell]
+----
+# vi /root/qs-installer/etc/iptables.ini
+192.168.101.0/24
+192.168.100.0/24
+----
+
+. 由于当前环境不对接 IaaS，也不使用自主搭建的 NTP，DNS 服务器，因此无需填写 `iaas.ini`。

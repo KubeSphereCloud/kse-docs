@@ -1,0 +1,72 @@
+---
+title: 修改用户偏好（ModifyUserPreference）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| indep_quota
+| String
+| true
+| 
+
+| user
+| String
+| true
+| 用户id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 用户id
+
+| user_preference
+| Object
+| false
+| 用户偏好
+
+| user_preference.indep_quota
+| String
+| false
+| 用户独立配额区域，多个区用逗号分隔
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "indep_quota": "testing",
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyUserPreferenceResponse",
+  "ret_code": 0,
+  "user_id": "admin",
+  "user_preference": {
+    "indep_quota": "testing"
+  }
+}
+----

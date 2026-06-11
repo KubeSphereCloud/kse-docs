@@ -1,0 +1,18 @@
+---
+title: "网卡重启导致的异常处理方法"
+weight: 3
+---
+
+重启网卡可能会导致 bond0 被删除并重建。NeonSAN 节点应避免进行如下的重启网卡的相关操作：
+[,shell]
+----
+systemctl restart networking
+----
+
+
+网卡重启后，需在相应的节点上执行如下命令重启 Store 服务。
+[,shell]
+----
+supervisorctl restart neonstore
+----
+

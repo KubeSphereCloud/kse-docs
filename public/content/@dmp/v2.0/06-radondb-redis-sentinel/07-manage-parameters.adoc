@@ -1,0 +1,132 @@
+---
+title: "修改数据库配置参数"
+keywords: "Kubernetes, {ks_product}, RadonDB Redis Sentinel, 配置参数, 修改数据库参数"
+description: "介绍如何修改 RadonDB Redis Sentinel 数据库配置参数。"
+weight: 07
+---
+
+:ks_db_product: Redis Sentinel
+
+本节介绍如何修改 RadonDB {ks_db_product} 数据库的配置参数。
+
+RadonDB {ks_db_product} 实例支持编辑配置参数，通过管理配置参数可调优数据库性能，并可启用数据库高可用性能。
+
+// Warning
+include::../../../_ks_components/admonitions/warning.adoc[]
+
+修改部分配置参数后，{ks_db_product} 服务会重启，造成业务中断。请谨慎操作。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 点击页面右侧的**参数管理**页签，点击**编辑**即可修改配置参数。
+. 点击**确定**保存。
+
+
+== 参数简介
+
+[%header,cols="1,5"]
+|===
+|参数 |说明
+
+|外部访问
+|是否使用域名从 KubeSphere 集群外部访问数据库分片。
+
+|maxmemory
+a|Redis 可用内存的上限，单位为 MB。默认值为 **974**。
+
+|activerehashing
+a|是否启用重哈希以节省内存。默认值为 **yes**。
+
+|appendonly
+a|是否启用 AOF 持久性。默认值为 **yes**。
+
+|appendfsync
+a|AOF 同步策略。默认值为 **everysec**。
+
+|cluster-node-timeout
+a|Redis 集群节点不可用时间上限，单位为毫秒。超过上限后，Redis 集群节点将被视为故障。取值范围为 **1000~6000000**。默认值为 **15000**。
+
+|latency-monitor-threshold
+a|慢操作时间阈值，单位为毫秒。花费时间超过此参数值的操作将被写入日志。取值 0 表示禁用此功能。
+
+|maxclients
+a|客户端连接的最大数量。取值 0（默认值）表示不限制客户端连接数。默认值为 **102400**。
+
+|maxmemory-policy
+a|Redis 内存使用量达到上限时采取的策略。
+
+|maxmemory-samples
+a|Redis 内存使用量达到上限时，Redis 驱逐算法采用的样本数量。默认值为 **3**。
+
+|min-slaves-max-lag
+a|至少存在 min-slaves-to-write 个从数据库，并且这些从数据库的网络延迟不超过此参数值时，主数据库才能允许写操作。默认值为 **10**。
+
+|min-slaves-to-write
+|请参考 min-slaves-max-lag 的描述信息。
+
+|no-appendfsync-on-rewrite
+|BGSAVE 或 BGREWRITEAOF 操作正在进行时是否阻止 fsync() 调用。
+
+|notify-keyspace-events
+|Redis 发送的通知类型。
+
+|repl-backlog-size
+|复制 backlog 文件的大小。
+
+|repl-backlog-ttl
+|复制 backlog 文件的保留期限。取值范围为 **1~864000**，默认值为 **3600**。
+
+|repl-timeout
+|复制超时时间。取值范围为 **1~864000**，默认值为 **60**。
+
+|set-max-intset-entries
+|当 set 对象完全由十进制 64 位带符号整数组成，并且 set 中元素数量不超过此参数的值时，使用 Intset 编码。
+
+|slowlog-log-slower-than
+|最大操作执行时间，单位为微秒。超过此参数值的操作将被记录到 slowlog 中。取值范围为 **-1~60000000**，默认值为 **-1**。
+
+|slowlog-max-len
+|slowlog 的最大长度。
+
+|hash-max-ziplist-entries
+|当 hash 对象同时满足以下两个条件时，采用 Ziplist 编码：1. hash 对象每个键和每个值的长度（单位为字节）不超过 hash-max-ziplist-value 值；2. hash 对象中的键值对数量不超过 hash-max-ziplist-entries 值。
+
+|hash-max-ziplist-value
+|请参考 hash-max-ziplist-entries 的描述信息。
+
+|list-max-ziplist-entries
+|当 list 对象同时满足以下两个条件时，采用 Ziplist 编码：1. list 对象元素的长度（单位为字节）不超过 list-max-ziplist-value 值；2. list 对象中的元素数量不超过 list-max-ziplist-entries 值。
+
+|list-max-ziplist-value
+|请参考 list-max-ziplist-entries 的描述信息。
+
+|zset-max-ziplist-entries
+|当 zset 对象同时满足以下两个条件时，采用 Ziplist 编码：1. zset 对象元素的长度（单位为字节）不超过 zset-max-ziplist-value 值；2. zset 对象中的元素数量不超过 zset-max-ziplist-entries 值。
+
+|zset-max-ziplist-value
+|请参考 zset-max-ziplist-entries 的描述信息。
+
+|lua-time-limit
+|Lua 脚本超时时间，单位为毫秒。取值 0 或负值表示不设置超时时间。
+
+|io-threads-do-reads
+|是否启用多线程读取。
+
+|io-threads
+|I/O 线程数。
+
+|logfile
+|导出日志信息到 stdout 或日志文件。
+|===

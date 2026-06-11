@@ -1,0 +1,169 @@
+---
+title: 查询用户站内信消息（DescribeNotificationCenterUserPosts）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| create_time
+| String
+| false
+| 消息创建时间
+
+| limit
+| Integer
+| false
+| 查询数量
+
+| notification_center_posts
+| Array
+| false
+| 消息id
+
+| offset
+| Integer
+| false
+| 查询偏移量
+
+| post_type
+| Array
+| false
+| 通知类型
+
+| search_word
+| String
+| false
+| 消息模糊查询
+
+| status
+| Array
+| false
+| 消息状态
+
+| users
+| Array
+| false
+| 用户id
+
+| verbose
+| Integer
+| false
+| 是否展示冗余信息
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_center_post_set
+| Array
+| false
+| 消息集合
+
+| notification_center_post_set[].content
+| String
+| false
+| 邮件、站内信消息内容
+
+| notification_center_post_set[].create_time
+| String
+| false
+| 创建时间
+
+| notification_center_post_set[].notification_center_post_id
+| String
+| false
+| 消息id
+
+| notification_center_post_set[].post_type
+| String
+| false
+| 通知类型
+
+| notification_center_post_set[].short_content
+| String
+| false
+| 短信内容
+
+| notification_center_post_set[].status
+| String
+| false
+| 消息状态
+
+| notification_center_post_set[].status_time
+| String
+| false
+| public
+
+| notification_center_post_set[].template_data
+| String
+| false
+| 模板数据
+
+| notification_center_post_set[].template_name
+| String
+| false
+| 模板名称
+
+| notification_center_post_set[].title
+| String
+| false
+| 消息标题
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeNotificationCenterUserPosts",
+  "limit": 1,
+  "offset": 0,
+  "owner": "usr-xxxxxxxx",
+  "post_type": [],
+  "status": [
+    "new"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeNotificationCenterUserPostsResponse",
+  "notification_center_post_set": [
+    {
+      "content": "this is content",
+      "create_time": "2023-06-15T07:59:44Z",
+      "notification_center_post_id": "nfp-xxxxxxxx",
+      "post_type": "product",
+      "short_content": "this is short content",
+      "status": "new",
+      "status_time": "2023-06-15T07:59:53Z",
+      "template_data": "{}",
+      "template_name": "",
+      "title": "this is a title"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 27
+}
+----

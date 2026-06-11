@@ -1,0 +1,52 @@
+---
+title: No root file system is defined
+weight: 20
+---
+
+== 问题现象
+
+安装操作系统时提示 “No root file system is defined”。
+
+image::/images/ep_offline/installation/faq_raid_01.png[,50%]
+
+== 原因一
+
+服务器使用 9460-8i RAID 阵列卡安装 Ubuntu 16.04.5.3 操作系统，RAID 卡驱动问题，默认的自动安装镜像没有 9460 阵列卡驱动，导致无法正常安装。
+
+=== 解决方法
+
+. 先做好 RAID。
+. link:https://ins.qingcloud.com/assets/files/2022-07-20/1658281270-942880-megaraid-sas.o[下载 RAID 卡驱动]，下载后将驱动名称修改为 `megaraid_sas.ko`。
++
+include::../../../../../../_components/note.adoc[]
+Ubuntu 16.04.5.3 系统的安装程序内核是 4.15.0-58，下载的 megaraid_sas.ko 就是对应的驱动。
+include::../../../../../../_components/table_footer.adoc[]
+. 将 RAID 卡驱动 megaraid_sas.ko 复制到刻录了操作系统 ISO 的 U 盘根目录。
+. 修改操作系统 ISO 中 `/pressed/custom.seed`（或 `autoinstall.seed`）文件，新增以下代码。
++
+[source]
+----
+## d-i preseed/early_command string
+d-i preseed/early_command string \
+modprobe scsi_transport_sas; \
+modprobe raid_class; \
+modprobe configfs; \
+insmod /cdrom/megaraid_sas.ko
+----
++
+示例：
++
+image::/images/ep_offline/installation/faq_raid_02.png[,70%]
+
+. 然后保存 ISO，重新使用 U 盘安装操作系统即可。
+
+
+== 原因二
+
+华为联想等服务器使用 QingCloud-16.04.5.3-AutoInstall.iso 镜像安装操作系统时，可能会提示 “No root file system is defined”。
+
+=== 解决方法
+
+使用 QingCloud-16.04.5.3-AutoInstall-huawei.iso 镜像重新安装操作系统。
+
+镜像下载路径为：`ftp://ins.qingcloud.com/isos/`。

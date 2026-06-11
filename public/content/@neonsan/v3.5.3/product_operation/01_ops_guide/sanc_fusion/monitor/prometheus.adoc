@@ -1,0 +1,61 @@
+---
+title: "Prometheus 服务"
+weight: 1
+---
+
+. 登录安装有 prometheus 服务的 NeonSAN 节点，prometheus 服务相关操作如下。
++
+* 启动 prometheus 服务。
++
+[,shell]
+----
+supervisorctl start prometheus 
+----
+
+* 重启 prometheus 服务。
++
+[,shell]
+----
+supervisorctl restart prometheus
+----
+* 停止 prometheus 服务。
++
+[,shell]
+----
+supervisorctl stop prometheus 
+----
+* 查看 prometheus 服务状态。
++
+[,shell]
+----
+supervisorctl status prometheus
+----
+* 查看 prometheus 服务的日志文件。
++
+[,shell]
+----
+cat /qingstor/log/prometheus.log 
+----
+
+* 查看 prometheus 的 supervisor 配置文件。
++
+[,shell]
+----
+cat /qingstor/etc/supervisord.d/prometheus.ini
+----
+
+. 查看 prometheus 的配置文件。
++
+[,shell]
+----
+/opt/prometheus/prometheus.yml
+----
+
+. 更新 prometheus 的配置文件后，需重新加载 prometheus 的配置。
++
+[,shell]
+----
+curl -X POST -g 'http://localhost:9090/-/reload'
+----
+
+

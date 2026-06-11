@@ -1,0 +1,46 @@
+---
+title: "View Rule Group List"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Monitoring and Alerting, Rule Groups, View Rule Group List"
+description: "Describes how to view the list of alerting rule groups."
+weight: 02
+---
+
+:ks_permission: **Rule Group View**
+:ks_navigation: **Monitoring and Alerting > Rule Groups**
+
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-viewAnAlertingPolicyList.adoc[]
+
+
+== Prerequisites
+
+* The **WizTelemetry Alerting** extension must be installed and enabled on the KubeSphere platform.
+
+
+:relfileprefix: ../../../../../
+
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and enter your cluster or workspace.
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
++
+====
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-para-alertingPolicyList.adoc[]
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-searchForAlertingPolicies.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

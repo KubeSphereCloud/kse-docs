@@ -1,0 +1,22 @@
+---
+title: "VPC 与云外网络通信"
+weight: 20
+---
+
+如下图所示，VPC1 的 KVR 管理路由器部署于 Hyper1，eth0 接口加入了基础网络，IP 地址为 100.100.20.6。VM2 位于 Hyper2，加入了 VPC1 的私有网络 vxnet1 中。此时，VM2 可以通过 KVR 访问到云外网络。
+
+image::/images/ep_offline/ep_twp/vpc_kvr_out.png[]
+
+VM2 访问云外 PC1 的流量转发逻辑如下：
+
+. VM2 与 PC1 属于不同的网段，VM2 发送数据包（目的 IP 为 PC1，目的 MAC 为 vRouter12 的 KR-MAC）通过 bridge 转发至 vRouter12 的 KR 接口进行处理。
+. vRouter12 收到数据包，根据目标 IP 查询路由表，匹配到默认路由，下一跳为 10.101.255.254（KVR-eth1），出接口为 KX 接口。
+. vRouter12 查询 ARP 表得到 10.101.255.254 的 MAC 地址，转发数据包至 KX 出接口处理。
+. DVR12-Bridge 从 KX 接口接收到数据包，根据 MAC 地址查询 bridge FDB 表，将数据包发送至 VTEP 接口处理。
+. DVR12-Bridge 查询 VXLAN FDB 表，对数据包进行 VXLAN 封装，VXLAN 封包目标 IP 为 Hyper1 的 IP 地址 10.88.1.1，VNI 为对端 VTEP VNI ID。
+. Hyper2 根据 10.88.1.1 查询路由/ARP 表信息，从 ETH 口发送后进入 CSW。
+. Hyper1 收到 VXLAN 数据包后，根据 VNI ID 交给对应的 VTEP 设备处理，对数据数据包进行 VXLAN 解封装，进入 KVR 进行转发处理。
+. KVR 接收到数据包之后，根据目标 IP 查询路由表，匹配到默认路由，下一跳为 10.100.20.1，出接口为  eth0。
+. KVR 匹配 NAT 策略，将数据包的源 IP 修改为 10.100.20.6，转发至 eth0 接口处理。
+. DVR1 根据目标 IP 地址查询路由表，匹配到默认路由，下一跳为 10.88.1.254，转发至出接口 ETH0 处理。
+. CSW 根据目标 IP 查询路由表，匹配路由转发至云外其他网络设备，最终转发至 PC1。

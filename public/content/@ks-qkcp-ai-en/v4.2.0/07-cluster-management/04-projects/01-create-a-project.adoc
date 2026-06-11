@@ -1,0 +1,71 @@
+---
+title: "Create a Project"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Project, Create a Project"
+description: "Describes how to create a project."
+weight: 01
+---
+
+
+:ks_permission: **Project Management**
+:ks_navigation: **Project**
+
+
+This section describes how to create a project.
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the **Create Project** dialog box, set the project parameters, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../_custom/clusterManagement/projects/projects-para-name.adoc[]
+
+include::../../../_custom/clusterManagement/projects/projects-para-aliasDescription.adoc[]
+|===
+--
+
+. In the project list, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the newly created project, and then select **Assign Workspace** from the drop-down list.
+
+. In the **Assign Workspace** dialog box, set the workspace to which the project belongs, select a workspace member as the project administrator, and then click **OK**.
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+// * After a project is assigned to a workspace, you cannot change the workspace to which the project belongs. Note: You can unbind the relationship between the workspace and the project.
+
+ifeval::["{file_output_type}" == "html"]
+After the project is created, you can invite users to join the project and deploy services in the project.
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+After the project is created, you can invite users to join the project and deploy services in the project. For more information, see the *KubeSphere Workspace and Project Management Guide*.
+endif::[]
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]

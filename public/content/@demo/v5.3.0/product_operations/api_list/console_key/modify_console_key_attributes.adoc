@@ -1,0 +1,65 @@
+---
+title: 修改Console（ModifyConsoleKeyAttributes）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_key
+| String
+| true
+| Console公钥
+
+| console_key_name
+| String
+| false
+| Console公钥的名称
+
+| description
+| String
+| false
+| Console公钥的描述
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_key_id
+| String
+| false
+| Console公钥
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyConsoleKeyAttributes",
+  "console_key": "FSTMGTOMPKSZJHCTHZHC",
+  "console_key_name": "zzzz",
+  "description": "zzzz desc"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyConsoleKeyAttributesResponse",
+  "console_key_id": "FSTMGTOMPKSZJHCTHZHC",
+  "ret_code": 0
+}
+----

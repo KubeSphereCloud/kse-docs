@@ -1,0 +1,129 @@
+// 节点分配
+
+== 注意事项
+
+* 节点充足时，neonsan-center 和 zookeeper 要尽量分配在不同的节点上。
+* spine-leaf 混合架构中，要求服务都在同一个二层网络里。
+
+== 操作步骤 
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+
+include::../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 分配 Common 服务所在节点。
++
+[source,shell]
+----
+installer role-node-add common -n <NODE_ID1>,<NODE_ID2>,<NODE_ID3> -p neonsan
+----
++
+
+include::../../../../_components/note.adoc[]
+* ``-n`` 参数，指定节点 ID，多个节点用逗号隔开。可执行 ``installer node-list`` 命令进行查看 <NODE_ID>。
+* ``-p`` 参数，用于指定相应的产品，此处指定为 ``neonsan``。
+* NeonSAN 独立部署时，此处指定的 NODE ID 应为 nodes.yaml 配置文件中 nodes 字段下配置好的物理节点所对应的 NODE ID。
+* 与 IaaS 融合部署时，此处指定的 NODE ID 应为提前规划好的 vm 节点，即 nodes.yaml 配置文件中，vms 字段下配置好的虚机所对应的 NODE ID。
+* 节点分配耗时稍长，请耐心等待。
+include::../../../../_components/table_footer.adoc[]
+
+. 分配 NeonSAN 服务所在节点。
++
+* 场景一：若 center 和 store 服务部署于相同节点（小型 POC 测试环境使用该场景即可），可执行如下命令。
++
+[source,shell]
+----
+installer role-node-add neonsan -n <NODE_ID4>,<NODE_ID5>,<NODE_ID6>
+----
++
+* 场景二：若 center 和 store 服务部署于不同节点，可根据如下步骤进行分配。
+.. 分配 neonsan-center 服务所在节点：
++
+[source,shell]
+----
+installer role-node-add neonsan-center -n <NODE_ID7>,<NODE_ID8>, <NODE_ID9>
+----
+.. 分配 neonsan-store 服务所在节点：
++
+[source,shell]
+----
+installer role-node-add neonsan-store -n <NODE_ID10>
+----
++
+include::../../../../_components/note.adoc[]
+* ``-n`` 参数，指定节点 ID，多个节点需用逗号隔开，可执行 ``installer node-list`` 命令进行查看 <NODE_ID>。
+* NeonSAN 服务均部署在物理节点上，**与 Iaas 融合部署时**，应为节点规划表中分配给 NeonSAN 使用的 Hyper 节点 ID。**独立部署时**，应为节点规划表中提前分配好的 Center 和 Store 节点 ID
+* 节点分配耗时稍长，请耐心等待。
+include::../../../../_components/table_footer.adoc[]
+
+
+. 若要部署 NeonSAN 异步灾备网关，则需要为灾备网关角色分配节点。
++
+[source,shell]
+----
+installer role-node-add neonsan-mrgw -n <neonsan_mrgw_node_id1>, <neonsan_mrgw_node_id2>
+----
++
+
+include::../../../../_components/note.adoc[]
+* 此角色节点用于异步灾备环境中，其他环境无需分配此节点类型。
+* ``-n`` 参数，指定节点 ID，多个节点需用逗号隔开，<neonsan_mrgw_node_id> 需根据实际情况进行修改。
+* NODE_ID 可执行 ``installer node-list`` 命令进行查看。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 分别执行如下命令，验证各项服务节点分配是否正确。
++
+* 验证 NeonSAN 服务。
++
+[source,shell]
+----
+installer role-list -p neonsan
+----
++
+image::/images/neonsan/auto_installer_8.png[]
+
+* 验证 Common 服务。
++
+[source,shell]
+----
+installer role-list -p common
+----
++
+image::/images/neonsan/auto_installer_9.png[]
++
+**回显字段说明**
++
+* ``name`` Common 或 NeonSAN 服务中各项子角色的名称。
+*  ``nodes`` 分配了相应子角色的节点 ID。
+* ``num`` 表示相应子角色最大可部署的节点数，0 表示无限制。
+* ``components`` 相应子角色的组件名称。
+* ``mutex`` 与当前子角色相互斥的角色名称。在集群节点数量充足的情况下，存在互斥关系的角色不要分配在相同节点上，如 neonsan-center 和 ZooKeeper。
+* ``description`` 对于相应子角色的描述信息。
+
++
+include::../../../../_components/note.adoc[]
+需关注返回结果中 nodes 字段，是否满足步骤 2 至步骤 4 对各个节点的分配要求。
+include::../../../../_components/table_footer.adoc[]
+
+. 若节点分配不正确，可依次执行如下命令，删除节点的角色信息后，重新分配。
++
+[source,shell]
+----
+installer role-node-delete <ROLE_NAME> -n <NODE_ID>
+----
++
+[source,shell]
+----
+installer role-node-add <ROLE_NAME> -n <NODE_ID>
+----

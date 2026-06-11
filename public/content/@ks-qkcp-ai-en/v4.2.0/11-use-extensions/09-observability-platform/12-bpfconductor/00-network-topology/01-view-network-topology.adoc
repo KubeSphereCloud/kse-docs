@@ -1,0 +1,99 @@
+---
+title: "View Network Topology"
+keywords: "Kubernetes, {ks_product}, BPFConductor, Network Topology, Observability"
+description: "Describes how to view the network topology."
+weight: 01
+---
+
+:ks_navigation: **Network > Network Topology**
+
+This section describes how to view the network topology diagram and the network traffic list.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role on the KubeSphere platform. For more information, see link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Network Observability** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
+. On the page, use the dropdown menus at the top to select the cluster, source project, and target project to view the network topology diagram and network traffic data between specific projects within a specific cluster.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Source Project
+|The project where the data sender is located, i.e., the starting point of the data flow.
+
+|Target Project
+|The project where the data receiver is located, i.e., the ending point of the data flow.
+|===
+
+// include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+* Click image:/images/ks-qkcp/zh/icons/refresh-light.svg[refresh,18,18] in the upper right corner to refresh the page information.
+
+// include::../../../../../../_ks_components/oper-selectTimeRange.adoc[]
+* Click image:/images/ks-qkcp/zh/icons/clock-2.svg[clock-2,18,18] in the upper right corner to set the time range for the data. The default is **Last 30 minutes**.
+--
+
+. The **Network Topology Diagram** displays the resource type (pod, service, cluster node, or IP address), resource name, and total transmission rate for each topology node, as well as the interaction relationships between topology nodes. You can also perform the following operations to get more information.
++
+--
+* Hover the mouse over a topology node to view the related nodes communicating with it and the direction of data flow.
+
+* Click a topology node to view its resource name, belonging project, send rate, and receive rate.
+
+* Hover the mouse over a topology connection line to view the topology nodes at both ends of the line, and use image:/images/ks-qkcp/zh/icons/left-right-button.svg[left-right-button,18,18] to understand the direction of data flow.
+
+* Click a topology connection line or the image:/images/ks-qkcp/zh/icons/left-right-button.svg[left-right-button,18,18] on it to view the start point, end point, and data transmission rate of that data flow segment.
+
+include::../../../../../_custom/WizTelemetry/view-topology-tools.adoc[]
+--
+
+. In the **Network Traffic** area, view the network traffic data for the selected project within the specified time range.
++
+--
+include::../../../../../../_ks_components/oper-sortAscendingDescending.adoc.adoc[]
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Source End
+|The network endpoint that initiates the communication request, displaying the resource type and resource name of this topology node.
+
+|Target End
+|The network endpoint that receives the communication request, displaying the resource type and resource name of this topology node.
+
+|Send Rate
+|The rate at which the source end transmits data to the target end.
+
+|Receive Rate
+|The rate at which the target end receives data from the source end.
+
+|Total Rate
+|The sum of the send rate and receive rate.
+
+|TCP Drops
+|The number of TCP packets dropped per second.
+
+A high drop rate may indicate network instability or device overload, requiring network configuration optimization or resource scaling.
+
+|TCP Retransmissions
+|The number of TCP packets retransmitted per second.
+
+Frequent retransmissions usually indicate network latency or packet loss, which may affect transmission efficiency. It is necessary to check for network latency or congestion.
+|===
+--

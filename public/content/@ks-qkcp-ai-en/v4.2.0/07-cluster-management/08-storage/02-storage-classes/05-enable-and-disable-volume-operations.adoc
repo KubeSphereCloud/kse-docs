@@ -1,0 +1,68 @@
+---
+title: "Enable and Disable Volume Operations"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Storage Class, Enable and Disable Volume Operations"
+description: "Describes how to enable and disable volume operations."
+weight: 05
+---
+
+:ks_permission: **Storage Class Management**
+:ks_navigation: **Storage > Storage Classes**
+
+
+This section describes how to enable and disable volume operations.
+
+You can configure whether to allow users to perform clone and expansion operations on PersistentVolumeClaims created by a specific storage class in the KubeSphere web console.
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|The steps described in this section only control whether users are allowed to use the related operations in the KubeSphere web console. Whether a PersistentVolumeClaim actually supports these operations depends on the backend storage system.
+|===
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+* To enable a feature, ensure that the backend storage system actually supports it.
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-oper-openDetailsPage.adoc[]
+
++
+
+. On the storage class details page, click **Operations > Set Volume Operations**.
+
+. In the **Set Volume Operations** dialog box, enable or disable the volume clone and volume expansion operations, then click **OK**.
++
+--
+
+[%header,cols="1,4"]
+|===
+|Feature |Description
+
+|Volume Clone
+|
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-para-allowVolumeCloning.adoc[]
+
+|Volume Expansion
+|
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-para-allowVolumeExpansion.adoc[]
+|===
+--

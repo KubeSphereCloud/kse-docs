@@ -1,0 +1,59 @@
+---
+title: "安装示例组件"
+keywords: "Kubernetes, {ks_product}, 快速入门, 安装组件, 示例, DevOps"
+description: "以 DevOps 安装为例，演示如何在{ks_product_left} Web 控制台安装组件。"
+weight: 02
+---
+
+KubeSphere 扩展组件，运行在 KubeSphere Core 之上，用来扩展并增强 KubeSphere 产品能力，以进一步满足企业各类型的业务需求。
+
+本节以安装 DevOps 为例，演示如何在{ks_product_left} Web 控制台安装扩展组件。有关组件管理的更多信息，请参阅link:../../06-extension-user-guide/[扩展组件管理]。
+
+Devops 安装完成后，即可在企业空间中创建 Devops 项目。有关 Devops 项目的更多信息，请参阅 link:../../08-workspace-management/04-devops-projects/[Devops 项目]。
+
+== 前提条件
+
+* 您需要以 platform-admin 角色登录到{ks_product_left} Web 控制台。有关平台角色的更多信息，请参阅link:../../05-users-and-roles/02-platform-roles/[平台角色]。
+* 您需要注册一个 KubeSphere 云账号。
+
+== 订阅步骤
+
+. 点击{ks_product_left} Web 控制台左上角的**扩展市场**，进入扩展市场页面。
+. 搜索查找 DevOps，点击**订阅**。
+. 如果您未绑定 https://kubesphere.cloud/login/[KubeSphere 云账号]，前往**扩展中心**绑定您的 KubeSphere 云账户，然后进入订阅流程。
+. 订阅完成后，在扩展市场的 DevOps 页面，点击**安装**，进入组件安装流程。
+
+== 安装步骤
+
+. 在组件安装对话框的**版本选择**页签，选择 DevOps 的版本号，并安装好所有必装组件（若有），点击**下一步**。
+
++
+include::../../../_components/note.adoc[]
+
+安装检测时，会识别扩展组件是否有依赖组件。依赖组件分为必装组件和选装组件。
+
+若必装组件的状态为**未就绪**，您需要先行安装正确版本的必装组件，以确保扩展组件的正常使用。而选装组件不会影响扩展组件的安装。
+
+include::../../../_components/table_footer.adoc[]
+
+
+. 在**扩展组件安装**页签，修改 DevOps 的配置后（可选），点击**开始安装**即开始安装 DevOps。
++
+image:/images/ks-qkcp/zh/v4.0/install-extensions.png[,100%]
+
+. 在**集群选择**页签，根据名称、标识选择集群。
+
+. 在**差异化配置**页签，分别编辑选中集群的 YAML 配置，也可不修改，使用初始默认配置。点击**确定**，开始配置集群 Agent。
+
+安装完成后，默认启用该组件。您可以在扩展市场或扩展中心配置、升级、禁用、卸载扩展组件，还可以点击顶部导航栏上的image:/images/ks-qkcp/zh/icons/grid.svg[grid,18,18]图标，查看使用该组件。
+
+//note
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+某些扩展组件安装后，需要激活才能使用。更多信息，请参阅link:../../06-extension-user-guide/02-subscribe-and-install-components/03-activate-components[激活扩展组件]。
+
+|===
+

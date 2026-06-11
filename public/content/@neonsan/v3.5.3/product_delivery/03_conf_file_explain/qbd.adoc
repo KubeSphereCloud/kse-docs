@@ -1,0 +1,105 @@
+---
+title: "qbd.conf"
+weight: 8
+---
+
+使用 QBD 客户端，需要配置这部分参数。具体内容可参考下表。
+
+[options="header",cols="2,2,3,1"]
+|===
+|参数名|类型 |说明 |是否必须
+4+h|[zookeeper]：zookeeper 集群信息
+|ip
+|IP 列表
+|ZooKeeper 集群节点 IP，以逗号分开，建议配置 3~5 个节点。
+|是
+
+|cluster_name	
+|字符串	
+|ZooKeeper 集群名	
+|是
+
+4+h|[client] 客户端信息
+|tcp_no_delay	
+|数字	
+a|禁止延时发送数据
+
+* 1：禁止
+* 0：允许	
+|是
+
+|io_depth	
+|数字	
+|IO 队列深度	
+|是
+
+|io_timeout	
+|数字	
+|IO 超时设置	
+|是
+
+|conn_timeout	
+|数字
+|连接超时设置	 
+|是
+
+|create_volume_timeout	
+|数字	
+|创建卷的超时设置	
+|是
+
+|zk_center_service_timeout	
+|数字	
+|Center 服务超时设置	
+|是
+
+|type	
+|字符串	
+|客户端类型：qbd	
+|是
+
+4+h|[connection] 节点间连接信息
+|type	
+|字符串	
+|节点间数据传输模式：TCP 或 RDMA	
+|是
+
+4+h|[tools]
+|export_block_size	
+|数字	
+|输出块的大小	
+|是
+
+|export_io_depth	
+|数字	
+|输出的 IO 队列深度	
+|是
+
+|import_block_size	
+|数字	
+|输入块的大小	
+|是
+
+|import_io_depth	
+|数字	
+|输入的 IO 队列深度	
+|是
+
+4+h|[key] 密钥相关信息
+|name	
+|字符串	
+|密钥名	
+|是
+
+|passwd	
+|字符串	
+|密钥密码	
+|是
+|===
+
+
+**注意事项**
+
+* 与 store.conf 里的 zookeeper 信息保持一致。
+* zk_center_service_timeout 参数的值建议大于 io_timeout 参数的取值，无特殊要求保持默认即可。
+

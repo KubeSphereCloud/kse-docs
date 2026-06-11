@@ -1,0 +1,263 @@
+---
+title: "创建 Volcano 作业"
+weight:  01
+---
+
+:ks_permission: ** project-admin **
+:ks_navigation: ** Volcano 调度 > Volcano 作业**
+
+
+本节介绍如何创建 Volcano 作业。
+
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Volcano** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. 在**基本信息**页签，设置 Volcano 作业的基本信息，然后点击**下一步**。
+
+. 在**作业设置**页签，设置调度策略、存储设置等，然后点击**下一步**。
+
+. 在**任务设置**页签，为 Volcano 作业管理的任务设置副本数量、容器、资源需求和调度策略，然后点击**下一步**。
+
+. 在**存储设置**页签，为 Volcano 作业挂载卷，然后点击**下一步**。
+
+. 在**高级设置**页签，为 Volcano 作业指定节点，设置元数据，然后点击**创建**。 
+
+请参阅link:#_参数描述[参数描述]设置 Volcano 作业的参数。
+
+== 参数描述
+
+* 基本信息
++
+--
+设置 Volcano 作业的基本信息。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+| Volcano 作业的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 40 个字符。
+
+|别名
+| Volcano 作业的别名。不同 Volcano 作业的别名可以相同。
+
+|描述
+| Volcano 作业的描述信息。描述可包含任意字符，最长 256 个字符。
+|===
+--
+
+* 作业设置 > 基础设置
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|调度器
+|该作业的容器组所使用的调度器，可选择 link:https://volcano.sh/zh/docs/schduler_introduction/[Volcano] 或 Kubernetes 默认调度器。
+
+Volcano 调度器更适用于高性能计算场景，如机器学习、大数据应用和科学计算。
+
+|队列
+|作业所属的队列，决定了其有资格使用的资源范围。
+
+若未指定队列，默认使用 default 队列。
+
+|最少容器组数量
+|定义了 Volcano 作业进入正常运行状态所需达到的最低要求。只有当作业中处于运行状态的容器组数量不小于最少容器组数量时，该作业才被视为运行正常。
+
+|最大重试次数
+|超过最大重试次数后，作业将标记为失败。
+
+|优先级
+|作业优先级：高、中、低。更高优先级的作业将会优先分配/抢占资源。
+|===
+--
+
+* 作业设置 >  生命周期策略
++
+--
+配置 Volcano 作业的自动处理策略。
+
+还可以在“任务设置”页签为任务（Task）单独配置策略以覆盖 Volcano 作业的默认策略。
+
+include::../../../../_custom/volcano/para-lifeCyclePolicies.adoc[]
+
+* 点击**添加**可设置多个生命周期策略。
+
+* 在已创建的生命周期策略右侧点击image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18]可删除策略。
+--
+
+* 作业设置 > 存储设置
++
+--
+为 Volcano 作业挂载卷，选择已有持久卷或新建一个持久卷。
+--
+
+* 作业设置 > 存储设置 > 指定已有持久卷
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|选择持久卷声明
+|点击选择一个已有的持久卷。
+
+|挂载路径
+|卷挂载到容器上的路径。
+|===
+
+* 作业设置 > 存储设置 > 新建持久卷
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|存储类
+|用于创建持久卷声明的存储类。
+
+|访问模式
+|持久卷的读写模式。
+
+**RWO**（ReadWriteOnce）：允许单个节点读取持久卷中的数据并向其中写入数据。
+
+// include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-para-accessMode.adoc[]
+
+|卷容量
+|持久卷的容量。
+
+|挂载方式
+|卷在容器上的挂载方式。
+|===
+
+
+* 任务设置 > 添加任务
++
+--
+* 为 Volcano 作业新增一个任务（Task），可单独设置副本数、容器镜像、资源需求和调度策略。
+
+* 将鼠标悬停在已创建的任务上，然后在右侧点击image:/images/ks-qkcp/zh/icons/pen-light.svg[pen-light,18,18]可编辑任务的设置。
+
+* 将鼠标悬停在已创建的任务上，然后在右侧点击image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18]可删除任务。
+--
+
+* 任务设置 > 添加任务 > 任务设置
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|任务名称
+|任务的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 15 个字符。
+
+|容器组副本数量
+|设置该任务的容器组副本数。
+
+|高级设置
+|为任务单独配置的生命周期策略，比上一步配置的 Volcano 作业的生命周期策略具有更高优先级。
+|===
+
+* 任务设置 > 添加任务 > 重启策略
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|重启策略
+|容器组中的容器异常退出时，系统采取的策略：重新创建容器组、或重启容器。
+|===
+
+* 任务设置 > 添加任务 > 容器
++
+--
+ifeval::["{file_output_type}" == "html"]
+有关添加容器的更多信息，请参阅link:../../../../08-workspace-management/10-application-workloads/03-workloads/01-create-a-workload/#_参数描述[创建工作负载]。
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+有关添加容器的更多信息，请参阅《KubeSphere 企业空间和项目管理指南》中的“创建工作负载”章节。
+endif::[]
+--
+
+* 存储设置
++
+--
+选择一个任务，为其创建的容器挂载卷、配置字典或保密字典。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountVolume.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountSecretOrConfigmap.adoc[]
+|===
+--
+
+* 存储设置 > 挂载卷 > 持久卷
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-persistentVolume.adoc[]
+--
+
+
+* 存储设置 > 挂载卷 > 临时卷
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-temporaryVolume_new.adoc[]
+--
+
+* 存储设置 > 挂载卷 > HostPath 卷
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-hostpathVolume.adoc[]
+--
+
+* 存储设置 > 挂载配置字典或保密字典
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountConfigmapSecret.adoc[]
+--
+
+
+* 高级设置
++
+--
+为 Volcano 作业管理的容器组指定节点，并设置 Volcano 作业的元数据。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-selectNode.adoc[]
+
+|添加元数据
+|
+设置 Volcano 作业的标签和注解。
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-Metadata.adoc[]
+|===
+--

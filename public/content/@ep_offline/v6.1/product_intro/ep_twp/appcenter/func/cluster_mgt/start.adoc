@@ -1,0 +1,15 @@
+---
+title: "启动/恢复集群"
+weight: 11
+---
+
+启动集群的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_05.png[]
+
+功能流程说明：
+
+. 启动节点虚拟机。
+. 将集群信息注册到 metadata service。
+. 启动集群每个节点的 confd agent。
+. 不同角色节点按照 order 升序执行 start cmd。

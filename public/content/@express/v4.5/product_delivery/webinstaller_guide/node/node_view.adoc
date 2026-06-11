@@ -1,0 +1,26 @@
+---
+title: "查看节点信息"
+weight: 1
+---
+
+用户在**节点管理**页面可以查看当前环境中所有物理节点的基本信息。
+
+
+. link:../../login[登录 {product_installer_name}]。
+
+. 在左侧导航栏中选择**节点管理**，进入相应页面。在当前页面用户可查看环境中所有物理节点的基本信息，包括**节点名称**、**节点 IP**、**系统架构**、**节点角色**和**相关配置**等信息。 +
+如下图所示，当前环境中的第一个节点名称为 guoxin01，节点 IP 为 172.31.195.70，系统架构为 x86 64 位，无 GPU 配置，有 USB 透传功能，CPU 为 12 核，内存为 128G，该节点角色为 Seed、VBR 以及 Snapshot。 
++
+include::../../../../../_components/note.adoc[]
+* Seed、VBR 以及 Snapshot 的节点角色可在创建资源池是通过开启**挂载节点**开关时进行设置。
+* Seed 表示镜像模板服务。
+* VBR 表示虚拟备份恢复节点，主要用于数据备份。
+* Snapshot 表示快照服务。
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/installer/node_1.png[]
+
+
+
+
+

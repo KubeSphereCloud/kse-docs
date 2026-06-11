@@ -1,0 +1,78 @@
+---
+title: 创建资源目录（CreateTagDirectory）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| current_directory
+| String
+| false
+| 当前资源目录
+
+| directory_name
+| String
+| false
+| 资源目录名称
+
+| directory_type
+| String
+| false
+| 资源目录类型
+
+| owner
+| String
+| false
+| 资源目录所有者
+
+| tag_index
+| String
+| false
+| 资源目录序号
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| directory_id
+| String
+| false
+| 资源目录id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateTagDirectory",
+  "current_directory": "dir-xwufi8dg",
+  "directory_name": "部门2",
+  "directory_type": "sub",
+  "owner": "usr-ddyfbbTV",
+  "tag_index": 1
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateTagDirectoryResponse",
+  "directory_id": "dir-yrdghz3u",
+  "ret_code": 0
+}
+----

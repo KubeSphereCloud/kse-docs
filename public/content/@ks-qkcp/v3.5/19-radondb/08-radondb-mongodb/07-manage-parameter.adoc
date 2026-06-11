@@ -1,0 +1,128 @@
+---
+title: "修改配置参数"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB MongoDB, 配置参数, 修改数据库参数"
+description: "介绍如何修改 RadonDB MongoDB 数据库配置参数。"
+weight: 10
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 0be809c5167d459aa0867bdd77b2702b
+:ks_xref_id: e71db4be02a24ce2a6dd5cbae94c8c0f
+:ks_comp: ../../../components/
+:ks_title: 修改配置参数
+:ks_keywords: Kubernetes, {ks_product}, RadonDB MongoDB, 配置参数, 修改数据库参数
+:ks_description: 介绍如何修改 RadonDB MongoDB 数据库配置参数。
+:ks_weight: 10
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+RadonDB MongoDB 应用支持配置参数管理功能，通过管理配置参数可调优数据库性能，并可启用数据库高可用性能。本小节主要如何介绍在{ks_product_both}上修改 RadonDB MongoDB 数据库配置参数。
+
+== 参数简介link:[id=cf5235db7f51488aa8d04f51c409e601]
+
+[%header,cols="1,5"]
+|===
+|参数 |说明
+
+|port
+|MongoDB 服务器监听的端口号。默认值为 27017。
+
+|oplogSizeMB
+|oplog 文件的大小上限，单位为 MB。默认值为 10240MB。
+
+|maxIncomingConnections
+|mongos 或 mongod 接受的最大同时连接数量。
+
+|cursorTimeoutMillis	
+|闲置游标的超时时间，单位为毫秒。闲置游标超时后将被 MongoDB 移除。
+		
+|profilingMode	
+a|是否启用性能分析（Profiling）模式，即是否开启慢查询检测。
+
+* 默认值为 off，表示不收集任何慢查询。
+* slowOp：表示根据 slowOpThresholdMs 参数收集慢查询数据。
+* all：表示开启全局慢查询检测，即收集任何操作记录的数据。
+	
+|slowOpThresholdMs	
+|慢操作时间阈值。花费时间大于此参数值的操作将被视为慢操作。
+	
+|enableMajorityReadConcern	
+|是否使用安全读取策略。默认为 **true**，表示只能读取到成功写入到大多数节点的数据。
+
+修改此参数值将导致数据库服务重启。
+	
+|commandVerbosity	
+a|命令相关组件的日志记录级别。
+
+* 默认值为 0，记录 Informational 级别日志。
+* 设置为 1，会记录所有的请求日志。
+	
+|indexVerbosity	
+a|索引操作相关组件的日志记录级别。
+
+* 默认值为 0，记录 Informational 级别日志。
+* 设置为 1，会记录所有的请求日志。
+	
+|queryVerbosity	
+a|查询操作相关组件的日志记录级别。
+
+* 默认值为 0，记录 Informational 级别日志。
+* 设置为 1，会记录所有的请求日志。
+	
+|networkVerbosity	
+a|组网操作相关组件的日志记录级别。
+
+* 默认值为 0，记录 Informational 级别日志。
+* 设置为 1，会记录所有的请求日志。
+	
+|writeVerbosity	
+a|写入操作相关组件的日志记录级别。
+
+* 默认值为 0，记录 Informational 级别日志。
+* 设置为 1，会记录所有的请求日志。
+|===
+
+== 修改配置参数link:[id=769df6a0d4cb46ba963bc846fcbccfa8]
+
+本小节主要介绍如何修改 RadonDB MongoDB 的配置参数。
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+修改部分配置参数后，MongoDB 服务会重启，造成业务中断。请谨慎操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+
+=== 前提条件link:[id=261aeaa4458c4585898ba25fa405f98b]
+
+* 请确保已获取{ks_product_both}平台登录用户帐号和密码，且已获取平台管理权限。
+
+* 请确保已创建 RadonDB MongoDB 应用。
+
+
+
+=== 操作步骤link:[id=2070b7559a44473bbfbcabb35c7d28dd]
+
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbMongoDB/radondbmongodb-oper-openDetailsPage.adoc[]
+
+
+. 点击页面右侧的**参数**页签，点击**编辑**即可修改应用配置参数。

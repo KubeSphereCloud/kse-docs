@@ -1,0 +1,71 @@
+---
+title: 创建控制台密钥（CreateConsoleKey）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_key_name
+| String
+| false
+| Console公钥的名称
+
+| description
+| String
+| false
+| Console公钥的描述
+
+| owner
+| String
+| false
+| 创建Console公钥的用户ID
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_key_id
+| String
+| false
+| Console公钥
+
+| secret_console_key
+| String
+| false
+| Console公钥的私钥
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateConsoleKey",
+  "console_key_name": "zzzz",
+  "description": "aaaaaaa",
+  "owner": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateConsoleKeyResponse",
+  "console_key_id": "SEVDSHXGUNTCOPAITNNE",
+  "ret_code": 0,
+  "secret_console_key": "MtxVMeHNQpUbMM8swnuDT3nMy7x2z0piyY1k0QYE"
+}
+----

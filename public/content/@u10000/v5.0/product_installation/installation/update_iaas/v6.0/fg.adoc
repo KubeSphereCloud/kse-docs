@@ -1,0 +1,64 @@
+---
+title: 更新 FG 配置
+weight: 4
+---
+
+{product_name} 一般是单独的物理网络，为了使 IaaS 平台的虚机资源能访问 {product_name} 的 API，需要将 {product_name} 所在的内网网段添加到 IaaS 平台的公共服务中。
+
+具体操作步骤如下。
+
+. 登录 IaaS 的 FirstBox。
+
+. 修改 `server.yaml` 配置，根据示例增加相关内容：
++
+[source,shell]
+----
+# vi /pitrix/conf/variables/global/server.yaml
+……
+common:
+  public_user_services:  //增加该字段
+    - 'xxx.xxx.xxx.aaa-xxx.xxx.xxx.bbb'
+
+qingstor:  //增加该根字段
+  qs_proxy_host: "yyy.yyy.yyy.yyy"
+……
+
+----
++
+
+* 在 `common` 下新增字段 `public_user_services`，填写 {product_name} 节点服务器所在网段。
+* 新增根字段 `qingstor`，`qs_proxy_host` 字段填写 {product_name} link:../../../config/ip/[配置文件]中第一个节点的 IP 地址。
+
+
+. 执行如下命令行，下发配置至各节点服务器：
++
+[source,shell]
+----
+# /pitrix/build/build_pkgs.py -p pitrix-global-conf
+# /pitrix/upgrade/update.sh all pitrix-global-conf
+
+----
+
+. 执行如下命令行，重启 FG：
++
+[source,shell]
+----
+# /pitrix/upgrade/exec_nodes.sh webservice "supervisorctl restart fg_server"
+
+----
+
+// . 添加 {product_name} 的 SSH Public Key 至 IaaS Proxy 节点：
+// .. 由于 {product_name} 所有节点使用的 SSH Public Key 均为同一个，因此，登录至 {product_name} 的任一节点查看 SSH Public Key 即可。
+// .. 查看 {product_name} 的 SSH Public Key。
+// +
+// [source,shell]
+// ----
+// # cat .ssh/id_rsa.pub
+// ----
+// .. 添加 {product_name} 的 SSH Public Key 至 IaaS 的 Proxy 节点的如下文件中：
+// +
+// [source,shell]
+// ----
+// # vi /root/.ssh/authorized_keys
+// ----
+

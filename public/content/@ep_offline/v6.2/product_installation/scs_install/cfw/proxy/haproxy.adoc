@@ -1,0 +1,86 @@
+---
+title: "配置 Haproxy"
+weight: 20
+---
+
+== 查看端口是否被监听
+
+1. 登录云平台所有 proxy 节点。
+2. 执行以下命令，查看端口是否监听。
++
+[source]
+----
+netstat -antp | grep -E '11880|18889|17110|17111|17114'
+----
++
+没有回显信息，表示没有被监听。
++
+image::/images/ep_offline/scs_install/cfw_proxy_haproxy.png[]
++
+若已经被监听，请在配置 Haproxy 时，修改对应的监听端口号为未被占用的端口。
+
+== 配置 Haproxy
+
+1. 登录云平台所有 proxy 节点。
+2. 执行以下命令，修改 /etc/haproxy/haproxy.cfg 文件。
++
+[source]
+----
+vim /etc/haproxy/haproxy.cfg
+----
+3. 按照如下格式添加已获取到的服务地址和端口。
++
+[source]
+----
+listen scs_cfw
+    bind 0.0.0.0:18889
+    mode tcp
+    balance source
+    server scs_cfw_0 10.30.1.4:8889 check
+    server scs_cfw_1 10.30.1.3:8889 check
+
+listen srp_log_qos
+    bind 0.0.0.0:17110
+    mode tcp
+    balance source
+    server scs_log_qos_0 10.30.1.6:7110 check
+    server scs_log_qos_1 10.30.1.7:7110 check
+
+listen srp_log_worker
+    bind 0.0.0.0:17111
+    mode tcp
+    balance source
+    server scs_log_qos_0 10.30.1.6:7111 check
+    server scs_log_qos_1 10.30.1.7:7111 check
+
+listen srp
+    bind 0.0.0.0:17114
+    mode tcp
+    balance source
+    server srp_0 10.30.1.6:7114 check
+    server srp_1 10.30.1.7:7114 check
+----
++
+参数说明：
++
+[cols='1,3'] 
+|===
+| 参数 | 说明 
+
+| scs_cfw | scs 角色的节点，云防火墙 saas 项目，云防火墙产品。
+| srp_log_qos | srp 角色的节点，日志存储控制系统。
+| srp_log_worker | srp 角色的节点，日志分析和查询服务。
+| srp | srp 角色的节点，安全资源池调度 iaas 资源的系统。
+|===
+4. 执行以下命令，重新加载 haproxy。
++
+[source]
+----
+service haproxy reload
+----
+5. 执行以下命令，查看服务状态是否正常。
++
+[source]
+----
+service haproxy status
+----

@@ -1,0 +1,56 @@
+---
+title: 查看权限组
+description: 
+weight: 1
+---
+
+
+== 权限组
+
+
+用以控制文件系统挂载路径的访问权限，不同协议下权限控制的维度不同。系统默认提供如下权限组。
+
+* `DEFAULT_ACCESS_GROUP_NFS` 是默认的 NFS 协议下的权限组，该权限组不限制任何客户端的访问和及其访问权限。
+* `DEFAULT_ACCESS_GROUP_SMB_<user_id>` 是默认的 SMB 协议下的权限组，该权限组默认提供 administrator 用户，该用户具备所有权限。`<user_id>` 是创建该权限组的 User ID。
+* `DEFAULT_ACCESS_GROUP_FTP_<user_id>` 是默认的 FTP 协议下的权限组，该权限组默认提供 administrator 用户，该用户具备所有权限。`<user_id>` 是创建该权限组的 User ID。
+
+对于没有严格要求访问权限的文件系统，挂载时可使用对应协议的默认权限组即可。
+
+include::../../../../../../../_components/note.adoc[]
+
+文件系统的创建者和权限组的创建者需要相同。即：文件系统仅可使用同一个用户创建的权限组和默认提供的 NFS 权限组进行权限控制。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+
+用户可在 Portal 查看系统中已创建的权限组列表。操作如下：
+
+. 成功登录 Portal。
+
+. 点击**存储服务 > 文件存储 > 权限管理**，进入权限组列表页面。当前环境中用户创建的所有权限组，均在此列表显示。
++
+image::/images/u10000/stor_file_auth_main.png[stor_file_auth_main,100%]
+
+== ACL 规则
+
+ACL 规则与权限组绑定，ACL 的创建、删除、修改，会影响所有使用该权限组对外提供挂载的文件系统。
+
+
+用户可查看指定权限组绑定的 ACL 规则列表。详细操作如下。
+
+. 成功登录 Portal。
+
+. 点击**存储服务 > 文件存储 > 权限管理**，进入权限组列表页面。
+
+. 在权限组列表页面，点击目标权限组。进入目标权限组的 ACL 规则列表页面。
++
+image::/images/u10000/stor_file_acl_list.png[stor_file_acl_list,100%]
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+---
+title: "LE 证书操作"
+description: 如何使用 LE 证书
+draft: false
+weight: 20   
+keywords: 云计算, LE
+---
+
+== 证书购买
+
+在 Console 打开 SSL 证书服务，点击**购买 SSL 证书**，在证书品牌选择 *LetsEncrypt*，即可创建 LE 证书订单（此时无需到付款环节）。
+
+image::/images/cloud_service/site/ssl/lessl1.png[]
+
+== 证书验证
+
+. 补全域名。
+
+.. 打开**证书订单列表**，找到创建的 LE 证书订单，点击**补全域名**。
++
+image::/images/cloud_service/site/ssl/lessl2.png[]
+
+.. 在弹出的**补全域名**窗口填写网站域名，并按提示去您的域名注册商网站完成域名解析配置。通过设置**域名解析步骤**，完成证书域名验证。您需要保持域名解析配置不变，青云证书服务将通过此配置实现后续的自动签发/续签。
++
+image::/images/cloud_service/site/ssl/lessl3.png[]
++
+域名解析配置：
++
+*主机记录*："`_acme-challenge.`" 加上 "`www`" 或您的二级域名。
+*记录类型*：CNAME。
+*记录值*：填写补充域名窗口中记录值后面的字符串。
++
+其他按默认填写即可。
+
+.. 完成域名解析配置后回到补全域名窗口点击**提交**，SSL 服务将实时验证域名解析，通过验证后可以进行下一步操作。
+
+. 点击**补全信息**，按提示输入公司相关信息，完成后点**提交**。
++
+image::/images/cloud_service/site/ssl/lessl7.png[]
+
+. 等待验证。
++
+完成补充信息后，订单会进入自动验证的状态，等待 5-10 分钟即可完成自动验证。完成之后您可以将证书应用到负载均衡器，或者下载到云主机中使用。
+
+== 应用到负载均衡
+
+. 打开一个已经创建的负载均衡器，点击**创建监听器**，创建 HTTPS 监听器。
++
+image::/images/cloud_service/site/ssl/lessl4.png[]
+
+. 在添加监听器窗口输入监听器名称，监听协议选择 HTTPS，并填入 443 端口。点击**添加服务器证书**。
++
+image::/images/cloud_service/site/ssl/lessl5.png[]
+
+. 在弹出的选择服务器证书窗口，选择LE证书点击**提交**，即可完成 LE 应用到负载均衡器的操作。
++
+image::/images/cloud_service/site/ssl/lessl6.png[]

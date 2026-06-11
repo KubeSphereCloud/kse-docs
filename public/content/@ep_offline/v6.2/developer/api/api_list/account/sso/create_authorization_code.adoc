@@ -1,0 +1,90 @@
+---
+title: 创建授权码（CreateAuthorizationCode）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| true
+| app
+
+| sk
+| String
+| true
+| 
+
+| user_id
+| String
+| true
+| 用户id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| authorization_code
+| String
+| false
+| public
+
+| expires_in
+| String
+| false
+| 过期时间
+
+| users
+| Object
+| false
+| 用户信息
+
+| users.lang
+| String
+| false
+| 云平台用户语言
+
+| users.user_id
+| String
+| false
+| 云平台用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app_id": "app_id_1",
+  "sk": "xxxxxxxxxxxxx",
+  "user_id": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateAuthorizationCodeResponse",
+  "authorization_code": "xxxxxxxxxx",
+  "expires_in": "2023-12-31 12:23:23",
+  "return_code": 0,
+  "user": {
+    "lang": "ZH_CN",
+    "user_id": "admin"
+  }
+}
+----

@@ -1,0 +1,33 @@
+---
+title: 服务器带外管理
+weight: 01
+---
+
+== 带外管理介绍
+
+//include::../../../../../_ep_offline/install/faq/connect_server.adoc[]
+
+服务器带外是指通过专用的通信通道对服务器进行远程维护和管理，包括服务器的电源管理、硬件监控、固件更新、BIOS设置、操作系统安装和配置等。完全独立于服务器操作系统之外，即使服务器的主要网络连接中断或故障，管理员仍然可以通过带外管理接口对服务器进行管理。
+
+服务器带外管理通常通过一个独立的管理接口（如带外管理端口、专用网络接口或物理接口）来实现。这个接口通常与服务器的主要网络接口分开，并使用专用协议（例如 IPMI、iLO 等）进行通信。
+
+== 带外登录默认密码
+
+常见服务器带外默认用户名和密码如下：
+
+include::../../../../../../_components/note.adoc[]
+若使用默认账号密码无法登录，请联系客户或集成商获取最新的密码。
+include::../../../../../../_components/table_footer.adoc[]
+
+[%header,cols="1,1,1"]
+|===
+| 服务器厂商	| 默认用户名	| 默认密码
+| 华为/超聚变	| Administrator	| Admin@9000
+| 黄河	| Administrator	| Admin@9000
+| 华三	| Admin	| Password@_
+| 海康威视	| ADMIN	| hik12345+
+| 联想	| USERID	| PASSW0RD
+| 浪潮	| admin	| admin
+| Dell	| root	| calvin
+| 宝德	| ADMIN	| Admin123@pl
+|===

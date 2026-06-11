@@ -1,0 +1,77 @@
+// :ks_include_id: 4527bd133db04495b10cf1930a58d5f9
+. On the **Basic Information** tab, set the basic information for the PersistentVolumeClaim, then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the PersistentVolumeClaim. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and has a maximum length of 253 characters.
+
+|Alias
+|The alias of the PersistentVolumeClaim. Different PersistentVolumeClaims can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), and has a maximum length of 63 characters.
+
+|Description
+|The description of the PersistentVolumeClaim. The description can contain any characters and has a maximum length of 256 characters.
+|===
+--
+
+. On the **Storage Settings** tab, set the storage requirements, then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+// |Creation Method
+// |The method for creating the PersistentVolumeClaim.
+
+// * **Create via StorageClass**: Select a StorageClass in the current project to create the PersistentVolumeClaim.
+
+// * **Create via VolumeSnapshot**: Select a VolumeSnapshot in the current project to create the PersistentVolumeClaim.
+
+// |StorageClass
+// |The StorageClass used to create the PersistentVolumeClaim. Available only when the PersistentVolumeClaim creation method is **Create via StorageClass**.
+
+// |VolumeSnapshot
+// |The VolumeSnapshot used to create the PersistentVolumeClaim. Available only when the PersistentVolumeClaim creation method is **Create via VolumeSnapshot**.
+
+|Access Mode
+|
+include::persistentVolumeClaims-para-accessMode.adoc[]
+
+Depending on the backend storage system, some access mode types may not be available.
+
+|Volume Capacity
+|The capacity of the volume corresponding to the PersistentVolumeClaim.
+|===
+--
+
+. On the **Advanced Settings** tab, set the labels and annotations for the PersistentVolumeClaim, then click **Create**.
++
+--
+include::../workloads/createWorkload/workloads-para-Metadata.adoc[]
+--
+
+. On the **Cluster Difference Settings** tab, configure different storage settings for the PersistentVolumeClaim in different clusters.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|StorageClass
+|The StorageClass used to create the PersistentVolumeClaim.
+
+|Access Mode
+|
+include::persistentVolumeClaims-para-accessMode.adoc[]
+
+|Volume Capacity
+|The capacity of each PersistentVolume created through the PersistentVolumeClaim template.
+|===
+
+After the PersistentVolumeClaim is created, it will be displayed in the PersistentVolumeClaim list.
+--

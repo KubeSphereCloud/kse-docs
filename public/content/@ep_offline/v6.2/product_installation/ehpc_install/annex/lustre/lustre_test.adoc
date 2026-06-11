@@ -1,0 +1,64 @@
+---
+title: "验证 Lustre"
+weight: 4
+---
+
+. 登录至 lustre-mgs（即 lustre-mdt） 云服务器的 Web 终端。
+
+. 执行如下命令，创建名为 nm_admin 的 nodemap。
++
+[source,shell]
+----
+# lctl nodemap_add nm_admin
+----
+
+. 依次执行如下命令，为客户端云服务器（即 lustre-client）添加访问权限。
++
+[source,shell]
+----
+# lctl nodemap_add_range --name nm_admin --range xx.xx.xx.xx@tcp0
+# lctl nodemap_modify --name nm_admin --property trusted --value 1
+# lctl nodemap_modify --name nm_admin --property admin --value 1
+----
++
+
+include::../../../../../../_components/note.adoc[]
+其中，xx.xx.xx.xx需替换成客户端云服务器即 lustre-client）的 IP 地址。@tcp0 表示使用的为以太网，若使用 IB 网络需替换为 @2ib。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录至客户端云服务器（即 lustre-client）Web 终端，依次执行如下命令，创建 ``/public`` 挂载目录并进行挂载测试。
++
+[source,shell]
+----
+# mkdir /public
+# mount -t lustre xx.xx.xx.xx@tcp0:/lustrefs  /public
+----
++
+
+include::../../../../../../_components/note.adoc[]
+其中，xx.xx.xx.xx 需替换成 lustre-mgs 云服务器（即 lustre-mdt）的 IP 地址。@tcp0 表示使用的为以太网，若使用 IB 网络需替换为 @2ib。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在客户端云服务器（即 lustre-client）Web 终端，执行如下命令，查看 Lustre 文件系统是否挂载成功。
++
+若挂载成功，放回结果中可查看到 /public 目录，且挂载点的容量为 lustre-ost1 和 lustre-ost2 上所有数据盘容量的总和。
++
+[source,shell]
+----
+# df -h
+----
++
+image::/images/ep_offline/ehpc_install/ehpc_6.png[]
+
+. 在客户端云服务器（即 lustre-client）Web 终端，依次执行如下命令，进行数据写入测试。
++
+[source,shell]
+----
+# touch test.img
+# dd if=/dev/zero of=/public/test.img bs=1M count=1000
+----
+
+
+

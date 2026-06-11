@@ -1,0 +1,76 @@
+---
+title: "安装 etcd-client"
+weight: 1
+---
+
+
+. 登录新的管理节点。
+. 执行如下命令，从当前集群的 qingstor-firstbox 上下载 etcd。
++
+[source,shell]
+----
+wget http://<firstbox_ip>:8097/misc/etcd-v3.3.12-lnux-amd64.tar.gz
+----
++
+include::../../../../../../_components/note.adoc[]
+<firstbox_ip> 为当前环境的 qingstor-firstbox 节点的 IP 地址，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 依次执行如下命令，安装 etcd。
++
+[source,shell]
+----
+tar -zxf etcd-v3.3.12-linux-amd64.tar.gz -C /opt
+----
++
+[source,shell]
+----
+ln -s /opt/etcd-v3.3.12-linux-amd64 /opt/etcd
+----
+
+. 创建 etcd 集群配置文件。
++
+[source,shell]
+----
+mkdir -p /qingstor/etc /qingstor/bin
+----
++
+[source,shell]
+----
+chmod 0755 /qingstor/etc /qingstor/bin
+----
+
+. 修改 ``/qingstor/etc/etcd_hosts`` 配置。
++
+[source,shell]
+----
+vi /qingstor/etc/etcd_hosts
+
+http://172.16.90.3:2379,http://172.16.90.4:2379,http://172.16.90.5:237
+----
++
+include::../../../../../../_components/note.adoc[]
+配置内容需包含所有数据库节点，根据实际情况修改示例 IP 地址即可。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 依次执行如下命令，从其他任一数据库节点分别同步文件 etcdctl-v2 和 etcdctl-v3。
++
+[source,shell]
+----
+scp -p <xx.xx.xx.xx>:/qingstor/bin/etcdctl-v2.sh /qingstor/bin/etcdctl-v2.sh 
+----
++
+[source,shell]
+----
+scp -p <xx.xx.xx.xx>:/qingstor/bin/etcdctl-v3.sh /qingstor/bin/etcdctl-v3.sh 
+----
++
+include::../../../../../../_components/note.adoc[]
+<xx.xx.xx.xx> 为当前环境其他健康数据库节点的 IP 地址，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+
+
+

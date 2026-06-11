@@ -1,0 +1,28 @@
+---
+title: 'ACL 相关'
+weight: 8
+---
+
+[cols="2,2,3,3a",options="header"]
+|===
+|英文词汇|中文/缩略词 |解释说明|应用
+|Access Control Lists 
+|访问控制表（ACL） 
+|是一组 IP 地址范围或网段，用于控制用户只能从该列表内的 IP 地址或网段访问本系统。ACL 是一种基于包过滤的访问控制技术，它能根据设定的条件对接口上的包进行过滤，从而使其能够通过或丢弃。
+|通过设置 ACL，可控制某个主机或子网对集群中某个卷，或所有卷的访问权限。默认允许所有主机访问整个集群的卷。
+|===
+
+*应用指南*
+
+设置 ACL：
+[source,shell]
+----
+//设置某一主机允许访问集群
+# neonsan set_acl --host 192.168.101.25 -action allow
+
+//设置指定主机拒绝访问集群中的某一个卷
+# neonsan set_acl -host 192.168.101.25 -volume pool/vol -action deny
+----
+
+
+

@@ -1,0 +1,58 @@
+---
+title: 配置存储网络
+weight: 20
+---
+
+include::../../../../../_components/attention.adoc[]
+在安装企业云平台基础软件的过程中，存储网络信息会被删除，请在安装完成之后再检查下存储网络信息。
+
+include::../../../../../_components/table_footer.adoc[]
+
+计算节点服务器上需要配置两个网络平面（管理网络和存储网络）。
+
+存储网络需与第三方存储的网络在同一网段。
+
+1. 依次登录所有计算节点。
+2. 执行以下命令，修改 /etc/network/interfaces 中的配置。
++
+[source,shell]
+----
+vi /etc/network/interfaces
+----
+3. 为所有计算节点配置存储网络。
++
+示例：
++
+[source,shell]
+----
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# mgmt network
+auto ens1f1
+iface ens1f1 inet static
+  address 172.31.60.205
+  netmask 255.255.255.0
+  gateway 172.31.60.254
+  dns-nameservers 172.31.60.209
+
+# repl network
+auto ens1f0
+iface ens1f0 inet static
+  address 192.168.0.3
+  netmask 255.255.255.0
+----
+4. 配置完成后，建议执行以下命令重启网络，校验是否配置成功。
++
+[source,shell]
+----
+service networking restart
+supervisorctl restart all
+----
+5. 检查存储连通性。
++
+[source,shell]
+----
+ping <存储IP地址>
+----

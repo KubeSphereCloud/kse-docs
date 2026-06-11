@@ -1,0 +1,36 @@
+---
+title: "平台备份任务状态检查"
+weight: 5
+---
+
+[cols="1h,4a"]
+|===
+|巡检目的
+|检查云易捷上虚拟资源的备份执行情况
+
+|巡检条件
+|云平台可正常稳定运行
+
+|巡检过程
+|. admin 用户登录云易捷 Console 界面 （http://console.xxxxx.com, admin@xxxxx.com 用户登录）。
+. 在顶部导航栏，选择**备份**。
+. 点击重点虚拟资源（如虚拟机或硬盘）的备份链，进入其详情页。
+. 查看任务执行的**操作日志**。
+
+
+|预期结果
+|. 可正常登录云易捷管理平台。
+. 云平台备份页面可正常显示。
+. 可正常进入相应备份链的详情页面。
+. 所有任务的操作日志均为正常。
+
+
+|检查结果示例
+|
+image::/images/express/polling/polling_backup_job_1.png[]
+image::/images/express/polling/polling_backup_job_2.png[]
+image::/images/express/polling/polling_backup_job_3.png[]
+|===
+
+
+

@@ -1,0 +1,97 @@
+---
+title: 修改IAM策略（ModifyIAMPolicyAttributes）
+weight: 11
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| description
+| String
+| false
+| 描述
+
+| effect
+| String
+| false
+| 权限
+
+| path
+| String
+| false
+| 路径
+
+| policy
+| String
+| false
+| IAM策略ID
+
+| policy_name
+| String
+| false
+| 策略名称
+
+| resources
+| Array
+| false
+| 资源QRN
+
+| statement
+| Array
+| false
+| 策略内容
+
+| tag
+| String
+| false
+| 标签
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| controller
+| String
+| false
+| 控制器类型
+
+| policy_id
+| String
+| false
+| IAM策略ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMPolicyAttributes",
+  "description": "虚拟私有云服务（VPC）的维护权限，可对该账号下虚拟私有云服务的资源查看和一般维护，不具备敏感操作的权限。",
+  "policy": "iamp-gyn7i60y",
+  "policy_name": "test"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMPolicyAttributesResponse",
+  "controller": "self",
+  "policy_id": "iamp-gyn7i60y",
+  "ret_code": 0
+}
+----

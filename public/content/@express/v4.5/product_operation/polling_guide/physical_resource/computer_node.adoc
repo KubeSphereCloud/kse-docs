@@ -1,0 +1,44 @@
+---
+title: "计算节点运行状态检查"
+weight: 2
+---
+
+
+[cols="1h,4a"]
+|===
+|巡检目的
+|检查云易捷平台内各计算节点详情及健康状态
+
+|巡检条件
+|云平台可正常稳定运行
+
+|巡检过程
+|. admin 用户登录云易捷界面 （http://console.xxxxx.com, admin@xxxxx.com 用户登录）。
+. 在顶部导航栏，选择**物理资源**。
+. 在左侧导航栏，选择**计算节点**，依次点击各计算节点进入其相应的详情页面进行查看。
+. 查看计算节点物理资源利用率，虚拟资源利用率，基于不同时间维度查看物理资源使用趋势，虚拟机运行情况，计算节点服务进程，服务告警记录。
+
+|预期结果
+|. 可正常登录云易捷管理平台。
+. 云平台物理资源页面可正常显示。
+. 可进入各计算节点的详情页面。
+. 检查结果要求：资源使用量在计划范围内、节点负载运行均衡，资源使用趋势无明显异常，虚拟机运行无异常，无异常的服务进程，无未恢复的告警记录。
++
+include::../../../../../_components/note_in_table.adoc[]
+若发现物理资源利用率不均衡，可到相应节点的详情页面对当前节点上的虚拟主机进行批量迁移。
+include::../../../../../_components/footer_in_table.adoc[]
+
+|检查结果示例
+|
+image::/images/express/polling/polling_compute_node_1.png[]
+image::/images/express/polling/polling_compute_node_2.png[]
+image::/images/express/polling/polling_compute_node_3.png[]
+image::/images/express/polling/polling_compute_node_4.png[]
+image::/images/express/polling/polling_compute_node_5.png[]
+image::/images/express/polling/polling_compute_node_6.png[]
+image::/images/express/polling/polling_compute_node_7.png[]
+image::/images/express/polling/polling_compute_node_8.png[]
+|===
+
+
+

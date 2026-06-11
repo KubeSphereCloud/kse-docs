@@ -1,0 +1,82 @@
+---
+title: "添加端口转发规则"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 端口, 转发, 规则, 添加"
+description: "介绍如何使用{ks_product_both}Web 控制台添加端口转发规则。"
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: ec04ab1f93be46ba9b94605bedec2259
+:ks_xref_id: 2c5f4e1c30064768b1fb2b707528b4c7
+:ks_comp: ../../../../components/
+:ks_title: 添加端口转发规则
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台添加端口转发规则。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 端口, 转发, 规则, 添加
+:ks_weight: 04
+:ks_logo: 
+:ks_download_url: 
+
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台为 VPC 添加端口转发规则。
+
+通过添加端口转发规则，您可以控制 VPC 内虚拟机的进出口流量。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=0be2a1452c84476ba3ea7bb809e5224c]
+
+include::../../../../_custom/networks/vpc-manage-prerequisites.adoc[]
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=50c40e9dde344302b7a6825a305b89b0]
+
+include::../../../../_custom/networks/vpc-steps.adoc[]
+
+. 在 VPC 列表页面，点击目标 VPC 名称，进入 VPC 详情页面。
+
+. 在 VPC 详情页面的右侧区域，点击**端口转发**页签，然后点击右上角的**添加规则**。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+添加规则前，请确认您已绑定弹性 IP，否则无法添加规则。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在弹出的对话框中，配置端口转发规则的相关参数。具体参数描述请参见下表。
+// 下表需和 1ad20662ddb6499b8fe7efdfcc7896fd 小节保持一致
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|端口转发规则的名称。
+
+include::../../../../_custom/networks/naming-convention.adoc[]
+
+|协议
+|数据传输的协议类型。{ks_product_right}支持 **TCP** 和 **UDP** 协议。
+
+|源端口
+|外网访问 VPC 的端口。
+
+|内网IP
+|内网 IP 地址。
+
+|内网端口
+|VPC 对公网暴露服务的端口。
+|===
+--
+
+. 点击**创建**。规则添加完成后将显示在规则列表中。

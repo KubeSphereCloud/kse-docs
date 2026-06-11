@@ -1,0 +1,32 @@
+---
+title: "告警"
+weight: 05
+---
+
+
+== 核心功能
+
+支持基于多租户、多维度的监控指标告警，其核心功能包括：
+
+1. 通过规则组分组管理告警规则，提供规则组和规则的增删改查、启用/禁用等灵活配置；
+2. 提供模板化规则配置以简化常见使用场景，包括针对节点和工作负载的 CPU、内存、磁盘、网络、容器组用量等监控指标的告警；
+3. 提供规则表达式的自定义配置，以支持复杂的使用场景；
+4. 支持告警规则配置检查周期、持续时间阈值、告警级别等；
+5. 提供项目、集群、全局多个级别规则组配置，支持多租户和多集群告警；
+6. 提供内置规则组，覆盖平台组件和应用的通用告警。
+
+== 架构设计
+
+=== 主要组件
+
+1. whizard-alerting
+2. Ruler
+
+=== 架构设计
+
+1. whizard-alerting 组件提供规则组的管理；
+2. 依赖 prometheus-operator 组件等将规则同步给 Ruler 组件；
+3. Ruler 组件评估规则组中的规则（查询监控指标），生成告警消息并发送给通知系统的 Alertmanager；
+4. Alertmanager 将可发送通知的告警发送到 Notification Manager，再由 Notification Manager 根据配置发送通知到 Emal, Slack 或 Wechat。
+
+image::/images/ks-qkcp/zh/technical-white-papers/4335.png[]

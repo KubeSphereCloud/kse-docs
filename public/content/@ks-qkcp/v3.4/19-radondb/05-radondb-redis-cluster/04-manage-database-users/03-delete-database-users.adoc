@@ -1,0 +1,94 @@
+---
+title: "删除 RadonDB Redis Cluster 用户"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Redis Cluster,删除 RadonDB Redis Cluster 用户"
+description: "介绍如何删除 RadonDB Redis Cluster 用户。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 5ad73be441e846b393e7b7de2863c2f9
+:ks_xref_id: 652cc37faa3f401e8f3d01e642874b59
+:ks_comp: ../../../../components/
+:ks_title: 删除 RadonDB Redis Cluster 用户
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB Redis Cluster,删除 RadonDB Redis Cluster 用户
+:ks_description: 介绍如何删除 RadonDB Redis Cluster 用户。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何删除 RadonDB Redis Cluster 用户。
+
+
+== 前提条件link:[id=525959f146ac4385b69f7aaf8f96e96d]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-prer-installRadondbRedisCluster.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-prer-databaseStatusRunning.adoc[]
+
+* 已经创建了 RadonDB Redis Cluster 用户。
+
+
+
+== 删除单个 RadonDB Redis Cluster 用户link:[id=2909343fb1244d458c0e0f5c796998a5]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-oper-openDetailsPage.adoc[]
+
++
+include::../../../../_custom/radondb/radondb-oper-openDatabaseUserList.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/accessControl/users/users-oper-deleteASingleUser.adoc[]
+
+
+
+== 批量删除 RadonDB Redis Cluster 用户link:[id=5327df2ecd64435996cd84fc3fd21cba]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openDatabaseUserList.adoc[]
+
+
++
+
+include::../../../../_custom/platformManagement/accessControl/users/users-oper-deleteMultipleUsers.adoc[]

@@ -1,0 +1,47 @@
+---
+title: "Upload Application Version"
+keywords: "Kubernetes, {ks_product}, workspace, application template, upload application version"
+description: "Describes how to upload an application version after creating an application template."
+weight: 06
+---
+
+
+:ks_permission: **Application/Application Version/Application Instance Management**
+:ks_navigation: **Application Management > Application Templates**
+
+
+This section describes how to upload an application version after creating an application template.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+* A Helm Chart archive in .tar.gz or .tgz format must be prepared. For more information, please refer to the link:https://helm.sh/docs/topics/charts/[Helm official documentation].
+
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
+. On the **Versions** tab of the application template details page, click **Upload Version**.
+
+. In the dialog box that appears, click **Upload Helm Chart**, select the locally stored Helm Chart archive in .tar.gz or .tgz format, and then click **OK**.
++
+--
+After the new application version is uploaded, it will be displayed on the **Versions** tab of the application template details page.
+--

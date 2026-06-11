@@ -1,0 +1,16 @@
+// :ks_include_id: d8d9b2087a9849b68d0e028a81a20303
+Configure whether to pull images from the image service when creating or updating a pod.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Prefer Local Image
+|When creating or updating a pod, prioritize using the image files stored on the node by the container runtime.
+
+|Always Pull Image
+|When creating or updating a pod, always attempt to pull the image from the image service.
+
+|Use Local Image Only
+|When creating or updating a pod, use only the images stored on the node by the container runtime. If the required image does not exist locally, pod creation will fail.
+|===

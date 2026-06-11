@@ -1,0 +1,29 @@
+---
+title: "Log Receivers"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Cluster Settings, Log Receivers"
+description: "Introduces how to add and manage log receivers."
+weight: 02
+layout: "second"
+---
+
+Log receivers are used to collect various types of system logs. Configure or add log receivers to send log data from WizTelemetry Logging, WizTelemetry Auditing, WizTelemetry Events, and notification history to external log receivers.
+
+KubeSphere supports collecting the following types of logs:
+
+* Container Logs: Logs obtained from the standard output of containers. The content of container logs is determined by the application running in the container.
+
+* Resource Events: Events for various resources such as application workloads, Jobs, pods, Services, Ingresses, etc.
+
+* Audit Logs: Records of requests received by the {ks_product} API server.
+
+* Notification History: Records of alert notifications sent by the KubeSphere platform to users.
+
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+After installing and enabling any one of the four extensions—WizTelemetry Logging, WizTelemetry Events, WizTelemetry Auditing, and WizTelemetry Notification—the **Log Receivers** option will appear under the **Logging** menu in the left navigation pane of the cluster. The **Log Receivers** page will then display the corresponding tabs.
+
+|===

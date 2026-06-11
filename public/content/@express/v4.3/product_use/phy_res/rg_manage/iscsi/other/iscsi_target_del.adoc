@@ -1,0 +1,23 @@
+---
+title: "删除 Target"
+weight: 4
+---
+
+. 登录{product_console_name}。
+. 选择**物理资源** > **资源池管理** > **iSCSI 外挂**，进入 iSCSI 外挂管理页面，点击**iSCSI 配置**。
+
+. 在 **iSCSI 配置**页面，点击前端服务器右侧的的下拉框，选择指定的 Target WWN，点击右侧更多操作，选择**删除**即可。
+
++
+
+include::../../../../../../../_components/attention.adoc[]
+* 待删除的 Target 上 不能有绑定的卷。
+* 若有卷存在于待删除的 Target 上，则需link:../iscsi_unbind_vol[先将卷解绑]，再删除 Target。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
++
+image::/images/express/console/iscsi_target_del_1.png[]
+
+
+

@@ -1,0 +1,82 @@
+---
+title: "禁用 Spring Cloud"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, Spring Cloud, 禁用 Spring Cloud"
+description: "介绍如何禁用 Spring Cloud 扩展组件。"
+weight: 02
+---
+
+// :ks_include_id: cc82545ae805481b9288a496b37921b2
+:ks_xref_id: a0a0b09176d0467ba387bc56e747da23
+:ks_comp: ../../../../components/
+:ks_title: 禁用 Spring Cloud
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, Spring Cloud, 禁用 Spring Cloud
+:ks_description: 介绍如何禁用 Spring Cloud 扩展组件。
+:ks_weight: 02
+:ks_icon:
+
+
+本节介绍如何禁用 Spring Cloud 扩展组件。
+
+
+== 前提条件link:[id=ad379019821e436f97ca04c7ca920372]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=020d185366a94da4b350851c3af85b57]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:springcloud:enabled** 参数设置为 **false**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  springcloud:
+    enabled: false
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令删除 Spring Cloud 相关系统资源：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+helm uninstall -n kubesphere-spring-cloud-system springcloud-controller
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete crd configurationhistories.springcloud.kubesphere.io configurations.springcloud.kubesphere.io gatewayrouteconfigs.springcloud.kubesphere.io gateways.springcloud.kubesphere.io
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

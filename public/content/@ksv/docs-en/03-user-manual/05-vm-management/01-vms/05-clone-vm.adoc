@@ -1,0 +1,56 @@
+---
+title: "Clone a VM"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, clone"
+description: "Describes how to clone a VM in the {ks_product} web console."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 263add7c0cea4e1a8388b4d580f91b6f
+:ks_xref_id: 4dcb72e28a83415e9a584004757fd0ad
+:ks_comp: ../../../../components/
+:ks_title: Clone a VM
+:ks_description: Describes how to clone a VM in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, clone
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to clone a VM in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=a7b1610858304442b3a4415eb48e8b98]
+
+include::../../../../_custom-en/vms/vm-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=cb82d485d75848799f05c8ecc1e1d8f4]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, find the VM that you want to manage, right-click on the blank area to open the shortcuts for VM operations, and then select **Clone** from the drop-down list.
+. In the dialog box that appears, configure parameters for the VM to clone.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the VM to clone. The name can contain only lowercase letters, digits, and hyphens (-), and must start and end with a lowercase letter or a digit. The name can contain up to 16 characters in length.
+
+|Quantity
+|The number of VMs that you want to clone. You can clone up to 50 VMs at a time.
+
+|Description
+|(Optional) The description of the VM to clone. The description can be up to 128 characters in length. The character types of the description are unlimited.
+|===
+--
+. Click **OK**. The VM appears in the VM list after it is cloned.

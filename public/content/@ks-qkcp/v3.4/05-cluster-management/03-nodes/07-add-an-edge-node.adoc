@@ -1,0 +1,159 @@
+---
+title: "添加边缘节点"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 节点, 添加边缘节点"
+description: "介绍如何添加边缘节点。"
+weight: 07
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: e4548b37fc584a33858266bee132171b
+:ks_xref_id: 2ca3a9ececa9472e9c300d69ef25000e
+:ks_comp: ../../../components/
+:ks_title: 添加边缘节点
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 节点, 添加边缘节点
+:ks_description: 介绍如何添加边缘节点。
+:ks_weight: 07
+:ks_icon:
+:ks_permission: **节点管理**
+
+
+本节介绍如何添加边缘节点。
+
+
+== 前提条件link:[id=9b48f00ca5a04c4d983eadd69796b761]
+
+// :relfileprefix: ../../../../
+* 您需要在{ks_product_both}平台具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅link:../../../04-platform-management/04-access-control/02-users/_index/[用户]和link:../../../04-platform-management/04-access-control/03-platform-roles/_index/[平台角色]。
+// include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+
+// :relfileprefix: ./
+
+
+
+ifeval::["{file_output_type}" == "html"]
+
+* {ks_product_right}平台需要启用 KubeEdge 扩展组件。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+* {ks_product_right}平台需要启用 KubeEdge 扩展组件。有关更多信息，请参阅《{ks_product_right}平台管理指南》的“扩展组件管理”章节。
+
+endif::[]
+
+* 待添加的边缘节点需要能够访问{ks_product_both}集群主节点的 **30000**、**30001**、**30002**、**30003**、**30004** 端口。
+
+* 待添加的边缘节点已安装 Docker、containerd、CRI-O 或 Virtlet 作为容器运行时。KubeEdge 边缘节点默认使用 containerd 作为运行时。有关更多信息，请参阅 link:https://docs.kubeedge.io/zh/docs/advanced/cri/[KubeEdge 官方文档]。
+
+* 您需要获取待添加的边缘节点的 SSH 登录信息。
+
+
+== 配置边缘节点link:[id=9ac3cf3aa85b4e3caf1dc463b630dfa8]
+
+执行以下步骤在边缘节点上配置 link:https://kubeedge.io/zh/docs/advanced/edgemesh/[EdgeMesh]。
+
+. 执行以下命令编辑 **/etc/nsswitch.conf** 文件：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+vi /etc/nsswitch.conf
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在 **/etc/nsswitch.conf** 文件中添加以下内容，然后保存文件：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+hosts:          dns files mdns4_minimal [NOTFOUND=return]
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令在边缘节点上启用 IP 转发：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+sudo echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令验证配置结果：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+sudo sysctl -p | grep ip_forward
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+如果显示以下信息，则表明配置成功：
+
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+net.ipv4.ip_forward = 1
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+
+== 添加边缘节点link:[id=de12f020430b4010a12d54786cf69514]
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在页面右侧点击**添加**。
+
+. 在**添加边缘节点**对话框，设置边缘节点的参数。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|边缘节点的名称。系统会自动为边缘节点生成名称，您也可以手动设置边缘节点的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+|内部 IP 地址
+|边缘节点在{ks_product_both}集群内部的 IP 地址。边缘节点的内部 IP 地址不能与{ks_product_both}集群现有节点的内部 IP 地址相同。
+
+|添加默认污点
+|是否为边缘节点添加污点以阻止容器组调度到边缘节点上。
+|===
+--
+
+. 点击**验证**以检查边缘节点的内部 IP 地址是否与现有节点的内部 IP 地址冲突。如果存在冲突，您需要输入其他 IP 地址。
+
+. 点击**复制**将边缘节点配置命令复制到剪贴板，然后登录边缘节点并执行已复制的命令。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* 请确保边缘节点能够通过 **--cloudcore-ipport** 参数指定的 IP 地址访问{ks_product_both}集群主节点。
+
+* 请确保边缘节点能够通过 **--cloudcore-ipport**、**--quicport**、**--certport**、**--tunnelport** 参数指定的端口号分别访问{ks_product_both}集群主节点的 **30000**、**30001**、**30002**、**30003**、**30004** 端口。
+
+* 取决于您的网络环境，您可能需要设置防火墙和流量转发规则。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 刷新{ks_product_left} Web 控制台的**边缘节点**页面。如果添加成功，边缘节点将显示在边缘节点列表。

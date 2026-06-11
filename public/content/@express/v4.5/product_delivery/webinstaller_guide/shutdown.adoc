@@ -1,0 +1,56 @@
+---
+title: "关机"
+weight: 14
+---
+
+{product_installer_name} 提供一键关闭云易捷集群服务器的功能。
+
+== 注意事项
+
+* 关机操作无法中断，请慎重操作。
+* 关机前务必确保云易捷控制台内所有虚拟资源已关闭，且操作日志中无执行中或等待中的任务。
+
+== 操作步骤
+
+. 关机前检查平台内是否有正在执行或等待中的任务。
+.. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../_components/table_footer.adoc[]
+
+.. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+.. 执行如下命令，检查当前环境是否有业务正在进行或等待。
++
+[source,shell]
+----
+python /pitrix/bin/shutdown_qingcloud.py check
+----
++
+include::../../../../_components/note.adoc[]
+* 返回结果中必须没有进行中或等待中的任务。
+* 若返回结果中有正在进行或等待中的任务，需等待任务完成或结束任务。
+include::../../../../_components/table_footer.adoc[]
+
+. 关机操作。
+.. link:../login[登录 {product_installer_name}]。
+.. 在 {product_installer_name} 任一页面内，点击顶部**关机**按钮。
++
+image::/images/express/installer/shutdown_1.png[]
+.. 若已确保云易捷控制台内的所有虚拟资源均已关闭，且无正在执行或等待的任务。用户可在弹出的**关机**窗口中，点击**已检查，关机**即可。
++
+image::/images/express/installer/shutdown_2.png[,60%]
+
+

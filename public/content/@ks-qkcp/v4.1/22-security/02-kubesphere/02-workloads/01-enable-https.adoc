@@ -1,0 +1,22 @@
+---
+title: "启用 HTTPS"
+weight: 01
+---
+
+. 创建工作负载。
+
+. 容器组设置 > 添加容器 > 添加服务端口。
++
+image:/images/ks-qkcp/zh/security-handbook/port.png[,80%]
+
+. 启用安全协议说明。
++
+[.admon.attention,cols="a"]
+|===
+|注意
+
+|应用负载的端口所使用的安全协议由容器镜像本身决定，如果镜像使用 https(443) 端口提供安全协议服务，则端口设置默认匹配使用 443 端口。
+|===
++
+image:/images/ks-qkcp/zh/security-handbook/port-https.png[,80%]
+

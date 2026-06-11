@@ -1,0 +1,30 @@
+// :ks_include_id: 02c275a851594f868957a3c32ff9f5cd
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Legend Type
+|The vertical data display method for the monitoring chart. Available types include **Basic Chart** and **Stacked Chart**.
+
+|Chart Color Scheme
+|The color scheme style for the monitoring chart. Available types include **Default Scheme**, **Cool Tone**, and **Warm Tone**.
+
+|Basic Information
+|User-defined monitoring chart name and description.
+
+|Data
+|Monitoring metrics displayed in the chart.
+
+* **Legend Name**: User-defined name for the monitoring metric.
+
+* **Interval**: The time interval for data in the monitoring chart, in the format <value><unit>, e.g., **1m** indicates a data interval of 1 minute.
+
+* **Monitoring Metric**: The monitoring metric exposed by the application. You can click **Monitoring Metric** and select a metric from the dropdown list, or manually enter a PromQL statement. Please ensure you have configured the application to expose monitoring metrics and have configured a monitoring exporter. For more information on PromQL expressions, please refer to link:https://prometheus.io/docs/prometheus/latest/querying/basics/[Prometheus Official Documentation].
+
+|Y-Axis
+|Settings for the vertical axis of the monitoring chart.
+
+* **Unit**: The data unit for the vertical axis.
+
+* **Precision**: The number of significant decimal places for the data on the vertical axis.
+|===

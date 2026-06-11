@@ -1,0 +1,56 @@
+---
+title: "Edit Pod IP Pool Information"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Network, Pod IP Pool, Edit Pod IP Pool Information"
+description: "Describes how to edit pod IP pool information."
+weight: 05
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Pod IP Pools**
+
+
+This section describes how to edit pod IP pool information.
+
+You can edit the alias and description of a pod IP pool. KubeSphere does not support editing the name of a pod IP pool.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere Network** extension must be installed and enabled on the KubeSphere platform.
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the pod IP pool you want to operate on, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Edit Information** from the dropdown list.
+
+. In the **Edit Information** dialog box, set the alias and description for the pod IP pool, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Alias
+|The alias of the pod IP pool. Different pod IP pools can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-). It cannot start or end with a hyphen (-) and has a maximum length of 63 characters.
+
+|Description
+|The description of the pod IP pool. The description can contain any characters, up to a maximum of 256 characters.
+|===
+--

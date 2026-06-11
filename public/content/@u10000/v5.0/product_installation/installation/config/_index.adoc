@@ -1,0 +1,39 @@
+---
+title: "修改配置"
+weight: 3
+---
+
+
+//为方便部署，{product_name} 的配置文件分为基础配置文件与高级配置的示例文件两个部分。待安装包上传完成后，用户可登录至上传有安装包的节点服务器查看配置文件的详细内容。
+
+为方便部署，{product_name} 的配置文件分为基础配置文件与高级配置的示例文件两个部分。待 FirstBox 成功创建后，用户可登录至 FirstBox 节点修改相关配置文件。
+
+* 基础配置文件
++
+
+基础配置文件有 `base.ini`、`ip.ini`、`iptables.ini`，存放目录为 `/qingstor/etc/`。无特殊需求，用户正确配置该部分文件，即可完成安装部署。
++
+[source,shell]
+----
+# ls /qingstor/etc/
+base.ini  ip.ini  iptables.ini
+----
+
+
+* 高级配置示例文件
++
+高级配置的示例文件有 `base.ini`、`ip.ini`、`iptables.ini`、`iaas.ini`、`nas.ini`，存放目录为 `/root/qs-installer/etc_example`。
++
+与基础配置文件不同的是，`base.ini`、`ip.ini`、`iptables.ini` 文件中的示例更加丰富。用户可根据说明信息进行配置。
++
+若当前环境需要对接已有的云平台、已有的 NTP 服务器、已有的 DNS 服务器等，或是多 Zone 环境中部署子 Zone 时，需将示例文件 `iaas.ini` 拷贝至 `/qingstor/etc/` 目录下进行修改。
++
+[source,shell]
+----
+# ls /root/qs-installer/etc_example
+base.ini  iaas.ini  ip.ini  iptables.ini  nas.ini
+----
+
+
+
+各配置文件字段详细说明如下。

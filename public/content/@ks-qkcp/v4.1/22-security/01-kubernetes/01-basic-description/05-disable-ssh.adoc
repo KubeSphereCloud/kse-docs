@@ -1,0 +1,25 @@
+---
+title: "root 远程登录启用/禁用"
+weight: 05
+---
+
+禁用 root 远程登录前，务必创建其他非 root 用户用于登录服务器节点。
+
+== 启用 root 远程登录
+
+修改配置文件 /etc/ssh/sshd_config, 设置 `PermitRootLogin` 为 yes。
+
+[,yaml]
+----
+PermitRootLogin yes #enabled
+----
+
+== 禁用 root 远程登录
+
+修改配置文件 /etc/ssh/sshd_config, 设置 `PermitRootLogin` 为 no。
+
+[,yaml]
+----
+PermitRootLogin no #disabled
+----
+

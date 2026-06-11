@@ -1,0 +1,48 @@
+// :ks_include_id: f0e2bbaddcbd4d3db4ce4f3625f57ca1
+. On the service details page, select **Operation > Edit Monitoring Exporter**.
+
+. On the **Edit Monitoring Exporter** page, configure the collection path, collection interval, and timeout for the monitoring metrics, then click **OK**.
++
+--
+KubeSphere's monitoring and alerting module will access the service and collect the application's monitoring metrics based on the parameters set here.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Protocol
+|The protocol used for communication. The value can be **HTTP** or **HTTPS**.
+
+|Port
+|The service port used for communication.
+
+|Path
+|The path where the application's monitoring metrics are exposed.
+
+|Authentication Method
+|The communication authentication method for the process of collecting application monitoring metrics.
+
+* **No Authentication**: No authentication method is used. This method may have security risks.
+
+* **TLS**: The process of collecting application monitoring metrics is authenticated via the TLS protocol.
+
+* **Bearer Token**: Authentication is performed via a token.
+
+* **Basic Authentication**: Authentication is performed via username and password.
+
+Except for **No Authentication**, other authentication methods require configuring corresponding authentication logic in the application and creating a Secret containing the authentication information in advance.
+
+|Collection Interval
+|The collection interval for application monitoring metrics, in minutes.
+
+|Timeout
+|The timeout for each collection of application monitoring metrics, in seconds.
+|===
+--
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+After the monitoring exporter is created, you also need to use the monitoring metrics in the KubeSphere web console to further create rule groups or custom monitoring dashboards to monitor the application's operational status.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]

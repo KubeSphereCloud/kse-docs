@@ -1,0 +1,32 @@
+---
+title: '加密相关'
+weight: 6
+---
+
+[cols="2,3,5a",options="header"]
+|===
+|英文词汇|中文/缩略词 |解释说明
+|userkey 
+|秘钥 
+|{product_name} 支持对集群内的卷进行加密，用户自定义设定秘钥名和密码。
+
+|-
+|数据加密 
+|{product_name} 支持数据的在线加密，并可提供多种业界标准算法供用户选择，通过密钥机制进行用户访问权限管理，有效提升数据安全性。支持 AES 加密算法：ECB，CFB，CBC，CTR、SM4。
+|===
+
+*应用指南*
+
+. 创建秘钥：
++
+[source,shell]
+----
+# neonsan add_userkey -key_name key1 -passwd zhu88jie
+----
+
+. 创建加密卷：
++
+[source,shell]
+----
+# neonsan create_volume -volume pool1/vol2 -size 10G -recount 3 -encrypt aes_128_ecb -userkey key1
+----

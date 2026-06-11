@@ -1,0 +1,128 @@
+---
+title: "Create Platform Roles"
+keywords: "Kubernetes, {ks_product}, Platform Management, Access Control, Platform Roles, Create Platform Roles"
+description: "Describes how to create a platform role."
+weight: 01
+---
+
+:ks_menu: **Users and Roles Management**
+:ks_navigation: **Platform Roles**
+
+This section describes how to create a platform role.
+
+// [.admon.note,cols="a"]
+// |===
+// |Note
+
+// |This feature is only available in KubeSphere ``Standard, Advanced, and Enterprise editions``.
+
+// |===
+
+The KubeSphere platform provides the following built-in platform roles. You can also create roles to customize role permissions.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|platform-admin
+|Platform administrator, who has all permissions on the KubeSphere platform, including platform role management, user management, cluster and workspace management, extension management, etc.
+
+|platform-regular
+|Platform regular user, who cannot access any resources before being invited to a workspace. This role is generally granted to workspace members who do not require other platform permissions.
+
+|platform-self-provisioner
+|Create a workspace and become the administrator of the created workspace.
+|===
+
+
+== Prerequisites
+
+You need to have the **platform-admin** role on the KubeSphere platform. For more information, see link:../../01-users/[Users] and link:../../02-platform-roles/[Platform Roles].
+
+== Steps
+
+include::../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
+. Click pass:a,q[{ks_menu}].
+. In the left navigation pane, select **Platform Roles**.
+. On the page, click **Create**.
+. In the **Create Platform Role** dialog box, set the name, alias, and description of the platform role, and then click **Edit Permissions**.
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the platform role. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and can be up to 63 characters long.
+
+|Alias
+|The alias of the platform role. Different workspace roles can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), and can be up to 63 characters long.
+
+|Description
+|The description of the platform role. The description can contain any characters and can be up to 256 characters long.
+|===
+
+. In the **Edit Permissions** dialog box, set the permissions for the platform role, and then click **OK**.
++
+--
+The permissions that can be set for a platform role are as follows:
+
+* App Store Management
++
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|App Store Management
+|Manage the App Store on the KubeSphere platform, such as app review, release, removal, etc.
+|===
+
+* Workspace
++
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Workspace Creation
+|Create a workspace.
+
+|Workspace Management
+|Manage all workspaces and resources within workspaces.
+
+|Workspace Viewing
+|View all workspaces and resources within workspaces.
+|===
+
+* Cluster Management
++
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Cluster Management
+|Create clusters, delete clusters, and manage all resources within clusters.
+
+|Cluster Viewing
+|View all clusters and cluster resources.
+|===
+
+* Access Control
++
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Role Viewing
+|View the platform role list and view platform role details.
+
+|User Viewing
+|View the user list and view user details.
+
+// |User Management
+// |Create users, edit user information, enable and disable users, modify user roles, delete users.
+
+// |Role Management
+// |Create platform roles, edit platform role information, edit platform role permissions, delete platform roles.
+|===
+--

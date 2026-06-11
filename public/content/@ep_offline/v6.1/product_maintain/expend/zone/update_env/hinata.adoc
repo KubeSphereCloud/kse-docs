@@ -1,0 +1,22 @@
+---
+title: "更新配置中心"
+weight: 4
+---
+
+同步 FirstBox 上的配置至配置中心。
+
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是原环境的 FirstBox 节点 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行如下命令行，将 FirstBox 节点上的配置同步至配置中心。
++
+[source,shell]
+----
+/pitrix/bin/sync_fb_conf_to_hinata.sh
+----
+

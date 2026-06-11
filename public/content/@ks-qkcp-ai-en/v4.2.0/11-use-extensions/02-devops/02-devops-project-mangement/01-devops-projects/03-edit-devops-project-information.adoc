@@ -1,0 +1,47 @@
+---
+title: "Edit DevOps Project Information"
+keywords: "Kubernetes, {ks_product}, Workspace Management, DevOps Project, Edit DevOps Project Information"
+description: "Describes how to edit DevOps project information."
+weight: 03
+---
+
+:ks_permission:  **DevOps Project Management**
+:ks_navigation:  **DevOps > DevOps Project Management**
+
+This section describes how to edit project information.
+
+You can edit the alias and description of a project. KubeSphere does not support editing the name of a created DevOps project.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+
+* {empty}
+include::../../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the DevOps project you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Edit Information** from the dropdown list.
+
+. In the **Edit Information** dialog box, set the alias and description for the DevOps project, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../../_custom/workspaceManagement/devopsProjects/devopsProject-para-aliasAndDescription.adoc[]
+|===
+--

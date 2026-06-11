@@ -1,0 +1,65 @@
+---
+title: '升级 installer-neonsan'
+weight: 3
+---
+
+
+. 登录集群中的任一节点。
+. 执行如下命令，登录 FirstBox 所在的节点。
++
+[,shell]
+----
+# ssh qingstor-firstbox 
+----
+
+. 将 qingstor-installer-neonsan_X.X.X-XXXXXXXX_amd64.deb 拷贝到 /var/www/installer 目录下并升级 deb 包。
++
+[,shell]
+----
+# cp /root/qingstor-installer/repo/installer/qingstor-installer-neonsan_X.X.X-XXXXXXXX_amd64.deb /var/www/installer
+----
+. 执行如下命令，登录 FirstBox。
++
+[,shell]
+----
+# ssh qingstor-firstbox -p 6023
+----
+
+. 执行如下命令，安装 qingstor-installer-neonsan_X.X.X-XXXXXXXX_amd64.deb 。
++
+[,shell]
+----
+# dpkg -i /var/www/installer/qingstor-installer-neonsan_X.X.X-XXXXXXXX_amd64.deb
+----
+
+. 执行如下命令，升级 installer-neonsan。
++
+[,shell]
+----
+# /qingstor/install/upgrade/upgrader upgrade -p installer-neonsan -t X.X.X
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* 其中 X.X.X 为新 qingstor-installer 的版本号。
+* 升级过程中会自动将 environment 目录下的文件和 mongodb 中的数据, 备份到 /qingstor/firstbox/backup/ 目录下。
+* 升级的日志文件为 /qingstor/log/upgrade/upgrade-installer.log。
+* 若要回滚升级操作，可执行 `/qingstor/install/upgrade/upgrader rollback -p installer-neonsan -t x.x.x`，其中新 x.x.x 为原本集群中 qingstor-installer 的版本号。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令，进行检查，确保版本号符合预期。
++
+[,shell]
+----
+# installer version-list
++-------------------+----------+--------+
+| package           | current  | old    |
++-------------------+----------+--------+
+| installer         | 2.0.17.1 | 2.0.16 |
++-------------------+----------+--------+
+| installer-neonsan | 3.5.1    | 3.4.0  |
++-------------------+----------+--------+
+----
+

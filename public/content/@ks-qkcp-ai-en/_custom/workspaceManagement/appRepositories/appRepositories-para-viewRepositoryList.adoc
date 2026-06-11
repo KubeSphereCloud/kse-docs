@@ -1,0 +1,34 @@
+* The application repository list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the application repository.
+
+|Status
+|The current status of the application repository.
+
+* **Successful**: The application repository has been added and synchronized successfully.
+
+* **Syncing**: The application repository is currently synchronizing with the Helm Chart repository.
+
+* **Not Synced**: When the sync interval is set to 0, the application repository does not synchronize with the Helm Chart repository.
+
+* **Failed**: Synchronization between the application repository and the Helm Chart repository has failed.
+
+|URL
+|The URL of the Helm Chart repository.
+
+|Scheduled Sync
+|Whether to perform scheduled synchronization with the Helm Chart repository, and the time interval for scheduled synchronization.
+
+|Type
+|System repository or custom repository.
+
+* System repository: Application repositories added in the "App Store Management" extension.
+* Custom repository: Application repositories added in the workspace.
+|===
+--

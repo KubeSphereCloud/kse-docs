@@ -1,0 +1,66 @@
+// 自动化部署常用 CLI
+
+
+== 查询所有节点列表
+
+命令格式：
+
+[source,shell]
+----
+installer node-list
+----
+
+== 查询所有任务列表
+
+命令格式：
+
+[source,shell]
+----
+installer task-list
+----
+
+== 修改硬件信息
+
+命令格式：
+
+[source,shell]
+----
+installer node-update ${NODE_ID} 
+----
+
+**命令行具体使用如下**
+
+* 使用 ``-h`` 参数，查询命令参数及说明：
++
+[source,shell]
+----
+installer node-update -h
+----
+
+* 收集到了多余的磁盘信息，则执行如下命令修改对应的磁盘状态为不可用。命令行中 ``-d`` 参数，为待修改磁盘盘符，需根据实际情况进行修改，若有多个磁盘需用逗号隔开：
++
+[source,shell]
+----
+installer node-update ${NODE_ID} -d ssa -s 0
+----
+
+* 若待部署环境中，使用 ICAS 磁盘作为存储盘，则收集节点信息时，会将做了 RAID 的磁盘识别为 SATA 盘，需修改磁盘的状态为 SSD，若有多个磁盘需用逗号隔开：
++
+[source,shell]
+----
+installer node-update ${NODE_ID} -d sdb -t ssd
+----
+
+* 若需修改磁盘的 size，可执行如下命令进行修改。``-S`` 参数可根据实际情况进行修改，若有多个磁盘需用逗号隔开：
++
+[source,shell]
+----
+installer node-update ${NODE_ID} -d sdc -S 3200
+----
+* 若需修改磁盘的状态为可用，可执行如下命令，若有多个磁盘需用逗号隔开：
++
+[source,shell]
+----
+installer node-update ${NODE_ID} -d sdd -s 1
+----
+

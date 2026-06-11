@@ -1,0 +1,26 @@
+---
+title: "VBC vxnet 内部通信"
+weight: 10
+---
+
+如下图所示，与服务器 VM1 和 VM2 属于不同计算节点，加入了同一个 VBC 基础网络。
+
+image::/images/ep_offline/ep_twp/vbc_1.png[]
+
+VM2 访问 VM1 的数据转发逻辑如下：
+
+. VM2 以广播方式发送 ARP 请求，解析 VM1 的 MAC 地址。
+
+. Hyper2 的 DVR 的 VTEP 接口接收到该 ARP 请求后，查询 ARP 表中存在 VM1 的静态 ARP 记录，便直接向 VM2 回复 ARP 报文，告知 VM1 的 MAC 地址。
+
+. VM2 接收到 ARP 响应报文，将 VM1 的 MAC 地址加入到本机的 ARP 表中，同时将 IP 数据包进行封包，目的 IP/MAC 均为 VM1，从 vNIC 发送后进入 Hyper2 的 DVR bridge。
+
+. Hyper2 的 DVR 查询 bridge FDB 表（类似于交换机 MAC 地址表），将数据包发送至 VTEP 接口处理。
+
+. Hyper2 的 DVR 查询 VXLAN FDB 表，对数据包进行 VXLAN 封装，VXLAN 封包目标 IP 为 Hyper1 的 IP 地址 10.88.1.1，根据 10.88.1.1 查询路由/ARP 表信息，从 ETH 口发送后进入 CSW（物理交换机）。
+
+. CSW 根据数据包 MAC 地址信息，转发至 Hyper1。
+
+. Hyper1 收到 VXLAN 数据包后，根据 VNI ID 交给对应的 VTEP 设备处理，对数据数据包进行 VXLAN 解封装。
+
+. Hyper1 的 DVR 查询 bridge FDB 表，将数据包转发至 VM1。

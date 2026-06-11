@@ -1,0 +1,53 @@
+
+// 添加节点
+
+该步骤用于生成 nodes.yaml 配置信息，将配置文件中的节点信息添加至集群。
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+
+include::../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，添加新的节点。
++
+[source,shell]
+----
+installer node-add -c /root/nodes.yaml 
+----
+
++
+include::../../../../_components/note.adoc[]
+若命令执行失败，可直接查看 /qingstor/log/installer_server.log 日志内容。
+include::../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，查看新添加节点的信息。
++
+[source,shell]
+----
+installer node-list 
+----
++
+
+include::../../../../_components/note.adoc[]
+返回结果中，关注 status 字段，若不为 new 或 available，则需调查原因并解决后，再次执行步骤 2。
+
+include::../../../../_components/table_footer.adoc[]
+
+* 独立部署 NeonSAN 场景下，返回结果将会显示 nodes.yaml 配置文件中 nodes 字段下配置好的待部署 NeonSAN 的节点信息。
++
+image::/images/neonsan/auto_installer_5.png[,60%]
+
+* 与 IaaS 融合部署场景下，返回结果将会显示 nodes.ymal 配置文件中 fused_nodes 字段下待部署 NeonSAN 服务以及 vms 字段下待部署 Common 服务的节点信息，如下图所示：
++
+image::/images/neonsan/auto_installer_6.png[,60%]
+
+

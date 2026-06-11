@@ -1,0 +1,102 @@
+---
+title: "查看容器组 IP 池详情"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 网络, 容器组 IP 池, 查看容器组 IP 池详情"
+description: "{ks_description}"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 28247b4cf1ea484094af66aa1098df4c
+:ks_xref_id: 1f7301e14de14a92835ac90aa74ce7e4
+:ks_comp: ../../../../components/
+:ks_title: 查看容器组 IP 池详情
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 网络, 容器组 IP 池, 查看容器组 IP 池详情
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **网络资源查看**
+:ks_navigation: **网络 > 容器组 IP 池**
+
+
+本节介绍如何查看容器组 IP 池详情。
+
+
+== 前提条件link:[id=c35954ff369241f18fd255e5882f8465]
+
+:relfileprefix: ../../../../
+* 您需要加入一个集群并在集群中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:05-cluster-management/12-cluster-settings/03-cluster-members/_index.adoc[集群成员]和xref:05-cluster-management/12-cluster-settings/04-cluster-roles/_index.adoc[集群角色]。
+
+// include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/podIpPools/podIpPools-prer-enablePodIpPool.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=f1a0e412ce54448380abb5b04eeaf12e]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在容器组 IP 池列表中点击一个容器组 IP 池的名称打开其详情页面。
+
+. 在容器组 IP 池详情页面左侧的**详情**区域查看容器组 IP 池的基本信息。
++
+--
+
+[%header,cols="2,5"]
+|===
+|参数 |描述
+
+|状态
+|容器组 IP 池的状态。
+
+|网段
+|容器组 IP 池包含的网段。
+
+|已用 IP 地址
+|已使用的 IP 地址数量。
+
+|IP 池块大小
+|IP 池用于分配 IP 的 block 的 CIDR 大小。
+
+|Overlay 模式
+|容器之间的通信模式。支持 IPIP 模式和 VXLAN 模式。
+
+|掩码
+|容器组 IP 池对应网段的掩码位数。
+
+|网络
+|容器组 IP 池对应网络的 IP 地址。
+
+|起始 IP 地址/结束 IP 地址
+|容器组 IP 池包含的 IP 地址范围。
+
+|创建时间
+|容器组 IP 池的创建时间。
+
+|创建者
+|创建容器组 IP 池的用户。
+|===
+--
+
+. 在容器组 IP 池详情页面右侧的**企业空间**页签查看可以使用容器组 IP 池的企业空间的名称、已使用 IP 地址数量和企业空间管理员。
+
+. 在容器组 IP 池右侧的**容器组**页签查看使用容器组 IP 池的全部容器组。
++
+--
+include::../../../../_custom/clusterManagement/nodes/nodes-para-podList.adoc[]
+--

@@ -1,0 +1,113 @@
+---
+title: "修改配置参数"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB ECK, 配置参数, 修改数据库参数"
+description: "介绍如何修改 RadonDB ECK 配置参数。"
+weight: 12
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 61f30d62eb02435f8f919b6c04ea50ca
+:ks_xref_id: af96362fc52540f8884f78fa2ee65f06
+:ks_comp: ../../../components/
+:ks_title: 修改配置参数
+:ks_keywords: Kubernetes, {ks_product}, RadonDB ECK, 配置参数, 修改数据库参数
+:ks_description: 介绍如何修改 RadonDB ECK 配置参数。
+:ks_weight: 12
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+RadonDB ECK 应用支持配置参数管理功能，通过管理配置参数可调优应用性能。本小节主要介绍在{ks_product_both}上修改 RadonDB ECK 配置参数。
+
+== 参数简介link:[id=ea27fd4454a5490f8e67b30bdbc16ea8]
+
+[%header,cols="1,5"]
+|===
+|参数  |说明
+
+| thread_pool.write.queue_size
+| 线程池写队列的大小。 默认值 10000。
+
+| thread_pool.search.queue_size
+| 线程池搜索队列的大小。 默认值 1000。
+
+| action.destructive_requires_name
+a| 是否在删除索引时禁止使用通配符或 _all。
+
+* 默认值 `true`，表示在删除索引时只限于特定名称指向的数据。
+* 取值 `false`，表示允许在删除索引时使用通配符或 _all，推荐配置。
+
+| http.cors.enabled
+| 是否启用跨区域资源共享，例如另一区域的服务器向 Elasticsearch 执行请求。
+
+| http.cors.allow-origin
+| 允许跨域资源共享的域。
+
+| indices.fielddata.cache.size
+| 表示字段缓存数据所能使用的堆内存的最大值。默认值 -1b。
+
+| indices.memory.index _buffer_size
+a| 分配给节点并由所有分片作为索引缓冲区共享的堆内存大小。
+
+* 默认值 10%，表示总堆内存的 10% 将被用于索引缓存被所有分片共享。
+* 可配置百分比或字节数。 
+
+| indices.queries.cache.size
+a| 表示控制过滤器缓存的内存大小。
+
+* 默认值 10%。
+* 可配置百分比或字节数。
+
+| indices.requests.cache.size
+| 在节点级管理的分片请求缓存大小。默认值为堆内存的 1%。
+
+| reindex.remote.whitelist
+| 列入白名单以进行 Reindex 操作的远程 Elasticsearch 节点的地址。多个地址使用半角逗号（,）进行分隔，例如 otherhost:9200, 192.168.1.\*:9200, localhost:*。
+
+| cluster.routing.allocation.awareness.attributes
+| 用于分片分配感知的属性。参数值可以为 k8s_node_name 和 zone。您可以同时设置两个值并用半角逗号（,）分隔。
+|===
+
+== 修改配置参数link:[id=01d46e6d1bd0480f857e94d5a2a4b1f5]
+
+本小节主要介绍如何修改 RadonDB ECK 的配置参数。
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+修改配置参数后，ECK 服务会重启，造成业务中断。请谨慎操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+
+=== 前提条件link:[id=44281e5872de4d5a8632257d60ad908f]
+
+* 请确保已获取{ks_product_both}平台登录用户帐号和密码，且已获取平台管理权限。
+
+* 请确保已创建 RadonDB ECK 应用。
+
+
+
+=== 操作步骤link:[id=5dc030fe2c5f46d091ae6842bbeafeb7]
+
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbEck/radondbeck-oper-openDetailsPage.adoc[]
+
+
+. 点击页面右侧的**参数**页签，点击**编辑**即可修改应用配置参数。

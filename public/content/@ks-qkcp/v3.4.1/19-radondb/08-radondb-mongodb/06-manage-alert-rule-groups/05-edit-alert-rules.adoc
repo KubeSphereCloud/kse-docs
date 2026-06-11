@@ -1,0 +1,70 @@
+---
+title: "管理告警规则"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, MongoDB, 管理告警规则组, 编辑告警规则"
+description: "介绍如何管理规则组中的告警规则。"
+weight: 05
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 5e01cacadbbc4807bccb8cf2b05ac7a3
+:ks_xref_id: d51dbd70c6ba42e7baa6a4932add7be9
+:ks_comp: ../../../../components/
+:ks_title: 管理告警规则
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, MongoDB, 管理告警规则组, 编辑告警规则
+:ks_description: 介绍如何管理规则组中的告警规则。
+:ks_weight: 05
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+本节介绍如何管理规则组中的告警规则，包括添加、修改、启用、禁用、删除告警规则。
+
+
+== 前提条件link:[id=5ad46824d7694098b789b9302e35fd2e]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbMongoDB/radondbmongodb-prer-installRadondbmongodb.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-createAlertGroup.adoc[]
+
+
+== 操作步骤link:[id=58d7d9bfc04e41408cef7f925fe87c1b]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMongoDB/radondbmongodb-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-editAnAlertingPolicy.adoc[]
+
++
+
+include::../../../../_custom/radondb/ruleGroups-oper-editAlertRules.adoc[]

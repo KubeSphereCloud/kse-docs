@@ -1,0 +1,80 @@
+---
+title: 修改配置
+weight: 2
+---
+
+登录原环境的 FirstBox 节点，修改以下配置文件，添加待扩容节点信息。命令行中的 `<firstbox ip>` 是原环境的 FirstBox 节点 IP。
+
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+
+== base.ini
+
+在配置文件 `/qingstor/etc/base.ini` 中新增如下内容，添加一个数据存储池。
+
+[source,yaml]
+----
+[cluster2]
+vol_type = replica 3
+storage_class = standard
+block = vdc
+block_count = 1
+----
+
+**填写说明**
+
+[cols="1,5a", options="header"]
+|===
+| 参数 | 说明 
+
+|cluster2 | 用于设置新扩容数据存储池的相关信息。
+
+* 多个数据存储池依次使用 `cluster1`、`cluster2`......​进行标识。
+* `cluster2` 表示第二数据存储池。
+* 若原环境中已经使用了 `cluster2`，则此处需修改为 `cluster3`。
+
+|vol_type a| 用于设置数据存储池的冗余策略。
+
+* 可选值为 `replicate` 与 `ec`。分别表示硬盘的冗余模式为副本或纠删码类型。
+* 副本填写格式为：`vol_type = replica 3`，其中 3 表示副本数，可根据实际情况进行修改。
+* 纠删码填写格式为：`vol_type = ec 4+2`，其中 4+2 表示 EC 的数据块与校验块的配比，可根据实际情况进行修改。
+
+|storage_class a|用于设置据存储池的存储级别。可选值为：`standard` 与 `standard_ia`，分别表示标准存储和低频存储。
+|block a|填写存储硬盘的设备名称。该字段仅填写存储盘盘符，索引盘排除在外。所填写存储盘盘符均需在存储节点存在。多个盘符之间使用空格分隔。
+|block_count a|用于填写数据盘数量。
+|===
+
+== ip.ini
+
+在配置文件 `/qingstor/etc/ip.ini` 中，`[role]` 字段下，按照示例格式，添加待扩容节点信息。
+
+[source,yaml]
+----
+
+......
+[role]
+192.168.10.6 = oss nas cluster1 global
+192.168.10.7 = oss nas cluster1 global
+192.168.10.8 = oss nas cluster1 global
+# 以下为新扩容节点信息
+192.168.10.2 = cluster2
+192.168.10.3 = cluster2
+192.168.10.4 = cluster2
+......
+----
+
+**填写说明**
+
+[cols="1,5a", options="header"]
+|===
+| 参数 | 说明 
+
+| role a| 用于配置新增物理节点的角色。示例格式说明。
+
+* `192.168.10.2` 为待扩容节点的 IP 地址，根据前期规划依次填写。
+* `cluster2` 为新增数据存储池，表示当前节点从属于数据存储池 `cluster2`，需根据link:#_base_ini[前文配置]内容进行替换。
+
+|===

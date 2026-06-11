@@ -1,0 +1,155 @@
+---
+title: "修改 RadonDB Redis Cluster 数据库配置参数"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB Redis Cluster, 配置参数, 修改数据库参数"
+description: "介绍如何修改 RadonDB Redis Cluster 数据库配置参数。"
+weight: 10
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 96cfebf52e994e8cb3cfbb80cd4f9eea
+:ks_xref_id: 143b01a989aa4dd3be08321d1f674fbe
+:ks_comp: ../../../components/
+:ks_title: 修改 RadonDB Redis Cluster 数据库配置参数
+:ks_keywords: Kubernetes, {ks_product}, RadonDB Redis Cluster, 配置参数, 修改数据库参数
+:ks_description: 介绍如何修改 RadonDB Redis Cluster 数据库配置参数。
+:ks_weight: 10
+:ks_icon:
+
+
+RadonDB Redis Cluster 应用支持配置参数管理功能，通过管理配置参数可调优数据库性能，并可启用数据库高可用性能。
+
+== 参数简介link:[id=6a8a3e97da464650be326b3fb5755b5c]
+
+本小节主要介绍如何修改 RadonDB Redis Cluster 数据库配置参数。
+
+[%header,cols="1,5"]
+|===
+|参数 |说明
+
+|maxmemory
+a|Redis 可用内存的上限，单位为 MB。默认值为 **128**。
+
+|activerehashing
+a|是否启用重哈希以节省内存。默认值为 **yes**。
+
+|appendonly
+a|是否启用 AOF 持久性。默认值为 **yes**。
+
+|appendfsync
+a|AOF 同步策略。默认值为 **everysec**。
+
+|cluster-node-timeout
+a|Redis 集群节点不可用时间上限，单位为毫秒。超过上限后，Redis 集群节点将被视为故障。取值范围为 **1000~6000000**。默认值为 **15000**。
+
+|latency-monitor-threshold
+a|慢操作时间阈值，单位为毫秒。花费时间超过此参数值的操作将被写入日志。取值 0 表示禁用此功能。
+
+|maxclients
+a|客户端连接的最大数量。取值 0（默认值）表示不限制客户端连接数。默认值为 **102400**。
+
+|maxmemory-policy
+a|Redis 内存使用量达到上限时采取的策略。
+
+|maxmemory-samples
+a|Redis 内存使用量达到上限时，Redis 驱逐算法采用的样本数量。默认值为 **3**。
+
+|min-slaves-max-lag
+a|至少存在 min-slaves-to-write 个从数据库，并且这些从数据库的网络延迟不超过此参数值时，主数据库才能允许写操作。默认值为 **10**。
+
+|min-slaves-to-write
+|请参考 min-slaves-max-lag 的描述信息。
+
+|no-appendfsync-on-rewrite
+|BGSAVE 或 BGREWRITEAOF 操作正在进行时是否阻止 fsync() 调用。
+
+|notify-keyspace-events
+|Redis发送的通知类型。
+
+|repl-backlog-size
+|复制 backlog 文件的大小。
+
+|repl-backlog-ttl
+|复制 backlog 文件的保留期限。取值范围为 **1~864000**，默认值为**3600**。
+
+|repl-timeout
+|复制超时时间。取值范围为 **1~864000**，默认值为**60**。
+
+|set-max-intset-entries
+|当 set 对象完全由十进制 64 位带符号整数组成，并且 set 中元素数量不超过此参数的值时，使用 Intset 编码。
+
+|slowlog-log-slower-than
+|最大操作执行时间，单位为微秒。超过此参数值的操作将被记录到 slowlog 中。取值范围为 **-1~60000000**，默认值为**1**。
+
+|slowlog-max-len
+|slowlog 的最大长度。
+
+|hash-max-ziplist-entries
+|当 hash 对象同时满足以下两个条件时，采用 Ziplist 编码：1. hash 对象每个键和每个值的长度（单位为字节）不超过 hash-max-ziplist-value 值；2. hash 对象中的键值对数量不超过 hash-max-ziplist-entries 值。
+
+|hash-max-ziplist-value
+|请参考 hash-max-ziplist-entries 的描述信息。
+
+|list-max-ziplist-entries
+|当 list 对象同时满足以下两个条件时，采用 Ziplist 编码：1. list 对象元素的长度（单位为字节）不超过 list-max-ziplist-value 值；2. list 对象中的元素数量不超过 list-max-ziplist-entries 值。
+
+|list-max-ziplist-value
+|请参考 list-max-ziplist-entries 的描述信息。
+
+|zset-max-ziplist-entries
+|当 zset 对象同时满足以下两个条件时，采用 Ziplist 编码：1. zset 对象元素的长度（单位为字节）不超过 zset-max-ziplist-value 值；2. zset 对象中的元素数量不超过 zset-max-ziplist-entries 值。
+
+|zset-max-ziplist-value
+|请参考 zset-max-ziplist-entries 的描述信息。
+
+|lua-time-limit
+|Lua 脚本超时时间，单位为毫秒。取值 0 或负值表示不设置超时时间。
+
+|io-threads-do-reads
+|是否启用多线程读取。
+
+|io-threads
+|I/O 线程数。
+|===
+
+== 修改配置参数link:[id=3b5f51a23ce746d9b89baf61b4c21dda]
+
+本小节主要介绍如何查看 RadonDB Redis Cluster 基本配置参数。
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+修改部分配置参数后，Redis Cluster 服务会重启，造成业务中断。请谨慎操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+
+=== 前提条件link:[id=bd51411d6f06434c955e854865df528b]
+
+* 请确保已获取{ks_product_both}平台登录用户帐号和密码，且已获取平台管理权限。
+
+* 请确保已创建 RadonDB Redis Cluster 应用。
+
+
+
+=== 操作步骤link:[id=739c1ccbf8e0464b88722b5f78b2a456]
+
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-oper-openDetailsPage.adoc[]
+
+
+. 点击页面右侧的**参数**页签，点击**编辑**即可修改应用配置参数。

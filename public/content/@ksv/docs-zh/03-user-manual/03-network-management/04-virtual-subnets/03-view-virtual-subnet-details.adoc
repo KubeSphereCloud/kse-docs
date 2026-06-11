@@ -1,0 +1,86 @@
+---
+title: "查看虚拟子网详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟子网, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看虚拟子网详情。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 9671e13a010946639c43eb4b6051bde7
+:ks_xref_id: c3312c94a27341cd8fb935a2874297c3
+:ks_comp: ../../../../components/
+:ks_title: 查看虚拟子网详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看虚拟子网详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟子网, 详情, 查看
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看虚拟子网详情。
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=74c54a4cd70b47b18b012eeee84cb806]
+
+include::../../../../_custom/networks/virtual-subnet-steps.adoc[]
+
+. 在虚拟子网列表页面，点击目标虚拟子网名称，进入虚拟子网详情页面。
+
+. 在虚拟子网详情页面的左侧区域，查看虚拟子网的基本信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|ID
+|虚拟子网在系统中的通用唯一标识符，由系统自动分配。
+
+|状态
+|虚拟子网当前的状态。
+
+|VPC
+|虚拟子网所在的 VPC 网络。
+
+|网段
+|虚拟子网的网段范围，它是虚拟子网所在的 VPC 网段的子集。
+
+|可用IP
+|虚拟子网中当前可用的 IP 数。
+
+|已用IP
+|虚拟子网中已使用的 IP 数。
+
+|创建时间
+|虚拟子网的创建时间。
+
+|创建者
+|虚拟子网的创建者。
+|===
+--
+
+. 在页面右侧的**关联资源**页签，查看已关联到当前虚拟子网的资源列表。具体参数描述请参见下表。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|已关联资源的名称。
+
+|ID
+|已关联资源在系统中的通用唯一标识符。
+
+|状态
+|已关联资源的状态。
+
+|IP 地址
+|已关联资源的 IP 地址。
+|===
+--

@@ -1,0 +1,116 @@
+---
+title: 查询第三方登录账户（DescribeLoginAccounts）
+weight: 8
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| accounts
+| Array
+| false
+| 账户列表
+
+| console
+| String
+| false
+| 
+
+| limit
+| Integer
+| false
+| 查询条数
+
+| login_accounts
+| Array
+| false
+| 登录账户列表
+
+| login_server
+| String
+| false
+| 登录服务器
+
+| offset
+| Integer
+| false
+| 查询偏移量
+
+| search_word
+| String
+| false
+| 查询关键字
+
+| status
+| Array
+| false
+| 账户状态列表
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_account_set
+| Array
+| false
+| 查询账户结果
+
+| total_count
+| Integer
+| false
+| 查询总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "accounts": [
+    "account_1",
+    "account_2"
+  ],
+  "console": [],
+  "limit": 20,
+  "login_accounts": [],
+  "login_server": "",
+  "offset": 10,
+  "search_word": "",
+  "status": [
+    "active"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeLoginAccountsResponse",
+  "login_account_set": [
+    {
+      "account_id": "o5RMi1XT2eEs3d0X9B_iKDsShvc4",
+      "console_id": "testingcloud",
+      "create_time": "2022-01-06T08:06:27Z",
+      "login_account_id": "3rda-vcW7qhq1",
+      "login_server_id": "3rds-t2OOOOx9",
+      "status": "active",
+      "status_time": "2022-01-06T08:06:27Z"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 0
+}
+----

@@ -1,0 +1,47 @@
+---
+title: "Delete an App Template"
+keywords: "Kubernetes, {ks_product}, workspace, app template, delete app template"
+description: "Introduces how to delete an app template."
+weight: 11
+---
+
+
+:ks_permission: **App/App Version/App Instance Deletion**
+:ks_navigation: **App Management > App Templates**
+
+
+This section describes how to delete an app template.
+
+// Warning
+include::../../../../../../_ks_components/admonitions/warning.adoc[]
+
+Once an app template is deleted, it cannot be recovered. Please perform this operation with caution.
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+// * All app versions in the app template have been deleted. For more information, see link:../08-delete-an-app-version/[Delete an App Version].
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the app template you want to delete, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Delete** from the drop-down list.
+
+. In the **Delete App Template** dialog box, enter the name of the app template, and then click **OK**.

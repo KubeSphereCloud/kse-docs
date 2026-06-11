@@ -1,0 +1,154 @@
+---
+title: "启用自定义伸缩"
+keywords: "Kubernetes, {ks_product}, 项目管理, 自定义伸缩"
+description: "介绍如何启用自定义伸缩。"
+weight: 01
+---
+
+// :ks_include_id: 26478884b32f4b189e0d35132b734f9e
+:ks_xref_id: 6f1700c9c5fd4ecbaeb84f556b8bfd2b
+:ks_comp: ../../../components/
+:ks_title: 启用自定义伸缩
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 自定义伸缩
+:ks_description: 介绍如何启用自定义伸缩。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **工作负载管理**
+:ks_navigation: **自定义伸缩**
+
+
+本节介绍如何启用自定义伸缩。
+
+
+== 前提条件link:[id=993ab7e8741644e287a801ba997157ed]
+
+
+:relfileprefix: ../../../
+* 您需要加入一个项目并在项目中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:07-project-management/10-project-settings/04-project-members/_index.adoc[项目成员]和xref:07-project-management/10-project-settings/03-project-roles/02-view-a-project-role-list.adoc[项目角色]。
+
+// include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+* 您需要提前创建部署或有状态副本集。有关更多信息，请参阅link:../../../18-spring-cloud/01-microservices/01-create-a-deployment-and-register-the-deployment-as-a-microservice/[创建部署并注册为微服务]和link:../../../07-project-management/03-application-workloads/03-workloads/01-create-a-workload/[创建有状态副本集]。
+
+== 操作步骤link:[id=16484ea0d8f649608f84416995476ff9]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
+. 在**自定义伸缩**页面，点击**创建**。
+
+. 在弹出的**创建自定义伸缩**对话框，设置别名，输入描述信息，点击**添加工作负载**选择部署或有状态副本集作为伸缩对象，点击**下一步**。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+此处**名称**不支持自定义。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在**伸缩设置**页签，设置以下参数。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|最小副本数
+|设置允许的最小容器组副本数量。默认值为 0。
+
+|最大副本数
+|设置允许的最大容器组副本数量。默认值为 1。
+
+|轮询间隔
+|检查每个触发器的时间间隔。默认情况下，将每 30 秒检查每个 ScaledObject 上的每个触发源。
+
+|冷却时间
+|最后一个触发器报告活动后，在将资源缩放回 0 之前等待的时间。默认为 5 分钟。
+
+|回退
+|如果伸缩器处于错误状态，它定义了要回退的副本数。
+
+* 失败阈值：每个伸缩器连续未能从其源获取指标的次数限制。
+* 回退副本数：伸缩器失败次数超过阈值后，资源回退的副本数量。
+|===
+--
+
+. 点击**添加触发器**，根据需要的指标添加触发器。
++
+--
+[%header,cols="1a,4a"]
+|===
+|触发器类型 |描述
+
+|Cron
+|根据 cron 计划进行弹性伸缩。
+
+* 时区：IANA 时区数据库中可接受的值之一。
+
+* 期望副本数：在 cron 计划的开始和结束之间必须将资源扩展到的副本数。
+
+* 开始：指示 cron 计划开始的 Cron 表达式。
+
+* 结束： 指示 cron 计划结束的 Cron 表达式。
+
+|Prometheus
+|基于 Prometheus 进行弹性伸缩。
+
+* 地址：Promethus 的服务地址。
+
+* 指标名称：如果使用多个触发器，则所有指标名称唯一。
+
+* 阈值：设置触发器开始缩放的值。
+
+* 表达式：设置查询运行的表达式。
+
+* 触发器认证：
+
+
+|自定义
+|根据 cron 计划进行弹性伸缩。
+
+* 类型：
+
+* 指标类型：
+
+* 触发器参数：
+
+* 触发器认证：
+|===
+--
+
+. （可选）点击**高级设置**，您可以设置以下参数。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|恢复到原始副本数
+|指定目标资源在删除后是否应缩减到原始副本数。默认是将副本数保持在与删除 ScaledObject 时相同的数量。
+
+|伸缩行为
+|配置目标资源在扩容和缩容两个方向的伸缩行为。
+
+* 策略偏好：伸缩器在不同的情况下会根据您的偏好来采取对应的策略。您可以禁用策略偏好。
+
+* 稳定窗口时间：当用于扩缩的指标不断波动时，稳定窗口用于限制副本计数的波动。
+
+* 策略类型：支持**百分比**和**容器组**。
+
+** 扩容值：
+
+** 激活时间：
+|===
+--
+
+. 点击**创建**以创建自定义伸缩任务。在**自定义伸缩**页面，您可以查看已创建的自定义伸缩任务。
+

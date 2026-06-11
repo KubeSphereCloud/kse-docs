@@ -1,0 +1,23 @@
+---
+title: "应用配置包"
+weight: 30
+---
+
+应用服务商提交一个应用需要包含以下几个文件：
+
+* *config.json*
++
+该文件定义了用户在云平台 Console 控制台部署应用时需设置的参数等信息，包括各种角色的节点配置、参数配置等。控制台支持语言国际化，默认情况下，所有语言都会按配置项中的 label 和 description 展示表单。另外，`cluster.json.mustache` 文件中的 custom service、监控项等，会使用 key 作为国际化展示。如果您想要适应不同的语言，需要在提交的应用中包含一个 locale 文件夹，并添加对应语言的翻译文件，如：
+
+** locale/en.json：英文翻译文件
+** locale/zh-cn.json：中文翻译文件
+
+* *cluster.json.mustache*
++
+该文件包含创建此应用实例时的基础架构、应用实例生命周期管理和自定义监控告警等信息，这是一个改进版的 mustache 文件。
+
+* *replace_policy.json*
++
+该文件定义了类型替换策略。
+
+

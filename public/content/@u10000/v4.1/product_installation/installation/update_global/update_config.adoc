@@ -1,0 +1,26 @@
+---
+title: 更新配置
+weight: 2
+---
+
+
+待 `iaas.ini` 配置文件正确填写完成后，执行如下步骤，下发配置至各节点服务器。
+
+. 登录 Global Zone 的 FirstBox。
+
+. 进入脚本所在目录。
++
+[source,shell]
+----
+# cd /root/qs-installer/
+
+----
+
+. 执行以下命令行，更新 Global 及 Portal 节点的配置。
++
+[source,shell]
+----
+# ./qs_installer deploy --global_gateway
+# ./qs_installer deploy --qingstor_zero_web --tags=zero-web
+
+----

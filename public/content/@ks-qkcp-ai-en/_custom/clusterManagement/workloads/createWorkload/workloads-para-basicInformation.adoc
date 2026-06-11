@@ -1,0 +1,26 @@
+// :ks_include_id: aaa01b3ba5d6460b9ee0d50de5a5def9
+* Basic Information
++
+--
+Set the basic information for the workload.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the workload. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and has a maximum length of 253 characters.
+
+|Alias
+|The alias of the workload. Different workloads can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), and has a maximum length of 63 characters.
+
+ifndef::project[]
+|Project
+|The project where the resource will be created.
+endif::[]
+
+|Description
+|The description of the workload. The description can contain any characters and has a maximum length of 256 characters.
+|===
+--

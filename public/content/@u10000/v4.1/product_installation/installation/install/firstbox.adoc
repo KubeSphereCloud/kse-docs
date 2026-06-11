@@ -1,0 +1,58 @@
+---
+title: 创建 FirstBox
+weight: 1
+---
+
+部署脚本 `qs_installer` 运行前会校验配置文件中填写的 IP 地址 的 22 端口是否可连接，若配置文件没有根据前文正确配置，则创建 FirstBox 的过程可能会失败。因此，在执行如下步骤创建 FirstBox 之前，需再次确认配置文件填写无误。
+
+include::../../../../../_components/note.adoc[]
+
+FirstBox 成功创建后，配置文件会被移动至 FirstBox 的 `/qingstor/etc` 目录下。后续如需更改配置，需登录至 FirstBox 中修改相应文件。
+
+include::../../../../../_components/table_footer.adoc[]
+
+创建 FirstBox 的详细操作步骤如下：
+
+. 登录上传有安装包的节点服务器，该节点服务器作为待创建 FirstBox 的宿主机。
+
+. 进入脚本所在目录
+
++
+[source,shell]
+----
+# cd /root/qs-installer/bin/
+----
+
+
+. 执行如下命令行，创建 FirstBox。
++
+[source,shell]
+----
+# ./init_firstbox_container.sh <node_password> <zone_id>
+----
++ 
+
+* 命令行中的 `<zone_id>` 需根据link:../../config/base/[配置文件]的 `zone_id` 进行填写。
+* 命令行中的 `<node_password>` 需根据link:../../prepare/prepare_hardware/#_操作系统[安装操作系统]时配置的 `root` 用户密码进行填写。
+
+. 若上面命令执行完成，且没有报错，说明 FirstBox 创建成功。执行如下命令行，登录 FirstBox。
++
+[source,shell]
+----
+# ssh -p 6023 root@<firstbox ip>
+----
+
++
+
+* 命令行中的 `<firstbox ip>` 为link:../../config/base/[ ip.ini 文件]中 role 字段下的第一个节点的 IP 地址。
+* 登录密码为 `zhu88jie`。
+
+
+. 登录至 FirstBox 中查看相应配置文件。
++
+[source,shell]
+----
+# cd /qingstor/etc/
+# ls
+base.ini  ip.ini  iptables.ini
+----

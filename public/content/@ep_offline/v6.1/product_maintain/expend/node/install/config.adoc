@@ -1,0 +1,43 @@
+---
+title: 配置节点
+weight: 2
+---
+
+
+Zone 内扩容节点时，无需配置 `variables.<zone_id>.yaml` 文件。
+
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是原环境的 FirstBox 节点 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，从模版创建配置文件，并修改文件名为 `scale_settings.<zone_id>.yaml`。
++
+命令行中的 `<zone_id>` 为待扩容 Zone 的 ID，需根据当前环境信息进行填写。
++
+[source,shell]
+----
+cp -f /pitrix/config/templates/settings.template.yaml /pitrix/config/scale_settings.<zone_id>.yaml
+----
+
+
+. 执行以下命令，修改配置文件 `scale_settings.<zone_id>.yaml` 内容。
++
+[source,shell]
+----
+vi /pitrix/config/scale_settings.<zone_id>.yaml
+----
++
+include::../../../../../../_components/note.adoc[]
+
+* `roles` 字段，支持 KS 节点及其子角色 `seed、snapshot、vbr`，不支持其它子角色及 `vms`。
+* 支持扩容 Hyper 节点及 VG 节点。
+* 若扩容 VG 节点，则需要配置 `eip` 字段。
+* 其余配置内容，均参考《企业云 v6.1 安装部署指南》相关章节内容。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+

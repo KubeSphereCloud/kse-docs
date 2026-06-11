@@ -1,0 +1,402 @@
+---
+title: "Environment Requirements"
+keywords: "Kubernetes, KubeSphere, Components, Support Matrix"
+description: "Introduce the environment requirements of KubeSphere."
+weight: 01
+---
+
+
+This section introduces the environment requirements for {ks_product-en}.
+
+== System Requirements
+
+[%header,cols="3a,4a,4a"]
+|===
+|OS |Minimum Requirements (per node)| Requirements for Production Environment (per node)
+
+|Ubuntu 16.04, 18.04, 20.04, 22.04
+|CPU: 2 cores, Memory: 4 GB, Disk: 40 GB
+|CPU: 8 cores, Memory: 16 GB, Disk: 200 GB
+
+|Debian 9, Debian 10
+|CPU: 2 cores, Memory: 4 GB, Disk: 40 GB
+|CPU: 8 cores, Memory: 16 GB, Disk: 200 GB
+
+|CentOS 7.x, CentOS Stream 
+|CPU: 2 cores, Memory: 4 GB, Disk: 40 GB
+|CPU: 8 cores, Memory: 16 GB, Disk: 200 GB
+
+|Red Hat Enterprise Linux 7.x, 8.x
+|CPU: 2 cores, Memory: 4 GB, Disk: 40 GB
+|CPU: 8 cores, Memory: 16 GB, Disk: 200 GB
+
+|SUSE Linux Enterprise Server 15/openSUSE Leap 15.2
+|CPU: 2 cores, Memory: 4 GB, Disk: 40 GB
+|CPU: 8 cores, Memory: 16 GB, Disk: 200 GB
+
+|Kylin v10
+|CPU: 2 cores, Memory: 4 GB, Disk: 40 GB
+|CPU: 8 cores, Memory: 16 GB, Disk: 200 GB
+|===
+
+== Storage Requirements
+
+* A default storage class must be available in the cluster.
++
+--
+A storage class defines a type of storage volume available for pods. If you did not set up an external persistent storage system when installing {ks_product-en}, {ks_product-en} will use the local storage system of cluster nodes as the persistent storage system and automatically create a corresponding **local** storage class. If you use an external persistent storage system, you need to install a storage plugin for the {ks_product-en} cluster and create storage classes to define the types of storage volumes available. For information about how to install a storage plugin, contact your storage system provider or refer to link:../04-configure-external-persistent-storage[Configure External Persistent Storage].
+--
+
+* Each extension of {ks_product-en} only requires the storage system to provide the capability to create and delete Persistent Volume Claims (PVCs), and does not rely on advanced capabilities such as expansion, cloning, or snapshots.
+
+
+== Dependency Requirements
+
+[%header,cols="1a,4a,4a"]
+|===
+|Dependency |Kubernetes Version ≥ 1.18|Kubernetes Version < 1.18
+
+|socat
+|Required
+|Optional, but recommended
+
+|conntrack
+|Required
+|Optional, but recommended
+
+|ebtables
+|Optional, but recommended
+|Optional, but recommended
+
+|ipset
+|Optional, but recommended
+|Optional, but recommended
+|===
+
+== Container Runtime Requirements
+
+[%header,cols="4a,4a"]
+|===
+|Supported Container Runtimes |Version
+
+|Docker
+|20.10.0+
+
+|containerd
+|Latest version
+
+|CRI-O (Experimental, not fully tested)
+|Latest version
+
+|iSula (Experimental, not fully tested)
+|Latest version
+|===
+
+== Network Requirements
+
+* Ensure that the DNS addresses in **/etc/resolv.conf** are accessible; otherwise, it may cause DNS issues in the cluster.
+
+* If your network configuration uses firewall rules or security groups, make sure that the infrastructure components can communicate with each other through specific ports. It is recommended to disable the firewall.
+
+* Supported CNI plugins: Calico and Flannel. Other plugins such as Cilium and Kube-OVN are also compatible, but note that they have not been fully tested.
+
+== Port Requirements
+
+Certain ports are used for communication between services. If you have firewall rules in your network configuration, ensure that the infrastructure components can communicate with each other through specific ports. These ports serve as communication endpoints for certain processes or services.
+
+[%header,cols="2a,2a,2a,2a,2a,3a"]
+|===
+|Service
+|Protocol
+|Action
+|Start Port
+|End Port
+|Remarks
+
+|ssh
+|TCP
+|allow
+|22
+|N/A
+|N/A
+
+|etcd
+|TCP
+|allow
+|2379
+|2380
+|N/A
+
+|apiserver
+|TCP
+|allow
+|6443
+|N/A
+|N/A
+
+|calico
+|TCP
+|allow
+|9099
+|9100
+|N/A
+
+|bgp
+|TCP
+|allow
+|179
+|N/A
+|N/A
+
+|nodeport
+|TCP
+|allow
+|30000
+|32767
+|N/A
+
+|master
+|TCP
+|allow
+|10250
+|10258
+|N/A
+
+|dns
+|TCP
+|allow
+|53
+|N/A
+|N/A
+
+|dns
+|UDP
+|allow
+|53
+|N/A
+|N/A
+
+|local-registry
+|TCP
+|allow
+|5000
+|N/A
+|Required for offline environments
+
+|local-apt
+|TCP
+|allow
+|5080
+|N/A
+|Required for offline environments
+
+|rpcbind
+|TCP
+|allow
+|111
+|N/A
+|Required when using NFS
+
+|ipip
+|IPENCAP / IPIP
+|allow
+|N/A
+|N/A
+|Calico requires IPIP protocol
+
+|metrics-server
+|TCP
+|allow
+|8443
+|N/A
+|N/A
+|===
+
+== Extension Support Matrix
+
+{ks_product-en} supports Kubernetes v1.23~1.32 by default. This section details the Kubernetes versions supported by each extension of {ks_product-en}. To avoid compatibility issues during use, please use the supported Kubernetes versions.
+
+[%header,cols="2a,2a,3a,2a"]
+|===
+|Extension |Extension Version |Supported Kubernetes Versions |Supported Architectures
+
+|ks-core
+|4.1.x
+|1.23~1.32
+|amd64、arm64
+
+|DevOps
+|1.2.x
+|1.23~1.32
+|amd64、arm64
+
+|Image Builder
+|0.1.0
+|1.23~1.32
+|amd64、arm64
+
+|App Store Management
+|2.1.x
+|1.23~1.32
+|amd64、arm64
+
+|Service Mesh
+|1.0.x
+|1.22~1.32
+|amd64、arm64
+
+|Application Management for Cluster Federation
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|WizTelemetry Observability Platform
+|2.0.x
+|1.23~1.32
+|amd64、arm64
+
+|WizTelemetry Data Pipeline
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|WizTelemetry Logging
+|1.2.x
+|1.23~1.32
+|amd64、arm64
+
+| WizTelemetry Events
+|1.2.x
+|1.23~1.32
+|amd64、arm64
+
+| WizTelemetry Auditing
+|1.2.x
+|1.23~1.32
+|amd64、arm64
+
+|WizTelemetry Monitoring
+|1.2.x
+|1.23~1.32
+|amd64、arm64
+
+| WizTelemetry Alerting
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|WizTelemetry Global Monitoring
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|WizTelemetry Events Alerting
+|1.2.x
+|1.23~1.32
+|amd64、arm64
+
+| WizTelemetry Notification
+|2.6.x
+|1.23~1.32
+|amd64、arm64
+
+| WizTelemetry Network Observability
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+| WizTelemetry Tracing
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|OpenSearch
+|2.11.1
+|1.23~1.32
+|amd64、arm64
+
+|Grafana for WizTelemetry
+|10.4.x
+|1.23~1.32
+|amd64、arm64
+
+|Grafana Loki for WizTelemetry
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|Grafana Alloy for WizTelemetry
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|Grafana Tempo for WizTelemetry
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|Network
+|1.2.x
+|1.23~1.32
+|amd64、arm64
+
+|Gateway
+|1.1.x
+|1.22~1.32
+|amd64、arm64
+
+|Ingress Utils
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|Storage
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|RadonDB DMP
+|2.2.x
+|1.23~1.32
+|amd64、arm64
+
+|EdgeWize
+|3.1.x
+|1.23-1.23
+|amd64、arm64
+
+|Spring Cloud
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|Multi-Cluster Agent Connection
+|1.1.x
+|1.23~1.32
+|amd64、arm64
+
+|Gatekeeper
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|OAuth2-Proxy
+|7.6.x
+|1.23~1.32
+|amd64、arm64
+
+|NVIDIA GPU Operator
+|23.9.x
+|1.23~1.32
+|amd64、arm64
+
+|Cert Manager
+|1.0.x
+|1.23~1.32
+|amd64、arm64
+
+|Metrics Server
+|0.7.x
+|1.23~1.32
+|amd64、arm64
+|===

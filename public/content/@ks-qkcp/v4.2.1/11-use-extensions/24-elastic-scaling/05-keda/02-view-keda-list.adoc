@@ -1,0 +1,76 @@
+---
+title: "查看 KEDA 列表"
+weight: 02
+---
+
+:ks_permission: **事件驱动伸缩查看**
+:ks_navigation: **弹性伸缩 > 事件驱动伸缩**
+
+
+本节介绍如何查看事件驱动伸缩的列表信息。
+
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* KubeSphere 平台需要安装并启用 **KEDA for KubeSphere** 扩展组件。
+
+
+== 操作步骤
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+ 
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+====
+* 事件驱动伸缩列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|策略名称
+|事件驱动伸缩（KEDA）的名称。
+
+|状态
+|KEDA 的当前状态。若状态异常，鼠标悬停于图标上可查看错误详情。
+
+|伸缩器
+|伸缩器的类型。
+
+|伸缩对象
+|KEDA 所管理的工作负载，通常是部署或有状态副本集。
+
+|最小副本数
+|允许的容器组副本的最小数量。
+
+|最大副本数
+|允许的容器组副本的最大数量。
+
+|创建时间
+|KEDA 资源的创建时间。
+|===
+--
+
+* 在列表上方点击搜索框并设置搜索条件，可按名称和状态搜索 KEDA。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+
+====
+
+

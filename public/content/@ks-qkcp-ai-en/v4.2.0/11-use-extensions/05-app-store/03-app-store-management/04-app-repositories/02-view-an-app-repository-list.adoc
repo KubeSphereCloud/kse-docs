@@ -1,0 +1,43 @@
+---
+title: "View App Repository List"
+keywords: "Kubernetes, {ks_product}, workspace, app repository, view app repository list"
+description: "Describes how to view the app repository list."
+weight: 02
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **App Repositories**
+
+This section describes how to view the app repository list in "App Store Management".
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+include::../../../../../_custom/workspaceManagement/appRepositories/appRepositories-para-viewRepositoryList.adoc[]
+
+* Click the search box above the list and enter a keyword to search for app repositories by name.
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

@@ -1,0 +1,70 @@
+// :ks_include_id: 267b7ca8422b4498b61de1061123bca4
+
+Sample code:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+hosts:
+- {name: node1, address: 172.31.50.23, internalAddress: 172.31.50.23, user: yop, password: "zhu1241jie"}
+- {name: node2, address: 172.31.50.24, internalAddress: 172.31.50.24, user: yop, password: "zhu1241jie"}
+- {name: node3, address: 172.31.50.25, internalAddress: 172.31.50.25, user: yop, password: "zhu1241jie"}
+
+roleGroups:
+  etcd:
+  - node1
+  - node2
+  - node3
+  control-plane:
+  - node1
+  - node2
+  - node3
+  worker:
+  - node1
+  - node2
+  - node3
+  registry:
+  - node1
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+The following table describes the parameters.
+
+[cols=".^1a,.^4a"]
+|===
+|Parameter |Description
+
+|hosts
+|A list of server nodes.
+
+|name
+|The name of the node.
+
+|address
+|The node IP address for SSH login.
+
+|internalAddress
+|The internal IP address of the node.
+
+|user
+|The username for SSH login. You must specify as user **root** or a user that has permissions to run **sudo** commands. If you leave this parameter empty, user **root** is specified by default. If you leave this parameter empty, user **root** is specified by default.
+
+|password
+|The password for SSH login.
+
+|roleGroups
+|A list of node roles.
+
+|etcd
+|The node on which etcd is installed. In most cases, etcd is installed on a control node.
+
+|control-plane
+|The control node. You can configure multiple control nodes in the cluster.
+
+|worker
+|The worker node. You can create VMs on worker nodes. In multi-node mode, a cluster must have at least three worker nodes. A control node can run as a worker node at the same time.
+
+|registry
+|Specifies the node on which the registry is deployed. In most cases, the value is the first node in the cluster.
+|===

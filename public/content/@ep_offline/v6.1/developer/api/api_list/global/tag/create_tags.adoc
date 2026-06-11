@@ -1,0 +1,94 @@
+---
+title: 创建标签（CreateTags）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| color
+| String
+| false
+| 标签颜色
+
+| description
+| String
+| false
+| 标签描述
+
+| project_id
+| String
+| false
+| 项目id
+
+| scope
+| String
+| false
+| 范围
+
+| system
+| Boolean
+| false
+| 是否是系统标签
+
+| tag_key
+| String
+| false
+| 标签key
+
+| tag_name
+| String
+| true
+| 标签名称
+
+| zone
+| String
+| false
+| 区域ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| tag_id
+| String
+| false
+| 标签id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateTag",
+  "color": "default",
+  "description": "",
+  "scope": "zone",
+  "system": false,
+  "tag_key": null,
+  "tag_name": "lzl"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateTagResponse",
+  "ret_code": 0,
+  "tag_id": "tag-zyre1eoh"
+}
+----

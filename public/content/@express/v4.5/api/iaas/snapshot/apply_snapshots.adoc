@@ -1,0 +1,71 @@
+---
+title: "ApplySnapshots"
+description: 
+draft: false
+weight: 6
+---
+
+回滚到指定备份点。
+
+include::../../../../../_components/note.adoc[]
+请注意，为了保证回滚的安全性，当回滚的资源为运行的{instance_product_name_cn}，或者为绑定在运行{instance_product_name_cn}上的硬盘时，该操作会导致{instance_product_name_cn}重启。
+include::../../../../../_components/table_footer.adoc[]
+
+*Request Parameters*
+
+[option="header",cols="1,1,2,1"]
+|===
+| Parameter name | Type | Description | Required
+
+| snapshots.n
+| String
+| 待回滚的备份 ID 列表
+| Yes
+
+| zone
+| String
+| 区域 ID，注意要小写
+| Yes
+|===
+
+link:../../../introduction/parameters/[公共参数]
+
+*Response Elements*
+
+[option="header",cols="1,1,2"]
+|===
+| Name | Type | Description
+
+| action
+| String
+| 响应动作
+
+| job_id
+| String
+| Job ID
+
+| ret_code
+| Integer
+| 执行成功与否，0 表示成功，其他值则为错误代码
+|===
+
+*Example*
+
+Example Request
+
+----
+https://api.domain.com/iaas/?action=ApplySnapshots
+&snapshots.1=ss-wtthl1qq
+&zone=gd2
+&COMMON_PARAMS
+----
+
+Example Response
+
+----
+{
+  "action":"ApplySnapshotsResponse",
+  "job_id":"j-mra6js1z",
+  "ret_code":0
+}
+----

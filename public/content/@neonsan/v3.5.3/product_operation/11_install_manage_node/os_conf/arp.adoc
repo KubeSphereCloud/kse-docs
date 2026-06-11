@@ -1,0 +1,35 @@
+---
+title: "配置 ARP"
+weight: 5
+---
+
+. 登录新的管理节点，修改 ``/etc/sysctl.conf`` 配置文件。
++
+[source,shell]
+----
+vi /etc/sysctl.conf
+----
++
+示例配置内容如下。
++
+[source,shell]
+----
+net.ipv4.conf.bondx.arp_ignore = 1 
+net.ipv4.conf.eth2.arp_ignore = 1
+net.ipv4.conf.eth3.arp_ignore = 1
+
+net.ipv4.conf.bondx.arp_filter = 1 
+net.ipv4.conf.eth2.arp_filter = 1
+net.ipv4.conf.eth3.arp_filter = 1
+----
++
+include::../../../../../_components/note.adoc[]
+示例配置中主机网口包括 eth0，eth1，eth2，eth3。其中，eth0 和 eth1 网口做 bondx 为集群的业务网络，eth2 和 eth3 网口为集群的存储网络。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令使配置生效。
++
+[source,shell]
+----
+sysctl -p
+----

@@ -1,0 +1,84 @@
+---
+title: 查询应用最新上架版本（GetLatestAppVersion）
+weight: 15
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| true
+| 应用ID
+
+| edition_Id
+| String
+| false
+| 系列
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| latest_app_version_set
+| Array
+| false
+| 版本信息
+
+| latest_app_version_set[].app_id
+| String
+| false
+| 应用ID
+
+| latest_app_version_set[].create_time
+| String
+| false
+| 创建时间
+
+| latest_app_version_set[].edition_id
+| String
+| false
+| 系列ID
+
+| latest_app_version_set[].version_id
+| String
+| false
+| 版本ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app_id": "app-xxxxxx"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetLatestAppVersionResponse",
+  "latest_app_version_set": [
+    {
+      "app_id": "app-00r26u27",
+      "create_time": "2023-07-18T09:28:29Z",
+      "edition_id": "default",
+      "version_id": "appv-5wao3gvu"
+    }
+  ]
+}
+----

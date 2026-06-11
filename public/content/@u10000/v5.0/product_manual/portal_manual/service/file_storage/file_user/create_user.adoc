@@ -1,0 +1,30 @@
+---
+title: 新增用户
+description: 
+weight: 2
+---
+
+
+
+. 成功登录 Portal。
+
+. 点击**存储服务 > 文件存储 > 文件用户**，默认进入用户列表页面。
++
+image::/images/u10000/stor_file_user_main.png[stor_file_user_main,100%]
+
+. 点击**新增用户**。
+
+. 弹出**新增用户**对话框，用户根据页面提示信息，输入相应参数即可。
++
+image::/images/u10000/stor_file_user_create.png[stor_file_user_create,40%]
++
+include::../../../../../../../_components/note.adoc[]
+
+* 系统将默认在用户名前添加 `nas-` 前缀，客户端访问文件系统时，使用的用户名，需携带 `nas-` 前缀。
+* 新增用户自动加入默认用户组 `DEFAULT_USER_GROUP_<user_id>` 中。`<user_id>` 是创建该用户组的 User ID。
+* {product_name} 不保存密码，若用户忘记密码，可直接进行link:../reset_pw[密码重置]。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 用户可在用户列表页面，查看新增用户信息。
+

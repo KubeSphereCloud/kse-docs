@@ -1,0 +1,103 @@
+---
+title: "创建虚拟机模板"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 模板, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建虚拟机模板。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: fd1acbe7ec45447499ef47b44ebc2146
+:ks_xref_id: 0e2bc7adfb7744fe9fa520ec39d53a8f
+:ks_comp: ../../../../components/
+:ks_title: 创建虚拟机模板
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建虚拟机模板。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 模板, 创建
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建虚拟机模板。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=83f379831e1a4357a9c87b46b176a3c6]
+
+include::../../../../_custom/vms/vm-template-manage-prerequisites.adoc[]
+
+{ks_product_right}支持创建新的模板或复制已有模板。您可以根据业务需求，执行以下操作创建模板：
+
+* link:#788ee17e33f340c7807cba6d2c5bb52c[创建新模板]
+* link:#175febe1b7fa4cc7a9604649fa92ad67[复制已有模板]
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 创建新模板link:[id=788ee17e33f340c7807cba6d2c5bb52c]
+
+include::../../../../_custom/vms/vm-template-steps.adoc[]
+
+. 在虚拟机模板列表页面，点击右上角的**创建**，然后在下拉列表中选择**创建模板**。
++
+include::../../../../_custom/vms/vm-template-create-basic-parameters.adoc[]
++
+. 在**配置信息**页签，配置模板相关参数。其中包括以下信息：
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|镜像
+|模板定义的虚拟机镜像。
+
+|CPU
+|模板定义的虚拟机 CPU 核心数。
+
+|内存
+|模板定义的虚拟机内存大小。
+
+|系统盘
+|模板定义的虚拟机系统盘大小。
+
+|数据盘
+|模板定义的虚拟机数据盘配置。点击**添加**可配置数据盘盘数和大小。
+
+|登录设置
+|设置虚拟机的登录方式。{ks_product_right}支持用户名密码和 SSH 密钥登录。
+
+|网络
+|设置虚拟机使用的网络和为虚拟机分配 IP 地址的方式。
+
+|是否共享
+|虚拟机模板的共享属性。开启共享后，其他项目的用户可复制该模板。
+|===
+--
+
+. 点击**确定**。模板创建后将显示在虚拟机模板列表中。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 复制已有模板link:[id=175febe1b7fa4cc7a9604649fa92ad67]
+
+include::../../../../_custom/vms/vm-template-steps.adoc[]
+
+. 在虚拟机模板列表页面，点击右上角的**创建**，然后在下拉列表中选择**复制模板**。
++
+include::../../../../_custom/vms/vm-template-create-basic-parameters.adoc[]
++
+. 在**选择模板**区域，选择待复制的虚拟机模板，然后点击**确定**。模板创建后将显示在虚拟机模板列表中。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+复制模板前，请确认已为目标虚拟机模板开启共享属性。只有共享模板支持复制。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

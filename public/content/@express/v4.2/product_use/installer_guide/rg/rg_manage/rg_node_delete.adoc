@@ -1,0 +1,22 @@
+---
+title: "移除节点"
+weight: 4
+---
+
+移除节点操作**无法回退**，须确保待移除的节点**无任何角色**，且待移除的节点上**无可用卷**分布其上，若有，则需先将卷进行删除后，再进行节点移除。
+
+. link:../../../login[登录 {product_installer_name}]。
+
+. 在**资源池管理**页面，点击待移除节点的资源池右侧的更多操作，选择**移除节点**。
++
+image::/images/express/installer/rg_manage_7.png[]
+
+. 在弹出的**移除节点**窗口中，选择可用的节点，点击**确定**即可。
++
+
+include::../../../../../../_components/note.adoc[]
+支持选择单个或多个节点。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/installer/rg_manage_8.png[,60%]

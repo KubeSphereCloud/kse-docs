@@ -1,0 +1,93 @@
+---
+title: "Community Edition"
+weight: 01
+---
+
+link:https://www.kubesphere.io/zh/[KubeSphere Community Edition] supports deployment on any infrastructure, offering both online and offline installation, one-click cluster upgrades and scaling, and provides features such as multi-tenancy, multi-cluster management, cloud-native observability, application lifecycle management, and DevOps.
+
+By using KubeSphere Community Edition, you will enjoy continuously iterated enterprise-grade features for free, making it easy to build the cornerstone of cloud-native.
+
+== Feature List
+
+// Consistent with the feature list page on the official website: https://kubesphere.io/zh/features/
+
+[%header,cols="1a,4a"]
+|===
+|Feature Module |Description
+
+|Cluster Management |Centralized visual management and operation of multiple Kubernetes clusters across clouds and infrastructures
+|Multi-Tenant Management |Logical resource isolation, network isolation, and fine-grained access control across clusters and projects
+|Application Management |Unified application lifecycle management, providing a unified abstraction layer for applications like Helm and Operator
+|K8s Resource Management |Provides a web console to interface with native Kubernetes APIs for quick creation and management of Kubernetes resources
+|Extension Management |Adopts a microkernel + extension architecture, allowing on-demand customization and platform capability extension
+|WizTelemetry Observability |Comprehensive insight into application and infrastructure performance and health status
+|DevOps |Provides an end-to-end workflow, integrating mainstream CI/CD tools
+|KubeSphere Gateway |Unified ingress management based on traffic, layer-7 load balancing, and multiple routing strategies
+|GateKeeper |An admission controller with flexible security policy configuration
+|Metrics Server |Scalable, efficient container resource metrics source, serving the Kubernetes built-in autoscaling pipeline
+|NVIDIA GPU Operator |Create, configure, and manage GPUs on Kubernetes
+|DeepSeek |Runs the DeepSeek-R1 model based on ollama, providing external API services
+|Grafana |An open and composable observability and data visualization platform
+|Loki |A scalable, highly available, multi-tenant log aggregation system
+|Higress |An API gateway based on Istio and Envoy
+|OB-Operator |Manages OceanBase-related resources in Kubernetes clusters
+|OceanBase Dashboard |An interactive management application for OceanBase
+|Fluid |An open-source, Kubernetes-native distributed dataset orchestrator and accelerator
+|===
+
+== Resource Quotas
+
+KubeSphere Community Edition supports a maximum cluster size of 128 vCPUs and only supports 1 cluster.
+
+// Quotas are mainly divided into three dimensions: global quotas, cluster quotas, and workspace quotas. Global quotas include platform quotas and extension quotas.
+
+// === Platform Quotas
+
+// [%header,cols="1a,1a"]
+// |===
+// |Quota |Quantity
+
+// |Users |3
+// |Workspaces |3 (including the system workspace)
+// |Clusters |1
+// |Cluster Scale |128 vCPU
+// |Alerting Rule Groups |30
+// |===
+
+// === Extension Quotas
+
+// [%header,cols="1a,1a,1a"]
+// |===
+// |Extension |Quota Item |Quantity
+
+// |WizTelemetry Notification |Notification Rules |2
+
+// .3+|DevOps |Projects |3 (per cluster)
+// |Pipelines |10 (per DevOps project)
+// |Continuous Deployments |3 (per DevOps project)
+
+// |Gateway |Project Gateways |30 (per cluster)
+// |===
+
+// === Cluster Quotas
+
+// You can view the resource quotas for each cluster on the cluster page, as follows:
+
+// [%header,cols="1a,1a"]
+// |===
+// |Quota Item |Quantity
+
+// |Workload Templates |30
+// |Alerting Rule Groups |30
+// |===
+
+// === Workspace Quotas
+
+// You can view the resource quotas for each workspace on the workspace page, as follows:
+
+// [%header,cols="1a,1a"]
+// |===
+// |Quota Item |Quantity
+
+// |App Repositories |1
+// |===

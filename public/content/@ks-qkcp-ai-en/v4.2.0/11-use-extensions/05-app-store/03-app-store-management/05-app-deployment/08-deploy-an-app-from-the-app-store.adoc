@@ -1,0 +1,70 @@
+---
+title: "Deploy Applications from the App Store"
+description: "Describes how to deploy applications from the App Store."
+weight: 08
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **Deployment Management**
+
+This section describes how to deploy applications from the App Store on the App Store Management page.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-clickCreate.adoc[]
+
+
++
+
+. In the **Create Application** dialog box, click **From App Store**.
+
+. In the App Store, click the application template you want to use, and then click **Deploy** in the upper right corner.
++
+--
+// Note
+include::../../../../../../_ks_components/admonitions/note.adoc[]
+
+If the **Deployment Notice** dialog box pops up, please read the relevant content carefully and then click **Agree**.
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. In the pop-up **Location** dialog box, select the installation location for the application, and then click **OK**.
+
++
+
+include::../../../../../_custom/projectManagement/apps/apps-oper-installApp.adoc[]
+
++
+--
+// Note
+include::../../../../../../_ks_components/admonitions/note.adoc[]
+
+Applications in the App Store are published by workspace members with relevant permissions or provided by third parties. For more information about application feature parameters, please contact the application provider.
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+After the application is created, it will appear in the application list.
+--

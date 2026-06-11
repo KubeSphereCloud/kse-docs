@@ -1,0 +1,15 @@
+---
+title: "查看数据库配置信息"
+weight: 5 
+---
+
+
+NeonSAN 集群中仅包含 Galera 数据库、QingStor 数据库或 Xenondb 数据库中的一种。由于数据库类型不同，则数据库登录方式和检查重点也不尽相同，根据当前 NeonSAN 环境中实际的数据库类型，选择相应的操作步骤。
+
+其中，Galera 数据库或 QingStor 数据库最为常用，可登录 NeonSAN 集群的任一节点执行如下命令，查看该集群中所使用的数据库类型以及数据库节点信息。
+
+[,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts"
+----
+

@@ -1,0 +1,44 @@
+---
+title: "强制删除 Pod"
+weight: 03
+---
+
+本节介绍如何强制删除指定 Pod。
+
+故障注入时，目标 Pod 将被立即删除，Deployment 控制器随后自动创建新的 Pod 以维持副本数。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *PodChaos*，配置以下参数后点击 *创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|故障类型（action）
+|选择 `pod-kill`，强制删除 Pod。
+
+|生效范围（selector）
+|选择故障注入的目标命名空间和 Pod。
+|===
+
+
+// note
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+Pod Kill 为一次性操作，无需设置持续时间。Pod 被删除后将由 Deployment 控制器自动重建。
+|===
+
+
+验证故障效果：
+
+[source,shell]
+----
+kubectl get pod -n default
+----
+
+
+   故障注入后，`nginx-pod` 的 Pod 将被删除并重新创建，可观察到 Pod 的 AGE 重置。

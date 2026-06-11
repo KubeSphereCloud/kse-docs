@@ -1,0 +1,56 @@
+---
+title: "启用 Calico Exporter"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, Calico Exporter, 启用 Calico Exporter"
+description: "介绍如何启用 Calico Exporter 扩展组件。"
+weight: 01
+---
+
+
+本节介绍如何启用 Calico Exporter 扩展组件。
+
+
+== 前提条件
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=b9c0cf78eeaf4690b281b8f4eaddfc24]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:monitoring:calico-exporter:enabled** 参数设置为 **true**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  monitoring:
+    calico-exporter: 
+      enabled: true
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionEnabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

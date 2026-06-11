@@ -1,0 +1,200 @@
+---
+title: 服务部署
+weight: 4
+---
+
+== 创建 FirstBox
+
+部署脚本 `qs_installer` 运行前会校验配置文件中填写的 IP 地址 的 22 端口是否可连接，若配置文件没有根据前文正确配置，则创建 FirstBox 的过程可能会失败。因此，在执行如下步骤创建 FirstBox 之前，需再次确认配置文件填写无误。
+
+include::../../../../_components/note.adoc[]
+
+FirstBox 成功创建后，配置文件会被移动至 FirstBox 的 `/qingstor/etc` 目录下。后续如需更改配置，需登录至 FirstBox 中修改相应文件。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+
+. 登录上传有安装包的节点服务器，该节点服务器作为待创建 FirstBox 的宿主机。
++
+[source,shell]
+----
+# ssh root@139.198.3.63 -p 1002
+----
+
+
+. 进入脚本所在目录
+
++
+[source,shell]
+----
+# cd /root/qs-installer/bin/
+----
+
+
+. 执行如下命令行，创建 FirstBox。`rose` 为配置文件 link:../config_modify[base.ini] 的 `zone_id`；`zhu88jie` 为前文配置的服务器 link:../prepare/connect/[root 用户密码]。
++
+[source,shell]
+----
+# ./init_firstbox_container.sh zhu88jie rose
+----
+
+. 若上述命令执行完成，且没有报错，说明 FirstBox 创建成功。
+
+. 执行如下命令行，登录 FirstBox。`192.168.100.2` 为配置文件link:../config_modify/#_ip_ini[ ip.ini ]中 role 字段下的第一个节点的 IP 地址。登录密码为 `zhu88jie`。
++
+[source,shell]
+----
+# ssh -p 6023 root@192.168.100.2
+----
+
+
+
+. 登录至 FirstBox 中查看相应配置文件。
++
+[source,shell]
+----
+# cd /qingstor/etc/
+# ls
+base.ini  ip.ini  iptables.ini
+----
+
+
+== 初始化服务器
+
+该部分操作将对各节点服务器进行初始化，使其符合 {product_name} 的部署要求。具体操作包括基本网络配置，内核参数设定，基本软件包的安装等。
+
+* 在进行初始化之前，需确保配置文件填写无误。
+* 以下操作均在 {product_name} 的 FirstBox 上执行。
+* 若有需要，可将配置文件发送至 {product_name} 研发团队协作核验。
+
+详细操作如下。
+
+. 执行如下命令行，登录 FirstBox。FirstBox 的 IP 为link:../config_modify/#_ip_ini[ ip.ini 文件]中 role 字段下的第一个节点的 IP 地址。
++
+[source,shell]
+----
+# ssh -p 6023 root@192.168.100.2
+----
+
+. 进入脚本所在目录：
++
+[source,shell]
+----
+# cd /root/qs-installer
+----
+
+. 执行如下命令行，初始化 FirstBox
++
+[source,shell]
+----
+# ./qs_installer init --firstbox
+----
++
+
+include::../../../../_components/note.adoc[]
+
+FirstBox 初始化完成后，需将用户本地的 SSH 公钥添加至 FirstBox 中：
+
+include::../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令行，初始化节点服务器。
++
+[source,shell]
+----
+# ./qs_installer init --common
+----
+
+. 当第一次运行初始化节点服务器的命令行时，系统会重启所有的节点服务器。由于部分服务器重启时间较长，导致有些 TASK 没有运行完成。因此，为确保所有节点服务器均正确初始化完成，用户需在全部节点重启完成后，再次执行如下命令行，初始化节点服务器。
++
+[source,shell]
+----
+# ./qs_installer init --common
+----
+
+. 至此，节点服务器的初始化完成。
+
+== 部署集群
+
+节点服务器初始化完成后，可对集群进行安装部署操作。在部署集群之前，请再次确认配置文件是否正确配置完成。
+
+=== 操作步骤
+
+. 执行如下命令行，登录 FirstBox。可根据前文创建的link:../prepare/port[端口转发规则]，查看 6023 对应的端口号。
++
+[source,shell]
+----
+# ssh root@139.198.3.63 -p 1006
+----
+
+. 进入脚本所在目录：
+
++
+[source,shell]
+----
+# cd /root/qs-installer
+----
+
+
+. 执行如下命令行，对整个集群进行安装部署。
++
+由于命令行包含较多任务，执行完成所需时间较长。若执行过程中报错，该命令会输出相应的错误信息并异常退出。请您根据错误信息进行排查并解决问题后，再次执行该命令行进行部署。
++
+[source,shell]
+----
+# ./qs_installer deploy --all
+----
+
+. 命令行执行完成，且无错误信息或异常退出，说明集群已安装部署完成。
+
+=== 命令行解析
+
+安装部署使用的命令行 `./qs_installer deploy --all` 是一个聚合命令，包含以下执行步骤：
+
+[source,shell]
+----
+# ./qs_installer deploy --configs
+# ./qs_installer deploy --registry
+# ./qs_installer deploy --databases
+# ./qs_installer deploy --hydro-node
+# ./qs_installer deploy --access-node
+----
+
+若用户较熟悉整个部署过程，也可分别执行上述命令行来部署整个集群。每个命令行执行的内容说明如下：
+
+* 下发网关服务及 Hydro 服务配置到对应角色的节点服务器
++
+[source,shell]
+----
+# ./qs_installer deploy --configs
+----
+
+* 为所有节点安装 `docker` 与 `docker-registry` 服务
++
+[source,shell]
+----
+# ./qs_installer deploy --registry
+----
+
+* 安装数据库，包含有：`etcd`、`redis-cache`、`tidb`、`tidb-schema`、`cassandra`、`tikv`、`memcached`
++
+[source,shell]
+----
+# ./qs_installer deploy --databases
+----
+
+* 部署并初始化 Hydro 集群相关服务，包括有：`qs_index`、`hydro_confd`、`hydro_stor`
++
+[source,shell]
+----
+# ./qs_installer deploy --hydro-node
+----
+
+* 安装基础服务、对象存储服务、Portal服务、Webconsole服务、监控告警服务、Account 服务以及 `docker_nas` 服务
++
+[source,shell]
+----
+# ./qs_installer deploy --access-node
+----
+

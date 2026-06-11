@@ -1,0 +1,567 @@
+---
+title: "升级{ks_product_left}"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, 升级"
+description: "介绍如何升级{ks_product_left}。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 0dbcdeb8dc9a4adaa9d5debd8c797d9f
+:ks_xref_id: 826a4fbc87cf41fdb12549bf8fd6e732
+:ks_comp: ../../components/
+:ks_title: 升级{ks_product_left}
+:ks_description: 介绍如何升级{ks_product_left}。
+:ks_keywords: {ks_product_full}, {ks_product}, 升级
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何升级{ks_product_abbr_full_left}。升级过程中将使用开源工具 KubeKey 创建私有镜像服务。有关 KubeKey 的更多信息，请访问 link:https://github.com/kubesphere/kubekey[GitHub KubeKey 仓库]。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=acc1540e15e14dcbba7063ae425cb981]
+
+* 请确保当前{ks_product_both}为 v1.5.0。如果您的{ks_product_both}版本低于 v1.5.0，请先将{ks_product_both}版本升级到 v1.5.0。
+* 升级{ks_product_both}到 {ks_product_ver} 会将网络插件替换为 Kube-OVN，升级过程中会重组 Pod 网络。为避免数据丢失，请提前备份所有重要数据，如网络、用户、虚拟机等数据。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 步骤一：推送镜像到本地仓库link:[id=2e5d954525e04adb8c1dc25a971368ed]
+
+. 将{ks_product_both}{ks_product_ver} 安装包传输到任意集群节点，并登录该集群节点。
+
+. 执行以下命令解压安装包，并进入安装包解压后生成的目录（将 **<package name>** 替换为安装包的实际名称，将 **<directory>** 替换为安装包解压后生成的目录）：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+tar -zxvf <package name>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+cd <directory>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令为 KubeKey 二进制文件 **kk** 添加执行权限：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+sudo chmod +x kk
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令编辑配置文件 **config-sample.yaml**：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+vi config-sample.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. 在 **spec:hosts** 参数下设置用于升级{ks_product_both}的服务器的信息。
++
+--
+include::../../_custom/nodes/add-node-config-parameters.adoc[]
+--
+
+. 在 **spec:registry:privateRegistry** 参数下，按如下配置设置私有镜像服务的地址，然后保存文件。
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+registry:
+    privateRegistry: "dockerhub.kubekey.local:5000"
+    auths:
+      "dockerhub.kubekey.local:5000":
+        skipTLSVerify: true
+    namespaceOverride: ""
+    registryMirrors: []
+    insecureRegistries: []
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令将安装所需的镜像推送到私有镜像服务：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+bin/kk artifact images push -f config-sample.yaml -a kubekey-artifact.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+推送过程中如果解档 **kubekey-artifact.tar.gz** 失败，执行以下命令清理 **bin/kubekey**：
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+rm -rf bin/kubekey/*
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+如果显示如下信息则推送成功：
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ _  __ _______      __
+| |/ // ____\ \    / /
+| ' /| (___  \ \  / / 
+|  <  \___ \  \ \/ /  
+| . \ ____) |  \  /   
+|_|\_\_____/    \/    
+                    
+19:49:26 CST [GreetingsModule] Greetings
+19:49:26 CST message: [node3]
+Greetings, KubeKey!
+19:49:26 CST message: [node1]
+Greetings, KubeKey!
+19:49:27 CST message: [node2]
+Greetings, KubeKey!
+19:49:27 CST success: [node3]
+19:49:27 CST success: [node1]
+19:49:27 CST success: [node2]
+19:49:27 CST [UnArchiveArtifactModule] Check the KubeKey artifact md5 value
+19:49:27 CST success: [LocalHost]
+19:51:16 CST success: [LocalHost]
+19:51:16 CST [ChownWorkerModule] Chown ./kubekey dir
+19:51:16 CST success: [LocalHost]
+19:51:16 CST Pipeline[ArtifactImagesPushPipeline] execute successfully
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 步骤二：删除 Calico 插件link:[id=19810827b247473cb78e5e05232b8379]
+
+. 执行以下命令删除 Kubernetes 中的网络资源：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl delete -f /etc/kubernetes/network-plugin.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令验证 Calico 已被移除：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl get pod -n kube-system
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+如果回显信息中不存在 Calico 相关 Pod 则删除成功：
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+NAME                         READY   STATUS    RESTARTS   AGE
+coredns-7448499f4d-974cv     1/1     Running   0          11h
+kube-multus-ds-amd64-9cclk   1/1     Running   0          11h
+kube-multus-ds-amd64-f5ksq   1/1     Running   0          11h
+kube-multus-ds-amd64-wxb87   1/1     Running   0          11h
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令清理节点上的 Calico 相关配置：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+rm -f /etc/cni/net.d/10-calico.conflist /etc/cni/net.d/calico-kubeconfig
+rm -f /opt/cni/bin/calico /opt/cni/bin/calico-ipam
+rm -rf /etc/cni/net.d/00-multus.conf
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+如果为多节点模式安装，需在每个{ks_product_both}集群节点上执行以上命令清理 Calico 相关配置。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 步骤三：安装 Kube-OVN 网络插件link:[id=59e03a99a2f543dba079cb4e8d93acf1]
+
+. 执行以下命令下载 Kube-OVN 的安装脚本：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+wget https://raw.githubusercontent.com/kubeovn/kube-ovn/release-1.10/dist/images/install.sh
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令编辑 **install.sh** 文件：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+vim install.sh
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+按如下配置修改文件中的 **REGISTRY** 和 **VERSION** 参数：
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+REGISTRY="dockerhub.kubekey.local:5000/kubeovn"
+VERSION="v1.10.7"
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下脚本安装 Kube-OVN：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+bash install.sh
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+脚本执行到第 4 步时执行以下命令重启 Multus：
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl -n kube-system rollout restart ds kube-multus-ds-amd64
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 步骤四：更换 ks-installer 镜像link:[id=efbed933615147e89e29eb6834802fe2]
+
+. 执行以下命令修改 ks-installer 镜像：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl edit deploy ks-installer -n kubesphere-system
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+按如下修改 **spec:containers:image** 配置：
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+spec:
+      containers:
+      - image: dockerhub.kubekey.local:5000/kubespheredev/ksv-installer:{ks_product_ver}
+        imagePullPolicy: Always
+        name: ks-installer
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+升级可能需要较长时间，请等待升级完成。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 升级结束后，执行以下命令查看升级日志：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ksv logs
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+如果显示如下信息则升级成功：
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+**************************************************
+Waiting for all tasks to be completed ...
+task openpitrix status is successful (1/5)
+task network status is successful (2/5)
+task multicluster status is successful (3/5)
+task virtualization status is successful (4/5)
+task monitoring status is successful (5/5)
+**************************************************
+Collecting installation results ...
+#####################################################
+###   Welcome to Kubesphere Virtualization!       ###
+#####################################################
+
+Console: http://172.31.50.23:30880
+Username: admin
+Password: P@88wOrd
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 从升级成功信息中的 **Console**、**Account** 和 **Password** 参数分别获取{ks_product_both}控制台的登录地址、管理员用户名和管理员密码，并使用网页浏览器登录{ks_product_both}Web 控制台。
++
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+取决于您的网络环境，您可能需要配置流量转发规则并在防火墙中放行 30880 端口。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在虚拟机列表页面，查看集群中各虚拟机的状态。正常情况下，此时虚拟机应处于 **KsVmUpgradeProcess** 状态。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 步骤五：创建子网映射link:[id=d07ce8cc33b94038a7c17c3eba2ff817]
+
+{ks_product_right}升级完成后，为确保网络通畅，需要为集群创建子网映射。如果{ks_product_both}v1.5.0 使用的 IP 池为物理网段，您需要配置物理子网；如果{ks_product_both}v1.5.0 使用的 IP 池为虚拟网段，您需要配置虚拟子网。您可以根据实际情况执行如下操作：
+
+* link:#b26b5ec50db544a1b6c448e2aef34bb5[配置虚拟子网]
+* link:#30a95f36a3c24ed78fc04b6e8dcec444[配置物理子网]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 配置虚拟子网link:[id=b26b5ec50db544a1b6c448e2aef34bb5]
+
+本例中 {ks_product} v1.5.0 使用虚拟子网 **vxnet-w6vks5m0: 172.50.10.0/24**，该网段不在可用的 VPC 范围。此时需要参考本文手动配置可用的 VPC 网段。
+
+. 在 {ks_product} {ks_product_ver} 所在的服务器节点执行以下命令配置可用的 VPC 网段：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl edit ksv ksv-config -n kubesphere-virtualization-system
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+按如下配置修改 **spec:configuration:cidrBlocks** 参数，然后保存文件：
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+spec:
+  configuration:
+    accessMode: ReadWriteMany
+    cidrBlocks:
+    - 10.10.0.0/16
+    - 10.20.0.0/16
+    - 10.30.0.0/16
+    - 10.40.0.0/16
+    - 10.50.0.0/16
+    - 10.60.0.0/16
+    - 10.70.0.0/16
+    - 10.80.0.0/16
+    - 10.90.0.0/16
+    - 172.16.0.0/16
+    - 172.17.0.0/16
+    - 172.18.0.0/16
+    - 172.19.0.0/16
+    - 172.20.0.0/16
+    - 192.168.0.0/16
+    - 172.50.0.0/16
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令重启 **ksv-apiserver** 以生效配置：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl rollout restart deploy ksv-apiserver -n kubesphere-virtualization-system
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在{ks_product_both}Web 控制台，进入 VPC 网络列表页面，然后点击右上角的**创建**。
+
+. 在弹出的对话框中，配置 VPC 网络。
++
+--
+* **网段范围**：选择前面步骤中所配置的网段 **172.50.0.0/16**。
+
+* **默认虚拟子网**：虚拟子网第 3 位填写与 v1.5.0 保持一致，即 **172.50.10.0/24**。
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+有关更多参数信息，请参阅 link:../../03-user-manual/03-network-management/03-vpcs/01-create-vpc/[创建 VPC 网络]。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 执行以下命令关联 IP 池至 Kube-OVN 虚拟子网：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+# 删除 webhook 限制
+kubectl delete  validatingwebhookconfigurations network.kubesphere.io
+ 
+# 修改 IP 池映射（需记录 v1.5.0 使用的IP 池 ID；或者在新版本的虚拟机列表按 F12 查看）
+kubectl edit ippool.network.kubesphere.io -n kubesphere-system vxnet-w6vks5m0
+ 
+# 新增 annotations，关联至新的虚拟子网
+subnet.network.kubesphere.io: net-yqmrrfta
+ 
+# 重启 ksv-controller-manager
+kubectl -n kubesphere-virtualization-system rollout restart deploy ksv-controller-manager
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 返回{ks_product_both}Web 控制台，查看 v1.5.0 虚拟子网是否成功指向 Kube-OVN 虚拟子网。正常情况下，虚拟机的 IP 与升级前保持一致。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 配置物理子网link:[id=30a95f36a3c24ed78fc04b6e8dcec444]
+
+如果 {ks_product} v1.5.0 使用的是物理子网，您可以在升级完成后执行如下操作创建物理子网：
+
+. 在{ks_product_both}Web 控制台，进入物理子网列表页面，然后点击右上角的**创建**。
+
+. 在弹出的对话框中，配置物理子网。
++
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+物理子网的网段和网关与 v1.5.0 保持一致即可。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 执行以下命令关联 IP 池至 Kube-OVN 物理子网：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+# 删除 webhook 限制
+kubectl delete  validatingwebhookconfigurations network.kubesphere.io
+ 
+# 修改IP池映射（需记录 v1.5.0 使用的 IP 池 ID；或者在新版本的虚拟机列表按 F12 查看）
+kubectl edit ippool.network.kubesphere.io -n kubesphere-system vxnet-3i9y4tq3
+ 
+# 新增 annotations，关联至新的虚拟子网
+subnet.network.kubesphere.io: net-ox3vg6fa
+   
+# 重启 ksv-controller-manager
+kubectl -n kubesphere-virtualization-system rollout restart deploy ksv-controller-manager
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 返回{ks_product_both}Web 控制台，查看 v1.5.0 物理子网是否成功指向 Kube-OVN 物理子网。正常情况下，虚拟机的 IP 与升级前保持一致。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 步骤六：更换用户 Kind 配置link:[id=82449014936e40ed80c1d72ec4c4bb13]
+
+. 执行以下命令生成 v1.5.0 的用户配置文件：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl get user -o yaml > new_user.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令替换脚本并删除多余字段：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+#!/bin/bash
+sed -i "s/User/KsvUser/g"  new_user.yaml
+sed -i "/creationTimestamp/d"  new_user.yaml
+sed -i "/finalizers:/d"  new_user.yaml
+sed -i "/finalizers.kubesphere.io/d"  new_user.yaml
+sed -i "/generation:/d"  new_user.yaml
+sed -i "/resourceVersion:/d"  new_user.yaml
+sed -i "/uid:/d"  new_user.yaml
+sed -i "/lastTransitionTime:/d"  new_user.yaml
+sed -i "/lastLoginTime:/d"  new_user.yaml
+sed -i "/state:/d"  new_user.yaml
+sed -i "/status:/d"  new_user.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行并应用脚本：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+# 执行脚本
+sh user.sh
+ 
+# Apply 用户脚本
+kubectl apply -f new_user.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 步骤七：迁移激活码link:[id=d4a2c69fe57e4a4689845598a30b1403]
+
+当上述步骤完成后，如果您之前已激活{ks_product_both}v1.5.0 集群且许可证未到期，您需要执行以下操作查询历史激活码并使用该激活码激活升级后的{ks_product_both}{ks_product_ver} 集群：
+
+. 执行以下命令查询历史激活码：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl -n kubesphere-system get secrets ks-license -ojsonpath='{.data.license}'
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 将查询到的历史激活码复制至{ks_product_both}Web 控制台以激活{ks_product_both}{ks_product_ver} 集群。有关如何激活许可证，请参阅 link:../../03-user-manual/01-platform-overview/04-activate-license/[激活许可证]。

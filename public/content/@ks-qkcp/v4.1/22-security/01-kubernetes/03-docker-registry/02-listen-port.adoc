@@ -1,0 +1,19 @@
+---
+title: "监听端口"
+weight:  02
+---
+
+. 查找文件配置。
++
+[,bash]
+----
+systemctl status registry
+vim /etc/kubekey/registry/config.yaml
+----
+
+. 修改监听地址为节点 IP。
++
+[,bash]
+----
+addr: ${node-ip}:${port}
+----

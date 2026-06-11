@@ -1,0 +1,42 @@
+---
+title: "网络可观测"
+weight: 09
+---
+
+== 核心功能
+
+1. 全景网络拓扑：四层流量分析，展示节点连接关系和 TCP 健康状况
+2. 全景服务拓扑：七层 HTTP 流量解析，呈现服务依赖和性能指标
+3. 服务性能监控：RED 指标（RPS、Duration、Error Rate）和最慢路由 TOP 10
+4. HTTP 流量日志：完整请求响应信息，包含请求体和响应体详情
+
+**核心优势：**
+
+1. 无侵入性监控：零代码修改，直接从内核获取数据
+2. 全栈可观测：覆盖应用到网络协议栈全链路
+3. 高性能低开销：内核执行，避免数据拷贝和上下文切换
+4. 安全可控：程序加载前严格验证，保障系统稳定
+
+== 架构设计
+
+=== 主要组件
+
+1. operator：管理 eBPF 应用（K8s 自定义资源）和维护 bpfman-daemon
+2. bpfman-daemon：维护节点 eBPF 程序生命周期
+3. bpfconductor-agent：管理用户空间 eBPF 程序，提供指标导出和流量日志收集
+
+=== 架构设计
+
+image::/images/ks-qkcp/zh/technical-white-papers/4339.png[]
+
+**设计特性**
+
+1. 可维护性：通过 K8s 自定义资源管理 eBPF 程序，支持节点筛选、命名空间过滤和版本控制
+2. 可扩展性：标准 OCI 镜像管理 eBPF 程序字节码，轻松扩展应用
+3. 安全性：仅 bpfman 守护进程拥有加载权限，支持程序镜像签名验证
+
+**数据采集**
+
+1. Metrics：Network Flow、TCP Stats、HTTP 性能指标
+2. Logging：详细 HTTP 流量日志
+3. 元数据关联：包含 node、namespace、pod 等云原生属性

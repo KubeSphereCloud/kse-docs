@@ -1,0 +1,74 @@
+---
+title: "扩展卷"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB ECK, 扩展卷"
+description: "介绍如何扩展挂载到节点的卷。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: d77465cf8f154b51878293e0d1d65264
+:ks_xref_id: 2bf869f0d62a4b6982f9195c3c81b11e
+:ks_comp: ../../../../components/
+:ks_title: 扩展卷
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB ECK, 扩展卷
+:ks_description: 介绍如何扩展挂载到节点的卷。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何扩展挂载到 RadonDB ECK 节点的卷。
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* 目前不支持对使用{ks_product_both}集群本地存储创建的卷进行扩展。
+
+* 目前仅支持增加卷容量，不支持减少卷容量。
+
+* 扩容卷可能会造成业务短暂的中断，请在业务低峰时进行。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=872c72def3034deaa5859b6487ac01fa]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbEck/radondbEck-prer-installRadondbEck.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbEck/radondbeck-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=7298502ca3d046ce92ccdda81a0b100f]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbEck/radondbeck-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 扩展卷**。
+
+. 在**扩展卷**对话框，选择节点角色，设置对应角色的卷容量，然后点击**确定**。

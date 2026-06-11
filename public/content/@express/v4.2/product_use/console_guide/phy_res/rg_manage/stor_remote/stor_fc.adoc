@@ -1,0 +1,44 @@
+---
+title: "FC 存储"
+weight: 1
+---
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，点击**物理资源** > **存储池管理** > **远端存储**，选择 **FC 存储**页签，点击**添加 FC 存储**。
++
+image::/images/express/console/rg_manage_stor_fc_1.png[]
+
+. 在添加**远端存储**的窗口中，根据提示选择集群中的某一节点，并点击**下一步**，进行**添加存储**。
++
+
+include::../../../../../../../_components/attention.adoc[]
+* 仅允许选择单个节点。
+* 若被选节点被设置为远端存储使用的服务器后，该服务器只能作为集中存储的计算节点使用。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
++
+image::/images/express/console/rg_manage_stor_fc_2.png[,50%]
+
+. 在磁盘列表中，选择需要添加至当前节点上的 FC 磁盘。点击**确定**即可。
+
+
+. 返回远端存储页面，创建成功的FC 存储显示在列。列表信息包括：磁盘 ``ID/名称``、``状态``、``LUN``、``总容量``、``可用容量``、``最大 IO 读速率``、``最大 IO 写速率``等信息。
++
+image::/images/express/console/rg_manage_stor_fc_3.png[]
+
+. 点击 FC 存储所在行右侧的更多操作 ，支持对其进行``编辑``、``挂载``和``删除``操作。
+
+
+. 点击创建完成的 FC 存储 ID，进入其详情页面，可查看相应的资源监控信息。
++
+image::/images/express/console/rg_manage_stor_fc_4.png[]
+
+. FC 存储创建成功之后，在导航栏点击**物理资源** > **计算节点**，在**计算节点**页面，可查看配置了 FC 存储的计算节点上出现**远端存储**标签。
++
+image::/images/express/console/rg_manage_stor_fc_5.png[]
+
+. 在计算节点页面，点击**远端存储**标签，支持取消该节点的 TPSC 类型。
+
+

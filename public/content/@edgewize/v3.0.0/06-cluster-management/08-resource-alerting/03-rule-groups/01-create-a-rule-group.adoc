@@ -1,0 +1,90 @@
+---
+title: "创建规则组"
+keywords: "Kubernetes, {ks_product}, 集群管理, 监控告警, 规则组, 创建规则组"
+description: "介绍如何创建告警规则组。"
+weight: 01
+---
+
+
+:ks_permission: **规则组管理**
+:ks_navigation: **边缘资源告警 > 规则组**
+
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-createAnAlertingPolicy.adoc[]
+
+
+== 前提条件
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+* 如需对应用程序的指标进行监控，您需要配置运行在容器中的应用程序，将符合 link:https://prometheus.io/docs/instrumenting/clientlibs/[Prometheus 规范]的监控指标暴露在某个服务端路径下，并在用于暴露工作负载的服务上link:https://docs.kubesphere.com.cn/v4.1.1/11-use-extensions/05-observability-platform/05-monitoring/08-edit-a-metrics-exporter/[设置监控导出器]以声明提供应用程序监控指标的路径。
+
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
++
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+// include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-setBasicInfo.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-addAlertRule.adoc[]
++
+====
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-commonParameters_new.adoc[]
+
+* 规则模板
++
+--
+通过下拉列表选择监控目标和触发条件。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+// |资源类型
+// |需要监控的工作负载的类型，如部署、有状态副本集、守护进程集。仅显示在项目的告警规则设置中。
+
+|监控目标
+|需要监控的目标，如集群节点、工作负载等。
+
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-triggerCondition.adoc[]
+|===
+--
+
+* 自定义规则
++
+--
+通过 PromQL 表达式指定监控目标和触发条件。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-duration.adoc[]
+
+|告警级别
+|
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-para-alertLevel.adoc[]
+
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-ruleExpression.adoc[]
+|===
+--
+====
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-clickOK.adoc[]

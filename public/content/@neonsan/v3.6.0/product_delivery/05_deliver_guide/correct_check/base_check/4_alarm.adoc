@@ -1,0 +1,49 @@
+---
+title: "告警配置检查"
+weight: 4
+---
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统正确配置告警。
+
+|预置条件	
+|QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+
+|测试过程
+a|
+. 登录 NeonSAN 安装有告警服务的节点服务器。
+. 查看 prometheus 配置文件。
++
+[source,shell]
+----
+cat /opt/prometheus/prometheus.yml
+----
+. 查看 alerter 配置文件。
++
+[source,shell]
+----
+cat /qingstor/etc/alerter.conf
+----
+. portal 页面配置告警邮箱。
+
+
+
+|预期结果	
+a|
+. 成功登录安装有监控服务的 NeonSAN 节点。
+. prometheus 配置文件中，各监控服务对应的节点 IP 正确配置，告警规则正确加载，告警服务正确配置。
+. alerter 配置文件各项参数配置正确。
+. 配置的告警邮箱均能收到告警信息。
+
+
+|验证结果	
+|
+
+|备注	
+|
+|===
+
+
+

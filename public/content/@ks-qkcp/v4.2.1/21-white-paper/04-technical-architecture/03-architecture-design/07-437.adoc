@@ -1,0 +1,29 @@
+---
+title: "边缘计算"
+weight: 07
+---
+
+== 核心功能
+
+* 支持云端组件的安装部署
+* 支持边缘节点的添加，边缘节点在加入集群时，支持自动添加污点
+* 支持边缘节点的日志和监控数据采集
+* 支持通过虚拟控制面实现海量设备节点纳管
+* 支持设备节点分级管理，支持多层级自助管理
+* 支持应用模版及批量部署，提高部署效率
+* 支持通过添加 nodeAffinity 禁止云端工作负载（如 DaemonSet）调度到边缘节点
+* 支持边缘节点空中下载功能，提高边缘节点管理、运维效率
+
+== 架构设计
+
+== 主要组件
+
+* Edgewize
+* Edgewize-OTA
+* KubeEdge
+* NodegroupWhizard-edge-logging
+* Whizard-edge-monitor
+
+== 架构设计
+
+image::/images/ks-qkcp/zh/technical-white-papers/437.png[]

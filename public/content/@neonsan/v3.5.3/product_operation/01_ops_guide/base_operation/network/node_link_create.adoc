@@ -1,0 +1,104 @@
+---
+title: "手动建立节点间连接"
+weight: 3
+---
+
+节点之间的连接断开后，需人为介入，手动建立连接。手动建立连接的具体操作如下。
+
+
+== NeonSAN v3.1.0 及以上版本
+
+. 逐个登录 NeonSAN 的各个节点，link../node_link[检查各节点间的连接是否建立]。
+
+. 若节点连接数不对，执行如下命令手动建立连接。
++
+--
+* 指定两个存储节点建立连接。
++
+[,shell]
+----
+neonsan connect_peer -src_storeid 1 -dst_storeid 2
+----
++
+参数说明：
++
+** ``-src_storeid`` 源存储节点 ID，根据实际情况进行修改。
+** ``-dst_storeid`` 目标存储节点 ID，根据实际情况进行修改。
+** 上述命令表示建立存储节点 ID 分别为 1 和 2 的两个节点的连接
+
+* 将同一存储池内的所有节点进行连接。
++
+[,shell]
+----
+neonsan connect_peer -rg_name rg_1
+----
++
+参数说明：
++
+** ``-rg_name`` 存储池名，根据实际情况进行修改。
+--
+
+. 再次执行如下命令，检查节点间是否建立连接。
++
+[,shell]
+----
+neonsan list_peer -store_id 1
+----
+
+
+== NeonSAN v3.1.0 以下版本
+
+. 登录 NeonSAN集群任一节点，执行如下命令查看存储池详细信息：
++
+[,shell]
+----
+neonsan list_rg -detail
+----
+
+. 执行如下命令查看各存储节点状态：
++
+[,shell]
+----
+neonsan list_store
+----
++
+include::../../../../../../_components/note.adoc[]
+* 根据存储池内 OK 状态的节点个数，计算同一存储池内各 OK 状态的节点应该建立的连接数。
+* 每个 OK 状态的存储节点应建立的连接数为：（N-1）*2*2。N表示该节点所在存储池内 OK 节点的个数。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 查看各节点已建立的连接：
++
+[,shell]
+----
+curl "http://192.168.101.26:2601/debug?op=list_peer"
+----
++
+include::../../../../../../_components/note.adoc[]
+* 192.168.101.26为待查询连接数的节点 IP。
+* 需将 IP依次替换为存储池内各个 OK状态的节点 IP，以确认各节点的连接数。并与步骤 2中应该建立的连接数进行比较。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 若节点连接数不对，执行如下命令手动建立连接：
++
+[,shell]
+----
+curl "http://192.168.101.26:2601/debug?op=connect_peer&store_id=28"
+----
++
+include::../../../../../../_components/note.adoc[]
+* 192.168.101.26需修改为实际节点 IP。
+* 参数 store_id指定的节点 ID为待建立连接的存储节点 ID。
+* 如上命令行含义为：建立 192.168.101.26节点与 28节点之间的连接。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，依次逐个节点确认已建立的连接数：
++
+[,shell]
+----
+curl "http://192.168.101.26:2601/debug?op=list_peer"
+----
++
+include::../../../../../../_components/note.adoc[]
+需将命令行中的 192.168.101.26替换为实际存储池内的各个节点 IP。
+include::../../../../../../_components/table_footer.adoc[]

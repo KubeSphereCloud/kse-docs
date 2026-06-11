@@ -1,0 +1,65 @@
+---
+title: 管理侧边栏菜单
+weight: 01
+---
+
+在 Console 页面进入某个产品页面后，页面左侧有侧边栏菜单，用于展示该产品的功能、所属分类下的其他产品以及相关联的服务。
+
+云平台的管理员可以根据实际情况，对侧边栏菜单进行自定义，隐藏/显示某些菜单。
+
+image::/images/ep_offline/cadmin/example_sidebar_00.png[,70%]
+
+== 参数路径
+
+侧边栏菜单通过如下配置进行控制。
+
+[cols='1,1,2']
+|===
+| 应用 | 配置 | 涉及参数
+
+| webconsole
+| sidebar_navigations
+a|
+
+* 在表单模式下，找到对应产品/服务的**隐藏此菜单**参数。
+* 在文本模式下，找到对应产品/服务的 **hide_for_all** 参数。
+|===
+
+== 操作步骤
+
+. link:../../../manual/login[登录配置中心]。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 在**应用**和**配置**搜索框中输入 `webconsole` 和 `sidebar_navigations`，点击**搜索**。
++
+image::/images/ep_offline/cadmin/example_sidebar.png[]
+. 在 sidebar_navigations 配置所在行，点击右侧的**管理配置**，进入 sidebar_navigations 配置页面。
++
+
+include::../../../../../../_components/note.adoc[]
+配置页面支持表单模式和文本模式，默认为表单模式（默认值可以自行定义，详细操作请参见link:../../../manual/system[系统设置]），可以通过右侧的按钮临时进行切换。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+** 表单模式
++
+如下示例中，网络流量镜像的**隐藏此菜单**开关为打开，表示在侧边栏中隐藏**网络流量镜像**。
++
+image::/images/ep_offline/cadmin/example_sidebar_02.png[,70%]
+
+** 文本模式
++
+将网络流量镜像的 **hide_for_all** 参数设置为 ``true``，表示在侧边栏中隐藏**网络流量镜像**。
++
+
+include::../../../../../../_components/note.adoc[]
+若文本模式下没有该参数，请按图中示例的格式手动添加。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/ep_offline/cadmin/example_sidebar_01.png[,70%]
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。
++
+大约一分钟后生效，登录 Console 查看对应的侧边栏菜单，可以看到对应的产品/服务已显示或隐藏。
+

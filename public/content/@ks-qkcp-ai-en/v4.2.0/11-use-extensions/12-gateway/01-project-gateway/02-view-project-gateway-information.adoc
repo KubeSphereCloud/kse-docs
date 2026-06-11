@@ -1,0 +1,44 @@
+---
+title: "View Project Gateway Information"
+keywords: "Kubernetes, {ks_product}, Project Management, Project Settings, Gateway Settings, View Project Gateway Information"
+description: "Describes how to view project gateway information."
+weight: 02
+---
+
+:ks_permission: **Project Gateway View**
+:ks_navigation: **Workspace Settings > Gateway Settings**
+
+
+This section describes how to view project gateway information.
+
+== Prerequisites
+
+* The **KubeSphere Gateway** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-oper-enterProjectGateway.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
++
+--
+The gateway page provides the following information:
+
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-para-gatewayCard_v42.adoc[]
+--

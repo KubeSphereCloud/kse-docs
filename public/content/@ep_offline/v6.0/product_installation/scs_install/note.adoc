@@ -1,0 +1,67 @@
+---
+title: "安装说明"
+weight: 20
+---
+
+由于 SCS 相关产品部署存在相互依赖，所以需要确保安装顺序正常。
+
+== 安装区域
+
+* scs、sintg、cfw 服务需要部署在 global（逻辑区域）。
++
+
+include::../../../../_components/note.adoc[]
+这里的 global 逻辑区域可以理解为任意 region，相当于管理区域。
+
+include::../../../../_components/table_footer.adoc[]
+
+* srp、logw_cfw服务部署在region（逻辑区域）。
++
+
+include::../../../../_components/note.adoc[]
+多 region 场景，需要每个 region 都部署。
+
+include::../../../../_components/table_footer.adoc[]
+
+== 安装顺序
+
+* scs、srp 为基础服务，优先部署且必须部署。
+* logw_cfw 需要在 cfw 之前部署。
+
+== 单 region 场景
+
+单 region 部署情况下，多个服务可以同时部署，通过 sic-deployment 配置文件中 server_codes 控制安装部署顺序。具体操作请参见link:../cfw/security/config[修改配置文件]或link:../sintg/security/config[修改配置文件]。
+示例：
+[source]
+----
+... 
+sic_deployment:
+  product_line: "scs"
+  server_codes:
+  - scs
+  - srp
+  - logw_cfw
+  - cfw
+  - sintg 
+...
+----
+
+include::../../../../_components/note.adoc[]
+以上示例表示云防火墙和安全资源池一起安装，若只需要安装其中一个产品，去掉对应服务即可。
+
+include::../../../../_components/table_footer.adoc[]
+
+== 多 region 场景
+
+多 region 部署场景下，需要人为干预部署。
+
+部署顺序如下：
+
+1. 在 global 区先部署好 scs 服务。
+2. 在其它 region部署好 srp、logw_cfw 服务。
+3. 在 global 区部署 cfw、sintg 服务。
+
+include::../../../../_components/note.adoc[]
+以上部署顺序是云防火墙和安全资源池一起安装，若只需要安装其中一个产品，部署时去掉对应服务即可。
+
+include::../../../../_components/table_footer.adoc[]

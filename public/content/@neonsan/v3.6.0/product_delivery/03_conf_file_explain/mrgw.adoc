@@ -1,0 +1,41 @@
+---
+title: "wrgw.conf"
+weight: 7
+---
+
+异步灾备环境需要配置这部分参数。配置参数如下表所列。
+[options="header",cols="2,2,3,1"]
+|===
+|参数名|类型 |说明 |是否必须
+4+h|[zookeeper]：zookeeper 集群信息
+|ip
+|IP 列表
+|ZooKeeper 集群节点 IP，以逗号分开，建议配置 3~5 个节点。与 store.conf 里的 zookeeper 信息保持一致。
+|是
+
+|cluster_name	
+|字符串	
+|ZooKeeper 集群名	
+|是
+
+4+h|[client]：客户端信息
+|tcp_no_delay	|数字	
+a|禁止延时发送数据
+
+* 1：禁止
+* 0：允许	
+|是
+
+|io_depth	|数字	|IO 队列深度	|是
+|io_timeout	|数字	|IO 超时设置	|是
+|conn_timeout	|数字	|连接超时设置	|是
+|type	|数字	|客户端类型：mrgw	|是
+|mrgw_ip	|数字	|灾备网关 IP	|是
+|mrgw_timeout	|数字	|灾备网关超时设置	|是
+
+4+h|[connection]：节点间连接方式
+|type |字符串 |节点间数据传输模式：TCP 或 RDMA	|是
+|===
+
+
+

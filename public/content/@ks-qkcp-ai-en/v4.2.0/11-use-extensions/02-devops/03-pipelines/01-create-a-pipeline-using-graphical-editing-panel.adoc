@@ -1,0 +1,493 @@
+---
+title: "Create a Pipeline Using the Graphical Editing Panel"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Use DevOps, Pipeline, Create a Pipeline Using the Graphical Editing Panel"
+description: "Introduces how to create a pipeline using the graphical editing panel."
+weight: 01
+---
+
+The graphical editing panel in DevOps contains all necessary operations for Jenkins link:https://www.jenkins.io/zh/doc/book/pipeline/#阶段[Stages] and link:https://www.jenkins.io/zh/doc/book/pipeline/#步骤[Steps]. DevOps supports defining these stages and steps directly on the interactive panel without creating any Jenkinsfile.
+
+This document demonstrates how to create a pipeline using the graphical editing panel in KubeSphere. Throughout the process, DevOps will automatically generate a Jenkinsfile based on the settings on the editing panel, and you do not need to manually create a Jenkinsfile. After the pipeline runs successfully, it will create a Deployment and a Service in your development environment and push the image to Docker Hub.
+
+== Prerequisites
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+* Have a link:http://www.dockerhub.com/[Docker Hub] account.
+
+* Have created a workspace, a DevOps project, and a user (e.g., **project-regular**), and have invited this user to the DevOps project and granted the **operator** role. Refer to link:../../02-devops-project-mangement/03-project-members/01-invite-a-user-to-a-project/[Invite a User to a DevOps Project].
+
+* Have created a user (e.g., **project-admin**) who has the **Project Creation** permission in the workspace.
+
+* Have set up a CI-dedicated node for running pipelines. Refer to link:../15-set-ci-node/[Set a CI Node for Dependency Caching].
+
+* Configure an email server to receive pipeline notifications (optional).
+Refer to link:../11-jenkins-email/[Set an Email Server for Pipelines].
+
+* Configure SonarQube to incorporate code analysis into the pipeline (optional).
+Refer to link:../../10-how-to-integrate/01-sonarqube/[Integrate SonarQube into Pipelines].
+
+== Pipeline Overview
+
+This sample pipeline includes the following stages.
+
+[.admon.note,cols="a"]
+|===
+|Description
+
+|
+* **Stage 1: Checkout SCM**: Pull source code from a GitHub repository.
+
+* **Stage 2: Unit Test**: The next stage proceeds only after this test passes.
+
+* **Stage 3: Code Analysis** (optional): Configure SonarQube for static code analysis.
+
+* **Stage 4: Build and Push**: Build the image, tag it with **snapshot-$BUILD_NUMBER**, and push it to Docker Hub, where **$BUILD_NUMBER** is the run ID of the record in the pipeline run record list.
+
+* **Stage 5: Generate Artifact**: Generate an artifact (JAR file package) and save it.
+
+* **Stage 6: Deploy to Development Environment**: Create a Deployment and a Service in the development environment. This stage requires review, and an email notification will be sent after the deployment runs successfully.
+|===
+
+== Steps 1: Create Credentials
+
+include::../../../../_custom/devops/project-regular-oper-logIn.adoc[]
++
+
+. In the left navigation pane, select **DevOps > Credentials**.
+
++
+
+include::../../../../_custom/devops/devops-oper-dropdownList.adoc[]
+
++
+
+. Create the following credentials. For more information on how to create credentials, refer to link:../../07-credentials/01-credential-management/[Credentials].
++
+--
+[.admon.note,cols="a"]
+|===
+|Description
+
+|
+If your account or password contains special characters, such as **@** and **$**, it may cause errors during pipeline execution due to unrecognized characters. In this case, first encode the account or password on a third-party website (e.g., link:https://www.urlencoder.org/[urlencoder]), then copy and paste the output as your credential information.
+
+|===
+
+[%header,cols="1a,2a,2a"]
+|===
+|Credential ID |Type |Purpose
+
+|dockerhub-id
+|Username and Password
+|Docker Hub
+
+|demo-kubeconfig
+|kubeconfig
+|Kubernetes
+|===
+--
+
+. Create another credential for SonarQube (**sonar-token**) for Stage 3 (Code Analysis) mentioned above. Select **Access Token** as the credential type, enter the SonarQube token in the **Token** field, refer to link:../../10-how-to-integrate/01-sonarqube/#_为新项目创建_sonarqube_token[Create a SonarQube Token for a New Project]. Click **OK** to complete.
+
+. After creation, you will see the created credentials on the Credentials page.
+
+== Steps 2: Create a Project
+
+In this example, the pipeline will deploy the link:https://github.com/kubesphere/devops-maven-sample/tree/v4.1.0-sonarqube[sample] application to a project. Therefore, you need to create a project (e.g., **kubesphere-sample-dev**). After the pipeline runs successfully, the application's Deployment and Service will be automatically created in this project.
+
+. Use the **project-admin** account to create the project. This user will also be the reviewer for the CI/CD pipeline.
+
+. Invite the **project-regular** account to this project and grant the **operator** role.
+
+== Steps 3: Create a Pipeline
+
+. On the **DevOps > Pipelines** page, click **Create**.
+
+. In the dialog that appears, name it **graphical-pipeline** and click **Next**.
+
+. On the **Advanced Settings** page, click **Add** to add the following string parameters. These parameters will be used in the pipeline's Docker commands. After adding, click **Create**.
++
+--
+[%header,cols="1a,2a,2a,2a"]
+|===
+|Parameter Type |Name |Value |Description
+
+|String
+|REGISTRY
+|`docker.io`
+|Image registry address. This example uses **docker.io**.
+
+|String
+|DOCKERHUB_NAMESPACE
+|Your Docker ID
+|Your Docker Hub account or the organization name under that account.
+
+|String
+|APP_NAME
+|`devops-sample`
+|Application name. This example uses **devops-sample**.
+|===
+
+[.admon.note,cols="a"]
+|===
+|Description
+
+|
+For other fields, use the default values directly or refer to link:../05-pipeline-settings/[Pipeline Settings] for custom configuration.
+|===
+--
+
+== Steps 4: Edit the Pipeline
+
+. Click the pipeline name to enter its details page.
+
+. To use the graphical editing panel, click **Edit Pipeline** under the **Pipeline Configuration** tab. In the dialog that appears:
+
+* Click **Custom Pipeline** and follow the steps below to set up each stage.
+
+* Or use the link:../03-use-pipeline-templates/[built-in pipeline templates] provided by DevOps.
+
+. Click **Next**, then click **Create**.
+
+[.admon.note,cols="a"]
+|===
+|Description
+
+|
+The **Sync Status** on the pipeline details page shows the synchronization result between KubeSphere and Jenkins. You can also click **Edit Jenkinsfile** to manually create a Jenkinsfile for the pipeline.
+
+|===
+
+=== Stage 1: Pull Source Code (Checkout SCM)
+
+The graphical editing panel includes two areas: the **Canvas** on the left and the **Content** on the right. It automatically generates a Jenkinsfile based on your configuration of different stages and steps, providing a more user-friendly experience for developers.
+
+[.admon.note,cols="a"]
+|===
+|Description
+
+|
+Pipelines include link:https://www.jenkins.io/zh/doc/book/pipeline/syntax/#声明式流水线[Declarative Pipelines] and link:https://www.jenkins.io/zh/doc/book/pipeline/syntax/#脚本化流水线[Scripted Pipelines]. Currently, using this panel to create declarative pipelines is supported. For more information on pipeline syntax, refer to link:https://www.jenkins.io/zh/doc/book/pipeline/syntax/[Jenkins Documentation].
+
+|===
+. On the graphical editing panel, select **node** from the **Type** dropdown list and **maven** from the **Label** dropdown list.
++
+--
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+**Agent** is used to define the execution environment. The **Agent** directive specifies where and how Jenkins executes the pipeline. For more information, please refer to link:../12-choose-jenkins-agent/[Choosing a Jenkins Agent].
+
+|===
+
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/graphical_panel.png[,100%]
+--
+
+. Click the plus icon on the left to add a stage. Click the text box above **Add Step**, then set a name for this stage (e.g., **Checkout SCM**) in the **Name** field on the right.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/edit_panel.png[,100%]
+
+. Click **Add Step**. Select **Git Clone** from the list to pull the sample code from GitHub. In the pop-up dialog, fill in the required fields. Click **OK** to complete the operation.
++
+--
+* **URL**: Enter the GitHub repository address link:https://github.com/kubesphere/devops-maven-sample.git[]. Note, this is a sample address; please use your own repository address.
+
+* **Credential ID**: No credential ID is required for this example.
+
+* **Branch**: Enter **v4.1.0-sonarqube**. If the code analysis stage is not needed, use the default **v4.1.0** branch.
+
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/enter_repo_url.png[,100%]
+--
+
+=== Stage 2: Unit Test
+
+. Click the plus icon to the right of Stage 1 to add a new stage for executing unit tests in a container. Name it **Unit Test**.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/unit_test.png[,100%]
+
+. Click **Add Step**, select **Specify Container** from the list. Name it **maven** and then click **OK**.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/container_maven.png[,100%]
+
+. Click **Add Nested Step** under the **maven** container step, select **shell** from the list, and enter the following command. Click **OK** to save the operation.
++
+--
+[,bash]
+----
+mvn clean test
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+On the graphical editing panel, you can specify a series of link:https://www.jenkins.io/zh/doc/book/pipeline/syntax/#steps[steps] to be executed within a given stage directive.
+|===
+--
+
+=== Stage 3: Code Analysis (Optional)
+
+This stage uses SonarQube for code testing. You can skip this stage if code analysis is not needed.
+
+. Click the plus icon to the right of the **Unit Test** stage to add a stage for SonarQube code analysis in a container. Name it **Code Analysis**.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/code_analysis_stage.png[,100%]
+
+. In **Code Analysis**, click **Add Step**, select **Specify Container**. Name it **maven** and then click **OK**.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/maven_container.png[,100%]
+
+. Click **Add Nested Step** under the **maven** container step to add a nested step. Click **Add Credential** and select the SonarQube token (**sonar-token**) from the **Credential ID** list. Enter **SONAR_TOKEN** in the **Text Variable** field, then click **OK**.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/sonarqube_credentials.png[,100%]
+
+. Under the **Add Credential** step, click **Add Nested Step** to add a nested step for it.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/nested_step.png[,100%]
+
+. Click **Sonarqube Configuration**, enter the name **sonar** in the pop-up dialog, and click **OK** to save the operation.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/sonar_env.png[,100%]
+
+. Under the **Sonarqube Configuration** step, click **Add Nested Step** to add a nested step for it.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/add_nested_step.png[,100%]
+
+. Click **shell** and enter the following command in the command line for SonarQube authentication and analysis, then click **OK** to complete the operation.
++
+--
+[,bash]
+----
+mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN
+----
+--
+
+. Click **Add Nested Step** (the third one) under the **Specify Container** step, select **Timeout**. Enter **1** in the time field and select **Hour** as the unit, then click **OK** to complete the operation.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/add_nested_step_2.png[,100%]
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/timeout_set.png[,100%]
+
+. Click **Add Nested Step** under the **Timeout** step, select **Run Code Quality Check (SonarQube)**. In the pop-up dialog, check **Abort the pipeline if the quality gate status is not green**. Click **OK** to save the operation.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/waitforqualitygate_set.png[,70%]
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/sonar_ready.png[,100%]
+
+
+=== Stage 4: Build and Push Image
+
+. Click the plus icon to the right of the previous stage to add a new stage for building and pushing the image to Docker Hub. Name it **Build and Push**.
+
+. In **Build and Push**, click **Add Step**, select **Specify Container**, name it **maven**, and then click **OK**.
+. Click **Add Nested Step** under the **maven** container step, select **shell** from the list, and enter the following command in the pop-up window. Click **OK** to complete the operation.
++
+--
+[,bash]
+----
+mvn -Dmaven.test.skip=true clean package
+----
+--
+
+. Click **Add Nested Step** again and select **shell**. In the command line, enter the following command to build the Docker image according to the link:https://github.com/kubesphere/devops-maven-sample/blob/v4.1.0-sonarqube/Dockerfile-online[Dockerfile]. Click **OK** to confirm the operation.
++
+--
+[,bash]
+----
+docker build -f Dockerfile-online -t $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BUILD_NUMBER .
+----
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/shell_command.png[,100%]
+--
+
+. Click **Add Nested Step** again and select **Add Credential**. In the pop-up dialog, fill in the following fields and click **OK** to confirm the operation.
++
+--
+* **Credential Name**: Select the Docker Hub credential you created, for example, **dockerhub-id**.
+* **Username Variable**: Enter **DOCKER_USERNAME**.
+* **Password Variable**: Enter **DOCKER_PASSWORD**.
+
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/docker_credential.png[,100%]
+
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For security reasons, account information is displayed as variables in the script.
+
+|===
+--
+
+. Under the **Add Credential** step, click **Add Nested Step** (the first one). Select **shell** and enter the following command in the pop-up window to log in to Docker Hub. Click **OK** to confirm the operation.
++
+--
+[,bash]
+----
+echo "$DOCKER_PASSWORD"|docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin
+----
+
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/login_docker_command.png[,100%]
+--
+
+. Click **Add Nested Step** again under the **Add Credential** step. Select **shell** and enter the following command to push the SNAPSHOT image to Docker Hub. Click **OK** to complete the operation.
++
+--
+[,bash]
+----
+docker push $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BUILD_NUMBER
+----
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/push_to_docker.png[,100%]
+--
+
+=== Stage 5: Generate Artifacts
+
+. Click the plus icon on the right side of the **Build and Push** stage to add a new stage for saving artifacts, and name it **Artifacts**. This example uses a JAR file package.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/add_artifact_stage.png[,100%]
+
+. Select the **Artifacts** stage, click **Add Step**, and select **Archive Artifacts**. In the pop-up dialog, enter **target/*.jar** to set it as the save path for artifacts in Jenkins. Click **OK** to complete the operation.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/artifact_info.png[,100%]
+
+=== Stage 6: Deploy to Development Environment
+
+. Click the plus icon on the right side of the **Artifacts** stage to add the final stage and name it **Deploy to Dev**. This stage is used to deploy resources to your development environment (i.e., the **kubesphere-sample-dev** project).
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/deploy_to_dev.png[,100%]
+
+. Click **Add Step** under the **Deploy to Dev** stage, select **Input** from the list, then enter **@project-admin** in the **Message** field. This means the **project-admin** account will review when the pipeline runs to this stage. Click **OK** to save the operation.
++
+--
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/input_message.png[,100%]
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+In KubeSphere, the account that can run the pipeline can also continue or terminate the pipeline.
+
+Additionally, the pipeline creator, users with the project admin role in that project, or the account you specify also have permission to continue or terminate the pipeline.
+
+|===
+--
+
+. Click **Add Step** again under the **Deploy to Dev** stage. Select **Specify Container** from the list, name it **maven**, and then click **OK**.
+
+. Click **Add Nested Step** under the **maven** container step. Select **Add Credential** from the list, fill in the following fields in the pop-up dialog, and then click **OK**.
++
+--
+* Credential Name: Select the kubeconfig credential you created, for example, **demo-kubeconfig**.
+
+* kubeconfig Variable: Enter **KUBECONFIG_CONTENT**.
+--
+
+. Click **Add Nested Step** under the **Add Credential** step. Select **shell** from the list, enter the following command in the pop-up dialog, and then click **OK**.
++
+--
+[,bash]
+----
+mkdir ~/.kube
+echo "$KUBECONFIG_CONTENT" > ~/.kube/config
+envsubst < deploy/no-branch-dev/devops-sample-svc.yaml | kubectl apply -f -
+envsubst < deploy/no-branch-dev/devops-sample.yaml | kubectl apply -f -
+----
+--
+
+. If you want to receive email notifications when the pipeline runs successfully, click **Add Step**, select **mail**, to add email information. Note that configuring an email server is an optional operation. If you skip this step, you can still run the pipeline.
++
+--
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more information on configuring an email server, please refer to link:../11-jenkins-email/[Set Up an Email Server for Pipelines].
+|===
+--
+
+
+. After completing the above steps, click **OK** in the lower right corner to finish editing the pipeline. The pipeline will display the complete workflow and clearly list each stage.
++
+--
+When defining a pipeline using the graphical editing panel, DevOps automatically creates the corresponding Jenkinsfile. Click **Edit Jenkinsfile** to view this Jenkinsfile.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+On the **Pipelines** list page, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the pipeline and select **Copy** to create a copy of this pipeline.
+|===
+--
+
+== Step 5: Run the Pipeline
+. Pipelines created using the graphical editing panel need to be run manually. Click **Run**. The pop-up dialog will display the three string parameters defined in link:#_步骤_3创建流水线[Step 3: Create a Pipeline]. Click **OK** to run the pipeline.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/run_pipeline.png[,100%]
+
+. On the **Run Records** tab, check the pipeline's run status. Click the run status to view details.
+
+. After a short wait, if the pipeline runs successfully, it will stop at the **Deploy to Dev** stage. **project-admin**, as the pipeline approver, needs to perform the approval before resources are deployed to the development environment.
+
+. Log in to the KubeSphere web console as the **project-admin** user and enter your workspace. On the **DevOps > Pipelines** page, click the pipeline name to enter its details page. Under the **Run Records** tab, click the record to be reviewed, then click **Continue** to approve the pipeline.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+To run multiple pipelines that do not contain multi-branches simultaneously, on the **Pipelines** list page, select all these pipelines and then click **Run** to run them in batch.
+|===
+
+== Step 6: View Pipeline Details
+
+include::../../../../_custom/devops/project-regular-oper-logIn.adoc[]
+
+. On the **DevOps > Pipelines** page, after selecting the project, click the **graphical-pipeline** pipeline.
+
+. Under the **Run Records** tab, click the record under **Status** to enter the **Run Record** details page. If the job status is **Success**, all stages of the pipeline will show **Success**.
+
+. Under the **Run Logs** tab, click each stage to view its detailed logs. Click **View Full Logs** to troubleshoot and resolve issues based on the logs, or download the logs locally for further analysis.
+
+== Step 7: Download Artifacts
+
+On the **Run Record** details page, click the **Artifacts** tab, then click the icon on the right side of the artifact to download it.
+
+== Step 8: View Code Analysis Results
+
+On the **Code Check** page, view the code analysis results for this sample pipeline provided by SonarQube. This section is unavailable if SonarQube is not configured beforehand. For more information, refer to link:../../10-how-to-integrate/01-sonarqube/[Integrate SonarQube into a Pipeline].
+
+== Step 9: Verify Kubernetes Resources
+
+If each stage of the pipeline runs successfully, a Docker image will be automatically built and pushed to your Docker Hub repository. Finally, the pipeline will automatically create a Deployment and a Service in the project you set up earlier.
+
+. Go to the project (in this example, **kubesphere-sample-dev**), click **Workloads** under **Application Workloads** to view the Deployment created automatically by the pipeline.
+
+. Click **Services** under **Application Workloads** to view the port number exposed by the sample service via NodePort. Use **<Node IP>:<NodePort>** to access the service.
++
+--
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Before accessing the service, you may need to configure port forwarding rules and allow the port in the security group.
+
+|===
+--
+
+. After the pipeline runs successfully, an image will be pushed to Docker Hub. Log in to Docker Hub to view the result.
++
+image:/images/ks-qkcp/zh/devops-user-guide/use-devops/create-a-pipeline-using-graphical-editing-panel/dockerhub_image.png[,100%]
+
+. The application name is the value of **APP_NAME**, which is **devops-sample** in this example. The Tag is the value of **SNAPSHOT-$BUILD_NUMBER**, where **$BUILD_NUMBER** is the **Run ID** recorded under the **Run Records** tab.
+
+. If you configured an email server and added email information in link:#_阶段_6部署至开发环境[Stage 6: Deploy to Development Environment], you will also receive an email notification upon completion.

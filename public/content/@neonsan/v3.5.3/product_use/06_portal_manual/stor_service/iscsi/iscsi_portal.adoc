@@ -1,0 +1,23 @@
+---
+title: '查看 Portal 服务器'
+weight: 1
+draft: false
+---
+
+. 登录 link:../../../login[Portal 管理界面]。
+
+. 选择左侧导航栏**存储服务** > **块存储** > **iSCSI**，进入 iSCSI 页面。点击**配置**按钮。
++
+image::/images/neonsan/portal_iscsi_portal_1.png[]
+
+. 进入 *iSCSI 配置页面*，查看系统中的所有服务器，点击**启用 iSCSI**，则可以将相应的存储节点服务器设置为 portal 服务器。
++
+
+include::../../../../../../_components/note.adoc[]
+创建 VIP 时，需确保集群中至少有 3 个 portal 服务器，故此处至少需启用 3 台服务器的 iSCSI。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_iscsi_portal_2.png[]
+
+

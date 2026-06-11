@@ -1,0 +1,66 @@
+---
+title: 应用告警策略（ApplyAlarmPolicy）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy
+| String
+| true
+| 策略id
+
+| owner
+| String
+| false
+| 用户
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| job_id
+| Array
+| false
+| job
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ApplyAlarmPolicy",
+  "alarm_policy": "alp-1ug2yruu",
+  "owner": "usr-rrPKHDpJ",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ApplyAlarmPolicyResponse",
+  "job_id": "j-px1mgzslkt0",
+  "ret_code": 0
+}
+----

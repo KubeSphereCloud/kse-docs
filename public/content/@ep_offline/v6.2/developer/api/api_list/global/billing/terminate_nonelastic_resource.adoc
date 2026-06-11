@@ -1,0 +1,73 @@
+---
+title: 终止非弹性计费资源（TerminateNonelasticResource）
+weight: 25
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| true
+| 
+
+| is_confirm
+| Integer
+| true
+| 默认
+
+| refund_policy
+| String
+| false
+| private
+
+| resource
+| String
+| true
+| 资源ID
+
+| user
+| String
+| true
+| 用户ID
+
+| zone
+| String
+| true
+| 区域ID
+|===
+
+== 返回数据
+
+此接口仅包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "TerminateNonelasticResource",
+  "console": "qingcloud",
+  "resource": "i-ob7ft6fe",
+  "user": "usr-w9XhbDCL",
+  "zone": "sh1a"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "TerminateNonelasticResourceResponse",
+  "ret_code": 0
+}
+----

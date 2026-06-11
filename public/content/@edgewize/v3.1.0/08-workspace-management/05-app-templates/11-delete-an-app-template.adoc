@@ -1,0 +1,60 @@
+---
+title: "删除应用模板"
+keywords: "Kubernetes, {ks_product}, 企业空间, 应用模板, 删除应用模板"
+description: "介绍如何删除应用模板。"
+weight: 11
+---
+
+
+// :ks_permission: **应用/应用版本/应用实例删除**
+:ks_permission: **边缘应用模板管理**
+:ks_navigation: **边缘应用模板**
+
+
+本节介绍如何删除应用模板。
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+应用模板删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件
+
+include::../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+// * 已删除应用模板中的所有应用版本。有关更多信息，请参阅link:../08-delete-an-app-version/[删除应用版本]。
+
+== 删除单个应用模板
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要删除的应用模板右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除**。
+
+. 在**删除应用模板**对话框，输入应用模板的名称，然后点击**确定**。
+
+
+== 批量删除应用模板
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 选择需要删除的应用模板左侧的复选框，然后在应用模板列表上方点击**删除**。
+
+. 在**批量删除应用模板**对话框，输入应用模板的名称，然后点击**确定**。
++
+--
+include::../../../_custom/note-separateNamesByComma.adoc[]
+--

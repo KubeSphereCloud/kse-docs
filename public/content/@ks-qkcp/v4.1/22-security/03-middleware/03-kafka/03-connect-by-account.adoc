@@ -1,0 +1,185 @@
+---
+title: "使用用户名/密码连接"
+weight: 03
+---
+
+. 获取 kafka pod。
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# kubectl -n kafka get pod -o wide
+NAME                                         READY   STATUS    RESTARTS   AGE   IP               NODE                         NOMINATED NODE   READINESS GATES
+my-cluster-kafka-0                           1/1     Running   0          2d    10.233.94.220    qyicsl-isdp-middleware-001   <none>           <none>
+my-cluster-kafka-1                           1/1     Running   0          2d    10.233.81.144    qyicsl-isdp-master-001       <none>           <none>
+my-cluster-kafka-2                           1/1     Running   0          2d    10.233.94.219    qyicsl-isdp-middleware-001   <none>           <none>
+----
+
+. 进入对应节点。
++
+[,bash]
+----
+ssh qyicsl-isdp-master-001
+----
+
+. 获取 kafka 容器。
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# isula ps |grep kafka-1
+38f4264ec0cc	4b08bfc9085817ab53fdb8dc98a42d61c8929d2180c3f6ff051935c9e8b8da02	"/opt/kafka/kafka_..." 	2 days ago       	Up 2 days       	     	k8s_kafka_my-cluster-kafka-1_kafka_e5143e1b-bcaf-4a28-8b60-3531a219892a_0
+2b6e8b927a6b	kubesphere/pause:3.8                                            	"/pause"              	2 days ago       	Up 2 days       	     	k8s_POD_my-cluster-kafka-1_kafka_e5143e1b-bcaf-4a28-8b60-3531a219892a_0
+----
+
+. 获取 tls 证书。
++
+[,bash]
+----
+kubectl -n kafka get secrets my-cluster-cluster-ca-cert -o jsonpath={.data.ca\\.p12}|base64 -d|openssl aes-256-cbc -d -iter 20000 -pbkdf2 -a -A -k  qingcloud | base64 -d > kafka.p12
+----
+
+. 复制证书到容器中。
++
+[,bash]
+----
+isula cp kafka.p12 38f4264ec0cc:/opt/kafka/config/
+----
+
+. 获取认证密码。
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# kubectl -n kafka get secrets my-cluster-cluster-ca-cert -o jsonpath={.data.ca\\.password} |base64 -d|openssl aes-256-cbc -d -iter 20000 -pbkdf2 -a -A -k  qingcloud | base64 -d
+oKFm68bnu4s1
+----
+
+. 进入 kafka 容器。
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# isula exec -it -u root 38f4264ec0cc bash
+root@my-cluster-kafka-1:/opt/kafka#
+----
+
+. 修改 `config/producer.properties` 和 `config/consumer.properties`，增加认证配置。使用上一步获取的 kafka.p12 和 password 替换配置。
++
+--
+[,bash]
+----
+cat >>config/producer.properties<<EOF
+security.protocol=sasl_ssl
+sasl.mechanism=PLAIN
+ssl.truststore.location=/opt/kafka/config/kafka.p12
+ssl.truststore.password=oKFm68bnu4s1
+ssl.truststore.type=pkcs12
+ssl.endpoint.identification.algorithm=
+EOF
+----
+
+[,bash]
+----
+cat >>config/consumer.properties<<EOF
+security.protocol=sasl_ssl
+sasl.mechanism=PLAIN
+ssl.truststore.location=/opt/kafka/config/kafka.p12
+ssl.truststore.password=oKFm68bnu4s1
+ssl.truststore.type=pkcs12
+ssl.endpoint.identification.algorithm=
+EOF
+----
+--
+
+. 增加 `config/kafka_client_jaas.conf`，设置用户名/密码。
++
+[,bash]
+----
+cat > config/kafka_client_jaas.conf <<EOF
+KafkaClient {
+  org.apache.kafka.common.security.plain.PlainLoginModule required
+  username="saas"
+  password="dms@kafka";
+};
+EOF
+----
+
+. 修改 `bin/kafka-console-producer.sh`。
++
+[,bash]
+----
+if [ "x$KAFKA_HEAP_OPTS" = "x" ]; then
+    export KAFKA_HEAP_OPTS="-Xmx512M -Djava.security.auth.login.config=config/kafka_client_jaas.conf"
+fi
+exec $(dirname $0)/kafka-run-class.sh kafka.tools.ConsoleProducer "$@"
+----
+
+. 修改 `bin/kafka-console-consumer.sh`。
++
+[,bash]
+----
+if [ "x$KAFKA_HEAP_OPTS" = "x" ]; then
+    export KAFKA_HEAP_OPTS="-Xmx512M -Djava.security.auth.login.config=config/kafka_client_jaas.conf"
+fi
+exec $(dirname $0)/kafka-run-class.sh kafka.tools.ConsoleConsumer "$@"
+----
+
+. 获取 cluster name。
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# kubectl get kafka -n kafka
+NAME         DESIRED KAFKA REPLICAS   DESIRED ZK REPLICAS   READY   WARNINGS
+my-cluster   3                        3                     True
+----
+
+. 在对应 namespace 创建 kafka topic，使用上一步的 cluster name。
++
+[,bash]
+----
+cat << EOF | kubectl create -n kafka -f -
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: test
+  labels:
+    strimzi.io/cluster: "my-cluster"
+spec:
+  partitions: 1
+  replicas: 1
+EOF
+----
+
+. 获取 kafka 服务地址：<节点 ip>:<svc nodeport 端口>。
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# kubectl -n kafka get svc my-cluster-kafka-external-bootstrap
+NAME                                  TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+my-cluster-kafka-external-bootstrap   NodePort   10.233.27.10   <none>        9092:31912/TCP   2d1h
+----
+
+. 进入 kakfa 容器。
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# isula exec -it -u root 38f4264ec0cc bash
+root@my-cluster-kafka-1:/opt/kafka#
+----
+
+. 执行以下命令。
++
+--
+* 生产者：
++
+[,bash]
+----
+bin/kafka-console-producer.sh --bootstrap-server 172.31.50.140:31912 --topic test \
+    --producer.config config/producer.properties
+----
+
+* 消费者：
++
+[,bash]
+----
+bin/kafka-console-consumer.sh --bootstrap-server 172.31.50.140:31912 --topic test \
+    --consumer.config config/consumer.properties --from-begin
+----
+--

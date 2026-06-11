@@ -1,0 +1,193 @@
+---
+title: "手动修改虚拟机静态 IP 和 DNS"
+weight: 9
+---
+
+== 运维场景
+
+
+在某些特殊场景下，如平台内的某一虚拟机是由其他虚拟机克隆而来，需要手动修改相应的静态 IP 和 DNS 时，可参考以下步骤。
+
+== 操作步骤
+
+=== Centos 系统
+
+. 登录云易捷 Console 控制台，在顶部导航栏选择**资源** > **虚拟机**，进入**虚拟机**列表页面，选择待修改静态 IP 地址或 DNS 的虚拟机。
+
+. 点击虚拟机的**连接远程桌面**图标，打开远程连接（VNC）会话窗口，输入在创建主机时已设置的用户名和密码，登录即可。
+
+. 执行如下命令，查看当前虚拟机配置的网络，并记录当前网络的网口信息。
++
+[source,shell]
+----
+ip a
+----
+
+. 进入 ``/etc/sysconfig/network-scripts`` 目录，并查看以 ifcfg 开头的网络配置文件。
++
+[source,shell]
+----
+cd /etc/sysconfig/network-scripts
+----
++
+[source,shell]
+----
+ls | grep ifcfg
+----
+
+. 修改并保存相应网口对应的网络配置文件。
++
+[source,shell]
+----
+vi ifcfg-eth0
+----
++
+include::../../../../../_components/note.adoc[]
+* ifcfg-eth0 为网络配置文件名需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
++
+[source,shell]
+----
+TYPE=Ethernet
+NAME=eth0
+DEVICE=eth0
+BOOTPROTO=static
+ONBOOT=yes
+# IPV6INIT=yes
+IPV6_AUTOCONF=no
+IPV6_FAILURE_FATAL=no
+# DHCPV6C=yes
+//添加以下内容
+IPADDR=xx.xx.xx.xx
+PREFIX=24
+GATEWAY=xx.xx.xx.254
+DNS1=114.114.114.114
+----
++
+**重要字段说明**：
++
+* ``BOOTPROTO`` 须修改为 ``static``。
+* ``ONBOOT`` 须修改为 ``yes``。
+* ``IPADDR`` 为当前虚拟机的 IP 地址。
+* ``GATEWAY`` 虚拟机所在网络的网关。
+*  ``DNS1`` 可修改为用户自己的 DNS 地址，若有多个 DNS 直接增加 ``DNS2=xx.xx.xx.xx`` 即可。
+
+
+. 重启网络服务。
++
+[source,shell]
+----
+systemctl restart network
+----
+
+. 检查网络状态，返回结果为 ``active`` 即可。
++
+[source,shell]
+----
+systemctl status network
+----
+
+. 检查 DNS 是否设置成功，返回结果中应显示上述步骤中设置的 DNS 地址。
++
+[source,shell]
+----
+cat /etc/resolv.conf
+----
++
+include::../../../../../_components/note.adoc[]
+返回结果中若无设置的 DNS 地址，可再次重启网络。
+include::../../../../../_components/table_footer.adoc[]
+
+
+=== Ubuntu 系统
+
+. 登录云易捷 Console 控制台，在顶部导航栏选择**资源** > **虚拟机**，进入**虚拟机**列表页面，选择待修改静态 IP 地址或 DNS 的虚拟机。
+
+. 点击虚拟机的**连接远程桌面**图标，打开远程连接（VNC）会话窗口，输入在创建主机时已设置的用户名和密码，登录即可。
+
+. 执行如下命令，查看当前虚拟机配置的网络，并记录当前网络的网口信息，如 eth0。
++
+[source,shell]
+----
+ip a
+----
+
+. 依次执行如下命令，检查 ``/etc/network/interfaces.d`` 目录中是否有上述步骤中查询到的网口信息（eth0）的配置文件。
++
+[source,shell]
+----
+cd /etc/network/interfaces.d
+----
++
+[source,shell]
+----
+ls
+----
+
+. 修改网卡信息，补充以下内容并保存。
++
+[source,shell]
+----
+vi /etc/network/interfaces
+----
++
+[source,shell]
+----
+auto eth0
+iface eth0 inet static
+address xx.xx.xx.xx
+netmask 255.255.255.0
+gateway xx.xx.xx.254
+----
++
+include::../../../../../_components/note.adoc[]
+* eth0 为网口信息，需根据实际情况进行修改。
+* address 为当前虚拟机的 IP 地址，根据实际情况进行修改。
+* gateway 为当前虚拟机的网关，根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 重启网络服务。
++
+[source,shell]
+----
+service networking restart
+----
+
+. 修改 ``/etc/systemd/resolved.conf`` 文件，在 ``[Resolve]`` 字段下添加 DNS。
++
+[source,shell]
+----
+vi /etc/systemd/resolved.conf
+----
++
+[source,config]
+----
+[Resolve]
+DNS=114.114.114.114
+DNS=8.8.8.8
+#FallbackDNS=8.8.8.8 8.8.4.4 2001:4860:4860::8888 2001:4860:4860::8844
+#Domains=
+#LLMNR=yes
+#DNSSEC=no
+----
++
+include::../../../../../_components/note.adoc[]
+DNS 根据实际情况进行修改，若有多个可直接新增一行 DNS 值即可。
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 重启 DNS 服务。
++
+[source,shell]
+----
+systemctl restart systemd-resolved.service
+----
+
+. 查看 DNS 配置结果。
++
+[source,shell]
+----
+systemd-resolve --status
+----
+
+

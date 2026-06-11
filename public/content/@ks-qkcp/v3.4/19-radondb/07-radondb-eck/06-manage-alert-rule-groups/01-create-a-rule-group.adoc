@@ -1,0 +1,91 @@
+---
+title: "创建规则组"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ECK, 管理告警规则组, 创建规则组"
+description: "介绍如何创建规则组。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 40c0586ff68d439f9bee5275e4f37f13
+:ks_xref_id: 8372389cfe2a46aa979380ad5159afb5
+:ks_comp: ../../../../components/
+:ks_title: 创建规则组
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ECK, 管理告警规则组, 创建规则组
+:ks_description: 介绍如何创建规则组。
+:ks_weight: 01
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+本节介绍如何创建告警规则组。
+
+
+== 前提条件link:[id=c8ae649d4cdf4849b16604addf0317eb]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbEck/radondbEck-prer-installRadondbEck.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=5c432e7487124f33975b27b23baccc08]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbEck/radondbeck-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面右侧点击**告警规则组**页签，然后点击**创建**。
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-setBasicInfo.adoc[]
+
++
+
+. 在**告警规则**页签，点击**添加告警规则**设置告警规则。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|规则名称
+|告警规则的名称。规则名称可包含任意字符，最长 63 个字符。
+
+|触发条件
+|触发告警指标、持续时间和告警级别。
+
+|概要
+|告警消息的内容概要。消息概要可包含任意字符，最长 63 个字符。
+
+|详情
+|告警消息的详细描述。消息详情可包含任意字符，最长 256 个字符。
+|===
+--
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-clickOK.adoc[]

@@ -1,0 +1,63 @@
+---
+title: 配置 HTTPS 支持
+weight: 120
+---
+
+如果使用 HTTPS 协议访问{product_name}，还需要预先上传 SSL 证书。
+
+SSL 数字证书提供了一种互联网身份验证的方式，是超文本传输安全协议 HTTPS 的基石，保证用户和服务器间的信息交换的保密性和安全性。
+
+== 准备证书
+
+. 由用户申请/购买 SSL 泛域名证书，证书包括 crt 、 key 两个文件。
++
+例如：
++
+* crt 文件：.cloud.lianluo.com_bundle.crt
+* key 文件：.cloud.lianluo.com.key
+
+. 准备安装所需的 server-chained.pem、server-key.pem、server.pem 文件。
++
+--
+* server-chained.pem = crt 文件
+* server-key.pem = key 文件
+* server.pem = crt 文件 + key 文件
++
+include::../../../../../../../_components/note.adoc[]
+合并时需要让 key 文件内容在最下面，可以执行命令 `cat server-chainer.pem server-key.pem > server.pem`。
+include::../../../../../../../_components/table_footer.adoc[]
+--
+
+// .. 将 crt 文件重命名为 server-chained.pem。
+// +
+// ----
+// mv office.conf office_bak.conf
+// ----
+// .. 将 key 文件重命名为 server-key.pem。
+// +
+// ----
+// mv office.conf office_bak.conf
+// ----
+// .. 执行以下命令，将 crt 文件和 key 文件合并，生成一个新的 server.pem 文件。
+// +
+// --
+// [source,shell]
+// ----
+// cat server-chainer.pem server-key.pem > server.pem
+// ----
+
+// include::../../../../../../../_components/note.adoc[]
+// 合并时需要让 key 文件内容在最下面。
+// include::../../../../../../../_components/table_footer.adoc[]
+// --
+
+== 上传证书
+
+. 登录云平台 FirstBox。
+. 执行以下命令，清除原始证书文件。
++
+[source]
+----
+rm -rf /pitrix/build/packages/pitrix-certs/cert/server*
+----
+. 将 server-chained.pem、server-key.pem、server.pem 这三个文件，上传到 FirstBox 的 ``/pitrix/build/packages/pitrix-certs/cert/`` 目录。

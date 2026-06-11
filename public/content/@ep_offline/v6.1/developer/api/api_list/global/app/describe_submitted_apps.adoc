@@ -1,0 +1,174 @@
+---
+title: 查询待审核应用列表（DescribeSubmittedApps）
+weight: 12
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_type
+| String
+| false
+| 查询应用类型
+
+| limit
+| Integer
+| false
+| 个数
+
+| offset
+| Integer
+| false
+| 偏移
+
+| reverse
+| Integer
+| false
+| 是否倒序
+
+| search_word
+| String
+| false
+| 关键词
+
+| sort_key
+| String
+| false
+| 排序字段，默认提交审核时间
+
+| status
+| Array
+| false
+| 状态
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_set
+| Array
+| false
+| 应用列表
+
+| app_set[].app_id
+| String
+| false
+| 应用ID
+
+| app_set[].app_name
+| String
+| false
+| 应用名称
+
+| app_set[].app_type
+| String
+| false
+| 应用类型
+
+| app_set[].console_id
+| String
+| false
+| 平台ID
+
+| app_set[].icon
+| String
+| false
+| 图标
+
+| app_set[].owner
+| String
+| false
+| 所有者
+
+| app_set[].passed_reviews
+| Array
+| false
+| 通过审核的渠道
+
+| app_set[].review_time
+| String
+| false
+| 审核时间
+
+| app_set[].reviews
+| Integer
+| false
+| 审核次数
+
+| app_set[].status
+| String
+| false
+| 应用状态
+
+| app_set[].submit_time
+| String
+| false
+| 提交审核时间
+
+| app_set[].version_id
+| String
+| false
+| 版本ID
+
+| app_set[].version_name
+| String
+| false
+| 版本名字
+
+| total_count
+| Integer
+| false
+| 总数量
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "limit": 50,
+  "offset": 0
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeSubmittedAppsResponse",
+  "app_set": [
+    {
+      "app_id": "app-xxxxxx",
+      "app_name": "测试应用",
+      "app_type": "cluster",
+      "console_id": "qingcloud",
+      "icon": "ca-vd5swrrp",
+      "owner": "usr-xxxxxx",
+      "passed_reviews": [
+        "dev",
+        "channel"
+      ],
+      "review_time": "2017-11-23T11:07:09",
+      "reviews": 3,
+      "status": "approved",
+      "submit_time": null,
+      "version_id": "appv-xxxxxx",
+      "version_name": "测试版本"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

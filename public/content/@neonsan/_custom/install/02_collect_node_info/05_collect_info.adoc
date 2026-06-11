@@ -1,0 +1,105 @@
+// 收集硬件信息
+
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+include::../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+include::../../../../_components/table_footer.adoc[]
+
+. 在收集硬件信息之前，建议创建相应的 IP 列表，使用如下工具，格式化待部署节点上用于做数据存储的磁盘。若集群中所有数据磁盘均为新裸盘，可直接跳过当前步骤。
++
+* 若各个节点上待格式化的磁盘，其盘符均一样时：
++
+[source,shell]
+----
+/qingstor/install/bin/erase_data_disks.sh -i /root/format_ip_list -d <dev_nvme01>
+----
++
+* 若各个节点上待格式化的磁盘，盘符不一样时：
++
+[source,shell]
+----
+/qingstor/install/bin/erase_data_disks.sh -i xx.xx.xx.xx -d <dev_nvme01>
+----
++
+include::../../../../_components/note.adoc[]
+* ``-i`` 参数，用于指定待格式化的磁盘所在的存储节点（Store 节点） IP 或 IP 列表，其中 IP 列表（/root/format_ip_list） 需手动自行创建。
+* ``-d`` 参数，用于指定待格式化的数据盘盘符，<dev_nvme01> 为盘符，需根据实际情况进行修改。
+* ``/qingstor/install/bin/erase_data_disks.sh -h`` 可查询该命令各参数及说明。
+* 若格式化磁盘的命令执行失败，可查看 ``/qingstor/log/node/erase_data_disks.log`` 日志文件查找原因，解决后，再次执行步骤 2。
+* 待部署节点上的数据盘存在脏数据，可能会导致收集硬件信息失败。
+include::../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，收集硬件信息。
++
+[source,shell]
+----
+installer node-collect -I /root/ip_list
+----
++
+include::../../../../_components/note.adoc[]
+* 在正式部署之前，该收集程序可以重复执行以修正硬件信息的错误, 正式部署之后，不要再次执行该命令。
+* 此处所使用的 ip_list 为link:../ip_list_create[前文步骤]所创建。
+include::../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，查看步骤 3 的执行状态。
++
+[source,shell]
+----
+installer task-show <TASK_ID>	
+----
++
+include::../../../../_components/note.adoc[]
+* 命令行中的 <TASK_ID>，需根据实际情况进行修改。TASK_ID 可执行如下命令进行查看： +
+``installer task-list``
+* 返回结果中，关注 status 字段，若不为 successful，则需调查原因并解决后，再次执行步骤 3。
+* 可登录至硬件收集失败的节点，查看 ``/qingstor-installer/collect/collect.log`` 日志，判断硬件信息收集失败的原因。 
+* 若问题无法解决，可联系 QingCloud Installer 小组。
+include::../../../../_components/table_footer.adoc[]
+
+. 待任务执行成功，可执行如下命令行获取指定节点的详细信息进行校验。
++
+[source,shell]
+----
+installer node-show <NODE_ID>	
+----
++
+include::../../../../_components/note.adoc[]
+<NODE_ID> 需根据实际情况进行修改，可执行 ``installer node-list`` 命令进行查看。
+include::../../../../_components/table_footer.adoc[]
+
+. 若硬件配置不符合预期，可以对硬件进行调整。
++
+* 若使用 iCAS，收集节点硬件信息时可能会将做了 RAID 的 SSD 识别成 SATA，可执行如下命令进行修改。
++
+[source,shell]
+----
+installer node-update <NODE_ID> -d <dev_name> -t ssd
+----
+* 若需要修改磁盘大小，可执行如下命令。
++
+[source,shell]
+----
+installer node-update <NODE_ID> -d <dev_name> -S 3200
+----
+* 若收集到多余磁盘，需要修改磁盘状态为``不可用``，可执行如下命令。
++
+[source,shell]
+----
+installer node-update <NODE_ID> -d <dev_name> -s 0
+----
++
+include::../../../../_components/note.adoc[]
+* <NODE_ID> 需根据实际情况进行修改，可执行 ``installer node-list`` 命令进行查看。
+* ``-d`` 用于指定待修改磁盘的盘符，多个盘符可以用逗号隔开。
+include::../../../../_components/table_footer.adoc[]
+
+
+

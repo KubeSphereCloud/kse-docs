@@ -1,0 +1,96 @@
+---
+title: "创建队列"
+weight:  01
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: ** Volcano 调度 > 队列**
+
+
+本节介绍如何创建队列。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|安装 Volcano 扩展组件后，会自动创建名为 `root` 和 `default` 的两个队列。
+
+* `root` 队列是所有队列的根队列。
+* `default` 队列是 Volcano 作业默认使用的队列。
+|===
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Volcano** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. 在**基本信息**页签，设置队列的基本信息，然后点击**下一步**。
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|队列的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+|别名
+|队列的别名。不同队列的别名可以相同。
+
+|描述
+|队列的描述信息。描述可包含任意字符，最长 256 个字符。
+|===
+
+. 在**队列设置**页签，配置队列比重、优先级和队列资源，然后点击**创建**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|比重
+|队列在集群资源划分中所占的相对比重。仅在 proportion 插件开启时生效。
+
+Volcano 扩展组件默认启用 proportion 插件。
+
+|优先级
+|队列的优先级。在资源分配/抢占/回收时，更高优先级的队列将会优先分配/抢占/回收资源。
+
+|CPU 预留
+|为队列预留的 CPU 资源，单位为核。
+
+|CPU 上限
+|允许队列使用的 CPU 资源上限，单位为核。
+
+|内存预留
+|为队列预留的内存资源，单位为 GiB/MiB。
+
+|内存上限
+|允许队列使用的内存资源上限，单位为 GiB/MiB。
+
+|CPU/内存应得
+|队列应得的 CPU/内存资源量。
+
+当队列已分配的资源量超过此值时，其超额部分可被回收以供其他队列使用；反之，若未超此值且集群有空闲资源，该队列则可继续借用其他队列的资源。
+
+// 使用 capacity 插件时，支持自定义此字段；使用 proportion 插件时，不支持自定义，由系统根据 weight（权重）自动计算。
+|===
+
+有关队列的更多信息，请参阅 link:https://volcano.sh/zh/docs/queue/[Volcano 官方文档]。
+--

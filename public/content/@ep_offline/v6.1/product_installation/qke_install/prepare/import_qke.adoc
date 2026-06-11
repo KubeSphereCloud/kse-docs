@@ -1,0 +1,208 @@
+---
+title: "准备安装包"
+weight: 1
+---
+
+
+
+== 步骤一：下载安装包
+
+QKE 安装部署所需各软件包的下载路径如下表所示。实施人员根据{product_name}的版本号，QKE 的版本号，下载各软件包。
+
+include::../../../../../_components/note.adoc[]
+
+这里以{product_name} v6.1、QKE v3.1.0 为例加以说明。其余版本的软件包，可参考link:../../overview/resources/[ FTP 目录详解]内容，进行下载。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+[cols='1,2,5a']
+|===
+| 安装包序号 | 安装包名称| 下载路径
+
+| 1 | app-o6lvbkhm_QKE| /pitrix/migrate_appcenter2_recommend/6_1
+| 2  | app-2mhyb1ui_Harbor| /pitrix/migrate_appcenter2_recommend/6_1
+| 3  | app-fdyvu2wk_etcd| /pitrix/migrate_appcenter2_recommend/6_1
+| 4  | app-p6au3oyq_ELK| /pitrix/migrate_appcenter2_recommend/6_1
+| 5  | qke-cli-v3.1.0.tar.gz| /pitrix/installer/k8s/QKE/v3.1.0/amd64/normal
+| 6 | qke-installer-v3.1.0.tar.gz| /pitrix/installer/k8s/QKE/v3.1.0/amd64/normal
+| 7  | qke_harbor.tar.gz| /pitrix/installer/k8s/QKE/v3.1.0/amd64/normal
+| 8  | qke_nginx.tar.gz| /pitrix/installer/k8s/QKE/v3.1.0/amd64/normal
+|===
+
+
+
+include::../../../../../_components/attention.adoc[]
+
+需比对下载的资源包的 MD5 值与 FTP 上各资源包对应的 MD5 值，确认下载内容无误后，再进行后续操作。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+== 步骤二：上传安装包
+
+将上述下载好的软件包，上传至当前{product_name}中任一物理服务器上的同一目录下。如上传于 `testing1a-proxy0` 服务器上的 `/root/export_apps/6_1` 目录下。
+
+
+
+== 步骤三：导入安装包
+
+应用包的导入操作，可通过 AppCenter 应用的导入脚本完成，该脚本为交互式应用程序。当{product_name}部署完成后，AppCenter 应用的导入脚本已存放于{product_name}的 Webservice 节点上的 `/pitrix/lib/pitrix-scripts/appcenter2/import_apps` 目录下。
+
+
+
+导入应用包的详细操作流程如下。
+
+. 登录{product_name}的 FirstBox 节点。
++
+include::../../../../../_components/note.adoc[]
+
+登录方式可咨询{product_name}安装部署人员。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令行，查看{product_name}的 Webservice 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/webservice
+----
++
+命令回显示例
++
+[source,shell]
+----
+nodes=( testbm1a-webservice0 testbm1a-webservice1 testbm2a-webservice0 testbm2a-webservice1 );
+----
+
+. 根据查询结果，登录 Webservice 节点。这里以登录 `testbm1a-webservice0` 节点为例。
++
+[source,shell]
+----
+ssh testbm1a-webservice0
+----
+
+. 执行如下命令行，进入脚本所在目录。
++
+[source,shell]
+----
+cd /pitrix/lib/pitrix-scripts/appcenter2/
+----
+//. 导入link:#_步骤二上传安装包[前文上传]的应用镜像文件包。
+. 导入link:#_步骤一下载安装包[序列号为 1、2、3、4 ]的应用镜像文件包。
+
+.. Global 与 Zone 融合部署
++
+如下图所示，Global 服务部署于 Region-1 的 Zone_A 服务器上。
++
+image::/images/ep_offline/installation/app_import_1.png[]
++
+导入方式如下，命令行中的 `root@testing1a-proxy0:/root/export_apps/6_1` 为link:#_步骤二上传安装包[前文上传]的镜像文件包路径，需根据实际情况进行修改。
++
+* Global Zone 导入 整个目录。如上图的 Region-1 的 Zone_A 导入整个目录。
++
+[source,shell]
+----
+./import_apps -s root@testing1a-proxy0:/root/export_apps/6_1
+----
++
+* 其他 Region 下任一个 Zone 导入 `镜像文件`。如 Region-2 的 Zone_A 导入 `镜像文件`。
++
+[source,shell]
+----
+./import_apps -s root@testing1a-proxy0:/root/export_apps/6_1 --image_only
+----
++
+include::../../../../../_components/note.adoc[]
+
+若当前{product_name}中仅一个 Region，则无需执行该步骤。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+.. Global 与 Zone 分离部署
++
+如下图所示，Global 服务部署于单独的物理服务器且与各个 Zone 物理隔离。
++
+image::/images/ep_offline/installation/app_import_2.png[]
++
+导入方式如下，命令行中的 `root@testing1a-proxy0:/root/export_apps/6_1` 为link:#_步骤二上传安装包[前文上传]的镜像文件包路径，需根据实际情况进行修改。
++
+* Global Zone 导入 `应用数据`。如上图的 Global 导入 `应用数据`。
++
+[source,shell]
+----
+./import_apps -s root@testing1a-proxy0:/root/export_apps/6_1 --app_only
+----
++
+* 其他 Region 下任一个 Zone 导入 `镜像文件`。如 Region-1 的 Zone_A 与 Region-2 的 Zone_A 分别导入 `镜像文件`。
++
+[source,shell]
+----
+./import_apps -s root@testing1a-proxy0:/root/export_apps/6_1 --image_only
+----
++
+include::../../../../../_components/note.adoc[]
+
+若当前{product_name}中仅一个 Region，则无需在 Region-2 的 Zone_A 执行导入 `镜像文件` 的步骤。
+
+include::../../../../../_components/table_footer.adoc[]
+
+.. 分布式 Global。
++
+当前环境中有多个 Global，则每个 Global 分别执行以上操作。
+
+
+
+== 附录
+
+=== 导入脚本介绍
+
+
+* 导入命令
++
+导入脚本已支持交互式参数填充，在使用过程中只需填入导入文件所在的目录 `-s` 即可，其余参数可根据提示进行补全。
++
+[source,shell]
+----
+./import_apps -s <应用镜像文件包路径>
+----
+
+* 查看命令详情
++
+[source,shell]
+----
+./import_apps -h
+----
+
+
+* 参数说明
++
+其他参数的详情可通过 `-h` 参数进行查看，正常导入流程不会用到。
++
+[cols='1,1,4a']
+|===
+| 参数 | 是否必须| 说明
+
+| -c  | 否| {product_name}的 `console_id`，默认无需填写。若填写错误，会导致 Console 中无法正常使用 AppCenter 应用。
+| -C  | 否| AppCenter 应用支持的虚拟机类型，可选项为 `KVM`、`LXC`。
+| -S  | 否| AppCenter 应用 ID 或 AppCenter 应用版本 ID。导入多个 AppCenter 应用或 AppCenter 应用版本时，可以 `,` 隔开。
+| -s  | 是| 
+
+仅支持从 `migrate_appcenter2_recommend` 目录下载的文件路径。
+
+
+| -r  | 否| {product_name}的 Region ID。
+| -z | 否| {product_name}的 Zone ID。
+| --instance_class  | 否| 创建 AppCenter 应用时，可选用的主机类型。
+| --volume_class  | 否| 创建 AppCenter 应用时，可选用的磁盘类型。
+| --isolate_billing  | 否| 
+
+* {product_name} v5.0 之前版本，需设置该参数 `--isolate_billing 0`。
+* {product_name} v5.0 以及后续版本，无需设置该参数。
+
+| --app_only  | 否| 仅导入 AppCenter 应用数据，不导入镜像。
+| --image_only  | 否| 仅导入 AppCenter 应用镜像，不导入数据。
+|===
+
+

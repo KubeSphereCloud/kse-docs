@@ -1,0 +1,12 @@
+// :ks_include_id: e37f1e1a226842e7b71cfc533a74d392
+|Collect Logs on Volumes
+|
+Allows the system to collect container logs saved on volumes. To use this feature, you need to perform the following operations:
+
+* Enable the **Collect Logs on Volumes** feature in the project where the container resides.
+
+* On the **Storage Settings** tab, enable the **Collect Logs on Volumes** feature, mount a persistent volume or temporary volume in read-write mode for the container, and set the **Container Log Path**.
+
+* Configure the application in the container to export logs to the **Container Log Path** under the volume mount directory.
+
+include::workloads-desc-viewContainerLogsOnVolume.adoc[]

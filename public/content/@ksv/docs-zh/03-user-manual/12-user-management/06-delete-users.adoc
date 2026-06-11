@@ -1,0 +1,70 @@
+---
+title: "删除用户"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 用户, 删除"
+description: "介绍如何使用{ks_product_both}Web 控制台删除用户。"
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 2497e62cb7a74309a68cb0e5927e9bae
+:ks_xref_id: dd73ab04fc7e4923b31d52d4d6a1c695
+:ks_comp: ../../../components/
+:ks_title: 删除用户
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台删除用户。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 用户, 删除
+:ks_weight: 06
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台删除用户。目前，您可以通过{ks_product_both}Web 控制台删除非 **admin** 用户，**admin** 用户不支持删除。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=0a4ba5da84484732a4f04c14b2ebf7c1]
+
+include::../../../_custom/users/user-manage-prerequisites.adoc[]
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 删除单个用户link:[id=b40e8875ccc348dbbfe69dee8bddf746]
+
+include::../../../_custom/users/user-steps.adoc[]
+
+. 在用户列表页面，点击目标用户名称，进入用户详情页面。
+
+. 在用户详情页面左上角点击 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**删除**。
+
+. 在弹出的对话框中点击**确定**可删除目标用户。
++
+--
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+用户删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 批量删除用户link:[id=0e4e999fbd2f4faca74c5e4bc0b5b8bb]
+
+include::../../../_custom/users/user-steps.adoc[]
+
+. 在用户列表页面，选择需要删除的用户名称左侧的复选框，然后在列表上方点击**删除**。
+
+. 在弹出的对话框中点击**确定**可批量删除多个用户。
++
+--
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+用户删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

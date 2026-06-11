@@ -1,0 +1,53 @@
+---
+title: "v1.6.0 版本说明"
+linkTitle: "{ks_title}"
+keywords: "版本说明, {ks_product_full}, {ks_product}, v1.6.0"
+description: ""
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 54db08e8ce1a4a7d846c59c74b6cc6c7
+:ks_xref_id: 20e7f2d8082a44c5a4134dba3edff55a
+:ks_comp: ../../components/
+:ks_title: v1.6.0 版本说明
+:ks_description: 
+:ks_keywords: 版本说明, {ks_product_full}, {ks_product}, v1.6.0
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 新增功能link:[id=4b8b9151509840acb5a789ae83db2417]
+
+* 新增物理网络模块。支持为虚拟机配置物理子网和弹性网络以达到更好的连通性和性能。
+* 新增虚拟网络模块。支持在 VPC 网络和虚拟子网中创建虚拟机以实现安全隔离，也支持为 VPC 网络或虚拟机绑定弹性 IP 以开启公网访问。
+* 新增 SSH 密钥功能。支持创建和为虚拟机绑定 SSH 密钥以安全便捷地登录 Linux 虚拟机。
+* 新增安全组模块。支持创建安全组并为关联的虚拟机创建单独的入站和出站流量规则集，从而提高关联资源的安全性。
+* 新增网络带宽限制功能。支持通过自定义 QoS 规则以保证网络传输带宽、降低网络传输时延，从而提高网络资源的利用率。
+* 新增支持 KSV 和 KubeSphere 融合部署，实现容器和虚拟机共存共管。
+* 新增支持企业级分布式存储 NeonSAN。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 功能优化link:[id=582778c4ca7f4ab6a40dc7a8d310fbf3]
+
+* 优化概览 UI 界面。支持通过全新的 UI 管理界面从虚拟机、磁盘、网络、物理节点、CPU、内存等维度实时查看集群中的资源情况，以更好地了解集群状态。
+* 优化虚拟机管理功能。支持通过全新的 UI 管理界面实时监测和管理集群中的虚拟机状态和资源使用情况，也支持通过虚拟机、模板、镜像等方式创建虚拟机。
+* 优化节点管理功能。支持通过全新的 UI 管理界面实时监测和管理集群中的物理节点状态和资源使用情况，也支持通过 Web 控制台快速添加集群节点。
+* 优化虚拟机镜像功能。支持通过全新的 UI 管理界面创建和管理镜像，也支持通过 Web 控制台为镜像开启共享属性，与项目中的其他用户共享镜像。
+* 优化告警和日志功能。支持通过全新的 UI 管理界面查看系统中的告警和日志，实时分析和处理告警。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 问题修复link:[id=f1e6cc2d12a1471e88915f45a35bbda9]
+
+* 修复镜像上传易中断失败问题。
+* 修复虚拟机模板所选镜像普通用户无权限问题。
+* 修复磁盘挂载中，虚拟机强制重启异常问题。

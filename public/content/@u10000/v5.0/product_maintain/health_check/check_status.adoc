@@ -1,0 +1,452 @@
+---
+title: 集群状态检查
+description: 
+weight: 3
+draft: true
+---
+
+{product_name} 集群服务均运行在容器中，确认集群状态，首先需确认各集群服务所在容器状态是否正常，再登录至各集群服务所在容器内，查看集群详细信息来判断集群状态是否正常。
+
+== 自动检查
+
+{product_name} 提供自动检查工具，方便用户简单快速的完成巡检任务。
+
+
+. 登录当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
++
+include::../../../../_components/note.adoc[]
+
+* 命令行中的 `<firstbox ip>` 为当前环境的 FirstBox 节点 IP，需根据实际情况进行填写。
+* 登录密码默认为 `zhu88jie`。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 进入脚本所在目录。
+
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，对当前环境进行基础检查。
++
+[source,shell]
+----
+./qs_installer tools --check-u1w
+----
++
+命令行返回结果如下图所示，则说明环境检查通过。
++
+image::/images/u10000/install_1.png[install_1,60%]
++
+include::../../../../_components/note.adoc[]
+
+若有异常输出，需根据输出内容进行排查并解决相关异常。
+
+include::../../../../_components/table_footer.adoc[]
+
+== 手动检查
+
+当自动巡检报错时，用户可参考以下步骤，对相应集群状态进行手动检查。
+
+=== 检查容器状态
+
+. 登录当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
++
+include::../../../../_components/note.adoc[]
+
+* 命令行中的 `<firstbox ip>` 为当前环境的 FirstBox 节点 IP，需根据实际情况进行填写。
+* 登录密码默认为 `zhu88jie`。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+. 在 FirstBox 节点中执行如下命令行，查看所有容器的状态。当 `status` 字段为 `running`，说明正常，其它状态均为异常。
++
+[source,shell]
+----
+./qs_installer shell -a "/qingstor/bin/public/serviceTool.sh status" -l all_node
+----
++
+命令回显示例
++
+[source,shell]
+----
+projectName                     status          pid     uptime
+hydro_stor                      running         1               07:35:33
+cosbench                        running         1               8-04:58:14
+qs_gateway3                     running         2238            08:37:10
+hydro_confd                     running         1               07:57:00
+......
+tipd_server_0                   running         1               8-17:00:41
+tidb_server                     running         1               8-17:00:07
+tikv_server                     exited          NONE    NONE
+......
+----
++
+如上所示，`tikv_server` 容器状态异常，需查明原因并解决。
+
+
+=== 检查 Tikv 集群状态
+
+//需逐个登录 Tikv 集群，确认集群状态是否正常。
+
+. 登录当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
++
+include::../../../../_components/note.adoc[]
+
+* 命令行中的 `<firstbox ip>` 为当前环境的 FirstBox 节点 IP，需根据实际情况进行填写。
+* 登录密码默认为 `zhu88jie`。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+. 从 FirstBox 节点跳转至 core0 节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 在 core0 节点，执行如下命令行，正常情况下会存在 `tipd_server` 与 `tipd_server_0` 两个容器。
++
+[source,shell]
+----
+docker ps -a|grep tipd
+----
+
+. 登录容器 `tipd_server`。
++
+[source,shell]
+----
+docker exec -it tipd_server /bin/sh
+----
++
+
+include::../../../../_components/note.adoc[]
+
+* tikv 集群状态检查包括 PD 检查与 Store 检查。
+* 执行后续命令行检查 `tipd_server` 集群状态。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 在容器内执行如下命令行，检查 PD 状态。
++
+[source,shell]
+----
+./pd-ctl -u core0:4479 health
+----
+
+. 确认命令行回显内容中，所有 `health` 字段均为 `true`，即为正常。
++
+[source,shell]
+----
+
+      "health": true
+
+----
+
+. 容器里继续执行如下命令行，检查 Store 状态。
++
+[source,shell]
+----
+./pd-ctl -u core0:4479 store
+----
+
+
+. 确认命令行回显内容中，所有 `state_name` 字段均为 `Up`，即为正常。
++
+[source,shell]
+----
+
+        "state_name": "Up"
+----
+
+. 退出容器当前容器。
++
+[source,shell]
+----
+exit
+----
+
+. 执行如下命令行，登录另一容器 `tipd_server_0`。
++
+[source,shell]
+----
+docker exec -it tipd_server_0 /bin/sh
+----
++
+include::../../../../_components/note.adoc[]
+
+根据步骤 3 查询结果，依次登录逐个容器。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 依次执行如下命令行，查看集群状态。确认集群是否健康的方式可参考前文步骤。
++
+[source,shell]
+----
+./pd-ctl -u core0:4379 health
+./pd-ctl -u core0:4379 store
+----
+
+
+// === 检查 Cassandra 集群状态
+
+// . 登录当前环境的 FirstBox 节点。
+// +
+// [source,shell]
+// ----
+// # ssh -p 6023 root@<firstbox ip>
+// ----
+// +
+
+// include::../../../_components/note.adoc[]
+
+// * 命令行中的 `<firstbox ip>` 为配置文件 `ip.ini` 中 `role` 字段下的第一个节点的 IP 地址。
+// * 登录密码为 `zhu88jie`。
+
+// include::../../../_components/table_footer.adoc[]
+
+
+// . 从 FirstBox 节点跳转至 core0 节点。
+// +
+// [source,shell]
+// ----
+// # ssh core0
+// ----
+
+// . 执行如下命令行，查看 cassandra 容器各节点状态。
+// +
+// [source,shell]
+// ----
+// #  docker exec -it cassandra nodetool status
+// ----
+
+// . 命令行回显结果如下所示，确认 `Datacenter` 为当前环境的 `Zone ID`，且所有节点状态，即第一列字段均为 `UN`，即为正常。
+// +
+// [source,shell]
+// ----
+// Datacenter: u1w
+// ===============
+// Status=Up/Down
+// |/ State=Normal/Leaving/Joining/Moving
+// --  Address        Load       Tokens       Owns (effective)  Host ID                               Rack
+// UN  101.100.11.80  16.94 MB   256          100.0%            082425e6-1d56-40e5-8f4a-414a67768025  default
+// UN  101.100.11.78  16.86 MB   256          100.0%            803a8dbf-3660-434d-987e-19c77a2079f1  default
+// UN  101.100.11.79  16.86 MB   256          100.0%            0c1951ea-8c08-452e-bf09-20b8990ece48  default
+// ----
+
+
+=== 检查 ETCD 集群状态
+
+. 登录当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
++
+include::../../../../_components/note.adoc[]
+
+* 命令行中的 `<firstbox ip>` 为当前环境的 FirstBox 节点 IP，需根据实际情况进行填写。
+* 登录密码默认为 `zhu88jie`。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+. 从 FirstBox 节点跳转至 core0 节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，查看 etcd 容器各节点状态。
++
+[source,shell]
+----
+docker exec -it etcd /qingstor/bin/etcdctl-v3.sh endpoint status -w table
+----
+
+. 命令行回显内容如下所示，确认输出内容中，`ERRORS` 字段无输出，`IS LEADER` 字段有且仅有一个节点为 `true`，`DB SIZE` 字段均不超过 7G。
++
+[source,shell]
+----
++--------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
+|      ENDPOINT      |        ID        | VERSION | DB SIZE | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS |
++--------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
+| 101.100.11.78:2379 | 7904cfd7d35acf2f |   3.5.5 |   24 MB |     false |      false |        20 |   30096924 |           30096924 |        |
+| 101.100.11.79:2379 | 3b29cc244ab40a9a |   3.5.5 |   24 MB |      true |      false |        20 |   30096924 |           30096924 |        |
+| 101.100.11.80:2379 | a5d94e00d671b5a6 |   3.5.5 |   24 MB |     false |      false |        20 |   30096926 |           30096926 |        |
++--------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
+----
+
+
+=== 检查 Hydro 集群状态
+
+使用 Hydro 的命令行工具，检查当前环境中 Hydro 集群信息。
+
+. 登录当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+# ssh -p 6023 root@<firstbox ip>
+----
++
+include::../../../../_components/note.adoc[]
+
+* 命令行中的 `<firstbox ip>` 为当前环境的 FirstBox 节点 IP，需根据实际情况进行填写。
+* 登录密码默认为 `zhu88jie`。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+. 从 FirstBox 节点跳转至 core0 节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，查看当前 Hydro 集群列表。
++
+[source,shell]
+----
+docker exec -it hydro_confd /qingstor/bin/hydro cluster list
+----
+
+. 命令行回显内容如下所示，确认磁盘是否都正常。
++
+[source,shell]
+----
+Cluster   Type       Disks(Normal)  Total   Used     Use%
+Cluster1  Replica 3  36(36)         13.1TB  995.0GB  7%  
+----
++
+返回字段说明
++
+[cols="2,8", options="header"]
+|===
+|字段 |说明
+
+|Cluster |集群名称。
+|Type |集群的数据冗余模式，这里的 `Replica 3` 即表示当前集群使用 3 副本的数据冗余模式。
+|Disks(Normal) |集群的磁盘总数量与当前正常磁盘数量，这里的 `36(36)` 即表示当前集群中总磁盘数量为 36，其中正常磁盘数量为 36。两个数字相等，说明当前集群中磁盘均正常。
+|Total |集群总容量。
+|Used |集群当前已使用容量。
+|Use% |集群当前已使用容量占比。
+|===
+
+
+
+. 查看指定集群的详细信息。如上输出所示，当前集群名为 `Cluster1`，因此查询命令如下。
++
+[source,shell]
+----
+docker exec -it hydro_confd /qingstor/bin/hydro cluster 1 info
+----
+
+. 命令行回显内容中，确认所有磁盘的 `Status` 字段均为 `Normal` 状态，且磁盘容量获取正常即可。
++
+[source,shell]
+----
+
+Devices
+Dev_ID UUID(SPA_ID)                                             Role        Use%               Status
+1      a8af5df8-6b3a-11ed-bf32-a0369fb08e9e14221866172956404297 Leader(1)  82.2GB/1.1TB(7%) 2022-12-02 10:52:46 Normal
+2      aaa0c87f-6b3a-11ed-a003-a0369fb08e9e12281257111771240951 Leader(1)  82.8GB/1.1TB(7%) 2022-12-02 10:52:46 Normal
+
+----
+
+
+=== 检查数据一致性
+
+若当前环境中，存在某些节点有断过网或者重启过，用户需要查看一下等待修复的文件列表。
+
+. 登录当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
++
+include::../../../../_components/note.adoc[]
+
+* 命令行中的 `<firstbox ip>` 为当前环境的 FirstBox 节点 IP，需根据实际情况进行填写。
+* 登录密码默认为 `zhu88jie`。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+. 从 FirstBox 节点跳转至 core0 节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，查看修复队列中的文件列表。
++
+[source,shell]
+----
+/qingstor/bin/hydro_confd/hydro cluster 1 heal-info
+----
+
+.. 若输出结果如下所示，则说明当前环境中，无等待修复的文件列表。
++
+[source,shell]
+----
+There are no repairing or pending processes
+----
+
+.. 输出结果如下所示，第一列是 Bucket 或 FS 的 ID，第二列是文件名 (inode_id)，第三列是修复花费的时间与完成修复的时间点。
++
+[source,shell]
+----
+shard 0: history: 12
+---------------------------------
+id(65), Unknow(294321869919788), <1s(done at 2022-12-04 04:07:26)
+id(240), Unknow(287384355476703), <1s(done at 2022-12-04 04:07:25)
+id(240), Unknow(287384355476703), <1s(done at 2022-12-04 04:07:23)
+id(240), Unknow(287384355476703), <1s(done at 2022-12-04 04:07:21)
+id(240), Unknow(287384355476703), <1s(done at 2022-12-04 04:07:19)
+id(240), Unknow(287384355476703), <1s(done at 2022-12-04 04:07:17)
+id(240), Unknow(287384355476703), <1s(done at 2022-12-04 04:07:15)
+id(65), Unknow(294321869919788), <1s(done at 2022-12-04 04:07:14)
+id(240), Unknow(287384355476703), <1s(done at 2022-12-04 04:07:13)
+id(240), Unknow(287384355476703), <1s(done at 2022-12-04 04:07:11)
+id(240), Unknow(287384355476703), <1s(done at 2022-12-04 04:07:09)
+id(65), Unknow(302296210693453), <1s(done at 2022-12-04 04:07:09)
+
+shard 5: history: 1
+---------------------------------
+id(65), Unknow(401481229996010), <1s(done at 2022-12-04 04:07:14)
+
+shard 11: history: 1
+---------------------------------
+id(243), Unknow(551210180047190), <1s(done at 2022-12-04 04:07:26)
+----
+
+. 执行如下命令行，查看文件修复历史。
++
+[source,shell]
+----
+/qingstor/bin/hydro_confd/hydro cluster 1 heal-info -h
+----

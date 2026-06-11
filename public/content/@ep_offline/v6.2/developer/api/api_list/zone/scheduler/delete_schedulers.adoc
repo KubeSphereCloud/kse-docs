@@ -1,0 +1,71 @@
+---
+title: 删除定时器（DeleteSchedulers）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| owner
+| String
+| false
+| 资源的所有者
+
+| schedulers
+| Array
+| true
+| 定时器id列表
+
+| zone
+| String
+| true
+| 请求区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| scheduler_ids
+| Array
+| false
+| 定时器id列表
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeleteSchedulers",
+  "owner": "usr-BnnisHWR",
+  "schedulers": [
+    "schd-8rzuyrmr"
+  ],
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteSchedulersResponse",
+  "ret_code": 0,
+  "scheduler_ids": [
+    "schd-8rzuyrmr"
+  ],
+  "trace_id": "PJjhXE04"
+}
+----

@@ -1,0 +1,102 @@
+---
+title: custom 配置说明
+weight: 10
+---
+
+在企业云 v6.0 版本之前，用户可通过 custom.poe 配置文件对 Console 和 AppCenter 控制台前端关键词和语句进行替换，从而实现对文字去品牌化。
+
+从企业云 v6.0 版本开始，用户可直接通过配置中心的 **webconsole-common 应用** > **brand 配置**来实现，详细操作可参见link:../../example/brand/#_替换品牌词关键字[替换品牌词/关键字]。
+
+若 **brand 配置**未覆盖完所有的关键词和语句，仍可通过 custom.poe 配置文件进行修改：
+
+* 企业云 v6.0 版本，配置中心还未纳管 custom.poe 配置文件，用户需登录云平台的 Webservice 节点上创建或修改 custom.poe 配置文件。
+* 企业云 v6.1 版本，配置中心已支持纳管 custom.poe 配置文件，用户需通过配置中心修改 custom_cn 和 custom_en 配置。
+
+以下介绍在配置中心修改 custom 配置的详细步骤。
+
+== 纳管 custom 配置
+
+云平台安装完成后，配置中心默认没有 custom_cn 和 custom_en 配置，需要用户手动在 FirstBox 创建配置文件并同步到配置中心。该步骤仅需执行一次。
+
+. 登录云平台 FirstBox。
+. 执行以下命令，在 FirstBox 上创建 custom_cn.poe 和 custom_en.poe 文件。
+
+** 升级到 v6.1 之前，已修改过 custom.poe 配置文件，需要将 Webservice 节点上 zh_CN 和 en 目录下的 custom.poe 文件，复制到 FirstBox 节点，并重命名为 custom_cn.poe 和 custom_en.poe 文件。
++
+[source]
+----
+scp testbm1a-webservice0:/pitrix/lib/pitrix-webconsole/locale/zh_CN/custom.poe /pitrix/conf/variables/webs/webconsole/custom_cn.poe
+scp testbm1a-webservice0:/pitrix/lib/pitrix-webconsole/locale/en/custom.poe /pitrix/conf/variables/webs/webconsole/custom_en.poe
+----
+
+** 若之前没有修改过 custom.poe 配置文件，创建两个空文件即可。
++
+[source]
+----
+touch /pitrix/conf/variables/webs/webconsole/custom_cn.poe
+touch /pitrix/conf/variables/webs/webconsole/custom_en.poe
+----
+
+. 执行以下命令，将 variables 目录的数据同步到配置中心。
++
+[source]
+----
+hinata-admincli sync-files
+----
++
+然后就可以在配置中心看到对应的配置了：
++
+image::/images/ep_offline/cadmin/cadmin_custom.png[]
+
+== 修改 custom 配置
+
+本小节以修改 custom_cn 为例。
+
+. link:../../manual/login[登录配置中心]。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 在配置管理页面，找到 **webconsole 应用** > **custom_cn 配置**。
+. 点击操作列的**管理配置**，进入对应的配置页面。
++
+image::/images/ep_offline/cadmin/cadmin_custom_01.png[]
++
+include::../../../../../_components/note.adoc[]
+该配置支持两种语法：
+
+* 关键词替换：用 replacekey/replacestr 标识。
+* 语句替换：用 msgid/msgstr 标识。具体 msgid 可以在 Webservice 节点上的 src/locale/zh_CN/LC_MESSAGES/django.po 文件中查看。
+include::../../../../../_components/table_footer.adoc[]
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。
++
+大约一分钟后生效，可登录 Console 检查配置。
+
+== 配置示例
+
+[source]
+----
+replacekey "QingCloud"
+replacestr "xx云"
+
+replacekey "青云"
+replacestr "xx云"
+
+replacekey "xx云xx云"
+replacestr "xx云"
+
+replacekey "xx云 xx云"
+replacestr "xx云"
+
+replacekey "VPC"
+replacestr "虚拟私有网络"
+
+
+msgid "DESC_INSTANCES"
+msgstr "这是一段主机的描述。"
+
+msgid "DESC_EIPS"
+msgstr "这是一段公网 IP 的描述。"
+
+msgid "zone_id"
+msgstr "zone中文名"
+----

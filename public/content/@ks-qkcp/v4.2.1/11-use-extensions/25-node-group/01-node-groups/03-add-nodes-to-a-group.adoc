@@ -1,0 +1,37 @@
+---
+title: "分配节点到节点组"
+weight:  03
+---
+
+:ks_permission: **节点组管理**
+:ks_menu: **节点 > 集群节点**
+
+
+本节介绍如何将集群节点分配到节点组。
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **KubeSphere 节点组**扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
+
++
+
+include::../../../../_custom/clusterManagement/nodes/nodes-oper-openListPage_new.adoc[]
+
++
+
+. 在需要操作的节点右侧点击image:/images/ks-qkcp/zh/icons/more.svg["more",18,18]，然后在下拉列表中选择**分配到节点组**。
+
+. 在**分配到节点组**对话框，选择一个节点组，然后点击**确定**。
++
+节点列表中将显示该节点所属的节点组。

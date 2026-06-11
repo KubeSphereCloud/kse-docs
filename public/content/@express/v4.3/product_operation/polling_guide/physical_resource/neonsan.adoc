@@ -1,0 +1,42 @@
+---
+title: "分布式存储检查"
+weight: 6
+---
+
+[cols="1h,4a"]
+|===
+|巡检目的
+|检查云易捷平台的分布式存储健康状态
+
+|巡检条件
+|云平台可正常稳定运行
+
+|巡检过程
+|
+. 后台登录到云易捷 FirstBox 节点。（用户名/密码：yop/zhu1241jie）
+. 切换至 root 用户。
+. 执行 ``neonsan list_store``，查看各存储节点状态。
+. 执行 ``neonsan list_ssd -H``，查看各磁盘状态。
+. 执行 ``neonsan list_volume -detail -H``，查看各卷的状态。
+. 执行 ``neonsan list_job``，查看各异步任务状态及进度。
+
+
+|预期结果
+|
+. 可正常登录云易捷 FistBox 节点。
+. 成功切换至 root 用户。
+. 各存储节点的状态均为 OK。
+. 各磁盘的状态均为 OK。
+. 各卷状态均为 OK。
+. 无正在进行的异步任务。
+
+
+|检查结果示例
+|
+image::/images/express/polling/polling_neonsan_1.png[]
+image::/images/express/polling/polling_neonsan_2.png[]
+image::/images/express/polling/polling_neonsan_3.png[]
+image::/images/express/polling/polling_neonsan_4.png[]
+|===
+
+

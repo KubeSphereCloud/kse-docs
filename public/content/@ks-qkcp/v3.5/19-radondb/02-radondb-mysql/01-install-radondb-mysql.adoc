@@ -1,0 +1,96 @@
+---
+title: "安装 RadonDB MySQL"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 安装 RadonDB MySQL"
+description: "介绍如何安装 RadonDB MySQL。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 93c270e7bd0f4aa4b31f380ccfe6cbb8
+:ks_xref_id: 113a26feb6384708ba85a932e585de98
+:ks_comp: ../../../components/
+:ks_title: 安装 RadonDB MySQL
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 安装 RadonDB MySQL
+:ks_description: 介绍如何安装 RadonDB MySQL。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何从{ks_product_both}应用商店安装 RadonDB MySQL。
+
+
+== 前提条件link:[id=20145e10527a4cc5bac0e58ea9f841bc]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+* 您需要获取 RadonDB MySQL 应用授权。有关更多信息，请联系{ks_product_both}技术支持。
+
+
+== 操作步骤link:[id=940b518b019044d193726b4b8c1a2cc0]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在页面右侧选择**安装 > RadonDB MySQL**。
+
+. 在**应用信息**页面，点击**安装**。
+
+. 在**基本信息**页签，设置 RadonDB MySQL 应用的基本信息和安装位置，然后点击**下一步**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|RadonDB MySQL 应用的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 32 个字符。
+
+|版本
+|RadonDB MySQL 应用的版本。
+
+|描述
+|RadonDB MySQL 应用的描述信息。描述可包含任意字符，最长 256 个字符。
+
+|位置
+|RadonDB MySQL 应用所属的企业空间、集群和项目。
+|===
+--
+
+. 在**应用设置**页签，设置 MySQL 数据库的参数，然后点击**安装**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|内核版本
+|MySQL 应用的内核版本。目前支持 MySQL 5.7 和 MySQL 8.0。
+
+|资源
+|系统为 MySQL 数据库预留的 CPU 和内存资源，同时也是 MySQL 数据库可使用的 CPU 和内存资源上限。
+
+|存储类 
+|MySQL 数据库使用的存储系统对应的存储类。如果下拉列表中没有符合需要的存储类，您需要联系平台管理员创建存储类。
+
+|卷
+|MySQL 数据库使用的卷大小，单位为 GiB。
+
+|备数据库
+|用于确保高可用性的备数据库的数量，取值可以为 **1**、**2** 或 **4**。
+|===
+
+RadonDB MySQL 安装完成后将显示在 RadonDB 应用列表中。
+--

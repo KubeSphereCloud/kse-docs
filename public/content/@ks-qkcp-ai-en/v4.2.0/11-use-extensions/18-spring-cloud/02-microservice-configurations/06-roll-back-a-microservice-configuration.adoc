@@ -1,0 +1,48 @@
+---
+title: "Roll Back Microservice Configuration"
+keywords: "Kubernetes, {ks_product}, Project Management, Spring Cloud, Roll Back Microservice Configuration"
+description: "Describes how to roll back microservice configuration."
+weight: 06
+---
+
+:ks_permission: ** Spring Cloud Microservice Management**
+:ks_navigation:  **Spring Cloud > Microservice Configuration**
+
+
+This section describes how to roll back microservice configuration.
+
+Each time you edit a microservice configuration, a modification record is generated. You can use these records to roll back the microservice configuration to a historical version.
+
+
+== Prerequisites
+
+* The **KubeSphere Spring Cloud** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/microserviceConfiguration/microserviceConfiguration-oper-openDetailsPage.adoc[]
+
++
+
+. On the microservice configuration details page, click **Operation > Roll Back**.
+
+. In the **Roll Back** dialog box, select the target modification record, and then click **OK**.

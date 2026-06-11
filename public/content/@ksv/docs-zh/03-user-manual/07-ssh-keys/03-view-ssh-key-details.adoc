@@ -1,0 +1,56 @@
+---
+title: "查看 SSH 密钥详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, SSH, 密钥, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看 SSH 密钥详情。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 22c561dfd89644bba3af12735bb9880e
+:ks_xref_id: 20a1aa52cf614ed19dfbe4385a41f1d7
+:ks_comp: ../../../components/
+:ks_title: 查看 SSH 密钥详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看 SSH 密钥详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, SSH, 密钥, 详情, 查看
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看 SSH 密钥详情。为安全起见，每个用户仅能查看自己创建的 SSH 密钥。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=d4d971c0cd1f4d6f868302e278ab3977]
+
+include::../../../_custom/ssh/ssh-key-steps.adoc[]
+
+. 在 SSH 密钥列表页面，点击目标 SSH 密钥名称，进入 SSH 密钥详情页面。
+
+. 在 SSH 密钥详情页面的左侧区域，查看 SSH 密钥的基本信息。
++
+--
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|ID
+|SSH 密钥在系统中的通用唯一标识符。
+
+|加密方式
+|SSH 密钥的加密方式。默认采用 RSA 加密方式。
+
+|创建时间
+|SSH 密钥的创建时间。
+
+|创建者
+|SSH 密钥的创建者。
+|===
+--
+
+. 在 SSH 密钥详情页面的右侧区域，查看 SSH 密钥的公钥信息。私钥已在 SSH 密钥创建完成后自动下载至本地，暂时不支持通过控制台查看私钥。
+
+

@@ -1,0 +1,35 @@
+---
+title: "Portal 页面方式"
+weight: 1
+---
+
+
+== 前提条件
+
+* 已成功申请 License，且已获得 License 授权证书。
+* 安装部署的 NeonSAN 集群为 v3.4.1 及以上版本，且 Portal 管理平台可正常登录。
+* 集群从 v3.4.1 版本进行升级。
+
+== 注意事项
+
+* NeonCenter 组件的升级完成前未导入 License 时，会影响 NeonSAN 卷的创建、以及 IaaS 侧虚拟机和硬盘的创建，其影响时长由集群规模而定，受影响``总时间 = 升级节点数 x 3 min``。建议此段时间内请勿进行卷、虚拟机以及硬盘的创建。
+* NeonSAN 集群完成 NeonCenter 组件的升级后，即可使用 API 命令行导入并激活 License。
+* 针对 Portal 页面方式适用于完成 NeonSAN 全部升级后进行 License 导入。
+
+== 操作步骤
+
+. 查看 License 授权证书邮件，记录 license_code。
+. 登录 Portal 管理平台，默认进入总览页面。点击右上角用户名，选择**系统设置**，进入系统设置界面。
++
+image::/images/neonsan/license_1.png[]
+
+. 在系统设置页面，选择 **License 管理**页签，点击**激活 License**。
+
+. 在弹出的**激活 License** 窗口中，输入 License 激活码，即步骤 1 中记录的 license_code，点击**确定**即可。
++
+include::../../../../../_components/note.adoc[]
+使用新的 License 密钥重新激活时，会覆盖集群中原有的 License。
+include::../../../../../_components/table_footer.adoc[]
+
+. 返回 **License 管理**页面，其状态显示``已激活``，有效期与授权容量与邮件内容相符，则表示 License 激活成功。
+

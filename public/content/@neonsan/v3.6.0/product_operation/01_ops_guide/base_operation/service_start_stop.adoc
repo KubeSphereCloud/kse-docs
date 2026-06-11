@@ -1,0 +1,47 @@
+---
+title: "服务的开始与停止"
+weight: 7
+---
+
+本节内容介绍运维过程中，可能涉及到的 NeonSAN 服务的启停操作。
+
+. 逐个登录 NeonSAN 节点服务器。
+. 执行如下命令，查看节点上由 supervisor 管理的所有服务。
++
+[,shell]
+----
+supervisorctl status
+----
+
+. 启动相应服务。
++
+[,shell]
+----
+supervisorctl start <service_name>
+----
++
+include::../../../../../_components/note.adoc[]
+<service_name> 为服务名称，需根据实际情况进行修改。如启动 store 服务，命令为 ``supervisorctl start neonstore``。
+include::../../../../../_components/table_footer.adoc[]
+
+. 停止相应服务。
++
+[,shell]
+----
+supervisorctl stop <service_name>
+----
++
+include::../../../../../_components/note.adoc[]
+<service_name> 为服务名称，需根据实际情况进行修改。如停止 store 服务，命令为 ``supervisorctl stop neonstore``。
+include::../../../../../_components/table_footer.adoc[]
+
+. 重启相应服务。
++
+[,shell]
+----
+supervisorctl restart <service_name>
+----
++
+include::../../../../../_components/note.adoc[]
+<service_name> 为服务名称，需根据实际情况进行修改。如重启 store 服务，命令为 ``supervisorctl restart neonstore``。
+include::../../../../../_components/table_footer.adoc[]

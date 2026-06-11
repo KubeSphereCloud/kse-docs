@@ -1,0 +1,35 @@
+---
+title: "手动恢复降级卷"
+weight: 1
+---
+
+== 适用场景
+若系统配置了自动恢复，则无需手动操作，降级卷会触发自动恢复。如需手动触发降级卷的恢复，可按如下步骤操作：
+
+== 操作步骤
+
+. 执行如下命令，对降级卷进行恢复。
++
+[,shell]
+----
+neonsan recovery_volume -volume pool/vol_name
+----
++
+include::../../../../../../_components/note.adoc[]
+-volume 用于指定卷名，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 查看异步任务执行状态，确认该卷是否恢复成功。
++
+[,shell]
+----
+neonsan list_job
+----
+
+. 待该卷成功恢复完成后，可执行如下命令查看卷的状态。
++
+[,shell]
+----
+neonsan list_volume -detail
+----
+. 若系统中仍有降级卷，则重复执行以上步骤即可。

@@ -1,0 +1,80 @@
+---
+title: 创建通知联系人（CreateNotificationList）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| is_account_contacts
+| Integer
+| false
+| 是否账户联系人
+
+| notification_items
+| Array
+| true
+| 联系方式id
+
+| notification_list_name
+| String
+| true
+| 接收人姓名
+
+| owner
+| String
+| false
+| 所属用户id
+
+| remarks
+| String
+| false
+| 备注
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_list_id
+| String
+| false
+| 接收人id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateNotificationList",
+  "notification_items": [
+    "ni-xxxxxxxx"
+  ],
+  "notification_list_name": "test",
+  "owner": "usr-xxxxxxxx",
+  "remarks": "",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateNotificationListResponse",
+  "notification_list_id": "nl-xxxxxxxx",
+  "ret_code": 0
+}
+----

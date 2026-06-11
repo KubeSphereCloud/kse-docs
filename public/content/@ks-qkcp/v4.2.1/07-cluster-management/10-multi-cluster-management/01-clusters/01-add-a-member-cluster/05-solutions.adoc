@@ -1,0 +1,176 @@
+---
+title: "添加集群的常见问题"
+weight: 05
+---
+
+添加成员集群时，若遇到异常提示，可参照下文进行处理。
+
+== 若使用 kubeconfig 直接连接集群
+
+=== 报错：managed by another host cluster
+
+问题描述：`current cluster is managed by another host cluster 'host'`
+
+解决办法：
+
+* 场景 1
++
+若成员集群想要被新的集群纳管，请在成员集群上link:../../../../../03-installation-and-upgrade/04-uninstall-kubesphere/01-uninstall-kubesphere-only/[卸载 KubeSphere] 后，重新添加该集群。
+
+* 场景 2
++
+====
+若成员集群被意外移除，需要被原 host 集群重新纳管，可编辑成员集群的 kubesphere-system 项目，删除以下注解，然后重新添加即可。
+
+[source,bash]
+----
+kubectl edit ns kubesphere-system
+----
+
+[source,yaml]
+----
+  annotations:
+    cluster.kubesphere.io/host-cluster: host # 删除此行
+    cluster.kubesphere.io/name: member # 删除此行
+----
+====
+
+=== 报错：connect: connection refused
+
+问题描述：`Get "https://172.18.0.3:6443/api/v1/namespaces/kube-system?timeout=10s": dial tcp 172.18.0.3:6443: connect: connection refused`
+
+解决办法：
+
+* link:../01-add-a-member-cluster-using-direct-connection/#_获取成员集群_kubeconfig[检查 kubeconfig 中的 server 地址]。
+
+* 检查 host 集群节点与成员集群的网络联通性。
++
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+主集群所有节点必须能访问成员集群的 Kubernetes API 服务（默认为成员集群主节点的 6443 端口）。取决于您的网络环境，您可能需要配置防火墙和流量转发规则。
+|===
+
+=== 报错：illegal base64 data at input byte 1472
+
+问题描述：`illegal base64 data at input byte 1472`
+
+解决办法：检查成员集群的 kubeconfig 信息，可能字段有内容缺失。
+
+=== 报错：cluster already exists
+
+问题描述：`cluster xxx already exists (member), MUST not import the same cluster twice`
+
+解决办法：该 kubeconfig 已经被添加到 host 集群，请添加其他集群的 kubeconfig。
+
+=== 报错：tls: failed to verify certificate
+
+问题描述：`Get "https://172.31.18.200:3000/api/v1/namespaces/kube-system?timeout=10s": tls: failed to verify certificate: x509: certificate is valid for 10.233.0.1, 172.18.0.2, 127.0.0.1, not 172.31.18.200`
+
+解决办法：检查 kubeconfig 中的 server 地址。地址错误导致 TLS 证书中没有该地址。
+
+== 若使用 tower 代理连接集群
+
+若使用 ``KubeSphere 多集群代理连接``（tower）添加集群时，出现以下任一错误，原因均为 ``tower`` 保密字典的配置信息缺失。
+
+错误 1：`failed to get secret configuration.yaml value`
+
+错误 2：`cannot generate agent deployment yaml for member cluster because tower.kubesphere-system.svc service has no public address, please check tower.kubesphere-system.svc status, or set address mannually in ClusterConfiguration`
+
+``tower`` 保密字典的配置示例如下：
+
+[source,yaml]
+----
+kind: Secret
+apiVersion: v1
+metadata:
+  name: tower
+  namespace: kubesphere-system
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    config.kubesphere.io/type: cluster-connection-config
+    kubesphere.io/extension-ref: tower
+  annotations:
+    kubesphere.io/creator: admin
+    meta.helm.sh/release-name: tower
+    meta.helm.sh/release-namespace: extension-tower
+data:
+  configuration.yaml: xxxx
+----
+
+ifeval::["{file_output_type}" == "html"]
+解决办法：您需要在 `data` 下的 `configuration.yaml` 中配置 `proxyPublishAddress: http://xxx:xxx`。配置方法请参考link:../../../../../11-use-extensions/19-tower/02-add-a-member-cluster-using-proxy-connection/#_集群中没有可用的_loadbalancer[通过代理连接添加成员集群]。
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+解决办法：您需要在 `data` 下的 `configuration.yaml` 中配置 `proxyPublishAddress: http://xxx:xxx`。配置方法请参考《KubeSphere 扩展组件使用指南》中的“KubeSphere 多集群代理连接”组件。
+endif::[]
+
+== 创建成功但是一直未就绪
+
+=== 方法 1：查看安装日志
+
+查看在成员集群​​上部署 KubeSphere 时所产生的安装日志。
+
+* **对于 KubeSphere 4.2.0 之前版本**
++
+====
+若 KubeSphere 版本低于 4.2.0，您需要在 ks-controller-manager 中获取安装日志，然后根据报错日志进行排查。方法如下：
+
+. 在 host 集群上执行以下命令，获取 `ks-controller-manager` 的实际 Pod 名称，如 `ks-controller-manager-7c6f5d8c86-abcx1`。
++
+[source,bash]
+----
+kubectl get pods -n kubesphere-system -l app=ks-controller-manager
+----
+
+. 使用上一步获取到的实际 Pod 名称，替换掉 <pod-name>，然后执行以下命令获取日志内容。
++
+[source,bash]
+----
+kubectl logs -f <pod-name> -n kubesphere-system
+----
+
+. 查看日志，根据报错信息排查问题。
+====
+
+* **对于 KubeSphere v4.2.0 及更高版本**
++
+====
+对于 KubeSphere v4.2.0 及更高版本，获取最近运行的 pod `helm-install-ks-core-xxx` 的安装日志，然后根据报错日志进行排查。方法如下：
+
+. 在 host 集群上执行以下命令，在输出的 annotations 部分获取最近运行的 `helm-install-ks-core` 的实际 Pod 名称，如 `helm-install-ks-core-cjpps2`。
++
+[source,bash]
+----
+kubectl get cluster <your-member-cluster-name> -o yaml
+----
+
+. 使用上一步获取到的实际 Pod 名称，替换掉 <pod-name>，然后执行以下命令获取日志内容。
++
+[source,bash]
+----
+kubectl logs -f <pod-name> -n kubesphere-system
+----
+
+. 查看日志，根据报错信息排查问题。
+====
+
+=== 方法  2：查看运行状态
+
+在 host 集群上执行以下命令，查看 `status.conditions` 字段下的集群运行状态信息，根据 `message` 提示进行排查。
+
+[source,bash]
+----
+kubectl get cluster <cluster-name> -o yaml
+----
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|将 <cluster-name> 替换为待排查集群的名称。
+
+|===

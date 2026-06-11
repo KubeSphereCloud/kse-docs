@@ -1,0 +1,63 @@
+---
+title: "删除主题"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, Kafka, 删除主题"
+description: "介绍如何删除主题。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: f1b395d35d9842f0abe073a44458bb39
+:ks_xref_id: 8809d3e5ff09479899d760281624a884
+:ks_comp: ../../../../components/
+:ks_title: 删除主题
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, Kafka, 删除主题
+:ks_description: 介绍如何删除主题。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何删除 RadonDB Kafka 主题。
+
+
+== 前提条件link:[id=c74a0c7464c34f0f842eaa39936fdbff]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbKafka/radondbkafka-prer-installRadondbkafka.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbKafka/radondbkafka-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=f4fa4b1323834cdd8e7f8a2973abbe4d]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面右侧点击**主题**，在目标主题右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除**。
+
+. 在**删除**对话框，输入主题名称，点击**确定**。

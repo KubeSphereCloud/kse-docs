@@ -1,0 +1,19 @@
+---
+title: "启用日志"
+weight: 04
+---
+
+* 错误日志：默认打印到 stdout，可以在 ks-console 上使用日志检索工具查询到
+
+* 慢日志：默认开启，记录到容器的 /var/log/mysql/mysql-slow.log
+
+* 审计日志：默认关闭，开启方法如下:
++
+--
+[,bash]
+----
+kubectl patch mysqlclusters.mysql.radondb.com sample --type=merge -p '{"spec":{"mysqlOpts":{"mysqlConf":{"audit_log_policy":"ALL"}}}}'
+----
+
+配置完成后审计日志路径为：/var/log/mysql/mysql-audit.log
+--

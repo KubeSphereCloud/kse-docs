@@ -1,0 +1,79 @@
+---
+title: "如何使用端口转发功能"
+description: 如何使用 VPC 的端口转发功能。
+keywords: VPC, VPC 网络, 端口转发
+draft: false
+weight: 20
+---
+
+== 功能介绍
+
+VPC 网络提供端口转发（DNAT）功能，将 NAT 网关上的公网IP映射给私有网络的云服务器使用，使云服务器可以面向互联网提供服务，比如 http/https 等。
+
+== 配置方法
+
+进入 VPC 网络详情页，在**管理配置**页签，选择**端口转发** > **添加规则**。
+
+image::/images/cloud_service/network/vpc/vpc_dnat_01.png[,100%]
+
+参数说明如下：
+
+* *名称*：自定义的名称，便于区分转发规则。
+* *协议*：可以设置 TCP/UDP 两种类型的协议。
+* *源端口*：NAT 网关会将以指定协议和端口访问该公网IP的请求转发到目标云服务器的内网端口上。
+* *内网 IP*：云服务器获取的私有网络 IP 地址。
+* *内网端口*：云服务器需要对公网暴露的端口服务，比如 http/https/ssh 等。
+
+== 案例一
+
+比如以下的配置就可以将公网 8000 端口的请求转发到 192.168.10.2 这个云服务器的 22 号端口，可添加端口转发规则，如下图所示。
+
+image::/images/cloud_service/network/vpc/vpc_dnat_02.png[,100%]
+
+添加成功后，需要放行 VPC 所在安全组源端口对应的下行规则，并应用修改。
+
+image::/images/cloud_service/network/vpc/vpc_dnat_09.png[,100%]
+
+include::../../../../../_components/note.adoc[]
+
+* 可以针对云服务器的同一内网端口添加多条转发规则，只要采用不同的源端口即可。
+
+* 可以针对同一个内网云服务器的多个内网服务添加多条转发规则。
+
+* 如果想实现指定 IP 或者 IP 段访问源端口的服务，可以在安全组规则中配置源 IP（相当于白名单）。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+//image::/images/cloud_service/network/vpc/vpc_dnat_05.png[,100%]
+
+== 案例二
+
+比如需要本地通过公网访问数据库服务，数据库节点的 IP 地址为:192.168.10.2。
+
+. 配置一条端口转发的规则将数据库服务的 3306 端口暴露给公网。
++
+
+include::../../../../../_components/attention.adoc[]
+
+建议加上源 IP，否则有被网络攻击的风险。
+
+include::../../../../../_components/table_footer.adoc[]
+
++
+image::/images/cloud_service/network/vpc/vpc_dnat_08.png[,100%]
+
+. 放行安全组下行 3336 号端口，否则公网将无法访问。
++
+image::/images/cloud_service/network/vpc/vpc_dnat_11.png[,100%]
+
+. 验证公网访问是否正常。
++
+[source]
+----
+[root@i-b6s3dvje ~]# telnet 139.198.19.41 3336
+Trying 139.198.19.41...
+Connected to 139.198.19.41.
+Escape character is '^]'.
+----
+

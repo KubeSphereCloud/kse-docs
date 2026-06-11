@@ -1,0 +1,22 @@
+---
+title: "Application Management"
+keywords: "Kubernetes, {ks_product}, workspace, Application Management, Application Template"
+description: "Introduces how to manage application templates through a workspace."
+weight: 02
+layout: "second"
+---
+
+
+In the KubeSphere platform, an application specifically refers to a business program composed of one or more workloads, services, Ingresses, and other resources. The application template feature of the KubeSphere platform is implemented based on Helm at its core, using Helm Charts to define the orchestration method of applications.
+
+You can create an application template in a workspace that contains one or more application versions (each application version is defined by a Helm Chart), thereby installing the applications defined in the application template within the projects of the workspace.
+
+ifeval::["{file_output_type}" == "html"]
+For more information about application repositories in a workspace, please refer to link:../../../08-workspace-management/05-app-management/02-app-repositories/[Application Repositories].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For more information about application repositories in a workspace, please refer to the "Application Repositories" chapter in the *KubeSphere Workspace and Project Management Guide*.
+endif::[]
+
+For more information about Helm, please refer to link:https://helm.sh/docs/[Helm Official Documentation].

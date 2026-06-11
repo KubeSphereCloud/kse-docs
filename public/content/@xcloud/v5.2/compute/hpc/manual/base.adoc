@@ -1,0 +1,89 @@
+---
+title: "基础操作"
+linkTitle: "基础操作"
+description: 创建集群和创建挂载点
+keyword: 云计算,HPC，创建集群
+draft: false
+weight: 10
+---
+本章节介绍如何创建集群。
+
+== 前提条件
+
+* 已获取管理控制台账号和密码。
+* 已完成个人实名认证且账户余额大于 0 元。
+* 已开通弹性高性能计算 HPC 服务。
+
+== 创建 EHPC 集群
+
+详细内容可参考link:../../quick-start/create_ehpc[创建 EHPC 集群]
+
+== 创建挂载点
+
+. 登录管理控制平台，创建 EHPC 集群，在**高级参数**配置页面，点击**创建新的 NAS 挂载点**，跳转至**文件存储 vNAS**页面。
++
+image::/images/cloud_service/compute/hpc/base_1.png[base_1]
+
+. 在文件系统页面，点击**创建**，在弹出的**创建 NAS**窗口中，配置各项参数，点击**确认**即可。
+
++
+image::/images/cloud_service/compute/hpc/base_2.png[base_2,60%]
+
++
+**参数说明**：
++
+[options="header",cols="1,4a"]
+|===
+|参数 |说明
+
+|名称
+|用户自定义，根据实际情况进行修改即可
+
+|类型
+|支持选择性能型或超高性能型
+
+|配置
+|建议选择中型或大型配置
+
+|网络
+|此处需选择**私有网络**
+
+|VPC 网络
+|需选择 EHPC 集群所在的 VPC 网络
+
+|私有网络
+|需选择 EHPC 集群所在的私有网络
+|===
+
+
+. 点击已创建成功的文件系统的 ID，进入其详情页面，在**共享存储目标**页签内，点击**创建**。
++
+image::/images/cloud_service/compute/hpc/base_3.png[base_3]
+
+. 在弹出的**创建共享存储目标**窗口中，选择目标类型为 NFS，配置各项参数后点击**提交**。
++
+image::/images/cloud_service/compute/hpc/base_4.png[base_4,60%]
++
+**参数说明**：
++
+[options="header",cols="1,4a"]
+|===
+|参数 |说明
+
+|目标类型
+|选择 NFS 类型
+
+|共享目录
+|用户自定义目录名称
+
+|硬盘
+|建议使用新申请的容量型或性能型硬盘
+
+|权限组
+|* 若平台内已经存在权限组，点击**选择权限组**。
+* 若无权限组，则需点击**创建权限组**进行创建。
+|===
+
+. 返回共享存储目标页签，点击**应用修改**，使得创建的共享存储目录生效即可。
++
+image::/images/cloud_service/compute/hpc/base_5.png[base_5]

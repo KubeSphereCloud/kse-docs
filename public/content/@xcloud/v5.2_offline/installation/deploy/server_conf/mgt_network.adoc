@@ -1,0 +1,245 @@
+---
+title: "配置管理网络"
+weight: 40
+---
+
+用户需要根据环境规划，依次登录每台服务器，为服务器配置管理网络。
+
+== 配置要求
+
+* 万兆 bond 上联网卡配置，使用命令测试 bond 是否 20G。
++
+[source]
+----
+ethtool bond0
+----
+* VG 网关节点，需要配置两对 bond，一条连接管理网络，一条连接公网。
+* Hyper-Sanc 融合节点，建议配置一对 bond 连接物理网络，两条私网线路配置存储私网。
+* 请使用同一网卡的两个口做 bond（避免网卡交叉使用）。
+
+== 操作步骤
+
+. 依次登录所有服务器节点。
+. 执行以下命令，修改/etc/network/interfaces中的配置。
++
+[source]
+----
+vi /etc/network/interfaces
+----
+
+== x86 网络配置示例
+=== SDN 模式网卡配置
+
+若选择 SDN 网络模式，请参照如下配置说明进行修改。
+
+示例（bond）：
+[source]
+----
+# This file describes the network interfaces available on your system 
+# and how to activate them. For more information, see interfaces(5). 
+
+# The loopback network interface 
+auto lo
+iface lo inet loopback
+
+
+auto ens2f0
+iface ens2f0 inet manual 
+bond-master bond0
+
+
+auto ens7f0
+iface ens7f0 inet manual 
+bond-master bond0
+
+# mgmt network
+auto bond0
+iface bond0 inet static
+address 10.10.0.11
+netmask 255.255.255.0
+gateway 10.10.0.254
+bond-mode 4
+bond-miimon 100
+bond-lacp-rate 1
+bond-slaves ens2f0 ens7f0
+----
+
+示例（单网卡）：
+
+[source]
+----
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# mgmt network
+auto ens7f0
+iface ens7f0 inet static
+  address 10.10.0.11
+  netmask 255.255.255.0
+  gateway 10.10.0.254
+----
+
+=== VLAN 模式网卡配置
+
+若选择 VLAN网络模式，请参照如下配置说明进行修改。
+
+示例（bond）：
+
+[source]
+----
+# This file describes the network interfaces available on your system 
+# and how to activate them. For more information, see interfaces(5). 
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+
+auto enp175s0f0
+iface enp175s0f0 inet manual 
+bond-master bond0
+
+
+auto enp175s0f1
+iface enp175s0f1 inet manual 
+bond-master bond0
+
+
+auto bond0
+iface bond0 inet manual 
+bond-mode 4
+bond-miimon 100
+bond-lacp-rate 1
+bond-slaves enp175s0f0 enp175s0f1
+
+# mgmt network
+
+auto vlan11   #注意此行和下一行的vlan11为vlan id，应与交换机上规划的vlan id匹配。
+
+iface vlan11 inet static 
+address 10.10.1.11
+netmask 255.255.255.0
+gateway 10.10.1.254 
+vlan_raw_device bond0
+----
+
+示例（单网卡）：
+
+[source]
+----
+# This file describes the network interfaces available on your system 
+# and how to activate them. For more information, see interfaces(5). 
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto enp175s0f1
+iface enp175s0f1 inet manual
+
+# mgmt network
+
+auto vlan11   #注意此行和下一行的vlan11为vlan id，应与交换机上规划的vlan id匹配。
+
+iface vlan11 inet static 
+address 10.10.1.11
+netmask 255.255.255.0
+gateway 10.10.1.254 
+vlan_raw_device enp175s0f1
+----
+
+== kylin 网络配置示例
+
+----
+# Ethernet 模式
+nmcli connection add type ethernet \
+    con-name enp129s0f1 \
+    ifname enp129s0f1 \
+    ipv6.method ignore \
+    ipv4.method manual \
+    ipv4.address "100.101.0.18/24"
+
+nmcli connection up enp129s0f1
+
+nmcli connection add type ethernet \
+    con-name ens1f1 \
+    ifname ens1f1 \
+    ipv6.method ignore \
+    ipv4.method manual \
+    ipv4.address "100.101.0.19/24"
+
+nmcli connection up ens1f1
+
+# Bridge  模式 
+nmcli connection add type bridge \
+    con-name br0 \
+    ifname br0 \
+    bridge.stp no
+
+nmcli connection add type ethernet \
+    con-name ens1f0 \
+    ifname ens1f0 \
+    slave-type bridge \
+    master br0
+
+nmcli connection modify br0 \
+    ipv4.addresses 172.31.30.19/24 \
+    ipv4.gateway 172.31.30.254 \
+    ipv4.dns 172.31.30.200 \
+    ipv4.method manual \
+    ipv6.method ignore
+
+nmcli connection up br0
+
+# Bond 模式 
+nmcli connection add type bond \
+    con-name bond0 \
+    ifname bond0 \
+    bond.options "lacp_rate=1,miimon=100,mode=802.3ad"
+
+nmcli connection add type ethernet slave-type bond \
+    con-name enp66s0f0 \
+    ifname enp66s0f0 \
+    master bond0
+
+nmcli connection add type ethernet slave-type bond \
+    con-name enp66s0f1 \
+    ifname enp66s0f1 \
+    master bond0
+
+nmcli connection modify bond0 \
+    ipv4.addresses 172.31.30.19/24 \
+    ipv4.gateway 172.31.30.254 \
+    ipv4.dns 172.31.30.200 \
+    ipv4.method manual \
+    ipv6.method ignore
+
+nmcli connection up bond0
+
+# VLan  模式 
+nmcli connection add type bridge \
+    con-name br0 \
+    ifname br0 \
+    bridge.stp no
+
+nmcli connection add type vlan \
+    con-name vlan30 \
+    ifname vlan30 \
+    vlan.id 30 \
+    vlan.parent ens1f0 \
+    slave-type bridge \
+    master br0
+
+nmcli connection modify br0 \
+    ipv4.addresses 172.31.30.19/24 \
+    ipv4.gateway 172.31.30.254 \
+    ipv4.dns 172.31.30.200 \
+    ipv4.method manual \
+    ipv6.method ignore
+
+nmcli connection up br0
+----

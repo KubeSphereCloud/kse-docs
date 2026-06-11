@@ -1,0 +1,19 @@
+---
+title: "Pod故障模拟"
+weight: 07
+---
+
+本节介绍如何模拟 Pod 故障（PodChaos）。
+
+PodChaos 通过直接操作 Pod 的生命周期，模拟 Pod 不可用、Pod 重建等场景，用于验证业务的高可用能力与自愈机制。
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用混沌工程扩展组件。
+
+== 支持的操作
+
+* 准备测试环境
+* Pod 不可用（Pod Failure）
+* 强制删除 Pod（Pod Kill）
+* 终止容器（Container Kill）

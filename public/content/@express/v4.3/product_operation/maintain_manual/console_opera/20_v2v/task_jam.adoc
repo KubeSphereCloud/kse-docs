@@ -1,0 +1,81 @@
+---
+title: "v2v 任务卡死"
+weight: 1
+---
+
+== 运维场景
+
+在 v2v 功能使用过程中，若创建 v2v 迁移任务长时间处于``进行中``状态，且任务进程处于挂载硬盘阶段，可参考如下步骤解决。
+
+== 注意事项
+
+v2v 节点上的 qemu-img 和 qemu-img-qbd 版本须与 Hyper 节点上的保持一致。可登录相应节点执行 ``qemu-img -V`` 查看版本信息。
+
+== 操作步骤
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，查看 v2v 节点基本信息。
++
+[source,shell]
+----
+cat /etc/hosts | grep v2v
+----
+
+. 登录至 v2v 节点。
+
+. 确认迁移脚本的进程 ``tmp/_2v2_xxxxx.sh``。
++
+[source,shell]
+----
+ps -ef |grep sh
+----
++
+image::/images/express/maintain/v2v_task_jam_1.png[]
+
+. kill 掉当前的迁移脚本进程，即 ``bash /tmp/_2v2_xxxxx.sh``。
+
+. 清理 convert 进程。
++
+[source,shell]
+----
+ps -ef | grep convert | grep -v grep | awk '{print $2}' | xargs kill -9
+----
+
+. 删除 .2v2_lock 文件。
++
+[source,shell]
+----
+rm -f /tmp/.v2v_loc
+----
+
+. 重新运行 ``/tmp/_2v2_xxxxx.sh`` 脚本。
++
+[source,shell]
+----
+bash /tmp/_2v2_xxxxx.sh
+----
++
+image::/images/express/maintain/v2v_task_jam_1.png[]
+
+. 确保上一步骤执行完成，重启迁移后的机器，并确认迁移数据。
+
+
+

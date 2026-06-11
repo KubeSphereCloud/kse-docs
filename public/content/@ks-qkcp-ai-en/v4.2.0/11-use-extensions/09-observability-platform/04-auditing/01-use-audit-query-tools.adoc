@@ -1,0 +1,184 @@
+---
+title: "Query Audit Logs"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Audit, Query Audit Logs"
+description: "Introduces how to use the audit log query tool."
+weight: 01
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **Logging > Audit Query**
+
+This section describes how to query audit logs.
+
+Audit logs: Records of requests received by the KubeSphere API server, i.e., the operational behavior of users on the KubeSphere platform.
+
+KubeSphere supports querying audit logs within the scope of a user's permissions, whether as a regular user role or a cluster administrator role.
+
+== Enable Auditing
+
+To obtain audit log data, you need to enable Kubernetes and KubeSphere auditing, i.e., enable audit log collection.
+
+=== Enable Kubernetes Auditing (Optional)
+
+Enabling Kubernetes auditing generates a large number of system audit logs, which increases storage resource usage. Furthermore, overly detailed audit information can affect the audit query experience. You can choose not to enable Kubernetes auditing and only enable KubeSphere auditing.
+
+If you need to audit operations not performed via the KubeSphere web console, such as auditing kubectl operations or K8s API calls, you can enable Kubernetes auditing.
+
+. Create an audit directory on the master node of the cluster.
++
+[,bash]
+----
+mkdir /etc/kubernetes/audit
+----
+
+. Create the policy file.
++
+--
+[,bash]
+----
+vi /etc/kubernetes/audit/audit-policy.yaml
+----
+
+[,yaml]
+----
+apiVersion: audit.k8s.io/v1
+kind: Policy
+rules:
+- level: Metadata
+----
+--
+
+. Edit the kube-apiserver.yaml file and add the following content.
++
+--
+[,bash]
+----
+vi /etc/kubernetes/manifests/kube-apiserver.yaml
+----
+
+[,yaml]
+----
+  spec:
+    containers:
+      - command:
+          - kube-apiserver
+          - --audit-policy-file=/etc/kubernetes/audit/audit-policy.yaml
+          - --audit-log-path=/etc/kubernetes/audit/audit.log
+          - --audit-log-maxbackup=10
+          - --audit-log-maxsize=100
+        volumeMounts:
+          - mountPath: /etc/kubernetes/audit
+            name: audit
+    volumes:
+      - hostPath:
+          path: /etc/kubernetes/audit
+          type: DirectoryOrCreate
+        name: audit
+----
+--
+
+=== Enable KubeSphere Auditing
+
+. Edit the values.yaml file in the KubeSphere Core (ks-core) chart package.
++
+--
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+If you cannot find the ks-core chart package, use `helm list -n kubesphere-system` to check the chart version of ks-core, then download the chart package using the command `helm pull oci://hub.kubesphere.com.cn/kse/ks-core --version <version>`. After extracting it, use `vi ks-core/values.yaml` to modify the `auditing` and `apiserver` sections.
+|===
+
+[,yaml]
+----
+auditing:
+  enable: true
+  auditLevel: Metadata
+  logOptions:
+    path: /etc/audit/audit.log
+
+apiserver:
+  extraVolumeMounts:
+    - mountPath: /etc/audit
+      name: audit
+  extraVolumes:
+    - hostPath:
+        path: /etc/kubesphere/audit
+        type: DirectoryOrCreate
+      name: audit
+----
+--
+
+. After modifying the values.yaml file for ks-core, you need to execute the helm upgrade command to update ks-core. For example:
++
+[source,bash]
+----
+helm upgrade --install -n kubesphere-system --create-namespace ks-core charts/ks-core --debug --wait
+----
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|Ensure all your configuration changes for ks-core are present in the values.yaml file. Otherwise, executing the upgrade command will cause other configurations to use default values, which may overwrite your previous configurations for ks-core!
+
+|===
+
+
+== Query Audit Logs as a Regular User Role
+
+=== Prerequisites
+
+* The **WizTelemetry Auditing** extension must be installed and enabled on the KubeSphere platform.
+
+* You have link:#_#_启用_kubesphere_审计[enabled KubeSphere auditing].
+
+=== Query Audit Logs
+
+. Log in to the KubeSphere web console.
+
+. Click **Component Dock > WizTelemetry Observability Platform**.
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. On the Audit Query page, set search conditions to query logs.
++
+--
+* If there are multiple clusters, click the **Cluster** dropdown to query logs in a specific cluster.
+
+* Click the search box, set search conditions, and then press **Enter** to view logs that meet specific conditions. You can set multiple search conditions simultaneously.
+
+* On the query results page, you can view the time distribution chart of logs. Click on a bar in the chart to switch to the log list for that time period. Click image:/images/ks-qkcp/zh/icons/start-dark.svg[start-dark,18,18]/image:/images/ks-qkcp/zh/icons/stop-dark-white.svg[stop-dark-white,18,18] to start/stop real-time data refresh. Click the time under **Refresh Frequency** to select the data refresh frequency.
+
+* In the upper right corner of the query results list, click image:/images/ks-qkcp/zh/icons/cogwheel.svg[cogwheel,18,18] to customize the information displayed in the list.
+
+* Click a log entry in the query results to view its detailed information.
+--
+
+== Query Audit Logs as a Cluster Administrator Role
+
+=== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **WizTelemetry Auditing** extension must be installed and enabled on the KubeSphere platform.
+
+* You have link:#_#_启用_kubesphere_审计[enabled KubeSphere auditing].
+
+=== Query Audit Logs
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. On the Audit Query page, set search conditions to query logs.

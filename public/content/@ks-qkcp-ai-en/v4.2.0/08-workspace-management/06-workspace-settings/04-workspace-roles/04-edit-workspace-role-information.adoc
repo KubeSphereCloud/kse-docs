@@ -1,0 +1,44 @@
+---
+title: "Edit Workspace Role Information"
+keywords: "Kubernetes, {ks_product}, Workspace, Workspace Settings, Workspace Role, Edit Workspace Role Information"
+description: "Describes how to view the workspace role list."
+weight: 04
+---
+
+:ks_permission: **Role Management**
+:ks_navigation: **Workspace Settings > Workspace Role**
+
+This section describes how to edit workspace role information.
+
+You can edit the alias and description of a workspace role created by a user. KubeSphere does not support editing built-in workspace roles, nor does it support editing the name of a workspace role.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. To the right of the workspace role you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Edit Information** from the drop-down list.
+
+. In the **Edit Information** dialog box, set the alias and description for the workspace role, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../_custom/workspaceManagement/workspaceRoles/workspaceRoles-para-aliasAndDescription.adoc[]
+|===
+--

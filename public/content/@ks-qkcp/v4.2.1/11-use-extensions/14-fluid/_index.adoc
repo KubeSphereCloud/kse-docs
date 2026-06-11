@@ -1,0 +1,31 @@
+---
+title: "Fluid"
+weight: 14
+---
+
+Fluid 是一个开源的、原生 Kubernetes 的分布式数据集编排器和加速器，适用于大数据和人工智能等数据密集型应用。Fluid 能够通过支持数据集操作，将分布式缓存系统（如 Alluxio 和 JuiceFS）转换为具有自我管理、弹性伸缩和自我修复能力的可观测缓存服务。同时，通过数据缓存位置信息，Fluid 可以为使用数据集的应用程序提供数据亲和性调度。更多信息，请参阅 link:https://github.com/fluid-cloudnative/fluid/blob/master/docs/zh/TOC.md[Fluid 官方文档]。
+
+Fluid Console 组件则是 KubeSphere 开发的 Fluid Web 控制台，提供数据集管理、数据加载、运行时管理等功能的可视化。旨在以更好的用户体验管理 Fluid 核心资源，解决 CLI 操作门槛高的问题，提升数据密集型应用的管理效率。
+
+为了更直观地使用 Fluid 的功能，建议同时安装 Fluid 和 Fluid Console 扩展组件。
+
+// Fluid 能力概述：
+// - 数据集管理：支持数据集（Dataset）的创建、查看、编辑和删除。
+// - 数据加载任务：可视化管理数据加载（Dataload）任务，支持多种加载策略。
+// - 运行时管理：支持多种运行时（如 Alluxio、JuiceFS、GooseFS 等）的状态监控与事件查看。
+// - 多集群与命名空间支持：可切换不同集群和命名空间，适配多租户场景。
+
+// Fluid Console 能力概述：
+// ● 多 Runtime 支持
+//   ○ 支持 AlluxioRuntime：适用于通用数据缓存与加速场景
+//   ○ 支持 ThinRuntime：轻量级、极简部署的数据加速 Runtime
+//   ○ 支持 JuiceFSRuntime：面向对象存储的高性能数据访问与缓存
+// ● 多存储类型加速
+//   ○ 对象存储加速：支持对对象存储进行数据加速访问
+//   ○ PVC 加速：支持对 Kubernetes PVC 数据进行缓存与加速
+//   ○ NFS 加速：支持对 NFS 共享存储进行加速
+// ● 控制台集成能力
+//   ○ 在 Console 中提供 Dataset、Runtime 创建、配置与状态展示能力
+//   ○ 支持 Runtime 生命周期管理（创建 / 查看 / 删除）
+//   ○ 可视化展示数据加速状态与资源信息
+

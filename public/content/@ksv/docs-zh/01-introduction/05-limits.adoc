@@ -1,0 +1,114 @@
+---
+title: "使用限制"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, 使用, 限制"
+description: "介绍{ks_product_both}的使用限制。"
+weight: 05
+logo: "{ks_logo}"
+downloadUrl: "{ks_download_url}"
+---
+
+// :ks_include_id: 7a769025270149d5a6341444b8131c5d
+:ks_xref_id: 4945902beb7747f9812931d4af22f0bd
+:ks_comp: ../../components/
+:ks_title: 使用限制
+:ks_description: 介绍{ks_product_both}的使用限制。
+:ks_keywords: {ks_product_full}, {ks_product}, 使用, 限制
+:ks_weight: 05
+
+
+在使用{ks_product_abbr_full_both}前，您需要先了解产品相关使用限制，以确保服务的顺利安装和使用。本文介绍您使用{ks_product_both}过程中需注意的资源限制。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 硬件link:[id=47a55e5d380041099f8796dba2649af7]
+
+使用{ks_product_both}需注意如下硬件限制：
+
+* 服务器节点的操作系统需要为 Linux 操作系统，Linux 内核版本必须在 4 以上。建议您使用 Ubuntu 18.04、Ubuntu 20.04、CentOS 7.9、CentOS 8.5、统信 UOS、银河麒麟 V10 或华为 EulerOS。
+
+* 服务器节点需要支持虚拟化。如果服务器节点不支持虚拟化，{ks_product_right}将以模拟模式运行。该模式将占用更多资源，且虚拟机相关模块无法使用。
+
+* 服务器节点必须具有至少 1 个未格式化且未分区的磁盘或 1 个未格式化的分区。该磁盘或分区的最低配置为 100 GB。
+
+* 如果使用 CentOS 操作系统，需禁用 SELinux。
+
+有关更多硬件限制，请参阅 link:../../02-quick-start/01-install-ksv-in-single-node-mode/[单节点模式安装]和 link:../../02-quick-start/02-install-ksv-in-multi-node-mode/[多节点模式安装]。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 节点和虚拟机link:[id=545bac589dcb46deb8f2f022f682581c]
+
+{ks_product_right}目前提供个人免费版、开发者版和企业版三种版本类型。不同版本类型所支持的最大节点数量和虚拟机数量不同，详情如下表所示。
+
+[cols="1a,1a,1a"]
+|===
+|版本 |最大节点数 |最大虚拟机数
+
+|个人免费版
+|3
+|9
+
+|开发者版
+|10
+|90
+
+|企业版
+|不限
+|不限
+|===
+
+有关更多版本差异信息，请参阅 link:../03-editions/[版本选型]。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 角色权限link:[id=fa5ae1a1b69c4100a7aa4b36fdd63f8c]
+
+{ks_product_right}在资源管控、功能使用等方面提供了完善的权限管控体系。在功能使用方面，{ks_product_right}通过 RBAC（Role-Based Access Control）方式来管控功能使用权限，详情如下表所示。
+
+[cols="1a,1a,1a"]
+|===
+|功能项 |操作项 |使用限制
+
+|概览
+|资源监控
+|
+以下监控指标仅 **admin** 用户可见：硬件节点相关指标、可用资源统计、网络相关概览和虚拟资源用量统计等。
+
+|物理资源 
+|
+* 节点管理
+
+* 物理网络管理
+|物理节点和物理网络管理功能仅 **admin** 用户可见。
+
+|虚拟资源 
+|
+* 项目管理
+
+* 虚拟机管理
+
+* 磁盘管理
+
+* 网络管理
+
+* SSH 密钥管理
+
+* 安全组管理
+|**admin** 用户可以管理集群中的所有虚拟资源，普通项目管理员和项目操作员可以管理自身创建的虚拟资源，项目观察员只能查看所属项目中的虚拟资源。
+
+|运维工具
+|
+* 定时任务和策略
+* 监控告警
+* 日志管理
+|**admin** 用户可以管理集群中所有的定时任务、定时策略、告警和日志，普通项目管理员和项目操作员可以管理自身创建的定时任务和定时策略以及所属项目中的告警和日志，项目观察员只能查看所属项目中的定时任务、定时策略、告警和日志。
+
+|用户管理 
+|项目和项目成员管理
+|用户管理功能仅对 **admin** 用户可见。
+|===
+

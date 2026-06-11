@@ -1,0 +1,48 @@
+---
+title: "Create a Persistent Volume Claim from a Volume Snapshot"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Persistent Volume Claim, Persistent Volume, Create a Persistent Volume Claim, Volume Snapshot"
+description: "Introduces how to create a persistent volume claim from a volume snapshot."
+weight: 02
+---
+
+:ks_permission: **Persistent Volume Claim Management**
+:ks_navigation: **Storage > Persistent Volume Claims**
+:snapshot:
+
+
+This section describes how to create a persistent volume claim from a volume snapshot. In addition to link:../../03-volume-snapshots/04-create-a-persistent-volume-from-a-volume-snapshot/[creating a persistent volume claim on the Volume Snapshots page], you can also choose to create it from a volume snapshot when creating a persistent volume claim.
+
+ifeval::["{file_output_type}" == "html"]
+For other methods of creating a persistent volume claim, refer to link:../../../../07-cluster-management/08-storage/01-persistent-volume-claims/01-create-a-persistent-volume-claim/[Create a Persistent Volume Claim].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For other methods of creating a persistent volume claim, refer to the "Persistent Volume Claims" chapter in the *KubeSphere Cluster Management Guide*.
+endif::[]
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and go to your cluster or workspace.
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-oper-createAPersistentVolumeClaim_v42.adoc[]

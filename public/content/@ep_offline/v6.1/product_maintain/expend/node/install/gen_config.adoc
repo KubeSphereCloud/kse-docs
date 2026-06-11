@@ -1,0 +1,56 @@
+---
+title: 生成配置文件
+weight: 3
+---
+
+
+当配置文件 `scale_settings.<zone_id>.yaml` 修改完成后，需在原环境的 FirstBox 节点上执行以下操作，生成配置文件，下发配置任务。
+
+
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是原环境的 FirstBox 节点 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，生成配置文件。
++
+命令行中的 `<zone_id>` 为待扩容 Zone 的 ID，需根据当前环境信息进行填写。
++
+[source,shell]
+----
+/pitrix/cli/config-qingcloud.py -s '/pitrix/config/scale_settings.<zone_id>.yaml'
+----
+
+
+
+. 执行以下命令，查看配置任务的执行状态。
++
+[source,shell]
+----
+/pitrix/cli/get-config-qingcloud-status.py
+----
++
+回显如下，状态为 `successful` 时，表示任务执行成功。
++
+image::/images/ep_offline/installation/deploy_modify_config_config_02.png[deploy_modify_config_config_02,50%]
++
+
+include::../../../../../../_components/note.adoc[]
+
+* 若状态为 `step1`，表示任务正在执行中，请耐心等待，稍后重新执行该命令查看状态。
+
+* 若状态异常，请查看如下日志，检查报错原因并修复。若仍不能解决，请联系技术支持。
+
+** 详细日志文件路径：`/pitrix/log/config`、`/pitrix/log/installer.log`。
+** 简略日志查看，可执行命令行 `/pitrix/cli/get-config-qingcloud-log.py`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 待任务成功执行完成，需在目录 `/pitrix/conf/settings` 下面查看生成的配置文件。
+
+
+. 若目录 `/pitrix/conf/settings` 下新增的节点信息，不符合预期，则需要重新修改配置文件 `/pitrix/config/scale_settings.<zone_id>.yaml` 后，再次执行以上操作步骤。
+

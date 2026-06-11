@@ -1,0 +1,8 @@
+// :ks_include_id: 44485d9a2c89473b896d0aa6c172b2c2
+|Container Type
+|
+The type of container.
+
+* **Init Container**: A container that performs initialization work for the main application container. The main application container will only start after all init containers have completed successfully. If an init container fails, the system will set the pod's status to failed.
+
+* **Main Container**: The container that runs the application. It is generally recommended to run only one main container per pod.

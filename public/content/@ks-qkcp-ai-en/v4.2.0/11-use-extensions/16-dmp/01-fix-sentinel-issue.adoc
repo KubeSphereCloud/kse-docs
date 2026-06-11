@@ -1,0 +1,21 @@
+---
+title: "Password Handling Solution for Original Redis Sentinel Instances After Upgrade"
+description: "Introduces how to handle the password issue for original Redis Sentinel instances after an upgrade."
+weight: 01
+---
+
+After upgrading from KubeSphere v4.1.2 to v4.1.3, the version of `redis-operator` has changed, and the storage location for Redis passwords has been adjusted: migrated from the original Secret to ConfigMap.
+
+For Redis instances created previously, this adjustment will cause the originally set default user password to become ineffective.
+
+== Solution
+
+. Click the image:/images/ks-qkcp/zh/icons/grid.svg[grid,18,18] icon on the top navigation bar, click **RadonDB DMP** to enter the database management platform.
+
+. Select **Redis Sentinel** in the left navigation pane.
+
+. In the Redis Sentinel instance list, click an instance name to open its details page.
+
+. Click the **Database Users** tab on the right side of the page, then click **Create**.
+
+. In the **Create User** dialog box, enter the username **default** and the original password, then click **OK**.

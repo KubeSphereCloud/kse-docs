@@ -1,0 +1,45 @@
+---
+title: nas.ini
+weight: 5
+---
+
+若当前环境中，部署的 {product_name} 文件存储需对接 AD 域，除以上公用配置文件内容外，还需配置 `nas.ini` 文件相关参数内容。
+
+
+详细操作步骤为：
+
+. 登录 FirstBox 节点。
+. 将示例文件 `/root/qs-installer/etc_example/nas.ini` 拷贝至 `/qingstor/etc/` 目录下。
+. 根据本节内容修改相关参数。
+
+== 示例
+
+[source,ini]
+----
+[ad]
+domain = stortest.com
+netbios = STORTEST
+admin_user = administartor  #用户名参数
+admin_pass = x2Mt@VH2*Hf42O! #密码参数
+ip = 192.168.100.51
+----
+
+== 参数说明
+
+该配置文件中，各参数用于填写待对接的 AD 域的相关信息，需根据部署环境的实际情况进行填写。详细说明如下。
+
+[cols="1,3a", options="header"]
+|===
+| 参数 | 说明 
+
+|domain | 待对接的 AD 域的域名。
+|netbios | 待对接的 AD 域的 Netbios 名。
+|admin_user |待对接的 AD 域具有管理员权限的用户。
+|admin_pass | `admin_user` 中指定用户对应的密码。
+|ip |待对接的 AD 域的域名对应的 IP 地址。
+|===
+
+
+
+
+

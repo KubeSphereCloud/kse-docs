@@ -1,0 +1,66 @@
+---
+title: 步骤四：更新 QKE Plus 配置
+weight: 5
+---
+
+. 登录{product_name} Global Zone 的 Webservice 节点。
+
+. 执行如下命令行，进入 QKE Plus 目录。
++
+[source,shell]
+----
+cd /pitrix/lib/pitrix-script/qke
+----
+
+. 修改配置文件 `/pitrix/lib/pitrix-script/qke/conf/config.yaml` 的如下内容。
++
+[source,shell]
+----
+......
+appv: appv-jya830ht                                  #和当前版本一致
+resource_kit: ca-20nibwly                            #和当前版本一致
+qke_version: v3.0.1                                  #定义QKE版本
+qke_cli_version: v3.0.1                              #cli版本，需要与导入的FTP qke-installer文件名保持一直，列如在FTP下载的qke-installer叫qke-installer-v3.0.1.tar.gz
+kubesphere_version: v3.3.2                           # kubesphere需要升级的目标版本
+kse_version: v3.3.1                                  # kubesphere企业版本升级的目标版本
+......
+cli_url: ${对应的文件服务器地址}/${对应导入的qke-cli文件名称}
+......
+----
++
+填写说明
++
+[cols='1,3a']
+|===
+| 参数  | 说明 
+
+| appv a| 根据 QKE Plus 版本信息进行填写。可参考link:../../../../product_installation/qke_install/overview/resources/#_应用版本说明[ FTP 目录详解]中的内容进行查询。
+| resource_kit a| 根据 QKE Plus 版本信息进行填写。可参考link:../../../../product_installation/qke_install/overview/resources/#_应用版本说明[ FTP 目录详解]中的内容进行查询。
+| qke_version a| 可根据link:../step1/[前文]下载的 QKE Plus 软件包版本进行填写。
+| qke_cli_version | 可根据link:../step1/[前文]下载的 QKE Plus 软件包版本进行填写。
+| kubesphere_version | 填写升级后的目标 KS 版本。可根据link:../step1/[前文]下载的 KS 软件包版本进行填写。
+| kse_version | 填写升级后的目标 KSE 版本。可根据link:../step1/[前文]下载的 KSE 软件包版本进行填写。
+| cli_url | 只需要将地址中包名部分替换为link:../step1/[前文]下载的 QKE Plus 软件包 `qke-cli-vx.x.x.tar.gz` 即可。
+|===
+
+
+
+. 确认配置文件修改无误后，执行以下命令行，确认生成的 SQL 是否符合预期。
++
+[source,shell]
+----
+./qke --upgrade=1
+----
++
+命令行回显结果如下，参考上一步配置内容确认 KubeSphere 的版本、Zone ID、`install_url` 以及 `private_registry` 地址是否正确。
++
+image::/images/ep_offline/qke_upgrade/qke_upgrade_3.png[qke_upgrade_3]
+
+. 确认以上内容无误后，执行以下命令行，插入新版本。
++
+[source,shell]
+----
+./qke --upgrade=1 --dry-run=0
+----
+
+

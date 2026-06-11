@@ -1,0 +1,66 @@
+---
+title: "Delete users"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, users, deletion"
+description: "Describes how to delete users in the {ks_product} web console."
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 2497e62cb7a74309a68cb0e5927e9bae
+:ks_xref_id: dd73ab04fc7e4923b31d52d4d6a1c695
+:ks_comp: ../../../components/
+:ks_title: Delete users
+:ks_description: Describes how to delete users in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, users, deletion
+:ks_weight: 06
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete users in the {ks_product_abbr_full} web console.  You can delete non-admin users in the {ks_product} web console. User **admin** cannot be deleted.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=0a4ba5da84484732a4f04c14b2ebf7c1]
+
+include::../../../_custom-en/users/user-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple users at a timelink:[id=0e4e999fbd2f4faca74c5e4bc0b5b8bb]
+
+include::../../../_custom-en/users/user-steps.adoc[]
+
+. On the **Local Users** page, click the name of the desired user. The details page of the user appears.
+. On the left side of the details page, click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+The user cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a userlink:[id=b40e8875ccc348dbbfe69dee8bddf746]
+
+include::../../../_custom-en/users/user-steps.adoc[]
+
+. On the **Local Users** page, select the check boxes next to the users that you want to delete, and click **Delete**.
+. In the dialog box that appears, click **OK**.
++
+--
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+Users cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

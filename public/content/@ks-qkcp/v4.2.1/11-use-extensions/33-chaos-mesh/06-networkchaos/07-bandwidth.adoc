@@ -1,0 +1,39 @@
+---
+title: "带宽限制"
+weight: 07
+---
+
+本节介绍如何限制指定 Pod 之间的网络通信带宽。
+
+故障注入期间，`nginx-network-server` 与 `nginx-network-client` 之间的双向通信带宽将被限制在 5 kbps。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *NetworkChaos*，配置以下参数后点击 *创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|故障类型（action）
+|选择 `bandwidth`，限制通信带宽。
+
+|带宽速率（bandwidth.rate）
+|带宽上限，例如 `5kbps`。
+
+|方向（direction）
+|故障生效的流量方向，选择 `both` 表示双向生效。
+
+|持续时间（duration）
+|故障持续时间，例如 `10m`。
+
+|生效范围（selector）
+|选择注入故障的源 Pod。
+
+|目标（target）
+|选择通信对端 Pod。
+|===
+
+
+验证故障效果：故障注入期间，两 Pod 之间的通信速率将被限制在设定的带宽上限以内。
+

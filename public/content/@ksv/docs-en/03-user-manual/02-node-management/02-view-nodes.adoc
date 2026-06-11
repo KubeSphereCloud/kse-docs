@@ -1,0 +1,90 @@
+---
+title: "View nodes"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, nodes, list, view"
+description: "Describes how to view nodes in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 1b135f08e14e4f61a1d7be8b2207e0da
+:ks_xref_id: f47fd1ac2f2b4c34b52155da7ee6a04d
+:ks_comp: ../../../components/
+:ks_title: View nodes
+:ks_description: Describes how to view nodes in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, nodes, list, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view nodes in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=b905e582cd67490b90f683084ae7a1e4]
+
+include::../../../_custom-en/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=d96f7e0dc5b149978693f201faeea4fc]
+
+include::../../../_custom-en/nodes/steps-view.adoc[]
+
++
+
+--
+On the **Nodes** page, you can view all nodes in {ks_product}. The following table describes the parameters.
+
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Total
+|The total number of nodes in the cluster.
+
+|Control Nodes
+|The number of control nodes in the cluster. Control nodes are used to manage and schedule the entire cluster.
+
+|Worker Nodes
+|The number of worker nodes in the cluster. Worker nodes are used to run business workloads in the cluster.
+
+|Name
+|The name of the node.
+
+In single-node mode, the node name is automatically assigned by the system.  In multi-node mode, you can specify node names when you install {ks_product}.
+
+|IP Address
+|The IP address of the node. Nodes in the same cluster can communicate with each other using IP addresses.
+
+|Status
+|The health status of the node.
+
+|Role
+|The role of the node in the cluster.  {ks_product} provides workers nodes and control nodes.
+
+include::../../../_custom-en/nodes/node-type-description.adoc[]
+
+|CPU Usage
+|The CPU usage of the node.
+
+|Memory Usage
+|The memory usage of the node.
+
+|System Disk
+|The system disk usage of the node.
+
+|CPU Limits
+|The CPU limits and usage of the node.
+
+|Memory Limits
+|The memory limits and usage of the node.
+|===
+--
+
+. (Optional) Click the search box above the node list and specify a condition to search for nodes by name or health status.  For example, use **Name:ab** to search for nodes whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

@@ -1,0 +1,94 @@
+---
+title: "删除 Kafka 用户"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, Kafka, 管理告警规则组, 删除 Kafka 用户"
+description: "介绍如何删除 Kafka 用户。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 3f98e2ad90904f1dbe5f5a8c288e6d6f
+:ks_xref_id: ca206905c167448484381f36be376a13
+:ks_comp: ../../../../components/
+:ks_title: 删除 Kafka 用户
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, Kafka, 管理告警规则组, 删除 Kafka 用户
+:ks_description: 介绍如何删除 Kafka 用户。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何删除 Kafka 用户。
+
+
+== 前提条件link:[id=3dd3e6acda4b4210b0b971243fde6e2b]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbKafka/radondbkafka-prer-installRadondbkafka.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbKafka/radondbkafka-prer-databaseStatusRunning.adoc[]
+
+* 已经创建了 Kafka 用户。
+
+
+
+== 删除单个 Kafka 用户link:[id=436889e3a90a4b46861b7f4635675d9a]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
++
+include::../../../../_custom/radondb/radondb-oper-openDatabaseUserList.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/accessControl/users/users-oper-deleteASingleUser.adoc[]
+
+
+
+== 批量删除 Kafka 用户link:[id=a2d2538ddefe4978ac1e7ac36bbcf88e]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openDatabaseUserList.adoc[]
+
+
++
+
+include::../../../../_custom/platformManagement/accessControl/users/users-oper-deleteMultipleUsers.adoc[]

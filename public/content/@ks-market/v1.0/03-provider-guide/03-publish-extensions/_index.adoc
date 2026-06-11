@@ -1,0 +1,91 @@
+---
+title: "扩展组件上架"
+weight: 3
+---
+
+在本地完成扩展组件的开发和测试后，还需要完善扩展组件的基础信息和销售信息，并提交审核。审核通过后，即可在 KubeSphere Marketplace 上架和售卖您的扩展组件。
+
+== 扩展组件基础信息
+
+扩展组件详情页会展示组件的基本信息、概览、截图和更新日志。
+
+基本信息：
+
+参考link:https://dev-guide.kubesphere.io/extension-dev-guide/zh/packaging-and-release/packaging/#extensionyaml-的定义[此文档]，设置扩展组件的元数据信息。
+
+概览：
+
+在扩展组件安装包的 `README_zh.md` 和 `README.md` 中提供详细的中英文产品说明，包括产品介绍、核心功能、快速开始、获取 License、公司或开源社区介绍等内容。可参考 https://kubesphere.com.cn/marketplace/extensions/ys1000/
+
+* 快速开始：说明如何安装扩展组件、安装后如何进入，并附带用户手册链接，其中应详细描述用户订阅后如何使用扩展组件。
+* 获取 License：使用软件开发商自己提供的 License 的扩展组件，需要提供以下内容，说明 License 交付流程，也可根据需要补充其他与 License 相关的注意事项。示例如下：
++
+--
+. 点击“订阅”，选择对应版本，购买扩展组件。
+
+. 购买成功后，我们会在 1 个工作日内将扩展组件的激活许可发送到您的邮箱，请留意邮件通知。如果您没有及时收到，请联系 support@kubesphere.cloud。
+
+. 进入扩展中心，授权登录 KubeSphere 云账号后，将自动同步您购买的扩展组件。
+
+. 完成安装后，激活 license，即可开始使用。
+--
+
+截图：
+
+在扩展组件安装包的 `./static/screenshots/` 目录中上传至少 3 张扩展组件的界面截图，支持 JPG 或 PNG 格式，没有尺寸限制。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+截图需尽量保留页面上部 KubeSphere Banner 或 KubeSphere 相关页面菜单，以便更好的给客户体现双方能力的融合效果。
+|===
+
+更新日志：
+
+若有版本更新，在扩展组件安装包的 `CHANGELOG_zh.md` 和 `CHANGELOG.md` 中提供详细的中英文更新日志。
+
+
+
+== 扩展组件销售信息
+
+KubeSphere 扩展组件支持线上交付和线下交付两种方式。
+
+
+=== 线上交付
+
+线上交付适用于中小型客户群体，因此扩展组件的定价和配置不宜过高。
+
+线上交付依赖于 KubeSphere Marketplace 提供的在线下单和在线交付能力。关于具体的收益划分和收入结算方式，请参考link:../01-serviceprovider/06-service-charge/[平台服务费规则及结算方式]。
+
+如果您已准备好在线订阅方案，请点击以下链接提交在线订阅信息：
+
+https://jinshuju.net/f/YJa12E
+
+此信息将用于配置扩展组件订阅页面，如： link:https://kubesphere.cloud/subscribe/488547202231233338/[RadonDB DMP 订阅页面]。
+
+=== 线下交付
+
+线下交付的价格不会在 KubeSphere Marketplace 中公开展示。线下交付的商务模式将根据双方商务政策和客户需求进行具体沟通。
+
+//note
+[.admon.note,cols="a"]
+|===
+|备注
+
+|
+如果您不准备通过 KubeSphere Marketplace 线上交付扩展组件，则无需提供在线订阅信息。不过，为了在 KubeSphere Marketplace 展示您的扩展组件并吸引潜在用户，您仍需提供扩展组件的基础信息，我们将提供咨询入口以便获取用户对您扩展组件的线下交付需求。
+|===
+
+在上述信息填写完成后，请将扩展组件安装包提交给与您对接的 KubeSphere 工作人员。我们将在 1-3 个工作日内进行审核，并在审核通过后第一时间通知您上架扩展组件。
+
+== 获取帮助
+
+如果您有任何问题或需要进一步的帮助，请通过微信或邮箱与我们联系：
+
+微信：
+
+image:/images/ks-market/zh/wechat.png[,30%]
+
+邮箱：support@kubesphere.cloud

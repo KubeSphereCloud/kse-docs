@@ -1,0 +1,166 @@
+---
+title: 获取集群价格（GetClusterPrice）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| true
+| 集群ID
+
+| app_version
+| String
+| true
+| 版本ID
+
+| cluster
+| String
+| true
+| 集群ID
+
+| conf
+| String
+| true
+| 集群详细配置
+
+| duration
+| String
+| false
+| 持续时长
+
+| limit
+| Integer
+| true
+| 查询数量
+
+| offset
+| String
+| true
+| 查询偏移量
+
+| zone
+| String
+| true
+| 可用区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| job_id
+| String
+| false
+| 任务ID
+
+| price_set
+| Array
+| false
+| 价格集合
+
+| price_set[].available_coupon
+| String
+| false
+| 优惠价格
+
+| price_set[].discount
+| String
+| false
+| 打折率
+
+| price_set[].discount_details
+| Array
+| false
+| 折扣详情
+
+| price_set[].discount_details[].product_id
+| String
+| false
+| 产品ID
+
+| price_set[].normal_price
+| String
+| false
+| 标准价格
+
+| price_set[].original_price
+| String
+| false
+| 原始价格
+
+| price_set[].price
+| String
+| false
+| 实际价格
+
+| price_set[].sequence
+| String
+| false
+| 序号
+
+| ret_code
+| Integer
+| false
+| 返回状态码
+
+| role
+| String
+| false
+| 节点角色
+
+| updated_env
+| String
+| false
+| 更新的环境变量
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetClusterPrice",
+  "app_id": "app-p6au3oyq",
+  "app_version": "appv-8hpa9r28",
+  "conf": "{\"cluster\":{\"es_node\":{\"cpu\":2,\"memory\":4096,\"count\":2,\"instance_class\":0,\"volume_class\":0,\"volume_size\":360},\"es_master_node\":{\"cpu\":2,\"memory\":2048,\"count\":1,\"instance_class\":0,\"volume_class\":0,\"volume_size\":330},\"es_node_2\":{\"cpu\":2,\"memory\":4096,\"count\":0,\"instance_class\":0,\"volume_class\":0,\"volume_size\":360},\"es_node_3\":{\"cpu\":2,\"memory\":4096,\"count\":0,\"instance_class\":0,\"volume_class\":0,\"volume_size\":360},\"lst_node\":{\"cpu\":2,\"memory\":4096,\"count\":1,\"instance_class\":0,\"volume_size\":330,\"volume_class\":0},\"kbn_node\":{\"cpu\":2,\"memory\":4096,\"count\":1,\"instance_class\":0}}}",
+  "duration": null,
+  "limit": 10,
+  "offset": 0,
+  "zone": "testing1b"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetAppPriceResponse",
+  "price_set": [
+    {
+      "available_coupon": "0",
+      "discount": 100,
+      "discount_details": {},
+      "normal_price": "2.7855",
+      "original_price": "2.7855",
+      "price": "2.7855",
+      "sequence": 0
+    }
+  ],
+  "ret_code": 0,
+  "trace_id": "JzPeSNRF"
+}
+----

@@ -1,0 +1,49 @@
+---
+title: "Edit Template Settings"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Application Workloads, Workload, Edit Workload Template Settings"
+description: "Describes how to edit the settings of an existing workload template."
+weight: 03
+---
+
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Application Workloads > Workload Templates**
+
+
+include::../../../../_custom/clusterManagement/workloadTemplates/workloadTemplates-desc-editWorkloadSettings.adoc[]
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the right side of the workload template, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Edit Template** from the dropdown list.
+
++
+
+. In the **Edit Settings** dialog box, configure the basic information, pod settings, storage settings, and advanced settings for the workload template, then click **OK**.
++
+For specific parameter configuration methods, please refer to link:../../03-workloads/01-create-a-workload#_parameter-description[Parameter Description].

@@ -1,0 +1,58 @@
+---
+title: 颁发重置账户锁令牌（SendUserLockResetPasswdToken）
+weight: 38
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user
+| String
+| true
+| 用户id
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| left
+| Int
+| false
+| 剩下的重置次数
+
+| user_id
+| String
+| false
+| 用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SendUserLockResetPasswordTokenResponse",
+  "left": 6,
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

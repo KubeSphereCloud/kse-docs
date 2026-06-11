@@ -1,0 +1,23 @@
+---
+title: "Overview"
+keywords: "Kubernetes, {ks_product-en}, opensearch, logs, observability"
+description: "Learn about the 'OpenSearch Distributed Search and Analytics Engine' extension."
+weight: 01
+layout: "second"
+---
+
+The "OpenSearch Distributed Search and Analytics Engine" extension is a built-in log storage extension for KubeSphere, used to store observability data such as logs, audits, events, and notification history.
+
+In addition to supporting the deployment of OpenSearch, this extension also supports the deployment of OpenSearch Dashboard and OpenSearch Curator.
+
+* **OpenSearch Dashboard** is used for visualizing OpenSearch data and managing the OpenSearch cluster's user interface. It is disabled by default after deployment. To enable it, set the `opensearch-dashboards.enabled` field to `true`.
+
+* **OpenSearch Curator** is a CronJob that periodically cleans up Kubernetes event logs, Kubernetes audit logs, Kubernetes application logs, and notification history logs that exceed the configured date (default is 7 days). It is enabled by default after deployment. To disable it, set the `opensearch-curator.enabled` field to `false`.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more information on extension configuration, see the details page of the "WhizardTelemetry Data Pipeline" and "OpenSearch Distributed Search and Analytics Engine" extensions in the Extensions Center.
+|===

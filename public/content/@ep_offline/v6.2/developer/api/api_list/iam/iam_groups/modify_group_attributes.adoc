@@ -1,0 +1,65 @@
+---
+title: 修改IAM用户组（ModifyIAMGroupAttributes）
+weight: 8
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| description
+| String
+| false
+| 描述
+
+| group_id
+| String
+| true
+| IAM用户组ID
+
+| group_name
+| String
+| false
+| 组名
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| group_id
+| String
+| false
+| IAM用户组ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMGroupAttributes",
+  "group_id": "iamg-7u5rtv8s",
+  "group_name": "test"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMGroupAttributesResponse",
+  "group_id": "iamg-7u5rtv8s",
+  "ret_code": 0
+}
+----

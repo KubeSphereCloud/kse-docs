@@ -1,0 +1,88 @@
+---
+title: 修改定时器任务属性（ModifySchedulerTaskAttributes）
+weight: 12
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| owner
+| String
+| false
+| 资源的所有者
+
+| scheduler_task
+| String
+| true
+| 定时器任务ID
+
+| scheduler_task_name
+| String
+| false
+| 定时器任务名称
+
+| task_params
+| Object
+| false
+| 定时器任务参数
+
+| task_params.resources
+| Array
+| false
+| 资源ID列表
+
+| zone
+| String
+| true
+| 请求区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| scheduler_task_id
+| String
+| false
+| 定时器任务ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifySchedulerTaskAttributes",
+  "owner": "usr-BnnisHWR",
+  "scheduler_task": "st-vy8dwhzo",
+  "scheduler_task_name": "are re",
+  "task_params": {
+    "resources": [
+      "i-g1l5c926"
+    ]
+  },
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifySchedulerTaskAttributesResponse",
+  "ret_code": 0,
+  "scheduler_task_id": "st-vy8dwhzo",
+  "trace_id": "ngLeDk1d"
+}
+----

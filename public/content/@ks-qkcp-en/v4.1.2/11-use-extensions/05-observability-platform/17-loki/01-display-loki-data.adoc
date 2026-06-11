@@ -1,0 +1,70 @@
+---
+title: "Visualize Data in Loki"
+keywords: "Kubernetes, {ks_product-en}, Grafana, loki, dashboard, observability"
+description: "Learn how to visualize logs, audits, events, and notification history data stored in Loki in Grafana."
+weight: 01
+---
+
+This section describes how to visualize logs, audits, events, and notification history data of KubeSphere stored in Loki in the Grafana console.
+
+== Prerequisites
+
+* **WhizardTelemetry Platform Service** should have been installed and enabled.
+* A Grafana console has been deployed via the "Grafana for WhizardTelemetry" extension or other methods.
+
+== Steps
+
+. Install Grafana Loki for WhizardTelemetry.
+
+. On the **Application Workloads > Services** page of the cluster, find `loki-agent-gateway`, **Edit External Access**, and enable NodePort.
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Depending on your network environment, you may need to configure traffic forwarding rules and allow this NodePort in the firewall.
+|===
+
+. Install WhizardTelemetry Data Pipeline and configure Loki information.
++
+--
+[,yaml]
+----
+  sinks:
+    loki:
+        endpoint: http://<loki-gateway-ip>:<loki-gateway-port>
+----
+
+Example:
+
+[,yaml]
+----
+  sinks:
+    loki:
+        endpoint: http://172.31.19.250:30858
+----
+--
+
+. Install WhizardTelemetry Logging, Auditing, Events, and Notification (install as needed), and modify the extension configuration to enable Loki.
++
+--
+[,yaml]
+----
+  sinks:
+    loki:
+      enabled: true
+----
+--
+
+. Configure the Loki data source in the Grafana console.
++
+--
+* If the Grafana console is deployed by the Grafana for WhizardTelemetry extension, after installing Grafana Loki for WhizardTelemetry, Loki data sources for logs, audits, events, and notification history will be automatically added to the Grafana console. For how to access the Grafana console, see link:../../16-grafana/[Grafana for WhizardTelemetry].
+
+* If the Grafana console is deployed using other methods, you need to manually add the loki data source in the Grafana console. For more information, see the details page of the Grafana Loki for WhizardTelemetry extension in the Extensions Center.
+--
+
+. Access the Grafana console to view the panels for KubeSphere logs, audits, events, and notification history under Dashboards.
++
+image:/images/ks-qkcp/zh/v4.1.2/loki-data.png[]

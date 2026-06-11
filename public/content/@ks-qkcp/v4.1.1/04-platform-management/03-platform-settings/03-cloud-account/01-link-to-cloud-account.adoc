@@ -1,0 +1,43 @@
+---
+title: "绑定云账号"
+keywords: "Kubernetes, {ks_product},绑定,KubeSphere Cloud,云账号"
+description: "介绍如何绑定 KubeSphere 云账号。"
+weight: 01
+---
+
+:ks_navigation: **云账号**
+
+
+订阅{ks_product_both}或扩展组件时，必须绑定 KubeSphere 云账号。 
+
+本节介绍如何绑定 KubeSphere 云账号。
+
+
+== 前提条件
+
+* 您需要在{ks_product_both}平台具有 **platform-admin** 角色。
+
+* 已注册一个 https://kubesphere.cloud/login/[KubeSphere 云账号]。
+
+== 操作步骤
+
+. 以具有 **platform-admin** 角色的用户登录{ks_product_left} Web 控制台。
+
+. 点击顶部的**绑定 KubeSphere 云账号**提示，进入**平台设置 > 云账号**页面。
+
+. 点击**绑定 KubeSphere 云账户**，输入云账号信息并授权，完成账号绑定。
++
+--
+绑定 KubeSphere 云账号后：
+
+// * 在扩展市场订阅的扩展组件都将自动同步到扩展中心。
+
+// * 扩展中心的组件列表右上角将显示云账号的头像，点击头像可选择“同步云账户”。
+
+* 已订阅的{ks_product_left} License 会自动同步到本地。
+
+* 已订阅的扩展组件 License 会自动同步到本地。
+
+* 已订阅的扩展组件可以在扩展中心进行管理。
+--
+

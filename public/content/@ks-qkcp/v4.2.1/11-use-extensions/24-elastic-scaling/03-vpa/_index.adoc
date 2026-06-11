@@ -1,0 +1,22 @@
+---
+title: "容器垂直伸缩"
+weight: 03
+---
+
+// 高级设置部分的参数说明可参考：https://kubernetes.io/zh-cn/docs/concepts/workloads/autoscaling/#scaling-workloads-vertically
+
+Vertical Pod Autoscaler (VPA) 是 Kubernetes Autoscaler 的组件，可自动管理 Pod 中容器的资源配额需求，免除手动配置。
+
+配置后，该组件会根据资源使用情况动态调整 Pod 的资源请求值​​，从而使 Pod 调度到资源充足的节点上，确保每个 Pod 获得适当的资源配额。同时会保持容器初始配置中请求值（requests）与上限值 （limits）的设定比例。
+
+该组件既可以缩减资源请求过度的 Pod，也能根据历史使用情况扩展资源请求不足的 Pod。适用于需要稳定资源配置的有状态应用的扩容等场景。
+
+安装 Vertical Pod Autoscaler 扩展组件后，集群和企业空间左侧导航栏的**弹性伸缩**菜单下将显⽰**容器垂直伸缩**选项。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+有关组件的更多信息，请参阅扩展中心 Vertical Pod Autoscaler 扩展组件的详情页说明。
+|===

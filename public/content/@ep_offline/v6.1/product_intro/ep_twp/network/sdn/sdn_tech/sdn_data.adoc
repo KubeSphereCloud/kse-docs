@@ -1,0 +1,30 @@
+---
+title: "SDN 数据平面"
+weight: 10
+---
+
+[discrete]
+=== overlay 网络协议
+
+企业云平台采用 VXLAN 协议构建 SDN 的 overlay 网络，打通了分散在集群计算节点的 vxnet 网络（包括基础网络及私有网络），实现了分布式的网络能力：
+
+* 平台引入 VXLAN 对不同 vxnet 网络进行二层隔离，为每一个 vxnet 均分配了一个 VNI（ VXLAN Network Identifier）作为 vxnet 唯一标识，使得平台网络扩展能力大幅提升，可支持 1600 万个 vxnet 网络。
+* VXLAN 采用 UDP 协议对二层报文进行封装，使得云平台二层网络不再受限于物理网络（Underlay）设备 MAC 地址表的限制，可以支撑大规模虚拟机的业务场景。
+* 云平台计算节点使用 VXLAN 隧道可以摆脱物理网络二层广播域的限制，构成大二层 overlay 网络，还可以实现跨数据中心 Region 级别的 vxnet 二层网络。
+
+[discrete]
+=== 分布式虚拟路由器 DVR 
+
+分布式虚拟路由器 DVR 是企业云平台 SDN 数据平面的核心组件，每个 DVR 管理着所在计算节点（Hyper Node）包含的网络中的所有 VM，为 vxnet 提供了数据包二层交换和三层路由能力。
+
+DVR 为 VM 提供了非常丰富的网络连接能力，VM 可以通过 DVR 连接至 VBC 基础网络、VPC 网络、通过 VG 集群访问 Internet、使用边界路由器打通访问其他 VPC 网络及专线等，配置 LB 集群、NAT 集群对外提供服务。
+
+image::/images/ep_offline/ep_twp/vpc_dvr.png[]
+
+云平台内的 vxnet 资源可以分散部署到同一个 Region 的任意计算节点上，在计算节点上会自动生成属于该 vxnet网络的 DVR 设备。分散在计算节点的多个 DVR，构成一个分布式虚拟路由器集群。DVR 集群工作机制如下：
+
+* DVR 集群通过选举机制决定 Controller、Master、Slave 角色，并基于 DVR 迁移等 SDN 数据平面高可用机制，确保 SDN 网络具备故障自愈能力。
+* DVR controller 作为 DVR 集群控制节点，对集群所有的 DVR 转发规则进行同步，并自动生成配置本地 ARP/FDB/VXLAN 表项，从而解决了 vxlan 中 flood-and-learn 带来的缺点，实现最短路径转发，为 vxnet 提供极高性能的数据转发能力。
+* DVR 通过在 VTEP 接口配置 ARP 代答，使得 vxnet 内 VM 的 ARP 请求无需通过 VXLAN 封装转发至其他计算节点，减少广播泛洪。
+* 同时 DVR 也允许用户发送广播包，使用头端复制原理，通过把数据包做复制，再以单播的方式发送到每个节点，而不再走广播泛洪的方式。
+* VPC 网络中的 DVR 采用 Linux namespace 实现，使得不同的 VPC 网络之间可以完全的三层网络隔离，并且可以拥有相同的 IP，配置独立的路由规则。

@@ -1,0 +1,419 @@
+---
+title: 环境确认
+weight: 6
+---
+
+WebInstaller 流程正常执行完成后，实施人员需对环境进行检查，确认当前的部署流程均正常执行完成，方能进行后续的初始化操作。详细内容如下。
+
+
+== 后台程序确认
+
+实施人员可以使用 `check.py` 脚本确认{product_name}的后台程序是否正常运行。
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，查看环境简略信息。`check.py` 更多使用方式，请执行 `check.py -h` 命令查看。
++
+[source,shell]
+----
+/pitrix/check/check.py -n all -v
+----
++
+命令回显示例
++
+image::/images/ep_offline/installation/deploy_check.png[,40%]
++
+回显字段说明
++
+[cols='1,2a']
+|===
+| 字段值 | 说明
+
+| Hostname | 主机名称。
+| Service | 服务名称。
+| Result | 检查结果。
+
+* `Normal` 或 `ok` 表示环境正常。
+* `Ignored` 表示忽略检查的配置项。
+* `Abnormal`、`Unknown` 以及 `error`  表示环境不正常，需要逐一排查并进行修复。
+|===
+
+
+. 执行以下命令，查看不正常项的详细信息。
++
+[source,shell]
+----
+cat /pitrix/check/formatted_result | egrep 'Abnormal|Unknown|error'
+----
++
+* 若没有输出内容，表示环境正常运行。
+* 若有输出内容，说明存在异常项，此时可执行如下命令行，重启不正常的服务，若仍然未恢复到正常状态，请逐一排查并进行修复。命令行中的 `<Hostname>` 与 `<Service>` 根据上一步查询结果进行填写。
++
+[source,shell]
+----
+fb exec_nodes <Hostname> 'supervisorctl restart <Service>'
+----
++
+** 命令行示例一
++
+重启所有 Webservice 节点上的 `alarm_server` 服务，则执行如下命令行。
++
+[source,shell]
+----
+fb exec_nodes webservice 'supervisorctl status alarm_server'
+----
+
+** 命令行示例二
++
+重启 `uat1a-webservice0` 节点上的 `alarm_server` 服务，则执行如下命令行。
++
+[source,shell]
+----
+fb exec_nodes uat1a-webservice0 'supervisorctl status alarm_server'
+----
+
+== 删除测试域名
+
+若当前部署的私有云环境不能访问互联网，此时，需人为删除 `server.yaml` 文件中的 `test_domains` 配置，否则 BOSS 会有 DNS 相关告警。操作步骤如下。
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行以下命令行，修改 `server.yaml.<zone_id>` 文件。
++
+[source,shell]
+----
+vi /pitrix/conf/variables/global/server.yaml.<zone_id>
+----
++
+删除如下内容。
++
+[source,shell]
+----
+  test_domains:
+    - 'www.baidu.com'
+    - 'www.taobao.com'
+----
+
+. 执行以下命令，刷新 `server.yaml.<zone_id>` 到各节点。
++
+[source,shell]
+----
+/pitrix/build/build_pkgs.py -p pitrix-global-conf
+/pitrix/upgrade/update.sh all pitrix-global-conf
+----
+
+// == 交换机配置更新
+
+// WebInstaller 流程正常执行完成后，若网络模式选择的 SDN 模式，则还需对交换机的配置进行更新。详细操作如下。
+
+// === SDN3.0
+
+
+// //若当前环境的网络模式使用的是 SDN3.0，且 WebInstaller 部署过程中，配置服务组件**路由推送服务**时，`虚拟节点 IP` 以及 `BGP AS 号` 选择的 `手动设置` 模式，则需将当时设置的 IP 以及 AS 号配置到相应的交换机上。
+
+// 若当前环境的网络模式使用的是 SDN3.0，WebInstaller 部署完成后，需将当时设置 Rsserver 服务的 IP 以及 AS 号配置到相应的交换机上。
+
+// // ==== 查看 Rsserver 配置
+
+// 可参考如下步骤，查询{product_name}中部署到 Rsserver 服务的相关配置信息。
+
+
+// . 执行如下命令行，登录{product_name}的 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
+// +
+// [source,shell]
+// ----
+// ssh root@<firstbox ip address>
+// ----
+
+// . 执行以下命令行，查看{product_name}的配置信息。
+// +
+// [source,shell]
+// ----
+// /pitrix/cli/describe-qingcloud.py
+// ----
+
+// . 在返回结果中，`zone_info` 字段下，查看当前 Zone 下的 `rsserver` 参数值，再次确认当前 Zone 是否启用了 Rsserver 服务。参数值为 `1` 表示己启用，参数值为 `0` 表示未启用。
+// +
+// image::/images/ep_offline/installation/webinstaller_39.png[webinstaller_39,60%]
+
+
+// . 若当前 Zone 已经启用了 Rsserver 服务，查看配置文件 `/pitrix/conf/variables/variables.yaml` 中当前 Zone 的 Rsserver 配置记录，获取 `rsserver_mgmt_network_address` 与 `rs_as_number`，用于交换机配置 BGP。
+// +
+// image::/images/ep_offline/installation/webinstaller_40.png[webinstaller_40,40%]
+// +
+// include::../../../../../_components/note.adoc[]
+
+// 如上图所示，`rsserver_mgmt_network_address` 与 `rs_as_number` 一一对应。即，`rsserver_mgmt_network_address` 列表中第一个 IP 地址，对应 `rs_as_number` 列表中的第一个 `as_number`，以此类推。
+
+// include::../../../../../_components/table_footer.adoc[]
+
+
+
+// . 将查询到的{product_name}的 Rsserver 服务的配置信息，填写至相应的交换机上。交换机配置示例如下。
+// +
+// [source,yaml]
+// ----
+// feature bgp
+// ip prefix-list rs-networks seq 5 permit 10.200.0.0/16 ge 24 le 32    #  如果是配置sdn3.0, 此处网段填写基础网络的16位网段
+// ip prefix-list rs-networks seq 10 permit 10.1.0.0/16 ge 24 le 32     #  如果是配置novg， 此处填写eip网络的16位网段
+// route-map allow permit 10
+// route-map reject deny 10
+// route-map rs-networks permit 10
+//  match ip address prefix-list rs-networks
+// route-map rs-networks deny 100
+// router bgp 420000                                                   # 交换机的AS number
+//   router-id 10.0.0.1                                             # 交换机的loopback ip(用于建立bgp连接的)
+//   bestpath as-path multipath-relax
+//   address-family ipv4 unicast
+//     redistribute direct route-map allow
+//     redistribute static route-map allow
+//     maximum-paths 9
+
+// ! 与第一个rsserver的bgp连接配置
+//   neighbor 10.0.2.1                                            # rsserver的ip
+//     remote-as 430000                                            # rsserver的AS number
+//     ebgp-multihop 255
+//     address-family ipv4 unicast
+//       route-map rs-networks in                                     # 允许接收rsserver发布的基础网络路由
+//       route-map reject out                                          # 禁止向rsserver发布基础网络路由
+//       soft-reconfiguration inbound always
+
+// ! 仿照第一个rsserver bgp邻居配置，编写其他的rsserver bgp邻居配置
+
+// ----
+// +
+// 相关配置参数如下。
+// +
+// [source,yaml]
+// ----
+
+
+//   neighbor 10.0.2.1                                            # rsserver0 的ip
+//     remote-as 430000                                           # rsserver0 的AS number
+//     ebgp-multihop 255
+//     address-family ipv4 unicast
+//       route-map rs-networks in                                    
+//       route-map reject out                                         
+//       soft-reconfiguration inbound always
+
+//   neighbor 10.0.2.1                                            # rsserver1 的ip
+//     remote-as 430000                                           # rsserver1 的AS number
+//     ebgp-multihop 255
+//     address-family ipv4 unicast
+//       route-map rs-networks in                                    
+//       route-map reject out                                         
+//       soft-reconfiguration inbound always
+
+//   neighbor 10.0.2.1                                            # rsserver2 的ip
+//     remote-as 430000                                           # rsserver2 的AS number
+//     ebgp-multihop 255
+//     address-family ipv4 unicast
+//       route-map rs-networks in                                    
+//       route-map reject out                                         
+//       soft-reconfiguration inbound always
+
+//   neighbor 10.0.2.1                                            # rsserver3 的ip
+//     remote-as 430000                                           # rsserver3 的AS number
+//     ebgp-multihop 255
+//     address-family ipv4 unicast
+//       route-map rs-networks in                                    
+//       route-map reject out                                         
+//       soft-reconfiguration inbound always
+
+
+// ----
+
+
+// === SDN2.0
+
+// 若当前环境的网络模式使用的是 SDN2.0，在 WebInstaller 部署完成后，需获取 Hyper 节点的 VBC 回程路由，并配置至相应的交换机上。
+
+// include::../../../../../_components/note.adoc[]
+
+// 无论当前计算节点使用哪种存储类型，请务必将默认安置组 `plg-00000000` 配置到所有计算节点，否则将导致在 Console 上创建 VPC 等服务失败。
+
+// include::../../../../../_components/table_footer.adoc[]
+
+
+// 需手动配置交换机的回程路由。
+
+
+// 该章节介绍如何为 Hyper 节点获取 VBC 回程路由，可以同时包含 SDS1.0 和 SDS2.0 节点。详细操作步骤如下。
+
+
+
+// . 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
+// +
+// [source,shell]
+// ----
+// ssh root@<firstbox ip address>
+// ----
+
+// . 获取 VBC 回程路由信息。
+// +
+// * 方式一：执行以下命令，获取路由信息。
+// +
+// [source,shell]
+// ----
+// /pitrix/bin/dump_vbc_route.sh hyper
+// ----
+// +
+// image::/images/ep_offline/installation/initialize_vbc_route_01.png[]
+// +
+// * 方式二：
+// +
+// .. 执行以下命令，获取 vbc_route_JOB_ID 文件名称。
+// +
+// [source,shell]
+// ----
+// cd /pitrix/log/deploy/
+// ls -al
+// ----
+// +
+// 命令回显如下所示，文件名称为 `vbc_route_j-ygSvX8AW`。
+// +
+// image::/images/ep_offline/installation/initialize_vbc_route_02.png[,50%]
+// +
+// .. 执行以下命令，获取 VBC 路由信息。
+// +
+// [source,shell]
+// ----
+// cat /pitrix/log/deploy/vbc_route_JOB_ID
+// ----
+// +
+// 命令行示例
+// +
+// [source,shell]
+// ----
+// cat /pitrix/log/deploy/vbc_route_j-ygSvX8AW
+// ----
+
+// . 在 Hyper 节点管理网络连接的交换机上，添加获取到的静态路由。示例内容如下。
+// +
+// [source,shell]
+// ----
+// ip route add 10.20.1.0/24 via 10.10.0.201 
+// ip route add 10.20.2.0/24 via 10.10.0.202 
+// ip route add 10.20.3.0/24 via 10.10.0.203
+// ip route add 10.20.4.0/24 via 10.10.0.204
+// ----
+
+
+
+== 登录{product_name}
+
+安装部署完成后，实施人员可登录{product_name}的 Console、BOSS 与配置中心进行相关检查与设置操作。
+
+
+=== 配置 Hosts 文件
+
+通过 Web 访问{product_name}的环境，需将{product_name}的 Host 信息添加至本地主机的 Hosts 文件中。可参考link:../standard/install/#_开始安装[前文内容]获取 Host 信息。
+
+
+打开本地主机 的 hosts 文件，写入获取到的 Hosts 信息。
+
+[source,shell]
+----
+// hosts 示例：
+10.10.0.231 console.democloud.com appcenter.democloud.com api.democloud.com docs.democloud.com
+10.10.0.211 cb0zcsf1.democloud.com
+10.10.0.212 cb1zcsf1.democloud.com
+10.10.0.231 boss.democloud.com
+----
+
+include::../../../../../_components/note.adoc[]
+
+* Linux 系统 hosts 文件路径为 `/etc/hosts`。
+* Windows 系统 hosts 文件路径为 `C:\Windows\System32\drivers\etc\hosts`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+
+=== 登录 Console
+
+include::../../../../../_components/attention.adoc[]
+此时还未对云平台进行初始化，还不能在 Console 上创建虚拟机。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 本地主机配置云平台的link:#_配置_hosts_文件[ Host 信息]。
+
+. 本地主机使用 Chrome 或火狐浏览器根据如下信息，访问{product_name} Console。其中 `<domain>` 可根据前期设置的**门户主域名**进行填写。
++
+[source,shell]
+----
+Web 地址：console.<domain>
+默认用户名：admin@<domain>
+默认密码：zhu88jie
+----
++
+如系统配置 `domain` 为 `democloud.com`，则登录信息如下。
++
+[source,shell]
+----
+Web 地址：console.democloud.com
+默认用户名：admin@democloud.com
+默认密码：zhu88jie
+----
+
+=== 登录 BOSS
+
+. 本地主机配置云平台的link:#_配置_hosts_文件[ Host 信息]。
+
+. 本地主机使用 Chrome 或火狐浏览器根据如下信息，访问{product_name} BOSS。其中 `<domain>` 可根据前期设置的**门户主域名**进行填写。
++
+[source,shell]
+----
+Web 地址：boss.<domain>
+默认用户名：boss@<domain>
+默认密码：zhu88jie
+----
++
+如系统配置 `domain` 为 `democloud.com`，则登录信息如下。
++
+[source,shell]
+----
+Web 地址：boss.democloud.com
+默认用户名：boss@democloud.com
+默认密码：zhu88jie
+----
+
+=== 登录配置中心
+
+. 本地主机配置云平台的link:#_配置_hosts_文件[ Host 信息]。
+
+. 本地主机使用 Chrome 或火狐浏览器根据如下信息，访问{product_name}的配置中心。其中 `<domain>` 可根据前期设置的**门户主域名**进行填写。
++
+[source,shell]
+----
+Web 地址：cadmin.<domain>
+默认用户名：admin@<domain>
+默认密码：zhu88jie
+----
++
+如系统配置 `domain` 为 `democloud.com`，则登录信息如下。
++
+[source,shell]
+----
+Web 地址：cadmin.democloud.com
+默认用户名：admin@democloud.com
+默认密码：zhu88jie
+----
+
+
+
+
+

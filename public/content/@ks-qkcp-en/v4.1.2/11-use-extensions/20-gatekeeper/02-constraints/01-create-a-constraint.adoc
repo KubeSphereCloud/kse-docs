@@ -1,0 +1,67 @@
+---
+title: "Create Constraints"
+description: "Learn how to create a constraint."
+weight: 01
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: ** Gatekeeper > Constraints**
+
+
+This section describes how to create a constraint.
+
+
+== Prerequisites
+
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **Gatekeeper** should have been installed and enabled.
+
+* A constraint template has been created.
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-clickCreate.adoc[]
+
++
+
+. In the **Create Constraint** dialog, set the following parameters, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Constraint Name
+|The name of the constraint.
+
+|Constraint Kind
+|The constraint template used by the constraint.
+
+|Enforcement Action
+|The `enforcementAction` field defines the action for handling Constraint violations. The default setting is `deny`, which means that by default, any admission request that violates the constraint will be denied. For more information, see link:https://open-policy-agent.github.io/gatekeeper/website/docs/violations/[Handling Constraint Violations].
+
+|Match Kinds
+|The `match` field defines the resources to which the constraint applies. For more information, see link:https://open-policy-agent.github.io/gatekeeper/website/docs/howto/#the-match-field[match].
+
+`kinds` accepts a list of objects with `apiGroups` and `kinds` fields that list the groups/kinds of objects to which the constraint will apply. If multiple groups/kinds objects are specified, only one match is needed for the resource to be in scope.
+
+|Namespace Selector
+|It is a label selector against an object's containing namespace or the object itself, if the object is a namespace.
+
+|Parameters
+|It describes the intent of a constraint. For more information, see link:https://open-policy-agent.github.io/gatekeeper/website/docs/howto/#the-parameters-field[parameters].
+|===
+
+You will view the created constraint on the **Constraints** page.
+--

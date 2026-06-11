@@ -1,0 +1,47 @@
+---
+title: "Mount or unmount a data disk"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, data disks, mount, unmount"
+description: "Describes how to mount or unmount a data disk to or from a VM in the {ks_product} web console."
+weight: 09
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: d0f2549dcdcd4330b1aaec0dff34248f
+:ks_xref_id: f0a5a19901c7465590a9d55cabb00583
+:ks_comp: ../../../../components/
+:ks_title: Mount or unmount a data disk
+:ks_description: Describes how to mount or unmount a data disk to or from a VM in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, data disks, mount, unmount
+:ks_weight: 09
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to mount or unmount a data disk to or from a VM in the {ks_product_abbr_full} web console.
+
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Each VM has a unique system disk. You cannot mount an extra system disk for the VM after the VM is created.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=93c8f8ca20e54d6f8d8be08b0a3ac561]
+
+include::../../../../_custom-en/vms/vm-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=79148dfadf1e48ebad23716a94e76a27]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, find the VM that you want to manage, right-click on the blank area to open the shortcuts for VM operations, and then select **Mount Data Disk** or **Unmount Data Disk** from the drop-down list.
+. Follow the wizard to proceed with your operation.

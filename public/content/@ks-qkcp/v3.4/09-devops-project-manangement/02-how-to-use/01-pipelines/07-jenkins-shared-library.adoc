@@ -1,0 +1,154 @@
+---
+title: "在流水线中使用 Jenkins 共享库"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, DevOps 项目, 使用 DevOps, 流水线"
+description: "介绍如何管理 DevOps 项目，以及如何在 DevOps 项目中管理流水线和 DevOps 项目设置。"
+weight: 07
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: bcfb98c5b15b4feebde985c574b91d6d
+:ks_xref_id: 4c5e0ab2976e48fda457135b33cba8ea
+:ks_comp: ../../../../components/
+:ks_title: 在流水线中使用 Jenkins 共享库
+:ks_keywords: Kubernetes, {ks_product}, DevOps 项目, 使用 DevOps, 流水线
+:ks_description: 介绍如何管理 DevOps 项目，以及如何在 DevOps 项目中管理流水线和 DevOps 项目设置。
+:ks_weight: 07
+:ks_icon:
+
+
+对于包含相同阶段或步骤的 Jenkins 流水线，在 Jenkinsfile 中使用 Jenkins 共享库避免流水线代码重复。
+
+本教程演示如何在{ks_product_left} DevOps 流水线中使用 Jenkins 共享库。
+
+
+== 准备工作link:[id=6fa754b0d68442209306f4f85f315fc3]
+
+* 您需要启用 DevOps 扩展组件。关于更多信息，请参阅《{ks_product_right}平台管理指南》的“扩展组件管理”章节。
+
+* 您需要创建一个企业空间、一个 DevOps 项目和一个用户 (**project-regular**)。必须邀请此帐户至 DevOps 项目中，并且授予 **operator** 角色。
+
+* 您需要一个可用 Jenkins 共享库。本教程以 link:https://github.com/devops-ws/jenkins-shared-library[GitHub 仓库]中的 Jenkins 共享库为例。
+
+
+== 步骤 1：在 Jenkins 仪表盘配置共享库link:[id=d019b3928abc48bd9b55dc9ac359e1a6]
+
+. link:../../../03-how-to-integrate/01-sonarqube/[登录 Jenkins 仪表板]并点击左侧导航栏中的**系统管理**。
+
+. 向下滚动并点击**系统配置**。
+
+. 向下滚动到 **Global Pipeline Libraries**，然后点击**新增**。
+
+. 配置字段如下所示。
+
+* **Name：** 为共享库设置名称（例如，`**demo-shared-library**`），以便在 Jenkinsfile 中引用此名称来导入共享库。
+
+* **Default version：** 设置共享库所在仓库的一个分支名称，将其作为导入共享库的默认分支。本教程将使用 master。
+
+* 在 **Retrieval method** 下，选择 **Modern SCM**。
+
+* 在 **Source Code Management** 下，选择 **Git** 并为**项目仓库**输入示例仓库的 URL 。如果您使用自己的仓库且访问此仓库需要凭据，则需要配置**凭据**。
+
+. 当您结束编辑，请点击**应用**。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+您还可以配置link:https://www.jenkins.io/zh/doc/book/pipeline/shared-libraries/#folder-level-shared-libraries[文件夹级别的共享库]。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+
+== 步骤 2：在流水线中使用共享库link:[id=c02ffc2b34b543c18323dc687d95f9b6]
+
+
+**a： 创建流水线**
+
+. 用 **project-regular** 帐户登录{ks_product_left} web 控制台。进入 DevOps 项目并点击**流水线**页面上的**创建**。
+
+. 在弹出窗口中设置名称（例如，`**demo-shared-library**`），点击**下一步**。
+
+. 在**高级设置**中，直接点击**创建**，使用默认设置创建流水线。
+
+**b：编辑流水线**
+
+. 在流水线列表中，点击流水线以转到其详细信息页面，然后点击**编辑 Jenkinsfile**。
+
+. 在显示的对话框中，输入以下示例Jenkinsfile。完成编辑后，点击**确定**。
++
+--
+// JSON
+include::../../../../../_ks_components/code/json.adoc[]
+
+library identifier: 'devops-ws-demo@master', retriever: modernSCM([
+  $class: 'GitSCMSource',
+  remote: 'https://github.com/devops-ws/jenkins-shared-library',
+  traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]
+])
+
+pipeline {
+  agent any
+
+  stages {
+    stage('Demo') {
+      steps {
+        script {
+          mvn.fake()
+        }
+      }
+    }
+  }
+}
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+您可以根据需要为 **agent** 指定 **label**。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 或者，您可以使用以 **@Library('<配置好的共享库名称>') _ ** 开头的 Jenkinsfile。如果使用这种类型的 Jenkinsfile，则需要提前在 Jenkins 仪表板上配置共享库。在本教程中，您可以使用以下示例 Jenkinsfile。
++
+--
+// JSON
+include::../../../../../_ks_components/code/json.adoc[]
+
+@Library('demo-shared-library') _
+
+pipeline {
+  agent any
+
+  stages {
+    stage('Demo') {
+      steps {
+        script {
+          mvn.fake()
+        }
+      }
+    }
+  }
+}
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+您可以使用 **@Library('demo-shared-library@<分支名称>') _** 来指定特定的分支。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+== 步骤 3：运行流水线
+
+. 您可以在**任务状态**选项卡下查看该阶段。点击**运行**运行它。
+
+. 在一段时间后，流水线将成功运行。
+
+. 您可以点击**运行记录**下的**成功**记录，然后点击**查看日志**查看日志详细信息。

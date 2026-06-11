@@ -1,0 +1,77 @@
+---
+title: "Configure Log Management"
+keywords: "Kubernetes, {ks_product-en}, logging"
+description: "This section introduces how to configure the 'WhizardTelemetry Logging' extension."
+weight: 01
+---
+
+WhizardTelemetry Logging supports configuring extensions to collect specified logs and create log indices by project.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more configuration information, see the details page of the "WhizardTelemetry Logging" extension in the Extensions Center.
+|===
+
+== Collect Specified Logs
+
+WhizardTelemetry Logging supports setting filter conditions to collect logs that include or exclude specified namespaces, which can reduce the number of logs.
+
+Edit the following parameters in the configuration of the WhizardTelemetry Logging extension:
+
+[,yaml]
+----
+vector-logging:
+  filter:
+    extraLabelSelector: "app.kubernetes.io/name!=kube-events-exporter"
+    extraNamespaceLabelSelector: ""
+    # When includeNamespaces and excludeNamespaces are set at the same time, only excludeNamespaces will take effect.
+    includeNamespaces: []
+    excludeNamespaces: []
+----
+
+* extraLabelSelector: Only collect logs from pods with this label.
+* extraNamespaceLabelSelector: Only collect logs from pods in namespaces with this label.
+* includeNamespaces: Only collect logs from pods in the specified namespaces.
+* excludeNamespaces: Do not collect logs from pods in the specified namespaces.
+
+== Create Log Indices by Namespace
+
+WhizardTelemetry Logging supports creating an index for each project (namespace), which can determine the log space occupied by a namespace, facilitate business rectification, and facilitate log analysis.
+
+=== Prerequisites
+
+Version requirements: 
+WhizardTelemetry Logging >= 1.2.0, WhizardTelemetry Platform Service >= 1.1.0.
+
+=== Steps
+
+. Modify the configuration of the WhizardTelemetry Logging extension. No need to modify the parameters in prefix.
++
+[,yaml]
+----
+vector-logging:
+  sinks:
+    opensearch:
+      index:
+        prefix: "{{ .cluster }}-{{ .kubernetes.namespace_name }}-logs"
+        timestring: "%Y.%m.%d"
+----
+
+. Modify the configuration of the WhizardTelemetry Platform Service extension. No need to modify the parameters in indexPrefix.
++
+[,yaml]
+----
+whizard-telemetry:
+  config:
+    logging:
+      enable: true
+      servers:
+        - elasticsearch:
+            endpoints:
+              - https://opensearch-cluster-data.kubesphere-logging-system:9200
+            indexPrefix: "{{ .cluster }}-{{ .kubernetes.namespace_name }}-logs"
+            timestring: "%Y.%m.%d"
+----

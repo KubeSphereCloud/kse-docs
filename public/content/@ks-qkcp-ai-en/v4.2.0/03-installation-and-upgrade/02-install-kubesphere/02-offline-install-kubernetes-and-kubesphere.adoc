@@ -1,0 +1,653 @@
+---
+title: "Offline Installation of Kubernetes and KubeSphere"
+keywords: "Kubernetes, KubeSphere, Installation, Offline Package, Offline Installation, Offline Deployment"
+description: "Learn how to install KubeSphere and Kubernetes in an offline environment."
+weight: 02
+---
+
+This section describes how to deploy Kubernetes and KubeSphere using an offline installation package in an environment without Internet access.
+
+The v4.x version of the open-source tool KubeKey will be used during the installation. For more information about KubeKey, please visit the link:https://github.com/kubesphere/kubekey[GitHub KubeKey repository].
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|``KubeSphere Community Edition`` users need to build the offline installation package themselves in a connected state. Users of other KubeSphere editions can contact KubeSphere delivery service experts to obtain the latest offline installation package, i.e., they can skip the offline package building process.
+|===
+
+
+== Preparations
+
+Prepare Linux hosts according to the following minimum configuration requirements.
+
+// [.admon.note,cols="a"]
+// |===
+// |Note
+
+// |If you do not need to build the offline installation package, you do not need to prepare a packaging node.
+// |===
+
+[%header,cols="1,1,2,2"]
+|===
+|Role	|Number of Hosts	|Minimum Requirements (per node)	|Network Requirements
+
+|Packaging Node	|1	|CPU: 1 core, Memory: 1 GB, Disk: 150 GB	|Must be able to access: link:https://github.com/[github.com], link:https://www.docker.com/[docker.io], link:https://quay.io/[quay.io]
+|Deployment Node (running Web Installer service)	|1	|CPU: 1 core, Memory: 1 GB, Disk: 150 GB	|Network connectivity with Kubernetes nodes
+|Private Image Registry Node	|1	|CPU: 8 cores, Memory: 16 GB, Disk: 100 GB	|Network connectivity with Kubernetes nodes
+|Kubernetes Node	|≥ 1 |CPU: 2 cores, Memory: 4 GB, Disk: 40 GB	|Network connectivity between nodes
+|===
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+* A single host can serve multiple roles simultaneously, such as being both a deployment node and a private image registry node, or both a deployment node and a Kubernetes node.
+* The private image registry node and Kubernetes nodes cannot be the same host.
+|===
+
+* **Packaging Node**: You need to prepare at least 1 Linux server as the packaging node. This node will download the required software packages and images from the Internet. Ensure it can access the following addresses: `github.com`, `docker.io`, `quay.io`.
+
+* **Deployment Node** (running the **Web Installer** service): During installation, you need to execute the `kk` command on this node to run the installation service. This node must have network connectivity with the private image registry node and Kubernetes nodes.
+
+* **Private Image Registry Node**: If you have not deployed any private image registry, please prepare at least 1 Linux server as the private image registry node. This node must have network connectivity with all Kubernetes nodes.
+
+* **Kubernetes Node**: You need to prepare at least 1 Linux server as a cluster node (Kubernetes does not need to be pre-installed).
+
+== Prerequisites
+
+// Except for the container runtime description, other parts are the same as the prerequisites for online installation.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|The following are the prerequisites that Kubernetes nodes must meet.
+|===
+
+* You need to prepare at least 1 Linux server as a cluster node. In a production environment, to ensure high availability of the cluster, it is recommended to prepare at least 5 Linux servers, with 3 as control plane nodes and the other 2 as worker nodes. If you are installing KubeSphere on multiple Linux servers, ensure all servers belong to the same subnet.
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-desc-systemRequirements.adoc[]
+
+* In a production environment, to ensure the cluster has sufficient computing and storage resources, it is recommended to configure each cluster node with at least 8 CPU cores, 16 GB of memory, and 200 GB of disk space. Additionally, it is recommended to mount at least 200 GB of extra disk space on each cluster node in the **/var/lib/docker** (for Docker) or **/var/lib/containerd** (for containerd) directory for storing container runtime data.
+
+* In a production environment, it is recommended to configure high availability for the KubeSphere cluster in advance to avoid cluster service interruption when a single control plane node fails. For more information, please refer to link:../../../03-installation-and-upgrade/01-preparations/02-configure-high-availability/02-configure-k8s-high-availability/[Configure High Availability].
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+If you have planned multiple control plane nodes, be sure to configure high availability for the cluster in advance.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+* By default, KubeSphere uses the local disk space of cluster nodes as persistent storage. In a production environment, it is recommended to configure an external storage system as persistent storage in advance. For more information, please refer to link:../../../03-installation-and-upgrade/01-preparations/04-configure-external-persistent-storage/[Configure External Persistent Storage].
+
+// * If container runtime is not installed on cluster nodes, the installation tool KubeKey will automatically install Docker as the container runtime on each cluster node during installation. You can also manually install containerd, CRI-O, or iSula as the container runtime in advance.
+// +
+// --
+// // Note
+// include::../../../../_ks_components/admonitions/note.adoc[]
+
+// The compatibility of CRI-O and iSula with KubeSphere has not been fully tested, and there may be unknown issues.
+
+// include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+// --
+
+* Ensure that the DNS server addresses configured in the **/etc/resolv.conf** file on all cluster nodes are available. Otherwise, the KubeSphere cluster may experience domain name resolution issues.
+
+* Ensure that the **sudo**, **tar**, **curl**, and **openssl** commands are available on all cluster nodes.
+
+* Ensure time synchronization across all cluster nodes.
+
+
+== Configure Firewall Rules
+
+// Same as for online installation
+
+KubeSphere requires specific ports and protocols for communication between services. If your infrastructure environment has a firewall enabled, you need to allow the required ports and protocols in the firewall settings. If your infrastructure environment does not have a firewall enabled, you can skip this step.
+
+The table below lists the ports and protocols that need to be allowed in the firewall.
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-para-portRequirement.adoc[]
+
+== Step 1: Build the Offline Installation Package
+
+Log in to the ``Packaging Node``, then follow the steps below to build the offline installation package.
+
+=== 1. Create Configuration File
+
+. Visit https://get-images.kubesphere.io/
+
+. Click to select the extensions you need to deploy.
+
+. Click **Submit**.
+
+. Create a `config.yaml` file on the packaging node.
++
+[source,bash]
+----
+vi config.yaml
+----
+
+. Copy the **Configuration File Result** below the submit button into the config.yaml file.
++
+====
+The following content is for example only; please copy the actual configuration information.
+[source,yaml]
+----
+apiVersion: kubekey.kubesphere.io/v1
+kind: Config
+spec:
+  cni:
+    calico_version: v3.28.2
+    cilium_version: 1.15.4
+    hybridnet_version: 0.6.8
+    kubeovn_version: 1.13.0
+    multus:
+      image:
+        tag: v4.3.0
+  cri:
+    container_manager: containerd
+    containerd_version: v1.7.6
+    crictl_version: v1.32.0
+    cridockerd_version: v0.3.1
+    docker_version: 24.0.7
+    runc_version: v1.1.7
+    sandbox_image:
+      tag: "3.8"
+  dns:
+    dns_cache_image:
+      tag: 1.24.0
+    dns_image:
+      tag: v1.11.1
+  etcd:
+    etcd_version: v3.5.11
+  image_manifests:
+  - docker.io/kubesphere/k8s-dns-node-cache:1.24.0
+  - docker.io/openebs/provisioner-localpv:4.2.0
+  - docker.io/openebs/linux-utils:4.2.0
+  - docker.io/kubesphere/coredns:v1.11.1
+  - docker.io/kubesphere/kube-apiserver:v1.32.6
+  - docker.io/kubesphere/kube-controller-manager:v1.32.6
+  - docker.io/kubesphere/kube-proxy:v1.32.6
+  - docker.io/kubesphere/kube-scheduler:v1.32.6
+  - docker.io/kubesphere/pause:3.8
+  - registry.cn-beijing.aliyuncs.com/kse/ks-apiserver:v4.2.0-community
+  - registry.cn-beijing.aliyuncs.com/kse/ks-console:v4.2.0-community
+  - registry.cn-beijing.aliyuncs.com/kse/ks-controller-manager:v4.2.0-community
+  - registry.cn-beijing.aliyuncs.com/kubesphereio/kubectl:v1.33.1
+  image_registry:
+    docker_registry_version: 2.8.3
+    dockercompose_version: v2.20.3
+    harbor_version: v2.10.1
+    keepalived_version: 2.0.20
+  Kubernetes:
+    helm_version: v3.14.3
+    kube_version: v1.32.6
+  storage_class:
+    local:
+      linux_utils_image:
+        tag: 4.2.0
+      provisioner_image:
+        tag: 4.2.0
+    nfs_provisioner_version: 4.2.0
+----
+
+When pulling images from certain image registries without authentication, it is easy to trigger exceptions such as rate limits, leading to operation failures. To log in to an image registry and pull images, you need to update the above configuration information as follows:
+
+[source,bash]
+----
+cat >> config.yaml << 'EOF'
+  cri:
+    registry:
+      auths:
+        - repo: <Image Registry Address> # The image registry to access when pulling images, e.g., docker.io
+          username: <Image Registry Account> # e.g., login account for docker.io
+          password: <Image Registry Password> # e.g., login password for docker.io
+EOF
+----
+====
+
+=== 2. Obtain kk and Web Installer
+
+`kk` is the command-line executable file of KubeKey, used for quickly deploying and managing Kubernetes clusters and related extensions. `Web Installer` is the graphical interface of KubeKey, used for deploying Kubernetes and KubeSphere.
+
+Execute the following command to install kk and Web Installer. First, ensure that the `tar` tool is already installed on the packaging node.
+
+[source,bash]
+----
+export KKZONE=cn
+export VERSION=latest
+curl -sfL https://get-kk.kubesphere.io | sh -
+----
+
+After execution, the following files will be generated in the current directory:
+
+[%header,cols="1a,4a"]
+|===
+|Original File |Extracted Files
+
+|`kubekey-v4.x.x-linux-amd64.tar.gz`
+|`kk`: The binary file for KubeKey.
+
+|`web-installer.tgz`
+|* `dist`: Web page resources.
+* `host-check.yaml`, `kubernetes`, `kubesphere`: Job template files.
+* `schema`: Configuration files.
+* `README.md`: Installation documentation.
+
+|`package.sh`
+|Offline installation package build script.
+|===
+
+=== 3. Build the Offline Installation Package
+
+Use the previously created configuration file to execute the offline package build script. This step takes a long time, please wait patiently for it to complete.
+
+[source,bash]
+----
+./package.sh config.yaml
+----
+
+If the following information is displayed, it indicates that the offline package was built successfully:
+
+----
+Offline package offline.tgz has been created successfully.
+----
+
+After execution, the `offline.tgz` file will be generated in the current directory. This file is the complete offline installation package.
+
+== Steps 2: Copy the Offline Installation Package to the Deployment Node
+
+Copy the offline installation package to the `deployment node` and extract it. All subsequent operations must be performed in the extracted directory on the deployment node.
+
+The offline installation package can be one you built yourself (e.g., `offline.tgz`) or one obtained from a KubeSphere delivery service expert.
+
+[source,bash]
+----
+tar -zxvf offline.tgz  #Note to replace the offline package name
+----
+
+[source,bash]
+----
+cd offline  #Note to replace with the actual directory name
+----
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+All subsequent steps will be performed on the deployment node, and commands must be executed within the extracted directory (e.g., `offline`), otherwise the operation will fail.
+|===
+
+
+== Steps 3: Synchronize Images to the Private Image Registry
+
+Log in to the `deployment node` and enter the directory where the offline package was extracted. Follow the steps below to synchronize the images from the offline installation package to the private image registry.
+
+=== Scenario 1: No Private Image Registry
+
+When there is no private image registry, you can use kk to create a harbor image registry.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|The private image registry node needs to have the tar tool pre-installed.
+|===
+
+. Enter the directory where the offline package was extracted and create the node configuration file `inventory_init_registry.yaml`.
++
+====
+[source,bash]
+----
+vi inventory_init_registry.yaml
+----
+
+Follow the instructions and fill in the relevant information for the image registry in the appropriate locations.
+[source,yaml]
+----
+kind: Inventory
+metadata:
+  name: default
+spec:
+  hosts:
+    harbor:
+      # Enter the SSH login information for the node where Harbor will be installed
+      # KubeKey will remotely connect to this host and install Harbor
+      internal_ipv4: <Image Registry Node IP Address>
+      connector:
+        host: <Image Registry Node SSH Connection IP>
+        port: <Image Registry Node SSH Connection Port> # Default 22
+        user: <Image Registry Node SSH Connection User> # Default root
+        password: <Image Registry Node SSH Connection Password>
+  groups:
+      image_registry:
+        hosts:
+         - harbor
+  vars:
+    image_registry:
+      type: harbor
+      auth:
+        # Enter your expected image registry domain name and default account here
+        # The automatically created Harbor will use this domain address, and the set account password will be used as the default account password
+        registry: <Expected Image Registry Domain Address>
+        username: admin
+        password: <Expected Harbor Admin Password>
+        # The Harbor image registry deployed by kk uses a self-signed certificate by default. If you have already applied for and hold a trusted SSL certificate, you can run Harbor with a trusted certificate.
+        #cert_file: <Trusted Service Certificate Path>
+        #key_file: <Service Certificate Key Path>
+    localDNS:
+     - /etc/hosts
+----
+====
+
+. Install Harbor and synchronize images.
++
+====
+Using the `inventory_init_registry.yaml` created in the previous step, execute the following command.
+
+[source,bash]
+----
+./kk init registry -i inventory_init_registry.yaml --workdir $(pwd)/prepare --set binary_dir=$(pwd)/kubekey/kubekey
+----
+
+If the following information is displayed, it indicates that the Harbor image registry has been successfully created and the images in the offline package have been successfully synchronized to the image registry.
+
+Example output:
+----
+[Playbook default/init-registry-j2khj] finish. total: 88,success: 88,ignored: 0,failed: 0
+----
+====
+
+. Configure domain name discovery. The Harbor image registry domain name needs to be discoverable by Kubernetes nodes.
++
+* Option 1: Configure domain name discovery on the DNS server.
+* Option 2: On each Kubernetes node, implement local domain name resolution by configuring the `/etc/hosts` file.
++
+====
+Log in to the ``Kubernetes node`` and execute the following command:
+
+[source,bash]
+----
+echo '<Image Registry Node IP Address> <Image Registry Domain Address>' | sudo tee -a /etc/hosts
+----
+====
+
+. (Optional) Configure Kubernetes nodes to trust the Harbor self-signed certificate.
++
+The Harbor image registry deployed by kk uses a self-signed certificate by default. The container runtime (docker, containerd) on Kubernetes nodes needs to perform certificate authentication when pulling images from this private registry.
++
+.. Obtain the self-signed Harbor service certificate.
++
+--
+Log in to the ``Private Image Registry Node`` and query the Harbor version to determine the path of the Harbor service certificate: `/opt/harbor/<harbor version>/ssl/server.crt`.
+
+Query the Harbor version:
+[source,bash]
+----
+docker images | grep harbor-core
+----
+
+Example path for the Harbor service certificate:
+[source,bash]
+----
+/opt/harbor/v2.10.1/ssl/server.crt
+----
+
+--
+
+.. Copy the Harbor service certificate to the trusted domain of each Kubernetes node.
++
+====
+Log in to the ``Kubernetes node`` and execute the following commands:
+
+* Ubuntu system:
++
+[source,bash]
+----
+cp /opt/harbor/<harbor version>/ssl/server.crt /usr/local/share/ca-certificates/
+update-ca-certificates
+----
+
+* CentOS system:
++
+[source,bash]
+----
+cp /opt/harbor/<harbor version>/ssl/server.crt /etc/pki/ca-trust/source/anchors/
+update-ca-trust
+----
+====
+
+=== Scenario 2: Existing Private Image Registry
+
+If you already have an image registry, you only need to synchronize the images from the offline installation package to the existing private image registry.
+
+. Go to the directory where the offline package is extracted and create the node configuration file `inventory_sync_image.yaml`.
++
+====
+[source,bash]
+----
+vi inventory_sync_image.yaml
+----
+
+[source,yaml]
+----
+kind: Inventory
+metadata:
+  name: default
+spec:
+  vars:
+    image_registry:
+      auth:
+        # Ensure the provided image registry account and password have permissions to create projects and push images
+        registry: <Your Image Registry Address>
+        username: <Your Image Registry Account>
+        password: <Your Image Registry Password>
+    localDNS:
+     - /etc/hosts
+----
+====
+
+. Synchronize images. Use the `inventory_sync_image.yaml` created in the previous step to push images.
++
+====
+[source,bash]
+----
+./kk artifact images -i inventory_sync_image.yaml --workdir $(pwd)/prepare --set binary_dir=$(pwd)/kubekey/kubekey,download.download_image=false
+----
+
+If the following information is displayed, it indicates that the images in the offline package have been successfully synchronized to the image registry.
+
+Example output:
+----
+[Playbook default/artifact-images-fkgmw] finish. total: 15,success: 15,ignored: 0,failed: 0
+----
+====
+
+== Step 4: Start the Web Installer
+
+The Web Installer is the graphical interface of KubeKey for deploying Kubernetes and KubeSphere.
+
+Log in to the ``Deployment Node`` and go to the directory where the offline package is extracted, then execute the following command to start the Web Installer:
+
+[source,bash]
+----
+cd offline  #Note: Replace with the actual directory name
+----
+
+[source,bash]
+----
+./kk web --port 8080 --schema-path schema --ui-path dist
+----
+
+After execution, do not close the command terminal. Open the KubeKey UI page in a browser via `http://<Deployment Node IP Address>:8080`.
+
+
+== Step 5: Deploy Kubernetes and KubeSphere
+
+On the `http://<Deployment Node IP Address>:8080` page, click **Start Installation** to enter the deployment process.
+
+===  1. Add Cluster Nodes
+
+On the **Basic Information** page, add Kubernetes nodes. Supports adding nodes manually, via file upload, or by node scanning.
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|If only one node is added, the node role must be `Master & Worker`.
+
+|===
+
+* **Manual Addition**
++
+--
+Suitable for adding a single node. Fill in the hostname, IP address, SSH address, SSH authentication, and other information.
+
+image::/images/ks-qkcp/zh/v4.2.0/web-installer/add-node-manual.png[,80%]
+--
+
+* **File Upload**
++
+--
+Suitable for batch adding nodes. Fill in node information according to the template and then upload.
+
+image::/images/ks-qkcp/zh/v4.2.0/web-installer/add-node-upload.png[,90%]
+--
+
+* **Node Scanning**
++
+--
+Suitable for automatic node discovery. Scan nodes via IP CIDR. You can freely select nodes to add based on the scan results.
+image::/images/ks-qkcp/zh/v4.2.0/web-installer/add-node-ip-range.png[,80%]
+--
+
+=== 2. Modify Configuration Parameters
+
+Configure the parameters required for deploying Kubernetes and KubeSphere.
+
+Both the **Kubernetes** and **KubeSphere Core** tabs support **Form Mode** and **YAML Mode**. You can fill in the configuration information in the form (all parameters must be configured) or directly edit the YAML file. For more configuration information, please refer to link:https://github.com/kubesphere/kubekey/blob/master/docs/config-example.md[this file].
+
+image::/images/ks-qkcp/zh/v4.2.0/web-installer/install-config.png[,80%]
+
+* **Kubernetes Configuration**
++
+--
+[%header,cols="1,1a,4a"]
+|===
+|Category |Parameter |Description
+
+.5+|Cluster Configuration
+|Cluster Name
+|Enter a cluster name.
+
+|Kubernetes Version
+|The version here must match the `kube_version` in the `config.yaml` file located in the offline installation package directory.
+
+|Cluster Access Address
+|The unified access endpoint address for the cluster, typically the domain name of the load balancer.
+
+|Port
+|The access port for the cluster.
+
+|Routing Mode
+|Supports `local` and `haproxy` modes.
+
+.1+|Container Runtime
+|Type
+|The type of container runtime, supports `docker` and `containerd`.
+
+.5+|Network Settings
+|Network Plugin
+|Supports multiple plugins, such as `calico`, `cilium`, `flannel`, `hybridnet`, and `kubeovn`.
+
+|Max Pods Per Node
+|The maximum number of pods that can run on each node. Default is 110.
+
+|Service CIDR
+|The range of IP addresses available for "Services" within the cluster.
+
+Service CIDR supports both IPv4 and IPv6 and must not overlap with other networks in the same cluster (e.g., Pod CIDR and Node IP).
+
+|Pod CIDR
+|The range of IP addresses available for "Pods" within the cluster.
+
+Pod CIDR supports both IPv4 and IPv6 and must not overlap with other networks in the same cluster (e.g., Node IP).
+
+|IPv4/IPv6 Mask Size
+|The number of bits in the IP address used to identify the network portion.
+// The remaining bits are used to identify the host portion. A larger mask value corresponds to a finer network division but results in fewer available host addresses within each subnet.
+
+.2+|Image Registry Configuration
+|Registry Address
+|Enter the actual address of the private image registry.
+
+|Username & Password
+|Enter the login account and password for the private image registry.
+
+.3+|Storage Settings
+|Enable
+|Use the local storage system of the cluster nodes.
+
+|Set as Default Storage
+|Set as the default storage class.
+
+|Storage Path
+|The storage path for volumes on the host machine.
+
+|===
+--
+
+* **KubeSphere Core Configuration**
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Global Image Registry
+|Enter the actual address of the private image registry.
+
+|Extension Image Registry
+|Enter the actual address of the private image registry.
+|===
+
+After configuration is complete, click **Next**.
+
+=== 3. Installation Preview
+
+On the **Installation Preview** page, after confirming that the version and other information are correct, click **Next: Execute Installation** to begin installation. You can also go back to the previous step to modify configuration parameters.
+
+=== 4. Installation
+
+Wait patiently for the installation to complete. After installation is complete, the system will automatically proceed to the installation verification step.
+
+If an exception occurs during installation, click **View Logs** to see the log details, then exit or reinstall after initialization.
+
+image::/images/ks-qkcp/zh/v4.2.0/web-installer/installing.png[]
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|If you need to reinstall, modify configuration parameters, or clear configurations on the Web Installer page, click the **Initialize** button on the left. This will reset all tasks on the Kubernetes nodes and return to the Basic Information page. The initialization operation is irreversible, please execute with caution.
+|===
+
+=== 5. Installation Verification
+
+. On the **Installation Verification** page, click **Start Detection**. The system will automatically run the corresponding detection script to verify system availability.
+
+. If the system detection passes, click **Finish**. You can then view the KubeSphere access address, administrator username, and default password.
+
+. Enter the access address in a web browser, log in to the KubeSphere web console, and you can start using KubeSphere.
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|Depending on your network environment, you may need to configure traffic forwarding rules and open port 30880 in the firewall.
+|===

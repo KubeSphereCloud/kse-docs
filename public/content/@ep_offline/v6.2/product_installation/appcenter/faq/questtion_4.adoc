@@ -1,0 +1,66 @@
+---
+title: AppCenter 应用导入过程中提示缺少基础镜像
+weight: 4
+---
+
+== 问题描述
+
+{product_name}使用脚本导入 AppCenter 应用过程中，提示缺少基础镜像文件。如下图所示。
+
+image::/images/ep_offline/installation/app_import_faq_5.png[]
+
+
+
+== 可能原因
+
+缺少基础镜像。
+
+== 解决方法
+
+{product_name}导入 AppCenter 应用时，若缺少基础镜像，则导入失败，需要先导入基础镜像再执行 AppCenter 应用导入操作。
+
+=== 导入基础镜像
+
+
+. 登录{product_name}的 FirstBox 节点。
+. 执行如下命令行，查看{product_name}的 Seed 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/seed
+----
++
+命令回显示例
++
+[source,shell]
+----
+nodes=( testbm2ar01n00 testbm2ar01n01 testbmr01n01 testbmr01n02 );
+----
+
+. 根据查询结果，登录 Seed 节点。这里以登录 `testbm2ar01n00` 节点为例。
++
+[source,shell]
+----
+ssh testbm2ar01n00
+----
+
+
+. 执行以下命令行，拷贝文件 `metadataarm.lz4` 至 Seed 节点的 `/pitrix/images-repo/me` 目录下。
++
+[source,shell]
+----
+wget -c -r -np -nd -L -A tgz,lz4,iso -P /pitrix/images-repo/$<XX> http://10.16.11.19/$<XX>/
+----
++
+命令行中的 `$<XX>` 表示 `images-repo` 的一个目录，使用者可以按需下载所需要的镜像。命令行示例如下。
++
+[source,shell]
+----
+wget -c -r -np -nd -L -A tgz,lz4 -R 'img-*' -P /pitrix/images-repo/bi http://10.16.11.19/bi/
+----
+
+
+
+
+
+

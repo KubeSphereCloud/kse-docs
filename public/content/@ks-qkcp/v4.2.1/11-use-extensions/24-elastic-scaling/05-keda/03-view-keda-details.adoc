@@ -1,0 +1,84 @@
+---
+title: "查看 KEDA 详情"
+weight: 03
+---
+
+
+:ks_permission: **事件驱动伸缩查看**
+:ks_navigation: **弹性伸缩 > 事件驱动伸缩**
+
+
+本节介绍如何查看 KEDA 的详情信息。
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* KubeSphere 平台需要安装并启用 **KEDA for KubeSphere** 扩展组件。
+
+
+== 操作步骤
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
+
+. 在 KEDA 列表中点击一个 KEDA 的名称打开其详情页面。
+
+. 在**属性**区域，查看 KEDA 的资源属性，如所属集群和项目。
+
+. 在**资源状态**页签，查看 KEDA 的详细状态信息、伸缩对象和触发器信息。
++
+--
+* 状态信息
++
+[.admon.note,cols="a"]
+|===
+|说明
+
+|如果显示image:/images/ks-qkcp/zh/icons/check-healthy.svg["healthy",15px,15px]则表明状态正常，如果显示image:/images/ks-qkcp/zh/icons/failure.svg["unhealthy",20px,20px]则表明出现异常，如果显示image:/images/ks-qkcp/zh/icons/question-colorful.svg["question",20px,20px]则表明因信息不足无法确定状态。
+|===
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|伸缩对象就绪
+|工作负载是否准备好开始伸缩。
+
+|伸缩器活跃​
+|伸缩器是否正常运行，即能够从外部事件源（如 Prometheus）获取指标并进行伸缩计算。
+
+|​伸缩器​回退​
+|当伸缩器无法从外部事件源获取指标时，系统是否启动了回退机制。​
+
+|暂停​
+|伸缩是否被暂停。
+|===
+
+* 伸缩对象
++
+查看 KEDA 所管理的工作负载的当前副本数、期望副本数、允许的副本数范围、轮询间隔和等待时间。
+
+
+* 触发器
++
+查看触发器的配置信息。有关各参数的说明，请参阅link:../01-create-keda/#_参数描述[参数描述]。
+--
+
+. 点击**事件**页签，查看 KEDA 相关的事件。
++
+--
+include::../../../../_custom/clusterManagement/clusterManagement-para-eventsTab.adoc[]
+--

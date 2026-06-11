@@ -1,0 +1,35 @@
+---
+title: "Modify Notification Language"
+keywords: "Kubernetes, {ks_product}, Platform Settings, Notification Management, Notification Settings, Silence Policy, Modify Notification Language"
+description: "This section describes how to modify the notification language."
+weight: 06
+---
+
+:ks_navigation: **Notification > Notification Settings**
+// :ks_permission: **Platform Settings Management**
+
+This section describes how to modify the notification language.
+
+Notifications sent to users contain key-value pair information. You can set the language for the keys in the notifications.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Notification** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Notification Settings** page, click the **Notification Language** tab, then select the notification language from the dropdown list.

@@ -1,0 +1,23 @@
+---
+title: "检查 qke_apiserver 服务状态"
+weight: 10
+---
+
+1. 登录云平台 Firstbox。
+2. 执行以下命令，检查 qke_apiserver 服务状态。
++
+[source]
+----
+fb exec_nodes {{ global_zone_id }}-webservice 'supervisorctl status qke_apiserver'
+----
++
+示例：
++
+[source]
+----
+fb exec_nodes uat1a-webservice 'supervisorctl status qke_apiserver'
+----
++
+当 qke_apiserver 服务状态均为 running，才可以继续执行后续步骤。
++
+image::/images/ep_offline/qke_install/install_service_qke_apiserver.png[,80%]

@@ -1,0 +1,94 @@
+---
+title: "预置检查及设置"
+weight: 1
+---
+
+
+**检查 CPU 工作模式**
+
+. 逐一登录 NeonSAN 集群的 Store 节点。
+
+. 查看当前节点 CPU 型号的默认主频值。
++
+[source,shell]
+----
+cat /proc/cpuinfo | grep "model name"| head -1
+----
+
+. 查看当前 CPU 频率。若不是当前节点 CPU 的默认主频，则需参考**设置 CPU 工作模式**步骤进行修改。
++
+[source,shell]
+----
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq
+----
+
+
+. 查看 cpu 当前工作模式。若返回结果不是 ``performance``，则需参考**设置 CPU 工作模式**步骤进行修改。
++
+[source,shell]
+----
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+----
+
+**设置 CPU 工作模式**
+
+. 依次执行如下命令，安装 cpupower 安装包。 
+.. 安装 linux-tools-common 包。
++
+[source,shell]
+----
+apt-get install linux-tools-common
+----
+.. 安装当前节点内核版本的 linux-tools 包，内核版本信息需根据实际情况进行修改。
++
+[source,shell]
+----
+apt-get install linux-tools-5.4.0-59-generic
+----
+
+. 设置 CPU 工作模式为 performance。若命令执行失败，根据错误提示安装相应的依赖包即可。
++
+[source,shell]
+----
+cpupower -c all frequency-set -g performance
+----
+
+. 设置 CPU 默认主频。
++
+[source,shell]
+----
+cpupower frequency-set -u 2.3G
+----
++
+include::../../../../../_components/note.adoc[]
+`-u` 用于指定当前节点的默认频率值，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 设置 CPU 最小主频。
++
+[source,shell]
+----
+cpupower frequency-set -d 2.3G
+----
++
+include::../../../../../_components/note.adoc[]
+`-d` 用于指定当前节点的默认频率值，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 禁用 CPU 空闲时休眠
++
+[source,shell]
+----
+for i in 'seq 1 <core_num>'; do cpupower idle-set -d $i; done
+----
++
+include::../../../../../_components/note.adoc[]
+`<core_num>` 为当前节点 CPU 的最大核数，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 查看 CPU 主频是否调整到默认主频。
++
+[source,shell]
+----
+ cat /proc/cpuinfo | grep 'cpu MHz'
+----

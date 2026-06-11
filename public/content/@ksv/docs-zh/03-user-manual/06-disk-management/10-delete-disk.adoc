@@ -1,0 +1,79 @@
+---
+title: "删除磁盘"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 磁盘, 删除"
+description: "介绍如何使用{ks_product_both}Web 控制台删除磁盘。"
+weight: 10
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 156254cf1f1a40cf8629edbda9930aba
+:ks_xref_id: 73dc5a1a677045ecb2462ecc40a18fdb
+:ks_comp: ../../../components/
+:ks_title: 删除磁盘
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台删除磁盘。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 磁盘, 删除
+:ks_weight: 10
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_both}Web 控制台删除磁盘。
+
+{ks_product_right}仅支持手动删除数据盘。删除磁盘前，您需要先将磁盘从虚拟机中解绑。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=ad531b8e36314f9cb44e13bc7e59180f]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/disks/disk-manage-prerequisites.adoc[]
+
+:relfileprefix: ./
+
+
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 删除单块数据盘link:[id=8f850b27a93740c7818ea36945aaa17a]
+
+include::../../../_custom/disks/disk-steps.adoc[]
+
+. 在磁盘列表页面，点击目标数据盘名称，进入数据盘详情页面。
+
+. 在数据盘详情页面左上角点击image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后选择**删除**。
+
+. 在弹出的对话框中点击**确定**可删除目标数据盘。
++
+--
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+数据盘删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 批量删除数据盘link:[id=4d831f3ffd3b4ca7bd5acc18c3feff8b]
+
+include::../../../_custom/disks/disk-steps.adoc[]
+
+. 在磁盘列表页面，选择需要删除的数据盘名称左侧的复选框，然后在列表上方点击**删除**。
+
+. 在弹出的对话框中点击**确定**可批量删除多个数据盘。
++
+--
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+数据盘删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

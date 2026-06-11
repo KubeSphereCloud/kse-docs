@@ -1,0 +1,70 @@
+---
+title: ModifyLoginAccountAttributes
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| account_id
+| String
+| false
+| 账号ID
+
+| account_name
+| String
+| false
+| 账号名称
+
+| login_account_id
+| String
+| true
+| 登录账号ID
+
+| status
+| String
+| false
+| 状态
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_account_id
+| String
+| false
+| 登录账户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "account_id": "account_id_1",
+  "account_name": "account_name_1",
+  "login_account_id": "login_account_id_1",
+  "status": "activated"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyLoginAccountAttributesResponse",
+  "login_account_id": "login_account_id_1",
+  "ret_code": 0
+}
+----

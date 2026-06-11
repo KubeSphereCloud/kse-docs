@@ -1,0 +1,65 @@
+---
+title: "修改同步执行的异步任务数"
+weight: 5
+---
+
+== 注意事项
+
+一般不建议修改。如需修改，需严格按照以下步骤进行。
+
+== 操作步骤
+
+. 查看集群中是否有正在执行的任务，若有，需等待所有任务都执行完成后，再进行后续步骤。
++
+[,shell]
+----
+neonsan list_job
+----
+
+. 逐个登录 center 节点，根据实际情况，修改配置文件 center.conf 中的以下参数。
++
+[,shell]
+----
+vi /etc/neonsan/center.conf
+
+... ...
+[async_queue]
+recovery.capacity=10
+gc.capacity=10
+rebalance.capacity=10
+move.capacity=10
+scrub.capacity=10
+metro_sync.capacity=10
+snapshot.capacity=10
+clone_sync.capacity=10
+local_access.capacity=10
+... ...
+----
+
+. 所有 center 节点的配置文件 center.conf 均修改完后，立即重启 Leader center 节点上的 center 服务即可。
+.. 查看 leader center。
++
+[,shell]
+----
+qfcip
+----
+.. 重启相应服务。
++
+[,shell]
+----
+supervisorctl restart neoncenter
+----
+
+. 输入如下命令确认修改是否生效，查看 capacity 确认。
++
+[,shell]
+----
+/opt/zookeeper-3.4.13/bin/zkCli.sh
+get /neonsan/upgrade_cluster/queues/recovery_volume
+----
++
+include::../../../../../../_components/note.adoc[]
+* 命令行中的 recovery_volume 可根据实际情况进行修改。
+* 如步骤 2 中更新的是 local_access.capacity 的值，则需将命令行中的 recovery_volume 替换为 local_access
+include::../../../../../../_components/table_footer.adoc[]
+

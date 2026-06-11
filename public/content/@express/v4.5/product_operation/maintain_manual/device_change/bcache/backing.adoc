@@ -1,0 +1,245 @@
+---
+title: "下线/更换数据（backing）盘"
+weight: 1
+---
+
+== 运维场景
+
+使用 Bcache 缓存软件做混插的云易捷环境中，若遇到需要下线或更换集群中已有的 Bcache 数据（backing）盘的情况，均可参考以下步骤。
+
+== 操作步骤
+
+=== 下线数据（backing）盘
+
+. 登录任一 Hyper 节点。
+. 关闭 NeonSAN 集群自动恢复与自动均衡功能。
++
+[source,shell]
+----
+neonsan set_parameter -parameter auto_recovery -value 0
+----
++
+[source,shell]
+----
+neonsan set_parameter -parameter auto_balance -value 0
+----
+
+. 检查磁盘状态，并记录待下线数据（backing）盘的 UUID。
++
+[source,shell]
+----
+neonsan list_ssd
+----
+. 迁移待下线数据（backing）盘的数据。
++
+[source,shell]
+----
+neonsan evict_ssd -ssd_uuid <ssd_uuid>
+----
++
+include::../../../../../../_components/note.adoc[]
+* ``-ssd_uuid`` 用于指定待迁移数据的磁盘的 UUID，需根据实际情况进行更改。
+* 可通过 ``neonsan list_job`` 查看任务执行状态。
+* 任务执行完成后，迁移数据的磁盘状态应为OFFLINE，否则需排查原因，解决问题后再次执行后续步骤。
+* 该命令可重复执行，直至数据迁移完成。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 移除待线下的数据（backing）盘。
++
+[source,shell]
+----
+neonsan remove_ssd -ssd_uuid <ssd_uuid>
+----
++
+include::../../../../../../_components/note.adoc[]
+``-ssd_uuid`` 用于指定待迁移数据的磁盘的 UUID，需根据实际情况进行更改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 开启 NeonSAN 集群自动恢复与自动均衡功能。
++
+[source,shell]
+----
+neonsan set_parameter -parameter auto_recovery -value 1
+----
++
+[source,shell]
+----
+neonsan set_parameter -parameter auto_balance -value 1
+----
+
+. 执行如下命令，将脏数据下刷至数据（backing）盘。
++
+[source,shell]
+----
+echo 0 > /sys/block/bcache*/bcache/writeback_percent
+----
++
+include::../../../../../../_components/note.adoc[]
+``bcache*`` 为 cache 盘盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 缓存模式设置的为 `writeback`，可执行如下命令，验证脏数据是否下刷完成，返回结果状态为 ``clean`` 即可。
++
+[source,shell]
+----
+cat /sys/block/bcache*/bcache/state
+----
+
+. 查看缓存盘的 cset.uuid。
++
+[source,shell]
+----
+ bcache-super-show /dev/sda
+----
++
+image::/images/express/maintain/backing_1.png[]
+
++
+include::../../../../../../_components/note.adoc[]
+``/dev/sda`` 为待与 cache 盘解绑的数据盘盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 解除绑定关系。
++
+[source,shell]
+----
+echo "cset.uuid" > /sys/block/bcache*/bcache/detach
+----
++
+include::../../../../../../_components/note.adoc[]
+* `bcache*`` 为cache盘盘符，需根据实际情况进行修改。
+* `cset.uuid` 为 bcache 盘的 cset.uuid。
+* 执行 ``/sys/block/bcache*/bcache/state``，查看结果为 ``no cache``，则表示绑定关系解除。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，停用数据（backing）盘。
++
+[source,shell]
+----
+echo 1 >/sys/block/<dev_name>/bcache/stop
+----
++
+include::../../../../../../_components/note.adoc[]
+``<dev_name>`` 为待停用的数据盘盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，彻底删除当前磁盘上的 bcache 分区。
++
+[source,shell]
+----
+wipefs -a /dev/sd*
+----
++
+include::../../../../../../_components/note.adoc[]
+``/dev/sd*`` 为待删除 bcache 分区的盘符，需根据实际情况进行修改
+include::../../../../../../_components/table_footer.adoc[]
+
+. 拔盘即可。
+
+=== 更换新数据（backing）盘
+
+. 参考上述步骤，下线数据（backing）盘后，插入新的数据盘，并查看其盘符。
++
+[source,shell]
+----
+lsblk
+----
+
+. 为插入的新盘创建 bcache 分区。
++
+[source,shell]
+----
+make-bcache -B <dev_name>
+----
++
+include::../../../../../../_components/note.adoc[]
+``<dev_name>`` 为新盘盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令查看现有 cache 盘的 cset.uuid。
++
+[source,shell]
+----
+bcache-super-show <dev_name>
+----
++
+include::../../../../../../_components/note.adoc[]
+``<dev_name>`` 为集群中现有的缓存盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 将步骤 2 新创建的数据（backing）盘和现有的 cache 盘进行绑定。
++
+[source,shell]
+----
+echo "cset.uuid" > /sys/block/ bcache2（新数据盘的bcache）/bcache/attach
+----
++
+include::../../../../../../_components/note.adoc[]
+* ``bcache2`` 为步骤 2 新数据盘的 bcache，需根据实际情况进行修改。
+* ``cset.uuid`` 为上一步查看到的现有 cache 盘的 cset.uuid。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 设置缓存模式。
++
+[source,shell]
+----
+echo writeback > /sys/block/bcache2（新数据盘的bcache）/bcache/cache_mode
+----
++
+include::../../../../../../_components/note.adoc[]
+``bcache2`` 为步骤 2 新数据盘的 bcache，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 查看缓存模式。
++
+[source,shell]
+----
+cat /sys/block/bcache2（新数据盘的bcache）/bcache/cache_mode
+----
++
+include::../../../../../../_components/note.adoc[]
+``bcache2`` 为步骤 2 新数据盘的 bcache，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 将新盘添加至集群。
++
+[source,shell]
+----
+neonsan add_ssd -dev /dev/bcache*  -store_id <STORE_ID> -trim_support false -type CachedHDD
+----
++
+include::../../../../../../_components/note.adoc[]
+* ``/dev/bcache*`` 为新添加数据盘的 bcache，需根据实际情况进行修改。
+* ``<STORE_ID>`` 为更换磁盘所在的 Store 节点 ID，可执行 ``neonsan list_store`` 查看，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 检查卷的状态，SSD 状态，以及 Store 的状态。
++
+[source,shell]
+----
+neonsan list_volume -detail
+----
++
+[source,shell]
+----
+neonsan list_ssd
+----
++
+[source,shell]
+----
+neonsan list_store
+----
+
+. 执行如下命令对集群内的 SSD 进行负载均衡。
++
+[source,shell]
+----
+neonsan rebalance_ssd
+----
++
+include::../../../../../../_components/note.adoc[]
+该命令为异步执行，可以通过 ``neonsan list_job`` 查看进程。
+include::../../../../../../_components/table_footer.adoc[]
+
+

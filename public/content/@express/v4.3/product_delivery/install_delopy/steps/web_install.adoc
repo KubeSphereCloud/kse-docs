@@ -1,0 +1,99 @@
+---
+title: "Web Installer 集群部署"
+weight: 4
+---
+
+云易捷集群的部署均在 CloudExpress Installer 部署管理平台（简称 Web Installer）上完成。
+
+. 在浏览器输入  Web Installer 地址 ``http://firstbox_ip:9998/``打开相应的登录页面，如 http://192.168.1.100:9998/。
++
+其中 ``firstbox_ip`` 为link:../init_node[节点初试化]操作步骤中设置的**启动节点**的 IP 地址，登录 Web Installer 的用户名密码默认为：admin/zhu88jie。
++
+image::/images/express/delivery/install_delopy_32.png[]
+
+. 登录 Web Installer 平台后，进入平台基本信息设置页面，请根据实际的link:../../plan/plat_para[平台参数部署规划]进行填写。
++
+image::/images/express/delivery/install_delopy_33.png[]
++
+include::../../../../../_components/note.adoc[]
+管理网络范围须按照前文中交换机设置的管理/业务网络实际范围进行填写，如 192.168.1.0-192.168.1.254。
+include::../../../../../_components/table_footer.adoc[]
+
+. 完成平台信息参数设置后，将自动弹出**添加节点**窗口，在该窗口中输入当前待部署环境中所有节点服务器所在的 IP 段，点击**扫描可用节点**。
++
+include::../../../../../_components/attention.adoc[]
+填写 IP 段时，一定不能将启动节点的虚拟 IP 地址包含在内。
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/delivery/install_delopy_34.png[,50%]
+
+. 在节点扫描的过程中，云易捷会自动识别同一网段的其他一体机，耗时约 2 分钟，若超过该时间，请重新扫描或检查网络连接后重新扫描。
++
+image::/images/express/delivery/install_delopy_35.png[]
+
+. 节点扫描完毕后，所有在网段内的一体机均会罗列出来，将鼠标悬停在相应的节点区域时，将显示**编辑节点**按钮。
++
+include::../../../../../_components/attention.adoc[]
+节点角色，集群内只需要 2 各节点进行设置即可，设置过多可能导致额外的存储空间消耗。
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/delivery/install_delopy_36.png[]
+
+. 点击**编辑节点**，进入节点详情页，核对节点信息，按需开启或关闭 GPU、USB、硬盘，信息核对和修改完毕后，返回添加节点页面。
++
+include::../../../../../_components/attention.adoc[]
+* 必须逐一检查每一个节点信息。
+* 全闪架构：需要检查有系统盘、数据盘， 大小、类型均符合预期，其中数据盘一定是 SSD 类型。
+* 混插架构：需要检查系统盘、缓存盘、数据盘， 大小、类型符合都符合预期， 其中缓存盘一定是 SSD 类型。
+* 在云易捷 v3.0 版本以后，可以指定一块数据盘专门作为备份空间（snapshot），至少有2个节点都选择了 snapshot 才会有效。
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/delivery/install_delopy_37.png[]
+
+. 节点信息确认无误后，点击**下一步**，进入**可选服务**页面，可根据实际需求，选择是否安装相应的组件。
++
+include::../../../../../_components/note.adoc[]
+选择 v2v 组件和 VMware 纳管组件，均会部署一个管理虚拟机，占用一部分资源，可根据实际需要选择，或者将来增加。
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/delivery/install_delopy_38.png[]
+
+. 点击**下一步**，进入**预览&安装**页面，最终确认平台信息、节点信息、可选服务信息无误后，点击**安装**。若需修改相应信息，点击**上一步**进入相应页面进行修改。
++
+image::/images/express/delivery/install_delopy_39.png[]
+
+. 点击**安装**后，系统会自动部署云易捷集群，等待所有步骤显示完成即可。
++
+image::/images/express/delivery/install_delopy_40.png[]
++
+若部署过程中，若出现错误，可点击相应任务最右侧图标，查看日志。解决问题后，点击**重试**，部署任务会从失败的步骤继续进行，直至部署完成。
++
+image::/images/express/delivery/install_delopy_41.png[]
+
+. 待集群部署完成后，在 Web Installer 平台内，选择**资源池管理**页面，点击**创建资源池**，将相同类型的节点添加至同一资源池内。
++
+image::/images/express/delivery/install_delopy_42.png[]
+
+. 部署完成后的云易捷平台自带 1 个月的使用授权。若需继续使用，可在申请 License 后，在 Web Installer 平台上，点击**基本信息** > **更改授权**，导入正式 License 授权证书。
++
+image::/images/express/delivery/install_delopy_43.png[]
+
+. 部署完成后，在 Web Installer 平台上，选择**基本信息**，将**访问地址**卡片页内的 Host 信息全部添加至客户端主机的 ``C:\windows\system32\drivers\etc\hosts`` 文件中，即可通过域名访问云易捷管理控制平台（Console 平台），访问地址如 console.expresscloud.com。
++
+image::/images/express/delivery/install_delopy_44.png[]
+
+. 上传镜像。
+.. 在 Web Installer 平台，选择**高级设置**。
+.. 点击**上传镜像**所在行右侧的**上传**按钮，将提前准备好的 QingCloud 基础模板镜像上传至平台内。
++
+include::../../../../../_components/note.adoc[]
+该过程需耗费较长时间，请耐心等待。
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/delivery/install_delopy_45.png[]
+
+
+
+
+
+

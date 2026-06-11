@@ -1,0 +1,41 @@
+---
+title: 测试验证
+weight: 3
+---
+
+用户如想验证创建的 QKE 集群安装的 HydroFS CSI 插件能否正常工作，可参考以下步骤。
+
+
+. 登录 QKE 所在 IaaS 的 Console。
+
+. 点击**产品与服务** > **容器服务** > **容器引擎 QKE**，进入容器引擎 QKE 主页面。
+
+. 在左侧导航栏，点击**集群管理**，进入集群列表页面。
++
+image::/images/u10000_v5.0/csi_qke_2.png[csi_qke_2,100%]
+
+. 在集群列表页面，点击待验证的集群名称/ID，进入当前集群的管理页面。
+
+. 在左侧导航栏，点击**资源管理** > **节点管理**，进入集群的节点列表页面。记录 `主节点` 的 **ID**。
++
+image::/images/u10000_v5.0/csi_qke_3.png[csi_qke_3,100%]
++
+include::../../../../../_components/note.adoc[]
+
+如上图所示，当前集群的 `主节点` 的 **ID** 为 `cln-5vh37pm9`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录当前 QKE 所在 IaaS 的 BOSS。
+
+. 在**搜一搜**中，输入上述操作查询到的 ID。如 `cln-5vh37pm9`，在搜索结果中点击目标资源。
+
+. 进入资源详情页面。如下所示，点击图标，连接远程终端。
++
+image::/images/u10000_v5.0/csi_qke_4.png[csi_qke_4,100%]
+
+
+至此，用户已登录 Kubernetes 集群的 Master 节点，后续操作同原生 Kubernetes 集群验证 CSI 插件。可直接参考link:../../k8s/verify/[前文内容]。
+
+
+

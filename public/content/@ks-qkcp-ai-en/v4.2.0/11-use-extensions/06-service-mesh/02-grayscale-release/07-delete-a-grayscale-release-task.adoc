@@ -1,0 +1,51 @@
+---
+title: "Delete a Grayscale Release Job"
+keywords: "Kubernetes, {ks_product}, Project Management, Grayscale Release, Delete Grayscale Release Job"
+description: "Describes how to delete a grayscale release job."
+weight: 07
+---
+
+:ks_permission: ** Service Mesh Management**
+:ks_navigation: **Grayscale Release > Grayscale Release**
+
+This section describes how to delete a grayscale release job.
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+A grayscale release job can only be deleted when one of the new or old versions has taken over all business traffic. After the grayscale release job is deleted, the version (service, workload, and pods) that has not taken over the business traffic will also be deleted.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere Service Mesh** extension must be installed and enabled on the KubeSphere platform.
+
+* One of the new or old versions has taken over all business traffic. For more information, see link:../04-switch-versions-blue-green-deployment/[Switch Online Version (Blue-Green Deployment)] and link:../05-adjust-traffic-distribution-ratio-canary-release/[Adjust Traffic Distribution Ratio (Canary Release)].
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/grayscaleRelease/grayscaleRelease-oper-openDetailsPage.adoc[]
+
++
+
+. On the details page of the grayscale release job, click **Delete** in the upper right corner.
++
+--
+The system will delete the grayscale release job and also delete the version that has not taken over the business traffic.
+--

@@ -1,0 +1,69 @@
+---
+title: "部署管理平台使用指南"
+weight: 15
+draft: false
+description: 本文将详细介绍如何使用青云云易捷部署管理平台。本文档适用于 CloudExpress 云易捷 v4.5 版本。
+pdf_docVersion: '01'
+pdf_releaseDate: 2023-10-27
+pdf_coverDocName: QingCloud 云易捷 v4.5
+---
+
+{product_name}除了提供计算虚拟化、软件定义存储、网络虚拟化等基本功能服务以外，还提供安全、运维等管理服务，以及 VMware 纳管、迁移工具、密码服务平台等增值功能。在 CloudExpress Installer 青云云易捷部署管理平台(以下简称 {product_installer_name})， 用户可以进行物理节点管理、资源池管理、产品升级、上传镜像、上传驱动、更新补丁、各项增值服务安装管理以及服务巡检等操作。
+
+本文旨在指导用户合理正确的使用 {product_installer_name}。
+
+
+== 软件版本
+
+本操作示例适用如下软件版本，在实际操作时，请以实际软件版本为准。
+
+* {product_name} v4.5 版本
+* {product_installer_name} v6.1.1 版本
+* 推荐览器类型为：Chrome
+
+== 读者对象
+
+本文档主要用于以下工程师：
+
+* {product_name}技术支持工程师
+* {product_name}运维工程师
+* {product_name}实施工程师
+* {product_installer_name}用户
+
+== 名词解释
+
+[cols="1,1,3", options="header"]
+|===
+|名词 |英文 |解释
+|青云云易捷部署管理平台
+|CloudExpress Installer
+|该平台主要包括物理节点管理、资源池管理、产品升级、上传镜像、上传驱动、更新补丁、各项增值服务安装管理以及服务巡检等相关操作。
+
+|云易捷管理控制平台（简称：云易捷 Console）
+|Console
+|该平台为用户提供对物理和虚拟资源的管理和运维功能。用户可登录该平台创建虚拟机、网络、存储等资源，并对其进行管理和运维操作，详细内容可参考link:https://box.yunify.com/s/EpXZYNd4Bmr8CHY[《云易捷管理控制平台用户操作手册》]。
+
+|资源池
+|-
+|为了资源合理利用以及管理的方便性，可将集群的存储节点划分为多个资源池。
+
+|卷
+|-
+|相当于一个逻辑盘，在云易捷控制台上所创建的每一个硬盘，在底层逻辑中均表示一个卷。
+
+|启动节点 
+|FirstBox
+|在安装部署云易捷时，进行节点初始化步骤时所设置的启动节点，一般为集群的第一台节点。该节点用于后续登录 {product_installer_name}。
+|===
+
+
+== 修订记录
+
+[cols="1,3,1",options="header"]
+|===
+|版本|修订内容|日期
+|01
+|第一次正式发布
+|2023-10-27
+|===
+

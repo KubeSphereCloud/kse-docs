@@ -1,0 +1,45 @@
+---
+title: "纳管边缘节点"
+weight:  02
+---
+
+:ks_permission: **节点管理**
+:ks_navigation: **边缘节点 > 节点接入**
+
+
+本节介绍如何将已注册的边缘节点纳管到边缘集群。
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+
+== 纳管单个边缘节点
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. 在需要纳管的节点右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**纳管**。
+
+. 选择**容器引擎**、**边缘软件**及其版本，用于配置边缘节点环境，然后点击**确定**。
++
+纳管成功后，节点状态会变为**运行中**。在**节点管理**页面，也能查看到被纳管的边缘节点。
+
+== 批量纳管边缘节点
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. 点击**批量管理**，在上方勾选**选择全部**，然后点击**纳管**。对话框会自动列出未纳管状态的节点。
+
+. 选择需要操作的节点，点击**纳管**。
+
+. 选择**容器引擎**、**边缘软件**及其版本，用于配置边缘节点环境，然后点击**确定**。
++
+纳管成功后，节点状态会变为**运行中**。在**节点管理**页面，也能查看到被纳管的边缘节点。

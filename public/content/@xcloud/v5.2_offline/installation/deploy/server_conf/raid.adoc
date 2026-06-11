@@ -1,0 +1,66 @@
+---
+title: "配置 RAID"
+weight: 10
+---
+
+== 管理节点（KS 节点）
+
+管理节点数据盘需要做成一块大盘，数据盘足够的情况下建议做 RAID5 或 RAID50。
+
+|===
+| 存储类型	| 存储介质	| RAID	| 备注
+
+.2+| 所有类型	
+| 系统盘	| RAID1（必配）	| -
+| SAS 盘	| RAID5/RAID50（必配）| 数据盘
+|===
+
+
+== 计算节点（Hyper 节点）
+
+不同存储类型 RAID 参照如下所示。
+
+[cols='1,1,2,1']
+|===
+| 存储类型	| 存储介质	| RAID	 | 备注
+
+.4+| SDS1.0	
+| 系统盘	| RAID1（必配）| -
+| SAS 盘	| RAID50/RAID5（必配）| 数据盘
+| NVMe	| 直通（选配，NVMe 和 SSD 2 选 1）| 缓存盘
+| SSD	| RAID1（选配，NVMe 和 SSD 2 选 1）| 缓存盘
+
+.3+| SDS2.0	
+| 系统盘	| RAID1（必配）| -
+| NVMe	| 直通（必配，NVMe 和 SSD 2 选 1） | 数据盘
+| SSD	| 直通（必配，NVMe 和 SSD 2 选 1）	| 数据盘	
+
+.3+| Sanc-HDD	
+| 系统盘	| RAID1（必配）| -
+| SAS  
+
+ a| 直通（必配）
+
+include::../../../../../_components/attention_in_table.adoc[]
+NeonSAN 混插场景默认采用数据盘直通模式，如果有多重数据冗余等需求可以做 RAID（RAID5/RAID50），单个 RAID 组容量不大于 50TB。	 
+
+include::../../../../../_components/footer_in_table.adoc[]
+
+| 数据盘
+
+| NVMe	| 直通（必配）| 缓存盘
+
+.3+| Sanc-SSD	
+| 系统盘	| RAID1（必配）| -
+| NVMe	| 直通（必配，NVMe 和 SSD 2 选 1）| 数据盘
+| SSD	| 直通（必配，NVMe 和 SSD 2 选 1）	| 数据盘	
+|===
+
+硬件 RAID 是否自带缓存对机械盘性能影响很大。
+
+* RAID 50：必须使用带缓存的硬件 RAID。
+* RAID 1：硬件 RAID 可以不带缓存。
+* 为提高缓存利用率，需要缓存空间尽可能的大，所以在做 CAS 设备的时候，要避免将一张 SSD 分成多个区使用，而是将整块 SSD 做成共享的缓存设备，分给两个 drbd 使用。
+
+
+

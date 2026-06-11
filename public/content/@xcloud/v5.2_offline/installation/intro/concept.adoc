@@ -1,0 +1,25 @@
+---
+title: "基本概念"
+weight: 30
+---
+
+* **企业云平台安装模式**
++
+安装模式支持标准部署（standard）、融合部署（fusion）。
+
+ ** 标准部署：KS 节点与 Hyper 节点分别独立部署。
+ ** 融合部署：KS 节点与 Hyper 节点共用服务器。
+
+* **Hyper-Sanc 部署模式**
++
+计算节点使用 NeonSAN 作为存储时，支持融合模式和分离模式。
+
+ ** Hyper-Sanc 融合模式：NeonSAN 与 Hyper 节点共用服务器。该场景需要先部署企业云平台基础软件，再部署 NeonSAN。
+ ** Hyper-Sanc 分离模式：NeonSAN 与企业云平台分别独立部署。建议先部署 NeonSAN。
+
+* **网络模式**
++
+支持 VLAN 模式（虚拟局域网，Virtual Local Area Network）和 SDN 模式（软件定义网络，Software Defined Network）。
+
+ ** VLAN 模式下，基础网络由用户现有网络环境提供。新增基础网络需要在 BOSS 里手动创建，并在接入交换机侧 trunk 口放通相关 VLAN，网关配置在客户网络设备侧。
+ ** SDN 模式下，基础网络是由云平台的虚拟路由器提供的。新增基础网络时，若已在客户网络设备侧配置回程路由，即可直接新增，无需再对客户侧网络做配置。

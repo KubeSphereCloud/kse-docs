@@ -1,0 +1,60 @@
+---
+title: "模拟内核路径上的 I/O 或内存故障"
+weight:  01
+---
+
+本节介绍如何模拟内核路径上的内存分配故障。
+
+故障注入期间，目标 Pod 内容器的物理页面分配将 100% 失败，最多失败 10 次。如果该事件在短时间内频繁触发，将触发系统 OOM Killer 回收内存。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *KernelChaos*，配置以下参数后点击 *创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|故障类型（failtype）
+|内核故障类型，`1` 表示内存页面分配失败。
+
+|触发概率（probability）
+|触发故障的概率，例如 `100` 表示 100%。
+
+|最大失败次数（times）
+|单次注入周期内最多触发故障的次数，例如 `10`。
+
+|持续时间（duration）
+|故障持续时间，例如 `10m`。
+
+|生效范围（selector）
+|选择故障注入的目标命名空间和 Pod。
+|===
+
+
+   对应 YAML 示例如下：
+
+[source,yaml]
+----
+apiVersion: chaos-mesh.org/v1alpha1
+kind: KernelChaos
+metadata:
+  name: kernel
+  namespace: default
+spec:
+  duration: 10m
+  kernelChaos:
+    failKernRequest:
+      probability: 100
+      times: 10
+  mode: all
+  selector:
+    namespaces:
+      - default
+    podPhaseSelectors:
+      - Running
+failtype: 1
+----
+
+
+验证故障效果：故障注入期间，查看目标 Pod 的状态，可能出现 OOM Killer 触发的容器重启记录。

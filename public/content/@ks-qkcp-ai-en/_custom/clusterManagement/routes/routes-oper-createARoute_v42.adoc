@@ -1,0 +1,56 @@
+// :ks_include_id: 570405898db841389a0ce7ed42a9a8e3
+. On the **Basic Information** tab, set the basic information for the Ingress, then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the Ingress. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and can be up to 253 characters long.
+
+|Alias
+|The alias of the Ingress. Different Ingresses can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), and can be up to 63 characters long.
+
+ifndef::project[]
+|Project
+|The project to which the Ingress belongs. System projects are typically used for managing system resources. It is recommended to select a user project.
+endif::[]
+
+|Description
+|The description of the Ingress. The description can contain any characters and can be up to 256 characters long.
+|===
+--
+
+. On the **Routing Rules** tab, click **Add Routing Rule** to set the routing rule parameters.
++
+--
+ifdef::multicluster[]
+include::../../multi-clusterProjectManagement/routes/routes-create-ClusterDiff.adoc[]
+endif::[]
+
+include::routes-para-routingRules_v42.adoc[]
+--
+
+. (Optional) On the **Routing Rules** tab, click **Path Rewrite** to configure a rewrite path for the current routing rule using a regular expression, then click **Next**.
++
+--
+* Path rewrite refers to modifying the URL path of a client request before forwarding it to the backend service. The **Rewrite Path** text box should contain the path to be sent to the backend service.
+
+* Path rewrite applies to all routing rules under the current Ingress.
+
+* If multiple paths require path rewriting, you can create multiple Ingresses to achieve this.
+--
+
+. On the **Advanced Settings** tab, set labels and annotations for the Ingress, then click **Create**.
++
+--
+* Click **Add** to set multiple labels or annotations.
+
+* Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] on the right side of a created label or annotation to delete it.
+
+include::routes-note-annotations.adoc[]
+
+After creation, the Ingress will be displayed in the Ingress list.
+--

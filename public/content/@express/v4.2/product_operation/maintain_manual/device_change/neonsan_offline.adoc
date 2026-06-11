@@ -1,0 +1,172 @@
+---
+title: "neonsan 下线"
+draft: true
+---
+
+////
+. 登录至待下线的物理节点。
+. 依次执行如下命令，查看集群剩余空间以及集群状态。
++
+[source,shell]
+----
+neonsan list_store -H
+----
++
+[source,shell]
+----
+neonsan list_volume -detail
+----
++
+[source,shell]
+----
+neonsan list_ssd
+----
++
+include::../../../../../_components/note.adoc[]
+* 返回结果中，集群剩余空间需大于集群总容量的 20%。
+* 返回结果中，各卷和磁盘状态均为 OK。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，关闭集群自动恢复和自动负载均衡功能。
++
+[source,shell]
+----
+neonsan set_parameter -parameter auto_recovery -value 0
+----
++
+[source,shell]
+----
+neonsan set_parameter -parameter auto_balance -value 0
+----
+
+. 迁移待下线节点数据。
++
+[source,shell]
+----
+neonsan evict_store -store_id <store_ID> -evacuate_data yes
+----
++
+include::../../../../../_components/note.adoc[]
+``-store_id`` 用于指定当前待下线节点的 ID，可通过 ``neonsan list_store`` 查看。
+include::../../../../../_components/table_footer.adoc[]
+
+. 查看迁移数据的异步任务是否完成。
++
+[source,shell]
+----
+neonsan list_job | head
+----
++
+include::../../../../../_components/note.adoc[]
+* 根据下线任务执行时间，查看相应的异步任务 ID。
+* PERCENT 为 100%，STATUS 为 succeeded 则表示执行成功。
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令，检查数据库中是否还有状态为 OK 卷。其中，``store_id`` 为当前待下线节点的 ID，需根据实际情况进行修改。
++
+[source,shell]
+----
+mysql -uneonsan -pzhu88jie neonsan -e "select * from replica where store_id=<store_ID> and status='OK';"
+----
++
+* 若经查询数据库，该节点的磁盘上无状态为 OK 的副本，则可直接进行后续操作步骤。
++
+* 若经查询数据库，该节点的磁盘上上仍有状态为 OK 的副本，则需执行如下命令再次迁移数据后，再进行后续操作步骤。
++
+[source,shell]
+----
+curl http://$(qfcip):2600/fast_chan?op=quit_maintenance&store_id=<store_ID>
+----
++
+[source,shell]
+----
+neonsan evict_ssd -ssd_uuid <UUID>
+----
++
+include::../../../../../_components/note.adoc[]
+* ``store_id`` 指定待迁移数据的节点 ID，根据实际情况进行修改。
+* ``-ssd_uuid`` 为待迁移数据的磁盘 UUID，根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 查看集群中卷的状态，并对降级卷进行恢复。
++
+[source,shell]
+----
+neonsan list_volume --detail
+----
+
+. 重复步骤 6~7，直至该节点上无 OK 状态的副本存在。
+
+. 停止当前待下线节点的 neonstore 服务。
++
+[source,shell]
+----
+supervisorctl stop neonstore
+----
+
+. 停止当前带下线节点的 Zookeeper 服务
++
+[source,shell]
+----
+/opt/zookeeper/bin/zkServer.sh stop
+----
+
+. 登录其他 Zookeeper 节点，查看其他节点的 Zookeeper 状态。
++
+[source,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
++
+include::../../../../../_components/note.adoc[]
+* 各节点 Zookeeper 服务正常，且集群中仅一个 leader 节点，其余均为 follower 节点。
+* 若存在 Zookeeper 异常的节点，需调查原因并解决后，再次执行该步骤。
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录数据库节点，手动备份数据。
+.. 查看定时备份的配置。
++
+[source,shell]
+----
+crontab -e
+----
+.. 根据定时备份的配置，手动执行备份命令。
++
+[source,shell]
+----
+sh /opt/neonsan/backup-db.sh xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+xx.xx.xx.xx 为待下线节点的 IP。
+include::../../../../../_components/table_footer.adoc[]
+
+. 查看数据库状态。
++
+[source,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
++
+include::../../../../../_components/note.adoc[]
+若存在数据库服务异常的节点，需调查原因并解决后，再次执行后续步骤。
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录至待下线节点，停止其数据库服务。
++
+[source,shell]
+----
+/opt/galera/bin/galera_cluster stop
+----
+. 再次查看数据库状态。
++
+[source,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
++
+include::../../../../../_components/note.adoc[]
+除待下线节点外，若存在数据库服务异常的节点，需调查原因并解决后，再次执行后续操作。
+include::../../../../../_components/table_footer.adoc[]
+////

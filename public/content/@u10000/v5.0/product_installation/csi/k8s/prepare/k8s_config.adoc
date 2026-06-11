@@ -1,0 +1,123 @@
+---
+title: 更新 Kubernetes 配置
+weight: 3
+---
+
+{product_name} 作为 Kubernetes 的存储后端是需要 Kubernetes 能访问 {product_name}。因此在使用 {product_name} 之前，需要在 Kubernetes 的集群中，配置{product_name} 的域名解析。
+
+详细操作步骤如下。
+
+
+. 登录 Kubernetes 集群的 Master 节点。
+
+. 执行如下命令行，确认当前环境中是否存在 `nodelocaldns` 服务。
++
+[source,shell]
+----
+kubectl get pod -n kube-system | grep "nodelocaldns"
+----
++
+* 若存在 `nodelocaldns` 服务，则执行如下命令行，修改 `nodelocaldns` 配置。
++
+[source,shell]
+----
+kubectl edit -o yaml cm nodelocaldns -n kube-system
+----
++
+* 若不存在 `nodelocaldns` 服务，则执行如下命令行，修改 `coredns` 配置。
++
+[source,shell]
+----
+kubectl edit cm coredns -n kube-system
+----
+
+. 修改相应的配置文件。
+//配置文件示例如下所示。这里以 `coredns` 配置为例加以说明，`nodelocaldns` 配置相似，即，需新增的内容一致。
++
+`coredns` 配置示例
++
+[source,yaml]
+----
+
+data:
+  Corefile: |
+    .:53 {
+        errors
+        cache 30
+        reload
+        loop
+        forward . /etc/resolv.conf
+        prometheus :9253
+    }
+
+    # 新增以下内容
+    stor.qingstorage.com:53 { # 填写内容为 QingStor U10000 的 Global Domain
+        errors
+        cache 30
+        loop
+        forward . 101.100.11.73 101.100.11.111 101.100.11.120 # 填写 QingStor U10000 的 DNS 服务地址
+    }
+----
++
+`nodelocaldns` 配置示例
++
+[source,yaml]
+----
+
+data:
+  Corefile: |
+    .:53 {
+        errors
+        cache 30
+        reload
+        loop
+        bind 169.254.25.10
+        forward . /etc/resolv.conf
+        prometheus :9253
+    }
+
+    # 新增以下内容
+    stor.qingstorage.com:53 { # 填写内容为 QingStor U10000 的 Global Domain
+        errors
+        cache 30
+        loop
+        bind 169.254.25.10 # 参考上文中的 bind 字段值进行填写
+        forward . 101.100.11.73 101.100.11.111 101.100.11.120 # 填写 QingStor U10000 的 DNS 服务地址
+    }
+----
++
+**填写说明**
++
+如示例所示，新增内容如下，配置文件中原内容不作修改。
++
+[source,yaml]
+----
+    stor.qingstorage.com:53 { # 填写内容为 QingStor U10000 的 Global Domain
+        errors
+        cache 30
+        loop
+        bind 169.254.25.10 # 参考上文 bind 字段值进行填写
+        forward . 101.100.11.73 101.100.11.111 101.100.11.120 # 填写 QingStor U10000 的 DNS 服务地址
+    }
+----
++
+* `stor.qingstorage.com:53` 中的 `stor.qingstorage.com` 为 {product_name} 的 Global Domain，可参考link:../u1w_config/#_global_domain[前文查询]内容进行填写。
+* `coredns` 配置中，无 `bind` 字段；`nodelocaldns` 配置中，`bind` 填写本配置文件中，原有模块中 `bind` 字段值。
+* `forward` 字段填写 QingStor U10000 的 DNS 服务地址，可参考link:../u1w_config/#_dns_服务地址[前文查询]内容进行填写。填写格式参考示例。
+
+
+. 配置文件修改完成后，执行如下命令行，重启服务。
++
+* 修改 `nodelocaldns` 配置，则重启 `nodelocaldns` 服务。
++
+[source,yaml]
+----
+for i in `kubectl get pod -n kube-system | grep "nodelocaldns" | awk  '{print $1}'`; do kubectl delete pod $i -n kube-system && sleep 30;done
+----
+
+* 修改 `coredns` 配置，则重启 `coredns` 服务。
++
+[source,yaml]
+----
+for i in `kubectl get pod -n kube-system | grep "coredns" | awk  '{print $1}'`; do kubectl delete pod $i -n kube-system && sleep 30;done
+----

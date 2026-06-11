@@ -1,0 +1,28 @@
+---
+title: "证书目录"
+weight: 01
+---
+
+
+[%header,cols="1a, 1a, 3a"]
+|===
+|目录	|说明	|更新机制
+|/etc/kubernetes/pki/	|kube-apiserver 相关证书	
+
+.3+|通过定时任务检查脚本并自动更新
+
+查看/修改证书刷新机制配置
+
+cat /etc/systemd/system/k8s-certs-renew.timer
+
+cat /etc/systemd/system/k8s-certs-renew.service
+
+cat /usr/local/bin/kube-scripts/k8s-certs-renew.sh
+
+|/var/lib/kubelet/pki/	|kubelet 证书
+
+|/etc/ssl/etcd/ssl/	|etcd SSL 证书
+
+|/etc/ssl/registry/ssl/	|docker registry 证书 | 
+
+|===

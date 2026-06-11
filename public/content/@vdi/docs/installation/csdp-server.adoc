@@ -1,0 +1,104 @@
+---
+title: 计算节点部署 csdp-server
+weight: 30
+---
+
+本文为您介绍在{platform_name_cn}的每个计算节点上安装服务端协议包。
+
+== 操作须知
+
+* 在安装 csdp-server 之前，请先完成 QingCloud 云平台配置，包括创建集群、添加存储等，否则会导致安装失败。
+* 服务端协议包 csdp-server 需要在 QingCloud 云平台的每个计算节点上安装。
+
+== 前提条件
+
+* 已获取桌面云平台的服务端协议组件包及相关依赖文件。
++
+[cols='1,1,2,2'] 
+|===
+| 架构| 目录 | 文件 | 说明 
+
+| ARM | DesktopArmInstaller/cstack
+| xview-csdp-server-xxx.09.1.ga-1.el8.cstack.aarch64.rpm| 其中 xxx 为版本号。
+
+.2+| X86 .2+| DesktopX86Installer/QingCloud
+| xview-csdp-server_xxx.09.1-ga_uxx_amd64.deb | 其中 xxx 为版本号，uxx 为操作系统版本，例如 xview-csdp-server_22.09.1-ga_u20_amd64.deb。 
+| ubuntu-xxx依赖	| 桌面云平台服务协议端组件的依赖包，其中 xxx 为操作系统版本。
+|===
+
+* 已将协议组件包及相关依赖文件上传至 QingCloud 云平台的计算节点，并保证登录用户拥有对协议包的可执行权限。
+* 已完成 QingCloud 云平台配置。
+
+== 安装步骤
+
+以下步骤为初始安装步骤。
+
+. 远程登录 QingCloud 云平台的各计算节点。
+. 进入服务端协议组件包所在目录，执行以下命令，安装服务端协议包。在执行命令前，请确保登录用户有安装包的可执行权限。
++
+--
+* 若计算节点是 ARM 架构，使用以下命令。
++
+[source]
+----
+rpm -ivh xview-csdp-server-22.09.1.ga-1.el8.cstack.aarch64.rpm
+----
+* 若计算节点是 X86 架构，使用以下命令。
++
+[source]
+----
+dpkg -i xview-csdp-server_22.09.1-ga_u20_amd64.deb
+----
++
+X86 架构下 Ubuntu 系统，还需执行以下命令，安装 Ubuntu 所需的依赖库。
++
+include::../../../_components/note.adoc[]
+不同版本的操作系统，依赖包不一样，请根据实际情况进行选择，替换示例中的依赖包名称。
+include::../../../_components/table_footer.adoc[]
++
+[source]
+----
+dpkg -i libfdk-aac0_0.1.3+20140816-2_amd64.deb
+dpkg -i liblz4-1_0.0~r131-2ubuntu2_amd64.deb
+dpkg -i libturbojpeg_1.4.2-0ubuntu3.4_amd64.deb
+dpkg -i libusb-1.0-0_2_1.0.20-1_amd64.deb
+dpkg -i libusbredirparser1_0.7.1-1_amd64.deb
+dpkg -i libusbredirhost1_0.7.1-1_amd64.deb
+dpkg -i multiarch-support_2.19-0ubuntu6.15_amd64.deb
+----
++
+image::/images/vdi/installation/csdp-server_01.png[]
+--
+
+== 升级步骤
+
+以下步骤为升级 csdp-server 步骤。
+
+. 远程登录 QingCloud 云平台的计算节点
+. 执行以下命令，移除旧的 csdp-server 安装包。
++
+--
+* 若计算节点是 ARM 架构，使用以下命令。
++
+[source]
+----
+yum remove xview-csdp-server-22.09.1.ga-1.el8.cstack.aarch64.rpm
+----
+* 若计算节点是 X86 架构，使用以下命令。
++
+[source]
+----
+dpkg -r xview-csdp-server_22.09.1-ga_u20_amd64.deb
+----
+--
+. 执行以下命令，升级服务端协议包。在执行命令前，请确保登录用户有安装包的可执行权限。
++
+[source]
+----
+rpm --upgrade xview-csdp-server-xxx.09.1.ga-1.el8.cstack.aarch64.rpm
+----
++
+include::../../../_components/note.adoc[]
+* 当 csdp-server 组件有升级更新时，执行上述升级步骤即可。
+* csdp-server 组件升级完成后，将 QingCloud 桌面云平台中的云桌面关机后再重启生效。
+include::../../../_components/table_footer.adoc[]

@@ -1,0 +1,97 @@
+---
+title: "访问 Redis Cluster 数据库"
+keywords: "Kubernetes, {ks_product}, RadonDB Redis Cluster, 访问 Redis Cluster"
+description: "介绍如何访问 RadonDB Redis Cluster 数据库。"
+weight: 05
+---
+
+:ks_db_product: Redis Cluster
+
+本节介绍如何访问 RadonDB {ks_db_product} 数据库。
+
+
+== 前提条件
+
+* 已获取{ks_product_both}平台登录账号和密码，且已获取平台操作管理权限。
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 将鼠标悬停至 Web 控制台右下角的image:/images/dmp/icons/hammer.svg[hammer,20,25]，点击 **kubectl**，在弹出的对话框执行以下命令进入 Redis 数据库。
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl exec -it -n <namespace>  <name>-leader-0 -- sh
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+* <namespace>：{ks_db_product} 实例所在的命名空间（即项目名称）。
+
+* <name>：{ks_db_product} 实例的名称。
+--
+
+. 连接 {ks_db_product} 数据库。
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+redis-cli -h <redis_instance_address> -p <port> -c
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+* <redis_instance_address>： {ks_db_product} 数据库的连接地址，如 10.233.85.29。可在实例详情页面的**概览**区域查看对应的容器组 IP 地址，请根据实际地址替换。
+
+* <port>： {ks_db_product} 数据库的端口号，默认为 6379。
+
+* -c：连接数据库节点时的必选参数。
+
+连接示例如下：
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+redis-cli -h 10.233.85.29 -p 6379 -c
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 如果 {ks_db_product} 实例设置了访问密码，执行以下命令完成密码验证。
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+AUTH <password>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+* 如果在创建 Redis 实例时设置了密码，直接替换 <password> 为您设置的密码即可。
+
+* 如果是新创建的数据库用户，则填写 <user> <password>。例如：账号为 test，密码为 Test@123，则执行 auth test Test@123。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+密码验证成功后，会返回 **OK**。
+--
+
+. 执行以下命令查看节点信息。
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+cluster nodes
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+

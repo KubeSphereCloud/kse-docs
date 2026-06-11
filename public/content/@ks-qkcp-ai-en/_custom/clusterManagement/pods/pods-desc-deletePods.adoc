@@ -1,0 +1,18 @@
+// :ks_include_id: 12077b1940064dbc91b46df1bb4d2390
+This section describes how to delete a pod.
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* It is recommended to delete a pod by deleting its managing resource (such as a workload or Job), rather than deleting the pod directly.
+
+* If you delete a pod directly, depending on the policy of the pod's managing resource, the system may recreate the pod.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+Deleting a running pod may cause business interruption. Please perform this operation with caution.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]

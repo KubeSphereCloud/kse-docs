@@ -1,0 +1,264 @@
+---
+title: 更改域名
+weight: 2
+---
+
+若已部署的 {product_name} 的域名，与前期规划不一致或不符合预期时，可按照本文档对其进行更改。
+
+* 域名示例
++
+[cols='2,2']
+|===
+| 原域名 | 新域名 
+
+| stor.qingstorage.com | stor.qingcloud.com 
+|===
+
+* 管理员账号示例
++
+[cols='1,1']
+|===
+| 原管理员账号 | 新管理员账号 
+
+| qingstor@qingstorage.com |qingstor@qingcloud.com
+|===
+
+以上述域名变更为例，根据不同的需求，可分为保留原账号、不保留原账号以及更新原账号三种情况。
+
+在进行域名变更前，针对这三种情况的前置操作有些差异，详细参考下文。
+
+== 前置操作
+
+//在进行域名变更前，用户需执行以下前置操作，完成数据库里面的内容更新后，再进行域名变更操作。
+
+=== 保留原账号
+
+无需执行额外操作，可直接进行域名变更。域名变更完成后，系统会自动创建出具有管理员权限的新账号，且原管理员账号仍然存在且可用。
+
+* 管理员账号
++
+[cols='2,1,1']
+|===
+| 管理员账号 | 能否使用 | 能否禁用 
+
+| qingstor@qingstorage.com  | 能 | 否
+| qingstor@qingcloud.com | 能 | 能
+|===
+
+* 原账号/新账号
++
+[cols='1,1,1']
+|===
+| 原账号/新账号 | 能否使用 | 能否禁用 
+
+| 原账号 | 能 | 否
+| 新账号 | 能 | 能
+|===
+
+=== 不保留原账号
+
+若用户要求，域名变更完成之后，只有新域名下的管理员账号可用，其他账号需新建。则在进行域名变更操作前，需要执行以下步骤来清理数据库内容。
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，从 FirstBox 节点跳转至 `core0` 节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 在 `core0` 节点上，执行如下命令行，登录数据库。
++
+[source,shell]
+----
+docker exec -it mysql-client bash
+mysql -u qingstor -h 127.0.0.1 -p
+----
+
+. 进入数据库后，依次执行如下命令行，清理用户信息。
++
+[source,shell]
+----
+truncate table account.users;
+truncate table account.access_key;
+truncate table account.console;
+truncate table `qingstor-zero-web`.users;  
+----
++
+include::../../../../../_components/note.adoc[]
+
+域名变更完成后，账号信息如下。
+
+* 原管理员账号不能使用，系统自动创建新管理员账号。
+* 原账号不能使用，新账号需新建。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+
+
+=== 更新原账号
+
+若用户要求，需要保留原账号内容，但原账号域名需更新为新域名。可在域名变更前，执行以下步骤。
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，从 FirstBox 节点跳转至 `core0` 节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 在 `core0` 节点上，执行如下命令行，登录数据库。
++
+[source,shell]
+----
+docker exec -it mysql-client bash
+mysql -u qingstor -h 127.0.0.1 -p
+----
+
+. 进入数据库后，依次执行如下命令行，更新用户信息。
++
+[source,shell]
+----
+UPDATE account.users SET notify_email = REPLACE(notify_email,'qingstorage.com','qingcloud.com');
+UPDATE account.users SET email = REPLACE(email ,'qingstorage.com','qingcloud.com');
+UPDATE account.console SET domain = REPLACE(domain ,'qingstorage.com','qingcloud.com');
+UPDATE account.console SET console_domain = REPLACE(console_domain ,'qingstorage.com','qingcloud.com');
+UPDATE `qingstor-zero-web`.users SET email = REPLACE(email ,'qingstorage.com','qingcloud.com');
+----
++
+include::../../../../../_components/note.adoc[]
+
+* 域名变更完成后，原管理员账号以及其他账号的域名，均更新为新域名。
+* 注意命令行中的域名信息。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+== 变更步骤
+
+根据用户的需求，分别执行以上前置操作后，可进入域名变更的流程。详细操作如下。
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 修改配置文件 `/qingstor/etc/base.ini` 中的 `global_domain` 字段为新域名。示例参考如下。
++
+[source,shell]
+----
+[base]
+......
+global_domain = stor.qingcloud.com
+......
+----
+
+
+. 进入脚本目录，执行如下命令行，对服务配置进行更新。
++
+[source,shell]
+----
+cd /root/qs-installer
+./qs_installer update --hosts
+./qs_installer deploy --dns
+./qs_installer deploy --gateway
+./qs_installer deploy --global_gateway
+./qs_installer deploy --account --tags=init
+./qs_installer deploy --qingstor_zero_web
+./qs_installer deploy --qs_webconsole
+./qs_installer deploy --hydro_node --tags=qs_index
+./qs_installer init --common --tags qsctl
+----
+
+. 执行如下命令行，重启所有节点上 Docker 服务，从而确保相关服务均成功加载配置。
++
+[source,shell]
+----
+for n in $(grep node /etc/hosts|awk '{print $2}'|sort -r)
+do
+  ./qs_installer shell -a "systemctl restart docker" -l $n
+  sleep 10
+done
+----
++
+include::../../../../../_components/note.adoc[]
+
+* 以上内容为整条命令，需完整输入后，再敲回车执行。
+* 重启 Docker 服务会导致本地与 FirstBox 的连接中断，稍等一分钟左右的时间后，再重新执行命令行登录 FirstBox 节点即可。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+== 域名确认
+
+待以上步骤执行完成后，用户可执行以下步骤来确认域名更换是否成功。
+
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 进入脚本所在目录。
+
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，生成 Host 相关信息。
++
+[source,shell]
+----
+./qs_installer tools --generate-hosts
+----
++
+命令回显示例
++
+[source,shell]
+----
+Usage config dir: /qingstor/etc/
+
+192.168.100.212 console.qingstorage.com
+192.168.100.212 portal.noah.stor.qingcloud.com 
+192.168.100.212 stor.qingcloud.com  noah.stor.qingcloud.com 
+192.168.100.212 s3.stor.qingcloud.com  s3.noah.stor.qingcloud.com 
+192.168.100.222 n0.noah.stor.qingcloud.com 
+192.168.100.222 s0.noah.stor.qingcloud.com 
+----
+
+
+. 将以上返回的 Host 相关信息，添加至本机的 Hosts 文件中即可。
++
+include::../../../../../_components/note.adoc[]
+
+* `console.qingcloud.com` 为当前环境的 Console 访问链接。
+* `portal.noah.stor.qingcloud.com` 为当前环境的 Portal 访问链接。
+* `n0.noah.stor.qingcloud.com` 为当前环境文件存储 NFS 服务域名。
+* `s0.noah.stor.qingcloud.com` 为当前环境文件存储 SMB 服务域名。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 分别使用新账号与账号登陆登录 Portal 与 Console 页面，尝试 Object 和 Bucket 的创建、上传、删除等操作。一切正常则说明修改域名操作成功完成。
+
+

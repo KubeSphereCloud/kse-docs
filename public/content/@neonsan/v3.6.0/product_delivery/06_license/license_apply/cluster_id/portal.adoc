@@ -1,0 +1,53 @@
+---
+title: Portal 页面上获取
+weight: 1
+---
+
+== 前提条件
+
+NeonSAN 集群为 v3.4.1 及以上版本，且 Portal 管理平台可正常登录。
+
+== 操作步骤
+
+. 在浏览器中输入“<安装Portal的服务器IP地址>:3000”，进入登录页面。在登录窗口输入用户名和密码 Portal 管理平台。
++
+include::../../../../../../_components/note.adoc[]
+* 推荐使用 Chrome，Safari，Firefox 等浏览器。
+* 不建议使用 IE 内核浏览器。
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/license_1.png[]
+
+. 登录 Portal 管理平台后，默认进入总览页面。点击右上角用户名，选择系统设置，进入系统设置界面。
++
+image::/images/neonsan/license_2.png[]
+
+. 在系统设置页面，选择 license 管理页签，查看基本信息，复制并记录集群 ID 即可。
++
+image::/images/neonsan/license_3.png[]
++
+**参数说明**
++
+[options="header",cols="1,3"]
+|===
+|参数  |详细说明
+|状态
+a|* 已激活：当前集群已导入有效的 License 文件。
+* 未激活：当前集群未导入 license 文件，或 License 已经失效。
+
+|有效期	
+|License 文件的有效期限。逾期集群将无法扩容存储池或创建新卷。
+
+|授权容量	
+|当前集群的授权容量，若集群容量超过该值将无法扩容存储池或创建新卷。
+
+|集群 ID	
+|当前集群的 ID。
+
+|集群容量	
+|当前集群的实际存储容量。
+|===
+
+
+
+

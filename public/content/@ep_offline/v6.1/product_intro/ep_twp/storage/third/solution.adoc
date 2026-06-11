@@ -1,0 +1,42 @@
+---
+title: "对接方案"
+weight: 1
+---
+青云企业云平台采用 LVM（Logical Volume Manage，逻辑卷管理）方案对接第三方存储。
+
+== 方案架构
+
+image::/images/ep_offline/ep_twp/third_storage_archit.png[]
+
+* 云平台底层通过磁盘阵列对接第三方存储设备，数据可靠性由磁盘阵列提供。
+* 通过 LVM+SANLock 方式，预先将第三方块存储划分成多个 LUN（Logical Unit Number，逻辑单元号）。
+* LUN 通过存储协议（iSCSI 或 FC）分别连接到某个资源组内的所有 Hyper，在 Hyper 侧识别为本地卷。
+* 将本地卷配置为物理分区卷 PV（Physical Volume）并挂到分区卷组 VG（Volume Group），在 VG 内部再划分逻辑分区卷 LV（Logical Volume）作为云服务器的硬盘。
+
+== 方案优势
+
+* 对接方案可以达到容量无损耗，性能损耗极小，接近 LVM 裸设备。
++
+
+include::../../../../../../_components/note.adoc[]
+实际对接中，存储容量以第三方存储提供的可用容量为准（不关注分布式存储的副本，集中式存储的 Raid）。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+* 对接方案具有良好的兼容性，可对接任意厂商的块存储，且无需存储厂商提供的相关插件。
+* 无需额外增加资源，仅需正常的第三方存储互连所需要的配套资源。
+
+
+== 对接限制
+
+* 第三方存储的相关能力，比如多路径等需兼容云平台的 hostOS，并提供相应文档或技术支持。
+* 同一组 Hyper（比如一个 plg），仅支持对接一套第三方存储。
+* 暂不支持第三方存储的业务连续性方案。
+
+== 如何扩容
+
+有三种方式扩容：
+
+* 增加新的 LUN 并挂载给资源组内所有 Hyper。
+* 对已有的 LUN 进行扩容。
+* 增加 Hyper，扩容的存储资源挂给新的 Hyper 资源组。

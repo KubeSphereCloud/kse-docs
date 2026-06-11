@@ -1,0 +1,49 @@
+---
+title: "模型广场"
+weight: 1
+---
+
+模型广场为用户提供预置的模型服务，其内汇聚了国内外主流大模型，用户可根据业务需求挑选相应的模型进行开发、训练、调优及推理部署等服务。模型广场主要包括以下模型：
+
+* 智谱 ChatGlm2、ChatGlm3
+* 百川 Baichuan2
+* Llama2、Llama3、Llama3-Chinese-8B 等
+
+== 前提条件
+
+已经获取 {console_name}账户和密码。
+
+== 操作步骤
+
+. 登录 {console_name}。
+. 在顶部导航栏，点击**产品与服务** > **{coreshub_name_cn}** > **{coreshub_name_cn}**，进入其**总览**页面。
+. 在左侧导航栏，选择**模型广场**，进入模型广场页面，用户可根据**应用场景**或**框架类型**标签对模型列表进行筛选。
++
+include::../../../../../_components/note.adoc[]
+* **应用场景**模型标签目前主要包括文本、图像、自然语言处理或计算机视觉。
+* **框架类型**模型标签目前主要包括 Tensorflow 或 PyTorch。
+* 所有标签筛选逻辑均为``或``关系。
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/cloud_service/compute/coreshub/model_square_1.png[]
+
+. 进入模型广场页面，在顶部**搜索框**中输入关键字段，可搜索相应模型。
++
+image::/images/cloud_service/compute/coreshub/model_square_2.png[,70%]
+
+. 在模型广场页面，将鼠标悬停在某一具体模型上方，点击**在线推理**即可link:../model_inference/inference_create/#_从模型广场创建推理服务[基于当前模型创建在线推理服务]。
++
+image::/images/cloud_service/compute/coreshub/model_square_4.png[]
+
+. 在模型广场页面，点击某一具体模型，可进入其详情页面，该页面介绍了当前模型的模型效果、模型部署、Web 应用、计算资源要求以及模型可用区域及资源等。
++
+include::../../../../../_components/note.adoc[]
+在模型详情页面也可直接link:../model_inference/inference_create/#_从模型广场创建推理服务[基于当前模型创建在线推理服务]。
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/cloud_service/compute/coreshub/model_square_3.png[]
+
+
+
+
+

@@ -1,0 +1,153 @@
+---
+title: "手动迁移数据"
+weight: 3
+---
+
+当集群中个别磁盘使用率超过 80%，且自动负载均衡不起作用，或者新插磁盘此时可手动迁移数据。详细操作步骤如下。
+
+. 确认集群状态。
++
+[,shell]
+----
+neonsan list_store
+neonsan list_ssd
+neonsan list_volume -detail
+----
+
+* 若集群中存在状态不为 OK 的磁盘或节点，需调查原因并解决后再执行以下步骤。
+* 若状态不为 OK 的磁盘或节点，为已知原因且无法恢复，可忽略。
+* 若集群中存在降级卷，需对降级卷进行恢复。
+. 执行如下命令，对集群进行垃圾回收。
++
+--
+[,shell]
+----
+neonsan gc
+----
+回显示例。
+----
++------------+---------------+
+| QUEUE NAME | ID |
++------------+---------------+
+| gc | job0000000002 |
++------------+---------------+
+----
+
+* 该任务为异步执行任务，返回异步任务 ID。
+* 可通过如下命令查看该命令执行结果。
++
+[,shell]
+----
+neonsan list_job -id job0000000002 -queue_name gc
+----
+--
+
+. 垃圾回收完成后，执行如下命令查看各磁盘使用率。根据磁盘使用情况，选择需均衡的磁盘。
++
+[,shell]
+----
+neonsan list_ssd
+----
+
+. 登录数据库，查看待均衡磁盘上的副本分布。
++
+--
+Galera 数据库
+[,sql]
+----
+mysql -uneonsan -pzhu88jie neonsan -e " select * from replica_ext where ssd_uuid='xxxxxxxx' and status='OK' order by allocated desc;"
+----
+Xenondb 数据库
+[,sql]
+----
+mysql -uneonsan -pzhu88jie -h192.168.101.251 neonsan -e " select * from replica_ext where ssd_uuid='xxxxxxxx' and status='OK' order by allocated desc;"
+----
+--
++
+include::../../../../../../_components/note.adoc[]
+* 命令行中的 xxxxxxxx，为待迁移数据的磁盘 UUID。
+* 根据命令回显的 ``allocated`` 字段，选择 ``allocated`` 容量大的副本作为待迁移的副本，并记录下该副本 ID 与 Shard ID，即。``rid`` 与 ``sid`` 字段。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 查看待迁移副本所在的 Shard 分布情况。
++
+--
+Galera 数据库
+
+[,sql]
+----
+mysql -uneonsan -pzhu88jie neonsan -e "select * from replica where shard_id='234881024';"
+----
+
+Xenondb 数据库
+[,sql]
+----
+mysql -uneonsan -pzhu88jie -h192.168.101.251 neonsan -e "select * from replica where shard_id='234881024';"
+----
+--
++
+include::../../../../../../_components/note.adoc[]
+* 命令行中的 shard_id 参数为步骤 4 中查询的副本对应的 sid 字段。
+* 待迁移副本所在 Shard 分布的节点不能作为迁移的目标节点。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令对 NeonSAN 集群中的 SSD 做负载均衡。
++
+[,shell]
+----
+neonsan rebalance_ssd
+----
++
+include::../../../../../../_components/note.adoc[]
+* 该命令为异步执行，可以通过 ``neonsan list_job`` 查看进程。
+* 若未达到负载均衡要求，可执行步骤 7。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 根据步骤 5 查询出来的结果，以及各磁盘的容量使用率，确定迁移的目标磁盘。
++
+[,shell]
+----
+neonsan list_ssd
+----
++
+include::../../../../../../_components/note.adoc[]
+* 排除待迁移副本所在 Shard 分布的节点。
+* 在剩下的节点中，选择磁盘使用率较低的磁盘作为迁移的目标磁盘。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，手动迁移数据至目标磁盘。
++
+* NeonSAN v3.0 及以后版本
++
+[,shell]
+----
+neonsan move_replica -replica_id <replica_id> -to_ssd <to_ssd_UUID>
+----
++
+include::../../../../../../_components/note.adoc[]
+* ``replica_id`` 是步骤 4 中查询出来的副本 ID。
+* ``to_ssd`` 是步骤 7 中确定的目标磁盘 UUID。
+include::../../../../../../_components/table_footer.adoc[]
+
+* NeonSAN v3.0 之前版本
++
+[,shell]
+----
+curl "http://$(qfcip):2600/qfa?op=move_replica&replica_id=xxx&to_ssd=xxxx"
+----
++
+include::../../../../../../_components/note.adoc[]
+* ``replica_id`` 是步骤 4 中查询出来的副本 ID。
+* ``to_ssd`` 是步骤 7 中确定的目标磁盘 UUID。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 再次确认集群中各磁盘的容量使用率。若尚未达到预期，则循环执行以上步骤，迁移副本，直至磁盘容量使用率达到预期即可。
++
+[,shell]
+----
+neonsan list_ssd
+----
+
+
+
+

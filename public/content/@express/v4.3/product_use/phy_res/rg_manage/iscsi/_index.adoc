@@ -1,0 +1,18 @@
+---
+title: "iSCSI 外挂"
+weight: 3
+---
+
+== 功能描述
+该功能可将{product_name_cn}集群中的存储空间利用 iSCSI 协议外置给第三方计算平台使用，即用户通过 iSCSI 协议在客户端访问{product_name_cn}的底层分布式存储卷。通过选择**物理资源** > **资源池管理** > **iSCSI 外挂**进入 **iSCSI 外挂**管理页面进行相关配置。
+ 
+== 名词解释
+* Target：iCSCI 存储服务器，位于位于 iSCSI 服务器上的存储资源，I/O 操作的执行者，需要导出一个或多个设备供 iSCS Iintiator 使用。
+* Initiator：iSCSI 客户端，即 iSCSI 服务器上的客户端，需配合相应的 iSCSI 存储服务端进行使用。
+* VIP：虚拟 IP。
+
+== 相关操作
+
+使用{product_name_cn}的 iSCSI 外挂功能，详细可参考后文步骤 1 ~ 步骤 5 相关内容。
+
+

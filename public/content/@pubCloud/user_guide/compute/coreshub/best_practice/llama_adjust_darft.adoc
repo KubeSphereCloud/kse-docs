@@ -1,0 +1,70 @@
+---
+title: "LLaMA 2 模型微调"
+weight: 4
+draft: true
+---
+
+LLaMA 是比较常用的开源模型，根据此模型框架进行微调和训练，此最佳实践介绍如何在 AI 智算平台启动模型的微调。
+
+== 基于容器实例启动训练任务
+
+. link:../../develop_training/k8s/k8s_create/[创建一个 GPU 卡数为 1 的容器实例]，并挂载相应数据集。
++
+include::../../../../../_components/note.adoc[]
+* 容器实例的**存储与数据**中若无可用数据集，则需提前link:../../res_manage/stor_data/stor_create/[创建文件存储]，并将相关数据文件link:../../res_manage/stor_data/file_upload/[上传至指定文件目录]下。
+* 镜像选择 Pytorch。
+include::../../../../../_components/table_footer.adoc[]
+
+. 等待容器实例创建完成后，使用 link:../../develop_training/k8s/k8s_login/#_jupyter_访问[jupyter 登录容器实例]，在 Terminal 内执行如下命令查看文件存储是否正确挂载。如下 ``/root/data`` 为创建容器实例时填写的挂载路径。
++
+include::../../../../../_components/attention.adoc[]
+若打开 Terminal 默认不是 bash，则需要输入 ``bash`` 进行切换。
+include::../../../../../_components/table_footer.adoc[]
++
+[,shell]
+----
+df -h
+----
++
+image::/images/cloud_service/compute/coreshub/bp_llama_adjust_1.png[,60%] 
++
+数据集及模型存储于 ``/root/data/llama-recipes-main/`` 目录。
++
+image::/images/cloud_service/compute/coreshub/bp_llama_adjust_2.png[,60%] 
+
+. 进入 ``/root/data/llama-recipes-main/`` 目录，指定如下命令启动微调代码，
++
+[,shell]
+----
+torchrun --nnodes 1 --nproc_per_node 1  examples/finetuning.py  --enable_fsdp --model_name /root/data/llama-recipes-main/src/llama_recipes/models/llama-2-7b/7B --use_peft --peft_method lora --dataset alpaca_dataset --save_model --dist_checkpoint_root_folder model_checkpoints --dist_checkpoint_folder fine-tuned --pure_bf16 --output_dir /root/data/outmodel
+----
++
+image::/images/cloud_service/compute/coreshub/bp_llama_adjust_3.png[] 
++
+参数说明：
++
+* ``--nnodes``：指定节点数量。
+* ``--nproc_per_node``：指定 GPU 数量。
+* ``--model_name``：指定模型路径。
+* ``--output_dir``：模型输出路径。
+* ``--dataset``：指定数据集。
+
+
+== 基于平台界面直接创建训练任务
+
+. 在link:../../develop_training/train_job/train_job_create/[创建分布式训练任务]页面，参考link:#_基于容器实例启动训练任务[基于容器实例启动训练任务]相关内容配置**镜像**和**存储与数据**相关参数。其它参数参考如下。
++
+* 启动命令：
++
+[,shell]
+----
+torchrun --nnodes 1 --nproc_per_node 1  data/llama-recipes-main/examples/finetuning.py  --enable_fsdp --model_name /root/data/llama-recipes-main/src/llama_recipes/models/llama-2-7b/7B --use_peft --peft_method lora --dataset alpaca_dataset --save_model --dist_checkpoint_root_folder model_checkpoints --dist_checkpoint_folder fine-tuned --pure_bf16 --output_dir /root/data/outmodel2
+----
+* 框架：选择 **Pytorch**。
+* 资源组：选择**公共资源池**，并选择 **GPU 数量**为 1 的**资源类型**，并将**数量**设置为 1。
+
+. 点击创建分布式任务页面上的**确定**，提交相关任务。
+. 返回分布式训练任务列表，查看当前任务为``运行中``即可。
+
+
+

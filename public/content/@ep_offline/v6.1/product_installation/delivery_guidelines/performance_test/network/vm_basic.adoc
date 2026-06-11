@@ -1,0 +1,46 @@
+---
+title: VM 间性能测试--基础网络
+weight: 2
+---
+
+
+[cols='^1h,4a']
+|===
+| 验收目的 | 验证云服务器基于基础网络的性能。
+| 预置条件 | * {product_name}已部署完成。
+
+* 内置 `ubuntu14.04.3` 操作系统镜像。
+
+
+| 操作步骤 | . 通过浏览器登录{product_name}的 Web Console。
+
+. 创建两台 `ubuntu14.04.3` 的云服务器 VM-1，VM-2，分别加入不同网段的基础网络中。
+. 防火墙下行放开 `5000` 端口。
+. 使用 SSH 工具登录 VM-1，执行命令行启动 Iperf Server 端。
++
+[source,shell]
+----
+iperf -s -p 5000
+----
+
+. 使用 SSH 工具登录 VM-2，执行命令行启动 Iperf Client 端。
++
+[source,shell]
+----
+iperf -c <server端 IP> -p 5000 -f M -i 1
+----
+
+. 分别观察 VM-1 与 VM-2 上的返回结果。
+
+| 预期结果 | 预期性能为 500M。
+| 验证结果 | 
+// * Iperf Server 端
+// +
+// image::/images/ep_offline/delivery_guidelines/iperf_server_2.png[iperf_server_2,40%]
+
+// * Iperf Client 端
+// +
+// image::/images/ep_offline/delivery_guidelines/iperf_client_4.png[iperf_client_4,40%]
+
+| 备注 | 创建云服务器的相关步骤，可参考《Console 用户指南》。
+|===

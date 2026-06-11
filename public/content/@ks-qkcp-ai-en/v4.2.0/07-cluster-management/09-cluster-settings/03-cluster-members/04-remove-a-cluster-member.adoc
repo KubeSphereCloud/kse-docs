@@ -1,0 +1,47 @@
+---
+title: "Remove Cluster Members"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Cluster Settings, Cluster Members, Remove Cluster Members"
+description: "Describes how to remove cluster members."
+weight: 04
+---
+
+:ks_permission: **Member Management**
+:ks_navigation: **Cluster Settings > Cluster Members**
+
+This section describes how to remove cluster members.
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+After a user is removed from the cluster, they will lose the permissions granted by the cluster role.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the cluster member you want to remove, and then select **Remove**.
+
+. In the **Remove Member** dialog box, enter the username of the cluster member, and then click **OK**.
++
+--
+The removed cluster member will no longer appear in the cluster member list.
+--

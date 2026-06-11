@@ -1,0 +1,40 @@
+---
+title: "Activate KubeSphere Enterprise"
+keywords: "activate, KubeSphere Enterprise, Kubernetes, KubeSphere, cloud account"
+description: "Explain how to activate KubeSphere Enterprise."
+weight: 03
+---
+
+After logging into the web console of KubeSphere Enterprise, you need to bind your KubeSphere cloud account, subscribe to KubeSphere Enterprise to access all its features.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+KubeSphere Enterprise v4.1.1 provides each user with a free trial license for a single cluster with 24 vCPUs for 30 days. After the trial period expires, you will need to subscribe to KubeSphere Enterprise for continued access.
+|===
+
+== Steps
+
+. Log in to the {ks_product-en} web console with a user having the **platform-admin** role.
+
+. Click the **Bind KubeSphere cloud account** prompt at the top, enter your cloud account information, authorize it, and complete the account binding.
+
+. Navigate to **Platform Settings > Cloud Accounts** page, then click on **Go to Subscription**.
+
+. Choose the **Plan** and **Duration**, confirm the **Cluster ID**, click on **Submit Order**, and proceed with the payment.
+
+. On the payment success page, scroll down to the bottom, and click on the **Back** button to return to the web console.
+
+== Activation Successful
+
+If the KubeSphere Enterprise license status shows a number, it indicates a successful activation, and you can start using KubeSphere Enterprise.
+
+== Activation Failed
+
+- Each cloud account can only obtain a free subscription for one cluster. If you attempt to activate on another cluster, it will result in an activation failure for KubeSphere Enterprise. Please click on **Go to Subscription**, and after a successful subscription, the cluster will automatically receive authorization.
+
+- Network issues during cloud account binding can lead to data synchronization failure, resulting in an activation failure for KubeSphere Enterprise. Please click on **Reauthorize**, manually trigger data synchronization, and retry activation.
+
+- If the license for the cluster has expired, it will result in an activation failure for KubeSphere Enterprise. Please click on **Go to Renewal**, and after successful renewal, you can use it again.

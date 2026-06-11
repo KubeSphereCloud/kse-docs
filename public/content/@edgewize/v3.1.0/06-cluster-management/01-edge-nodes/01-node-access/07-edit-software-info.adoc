@@ -1,0 +1,60 @@
+---
+title: "编辑软件信息"
+weight:  07
+---
+
+:ks_permission: **节点管理**
+:ks_navigation: **边缘节点 > 节点接入**
+
+
+本节介绍如何对边缘节点中的内置软件进行安装、卸载、重启、启用禁用、修改配置等操作。
+
+[.admon.warning,cols="a"]
+|===
+|警告
+
+|请谨慎操作，以避免业务中断或边缘节点无法正常运行。
+|===
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+== 编辑单个节点的软件信息
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. 在需要操作的节点右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑软件信息**。
+
+. 在**编辑软件信息**对话框，点击**容器引擎**和**边缘软件**页签，对容器引擎、边缘软件进行以下操作。点击image:/images/ks-qkcp/zh/icons/check-dark.svg[check,18,18]确认。
++
+--
+include::../../../../_custom/clusterManagement/nodes/nodes-para-editSoftware.adoc[]
+--
+
+. 点击**自定义命令**页签，输入将在边缘节点上执行的 shell 命令。点击image:/images/ks-qkcp/zh/icons/check-dark.svg[check,18,18]确认，最后点击**确定**。
+
+
+== 批量编辑节点的软件信息
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. 点击**批量管理**，在上方勾选**选择全部**，然后点击**编辑软件信息**。
+
+. 在**编辑软件信息**对话框，点击**容器引擎**和**边缘软件**页签，选择容器引擎和边缘软件，及其版本。点击image:/images/ks-qkcp/zh/icons/check-dark.svg[check,18,18]确认。
++
+--
+确认后，您可以进行以下操作：
+
+include::../../../../_custom/clusterManagement/nodes/nodes-para-editSoftware.adoc[]
+--
+
+. 点击**自定义命令**页签，输入将在边缘节点上执行的 shell 命令。点击image:/images/ks-qkcp/zh/icons/check-dark.svg[check,18,18]确认，最后点击**确定**。

@@ -1,0 +1,59 @@
+---
+title: "查看节点组列表"
+weight: 02
+---
+
+:ks_permission: **节点组管理**
+:ks_menu: **节点组 > 节点组列表**
+
+本节介绍节点组列表。
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
++
+====
+* 节点列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|节点组的名称、别名和描述。
+
+|节点数量
+|节点组中边缘节点的数量。
+
+|项目数量
+|与节点组绑定的项目数量。
+
+|节点组
+|当前节点组所属的节点组。将光标悬停在节点组的数据上查看所属节点组的完整信息。
+
+|创建时间
+|节点组的创建时间。
+|===
+--
+
+* 在列表上方点击搜索框并输入关键字，可按名称搜索节点组。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+
+* 在列表右上角点击**创建**可创建节点组。更多有关信息，请参阅link:../../01-node-groups-tree/01-create-a-node-group[创建节点组]。
+
+* 在节点组右侧点击image:/images/ks-qkcp/zh/icons/more.svg["more",18,18]，可link:../../01-node-groups-tree/05-edit-node-group-info[编辑节点组信息]、link:../../01-node-groups-tree/07-move-node-groups[移动节点组]、link:../../01-node-groups-tree/15-delete-node-groups[删除节点组]。
+
+* 点击节点组名称，可进入节点组详情页面。
+====

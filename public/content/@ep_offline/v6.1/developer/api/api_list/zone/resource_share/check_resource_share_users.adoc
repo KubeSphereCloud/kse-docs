@@ -1,0 +1,114 @@
+---
+title: 检查需要添加共享的用户是否存在（CheckResourceShareUsers）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| owner
+| String
+| false
+| 资源的所有者
+
+| resource_share_id
+| String
+| false
+| 共享单元id
+
+| user
+| String
+| false
+| 需要查询的用户
+
+| zone
+| String
+| true
+| 请求区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| email
+| String
+| false
+| 用户邮箱
+
+| message
+| String
+| false
+| 返回消息
+
+| resource_id
+| String
+| false
+| 已回收的资源id
+
+| status
+| String
+| false
+| 资源状态
+
+| user
+| Array
+| false
+| 用户信息
+
+| user_id
+| String
+| false
+| 用户id
+
+| user_name
+| String
+| false
+| 用户名称
+
+| user_type
+| String
+| false
+| 用户类型
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CheckResourceShareUsers",
+  "owner": "admin",
+  "user": "usr-gqn3h1yJ",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CheckResourceShareUsersResponse",
+  "message": true,
+  "ret_code": 0,
+  "trace_id": "gZ8q2o3l",
+  "user": {
+    "email": "welwei@yunify.com",
+    "status": "active",
+    "user_id": "usr-gqn3h1yJ",
+    "user_name": "welwei",
+    "user_type": 0
+  }
+}
+----

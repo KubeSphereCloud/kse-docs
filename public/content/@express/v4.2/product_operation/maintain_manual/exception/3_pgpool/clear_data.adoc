@@ -1,0 +1,118 @@
+---
+title: "清理无效数据"
+weight: 1
+---
+
+== 运维场景
+
+通过清理 PostgreSQL 数据库表中的无用数据，例如告警等，释放集群空间。
+
+== 操作步骤
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令查看集群的 pg_master 节点。
++
+[source,shell]
+----
+fb exec_nodes -f webservice cat /pitrix/run/pg_master
+----
+
+. 登录至 pg_master 节点，依次执行如下命令，查看 ``/pitrix/postgresql-10.4/data/base`` 下占用存储空间最大的文件目录，记录其 ID，记作 id_1。
++
+[source,shell]
+----
+cd /pitrix/postgresql-10.4/data/base
+----
++
+[source,shell]
+----
+du -sh *
+----
+
+. 进入上一步骤查询到的占用空间最大的文件目录。
++
+[source,shell]
+----
+cd id_1
+----
++
+查看并记录占用存储空间的最大的文件的 ID，记作 id_2
++
+[source,shell]
+----
+du -sh *
+----
+
+. 登录 PostgreSQL 数据库。
++
+[source,shell]
+----
+psql
+----
+
+. 查询占用存储空间较大的文件所属数据库。
++
+[source,sql]
+----
+SELECT datname FROM pg_database WHERE oid = id_1;
+----
++
+image::/images/express/maintain/clear_data_1.png[]
+
++
+include::../../../../../../_components/note.adoc[]
+* ``oid`` 指定文件 ID，需根据实际情况进行修改，即上述步骤中记为 id_1 的文件。
+* 返回结果一般为 boss2_manager 数据库。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录至 boss2_manager 数据库。
++
+[source,sql]
+----
+\c boss2_manager
+----
+
+. 查询数据表，确认占用较大存储空间的文件为 alert_alertevent 数据表。
++
+[source,sql]
+----
+SELECT * FROM pg_class WHERE relfilenode =  id_2;
+----
++
+image::/images/express/maintain/clear_data_2.png[]
++
+include::../../../../../../_components/note.adoc[]
+* ``relfilenode`` 指定文件 ID，需根据实际情况进行修改，即上述步骤中记为 id_2 的文件。
+* 返回结果一般为 alert_alertevent 表。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，退出数据库。
++
+[source,sql]
+----
+\q
+----
+. 执行如下命令，清空 alert_alertevent 表。
++
+[source,shell]
+----
+psql -p 5433 -d boss2_manager -c 'truncate table alert_alertevent CASCADE;'
+----

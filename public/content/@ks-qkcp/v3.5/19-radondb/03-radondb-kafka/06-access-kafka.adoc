@@ -1,0 +1,248 @@
+---
+title: "访问 RadonDB Kafka "
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB Kafka, 访问 Kafka"
+description: "介绍如何访问 RadonDB Kafka 。"
+weight: 06
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 7e2ec48094a8472d808bb6cfac2fbf79
+:ks_xref_id: dce852c8caae4d4d98d83771d83821ca
+:ks_comp: ../../../components/
+:ks_title: 访问 RadonDB Kafka 
+:ks_keywords: Kubernetes, {ks_product}, RadonDB Kafka, 访问 Kafka
+:ks_description: 介绍如何访问 RadonDB Kafka 。
+:ks_weight: 06
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+本节介绍如何访问 RadonDB Kafka。
+
+
+== 前提条件link:[id=3b2504c9f81a40b180d101f25385b8a1]
+
+* 请确保已获取{ks_product_both}平台登录用户帐号和密码，且已获取平台操作管理权限。
+
+* 请确保已安装 RadonDB Kafka 应用。
+
+* 您已经安装了用于访问 Kafka 的客户端。
+
+
+== 下载 CA 证书和用户证书link:[id=0825016afe1b45869462e6770bf5c622]
+
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
+. 在页面左侧的**传输加密**区域，下载 CA 证书并保存密码。
+
+. 在页面右侧点击 **Kafka 用户**页签，下载用户证书并保存密码。
+
+
+
+== 修改 Kafka 配置文件link:[id=ec9a43f5afdc4d9ab422b3ae4b1d9814]
+
+RadonDB Kafka 支持三种认证类型：TLS、SCRAM-SHA-512 和无需认证。不同的认证模式下，配置文件的修改方式不同，具体请参阅以下内容。
+
+**TLS 认证类型**
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+当**认证类型**为 **TLS** 时，**TLS** 参数不能设置为 **false**。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+在 **config/producer.properties** 和 **config/consumer.properties** 文件末尾添加下面的内容。
+
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+#在文件末尾添加以下内容。
+
+security.protocol=ssl
+ssl.truststore.location=<ca.p12>
+ssl.truststore.password=<truststore_password>
+ssl.truststore.type=pkcs12
+ 
+ssl.keystore.location=<user.p12>
+ssl.keystore.password=<keystore_password>
+ssl.keystore.type=pkcs12
+ssl.endpoint.identification.algorithm=
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+参数解释如下：
+
+* <ca.p12>： CA 证书的保存路径。
+
+* <truststore_password>：CA 证书的密码。
+
+* <user.p12>：用户证书的保存路径。
+
+* <keystore_password>：用户证书密码。
+
+
+**SCRAM-SHA-512 认证类型**
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+当认证类型设置为 **SCRAM-SHA-512**，传输加密 TLS 的值可以设置为 **true** 和 **false**。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+. 当 TLS 的值设置为 **true** 时，在 **config/producer.properties** 和 **config/consumer.properties** 文件末尾添加以下内容。
++
+--
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+#在文件末尾添加以下内容。
+security.protocol=sasl_ssl
+sasl.mechanism=SCRAM-SHA-512
+ssl.truststore.location=<ca.p12>
+ssl.truststore.password=<truststore_password>
+ssl.truststore.type=pkcs12
+ssl.endpoint.identification.algorithm=
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 当 TLS 的值设置为 **false** 时，在 **config/producer.properties** 和 **config/consumer.properties** 文件末尾添加以下内容。
++
+--
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+#在文件末尾添加以下内容。
+
+security.protocol=SASL_PLAINTEXT
+sasl.mechanism=SCRAM-SHA-512
+ssl.endpoint.identification.algorithm=
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+创建 **config/kafka_client_jaas.conf** 文件，并添加以下内容。
+
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+> cat config/kafka_client_jaas.conf
+KafkaClient {
+  org.apache.kafka.common.security.scram.ScramLoginModule required
+  username="username"
+  password="password";
+};
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+将 **username** 和 **password** 修改为实际的用户名和密码。
+--
+
+. 执行以下命令修改 **bin/kafka-console-producer.sh** 和 **bin/kafka-console-consumer.sh** 文件。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+#修改 bin/kafka-console-producer.sh 文件。
+
+if [ "x$KAFKA_HEAP_OPTS" = "x" ]; then
+    export KAFKA_HEAP_OPTS="-Xmx512M -Djava.security.auth.login.config=/opt/kafka/config/kafka_client_jaas.conf"
+fi
+exec $(dirname $0)/kafka-run-class.sh kafka.tools.ConsoleProducer "$@"
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+if [ "x$KAFKA_HEAP_OPTS" = "x" ]; then
+    export KAFKA_HEAP_OPTS="-Xmx512M -Djava.security.auth.login.config=/opt/kafka/config/kafka_client_jaas.conf"
+fi
+  
+exec $(dirname $0)/kafka-run-class.sh kafka.tools.ConsoleConsumer "$@"
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+请将 **config/kafka_client_jaas.conf** 的地址根据实际情况修改为绝对地址。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+**无需认证模式**
+
+当认证类型设置为 **无需认证**，传输加密 TLS 的值可以设置为 **true** 和 **false**。
+
+. 当 TLS 的值为 **true** 时，在 **config/producer.properties** 和 **config/consumer.properties** 文件后增加以下内容：
++
+--
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+#在文件末尾添加以下内容。
+security.protocol=SSL
+ssl.truststore.location=<ca.p12>
+ssl.truststore.password=<truststore_password>
+ssl.truststore.type=pkcs12
+ssl.endpoint.identification.algorithm=
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 当 TLS 的值为 **true** 时，您无需做任何修改。
+
+
+== 使用 Kafka 客户端生产和消费消息link:[id=4dbe0ff792fe49718dc9355a3e4b6042]
+
+执行以下命令使用 Kafka 客户端生产和消费消息。
+
+生产消息
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+# bin/kafka-console-producer.sh --bootstrap-server 192.168.100.2:31522 --topic demo-topic --producer.config config/producer.properties
+>hello
+>radondb
+>kafka
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+消费消息
+
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+# bin/kafka-console-consumer.sh --bootstrap-server 192.168.100.2:31522 --topic demo-topic --consumer.config config/consumer.properties
+hello
+radondb
+kafka
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+其中，**bootstrap-server** 需要修改为控制台上的访问地址。
+
+image::/images/ks-qkcp/zh/radondb-management/access-kafka.png[access-kafka,700,700]
+
+上图红框中第一个读写地址是使用 Kubernetes 节点网络访问 Kafka 服务时使用的地址，如在 Kubernetes 节点上访问 Kafka，或 Kubernetes 节点同网段主机上访问 Kafka 服务。第二个读写地址是使用 Kubernetes 集群中 pod 访问 kafka 服务时使用的地址。
+
+将 **topic** 修改为实际使用的 topic 地址，**group** 修改为实际使用的 group 值。

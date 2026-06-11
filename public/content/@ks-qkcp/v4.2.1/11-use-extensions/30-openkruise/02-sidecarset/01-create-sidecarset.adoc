@@ -1,0 +1,75 @@
+---
+title: "创建 SidecarSet"
+weight:  01
+---
+
+本节介绍如何创建 SidecarSet。
+
+== 操作步骤
+
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *SidecarSet*。
+. 在页面右上角点击 *创建*。
+. 在 *基本信息* 页签，填写以下参数后点击 *下一步*。
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|SidecarSet 的名称。只能包含小写字母、数字和连字符（`-`），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+|别名
+|SidecarSet 的别名。支持中文、字母、数字和连字符（`-`），不得以连字符（`-`）开头和结尾，最长 63 个字符。
+
+|描述
+|SidecarSet 的描述信息。可包含任意字符，最长 256 个字符。
+|===
+
+. 在 *SidecarSet 设置* 页签，配置 SidecarSet 的生效范围和注入策略，然后点击 *下一步*。
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|项目设置（`spec.namespace`）
+|指定 SidecarSet 生效的项目（命名空间）。留空则对所有项目生效。
+
+|命名空间选择器（`spec.namespaceSelector`）
+|通过标签选择器指定 SidecarSet 生效的项目范围。
+
+|更新策略（`spec.updateStrategy.type`）
+|指定 SidecarSet 的更新方式，支持滚动更新。
+
+|最大不可用数（`maxUnavailable`）
+|滚动更新过程中允许同时不可用的容器组数量或百分比。
+
+|分批灰度（`partition`）
+|滚动更新时保留旧版本 Sidecar 容器的容器组数量。
+
+|暂停注入（`spec.injectionStrategy.paused`）
+|开启后，SidecarSet 将暂停向新创建的容器组注入 Sidecar 容器，已注入的存量容器组不受影响。
+
+|注入元数据（`patchPodMetadata`）
+|开启后，将为目标容器组注入指定的元数据（标签或注解）。
+|===
+
+. 在 *Sidecar 容器设置* 页签，点击 *添加容器*，配置需要注入的 Sidecar 容器，然后点击 *下一步*。
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|注入位置（`podInjectPolicy`）
+|指定 Sidecar 容器在目标容器组中的插入位置，可选择在应用容器之前或之后注入。
+
+|共享数据卷（`shareVolumePolicy`）
+|指定是否允许 Sidecar 容器共享业务容器挂载的数据卷。
+
+|共享环境变量（`transferEnv`）
+|指定是否将业务容器的环境变量共享给 Sidecar 容器。
+|===
+
+. 在 *存储设置* 页签，按需为 Sidecar 容器配置独立的数据卷，然后点击 *下一步*。
+. 在 *高级设置* 页签，按需配置高级参数，然后点击 *创建*。
+
+创建完成后，SidecarSet 将显示在 SidecarSet 列表中。在创建 Deployment 等工作负载时，您可以在 *容器组设置* 步骤中选择该 SidecarSet，以注入 Sidecar 容器。

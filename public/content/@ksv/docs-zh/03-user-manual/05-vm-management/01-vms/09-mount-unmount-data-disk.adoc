@@ -1,0 +1,47 @@
+---
+title: "挂载/卸载虚拟机数据盘"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 数据盘, 挂载, 卸载"
+description: "介绍如何使用{ks_product_both}Web 控制台挂载或卸载虚拟机数据盘。"
+weight: 09
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: d0f2549dcdcd4330b1aaec0dff34248f
+:ks_xref_id: f0a5a19901c7465590a9d55cabb00583
+:ks_comp: ../../../../components/
+:ks_title: 挂载/卸载虚拟机数据盘
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台挂载或卸载虚拟机数据盘。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 数据盘, 挂载, 卸载
+:ks_weight: 09
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台挂载或卸载虚拟机数据盘。
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+每台虚拟机有且仅有一个系统盘，虚拟机创建后您无法为虚拟机挂载额外的系统盘。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=93c8f8ca20e54d6f8d8be08b0a3ac561]
+
+include::../../../../_custom/vms/vm-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=79148dfadf1e48ebad23716a94e76a27]
+
+include::../../../../_custom/vms/vm-view-steps.adoc[]
+
+. 在虚拟机列表页面，在目标虚拟机的空白区域点击右键虚拟机操作菜单，然后选择**挂载数据盘**或**卸载数据盘**。
+
+. 按照页面向导完成后续挂载或卸载操作。

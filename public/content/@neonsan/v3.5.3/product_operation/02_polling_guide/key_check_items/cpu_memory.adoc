@@ -1,0 +1,79 @@
+---
+title: "检查 CPU 和内存使用率（2 级）"
+weight: 4
+---
+
+. 逐个登录 NeonSAN 服务器节点。
+
+. 查看系统 CPU 使用情况。
++
+[,shell]
+----
+top
+----
++
+image::/images/neonsan/polling_guide_10.png[]
++
+回显说明：
++
+* ``us`` 表示用户空间程序的 CPU 使用率。
+* ``sy`` 表示系统空间的 CPU 使用率，主要是内核程序。
+* ``id`` 表示空闲 CPU。
+* 如上所示，当前空闲 CPU 为 98.6%。若当前 CPU 使用率过高，空闲 CPU 为 20% 以下，需查看各线程占用 CPU 的情况，并持续观察一段时间，若使用率长时间（2 小时及以上）保持80% 以上，需反馈给 NeonSAN 研发小组，做进一步分析研究。
+
+. 查看系统内存使用情况。
++
+[,shell]
+----
+free -h
+----
++
+image::/images/neonsan/polling_guide_11.png[]
++
+若返回结果中，内存**空闲率=(buff/cache+available)/total** 低于 20% 且 ``swap`` 使用大于 10G，则说明其空间占用较多，执行以下脚本查看内存占用较多的前 10 个进程。
++
+[,shell]
+----
+for i in $( cd /proc;ls |grep "^[0-9]"|awk ' $0 >100') ;do awk '/Swap:/{a=a+$2}END{print '"$i"',a/1024"M"}' /proc/$i/smaps 2>/dev/null ; done | sort -k2nr | head -10
+----
++
+image::/images/neonsan/polling_guide_12.png[]
++
+执行如下命令，根据上述结果中的进程 ID 查看相应的具体进程，若有 store、center 或 monitor 等 NeonSAN 服务，则需要联系 NeonSAN 产研团队进行排查，若无 NeonSAN 相关服务，则继续后续检查。
++
+[,shell]
+----
+ps -ef | grep <id>
+----
+
+. 查看 neonstore 服务的内存使用情况。neonstore 进程内存使用量需小于 40G，大于这个值需要反馈给 NeonSAN 研发小组。 
+.. 查看 neonstore 服务进程 ID。
++
+[,shell]
+----
+pidof neonstore
+----
++
+回显示例：
++
+[,shell]
+----
+7083
+----
+
+.. 查看 neonstore 服务内存使用量。如下所示，neonstore 进程当前内存使用量为 11271996 kB，即大约为 11G。总的内存使用率不应超过 80%，若超过 80%，需持续观察一段时间，若使用率长时间(2h)保持 80% 以上，需反馈给 NeonSAN 产研团队，做进一步分析研究。
++
+[,shell]
+----
+cat /proc/7083/status | grep VmRSS
+----
++
+回显示例：
++
+[,shell]
+----
+VmRSS:	11271996 kB
+----
+
+
+

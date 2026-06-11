@@ -1,0 +1,51 @@
+---
+title: "Remove Project Members"
+keywords: "Kubernetes, {ks_product}, Project Management, Project Settings, Project Members, Remove Project Members"
+description: "Describes how to remove project members."
+weight: 04
+---
+
+:ks_permission: **Member View**
+:ks_navigation: **Project Management > Project Members**
+
+This section describes how to remove project members.
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+After a user is removed from a project, they will lose the permissions granted by the project role.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. To the right of the project member you want to remove, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Remove**.
+
+. In the **Remove Member** dialog box, enter the username of the project member, then click **OK**.
++
+--
+The removed project member will no longer appear in the project member list.
+--

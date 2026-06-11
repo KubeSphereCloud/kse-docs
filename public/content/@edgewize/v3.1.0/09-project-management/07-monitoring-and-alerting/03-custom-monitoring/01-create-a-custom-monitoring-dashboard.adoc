@@ -1,0 +1,44 @@
+---
+title: "创建自定义监控面板"
+keywords: "Kubernetes, {ks_product}, 项目管理, 自定义监控面板, 创建自定义监控面板"
+description: "介绍如何创建自定义监控面板。"
+weight: 01
+---
+
+:ks_permission: **监控管理**
+:ks_navigation: **监控告警 > 自定义监控**
+
+
+include::../../../../_custom/clusterManagement/customMonitoringDashboards/customMonitoringDashboards-desc-createACustomMonitoringDashboard.adoc[]
+
+
+== 前提条件
+
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+
+include::../../../../_custom/clusterManagement/customMonitoringDashboards/customMonitoringDashboards-prer-exposeMetrics.adoc[]
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-exposeMetrics.adoc[]
+
+:relfileprefix: ./
+
+
+== 操作步骤
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/customMonitoringDashboards/customMonitoringDashboards-oper-createACustomMonitoringDashboard.adoc[]

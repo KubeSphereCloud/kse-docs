@@ -1,0 +1,76 @@
+---
+title: "查看 HPA 列表"
+weight: 02
+---
+
+:ks_permission: **容器水平伸缩查看**
+:ks_navigation: **弹性伸缩 > 容器水平伸缩**
+
+
+本节介绍如何查看容器水平伸缩的列表信息。
+
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* KubeSphere 平台需要安装并启用 **Metrics Server** 扩展组件。
+
+
+== 操作步骤
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+ 
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+====
+* 容器水平伸缩列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|策略名称
+|容器水平伸缩（HPA）的名称。
+
+|状态
+|HPA 的当前状态。若状态异常，鼠标悬停于图标上可查看错误详情。
+
+|伸缩对象
+|HPA 所管理的工作负载，通常是部署或有状态副本集。
+
+|目标 CPU/内存用量
+|HPA 进行自动伸缩所依据的 CPU/内存指标的阈值，以及当前实际用量。
+
+|副本数量范围
+|HPA 能够自动调节的 Pod 副本数的上下限。
+
+|期望副本数​
+|根据当前指标数据（CPU、内存等）计算出的、理论上最合适的 Pod 副本数量。
+
+|创建时间
+|HPA 资源的创建时间。
+|===
+--
+
+* 在列表上方点击搜索框并设置搜索条件，可按名称和状态搜索 HPA。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+
+====
+
+

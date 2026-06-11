@@ -1,0 +1,99 @@
+---
+title: "Patch 升级操作"
+weight: 1
+---
+
+== 注意事项 
+
+* 仅 QingStor Installer v3.0.0 及以上版本支持升级 Installer Patch。
+* 若 Installer 已升级完成则无需进行此操作。
+* 补丁执行历史记录保存于集群所有节点的 ``/qingstor/log/upgrade/patched_history`` 文件内。
+* 升级 Patch 命令支持重复执行。
+
+== 适用范围
+
+Installer Patch 升级操作主要用于满足在 NeonSAN 暂时无法升级的情况下，自动化处理和解决某些需要人工介入的重要问题（如集群环境配置问题）。
+
+
+== 操作步骤
+
+. 登录 FirstBox 所在节点，进入升级脚本 upgrader.sh 所在目录。
++
+[,shell]
+----
+cd /qingstor-installer
+----
+
+. 执行相应脚本，升级 Installer Patch。
++
+[,shell]
+----
+bash upgrader.sh -u patch 
+----
++
+根据回显结果，检查获取到的集群信息。
++
+[,shell]
+----
+==============================================
+Log:          /qingstor/log/upgrade/upgrader.log
+Log(fb):      /qingstor/log/upgrade/upgrade-patch.log
+Mode:         Patch
+Version:      2.0.18
+Step:         1-2
+Start:        Mon Jul 10 16:27:18 CST 2023
+==============================================
+Environment Information Check
+----------------------------------------------
+172.16.90.3:                  kylin V10
+172.16.90.4:                  kylin V10
+172.16.90.5:                  kylin V10
+installer version:            2.0.18
+installer upgrade:            3.0.0
+installer-neonsan version:    3.5.3
+installer-neonsan upgrade:    3.5.3
+portal version:               3.5.3
+portal upgrade:               3.5.3
+neonsan center version:       3.5.3
+neonsan monitor version:      3.5.3
+neonsan store version:        3.5.3
+----------------------------------------------
+environment information is correct? [y/n]:
+----
+
+. 若确认环境信息无误，根据提示输入 ``y``。
++
+升级脚本将会自动依次进行**升级预检查**和**升级补丁**步骤。
++
+[,shell]
+----
+environment information is correct? [y/n]: y
+==============================================
+Step1: 升级预检查                [succ]
+Step2: 升级补丁                 [succ]
+==============================================
+End:     Mon Jul 10 16:28:12 CST 2023
+==============================================
+----
+
+== 升级脚本使用说明
+
+[,shell]
+----
+bash upgrader.sh -u patch -v <Installer_Version>
+----
+* ``-v`` 为可选参数，用于指定 Installer 的版本。
+* 若指定 ``-v`` 参数，则将会执行指定版本及以前版本的补丁。
+* 若不指定 ``-v`` 参数，则默认执行当前环境内 Installer 版本及以前版本的补丁。
+
+示例：
+
+若使用 qingstor-installer*.tar.gz 包的版本为 v3.0.0，在 Installer 版本为 v2.0.17 的环境上执行 ``bash upgrader.sh -u patch``，将会执行 v2.0.17 及以前版本的补丁。
+
+若使用 qingstor-installer*.tar.gz 包的版本为 v3.0.0，在 Installer 版本为 v2.0.17 的环境上执行 ``bash upgrader.sh -u patch -v 2.0.15``，将会执行 v2.0.15 及以前版本的补丁。
+
+
+
+
+
+

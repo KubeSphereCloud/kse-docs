@@ -1,0 +1,185 @@
+---
+title: 测试准备
+description: 
+weight: 1
+---
+
+COSBench 是一个开源的，针对对象存储的测试工具，支持 S3 协议。COSBench 中有两种角色，Controller 与 Driver。其中，Controller 负责接受和分发任务至 Driver，Driver 负责实际的读写操作。COSBench 的项目地址：link:https://github.com/intel-cloud/cosbench[COSbench Git]。
+
+{product_name} 对象存储的性能测试，目前是通过 S3 协议来兼容接口，并使用 COSBench 工具来完成。
+
+
+
+
+== 安装测试工具
+
+. 登录当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+# ssh -p 6023 root@<firstbox ip>
+----
++
+
+include::../../../../../../_components/note.adoc[]
+
+* 命令行中的 `<firstbox ip>` 为配置文件 `ip.ini` 中 `role` 字段下的第一个节点的 IP 地址。
+* 登录密码为 `zhu88jie`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 进入如下目录：
++
+[source,shell]
+----
+# cd /root/qs-installer
+----
+
+. 执行如下命令部署 COSBench：
++
+[source,shell]
+----
+# ./qs_installer update --hosts
+# ./qs_installer deploy --cosbench
+----
+
+. 成功部署 COSBench 后，每个网关节点上会启动一个容器来运行 COSBench 的 Driver 服务。默认情况下，每个容器内会运行 3 个 COSBench 的 Driver 实例。COSBench 的 Controller 服务会启动在 `cosbench0` 节点上的容器内。用户可执行如下操作来确定 `cosbench0` 节点的 IP 地址：
++
+[source,shell]
+----
+# ping cosbench0
+PING cosbench0 (101.100.11.58) 56(84) bytes of data.
+……
+----
++
+
+include::../../../../../../_components/note.adoc[]
+
+如命令行回显结果所示，`101.100.11.58` 即为 `cosbench0` 节点的 IP 地址。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 后续测试结果，用户均可通过访问 Controller 的页面 `http://<cosbench0 的 IP>:19088/controller` 进行查看与下载。
++
+
+include::../../../../../../_components/note.adoc[]
+
+如步骤 4 中查询到 `cosbench0` 节点的 IP 地址为 `101.100.11.58`，则 Controller 页面的访问链接为：`http://101.100.11.58:19088/controller`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+== 执行测试步骤
+
+
+. 登录当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+# ssh -p 6023 root@<firstbox ip>
+----
++
+
+include::../../../../../../_components/note.adoc[]
+
+* 命令行中的 `<firstbox ip>` 为配置文件 `ip.ini` 中 `role` 字段下的第一个节点的 IP 地址。
+* 登录密码为 `zhu88jie`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 通过 FirstBox 跳转至 `cosbench0` 节点。
++
+[source,shell]
+----
+# ssh cosbench0
+----
+
+. 进入 COSBench 的容器。
++
+[source,shell]
+----
+# docker exec -it cosbench /bin/bash
+----
+
+
+
+. 测试脚本的模版在 `/tmp/workloads` 目录下，每个 xml 文件包含其指定大小的 `read` 与 `write` 操作。查看默认的测试案例脚本内容如下，其中，文件名 `128MB-200.xml` 表示 `128MB` 的读写操作，并发度为 200。
++
+[source,shell]
+----
+# ll /tmp/workloads/
+total 176
+-rw-r--r-- 1 root root 1895 Sep 12  2017 128MB-200.xml
+-rw-r--r-- 1 root root 1880 Sep 12  2017 128MB-50.xml
+-rw-r--r-- 1 root root 1894 Sep 12  2017 16KB-1000.xml
+-rw-r--r-- 1 root root 1879 Sep 12  2017 16KB-200.xml
+-rw-r--r-- 1 root root 1894 Sep 12  2017 16KB-3000.xml
+-rw-r--r-- 1 root root 1879 Sep 12  2017 16KB-400.xml
+……
+
+----
+
+. 进入 COSBench 执行目录，根据实际需求，运行相应的测试脚本，如 4k 读写测试，并发 3000。命令行如下。
++
+[source,shell]
+----
+# cd cosbench
+# ./cli.sh submit /tmp/workloads/4KB-3000.xml
+----
+
+. 登录 COSBench 的 Controller 页面，查看测试用例运行情况。
++
+image::/images/u10000/cosbench.png[cosbench,100%]
++
+
+include::../../../../../../_components/note.adoc[]
+
+* 如上图所示，状态为 `finished`，即为测试用例运行完毕。
+* 一个 `workstage` 是一个测试阶段，每个测试均包含如下几个部分:
+** `prepare`：测试前的准备工作。系统将会向每个 Bucket，中上传 100000 个大小为 4096B，Block Size 为 4KB 的 Object。
+** `read`：读测试，在指定时间内以指定的并发数反复读取 `prepare` 状态时上传的 Object。
+** `write`：写测试，在指定时间内以指定的并发数反复写入 Object。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 测试用例运行过程中，需查看相应节点的负载。
++
+[source,shell]
+----
+# top                    //查看 CPU 的使用情况
+# nload                  //查看网卡流量
+# iostat -xmd 1          //查看磁盘 IO
+# netstat -an |wc -l     //查看端口占用数量(一般在 30 w 左右都是安全的)
+
+----
++
+
+include::../../../../../../_components/note.adoc[]
+
+测试用例运行完毕，需等待 1~2 分钟，服务器负载降下来后，再进行下一个测试。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+== 分析测试结果
+
+待所有用例运行完毕后，需访问 Controller 页面查看并分析测试结果。
+
+. 登录 COSBench 的 Controller 页面 `http://<cosbench0_IP>:19088/controller`。
+
+. 点击 **view performance matrix** 查看已经完成了的测试结果。
+
+. 按照下图所示选择过滤条件，然后点击 **filter** 过滤出有用的信息。
++
+image::/images/u10000/cosbench_filter.png[cosbench_filter,100%]
++
+
+include::../../../../../../_components/note.adoc[]
+
+* `Op-Type`：测试类型，读测试或写测试。
+* `Op-Count`：总共完成的上传或卸载次数。
+* `Byte-Count`：总共上传或下载的文件大小。
+* `Avg-ResTime`：平均响应时间。
+* `Avg-ProcTime`：平均处理时间。
+* `Throughput`：平均每秒完成的上传或下载次数。
+* `Bandwidth`：压测期间，平均带宽，单位为：Byte。
+
+include::../../../../../../_components/table_footer.adoc[]

@@ -1,0 +1,923 @@
+---
+title: 通过监控数据获取云主机列表（DescribeInstancesWithMonitors）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| limit
+| Integer
+| false
+| 每页数量
+
+| offset
+| Integer
+| false
+| 页数
+
+| owner
+| String
+| false
+| 用户Id
+
+| reverse
+| Integer
+| false
+| 反转
+
+| sort_key
+| String
+| false
+| 排序字段
+
+| tags
+| Array
+| false
+| 标签
+
+| verbose
+| Integer
+| false
+| 详情
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| instance_set
+| Object
+| false
+| 云主机详情
+
+| instance_set.agent_type
+| String
+| false
+| agent类型
+
+| instance_set.architecture
+| String
+| false
+| 架构
+
+| instance_set.block_bus
+| String
+| false
+| 块设备总线
+
+| instance_set.broker_host
+| String
+| false
+| 图形登录密码
+
+| instance_set.broker_port
+| String
+| false
+| 代理端口
+
+| instance_set.console_id
+| String
+| false
+| 
+
+| instance_set.controller
+| String
+| false
+| 控制器
+
+| instance_set.cpu_topology
+| String
+| false
+| cpu拓扑
+
+| instance_set.create_time
+| String
+| false
+| 创建时间
+
+| instance_set.description
+| String
+| false
+| 描述
+
+| instance_set.disable_swp
+| Integer
+| false
+| 禁用交换分区
+
+| instance_set.eip
+| String
+| false
+| 公网Ip
+
+| instance_set.eips
+| Object
+| false
+| 公网Ip列表
+
+| instance_set.eips.TODO
+| String
+| false
+| 待定义
+
+| instance_set.extra
+| Object
+| false
+| 扩展
+
+| instance_set.extra.bandwidth
+| Integer
+| false
+| 带宽
+
+| instance_set.extra.block_bus
+| String
+| false
+| 块设备总线
+
+| instance_set.extra.boot_dev
+| String
+| false
+| 启动设备
+
+| instance_set.extra.cdrom_status
+| Integer
+| false
+| cdrom状态
+
+| instance_set.extra.clipboard
+| Integer
+| false
+| 剪贴板
+
+| instance_set.extra.container_mode
+| String
+| false
+| 容器模式
+
+| instance_set.extra.cpu_max
+| Integer
+| false
+| 最大cpu核数
+
+| instance_set.extra.cpu_model
+| String
+| false
+| cpu模型
+
+| instance_set.extra.features
+| Integer
+| false
+| 特征
+
+| instance_set.extra.filetransfer
+| Integer
+| false
+| 文件传输
+
+| instance_set.extra.gpu
+| Integer
+| false
+| gpu个数
+
+| instance_set.extra.gpu_class
+| Integer
+| false
+| gpu类型
+
+| instance_set.extra.gpu_pci_nums
+| String
+| false
+| gpu的pci插槽数
+
+| instance_set.extra.hypervisor
+| String
+| false
+| 虚拟化类型
+
+| instance_set.extra.ib_sriov_type
+| Integer
+| false
+| ib_sriov类型
+
+| instance_set.extra.instance_ext_type
+| String
+| false
+| 云主机扩展类型
+
+| instance_set.extra.instance_id
+| String
+| false
+| 云主机Id
+
+| instance_set.extra.iops
+| Integer
+| false
+| 每秒读写操作次数
+
+| instance_set.extra.ivshmem
+| String
+| false
+| 共享内存设备
+
+| instance_set.extra.label
+| String
+| false
+| 标签
+
+| instance_set.extra.load_mode
+| String
+| false
+| 加载模式
+
+| instance_set.extra.max_bs
+| String
+| false
+| 最大块大小
+
+| instance_set.extra.mem_max
+| Integer
+| false
+| 最大内存
+
+| instance_set.extra.mount_status
+| Integer
+| false
+| 安装状态
+
+| instance_set.extra.nic_mqueue
+| Integer
+| false
+| 网卡队列
+
+| instance_set.extra.nic_type
+| String
+| false
+| 网卡类型
+
+| instance_set.extra.no_limit
+| Integer
+| false
+| 无限制
+
+| instance_set.extra.no_restrict
+| Integer
+| false
+| 不限制
+
+| instance_set.extra.os_disk_encryption
+| Integer
+| false
+| 操作系统磁盘加密
+
+| instance_set.extra.os_disk_size
+| Integer
+| false
+| 系统盘大小
+
+| instance_set.extra.policy
+| String
+| false
+| 策略
+
+| instance_set.extra.qxl_number
+| Integer
+| false
+| qxl数
+
+| instance_set.extra.read_iops
+| Integer
+| false
+| 读操作次数
+
+| instance_set.extra.read_throughput
+| Integer
+| false
+| 读吞吐量
+
+| instance_set.extra.rg
+| String
+| false
+| 资源池
+
+| instance_set.extra.sanc_rep_count
+| String
+| false
+| sanc个数
+
+| instance_set.extra.slots
+| Object
+| false
+| 插槽
+
+| instance_set.extra.slots.TODO
+| String
+| false
+| 待定义
+
+| instance_set.extra.spice_compression
+| String
+| false
+| 压缩
+
+| instance_set.extra.sriov_nic_type
+| Integer
+| false
+| 
+
+| instance_set.extra.throughput
+| Integer
+| false
+| 吞吐量
+
+| instance_set.extra.usb
+| Integer
+| false
+| usb个数
+
+| instance_set.extra.usb3_bus
+| String
+| false
+| USB3总线
+
+| instance_set.extra.usbredir
+| Integer
+| false
+| usb重定向
+
+| instance_set.f_resetpwd
+| Integer
+| false
+| 重置密码
+
+| instance_set.graphics_passwd
+| String
+| false
+| 图形登录密码
+
+| instance_set.graphics_port
+| String
+| false
+| 图形端口
+
+| instance_set.graphics_protocol
+| String
+| false
+| 图形协议
+
+| instance_set.host_machine
+| String
+| false
+| 物理机名称
+
+| instance_set.hostname
+| String
+| false
+| 主机名称
+
+| instance_set.hypervisor
+| String
+| false
+| 管理程序
+
+| instance_set.image_features
+| Integer
+| false
+| 图像特征
+
+| instance_set.image_id
+| String
+| false
+| 镜像Id
+
+| instance_set.image_owner
+| String
+| false
+| 图片所有者
+
+| instance_set.image_size
+| Integer
+| false
+| 镜像大小
+
+| instance_set.instance_category
+| String
+| false
+| 主机分类
+
+| instance_set.instance_class
+| Integer
+| false
+| 主机类
+
+| instance_set.instance_class_feature
+| Integer
+| false
+| 系统类型
+
+| instance_set.instance_id
+| String
+| false
+| 云主机Id
+
+| instance_set.instance_name
+| String
+| false
+| 主机名称
+
+| instance_set.instance_type
+| String
+| false
+| 主机配置
+
+| instance_set.label
+| String
+| false
+| 标签
+
+| instance_set.memory_current
+| Integer
+| false
+| 内存
+
+| instance_set.memory_max
+| Integer
+| false
+| 最大内存
+
+| instance_set.monitor_data
+| Object
+| false
+| 监控数据
+
+| instance_set.monitor_data.TODO
+| String
+| false
+| 待定义
+
+| instance_set.nic_type
+| String
+| false
+| 网卡类型
+
+| instance_set.os_disk_size
+| Integer
+| false
+| 系统盘大小
+
+| instance_set.os_family
+| String
+| false
+| 系统类型
+
+| instance_set.owner
+| String
+| false
+| 用户Id
+
+| instance_set.pitrix_instance_type
+| String
+| false
+| 主机类型
+
+| instance_set.place_group_id
+| String
+| false
+| 安置组ID
+
+| instance_set.platform
+| String
+| false
+| 平台
+
+| instance_set.processor_type
+| String
+| false
+| 处理器类型
+
+| instance_set.ratio
+| Integer
+| false
+| 比率
+
+| instance_set.root_image_id
+| String
+| false
+| root镜像Id
+
+| instance_set.root_partition_fs
+| String
+| false
+| 根分区xfs
+
+| instance_set.root_partition_number
+| Integer
+| false
+| 根分区序号
+
+| instance_set.root_user_id
+| String
+| false
+| root用户Id
+
+| instance_set.sound_type
+| String
+| false
+| 音频类型
+
+| instance_set.status
+| String
+| false
+| 状态
+
+| instance_set.status_time
+| String
+| false
+| 更新时间
+
+| instance_set.sub_code
+| Integer
+| false
+| 子编码
+
+| instance_set.tags
+| Object
+| false
+| 标签
+
+| instance_set.tags.color
+| String
+| false
+| 颜色
+
+| instance_set.tags.owner
+| String
+| false
+| 用户Id
+
+| instance_set.tags.tag_id
+| String
+| false
+| 标签Id
+
+| instance_set.tags.tag_key
+| String
+| false
+| 标签Key
+
+| instance_set.tags.tag_name
+| String
+| false
+| 标签名字
+
+| instance_set.tags.tag_value
+| String
+| false
+| 标签说明
+
+| instance_set.transition_status
+| String
+| false
+| 透传状态
+
+| instance_set.ui_type
+| String
+| false
+| ui类型
+
+| instance_set.vcpus_current
+| String
+| false
+| vcpu个数
+
+| instance_set.vcpus_max
+| Integer
+| false
+| vcpu最大个数
+
+| instance_set.video_ram
+| Integer
+| false
+| 视频内存
+
+| instance_set.video_type
+| String
+| false
+| 视频类型
+
+| instance_set.vxnets
+| Object
+| false
+| 私有网络
+
+| instance_set.vxnets.bandwidth
+| Integer
+| false
+| 带宽
+
+| instance_set.vxnets.controller
+| String
+| false
+| 控制器
+
+| instance_set.vxnets.instance_id
+| String
+| false
+| 云主机Id
+
+| instance_set.vxnets.ipv6_address
+| String
+| false
+| ipv6地址
+
+| instance_set.vxnets.ipv6_public_bandwidth
+| Integer
+| false
+| ipv6带宽
+
+| instance_set.vxnets.nic_id
+| String
+| false
+| 网卡Id
+
+| instance_set.vxnets.owner
+| String
+| false
+| 用户Id
+
+| instance_set.vxnets.private_ip
+| String
+| false
+| 私网ip
+
+| instance_set.vxnets.role
+| Integer
+| false
+| 角色
+
+| instance_set.vxnets.sequence
+| Integer
+| false
+| 序号
+
+| instance_set.vxnets.sriov_nic
+| Object
+| false
+| sriov网卡
+
+| instance_set.vxnets.sriov_nic.TODO
+| String
+| false
+| 待定义
+
+| instance_set.vxnets.sriov_nic_type
+| Integer
+| false
+| sriov网卡类型
+
+| instance_set.vxnets.status
+| String
+| false
+| 状态
+
+| instance_set.vxnets.vxnet_id
+| String
+| false
+| 私有网络Id
+
+| instance_set.vxnets.vxnet_type
+| Integer
+| false
+| 类型
+
+| instance_set.zone_id
+| String
+| false
+| 可用区
+
+| ret_code
+| Integer
+| false
+| 返回码
+
+| total_count
+| Integer
+| false
+| 总数
+
+| trace_id
+| String
+| false
+| 追踪Id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeInstancesWithMonitors",
+  "limit": 100,
+  "offset": 0,
+  "owner": "usr-rrPKHDpJ",
+  "reverse": 1,
+  "sort_key": "memory",
+  "tags": [
+    "tag-dfugvprv"
+  ],
+  "verbose": 1,
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeInstancesWithMonitorsResponse",
+  "instance_set": [
+    {
+      "agent_type": "pitrix",
+      "architecture": "x86_64",
+      "block_bus": "vd",
+      "broker_host": "",
+      "broker_port": "",
+      "console_id": "admin",
+      "controller": "self",
+      "cpu_topology": "4,1,1",
+      "create_time": "2021-04-09T02:11:52Z",
+      "description": "",
+      "disable_swp": 0,
+      "eip": null,
+      "eips": [],
+      "extra": {
+        "bandwidth": 0,
+        "block_bus": "",
+        "boot_dev": "",
+        "cdrom_status": 0,
+        "clipboard": 1,
+        "container_mode": "",
+        "cpu_max": 4,
+        "cpu_model": "",
+        "features": 4,
+        "filetransfer": 1,
+        "gpu": 0,
+        "gpu_class": 0,
+        "gpu_pci_nums": "",
+        "hypervisor": "kvm",
+        "ib_sriov_type": 0,
+        "instance_ext_type": "",
+        "instance_id": "i-gnnnti62",
+        "iops": 0,
+        "ivshmem": "",
+        "label": null,
+        "load_mode": null,
+        "max_bs": null,
+        "mem_max": 8192,
+        "mount_status": 0,
+        "nic_mqueue": 1,
+        "nic_type": "",
+        "no_limit": 0,
+        "no_restrict": 0,
+        "os_disk_encryption": 0,
+        "os_disk_size": 100,
+        "policy": null,
+        "qxl_number": 0,
+        "read_iops": 0,
+        "read_throughput": 0,
+        "rg": null,
+        "sanc_rep_count": null,
+        "slots": {
+          "d|i-gnnnti62": "s|0x06",
+          "i|52:54:d5:62:6d:2c": "s|0x0a"
+        },
+        "spice_compression": null,
+        "sriov_nic_type": 0,
+        "throughput": 0,
+        "usb": 0,
+        "usb3_bus": null,
+        "usbredir": 1
+      },
+      "f_resetpwd": 1,
+      "graphics_passwd": "uRXtNAGNHIFrLSTmHxZDRiRjHgUce1n2",
+      "graphics_port": "5904",
+      "graphics_protocol": "vnc",
+      "host_machine": "deltar02n08",
+      "hostname": "kafkaflink-2",
+      "hypervisor": "kvm",
+      "image_features": 64,
+      "image_id": "xenial7x64",
+      "image_owner": "system",
+      "image_size": 20,
+      "instance_category": "legacy_high_performance",
+      "instance_class": 0,
+      "instance_class_feature": 0,
+      "instance_id": "i-gnnnti62",
+      "instance_name": "kafka-2&#39;vm",
+      "instance_type": "c4m8",
+      "label": null,
+      "memory_current": 8192,
+      "memory_max": 8192,
+      "monitor_data": {
+        "cpu": [
+          1685678700,
+          117
+        ],
+        "if_tp-52:54:d5:ce:9e:ed": [
+          1685678700,
+          1089
+        ],
+        "memory": [
+          1685678700,
+          410
+        ]
+      },
+      "nic_type": "virtio",
+      "os_disk_size": 100,
+      "os_family": "ubuntu",
+      "owner": "usr-rrPKHDpJ",
+      "pitrix_instance_type": "instance",
+      "place_group_id": "plg-00000000",
+      "platform": "linux",
+      "processor_type": "64bit",
+      "ratio": 2,
+      "root_image_id": "xenial7x64",
+      "root_partition_fs": "",
+      "root_partition_number": 0,
+      "root_user_id": "usr-rrPKHDpJ",
+      "sound_type": "ac97",
+      "status": "running",
+      "status_time": "2023-02-23T08:26:24Z",
+      "sub_code": 0,
+      "tags": [
+        {
+          "color": "#9872c2",
+          "owner": "usr-rrPKHDpJ",
+          "tag_id": "tag-wc11ov6k",
+          "tag_key": "勿删勿动 no_delete",
+          "tag_name": "勿删勿动 no_delete",
+          "tag_value": "勿删勿动 no_delete"
+        }
+      ],
+      "transition_status": "",
+      "ui_type": "tui",
+      "vcpus_current": 4,
+      "vcpus_max": 4,
+      "video_ram": 9126,
+      "video_type": "vga",
+      "vxnets": {
+        "vxnet-ulvq5m0": [
+          {
+            "bandwidth": 0,
+            "controller": "self",
+            "instance_id": "i-gnnnti62",
+            "ipv6_address": "",
+            "ipv6_public_bandwidth": 0,
+            "nic_id": "52:54:d5:62:6d:2c",
+            "owner": "usr-rrPKHDpJ",
+            "private_ip": "192.168.128.7",
+            "role": 0,
+            "sequence": 1,
+            "sriov_nic": [],
+            "sriov_nic_type": 0,
+            "status": "in-use",
+            "vxnet_id": "vxnet-ulvq5m0",
+            "vxnet_type": 1
+          }
+        ]
+      },
+      "zone_id": "delta"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1,
+  "trace_id": "iDMVcJfZ"
+}
+----

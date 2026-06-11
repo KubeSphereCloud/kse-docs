@@ -1,0 +1,83 @@
+---
+title: 管理安全组
+description: 如何创建安全组
+draft: false
+weight: 10
+keyword: 云服务器, 安全，安全组
+linkkey: security_security_group_ipsets_guide,security_security_group_guide,security_security_group_rule_subset_guide
+---
+//tag::all[]
+为了加强位于基础网络 vxnet-0 中的云服务器或路由器的安全性，可以在云服务器或路由器之前放置一个安全组。
+
+
+== 创建安全组
+
+. 点击**安全**中的**安全组**进入如下界面。
++
+image::/images/cloud_service/security/security_group/create_sg_1.png[]
++
+
+include::../../../../../_components/note.adoc[]
+云平台系统为每个用户提供了一个缺省安全组(ID 之后带有星标)，默认打开 22 端口。也可以创建更多的安全组。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 点击**创建**跳出如下界面。
++
+image::/images/cloud_service/security/security_group/create_sg_2.png[]
++
+
+include::../../../../../_components/note.adoc[]
+打开**组内互信**表示加入该安全组内的资源互相信任，互相放行彼此间的流量。
+
+include::../../../../../_components/table_footer.adoc[]
+. 在名称框里输入创建的安全组名称，并选择是否开启**组内互信**，点击**提交**。
+
+== 编辑安全组
+. 点击创建好的安全组 ID 进入如下界面。
++
+image::/images/cloud_service/security/security_group/create_sg_3.png[]
+
++
+. 左侧**基本属性**栏记录了安全组ID、安全组名称、标签、描述、资源以及创建时间。
+
+. 点击**基本属性**旁边的菜单按钮，可对安全组进行**修改**、**应用安全组规则**、**标签绑定/解绑**、**添加到项目**、以及**删除**的操作。
++
+image::/images/cloud_service/security/security_group/create_sg_15.png[]
+
+== 备份安全组
+. 点击创建好的安全组 ID 进入详情页面。
+
+. 点击页面上侧的**备份**页签，进入如下界面。
++
+image::/images/cloud_service/security/security_group/create_sg_7.png[]
+
+. 点击**创建备份**，跳出如下界面。
++
+image::/images/cloud_service/security/security_group/create_sg_8.png[]
+
+. 填写备份名称，点击**提交**，进入如下界面。
++
+image::/images/cloud_service/security/security_group/create_sg_9.png[]
+
+. 选择备份策略再点击上侧**回滚**或鼠标右击备份策略选择**回滚**，亦或鼠标左击备份策略，跳出如下界面。
++
+image::/images/cloud_service/security/security_group/create_sg_10.png[]
+
+. 点击页面中左侧**开关**按钮，"`开`"表示与当前安全组对比，界面如下。
++
+image::/images/cloud_service/security/security_group/create_sg_11.png[]
++
+
+include::../../../../../_components/note.adoc[]
+页面下侧表示的不同颜色代表着不同的规则。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 再次点击页面中左侧**开关**按钮，关闭备份规则与当前规则的对比。
+
+. 点击**回滚**，弹出提示框。
+
+. 点击**确认**，备份规则会自动覆盖当前规则。
+
+//end::all[]

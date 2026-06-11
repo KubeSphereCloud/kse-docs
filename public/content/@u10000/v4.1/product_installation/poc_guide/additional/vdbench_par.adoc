@@ -1,0 +1,81 @@
+---
+title: Vdbend 常用参数
+description: 
+weight: 3
+---
+
+== HD
+
+定义主机。多客户端测试时需要填写该字段，单客户端时不需要填写该字段。测试时，每个客户端安装 Vdbench 的目录需保持一致，如 `/root/xm/vdbench50407`。
+
+[source,shell]
+----
+hd=default,vdbench=/root/xm/vdbench50407/,user=root,shell=ssh
+hd=hd1,system=20.5.29.101
+hd=hd2,system=20.5.29.102
+hd=hd3,system=20.5.29.103
+
+----
+
+== FSD
+
+定义文件系统，相关参数说明如下。
+
+[cols="1,5", options="header"]
+|===
+| 参数 | 说明 
+
+|fsd |标识文件系统定义的名称。
+|anchor |将在其中创建目录结构的目录。
+|width |要在定位符下创建的目录数。
+|depth |要在定位符下创建的级别数。
+|files |要在最低级别创建的文件数。
+|sizes |将创建的文件大小。
+|distribution |配置为 `bottom`，表示仅在最低级别创建文件；配置为 `all`，表示在所有目录中创建文件。默认为 `bottom`。
+|shared |配置为 `yes`，表示多个客户端共同创建指定数量的文件；配置为 `no`，表示每个客户端单的创建指定数量的文件。默认为 `no`。
+|openflags |用于打开一个文件系统的 `flag_list`。
+
+
+|===
+
+
+== FWD
+
+定义文件系统工作负载，相关参数说明如下。
+
+[cols="1,5", options="header"]
+|===
+| 参数 | 说明 
+
+|fwd |标识文件系统工作负载定义的名称。
+|fsd |要使用的文件系统定义的 ID。
+|host |要用于此工作负载的主机的 ID。
+|fileio |标识文件 I/O 将执行的方式。可配置为 `random` 或 `sequential`。
+|fileselect |标识选择文件或目录的方式。可配置为 `random` 或 `sequential`。
+|xfersizes |数据传输（读取和写入操作）处理的数据大小。
+|operation |选择要执行的单个文件操作。
+|rdpct |读取和写入操作的百分比。
+|threads |此工作负载的并发线程数量。每个线程需要至少 1 个文件。
+|===
+
+== RD
+
+定义运行相关参数。
+
+[cols="1,5", options="header"]
+|===
+| 参数 | 说明 
+
+| fwd | 要使用的文件系统工作负载定义的 ID。
+| fwdrate | 每秒执行的文件系统操作数量。
+| format a| 在开始运行之前要执行的操作。
+
+* 配置为 `yes`：在每轮 RD 中，都会删除原有文件和目录，生成新的文件和目录；
+* 配置为 `no`：不会新建文件和目录，现有的文件目录结构需要满足 fsd 的配置要求；
+* 配置为 `restart`：每轮执行 RD 中，对不满足 fsd 配置要求的文件进行新建或是写入指定大小文件；
+* 配置为 `clean`：执行删除当前的目录结构。
+| operations | 选择要执行的单个文件操作。
+| elapsed | 运行时间。
+| interval | 报告间隔时间。
+
+|===

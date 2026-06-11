@@ -1,0 +1,49 @@
+---
+title: "三网独立部署"
+weight: 1
+---
+
+云平台SANC融合架构和SANC分离架构中，NeonSAN的三网独立部署是指NeonSAN的业务网络、管理网络以及存储网络需分别使用独立的网络和物理网卡以实现三网分离部署。
+
+* 业务网络：NeonSAN 对 IaaS 提供服务的网络，即客户端使用QBD对NeonSAN的卷进行读写时所用的网络。
+* 管理网络：NeonSAN Portal的前端管理网络以及Zookeeper与数据库管理网络。
+* 存储网络：NeonSAN存储节点间卷副本同步复制所需网络。
+
+**部署指导**
+
+* NeonSAN 存储节点网络端口数共需 6 个，业务网络、管理网络以及存储网络分别需要2个网口。其中，分别分配给业务网络和管理网络的2个网口需要做bond。
+* 在三网独立部署场景下，使用NeonSAN全RDMA互连功能时，业务网络和存储网络采用RDMA网卡，管理网络仍使用TCP网卡即可。
+* NeonSAN集群部署完成后，需手动修改如下配置文件相关内容以完成三网分离架构。**将下表中所有配置文件中相应字段，根据实际情况修改为管理网段的IP地址**。
++
+[options="header",cols="2,1"]
+|===
+|配置文件名	|需修改的字段
+|/etc/neonsan/center.conf	
+|zookeepr.ip +
+center.mngt_ip +
+mysql.ip +
+
+|/etc/neonsan/store.conf	
+|zookeepr.ip +
+store.mngt_ip 
+
+|/etc/neonsan/monitor.conf	
+|zookeeper.ip +
+store.local_storeip +
+mysql_cluster.ip +
+mysql.ip 
+
+|/etc/neonsan/qbd.conf	
+|zookeepr.ip +
+center.ip
+
+|/opt/zookeeper-x.x.x/confzoo.cfg	
+|server.x=ip:2888:3888
+
+|/opt/galera/mgmt.conf	
+|zookeepr.ip
+
+|/opt/galera/confneonsan_galera.conf	
+|wsrep_cluster_address +
+wsrep_node_address 
+|===

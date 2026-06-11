@@ -1,0 +1,71 @@
+---
+title: 查询用户登录历史记录（GetUserLoginHistory）
+weight: 18
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Integer
+| false
+| 查询数量
+
+| offset
+| Integer
+| false
+| 查询偏移量
+
+| user
+| String
+| true
+| 查询的用户
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_history_set
+| Array
+| false
+| 查询登录历史结果
+
+| total_count
+| Integer
+| false
+| 查询总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "limit": 10,
+  "offset": 1,
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetUserLoginHistoryResponse",
+  "login_history_set": [],
+  "ret_code": 0,
+  "total_count": 0
+}
+----

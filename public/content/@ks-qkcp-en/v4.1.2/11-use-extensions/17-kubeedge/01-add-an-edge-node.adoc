@@ -1,0 +1,132 @@
+---
+title: "Add Edge Nodes"
+keywords: "Kubernetes, {ks_product-en}, cluster management, nodes, add edge node"
+description: "Learn how to add an edge node."
+weight: 01
+---
+
+:ks_permission: **Node Management**
+:ks_navigation: **Nodes > Edge Nodes**
+
+This section describes how to add an edge node.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeEdge** should have been installed and enabled.
+
+* The edge node to be added needs to be able to access the **30000**, **30001**, **30002**, **30004** ports of the KubeSphere cluster master node.
+
+* The edge node has Docker, containerd, CRI-O, or Virtlet installed as the container runtime. KubeEdge use containerd by default as the runtime. For more information, see link:https://kubeedge.io/zh/docs/[KubeEdge Documentation].
+
+* The SSH login information of the edge node has been obtained.
+
+
+== Configure Edge Node
+
+Perform the following steps to configure link:https://kubeedge.io/zh/docs/advanced/edgemesh/[EdgeMesh] on the edge node.
+
+. Run the following command to edit the **/etc/nsswitch.conf** file:
++
+--
+// Bash
+[,bash]
+----
+vi /etc/nsswitch.conf
+----
+--
+
+. Add the following content to the **/etc/nsswitch.conf** file and save the file:
++
+--
+// Bash
+[,bash]
+----
+hosts:          dns files mdns4_minimal [NOTFOUND=return]
+----
+--
+
+. Run the following command to enable IP forwarding on the edge node:
++
+--
+// Bash
+[,bash]
+----
+sudo echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+----
+--
+
+. Run the following command to verify the configuration result:
++
+--
+// Bash
+[,bash]
+----
+sudo sysctl -p | grep ip_forward
+----
+
+If the following information is displayed, the configuration is successful:
+
+// Bash
+[,bash]
+----
+net.ipv4.ip_forward = 1
+----
+--
+
+
+== Add Edge Node
+
+include::../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. Click **Add** on the right side of the page.
+
+. In the **Add Edge Node** dialog, set the parameters for the edge node.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the edge node. The system will automatically generate a name for the edge node, or you can manually set the name of the edge node. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and can be up to 63 characters long.
+
+// |Internal IP Address
+// |The internal IP address of the edge node in the KubeSphere cluster. The internal IP address of the edge node cannot be the same as the internal IP address of the existing nodes in the KubeSphere cluster.
+
+|Add Default Taint
+|Whether to add a taint to the edge node to prevent pods from being scheduled to the edge node.
+|===
+--
+
+. Click **Verify** to generate the edge node configuration command.
+
+. Click **Copy** to copy the edge node configuration command to the clipboard, then make the following modifications.
++
+Modify the ports in the edge node configuration command `10000,10001,10002,10004` to the ports exposed by the cloudcore service `30000,30001,30002,30004`.
+
+. Log in to the edge node and run the modified command.
++
+--
+// Note
+include::../../../../_ks_components-en/admonitions/note.adoc[]
+
+* Ensure that the edge node can access the KubeSphere cluster master node via the IP address specified by the **--cloudcore-ipport** parameter.
+
+* Ensure that the edge node can access the ports of KubeSphere cluster master node - **30000**, **30001**, **30002**, **30004** respectively via the port numbers specified by the **--cloudcore-ipport**, **--quicport**, **--certport**, and **--tunnelport** parameters.
+
+* Depending on your network environment, you may need to configure firewall and traffic forwarding rules.
+
+include::../../../../_ks_components-en/admonitions/admonEnd.adoc[]
+--
+
+. Refresh the **Edge Nodes** page of the {ks_product-en} web console. If the addition is successful, the edge node will be displayed in the edge node list.

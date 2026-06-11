@@ -1,0 +1,42 @@
+// tag::onlydeploy[]
+Set the strategy for pod updates during deployment.
+
+Deployment:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Rolling Update (Recommended)
+|Gradually replaces old pod replicas with new ones. During the upgrade, traffic is load-balanced between old and new pod replicas, ensuring no service interruption. If you choose this strategy, you need to further configure the **Maximum Unavailable Pods** and **Maximum Surge Pods**.
+
+|Recreate
+|Deletes all old pod replicas before creating new ones. Service will be interrupted during the upgrade.
+|===
+// end::onlydeploy[]
+
+StatefulSet:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+|Rolling Update (Recommended)
+|Gradually replaces old pod replicas with new ones. During the upgrade, traffic is load-balanced between old and new pod replicas, ensuring no service interruption. If you choose this strategy, you need to further configure the **Partition**.
+
+|On Delete
+|Pods must be manually deleted before they can be updated.
+|===
+
+ifndef::multicluster[]
+DaemonSet:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+|Rolling Update (Recommended)
+|Gradually replaces old pod replicas with new ones. During the upgrade, traffic is load-balanced between old and new pod replicas, ensuring no service interruption. If you choose this strategy, you need to further configure the **Max Unavailable** and **Min Ready Seconds**.
+
+|On Delete
+|Pods must be manually deleted before they can be updated.
+|===
+endif::[]

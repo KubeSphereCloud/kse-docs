@@ -1,0 +1,29 @@
+---
+title: 生成配置文件失败排查方法
+weight: 01
+---
+
+== 可能原因
+
+* yaml 配置文件格式不规范或者缩进错误。
+* `setting.<zone_id>.yaml` 配置文件中 IP 地址填写错误。
+
+== 排查步骤
+
+. 登录 FirstBox。
+. 执行以下命令，查看 ConfigQingCloud 出错的命令及对应的日志。
++
+--
+[source,shell]
+----
+grep -a 'Execing the script' /pitrix/log/service/qingcloud_server.log | grep <job_id>
+----
+
+include::../../../../../../_components/note.adoc[]
+<job_id> 可以通过命令 `/pitrix/cli/get-config-qingcloud-status.py` 查看。
+include::../../../../../../_components/table_footer.adoc[]
+
+回显信息如下，可以看到具体执行的命令，以及日志文件路径。
+
+image::/images/ep_offline/installation/faq_config_qingcloud.png[]
+--

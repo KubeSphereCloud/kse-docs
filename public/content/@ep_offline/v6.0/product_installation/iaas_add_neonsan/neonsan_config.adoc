@@ -1,0 +1,360 @@
+---
+title: 对接 NeonSAN（Hyper-Sanc 模式）
+weight: 40
+---
+
+当计算节点使用 Hyper-Sanc 模式时需执行本章节相关内容。NeonSAN 的部署过程，不在本文描述。本章节内容仅涉及到与 NeonSAN 集群对接过程中，云平台需要执行的相关操作。
+
+* Hyper-Sanc 融合模式：NeonSAN 与 Hyper 节点共用服务器，该场景需要先完成企业云平台基础软件部署，再部署 NeonSAN。
+* Hyper-Sanc 分离模式：NeonSAN 与企业云平台相互独立，建议先部署 NeonSAN。
+
+== 配置网络
+
+当计算存储节点采用 Hyper-Sanc 融合部署模式时，需要在 Hyper 节点上配置两个网络，分别用作 NeonSAN 的管理网络和存储网络。因此，在进行 NeonSAN 部署前，需要执行以下步骤。
+
+. 依次登录云平台的 Hyper 节点。
+
+. 执行以下命令，修改 `/etc/network/interfaces` 中的配置，新增如下内容，为 NeonSAN 增加管理网络和存储网络。
++
+需根据实际规划内容进行填写。
++
+[source,shell]
+----
+# vi /etc/network/interfaces
+......
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# mgmt network
+auto ens1f1
+iface ens1f1 inet static
+  address 172.31.60.205
+  netmask 255.255.255.0
+  gateway 172.31.60.254
+  dns-nameservers 172.31.60.209
+
+# repl network
+auto ens1f0
+iface ens1f0 inet static
+  address 192.168.0.3
+  netmask 255.255.255.0
+
+----
+
+. 配置修改完成后，执行以下命令重启网络，校验是否配置成功。
++
+[source,shell]
+----
+# service networking restart
+# supervisorctl restart all
+----
+
+
+== 配置 NeonSAN
+
+待 NeonSAN 集群安装部署完成后，需将 NeonSAN 集群相关信息补充到企业云平台的配置中。详细操作如下。
+
+=== 获取 NeonSAN 集群信息
+
+. 登录 NeonSAN 的任一物理节点。
+
+. 执行以下命令，获取 NeonSAN 的 ZooKeeper 地址和集群名称。
++
+[source,shell]
+----
+# cat /etc/neonsan/center.conf
+----
++
+回显示例如下：
++
+image::/images/ep_offline/installation/add_stor_neonsan_config_01.png[,50%]
+
+=== 添加 NeonSAN 集群信息
+
+. 执行以下命令，登录企业云平台的 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，修改 `/pitrix/conf/variables/variables.yaml` 文件中如下参数，配置 NeonSAN 集群信息。
++
+[source,shell]
+----
+# vi /pitrix/conf/variables/variables.yaml
+......
+Zone_ID:
+  support_neonsan: 1
+  ...
+  neonsan:
+    neonsan_zookeeper_ips:
+      - '172.30.80.3'
+      - '172.30.80.4'
+      - '172.30.80.5'
+    neonsan_center_ips:
+      - '172.30.80.6'
+      - '172.30.80.7'
+      - '172.30.80.8'
+    neonsan_cluster_name: 'neonsan'
+
+----
++
+**参数说明**
++
+[cols='1,2']
+|===
+| 参数 | 说明
+
+| support_neonsan | 修改配置为 `1`。
+| neonsan_zookeeper_ips | 根据示例格式，填写link:#_获取_neonsan_集群信息[上文]获取的 NeonSAN 集群的 Zookeeper 节点 IP 地址。
+| neonsan_center_ips | 根据示例格式，填写link:#_获取_neonsan_集群信息[上文]获取的 NeonSAN 集群的 Center 节点 IP 地址。
+| neonsan_cluster_name | 填写link:#_获取_neonsan_集群信息[上文]获取的 NeonSAN 集群名。
+|===
+
++
+
+include::../../../../_components/note.adoc[]
+* 若没有对应参数，则按照示例格式添加对应参数。
+* 若安装企业云平台时已配置 NeonSAN 参数，此步骤仅需查看并确保以上参数均正确配置即可。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，刷新 NeonSAN 配置到 Hyper、VBR、Webservice 节点。
++
+[source,shell]
+----
+# /pitrix/build/build_pkgs.py -p pitrix-neonsan-conf
+# /pitrix/upgrade/update.sh webservice,vbr,hyper pitrix-neonsan-conf,pitrix-neonsan-tool
+----
+. 登录任意若干 Hyper 或 VBR 节点，执行以下命令，确认配置是否正确。
++
+[source,shell]
+----
+# qbd --version
+# neonsan list_store && neonsan list_ssd && neonsan list_port && neonsan list_pool && neonsan list_parameter
+----
++
+命令回显信息如下，表示配置正确。
++
+image::/images/ep_offline/installation/add_stor_neonsan_config_02.png[,50%]
++
+image::/images/ep_offline/installation/add_stor_neonsan_config_03.png[]
+
+== 对接 NeonSAN 告警
+
+. 执行如下命令行，登录企业云平台的 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，按照如下内容修改 `/pitrix/conf/variables/boss2/boss2.yaml.<zone_id>` 文件中 `neonsan` 字段相关参数。
++
+[source,shell]
+----
+# vim /pitrix/conf/variables/boss2/boss2.yaml.<zone_id>
+......
+neonsan:
+  Zone1:
+    zk_hosts: '172.30.80.3:2181,172.30.80.4:2181,172.30.80.5:2181'
+    cluster_name: 'neonsan'
+    monitor_url: 'http://172.30.80.3:9090/'
+    nic_pattern: 'bond[0-9]|eth[0-9]|en[*]'
+  Zone2:
+    zk_hosts: 'NEONSAN_ZK_HOSTS'
+    cluster_name: 'NEONSAN_CLUSTER_NAME'
+    monitor_url: 'NEONSAN_MONITOR_URL'
+    nic_pattern: 'bond[0-9]|eth[0-9]'
+
+----
++
+**参数说明**
++
+[cols='1,2']
+|===
+| 参数 | 说明
+
+| zk_hosts |根据示例格式，填写link:#_获取_neonsan_集群信息[上文]获取的 NeonSAN 集群的 ZooKeeper 节点信息。格式参考示例为：IP 地址 `:2181`。
+| cluster_name | 填写link:#_获取_neonsan_集群信息[上文]获取的 NeonSAN 集群名。
+| monitor_url | 填写 NeonSAN 监控 API 的 URL 地址，其中 IP 为 NeonSAN 集群中 Monitor 服务的 IP 地址，可根据link:#_获取_neonsan_集群信息[上文]获取到的内容进行填写。端口默认为 `9090`。
+| nic_pattern | 填写监控时使用的网卡名称规则，若不配置，将默认获取 bond0-bond9 或 eth0-eth9 的监控数据。
+|===
+
+. 执行以下命令，按照如下内容修改 `/pitrix/conf/variables/boss2/boss2.yaml.<zone_id>` 文件中 `modules` 字段相关参数。
++
+在 `enable` 字段下，新增示例中的两行内容，或在 `disable` 字段下注释掉示例中的两行内容，以在 BOSS 界面上展示出 NeonSAN 菜单。
++
+[source,yaml]
+----
+# vim /pitrix/conf/variables/boss2/boss2.yaml.<zone_id>
+......
+modules:
+  enable:
+    ...
+    - boss2.storage_pools   # 存储池
+    - boss2.storage_nodes   # 存储节点
+...
+  disable:
+#    - boss2.storage_pools   # 存储池
+#    - boss2.storage_nodes   # 存储节点
+----
+
+
+
+. 执行以下命令，刷新配置到 Boss 节点。
++
+[source,shell]
+----
+# /pitrix/build/build_pkgs.py -p pitrix-ks-boss2-conf
+# /pitrix/upgrade/update.sh boss pitrix-ks-boss2-conf
+----
+
+. 完成以上配置后，可登录 BOSS，选择**基础设施** > **存储** > **存储池管理** > **存储节点**，查看存储相关信息。
++
+image::/images/ep_offline/installation/add_stor_neonsan_alarm_02.png[]
+
+
+== 混插型环境配置
+
+
+如果 NeonSAN 环境为全闪环境，即使用的磁盘均为 SSD 盘，可忽略该章节内容。若 NeonSAN 环境为混插环境，则需要进行以下相关操作。
+
+=== 设置安置组
+
+混插型环境需要为各 Hyper 节点新增四个安置组：`sas`、`sanc`。操作步骤如下。
+
+* 方式一：通过 BOSS 平台设置。
+
+* 方式二：通过 CLI 添加。
++
+. 执行如下命令行，登录企业云平台的 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，为 Hyper 节点设置安置组。
++
+[source,shell]
+----
+# /pitrix/bin/modify_hyper_plgs.sh hyper add sas,ssd,sata,sanc
+----
+
+=== 修改后端配置
+
+. 执行如下命令行，登录企业云平台的 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，修改 `server.yaml.<zone_id>` 文件中的 `default` 字段为 `HDD`。
++
+[source,shell]
+----
+# vi /pitrix/conf/variables/global/server.yaml.<zone_id>
+......
+
+common:
+  volume_type_label:
+    !!int 5: 'SSD'
+    !!int 6: 'HDD'
+    !!int 7: 'SSD2'
+    default: 'HDD'
+  instance_class_label:
+    !!int 6: 'SSD'
+    !!int 7: 'HDD'
+    default: 'HDD'
+
+----
+
+. 执行以下命令，刷新 `server.yaml.<zone_id>` 配置到节点。
++
+[source,shell]
+----
+# /pitrix/upgrade/build_global_conf.sh
+# /pitrix/upgrade/update.sh -f all pitrix-global-conf
+----
+
+=== 添加前端配置
+
+NeonSAN 环境为混插环境，提供的云硬盘类型用到 `volume type 6` 和 `instance class 7`，为在前端页面能正常显示，需要执行如下步骤。
+
+. 登录配置中心。
+
+. 在左侧导航栏，选择**应用管理**，进入应用管理页面。
+
+. 选择 **webconsole** 应用，进入 Webconsole 配置管理页面。
+
+. 在 `zone_config` 所在行，点击右侧的**管理配置**，进入 **zone_config** 配置页面。
++
+image::/images/ep_offline/installation/add_stor_neonsan_hdd_02_new.png[,80%]
+. 找到 `valid_volume_types` 参数，添加前端云硬盘类型。
++
+[source]
+----
+valid_volume_types:
+{enable: false, max: 1000, max_io: 128 MB/s, min: 10, step: 10, type: 0}
+{enable: false, max: 5000, max_io: 36 MB/s, min: 100, step: 50, type: 1}
+{enable: false, max: 10000, max_io: 36 MB/s, min: 100, step: 50, type: 2}
+{enable: false, max: 1000, max_io: 200 MB/s, min: 10, step: 10, type: 3}
+{enable: false, max: 5000, max_io: 36 MB/s, min: 100, step: 50, type: 4}
+{enable: false, max: 50000, max_io: 200 MB/s, min: 100, step: 100, type: 5}
+
+# 新增如下内容
+{enable: true, max: 50000, max_io: 36 MB/s, min: 10, step: 10, type: 6}
+----
+
+. 找到 `valid_snapshot_volume_type_map` 参数，添加前端备份盘类型。
++
+[source,shell]
+----
+valid_snapshot_volume_type_map:
+  volume_type_0: [0, 3]
+  volume_type_2: [2]
+  volume_type_3: [0, 3]
+  volume_type_5: [5]
+
+# 新增如下内容
+  volume_type_6: [6]
+----
+
+. 找到 `valid_instance_classes` 参数，添加前端主机类型 `7`。
++
+[source,shell]
+----
+valid_instance_classes: [0, 1, 6, 7]
+----
+
+. 修改磁盘副本规格。
++
+include::../../../../_components/note.adoc[]
+若用户没有特殊要求，可跳过该步骤，使用默认配置即可。
+include::../../../../_components/table_footer.adoc[]
++
+* 找到如下参数，根据实际情况修改 NeonSAN HDD 盘副本数。
++
+[source,shell]
+----
+min_replice_count_of_volume_type_6: 2 #修改此行，设置最小副本数
+max_replice_count_of_volume_type_6: 3 #修改此行，设置最大副本数
+default_replica_count_of_volume_type_6: 2 #修改此行，设置默认副本数
+----
++
+* 找到 `default_replica_count_of_volume_type_6` 参数，在该参数下方添加如下内容。根据实际情况修改 NeonSAN SSD 盘副本数。
++
+[source,shell]
+----
+default_replica_count_of_volume_type_6: 2
+min_replice_count_of_volume_type_5: 2 #添加此行，设置最小副本数
+max_replice_count_of_volume_type_5: 3 #添加此行，设置最大副本数
+default_replica_count_of_volume_type_5: 2 #添加此行，设置默认副本数
+----
+
+. 配置完成后，点击**保存**。

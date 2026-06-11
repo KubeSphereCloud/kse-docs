@@ -1,0 +1,1229 @@
+---
+title: "Event/Auditing Alert Rule Examples"
+description: "Introduces examples of alert rules for events and auditing."
+weight: 02
+---
+
+You can refer to the examples and parameter descriptions to customize alert rules for events and auditing, and then link:../01-create-rules-for-auditing[create alert rules].
+
+== Event Alert Rule Examples
+[,yaml]
+----
+apiVersion: logging.whizard.io/v1alpha1
+kind: ClusterRuleGroup
+metadata:
+  name: events-rules
+spec:
+  type: events
+  rules:
+    - name: ContainerCreated
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Pod" and reason="Created" and involvedObject.fieldPath != ""
+      desc: create new container
+      enable: true
+      alerts:
+        severity: info
+    - name: ContainerStarted
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Pod" and reason="Started" and involvedObject.fieldPath != ""
+      desc: start new pod
+      alerts:
+        severity: warning
+        annotations:
+          summary:  start new pod
+          summaryCn: 创建新容器
+      enable: true
+    - name: ContainerFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="Failed" and involvedObject.fieldPath != ""
+      desc: Create container failed
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Container failed
+          summaryCn: 容器失败
+    - name: ContainerKilling
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Pod" and reason="Killing" and involvedObject.fieldPath != ""
+      desc: container kill
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: container killing
+          summaryCn: 容器停止
+    - name: ContainerPreempting
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="Preempting"
+      desc: container is preempting
+      alerts:
+        severity: warning
+        annotations:
+          summary: Container is preemting
+          summaryCn: 容器抢占中
+      enable: true
+    - name: ContainerBackoff
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="BackOff" and involvedObject.fieldPath != "" and count>3
+      desc: container back off
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Container back-off
+          summaryCn: 容器回退
+    - name: ContainerUnhealthy
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="Unhealthy" and count>3
+      desc: container is unhealthy
+      alerts:
+        severity: warning
+        annotations:
+          summary: Container is unhealthy
+          summaryCn: 容器状态不良
+      enable: true
+    - name: ContainerProbeWarning
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="ProbeWarning" and count>3
+      desc: Warning to perform a probe to the container
+      alerts:
+        severity: warning
+        annotations:
+          summary: Warning to perform a probe to the container
+          summaryCn: 容器探测警告
+      enable: true
+    - name: PodKillingExceededGracePeriod
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="ExceededGracePeriod"
+      desc: Pod killing exceeded specified grace period
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Pod killing exceeded specified grace period
+          summaryCn: pod终止超时
+    - name: PodKillFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FailedKillPod"
+      desc: Warning to perform a probe to the container
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to kill pod
+          summaryCn: pod终止失败
+    - name: PodContainerCreateFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FailedCreatePodContainer"
+      desc: Failed to create pod container
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to create pod container
+          summaryCn: pod容器创建失败
+    - name: PodFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="Failed" and involvedObject.fieldPath=""
+      desc: Pod failed
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Pod failed
+          summaryCn: pod失败
+    - name: PodNetworkNotReady
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="NetworkNotReady"
+      desc: Pod network is not ready
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Pod network is not ready
+          summaryCn: Pod网络异常
+    - name: ImagePulling
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Pod" and reason="Pulling"
+      desc: pull images
+      enable: true
+      alerts:
+        severity: warning
+    - name: ImagePulled
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Pod" and reason="Pulled"
+      desc: images pulled
+      enable: true
+      alerts:
+        severity: warning
+    - name: ImagePullPolicyError
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="ErrImageNeverPull"
+      desc: Wrong image pull policy
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Wrong image pull policy
+          summaryCn: 镜像拉取策略错误
+    - name: ImageInspectFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="InspectFailed"
+      desc: Failed to inspect image
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to inspect image
+          summaryCn: 镜像检查失败
+    - name: NodeReady
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Node" and reason="NodeReady"
+      desc: Pod network is not ready
+      enable: true
+      alerts:
+        severity: warning
+    - name: NodeSchedulable
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Node" and reason="NodeSchedulable"
+      desc: node is schedulable
+      enable: true
+      alerts:
+        severity: warning
+    - name: NodeNotSchedulable
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Node" and reason="NodeNotSchedulable"
+      desc: node is not schedulable
+      enable: true
+      alerts:
+        severity: warning
+    - name: KubeletStarting
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Node" and reason="Starting"
+      desc: kubelet is starting
+      enable: true
+      alerts:
+        severity: warning
+    - name: KubeletSetupFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Node" and reason="KubeletSetupFailed"
+      desc: Failed to setup kubelet
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to setup kubelet
+          summaryCn: kubelet安装失败
+    - name: VolumeAttachFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FailedAttachVolume"
+      desc: Failed to attach volume
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to attach volume
+          summaryCn: 存储卷装载失败
+    - name: VolumeMountFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FailedMount"
+      desc: Failed to mount volume
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to mount volume
+          summaryCn: 存储卷挂载失败
+    - name: VolumeResizeFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="VolumeResizeFailed"
+      desc: Failed to expand/reduce volume
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to expand/reduce volume
+          summaryCn: 存储卷扩缩容失败
+    - name: VolumeResizeSuccess
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="VolumeResizeSuccessful"
+      desc: volume resize success
+      enable: true
+      alerts:
+        severity: warning
+    - name: FileSystemResizeFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FileSystemResizeFailed"
+      desc: failed to expand/reduce file system
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to expand/reduce file system
+          summaryCn: 文件系统扩缩容失败
+    - name: FileSystemResized
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="FileSystemResizeSuccessful"
+      desc: File system resize success
+      enable: true
+      alerts:
+        severity: warning
+    - name: VolumeMapFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FailedMapVolume"
+      desc: Failed to map volume
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to map volume
+          summaryCn: 存储卷映射失败
+    - name: VolumeAlreadyMounted
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="AlreadyMountedVolume"
+      desc: Volume is already mounted
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Volume is already mounted
+          summaryCn: 存储卷已被挂载
+    - name: VolumeAttached
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="SuccessfulAttachVolume"
+      desc: Volume is attached
+      enable: true
+      alerts:
+        severity: warning
+    - name: VolumeMounted
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="SuccessfulMountVolume"
+      desc: volume is mounted
+      enable: true
+      alerts:
+        severity: warning
+    - name: NodeRebooted
+      expr:
+        kind: rule
+        condition: type="Warning" a
+nd involvedObject.kind="Node" and reason="Rebooted"
+      desc: Node Rebooted
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Node Rebooted
+          summaryCn: Node Rebooted
+    - name: ContainerGCFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="ContainerGCFailed"
+      desc: Container GC failed
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Container GC failed
+          summaryCn: Container GC failed
+    - name: ImageGCFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="ImageGCFailed"
+      desc: Image GC failed
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Image GC failed
+          summaryCn: Image GC failed
+    - name: NodeAllocatableEnforcementFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FailedNodeAllocatableEnforcement"
+      desc: Node allocatable enforcement failed
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Node allocatable enforcement failed
+          summaryCn: Node allocatable enforcement failed
+    - name: NodeAllocatableEnforcedSuccess
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Node" and reason="NodeAllocatableEnforced"
+      desc: Node allocatable enforcement success
+      enable: true
+      alerts:
+        severity: warning
+    - name: SandboxChanged
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="SandboxChanged"
+      desc: Sandbox changed
+      enable: true
+      alerts:
+        severity: warning
+    - name: SandboxCreateFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FailedCreatePodSandBox"
+      desc: Failed to create sandbox
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to create sandbox
+          summaryCn: Failed to create sandbox
+    - name: SandboxStatusFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FailedPodSandBoxStatus"
+      desc: Failed to get sandbox status
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to get sandbox status
+          summaryCn: Failed to get sandbox status
+    - name: DiskCapacityInvalid
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="InvalidDiskCapacity"
+      desc: Invalid disk capacity
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Invalid disk capacity
+          summaryCn: Invalid disk capacity
+    - name: DiskSpaceFreeFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FreeDiskSpaceFailed"
+      desc: Failed to free disk space
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to free disk space
+          summaryCn: Failed to free disk space
+    - name: PodStatusSyncFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="FailedSync"
+      desc: Failed To Sync Pod Status
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed To Sync Pod Status
+          summaryCn: Failed To Sync Pod Status
+    - name: ConfigurationValidationFaile
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="FailedValidation"
+      desc: Configuration Validation Failed
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Configuration Validation Failed
+          summaryCn: Configuration Validation Failed
+    - name: LifecycleHookPostStartFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FailedPostStartHook"
+      desc: Failed to postStart LifecycleHook
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to postStart LifecycleHook
+          summaryCn: Failed to postStart LifecycleHook
+    - name: LifecycleHookPreStopFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FailedPreStopHook"
+      desc: Failed to preStop LifecycleHook
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to preStop LifecycleHook
+          summaryCn: Failed to preStop LifecycleHook
+    - name: HPASelectorError
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="HorizontalPodAutoscaler" and reason in ("SelectorRequired","InvalidSelector")
+      desc: HPA selector error
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: HPA selector error
+          summaryCn: HPA selector error
+    - name: HPAMetricError
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="HorizontalPodAutoscaler" and reason in ("FailedGetObjectMetric","InvalidMetricSourceType")
+      desc: Node allocatable enforcement failed
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: HPA metric error
+          summaryCn: HPA metric error
+    - name: HPAConvertFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="HorizontalPodAutoscaler" and reason="FailedConvertHPA"
+      desc: Failed to convert HPA
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to convert HPA
+          summaryCn: Failed to convert HPA
+    - name: HPAGetScaleFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="HorizontalPodAutoscaler" and reason="FailedGetScale"
+      desc: Failed to get HPA scale
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to get HPA scale
+          summaryCn: Failed to get HPA scale
+    - name: HPAComputeReplicasFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="HorizontalPodAutoscaler" and reason="FailedComputeMetricsReplicas"
+      desc: Failed to compute HPA replicas
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to compute HPA replicas
+          summaryCn: Failed to compute HPA replicas
+    - name: HPARescaleFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="HorizontalPodAutoscaler" and reason="FailedRescale"
+      desc: Failed to rescale HPA size
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to rescale HPA size
+          summaryCn: Failed to rescale HPA size
+    - name: HPARescaleSuccess
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="HorizontalPodAutoscaler" and reason="SuccessfulRescale"
+      desc: Rescaled HPA size
+      enable: true
+      alerts:
+        severity: warning
+    - name: NodeSystemOOM
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Node" and reason="SystemOOM"
+      desc: Node system OOM encountered
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Node system OOM encountered
+          summaryCn: Node system OOM encountered
+    - name: VolumeBindingFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="FailedBinding"
+      desc: Volume binding failed
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Volume binding failed
+          summaryCn: Volume binding failed
+    - name: VolumeMismatch
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="VolumeMismatch"
+      desc: Volume Mismatch
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Volume Mismatch
+          summaryCn: Volume Mismatch
+    - name: VolumeRecycleFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="VolumeFailedRecycle"
+      desc: Failed to recycle volume
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to recycle volume
+          summaryCn: Failed to recycle volume
+    - name: VolumeRecycled
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="VolumeRecycled"
+      desc: Volume Recycled
+      enable: true
+      alerts:
+        severity: warning
+    - name: VolumeRecyclerPodError
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="RecyclerPod"
+      desc: Volume Recycler pod error
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Volume Recycler pod error
+          summaryCn: Volume Recycler pod error
+    - name: VolumeDeleted
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="VolumeDelete"
+      desc: Volume Deleted
+      enable: true
+      alerts:
+        severity: warning
+    - name: VolumeDeleteFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="VolumeFailedDelete"
+      desc: Failed to delete volume
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to delete volume
+          summaryCn: Failed to delete volume
+    - name: VolumeProvisionFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="ProvisioningFailed"
+      desc: Failed to provision volume
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to provision volume
+          summaryCn: Failed to provision volume
+    - name: VolumeProvisioned
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="ProvisioningSucceeded"
+      desc: Volume provisioned
+      enable: true
+      alerts:
+        severity: warning
+    - name: VolumeProvisionCleanupFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="ProvisioningCleanupFailed"
+      desc: Failed to clean up provision volume
+      enable: true
+      alerts:
+severity: warning
+        annotations:
+          summary: Failed to clean up provision volume
+          summaryCn: Failed to clean up provision volume
+    - name: VolumeExternalExpandingError
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="ExternalExpanding"
+      desc: Error for volume external expanding
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Error for volume external expanding
+          summaryCn: Error for volume external expanding
+    - name: PodScheduleFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Pod" and reason="FailedScheduling"
+      desc: Failed to schedule pod
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to schedule pod
+          summaryCn: Failed to schedule pod
+    - name: PodSchedulePreempted
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Pod" and reason="Preempted"
+      desc: Pod preempted
+      enable: true
+      alerts:
+        severity: warning
+    - name: PodScheduled
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="Pod" and reason="Scheduled"
+      desc: Pod scheduled
+      enable: true
+      alerts:
+        severity: warning
+    - name: PodCreateFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind in ("Pod","ReplicaSet","DaemonSet","StatefulSet","Job") and reason="FailedCreate"
+      desc: Failed to create pod
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to create pod
+          summaryCn: Failed to create pod
+    - name: PodCreated
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind in ("Pod","ReplicaSet","DaemonSet","StatefulSet","Job") and reason="SuccessfulCreate"
+      desc: pod created
+      enable: true
+      alerts:
+        severity: warning
+    - name: PodDeleteFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind in ("Pod","ReplicaSet","DaemonSet","StatefulSet","Job") and reason="FailedDelete"
+      desc: Failed to delete pod
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to delete pod
+          summaryCn: Failed to delete pod
+    - name: PodDeleted
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind in ("Pod","ReplicaSet","DaemonSet","StatefulSet","Job") and reason="SuccessfulDelete"
+      desc: pod deleted
+      enable: true
+      alerts:
+        severity: warning
+    - name: ReplicaSetCreateError
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="ReplicaSetCreateError"
+      desc: Error to create replica set for deployment
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Error to create replica set for deployment
+          summaryCn: Error to create replica set for deployment
+    - name: DeploymentRollbackFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason in("DeploymentRollbackRevisionNotFound","DeploymentRollbackTemplateUnchanged")
+      desc: Failed to rollback deployment
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to rollback deployment
+          summaryCn: Failed to rollback deployment
+    - name: DeploySelectorAll
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="Deployment" and reason="SelectingAll"
+      desc: The deploy is selecting all pods
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: The deploy is selecting all pods
+          summaryCn: The deploy is selecting all pods
+    - name: DaemonSelectorAll
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="DaemonSet" and reason="SelectingAll"
+      desc: The daemon set is selecting all pods
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: The daemon set is selecting all pods
+          summaryCn: The daemon set is selecting all pods
+    - name: DaemonPodFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="DaemonSet" and reason in ("FailedDaemonPod","FailedPlacement")
+      desc: Failed daemon pod
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed daemon pod
+          summaryCn: Failed daemon pod
+    - name: LoadBalancerSyncFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="SyncLoadBalancerFailed"
+      desc: Error syncing load balancer
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Error syncing load balancer
+          summaryCn: Error syncing load balancer
+    - name: LoadBalancerDeleting
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="DeletingLoadBalancer"
+      desc: LoadBalancer is deleting
+      enable: true
+      alerts:
+        severity: warning
+    - name: LoadBalancerEnsuring
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="EnsuringLoadBalancer"
+      desc: LoadBalancer is ensuring
+      enable: true
+      alerts:
+        severity: warning
+    - name: LoadBalancerEnsured
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="EnsuredLoadBalancer"
+      desc: LoadBalancer is ensured
+      enable: true
+      alerts:
+        severity: warning
+    - name: LoadBalancerUnAvailable
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="UnAvailableLoadBalancer"
+      desc: Load balancer is not available
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Load balancer is not available
+          summaryCn: Load balancer is not available
+    - name: LoadBalancerUpdated
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="UpdatedLoadBalancer"
+      desc: LoadBalancer is updated
+      enable: true
+      alerts:
+        severity: warning
+    - name: LoadBalancerUpdateFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="UpdateLoadBalancerFailed"
+      desc: Failed to update load balancer
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to update load balancer
+          summaryCn: Failed to update load balancer
+    - name: LoadBalancerDeleting
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="DeletingLoadBalancer"
+      desc: Failed To Sync Pod Status
+      enable: true
+      alerts:
+        severity: warning
+    - name: LoadBalancerDeleted
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="DeletedLoadBalancer"
+      desc: LoadBalancer is deleted
+      enable: true
+      alerts:
+        severity: warning
+    - name: VolumeDeleted
+      expr:
+        kind: rule
+        condition: type="Normal" and reason="VolumeDelete"
+      desc: Volume is deleted
+      enable: true
+      alerts:
+        severity: warning
+    - name: LoadBalancerDeleteFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and reason="DeleteLoadBalancerFailed"
+      desc: Failed to delete load balancer
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to delete load balancer
+          summaryCn: Failed to delete load balancer
+    - name: JobGetFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="CronJob" and reason="FailedGet"
+      desc: Failed to get job
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to get job
+          summaryCn: Failed to get job
+    - name: JobCreated
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="CronJob" and reason="SuccessfulCreate"
+      desc: job is created
+      enable: true
+      alerts:
+        severity: warning
+    - name: JobCreateFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="CronJob" and reason="FailedCreate"
+      desc: Failed to create job
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to create job
+          summaryCn: Failed to create job
+    - name: JobDeleted
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="CronJob" and reason="SuccessfulDelete"
+      desc: job is deleted
+      enable: true
+      alerts:
+        severity: warning
+    - name: JobDeleteFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="CronJob" and reason="FailedDelete"
+      desc: Failed to delete job
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: Failed to delete job
+          summaryCn: Failed to delete job
+    - name: JobCompleted
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="CronJob" and reason="SawCompletedJob"
+      desc: job is completed
+      enable: true
+      alerts:
+        severity: warning
+    - name: JobUnexpected
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="CronJob" and reason="UnexpectedJob"
+      desc: CronJob saw unexpected job
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: CronJob saw unexpected job
+          summaryCn: CronJob saw unexpected job
+    - name: JobMissing
+      expr:
+        kind: rule
+        condition: type="Normal" and involvedObject.kind="CronJob" and reason="MissingJob"
+      desc: CronJob missed expected job
+      enable: true
+      alerts:
+        severity: warning
+    - name: JobScheduleFailed
+      expr:
+        kind: rule
+        condition: type="Warning" and involvedObject.kind="CronJob" and reason in ("MissSchedule","FailedNeedsStart")
+      desc: CronJob failed to schedule job
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: CronJob failed to schedule job
+          summaryCn: CronJob failed to schedule job
+CronJob failed to schedule job
+          summaryCn: Job scheduling failed
+----
+
+== Auditing Alert Rule Examples
+
+
+[,yaml]
+----
+apiVersion: logging.whizard.io/v1alpha1
+kind: ClusterRuleGroup
+metadata:
+  name: auditing-rules
+spec:
+  type: auditing
+  rules:
+    - name: ignore-action
+      expr:
+        kind: list
+        list:
+          - get
+          - list
+          - watch
+      desc: all action not need to be audit
+    - name: action
+      expr:
+        kind: list
+        list:
+          - create
+          - delete
+          - update
+          - patch
+      desc: all operator need to be audit
+    - name: pod
+      expr:
+        kind: macro
+        macro: ObjectRef.Resource="pods"
+      desc: pod
+    - name: service
+      expr:
+        kind: macro
+        macro: ObjectRef.Resource="services"
+      desc: service
+    - name: user
+      expr:
+        kind: alias
+        alias: User.username
+      desc: the alias of the user related to audit event
+    - name: name
+      expr:
+        kind: alias
+        alias: ObjectRef.Name
+      desc: the alias of the resource name
+    - name: namespace
+      expr:
+        kind: alias
+        alias: ObjectRef.Namespace
+      desc: the alias of the resource namespace
+    - name: create
+      expr:
+        kind: macro
+        macro: Verb = "create"
+      desc: create operator
+    - name: ResourceChange
+      expr:
+        kind: rule
+        condition: Verb in ${action}
+      desc: audit the change of resource
+      enable: true
+      alerts:
+        severity: info
+    - name: CreateHostNetworkPod
+      expr:
+        kind: rule
+        condition: ${pod} and ${create} and RequestObject.spec.hostNetwork = true
+      desc: Detect an attempt to start a pod using the host network
+      alerts:
+        severity: warning
+        annotations:
+          summary: creat hostNetwork pod
+          summaryCn: Create hostNetwork pod
+        message: ${user} ${Verb} HostNetwork Pod ${name} in Namespace ${namespace}.
+      enable: true
+    - name: CreateHostportPod
+      expr:
+        kind: rule
+        condition: ${pod} and ${create} and (RequestObject.spec.containers[*].ports[*].hostPort > 0 or RequestObject.spec.initContainers[*].ports[*].hostPort > 0)
+      desc: Detect an attempt to start a pod mount to a host port
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: creat hostport pod
+          summaryCn: Create hostport pod
+        message: ${user} ${Verb} HostPort Pod ${name} in Namespace ${namespace}.
+    - name: CreateNodePortService
+      expr:
+        kind: rule
+        condition: ${service} and ${create} and RequestObject.spec.type = "NodePort"
+      desc: Detect an attempt to start a service with a NodePort service type
+      enable: true
+      alerts:
+        severity: warning
+        annotations:
+          summary: creat NodePort service
+          summaryCn: Create NodePort service
+        message: ${user} ${Verb} NodePort Service ${name} in Namespace ${namespace}.
+    - name: AttachOrExecPod
+      expr:
+        kind: rule
+        condition: ${pod} and ${create} and ObjectRef.Subresource in ("exec", "attach")
+      desc: Detect any attempt to attach/exec to a pod
+      alerts:
+        severity: warning
+        annotations:
+          summary: attach or exec pod
+          summaryCn: Attach or exec pod
+        message: ${user} ${ObjectRef.Subresource} Pod ${name} in Namespace ${namespace}.
+----
+
+== Alert Rule Parameter Description
+
+Alert rules currently support three types: auditing, events, and logs. Configure different types of alert rules under `spec.type`, such as `type: auditing`, `type: events`, or `type: logs`.
+
+The configuration items for alert rules `spec.rules` are as follows:
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|`name`
+| Rule name.
+
+|`desc`
+| Rule description.
+
+|`expr.kind`
+|Rule type, which can be `rule`, `macro`, `list`, or `alias`.
+
+|`expr.condition`
+|The filter expression for logs to check if they match the rule. You can use comparison operators (=, !=, <, <=, >, >=, contains, in, like, regexp), boolean operators (and, or, and not), and parentheses for combination.
+
+|`expr.macro`
+| The condition for a macro.
+
+|`expr.list`
+| The value for a list.
+
+|`expr.alias`
+| The value for an alias.
+
+|`enable`
+| If false, the rule will not take effect.
+
+|`alerts.output`
+| Specifies the message output when a matching event occurs.
+
+|`alerts.annotations`
+| Annotations for the rule, included in the alert message output when a matching event occurs.
+
+|`alerts.annotations.summary`
+| Specifies the summary message output when a matching event occurs.
+
+|`alerts.annotations.summaryCn`
+| Specifies the Chinese summary message output when a matching event occurs.
+
+|`alerts.severity`
+| The alert severity level for the rule, which can be INFO, WARNING, ERROR, or CRITICAL.
+|===
+
+**Macro**
+
+A macro is a fragment of a rule condition that can be reused within rules or even other macros. Macros provide a way to name common patterns and eliminate redundancy in rules. The following is an example of a macro:
+
+[,yaml]
+----
+apiVersion: logging.whizard.io/v1alpha1
+kind: ClusterRuleGroup
+metadata:
+  name: macro-rule
+spec:
+  type: auditing
+  rules:
+  - desc: pod
+    expr:
+      kind: macro
+      macro: ObjectRef.Resource="pods"
+    name: pod
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Macros can be used in rules or other macros, for example, `${pod}` or `${alerting-rule.pod}`. The difference between these two methods is that `${pod}` can only be used within `alerting-rule`, while `${alerting-rule.pod}` can be used across all instances. Macros can also be used in lists and aliases.
+|===
+
+**List**
+
+A list is a collection of items that can be included in rules, macros, or other lists. Unlike rules and macros, a list cannot be parsed as a filter expression. The following is an example of a list:
+
+[,yaml]
+----
+apiVersion: logging.whizard.io/v1alpha1
+kind: ClusterRuleGroup
+metadata:
+  name: list-rule
+spec:
+  type: alerting
+  rules:
+  - desc: all action not need to be audit
+    expr:
+      kind: list
+      list:
+        - get
+        - list
+        - watch
+    name: ignore-action
+----
+
+**Alias**
+
+An alias is an abbreviated name for a filter field, which can be included in rules, macros, lists, and output strings. The following is an example of an alias:
+
+[,yaml]
+----
+apiVersion: logging.whizard.io/v1alpha1
+kind: ClusterRuleGroup
+metadata:
+  name: alias-rule
+spec:
+  type: alerting
+  rules:
+  - desc: the alias of the user related to audit event
+    expr:
+      alias: User.username
+      kind: alias
+    name: user
+----

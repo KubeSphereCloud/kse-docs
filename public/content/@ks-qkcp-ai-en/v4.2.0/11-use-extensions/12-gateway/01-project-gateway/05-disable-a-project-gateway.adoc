@@ -1,0 +1,46 @@
+---
+title: "Disable Project Gateway"
+keywords: "Kubernetes, {ks_product}, Project Management, Project Settings, Gateway Settings, Disable Project Gateway"
+description: "Describes how to disable a project gateway."
+weight: 05
+---
+
+:ks_permission: **Project Gateway Management**
+:ks_navigation: **Workspace Settings > Gateway Settings**
+
+This section describes how to disable a project gateway.
+
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-warn-disableGateway.adoc[]
+
+== Prerequisites
+
+* The **KubeSphere Gateway** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-oper-enterProjectGateway.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. To the right of the gateway you want to operate on, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Delete** from the dropdown list.
+
+. In the dialog box that appears, enter the name of the gateway, then click **OK**.
+// include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-oper-disableGateway.adoc[]

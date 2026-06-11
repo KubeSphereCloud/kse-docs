@@ -1,0 +1,77 @@
+[discrete]
+=== Observability
+
+include::WizTelemetry-intro-kse_v420.adoc[]
+
+**KubeEye Inspection**: Provides a flexible and extensible method for inspecting Kubernetes clusters. It supports automated inspection of nodes, workloads, and services within a Kubernetes cluster through custom inspection rules and schedules, collects inspection result data, and automatically generates inspection reports.
+
+[discrete]
+=== Developer Tools
+
+**KubeSphere App Store Management**: A multi-cloud application management platform based on OpenPitrix, used for uploading, reviewing, and managing different types of applications in multi-cloud environments. It can serve as a tool for sharing and distributing data, middleware, and office applications among different teams within an enterprise.
+
+**KubeSphere Service Mesh**: A powerful tool for microservices governance and visual management. It provides three gray release strategies including blue-green deployment, canary release, and traffic mirroring, along with two observability capabilities: traffic monitoring and link tracing.
+
+**Spring Cloud**: Provides microservices, microservice configuration, and microservice gateway functionalities.
+
+[discrete]
+=== Compute
+
+**KubeSphere Multi-Cluster Proxy Connection**: A tool for establishing network connections between clusters via a proxy. If the host cluster cannot directly access member clusters, you can expose the proxy service address of the host cluster, allowing member clusters to connect to the host cluster through the proxy.
+
+**Federated Cluster Application Management**: An extension designed to simplify the management of applications across multiple federated Kubernetes clusters. Users can easily deploy, update, and manage applications across multiple federated clusters.
+
+**Metrics Server**: Dynamically scales the number of pods based on set metrics, enabling services running on them to have a certain degree of adaptability to metric changes.
+
+**Vertical Pod Autoscaler**: A component of Kubernetes Autoscaler that automatically manages the resource quota requirements for containers within pods, eliminating the need for manual configuration.
+
+**KEDA for KubeSphere**: An event-driven autoscaling component based on Kubernetes, capable of providing event-driven scaling functionality for any container running in Kubernetes.
+
+[discrete]
+=== Edge Computing
+
+**EdgeWize**: A cloud-edge collaborative infrastructure platform based on Kubernetes. It adopts a pluggable architecture to integrate key edge computing capabilities, helping enterprises quickly build intelligent, open edge application management platforms and achieve business edge transformation.
+
+[discrete]
+=== Database & Middleware
+
+**RadonDB DMP**: An enterprise-grade cloud-native database management platform for multi-cloud scenarios in Kubernetes. It easily enables cross-cloud deployment, multi-cloud management, intelligent observability, and unified operations for multiple types of mainstream databases. It also fully builds an ecosystem loop around scenarios such as high performance, high availability, business tracking, and data flow, helping customers truly achieve Database as a Service.
+
+[discrete]
+=== CI/CD
+
+**DevOps**: Provides out-of-the-box CI/CD functionality based on Jenkins, offering a one-stop DevOps solution. Supports creating pipelines using a graphical editing panel or Jenkinsfile.
+
+**Image Builder**: Builds container images from source code or binary executable files (S2I & B2I).
+
+[discrete]
+=== Network
+
+**KubeSphere Gateway**: The KubeSphere Gateway is an extension that aggregates services and manages external access to the KubeSphere platform. It has now formed a gateway system with three resource management dimensions: "cluster, project, workspace," supporting the management of cluster gateways, workspace gateways, and project gateways.
+
+**KubeSphere Network**: Manages cluster network policies and pod IP pools. Controls the access and accessibility permissions of pods within clusters and projects; creates pod IP pools and allocates IP addresses from the pools to pods.
+
+**Ingress Tool**: Provides multiple practical extension capabilities for Ingress, such as domain name reuse validation. After enabling, tenants cannot apply the same domain name to different projects when creating Ingress.
+
+[discrete]
+=== Security
+
+**Gatekeeper**: Gatekeeper is an admission controller for Kubernetes that enables flexible policy configuration. It uses link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)] to validate requests for creating and updating resources on a Kubernetes cluster.
+
+**OAuth2-Proxy**: Provides a unified authentication interface to ensure all applications are protected through the same process, simplifying identity authentication management in multi-application environments, improving security and user experience. Suitable for enterprise environments that require unified authentication management for multiple backend applications, and for applications that need to authenticate users through third-party authentication services.
+
+**Certificate Management**: Creates TLS certificates for workloads in Kubernetes and renews them before they expire.
+
+[discrete]
+=== Storage
+
+**KubeSphere Storage**: Manages volume snapshots, volume snapshot classes, sets authorization rules for storage classes, and configures automatic volume expansion.
+
+[discrete]
+=== Artificial Intelligence
+
+**NVIDIA GPU Operator**: An extension based on the link:https://github.com/NVIDIA/gpu-operator[GPU Operator], supporting the creation, configuration, and management of GPUs on Kubernetes.
+
+**Computing Device Management**: Used for unified management of various heterogeneous computing devices such as NVIDIA GPUs and Ascend NPUs in Kubernetes clusters. Provides resource sharing, resource isolation, intelligent scheduling, real-time monitoring, and alerting functionalities, which can improve the utilization rate of computing device resources and reduce the operational complexity of AI clusters.
+
+**Volcano**: A container batch computing platform built on Kubernetes, primarily used for high-performance computing scenarios. It extends Kubernetes' native scheduling capabilities, providing advanced scheduling strategies, queue management, heterogeneous hardware support, and other key features for tasks requiring large-scale parallel computing such as AI machine learning, big data processing, and scientific computing, significantly improving cluster resource utilization and the operational efficiency of complex workflows.

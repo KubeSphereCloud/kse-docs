@@ -1,0 +1,176 @@
+---
+title: '关机'
+weight: 1
+---
+
+== 运维场景
+
+在需要关闭云易捷集群等运维场景下均可参考此步骤，云易捷支持自动关机和手动关机。
+
+== 注意事项
+
+* 关机操作无法中断，请慎重操作。
+* 关机前务必确保云易捷 Console 平台内所有虚拟资源已关闭，且操作日志中无执行中或等待中的任务。
+
+== 自动关机
+
+该操作适用于 Express v2.1.2 及以上版本。
+
+. 登录云易捷部署管理平台。
++
+[source,shell]
+----
+http://xx.xx.xx.xx:9998
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* 推荐使用 Chrome 浏览器。
+* xx.xx.xx.xx 为当前集群的**启动节点 IP** 地址，需根据实际情况进行修改。
+* 用户名密码：admin/zhu88jie
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在 {product_installer_name} 任一页面内，点击顶部**关机**按钮。
++
+image::/images/express/installer/shutdown_1.png[]
+
+. 若已确保云易捷 Console 平台内的所有虚拟资源均已关闭，且无正在执行或等待的任务。用户可在弹出的**关机**窗口中，点击**已检查，关机**即可。
++
+image::/images/express/installer/shutdown_2.png[]
+
+
+== 使用脚本关机
+
+该操作适用于 Express v2.1.1 及以下版本。
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，检查当前环境是否有业务正在进行。
++
+[source,shell]
+----
+python /pitrix/bin/shutdown_qingcloud.py check
+----
++
+include::../../../../../../_components/note.adoc[]
+* 返回结果中必须没有进行中或等待中的任务。
+* 若返回结果中有正在进行或等待中的任务，需等待任务完成或结束任务。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，查看并记录当前环境 FirstBox 的宿主机。
++
+[source,shell]
+----
+python /pitrix/bin/shutdown_qingcloud.py get_fb_host
+----
+
+. 确保云易捷 Console 平台内的所有虚拟资源均已关闭，且无正在执行或等待的任务，执行如下命令，停止服务。
++
+[source,shell]
+----
+python /pitrix/bin/shutdown_qingcloud.py shurt_down
+----
+
+. 关闭 FirstBox 宿主机。
++
+[source,shell]
+----
+ssh xx.xx.xx.xx
+----
++
+[source,shell]
+----
+shutdown -h 0
+----
+
+////
+== 手动关机
+
+该操作适用于 Express v2.1.1 及以下版本。
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+# ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 切换至 root 用户。
++
+[source,shell]
+----
+# sudo -i
+----
+
+. 关闭计算节点服务。
+
+.. 执行如下命令，将计算节点状态修改为 ``standby``。
++
+[source,shell]
+----
+# ./pitrix/bin/modify_hyper_status.sh hyper standby
+----
+
+.. 关闭除 galera_cluster 以外的其他服务。
++
+[source,shell]
+----
+# ./pitrix/bin/modify_hyper_status.sh hyper 'supervisorctl stop alertmanager compute_agent compute_monitor compute_proxy compute_server libvirtd neoncenter neonmonitor neonstore prometheus repl_proxy repl_server storage_proxy storage_server storage_vbr storage_vbr_proxy telegraf zk_proxy zookeeper'
+----
+
+.. 逐个关闭 galera_cluster 集群中的节点。
++
+[source,shell]
+----
+# ./pitrix/conf/nodes/neonsan-db for node in ${nodes[@]}; do /pitrix/upgrade/exec_nodes.sh ${node} 'supervisorctl stop galera_cluster; sleep 3'; done
+----
+
+.. 若使用 iCAS，需执行如下命令，检查缓存是否已写入磁盘。
++
+[source,shell]
+----
+# /pitrix/upgrade/exec_nodes.sh hyper 'casadm -P -i 1|grep Dirty'
+----
+
+. 关闭管理节点服务。
+.. 关闭 supervisor 管理的所有服务。
++
+[source,shell]
+----
+# /pitrix/upgrade/exec_nodes.sh vm 'supervisorctl stop all'
+----
+
+.. 关闭 zoocassa 相关服务。
++
+[source,shell]
+----
+# /pitrix/upgrade/exec_nodes.sh zoocassa 'service cassandra stop'
+# /pitrix/upgrade/exec_nodes.sh zoocassa '/opt/zookeeper/bin/zkServer.sh stop'
+# /pitrix/upgrade/exec_nodes.sh zoocassa 'service memcached stop'
+# /pitrix/upgrade/exec_nodes.sh zoocassa 'service redis_6379 stop;redis-cli -p 26379 shutdown'
+----
+////
+
+

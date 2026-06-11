@@ -1,0 +1,60 @@
+---
+title: "禁用成员集群的控制台"
+keywords: "Kubernetes, {ks_product}, 多集群管理, 集群, 禁用成员集群的控制台"
+description: "介绍如何禁用成员集群的控制台。"
+weight: 06
+---
+
+
+本节介绍如何禁用成员集群的{ks_product_left} Web 控制台。
+
+启用多集群管理功能后，可以配置是否允许用户登录成员集群的 Web 控制台。禁用成员集群的控制台可以避免操作冲突。
+
+
+== 前提条件link:[id=dd22b33b78cb4b3d8bd9d4b8b2e71665]
+
+:relfileprefix: ../../../../
+* {ks_product_right}平台需要启用多集群管理扩展组件。有关更多信息，请参阅xref:04-platform-management/01-extension-management/13-multi-cluster-management/01-enable-multi-cluster-management.adoc[启用多集群管理]。
+
+:relfileprefix: ./
+
+* 成员集群已被联邦集群纳管。
+* 您需要在成员集群具有 **platform-admin** 角色。
+
+== 操作步骤
+
+. 以具有 **platform-admin** 角色的用户登录该成员集群的的{ks_product_left} Web 控制台。
++
+. 将光标悬停在页面右下角的image:/images/ks-qkcp/zh/icons/hammer.svg[hammer,18,18] 图标，然后在菜单中选择 **kubectl**。
+. 在 **kubectl** 对话框，执行以下命令编辑集群配置文件：
++
+// bash
+[,bash]
+----
+kubectl edit cc ks-installer -n kubesphere-system
+----
+
+. 在集群配置文件中，将 **common:core:console:enabled** 参数设置为 **false**，然后保存⽂件。
++
+// YAML
+[,yaml]
+----
+  common:
+    core:
+      console:
+        enableMultiLogin: true
+        port: 30880
+        type: NodePort
+        clusterName: default  
+        enabled: false       # true 为启用成员集群的控制台，false 为禁用成员集群的控制台
+----
+
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+禁用过程可能需要一定时间，请等待禁用完成。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

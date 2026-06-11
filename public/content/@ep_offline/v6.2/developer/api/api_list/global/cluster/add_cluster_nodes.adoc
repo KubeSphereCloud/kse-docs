@@ -1,0 +1,98 @@
+---
+title: 添加节点（ResizeCluster扩容集群也使用该接口）（AddClusterNodes）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cluster
+| Integer
+| true
+| 集群ID
+
+| node_count
+| Integer
+| false
+| 节点数量
+
+| node_name
+| Integer
+| false
+| 节点名称
+
+| node_role
+| String
+| true
+| 节点角色
+
+| zone
+| String
+| true
+| 可用区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cluster_id
+| String
+| false
+| 集群ID
+
+| job_id
+| String
+| false
+| 集群ID
+
+| new_node_ids
+| Array
+| false
+| 新增节点ID
+
+| ret_code
+| Integer
+| false
+| 返回状态码
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "AddClusterNodes",
+  "cluster": "cl-dvdc7l9l",
+  "node_count": 2,
+  "node_name": "test",
+  "node_role": "etcd_node",
+  "zone": "qa1a"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "AddClusterNodesResponse",
+  "cluster_id": "cl-dvdc7l9l",
+  "job_id": "j-qo7yiwbvito",
+  "new_node_ids": [
+    "cln-x07uiw2k",
+    "cln-my12wl8v"
+  ],
+  "ret_code": 0
+}
+----

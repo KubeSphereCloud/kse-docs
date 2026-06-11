@@ -1,0 +1,44 @@
+---
+title: "编辑 HPA 设置"
+weight: 05
+---
+
+:ks_permission: **容器水平伸缩管理**
+:ks_navigation: **弹性伸缩 > 容器水平伸缩**
+
+
+本节介绍如何编辑 HPA 的伸缩设置。
+
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* KubeSphere 平台需要安装并启用 **Metrics Server** 扩展组件。
+
+
+== 操作步骤
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. 在需要操作的 HPA 右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑伸缩设置**。
+
+. 在**编辑伸缩设置**对话框，设置最小最大副本数、伸缩指标和伸缩行为，然后点击**确定**。
++
+--
+有关各参数的说明，请参阅link:../01-create-hpa/[创建容器水平伸缩]。
+--

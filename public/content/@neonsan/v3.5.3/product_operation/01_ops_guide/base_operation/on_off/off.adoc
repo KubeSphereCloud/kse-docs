@@ -1,0 +1,131 @@
+---
+title: "关机"
+weight: 1
+---
+
+关闭 NeonSAN 集群，不引起卷降级的步骤如下。
+
+. 关闭 NeonSAN 上层相关应用。
+* 对于 IaaS 云平台，遵循相应的关机流程，确保所有虚拟机均已关机。
+* 对于 NeonSAN 卷的物理 Oracle 集群，遵循 Oracle 的停机流程，关闭其相应的 Oracle 数据库和集群软件，确保 NeonSAN 上无 IO。
+* 对于容器平台，遵循其关机流程，关闭 kubelet、docker、docker.socket、container 等服务，确保 NeonSAN 上无 IO。
+* 对于使用 QBD 挂载 NeonSAN 卷的物理机，需停止 QBD 相关服务和应用，卸载 QBD 设备，并执行如下命令，解除 QBD 设备与卷的映射关系。
++
+[,shell]
+----
+qbd -u <pool_name>/<volume_name> -c /etc/neonsan/qbd.conf
+----
+
+. NeonSAN 的上层应用关闭完成后，登录 NeonSAN 节点，执行如下脚本，确保集群内无任何 OPEN 的卷。
++
+若无返回结果，则证明集群内的所有卷均已关闭连接。否则，需登录返回结果中的卷所在节点，检查是否有相应的服务或应用正在使用该卷，并关闭相应服务或应用。
++
+[,shell]
+----
+for volume in `neonsan list_volume --detail|grep '|'|grep -v POOL|tr -d ' '|awk -F'|' '{print $5"/"$3}'`
+do
+    list_volume_result=`neonsan list_volume_conns --volume $volume`
+    list_volume_result_lines=`echo "$list_volume_result"|wc -l`
+    if [ $list_volume_result_lines -gt 1 ]
+    then
+        echo "$volume:"
+        echo "$list_volume_result"
+        echo ""
+    fi
+done
+----
+
+. 查看 NeonSAN 集群状态，确保集群状态正常，且无正在执行的异步任务。
++
+[,shell]
+----
+neonsan list_store
+neonsan list_ssd
+neonsan list_volume -detail
+neonsan list_job
+----
++
+include::../../../../../../_components/note.adoc[]
+* 若存在 STATUS 不为 OK 的 store 节点，需调查，并解决问题。
+* 若存在 STATUS 不为 OK 的 SSD，需调查，并解决问题。
+* 若存在 STATUS 不为 OK 的 volume，需调查，并解决问题。
+* 若存在正在执行的异步任务，需等待该异步任务执行完成。
+* 最终确保所有 store，SSD，volume 的 STATUS 均为 OK，且异步任务列表中，所有任务均执行完成。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 备份数据库
++
+[,shell]
+----
+sh /opt/neonsan/backup-db.sh 192.168.2.6
+----
++
+include::../../../../../../_components/note.adoc[]
+* 若脚本 backup-db.sh 不存在，可 link:https://box.yunify.com/s/25MxH5k4kFCqNCA[获取该脚本]，并上传至节点服务器。
+* 若目录/var/log/neonsan 不存在，需手动创建目录后，再执行如上命令。
+* 192.168.2.6 为 NeonSAN 集群中的数据库节点 IP。需根据实际情况进行修改。数据库类型为 Galera，则 IP 为任一 Galera 节点 IP，数据库类型为 Xenondb，则 IP 为 Xenondb 的虚 IP。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 停止集群中的监控服务。
++
+[,shell]
+----
+supervisorctl stop prometheus
+supervisorctl stop alerter
+supervisorctl stop neonmonitor
+----
+
+. 逐个登录集群的 store 节点，停掉该节点上的 store 服务。
++
+各个 Store 节点信息可通过 ``neonsan list_store`` 进行查询。
++
+[,shell]
+----
+supervisorctl stop neonstore
+---- 
+
+. 逐个登录集群的 center 节点，停掉该节点上的 center 服务。
++
+各个 Center 节点信息可通过 ``neonsan list_center`` 进行查询。
++
+[,shell]
+----
+supervisorctl stop neoncenter
+----
+
+. 逐个登录集群的数据库节点，停掉该节点上的数据库服务。
++
+--
+* Xenondb 数据库：
++
+[,shell]
+----
+/opt/xenondb/bin/xenon_service.py stop
+----
+* Galera 数据库：
++
+[,shell]
+----
+supervisorctl stop galera_cluster
+----
+* QingStor mysql_neonsan 数据库关闭，请参考本文：“QingStor 融合部署运维 > 数据库服务 > 数据库服务的启停”相关内容。
+--
+
+. 逐个登录集群的 zookeeper 节点，停掉该节点上的 zookeeper 服务。
++
+[,shell]
+----
+supervisorctl stop zookeeper
+----
++
+include::../../../../../../_components/note.adoc[]
+Zookeeper 节点 IP 可通过 ``ssh qingstor-firstbox "cat /etc/hosts\|grep zookeeper"`` 命令查看。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 将物理服务器逐个关机，若有断电需求，切断相应服务器电源即可。
+
+
+
+
+
+

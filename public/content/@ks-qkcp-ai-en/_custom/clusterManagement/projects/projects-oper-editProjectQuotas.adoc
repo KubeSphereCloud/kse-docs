@@ -1,0 +1,37 @@
+// :ks_include_id: 5e0c07e44f1440999412a1ec7581f173
+. In the **Edit Project Quota** dialog box, set the project resource reservations and resource limits.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|CPU Reservation
+|The maximum total CPU reservation for all containers in the project, in cores.
+
+|CPU Limit
+|The maximum total CPU limit for all containers in the project, in cores.
+
+|Memory Reservation
+|The maximum total memory reservation for all containers in the project, in GiB.
+
+|Memory Limit
+|The maximum total memory limit for all containers in the project, in GiB.
+
+|GPU Type
+|The type of GPU that containers in the project can use.
+
+|GPU Limit
+|The maximum number of GPUs that all containers in the project can use, in GPUs.
+|===
+--
+
+. In the **Storage Resource Quota** area of the **Edit Project Quota** dialog box, set the total storage resource and storage class-related resources.
+
+. In the **Application Resource Quota** area of the **Edit Project Quota** dialog box, set the maximum number of application resources for the project, and then click **OK**.
++
+--
+* Click **Add** to set the maximum number for multiple types of application resources.
+
+* You can set the maximum number of pods, Deployments, StatefulSets, DaemonSets, Jobs, CronJobs, PersistentVolumeClaims, Services, Ingresses, Secrets, and ConfigMaps in the project.
+--

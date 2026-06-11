@@ -1,0 +1,114 @@
+---
+title: 安装 qke_apiserver
+weight: 2
+---
+
+
+`qke_apiserver` 服务可以在安装{product_name}时一起部署，也可以在{product_name}安装完成后再部署。该服务只需在{product_name}的 Global Zone 的 Webservice 节点部署即可。
+
+include::../../../../../_components/note.adoc[]
+
+* 如何在安装部署{product_name}的同时，安装 `qke_apiserver`，可以参考link:../../../installation/[《{product_name}安装部署指南》]。
+* 如何在已经部署完成的{product_name}上安装 `qke_apiserver`，可参考本文。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+== 步骤一：安装 qke_apiserver
+
+
+
+. 登录{product_name} Global Zone 的 FirstBox 节点。
++
+include::../../../../../_components/note.adoc[]
+
+登录方式可咨询{product_name}安装部署人员。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行以下命令，创建配置文件 `vm_variables.<zone_id>.yaml`。其中，`<zone_id>` 为 Global Zone 的 ID，需根据实际情况进行修改。
++
+[source,shell]
+----
+cp -f /pitrix/config/templates/vm_variables.template.yaml /pitrix/config/vm_variables.<zone_id>.yaml
+----
+
+. 修改配置文件中的参数 `deploy_qkeapi`，将其设置为 `1`。
++
+[source,shell]
+----
+......
+  # Please read the document [how_to_deploy_qkeapi.md]
+  # deploy qkeapi, 0(no) or 1(yes), 0 is default
+  deploy_qkeapi: 1
+......
+----
+
+. 执行以下命令，安装部署 `qke_apiserver`。其中，`/pitrix/config/vm_variables.<zone_id>.yaml` 为上一步创建的配置文件，需根据实际情况进行修改。
++
+[source]
+----
+/pitrix/cli/deploy-qingcloud-component.py -v /pitrix/config/vm_variables.<zone_id>.yaml
+----
++
+include::../../../../../_components/note.adoc[]
+
+此步骤耗时较长，请耐心等待。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行以下命令，查看部署任务的执行状态。
++
+[source]
+----
+/pitrix/cli/get-deploy-qingcloud-component-status.py
+----
++
+回显如下，`status` 字段为 `successful` 时，表示任务执行成功。
++
+image::/images/ep_offline/qke_install/qke_install_5.png[]
++
+include::../../../../../_components/note.adoc[]
+
+* `status` 字段为 `step1`，表示任务正在执行中，请耐心等待，稍后重新执行该命令查看状态。
+* 若状态异常，请查看如下日志，检查报错原因并修复。若仍不能解决，请联系技术支持。
+** 详细日志文件，请查看 `/pitrix/log/deploy` 路径下，对应的 Job ID 日志文件。
+** 简略日志查看，可执行命令行 `/pitrix/cli/get-deploy-qingcloud-component-log.py`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+
+== 步骤二：确认服务运行状态
+
+. 登录{product_name} Global Zone 的 FirstBox 节点。
++
+include::../../../../../_components/note.adoc[]
+
+登录方式可咨询{product_name}安装部署人员。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令行，查看 `qke_apiserver` 服务的运行状态。其中，`<zone_id>` 为当前 Global Zone 的 Zone ID，需根据实际情况进行填写。
++
+[source,shell]
+----
+fb exec_nodes <zone_id>-webservice 'supervisorctl status qke_apiserver'
+----
++
+
+. 根据命令回显内容，确认各节点的 `qke_apiserver` 服务的运行状态。
++
+image::/images/ep_offline/qke_install/qke_install_6.png[]
++
+include::../../../../../_components/note.adoc[]
+
+* 各节点的 `qke_apiserver` 服务的运行状态均需为 `RUNNING`，表示服务运行正常。
+* 若状态异常，需检查报错原因并修复。若仍不能解决，请联系技术支持。
+
+include::../../../../../_components/table_footer.adoc[]
+

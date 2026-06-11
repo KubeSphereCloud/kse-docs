@@ -1,0 +1,57 @@
+---
+title: "查看数据库集群状态"
+weight: 1
+---
+
+. 逐个登录数据库集群节点。
+. 数据库服务的 supervisor 配置文件路径。
++
+[,shell]
+----
+/qingstor/etc/supervisord.d/neonsan-mysql.ini
+----
+. 执行如下命令查看集群状态。
++
+--
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
+回显示例
+[,shell]
+----
+cluster qingstor
+started nodes:
+	 172.16.0.2:3307
+	 172.16.0.3:3307
+	 172.16.0.4:3307
+live nodes:
+	 172.16.0.2:3307
+	 172.16.0.3:3307
+	 172.16.0.4:3307
+arbitors:
+----
+--
++
+* `started nodes`:数据库集群中所有节点信息，包含IP与端口号。
+* `live nodes`:集群存活的节点，在没有 arbitor 节点的情况下，live nodes 下的节点与 started nodes 下的节点应保持一一对应。
+* `arbitors`: arbitor节点，即仲裁节点。
+
+.  查看数据库服务配置文件。
++
+[,shell]
+----
+cat /qingstor/etc/xtradb-neonsan.cnf
+----
+. 查看数据库服务日志文件。
++
+[,shell]
+----
+cat /qingstor/log/mysql/neonsan-mysql-error.log
+----
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+---
+title: "查询系统端口状态"
+weight: 14
+---
+
+== 操作步骤
+
+. 登录 NeonSAN 集群任一节点。 
+
+. 获取存储系统所有业务和数据端口的状态信息。所有端口状态均为 OK 表示正常。
++
+* NeonSAN v2.2.0 及以上版本
++
+[,shell]
+----
+neonsan list_port -all
+----
++
+image::/images/neonsan/polling_guide_39.png[,70%]
+
+* NeonSAN v2.2.0 以下版本
++
+[,shell]
+----
+curl "http://$(qfcip):2600/qfa?op=list_port" |python -m json.tool
+----
++
+image::/images/neonsan/polling_guide_40.png[,70%]
+
+== 相关说明
+
+NeonSAN 建议双网卡，四网口。其中两个为前端业务端口，建议使用 bond， 两个为内部数据端口。CLI 的 list_port 显示的为每个节点的业务端口， 指定-all 参数可显示所有端口状态。API 的 list_port 则是将所有端口都 列举出来。 +
+所有端口的状态都为 OK，即表示端口状态正常。
+
+

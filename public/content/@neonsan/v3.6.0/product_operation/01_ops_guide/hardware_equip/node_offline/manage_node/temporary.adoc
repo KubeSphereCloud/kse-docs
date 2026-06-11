@@ -1,0 +1,159 @@
+---
+title: "临时下线"
+weight: 1
+---
+
+仅需停止该节点上的管理服务即可。详细操作步骤如下。
+
+. 逐个登录 Zookeeper 服务节点，查看该节点的 Zookeeper 服务。
+.. 查看 Zookeeper 集群状态.
++
+[,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
++
+include::../../../../../../../_components/note.adoc[]
+若存在 Zookeeper 服务异常的节点，需调查原因并解决后，再次执行该步骤。
+include::../../../../../../../_components/table_footer.adoc[]
+
+.. 确认 center/store 在 Zookeeper 中的信息。
++
+[,shell]
+----
+/opt/zookeeper/bin/zkCli.sh
+ls /neonsan/cluster_name/stores/
+ls /neonsan/cluster_name/centers/
+----
++
+include::../../../../../../../_components/note.adoc[]
+* cluster_name 为 NeonSAN 集群名称，需根据实际情况进行修改。
+* 需确认 center/store 在 Zookeeper 中的信息是否完整。若与实际情况不符，需调查原因并解决后，再次执行该步骤。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 停止待下线节点上的 Zookeeper 服务。
++
+[,shell]
+----
+/opt/zookeeper/bin/zkServer.sh stop
+----
+
+. 逐个登录 Zookeeper 服务其余节点，查看该节点的 Zookeeper 服务。
++
+[,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 各节点 Zookeeper 服务正常，且集群中仅一个 leader 节点，其余均为 follower 节点。
+* 若存在 Zookeeper 异常的节点，需调查原因并解决后，再次执行该步骤。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 登录数据库服务节点，手动备份数据库。
+.. 查看定时备份的配置。
++
+[,shell]
+----
+crontab -e
+----
+. 根据定时备份的配置，手动执行备份命令。
++
+[,shell]
+----
+sh /opt/neonsan/backup-db.sh 192.168.101.25 
+----
++
+include::../../../../../../../_components/note.adoc[]
+根据定时备份配置，修改相应的备份命令。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 登录数据库服务节点，查看数据库集群状态。
++
+若存在数据库服务异常的节点，需调查原因并解决后，再次执行该步骤。
++
+--
+* Qingstor Mysql 数据库
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
+* Galera 数据库
++
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
+
+* Xenondb 数据库
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
+--
+
+. 停止待下线节点的数据库服务。
++
+--
+* Qingstor Mysql 数据库
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql stop
+----
+* Galera 数据库
++
+[,shell]
+----
+/opt/galera/bin/galera_cluster stop
+----
+
+* Xenondb 数据库
++
+[,shell]
+----
+/opt/xenondb/bin/xenon_service.py stop
+----
+--
+
+. 登录其他数据库服务节点，查看数据库集群状态。
++
+除待下线节点外，若存在数据库服务异常的节点，需调查原因并解决后，再次执行该操作。
++
+--
+* Qingstor Mysql 数据库
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
+* Galera 数据库
++
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
+
+* Xenondb 数据库
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
+--
+
+. 确认 NeonSAN 集群状态正常。
++
+[,shell]
+----
+neonsan list_store
+neonsan list_ssd
+neonsan list_volume
+----
++
+include::../../../../../../../_components/note.adoc[]
+集群服务正常，无降级卷。
+include::../../../../../../../_components/table_footer.adoc[]
+

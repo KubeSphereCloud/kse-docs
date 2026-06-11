@@ -1,0 +1,63 @@
+---
+title: "View Built-in Dashboards"
+keywords: "Kubernetes, {ks_product-en}, Grafana, monitoring, built-in dashboard, observability"
+description: "Learn how to view the built-in Dashboards provided by the extension."
+weight: 01
+---
+
+The Grafana for WhizardTelemetry extension comes with multiple Grafana Dashboards that allow direct querying of monitoring data for Kubernetes and KubeSphere without the need for manual configuration of Grafana Dashboards.
+
+== Steps
+
+. After logging into the Grafana console, click **Dashboards** in the left navigation pane to view all built-in Dashboard templates, which are in four directories: `aicp`, `kube-prometheus-stack`, `whizard-loki`, and `whizard-monitoring`.
++
+--
+image:/images/ks-qkcp/zh/v4.1.2/grafana/dashboard-list.png[dashboard-list]
+
+[%header,cols="1a,3a"]
+|===
+|Directory |Description
+
+|aicp
+|Used for QingCloud AI Computing Platform, please view monitoring panels in the "AI Computing Management" platform.
+
+|kube-prometheus-stack
+|Visualizes monitoring data for Kubernetes.
+
+|whizard-loki
+|Visualizes logs, audits, events, and notification history of KubeSphere stored in Loki.
+
+|whizard-monitoring
+|Multi-cluster monitoring adapted for Whizard and KubeSphere.
+|===
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+* After installing the **WhizardTelemetry Monitoring** extension, the Dashboards in **kube-prometheus-stack** and **whizard-monitoring** will display monitoring data.
+* To display monitoring data in the Dashboards of **whizard-loki**, see link:../../17-loki/01-display-loki-data[Grafana Loki for WhizardTelemetry].
+|===
+--
+
+. Click on a Dashboard template in the directory to view the corresponding monitoring data.
++
+Below is an example using the **KubeSphere Nodes** template from the **whizard-monitoring** directory to introduce the Dashboard page.
+
+. The **KubeSphere Nodes** dashboard displays monitoring information for each node, including resource utilization of CPU, memory, disk, and pods, disk IOPS, disk throughput, network bandwidth, etc.
++
+image:/images/ks-qkcp/zh/v4.1.2/grafana/node-dashboard.png[node-dashboard]
+
+. Click **data source**, **cluster**, and **node** at the top to select data from specified sources, clusters, and nodes.
+. Click image:/images/ks-qkcp/zh/icons/time-light.png[time-light,18,18] in the upper-right corner to set the time range for data display, supporting custom time periods.
+. Click image:/images/ks-qkcp/zh/icons/refresh-light.png[refresh-light,18,18] in the upper-right corner to refresh the data on the dashboard. Click image:/images/ks-qkcp/zh/icons/chevron-down.svg[chevron-down,18,18] to set the interval for automatic data refresh.
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] in the upper-right corner of each panel to independently view, edit, share, inspect, delete, etc., the specified panel.
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|For more information on Dashboards, see link:https://grafana.com/docs/grafana/latest/dashboards/[Grafana Documentation].
+
+|===

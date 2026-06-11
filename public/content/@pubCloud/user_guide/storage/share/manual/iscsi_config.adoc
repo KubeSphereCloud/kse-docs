@@ -1,0 +1,118 @@
+---
+title: "步骤 3：配置 iSCSI 客户端"
+weight: 3
+---
+
+该章节主要介绍如何在 Linux 和 Windows 两种操作系统上配置 iSCSI 客户端来访问 Virtual SAN。
+
+== Linux 系统
+
+. 安装客户端软件
++
+[,shell]
+----
+// Redhat/Centos 系统： 
+yum install -y iscsi-initiator-utils
+
+// Debian/Ubuntu 系统: 
+apt-get install open-iscsi
+----
+
+. 配置 initiator name。
+.. 执行如下命令，编辑 ``initiatorname.iscsi`` 文件。
++
+[,shell]
+----
+vi /etc/iscsi/initiatorname.iscsi
+----
+.. 加入 ``InitiatorName`` 字段，如下所示。 若用户在link:../create_target[创建目标门户]时设置了 iSCSI 客户端标识，请保证两处的名称一致，否则后面的登录操作会失败。
++
+[,shell]
+----
+InitiatorName=iqn.1993-08.org.debian:01:967eaffe29d7
+----
++
+
+include::../../../../../_components/note.adoc[]
+可以用 iscsi-iname 命令生成一个 initiator name，例如： +
+`iscsi-iname （以缺省前缀生成名称）` +
+`iscsi-iname -p iqn.2005-03.com.qingcloud （以指定的前缀生成名称）`
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 发现目标。默认情况下，iSCSI 发起方和目标方之间通过端口 3260 连接。iSCSI 发起方和目标方建立连接以后，可以进行登录节点操作。
++
+
+include::../../../../../_components/note.adoc[]
+* iSCSI 命令需要以 root 身份运行（下同）。
+* Virtual SAN 服务器 IP 可进入其详情页面进行查看。
+
+include::../../../../../_components/table_footer.adoc[]
++
+[,shell]
+----
+# iscsiadm -m discovery -t st -p <Virtual SAN 服务器 IP>
+# iscsiadm -m node
+----
+
+. 登录到目标门户。
++
+
+[,shell]
+----
+# iscsiadm -m node -T <目标 IQN>  -p  <Virtual SAN 服务器 IP>  --login
+# iscsiadm -m session
+----
+
+. 完成上述步骤后，执行 ``lsblk`` 命令，你可以发现本地多了一块或多块硬盘， 你可以像本地硬盘一样使用它（们）。
++
+
+include::../../../../../_components/note.adoc[]
+如果你想在客户端重启时自动登录，请执行下面的命令： +
+`iscsiadm -m node -T <目标IQN>  -p  <Virtual SAN 服务器IP> --op update -n node.startup -v automatic`
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 卸载、登出、删除目标。
++
+[,shell]
+----
+# umount /data (/data是共享存储挂载的目录)
+# iscsiadm -m node -T  <目标IQN>   -p <Virtual SAN 服务器IP> --logout
+# iscsiadm -m node -T <目标IQN> -p  <Virtual SAN 服务器IP> --op=delete
+----
++
+
+include::../../../../../_components/note.adoc[]
+如果你想登出所有的目标，请执行下面的命令： `iscsiadm -m node --logout`
+
+include::../../../../../_components/table_footer.adoc[]
+
+== Windows 系统
+
+. 安装客户端软件。
++
+* 在 Windows Server 2008 R2 中，可以通过执行以下操作之一访问 Microsoft iSCSI initiator 的界面：
++
+** 依次单击 *开始* > *控制面板* > *经典视图* > *iSCSI initiator*。
+** 依次单击 *开始* > *管理工具* > *iSCSI initiator*。
+
+* 在 Windows 7 中，可以通过执行以下操作之一访问 Microsoft iSCSI initiator 的界面： +
++
+依次单击 *开始* > *控制面板*，在搜索字段中键入 iSCSI，然后在 *管理工具* 中单击 *iSCSI initiator*。
+
+. 发现目标:
+.. 点击程序的发现页面，然后点击 *发现门户...*。
+.. 在弹出的窗口中，可以输入服务器地址。
+.. 跳转到目标器页面，这是会自动显示服务器的所有有效 target。
+
+. 登录到目标:转到目标器页面，选中之前创建的目标，然后点击**连接**。
++
+
+include::../../../../../_components/note.adoc[]
+默认勾选**将此连接添加到收藏目标列表**，即系统启动会自动连接存储设备。
+
+include::../../../../../_components/table_footer.adoc[]
++
+点击**确定**，就能够连接。即可像操作普通磁盘一样，对其格式化，分区等。
+

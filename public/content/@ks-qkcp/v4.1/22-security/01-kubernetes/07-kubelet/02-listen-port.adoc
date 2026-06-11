@@ -1,0 +1,16 @@
+---
+title: "通信端口"
+weight: 02
+---
+
+编辑配置文件，设置监听端口。
+
+[,bash]
+----
+# 查找文件配置
+systemctl status kubelet
+vim /var/lib/kubelet/config.yaml
+
+# 设置监听端口
+address: "192.168.200.2"
+----

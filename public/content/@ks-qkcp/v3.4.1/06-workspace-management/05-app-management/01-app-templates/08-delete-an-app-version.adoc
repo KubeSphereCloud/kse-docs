@@ -1,0 +1,73 @@
+---
+title: "删除应用版本"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 企业空间, 应用模板, 删除应用版本"
+description: "介绍如何在应用模板中删除应用版本。"
+weight: 08
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 7ea60c62b1074c7887b9dbede9fc7414
+:ks_xref_id: ec123197d2ff4206aac7575709876659
+:ks_comp: ../../../../components/
+:ks_title: 删除应用版本
+:ks_keywords: Kubernetes, {ks_product}, 企业空间, 应用模板, 删除应用版本
+:ks_description: 介绍如何在应用模板中删除应用版本。
+:ks_weight: 08
+:ks_icon:
+:ks_permission: **应用模板管理**
+:ks_navigation: **应用管理 > 应用模板**
+
+
+本节介绍如何在应用模板中删除应用版本。
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+应用版本删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=171772dd16e24af7ae1789ceede30279]
+
+
+:relfileprefix: ../../../../
+* 您需要加入一个企业空间并在企业空间中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:06-workspace-management/06-workspace-settings/03-workspace-members/_index.adoc[企业空间成员]、xref:06-workspace-management/06-workspace-settings/04-workspace-roles/_index.adoc[企业空间角色]和xref:06-workspace-management/06-workspace-settings/05-departments/_index.adoc[部门]。
+
+// include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-prer-enableAppManagment.adoc[]
+
+ifeval::["{file_output_type}" == "html"]
+
+* 如果需要删除的应用版本已发布到应用商店，您需要联系应用商店管理员将应用版本下架。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+* 如果需要删除的应用版本已发布到应用商店，您需要联系应用商店管理员将应用版本下架。有关更多信息，请参阅《{ks_product_right}平台管理指南》的“应用商店管理”章节。
+
+endif::[]
+
+
+== 操作步骤link:[id=10826b1bed5d4e2599afefa1b1e435f5]
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. 在应用模板详情页面右侧的**版本**页签，点击需要删除的应用版本，在展开的区域中点击**删除**，然后在弹出的对话框点击**确定**。

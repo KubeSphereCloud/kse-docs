@@ -1,0 +1,64 @@
+---
+title: '检查存储池'
+weight: 5
+---
+. 登录集群的任一节点。
+
+. 执行如下命令，查看集群内所有的存储池。
++
+[,shell]
+----
+neonsan list_rg
+RG count:  2
++-------+---------+
+| RG ID | RG NAME |
++-------+---------+
+|     1 | SSD0    |
+|     2 | testSSD |
++-------+---------+
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* 返回结果中 `RG NAME` 所对应的值为存储池名，`RG ID`即为存储池所对应的 ID。
+* 可根据 *配置新增节点 > 生成配置* 章节中，配置的新增节点所在存储名进行查看，一般情况下，新增节点会在集群原有存储池中，或命名形式如 `testxxx` 的存储池中。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，查看新增的节点是否在步骤 2 查询到的存储池内。
++
+[,shell]
+----
+neonsan list_store -rg ${rg_id}
+----
++
+image::/images/neonsan/auto_exp_5.png[auto_exp_5]
++
+
+include::../../../../../../_components/note.adoc[]
+* 此处的 ${rg_id} 为步骤 2 查询到的 `RG ID`，需根据实际情况进行填写。
+* 注意查看返回结果中的 MNGT IP 字段，需包含所有新增节点的管理 IP 地址。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，查看新扩容存储池是否有 Label。
++
+[,shell]
+----
+neonsan list_label
+label count:  1
++------------+---------+--------------+
+| LABEL NAME | RG NAME |     FREE     |
++------------+---------+--------------+
+| SSD        | SSD0    | 257698037760 |
++------------+---------+--------------+
+----
++
+include::../../../../../../_components/note.adoc[]
+一般情况下，新扩容的临时存储池名，形如 `testXXX`。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+
+

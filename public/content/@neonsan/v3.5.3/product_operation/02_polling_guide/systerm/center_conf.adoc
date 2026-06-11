@@ -1,0 +1,30 @@
+---
+title: "查看 Center 配置信息"
+weight: 2
+---
+
+. 登录集群任一节点查看 Center 节点。
++
+[,shell]
+----
+neonsan list_center
+----
+. 逐个登录 NeonSAN Center 节点。 
+
+. 输入如下命令，查看 Center 的配置信息。
++
+[,shell]
+----
+cat /etc/neonsan/center.conf 
+----
+
+. 部分关键配置信息。
++
+image::/images/neonsan/polling_guide_47.png[,70%]
+
++
+include::../../../../../_components/note.adoc[]
+此处所配置的 IP 地址需与各个 Store 节点上的 qbd.conf 和 store.conf 以及 Hyper 节点上的 qbd.conf 中的 ``[zookeeper].ip`` 保持一致。
+include::../../../../../_components/table_footer.adoc[]
+
+

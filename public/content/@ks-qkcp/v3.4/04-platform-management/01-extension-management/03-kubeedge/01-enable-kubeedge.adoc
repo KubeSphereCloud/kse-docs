@@ -1,0 +1,82 @@
+---
+title: "启用 KubeEdge"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, KubeEdge, 启用 KubeEdge"
+description: "介绍如何启用 KubeEdge 扩展组件。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 7aa7807384f14981860895f6f0f26fec
+:ks_xref_id: 1d0e8d4642dd4e65a1fb83932ddb78b8
+:ks_comp: ../../../../components/
+:ks_title: 启用 KubeEdge
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, KubeEdge, 启用 KubeEdge
+:ks_description: 介绍如何启用 KubeEdge 扩展组件。
+:ks_weight: 01
+:ks_icon:
+
+
+本节介绍如何启用 KubeEdge 扩展组件。
+
+
+== 前提条件link:[id=f97165e9bbbe43b9bd1a131ebc156f03]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=5f537e44d73848dfb409383dc121931b]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-setParametersInCc.adoc[]
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  edgeruntime:
+    enabled: true
+    kubedge:
+      enabled: true
+      cloudCore:
+        cloudHub:
+          advertiseAddress:
+            - "<external IP address>"
+        service:
+          cloudhubQuicNodePort: "30001"
+          cloudhubHttpsNodePort: "30002"
+          cloudstreamNodePort: "30003"
+          tunnelNodePort: "30004"
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* 请将 <external IP address> 替换为集群节点的外部访问 IP 地址。
+
+* KubeEdge 的相关服务通过节点端口 **30001**、**30002**、**30003** 和 **30004** 对外暴露。请确保边缘节点可以通过 <external IP address> 和上述端口访问 KubeEdge 相关服务。
+
+* KubeEdge 启用后，集群导航栏将显示**边缘节点**选项。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

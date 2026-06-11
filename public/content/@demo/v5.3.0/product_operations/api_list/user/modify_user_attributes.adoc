@@ -1,0 +1,208 @@
+---
+title: modify（ModifyUserAttributes）
+weight: 25
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| address
+| String
+| false
+| 地址
+
+| birthday
+| Integer
+| false
+| 生日
+
+| change_passwd_first_login
+| Integer
+| false
+| 是否需要初次登录修改密码
+
+| channel
+| String
+| false
+| 
+
+| company_name
+| String
+| false
+| 公司名称
+
+| company_phone
+| String
+| false
+| 公司电话
+
+| crm_owner
+| String
+| false
+| 
+
+| email
+| String
+| false
+| 邮件
+
+| force
+| Integer
+| false
+| 
+
+| gender
+| String
+| false
+| 性别
+
+| gravatar_email
+| String
+| false
+| 
+
+| industry_category
+| String
+| false
+| 分类
+
+| lang
+| String
+| false
+| 语言类型
+
+| nologin
+| Integer
+| false
+| 是否免密登录
+
+| notify_email
+| String
+| false
+| 通知邮件地址
+
+| paid_mode
+| String
+| false
+| 付款模式
+
+| phone
+| String
+| false
+| 电话
+
+| preference
+| Integer
+| false
+| 
+
+| privilege
+| Integer
+| false
+| 特权
+
+| rating
+| Integer
+| false
+| 折扣率
+
+| remarks
+| String
+| false
+| 备注
+
+| role
+| String
+| false
+| 角色
+
+| sale_type
+| String
+| false
+| 销售类型
+
+| source
+| String
+| false
+| 来源
+
+| support_engineer
+| String
+| false
+| 支持工程师
+
+| user
+| String
+| false
+| 用户
+
+| user_name
+| String
+| false
+| 用户名
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "address": "ChinaChengDu",
+  "birthday": 0,
+  "change_passwd_first_login": 0,
+  "channel": "channel_0",
+  "company_name": "company_name_0",
+  "company_phone": "157******",
+  "crm_owner": "crm_owner_0",
+  "email": "4743*****",
+  "force": 0,
+  "gender": "male",
+  "gravatar_email": "4743*****",
+  "industry_category": "Education",
+  "lang": "ZH_CN",
+  "nologin": 0,
+  "notify_email": "4743*******",
+  "paid_mode": "pre_paid",
+  "phone": "157*******",
+  "preference": 0,
+  "privilege": 0,
+  "rating": 0,
+  "remarks": "",
+  "role": "role",
+  "sale_type": "public",
+  "source": "source_0",
+  "support_engineer": "engineer_0",
+  "user": "admin",
+  "user_name": "user_name"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyUserAttributesResponse",
+  "ret_code": 0,
+  "user_id": "user_id"
+}
+----

@@ -1,0 +1,58 @@
+---
+title: 删除IAM用户（DeleteIAMUsers）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| users
+| Array
+| true
+| IAM用户ID列表
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| users
+| Array
+| false
+| IAM用户ID列表
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeleteIAMUsers",
+  "users": [
+    "iamu-6ktnazef"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteIAMUsersResponse",
+  "ret_code": 0,
+  "users": [
+    "iamu-6ktnazef"
+  ]
+}
+----

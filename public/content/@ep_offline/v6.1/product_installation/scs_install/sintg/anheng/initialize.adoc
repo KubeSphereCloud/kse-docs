@@ -1,0 +1,55 @@
+---
+title: "初始化安恒云"
+weight: 50
+---
+
+1. 进入安恒云管理控制台登录页面。
++
+image::/images/ep_offline/scs_install/sintg_anheng_05.png[]
+2. 输入密码后，点击保存并进入控制台。
++
+
+include::../../../../../../_components/note.adoc[]
+管理控制台默认账户为 `superadmin`；密码可以自定义设置，或者使用默认的 `Zhu88jie@`。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+3. 点击立即开始初始化，进行页面初始化。
++
+image::/images/ep_offline/scs_install/sintg_anheng_06.png[]
+
+4. 勾选希望使用的代理IP，点击**下一步**。
++
+
+include::../../../../../../_components/note.adoc[]
+* 如果安恒云虚拟机绑定了公网 IP：此处勾选**公网 IP 地址**；若没有可选的值，勾选``其他 IP``，并填入公网 IP 地址。
+* 配置了隧道代理，此处才会有 ``127.0.0.1``，可根据实际情况选择勾选虚拟机的 IP 或 127.0.0.1。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/ep_offline/scs_install/sintg_anheng_07.png[]
+5. 配置“网盘”和“审计日志”的存储位置。本地存储和公有云对象存储二选一。
++
+image::/images/ep_offline/scs_install/sintg_anheng_08.png[]
++
+* 选择本地存储
++
+image::/images/ep_offline/scs_install/sintg_anheng_09.png[,60%]
++
+* 选择公有云对象存储
++
+image::/images/ep_offline/scs_install/sintg_anheng_10.png[,60%]
+6. 存储位置配置完成后，点击**下一步**。
+7. 设置业务组织（团队）信息。
++
+参数说明：
++
+* **团队名称**：填写 `qingcloud`。
+* **团队管理员用户**：默认使用 `admin`。
+* **管理员密码**：可以自定义设置，或者使用默认的 `Zhu88jie@`。
+
++
+image::/images/ep_offline/scs_install/sintg_anheng_11.png[]
+8. 点击**下一步**，配置完成。
++
+image::/images/ep_offline/scs_install/sintg_anheng_12.png[]

@@ -1,0 +1,101 @@
+---
+title: "服务状态检查"
+weight: 3
+---
+
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统各节点服务均正常运行。
+
+|预置条件	
+|QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+
+|测试过程
+a|
+. 登录 NeonSAN 各节点服务器。
+. 查看系统各服务运行状态。
++
+[source,shell]
+----
+supervisorctl status
+----
+. 检查 keepalived 服务运行状态。
++
+[source,shell]
+----
+systemctl status keepalived.service
+----
+. 重启主机，查看各服务是否正常重启。
++
+[source,shell]
+----
+supervisorctl status
+----
++
+[source,shell]
+----
+systemctl status keepalived.service
+----
+. 查看各节点间链接是否建立。
++
+[source,shell]
+----
+curl http://localhost:2601/debug?op=list_peer
+----
+. 查看各节点的磁盘空间。
++
+[source,shell]
+----
+neonsan list_ssd
+----
+. 检查 monitor 服务能正常告警。
++
+* 停 store 服务。
++
+[source,shell]
+----
+supervisorctl stop neonstore
+----
+* 查看节点其他服务运行状态。
++
+[source,shell]
+----
+supervisorctl status
+----
+* 登录配置的告警邮箱，查看邮件信息。
+* 恢复节点的store服务。
++
+[source,shell]
+----
+supervisorctl start neonstore
+----
+
+|预期结果	
+a|
+. 各节点可正常登录。
+. 系统各服务运行状态均为 ``RUNNING`` 状态。
+. keepalived 服务运行状态为 ``running`` 状态。
+. 重启主机后，系统各服务陆续启动，启动后，运行状态均为 ``RUNNING`` 状态。
+. 各存储池内节点间链接正常建立，链接个数应该为：``（当前节点所在存储池节点总数 - 1）* 数据口个数 * 2``。 +
+示例：若当前节点所在存储池中节点总数为 4，且每个节点的 store.conf 文件中配置的数据口（即 rep_port 数）为 2，则根据链接个数计算公式，测试过程步骤 5 查询结果中每个节点的链接数应为 (4-1)*2*2=12。
+. 各节点磁盘空间与实际配置的磁盘空间大小一致。
+. 停一个节点的 store 服务后，不影响系统其它服务，且配置的告警邮箱收到 store 节点异常的告警邮件。恢复节点的 store 服务后，告警邮箱收到异常已解决邮件。邮箱收到告警邮件的时间会有延迟，与 monitor 配置的时间间隔有关。
++
+[source,shell]
+----
+cat /etc/neonsan/monitor.conf \| grep timeInterval
+----
++
+[source,shell]
+----
+timeInterval=3000
+----
+
+|验证结果	
+|
+
+|备注	
+|
+|===

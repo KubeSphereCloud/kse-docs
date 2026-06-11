@@ -1,0 +1,36 @@
+---
+title: "镜像"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 镜像,"
+description: "介绍{ks_product_both}Web 控制台的镜像管理功能。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 9943b048a60b4f058135ae148879a112
+:ks_xref_id: 2c35b3251ace44d69fc6e5385b09aead
+:ks_comp: ../../../../components/
+:ks_title: 镜像
+:ks_description: 介绍{ks_product_both}Web 控制台的镜像管理功能。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 镜像,
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+虚拟机镜像是虚拟机的一种标准交付物，用于打包虚拟机相关配置及其依赖的环境。不同的镜像可以包含不同的操作系统配置，如 Fedora、CentOS 和 Ubuntu 等。{ks_product_abbr_full_right}提供的镜像分为系统镜像、自有镜像、共享镜像三种类型。各镜像类型间的区别如下：
+
+[cols='1a,3a']
+|===
+|类型 |描述
+
+|系统镜像
+|{ks_product_right}提供的官方镜像或 **admin** 用户上传的所有镜像。平台内的其他账户在创建虚拟机时可直接调用系统镜像创建虚拟机。
+
+|自有镜像
+|您通过复制功能创建的镜像或从本地导入的自定义镜像。只有自有镜像的创建者可以使用、共享、复制和删除该镜像。
+
+|共享镜像
+|其他{ks_product_both}用户共享给您的镜像。
+|===

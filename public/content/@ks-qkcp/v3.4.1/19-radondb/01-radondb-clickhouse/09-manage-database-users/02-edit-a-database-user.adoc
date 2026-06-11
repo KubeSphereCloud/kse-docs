@@ -1,0 +1,69 @@
+---
+title: "编辑数据库用户"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 编辑数据库用户"
+description: "介绍如何编辑数据库用户。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 1332981703504b729a714193aae10369
+:ks_xref_id: 90b80be0f0ac4d7d90dfdcfb7e769821
+:ks_comp: ../../../../components/
+:ks_title: 编辑数据库用户
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 编辑数据库用户
+:ks_description: 介绍如何编辑数据库用户。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何编辑数据库用户。
+
+
+== 前提条件link:[id=756400ce67b942ccb0a27d838074bb2e]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbClickhouse/radondbClickhouse-prer-installRadondbClickHouse.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbClickhouse/radondbClickhouse-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=ecf06636066342f3ae7a044376876387]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbClickhouse/radondbClickhouse-oper-openDetailsPage.adoc[]
+
++
+
+. 在需要编辑的用户右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑**。
+
++
+
+. 在**编辑用户**对话框，设置用户名和密码，然后点击**确定**。
++
+--
+include::../../../../_custom/radondb/radondbClickhouse/radondbClickhouse-para-usernamePassword.adoc[]
+--

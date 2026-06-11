@@ -1,0 +1,162 @@
+---
+title: "容器垂直伸缩 (VPA) 最佳实践"
+weight: 10
+---
+
+如果您希望根据 Pod 实际的资源使用情况，动态调整和优化资源配置，以确保 Pod 能够调度到资源充足的节点上，建议您为业务容器开启垂直伸缩 VPA（Vertical Pod Autoscaler）功能。VPA 能够监控 Pod 的资源消耗模式，灵活推荐 CPU 和内存资源分配的配置，并在适当的情况下自动进行调整，而不调整 Pod 的副本数量。这种能力更适用于需要稳定资源配置的有状态应用的扩容等场景。
+
+== 使用容器垂直伸缩 (VPA)
+
+创建 `VerticalPodAutoscaler` 资源并关联工作负载，稍后即可通过 `status.recommendation` 获取推荐值，VPA 将根据 `spec.updatePolicy` 执行更新策略。
+
+操作步骤：在**创建容器垂直伸缩**对话框中，点击**编辑 YAML**，输入以下内容并保存。
+
+[source,yaml]
+----
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: nginx-vpa
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       Deployment
+    name:       nginx
+  updatePolicy:
+    updateMode: "Auto"
+status:
+  conditions:
+  - lastTransitionTime: "2025-08-21T07:11:28Z"
+    status: "True"
+    type: RecommendationProvided
+  recommendation:
+    containerRecommendations:
+    - containerName: nginx
+      lowerBound:
+        cpu: 100m
+        memory: 250Mi
+      target:
+        cpu: 100m
+        memory: 250Mi
+      uncappedTarget:
+        cpu: 25m
+        memory: 250Mi
+      upperBound:
+        cpu: 100m
+        memory: 250Mi
+----
+
+关于 `updateMode` 字段:
+
+[%header,cols="1a,4a"]
+|===
+|参数值 |描述
+
+|Auto	|目前默认是 Recreate，未来可能会变更为就地更新（in-place updates）
+|Recreate	|VPA 会在创建 Pod 时分配资源请求（Request），并且当请求的资源与新的建议值区别很大时通过驱逐 Pod 的方式来更新现存的 Pod
+|Initial	|VPA 只有在创建时分配资源请求，之后不做更改
+|Off	|VPA 不会自动更改 Pod 的资源需求，建议值仍会计算并可在 VPA 对象中查看
+|InPlaceOrRecreate	|VPA 首先尝试非干扰性的原地重新调整大小，或者在需要时回退到 Recreate
+|===
+
+== 原地更新（InPlaceOrRecreate）
+
+VPA 支持原地更新，以减少在应用资源建议值时带来的中断。该功能利用 Kubernetes 的原地更新能力（截止 Kubernetes 1.33 版本处于测试阶段）来修改容器资源，无需重新创建 Pod。 更多信息请参阅 link:https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler/enhancements/4016-in-place-updates-support[AEP-4016：VPA 对原地更新的支持]。
+
+=== 使用方法
+
+要使用原地更新，请将 VPA 的 `updateMode` 设置为 `InPlaceOrRecreate`：
+
+[source,yaml]
+----
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: my-vpa
+spec:
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+----
+
+=== 行为特性
+
+当使用 `InPlaceOrRecreate` 模式时，VPA 将首先尝试在 Pod 内原地应用资源更新，如果原地更新失败，则 VPA 将回退到传统的 Pod 重新创建方式。
+更新通常在以下情况下触发：
+
+* 容器的资源请求值超出推荐范围
+* 容器发生快速内存不足（Quick OOM）事件
+* 对于长期运行的 Pod（>12小时），当新推荐的资源值与当前设定值差异显著（>10%）时
+
+**重要说明**
+
+* 可能存在中断：虽然原地更新的目标是尽可能减少干扰，但它不能保证完全零中断，因为容器运行时负责实际的资源调整操作。
+* 内存限制缩减：在当前版本（Kubernetes 1.33 Beta 版本）中，对于配置了 `resizePolicy: PreferNoRestart` 的 Pod，不支持对内存限制（memory limit）进行缩减。在这种情况下，VPA 将回退到 Pod 重建的方式。
+
+
+=== 已知限制
+
+* Pod 中的所有容器必须一起更新（不支持部分容器更新）
+* 内存缩减需要仔细考虑以防止 OOM（内存不足）
+* 更新仍需遵守 VPA 的标准更新条件和时间限制
+* 如果更新会导致 Pod 的 QoS 等级发生改变，则原地更新将会失败
+
+=== 回退行为
+
+在以下情况下，VPA 将回退到 Pod 重建方式：
+
+* 原地更新link:https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/1287-in-place-update-pod-resources/README.md#resize-status[不可行]（例如节点资源不足等）
+* 更新操作被link:https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/1287-in-place-update-pod-resources/README.md#resize-status[延迟]超过 5 分钟
+* 更新操作持续进行超过 1 小时
+* 更新将导致 link:https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/[Pod QoS] 等级发生变更
+* 需要在配置了 link:https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/1287-in-place-update-pod-resources/README.md#container-resize-policy[PreferNoRestart 策略]的情况下缩减内存限制
+
+== 资源限制和驱逐行为控制
+
+=== 资源限制控制
+
+在设置资源限制（limits）时，VPA 将遵循link:https://github.com/kubernetes/autoscaler/blob/vertical-pod-autoscaler-1.2.1/vertical-pod-autoscaler/pkg/apis/autoscaling.k8s.io/v1/types.go#L95-L103[资源策略]。VPA 会为所有容器维持资源限制（limit）与资源请求（request）之间指定的比例。
+
+VPA 会尝试将推荐值限制在link:https://kubernetes.io/docs/concepts/policy/limit-range/[限制范围（Limit Range）]所定义的最小值和最大值区间内。如果限制范围（Limit Range）的设置与 VPA 的资源策略发生冲突，VPA 将优先遵循其自身的资源策略（并可能设置超出限制范围的值）。
+
+以下是一个配置示例，该配置指定容器的资源推荐范围。
+
+[source,yaml]
+----
+spec:
+  resourcePolicy:
+    containerPolicies:
+    - containerName: nginx
+      controlledResources:
+      - cpu
+      - memory
+      maxAllowed:
+        cpu: 2
+        memory: 2Gi
+      minAllowed:
+        cpu: 100m
+        memory: 128Mi
+----
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|如果工作负载包含多个容器，其他未显示配置的容器仍遵循默认值。
+
+|===
+
+=== 根据扩缩方向和资源控制驱逐行为
+
+为了限制由驱逐引起的中断，您可以通过在 VPA 规范中指定 `updatePolicy.EvictionRequirements` 来对更新器的驱逐行为施加额外约束。`EvictionRequirement` 包含一种（或多种）资源和一个 `ChangeRequirement`（变更要求），该要求通过将新的资源推荐值与容器当前设定的资源值进行比较来评估。
+
+以下是一个配置示例，该配置仅允许在 CPU 或内存需要扩容（调高）时进行驱逐，而在两者都需要缩容（调低）时则不允许：
+
+[source,yaml]
+----
+ updatePolicy:
+   evictionRequirements:
+     - resources: ["cpu", "memory"]
+       changeRequirement: TargetHigherThanRequests
+----
+
+请注意，这并不会完全阻止缩容，因为 Pod 可能会因其他原因而被重新创建，从而导致新的资源推荐值被应用。更多背景信息和使用说明，请参阅link:https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler/enhancements/4831-control-eviction-behavior[原始 AEP 提案]。

@@ -1,0 +1,150 @@
+// :ks_include_id: f730ff7f032240069f81e1b59ff72366
+* Storage
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Persistent Volume Claim View
+|View persistent volume claim list, view persistent volume claim details.
+
+|Persistent Volume Claim Management
+|Create persistent volume claim, clone volume, create volume snapshot, expand persistent volume, edit persistent volume claim information, delete persistent volume claim.
+
+|Volume Snapshot View
+|View volume snapshot list, view volume snapshot details.
+
+|Volume Snapshot Management
+|Create volume snapshot, create persistent volume from snapshot, delete volume snapshot.
+|===
+--
+
+* Configuration
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Service Account View
+|View service account list, view service account details.
+
+|Service Account Management
+|Create service account, edit service account information, modify service account role, delete service account.
+
+|Secret View
+|View secret list, view secret details.
+
+|Secret Management
+|Create secret, edit secret information, edit secret settings, delete secret.
+
+|ConfigMap View
+|View ConfigMap list, view ConfigMap details.
+
+|ConfigMap Management
+|Create ConfigMap, edit ConfigMap information, edit ConfigMap settings, delete ConfigMap.
+|===
+--
+
+* Access Control
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Role View
+|View project role list, view project role details.
+
+|Role Management
+|Create project role, edit project role information, edit project role permissions, delete project role.
+
+|Member View
+|View project member list.
+
+|Member Management
+|Invite users to join project, modify project member role, remove project member.
+|===
+--
+
+* Monitoring & Alerting
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Custom Monitoring View
+|View custom monitoring dashboard.
+
+|Custom Monitoring Management
+|Create custom monitoring dashboard, edit custom monitoring dashboard information, edit custom monitoring dashboard, delete custom monitoring dashboard.
+
+|Rule Group View
+|View rule group list, view rule group details.
+
+|Rule Group Management
+|Create rule group, edit rule group, delete rule group.
+
+|Alert View
+|View alert list.
+|===
+--
+
+* Application Workloads
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Application Workloads View
+|
+* Application View: View application list, view template-based application details, view composed app details.
+
+* Service View: View service topology, view service list, view service details.
+
+* Workload View: View workload list, view workload details.
+
+* Job View: View Job list, view Job details.
+
+* Ingress View: View Ingress list, view Ingress details, access backend services of Ingress.
+
+* Pod View: View pod list, view pod details, view container details.
+
+* Grayscale Release View: View grayscale release task list, view grayscale release task details.
+
+* Image Builder View: View image builder list, view image builder details.
+
+|Application Workloads Management
+|
+* Application Management: Install applications from template, install applications from App Store, create composed apps, delete applications.
+
+* Service Management: Create stateful or stateless services, create external services, create services from source code, create services from artifacts, create services from existing workloads, edit service information, edit service settings, edit service external access settings, edit monitoring exporters, delete services.
+
+* Workload Management: Create workloads, edit workload information, recreate workloads, delete workloads, adjust pod replica count, stop workloads, roll back workload settings, edit autoscaling settings, edit workload settings.
+
+* Job Management: Create Jobs, edit Job information, delete Jobs, rerun Jobs, suspend CronJobs.
+
+* Ingress Management: Create Ingress, edit Ingress information, edit routing rules, edit Ingress annotations, delete Ingress.
+
+* Pod Management: Access container terminal, delete pods.
+
+* Grayscale Release Management: Create grayscale release tasks, switch active version (Blue-Green Deployment), adjust traffic distribution ratio (Canary Release), edit grayscale release task settings, delete grayscale release tasks.
+
+* Image Builder Management: Create image builder from source code, create image builder from artifacts, edit image builder information, run image builder, delete image builder.
+|===
+--
+
+* Project Settings
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Project Settings Management
+|View project overview information, edit project information, edit project quota, edit default container quota, delete project.
+|===
+--

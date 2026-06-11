@@ -1,0 +1,109 @@
+---
+title: "安装 RadonDB ClickHouse"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ClickHouse, 安装 RadonDB ClickHouse"
+description: "介绍如何安装 RadonDB ClickHouse 数据库应用。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: f53b4d52f70f4c08aa88df58ffa3343e
+:ks_xref_id: ea2862bf8270409785c21d42ec8290e6
+:ks_comp: ../../../components/
+:ks_title: 安装 RadonDB ClickHouse
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ClickHouse, 安装 RadonDB ClickHouse
+:ks_description: 介绍如何安装 RadonDB ClickHouse 数据库应用。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何安装 RadonDB ClickHouse 应用。
+
+
+== 前提条件link:[id=c3948d700f6e4636916fb096cf9034fa]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+* 您需要获取 RadonDB ClickHouse 应用授权。有关更多信息，请联系{ks_product_both}技术支持。
+
+
+== 操作步骤link:[id=ce7412267d884fa8b34e4d9070724345]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在页面右侧选择**安装 > RadonDB ClickHouse**。
+
+. 在**基本信息**页签，设置 RadonDB ClickHouse 应用的基本信息和安装位置，然后点击**下一步**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|RadonDB ClickHouse 应用的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 32 个字符。
+
+|版本
+|RadonDB ClickHouse 应用的版本。
+
+|描述
+|RadonDB ClickHouse 应用的描述信息。描述可包含任意字符，最长 256 个字符。
+
+|位置
+|RadonDB ClickHouse 应用所属的企业空间、集群和项目。
+|===
+--
+
+. 在**应用设置**页签，设置 ClickHouse 数据库的参数，然后点击**安装**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|资源
+|系统为 ClickHouse 数据库预留的 CPU 和内存资源，同时也是 ClickHouse 数据库可使用的 CPU 和内存资源上限。
+
+|存储类 
+|ClickHouse 数据库使用的存储系统对应的存储类。如果下拉列表中没有符合需要的存储类，您需要联系平台管理员创建存储类。
+
+|卷
+|ClickHouse 数据库使用的卷大小，单位为 GiB。
+
+|分片数量
+|ClickHouse 数据库的分片数量。取值范围为 1 到 100。
+
+|副本数量
+|每个数据库分片的副本数量。
+
+|用户名
+|ClickHouse 数据库的访问用户名。默认用户名为 **clickhouse**。
+
+|密码
+|ClickHouse 数据库的访问密码。默认密码为 **C1ickh0use-0perator**。
+|===
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+如果存储类选择{ks_product_both}集群本地存储，后续将无法对卷进行扩展，建议选择其他存储类。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+RadonDB ClickHouse 安装完成后将显示在 RadonDB 应用列表中。
+--

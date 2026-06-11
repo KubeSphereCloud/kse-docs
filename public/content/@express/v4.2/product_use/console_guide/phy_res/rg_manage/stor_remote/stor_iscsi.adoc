@@ -1,0 +1,41 @@
+---
+title: "iSCSI 存储"
+weight: 2
+---
+
+. 登录{product_console_name}。
+. 点击**物理资源** > **存储池管理** > **远端存储**，选择 **iSCSI 存储**页签，点击**添加 iSCSI 存储服务器**。
+
+. 在**添加远端存储**的窗口中，根据提示选择集群中的某一节点，并点击**下一步**，进行**添加存储**。
++
+
+include::../../../../../../../_components/note.adoc[]
+* 仅允许选择单个节点。
+* 若被选节点被设置为远端存储使用的服务器后，该服务器只能作为集中存储的计算节点使用。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 在**添加存储**页面中，输入需要添加的 iSCSI 服务器的 **IP 地址**和**端口**，点击**确定**即可。
++
+image::/images/express/console/rg_manage_stor_iscsi_1.png[,50%]
+
+. 返回**远端存储**页面，创建成功的 iSCSI 存储显示在列。列表信息包括：``ID/名称``、``存储 IP 地址``、``端口``以及``添加时间``。
++
+image::/images/express/console/rg_manage_stor_iscsi_2.png[]
+
+. 点击 iSCSI 存储所在行右侧的更多操作，支持对其进行``编辑``、``删除``和``重新扫描``操作。
++
+
+include::../../../../../../../_components/note.adoc[]
+* 编辑操作支持修改其名称 CHAP 用户名和密码。
+* 删除操作时需注意当前的 iSCSI 存储服务器上是否有虚拟磁盘正在使用，若有，则无法删除。
+* 重新扫描操作是对已经添加的 iSCSI 存储进行服务器内的 LUN 扫描。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+
+
+
+
+
+

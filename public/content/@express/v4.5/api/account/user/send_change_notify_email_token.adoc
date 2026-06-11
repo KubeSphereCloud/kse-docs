@@ -1,0 +1,70 @@
+---
+title: 颁发修改邮箱的令牌（SendChangeNotifyEmailToken）
+weight: 34
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notify_email
+| String
+| true
+| 
+
+| user
+| String
+| false
+| 
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| left
+| Integer
+| false
+| 
+
+| notify_email
+| String
+| false
+| 待通知的电子邮件地址
+
+| user_id
+| String
+| false
+| 用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "notify_email": "4743*****",
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SendChangeNotifyEmailTokenResponse",
+  "left": 5,
+  "notify_email": "4743*****",
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

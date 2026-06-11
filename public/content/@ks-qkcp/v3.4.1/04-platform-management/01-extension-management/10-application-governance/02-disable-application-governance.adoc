@@ -1,0 +1,113 @@
+---
+title: "禁用应用治理"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, 应用治理, 禁用应用治理"
+description: "介绍如何禁用应用治理扩展组件。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 71e1882aafd44a4e919ce3cbf3c906e8
+:ks_xref_id: fda78f0d85094d358dffd97ef09efaba
+:ks_comp: ../../../../components/
+:ks_title: 禁用应用治理
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, 应用治理, 禁用应用治理
+:ks_description: 介绍如何禁用应用治理扩展组件。
+:ks_weight: 02
+:ks_icon:
+
+
+本节介绍如何禁用应用治理扩展组件。
+
+
+== 前提条件link:[id=d123aa2d2ff44779a961236b5a2abe24]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=c1cdd9f5be314f63a61db8609ac6b31d]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:servicemesh:enabled** 参数设置为 **false**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  servicemesh
+    enabled: false
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在 **kubectl** 对话框，执行以下命令删除应用治理相关资源：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+curl -L https://istio.io/downloadIstio | sh -
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+istioctl x uninstall --purge
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl -n istio-system delete kiali kiali
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+helm -n istio-system delete kiali-operator
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl -n istio-system delete jaeger jaeger
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+helm -n istio-system delete jaeger-operator
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,71 @@
+---
+title: "创建物理网络"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 物理网络, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建物理网络。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 18ce657aa06441bdb7ecdf186997d5dd
+:ks_xref_id: 15f02bc4edfd44068d2c0d5b24ee7733
+:ks_comp: ../../../../components/
+:ks_title: 创建物理网络
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建物理网络。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 物理网络, 创建
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建物理网络。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=68d62183f6e94ed894a9f0cf9dd87f5a]
+
+include::../../../../_custom/networks/physical-network-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=17dbeb28067045b796c4d2b59f6ed63d]
+
+include::../../../../_custom/networks/physical-network-steps.adoc[]
+
+. 在物理网络列表页面，点击右上角的**创建**。
+
+. 在弹出的对话框中，配置物理网络的基本信息，然后点击**下一步**。具体参数描述如下表所示。
++
+--
+[cols='1a,3a']
+|===
+|参数 |描述
+
+|名称
+|物理网络的名称。
+
+include::../../../../_custom/networks/physical-network-naming-convention.adoc[]
+
+|类型
+
+|网络的类型。支持以下网络类型：
+
+include::../../../../_custom/networks/network-type-description.adoc[]
+
+|描述
+|用户自定义的描述信息。
+
+include::../../../../_custom/networks/description-convention.adoc[]
+|===
+--
+
+. 在**选择物理网卡**页签，选择您想要使用的物理网卡，然后点击**下一步**。
++
+--
+include::../../../../_custom/networks/nic-config-description.adoc[]
+--
+
+. 确认已选网卡，然后点击**确定**。网络创建完成后将显示在网络列表页面。

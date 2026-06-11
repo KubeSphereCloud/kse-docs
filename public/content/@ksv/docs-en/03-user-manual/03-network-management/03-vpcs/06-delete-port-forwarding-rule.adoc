@@ -1,0 +1,52 @@
+---
+title: "Delete a port forwarding rule"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, ports, forwarding, rules, deletion"
+description: "Describes how to delete port forwarding rules in the {ks_product} web console."
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: ded57a6e71844f0096d0b93415104936
+:ks_xref_id: c139b29fc9914fe9a361876f5150769e
+:ks_comp: ../../../../components/
+:ks_title: Delete a port forwarding rule
+:ks_description: Describes how to delete port forwarding rules in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, ports, forwarding, rules, deletion
+:ks_weight: 06
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete port forwarding rules in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=5ba5d1b87d2d43489ef0b206f4bff047]
+
+* The user that you use has been granted permissions to manage VPCs.  User **admin** can manage all VPCs in your cluster. Project administrators and operators can manage the VPCs created on their own and have read-only permissions on the VPCs created by other users. Project viewers can view only the VPCs created in the projects to which they belong.
+* If you log in as a non-admin user, you can only delete a port forwarding rule created on your own.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=9146042a46c44232a1da6c9767c90304]
+
+include::../../../../_custom-en/networks/vpc-steps.adoc[]
+
+. On the **VPCs** page, click the name of a VPC to view its details.
+. On the right side of the details page, click the **Port Forwarding** tab to view the port forwarding rules created for the VPC.
+. Find the port forwarding rule that you want to delete, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+The rule cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

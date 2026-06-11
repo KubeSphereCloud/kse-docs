@@ -1,0 +1,158 @@
+---
+title: "开机"
+weight: 2
+---
+
+
+集群各个角色节点 IP 地址可执行如下命令进行查看。
+
+[,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts"
+----
+
+. 接通电源，上电。
+. 逐个将服务器开机。
+. 逐个登录 zookeeper 节点，启动该节点上的 zookeeper 服务并检查 zookeeper 服务状态。
+.. 启动服务。
++
+[,shell]
+----
+supervisorctl start zookeeper
+----
+.. 检查服务状态，返回结果为 ``RUNNING`` 即可。
++
+--
+[,shell]
+----
+supervisorctl status zookeeper 
+----
+逐个登录 zookeeper 节点，执行如下命令，返回结果中，集群内仅一个节点为 leader，其他均为 follower。
+[,shell]
+----
+/opt/zookeeper-3.4.13/bin/zkServer.sh status
+----
+回显示例
+[,shell]
+----
+ZooKeeper JMX enabled by default
+Using config: /opt/zookeeper-3.4.13/bin/../conf/zoo.cfg
+Mode: leader
+----
+--
+
+. 逐个登录集群的数据库节点，启动该节点上的数据库服务。
++
+--
+* Galera 数据库  
++
+可参考《GALERA Cluster 安装部署及使用说明》 运维章节相关内容进行操作。  
+* Qinstor MySQL 数据库 
++
+请参考本文：“QingStor 融合部署运维 > 数据库服务 > 数据库服务的启停”相关内容。  
+* Xenondb 数据库  
++
+[,shell]
+----
+/opt/xenondb/bin/xenon_service.py start
+----
+
+--
+
+. 数据库服务启动后，查看数据库状态  
++
+--
+* Galera 数据库，依次执行如下命令。
++
+[,shell]
+----
+supervisorctl status galera_cluster 
+
+/opt/galera/bin/galera_cluster status  //galera v1.0.1 需依次在 galera 节点上查看本节点 galera 状态  
+----
+
+* Qinstor MySQL 数据库 
++
+在没有 arbitor 节点的情况下，live nodes 下的节点与 started nodes 下的节点应保持一 一对应。  
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
+
+* Xenondb 数据库
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
+--
+
+. 逐个登录集群的 center 节点，启动该节点上的 center 服务：  
++
+[,shell]
+----  
+supervisorctl start neoncenter
+----
++
+include::../../../../../../_components/note.adoc[]
+确认 center 服务正常启动，若异常，需调查相关原因并解决。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 逐个登录集群的 store 节点，启动该节点上的 store 服务：  
++
+[,shell]
+----  
+supervisorctl start neonstore
+----
++
+include::../../../../../../_components/note.adoc[]
+确认 store 服务正常启动，若异常，需调查相关原因并解决。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 逐个登录集群的节点，查看该节点上各服务状态。
++
+除监控服务外，其他服务状态均为 ``RUNNING``。
++
+[,shell]
+----
+supervisorctl status
+----
+
+. 查看集群状态，返回结果中 store，SSD，volume 的 STATUS 均为 OK。若异常，需调查相关原因并解决。
++
+[,shell]
+----
+neonsan list_store
+neonsan list_ssd
+neonsan list_volume -detail
+---- 
+
+. 逐个登录集群的节点，启动该节点上的监控服务。确认监控服务正常启动，若异常，需调查相关原因并解决。
++
+[,shell]
+----
+supervisorctl start prometheus
+supervisorctl start alerter
+supervisorctl start neonmonitor
+----
+
+. 挂载 volume。
++
+[,shell]
+----
+qbd -m vol/move_1 -c /etc/neonsan/qbd.conf
+----
++
+include::../../../../../../_components/note.adoc[]
+volume 名与配置参数，需根据实际情况修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 开启客户端。
++
+先启动部分 client，验证 OK 后，再启动剩余 client。
+
+
+
+
+

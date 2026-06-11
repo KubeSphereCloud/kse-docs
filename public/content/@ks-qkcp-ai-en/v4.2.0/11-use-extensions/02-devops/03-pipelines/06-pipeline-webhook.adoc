@@ -1,0 +1,75 @@
+---
+title: "Triggering a Pipeline Using Webhook"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Using DevOps, Pipeline"
+description: "Describes how to trigger a pipeline using a webhook in a GitHub repository."
+weight: 06
+---
+
+:ks_navigation:  **DevOps > Pipeline**
+
+To create a Jenkinsfile-based pipeline from a remote code repository, you can configure a webhook in the remote repository so that the pipeline is automatically triggered when the remote repository changes.
+
+This document demonstrates how to trigger a pipeline using a webhook in a GitHub repository.
+
+== Prerequisites
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+* You have created a workspace, a DevOps project, and a user (for example, **project-regular**), and have invited this user to the DevOps project and granted the **operator** role. Refer to link:../../02-devops-project-mangement/03-project-members/01-invite-a-user-to-a-project/[Invite a User to a DevOps Project].
+
+* You have created a Jenkinsfile-based pipeline from a remote code repository. For more information, refer to link:../02-create-a-pipeline-using-jenkinsfile/[Create a Pipeline Using Jenkinsfile].
+
+== Configure Webhook
+
+=== Obtain the Webhook URL
+
+include::../../../../_custom/devops/project-regular-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/devops/devops-oper-dropdownList.adoc[]
+
+. On the **Pipeline** page, click a pipeline (for example, **jenkins-in-scm**) to view its details page.
+
+. Click **Operation**, and select **Edit Settings** from the drop-down menu.
+
+. In the dialog box that appears, scroll to **Webhook** to obtain the Webhook push URL.
+
+=== Set Up the Webhook in the GitHub Repository
+
+. Log in to your GitHub account and go to the **devops-maven-sample** repository.
+
+. Click **Settings** > **Webhooks**, and then click **Add webhook**.
+
+. In **Payload URL**, enter the Webhook push URL from the pipeline, and then click **Add webhook**.
+This tutorial selects the default **Just the push event**. Configure it according to your actual needs. For more information, refer to link:https://docs.github.com/en/developers/webhooks-and-events/webhooks/creating-webhooks[GitHub Documentation].
+
+. The configured webhook will be displayed on the **Webhooks** page.
+
+== Trigger the Pipeline Using Webhook
+
+=== Submit a Pull Request to the Repository
+
+. On the **Code** page of the devops-maven-sample repository, click **master** and then select the **v4.1.0-sonarqube** branch.
+
+. Go to **/deploy/dev-ol** and click the file **devops-sample.yaml**.
+
+. Click image:/images/ks-qkcp/zh/icons/pen-light.svg[pen-light,18,18] to edit the file. For example, change the value of **spec.replicas** to **3**.
+
+. Click **Commit changes**.
+
+=== Check the Webhook Delivery
+
+. On the **Settings** > **Webhooks** page of the devops-maven-sample repository, click the created webhook.
+
+. Click **Recent Deliveries**, and then click a specific delivery record to view its details.
+
+== Check the Pipeline Status
+
+. On the **Run Records** tab of the pipeline details page, check whether a new run has been triggered by the pull request submitted to the **v4.1.0-sonarqube** branch of the remote repository.
+
+. Go to the **Workloads > Pods** page of the **kubesphere-sample-dev** project and check the status of the 3 pods. If the 3 pods are in the running state, it indicates that the pipeline is running normally.

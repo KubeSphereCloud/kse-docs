@@ -1,0 +1,38 @@
+---
+title: "View Workspace Key Metrics Ranking"
+keywords: "Kubernetes, {ks_product}, WizTelemetry Global Monitoring, Workspace, Key Metrics Ranking"
+description: "Describes how to sort workspaces based on multi-dimensional monitoring metrics."
+weight: 08
+---
+
+:ks_navigation: **Global Monitoring > Workspace**
+
+This section describes how to sort workspaces based on multi-dimensional monitoring metrics.
+
+== Prerequisites
+
+You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
++
+--
+View the number of authorized clusters, the number of created projects, and data from other monitoring metrics for each workspace.
+
+include::../../../../../_custom/WizTelemetry/sort-by-clusters-fields-and-order.adoc[]
+
+* Click the search box above the list and enter a keyword to search for a workspace by name.
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+--

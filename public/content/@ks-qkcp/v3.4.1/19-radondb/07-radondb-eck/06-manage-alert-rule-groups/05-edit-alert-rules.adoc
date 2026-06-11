@@ -1,0 +1,70 @@
+---
+title: "管理告警规则"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ECK, 管理告警规则组, 编辑告警规则"
+description: "介绍如何管理规则组中的告警规则。"
+weight: 05
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: f66d216780f741a096e438c3af3720eb
+:ks_xref_id: 336441233eb04eab893d52ab543c85fa
+:ks_comp: ../../../../components/
+:ks_title: 管理告警规则
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ECK, 管理告警规则组, 编辑告警规则
+:ks_description: 介绍如何管理规则组中的告警规则。
+:ks_weight: 05
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+本节介绍如何管理规则组中的告警规则，包括添加、修改、启用、禁用、删除告警规则。
+
+
+== 前提条件link:[id=8ca52fd5a8124c7a903226b3129e1854]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbEck/radondbEck-prer-installRadondbEck.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbEck/radondbeck-prer-createAlertGroup.adoc[]
+
+
+== 操作步骤link:[id=09df9f90f5ca4751953dda45e6cbb5b1]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbEck/radondbeck-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-editAnAlertingPolicy.adoc[]
+
++
+
+include::../../../../_custom/radondb/ruleGroups-oper-editAlertRules.adoc[]

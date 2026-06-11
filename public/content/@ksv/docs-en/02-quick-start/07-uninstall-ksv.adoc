@@ -1,0 +1,88 @@
+---
+title: "Uninstall {ks_product}"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, uninstallation"
+description: "Describes how to uninstall {ks_product}."
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 29a4b68ecb50470da45266e2d4973aad
+:ks_xref_id: 8438044214244287905adc9b63b2f86f
+:ks_comp: ../../components/
+:ks_title: Uninstall {ks_product}
+:ks_description: Describes how to uninstall {ks_product}.
+:ks_keywords: {ks_product_full}, {ks_product}, uninstallation
+:ks_weight: 07
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to uninstall {ks_product_abbr_full}.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=2f8b0abfb4bb4a1fb92d42f2cf4c764b]
+
+If the uninstallation takes longer than 15 minutes, you can restart your node and then uninstall {ks_product} again. For more information, see link:../01-install-ksv-in-single-node-mode/[Install {ks_product} in single-node mode] and link:../02-install-ksv-in-multi-node-mode/[Install {ks_product} in multi-node mode].
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=f30e650507b7464cbeb36d36671207c2]
+
+. Log in to the server node on which {ks_product} is installed as user **root**.
+. Go to the directory generated after the installation package is decompressed.
++
+--
+* x86 architecture
++
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cd kubesphere-virtualization-x86_64
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+* ARM64 architecture
++
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cd kubesphere-virtualization-arm64
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Run the following command to uninstall {ks_product}:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+./uninstall.sh -m
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+If the following command output appears, {ks_product} is uninstalled:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+INFO[14:25:16 CST] Successful.
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+If the uninstallation takes longer than 15 minutes, you can restart your node and then uninstall {ks_product} again.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--

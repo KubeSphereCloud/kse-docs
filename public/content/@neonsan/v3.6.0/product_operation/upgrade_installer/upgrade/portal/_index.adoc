@@ -1,0 +1,20 @@
+---
+title: "升级 Portal"
+weight: 2
+---
+
+* 升级 Portal 前需完成 Installer 的升级。
+* Portal 升级无回滚操作，但是 Portal 升级步骤可重复执行。
+* FirstBox 所在节点可在 NeonSAN 集群任一节点，通过 SSH 免密访问登录。
++
+[,shell]
+----
+ssh qingstor-firstbox 
+----
+
+* FirstBox 可执行如下命令进行登录。
++
+[,shell]
+----
+ssh qingstor-firstbox -p 6023
+----

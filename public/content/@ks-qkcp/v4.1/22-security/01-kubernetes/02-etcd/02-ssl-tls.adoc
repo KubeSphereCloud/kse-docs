@@ -1,0 +1,65 @@
+---
+title: "SSL/TLS 加密套件"
+weight: 02
+---
+
+. 查看本机加密套件。
++
+[,bash]
+----
+openssl ciphers -v 'RC4:HIGH:!aNULL:!MD5'
+----
+
+. 修改配置文件，添加加密套支持。
++
+[,bash]
+----
+vim /etc/etcd.env
+
+# 新增，多个加密套之间使用英文逗号隔开
+ETCD_CIPHER_SUITES=TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+
+# 重启 etcd
+systemctl daemon-reload
+systemctl restart etcd
+----
+
+. 验证加密套配置，根据返回值确认是否可以成功访问。
++
+[,bash]
+----
+# 注意服务端和客户端加密套参数区别
+# 服务端 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+# 服务端 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+# 客户端 ECDHE-RSA-AES128-GCM-SHA256
+# 客户端 ECDHE-RSA-AES256-GCM-SHA384
+curl \
+--cacert /etc/ssl/etcd/ssl/ca.pem \
+--cert /etc/ssl/etcd/ssl/node-qyicsl-isdp-master-0001.pem \
+--key /etc/ssl/etcd/ssl/node-qyicsl-isdp-master-0001-key.pem \
+-L https://192.168.200.2:2379/metrics \
+--ciphers ECDHE-RSA-AES128-GCM-SHA256
+or
+curl \
+--cacert /etc/ssl/etcd/ssl/ca.pem \
+--cert /etc/ssl/etcd/ssl/node-qyicsl-isdp-master-0001.pem \
+--key /etc/ssl/etcd/ssl/node-qyicsl-isdp-master-0001-key.pem \
+-L https://192.168.200.2:2379/metrics \
+--ciphers ECDHE-RSA-AES256-GCM-SHA384
+----
+
+. 更换未配置的加密套测试。
++
+[,bash]
+----
+curl \
+--cacert /etc/ssl/etcd/ssl/ca.pem \
+--cert /etc/ssl/etcd/ssl/node-qyicsl-isdp-master-0001.pem \
+--key /etc/ssl/etcd/ssl/node-qyicsl-isdp-master-0001-key.pem \
+-L https://192.168.200.2:2379/metrics \
+--ciphers ECDHE-ECDSA-CHACHA20-POLY1305-SHA256
+
+# 返回结果失败
+curl: (59) failed setting cipher list: ECDHE-ECDSA-CHACHA20-POLY1305-SHA256
+----
+

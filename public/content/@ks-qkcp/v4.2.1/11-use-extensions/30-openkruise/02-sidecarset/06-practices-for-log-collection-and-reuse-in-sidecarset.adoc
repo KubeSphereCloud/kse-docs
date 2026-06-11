@@ -1,0 +1,82 @@
+---
+title: "SidecarSet 日志采集与复用实践"
+weight: 06
+---
+本节介绍 SidecarSet 日志采集与复用实践。对于大型 Kubernetes 集群，或作为 PaaS 平台为多业务方服务的场景，推荐采用 SidecarSet 管理日志采集 Agent，例如 FileBeat 或 Fluent Bit。KubeSphere 扩展组件同时支持在创建 Deployment 时直接注入已创建的 SidecarSet，实现一键复用。
+
+== 场景对比
+
+* *DaemonSet 方式*：资源占用较低，但难以实现强租户隔离和灵活配置。
+* *业务 Pod 硬编码 Sidecar*：会增加配置复杂度，且 Sidecar 升级通常会触发业务 Pod 重建，导致运维与研发团队耦合较深。
+* *SidecarSet 方式*：将日志采集容器与业务工作负载解耦，由平台团队统一运维，业务侧无需感知底层实现。
+
+== 实践建议
+
+* *统一注入配置*：平台团队可统一定义 FileBeat SidecarSet，并通过 `selector.matchLabels`（例如 `kruise.io/inject-filebeat: "true"`）标记需要采集日志的业务 Pod。
+* *共享日志卷*：可在 SidecarSet 中配置 `shareVolumePolicy.type: enabled`，使 FileBeat 容器自动挂载业务容器的日志目录；也可以在 SidecarSet 的 `volumes` 中定义共享卷，并通过 `volumeMounts` 挂载到 Sidecar。这样业务开发者无需在 Deployment 中重复声明日志卷。
+* *业务方低门槛接入*：业务研发在创建 Deployment 时，只需给 Pod 添加指定 Label，即可自动注入日志采集 Sidecar，而无需关注 Agent 版本和配置。在 KubeSphere 页面中，也可以在创建 Deployment 的 *容器组设置* 步骤中点击 *注入 sidecar 容器*，然后选择目标 SidecarSet 完成注入。
+* *Sidecar 独立灰度升级*：当 FileBeat 版本需要升级时，直接修改 SidecarSet 的镜像地址即可。控制器会对所有匹配 Pod 中的 Sidecar 容器执行原地升级，业务 Pod 不会重建，服务也不会中断。升级时建议同时配置 `maxUnavailable` 和 `partition`，避免 Sidecar 升级异常导致大量 Pod 进入 Not Ready 状态。
+* *资源优化*：在资源紧张场景下，可将 Sidecar 的 `requests.cpu` 设置为 `0`，使 Pod 的 QoS 保持为 `Burstable`，从而降低对节点资源的强制占用。
+
+=== SidecarSet YAML 示例
+
+
+[source,yaml]
+----
+apiVersion: apps.kruise.io/v1alpha1
+kind: SidecarSet
+metadata:
+  name: filebeat-sidecar
+spec:
+  selector:
+    matchLabels:
+      kruise.io/inject-filebeat: "true"
+  containers:
+    - name: filebeat
+      image: docker.elastic.co/beats/filebeat:7.16.2
+      volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+          readOnly: true
+  volumes:
+    - name: varlog
+      emptyDir: {}
+  updateStrategy:
+    type: RollingUpdate
+    maxUnavailable: 20%
+    partition: 90  # 保留 90% 旧版本，仅升级 10%
+----
+
+说明：`partition: 90` 表示发布时保留 90% 的旧版本实例，仅对 10% 的匹配 Pod 先执行 Sidecar 升级，适合日志采集 Agent 的小批量灰度发布场景。
+
+
+=== 被注入工作负载示例
+
+以下示例展示了一个可被 `filebeat-sidecar` 注入的 Deployment。该工作负载通过在 Pod 模板中添加 `kruise.io/inject-filebeat: "true"` 标签，匹配前文定义的 SidecarSet，从而自动注入 FileBeat Sidecar 容器。
+
+[source,yaml]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-demo
+  template:
+    metadata:
+      labels:
+        app: nginx-demo
+        kruise.io/inject-filebeat: "true"
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25
+          ports:
+            - containerPort: 80
+----
+
+说明：该示例的关键在于 Pod 模板中的标签 `kruise.io/inject-filebeat: "true"`。只要标签与 SidecarSet 的 `selector.matchLabels` 匹配，即可在工作负载创建时自动注入对应的 Sidecar 容器。
+

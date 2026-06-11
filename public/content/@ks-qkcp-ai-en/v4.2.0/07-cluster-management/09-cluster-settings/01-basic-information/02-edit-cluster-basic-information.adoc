@@ -1,0 +1,63 @@
+---
+title: "Edit Cluster Basic Information"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Basic Information, Edit Cluster Basic Information"
+description: "Describes how to edit cluster basic information."
+weight: 02
+---
+
+:ks_permission: **Cluster Settings Management**
+:ks_navigation: **Cluster Settings > Basic Information**
+
+This section describes how to edit cluster basic information.
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+KubeSphere does not support modifying the name of an already added cluster.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Basic Information** page, click **Edit Information** on the right.
+
+. In the **Edit Information** dialog box, set the cluster's alias, provider, description, and label, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Alias
+|The alias of the cluster.
+
+|Provider
+|The provider of the cluster.
+
+|Description
+|The description of the cluster. The description can contain any characters, with a maximum length of 256 characters.
+
+|Label
+|Used to identify the purpose of the cluster. The value can be **Production**, **Development**, **Testing**, or **Demo**.
+|===
+--

@@ -1,0 +1,43 @@
+// :ks_include_id: 8360812c23cc484684a3fc862385b1df
+
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the security group rule.
+
+include::naming-convention.adoc[]
+
+|Direction
+|The direction of the traffic that the security group rule controls.
+
+* **Outbound Traffic**: controls the outbound traffic of the resources associated with the security group. By default, the outbound traffic is allowed.
+* **Inbound Traffic**: controls the inbound traffic of the resources associated with the security group. By default, the inbound traffic is denied unless it matches a rule that allows the traffic.
+
+|Protocol
+|The protocol that corresponds to the security group rule.  Valid values:
+
+* **ALL**: supports all protocol types.
+* **TCP**
+* **UDP**
+* **ICMP**
+
+|Source Port
+|Sets the source port for a preset security group rule.
+
+|Destination Port
+|Sets the destination port for a preset security group rule.
+
+|Type
+|The object on which the security group rule takes effect.
+
+* IP Address: the IP address range in which the security group rule takes effect.
+* Security Group：the security group in which the security group rule takes effect.
+
+|Destination IP Address
+|The IP address on which the security group rule takes effect when **Direction** is set to **Outbound Traffic**.
+
+|Source IP Address
+|The IP address on which the security group rule takes effect when **Direction** is set to **Inbound Traffic**.
+|===

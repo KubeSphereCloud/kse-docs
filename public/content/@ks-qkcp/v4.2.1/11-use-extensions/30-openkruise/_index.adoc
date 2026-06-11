@@ -1,0 +1,30 @@
+---
+title: "OpenKruise"
+weight: 30
+---
+
+
+OpenKruise 是基于 Kubernetes 的扩展套件，专注于云原生应用的自动化，包括部署、发布、运维及可用性防护。OpenKruise 提供的绝大部分能力基于 CRD 扩展实现，无需外部依赖，可运行在任意标准 Kubernetes 集群中。
+
+== 支持范围
+
+本文档介绍的扩展组件仅提供 CloneSet 和 SidecarSet 两个资源的管理界面。OpenKruise 官方还提供 Advanced StatefulSet、Advanced DaemonSet、BroadcastJob、ImagePullJob、PodUnavailableBudget 等其他能力，如有需要，请通过 OpenKruise 官方命令行或 YAML 方式使用。
+
+== 核心能力
+
+OpenKruise 包含一系列增强版 Workloads（工作负载），例如 CloneSet、Advanced StatefulSet、Advanced DaemonSet、BroadcastJob 和 SidecarSet。
+
+这些能力不仅支持类似 Kubernetes 原生 Workloads 的基础功能，还提供原地升级、可配置的扩缩容与发布策略、并发操作等增强能力。
+
+其中，原地升级是一种升级应用容器镜像甚至环境变量的方式。该方式仅重建 Pod 中指定的容器，不会影响整个 Pod 及其中的其他容器。因此，它可以带来更快的发布速度，并减少对 Scheduler、CNI、CSI 等组件的影响。
+
+OpenKruise 还提供高级运维能力，帮助用户更高效、更具弹性且更节省成本地管理应用程序。例如，您可以使用 ImagePullJob 在任意节点上预拉取镜像，也可以在不重建 Pod 的情况下重启运行中的一个或多个容器。此外，还可以约束无状态工作负载在不同域（例如可用区、节点池或 CPU 架构）中的分布，从而实现跨多域部署和弹性伸缩。
+
+
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|本插件基于 OpenKruise v1.4.0 版本开发，提供 CloneSet 和 SidecarSet 两个扩展资源的管理能力。
+|===

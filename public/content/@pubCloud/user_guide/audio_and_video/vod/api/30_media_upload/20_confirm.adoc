@@ -1,0 +1,121 @@
+---
+title: "确认上传"
+description: 
+keywords: 云点播,API 参考,媒资上传
+draft: false
+weight: 20
+---
+== 接口描述
+
+该接口（CommitUpload）用于确认上传状态。
+
+== 请求语法
+
+[source,json]
+----
+POST /api/v1/media/<MediaId>/uploaded HTTP/1.1
+Host:  api.vod.frontwize.com
+Content-Type: application/json
+Date: <date>
+Authorization: <authorization-string>
+----
+
+== 请求参数
+
+*请求头*：
+
+[cols="1,1,1,2"]
+|===
+| 参数 | 是否必选 | 参数类型 | 描述
+
+| source
+| 否
+| String
+a| 上传来源。 
+
+取值如下： 
+
+* CONSOLE：控制台
+* SDK：SDK上传
+* 其他或不传：API 接口上传
+|===
+
+*请求消息体*：
+[cols="1,1,1,2"]
+|===
+| 参数 | 是否必选 | 参数类型 | 描述
+
+| Status
+| 是
+| String
+a| 上传状态。 
+
+取值如下： 
+
+* CREATED：创建成功
+* FAILED：创建失败
+* CANCELLED：创建取消
+
+
+| AppId
+| 否
+| int
+| 预留字段。
+|===
+
+== 响应参数
+
+|===
+| 参数名称 | 类型 | 描述
+
+| MediaId
+| String
+| 媒体文件的唯一标识。
+
+| PlayUrl
+| String
+a| 媒体播放地址。 +
+
+include::../../../../../../_components/note_in_table.adoc[]
+此字段可能返回 null，表示取不到有效值。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+|===
+
+== 请求示例
+
+[source,json]
+----
+POST /api/v1/media/52746780168687616/uploaded HTTP/1.1
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7
+Connection: keep-alive
+Content-Length: 233
+Content-Type: application/json; charset=UTF-8
+source:CONSOLE
+Host: api.vod.frontwize.com
+Authorization: authorization string
+{
+  "Status":"CREATED"
+}
+----
+
+== 响应示例
+[source,json]
+----
+HTTP/1.1 200 OK
+Date: Thu, 26 May 2022 06:18:10 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Language,Cookie
+Content-Language: zh-cn
+x-qvod-request-id: aa08cf7a43f611e5886952542e6ce14b
+{
+  "MediaId": "52746780168687616",
+  "PlayUrl": "https://6ajnshtgnbkpnks.vodtest.frontwize.com/vod/52746780168687616.mp4",
+  "ret_code": 0
+}
+----

@@ -1,0 +1,37 @@
+---
+title: "创建节点组"
+weight:  01
+---
+
+:ks_permission: **节点组管理**
+:ks_menu: **节点组**
+
+
+本节介绍如何创建节点组。
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **KubeSphere 节点组**扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+// include::../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
+
++
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. 在**创建节点组**对话框中，输入节点组名称，然后点击**确定**。
++
+节点组创建完成后将显示在节点组列表中。

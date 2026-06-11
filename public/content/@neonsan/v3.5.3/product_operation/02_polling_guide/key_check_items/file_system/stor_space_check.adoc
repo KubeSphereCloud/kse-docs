@@ -1,0 +1,40 @@
+---
+title: "检查存储空间使用率（2 级）"
+weight: 1
+---
+
+. 逐个登录 NeonSAN 集群各节点，查看各节点 prometheus wal 目录空间使用情况。返回结果，不能大于 30GB。
++
+[,shell]
+----
+du -sh /qingstor/data/prometheus/data/wal
+----
++
+回显示例：
++
+[,shell]
+----
+302M	/qingstor/data/prometheus/data/wal
+----
+
+. 逐个登录 NeonSAN 集群各节点，查看本节点系统盘的使用情况。一般根目录 ``/`` 所对应的盘为系统盘，如下所示，该节点系统盘使用率为 17%。
++
+[,shell]
+----
+df -h
+----
++
+image::/images/neonsan/polling_guide_6.png[]
+
+. 若上一步骤查询到，系统盘使用率超过 80%，则需对系统盘空间进行清理，使得系统盘使用率降低至 50% 及以下。
++
+* 手动清理 ``/`` 目录下的无用的文件，注意需排除根目录下挂载的文件系统，可执行如下命令查看。
++
+[,shell]
+----
+find / -mount -size +100M
+----
+
+* 清除 ``/qingstor/data/prometheus/data/wal`` 下时间戳较早的文件。
+
+

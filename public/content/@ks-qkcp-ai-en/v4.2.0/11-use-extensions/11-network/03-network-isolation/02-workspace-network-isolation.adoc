@@ -1,0 +1,48 @@
+---
+title: "Enable Workspace Network Isolation"
+keywords: "Kubernetes, {ks_product}, Workspace, Workspace Settings, Enable and Disable Network Isolation"
+description: "Introduces how to enable and disable workspace network isolation."
+weight: 02
+---
+
+:ks_permission: **Workspace Network Isolation Management**
+:ks_navigation: **Service Network > Workspace Network Isolation**
+
+This section describes how to enable workspace network isolation.
+
+After enabling workspace network isolation, pods belonging to that workspace cannot be accessed by clients outside the workspace, nor by clients outside the cluster to which they belong.
+
+Enabling workspace network isolation does not restrict outbound traffic by default, but you can choose whether to restrict it. After restricting outbound traffic, the workspace will not be able to access other workspaces and can only access resources within the current workspace.
+
+However, when workspace network isolation (including outbound traffic restriction) is enabled, you can link:../04-set-whitelist/[add a whitelist] to allow specific projects, services, network segments, or ports to communicate with pods in a project within the workspace.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The cluster to which the workspace belongs needs to have the **KubeSphere Network** extension installed.
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. (Optional) After checking **Outbound Traffic Restriction**, the workspace will not be able to access other workspaces.
+
+. Click the switch on the right to enable or disable workspace network isolation.
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|After enabling "Workspace Network Isolation", you cannot enable or disable "Outbound Traffic Restriction". You need to disable "Workspace Network Isolation" first, then check/uncheck "Outbound Traffic Restriction".
+|===

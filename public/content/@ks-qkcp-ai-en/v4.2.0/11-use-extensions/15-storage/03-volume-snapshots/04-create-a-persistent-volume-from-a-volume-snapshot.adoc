@@ -1,0 +1,41 @@
+---
+title: "Create a Persistent Volume from a Volume Snapshot"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Volume Snapshot, Create Persistent Volume Claim"
+description: "Introduces how to create a persistent volume from a volume snapshot."
+weight: 04
+---
+
+
+:ks_permission: **Volume Snapshot Management**
+:ks_navigation: **Storage > Volume Snapshots**
+
+
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-desc-createAPersistentVolumeFromAVolumeSnapshot.adoc[]
+
+
+== Prerequisites
+
+* The **KubeSphere Storage** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+. Log in to the KubeSphere web console as a user with the pass:a,q[{ks_permission}] permission and enter your cluster or workspace.
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-oper-createAPersistentVolumeFromAVolumeSnapshot.adoc[]

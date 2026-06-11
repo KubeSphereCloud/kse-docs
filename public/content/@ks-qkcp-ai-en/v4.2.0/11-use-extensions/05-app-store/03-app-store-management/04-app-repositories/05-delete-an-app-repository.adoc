@@ -1,0 +1,60 @@
+---
+title: "Delete App Repository"
+keywords: "Kubernetes, {ks_product}, workspace, app repository, delete app repository"
+description: "Describes how to delete an app repository."
+weight: 05
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **App Repository**
+
+This section describes how to delete an app repository.
+
+// Warning
+include::../../../../../../_ks_components/admonitions/warning.adoc[]
+
+Once an app repository is deleted, users cannot install applications from it. Please perform this operation with caution.
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Delete a Single App Repository
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appRepositories/appRepositories-oper-deleteASingleRepository.adoc[]
+
+== Batch Delete App Repositories
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appRepositories/appRepositories-oper-deleteMultipleRepositories.adoc[]

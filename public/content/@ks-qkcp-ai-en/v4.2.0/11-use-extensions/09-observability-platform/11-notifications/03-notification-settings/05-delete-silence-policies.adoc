@@ -1,0 +1,57 @@
+---
+title: "Delete a Silence Policy"
+keywords: "Kubernetes, {ks_product}, Platform Settings, Notification Management, Notification Settings, Silence Policy, Delete a Silence Policy"
+description: "This section describes how to delete a silence policy."
+weight: 05
+---
+
+:ks_navigation: **Notification > Notification Settings**
+// :ks_permission: **Platform Settings Management**
+
+This section describes how to delete a silence policy.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Notification** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Delete a Single Silence Policy
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the silence policy you want to delete, and then select **Delete** from the drop-down list.
+
+. In the **Delete Silence Policy** dialog box, enter the name of the silence policy, and then click **OK**.
+
+== Batch Delete Silence Policies
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Select the checkboxes on the left side of the silence policies you want to delete, and then click **Delete** at the top of the list.
+
+. In the **Batch Delete Silence Policies** dialog box, enter the name of the silence policy, and then click **OK**.
++
+--
+include::../../../../../_custom/note-separateNamesByComma.adoc[]
+--

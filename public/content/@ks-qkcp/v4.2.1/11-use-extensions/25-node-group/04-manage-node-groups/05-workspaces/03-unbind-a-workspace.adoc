@@ -1,0 +1,49 @@
+---
+title: "解绑企业空间"
+weight: 03
+---
+
+:ks_permission: **节点组管理**
+:ks_menu: **企业空间**
+
+本节介绍如何解除企业空间与节点组的绑定关系。
+
+
+== 前提条件
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* 节点组已经与一个企业空间绑定。
+
+== 解绑单个企业空间
+
+include::../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
+
+. 在需要删除的企业空间右侧点击image:/images/edgewize/zh/icons/delete.svg[delete,18,18]。
+
+. 在**删除企业空间**对话框，输入企业空间的名称，然后点击**确定**。
+
+== 批量解绑企业空间
+
+include::../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
+
+. 选择需要删除的企业空间左侧的复选框，然后在企业空间列表上方点击**删除**。
+
+. 在**删除企业空间**对话框，输入企业空间的名称，然后点击**确定**。
+
++
+--
+include::../../../../../_custom/note-separateNamesByComma.adoc[]
+--

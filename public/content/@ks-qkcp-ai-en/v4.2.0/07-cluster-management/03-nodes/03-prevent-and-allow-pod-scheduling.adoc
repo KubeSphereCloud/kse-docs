@@ -1,0 +1,39 @@
+---
+title: "Block and Allow Pod Scheduling"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Node, Cluster Node, Block and Allow Pod Scheduling"
+description: "Describes how to block and allow pod scheduling."
+weight: 03
+---
+
+:ks_permission: **Node Management**
+
+This section describes how to block and allow pods from being scheduled to a node.
+
+== Prerequisites
+
+:relfileprefix: ../../../
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../_custom/clusterManagement/nodes/nodes-oper-openListPage_new.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg["more",18,18] on the right side of the node you want to operate on, then select **Stop Scheduling** from the drop-down list. After the operation is complete, the node status will change to **Unschedulable**.
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg["more",18,18] on the right side of a node with the status **Unschedulable**, then select **Enable Scheduling** from the drop-down list to allow pods to be scheduled to this node.
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+After a node's status is set to **Unschedulable**, newly created pods will no longer be scheduled to this node. The pods originally running on the node are not affected.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]

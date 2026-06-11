@@ -1,0 +1,102 @@
+---
+title: "在 KubeSphere UI 中启用扩展资源管理"
+weight:  01
+---
+
+KubeSphere 支持通过集群级配置，将 Kubernetes 的**扩展资源（Extended Resources）**纳入 UI 的统一管理与配额控制能力。
+
+该机制不仅适用于 **NPU**，也可用于 **GPU、FPGA、RDMA、自定义硬件资源等多种资源扩展场景**。
+
+该方式无需修改 KubeSphere 源码，通过配置即可灵活扩展 UI 对新资源类型的支持。
+
+== 前提条件
+
+* 已成功部署 KubeSphere。
+* 具备集群管理员权限。
+* 集群节点中已注册对应的 Kubernetes 扩展资源（可通过 `kubectl describe node` 查看）。
+
+== 配置说明
+
+通过创建一个集群配置 Secret，向 KubeSphere 注入扩展资源定义，从而在 UI 中展示并管理这些资源。
+
+示例配置说明了如何为 KubeSphere 增加 *NPU 资源配额管理能力*，并对不同类型的 NPU 进行区分展示和限制。
+
+[source,yaml]
+----
+piVersion: v1
+kind: Secret
+metadata:
+  name: io.kubesphere.config.clusterconfig.extendedresources
+  namespace: kubesphere-system
+type: config.kubesphere.io/generic-cluster-config
+stringData:
+  configuration.yaml: |
+    extendedResources:
+      - group: "NPU"
+        icon: "computing"
+        title:
+          zh: "NPU 配额"
+          en: "NPU quota"
+        description:
+          zh: "对不同类型的 NPU 分别进行限制"
+          en: "Limit different types of NPU separately"
+        resources:
+          - name: "huawei.com/Ascend910"
+            displayName:
+              en: "Huawei Ascend 910b"
+              zh: "昇腾910b"
+          - name: "huawei.com/Ascend910-12c.3cpu.32g"
+            displayName:
+              en: "Huawei Ascend 910b-12c.3cpu.32g"
+              zh: "昇腾910b-12c.3cpu.32g"
+          - name: "huawei.com/Ascend910-6c.1cpu.16g"
+            displayName:
+              en: "Huawei Ascend 910b-6c.1cpu.16g"
+              zh: "昇腾910b-6c.1cpu.16g"
+----
+
+== 关键字段说明
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|*group*
+|扩展资源的分组名称，在 UI 中作为一级分类展示（如 NPU、GPU 等）。
+
+|*icon*
+|UI 中显示的资源图标类型。
+
+|*title / description*
+|资源分组的中英文名称与说明，用于提升 UI 可读性。
+
+|*resources*
+|具体的扩展资源列表，一个资源通常对应一个 Kubernetes 扩展资源名。
+
+|*resources.name*
+|Kubernetes 中定义的扩展资源名称（如 `vendor.com/device`）。
+
+|*resources.displayName*
+|该资源在 KubeSphere UI 中展示的名称，支持中英文。
+|===
+
+
+== 支持的资源类型
+
+该配置方式可用于所有 Kubernetes 扩展资源，包括但不限于：
+
+* GPU（如 `nvidia.com/gpu`）
+* NPU（如昇腾、寒武纪等）
+* FPGA
+* RDMA / 高速网卡资源
+* 其他厂商或自定义硬件加速资源
+
+只要资源已被 Kubernetes 正确识别并注册，即可通过该机制纳入 KubeSphere UI 管理。
+
+== 生效效果
+
+配置生效后：
+
+* 在 **企业空间 / 项目 > 资源配额** 页面中可看到新增的扩展资源分组
+* 管理员可对不同类型的扩展资源分别设置配额限
+* 用户可在 UI 中直观地查看和使用异构算力资源

@@ -1,0 +1,939 @@
+---
+title: server.yaml 参数说明参考
+weight: 20
+---
+
+== 文件规范
+
+* 大小写敏感
+* 使用缩进表示层级关系
+* 缩进时不允许使用 Tab 键，只允许使用空格。
+* 缩进的空格数目不重要，只要相同层级的元素左侧对齐即可
+
+== account_server 相关配置
+
+[source]
+----
+account_server:
+  app_session_expired_time: 2592000 #app # 会话超时时间（秒）
+  attachment_type: 'qingstor'
+  email_domain_black_list: 'yopmail.com,skytaox.tk,mailinator.com,monumentmail.com,safetymail.info,mail.bccto.me,reallymymail.com,spamgoes.in,mailismagic.com,suremail.info,einrot.com,drdrb.com,jourrapide.com,armyspy.com,dayrep.com,ojooo.net,superrito.com,sendspamhere.com,fleckens.hu,rhyta.com,grr.la,my10minutemail.com,mailtothis.com,vidchart.com,yyou.co.uk,beddly.com,broadbandninja.com,evopo.com,whatsaas.com,vomoto.com,advantimo.com,6paq.com,fammix.com,spikio.com,whatiaas.com,appixie.com,consumerriot.com,99experts.com,sohu.y.35.com,smail.cn.pn,mailnesia.com,meltmail.com,filzmail.com,iozak.com,79mail.com'
+  email_domain_black_list_partial_match: 'guerrillamail,sharklaser,tempmail,f3322.org,weikii.com' #注册邮箱黑名单？
+  initial_bonus: 'cny:2,hkd:2,usd:0.5'  #最初用户奖励
+  qingstor_enable: 0
+  reject_login: '21600|5|86400' #拒绝登录参数意义？
+  session_expired_time: 21600  # 会话超时时间（秒）
+  strict_verify: ''
+  verify_bonus: # 认证奖励
+    company: 'cny:48,hkd:48,usd:8'
+    personal: 'cny:8,hkd:8,usd:1.5'
+  coupon_disabled_consoles: ''
+----
+
+== 用户资源监控告警服务配置项（自动生成）
+
+[source]
+----
+alarm_server:
+  ignore_hosts: ''
+  ws_proxy_host: 'proxy'  # proxy 解析的是一个floating_ip，配置在proxy0或proxy1上,installer4.x之后host变为zoneid-proxy
+----
+
+== 自动伸缩服务配置（自动生成）
+
+[source]
+----
+autoscaling_server:
+  api_server:
+    default:
+      api_host:'api.qingcloud.com'  #api域名，根据firstbox:/pitrix/conf/variables/domain的配置生成，默认安装出来是api+.domain。
+      api_port: '7777'   #api server端口
+      api_protocol:'http' #apiserver传输协议，http或https，根据firstbox:/pitrix/conf/variables/site_protocol的配置生成
+----
+
+== connection broker（cb_server 网页登录虚机 Console）服务配置（自动生成）
+
+[source]
+----
+cb_server:
+  domain_name:  #下面两个域名根据firstbox:/pitrix/conf/variables/下的zone_id和domain配置生成
+    proxy0: 'cb0pek1.qingcloud.com'  #proxy0的域名为cb0_zoneid+domain
+    proxy1: 'cb1pek1.qingcloud.com'  #proxy1的域名为cb1_zoneid+domain
+  wss_cert_file: '/pitrix/conf/cert/server-chained.pem' #cb_server ssl证书配置位置，http环境不需要此配置
+  wss_key_file: '/pitrix/conf/cert/server-key.pem' #cb_server ssl证书配置位置，http环境不需要此配置
+# ci_server配置项
+ci_server:
+  ws_proxy_host: 'proxy'
+----
+
+== 通用配置项 common
+
+=== 通用功能开启设置
+
+[source]
+----
+common:
+  enable_billing: true  # false 表示关闭计费  true表示打开计费，没配置默认为True，只在6.0及之后的版本生效。
+  only_support_shared_volume: ''
+  image_min_zones: 1
+  multiple_resource_group_resource: 'scheduler,autoscaling_policy,alarm_policy,keypair,security_group,user_group,wan_net' #跨可用区资源？
+  multiple_resource_group_resource_limit: 10 #
+  ssh_cipher: 'aes128-gcm@openssh.com'
+  appcenter2_available_areas: 'pek1' #可以使用appcenter的区域，若有多个region，填写各个region的region_id，若所选region为zone模式部署，则填写该zone的zone_id；
+  appcenter_administrator: ''  #待定
+  ca_servers: 'hrb1r02n03' #ca服务器 已经弃用
+  disable_bandwidth_leasing: 1 #控制是否收取 eip 额外带宽 的费用,选1就是不额外收费
+  eip_ban_command: '/usr/bin/python /pitrix/bin/ban_ip.py -a %s -o 1' #待定
+  eip_ban_remote_hosts: '' #待定
+  eip_minimum_bw: 100 #待定
+  enable_bm_ikvm_vnc: 1 #开启bminstance vnc访问，目前仅支持部分硬件（dell）
+  bm_vnc_type: ''
+  enable_bm_vbc: 1 #开启bm基础网络
+  enable_external_span_server: 0  # 是否允许物理机或云外ip作为 span server。0: 仅允许基础网络ip； 1：无限制，可以使用云外的ip接收span流量
+  enable_hotplug: 0 #支持虚机在线动态修改内存和cpu, 此选项需要和前端的local_config.yaml里的选项一起打开才能完整生效 建议关闭
+  enable_lb_nbproc: 1  #负载均衡起是否启用多进程模式, 默认都开,提升单节点性能
+  enable_license: false #license功能开关
+  enable_mig5: 1 # 是否启用migration version 5迁移 -- 默认都打开,更高效的迁移
+  enable_nbi: 1  #是否打开network based image,加速系统镜像没同步到本地盘时的虚机启动速度,默认都开
+  nbi_type: 'nbd'　 # network based image的协议,目前都设置成nbd
+  enable_set_vbc_ip: 1 #是否支持指定基础网络地址,默认都开
+  is_vxlan_lbc_use_service_ip: 0 # 开启时，对新建的lb分配service ip, lb listener添加后端不再支持 ip 地址, 默认关闭.
+  enable_vdi: 1 #是否启用vdi支持（spice协议）,默认都开
+  enable_ipv6_on_border: 0 # border是否开启IPv6
+  enable_vg_ha: 1 #是否启动vg ha功能是 如果是1， 那么检测到 vg 有异常的时候， 会发任务迁移这台 VG 上的 eip 对对应的ha机器上 0为不启用，1为启用
+  enable_vxnet_mq: 1 #打开物理网卡的多队列功能,最大限度利用cpu的能力,默认都打开,目前只有intel/mellanox的硬件支持此配置,其他硬件配置上不生效
+  env: 'production'  # 生产环境 默认都开 只有开发/测试时会指定其他环境
+  reset_instance_login_pwd_online: 0
+  # 配置 1 的话，有 sriov 的 kvm 的 pitrix 主机会进行 rename 成 ethx
+  # 配置 2 则每个 有 sriov 的 kvm 的 主机都会用 udev 去 rename
+  sriov_nic_rename_type: 1
+  # 配置为 1，pitrix 的 sriov_nic_type =2 的主机也可以应用 sg
+  # 配置为 2, 所有的 sriov_nic_type =2 的主机也可以应用 sg
+  sriov_sg_type: 1
+  # 开启 ct offload 的功能，不支持的 hyper 开启也无影响
+  enable_ct_offload: 1
+  enable_sriov: 1
+  sriov_policies:
+    loadbalancer: '0,2'
+    nfv: '0,2'
+    eip: '0,2'
+    instance: '0,1,2'
+  cluster_node_access_users: ''
+# cmd和sql执行日志输入级别配置
+  special_info_log:
+     enable_sql_info: 1   # 配置为1，将执行的sql语句以info级别日志进行输出（不用开启debug）
+     enable_cmd_info: 1 # 配置为1，将执行的cmd指令以info级别日志进行输出（不用开启debug）  
+----
+
+=== 基础环境配置
+
+[source]
+----
+common:
+  rx_rate_over_limit: 1000
+  sdn_driver: 'nfv' #sdn控制器类型 nfv为sdn模式 drvier为vlan模式
+  ssh_port: 22 ## 物理服务器和管理节点的ssh端口号
+  uuid_version: 2 # uuid 的版本控制，默认为 1。支持：[1, 2]
+  verify_key: '/pitrix/conf/global/verify.pub'
+  vm_network: '10.10.0.0/16' # 基础网络网段
+  vm_networks:    # 基础网络网段，支持多个段，配置格式如下
+    - '10.10.0.0/16'
+    - '20.10.0.0/16'
+  vxnet_ipv6_subnets: # ipv6私有网络网段
+    - ''
+  vxnet_subnets:  # 私有网络网段
+    - '172.17.0.0/16'
+  vxnet_version: 2 # SDN版本
+  zone_code: 1  # zone的id
+  region_id: 'bjctpgr' # region的id
+  zone_id: 'pek1'  # zone的id
+  image_sources: 'pek1r02n03,pek1r03n03'　＃# 映像文件所在的节点,即seed节点
+  zone_settings:
+    hrb1:
+      backstore_replicas: 2 #备份副本数量
+      backstore_servers: #备份位置，即snapshot节点
+        - 'pek1r02n03'
+        - 'pek1r03n03'
+      backstore_type: 'disk'  #备份类型
+      fg_proxy: 'pek1-proxy' #fg代理位置
+      image_sources: # 映像文件所在的节点,即seed节点
+        - 'pek1r02n03'
+        - 'pek1r03n03'
+      repl_zone: ''
+      virtual_gateways: #vghostname 若为h3cvg 则此处参数应与virtual_gateway部分配置一致
+        - 'hrb1r02n00'
+        - 'hrb1r02n01'
+  check_sanc_label_rg: false  # 详请参考 https://cwiki.yunify.com/pages/viewpage.action?pageId=66167094
+  volume_type_label:
+    5: 'SSD'   
+    6: 'HDD'
+    7: 'SSD2'
+    default: 'SSD'
+  instance_class_label:
+    6: 'SSD'  
+    7: 'HDD'
+    203: 'SSD'        # example：默认在SSD标签上创建E3型主机
+    default: "SSD"    # example：不在上面列表钟的主机类型，默认创建在SSD标签上
+  volume_type_rg:     #  配置rg映射关系，创建页面打开指定rg创建功能时会读取由此生成的api信息
+    5:
+      - "SSD"
+      - "HDD"
+    6:
+      - "SSD"
+      - "HDD"
+  instance_class_rg:
+    6:
+      - "SSD"
+      - "HDD"
+    7:
+      - "SSD"
+      - "HDD"
+  nfv_nat_spec_map:
+    !!int 1:
+      cpu: 1
+      memory: 1024
+      node_count: 2
+      rps: 500
+      vxnets: 1
+    !!int 2:
+      cpu: 2
+      memory: 1024
+      node_count: 4
+      rps: 250
+      vxnets: 2
+    !!int 3:
+      cpu: 4
+      memory: 1024
+      node_count: 8
+      rps: 125
+      vxnets: 4
+----
+
+=== 虚拟化策略设置
+
+[source]
+----
+common:
+  hypervisor_policies: #可选配置为lxc和kvm， lxc仅在sds2.0环境可以使用，如果创建资源没有指定虚机类型,取列表的第一个作为当前默认类型
+    cache: 'kvm'
+    hadoop: 'kvm'
+    loadbalancer: 'kvm'
+    mongo: 'kvm'
+    rdb: 'kvm'
+    rdb_mysql5.5: 'kvm'
+    router: 'kvm'
+----
+
+=== 网络访问限制设置
+
+[source]
+----
+common:
+  public_user_services: # 支持用户虚机访问的物理网络地址段,比如dns服务器,windows激活服务器等的地址段
+    - '172.21.33.100-172.21.33.135'
+    - '172.21.33.1-172.21.33.10'
+  intranet_networks:  #如果VM绑定了EIP，与物理环境互访问需要经过VG，效率较低，添加此配置，可以使VM用基础网络IP与物理网络互访。
+    - '10.249.0.0/16'
+    - '11.0.0.0/24'
+    - '192.168.0.0/24'
+  restricted_user_networks: ## 禁止用户虚机访问的物理网段
+    - '172.16.100.0/24'
+----
+
+=== 副本策略设置
+
+[source]
+----
+common:
+  repl_policies: # 如果创建资源没有指定副本策略,取列表的第一个作为当前默认策略
+    loadbalancer: '0,1'
+    hadoop: '0,1'
+    instance: '0,1'
+    volume: '0,1'
+----
+
+=== 预留合约设置
+
+[source]
+----
+common:
+  reserved_resource:
+    months: #资源支持的合约月份设置
+      bm_instance: '1,2,3,4,5,6,7,8,9,10,11,12,24,36'
+      dedicated_host_group: '1,2,3,4,5,6,7,8,9,10,11,12,24,36'
+      instance: '1,2,3,4,5,6,7,8,9,10,11,12,24,36'
+      rdb: '1,2,3,4,5,6,7,8,9,10,11,12,24,36'
+      volume: '1,2,3,4,5,6,7,8,9,10,11,12,24,36'
+    need_review:
+      dedicated_host_group: 'dedicated_host_group_size:10'
+      instance: 'count:50,cpu:200,memory:200,gpu:2'
+    zones: #开启预留合约的区域。若有多个region，填写各个region的region_id，若所选region为zone模式部署，则填写该zone的zone_id
+      bm_instance: ''
+      cluster: ''
+      dedicated_host_group: ''
+      instance: ''
+      volume: ''
+----
+
+=== 区域可使用资源范围设置
+
+resource_limits 配置分为三个层级：
+
+* default：该层级配置在各个区域均生效。
+* region：该层级配置在所在区域优先生效，即会覆盖 default 层级下的配置，default 层级下的配置可以添加到 region 下，之前版本实施的环境该层级为zone_id，当有多个区域时按需求填写每个区域的配置。
+* zone：此配置定义 resource_limits 内配置生效的区域填写各个区域的 region_id，installer4.x 之前版本实施的环境填写该区域的 zone_id。
+
+如下为 server.yaml 中 vol 参数与 volumetype 对应关系：
+
+[source]
+----
+VOLUME_TYPE_HIGH_PERFORMANCE = 0
+VOLUME_TYPE_HIGH_CAPACITY = 1
+VOLUME_TYPE_HIGH_CAPACITY_PLUS = 2
+VOLUME_TYPE_HIGH_PERFORMANCE_PLUS = 3
+VOLUME_TYPE_SAN = 4
+VOLUME_TYPE_HIGH_PERFORMANCE_SHARED = 5  # high performance shared volume, neonsan on "label SSD"
+VOLUME_TYPE_HIGH_CAPACITY_SAN = 6 # neonsan on "label HDD"
+VOLUME_TYPE_BM_LOCAL = 10  # local volume on bm instance
+VOLUME_TYPE_ST = 100
+VOLUME_TYPE_ET = 200
+----
+
+[discrete]
+==== default
+
+[source]
+----
+common:
+  resource_limits:
+    default: #default配置在各个区域均生效
+      ban_mm_vxnets: 1 # 是否允许一个虚机加入多个受管网络（0允许，1禁止）
+      ignore_mm_vxnet_users: ''  #ban_mm_vxnets=0的情况下,允许的非管理员用户使用特性"一个虚机加入多个受管网络", 空格分隔的多个usr id
+      bucket_create_whitelist: '' #对象存储用户白名单,白名单用户不限制创建的bucket数量,空格分隔的多个usr-id  例如'usr-abcdefg usr-xxxxxxx'
+      disabled_actions: ''  #禁止的api请求,空格分割的多个action,目前并未使用
+      disabled_features: '' #禁止的api请求,空格分割的多个action,目前并未使用
+      enable_nic_bandwidth: 0
+      volume_step: 10 #高性能盘(sas)调整最小单位(GB)
+      min_volume_size: 10 # 高性能盘(sas)最小硬盘大小（GB）
+      min_hcs_volume_size: 100 # neonsan on "label HDD" 最小硬盘大小（GB）
+      max_hcs_volume_size: 50000 # neonsan on "label HDD" 最大硬盘大小（GB）
+      hcs_volume_step: 100 # neonsan on "label HDD" 调整最小单位(GB)
+      hc_volume_step: 50 #大容量盘的调整最小单位(GB) 对应volumetype2
+      min_hc_volume_size: 100 #最小容量盘大小（GB）
+      max_hc_volume_size: 50000 #最大容量盘大小（GB）
+      hps_volume_step: 100   #大容量盘的调整最小单位(GB) 对应volumetype5
+      max_hps_volume_size: 500000 #超高性能容量盘（volumetype5）最大硬盘大小（GB）
+      min_hps_volume_size: 100 #超高性能容量盘（volumetype5）最小硬盘大小（GB）
+      max_abuse_eip_cnt: 1000 #全局当前zone每天新用户可以在windows主机上绑定eip的总数
+      max_alarm_policy_actions: 100  #一条告警策略里最大的action数
+      max_alarm_policy_resources: 2000 #一条告警策略关联的最多资源数
+      max_alarm_policy_rules: 1000  #一条告警规则里面的最大告警策略数
+      max_bucket_create_cnt: 100000  #可创建的最大bucket数
+      max_change_eip_billing_mode_cnt: 100 #每日调整eip计费方式的最大次数
+      max_eip_bandwidth: 10000 # 最大eip带宽（Mbps）
+      max_eip_count: 1000  # 最大eip数量（个）
+      max_gpu_count: 30  #最大gpu数量（个）
+      max_image_shared_users: 10000  # 最大共享映像数量（个）
+      max_instance_count: 100  # 最大创建虚机数量（个）
+      max_item_in_resource_group: 1000   # 资源组中最大资源数量（个）
+      max_listener_backends: 1000 # 最大监听器后端数量（个）
+      max_loadbalancer_listeners: 1000  # 负载均衡器最大监听器数量（个）
+      max_loadbalancer_policy_rewrite_rules: 50  # 负载均衡器策略最大重写规则数量（条）
+      max_loadbalancer_policy_rules: 50 # 负载均衡器策略最大转发规则数量（条）
+      max_member_in_user_group: 100 # 用户组中最大用户数（个）
+      max_nic_per_instance: 100 #单个虚机做多绑定网卡数
+      max_resource_shared_users: 10000   #可授权共享资源的最大用户数
+      max_rg_cnt_item_can_join: 10 #一个资源所能加入的资源组的最大个数
+      max_router_count: 100 #单次调用所能创建的最大路由器个数
+      max_router_entries: 1000   #路由器上能添加的最大静态路由数
+      max_router_statics: 1000 #vpc里各种规则的总数(dhcp/tunnel/vpn)
+      max_router_vxnets: 100 # 路由器最多连接私有网络数量（个）
+      max_rule_in_group_role: 100 #资源协作相关 用户组最大成员数
+      max_security_group_rules: 1000  #防火墙最大规则数
+      max_security_group_rulesets: 5 #防火墙最大规则数
+      max_security_group_snapshots: 100  #最大防火墙快照数
+      max_volume_count: 100  #单次创建最多硬盘数
+      max_volume_per_inst: 100 #单个虚机做多挂载硬盘数
+      max_volume_size: 2000 #高性能盘(sas)单个最大尺寸(GB)
+      max_vos_replica_count: 30
+      max_vxnet_count: 100 #单次最多创建的vxnet数量
+      min_abuse_eip_sec: 86400 #从创建eip起 到释放eip的最小时间间隔
+      min_hosts_per_dedicated_group: 2
+      min_reserved_hosts_in_pool: 2
+----
+
+[discrete]
+==== region
+
+[source]
+----
+common:
+  resource_limits:
+    pek:
+      bm_zones:
+        - 'pek1'
+      neonsan_zones:
+        - 'pek1'
+      public_zones:
+        - 'pek1'
+      valid_cpu_cores: '1, 2, 4, 8, 12, 16, 24, 32' # 支持的cpu数量
+      valid_cpu_memory_pairs:   # 支持的cpu个数与内存配比关系
+        !!int 1: '512, 1024, 2048, 4096, 8192, 12288, 16384, 24576, 32768, 40960,
+          49152, 65536'
+        !!int 2: '512, 1024, 2048, 4096, 6144, 8192, 12288, 16384, 24576, 32768, 40960,
+          49152, 65536'
+        !!int 4: '512, 1024, 2048, 4096, 6144, 8192, 12288, 16384, 24576, 32768, 40960,
+          49152, 65536'
+        !!int 8: '512, 1024, 2048, 4096, 6144, 8192, 12288, 16384, 24576, 32768, 40960,
+          49152, 65536'
+        !!int 12: '512, 1024, 2048, 4096, 6144, 8192, 12288, 16384, 24576, 32768,
+          40960, 49152, 65536'
+        !!int 16: '512, 1024, 2048, 4096, 6144, 8192, 12288, 16384, 24576, 32768,
+          40960, 49152, 65536'
+        !!int 20: '512, 1024, 2048, 4096, 6144, 8192, 12288, 16384, 24576, 32768,
+          40960, 49152, 65536'
+        !!int 24: '512, 1024, 2048, 4096, 6144, 8192, 12288, 16384, 24576, 32768,
+          40960, 49152, 65536'
+        !!int 32: '512, 1024, 2048, 4096, 6144, 8192, 12288, 16384, 24576, 32768,
+          40960, 49152, 65536, 131072'
+      valid_instance_classes: '0,1,5' # 支持的instance类型
+      valid_memory_size: '512, 1024, 2048, 4096, 6144, 8192, 12288, 16384, 24576,
+        32768, 40960, 49152, 65536, 131072' # 支持的内存大小
+      vpc_ipv6_prefixlen: '56'
+      vxnet_ipv6_prefixlen: '64'
+      vxnet_ks_white_list: ''
+----
+
+[discrete]
+==== Zones
+
+[source]
+----
+common:
+  resource_limits:
+    zones: 'pek' # 共有哪些zone
+----
+
+[discrete]
+==== TPSC 磁盘膨胀比例
+
+[source]
+----
+common:
+  tpsc_lv_expand: 110  # TPSC主机磁盘（系统盘，数据盘（如果有））膨胀比例，非必须字段（不填写后端默认为100，即不膨胀），数值范围：>=100的整数，表示膨胀的百分比，即膨胀110%
+----
+
+== 计算节点相关配置
+
+[source]
+----
+compute_server:
+   # 虚拟机 proc 文件系统有问题时，是否以及何时执行迁移的配置
+  migrate_broken_proc_filesystem:
+    # 0: 只打印; 1: 立即迁移 ; 2: 在 time_range 时间内自动迁移
+    enable: 0
+    # 1:00 - 1:59  or 3:00 - 4:59 可以自动迁移
+    time_range: '1-1,3-4,'
+  rcopy_to_type: 'mtar' # 可配置为 rsync 或者 mtar, 用在 cm 资源的迁移，有稀疏文件时用 mtar 迁移会更快，可以根据需要实测对比
+  lb_high_mem_restart : 0 # 默认即是关闭，表示关闭 lb 内存高时重启haproxy的逻辑，可以根据需要打开
+  enable_nested_kvm: 0 # 是否开启嵌套虚拟化, 默认不开启, 修改后需要重启服务, 因为系统有缓存
+  cpu_short_name_map:  # 主机类型与cpu名字的map, short_name 用于匹配 hyper上lscpu的结果, 若匹配的上, vm内会用cpu_full_name_map的配置显示cpu信息
+    203: 'xxx'
+  cpu_full_name_map: # 主机类型与cpu名字的map,  可在vm内用lscpu查看效果, 会显示成该配置项
+    203: 'xxx'
+ 
+ 
+ 
+  archive_keep_time: 259200  # archive 保留的时间，单位是秒，默认是30天。
+  disable_hyperpair_rescue: 0 #关闭灾难迁移
+  enable_live_migrate_min_downtime_mode: 0 #开启最小中断时间在线迁移，只能在同构hyper间可以进行最小中断时间迁移，from patch20190911
+  append_guest_boot_params:
+    nopti:
+      centos,fedora,redhat,oracle,opensuse,suse,slse,debian,ubuntu,arch: 'nopti spectre_v2=off'
+  bw_tx_alert_action: 'alert'   # 发现 tx 带宽超标后的动作，不配置则不检查也无告警日志:
+                                # limit 限速:限速值为 limit_upto, 默认 4000kb/sec
+                                # stop: 暂停主机
+                                # alert: 只告警日志
+  pps_tx_alert_action: 'alert'  # 发现 tx pps超标后的动作，不配置则不检查也无告警日志:
+                                # limit 限速:限速值为 limit_upto, 默认 4000kb/sec
+                                # stop: 暂停主机
+                                # alert: 只告警日志
+  ban_ddosing:
+    ban_timeout: 3600 # 单个ip被ban的时间
+    max_invalid: 100 # 最大的invalid的个数
+    new_est_rate: 1.2 # new和est状态链接的比例
+    udp_est_rate: 1.3  # udp rr 和est状态链接的比例
+    limit_upto: 4000 # action 为 limit 时的限速值, kb/sec
+  pps_tx_alert: 150000   #tx pps流量超标的值:
+  disable_router_aspoof: 0 # 禁用虚拟路由器基础网络网卡的mac/ip地址绑定功能。配置成0时，适合Cisco ACI这种有路由学习功能的交换机，避免异常流量导致路由混乱，也可以减小肉鸡大量发包时，对内网的带宽占用。
+  router_synflood_limit: 5000  为 0 时不配置 vr 的 syn 报文限速, 非零时其值为限速的值, 范围为 [0, 10000], 默认为 0
+  bandwidth:        # 带宽限速
+    bw_broadcast: 1000  # 广播报文限速, 单位 kbit/s
+    inbound:   # 入向带宽限速
+      average: 0  # 平均值（KBps）
+      burst: 40960                  # 限速的敏感度阈值，例如40960意思是累计流量达到40Mbps以后才会做一次限速检测，不需要手动更改，保持不变即可
+      peak: 0 # 最大值（KBps）
+    outbound: # 出向带宽限速
+      average: 0
+      burst: 40960
+      peak: 0
+  bm_border_as_number: 65001 #border交换机asnumber
+  disable_bm_os_disk_resize: 1 #禁止bmnode将整个跟分区全部使用
+  bm_instance_erase_type: 2 #私有云一般设置为0， 表示删除BM主机的时候不清楚磁盘 BAREMETAL_ERASE_TYPE_NO = 0
+BAREMETAL_ERASE_TYPE_FULL = 1 BAREMETAL_ERASE_TYPE_FAST = 2
+  bm_image_transfer_timeout: 600 #创建bm主机时拷贝镜像的超时时间（秒）
+  bm_network_mode: 'vlan' #bm网络模式 详细文档参见bm部署文档
+  bm_modprobe_blacklist: 'igb, ixgbe' # bm2.0 要禁用的网卡驱动
+  cm_default_with_nesting: 1 #开启后可以在CM 里面跑 docker，默认要关闭即配置为 0，开启的话要关闭每个 lxc 主机的 udevd 服务
+  container_space_threshold: 90 # /pitrix/data/container目录使用率阈值（%）
+  cpu_si_threshold: 20 # cpu si负载超过这个值后，就无法被调度创建新vm
+  cpu_wa_threshold: 20 # cpu wa负载超过这个值后，就无法被调度创建新vm
+  cpu_oversale_rate: 5 # cpu超卖比（倍）
+  default_cpu_model: '' #默认cpu体系架构
+  disable_aspoof: 1  # 禁用mac/ip地址绑定。默认0, 表示vm网卡发出去的报文源mac和ip都不可更改，必须使用dhcp分配的ip地址。
+  disk_reserve_rate: 0.85  # 磁盘超卖比
+  enable_fence: 0
+  enable_disaster_hyper_restart: 1 #对接第三方NAS存储时，支持使用fence设备解决可能出现的并发访问引起数据损坏的问题,在对接第三方NAS存储的时候需要需要部署 bm server 并连入 ipmi 网络以重启 hyper 服务器,开启此配置可以重启服务器
+ auto_healing: #自动迁移功能参数
+    memory_low_threshold: 5 #内存剩余门限值 百分比， 参考boss内存使用率计算 和 内存超标触发迁移条件
+    space_low_threshold: 5 #磁盘剩余门限值 百分比
+    load_high_threshold: 0 #io门限
+    cpu_high_threshold: 0 # cpu用量门限，百分比。不推荐开启，因为容易触发大量迁移
+    slab_high_threshold: 0 # kernel slab 用量门限，百分比。不推荐开启，因为容易触发大量迁移
+    repl_receive_high_threshold: 20  #解决zfs receive过多引起同步不及时的问题
+  enable_auto_healing: 1  #开启/关闭自动迁移功能
+  enable_mig5_volume: 1 #用于快速加载硬盘,会先用mig5做远程加载,再拷贝
+  enable_mp_monitoring: 1
+  enable_place_policy_v2: 1
+  enable_zk_proxy: 1 # 是否启用zk_proxy
+  image:  # bm，路由器,vsan,PAAS应用使用的映像
+    bootcore: 'bootcorec'
+    elasticsearch: 'elasticsearcha'
+    hbase: 'sparkd'
+    hdw: 'hdw'
+    kafka: 'kafkaa'
+    loadbalancer: 'loadbalancern'
+    memcached1.4.13: 'cache-memcached1.4.13a'
+    mongo3.0: 'mongo30-a'
+    nas: 'nasa'
+    opsbuilder: 'opsbuildera'
+    rdb_mysql5.5: 'rdbmysql553'
+    rdb_mysql5.6: 'rdb-mysql56-1'
+    rdb_mysql5.7: 'rdb-mysql57-1'
+    rdb_mysql_proxy: 'rdb-mysql-proxy'
+    rdb_psql9.3: 'rdb-psql93-1'
+    rdb_psql9.4: 'rdb-psql94-1'
+    redis: 'redisa'
+    redis2.8.17: 'cache-redis2.8.17a'
+    router: 'routern'
+    s2: 's2a'
+    spark: 'sparke'
+    storm: 'storm'
+    zookeeper: 'zookeeper'
+    nfvnat: 'nfvnata'
+  image_space_threshold: 90 # /pitrix/data/image目录使用率阈值（%）
+  iotune: 虚机磁盘IO限速
+    read_bytes_sec_mass_vol: 37748736 #容量盘读取吞吐上限，0代表不限制。
+    read_bytes_sec_vos_vol: 268435456 
+    read_iops_sec_flash_vol: 25000
+    read_iops_sec_vos_vol: 30000
+    total_iops_sec: 5000   #性能IOPS上限，0代表不限制。
+    write_bytes_sec: 134217728
+    write_bytes_sec_flash_vol: 268435456
+    write_bytes_sec_mass_vol: 37748736
+    write_bytes_sec_vos_vol: 268435456
+    write_iops_sec_flash_vol: 25000
+    write_iops_sec_vos_vol: 30000
+  live_migrate_version: 4 #在线迁移的方式 默认为4 不需要修改
+  maintain: # 维护配置项
+    image_limit_rate: 128000000  # bot 内部上传、下载 image 时的限速
+    live_migrate_ro_limit_rate: 128000000  # 在线迁移只读文件的限速，比如 base image 或主机 ro image 时
+    live_migrate_rw_limit_rate: 128000000   # 在线迁移可写文件的限速，相当于迁移时，最后的切换速度。
+    migrate_limit_rate: 512000000   # drbd 迁移限速
+    clone_volume_limit_rate: 64000000  #设置克隆限速为 64M/s，0 表示不限速，不配置时的缺省值是 128M/s from ptach 20200305 ,针对解决neonsan硬盘限速问题，建议对混插环境，设置限速为 64MB/s；对全闪环境，使用缺省值
+    mem_oversale_rate: 1 # 内存超卖比
+  network_driver_config_file: '/pitrix/conf/network_driver.ini'  # bm 专有配置, 用于指定 swctl server 配置 bm 网络时所使用的网络插件及配置文件
+  network_l3_plugin: 'networking_terra.l3.terra_l3.TerraL3RouterPlugin' # bm 专有配置, 用于指定 swctl server 配置 bm 网络时所使用的网络插件及配置文件
+  network_ml2_plugin: 'networking_terra.ml2.mech_terra.TerraMechanismDriver' # bm 专有配置, 用于指定 swctl server 配置 bm 网络时所使用的网络插件及配置文件
+  network_qcext_plugin: 'networking_terra.qcext.qcext_terra.TerraQcExtDriver' # bm 专有配置, 用于指定 swctl server 配置 bm 网络时所使用的网络插件及配置文件
+  os_provision_subnet: '10.100.100.0/24' # bm 专有配置, 物理主机会加入该子网以便拷贝镜像
+  os_provision_subnet_gateway: '' bm 专有配置, 物理主机拷贝镜像子网的网关
+  pxe_netmask: '/22'  # bm 专有配置, 用于指定以 pxe 方式启动物理主机时所使用子网的掩码, /22 表示 255.255.252.0
+  pxe_subnets: # bm 专有配置，用于指定以 pxe 方式启动物理主机时所使用子网的动态 IP 地址范围，不包括 bm server 节点的 IP
+    - '192.18.244.10-198.18.247.250'
+  repl_dynamic_throttle: 1
+  repl_no_compress_ratio: 1.2 # 如果压缩率低于这个阈值，则不进行压缩； 这里 1.2 表示压缩率是 1.2 倍
+  repl_qcow2_volume_snapshot: 1  # 打开表示对 repl 节点的备份使用 zfs 快照方式
+  repl_redundancy_level: 2 # 副本的级别。0：副本跨物理机，1：副本需要跨 box，2：副本需要跨 rack
+  sdn_monitor: 1
+  snapshot:
+    backstore:
+      replicas: '2' #默认备份副本数
+      servers:  # snapshot节点有哪些
+        - 'pek1r07n00'
+        - 'pek1r08n00'
+      type: 'disk'
+  spice_compression: 'auto' # spice协议是否启用压缩
+  strict_image_checking: 1 # 一个账户的资源，在相同的物理机上最多只有一个 no repl 的资源。如果设置为 0,则取消这个检查
+  vbc_vip_subnet: 24
+  vbc_network_mode: ''
+  vg_protection: 1
+  vol_cache_mode: 'writeback'
+  vom_cache_mode: 'none'
+  vos_replica_count: 2 #硬盘副本数量 对于重要数据建议使用3副本
+  vpc_border_as_number: 65534  # 用于指定 vpc border 所使用的自治系统编号
+  min_kernel_vr: '4.4.0-83' #最低kernel版本
+  enable_vbc_default_sg: 1# 为 0 时关闭 vbc 的 sg 和 isol 隔离策略, 默认为 1
+  hyperpair_rescue_hold_mode: 0
+  allow_fast_rescue: 1 #1代表mirror检测到pair hyper节点故障就迁移； 0或没有代表检测mirror故障+其它条件综合判断，都满足才会迁移，allow_fast_rescue这个参数不允许在生产环境开启，只能在poc中使用
+  hyperpair_rescue_strict_mode: 0  #解决drbd在某些环境下因为连接不稳定容易引起宕机的问题 (默认值即是0, 配置成1则只要disk检测失败就会触发宕机)from ptach20191008
+  max_vbr_jobs: 20 #防止太多并发任务造成阻塞
+  max_compute_jobs: 0   # 最多可以并发多少计算job from patch 20200305
+  max_seed_jobs: 0      # 最多可以并发多少映像job from patch 20200305
+  max_vbr_jobs: 0       # 最多可以并发多少备份job from patch 20200305
+  max_migrate_jobs: 10  # 最多可以并发多少迁移job from patch 20200305
+  job_throttle: #细粒度控制每个job的并发个数
+    "CloneInstances": 3 #sanc全闪建议配置为5
+    "CreateVolumeFromSnapshot": 3 #sanc全闪建议配置为5
+    "MigrateInstances": 3 #sanc全闪建议配置为5
+  enable_io_scheduler_update: 1  #允许设置qbd设备的io scheduler为deadline
+  rescue_wait_time  #修改灾难迁移判定时间
+  resource_server: #删除资源物理服务器上保留时间的配置（秒）
+  eip_traffic_charge_policy: ''
+  keep_time: #资源保留时间
+    suspended: #因欠费暂停的资源
+      default: 432000
+      eip_without_icp: 60
+      extended: 864000
+    terminated: #销毁的资源
+      default: 7200
+  least_leasing_time: 0
+  archive_keep_time_snapshot: 432000 #删除资源备份服务器上保留时间的配置（秒）
+  disable_fragment_packet_offload: 0 #表示offload环境udp大包处理是否打开，0为关闭，1为打开
+  instance_ip_allocation_mode: # ip 分配的方式， 默认 0 ，使用 dhcp 分配， 1 先使用 db 分配；包括如下资源子类型
+    instance: 1
+    cluster: 1
+    container_group: 1
+----
+
+== Fgserver 相关配置
+
+[source]
+----
+fg_server:
+  max_loadbalancer_snapshots: 20 #lb备份最大数量（个）
+  max_router_snapshots: 20 #vpc备份嘴阀数量（个）
+  max_lb_router_auto_snapshots: 5
+  disable_new_job: false #禁止操作任何任务
+  max_change_repl_policy_cnt: 2
+  max_heavy_jobs: 20
+  max_pending_jobs: 20 #最大等待任务数（个）
+  max_os_disk_size: 500 #系统盘最大容量（GB）
+  selected_images: 'centos68x64a,centos74x64,debian87x64,xenial4x64a,bionicx64,debian93x64,winsrv2012r2chsi,winsrv2016sechsa' #常用镜像
+  verify_key: '/pitrix/conf/global/verify.pub'
+  vxnet_tunnel_type: 'vxlan'
+  ws_proxy_host: 'pek1-proxy'
+  enable_appcenter_quota: 0 #支持appcenter配额
+  check_resource_types: 'instance,volume,vpc_border,vxnet,loadbalancer,nfv' #资源类型，取消用户zone访问权限之前需要检查这些类型的资源是否存
+----
+
+== wsserver 相关配置
+
+
+[source]
+----
+ws_server:
+  health_check_zones: 'pek'
+  fg_req_fast_timeout: 1
+  fg_req_fast_timeout_rate: 80
+  cpe_order_installment_users: ''
+  appcenter2_enabled_normal_user: 1
+  allow_zone_access_in_region: 0 #是否支持仅授予region中zone的权限，0表示不支持，1表示支持，默认为0,如staging下的delta，gamma， 设置为0表示仅对staging进行授权，同时授予delta、gamma的权限，设置为1时支持单独对staging的delta进行授权
+----
+
+== globalbot 相关配置
+
+[source]
+----
+global_bot_server:
+  appcenter2_transit:
+    bwlimit: 157286400
+    host: ''
+    ssh_port: 22
+    type: 'host'
+  image_migration_zones: 'pek2'
+  max_resource_migration_tasks: 2
+  max_working_global_job: 6
+  migration_transit:
+    bwlimit: 314572800
+    host: 'bjctpg2-boss'
+    ssh_port: 22
+    type: 'host'
+  snapshot_migration_zones: 'pek1'
+  snapshot_transform:
+    volume_type:
+      !!int 0: 0
+      !!int 1: 1
+      !!int 2: 2
+      !!int 3: 3
+----
+
+== AppCenter 内网 API 设置
+
+[source]
+----
+intranet_api_server: #固定配置 不需要修改
+  api_host: 'api.ks.qingcloud.com'
+  api_port: '80'
+  api_protocol: 'http'
+----
+
+== ioserver 设置
+
+[source]
+----
+io_server:
+  cert_file: '/pitrix/conf/cert/server.pem' #ioserver所在服务器（Webservice）证书位置
+  flash_policy_file: '/pitrix/conf/flashpolicy.xml' #闪动信息图标xml配置
+  flash_policy_port: 844 #ioserver闪动信息图标服务端口
+  ws_proxy_host: 'pek1-proxy'
+----
+
+== DNS 配置
+
+[source]
+----
+name_agent: # name agent 里的定期检查。
+  check_interval:
+    check_dns_resolve: 60 # 检测forwarders是否配置，检测指定的域名是否可从本地往forwarders解析。
+    check_dns_cluster: 10 # 检测cluster其它节点是否正常，检测指定的域名是否可从本地往其它节点解析。
+  test_domains: # 测试域名
+    - 'www.baidu.com'
+    - 'www.taobao.com'
+  test_domain_fail_alert_percent: 0.5 # 测试域名失败数量比例超过阈值时，会报CRITICAL；否则只报ERROR。
+ 
+ 
+name_server:
+  cluster_mode: 'master-master' # 集群模式
+  cluster_nodes:  # 该zone的dns集群节点
+    - 'pek1-dnsmaster0'
+    - 'pek1-dnsmaster1'
+----
+
+== 告警服务配置
+
+[source]
+----
+nf_server:
+  settings_type: 'db'
+  apns_cert: '/pitrix/conf/cert/apns_dev.pem' # apns证书位置
+  mobile_admins: ''
+  modes: 'global,zone'
+  notify_consoles: 'pek1'
+  notify_setting:
+    system:
+      call_center: ''
+  notify_settings:
+    pek1:
+      base_email_template: '' # 通知邮件模板, 默认是 base，公有云是 qingcloud
+      boss_url: 'https://boss.qingcloud.com'
+      console_name: 'pek11' # 邮件中显示的控制台名称
+      console_url: 'https://console.bj189.cn'
+      crontab:
+        check_resource_daily_report: '3 2 1 * * * ' #每日资源统计发送时间配置
+      icp_admins: ''
+      resource_daily_report_admins: 'resource_daily_report_group@yunify.com' #每日资源统计
+      site_url: 'https://www.qingcloud.com'
+      sms_config: '' #短信告警配置
+      ticket_admins: ''
+      ticket_duty_table: ''
+      zone_id: 'bjctpg2'
+      zones: 'bjctpg2'
+    qingcloud:
+      base_email_template: ''
+      crontab:
+        check_resource_daily_report: '3 2 1 * * * '
+      resource_daily_report_admins: 'resource_daily_report_group@yunify.com'
+      sms_config:
+        provider: 'zucp'
+      zones: ''
+    system:
+      admin_phone_number: ''
+      base_email_template: 'base' # 通知邮件模板, 默认是 base，公有云是 qingcloud
+      console_name: 'pek1' #consoleid
+      console_url: 'https://console.qingcloud.com' #console域名
+      daily_report_admins: '' #每日资源统计接收方邮件地址
+      emergency_alert: 'crash'
+      enable_notifylog: true #允许保留历史告警日志
+      enable_save_notifylog: false
+      icp_admins: ''
+      insufficient_balance_admins: ''
+      invoice_admins: ''
+      login_passwd: 'uNm6fpIf9EnOKmaWf/8VuQ=='  # 发件人密码
+      login_user: 'yop' # 发件人用户名
+      network_admins: 'network_group@yunify.com'
+      notify_senders: 'noreply@qingcloud.com' #告警发件人邮箱
+      notify_timeout: 20  # 发送超时时间（秒）
+      site_url: 'https://console.qingcloud.com'
+      sms_admins: ''
+      notifylog_third_parties:
+        qingcloud_emergency:
+          admin_phone_number: ''
+          emergency_alert: 'crash'
+          type: 'qingcloud_mobile'
+        webhook:
+          type: 'webhook'
+          url: 'http://192.168.224.241:6777/alert_receiver/nf/'
+      sms_config: #短信告警配置
+        provider: 'zucp'
+        sn: ' ' #短信网关方提供的账号
+        pwd: ' ' #短信网关方提供的密码
+        sign: ' ' #短信网关方提供的签名
+      smtp_port: 587 # smtp服务器端口号
+      smtp_server: 'SMTP_SERVER' # smtp服务器地址
+      ssl_on: false #ssl设置
+      system_admins: '' #告警接收邮箱
+      ticket_admins: '' #工单接收邮箱
+      ticket_duty_table: ''
+      trade_admins: ''
+      user_verify_admins: ''
+----
+
+
+
+== Pgwatcher 配置
+
+
+[source]
+----
+pg_watcher:
+  using_master_by_ts: 0
+  inactive_failover: 1
+  globals: 'bjctpg2-webservice1,bjctpg2-webservice0'
+  pg_node_info:
+    bjctpg2r01n01:
+      zone_id: 'bjctpg2'
+      pgpools: 'bjctpg2r01n02,bjctpg2r02n02'
+    bjctpg2r02n01:
+      zone_id: 'bjctpg2'
+      pgpools: 'bjctpg2r01n02,bjctpg2r02n02'
+----
+
+
+
+== VG 相关配置
+
+[source]
+----
+vgateway_agent:
+  check_interval:   # vg agent 检查项与频率（秒）
+    check_vg_eip_gw: 10 # 检查 virtual_gateway 里配置的网关是否可达
+    check_vg_load: 60 # 检查当前 vg 负载情况
+  health_check_max_workers: 512 # lvs 健康检查 worker 数
+  lb_lvs_healthy_check:
+    check_enable: 1  # lvs 健康检查是否自动剔除、恢复 rs 后端
+    alert_buffer: 1800                      # lvs rs 在反复持续在正常、异常状态切换时，$alert_buffer  时间内只报ERROR
+    max_del_rs_count: 1   # 一个 vs 最多能剔除的 rs 数
+    min_left_rs_count: 1  # 一个 vs 最少应该保留的 rs 数
+    faulty_lb_instance_duration: 300   #   在这个时间内，如果某个lbnode的所有监听器都异常，就认为这个节点是faulty.
+    rebuild_faulty_lb_instance_enable: 0    # 是否自动对faulty lb node进行rebuild-loadbalancer-instance
+  vg_eip_gw_check:
+    alert_buffer: 60 #  vg  gw  不可达时，在一定时间内报  ERROR。超过该时间，报  CRITICAL.单位：秒。
+    alert_tolerance: 3   # vg gw 连续 N 次不可达之后，才报 ERROR 或者 CRITICAL。
+    ping_count: 2 # vg gw ping 数
+    ping_timeout: 5   # vg gw ping 数为 'ping_count' 时超时时长
+  vg_load_check:
+    eip_auto_migration_batch: 1 # eip 批量迁移数
+    eip_auto_migration_enable: 0  # 是否开启 eip 自动迁移
+    eip_migration_cpu_si_threshold: 5  # 当当前 vg CPU si 达到该阈值时，开始判断是否需要迁移 eip
+    eip_migration_min_interval: 1800 # eip 被自动迁移的间隔时间
+    eip_migration_pps_interval: 10  # eip pps 监控时间段
+    eip_migration_pps_threshold: 50000 # 当 CPU si 达到阈值时，pps 达到该阈值的 eip 将被迁移
+ 
+ 
+virtual_gateway:
+  global:
+    fast_ddos_check: 0 # 为 0 时关闭 ddos 的快速检测, 即 1m 检测一次, 否则是 10s 一次的快速检测, 默认 1
+    has_eip_rule: 0 # 如果单台vg的公网有多个vlan, 请设置成 1, 默认是 0
+    has_tc_rx: 1  # 是否在vg开启入流量限速
+    has_tc_tx: 1  # (sdn 2.0无效)是否在vg开启出流量限速。计算节点也有eip出流量限速，此功能在vg可不开.
+    min_tc_rx: 10   # 最小入带宽, 单位MB, 默认10
+    mode: 'dvr' # dvr 表示 sdn 2.0。其它值表示sdn 1.0
+    pps_rx_alert: 100000 # eip 入流量 pps 报警阈值
+    pps_rx_alert_action: 'warn' # eip 入流量 pps 报警触发的动作，还可配置为 "stop"，不配置则不检查也无告警日志
+    rx_bandwidth_percent: 100 # eip 入带宽跟总带宽的比例，比如 200表示10M的eip入流量按20M限速。默认100
+    eip_minimum_bw: 200  #vg上触发速率超限解绑的最低带宽值(Mbits) 瞬时速率是否超限取决于两个条件都满足
+               #  1.瞬时带宽超过eip_minimum_bw
+               #  2.瞬时带宽超过了 用户购买带宽* (rx_rate_over_limit -1)
+               #  程序目前默认rate_over_limit是1.5,私有云设置成1000也就意味着基本没有上限控制 单位：Mbps
+    eip_maximum_bw: 10000  # 如果配置了eip_maximum_bw：
+               #   当当前带宽-购买带宽>eip_maximum_bw时，会调用eip_ban_command（一般是运营商接口）来封禁EIP；
+               #   否则只是在本地封禁EIP(raw PREROUTING DROP)单位：Mbps
+eip_ban_buffer_time: 1800  # 针对频繁短时间攻击的防御措施。如果出现短时间攻击，在 `eip_ban_buffer_time` 时间内，次数超过 `eip_ban_buffer_count`，eip 同样会被封禁。
+    eip_ban_buffer_count: 3
+    eip_mac_snat_enabled: 0 # eip 的回包 mac 地址是否保持和 eip mac 一致，运营商设备有限制的情况下此配置续改为1
+  H3C-VG-6800: # 做为虚拟网关节点的服务器 若为x86vg则填写对应服务hostname
+    cluster_name: 'default' #sdn 2.0遇到负载均衡处理来自不同线路的网络时需要上联出口相同的一组vg为一个vg组，多线网络可能有多个vg组，多线网路必须为每个线路指定一个单独的cluster_name以区分线路，如果不填，那么默认的cluster_name是'default'
+    eips: # 该服务器所管理的EIP网段和网关
+      36.112.150.0/24|HA0: '36.112.150.2(.1)'
+      36.112.148.128/25|HA0: '36.112.148.130(.129)' # # 这里的配置比较复杂，针对以上配置，格式是：A(B): 'C(D)|E'
+      # A: eip 段。这里有 br_vlan8 管理。
+      # B: vg group。optional，同一个网段内，要在至少两个 vg 上配置，保证可迁移。一个 vg 不用配，另一个配置为 HA0。vg group 在 cli migrate-eips 里有体现。
+      # C: 该 eip 段在该 vg 上的管理设备的地址，这里是 br_vlan8 对应的 ip：192.168.8.10
+      # D: 该 eip 段的网关，主要配置最后一位即可。这里 .1 表示 192.168.8.1。
+      # E: has_eip_rule。这是一个开关，在配置 multi vlans 时，该开关一定要开启。
+    type: 'h3c-s6800'  #h3cvg专用配置，若为x86vg则不填
+    user_ip:
+      10.2.0.0/16: '192.168.220.249' #若为h3cvg则填写vgloopback地址，若为x86vg则填写vg物理网络地址
+mgmt_ip: '192.168.220.249' #若为h3cvg则填写vgloopback地址，若为x86vg则填写vg物理网络地址
+compute_server:
+  switch_private_ssh_key: "/root/.ssh/id_rsa_xxx" # 填写netconf客户端连接交换机使用的私钥路径
+eipctl_server:
+  lb_healthy_check:
+    check_enable: 1
+    rebuild_faulty_lb_instance_enable: 1
+----
+
+== 对象存储对接配置
+
+[source]
+----
+qingstor:
+  qs_proxy_host: '192.168.225.16' 填写对象存储网关节点bridgeVIP
+----
+
+== Warehouse 服务配置
+
+[source]
+----
+warehouse_server:
+  is_enabled: false
+  proxy_host: 'pek1-proxy'
+  proxy_port: 8856 #warehouse 服务代理端口
+  func_enabled:
+    - 'get_condition_user_ids_from_wh'
+----
+
+== 资源限制配置
+
+[source]
+----
+resource_limits:
+  default:
+    max_bucket_create_cnt: 100  # 用户最大bucket数量（个）
+    max_resource_shared_users: 100  # 用户最大共享资源数量（个）
+    valid_loadbalancer_types: '0,1,2,3'  # 支持的负载均衡器类型
+----
+
+== uuid_version_2 资源配置
+
+[source]
+----
+uuid_version_2_resource_types: # 使用 uuid version 2 的资源类型，默认可以不配置。要在 common.uuid_version == 2 时才会生效。
+  excluded:  # 不要使用 uuid version 2 的资源类型。excluded 优先级比 included 高。
+    - 'vxnet'
+  included:  # 要使用 uuid version 2 的资源类型列表。
+    - 'j'
+    - 't'
+    - 'pb'
+----

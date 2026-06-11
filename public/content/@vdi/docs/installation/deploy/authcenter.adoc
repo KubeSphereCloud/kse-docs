@@ -1,0 +1,45 @@
+---
+title: 配置 AuthCenter
+weight: 50
+---
+
+在每台计算节点上配置 AuthCenter 是为了让每台物理机和 QingCloud 桌面云平台管控的 10099 端口通信 ，配置 AuthCenter 起到检查 License 许可的作用。
+
+== 操作须知
+
+所有计算节点上均需要配置 AuthCenter。
+
+== 前提条件
+
+* 已在 QingCloud 云平台的各计算节点上部署 csdp-server。
+* 已成功创建 QingCloud 桌面云主机。
+
+== 操作步骤
+
+. 登录云平台各计算节点。
+. 执行以下命令，进入 etc 目录。
++
+[source]
+----
+cd /etc
+----
+. 执行以下命令，创建配置文件 ``sdap.ini``。
++
+[source]
+----
+mkdir cstack
+touch sdap.ini
+----
+. 执行以下命令，进入配置文件编辑模式。
++
+[source]
+----
+vim sdap.ini
+----
+. 在文件中增加以下内容，添加 QingCloud 桌面云主机的认证端口 ``10099``。
++
+[source]
+----
+auth_center=<QingCloud 桌面云主机内网 IP>:10099
+----
+. 保存并退出文件。

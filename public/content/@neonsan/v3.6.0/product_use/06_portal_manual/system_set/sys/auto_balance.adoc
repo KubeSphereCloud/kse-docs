@@ -1,0 +1,26 @@
+---
+title: 设置自动负载均衡
+weight: 3
+---
+
+== 功能描述
+
+Portal 管理平台支持一键开启自动负载均衡的功能，其中自动负载均衡是指针对同一存储池内的达到一定使用率的磁盘容量进行自动均衡。
+
+== 操作步骤
+
+. 登录 link:../../../login[Portal 管理界面]。
+
+. 在**总览**页面，点击用户名，选择**系统设置**，即可进入系统设置页面。
++
+image::/images/neonsan/portal_system_set.png[]
+
+. 在系统设置页面，选择**集群设置**，开启 **shard 自动均衡**的开关，开启集群的自动负载均衡设置。
++
+image::/images/neonsan/portal_auto_balance_1.png[]
+
+. 在左侧导航栏内选择**运维管理** > **操作记录**，可看到 auto_balance 的参数值已被设定为 1 ，即开启自动负载均衡设置。
++
+image::/images/neonsan/portal_auto_balance_2.png[]
+
+

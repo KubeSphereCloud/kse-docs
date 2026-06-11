@@ -1,0 +1,14 @@
+---
+title: "OAuth2-Proxy"
+keywords: "Kubernetes, {ks_product}, OAuth2-Proxy, alertmanager"
+description: "Introduces how to use the OAuth2-Proxy extension."
+weight: 21
+layout: "second"
+---
+
+
+The OAuth2-Proxy extension is designed to protect backend applications and provide unified authentication services. By handling the OAuth2 protocol authentication flow, it allows users to log in through third-party authentication services (such as Google, GitHub, KubeSphere) and generates user sessions. link:https://openresty.org/[OpenResty] acts as a reverse proxy server, receiving HTTP requests and forwarding them to backend applications.
+
+OAuth2-Proxy provides a unified authentication interface to ensure all applications are protected through the same process, simplifying identity verification management in multi-application environments, improving security and user experience. It is suitable for enterprise environments that require unified authentication management for multiple backend applications, as well as applications that need user identity verification through third-party authentication services.
+
+// After the extension is configured, various services such as AlertManager, Prometheus, Whizard, etc., can be accessed after authentication through the KubeSphere platform.

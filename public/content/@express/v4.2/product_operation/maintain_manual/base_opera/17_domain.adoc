@@ -1,0 +1,63 @@
+---
+title: "修改集群域名"
+weight: 17
+---
+
+== 运维场景
+
+在云易捷集群环境搭建完成后，需要修改集群域名时，可参考如下步骤实现。
+
+== 操作步骤
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，确认当前集群的域名信息。
++
+[source,shell]
+----
+/pitrix/bin/get_yaml_info.py variables.yaml common domain
+----
+
+. 执行如下命令，修改集群域名。
++
+[source,shell]
+----
+/pitrix/bin/modify_domain.sh -o <old_domain>  -n <new_domain>
+----
++
+**参数说明**：
++
+* ``-o`` 用于指定集群当前的旧域名信息，即步骤 3 中查询到的域名信息。
+* ``-n`` 用于指定集群的新域名。
+
++
+include::../../../../../_components/note.adoc[]
+* 云易捷 v4.3 及以上版本 ``modify_domain.sh`` 脚本存放于 FirstBox 节点的 ``/pitrix/bin/`` 目录下。
+* 云易捷 v4.3 以下版本，需link:https://cwiki.yunify.com/pages/viewpage.action?pageId=156912125&preview=/156912125/156912135/modify_domain.sh[下载脚本]，并上传至 FirstBox 节点。
+* 修改集群域名脚本的日志默认输出至 FirstBox 节点，即 ``/pitrix/log/config/modify_domain.log`` 日志文件。
+include::../../../../../_components/table_footer.adoc[]
+
+. 集群域名修改完成后，登录云易捷部署管理平台，选择**基本信息**，获取新的 Hosts 解析信息。
++
+image::/images/express/maintain/domain_modify_1.png[]
+
+
+. 本地更新集群 Hosts 信息后，登录云易捷 Console 管理控制平台，确认前端页面显示是否正常，以及连接 VNC 虚拟机是否正常，创建虚拟机、硬盘等等操作是否正常。
+

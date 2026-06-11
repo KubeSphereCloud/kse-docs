@@ -1,0 +1,428 @@
+---
+title: "FAQs"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, FAQ, troubleshooting"
+description: "Summarize FAQ about {ks_product}."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 37db71d493e54f6dbf8365832cdf42ed
+:ks_xref_id: e88cf7b8d97346eaa222e167ce617f72
+:ks_comp: ../../components/
+:ks_title: FAQs
+:ks_description: Summarize FAQ about {ks_product}.
+:ks_keywords: {ks_product_full}, {ks_product}, FAQ, troubleshooting
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic summarizes frequently asked questions (FAQ) about {ks_product_abbr_full}.
+
+** link:#eba9db5993a74d64896db4d0ef8182be[How do I do if an error is reported in OpenSSL when I install {ks_product}?]
+** link:#2b75c5c620e143f0a3c87063769ee42e[How do I do if a disk error is reported when I install {ks_product}?]
+** link:#b4d3a37901204ebfbeb90051b5710e7f[How do I do if CoreDNS fails when I install {ks_product}?]
+** link:#e9c26995b7374840b7fb7018d394889b[How do I do if the installation of {ks_product} remains stuck in MinIO?]
+** link:#2e42a6197dfb4a439a37df137cd6b862[Why is a message returned indicating that my server does not support virtualization when I install {ks_product}?]
+** link:#6f4b309b9443425d940cb71c45a9785c[How do I reset a user password?]
+** link:#b0e3ed476c6a40edbc232f467c680ebe[Why does my VM get stuck in the Pending state?]
+** link:#6a7f82f8c0b847ef8a9dc06b763b0dd6[Why does my VM get stuck in the Unschedulable state?]
+** link:#72e93063e3cd4c4cb57e3f299d758a2e[Which formats of image files can I upload to {ks_product}?]
+** link:#89615faab0aa4b94b653400813a48b2b[If an image file is excessively large, can I use other methods to upload the file?]
+** link:#40969a5797d146d9aa5a22482657aeb4[Why is a mounted disk still unavailable?]
+** link:#a6d11232828d4adcb5c2009200e9ae6e[Can {ks_product} support external storage devices?]
+** link:#fb0ca43a2e7149d594aacb6bed83f7b1[How do I set up a unified endpoint for Internet access?]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== How do I do if an error is reported in OpenSSL when I install {ks_product}?link:[id=eba9db5993a74d64896db4d0ef8182be]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Descriptionlink:[id=bab9b2d5b71241e29488199b6b145327]
+
+When you install {ks_product}, an error is reported in OpenSSL, as shown in the following code block.
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+error: openssl: /usr/lib/x86_64-linux-gnu/libssl.so.1.1: version `OPENSSL_1_1_1' not found (required by openssl)
+openssl: /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1: version `OPENSSL_1_1_1' not found (required by openssl)
+: exit status 1
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+This error is reported because the system software version is outdated.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Solutionlink:[id=7e2167d0c0cc48b0aca9ec01d83e5570]
+
+You can run the **apt update** and **apt upgrade** commands to update the system package. Then, reinstall {ks_product}.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== How do I do if a disk error is reported when I install {ks_product}?link:[id=2b75c5c620e143f0a3c87063769ee42e]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Descriptionlink:[id=30b4e1510d1a4f34b1c23fb1a05ced27]
+
+{ks_product} failed to be installed because a disk error is reported.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Solutionlink:[id=5e89ade5ff0f4a43b09e42eca5b93f4f]
+
+. Run the following script to clear the disk used for Ceph storage:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+DISK="/dev/sdX"
+
+# Zap the disk to a fresh, usable state (zap-all is important, b/c MBR has to be clean)
+sgdisk --zap-all $DISK
+
+# Wipe a large portion of the beginning of the disk to remove more LVM metadata that may be present
+dd if=/dev/zero of="$DISK" bs=1M count=100 oflag=direct,dsync
+
+# SSDs may be better cleaned with blkdiscard instead of dd
+blkdiscard $DISK
+
+# Inform the OS of partition table changes
+partprobe $DISK
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Reinstall {ks_product}.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== How do I do if CoreDNS fails when I install {ks_product}?link:[id=b4d3a37901204ebfbeb90051b5710e7f]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Descriptionlink:[id=1b5ae4d4b4ce43e1b8fdf55ac78c65a5]
+
+When you install KSV, CoreDNS fails and its status is not **Running**.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Solutionlink:[id=06d807e109b84d59be7b2552f43c375e]
+
+. Run **kubectl get pod -n kube-system** to query the status of CoreDNS.  If the status of CoreDNS is not **Running**, modify the configuration of CoreDNS.
+. Run **kubectl edit cm -n kube-system coredns** to modify the configuration of CoreDNS.
+. Change **forward . /etc/resolv.conf** to **forward .8.8.8.8**.  Then, save and exit.
+. Run **kubectl rollout restart deploy -n kube-system coredns** to restart CoreDNS.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== How do I do if the installation of {ks_product} remains stuck in MinIO?link:[id=e9c26995b7374840b7fb7018d394889b]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Description
+
+{ks_product} failed to be installed and the installation remains stuck in MinIO.  This issue can occur if CoreDNS fails or the storage becomes abnormal. Check the status of CoreDNS and the storage for troubleshooting. Note that the storage system must be a device that is unformatted or non-partitioned.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Solutionlink:[id=53607b8d48b94cf8b7f87484a311803d]
+
+. Run **ksv logs** to query logs.  If the installation fails due to an error in MinIO, the following result is returned:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+1. check the storage configuration and storage server
+1. make sure the DNS address in /etc/resolv.conf is available
+1. execute 'kubectl logs -n kubesphere-system -l job-name=minio-make-bucket-job' to watch logs
+1. execute 'helm -n kubesphere-system uninstall ks-minio && kubectl -n kubesphere-system delete job minio-make-bucket-job'
+1. Restart the installer pod in kubesphere-system namespace
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Query the status of CoreDNS.  If CoreDNS fails, you can troubleshoot errors based on link:#b4d3a37901204ebfbeb90051b5710e7f[How do I do if CoreDNS fails when I install {ks_product}.
+. Query the status of the storage.  If the storage becomes abnormal, perform the following steps to troubleshoot:
+. Run **kubectl get pod -n rook-ceph** to query the status of the Ceph component.
+. Check whether a pod named in the format of **rook-ceph-osd-x-xxxxx** exists.  If such a pod exists, check whether the status of the pod is **Running**.
+. If no such a pod exists, check whether an unformatted server disk is reserved for Ceph storage.
+. If such a disk is reserved, run the script provided in @@@xref@@@:{ks_xref}{e8139fa61e6b4d6081b9f85bbf9b82d5}[Precautions for installation] to clear the disk.  Then, restart the server.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Why is a message returned indicating that my server does not support virtualization when I install {ks_product}?link:[id=2e42a6197dfb4a439a37df137cd6b862]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Descriptionlink:[id=cd2b316098eb4ab8971f939896072aa6]
+
+When you install {ks_product}, the system returns the following information, indicating that virtualization is not supported by the server:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+Some server nodes do not support virtualization.
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+This error message can occur on some ARM64 servers that are developed by Chinese vendors. Virtualization is supported by these servers.  The error is returned because simulation is enabled during {ks_product} installation.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Solutionlink:[id=19fd3f6be1684a80a12d53f370a1ca53]
+
+. Edit the cluster configuration file **kubectl edit cc -n kubesphere-system ks-installer**. Change the value of **useEmulation** in **spec.virtualization** to **false**.
+. Save and exit. Query logs to verify that the setting takes effect.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== How do I reset a user password?link:[id=6f4b309b9443425d940cb71c45a9785c]
+
+. Log in to the server node on which{ks_product_both}is installed.
+. Run the following command to reset a user password:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl patch users <username> -p '{"spec":{"password":"<new password>"}}' --type='merge' && kubectl annotate users <username> iam.kubesphere.io/password-encrypted-
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+* You need to replace the __<username>__ parameter in the command with the actual username and change the __<new password>__ parameter to the new password.
+* We recommend that you specify a password that contains digits and letters and the length can be 6 to 64 characters.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Why does my VM get stuck in the Pending state?link:[id=b0e3ed476c6a40edbc232f467c680ebe]
+
+**Pending** indicates that the system is waiting for resources required for VM creation. You can see if the disks corresponding to the VMs were created. Disk creation failures are often caused by the excessive disk size. In this case, you can delete the VMs and reduce the disk size when you re-create the VMs.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Why does my VM get stuck in the Unschedulable state?link:[id=6a7f82f8c0b847ef8a9dc06b763b0dd6]
+
+**Unschedulable** indicates that resource scheduling failed. The possible causes and solutions are as follows:
+
+[cols='1a,3a']
+|===
+|Possible Cause |Solution
+
+|The parameter values of the CPU or memory size are too large, leading to VM scheduling failure.
+|You can delete the VMs and reduce the CPU or memory size when you re-create them.
+
+|Some nodes do not support virtualization.
+|Log in to any server node as user **root** and run the **grep -E &apos;(svm\|vmx)&apos; /proc/cpuinfo** command. Virtualization is not supported if no command output is returned.
+|===
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Which formats of image files can I upload to {ks_product}?link:[id=72e93063e3cd4c4cb57e3f299d758a2e]
+
+{ks_product} allows you to upload image files in IMG, QCOW2, XZ, TAR, GZ, ISO, and RAW formats.  Uploading image files using HTTP is also supported if server nodes can access the Internet.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== If an image file is excessively large, can I use other methods to upload the file?link:[id=89615faab0aa4b94b653400813a48b2b]
+
+{ks_product} supports uploading an image from local storage or a URL.  If the image file is excessively large, you can use FTP to upload.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Solutionlink:[id=244ed907fe634c28801fd8a02f04568a]
+
+. Log in to a server node as user **root**.
+. Run the following command to obtain the username and password used to log in to the FTP server:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+ksv ftp-server
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Run the following command to connect to any server nodes in the cluster:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+ftp <node IP address>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+Replace __<node IP address>__  with your own server node IP address.
+
+
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. Log in to the FTP server using the username and password obtained in step 2.
+. Run the following command to upload your local image file to the FTP server.
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+put <local image path>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+Replace __<local image path>__ with your own local image file path.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+For example:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+put /pitrix/img/ubuntu_16.04_LTS_server-cloudimg-amd64.img
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. On the **Upload Image** page of the{ks_product_both}web console, upload the image file from URL  http://minio.kubesphere-system.svc:9000/qingcloud-images/ubuntu_16.04_LTS_server-cloudimg-amd64.img.
++
+--
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+Replace __ubuntu_16.04_LTS_server-cloudimg-amd64.img__ with the name of the image file to be uploaded.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Why is a mounted disk still unavailable?link:[id=40969a5797d146d9aa5a22482657aeb4]
+
+When dynamically mounting a disk that is created separately, the VM needs to be restarted before the disk takes effect.  For future hot swaps, you do not need to restart the VM.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Can {ks_product} support external storage devices?link:[id=a6d11232828d4adcb5c2009200e9ae6e]
+
+Yes, you can connect {ks_product} to external storage. The external storage sever must support Container Storage Interface (CSI). If CSI is supported, we can perform the adaptation and test based on the external CSI.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== How do I set up a unified endpoint for Internet access?link:[id=fb0ca43a2e7149d594aacb6bed83f7b1]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Scenariolink:[id=86868e4778d5435c8437cfa5f4db9c19]
+
+In a multi-node cluster, only one server node can access the Internet and VMs on other server nodes must access the Internet from this server node.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== How it workslink:[id=3fc2b094ae8f43348fd2a8003ee5286b]
+
+The server node that can access the Internet must have two NICs, for example, NIC A and NIC B, of which NIC A can only connect to the intranet. By running the following commands, you can translate the private IP address of NIC A to the IP address of NIC B for accessing the Internet.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Solutionlink:[id=94e854c62a0e494fba444ce8024910f1]
+
+. Log in to the node server that can access the Internet as user **root**.
+. Run the following command:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+iptables -t nat -A POSTROUTING -s <intranet CIDR block> -o <NIC B name> -j MASQUERADE
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Replace __<intranet CIDR block>__ and __<NIC B name>__ with your own CIDR block and NIC name, for example:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+iptables -t nat -A POSTROUTING -s 192.168.0.0/16 -o eno2 -j MASQUERADE
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Log in to other node servers that need to access the Internet as user **root**.
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+ip r add default via <private IP address>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Replace __<private IP address>__ with the private IP address of the node that can access the Internet, for example:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+ip r add default via 192.168.0.1
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--

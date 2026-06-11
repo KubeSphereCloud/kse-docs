@@ -1,0 +1,59 @@
+---
+title: "Run an Image Builder"
+keywords: "Kubernetes, {ks_product}, Image Builder, Run an Image Builder"
+description: "Introduces how to run an image builder."
+weight: 05
+---
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Image Builder**
+
+
+This section describes how to run an image builder.
+
+After an image builder starts running, it builds source code or artifact files into container images and pushes them to the specified image service.
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the right side of the image builder you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Run** from the drop-down list.
+
+. (Optional) In the **Run** dialog box, modify the parameters of the image builder as needed.
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+For more information about image builder parameters, refer to link:../01-create-an-image-builder/01-create-an-image-builder-using-source-code/[Create an Image Builder Using Source Code] and link:../01-create-an-image-builder/02-create-an-image-builder-using-an-artifact/[Create an Image Builder Using an Artifact].
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. In the **Run** dialog box, click **Run**.
++
+--
+The image builder will start the image building process. If the image is built successfully, you will see the image with the expected tag when you access the image repository.
+--

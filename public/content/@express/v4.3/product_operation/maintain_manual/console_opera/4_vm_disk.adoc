@@ -1,0 +1,100 @@
+---
+title: "修改虚拟机系统盘容量上限"
+weight: 4
+---
+
+== 运维场景
+
+在实际环境应用之后，客户针对平台内所能创建的虚拟机的系统盘容量有了更高的配置要求时，可参考以下步骤。
+
+== 注意事项
+
+虚拟机系统盘容量最大允许设置为 500GB。
+
+
+== 操作步骤
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，修改前端配置文件。
++
+[source,shell]
+----
+vi /pitrix/conf/variables/webexpress/config.yaml
+----
++
+[source,yaml]
+----
+......
+os_disk_size:
+    linux:
+      max: 9990
+      min: 20
+      step: 10
+    windows:
+      max: 9990
+      min: 50
+      step: 10
+    unix:
+      max: 9990
+      min: 20
+      step: 10
+ ......
+----
+
+. 依次执行如下命令，更新配置。
++
+[source,shell]
+----
+fb build_pkgs -p pitrix-ks-webservice-webexpress
+----
++
+[source,shell]
+----
+fb update webservice pitrix-ks-webservice-webexpress
+----
+
+. 执行如下命令，修改 IaaS 配置文件。
++
+[source,shell]
+----
+vi /pitrix/conf/variables/global/server.yaml.{zone_id}
+----
++
+在 fg_server 添加如下参数，500 单位 GB，即最大系统盘
++
+[source,yaml]
+----
+... ...
+fg_server:
+  max_os_disk_size: 500
+... ...
+----
+. 依次执行如下命令，更新配置。
++
+[source,shell]
+----
+fb build_pkgs -p pitrix-global-conf
+----
++
+[source,shell]
+----
+fb update all pitrix-global-conf
+----

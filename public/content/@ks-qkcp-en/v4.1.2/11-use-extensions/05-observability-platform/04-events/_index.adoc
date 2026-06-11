@@ -1,0 +1,25 @@
+---
+title: "WhizardTelemetry Events"
+keywords: "Kubernetes, {ks_product-en}, events"
+description: "This section introduces how to use the 'WhizardTelemetry Events' extension."
+weight: 04
+---
+
+This section introduces how to use the "WhizardTelemetry Events" extension.
+
+This extension can store events of resources such as workloads, Jobs, pods, services, and Ingresses for a long time and provides multi-tenant perspective event retrieval and viewing functions.
+
+After installing the "WhizardTelemetry Events" extension,
+
+* The **Resource Event Search** option will be displayed in the toolbox at the bottom right of the page, allowing users to query resource events within their permissions.
+* The **Log Receivers** option will be displayed under the **Cluster Settings** menu in the left navigation pane, and the **Log Receivers** page will display the **Resource Events** tab, supporting the addition of various types of log receivers. For more information, see link:../03-logging/06-log-receivers/[Log Receivers].
+
+//attention
+[.admon.attention,cols="a"]
+|===
+| Note
+
+|
+WhizardTelemetry Events depends on WhizardTelemetry Platform Service and WhizardTelemetry Data Pipeline. Therefore, before installing WhizardTelemetry Events, you must first install and configure the WhizardTelemetry Platform Service and WhizardTelemetry Data Pipeline extensions, otherwise, the event-related functions will not work properly!
+
+|===

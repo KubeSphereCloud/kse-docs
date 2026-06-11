@@ -1,0 +1,64 @@
+---
+title: "Create a disk snapshot"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, disks, snapshots, creation"
+description: "Describes how to create a disk snapshot in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 59b7cfce381f47178ac5940dd5fba2f0
+:ks_xref_id: ddc176a6060a47d2a496f9ea64904ce3
+:ks_comp: ../../../components/
+:ks_title: Create a disk snapshot
+:ks_description: Describes how to create a disk snapshot in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, disks, snapshots, creation
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to create a disk snapshot in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=37de7e6f8d7d48fa9f50754877ebf70b]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom-en/disks/disk-manage-prerequisites.adoc[]
+
+:relfileprefix: ./
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=959950457d8e4a1f96a72b300299cdcb]
+
+include::../../../_custom-en/disks/disk-steps.adoc[]
+
+. On the **Disks** page, click the name of the desired disk. The details page of the disk appears.
+. On the **Snapshots** tab, click **Create** in the upper-right corner.
+. In the dialog box that appears, set **Name** and **Description** for the snapshot.
++
+--
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the snapshot.
+
+include::../../../_custom-en/disks/disk-snapshot-naming-convention.adoc[]
+
+|Description
+|The description of the snapshot.
+
+include::../../../_custom-en/networks/description-convention.adoc[]
+|===
+--
+. Click **OK**.  The snapshot appears in the snapshot list after it is created.

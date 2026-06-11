@@ -1,0 +1,35 @@
+---
+title: 配置免密访问
+weight: 4
+---
+
+
+安装{product_name}过程中，Installer 脚本会自动关闭所有节点的用户名与密码登录方式。因此，实施人员需在执行 Installer 脚本前，配置本地主机与待部署环境的物理服务器之间的免密访问。
+
+
+具体操作步骤如下。
+
+
+. 在本地主机终端，执行如下命令行，查看本地主机的 SSH 公钥。
++
+[source,shell]
+----
+cat /root/.ssh/id_rsa.pub
+----
+
+. 通过用户名密码的方式，登录上传有安装包的物理服务器，即 FirstBox 宿主机。
++
+include::../../../../../_components/note.adoc[]
+用户名密码为安装操作系统时设置的用户名和密码，默认为 `yop/zhu1241jie`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 在上传有安装包的物理服务器上，执行以下命令，切换到 `root` 用户。
++
+[source,shell]
+----
+sudo su
+----
+
+. 将本地主机的公钥添加至该物理服务器的 `/root/.ssh/authorized_keys` 文件中。
+

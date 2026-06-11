@@ -1,0 +1,86 @@
+---
+title: "Delete VPCs"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VPCs, deletion"
+description: "Describes how to delete VPCs in the {ks_product} web console."
+weight: 09
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: fe465f4e8e924e42a8739a12ec399ab2
+:ks_xref_id: 8e3db181ded04b9cb2fc9d8ce8442126
+:ks_comp: ../../../../components/
+:ks_title: Delete VPCs
+:ks_description: Describes how to delete VPCs in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VPCs, deletion
+:ks_weight: 09
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete virtual private clouds (VPCs) in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=9a573c4e186a403690b3d256313abfef]
+
+include::../../../../_custom-en/networks/vpc-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a VPClink:[id=bfd792de828245f3a704c15d508affbe]
+
+include::../../../../_custom-en/networks/vpc-steps.adoc[]
+
+. On the **VPCs** page, click the name of a VPC to view its details.
+. On the left side of the details page, click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+The VPC cannot be restored after it is deleted, and the subnets created in the VPC are also deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Make sure the VPC is not associated with elastic IP addresses (EIPs), and the subnets in the VPC are not associated with resources. Otherwise, the VPC cannot be deleted.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple VPCs at a timelink:[id=59fc1f4c1ac342368d3ddfcd7c028de8]
+
+include::../../../../_custom-en/networks/vpc-steps.adoc[]
+
+. On the **VPCs** page, select the check boxes next to the VPCs that you want to delete and click **Delete**.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+The VPCs cannot be restored after they are deleted, and the subnets created in the VPCs are also deleted. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Make sure the VPCs are not associated with EIPs, and the subnets in the VPCs are not associated with resources. Otherwise, the VPCs cannot be deleted.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

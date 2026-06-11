@@ -1,0 +1,166 @@
+---
+title: 备份创建集群（DeployAppVersionFromSnapshot）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| true
+| 应用ID
+
+| auto_renew
+| Integer
+| false
+| 自动续费
+
+| charge_mode
+| String
+| false
+| 计费模式
+
+| conf
+| String
+| true
+| 集群详细配置
+
+| debug
+| Integer
+| false
+| 开发者模式
+
+| months
+| Integer
+| false
+| 续费时长（月）
+
+| multi_deploy_zones
+| Array
+| false
+| 多可用区域部署
+
+| order_id
+| String
+| false
+| 订单ID
+
+| snapshot_id
+| String
+| true
+| 备份ID
+
+| version_id
+| String
+| true
+| 应用版本ID
+
+| zone
+| String
+| true
+| 可用区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| false
+| 应用ID
+
+| app_version
+| String
+| false
+| 应用版本
+
+| cluster_id
+| String
+| false
+| 集群ID
+
+| cluster_name
+| String
+| false
+| 集群名称
+
+| job_id
+| String
+| false
+| 任务ID
+
+| node_count
+| String
+| false
+| 节点数量
+
+| node_ids
+| Array
+| false
+| 节点id
+
+| ret_code
+| Integer
+| false
+| 返回状态码
+
+| vxnet_id
+| String
+| false
+| 私有网络ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeployAppVersionFromSnapshot",
+  "app_id": "app-00r26u27",
+  "app_type": "cluster",
+  "charge_mode": "elastic",
+  "conf": "{\"cluster\":{\"name\":\"QingCloud MySQL Plus\",\"description\":\"\",\"maininstance\":{\"resource_group\":\"4C8G\",\"cpu\":4,\"memory\":8192,\"count\":2,\"instance_class\":202,\"volume_class\":200,\"volume_size\":20},\"vxnet\":\"vxnet-7ra9pzc\",\"global_uuid\":\"95112219801795025\",\"add_port_to_sg\":1},\"zone\":\"gd2\",\"vpc\":\"rtr-70nxtrrl\",\"env\":{\"enable_bucket\":\"false\",\"access_key_id\":{\"access_key_id\":\"\"},\"mysqlversion\":\"MySQL-5.7\",\"load_read_requests_to_nodes\":\"All_exclude_master\",\"not_load_read_to_much_delay_slave\":0,\"election-timeout\":20000,\"admit-defeat-hearbeat-count\":5,\"semi-sync-timeout-for-two-nodes\":10000,\"port\":3306,\"audit_log_policy\":\"NONE\",\"audit_log_format\":\"OLD\",\"audit_log_rotate_on_size\":104857600,\"audit_log_rotations\":6,\"group_concat_max_len\":1024,\"default-time-zone\":\"+08:00\",\"default-storage-engine\":\"InnoDB\",\"innodb_buffer_pool_size\":-1,\"character_set_server\":\"utf8mb4\",\"interactive_timeout\":3600,\"back_log\":2048,\"expire_logs_days\":7,\"ft_min_word_len\":4,\"key_buffer_size\":33554432,\"log_bin_trust_function_creators\":1,\"long_query_time\":3,\"lower_case_table_names\":0,\"max_connections\":0,\"max_connect_errors\":655360,\"binlog_cache_size\":32768,\"binlog_stmt_cache_size\":32768,\"query_cache_size\":0,\"query_cache_type\":\"OFF\",\"sync_master_info\":1000,\"sync_relay_log\":1000,\"sync_relay_log_info\":1000,\"table_open_cache\":2000,\"thread_cache_size\":128,\"wait_timeout\":3600,\"innodb_ft_max_token_size\":84,\"innodb_ft_min_token_size\":3,\"sql_mode\":\"STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION\",\"slave_rows_search_algorithms\":\"INDEX_SCAN,HASH_SCAN\",\"max_allowed_packet\":1073741824,\"slave_parallel_workers\":8,\"slave_pending_jobs_size_max\":1073741824,\"event_scheduler\":\"OFF\",\"innodb_print_all_deadlocks\":0,\"skip-name-resolve\":0,\"autocommit\":1,\"transaction_isolation\":\"READ-COMMITTED\",\"innodb_log_buffer_size\":16777216,\"innodb_log_file_size\":1073741824,\"innodb_log_files_in_group\":2,\"validate_password_policy\":\"MEDIUM\",\"validate_password_length\":8,\"innodb_flush_method\":\"O_DIRECT\",\"innodb_use_native_aio\":1,\"connection_control_failed_connections_threshold\":0,\"connection_control_min_connection_delay\":1000,\"connection_control_max_connection_delay\":2147483647,\"explicit_defaults_for_timestamp\":0,\"innodb_adaptive_hash_index\":0,\"innodb_autoinc_lock_mode\":2,\"performance_schema\":1,\"block_encryption_mode\":\"aes-128-ecb\",\"clickhouse_http_port\":8123,\"clickhouse_tcp_port\":9000}}",
+  "debug": 0,
+  "multi_deploy_zones": [
+    "gd2a",
+    "gd2b"
+  ],
+  "snapshot_id": "ss-1l3r165c",
+  "version_id": "appv-c965ynqa",
+  "zone": "gd2"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateClusterFromSnapshotResponse",
+  "app_id": "app-00r26u27",
+  "app_version": "appv-c965ynqa",
+  "cluster_id": "cl-2d8b77pn",
+  "cluster_name": "QingCloud MySQL Plus",
+  "job_id": "j-aqrpmo1ytbw",
+  "node_count": 2,
+  "node_ids": [
+    "cln-kdbvds8u",
+    "cln-5f6wzrou"
+  ],
+  "ret_code": 0,
+  "trace_id": "p9jaSxbM",
+  "vxnet_id": "vxnet-7ra9pzc"
+}
+----

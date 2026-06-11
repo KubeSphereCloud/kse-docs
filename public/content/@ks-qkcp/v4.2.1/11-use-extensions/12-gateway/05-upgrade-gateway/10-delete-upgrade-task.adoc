@@ -1,0 +1,53 @@
+---
+title: "删除升级任务"
+weight: 10
+---
+
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **网关 > 网关升级**
+
+
+本节介绍如何删除升级任务。
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **KubeSphere 网关**扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== 删除单个升级任务
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**升级任务**页签，在需要删除的任务右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除**。
+
+. 在**删除升级任务**对话框，输入任务的名称，然后点击**确定**。
+
+== 批量删除升级任务
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**升级任务**页签，选择需要删除的任务左侧的复选框，然后在列表上方点击**删除**。
+
+. 在**批量删除升级任务**对话框，输入任务的名称，然后点击**确定**。
++
+--
+include::../../../../_custom/note-separateNamesByComma.adoc[]
+--

@@ -1,0 +1,72 @@
+---
+title: "备份数据库"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB PostgreSQL,备份数据库"
+description: "如何在{ks_product_both}上备份数据库。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: e00abc3724a342a895f445f50aeb14d8
+:ks_xref_id: 003aa69f30be49c0be5d97c0b04ced58
+:ks_comp: ../../../../components/
+:ks_title: 备份数据库
+:ks_keywords: Kubernetes, {ks_product}, RadonDB PostgreSQL,备份数据库
+:ks_description: 如何在{ks_product_both}上备份数据库。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本小节主要介绍了如何在{ks_product_both}上备份数据库。
+
+
+== 前提条件link:[id=09732730b1bc4379b2398bb07dc2fcf7]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondpq-prer-installRadondbpq.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=e2a67b5ee86044f280b29f8c2324bb6f]
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+备份过程可能会导致数据库服务压力过大，请在非高峰时段执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbPostgreSQL/radondbpq-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 备份**。
+
+. 在**备份**对话框，点击**确定**创建备份。
+
+. 如果您需要设置自动备份，选择**更多操作 > 设置自动备份**。
+
+. 在弹出的**设置自动备份**对话框，选择备份期间和日期，并设置备份保留期限，点击**确定**。

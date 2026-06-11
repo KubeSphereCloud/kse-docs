@@ -1,0 +1,60 @@
+// 登录 Portal
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+
+include::../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+
+include::../../../_components/table_footer.adoc[]
+
+. 登录 portal 节点。
++
+[source,shell]
+----
+ssh zero-web0
+----
+
+. 添加配置。
++
+[source,shell]
+----
+cd /qingstor/etc/
+----
++
+[source,shell]
+----
+CONFIG_FILE_PATH=/qingstor/etc/qingstor-zero-web.yaml
+----
+
+. 初始化用户。
+** 若不使用 account。
++
+[source,shell]
+----
+/qingstor/bin/qingstor-zero-web task super_admin:add admin@qingstor.com zhu88jie
+----
+** 若使用 account，其中 domain 是 common.yaml 中填写的 domain。
++
+[source,shell]
+----
+/qingstor/bin/qingstor-zero-web task super_admin:add admin@<domain> zhu88jie
+----
+. 登录 portal，使用浏览器打开 “<Portal_vip>:3000”，输入用户名与密码进行登录。
++
+
+include::../../../_components/note.adoc[]
+此处 <Portal_vip> 为在 common.yaml 配置文件中配置 Portal 的虚 IP，即字段 ``qingstor_mysql_vip``。
+include::../../../_components/table_footer.adoc[]
++
+[,shell]
+----
+用户名：admin@qingstor.com
+密码：zhu88jie
+----

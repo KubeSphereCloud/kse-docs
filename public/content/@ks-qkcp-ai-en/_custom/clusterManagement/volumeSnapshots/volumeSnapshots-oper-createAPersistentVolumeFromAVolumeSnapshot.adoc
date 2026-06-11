@@ -1,0 +1,47 @@
+// :ks_include_id: 866a7f0d7d8549c595c932a0e15d5cba
+. On the Volume Snapshot details page, click **Operation > Create Volume**.
+
+. On the **Basic Information** tab, set the basic information for the PersistentVolumeClaim, then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the PersistentVolumeClaim. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and can be up to 253 characters long.
+
+|Alias
+|The alias of the PersistentVolumeClaim. Different PersistentVolumeClaims can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), and can be up to 63 characters long.
+
+|Description
+|The description of the PersistentVolumeClaim. The description can contain any characters and can be up to 256 characters long.
+|===
+--
+
+. On the **Storage Settings** tab, select the access mode for the backend storage area, then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|ReadWriteOnce
+|Allows a single node to read data from and write data to the backend storage area.
+
+|ReadOnlyMany
+|Allows multiple nodes to read data from the backend storage area.
+
+|ReadWriteMany
+|Allows multiple nodes to read data from and write data to the backend storage area.
+|===
+--
+
+. On the **Advanced Settings** tab, set the labels and annotations for the PersistentVolumeClaim, then click **Create**.
++
+--
+include::../workloads/createWorkload/workloads-para-Metadata.adoc[]
+
+The system will create the PersistentVolumeClaim based on the parameters set in the above steps, and will also create the corresponding PersistentVolume based on the snapshot data.
+--

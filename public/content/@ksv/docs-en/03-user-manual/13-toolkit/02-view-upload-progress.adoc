@@ -1,0 +1,70 @@
+---
+title: "Monitor the progress of operations"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, operations, progress, view"
+description: "Describes how to monitor the progress of operations in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 9a1b1714edab4061b32b289072abb6de
+:ks_xref_id: ac188a685d6f498397de1757027939e2
+:ks_comp: ../../../components/
+:ks_title: Monitor the progress of operations
+:ks_description: Describes how to monitor the progress of operations in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, operations, progress, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+{ks_product_abbr_full} provides a toolbox in the web console to help you monitor the progress of image upload, replication, and node adding. This topic describes how to use the toolbox to monitor the progress of resource operations.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Monitor the progress of image operationslink:[id=f9fa7be51b6040fba7480e4804efc575]
+
+. Log in to the {ks_product} web console as **admin** or a user that belongs to at least one project.
+. In the lower-right corner of the page, hover over image:/images/ksv/en/icons/hammer.svg[18px,18px] to open the toolbox.
+. In the menu that appears, choose **Upload Progress** > **Images**.
++
+--
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+Before you can view the progress of image operations, upload or replicate an image. For more information, see link:../../05-vm-management/03-images/01-create-image/[Create an image].
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Monitor the progress of node operationslink:[id=e23d3d91c6b846c7bc54a68e2971cfc7]
+
+. Log in to the {ks_product} web console as user **admin**.
++
+--
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+Only user **admin** has permissions to view physical nodes.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. In the lower-right corner of the page, hover over image:/images/ksv/en/icons/hammer.svg[18px,18px] to open the toolbox.
+. In the menu that appears, choose **Upload Progress** > **Nodes**.
++
+--
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+Before you can view the progress of node operations, add a node. For more information, see link:../../02-node-management/01-add-node/[Add nodes].
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

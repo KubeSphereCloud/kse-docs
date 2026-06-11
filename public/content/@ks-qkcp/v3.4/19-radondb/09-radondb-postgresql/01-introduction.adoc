@@ -1,0 +1,64 @@
+---
+title: "应用介绍"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB PostgreSQL, 产品简介, 功能特性, 架构原理"
+description: "介绍 RadonDB PostgreSQL 产品简介、功能特性和架构原理。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 39d2f6a567ba4e38a4f7e2a0995ba00b
+:ks_xref_id: 176e170970234c0abfeb11b3ad9fbde7
+:ks_comp: ../../../components/
+:ks_title: 应用介绍
+:ks_keywords: Kubernetes, {ks_product}, RadonDB PostgreSQL, 产品简介, 功能特性, 架构原理
+:ks_description: 介绍 RadonDB PostgreSQL 产品简介、功能特性和架构原理。
+:ks_weight: 01
+:ks_icon:
+
+
+== 什么是 RadonDB PostgreSQLlink:[id=7263de2c429741428cf82dd6f7f1f871]
+
+RadonDB PostgreSQL 是一款基于 PostgreSQL 的容器化、开源关系型数据库，支持在{ks_product_both}上安装部署和管理，自动执行与运行 PostgreSQL 集群有关的任务，被广泛应用于地理空间和移动领域。
+
+* 具备高可用、稳定性、数据完整性等性能。
+* 支持在线水平扩展。
+* 支持故障自动转移 ，提供 HA 功能。
+* 提供 PostgreSQL 常用参数接口，方便调整参数。
+* 提供 pg_dirtyread 插件，支持误删除数据找回。
+* 提供 PostGIS 插件，具备存储、查询和修改空间关系的能力。
+* 提供 Citus 插件，提供分布式数据库能力。
+* 提供实时监控、健康检查、日志自动清理等功能。
+
+== 功能特性link:[id=96f03ed32a224ac3990b3cd830887afe]
+
+* 一键安装部署
++
+--
+提供一键部署，开箱即用服务，免去复杂的手动安装、部署。
+--
+
+* 弹性扩容伸缩
++
+--
+提供对数据库节点数量、资源规格、卷容量的弹性扩容。
+--
+
+* 数据库用户管理
++
+--
+提供用户管理列表，支持创建、修改、删除用户。
+--
+
+* 实时监控告警
++
+--
+提供应用节点资源和服务的监控指标，支持可视化监控应用状态。
+--
+
+* 配置参数管理
++
+--
+开放管理和查看数据库配置参数，提高数据库运维效率。
+--

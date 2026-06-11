@@ -1,0 +1,163 @@
+---
+title: "管理 Virtual SAN"
+weight: 4
+---
+
+== 查看 Virtual SAN
+
+. 登录 {console_name}.
+
+. 在导航栏中点击**产品与服务** > **存储服务** > **共享存储**，即可进入 **Virtual SAN** 列表页面。
++
+在当前页面可查看已创建成功的 Virtual SAN 服务器 ``ID``、``名称``、``区域``、``状态``、``类型``、``节点数量``、``网络``、``内网 IP``、``所属项目``等基本信息。
++
+image::/images/cloud_service/storage/share/manage_vsan_1.png[]
+
+. 点击 Virtual SAN 服务器的 ``ID``，可进入当前 vSAN 的详情页面。在当前页面可查看 vSAN 的**基本属性**、**租赁信息**、**目标门户组**以及**图形化**信息。
++
+image::/images/cloud_service/storage/share/manage_vsan_2.png[]
+
+. 选择**目标门户组**页签，在存储列表内，可查看当前挂载至 vSAN 服务器上的所有硬盘。点击**监控**列内的**查看**操作，可查看针对指定硬盘的监控数据。
++
+image::/images/cloud_service/storage/share/manage_vsan_3.png[]
+
+== 修改 Virtual SAN
+
+. 在 **Virtual SAN** 列表页面，右键点击待修改的 **Virtual SAN**，在弹框中，点击**修改**。
++
+image::/images/cloud_service/storage/share/manage_vsan_6.png[]
+
+. 在弹出的**修改共享存储属性**的窗口中，输入新的名称和描述，点击**修改**即可。
+
+== 关闭/启动 Virtual SAN
+
+=== 关闭
+
+. 在 **Virtual SAN** 列表页面，右键点击待关闭的 **Virtual SAN**，在弹框中，点击**关闭**。
++
+image::/images/cloud_service/storage/share/manage_vsan_7.png[]
+
+. 若确定无误，在弹出的**提示**窗口中，点击**确认**即可。
+
+=== 启动
+
+. 在 **Virtual SAN** 列表页面，右键点击待启动的 **Virtual SAN**，在弹框中，点击**启动**。
++
+image::/images/cloud_service/storage/share/manage_vsan_8.png[]
+
+. 若确定无误，在弹出的**提示**窗口中，点击**确认**即可。
+
+== 切换私有网络
+
+. 在 **Virtual SAN** 列表页面，右键点击指定 **Virtual SAN**，在弹框中，点击**切换私有网络**。
+
+. 在弹出的**选择要加入的私有网络**窗口中，选择待加入的私有网络，并配置 IP 地址，点击**提交**即可。
++
+
+include::../../../../../_components/note.adoc[]
+* IP 地址支持**自动分配**或**手动配置**。
+* 若当前 Virtual SAN 有已连接的 iSCSI 客户端，切换私有网络时连接会中断。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/cloud_service/storage/share/manage_vsan_9.png[,60%]
+
+== 修改内网 IP 地址
+
+. 在 **Virtual SAN** 列表页面，右键点击指定 **Virtual SAN**，在弹框中，点击**修改内网 IP 地址**。
+
+. 在弹出的**修改内网 IP 地址**的窗口中，输入 IP 值，点击**提交**即可。
++
+
+include::../../../../../_components/note.adoc[]
+所设定的 IP 值需在所处私有网络的 IP 范围内。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/cloud_service/storage/share/manage_vsan_10.png[,60%]
+
+== 绑定/解绑标签
+
+=== 绑定
+. 在 **Virtual SAN** 列表页面，右键点击指定 **Virtual SAN**，在弹框中，选择**标签** > **绑定**。
+
+. 在弹出的**选择标签**的窗口中，勾选待绑定的标签，点击**提交**即可。
++
+
+include::../../../../../_components/note.adoc[]
+* 若无可用的标签，可点击**+创建标签**进行新建。
+* 支持同时绑定多个标签。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/cloud_service/storage/share/manage_vsan_11.png[,60%]
+
+=== 解绑
+
+. 在 **Virtual SAN** 列表页面，右键点击指定 **Virtual SAN**，在弹框中，选择**标签** > **解绑**。
+
+. 在弹出的**选择从资源上解绑的标签**窗口中，勾选待解绑的标签，点击**提交**。
++
+image::/images/cloud_service/storage/share/manage_vsan_12.png[,60%]
+
+== 加入/离开项目
+
+=== 加入
+. 在 **Virtual SAN** 列表页面，右键点击指定 **Virtual SAN**，在弹框中，选择**项目** > **加入**。
+
+. 在弹出的**添加到项目**窗口中，选择待加入的项目，点击**提交**。
++
+
+include::../../../../../_components/note.adoc[]
+每个共享存储资源仅支持加入一个项目。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/cloud_service/storage/share/manage_vsan_13.png[,60%]
+
+=== 离开
+. 在 **Virtual SAN** 列表页面，右键点击指定 **Virtual SAN**，在弹框中，选择**项目** > **离开**。
+
+. 若确定离开项目无误，在弹出的**提示**窗口中，点击**确认**即可。
+
+== 删除 Virtual SAN
+
+. 在 **Virtual SAN** 列表页面，右键点击指定 **Virtual SAN**，在弹框中，选择**删除**。
++
+image::/images/cloud_service/storage/share/manage_vsan_14.png[]
+
+. 若确定无误，在弹出的**提示**窗口中，点击**确认**即可。
+
+== 管理目标门户组
+
+=== 禁用目标门户
+
+. 在 vSAN 的详情页面，选择**目标门户组**页签。在指定目标门户所在行，点击**操作**下拉框，选择**禁用**。
++
+image::/images/cloud_service/storage/share/manage_vsan_4.png[]
+
+. 若确定无误，在弹出的**提示**窗口中，点击**提交**后，返回目标门户组页面，点击**应用修改**，使其生效即可。
+
+=== 启用目标门户
+
+. 在 vSAN 的详情页面，选择**目标门户组**页签。在指定目标门户所在行，点击**操作**下拉框，选择**启用**。
+
+. 若确定无误，在弹出的**提示**窗口中，点击**提交**后，返回目标门户组页面，点击**应用修改**，使其生效即可。
+
+
+=== 删除目标门户
+
+. 在 vSAN 的详情页面，选择**目标门户组**页签。在指定目标门户所在行，点击**操作**下拉框，选择**删除**。
+
++
+image::/images/cloud_service/storage/share/manage_vsan_5.png[]
+
+. 若确定无误，在弹出的**提示**窗口中，点击**提交**后，返回目标门户组页面，点击**应用修改**，使其生效即可。
+
+
+
+
+
+
+
+

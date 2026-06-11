@@ -1,0 +1,34 @@
+---
+title: "准备安装包"
+weight: 1
+---
+
+. 从以下路径获取最新版本的 Qingstor WebInstaller 安装包。
++
+[source,shell]
+----
+ftp://ins.qingcloud.com/neonsan/qingstor-installer-1.0/
+----
++
+include::../../../../../../_components/note.adoc[]
+* 若安装包下载路径不能访问，请与 Qingstor Installer 组联系。
+* 安装包名为：``qingstor-installer_3.0.0_neonsan_3.5.3_all_noarch.tar.gz``
+include::../../../../../../_components/table_footer.adoc[]
+
+. 选择待部署集群的任一节点。
++
+include::../../../../../../_components/note.adoc[]
+SANC 融合部署模式下，选择任意一个待部署 NeonSAN 服务的 IaaS Hyper 节点。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 建立自己电脑与安装节点的 SSH 免密访问通道，访问用户为 root，且后面所有的安装部署均需要使用 root 用户。
+
+. 将安装包上传至安装节点的 ``/root`` 目录。
+. 解压安装包至 ``/root`` 目录。
++
+[source,shell]
+----
+tar -zxf /root/qingstor-installer_3.0.0_neonsan_3.5.3_all_noarch.tar.gz -C /root/
+----
+
+

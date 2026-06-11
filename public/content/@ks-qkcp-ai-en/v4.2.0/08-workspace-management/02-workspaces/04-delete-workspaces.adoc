@@ -1,0 +1,65 @@
+---
+title: "Delete Workspace"
+keywords: "Kubernetes, {ks_product}, Access Control, Workspace, Delete Workspace"
+description: "Introduces how to delete a workspace."
+weight: 04
+---
+
+:ks_permission: **Workspace Management**
+
+This section describes how to delete a workspace.
+
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+The system workspace **system-workspace** cannot be deleted.
+|===
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+The deleted workspace cannot be recovered. If you choose to delete the projects in the workspace simultaneously, all projects in the workspace and all resources in them will also be deleted. Perform this operation with caution.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+You must have the pass:a,q[{ks_permission}] permission on the KubeSphere platform.
+
+
+== Delete a Single Workspace
+
+include::../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
++
+. Click **Workspace Management**.
+. On the right of the workspace to operate, click image:/images/ks-qkcp/en/icons/more.svg[more,18,18], and then select **Delete** from the drop-down list.
+. In the **Delete Workspace** dialog box, enter the workspace name, and then click **OK**.
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|You can select the **Delete projects in the workspace** check box to delete all projects in the workspace simultaneously.
+
+|===
+
+
+== Batch Delete Workspaces
+include::../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
++
+. Click **Workspace Management**.
+. Select the check boxes on the left of the workspaces to be deleted, and then click **Delete** above the workspace list.
+. In the **Batch Delete Workspaces** dialog box, enter the workspace names, and then click **OK**.
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Use half-width commas (,) and spaces to separate multiple names.
+
+|===

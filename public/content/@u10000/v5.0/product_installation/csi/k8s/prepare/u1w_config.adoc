@@ -1,0 +1,205 @@
+---
+title: 获取 {product_name} 信息
+weight: 2
+---
+
+== Hosts 信息
+
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，进入脚本所在目录。
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，查看 Host 相关信息。
++
+[source,shell]
+----
+./qs_installer tools --generate-hosts
+----
+命令行回显示例
++
+[source,shell]
+----
+Usage config dir: /qingstor/etc/
+
+192.168.100.212 console.qingstorage.com
+192.168.100.212 portal.noah.stor.qingstorage.com
+192.168.100.212 stor.qingstorage.com noah.stor.qingstorage.com
+192.168.100.212 s3.stor.qingstorage.com s3.noah.stor.qingstorage.com
+192.168.100.222 n0.noah.stor.qingstorage.com
+192.168.100.222 s0.noah.stor.qingstorage.com
+
+# default_user: qingstor@qingstorage.com
+# default_pass: zhu88jie
+----
+
+. 将以上返回的 Host 相关信息，添加至本机的 Hosts 文件中即可。
++
+include::../../../../../../_components/note.adoc[]
+
+* `console.qingstorage.com` 为当前环境的 Console 访问链接。
+* `portal.noah.stor.qingstorage.com` 为当前环境的 Portal 访问链接。
+* `n0.noah.stor.qingstorage.com` 为当前环境文件存储 NFS 服务域名。
+* `s0.noah.stor.qingstorage.com` 为当前环境文件存储 SMB 服务域名。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 根据以上内容，得出本例中 Portal 登录信息如下。
++
+> Portal 链接：portal.noah.stor.qingstorage.com +
+> 默认用户名：qingstor@qingstorage.com +
+> 默认密码：zhu88jie
+
+
+
+== Global Domain
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，关注配置文件中的 `global_domain` 字段。
++
+[source,shell]
+----
+cat /qingstor/etc/base.ini
+----
++
+回显内容示例
++
+[source,shell]
+----
+......
+zone_id = ectest
+region_id = yyy
+global_domain = stor.qingstorage.com
+......
+----
+
+
+== DNS 服务地址
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，查看 {product_name} 的 DNS 节点信息。命令行回显内容即为 {product_name} DNS 节点 IP 地址。
++
+[source,shell]
+----
+cat /etc/hosts | grep core
+----
++
+回显内容示例
++
+[source,shell]
+----
+172.16.0.9 core0
+172.16.0.10 core1
+172.16.0.11 core2
+----
+
+== 存储集群 IP
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，查看 {product_name} 的 DNS 节点信息。命令行回显内容即为 {product_name} DNS 节点 IP 地址。
++
+[source,shell]
+----
+cat /qingstor/etc/ip.ini
+----
++
+回显内容示例如下。
++
+[source,shell]
+----
+[role]
+192.168.100.2 = oss nas cluster1 global
+192.168.100.3 = oss nas cluster1 global
+192.168.100.4 = oss nas cluster1 global
+----
++
+角色设置中，前缀为 `cluster` 的，即为存储集群的节点。当前示例中，存储节点 IP 地址为 `192.168.100.2`、`192.168.100.3`、`192.168.100.4`。
+
+== hydro_confd 集群信息
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，跳转至 {product_name} 任一网关节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，查看 `hydro_confd` 集群信息。
++
+[source,shell]
+----
+cat /qingstor/etc/hydro_confd.yaml
+----
++
+命令回显示例
++
+[source,shell]
+----
+......
+confd_addr:
+  - "172.16.0.9:9296"
+  - "172.16.0.10:9296"
+  - "172.16.0.11:9296"
+......
+----
+
+== 创建 Kubernetes 账户
+
+使用 {product_name} 作为底层存储时，Kubernetes 与 {product_name} 共用一套账户体系。也就是说，在 Kubernetes 中，使用账户 A，创建一个 PV 时，系统会在底层存储 {product_name} 中创建一个相应的文件系统，而该文件系统的所属人也是账户 A。
+
+
+
+因此，用户需先在 {product_name} 的 Portal 申请一个账户，用于 Kubernetes 与 QingStor U10000 对接，对接成功后，后期 Kubernetes 创建的所有挂载点，均会归属于该账户下。详细操作如下。
+
+
+
+. 参考link:#_hosts_信息[前文内容]，登录 {product_name} 的 Portal。
+
+
+. 点击**运维管理** > **用户管理**，进入用户管理页面，点击** Console 用户**标签页面的**新增用户**来创建 Kubernetes 对接 {product_name} 的账户。并记录 User ID。
+
+. 给成功创建的 Kubernetes 账户创建 API 密钥。
+
+. 下载 Kubernetes 账户的 API 密钥至本地保存。
++
+include::../../../../../../_components/note.adoc[]
+
+创建用户与 API 密钥的详细操作，可参考《{product_name} Portal 用户手册》。
+
+include::../../../../../../_components/table_footer.adoc[]

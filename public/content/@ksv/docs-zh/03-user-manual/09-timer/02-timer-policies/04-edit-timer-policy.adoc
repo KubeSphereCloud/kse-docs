@@ -1,0 +1,53 @@
+---
+title: "编辑定时策略信息"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 定时策略, 编辑"
+description: "介绍如何使用{ks_product_both}Web 控制台编辑定时策略信息。"
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: b5b275eac6114a78b516711658ecfad4
+:ks_xref_id: c3571fe649cb488688b97541c22571d4
+:ks_comp: ../../../../components/
+:ks_title: 编辑定时策略信息
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台编辑定时策略信息。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 定时策略, 编辑
+:ks_weight: 04
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台编辑定时策略信息。您可以通过编辑操作修改定时策略的名称、所属项目、任务执行周期和时间。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=c9bf2b69024a45d8a780af9bc102d20d]
+
+系统 **admin** 用户可以编辑集群中所有已创建的定时策略，普通项目管理员和操作员可以编辑自身创建的定时策略，项目观察员没有编辑权限。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 在定时策略列表页面编辑link:[id=07ae7fda608540bf88dce4492643a810]
+
+include::../../../../_custom/timer/timer-policy-steps.adoc[]
+
+. 找到目标定时策略，点击右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**编辑**。
+
+. 在弹出的对话框中修改定时策略的**名称**、**选择项目**、**周期**和**时间**，然后点击**确定**。有关更多参数信息，请参阅 link:../01-create-timer-policy/[创建定时策略]。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 在定时策略详情页面编辑link:[id=df3e65de5d7a4178b48648dc1d117bcb]
+
+include::../../../../_custom/timer/timer-policy-steps.adoc[]
+
+. 在定时策略列表页面，点击目标定时策略名称，进入定时策略详情页面。
+
+. 在定时策略详情页面，点击左上角的**编辑**。
+
+. 在弹出的对话框中修改定时策略的**名称**、**选择项目**、**周期**和**时间**，然后点击**确定**。有关更多参数信息，请参阅 link:../01-create-timer-policy/[创建定时策略]。

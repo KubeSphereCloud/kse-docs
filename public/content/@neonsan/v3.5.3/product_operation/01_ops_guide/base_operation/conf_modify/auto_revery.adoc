@@ -1,0 +1,19 @@
+---
+title: "配置自动恢复降级卷"
+weight: 2
+---
+
+登录 NeonSAN 集群任一节点，执行如下命令，设置 auto_recovery 参数。
+
+[,shell]
+----
+neonsan set_parameter --parameter auto_recovery --value 1
+----
+
+相关说明:
+
+* auto_recovery 设置为 1，表示开启自动恢复降级卷；
++
+auto_recovery 设置为 0，表示关闭自动恢复降级卷。
+
+* 若开启自动恢复降级卷，则 NeonSAN 存储系统会每隔 5 分钟后获取一次降级卷的信息，并开始逐个恢复降级卷。

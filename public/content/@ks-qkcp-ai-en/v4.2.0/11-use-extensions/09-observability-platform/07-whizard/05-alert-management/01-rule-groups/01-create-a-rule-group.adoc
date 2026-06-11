@@ -1,0 +1,101 @@
+---
+title: "Create a Rule Group"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Monitoring and Alerting, Alert Management, Rule Group, Create Rule Group"
+description: "Describes how to create an alerting rule group."
+weight: 01
+---
+
+// :ks_permission: **Rule Group Management**
+:ks_navigation: **Global Alerting > Custom Rule Groups**
+
+
+include::../../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-createAnAlertingPolicy.adoc[]
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+KubeSphere only supports creating custom rule groups and does not support creating built-in rule groups.
+|===
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+:relfileprefix: ../../../../../../
+
+include::../../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-exposeMetrics_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
++
+
+include::../../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-setBasicInfo.adoc[]
+
++
+
+include::../../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-addAlertRule.adoc[]
++
+include::../../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-commonParameters_new.adoc[]
+
+* Rule Template
++
+--
+Select the monitoring target and trigger condition via the dropdown list.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Monitoring Target
+|The cluster node or workload to be monitored.
+
+include::../../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-triggerCondition.adoc[]
+|===
+--
+
+* Custom Rule
++
+--
+Specify the monitoring target and trigger condition via a PromQL expression.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster Setting
+|Select the cluster where the resources to be monitored are located.
+
+include::../../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-duration.adoc[]
+
+|Alert Level
+|
+include::../../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-para-alertLevel.adoc[]
+
+include::../../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-ruleExpression.adoc[]
+|===
+--
+
++
+
+include::../../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-clickOK.adoc[]

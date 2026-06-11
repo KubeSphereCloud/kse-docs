@@ -1,0 +1,52 @@
+---
+title: "View SSH key details"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, SSH, keys, details, view"
+description: "Describes how to view the details of an SSH key in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 22c561dfd89644bba3af12735bb9880e
+:ks_xref_id: 20a1aa52cf614ed19dfbe4385a41f1d7
+:ks_comp: ../../../components/
+:ks_title: View SSH key details
+:ks_description: Describes how to view the details of an SSH key in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, SSH, keys, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of an SSH key in the {ks_product_abbr_full} web console. For security purposes, each user can view only the SSH keys created on their own.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=d4d971c0cd1f4d6f868302e278ab3977]
+
+include::../../../_custom-en/ssh/ssh-key-steps.adoc[]
+
+. On the **SSH Keys** page, click the name of an SSH key to view its details.
+. On the left side of the details page, view basic information about the SSH key.
++
+--
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the SSH key in the system.
+
+|Encryption Method
+|The encryption method of the SSH key.  By default, RSA is used for encryption.
+
+|Created at
+|The time when the SSH key was created.
+
+|Created by
+|The username that is used to create the SSH key.
+|===
+--
+. On the right side of the details page, view the public key of the SSH key. The private key will be automatically downloaded to your local environment when the SSH key is created. You cannot view the private key in the console.

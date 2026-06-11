@@ -1,0 +1,30 @@
+---
+title: "OpenSearch Overview"
+keywords: "Kubernetes, {ks_product}, opensearch, logging, observability"
+description: "Introduces the 'OpenSearch Distributed Search and Analytics Engine' extension."
+weight: 01
+---
+
+The OpenSearch service provided by the "OpenSearch Distributed Search and Analytics Engine" extension serves as the default log receiver for KubeSphere, used for storing observability data such as logs, audits, events, and notification history.
+
+In addition to supporting the deployment of OpenSearch, this extension also supports the deployment of OpenSearch Dashboard and OpenSearch Curator.
+
+* **OpenSearch Dashboard** is a user interface for visualizing OpenSearch data and managing the OpenSearch cluster. It is disabled by default. To enable it, set the `opensearch-dashboards.enabled` field to true.
+
+* **OpenSearch Curator** is a CronJob that periodically cleans up Kubernetes event logs, Kubernetes audit logs, Kubernetes application logs, and notification history logs older than the configured number of days (default is 7 days). It is enabled by default. To disable it, set the `opensearch-curator.enabled` field to false.
++
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+The OpenSearch Curator feature is deprecated and will be removed in a future release. It is recommended to use the ISM (Index State Management) feature within the Logging, Auditing, Events, and Notification extensions for index management.
+|===
+
+[.admon.note,cols="a"]
+|===
+|Info
+
+|
+For more information on extension configuration, please refer to the description pages for the "WizTelemetry Data Pipeline" and "OpenSearch Distributed Search and Analytics Engine" extensions in the Extensions Center.
+|===

@@ -1,0 +1,58 @@
+---
+title: "View Constraint Template Details"
+description: "This document describes how to view constraint template details."
+weight: 03
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: ** Gatekeeper > Constraint Templates**
+
+This section describes how to view constraint template details.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The KubeSphere platform needs to have the **Gatekeeper** extension installed and enabled.
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. In the constraint template list, click the name of a constraint template to open its details page.
+
+. On the constraint template details page, in the **Attributes** area, view the basic information of the constraint template.
++
+--
+
+[%header,cols="2,5"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the constraint template belongs.
+
+|Creation Time
+|The creation time of the constraint template.
+
+|CRD
+|The name of the CRD corresponding to the constraint template.
+|===
+--
+
+. On the constraint template details page, click the **Target** tab to view the constrained objects of the constraint template.
+
+. On the constraint template details page, click the **Status** tab to view the labels and annotations of the constraint template.
+
+. On the constraint template details page, click the **Constraints** tab to view the constraints created using the constraint template.

@@ -1,0 +1,83 @@
+---
+title: "开机"
+weight: 2
+---
+
+== 运维场景
+
+云易捷环境搭建完成需正常启动或者在关机运维后需开启等场景下，均可参考以下步骤。
+
+== 注意事项
+
+启动云易捷物理主机之后，各项服务会自启。但需用户检查系统各项服务的状态。
+
+== 操作步骤
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，检查所有服务的状态。
++
+[source,shell]
+----
+/pitrix/check/check.py -n all 
+----
+
+. 执行如下命令，查看 rabbitmq 服务的状态。
++
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh zoocassa 'service rabbitmq status'
+----
++
+include::../../../../../../_components/note.adoc[]
+若返回结果中，当前服务状态不为 `running`，则需执行 `service rabbitmq start` 手动开启。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，检查 NeonSAN 服务。
++
+[source,shell]
+----
+neonsan list_store && neonsan list_ssd && neonsan list_port && neonsan list_pool && neonsan list_parameter && neonsan list_rg -detail
+----
+
+. 依次执行如下命令，确认所有盘均正常挂载至 QBD 设备。
++
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh snapshot 'lsblk |grep snapshot'
+----
++
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh seed "lsblk |egrep 'images-repo|image_nbd'"
+----
++
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh vbr 'lsblk |grep vbr'
+----
++
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh hyper "lsblk |egrep -w 'image|image_nbd'"
+----
+
+. 登录当前环境的 Console 管理控制平台，查看基本信息并创建虚拟机进行验证。
+

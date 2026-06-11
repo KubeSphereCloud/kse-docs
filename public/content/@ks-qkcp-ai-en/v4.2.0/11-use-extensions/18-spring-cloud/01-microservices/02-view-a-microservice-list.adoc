@@ -1,0 +1,66 @@
+---
+title: "View the Microservice List"
+keywords: "Kubernetes, {ks_product}, Project Management, Spring Cloud, View the Microservice List"
+description: "Introduces how to view the microservice list."
+weight: 02
+---
+
+
+:ks_permission: **View Spring Cloud Microservices**
+:ks_navigation:  **Spring Cloud > Microservices**
+
+
+This section describes how to view the microservice list.
+
+
+== Prerequisites
+
+* The **KubeSphere Spring Cloud** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
++
+====
+// * The Service Registry shows the address of the service registry, the number of microservices, the number of microservice instances, and the number of healthy instances.
+
+* The microservice list displays the number of instances, the number of healthy instances, and whether the health protection mechanism has been triggered for each microservice.
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* To prevent traffic from flowing entirely to healthy instances due to too many unhealthy instances, which could then overwhelm the healthy instances and cause a cascading failure (avalanche effect), Nacos supports setting a health protection threshold. When the proportion of healthy instances to the total number of microservice instances is less than this value, the instance will be returned to the client regardless of its health status.
+
+* The default health protection threshold in KubeSphere is 0, meaning the health protection mechanism is not used by default. You can refer to the link:https://nacos.io[Nacos official documentation] to set the health protection threshold for Nacos.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+* Click the search box above the list and enter a keyword to search for microservices by name.
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====
+
+. Click image:/images/ks-qkcp/zh/icons/plus-square.svg[plus-square,18,18] on the right side of a microservice to view all instances of that microservice.
++
+--
+include::../../../../_custom/projectManagement/microservices/microservices-para-instances.adoc[]
+--

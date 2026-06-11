@@ -1,0 +1,46 @@
+---
+title: "网络"
+weight: 10
+---
+
+Kubernetes 使用 IP 池（IPPool）来规划 Pod 的网络地址空间。
+
+== 功能特性
+
+* IPPool 可以帮助集群管理员、企业空间管理员、项目管理员对当前的集群、企业空间、项目所使用的 Pod IP 进行规划。
+* IPPool 需要在启用 https://www.tigera.io/project-calico/[Calico] 插件的模式下启动。
+* 支持 LB 插件。
+* 支持网络策略可视化管理。
+
+== 主要组件
+
+* *LB 插件*
++
+LB 插件基于 https://github.com/kubernetes/cloud-provider[cloud-provider] 实现，LB 插件通过调用 cloud-provider 仓库中的程序，实现了库中对应的接口。
+
+* *网络策略*
+
+** 创建企业空间时，可以勾选是否添加“默认的企业空间网络策略”，企业空间管理员可以删除“默认的企业空间网络策略”。
+** “企业空间网络策略"会自动为每个项目生成“项目网络策略”，自动生成的策略只能插卡，不能修改和删除。
+** 项目管理员可以为自己有权限的项目配置“项目网络策略”。
+
+== 架构设计
+
+K8s 集群使用 CoreDNS 作为集群内部的 DNS 服务。
+
+* 集群内使用的 CoreDNS 既是权威 DNS 也是递归 DNS，上游的 DNS 可自定义。
++
+例如：在集群内部，可以使用 `ks-apiserver.kubesphere-system.svc.cluster.local` 来访问 “kubesphere-system” Namespace 下 “ks-apiserver” 这个 Service。
+* 集群所使用的 Domain 可以在安装时自定义，默认使用 cluster.local。
+* 如果底层网络已经互通，建议作为数据中心 DNS 上 ZONE 的延伸。
+* 在 K8s 内，使用 https://github.com/kubernetes-sigs/[external-dns] 可以向 DNS 服务商暴露 K8s 集群中的 Service 和 Ingress，这是一种主动 push 的模型。
+
+CoreDNS 架构设计如下图。
+
+image::/images/ep_offline/qke_twp/05_coredns.png[]
+
+*架构说明*：
+
+1. NodeLocalDNS：每个 Node 本地的 DNS 请求缓存代理。可提高 DNS 解析性能，避免每次 DNS 请求都需要发送到 CoreDNS 上。
+2. CoreDNS：集群内部的 DNS 服务器，提供集群内部域名解析服务，对于不存在与集群内部的域名请求，递归到上游 DNS。
+3. Upstream DNS：上游 DNS。生产环境下，底层网络互通时，结合数据中心 DNS，建议在数据中心 DNS 上将不同集群使用的Domain 转发到对应集群的 CoreDNS 上，避免缓存。

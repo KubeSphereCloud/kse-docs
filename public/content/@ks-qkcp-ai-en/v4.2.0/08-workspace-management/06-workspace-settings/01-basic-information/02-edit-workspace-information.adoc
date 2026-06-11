@@ -1,0 +1,49 @@
+---
+title: "Edit Workspace Information"
+keywords: "Kubernetes, {ks_product}, Workspace, Workspace Settings, Basic Information, View and Edit Workspace Information"
+description: "Describes how to edit workspace information."
+weight: 02
+---
+
+:ks_permission: **Workspace Settings Management**
+:ks_navigation: **Workspace Settings > Basic Information**
+
+This section describes how to edit workspace information.
+
+You can edit the alias and description of a workspace. KubeSphere does not support editing the name of a created workspace.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. In the **Workspace Information** area, click **Manage > Edit Information** in the upper-right corner.
+
+. In the **Edit Information** dialog box, set the alias and description for the workspace, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Alias
+|The alias of the workspace. Different workspaces can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-). It must not start or end with a hyphen (-) and can be up to 63 characters long.
+
+|Description
+|The description of the workspace. The description can contain any characters and can be up to 256 characters long.
+|===
+--

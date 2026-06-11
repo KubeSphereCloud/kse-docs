@@ -1,0 +1,88 @@
+---
+title: 修改自动伸缩策略（ModifyAutoScalingPolicyAttributes）
+weight: 10
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| autoscaling_policy
+| String
+| true
+| 自动伸缩策略ID
+
+| autoscaling_policy_name
+| String
+| true
+| 自动伸缩策略名称
+
+| description
+| String
+| true
+| 自动伸缩策略描述信息
+
+| owner
+| String
+| true
+| 所有者
+
+| zone
+| String
+| true
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 操作名称
+
+| autoscaling_policy_id
+| String
+| false
+| 自动伸缩策略ID
+
+| ret_code
+| Integer
+| false
+| 操作结果
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyAutoScalingPolicyAttributes",
+  "autoscaling_policy": "asp-5nezjmtm",
+  "autoscaling_policy_name": "123",
+  "description": "123",
+  "owner": "usr-DnmqVpLq",
+  "zone": "qa"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyAutoScalingPolicyAttributesResponse",
+  "autoscaling_policy_id": "asp-5nezjmtm",
+  "ret_code": 0
+}
+----

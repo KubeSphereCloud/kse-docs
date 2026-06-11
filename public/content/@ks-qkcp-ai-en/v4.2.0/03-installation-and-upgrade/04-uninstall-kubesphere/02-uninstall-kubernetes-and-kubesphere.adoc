@@ -1,0 +1,126 @@
+---
+title: "Uninstalling Kubernetes and KubeSphere"
+keywords: "Kubernetes, {ks_product}, Uninstalling Kubernetes and KubeSphere"
+description: "Describes how to uninstall Kubernetes and KubeSphere."
+weight: 02
+---
+
+This section describes how to uninstall Kubernetes and KubeSphere.
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+The Kubernetes uninstallation method described in this section is only applicable to scenarios where Kubernetes was installed via KubeKey. If your Kubernetes was not installed via KubeKey, please refer to the link:https://kubernetes.io/zh/docs/reference/setup-tools/kubeadm/kubeadm-reset/[Kubernetes official documentation] to uninstall Kubernetes.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+[.admon.warning,cols="a"]
+|===
+|Warning
+
+|
+* This operation will cause KubeSphere cluster business interruption and cannot be undone. Please perform this operation with caution.
+
+* {empty}
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-prer-backUpData.adoc[]
+|===
+
+
+== If KubeSphere was installed online
+
+If KubeSphere was link:../../02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/[installed online], please follow the steps below to uninstall Kubernetes and KubeSphere.
+
+=== Prerequisites
+
+You need to obtain the installation configuration file **config-sample.yaml** and transfer it to the cluster node used to perform the operations in this section.
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+If you cannot obtain the installation configuration file **config-sample.yaml**, you need to refer to link:../../02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/[Online Installation of KubeSphere] to recreate the **config-sample.yaml** file. When recreating this file, be sure that the cluster information in the file matches the actual current state of the cluster. Otherwise, errors may occur during the uninstallation process.
+|===
+
+=== Steps
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-downloadKubekey.adoc[]
+// https://get-kk.kubesphere.io No parameters. This is the kubekey v3.1.11 used by default for the online version.
+// The offline version requires parameters: curl -sfL https://get-kk.kubesphere.io | VERSION=latest sh -
+
++
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-transferConfig.adoc[]
+
++
+
+. Execute the following command to start uninstalling KubeSphere:
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+ ./kk delete cluster -f config-sample.yaml
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+If the following information is displayed, it indicates successful uninstallation:
+
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+Pipeline[DeleteClusterPipeline] execute successful
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+
+== If KubeSphere was installed offline
+
+If KubeSphere was link:../../02-install-kubesphere/02-offline-install-kubernetes-and-kubesphere/[installed offline] using the Web Installer, please follow the steps below to uninstall Kubernetes and KubeSphere.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|Uninstalling Kubesphere alone is not supported.
+|===
+
+
+=== Method 1: Initialize
+
+On the Web Installer page, click the **Initialize** button to uninstall Kubernetes and KubeSphere.
+
+After the initialization task is completed, you will return to the start installation page.
+
+=== Method 2: Execute the uninstall command
+
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-oper-getInfoForOfflineInstall.adoc[]
+
+**III. Uninstall Kubernetes and KubeSphere**
+
+. Use `kkv4-inventory.yaml` and `kkv4-config.json` to execute the uninstall command.
++
+--
+[source,bash]
+----
+./kk delete cluster -i kkv4-inventory.yaml -c kkv4-config.json --workdir=$(pwd)/operator
+----
+
+If the following information is displayed, it indicates successful uninstallation.
+
+Example output:
+
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+[Playbook default/delete-cluster-5vfjw] finish. total: 36,success: 31,ignored: 5,failed: 0
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. After the command is successfully executed, the Web Installer page will not show that the cluster has been uninstalled. Continue to execute the following command to restore the Web Installer page to the start installation page:
++
+[source,bash]
+----
+rm -rf kubekey/runtime/kubekey.kubesphere.io/v1/playbooks/
+----

@@ -1,0 +1,69 @@
+---
+title: "安装部署工具"
+weight: 20
+---
+
+企业云平台 v6.0.1 及以上版本，qingcloud-firstbox 节点在初始化安装时会自动安装 sic-deployment 工具，将不用再单独手动安装，可以跳过此步骤。
+
+== 导入依赖包
+
+1. 下载依赖包。
++
+[source]
+----
+ftp://ins.qingcloud.com/sic-deploy/secrity/elastic
+ftp://ins.qingcloud.com/sic-deploy/secrity/elastic
+----
+2. 将依赖包存放到云平台 FirstBox 指定路径下。
++
+[cols='1,4,2']
+|===
+| 路径	| 依赖包	| FirstBox 路径
+
+.6+| elastic
+| es-plugins/elasticsearch-analysis-ik-8.1.2.zip	| /pitrix/repo/elastic/
+| elasticsearch-8.1.2-amd64.deb	| /pitrix/repo/elastic/
+| filebeat-8.1.2-amd64.deb	| /pitrix/repo/elastic/
+| kibana-8.1.2-amd64.deb	| /pitrix/repo/elastic/
+| logstash-8.1.2-amd64.deb	| /pitrix/repo/elastic/
+| metricbeat-8.1.2-amd64.deb	| /pitrix/repo/elastic/
+.3+| pip
+| httplib2-0.19.1.tar.gz	| /var/www/repo/pip/
+| pyparsing-2.4.7-py2.py3-none-any.whl	| /var/www/repo/pip/
+| waitress-1.4.4-py2.py3-none-any.whl	| /var/www/repo/pip/
+|===
+
+== 安装部署工具
+
+1. 登录云平台 FirstBox。
+2. 执行以下命令，检查对应路径下是否已有相关依赖包。
++
+[source]
+----
+ls -lt /pitrix/repo/indep/{pitrix-common,pitrix-service-distutils,pitrix-sic-deployment}-1.0.deb
+ls -lt /pitrix/repo/elastic/
+ls -lt /var/www/repo/pip/{httplib2-0.19.1.tar.gz,pyparsing-2.4.7-py2.py3-none-any.whl,waitress-1.4.4-py2.py3-none-any.whl}
+----
++
+回显如下信息，表示依赖包已准备好。
++
+image::/images/ep_offline/scs_install/prepare_install_tool_01.png[]
+3. 执行以下命令，安装部署工具。
++
+[source]
+----
+pip2 install httplib2
+apt-get install pitrix-common pitrix-service-distutils pitrix-sic-deployment -y
+----
++
+回显如下信息，表示安装成功。
++
+
+include::../../../../../_components/note.adoc[]
+如果提示 Unable to locate package pitrix-sic-deployment，请执行 ``apt-get update`` 更新一下索引。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/ep_offline/scs_install/prepare_install_tool_02.png[]
++
+image::/images/ep_offline/scs_install/prepare_install_tool_03.png[]

@@ -1,0 +1,100 @@
+---
+title: "View the details of a project"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, projects, details, view"
+description: "Describes how to view the details of a project in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: fe4a5eb679de40a18cdd38aadb0fdfb1
+:ks_xref_id: cb65bb84bf5f4f46b7b3e51fa8194b17
+:ks_comp: ../../../components/
+:ks_title: View the details of a project
+:ks_description: Describes how to view the details of a project in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, projects, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of a project in the {ks_product_abbr_full} web console.
+
+include::../../../_custom-en/projects/project-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=8eed70e179894398ba09c63e6f5e9e26]
+
+include::../../../_custom-en/projects/project-view-steps.adoc[]
+
+. On the **Projects** page, click the name of the project that you want to view. The details page of the project appears.
+. On the left side of the details page, view basic information about the project.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Alias
+|The alias of the project.
+
+|Status
+|Specifies whether the project is in an active state.
+
+|Created at
+|The time when the project was created.
+
+|Created by
+|The username that is used to create the project.
+|===
+--
+. On the right side of the details page, click **Overview** to view the resource overview of the project.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|VMs
+|The total number of VMs created in the project and the number of VMs in each state.
+
+|Storage
+|The number of disks mounted to the project, the total disk size, and the used disk size.
+
+|VPCs
+|The total number of VPCs and the number of available VPCs in the project.
+
+|Subnets
+|The total number of subnets, the number of physical subnets, and the number of virtual subnets created in the project.
+|===
+--
+. On the right side of the details page, click **Members** to view the members in the project.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the project member.
+
+|Email
+|The email address of the project member used for sign-up.
+
+|Status
+|The current status of the project member.
+
+// 包括哪几种状态类型？
+
+|Role
+|The role of the member in the project. {ks_product} provides **Administrator**, **Operator**, and **Viewer** roles.
+
+|Last Login
+|The last time when the project member logged in to the {ks_product} web console.
+|===
+--
+. (Optional) Click the search box above the project member list and specify a condition to search for project members by name. For example, use **Name:ab** to search for project members whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

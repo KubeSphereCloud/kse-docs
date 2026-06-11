@@ -1,0 +1,53 @@
+---
+title: 删除Console（DeleteConsoleKey）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_key
+| String
+| true
+| Console公钥
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_key_id
+| String
+| false
+| Console公钥
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeleteConsoleKey",
+  "console_key": "SEVDSHXGUNTCOPAITNNE"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteConsoleKeyResponse",
+  "console_key_id": "SEVDSHXGUNTCOPAITNNE",
+  "ret_code": 0
+}
+----

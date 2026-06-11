@@ -1,0 +1,260 @@
+---
+title: 查询用户余额（GetBalance）
+weight: 10
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user
+| String
+| true
+| 用户ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| balance
+| String
+| false
+| 余额
+
+| bonus
+| String
+| false
+| 奖金（已弃用）
+
+| coupons
+| Array
+| false
+| 优惠券列表
+
+| coupons[].balance
+| String
+| false
+| 余额
+
+| coupons[].category
+| String
+| false
+| 类别
+
+| coupons[].conditions
+| Object
+| false
+| 条件
+
+| coupons[].conditions.TODO
+| String
+| false
+| 待定义（动态结构，参考示例）
+
+| coupons[].console_id
+| String
+| false
+| 控制台ID
+
+| coupons[].coupon_id
+| String
+| false
+| 优惠券ID
+
+| coupons[].coupon_type_id
+| String
+| false
+| 优惠券类型ID
+
+| coupons[].create_time
+| String
+| false
+| 创建时间
+
+| coupons[].dispatcher
+| String
+| false
+| 分配者
+
+| coupons[].end_time
+| String
+| false
+| 结束时间
+
+| coupons[].parent_coupon_id
+| String
+| false
+| 父优惠券ID
+
+| coupons[].remarks
+| String
+| false
+| 备注信息
+
+| coupons[].resource_id
+| String
+| false
+| 资源ID
+
+| coupons[].root_user_id
+| String
+| false
+| 主账号Id
+
+| coupons[].start_time
+| String
+| false
+| 开始时间
+
+| coupons[].status
+| String
+| false
+| 状态
+
+| coupons[].status_time
+| String
+| false
+| 状态时间
+
+| coupons[].sub_category
+| String
+| false
+| 子类别
+
+| coupons[].update_time
+| String
+| false
+| 更新时间
+
+| coupons[].usage_mode
+| String
+| false
+| 使用模式
+
+| coupons[].user_id
+| String
+| false
+| 用户ID
+
+| coupons[].value
+| String
+| false
+| 面值
+
+| paid_mode
+| String
+| false
+| 账户类型prepaid：预付费；postpaid:
+
+| preference
+| Integer
+| false
+| 账户设置
+
+| root_user_id
+| String
+| false
+| 主账户ID
+
+| shared_balance
+| String
+| false
+| 主账户余额
+
+| shared_bonus
+| String
+| false
+| 子账户使用主账户的（开发者）奖金
+
+| shared_coupons
+| Arrary(string)
+| false
+| 主账户的优惠券列表
+
+| shared_paid_mode
+| String
+| false
+| 主账户的账户类型prepaid：预付费；postpaid:
+
+| total_shared_sum
+| String
+| false
+| 主账户的总余额
+
+| total_sum
+| String
+| false
+| 总余额
+
+| user_type
+| Integer
+| false
+| 账户类型0:主账户；1:子账户
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetBalanceResponse",
+  "balance": "999116013.9623",
+  "bonus": "0",
+  "coupons": [
+    {
+      "balance": "0",
+      "category": "",
+      "conditions": "[{\"zones\":[\"all\"],\"resource_types\":[\"app-gmu6wmkv\",\"cluster\",\"cluster_app_service\",\"app\"],\"apps\":[{\"app_id\":\"app-gmu6wmkv\"}]}]",
+      "console_id": "admin",
+      "coupon_id": "cpi-dbtllblb",
+      "coupon_type_id": "",
+      "create_time": "2021-10-28T11:13:26",
+      "dispatcher": "",
+      "end_time": "2022-10-30T23:59:59",
+      "parent_coupon_id": "",
+      "remarks": "",
+      "resource_id": "",
+      "root_user_id": "admin",
+      "start_time": "2021-10-28T00:00:00",
+      "status": "activated",
+      "status_time": "",
+      "sub_category": "",
+      "update_time": "2021-10-28T12:42:49",
+      "usage_mode": "auto",
+      "user_id": "admin",
+      "value": "0"
+    }
+  ],
+  "paid_mode": "prepaid",
+  "preference": 1,
+  "ret_code": 0,
+  "root_user_id": "admin",
+  "shared_balance": "0",
+  "shared_bonus": "0",
+  "shared_coupons": [],
+  "shared_paid_mode": "prepaid",
+  "total_shared_sum": "0",
+  "total_sum": "999116013.9623",
+  "user_id": "admin",
+  "user_type": 0
+}
+----

@@ -1,0 +1,44 @@
+---
+title: 制作 Kylin 桌面镜像（ARM）
+weight: 20
+---
+
+标准 Kylin 桌面镜像可以直接从 `\ftp://ins.qingcloud.com/express/桌面/ISO` 路径获取。
+
+若需要手动制作 Kylin 桌面镜像，可以参考如下步骤进行操作。
+
+== 制作 Kylin 桌面镜像
+
+下载 Kylin 基础镜像后，参考link:../win10_image[制作 Win10 桌面镜像]的注册镜像、创建云服务器、安装模板系统、模板转为镜像的步骤进行操作。
+
+== 修改 Kylin 镜像字段
+
+镜像制作成功后，为了使用 **Spice** 协议远程访问云桌面（由 Kylin 桌面镜像创建），需要在{platform_name_cn}的数据库中修改 Kylin 桌面镜像的 **ui_type** 和 **video_type** 字段。
+
+include::../../../../_components/note.adoc[]
+{platform_name_cn}默认的远程访问方式是 VNC，云桌面是 Spice 方式。
+include::../../../../_components/table_footer.adoc[]
+
+. 远程登录到{platform_name_cn}的 FirstBox 节点。
+. 执行以下命令，查看 Pgserver 节点名称。
++
+[source]
+----
+cat /etc/hosts | grep pgserver
+----
+. 远程登录到{platform_name_cn}的任一 Pgserver 数据库节点。
+. 执行以下命令，修改镜像字段。
++
+[source,sql]
+----
+update image set ui_type='gui',video_type='qxl',boot_loader='AAVMF_CODE.fd',block_bus='sd' WHERE image_id='xxxxxxxx';
+----
+
+. 执行以下命令，确认修改结果。
++
+[source,sql]
+----
+select * from image where image_id='xxxxxxxx'
+----
+
+

@@ -1,0 +1,78 @@
+---
+title: '运维相关'
+weight: 13
+---
+
+[cols="2,2,3,3a",options="header"]
+|===
+|英文词汇 |中文/缩略词|解释说明|应用
+|recovery_volume
+|-
+|恢复集群中降级（状态为 DEGRADED ）的卷。
+|可通过执行如下命令对降级的卷进行恢复：`neonsan recovery_volume -volume pool/test_volume`
+
+|repair_volume
+|-
+|将集群中状态为 ERROR 的卷，修复为 DEGRADED。
+|当卷的状态为 ERROR 时，表明数据可能被损坏。可通过 repair_volume 将卷的状态强制修改为 DEGRADED 之后，对相应的卷进行完整备份，命令如下：`neonsan repair_volume -volume neonpool/vol`
+
+|rebalance_ssd
+|-
+|对集群中的磁盘做负载均衡处理。
+|`neonsan rebalance_ssd` 可指定磁盘做负载均衡，即将相应磁盘上的副本迁移至其他磁盘上，详细内容可参考《{product_name} CLI 使用手册》。
+
+|reloc
+|-
+|将制定卷的某一 ERROR 副本迁移到其他正常节点。。当一个 Volume 里面有一个 error 状态的副 本，那么该 error 状态的副本所在的节点状态或者 SSD 的状态异常， 此时， 需将此副本迁移至其他正常节点。
+|可通过执行如下命令，进行 ERROR 副本的迁移：`neonsan relocate -volume_name pool_1/vol_3`
+
+|job
+|异步任务
+|{product_name} 系统中的异步任务，可通过 `neonsan list_job` 查看各项异步任务的状态信息。
+|使用命令查看到的异步任务的状态包括：Succeeded：成功 Failed：失败 Processing：处理中 Pending：等待执行 waiting：等待中，还未到执行时间。对于正在执行的部分异步任务，执行 `neonsan stop_job` 命令，支持手动停止，详细内容可参考《{product_name} CLI 使用手册》。
+
+|replica_location
+|副本分布
+|卷的副本分布情况。
+|可通过执行 `neonsan list_volume_replocation -volume pool/test_vol` 查看指定卷各副本的分布情况。
+
+|move_replica
+|迁移副本
+|将指定副本迁移至其他节点的某一磁盘上。
+|可通过执行如下命令进行副本迁移：`neonsan move_replica -replica_id 1140850688 -to_ssd f68a555d-c415-444b-bd40-96b1fe1b7625`，需指定目标磁盘的 UUID。
+
+|evict_ssd
+|迁移磁盘数据
+|将指定磁盘上的数据迁移至其他磁盘上。
+|通过指定待迁移数据磁盘的 UUID 进行数据迁移，具体操作如下：`neonsan evict_ssd -ssd_uuid ${SSD——UUID}`
+
+|remove_ssd
+|-
+|清理集群中无效的磁盘数据。
+|执行如下命令进行清除：`neonsan remove_ssd -ssd_uuid ${SSD_UUID}`，该命令令用于清除在拔盘插盘过程中，残留在存储节点上无效的磁盘信息。
+
+|evict_store
+|迁移节点数据
+|将指定 Store 节点从 {product_name} 集群中剔除，该 Store 节点上的 OK 状态的 副本会迁移至 {product_name} 集群的其他 Store 节点上。
+|命令示例：`neonsan evict_store -store_id 24 -evacuate_data yes`，该命令适用于节点维护，缩容，下线等。
+
+|cluster_info
+|集群信息
+|主要包括当前集群内活跃的 Center 节点数、Store 节点总数、异常的 Store 节点数、磁盘总数、异常磁盘数、网口总数、异常网口数等信息。
+|通过执行 `neonsan cluster_info` 查看当前集群的全部信息。
+
+|gc
+|空间回收
+|对当前集群内的所有 store 节点或指定 store 节点上的空间进行回收。
+|在集群空间不足和手动迁移数据时，可执行如下命令：`neonsan gc` 可对集群内的垃圾进行清理。
+
+|move_volume
+|-
+|将指定卷迁移至其他存储池中，即跨 rg 迁移数据，支持在线迁移。
+|通过执行如下命令：`neonsan move_volume -volume vol/vol33 -dst_rg rg2` 将指定卷迁移至目标存储池中，且目标存储池的剩余空间需大于 20%，暂不支持卷在混插存储池和全闪存储池相互迁移。
+
+|evict_volume
+|-
+|将指定的卷从相应的 Store 节点迁移至其他存储节点上。
+|通过执行如下命令：`neonsan evict_volume -store_id 3 -volume pool_1/vol1` 对指定节点上的目标卷进行迁移。
+|===

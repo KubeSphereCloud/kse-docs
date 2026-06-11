@@ -1,0 +1,36 @@
+---
+title: "使用节点终端"
+weight: 07
+---
+
+:ks_permission: **节点管理**
+
+本节介绍如何使用边缘节点的终端。
+
+您可以使用{ks_product_both}提供的命令行终端对边缘节点进行操作。
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/nodes/nodes-oper-openListPage_new.adoc[]
+
++
+
+. 在需要操作的节点右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**打开终端**。
++
+--
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* 如果节点处于**告警**状态，将**不支持打开终端**。
+* 初次打开节点终端时，由于相关服务尚未启动，系统可能会提示缺少相关权限。如果遇到此情况，您可以稍后重试。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

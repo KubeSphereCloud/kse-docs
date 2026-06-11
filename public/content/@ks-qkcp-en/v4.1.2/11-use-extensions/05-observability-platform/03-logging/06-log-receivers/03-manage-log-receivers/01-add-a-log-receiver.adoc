@@ -1,0 +1,47 @@
+---
+title: "Add Log Receivers"
+keywords: "Kubernetes, {ks_product-en}, cluster management, cluster settings, log receivers, add log receiver"
+description: "This section introduces how to add log receivers."
+weight: 01
+---
+
+:ks_permission: **Cluster Settings Management**
+:ks_navigation: **Cluster Settings > Log Receivers**
+
+This section introduces how to add log receivers.
+
+{ks_product-en} supports using Elasticsearch, OpenSearch, and Kafka as log receivers.
+
+* Only one log receiver of each type can be added.
+
+* {ks_product-en} defaults to using OpenSearch and provides log analysis tools, which you can use in the toolbox of the {ks_product-en} web console to query logs collected by OpenSearch.
+
+* {ks_product-en} does not install Kafka by default and currently does not provide log analysis tools for Kafka. {ks_product-en} only provides the function of connecting with Kafka. If you need to use Kafka as a log receiver, you need to refer to the link:https://kafka.apache.org/documentation/[Kafka Documentation] to install Kafka.
+
+== Prerequisites
+
+* {empty}
+include::../../../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **WhizardTelemetry Logging**, **WhizardTelemetry Events**, **WhizardTelemetry Auditing**, or **WhizardTelemetry Notification** should have been installed and enabled.
+
+== Steps
+
+include::../../../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+. On the **Log Receivers** page, click **Container Logs**, **Resource Events**, **Audit Logs**, or **Notification History** to open the log receiver list.
+
+. Click **Add Log Receiver** on the right side of the page.
+
+. In the **Add Log Receiver** dialog, select **Elasticsearch**, **OpenSearch**, or **Kafka**.
+
+. Set the parameters of the log receiver, then click **OK**.
++
+--
+include::../../../../../../_custom-en/clusterManagement/logReceivers/logReceivers-para-addLogReceiver.adoc[]
+--

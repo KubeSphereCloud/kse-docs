@@ -1,0 +1,124 @@
+---
+title: "平台自检"
+weight: 15
+---
+
+== 支持的自检项目
+
+BOSS 平台支持用户检查 BOSS 依赖是否配置妥当、当前服务状态是否正常、数据库队列等服务是否可用，具体检查项目包括：
+
+* 数据库是否可连接、可读写
+* RabbitMQ 是否可连接、可读写
+* Memcached 是否可读写
+* 本地文件系统读写是否正常
+* IaaS 请求是否正常
+* 镜像上传服务是否正常
+* 对自己的请求是否正常
+* celery 测试
+
+== 自检使用说明
+
+//BOSS 自检可通过 `ping app` 来实现。基本使用步骤如下：
+
+BOSS 自检基本使用步骤如下：
+
+. 执行 `cd /pitrix/bin/boss2-manager` 命令进入 BOSS 管理目录。
+. 使用 `sh django_manage.sh <parameter>` 命令检查一个或多个模块。
++
+`<parameter>` 是支持的自检参数，可填写多个参数，使用空格分隔。例如，检查数据库，则执行 `sh django_manage.sh database`。详细参数说明如下表所示。
++
+[cols="1,1,2,2"]
+|===
+|模块|参数|检查项目|备注
+
+|数据库
+|database
+a| * 连接检查
+* 版本检查
+* 写入读出
+|通过向测试表 TestDbx 写入读出数据判断数据库配置是否正常。
+
+|supervisor
+|supervisor
+|使用 supervisorctl status 命令检查服务运行状态
+a| 目前仅检查以下几个服务的状态：
+
+* boss2_manager
+* transit_upload_backend
+* transit_upload_server
+
+
+|缓存
+|cache
+|写入读出
+|-
+
+|本地文件系统
+|filesystem
+|写入读出
+|-
+
+|IaaS 请求
+|IaaS
+a| * 检查配置中 IaaS 的 host 和 port 是否可联通
+* 检查 IaaS url 是否为合法的 IaaS API 地址
+* 发起 IaaS API 请求
+a| * 通过直接 GET IaaS url 来判断地址确实是 IaaS 的 url，因为 IaaS 的 url 此时会返回 json 格式的数据，并告知用户 code 为 1100，未传签名数据。
+* 通过请求DescribeZones接口来判断配置是否正常
+
+|cronus 请求
+|cronus
+|cronus 请求
+|请求 cronus 以检查 url 配置是否正常，将会使用 IaaS 配置中的 default_zone 进行 cronus 数据的请求。
+
+|celery 检查
+|celery
+a|* 任务写入
+* 任务读出
+|测试任务读取的时候需要运行 celery 服务。
+
+|celery beat 检查
+|beat
+|beat 任务是否正常执行
+|该检查项实际是由 beat 运行了一个每分钟执行一次的任务，因此首次部署后需要等到几分钟载进行检查。
+
+|存储检查
+|storage
+a|* 报告文件写入
+* 报告文件下载
+|-
+
+|后端请求检查
+|backend
+|请求后端接口
+|该选项测试时需要保证后端服务已启动。
+
+|V2V 检查
+|V2V
+|依次请求 V2V 配置中的每个 Zone
+|只有开启了 Warehouse 模块功能才会运行该检查。
+
+|BI 检查
+|Bi
+|请求服务器的 /check_health 路由
+|只有开启了BI模块功能才会运行该检查。
+
+|Warehouse 检查
+|warehouse
+|请求 warehouse 服务器的 check_health action 接口
+|只有开启了 Warehouse 模块功能才会运行该检查。
+
+|LDAP 检查
+|ldap
+a|* server 连通性检查
+* 建立连接认证检查
+|只有使用了 LDAP 作为认证后端才会运行该检查。
+
+|预置数据检查
+|Init_data
+|检查预置数据是否导入
+|若预置数据未导入，会导致系统产生一些运行异常，因此运行该检查。
+|===
+			
+
+			

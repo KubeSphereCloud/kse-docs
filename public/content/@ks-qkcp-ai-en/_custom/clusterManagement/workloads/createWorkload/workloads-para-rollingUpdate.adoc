@@ -1,0 +1,41 @@
+// tag::onlydeploy[]
+Set the relevant parameters for the rolling update strategy.
+
+Deployment:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Max Unavailable Pods
+|The maximum number or percentage of unavailable pod replicas allowed during the update process.
+
+|Max Surge Pods
+|The maximum number or percentage of extra pod replicas allowed during the update process.
+|===
+// end::onlydeploy[]
+
+StatefulSet:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Pod Management Policy
+|Set a partition number to divide the pod replicas into two groups. When updating the StatefulSet, only pod replicas with an ordinal number greater than or equal to the partition number will be updated.
+|===
+
+ifndef::multicluster[]
+DaemonSet:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Max Unavailable Pods
+|The maximum number or percentage of unavailable pod replicas allowed during the update process.
+
+|Min Ready Seconds
+|The minimum stable running duration required for a pod replica to be considered ready.
+|===
+endif::[]

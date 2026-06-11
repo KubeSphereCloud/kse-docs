@@ -1,0 +1,64 @@
+---
+title: "Enable and disable alerting"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, alerting, features, enabling, disabling"
+description: "Describes how to enable and disable alerting in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 562cda85cda44c19b35fdd7c36c10d35
+:ks_xref_id: deaf255f9321418e9c005260cf5ff3be
+:ks_comp: ../../../components/
+:ks_title: Enable and disable alerting
+:ks_description: Describes how to enable and disable alerting in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, alerting, features, enabling, disabling
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+The **Alerts** module is encapsulated into the main installation package of {ks_product}. If you want to use the alerting feature, you can use the CLI tool to enable alerting without the need to download a separate feature package. If alerting is no longer needed, you can disable this feature.  This topic describes how to enable and disable alerting for {ks_product}.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=f461dbdd191c471eb37e8aadd3a31b69]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom-en/alerts/feature-enable-prerequisites.adoc[]
+
+:relfileprefix: ./
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=79c72b88d2e947bb91b8bb0739006466]
+
+. Log in to the server node on which {ks_product} is installed as user **root**.  If you install {ks_product} in multi-node mode, log in to one of the server nodes on which {ks_product} is installed.
+. Run the following command to enable alerting:
++
+--
+// Bash
+
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl -n kubesphere-system patch cc ks-installer --type merge --patch '{"spec":{"alerting":{"enabled":true}}}'
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+. If alerting is no longer needed, run the following command to disable this feature:
++
+--
+// Bash
+
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl -n kubesphere-system patch cc ks-installer --type merge --patch '{"spec":{"alerting":{"enabled":false}}}'
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--

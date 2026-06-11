@@ -1,0 +1,122 @@
+---
+title: "Bcache 设备异常及解决方法"
+weight: 10
+---
+
+== 鲲鹏 ARM 平台重启后 Bcache 消失，无法自动加载 Bcache 设备
+
+*原因描述*
+
+Bcache 不支持 page size 为 64K 的环境，可通过 `getconf PAGESIZE` 可以查询当前环境 page size 值，若结果为 65535 将会导致此问题。
+
+*解决方法*
+
+. 获取如下两个安装包。
++
+* https://box.yunify.com/f/823726[linux-headers-4.19.90+pitrix2_4.19.90+pitrix2-1_arm64.deb]
+
+* link:https://box.yunify.com/f/823727[linux-image-4.19.90+pitrix2_4.19.90+pitrix2-1_arm64.deb]
+
+. 将上述安装包上传至相应服务器，并使用 `dkpg -i` 进行安装。
+
+. 通过命令 `dpkg --get-selections | grep linux-image` 或者 `grep menuentry /boot/grub/grub.cfg` 确认已经可用。
+
+. 依次执行如下命令行，并记录返回结果中红框内的内容。
++
+[,shell]
+----
+grep submenu /boot/grub/grub.cfg
+grep gnulinux /boot/grub/grub.cfg
+----
++
+image::/images/neonsan/ops_guide_bcache_faq_1.png[]
+
+. 编辑 `/etc/default/grub` 文件，修改 `GRUB_DEFAULT=`。根据上一步记录的字符串按照如下形式进行拼接。
++
+image::/images/neonsan/ops_guide_bcache_faq_2.png[]
+. 执行 `update-grub` 更新。
+
+. 重启系统后使用 `getconf PAGESIZE` 检查是否为 4K。
+
+
+== 使用 make-bcache 出现异常情况
+
+* *情况一*：使用 make-bcache 命令创建 bcache 信息，提示 “Device /dev/sdc already has a non-bcache superblock, remove it using wipefs and wipefs -a”。
++
+--
+*原因描述*
+
+创建 bcache 的 backing 和 cache 时，会向硬盘写 superblock 数据，硬盘未清空，有残余数据存在或者之前已经作为 bcache 盘进行格式化。
+
+*解决方法*
+
+执行 `wipefs -a <dev_name>` 命令，擦除相应磁盘上的数据。
+--
+
+* *情况二*：使用 make-bcache 命令格式化盘，过程无报错，但是使用 `lsblk` 命令查询无法显示 bcache 设备名或者在 `/sys/fs/bcache/` 下无 cache 目录。
++
+可使用 `echo /dev/sd* > /sys/fs/bcache/register` 命令手动注册。
+
+* *情况三*：硬盘热拔插后，使用命令 make-bcache 提示 busy，且使用 `echo 1 > /sys/block/bcache0/bcache/stop` 找不到 stop 文件。
++
+--
+*原因描述*
+
+可能是因为热拔插后物理盘的盘符发生了变化，导致拔插前 `/sys/block/bcache0` 的目录无法找到之前盘符的目录。
+
+*解决方法*
+
+若为存储节点上的盘，可参考以下步骤进行解决。
+
+. 执行如下命令，删除 bcache 设备。
++
+[,shell]
+----
+neonsan remove_ssd  -ssd_uuid <SSD_UUID>
+----
+
+. 执行如下命令，在物理盘符目录下停掉相应 bcache 设备。例如，当前的物理盘符是 sdf。
++
+[,shell]
+----
+echo 1 > /sys/block/sdf/bcache/stop
+----
+--
+
+== 拔盘操作后无法在 /dev/bcache/by-uuid/ 中找到 Bcache 设备对应的链接文件
+
+执行如下命令，手动注册即可。
+
+[,shell]
+----
+echo /dev/sd* > /sys/fs/bcache/register
+----
+
+若环境为麒麟系统，ARM 架构，则可执行如下命令，生成 label 和 uuid。
+
+[,shell]
+----
+bcache set-label /dev/sd* test-bcache-sda
+----
+
+
+////
+== NeonStore 日志中出现 “bcache0 on store:* is in use, can't delete from candidate_disk”
+
+出现此告警的原因在于 NeonMonitor 未进行适配，导致无法识别 bcache 设备，不会对集群使用造成影响，无需处理。
+
+== 为什么 NeonSAN 集群的硬盘异常之后，`list_ssd` 命令返回结果中有重复的盘符名，比如两个 bcache0，但其中一个状态 OK，另外一个状态为 OFFLINE 或者 ERROR，而且 uuid 不同？
+
+*原因描述*
+
+因为系统重启后 bcache 盘符的顺序是根据加载硬盘的顺序变化的会有盘符漂移，store.conf 配置文件中有 bcache0-4，那么 neonsan 启动会加载这些个 bcache 盘，然后根据 uuid 更新盘符名称，如果有个盘丢了加载不了，就会导致看起来多了个同样盘符的硬盘。
+
+*解决方法*
+
+可以 remove_ssd 去掉异常的硬盘，不过要记得检查 store.conf 中是否会把重复的盘符去掉，可能要手动修改一下，比如两个 bcache0 在 remove_ssd 之后配置文件中只剩下 bcache1-4 那么就需要改为 bcache0-3，避免重启后无法找到全部的硬盘，bcache 盘符都是从 0 开始不会跳过某个数字。
+////
+
+
+
+
+

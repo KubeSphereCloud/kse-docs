@@ -1,0 +1,30 @@
+---
+title: "检查部署工具"
+weight: 10
+---
+
+由于 SCS 产品部署通过 sic-deployment 工具部署，所以需要确保云平台的 FirstBox 节点上已安装部署工具。
+
+1. 登录云平台 FirstBox 节点。
+2. 执行以下命令，查看是否已安装部署工具。
++
+[source]
+----
+pip2 list| grep httplib2
+dpkg -l | grep sic-deployment
+ls -lt /pitrix/lib/pitrix-sic-deployment/
+----
++
+显示类似如下信息，表示部署工具已安装成功。
++
+image::/images/ep_offline/scs_install/prepare_check_tool_01.png[]
++
+image::/images/ep_offline/scs_install/prepare_check_tool_02.png[]
++
+image::/images/ep_offline/scs_install/prepare_check_tool_03.png[]
++
+
+include::../../../../../_components/note.adoc[]
+如果未安装，请执行link:../install_tool[安装部署工具]进行安装。
+
+include::../../../../../_components/table_footer.adoc[]

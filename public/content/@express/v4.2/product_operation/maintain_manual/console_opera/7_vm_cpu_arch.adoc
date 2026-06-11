@@ -1,0 +1,88 @@
+---
+title: "手动修改虚拟机 CPU 架构"
+weight: 7
+---
+
+== 运维场景
+
+在某些特殊需要修改已创建成功的虚拟机 CPU 框架的场景下，可参考以下操作步骤。
+
+== 注意事项
+
+修改虚拟机的 CPU 架构，须在虚拟机关机状态下进行。
+
+== 操作步骤
+
+. 登录云易捷 Console 控制台，在顶部导航栏选择**资源** > **虚拟机**，进入**虚拟机**列表页面，将待修改 CPU 架构的虚拟机关机，并记录其 ID、CPU 核数以及内存大小。
++
+image::/images/express/maintain/vm_cpu_arch_1.png[]
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，查看 webservice 节点信息。
++
+[source,shell]
+----
+cat /etc/hosts | grep webservice
+----
+
+. 登录至 webservice 节点，并切换至 ``/pitrix/cli`` 目录。
+
+. 修改虚拟机 CPU 架构。
++
+[source,shell]
+----
+./resize-instances -i <vm_id> -t custom --cpu_model EPYC -C <core_num> —M <memory_size>
+----
++
+**参数说明**：
++
+* ``-i`` 用于指定待修改 CPU 机构的虚拟机 ID，<vm_id> 需根据实际情况进行修改。
+* ``-t`` 自定义虚拟机规格，固定参数 ``custom``。
+* ``--cpu_model`` 用于指定虚拟机的 CPU 架构类型。需要注意的是，若物理机的 CPU 为 ARM 厂商，则仅允许设置 ARM 架构类型，若物理机的 CPU 为 Intel 厂商，则仅支持 Intel 架构类型。
+* ``-C`` 用于指定虚拟机的 CPU 核数，需与待修改虚拟机保持一致，根据实际情况进行修改。
+* ``-M`` 用于指定虚拟机的内存大小，需与待修改虚拟机保持一致，根据实际情况进行修改。
+
+. 登录云易捷 Console 控制台，在顶部导航栏选择**资源** > **虚拟机**，在**虚拟机**列表，将修改过 CPU 架构的虚拟机开机。
+
+. 点击虚拟机的**连接远程桌面**图标，打开远程连接（VNC）会话窗口。
++
+image::/images/express/maintain/vm_cpu_arch_2.png[]
+
+. 在 VNC 窗口，输入在创建主机时已设置的用户名和密码，登录即可。
+
+. 执行如下命令，检查当前虚拟主机的 CPU 架构信息，即查看返回结果中 ``Model name`` 是否为预期修改的 CPU 架构。
++
+[source,shell]
+----
+lscpu
+----
++
+include::../../../../../_components/note.adoc[]
+``Model name`` 的默认值为 ``QEMU Virtual CPU``。
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+
+
+
+
+

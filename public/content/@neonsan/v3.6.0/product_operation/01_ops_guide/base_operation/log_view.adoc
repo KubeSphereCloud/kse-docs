@@ -1,0 +1,65 @@
+---
+title: "日志查看"
+weight: 3
+---
+
+. 逐个登录 NeonSAN 集群的节点。
+. 查看逐个服务的日志文件：
++
+--
+* 查看 store 的日志文件里面有没有异常日志内容：
++
+[,shell]
+----
+grep -E "QFA_SC_NODE_LOST | QFA_SC_NOT_PRIMARY | heartbeat timeout | IBV_WC_RECV"  /var/log/neonstore.log
+----
++
+出现如下关键字，即表示服务异常:
++
+----
+status:QFA_SC_NODE_LOST
+status:QFA_SC_NOT_PRIMARY
+heartbeat timeout
+IBV_WC_RECV
+----
+
+
+* 查看 center 的日志文件里面有没有异常日志内容：
++
+[,shell]
+----
+grep -E "QfaScNodeLost | QfaScAioTimeout | handleNotPirmary | prepare fail | OFFLINE | Set replica StatusError"  /var/log/neoncenter.log
+----
++
+出现如下关键字，即表示服务异常:
++
+----
+QfaScNodeLost     ->存储节点间 io 超时
+QfaScAioTimeout   ->磁盘 io 超时
+handleNotPirmary  ->客户端 io 超时
+prepare fail       ->客户端挂载卷失败
+OFFLINE            ->存储节点或者磁盘离线
+----
+--
+
+. 其他相关服务的日志文件查看方式：
++
+* 查看 prometheus 的日志文件内容：
++
+[,shell]
+----
+vi /var/log/prometheus.log
+----
+* 查看 monitor 的日志文件内容：
++
+[,shell]
+----
+vi /var/log/neonmonitor.log
+----
+
+* 查看数据库的日志文件内容：
++
+[,shell]
+----
+vi /data/galera/log/mysqld.log
+----

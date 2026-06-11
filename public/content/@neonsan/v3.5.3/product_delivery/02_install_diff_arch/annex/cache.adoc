@@ -1,0 +1,51 @@
+---
+title: "缓存软件选择"
+weight: 2
+---
+
+NeonSAN 在不同应用场景下，缓存软件与平台对应关系如下。
+
+include::../../../../../_components/attention.adoc[]
+icas/opencas 和 bcache 缓存软件不能在同一存储池内融合部署使用。
+
+include::../../../../../_components/table_footer.adoc[]
+
+[options="header",cols="1,1,3,2"]
+|===
+|应用场景 |操作系统 |版本/平台 |缓存软件
+
+.4+|云易捷
+|Ubuntu 
+|ubuntu x86 16.04/Intel/海光 
+|bcache
+
+|Ubuntu 
+|ubuntu x86 20.04/Intel/海光 
+|bcache
+
+|Ubuntu 
+|ubuntu arm 18.04/鲲鹏/飞腾 
+|bcache
+
+|Kylin 
+|kylin v10 sp2/海光/鲲鹏/飞腾 
+|bcache
+
+.4+|企业云（SANC 融合/分离）
+|Ubuntu 
+|ubuntu x86 16.04/Intel/海光 
+|icas/opencas
+
+|Ubuntu 
+|ubuntu x86 20.04/Intel/海光 
+|icas/opencas
+
+|Ubuntu 
+|ubuntu arm 18.04/鲲鹏/飞腾 
+|bcache
+
+|Kylin 
+|kylin v10 sp2/海光/鲲鹏/飞腾 
+|bcache
+|===
+

@@ -1,0 +1,262 @@
+---
+title: "View the details of a node"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, nodes, details, view"
+description: "Describes how to view the details of a node in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 17b92ca585f74e1ea388ac81ee5c6c36
+:ks_xref_id: 34e393d98a3649bca2a6acbef09a6587
+:ks_comp: ../../../components/
+:ks_title: View the details of a node
+:ks_description: Describes how to view the details of a node in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, nodes, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of a node in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=15813abbab0547e8bc226625837b6352]
+
+include::../../../_custom-en/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=0b187d9ce92b4c0b865a52eeb375e56d]
+
+include::../../../_custom-en/nodes/steps-view.adoc[]
+
+. On the **Nodes** page, click the name of the node that you want to view. The details page of the node appears.
+. On the left side of the details page, view basic information and physical resource statistics about the node.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Status
+|The health status of the node.
+
+|IP
+|The IP address of the NIC. Nodes in the same cluster can communicate with each other using IP addresses.
+
+|Role
+|The role of the node in the cluster.  {ks_product} provides workers nodes and control nodes.
+
+include::../../../_custom-en/nodes/node-type-description.adoc[]
+
+|OS
+|The OS type of the node.
+
+include::../../../_custom-en/nodes/supported-os-types.adoc[]
+
+|Kernel
+|The kernel version of the OS used by the node.
+
+|Architecture
+|The architecture used by the node.
+
+|Created at
+|The time when the node was added.
+
+|CPU Model
+|The CPU model used by the node.
+
+|CPU cores
+|The resource usage of the node, including the CPU, memory, data disk, and system disk resources.The number of physical CPU cores provided by the node. The following formula can be used: Total number of CPU cores = Number of physical CPUs x Number of CPU cores per physical CPU.
+
+|Physical Disks
+|The number of physical disks inserted on the node.
+
+|Physical NICs
+|The number of physical NICs inserted on the node.
+|===
+--
+. On the right side of the details page, click **Overview** to view the resource overview of the node.
++
+--
+[cols='1a,4a']
+|===
+|Section |Description
+
+|Usage
+|The resource usage of the node, including the CPU, memory, data disk, and system disk resources.
+
+|Occurred at
+|The resource limits and requests of the node, including the CPU and memory resources.
+
+|Monitoring
+|The monitoring of cluster resources, including compute, network, and storage resources.
+
+You can expand the drop-down list next to **Monitoring** to specify a time range to query. {ks_product} allows you to view resource statistics in the latest 7 days.
+
+|Compute
+|The monitoring of compute resources, including the CPU usage, average CPU workloads, and memory usage.
+
+|Networks
+|The monitoring of network resources, including the inbound and outbound traffic and packet loss rate.
+
+You can expand the drop-down list next to **Networks** to specify an NIC to view its network performance.
+
+|Storage
+|The monitoring of storage resources, including the disk usage, throughput, IOPS, average I/O latency, and I/O queue length.
+
+You can expand the drop-down list next to **Storage** to specify a physical disk to view its resource usage.
+|===
+--
+. On the right side of the details page, click **VMs** to view the VMs that run on the node.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|
+include::../../../_custom-en/nodes/name-description.adoc[]
+
+|Status
+|
+include::../../../_custom-en/nodes/status-description.adoc[]
+
+|OS
+|The OS type of the VM. You can place the cursor on the OS to view the specific type and version of the OS.
+
+|IP Address
+|
+include::../../../_custom-en/nodes/ip-address-description.adoc[]
+
+|CPU Usage
+|The CPU usage of the VM.
+
+|Memory Usage
+|The memory usage of the VM.
+
+|System Disk
+|The system disk size of the VM.
+|===
+--
+. On the right side of the details page, click **Disks** to view the physical disks inserted on the node.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|
+include::../../../_custom-en/nodes/disk-name-description.adoc[]
+
+|Type
+|
+include::../../../_custom-en/nodes/disk-type-description.adoc[]
+
+|Model
+|The model of the disk. {ks_product} supports SATA disks, HDDs, and SSDs.
+
+|Size
+|Th size of the disk.
+
+|Mount Target
+|The mount point of the disk, which is the entry point of the filesystem.
+
+|Filesystem
+|The filesystem of the disk.
+|===
+--
+. On the right side of the details page, click **Physical NICs** to view the physical NICs inserted on the node.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the NIC.
+
+|MAC Address
+|The physical address of the NIC, which is the unique identifier of the NIC in the network.
+
+|Status
+|The status of the NIC.
+
+|Type
+|The type of the NIC.
+
+{ks_product} supports physical NICs and virtual NICs.
+
+|IP Address
+|The name of the NIC.
+
+|MTU
+|The maximum transmission unit (MTU) of the NIC.
+
+|Max. Rate
+|The maximum transmission rate of the NIC.
+
+|Current Rate
+|The current transmission rate of the NIC.
+|===
+--
+. On the right side of the details page, click **Alerts** to view the alerts generated on the node.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Alert Message
+|The alert message that is automatically generated after the alert is fired.
+
+|Status
+|The status of the alert. Valid values:
+
+include::../../../_custom-en/alerts/alert-status-description.adoc[]
+
+|Severity
+|The severity of the alert. Valid values:
+
+include::../../../_custom-en/alerts/alert-severity-levels.adoc[]
+
+|Alert Policy
+|The custom name of the alert policy.
+
+include::../../../_custom-en/networks/physical-network-naming-convention.adoc[]
+
+|Fired at
+|The time when the alert was fired.
+|===
+--
+. On the right side of the details page, click **Events** to view the events generated on the node.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Type
+|The type of the event.
+
+|Cause
+|The reason why the event was generated.
+
+|Fired at
+|The time when the event happened.
+
+|Source
+|The name of the resource on which the event happened.
+
+|Message
+|The message that is automatically generated after the event happened.
+|===
+--
+. (Optional) Click **Export** in the upper-right corner to export the events to your local environment.

@@ -1,0 +1,22 @@
+---
+title: "创建集群"
+weight: 5
+---
+集群创建的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_02.png[]
+
+功能流程说明：
+
+. 创建当前集群所有节点的资源，如云服务器、硬盘、IP 地址等。
+. 将本集群中所有信息注册到 metadata service 中。
+. 启动所有节点的 confd agent，监控 metadata service 中本集群信息的变化并按照 /etc/confd 下的模板（toml、tmpl）定义刷新配置。如果 toml 文件里定义 reload_cmd 且配置确实发生变更则执行该命令。
+. 执行 init 和 start 中定义的 cmd，按照 init 中 post_start_service 的定义顺序执行。
++
+* 如果 post_start_service 为 true，则表示 init 在 start 后执行。
+* 不同 role 节点相同命令的执行顺序，按照 order 的定义从小到大依次执行，默认为 0（最早执行），相同 order 的节点并行执行。
+
+include::../../../../../../../_components/note.adoc[]
+本文流程中涉及的相关参数及命令，请参见“应用开发平台用户指南 > 云应用开发指南 > 开发模板规范-完整版”中的说明。
+
+include::../../../../../../../_components/table_footer.adoc[]

@@ -1,0 +1,22 @@
+---
+title: "背景速览"
+weight: 03
+---
+
+== KubeSphere 企业版
+
+{ks_product_right}相比较 Rancher 与 OpenShift，虽然产品起步时间较晚，但是其产品化程度和安装使用的易用性上相比较 Rancher 与 OpenShift 更高。其产品设计思路是依托自主研发的 LuBan 分布式可扩展开放架构，{ks_product_right}在 KubeSphere 开源版的基础上进一步优化，全面覆盖多云集群管理、微服务治理、云边协同、全栈可观测、DevOps、企业应用分发以及数据基础设施管理等核心业务场景。
+
+image:/images/ks-qkcp/zh/competitiveness-analysis/kse.png[]
+
+== OpenShift
+
+OpenShift 功能全面，凭借 Red Hat 多年在 Linux 和 Kubernetes 领域的技术沉淀、生态建设与客户积累，展现出显著优势；但同时也存在较高的厂商绑定，例如要求 Master 节点必须使用 RHCOS 或 RHEL，并且部分高级功能（如多集群管理和边缘计算）仅通过商业订阅提供。这使得 OpenShift 更适合那些对红帽商业生态依赖较大或对云原生安全要求极高的大型企业，但其商业订阅服务价格也相对较高。
+
+image:/images/ks-qkcp/zh/competitiveness-analysis/openshift.png[]
+
+== Rancher
+
+image:/images/ks-qkcp/zh/competitiveness-analysis/rancher.png[]
+
+Rancher 产品本身轻量，其优势在于支持和扩展底层组件（如 K3s 和 Longhorn 等开源项目），但整体设计更偏向 Kubernetes 原生，需要通过安装第三方开源组件并利用不同项目和界面拼凑功能以应对各类场景。这意味着使用 Rancher 要求用户对 Kubernetes 及云原生生态有深入理解，产品学习门槛较高，更适合具备云原生技术基础的 Kubernetes 集群运维人员。

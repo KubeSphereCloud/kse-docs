@@ -1,0 +1,81 @@
+---
+title: "查看资源概览"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 资源, 概览, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看资源概览。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 186b81e4273f4d86a8adb990cfe4302e
+:ks_xref_id: 44f5816f72ae4563a41e1a78a9e0a4b9
+:ks_comp: ../../../components/
+:ks_title: 查看资源概览
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看资源概览。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 资源, 概览, 查看
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+{ks_product_abbr_full_right}Web 控制台的概览功能从虚拟机、磁盘、网络、物理节点、CPU、内存等维度实时展示集群中的资源情况。本节介绍如何使用{ks_product_both}Web 控制台查看资源概览。
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+平台概览中的物理资源统计信息仅 **admin** 用户可见，普通用户可以查看所属项目中的虚拟资源用量情况。本文以 **admin** 用户视角介绍集群资源统计信息。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=62ebd4e7cc9f472d802e6cbbc2f6d2f8]
+
+. 登录{ks_product_both}Web 控制台。
+
+. 在页面顶部的导航栏中点击**概览**以打开资源监控页面。
+
+. 在**虚拟机**、**磁盘**、**网络**和**告警**区域，分别查看集群中各状态的虚拟机和磁盘数量，虚拟子网、VPC 网络和物理子网数量，以及系统中存在的告警信息。
+
+. 在**虚拟资源**区域，查看 CPU、内存和存储资源用量情况。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../_custom/nodes/resource-usage-color-description.adoc[]
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在**物理节点**区域，查看集群中的控制节点和工作节点总数、各状态节点的数量以及集群超卖比。
++
+--
+include::../../../_custom/nodes/node-type-description.adoc[]
+--
+
+. 在**物理资源使用情况**区域，查看集群中物理节点的 CPU、内存和磁盘用量情况。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+展开**物理资源使用情况**区域右侧的下拉框可选择查看指定节点的资源用量情况。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在**系统组件**区域，查看集群中各系统组件的运行情况。
+
+. 在 **CPU 使用率 Top 5**、**内存使用率 Top 5** 和**节点使用率 Top 5** 区域，分别查看集群中特定资源用量最高的 5 台虚拟机和节点的名称及资源用量情况。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+展开**节点使用率 Top 5** 区域右侧的下拉框可按 CPU 使用率、内存使用率和磁盘使用率分别查看资源用量最高的 5 个节点的名称。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

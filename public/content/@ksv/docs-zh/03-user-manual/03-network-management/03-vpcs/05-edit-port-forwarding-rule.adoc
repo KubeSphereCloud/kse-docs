@@ -1,0 +1,49 @@
+---
+title: "编辑端口转发规则"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 端口, 转发, 规则, 编辑"
+description: "介绍如何使用{ks_product_both}Web 控制台编辑端口转发规则。"
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 6268a10733b346318914306e21eecdad
+:ks_xref_id: f6b0f8d0aaf543c4b52dd4664fd971b9
+:ks_comp: ../../../../components/
+:ks_title: 编辑端口转发规则
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台编辑端口转发规则。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 端口, 转发, 规则, 编辑
+:ks_weight: 05
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台编辑端口转发规则。
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=8021aa00f5eb4d658ac58178fe076952]
+
+* 请确保您有 VPC 网络管理权限。系统 admin 用户可以管理集群中所有的 VPC 网络，普通项目管理员或操作员可以管理自身创建的 VPC 网络，对其他用户创建的 VPC 网络有只读权限。项目观察员只能查看所属项目中的 VPC 网络。
+
+* 如果您以非 **admin** 用户登录，您只能编辑自身创建的端口转发规则。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=17a41b04958e4f50b5cde504075af476]
+
+include::../../../../_custom/networks/vpc-steps.adoc[]
+
+. 在 VPC 列表页面，点击目标 VPC 名称，进入 VPC 详情页面。
+
+. 在 VPC 详情页面的右侧区域，点击**端口转发**页签，进入端口转发规则列表页面。
+
+. 找到目标端口转发规则，点击右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**编辑**。
+
+. 在弹出的对话框中，修改端口转发规则的相关参数。有关更多参数信息，请参阅 link:../04-add-port-forwarding-rule/[添加端口转发规则]。
+
+. 点击**确认**。

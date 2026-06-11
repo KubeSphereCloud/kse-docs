@@ -1,0 +1,108 @@
+---
+title: IOzone
+description: 
+weight: 4
+draft: true
+---
+
+iozone 是一款开源工具，用来测试文件系统的读写性能，也可以进行测试磁盘读写性能。
+
+== 安装配置
+
+. 官网下载 iozone 工具，官网链接如下：
++
+[source,shell]
+----
+http://www.iozone.org/
+----
+
+. 解压后，进入安装目录进行安装。命令行如下。
++
+[source,shell]
+----
+# tar xvf iozone3_430.tar
+# cd iozone3_430/src/current
+# make linux
+----
+
+. 调整操作系统配置。
++
+[source,shell]
+----
+# cpupower frequency-set -g performance
+----
+
+
+== 测试步骤
+
+**准备工作**
+
+. 使用正确的用户名和密码登录 Portal。
+. 点击**创建文件系统**，输入合法参数后点击**确定**，创建文件系统。
+. 进入文件系统详情页面，点击**创建共享**，输入合法参数创建共享。
+. 在客户端上挂载文件系统下的共享点，进行性能测试。
+
+**性能测试**
+
+. 在客户端执行如下命令行，查看 iozone 工具所在目录。
++
+[source,shell]
+----
+# find / -name iozone
+----
+. 进入 iozone 工具所在目录。
++
+[source,shell]
+----
+# cd ${/root/iozone3_487/src/current/}
+----
+
+
+. 执行如下命令进行性能测试。`${filesystem_test}` 为前面步骤创建的测试脚本文件名。
++
+[source,shell]
+----
+# ./iozone - acf test_dir/test_file
+----
+
++
+
+include::../../../../../../../_components/note.adoc[]
+
+用户需对参数进行配置，参数说明可参考：link:todo[附录]相关内容。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+
+
+== 结果分析
+
+由于服务器的配置不同，网络等各种原因，历史测试的结果以及得出的最优性能对应的配置参数等，只能作为参考。本章内容主要介绍如何查看测试结果。
+
+关注图中红框标示的数据，该数据为不同读写模式下的吞吐量。
+
+image::/images/u10000/iozone.png[iozone,100%]
+
+**相关参数说明**
+
+[cols="1,3", options="header"]
+|===
+| 参数 | 说明
+| write | 向一个新文件写入数据
+| rewrite | 向一个已存在的文件写入数据
+| read | 读一个已存在的文件
+| reread | 读一个最近读过的文件
+| random read | 随机读
+| random write | 随机写
+| bkwd read | backwards read，使用倒序读一个文件
+| record rewrite | 写与覆盖写一个文件中的特定块
+| stride read | 跳跃读一个文件
+| fwhite | 调用库函数 `fwrite()` 来写一个新文件
+| frewrite | 调用库函数 `frewrite()` 来写一个新文件
+| fread | 调用库函数 `fread()` 来写一个新文件
+| freread | 调用库函数 `freread()` 来写一个新文件
+
+
+|===
+
+

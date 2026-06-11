@@ -1,0 +1,8 @@
+// :ks_include_id: 6dc8492ff19d4f1bb83db24a36e18f07
+* **Guaranteed**: Every container in the pod has memory limits, memory requests, CPU limits, and CPU requests set, and the memory limit equals the memory request, and the CPU limit equals the CPU request.
+
+* **Burstable**: At least one container in the pod does not meet the requirements for the **Guaranteed** type.
+
+* **BestEffort**: The containers in the pod are not configured with any memory limits, memory requests, CPU limits, or CPU requests.
+
+The QoS type of a pod determines its runtime priority. When system resources are insufficient to run all pods, the system prioritizes ensuring the operation of pods with a QoS type of **Guaranteed**, followed by pods with a QoS type of **Burstable**, and lastly, pods with a QoS type of **BestEffort**.

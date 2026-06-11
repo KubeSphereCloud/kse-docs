@@ -1,0 +1,12 @@
+---
+title: "限制容器获取额外权限"
+weight: 01
+---
+
+要禁止容器通过 SUID（Set User ID）或 GUID（Group ID）位获取额外权限，您可以在容器组的 yaml 配置中添加如下安全性设置：
+
+[,yaml]
+----
+securityContext:
+          allowPrivilegeEscalation: false
+----

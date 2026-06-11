@@ -1,0 +1,33 @@
+---
+title: "View Platform Role List"
+keywords: "Kubernetes, {ks_product}, Platform Management, Access Control, Platform Role, View Platform Role List"
+description: "Describes how to view the platform role list."
+weight: 02
+---
+
+:ks_menu: **Users and Roles Management**
+:ks_permission: **Role View**
+:ks_navigation: **Platform Roles**
+
+
+This section describes how to view the platform role list.
+
+
+== Prerequisites
+
+You need to have the pass:a,q[{ks_permission}] permission on the KubeSphere platform. For more information, see link:../../01-users/[Users] and link:../../02-platform-roles/[Platform Roles].
+
+== Steps
+
+include::../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
++
+. Click pass:a,q[{ks_menu}].
+. In the left navigation pane, select **Platform Roles**. The platform role list provides the role's name, description, and creation time.
++
+--
+* Click the search box above the list and enter a keyword to search for users by name.
+
+include::../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../_ks_components/oper-customizeColumns.adoc[]
+--

@@ -1,0 +1,79 @@
+---
+title: describe（DescribeUserSecuritySetting）
+weight: 18
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Integer
+| false
+| 查询数量
+
+| offset
+| Integer
+| false
+| 偏移量
+
+| root_user
+| String
+| false
+| root用户
+
+| users
+| Array
+| false
+| 查询的用户列表
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| total_count
+| String
+| false
+| 查询总数,
+
+| user_security_setting_set
+| String
+| false
+| 用户安全设置列表,
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "limit": 10,
+  "offset": 0,
+  "root_user": "root_user",
+  "users": [
+    "admin",
+    "normal_user"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeUserSecuritySettingResonse",
+  "ret_code": 0,
+  "total_count": 10,
+  "user_security_setting_set": []
+}
+----

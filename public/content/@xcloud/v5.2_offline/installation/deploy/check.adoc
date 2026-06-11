@@ -1,0 +1,63 @@
+---
+title: "整体环境检查"
+weight: 60
+---
+
+企业云平台基础软件安装完成后，需要对环境正确性进行验证。
+
+使用 check.py 脚本自动检查环境。
+
+. 登录FirstBox。
+. 执行以下命令，查看环境详细信息。
++
+[source]
+----
+/pitrix/check/check.py -n all -v
+----
++
+image::/images/ep_offline/installation/deploy_check.png[,40%]
++
+**Result说明**：
+
+ ** Normal/ok：正常。
+ ** Ignored：忽略检查的配置项。
+ ** Abnormal/Unknown/error：不正常。
+
++
+
+include::../../../../_components/note.adoc[]
+* 执行命令 `/pitrix/check/check.py -n all`，可以查看环境简略信息。
+* check.py 更多使用方式，请执行 `check.py -h` 命令查看。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，查看是否有不正常项。
++
+[source]
+----
+cat /pitrix/check/formatted_result | egrep 'Abnormal|Unknown|error'
+----
+
+ ** 若没有不正常项，表示环境正常运行。
+ ** 若有不正常项，请重启不正常的服务，若仍然未恢复到正常状态，请再逐一排查并修复。
++
+请在 FirstBox 执行以下命令，重启目标节点上相应的服务。
++
+[source]
+----
+fb exec_nodes <Hostname> 'supervisorctl restart <Service>'
+----
++
+示例一：如下命令表示重启所有 webservice 节点上的 alarm_server 服务。
++
+[source]
+----
+fb exec_nodes webservice 'supervisorctl status alarm_server'
+----
++
+示例二：如下命令表示仅重启 uat1a-webservice0 节点上的 alarm_server 服务。
++
+[source]
+----
+fb exec_nodes uat1a-webservice0 'supervisorctl status alarm_server'
+----

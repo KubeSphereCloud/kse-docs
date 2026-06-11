@@ -1,0 +1,64 @@
+---
+title: "Delete Storage Class"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage Class"
+description: "Describes how to delete a storage class."
+weight: 07
+---
+
+:ks_permission: **Storage Class Management**
+:ks_navigation: **Storage > Storage Classes**
+
+
+This section describes how to delete a storage class.
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+After a storage class is deleted, the persistent volume claims and persistent volumes created based on it will not be deleted. Containers can still use the mounted persistent volumes. However, users will no longer be able to use volume cloning, volume snapshot, and volume expansion features, and will not be able to create storage areas in the backend storage system through this storage class.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Delete a Single Storage Class
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the storage class you want to delete, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Delete** from the dropdown list.
+
+. In the **Delete Storage Class** dialog box, enter the name of the storage class, then click **OK**.
+
+
+== Batch Delete Storage Classes
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Select the checkbox on the left of the storage classes you want to delete, then click **Delete** above the storage class list.
+
+. In the **Batch Delete Storage Classes** dialog box, enter the names of the storage classes, then click **OK**.
++
+--
+include::../../../../_custom/note-separateNamesByComma.adoc[]
+--

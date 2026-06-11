@@ -1,0 +1,88 @@
+---
+title: "创建 SSL 加密的用户"
+weight: 06
+---
+
+. 使用命令行创建用户。
++
+[,bash]
+----
+#用户名称和密码可以自定义，如下示例创建了两个用户，一个具有超级权限，一个普通权限
+cat <<EOF | kubectl apply -f -
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  # Corresponding to the user's secretName
+  name: sample-user-password
+data:
+  # The key corresponding to the user's secretKey
+  # RadonDB@123456
+  superUser: ct+rqR3NuQWlYd7jS2uUhXW0hLdUuQgSH0l6Pbj5
+  normalUser: ct+rqR3NuQWlYd7jS2uUhXW0hLdUuQgSH0l6Pbj5
+---
+apiVersion: mysql.radondb.com/v1alpha1
+kind: MysqlUser
+metadata:
+  name: super-user
+spec:
+  ## MySQL user name.
+  user: super_user
+  withGrantOption: true
+  tlsOptions: 
+    type: SSL
+  hosts: 
+  - "%"
+  permissions:
+  - database: "*"
+    tables:
+    - "*"
+    privileges:
+    - ALL
+  ## Specify the cluster where the user is located.
+  userOwner:
+    clusterName: sample
+    nameSpace: default
+  ## Specify the secret object for user.
+  secretSelector:
+    secretName: sample-user-password
+    secretKey: superUser
+---
+apiVersion: mysql.radondb.com/v1alpha1
+kind: MysqlUser
+metadata:
+  name: normal-user
+spec:
+  ## MySQL user name.
+  user: normal_user
+  withGrantOption: false
+  tlsOptions: 
+    type: SSL
+  hosts: 
+  - "%"
+  permissions:
+  - database: "*"
+    tables:
+    - "*"
+    privileges:
+    - USAGE
+## Specify the cluster where the user is located.
+  userOwner:
+    clusterName: sample
+    nameSpace: default
+  ## Specify the secret object for user.
+  secretSelector:
+    secretName: sample-user-password
+    secretKey: normalUser
+EOF
+----
+
+. 验证用户。
++
+[,bash]
+----
+# kubectl get mysqluser
+NAME          USERNAME      SUPERUSER   HOSTS   TLSTYPE   CLUSTER   NAMESPACE   AVAILABLE
+super-user    super_user    true        ["%"]   SSL       sample    default     True
+normal-user   normal_user   false       ["%"]   SSL       sample    default     True
+----

@@ -1,0 +1,22 @@
+---
+title: "SSL/TLS 加密套件"
+weight: 01
+---
+
+. 修改 daemonset 中 node-exporter 配置文件，修改 spec.template.spec.containers 中 kube-rbac-proxy 下 args 中的 `--tls-cipher-suites` 参数。
++
+[,yaml]
+----
+- name: kube-rbac-proxy
+  image: 'kubesphere/kube-rbac-proxy:v0.11.0'
+  args:
+      - '--logtostderr'
+      - '--tls-cipher-suites=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256'
+----
+
+. 验证加密套件。
++
+[,bash]
+----
+openssl s_client -connect 192.168.200.2:9100
+----

@@ -1,0 +1,64 @@
+---
+title: "创建并拉起 FirstBox"
+weight: 3
+---
+
+## 创建 FirstBox
+. 登录至上传有 Installer 安装包的节点。
+
+. 执行如下命令，创建 FirstBox。
++
+[,shell]
+----
+/root/qingstor-installer/bootstrap/launch_fb.sh -a xx.xx.xx.xx
+----
++
+参数说明：
++
+* 使用 ``-a`` 参数指定 qingstor-firstbox 的管理地址，需替换为当前所在节点的管理 IP 地址，无需另外指定。
+* 使用 ``-h`` 参数，可查看命令参数及帮助信息。
+* 若环境中的 SSH 访问未使用默认端口号 22，可使用 ``-p`` 参数，手动指定端口。
+* 若环境为 spine-leaf(ecmp)，需要指定 ``-s`` 参数，命令如下： +
+``/root/qingstor-installer/bootstrap/launch_fb.sh -a x.x.x.x -s``
+* 若环境为 spine-leaf，创建 FirstBox 时，没有添加 ``-s`` 参数，需在 FirstBox 启动后执行如下命令: +
+``mkdir -p /opt/installer && touch /opt/installer/.is_spine_leaf``
+
+. 若 FirstBox 创建失败，可查看如下日志。检查并解决问题后，再次进行上一步骤。
++
+[,shell]
+----
+cat /root/launch_fb.log
+----
+
+. 耐心等待上一步执行完成。
+
+## 登录 FirstBox
+
+. 执行如下命令，登录 FirstBox。
++
+[,shell]
+----
+ssh xx.xx.xx.xx -p 6023
+----
++
+include::../../../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码：yop/zhu88jie
+* 默认可 SSH 免密访问。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 检查当前服务状态。
++
+[source,shell]
+----
+systemctl status installer-server
+----
++
+include::../../../../../../_components/note.adoc[]
+* 服务状态显示如下，即为正常： +
+``Active: active (running)``
+* 若服务异常，需调查原因并解决后，才能继续。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+

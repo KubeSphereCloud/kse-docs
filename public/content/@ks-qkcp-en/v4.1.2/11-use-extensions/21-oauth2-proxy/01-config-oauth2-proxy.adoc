@@ -1,0 +1,255 @@
+---
+title: "Configure and Access Services"
+keywords: "Kubernetes, {ks_product-en}, OAuth2-Proxy, alertmanager"
+description: "Learn how to configure the OAuth2-Proxy extension to access services."
+weight: 01
+---
+
+OAuth2-Proxy supports various link:https://oauth2-proxy.github.io/oauth2-proxy/configuration/providers/[OAuth Providers]. This section describes how to configure the extension to use KubeSphere as an OAuth Provider, so that after logging in through KubeSphere authentication, you can directly access various services.
+
+== Configure OAuth2-Proxy
+
+The OAuth2-Proxy extension provides two methods, NodePort and Ingress, to provide unified authentication for applications based on KubeSphere users. The configuration methods for OAuth2-Proxy are different under different methods.
+
+=== NodePort Method
+
+By exposing the OpenResty NodePort in the extension, a unified access entry is provided for proxy applications.
+
+In the extension configuration, modify `global.host`, and confirm `openresty.service.nodePort`, to complete the deployment of the extension.
+
+[,yaml]
+----
+global:
+  # OAuth2-Proxy service external access address
+  # For example, using NodePort, the address is http://172.31.19.4:32080,
+  # using Ingress, the host is http://172.31.19.4.nip.io:80
+  host: "http://<oauth2-proxy-service-external-access-address>"
+
+  # Kubesphere portal address. For example, http://172.31.19.4:30880
+  # No need to set this explicitly, KubeSphere's portal address will be auto-injected.
+  portal.url: "http://<kubesphere-console-address>"
+
+openresty:
+  enabled: true
+
+  service:
+    type: NodePort
+    portNumber: 80
+    nodePort: 32080
+    annotations: {}
+
+oauth2-proxy:
+  extraArgs:
+    provider: oidc
+    provider-display-name: "kubesphere"
+    # Issuer address
+    # The KubeSphere portal URL is filled by default, but if you use another OAuth Provider, change it
+    oidc-issuer-url: "{{ .Values.global.portal.url }}"
+----
+
+=== Ingress Method
+
+OAuth2-Proxy supports configuring unified authentication for applications through Ingress. In this scenario, Ingress will replace OpenResty to provide a unified service entry and reverse proxy function.
+
+. In the extension configuration, change `openresty.enabled` to false, `ingress.enabled` to true, and modify `global.host`, to complete the deployment of the extension.
++
+--
+[,yaml]
+----
+global:
+  # OAuth2-Proxy service external access address
+  # For example, using NodePort, the address is http://172.31.19.4:32080,
+  # using Ingress, the host is http://172.31.19.4.nip.io:80
+  host: "http://<oauth2-proxy-service-external-access-address>"
+
+  # Kubesphere portal address. For example, http://172.31.19.4:30880
+  # No need to set this explicitly, KubeSphere's portal address will be auto-injected.
+  portal.url: "http://<kubesphere-console-address>"
+
+openresty:
+  enabled: false
+
+oauth2-proxy:
+  extraArgs:
+    provider: oidc
+    provider-display-name: "kubesphere"
+    # Issuer address
+    # The KubeSphere portal URL is filled by default, but if you use another OAuth Provider, change it
+    oidc-issuer-url: "{{ .Values.global.portal.url }}"
+
+  ingress:
+    enabled: true
+    className: nginx
+----
+--
+
+. Add annotations in the Ingress field of the application. Please refer to the link:https://kubernetes.github.io/ingress-nginx/examples/auth/oauth-external-auth/[ingress-nginx/External OAUTH Authentication] example.
++
+[,yaml]
+----
+...
+metadata:
+  name: application
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+...
+----
+
+=== Note
+
+If you use KubeSphere 4.x as an OAuth Provider, please ensure that the external access address of the KubeSphere Console is consistent with the `issuer.url` in the configmap `kubesphere-config`. If they are inconsistent, update them as follows.
+
+[,yaml]
+----
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubesphere-config
+  namespace: kubesphere-system
+data:
+  kubesphere.yaml: |
+    authentication:
+      issuer:
+        url: "http://172.31.19.4:30880"     # Confirm the issuer address
+----
+
+. Copy the `values.yaml` file from ks-core and create a new file named `custom-kscore-values.yaml`.
++
+[,bash]
+----
+cp ks-core/values.yaml custom-kscore-values.yaml
+----
+
+. Modify `portal.hostname` to the actual address.
++
+[,yaml]
+----
+portal:
+  ## The IP address or hostname to access ks-console service.
+  ## DO NOT use IP address if ingress is enabled.
+  hostname: "172.31.19.4"
+  http:
+    port: 30880
+----
+
+. Update ks-core.
++
+--
+[,bash]
+----
+helm upgrade --install -n kubesphere-system --create-namespace ks-core ${kscore_chart_path}  -f ./custom-kscore-values.yaml  --debug --wait
+----
+--
+
+== Example 1: Access AlertManager Service via NodePort
+
+. In the extension configuration, modify `global.host`, and confirm `openresty.service.nodePort`.
+
+. Then modify the `openresty.configs` configuration as follows.
++
+[,yaml]
+----
+openresty:
+  configs:
+    - name: alertmanager
+      description: Alertmanager endpoint in KubeSphere monitoring stack 
+      subPath: /alertmanager/
+      endpoint: http://whizard-notification-alertmanager.kubesphere-monitoring-system.svc:9093/
+----
+
+. After the configuration is complete, access the external address of OAuth2-Proxy, such as http://172.31.19.4:32080, and after logging in through KubeSphere authentication, you can see the entry for the Alertmanager service on the homepage, click to access it.
+
+== Example 2: Access AlertManager Service via Ingress
+
+. In the extension configuration, change `openresty.enabled` to false, `ingress.enabled` to true, and modify `global.host`.
+
+. Install the ingress-nginx controller.
++
+[,bash]
+----
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
+----
+
+. Modify the deployment named `ingress-nginx-controller.` Set the ingress external access method, currently link:https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network[exposed via host network].
++
+[,yaml]
+----
+spec:
+    nodeName: <node-name>  # Replace with the actual node name
+    hostNetwork: true
+----
+
+. Create the alertmanager custom resource, service, and ingress.
++
+--
+[,bash]
+----
+vim alertmanager.yaml
+----
+
+[,yaml]
+----
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  name: main
+  namespace: extension-oauth2-proxy
+spec:
+  externalUrl: http://172.31.19.4.nip.io/alertmanager # Replace with the actual address
+  portName: web
+  replicas: 1
+  resources:
+    requests:
+      memory: 400Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager-main
+  namespace: extension-oauth2-proxy
+spec:
+  type: ClusterIP
+  ports:
+  - name: web
+    port: 9093
+    protocol: TCP
+    targetPort: web
+  selector:
+    alertmanager: main
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start?rd=$escaped_request_uri
+    nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2/auth
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: alertmanager-ingress
+  namespace: extension-oauth2-proxy
+spec:
+  ingressClassName: nginx 
+  rules:
+  - host: 172.31.19.4.nip.io  # Replace with the actual address
+    http:
+      paths:
+      - backend:      # Application configuration part
+          service:
+            name: alertmanager-main
+            port:
+              number: 9093
+        path: /alertmanager(/|$)(.*)
+        pathType: ImplementationSpecific
+----
+--
+
+. Deploy the Alertmanager service.
++
+[,bash]
+----
+kubectl apply -f alertmanager.yaml
+----
+
+. Access `<node-ip>.nip.io/alertmanager` in the browser, such as 172.31.19.4.nip.io/alertmanager, to access the Alertmanager user interface.

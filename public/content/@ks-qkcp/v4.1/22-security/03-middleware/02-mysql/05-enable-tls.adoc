@@ -1,0 +1,20 @@
+---
+title: "启用 TLS"
+weight: 05
+---
+
+. 根据证书文件创建 Secret
++
+[,bash]
+----
+kubectl create secret generic sample-ssl --from-file=tls.crt=server.pem --
+from-file=tls.key=server-key.pem --from-file=ca.crt=ca.pem --
+type=kubernetes.io/tls
+----
+
+. 配置 RadonDB MySQL 集群使用 TLS，配置之后会触发滚动更新，即集群会重启
++
+[,bash]
+----
+kubectl patch mysqlclusters.mysql.radondb.com sample --type=merge -p '{"spec":{"tlsSecretName":"sample-ssl"}}'
+----

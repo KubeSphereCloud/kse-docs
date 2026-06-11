@@ -1,0 +1,38 @@
+---
+title: "View Node Key Metrics Ranking"
+keywords: "Kubernetes, {ks_product}, WizTelemetry Global Monitoring, Node, Key Metrics Ranking"
+description: "Introduces how to sort nodes based on multi-dimensional monitoring metrics."
+weight: 06
+---
+
+:ks_navigation: **Global Monitoring > Nodes**
+
+This section describes how to sort nodes based on multi-dimensional monitoring metrics.
+
+== Prerequisites
+
+You need to have the **platform-admin** role in the KubeSphere platform. For more information, please refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
++
+--
+View the status, cluster affiliation, and other monitoring metric data for each node.
+
+include::../../../../../_custom/WizTelemetry/sort-by-clusters-fields-and-order.adoc[]
+
+* Click the search box above the list and enter keywords to search for nodes by name.
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+--

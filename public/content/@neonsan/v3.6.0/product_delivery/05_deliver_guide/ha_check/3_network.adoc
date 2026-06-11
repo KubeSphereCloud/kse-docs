@@ -1,0 +1,100 @@
+---
+title: "网络故障"
+weight: 3
+---
+
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统的冗余网络配置
+
+|预置条件	
+a|
+. QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+. 各节点服务配置正确，且状态正常。
+. 系统中已经成功创建 3 副本卷：vol/test，且已有客户端对该卷进行 IO 操作。
+
+|测试过程
+a|
+. 在客户端，使用FIO工具，对卷进行写入数据。
++
+[source,shell]
+----
+fio -name=test_10 -filename=/dev/qbd0 -bs=4k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=600 -time_based -rw=randwrite -iodepth=32 -numjobs=2 -size 1M
+----
+. 写数据的过程中，直接将一台存储节点前端业务网线拔掉 1 根，检查卷的写数据情况。
+. 检查集群中卷的状态和端口状态。
++
+[source,shell]
+----
+neonsan list_volume -detail
+----
++
+[source,shell]
+----
+neonsan list_port -all
+----
+. 插上网线，检查卷的写数据情况。
+. 直接将一台存储节点前端业务网线同时拔掉 2 根，检查卷的写数据情况。
+. 检查集群中卷的状态和端口状态。
++
+[source,shell]
+----
+neonsan list_volume -detail
+----
++
+[source,shell]
+----
+neonsan list_port -all
+----
+. 插上网线，检查卷的写数据情况。
+. 写数据的过程中，直接将一台存储节点内部数据通信网线拔掉 1 根，检查卷的写数据情况。
+. 检查集群中卷的状态和端口状态。
++
+[source,shell]
+----
+neonsan list_volume -detail
+----
++
+[source,shell]
+----
+neonsan list_port -all
+----
+. 插上内部数据通信网线，检查卷的写数据情况。
+. 写数据的过程中，直接将一台存储节点内部数据通信网线拔掉 2 根，检查卷的写数据情况。
+. 检查集群中卷的状态和端口状态。
++
+[source,shell]
+----
+neonsan list_volume -detail
+----
++
+[source,shell]
+----
+neonsan list_port -all
+----
+. 插上内部数据通信网线，检查卷的写数据情况。
+
+|预期结果	
+a|
+. 命令执行成功，卷可正常写入数据。
+. 卷数据写入正常，FIO 没有中断。
+. 卷的状态均为 ``OK``，被断开的端口状态为 ``ERROR``。
+. 插入网线后，卷数据写入正常，FIO 没有中断。
+. 卷数据写入正常，FIO 没有中断。
+. 卷的状态均为 ``DEGRADED``，被断开的 2 个端口状态为 ``ERROR``。
+. 插入网线后系统自动触发卷恢复，卷数据写入正常，FIO 没有中断。
+. 卷数据写入正常，FIO 没有中断。
+. 卷的状态均为 ``OK``，被断开的端口状态为 ``ERROR``。
+. 插入网线后，卷数据写入正常，FIO 没有中断。
+. 卷数据写入正常，FIO 没有中断。
+. 卷的状态均为 ``DEGRADED``，被断开的 2 个端口状态为 ``ERROR``。
+. 待节点插上相应的网线后，系统自动触发降级卷的恢复，卷数据写入正常，FIO 没有中断。
+
+|验证结果	
+|
+
+|备注	
+|
+|===

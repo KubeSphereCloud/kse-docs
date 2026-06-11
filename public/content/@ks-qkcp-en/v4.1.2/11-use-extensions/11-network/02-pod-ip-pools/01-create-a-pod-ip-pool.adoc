@@ -1,0 +1,147 @@
+---
+title: "Create Pod IP Pools"
+keywords: "Kubernetes, {ks_product-en}, cluster management, network, pod IP pool, create pod IP pool"
+description: "Introduce how to create pod IP pools."
+weight: 01
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Pod IP Pools**
+
+
+This section introduces how to create pod IP pools.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeSphere Network** should have been installed and enabled.
+
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-clickCreate.adoc[]
+
++
+
+. In the **Create Pod IP Pool** dialog box, set the parameters for the pod IP pool, and then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|IP Address
+|The network address of the network segment corresponding to the pod IP pool.
+
+|Mask
+|The mask bits of the network segment corresponding to the pod IP pool.
+
+|Quantity
+|The number of pod IP pools to create. A maximum of 10 pod IP pools can be created at the same time. If the quantity is greater than or equal to 2, the system will automatically fill in the network addresses for the other IP pools. You can also customize the network addresses for the other IP pools as needed.
+|===
+--
+
+. In the **Pod IP Pool** dialog box, click image:/images/ks-qkcp/zh/icons/pen-light.svg[pen,18,18], and in the pop-up **Edit Pod IP Pool** area, set the following parameters, and then click **Create**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Network Segment
+|The IP range of the pod IP pool.
+
+|Name
+|The name of the pod IP pool. You can modify the system-generated default name. The name can only contain lowercase letters, numbers, and hyphens (-), must start or end with a lowercase letter or number, and can be up to 63 characters long.
+
+|IP Pool Block Size
+|The CIDR size of the block used by the IP pool to allocate IPs.
+
+|NAT Outgoing
+|Whether to allow communication across IP pools via NAT.
+
+When enabled, packets sent from Calico networked containers in this pool to destinations outside of any Calico IP pools will be masqueraded.
+
+If IPIP or VXLAN mode is enabled, it is recommended to enable NAT outgoing, otherwise the routing between Workloads and Hosts running Calico is asymmetric and may cause traffic to be filtered due to RPF checks failing.
+
+|Alias
+|The alias of the pod IP pool. The alias can only contain Chinese characters, letters, numbers, and hyphens (-), and cannot start or end with a hyphen (-), and can be up to 63 characters long.
+
+|Description
+|The description of the pod IP pool. The description can contain any characters and can be up to 256 characters long.
+
+|Select Nodes
+|Use label selectors to match appropriate nodes for the IP pool.
+
+* **Node Range**
+
+** All: Match all nodes within the label selection range.
+** Disable All: Prevent automatic allocation of IP pool IP addresses to any node's pods.
+
+* **Label Select**
+
+ifeval::["{file_output_type}" == "html"]
+** Key: The key of the node label. Click to enter a custom key. For more information about node labels, please refer to link:../../../../07-cluster-management/03-nodes/06-edit-node-labels.adoc[Edit Node Labels].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+** Key: The key of the node label. Click to enter a custom key. For more information about node labels, please refer to the "Nodes" section in the {ks_product-en} Cluster Management Guide.
+endif::[]
+
+** Operator: The operator for the filtering condition.
+
+*** Contains: The value corresponding to the key contains a specific string.
+
+*** Does Not Contain: The value corresponding to the key does not contain a specific string.
+
+*** Exists: The node label contains a specific key.
+
+*** Does Not Exist: The node label does not contain a specific key.
+
+** Value: The string that the value corresponding to the key must contain. Press **Enter** to set multiple strings, and if the value corresponding to the key contains any one of the strings, it meets the condition.
+
+** Click **Add** to create multiple labels at the same time.
+
+** Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] on the right side of an added label to delete the label.
+
+* **Custom**
+
+Filter nodes that meet the conditions through custom expressions. For more information about expressions, please refer to link:https://docs.tigera.io/calico/latest/reference/resources/ippool#node-selector[Node Selector].
+
+|IPIP Mode
+
+|IPIP mode is one of the Overlay modes and cannot be set simultaneously with VXLAN mode. If both are set to Never, BGP mode is used.
+
+IPIP mode: Create an IP in IP tunnel on each node to achieve communication between containers. The values are as follows:
+
+** Always: Always perform IPIP encapsulation (default).
+
+** CrossSubnet: Perform IPIP encapsulation only when crossing network segments.
+
+** Never: Never perform IPIP encapsulation.
+
+
+|VXLAN Mode
+
+|VXLAN mode is one of the Overlay modes and cannot be set simultaneously with IPIP mode. If both are set to Never, BGP mode is used.
+
+VXLAN mode: Create a VXLAN tunnel on each node to achieve communication between containers. The values are as follows:
+
+** Always: Always perform VXLAN encapsulation.
+
+** CrossSubnet: Perform VXLAN encapsulation only when crossing network segments.
+
+** Never: Never perform VXLAN encapsulation.
+|===
+--

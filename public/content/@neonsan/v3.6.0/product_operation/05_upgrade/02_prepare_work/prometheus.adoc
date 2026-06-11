@@ -1,0 +1,75 @@
+---
+title: "限制 Prometheus 资源占用"
+weight: 2
+---
+
+. 将 Prometheus 资源占用限制脚本 patch_prometheus.tgz 上传至 NeonSAN 集群中的任一 Center 节点上。
+
+. 登录上传有 patch_prometheus.tgz 包的 Center 节点。
+. 执行如下命令，查看集群中的 Monitor 节点信息。
++
+[source,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts|grep monitor"
+----
+. 执行如下命令，将 patch_prometheus.tgz 包复制到所有安装了 Prometheus 的 Monitor 节点。
++
+[source,shell]
+----
+scp patch_prometheus.tgz  monitor<N>:/root/
+----
++
+include::../../../../../_components/note.adoc[]
+``monitor<N>`` 需根据实际情况进行修改，一般为 ``monitor0`` 和 ``monitor1``
+include::../../../../../_components/table_footer.adoc[]
+
+. 逐一登录 monitor 节点，执行如下操作。
+.. 查看当前集群中 Prometheus 实际使用的数据目录。
++
+[source,shell]
+----
+ps -ef|grep prometheus
+----
++
+[source]
+----
+root     11228  2694  3 17:45 ?        00:00:34 /opt/prometheus/prometheus -config.file /opt/prometheus/prometheus.yml -storage.local.path=/pitrix/qingstor/data/prometheus/data
+----
++
+include::../../../../../_components/note.adoc[]
+使用 qingstor-installer 部署的环境 Prometheus 数据目录实际为 ``/pitrix/qingstor/data/prometheus/data``，返回结果中 ``–-storage.local.path`` 或 ``–-storage.tsdb.path`` 所指目录为数据目录。
+include::../../../../../_components/table_footer.adoc[]
+
+.. 检查 Prometheus 数据目录所属分区的剩余空间大小。
++
+[source,shell]
+----
+df -h
+----
++
+include::../../../../../_components/note.adoc[]
+Prometheus 数据目录所属分区建议预留 100GB，若无法满足，至少预留 50GB。
+include::../../../../../_components/table_footer.adoc[]
+
+.. 解压 patch_prometheus.tgz 包。
++
+[source,shell]
+----
+tar -zxvf patch_prometheus.tgz
+----
+
+.. 进入指定目录下，并执行 Prometheus 资源占用限制脚本。
++
+[source,shell]
+----
+cd patch_prometheus
+./patch_prometheus.py -s <disk_size> -m <memory>
+----
++
+参数说明及示例：
++
+* ``-s`` 用于指定 Prometheus 数据目录的最大使用空间，单位为 GiB。
+* ``-m`` 用于指定 Prometheus 最大使用的内存大小，单位为 GiB。
+* ``./patch_prometheus.py -s 100 -m 4`` 则表示限制 Prometheus 数据目录使用磁盘容量为 100GiB，内存大小为 4GiB。
+
+

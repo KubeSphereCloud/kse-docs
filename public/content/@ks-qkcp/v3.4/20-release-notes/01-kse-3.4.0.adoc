@@ -1,0 +1,261 @@
+---
+title: "KubeSphere 企业版 v3.4.0 版本说明"
+linkTitle: "KubeSphere 企业版 v3.4.0 版本说明"
+keywords: "v3.4.0 版本说明, KubeSphere 企业版"
+description: "介绍 KubeSphere 企业版新特性、功能增强以及修复问题。"
+weight: 01
+layout: "second"
+icon: "/images/docs/docs.svg"
+---
+
+== DevOps
+
+=== 新特性
+
+- 支持通过 CRD 定义流水线 Step。
+- 将 PipelineRun 的结果保存到 configmap 中。
+
+=== 优化增强
+
+- 优化编辑流水线流程，支持异步调用 Jenkins 的 toJson 和 toJenkinsfile API。
+- 支持在 git provider 中显示 CI 的进度。
+- 支持按照类别过滤流水线和多分支流水线。
+- 升级 Jenkins 中 Subversion 相关插件。
+
+=== 问题修复
+
+- 修复用户修改并保存流水线配置后 Webhook 配置丢失的问题。
+- 修复 PipelineRun 从“取消”状态变成“未运行”状态的问题。
+- 修复 DevOps 流水线 controller 从 Jenkins 中单次无法获取运行 job 的信息时触发获取失败的问题。
+- 修复由于密钥不匹配导致的新用户运行流水线失败的问题。
+- 修复编辑流水线中保留期限和构建记录最大数量表单验证未限定数字的问题。
+
+== 存储
+
+=== 新特性
+
+- 添加存储资源配额设置。
+- 支持存储配额管理功能。
+
+=== 问题修复
+
+- 通过存储配额限制扩容操作。
+- 更新存储配额相关的 Webhook。
+- 修复持久卷列表中绑定状态不正确的问题。
+
+== 服务网格
+
+=== 新特性
+
+- 升级 Istio 版本到 v1.14.6，Kiali 版本升级到 v1.50，Jaeger 版本升级到 1.29。
+
+=== 问题修复
+
+- 修复使用默认内置 Elasticsearch 配置创建 jaeger-secret 错误导致 Jaeger 组件启用失败的问题。
+
+== 可观测性
+
+=== 新特性
+
+- 支持通过 KubeSphere Whizard 可观测中心配置 Whizard 参数。
+- 新增自定义伸缩功能，支持基于各种自定义指标自动伸缩工作负载，支持的伸缩器包括 Cron, Promethus, Kafka 等。
+- 集成 processor exporter。
+- 集成 blackbox-exporter。
+
+=== 优化增强
+
+- 优化可观测中心页面中告警规则的显示。
+- 优化无数据展示时的监控页面。
+- 内置日志存储从 Elasticsearch 切换为 OpenSearch, 内置 Elasticsearch 已被移除。
+- 升级 logsidecar-injector 到 v1.2.0。
+- 升级 Notification Manager 到 v2.3.0。
+- 升级 kube-events 到 v0.6.0。
+- 升级 Whizard 到 v0.6.0。
+- 支持 Prometheus 认证配置。
+- 升级 OpenSearch 以及 OpenSearch Dashboard 到 v2.6.0。
+
+=== 问题修复
+
+- 修复资源用量排行页面操作排序时导致系统页面卡死的问题。
+- 修复内置告警规则不能修改应用集群的问题。
+- 修复告警目标显示不准确的问题。
+- 修复告警规则超过一定数量后未正常触发告警的问题。
+- 修复告警模块启用问题。
+
+== KubeEdge 集成
+
+=== 优化增强
+
+- 升级 KubeEdge 至 v1.13.0。
+
+== 网络
+
+=== 优化增强
+
+- 优化 IP 池配置参数。
+
+=== 问题修复
+
+- 修复 IP 池 locales 文件。
+- 修改禁用 IP 池时，迁移该 IP 池下的容器组到其他的 IP 池的迁移规则。
+- 修改创建 IP 池时 Overlay 的规则。
+
+== 微服务
+
+=== 新特性
+
+- 网关新增 affinity, tolerations 参数配置。
+- 支持企业空间网关。
+- 增加网关设置 worker-processes 的默认值。
+
+=== 优化增强
+
+- 升级 nginx-ingress 至 v1.3.1。
+
+=== 问题修复
+
+- 修复集群网关数据重复的问题。
+- 修复获取集群网关数据中没有集群信息的问题。
+
+== App Store
+
+=== 优化增强
+
+- 为 Password 类型的 Identity Provider 增加独立的认证接口。
+- 新增 IAM v1beta1 API。
+
+=== 问题修复
+
+- 修复应用安装失败后变更配置无法重新安装的问题。
+- 移除在 KSE v3.0.0 版本中标记为弃用的认证 API。
+- 将 IAM v1alpha2 API 标记为弃用。
+
+== 认证与授权
+
+=== 新特性
+
+- 在许可证页面增加授权状态提示。
+- 支持在许可证页面隐藏未授权组件。
+- 增加最终用户许可协议查看页面。
+
+=== 优化增强
+
+- 更新最短密码长度到 8 位。
+
+== 安全
+
+=== 优化增强
+
+- ks-core 使用非 root 用户运行并替换更安全的基础镜像。
+- 修复 kubesphere/spring-cloud-gateway 中潜在的堆转储文件泄露漏洞。
+- 用户首次登录强制修改初始密码。
+- 提供更完善的安全材料：基于 SPDX 标准的 SBOM、开源软件清单。
+
+== DMP
+
+=== OpenSearch
+
+==== 优化增强
+
+- operator 版本号升级为 v2.0.19 ， chart 版本号升级为 v2.0.21。
+- 部署时 Service 类型支持修改为 NodePort。
+- 增加日志输出格式配置。
+
+==== 问题修复
+
+- 修复磁盘单位校验、转换的问题。
+- 增加 kubesphere 标签，特定监控场景下可以正确展示数据。
+- 修复多集群场景下监控无法展示的问题。
+- 修复日志时间戳问题。
+
+=== MongoDB
+
+==== 优化增强
+
+- chart 版本号升级为 v2.0.8。
+
+==== 问题修复
+
+- 修复磁盘单位校验、转换的问题。
+- 增加 kubesphere 标签，特定监控场景下可以正确展示数据。
+
+=== Redis
+
+==== 优化增强
+
+- chart 版本号升级为 v2.0.8。
+- 增强 Sentinel 高可用能力。
+
+==== 问题修复
+
+- 修复了安装配置中 namespaceOverride 参数不生效的问题。
+- 修改了镜像的拉取策略（Aways 修改为 IfNotPresent）。
+- 增加 kubesphere 标签，特定监控场景下可以正确展示数据。
+
+=== MySQL
+
+==== 问题修复
+
+- 修复 helm chart 中 imageNamespaceOverride 不能正确替换镜像的问题。
+- 修复了 MySQL 8.0 版本中，配置文件的权限错误问题。
+
+=== PostgreSQL
+
+==== 优化增强
+
+- chart 版本号升级为 v1.2.0。
+- 新增了创建备份、定时备份和按备份还原的功能。
+- 更新 crd 字段设计。
+
+==== 问题修复
+
+- 增加 kubesphere 标签，特定监控场景下可以正确展示数据。
+
+=== Kafka
+
+==== 优化增强
+
+- 更新 chart 版本到 0.1.1，移除无用的 metric 统计 yaml。
+- 新增 num.partition 配置参数。
+- topic 名称增强，支持字符， 并增加支持长度。
+
+==== 问题修复
+
+- 默认不启用网络策略配置。
+- 修复部署 Kafka 立即打开无法获取 secret 报错的问题。
+
+== 用户体验
+
+- 支持集群、项目、企业空间、DevOps 项目改名。
+- 优化部分词条和描述信息。
+- 修复页面缺失别名搜索。
+- 修复创建服务和创建应用表单里容器设置中没有 GPU 限制的问题。
+- 修复项目灰度发布详情页跳转到容器详情后返回 URL 错误。
+- 修复集群名称过长的问题。
+- 修复集群可见性列表和弹窗样式。
+- 修复 system-workspace 没有显示所在集群的问题。
+- 修复修改集群名称后，集群详情页面接口报错的问题。
+- 修改别名匹配正则。
+- 修复 Webhook URL 字段表单样式。
+- 支持设置容器组优雅退出时间。
+- 优化 LDAP 登录页面。
+- 增加别名展示权重。
+
+== API 变更
+
+=== API 弃用
+
+随着 API 的发展，旧的 API 会被弃用并最终被移除。以下 API 已被标记为弃用，并将在下一个主要版本中被移除。
+
+- 所有 `iam.kubesphere.io` 这个 APIGroup 下 alpha 版本的资源型 API(**iam.kubesphere.io/v1alpha2**)。
+- Alpha 版本的 `登录` API (**/kapis/iam.kubesphere.io/v1alpha2/login**)。
+- 所有 alpha 版本的资源型 API (resources.kubesphere.io/v1alpha2)。
+- 所有 alpha 版本的资源型 API (resources.kubesphere.io/v1alpha3)。
+
+=== API 移除
+
+v3.4 版本将停止提供以下 API。取而代之的是更新、更稳定的 API。
+
+- alpha 版本的 `tojenkinsfile` API (**/kapis/devops.kubesphere.io/v1alpha2/tojenkinsfile**)。
+- alpha 版本的 `tojson` API (**/kapis/devops.kubesphere.io/v1alpha2/tojson**)。
+- alpha 版本的 `Authentication` API (**/kapis/iam.kubesphere.io/v1alpha2/login**)。

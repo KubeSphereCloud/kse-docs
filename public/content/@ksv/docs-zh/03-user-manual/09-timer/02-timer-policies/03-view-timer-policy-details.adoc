@@ -1,0 +1,89 @@
+---
+title: "查看定时策略详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 定时策略, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看定时策略详情。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 4a0e678d346843889f6030aa4c254da4
+:ks_xref_id: 396775bb81b24889810fd1ff1a2ae37a
+:ks_comp: ../../../../components/
+:ks_title: 查看定时策略详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看定时策略详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 定时策略, 详情, 查看
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看定时策略列表。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=258b1eb5d024457da532acbaa50b17b5]
+
+include::../../../../_custom/timer/timer-policy-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=c9babb4e3be749c998a327a41f8cdcdb]
+
+include::../../../../_custom/timer/timer-policy-steps.adoc[]
+
+. 在定时策略列表页面，点击目标定时策略名称，进入定时策略详情页面。
+
+. 在**基本信息**区域，查看定时策略的基本信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|ID
+|定时策略在系统中的通用唯一标识符。
+
+|周期
+|定时任务的执行周期。目前支持每天、每 N 天、每 N 小时、每周或每月执行。
+
+|周期时间
+|定时任务执行的具体时间点。
+
+|创建时间
+|定时策略的创建时间。
+
+|创建者
+|定时策略的创建者。
+|===
+--
+
+. 在**定时任务**页签，查看定时策略对应的定时任务信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|用户自定义的定时任务名称。
+
+|ID
+|定时任务在系统中的通用唯一标识符。
+
+|状态
+|定时任务当前的状态。
+
+|执行操作
+|执行定时任务时完成的操作。目前包含以下几种操作类型：**开启虚拟机**、**关闭虚拟机**、**重启虚拟机**及**创建备份**。
+
+|成功/失败次数
+|统计定时任务执行成功和失败的次数。
+|===
+--
+
+. （可选）点击定时任务列表上方的搜索框并设置搜索条件，可按名称或 ID 搜索定时任务。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的定时任务。
+

@@ -1,0 +1,71 @@
+---
+title: "删除虚拟机模板"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 模板, 版本, 删除"
+description: "介绍如何使用{ks_product_both}Web 控制台删除虚拟机模板。"
+weight: 08
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 3c286bd16b2048bc8e08c244b05b6e68
+:ks_xref_id: ca08cb66092a4508b13df36e683f8a4d
+:ks_comp: ../../../../components/
+:ks_title: 删除虚拟机模板
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台删除虚拟机模板。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 模板, 版本, 删除
+:ks_weight: 08
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台删除虚拟机模板。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=8f49f801172940b58cccd6adcd5a8f00]
+
+include::../../../../_custom/vms/vm-template-manage-prerequisites.adoc[]
+
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 删除单个虚拟机模板link:[id=dfcbd4e6f3104d5b9678cf28ff8e543f]
+
+include::../../../../_custom/vms/vm-template-steps.adoc[]
+
+. 在虚拟机模板列表页面，点击目标虚拟机模板名称，进入虚拟机模板详情页面。
+
+. 在虚拟机模板详情页面左上角点击image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后选择**删除**。
+
+. 在弹出的对话框中点击**确定**可删除虚拟机模板。
++
+--
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+虚拟机模板删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 批量删除虚拟机模板link:[id=a4a36ecb4c994fbbbbdda4051f12ee4a]
+
+include::../../../../_custom/vms/vm-template-steps.adoc[]
+
+. 在虚拟机模板列表页面，选择需要删除的虚拟机模板名称左侧的复选框，然后在列表上方点击**删除**。
+
+. 在弹出的对话框中点击**确定**可批量删除多个虚拟机模板。
++
+--
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+虚拟机模板删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,74 @@
+---
+title: "View Service List"
+keywords: "Kubernetes, {ks_product}, Project Management, Workloads, Service, View Service List"
+description: "Describes how to view the service list."
+weight: 02
+---
+
+:ks_permission: **Federated Project View**
+:ks_navigation: **Application Workloads > Services**
+
+
+include::../../../../../_custom/clusterManagement/services/services-desc-viewServiceList.adoc[]
+
+== Prerequisites
+
+* The **Federated Cluster Application Management** extension must be installed and enabled on the KubeSphere platform.
+
+* {empty}
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-prer-requiredPermission_v4.adoc[]
+
+
+== Steps
+
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage_v4.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+* The service list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../../_custom/clusterManagement/services/services-para-name.adoc[]
+
+|Status
+|The status of the service, **Running** or **Deleting**.
+
+|Service Type
+|The type of service. Depending on how the service is created, KubeSphere categorizes services into the following types:
+
+include::../../../../../_custom/clusterManagement/services/services-para-statelessStatefulExternal.adoc[]
+
+// * **External Service**: The service forwards business traffic to other services outside the cluster. The system does not assign a virtual IP address to the service. It can be accessed from within the cluster using a domain name in the format <service name>.<project name>**.svc.cluster.local**.
+
+// * **Custom Service**: A service created by users by customizing the internal access mode and backend workloads.
+
+|Application
+|The application to which the service belongs.
+
+// |Internal Access
+// |
+// include::../../../../../_custom/clusterManagement/services/services-para-internalAccess.adoc[]
+
+// include::../../../../../_custom/clusterManagement/services/services-para-virtualip-headless.adoc[]
+
+// include::../../../../../_custom/clusterManagement/services/services-para-externalName.adoc[]
+
+// include::../../../../../_custom/clusterManagement/services/services-para-externalAccess.adoc[]
+
+include::../../../../../_custom/clusterManagement/services/services-para-creationTime.adoc[]
+|===
+--
+
+include::../../../../../_custom/clusterManagement/services/services-oper-searchForServices.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

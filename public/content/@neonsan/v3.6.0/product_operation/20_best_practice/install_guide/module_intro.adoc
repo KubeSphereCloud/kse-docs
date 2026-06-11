@@ -1,0 +1,40 @@
+---
+title: "NeonSAN 组件介绍"
+weight: 1
+---
+
+NeonSAN 软件组件包括：Zookeeper、MySQL Galera、NeonCenter、NeonStore、Monitor、Prometheus 以及 Alertmanager/qs-alert，各角色功能描述如下：
+
+* **Zookeeper 组件**
++
+一个 NeonSAN 存储系统中的 Zookeeper 集群最少部署要求为 3 节点，且 Zookeeper 集群节点数必须为奇数。为保证 NeonSAN 存储系统服务正常必须保证 Zookeeper 集群中需要大于一半的 Zookeeper 节点处于活跃可访问状态。比如，3 节点的 Zookeeper 集群可容忍 1 个 Zookeeper 节点故障，5 节点的 Zookeeper 集群可容忍 2 个 Zookeeper 节点故障。Zookeeper 角色功能： +
+(1) 为控制组件选主，即决定主 Center 节点。 +
+(2) 集群管理功能入口。例如：客户端挂载卷（Volume）、集群节点的加入、CLI 或 API 调用等，上述操作均需要先通过 Zookeeper 获取到主 Center IP 后，客户端将相应请求发送给 Zookeeper 选定的主 Center。 +
+
+* **MySQL Galera 组件**
++
+存储集群层面元数据（节点信息，卷状态等）信息，当发生创建/删除卷、存储节点上/下线、磁盘增/删操作、集群层面故障处理时需要从数据库进行查询或修改操作。
++
+NeonSAN 存储系统中的 MySQL Galera 集群最少部署要求为 3 节点，且可容忍不超过 MySQL Galera 集群节点数一半的节点发生故障，即 3 节点的 MySQL Galera 集群可容忍 1 个 MySQL Galera 节点故障，5 节点 MySQL Galera 集群可容忍 2 个 MySQL Galera 节点故障。
+
+* **NeonCenter 组件**
++
+控制层面组件，主 Center 处理所有集群层面的控制请求。同一时刻一个 NeonSAN 集群中只能有一个主 Center。
+
+* **NeonStore 组件**
++
+数据层面组件，负责处理数据收发、副本间复制、IO 读写以及本地磁盘管理。
+
+* **Monitor 组件**
++
+负责物理机硬件、服务状态以及相关数据的监控。硬件异常事件通过 Monitor 上报到主 Center，触发对应的故障处理流程。
+
+* **Prometheus 组件**
++
+负责监控和存储存储系统的各项数据，根据告警规则向 Alertmanager 发送告警信息。
++
+* **Alertmanager/qs-alert 组件**
++
+与 Prometheus 组件配合使用实现告警功能，可以对外推送告警信息，可支持 SNMP、SMTP、Webhook。
+
+

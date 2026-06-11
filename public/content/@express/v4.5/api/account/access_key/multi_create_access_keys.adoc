@@ -1,0 +1,83 @@
+---
+title: 批量创建API密钥（MultiCreateAccessKeys）
+weight: 9
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| users
+| Array
+| true
+| 创建API密钥的用户集合
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_key_id
+| String
+| false
+| API密钥的ID
+
+| access_key_set
+| Dict
+| false
+| 用户ID和创建的API密钥的映射表
+
+| msg
+| String
+| false
+| 错误消息
+
+| secret_access_key
+| String
+| false
+| API密钥的私钥
+
+| status
+| String
+| false
+| API密钥的状态
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "MultiCreateAccessKeys",
+  "users": [
+    "user1",
+    "user2"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "access_key_set": {
+    "usr-xCrXIiXv": {
+      "access_key_id": "ZQUPUJHZRCFVYVWCCCC",
+      "message": "",
+      "secret_access_key": "pHCkOsBg165abcdeGaGmetque6jwZ6YdNNuB8kr1",
+      "status": true
+    }
+  },
+  "action": "MultiCreateAccessKeysResponse",
+  "ret_code": 0
+}
+----

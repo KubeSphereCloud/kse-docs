@@ -1,0 +1,55 @@
+---
+title: FTP 目录详解
+weight: 2
+---
+
+QKE 的软件包分为用于后台安装部署 QKE 服务的应用包与用于 Console 用户创建 QKE 集群的资源包，均统一存放于内部link:ins.qingcloud.com[ FTP 服务器]。
+
+在安装部署前，我们对 QKE 的软件包的存放格式与路径，进行一个说明，以便实施人员更为准确地获取到目标安装包，避免因安装包的问题而引发的异常。
+
+== 目录层级说明
+
+* 应用包
++
+应用包目录为 `/pitrix/migrate_appcenter2_recommend`，镜像文件目录按照 `iaas_version/app_id-app_name/app_version_id` 的格式进行存储，如下图所示。
++
+image::/images/ep_offline/qke_install/qke_install_1.png[]
+
+* 资源包
++
+资源包目录为 `/pitrix/installer/k8s/QKE/`，目录层级如下图所示。
++
+image::/images/ep_offline/qke_install/qke_install_20.png[]
+
+
+//实施人员根据需求，下载对应版本的应用包与资源包即可。
+
+== 应用版本说明
+
+
+如上图所示，{product_name} v6.1 版本下的 QKE 镜像文件包有 `appv-7290ketz` 与 `appv-hr1rhbqz` 两个版本目录。实施人员可查看版本目录下的 `meta_data.json` 文件内容，获取 QKE 的版本号。
+
+[source,shell]
+----
+cat migrate_appcenter2_recommend/6_1/app-o6lvbkhm_QKE/appv-hr1rhbqz/meta_data.json
+----
+
+输出结果如下图所示。
+
+image::/images/ep_offline/qke_install/qke_install_2.png[]
+
+
+根据以上方式，我们可以知道{product_name} v6.1 版本下的 QKE 镜像文件包的版本号分别为：
+
+* `appv-7290ketz` 对应 QKE v3.0.0 版本。
+* `appv-hr1rhbqz` 对应 QKE v3.1.0 版本。
+
+// == 导出要求
+
+// {product_name}安装 QKE 时，需同时安装 ETCD 与 ELK 的镜像文件。如，在{product_name} v6.1 的环境中，安装部署 QKE 应用，需要下载的目录有 `app-fdyvu2wk_etcd`、`app-p6au3oyq_ELK` 以及 `app-o6lvbkhm_QKE`。
+
+// image::/images/ep_offline/qke_install/qke_install_3.png[]
+
+
+
+

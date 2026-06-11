@@ -1,0 +1,47 @@
+---
+title: "Edit Auto-scaling Settings"
+keywords: "Kubernetes, {ks_product}, Application Workloads, Workloads, Edit Auto-scaling"
+description: "Describes how to edit the auto-scaling settings for a workload."
+weight: 01
+---
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Application Workloads > Workloads**
+
+
+include::../../../_custom/clusterManagement/workloads/workloads-desc-editAutoScaling.adoc[]
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../
+* {empty}
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* The **Metrics Server** extension must be installed and enabled on the KubeSphere platform.
+
+
+== Steps
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and go to your cluster or workspace.
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Workloads** page, click **Deployments** or **StatefulSets**, then click the name of a workload in the list to go to its details page.
+
++
+
+include::../../../_custom/clusterManagement/workloads/workloads-oper-editAutoScalingSettings_v42.adoc[]
+
++
+
+After the setup is complete, the image:/images/ks-qkcp/zh/icons/clock-2.svg[scaling,18,18] icon will appear in the status bar on the Deployments or StatefulSets list page, indicating that a pod horizontal auto-scaling policy has been set.
+
+. On the **Pod Horizontal Auto-scaling** page, click the image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] icon to the right of the auto-scaling entry to edit or delete the auto-scaling settings.

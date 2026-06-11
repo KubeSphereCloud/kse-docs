@@ -1,0 +1,64 @@
+---
+title: "KubeSphere Virtualization"
+linkTitle: "{ks_title}"
+keywords: ""
+description: ""
+weight: 05
+logo: "{ks_logo}"
+downloadUrl: "{ks_download_url}"
+---
+
+// :ks_include_id: 291e1c2e555d4e7b8f17e118a414b785
+:ks_xref_id: 138c082a2fb54f71abba832433031001
+:ks_comp: ../../components/
+:ks_title: KubeSphere Virtualization
+:ks_description: 
+:ks_keywords: 
+:ks_weight: 05
+
+
+KubeSphere Virtualization (KSV) is a lightweight VM management platform built on top of KubeSphere. KSV supports single-node and multi-node modes for deployment and provides easy-to-use services to meet enterprise-grade requirements of virtualization.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Benefitslink:[id=8cb178b646844470b1080dafe30dfa07]
+
+KSV can provide compute and storage resources with the following benefits:
+
+* **Low cost**: supports a minimum specification of 4 CPU cores and 8 GB memory and multi-node clusters.
+
+* **Simple operation**: provides an easy-to-use web console to help you monitor all resources for enterprise hardware virtualization and enables service self-healing.
+
+* **Quick installation**: allows you to deploy and update a cluster in 20 minutes.
+
+* **Quick response**: allows you to create and resize VMs within seconds.
+
+* **Excellent compatibility**: frees you from the dependency of the underlying infrastructure. You can create VMs on any servers that suppport virtualization.
+
+* **Connection to containers**: seamlessly connects to KubeSphere and integrates VMs and containers.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Scenarioslink:[id=2e9bb7b58109421882dfecae58addb57]
+
+KSV is applicable to a variety of scenarios and provides a platform for individual users and enterprises of all sizes to virtualize resources. This service also offers a solution to edge computing, resource pooling, hybrid deployment of containerized apps, and replacement of commercial services with the ones self-developed by Chinese vendors.
+
+* Edge computing
++
+--
+If you have a large number of edge data centers but limited budgets for virtualization, KSV provides a lightweight virtualization platform that supports a minimum specification of 4 CPU cores and 8 GB memory. This helps you significantly reduce the costs of the deployment and O&M of the infrastructure.
+--
+
+* Resource pooling
++
+--
+KSV is a cloud-native virtualization platform self-developed by QingCloud. This service is fully compatible with chips developed by Chinese vendors and can connect to third-party storage devices. KSV can help you improve resource usage and apply to a range of scenarios, such as replacement of commercial services, construction of virtual infrastructures, testing environments, and practical training.
+--
+
+* Hybrid deployment of containers and VMs
++
+--
+Built on top of Kubernetes, KSV is an HCI that allows you to deploy VMs and containers in hybrid mode. You can adopt a hybrid deployment of KubeSphere and KSV. This way, you can apply for VM or pod resources in a unified console. This simplifies your infrastructure and improves O&M efficiency.
+--

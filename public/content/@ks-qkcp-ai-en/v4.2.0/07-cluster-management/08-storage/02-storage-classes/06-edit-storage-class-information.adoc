@@ -1,0 +1,48 @@
+---
+title: "Edit Storage Class Information"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage Class"
+description: "Describes how to edit the alias and description of a storage class."
+weight: 06
+---
+
+:ks_permission: **Storage Class Management**
+:ks_navigation: **Storage > Storage Classes**
+
+This section describes how to edit the alias and description of a storage class.
+
+You can edit the alias and description of a storage class. KubeSphere does not support editing the name of a storage class.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the storage class you want to operate on, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Edit Information** from the dropdown list.
+
+. In the **Edit Information** dialog box, set the alias and description for the storage class, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Alias
+|The alias of the storage class. Different storage classes can have the same alias.
+
+|Description
+|The description of the storage class. The description can contain any characters, up to a maximum of 256 characters.
+|===
+--

@@ -1,0 +1,25 @@
+---
+title: "Step 3: Configure WizTelemetry Platform Service"
+description: "Configure WizTelemetry Platform Service."
+weight: 03
+---
+
+== Modify whizard-telemetry-config
+
+If an external OpenSearch database is used, you need to modify the configuration file `whizard-telemetry-config`.
+
+. In the **left navigation pane** of the cluster, select **Configuration > ConfigMaps**.
+
+. On the **ConfigMaps** page, find **whizard-telemetry-config**. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right, then select **Edit yaml** from the dropdown list.
++
+image:/images/ks-qkcp/zh/v4.1/whizard-telemetry-config.png[vector,100%]
+
+. Modify the `notification:history:endpoints`, `logging:endpoints`, `auditing:endpoints`, and `events:endpoints` to the OpenSearch address, then click **OK**.
++
+image:/images/ks-qkcp/zh/v4.1/edit-endpoint.png[vector,100%]
+
+== Query Logs in the KSE Interface
+
+image:/images/ks-qkcp/zh/v4.1/log.png[vector,100%]
+
+After deployment is complete, logs can be queried from OpenSearch, as shown in the figure.

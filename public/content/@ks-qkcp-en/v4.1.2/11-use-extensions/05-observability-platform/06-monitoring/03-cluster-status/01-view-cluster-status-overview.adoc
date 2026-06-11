@@ -1,0 +1,59 @@
+---
+title: "Cluster Status Overview"
+keywords: "Kubernetes, {ks_product-en}, monitoring & alerting, cluster status, overview"
+description: "This section introduces how to view the cluster status."
+weight: 01
+---
+
+:ks_permission: **Monitoring Viewing**
+:ks_navigation: **Monitoring & Alerting > Cluster Status**
+
+This section introduces how to view the cluster status.
+
+== Prerequisites
+
+* {empty}
+include::../../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **WhizardTelemetry Monitoring** should have been installed and enabled.
+
+== Steps
+
+include::../../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. View the status of cluster nodes, cluster resources, etcd, and service components under the **Overview** tab of the **Cluster Status** page.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster Node Status
+|The total number of nodes in the cluster and the number of normal nodes.
+
+|Cluster Resource Usage
+|The total and used amounts of CPU, memory, and disk resources in the cluster, as well as the total number of pods that can be created in the cluster and the number of pods already created. By default, each normal cluster node can create a maximum of 110 pods.
+
+|etcd Monitoring
+|The service status, Raft proposal, database size, and client traffic of the etcd database.
+
+* **Service Status**: Displays the Leader node of the etcd cluster, the IP address of each node, and the number of Leader changes in the last hour.
+
+* **Raft Proposal**: Displays the number of committed, applied, failed, and pending Raft proposals per second.
+
+* **DB Size**: The change in the size of the etcd database over time.
+
+* **Client Traffic**: The data traffic sent to and received from gRPC clients.
+
+Viewing etcd monitoring information requires enabling etcd monitoring in advance. For more information, see the details page of the **WhizardTelemetry Monitoring** extension in the Extensions Center.
+
+|Service Component Monitoring
+|The request latency and requests per second of the Kubernetes API server, as well as the cumulative scheduling attempts and scheduling times per second of the scheduler.
+|===
+--

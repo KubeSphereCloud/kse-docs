@@ -1,0 +1,148 @@
+---
+title: "移除或停止指定服务"
+weight: 2
+---
+
+## 移除指定服务
+
+使用 Instller 部署的新管理节点中包含 NeonSAN 集群所需的所有服务。作为管理节点需移除存储以及告警等相关服务，仅保留相应的管理服务即可。
+
+. 逐一登录各个新管理节点。
+
+. 依次执行如下命令，停止并移除 Center 服务。
++
+[,shell]
+----
+supervisorctl stop neoncenter
+supervisorctl remove neoncenter
+dpkg -P pitrix-neoncenter-dbg
+----
+
+. 依次执行如下命令，停止并移除 Store 服务。
++
+[,shell]
+----
+supervisorctl stop neonstore
+supervisorctl remove neonstore
+dpkg -P pitrix-neonstore-dbg
+----
+
+. 依次执行如下命令，停止并移除 Monitor 服务。
++
+[,shell]
+----
+supervisorctl stop neonmonitor
+supervisorctl remove neonmonitor
+dpkg -P pitrix-neonsan-monitor
+----
+
+. 依次执行如下命令，停止并移除 qs_device 服务。
++
+--
+[,shell]
+----
+supervisorctl stop qs_device
+supervisorctl remove qs_device
+dpkg -P qs-device
+----
+
+若在执行 ``dpkg -P qs-device`` 命令时，出现以下错误：
+
+image::/images/neonsan/migrate_manage_node_1.png[,70%]
+
+可执行如下命令，移除开机启动文件。
+
+[,shell]
+----
+mv /qingstor/etc/supervisord.d/qs_device.ini /tmp/qs_device.ini.bak
+----
+--
+
+. 移除 neonsan-tool。
++
+[,shell]
+----
+dpkg -P pitrix-neonsan-tool
+----
+
+. 移除 Prometheus 服务。
++
+[,shell]
+----
+supervisorctl remove prometheus
+----
+
+. 移除 qs_alerter 服务。
++
+[,shell]
+----
+supervisorctl remove qs_alerter
+----
+
+. 依次执行如下命令，检查相关服务是否已被停止或卸载干净。
++
+若无返回结果，则证明已停止或卸载干净。
++
+[,shell]
+----
+supervisorctl  status |grep -E 'neoncenter|neonstore|neonmonitor|qs_device'
+
+dpkg -l |grep -E 'pitrix-neoncenter-dbg|pitrix-neonstore-dbg|pitrix-neonsan-monitor|pitrix-neonsan-tool|qs-device'
+----
+
+
+
+## 停止指定服务
+
+为防止新管理节点上产生的元数据将后续从原集群中迁移过来的数据库元数据覆盖掉，需先将新管理节点上的相关服务进行停止操作。
+
+. 逐一登录至各个新管理节点。
+
+. 依次执行如下命令，停止数据库服务。
++
+[,shell]
+----
+supervisorctl stop mysql_neonsan
+supervisorctl stop mysql_qingstor
+----
+
+. 确认 mysqld 进程是否已退出。
++
+[,shell]
+----
+ps -axf |grep mysqld
+----
++
+include::../../../../../_components/attention.adoc[]
+若 mysqld 进程未退出，则需手动将其 ``kill``。
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 停止 ZooKeeper 服务。
++
+[,shell]
+----
+supervisorctl stop zookeeper
+----
+
+. 停止 etcd 服务并移除相关文件。
+.. 停止服务。
++
+[,shell]
+----
+systemctl stop etcd
+----
+.. 移除文件。
++
+[,shell]
+----
+mv /qingstor/data/etcd/member /qingstor/data/etcd/memberbak
+----
+
+. 停止 Portal 服务。
++
+[,shell]
+----
+supervisorctl stop all
+----
+

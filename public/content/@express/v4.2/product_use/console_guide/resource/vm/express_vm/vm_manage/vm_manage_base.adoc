@@ -1,0 +1,170 @@
+---
+title: "基本管理"
+weight: 2
+---
+
+== 功能描述
+
+云易捷支持对已创建的 ExpressCloud 虚拟机进行基本管理，主要包括：修改主机属性、修改主机所在目录、关闭主机、启动/重启主机、绑定或解绑标签等。
+
+
+== 修改主机属性
+
+. 登录{product_console_name}。
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 点击主机所在行右侧的更多操作，选择**修改**，在弹出的**修改属性**的窗口中输入主机的新名称以及相关描述，点击**修改**即可。
+
+
+== 关闭主机
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 点击主机所在行右侧的更多操作，选择**关闭**，在弹出的**关机**的窗口中，点击**关机**即可。
++
+
+include::../../../../../../../../_components/note.adoc[]
+强制关机可能会导致未保存数据的丢失，请谨慎操作！
+
+include::../../../../../../../../_components/table_footer.adoc[]
+
+
+== 启动/重启主机
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 点击已关机的主机所在行右侧的更多操作，选择**启动**，在弹出的**启动**的窗口中，点击**启动**即可。
+
+. 点击主机所在行右侧的更多操作，选择**重启**，在弹出的**重启**的窗口中，点击**重启**即可。
+
+
+== 制作成镜像
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 点击主机所在行右侧的更多操作，选择**制作镜像**，在弹出的**制作镜像**窗口中，输入镜像名称，点击**确定**即可。
++
+
+include::../../../../../../../../_components/note.adoc[]
+制作成镜像的虚拟机须要为``已关机``状态。
+
+include::../../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vm_manage_base_5.png[,50%]
+
+. 镜像创建成功后，在顶部导航栏，选择**资源** > *镜像*，点击**自有**，进入自有镜像列表，基于虚拟机创建的镜像已显示在列。
++
+image::/images/express/console/vm_manage_base_6.png[]
+
+
+== 克隆主机
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 点击主机所在行右侧的更多操作，选择**克隆主机**，在弹出的**克隆主机**窗口中，点击**克隆**即可。
+
+//image::/images/express/console/vm_manage_base_10.png[,50%]
+
+== 加入/离开网络
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 点击主机所在行右侧的更多操作，选择**网络**，点击**加入网络**，在弹出的**加入网络**窗口中，选择待加入的网络，点击**确定**即可。
++
+image::/images/express/console/vm_manage_base_11.png[,70%]
+
+. 若当前虚拟主机已加入其他网络，系统会弹出**切换网络**窗口，用户可根据需要选择**切换网络**来替换当前主机所在网络或**直接添加**其它基础网络。
++
+image::/images/express/console/vm_manage_base_12.png[,70%]
+
+. 点击主机所在行右侧的更多操作，选择**网络**，点击**离开网络**，在弹出的**选择要从主机{主机 ID}离开的网络**窗口中，选择当前虚拟主机待离开的基础网络，点击**确定**即可。
++
+image::/images/express/console/vm_manage_base_13.png[,50%]
+
+== 挂载/卸载硬盘
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 点击主机所在行右侧的更多操作，选择**硬盘**，点击**挂载硬盘**，在弹出的**选择硬盘**窗口中，选择待挂载至当前主机的硬盘，点击**确定**即可。
++
+
+include::../../../../../../../../_components/note.adoc[]
+* 可选择单个或多个硬盘进行挂载。
+* 若平台内无可用的硬盘，可参考link:../../../../storage/disk_create[创建硬盘]相关内容进行创建。
+
+include::../../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vm_manage_base_14.png[,60%]
+
+. 点击主机所在行右侧的更多操作，选择**硬盘**，点击**卸载硬盘**，在弹出的**选择需要从主机上卸载的硬盘**窗口中，选择待卸载的硬盘，点击**确定**即可。
++
+image::/images/express/console/vm_manage_base_15.png[,50%]
+
+== 绑定/解绑 SSH 密钥
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 点击主机所在行右侧的更多操作，选择 *SSH 密钥*，点击**绑定 SSH 密钥**，在弹出的**绑定 SSH 密钥**窗口中，选择待绑定至当前主机的 SSH 密钥，点击**确定**即可。
++
+
+include::../../../../../../../../_components/note.adoc[]
+* 可选择单个或多个 SSH 密钥进行绑定。
+* 若当前平台内没有可用的 SSH 密钥，可参考link:../../../../ssh/ssh_create[创建 SSH 密钥]相关内容。
+
+include::../../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vm_manage_base_16.png[,60%]
+
+. 点击主机所在行右侧的更多操作，选择 *SSH 密钥*，点击**解绑 SSH 密钥**，在弹出的**选择需要从主机上解绑的 SSH 密钥**窗口中，选择待解绑的 SSH 密钥，点击**确定**即可。
++
+image::/images/express/console/vm_manage_base_17.png[,50%]
+
+== 加入/离开安全组
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 点击主机所在行右侧的更多操作，选择**安全组**，点击**加入安全组**，在弹出的**选择安全组规则**窗口中，选择待加入的安全组，点击**确定**即可。
++
+
+include::../../../../../../../../_components/note.adoc[]
+若当前平台内没有可用的 安全组，可参考link:../../../../safety/safety_create[创建安全组规则]相关内容。
+
+include::../../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vm_manage_base_18.png[,60%]
+
+. 点击主机所在行右侧的更多操作，选择**安全组**，点击**离开安全组**，在弹出的**移除安全组规则**窗口中，点击**确定**即可。
++
+image::/images/express/console/vm_manage_base_19.png[,50%]
+
+
+== 重置密码
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 关闭正在运行中的虚拟机，详细操作可参考link:#_关闭主机[关闭主机]相关内容。
+. 点击主机所在行右侧的更多操作，选择**重置密码**，在弹出的**重置密码**窗口中，输入新密码，点击**重置**即可。
+//+
+//image::/images/express/console/vm_manage_base_23.png[,50%]
+
+
+== 绑定/解绑标签
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 点击主机所在行右侧的更多操作，选择 *标签*，点击**绑定标签**，在弹出的**绑定标签**窗口中，选择待绑定至当前主机的标签，点击**绑定**即可。
++
+
+include::../../../../../../../../_components/note.adoc[]
+* 若当前平台内没有可用的标签，可点击**创建**，即可创建新标签。
+* 可绑定单个或多个标签。
+
+include::../../../../../../../../_components/table_footer.adoc[]
+//+
+//image::/images/express/console/vm_manage_base_25.png[,50%]
+
+. 点击主机所在行右侧的更多操作，选择 *标签*，点击**解绑标签**，在弹出的**解绑标签**窗口中，删除待解绑的标签，点击**确定**即可。
+//+
+//image::/images/express/console/vm_manage_base_26.png[,50%]
+
+== 删除主机
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+. 点击主机所在行右侧的更多操作，选择 *删除*，在弹出的**删除**窗口中，点击**删除**即可。
++
+
+include::../../../../../../../../_components/note.adoc[]
+删除后资源将在回收站保留 2 小时，请提前备份数据。
+
+include::../../../../../../../../_components/table_footer.adoc[]
+
+

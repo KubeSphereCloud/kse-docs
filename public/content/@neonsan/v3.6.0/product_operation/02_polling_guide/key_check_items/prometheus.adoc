@@ -1,0 +1,63 @@
+---
+title: "检查 Prometheus 资源限制配置"
+weight: 8
+---
+
+. 登录 FirstBox 节点，查看当前环境的 monitor 节点信息。
++
+[,shell]
+----
+cat /etc/hosts | grep monitor
+----
++
+回显示例：
++
+[,shell]
+----
+172.31.30.195 monitor0
+172.31.30.194 monitor1
+----
+
+. 逐个登录 monitor 节点，检查是否有以下配置文件和服务。
++
+[,shell]
+----
+cat /etc/systemd/system/cgroup_prometheus.service
+----
++
+include::../../../../../_components/note.adoc[]
+* 若有，则进行步骤 3，检查 Prometheus 数据目录所属分区和空间。
+* 若没有上述配置文件和服务，可参考“《NeonSAN 升级脚本使用手册》：限制 Promethus 资源占用”章节内容进行配置。
+include::../../../../../_components/table_footer.adoc[]
+
+. 在所有 monitor 节点上，依次执行如下命令，检查确认当前 Prometheus 使用的数据目录以及其空间。
+
+.. 确认 Prometheus 的数据目录。
++
+[,shell]
+----
+ps -ef | grep prometheus
+----
++
+回显示例：
++
+[,shell]
+----
+root     11228  2694  3 17:45 ?        00:00:34 /opt/prometheus/prometheus -config.file /opt/prometheus/prometheus.yml -storage.local.path=/pitrix/qingstor/data/prometheus/data
+----
+.. 查看所属分区的空间。
++
+[,shell]
+----
+df -h
+----
++
+include::../../../../../_components/note.adoc[]
+* 使用 qingstor-installer 部署的环境 Prometheus 数据目录实际为 /pitrix/qingstor/data/prometheus/data，其中 
+–-storage.local.path 或 –-storage.tsdb.path 所指目录为数据目录。
+
+* 数据目录所属分区一般为 ``/pitrix`` 或``根目录``，请根据实际情况进行确认。
+* Prometheus 数据目录所属分区建议预留 100GB，若无法满足，至少预留 50GB。
+include::../../../../../_components/table_footer.adoc[]
+
+

@@ -1,0 +1,32 @@
+---
+title: "告警与通知"
+weight: 5
+---
+
+KubeSphere 告警与通知支持基于多租户、多维度的监控指标告警，告警策略支持集群管理员对节点级别和租户对工作负载级别两个层级。
+
+== 功能特性
+
+* 可自定义包含多个告警规则的告警策略，并且可以指定通知规则和重复告警的规则。
+* 提供节点级别和工作负载级别的监控告警指标，包括容器组、CPU、内存、磁盘、网络等多个监控告警指标。
+* 可自定义某监控指标的检测周期长度、持续周期次数、告警等级等。
+* 可自定义发送通知时间段及通知列表，目前支持邮件通知。
+* 支持设置重复告警周期、最大重复次数并和告警级别挂钩。
+
+== 主要组件
+
+* *Prometheus Operator*：监控服务后端，根据告警规则向 Alertmanager 发送告警。
+* *Alertmanager*：处理由客户端应用程序（例如 Prometheus 服务器）发出的告警。
+* *Notification Manager*：Kubernetes 原生通知管理工具，完全开源。
+
+== 架构设计
+
+image::/images/ep_offline/qke_twp/05_alertmanager.png[] 
++++<br/>+++
+*架构说明：*
+
+. Prometheus Operator 通过监控 CRD 管理 Prometheus 实例的生命周期与配置变更。Prometheus 从各数据源（包括 Node Exporter，kube-state-metrics，kubelet，cadvisor，K8s ApiServer, K8s scheduler，Etcd 等）抓取监控数据，然后根据内部配置的 Alert Rule 实时判断接收到的监控数据是否需要告警，如果需要则会发送告警信息到 Alertmanager。
+
+. Kube-Events 监控 K8s 事件，可以将符合告警条件的 K8s 事件也发送告警至 Alertmanager。
+. Kube-Auditing 将监控 K8s/平台审计事件，并可将符合告警条件的审计事件发送告警至 Alertmanager。
+. Alertmanager 会统一将可发送通知的告警发送到 Notification Manager，再由 Notification Manager 根据配置发送通知到 Email、Slack 或 Wechat。

@@ -1,0 +1,78 @@
+// 生成配置
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+include::../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+include::../../../../_components/table_footer.adoc[]
+
+. 生成 common 配置。
++
+[source,shell]
+----
+installer product-config common -c /root/common.yaml
+----
++
+
+include::../../../../_components/note.adoc[]
+生成配置之前，可根据实际情况对相应的 yaml 文件进行多次修改后，执行该命令。
+include::../../../../_components/table_footer.adoc[]
+
+. 生成 NeonSAN 公共配置。
++
+[source,shell]
+----
+installer product-config neonsan -c /root/neonsan.yaml
+----
++
+
+include::../../../../_components/note.adoc[]
+生成配置之前，可根据实际情况对相应的 yaml 文件进行多次修改后，执行该命令。
+include::../../../../_components/table_footer.adoc[]
+
+. 生成 NeonSAN 主机相关配置。
++
+[source,shell]
+----
+installer product-config neonsan-settings -c /root/neonsan-settings.yaml
+----
++
+
+include::../../../../_components/note.adoc[]
+生成配置之前，可根据实际情况对相应的 yaml 文件进行多次修改后，执行该命令。
+include::../../../../_components/table_footer.adoc[]
+
+. 校验配置文件。
+
+.. 查看各角色的主机信息是否完善且符合预期。
++
+[source,shell]
+----
+cat /qingstor/install/deployment/environment/hosts
+----
+.. 查看以下目录中配置文件是否符合配置预期。
++
+[source,shell]
+----
+cd /qingstor/install/deployment/environment/group_vars/all/
+----
++
+[source,shell]
+----
+cd /qingstor/install/deployment/environment/group_vars/neonsan/
+----
++
+include::../../../../_components/note.adoc[]
+* all 目录下为公共配置。
+* neonsan 目录下为 NeonSAN 存储节点的配置。
+* 若配置有问题，可通过修改相应的 yaml 文件后，再次执行对应的生成配置命令进行矫正。
+* 若配置有问题，也可直接修改上述文件夹中已生成的配置文件，使之更加符合 NeonSAN 服务的部署要求。
+include::../../../../_components/table_footer.adoc[]
+
+

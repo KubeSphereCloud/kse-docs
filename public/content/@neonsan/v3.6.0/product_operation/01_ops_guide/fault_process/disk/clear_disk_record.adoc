@@ -1,0 +1,150 @@
+---
+title: "清理无效磁盘记录"
+weight: 1
+---
+
+经过换盘，磁盘下线又重新上线等操作后，集群中出现若干个状态为 ERROR 或 OFFLINE 的磁盘，其有可能能为无效的残留信息，可以手动对其进行清理。操作步骤如下。
+
+## NeonSAN v3.5.0 及之后版本
+
+. 查看集群中的磁盘信息，确认集群中是否存在无效记录。
++
+[,shell]
+----
+neonsan list_ssd
+----
+* 无效记录指状态不为 OK 的磁盘记录，并记录其磁盘的 UUID。
+* 若不存在无效记录，步骤到此结束。
+
+. 确认步骤 1 查询到的记录为无效记录。
+.. 查看该服务器上的磁盘列表。
++
+[,shell]
+----
+fdisk -l
+----
+.. 与 ``neonsan list_ssd`` 的结果比对，确认步骤 1 中的磁盘信息为无效记录。
+
+. 执行如下命令，删除集群中的无效磁盘记录。
++
+[,shell]
+----
+neonsan remove_ssd -ssd_uuid <ssd_uuid>
+----
++
+include::../../../../../../_components/note.adoc[]
+UUID 为步骤 1 查询到的无效磁盘记录，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 确认无效的磁盘记录已被清理。
++
+[,shell]
+----
+neonsan list_ssd
+----
+
+## NeonSAN v3.5.0 版本之前操作步骤
+
+. 查看集群中的磁盘信息，确认集群中是否存在无效记录。
++
+[,shell]
+----
+neonsan list_ssd
+----
+* 无效记录指状态不为 OK 的磁盘记录，并记录其磁盘的 UUID。
+* 若不存在无效记录，步骤到此结束。
+
+. 确认步骤 1 查询到的记录为无效记录。
+.. 查看该服务器上的磁盘列表。
++
+[,shell]
+----
+fdisk -l
+----
+.. 与 ``neonsan list_ssd`` 的结果比对，确认步骤 1 中的磁盘信息为无效记录。
+
+. 删除 ZooKeeper 中关于该磁盘的记录。
+
+.. 确认待删除 SSD 信息，目录需根据实际情况修改。
++
+[,shell]
+----
+# /opt/zookeepe/bin/zkCli.sh
+get /neonsan/cluster1/stores/5/ssds/36e0b141-344c-4426-9be2-06e75470b9cd
+----
+.. 删除相应 SSD 信息。
++
+[,shell]
+----
+rmr /neonsan/cluster1/stores/5/ssds/36e0b141-344c-4426-9be2-06e75470b9cd
+----
+.. 退出 ZooKeeper。
++
+[,shell]
+----
+quit
+----
+
+. 登录数据库，删除该条磁盘无效记录。
++
+* QingStor MySQL 数据库
++
+--
+登录数据库。
+
+[,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h neonsan-mysql0 -P 3306
+----
+删除磁盘记录。
+[,sql]
+----
+mysql > delete from ssd where uuid="xxxxx";
+----
+--
+
+* Galera 数据库
++
+--
+登录数据库。
+
+[,shell]
+----
+mysql -uneonsan -pzhu88jie
+----
+
+删除磁盘记录。
+[,sql]
+----
+mysql > delete from ssd where uuid="xxxxx";
+----
+--
+
+* Xenondb 数据库
++
+--
+登录数据库。
+
+[,shell]
+----
+mysql -uneonsan -pzhu88jie -hx.x.x.x
+----
+include::../../../../../../_components/note.adoc[]
+x.x.x.x 为 Xenondb 数据库虚 IP。
+include::../../../../../../_components/table_footer.adoc[]
+
+删除磁盘记录。
+[,sql]
+----
+mysql > delete from ssd where uuid="xxxxx";
+----
+--
+
+. 确认该条无效的磁盘记录已被清理。
++
+[,shell]
+----
+neonsan list_ssd
+----
+
+

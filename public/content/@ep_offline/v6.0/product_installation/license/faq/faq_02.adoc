@@ -1,0 +1,21 @@
+---
+title: "为什么注册了 PaaS License 后，仍然无法创建 PaaS 应用？"
+weight: 20
+---
+
+== 可能原因
+
+* PaaS License 授权中 ``vCPU 数量``不足。
+* 云平台上云服务相关配额不足。
+
+== 原因分析
+
+在云平台上创建 PaaS 应用集群时，会创建对应的节点（即云服务器），并根据配置消耗相应的云服务配额。
+所以在创建 PaaS 应用前，请保证有足够的 PaaS License 授权和足够的云服务配额。
+
+== 解决方法
+
+* 若 License 授权中 ``vCPU 数量``不足，请重新申请并注册 PaaS License。
+* 若云平台上云服务相关配额不足，请登录 BOSS 平台修改配额。
++
+image::/images/ep_offline/license/faq_02.png[]

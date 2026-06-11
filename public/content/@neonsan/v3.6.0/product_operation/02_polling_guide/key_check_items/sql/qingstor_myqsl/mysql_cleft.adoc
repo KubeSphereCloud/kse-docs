@@ -1,0 +1,105 @@
+---
+title: "检查 QingStor MySQL 是否发生脑裂"
+weight: 2
+---
+
+. 逐个登录数据库集群节点。
+. 执行如下命令查看集群状态。
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
++
+回显示例：
++
+[,shell]
+----
+cluster qingstor
+started nodes:
+	 172.16.0.2:3307
+	 172.16.0.3:3307
+	 172.16.0.4:3307
+live nodes:
+	 172.16.0.2:3307
+	 172.16.0.3:3307
+	 172.16.0.4:3307
+arbitors:
+----
++
+include::../../../../../../../_components/note.adoc[]
+* ``started nodes``：数据库集群中所有节点信息，包含 IP 与端口号。
+* ``live nodes``：集群存活的节点，在没有 arbitor 节点的情况下，live nodes 下的节点与 started nodes 下的节点应保持一一对应。
+* ``arbitors``：arbitor 节点，即仲裁节点。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 逐个登录 live nodes 中的集群节点，查看内容如下的日志。定位至日志最新内容，重点关注 ``wsrep_cluster_status`` 相关内容。
++
+[,shell]
+----
+tail /qingstor/log/mysqlmgr-neonsan.log
+----
++
+回显示例：
++
+[,shell]
+----
+... ...
+[2021-09-26 11:59:11] [info] wsrep_connected=on wsrep_ready=on wsrep_cluster_status=primary, clusterSize change 0->3
+[2021-09-26 11:59:11] [info] Running etcd keepalive thread
+[2021-09-26 11:59:11] [debug] put /mysql/neonsan/live/本地ip:3306
+[2021-09-26 11:59:11] [info] put /mysql/neonsan/live/本地ip:3306
+----
++
+回显说明：
++
+* 以步骤 2 的查询结果为例，该集群规模为 3。
+* ``wsrep_cluster_status``：集群目前状态，如上述内容所示，primary 表示该节点可接受读写请求。
+* ``clusterSize change``：集群规模变化，如上述内容所示，0->3 表示在该时刻本地节点加入数据库集群，且该集群总规模为 3。
+
+. 对比上一步中所查询的详细内容。
++
+* **以 3 节点集群为例，未发生脑裂现象的场景**
+** 场景一
++
+正常情况下，若所有集群节点均在线，并且日志查询结果中 ``clusterSize change`` 参数所示的集群规模均为 ``3``，则表示 MySQL 未发生脑裂。
+
+** 场景二
++
+若集群中某一节点掉线，则其他节点的日志中会出现如下内容。
++
+[,shell]
+----
+... ...
+[2021-11-05 16:47:04] [info] wsrep_connected=on wsrep_ready=on wsrep_cluster_status=primary, clusterSize change 3->2
+... ...
+----
++
+若剩余 2 节点中任一节点正常关闭，则此时唯一的数据节点的日志中会出现如下内容，此时 ``wsrep_cluster_status`` 为 ``primary`` 的节点仍可接受读写。
++
+[,shell]
+----
+... ...
+[2021-11-05 16:47:04] [info] wsrep_connected=on wsrep_ready=on wsrep_cluster_status=primary, clusterSize change 3->2
+... ...
+----
++
+若剩余 2 个节点中任一节点由于网络异常而断开链接，则所有节点的 ``wsrep_cluster_status`` 参数均为 ``non-primary`` 状态，即此时节点均不可接受读写请求。
++
+[,shell]
+----
+... ...
+[2021-11-05 16:47:15] [error] wsrep_connected=on wsrep_ready=off wsrep_cluster_status=non-primary, clusterSize change 2->1
+[2021-11-05 16:47:15] [info] revoke live node lease
+... ...
+----
+
+* **以 3 节点集群为例，发生脑裂现象的场景**
+** 场景一
++
+3 节点的集群中，若其中有两个节点的日志中 ``wsrep_cluster_status`` 为 ``primary`` 且 ``size`` 为 ``2``，第 3 个节点上 ``wsrep_cluster_status`` 参数也为 ``primary``，但 ``size`` 为 ``1``，则MySQL 集群可能出现脑裂。
+
+** 场景二
++
+3 节点的集群中，若 3 个节点的日志中 ``wsrep_cluster_status`` 参数均为 ``primary`` 且 ``size`` 均为 ``1``，则 MySQL 集群可能出现脑裂。
+

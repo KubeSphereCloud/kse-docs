@@ -1,0 +1,190 @@
+---
+title: "修改配置参数"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB PostgreSQL, 配置参数, 修改数据库参数"
+description: "介绍如何修改 RadonDB PostgreSQL 数据库配置参数。"
+weight: 10
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: b356bddba67540baa17cdda6c4934e28
+:ks_xref_id: 493045626d0c413285f50346cbd4943c
+:ks_comp: ../../../components/
+:ks_title: 修改配置参数
+:ks_keywords: Kubernetes, {ks_product}, RadonDB PostgreSQL, 配置参数, 修改数据库参数
+:ks_description: 介绍如何修改 RadonDB PostgreSQL 数据库配置参数。
+:ks_weight: 10
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+RadonDB PostgreSQL 应用支持配置参数管理功能，通过管理配置参数可调优数据库性能，并可启用数据库高可用性能。本小节主要介绍如何修改 RadonDB PostgreSQL 数据库配置参数。
+
+
+== 参数简介link:[id=75f6de0fe53148dc9de28413d56724b1]
+
+[%header,cols="1,5"]
+|===
+|参数 |说明
+
+|内核
+|数据库内核版本。应用安装成功后，不支持修改。
+
+|port
+|PostgreSQL 服务器监听的端口号。取值范围为 1~65534，参数值不能为 55555。
+
+|fsync
+|是否设置 PostgreSQL 服务器尽可能确保更新被物理写入磁盘。默认值为 **true**。
+
+|full_page_writes
+|是否设置 PostgreSQL 服务器在每个检查点后第一次修改时将每个磁盘页面的全部内容写入 WAL。
+
+|wal_compression
+|表示流式复制并发连接的最大数量是否设置 PostgreSQL 服务器在基础备份过程中或在 full_page_writes 启用时压缩写入到 WAL 的完整页面。
+
+|jit	
+|JIT 编译可用时，是否允许 PostgreSQL 使用 JIT 编译。
+
+|autovacuum
+|服务器是否运行自动清理启动器守护进程。
+
+|synchronous_commit
+|数据库服务器向客户端返回 success 指示之前所需要完成的 WAL 处理工作量。
+
+|wal_level
+|写入 WAL 的信息级别。
+
+|temp_buffers
+|每个数据库会话用作临时缓冲区的最大内存大小，单位为 MB。取值范围为 1~32768，默认值为 **1**。
+
+|work_mem
+|将数据写入临时磁盘文件之前查询操作所使用的内存上限，单位为 MB。取值范围为 1~1024。
+
+|maintenance_work_mem
+|用于 VACUM、CREATE INDEX、ALTER TABLE ADD FOREIGN KEY 等维护操作的最大内存空间，单位为 MB。取值范围为 64~1024。
+
+|shared_buffers
+|数据库服务器用作共享缓冲区的内存，单位为 MB。取值范围为 128~10240。
+
+|max_connections
+|并发连接的最大数量。取值范围为 100~262143。
+
+|max_worker_processes
+|并发工作进程的最大数量。取值范围为 10~65536。
+
+|wal_writer_delay
+|WAL 写入器的活动轮次之间的睡眠时间，单位为毫秒。取值范围为 1~10000。
+
+|wal_writer_flush_after
+|WAL 写入器写入 WAL 日志的数量阈值，单位为 MB。达到此参数值时将触发刷写。取值范围为 1~1024。
+
+|commit_delay
+|在提交事务和将 WAL 刷写到到磁盘之间的延迟，单位为微秒。取值范围为 0~100000，默认值为 **5**。
+
+|commit_siblings
+|执行 commit_delay 所需并发活动事务的最小数量。取值范围为 0~1000，默认值为 **10**。
+
+|bgwriter_delay
+|后台写入器的活动轮次之间的睡眠时间，单位为毫秒。取值范围为 10~10000，默认值为 **10**。
+
+|bgwriter_lru_maxpages
+|后台写入器每个轮次刷写的 LRU 页面的最大数量。取值范围为 0~1073741823，默认值为 **1000**。
+
+|bgwriter_flush_after
+|当后台写入器写入的数据量大于此参数值时（单位为 KB），尝试强制要求操作系统将写入的数据刷写到底层存储系统中。取值范围为 0~2048，默认值为 **512**。
+
+|statement_timeout
+|语句的最大持续时间，单位为微秒。花费时间超过此参数值的语句将被中止。取值范围为 0~2147483647，默认值为 **0**。
+
+|idle_in_transaction_session_timeout
+|在事务查询之间最大空闲时间，单位为微秒。空闲时间超过此参数值的会话将被终止。取值范围为 0~2147483647，默认值为 **86400000**。
+
+|log_min_duration_statement
+|触发日志记录的语句最短执行时间，单位为毫秒。取值范围为 -1~2147483647，默认值为 **10000**。
+
+|checkpoint_timeout
+|WAL 自动检查点之间的最大时间间隔，单位秒。取值范围为 30~86400，默认值为 **300**。
+
+|autovacuum_vacuum_cost_delay
+|autovacuum 操作的代价延迟值，单位为毫秒。取值范围为 -1~100，默认值为 **0**。
+
+|autovacuum_vacuum_cost_limit
+|autovacuum 操作的代价限制值。取值范围为 -1~10000，默认值为 **10000**。
+
+|autovacuum_vacuum_scale_factor
+|触发 autovacuum VACUUM 操作的表大小比例阈值。取值范围为 0.01~100，默认值为 **0.02**。
+
+|autovacuum_analyze_scale_factor
+|触发 autovacuum ANALYZE 操作的表大小比例阈值。取值范围为 0.01~100，默认值为 **0.05**。
+
+|vacuum_defer_cleanup_age
+|VACUUM 和 HOT cleanup 操作的延迟（以事务数量计）。取值范围为 0~1000000，默认值为 **10000**。
+
+|seq_page_cost
+|规划器对于一次顺序获取磁盘页面的代付估计。取值范围为 0~100000000，默认值为 **1**。
+
+|random_page_cost
+|规划器对于一次非顺序获取磁盘页面的代付估计。取值范围为 0~100000000，默认值为 **1.1**。
+
+|cpu_tuple_cost
+|规划器对一次查询中处理每一行的代价估计。取值范围为 0~100000000，默认值为 **0.01**。
+
+|cpu_index_tuple_cost
+|规划器对一次索引扫描中处理每一个索引项的代价估计。取值范围为 0~100000000，默认值为 **0.005**。
+
+|log_min_messages
+|写入到服务器日志的消息等级。
+
+|log_statement
+|需要记录的 SQL 语句的类型。
+
+|max_wal_senders
+|同时运行的 WAL 发送器进程的最大数量。取值范围为 10~262143，默认值为 **15**。
+
+|max_replication_slots
+|复制槽（replication slot）的最大数量。修改此参数值将导致数据库服务重启。取值范围为 10~262143，默认值为 **15**。
+|===
+
+
+== 修改配置参数link:[id=0320c00fb579483d8d0757e65ba15f1a]
+
+本小节主要介绍如何查看 RadonDB PostgreSQL 基本配置参数。
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+修改部分配置参数后，PostgreSQL 服务会重启，造成业务中断。请谨慎操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+
+=== 前提条件link:[id=c821d2e325f14d86a64ff89672dae229]
+
+* 请确保已获取{ks_product_both}平台登录用户帐号和密码，且已获取平台管理权限。
+
+* 请确保已创建 RadonDB PostgreSQL 应用。
+
+
+
+=== 操作步骤link:[id=edb5e03448ec4ffb89222ceb6b34d725]
+
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbPostgreSQL/radondbpq-oper-openDetailsPage.adoc[]
+
+
+. 点击页面右侧的**参数**页签，点击**编辑**即可修改应用配置参数。

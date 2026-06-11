@@ -1,0 +1,63 @@
+---
+title: "View Cluster Member List"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Cluster Settings, Cluster Members, View Cluster Member List"
+description: "Describes how to view the cluster member list."
+weight: 02
+---
+
+:ks_permission: **Member View**
+:ks_navigation: **Cluster Settings > Cluster Members**
+
+This section describes how to view the cluster member list.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+* The cluster member list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Username
+|The username of the cluster member.
+
+|Status
+|
+The current status of the cluster member.
+
+include::../../../../_custom/clusterManagement/clusterMembers/clusterMembers-para-userStatus.adoc[]
+
+|Role
+|The role of the cluster member within the cluster.
+
+* **cluster-admin**: Cluster administrator, has all permissions within the cluster except for creating and deleting the cluster.
+
+* **cluster-viewer**: Cluster viewer, has view permissions for all resources within the cluster.
+
+|Last Login
+|The time when the cluster member last logged into the KubeSphere web console.
+|===
+--
+
+* Click the search box above the list and enter a keyword to search for cluster members by name.
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

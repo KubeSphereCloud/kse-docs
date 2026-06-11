@@ -1,0 +1,290 @@
+---
+title: 获取通知列表（DescribeNotificationLists）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| false
+| 控制台
+
+| is_account_contacts
+| Integer
+| false
+| 是否账户联系人
+
+| limit
+| Integer
+| false
+| 查询数量
+
+| notification_lists
+| Array
+| false
+| 通知列表id
+
+| offset
+| Integer
+| false
+| 查询偏移量
+
+| owner
+| Array
+| false
+| 所属用户id
+
+| remarks
+| String
+| false
+| 备注
+
+| reverse
+| Integer
+| false
+| 是否倒序
+
+| root_user_id
+| String
+| false
+| 根用户id
+
+| search_word
+| String
+| false
+| 模糊查询
+
+| sort_key
+| String
+| false
+| 排序字段
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| is_account_contacts
+| Integer
+| false
+| 是否账户联系人
+
+| notification_list_id
+| String
+| false
+| 通知列表id
+
+| notification_list_set
+| Array
+| false
+| 通知列表集合
+
+| notification_list_set[].console_id
+| String
+| false
+| 控制台
+
+| notification_list_set[].create_time
+| String
+| false
+| 创建时间
+
+| notification_list_set[].email
+| String
+| false
+| 邮箱
+
+| notification_list_set[].is_mine
+| String
+| false
+| 资源是否所属当前用户
+
+| notification_list_set[].items
+| Array
+| false
+| 通知方式详情
+
+| notification_list_set[].items[].console_id
+| String
+| false
+| 控制台
+
+| notification_list_set[].items[].content
+| String
+| false
+| 联系方式
+
+| notification_list_set[].items[].create_time
+| String
+| false
+| 创建时间
+
+| notification_list_set[].items[].notification_item_id
+| String
+| false
+| 联系方式id
+
+| notification_list_set[].items[].notification_item_type
+| String
+| false
+| 联系方式类型
+
+| notification_list_set[].items[].owner
+| String
+| false
+| 所属用户id
+
+| notification_list_set[].items[].remarks
+| String
+| false
+| 备注
+
+| notification_list_set[].items[].root_user_id
+| String
+| false
+| 根用户id
+
+| notification_list_set[].items[].verification_code
+| String
+| false
+| 验证码
+
+| notification_list_set[].items[].verified
+| String
+| false
+| 是否已验证
+
+| notification_list_set[].items[].verify_time
+| String
+| false
+| 验证时间
+
+| notification_list_set[].notification_list_name
+| String
+| false
+| 接收人姓名
+
+| notification_list_set[].owner_info
+| String
+| false
+| 所属用户信息
+
+| notification_list_set[].remarks
+| String
+| false
+| 备注
+
+| notification_list_set[].root_user_id
+| String
+| false
+| 根用户id
+
+| notification_list_set[].user_id
+| String
+| false
+| 用户id
+
+| notification_list_set[].visibility
+| String
+| false
+| 是否可见
+
+| owner
+| String
+| false
+| 所属用户id
+
+| shared
+| String
+| false
+| 是否共享
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeNotificationLists",
+  "limit": 10,
+  "offset": 0,
+  "owner": "usr-xxxxxxxx",
+  "search_word": "",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeNotificationListsResponse",
+  "notification_list_set": [
+    {
+      "console_id": "testingcloud",
+      "create_time": "2022-03-21T08:24:26Z",
+      "is_account_contacts": 1,
+      "is_mine": "true",
+      "items": [
+        {
+          "console_id": "testingcloud",
+          "content": "all*****@yunify.com",
+          "create_time": "2022-03-21T16:24:25",
+          "notification_item_id": "ni-xxxxxxxx",
+          "notification_item_type": "email",
+          "owner": "usr-xxxxxxxx",
+          "remarks": "",
+          "root_user_id": "usr-xxxxxxxx",
+          "verification_code": "",
+          "verified": 1,
+          "verify_time": "2022-03-21T16:24:25"
+        },
+        {
+          "console_id": "testingcloud",
+          "content": "86-133****8888",
+          "create_time": "2022-03-21T16:24:25",
+          "notification_item_id": "ni-xxxxxxxx",
+          "notification_item_type": "phone",
+          "owner": "usr-xxxxxxxx",
+          "remarks": "",
+          "root_user_id": "usr-xxxxxxxx",
+          "verification_code": "",
+          "verified": 1,
+          "verify_time": "2022-03-21T16:24:25"
+        }
+      ],
+      "notification_list_id": "nl-xxxxxxxx",
+      "notification_list_name": "test",
+      "owner": "usr-xxxxxxxx",
+      "owner_info": {
+        "email": "all*****@yunify.com",
+        "user_id": "usr-xxxxxxxx"
+      },
+      "remarks": "",
+      "root_user_id": "usr-xxxxxxxx",
+      "shared": "false",
+      "visibility": "private"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

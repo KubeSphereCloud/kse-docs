@@ -1,0 +1,160 @@
+---
+title: "Canary Release Practice"
+keywords: "KubeSphere, Kubernetes, Bookinfo, Istio, Canary Release, Service Mesh"
+description: "Learn how to deploy a canary service in KubeSphere."
+weight: 07
+---
+
+In a canary release, you can introduce a new version of an application and send a small portion of traffic to it for testing. Meanwhile, the old version handles the rest of the traffic. If everything goes well, you can gradually increase the traffic sent to the new version while phasing out the old version. If any issues arise, you can adjust the traffic ratio and roll back to the previous version.
+
+This method efficiently tests service performance and reliability, helping to identify potential issues in a real-world environment without affecting the overall system stability.
+
+== Prerequisites
+
+* Prepare a project (e.g., **demo-project**) and a user (e.g., **project-regular**) invited to that project. This user should have the **operator** role in the project. For more information, refer to link:../03-control-user-permissions/[Control User Permissions].
+
+* The KubeSphere platform needs to have the **KubeSphere Service Mesh** and **KubeSphere Gateway** extensions installed and enabled.
+
+ifeval::["{file_output_type}" == "html"]
+* Enable the project gateway and enable the **Tracing** feature for the project gateway. For more information, refer to link:../../11-use-extensions/12-gateway/01-project-gateway/01-enable-a-project-gateway[Enable a Project Gateway].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+* Enable the project gateway and enable the **Tracing** feature for the project gateway. For more information, refer to the "Enable a Project Gateway" chapter in the *KubeSphere Extensions Usage Guide*.
+endif::[]
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+If you cannot access the Ingress after enabling tracing, add the annotation `nginx.ingress.kubernetes.io/service-upstream: true` to the Ingress.
+|===
+
+
+* A composed app has been created and **Application Governance** was enabled during its creation to facilitate a canary release for that app. The sample app used in this tutorial is Bookinfo. For more information, refer to link:../06-deploy-bookinfo/[Deploy and Access Bookinfo].
+
+== Steps
+
+=== 1. Create a Canary Release Task
+
+. Log in to the KubeSphere web console as user **project-regular**.
+
+. Click **Workspace Management** and enter the workspace where the project resides.
+
+. In the left navigation pane, select **Gray Release** > **Gray Release**.
+
+. On the **Release Mode** tab, select project **demo-project** from the drop-down list in the upper-left corner of the page, and click **Create** next to **Canary Release**.
+
+. Set a task name and click **Next**.
+
+. On the **Service Settings** tab, select your app and the service for which you want to implement the canary release from the drop-down lists. If you are also using the sample app Bookinfo, select **reviews** and click **Next**.
+
+. On the **New Version Settings** tab, set the new version number to `v2`, and modify the container image address for `reviews` (e.g., change `kubesphere/examples-bookinfo-reviews-v2:1.16.2`; change `v1` to `v2`), then click **Next**.
+
+. You can send traffic to the two versions (`v1` and `v2`) either by specifying a specific ratio or by using request content (e.g., `Http Header`, `Cookie`, and `URI`). Select **Specify Traffic Distribution**, and drag the middle slider to change the traffic ratio sent to each version (e.g., set it to 50% each). After completing the operation, click **Create**.
++
+This release task will also create a new deployment simultaneously. You can view the deployment corresponding to the new version on the **Application Workloads > Workloads** page.
+
+=== 2. Verify the Canary Release
+
+Now that you have two available application versions, access the application to verify the canary release.
+
+. link:../06-deploy-bookinfo//#_3_Access_Bookinfo_via_NodePort[Access the Bookinfo website] and repeatedly refresh the browser. You will see the **Book Reviews** section switching between the v1 and v2 versions at a 50% ratio, i.e., either not displaying or displaying ratings with 5 black stars.
+
+. After the canary release task is created, it will be displayed under the **Release Tasks** tab. Click the task to view its details.
+
+. You can see that each version receives half of the traffic.
+
+. Alternatively, you can execute the following command on the machine running KubeSphere to directly obtain the virtual service and identify the weights:
+
++
+--
+[source,bash]
+----
+kubectl -n demo-project get virtualservice -o yaml
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+- When executing the above command, replace `demo-project` with your own project name.
+- If you want to use the kubectl tool to execute commands in the KubeSphere web console, you need to log in with the `admin` account.
+|===
+
+Expected output:
+
+[source,bash]
+----
+   ...
+   spec:
+     hosts:
+     - reviews
+     http:
+     - route:
+       - destination:
+           host: reviews
+           port:
+             number: 9080
+           subset: v1
+         weight: 50
+       - destination:
+           host: reviews
+           port:
+             number: 9080
+           subset: v2
+         weight: 50
+    ...
+----
+--
+
+=== 3. View Network Topology
+
+. Execute the following command on the machine running KubeSphere to introduce real traffic, simulating access to Bookinfo every 0.5 seconds.
++
+--
+[source,bash]
+----
+watch -n 0.5 "curl http://productpage.demo-project.192.168.0.2.nip.io:32277/productpage?u=normal"
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Replace `demo-project`, `192.168.0.2`, and `32277` with the actual values for your own environment.
+|===
+--
+
+. On the **Composed Apps** page, click **Bookinfo** to enter its details page, then click the **Traffic Monitoring** tab. You can see the communication, dependencies, operational status, and performance between different services.
+
+. Click on an extension (e.g., **reviews**), and on the right side, you can see traffic monitoring information displaying real-time data for **Traffic**, **Success Rate**, and **Duration**.
+
+=== 4. View Tracing Details
+
+KubeSphere provides distributed tracing functionality based on link:https://www.jaegertracing.io/[Jaeger] for monitoring and troubleshooting microservices-based distributed applications.
+
+. On the **Tracing** tab, you can clearly see all phases of a request and internal calls, as well as the call duration for each phase.
+
+. Click on any entry to drill down and view detailed information about the request and where it was processed (on which machine or container).
+
+=== 5. Take Over All Traffic
+
+If everything runs smoothly, you can direct all traffic to the new version.
+
+. Return to the **Gray Release** page, and under the **Release Tasks** tab, click the canary release task.
+
+. In the dialog box that pops up, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of **reviews v2** and select **Take Over**. This means 100% of the traffic will be sent to the new version (v2).
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+If any issues arise with the new version, select the v1 version to take over, allowing you to roll back to the previous v1 version.
+|===
+
+. Access Bookinfo again and refresh the browser several times. You will find that the page only displays results from **reviews v2** (i.e., ratings with black stars).

@@ -1,0 +1,80 @@
+---
+title: "查看 Center 日志文件"
+weight: 3
+---
+
+. 逐个登录 NeonSAN Center 的每个节点。 
+
+. 输入如下命令，查看 Center 的异常日志。
++
+[,shell]
+----
+cat /var/log/neoncenter.log |grep ERRO 
+cat /var/log/neoncenter.log |grep WARN 
+cat /var/log/neoncenter.log |grep FATA 
+----
+
+. 若上一步有内容输出，说明服务有异常，需要输入如下命令，查看 Center 的完整日志。
++
+[,shell]
+----
+vi /var/log/neoncenter.log 
+----
+
+. 部分错误日志关键字解释及建议，其他未列出错误可联系 NeonSAN 产研团队进行排查。
++
+[options="header",cols="1,1,3"]
+|===
+|关键字 | 含义 |建议
+|QfaScNodeLost store 
+|节点间连接失败 
+a|. 查看存储节点间的网络连接通信和存储节点与主 center 所在节点 的网络连接通信。
+. 检查业务负载压力。 
+. 若网络通信无异常且负载压力不 大出现以上报错，需提交工单，联系 NeonSAN 产研团队进行处理。
+
+|QfaScAioTimeout 
+|磁盘 io 超时 
+a|. 检查是否混插节点，若是，参考“link:../../key_check_items/cache_check[本手册：检查缓存盘]”相关内容。若不是，执行下一步。 
+. 检查 store.conf 配置文件中 全闪和混插超时参数设置是否正确，由 ssd_io_timeout 配置项决定，全闪环境中默认是 3 秒，混插环境是 60 或 65 秒。若超时参数设置不正确，需联系 NeonSAN 产研团队进行处理。 
+. 检查 data_port 到存储节点的 业务网络网络通信和业务负载，若业务负载过大，联系 NeonSAN 产研团队进行处理。
+
+|handleNotPirmary 
+|非主 replica 收到写请求 
+|非主副本收到写请求 center 会将原主副本状态改为 ERROR，然后自动进行主从副本切换，日志有此关键字只需要关注集群内是否有降级卷，若有，开启自动恢复功能或手 动进行卷恢复。
+
+|prepare fail 
+|客户端挂载卷失败 
+a|. 若日志有 ``Failed prepare_volume, SSD:<ssd_uuid> not available`` 说明 SSD 不存在所以挂载失败。需要检查磁盘是否被拔出或 offline。若磁盘 offline， 则重启相应节点的 neonstore 服 务，进行上线。若磁盘被拔出需要将磁盘重新插回插槽后，重新挂载卷。
+. 其他情况，请联系 NeonSAN 产 研团队进行处理。
+
+|OFFLINE 
+|存储节点或者磁盘离线 
+a|. 检查节点是否正在执行 evict_store，若是无需处理。 
+. 检查节点是否处于维护模式，若 是，等待相应的运维操作结束后， 执行 quit_maintenance 退出维护模式。
+
+|Lock wait timeout exceeded; try restarting transaction 
+|数据库访问获取锁超时 
+|建议检查 MySQL 数据库集群状态 和 MySQL 节点空间使用率
+
+|Read error 
+|网络读写出现超时 
+|建议检查当前 Center 节点到目 标节点的网络连通性和质量 
+
+|FATA Center 
+|致命错误退出 
+|建议联系 NeonSAN 产研团队介入排查 
+
+|connection reset by peer 
+|Center 与 MySQl 或 Store 的链接被重置 
+|建议检查网络连通性和质量 
+
+|Deny host.*?to access volume 
+|客户端访问被 NeonSAN ACL 规则拒绝 
+|执行 ``neonsan list_acl`` 检查不必要的 ACL 规则并删除 
+
+|DB ping failed 
+|Center 与数据库间连接测试失败 
+|建议检查 Center 版本是否为早期 v3.5.1 版本，检查数据库会话超时设置是否过低，数据库连接数是否过大或者网络连通性。
+|===
+
+

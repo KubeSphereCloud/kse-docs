@@ -1,0 +1,95 @@
+---
+title: "激活许可证"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 激活, 许可证, 激活码"
+description: "介绍如何使用{ks_product_both}Web 控制台激活许可证。"
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e29bea6fa70f445889d0e4036b13a896
+:ks_xref_id: b51f3f2b04404bcf885738a430b747ca
+:ks_comp: ../../../components/
+:ks_title: 激活许可证
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台激活许可证。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 激活, 许可证, 激活码
+:ks_weight: 04
+:ks_logo: 
+:ks_download_url: 
+
+
+{ks_product_abbr_full_right}目前提供以下许可证类型：
+
+* 个人免费版许可证：{ks_product_right}安装后处于未激活状态，许可证默认为试用版许可证。允许用户最多部署 3 个节点、最多创建 9 台虚拟机。个人免费版许可证不限制有效期。
+
+* 开发者版许可证：{ks_product_right}开发者版许可证允许用户部署多达 10 个节点和 90 台虚拟机。除根据您的实际购买情况限定资源管理规模和有效期外，开发者版许可证提供{ks_product_both}的全部功能。
+
+* 企业版许可证：{ks_product_right}企业版许可证允许用户创建任意数量的节点和虚拟机，并提供{ks_product_both}的全部功能和相关技术支持。
+
+本节介绍如何激活{ks_product_both}许可证。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=bf7c3b939c9c47a5b3f5690416b1d038]
+
+仅用户 **admin** 有权限激活{ks_product_left}。请确保您以用户 **admin** 登录{ks_product_both}Web 控制台。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 获取集群 IDlink:[id=5cf4ce5b3b454f34a138951b1dd5dc5e]
+
+. 登录{ks_product_both}Web 控制台。
+
+. 在页面右上角点击 image:/images/ksv/zh/icons/cogwheel.svg[18px,18px]，然后点击**激活**。
+
+. 在**激活**对话框，点击**集群 ID** 右侧的**复制**获取集群 ID。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+如果您采用的是线上订购策略，请将获取到的集群 ID 填写至线上购买页面的**集群 ID** 字段。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 激活许可证link:[id=1453637858214345ad2eabe28ee32570]
+
+{ks_product_right}购买完成后会生成激活码。您可以执行如下操作使用激活码激活{ks_product_both}许可证：
+
+. 在**激活**对话框的**激活码**区域，输入激活码，然后点击**提交**可对{ks_product_both}进行激活。
++
+--
+激活成功后，**激活**对话框中将显示当前许可证的相关信息。
+
+// 下表介绍{ks_product_both}许可证的相关参数：
+
+// [cols='1a,3a']
+// |===
+// |参数 |描述
+
+// |集群 ID
+// |许可证对应的集群的 ID。每个{ks_product_both}激活码都与特定的集群绑定，如果激活码与集群 ID 不匹配则{ks_product_both}无法激活成功。
+
+// |授权用户
+// |许可证授予的用户的名称。
+
+
+// |CPU 数量上限
+// |许可证允许虚拟化的 CPU 数量。根据您的实际购买情况，每个商业版许可证都支持对特定数量的 CPU 进行虚拟化。
+
+// |签发时间
+// |许可证的签发时间。许可证的有效期从许可证的签发时间而非{ks_product_both}的激活时间开始计算。许可证到期后，无论许可证是否已经用于激活{ks_product_left}，许可证都将失效。
+
+// |到期时间
+// |许可证的到期时间。商业版许可证到期后将自动转变为试用版许可证。
+// |===
+--
+
+. 点击**关闭**完成激活。

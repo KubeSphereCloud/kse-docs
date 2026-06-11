@@ -1,0 +1,73 @@
+---
+title: "View Pod IP Pool List"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Network, Pod IP Pool, View Pod IP Pool List"
+description: "Describes how to view the Pod IP pool list."
+weight: 02
+---
+
+:ks_permission: **Cluster Network Resource View**
+:ks_navigation: **Network > Pod IP Pools**
+
+This section describes how to view the Pod IP pool list.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere Network** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+* The Pod IP pool list provides the following information:
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the Pod IP pool.
+
+|Status
+|The status of the Pod IP pool.
+
+|CIDR
+|The CIDR block contained in the Pod IP pool.
+
+|Used IP Addresses
+|The number of used IP addresses and the total number of IP addresses in the Pod IP pool.
+
+|IP Pool Block Size
+|The CIDR size of the block used by the IP pool for IP allocation.
+
+|Overlay Mode
+|The communication mode between pods. Supports IPIP mode and VXLAN mode. If not set, BGP mode is used.
+
+|NAT Outgoing
+|Whether cross-pool communication via NAT is allowed.
+|===
++
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+The Pod IP pool **default-ipv4-ippool** is automatically created after KubeSphere installation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
++
+* Click the search box above the list and set search criteria to search for Pod IP pools by name and status.
++
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
++
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]

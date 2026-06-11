@@ -1,0 +1,74 @@
+---
+title: "扩展卷"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Redis Cluster, 扩展卷"
+description: "介绍如何扩展挂载到数据库节点的卷。"
+weight: 08
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 6bc32609aa5a436c9598e14fd669afc8
+:ks_xref_id: f066d586777c4d8b92ddb8846a048e3a
+:ks_comp: ../../../components/
+:ks_title: 扩展卷
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB Redis Cluster, 扩展卷
+:ks_description: 介绍如何扩展挂载到数据库节点的卷。
+:ks_weight: 08
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何扩展挂载到数据库节点的卷。
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* 目前不支持对使用{ks_product_both}集群本地存储创建的卷（local）进行扩展。
+
+* 目前仅支持增加卷容量，不支持减少卷容量。
+
+* 此操作可能会中断数据库服务，请在非高峰时段执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=ce89a35f2417449c81cdf76338315907]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-prer-installRadondbRedisCluster.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=6097d5a30c4047b19655c6999f165567]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 扩展卷**。
+
+. 在**扩展卷**对话框，选择节点角色，设置卷的容量，然后点击**确定**。

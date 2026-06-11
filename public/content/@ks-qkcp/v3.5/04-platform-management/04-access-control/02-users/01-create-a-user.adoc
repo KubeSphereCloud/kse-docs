@@ -1,0 +1,74 @@
+---
+title: "创建用户"
+keywords: "Kubernetes, {ks_product}, 访问控制, 用户, 创建用户"
+description: "介绍如何创建用户。"
+weight: 01
+---
+
+// :ks_include_id: 362d78fc1d3d4f4981475b0da0c60092
+:ks_xref_id: 4a9cf2be8e8a4148ae1eac5fa277bf88
+:ks_comp: ../../../../components/
+:ks_title: 创建用户
+:ks_keywords: Kubernetes, {ks_product}, 访问控制, 用户, 创建用户
+:ks_description: 介绍如何创建用户。
+:ks_weight: 01
+:ks_icon:
+:ks_menu: **平台管理 > 访问控制**
+:ks_navigation: **用户**
+:ks_permission: **用户管理**
+
+
+本节介绍如何创建用户。
+
+
+== 前提条件link:[id=262bf3621c124ac4add80dfd17741a43]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=a3757a8976424ba683d7aa985aa26d62]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. 在**创建用户**对话框，设置用户的信息，然后点击**确定**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|用户名
+|用户的名称。用户名只能包含小写字母、数字、连字符（-）和句点（.），必须以小写字母或数字开头及结尾，最长 32 个字符。
+
+include::../../../../_custom/platformManagement/accessControl/users/users-para-email.adoc[]
+
+include::../../../../_custom/platformManagement/accessControl/users/users-para-platformRole.adoc[]
+
+|密码
+|用户的密码。密码必须包含数字、大写字母和小写字母，长度为 8 至 64 个字符。
+
+include::../../../../_custom/platformManagement/accessControl/users/users-para-description.adoc[]
+|===
+
+用户创建完成后将显示在用户列表中。
+--

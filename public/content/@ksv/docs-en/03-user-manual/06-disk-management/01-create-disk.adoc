@@ -1,0 +1,66 @@
+---
+title: "Create a disk"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, disks, creation"
+description: "Describes how to create a disk in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 528b5ebc87f4446aa1c30c4936ca5df2
+:ks_xref_id: a2f7007d2c734b64a84b9da3ed6f43df
+:ks_comp: ../../../components/
+:ks_title: Create a disk
+:ks_description: Describes how to create a disk in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, disks, creation
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to create a disk in the {ks_product_abbr_full} web console. Disks can be mounted to VMs for data storage.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=01620f00c8574b63b3e0408944201191]
+
+User **admin** can create disks in all projects of your cluster. Common users such as project administrators and operators can create disks in the projects to which they belong.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=16daa4c2a5124754b92a255ba94a5573]
+
+include::../../../_custom-en/disks/disk-steps.adoc[]
+
+. On the **Disks** page, click **Create** in the upper-right corner.
+. In the dialog box that appears, configure parameters for the disk.
++
+--
+[cols="1a,3a"]
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the disk.
+
+include::../../../_custom-en/vms/vm-naming-convention.adoc[]
+
+|Project
+|The project in which the disk is created.
+
+|Size
+|Th size of the disk.
+
+|Quantity
+|The number of disks that you want to create. You can create up to 50 disks at a time.
+
+|Description
+|The description of the disk.
+
+include::../../../_custom-en/networks/description-convention.adoc[]
+|===
+--
+. Click **Create**. The disk appears in the disk list after it is created.

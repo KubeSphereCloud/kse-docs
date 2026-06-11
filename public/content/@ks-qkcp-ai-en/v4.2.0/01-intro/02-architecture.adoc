@@ -1,0 +1,105 @@
+---
+title: "Product Architecture"
+description: "Introduces the KubeSphere LuBan architecture and extensions."
+weight: 02
+---
+
+KubeSphere LuBan is a distributed, cloud-native, extensible, and open architecture that provides a hot-pluggable microkernel for extensions. The core part (KubeSphere Core) only contains the essential basic functions required for system operation, while independent business modules are encapsulated in various extensions. Users can dynamically install, uninstall, enable, and disable extensions while the system is running.
+
+== KubeSphere LuBan Architecture
+
+The KubeSphere LuBan architecture design is shown in the following diagram.
+
+image:/images/ks-qkcp/en/v4.0/4.0-architecture.png[architecture,80%]
+
+== Why KubeSphere LuBan Was Introduced
+
+Since 2018, the KubeSphere hybrid multi-cloud container management platform has released over a dozen versions, including three major releases. To meet user demands, KubeSphere has integrated numerous enterprise-grade features, such as multi-tenant management, multi-cluster management, DevOps, GitOps, service mesh, microservices, observability (including monitoring, alerting, logging, auditing, events, notifications, etc.), App Store, edge computing, network and storage management, and more.
+
+Although KubeSphere's all-in-one container solution greatly enhances the user experience with containers, it also presents the following challenges:
+
+**Long Release Cycles**
+
+When releasing a new version, it is necessary to wait for all components to complete development, testing, and pass integration testing.
+
+**Slow Response to User Feedback**
+
+Since components cannot be iterated independently, after a KubeSphere release, processing feedback from the community and users requires waiting for a new KubeSphere version to be released before it can be delivered to users together, resulting in insufficiently timely responses.
+
+**Code Coupling**
+
+Although it was previously possible to individually enable/disable specific components, the front-end and back-end code of these components were still coupled together, making them prone to mutual interference and architecturally inelegant.
+
+**Excessive System Resource Consumption**
+
+Some components are enabled by default, which may consume excessive system resources for users without related requirements.
+
+== Advantages of KubeSphere LuBan
+
+**Plugin-based Core Framework**
+
+Supports independent development and deployment of components to extend system functionality. Components can be added, upgraded, or removed based on requirements without modifying the core framework's code.
+
+**Fully Open Basic UI Component Library**
+
+Components are open to everyone; anyone can freely access, use, and extend these components. Users can customize and extend them according to their own needs to meet different design and functional requirements.
+
+**Hot Updates and Hot Fixes for Front-end and Back-end**
+
+Developers can perform real-time updates and fixes to the front-end and back-end while the system is running, improving development and operational efficiency while ensuring application availability and user experience.
+
+**Open Extensions Center, Ecosystem Co-creation**
+
+We provide an open platform, encouraging third-party developers to add new features or enhance existing ones through extensions, develop and integrate within the system's framework, and seamlessly connect their extensions with the system to jointly build a healthy and prosperous ecosystem.
+
+== How KubeSphere LuBan Can Help You
+
+The KubeSphere LuBan architecture can benefit the following individuals:
+
+**KubeSphere Users**
+
+KubeSphere users can freely choose which KubeSphere extensions to enable. They can also seamlessly integrate their own applications into the KubeSphere web console. Furthermore, as the KubeSphere extension ecosystem enriches, users can freely choose a wider variety of products and services in the KubeSphere Marketplace, ultimately achieving a personalized container management platform experience.
+
+**KubeSphere Maintainers**
+
+The extension mechanism allows maintainers to focus more on developing KubeSphere's core features, making KubeSphere Core more lightweight, and potentially accelerating the release cycle. Additionally, because extensions can be iterated independently, they can meet user needs more promptly.
+
+**KubeSphere Contributors**
+
+The introduction of the extension mechanism makes KubeSphere Core and other KubeSphere extensions more loosely coupled, and development becomes easier to get started with.
+
+**Cloud-Native Application Developers (ISVs) or Other Open-Source Projects**
+
+Numerous ISVs or other open-source projects can seamlessly integrate their products or open-source projects into the KubeSphere ecosystem at a low cost. For example, Karmada/KubeEdge developers can develop independent Karmada/KubeEdge consoles based on KubeSphere LuBan.
+
+== What is a KubeSphere Extension?
+
+A KubeSphere extension is a Helm Chart that can extend KubeSphere functionality, is orchestrated using Helm, and adheres to the KubeSphere extension development specifications.
+
+As a developer in the cloud-native field, you no longer need to spend a lot of time learning a proprietary application orchestration method.
+
+Visit link:https://kubesphere.com.cn/extensions/marketplace/[KubeSphere Marketplace] to view and install published extensions.
+
+== What Can KubeSphere Extensions Do?
+
+From the front-end UI to the back-end API, almost every part of KubeSphere can be customized and enhanced through the extension API. Many of KubeSphere's core features are also built as extensions using the same extension API.
+
+Here are some examples of what can be achieved using the extension API:
+
+. Inject new menus and functional pages into the project's left navigation pane, supporting the management of more types of resources.
+. Inject functional entry points into the platform-level menu to enhance platform management capabilities.
+. Directly embed existing third-party functional component pages into KubeSphere to aggregate disparate systems.
+. Override existing page routes in KubeSphere to implement your unique business logic.
+. Extend KubeSphere's APIs.
+
+If you want a more comprehensive understanding of the extension API, please refer to link:https://dev-guide.kubesphere.io/extension-dev-guide/en/feature-customization/[Extension Capabilities].
+
+== How to Build an Extension?
+
+Please refer to the link:https://dev-guide.kubesphere.io/extension-dev-guide/en/best-practice/develop-example/[Development Examples] chapter to familiarize yourself with how to build an extension.
+
+If you have questions during the development of an extension, please try to get help via link:https://github.com/kubesphere/kubesphere/issues/new/choose[GitHub Issue].
+
+== How to Publish an Extension?
+
+Please refer to link:https://dev-guide.kubesphere.io/extension-dev-guide/en/packaging-and-release/release/[Publishing Extensions] to learn how to submit an extension to the KubeSphere Marketplace.

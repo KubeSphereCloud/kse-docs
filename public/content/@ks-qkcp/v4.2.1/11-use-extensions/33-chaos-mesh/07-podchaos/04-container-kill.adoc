@@ -1,0 +1,37 @@
+---
+title: "终止容器"
+weight: 04
+---
+
+本节介绍如何终止 Pod 中的指定容器。
+
+故障注入时，目标 Pod 中指定的容器将被强制停止，Pod 随即触发重启流程。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *PodChaos*，配置以下参数后点击 *创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|故障类型（action）
+|选择 `container-kill`，终止指定容器。
+
+|容器名称（containerNames）
+|需要终止的容器名称，例如 `nginx`。
+
+|生效范围（selector）
+|选择故障注入的目标命名空间和 Pod。
+|===
+
+
+验证故障效果：
+
+[source,shell]
+----
+kubectl get pod -n default
+----
+
+
+   故障注入后，`nginx-pod` 的重启次数将增加。

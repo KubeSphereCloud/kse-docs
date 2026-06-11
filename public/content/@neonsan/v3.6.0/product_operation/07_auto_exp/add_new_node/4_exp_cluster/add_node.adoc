@@ -1,0 +1,62 @@
+---
+title: "添加新增节点至目标存储池"
+weight: 6
+---
+
+
+. 将新增节点从临时存储池中移除。
++
+[,shell]
+----
+neonsan delete_rg_node -rg <test_rg_nam> -store_id <Store_ID>
+----
++
+参数说明：
++
+* ``-rg`` 用于指定名称形如 ``testXXX`` 的临时存储池名。
+* ``-store_id`` 用于指定待从临时存储池中移除的存储节点 ID。
+
+. 将新增的节点添加至目标存储池中。
++
+* 情况一：添加至集群中原有存储池。
++
+--
+[,shell]
+----
+neonsan add_rg_node -rg <target_rg_name> -store_id <Store_ID1>
+----
+
+参数说明：
+
+* ``-rg`` 用于指定预期规划的目标存储池，需集群内已存在的存储池。若是用 QinStor Installer v3.0.0 及以上版本，则此处执行配置新增节点中，``scale_neonsan-settings.yaml`` 文件中的配置的 ``target_rg_name``参数。
+* ``-store_id`` 用于指定待添加至当前存储池的存储节点 ID。
+--
+
+* 情况二：将节点添加至新存储池。
++
+--
+创建新存储池。
+
+[,shell]
+----
+neonsan create_rg -rg <target_rg_name>
+----
+
+include::../../../../../../_components/note.adoc[]
+``-rg`` 用于指定存储池名，需为集群中不存在的存储池。若是用 QinStor Installer v3.0.0 及以上版本，则此处执行配置新增节点中，``scale_neonsan-settings.yaml`` 文件中的配置的 ``target_rg_name``参数。
+include::../../../../../../_components/table_footer.adoc[]
+
+将节点添加至新的存储池中。
+
+[,shell]
+----
+neonsan add_rg_node -rg <target_rg_name> -store_id <Store_ID1>
+----
+
+参数说明：
+
+* ``-rg`` 用于指定新创建的存储池名。
+* ``-store_id`` 用于指定待添加至当前存储池的存储节点 ID。
+--
+
+

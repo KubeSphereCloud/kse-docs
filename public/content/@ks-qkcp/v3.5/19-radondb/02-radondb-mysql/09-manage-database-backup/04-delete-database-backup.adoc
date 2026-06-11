@@ -1,0 +1,67 @@
+---
+title: "删除 RadonDB MySQL 数据库备份"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 删除"
+description: "介绍如何删除 RadonDB MySQL 数据库备份。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 350e690351df4789adebe36445047796
+:ks_xref_id: 0f2a135a96c347328f9a09ebf151f790
+:ks_comp: ../../../../components/
+// :ks_include_id: 
+:ks_xref_id: 
+:ks_title: 删除 RadonDB MySQL 数据库备份
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 删除
+:ks_description: 介绍如何删除 RadonDB MySQL 数据库备份。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何删除 RadonDB MySQL 数据库备份。
+
+
+== 前提条件link:[id=f266607c162c481bb7a4e27c4300c5f5]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-installRadondbmysql.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-databaseStatusRunning.adoc[]
+
+* 您已经创建了备份。
+
+
+== 操作步骤link:[id=91d2e0aac2044d58a1475866c9f4e68b]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面右侧点击**备份**页签，找到目标备份，点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，选择**删除**。
+
+. 在弹出的**删除备份**对话框，输入备份名称，点击**确定**。

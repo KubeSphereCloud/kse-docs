@@ -1,0 +1,83 @@
+---
+title: "View Volume Snapshot Class Details"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Volume Snapshot Class, View Volume Snapshot Class Details"
+description: "Describes how to view volume snapshot class details."
+weight: 03
+---
+
+:ks_permission: **Volume Snapshot Class View**
+:ks_navigation: **Storage > Volume Snapshot Classes**
+
+
+This section describes how to view volume snapshot class details.
+
+
+== Prerequisites
+
+
+* The **KubeSphere Storage** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. In the volume snapshot class list, click the name of a volume snapshot class to open its details page.
+
+. On the volume snapshot class details page, view the resource attributes of the volume snapshot class in the **Attributes** area.
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Provisioner
+|
+The storage plugin corresponding to the volume snapshot class.
+
+|Deletion Policy
+|
+include::../../../../_custom/clusterManagement/volumeSnapshotContents/volumeSnapshotContents-para-deletionPolicy.adoc[]
+
+|Creation Time
+|The creation time of the volume snapshot class.
+|===
+--
+
+. On the volume snapshot class details page, view the volume snapshots created using this volume snapshot class in the **Volume Snapshots** area.
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the volume snapshot.
+
+|Status
+|
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-para-volumeSnapshotStatus_v4.adoc[]
+
+|Capacity
+|
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-para-capacity.adoc[]
+
+|Creation Time
+|The creation time of the volume snapshot.
+|===
+--

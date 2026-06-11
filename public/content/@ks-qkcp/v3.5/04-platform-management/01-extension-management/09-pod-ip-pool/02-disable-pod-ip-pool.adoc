@@ -1,0 +1,65 @@
+---
+title: "禁用容器组 IP 池"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, 容器组 IP 池, 禁用容器组 IP 池"
+description: "介绍如何禁用容器组 IP 池扩展组件。"
+weight: 02
+---
+
+// :ks_include_id: 0407b2f3b24b4236b112e9a02da5221a
+:ks_xref_id: 2f5d5fe7c0374dcfa81edfb067dc9cf8
+:ks_comp: ../../../../components/
+:ks_title: 禁用容器组 IP 池
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, 容器组 IP 池, 禁用容器组 IP 池
+:ks_description: 介绍如何禁用容器组 IP 池扩展组件。
+:ks_weight: 02
+:ks_icon:
+
+
+本节介绍如何禁用容器组 IP 池扩展组件。
+
+
+== 前提条件link:[id=deb09b1c0bad44de9b2c9daabfac5f62]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=51c5a3edbec646cebf254488177a24f2]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:network:ippool:type** 参数设置为 **none**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  network:
+    ippool:
+      type: none
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

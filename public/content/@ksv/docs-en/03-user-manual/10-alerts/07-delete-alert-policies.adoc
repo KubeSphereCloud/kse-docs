@@ -1,0 +1,69 @@
+---
+title: "Delete alert policies"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, alert policies, deletion"
+description: "Describes how to delete alert policies in the {ks_product} web console."
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 6f3c24c851eb499b80debd245dddea4a
+:ks_xref_id: 28b8314557f2413eb3761a0ec0d43d20
+:ks_comp: ../../../components/
+:ks_title: Delete alert policies
+:ks_description: Describes how to delete alert policies in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, alert policies, deletion
+:ks_weight: 07
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete alert policies in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=05c6ddd871b24ee5b60a56e5541926a2]
+
+User **admin** can delete all alert policies in your cluster. Project administrators and operators can delete the alert policies created on their own, and project viewers cannot delete alert policies.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete an alert policylink:[id=43d6223d48e3496c8ce7a5d846a365d3]
+
+include::../../../_custom-en/alerts/alert-steps.adoc[]
+
+. On the **Alert Policies** tab, find the alert policy that you want to delete, click image:/images/ksv/en/icons/more.svg[operation-menu,13], and then select **Delete** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+The alert policy cannot be restored after it is deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple alert policies at a timelink:[id=9f60f396d3ec45d0ad180ac640e11bf5]
+
+include::../../../_custom-en/alerts/alert-steps.adoc[]
+
+. On the **Alert Policies** tab, select the checkboxes next to the policies that you want to delete and click **Delete** in the upper-left corner.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+Alert policies cannot be restored after they are deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

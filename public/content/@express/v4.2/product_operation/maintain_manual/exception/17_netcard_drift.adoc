@@ -1,0 +1,51 @@
+---
+title: "防止网卡漂移"
+weight: 17
+---
+
+== 运维场景
+
+有些物理服务器不能固定 mac 和 ethx 的对应关系，可直接使用原生网卡名，用于防止网卡漂移的问题出现。
+
+== 操作步骤
+
+. 登录指定物理服务器。
+
+. 修改 ``/etc/default/grub`` 文件。将 ``GRUB_CMDLINE_LINUX_DEFAULT="net.ifnames=0 biosdevname=0 quiet"`` 改为 ``GRUB_CMDLINE_LINUX_DEFAULT="quiet"``。
++
+[source,shell]
+----
+vi /etc/default/grub
+----
++
+image::/images/express/maintain/netcard_drift_1.png[]
+
+. 删除配置文件 ``70-persistent-net.rules``。
++
+[source,shell]
+----
+rm /etc/udev/rules.d/70-persistent-net.rules
+----
+
+. 重启物理服务器。
++
+[source,shell]
+----
+reboot
+----
+
+. 手动修改网卡名。
++
+[source,shell]
+----
+vi /etc/network/interfaces
+----
+
+. 重启物理服务器。
++
+[source,shell]
+----
+reboot
+----
+
+

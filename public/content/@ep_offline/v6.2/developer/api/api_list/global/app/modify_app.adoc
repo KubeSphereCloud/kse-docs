@@ -1,0 +1,129 @@
+---
+title: 修改应用信息（未上架或已上架）（ModifyApp）
+weight: 19
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| abstraction
+| String
+| false
+| 概述
+
+| app
+| String
+| true
+| 应用ID
+
+| app_name
+| String
+| false
+| 应用名称
+
+| category
+| String
+| false
+| 分类
+
+| company_url
+| String
+| false
+| 公司网址
+
+| cover_img
+| String
+| false
+| 封面图片
+
+| description
+| String
+| true
+| 描述
+
+| icon
+| String
+| false
+| 图标
+
+| screenshots
+| Array
+| false
+| 截图
+
+| sla_period
+| Integer
+| false
+| 交付周期（license）
+
+| spec
+| String
+| false
+| 定价信息（license）
+
+| sub-category
+| String
+| false
+| 子类
+
+| terms-of-service
+| String
+| false
+| 服务条款
+
+| usage_instructions
+| String
+| false
+| 使用说明
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| ret_code
+| Int
+| false
+| 响应码
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app": "app-xxxxxx",
+  "app_name": "测试应用",
+  "category": "database",
+  "company_url": "https://www.qingcloud.com",
+  "cover_img": "",
+  "description": "这是一个测试应用",
+  "icon": "ca-xxxxxx",
+  "screenshots": [
+    "ca-xxxxxx"
+  ],
+  "sub-category": "",
+  "terms-of-service": "https://www.qingcloud.com/terms#mongodb-terms",
+  "usage_instructions": "https://docsv4.qingcloud.com/user_guide/database/mongodb/"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyAppResponse",
+  "ret_code": 0
+}
+----

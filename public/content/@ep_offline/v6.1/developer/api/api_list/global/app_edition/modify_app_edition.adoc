@@ -1,0 +1,70 @@
+---
+title: 修改应用系列（ModifyAppEdition）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| description
+| String
+| false
+| 系列描述
+
+| edition_id
+| String
+| true
+| 应用系列ID
+
+| is_default
+| Integer
+| false
+| 是否默认
+
+| name
+| String
+| false
+| 系列名称
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| edition_id
+| String
+| false
+| 系列ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "description": "基础版",
+  "edition_id": "appe-xxxxxx",
+  "name": "基础版"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyAppEditionResponse",
+  "edition_id": "appe-xxxxxx",
+  "ret_code": 0
+}
+----

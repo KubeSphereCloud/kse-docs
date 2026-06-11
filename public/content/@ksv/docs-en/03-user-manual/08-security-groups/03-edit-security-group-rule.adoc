@@ -1,0 +1,47 @@
+---
+title: "Edit a security group rule"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, security groups, rules, edit"
+description: "Describes how to edit a security group rule in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e19d869ccbb34635a97e30b3345cc34b
+:ks_xref_id: 3de61c91d355482592fc096bea287f60
+:ks_comp: ../../../components/
+:ks_title: Edit a security group rule
+:ks_description: Describes how to edit a security group rule in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, security groups, rules, edit
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to edit a security group rule in the {ks_product_abbr_full} web console.
+
+User **admin** can edit all security group rules in your cluster. Project administrators and operators can edit the security group rules created on their own, and project viewers cannot edit security group rules.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=b3ba830d7a8b4924800daec19e141994]
+
+include::../../../_custom-en/security-groups/security-group-rule-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=0f1bef6b8cc0463eb14da6778228beac]
+
+include::../../../_custom-en/security-groups/security-group-steps.adoc[]
+
+. On the **Security Groups** page, click the name of a security group to view its details.
+. On the **Inbound Traffic** or **Outbound Traffic** tab, find the security group rule that you want to edit, click image:/images/ksv/en/icons/more.svg[operation-menu,13], and then select **Edit** from the drop-down list.
+. In the dialog box that appears, modify parameters for the security group rule.
++
+--
+include::../../../_custom-en/security-groups/security-group-rule-parameters.adoc[]
+--
+. Click **OK**.

@@ -1,0 +1,30 @@
+---
+title: "添加转发规则"
+weight: 4
+---
+
+. 登录{product_console_name_en}。
+. 在顶部导航栏，选择**资源** > **网络** > **VPC 网络**，默认进入 VPC 网络列表页面。点击指定 VPC 网络的名称/ID，进入其详情页面。
+. 选择**管理配置**页签，点击**添加规则**。
++
+image::/images/express/console/vpc_config_1.png[]
+. 在弹出的**添加端口转发规则**的窗口中，配置端口转发规则``名称``、``协议``、``源端口``、``内网 IP``、``内网端口``后，点击**确定**即可。
++
+
+include::../../../../../../_components/note.adoc[]
+* 支持 TCP 和 UDP 协议。
+* 若输入端口范围，需使用 <起始端口>-<结束端口> 格式，例如 1000-2000，并且源端口范围和内网端口范围必须是相同的。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vpc_config_2.png[,60%]
+
+. 已创建好的端口转发规则，支持**启用**和**禁用**操作。
+
++
+image::/images/express/console/vpc_config_3.png[]
+
+
+
+
+

@@ -1,0 +1,25 @@
+// :ks_include_id: 5f8f7ff05ece4c439f6806ad715b9c8c
+Set environment variables for the container.
+
+* Click **Add Environment Variable** to set multiple environment variables.
+
+* Click **Batch Reference** to create environment variables using data from a ConfigMap or Secret. The ConfigMap or Secret must belong to the same project as the container to be referenced by the container. After the container is created, the values of the environment variables will not change dynamically with updates to the ConfigMap or Secret settings.
+
+* Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] on the right side of a created environment variable to delete it.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Key
+|The name of the environment variable.
+
+|Value
+|The value of the environment variable.
+
+|Resource
+|The name of the ConfigMap or Secret. Only available when referencing a ConfigMap or Secret.
+
+|Key in Resource
+|The key within the ConfigMap or Secret. The value corresponding to this key will be used as the value of the environment variable. Only available when referencing a ConfigMap or Secret.
+|===

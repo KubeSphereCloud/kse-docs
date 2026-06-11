@@ -1,0 +1,50 @@
+---
+title: "静态路由对接方式"
+weight: 10
+---
+
+== 组网架构
+
+image::/images/ep_offline/ep_twp/vbc_2.png[]
+
+该架构下，路由逻辑如下：
+
+* 云平台内 Hyper 节点在部署时，配置网卡网关地址为 CSW，即默认路由指向 CSW。
+* 企业云创建 SDN VBC 网络时，指定管理网络 IP，该 IP 作为承载 VBC DVR 对外的 IP 地址，将以 VIP 形式自动配置于 DVR master 所在 Hyper 的物理网卡上。
+* 当 VBC 的 VM 被安置到 Hyper 节点会自动产生 VBC 网段路由，出接口为 VBC DVR bridge。
+* CSW 配置 VBC 网络静态路由，将 VBC 网段指向对应的 VBC-VIP。
+
+== 报文转发逻辑
+
+[discrete]
+=== 场景一
+
+如下图所示，VM1 和 VM2 属于不同计算节点，加入同一个 VBC 基础网络，其中 VM1 所在的 Hyper 为 DVR master。
+
+image::/images/ep_offline/ep_twp/vbc_3.png[]
+
+云外网络的主机 PC1 访问 VM1 的数据转发逻辑如下：
+
+. PC1 发送数据包（目的 IP 为 VM1 10.101.101.101），通过数据中心网络设备转发至云平台核心交换机 CSW。
+. CSW 根据目标 IP 查询路由表，匹配到 VBC 网段静态路由 10.101.101.0/24，转发至下一跳 10.88.1.101（即 Hyper1）进行处理。
+. Hyper1 收到数据包，根据目标 IP 查询路由表，匹配到 VBC 网段路由，转发至出接口 VBC DVR bridge 处理。
+. Hyper1 的 DVR 查询 ARP 表，得到 VM1 MAC 地址，根据 MAC 地址查询 bridge FDB 表，将数据包发送至 VM1。
+
+
+[discrete]
+=== 场景二
+
+如下图所示，VM1 和 VM2 属于不同计算节点，加入同一个 VBC 基础网络，其中 VM2 所在的 Hyper 为 DVR slave。
+
+image::/images/ep_offline/ep_twp/vbc_4.png[]
+
+云外网络的主机 PC1 访问 VM2 的数据转发逻辑如下：
+
+. PC1 发送数据包（目的 IP 为 VM2 10.101.101.102），通过数据中心网络设备转发至云平台核心交换机 CSW。
+. CSW 根据目标 IP 查询路由表，匹配到 VBC 网段静态路由 10.101.101.0/24，转发至下一跳 10.88.1.101（即 Hyper1）进行处理。
+. Hyper1 收到数据包，根据目标 IP 查询路由表，匹配到 VBC 网段路由，转发至出接口 VBC DVR bridge 处理。
+. Hyper1 的 DVR 查询 ARP 表，得到 VM2 MAC 地址，根据 MAC 地址查询 bridge FDB 表，将数据包发送至 VTEP 接口处理。
+. Hyper1 的 DVR 查询 VXLAN FDB 表，对数据包进行 VXLAN 封装，VXLAN 封包目标 IP 为 Hyper1 的 IP 地址 10.88.1.2，根据 10.88.1.2 查询路由/ARP 表信息，从 ETH 口发送后进入 CSW。
+. CSW 根据数据包 MAC 地址信息，转发至 Hyper2。
+. Hyper2 收到 VXLAN 数据包后，根据 VNI ID 交给对应的 VTEP 设备处理，对数据数据包进行 VXLAN 解封装。
+. Hyper2 的 DVR 查询 bridge FDB 表，将数据包转发至 VM2。

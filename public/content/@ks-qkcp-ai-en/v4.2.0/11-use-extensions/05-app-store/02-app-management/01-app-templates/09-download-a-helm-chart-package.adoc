@@ -1,0 +1,44 @@
+---
+title: "Download Helm Chart Archive"
+keywords: "Kubernetes, {ks_product}, workspace, app template, download Helm Chart archive"
+description: "Describes how to download the Helm Chart archive for an app version."
+weight: 09
+---
+
+
+:ks_permission: **App/App Version/App Instance View**
+:ks_navigation: **App Management > App Templates**
+
+
+This section describes how to download the Helm Chart archive for an app version.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. On the app template details page, go to the **Versions** tab, click the desired app version, and then click **Download** in the expanded area.
++
+--
+The Helm Chart archive for the app version will be downloaded to your local machine via your browser.
+--

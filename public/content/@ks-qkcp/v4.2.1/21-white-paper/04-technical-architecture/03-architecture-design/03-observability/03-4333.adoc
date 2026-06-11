@@ -1,0 +1,15 @@
+---
+title: "审计"
+weight: 03
+---
+
+== 核心功能
+
+KubeSphere 审计功能接收 K8s 和 ks 产生的审计事件，经由 vector 收集处理后，发送到后端存储（OpenSearch、ElasticSearch 等）进行持久化存储，为用户提供审计事件查询功能。
+
+== 架构设计
+
+主要组件：
+
+1. kube-apiserver：K8s 审计事件的生产者。 
+2. ks-apiserver：ks 审计事件的生产者。

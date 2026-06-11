@@ -1,0 +1,42 @@
+---
+title: "修改页面跳转链接"
+weight: 1
+---
+
+以标准大屏为例，针对大屏页面上的各页面跳转按钮的链接修改步骤如下。
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，点击**运维工具** > **计算大屏**，进入**计算大屏**列表页面。点击**配置大屏**按钮，进入配置大屏登录页面。
++
+
+include::../../../../../../../_components/note.adoc[]
+账号和密码为用户在link:../../gui_conf[配置大屏]时设定，需根据实际情况进行修改。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/gui_login.png[]
+
+. 选择**工作空间**，在顶部导航栏选择**我的应用** > **全部应用**。以下图为示例，其中编号 1 即为标准大屏，通常作为大屏展示的首页。
++
+image::/images/express/console/gui_publish_1.png[]
+
+. 在**全部应用**页面，选择标准大屏，选中大屏中左侧跳转至“单业务系统大屏”页面的按钮（即下图标注序号 1）。 +
+在其右侧编辑栏中，点击**属性**，勾选**页面跳转**和**新开窗口**。
+
++
+
+include::../../../../../../../_components/note.adoc[]
+跳转对象须要填写指定大屏场景的**发布链接**，即link:../../gui_publish[发布计算大屏]时所记录的各场景分享链接。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/gui_standard_1.png[]
+
+. 在右侧编辑栏中，点击数据图标image:/images/express/console/gui_data.png[]，选择查看数据表，获取当前环境中的单系统数据，即单业务系统的名称和 ID。
++
+image::/images/express/console/gui_standard_2.png[]
+
+. 其他大屏页面上的跳转按钮均可参考上述步骤进行修改。
+
+

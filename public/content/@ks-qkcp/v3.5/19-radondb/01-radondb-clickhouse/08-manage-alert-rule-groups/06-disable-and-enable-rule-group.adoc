@@ -1,0 +1,98 @@
+---
+title: "禁用和启用规则组"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 禁用和启用规则组"
+description: "介绍如何禁用和启用规则组。"
+weight: 06
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 9781031490dd4670ba8e9a2697983f6c
+:ks_xref_id: fd77c28bd3714570b428c0d8c657eac7
+:ks_comp: ../../../../components/
+:ks_title: 禁用和启用规则组
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, ClickHouse, 管理告警规则组, 禁用和启用规则组
+:ks_description: 介绍如何禁用和启用规则组。
+:ks_weight: 06
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-disableAndEnablerRuleGroups.adoc[]
+
+
+== 前提条件link:[id=9cc4e524578d4e7497ae8de46f265b15]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbClickhouse/radondbClickhouse-prer-installRadondbClickHouse.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 禁用和启用单个规则组link:[id=66eb2795beb34332a8efc5dff1c6a457]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbClickhouse/radondbClickhouse-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-disableAndEnableASingleRuleGroup.adoc[]
+
+
+== 批量启用和禁用规则组link:[id=ed97ebfe19b1491793a38840af4b3c5e]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbClickhouse/radondbClickhouse-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-disableAndEnableMultipleRuleGroups.adoc[]

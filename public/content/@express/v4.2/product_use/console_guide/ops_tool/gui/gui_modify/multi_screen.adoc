@@ -1,0 +1,42 @@
+---
+title: "多屏展示文件修改"
+weight: 2
+---
+
+== 功能说明
+
+多屏展示页面即为综合业务系统多屏展示，其可在一个页面上展示当前环境中所有的单业务系统。支持多屏合一的页面显示设置，即二屏合一、四屏合一以及六屏合一。多屏展示页面（二屏合一），如下所示。
+
+image::/images/express/console/gui_multi_screen_1.png[]
+
+== 操作步骤
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，点击**运维工具** > **计算大屏**，进入**计算大屏**列表页面。点击**配置大屏**按钮，进入配置大屏登录页面。
++
+
+include::../../../../../../../_components/note.adoc[]
+账号和密码为用户在link:../../gui_conf[配置大屏]时设定，需根据实际情况进行修改。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/gui_login.png[]
+
+. 选择**工作空间**，在顶部导航栏选择**我的应用** > **全部应用**，选择多屏展示场景文件，进入其编辑页面。以二屏合一页面为例，对多屏展示页面进行编辑。
+
+. 在编辑页面，点击左侧页面栏中待编辑的 2 屏展示页面，选择**图层**栏中的某一 Iframe 组件，在右侧编辑栏中点击image:/images/express/console/gui_multi.png[]，点击**全局样式**，勾选**允许交互**，并将默认 URL 修改为待跳转的页面的发布链接。
++
+
+include::../../../../../../../_components/note.adoc[]
+* 跳转对象须要填写指定大屏场景的**发布链接**，即link:../../gui_publish[发布计算大屏]时所记录的各场景分享链接。
+* 用户可根据实际情况复制和删除 Iframe 组件，以实现页面的增删，使其与实际环境中单击系统数保持一致。
+* 新复制的 Iframe 组件中全局样式里的 URL 为空，需根据实际情况填写发布地址，并勾选**允许交互**按钮。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/gui_multi_screen_2.png[]
+
+. 多屏展示页面标题修改：在左侧**页面**栏中，选择待修改的多屏展示页面，右侧出现**页面设置**栏，页面名称根据实际情况进行修改即可。
++
+image::/images/express/console/gui_multi_screen_3.png[]

@@ -1,0 +1,55 @@
+---
+title: "升级网关实例"
+weight: 03
+---
+
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **网关 > 网关升级**
+
+
+本节介绍如何升级网关实例。
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **KubeSphere 网关**扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== 升级单个网关实例
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**网关升级**页签，可升级的网关实例后会显示``升级``字样。
+
+. 点击**升级**，在弹出的对话框中，点击**确定**。
++
+将在“升级任务”页签自动创建一个对应的升级任务。
+
+== 批量升级网关实例
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**网关升级**页签，可升级的网关实例后会显示``升级``字样。
+
+. 选择需要升级的网关实例左侧的复选框，然后在列表上方点击**升级**。
+
+. 点击**升级**，在弹出的对话框中，点击**确定**。
++
+将在“升级任务”页签自动创建一个对应的升级任务。

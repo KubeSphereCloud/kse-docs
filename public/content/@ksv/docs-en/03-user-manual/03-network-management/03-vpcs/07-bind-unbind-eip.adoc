@@ -1,0 +1,68 @@
+---
+title: "Bind or unbind EIPs"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, EIPs, bind, unbind"
+description: "Describes how to associate or dissociate an EIP with or from a VPC."
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 17a718d0c1954bb7afaa6ba003d32f53
+:ks_xref_id: e5528a47217143dfa48d1c45e561a6e4
+:ks_comp: ../../../../components/
+:ks_title: Bind or unbind EIPs
+:ks_description: Describes how to associate or dissociate an EIP with or from a VPC.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, EIPs, bind, unbind
+:ks_weight: 07
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to associate or dissociate an elastic IP address (EIP) with or from a virtual private cloud (VPC).
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=834688ad50284ce4a7447376acab50c8]
+
+include::../../../../_custom-en/networks/vpc-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Associate or dissociate from the list of VPCslink:[id=dd1fe444f5274c46836710eb84d1a837]
+
+include::../../../../_custom-en/networks/vpc-steps.adoc[]
+
+. Find the VPC that you want to manage, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Associate EIP** or **Dissociate EIP** from the drop-down list.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+The EIP cannot be restored after it is dissociated. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Associate or dissociate from the VPC details pagelink:[id=4bdc4d8d75ce4acf96db753072e657f5]
+
+include::../../../../_custom-en/networks/vpc-steps.adoc[]
+
+. On the **VPCs** page, click the name of a VPC to view its details.
+. On the left side of the page, click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Associate EIP** or **Dissociate EIP** from the drop-down list.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+The EIP cannot be restored after it is dissociated. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

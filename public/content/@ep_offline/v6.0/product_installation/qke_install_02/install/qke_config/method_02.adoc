@@ -1,0 +1,240 @@
+---
+title: "方式二：在后台修改"
+weight: 20
+---
+
+== 操作步骤
+
+1. 登录一个 Webservice 节点。
+2. 执行以下命令，进入 /pitrix/lib/pitrix-webconsole-paas/configs 目录。
++
+[source]
+----
+cd /pitrix/lib/pitrix-webconsole-paas/configs
+----
+3. 执行以下命令，新增 local_config.yaml 文件。
++
+[source]
+----
+touch local_config.yaml
+----
++
+内容参照如下 local_config.yaml 示例，主要修改 zone_groups 和 volume_class 相关参数。
++
+[cols='1,3'] 
+|===
+| 参数 | 说明 
+
+| zone_groups a| 
+
+* abroad：海外 region。若没有海外 region，可以删除此参数。
+* domestic：国内 region。
+| volume_class 相关参数 a| default_volume_class 为默认的磁盘类型。
+
+* 如果 NeonSAN 环境是纯 SSD 环境，则配置 volume_class 5。
+* 如果 NeonSAN 环境为混插型硬盘，则配置 volume_class 6。
+|===
+4. 执行以下命令，重启 apache。
++
+[source]
+----
+service apache2 restart
+----
+
+== local_config.yaml 示例
+
+[source,yaml]
+----
+GLOBAL_CONFIG:
+  # AZ 组，主要用于创建集群时选择 AZ
+  zone_groups:
+    abroad:
+    - {{ region_id }} # 海外AZ配置，若确认不支持海外，可以删除该字段及其配置
+    domestic:
+    - {{ region_id }} # 国内AZ
+
+ 
+  support_base_network: true # 基础网络
+  support_muti_create: false # 是否支持多可用区部署
+  support_private_network: true # 私有网络
+  support_security_group: true # 安全组
+  support_storage_plugin: true # 存储插件
+  support_after_sale: false # 售后服务
+  support_abroad: false # 是否支持海外AZ
+  support_voucher: false # 快速入门——代金券
+  support_quickly_video: false # 快速入门——视频演示
+  support_quickly_create: false # 快速入门——快速创建入门集群
+  support_wechat_group: false # 快速入门——微信交流群
+ 
+  support_billing: false # 计费相关配置
+  support_order: false # 订单
+  support_subscription: false # 包年包月
+ 
+  charge_options:
+    renew_duration: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60] # 续费周期，若环境确认不支持计费，可删除该字段及其配置
+ 
+  qke_app_id: app-o6lvbkhm
+  qke_plus_edtions: # qke 版本
+    - edition_id: appe-plezercv # 版本 id
+      name: Hosting cluster # 版本名称
+      type: hosting-edition # 版本类型
+      support: false # 具体详见开关字段说明
+    - edition_id: appe-afcm87o7
+      name: Self-Managed cluster
+      type: self-edition
+      support: true
+    - name: Serverless cluster
+      type: serverless-edition
+      support: false
+ 
+  # 可视化工具控制
+  cluster_visualizer:
+    - key: install_kubesphere # 免费的kubesphere服务
+      support: false # 1.这里默认用户购买了 QKCP，所以隐藏了KS；2.若用户未购买QKCP，就开放并选中KS，让QKCP可选（引导用户购买）
+    - key: install_qkcp
+      support: true # 为 true 表示支持改功能
+      checked: true # checked true 表示创建时默认选中的工具，有且只有一个对象添加该字段，且该对象support 必须是 true ！
+    - key: install_kubernetes
+      support: false
+     
+  # 文档
+  docs_url:
+    guide_href: /container/qke_plus/intro/introduction/
+    self_href: /container/qke_plus/quickstart/create_selfmgt_cluster/
+ 
+ 
+ZONE_CONFIG:
+  default:
+    valid_sider_features:
+      - name: paas
+        title: KubeSphere®(QKE)
+        portal_name: paas #此属性名是为了和主portal的菜单进行区分的字段，子portal的收藏功能显示会加上此前缀，用来区分是不是子项目
+        icon: fuse #子portal 标题对应的 lego-ui中 icon name
+        related_names: [] # 为空表示：不设置关联服务
+        items:
+          - {
+              name: quickstart,
+              title: 快速入门,
+              icon: guidepost,
+              zh-cn: 快速入门,
+              en: Quick Start,
+            }
+          - {
+              name: clusters,
+              title: 集群管理,
+              icon: cluster-service,
+              zh-cn: 集群管理,
+              en: Cluster List,
+            }
+      - name: cluster
+        title: Cluster Detail
+        portal_name: paas
+        icon: fuse
+        related_names: []
+        items:
+          - {
+              name: overview,
+              title: 集群概览,
+              icon: dashboard,
+              zh-cn: 集群概览,
+              disabled: 0,
+              en: Cluster Overview,
+            }
+          - {
+              name: info,
+              title: 集群信息,
+              icon: details,
+              zh-cn: 集群信息,
+              disabled: 0,
+              en: Cluster Info,
+            }
+          - name: sourcemanage
+            title: 资源管理
+            icon: resource-management
+            zh-cn: 资源管理
+            disabled: 0
+            en: Source Management
+            items:
+              - {
+                  name: nodes,
+                  title: 节点管理,
+                  icon: node-management,
+                  zh-cn: 节点管理,
+                  disabled: 0,
+                  en: Node Management,
+                }
+              - {
+                  name: resources,
+                  title: 挂载资源,
+                  icon: resource,
+                  zh-cn: 挂载资源,
+                  disabled: 0,
+                  en: Hang Source,
+                }
+              - {
+                  name: workloads,
+                  title: 工作负载,
+                  icon: apps-duotone,
+                  zh-cn: 工作负载,
+                  disabled: 0,
+                  en: Workloads,
+                }
+              - {
+                  name: services,
+                  title: 服务,
+                  icon: service,
+                  zh-cn: 服务,
+                  disabled: 0,
+                  en: Service,
+                }
+          - {
+              name: console,
+              title: 可视化控制台,
+              icon: visualization,
+              zh-cn: 可视化控制台,
+              disabled: 0,
+              en: Visual Console,
+            }
+          - name: clustermaintenance
+            title: 集群运维
+            icon: maintain
+            zh-cn: 集群运维
+            disabled: 0
+            en: Cluster Maintenance
+            items:
+              - {
+                  name: logs,
+                  title: 日志管理,
+                  icon: pen-log,
+                  zh-cn: 日志管理,
+                  disabled: 0,
+                  en: Cluster log,
+                }
+              - {
+                  name: monitors,
+                  title: 监控管理,
+                  icon: web-monitor,
+                  zh-cn: 监控管理,
+                  disabled: 0,
+                  en: Monitor Management,
+                }
+              - {
+                  name: alarms,
+                  title: 告警管理,
+                  icon: notification,
+                  zh-cn: 告警管理,
+                  disabled: 0,
+                  en: Alarm Management,
+                }
+              - {
+                  name: upgradecheck,
+                  title: 升级检查,
+                  icon: update,
+                  zh-cn: 升级检查,
+                  disabled: 0,
+                  en: Upgrade Check,
+                }
+    default_volume_class: 6
+    default_volume_class_config: { key: "volume_class", default: 6, range: [6] }
+    default_volume_size_config: { min: 100, max: 2000, step: 10 }
+----

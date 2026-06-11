@@ -1,0 +1,66 @@
+---
+title: "View VPCs"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VPCs, view"
+description: "Describes how to view VPCs in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: de68a4faeffb43a18465b6ec7f398ec9
+:ks_xref_id: 27b45570d89c4febbebb6a66eebf02e8
+:ks_comp: ../../../../components/
+:ks_title: View VPCs
+:ks_description: Describes how to view VPCs in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VPCs, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view VPCs in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=ffe9257344d746b59e0c017800685cc4]
+
+include::../../../../_custom-en/networks/vpc-steps.adoc[]
+
++
+
+--
+You can view all VPCs in the project, including the default VPC and the VPCs created on your own.  The following table describes the parameters.
+
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the VPC.
+
+include::../../../../_custom-en/networks/naming-convention.adoc[]
+
+|ID
+|The universally unique identifier (UUID) of the VPC in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the VPC.
+
+|IP Range
+|The IP address range in which the VPC resides.
+
+|Associated Resources
+|The resources associated with the VPC.
+
+|Created by
+|The username that is used to create the VPC.
+
+|Created at
+|The time when the VPC was created.
+|===
+--
+
+. (Optional) Click the search box above the VPC list and set query conditions to search for VPCs by name or ID.  For example, use **Name:ab** to search for VPCs whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

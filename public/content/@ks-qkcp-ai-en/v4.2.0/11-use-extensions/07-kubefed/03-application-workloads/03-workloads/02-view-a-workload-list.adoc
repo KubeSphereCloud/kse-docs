@@ -1,0 +1,43 @@
+---
+title: "View Workload List"
+keywords: "Kubernetes, {ks_product}, Federated Project, Application Workloads, Workloads, View Workload List"
+description: "Describes how to view the workload list."
+weight: 02
+---
+
+:ks_permission: **Federated Project View**
+:ks_navigation: **Application Workloads > Workloads**
+
+
+include::../../../../../_custom/clusterManagement/workloads/workloads-desc-viewAWorkloadList.adoc[]
+
+
+== Prerequisites
+
+* The **Federated Cluster Application Management** extension must be installed and enabled on the KubeSphere platform.
+
+* {empty}
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-prer-requiredPermission_v4.adoc[]
+
+
+== Steps
+
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage_v4.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/workloads/workloads-multi-project-oper-openListPage.adoc[]
++
+====
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-multi-project-para-workloadList.adoc[]
+
+include::../../../../../_custom/clusterManagement/workloads/workloads-multi-project-oper-searchForWorkloads.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

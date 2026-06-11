@@ -1,0 +1,78 @@
+---
+title: "View the details of an image"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, images, details, view"
+description: "Describes how to view the details of an image in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 5b7757744ac947ff940bded7a3b9751c
+:ks_xref_id: 58bc94b88f5147f9a8424206b84bd336
+:ks_comp: ../../../../components/
+:ks_title: View the details of an image
+:ks_description: Describes how to view the details of an image in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, images, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of an image in the {ks_product_abbr_full} web console.
+
+include::../../../../_custom-en/vms/vm-image-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=236d45dabd8e474793c312c01e628b00]
+
+include::../../../../_custom-en/vms/vm-image-steps.adoc[]
+
+. On the **System Images**, **Private Images**, or **Shared Images** tab, view the images of a specific type.  For more information about images of different types, see link:../[Images].
+. Click the name of the image that you want to view. The details page of the image appears.
+. On the left side of the details page, view basic information about the image.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the image in the system.
+
+|Status
+|The status of the image.
+
+|OS
+|The OS type of the image.
+
+|Version
+|The OS version of the image.
+
+|Created at
+|The time when the image was created.
+
+|Created by
+|The username that is used to create the image.
+|===
+--
+. On the right-side **Overview** tab, view the default configuration of the image.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|CPU
+|The number of CPU cores defined in the image.
+
+|Memory
+|The memory size defined in the image.
+
+|System Disk
+|The system disk size defined in the image.
+|===
+--
+. On the right-side **VMs** tab, view the VMs created based on the image. For more information about parameters, see link:../../01-vms/01-create-vm/[Create a VM].

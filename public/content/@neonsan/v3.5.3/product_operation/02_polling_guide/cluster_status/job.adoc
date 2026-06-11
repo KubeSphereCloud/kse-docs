@@ -1,0 +1,30 @@
+---
+title: "查询异步任务状态"
+weight: 15
+---
+
+. 登录 NeonSAN 集群任一节点。 
+. 执行如下命令，获取集群中所有异步任务执行状态。
++
+[,shell]
+----
+neonsan list_job
+----
++
+image::/images/neonsan/polling_guide_41.png[]
+
+. 执行如下命令，可查询指定异步任务的执行状态。
++
+[,shell]
+----
+neonsan list_job -queue_name gc
+----
++
+image::/images/neonsan/polling_guide_42.png[]
++
+include::../../../../../_components/note.adoc[]
+* 返回结果中，``PERCENT`` 为 100%，且 ``STATUS`` 为 OK，即表示该任务正常执行结束。
+* 仅做观测与记录即可。
+include::../../../../../_components/table_footer.adoc[]
+
+

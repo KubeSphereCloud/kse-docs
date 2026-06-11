@@ -1,0 +1,88 @@
+---
+title: 通过监控数据获取云主机列表（GetResourceSummaryMonitors）
+weight: 24
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| owner
+| String
+| false
+| 用户Id
+
+| resource_types
+| Array
+| false
+| 资源类型
+
+| step
+| String
+| false
+| 粒度
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| message
+| String
+| false
+| 错误信息
+
+| ret_code
+| Integer
+| false
+| 返回码
+
+| trace_id
+| String
+| false
+| 追踪Id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetResourceSummaryMonitors",
+  "owner": "usr-rrPKHDpJ",
+  "resource_types": [
+    "loadbalancer_listener"
+  ],
+  "step": "5m"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "message": "PermissionDenied, no monitor data found",
+  "ret_code": 1400,
+  "trace_id": "L7NoAJsh"
+}
+----

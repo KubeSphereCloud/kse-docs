@@ -1,0 +1,84 @@
+---
+title: 修改用户公共附件属性（ModifyUserCommonAttachmentAttributes）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| attachment_category
+| String
+| true
+| 附件目录
+
+| attachment_content
+| String
+| true
+| 附件内容,
+
+| attachment_name
+| String
+| true
+| 附件名称
+
+| attachment_sub_category
+| String
+| true
+| 附件子目录
+
+| attachment_type
+| String
+| true
+| 附件类型
+
+| owner
+| String
+| true
+| 附件所有者的用户id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| attachment_id
+| String
+| false
+| 附件id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyUserCommonAttachmentAttributes",
+  "attachment_category": "user_verify",
+  "attachment_content": "GhpcyBpcyBhIGV4YW1wbGU=",
+  "attachment_name": "test.jpg",
+  "attachment_sub_category": "id",
+  "attachment_type": "jpg",
+  "owner": "usr-ddyfbbTV"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyUserCommonAttachmentAttributesResponse",
+  "attachment_id": "usca-ebkch62k",
+  "ret_code": 0
+}
+----

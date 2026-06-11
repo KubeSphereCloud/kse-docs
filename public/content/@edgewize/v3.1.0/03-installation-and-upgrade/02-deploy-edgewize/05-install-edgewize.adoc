@@ -1,0 +1,168 @@
+---
+title: "安装 EdgeWize"
+weight: 04
+---
+
+
+本节介绍如何安装边缘计算扩展组件 - EdgeWize。
+
+== 准备工作
+
+下载 ewctl 命令行工具，用于辅助 EdgeWize 的安装和管理。
+
+根据您的系统架构下载对应版本：
+link:https://ins.qingcloud.com/repos/k8s/Edgewize/ewctl-v0.3.1.1-linux-amd64.tar.gz[amd64]
+https://ins.qingcloud.com/repos/k8s/Edgewize/ewctl-v0.3.1.1-linux-arm64.tar.gz[arm64]
+
+== 步骤 1：纳管集群 kubeconfig 并导入根证书
+
+为了给 EdgeWize 网关和边缘集群 CloudCore 颁发服务器证书，EdgeWize 需要获取根证书和对应的私钥。
+
+[.admon.warning,cols="a"]
+|===
+|警告
+
+|
+* 安装 EdgeWize 之前，必须先完成 EdgeWize 根证书的导入工作，否则无法正常使用 EdgeWize。
+* 使用 ewctl 工具生成的证书需要备份，并妥善保存。
+|===
+
+. 解压 EdgeWize 安装包中的 ewctl 命令行工具到指定目录。
++
+[,bash]
+----
+tar -zxvf <ewctl package name> -C /usr/local/bin/
+----
+
+. （可选）若想避免在使用 ewctl 时对集群默认的 kubeconfig 文件进行修改，可创建 EdgeWize 专用的 kubeconfig 文件。如，在任意路径下创建空的 kubeconfig 文件。
++
+[,bash]
+----
+touch /root/edgewize-config
+----
+
+. （可选）为方便后续操作，可以设置 KUBECONFIG 环境变量。假设当前 ewctl 使用的 kubeconfig 文件路径为 /root/edgewize-config:
++
+[,bash]
+----
+export KUBECONFIG="/root/edgewize-config"
+----
+
+. 将底层 meta 集群的 kubeconfig 配置（默认位置假设为 /root/.kube/config）导入 ewctl 使用的 kubeconfig 文件。
++
+[,bash]
+----
+ewctl config metacluster -f /root/.kube/config
+----
+
+
+. 将{ks_product_left} host 集群的 kubeconfig 配置（默认位置假设为 /root/.kube/config）导入 ewctl 使用的 kubeconfig 文件。
++
+--
+[,bash]
+----
+ewctl config hostcluster -f /root/.kube/config
+----
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+在{ks_product_both}中，meta 集群和 host 集群实际为同一个集群。
+|===
+--
+
+. 生成 EdgeWize 签发证书所需的根证书和私钥。执行命令之后会在本地 /root/certs 文件夹下生成 rootCA.crt 和 rootCA.key 两个文件。
++
+[,bash]
+----
+mkdir /root/certs
+
+ewctl certs create --caCrtFilePath /root/certs --caKeyFilePath /root/certs
+----
+
+. 将本地的根证书和私钥导入 host 集群。
++
+[,bash]
+----
+ewctl certs import --caCrtFilePath /root/certs/rootCA.crt --caKeyFilePath /root/certs/rootCA.key -c  
+----
+
+== 步骤 2：安装 EdgeWize
+
+. 登录{ks_product_left} Web 控制台，在扩展中心安装 EdgeWize 扩展组件。
++
+--
+点击开始安装前，需修改**扩展组件配置**。
+
+[source,yaml]
+----
+edgewize-ota-server:
+  mqtt:
+    host: "172.31.19.30" # 替换为 host 集群节点的 IP 地址
+    port: 31883
+    username: "admin"
+    password: "P@88w0rd"
+----
+
+[source,yaml]
+----
+edgewize:
+  advertiseAddress:
+    - "172.31.19.30"   # 替换为 host 集群节点的 IP 地址
+  dnsNames:
+    - edgewize.io
+----
+
+[source,yaml]
+----
+vclusterK8s:
+      syncer:
+        image: edgewize/vcluster:v0.13.1
+        extraArgs:
+          - --tls-san=172.31.19.30,*.edgewize.io     # 根据 edgewize.advertiseAddress 同步修改 IP 地址
+----
+
+`tls-san` 中设置的 IP 和域名，用于为虚拟集群（vcluster）部署的 Kubernetes 生成证书。
+--
+
+. 点击**开始安装**，安装 EdgeWize 扩展组件。
++
+--
+- 安装完成后，默认启用该组件。您可以在扩展中心配置、升级、禁用、卸载 EdgeWize。有关更多信息，请参阅link:https://docs.kubesphere.com.cn/latest/06-extension-user-guide/03-manage-components/[管理扩展组件]。
+- 点击顶部导航栏上的image:/images/edgewize/zh/icons/grid.svg[grid,18,18]，然后点击 **edgewize-io** 图标开始使用 EdgeWize。
+
+[.admon.attention,cols="a"]
+|===
+|注意
+
+|
+为了更好地使用 EdgeWize，需要配置并安装 WizTelemetry 可观测平台的多个扩展组件，请参阅link:../03-install-extensions[安装依赖扩展组件]。
+|===
+--
+
+== 步骤 3：修改配置字典
+
+若{ks_product_both}使用了私有镜像仓库，为了使边缘集群的 ks-core 也使用私有镜像仓库，需要修改 host 集群的 `extension-edgewize` 项目下的 configmap `custom-kubesphere-config`.
+
+. 登录{ks_product_left} Web 控制台，进入 host 集群。
+
+. 点击**配置 > 配置字典**，搜索 `custom-kubesphere-config`。
+
+. 点击配置字典名称，进入详情页面。
+
+.  点击**操作 > 编辑设置**， 编辑已有的键值对数据，添加 global 配置如下，然后点击**确定**。
++
+[,yaml]
+----
+global:
+  imagePullSecrets: []
+  imageRegistry: dockerhub.kubekey.local/kse # 替换为实际的镜像仓库地址
+----
+
+. 重启 host 集群的 `edgewize-controller-manager` 工作负载。
++
+[,bash]
+----
+kubectl rollout restart deployment edgewize-controller-manager -n extension-edgewize
+----

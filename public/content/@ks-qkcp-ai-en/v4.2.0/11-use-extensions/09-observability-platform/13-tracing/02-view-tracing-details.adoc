@@ -1,0 +1,84 @@
+---
+title: "View Trace Details"
+keywords: "Kubernetes, {ks_product}, Tracing, Network, Observability"
+description: "Describes how to view trace details."
+weight: 02
+---
+
+:ks_navigation: **Tracing > Trace Query**
+
+This section describes how to view trace details.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role on the KubeSphere platform. For more information, see link:../../../../05-users-and-roles/01-users/[Users] and link:../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Tracing** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. Click the Trace ID (e.g., `c76049d283c30cdfdf26e2485ba5fae32`) or `<Service Name>:<Root Span Name>` (e.g., `loadgenerator:GET`) to access the trace details.
+
+. In the upper area of the trace details page, view the basic information of the trace.
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Root Span Name
+|The global entry point of the trace, representing the initial request action.
+
+// Regular Span
+// The smallest operational unit in a trace, identifying a discrete action within a single service (such as an API endpoint, method call, or DB query).
+
+|Trace ID
+|The unique identifier of the trace, used to track the complete request lifecycle in a distributed system (typically a 32-bit hash value), e.g., `c76049d283c30cdfdf26e2485ba5fae32`.
+
+|Start Time
+|The time when the request was initiated.
+
+|Duration
+|The total time taken from the initiation to the completion of the request.
+
+|Span
+|The total number of Spans in the trace.
+
+Each Span represents an independent operational unit in the trace. For example, `8` indicates that this trace triggered 8 independent operations.
+
+|Service
+|The total number of services invoked in the trace.
+
+|Depth
+|A metric indicating the depth of the call chain, reflecting the complexity of the request. For example, `3` indicates that the longest call chain contains 3 levels of service nesting.
+|===
+
+. Under the **Trace Timeline** tab on the trace details page, you can clearly see the complete path of the request from start to finish and the execution duration of each Span through a visual chart, helping to locate performance bottlenecks.
++
+--
+* Click the search box to search by service name or Span name. Search results will be highlighted.
+
+* On the right side of **Services and Spans**, click image:/images/ks-qkcp/zh/icons/chevron-down.svg[chevron-down,18,18] to expand the direct child Spans of the current level, click image:/images/ks-qkcp/zh/icons/chevron-right.svg[chevron-right,18,18] to collapse one level up, click image:/images/ks-qkcp/zh/icons/chevron-down-double.png[chevron-down-double,18,18] to expand all nested Spans, click image:/images/ks-qkcp/zh/icons/chevron-right-double.png[chevron-right-double,18,18] to collapse all levels.
+
+* Click a Span to view its detailed information. Click the row of the Span or the colored block on the left again to collapse the detailed information. For more information about Span parameters, refer to the link:https://opentelemetry.io/zh/docs/concepts/signals/traces/#spans[OpenTelemetry official documentation].
+--
+
+. Click the **Span List** tab on the trace details page to view all Spans in this trace.
++
+--
+* Click the search box to search by service name or Span name.
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+
+--

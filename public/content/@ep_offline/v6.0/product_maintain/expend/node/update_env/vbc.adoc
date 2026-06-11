@@ -1,0 +1,22 @@
+---
+title: "获取 VBC 回程路由"
+weight: 4
+---
+
+若当前 Zone 的网络模式不为 VLAN 模式，即配置了 VBC 网络，则需将新增 Hyper 节点的静态路由添加至对应的网关路由器上。
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是原环境的 FirstBox 节点 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行如下命令行，查看新增 Hyper 节点的 VBC 网段。
++
+[source,shell]
+----
+/pitrix/bin/dump_vbc_route.sh hyper
+----
+
+. 将新增 Hyper 节点的 VBC 网段添加至路由器。

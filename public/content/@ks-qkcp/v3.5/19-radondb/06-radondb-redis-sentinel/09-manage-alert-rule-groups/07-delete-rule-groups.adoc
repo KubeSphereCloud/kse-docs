@@ -1,0 +1,91 @@
+---
+title: "删除规则组"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, Redis Sentinel, 管理告警规则组, 删除规则组"
+description: "介绍如何删除规则组。"
+weight: 07
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 3c8a5493e9ff40848a5117835b3a146c
+:ks_xref_id: be426573c9964da890b881f62cc1d61c
+:ks_comp: ../../../../components/
+:ks_title: 删除规则组
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, Redis Sentinel, 管理告警规则组, 删除规则组
+:ks_description: 介绍如何删除规则组。
+:ks_weight: 07
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+本节介绍如何删除告警规则组。
+
+
+== 前提条件link:[id=a28a55ccb0934d3ba6731bcf6a32198d]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbRedisSentinel/radondbRedisSentinel-prer-installRadondbRedisSentinel.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-prer-createAlertGroup.adoc[]
+
+
+== 删除单个规则组link:[id=15ff912823da4dbd8c3807c4c9b04f18]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbRedisSentinel/radondbRedisSentinel-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-deleteASingleAlertingPolicy.adoc[]
+
+
+== 批量删除规则组link:[id=305959a12b634c2b8a677c7d85f24775]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbRedisSentinel/radondbRedisSentinel-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-deleteMultipleAlertingPolicies.adoc[]

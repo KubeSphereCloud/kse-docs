@@ -1,0 +1,189 @@
+---
+title: 更新 Webconsole 配置
+weight: 2
+---
+
+
+IaaS 的 Console 页面在对接 {product_name} 之前，没有 {product_name} 的相关功能。更新完 IaaS 的 Webconsole 相关配置后，IaaS 的 Console 页面上会出现 {product_name} 的功能页。
+
+待 IaaS 完成对接 {product_name} 之后，用户可在 IaaS 的 Console 页面上使用 {product_name}。
+
+
+. 登录 IaaS 的 FirstBox。
+
+. 通过 IaaS 的 FirstBox，登录至 IaaS 的 webservice 节点：
+.. 执行如下命令行，查看 IaaS 的 webservice 节点：
++
+[source,shell]
+----
+# cat /etc/hosts | grep web
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-webservice
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-webservice0
+xxx.xx.xx.xx xxxxxxxxxxxxxxxxxxxx guangd1a-webservice1
+----
+
+.. 根据查询结果，逐个登录 IaaS 的 webservice 节点。这里以登录 `guangd1a-webservice0` 节点为例。
++
+[source,shell]
+----
+# ssh guangd1a-webservice0
+----
+
+. 修改 webservice 节点的相关配置文件，添加 {product_name} 的相关配置。
+.. 登录 {product_name} 的 FirstBox。
+.. 查看如下配置文件：
++
+[source,shell]
+----
+# cat /root/qs-installer/qs-deploy/env/<zone_id>/group_vars/all 
+……
+qs_secret_access_key_id
+qs_secret_access_key
+……
+----
+
+.. 将上述查询结果添加至 IaaS 的 webservice 节点的如下配置文件中：
++
+[source,shell]
+----
+# vi /pitrix/lib/pitrix-websupervisor/mysite/local_settings.py
+# vi /pitrix/conf/web_console_settings.py
+……
+'qs_config': {
+    'qy_access_key_id': 'XXXXXXXXXXXXXXXXXXXXXXXXX', 
+    'qy_secret_access_key': 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',  
+    'endpoint': 'xxxxxxx',  # 对象Global域名，即 QingStor U10000 配置文件中的 global_domain
+    'port': '80',
+#   'proxy': ['proxy:8900'], 
+    'protocol': 'http',
+    'verify_ssl': False,
+    'maxFileNum': 10,}
+
+----
++
+**填写说明：**
+
+* 将上述查询结果 `qs_secret_access_key_id` 与 `qs_secret_access_key` 分别填入 `qy_access_key_id` 与 `qy_secret_access_key`。
+* 若启用了 `proxy` 字段，那么 `endpoint`、`protocol` 与 `port` 这几个字段的配置无效。
+* {product_name} 不建议用户开启 Proxy 服务来访问 {product_name} 的网络。若用户在确定无其他方式访问 {product_name} 的网络，则可开启 Proxy 服务。
+* `maxFileNum` 表示能够在 Console 上同时上传的最大文件个数。私有云项目中，可将该值调大，比如修改为 200。
+
+
+. 修改 webservice 节点的 `local_config.yaml` 配置文件中的如下字段。
++
+[source,shell]
+----
+
+# vi /pitrix/lib/pitrix-webconsole/mysite/local_config.yaml
+……
+GLOBAL_CONFIG:
+  qingstor_disable_virtual_host: true
+  qingstor_isolated_cname: true
+  qingstor_charged: false
+  enable_google_analytics: false
+  enable_baidu_analytics: false
+  enable_eloqua_analytics: false
+  enable_zhugeio_analytics: false
+  enable_sentry: false
+
+  # 配置此选项之后 console 就会给 qs-global-gateway 发送 zone_id 而非 region_id.
+  qs_region_zone_mapping:  //对象用
+     pek3: pek3b
+  qfs_region_zone_mapping:  //文件用
+     pek3: pek3b
+
+  qingstor_region_az:  // QingStor 对象存储 v3.3 新增参数
+     pek3:
+       - pek3b
+     sh1:
+       - sh1a
+     ap3:
+       - ap3  
+
+  service_unsupported_zones_map: // QingStor 对象存储 v3.3 新增参数
+     qingstor: [ap2a, pekt3]
+
+  production_services:  
+    - name: storage
+      title: Storage Service
+      cate: Computing Basic Service
+      items:
+        - {name: qingstor, title: QingStor} //新增，顶部导航增加对象存储菜单
+        - {name: qfs, title: QFS} //新增，顶部导航增加文件存储菜单
+
+ZONE_CONFIG:
+  default:
+    valid_sider_features:
+      - name: computing_basic_service
+        title: Computing Basic Service
+        items:
+          ......
+          - name: storage
+            title: Storage
+            items:
+              - {name: volumes, title: Volumes}
+              - {name: shared_storage, title: Shared Storage}
+              - {name: qingstor, title: QingStor}  //新增
+              - {name: snapshots, title: Snapshots}
+……
+
+
+----
+
++
+**填写说明：**
++
+[cols="3a,5a", options="header"]
+|===
+| 参数 | 说明 
+
+|qingstor_disable_virtual_host a| 
+* 是否使用 Virtual Host 格式的 URL 地址。
+* 私有云配置为 `true`。
+
+| qingstor_isolated_cname a|
+
+* 是否支持配置自定义域名。默认情况下，Console 需要检查域名是否备案。
+* 私有云环境，可跳过该检查，设置为 `false`。
+
+| qingstor_charged a| 是否显示计费功能。
+
+* 私有云配置为 `false`。
+* 若有完整的计费服务，则可开启该功能，即设置为 `true`。
+
+a|  
+* enable_google_analytics
+* enable_baidu_analytics
+* enable_eloqua_analytics
+* enable_zhugeio_analytics
+* enable_sentry
+
+
+|   用于网站统计，私有云均配置为 `false`。
+
+a|  
+* qs_region_zone_mapping
+* qfs_region_zone_mapping
+
+
+| * 用于解决当 region_id 与 zone_id 不一致时，导致的在 Console 上传文件出错的问题。
+* 填写格式参考示例。`pek3: pek3b` 中的 `pek3b` 为当前部署环境的 Zone ID，`pek3` 为当前部署环境所属的 Region ID。
+
+|  qingstor_region_az | 用于配置 Region 与其 Zone 列表，表示哪些 Region 与其下面的 Zone 能创建 Bucket。
+| service_unsupported_zones_map | IaaS 环境中有多个 Zone，没有对接 {product_name} 的 Zone，需添加在此。
+| production_services a| * 增加 `{name: qingstor, title: QingStor}`，顶部导航增加 {product_name} 对象存储菜单。
+
+* 增加 `{name: qfs, title: QFS}`，顶部导航增加 {product_name} 文件存储菜单。
+| valid_sider_features a| * 增加 {name: qingstor, title: QingStor}。
+
+
+
+|===
+
+. 逐个登录 IaaS 的 webservice 节点，修改完以上配置文件后，重启该节点的 webconsole 服务，使配置生效。
++
+[source,shell]
+----
+# /pitrix/upgrade/exec_nodes.sh webservice "service apache2 restart"
+
+----

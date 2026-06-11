@@ -1,0 +1,57 @@
+---
+title: "导入 VM 镜像"
+weight: 40
+---
+
+上传企业云平台提供的 VM 镜像后，用户才可以在 Console 上成功创建虚拟机。
+
+需要将 VM 镜像包上传到任一 seed 服务所在节点的 /pitrix/images-repo 目录。
+
+include::../../../../_components/note.adoc[]
+只需上传到任一 seed 节点即可，系统会自动同步镜像到所有 seed 节点。
+
+include::../../../../_components/table_footer.adoc[]
+
+== 前提条件
+
+获取企业云平台 VM 镜像包。
+
+镜像路径：ftp://ins.qingcloud.com/images-repo。
+
+必须要导入的镜像：ks、ro、tr、lo、xe、s2、na、me。否则将无法成功创建VPC、LB资源。 
+
+其他镜像根据实际需要进行导入。例如 ce 对应CentOS，wi 对应Windows。
+
+== 操作步骤
+
+1. 将 VM 镜像 images-repo 上传到一台物理机。
++
+例如上传到了 testoem05n00:/tmp/test/ftp/images-repo 目录。
+2. 执行以下命令，查看 seed 服务所在节点。
++
+[source]
+----
+cd /pitrix/conf/nodes/
+cat seed
+----
++
+image::/images/ep_offline/installation/initialize_vm_image.png[]
+3. 登录 VM 镜像所在服务器节点。
++
+[source]
+----
+ssh testoem05n00
+----
+4. 执行以下命令，开始导入 VM 镜像。
++
+[source]
+----
+rsync -aPS <VM镜像包路径> <任一seed服务所在节点>:/pitrix/images-repo/
+----
++
+示例：
++
+[source]
+----
+rsync -aPS /tmp/test/ftp/images-repo/ testoem02n01:/pitrix/images-repo/
+----

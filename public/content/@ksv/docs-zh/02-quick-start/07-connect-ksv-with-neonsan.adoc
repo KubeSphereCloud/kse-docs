@@ -1,0 +1,262 @@
+---
+title: "{ks_product_right}对接 NeonSAN 存储"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, NeonSAN, 对接"
+description: "介绍如何将{ks_product_both}对接至 NeonSAN 存储。"
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: fb7560de882c49db8671898dcfb8a477
+:ks_xref_id: 7fe08819f752496ba5094329f2c17277
+:ks_comp: ../../components/
+:ks_title: {ks_product_right}对接 NeonSAN 存储
+:ks_description: 介绍如何将{ks_product_both}对接至 NeonSAN 存储。
+:ks_keywords: {ks_product_full}, {ks_product}, NeonSAN, 对接
+:ks_weight: 07
+:ks_logo: 
+:ks_download_url: 
+
+
+NeonSAN 是青云的一款企业级分布式块存储系统，NeonSAN CSI 是 NeonSAN 面向 Kubernetes 提供的存储插件，具有在 Kubernetes 平台上动态创建持久存储卷的能力。
+
+{ks_product_abbr_full_right}支持与商用核心存储系统QingStor NeonSAN 深度集成，实现一步迈入云原生。本文介绍如何将{ks_product_both}对接至 NeonSAN 存储。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=4ddfee66ba7442fa95492c5ca7085b93]
+
+* 请确保 NeonSAN CSI 已安装。如未安装，请联系 NeonSAN 技术支持团队。有关更多信息，请参阅 link:https://github.com/yunify/qingstor-csi[QingStor-CSI]。
++
+--
+执行以下命令检查 NeonSAN CSI 是否安装。如果输出为空，则表示 NeonSAN CSI 未安装。
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+$ kubectl get pod --all-namespaces | grep csi-neonsan
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+* 请确保目标节点满足安装{ks_product_both}的所有前提条件。有关更多信息，请参阅link:https://kubesphere.cloud/docs/ksv/02-quick-start/01-install-ksv-in-single-node-mode/[单节点模式安装]和link:https://kubesphere.cloud/docs/ksv/02-quick-start/02-install-ksv-in-multi-node-mode/[多节点模式安装]。
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 安装步骤link:[id=e7d33157b79b45a196af25e5dcf29b6b]
+
+. 以 **root** 用户登录安装了 NeonSAN CSI 的服务器节点。
+
+. 执行以下命令，查看节点上的 etcd 服务。
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+systemctl status etcd
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+回显示例：
+
+image:/images/ksv/zh/installation/output.png[output,500px]
+
+以上回显表明，etcd 的安装路径为 **/opt/etcd**。
+--
+
+. 执行以下命令，进入 etcd 安装路径：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+cd /opt/etcd
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令，查看 etcd 集群信息：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+./etcdctl --endpoints=http://172.31.11.110:2379 member list
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+回显示例：
+
+image:/images/ksv/zh/installation/etcd.png[]
+--
+
+. 执行以下命令检查服务器节点的架构：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+uname -m
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 根据服务器节点的架构类型下载安装包。
++
+--
+* x86 架构
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+curl -OL https://virtualization.kubesphere.cloud/v1.6.1/kubesphere-virtualization-x86_64-v1.6.1.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+* ARM64 架构
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+curl -OL https://virtualization.kubesphere.cloud/v1.6.1/kubesphere-virtualization-arm64-v1.6.1.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令解压安装包：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+tar -zxvf kubesphere-virtualization-<package name>.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+请将命令中的 <package name> 替换为实际下载的安装包名称。
+
+* x86 架构：将 <package name> 替换为 **x86_64-{ks_product_ver}**
+* ARM64 架构： 将 <package name> 替换为 **arm64-{ks_product_ver}**
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 执行以下命令进入安装包解压后生成的目录：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+cd kubesphere-virtualization-<file path>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+请将命令中的 <file path> 替换为实际生成的目录名称。
+
+* x86 架构：将 <file path> 替换为 **x86_64**
+* ARM64 架构： 将 <file path> 替换为 **arm64**
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 执行以下命令编辑 **config-sample.yaml** 文件：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+vi config-sample.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 按如下配置，修改 **config-sample.yaml** 文件中的 **etcd** 和 **addons** 参数：
++
+--
+image:/images/ksv/zh/installation/addon.png[parameter,500px]
+
+有关更多参数信息，请参阅 link:https://github.com/kubesphere/kubekey/blob/master/docs/config-example.md[config-example]。
+--
+
+. 修改 csi-neonsan 的 **values.yaml** 配置：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+# 进入charts文件
+cd charts/csi-neonsan
+ 
+# 修改value参数
+vim values.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+按如下配置修改参数：
+
+* 将 **provisioner** 配置下的 **repository** 设置为 **kubespheredev/csi-provisioner**，**tag** 设置为 **v3.1.0**；
+* 将 **attacher** 配置下的 **repository** 设置为 **kubespheredev/csi-attacher**，**tag** 设置为 **v3.4.0**；
+* 将 **resizer** 配置下的 **repository** 设置为 **kubespheredev/csi-resizer**，**tag** 设置为 **v1.4.0**；
+* 将 **snapshotter** 配置下的 **repository** 设置为 **kubespheredev/csi-snapshotter**，**tag** 设置为 **v5.0.1**；
+* 将 **registrar** 配置下的 **repository** 设置为 **kubespheredev/csi-node-driver-registrar**，**tag** 设置为 **v2.5.0**。
+
+有关更多参数信息，请参阅 link:https://github.com/kubesphere/ksv-installer/blob/ksv/package/amd64/manifest-sample.yaml[manifest-sample]。
+--
+
+. 执行命令安装{ks_product_left}：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+# 按照{ks_product_both}单 / 多节点命令安装即可，示例：
+
+./install.sh -m
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 结果校验link:[id=f331ffe7c68d418da062d62878dc1436]
+
+. 安装完成后，校验 csi-neonsan 是否正常：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+root@node1:~# kubectl -n kube-system get pod | grep csi-neonsan
+csi-neonsan-controller-c85c94b84-cpkh2   5/5     Running   4          18d
+csi-neonsan-node-bb4f5                   2/2     Running   8          26d
+csi-neonsan-node-g8wlf                   2/2     Running   2          26d
+csi-neonsan-node-trkbb                   2/2     Running   2          26d
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 查看{ks_product_both}安装日志：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ksv logs
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+如出现以下类似回显，则安装成功：
+
+image:/images/ksv/zh/installation/log.png[log,500px]
+--

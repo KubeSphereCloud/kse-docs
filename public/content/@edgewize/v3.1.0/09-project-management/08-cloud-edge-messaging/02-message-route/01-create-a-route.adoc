@@ -1,0 +1,83 @@
+---
+title: "创建消息路由"
+weight: 01
+---
+
+// :ks_permission: **没有**
+:ks_navigation: **云边消息 > 消息路由**
+
+
+本节介绍如何创建一个消息路由，将消息从一个端点转发至另一个端点。
+
+EdgeWize 支持创建多种类型的消息路由规则。目前支持的端点转发类型有：
+
+* 云端 -> 边缘：通过云端 API，访问边缘 HTTP 服务 (源端点：System Rest -> 目标端点：Service Bus)
+* 云端 -> 边缘：通过云端 API，向边缘 MQTT 的指定 Topic 发送消息 (源端点：System Rest -> 目标端点：Event Bus)。
+// +
+// 由于 MQTT 消息并不会等待返回值，因此发送完毕以后，会马上提示发送成功。通过 MQTT 工具，可以监听到对应的消息。
+* 边缘 -> 云端：通过边缘 MQTT 指定的 Topic，调用到云端 HTTP 服务 (源端点：Event Bus -> 目标端点：System Rest)
+// +
+// 通过 MQTT 发送消息，由云端指定的接口接收消息，但边缘节点不会向云端接收响应结果。
+// 通过 MQTT，向预设的 Topic 发送消息。
+// 此处 Topic 规则为：{namespace}/{path}，其中，namespace 为边缘项目名称，path 为 Event Bus 端点中输入的 Topic 名称。
+// 如果 Event Bus 输入的 Topic，以 / 开头，则这里的 Topic，就会出现 2 条斜杠。
+
+
+== 前提条件
+
+// * {empty}
+// include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+* 您需要加入一个边缘项目并在项目中具有 **project-admin** 角色。
+
+* 已分别在云端和边缘节点link:../../01-message-endpoint/01-create-an-endpoint/[创建源端点和目标端点]。
+
+== 操作步骤
+
+// include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+. 以具有 **project-admin** 角色的用户登录{ks_product_left} Web 控制台并进入您的边缘项目。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. 在**基本信息**页签，设置消息路由的基本信息，然后点击**下一步**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|消息路由的名称。
+
+名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+|别名
+|消息路由的别名。
+
+不同消息路由的别名可以相同。别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。
+
+|描述
+|消息路由的描述信息。
+
+描述可包含任意字符，最长 256 个字符。
+|===
+--
+
+. 在**路由规则**页签，选择源端点和目标端点，然后点击**创建**。
++
+--
+当目标端点为边缘节点时，可以选择多个边缘节点或者输入正则表达式来匹配到多个边缘节点；当源端点为边缘节点时，则只能选择一个边缘节点。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+消息路由创建后，默认禁用，请手动link:../06-disable-and-enable-routes/[启用消息路由]。
+|===
+--

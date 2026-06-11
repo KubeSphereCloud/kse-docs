@@ -1,0 +1,73 @@
+---
+title: 添加自有域名
+keywords: 添加域名, 自有域名
+description: 本章节指导您如何添加域名。
+draft: false
+collapsible: false
+weight: 10
+linkkey: rtc_demand_domain_guide
+---
+本文介绍如何添加自有域名。
+
+== 背景信息
+
+云点播服务需要通过域名实现媒资的加速分发。开通云点播服务时，系统使用**青云默认域名**，您也可以使用**自有域名**，推荐您使用自有域名。
+
+* 自有域名
++
+自有域名为您在域名注册商购买的域名，域名需要完成备案。
+
+* {platform_shortname}默认域名
++
+{platform_shortname} 为您提供默认域名服务，加速区域为中国大陆。若选择{platform_shortname}提供的默认域名，系统自动分配用户青云所属二级/三级域名，例如：_1302522583_.*vod.qingVideo.com*。
++
+若默认域名出现任何违规情况，{platform_shortname}有权收回该域名，请尽快配置您的自有域名。
+
+== 前提条件
+
+* 已获取管理控制台的账号和密码。
+* 已准备好一个已经实名认证并且完成备案的域名。
+
+== 操作步骤
+
+. 登录管理控制台。
+. 选择**产品与服务** > *音视频服务* > *云点播*，进入云点播的**音视频管理**页面。
++
+image::/images/cloud_service/audio_and_video/vod/um_video_list.png[]
+
+. 在左侧导航栏中，点击**域名管理**，进入域名管理页面。
++
+image::/images/cloud_service/audio_and_video/vod/um_domain_list.png[]
+
+. 点击**添加域名**，弹出**添加域名**窗口。
++
+image::/images/cloud_service/audio_and_video/vod/um_domain_win.png[,50%]
+
+. 根据需要配置参数。
++
+[cols="1,2"]
+|===
+| 参数 | 参数说明
+
+| 域名
+| 请输入已备案的域名。
+
+| 加速区域
+| 当前仅支持中国大陆。
+
+| 存储区域
+| 选择存储区域。
+
+| 设为默认分发域名
+| 设置为默认分发域名。默认分发协议类型为 “HTTP”，仅配置证书的域名可选择为 HTTPS 协议。
+|===
+
+. 点击**确认**，完成域名添加操作。
++
+在域名列表页面，您可以查看**域名**、*状态*、*CNAME* 以及**域名类型**。
++
+域名添加后，默认为**启用**状态。
+
+== 相关操作
+
+使用自有域名，您需要前往 DNS 域名服务商处配置 CNAME 解析。详细信息请参考link:../20_config_cname[配置 CNAME]。

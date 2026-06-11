@@ -1,0 +1,120 @@
+---
+title: "NeonSAN v3.5.0 之前版本操作步骤"
+weight: 2
+---
+
+. 查看集群中剩余空间。
++
+[,shell]
+----
+neonsan list_store
+----
++
+* 集群剩余空间需大于集群总容量的 20%。
+* 除待迁移数据磁盘所在节点之外的其他节点的剩余空间，需大于待迁移数据磁盘已使用空间的两倍。
+* 若存在状态**不为 OK** 的节点，需调查原因后，再继续数据迁移操作。
+
+. 检查集群中卷的状态。
++
+若存在状态不为 OK 的卷，需link:../../../volume/[对相应卷进行恢复]后，再继续数据迁移操作。
++
+[,shell]
+----
+neonsan list_volume -detail
+----
+. 检查集群中磁盘的状态。
++
+[,shell]
+----
+neonsan list_ssd
+----
++
+* 若存在状态不为 OK 的磁盘，需调查原因并解决后，再进行后续步骤，继续数据迁移操作。
+* **若待迁移数据的磁盘状态为 OK 或存在单副本卷**，则需**从步骤 4** 开始，进行数据迁移操作。
+* **若待迁移数据的磁盘状态不为 OK 且无法恢复**，可直接**从步骤 5** 开始，进行数据迁移操作。
+
+. 若待迁移数据的磁盘状态为 OK 或者存在单副本卷，执行如下命令，迁移数据。
++
+[,shell]
+----
+# NeonSAN v2.2 及以后命令格式
+
+neonsan remove_ssd -ssd_uuid <ssd_uuid> -evacuate_data yes
+
+# NeonSAN v2.2 之前命令格式
+
+neonsan remove_ssd -store_id <store_id> -dev_name <ssd_dev_name> -forever yes
+----
++
+* 执行 ``neonsan list_job`` 查看数据迁移任务的执行状态，等待任务执行完成
+* 若任务执行失败，可联系 NeonSAN 研发小组，分析失败原因，解决问题后，再次进行当前迁移步骤。
+* 任务执行成功后，执行 ``neonsan list_ssd`` 查看待迁移数据磁盘状态需为 ``REMOVED``，否则需排查原因，解决问题后再次进行当前迁移步骤。
+
+. 执行如下命令，登录数据库，执行如下命令查询数据库，确认该磁盘上是否存在状态为 OK 的副本。
++
+--
+QingStor MySQL 数据库
+
+[,sql]
+----
+mysql -uqingstor -p'QS!ows%0923' -h192.168.101.251 neonsan -e " select * from replica where ssd_uuid='xxxxx' and status='OK';"
+----
+Galera 数据库
+[,sql]
+----
+mysql -uneonsan -pzhu88jie neonsan -e "select * from replica where ssd_uuid='xxxxx' and status='OK';"
+----
+Xenondb 数据库
+
+[,shell]
+----
+mysql -uneonsan -pzhu88jie -h192.168.101.251 neonsan -e "select * from replica where ssd_uuid='xxxxx' and status='OK';"
+----
+--
+
+* 命令行中的 xxxxx 均为下线磁盘的 UUID，需根据实际情况进行修改。
+* QingStor MySQL 数据库密码需使用单引号。
+* Xenondb 数据库的需要指定其虚 IP，需根据实际情况进行修改。
+* 命令行执行完后，**无记录输出**，即表示**该磁盘上不存在状态为 OK 的副本，可直接进行步骤 7**。
+* 命令执行完后，**有记录输出**，即表示**该磁盘上存在状态为 OK 的副本，则需进行步骤 6**。
+
+. 若待下线磁盘上仍有状态 OK 的副本存在，需将该副本对应的卷 reopen，以造成卷的降级。
++
+* NeonSAN v2.2 及以后版本
++
+[,shell]
+----
+neonsan remove_ssd -ssd_uuid <ssd_uuid> -evacuate_data no
+----
++
+include::../../../../../../../_components/note.adoc[]
+``-ssd_uuid`` 参数指定待下线磁盘的 UUID，需根据实际情况进行修改。
+include::../../../../../../../_components/table_footer.adoc[]
+
+* NeonSAN v2.2 之前版本
++
+[,shell]
+----
+curl "http://$(qfcip):2600/qfa?op=open_volume&name=pool/vol"
+----
++
+命令行中的 ``name`` 为步骤 2 中，查询出来的副本对应的卷名，需根据实际情况进行修改，查询方法如下所示。
++
+image::/images/neonsan/ops_guide_17.png[]
+
+. 查看集群中卷的状态，并对降级卷进行恢复。
++
+[,shell]
+----
+neonsan list_volume --detail
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 若系统中设置了 auto_recovery，则无需手动操作。
+* 若系统没有设置 auto_recovery，需link:../../../volume/degraded_recovery/[手动对降级卷进行恢复]。
+include::../../../../../../../_components/table_footer.adoc[]
+. 重复步骤 5~7，直至待下线磁盘上无副本存在。
+
+
+
+

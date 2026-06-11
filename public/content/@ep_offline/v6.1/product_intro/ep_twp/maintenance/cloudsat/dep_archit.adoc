@@ -1,0 +1,29 @@
+---
+title: "部署架构"
+weight: 10
+---
+
+云监控 CloudSat 支持 x86、ARM 架构部署，并支持全组件高可用。
+
+image::/images/ep_offline/ep_twp/cloudsat_02.png[]
+
+云监控整体架构由以下组件组成：
+
+*CloudSat 集群*：
+
+* sat-api：提供告警规则管理，监控数据上报查询服务。
+* sat-transfer：对上报到 Cloudsat kafka 中的监控数据进行清洗处理。
+* sat-alarm：提供资源告警数据的查询，对监控数据进行告警判断处理。
+* sat-global-api：提供查询所有可用区的服务的接口。
+
+*云平台公共组件*：
+
+* Postgresql：存储告警规则、命名空间等用户基础数据。
+* zookeeper：保证数据一致性。
+
+*基础组件*：
+
+* Flink：对监控大数据流进行聚合处理。
+* Kafka：存储第三方上报到 CloudSat 的监控数据，实现监控数据上报和解耦处理。
+* Etcd：存储监控平台操作记录，事件数据等。
+* Clickhouse：存储资源的监控明细数据。

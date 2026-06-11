@@ -1,0 +1,29 @@
+---
+title: "检查集群剩余容量（2 级）"
+weight: 11
+---
+
+. 登录 NeonSAN 集群任一存储节点。
+
+. 执行如下命令，查看当前整个集群空间剩余容量信息。如下所示，当前集群总容量为 275742GB，剩余容量为 274414GB，已使用容量为 1327GB，则剩余空间容量占：99.5%
++
+[,shell]
+----
+neonsan stats_pool -pool move_pool
+----
++
+image::/images/neonsan/polling_guide_18.png[]
++
+include::../../../../../_components/note.adoc[]
+* ``-pool`` 用于指定集群中任一卷组名，需根据实际情况进行修改。
+* 当集群剩余容量占比不足 20% 时，需进行扩容。
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+
+
+
+
+
+

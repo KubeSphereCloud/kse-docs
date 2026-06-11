@@ -1,0 +1,57 @@
+---
+title: "删除端口转发规则"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 端口, 转发, 规则, 删除"
+description: "介绍如何使用{ks_product_both}Web 控制台删除端口转发规则。"
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: ded57a6e71844f0096d0b93415104936
+:ks_xref_id: c139b29fc9914fe9a361876f5150769e
+:ks_comp: ../../../../components/
+:ks_title: 删除端口转发规则
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台删除端口转发规则。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 端口, 转发, 规则, 删除
+:ks_weight: 06
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台删除端口转发规则。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=5ba5d1b87d2d43489ef0b206f4bff047]
+
+* 请确保您有 VPC 网络管理权限。系统 admin 用户可以管理集群中所有的 VPC 网络，普通项目管理员或操作员可以管理自身创建的 VPC 网络，对其他用户创建的 VPC 网络有只读权限。项目观察员只能查看所属项目中的 VPC 网络。
+
+* 如果您以非 **admin** 用户登录，您只能删除自身创建的端口转发规则。
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=9146042a46c44232a1da6c9767c90304]
+
+include::../../../../_custom/networks/vpc-steps.adoc[]
+
+. 在 VPC 列表页面，点击目标 VPC 名称，进入 VPC 详情页面。
+
+. 在 VPC 详情页面的右侧区域，点击**端口转发**页签，进入端口转发规则列表页面。
+
+. 找到目标端口转发规则，点击右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**删除**。
+
+. 在弹出的对话框中点击**删除**可删除当前端口转发规则。
++
+--
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+规则删除后无法恢复，请谨慎操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+

@@ -1,0 +1,58 @@
+---
+title: "查看消息端点列表"
+weight: 02
+---
+
+// :ks_permission: **没有**
+:ks_navigation: **云边消息 > 消息端点**
+
+
+本节介绍如何查看消息端点的列表信息。
+
+== 前提条件
+
+// include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+您需要加入一个边缘项目并在项目中具有 **project-admin** 角色。
+
+== 操作步骤
+
+// include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+. 以具有 **project-admin** 角色的用户登录{ks_product_left} Web 控制台并进入您的边缘项目。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+====
+* 消息端点列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|消息端点的名称。
+
+|类型
+|消息端点的类型：SystemREST、Event Bus 或 Service Bus。
+
+|位置
+|消息端点的位置：云端或边缘节点。
+
+|消息端点配置
+|消息端点的配置信息：源端路径、目的端路径或 Topic 名称。
+
+|创建时间
+|消息端点的创建时间。
+|===
+--
+
+* 在列表上方点击搜索框并设置搜索条件，可按名称和类型搜索消息端点。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====
+

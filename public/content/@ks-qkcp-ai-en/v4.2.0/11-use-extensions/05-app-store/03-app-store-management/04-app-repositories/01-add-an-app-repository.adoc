@@ -1,0 +1,47 @@
+---
+title: "Add Application Repository"
+keywords: "Kubernetes, {ks_product}, Platform, Application Repository, Add Application Repository"
+description: "Describes how to add an application repository."
+weight: 01
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **Application Repositories**
+
+This section describes how to add an application repository to the KubeSphere platform. The application repository added here is a system repository.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+* A Helm Chart repository must be created in advance. For information on how to create a Helm Chart repository, please refer to the link:https://helm.sh/docs/topics/chart_repository/[Helm official documentation].
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the page, click **Add**.
+
+. In the **Add Application Repository** dialog box, set the parameters for the application repository, then click **OK**.
++
+--
+include::../../../../../_custom/workspaceManagement/appRepositories/appRepositories-para-createAppRepository_v42.adoc[]
+
+After the application repository is created, it will be displayed in the application repository list.
+--

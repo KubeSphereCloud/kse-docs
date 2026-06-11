@@ -1,0 +1,41 @@
+---
+title: "激活 Windows 系统云服务器"
+weight: 10
+---
+
+== 通过图形化界面激活
+
+. 登录 Windows 系统云服务器之后，右键 *此电脑* > *属性*。
++
+image::/images/cloud_service/compute/vm/faq_trouble_activation_of_winOS_1.png[]
+
+. 点击右下角的 *激活 Windows*。
++
+image::/images/cloud_service/compute/vm/faq_trouble_activation_of_winOS_2.png[]
+
+. 之后我们可以看到系统成功激活。
++
+image::/images/cloud_service/compute/vm/faq_trouble_activation_of_winOS_3.png[]
+
+== 通过 cmd 命令行界面激活
+
+. 打开 cmd 命令行。
+. 输入 `slmgr /ato` 命令进行激活。
+
+. 若无法自动激活，且提示类似 "错误：0xC004F074 软件授权服务报告无法激活该计算机。秘钥管理服务（KMS）不可用" 的报错信息，可进行如下操作进行激活。
+.. 在 cmd 命令行中，执行如下命令，获取云服务器所在大区的 KMS 服务器的 IP 地址。
++
+[,shell]
+----
+ping windows-kms-server.ks.domain.com
+----
++
+image::/images/cloud_service/compute/vm/faq_trouble_activation_of_winOS_5.png[]
+.. 将上一步中获取到的 IP 地址及 windows-kms-server.ks.domain.com 域名写到 `C:\Windows\System32\drivers\etc\hosts` 文件的最后，保存退出。
++
+image::/images/cloud_service/compute/vm/faq_trouble_activation_of_winOS_6.png[]
+
+.. 再次打开 Windows 的 cmd 窗口，然后输入 `slmgr /ato` 即可激活。
+.. 若执行 `slmgr /ato` 仍然提示 0xC004F074，先执行 `slmgr /skms windows-kms-server.ks.domain.com` 设置 kms 服务器，然后再执行 `slmgr /ato`。
+
+. 若仍然无法激活 Windows 云服务器，可以通过工单系统联系我们。

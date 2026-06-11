@@ -1,0 +1,27 @@
+---
+title: RAID 卡出现报错或识别不了
+weight: 25
+---
+
+== 问题现象
+
+服务器做完 RAID 配置，BIOS 启动模式由 UEFI 改成 Legacy 后，出现如下报错：
+
+----
+Communication between the iBMC and PCIe card (9460-8i) failed.
+----
+
+== 可能原因
+
+BIOS 启动模式为 Legacy 模式时，服务器 Oprom 资源会按 PCIe 设备进行分配。服务器的 Oprom 资源空间有限，不同的 PCIe 设备需要的 Oprom 资源不同，当 PCIe 设备较多时，可能会出现 Oprom 资源分配不足，影响 PCIe 设备的正常性能。
+
+BIOS 分配的 Oprom 空间为 0xC0000 ~ 0xE0000，也就是 128 KB，如果分配给 PCIe 设备的 Oprom 资源超过了该限制，BIOS 就无法读取到该设备。
+
+加载部件 Oprom 的顺序为：**VGA** > **SOL** > **Raid 扣卡** > **PCH 10Gbe** > **PCIe 卡**（按照 BUS 号从小到大）> **软 RAID**。
+
+== 解决方法
+
+* **方法一**：如果业务允许，可将 BIOS 启动模式改为 UEFI（UEFI 模式下无 Oprom 资源分配的问题）。
+* **方法二**：如果 BIOS 启动模式必须使用 Legacy，可将 BIOS 下的串口重定向功能关闭，释放 Oprom 资源给 RAID 卡使用。
++
+关闭串口重定向目录：将 **Advanced** > **Console Redirection** 页面的 **Console Serial Redirection** 配置为 **Disabled**。

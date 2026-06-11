@@ -1,0 +1,31 @@
+---
+title: "Network Isolation"
+keywords: "Kubernetes, {ks_product}, workspace, network policy, project settings, network isolation"
+description: "Introduces how to enable network isolation for workspaces and projects."
+weight: 03
+layout: "second"
+---
+
+
+Workspace network isolation and project network isolation are used to control the egress and ingress traffic of workspaces and projects.
+
+* If both "Workspace Network Isolation (including egress traffic restrictions)" and "Project Network Isolation (including egress traffic restrictions)" are enabled, the project's network policy takes precedence.
+* If "Workspace Network Isolation" is enabled and "Project Network Isolation" is not enabled, the workspace's network policy takes precedence, meaning "Workspace Network Isolation (including egress traffic restrictions)" applies to all projects within the workspace.
+* If "Workspace Network Isolation" is not enabled and "Project Network Isolation" is enabled, the project's network policy takes precedence.
+
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+* Enabling "Workspace Network Isolation" automatically creates network policies in the corresponding cluster for all projects under that workspace. If a new project is added to the workspace, a network policy will be automatically created for that project. If a project is removed from the workspace, its network policy will also be automatically removed.
+
+* Enabling "Project Network Isolation" automatically creates a network policy in the corresponding cluster for that project.
+|===
+
+
+Based on enabling "Workspace Network Isolation" or "Project Network Isolation", you can configure a whitelist for a project to achieve the following purposes:
+
+* Allow the current project to access specific projects, services, IP CIDR blocks, or ports.
+* Allow the current project to be accessed by specific projects, services, IP CIDR blocks, or ports.

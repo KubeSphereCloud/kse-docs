@@ -1,0 +1,144 @@
+---
+title: "修改配置参数"
+keywords: "Kubernetes, {ks_product}, RadonDB RabbitMQ, 配置参数, 修改参数"
+description: "介绍如何修改 RadonDB RabbitMQ 配置参数。"
+weight: 07
+---
+
+:ks_db_product: RabbitMQ
+
+本节介绍如何修改 RadonDB {ks_db_product} 的配置参数。
+
+RadonDB {ks_db_product} 实例支持编辑配置参数，通过管理配置参数可调优服务性能，并可启用高可用性能。
+
+// Warning
+include::../../../_ks_components/admonitions/warning.adoc[]
+
+修改部分配置参数后，{ks_db_product} 服务会重启，造成业务中断。请谨慎操作。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 点击页面右侧的**参数管理**页签，点击**编辑**即可修改配置参数。
+. 点击**确定**保存。
+
+
+== 参数简介
+
+[%header,cols="1,3"]
+|===
+|参数 |说明
+
+|节点端口
+|是否启用 NodePort 以便从集群外部访问。
+
+|cluster_partition_handling
+|网络分区处理策略。
+
+|cluster_keepalive_interval	
+|向集群里的其他子节点发送存活消息的间隔，单位为 ms。取值范围为 1000–51200。
+
+|queue_master_locator
+|队列主节点的策略。
+
+|peer_discovery_backend
+|指定集群节点发现机制。
+
+| address_type
+| 访问其他节点时使用的方式。
+
+| hostname
+| Kubernetes API 主机名。
+
+| num_acceptors.tcp
+| 接收 tcp 连接的 erlang 进程数。
+
+| handshake_timeout
+| 连接超时时间，单位 ms。
+
+| num_acceptors.ssl
+| 接收 tls 连接的 erlang 进程数。
+
+| vm_memory_high_watermark.relative
+| 内存阈值, 绝对值。
+
+| vm_memory_calculation_strategy
+| 内存使用情况报告策略。
+
+| vm_memory_high_watermark_paging_ratio
+| 分页阈值。
+
+| disk_free_limit.relative
+| 可用磁盘阈值，相对值。
+
+| disk_free_limit.absolute
+| 可用磁盘阈值，绝对值。
+
+| log.file.level
+| 日志级别。
+
+| channel_max
+| 最大 channel 数量。
+
+| max_message_size
+| 允许的最大消息负载大小，单位 bytes。
+
+| heartbeat
+| 心跳超时时间。
+
+| default_user
+| 默认用户。
+
+| default_pass
+| 默认用户密码。
+
+| default_user_tags.administrator
+| 默认用户标签。
+
+| default_permissions.configure
+| 默认用户的 configure 权限。
+
+| default_permissions.read
+| 默认用户的 read 权限。
+
+| default_permissions.write
+| 默认用户的 write 权限。
+
+| collect_statistics
+| 统计相关，与web管理插件显示有关。
+
+| collect_statistics_interval
+| 配置发送当前 broker 的时间间隔，单位 ms。
+
+| delegate_count
+| 用于集群内通信的代表进程数。
+
+| queue_index_embed_msgs_below
+| 在消息的字节数中，消息将被直接嵌入到队列索引中。
+
+| mnesia_table_loading_retry_timeout
+| 等待集群中的 Mnesia tables 变得可用时使用的超时时间，单位 ms。
+
+| mnesia_table_loading_retry_limit
+| 在等待集群中的 Mnesia tables 可用时，需要重试的次数。
+
+| mirroring_sync_batch_size
+| 在消息中镜像同步批量大小。
+
+| proxy_protocol
+| 设置是否启用代理。
+
+|===
+
+

@@ -1,0 +1,32 @@
+---
+title: "修改 DHCP"
+weight: 5
+---
+
+== 场景描述
+
+该章节用于指导用户修改已创建好的 IP 池的 DHCP。
+
+== 注意事项
+
+对与状态为``使用中``的 IP 池进行 DHCP 修改，有可能影响正在进行的业务，请谨慎操作。
+
+== 操作步骤
+
+. 登录{product_console_name}。
+. 在顶部导航栏，选择**资源** > **网络** > **IP 池**，进入  **IP 池**列表页面。
+. 点击待修改 DHCP 的 IP 池名称，进入其详情页面。
+. 在 IP 池详情页面，，点击**更多操作** > **修改 DHCP**。
++
+image::/images/express/console/ip_pool_manage_10.png[]
+
+. 在弹出的**修改 DHCP**窗口中，**开启** DHCP 服务器，设置``起始 IP``、``结束 IP`` 以及``网关 IP``，点击**修改**即可。
++
+include::../../../../../../../_components/note.adoc[]
+修改网关需要等待服务生效，更新之后需重启虚拟机，以使网关 IP 生效。
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/ip_pool_manage_11.png[,60%]
+
+
+

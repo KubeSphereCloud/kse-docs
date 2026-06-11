@@ -1,0 +1,106 @@
+---
+title: "Xenondb 数据库"
+weight: 2
+---
+
+
+. 登录 NeonSAN 的数据库节点，查询数据库集群状态。
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
++
+image::/images/neonsan/ops_guide_13.png[]
++
+include::../../../../../../../_components/note.adoc[]
+* 若数据库集群状态异常，需调查原因并解决后，再次执行该步骤。
+* 返回结果中 ``Mysqld`` 字段均为 ``RUNNING``；``IO/SQL_RUNNING`` 字段均为 ``[true/true]`` 即表示正常。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 登录数据库集群的 FOLLOWER 节点。
+
+. 停止该节点的数据库服务。
++
+[,shell]
+----
+/opt/xenondb/bin/xenon_service.py stop
+----
+. 查看数据库集群状态。
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
++
+include::../../../../../../../_components/note.adoc[]
+除该节点状态为 UNKNOW 以后，其余节点状态正常。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 确认该节点的 mysqld 进程停止运行。无相关进程内容输出，则说明 mysqld 进程停止运行。
++
+[,shell]
+----
+ps -ef | grep mysqld
+----
+. 确认该节点数据库目录没有使用。
++
+[,shell]
+----
+lsof +d /data/xenondb/
+----
++
+include::../../../../../../../_components/note.adoc[]
+需根据实际情况修改数据库目录。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 迁该节点数据目录到指定目录下，如/pitrix 目录。
++
+[,shell]
+----
+mv /data/xenondb/ /pitrix/data/xenondb
+----
++
+include::../../../../../../../_components/note.adoc[]
+需根据实际情况修改命令行中的目录。
+include::../../../../../../../_components/table_footer.adoc[]
+. 在原数据目录下创建软链接。
++
+[,shell]
+----
+ln -s /pitrix/data/xenondb /data/xenondb
+----
+. 启动数据库服务。
++
+[,shell]
+----
+/opt/xenondb/bin/xenon_service.py start
+----
++
+include::../../../../../../../_components/note.adoc[]
+可执行 ``ps -ef | grep mysqld`` 命令确认 Mysqld 运行状态。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 查看数据库集群状态。
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status 
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 若数据库集群状态异常，需调查原因并解决后，再次执行该步骤。
+* 集群状态正常后，即 ``Mysqld`` 字段均为 ``RUNNING``；``IO/SQL_RUNNING`` 字段均为 ``[true/true]``。再继续操作下一个节点。
+include::../../../../../../../_components/table_footer.adoc[]
+. 重复步骤 2~步骤 10。待所有 FOLLOWER 节点操作完成后，最后操作数据库 Leader 节点。
+. 确认集群各服务状态。
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+neonsan list_store
+neonsan list_ssd
+neonsan list_volume -detail
+----
+
+

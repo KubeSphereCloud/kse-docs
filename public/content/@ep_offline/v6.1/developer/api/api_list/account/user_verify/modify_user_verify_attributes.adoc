@@ -1,0 +1,164 @@
+---
+title: 修改用户认证属性（ModifyUserVerifyAttributes）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| address
+| String
+| false
+| 地址
+
+| authorizer_name
+| String
+| false
+| 认证名称
+
+| authorizer_phone
+| String
+| false
+| 认证电话
+
+| authorizer_position
+| String
+| false
+| 认证地址
+
+| bank_account_name
+| String
+| false
+| 银行开户名
+
+| bank_account_number
+| String
+| false
+| 银行开户账号
+
+| bank_name
+| String
+| false
+| 银行名称
+
+| business_license_code
+| String
+| false
+| 经营执照编码
+
+| company_cert_type
+| String
+| false
+| 公司证书类型
+
+| company_code
+| String
+| false
+| 公司编码
+
+| company_name
+| String
+| false
+| 公司名称
+
+| company_profile
+| String
+| false
+| 公司简介
+
+| company_website
+| String
+| false
+| 公司地址
+
+| credential_type
+| String
+| false
+| 凭证类型
+
+| nationality
+| String
+| false
+| 国籍
+
+| offical_address
+| String
+| false
+| 官方地址
+
+| offical_fax
+| String
+| false
+| 官方传真
+
+| offical_phone
+| String
+| false
+| 官方电话
+
+| personal_code
+| String
+| false
+| 身份证号码
+
+| personal_name
+| String
+| false
+| 姓名
+
+| product_description
+| String
+| false
+| 产品描述
+
+| user
+| String
+| true
+| 用户id
+
+| zip_code
+| String
+| false
+| 邮政编码
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "user": "admin",
+  "verify_type": "company"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyUserVerifyAttributesResponse",
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

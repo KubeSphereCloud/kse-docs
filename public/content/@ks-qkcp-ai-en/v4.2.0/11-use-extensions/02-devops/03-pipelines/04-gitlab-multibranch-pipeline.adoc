@@ -1,0 +1,231 @@
+---
+title: "Creating a Multi-branch Pipeline Using GitLab"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Using DevOps, Pipeline"
+description: "Describes how to create a multi-branch pipeline using GitLab."
+weight: 04
+---
+
+
+link:https://gitlab.com/users/sign_in[GitLab] is a web-based Git repository management tool that supports both public and private repositories. It provides comprehensive DevOps capabilities, including source code management, code review, issue tracking, and continuous integration. Through GitLab, teams can collaborate efficiently on a single platform to complete the entire software development process from coding to deployment.
+
+KubeSphere supports creating multi-branch pipelines using GitLab within DevOps projects. This document demonstrates how to create a multi-branch pipeline using GitLab.
+
+
+== Prerequisites
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+* A workspace, a DevOps project, and a user (for example, **project-regular**) must be created. This user must be invited to the DevOps project and granted the **operator** role. Refer to link:../../02-devops-project-mangement/03-project-members/01-invite-a-user-to-a-project/[Invite a User to a DevOps Project].
+
+* You must have a link:https://gitlab.com/users/sign_in[GitLab] account and a link:https://hub.docker.com/[Docker Hub] account.
+
+
+== Step 1: Create Credentials
+
+include::../../../../_custom/devops/project-regular-oper-logIn.adoc[]
++
+
+. In the left navigation pane, select **DevOps > Credentials**.
+
++
+
+include::../../../../_custom/devops/devops-oper-dropdownList.adoc[]
+
++
+
+. Create the following credentials. For more information on how to create credentials, refer to link:../../07-credentials/01-credential-management/[Credentials].
++
+--
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+If your account or password contains special characters, such as **@** and **$**, it may cause errors during pipeline execution due to unrecognized characters. In this case, you need to first encode your account or password on a third-party website (for example, link:https://www.urlencoder.org/[urlencoder]), then copy and paste the output as your credential information.
+
+|===
+
+[%header,cols="1a,2a,2a"]
+|===
+|Credential ID|Type|Purpose
+
+|dockerhub-id
+|Username and Password
+|Docker Hub
+
+|gitlab-id
+|Username and Password
+|GitLab
+
+|demo-kubeconfig
+|kubeconfig
+|Kubernetes
+|===
+--
+
+. After creation, you will see the created credentials on the Credentials page.
+
+
+== Step 2: Edit the Jenkinsfile in the GitLab Repository
+
+. Log in to GitLab and create a public project. Click **New project > Import project**, select **Import repository from URL**, enter the URL of link:https://github.com/kubesphere/devops-maven-sample[devops-maven-sample], set the visibility level to **Public**, and then click **Create project**.
+
+. In the newly created project, create a new branch from the v4.1.0 branch and name it **gitlab-demo**.
+
+. In the **gitlab-demo** branch, click the **Jenkinsfile-online** file in the root directory.
+
+. Click **Edit**, change **GITHUB_CREDENTIAL_ID**, **GITHUB_ACCOUNT**, and **@github.com** to **GITLAB_CREDENTIAL_ID**, **GITLAB_ACCOUNT**, and **@gitlab.com** respectively, and then edit the entries listed in the table below. Also, change the **branch** value in the **push latest** and **deploy to dev** stages to **gitlab-demo**.
++
+--
+[%header,cols="1a,2a,2a"]
+|===
+|Entry|Value|Description
+
+|GITLAB_CREDENTIAL_ID
+|gitlab-id
+|The **name** you set for your GitLab account in KubeSphere, used to push tags to your GitLab repository.
+
+|DOCKERHUB_NAMESPACE
+|your-dockerhub-id
+|Replace with your Docker Hub account name, or the name of an Organization under that account.
+
+|GITLAB_ACCOUNT
+|your-gitlab-id
+|Replace with your GitLab account name, or the name of a group under that account.
+|===
+
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more information about environment variables in the Jenkinsfile, refer to link:../02-create-a-pipeline-using-jenkinsfile/[Creating a Pipeline Using a Jenkinsfile].
+
+|===
+--
+
+. Click **Commit changes** to update the file.
+
+
+== Step 3: Create Projects
+
+Create two projects, for example, **kubesphere-sample-dev** and **kubesphere-sample-prod**, representing the development and production environments respectively. After the pipeline runs successfully, the relevant deployments (Deployment) and services (Service) for the application will be automatically created in these two projects.
+
+For more information, refer to link:../02-create-a-pipeline-using-jenkinsfile/#_step_2_modify_jenkinsfile_in_github_repository[Creating a Pipeline Using a Jenkinsfile].
+
+== Step 4: Create a Pipeline
+
+. On the **DevOps > Pipelines** page, click **Create**.
+
+. In the dialog box that appears, name it **gitlab-multi-branch**.
+
+. Under **Pipeline Type**, select **Multi-branch Pipeline**.
+
+. Under **Code Repository**, select a code repository and click **Next** to continue.
++
+--
+If no code repository is available, click **Create Code Repository** below. For more information, refer to link:../../06-code-repositories/01-import-code-repositories/[Importing Code Repositories].
+--
+
+.. In the **Import Code Repository** dialog box, enter a code repository name (custom), and click to select a code repository.
+
+.. On the **GitLab** tab, select the default option link:https://gitlab.com[] for **GitLab Server Address**, enter the name of the group to which the GitLab project belongs in **Project Group/Owner**, and then select the **devops-maven-sample** repository from the **Code Repository** dropdown menu. Click the image:/images/ks-qkcp/zh/icons/check-dark.svg[check,18,18] icon in the lower right corner, and then click **OK**.
++
+--
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+To use a private GitLab repository, follow these steps:
+
+* On GitLab, go to **User Settings > Access Tokens** and create a personal access token with API and read_repository permissions.
+
+* link:../07-access-jenkins-console[Log in to the Jenkins dashboard], go to **Manage Jenkins > Manage Credentials**, and create a Jenkins credential using your GitLab token for accessing GitLab. Then go to **Manage Jenkins > Configure System**, and add this credential under **GitLab Services**.
+
+* In the DevOps project, select **DevOps Project Settings > Credentials** and create a credential using your GitLab token. When creating the pipeline, specify this credential in the **Credential** field on the **GitLab** tab so that the pipeline can pull code from your private GitLab repository.
+
+|===
+--
+
+. On the **Advanced Settings** tab, change the **Script Path** to **Jenkinsfile-online** and then click **Create**.
++
+--
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+This field specifies the path to the Jenkinsfile in the code repository, relative to the repository's root directory. If the file location changes, the script path also needs to be updated.
+
+|===
+--
+
+
+== Step 5: Run the Pipeline
+
+. After the pipeline is created, it will appear in the list. Click the pipeline name to view its details page.
+. Click **Run** on the right. In the dialog box that appears, select **gitlab-demo** from the dropdown menu and add a tag number, such as **v0.0.2**. Click **OK** to trigger a new run.
+. Wait a moment, then click the run record to view its details.
+. If the pipeline runs successfully, it will pause at the **Deploy to Dev** stage, requiring a user with approval permissions to click **Continue**.
++
+--
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Three stages, **deploy to dev**, **push with tag**, and **deploy to production**, are defined in the Jenkinsfile, each requiring approval. Therefore, when the pipeline reaches these stages, it will pause and wait for approval.
+|===
+--
+
+
+== Step 6: Check the Pipeline Status
+
+. Under the **Pipeline** tab of the run record, view the running status of the pipeline.
+
+. Click the **Run Logs** tab to view the pipeline run logs. Click each stage to view its detailed logs. Click **View Full Logs** to troubleshoot issues based on the logs, or download the logs locally for further analysis.
+
+
+== Step 7: Verify the Results
+
+. As defined in the Jenkinsfile, the Docker image built by the pipeline has also been successfully pushed to Docker Hub. In Docker Hub, you will see the image with the tag **v0.0.2**, which was specified before running the pipeline.
+
+. Simultaneously, a new tag has been generated in GitLab.
+
+. The sample application will be deployed to **kubesphere-sample-dev** and **kubesphere-sample-prod**, creating the corresponding deployments and services. Go to these two projects, and the expected results are as follows:
+
++
+--
+[%header,cols="1,2,2,1,1"]
+|===
+|Environment|URL|Namespace|Deployment|Service
+
+|Development Environment
+|http://{$NodeIP}:{$30861}
+|kubesphere-sample-dev
+|ks-sample-dev
+|ks-sample-dev
+
+|Production Environment
+|http://{$NodeIP}:{$30961}
+|kubesphere-sample-prod
+|ks-sample
+|ks-sample
+|===
+
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+You may need to open the port in the security group to access the application using the URL. For more information, refer to link:../02-create-a-pipeline-using-jenkinsfile/#_step_8_access_the_sample_service[Accessing the Sample Service].
+
+|===
+--

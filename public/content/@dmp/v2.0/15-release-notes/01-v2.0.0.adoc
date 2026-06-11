@@ -1,0 +1,94 @@
+---
+title: "v2.0.0 版本说明"
+keywords: "v2.0.0 版本说明, RadonDB DMP"
+description: "介绍 RadonDB DMP 新特性、功能增强以及问题修复。"
+weight: 10
+---
+
+== 全新管理平面
+- 支持多种类型数据库与中间件的的可视化创建与统一管理。
+- 支持对 K8s 集群进行切换，查看不同集群上的数据库与中间件实例。
+
+== 可扩展
+- 采用全新的微内核架构 KubeSphere LuBan，支持 RadonDB DMP 功能扩展。
+
+== MySQL
+- 支持 MySQL 版本：5.7、8.0	
+- 支持通过 Uber 日志格式改进命令和 Sidecar 中的日志记录
+- 支持备份进行过程中滚动更新暂停转换
+- 添加备份版本转换和 MySQL 转换逻辑 
+- 添加 CRD 名称空间转换
+- 添加维护模式删除领导者服务
+-  增强实例健康检查
+- 修复插件 xtraconf 所有权问题和 S3 备份环境问题
+- 修复 Chart 问题和版本问题
+- 修复备份/恢复中的 Bugs 并融合 V2.4.0 功能
+- 修复通过 Helm 安装时备份转换问题
+- 修复运维人员中的备份转换崩溃问题
+- 修复与 Xenon 健康检查相关的 Bugs
+- 修改检查 CRD 配置
+
+== OpenSearch
+- 支持 OpenSearch、Dashboard、Logstash 等节点的部署和管理
+- 支持 OpenSearch 版本：2.8.0
+- 支持动态扩展实例计算规格和存储容量
+- 支持动态调整实例节点数量
+- 支持通过滚动方式执行配置更改
+- 支持 Keystore 功能
+- 支持对接 Prometheus，提供基于 Exporter 的资源状态监控功能
+- 支持 TLS
+
+== Redis Cluster
+- 支持 Proxy 作为实例代理
+- 支持 Redis Cluster 实例故障转移和自动恢复
+- 支持基于 Prometheus Exporter 的资源状态监控功能
+- 支持 K8s 请求和限制的资源限制
+- 支持对群集的密码/无密码设置
+- Redis 管理配置参数热更新
+
+== Redis Sentinel
+- 支持 Redis 哨兵模式部署
+- 支持 Redis Sentinel 故障转移和自动恢复
+- 支持基于 Prometheus Exporter 的资源状态监控功能
+- 支持对实例的密码/无密码设置
+- 支持 Redis 管理配置参数热更新
+
+== MongoDB
+- 支持副本集模式部署
+- 支持实例自动故障转移和恢复
+- 支持 TLS
+- 使用 Prometheus Exporter 进行内置监控
+
+== PorstgreSQL
+- 支持 12.12、13.8、14.5、15.3 的内核版本
+- 所有内核版本均支持 PostGis、Citus 插件
+- 支持水平及垂直扩缩容
+- 支持半同步流复制
+
+== Kafka
+- 支持 Kafka 3.2 版本
+- 支持通过图形化界面部署和管理 Kafka 节点及 ZooKeeper 节点
+- 支持实例自动故障转移和恢复
+- 支持动态扩展实例容量和存储
+- 支持对接 Prometheus，提供基于 Exporter 的资源状态监控功能
+- 支持 TLS，内部访问通过 TLS 更安全
+- 支持图形化界面部署和管理用户、Topic 以及 Acl 控制
+- 支持通过界面对实例重平衡
+
+== RabbitMQ
+- 支持 RabbitMQ 3.11.13 版本
+- 支持图形界面部署和管理 RabbitMQ 节点
+- 支持实例自动故障转移和恢复
+- 支持动态扩展实例容量和存储
+- 支持对接 Prometheus ，提供基于 Exporter 的资源状态监控功能
+- 支持 X86 和 Arm64 架构
+- 集成了 RabbitMQ Management
+
+== 备份管理
+- 提供备份与恢复能力。支持手动备份、自动化备份、从备份中恢复等功能。
+- 提供 S3 类型备份仓库。
+
+== 限制与局限
+- 监控与告警功能需接入 Whizard 可观测中心扩展组件，当前暂不可用，将在后续版本中支持。
+- 巡检功能需接入 KubeEye 集群巡检扩展组件，当前暂不可用，将在后续版本中支持。
+

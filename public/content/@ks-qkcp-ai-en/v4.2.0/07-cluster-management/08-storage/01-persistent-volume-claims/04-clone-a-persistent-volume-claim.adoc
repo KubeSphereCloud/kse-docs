@@ -1,0 +1,43 @@
+---
+title: "Clone a Persistent Volume Claim"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Persistent Volume Claim, Persistent Volume, Clone Persistent Volume"
+description: "Introduces how to clone a persistent volume."
+weight: 04
+---
+
+:ks_permission: **Persistent Volume Claim Management**
+:ks_navigation: **Storage > Persistent Volume Claims**
+
+
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-desc-cloneAPersistentVolume.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-prer-persistentVolumeCreated.adoc[]
+
+* The clone operation is ultimately performed by the backend storage system. Ensure that your backend storage system supports volume cloning and that the storage class associated with the Persistent Volume Claim has the volume cloning feature enabled. For more information, refer to link:../../02-storage-classes/05-enable-and-disable-volume-operations/[Enable and Disable Volume Operations].
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-oper-cloneAPersistentVolume.adoc[]

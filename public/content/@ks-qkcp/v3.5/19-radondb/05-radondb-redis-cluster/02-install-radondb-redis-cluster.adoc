@@ -1,0 +1,88 @@
+---
+title: "安装 RadonDB Redis Cluster"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Redis Cluster, 安装 RadonDB Redis Cluster"
+description: "介绍如何安装 RadonDB Redis Cluster。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 0d2f871f56e241e1ba8a0dd217dacb2a
+:ks_xref_id: f21d6e3b853c4c909a36956c63a72598
+:ks_comp: ../../../components/
+:ks_title: 安装 RadonDB Redis Cluster
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB Redis Cluster, 安装 RadonDB Redis Cluster
+:ks_description: 介绍如何安装 RadonDB Redis Cluster。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何安装 RadonDB Redis Cluster。
+
+
+== 前提条件link:[id=ea265b87466640fd89733e8229269425]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+* 您需要获取 RadonDB Redis Cluster 应用授权。有关更多信息，请联系{ks_product_both}技术支持。
+
+
+== 操作步骤link:[id=7e4a9c3a439f40c4b32c13fa3e1b89f8]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在页面右侧选择**安装 > RadonDB Redis Cluster**。
+
+. 在**基本信息**页签，设置 RadonDB Redis Cluster 应用的基本信息和安装位置，然后点击**下一步**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|RadonDB Redis Cluster 应用的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 32 个字符。
+
+|版本
+|RadonDB Redis Cluster 应用的版本。
+
+|描述
+|RadonDB Redis Cluster 应用的描述信息。描述可包含任意字符，最长 256 个字符。
+
+|位置
+|RadonDB Redis Cluster 应用所属的企业空间、集群和项目。
+|===
+--
+
+. 在**应用设置**页签，设置 Redis Cluster 数据库的参数，然后点击**安装**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-para-redisSettings.adoc[]
+
+|代理节点数量
+|Redis 数据库的代理节点数量。取值范围为 0 到 50。
+
+|代理节点资源
+|系统为 Redis 代理节点预留的 CPU 和内存资源，同时也是 Redis Cluster 代理节点可使用的 CPU 和内存资源上限。
+
+|===
+
+RadonDB Redis Cluster 安装完成后将显示在 RadonDB 应用列表中。
+--

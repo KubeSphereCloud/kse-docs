@@ -1,0 +1,91 @@
+---
+title: 查询第三方APP（DescribeThirdApps）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| client_ids
+| Array
+| true
+| 客户端ID列表
+
+| limit
+| Integer
+| false
+| 查询数量
+
+| offset
+| Integer
+| false
+| 查询偏移
+
+| owner
+| String
+| false
+| 
+
+| reverse
+| Integer
+| false
+| 数据是否反向排序
+
+| sort_key
+| String
+| false
+| 排序字段
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| third_app_set
+| Array
+| false
+| 查询结果列表
+
+| total_count
+| String
+| false
+| 查询总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "client_ids": [
+    "client_id1",
+    "client_id2"
+  ],
+  "limit": 10,
+  "offset": 1,
+  "owner": "admin",
+  "reverse": 1,
+  "sort_key": "client_name"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeThirdAppsResponse",
+  "ret_code": 0,
+  "third_app_set": [],
+  "total_count": 10
+}
+----

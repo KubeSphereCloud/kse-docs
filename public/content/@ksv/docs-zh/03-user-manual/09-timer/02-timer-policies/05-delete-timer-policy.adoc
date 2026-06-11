@@ -1,0 +1,73 @@
+---
+title: "删除定时策略"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 定时策略, 删除"
+description: "介绍如何使用{ks_product_both}Web 控制台删除定时策略。"
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 2338c4e939d04f3ab8889d92f10261ac
+:ks_xref_id: e0ba5e2589614983b15888fd3db54c5f
+:ks_comp: ../../../../components/
+:ks_title: 删除定时策略
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台删除定时策略。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 定时策略, 删除
+:ks_weight: 05
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台删除定时策略。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=beaee008205443abb1b38bc6f36c4ca6]
+
+系统 **admin** 用户可以删除集群中所有已创建的定时策略，普通项目管理员和操作员可以删除自身创建的定时策略，项目观察员没有删除权限。
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 删除单个定时策略link:[id=31897d7694cf4c95b12f2d0a2d072490]
+
+include::../../../../_custom/timer/timer-policy-steps.adoc[]
+
+. 在定时策略列表页面，点击目标定时策略，进入定时策略详情页面。
+
+. 在定时策略详情页面左上角点击 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**删除**。
+
+. 在弹出的对话框中点击**确定**可删除当前定时策略。
++
+--
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+定时策略删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 批量删除定时策略link:[id=a7d264fe587345acb66d27948e5a32f0]
+
+include::../../../../_custom/timer/timer-policy-steps.adoc[]
+
+. 在定时策略列表页面，选择需要删除的定时策略名称左侧的复选框，然后在列表上方点击**删除**。
+
+. 在弹出的对话框中点击**确定**可批量删除多个定时策略。
++
+--
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+定时策略删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+

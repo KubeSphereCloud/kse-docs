@@ -1,0 +1,221 @@
+---
+title: "控制用户权限"
+keywords: "Kubernetes, {ks_product}, 快速入门, 用户, 权限"
+description: "介绍如何创建用户，并使用企业空间、项目和角色控制用户的访问权限。"
+weight: 03
+---
+
+// :ks_include_id: 0959cd0a7bc943ba9fd03053485008e6
+:ks_xref_id: 798eaa56735c4c94ad68a57f822403fa
+:ks_comp: ../../components/
+:ks_title: 控制用户权限
+:ks_keywords: Kubernetes, {ks_product}, 快速入门, 用户, 权限
+:ks_description: 介绍如何创建用户，并使用企业空间、项目和角色控制用户的访问权限。
+:ks_weight: 03
+:ks_icon:
+
+
+ifeval::["{file_output_type}" == "html"]
+
+本节介绍如何创建用户，并使用企业空间、项目和角色控制用户的访问权限。有关用户权限控制的更多信息，请参阅link:../../04-platform-management/04-access-control/_index/[访问控制]。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+本节介绍如何创建用户，并使用企业空间、项目和角色控制用户的访问权限。有关用户权限控制的更多信息，请参阅《KubeSphere 企业版平台管理指南》里的“访问控制”章节。
+
+endif::[]
+
+{ks_product_right}的多租户系统分为三个层级，即集群、企业空间和项目。您可以在一个{ks_product_both}集群中创建多个企业空间，每个企业空间下可以创建多个项目。{ks_product_right}为每个层级默认设有多个内置角色，您也可以创建拥有自定义权限的角色。
+
+
+== 前提条件link:[id=47a5fd7043ff46deae636927dc2051ba]
+
+您需要准备一个 Kubernetes 集群，并已安装{ks_product_left}。
+
+
+== 创建用户link:[id=9cae3164010f4bf98301cc2b583fe4f9]
+
+. 使用默认用户 **admin** 和密码 **P@88w0rd** 登录{ks_product_left} Web 控制台。
++
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+为了您的账户安全，首次登录时系统会提示您修改密码。密码修改后，后续请使用新密码登录。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 点击左上角的**平台管理**，选择**访问控制**。
+
+. 在左侧导航栏，选择**用户**。
+
+. 在用户列表页面，点击**创建**。
+
+. 在**添加用户**对话框，输入以下必填参数：
++
+--
+* **用户名**：用户的名称。
+* **邮箱**：用户的邮箱地址。
+* **密码**：用户的密码。
+--
++
+. 点击**确定**。用户创建后将显示在用户列表中。
+
+
+== 创建企业空间link:[id=f1dc2008841c49dc88c48de6d2b3a5da]
+
+. 在左侧导航栏，选择**企业空间**。企业空间列表中已列出默认企业空间 **system-workspace**，该企业空间包含所有系统项目。
+
+. 在企业空间列表页面，点击**创建**。
+
+. 在**创建企业空间**的**基本信息**页面，输入企业空间的名称（例如 **demo-workspace**）。
++
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+对于多集群环境，设置企业空间的基本信息后，点击**下一步**。在**集群设置**页面，选择企业空间需要使用的集群。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
++
+. 点击**创建**。企业空间创建后将显示在企业空间列表中。
+
+
+== 创建企业空间角色link:[id=b723b6c8b76446428ed1b405b94bb7b9]
+
+. 在企业空间列表页面，点击企业空间的名称 **demo-workspace** 进入该企业空间。
+
+. 在左侧导航栏，选择**企业空间设置** > **企业空间角色**。
++
+--
+企业空间角色列表页面默认列出以下四个内置角色。
+[%header,cols="1a,2a"]
+|===
+|角色 |描述
+
+|**workspace-viewer**
+|企业空间观察员，可以查看企业空间中的所有资源。
+|**workspace-self-provisioner**
+|企业空间普通成员，可以查看企业设置、管理应用模板、创建项目和 DevOps 项目。
+|**workspace-regular**
+|企业空间普通成员，可以查看企业空间设置。
+|**workspace-admin**
+|企业空间管理员，可以管理企业空间中的所有资源。
+|===
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+企业空间内置角色的名称以 <企业空间名称>-<角色名称> 格式显示。例如，在名称为 **demo-workspace** 的企业空间中，角色 **admin** 的实际角色名称为 **demo-workspace-admin**。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
++
+. 在企业空间角色列表页面，点击**创建**。
+
+. 在**创建企业空间角色**对话框，输入**名称**，然后点击**编辑权限**继续。
+
+. 在**编辑权限**对话框，权限归类在不同的**功能模块**下。
++
+--
+在本示例中，点击**项目管理**，并为该角色选择**项目创建**、**项目管理**和**项目查看**。
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+**依赖于**表示当前授权项依赖所列出的授权项，勾选该权限后系统会自动选上所有依赖权限。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
++
+. 点击**确定**。新创建的角色将显示在企业空间角色列表中。
+
+
+== 邀请用户到企业空间link:[id=bf146cbcaffe4ae4a8db82770b9935fb]
+
+. 在左侧导航栏，选择**企业空间设置** > **企业空间成员**。
+
+. 在企业空间成员列表页面，点击**邀请**。
+
+. 在**邀请成员**对话框，点击用户右侧的 image:/images/ks-qkcp/zh/icons/add-dark.svg[add,18,18] 并为用户分配在当前企业空间中的角色。
+
+. 点击**确定**。用户被邀请后将显示在企业空间成员列表中。
+
+
+== 创建项目link:[id=30cc12e1d7824ae4b5f1c2ad957ce49c]
+
+. 在左侧导航栏，选择**项目**。
+
+. 在**项目**页签，点击**创建**。
+
+. 在**创建项目**对话框，输入项目的**名称**（例如 **demo-project**）。
++
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+对于多集群环境，您需要选择要创建项目的集群。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
++
+. 点击**确定**。项目创建后将显示在项目列表中。
+
+
+== 创建项目角色link:[id=89a829d13130428697df7576d3d045a6]
+
+. 在**项目**页签，点击项目的名称 **demo-project** 进入该项目。
+
+. 在左侧导航栏，选择**项目设置** > **项目角色**。
++
+--
+项目列表页面默认列出以下三个内置角色。
+
+[%autowidth]
+|===
+|角色 |描述
+
+|**viewer**
+|项目观察员，可以查看项目中的所有资源。
+
+|**operator**
+|项目管理员，可以管理项目中除用户和角色之外的资源。
+
+|**admin**
+|项目管理员，可以管理项目中的所有资源。
+|===
+--
++
+. 在项目角色列表页面，点击**创建**。
+
+. 在**创建角色**对话框，输入**名称**，然后点击**编辑权限**继续。
+
+. 在**编辑权限**对话框，权限归类在不同的**功能模块**下。
++
+--
+在本示例中，点击**应用负载管理**，并为该角色选择**应用负载管理**和**应用负载查看**。
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+**依赖于**表示当前授权项依赖所列出的授权项，勾选该权限后系统会自动选上所有依赖权限。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
++
+. 点击**确定**。新创建的角色将显示在企业空间角色列表中。
+
+
+== 邀请用户到项目link:[id=803101a7a83f4b41a6dce9f3ee59bd5b]
+
+. 在左侧导航栏，选择**项目设置** > **项目成员**。
+
+. 在项目成员列表页面，点击**邀请**。
+
+. 在**邀请成员**对话框，点击用户右侧的 image:/images/ks-qkcp/zh/icons/add-dark.svg[add,18,18] 并为用户分配在当前项目中的角色。
+
+. 点击**确定**。用户被邀请后将显示在项目成员列表中。

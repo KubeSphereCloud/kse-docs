@@ -1,0 +1,210 @@
+---
+title: 查询证书（DescribeLicenses）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| license_id
+| String
+| true
+| 证书ID
+
+| license_type
+| String
+| true
+| 证书类型
+
+| limit
+| Integer
+| true
+| 查询个数
+
+| offset
+| Integer
+| true
+| 偏移量
+
+| product_id
+| String
+| true
+| 产品id
+
+| product_name
+| String
+| true
+| 产品名称
+
+| reverse
+| Integer
+| true
+| 查询结果是否反转
+
+| status
+| String
+| true
+| 状态
+
+| sub_product_id
+| String
+| true
+| 子产品id
+
+| zone
+| String
+| true
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 操作名称
+
+| license_set
+| Array
+| false
+| 
+
+| license_set[].create_time
+| String
+| false
+| true
+
+| license_set[].custom_data
+| String
+| false
+| true
+
+| license_set[].end_time
+| String
+| false
+| true
+
+| license_set[].hypernode_count
+| Integer
+| false
+| true
+
+| license_set[].license_id
+| String
+| false
+| true
+
+| license_set[].license_type
+| String
+| false
+| true
+
+| license_set[].product_id
+| String
+| false
+| true
+
+| license_set[].product_name
+| String
+| false
+| true
+
+| license_set[].start_time
+| String
+| false
+| true
+
+| license_set[].status
+| String
+| false
+| true
+
+| license_set[].status_time
+| String
+| false
+| true
+
+| license_set[].sub_product_id
+| String
+| false
+| true
+
+| license_set[].version
+| String
+| false
+| true
+
+| license_set[].zone
+| String
+| false
+| true
+
+| ret_code
+| Integer
+| false
+| 操作结果
+
+| total_count
+| Integer
+| false
+| 
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "license_code": "app-123123",
+  "license_type": "app",
+  "limit": 1,
+  "offset": 1,
+  "product_id": "product-xx",
+  "product_name": "product-name",
+  "reverse": 1,
+  "status": "activate",
+  "sub_product_id": "sub-product-xxx",
+  "zone": "pek"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeLicensesResponse",
+  "license_set": [
+    {
+      "create_time": "2023-07-05T08:35:51Z",
+      "custom_data": null,
+      "end_time": "2023-10-04T08:35:51Z",
+      "hypernode_count": 20,
+      "license_id": "lc-6Xhrf3KW",
+      "license_type": null,
+      "product_id": null,
+      "product_name": null,
+      "start_time": "2023-07-05T08:35:51Z",
+      "status": "enabled",
+      "status_time": "2023-07-05T08:35:51Z",
+      "sub_product_id": null,
+      "version": null,
+      "zone": null
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

@@ -1,0 +1,141 @@
+---
+title: 环境检查
+weight: 4
+---
+
+
+
+// == 检查存储集群
+
+
+// . 执行如下命令行，登录原环境的 FirstBox 节点。命令行中的 `<firstbox ip>` 是原环境的 FirstBox 节点 IP。
+// +
+// [source,shell]
+// ----
+// ssh -p 6023 root@<firstbox ip>
+// ----
+
+// . 执行如下命令行，从 FirstBox 节点跳转至网关节点。
+// +
+// [source,shell]
+// ----
+// ssh core0
+// ----
+
+// . 执行如下命令行，检查新的数据存储池是否成功添加。
+// +
+// [source,shell]
+// ----
+// docker exec hydro_confd hydro cluster list
+// ----
+// +
+// 命令行回显内容如下所示，新增数据存储池显示在列，说明数据存储池添加成功。
+// +
+// image::/images/u10000/expand_1.png[expand_1,60%]
+
+// . 执行如下命令行，检查新增数据存储池的硬盘状态是否正常。
+// +
+// 命令行中 `cluster 2` 表示数据存储池名称，其中 `cluster 2` 部分需根据link:../config/#_base_ini[前文]数据存储池配置内容进行替换。
+// +
+// [source,shell]
+// ----
+// docker exec hydro_confd hydro cluster 2 info
+// ----
+// +
+// 命令行回显内容如下所示，所有硬盘 `Status` 字段均显示 `Normal`，说明硬盘状态正常。
+// +
+// image::/images/u10000/expand_2.png[expand_2,70%]
+
+
+== 检查后端服务
+
+. 执行如下命令行，登录原环境的 FirstBox 节点。命令行中的 `<firstbox ip>` 是原环境的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 进入脚本所在目录。
+
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，对当前环境进行基础检查。
++
+[source,shell]
+----
+./qs_installer tools --check-u1w
+----
++
+命令行返回结果如下图所示，则说明环境检查通过。若有异常输出，需根据输出内容进行排查并解决相关异常。
++
+image::/images/u10000/install_1.png[install_1,60%]
+
+
+== 检查前端服务
+
+延续前文步骤，执行以下命令行，获取 Host 信息后，并登录 Portal 查看集群状态。
+
+. 执行如下命令行，生成 Host 相关信息。
++
+[source,shell]
+----
+./qs_installer tools --generate-hosts
+Usage config dir: /qingstor/etc/
+
+192.168.100.212 console.qingstorage.com
+192.168.100.212 portal.noah.stor.qingstorage.com
+192.168.100.212 stor.qingstorage.com noah.stor.qingstorage.com
+192.168.100.212 s3.stor.qingstorage.com s3.noah.stor.qingstorage.com
+192.168.100.222 n0.noah.stor.qingstorage.com
+192.168.100.222 s0.noah.stor.qingstorage.com
+----
++
+输出示例
++
+[source,shell]
+----
+Usage config dir: /qingstor/etc/
+
+192.168.100.212 console.qingstorage.com
+192.168.100.212 portal.noah.stor.qingstorage.com
+192.168.100.212 stor.qingstorage.com noah.stor.qingstorage.com
+192.168.100.212 s3.stor.qingstorage.com s3.noah.stor.qingstorage.com
+192.168.100.222 n0.noah.stor.qingstorage.com
+192.168.100.222 s0.noah.stor.qingstorage.com
+----
+
+. 将以上返回的 Host 相关信息，添加至本机的 Hosts 文件中即可。
++
+include::../../../../../_components/note.adoc[]
+
+* `console.qingstorage.com` 为当前环境的 Console 访问链接。
+* `portal.noah.stor.qingstorage.com` 为当前环境的 Portal 访问链接。
+* `n0.noah.stor.qingstorage.com` 为当前环境文件存储 NFS 服务域名。
+* `s0.noah.stor.qingstorage.com` 为当前环境文件存储 SMB 服务域名。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 浏览器中输入 Portal 域名，并成功登录 Portal 后，查看**总览**页面，确认**物理资源模块**能成功体现扩容后环境信息。
++
+image::/images/u10000/expand_3.png[expand_3,100%]
+
+. 点击查看**存储池**页面，确认该页面正常显示扩容后各数据存储池信息。
++
+image::/images/u10000/expand_5.png[expand_5,100%]
+
+. 点击查看**服务器**页面，确认该页面正常显示扩容后各节点信息。
++
+image::/images/u10000/expand_4.png[expand_4,100%]
+
+
+
+
+至此，扩容存储节点的操作执行完毕。操作人员需测试存储功能是否正常，观察 Portal 告警中是否有新的告警产生等，若半小时内无新增告警，则说明扩容成功，结束扩容。
+
+

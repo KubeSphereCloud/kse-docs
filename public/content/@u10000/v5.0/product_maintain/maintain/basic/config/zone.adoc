@@ -1,0 +1,29 @@
+---
+title: 查看 Global Domain
+weight: 2
+---
+
+. 登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 是 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 进入配置文件所在目录，查看配置内容。
++
+[source,shell]
+----
+cat /qingstor/etc/base.ini
+----
++
+命令行回显示例
++
+[source,shell]
+----
+......
+zone_id = ectest
+global_domain = stor.qingstorage.com
+......
+----
+

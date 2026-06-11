@@ -1,0 +1,10 @@
+// :ks_include_id: 61bf4ea84b3d4363b5a4ebfacd921138
+This section describes how to edit the default container quota.
+
+The default container quota is the default value for resource reservations and resource limits for containers in a project. When creating a container in a project, if the user does not specify resource reservations and resource limits, the KubeSphere system will automatically use the default container quota.
+
+The default container quota includes two types of settings:
+
+* Resource Reservation: The resources reserved by the system for the container.
+
+* Resource Limit: The upper limit of resources that the container can use.

@@ -1,0 +1,107 @@
+---
+title: "卷相关功能"
+weight: 2
+---
+
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统的卷相关功能
+
+|预置条件	
+a|. QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+. 各节点服务配置正确，且状态正常。
+
+
+|测试过程
+a|
+. 登录 NeonSAN 集群任一节点。
+. 查看集群中的卷的信息。
++
+[source,shell]
+----
+neonsan list_volume -detail
+----
+. 查看集群中存在的卷组信息。
++
+[source,shell]
+----
+neonsan list_pool -detail
+----
+. 创建集群中不存在的卷组。
++
+[source,shell]
+----
+neonsan create_pool -pool neonpool
+----
+. 查看新创建的卷组信息。
++
+[source,shell]
+----
+neonsan list_pool -pool neonpool -detail
+----
+. 创建集群中不存在的卷。
++
+[source,shell]
+----
+neonsan create_volume -volume vol -pool neonpool -size 500G  -repcount 3
+----
+. 查看新创建卷的详细信息。
++
+[source,shell]
+----
+neonsan list_volume -detail -volume neonpool/vol
+----
+. 对新创建的卷进行重命名操作。
++
+[source,shell]
+----
+neonsan rename_volume -new_name neonpool/vol1 -volume neonpool/vol
+----
+. 对新创建的卷进行扩容操作。
++
+[source,shell]
+----
+neonsan resize_volume -volume neonpool/vol1 -size 550G
+----
+. 查看集群中卷的详细信息。
++
+[source,shell]
+----
+neonsan list_volume -detail
+----
+. 删除新创建的卷。
++
+[source,shell]
+----
+neonsan delete_volume -volume neonpool/vol1
+----
+. 删除新创建的卷组。
++
+[source,shell]
+----
+neonsan delete_pool -pool neonpool
+----
+
+|预期结果	
+a|
+. 成功登录 NeonSAN 节点。
+. 各命令行成功执行，无错误返回，即可查看当前集群内卷的信息。
+. 各命令行成功执行，无错误返回，即可查看当前集群内卷组的信息。
+. 成功创建卷组 neonpool。
+. 新创建的卷组的详细信息显示在列。
+. 成功创建卷 vol。
+. 新创建的卷详细信息显示在列。
+. 重命名操作成功，通过 ``list_volume`` 命令查看，卷 vol 不存在，新卷名 vol1 显示在列，相关参数与 vol 保持一致。
+. 扩容操作成功。
+. 通过 ``list_volume`` 命令查看，卷 vol1 的容量更新为 550G。
+. 删除 vol1 后，通过 ``list_volume`` 命令查看，无该卷相关信息显示。
+. 删除卷组 neonpool 后，通过 ``list_pool`` 命令查看，无该卷组相关信息显示。
+
+|验证结果	
+|
+
+|备注	
+|
+|===

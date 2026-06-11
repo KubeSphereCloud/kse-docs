@@ -1,0 +1,84 @@
+---
+title: 查询配额（DescribeAccountQuotas）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Integer
+| false
+| 
+
+| offset
+| Integer
+| false
+| 
+
+| search_word
+| String
+| false
+| 搜索关键字段
+
+| users
+| Array
+| false
+| 用户id
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| account_quota_set
+| Array
+| false
+| 配额详情
+
+| total_count
+| Integer
+| false
+| 总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAccountQuotas",
+  "users": [
+    "usr-KmJmFe0V"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "account_quota_set": [
+    {
+      "access_key": 27,
+      "account_api": 2000,
+      "session_api": 10000,
+      "sub_user": 15,
+      "user_id": "usr-KmJmFe0V"
+    }
+  ],
+  "action": "DescribeAccountQuotasResponse",
+  "ret_code": 0,
+  "total_count": 1
+}
+----

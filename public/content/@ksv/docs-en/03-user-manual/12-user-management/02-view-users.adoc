@@ -1,0 +1,68 @@
+---
+title: "View users"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, users, list, view"
+description: "Describes how to view users in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: ee3e268d14f04619a95691479efb2f93
+:ks_xref_id: 63e8a58e32a34c07accfc37ed7ae8663
+:ks_comp: ../../../components/
+:ks_title: View users
+:ks_description: Describes how to view users in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, users, list, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view users in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=7e6fb3b942b04d3d8e969d99ad7c4c22]
+
+include::../../../_custom-en/users/user-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=e7a21cc4b8254d279a2fefc69fe4eead]
+
+include::../../../_custom-en/users/user-steps.adoc[]
+
+. On the **Local Users** page, view users.
++
+--
+You can view users in the system. The following table describes the parameters.
+
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the user.
+
+include::../../../_custom-en/security-groups/naming-convention.adoc[]
+
+|Email
+|The email address of the user.
+
+The email address can be used to log in to the {ks_product} web console.
+
+|Project / Role
+|The project to which the user belongs and the role of the user in the project.
+
+|Last Login
+|The last time when the user logged in to the web console.
+
+|Creator
+|The creator of the user.  Only user **admin** can create users.
+|===
+--
+. (Optional) Click the search box above the user list and specify a condition to search for users by name.  For example, use **Name:ab** to search for users whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

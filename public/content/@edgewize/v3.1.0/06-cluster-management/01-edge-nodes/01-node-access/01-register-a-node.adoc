@@ -1,0 +1,82 @@
+---
+title: "注册边缘节点"
+weight:  01
+---
+
+:ks_permission: **节点管理**
+:ks_navigation: **边缘节点 > 节点接入**
+
+
+本节介绍如何注册一个或多个边缘节点，以备接入边缘集群。
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. 点击**注册**。
+
+. 在**注册边缘节点**对话框，点击**单个注册**或**批量注册**页签，设置注册信息，然后点击**确定**。
++
+====
+* **单个注册**
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|节点名称
+|边缘节点的名称。
+
+|节点 IP 地址
+|边缘节点的 SSH 登录信息，包括 IP 地址和端口号。
+
+|用户名
+|边缘节点的用户名。
+
+|密码
+|边缘节点的登录密码。
+
+|文件服务器注册地址
+|用于边缘节点与文件服务器的通信。
+
+可输入公开地址 `docker.io` 或 `swr.cn-east-3.myhuaweicloud.com`，或您的私有文件服务器地址（还需要填写文件服务器用户名和密码）。
+|===
+
+* **批量注册**
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+// |节点名称
+// |无需输入。节点名称会自动填充为 `hostname + MAC 地址`。
+
+|节点 IP 地址
+|填写多个边缘节点的 SSH 登录 IP 地址，用英文逗号分开。
+
+|SSH 端口
+|各个边缘节点的端口必须一样。
+
+|用户名
+|各个边缘节点的用户名必须一样。
+
+|密码
+|各个边缘节点的登录密码必须一样。
+
+|文件服务器注册地址
+|用于边缘节点与文件服务器的通信。
+
+可输入公开地址 `docker.io` 或 `swr.cn-east-3.myhuaweicloud.com`，或您的私有文件服务器地址（还需要填写文件服务器用户名和密码）。
+|===
+
+如果注册成功，节点状态会变为**未纳管**，您还需要将其link:../02-integrate-a-node[纳管到边缘集群]。如果注册失败，请重新注册或删除该节点。
+====

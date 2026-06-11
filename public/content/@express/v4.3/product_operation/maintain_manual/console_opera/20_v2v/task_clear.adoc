@@ -1,0 +1,80 @@
+---
+title: "清理 v2v 任务"
+weight: 2
+---
+
+== 运维场景
+
+由于断网等因素导致机器重启后，Console 管理控制平台上，v2v 迁移任务状态一直处于``迁移中``，可通过以下方式清除相应的任务。
+
+== 前提条件
+
+* 确定待清除的 v2v 迁移任务可删除。
+* IaaS 端各项服务正常。
+* v2v 服务正常。
+
+== 操作步骤
+
+. 登录云易捷 Console 控制平台，在顶部导航栏，选择**运维工具** > **v2v 迁移**，记录待清除的的 v2v 任务 ID。
++
+image::/images/express/maintain/v2v_task_clear_1.png[]
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+. 执行如下命令，查看 v2v 节点基本信息。
++
+[source,shell]
+----
+cat /etc/hosts | grep v2v
+----
+
+. 登录至 v2v 节点。
+
+. 执行如下命令，检查 2v2 服务状态，须确保各项服务状态均为 ``RUNNING``。
++
+[source,shell]
+----
+supervisorctl status
+----
++
+image::/images/express/maintain/v2v_task_clear_2.png[]
+
+. 确认迁移脚本的进程 ``tmp/_2v2_xxxxx.sh``。
++
+若返回结果中存在 ``bash /tmp/_v2v_xxxxx.sh`` 则表示任务正常，无需进行清除。
++
+若返回结果中无 ``bash /tmp/_v2v_xxxxx.sh``，则表示迁移任务不正常可以，需要进行清除。
++
+[source,shell]
+----
+ps -ef |grep sh
+----
+
+. 执行如下命令，清除指定 2v2 任务。
++
+[source,shell]
+----
+v2v_del <v2v_id>
+----
++
+include::../../../../../../_components/note.adoc[]
+<v2v_id> 为待清除的的 v2v 任务 ID，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+

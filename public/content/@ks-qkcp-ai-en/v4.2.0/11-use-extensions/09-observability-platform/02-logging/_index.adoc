@@ -1,0 +1,28 @@
+---
+title: "WizTelemetry Logging"
+keywords: "Kubernetes, {ks_product}, Logging"
+description: "Introduces how to use the 'WizTelemetry Logging' extension."
+weight: 02
+layout: "second"
+---
+
+
+This section introduces how to use the 'WizTelemetry Logging' extension.
+
+This extension provides real-time and historical log collection, query, export, and storage for cloud-native applications from a multi-tenant perspective. It can connect to log receivers such as ElasticSearch, OpenSearch, and Kafka. By default, it collects Calico logs, including information about Calico pod IP address allocation and release.
+
+After installing the 'WizTelemetry Logging' extension,
+
+* The WizTelemetry Observability Platform in the Component Dock will display the **Logging** menu, and the **Log Query** option will appear under the **Logging** menu.
+* The **Logging** menu will appear in the cluster's left navigation pane, with **Log Receivers** and **Log Query** options under it. The **Log Receivers** page will display the **Container Logs** tab, supporting the addition of various types of log receivers. The **Log Query** page allows users to query container logs within their permission scope.
+
+//attention
+[.admon.attention,cols="a"]
+|===
+| Note
+
+|
+- WizTelemetry Logging depends on the WizTelemetry Platform Service and WizTelemetry Data Pipeline. Therefore, you must install and configure these two extensions before installing WizTelemetry Logging. Otherwise, logging-related features will not function properly!
+
+- If logs are not being collected, ensure Docker's root directory is under /var/lib. If not, you need to modify the mount configuration for the Agent in the WizTelemetry Data Pipeline. For more information, please refer to the details page of the 'WizTelemetry Data Pipeline' extension in the Extensions Center.
+|===

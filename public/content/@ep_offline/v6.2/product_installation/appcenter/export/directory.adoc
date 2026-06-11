@@ -1,0 +1,107 @@
+---
+title: FTP 目录详解
+weight: 1
+---
+
+登录内部 FTP 服务器，进入 `/pitrix` 目录，查看 AppCenter 应用镜像文件包。
+
+== 总目录说明
+
+如下图所示，用户仅关注目录 `migrate_appcenter2_apps` 与 `migrate_appcenter2_recommend` 即可。
+
+image::/images/ep_offline/installation/app_dir_1.png[]
+
+
+
+//目录 `migrate_appcenter2_apps` 与 `migrate_appcenter2_recommend` 的说明如下。
+
+[cols='1,3a']
+|===
+| 目录名 | 描述
+
+| migrate_appcenter2_apps | AppCenter 应用镜像文件全量包。
+
+* 包含所有应用及其版本，并按照 `app_id` 进行分类。
+* 不包含 ARM 版本的应用。
+
+| migrate_appcenter2_recommend | AppCenter 应用镜像文件推荐版本包。
+
+* 根据link:../version_set[推荐版本]设置的推荐版本。
+* 目录中仅包含{product_name}各版本推荐的 APP 应用。
+* 包含 ARM 版本的应用。
+|===
+
+== 子目录说明
+
+用户根据{product_name}版本下载 `migrate_appcenter2_recommend` 目录下的推荐版本镜像文件包即可。若用户要求导入指定应用的全部版本，可下载 `migrate_appcenter2_apps` 目录下镜像文件包。
+
+//镜像文件目录按照 `iaas_version` / `app_id`-`app_name` / `app_version_id` 的格式进行存储，方便进行单个应用的单个版本导入。
+
+
+
+* `migrate_appcenter2_recommend` 目录架构如下，镜像文件目录按照 `iaas_version/app_id-app_name/app_version_id` 的格式进行存储，方便用户根据需求，导入部分应用，或应用的部分版本，或单个应用的单个版本。
++
+image::/images/ep_offline/installation/app_dir_2.png[]
+
+
+* `migrate_appcenter2_apps` 目录架构如下，镜像文件目录按照 `app_id` 目录分别存储。
++
+image::/images/ep_offline/installation/app_dir_3.png[]
+
+
+
+
+== 应用文件目录说明
+
+以 AppCenter 应用 `OpenSearch` 为例，展开说明各应用文件存放详情。AppCenter 应用包括 `apps` 目录、`images` 目录以及 `meta_data.json` 文件，说明如下。
+
+[cols='1,3a']
+|===
+| 文件 | 描述
+
+| apps  | 该目录用来存放 AppCenter 应用的数据。在导入应用时，需要上传至 Global 的 Webservice 节点上的 Zone 数据库中。
+| images | 该目录用来存放 AppCenter 应用的镜像文件包。在导入应用时，需要上传至 Zone 的 Seed 节点上。
+| meta_data.json | 当前目录的描述文件，包含应用、版本、镜像的信息。
+
+|===
+
+
+
+* `migrate_appcenter2_recommend` 目录
++
+image::/images/ep_offline/installation/app_dir_4.png[]
+
+* `migrate_appcenter2_apps` 目录
++
+image::/images/ep_offline/installation/app_dir_5.png[]
+
+
+== 导出示例
+
+* 导入全部应用
++
+如导入{product_name} v6.1 版本推荐的 AppCenter 应用镜像文件，需导出的目录为 `/pitrix/migrate_appcenter2_recommend/6_1/`。
+
+
+* 导入指定应用
++
+如导入{product_name} v6.1 版本推荐的名为 `etcd` 的应用的所有版本，需导出的目录为 `/pitrix/migrate_appcenter2_recommend/6_1/app-fdyvu2wk_etcd/`。
+
+
+* 导入指定应用的指定版本
++
+如导入{product_name} v6.1 版本推荐的名为 `etcd` 的应用的 `appv-52759jdc` 版本，需导出的目录为 `/pitrix/migrate_appcenter2_recommend/6_1/app-fdyvu2wk_etcd/appv-52759jdc`。
+
+
+* 导入 ARM 版本
++
+需导出的目录为 `/pitrix/migrate_appcenter2_recommend/arm/`。
++
+image::/images/ep_offline/installation/app_dir_6.png[]
++
+include::../../../../../_components/note.adoc[]
+
+* 若需导入 ARM 版本下所有应用，下载上图整个目录即可。
+* 若需导入 ARM 版本下的指定应用，可下载指定应用目录以及上图中 `img-mfm5vwla.lz4` 文件。
+
+include::../../../../../_components/table_footer.adoc[]

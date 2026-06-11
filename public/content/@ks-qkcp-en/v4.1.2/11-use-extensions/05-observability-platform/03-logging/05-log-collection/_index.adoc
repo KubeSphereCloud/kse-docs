@@ -1,0 +1,23 @@
+---
+title: "Log Collection"
+keywords: "Kubernetes, {ks_product-en}, project management, project settings, log collection"
+description: "This section introduces how to enable and disable the log collection feature."
+weight: 02
+layout: "second"
+---
+
+This section introduces how to use the log collection feature.
+
+After enabling the log collection feature, {ks_product-en} will read the log files saved on the volumes by the containers and then print the contents of the log files to the standard output of the containers. The following steps are required to use the log collection feature:
+
+. Install and enable the "WhizardTelemetry Logging" extension.
+
+. Enable `logsidecar-injector` in the configuration of the "WhizardTelemetry Logging" extension. For more information, see link:01-enable-logsidecar/[Enable Log Collection].
+
+. Enable log collection in the project.
+
+. Set the container to output the log files to a path inside the container. For more information, contact the developer of the image in the container.
+
+. Enable **Collect Logs on Volumes** when creating workloads, services, or Jobs, mount a read-write volume for the container, and set the path of the log files.
+
+. Use the toolbox to query container logs. For more information, see link:../03-use-log-query-tools/[Use the Container Log Query Tool].

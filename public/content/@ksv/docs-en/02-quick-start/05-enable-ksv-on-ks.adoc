@@ -1,0 +1,864 @@
+---
+title: "Install {ks_product} on KubeSphere"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, KubeSphere, installation"
+description: "Describes how to install {ks_product} on KubeSphere."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 68b23987e15749e0aa7d8c4f34ff4f30
+:ks_xref_id: de0dcd7aa9ac401790f1f00b71370e48
+:ks_comp: ../../components/
+:ks_title: Install {ks_product} on KubeSphere
+:ks_description: Describes how to install {ks_product} on KubeSphere.
+:ks_keywords: {ks_product_full}, {ks_product}, KubeSphere, installation
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+In {ks_product_abbr_full} v1.6.0 or later, you can deploy {ks_product_abbr_full} and KubeSphere in hybrid mode. This way, you can manage containers and VM workloads at the same time. This topic describes how to install {ks_product} on KubeSphere.
+
+In this example, we use the open source tool KubeKey to install KubeSphere and {ks_product}.To obtain more information about KubeKey, visit link:https://github.com/kubesphere/kubekey[GitHub KubeKey].
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=a93eb533dfa24c5592e164d86372a1db]
+
+include::../../_custom-en/installation/precautions.adoc[]
+
+* Each server node on which {ks_product} is installed must run on Linux, and the kernel version of Linux must be 4.0 or later. We recommend that you use one of the following OSs: Ubuntu 18.04, Ubuntu 20.04, CentOS 7.9, Unity Operating System (UOS), Kylin V10, and EulerOS. Some unknown issues may exist if you use an OS other than the preceding ones. More OSs will be supported in later versions.
++
+--
+Query the OS version:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cat /etc/issue
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+* Make sure your server node meets the following conditions:
++
+--
+[cols="1a,1a,1a"]
+|===
+|Hardware |Minimum |Recommended
+
+|CPU cores
+|4 cores
+|8 cores
+
+|Memory
+|8 GB
+|16 GB
+
+|System disk
+|100 GB
+|200 GB
+|===
+
+Query the number of CPU cores of your server:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cat /proc/cpuinfo | grep "processor" | sort | uniq | wc -l
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Query the memory size:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cat /proc/meminfo | grep MemTotal
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Query the available disk size:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+df -hl
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+* The server node must have at least one disk that is unformatted and unpartitioned, or one unformatted partition. The minimum size of the disk or partition is 100 GB and the recommended size is 200 GB. The minimum size of the disk or partition is 100 GB and the recommended size is 200 GB.
++
+--
+Query the disk partition of the server node:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+lsblk -f
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+For example, the following command output indicates that **vdb** meets the requirements:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+NAME                  FSTYPE      LABEL UUID                                   MOUNTPOINT
+vda
+└─vda1                LVM2_member       >eSO50t-GkUV-YKTH-WsGq-hNJY-eKNf-3i07IB
+ ├─ubuntu--vg-root    ext4              c2366f76-6e21-4f10-a8f3-6776212e2fe4   /
+ └─ubuntu--vg-swap_1  swap              9492a3dc-ad75-47cd-9596-678e8cf17ff9   [SWAP]
+vdb
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+* The server node must support virtualization. If a server node does not support virtualization, {ks_product} runs in emulation mode. In this mode, more resources can be consumed, and all VM-based modules are unavailable.
++
+--
+Query whether a server node supports virtualization. If the command output is empty, the server node does not support virtualization.
+
+* x86 architecture
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+grep -E '(svm|vmx)' /proc/cpuinfo
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+* ARM64 architecture
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+ls /dev/kvm
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Install dependencieslink:[id=f4c0d4b5dcac4d0d9b406dad21583201]
+
+The dependencies for **socat**, **conntrack**, **ebtables**, and **ipset** are required for your server node. If you have installed the dependencies on your server node, skip this step.
+
+If your server node runs on Ubuntu, run the following command to install the dependencies:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+sudo apt install socat conntrack ebtables ipset -y
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+If your server node runs on an OS of another type, replace **apt** with the actual software package management tool.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Deploy a Kubernetes clusterlink:[id=bb98caa94237417ca5a1df6acc407551]
+
+. Download KubeKey:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+curl -sfL https://get-kk.kubesphere.io | VERSION=v3.0.5 sh -
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Grant **kk** permissions to execute the binary file:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+sudo chmod +x kk
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Create a cluster configuration file:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Edit file **config-sample.yaml**:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+vi config-sample.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Sample code:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+apiVersion: kubekey.kubesphere.io/v1alpha2
+kind: Cluster
+metadata:
+  name: sample
+spec:
+  hosts:
+  - {name: node1, address: 172.16.0.2, internalAddress: 172.16.0.2, user: ubuntu, password: "Qcloud@123"}
+  - {name: node2, address: 172.16.0.3, internalAddress: 172.16.0.3, user: ubuntu, password: "Qcloud@123"}
+  roleGroups:
+    etcd:
+    - node1
+    control-plane:
+    - node1
+    worker:
+    - node1
+    - node2
+  controlPlaneEndpoint:
+    ## Internal loadbalancer for apiservers
+    # internalLoadbalancer: haproxy
+
+domain: lb.kubesphere.local
+    address: ""
+    port: 6443
+  kubernetes:
+    version: v1.23.10
+    clusterName: cluster.local
+    autoRenewCerts: true
+    containerManager: docker
+  etcd:
+    type: kubekey
+  network:
+    plugin: calico
+    kubePodsCIDR: 10.233.64.0/18
+    kubeServiceCIDR: 10.233.0.0/18
+    ## multus support. https://github.com/k8snetworkplumbingwg/multus-cni
+    multusCNI:
+      enabled: false
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. In **spec:hosts** of file **config-sample.yaml**, configure your server node.
++
+--
+[cols='1a,3a']
+|===
+|Parameter |Description
+
+|name
+|The custom name of the node.
+
+|address
+|The node IP address for SSH login.
+
+|internalAddress
+|The internal IP address of the node.
+
+|user
+|The username for SSH login. You must specify as user **root** or a user that has permissions to run **sudo** commands. If you leave this parameter empty, user **root** is specified by default.
+
+|password
+|The password for SSH login.
+|===
+--
+. In **spec:network:plugin** of file **config-sample.yaml**, set the value to **kubeovn**:
++
+--
+Sample code:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+network:
+    plugin: kubeovn
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. In **spec:network:multusCNI:enabled** of file **config-sample.yaml**, set the value to **true**:
++
+--
+Sample code:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+multusCNI:
+      enabled: true
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Create the Kubernetes cluster:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Deploy KubeSphere and {ks_product} in hybrid modelink:[id=d40d34392fb944d9b962f003a82b5013]
+
+. Run the following command to create an installer:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cat <<EOF | kubectl create -f -
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: clusterconfigurations.installer.kubesphere.io
+spec:
+  group: installer.kubesphere.io
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+          status:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+  scope: Namespaced
+  names:
+    plural: clusterconfigurations
+    singular: clusterconfiguration
+    kind: ClusterConfiguration
+    shortNames:
+    - cc
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kubesphere-system
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ks-installer
+  namespace: kubesphere-system
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ks-installer
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - apps
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - extensions
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - batch
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - apiregistration.k8s.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - tenant.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - certificates.k8s.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - devops.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - monitoring.coreos.com
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - logging.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - jaegertracing.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - policy
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - autoscaling
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - networking.istio.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - config.istio.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - iam.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - notification.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - auditing.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - events.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - core.kubefed.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - installer.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - storage.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - security.istio.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - monitoring.kiali.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - kiali.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - kubeedge.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - types.kubefed.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - scheduling.k8s.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - kubevirt.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - cdi.kubevirt.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - network.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - virtualization.kubesphere.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - snapshot.storage.k8s.io
+  resources:
+  - '*'
+  verbs:
+  - '*'
+
+---
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: ks-installer
+subjects:
+- kind: ServiceAccount
+  name: ks-installer
+  namespace: kubesphere-system
+roleRef:
+  kind: ClusterRole
+  name: ks-installer
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ks-installer
+  namespace: kubesphere-system
+  labels:
+    app: ks-install
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ks-install
+  template:
+    metadata:
+      labels:
+        app: ks-install
+    spec:
+      serviceAccountName: ks-installer
+      containers:
+      - name: installer
+        image: kubespheredev/ksv-installer:{ks_product_ver}
+        imagePullPolicy: "Always"
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 20m
+            memory: 100Mi
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: host-time
+      volumes:
+      - hostPath:
+          path: /etc/localtime
+          type: ""
+        name: host-time
+
+EOF
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Run the following command to create a cluster configuration file:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cat <<EOF | kubectl create -f -
+---
+apiVersion: installer.kubesphere.io/v1alpha1
+kind: ClusterConfiguration
+metadata:
+  name: ks-installer
+  namespace: kubesphere-system
+  labels:
+    version: v3.3.1
+spec:
+  persistence:
+    storageClass: ""
+  authentication:
+    jwtSecret: ""
+  etcd:
+    monitoring: false
+    endpointIps: localhost
+    port: 2379
+    tlsEnable: true
+  common:
+    core:
+      console:
+        enabled: true
+        enableMultiLogin: true
+        port: 30880
+        type: NodePort
+    redis:
+      enabled: false
+      enableHA: false
+      volumeSize: 2Gi
+    openldap:
+      enabled: false
+      volumeSize: 2Gi
+    minio:
+      volumeSize: 20Gi
+    monitoring:
+      endpoint: http://prometheus-operated.kubesphere-monitoring-system.svc:9090
+      GPUMonitoring:
+        enabled: false
+    gpu:
+      kinds:
+      - resourceName: "nvidia.com/gpu"
+        resourceType: "GPU"
+        default: true
+    es:
+      logMaxAge: 7
+      elkPrefix: logstash
+      basicAuth:
+        enabled: false
+        username: ""
+        password: ""
+      externalElasticsearchHost: ""
+      externalElasticsearchPort: ""
+  alerting:
+    enabled: false
+  auditing:
+    enabled: false
+  devops:
+    enabled: false
+    jenkinsMemoryLim: 8Gi
+    jenkinsMemoryReq: 4Gi
+    jenkinsVolumeSize: 8Gi
+  events:
+    enabled: false
+  logging:
+    enabled: false
+    logsidecar:
+      enabled: true
+      replicas: 2
+  metrics_server:
+    enabled: false
+  monitoring:
+    storageClass: ""
+    node_exporter:
+      port: 9100
+    gpu:
+      nvidia_dcgm_exporter:
+        enabled: false
+  multicluster:
+    clusterRole: none
+  network:
+    networkpolicy:
+      enabled: false
+    ippool:
+      type: none
+    topology:
+      type: none
+  openpitrix:
+    store:
+      enabled: false
+  servicemesh:
+    enabled: false
+    istio:
+      components:
+        ingressGateways:
+        - name: istio-ingressgateway
+          enabled: false
+        cni:
+          enabled: false
+  edgeruntime:
+    enabled: false
+    kubeedge:
+      enabled: false
+      cloudCore:
+        cloudHub:
+          advertiseAddress:
+            - ""
+        service:
+          cloudhubNodePort: "30000"
+          cloudhubQuicNodePort: "30001"
+          cloudhubHttpsNodePort: "30002"
+          cloudstreamNodePort: "30003"
+          tunnelNodePort: "30004"
+      iptables-manager:
+        enabled: true
+        mode: "external"
+  gatekeeper:
+    enabled: false
+  virtualization:
+    enabled: true
+    expressNetworkMTU: 1300
+    useEmulation: false
+    cpuAllocationRatio: 1
+    console:
+      port: 30890
+      type: NodePort
+  terminal:
+    timeout: 600
+
+EOF
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Run the following command to query deployment logs:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l 'app in (ks-install, ks-installer)' -o jsonpath='{.items[0].metadata.name}') -f
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+The deployment may take 10 to 30 minutes based on your hardware and network environment.If the following command output appears, the deployment is successful:
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+#####################################################
+###              Welcome to KubeSphere!           ###
+#####################################################
+
+Console: http://192.168.0.2:30880
+Account: admin
+Password: P@88w0rd
+
+NOTES:
+  1. After you log into the console, please check the
+     monitoring status of service components in
+     the "Cluster Management". If any service is not
+     ready, please wait patiently until all components
+     are up and running.
+  2. Please change the default password after login.
+
+#####################################################
+https://kubesphere.io             20xx-xx-xx xx:xx:xx
+#####################################################
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Obtain the IP address, admin account, and password from **Console**, **Account**, and **Password** parameters, and use a browser to log in to the KubeSphere web console.
++
+--
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+Depending on your network environment, you may need to configure traffic forwarding rules and enable port 30880 in the firewall.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--

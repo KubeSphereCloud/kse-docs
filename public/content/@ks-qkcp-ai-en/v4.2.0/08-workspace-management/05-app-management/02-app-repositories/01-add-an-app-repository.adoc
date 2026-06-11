@@ -1,0 +1,41 @@
+---
+title: "Add Application Repository"
+keywords: "Kubernetes, {ks_product}, workspace, application repository, add application repository"
+description: "Describes how to add an application repository."
+weight: 01
+---
+
+:ks_permission: **Application Repository Management**
+:ks_navigation: **Application Management > Application Repository**
+
+This section describes how to add an application repository in a workspace. The application repository added here is a self-built repository.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* A Helm Chart repository has been created in advance. For information on how to create a Helm Chart repository, please refer to the link:https://helm.sh/zh/docs/topics/chart_repository/[Helm official documentation].
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the page, click **Add**.
+
+. In the **Add Application Repository** dialog box, set the parameters for the application repository, then click **OK**.
++
+--
+include::../../../../_custom/workspaceManagement/appRepositories/appRepositories-para-createAppRepository_v4.adoc[]
+
+After the application repository is created, it will be displayed in the application repository list.
+--

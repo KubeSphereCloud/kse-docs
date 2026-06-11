@@ -1,0 +1,56 @@
+---
+title: "服务准备"
+description: 本小节主要介绍如何准备大数据台数据开发环境。
+keywords: 大数据工作台,最佳实践,SQL 作业
+weight: 20
+collapsible: false
+draft: false
+---
+== 创建工作空间
+
+. 登录管理控制台。
+. 选择**产品与服务** > *大数据服务* > *大数据工作台*，进入大数据工作台概览页面。
+. 在左侧导航选择**工作空间**，进入工作空间页面。
+. 选择相应的区域，点击**创建工作空间**，进入创建工作空间页面。
+. 配置基本信息，包括工作空间名称和描述信息。
++
+image::/images/cloud_service/bigdata/dataomnis/create_workspace.png[创建工作空间]
+
+. 配置网络信息，包括 VPC 网络和私有网络。
++
+image::/images/cloud_service/bigdata/dataomnis/create_net.png[创建网络]
++
+[cols="1,4"]
+|===
+| 参数 | 参数说明
+
+| VPC 网络
+ a| 选择 VPC 网络。
+ 
+*  默认适配同区域已有的 VPC 网络。可在下拉框选择已有 VPC 网络。 +
+* 若无可选 VPC 网络，可点击**新建 VPC 网络**，创建依赖网络资源。
+
+| 私有网络
+ a| 选择私有网络。
+ 
+* 默认适配同区域已有的私有网络。可在下拉框选择已有私有网络。 +
+* 若无可选私有网络，可点击**新建私有网络**，创建依赖网络资源。
+|===
+
+. 点击**创建**，开始创建工作空间。  +
+工作空间创建完成后，即可在工作空间页面查看相应内容。
++
+image::/images/cloud_service/bigdata/dataomnis/workspace_list.png[工作空间列表]
+
+== 创建计算集群
+
+. 在目标工作空间选择**数据开发** > *计算集群*，进入计算集群列表页面。
+. 点击**创建集群**，进入创建计算集群页面。
+. 配置集群相关参数。
+参数详细介绍请参见link:../../../manual/flink_cluster/create_cluster/[创建计算集群]。
++
+image::/images/cloud_service/bigdata/dataomnis/bp_create_flink_cluster.png[创建计算集群]
+. 配置完成后，点击**立即创建**，开始创建计算集群。   +
+计算集群创建成功后，即可在计算集群页面查看相应内容。
++
+image::/images/cloud_service/bigdata/dataomnis/flink_cluster_list.png[计算集群列表]

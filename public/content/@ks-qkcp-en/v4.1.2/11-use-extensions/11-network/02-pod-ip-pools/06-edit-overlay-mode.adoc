@@ -1,0 +1,68 @@
+---
+title: "Edit Overlay Mode"
+keywords: "Kubernetes, {ks_product-en}, cluster management, network, pod IP pool, edit overlay mode"
+description: "Introduce how to edit overlay mode."
+weight: 06
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Pod IP Pools**
+
+
+This section introduces how to edit overlay mode.
+
+Overlay mode can achieve cross-host container communication without modifying the physical network of the host machines.
+
+== Prerequisites
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeSphere Network** should have been installed and enabled.
+
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the pod IP pool you want to edit, and then select **Edit Overlay Mode** from the dropdown list.
+
+. In the **Edit Overlay Mode** dialog box, select IPIP mode or VXLAN mode, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Mode |Description
+
+|IPIP Mode
+|Create an IP in IP tunnel on each node to achieve communication between containers. The values are as follows:
+
+** **Always**: Always perform IPIP encapsulation (default).
+
+** **CrossSubnet**: Perform IPIP encapsulation only when crossing network segments.
+
+** **Never**: Never perform IPIP encapsulation.
+
+|VXLAN Mode
+|Create a VXLAN tunnel on each node to achieve communication between containers. The values are as follows:
+
+** **Always**: Always perform VXLAN encapsulation.
+
+** **CrossSubnet**: Perform VXLAN encapsulation only when crossing network segments.
+
+** **Never**: Never perform VXLAN encapsulation.
+|===
+--
+
+// Note
+include::../../../../../_ks_components-en/admonitions/note.adoc[]
+
+If both are set to Never, BGP mode is used.
+
+include::../../../../../_ks_components-en/admonitions/admonEnd.adoc[]

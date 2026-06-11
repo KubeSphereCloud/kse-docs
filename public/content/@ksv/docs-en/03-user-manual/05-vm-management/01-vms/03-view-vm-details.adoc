@@ -1,0 +1,201 @@
+---
+title: "View the details of a VM"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, details, view"
+description: "Describes how to view the details of a VM in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 7e69c7c513264ba780b50347114ef276
+:ks_xref_id: 327a76600165456f8dc7cc64734bde1b
+:ks_comp: ../../../../components/
+:ks_title: View the details of a VM
+:ks_description: Describes how to view the details of a VM in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of a VM in the {ks_product_abbr_full} web console.
+
+include::../../../../_custom-en/vms/vm-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=b4b16877e98043eebe2815cf7f77b13e]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, click the name of a VM to view its details.
+. On the left side of the details page, view basic information about the VM.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the VM in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the VM.
+
+|IP Address
+|The IP address of the VM. If a VM contains multiple NICs, multiple IP addresses are assigned to the VM.
+
+|Project
+|The project name in which the VM is created.
+
+|Node
+|The node that runs the VM. This parameter is available to user **admin** only.
+
+|IOPS & Throughput
+|The IOPS and throughput of the disk mounted to the VM.
+
+|Upload & Download
+|The network rate of the VM.
+
+|Created at
+|The time when the VM was created.
+
+|Created by
+|The username that is used to create the VM.
+|===
+--
+. In the **Configuration** and **Associated Resources** areas, view the configuration and associated resources of the VM.
+. On the right side of the details page, click the **Overview** tab to view the resource overview of the VM.
++
+--
+[cols='1a,4a']
+|===
+|Section |Description
+
+|Usage
+|The resource usage of the VM, including the usage of CPU cores and memory.
+
+|Requests and Limits
+|The resource limits and requests of the VM, including the CPU and memory resources.
+
+|Compute
+|The monitoring of compute resources, including the CPU usage, average CPU workloads, and memory usage.
+
+|Networks
+|The monitoring of network resources, including the inbound and outbound traffic, IOPS, packet loss rate, and error rate.
+
+You can expand the drop-down list next to **Networks** to select an NIC to view its performance.
+
+|Storage
+|The monitoring of storage resources, including the disk throughput, IOPS, average I/O latency, and I/O queue length.
+
+You can expand the drop-down list next to **Storage** to view the resource usage of a specific disk.
+|===
+--
+. On the right side of the details page, click the **Disks** tab to view the disks mounted to the VM.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the disk.
+
+include::../../../../_custom-en/vms/vm-naming-convention.adoc[]
+
+|ID
+|The UUID of the disk in the system.
+
+|Size
+|Th size of the disk.
+
+|Type
+|The type of the disk. {ks_product} provides system disks and data disks.
+
+|Filesystem
+|The filesystem of the disk.
+
+|Storage Type
+|The storage type of the disk.
+|===
+--
+. On the right side of the details page, click the **Networks** tab to view the network information of the VM.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the network used by the VM.
+
+|ID
+|The UUID of the network in the system.
+
+|IP Address
+|The IP address of the VM.
+
+|Type
+|The type of the network. {ks_product} supports physical networks and virtual networks.
+
+|MAC Address
+|The MAC address of the VM.
+
+|IP Range
+|The IP address range in which the VM resides.
+
+|Gateway
+|The gateway address that corresponds to the VM.
+|===
+--
+. On the right side of the details page, click the **Snapshots** tab to view the snapshots created for the VM.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the snapshot.
+
+include::../../../../_custom-en/vms/vm-naming-convention.adoc[]
+
+|ID
+|The UUID of the snapshot in the system.
+
+|Description
+|The description of the snapshot.
+
+|Created at
+|The time when the snapshot was created.
+|===
+--
+. On the right side of the details page, click the **Events** tab to view the events that happened to the VM.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Type
+|The type of the event. Valid values:
+
+* **Normal**: The event is in a normal state.
+* **Warning**: The event is in a warning state.
+
+|Cause
+|The reason why the event was recorded.
+
+|Occurred at
+|The time when the event happened.
+
+|Source
+|The component from which the event happened.
+
+|Message
+|The details of the event.
+|===
+--

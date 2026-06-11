@@ -1,0 +1,33 @@
+---
+title: "准备测试环境"
+weight:  01
+---
+
+本节介绍如何创建测试部署，用于后续验证 HTTP 故障注入效果。
+
+*创建测试部署*
+
+
+[source,yaml]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: nginx-http-server
+namespace: default
+spec:
+replicas: 1
+selector:
+ matchLabels:
+   app: nginx-http-server
+template:
+ metadata:
+   labels:
+     app: nginx-http-server
+ spec:
+   containers:
+     - name: nginx
+       image: nginx:stable-perl
+       ports:
+         - containerPort: 80
+----

@@ -1,0 +1,79 @@
+---
+title: "使用 Web Kubectl"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, Kubectl"
+description: "介绍如何使用{ks_product_both}Web 控制台的 Kubectl。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 47270bd7161b4adfb55e30b2e45018cb
+:ks_xref_id: de70fb92afe34ab589317e0c7e88eb78
+:ks_comp: ../../../components/
+:ks_title: 使用 Web Kubectl
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台的 Kubectl。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, Kubectl
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+Kubectl 是 Kubernetes 命令行工具，您可以用它在 Kubernetes 集群上运行命令。Kubectl 可用于部署应用、查看和管理集群资源、查看日志等。
+
+{ks_product_abbr_full_right}Web 控制台提供 Web Kubectl，方便用户使用。在默认情况下，只有 **admin** 用户才有权限使用 Web Kubectl 进行集群资源操作和管理。
+
+本节介绍了如何使用 Web Kubectl 进行集群资源操作和管理。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=f0d8422b6abf46c9adbfe617fef0052e]
+
+. 以 **admin** 用户登录{ks_product_both}Web 控制台。
+
+. 在页面右下角的 image:/images/ksv/zh/icons/hammer.svg[18px,18px] 图标上悬停以打开工具箱，然后在弹出菜单中选择 **Kubectl**。
+
+. 在命令行工具中输入 Kubectl 命令，查询并管理 Kubernetes 集群资源。例如，执行以下命令查询集群中所有 PVC 的状态。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl get pvc --all-namespaces
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在终端窗口中使用以下语法运行 Kubectl 命令：
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl [command] [TYPE] [NAME] [flags]
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+其中，**command**、**TYPE**、**NAME** 和 **flags** 分别具有以下含义：
+
+[cols='1a,3a']
+|===
+|参数 |描述
+
+|command
+|指定要对一个或多个资源执行的操作，例如 **create**、**get**、**describe** 和 **delete**。
+
+|TYPE
+|指定资源类型。资源类型不区分大小写，您可以指定单数、复数或缩写形式。
+
+|NAME
+|指定资源的名称。名称区分大小写。如果省略名称，则会显示所有资源的详细信息，例如 **kubectl get pods**。
+
+|flags
+|指定可选标志。例如，您可以使用 **-s** 或 **--server** 标志指定 Kubernetes API 服务器的地址和端口。
+|===
+
+如果您需要帮助，请在终端窗口运行 **kubectl help** 或者参考 link:https://kubernetes.io/zh-cn/docs/reference/kubectl/[Kubernetes Kubectl CLI 文档]。
+--
+

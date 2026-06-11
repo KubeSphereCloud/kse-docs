@@ -1,0 +1,71 @@
+---
+title: "View timer tasks"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, timer tasks, list, view"
+description: "Describes how to view timer tasks in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 75c893d7b8224b4bb38b7a0ea7b30a84
+:ks_xref_id: f31d532e18984c3abda609a0ddbb3c62
+:ks_comp: ../../../../components/
+:ks_title: View timer tasks
+:ks_description: Describes how to view timer tasks in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, timer tasks, list, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view timer tasks in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=d1b2bb539dfe4fb093ddf0aa189f7b68]
+
+include::../../../../_custom-en/timer/timer-task-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=a45419e5edd44b03af21cf7c8ec00262]
+
+include::../../../../_custom-en/timer/timer-task-steps.adoc[]
+
++
+
+--
+You can view all timer tasks in the project. The following table describes the parameters.
+
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the timer task.
+
+|ID
+|The universally unique identifier (UUID) of the timer task in the system.
+
+|Status
+|The status of the timer task. Valid values: **Enabled** and **Disabled**.
+
+|Operation
+|The operation to perform by the timer task.  Valid values: **Start VM**, **Stop VM**, **Restart VM**, and **Create Snapshot**.
+
+|Policy
+|The policy that is used to run the timer task.  The system supports **Execute Periodically** and **Execute Once** policies.
+
+|Success / Failure
+|The number of times that the task succeeded and failed.
+
+|Project
+|The project name in which the timer task is created.
+|===
+--
+
+. (Optional) Click the search box above the timer task list and specify a condition to search for timer tasks by name or ID. For example, use **Name:ab** to search for timer tasks whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

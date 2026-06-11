@@ -1,0 +1,185 @@
+---
+title: base.ini
+weight: 1
+---
+
+该配置文件内容分为存储池通用配置与数据存储池相关配置。如link:#_示例[示例]所示，`[cluster]` 标记的数据存储池可以配置多个，根据实际环境进行增加或删除。依次使用 `[cluster1]`、`[cluster2]`......进行标识。
+
+
+== 示例
+
+[source,ini]
+----
+[base]
+allow_passwd_login = true
+is_instance_on_iaas = true
+zone_id = xxx
+region_id = yyy
+global_domain = stor.qingstorage.com
+
+[cluster1]
+vol_type = replica 3
+storage_class = standard
+block = vdc vdd
+block_count = 2
+
+[cluster2]
+vol_type = ec 4+2
+storage_class = standard_ia
+block = vdc vdd
+block_count = 2
+----
+
+== 参数说明
+
+[cols="1,5", options="header"]
+|===
+| 参数 | 说明 
+
+|base | 用于设置存储池通用配置信息。
+
+|allow_passwd_login a| 用于设置是否允许用户通过 SSH 用户名 & 密码的方式登录该环境。
+
+* 取值为 `True` 或 `False`。配置为 `False` 时，仅允许用户通过 SSH Key 的方式登录。
+* 默认值为 `False`。
+* 若网关节点配置有公网 IP，则此参数必须设置为 `False`。
+
+|is_instance_on_iaas a|用于标记待部署环境是否由虚拟机搭建。
+
+* 取值为 `True` 或 `False`。
+* 默认值为 `False`，表示使用物理机搭建环境。
+* 若使用虚拟机搭建环境时，需修改该参数为 `True`。
+
+|zone_id a|用于配置当前环境的 Zone ID。由不超过 12 个字符的小写字母，数字，以及中划线组成的以小写字母开头，且以小写字母或数字结尾的字符串组成。
+
+* 不与 IaaS 对接的环境中，需根据前期规划进行填写。
+* 与 IaaS 对接的环境中，填写对接的 IaaS 区域的 Zone ID。
+//** 若当前对接的是 IaaS 环境中不支持 Region 模式的区域，`zone_id` 需填写对接的 IaaS 区域的 Zone ID。
+//** 若当前对接的是 IaaS 环境中支持 Region 模式的区域，`zone_id` 可与对接的 IaaS 区域的 Zone ID 不一致，也可保持一致。
+
+|region_id a|用于配置当前环境的 Region ID。
+
+* 不与 IaaS 对接的环境中，若前期规划仅一个 Zone，则无需填写；若前期规划为多个 Zone 的环境，则需要根据前期规划进行填写。
+* 与 IaaS 对接的环境中，填写对接的 IaaS 区域所属的 Region ID。
+//** 若当前对接的是 IaaS 环境中不支持 Region 模式的区域，无需填写。
+//** 若当前对接的是 IaaS 环境中支持 Region 模式的区域，`region_id` 填写对接的 IaaS 区域所属的 Region ID。
+
+|global_domain a|用于配置当前环境的 Global 域名。用户可根据前期规划进行填写。
+
+|cluster1 | 用于设置数据存储池的相关信息。可以设置多个，依次使用 `cluster1`、`cluster2`......​进行标识。
+
+|vol_type a| 用于设置数据存储池的冗余策略。
+
+* 可选值为 `replicate` 与 `ec`。分别表示硬盘的冗余模式为副本或纠删码类型。
+* 副本填写格式为：`vol_type = replica 3`，其中 3 表示副本数，可根据实际情况进行修改。
+* 纠删码填写格式为：`vol_type = ec 4+2`，其中 4+2 表示 EC 的数据块与校验块的配比，可根据实际情况进行修改。
+
+|storage_class a|用于设置据存储池的存储级别。可选值为：`standard` 与 `standard_ia`，分别表示标准存储和低频存储。
+
+
+// |readonly a|用于设置当前的数据存储池是否为只读，可选值为：`true` 与 `false`，分别表示数据存储池只读和数据存储池可读写。默认值为 `false`。
+
+|block a|填写存储硬盘的设备名称。该字段仅填写存储盘盘符，索引盘排除在外。所填写存储盘盘符均需在存储节点存在。多个盘符之间使用空格分隔。
+
+|block_count a|用于填写数据盘数量。
+
+|===
+
+// //// === base
+
+// 必填项。
+
+// ==== 示例
+
+// [source,ini]
+// ----
+// [base]
+// allow_passwd_login = true
+// is_instance_on_iaas = true
+// zone_id = xxx
+// global_domain = stor.qingstorage.com
+// ----
+
+// ==== 参数说明
+
+// [cols="1,5", options="header"]
+// |===
+// | 参数 | 说明 
+
+// |allow_passwd_login a| 用于设置是否允许用户通过 SSH 用户名/密码的方式登录该环境。
+
+// * 取值为 `True` 或 `False`。配置为 `False` 时，仅允许用户通过 SSH Key 的方式登录。
+// * 默认值为 `False`。
+// * 若网关节点配置有公网 IP，则此参数必须设置为 `False`。
+
+// |is_instance_on_iaas a|用于标记待部署环境是否由虚拟机搭建。
+
+// * 取值为 `True` 或 `False`。
+// * 默认值为 `False`，表示使用物理机搭建环境。
+// * 若使用虚拟机搭建环境时，需修改该参数为 `True`。
+
+// |zone_id a|用于配置当前环境的 Zone ID。由不超过 12 个字符的小写字母，数字，以及中划线组成的以小写字母开头，且以小写字母或数字结尾的字符串。
+
+// * 不与 IaaS 对接的环境中，`zone_id` 需根据前期规划进行填写。
+// * 与 IaaS 对接的环境中，`zone_id` 的填写需遵循如下规则：
+// ** 若当前对接的是 IaaS 环境中不支持 Region 模式的区域，`zone_id` 需填写对接的 IaaS 区域的 Zone ID。
+// ** 若当前对接的是 IaaS 环境中支持 Region 模式的区域，`zone_id` 可与对接的 IaaS 区域的 Zone ID 不一致，也可保持一致。
+
+// |global_domain a|用于配置当前环境的 Global 域名。用户可根据前期规划进行填写。
+
+
+
+// |===
+
+// === cluster1
+
+// 配置第一个数据存储池信息。必填项。
+
+// ==== 示例
+
+// [source,ini]
+// ----
+// [cluster1]
+// vol_type = replica 3
+// storage_class = standard
+// readonly = false
+// block = vdc vdd
+// block_count = 2
+// ----
+
+// ==== 参数说明
+
+// [cols="1,6", options="header"]
+// |===
+// | 参数 | 说明 
+// |vol_type a| 用于设置存储池的冗余策略。
+
+// * 可选值为 `replicate` 与 `ec`。分别表示硬盘的冗余模式为副本或纠删码类型。
+// * 副本填写格式为：`vol_type = replica 3`，其中 3 表示副本数，可根据实际情况进行修改。
+// * 纠删码填写格式为：`vol_type = ec 4+2`，其中 4+2 表示 EC 的数据块与校验块的配比，可根据实际情况进行修改。
+
+// |storage_class a|用户设置存储级别。可选值为：`standard` 与 `standard_ia`，分别表示标准存储和低频存储。
+
+
+// |readonly a|用于设置当前的数据存储池是否为只读，可选值为：`true` 与 `false`，分别表示数据存储池只读和数据存储池可读写。默认值为 `false`。
+
+// |block a|填写存储硬盘的设备名称。该字段仅填写存储盘盘符，索引盘排除在外。所填写存储盘盘符均需在存储节点存在。多个盘符之间使用空格分隔。
+
+// |block_count a|用于填写数据盘数量。
+
+// |===
+
+// === cluster2
+
+// 配置第二个数据存储池信息。可选项。多个数据存储池，安装此格式，依次追加为：[cluster2]、[cluster3]、[cluster4]......
+
+// [source,ini]
+// ----
+// [cluster2]
+// vol_type = ec 4+2
+// storage_class = standard
+// readonly = false
+// block = vde vdf
+// block_count = 2
+// ---- ////
+

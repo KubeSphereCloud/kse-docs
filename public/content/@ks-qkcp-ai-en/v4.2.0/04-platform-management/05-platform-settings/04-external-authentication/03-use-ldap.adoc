@@ -1,0 +1,303 @@
+---
+title: "LDAP/LDAPS Authentication"
+keywords: "Kubernetes, KubeSphere, LDAP, Identity Provider, Authentication"
+description: "Learn how to configure LDAP service on KubeSphere."
+weight: 03
+---
+
+:ks_navigation: **Configuration > Secrets**
+
+KubeSphere supports external authentication via LDAP and LDAPS, allowing users to log in to the KubeSphere web console using their LDAP or LDAPS username and password.
+
+Platform administrators can configure LDAP/LDAPS authentication through a Secret.
+
+== Differences Between LDAP and LDAPS
+
+[%header,cols="1a,2a,5a"]
+|===
+|Authentication Method |Connection Method |Security
+
+|LDAP
+|Uses plaintext transmission, default port 389
+|Data transmission is not encrypted, not suitable for production environments.
+
+|LDAPS
+|Uses SSL/TLS encrypted transmission, default port 636
+|Data transmission is encrypted, providing higher security, recommended for production environments.
+
+**LDAPS (SSL/TLS)**
+
+- Port: 636, uses SSL/TLS encrypted channel, URL format: ldaps://hostname:636, similar to HTTPS, performs SSL/TLS handshake when establishing the connection.
+
+**STARTTLS**
+
+- Port: 389 (same as regular LDAP), establishes a regular connection first, then upgrades to an encrypted connection, URL format: ldap://hostname:389, upgrades to an encrypted connection via the STARTTLS command after establishing the connection.
+
+|===
+
+
+// == Prerequisites
+
+// You need to obtain the server address, administrator Distinguished Name (DN), and administrator password for the LDAP or LDAPS service.
+
+== Steps
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
+. Click **Cluster Management** and enter the host cluster.
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. In the **Create Secret** dialog, click the **Edit YAML** toggle in the upper right corner to create the secret using YAML.
+
+. Modify the YAML file according to the following example and parameter descriptions. After configuration is complete, click **Create**.
+
+. Log out of the KubeSphere web console. On the login page, click **Log in with LDAP**, and enter your LDAP/LDAPS username and password to log in.
++
+image:/images/ks-qkcp/zh/v4.1.3/ldap-login.png[ldap, 80%]
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+In a multi-cluster environment, configuration is only required in the host cluster.
+|===
+
+== LDAP Configuration
+
+=== Basic LDAP Configuration
+
+[source,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: kubesphere-system  # Do not modify
+  name: identity-provider-ldap  # Ensure this Secret name is unique within the Kubernetes cluster
+  labels:
+    config.kubesphere.io/type: identityprovider # Do not modify
+    config.kubesphere.io/identityprovider: openldap # Must match the name field in configuration.yaml
+type: config.kubesphere.io/identityprovider # Do not modify
+
+stringData:
+  configuration.yaml: |
+    name: openldap
+    type: LDAPIdentityProvider
+    mappingMethod: auto
+    hidden: false
+    disabled: false
+    displayName: "Third-party login for LDAP"
+    provider:
+      # ldap.example.com:389 When no protocol is specified, defaults to ldap protocol
+      host: "ldap://ldap.example.com:389"
+      managerDN: "cn=admin,dc=example,dc=com"
+      managerPassword: "your-password"
+      userSearchBase: "ou=Users,dc=example,dc=com"
+      loginAttribute: uid
+      mailAttribute: mail
+----
+
+
+=== Complete LDAP Configuration
+
+The following only shows the configuration of the `provider` section under `stringData:configuration.yaml`. Other parts should remain the same as the corresponding parts in link:#_ldap_基本配置[Basic LDAP Configuration].
+
+[source,yaml]
+----
+    provider:
+      # Required fields
+      host: ldap.example.com:389
+      managerDN: cn=admin,dc=example,dc=com
+      managerPassword: "your-password"
+      userSearchBase: ou=Users,dc=example,dc=com
+      loginAttribute: uid
+      mailAttribute: mail
+      
+      # Optional fields
+      readTimeout: 15000
+      startTLS: false
+      insecureSkipVerify: false
+      rootCA: /path/to/ca.crt
+      rootCAData: "base64_encoded_cert_data"
+      userSearchFilter: "(objectClass=person)"
+ifeval::["{file_output_type}" == "pdf"]
+----
+<<<
+[source,yaml]
+----
+endif::[]
+      groupSearchBase: ou=Groups,dc=example,dc=com
+      groupSearchFilter: "(objectClass=group)"
+      userMemberAttribute: memberOf
+      groupMemberAttribute: member
+      displayNameAttribute: displayName
+----
+
+=== LDAP Parameter Description
+
+This is the parameter description for the `provider` section under `stringData:configuration.yaml`. For parameter descriptions of other parts in the Secret, please refer to link:../01-set-up-external-authentication/#_parameter-description[Configure External Authentication].
+
+[%header,cols="2a,1a,1a,1a,3a"]
+|===
+|Parameter |Type |Required |Default |Description
+
+|  host                  | string  |  Yes  |  -     | LDAP server address and port, format: `host: port`.
+
+If no port is specified, defaults to 389 (LDAP) or 636 (LDAPS)
+
+|  managerDN             | string  |  Yes  |  -     | DN (Distinguished Name) of the administrator user
+
+|  managerPassword       | string  |  Yes  | -      | Password of the administrator user
+
+|  userSearchBase        | string  |  Yes  | -      | Base DN for user search
+
+|  loginAttribute        | string  |  Yes  | -      |  Login attribute used to compare user entries
+
+|  mailAttribute         | string  |  Yes  | -      | User email attribute name
+
+|  readTimeout           | int     | No   |  15000 | Timeout (in milliseconds) for reading data from the remote server
+
+|  startTLS              | bool    | No   | false  |  Whether to use StartTLS connection. If specified, the connection will use the ldaps:// protocol
+
+|  insecureSkipVerify    | bool    | No   | false  | Whether to skip TLS certificate verification
+
+|  rootCA                | string  | No   | -      | Path to the trusted root certificate file. Defaults to the host's root CA
+
+|  rootCAData            | string  | No   | -      | Base64-encoded PEM format root certificate data
+
+|  userSearchFilter      | string  | No   | -      |  LDAP filter used to identify user objects, e.g., (objectClass=person)
+
+|  groupSearchBase       | string  | No   | -      | Base DN for group search
+
+|  groupSearchFilter     | string  | No   |  -     | LDAP filter used to identify group objects, e.g., (objectClass=group)
+
+|  userMemberAttribute   | string  | No   | -      |  Attribute in the user object that stores group membership information
+
+|  groupMemberAttribute  | string  | No   | -      | Attribute in the group object that stores primary group membership information
+
+|  displayNameAttribute  | string  | No   | -      | Attribute name for the user's display name
+
+|===
+
+
+== LDAPS Configuration
+
+[source,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: kubesphere-system  # Do not modify
+  name: identity-provider-ldaps  # Ensure this Secret name is unique within the Kubernetes cluster
+ifeval::["{file_output_type}" == "pdf"]
+----
+<<<
+[source,yaml]
+----
+endif::[]
+  labels:
+    config.kubesphere.io/type: identityprovider # Do not modify
+    config.kubesphere.io/identityprovider: openldap # Must match the name field in configuration.yaml
+type: config.kubesphere.io/identityprovider # Do not modify
+
+stringData:
+  configuration.yaml: |
+    name: openldap
+    type: LDAPIdentityProvider
+    mappingMethod: auto
+    hidden: false
+    disabled: false
+    displayName: "Third-party login for LDAP"
+    provider:
+      host: "ldaps://ldaps.example.com:636"
+      managerDN: "cn=admin,dc=example,dc=com"
+      managerPassword: "your-password"
+      userSearchBase: "ou=Users,dc=example,dc=com"
+      loginAttribute: uid
+      mailAttribute: mail
+      startTLS: false  # Set to false when using LDAPS
+      insecureSkipVerify: false  # Recommended to set to false in production environments
+      # If you need to specify a CA certificate, you can add one of the following configurations
+      rootCA: <ca-file>
+      rootCAData: <ca-data>
+----
+
+
+=== LDAPS-Specific Configuration Parameter Description
+
+[%header,cols="1a,3a"]
+|===
+|Parameter |Description
+
+|startTLS
+|
+- false: Use LDAPS (SSL/TLS) connection
+- true: Use STARTTLS method for encrypted connection
+
+|insecureSkipVerify
+|
+- false: Verify server certificate (recommended)
+- true: Skip server certificate verification (for testing environments only)
+
+|rootCA
+|Path to the LDAP server's CA certificate (optional)
+
+|rootCAData
+|Content of the LDAP server's CA certificate (optional)
+|===
+
+== STARTTLS Configuration
+
+[source,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: kubesphere-system  # Do not modify
+  name: identity-provider-ldaps  # Ensure this Secret name is unique within the Kubernetes cluster
+  labels:
+    config.kubesphere.io/type: identityprovider # Do not modify
+    config.kubesphere.io/identityprovider: openldap # Must match the name field in configuration.yaml
+type: config.kubesphere.io/identityprovider # Do not modify
+
+stringData:
+  configuration.yaml: |
+    name: openldap
+    type: LDAPIdentityProvider
+    mappingMethod: auto
+    hidden: false
+    disabled: false
+    displayName: "Third-party login for LDAP"
+    provider:
+      # ldap.example.com:389 When no protocol is specified, defaults to ldap protocol
+      host: "ldap://ldaps.example.com:389"
+      managerDN: "cn=admin,dc=example,dc=com"
+      managerPassword: "your-password"
+      userSearchBase: "ou=Users,dc=example,dc=com"
+      loginAttribute: uid
+      mailAttribute: mail
+      startTLS: true  # Set to true
+      insecureSkipVerify: false  # Recommended to set to false in production environments
+      # If you need to specify a CA certificate, you can add one of the following configurations
+      rootCA: <ca-file>
+      rootCAData: <ca-data>
+----
+
+
+== Configuration Differences: LDAP/LDAPS/STARTTLS
+
+[%header,cols="1a,1a,1a,2a"]
+|===
+| Protocol    | host Protocol | startTLS   | insecureSkipVerify
+
+| **ldap**     | ldap   | false      | -
+| **ldaps**    | ldaps  | true/false | true/false
+| **starttls** | ldap   | true       | true/false
+|===

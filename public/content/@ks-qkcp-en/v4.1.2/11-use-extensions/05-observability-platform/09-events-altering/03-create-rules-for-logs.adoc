@@ -1,0 +1,104 @@
+---
+title: "Create Alert Rules for Logs"
+description: "Describes how to define alert rules for Kubernetes logs."
+weight: 03
+---
+
+This section describes how to define alert rules for Kubernetes logs.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+WhizardTelemetry Events Alerting by default receives logs from Kubernetes clusters. If you want to receive other logs, you need to modify the configuration of the WhizardTelemetry Data Pipeline, or create a new Secret for configuration. Refer to the link:https://vector.dev/docs/reference/configuration/[Vector Documentation] for configuration.
+|===
+
+== Prerequisites
+
+* You should have the **platform-admin** role on the {ks_product-en} platform.
+
+* **WhizardTelemetry Events Alerting** should have been extension installed and enabled.
+
+* Log alerting has been enabled in the extension configuration of WhizardTelemetry Events Alerting, i.e., set `loggingAlerting.enabled` to `true`.
+
+
+== Steps
+
+. On any cluster node, create a yaml file to define alert rules for logs in that cluster. For more information about parameter configuration, please refer to link:../02-example-rules-for-auditing/#_parameter_description[Parameter Description].
++
+====
+
+* Keyword-based alerting
++
+--
+For example, the following configuration indicates that an alert will be triggered when [ERROR] is included in the test log and the pod name contains `pod_name`.
+
+[,yaml]
+----
+apiVersion: logging.whizard.io/v1alpha1
+kind: ClusterRuleGroup
+metadata:
+  name: logging-rules
+spec:
+  type: logs
+  rules:
+    - name: log-test
+      expr:
+        kind: rule
+        condition: log contains "[ERROR]" and kubernetes.pod_name contains "pod_name"
+      desc: 'test logging'
+      enable: true
+      alerts:
+        severity: warning
+----
+--
+
+
+* Sliding window alerting
++
+--
+The configuration is basically the same as keyword-based alerting, the only difference is that you should add the `slidingWindow` configuration.
+
+For example, the following configuration indicates that in a 20s window sliding every 10s, an alert will be triggered when the logs in the window contain [INFO], the cluster contains `gcp-prod-cluster`, and the number is greater than or equal to 20.
+
+[,yaml]
+----
+apiVersion: logging.whizard.io/v1alpha1
+kind: ClusterRuleGroup
+metadata:
+  name: logging-rules
+spec:
+  type: logs
+  rules:
+    - name: TestLoggingRuleWindow-02
+      expr:
+        kind: rule
+        condition: log contains "[INFO]" and cluster contains "gcp-prod-cluster"
+      desc: stream test 2
+      enable: true
+      alerts:
+        severity: info
+        annotations:
+          summary: for test
+          summaryCn: 测试TestLoggingRuleWindow-02
+        message:  告警测试TestLoggingRuleWindow-02
+      slidingWindow:
+        windowSize: 20s
+        slidingInterval: 10s
+        count: 20
+----
+--
+
+====
+
+. Run the following command to create the CRD (Custom Resource Definition).
++
+[,bash]
+----
+kubectl apply -f xxx.yaml  # Replace with the name of the yaml file
+----
+
+. After successful execution, search for **ClusterRuleGroup** on the Cluster **CRDs** page.
+
+. Click **ClusterRuleGroup** to enter the details page and view, edit, or delete the alert rules on the right side of the page.

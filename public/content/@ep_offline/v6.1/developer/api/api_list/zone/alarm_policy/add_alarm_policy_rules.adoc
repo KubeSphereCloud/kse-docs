@@ -1,0 +1,126 @@
+---
+title: 添加告警规则（AddAlarmPolicyRules）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy
+| String
+| true
+| 策略id
+
+| owner
+| String
+| false
+| 用户
+
+| rules
+| Object
+| true
+| 告警规则数组
+
+| rules.alarm_level_id
+| String
+| true
+| 规则级别
+
+| rules.condition_type
+| String
+| true
+| 条件
+
+| rules.consecutive_periods
+| Integer
+| true
+| 连续周期
+
+| rules.data_processor
+| String
+| true
+| 数据类型
+
+| rules.meter
+| String
+| true
+| public
+
+| rules.period_end_hhmm
+| String
+| true
+| 规则生效截至时间
+
+| rules.period_start_hhmm
+| String
+| true
+| 规则生效开始时间
+
+| rules.thresholds
+| String
+| true
+| 阈值
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy_rules
+| Array
+| false
+| 规则id数组
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "AddAlarmPolicyRules",
+  "alarm_policy": "alp-f0t3obl0",
+  "owner": "usr-rrPKHDpJ",
+  "rules": [
+    {
+      "alarm_level_id": "level-00000000",
+      "condition_type": "gt",
+      "consecutive_periods": 1,
+      "data_processor": "raw",
+      "meter": "disk-inode",
+      "period_end_hhmm": "23:59",
+      "period_start_hhmm": "00:00",
+      "thresholds": "90"
+    }
+  ],
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "AddAlarmPolicyRulesResponse",
+  "alarm_policy_rules": [
+    "alpr-ugtabta7"
+  ],
+  "ret_code": 0,
+  "trace_id": "ZSaW3HFf"
+}
+----

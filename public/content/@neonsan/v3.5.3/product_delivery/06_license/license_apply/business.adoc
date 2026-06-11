@@ -1,0 +1,101 @@
+---
+title: 商用版 License
+weight: 3
+---
+
+== 注意事项
+
+* NeonSAN 的商用版 License 期限为永久有效，其授权容量由客户实际购买容量。
+* 若集群容量超过 License 授权容量，则 NeonSAN 存储系统将无法扩容存储池以及创建新卷。
+
+== 应用场景
+
+* 旧版本 NeonSAN 集群升级到 v3.4.1 及以上版本时，需提前申请商业版 License，待获得 License 授权证书后，再进行集群的升级操作。
+* License 授权容量已达上限，需进行扩容时。
+
+== 操作步骤
+
+. 登录全象云平台。
++
+[source,shell]
+----
+https://apps.yunify.com/login
+----
++
+image::/images/neonsan/license_5.png[]
+
+. 在全象云工作台页面，选择**我的应用** > **青云产品许可申请** > **云平台许可申请** > **NeonSAN 许可申请**，进入 License 申请页面。
++
+image::/images/neonsan/license_6.png[]
+
+. 点击**新建**，弹出 License 申请页面，输入各项参数信息。
++
+image::/images/neonsan/license_8.png[]
++
+**参数说明**
++
+[options="header",cols="1,1,3"]
+|===
+|参数类型 |参数 |详细说明
+.9+|必填项
+|合同编号	
+|与客户签订的合同编码
+
+|许可类型	
+|商用版 License，请选择**生产环境**
+
+|集群 ID	
+|NeonSAN 集群的 ID
+
+|申请人	
+|License 申请者的姓名
+
+|申请容量	
+|根据实际需要填写容量
+
+|申请人所在部门	
+|根据申请人信息系统自动填充
+
+|许可开始的时间	
+|License 许可证有效期的起始时间
+
+|许可接收者邮箱	
+a|接收当前 License 授权证书的邮箱。依次推荐使用：
+
+* mail.yunify.com 邮箱
+* QQ 邮箱
+* 163 邮箱
+* 其他企业或公共邮箱
+
+|SANC 描述信息	
+|需填写产品配置信息
+
+.4+|选填信息
+|售前负责人
+|青云售前负责人信息
+
+|客户名称
+|已购买 NeonSAN 产品并签署合同的客户名称
+
+|合同名称
+|与客户签订的合同名称
+
+|订单编号
+|客户购买 NeonSAN 分布式存储系统所产生的订单号
+|===
+
+. 各项信息填写完成后，点击**确认新建**，等待审批通过即可。
+. 申请审批通过后，系统会将 License 授权证书以邮件的形式发送至许可接收者的邮箱。授权证书内容如下表所示，重点关注 ``License_code``。
++
+[options="header",cols="1,2"]
+|===
+|参数 |详细说明
+|license_id	|License 许可证的 ID
+|capacity	|该 License 的授权容量
+|applicant	|License 申请人信息
+|description	|集群描述信息
+|license_code	|License 密钥，用于激活 License
+|application_code	|申请密钥
+|start_time	|该 License 有效期的开始日期
+|end_time	|该 License 有效期的截止日期
+|===

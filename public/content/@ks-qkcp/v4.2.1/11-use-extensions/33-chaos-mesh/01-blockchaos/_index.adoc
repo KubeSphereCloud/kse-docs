@@ -1,0 +1,20 @@
+---
+title: "块存储故障模拟"
+weight:  01
+---
+
+本节介绍如何模拟块存储故障（BlockChaos）。
+
+BlockChaos 通过向块设备的 I/O 调用注入延迟，模拟磁盘性能下降场景，用于验证业务在存储性能劣化时的表现。
+
+== 前提条件
+
+* 节点上需挂载块设备，且块设备的调度器需设置为 `ioem` 或 `ioem-mq`。
+* 需已安装 chaos-driver 内核模块。有关安装方法，请参阅 link:https://github.com/chaos-mesh/chaos-driver/blob/master/README.md[chaos-driver 安装文档]。
+* 块设备需通过 volume 挂载到目标 Pod 中。
+* KubeSphere 平台需要安装并启用混沌工程扩展组件。
+
+== 支持的操作
+
+* 准备测试环境
+* 注入块存储延迟（delay）

@@ -1,0 +1,83 @@
+---
+title: "View virtual subnet details"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, virtual subnets, details, view"
+description: "Describes how to view virtual subnet details in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 9671e13a010946639c43eb4b6051bde7
+:ks_xref_id: c3312c94a27341cd8fb935a2874297c3
+:ks_comp: ../../../../components/
+:ks_title: View virtual subnet details
+:ks_description: Describes how to view virtual subnet details in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, virtual subnets, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view virtual subnet details in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=74c54a4cd70b47b18b012eeee84cb806]
+
+include::../../../../_custom-en/networks/virtual-subnet-steps.adoc[]
+
+. On the **Subnets** page, click the name of the virtual subnet that you want to view. The details page of the virtual subnet appears.
+. On the left side of the details page, view basic information about the virtual subnet.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the virtual subnet in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the virtual subnet.
+
+|VPC
+|The virtual private cloud (VPC) where the virtual subnet resides.
+
+|IP Range
+|The IP address range in which the virtual subnet resides. The value is the subset of the IP address range in which the VPC resides.
+
+|Available IPs
+|The number of IP addresses available in the virtual subnet.
+
+|Used IPs
+|The number of IP addresses used in the virtual subnet.
+
+|Created at
+|The time when the virtual subnet was created.
+
+|Created by
+|The username that is used to create the virtual subnet.
+|===
+--
+. On the right side of the details page, view the resources that are associated with the virtual subnet.  The following table describes the parameters.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the associated resource.
+
+|ID
+|The UUID of the resource in the system.
+
+|Status
+|The status of the associated resource.
+
+|IP Address
+|The IP address of the associated resource.
+|===
+--

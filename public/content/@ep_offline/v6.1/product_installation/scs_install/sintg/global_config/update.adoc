@@ -1,0 +1,12 @@
+---
+title: "更新配置文件"
+weight: 20
+---
+
+修改完配置文件后，执行以下命令，更新配置文件。
+[source]
+----
+/pitrix/build/build_pkgs.py -p pitrix-global-conf
+fb update {zone_id}-scs pitrix-global-conf
+fb update {zone_id}-srp pitrix-global-conf
+----

@@ -1,0 +1,82 @@
+---
+title: "从应用模板安装应用"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 项目管理, 应用, 从应用模板安装应用"
+description: "介绍如何从应用模板安装应用。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: a0071698656c47c88fa42e468c6462de
+:ks_xref_id: d25393af39274cc89419fae8aa648fa7
+:ks_comp: ../../../../components/
+:ks_title: 从应用模板安装应用
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 应用, 从应用模板安装应用
+:ks_description: 介绍如何从应用模板安装应用。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何从应用模板安装应用。
+
+
+== 前提条件link:[id=a6436950d3374c9d99d5f30f5a3af2dc]
+
+:relfileprefix: ../../../../
+* 您需要加入一个项目并在项目中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:07-project-management/10-project-settings/04-project-members/_index.adoc[项目成员]和xref:07-project-management/10-project-settings/03-project-roles/02-view-a-project-role-list.adoc[项目角色]。
+
+// include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-prer-enableAppManagment.adoc[]
+
+
+== 操作步骤link:[id=a5f7d73b9eec4eee9c837348dde3c066]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. 在**创建应用**对话框点击**从应用模板**。
+
+. 在**应用模板**页面，点击**选择应用仓库**下拉列表，选择一个应用仓库或**当前企业空间**，点击需要使用的应用模板，然后点击**安装**。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+应用模板和应用仓库由具有相关权限的企业空间成员创建。
+ifeval::["file_output_type" == "pdf"]
+有关更多信息，请参阅《{ks_product_right}企业空间管理指南》的“应用管理”章节。
+endif::[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
++
+
+include::../../../../_custom/projectManagement/apps/apps-oper-installApp.adoc[]
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+应用模板和应用仓库由具有相关权限的企业空间成员创建。有关应用功能参数的更多信息，请联系相关企业空间成员或应用的提供方。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+应用创建完成后将显示在应用列表中。
+--

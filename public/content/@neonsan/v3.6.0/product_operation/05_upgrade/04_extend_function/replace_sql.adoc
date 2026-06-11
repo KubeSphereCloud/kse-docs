@@ -1,0 +1,109 @@
+---
+title: "替换数据库"
+wieght: 2
+---
+ 
+在进行 NeonSAN 管理服务在线迁移的运维场景中，可能需要将当前环境中的 neonsan_mysql 数据库替换成 Galera 数据库，可参考以下步骤进行。
+
+. 将升级脚本和 galera_cluster v1.1.5 及以上版本的安装包，上传至集群任一 Center 节点上。
+
+. 登录上述节点，创建 ``ip_list.txt`` 文件，内容为集群内所有节点的 IP。
++
+[source,shell]
+----
+vi /root/ip_list.txt
+
+xx.xx.xx.xx xx.xx.xx.xx xx.xx.xx.xx
+----
++
+
+include::../../../../../_components/note.adoc[]
+* ``ip_list.txt`` 文件须位于安装包所在目录，此处示例为 ``/root`` 目录。
+* 节点 IP 以空格分隔。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 在当前节点上，运行升级脚本，进入升级脚本操作界面。
++
+[source,shell]
+----
+./upgrade_v1.20.sh
+----
+
+. 根据提示信息，输入 ``n``。
+
+. 根据提示信息，输入 ``1``，进入基础工具检查阶段。
++
+若无异常反馈，可继续后续步骤。否则，用户可根据提示信息，安装相应的组件，再继续操作。
++
+[source,shell]
+----
+please input 1-15 number: 1
+----
+
+. 根据提示信息，输入 ``2``，进入集群状态检查阶段。
++
+若集群各项服务状态均为 OK，方可进行后续操作步骤；否则，需解决相应异常后再进行后续操作。
++
+[source,shell]
+----
+please input 1-15 number: 2
+----
+
+. 根据提示信息，输入 ``3``，确定是否将 neonsan-mysql 数据库替换为 Galera 数据库。
++
+
+include::../../../../../_components/attention.adoc[]
+Galera 数据库必须为 v1.1.5及以上版本。
+
+include::../../../../../_components/table_footer.adoc[]
++
+[source,shell]
+----
+please input 1-15 number: 3
+----
++
+image::/images/neonsan/migrate_node_4.png[]
+
+. 根据提示信息，输入 ``4``，将 Galera 数据库安装包拷贝至集群的其他节点。
++
+[source,shell]
+----
+please input 1-15 number: 4
+----
++
+include::../../../../../_components/note.adoc[]
+拷贝正常结束后，会输出 ``Copy upgrade deb packets successfully`` 提示信息，即可进行下一步操作。
+include::../../../../../_components/table_footer.adoc[]
+
+. 根据提示信息，输入 ``5``，进行数据库替换准备，该操作会对数据库进行备份，并关闭自动负载均衡和自动恢复降级卷功能。
++
+
+include::../../../../../_components/note.adoc[]
+* 该操作会检查当前的异步任务列表，若有正在执行的任务列表，则需等待该任务执行完成才可以继续一步操作。
+* 出现绿色字体提示操作成功，即可正常继续后续操作。
+
+include::../../../../../_components/table_footer.adoc[]
++
+[source,shell]
+----
+please input 1-15 number: 5
+----
++
+image::/images/neonsan/migrate_node_6.png[,70%]
+
+. 根据提示信息，输入 ``15``，将 neonsan-mysql 服务替换为 Galera 数据库服务。
++
+
+include::../../../../../_components/note.adoc[]
+* 根据提示信息，逐一替换各个节点的数据库。
+* 返回结果中出现以下提示信息，且各服务状态均为 OK 则证明数据库替换成功。
+
+include::../../../../../_components/table_footer.adoc[]
++
+[source,shell]
+----
+please input 1-15 number: 15
+----
++
+image::/images/neonsan/migrate_node_7.png[]

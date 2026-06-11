@@ -1,0 +1,25 @@
+---
+title: "手动安装"
+weight: 30
+---
+
+== 前提条件
+
+已获取手动安装镜像 QingCloud-X.X.X.X-NoAutoInstall.iso。 
+
+== 安装说明
+
+手动安装过程中，请参照如下参数进行配置：
+
+* 语言：English
+* 国家：China
+* 运行语言：en_US.UTF-8
+* 键盘：English (US)
+* 分区：根目录分配 50G，SWAP 分配 32G，全部为主分区，分区表建议为 msdos。除非必要，否则不要增加 boot 分区。
+* 用户名密码：**设置用户名密码为 yop/zhu1241jie**。建议所有节点之间账户密码一致。
+* 安装包选择：除了 SSH 服务之外，安装系统时请勿勾选任何多余的软件包。安装后校验是否有 ethtool 包，若没有，需要补充安装。
+
+include::../../../../../../_components/note.adoc[]
+操作系统安装完成后，建议多重启几次服务器，观察网络和磁盘顺序，确保网络通畅，磁盘顺序正常。
+
+include::../../../../../../_components/table_footer.adoc[]

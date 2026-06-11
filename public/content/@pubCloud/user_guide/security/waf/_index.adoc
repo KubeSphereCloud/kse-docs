@@ -1,0 +1,39 @@
+---
+title: "Web 应用防火墙"
+linkTitle: "Web 应用防火墙"
+weight: 30
+collapsible: true
+type: "product"
+description: WAF (Web 应用防火墙）通过检查 HTTP/HTTPS 流量来实现内容过滤， 可以防止针对 Web 应用程序漏洞的攻击，如 SQL 注入、跨站点脚本（XSS）、文件包含漏洞以及安全配置错误等。 CC 防护功能可以降低攻击对系统的影响，通过自定义规则可以灵活有效的阻止非法流量，保证应用的稳定运行。 WAF 部署在负载均衡器（LoadBalancer）之上，本指南旨在介绍如何通过配置 WAF 来实现内容防护。
+
+study_section:
+  - title: 了解
+    icon: /images/icons/note_tree_duotone.svg
+    children:
+      - title: 产品简介
+        children:
+          - title: 什么是 WAF
+            url: intro/introduction/
+
+  - title: 使用
+    icon: /images/icons/simulation_duotone.svg
+    children:
+      - title: 操作指南
+        children:
+          - title: 创建 WAF
+            url: manual/waf_user_guide/
+          - title: 开启 WAF
+            url: manual/waf_user_guide/#_开启_waf
+          - title: 关闭 WAF
+            url: manual/waf_user_guide/#_关闭_waf
+
+  - title: 开发
+    icon: icon-code_box_duotone
+    children:
+      - title: API 参考
+        children:
+          - title: API 概述
+            url: api/overview/
+          - title: API 接口
+            url: api/command_list/add_waf_rules/
+---

@@ -1,0 +1,53 @@
+---
+title: "查看巡检规则组列表"
+weight:  03
+---
+
+:ks_navigation: **巡检规则组**
+
+
+本节介绍巡检规则组列表的信息。
+
+== 前提条件
+
+* 您需要在 KubeSphere 平台具有 **platform-admin** 角色。
+
+* 已创建巡检规则。
+
+
+== 操作步骤
+
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+. 点击**组件坞 > 集群巡检**，进入集群巡检页面。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+--
+巡检规则组列表提供以下信息：
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|巡检规则的名称。
+
+|风险等级
+|巡检规则中定义的风险等级（危险、警告、可忽略）及其对应的规则数量。
+
+|关联巡检任务
+|使用当前巡检规则的巡检任务数量。
+|===
+
+* 在列表上方点击搜索框并输入关键字，可按名称搜索巡检规则。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+--

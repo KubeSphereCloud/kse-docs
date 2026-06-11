@@ -1,0 +1,150 @@
+---
+title: "重建 vbr"
+weight: 12
+---
+
+== 运维场景
+
+NeonSAN 为云易捷提供块存储，在使用中，IaaS 删除的文件 NeonSAN 可能无法感知，所以某些情况下导致 NeonSAN 卷的容量非常大。目前需要手动重建卷进行处理。
+
+== 前提条件
+
+重建卷需要先删除卷，故需要与用户确认能够删除的卷数据，或对数据进行备份或迁移，待重建卷后恢复即可。
+
+== 操作步骤
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 查看待处理的卷，记录卷名、大小以及副本数等信息。
++
+[source,shell]
+----
+neonsan list_volume -detail -H
+----
+
+. 依次执行如下命令，暂停自动挂载。
++
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh vbr 'supervisorctl stop storage_vbr'
+----
++
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh vbr 'mv /pitrix/bin/alert-agent /pitrix/bin/alert-agent.bak'
+----
++
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh vbr 'umount /pitrix/data/container/vbr'
+----
+. 执行如下命令，查看 Snapshot 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/vbr
+----
++
+[source,shell]
+----
+nodes=( yijie01n01 yijie01n02 );
+----
+
+. 逐一登录 vbr 节点，进行如下操作。
+.. 依次执行如下命令，解除待处理的 vbr 卷的映射关系后，将其删除。
++
+[source,shell]
+----
+qbd -u </vol/express_vbr_xxxx.img>
+----
++
+[source,shell]
+----
+neonsan delete_volume -volume </vol/express_vbr_xxxx.img>
+----
++
+include::../../../../../_components/note.adoc[]
+</vol/express_vbr_xxxx.img> 为待处理的 vbr 卷的卷名，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+.. 创建新的 vbr 卷。
++
+[source,shell]
+----
+neonsan create_volume -volume </vol/express_vbr_xxxx.img> -size <xxG> -repcount 2
+----
++
+include::../../../../../_components/note.adoc[]
+* -volume 用于指定卷名，需与原 vbr 卷名保持一致。
+* -size 用于指定卷的大小需与原 vbr 卷大小保持一致。
+* -repcount 用于指定卷副本数，设置为 2 即可。
+include::../../../../../_components/table_footer.adoc[]
+
+.. 设置重建的 vbr 卷的映射关系。
++
+[source,shell]
+----
+qbd -m </vol/express_vbr_xxxx.img>
+----
+
+.. 格式化已映射出去的 vbr 卷。
++
+[source,shell]
+----
+mkfs.ext4 -F -q -E lazy_itable_init=0,lazy_journal_init=0 -T largefile /dev/$(qbd -l | grep </vol/express_vbr_xxxx.img> | awk '{print $3}')
+----
+
+.. 挂载卷。
++
+[source,shell]
+----
+/opt/automount_neonsan_volumes.sh
+----
+
+.. 检查 vbr 卷是否挂载成功。
++
+[source,shell]
+----
+lsblk |grep vbr
+----
++
+[source,shell]
+----
+qbd3      251:48   0   968G  0 disk /pitrix/data/container/vbr
+----
++
+include::../../../../../_components/note.adoc[]
+若无返回结果，请联系 QingCloud Installer 组相关人员。
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录 FirstBox 节点，在 root 用户下恢复自动挂载。
++
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh snapshot 'mv /pitrix/bin/alert-agent.bak /pitrix/bin/alert-agent'
+----
++
+[source,shell]
+----
+/pitrix/upgrade/exec_nodes.sh vbr 'supervisorctl start storage_vbr'
+----
+
+
+

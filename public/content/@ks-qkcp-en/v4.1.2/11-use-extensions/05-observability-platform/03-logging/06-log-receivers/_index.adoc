@@ -1,0 +1,18 @@
+---
+title: "Log Receivers"
+description: "This section introduces how to configure or add log receivers."
+weight: 03
+layout: "second"
+---
+
+Log receivers are used to collect various types of system logs. Configure or add log receivers to send log data from WhizardTelemetry Logging, WhizardTelemetry Auditing, WhizardTelemetry Events, and notification history to external log receivers.
+
+{ks_product-en} supports collecting the following types of logs:
+
+* Container logs: Logs obtained from the container's standard output. The content of container logs is determined by the application running in the container.
+
+* Resource events: Events of various resources such as workloads, Jobs, pods, services, and Ingresses.
+
+* Audit logs: Records of requests received by the KubeSphere API server.
+
+* Notification history: Records of notifications sent by the {ks_product-en} platform to users.

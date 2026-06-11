@@ -1,0 +1,85 @@
+---
+title: "创建 SSH 密钥"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, SSH, 密钥, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建 SSH 密钥。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 44b84ae6f42a4a0f867274f1b71cbbd2
+:ks_xref_id: 2bc3dd96920e4d8596f6da96a9e5c06e
+:ks_comp: ../../../components/
+:ks_title: 创建 SSH 密钥
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建 SSH 密钥。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, SSH, 密钥, 创建
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建 SSH 密钥。
+
+SSH 密钥由一个公钥和一个私钥组成，公钥可对会话进行加密、验证数字签名，只有使用对应的私钥才能解密会话数据，从而保证数据传输的安全性。创建 SSH 密钥后，系统将自动下载私钥至本地，请您妥善保管。使用 SSH 密钥绑定虚拟机后，如果没有私钥，您将无法登录虚拟机。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=fca54c4733e64898a600dfed8681f65a]
+
+请确保您有权限创建 SSH 密钥。仅系统 **admin** 用户、普通项目管理员、普通项目操作员有权限创建密钥。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=f155fd8e79cf40f38d1c50e0897a0a1d]
+
+include::../../../_custom/ssh/ssh-key-steps.adoc[]
+
+. 在 SSH 密钥列表页面，点击右上角的**创建**。
+
+. 在弹出的对话框中，配置 SSH 密钥相关参数。具体参数描述请参见下表。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|选择方式
+|您可以选择以下任一类型创建密钥对。建议您选择**创建新密钥**，并及时保存私钥。
+
+* **创建新密钥**：系统会为您创建新的 SSH 密钥。创建完成后将自动下载私钥，您只有这一次下载私钥的机会，请妥善保存私钥文件。
+
+* **使用已有公钥**：您可以自行导入 Base64 编码的公钥内容。
+
+|名称
+|SSH 密钥的名称。
+
+include::../../../_custom/security-groups/naming-convention.adoc[]
+
+|别名
+|SSH 密钥的别名。
+include::../../../_custom/alerts/alias-naming-convention.adoc[]
+
+|公钥
+|输入需要生成对应私钥的公钥。此参数仅**选择方式**为**使用已有公钥**时可见。
+
+|描述
+|用户自定义的描述信息。
+
+include::../../../_custom/networks/description-convention.adoc[]
+|===
+--
+
+. 点击**确定**。SSH 密钥创建后将显示在SSH 密钥列表中。
+
+// 这部分待补充
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 后续步骤link:[id=c4b3e60ad58c47b790d261acfedf29da]
+
+创建密钥对后，您可以在创建虚拟机时为虚拟机绑定 SSH 密钥，然后便可以通过 SSH 密钥登录虚拟机。有关更多信息，请参阅 link:../../05-vm-management/01-vms/01-create-vm/[创建虚拟机]。
+
+

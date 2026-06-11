@@ -1,0 +1,49 @@
+---
+title: "检查 keepalived 服务"
+weight: 2
+draft: true
+---
+
+. 逐个登录除 zero-web 节点以外的其他 NeonSAN 节点服务器，zero-web 节点信息可执行如下命令查看。
++
+[,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts|grep zero-web"
+----
+
+. 执行如下命令，检查 keepalived 是否安装。
++
+[,shell]
+----
+keepalived -v
+----
++
+include::../../../../../../_components/note.adoc[]
+除 zero-web 节点以外，且没有使用 iSCSI 接口和旧文件存储 v2 架构环境（文件存储底层依赖 NeonSAN 提供存储空间，需要 keepalived 绑定 vip 做 NAS 高可用网关使用），其他 NeonSAN 节点上均不应安装 keepalived。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 若上一步骤中，查询到其他 NeonSAN 节点上，安装有 keepalived，可执行以下步骤进行删除。
+.. 停keepalived服务
++
+[,shell]
+----
+supservisorctl stop keepalived 
+----
+
+.. 删除加载信息
++
+[,shell]
+----
+supservisorctl remove keepalived 
+----
+.. 删除配置文件
++
+[,shell]
+----
+rm -f /etc/supervisor/conf.d/keepalived.conf 
+----
+
+
+
+
+

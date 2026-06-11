@@ -1,0 +1,80 @@
+---
+title: 禁用自动伸缩策略（InactivateAutoScalingPolicies）
+weight: 9
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| autoscaling_policies
+| Array
+| true
+| 自动伸缩策略ID列表
+
+| owner
+| String
+| true
+| 所有者
+
+| zone
+| String
+| true
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 操作名称
+
+| autoscaling_policy_ids
+| Array
+| false
+| 自动伸缩策略ID列表
+
+| ret_code
+| Integer
+| false
+| 操作结果
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "InactivateAutoScalingPolicies",
+  "autoscaling_policies": [
+    "asp-5nezjmtm"
+  ],
+  "owner": "usr-DnmqVpLq",
+  "zone": "qa"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "InactivateAutoScalingPoliciesResponse",
+  "autoscaling_policy_ids": [
+    "asp-5nezjmtm"
+  ],
+  "ret_code": 0
+}
+----

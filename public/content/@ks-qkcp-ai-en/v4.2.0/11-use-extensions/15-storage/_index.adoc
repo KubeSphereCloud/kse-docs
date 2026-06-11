@@ -1,0 +1,35 @@
+---
+title: "KubeSphere Storage"
+keywords: "Kubernetes, {ks_product}, Storage, Volume Snapshot"
+description: "Introduces how to use the 'KubeSphere Storage' extension."
+weight: 15
+layout: "second"
+---
+
+
+This section introduces how to use the 'KubeSphere Storage' extension.
+
+This extension contains multiple storage-related utilities:
+
+* snapshot-controller: Used to create snapshots for PVCs.
+* snapshotclass-controller: Used to count snapshots.
+* pvc-auto-resizer: Used to automatically expand PVCs when capacity is insufficient.
+* storageclass-accessor: Provides an admission controller to validate whether PVC creation is allowed in a specific namespace or workspace.
+* volume-initializer: Provides an admission controller to inject init containers into pods for initializing PVC volumes.
+* nfs-pv-static-provisioner: Automatically creates NFS-type PVs and associates them with existing NFS volumes based on PVC annotations.
+* apiserver: Provides storage-related APIs.
+
+After installing the 'KubeSphere Storage' extension,
+
+* Under the **Storage** menu in the cluster's left navigation pane, the **Volume Snapshots** and **Volume Snapshot Classes** options will appear, and **Storage Classes** will support **Set Authorization Rules** and **Set Auto Expansion**.
+* Under the **Storage** menu in the workspace's left navigation pane, the **Volume Snapshots** option will appear.
+* When creating a PersistentVolumeClaim, you can **Bind to an existing NAS volume** and **Create from a volume snapshot**.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+* The auto-expansion feature for Storage Classes supports automatic expansion when PVC capacity is insufficient. It only controls whether users are allowed to perform related operations in the KubeSphere web console. Whether the Storage Class actually supports these operations depends on the backend storage system.
+* Setting up auto-expansion requires connecting to the Prometheus service to work. For more information, please refer to the description on the details page of the 'KubeSphere Storage' extension in the Extensions Center.
+|===

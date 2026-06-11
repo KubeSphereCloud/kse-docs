@@ -1,0 +1,29 @@
+// :ks_include_id: a1136d082b9243c99e434b23d986907a
+
+Before you install {ks_product}, carefully read the following precautions and make sure the conditions are met:
+
+* Before you install {ks_product}, we recommend that you run the following script to clear the disk for Ceph storage. Replace the drive letter in the script with the actual one. After the disk is cleared, restart the server.
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+DISK="/dev/sdX"
+
+# Zap the disk to a fresh, usable state (zap-all is important, b/c MBR has to be clean)
+sgdisk --zap-all $DISK
+
+# Wipe a large portion of the beginning of the disk to remove more LVM metadata that may be present
+dd if=/dev/zero of="$DISK" bs=1M count=100 oflag=direct,dsync
+
+# SSDs may be better cleaned with blkdiscard instead of dd
+blkdiscard $DISK
+
+# Inform the OS of partition table changes
+partprobe $DISK
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+* If environment conditions can be met or {ks_product} is to be installed in a production environment, we recommend that you use SSDs in etcd. By default, the data directory of etcd is **/var/lib/etcd**.
+* If the size of the system disk is small or {ks_product} is to be installed in a production environment, we recommend that you mount a disk of 100 GB or larger to the directory **/var/lib/rancher**.

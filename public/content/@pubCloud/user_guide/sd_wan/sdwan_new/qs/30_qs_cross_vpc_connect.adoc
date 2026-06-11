@@ -1,0 +1,318 @@
+---
+title: "跨区域 VPC 互联"
+draft: false
+collapsible: false
+weight: 30
+---
+
+本文介绍如何通过 SD-WAN 核心网络实现跨区域的 VPC 互联。
+
+== 场景示例
+
+某企业在北京3区及上海1区分别创建了 VPC1 和 VPC2，并分别在 VPC1 和 VPC2 下使用云服务器部署了应用服务，VPC1 与 VPC2 互不相通。因业务发展需要，企业需要两个 VPC 之间可以互相通信。该场景下，企业可使用 SD-WAN 产品分别在北京3区和上海1区的 VPC 内部署 VCPE 接入点，从而实现跨区域 VPC 通信，并可配合边界路由器实现跨区域多 VPC 互联通信。
+
+image::/images/cloud_service/sd_wan/qs_cross_region_access.png[]
+
+== 准备工作
+
+在北京3区、上海1区分别创建 1 个 VPC，并在 VPC 下的私有网络中创建一台云服务器，模拟用户业务资源跨区域 VPC 通信场景。详细操作步骤请参考link:/user_guide/network/vpc/manual/vpcnet/10_create_vpc/[创建 VPC 网络]及link:/user_guide/network/vpc/quick-start/20_qs_ipv4/#步骤2在私有网络中创建云服务器[在私有网络中创建服务器]。
+
+资源网络规划如下：
+
+|===
+|业务 VPC| VPC1|VPC2
+
+|所属区域|北京3区|上海1区
+
+|VPC 网络网段|192.168.0.0/16|172.16.0.0/16
+
+|私有网络网段|vxnet01：192.168.0.0/24|vxnet02：172.16.0.0/24
+
+|云服务器 IP 地址|VM01：192.168.0.2|VM02：172.16.0.2
+
+|===
+
+创建完成后，如下图所示。
+
+*北京3区：*
+
+image::/images/cloud_service/sd_wan/qs_ready_vm01.png[]
+
+*上海1区：*
+
+image::/images/cloud_service/sd_wan/qs_ready_vm02.png[]
+
+下文将介绍如何使用 SD-WAN 配合边界路由器实现 VPC1 与 VPC2 互通，即 VM01 与 VM02 能够互相通信。
+
+== 步骤一：创建连接云网
+
+. 登录管理控制台。
+. 选择**产品与服务** > *网络服务* > *SD-WAN（新版）*，进入**连接云网**页面。
+. 点击**创建连接云网**，弹出**创建连接云网**窗口。
++
+image::/images/cloud_service/sd_wan/qs_wan_multiple.png[,60%]
+
+
+. 输入企业云网的**名称**和描述信息，并点击**创建连接云网**。
++
+当连接云网的状态为``活跃``时，说明连接云网创建成功。
+
+== 步骤二：创建接入点 VCPE
+
+按照如下操作步骤，分别创建两个 VCPE 接入点：“VCPE01” 和 “VCPE02”。
+
+//*VCPE01 网关配置*：网段 `192.168.200.0/24` ，网关 IP 为 `192.168.200.200`。
+
+. 在左侧导航栏中，点击**接入点**，进入**接入点**页面。
+
+. 点击**创建接入点**，弹出**创建接入点**窗口。
+
+. 配置接入点基本信息。
++
+image::/images/cloud_service/sd_wan/qs_create_vcpe_access.png[]
++
+详细参数说明，请参考link:../../open_access_point/vcpe/30_create_vcpe/[创建软件 VPCE 接入点]。以下为配置示例。
++
+[options="header",cols="1,2"]
+|===
+| 参数 | 参数说明
+
+| 接入点名称
+| 输入接入点的名称。本示例中为 “VCPE01”。
+
+| 接入点类型
+| 选择 `VCPE 虚拟机`。
+
+| 部署方式
+| 默认``双机``部署方式，支持主备设备高可用方式运行。
+
+| 关联连接云网
+| 选择关联的连接云网，即<<_步骤一创建连接云网,步骤一>>中创建的 “sdwan”。
+
+| 高级设置
+| 保持默认，暂不配置。
+
+|购买信息
+|根据实际需求选择计费方式、带宽上限等信息。本示例中使用按需计费方式，其他选项保持默认设置。
+
+|接入点数量
+|设置为 2。
+|===
+. 点击**立即创建**，弹出提示框。
+. 点击**知道了**，返回接入点页面，可看到接入点已创建成功。
++
+批量创建的接入点不会重复命名，为便于识别，需要将其中 “VCPE011” 的接入点名称修改为 “VCPE02”。
+. 右键点击接入点，选择**修改名称**，修改为 “VCPE02”，点击**确认修改**。
++
+image::/images/cloud_service/sd_wan/qs_vcpe_acess_creation_done.png[]
+
+== 步骤三：创建接入点 VPC 及私有网络
+
+在北京3区、上海1区分别创建 1 个 VPC，用于部署软件 VCPE。VPC 分别命名 “VPC中继1” 及 “VPC中继2”，并在 VPC 下创建 2 个私有网络，具体操作步骤，请参考link:/user_guide/network/vpc/manual/vpcnet/10_create_vpc/[创建 VPC 网络]。
+
+资源信息规划如下表所示。
+
+|===
+| 接入点 VPC | VPC中继1|VPC中继2
+
+|所属区域|北京3区|上海1区
+
+|VPC 网络网段|192.168.0.0/16|172.16.0.0/16
+
+|私有网络网段
+|vxnet01：192.168.10.0/24 +
+vxnet02：192.168.20.0/24
+|vxnet01：172.16.10.0/24 +
+vxnet02：172.16.20.0/24
+
+|===
+
+创建完成后，如下图所示。
+
+*北京3区：*
+
+image::/images/cloud_service/sd_wan/qs_create_vpce_vpc_1.png[]
+
+*上海1区：*
+
+image::/images/cloud_service/sd_wan/qs_create_vpce_vpc_2.png[]
+
+
+== 步骤四：激活 VCPE
+
+[[create_vcpe_vm01]]
+. 在北京3区，使用 VCPE 镜像创建一台云服务器 “VCPE01_VM”，用于激活 “VCPE01”。
+.. 选择**产品与服务** > **计算** > **镜像**，进入镜像页面。
+.. 点击**市场**页签，进入市场镜像页面。
+.. 找到 **SD-WAN vCPE** 镜像，勾选该镜像，点击**基于镜像创建云服务器**。
++
+image::/images/cloud_service/sd_wan/um_vcpe_image_market.png[]
+.. 根据界面提示配置云服务器参数。
++
+
+include::../../../../../_components/note.adoc[]
+* 实例规格：最低需满足 vCPUs 2核，内存 4G。
+* 网络配置：关联 “VPC中继1”-“vxnet01”，指定 IP 地址：192.168.10.2，并绑定一个公网 IP。
+* 其他配置根据实际需求即可。
+
+include::../../../../../_components/table_footer.adoc[]
++
+配置示例：
++
+image::/images/cloud_service/sd_wan/qs_prepare_vcpe_vm01.png[]
++
+image::/images/cloud_service/sd_wan/qs_prepare_vcpe_vm01_net.png[]
+
+. [[create_vcpe_vm01_nic]]在北京3区，创建一张网卡，并绑定为 “VCPE01_VM” 的从网卡。
+.. 选择**产品与服务** > **计算** > **网卡**，进入网卡页面。
+.. 点击**申请**，弹出**申请网卡**窗口。
+.. 配置网卡信息，点击**提交**。
++
+* 网络：选择 “VPC中继1” 下的私有网络 “vxnet02”。
+* 内网 IP：指定为 192.168.20.2。
++
+image::/images/cloud_service/sd_wan/qs_vcpe_vm01_nic.png[]
+.. 右键点击创建的网卡，选择**分配到云服务器**，将网卡绑定给<<create_vcpe_vm01,步骤1>>中创建的云服务器 “VCPE01_VM”，点击**提交**。
+
+. [[active_vcpe01]]登录云服务器 “VCPE01_VM”，绑定 “VCPE01” 的 License。
+.. 在 “VCPE01” 接入点详情页面，获取接入点的序列号。
++
+image::/images/cloud_service/sd_wan/qs_vcpe_vm01_license.png[]
+.. 登录云服务器 “VCPE01_VM”，执行以下命令，绑定 License。
++
+
+include::../../../../../_components/note.adoc[]
+License 即 VCPE 接入点的序列号。
+
+include::../../../../../_components/table_footer.adoc[]
++
+[,shell]
+----
+wagent join -l <License>
+----
++
+若回显信息如下所示，则说明绑定 License 成功。
++
+image::/images/cloud_service/sd_wan/qs_vcpe_vm01_bind_license.png[]
+
+. 参照<<create_vcpe_vm01,步骤1>>，在上海1区创建一台云服务器 “VCPE02_VM”，用于激活 “VCPE02”。
++
+
+include::../../../../../_components/note.adoc[]
+* 实例规格：最低需满足 vCPUs 2核，内存 4G。
+* 网络配置：关联 “VPC中继2”-“vxnet01”，指定 IP 地址：172.16.10.2，并绑定一个公网 IP。
+* 其他配置根据实际需求即可。
+
+include::../../../../../_components/table_footer.adoc[]
++
+配置示例：
++
+image::/images/cloud_service/sd_wan/qs_prepare_vcpe_vm02.png[]
++
+image::/images/cloud_service/sd_wan/qs_prepare_vcpe_vm02_net.png[]
+
+. 参照<<create_vcpe_vm01_nic,步骤2>>，在上海1区创建一张网卡，并分配给云服务器 “VCPE02_VM”。
++
+* 网络：选择 “VPC中继2” 下的私有网络 “vxnet02”。
+* 内网 IP：指定为 172.16.20.2。
++
+image::/images/cloud_service/sd_wan/qs_vcpe_vm02_nic.png[]
+
+. 参照<<active_vcpe01,步骤3>>，为 “VCPE02_VM” 绑定 License，完成 VCPE02 的激活。
++
+VCPE 激活成功后，接入点状态变为``已激活``，且设备状态和连接状态显示正常。
++
+image::/images/cloud_service/sd_wan/qs_vcpe_active_done.png[]
+
+== 步骤五：创建边界路由器并绑定私有网络
+
+. 在北京3区，创建一个边界路由器，并绑定 “VPC1” 的 “vxnet01”（192.168.0.0/24） 与 “VPC中继1” 的 “vxnet02”（192.168.20.0/24）。
++
+具体操作步骤，可参考link:/user_guide/network/border_router/manual/border_user_guide/[使用边界路由器连接不同 VPC]。
++
+image::/images/cloud_service/sd_wan/qs_border01_bind_vxnet.png[]
+. 在边界路由器的**路由设置**区域，点击**添加路由**，路由策略如下图所示。
++
+该策略使去往上海1区业务私有网络 172.16.0.0/24 的流量，下一跳指向 VCPE01。路由不发布只做本地使用。
++
+image::/images/cloud_service/sd_wan/add_border01_route.png[]
+
+. 添加后，点击**应用修改**。
+. 在上海1区，创建一个边界路由器，并绑定 “VPC2” 的 “vxnet01”（172.16.0.0/24） 与 “VPC中继2” 的 “vxnet02”（172.16.20.0/24）。
++
+image::/images/cloud_service/sd_wan/qs_border02_bind_vxnet.png[]
+. 在边界路由器的**路由设置**区域，点击**添加路由**，路由策略如下图所示。
++
+该策略使去往北京3区业务私有网络 192.168.0.0/24 的流量，下一跳指向 VCPE02。路由不发布只做本地使用。
++
+image::/images/cloud_service/sd_wan/add_border02_route.png[]
+. 添加后，点击**应用修改**。
+
+== 步骤六：配置 VCPE
+
+需要在 “VCPE01” 与 “VCPE02” 上分别执行如下操作进行配置。
+
+. 在 SD-WAN **接入点**页面，点击接入点 ID，进入 VCPE 接入点详情页面。
+. 在**设备管理** > **WAN配置**页面，点击**自定义业务组**，将 eth1 网口移动到``内网流量组``（若已在内网流量组则无须移动），eth0 网络移动到 ``POP流量组``（若已在POP流量组则无须移动）。
++
+image::/images/cloud_service/sd_wan/qs_vcpe_wan_cfg.png[]
+. 点击**应用修改**。
+. 在**网络管理** > **静态路由**页面，点击**添加静态路由**，配置 VCPE 路由通告。
++
+需要添加两条路由配置。
++
+VCPE01 静态路由配置如下： 
++
+image::/images/cloud_service/sd_wan/qs_vcpe_static_route_01.png[]
++
+
+include::../../../../../_components/note.adoc[]
+* 路由1：目标网络 “192.168.20.0/24” 为访问 VPC中继1-vxnet02 的路由。
+* 路由2：目标网络 “192.168.0.0/24” 为访问业务资源 VPC1-vxnet01 的路由。
+
+include::../../../../../_components/table_footer.adoc[]
+
++
+VCPE02 静态路由配置如下：
++
+image::/images/cloud_service/sd_wan/qs_vcpe_static_route_02.png[]
++
+
+include::../../../../../_components/note.adoc[]
+* 路由1：目标网络 “172.16.20.0/24” 为访问 VPC中继2-vxnet02 的路由。
+* 路由2：目标网络 “172.16.0.0/24” 为访问业务资源 VPC2-vxnet01 的路由。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 点击**应用修改**。
+
+== 步骤七：配置业务 VPC 路由
+
+需要在 “VPC1” 与 “VPC2” 上分别执行如下操作进行配置。
+
+. 进入 VPC 详情页面，选择**管理配置** > **内网路由策略**。
+. 点击**添加规则**，添加内网路由策略。
++
+VPC1 的内网路由策略配置如下：
++
+image::/images/cloud_service/sd_wan/qs_vpc1_internal_route.png[]
++
+VPC2 的内网路由策略配置如下：
++
+image::/images/cloud_service/sd_wan/qs_vpc2_internal_route.png[]
+
+. 点击**提交**。
+. 点击**应用修改**。
+
+== 步骤八：验证网络连通性
+
+. 登录北京3区的云服务器 VM01。
+. 执行 `ping 172.16.0.2`，验证是否可成功与上海1区的云服务器 VM02 通信。
++
+若回显信息如下，则代表 VM01 与 VM02 能够正常互通。
++
+image::/images/cloud_service/sd_wan/qs_vm01_ping_vm02.png[]
+
+== 操作演示视频
+
+video::https://yunify-qingcloud-docs.pek3b.qingstor.com/video/qs_sdwan_cross_vpc_access_2023.mp4[如何实现跨区域 VPC 互联]

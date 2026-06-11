@@ -1,0 +1,40 @@
+---
+title: "Edit Application Information"
+description: "Describes how to edit application information."
+weight: 04
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **Deployment Management**
+
+This section describes how to edit the information of a deployed application.
+
+You can edit the alias and description of an application. KubeSphere does not support editing the name of a deployed application.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the application you want to edit, then select **Edit Information** from the dropdown list.
+
+. In the **Edit Information** dialog box, set the alias and description for the application, then click **OK**.

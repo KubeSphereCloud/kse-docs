@@ -1,0 +1,63 @@
+---
+title: "删除应用模板"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 企业空间, 应用模板, 删除应用模板"
+description: "介绍如何删除应用模板。"
+weight: 11
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 57263d94816d44a58969ead976c269af
+:ks_xref_id: f759ce8746d44c6d9918af2ac7827019
+:ks_comp: ../../../../components/
+:ks_title: 删除应用模板
+:ks_keywords: Kubernetes, {ks_product}, 企业空间, 应用模板, 删除应用模板
+:ks_description: 介绍如何删除应用模板。
+:ks_weight: 11
+:ks_icon:
+:ks_permission: **应用模板管理**
+:ks_navigation: **应用管理 > 应用模板**
+
+
+本节介绍如何删除应用模板。
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+应用模板删除后无法恢复，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=2c29eb9fa1064b8888e5a76ccc798f5f]
+
+//:relfileprefix: ../../../../
+* 您需要加入一个企业空间并在企业空间中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅link:../../../../06-workspace-management/06-workspace-settings/03-workspace-members/_index/[企业空间成员]、link:../../../../06-workspace-management/06-workspace-settings/04-workspace-roles/_index/[企业空间角色]和link:../../../../06-workspace-management/06-workspace-settings/05-departments/_index/[部门]。
+
+// include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+//:relfileprefix: ./
+
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-prer-enableAppManagment.adoc[]
+
+* 您需要删除应用模板中的所有应用版本。有关更多信息，请参阅link:../08-delete-an-app-version/[删除应用版本]。
+
+== 操作步骤link:[id=774e3f9e98f0446aa5df0c68ed811d9f]
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. 在应用模板详情页面左上角选择**更多操作 > 删除**。
+
+. 在**删除应用模板**对话框，输入应用模板的名称，然后点击**确定**。

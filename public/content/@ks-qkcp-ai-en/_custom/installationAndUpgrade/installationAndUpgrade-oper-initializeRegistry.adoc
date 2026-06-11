@@ -1,0 +1,106 @@
+// :ks_include_id: af7b991f4aa34769a70397593ae19d73
+. Execute the following command to edit the installation configuration file **config-sample.yaml**:
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+vi config-sample.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+The following is a partial example configuration file. For the complete example, please refer to link:https://github.com/kubesphere/kubekey/blob/master/docs/config-example.md[this file].
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+apiVersion: kubekey.kubesphere.io/v1alpha2
+kind: Cluster
+metadata:
+  name: sample
+spec:
+  hosts:
+  - {name: node1, address: 192.168.6.6, internalAddress: 192.168.6.6, password: "Qcloud@123"}     # For arm64 nodes, remember to add the parameter arch: arm64
+  roleGroups:
+    etcd:
+    - node1
+    control-plane:
+    - node1
+    worker:
+    - node1
+   # If you want to use kk to automatically deploy the image registry, set this host group (it is recommended to deploy the registry separately from the cluster to reduce mutual impact)
+    registry:
+    - node1
+  controlPlaneEndpoint:
+    ## Internal loadbalancer for apiservers
+    #internalLoadbalancer: haproxy       # If deploying a high-availability cluster and no load balancer is available, you can enable this parameter for internal cluster load balancing
+    domain: lb.kubesphere.local
+    address: ""
+    port: 6443
+  kubernetes:
+    version: v1.23.15
+    clusterName: cluster.local
+  network:
+    plugin: calico
+    kubePodsCIDR: 10.233.64.0/18
+    kubeServiceCIDR: 10.233.0.0/18
+    ## multus support. https://github.com/k8snetworkplumbingwg/multus-cni
+    enableMultusCNI: false
+  registry:
+    # If you want to use kk to deploy harbor, you can set this parameter to harbor. If this parameter is not set and you need to use kk to deploy a container image registry, docker registry will be deployed by default.
+    # Harbor does not support arm64. When deploying in an arm64 environment, you can leave this parameter unconfigured.
+    type: harbor
+    # If using a harbor deployed by kk or another registry that requires login, you need to set the auths for the corresponding registry. If using the default docker registry deployed by kk, this parameter does not need to be configured.
+    # Note: If using kk to deploy harbor, please set this parameter after harbor is started.
+    auths:
+      "dockerhub.kubekey.local":
+        username: admin
+        password: Harbor12345
+        plainHTTP: false  # If the registry uses http, please set this parameter to true
+    privateRegistry: "dockerhub.kubekey.local"   # Set the private registry address used during cluster deployment
+    registryMirrors: []
+    insecureRegistries: []
+  addons: []
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+
+Under the **spec:hosts** parameter, set the information for the server used to create the private image service.
+
+include::installationAndUpgrade-para-hosts.adoc[]
+
+Under the **spec:roleGroups:registry** parameter, set the server name used to create the private image service (replace `<registry name>` with the actual server name set under the **spec:hosts** parameter).
+
+// YAML
+include::../../../_ks_components/code/yaml.adoc[]
+
+    registry:
+    - <registry name>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Set the **spec:registry:privateRegistry** parameter to the address of the private image service **dockerhub.kubekey.local**, then save the file.
+
+// YAML
+include::../../../_ks_components/code/yaml.adoc[]
+
+  registry:
+    registryMirrors: []
+    insecureRegistries: []
+    privateRegistry: dockerhub.kubekey.local
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to initialize the private image service:
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ ./kk init registry -f config-sample.yaml -a kubekey-artifact.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+include::installationAndUpgrade-note-initializeRegistry.adoc[]
+--

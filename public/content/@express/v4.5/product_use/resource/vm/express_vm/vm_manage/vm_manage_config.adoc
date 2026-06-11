@@ -1,0 +1,52 @@
+---
+title: "更改配置"
+weight: 20
+---
+
+== 功能描述
+
+ExpressCloud 虚拟机支持在线或离线更改配置。
+
+* 在线更改配置：支持 CPU 和内存的更改。
+* 关机更改配置：支持 CPU 、CPU 拓扑结构、内存以及系统盘容量的更改。
+
+
+
+== 在线更改配置
+. 登录{product_console_name_en}。
+
+. 在顶部导航栏，选择**资源** > *虚拟机*，点击 *ExpressCloud 主机*，进入 ExpressCloud 主机列表页面。
+
+. 点击主机所在行右侧的更多操作，选择**更改配置**，点击**在线更改配置**，在弹出的**在线更改虚拟机配置**的窗口中，重新选择 *CPU* 和**内存**值，点击**更改配置**即可。
++
+
+include::../../../../../../../_components/note.adoc[]
+若无有效可升级配置，可进入修改操作设置虚拟机的最大可更改配置，详细可参考link:../vm_max_conf[修改最大配置]相关内容。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
++
+image::/images/express/console/vm_manage_config_1.png[,50%]
+
+== 关机更改配置
+
+. 关闭待更改配置的虚拟主机。
++
+
+include::../../../../../../../_components/note.adoc[]
+关闭虚拟机可参考link:../vm_manage_base/#_关闭主机[前文]内容。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 在 ExpressCloud 主机列表页面，点击已关闭主机所在行右侧的更多操作，选择**更改配置**，点击**关机更改配置**。
+
+. 在弹出的**更改主机配置**的窗口中，重新设置各参数，并点击**更改配置**即可。
++
+
+include::../../../../../../../_components/note.adoc[]
+支持修改 CPU 核数、CPU 拓扑结构、内存以及系统盘容量。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
++
+image::/images/express/console/vm_manage_config_2.png[,60%]

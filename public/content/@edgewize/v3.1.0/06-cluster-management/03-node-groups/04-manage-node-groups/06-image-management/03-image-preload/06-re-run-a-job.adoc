@@ -1,0 +1,39 @@
+---
+title: "重新运行任务"
+keywords: "Kubernetes, {ks_product}, 集群管理, 应用负载, 任务, 重新运行任务"
+description: "介绍如何重新运行任务。"
+weight: 06
+---
+
+:ks_permission: **节点组管理**
+:ks_navigation: **镜像管理 > 镜像预热**
+
+
+本节介绍如何重新运行任务。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+* 此操作仅对即时预热任务可用。
+* 仅允许重新运行已结束的任务。正在运行中的任务不支持此操作。
+|===
+
+
+== 前提条件
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+
+== 操作步骤
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**即时预热**任务列表，在需要操作的任务右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**重新运行**。任务将重新开始运行。

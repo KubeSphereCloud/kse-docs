@@ -1,0 +1,82 @@
+---
+title: "View Application List"
+description: "Describes how to view the list of deployed applications."
+weight: 01
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **Deployment Management**
+
+This section describes how to view the list of deployed applications.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+* The application list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the application.
+
+include::../../../../../_custom/projectManagement/apps/apps-para-status_v4.adoc[]
+
+|Workspace
+|The workspace to which the application belongs.
+
+|Project
+|The project to which the application belongs.
+
+|Cluster
+|The cluster to which the application belongs.
+
+|Operator
+|The user who created the application.
+
+|Application Type
+|The type of application template, such as **helm application**, **yaml application**, or **operator application**.
+
+|Application Template
+|The application template used to create the application. Only displayed for template-based applications.
+
+|Version
+|The version number of the application.
+
+* For template-based applications, displays the Helm Chart version.
+
+// * For composed apps, displays the user-defined version number.
+
+|Update Time
+|The time when the application was last updated.
+|===
+--
+
+* Click the search box above the list and enter a keyword to search for applications by name.
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

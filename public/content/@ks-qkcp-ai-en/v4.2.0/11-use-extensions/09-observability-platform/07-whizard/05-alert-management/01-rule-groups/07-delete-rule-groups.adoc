@@ -1,0 +1,71 @@
+---
+title: "Delete Custom Rule Groups"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Monitoring and Alerting, Alert Management, Rule Groups, Delete Rule Groups"
+description: "Describes how to delete alert rule groups."
+weight: 07
+---
+
+// :ks_permission: **Rule Group Management**
+// :ks_menu: **Platform Management > WizTelemetry Global Monitoring**
+:ks_navigation: **Global Alerting > Custom Rule Groups**
+
+This section describes how to delete alert rule groups.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+KubeSphere only supports deleting custom rule groups and does not support deleting built-in rule groups. You can reset built-in rule groups.
+|===
+
+[.admon.warning,cols="a"]
+|===
+|Warning
+
+|
+Rule groups cannot be recovered after deletion. Please perform this operation with caution.
+|===
+
+
+== Prerequisites
+
+You need to have the **platform-admin** role in the KubeSphere platform. For more information, please refer to link:../../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+
+== Delete a Single Rule Group
+
+include::../../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
++
+
+include::../../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-deleteASingleAlertingPolicy.adoc[]
+
+
+== Batch Delete Rule Groups
+
+include::../../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
++
+
+include::../../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-deleteMultipleAlertingPolicies.adoc[]

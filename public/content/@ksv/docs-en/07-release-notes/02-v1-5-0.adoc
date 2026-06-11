@@ -1,0 +1,54 @@
+---
+title: "Release Notes for v1.5.0"
+linkTitle: "{ks_title}"
+keywords: "release notes, {ks_product_full}, {ks_product}, v1.5.0"
+description: ""
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: d028bceb33254445aaabcf09fba480de
+:ks_xref_id: 316131b8b7844738a245959794204c46
+:ks_comp: ../../components/
+:ks_title: Release Notes for v1.5.0
+:ks_description:
+:ks_keywords: release notes, {ks_product_full}, {ks_product}, v1.5.0
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== New featureslink:[id=0d0fbe7b3124471482bc185d6c4df2b4]
+
+* Add the virtual machine (VM) template feature. You can use this feature to create VMs based on templates.
+* Add the VM clone feature. You can use this feature to create VMs based on VMs.
+* Add the feature for querying historical resource monitoring data.You can query the resource monitoring data of the last 1 hour or the last 6, 12, or 24 hours.
+* Add the feature for forcibly stopping or restarting VMs.
+* Add the timer feature.
+* Change the CPU overcommit ratio to 10.
+* Encapsulate the packages for alerts and logs into the main installation package. You do not need to download separate packages for alerts and logs.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Enhancementslink:[id=56c30bbc239b416ab9ca9eeca14ef514]
+
+* Support system images.
+* Modify the naming conventions of some resources.The names of some resources can contain uppercase letters.
+* Modify the password strength rules.
+* Add the **Default** label to identify the default network interface controller (NIC) used by a VM.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Fixed issueslink:[id=6d3f9be46661467e9e87f910e8845e47]
+
+* Fix the issue that the image cannot be imported when you create a VM that uses a minimum configuration of 4 CPU cores and 8 GB memory.
+* Fix the issue that the real-time VM configuration cannot be synchronized to the <strong x-id="1">Summary</strong> section on the right side when you create a VM that uses custom resources.
+* Fix the issue that the SSH key becomes invalid after a VM is restarted.
+* Fix the issue that the image cannot be saved due to an invalid format of the image name.
+* Fix the display error of the storage expansion unit when you set the data disk size to 1024 or a value that is a multiple of 1024.

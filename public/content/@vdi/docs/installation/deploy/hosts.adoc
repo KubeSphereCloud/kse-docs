@@ -1,0 +1,33 @@
+---
+title: 添加 hosts（可选）
+weight: 40
+---
+
+== 操作须知
+
+若需在 QingCloud 桌面云平台中通过域名添加 QingCloud 虚拟化平台，则需要在 QingCloud 桌面云主机中添加 hosts。
+
+== 前提条件
+
+* 已获取 QingCloud 云平台的 IP 地址和访问端口，以及域名。
+* 已成功创建 QingCloud 桌面云主机。
+
+== 操作步骤
+
+. 远程登录 QingCloud 桌面云主机。
+. 执行以下命令，编辑 hosts 文件。
++
+[source]
+----
+vim /etc/hosts
+----
+. 在 hosts 文件中填写如下信息。
++
+[source]
+----
+# 通过域名访问 QingCloud 云平台，域名以 console.pekdemo.com为例
+QingCloud 云平台的 IP:端口 console.pekdemo.com 
+# 通过API访问 QingCloud 云平台，API访问域名以 api.pekdemo.com 为例
+QingCloud 云平台api访问的 IP:端口 api.pekdemo.com
+----
+. 保存并退出文件。

@@ -1,0 +1,47 @@
+---
+title: "登录控制台"
+description: 本小节介绍如何在本地通过公网访问可视化控制台。
+draft: false
+weight: 10
+keyword: 容器,QKE,KubeSphere,QKCP
+---
+如果您安装了可视化控制台，则可以使用浏览器登录控制台。
+
+本小节介绍如何在本地通过公网访问控制台。
+
+== 前提条件
+
+* 已安装可视化控制台，且控制台后端正常运行。
+* 已link:../bind_eip/[绑定控制台 EIP]。
+* 确保用于访问的机器具备访问外网的能力。
+
+== 背景信息
+
+首次登录控制台请使用系统预置的默认管理员账户及密码，登录后需要立即修改密码。
+
+点击控制台名称后的image:/images/cloud_service/container/qke/ks_version_info.png[20px,20px]图标，可查看账号及密码信息。
+
+== 操作步骤
+
+. 登录管理控制台。
+. 在控制台顶部的导航菜单中，选择**产品与服务** > *容器服务* > *{k8s_engine_fullname}*，进入 QKE 集群列表页面。
+. 在集群列表，点击目标集群名称，进入**集群概览**页面。
+. 在左侧导航栏，点击**可视化控制台**，进入**可视化控制台**页面。
++
+image::/images/cloud_service/container/qke/access_ks.png[]·
+
+. 可通过以几种下方式进入控制台登录页面。
+ ** 点击控制台名称下方的公网 IP 地址，进入到控制台登录页面。
+ ** 点击**前往控制台**，进入到控制台登录页面。
+ ** 在浏览器地址栏中，输入控制台绑定的公网 IP 并按下回车，进入到控制台登录页面。
+
++
+​	image::/images/cloud_service/container/qke/kubesphere_login.png[]·
+. 输入用户及密码，点击**登录**。
++
+
+include::../../../../../../_components/note.adoc[]
+
+为保障系统安全，首次登录后，请立即修改密码。
+
+include::../../../../../../_components/table_footer.adoc[]

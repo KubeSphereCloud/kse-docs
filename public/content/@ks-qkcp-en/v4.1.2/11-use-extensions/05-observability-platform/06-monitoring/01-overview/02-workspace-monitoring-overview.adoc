@@ -1,0 +1,71 @@
+---
+title: "Workspace Monitoring Overview"
+description: "This section introduces how to view monitoring information on the workspace overview page."
+weight: 02
+---
+
+:ks_permission: **Monitoring Viewing**
+:ks_navigation: **Overview**
+
+This section introduces how to view monitoring information on the workspace overview page.
+
+== Prerequisites
+
+* {empty}
+include::../../../../../_custom-en/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+* **WhizardTelemetry Monitoring** should have been installed and enabled.
+
+== Steps
+
+include::../../../../../_custom-en/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
++
+--
+The **Overview** page's **Resource Usage** tab provides the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Area |Description
+
+|Physical Resources
+|The CPU and memory usage of the workspace in the specified cluster.
+
+|Application Resource Usage
+|The number of deployments, StatefulSets, DaemonSets, Jobs, CronJobs, persistent volume claims, etc., created by the workspace in the specified cluster.
+|===
+
+include::../../../../../../_ks_components-en/oper-selectTimeRange.adoc[]
+
+include::../../../../../../_ks_components-en/oper-Autorefresh.adoc[]
+
+include::../../../../../../_ks_components-en/oper-refreshData.adoc[]
+
+* Click the **Cluster** dropdown list in the upper right corner to view data in a specific cluster.
+--
+
+. Click the **Usage Ranking** tab on the **Overview** page to view the resource usage of projects in the workspace.
++
+--
+* Click the **Cluster** dropdown list at the top left of the list to view data in a specific cluster.
+
+* Click the dropdown list at the top of the list to select sorting by CPU usage, memory usage, pod count, outbound traffic, or inbound traffic.
+
+* Click image:/images/ks-qkcp/zh/icons/sort-ascending.svg[sort-ascending,18,18]/image:/images/ks-qkcp/zh/icons/sort-descending.svg[sort-descending,18,18] above the list to sort in ascending/descending order.
+
+include::../../../../../_custom-en/clusterManagement/clusterStatus/clusterStatus-oper-exportJsonData.adoc[]
+--
+
+. Click the **Cluster Information** tab on the **Overview** page to view the total and used amounts of CPU, memory, and disk for clusters authorized to the workspace, as well as the total number of pods that can be created on the cluster and the number of pods already created.
++
+--
+// Note
+include::../../../../../../_ks_components-en/admonitions/note.adoc[]
+
+By default, each cluster node can create a maximum of 110 pods.
+
+include::../../../../../../_ks_components-en/admonitions/admonEnd.adoc[]
+--

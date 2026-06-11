@@ -1,0 +1,77 @@
+---
+title: "创建数据库用户"
+keywords: "Kubernetes, {ks_product}, RadonDB, MySQL, 管理告警规则组, 创建数据库用户"
+description: "介绍如何创建数据库用户。"
+weight: 01
+---
+
+:ks_db_product: MySQL
+
+本节介绍如何创建数据库用户。
+
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+
+. 在左侧导航栏选择 **{ks_db_product}**。
+
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+
+. 在页面右侧点击**数据库用户**页签，然后点击**创建**。
+
+. 在**创建用户**对话框，设置用户名和密码，然后点击**确定**。用户创建完成后将显示在用户列表中。
++
+--
+[%header,cols="1,5"]
+|===
+|参数 |说明
+
+|用户名
+a|自定义用户名称。
+
+配置要求：用户名只能包含大写字母、小写字母、数字，必须以大写或小写字母开头，长度为 2 到 26 个字符。
+
+|密码  
+a|输入用户密码。
+
+配置要求：密码必须包含至少一个大写字母、一个小写字母、一个数字和一个特殊字符（!@#$%^&*_+-=），长度为 8 到 32 个字符。
+
+|授权数据库  
+a|输入授权访问的数据库名称。
+
+默认为*，表示授权全部数据库。仅支持输入一个数据库名称。
+
+|权限  
+a|选择用户的权限。可选择普通权限、高级权限或自定义权限。支持创建多个具有相同权限的用户。
+
+{ks_db_product} 实例创建成功后，将生成默认用户 **root**。**root** 是超级管理员用户，拥有对数据库的最高管理权限。该用户账号默认生成，不支持修改和删除。
+
+* **普通权限**用户具备数据库操作使用权限，包括 ALTER、ALTER ROUTINE、CREATE、CREATE ROUTINE、CREATE TEMPORARY TABLES、CREATE VIEW、DELETE、DROP、EXECUTE、EVENT、INDEX、INSERT、LOCK TABLES、SELECT、SHOW VIEW、UPDATE、TRIGGER、REFERENCES 等数据库操作权限。
+
+* **高级权限**用户具备数据库高级操作使用权限，除普通权限外，还具备 PROCESS、RELOAD 和 SHOW DATABASES 数据库操作权限。
+
+* **自定义权限**用户的权限在 yaml 文件中进行设置。打开右上角的**编辑 YAML**，在 yaml 文件中自定义用户的权限。
+
+|授权主机  
+a|输入允许访问的主机 IP。
+
+默认为 %，表示任意主机可访问。可输入一个或多个主机 IP，以逗号（,）分隔。
+
+|===
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* 不支持创建 **root** 或以 **radondb_** 开头的名称。
+
+* 不支持创建同名用户。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
++

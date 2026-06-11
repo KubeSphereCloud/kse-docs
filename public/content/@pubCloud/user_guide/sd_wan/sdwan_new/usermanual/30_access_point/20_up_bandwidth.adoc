@@ -1,0 +1,46 @@
+---
+title: "调整带宽"
+collapsible: false
+weight: 20
+draft: false
+---
+调整带宽后，系统将按照调整后的带宽计费。执行调整带宽操作后，立即生效。
+
+include::../../../../../../_components/note.adoc[]
+* 接入点为按需计费时，可提升带宽，也可降低带宽。
+* 接入点为包年包月计费时，仅支持提升带宽。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+本章节介绍如何调整带宽上限。
+
+== 前提条件
+
+
+* 已创建连接云网。
+* 按需计费模式时，调整带宽需接入点状态处于**已激活**，设备状态处于**在线**。
+* 包年包月模式时，调整带宽需接入点状态处于**已激活**。
+
+== 操作步骤
+
+. 登录管理控制台。
+. 选择**产品与服务** > *网络服务* > *SD-WAN（新版）*，进入**连接云网**页面。
++
+image::/images/cloud_service/sd_wan/qs_cloud_network.png[]
+
+. 在左侧导航栏中，点击**接入点**，进入**接入点**页面。
++
+image::/images/cloud_service/sd_wan/qs_light_access.png[]
+
+. 勾选待提升带宽上限的接入点。
+. 点击**调整带宽**，弹出**调整带宽**窗口。
++
+image::/images/cloud_service/sd_wan/change_bandwidth_01.png[,60%]
+
+. 根据需要调整带宽后，点击**确定**，完成提调整宽上限的操作。
++
+
+include::../../../../../../_components/note.adoc[]
+包年包月带宽调整费用请参见link:../../../new_billing/10_new_billing/#场景三包年包月调整带宽[包年包月调整带宽]。
+
+include::../../../../../../_components/table_footer.adoc[]

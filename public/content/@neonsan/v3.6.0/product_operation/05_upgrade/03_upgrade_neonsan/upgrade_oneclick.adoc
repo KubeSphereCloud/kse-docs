@@ -1,0 +1,31 @@
+---
+title: "方式一：一键升级"
+weight: 1
+---
+
+. 将 NeonSAN 升级所需安装包及升级脚本上传至集群的任一 Center 节点。
+
+. 登录上述 Center 节点。
+
+. 在当前节点，创建 ``/root/ip_list.txt`` 文件，内容为当前集群内所有节点 IP。
++
+[source,shell]
+----
+vi ip_list.txt
+xx.xx.xx.xx xx.xx.xx.xx xx.xx.xx.xx
+----
++
+include::../../../../../_components/attention.adoc[]
+节点 IP 以空格分隔，且数据库所在节点 IP 需位于 IP 列表的前端，其他节点 IP 的顺序则任意。
+include::../../../../../_components/table_footer.adoc[]
+
+. 在当前节点，运行升级脚本。
+
+. 根据提示信息，输入 ``y``，进入一键升级，输入待升级的服务，例如 ``NeonSAN`` 后，再依次指定当前环境的版本信息、目标版本信息以及安装包所在目录，回车确定即可。
++
+image::/images/neonsan/upgrade_neonsan_13.png[]
+
+. 等待升级完成。按照此方式升级后，存储节点上 neoncenter、neonstore、neonmonitor 以及 neontool 将统一升级到目标版本。
+
+
+

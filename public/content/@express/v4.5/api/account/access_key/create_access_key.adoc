@@ -1,0 +1,81 @@
+---
+title: 创建API密钥（CreateAccessKey）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_key_name
+| String
+| false
+| API密钥名称
+
+| controller
+| String
+| false
+| 控制器类型
+
+| description
+| String
+| false
+| API密钥的描述
+
+| ip_white_list
+| String
+| false
+| IP白名单，限制使用API密钥的源IP
+
+| owner
+| String
+| false
+| API密钥的所有者
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_key_id
+| String
+| false
+| API密钥ID
+
+| secret_access_key
+| String
+| false
+| 秘密访问密钥
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "access_key_name": "ci",
+  "action": "CreateAccessKey",
+  "description": "access key for ci",
+  "ip_white_list": "192.168.10.13"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "access_key_id": "JZOHGWGENRXLKPMEMZYR",
+  "action": "CreateAccessKeyResponse",
+  "ret_code": 0,
+  "secret_access_key": "7jU85RMTIWLwhsMwHjrhBfxRlEgr9GIYQhhrYRz5"
+}
+----

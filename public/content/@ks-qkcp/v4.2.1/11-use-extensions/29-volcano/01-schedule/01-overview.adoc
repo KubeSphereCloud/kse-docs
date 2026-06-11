@@ -1,0 +1,28 @@
+---
+title: "Volcano 调度概述"
+weight: 01
+---
+
+link:https://volcano.sh/zh/docs/[Volcano] 是一个基于 Kubernetes 的批处理平台，提供了机器学习、深度学习、生物信息学、基因组学及其他大数据应用所需要而 Kubernetes 当前缺失的一系列特性，提供了高性能任务调度引擎、高性能异构芯片管理、高性能任务运行管理等通用计算能力。
+
+== Volcano Scheduler
+
+Volcano Scheduler 是负责 Pod 调度的组件，它由一系列 action 和 plugin 组成。action 定义了调度各环节中需要执行的动作；plugin 根据不同场景提供了 action 中算法的具体实现细节。Volcano Scheduler 具有高度的可扩展性，您可以根据需要实现自己的 action 和 plugin。
+
+image::/images/ks-qkcp/zh/v4.2.1/volcano/volcano-scheduler.png[]
+
+Volcano Scheduler 的工作流程如下：
+
+1. 客户端提交的 Job 被调度器识别到并缓存起来。
+2. 周期性开启会话，一个调度周期开始。
+3. 将没有被调度的 Job 发送到会话的待调度队列中。
+4. 遍历所有的待调度 Job，按照定义的次序依次执行 enqueue、allocate、preempt、reclaim、backfill 等动作，为每个 Job 找到一个最合适的节点。将该 Job 绑定到这个节点。action 中执行的具体算法逻辑取决于注册的 plugin 中各函数的实现。
+5. 关闭本次会话。
+
+== Volcano 自定义资源
+
+* **Pod 组**（PodGroup）：Pod 组是 Volcano 自定义资源类型，代表一组强关联 Pod 的集合，主要用于批处理工作负载场景，比如 Tensorflow 中的一组 ps 和 worker。
+* **队列**（Queue）：容纳一组 PodGroup 的队列，也是该组 PodGroup 获取集群资源的划分依据。
+* **作业**（Volcano Job，简称 vcjob）：Volcano 自定义的 Job 资源类型。区别于 Kubernetes Job，vcjob 提供了更多高级功能，如可指定调度器、支持最小运行 Pod 数、 支持 task、支持生命周期管理、支持指定队列、支持优先级调度等。Volcano Job 更加适用于机器学习、大数据、科学计算等高性能计算场景。
+* 应用扩缩容优先级策略（Balancer 与 BalancerPolicyTemplate）：开启 Volcano 应用扩缩容优先级策略后，将会在集群中新增两类 CRD 资源，其中 BalancerPolicyTemplate 用来进行优先级策略定义，Balancer 用来申明扩缩容优先级的作用范围。一个 Balancer CR 资源对应一个 BalancerPolicyTemplate CR 资源，两者结合共同申明哪些工作负载使用了哪些优先级策略。
+

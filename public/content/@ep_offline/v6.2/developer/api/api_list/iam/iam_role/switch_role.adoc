@@ -1,0 +1,84 @@
+---
+title: 切换IAM身份（SwitchIAMRole）
+weight: 16
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| principal
+| String
+| true
+| 信任载体ID
+
+| role
+| String
+| true
+| IAM身份ID列表
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_key
+| String
+| false
+| API密钥ID
+
+| expiration
+| String
+| false
+| 过期时间戳
+
+| id_token
+| String
+| false
+| 访问凭证,jwt格式
+
+| jti
+| String
+| false
+| JWT编号
+
+| secret_key
+| String
+| false
+| API密钥私钥
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "SwitchIAMRole",
+  "principal": "usr-x7nsyzyC",
+  "role": "iamr-xj92xa37"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "access_key": "FKOwcXjACDobID4AeE02Or",
+  "action": "SwitchIAMRoleResponse",
+  "expiration": 1680875600,
+  "id_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3IiOiIxIiwiYXVkIjoiaWFtIiwiYXpwIjoiaWFtIiwiY29ucyI6ImFkbWluIiwiY3VpZCI6ImlhbXIteGo5MnhhMzciLCJlaXNrIjoiWkd0aTN2RkpUUG5pS0c5Z29wcldXc0xDalgtMzBKTmFjanBPQVNRc2d6ST0iLCJleHAiOjE2ODA4NzU2MDAsImlhdCI6MTY4MDg1NDAwMCwiaXNzIjoic3RzIiwianRpIjoiRktPd2NYakFDRG9iSUQ0QWVFMDJPciIsIm5iZiI6MCwib3JnaSI6InVzci14N25zeXp5QyIsIm93dXIiOiJ1c3ItTGdwSzlaekUiLCJwcmVmIjoicXJuOnN0YWdpbmc6aWFtOiIsInJvdXIiOiJ1c3ItTGdwSzlaekUiLCJydHlwIjoicm9sZSIsInN1YiI6InN0cyIsInR5cCI6IklEIn0.rPHoYyZbhqFvoNqMYvk5hLOiu_KGecrL6YwCQwyPWF-jK1KJudMxq0wu75gFQx9ju6-lPiPjGAAWNCiS4a1FqFzFDBhSSGAewjuNPpGMbZzDrRVnNFXQcEpCNVLoe8HczYMiVd0TxPP9Do_mehxhSPdtrfpYAz66OC_qetcn5zw",
+  "jti": "FKOwcXjACDobID4AeE02Or",
+  "ret_code": 0,
+  "secret_key": "QcTwT9qTeAgcPHx"
+}
+----

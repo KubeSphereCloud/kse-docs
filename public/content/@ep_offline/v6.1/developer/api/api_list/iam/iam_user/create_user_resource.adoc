@@ -1,0 +1,80 @@
+---
+title: 绑定资源到IAM用户创建资源（CreateIAMUserResource）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| iam_user_id
+| String
+| true
+| IAM用户ID
+
+| resource_type
+| String
+| false
+| 资源类型
+
+| resources
+| Array
+| true
+| 资源ID列表
+
+| zone
+| String
+| false
+| Zone
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| iam_user_id
+| String
+| false
+| IAM用户ID
+
+| resources
+| Array
+| false
+| 资源ID列表
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateIAMUserResource",
+  "iam_user_id": "iamu-k0i2m98t",
+  "resources": [
+    "i-esdaf97b"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateIAMUserResourceResponse",
+  "iam_user_id": "iamu-k0i2m98t",
+  "resources": [
+    "i-esdaf97b"
+  ],
+  "ret_code": 0
+}
+----

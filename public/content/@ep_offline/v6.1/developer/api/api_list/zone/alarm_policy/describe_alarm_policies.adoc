@@ -1,0 +1,207 @@
+---
+title: 获取告警策略列表（DescribeAlarmPolicies）
+weight: 10
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Integer
+| true
+| 返回数据条数
+
+| offset
+| Integer
+| true
+| 分页起始索引
+
+| owner
+| String
+| true
+| 用户id
+
+| search_word
+| String
+| false
+| 查询关键字
+
+| status
+| Array
+| false
+| 告警策略状态
+
+| usage
+| String
+| false
+| 告警策略用途
+
+| zone
+| String
+| true
+| zone区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy_set
+| Object
+| false
+| 告警策略信息
+
+| alarm_policy_set.alarm_policy_category
+| String
+| false
+| 告警策略类型
+
+| alarm_policy_set.alarm_policy_id
+| String
+| false
+| 告警策略Id
+
+| alarm_policy_set.alarm_policy_name
+| String
+| false
+| 告警策略名称
+
+| alarm_policy_set.alarm_policy_type
+| String
+| false
+| 告警策略类型
+
+| alarm_policy_set.create_time
+| String
+| false
+| 创建时间
+
+| alarm_policy_set.description
+| String
+| false
+| 描述
+
+| alarm_policy_set.is_applied
+| Integer
+| false
+| 是否应用
+
+| alarm_policy_set.notice_count
+| Integer
+| false
+| 通知次数
+
+| alarm_policy_set.operator
+| String
+| false
+| 操作
+
+| alarm_policy_set.owner
+| String
+| false
+| 用户Id
+
+| alarm_policy_set.period
+| String
+| false
+| 监控周期
+
+| alarm_policy_set.resource_info
+| String
+| false
+| 资源信息
+
+| alarm_policy_set.status
+| String
+| false
+| 策略状态
+
+| alarm_policy_set.status_time
+| String
+| false
+| 创建时间
+
+| alarm_policy_set.sub_code
+| Integer
+| false
+| 子编码
+
+| alarm_policy_set.usage
+| String
+| false
+| 用途
+
+| total_count
+| Integer
+| false
+| 信息总条数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAlarmPolicies",
+  "limit": 10,
+  "offset": 0,
+  "owner": "usr-rrPKHDpJ",
+  "search_word": "alp-f0t3obl0",
+  "status": [
+    "active",
+    "suspended"
+  ],
+  "usage": "alarm",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAlarmPoliciesResponse",
+  "alarm_policy_set": [
+    {
+      "alarm_policy_category": "threshold",
+      "alarm_policy_id": "alp-f0t3obl0",
+      "alarm_policy_name": "test",
+      "alarm_policy_type": "instance",
+      "alarm_role": "",
+      "console_id": "admin",
+      "controller": "self",
+      "create_time": "2023-05-24T08:19:39Z",
+      "description": "",
+      "group_id": "s-webservice0",
+      "is_applied": 1,
+      "notice_count": 1,
+      "operator": "or",
+      "owner": "usr-rrPKHDpJ",
+      "period": "1m",
+      "resource_info": {},
+      "resource_project_info": [],
+      "resources": [],
+      "root_user_id": "usr-rrPKHDpJ",
+      "status": "active",
+      "status_time": "2023-05-24T08:19:39Z",
+      "sub_code": 0,
+      "tags": [],
+      "usage": "alarm",
+      "zone_id": "gamma"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

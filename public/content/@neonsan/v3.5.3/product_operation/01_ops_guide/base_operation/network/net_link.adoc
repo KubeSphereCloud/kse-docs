@@ -1,0 +1,76 @@
+---
+title: "网络是否连通"
+weight: 1
+---
+
+
+== NeonSAN v2.2 及以上版本
+
+可使用 Inspection工具对集群的网络进行检查，命令如下。
+
+[,shell]
+----
+inspection check_network -port_type RDMA|TCP -store_ip store_ips
+----
+
+== NeonSAN v2.2 以下版本
+
+NeonSAN V2.1 版本可使用脚本 link:https://box.yunify.com/s/Y2b2K3bsjXdaGfi[check_network.sh] 对集群的网络进行检查，check_network.sh 脚本内容可在附录查看。
+
+其他低版本可手动检查，具体操作如下。
+
+* 若节点间连接方式为 **TCP 模式**，则可登录各 NeonSAN 的节点，使用如下命令查看即可：
++
+[,shell]
+----
+ping xx.xx.xx.xx   //xx.xx.xx.xx 为各节点 IP 地址。
+----
+
+* 若节点节点间连接方式为 **RDMA 模式**，具体操作如下。
++
+. 登录 NeonSAN 集群节点。
+. 查看端口信息。
++
+[,shell]
+----
+ibv_devinfo | grep stat
+----
++
+回显示例：
++
+[,shell]
+----
+			state:			PORT_ACTIVE (4)
+			state:			PORT_ACTIVE (4)
+			state:			PORT_ACTIVE (4)
+			state:			PORT_ACTIVE (4)
+----
++
+include::../../../../../../_components/note.adoc[]
+* NeonSAN 节点配置 4 个端口，2 个业务端口，2 个内部数据端口。
+* 命令执行结果显示 4 条记录，且每个端口状态均为 PORT_ACTIVE 即为正常。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 节点间使用 ``rping`` 命令查看连接状态。
+
+.. 首先登录至对端节点，执行如下命令，开启 rping 服务。
++
+[,shell]
+----
+nohup rping -s -P > /dev/null 2>&1 &
+----
+.. 返回当前节点，执行如下命令，检查连接状态。
++
+[,shell]
+----
+rping -cv -C 5 -a 192.168.101.25
+----
++
+image::/images/neonsan/polling_guide_27.png[]
++
+include::../../../../../../_components/note.adoc[]
+* 集群内其他节点 IP，需根据实际情况进行修改。
+* 网络异常，需要查看异常原因，并解决。
+include::../../../../../../_components/table_footer.adoc[] 
+
+

@@ -1,0 +1,42 @@
+---
+title: "在工作负载页面管理 KEDA 资源"
+weight:  06
+---
+
+:ks_permission: **事件驱动伸缩管理**
+:ks_navigation: **工作负载 > 部署/有状态副本集**
+
+本节介绍如何在工作负载的详情页面管理与其绑定的 KEDA（事件驱动伸缩）资源。
+
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* KubeSphere 平台需要安装并启用 **KEDA for KubeSphere** 扩展组件。
+
+
+== 操作步骤
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在列表中点击一个工作负载的名称打开其详情页面。
+
+. 在工作负载详情页面点击**事件驱动伸缩**。
+
+. 在**事件驱动伸缩**页面，点击**创建**。KEDA 创建步骤请参阅link:../01-create-keda/[创建事件驱动伸缩]。
+// +
+// 创建完成后，在部署或有状态副本集列表页的状态栏中，会出现image:/images/ks-qkcp/zh/icons/clock-2.svg[scaling,18,18]，表示已设置伸缩策略。
+
+. 若已有与当前工作负载绑定的 KEDA 资源，点击 KEDA 名称查看详情，并可对其进行编辑信息、编辑伸缩设置和删除操作。
+

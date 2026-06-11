@@ -1,0 +1,71 @@
+---
+title: '简单功能测试'
+weight: 2
+---
+
+. 逐个登录新增的节点。
+. 执行如下命令，检查节点间连接是否建立。
++
+[,shell]
+----
+curl "http://localhost:2601/debug?op=list_peer"
+----
++
+include::../../../../../../_components/note.adoc[]
+* 每个节点的连接数为：`（节点所在存储池总节点数 - 1）*数据口个数*2`，例如、194/195/196 三个节点组成的存储，在 194 节点上执行，正确结果显示如下，链接个数为：`(3-1)*1*2 = 4`。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在包含有新增节点的存储池内创建 volume，确认有副本落在新增节点上。
+.. 创建新卷。
++
+[,shell]
+----
+
+neonsan create_volume -volume vol2 -pool vol -size 128G  -repcount 3 -rg testSDD
+----
++
+include::../../../../../../_components/note.adoc[]
+卷名和卷组名需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+.. 查看 Step1 创建的新卷其副本分布。
++
+[,shell]
+----
+neonsan list_replica_location -volume vol/vol2
+----
++
+include::../../../../../../_components/note.adoc[]
+需关注返回结果中 `STORE ID` 需有新增节点的 ID。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 对步骤 3 创建的新卷进行读写操作。
++
+[,shell]
+----
+fio -name=tcase  -ioengine=qbd -bs=4k -volume=vol/vol2 -runtime=600  -config_file=/etc/neonsan/qbd.conf -rw=randwrite -time_based -use_tcp=1 -group_reporting -iodepth=16 -numjobs=1
+----
++
+
+include::../../../../../../_components/attention.adoc[]
+此处不需要太大测试压力，只需要验证卷能正常读写即可。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 收集各个节点的相关日志信息。
++
+[,shell]
+----
+//store日志
+/var/log/neonstore*.log
+
+//center日志
+/var/log/neoncenter*.log
+
+//监控日志
+/var/log/neonmonitor*.log
+
+//zookeeper日志
+/var/log/zookeeper/zookeeper*.out
+----
+
+

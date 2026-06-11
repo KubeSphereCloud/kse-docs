@@ -1,0 +1,60 @@
+---
+title: "检查节点间连接是否建立"
+weight: 16
+---
+
+//tag::peer[]
+. 逐个登录 NeonSAN 集群的存储节点。 
+. 执行如下命令，查看当前节点所属存储池。
++
+[,shell]
+----
+neonsan list_rg -detail
+----
+. 执行如下命令，查看与当前节点建立连接的节点信息。
++
+* CLI 查询方式（NeonSAN v3.1.0 及以后版本支持）
++
+[,shell]
+----
+neonsan list_peer -store_id 4
+----
++
+image::/images/neonsan/polling_guide_peer_1.png[,70%]
++
+参数及回显说明：
++
+** ``-store_id``：用于指定当前存储节点的 ID，可执行 ``neonsan list_store`` 查看。
+** ``LOCAL IP``：本节点 IP 地址。
+** ``LOCAL PORT``：本节点端口信息。
+** ``PEER ID``：与指定节点建立连接的存储节点 ID
+** ``PEER IP``：对端节点 IP 地址。 
+** ``PEER PORT``：对端节点端口信息。
+** ``TRANSPORT``：节点间连接方式。
+** ``STATUS``：节点间连接状态。
+
++
+* API 查询方式
++
+[,shell]
+----
+curl "http://localhost:2601/debug?op=list_peer"
+----
++
+image::/images/neonsan/polling_guide_peer_2.png[,70%]
++
+回显说明：
++
+** ``total_cnt``：与本节点已建立的连接数。
+** ``peers``：已建立连接的节点列表。
+** ``store_id``：存储节点 ID。
+** ``transport``：节点间连接方式。
+** ``local_ip``：本节点 IP 地址。
+** ``local_port``：本节点端口信息。
+** ``peer_port``：对端节点端口信息。
+** ``peer_ip``：对端节点 IP 地址。 
+** ``status``：节点间连接状态。
+//end::peer[]
+
+
+

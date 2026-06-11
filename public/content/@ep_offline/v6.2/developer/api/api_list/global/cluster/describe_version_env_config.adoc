@@ -1,0 +1,142 @@
+---
+title: 查询版本环境变量配置（DescribeVersionEnvConfig）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| true
+| 应用id
+
+| app_version
+| String
+| true
+| 应用版本id
+
+| role_envs
+| Array
+| true
+| 角色对应环境变量
+
+| role_envs[].env
+| Object
+| true
+| env为dict，key不固定，按需要的环境变量输入，参考example
+
+| role_envs[].env.params
+| String
+| true
+| 环境变量,参数名不固定
+
+| role_envs[].role
+| String
+| true
+| 节点角色
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| config
+| Object
+| false
+| 配置
+
+| config.description
+| String
+| false
+| 
+
+| config.key
+| String
+| false
+| 
+
+| config.properties
+| Array
+| false
+| 属性
+
+| config.properties[].description
+| String
+| false
+| 
+
+| config.properties[].key
+| String
+| false
+| 
+
+| config.properties[].properties
+| String
+| false
+| 属性
+
+| config.properties[].type
+| String
+| false
+| properties值的类型
+
+| config.type
+| String
+| false
+| 
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app_id": "app-owxi28r5",
+  "app_version": "appv-vnbwqqmh",
+  "role_envs": [
+    {
+      "env": {
+        "params": 1
+      },
+      "role": "es_node"
+    }
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeVersionEnvConfigResponse",
+  "config": {
+    "properties": [
+      {
+        "description": "The role configuration properties of the application",
+        "key": "es_node",
+        "properties": "",
+        "type": "array"
+      },
+      {
+        "description": "The role configuration properties of the application",
+        "key": "es_node_2",
+        "properties": "",
+        "type": "array"
+      }
+    ]
+  },
+  "ret_code": 0
+}
+----

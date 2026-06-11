@@ -1,0 +1,274 @@
+---
+title: 查询发送到用户的邮件（DescribeEmailJobUsers）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| activated
+| Integer
+| false
+| 是否已认证
+
+| console_id
+| String
+| false
+| 控制台
+
+| end_balance
+| String
+| false
+| 最大余额
+
+| role
+| Array
+| false
+| 角色
+
+| search_word
+| String
+| false
+| 模糊查询
+
+| start_balance
+| String
+| false
+| 最小余额
+
+| status
+| Array
+| false
+| 状态
+
+| user_type
+| Array
+| false
+| 用户类型
+
+| users
+| Array
+| false
+| 用户id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+
+| user_set
+| Array
+| false
+| 用户集合
+
+| user_set[].activated
+| Integer
+| false
+| 是否激活
+
+| user_set[].channel
+| Array
+| false
+| 
+
+| user_set[].console
+| String
+| false
+| 控制台ID
+
+| user_set[].currency
+| Array
+| false
+| 货币
+
+| user_set[].display_attributes
+| Array
+| false
+| 
+
+| user_set[].email
+| Array
+| false
+| 邮件
+
+| user_set[].end_rating
+| Integer
+| false
+| 最高优惠价格
+
+| user_set[].excluded_users
+| Array
+| false
+| 排除的用户
+
+| user_set[].limit
+| Integer
+| false
+| 查询个数
+
+| user_set[].offset
+| Integer
+| false
+| 偏移量
+
+| user_set[].paid_mode
+| Array
+| false
+| 付款方式
+
+| user_set[].phone
+| Array
+| false
+| 电话
+
+| user_set[].preference
+| Integer
+| false
+| 
+
+| user_set[].rating
+| Array
+| false
+| 优惠价格列表
+
+| user_set[].reverse
+| Integer
+| false
+| 是否倒序排序
+
+| user_set[].role
+| Array
+| false
+| 角色
+
+| user_set[].root_user
+| Array
+| false
+| 根用户
+
+| user_set[].search_word
+| String
+| false
+| 搜索关键字
+
+| user_set[].sort_key
+| String
+| false
+| 排序字段
+
+| user_set[].start_rating
+| Integer
+| false
+| 最低优惠价格
+
+| user_set[].status
+| Array
+| false
+| 状态
+
+| user_set[].user_name
+| String
+| false
+| 用户名称
+
+| user_set[].user_type
+| Array
+| false
+| 用户类型
+
+| user_set[].users
+| Array
+| false
+| 用户列表
+
+| user_set[].verbose
+| Integer
+| false
+| 是否展示冗余信息
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeEmailJobUsers",
+  "activated": 1,
+  "console": [],
+  "role": [],
+  "search_word": "",
+  "status": [],
+  "users": [
+    "usr-xxxxxxxx"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeEmailJobUsersResponse",
+  "ret_code": 0,
+  "total_count": 1,
+  "user_set": [
+    {
+      "address": "",
+      "balance": "0",
+      "birthday": null,
+      "bonus": "100001.2277",
+      "change_passwd_first_login": 0,
+      "channel": "",
+      "company_name": "",
+      "company_phone": "",
+      "console_id": "alphacloud",
+      "create_time": "2016-12-25T16:00:12Z",
+      "crm_owner": "",
+      "currency": "cny",
+      "email": "z****@yunify.com",
+      "email_veri_code": "",
+      "gender": "male",
+      "gravatar_email": "z****@yunify.com",
+      "industry_category": "ec",
+      "is_phone_verified": 0,
+      "lang": "zh-cn",
+      "mkt_source": "",
+      "nologin": 0,
+      "notify_email": "",
+      "paid_mode": "prepaid",
+      "passwd": "$2a$12$wR4C0GBiLr567Zp7Bc7jaOdaO3bjTPPJYhCRrHIQbtcU23DRAso/S",
+      "passwd_status_time": "2018-07-13T05:32:15Z",
+      "phone": "",
+      "preference": 1,
+      "privilege": 10,
+      "rating": 0,
+      "remarks": "",
+      "role": "user",
+      "root_user_id": "usr-xxxxxxxx",
+      "source": "",
+      "status": "active",
+      "status_time": "2016-12-25T16:00:12Z",
+      "user_id": "usr-xxxxxxxx",
+      "user_name": "zed",
+      "user_type": 0,
+      "verification_code": ""
+    }
+  ]
+}
+----

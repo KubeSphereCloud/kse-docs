@@ -1,0 +1,46 @@
+---
+title: "Workspace and Project Management"
+keywords: "Kubernetes, {ks_product}, Workspace Management"
+description: "Introduces how to manage resources within a single workspace."
+weight: 08
+icon: "/images/docs/common/docs.svg"
+layout: "second"
+---
+
+
+
+This section introduces how to manage resources within a workspace.
+
+On the KubeSphere platform, workspaces are used for grouping and managing resources. Cluster administrators can authorize one or more clusters to a workspace, allowing the workspace's resources to run on those clusters. Each workspace can contain multiple projects. Users can be invited to join a workspace and, based on their workspace role, gain viewing and management permissions for the workspace's resources.
+
+After KubeSphere installation is complete, the system automatically creates the **system-workspace**, which contains system projects for managing system resources.
+
+ifeval::["{file_output_type}" == "pdf"]
+== Product Version
+
+This document applies to KubeSphere v4.2.0.
+
+== Intended Audience
+
+This document is primarily intended for the following readers:
+
+* KubeSphere Users
+
+* Delivery Engineers
+
+* Operations Engineers
+
+* Support Engineers
+
+
+== Revision History
+
+[%header,cols="1a,1a,3a"]
+|===
+|Document Version |Release Date |Description of Changes
+
+|01
+|{pdf_releaseDate}
+|First official release.
+|===
+endif::[]

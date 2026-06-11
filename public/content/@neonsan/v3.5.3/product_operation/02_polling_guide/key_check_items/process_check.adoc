@@ -1,0 +1,63 @@
+---
+title: "僵尸进程检查（2/3 级）"
+weight: 7
+---
+
+== 相关说明
+
+该检查项需根据进程的具体情况进行级别处理：
+
+* 3 级：NeonSAN 服务（如 QingStor-zero-web、Zookeeper、MySQL Galera、NeonCenter、NeonStore、Monitor、Prometheus 以及 Alertmanager/qs-alert）相关进程，联系相应的 NeonSAN 产研人员进行排查处理。
+* 2级：其他进程，可参考操作步骤自行处理。
+
+
+== 操作步骤
+
+. 逐个登录 NeonSAN 服务器节点。
+. 输入如下命令，检查是否存在僵尸进程。
++
+[,shell]
+----
+ps
+----
++
+include::../../../../../_components/note.adoc[]
+* 返回结果中级别为 3 的进程，则联系 NeonSAN 产研团队进行处理。
+* 返回结果中级别为 2 的进程，则参考后续步骤进行处理。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，获取父进程 ID。
++
+[,shell]
+----
+ps -A -o stat,ppid,cmd | grep keepalived | grep -e '^[Zz]' | awk '{print $2}'
+----
++
+include::../../../../../_components/note.adoc[]
+``keepalived`` 为示例，需根据实际情况修改为相应的僵尸进程。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，kill 相应的僵尸进程。
++
+[,shell]
+----
+Kill -s 9 <id>
+----
++
+include::../../../../../_components/note.adoc[]
+* <id> 为上一步骤中查询到的进程 ID，需根据实际情况修改。
+* 清除僵尸进程不会对其他进程造成影响。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，确认僵尸进程已清理完成。
++
+[,shell]
+----
+ps -A -o stat,pid,ppid,cmd | grep -e '^[Zz]' | grep "keepalived" | awk 'END{print NR}'
+----
++
+include::../../../../../_components/note.adoc[]
+* ``keepalived`` 为示例，需根据实际情况修改为相应的僵尸进程。
+* 返回结果为 0，则表明相关僵尸进程已经清理完成。
+include::../../../../../_components/table_footer.adoc[]
+

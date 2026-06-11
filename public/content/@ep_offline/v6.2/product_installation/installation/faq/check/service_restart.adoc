@@ -1,0 +1,23 @@
+---
+title: Webservice 上 billing_delegator 服务一直反复重启
+weight: 10
+---
+
+== 问题现象
+
+Webservice 上 billing_delegator 服务一直反复重启。
+
+== 可能原因
+
+Webservice 节点的 `/pitrix/tmp/` 目录下有多余的隐藏文件。
+
+== 解决方法
+
+. 在 Webservice 节点上执行以下命令，查看该目录下的隐藏文件。
++
+[source]
+----
+ls -a /pitrix/tmp/
+----
+. 删除 `.billing_delegator*` 开头的隐藏文件。
+

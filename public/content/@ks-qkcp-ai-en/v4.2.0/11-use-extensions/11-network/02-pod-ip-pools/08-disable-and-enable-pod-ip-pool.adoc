@@ -1,0 +1,56 @@
+---
+title: "Disable and Enable Pod IP Pools"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Network, Pod IP Pool, Disable and Enable Pod IP Pools"
+description: "Describes how to disable and enable Pod IP Pools."
+weight: 08
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Pod IP Pools**
+
+
+This section describes how to disable and enable Pod IP Pools.
+
+After a Pod IP Pool is disabled, it will no longer allocate IP addresses, and it will not affect the network of pods that have already been assigned IP addresses. However, disabling a Pod IP Pool will automatically unbind it from its associated projects. When migrating a Pod IP Pool, the number of available addresses in the new IP pool must not be less than the number of IP addresses currently in use by the existing pool.
+
+//warning
+[.admon.warning,cols="a"]
+|===
+|Warning
+
+|
+After the migration is complete, workloads will be restarted. Please perform this operation with caution.
+
+|===
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+* The **KubeSphere Network** extension must be installed and enabled on the KubeSphere platform.
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+. On the right side of the Pod IP Pool you want to operate on, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Disable** from the dropdown list.
+
+. In the **Disable Pod IP Pool** dialog box, click **OK**.
+
+. On the right side of the disabled Pod IP Pool, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Enable** from the dropdown list to enable the Pod IP Pool.
+
++
+--
+If the disabled Pod IP Pool has allocated IPs, check **Migrate Pod IP Pool** to migrate pods with assigned IP addresses to a new Pod IP Pool.
+--

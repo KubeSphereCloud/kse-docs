@@ -1,0 +1,28 @@
+---
+title: '删除 Target'
+weight: 7
+draft: false
+---
+
+. 登录 link:../../../login[Portal 管理界面]。
+
+. 选择左侧导航栏**存储服务** > **块存储** > **iSCSI**，进入 iSCSI 页面。点击**配置**按钮。
++
+image::/images/neonsan/portal_iscsi_del_target_1.png[]
+
+. 进入 **iSCSI 配置**页面，选择 Target，点击其所在行右侧的更多操作，选择**删除 Target**。
++
+
+include::../../../../../../_components/attention.adoc[]
+* 待删除的 Target上 不能有绑定的卷。
+* 若有卷存在于待删除的 Target 上，则需先将卷解绑，再删除 Target。解绑卷操作步骤可参考link:../iscsi_unbind_vol[前文内容]。
+
+include::../../../../../../_components/table_footer.adoc[]
+
++
+image::/images/neonsan/portal_iscsi_del_target_2.png[]
+
+. 成功删除的 Target 将不在显示在 **iSCSI 配置**页面。
++
+image::/images/neonsan/portal_iscsi_del_target_3.png[]
+

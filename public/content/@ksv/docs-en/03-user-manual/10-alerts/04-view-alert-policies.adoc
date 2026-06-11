@@ -1,0 +1,70 @@
+---
+title: "View alert policies"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, alerts, policies, list, view"
+description: "Describes how to view alert policies in the {ks_product} web console."
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e7894e1bd55d4da285f6c0b8b277158d
+:ks_xref_id: 446767444f8d4b8eb60719878a03dc5d
+:ks_comp: ../../../components/
+:ks_title: View alert policies
+:ks_description: Describes how to view alert policies in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, alerts, policies, list, view
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view alert policies in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=20e8a328fc5547d982ef1ffb38f37854]
+
+User **admin** can view all alert policies in your cluster. Common users such as project administrators, operators, and viewers can view the alert policies in the projects to which they belong.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=19e9dd8329274265bad2eac0aa5f14e3]
+
+include::../../../_custom-en/alerts/alert-steps.adoc[]
+
+. On the **Alert Policies** tab, view alert policies.
++
+--
+You can view all alert policies in the system. The following table describes the parameters.
+
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the alert policy.
+
+You can view the alias of the alert policy below the alert policy name.
+
+|Status
+|The status of the alert.  Valid values:
+
+include::../../../_custom-en/alerts/alert-status-description.adoc[]
+
+|Severity
+|The severity of the alert. Valid values:
+
+include::../../../_custom-en/alerts/alert-severity-levels.adoc[]
+
+|Monitoring Target
+|The monitoring target of the alert. {ks_product} can monitor nodes and VMs.
+
+|Rule
+|The alert rule of the alert policy.
+|===
+--
+. (Optional) Click the search box above the alert policy list and specify a condition to search for alert policies by name, status, or severity.  For example, use **Name:ab** to search for alert policies whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

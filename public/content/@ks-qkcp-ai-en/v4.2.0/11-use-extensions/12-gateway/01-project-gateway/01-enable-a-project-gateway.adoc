@@ -1,0 +1,52 @@
+---
+title: "Enable Project Gateway"
+keywords: "Kubernetes, {ks_product}, Project Management, Project Settings, Gateway Settings, Enable Project Gateway"
+description: "Describes how to enable a project gateway."
+weight: 01
+---
+
+
+:ks_permission: **Project Gateway Management**
+:ks_navigation: **Workspace Settings > Gateway Settings**
+:enable-gateway:
+
+This section describes how to enable a project gateway.
+
+
+== Prerequisites
+
+* The **KubeSphere Gateway** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-oper-enterProjectGateway.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the right side of the page, click **Enable Gateway**.
+
+. In the dialog box that appears, configure the gateway parameters, and then click **OK**.
++
+--
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-para-enableGateway_v42.adoc[]
+--

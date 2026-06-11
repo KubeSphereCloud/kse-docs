@@ -1,0 +1,53 @@
+---
+title: "2. 创建 ThinRuntime"
+weight: 02
+---
+
+:ks_permission: **数据集加速管理**
+:ks_navigation: **数据集 > 数据加速运行时**
+
+本节介绍如何创建 ThinRuntime，用于生成连接 NFS 的 PVC，供后续 NFS 加速使用。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|如果您创建 NFS 数据集时在**数据源**页签中勾选了**自动创建 ThinRuntime**，则无需再次创建，可以跳过该文档。
+|===
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Fluid** 和 **Fluid Console** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* 已link:../01-create-nfs-dataset[创建 NFS 数据集]。
+
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. 在**基本信息**页签，选择已创建的 NFS 数据集，然后点击**下一步**。
+
+. 在 **Runtime 配置**页签，Runtime 类型选择为 **Thin**，然后点击**下一步**。
+
+. 在**高级设置**页签，点击**创建**。
+
+. 点击**数据集**进入数据集页面，NFS 数据集的状态将显示为**已绑定**。
+
+. 点击**存储 > 持久卷声明**，可看到用于连接 NFS 的 PVC 已被创建。
++
+此 PVC 名称将用于link:../03-create-pvc-dataset[创建 PVC 数据集]。

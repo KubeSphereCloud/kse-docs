@@ -1,0 +1,43 @@
+---
+title: "Delete Constraint Template"
+description: "Describes how to delete a constraint template."
+weight: 07
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: ** Gatekeeper > Constraint Templates**
+
+This section describes how to delete a constraint template.
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+Constraint templates cannot be recovered after deletion. Please perform this operation with caution.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **Gatekeeper** extension must be installed and enabled on the KubeSphere platform.
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the constraint template you want to delete, then select **Delete** from the drop-down list.
+
+. In the **Delete Constraint Template** dialog box, enter the name of the constraint template, then click **OK**.

@@ -1,0 +1,289 @@
+---
+title: 批量获取扣费信息（GetLeaseInfos）
+weight: 13
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resources
+| Array
+| true
+| 资源ID
+
+| user
+| String
+| false
+| 用户ID
+
+| verbose
+| Integer
+| false
+| 是否返回集群的详细信息
+
+| zone
+| String
+| true
+| 区域ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| lease_info_set
+| Array
+| false
+| lease_info
+
+| lease_info_set[].console_id
+| String
+| false
+| 控制台ID
+
+| lease_info_set[].contract
+| Object
+| false
+| 合同信息
+
+| lease_info_set[].contract.auto_renew
+| Integer
+| false
+| 用户设置合同到期后的续费时长
+
+| lease_info_set[].contract.charge_mode
+| String
+| false
+| 计费模式
+
+| lease_info_set[].contract.console_id
+| String
+| false
+| 控制台ID
+
+| lease_info_set[].contract.contract_id
+| String
+| false
+| 合同ID
+
+| lease_info_set[].contract.create_time
+| String
+| false
+| 合同创建时间
+
+| lease_info_set[].contract.discount
+| Integer
+| false
+| 合同折扣
+
+| lease_info_set[].contract.duration
+| String
+| false
+| 合同周期
+
+| lease_info_set[].contract.end_time
+| String
+| false
+| 合同结束时间
+
+| lease_info_set[].contract.long_resource_id
+| String
+| false
+| 
+
+| lease_info_set[].contract.next_charge_mode
+| String
+| false
+| 用户设置合同到期转换的计费模式
+
+| lease_info_set[].contract.price
+| String
+| false
+| 合同价格
+
+| lease_info_set[].contract.price_info
+| Object
+| false
+| 合同配置
+
+| lease_info_set[].contract.price_info.TODO
+| String
+| false
+| 待定义（动态结构，参考示例）
+
+| lease_info_set[].contract.product_id
+| String
+| false
+| 合同使用的促销ID
+
+| lease_info_set[].contract.resource_id
+| String
+| false
+| 资源ID
+
+| lease_info_set[].contract.start_time
+| String
+| false
+| 合同开始时间
+
+| lease_info_set[].contract.zone_id
+| String
+| false
+| 区域ID
+
+| lease_info_set[].group_id
+| String
+| false
+| 
+
+| lease_info_set[].lease_time
+| String
+| false
+| 租赁开始时间
+
+| lease_info_set[].renewal
+| String
+| false
+| 系统默认资源到期后的处理模式
+
+| lease_info_set[].renewal_time
+| String
+| false
+| 租赁到期时间
+
+| lease_info_set[].resource_id
+| String
+| false
+| 资源ID
+
+| lease_info_set[].root_user_id
+| String
+| false
+| 主用户ID
+
+| lease_info_set[].status
+| String
+| false
+| 租赁状态
+
+| lease_info_set[].status_time
+| String
+| false
+| 租赁状态变更时间
+
+| lease_info_set[].unlease_time
+| String
+| false
+| 解除租赁时间
+
+| lease_info_set[].user_id
+| String
+| false
+| 用户ID
+
+| lease_info_set[].zone_id
+| String
+| false
+| 区域ID
+
+| resources
+| Array
+| false
+| 返回的资源ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetLeaseInfos",
+  "resources": [
+    "cl-vmk7zt7d"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetLeaseInfosResponse",
+  "lease_info_set": [
+    {
+      "console_id": "qingcloud",
+      "contract": {
+        "auto_renew": null,
+        "charge_mode": "monthly",
+        "console_id": "qingcloud",
+        "contract_id": "ct-8rSs32LY",
+        "create_time": "2021-11-01T01:49:02Z",
+        "discount": 100,
+        "duration": "1 month",
+        "end_time": null,
+        "group_id": "2",
+        "long_resource_id": null,
+        "next_charge_mode": null,
+        "price": "726.864",
+        "price_info": {
+          "aid": "app-o1rl71en",
+          "avv": "public",
+          "cid": "cl-vmk7zt7d",
+          "md": {
+            "nd": [
+              {
+                "c": 2,
+                "cls": 202,
+                "cnt": 3,
+                "g": 0,
+                "gcls": 0,
+                "hpvr": "kvm",
+                "m": 4096,
+                "r": "replica",
+                "repl": 1,
+                "sc": 200,
+                "stor": 100
+              }
+            ]
+          },
+          "pts": [
+            "cluster"
+          ],
+          "stat": "active",
+          "zone": "pek3c"
+        },
+        "product_id": null,
+        "resource_id": "cl-vmk7zt7d",
+        "start_time": "2021-11-01T01:49:02Z",
+        "zone_id": "pek3"
+      },
+      "group_id": "2",
+      "lease_time": "2020-09-29T23:26:24Z",
+      "renewal": "auto",
+      "renewal_time": "2021-12-01T01:49:02Z",
+      "resource_id": "cl-vmk7zt7d",
+      "root_user_id": "usr-lKV1fd7l",
+      "status": "active",
+      "status_time": "2020-09-29T23:26:25Z",
+      "unlease_time": null,
+      "user_id": "usr-lKV1fd7l",
+      "zone_id": "pek3"
+    }
+  ],
+  "resources": [
+    "cl-vmk7zt7d"
+  ],
+  "ret_code": 0
+}
+----

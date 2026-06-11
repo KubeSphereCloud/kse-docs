@@ -1,0 +1,241 @@
+---
+title: "从 v4.1.x 升级到 v4.1.2"
+keywords: "Kubernetes, {ks_product}, 安装, 升级{ks_product_left}"
+description: "介绍如何升级{ks_product_left}。"
+weight: 04
+---
+
+本节介绍如何在保持当前的 Kubernetes 版本不变的情况下从{ks_product_both} v4.1.x 升级到{ks_product_both} v4.1.2。
+
+
+== 前提条件
+
+* 联系{ks_product_both}交付服务专家获取{ks_product_left} v4.1.2 安装包。
+
+* 请确保当前{ks_product_both}版本为 v4.1.x。
+
+* 请确保当前 Kubernetes 版本为 v1.21.x、v1.22.x、v1.23.x, v1.24.x, v1.25.x, v1.26.x, v1.27.x 或 v1.28.x。
+
+// :relfileprefix: ../../../
+
+// include::../../../_custom/installationAndUpgrade/installationAndUpgrade-prer-offlineInstallation.adoc[]
+
+// :relfileprefix: ./
+
+* {empty}
+include::../../../_custom/installationAndUpgrade/installationAndUpgrade-prer-backUpData.adoc[]
+
+== 准备工作
+
+=== 1. 解压安装包
+
+. 将{ks_product_both}安装包传输到待升级集群的节点，并登录该集群节点。
+
+. 执行以下命令解压 v4.1.2 安装包（将 <package name> 替换为安装包的实际名称）。
++
+--
+[,bash]
+----
+tar -zxvf <package name>
+----
+
+[.admon.attention,cols="a"]
+|===
+|注意
+
+|请确保操作目录有足够的可用空间，建议大于 100 GB。
+
+|===
+--
+
+. 进入安装包解压后生成的目录（将 <directory> 替换为安装包解压后生成的目录）。
++
+--
+[,bash]
+----
+cd <directory>
+----
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+若想了解安装包各个文件的作用，请参阅link:../../02-install-kubesphere/02-install-kubernetes-and-kubesphere/#_查看安装包内容[查看安装包内容]。
+|===
+--
+
+=== 2. 推送镜像
+
+. 在 v4.1.2 目录下，编辑安装{ks_product_both}时创建的 **config-sample.yaml **文件，修改其中的 **registry** 部分。
++
+--
+[,yaml]
+----
+    privateRegistry: "dockerhub.kubekey.local/kse" # 替换为实际镜像仓库地址
+    auths:
+      "dockerhub.kubekey.local":  # 替换为实际镜像仓库地址
+        username: admin           # 替换为镜像仓库的用户名
+        password: Harbor12345     # 替换为镜像仓库的密码
+        skipTLSVerify: true
+        plainHTTP: true   # 如果镜像仓库使用 http，该参数设置为 true
+----
+--
+
+. 推送镜像到所使用的镜像仓库。
++
+[,bash]
+----
+./kk artifact images push -f config-sample.yaml -a kubekey-artifact.tar.gz
+----
+
+== 升级{ks_product_left}
+
+{ks_product_right} v4.1 及后续版本采用 helm chart 方式升级 ks-core。
+
+=== 升级 host 集群
+
+. 检查当前集群的 ks-core 配置。
++
+--
+[,bash]
+----
+helm get value -n kubesphere-system ks-core
+----
+--
+
+. 创建升级配置文件。如果上一步中有除镜像仓库、镜像版本、cloud 和 upgrade 之外的其它参数，请添加至以下配置文件中。
++
+--
+[,bash]
+----
+cat <<EOF > kse-v4.1.2-custom-values.yaml
+----
+
+[,yaml]
+----
+# 以下两个参数分别用来指定 ks-core 所使用镜像以及扩展组件所使用镜像的镜像仓库地址，请根据环境实际信息修改。
+global:
+  imageRegistry: dockerhub.kubekey.local/kse
+extension:
+  imageRegistry: dockerhub.kubekey.local/kse
+# 开启 ks-core 组件（ks-apiserver、ks-controller-manager、ks-console）的高可用，请根据集群实际情况配置。
+ha:
+  enabled: false
+# 开启 redis 高可用，ks-apiserver 高可用依赖 redis，如该参数为 false，默认 kubesphere-system 下的 redis 为单副本，请根据集群实际情况配置。
+redisHA:
+  enabled: false
+EOF
+----
+--
+
+. 执行以下命令开始升级。
++
+--
+[,bash]
+----
+helm upgrade --install ks-core charts/ks-core -n kubesphere-system -f kse-v4.1.2-custom-values.yaml --wait --debug
+----
+
+[.admon.attention,cols="a"]
+|===
+|注意
+
+|
+替换 `charts/ks-core` 为当前环境下 ks-core chart 的真实路径。
+|===
+--
+
+. 升级扩展组件库。
++
+--
+[source,bash]
+----
+helm template -n kubesphere-system charts/kse-extensions-publish \
+     --set museum.enabled=true \
+     --set global.imageRegistry=dockerhub.kubekey.local/kse | kubectl apply -f -
+----
+
+[.admon.attention,cols="a"]
+|===
+|注意
+
+|
+替换 `dockerhub.kubekey.local/kse` 为实际的镜像仓库地址。
+|===
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+host 和 member 集群都升级完成后，即可在 Web 控制台上升级各个扩展组件。
+|===
+--
+
+. 参考以下步骤，检查 host 集群是否升级成功。
+
+.. 执行以下命令，upgrade job 应该是成功完成的状态，如下所示。
++
+[,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get job | grep upgrade
+ks-core-post-upgrade    1/1           16s        28m
+ks-core-pre-upgrade     1/1           58s        31m
+prepare-upgrade         1/1           26s        32m
+----
+
+.. 执行以下命令，pod（ks-apiserver, ks-console, ks-controller-manager）应该为 running 状态，如下所示。
++
+[,bash]
+----
+root@xxx:~# watch kubectl get pod -n kubesphere-system
+NAME                                     READY   STATUS      RESTARTS        AGE
+ks-apiserver-594bb884db-phrlv            1/1     Running     0               28m
+ks-console-7cd55dd9f9-f2jl9              1/1     Running     0               28m
+ks-controller-manager-785fc676dc-9d9j2   1/1     Running     0               28m
+----
+
+. 使用原有的 Web 控制台的 IP 地址、管理员用户名和管理员密码，并使用网页浏览器登录 v4.1.2 的{ks_product_left} Web 控制台。
+
+. 根据激活提示点击**激活**，导入{ks_product_left}的 license。
+
+. 检查 host 集群各项功能和数据是否正常。
+
+=== 升级 member 集群
+
+. 按照以上link:#_升级_host_集群[升级 host 集群]的步骤升级 member 集群。
+
+. 参考以下步骤，检查 member 集群是否升级成功。
+
+.. 执行以下命令，upgrade job 应该是成功完成的状态，如下所示。
++
+[,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get job | grep upgrade
+ks-core-post-upgrade    1/1           16s        28m
+ks-core-pre-upgrade     1/1           58s        31m
+prepare-upgrade         1/1           26s        32m
+----
+
+.. 执行以下命令，ks-agent pod 应该为 running 状态，如下所示。
++
+[,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get pod
+NAME                          READY   STATUS      RESTARTS        AGE
+ks-agent-5dc5b57977-4x6mf     2/2     Running     0               59m
+----
+
+. 如果您在以上升级命令中增加了自定义配置（如，--set a=b），需在 Web 控制台同步添加 member 集群的自定义配置。
++
+--
+方法：在**集群管理**页面，在需要操作的集群右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**编辑配置**。在弹窗中，输入 `a: b`。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|如果您在升级命令中未加入自定义的配置，则无需在 Web 控制台添加集群配置。
+|===
+--

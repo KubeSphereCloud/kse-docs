@@ -1,0 +1,75 @@
+---
+title: "使用 KubeEdge 添加边缘节点"
+weight: 01
+---
+
+:ks_permission: **节点管理**
+:ks_menu: **边缘节点 > 节点管理**
+
+
+本节介绍如何使用 KubeEdge 边缘运行时添加边缘节点。
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+== 准备工作
+
+在边缘节点上link:https://docs.docker.com/engine/install/[安装 Docker]。
+
+== 添加边缘节点
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
+
+. 在页面右侧点击**添加**。
+
+. 在**添加边缘节点**对话框，设置边缘节点的参数。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|镜像仓库地址
+|请输入 `docker.io/edgewize`。
+
+|名称
+|边缘节点的名称。系统会自动为边缘节点生成名称，您也可以手动设置边缘节点的名称。
+名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+|添加默认污点
+|是否为边缘节点添加污点以阻止容器组调度到边缘节点上。
+
+|===
+--
+
+. 点击**验证**生成边缘节点配置命令。
+
+. 登录边缘节点并执行上一步生成的命令。
+
+. 刷新{ks_product_left} Web 控制台的**边缘节点**页面。如果添加成功，边缘节点将显示在边缘节点列表。
+
+
+== 重置边缘节点
+
+重置节点将清除边缘节点上因执行节点配置命令而创建的资源。
+
+[,bash]
+----
+systemctl stop edgecore
+ 
+rm -rf /etc/kubeedge/
+ 
+rm /usr/local/bin/edgecore
+ 
+rm -rf /var/lib/kubeedge /var/lib/edged /etc/kubeedge/ca /etc/kubeedge/certs
+ 
+docker stop mqtt
+ 
+docker rm mqtt
+ 
+systemctl daemon-reload
+----
+

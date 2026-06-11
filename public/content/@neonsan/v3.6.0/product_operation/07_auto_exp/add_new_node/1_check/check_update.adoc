@@ -1,0 +1,71 @@
+---
+title: '检查并升级 Installer'
+weight: 5
+---
+== 特别说明
+
+若当前集群曾对 NeonSAN 做过升级操作时，当前环境中所使用的 NeonSAN 版本与原来使用 qinngstor-instller 工具所安装部署的 NeonSAN 版本会存在差异。故，使用 `installer version-list` 命令查询到的 installer-neonsan 的版本号为部署 NeonSAN 时所使用的版本，并非当前环境中 NeonSAN 的实际版本号。
+
+== 操作步骤
+. 登录待扩容集群中的任一节点。
+
+. 执行如下命令，登录 FirstBox。
++
+[,shell]
+----
+ssh qingstor-firstbox -p 6023
+----
+
+. 执行如下命令，查看当前集群中实际的 {product_name} 版本。
++
+[,shell]
+----
+neonsan list_version
+----
++
+回显示例
++
+[,shell]
+----
+NeonSAN Cli Version: 3.5.0 build:6e5f9cd-Aug 29 2022 20:24:33
+WARNING: different versions exist in cluster
++---------+--------------------------------------+---------------------+
+| NEONSAN |            BUILD VERSION             |    UPDATED TIME     |
++---------+--------------------------------------+---------------------+
+| center  | 3.5.0,build:3a6491ae-20220829.123327 | 2022-10-11 01:48:25 |
+| monitor | 3.5.0,build:92f5625-20221013.181550  | 2022-10-13 18:49:57 |
+| store   | 3.5.0,build:6e5f9cd8-20220829.123327 | 2022-10-11 01:49:22 |
++---------+--------------------------------------+---------------------+
+----
+
+. 执行如下命令，查看 installer-neonsan 的版本。
++
+[,shell]
+----
+installer version-list
+----
++
+回显示例
++
+[,shell]
+----
++-------------------+---------+-----+
+| package           | current | old |
++-------------------+---------+-----+
+| installer         | 2.0.16  |     |
++-------------------+---------+-----+
+| installer-neonsan | 3.4.0   |     |
++-------------------+---------+-----+
+----
++
+include::../../../../../../_components/note.adoc[]
+如上所示，返回结果中，qinngstor-instller 部署工具的版本为 2.0.16， installer-neonsan 表示集群中使用 qinngstor-instller 部署工具原本所安装的 NeonSAN 版本为 3.4.0。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 对比步骤 3 和步骤 4 返回结果中 {product_name} 的版本号是否一致。 
++
+若版本不一致，则说明该集群对 NeonSAN 版本做了升级处理，此时扩容需保证 NeonSAN 版本的一致性，获取安装包时，需选取与步骤 3 查询到的 NeonSAN 版本保持一致的安装包。此时，需参考link:../../../6_annex/update_installer/[附录]对 installer 进行升级后，再进行link:../../3_node_config/os_config[配置新增节点]及后续的相关操作。 
++
+若版本一致，则无需升级 installer，可直接进行link:../../3_node_config/os_config[配置新增节点]及后续的相关操作即可。
+
+

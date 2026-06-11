@@ -1,0 +1,55 @@
+---
+title: "多集群管理"
+weight: 10
+---
+
+多集群管理允许用户织跨不同的云厂商或者在不同的基础设施上运行和管理多个 Kubernetes 集群。
+
+多集群管理最常见的使用场景包括服务流量负载均衡、隔离开发和生产环境、解耦数据处理和数据存储、跨云备份和灾难恢复、灵活分配计算资源、跨区域服务的低延迟访问以及避免厂商锁定等。
+
+KubeSphere 多集群管理为用户提供了统一的控制平面，将应用程序及其副本分发到位于公有云和本地环境的多个集群。
+
+== 功能特性
+
+* KubeSphere 多集群可以管理多个 KubeSphere 集群资源，并具有向多个集群部署应用的能力。
+* KubeSphere 还拥有跨多个集群的丰富可观测性，包括集中监控、日志系统、事件和审计日志等。
+
+== 主要组件
+
+https://github.com/kubernetes-sigs/kubefed[KubeFed]（Kubernetes Cluster Federation，Kubernetes 集群联邦）。
+
+== 架构设计
+
+KubeSphere 多集群依赖于多集群控制平面(Multi Cluster Control Plane)，由控制平面管理多个集群。控制平面运行的集群称之为 Host Cluster，被管理的集群称之为 Member Cluster。控制平面可以运行在其被管理的集群上。架构设计如下图所示。
+
+image::/images/ep_offline/qke_twp/05_mccp.png[]
+
+* *多集群控制平面* 
+** ks-mc-console：多集群管理界面，通过管理界面来完成对集群的管理，资源的创建部署。 
+** ks-mc-controller：多集群控制器，负责将用户创建的多集群资源对象同步到 Joined Cluster 上。例如，用户创建了一个多集群 workspace（这个 workspace 可以使用到多个 Joined Cluster 资源），ks-mc-controller 会将 workspace 同步创建到 Joined Cluster 上。 
+** ks-mc-apiserver：负责接受 ks-mc-console 请求，并将请求转义成具体的集群 API，发到对应的集群上，接受 Joined Cluster 的 Response，将 Response 聚合后返回给ks-mc-console。 
+** ks-mc-account：多集群的用户组件，负责多集群下用户的认证、权限校验。 
+
+上述组件可以在现有组件之上增加功能，无需新增组件。 
+
+== 依赖 
+
+多集群之间的权限管理需要打通，需要对权限管理进行重构。将用户抽象成 CRD 形式，利用 KubeFed 将用户传播到 Member Cluster 上，做到用户在多个集群之间权限一致。 
+
+== 应用案例
+
+* *低延迟，高可用*
++
+image::/images/ep_offline/qke_twp/05_mc_use_case_1.png[]
+
++
+用户在上海和北京两地创建了两个集群，集群间运行相同的服务。通过一个全局的负载均衡器，来将请求转发到离用户距离近的集群，来降低请求的响应延迟。 
++
+这个场景需要公网 DNS 支持，其本质是由 Kubefed 去动态更新 DNS 解析，适合在公有云上使用。私有云场景下使用会稍微复杂些。 
+
+* *开发-测试-生产*
++
+image::/images/ep_offline/qke_twp/05_mc_use_case_2.png[]
++
+用户有个三个集群，分别是开发（developement），测试（testing），生产（production）集群，且集群间的网络是完全隔离的，无法通信。通过一个中间的网络环境创建 Host Cluster 与三个集群通信，通过多集群管理三个集群，完成从开发到测试，再到生产环境的流水线。 
+

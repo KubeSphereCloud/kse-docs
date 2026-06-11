@@ -1,0 +1,111 @@
+---
+title: "静态加密"
+weight:  01
+---
+
+kube-apiserver 的参数 `--encryption-provider-config` 控制 API 数据在 etcd 中的加密方式。该配置作为一个名为 EncryptionConfiguration 的 API 提供。
+
+[.admon.attention,cols="a"]
+|===
+|注意
+
+|
+重要：对于高可用配置（有两个或多个控制平面节点），加密配置文件必须相同！否则，kube-apiserver 组件无法解密存储在 etcd 中的数据。
+|===
+
+== 示例
+
+. 创建一个新的加密配置文件 /etc/kubernetes/enc/enc.yaml。
++
+[,yaml]
+----
+apiVersion: apiserver.config.k8s.io/v1
+kind: EncryptionConfiguration
+resources:
+  - resources:
+      - secrets
+    providers:
+      - aescbc:
+          keys:
+            - name: key1
+              secret: <BASE 64 ENCODED SECRET>
+      - identity: {}
+----
+
+. 生成一个 32 字节的随机密钥并进行 base64 编码。如果在 Linux 或 macOS 上，请运行以下命令。
++
+[,bash]
+----
+head -c 32 /dev/urandom | base64
+----
+
+. 将这个值放入到 EncryptionConfiguration 结构体的 secret 字段中。
+
+. 修改 /etc/kubernetes/manifests/kube-apiserver.yaml 中 kube-apiserver 容器的启动命令，增加 --encryption-provider-config，将其指向配置文件所在位置。修改完成之后等待 kubernetes 自动重启 kubeapi-server 服务。
++
+--
+修改之后 kube-apiserver.yaml 文件如下：
+
+[,yaml]
+----
+apiVersion: v1
+kind: Pod
+metadata:
+annotations:
+kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint: 10.10.30.4:6443
+creationTimestamp: null
+labels:
+component: kube-apiserver
+tier: control-plane
+name: kube-apiserver
+namespace: kube-system
+spec:
+containers:
+- command:
+- kube-apiserver
+...
+- --encryption-provider-config=/etc/kubernetes/enc/enc.yaml # <-- 增加这一行
+volumeMounts:
+...
+- name: enc # <-- 增加这一行
+mountPath: /etc/kubernetes/enc # <-- 增加这一行
+readonly: true # <-- 增加这一行
+...
+volumes:
+...
+- name: enc # <-- 增加这一行
+hostPath: # <-- 增加这一行
+path: /etc/kubernetes/enc # <-- 增加这一行
+type: DirectoryOrCreate # <-- 增加这一行
+----
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+更多加密算法配置方式，请参阅 link:https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/encrypt-data/[Kubernetes 文档]。
+
+|===
+--
+
+. 配置静态加密之后历史数据不会自动更新，需要执行以下命令手动更新。
++
+[,bash]
+----
+kubectl get secrets --all-namespaces -o json | kubectl replace -f -
+----
+
+. 测试查看 secret 是否加密。
++
+[,bash]
+----
+# 说明 etcd 的证书配置可以从 kube-apiserver 容器的 command 启动命令中获取
+ETCDCTL_API=3 etcdctl \
+--cacert=/etc/ssl/etcd/ssl/ca.pem \
+--cert=/etc/ssl/etcd/ssl/node-qyicsl-isdp-master-0001.pem \
+--key=/etc/ssl/etcd/ssl/node-qyicsl-isdp-master-0001-key.pem \
+get /registry/secrets/default/secret1 
+----
+
+

@@ -1,0 +1,58 @@
+---
+title: "Platform Introduction"
+keywords: "Kubernetes, KubeSphere, Platform, Modules"
+description: "Introduces the modules and features of the KubeSphere web console."
+weight: 01
+---
+
+KubeSphere employs a fine-grained access control mechanism. The KubeSphere web console displays differently depending on the role of the logged-in user.
+
+This section introduces the modules and features of the KubeSphere web console from the perspective of a user with the `platform-admin` role.
+
+image:/images/ks-qkcp/en/v4.2.0/console.png[console,100%]
+
+[%header,cols="1a,7a"]
+|===
+|Module |Function
+
+|Top Navigation Bar
+|The top navigation bar displays the management entries for clusters and workspaces by default. You can also customize component entries in the Component Dock to add components to the top navigation bar for quick access.
+
+|Component Dock
+|The Component Dock is the global access point for the Extensions Center, Platform Settings, Access Control, App Store, various extensions, and the Toolbox.
+
+|Quick Access Bar
+|Below the top navigation bar, the clusters and workspaces added to the link:../03-navigation-and-access/03-quick-access/[Quick Access] are displayed. Click image:/images/ks-qkcp/en/icons/chevron-down.svg[chevron-down,18,18] to expand the Quick Access Bar.
+
+// |KubeSphere Marketplace
+// |The store for extensions, supporting operations like installing, uninstalling, configuring, and upgrading extensions.
+
+// |App Store
+// |The App Store provides application templates based on Helm Charts, supporting searching for and installing applications into a specific project.
+
+|Workspace
+|
+The page you land on after logging in is the Workspace. Click the logo in the top-left corner to return to the Workspace page.
+
+* **Cluster Management**: Manages resources from an infrastructure perspective, supporting operations like managing cluster resources, adding/removing member clusters, etc.
+
+* **Workspace Management**: Provides the capability to share resources across clusters, supporting operations like creating workspaces, managing workspace and project resources, deleting workspaces, etc.
+
+* **User and Role Management**: Create users/platform roles, edit information, enable/disable users, modify user roles, edit platform role permissions, etc.
+
+* **Extensions Center**: Manage extensions, such as installing, uninstalling, configuring, disabling, and upgrading extensions.
+
+* **Quick Access**: Supports quick access to clusters and workspaces.
+
+// |Extensions
+// |Global access point for platform-level, multi-cluster, and multi-tenant extensions, supporting quick access to installed extensions.
+
+// |Platform Settings
+// |View and customize platform information, manage licenses.
+|===
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+For detailed introductions to each feature, please refer to the corresponding management guides.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]

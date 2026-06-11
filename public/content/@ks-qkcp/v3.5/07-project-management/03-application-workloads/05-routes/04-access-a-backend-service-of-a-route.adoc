@@ -1,0 +1,51 @@
+---
+title: "访问应用路由的后端服务"
+keywords: "Kubernetes, {ks_product}, 项目管理, 应用负载, 应用路由, 访问应用路由的后端服务"
+description: "介绍如何访问应用路由的后端服务。"
+weight: 04
+---
+
+// :ks_include_id: b17757d9bc3a47ffbd5ca0e39cf2a03c
+:ks_xref_id: 9535141dca664e9eaa75dcc35c9cab14
+:ks_comp: ../../../../components/
+:ks_title: 访问应用路由的后端服务
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 应用负载, 应用路由, 访问应用路由的后端服务
+:ks_description: 介绍如何访问应用路由的后端服务。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **应用负载查看**
+:ks_navigation: **应用负载 > 应用路由**
+
+
+include::../../../../_custom/clusterManagement/routes/routes-desc-accessABackendServiceOfARoute.adoc[]
+
+
+== 前提条件link:[id=352241e9e321437083239d20d6a1d7a3]
+
+:relfileprefix: ../../../../
+* 您需要加入一个项目并在项目中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:07-project-management/10-project-settings/04-project-members/_index.adoc[项目成员]和xref:07-project-management/10-project-settings/03-project-roles/02-view-a-project-role-list.adoc[项目角色]。
+
+// include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+* 您需要启用{ks_product_both}集群网关或项目网关。有关更多信息，请参阅link:../../../10-project-settings/05-gateway-settings/[网关设置]。
+
+include::../../../../_custom/clusterManagement/routes/routes-prer-accessABackendServiceOfARoute.adoc[]
+
+
+== 操作步骤link:[id=f9f01cae21454df698f72c1c954e2bde]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/routes/routes-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/routes/routes-oper-accessABackendServiceOfARoute.adoc[]

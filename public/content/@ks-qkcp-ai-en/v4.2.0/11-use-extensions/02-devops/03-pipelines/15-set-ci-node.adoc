@@ -1,0 +1,41 @@
+---
+title: "Setting Up CI Nodes for Dependency Caching"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Using DevOps"
+description: "Describes how to set up CI nodes for dependency caching."
+weight: 15
+---
+
+
+Building applications often requires pulling various dependencies. Issues such as long pull times or unstable networks may arise during this process, potentially leading to build failures. To provide a more reliable and stable environment, you can configure nodes or node groups specifically for Continuous Integration (CI) and accelerate the build process by using caching.
+
+This document demonstrates how to set up CI nodes so that KubeSphere schedules pipeline tasks to these nodes.
+// This document demonstrates how to set up CI nodes so that KubeSphere schedules pipeline tasks as well as S2I/B2I build tasks to these nodes.
+
+== Prerequisites
+
+You need to have **Cluster Management** permissions on the KubeSphere platform.
+
+== Label CI Nodes
+
+. Log in to the KubeSphere web console with an account that has **Cluster Management** permissions.
+
+. Click **Cluster Management** and enter a cluster.
+
+. In the left navigation pane, select **Cluster Nodes** under **Nodes** to view the existing nodes in the current cluster.
+
+. Select a node from the list to run CI tasks. Click the node name to go to its details page, then click **Operation** > **Edit Labels**.
+
+. In the dialog box that appears, after the key **node-role.kubernetes.io/worker**, enter **ci** as the value for this label, and click **OK**.
+
+
+== Add Taints to CI Nodes
+
+Pipelines typically determine whether to schedule tasks to a node based on link:https://kubernetes.io/zh/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity[node affinity]. If you want to dedicate a node to CI tasks, meaning you do not want other workloads scheduled to this node, you can add a link:https://kubernetes.io/zh/docs/concepts/scheduling-eviction/taint-and-toleration/[taint] to the node.
+
+// Pipelines and S2I/B2I workflows typically determine whether to schedule tasks to a node based on link:https://kubernetes.io/zh/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity[node affinity]. If you want to dedicate a node to CI tasks, meaning you do not want other workloads scheduled to this node, you can add a link:https://kubernetes.io/zh/docs/concepts/scheduling-eviction/taint-and-toleration/[taint] to the node.
+
+. Click **Operation** > **Edit Taints**.
+
+. Click **Add**, enter the key **node.kubernetes.io/ci** without specifying a value. Select **Prefer No Schedule**, **No Schedule**, or **No Execute** as needed.
+
+. Click **OK**. KubeSphere will schedule tasks based on the taint you set.

@@ -1,0 +1,28 @@
+---
+title: "查询卷组信息"
+weight: 9
+---
+
+. 登录 NeonSAN 集群任一节点。
+
+. 执行如下命令，查询整个 NeonSAN 集群中所有的卷组。
++
+[,shell]
+----
+neonsan list_pool -detail 
+----
+
+. 执行如下命令，查询单个卷组的详细信息。
++
+[,shell]
+----
+neonsan list_pool -detail -pool pool_1
+----
++
+image::/images/neonsan/polling_guide_32.png[]
++
+回显说明：
++
+* ``ID``：对应卷组 ID。
+* ``NAME``：对应卷组名。
+* ``CREATED TIME``：对应卷组创建的时间。

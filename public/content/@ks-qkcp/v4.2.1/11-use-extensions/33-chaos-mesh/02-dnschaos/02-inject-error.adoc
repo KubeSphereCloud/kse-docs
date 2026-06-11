@@ -1,0 +1,64 @@
+---
+title: "注入 DNS 解析错误"
+weight:  02
+---
+
+本节介绍如何使指定域名的 DNS 解析返回错误。
+
+故障注入期间，对 `ci-bot.kubesphere.io` 执行 DNS 查询将返回 `SERVFAIL` 错误，而非正常的 IP 地址。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *DNSChaos*。
+. 配置以下参数后点击 *创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|故障类型（action）
+|选择 `error`，使 DNS 解析返回错误。
+
+|匹配域名（patterns）
+|触发故障的域名，支持通配符，例如 `ci-bot.kubesphere.io`。
+
+|持续时间（duration）
+|故障持续时间，例如 `10m`。
+
+|生效范围（selector）
+|选择故障注入的目标命名空间和 Pod。
+|===
+
+
+   对应 YAML 示例如下：
+
+[source,yaml]
+----
+apiVersion: chaos-mesh.org/v1alpha1
+kind: DNSChaos
+metadata:
+  name: dns-error
+  namespace: default
+spec:
+  action: error
+  duration: 10m
+  patterns:
+    - ci-bot.kubesphere.io
+  mode: all
+  selector:
+    namespaces:
+      - default
+    pods:
+      default:
+        - "{{podID}}"
+----
+
+
+验证故障效果：在注入 Pod 中执行 DNS 查询，观察是否返回错误。
+
+[source,shell]
+----
+kubectl exec "{{podID}}" -- nslookup ci-bot.kubesphere.io
+----
+
+   正常情况下返回域名对应的 IP 地址；故障注入期间返回错误：`server can't find ci-bot.kubesphere.io: SERVFAIL`。

@@ -1,0 +1,16 @@
+---
+title: "查看 Galera 配置信息"
+weight: 2
+---
+
+若当前 NeonSAN 环境使用的为 Galera 数据库，可参考以下步骤进行配置信息的查看。其他数据库类型，请参考其他章节内容。
+
+
+. 逐个登录 Galera 集群的每个节点。
+
+. 输入如下命令，查看 Galera 的配置信息。
++
+[,shell]
+----
+cat /opt/galera/conf/neonsan_galera.conf
+----

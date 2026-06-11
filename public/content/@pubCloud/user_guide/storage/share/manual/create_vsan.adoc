@@ -1,0 +1,70 @@
+---
+title: "步骤 1：创建 Virtual SAN 服务器"
+description: 本小节主要介绍Virtual SAN。
+draft: false
+weight: 1
+keywords: 云计算, 青云, QingCloud, 共享存储, Virtual SAN, NeonSAN
+linkkey: storage_vsan_share_creat_manual[[_创建_virtual_san_服务器]]
+---
+
+== 功能描述
+
+通过{platform_name_cn} 的 SDS（软件定义存储）技术，用户可以快速地搭建您专属的基于 iSCSI 协议的 Virtual SAN 服务。 首先需要创建一个 Virtual SAN 服务器；然后再在其上创建一个或多个目标； 最后在云服务器客户端登录这些目标即可使用。
+
+本指南旨在介绍如何配置 Virtual SAN 和目标，以及如何设置客户端来访问 Virtual SAN。
+
+include::../../../../../_components/note.adoc[]
+如果将一块硬盘通过 Virtual SAN 服务挂载到多台云服务器上，那么必须通过分布式文件系统（Distributed File System）的支持才可以并行读写，可以使用 {brand_name_cap} 已经推出的 link:../../../vnas/intro/introduction[NAS 服务]。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 操作步骤
+
+. 登录 {console_name}.
+
+. 在导航栏中点击**产品与服务** > **存储服务** > **共享存储**，即可进入 **Virtual SAN** 列表页面。
+
+. 点击**+创建**按钮开始创建，进入如下页面：
++
+image::/images/cloud_service/storage/share/vsan_1.png[,60%]
+
+. 设置如下基本信息。
++
+[options="header",cols="1,3a"]
+|===
+|参数名称|参数说明
+
+|名称               
+|Virtual SAN 服务器的名称。 
+
+|类型             
+|* 支持基础性和企业型。
+* 基础型 VSAN 服务使用的云服务器类型为基础型的云服务器，是面向个人或中小团队用户推出的入门型共享块存储服务，满足低负载的共享存储服务的场景需求。基础型 VSAN 服务可以使用**基础型本地盘**，**容量型云盘**和**通用型 SSD 云盘**。
+* 企业型 VSAN 服务使用的云服务器类型为企业型的云服务器，是面向性能要求更高的企业级生产应用环境设计的高性能高可靠共享块存储服务，满足企业客户关键业务使用场景的存储需求。企业型 VSAN 服务可以使用**企业型 SSD 本地盘**，**容量型云盘**和**通用型 SSD 云盘** 。
+
+|VPC网络            
+|根据实际情况选择。如需创建新的VPC网络，点击**新建VPC网络**，即可跳转至相应页面进行创建。  
+
+|私有网络          
+|根据实际情况选择。如需创建新的私有网络，点击**新建私有网络**，即可跳转至相应页面进行创建。
+
+include::../../../../../_components/note_in_table.adoc[]
+
+需要确保所选私有网络的 DHCP 处于**打开**状态。
+
+include::../../../../../_components/footer_in_table.adoc[]
+
+|可用区           
+|根据实际情况选择。 
+
+|工作模式        
+|支持单节点和集群。 +
+集群模式可用于客户端 HA 和负载均衡，目前共享目标硬盘仅支持企业级分布式 SAN（NeonSAN）。
+
+|节点数量         
+|工作模式设置为**集群**时需设置该参数。根据实际情况设置。支持范围为:2~10。   
+
+|IP        
+|支持自动分配和手动指定。根据实际情况设置。                        
+|===
+

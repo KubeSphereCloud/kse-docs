@@ -1,0 +1,132 @@
+---
+title: 获取消息设置（DescribeNotifierSettings）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| true
+| 控制台
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| false
+| 控制台
+
+| notifier_settings_set
+| Array
+| false
+| 消息设置集合
+
+| notifier_settings_set[].base_email_template
+| String
+| false
+| 邮件模板
+
+| notifier_settings_set[].login_passwd
+| String
+| false
+| 登录密码
+
+| notifier_settings_set[].login_user
+| String
+| false
+| 登录用户
+
+| notifier_settings_set[].notify_senders
+| Array
+| false
+| 发件者名称
+
+| notifier_settings_set[].notify_timeout
+| String
+| false
+| 超时秒数
+
+| notifier_settings_set[].smtp
+| String
+| false
+| 消息状态
+
+| notifier_settings_set[].smtp_port
+| String
+| false
+| smtp端口
+
+| notifier_settings_set[].smtp_server
+| String
+| false
+| smtp服务器
+
+| notifier_settings_set[].ssl_on
+| String
+| false
+| 是否开启ssl
+
+| notifier_settings_set[].starttls
+| String
+| false
+| 是否开启tls
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeNotifierSettings",
+  "console_id": "devopscloud"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeNotifierSettingsResponse",
+  "notifier_settings_set": [
+    {
+      "console_id": "devopscloud",
+      "smtp": {
+        "base_email_template": "",
+        "login_passwd": "*******",
+        "login_user": "notiuser",
+        "notify_senders": [
+          "no*****@qingcloud.com"
+        ],
+        "notify_timeout": 15,
+        "smtp_port": 587,
+        "smtp_server": "mail.qing***oud.com",
+        "ssl_on": false,
+        "starttls": false
+      }
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

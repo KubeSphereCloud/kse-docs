@@ -1,0 +1,35 @@
+---
+title: "解决 ixgbe 网卡兼容性问题"
+weight: 6
+---
+
+== 运维场景
+
+ixgbe 光纤网卡的驱动在默认情况下不支持第三方容光模块，从而导致网卡驱动加载失败，可通过一下方式进行解决。
+
+== 操作步骤
+
+. 登录至当前环境中配置了 ixgbe 网卡的物理节点。
+
+. 执行如下命令，卸载 ixgbe 驱动。
++
+[source,shell]
+----
+rmmod ixegd
+----
+
+. 执行如下命令，加载 ixgbe 参数。
++
+[source,shell]
+----
+modprobe ixgbe allow_unsupported_sfp=1
+----
+
+. 加载成功后，执行如下命令，检查 ixgbe 网卡信息。
++
+[source,shell]
+----
+ifconfig
+----
+
+

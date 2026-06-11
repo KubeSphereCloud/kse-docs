@@ -1,0 +1,85 @@
+---
+title: "Create an Image Builder Using Source Code"
+keywords: "Kubernetes, {ks_product}, Create Image Builder, Create Image Builder Using Source Code"
+description: "Describes how to create an image builder to build source code into container images."
+weight: 01
+---
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Image Builders**
+
+
+This section describes how to build source code into container images (S2I).
+
+include::../../../../_custom/projectManagement/imageBuilders/imageBuilders-desc-imageBuilderCreated.adoc[]
+
+include::../../../../_custom/projectManagement/services/services-oper-pullSourceCodeAndBuildImage.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/services/services-oper-pushPullImage.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/services/services-prer-sourceCodeRepository_v42.adoc[]
+
+:relfileprefix: ./
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/services/services-prer-imageRegistry_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. On the **Build Mode** tab, select **Java**, **Node.js**, or **Python** based on the source code language, then click **Next**.
+
+. On the **Build Settings** tab, configure the build environment, code repository information, and image service information, then click **Create**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../_custom/projectManagement/services/services-para-buildEnvironmentSourceCode.adoc[]
+
+include::../../../../_custom/projectManagement/services/services-para-codeRepositoryURL.adoc[]
+
+include::../../../../_custom/projectManagement/services/services-para-buildSettings.adoc[]
+
+include::../../../../_custom/projectManagement/services/services-para-codeRelativePath.adoc[]
+
+include::../../../../_custom/projectManagement/services/services-para-environmentVariablesSourceCode.adoc[]
+|===
+
+include::../../../../_custom/projectManagement/imageBuilders/imageBuilders-desc-creationComplete.adoc[]
+--

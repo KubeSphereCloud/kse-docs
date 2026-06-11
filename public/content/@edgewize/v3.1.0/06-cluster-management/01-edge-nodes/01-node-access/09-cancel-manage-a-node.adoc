@@ -1,0 +1,45 @@
+---
+title: "取消纳管节点"
+weight:  09
+---
+
+:ks_permission: **节点管理**
+:ks_navigation: **边缘节点 > 节点接入**
+
+
+本节介绍如何从边缘集群中移除已纳管的边缘节点。
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+
+== 取消纳管单个节点
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. 在需要纳管的节点右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**取消纳管**。
+
+. 在**取消纳管**对话框，输入边缘节点的名称，然后点击**确定**。
+
+== 取消纳管多个节点
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. 点击**批量管理**，在上方勾选**选择全部**，然后点击**取消纳管**。对话框会自动列出已纳管的节点。
+
+. 选择需要操作的节点，点击**取消纳管**。
+
+. 在**批量取消纳管**对话框，输入边缘节点的名称，然后点击**确定**。
++
+--
+include::../../../../_custom/note-separateNamesByComma.adoc[]
+--

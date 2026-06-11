@@ -1,0 +1,100 @@
+// :ks_include_id: e06b7d959620413ebfcc3bfe526b03d1
+. On the PersistentVolumeClaim details page, view the resource attributes of the PersistentVolumeClaim in the **Attributes** area.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Project
+|The project to which the PersistentVolumeClaim belongs.
+
+// |Status
+// |
+// include::persistentVolumeClaims-para-status.adoc[]
+
+|Capacity
+|The storage capacity requested by the PersistentVolumeClaim.
+
+|Access Mode
+|
+include::persistentVolumeClaims-para-accessMode.adoc[]
+
+|Storage Class
+|The storage class requested by the PersistentVolumeClaim.
+
+|Provisioner
+|
+include::../persistentVolumes/persistentVolumes-para-provisioner.adoc[]
+
+// |PersistentVolume
+// |The PersistentVolume bound to the PersistentVolumeClaim.
+
+|Creation Time
+|The creation time of the PersistentVolumeClaim.
+
+|Creator
+|The user who created the PersistentVolumeClaim. If this field is empty, it indicates that the PersistentVolumeClaim was created automatically by the system.
+|===
+--
+
+. On the PersistentVolumeClaim details page, view the resource usage of the PersistentVolume corresponding to the PersistentVolumeClaim on the **Resource Status** tab.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|PersistentVolume
+|Displays the used capacity percentage, remaining capacity size, and total capacity size of the PersistentVolume.
+
+|Inode Usage
+|Displays the cluster Inode usage percentage within the specified time range.
+|===
+--
+
+. On the PersistentVolumeClaim details page, view the mounted pods of the PersistentVolume corresponding to the PersistentVolumeClaim on the **Mount Information** tab.
++
+--
+// include::../nodes/nodes-para-podList.adoc[]
+
+Click image:/images/ks-qkcp/zh/icons/chevron-down.svg["chevron-down",18,18] to view information about the containers running in the pod.
+--
+
+. On the PersistentVolumeClaim details page, click the **Metadata** tab to view the labels and annotations of the PersistentVolumeClaim.
+
+. On the PersistentVolumeClaim details page, click the **Events** tab to view the events of the PersistentVolumeClaim.
++
+--
+include::../clusterManagement-para-eventsTab.adoc[]
+--
+
+// . On the PersistentVolumeClaim details page, view the snapshots of the PersistentVolume corresponding to the PersistentVolumeClaim on the **Snapshots** tab.
+// +
+// --
+
+// [%header,cols="1a,4a"]
+// |===
+// |Parameter |Description
+
+// |Name
+// |The name, alias, and snapshot class of the snapshot.
+
+// |Status
+// |The status of the snapshot.
+
+// * **Creating**: The snapshot is being created.
+
+// * **Creation Failed**: The snapshot creation failed.
+
+// * **Creation Successful**: The snapshot was created successfully.
+
+// * **Deleting**: The snapshot is being deleted.
+
+// |Capacity
+// |The capacity size of the snapshot.
+
+// |Creation Time
+// |The creation time of the snapshot.
+// |===
+// --

@@ -1,0 +1,83 @@
+---
+title: 发送确认邮件（SendConfirmEmail）
+weight: 32
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| false
+| 控制台ID
+
+| email
+| String
+| true
+| 邮箱
+
+| passwd
+| String
+| false
+| 密码
+
+| redirect_uri
+| String
+| false
+| 重定向URI
+
+| user
+| String
+| false
+| 用户
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| email
+| String
+| false
+| 邮箱
+
+| user_id
+| String
+| false
+| 用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "console": "console_0",
+  "email": "4743******",
+  "passwd": "******",
+  "redirect_uri": "http://*********",
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SendConfirmEmailResponse",
+  "email": "4743******",
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

@@ -1,0 +1,190 @@
+---
+title: 创建IAM用户（CreateIAMUser）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| auto_generate_passwd
+| Integer
+| false
+| 自动生成密码
+
+| change_passwd_first_login
+| Integer
+| false
+| 第一次登录是否需要修改密码
+
+| console_access
+| Integer
+| false
+| 允许控制台访问
+
+| description
+| String
+| false
+| 描述
+
+| owner
+| String
+| false
+| 所有者
+
+| passwd
+| String
+| false
+| 登录密码
+
+| path
+| String
+| false
+| 路径
+
+| programmatic_access
+| Integer
+| false
+| 允许编程访问
+
+| root_user
+| String
+| false
+| 根用户ID
+
+| user_names
+| Array
+| true
+| IAM用户名称列表
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| iam_users
+| Object
+| false
+| IAM用户详情集合
+
+| iam_users.change_passwd_first_login
+| Integer
+| false
+| 第一次登录是否需要修改密码
+
+| iam_users.console_access
+| Integer
+| false
+| 允许控制台访问
+
+| iam_users.console_id
+| String
+| false
+| 控制台ID
+
+| iam_users.full_user_name
+| String
+| false
+| IAM用户名称全拼
+
+| iam_users.owner
+| String
+| false
+| 所有者
+
+| iam_users.passwd
+| String
+| false
+| 登录密码
+
+| iam_users.passwd_status_time
+| String
+| false
+| 最后一次密码修改时间
+
+| iam_users.path
+| String
+| false
+| 路径
+
+| iam_users.programmatic_access
+| String
+| false
+| 允许编程访问
+
+| iam_users.qrn
+| String
+| false
+| IAM用户
+
+| iam_users.root_user_id
+| String
+| false
+| 根用户ID
+
+| iam_users.user_id
+| String
+| false
+| IAM用户ID
+
+| iam_users.user_name
+| String
+| false
+| IAM用户名称
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateIAMUser",
+  "auto_generate_passwd": 1,
+  "change_password_first_login": 0,
+  "console_access": 1,
+  "owner": "usr-ZiEgnuY1",
+  "programmatic_access": 1,
+  "user_names": [
+    "iamtest2"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateIAMUserResponse",
+  "iam_users": {
+    "iamu-6ktnazef": {
+      "change_passwd_first_login": 0,
+      "console_access": 1,
+      "console_id": "testingcloud",
+      "create_time": "2023-03-02T16:11:15",
+      "full_user_name": "iamtest2@wangcw.onqingcloud.com",
+      "last_login_time": "2023-03-02T16:11:15",
+      "owner": "usr-ZiEgnuY1",
+      "passwd": "$#OBRyFxq2sbE",
+      "passwd_status_time": "2023-03-02T16:11:15",
+      "path": "/",
+      "programmatic_access": 1,
+      "qrn": "qrn:qingcloud:iam::usr-ZiEgnuY1:user/iamu-6ktnazef",
+      "root_user_id": "usr-ZiEgnuY1",
+      "user_id": "iamu-6ktnazef",
+      "user_name": "iamtest2"
+    }
+  },
+  "ret_code": 0,
+  "total_count": 1
+}
+----

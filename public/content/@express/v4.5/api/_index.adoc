@@ -1,0 +1,107 @@
+---
+title: "API 手册"
+description: "通过云易捷开放的 API，用户可以查看和操作虚拟资源、后台服务，并对账号和密钥进行管理。"
+weight: 15
+
+study_section:
+  - title: 使用说明
+    icon: icon-hammer_duotone
+    children:
+      - title: 
+        children:
+          - title: 前置条件
+            url: "introduction/precondition/"
+          - title: 请求结构
+            url: "introduction/build_request/"
+          - title: 公共参数
+            url: "introduction/parameters/"
+          - title: 签名方法
+            url: "introduction/signature/"
+          - title: 错误码
+            url: "introduction/error_code/"
+          - title: SDK 使用说明
+            url: "introduction/sdk/"
+          - title: CLI 使用说明
+            url: "introduction/cli/"
+  - title: 虚拟资源类
+    icon: icon-computing_duotone
+    children:
+      - title: 
+        children:
+          - title: 主机
+            url: "iaas/instance/"
+          - title: 硬盘
+            url: "iaas/volume/"
+          - title: VPC
+            url: "iaas/vpc/"
+          - title: 私有网络
+            url: "iaas/vxnet/"
+          - title: 负载均衡器
+            url: "iaas/loadbalancer/"
+          - title: 网卡
+            url: "iaas/nic/"
+          - title: 防火墙
+            url: "iaas/security_group/"
+          - title: 镜像
+            url: "iaas/image/"
+          - title: SSH 密钥
+            url: "iaas/keypair/"
+          - title: 资源监控
+            url: "iaas/monitor/"
+          - title: 监控告警
+            url: "iaas/alarm/"
+          - title: 备份
+            url: "iaas/snapshot/"
+          - title: UserData
+            url: "iaas/userdata/"
+          - title: 操作日志
+            url: "iaas/job/"
+          - title: 标签
+            url: "iaas/tag/"
+          - title: 消息中心及通知列表
+            url: "iaas/notification_center/"
+  - title: 管理服务类
+    icon: icon-operation_manage_duotone
+    children:
+      - title: 
+        children:
+          - title: 请求结构
+            url: "boss/build_request/"
+          - title: 公共参数
+            url: "boss/parameters/"
+          - title: 节点管理
+            url: "boss/node_management/"
+          - title: 服务进程
+            url: "boss/service_process/"
+          - title: 资源相关
+            url: "boss/resource_related/"
+          - title: 镜像注册
+            url: "boss/image_registration/"
+          - title: 报表类
+            url: "boss/report_related/"
+          - title: 汇总统计
+            url: "boss/summary_statistics/"
+          - title: 运维操作日志
+            url: "boss/operation_and_maintenance_log/"
+          - title: 灾备管理
+            url: "boss/disaster_management/"
+          - title: NeonSAN 相关接口
+            url: "boss/neonsan_related_interfaces/"
+          - title: 巡检
+            url: "boss/neonsan_related_interfaces/"
+  - title: 账号密钥类
+    icon: icon-human_gear_duotone
+    children:
+      - title: 
+        children:
+          - title: API 密钥
+            url: "account/access_key/"
+          - title: 用户
+            url: "account/user/"
+          - title: 用户会话
+            url: "account/session/"
+          - title: 单点登录
+            url: "account/sso/"
+          - title: 控制台密钥
+            url: "account/console_key/"
+---

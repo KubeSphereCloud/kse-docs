@@ -1,0 +1,47 @@
+---
+title: "部署新 Zone"
+weight: 2
+---
+
+
+部署新 Zone，有如下注意事项。
+
+* 所有操作，均需在原环境的 FirstBox 节点上进行。
+* 文件名中的 `<zone_id>` 为可用区 ID，需与原 Zone 不同，可根据当前新部署的 Zone 的信息进行填写。
+* 其余操作步骤，实施人员均可参考《企业云 v6.1 安装部署指南》。
+
+针对 `variables.<zone_id>.yaml` 和 `setting.<zone_id>.yaml` 两类配置文件的填写，有如下要求。
+
+== variables.<zone_id>.yaml
+
+**common** 与 **base** 相关字段，均需与原环境中其他 Zone 填写一致。**advanced** 字段参数配置要求如下。
+
+[cols='1a,3a']
+|===
+| 字段 | 配置要求 
+
+| zone_name | 需与原环境中其他 Zone 进行区分，配置不能相同。
+| zone_code | 需与原环境中其他 Zone 进行区分，配置不能相同。
+| is_global_zone | 当前新部署 Zone 不为 Global Zone，因此需配置为 `0`。
+| is_sub_zone | 配置为 `1`。
+| deploy_boss | 新 Zone 无需部署 BOSS 服务，故配置为 `0`。
+| deploy_warehouse | 新 Zone 无需部署 Warehouse 服务，故配置为 `0`。
+| deploy_cronus | 新 Zone 需部署 Cronus 服务，故配置为 `1`。
+| is_cronus_master_zone | 新 Zone 无需部署 InfluxDB 服务，故配置为 `0`。
+| deploy_smc | 新 Zone 无需部署 SMC 服务，故配置为 `0`。
+| 其他 | 根据前期规划，参考《企业云 v6.1 安装部署指南》相关章节内容，进行填写。
+
+|===
+
+== settings.<zone_id>.yaml
+
+该文件用于配置各个物理服务器节点上需要运行的角色，以及各角色的部署方式。新 Zone 部署时，角色分配有如下要求。
+
+* 新部署的 Zone 只部署一台 Pgserver，与原环境的 Zone 构成一主两从架构。且部署 Pgserver 的主机类型必须与原环境的 Zone 保持一致，都为物理机或者都为虚拟机。
+* 新部署的 Zone，仅需部署一台 Cloudsat。
+* 新部署的 Zone，无需部署 Warehouse。
+* 新部署的 Zone，无需部署 Influxdb 虚拟机。
+* 新部署的 Zone，无需部署 BOSS。
+* 其他虚拟机和物理角色按照示例中部署。
+
+

@@ -1,0 +1,139 @@
+---
+title: "恢复盘符漂移导致的磁盘异常"
+weight: 3
+---
+
+设备重启后，原磁盘的盘符可能会发生变化。若 store.conf 文件中磁盘信息以 /dev/sda 盘符的形式进行配置时，服务重启后，盘符漂移会导致相应的磁盘 OFFLINE，此时可通过以下操作步骤对磁盘逐一进行恢复。
+
+== 操作步骤
+
+. 查看集群中的磁盘信息，确认状态为 OFFLINE 的磁盘。
++
+[,shell]
+----
+neonsan list_ssd
+----
+
+. 确认磁盘 OFFLINE 的原因是否为盘符漂移导致，即检查盘符是否与步骤 1 查询结果一致。
+.. 登录步骤 1 磁盘所在的节点，执行如下命令，查看磁盘的实际盘符。
++
+[,shell]
+----
+fdisk -l
+----
+.. 登录步骤 1 磁盘所在的节点，查看 store.conf 配置文件中的盘符信息。
++
+[,shell]
+----
+cat /etc/neonsan/store.conf
+
+... ...
+[ssd.0]
+trim_on_reclaim=0
+zero_on_reclaim=0
+dev="/dev/vde"
+type="SSD" 
+... ...
+----
++
+include::../../../../../../_components/note.adoc[]
+* 对比上述查询结果，若盘符一致，则证明该磁盘 OFFLINE 的原因不是由盘符漂移导致的，需排查其他原因。
+* 对比上述查询结果，若盘符不一致，则该磁盘该磁盘 OFFLINE 的原因是由盘符漂移导致的，需进行后续操作步骤。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 检查集群中所有卷的状态。
++
+[,shell]
+----
+neonsan list_volume -detail -H |grep -v OK
+----
++
+* 若存在状态异常的卷，需查看该卷是否由当前 OFFFLINE 的磁盘导致的。若是，可忽略该卷，进行后续操作步骤。
+* 若返回结果中状态异常的卷，不是由 OFFLINE 的磁盘导致的，需立即对其进行恢复后，再进行后续操作。异常卷恢复可参考。“本手册。异常处理 > 卷相关问题”章节内容。
+
+. 移除该状态为 OFFLINE 的磁盘。
++
+--
+* NeonSAN v3.5.1 及以后版本
++
+[,shell]
+----
+neonsan evict_ssd -ssd_uuid <SSD_UUID>
+neonsan remove_ssd -ssd_uuid <SSD_UUID>
+----
+
+* NeonSAN v3.5.1 之前版本
++
+[,shell]
+----
+neonsan remove_ssd -ssd_uuid <SSD_UUID> -evacuate_data no 备注。
+----
+
+include::../../../../../../_components/note.adoc[]
+命令行中 ``-ssd_uuid`` 用于指定步骤 1 查询到的状态为 OFFLINE 的磁盘 UUID，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+--
+. 重新将磁盘添加至集群。
++
+[,shell]
+----
+neonsan add_ssd -store_id <STORE_ID> -dev <dev_NAME>
+----
++
+include::../../../../../../_components/note.adoc[]
+-store_id 用于指定磁盘所在存储节点的 ID，需根据实际情况进行修改。
+-dev 用于指定相应盘符，为步骤 2 中 ``fdisk -l`` 查询到磁盘的实际盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 查看集群状态。
++
+[,shell]
+----
+neonsan list_ssd
+neonsan list_volume -detail -H |grep -v OK
+----
++
+include::../../../../../../_components/note.adoc[]
+* 返回结果中磁盘和卷的状态需均为 OK。
+* 若存在其他 OFFLINE 的磁盘，可参考步骤 1~6，逐个进行恢复。
+* 若存在状态异常的卷可参考。“本手册。异常处理 > 卷相关问题”章节内容。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+== 避免盘符漂移
+
+将 store.conf 文件中的磁盘信息修改为 by-id 的形式进行配置，可有效避免磁盘盘符漂移导致的磁盘 OFFLINE。配置修改可参考如下操作。
+
+. 查看磁盘 by-id。
++
+[,shell]
+----
+ll /dev/disk/by-id/
+----
++
+回显示例
++
+[,shell]
+----
+... ...
+
+lrwxrwxrwx 1 root root 13 Jun 29 02:35 nvme-eui.cfe00003b24bd100 -> ../../nvme2n1
+
+... ...
+----
+
+. 根据实际情况，将 store.conf 文件中的 SSD 盘符信息修改为响应的 by-id。
++
+[,shell]
+----
+vi /etc/neonsan/store.conf
+
+... ...
+[ssd.0]
+trim_on_reclaim=0
+zero_on_reclaim=0
+dev="/dev/disk/by-id/nvme-eui.cfe00003b24bd100"
+type="SSD"
+... ...
+----
+

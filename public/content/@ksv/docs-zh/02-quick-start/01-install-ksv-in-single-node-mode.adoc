@@ -1,0 +1,292 @@
+---
+title: "单节点模式安装"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, 安装, 单节点"
+description: "介绍如何在单节点模式下安装{ks_product_left}。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: bebf7c55638148aca930eb01293a0a05
+:ks_xref_id: 1522e7a00e894c94a03c50108aed89b0
+:ks_comp: ../../components/
+:ks_title: 单节点模式安装
+:ks_description: 介绍如何在单节点模式下安装{ks_product_left}。
+:ks_keywords: {ks_product_full}, {ks_product}, 安装, 单节点
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何在单节点模式下安装{ks_product_abbr_full_left}。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 注意事项link:[id=9ad5695606a14c2d9cb6cd0ebc389ae6]
+
+include::../../_custom/installation/precautions.adoc[]
+
+* 服务器节点的操作系统需要为 Linux 操作系统，Linux 内核版本必须在 4 以上。建议使用 Ubuntu 18.04、Ubuntu 20.04、CentOS 7.9、CentOS 8.5、统信 UOS、银河麒麟 V10 或华为 EulerOS。其他操作系统尚未充分测试，可能存在未知问题。未来将支持更多操作系统。
++
+--
+检查操作系统版本：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+cat /etc/issue
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+* 服务器节点的硬件配置必须满足以下条件：
++
+--
+[cols="1a,1a,1a"]
+|===
+|硬件 |最低配置 |推荐配置
+
+|CPU
+|4 核
+|8 核
+
+|内存
+|8 GB
+|16 GB
+
+|系统磁盘
+|100 GB
+|200 GB
+|===
+
+检查 CPU 核心数：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+cat /proc/cpuinfo | grep "processor" | sort | uniq | wc -l
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+检查内存大小：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+cat /proc/meminfo | grep MemTotal
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+检查可用磁盘大小：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+df -hl
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+* 服务器节点必须至少具有 1 个未格式化且未分区的磁盘，或 1 个未格式化的分区。该磁盘或分区的最低配置为 100 GB，推荐配置为 200 GB。
++
+--
+检查服务器节点磁盘分区：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+lsblk -f
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+例如，以下回显表明 **vdb** 磁盘为满足条件的设备：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+NAME                  FSTYPE      LABEL UUID                                   MOUNTPOINT
+vda
+└─vda1                LVM2_member       >eSO50t-GkUV-YKTH-WsGq-hNJY-eKNf-3i07IB
+ ├─ubuntu--vg-root    ext4              c2366f76-6e21-4f10-a8f3-6776212e2fe4   /
+ └─ubuntu--vg-swap_1  swap              9492a3dc-ad75-47cd-9596-678e8cf17ff9   [SWAP]
+vdb
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+* 服务器节点需要支持虚拟化。如果服务器节点不支持虚拟化，安装过程将报错，{ks_product_right}也无法成功安装。
++
+--
+检查服务器节点是否支持虚拟化（若无回显则不支持虚拟化）：
+
+* x86 架构：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+grep -E '(svm|vmx)' /proc/cpuinfo
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+* ARM64 架构
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ls /dev/kvm
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=f250205ff6ed4b74bc89f0e1f06e74e2]
+
+. 以 **root** 用户登录服务器节点。
+
+. 执行以下命令检查服务器节点的架构：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+uname -m
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 根据服务器节点的架构类型下载安装包。
++
+--
+* x86 架构
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+curl -OL https://virtualization.kubesphere.cloud/v1.6.1/kubesphere-virtualization-x86_64-v1.6.1.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+* ARM64 架构
+
+// Bash
+// URL 待替换
+include::../../../_ks_components/code/bash.adoc[]
+
+curl -OL https://virtualization.kubesphere.cloud/v1.6.1/kubesphere-virtualization-arm64-v1.6.1.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令解压安装包：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+tar -zxvf kubesphere-virtualization-<package name>.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+请将命令中的 <package name> 替换为实际下载的安装包名称。
+
+* x86 架构：将 <package name> 替换为 **x86_64-{ks_product_ver}**
+* ARM64 架构： 将 <package name> 替换为 **arm64-{ks_product_ver}**
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 执行以下命令进入安装包解压后生成的目录：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+cd kubesphere-virtualization-<file path>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+请将命令中的 <file path> 替换为实际生成的目录名称。
+
+* x86 架构：将 <file path> 替换为 **x86_64**
+* ARM64 架构： 将 <file path> 替换为 **arm64**
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 执行以下命令开始安装：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ ./install.sh -a --ratio <overcommit ratio>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+* **--ratio** 为可选参数，用于指定{ks_product_both}集群的超卖比，即每个物理 CPU 可以虚拟化多少个虚拟 CPU。您可以根据业务需求将 <overcommit ratio> 设置为实际的超卖比数值，取值需为 1 至 10 的整数。如果未设置该参数，超卖比默认值为 **2**。
+* 超卖比还将决定{ks_product_both}可创建虚拟机的总数。可创建虚拟机的总数 = 集群 CPU 核心总数 x 超卖比。
+* 只有安装{ks_product_both}时可以设置超卖比，升级时不支持修改超卖比。
+* 安装可能需要较长时间，请等待安装完成。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+如果显示如下信息则安装成功：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+#####################################################
+###    Welcome to KubeSphere Virtualization!      ###
+#####################################################
+
+Console: http://172.16.0.59:30880
+Username: admin
+Password: P@88w0rd
+
+NOTE:
+Please change the default password of the admin user
+after login.
+
+#####################################################
+https://kubesphere.cloud/ksv/     2022-12-01 14:03:45
+#####################################################
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 从安装成功回显中的 **Console**、**Username** 和 **Password** 参数分别获取{ks_product_both}Web 控制台的地址、系统管理员用户名和系统管理员密码。
++
+--
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+{ks_product_right}默认提供以下用户：
+
+系统管理员：用户名 **admin**，密码 **P@88w0rd**
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. （可选）安装结束后，执行以下命令查看安装日志：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ksv logs
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--

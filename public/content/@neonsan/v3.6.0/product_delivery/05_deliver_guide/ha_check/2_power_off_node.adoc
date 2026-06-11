@@ -1,0 +1,61 @@
+---
+title: "存储节点断电"
+weight: 2
+---
+
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统的高可用性
+
+|预置条件	
+a|
+. QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+. 各节点服务配置正确，且状态正常。
+. 系统中已经成功创建 3 副本卷：vol/test，且已有客户端对该卷进行 IO 操作。
+
+
+|测试过程
+a|
+. 在客户端，使用 FIO 工具，对卷进行写入操作。
++
+[source,shell]
+----
+fio -name=test_10 -filename=/dev/qbd0 -bs=4k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=600 -time_based -rw=randwrite -iodepth=32 -numjobs=2 -size 1M
+----
+. 写数据的过程中，直接将一台存储节点断电，检查卷的写数据情况。
+. 检查集群中各存储节点状态。 
++
+[source,shell]
+----
+neonsan list_store
+----
+. 检查断电节点上所有卷的状态。
++
+[source,shell]
+----
+neonsan list_volume -detail
+----
+. 断电节点恢复通电。
+. 查看系统中所有卷的详细信息。
++
+[source,shell]
+----
+neonsan list_volume -detail
+----
+
+|预期结果	
+a|
+. 命令执行成功，卷可正常写入数据。
+. 节点断电后，卷读写正常，FIO 没有中断。
+. 断电节点上的卷的状态均为 ``DEGRADED``。
+. 节点通电成功，系统自动触发 volume 恢复。
+. 待卷恢复后，所有卷的状态均显示 ``OK``。
+
+|验证结果	
+|
+
+|备注	
+|
+|===

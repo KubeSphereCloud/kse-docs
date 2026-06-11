@@ -1,0 +1,52 @@
+---
+title: "Delete Domain Name Reuse Validation"
+description: "Introduces how to delete domain name reuse validation."
+weight: 04
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **Application Workloads > Application Routing Tools**
+
+
+This section describes how to delete a domain name to stop its reuse validation when creating or editing an Ingress.
+
+
+== Prerequisites
+
+* The **KubeSphere Application Routing Tools** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../
+* {empty}
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the domain name you want to delete, then select **Delete** from the dropdown list.
+
+. In the **Delete Domain Name** dialog box, enter the name of the domain name, then click **OK**.
+
+
+== Batch Delete Domain Names
+
+. Log in to the KubeSphere web console as a user with the **cluster-admin** role and enter your cluster.
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
+. Select the checkbox to the left of the domain name(s) you want to delete, then click **Delete** above the domain name list.
+
+. In the **Batch Delete Domain Names** dialog box, enter the name(s) of the domain name(s), then click **OK**.
++
+--
+include::../../../_custom/note-separateNamesByComma.adoc[]
+--

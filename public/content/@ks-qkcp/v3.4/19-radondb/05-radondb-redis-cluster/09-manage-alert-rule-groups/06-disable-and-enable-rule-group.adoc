@@ -1,0 +1,98 @@
+---
+title: "禁用和启用规则组"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, Redis Cluster, 管理告警规则组, 禁用和启用规则组"
+description: "介绍如何禁用和启用规则组。"
+weight: 06
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 77fde872f23947808808dc96900fc7de
+:ks_xref_id: cde1ac0b214c4728a6e80e30e3914be9
+:ks_comp: ../../../../components/
+:ks_title: 禁用和启用规则组
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, Redis Cluster, 管理告警规则组, 禁用和启用规则组
+:ks_description: 介绍如何禁用和启用规则组。
+:ks_weight: 06
+:ks_icon:
+:ks_navigation: **应用负载 > 应用**
+:ks_permission: **应用负载管理**
+
+
+== 前提条件link:[id=4880d4fac10c4aada07f7ac7a3025c3b]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-alerRuleGroupPermissionsManage.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-prer-installRadondbRedisCluster.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-prer-createAlertGroup.adoc[]
+
+
+
+== 禁用和启用单个规则组link:[id=b7c625b256294ecb973a1b12c5072e3b]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-disableAndEnableASingleRuleGroup.adoc[]
+
+
+== 批量启用和禁用规则组link:[id=20ced9d955b54581b538ba22324a51ba]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-openRuleGroupList.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-disableAndEnableMultipleRuleGroups.adoc[]

@@ -1,0 +1,40 @@
+---
+title: "Install and Use Extensions"
+keywords: "Kubernetes, KubeSphere, Quick Start, Install Extension, Example, DevOps, Extension Features"
+description: "Introduces all extensions and demonstrates how to install them."
+weight: 02
+---
+
+Starting from v4.1, KubeSphere has decoupled some of its core functional components. These components are now seamlessly integrated into the KubeSphere web console as extensions, with independent version maintenance, truly achieving a plug-and-play application-level cloud-native operating system.
+
+The original functional modules, such as DevOps, Service Mesh, Observability (including monitoring, alerting, logging, events, notification), App Store, Edge Computing, Network and Storage Management, are now provided by extensions. Therefore, to fully utilize these features, it is recommended that you select the extensions to install based on your actual needs, customizing your own KubeSphere container management platform.
+
+== Understand Extensions
+
+Please refer to the table below to understand the functions of the extensions, so you can choose the appropriate ones to install.
+
+include::../../_custom/extensionIntro/extension-intro-kse_v420.adoc[]
+
+== Install Extensions
+
+include::../../_custom/extensionInstall/install-all-extensions_v42.adoc[]
+
+== Manage Extensions
+
+ifeval::["{file_output_type}" == "html"]
+You can link:../../06-extension-management/02-manage-extensions[configure, upgrade, disable, and uninstall extensions] in the Extensions Center.
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+You can configure, upgrade, disable, and uninstall extensions in the Extensions Center. Please refer to the *KubeSphere Extension Management Guide*.
+endif::[]
+
+== Use Extensions
+
+ifeval::["{file_output_type}" == "html"]
+The usage methods of extensions vary. Please refer to link:../../11-use-extensions/[Extension Usage Guide] to learn about the functional entry points, configuration, and usage methods of each extension.
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+The usage methods of extensions vary. Please refer to the *KubeSphere Extension Usage Guide* to learn about the functional entry points, configuration, and usage methods of each extension.
+endif::[]

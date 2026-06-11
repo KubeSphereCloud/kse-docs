@@ -1,0 +1,138 @@
+---
+title: "创建边缘集群"
+weight: 02
+---
+
+本节介绍如何在{ks_product_both}平台创建边缘集群。
+
+创建边缘集群可采用 2 种模式：物理集群模式和虚拟集群模式（vcluster）。
+
+== 前提条件
+
+* 您需要在{ks_product_both}平台具有 **platform-admin** 角色。
+
+* 边缘运行时 OpenYurt 需要部署在 master 节点，如使用 OpenYurt 创建边缘集群，请确定边缘集群有 master 节点。
+
+== 物理集群模式
+
+. link:https://docs.kubesphere.com.cn/latest/03-installation-and-upgrade/02-install-kubesphere/01-online-install-kubernetes-and-kubesphere/#_创建_kubernetes_集群[创建一个 Kubernetes 集群]。为满足 OpenYurt 对 Kubernetes 的要求，Kubernetes 建议版本：1.22-1.24，推荐版本 1.23.x。
+
+. 在 Kubernetes 集群节点上，执行 cat .kube/config 获取 kubeconfig，并将 kubeconfig 信息中的 `clusters:cluster:server` 参数修改为此集群 master 节点的 IP 地址。
++
+--
+[,bash]
+----
+cat .kube/config
+----
+
+[,yaml]
+----
+apiVersion: v1
+clusters:
+- cluster:
+    server: https://lb.kubesphere.local:6443    # 替换为 server: https://<node-ip>:6443
+----
+--
+
+. 在{ks_product_left} Web 控制台，点击顶部导航栏上的image:/images/edgewize/zh/icons/grid.svg[grid,18,18]，然后点击 **edgewize-io** 图标。
+
+. 在**边缘集群管理**页面，点击**创建边缘集群**。
+
+. 输入**集群名称**，选择**边缘运行时**（边缘运行时支持 kubeedge 和 openyurt），点击**下一步**。
+
+. 安装方式选择**手动安装**，并将第 2 步中已编辑的 kubeconfig 文件粘贴到下面的 kubeconfig 输入框，点击**创建**。
+
+. 等待边缘集群创建就绪，在**边缘集群管理**列表中点击集群名称，查看、管理集群中的资源。
+
+
+== 虚拟集群模式（vcluster）
+
+. 解压 EdgeWize 安装包中的 ewctl 命令行工具到指定目录。
++
+[,bash]
+----
+tar -zxvf <ewctl package name> -C /usr/local/bin/
+----
+
+. 使用 ewctl 加载 meta 集群和 host 集群的 config。
+// 此步骤内容与 /03-installation-and-upgrade/02-deploy-edgewize/05-install-edgewize.adoc 的步骤 1 相同。
+.. （可选）若想避免在使用 ewctl 时对集群默认的 kubeconfig 文件进行修改，可创建 EdgeWize 专用的 kubeconfig 文件。如，在任意路径下创建空的 kubeconfig 文件。
++
+[,bash]
+----
+touch /root/edgewize-config
+----
+
+.. （可选）为方便后续操作，可以设置 KUBECONFIG 环境变量。假设当前 ewctl 使用的 kubeconfig 文件路径为 /root/edgewize-config:
++
+[,bash]
+----
+export KUBECONFIG="/root/edgewize-config"
+----
+
+.. 将底层 meta 集群的 kubeconfig 配置（默认位置假设为 /root/.kube/config）导入 ewctl 使用的 kubeconfig 文件。
++
+[,bash]
+----
+ewctl config metacluster -f /root/.kube/config
+----
+
+.. 将{ks_product_left} host 集群的 kubeconfig 配置（默认位置假设为 /root/.kube/config）导入 ewctl 使用的 kubeconfig 文件。
++
+[,bash]
+----
+ewctl config hostcluster -f /root/.kube/config
+----
+
+. 使用 ewctl 为即将创建的边缘集群（假设集群名称为 testcluster）初始化各种资源。
++
+--
+* 使用 kk (kubekey) 安装{ks_product_both}时，若没有启用高可用，执行以下命令即可：
++
+[,bash]
+----
+ewctl cluster init testcluster
+----
+
+* 若使用 kk (kubekey) 安装{ks_product_left}，并启用了高可用，由于目前没有虚拟 IP 可用，可能需要使用 kube-apiserver 的访问地址，可以通过参数 `--kube-apiserver-host` 指定 IP，如：
++
+[,bash]
+----
+ewctl cluster init testcluster --kube-apiserver-host "172.31.18.22"
+----
+--
+
+. 在**边缘集群管理**页面，点击**创建边缘集群**。
+
+. 输入集群名称 **testcluster**，选择**边缘运行时**（边缘运行时支持 kubeedge 和 openyurt），点击**下一步**。
+
+. 安装方式选择**自动安装**，托管集群选择 **host**。
+
+. 若边缘运行时为 **kubeedge**，将**公开地址**设置为边缘集群 KubeEdge 组件的公开地址（默认即可）；若边缘运行时为 **openyurt**，将**公开地址**设置为边缘集群 OpenYurt 组件的公开地址（默认即可）。
+
+. 点击**创建**。
+
+. 等待边缘集群创建就绪，在**边缘集群管理**列表中点击集群名称，查看、管理集群中的资源。
+
+=== 使用 kubectl 访问边缘集群
+
+. 如需使用 `kubectl` 命令，访问使用 vcluster 创建的边缘集群，执行以下命令，将边缘集群 testcluster 的 config context 合并到集群使用的 kubeconfig 文件中。
++
+[source,bash]
+----
+ewctl cluster dump testcluster
+----
+
+. 查看当前 kubeconfig 中所有集群的 context.
++
+[source,bash]
+----
+ewctl cluster list
+----
+
+. 将 kubectl 的当前会话切换到边缘集群 testcluster 环境下。
++
+[source,bash]
+----
+ewctl cluster connect testcluster
+----

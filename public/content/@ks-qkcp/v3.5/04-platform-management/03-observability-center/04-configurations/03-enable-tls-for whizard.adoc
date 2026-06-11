@@ -1,0 +1,99 @@
+---
+title: "配置 Whizard 内部 TLS 通信"
+weight: 03
+---
+
+
+本节介绍如何在{ks_product}安装前及安装完成后，配置 TLS 以进行 Whizard 的内部服务通信。
+
+
+== 版本要求
+
+Whizard 版本 >= 0.7.0，KubeSphere 企业版版本 >= 3.4.1。
+
+== 在{ks_product}安装前配置
+
+. 登录集群节点，执行以下命令编辑 cluster-configuration.yaml 配置文件：
++
+--
+// bash
+[,bash]
+----
+vi cluster-configuration.yaml
+----
+--
+
+. 将 **spec:monitoring:whizard:server:tlsEnable**  参数设置为 **true**，然后保存⽂件。
++
+--
+// YAML
+[,yaml]
+----
+spec:
+  monitoring:
+    whizard:
+      server:
+        nodePort: 30990
+        tlsEnable: true
+----
+--
+
+== 在{ks_product}安装后配置
+
+=== 前提条件
+
+您需要在{ks_product_both}平台具有 **platform-admin** 角色。
+
+
+=== 操作步骤
+
+. 以具有 **platform-admin** 角色的用户登录{ks_product_left} Web 控制台。
+
+. 将光标悬停在页面右下角的image:/images/ks-qkcp/zh/icons/hammer.svg[hammer,18,18] 图标，然后在菜单中选择 **kubectl**。
+
+. 在 **kubectl** 对话框，执行以下命令删除 Whizard 的资源：
++
+--
+[,bash]
+----
+helm delete whizard -n kubesphere-monitoring-system
+----
+--
+
+. 执行以下命令编辑集群配置文件。
++
+--
+// bash
+[,bash]
+----
+kubectl edit cc ks-installer -n kubesphere-system
+----
+--
+
+. 在集群配置文件中，将 **spec:monitoring:whizard:server:tlsEnable**  参数设置为 **true**，并删除 **status:monitoring** 参数的全部内容，然后保存⽂件。
++
+--
+// YAML
+[,yaml]
+----
+spec:
+  monitoring:
+    whizard:
+      server:
+        nodePort: 30990
+        tlsEnable: true
+----
+--
+
++
+删除 **status:monitoring** 参数的内容：
++
+--
+[,yaml]
+----
+status:
+  monitoring:
+    enabledTime: 2023-09-28T14:16:41CST
+    status: enabled
+----
+--

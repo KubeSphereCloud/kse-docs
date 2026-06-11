@@ -1,0 +1,33 @@
+---
+title: "License 简介"
+weight: 1
+---
+
+== 概述
+
+License 即许可证，是供应商与客户对所销售/购买的产品（此处为 NeonSAN 版本）的使用范围、功能、期限等进行授权/被授权的一种合约形式。物理形式上表现为 License 文件或 License 授权证书。
+NeonSAN 分布式存储系统的 License 功能按容量授权，最小单位为 TB，客户可按需购买。
+
+== 分类及应用场景
+
+QingStor NeonSAN 分布式存储系统的 License 根据用途进行分类：
+
+* *商用版 License*
+** 正常情况下，依据合同规定购买的 License。NeonSAN 的商用版 License 期限为永久有效，其授权容量为客户实际购买容量。
+** 由于 SANC 融合、企业云以及云易捷场景下以 CPU、节点数整体授权，无需对 NeonSAN 存储容量进行管控，故在上述场景下需进行商用版 License 申请流程，申请容量根据实际应用进行填写。
+** 若 NeonSAN 集群需升级至 v3.4.1 及以上版本，请提前申请商用版本 License，待获得 License 授权证书后，再进行集群的升级操作，以防止集群功能受到影响。
+
+* *试用版 License*
+** 用于 POC 测试等特殊用途的临时 License。新部署的 NeonSAN 集群已自动加载试用版 License，其有效期限默认为 1 个月，授权容量默认为 100TB。
+** 若需延长期限或增加授权容量可参考试用版 License 申请流程进行延时及扩容申请。
+
+== 注意事项
+* NeonSAN v3.4.1 及以上版本具有 License 功能。
+* NeonSAN 集群完成 NeonCenter 组件的升级后，即可使用 API 命令行导入并激活 License。
+* NeonCenter 组件的升级完成前未导入 License 时，会影响 NeonSAN 卷的创建、以及 IaaS 侧虚拟机和硬盘的创建，其影响时长由集群规模而定，受影响``总时间 = 升级节点数 x 3 min``。建议此段时间内请勿进行卷、虚拟机以及硬盘的创建。
+
+== 基本概念
+* License 文件：控制授权容量、功能以及有效期限的授权文件，该文件根据合同信息，通过专门的加密工具生成。一个 NeonSAN 集群仅可加载一个 License 文件。
+* License 授权证书：用于记录 License 的 ID、授权容量、License 申请人信息、集群配置相关描述、License 密钥等信息。License 授权证书会以邮件的形式发送给指定用户。
+
+

@@ -1,0 +1,53 @@
+---
+title: 安装{product_name}失败排查方法
+weight: 1
+---
+
+== 排查步骤
+
+. 登录 FirstBox。
+. 执行以下命令，查看 DeployQingCloud 出错的命令及对应的日志。
++
+--
+[source,shell]
+----
+grep -a 'Execing the script' /pitrix/log/service/qingcloud_server.log | grep <job_id>
+----
+
+include::../../../../../../_components/note.adoc[]
+<job_id> 可以通过命令 `/pitrix/cli/get-config-qingcloud-status.py` 查看。
+include::../../../../../../_components/table_footer.adoc[]
+
+回显信息如下，可以看到具体执行的命令，以及日志文件路径。
+
+image::/images/ep_offline/installation/faq_deploy_qingcloud_01.png[]
+
+步骤对应日志：
+
+[cols='1,2,5']
+|===
+| 步骤 | 命令 | 日志位置
+
+| step0 | build installer packages | FirstBox 的 /pitrix/log/build_pkgs/
+| step1-1 | install shared node | *粗略日志*：FirstBox 的 /pitrix/log/install_nodes/
+
+*详细日志*：具体部署节点的 /opt/install/
+
+| step1-2 | install other phy nodes | *粗略日志*：FirstBox 的 /pitrix/log/install_nodes/
+
+*详细日志*：具体部署节点的 /opt/install/
+
+| step2 | launch ks vms | FirstBox 的 /pitrix/log/launch_vms/
+| step3 | install vm nodes | *粗略日志*：FirstBox 的 /pitrix/log/install_nodes/
+
+*详细日志*：具体部署节点的 /opt/install
+
+| step4 | deploy all nodes | *粗略日志*：FirstBox 的 /pitrix/log/deploy_nodes/deploy_nodes_allinone.log
+
+*详细日志*：具体的角色刷包日志 /pitrix/log/update_nodes/
+
+| step5-1 | dump the hosts | FirstBox 的 /pitrix/log/deploy/dump_hosts.log
+| step5-2 | dump vbc route | FirstBox 的 /pitrix/log/deploy/vbc_route_{job_id}
+|===
+
+--

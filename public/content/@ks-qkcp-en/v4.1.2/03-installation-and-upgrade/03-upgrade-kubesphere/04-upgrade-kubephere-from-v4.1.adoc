@@ -1,0 +1,234 @@
+---
+title: "Upgrade from v4.1.x to v4.1.2"
+keywords: "Kubernetes, KubeSphere Enterprise, installation, upgrade KubeSphere Enterprise"
+description: "This guide describes how to upgrade KubeSphere Enterprise."
+weight: 04
+---
+
+This section describes how to upgrade from KubeSphere Enterprise v4.1.x to KubeSphere Enterprise v4.1.2 while keeping the Kubernetes version unchanged.
+
+== Prerequisites
+
+* Contact the KubeSphere Enterprise support team to get the KubeSphere Enterprise v4.1.2 installation package and license.
+
+* Ensure that the current version of KubeSphere Enterprise is v4.1.x.
+
+* Ensure that the current Kubernetes version is v1.21.x, v1.22.x, v1.23.x, v1.24.x, v1.25.x, v1.26.x, v1.27.x or v1.28.x.
+
+* {empty}
+include::../../../_custom-en/installationAndUpgrade/installationAndUpgrade-prer-backUpData.adoc[]
+
+== Preparation
+
+=== 1. Unpack the Installation Package
+
+. Transfer the {ks_product-en} installation package to the cluster node to be upgraded and log in to that node.
+
+. Run the following command to unpack the v4.1.2 installation package (replace <package name> with the actual package name).
++
+--
+[,bash]
+----
+tar -zxvf <package name>
+----
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|Ensure that the directory has sufficient available space, preferably greater than 100 GB.
+|===
+--
+
+. Enter the directory generated after unpacking the installation package.
++
+--
+[,bash]
+----
+cd <directory>
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+To know the purpose of each file in the installation package, refer to link:../../02-install-kubesphere/02-install-kubernetes-and-kubesphere/#_view_the_installation_package[View the Installation Package].
+|===
+--
+
+=== 2. Push Images
+
+. In the v4.1.2 directory, edit the **config-sample.yaml** file created during the installation and modify the **registry** section within it.
++
+--
+[,yaml]
+----
+    privateRegistry: "dockerhub.kubekey.local/kse" # Replace with the actual image registry address
+        auths:
+          "dockerhub.kubekey.local":  # Replace with the actual image registry address
+              username: admin           # Replace with the username of the image registry
+              password: Harbor12345     # Replace with the password of the image registry
+              skipTLSVerify: true
+              plainHTTP: true   # Set this parameter to true if the image registry uses http
+----
+--
+
+. Push the images to the image registry.
++
+[,bash]
+----
+./kk artifact images push -f config-sample.yaml -a kubekey-artifact.tar.gz
+----
+
+== Upgrade {ks_product-en}
+
+{ks_product-en} v4.1 and later versions use the helm chart method to upgrade ks-core.
+
+=== Upgrade Host Cluster
+
+. Check the current cluster's ks-core configuration.
++
+--
+[,bash]
+----
+helm get value -n kubesphere-system ks-core
+----
+--
+
+. Create an upgrade configuration file. If there are other parameters besides the image registry, image version, cloud, and upgrade in the previous step, please add them to the following configuration file.
++
+--
+[,bash]
+----
+cat <<EOF > kse-v4.1.2-custom-values.yaml
+----
+
+[,yaml]
+----
+# The following two parameters are used to specify the image registry addresses for ks-core and extensions, respectively. Please modify them according to the actual environment information.
+global:
+  imageRegistry: dockerhub.kubekey.local/kse
+extension:
+  imageRegistry: dockerhub.kubekey.local/kse
+# Enable high availability for ks-core components (ks-apiserver, ks-controller-manager, ks-console). Please configure according to the actual situation of the cluster.
+ha:
+  enabled: false
+# Enable high availability for redis. ks-apiserver high availability depends on redis. If this parameter is false, the redis in kubesphere-system defaults to a single replica. Please configure according to the actual situation of the cluster.
+redisHA:
+  enabled: false
+EOF
+----
+--
+
+. Run the following command to start the upgrade.
++
+--
+[,bash]
+----
+helm upgrade --install ks-core charts/ks-core -n kubesphere-system -f kse-v4.1.2-custom-values.yaml --wait --debug
+----
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+Replace `charts/ks-core` with the actual path of the `ks-core` chart in the current environment.
+|===
+--
+
+. Upgrade the extension repository.
++
+--
+[source,bash]
+----
+helm template -n kubesphere-system charts/kse-extensions-publish \
+     --set museum.enabled=true \
+     --set global.imageRegistry=dockerhub.kubekey.local/kse | kubectl apply -f -
+----
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+Replace `dockerhub.kubekey.local/kse` with the actual image registry address.
+|===
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+After the host and member clusters are upgraded, you can upgrade each extension in the web console.
+|===
+--
+
+. Follow the steps below to check if the host cluster has been successfully upgraded.
+
+.. Run the following command; the upgrade job should have completed successfully as shown below.
++
+[,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get job | grep upgrade
+ks-core-post-upgrade    1/1           16s        28m
+ks-core-pre-upgrade     1/1           58s        31m
+prepare-upgrade         1/1           26s        32m
+----
+
+.. Run the following command; the pods (ks-apiserver, ks-console, ks-controller-manager) should be in the running state as shown below.
++
+[,bash]
+----
+root@xxx:~# watch kubectl get pod -n kubesphere-system
+NAME                                     READY   STATUS      RESTARTS        AGE
+ks-apiserver-594bb884db-phrlv            1/1     Running     0               28m
+ks-console-7cd55dd9f9-f2jl9              1/1     Running     0               28m
+ks-controller-manager-785fc676dc-9d9j2   1/1     Running     0               28m
+----
+
+. Use the IP address of the original web console, administrator username, and password, and log in to the v4.1.2 {ks_product-en} web console using a web browser.
+
+. Follow the activation prompts and click **Activate** to import the KubeSphere Enterprise license.
+
+. Check if all functions and data of the host cluster are normal.
+
+
+=== Upgrade Member Cluster
+
+. Follow the steps in link:#_upgrade_host_cluster[Upgrade Host Cluster] to upgrade the member cluster.
+
+. Follow the steps below to check if the member cluster has been successfully upgraded.
+
+.. Run the following command; the upgrade job should have completed successfully as shown below.
++
+[,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get job | grep upgrade
+ks-core-post-upgrade    1/1           16s        28m
+ks-core-pre-upgrade     1/1           58s        31m
+prepare-upgrade         1/1           26s        32m
+----
+
+.. Run the following command; the `ks-agent` pod should be in the running state as shown below.
++
+[,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get pod
+NAME                          READY   STATUS      RESTARTS        AGE
+ks-agent-5dc5b57977-4x6mf     2/2     Running     0               59m
+----
+
+. If you added custom configurations (e.g., `--set a=b`) in the above upgrade command, you need to add the custom configurations for the member cluster in the web console.
++
+--
+Method: On the **Cluster Management** page, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the member cluster you want to edit, and then select **Edit Configuration** from the dropdown list. In the pop-up window, enter `a: b`.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|If you did not include custom configurations in the upgrade command, you do not need to add cluster configurations in the web console.
+|===
+--

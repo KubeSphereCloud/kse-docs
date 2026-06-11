@@ -1,0 +1,65 @@
+---
+title: 软件包准备
+weight: 3
+draft: true
+---
+
+升级前，需提前准备 QKE Plus 的目标版本 `v3.1.0` 的安装包或者 KSE 组件的目标版本 `v3.0.1` 安装包。各安装包均统一存放于内部link:ins.qingcloud.com[ FTP 服务器]。
+
+详细操作如下。
+
+== QKE Plus 软件包
+
+. 登录内部link:ins.qingcloud.com[ FTP 服务器]。
+
+. 执行如下命令行，进入 QKE Plus 安装包的存放路径。
++
+[source,shell]
+----
+cd /pitrix/migrate_appcenter2_recommend/
+----
++
+include::../../../../../_components/note.adoc[]
+
+QKE Plus 安装包的存放路径可参考link:../../../../product_installation/qke_install/overview/resources/[安装部署]文档中的说明。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 参考如下路径，获取目标版本 QKE Plus。
++
+* {product_name} v6.1 版本对应的 QKE Plus v3.1.0 的软件包路径如下。
++
+[source,shell]
+----
+/pitrix/migrate_appcenter2_recommend/6_1/app-o6lvbkhm_QKE/appv-hr1rhbqz
+----
++
+* {product_name} v6.0 版本对应的 QKE Plus v3.1.0 的软件包路径如下。
++
+[source,shell]
+----
+/pitrix/migrate_appcenter2_recommend/6_0/app-o6lvbkhm_QKE/appv-hr1rhbqz
+----
+
+
+== KSE 软件包
+
+. 登录内部link:ins.qingcloud.com[ FTP 服务器]。
+
+. 执行如下命令行，进入 KSE 安装包的存放路径。
++
+[source,shell]
+----
+cd /pitrix/installer/k8s/KubeSphere/
+----
++
+目录层级如下图所示。
++
+image::/images/ep_offline/qke_upgrade/qke_upgrade_1.png[qke_upgrade_1]
+
+. 参考如下路径，获取 v3.3.2 版本的 KSE 软件包。
++
+[source,shell]
+----
+/pitrix/installer/k8s/KubeSphere/v3.3.2/ks-all-v3.3.2-offline-linux-amd64.tar.gz
+----

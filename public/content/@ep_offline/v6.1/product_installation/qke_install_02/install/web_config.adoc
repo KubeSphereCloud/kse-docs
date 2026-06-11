@@ -1,0 +1,65 @@
+---
+title: "修改前端配置"
+weight: 40
+---
+
+1. 登录 Firstbox。
+2. 执行以下命令，备份 global fb 节点的前端配置文件。
++
+[source]
+----
+cp /pitrix/conf/variables/webs/webconsole/settings.py{,.$(date "+%Y%m%d")}
+----
++
+示例：
++
+[source]
+----
+cp /pitrix/conf/variables/webs/webconsole/settings.py{,.$(date "+20221014")}
+----
+3. 执行以下命令，修改 global fb 节点的前端配置文件。
++
+[source]
+----
+cd /pitrix/conf/variables/webs/webconsole/
+vi settings.py
+----
++
+在 PITRIX_SETTINGS 里面添加 qke_config。
++
+[source]
+----
+PITRIX_SETTINGS = {
+    'qke_config': {
+        'endpoint': '{{ zone_id }}-webservice',
+        'port': '9102',
+        'verify_ssl': False,
+        'protocol': 'http',
+        'prefix': 'api/v1/qke'
+    },
+}
+----
++
+示例如下：
++
+image::/images/ep_offline/qke_install/install_web_config_01.png[]
+
+4. 执行以下命令，备份 webconsole 相关文件。
++
+[source]
+----
+/pitrix/upgrade/exec_nodes.sh webservice 'cp -r /pitrix/lib/pitrix-webconsole /pitrix/lib/pitrix-webconsole.$(date +%y%m%d);cp  /pitrix/conf/web_console_settings.py /pitrix/conf/web_console_settings.py.$(date +%y%m%d)'
+----
+5. 执行以下命令，刷新global zone的前端包。
++
+[source]
+----
+/pitrix/build/build_pkgs.py -p pitrix-ks-webservice-webconsole
+/pitrix/upgrade/update.sh webservice pitrix-ks-webservice-webconsole
+----
++
+回显如下信息，表示操作成功。
++
+image::/images/ep_offline/qke_install/install_web_config_02.png[]
++
+image::/images/ep_offline/qke_install/install_web_config_03.png[]

@@ -1,0 +1,61 @@
+---
+title: "系统基础配置检查"
+weight: 1
+---
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统各节点服务器正确配置。
+
+|预置条件	
+|QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+
+|测试过程
+a|. 登录 NeonSAN 各节点服务器。
+. 查看各服务运行状态。
++
+[source,shell]
+----
+supervisorctl status
+----
+. 查看各服务器的 arp 设置。 
++
+[source,shell]
+----
+sysctl -a \| grep arp_ignore
+----
+. 使用 tmux 的方式，在 NeonSAN 所有节点上，同时输入如下命令行，查看各节点服务器的时间设置，确认各服务器的时间差在毫秒级别。 +
++
+[source,shell]
+----
+date +%s
+----
+
+. 检查 RDMA 网络。 
++
+[source,shell]
+----
+ibv_devinfo \| grep state
+----
+|预期结果	
+a|
+. NeonSAN 各节点均能正常登录。
+. 各服务状态均为 ``RUNNING`` 状态。
+. 各节点 arp 相关配置均保持相同，且如下两个配置为 ``1``。
++
+[source,shell]
+----
+net.ipv4.conf.default.arp_ignore = 1
+net.ipv4.conf.all.arp_ignore = 1
+----
+. 各节点时间差在毫秒级别。
+. 所有网口状态均为 ``PORT_ACTIVE``。
+
+|验证结果	
+|
+
+|备注	
+|
+|===
+

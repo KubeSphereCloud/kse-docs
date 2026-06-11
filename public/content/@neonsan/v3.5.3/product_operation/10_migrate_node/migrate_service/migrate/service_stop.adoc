@@ -1,0 +1,94 @@
+---
+title: "停止原管理节点相关服务"
+weight: 1
+---
+
+. 登录至原集群某一管理节点（非 FirstBox 节点），停止以下服务。
+.. 停止 mysql_neonsan 服务。
++
+[,shell]
+----
+supervisorctl stop mysql_neonsan
+----
+.. 停止 mysql_qingstor 服务。
++
+[,shell]
+----
+supervisorctl stop mysql_qingstor
+----
+
+.. 检查 mysqld 进程是否退出，若未退出，需手动 ``kill``。
++
+[,shell]
+----
+ps -axf |grep mysqld
+----
+
+.. 停止 ZooKeeper 服务。
++
+[,shell]
+----
+supervisorctl stop zookeeper
+----
+
+.. 停止 etcd。
++
+[,shell]
+----
+systemctl stop etcd
+----
+
+.. 若当前节点上有 neoncenter 和 neonstore 服务，则需执行如下命令，停止相应服务。
++
+[,shell]
+----
+supervisorctl stop neonstore
+supervisorctl stop neoncenter
+----
+
+. 将当前原集群管理节点，从 etcd 集群剔除。
+
+.. 查看当前节点的在 etcd 集群内的 ID，IP 地址为原集群管理节点 IP，需根据实际情况进行修改。
++
+[,shell]
+----
+/opt/etcd/etcdctl --endpoints "http://172.31.30.172:2379,http://172.31.30.173:2379,http://172.31.30.171:2379" cluster-health
+----
++
+回显示例如下，返回结果中 ``member`` 后的字符串即为相应的节点 ID，如 IP 为 172.31.30.171 的节点，其在 etcd 集群中的 ID 为 ``ffda748202f1d777``。  
++
+[,shell]
+----
+member 187874282506b127 is healthy: got healthy result from http://172.31.30.172:2379
+member a7b62a29d1f66ec5 is healthy: got healthy result from http://172.31.30.173:2379
+member ffda748202f1d777 is healthy: got healthy result from http://172.31.30.171:2379
+cluster is healthy
+----
+
+.. 将当前节点（如 172.31.30.171）从 etcd 集群中剔除。
++
+[,shell]
+----
+/opt/etcd/etcdctl --endpoints "http://172.31.30.172:2379,http://172.31.30.173:2379,http://172.31.30.171:2379" member remove ffda748202f1d777
+----
++
+回显示例：
++
+[,shell]
+----
+Removed member ffda748202f1d777 from cluster
+----
+
+. 检查 NeonSAN 集群状态。
++
+返回结果中，由于有一数据库节点下线，理应导致集群中有一 Center 节点也为下线状态。
++
+[,shell]
+----
+neonsan list_center
+neonsan list_store
+neonsan list_ssd
+neonsan list_job
+neonsan list_volume --detail |grep -v OK
+----
+

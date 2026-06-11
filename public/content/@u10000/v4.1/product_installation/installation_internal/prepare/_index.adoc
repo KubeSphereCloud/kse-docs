@@ -1,0 +1,38 @@
+---
+title: "云服务器准备"
+description: "公有云平台搭建 QingStor U10000"
+weight: 1
+---
+
+在安装部署 {product_name} 之前，各节点服务器需达到安装前的标准状态，才可使用 {product_name} 自动化部署脚本来部署环境。在青云QingCloud 云平台上搭建私有的 {product_name} 环境，需自行创建云服务器，使其达到标准后，再进行 {product_name} 的部署。
+
+== 操作流程
+. link:../prepare/public_ip/[申请公网 IP]。
+. link:../prepare/vpc[创建 VPC 网络]。
+. link:../prepare/add_local_ssh[添加本地 SSH 密钥至云服务器]。
+. link:../prepare/vm[创建云服务器]。
+. link:../prepare/port[创建端口转发]。
+. link:../prepare/security[修改安全组]。
+. link:../prepare/connect[建立云服务器间的互信]。
+
+== 环境信息表
+
+云服务器创建完成后，为方便操作与说明，需将服务器信息填写至如下表格中：
+
+[cols="2,5", options="header"]
+|===
+| 参数 |说明
+
+| 公网 IP	| 139.198.3.63
+| 节点 1 IP	|192.168.100.2
+| 节点 2 IP	| 192.168.100.3
+| 节点 3 IP	|192.168.100.4
+| SSH 密钥	|local_ssh
+| root 账户密码	|zhu88jie
+
+
+|===
+
+
+
+

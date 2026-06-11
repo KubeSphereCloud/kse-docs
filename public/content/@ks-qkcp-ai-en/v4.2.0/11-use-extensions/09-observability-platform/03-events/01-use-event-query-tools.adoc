@@ -1,0 +1,69 @@
+---
+title: "Query Resource Events"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Events, Query Resource Events"
+description: "Introduces how to use the resource event query tool."
+weight: 01
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **Logging > Event Query**
+
+This section describes how to query resource events.
+
+Resource events: Events for various resources such as application workloads, Jobs, pods, Services, Ingresses, etc.
+
+KubeSphere supports querying resource events within a user's permission scope, whether as a regular user or a cluster administrator.
+
+== Query Events as a Regular User
+
+=== Prerequisites
+
+The **WizTelemetry Events** extension must be installed and enabled on the KubeSphere platform.
+
+=== Query Resource Events
+
+. Log in to the KubeSphere web console.
+
+. Click **Component Dock > WizTelemetry Observability Platform**.
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+
+. On the Event Query page, set search criteria to query events.
++
+--
+* If there are multiple clusters, click the **Cluster** dropdown list to query events in a specific cluster.
+
+* Click the search box, set search criteria, and then press **Enter** to view events that meet specific conditions. You can set multiple search criteria simultaneously.
+
+* On the query results page, you can view the time distribution chart of events. Click on a bar in the chart to switch to the event list for that time period. Click image:/images/ks-qkcp/zh/icons/start-dark.svg[start-dark,18,18]/image:/images/ks-qkcp/zh/icons/stop-dark-white.svg[stop-dark-white,18,18] to start/stop real-time data refresh. Click the time next to **Refresh Frequency** to select the data refresh rate.
+
+* In the upper right corner of the query results list, click image:/images/ks-qkcp/zh/icons/cogwheel.svg[cogwheel,18,18] to customize the information displayed in the list.
+
+* Click an event entry in the query results to view its detailed information.
+--
+
+== Query Events as a Cluster Administrator
+
+=== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **WizTelemetry Events** extension must be installed and enabled on the KubeSphere platform.
+
+=== Query Resource Events
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. On the Event Query page, set search criteria to query events.

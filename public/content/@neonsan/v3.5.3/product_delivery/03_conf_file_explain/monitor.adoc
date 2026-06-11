@@ -1,0 +1,109 @@
+---
+title: "monitor.conf"
+weight: 4
+---
+
+
+该配置文件用于保存 monitor 相关配置信息，其参数说明如下所示。
+
+[options="header",cols="2,2,3,1"]
+|===
+|参数名|类型 |说明 |是否必须 
+4+h|[zookeeper]：zookeeper 集群信息
+|ip
+|IP 列表
+|ZooKeeper 集群节点 IP，以逗号分开，建议配置 3~5 个节点。
+|是
+
+|cluster_name	
+|字符串	
+|ZooKeeper 集群名	
+|是
+
+4+h|[monitor]：监控相关参数
+|timeInterval	
+|数字	
+|更新监控信息的时间间隔	
+|是
+
+|monitor_store	
+|布尔	
+a|是否监控 store 信息 
+
+* true：是
+* false：否	
+|是
+
+|monitor_status	
+|布尔	
+a|是否监控状态信息
+
+* true：是
+* false：否	
+|是
+
+|monitor_alert	
+|布尔	
+a|是否用于保存告警记录
+* true：是
+* false：否	
+|是
+
+4+h|[store]：本节点信息
+|local_storeip
+|字符串
+|本节点 IP	
+|是
+
+|type	
+|字符串	
+|节点间数据传输模式：RDMA 或 TCP	
+|是
+
+4+h|[mysql_cluster]：数据库集群信息
+|type	
+|字符串	
+|数据库集群
+|是
+
+|ip	
+|字符串	
+|数据库集群 ip	
+|是
+
+4+h|[mysql]：数据库信息
+|user	|字符串	|数据库用户名	|是
+|pass	|字符串	|数据库密码	|是
+|ip	|IP 格式	|浮动 IP	|是
+|db_name	|字符串	|数据库名	|是
+|===
+
+**注意事项**：
+
+* 与 store.conf 里的 zookeeper 信息保持一致。
+* 整个集群中，只需一个节点上将 monitor_status 与 monitor_alert 设置为 true。
++
+[source,conf]
+----
+monitor_store=true
+monitor_status=true
+monitor_alert=true
+----
++
+monitor_stutus 字段配置为 ture 的节点，必须对 mysql_cluster 数据库集群信息相关参数进行配置。
+* monitor_store 需在每个节点都配置为 true。
+* xenondb 集群信息查询如下：
++
+[source,shell]
+----
+cat /opt/xenondb/conf/xenon.conf
+----
+* galera 集群信息查询如下：
++
+[source,conf]
+----
+cat /opt/galera/conf/neonsan_galera.conf
+----
+
+
+

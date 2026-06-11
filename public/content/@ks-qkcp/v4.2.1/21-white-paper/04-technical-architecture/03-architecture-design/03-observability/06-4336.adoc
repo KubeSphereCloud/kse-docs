@@ -1,0 +1,18 @@
+---
+title: "通知"
+weight: 06
+---
+
+== 核心功能
+1. 基于多租户的通知系统。
+2. 支持多种通知渠道：邮件、微信、飞书、slack、webhook。
+3. 支持通知静默。
+4. 支持通知历史。
+
+== 架构设计
+
+Notification Manager：接收告警并发送通知。
+
+Alertmanager：接收指标告警和事件告警并发送给 Notification Manager。
+
+image::/images/ks-qkcp/zh/technical-white-papers/4336.png[]

@@ -1,0 +1,103 @@
+---
+title: "Configure WeCom Notification Message Template"
+description: "Learn how to configure WeCom notification messages."
+weight: 01
+---
+
+. Log in to the cluster node and create a markdown template.
++
+--
+[,bash]
+----
+vi <template-name>
+----
+
+Content as follows:
+
+[,yaml]
+----
+apiVersion: v1
+data:
+  template: |
+    {{- define "nm.default.markdown.test" }}
+    {{- range .Alerts }}
+    {{- $rawStatus := .Status }}
+    {{- if eq $rawStatus "firing" }}
+    ### <font color="yellow">{{ template "nm.default.message" . }}</font>
+    {{- else }}
+    ### <font color="green">{{ template "nm.default.message" . }}</font>
+    {{- end }}
+    {{- range .Labels.SortedPairs }}
+    {{- if eq .Name "severity" }}
+    {{- $color := "" }}
+    {{- if eq .Value "critical" }}
+    {{- $color = "red" }}
+    {{- else if eq .Value "error" }}
+    {{- $color = "orange" }}
+    {{- else if eq .Value "warning" }}
+    {{- $color = "yellow" }}
+    {{- else if eq .Value "info" }}
+    {{- $color = "blue" }}
+    {{- end }}
+    > <font color="{{$color}}">**{{ .Name | translate }}:  {{ .Value }}**</font>
+    {{- else }}
+    > **{{ .Name | translate }}**:  {{ .Value }}
+    {{- end }}
+    {{- end }}
+    {{ range .Annotations.SortedPairs.Filter "runbook_url" "message" "summary" "summary_cn" }}
+    > **{{ .Name | translate }}**:  {{ .Value }}
+    {{- end }}
+    {{ end }}
+    {{- end }}
+
+kind: ConfigMap
+metadata:
+  name: notification-manager-template-test
+  namespace: kubesphere-monitoring-system
+----
+--
+
+. Run the following command to create a ConfigMap named `notification-manager-template-test`.
++
+[,bash]
+----
+kubectl apply -f <template-name>
+----
+
+. Configure WeCom in the link:../../01-notification-channels/04-set-wecom-notification/[Notification Channels] or link:../../05-users-notification/04-set-wecom-notification/[User Notification Settings] to receive notification messages in WeCom sessions or WeCom groups.
+
+. View the WeChat receiver.
++
+--
+[,bash]
+----
+kubectl -n kubesphere-monitoring-system get receiver
+----
+
+* Receivers starting with global, such as `global-wechat-receiver`, are globally configured WeChat receivers.
+* Receivers starting with the username, such as `admin-wechat-receiver`, are tenant-level configured WeChat receivers.
+--
+
+. Edit the corresponding WeChat receiver to use the markdown template in the notification message.
++
+--
+[,bash]
+----
+kubectl -n kubesphere-monitoring-system edit receiver <wechat-receiver-name>
+----
+
+
+[,yaml]
+----
+spec:
+  wechat:
+    enabled: true
+    template: nm.default.markdown.test
+    tmplText:
+      name: notification-manager-template-test
+      namespace: kubesphere-monitoring-system
+    tmplType: markdown
+----
+
+WeCom notification messages will display using this markdown template.
+--

@@ -1,0 +1,66 @@
+---
+title: "计算大屏数据导入"
+weight: 3
+---
+
+== 前提条件
+
+* 已完成link:../gui_conf[配置大屏]相关步骤。
+* 已完成link:../data_create/sys_create[单机系统创建]。
+
+== 操作步骤
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，点击**运维工具** > **计算大屏**，进入**计算大屏**列表页面。点击**配置大屏**按钮，进入配置大屏登录页面。
++
+
+include::../../../../../_components/note.adoc[]
+账号和密码为用户在link:../gui_conf[配置大屏]时设定，需根据实际情况进行修改。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/gui_data_import_1.png[]
+
+. 若是首次登录配置大屏页面，需用户手动录入 License，即将 License 文件拖拽之空白处即可。
++
+
+include::../../../../../_components/note.adoc[]
+License 的获取请联系云易捷商务人员。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/gui_data_import_2.png[]
+
+. 录入 License 后，可进入**大屏应用**界面。
++
+image::/images/express/console/gui_data_import_3.png[]
+
+. 在大屏应用界面，点击右上角的**工作空间**进入相应页面。
++
+image::/images/express/console/gui_data_import_4.png[]
+
+. 点击顶部导航栏右侧的**场景导入**image:/images/express/console/data_import.png[]，弹出**场景文件导入**页面，将所有场景均录入大屏软件系统。
++
+
+include::../../../../../_components/note.adoc[]
+场景文件下载，请联系云易捷商务人员。
+
+include::../../../../../_components/table_footer.adoc[]
+
++
+image::/images/express/console/gui_data_import_5.png[]
+
+. 场景文件导入成功后，返回工作空间页面，点击**我的数据** > **配置管理**，查看确认当前环境的 express-conf 和 boss-conf 文件配置是否正确。若不正确，可在此处进行修改。
++
+image::/images/express/console/gui_data_import_6.png[]
+
+. 点击**我的数据** > **数据连接**，逐一查看数据连接中配置文件的 zoneid 和 api 是否正确。
++
+image::/images/express/console/gui_data_import_7.png[]
++
+image::/images/express/console/gui_data_import_8.png[]
++
+image::/images/express/console/gui_data_import_9.png[]
++
+image::/images/express/console/gui_data_import_10.png[]

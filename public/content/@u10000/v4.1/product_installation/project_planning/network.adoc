@@ -1,0 +1,160 @@
+---
+title: 网络规划
+weight: 2
+---
+
+
+{product_name} 网络支持 Bond 和 Spine-Leaf (ECMP) 两种方案。
+在特大规模的环境中，比如网关节点在 8 台以上，这个时候 {product_name} 推荐使用 Spine-Leaf，该方案比 DNS 负载轮询能更好地均衡流量，但同时，该方案在部署和运维过程中会更加复杂。
+
+
+== 网络分类
+
+{product_name} 的网络分为存储网络与业务网络。
+
+
+
+=== 存储网络
+
+存储网络用于 {product_name} 系统中各节点之间的通信、请求转发、数据同步以及节点宕机或硬盘故障等异常引起的数据恢复。
+
+=== 业务网络
+
+业务网络主要用于业务系统访问 {product_name}。包括但不限于：
+
+* 用于公网用户访问。如支持公网 Console 访问，支持公网 API/SDK 访问，支持公网跨区复制等。如有需求，可以直接给 {product_name} 配置公网 IP，也可以使用四层转发，取决于用户的网络规划要求。
+
+* 可用于 Console/Portal 服务来访问 {product_name}。
+* 在与 IaaS 对接的环境中，还用于 IaaS 访问 {product_name}。
+
+{product_name} 支持业务网络分离部署。用户可根据需求，规划多组业务网络，分别用于不同的用途。如提供外网访问与提供 IaaS 平台的业务访问，可用不同的业务网络实现。
+
+
+
+
+== 网卡配置
+
+根据前文说明，{product_name} 的网络根据用途分为存储网络与业务网络。若用户无需将存储网络与业务网络进行物理分离，则各节点服务器仅需配置一张网卡就能满足需求。
+
+若用户部署的环境需对外提供互联网访问，则 {product_name} 从网络安全的角度出发，推荐用户将存储网络与业务网络进行物理分离，即网关节点使用两张网卡，存储节点配置一张网卡。
+
+如果是 POC 项目测试，且用户不要求性能，则节点之间仅需确保网络互通即可。其他场景，除集群内各节点之间网络互通外，还需按照如下要求配置网络：
+
+* 网口两两做 Bond：mode 4。网关节点或全能节点若有两块网卡，则两张网卡分别取一个口做 Bond，如果只有一张网卡，则同一网卡的两个口做 Bond。
+* 交换机需支持 bond mode 4。
+* 若需要对接 IaaS，则 {product_name} 的网络要和 IaaS 的物理网络与基础网络互通。
+* 如需对外提供互联网访问，则网关节点需要两块网卡，一块承接存储网络请求：bond0，一块提供互联网访问：bond1。
+
+
+
+
+== IP 规划
+
+根据前文介绍，{product_name} 的网络分：业务网络与存储网络。业务网络根据需求，又可分为多组。因此所需规划的 IP 数分别说明如下：
+
+=== 存储网络
+
+{product_name} 的各节点均需配置物理 IP，用于存储网络。所有 IP 均在同一网段。
+
+* 所需 IP 计算公式如下：
++
+[source,shell]
+----
+节点个数
+----
+
+* 对应配置文件中的内容如下，所有 IP 均在同一网段。
++
+[source,shell]
+----
+# cat /root/qs-installer/etc/ip.ini
+......
+[role]
+192.168.100.2 = oss nas cluster1 global
+192.168.100.3 = oss nas cluster1 global
+192.168.100.4 = oss nas cluster1 global
+......
+----
+
+=== 业务网络
+
+业务网络通过 VIP 对外提供服务。每个网关节点或全能节点均需配置 VIP。如有需求，业务网络也可根据用途配置多组。
+
+除此之外，如需对外提供文件存储的能力，还需给每个网关节点配置用于访问文件存储服务的 VIP。
+
+* 所需 IP 计算公式如下
++
+[source,shell]
+----
+网关节点个数或全能节点个数 * （业务网络组数 + 1） 
+----
+
+
+* 对应配置文件中的内容如下：
++
+`keepalive_int` 与 `keepalive_ext` 为多组业务网络，`nas_vip` 为文件存储 VIP。
++
+[source,shell]
+----
+# cat /root/qs-installer/etc/ip.ini
+......
+[keepalive_int]
+192.168.100.2: vip=192.168.100.212 inf=eth0
+192.168.100.3: vip=192.168.100.213 inf=eth0
+192.168.100.4: vip=192.168.100.214 inf=eth0
+
+[keepalive_ext]
+192.168.100.2: vip=10.10.10.212 inf=eth0 mask=27
+192.168.100.3: vip=10.10.10.213 inf=eth0 mask=27
+192.168.100.4: vip=10.10.10.214 inf=eth0 mask=27
+
+[nas_vip]
+192.168.100.222: inf=eth0
+192.168.100.223: inf=eth0
+192.168.100.224: inf=eth0
+......
+
+
+----
+
++
+或者如下内容：
+
++
+[source,shell]
+----
+# cat /root/qs-installer/etc/ip.ini
+......
+[slb_int]
+192.168.100.215
+192.168.100.216
+
+[slb_ext]
+192.168.100.115
+192.168.100.116
+
+[nas_vip]
+192.168.100.222: inf=eth0
+192.168.100.223: inf=eth0
+192.168.100.224: inf=eth0
+......
+----
+
+
+
+== 部署要求
+
+* 建议在当前环境中，第一个部署的 Zone 内部署 Global GateWay 服务。
+* 多 Zone 环境中，其余 Zone 和 Global 内网的如下端口之间需互通：80、443、53、123、7171、7777、9443。
+* 与 IaaS 对接的环境中，要求 IaaS 支持以下网络和 {product_name} 的业务网络 `keepalive_int` 互通。
+
+** IaaS 的 DNS 节点与 {product_name} 各个 Zone 需保持 `53` 端口的互通。
+** IaaS 基础网络与 {product_name} 相应 Zone 需保持 `80` 与 `443` 端口的互通。
+** IaaS 的 WebService 节点、Proxy 节点以及 Fg 节点均需可访问 {product_name} 各个 Zone 的 `80` 与 `443` 端口。
+** IaaS 的 Fg 服务所在端口、IaaS 的 API 服务所在端口均需支持 {product_name} 配置文件中 `keepalive_int` 网络的访问。
+
+// ** IaaS 的 DNS 节点与 {product_name} 各个 Zone 的link:../../installation/config_modify/#_ip_ini[ keepalive_int] 网络需保持 `53` 端口的互通。
+// ** IaaS 基础网络与 {product_name} 相应 Zone 的link:../../installation/config_modify/#_ip_ini[ keepalive_int] 网络需保持 `80` 与 `443` 端口的互通。
+// ** IaaS 的 WebService 节点、Proxy 节点以及 Fg 节点均需可访问 {product_name} 各个 Zone 的link:../../installation/config_modify/#_ip_ini[ keepalive_int] 网络的 `80` 与 `443` 端口。
+// ** IaaS 的 Fg 服务所在端口、IaaS 的 API 服务所在端口均需支持 {product_name} link:../../installation/config_modify/#_ip_ini[配置文件中 keepalive_int] 网络的访问。
+

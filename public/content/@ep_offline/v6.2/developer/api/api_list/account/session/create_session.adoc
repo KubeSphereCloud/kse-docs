@@ -1,0 +1,143 @@
+---
+title: 创建新的session（CreateSession）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| false
+| 控制台
+
+| email
+| String
+| false
+| 邮箱
+
+| ignore_pwd
+| String
+| false
+| 忽略密码
+
+| login_device
+| String
+| false
+| 登录设备
+
+| login_ip
+| String
+| false
+| 登录ip
+
+| login_platform
+| String
+| false
+| 登录平台
+
+| login_server_id
+| String
+| false
+| 登录服务id
+
+| notify_openid
+| String
+| false
+| 通知的openid
+
+| passwd
+| String
+| false
+| 密码
+
+| phone
+| String
+| false
+| 电话号
+
+| session_type
+| String
+| false
+| 会话类型
+
+| token
+| String
+| false
+| 身份令牌
+
+| user
+| String
+| false
+| 用户id
+
+| user_id
+| String
+| false
+| 用户id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| sk
+| String
+| false
+| 登录成功创建的会话key
+
+| user
+| Object
+| false
+| 登录成功的用户信息
+
+| user.lang
+| String
+| false
+| 云平台用户语言
+
+| user.user_id
+| String
+| false
+| 云平台用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateSession",
+  "login_device": "PC",
+  "login_ip": "192.168.12.9",
+  "login_platform": "Qingcloud Web Console",
+  "passwd": "Zhu88jie@",
+  "session_type": "web",
+  "user": "usr-dQFUel6D"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateSessionResponse",
+  "ret_code": 0,
+  "sk": "cLrF9Bf5l0CqKw5ILfvJKply5pgDUoo0",
+  "user": {
+    "lang": "zh-cn",
+    "user_id": "usr-dQFUel6D"
+  }
+}
+----

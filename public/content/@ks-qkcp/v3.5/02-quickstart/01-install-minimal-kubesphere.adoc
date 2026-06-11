@@ -1,0 +1,167 @@
+---
+title: "最小化方式安装{ks_product_left}"
+keywords: "Kubernetes, {ks_product}, 快速入门, 用户, 权限"
+description: "介绍如何以最小化方式快速安装{ks_product_left}。"
+weight: 01
+---
+
+
+ifeval::["{file_output_type}" == "html"]
+
+本节介绍如何以最小化方式安装{ks_product_left}。本节仅安装{ks_product_both}的基本组件用于测试，有关{ks_product_both}安装的更多信息，请参阅link:../../03-installation-and-upgrade/[安装和升级]。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+本节介绍如何以最小化方式安装{ks_product_left}。本节仅安装{ks_product_both}的基本组件用于测试，有关{ks_product_both}安装的更多信息，请参阅《KubeSphere 企业版安装指南》。
+
+endif::[]
+
+取决于您是否有可用的 Kubernetes 集群，您可以选择以下安装方式之一:
+
+* 如果您有可用的 Kubernetes 集群，您可以在原有 Kubernetes 集群的基础上link:#32df4c8878ff4daaa2cc7eebbd5f9732[仅安装{ks_product_left}]，从而使用{ks_product_both}继续管理原有 Kubernetes 集群中的资源。
+
+* 如果您没有可用的 Kubernetes 集群，您可以使用本节介绍的方法在单台 Linux 主机上link:#7b9ed7a0f6d4427d9445ff079ca53e95[安装 Kubernetes 和{ks_product_left}]。
+
+== 仅安装{ks_product_left}link:[id=32df4c8878ff4daaa2cc7eebbd5f9732]
+
+
+=== 前提条件link:[id=fdd11f511bc64ad3bfb1de721611223f]
+
+
+* 您需要具有可用的 Kubernetes 集群，Kubernetes 版本必须为 v1.21.x、v1.22.x、v1.23.x, v1.24.x, v1.25.x 和 v1.26.x。
+
+* Kubernetes 集群中必须具有至少 1 个可用 CPU 核心和 2 GB 可用内存。
+
+* Kubernetes 集群已设置默认存储类。有关更多信息，请参阅 link:https://kubernetes.io/zh/docs/tasks/administer-cluster/change-default-storage-class/[Kubernetes 官方文档]。
+
+
+=== 安装步骤link:[id=8a1f91bfef4f4a33b87b759e3f69a6e6]
+
+. 登录 Kubernetes 集群的任意节点，执行以下命令开始安装{ks_product_left}（取决于您的硬件和网络环境，安装可能需要 10 到 30 分钟时间）：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.5.0/kubesphere-installer.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.5.0/cluster-configuration.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 安装过程中，执行以下命令查看安装日志：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='{.items[0].metadata.name}') -f
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+如果显示如下信息，则表明安装成功：
+
+include::../../_custom/installationAndUpgrade/installationAndUpgrade-desc-installationSuccessOutput.adoc[]
+--
++
+include::../../_custom/installationAndUpgrade/installationAndUpgrade-obtainLoginInfo.adoc[]
+
+== 安装 Kubernetes 和{ks_product_left}link:[id=7b9ed7a0f6d4427d9445ff079ca53e95]
+
+
+=== 前提条件link:[id=b7622893607d43fc8c31001adcde9e5f]
+
+您需要准备一台 Linux 主机，并确保主机软硬件满足以下条件：
+
+[%header,cols="3a,7a"]
+|===
+|类别 |配置要求
+
+|硬件
+|最低配置：2 个 CPU 核心，4 GB 内存，40 GB 磁盘空间。
+
+|操作系统
+|Ubuntu 16.04、Ubuntu 18.04、Debian 9、Debian 10、CentOS 7、CentOS Stream、RHEL 7、RHEL 8、SLES 15 或 openSUSE Leap 15。
+
+|网络
+|
+* 请确保 /etc/resolv.conf 中的 DNS 地址可用。
+* 建议禁用防火墙以避免组件通信受阻。
+
+|依赖项
+|socat、conntrack、ebtables 和 ipset
+
+|其他
+|节点上可以使用 sudo、curl 和 openssl 命令。
+|===
+
+
+=== 安装步骤link:[id=f72e2ba26e3c4c14ad5573e1cda5aa33]
+
+. 如果您访问 GitHub/Googleapis 受限，请登录 Linux 主机，执行以下命令设置下载区域：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+export KKZONE=cn
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+--
+
+. 执行以下命令下载安装工具 KubeKey：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+curl -sfL https://get-kk.kubesphere.io | sh -
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+KubeKey 是高效、易用、开源 Kubernetes 和{ks_product_both}安装工具。有关 KubeKey 的更多信息，请访问 link:https://github.com/kubesphere/kubekey[KubeKey GitHub 仓库]。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 执行以下命令为 KubeKey 二进制文件 **kk** 添加执行权限：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+chmod +x kk
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令开始安装 Kubernetes 和{ks_product_left}（以下以 Kubernetes 1.25.4 和{ks_product_left} v3.5.0 为例）：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ ./kk create cluster --with-kubernetes v1.25.4 --with-kubesphere v3.5.0
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+如果显示如下信息，则表明安装成功：
+
+include::../../_custom/installationAndUpgrade/installationAndUpgrade-desc-installationSuccessOutput.adoc[]
+--
++
+
+include::../../_custom/installationAndUpgrade/installationAndUpgrade-obtainLoginInfo.adoc[]
+

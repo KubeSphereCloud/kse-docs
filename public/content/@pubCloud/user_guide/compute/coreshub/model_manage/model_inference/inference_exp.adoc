@@ -1,0 +1,39 @@
+---
+title: "在线推理服务扩容/缩容"
+weight: 10
+---
+
+== 前提条件
+
+* 已经获取 {console_name}账户和密码。
+* 已link:../inference_create[创建在线推理服务]，且状态为``运行中``或``已关闭``。
+
+== 扩容
+
+. 登录 {console_name}。
+. 在顶部导航栏，点击**产品与服务** > **{coreshub_name_cn}** > **{coreshub_name_cn}**，进入其**总览**页面。
+. 在左侧导航栏，选择**推理服务** > **在线推理服务**，进入在线推理服务列表页面。
+. 点击指定推理服务操作列中的**服务详情**，进入其详细信息页面。
+. 在推理服务详细信息页面，点击右上角更多操作，并选择**扩容**。
++
+image::/images/cloud_service/compute/coreshub/model_inference_exp_1.png[]
+
+. 在弹出的**扩容**窗口中，设置**扩容实例数量**，点击**确定**，并等待服务更新完成即可。
++
+include::../../../../../../_components/attention.adoc[]
+只能扩容与原在线推理服务中，同种规格的资源。
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/cloud_service/compute/coreshub/model_inference_exp_2.png[]
+
+
+== 缩容
+
+**仅包含多个实例**的推理服务支持缩容操作。
+
+. 进入指定推理服务的详情页面，点击右上角更多操作，并选择**缩容**。
+. 在弹出的**缩容**窗口中，设置**缩容实例数量**，点击**确定**，并等待服务更新完成即可。缩容后，当前推理服务所用的实例费用会同步下调。
++
+include::../../../../../../_components/attention.adoc[]
+在线推理服务中至少包含一个实例。
+include::../../../../../../_components/table_footer.adoc[]

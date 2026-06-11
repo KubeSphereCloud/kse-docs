@@ -1,0 +1,69 @@
+---
+title: "View EIPs"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, EIPs, view"
+description: "Describes how to view EIPs in the {ks_product} web console."
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 3a68a14c006d458882d088943c371a2a
+:ks_xref_id: 7186876d9ca94bdd8d6b4c24a233c2c7
+:ks_comp: ../../../../components/
+:ks_title: View EIPs
+:ks_description: Describes how to view EIPs in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, EIPs, view
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view elastic IP addresses (EIPs) in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=44a176bd491e44f5a0aae0235875559a]
+
+include::../../../../_custom-en/networks/eip-steps.adoc[]
+
++
+
+--
+You can view all EIPs in the project. The following table describes the parameters.
+
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the EIP.
+
+include::../../../../_custom-en/networks/naming-convention.adoc[]
+
+|ID
+|The universally unique identifier (UUID) of the EIP in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the EIP.
+
+|IP Address
+|The EIP.
+
+|View EIPs
+|The address type of the EIP.   By default, {ks_product} uses IPv4.
+
+|Associated Resources
+|The resources that are associated with the EIP.  You can associate EIPs with virtual private clouds (VPCs) or VMs.
+
+|Created by
+|The username that is used to create the EIP.
+
+|Created at
+|The time when the EIP was created.
+|===
+--
+
+. (Optional) Click the search box above the EIP list and set query conditions to search for EIPs by name or ID.  For example, use **Name:ab** to search for EIPs whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

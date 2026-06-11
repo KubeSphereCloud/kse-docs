@@ -1,0 +1,25 @@
+---
+title: '查看客户端'
+weight: 6
+draft: false
+---
+
+. 登录 link:../../../../login[Portal 管理界面]。
+
+. 选择左侧导航栏**存储服务** > **块存储** > **卷管理**，进入卷管理页面。
+
+. 点击待查看客户端的卷右侧的更多操作，在弹出的选项列表中选择**查看客户端**。
++
+image::/images/neonsan/portal_vol_more_opera.png[]
+ 
+. 在弹出的**已链接客户端**窗口中，可查看当前卷上所连接的左右客户端。
++
+
+include::../../../../../../../_components/note.adoc[]
+由于 ISCSI 连接该卷是通过 Target 服务器连接的，故显示客户端信息为 Target 服务器信息
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_vol_client_1.png[,40%]
+
+

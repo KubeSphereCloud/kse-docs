@@ -1,0 +1,70 @@
+---
+title: "View the details of an operation log entry"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, logs, operation logs, details, view"
+description: "Describes how to view the details of an operation log entry in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 5b32000ad515419196006044679379af
+:ks_xref_id: 6b9bdece510e493f90b46bb713e074da
+:ks_comp: ../../../components/
+:ks_title: View the details of an operation log entry
+:ks_description: Describes how to view the details of an operation log entry in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, logs, operation logs, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of an operation log entry in the {ks_product_abbr_full} web console. By default, logs are retained for 7 days.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=096948bec0d44c3e95d7ce57a7655c6e]
+
+User **admin** can view all operation logs in your cluster. Common users such as project administrators, operators, and viewers can view the operation logs in the projects to which they belong.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=99c3e3c4d8644a2b8003a8c1e9f66556]
+
+include::../../../_custom-en/logs/logs-steps.adoc[]
+
+. On the **Operation Logs** tab, find the operation log entry that you want to view and click to view its details.
+. In the dialog box that appears, view the details of the operation log entry.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Time
+|The time when the operation log entry was generated.
+
+|Operation
+|The operation performed on the resource.
+
+|Status
+|The server response status to the browser's request.
+
+|Project
+|The project in which the resource was operated.
+
+|Resource Type & Name
+|The type and name of the resource that was operated.
+
+|Operator
+|The user who performed the operation on the resource.
+
+|Source IP Address
+|The IP address of the machine used to access the resource.
+
+|Cause
+|The reason why the HTTP request failed.
+|===
+--

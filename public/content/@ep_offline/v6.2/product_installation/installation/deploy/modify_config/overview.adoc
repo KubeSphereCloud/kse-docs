@@ -1,0 +1,27 @@
+---
+title: 概述
+weight: 10
+draft: true
+---
+
+{product_name}部署前，实施人员需要根据配置文件模版创建 `variables.<zone_id>.yaml` 和 `setting.<zone_id>.yaml` 两类配置文件，并修改相关配置参数。
+
+include::../../../../../../_components/note.adoc[]
+文件名中的 <zone_id> 为可用区 ID，需根据环境规划中的信息进行填写。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+各配置文件信息，说明如下。
+
+[cols='2,4,3']
+|===
+| 文件 | 描述 | 模版文件路径
+
+| variables.<zone_id>.yaml
+| 用于配置{product_name}基本信息、网络信息和需要部署的服务信息。
+| /pitrix/config/templates/variables.template.yaml
+
+| setting.<zone_id>.yaml
+| 用于配置各个物理服务器节点上需要运行的角色，以及角色的部署方式。
+| /pitrix/config/templates/settings.template.yaml
+|===

@@ -1,0 +1,46 @@
+---
+title: Error：The variable [region_id] and [zone_id] is same
+weight: 06
+---
+
+== 问题现象
+
+执行命令 `/pitrix/cli/config-qingcloud.py -v '/pitrix/config/variables.demo1.yaml' -s '/pitrix/config/settings.demo1.yaml'` 生成 settings 失败。
+
+----
+
+  {
+  "action": "GetLogResponse",
+  "job_action": "ConfigQingCloud",
+  "job_id": "j-VDZ6ueK3",
+  "log": {
+    "001": "Info: Load the variables yaml file [/tmp/variables.demo1.yaml] ...",
+    "002": "Info: Initing the variables dict to a new variables dict ...",
+    "003": "Info: Initing the variables dict to a new variables dict successfully.",
+    "004": "Info: Checking the new variables dict whether is valid ...",
+    "005": "Error: The variable [region_id] and [zone_id] is same!"
+----
+
+== 问题原因
+
+Region ID 和 Zone ID 重复。
+
+== 解决方法
+
+请提前规划好 Region ID 和 Zone ID。
+
+. 登录 FirstBox 节点。
+. 执行以下命令，修改 Zone ID，以下以 `demo1a` 为例。
++
+[source,shell]
+----
+mv /pitrix/config/variables.demo1.yaml /pitrix/config/variables.demo1a.yaml
+mv /pitrix/config/settings.demo1.yaml /pitrix/config/settings.demo1a.yaml
+----
+
+. 执行以下命令，重新生成配置文件。
++
+[source,shell]
+----
+/pitrix/cli/config-qingcloud.py -v '/pitrix/config/variables.demo1a.yaml' -s '/pitrix/config/settings.demo1a.yaml' -f
+----

@@ -1,0 +1,84 @@
+---
+title: "View Volume Snapshot Content Details"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Volume Snapshot Content, View Volume Snapshot Content Details"
+description: "Describes how to view volume snapshot content details."
+weight: 07
+---
+
+:ks_permission: **Volume Snapshot Content View**
+:ks_navigation: **Storage > Volume Snapshots**
+
+
+This section describes how to view volume snapshot content details.
+
+
+== Prerequisites
+
+* The **KubeSphere Storage** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Volume Snapshots** page, click **Volume Snapshot Content**, then click the name of a volume snapshot content to open its details page.
+
+. On the volume snapshot content details page, view the resource attributes of the snapshot in the **Attributes** area.
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Status
+|
+include::../../../../_custom/clusterManagement/volumeSnapshotContents/volumeSnapshotContents-para-status.adoc[]
+
+|Capacity
+|
+include::../../../../_custom/clusterManagement/volumeSnapshotContents/volumeSnapshotContents-para-capacity.adoc[]
+
+|Volume Snapshot Class
+|
+include::../../../../_custom/clusterManagement/volumeSnapshotContents/volumeSnapshotContents-para-volumeSnapshotClass.adoc[]
+
+|Snapshot Handle
+|The unique identifier of the volume snapshot content in the backend storage system.
+
+|Provisioner
+|The storage plugin corresponding to the volume snapshot class.
+
+|Deletion Policy
+|
+include::../../../../_custom/clusterManagement/volumeSnapshotContents/volumeSnapshotContents-para-deletionPolicy.adoc[]
+
+|Creation Time
+|The creation time of the volume snapshot content.
+
+|Creator
+|The user who created the volume snapshot content.
+|===
+--
+
+. On the details page, click the **Resource Status** tab to view the volume snapshot name and volume snapshot class corresponding to the volume snapshot content.
+
+. On the details page, click the **Metadata** tab to view the labels and annotations of the volume snapshot content.
+
+. On the details page, click the **Events** tab to view the events of the volume snapshot content.
++
+--
+include::../../../../_custom/clusterManagement/clusterManagement-para-eventsTab.adoc[]
+--

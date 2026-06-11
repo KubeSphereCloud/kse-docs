@@ -1,0 +1,104 @@
+---
+title: "Limit"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, use, limits"
+description: "Describes the limits of {ks_product}."
+weight: 05
+logo: "{ks_logo}"
+downloadUrl: "{ks_download_url}"
+---
+
+// :ks_include_id: 7a769025270149d5a6341444b8131c5d
+:ks_xref_id: 4945902beb7747f9812931d4af22f0bd
+:ks_comp: ../../components/
+:ks_title: Limit
+:ks_description: Describes the limits of {ks_product}.
+:ks_keywords: {ks_product_full}, {ks_product}, use, limits
+:ks_weight: 05
+
+
+Before you use {ks_product_abbr_full}, we recommend that you understand the service limits to ensure smooth installation and use of this service. This topic describes the resource limits of {ks_product}.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Hardwarelink:[id=47a55e5d380041099f8796dba2649af7]
+
+Before you use {ks_product}, take notice of the following hardware limits:
+
+* The server node on which {ks_product} is installed must run on Linux, and the kernel version of Linux must be 4.0 or later.  We recommend that you use one of the following OSs: Ubuntu 18.04, Ubuntu 20.04, CentOS 7.9, Unity Operating System (UOS), Kylin V10, and EulerOS.
+* The server node must support virtualization.  If a server node does not support virtualization, {ks_product} runs in emulation mode. In this mode, more resources can be consumed, and all VM-based modules are unavailable.
+* The server node must have at least 1 unformatted and unpartitioned disk, or 1 unformatted partition.  The minimum disk or partition size must be 100 GB.
+* If you use CentOS, make sure SELinux is disabled.
+
+For more information, see link:../../02-quick-start/01-install-ksv-in-single-node-mode/[Install {ks_product} in single-node mode] and link:../../02-quick-start/02-install-ksv-in-multi-node-mode/[Install {ks_product} in multi-node mode].
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Nodes and VMslink:[id=545bac589dcb46deb8f2f022f682581c]
+
+{ks_product} provides the following types of editions: Basic, Developer, and Enterprise. The maximum number of nodes and VMs supported varies based on editions. The following table describes the details.
+
+[cols="1a,1a,1a"]
+|===
+|Edition |Max. number of nodes |Max. number of VMs
+
+|Basic
+|3
+|9
+
+|Developer
+|10
+|90
+
+|Enterprise
+|Unlimited
+|Unlimited
+|===
+
+For more information about editions, see link:../03-editions/[Editions].
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Roles and permissionslink:[id=fa5ae1a1b69c4100a7aa4b36fdd63f8c]
+
+{ks_product} provides a complete access control system to manage user permissions on resources and features.  {ks_product} uses role-based access control (RBAC) to grant users the permissions on specific features. The following table describes the details.
+
+[cols="1a,1a,1a"]
+|===
+|Module |Operation |Limit
+
+|Overview
+|Resource monitoring
+|
+The following monitoring metrics are available to user **admin** only: hardware-related metrics, available resource statistics, network overview, and virtual resource usage statistics.
+
+|Physical Resources
+|
+* Node management
+* Physics network management
+|The modules related to physical nodes and physical networks are available to user **admin** only.
+
+|Virtual Resources
+|
+* Project management
+* VM management
+* Disk management
+* Network management
+* SSH key management
+* Security group management
+|User **admin** can manage all virtual resources in the cluster. Common users such as project administrators and project operators can manage the virtual resources created on their own, and project viewers have read-only permissions on virtual resources in the projects to which they belong.
+
+|O&M Tools
+|
+* Timer tasks and policies
+* Alerts
+* Logs
+|User **admin** can manage all timer tasks, timer policies, alerts, and logs in the cluster. Common users such as project administrators and project operators can manage the timer tasks and timer policies created on their own, as well as the alerts and logs generated in the projects to which they belong. Project viewers have read-only permissions on timer tasks, timer policies, alerts, and logs in the projects to which they belong.
+
+|Users
+|Project and member management
+|The **Users** module is available to user **admin** only.
+|===

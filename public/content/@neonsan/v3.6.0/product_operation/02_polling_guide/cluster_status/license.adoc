@@ -1,0 +1,30 @@
+---
+title: "检查 License 信息"
+weight: 18
+---
+
+
+== 适用范围
+
+仅适用于 NeonSAN v3.4.0 及以上版本。
+
+== 操作步骤
+
+. 登录 NeonSAN 集群任一节点。 
+
+. 执行如下命令，获取当前集群的 License 信息，需确保当前集群的 License 已被激活，其在有效期内。
++
+[,shell]
+----
+neonsan list_license
+----
++
+image::/images/neonsan/polling_guide_46.png[]
++
+include::../../../../../_components/note.adoc[]
+若无可用 License 或可用期限已过期，需重新进行 License 申请与激活。
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+

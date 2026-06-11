@@ -1,0 +1,204 @@
+---
+title: "Edit Workload Settings"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Application Workloads, Workload, Edit Workload Settings"
+description: "Describes how to edit the settings of a created workload."
+weight: 10
+---
+
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Application Workloads > Workloads**
+
+
+include::../../../../_custom/clusterManagement/workloads/workloads-desc-editWorkloadSettings.adoc[]
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/workloads/workloads-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/workloads/workloads-oper-editWorkloadSettings_v42.adoc[]
+
++
+
+. In the **Edit Settings** dialog box, set the workload's update policy, containers, storage, pod scheduling rules (not available for DaemonSets), and pod graceful termination respectively, then click **OK**. For specific parameter configuration methods, please refer to link:#_parameter-description[Parameter Description].
+
+
+== Parameter Description
+
+* Update Policy
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-updatePolicy.adoc[]
+--
+
+* Update Policy > Rolling Update Settings
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-rollingUpdate.adoc[]
+--
+
+* Containers > Add Container
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-addContainer.adoc[]
+--
+
+* Containers > Container Settings
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-setImageNameTypeResource.adoc[]
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerImage.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerName.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerType.adoc[]
+
+include::../../../../_custom/clusterManagement/projects/projects-para-containerQuotas.adoc[]
+|===
+--
+
+* Containers > Container Settings > Port Settings
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-Port.adoc[]
+--
+
+* Containers > Container Settings > Image Pull Policy
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-imagePullPolicy.adoc[]
+--
+
+* Containers > Container Settings > Health Check
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-healthCheck.adoc[]
+--
+
+* Containers > Container Settings > Lifecycle Management
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-lifecycleManagement.adoc[]
+--
+
+* Containers > Container Settings > Startup Command
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-startCommand.adoc[]
+--
+
+* Containers > Container Settings > Environment Variables
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-environmentVariables.adoc[]
+--
+
+* Containers > Container Settings > Container Security Context
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerSecurityContext.adoc[]
+--
+
+* Containers > Container Settings > Sync Host Timezone
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-syncTimeZone.adoc[]
+--
+
+* Storage
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-mountVolume.adoc[]
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-collectLogsOnVolume.adoc[]
+
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-enableLogCollectionCluster.adoc[]
+
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-addPVCTemplate.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountVolume.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountSecretOrConfigmap.adoc[]
+|===
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-oper-editDeleteVolume_new.adoc[]
+--
+
+// * Storage > Add Persistent Volume Claim Template
+// +
+// --
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-volumeTemplate.adoc[]
+// --
+
+* Storage > Mount Volume > Persistent Volume
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-persistentVolume.adoc[]
+--
+
+* Storage > Mount Volume > Temporary Volume
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-temporaryVolume_new.adoc[]
+--
+
+* Storage > Mount Volume > HostPath Volume
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-hostpathVolume.adoc[]
+--
+
+* Storage > Mount ConfigMap or Secret
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountConfigmapSecret.adoc[]
+--
+
+* Pod Scheduling Rules
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-podSchedulingRules.adoc[]
+--
+
+* Pod Scheduling Rules > Custom Rules
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-customRules.adoc[]
+--
+
+* Pod Graceful Termination
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-PodGracePeriod.adoc[]
+--

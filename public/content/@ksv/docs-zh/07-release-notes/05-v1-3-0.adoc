@@ -1,0 +1,49 @@
+---
+title: "v1.3.0 版本说明"
+linkTitle: "{ks_title}"
+keywords: "版本说明, {ks_product_full}, {ks_product}, v1.3.0"
+description: ""
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 64653856ab274121adc40fd28d1fa850
+:ks_xref_id: 7207d8d3414f40c29f3b345297694b65
+:ks_comp: ../../components/
+:ks_title: v1.3.0 版本说明
+:ks_description: 
+:ks_keywords: 版本说明, {ks_product_full}, {ks_product}, v1.3.0
+:ks_weight: 05
+:ks_logo: 
+:ks_download_url: 
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 新增功能link:[id=d324ea519e184d2284f602034a41f238]
+
+* 新增支持操作日志管理功能。
+
+* 新增支持删除文件服务器中的同名镜像文件。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 功能优化link:[id=62eaacd9e02745119c596ecc1845c832]
+
+* **编辑虚拟机**功能拆分为**编辑**和**调整资源**。
+
+* 优化虚拟机详情页面的快捷操作菜单。
+
+* 未激活 KSV 时，虚拟机数量达到上限 9 台后可以继续创建，但超出限制的虚拟机会被锁定。
+
+* 使用 ISO 镜像创建的虚拟机默认使用 VNC 连接。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 问题修复link:[id=68a11cb4583e447ca4372cf9e2d9852f]
+
+* 解决超卖算法造成的扩容的问题。

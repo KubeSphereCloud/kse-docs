@@ -1,0 +1,68 @@
+---
+title: "修改集群名称"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 概览, 修改集群名称"
+description: "介绍如何修改集群名称。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+
+
+本节介绍如何修改单个集群的名称。
+
+单个集群的默认名称为 **default**。修改集群名称后，需要重启 ks-console，才能生效。
+
+
+// Note
+include::../../../../_components/note.adoc[]
+
+如果已启用**多集群管理**功能，主集群的名称由用户在启用多集群功能时设置，默认为 **host**，成员集群的名称由用户添加成员集群时设置。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+== 前提条件
+
+
+您需要在{ks_product_both}平台具有 **platform-admin** 角色。
+
+
+== 操作步骤
+
+. 以具有 **platform-admin** 角色的用户登录该集群节点。
++
+. 执⾏以下命令编辑 **cluster-configuration.yaml** 配置⽂件：
++
+--
+[,bash]
+----
+vi cluster-configuration.yaml
+----
+
+以下为示例文件。
+
+// YAML
+[,yaml]
+----
+  common:
+    core:
+      console:
+        enableMultiLogin: true
+        port: 30880
+        type: NodePort
+        clusterName: default  #修改集群名称
+        enabled: false
+----
+--
+
+. 在集群配置文件中，将 **clusterName** 参数自定义为您的集群名称，然后保存文件。
+
+. 执行以下命令，重启 ks-console 生效。
+
++
+[,bash]
+----
+kubectl -n kubesphere-system rollout restart deploy ks-console
+----

@@ -1,0 +1,88 @@
+---
+title: "获取及上传 Lustre 镜像"
+weight: 1
+---
+
+== 相关说明
+
+一般情况下，安装部署 Lustre 服务需要用到三个镜像文件，即：
+
+* Lustre 镜像：img-gdadx1o3.lz4。
+* Lustre 所依赖的基础镜像：centos76x64a.lz4 和 centos76x64.lz4。
+
+== 操作步骤
+
+. 从以下 ftp 路径获取新的 Lustre 部署镜像。
++
+[source,shell]
+----
+ftp://ins.qingcloud.com/hpc/20221230/lustre-image
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* img-gdadx1o3.lz4 为 Lustre 镜像。
+* centos76x64a.lz4 和 centos76x64.lz4 为 Lustre 所依赖的基础镜像。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录企业云平台集群的 FirstBox 节点，执行如下命令，查看 seed 节点信息。
++
+[source,shell]
+----
+# cat /pitrix/conf/nodes/seed
+nodes=( sr01n27 sr01n28 sr01n29 sr01n34 );
+----
+
+. 登录其中任一 seed 节点。
+
+. 执行如下命令，查看当前环境中是否已有 Lustre 所依赖的基础镜像。
++
+[source,shell]
+----
+# ls /pitrix/images-repo/ce | grep centos76x64
+----
++
+
+include::../../../../../../_components/note.adoc[]
+若返回结果中没有 centos76x64a.lz4 和 centos76x64.lz4，则需用户根据实际情况手动上传。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 将 Lustre 服务所需镜像上传至每一个 seed 节点的指定目录中。
+
+** Lustre 镜像 img-gdadx1o3.lz4 需上传至 ``/pitrix/images-repo/gd`` 目录中。
+
+** Lustre 服务所依赖的基础镜像 centos76x64a.lz4 和 centos76x64.lz4 需上传至 ``/pitrix/images-repo/ce`` 目录下中。
+
+. 登录 pgserver 的 master 节点，一般为 zone-pgserver0 节点。
+
+. 依次执行如下命令，创建 image.sql 文件。
++
+[source,shell]
+----
+# touch image.sql
+
+# vi image.sql
+
+insert into image (image_id,image_name,description,platform,architecture,processor_type,hypervisor,block_bus,size,status,sub_code,transition_status,visibility,ui_type,video_type,video_ram,create_time,status_time,recommended_type,format,base_id,root_id,agent_type,os_family,default_user,default_passwd,controller,console_id,owner,nic_type,sound_type,f_resetpwd,features,image_type,root_partition_number,root_partition_fs,root_user_id,billing_id,app_billing_id,lang,boot_kernel,boot_initrd,boot_cmdline,baremetal,init_owner,image_encryption,md5,boot_loader,order_name,swap_64) values ('img-gdadx1o3','lustre','','linux','x86_64','64bit','kvm','vd',20,'available',0,'','private','tui','vga',9126,'2023-3-15 14:14:41','2023-3-15 14:14:41','c1m1','qcow2','centos76x64a','centos76x64','pitrix','centos','root','p12cHANgepwD','self','vmt1demo','admin','virtio','ac97',1,192,0,0,'','admin','','','en-us','','','','t','',0,'','','00lustre1',0);
+----
++
+include::../../../../../../_components/attention.adoc[]
+* image.sql 文件中 init_ower 和 root_user_id 字段的对应值均为 EHPC 开发者账户 ID。
+* image.sql 文件中 console_id 需修改为当前云平台环境的 Console ID。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，将 Lustre 镜像信息写入到 ZONE 库的 image 表中。完成后，相应的镜像一般会存放在对应用户的**自有镜像**中。
++
+[source,shell]
+----
+# psql -d zone -f image.sql
+----
+
+
+
+
+
+

@@ -1,0 +1,196 @@
+---
+title: 获取短信任务（DescribeSMSJobs）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| email
+| String
+| false
+| 用户邮箱
+
+| end_time
+| String
+| false
+| 查询发送截止时间
+
+| limit
+| Integer
+| false
+| 查询数量
+
+| notification_center_posts
+| String
+| false
+| 消息任务id
+
+| offset
+| Integer
+| false
+| 查询偏移量
+
+| phone
+| String
+| false
+| 用户手机号
+
+| phones
+| String
+| false
+| 接收短信的手机号
+
+| post_sub_type
+| String
+| false
+| 消息类型
+
+| post_type
+| String
+| false
+| 业务类型
+
+| provider
+| String
+| false
+| 短信供应商
+
+| search_word
+| String
+| false
+| 模糊查询
+
+| sms_jobs
+| String
+| false
+| 短信任务id
+
+| sms_type
+| String
+| false
+| 短信类型
+
+| start_time
+| String
+| false
+| 查询发送开始时间
+
+| status
+| String
+| false
+| 状态
+
+| user_id
+| String
+| false
+| 用户id
+
+| user_name
+| String
+| false
+| 用户名称
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| sms_job_set
+| Array
+| false
+| 短信任务集合
+
+| sms_job_set[].content
+| String
+| false
+| 短信内容
+
+| sms_job_set[].create_time
+| String
+| false
+| 创建时间
+
+| sms_job_set[].phone
+| String
+| false
+| 手机号
+
+| sms_job_set[].provider
+| String
+| false
+| 短信供应商
+
+| sms_job_set[].sms_job_id
+| String
+| false
+| 短信任务id
+
+| sms_job_set[].sms_type
+| String
+| false
+| 短信类型
+
+| sms_job_set[].status
+| String
+| false
+| 状态
+
+| sms_job_set[].tick_id
+| String
+| false
+| 批次id
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeSMSJobs",
+  "limit": 1,
+  "offset": 0,
+  "phones": [],
+  "sms_jobs": [],
+  "sms_type": "",
+  "status": ""
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeSMSJobsResponse",
+  "ret_code": 0,
+  "sms_job_set": [
+    {
+      "content": "您的手机验证码是: 2685，请在30分钟内完成验证。",
+      "create_time": "2019-12-27T03:39:51Z",
+      "phone": "17786022311",
+      "provider": "zucp",
+      "sms_job_id": "sms-xxxxxxxx",
+      "sms_type": "register",
+      "status": "pending",
+      "tick_id": "-21"
+    }
+  ],
+  "total_count": 8333
+}
+----

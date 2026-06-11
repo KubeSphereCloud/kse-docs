@@ -1,0 +1,33 @@
+---
+title: '创建容灾'
+weight: 2
+draft: false
+---
+
+. 登录 link:../../../login[Portal 管理界面]。
+
+. 选择左侧导航栏**存储服务** > **块存储** > **容灾管理**，进入容灾管理页面。
++
+image::/images/neonsan/portal_create_dts_1.png[]
+
+. 点击**创建容灾**，选择相应的卷，并输入对应的灾备网关 IP，点击**保存**。
++
+
+include::../../../../../../_components/note.adoc[]
+* 创建容灾的卷，角色需为 master。若不是，需修改卷角色后，再创建容灾。
+* 灾备网关 IP 地址，可登录至主站点的任一节点上执行 ``neonsan list_mrgw`` 命令查看。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_create_dts_2.png[,40%]
+
+. 创建成功的容灾会显示在容灾管理列表页面，当前页面会显示相应容灾卷的``卷名``、``灾备网关 IP``、``端口``、``复制周期(秒)``以及``链路状态更新时间``。点击相应卷右侧的更多操作，可对制定容灾卷进行``基础数据同步``或``删除容灾``操作。
++
+image::/images/neonsan/portal_create_dts_3.png[]
+
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+---
+title: "Remove Member Cluster"
+keywords: "Kubernetes, {ks_product}, Multi-cluster Management, Cluster, Remove Member Cluster"
+description: "Describes how to remove a member cluster."
+weight: 09
+---
+
+:ks_menu: **Cluster Management**
+
+This section describes how to remove a member cluster.
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* The host cluster cannot be removed.
+
+* After a member cluster is removed, KubeSphere will no longer be able to manage that cluster. The existing Kubernetes resources in the cluster will not be deleted.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+After a cluster is removed, the existing multi-cluster configuration data in the cluster will not be automatically cleaned up. Uninstalling KubeSphere or deleting associated resources may lead to user data loss. Be sure to perform the link:#_clean-up-multi-cluster-configuration-data[Clean Up Multi-cluster Configuration Data] steps on the removed cluster.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+You need to have the **platform-admin** role in both the host cluster and the member cluster to be removed.
+
+
+
+== Remove Cluster via Web Console
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-oper-logInToHost.adoc[]
+
+. Click **Cluster Management**.
+
+. On the right side of the cluster you want to operate on, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Remove Cluster** from the dropdown list.
+
+. In the **Remove Cluster** dialog box, confirm the information of the cluster to be removed, drag the slider to the right, enter the name of the cluster to be removed, and then click **Remove**.
+
+== Remove Cluster via Command Line
+
+In some cases, it may not be possible to remove a member cluster from the web console. For example, if the member cluster's credentials are incorrect. In such cases, you can perform the following steps to remove an unhealthy member cluster via the command line:
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-oper-logInToHost.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl_v42.adoc[]
+
++
+
+. In the **kubectl** dialog box, execute the following command to remove the member cluster (replace `<cluster name>` with the name of the member cluster):
++
+--
+// Bash
+[source,bash]
+----
+kubectl delete cluster <cluster name>
+----
+--
+
+
+== Clean Up Multi-cluster Configuration Data
+
+Log in to the node of the removed member cluster and execute the following command to clean up the multi-cluster configuration data in the cluster:
+
+[,bash]
+----
+for ns in $(kubectl get ns --field-selector status.phase!=Terminating -o jsonpath='{.items[*].metadata.name}'); do kubectl label ns $ns kubesphere.io/workspace- && kubectl patch ns $ns --type merge -p '{"metadata":{"ownerReferences":[]}}'; done
+----

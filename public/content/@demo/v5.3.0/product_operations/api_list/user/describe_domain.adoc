@@ -1,0 +1,58 @@
+---
+title: describe（DescribeIAMDomain）
+weight: 15
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| true
+| 用户ID
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| iam_domain
+| String
+| false
+| iam域名
+
+| user_id
+| String
+| false
+| 用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "user_id": "user_id"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMDomainResponse",
+  "iam_domain": "iam_domain_0",
+  "ret_code": 0,
+  "user_id": "user_id"
+}
+----

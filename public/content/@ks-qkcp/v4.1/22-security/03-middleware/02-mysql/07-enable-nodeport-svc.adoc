@@ -1,0 +1,13 @@
+---
+title: "开启 nodeport 服务"
+weight: 07
+---
+
+假设集群名称为 sample，使用 `kubectl edit svc sample-leader` 命令修改 sample-leader 服务。
+
+将 spec.type 修改为 NodePort；在 spec.ports 下，在 name 为 mysql 的项目中增加 nodePort: xxxx，其中 xxxx 为您想设置的端口号。
+
+示例如下：
+
+image:/images/ks-qkcp/zh/security-handbook/327-enable-nodeport/01.png[]
+image:/images/ks-qkcp/zh/security-handbook/327-enable-nodeport/02.png[]

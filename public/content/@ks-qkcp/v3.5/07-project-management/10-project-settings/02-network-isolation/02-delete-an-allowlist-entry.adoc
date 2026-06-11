@@ -1,0 +1,55 @@
+---
+title: "删除白名单条目"
+keywords: "Kubernetes, {ks_product}, 项目管理, 项目设置, 网络隔离, 删除白名单条目"
+description: "介绍如何删除白名单条目。"
+weight: 02
+---
+
+// :ks_include_id: 2f13e36993194467b60f3b4fd02cea2a
+:ks_xref_id: 7daef8bfd9684dc79e00871220dcc816
+:ks_comp: ../../../../components/
+:ks_title: 删除白名单条目
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 项目设置, 网络隔离, 删除白名单条目
+:ks_description: 介绍如何删除白名单条目。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **项目设置管理**
+:ks_navigation: **项目设置 > 网络隔离**
+
+
+本节介绍如何删除白名单条目。
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+删除白名单条目可能会导致当前项目中的容器组网络连接中断，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=843fd2a586454baaa5da0b30b1dfc92f]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=88f1a2d5810746af8d10bb84fca88dd8]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**网络隔离**页面，点击**内部白名单**或**外部白名单**页签。
+
+. 在需要删除的白名单条目右侧点击 image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18]。
+
+. 在**删除白名单条目**对话框，输入白名单条目的的名称，然后点击**确定**。

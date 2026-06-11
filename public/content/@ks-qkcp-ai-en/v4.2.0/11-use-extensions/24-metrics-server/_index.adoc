@@ -1,0 +1,25 @@
+---
+title: "Metrics Server"
+keywords: "Kubernetes, {ks_product}, Metrics Server, Horizontal Scaling, Vertical Scaling"
+description: "Introduces how to use the Metrics Server extension."
+weight: 24
+layout: "second"
+---
+
+
+Metrics Server is a scalable, efficient source of container resource metrics for Kubernetes' built-in autoscaling pipelines.
+
+Metrics Server collects resource metrics from Kubelets and exposes them in the Kubernetes apiserver through the link:https://github.com/kubernetes/metrics[Metrics API], for use by the link:https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/[Horizontal Pod Autoscaler] and link:https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler/[Vertical Pod Autoscaler].
+
+Metrics Server enables the following features:
+
+- CPU/Memory-based horizontal autoscaling (Learn more about link:https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/[Horizontal Autoscaling])
+- Automatic adjustment/recommendation of resources required by containers (Learn more about link:https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler/[Vertical Autoscaling])
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more information about this extension, please refer to the description on the Metrics Server extension details page in the Extensions Center.
+|===

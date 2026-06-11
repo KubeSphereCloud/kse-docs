@@ -1,0 +1,67 @@
+---
+title: "查看 VPC 网络列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, VPC, 网络, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看 VPC 网络列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: de68a4faeffb43a18465b6ec7f398ec9
+:ks_xref_id: 27b45570d89c4febbebb6a66eebf02e8
+:ks_comp: ../../../../components/
+:ks_title: 查看 VPC 网络列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看 VPC 网络列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, VPC, 网络, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看 VPC 网络列表。
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=ffe9257344d746b59e0c017800685cc4]
+
+include::../../../../_custom/networks/vpc-steps.adoc[]
+
++
+--
+VPC 列表展示当前项目中的所有 VPC，包括默认 VPC 和用户自建 VPC。具体参数信息如下表所示。
+
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|VPC 的名称。
+
+include::../../../../_custom/networks/naming-convention.adoc[]
+
+|ID
+|VPC 在系统中的通用唯一标识符，由系统自动分配。
+
+|状态
+|VPC 的状态。
+
+|IP 地址范围
+|VPC 的网段范围。
+
+|绑定资源
+|已和 VPC 绑定的资源。
+
+|创建者
+|VPC 的创建者。
+
+|创建时间
+|VPC 的创建时间。
+|===
+--
+
+. （可选）点击 VPC 列表上方的搜索框并设置搜索条件，可按名称和 ID 搜索 VPC。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的 VPC。
+
+. （可选）在 VPC 列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。

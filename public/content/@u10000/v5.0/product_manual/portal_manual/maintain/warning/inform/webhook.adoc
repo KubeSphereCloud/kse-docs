@@ -1,0 +1,79 @@
+---
+title: 配置 Webhook
+description: 
+weight: 3
+---
+
+Portal 支持用户配置 Webhook 来接收相应的告警通知。若设置或者删除 Webhook 消息接收端后，系统默认生效时间为 10 秒。
+
+最多可添加 5个 Webhook 接收端。
+
+== 操作步骤
+
+. 成功登录 Portal。
+
+. 点击**运维管理 > 告警管理 > 告警通知 > Webhook**，进入 Webhook 服务配置页面。
+
+. 点击开启 Webhook 服务配置。
+
+. 点击**添加 Webhook 接收端 URL**，填写接收端 URL 信息后，点击**配置**。
++
+image::/images/u10000/maintain_warning_webhook.png[maintain_warning_webhook,100%]
++
+
+* `地址` 填写接收端的 URL 地址，需输入以 `http://` 或 `https://` 开头的 URL。
+* 如需验证该 URL 是否设置成功，用户可在当前存储环境中触发一条告警后，再到设置的 Webhook 消息接收端确认告警消息已经收到即可。
+
+. 页面支持删除操作，用户可点击接收端 URL 的删除图标，即可完成删除操作。已删除的 Webhook 消息接收端不再收到相应的告警消息。
++
+image::/images/u10000/maintain_warning_webhook_del.png[maintain_warning_webhook_del,100%]
+
+. Portal 页面支持用户查看 Webhook 发送消息示例。用户点击** Webhook 发送消息示例**，弹出示例对话框。
++
+image::/images/u10000/maintain_warning_webhook_example.png[maintain_warning_webhook_example, 60%]
+
+== 对接 BOSS
+
+Portal 支持将 U10000 的告警通过 Webhook 发送给 BOSS。用户参考以上操作步骤，将 BOSS 的 Webhook 地址添加至此即可。
+
+image::/images/u10000/maintain_warning_webhook_boss.png[maintain_warning_webhook_boss, 100%]
+
+include::../../../../../../../_components/note.adoc[]
+
+`地址` 填写 BOSS 的 Webhook URL，其格式为 `http://<proxy_vip>:6777/alert_receiver/qingstor/`。其中 `<proxy_vip>` 需从实施人员处获取。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+用户可参考如下步骤，验证设置是否成功。
+
+. 登录 FirstBox。命令行中的 `<firstbox ip>` 需从实施人员处获取。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 从 FirstBox 节点跳转至任一节点。这里以 `core0` 节点为例。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，停止 `qs_device` 服务。
++
+[source,shell]
+----
+docker stop qs_device
+----
+
+. 浏览器登录 Portal 页面，确认告警列表页，新增该条告警内容。
+
+. 浏览器登录对接环境的 BOSS 页面，确认 BOSS 的告警页面，新增该条告警内容，以确认 Webhook 发送告警是否成功。
+
+. 确认以上内容无误后，间隔几分钟，返回登录当前环境节点服务器窗口，执行如下命令行，重启 `qs_device` 服务。
++
+[source,shell]
+----
+docker start qs_device
+----

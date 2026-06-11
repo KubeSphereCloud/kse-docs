@@ -1,0 +1,46 @@
+---
+title: "网络分区"
+weight: 02
+---
+
+本节介绍如何模拟网络分区，切断两个 Pod 之间的双向通信。
+
+故障注入期间，`nginx-network-server` 与 `nginx-network-client` 之间的网络完全断开，两者访问其他目标不受影响。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *NetworkChaos*，配置以下参数后点击 *创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|故障类型（action）
+|选择 `partition`，切断网络连接。
+
+|方向（direction）
+|故障生效的流量方向，选择 `both` 表示双向断开。
+
+|持续时间（duration）
+|故障持续时间，例如 `10m`。
+
+|生效范围（selector）
+|选择注入故障的源 Pod（如服务端 Pod）。
+
+|目标（target）
+|选择通信对端 Pod（如客户端 Pod）。
+|===
+
+
+验证故障效果：
+
+[source,shell]
+----
+# 服务端访问客户端（应失败）
+kubectl exec "{{server-podID}}" -- curl -v "{{client-podIP}}"
+# 服务端访问外部（应正常）
+kubectl exec "{{server-podID}}" -- curl -v "ci-bot.kubesphere.io"
+----
+
+
+   故障注入期间，两 Pod 之间的访问将失败；访问外部地址不受影响。

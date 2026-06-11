@@ -1,0 +1,323 @@
+---
+title: "store.conf"
+weight: 1
+---
+
+该配置文件用于配置 neonstore 服务，其参数说明如下所示。
+
+[options="header",cols="3,2,4,2,2"]
+|===
+|参数名|类型 |说明 |是否必须 |备注
+5+h|[zookeeper]
+|ip
+|IP 列表
+|ZooKeeper 集群节点 IP，以逗号分开，建议配置 3~5 个节点。
+|是
+|-
+
+|cluster_name	
+|字符串	
+|ZooKeeper 集群名	
+|是
+|-
+
+5+h|[store]
+|id	
+|数字	
+|本存储节点的 ID	
+|是
+|-
+
+|mngt_ip	
+|字符串	
+|本存储节点的 IP	
+|是
+|-
+
+|objectsize	
+|数字	
+a|块的大小。
+
+* 混插环境默认为 4M
+* 全闪环境默认为 64M	
+|是
+|-
+
+|auto_extend_task_pool 	
+|数字	
+|是否开启 task pool 自动扩展功能，1:开启，0:关闭，默认值为 1	
+|否
+|NeonSAN v3.1.5新增参数
+
+|mdst_enable	
+|数字	
+|是否开启双日志 zone 功能，1：开启，0:关闭，默认值为 0	
+|否
+|NeonSAN v3.3.2 新增参数
+
+|ssd_access_timeout
+|数字
+|设置当磁盘无法访问且无 IO 时重试访问磁盘的超时时间，单位秒
+|否
+|NeonSAN v3.5.3 新增参数，仅特定情况下需要设置
+
+5+h|[store.location]:节点位置信息
+|chassis	
+|字符串	
+|本节点所在的 chassis 名	
+|是
+|-
+
+|failure_domain
+|字符串	
+|本节点所在的故障域	
+|是
+|-
+
+5+h|[store.affinity]:邦核相关信息
+|dispatcher	
+|数字列表	
+|dispatcher 线程绑定的 CPU 核	
+|是
+|-
+
+|replicator	
+|数字列表	
+|replicator 线程绑定的 CPU 核	
+|是
+|-
+
+|ssd	
+|数字列表	
+|ssd 相关线程绑定的 CPU 核心	
+|是
+|-
+
+|rdma_server	
+|数字列表	
+|rdma server 线程绑定的 CPU 核心	
+|否
+|-
+
+|tcp_server	
+|数字列表	
+|tcp server 线程绑定的 CPU 核心	
+|否
+|-
+
+5+h|[dispatcher]:dispatcher 线程相关参数设置
+|iotaskpoolsize	
+|数字	
+|处理 IO 的 pool size 大小	
+|否
+|-
+
+|ssd_io_timeout	
+|数字	
+|下发 IO 的 timeout 设置	
+|否
+|-
+
+|conn_close_wait_time	
+|数字	
+|连接的 timeout 设置	
+|否
+|-
+
+|iotaskpool_extend_size	
+|数字	
+|每次扩展 io task pool 的大小，默认值为 1024	
+|否
+|NeonSAN v3.1.5 新增参数
+
+|iotaskpool_extend_threshold	
+|数字	
+|触发自动扩展 io task  pool 的阈值，空闲的 task 数量低于这个数值的时候触发自动扩展，默认值为 1024	
+|否
+|NeonSAN v3.1.5 新增参数
+
+|iotaskpool_extend_limit	
+|数字	
+|扩展 io task pool 的最大次数，默认值为 8	
+|否
+|NeonSAN v3.1.5 新增参数
+
+5+h|[replicator]:replicator 线程相关参数设置
+|iotaskpoolsize	
+|数字	
+|处理 IO 的 pool size 大小	
+|是
+|-
+
+|enable_connect_in_io_path	
+|数字	
+a|IO 流程中建立副本连接：
+
+* 0：不允许（默认设置）
+* 1：允许	
+|是
+|-
+
+|rep_io_timeout	
+|数字	
+|副本间 IO 操作的 timeout 设置	
+|是
+|-
+
+|io_depth	
+|数字	
+|IO 深度	
+|是
+|-
+
+|conn_timeout	
+|数字	
+|副本间连接的 timeout 设置	
+|是
+|-
+
+5+h|[SSD]
+|ssds	
+|字符串	
+|本节点 SSD 名列表	
+|否
+|-
+
+|dev	
+|字符串	
+|磁盘名	
+|是
+|-
+
+|type	
+|字符串	
+a|节点类型：
+
+* SSD：全闪
+* CachedHDD：混插
+* HDD：机械盘	
+|是
+|-
+
+|trim_on_reclaim	
+|数字	
+a|删 volume 时，是否使用磁盘 trim 清盘：
+
+0：不使用
+1：使用	
+|是
+|-
+
+|zero_on_reclaim	
+|数字	
+a|删 volume 时，是否使用写 0 清盘： 
+
+0：不使用
+1：使用	
+|是
+|-
+
+5+h|[tpoller]：TCP Poller线程数
+|server_thread_count	|数字	|server 线程数	|是 |-
+|client_thread_count	|数字	|client 线程数	|是 |-
+
+5+h|[metro]：用于异步灾备环境
+|timeout	|数字	|与灾备网关的交互 timeout 设置	|否 |-
+|buffer_count	|数字	|数据传输单位的个数	|否 |-
+
+5+h|[connection]
+|type	|字符串	|节点间数据传输模式：TCP 或 RDMA 	|是 |-
+
+5+h|[port]：NeonSAN 外部数据交互的端口信息
+|ip	|数字	|数据交互的端口 IP	|是 |-
+
+5+h|[rep_port]：NeonSAN 内部数据间交互的端口信息
+|ip |数字	|数据交互的端口 IP	|是  |-
+
+5+h|[crypt]
+|crypt_pool_size	|数字	|crypt_pool 大小	|是  |-
+|crypt_block_queue_size	|数字	|crypt_block 序列大小	|是 |-
+|crypt_thread_count	|数字	|crypt_thread 数	|是 |-
+
+|===
+
+**注意事项**：
+
+* ZooKeeper 集群信息可查询如下配置内容，需换成当前环境对应的 zookeeper 目录。
++
+[source,shell]
+----
+cat /opt/zookeeper/conf/zoo.cfg
+----
+
+
+* 同步灾备的情况下，ZooKeeper 集群需剔除仲裁节点。例如：由 a，b，c 组成的一个ZooKeeper集群。其中，c 是仲裁站点，那么，ZooKeeper 集群应设置如下。
++
+[source,conf]
+----
+[zookeeper]
+ip="a:2181,b:2181"
+cluster_name="cluster1"
+----
+
+* NeonSAN 系统默认配置的 disk 为 SSD 类型，如果环境中配置了 cas 盘，即混插模式，配置应做如下修改。
++
+[source,conf]
+----
+type="CachedHDD"
+objectsize=4
+----
+
+* 磁盘清盘，如果磁盘支持 trim，可首选 trim 模式，即配置如下。
++
+[source,conf]
+----
+zero_on_reclaim=0
+trim_on_reclaim=1
+----
+* 磁盘不支持 trim 模式，则选用清零配置。
++
+[source,conf]
+----
+zero_on_reclaim=1
+trim_on_reclaim=0
+----
+* 由于磁盘清零耗时较长，混插环境，建议私有云如下配置。
++
+[source,conf]
+----
+zero_on_reclaim=0
+trim_on_reclaim=0
+----
+* 关于绑核部分内容，可参考link:https://box.yunify.com/s/jmd7i7dPccZkp3k[《NeonSAN 产品性能测试指南》]。
+
+* 异步灾备环境必须设置如下参数，且值为 60；同步灾备环境无需配置。
++
+[source,conf]
+----
+# metro client timeout
+[metro]
+timeout=60
+----
+* 混插模式下，需设置 ssd_io_timeout 为 60，rep_io_timeout 为 65，conn_close_wait_time 的值为 rep_io_timeout 的 10 倍，即 650。
++
+[source,conf]
+----
+ssd_io_timeout=60 
+conn_close_wait_time=650
+rep_io_timeout=65
+----
+
+* 在网络硬盘场景下，为解决网络频繁闪断导致磁盘不可用的问题，可通过以下参数，设置当磁盘无法访问且无 IO 时重试访问磁盘的超时时间，单位秒，需根据实际环境配置进行修改。在非网络硬盘场景下，无需设置该参数。
++
+[,conf]
+----
+... ....
+[store]
+ssd_access_timeout=10
+... ...
+----
+
+
+
+

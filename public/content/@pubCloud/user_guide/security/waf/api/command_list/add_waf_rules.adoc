@@ -1,0 +1,184 @@
+---
+title: "AddWAFRules"
+description: 
+draft: false
+---
+创建 WAF 域名防护策略。
+
+*Request Parameters*
+
+[cols="1,1,2,1"]
+|===
+| Parameter name | Type | Description | Required
+
+| rule_group
+| String
+| WAF域名防护的策略组 ID +
+wafrg-xxxxxxxx：自定义规则的策略组 ID +
+wafcg-xxxxxxxx：黑白名单的策略组 ID
+| Yes
+
+| rules.n
+| Array
+| 策略的规则内容 +
+JSON 格式的自定义规则的策略，参数可以参考下面的 <<signature-item,Signature Item>> +
+JSON 格式的黑白名单的策略，参数可以参考下面的 <<checklist-item,Checklist Item>>
+| Yes
+
+| zone
+| String
+| 区域 ID，注意要小写
+| Yes
+|===
+
+[[signature-item]]*Signature Item*
+
+[cols="1,1,2"]
+|===
+| Name | Type | Description
+
+| attack_type
+| String
+| 攻击类别 +
+RFI：远程文件包含 +
+CODEi：远程文件包含 +
+WEBSHELL：网站后门 +
+SQLi：SQL注入 +
+XSS：跨站脚本攻击 +
+LFI：本地文件包含 +
+CRLFi：回车换行注入 +
+OTHER：其他类别比如扫描
+
+| http_method
+| String
+| HTTP 请求方法：ALL, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+
+| impact
+| Integer
+| 规则的严重级别 +
+0：低级别 +
+1：中级别 +
+2：高级别
+
+| action
+| String
+| 规则的响应动作 +
+report：仅报告日志 +
+block：阻断请求 +
+limit：限流 +
+redirect_limit：重定向并限流
+
+| val1
+| Integer
+| 当规则的响应动作为“限流”或“重定向并限流”时，一分钟内的访问阈值
+
+| rule_content
+| String
+| 规则匹配的内容，包括“协议变量”、“操作符”和“检查项”三部分组成 +
+ +
+“协议变量”的取值如下： +
+REQUEST_URI：一遍解码后的 uri，包括参数部分 +
+URI_DIR：uri 路径部分，如：uri=/abc/a.htm，则uri_dir=/abc/ +
+URI_FILE：uri 的文件部分，如：uri=/abc/a.htm，则uri_file=a.htm +
+URI_ARGS：在上面 REQUEST_URI 的基础上，解析?号之后的参数部分 +
+USER_AGENT：一遍解码后的 useragent +
+REFERER：一遍解码后的 referer +
+COOKIE：一遍解码后的 cookie +
+POST_ARGS：一遍解码的表单参数 +
+ +
+“操作符”的取值如下： +
+`{caret}{caret}[r]`： 包含关系 +
+`==`： 等于关系 +
+
+
+“检查项”是将要检查匹配的规则项：支持“匹配所有规则”和“匹配任意规则”两种关系 +
+`&&`：匹配所有规则 +
+`\|\|`：匹配任意规则
+|===
+
+[[checklist-item]]*Checklist Item*
+[cols="1,1,2"]
+|===
+| Name | Type | Description
+
+| list_name
+| String
+| 黑白名单列表名称
+
+| description
+| String
+| 描述信息
+
+| list_type
+| Integer
+| 黑白名单类别 +
+0：IP 黑白名单 +
+1：URL 黑白名单 +
+2：CC 防护列表 +
+3：接口防刷列表
+
+| list_color
+| Integer
+| 黑白名单类别 +
+0：白名单 +
+1：黑名单 +
+其他：当配置为 CC 防护列表时，表示 CC 防护阈值
+
+| list_content
+| String
+| 规则匹配的内容，根据规则类别填写不同的匹配内容 +
+IP 黑白名单：IP 地址/掩码 +
+URL 黑白名单：URL 地址 +
+CC 防护列表：CC 保护 的 URL 地址，完全匹配 +
+接口防刷列表：接口 URL 地址，前缀匹配
+
+| val1
+| String
+| 接口防刷列表配置的 Referer 地址
+|===
+
+link:../../parameters/[公共参数]
+
+*Response Elements*
+[cols="1,1,2"]
+|===
+| Name | Type | Description
+
+| action
+| String
+| 响应动作
+
+| waf_rules
+| String
+| 添加的防护规则 ID +
+wafri-xxxxxxxx：自定义规则 ID +
+wafci-xxxxxxxx：黑白名单规则 ID
+|===
+
+*Example*
+
+_Example Request_:
+[source,url]
+----
+https://api.qingcloud.com/iaas/?action=AddWAFRules
+&rule_group=wafcg-32yt310g
+&rules.1.list_name=test_waf
+&rules.1.description=test_waf_desc
+&rules.1.list_type=3
+&rules.1.list_color=60
+&rules.1.list_content=/url
+&rules.1.val1=/referer
+&zone=pek3a
+&COMMON_PARAMS
+----
+
+_Example Response_:
+
+[source,json]
+----
+{
+  "action":"AddWAFRulesResponse",
+  "waf_rules":["wafcg-32yt310g"],
+  "ret_code":0
+}
+----

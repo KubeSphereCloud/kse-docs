@@ -1,0 +1,76 @@
+---
+title: "Configure Logging"
+keywords: "Kubernetes, {ks_product}, Logging"
+description: "Introduces how to configure the 'WizTelemetry Logging' extension."
+weight: 01
+---
+
+WizTelemetry Logging supports configuring the extension to collect specified logs, create log indices by project, and other functions.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more configuration information, please refer to the details page description of the 'WizTelemetry Logging' extension in the Extensions Center.
+|===
+
+== Collect Specified Logs
+
+WizTelemetry Logging supports setting filter conditions to collect logs that include or exclude specified namespaces, which can reduce the volume of logs.
+
+In the extension configuration of WizTelemetry Logging, edit the following parameters:
+
+[,yaml]
+----
+vector-logging:
+  filter:
+    extraLabelSelector: "app.kubernetes.io/name!=kube-events-exporter"
+    extraNamespaceLabelSelector: ""
+    # When includeNamespaces and excludeNamespaces are set at the same time, only excludeNamespaces will take effect.
+    includeNamespaces: []
+    excludeNamespaces: []
+----
+
+* extraLabelSelector: Only collect logs from pods with this label.
+* extraNamespaceLabelSelector: Only collect logs from pods under namespaces with this label.
+* includeNamespaces: Only collect logs from pods under the specified namespaces.
+* excludeNamespaces: Do not collect logs from pods under the specified namespaces.
+
+== Create Log Indices by Namespace
+
+WizTelemetry Logging supports creating an index for each project (namespace). This allows you to determine the space occupied by logs for a specific namespace, facilitating business rectification, and also makes log analysis easier.
+
+=== Prerequisites
+
+Version requirements: WizTelemetry Logging >= 1.2.0, WizTelemetry Platform Service >= 1.1.0.
+
+=== Steps
+
+. Modify the WizTelemetry Logging extension configuration. There is no need to modify the parameters within `prefix`.
++
+[,yaml]
+----
+vector-logging:
+  sinks:
+    opensearch:
+      index:
+        prefix: "{{ .cluster }}-{{ .kubernetes.namespace_name }}-logs"
+        timestring: "%Y.%m.%d"
+----
+
+. Modify the WizTelemetry Platform Service extension configuration. There is no need to modify the parameters within `indexPrefix`.
++
+[,yaml]
+----
+whizard-telemetry:
+  config:
+    logging:
+      enable: true
+      servers:
+        - elasticsearch:
+            endpoints:
+              - https://opensearch-cluster-data.kubesphere-logging-system:9200
+            indexPrefix: "{{ .cluster }}-{{ .kubernetes.namespace_name }}-logs"
+            timestring: "%Y.%m.%d"
+----

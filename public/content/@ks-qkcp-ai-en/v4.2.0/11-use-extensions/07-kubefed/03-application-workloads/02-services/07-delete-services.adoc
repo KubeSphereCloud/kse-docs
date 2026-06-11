@@ -1,0 +1,50 @@
+---
+title: "Delete Service"
+keywords: "Kubernetes, {ks_product}, Project Management, Workload, Service, Delete Service"
+description: "Introduces how to edit the external access settings of a service."
+weight: 07
+---
+
+:ks_permission: **Federated Project Management**
+:ks_navigation: **Application Workloads > Services**
+
+
+include::../../../../../_custom/clusterManagement/services/services-desc-deleteServices.adoc[]
+
+
+== Prerequisites
+
+* The **Federated Cluster Application Management** extension needs to be installed and enabled on the KubeSphere platform.
+
+* {empty}
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-prer-requiredPermission_v4.adoc[]
+
+
+== Delete a Single Service
+
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage_v4.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/services/services-oper-deleteASingleService.adoc[]
+
++
+
+. In the **Delete Service** dialog box, select the workload(s) to be deleted simultaneously, and then click **OK**.
+
+
+== Delete Services in Batches
+
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage_v4.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/services/services-oper-deleteMultipleServices.adoc[]

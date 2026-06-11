@@ -1,0 +1,59 @@
+---
+title: "HTTPS 模式配置 VNC 访问"
+weight: 30
+---
+
+如果是 HTTPS 协议，可能还无法访问 VNC。请执行如下步骤，配置 VNC 访问。
+
+1. 登录 FirstBox。
+2. 执行以下命令，修改文件 server.yaml.ZONE_ID。
++
+[source]
+----
+vi /pitrix/conf/variables/global/server.yaml.ZONE_ID
+----
+3. 修改 cb_server 部分。 +
+根据实际情况修改证书路径。
++
+[source,yaml]
+----
+cb_server:
+  wss_cert_file: '/pitrix/conf/cert/server-chained.pem'
+  wss_key_file: '/pitrix/conf/cert/server-key.pem' 
+  domain_name: ''
+    proxy1: 'cb1llhd1.cloud.lianluo.com' 
+    proxy0: 'cb0llhd1.cloud.lianluo.com'
+io_server:
+  cert_file: '/pitrix/conf/cert/server.pem'
+----
+4. 执行以下命令，刷新 server.yaml.ZONE_ID 到节点。
++
+[source]
+----
+/pitrix/upgrade/build_global_conf.sh 
+/pitrix/upgrade/update.sh all pitrix-global-conf
+----
+5. 登录任一webservice节点，执行以下命令，配置 push_server。
++
+[source]
+----
+/pitrix/conf/web_console_settings.py
+----
+将 PUSH_URL = 'http://console.democloud.com:8000' +
+改为 PUSH_URL = 'https://console.democloud.com:8000'
+6. 执行以下命令，重启 Nginx 和 Apache。
++
+[source]
+----
+service nginx
+----
+7. 登录 proxy0、proxy1，重启 cb_server。
++
+
+include::../../../../_components/note.adoc[]
+安装成功后： 
+
+* 在 webservice0/webservice1 的/pitrix/conf/cert 目录下，有用户的 server.pem 文件。重启 Nginx 和 Apache 后生效。
+* 在 proxy0/proxy1 的/pitrix/conf/cert 目录下，有用户的 server-key.pem、server-chained.pem 文件。重启 Nginx 后生效。
+
+include::../../../../_components/table_footer.adoc[]

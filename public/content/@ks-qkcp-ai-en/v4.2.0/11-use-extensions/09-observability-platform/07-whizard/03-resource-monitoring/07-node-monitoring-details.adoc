@@ -1,0 +1,109 @@
+---
+title: "View Node Monitoring Details"
+keywords: "Kubernetes, {ks_product}, WizTelemetry Global Monitoring, Node, Resource Usage Ranking"
+description: "Describes how to view the resource usage details of a node."
+weight: 07
+---
+
+:ks_navigation: **Global Monitoring > Nodes**
+
+This section describes how to view the monitoring details of a single node.
+
+== Prerequisites
+
+You need to have the **platform-admin** role on the KubeSphere platform. For more information, see link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
+. In the node list, click the name of a node to open its details page.
+
+. In the upper area of the details page, view the basic information of the current node.
++
+--
+* Click **Manage Node** to go to the node details page.
+* Click image:/images/ks-qkcp/zh/icons/chevron-down.svg[chevron-down,18,18] to hide this area.
+--
+
+. Under the **Overview** tab of the details page, view the overview information of the node.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Area |Description
+
+|Node Health
+|Displays the node's scheduling status, ready status, and network, memory, disk, and process pressure. If image:/images/ks-qkcp/zh/icons/check-healthy.svg["healthy",15px,15px] is displayed, the status is normal. If image:/images/ks-qkcp/zh/icons/substract-unhealthy.svg["unhealthy",15px,15px] is displayed, an alert is present.
+
+* **Scheduling Status**: Whether the node is scheduled normally.
+
+* **Ready Status**: Whether the node is ready to receive pods.
+
+* **Network Availability**: Whether the node's network configuration is correct.
+
+* **Memory Pressure**: Whether the node's remaining memory is less than the threshold. The default threshold is 100 MiB.
+
+* **Disk Pressure**: Whether the node's remaining disk space or number of inodes is less than the threshold. The default disk space threshold is 10% of the total disk space, and the default inode count threshold is 5% of the maximum number of inodes.
+
+* **Process Pressure**: Whether the number of processes that can be created on the node is less than the threshold. A newly installed KubeSphere cluster does not have a process count threshold set by default.
+
+|Real-time Resource Usage
+|The real-time usage and total amount of CPU, memory, and disk for the current node.
+
+Click the corresponding area to view the real-time usage percentage of that resource.
+
+|Node Quota Statistics
+|The CPU quota, memory quota, and ephemeral storage quota for the current node, including reserved amount, limit amount, and total amount.
+
+|Pods
+|The number of various types of pods on the current node.
+
+Pod status types include:
+
+include::../../../../../_custom/clusterManagement/pods/pods-para-podStatus_overview.adoc[]
+
+Pod QoS (Quality of Service) types include:
+
+include::../../../../../_custom/clusterManagement/pods/pods-para-qosTypes.adoc[]
+
+include::../../../../../_custom/clusterManagement/pods/pods-para-oomTypes.adoc[]
+
+|Kubelet Health Status
+|
+* **Pod Startup Latency**: The time required for a pod to transition from creation to the running state.
+* **PLEG Relist Duration**: The time taken by Kubelet to periodically check container status (e.g., liveness/readiness).
+* **Runtime Operator Duration**: The time taken by the container runtime to perform operations (e.g., starting/stopping containers).
+* **Storage Operator Duration**: The time taken by Kubelet to handle storage-related operations (e.g., mounting volumes).
+|===
+--
+
+. Click the **Pods** tab on the details page to view monitoring information for all pods on the node.
++
+--
+include::../../../../../_custom/WizTelemetry/sort-by-fields-and-order.adoc[]
+
+* Click the search box above the list and enter keywords to search for pods by name.
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+--
+
+. Click the **Monitoring** tab on the details page to view detailed information about monitoring metrics within a specified time range.
++
+--
+include::../../../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshData.adoc[]
+--

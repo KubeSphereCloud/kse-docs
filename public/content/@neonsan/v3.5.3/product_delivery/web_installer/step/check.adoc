@@ -1,0 +1,45 @@
+---
+title: "环境检查"
+weight: 3
+---
+
+== Portal 平台确认
+
+. 登录 NeonSAN 管理平台 Portal。使用浏览器打开 “<Portal_vip>:3000”，输入用户名与密码进行登录。
++
+include::../../../../../_components/note.adoc[]
+<Portal_vip> 为link:../install/cluster_info[配置集群信息]时设置的管理平台 VIP。
+include::../../../../../_components/table_footer.adoc[]
++
+[,shell]
+----
+用户名：admin@qingstor.com
+密码：zhu88jie
+----
+
+. 在总览页面，查看当前集群状态，并进行创建卷的相关操作，查看存储功能是否完善。
+
+
+== 后台确认
+
+. 部署完成后，登录至 NeonSAN 集群的任一节点，执行如下命令确认服务是否正常。
++
+[source,shell]
+----
+neonsan list_store && neonsan list_ssd && neonsan list_port && neonsan list_pool && neonsan list_parameter && neonsan list_rg -detail
+----
++
+include::../../../../../_components/note.adoc[]
+* 命令执行成功，无错误提示，即部署成功。
+* 若任一命令执行失败，可登录至 NeonSAN 任一节点，进入 ``/var/log/`` 目录查看相关日志调查原因并解决后，再次执行该命令。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，创建卷，已确认存储功能可用。
++
+[source,shell]
+----
+neonsan create_volume -volume vol/vol02 -size 10G -repcount 3
+----
+
+
+

@@ -1,0 +1,67 @@
+---
+title: "禁用多集群管理"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, 多集群管理, 禁用多集群管理"
+description: "介绍如何禁用多集群管理扩展组件。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 69bebb4b21ea47bda00380f0c79e3da1
+:ks_xref_id: 67f8d4ad3bb94e34bd700dccb3334c7f
+:ks_comp: ../../../../components/
+:ks_title: 禁用多集群管理
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, 多集群管理, 禁用多集群管理
+:ks_description: 介绍如何禁用多集群管理扩展组件。
+:ks_weight: 02
+:ks_icon:
+
+
+本节介绍如何禁用多集群管理扩展组件。
+
+
+== 前提条件link:[id=44300eff9eb544739c7d97f736cd83e8]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=90586d94d26c4c2f9189c1773de7ab80]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:multicluster:clusterRole** 参数设置为 **none**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  multicluster:
+    clusterRole: none
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

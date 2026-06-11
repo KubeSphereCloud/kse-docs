@@ -1,0 +1,93 @@
+---
+title: "GSLB 实现 CDN 源站容灾切换"
+description: 本小节主要介绍如何使用 GSLB 实现 CDN 源站容灾切换。
+keywords: DNS, GSLB, CDN, 源站容灾
+weight: 2
+draft: true
+---
+//全局负载均衡（GSLB）暂时下线
+
+== 应用场景
+
+网站、视频、游戏、直播等客户群体为实现就近访问源站内容，会将企业应用服务接入 CDN 加速，同时他们对业务的高可用性也有极高要求，但 CDN 本身无法感知源站 IP 的运行状态，所以在故障及灾难场景下，无法快速将用户流量切换至正常节点上，而全局负载均衡（下文简称 GSLB），则可以帮助企业实现流量负载均衡、访问加速及容灾切换。
+
+== 操作步骤
+
+本文以 ``test.yunify.com`` 作为测试域名。
+
+=== 步骤一：全局负载均衡配置
+
+. 登录管理控制台。
+. 选择**产品与服务** > *域名与网站* > *云解析 DNS*，进入域名解析页面。
+. 在左侧导航栏选择**全局负载均衡**，进入实例列表页面。
+. 点击**添加**，创建一个 GSLB 实例。
++
+具体参数配置说明，可参见link:../../quickstart/creatgslbpolicy/[配置 GSLB 实例]，以下为配置示例。
+
+ .. 配置站点。
++
+image::/images/cloud_service/site/dns/bp05_station_set.png[添加站点]
+
+ .. 配置监控规则。 +
+配置 HTTP 监控。
++
+image::/images/cloud_service/site/dns/bp05_monitoring_setting.png[添加监控规则]
+
+ .. 配置调度策略。 +
+勾选**智能跌宕**和**主备切换**，并根据实际情况配置**主 IP 池在线率**阈值范围。
++
+image::/images/cloud_service/site/dns/gslb_scheduling_policy.png[配置调度策略]
+
+ .. 配置好参数后，点击**完成创建**。
++
+创建完成后，在弹出的配置信息确认页面，可看到 CNAME 接入域名。点击域名后的复制按钮，复制 GSLB 的 CNAME 接入域名。
++
+image::/images/cloud_service/site/dns/bp05_glsb_complete.png[CNAME地址]
+
+=== 步骤二：CDN 加速配置
+
+**配置加速域名**
+
+. 选择**产品与服务** > *网络服务* > *CDN 服务*，进入 CDN 页面。
+. 点击**购买**，弹出**购买 CDN 服务**页面。
++
+image::/images/cloud_service/site/dns/bp05_buy_cdn.png[购买CDN服务]
+
+. 点击**添加域名**，输入域名名称，点击**提交**。
++
+image::/images/cloud_service/site/dns/bp05_add_domain.png[添加域名]
+
+. 点击**创建域名记录**，配置域名记录，点击**提交**。
++
+回源地址填写在<<_步骤一全局负载均衡配置,步骤一>>中复制的 GSLB 实例的 CNAME 接入域名。
++
+image::/images/cloud_service/site/dns/bp05_domain_record.png[创建域名记录]
+
+. 设置 Origin Host、节点类型和服务区域。
+. 点击**提交**，购买完成后返回 CDN 页面。
+. 点击域名记录名称，进入详情页。
+. 在**基本属性**区域，复制 CNAME。
++
+image::/images/cloud_service/site/dns/bp05_cdn_domain_cname.png[域名CNAME,50%]
+
+**配置域名解析**
+
+include::../../../../../_components/note.adoc[]
+
+若域名托管在其他解析服务商，则需要登录到相应解析管理控制台，添加 CNAME 记录。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 选择**产品与服务** > *域名与网站* > *云解析 DNS*，进入域名解析页面。
+. 点击**添加**，输入要解析的域名，点击**添加**。
++
+image::/images/cloud_service/site/dns/bp05_add_dns.png[添加解析域名]
+
+. 在域名列表，点击已添加的域名名称，进入域名管理页面。
+. 在**解析记录**页签下，点击**添加记录**，配置 CNAME 记录。
++
+记录值填写在<<_步骤二cdn_加速配置,加速域名配置>>中复制的 CNAME。
++
+image::/images/cloud_service/site/dns/bp05_gslb_dns.png[域名解析记录]
++
+至此，CDN 加速配置完成。

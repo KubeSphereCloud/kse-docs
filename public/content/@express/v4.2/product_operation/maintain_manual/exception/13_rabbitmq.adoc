@@ -1,0 +1,137 @@
+---
+title: "Rabbitmq 服务恢复"
+weight: 13
+---
+
+== 运维场景
+
+物理节点断电启动后，通过服务巡检发现 Rabbitmq 异常。该问题可能是由于节点长时间宕机导致当前节点无法加入集群导致的。可参考以下方式进行恢复。
+
+
+== 操作步骤
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，查看 KS 节点信息。
++
+[source,shell]
+----
+cat /etc/hosts | grep ks
+----
+
+. 逐一登录各 KS 节点，
+. 检查各 KS 节点上 rabbitmq-server 服务的状态。rabbitmq-server 服务一般仅存在于其中 2 个 KS 节点上。
++
+[source,shell]
+----
+systemctl status rabbitmq-server
+----
+
+. 登录至 rabbitmq-server 服务状态异常的 KS 节点上，依次执行如下命令，删除本地数据文件，并重启。
+.. 删除本地数据文件。
++
+[source,shell]
+----
+rm -rf /var/lib/rabbitmq/mnesia
+----
+
+.. 重启服务。
++
+[source,shell]
+----
+systemctl start rabbitmq-server
+----
++
+include::../../../../../_components/note.adoc[]
+* 若当前 KS 节点上的 rabbitmq-server 服务无法启动，则可尝试登录另一 KS 节点，执行 `` systemctl stop rabbitmq-server `` 关闭 rabbitmq-server 服务，然后再重新启动当前节点 rabbitmq-server 服务。
+* 若 rabbitmq-server 服务无法关闭，则可使用 ``ps`` 命令查询 rabbitmq 进程后，``kill`` 相应进程。
+include::../../../../../_components/table_footer.adoc[]
+
+. 可重复执行步骤 6，直至两个 KS 节点上的 rabbitmq-server 服务均启动成功。
+
+. 在其中任一部署了rabbitmq-server 服务的节点上，依次执行如下命令，重新添加用户信息。
++
+[source,shell]
+----
+rabbitmqctl add_user boss2 zhu88jie
+----
++
+[source,shell]
+----
+rabbitmqctl set_permissions -p / boss2 '.*' '.*' '.*'
+----
+
+. 待所有 KS 节点上的 rabbitmq-server 服务启动成功后，执行如下命令，检查当前集群节点的状态。
++
+[source,shell]
+----
+rabbitmqctl cluster_status
+----
+
+.. 若返回结果中， ``Running Nodes`` 中包含两个节点，即为正常。
++
+image::/images/express/maintain/rabbitmq_1.png[]
+
+.. 若返回结果中，``Running Nodes`` 中仅包含一个节点信息或者为空。可登录相应节点，依次执行如下命令，手动添加。
++
+[source,shell]
+----
+rabbitmqctl stop_app
+----
++
+[source,shell]
+----
+rabbitmqctl join_cluster rabbit@<ks_hostname>
+----
++
+[source,shell]
+----
+rabbitmqctl start_app
+----
+
+== 其他情况
+
+若物理机突然断电宕机，重启后，各节点的 rabbitmq-server 服务均正常。但是 ``rabbitmqctl cluster_status`` 返回结果中 ``Running Nodes`` 里只有一个节点信息或者为空，则需要登录相应的节点进行如下操作。
+
+. 逐一登录指定部署了 rabbitmq-server 服务的 KS 节点。
+
+. 执行如下命令，强制启动服务。
++
+[source,shell]
+----
+rabbitmqctl force_boot
+----
+
+. 执行如下命令，重启服务。
++
+[source,shell]
+----
+systemctl restart rabbitmq-server
+----
+
+. 在任一部署了 rabbitmq-server 服务的 KS 节点上，执行如下命令，检查状态。返回结果中`，`Running Nodes`` 中包含所有部署了 rabbitmq-server 服务的节点。
++
+[source,shell]
+----
+rabbitmqctl cluster_status
+----
+
+
+

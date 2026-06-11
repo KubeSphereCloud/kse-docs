@@ -1,0 +1,79 @@
+---
+title: 清理集群/节点中间状态（CleanClusterTransitionStatus）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cluster_id
+| String
+| false
+| 集群ID
+
+| node_id
+| String
+| false
+| 集群节点ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| job_id
+| Object
+| false
+| 任务信息
+
+| job_id.cluster_id
+| String
+| false
+| 集群ID
+
+| job_id.node_id
+| String
+| false
+| 集群节点ID
+
+| ret_code
+| String
+| false
+| 返回状态码
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CleanClusterTransitionStatus",
+  "cluster_id": "cl-fqzrvm3g",
+  "node_id": "cln-3ovkuha6"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CleanClusterTransitionStatusResponse",
+  "job_id": {
+    "cluster_id": "cl-fqzrvm3g",
+    "node_id": "cln-3ovkuha6"
+  },
+  "ret_code": 0,
+  "trace_id": "fydzP26i"
+}
+----

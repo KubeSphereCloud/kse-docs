@@ -1,0 +1,47 @@
+---
+title: "View Log Receiver Details"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Cluster Settings, Log Receiver, View Log Receiver Details"
+description: "Describes how to view log receiver details."
+weight: 03
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **Logging > Log Receivers**
+
+
+This section describes how to view log receiver details.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* A log receiver has been added.
+
+
+== Steps
+
+include::../../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Log Receivers** page, click **Container Logs**, **Resource Events**, **Audit Logs**, or **Notification History**, then click the name of a log receiver in the list to open its details page.
+
++
+
+. On the log receiver details page, check whether the log receiver is enabled in the **Attributes** area.
+
+. On the log receiver details page, view the log receiver's settings on the **Resource Status** tab.
++
+--
+include::../../../../../_custom/clusterManagement/logReceivers/logReceivers-para-addLogReceiver.adoc[]
+--

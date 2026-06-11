@@ -1,0 +1,61 @@
+---
+title: "Reset Built-in Rule Groups"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Monitoring and Alerting, Alert Management, Rule Groups, Delete Rule Groups"
+description: "Describes how to reset built-in rule groups."
+weight: 08
+---
+
+:ks_permission: **Rule Group Management**
+:ks_navigation: **Monitoring and Alerting > Rule Groups**
+
+This section describes how to reset built-in rule groups.
+
+For built-in rule groups, after editing the preset alert rules, you can reset the rule group to restore the default alert rules.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+* KubeSphere only supports resetting built-in rule groups and does not support resetting custom rule groups.
+* There are no built-in rule groups in projects.
+|===
+
+[.admon.warning,cols="a"]
+|===
+|Warning
+
+|
+Rule groups cannot be recovered after reset. Please perform this operation with caution.
+|===
+
+
+
+
+== Prerequisites
+
+* The **WizTelemetry Alerting** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../../
+
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions and enter your cluster.
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Rule Groups** page, click **Built-in Rule Groups** to open the rule group list.
+
+. On the right side of the rule group you want to reset, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Reset** from the dropdown list.
+
+. In the **Reset Rule Group** dialog box, click **OK**.

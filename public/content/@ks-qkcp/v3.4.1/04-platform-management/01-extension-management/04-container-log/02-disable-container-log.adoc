@@ -1,0 +1,141 @@
+---
+title: "禁用容器日志"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, 禁用容器日志"
+description: "介绍如何禁用容器日志扩展组件。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 84c471931d8f45628f94f95e2f93ff38
+:ks_xref_id: 49387c3669e545e59b5964c267acb78b
+:ks_comp: ../../../../components/
+:ks_title: 禁用容器日志
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, 禁用容器日志
+:ks_description: 介绍如何禁用容器日志扩展组件。
+:ks_weight: 02
+:ks_icon:
+
+
+本节介绍如何禁用容器日志扩展组件。
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+此操作可能导致资源事件、审计日志和应用治理功能异常，请谨慎执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=e33a4e594e4941c192322816737a9e72]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=6ba32e6fad884f898018d7ffde731775]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:logging:enabled** 参数设置为 **false**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  logging:
+    enabled: false
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在 **kubectl** 对话框，执行以下命令删除容器日志相关资源：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete crd fluentbitconfigs.logging.kubesphere.io
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete crd fluentbits.logging.kubesphere.io
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete crd inputs.logging.kubesphere.io
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete crd outputs.logging.kubesphere.io
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete crd parsers.logging.kubesphere.io
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete deployments.apps -n kubesphere-logging-system fluentbit-operator
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+helm uninstall elasticsearch-logging --namespace kubesphere-logging-system
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete deployment logsidecar-injector-deploy -n kubesphere-logging-system
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete ns kubesphere-logging-system
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

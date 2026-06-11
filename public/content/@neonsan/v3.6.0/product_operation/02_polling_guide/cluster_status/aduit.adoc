@@ -1,0 +1,22 @@
+---
+title: "查询审计信息"
+weight: 12
+---
+
+. 登录 NeonSAN 集群任一节点。 
+. 执行如下命令，查询 NeonSAN 集群的操作记录。
++
+[,shell]
+----
+neonsan list_audit
+----
++
+image::/images/neonsan/polling_guide_37.png[]
++
+回显说明：
++
+* ``OPERATION TYPE``：执行的操作。 
+* ``FROM IP``：执行对应操作的节点 IP。
+* ``TIME``：执行对应操作的时间。
+
+

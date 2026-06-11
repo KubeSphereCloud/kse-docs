@@ -1,0 +1,51 @@
+---
+title: "Disassociate EIPs from resources"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, EIPs, dissociation"
+description: "Describes how to dissociate EIPs from resources in the {ks_product} web console."
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 660d219417bf435f8332a40c76529127
+:ks_xref_id: eeb669b8d04d43d4becf0c2a8efddc7b
+:ks_comp: ../../../../components/
+:ks_title: Disassociate EIPs from resources
+:ks_description: Describes how to dissociate EIPs from resources in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, EIPs, dissociation
+:ks_weight: 07
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to dissociate elastic IP addresses (EIPs) from resources in the {ks_product_abbr_full} web console.
+
+You can dissociate EIPs from virtual private clouds (VPCs) or VMs based on business requirements.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=ac69a427955d496ba10fd1cfa3767f75]
+
+include::../../../../_custom-en/networks/eip-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=8bcc76297312433dabcda9a5d10f2ad9]
+
+include::../../../../_custom-en/networks/eip-steps.adoc[]
+
+. Find the VPC that you want to dissociate, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Unbind** from the drop-down list.
+. In the dialog box that appears, click **OK**.
++
+--
+// Warning
+
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+After you dissociate EIPs from VPCs, the resources in VPCs cannot be accessed over the Internet. Exercise caution when you perform this operation.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,135 @@
+---
+title: "查看系统组件列表"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 系统组件, 查看系统组件列表"
+description: "介绍如何查看系统组件列表。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 9257fe662f794a4ea2db41c0a70da47e
+:ks_xref_id: d690888a20f74f1b9b4cf9e1027e8c39
+:ks_comp: ../../../components/
+:ks_title: 查看系统组件列表
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 系统组件, 查看系统组件列表
+:ks_description: 介绍如何查看系统组件列表。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **系统组件查看**
+:ks_navigation: **系统组件**
+
+
+本节介绍如何查看系统组件列表。
+
+
+== 前提条件link:[id=6400868f86154944bf44d5102babf7ab]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=ba560dff37e94069bd099d8c861c5d07]
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**系统组件**页面，选择一个组件分类查看属于该分类的所有系统组件。
++
+====
+* **系统组件**页面显示系统组件分类：
++
+--
+[%header,cols="1a,4a"]
+|===
+|组件类别 |描述
+
+|{ks_product}
+|{ks_product_right}平台的系统组件。
+
+|Kubernetes
+|Kubernetes 系统组件。
+
+|应用治理
+|
+
+ifeval::["{file_output_type}" == "html"]
+
+{ks_product_right}应用治理功能相关的系统组件，需要启用应用治功能才会显示。有关更多信息，请参阅 link:../../../04-platform-management/01-extension-management/[启用可插拔组件]。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+{ks_product_right}应用治理功能相关的系统组件，需要启用应用治功能才会显示。有关更多信息，请参阅《{ks_product_right}平台管理指南》的“扩展组件管理”章节。
+
+endif::[]
+
+|监控
+|{ks_product_right}监控功能相关的系统组件。
+
+|日志
+|
+
+ifeval::["{file_output_type}" == "html"]
+
+{ks_product_right}日志功能相关的系统组件，需要启用日志功能才会显示。有关更多信息，请参阅link:../../../04-platform-management/01-extension-management/[启用可插拔组件]。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+{ks_product_right}日志功能相关的系统组件，需要启用日志功能才会显示。有关更多信息，请参阅《{ks_product_right}平台管理指南》的“扩展组件管理”章节。
+
+endif::[]
+
+|DevOps
+|
+ifeval::["{file_output_type}" == "html"]
+
+{ks_product} DevOps 功能相关的系统组件，需要启用 DevOps 功能才会显示。有关更多信息，请参阅link:../../../04-platform-management/01-extension-management/[启用可插拔组件]。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+{ks_product} DevOps 功能相关的系统组件，需要启用 DevOps 功能才会显示。有关更多信息，请参阅《{ks_product_right}平台管理指南》的“扩展组件管理”章节。
+
+endif::[]
+
+|===
+--
+
+* 系统组件列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称和描述
+|系统组件的名称和描述
+
+|状态
+|
+include::../../../_custom/clusterManagement/systemComponents/systemComponents-para-status.adoc[]
+
+|副本数量
+|
+include::../../../_custom/clusterManagement/systemComponents/systemComponents-para-replica-count.adoc[]
+
+|运行时间
+|系统组件已持续运行的时间。
+|===
+--
+====

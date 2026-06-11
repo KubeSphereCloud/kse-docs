@@ -1,0 +1,38 @@
+---
+title: "设置安置组"
+weight: 10
+---
+
+企业云平台通过安置组（Placement Group，PLG）配置每个计算节点所支持的资源类型。
+
+请根据实际情况为计算节点设置安置组，可以配置默认的安置组和新建的安置组。
+
+== 注意事项
+
+无论当前计算节点使用哪种存储类型，请务必将 plg-00000000（sas group）配置到所有计算节点，否则将导致在 Console 上创建 VPC 等服务失败。
+
+== 操作步骤
+
+1. 登录 BOSS。
+2. 选择**基础设施** > *计算* > **计算节点**，进入计算节点页面。
++
+image::/images/ep_offline/installation/initialize_plg_config_plg_01.png[]
+3. 在目标计算节点的操作列，点击更多图标image:/images/ep_offline/installation/icon_more.png[]，选择**设置安置组**，弹出设置计算节点安置组对话框。
++
+image::/images/ep_offline/installation/initialize_plg_config_plg_02.png[]
+4. 勾选需要设置的**安置组**，填写**操作原因**。
++
+
+include::../../../../../_components/note.adoc[]
+* 所有环境都必须勾选``性能型: sas group``。
+* hyper-repl 环境必须勾选``超高性能型: ssd group``。
+* hyper-sanc 环境必须勾选 `sanc group`。
+* s2 server 配置说明：如果使用 s2 server 还需要确保添加了性能型或超高性能型 PLG。
+
+include::../../../../../_components/table_footer.adoc[]
+
+5. 点击**设置**，回到计算节点页面。
++
+image::/images/ep_offline/installation/initialize_plg_config_plg_03.png[]
++
+若修改后状态没有立即改变，请点击列表右上方的刷新按钮进行刷新，刷新界面即可看到修改后的结果。

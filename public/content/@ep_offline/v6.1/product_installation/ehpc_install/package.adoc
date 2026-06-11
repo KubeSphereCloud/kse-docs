@@ -1,0 +1,29 @@
+---
+title: "准备安装包"
+weight: 3
+---
+
+EHPC 服务的安装部署主要包括两部分：EHPC 应用安装与文件存储 EPFS 服务安装。因此，用户需参考以下方式获取两个服务所需的安装包。
+
+
+== 获取 EHPC 应用包
+
+从以下 ftp 路径，获取新的 EHPC 应用安装包。
+
+[source,shell]
+----
+ftp://ins.qingcloud.com/hpc/20221230/migrate_appcenter2_ehpc.tar.gz
+----
+
+
+== 获取 EPFS 所需安装包
+
+EPFS 服务为 Lustre 文件系统的管理服务。Lustre 一般由第三方提供，故无需关注其安装部署流程，在 POC 环境中，用户可参考link:../annex/lustre[附录内容]，使用云服务器进行虚拟部署，以演示相应功能与特性。 +
+为了方便用户能够便捷的在浏览器页面实现文件的上传与下载操作，部署 EPFS 时需安装 MinIO 服务。在实际生产环境中需部署 MinIO 服务，可从以下 ftp 路径获取该服务安装包。
+
+[source,shell]
+----
+ftp://ins.qingcloud.com/hpc/20221230/minio.tar
+----
+
+

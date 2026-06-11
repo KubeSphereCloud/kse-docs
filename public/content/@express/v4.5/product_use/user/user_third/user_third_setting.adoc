@@ -1,0 +1,59 @@
+---
+title: "管理第三方服务器"
+draft: false
+weight: 3
+---
+== 功能描述
+
+云易捷支持管理员用户对通过第三方登录的用户进行管理操作，包括修改、禁用以及启用操作。
+
+
+== 修改第三方服务器
+
+. 登录{product_console_name_en}。
+. 在顶部导航栏，选择**用户管理** > *第三方登录*，进入第三方登录列表页面。
++
+
+include::../../../../../_components/note.adoc[]
+在**第三方登录**列表页面的搜索框中输入服务器名称，点击``Enter``，找到指定的第三方服务器。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/user_third_setting_1.png[setting_third_user_1]
+
+. 点击待修改名称的本地用户所在行右侧的更多操作，选择**修改**。
++
+image::/images/express/console/user_third_setting_2.png[setting_third_user_2]
+
+. 在弹出的**修改第三方服务器**的窗口中输入相应参数，点击**修改**即可。可修改的内容包括名称、类型、服务器地址/端口、基准、管理员账户/密码。
++
+image::/images/express/console/user_third_setting_3.png[,60%]
+
+== 禁用/启用服务器
+
+=== 禁用服务器
+被禁用的第三方服务器下关联的所有账户将无法登录当前平台。
+
+. 登录{product_console_name_en}。
+. 在顶部导航栏，选择**用户管理** > *第三方登录*，进入第三方登录列表页面。 点击待禁用服务器所在行右侧的更多操作，选择**禁用服务器**。
++
+image::/images/express/console/user_third_setting_4.png[setting_third_user_4]
+
+. 在弹出的**禁用**的窗口中，点击**禁用**即可。
+//+
+//image::/images/express/console/user_third_setting_5.png[,50%]
+
+. 返回第三方登录列表，此时弹出**当前服务器被禁用成功**的提示符，且该服务器的状态变为**已禁用**。
++
+image::/images/express/console/user_third_setting_6.png[setting_third_user_6]
+
+=== 启用服务器
+
+. 登录{product_console_name_en}。
+. 在顶部导航栏，选择**用户管理** > *第三方登录*，进入第三方登录列表页面。 点击待恢复的服务器所在行右侧的更多操作，选择**启用服务器**。
++
+image::/images/express/console/user_third_setting_7.png[setting_third_user_7]
+
+. 返回第三方登录列表，此时弹出**当前服务器已被恢复**的提示符，此时该服务器状态变为**活跃**。
++
+image::/images/express/console/user_third_setting_8.png[setting_third_user_8]

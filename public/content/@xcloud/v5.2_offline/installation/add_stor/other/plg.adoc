@@ -1,0 +1,109 @@
+---
+title: "设置安置组"
+weight: 50
+---
+
+企业云 v6.0.0 及以上版本中，使用 s1 主机类型作为第三方存储主机类型。
+
+需要为 Hyper 配置两个 PLG：
+
+* 主机使用 **s1 group**，对应 instance_class 101。
+* 硬盘使用 **tps group**，对应 volume_type 20。
+
+== 设置 tps group
+
+1. 登录任一 webservice 节点。
+2. 执行以下命令，进入 /pitrix/cli 目录。
++
+[source]
+----
+cd /pitrix/cli
+----
+3. 执行以下命令，确认是否有 **tps group** 安置组（默认有）。
++
+[source]
+----
+./describe-place-groups -g 'plg-00000tps'
+----
++
+若没有 **tps group** 安置组，执行以下命令进行创建。
++
+[source]
+----
+./create-place-group -n "tps group" -p plg-00000tps
+----
+4. 创建并绑定 volume type  20 到 tps group。
++
+[source]
+----
+./create-place-group-rules -g plg-00000tps -r volume_type_20
+----
+5. 添加主机。
++
+[source]
+----
+./associate-place-groups-to-hypernode -g plg-00000tps -H dev1ar01n04
+----
++
+**参数说明**
++
+**-H 参数**：实际部署的 tpsc 计算节点。
+
+6. 加载安置组。
++
+[source]
+----
+./load-place-groups
+----
+
+== 设置 s1 group
+
+1. 登录任一 webservice 节点。
+2. 执行以下命令，进入 /pitrix/cli 目录。
++
+[source]
+----
+cd /pitrix/cli
+----
+3. 执行以下命令，确认是否有 **s1 group** 安置组。
++
+[source]
+----
+./describe-place-groups -g 'plg-00000101'
+----
++
+若没有 **s1 group** 安置组，执行以下命令进行创建。
++
+[source]
+----
+./create-place-group -n "s1 group" -p plg-00000101
+----
+4. 添加 instance type 101。
++
+[source]
+----
+/pitrix/lib/pitrix-scripts/instance_type/init_instance_type -i 101 -z devops1a
+----
+5. 创建并绑定 instance type 101 到 s1 group。
++
+[source]
+----
+./create-place-group-rules -g plg-00000101 -r instance_class_101
+----
+6. 添加主机。
++
+[source]
+----
+./associate-place-groups-to-hypernode -g plg-00000101 -H dev1ar01n04
+----
++
+**参数说明**
++
+**-H 参数**：实际部署的 tpsc 计算节点。
+
+7. 加载安置组。
++
+[source]
+----
+./load-place-groups
+----

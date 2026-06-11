@@ -1,0 +1,54 @@
+---
+title: "Configure a network for EIPs"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, elastic, IP addresses, web console, configuration"
+description: "Configure a network for EIPs"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: a4cd53cc374f45269701f8b2a5687ea2
+:ks_xref_id: b58944031a0548548bcdd51da176c7ac
+:ks_comp: ../../../../components/
+:ks_title: Configure a network for EIPs
+:ks_description: Configure a network for EIPs
+:ks_keywords: {ks_product_full}, {ks_product}, elastic, IP addresses, web console, configuration
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+If you have not configured a network for elastic IP addresses (EIPs) during installation, you can configure a network in the {ks_product_abbr_full} console after installation.  This topic describes how to configure a network for EIPs in the {ks_product} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=682cc0ea27114621922f7b3cd1a96a0f]
+
+include::../../../../_custom-en/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=eef769b7c497423f83c08ff5abf46a57]
+
+include::../../../../_custom-en/networks/eip-network-config-steps.adoc[]
+
+. On the **EIP Networks** page, click **Create**.
++
+--
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Before you configure a network for EIPs, make sure a physical network is created.  If a physical network is not created, click **Click to create**.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. In the dialog box that appears, configure parameters for the EIP network. 
++
+--
+include::../../../../_custom-en/networks/eip-network-config-parameters.adoc[]
+--
+. Click **Create**.

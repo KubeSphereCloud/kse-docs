@@ -1,0 +1,614 @@
+---
+title: 前期准备
+weight: 1
+draft: true
+---
+
+在安装部署 {product_name} 之前，各节点服务器需达到安装前的标准状态，才可使用 {product_name} 自动化部署脚本来部署环境。
+
+== 环境规划表
+
+
+
+
+== 创建网络
+
+. 登录 link:https://console.qingcloud.com/[Console]，输入正确的用户名密码。
+
+. 选择**产品与服务** > **网络服务** > **VPC 网络**，进入 VPC 网络主页面。
++
+image::/images/u10000/vpc_main.png[vpc_main,100%]
+
+. 点击**创建 VPC 网络**，进入创建 VPC 网络页面。
++
+image::/images/u10000/vpc_create_main.png[vpc_create_main,100%]
+
+
+. 分别点击**展开**，根据页面提示信息分别填写 VPC 网络的基本信息与初始私有网络信息。
++
+* 基本信息
++
+image::/images/u10000/vpc_basic_info.png[vpc_basic_info,100%]
++
+**参数说明**
++
+[cols="2,5", options="header"]
+|===
+| 参数 |说明
+
+| 区域	|待创建的 VPC 网络所在区域。选择 `北京3区`。
+| 名称	|待创建的 VPC 网络名称，需用户自行定义。
+| IPv4 地址范围	|确定待创建的 VPC 网络所在的地址范围。
+| IPv6 地址范围	|选择 `关闭 IPv6`。
+| 类型	|为绑定公网 IP，不可使用免费型。选择 `中型`。
+| 公网IP | 选择 `购买并绑定`。
+| 公网IP名称| 填写待绑定的公网 IP 名称。
+| 计费模式| 选择 `按带宽计费`。
+| 带宽上限| 选择 `100 Mbps`。
+
+| 安全组 | 选择 `默认安全组`。
+
+|===
+
++
+* 初始私有网络
++
+image::/images/u10000/vpc_private_info.png[vpc_private_info,100%]
++
+**参数说明**
++
+[cols="2,5", options="header"]
+|===
+| 参数 |说明
+
+| 名称	|待创建的私有网络名称。用户自行定义。
+| 部署方式	|选择 `单可用区部署`。
+| 可用区	| 选择 `北京3区-B`。
+| IPv4 地址范围	|默认即可。
+
+| 网络 ACL | 默认即可。
+
+|===
+
+// . 由于 {product_name} 标准环境，推荐使用两张网卡。因此，这里需要创建两个私有网络，分别绑定于两张网卡。点击**添加私有网络**，再创建一组私有网络。
+// +
+// image::/images/u10000/vpc_private_info2.png[vpc_private_info2,100%]
+// +
+// **参数说明**
+// +
+// [cols="2,5", options="header"]
+// |===
+// | 参数 |说明
+
+// | 名称	|待创建的私有网络名称。与上面创建的私有网络名称保持不同即可。
+// | 部署方式	|选择 `单可用区部署`。与上面创建的私有网络保持一致即可。
+// | 可用区	| 选择 `北京3区-B`。与上面创建的私有网络保持一致即可。
+// | IPv4 地址范围	|默认即可。与上面创建的私有网络网段保持不同即可。
+
+// | 网络 ACL | 默认即可。
+
+// |===
+
+. 填写完 VPC 网络的基本信息与私有网络信息后，点击**立即创建**。
+
+. 进入 VPC 网络主页面，可查看已创建的 VPC 网络。
++
+image::/images/u10000/vpc_list.png[vpc_list,100%]
+
+// == 申请网卡
+
+// . 登录 link:https://console.qingcloud.com/[Console]，输入正确的用户名密码。
+
+// . 选择**产品与服务** > **计算** > **云服务器**，进入计算基础服务主页面。
+// +
+// image::/images/u10000/vm_main.png[vm_main,100%]
+
+// . 点击**网卡**，进入网卡主页面。
+// +
+// image::/images/u10000/netcard_main.png[netcard_main,100%]
+
+// . 点击**申请**，弹出申请网卡对话框：
+// +
+// image::/images/u10000/netcard_create.png[netcard_create,100%]
+// +
+// **参数说明**
+// +
+// [cols="2,5", options="header"]
+// |===
+// | 参数 |说明
+
+// | 名称	|待创建的网卡名称。需用户自行定义。
+// | 数量	|填写 `1`。
+// | 网络	| 选择已创建的私有网络。
+// | 内网 IP	|填写 `2`。
+
+// |===
+
+// . 重复以上步骤，创建 3 张网卡。
+// +
+// include::../../../../../_components/note.adoc[]
+
+// * 这里以创建 3 台云服务器搭建 3 节点的 {product_name} 环境为例，因此申请 3 张网卡。
+// * 需注意的是，3 张网卡需选择相同的私有网络。
+
+
+// include::../../../../../_components/table_footer.adoc[]
+
+// . 进入网卡主页面，查看已申请的网卡列表：
+// +
+// image::/images/u10000/netcard_list.png[netcard_list,100%]
+
+
+== 创建 SSH 密钥
+
+include::../../../../../_components/note.adoc[]
+
+* 由于后续用户需要通过本地主机连接访问云服务器，因此这里使用的是本地主机的 SSH 公钥。
+* 后续创建云服务器时，使用该 SSH 密钥，即可将本地主机的 SSH 公钥成功添加至云服务器中。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+
+. 登录 link:https://console.qingcloud.com/[Console]，输入正确的用户名密码。
+
+. 选择**产品与服务** > **计算** > **云服务器**，进入计算基础服务主页面。
++
+image::/images/u10000/vm_main.png[vm_main,100%]
+
+. 点击**SSH 密钥**，进入 SSH 密钥主页面。
++
+image::/images/u10000/ssh_main.png[ssh_main,100%]
+
+. 点击**创建**，弹出创建SSH密钥对话框，页面参数依次选择 `使用已有公钥`，并将本地主机的 SSH 公钥拷贝粘贴至此后，点击**提交**。
++
+image::/images/u10000/ssh_create.png[ssh_create, pdfwidth=60%]
+
+. 正确输入参数后，点击**提交**。
+
+. 进入 SSH 密钥主页面，查看已创建的 SSH 密钥。
++
+image::/images/u10000/ssh_list.png[ssh_list,100%]
+
+
+== 创建云服务器
+
+. 登录 link:https://console.qingcloud.com/[Console]，输入正确的用户名密码。
+
+. 选择**产品与服务** > **计算** > **云服务器**，进入计算基础服务主页面。
++
+image::/images/u10000/vm_main.png[vm_main,100%]
+
+. 在云服务器标签页，点击**创建**。
+
+. 进入**购买云服务器**页面。需依次填写相关参数后，点击**立即购买**。
++
+* 填写购买信息
++
+image::/images/u10000/vm_basic_info.png[vm_basic_info,100%]
++
+**参数说明**
++
+[cols="2,5", options="header"]
+|===
+| 参数 |说明
+
+| 计费方式	|选择 `按需计费`。
+| 区域及可用区	| 选择 `北京3区-C`。与前文link:#_创建网络[创建的私有网络]保持一致即可。
+
+|===
+
+
++
+* 填写配置信息
++
+image::/images/u10000/vm_config_info.png[vm_config_info,100%]
++
+**参数说明**
++
+[cols="2,5", options="header"]
+|===
+| 参数 |说明
+
+| 规格	| vCPU 选择 `8 核`，内存选择 `16 G`，CPU 指令集选择 `Ice Lake`。根据以上要求，选择相应的实例即可。
+| 镜像	| 选择 `标准镜像`。操作系统选择 `Ubuntu`，版本选择 `20.04` 系列即可。
+| 存储	| 系统盘选择 `150 G`。数据盘创建 2 块，均选择 `容量型云盘`，大小为 `300 G`。勾选 `自动格式化`。
+| 网络	a| 选择 `VPC 私有网络`。
+
+* VPC 私有网络列表中选择link:#_创建网络[前期已创建]的 VPC 私有网络。
+* 私有网络子网列表中选择有别于link:#_申请网卡[申请网卡]时使用的子网网段。
+* 前期link:#_申请网卡[申请网卡]时使用的是 `100` 网段的子网，这里选择 `101` 网段的子网即可。
+* 为了与前期link:#_申请网卡[申请网卡]时使用的 IP 地址对应，，这里选择 `手动分配 IP 地址`，并填写 `2`。
+
+| 网卡	a| 
+
+* 由于 {product_name} 标准配置为每节点 2 张网卡，因此这里需要给云服务器增加一个网卡。
+* 选择已申请的网卡。这里选择 IP 地址为 `192.168.100.2` 的网卡。
+
+| 弹性公网 IP| 选择 `暂不绑定`。
+
+|===
+
++
+* 填写云服务器设置
++
+image::/images/u10000/vm_machine_info.png[vm_machine_info,100%]
++
+**参数说明**
++
+[cols="2,5", options="header"]
+|===
+| 参数 |说明
+
+| 云服务器名称	| 待创建的云服务器名称。
+| 登录方式	| 选择 `SSH密钥`。并在下拉框内选择link:#_创建_ssh_密钥[前期已创建]的 SSH 密钥。
+
+| 安全组| 选择 `已有安全组`。并在下拉框内选择 `默认安全组`。
+| 高级配置| 维持默认，无需够选 `现在配置`。
+
+|===
+
+
++
+* 填写特惠加购
++
+image::/images/u10000/vm_extra_info.png[vm_extra_info,100%]
++
+维持默认，无需填写。
+
+. 根据以上步骤，创建 3 台云服务器。
+
+. 在云服务器主页面，查看已创建的云服务器列表：
++
+image::/images/u10000/vm_list.png[vm_list,100%]
+
+
+. 在云服务器主页面，点击云服务器 ID，进入云服务器详情页面，确认云服务器的资源绑定正确。
++
+image::/images/u10000/vm_detail_info.png[vm_detail_info,100%]
++
+
+include::../../../../../_components/note.adoc[]
+
+需确认如下信息：
+
+* 硬盘成功绑定两块。
+* 内网 IP 成功绑定两个，且一一对应，如：192.168.101.4/192.168.100.4；192.168.101.3/192.168.100.3；192.168.101.2/192.168.100.2。
+* SSH 密钥绑定的为link:#_创建_ssh_密钥[前期创建]的 SSH 密钥。这里为 `local_ssh`。
+* 若以上信息不准确，可根据link:https://docsv3.qingcloud.com/compute/vm/manual/disk/10_mount_disk/[公有云用户手册]进行修改。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+== 创建端口转发
+
+由于创建的云服务器过多，而公网 IP 分配过少，避免资源浪费，可给一个公网 IP 配置多个端口转发。本地链接云服务器，可使用 `公网 IP + 端口号` 
+的方式，逐个登录云服务器。
+
+
+. 登录 link:https://console.qingcloud.com/[Console]，输入正确的用户名密码。
+
+. 选择**产品与服务** > **网络服务** > **VPC 网络**，进入 VPC 网络主页面。
++
+image::/images/u10000/vpc_list.png[vpc_list,100%]
+
+. 点击已创建的云服务器节点所在的 VPC 网络名称，进入其详情页面。
++
+image::/images/u10000/vpc_detail_info.png[vpc_detail_info,100%]
+
+. 点击**管理配置**，进入管理配置标签页，点击**端口转发** > **添加规则**：
++
+image::/images/u10000/vpc_config_info.png[vpc_config_info,100%]
+
+. 弹出**添加端口转发规则**对话框：
++
+image::/images/u10000/vpc_port_transfer_create.png[vpc_config_info, pdfwidth=60%]
++
+**参数说明**
++
+[cols="2,5", options="header"]
+|===
+| 参数 |说明
+
+| 名称	| 用户自定义即可。这里填写 `rul1`。
+| 协议	| 选择 `TCP`。
+| 源端口	| 填写 `1002`。可自行定义。
+| 内网 IP	a| 
+* 填写各云服务器节点的主网卡 IP 地址。
+
+* 这里建议一一对应。源端口号填写 1002，则此处填写 `192.168.100.2`。
+
+
+| 内网端口	a| 填写 `22`。
+
+|===
+
+
+. 参考以上步骤，创建 3 条转发规则，且一一与各云服务器节点的主网卡 IP 地址对应。
+
+. 完成端口转发规则创建后，点击**应用修改**：
++
+image::/images/u10000/vpc_port_transfer_list.png[vpc_port_transfer_list,100%]
+
+== 登录云服务器
+
+
+
+== 云服务器配置确认
+
+待云服务器各节点间，以及与本地可建立连接后，需再次逐一登录云服务器，确认云服务器内部配置正确。这里主要确认一下网卡配置。
+
+. 使用 WindTerm 或 Putty 等支持 SSH 的终端工具，输入如下命令行，逐一登录云服务器。其中 `xx.xx.xx.xx` 需根据实际情况，修改为前期创建的公网 IP。
++
+[source,shell]
+----
+# ssh root@xx.xx.xx.xx -p 1004
+----
+
+. 执行如下命令行，确认系统是否自带网络相关工具。若没有，需根据提示信息自行安装相应的网络工具。
++
+image::/images/u10000/vm_install_ifconfig.png[vm_install_ifconfig,100%]
+
+. 执行如下命令行，查看网卡配置。
++
+image::/images/u10000/vm_netcard_config.png[vm_netcard_config,100%]
+
+. 根据命令回显结果可知，当前云服务器仅配置了一张网卡。需手动添加第二张网卡。
+** 修改 `/etc/network/interfaces` 配置文件，添加如下内容
++
+[source,shell]
+----
+auto eth1
+iface eth1 inet static
+address 192.168.100.2  // 当前云服务器的另一张网卡 IP
+netmask 255.255.255.0
+
+----
+
+** 拉起第二张网卡
++
+[source,shell]
+----
+# ifup eth1
+
+----
+
+. 再次查看网卡配置。显示两块网卡即为正常。
++
+image::/images/u10000/vm_netcard_config2.png[vm_netcard_config2,100%]
+
+. 逐一登录云服务器，进行如上操作。
+
+== 云服务器绑定公网
+
+由于在部署 {product_name} 的过程中，需对云服务器节点进行重启，而重启云服务器，会导致用户无法再次使用 `公网 IP + 端口号` 的形式再次登录云服务器。
+
+为解决这一问题，用户可以在完成以上操作后，将公网 IP 从 VPC 网络中解绑，并重新绑定至某一台云服务器上。后续用户可通过公网 IP 直接访问其中一台云服务器，并通过该台云服务器跳转至其他两台云服务器。
+
+该操作不会影响前期的网络设定以及各节点之间的连接方式。详细操作步骤如下。
+
+. 登录 link:https://console.qingcloud.com/[Console]，输入正确的用户名密码。
+
+. 选择**产品与服务** > **网络服务** > **VPC 网络**，进入 VPC 网络主页面。点击**解绑**，解绑 VPC 网络绑定的公网 IP。
++
+image::/images/u10000/vpc_unbind_eip.png[vpc_unbind_eip,100%]
+
+. 弹出提示框，确认操作无误后，点击**确认**，等待 VPC 网络更新完成。
+
+. 在左侧导航栏，点击**计算** > **云服务器**，进入云服务器管理界面，右键点击任一待部署的云服务器，点击**公网 IPv4** > **绑定**。
++
+image::/images/u10000/vm_bind_eip.png[vm_bind_eip,100%]
+
+. 弹出确认对话框，点击**确认**，跳转至配置对话框。`公网 IP` 选择刚从 VPC 网络上解绑的公网 IP，`后端网卡` 从下拉框内选择主网卡，点击**提交**。
++
+image::/images/u10000/vm_bind_eip_conf.png[vm_bind_eip_conf,100%]
++
+
+include::../../../../../_components/note.adoc[]
+
+在后续安装部署的过程中，该节点会用于上传 Installer 安装包，并创建 FirstBox。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 通过公网 IP 登录云服务器。命令行中的公网 IP，可根据实际情况替换。
++
+[source,shell]
+----
+# ssh root@139.198.26.112
+
+----
+
+
+
+== 安装包准备
+
+{product_name} 安装包位于 ftp://ins.qingcloud.com[FTP 服务器] 的 `/qingstor/u10000/v4.1-docker/` 目录下。
+
+
+=== 安装包信息
+安装包信息如下表所示，包名中携带的 `yyyymmdd` 为包上传日期，`x.x.x` 为包的版本号。无特殊需求，建议均使用最新的安装包即可。
+
+[cols="1,3,6", options="header", ]
+|===
+|安装包序号
+|安装包名称
+|说明
+
+|1
+|os-yyyymmdd.tgz
+|与操作系统相关的软件包。
+
+|2
+|qingstor-docker-vx.x.x-yyyymmdd.tar.gz
+|基础包，其内容包括：FirstBox 镜像、Docker 安装程序以及一些通用组件。
+
+|3
+|qingstor-vx.x.x.tgz
+|{product_name} 服务包
+
+|4
+|qs-installer-yyyymmdd.tar.gz
+|Installer 安装包
+
+|5
+|registry-vx.x.x-yyyymmdd.tar.gz
+|镜像包，其内容包括：私有镜像仓库以及具体的镜像包
+
+|===
+
+=== 上传安装包
+
+. 选择link:#_云服务器绑定公网[绑定有公网 IP] 的节点作为 FirstBox 的宿主机。登录至该节点服务器。
+
+. 执行如下命令行，创建安装目录，并将序号为 1、2、3、5 的压缩包上传至该目录下：
+
++
+[source,shell]
+----
+# mkdir -pv /var/www/repo
+----
+
+. 执行如下命令行，解压已上传的安装包：
+
++
+[source,shell]
+----
+# cd /var/www/repo
+# tar xf qingstor-docker-v4.1.0-20221026.tar.gz
+# tar xf os-20220913.tgz -C ./qingstor-docker
+# tar xf qingstor-v4.1.0.tar.gz -C ./qingstor-docker/u1w-v4.1
+# tar xf registry-v4.1.0-20221119.tar.gz -C ./qingstor-docker/u1w-v4.1
+----
+
+. 执行如下命令行，查看解压后 `qingstor-docker` 的目录层级：
+
++
+[source,shell]
+----
+# tree /var/www/repo/qingstor-docker -C -L 3
+
+----
+
+. 将序号为 4 的压缩包上传至该节点服务器的 `/root` 目录下，然后执行如下命令行解压：
+
++
+[source,shell]
+----
+# cd /root
+# tar -xf qs-installer-v4.1.0-20221119.tgz
+----
+
+. 至此，安装包准备完成。
+
+== 硬盘准备
+
+前文link:#_创建云服务器[创建云服务器]时，每台云服务器均加载了两块硬盘。一块用作索引盘，一块用作数据盘。
+
+=== 索引盘
+
+. 逐个登录云服务器。
+
+. 执行如下命令行，查看系统中索引盘盘符。
+
++
+[source,shell]
+----
+# fdisk -l
+……
+Disk /dev/vdc: 300 GiB, 322122547200 bytes, 629145600 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/vdd: 300 GiB, 322122547200 bytes, 629145600 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+……
+----
+
+. 三台云服务器均格式化索引盘 `/dev/vdc`。
+
++
+[source,shell]
+----
+# mkfs.xfs -f -n ftype=1 /dev/vdc
+----
+
+. 查看索引盘的 `UUID`。
+
++
+[source,shell]
+----
+# blkid /dev/vdc
+/dev/nvme0n1: UUID="5b82b140-b230-442c-932a-e3f5e7d92b73" TYPE="xfs"
+----
+
+. 添加索引盘信息至开机自动挂载配置。将上一步查询到的 `UUID` 写入 `/etc/fstab` 文件。
+
++
+[source,shell]
+----
+# vi /etc/fstab
+……
+UUID=5b82b140-b230-442c-932a-e3f5e7d92b73  /qingstor  xfs  defaults 0 0
+……
+----
+
+. 创建挂载目录 `/qingstor`。若该目录已存在，则无需执行该步骤再次创建。
+
++
+[source,shell]
+----
+# mkdir /qingstor
+----
+
+. 挂载索引盘。
+
++
+[source,shell]
+----
+# mount -a
+----
+
+. 查看挂载结果，命令行回显结果如下所示，即为挂载成功。
+
++
+[source,shell]
+----
+# lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+……
+nvme0n1 259:0    0   1.8T  0 disk /qingstor
+……
+----
+
+. 需确保待部署环境中的全能节点或网关节点均完成以上操作。
+
+=== 数据盘
+
+由于在安装部署过程中，安装脚本会格式化各节点服务器上所有的数据盘。因此，在安装部署之前，需要确认所有存储节点的数据盘上均无数据、无分区，且所有存储节点上的数据盘均需保持盘符及硬盘顺序一致。
+
+
+用户可使用 `lsblk` 或 `parted -l` 检查目标硬盘是否存在分区，如果存在，需删除分区再对硬盘进行格式化。
+
+操作步骤如下。
+
+. 逐个登录待部署环境中的存储节点，执行如下命令行，根据命令行回显内容，核对硬盘信息是否正确。若硬盘尚有数据，用户可根据实际情况决定是否将数据进行手动转移。
+
++
+[source,shell]
+----
+# lsblk
+
+----
+
+. 执行如下命令行，删除硬盘的分区信息并进行格式化。硬盘格式化后，硬盘内数据将无法恢复。
+
++
+[source,shell]
+----
+# parted -s /dev/sdc block mklabel gpt
+----

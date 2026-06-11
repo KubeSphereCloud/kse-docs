@@ -1,0 +1,16 @@
+---
+title: "安装场景介绍"
+weight: 1
+---
+
+
+NeonSAN 是青云自主研发的企业级分布式块存储系统。用户可使用 QingCloud 提供的 Installer 包，来完成 NeonSAN 产品的安装与部署。在安装过程中需要创建 FirstBox 节点，该节点可根据配置文件里面的部署设置，通过 SSH 免密访问，将对应的安装内容，发送至待部署的各个节点上，直至安装完成。NeonSAN 的安装部署按场景可分为**独立部署**和**与 IaaS 融合部署**安装。
+
+* NeonSAN 独立部署：NeonSAN 的各种组件均独立部署于物理服务器上，再对接至 IaaS 端。NeonSAN 与 IaaS 不共享物理资源。
+
+* NeonSAN 与 IaaS 融合部署：NeonSAN 的部分组件，如 ZooKeeper、数据库等，部署 IaaS 端物理节点上拉起的虚拟机上。
+
+
+
+
+

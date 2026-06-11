@@ -1,0 +1,68 @@
+---
+title: "Delete Pod IP Pools"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Network, Pod IP Pools, Delete Pod IP Pools"
+description: "Introduces how to delete pod IP pools."
+weight: 09
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Pod IP Pools**
+
+
+This section describes how to delete pod IP pools.
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+Pod IP pools cannot be recovered after deletion. Please perform this operation with caution.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere Network** extension must be installed and enabled on the KubeSphere platform.
+
+
+include::../../../../_custom/clusterManagement/podIpPools/podIpPools-prer-notUsed.adoc[]
+
+
+== Delete a Single Pod IP Pool
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the pod IP pool you want to delete, and then select **Delete** from the drop-down list.
+
+. In the **Delete Pod IP Pool** dialog box, enter the name of the pod IP pool, and then click **OK**.
+
+
+== Batch Delete Pod IP Pools
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Select the checkboxes on the left of the pod IP pools you want to delete, and then click **Delete** above the pod IP pool list.
+
+. In the **Batch Delete Pod IP Pools** dialog box, enter the names of the pod IP pools, and then click **OK**.
++
+--
+include::../../../../_custom/note-separateNamesByComma.adoc[]
+--

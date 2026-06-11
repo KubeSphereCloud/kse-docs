@@ -1,0 +1,51 @@
+---
+title: "创建自定义监控面板"
+keywords: "Kubernetes, {ks_product}, 项目管理, 自定义监控面板, 创建自定义监控面板"
+description: "介绍如何创建自定义监控面板。"
+weight: 01
+---
+
+// :ks_include_id: 6446b56dbc6d48828209e0460c293fd9
+:ks_xref_id: 8c743b7084924ad59d25af92e6387d0f
+:ks_comp: ../../../../components/
+:ks_title: 创建自定义监控面板
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 自定义监控面板, 创建自定义监控面板
+:ks_description: 介绍如何创建自定义监控面板。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **自定义监控管理**
+:ks_navigation: **监控告警 > 自定义监控**
+
+
+include::../../../../_custom/clusterManagement/customMonitoringDashboards/customMonitoringDashboards-desc-createACustomMonitoringDashboard.adoc[]
+
+
+== 前提条件link:[id=ac37d022a3e7484b8f791516eb2febbe]
+
+:relfileprefix: ../../../../
+* 您需要加入一个项目并在项目中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:07-project-management/10-project-settings/04-project-members/_index.adoc[项目成员]和xref:07-project-management/10-project-settings/03-project-roles/02-view-a-project-role-list.adoc[项目角色]。
+
+// include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/clusterManagement/customMonitoringDashboards/customMonitoringDashboards-prer-exposeMetrics.adoc[]
+
+* 您需要在用于暴露工作负载的服务上设置监控导出器以声明提供应用程序监控指标的路径。{ks_product_right}将根据监控导出器的相关参数获取应用程序的监控指标。有关更多信息，请参阅link:../../../03-application-workloads/02-services/08-edit-a-metrics-exporter/[编辑监控导出器]。
+
+== 操作步骤link:[id=a002967e5e014be1ba30f414055440af]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/customMonitoringDashboards/customMonitoringDashboards-oper-createACustomMonitoringDashboard.adoc[]

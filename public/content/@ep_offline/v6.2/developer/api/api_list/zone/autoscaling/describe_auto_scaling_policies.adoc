@@ -1,0 +1,213 @@
+---
+title: 查询自动伸缩策略（DescribeAutoScalingPolicies）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| autoscaling_policies
+| Array
+| false
+| 自动伸缩策略ID
+
+| owner
+| String
+| true
+| 所有者
+
+| project_id
+| String
+| false
+| 项目ID
+
+| verbose
+| Integer
+| true
+| 是否可见
+
+| zone
+| String
+| true
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 操作名称
+
+| autoscaling_policy_set
+| Array
+| false
+| 查询结果
+
+| autoscaling_policy_set[].autoscaling_policy_id
+| String
+| false
+| 自动伸缩名称
+
+| autoscaling_policy_set[].console_id
+| String
+| false
+| 控制台ID
+
+| autoscaling_policy_set[].controller
+| String
+| false
+| 控制器类型
+
+| autoscaling_policy_set[].create_time
+| String
+| false
+| 创建时间
+
+| autoscaling_policy_set[].description
+| String
+| false
+| 描述
+
+| autoscaling_policy_set[].notification_lists
+| Array
+| false
+| 通知列表
+
+| autoscaling_policy_set[].notify_event
+| Integer
+| false
+| 通知事件
+
+| autoscaling_policy_set[].owner
+| String
+| false
+| 拥有者
+
+| autoscaling_policy_set[].resource
+| Object
+| false
+| 关联资源
+
+| autoscaling_policy_set[].resource.resource_id
+| String
+| false
+| 关联资源ID
+
+| autoscaling_policy_set[].resource.resource_name
+| String
+| false
+| 关联资源名称
+
+| autoscaling_policy_set[].resource.resource_type
+| String
+| false
+| 关联资源类型
+
+| autoscaling_policy_set[].resource_project_info
+| String
+| false
+| 资源项目信息
+
+| autoscaling_policy_set[].resource_type
+| String
+| false
+| 资源类型
+
+| autoscaling_policy_set[].root_user_id
+| String
+| false
+| 根用户
+
+| autoscaling_policy_set[].scale_type
+| String
+| false
+| 伸缩类型
+
+| autoscaling_policy_set[].status
+| String
+| false
+| 状态
+
+| autoscaling_policy_set[].status_time
+| String
+| false
+| 状态时间
+
+| autoscaling_policy_set[].strategy
+| String
+| false
+| 策略
+
+| ret_code
+| Integer
+| false
+| 操作结果
+
+| total_count
+| Integer
+| false
+| 数量
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAutoScalingPolicies",
+  "autoscaling_policies": [
+    "asp-7w1cta60"
+  ],
+  "owner": "admin",
+  "verbose": 1,
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAutoScalingPoliciesResponse",
+  "autoscaling_policy_set": [
+    {
+      "autoscaling_policy_id": "asp-7w1cta60",
+      "autoscaling_policy_name": "",
+      "console_id": "testingcloud",
+      "controller": "self",
+      "create_time": "2023-03-22T07:35:54Z",
+      "description": "",
+      "notification_lists": [],
+      "notify_event": 3,
+      "owner": "admin",
+      "resource": {
+        "resource_id": "i-0l0pmy3y",
+        "resource_name": "123",
+        "resource_type": "instance"
+      },
+      "resource_project_info": [],
+      "resource_type": "instance",
+      "root_user_id": "admin",
+      "scale_type": "instance_size",
+      "status": "active",
+      "status_time": "2023-03-22T07:35:54Z",
+      "strategy": "dynamic"
+    }
+  ],
+  "total_count": 1
+}
+----

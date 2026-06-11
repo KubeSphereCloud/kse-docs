@@ -1,0 +1,112 @@
+---
+title: "创建规则组"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 监控告警, 规则组, 创建规则组"
+description: "介绍如何创建告警规则组。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: b99186669a5048f896e903cb9eeab1f2
+:ks_xref_id: f4d1934b8d6c4af6950c0c99dcbef20d
+:ks_comp: ../../../../components/
+:ks_title: 创建规则组
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 监控告警, 规则组, 创建规则组
+:ks_description: 介绍如何创建告警规则组。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **规则组管理**
+:ks_navigation: **监控告警 > 规则组**
+
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-createAnAlertingPolicy.adoc[]
+
+
+== 前提条件link:[id=602e698afeda488c838fa2c3c2652d15]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+:relfileprefix: ../../../../
+* 您需要加入一个集群并在集群中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:05-cluster-management/12-cluster-settings/03-cluster-members/_index.adoc[集群成员]和xref:05-cluster-management/12-cluster-settings/04-cluster-roles/_index.adoc[集群角色]。
+
+// include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-exposeMetrics.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=fbe0b2a9ce0047a6817e2c579eba6042]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-setBasicInfo.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-addAlertRule.adoc[]
++
+====
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-commonParameters.adoc[]
+
+* 规则模板
++
+--
+通过下拉列表选择监控目标和触发条件。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|监控目标
+|需要监控的集群节点。
+
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-triggerCondition.adoc[]
+|===
+--
+
+* 自定义规则
++
+--
+通 PromQL 表达式指定监控目标和触发条件。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-duration.adoc[]
+
+|告警级别
+|
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-para-alertLevel.adoc[]
+
+include::../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-ruleExpression.adoc[]
+|===
+--
+====
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-clickOK.adoc[]

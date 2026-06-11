@@ -1,0 +1,83 @@
+---
+title: "数据库检查"
+weight: 3
+---
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统数据库服务正确配置。
+
+|预置条件	
+|QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+
+|测试过程
+a|
+. 登录集群的 FirstBox，查看 Zookeeper 集群节点信息。
++
+[source,shell] 
+----
+cat /etc/hosts \| grep mysql
+----
+. 逐一登录 NeonSAN 集群的数据库节点服务器。
+. 查看如下配置文件。
++
+[source,shell]
+----
+cat /qingstor/etc/xtradb-neonsan.cnf
+----
+. 查看 apring 的包。
++
+[source,shell]
+----
+dpkg -l \| grep arping
+----
+. 输入如下命令，查看数据库集群状态。
++
+[source,shell]
+----
+/qingstor/bin/qingstor-mysql list
+----
+. 输入如下命令，查看系统是否开启定时备份。
++
+[source,shell]
+----
+cat /etc/cron.d/neonsan_xtradb_dailybackups
+----
+. 若配置了数据库定时备份，则验证数据库备份脚本是否可用（根据步骤5中的脚本，替换如下命令）。
++
+[source,shell]
+----
+/qingstor/bin/neonsan_xtradb_backup.sh
+----
+. 检查数据库备份文件大小。
+
+|预期结果	
+a|
+. 成功登录 NeonSAN 集群的 FirstBox 节点，并查看相应的数据库集群信息。
+. 成功登录数据库节点。
+. xtradb-neonsan.cnf 文件中，IP 地址为数据库集群的管理节点IP。
++
+[source,shell]
+----
+......
+wsrep_node_address=172.16.0.2:3406
+......
+----
+. apring 的包使用的为 iputils-arping。
+. 当前数据库状态正常，started nodes 与 live nodes 一致，且包含数据库集群的各节点。
+. 系统正确配置了定时备份，且使用的备份脚本正确。
+. 直接执行备份脚本，能生成数据库备份文件。
++
+[source,shell]
+----
+/qingstor/backup/neonsan-mysql
+----
+. 数据库备份文件大小正常（若为几十字节，则不正常）。
+
+|验证结果	
+|
+
+|备注	
+|
+|===

@@ -1,0 +1,91 @@
+---
+title: 创建应用版本（CreateAppVersion）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| true
+| 应用ID
+
+| description
+| String
+| false
+| 版本描述
+
+| name
+| String
+| false
+| 版本名称
+
+| verbose
+| Integer
+| false
+| 是否返回版本详细信息字段，默认
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| false
+| 应用ID
+
+| description
+| String
+| false
+| 版本描述
+
+| name
+| String
+| false
+| 版本名称
+
+| status
+| String
+| false
+| 版本状态
+
+| version_id
+| String
+| false
+| 应用版本ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app_id": "app-xxxxxx",
+  "description": "测试版本",
+  "name": "版本1",
+  "verbose": 0
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateAppVersionResponse",
+  "ret_code": 0,
+  "version_id": "appv-xxxxxx"
+}
+----

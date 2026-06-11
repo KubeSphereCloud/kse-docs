@@ -1,0 +1,61 @@
+---
+title: "check_network.sh 脚本内容"
+weight: 50
+---
+
+check_network.sh 脚本内容如下：
+
+[,shell]
+----
+#!/bin/bash
+#Usage : check_network.sh <id1 id2 ... >
+hostid="$*"
+declare -a loginip
+declare -a ports
+count=0
+portcnt=0
+for h in $hostid; do
+	loginip[$count]="192.168.101.$h"
+	count=$(( $count + 1 ))
+	ports[$portcnt]="192.168.101.$h"
+	portcnt=$(( $portcnt + 1 ))
+	ports[$portcnt]="192.168.102.$h"
+	portcnt=$(( $portcnt + 1 ))
+	#ports[$portcnt]="192.168.103.$h"
+	#portcnt=$(( $portcnt + 1 ))
+	#ports[$portcnt]="192.168.104.$h"
+	#portcnt=$(( $portcnt + 1 ))
+done
+
+for h in $hostid; do
+	ssh "192.168.101.$h" 'pkill -9 rping'
+done
+for h in $hostid; do
+	for ip in ${ports[*]}; do
+		echo "==== ping from HOST:$h => PORT:$ip, `date` ===="
+		if ! ssh "192.168.101.$h" "ping -c 10 -i 0.1 $ip" ; then
+			echo "Failed ICMP ping from $h => $ip"
+			exit 1
+		fi
+	done
+done
+
+for h in $hostid; do
+	ssh "192.168.101.$h" 'nohup rping -s -P ' &
+done
+sleep 5
+
+for h in $hostid; do
+	for ip in ${ports[*]}; do
+		echo "==== rping from HOST:$h => PORT:$ip, `date` ===="
+		if ! ssh "192.168.101.$h" "time rping -cv -C 5 -a $ip" ; then
+			echo "Failed rping from $h => $ip"
+			exit 1
+		fi
+	done
+done
+
+jobs -p | xargs kill -9
+date
+----
+

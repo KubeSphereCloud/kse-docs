@@ -1,0 +1,357 @@
+---
+title: "交换机配置及网络连接"
+weight: 3
+---
+
+## 网络连接说明
+
+以 3 台青云节点和 2 台汇聚交换机，在不开启 RDMA 的前提下为例，则网络链路图如下。
+
+image::/images/express/delivery/install_delopy_21.png[,50%]
+
+. 交换机 2 台做堆叠。
+. 业务网络：堆叠后两台交换机 A 和 B，A/1 和 B/1 接口、A/2 和 B/2 接口、A/3 和 B/3 接口 使能 LACP 动态端口聚合。接口聚合口，并配置trunk。
+. 业务网络和管理网络：划分至少两个网段，网关统一为 ``.254``。
+** 管理网络 1 个 C 段地址 ``VLAN：100``。
+** 业务网络 1 个 C 段地址 ``VLAN：200``。
+. 存储网络：
+.. 在 A 交换机的 10、11、12 创建 ``VLAN 1000``，接口模式为 ``ACCESS``。
+.. 在 B 交换机的 10、11、12 创建 ``VLAN 1001``，接口模式为 ``ACCESS``。
+
+## 配置端口聚合与 ACCESS 或 TRUNK 模式
+
+**不同交换机相关配置命令不同**，请根据实际情况做出修改。**以思科交换机为例**，具体操作如下。
+
+. 进入交换机全局配置模式。
++
+[,shell]
+----
+conf t
+----
+
+. 创建 VLAN 10。
++
+[,shell]
+----
+vlan 10
+----
+. 配置 VLAN 10 名称为 vlan10。
++
+[,shell]
+----
+name vlan10
+----
+. 进入 VLAN 10。
++
+[,shell]
+----
+int vlan10
+----
+. 配置 VLAN 10 下的 IP。
++
+[,shell]
+----
+ip address 1.1.1.1 255.255.255.0
+----
+. 退出 VLAN 设置，返回配置模式。
++
+[,shell]
+----
+exit
+----
+. 创建聚合组 1。
++
+[,shell]
+----
+int port-channel 1
+----
+
+. 将 eth1/1 端口加入聚合组 1
+.. 进入 eth1/1 端口。
++
+[,shell]
+----
+int eth1/1
+----
+
+.. 加入聚合组 1。
++
+[,shell]
+----
+channel-group 1 mode on
+----
+.. 退出 eth1/1 端口。
++
+[,shell]
+----
+exit
+----
+. 将 eth1/2 端口加入聚合组 1
+.. 进入 eth1/2 端口。
++
+[,shell]
+----
+int eth1/2
+----
+
+.. 加入聚合组 1。
++
+[,shell]
+----
+channel-group 1 mode on
+----
+.. 退出 eth1/2 端口。
++
+[,shell]
+----
+exit
+----
+
+. 配置聚合组 1 为 ACCESS 或 TRUNK 模式，
++
+* 配置聚合组 ACCESS 可放行 VLAN 为 10。
+.. 进入聚合组 1。
++
+[,shell]
+----
+int port-channel 1
+----
+.. 设置为 ACCESS 模式。
++
+[,shell]
+----
+switchport mode access
+----
+.. 放行 VLAN 为 10。
++
+[,shell]
+----
+switchport access vlan 10
+----
+
+.. 退出聚合组。
++
+[,shell]
+----
+exit
+----
+
+
+* 配置聚合组 TRUNK 可放行 VLAN 为 ALL。
+.. 进入聚合组 1。
++
+[,shell]
+----
+int port-channel 1
+----
+.. 设置为 TRUNK 模式。
++
+[,shell]
+----
+switchport mode trunk
+----
+.. 放行 VLAN 为 ALL。
++
+[,shell]
+----
+switchport trunk allowed vlan all 
+----
+.. 退出聚合组。
++
+[,shell]
+----
+exit
+----
+
+. 保存配置变更。
++
+[,shell]
+----
+write
+----
+
+
+## 指定端口配置 ACCESS 或 TRUNK 模式
+
+**不同交换机相关配置命令不同**，请根据实际情况做出修改。**以思科交换机为例**，具体操作如下。
+
+. 进入交换机全局配置模式。
++
+[,shell]
+----
+conf t
+----
+
+. 创建 VLAN 10。
++
+[,shell]
+----
+vlan 10
+----
+. 配置 VLAN 10 名称为 vlan10。
++
+[,shell]
+----
+name vlan10
+----
+
+. 配置 VLAN 10 下的 IP。
++
+[,shell]
+----
+ip address 1.1.1.1 255.255.255.0
+----
+. 退出 VLAN 设置，返回配置模式。
++
+[,shell]
+----
+exit
+----
+
+. 进入 eth1/1 端口。
++
+[,shell]
+----
+int eth1/1
+----
+
+. 将端口 eth1/1 设置为 ACCESS 或 TRUNK 模式。
++
+* ACCESS 模式
+.. 将端口 eth1/1 设置为 ACCESS。
++
+[,shell]
+----
+switchport mode access
+----
+.. 放行 VLAN 为 10。
++
+[,shell]
+----
+switchport access vlan 10
+----
+
+* TRUNK 模式
+.. 将端口 eth1/1 设置为 TRUNK。
++
+[,shell]
+----
+switchport mode trunk
+----
+.. 放行 VLAN 为 ALL。
++
+[,shell]
+----
+switchport trunk allowed vlan all
+----
+
+. 退出 eth1/1 端口。
++
+[,shell]
+----
+exit
+----
+
+. 保存配置变更。
++
+[,shell]
+----
+write
+----
+
+## 指定端口删除聚合组设置
+
+**不同交换机相关配置命令不同**，请根据实际情况做出修改。**以思科交换机为例**，具体操作如下。
+
+. 进入交换机全局配置模式。
++
+[,shell]
+----
+conf t
+----
+
+. 将端口从聚合组 1 中删除。
+.. 进入指定端口，如 eth1/1 或 eth1/2。
++
+[,shell]
+----
+int eth1/1
+----
+
+.. 将指定端口从聚合组 1 中剔除。
++
+[,shell]
+----
+no port-group 1
+----
+
+.. 退出指定端口设置。
++
+[,shell]
+----
+exit
+----
+.. 进入其他端口参考上述三步完成从聚合组剔除的操作即可。
+
+. 保存配置。
++
+[,shell]
+----
+write
+----
+
+## 其他操作 
+
+**不同交换机相关配置命令不同**，请根据实际情况做出修改。**以思科交换机为例**，具体操作如下。
+
+* 查看配置模式下指定端口的详细信息。
++
+[,shell]
+----
+do show run int eth1/1
+----
++
+include::../../../../../../_components/note.adoc[]
+* 命令行中，在管理员模式（即 # 模式）下，无需加 ``do``。
+* ``eth1/1`` 为端口名，请根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+* 删除接口下的 ACCESS 或 TRUNK 模式。
++
+--
+[,shell]
+----
+no switchoprt mode access
+----
+或
+[,shell]
+----
+no switchoprt mode trunk
+----
+--
+
+* 查看所有接口 up 或 down 信息。
++
+[,shell]
+----
+do show run
+----
++
+include::../../../../../../_components/note.adoc[]
+命令行中，在管理员模式（即 # 模式）下，无需加 ``do``。
+include::../../../../../../_components/table_footer.adoc[]
+
+* 查看接口配置，需在管理员模式下，根据版本不同，使用不同的命令格式。
++
+--
+[,shell]
+----
+show ip int bri
+----
+或
+[,shell]
+----
+show int bri
+----
+--
+

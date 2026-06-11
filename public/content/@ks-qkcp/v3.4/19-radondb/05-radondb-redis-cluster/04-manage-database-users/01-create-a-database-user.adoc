@@ -1,0 +1,81 @@
+---
+title: "创建 RadonDB Redis Cluster 用户"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, Redis Cluster,创建 Redis Cluster 用户"
+description: "介绍如何创建 RadonDB Redis Cluster 用户。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 53fb97a89fde4fa087e2852b950cfdc1
+:ks_xref_id: dc3cc78971424597b243d88775e8352a
+:ks_comp: ../../../../components/
+:ks_title: 创建 RadonDB Redis Cluster 用户
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, Redis Cluster,创建 Redis Cluster 用户
+:ks_description: 介绍如何创建 RadonDB Redis Cluster 用户。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何创建 RadonDB Redis Cluster 用户。
+
+
+== 前提条件link:[id=e6624dc6a7a644449d3b420c5ce8b766]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-prer-installRadondbRedisCluster.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=e72ee26984264a578b1e1e3b581c1d40]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbRedisCluster/radondbRedisCluster-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面右侧点击**数据库用户**页签，然后点击**创建**。
+
+. 在**创建用户**对话框，设置以下参数，然后点击**确定**。用户创建完成后将显示在用户列表中。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|用户名
+a|自定义用户名称。
+
+配置要求：只能包含大写字母、小写字母、数字和下划线（_），必须以大写或小写字母开头，长度为 2 到 26 个字符。
+
+|密码
+|密码必须包含至少一个大写字母、一个小写字母、一个数字和一个特殊字符（!@#$%^&*_+-=），长度为 8 到 32 个字符。
+
+|权限
+|根据 Redis 官方规则设置 ACL 以控制用户的权限。
+|===
+--

@@ -1,0 +1,68 @@
+---
+title: "Delete Edge Nodes"
+keywords: "Kubernetes, {ks_product-en}, cluster management, nodes, delete edge node"
+description: "Learn how to delete an edge node."
+weight: 03
+---
+
+:ks_permission: **Node Management**
+:ks_menu: **Nodes > Edge Nodes**
+
+This section describes how to delete an edge node.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeEdge** should have been installed and enabled.
+
+* The SSH login information for the KubeSphere cluster master node and the edge node has been obtained.
+
+
+== Steps
+
+. Log in to the edge node and run the following commands to remove the configuration in the edge node:
++
+--
+// Bash
+[,bash]
+----
+ ./keadm reset
+----
+
+// Bash
+[,bash]
+----
+apt remove mosquitto
+----
+
+// Bash
+[,bash]
+----
+rm -rf /var/lib/kubeedge /var/lib/edged /etc/kubeedge/ca /etc/kubeedge/certs
+----
+--
+
+. Log in to the cluster master node and run the following command to delete the edge node.
++
+--
+// Bash
+[,bash]
+----
+kubectl delete node <edgenode-name>
+----
+--
+
+. Run the following command on the cluster master node to check the current nodes:
++
+--
+// Bash
+[,bash]
+----
+kubectl get node
+----
+
+If the command output does not show the edge node, the edge node has been successfully deleted.
+--

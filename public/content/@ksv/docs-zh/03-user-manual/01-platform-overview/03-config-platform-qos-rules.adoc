@@ -1,0 +1,85 @@
+---
+title: "配置平台 QoS 规则"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 平台, QoS, 规则, 配置"
+description: "介绍如何使用{ks_product_both}Web 控制台配置平台 QoS 规则。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 804a55268ba44c378e760dd6b2cb9a02
+:ks_xref_id: 16a4134503e8491fb58a5890226ddc98
+:ks_comp: ../../../components/
+:ks_title: 配置平台 QoS 规则
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台配置平台 QoS 规则。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 平台, QoS, 规则, 配置
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+{ks_product_abbr_full_right}支持自定义 QoS 规则。QoS 规则可以帮助您区分不同业务的流量，保证网络传输带宽、降低网络传输时延，从而提高网络资源的利用率。本节介绍如何使用{ks_product_both}Web 控制台配置平台 QoS 规则。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 创建 QoS 规则link:[id=b97c78e779624fe29a3af3f064ddb36f]
+
+{ks_product_right}支持您基于网络相关性能指标创建最多 5 条规则。您可以执行如下操作创建 QoS 规则：
+
+. 登录{ks_product_both}Web 控制台。
+
+. 在页面右上角点击 image:/images/ksv/zh/icons/cogwheel.svg[18px,18px]，然后点击**平台管理**以打开平台管理页面。
+
+. 根据业务需求，选择**网络设置**页签基于网络相关性能指标创建 QoS 规则。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* {ks_product_right}为用户提供默认的 QoS 规则。若要使用新创建的 QoS 规则，需点击目标规则右侧的**设为默认**将其设置为默认规则。
+
+* 如果某条规则被删除，则使用该规则的虚拟机会使会在下次重启时使用默认规则。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 删除 QoS 规则link:[id=69216978869d4853a5ba1a3482391719]
+
+如果不再使用某条 QoS 规则，可执行如下操作删除该规则：
+
+. 登录{ks_product_both}Web 控制台。
+
+. 在页面右上角点击 image:/images/ksv/zh/icons/cogwheel.svg[18px,18px]，然后点击**平台管理**以打开平台管理页面。
+
+. 根据业务需求，选择**网络设置**页签查看当前基于网络相关性能指标创建的 QoS 规则列表。
+
+. 找到目标 QoS 规则，点击右侧的 image:/images/ksv/zh/icons/trash-light.svg[18px,18px]。
+
+. 在弹出的对话框中点击**确认**即可删除 QoS 规则。
++
+--
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+规则删除后，所有使用该规则的虚拟机会在重启之后使用默认规则。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 后续操作link:[id=dfd33036975b41b9840f349aad218791]
+
+QoS 规则创建完成后，您可以在创建虚拟机时启用 QoS 特性并指定使用特定的 QoS 规则。有关更多信息，请参阅 link:../../05-vm-management/01-vms/01-create-vm/[创建虚拟机]。
+
+
+
+
+

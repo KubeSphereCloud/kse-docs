@@ -1,0 +1,26 @@
+---
+title: "概述"
+weight: 10
+---
+
+企业云平台部署前，需要根据配置文件模版创建 variables.ZONE_ID.yaml 和 setting.ZONE_ID.yaml 两类配置文件，并配置安装参数。
+
+include::../../../../../_components/note.adoc[]
+文件名中的 ZONE_ID 为可用区 ID，请根据环境规划中的信息进行配置。若有多个 ZONE，需要对应创建并修改多个配置文件。
+
+include::../../../../../_components/table_footer.adoc[]
+
+* variables 模版路径：
++
+[source]
+----
+/pitrix/config/templates/variables.template.yaml
+----
+* setting 模版路径：
++
+[source]
+----
+/pitrix/config/templates/settings.template.yaml
+----
+
+以下介绍创建、修改配置文件的详细操作步骤和参数说明。

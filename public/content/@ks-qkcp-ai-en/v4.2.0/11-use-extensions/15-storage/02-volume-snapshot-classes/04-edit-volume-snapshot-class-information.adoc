@@ -1,0 +1,56 @@
+---
+title: "Edit Volume Snapshot Class Information"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Volume Snapshot Class, Edit Volume Snapshot Class Information"
+description: "Introduces how to edit information for a volume snapshot class."
+weight: 04
+---
+
+
+:ks_permission: **Volume Snapshot Class Management**
+:ks_navigation: **Storage > Volume Snapshot Classes**
+
+
+This section describes how to edit information for a volume snapshot class.
+
+You can edit the alias and description of a volume snapshot class. KubeSphere does not support editing the name of a volume snapshot class.
+
+
+== Prerequisites
+
+* The KubeSphere platform needs to have the **KubeSphere Storage** extension installed and enabled.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the volume snapshot class you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Edit Information** from the dropdown list.
+
+. In the **Edit Information** dialog, set the alias and description for the volume snapshot class, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Alias
+|The alias for the volume snapshot class. Aliases can be the same for different volume snapshot classes.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), and has a maximum length of 63 characters.
+
+|Description
+|The description information for the volume snapshot class. The description can contain any characters, up to a maximum of 256 characters.
+|===
+--

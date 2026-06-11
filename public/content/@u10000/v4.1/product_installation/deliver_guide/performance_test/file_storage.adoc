@@ -1,0 +1,61 @@
+---
+title: 文件存储
+weight: 1
+---
+
+以下测试项均采用 FIO 工具进行压测。
+
+
+== 测试目的
+
+用于验证 {product_name} 文件存储的性能达到交付标准。
+
+== 预置条件
+
+{product_name} 文件存储已经部署完毕，且运行正常。
+
+== 测试过程
+
+. 创建文件系统 FS1，文件系统预读块大小设置为自动，数据块大小设置为 4k，创建共享。
+
+. 创建文件系统 FS2，文件系统预读块大小设置为自动，数据块大小为设置 16k，创建共享。
+
+. 创建文件系统 FS3，文件系统预读块大小设置为自动，数据块大小为设置 64k，创建共享。
+
+. 在客户端分别挂载三个文件系统下的共享点，并使用 FIO 工具测试不同数据块的最佳性能：
+
+.. FS1 测试 4k
++
+[source,shell]
+----
+# fio --randrepeat=1 --ioengine=libaio --direct=1 --name=qfs_fio --iodepth=128 --numjobs=16 --size=1g --bs=4k --group_reporting=1 --readwrite=write --time_based=1 --runtime=60 --sync=0 --fdatasync=0 --filename=test_file
+----
+.. FS2 测试 16k
++
+[source,shell]
+----
+# fio --randrepeat=1 --ioengine=libaio --direct=1 --name=qfs_fio --iodepth=128 --numjobs=16 --size=1g --bs=16k --group_reporting=1 --readwrite=write --time_based=1 --runtime=60 --sync=0 --fdatasync=0 --filename=test_file
+----
+.. FS3 测试 64k 和 1M
++
+[source,shell]
+----
+# fio --randrepeat=1 --ioengine=libaio --direct=1 --name=qfs_fio --iodepth=128 --numjobs=16 --size=1g --bs=64k --group_reporting=1 --readwrite=write --time_based=1 --runtime=60 --sync=0 --fdatasync=0 --filename=test_file
+
+# fio --randrepeat=1 --ioengine=libaio --direct=1 --name=qfs_fio --iodepth=128 --numjobs=16 --size=1g --bs=1M --group_reporting=1 --readwrite=write --time_based=1 --runtime=60 --sync=0 --fdatasync=0 --filename=test_file
+----
+
+
+
+== 预期结果
+
+. 压测请求成功率为 100%
+. 系统功能无异常
+. 无错误日志
+
+
+== 验证结果
+
+== 备注
+
+性能测试结果以测试情况为准，如需进行全面的性能压测，建议使用 vdbench 工具进行测试，详细操作可见《POC 测试指南》。

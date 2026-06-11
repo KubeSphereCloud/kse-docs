@@ -1,0 +1,70 @@
+---
+title: 创建账户锁（CreateUserLock）
+weight: 13
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| api
+| Int
+| false
+| 是否锁定api
+
+| passwd
+| String
+| true
+| 账户锁密码
+
+| session
+| Int
+| false
+| 是否锁定控制台
+
+| user
+| String
+| true
+| 用户id
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "api": 1,
+  "passwd": "********",
+  "session": 0,
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateUserLockResponse",
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

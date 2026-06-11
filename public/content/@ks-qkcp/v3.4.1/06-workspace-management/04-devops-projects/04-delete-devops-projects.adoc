@@ -1,0 +1,78 @@
+---
+title: "删除 DevOps 项目"
+linkTitle: "{ks_title}"
+keywords: "Kuberentes, {ks_product}, 企业空间管理, DevOps 项目, 删除 DevOps 项目"
+description: "介绍如何删除 DevOps 项目。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: d5f24a4e3e984a2aaecfdc80de47da76
+:ks_xref_id: 8d0b2a4173944a1daa033d6bef9c5b10
+:ks_comp: ../../../components/
+:ks_title: 删除 DevOps 项目
+:ks_keywords: Kuberentes, {ks_product}, 企业空间管理, DevOps 项目, 删除 DevOps 项目
+:ks_description: 介绍如何删除 DevOps 项目。
+:ks_weight: 04
+:ks_icon:
+
+
+本节介绍如何删除 DevOps 项目。
+
+:ks_permission:  **DevOps 项目管理**
+:ks_navigation:  **DevOps 项目**
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+DevOps 项目删除后不能恢复，同时 DevOps 项目中的所有的资源也将被删除，请谨慎执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=0db51029fe3847dd911dbb95a1a4180c]
+
+:relfileprefix: ../../../
+
+* 您需要加入一个企业空间并在企业空间中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:06-workspace-management/06-workspace-settings/03-workspace-members/_index.adoc[企业空间成员]、xref:06-workspace-management/06-workspace-settings/04-workspace-roles/_index.adoc[企业空间角色]和xref:06-workspace-management/06-workspace-settings/05-departments/_index.adoc[部门]。
+
+// include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+include::../../../_custom/workspaceManagement/devopsProjects/devopsProject-prer-enableDevops.adoc[]
+
+
+== 删除单个项目link:[id=ca784961d6e74e1aa7bc5ddf2463df3c]
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要删除的 DevOps 项目右侧点击 more，然后在下拉列表中选择**删除**。
+
+. 在**删除 DevOps 项目**对话框，输入 DevOps 项目的名称，然后点击**确定**。
+
+
+== 批量删除项目link:[id=09f2e0e917e948abb783dd38f69cadbd]
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 选择需要删除的 DevOps 项目左侧的复选框，然后在 DevOps 项目列表上方点击**删除**。
+
+. 在**批量删除 DevOps 项目**对话框，输入 DevOps 项目的名称，然后点击**确定**。
++
+--
+include::../../../_custom/note-separateNamesByComma.adoc[]
+--

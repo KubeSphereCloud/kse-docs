@@ -1,0 +1,328 @@
+---
+title: 查询自动伸缩策略执行历史（DescribeAutoScalingHistory）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| autoscaling_policy
+| String
+| true
+| 自动伸缩策略ID
+
+| history_type
+| Array
+| true
+| 执行历史类型
+
+| limit
+| Integer
+| true
+| 查询数量
+
+| offset
+| Integer
+| true
+| 查询偏移量
+
+| owner
+| String
+| true
+| 所有者
+
+| verbose
+| Integer
+| true
+| 可见性
+
+| zone
+| String
+| true
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 操作名称
+
+| autoscaling_history_set
+| Array
+| false
+| 自动伸缩执行历史列表
+
+| autoscaling_history_set[].autoscaling_history_id
+| String
+| false
+| 自动伸缩历史ID
+
+| autoscaling_history_set[].autoscaling_policy_id
+| String
+| false
+| 自动伸缩规则ID
+
+| autoscaling_history_set[].autoscaling_policy_rule_id
+| String
+| false
+| 自动伸缩规则策略ID
+
+| autoscaling_history_set[].create_time
+| String
+| false
+| 创建时间
+
+| autoscaling_history_set[].description
+| String
+| false
+| 描述
+
+| autoscaling_history_set[].history_data
+| Object
+| false
+| 历史信息
+
+| autoscaling_history_set[].history_data.autoscaling_policy_rule
+| Object
+| false
+| 自动伸缩规则
+
+| autoscaling_history_set[].history_data.autoscaling_policy_rule.autoscaling_policy_rule_id
+| String
+| false
+| 自动伸缩规则ID
+
+| autoscaling_history_set[].history_data.autoscaling_policy_rule.scale_direction
+| String
+| false
+| 自动伸缩方向
+
+| autoscaling_history_set[].history_data.history_type
+| String
+| false
+| 执行历史类型
+
+| autoscaling_history_set[].history_data.logs
+| Array
+| false
+| 日志信息
+
+| autoscaling_history_set[].history_data.logs[].action
+| String
+| false
+| 动作
+
+| autoscaling_history_set[].history_data.logs[].log_type
+| String
+| false
+| 日志类型
+
+| autoscaling_history_set[].history_data.logs[].request
+| String
+| false
+| 请求
+
+| autoscaling_history_set[].history_data.logs[].response
+| String
+| false
+| 响应
+
+| ret_code
+| Integer
+| false
+| 操作结果
+
+| total_count
+| Integer
+| false
+| 数量
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAutoScalingHistory",
+  "autoscaling_policy": "asp-5nezjmtm",
+  "history_type": [
+    "notification",
+    "scale_success",
+    "scale_fail"
+  ],
+  "limit": 100,
+  "offset": 0,
+  "owner": "usr-DnmqVpLq",
+  "verbose": 1,
+  "zone": "qa"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAutoScalingHistoryResponse",
+  "autoscaling_history_set": [
+    {
+      "autoscaling_history_id": "ash-b92arkgs",
+      "autoscaling_policy_id": "asp-5nezjmtm",
+      "autoscaling_policy_rule_id": "aspr-pjx1epnp",
+      "create_time": "2023-07-05T08:25:37Z",
+      "description": "",
+      "history_data": {
+        "autoscaling_policy_rule": {
+          "autoscaling_policy_rule_id": "aspr-pjx1epnp",
+          "scale_direction": "increase"
+        },
+        "history_type": "scale_fail",
+        "logs": [
+          {
+            "action": "DescribeEips",
+            "log_type": "api",
+            "request": {
+              "eips": [
+                "eip-in2wr771"
+              ],
+              "status": [
+                "available",
+                "associated"
+              ],
+              "zone": "qa"
+            },
+            "response": {
+              "eip_set": [
+                {
+                  "alarm_status": "",
+                  "associate_mode": 0,
+                  "bandwidth": 4,
+                  "billing_mode": "bandwidth",
+                  "console_id": "qacloud",
+                  "controller": "self",
+                  "create_time": "2022-03-31T01:55:49Z",
+                  "description": null,
+                  "eip_addr": "192.168.5.45",
+                  "eip_group": {
+                    "eip_group_id": "eipg-00000000",
+                    "eip_group_name": "BGP multi-line"
+                  },
+                  "eip_id": "eip-in2wr771",
+                  "eip_name": "cloudsat-lb",
+                  "eip_network": "192.168.5.0/24",
+                  "eip_offload": 0,
+                  "icp_audit_logs": [],
+                  "icp_audit_reason": "",
+                  "icp_audit_status_time": null,
+                  "icp_codes": "",
+                  "is_quarantined": 0,
+                  "need_icp": 0,
+                  "owner": "usr-DnmqVpLq",
+                  "remaining_changes": 100,
+                  "resource": {
+                    "nic_id": "",
+                    "resource_id": "lb-ljsn01xy",
+                    "resource_name": "cloudsat-lb",
+                    "resource_type": "loadbalancer"
+                  },
+                  "resource_project_info": [],
+                  "root_user_id": "usr-DnmqVpLq",
+                  "rvg_id": "",
+                  "status": "associated",
+                  "status_time": "2022-11-09T13:13:35Z",
+                  "sub_code": 0,
+                  "tags": [],
+                  "transition_status": "",
+                  "vgs": {
+                    "HA0": {
+                      "role": 1,
+                      "vg_mgmt_ip": "172.31.20.10"
+                    }
+                  },
+                  "vni": 2,
+                  "zone_id": "qa"
+                }
+              ],
+              "ret_code": 0,
+              "total_count": 1
+            }
+          },
+          {
+            "action": "ChangeEipsBandwidth",
+            "log_type": "api",
+            "request": {
+              "bandwidth": 5,
+              "eips": [
+                "eip-in2wr771"
+              ],
+              "zone": "qa"
+            },
+            "response": {
+              "message": "PermissionDenied",
+              "ret_code": 1400
+            }
+          },
+          {
+            "log_type": "msg",
+            "message": "API call failed"
+          }
+        ]
+      },
+      "history_type": "scale_fail"
+    },
+    {
+      "autoscaling_history_id": "ash-50kqob6g",
+      "autoscaling_policy_id": "asp-5nezjmtm",
+      "autoscaling_policy_rule_id": "aspr-pjx1epnp",
+      "create_time": "2023-07-05T08:25:38Z",
+      "description": "",
+      "history_data": {
+        "action": {
+          "create_time": "2022-02-23T09:43:05Z",
+          "is_account_contacts": 1,
+          "items": [
+            {
+              "content": "jiachong@yunify.com",
+              "create_time": "2022-03-14T15:35:10",
+              "notification_item_id": "ni-w3uttruv",
+              "notification_item_type": "email",
+              "remarks": "",
+              "verified": 1
+            },
+            {
+              "content": "15602991089",
+              "create_time": "2022-03-14T15:33:28",
+              "notification_item_id": "ni-3n0gtb0u",
+              "notification_item_type": "phone",
+              "remarks": "",
+              "verified": 1
+            }
+          ],
+          "notification_list_id": "nl-ggjkqqce",
+          "notification_list_name": "Account Contacts",
+          "owner": "usr-DnmqVpLq",
+          "remarks": "",
+          "visibility": "private"
+        }
+      },
+      "history_type": "notification"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 2
+}
+----

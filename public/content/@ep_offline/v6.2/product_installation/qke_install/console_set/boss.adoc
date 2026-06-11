@@ -1,0 +1,77 @@
+---
+title: "BOSS 操作"
+weight: 1
+draft: true
+---
+
+
+
+== 步骤一：登录 BOSS
+
+include::../prepare/habor.adoc[tag=web_login]
+
+. 本地主机在 Chrome 或火狐浏览器中输入上一步查询到的 BOSS 的 Web 地址，登录信息如下。
++
+[source,shell]
+----
+Web 地址: 查询结果中 boss 开头的 URL。
+默认用户名：boss@<domain>
+默认密码：zhu88jie
+----
++
+如前面查询到的 BOSS 的 Web 地址为 `boss.democloud.com`，则登录信息如下。
++
+[source,shell]
+----
+Web 地址：boss.democloud.com
+默认用户名：boss@democloud.com
+默认密码：zhu88jie
+----
+
+== 步骤二：上架 QKE
+
+实施人员需在 BOSS 上将 QKE 进行上架处理后，用户在 Console 页面，才能查找到 QKE 的入口。
+
+. 延续前文步骤，实施人员成功登录 BOSS。
+
+. 点击**运营管理** > **产品中心** > **产品管理**，进入产品管理主页面。
+
+. 在产品目录树中点击 **AppCenter** > **容器服务** > **容器引擎 QKE**，进入容器引擎 QKE 详情页面。
++
+image::/images/ep_offline/qke_install/qke_install_7.png[]
+
+. 在容器引擎 QKE 详情页面，点击右上角的**上架**。
+
+. 在弹出的对话框内，确认操作无误后，点击**确认**，完成产品上架操作。
+
+. 登录 Console，点击**产品与服务** > **容器服务** > **容器引擎 QKE**，能成功进入**容器引擎 QKE** 主页面。
+
+== 步骤三：AppCenter 控制台移除 QKE
+
+include::../../../../../_components/note.adoc[]
+
+如下图所示，若 Console 的 AppCenter 控制台的应用中心页面，不显示 QKE 的入口，则无需执行该步骤。
+
+include::../../../../../_components/table_footer.adoc[]
+
+image::/images/ep_offline/qke_install/qke_install_8.png[]
+
+
+. 延续前文步骤，实施人员成功登录 BOSS。
+
+. 点击**资源管理** > **AppCenter** > **云应用**，进入云应用列表页面。
+
+. 在搜索框内，输入 `容器引擎 QKE`，找到**容器引擎 QKE** 应用，点击应用名称，进入容器引擎 QKE 详情页面。
++
+image::/images/ep_offline/qke_install/install_qke_hide_01.png[]
+
+. 点击右上角的**应用中心显示设置**。
+
+. 在弹出的对话框中，设置**应用中心显示**为 `否`，即表示不在 Console 的 AppCenter 控制台的应用中心页面显示。
+
+. 点击**修改**，完成 BOSS 操作。
+
+. 登录 Console，点击**产品与服务** > **AppCenter 控制台** > **应用中心**，进入 AppCenter 应用列表主页面，确认容器引擎 QKE 不在应用列表显示。
+
+
+

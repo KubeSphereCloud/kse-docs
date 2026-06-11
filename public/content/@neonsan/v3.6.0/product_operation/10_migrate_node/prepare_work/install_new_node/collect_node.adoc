@@ -1,0 +1,111 @@
+---
+title: "收集硬件信息"
+weight: 2
+---
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh xx.xx.xx.xx -p 6023
+----
+
+. 在 root 目录下创建 ip_list，并将新管理节点的 IP 地址以每行一个的方式，填写至 ip_list 内。
++
+[,shell]
+----
+vi /root/ip_list
+----
+ 
+. 建立新节点间 SSH 免密访问。
++
+[,shell]
+----
+/qingstor/install/bin/establish_ssh.sh /root/ip_list <SSH_PORT> <USER> <PASSWD>
+----
++
+include::../../../../../../_components/note.adoc[]
+* <SSH_PORT> 为端口号，默认为 22，无需修改。
+* <USER> 与 <PASSWD> 为各新管理节点的登录用户名与密码，根据实际情况进行修改即可。
+* 若执行失败，可查看 ``/qingstor/log/establish_ssh.log``。
+include::../../../../../../_components/table_footer.adoc[]
+. 拷贝示例文件。
++
+[,shell]
+----
+cp /qingstor/install/test/yaml/nodes.yaml /root/nodes.yaml
+----
+. 修改 nodes.yaml 文件，仅保留文件内的 ``nodes`` 配置组即可。
++
+[,shell]
+----
+vi /root/nodes.yaml
+----
++
+配置文件内容示例如下，需包含所有新的管理节点 IP。
++
+[,shell]
+----
+# Physical nodes that deploy QingStor and do not deploy IAAS.
+nodes:
+  - 192.168.0.8
+  - 192.168.0.9
+  - 192.168.0.10
+----
+
+. 添加新节点。
++
+[,shell]
+----
+installer node-add -c /root/nodes.yaml
+----
+
+. 查看新添加节点的信息，返回结果中，关注 status 字段，若为 new 或 available 即可。
++
+[,shell]
+----
+installer node-list
+----
+
+. 收集硬件信息。
++
+[,shell]
+----
+installer node-collect -I /root/ip_list
+----
++
+include::../../../../../../_components/note.adoc[]
+* 可执行 ``installer task-list`` 命令查看硬件手机情况，返回结果中 status 字段为 successful 即可。
+* 若收集硬件失败，可查看 ``/qingstor-installer/collect/collect.log`` 日志。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 校验指定节点的硬件信息。
++
+[,shell]
+----
+installer node-show <NODE_ID>
+----
++
+include::../../../../../../_components/note.adoc[]
+<NODE_ID> 需根据实际情况进行修改，可执行 ``installer node-list`` 命令进行查看。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 若节点的硬件信息准确可直接进行修改。
+* 若需修改磁盘类型，可执行如下命令进行修改。
++
+[source,shell]
+----
+installer node-update <NODE_ID> -d <dev_name> -t ssd
+----
+* 若需要修改磁盘大小，可执行如下命令。
++
+[source,shell]
+----
+installer node-update <NODE_ID> -d <dev_name> -S 3200
+----
+* 若收集到多余磁盘，需要修改磁盘状态为``不可用``，可执行如下命令。
++
+[source,shell]
+----
+installer node-update <NODE_ID> -d <dev_name> -s 0
+----

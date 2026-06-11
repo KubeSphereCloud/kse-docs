@@ -1,0 +1,172 @@
+---
+title: 批量获取监控数据（GetMonitors）
+weight: 19
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| end_time
+| String
+| false
+| 结束时间
+
+| meter
+| String
+| false
+| 指标
+
+| meters
+| Array
+| false
+| 指标
+
+| owner
+| String
+| false
+| 用户Id
+
+| range
+| Integer
+| false
+| 时间间隔
+
+| resource
+| String
+| false
+| 资源Id
+
+| resourceIds
+| Array
+| false
+| 资源Id
+
+| resource_meters_pairs
+| Array
+| false
+| 
+
+| start_time
+| String
+| false
+| 开始时间
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| monitors
+| Object
+| false
+| 监控详情
+
+| monitors.meter_set
+| Object
+| false
+| 监控数据
+
+| monitors.meter_set.data
+| Object
+| false
+| 监控数据
+
+| monitors.meter_set.meter_id
+| String
+| false
+| 指标Id
+
+| monitors.resource_id
+| String
+| false
+| 资源Id
+
+| ret_code
+| Integer
+| false
+| 返回码
+
+| trace_id
+| String
+| false
+| 追踪Id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetMonitors",
+  "end_time": "2023-06-06T03:42:57.143Z",
+  "meter": "cpu",
+  "owner": "usr-rrPKHDpJ",
+  "range": 6,
+  "resourceIds": [
+    "i-vlx0vqw5"
+  ],
+  "resource_meters_pairs": [
+    {
+      "meters": [
+        "cpu"
+      ],
+      "resource": "i-vlx0vqw5"
+    }
+  ],
+  "start_time": "2023-06-05T21:42:57.143Z",
+  "step": "5m",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetMonitorsResponse",
+  "monitors": [
+    {
+      "meter_set": [
+        {
+          "data": [
+            [
+              300,
+              16
+            ]
+          ],
+          "meter_id": "cpu"
+        }
+      ],
+      "resource_id": "i-vlx0vqw5"
+    }
+  ],
+  "ret_code": 0,
+  "trace_id": "Kq6XFg0n"
+}
+----

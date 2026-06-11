@@ -1,0 +1,51 @@
+---
+title: "Resize resources for a VM"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VM, resources, resize"
+description: "Describes how to resize resources for a VM in the {ks_product} web console."
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 63e7e6aa23fe4cfc913f2b4fda5a13f4
+:ks_xref_id: 7198a466f6d2468785f57ae5a17803e2
+:ks_comp: ../../../../components/
+:ks_title: Resize resources for a VM
+:ks_description: Describes how to resize resources for a VM in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VM, resources, resize
+:ks_weight: 07
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to resize VM resources in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=2689839ee95a42348e97615c07dba9af]
+
+include::../../../../_custom-en/vms/vm-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=33e179accc064a86bff540d8052913cf]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, click the name of a VM to view its details.
+. In the upper-left corner of the details page, click **Resize**.
+. In the dialog box that appears, modify the default configuration and disk size of the VM, and click **OK**.  The default configuration includes the number of CPU cores and memory size. For more information about parameters, see link:../01-create-vm/[Create a VM].
+. In the **Note** dialog box, click **Restart** to make the new configuration take effect. If you click **Cancel**, the new configuration is saved.
++
+--
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+The VM must be restarted before the new configuration takes effect.  The VM restart may take a while, during which no operations can be performed on the VM. Please select **Restart** or **Cancel** based on your business requirements.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,108 @@
+---
+title: 查询用户授权应用（DescribeUserAuthorizations）
+weight: 9
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| client_id
+| String
+| false
+| 
+
+| reverse
+| Integer
+| false
+| 是否倒序
+
+| search_word
+| String
+| false
+| 检索字段
+
+| sort_key
+| String
+| false
+| 排序字段
+
+| status
+| String
+| false
+| 状态
+
+| token_issuer
+| String
+| false
+| 发行人
+
+| user_id
+| String
+| true
+| 
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| authorization
+| Array
+| false
+| 认证授权信息
+
+| limit
+| String
+| false
+| 
+
+| offset
+| String
+| false
+| 
+
+| total_count
+| Integer
+| false
+| 总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAccountQuotas",
+  "client_id": "",
+  "reverse": 0,
+  "search_word": "",
+  "sort_key": "",
+  "status": "active",
+  "token_issuer": "iam",
+  "user_id": "usr-KmJmFe0V"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeUserAuthorizationsResponse",
+  "authorization_set": [],
+  "limit": 100,
+  "offset": 0,
+  "ret_code": 0,
+  "total_count": 0
+}
+----

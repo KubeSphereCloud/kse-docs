@@ -1,0 +1,20 @@
+---
+title: "License FAQ"
+weight: 07
+---
+
+== Error When Adding Licenses
+
+Description: An error occurs when adding a license: `admission webhook "validator.config.kubesphere.io" denied the request: license for whizard-telemetry already exist`
+
+Reason: When adding a license or license bundle, the license for whizard-telemetry (WhizardTelemetry Platform Service) already exists in the {ks_product-en} platform.
+
+Solution: Delete the existing whizard-telemetry license and then add the new license.
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+When the license expires, you should also delete the expired license before adding a new one.
+|===

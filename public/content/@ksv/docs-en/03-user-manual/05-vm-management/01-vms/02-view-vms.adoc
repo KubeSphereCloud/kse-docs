@@ -1,0 +1,88 @@
+---
+title: "View VMs"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, list, view"
+description: "Describes how to view VMs in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 7a94aaa418c44dcfbd88d10e66ab0f1e
+:ks_xref_id: 2b3707e2a26348549c275a16b8f42b36
+:ks_comp: ../../../../components/
+:ks_title: View VMs
+:ks_description: Describes how to view VMs in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, list, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view VMs in the {ks_product_abbr_full} web console.
+
+include::../../../../_custom-en/vms/vm-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=9e454cef6f024766baaf294274a23f9a]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
++
+
+--
+The following table describes the parameters.
+
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the VM.
+
+include::../../../../_custom-en/vms/vm-naming-convention.adoc[]
+
+|ID
+|The universally unique identifier (UUID) of the VM in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the VM.
+
+|OS
+|The OS type and version of the VM.  You can place the cursor on the OS to view the specific type and version of the OS.
+
+|IP Address
+|The IP address of the VM. If a VM contains multiple NICs, multiple IP addresses are assigned to the VM.
+
+|CPU Usage
+|The CPU usage of the VM.  You can place the cursor on the ring to view the number of CPU cores used and the total CPU cores.
+
+include::../../../../_custom-en/vms/resource-usage-ring-description.adoc[]
+
+|Memory Usage
+|The memory usage of the VM.  You can place the cursor on the ring to view the used memory size and the total memory.
+
+include::../../../../_custom-en/vms/resource-usage-ring-description.adoc[]
+
+|System Disk
+|The system disk size of the VM.
+
+|Associated Resources
+|The resources that are associated with the VM.  You can place the cursor on a specific resource to view its details.
+
+|Node
+|The node that runs the VM.  This parameter is available to user **admin** only.
+
+|Project
+|The project name in which the VM is created.
+|===
+--
+
+// 所有后面的需要等开发完成后验证
+
+. (Optional) In the blank area of the VM list, right-click to open the VM operation menu.
+. (Optional) On the right side of a VM, click image:/images/ksv/en/icons/terminal.svg[terminal,14] or image:/images/ksv/en/icons/vnc.svg[vnc,14] to use Terminal or VNC to remotely connect to the VM.
+. (Optional) Click the search box above the VM list and set query conditions to search for VMs by name, ID, or status. For example, use **Name:ab** to search for VMs whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

@@ -1,0 +1,53 @@
+---
+title: "Add Domains for Domain Reuse Validation"
+description: "Learn how to add domain reuse validation."
+weight: 01
+---
+
+:ks_navigation: **Application Workloads > Ingress Utils**
+
+This section describes how to add a domain on the Ingress Utils page, so that when creating or editing an Ingress, the domain is verified for uniqueness to ensure that the domain is not used by other projects.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|"Domain Reuse Validation" only takes effect on the current cluster and does not apply to previously existing Ingresses.
+|===
+
+== Prerequisites
+
+* **KubeSphere Ingress Utils** should have been installed and enabled.
+
+* You should have the **cluster-admin** role on the {ks_product-en} platform.
+
+== Steps
+
+. Log in to the {ks_product-en} web console with a user who has the **cluster-admin** role and enter your cluster.
+
++
+
+include::../../../../_ks_components-en/oper-navigate.adoc[]
+
+. Click **Add Domain** on the page.
+
+. In the **Add Domain** dialog, set the domain information.
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the domain. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and can be up to 63 characters long.
+
+|Domain
+|The domain address, supports wildcard matching.
+
+The wildcard * matches all, but only matches one level of subdomains. That is: `\*.qingcloud.com` indicates matching all domains with the suffix `.qingcloud.com`, but does not match `*.xxx.qingcloud.com`.
+
+|Description
+|The description of the domain. The description can contain any characters and can be up to 256 characters long.
+|===
+--

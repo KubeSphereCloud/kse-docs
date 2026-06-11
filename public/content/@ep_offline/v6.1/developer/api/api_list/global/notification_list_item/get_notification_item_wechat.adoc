@@ -1,0 +1,62 @@
+---
+title: 获取微信二维码（GetNotificationItemWechatQR）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| true
+| 控制台
+
+| notification_item
+| String
+| true
+| 通知列表项id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| qr
+| String
+| false
+| 二维码链接
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetNotificationItemWechatQR",
+  "console": "qingcloud",
+  "notification_item": "ni-xxxxxxxx",
+  "owner": "usr-xxxxxxxx",
+  "zone": "pek3"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetNotificationItemWechatQRResponse",
+  "qr": "http://weixin.qq.com/q/02M_5EQ_Xs9YT1ET_zxA1g",
+  "ret_code": 0
+}
+----

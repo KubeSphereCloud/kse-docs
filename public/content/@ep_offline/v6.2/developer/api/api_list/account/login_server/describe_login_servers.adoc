@@ -1,0 +1,110 @@
+---
+title: 查询第三方登录服务器（DescribeLoginServers）
+weight: 9
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| false
+| 
+
+| ldap_type
+| Integer
+| false
+| 
+
+| limit
+| Integer
+| false
+| 查询数量
+
+| login_server_id
+| Array
+| false
+| 登录服务器ID
+
+| offset
+| Integer
+| false
+| 偏移量
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| server_type
+| Array
+| false
+| 服务器类型
+
+| status
+| Array
+| false
+| 状态
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_server_set
+| Array
+| false
+| 查询出的登录服务器列表
+
+| total_count
+| Integer
+| false
+| 查询总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "console": "console_id",
+  "ldap_type": 1,
+  "limit": 20,
+  "login_server_ids": [
+    "login_server_id_1",
+    "login_server_id_2"
+  ],
+  "offset": 10,
+  "search_word": "login_server",
+  "server_type": [
+    "ssh",
+    "http"
+  ],
+  "status": [
+    "activate",
+    "disable"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeLoginServersResponse",
+  "login_server_set": [],
+  "ret_code": 0,
+  "total_count": 0
+}
+----

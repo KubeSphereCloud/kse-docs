@@ -1,0 +1,78 @@
+---
+title: "预置镜像"
+weight: 20
+linkkey: compute_ai_check_env,compute_ai_software,compute_ai_repository,compute_ai_images_customized
+---
+
+
+本章节主要介绍如何查看平台内的镜像仓库以及使用指定镜像提交训练任务。
+
+== 前提条件
+
+* 已获取管理控制台账号和密码。
+* 已完成个人实名认证且账户余额大于 0 元。
+
+== 查看预置镜像
+
+. 登录管理控制台。
+
+. 点击**产品与服务** > **计算** > **AI 算力平台**，选择左侧导航栏中的**镜像仓库**，默认进入预置镜像列表页面。
++
+image::/images/cloud_service/compute/ai/image_lib_1.png[]
+
+. 点击该页面右上角列表排列方式切换图标，可以**卡片**或**列表**形式展示平台内的镜像。
++
+image::/images/cloud_service/compute/ai/image_lib_2.png[]
+
+. 在列表上方的搜索框内输入关键词，支持镜像列表筛选。
+
+
+== 拉取预置镜像
+
+. 开启开发环境，并link:../../train_server/jupyterlab/#_登录节点后台[登录指定计算节点的后台]。
+. 在预置镜像列表页面，复制指定镜像的拉取命令。
++
+image::/images/cloud_service/compute/ai/image_lib_3.png[]
+
+. 在 Terminal 界面，输入上一步骤中复制的拉取命令，等待镜像下载完成即可。
++
+--
+include::../../../../../../_components/note.adoc[]
+下载成功的镜像将保存至当前集群挂载的并行文件存储的共享目录中的 ``/data`` 路径下。
+include::../../../../../../_components/table_footer.adoc[]
+
+以拉取 PyTorch 架构下的 2.0.1-cuda11.7-cudnn8-runtime 为例，拉取命令：
+
+[,shell]
+----
+docker pull j1-dockerhub.qingcloud.com/pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
+----
+
+命令回显：
+
+[,shell]
+----
+2.0.1-cuda11.7-cudnn8-runtime: Pulling from pytorch/pytorch
+99803d4b97f3: Pull complete 
+4ade0a4bc5d5: Pull complete 
+035a286326d6: Pull complete 
+4f4fb700ef54: Pull complete 
+2185b402c9ca: Pull complete 
+Digest: sha256:82e0d379a5dedd6303c89eda57bcc434c40be11f249ddfadfd5673b84351e806
+Status: Downloaded newer image for j1-dockerhub.qingcloud.com/pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
+j1-dockerhub.qingcloud.com/pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
+----
+--
+
+
+== 提交训练任务
+
+若需要在镜像仓库使用预置镜像提交训练任务，需提前创建好 AI 算力集群。
+
+. 在**镜像仓库**页面，选择待使用的镜像，点击其上对应的**提交训练任务**。
+
+. 跳转至**创建训练任务**页面，其中**运行环境**已设定为上一步骤中选择的镜像。参考link:../../train_server/train_job_create[创建训练任务]相关章节，完成任务的创建与提交即可。
+
+
+
+

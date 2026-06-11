@@ -1,0 +1,57 @@
+---
+title: 修改云硬盘容量
+weight: 25
+---
+
+在创建云硬盘时，可以配置硬盘容量。系统支持用户自定义云硬盘容量的最大值、最小值和步幅。
+
+image::/images/ep_offline/cadmin/example_global_volume_00.png[]
+
+== 参数路径
+
+[cols='1,1,3']
+|===
+| 应用 | 配置 | 参数
+
+| global
+| server
+a|
+
+* max_hps_volume_size：**通用型 SSD 云盘**的硬盘容量最大值。
+* min_hps_volume_size：**通用型 SSD 云盘**的硬盘容量最小值。
+* hps_volume_step：**通用型 SSD 云盘**的硬盘容量步幅。
+|===
+
+== 操作步骤
+
+. link:../../../manual/login[登录配置中心]。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 选择 `global` 应用，选择 `server` 配置。
++
+image::/images/ep_offline/cadmin/example_global_server.png[]
+. 找到需要修改的 server 配置，点击操作列的**管理配置**，进入 server 配置页面。
++
+
+include::../../../../../../_components/note.adoc[]
+server 配置目前仅支持文本模式。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+找到如下参数，修改**通用型 SSD 云盘**的硬盘容量参数。
++
+[source,yaml]
+----
+common:
+...
+  resource_limits:
+    default:
+      ...
+      hps_volume_step: 10
+      max_hps_volume_size: 500000
+      min_hps_volume_size: 100
+----
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。
++
+大约一分钟后生效，登录 Console 可在创建云硬盘页面看到修改效果。

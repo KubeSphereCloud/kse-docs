@@ -1,0 +1,57 @@
+---
+title: "数据库服务的启停"
+weight: 2
+---
+
+== 注意事项
+
+* 集群启动和关闭后需要通过 `ps` 命令和管理脚本的 `list` 命令确认该节点的 Mysql 进程已经启动或关闭。
+* 不建议使用 supervisor 服务来启停数据库服务，supervisor 服务是作为守护进程来处理数据库进程异常，从而自动拉起数据库服务而存在的。
+
+== 操作步骤
+
+. 登录数据库集群节点。
+. 停止该节点上的数据库服务。
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql stop
+----
+
+. 查看该节点上相关进程。无输出则为正常情况，若仍有输出，则手动 `kill` 相关进程。
++
+[,shell]
+----
+ps -aux | grep mysqld | grep neonsan-mysql
+----
+
+. 查看数据库集群状态。返回结果中，`live nodes` 内不再显示当前节点 IP。
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
+
+. 启动该节点上的数据库服务。
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql start
+----
+. 查看该节点上相关进程。
++
+[,shell]
+----
+ps -aux | grep mysqld | grep neonsan-mysql
+----
++
+include::../../../../../../_components/note.adoc[]
+输出正在运行状态的 mysqld 进程。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 查看数据库集群状态。返回结果中，`live nodes` 内显示当前节点 IP。
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----

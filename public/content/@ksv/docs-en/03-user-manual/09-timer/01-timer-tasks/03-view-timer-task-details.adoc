@@ -1,0 +1,110 @@
+---
+title: "View the details of a timer task"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, timer tasks, details, view"
+description: "Describes how to view the details of a timer task in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: f93d065a8d0d4fc29a26d084a92859d3
+:ks_xref_id: 2533db913130491e9dc5b8854cdcf06d
+:ks_comp: ../../../../components/
+:ks_title: View the details of a timer task
+:ks_description: Describes how to view the details of a timer task in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, timer tasks, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of a timer task in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=640ce117ae514eaaba636d70a8a9c7f3]
+
+include::../../../../_custom-en/timer/timer-task-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=71fd20bc7b5f47c4a9dcf5973bee2571]
+
+include::../../../../_custom-en/timer/timer-task-steps.adoc[]
+
+. On the **Timer Tasks** tab, click the name of the task that you want to view. The details page of the timer task appears.
+. On the left side of the details page, view basic information about the timer task.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the timer task in the system.
+
+|Status
+|Specifies whether the timer task is enabled.
+
+|Operation
+|The description of the timer task execution. Valid values: **Start VM**, **Stop VM**, **Restart VM**, and **Create Snapshot**.
+
+|Policy
+|The policy that is used to run the timer task.
+
+|Time
+|The point in time at which the timer task runs.
+
+|Executions
+|The number of times that the timer task runs.
+
+|Maximum Attempts
+|The maximum number of times that the timer task is allowed to fail.  If the specified value is exceeded, the system will stop or skip the task based on the settings. Valid values: 3 to 8.
+
+|Whether to Skip Error
+|The operation to perform if the number of the maximum attempts has been reached. You can skip errors or stop the timer task.
+|===
+--
+. On the **History** tab, view the execution records of the timer task. The following table describes the parameters.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Time
+|The point in time at which the timer task runs.
+
+|Status
+|The execution result of the timer task.
+
+|Object
+|The object on which the timer task runs. Each timer task can run on multiple objects.
+
+|Operation
+|The operation to perform by the timer task.
+
+|Description
+|The description of the timer task execution.
+|===
+--
+. On the **Objects** tab, view the status of the object on which the timer task runs. The following table describes the parameters.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the object.
+
+|ID
+|The UUID of the object in the system.
+
+|Status
+|The status of the object.
+|===
+--

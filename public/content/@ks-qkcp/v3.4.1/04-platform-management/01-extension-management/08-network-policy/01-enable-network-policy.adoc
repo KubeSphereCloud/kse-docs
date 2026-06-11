@@ -1,0 +1,70 @@
+---
+title: "启用网络策略"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, 网络策略, 启用网络策略"
+description: "介绍如何启用网络策略扩展组件。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 93a481e6f196424783046796c2dc8a74
+:ks_xref_id: f378a63f777b46819477959b6960dd23
+:ks_comp: ../../../../components/
+:ks_title: 启用网络策略
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, 网络策略, 启用网络策略
+:ks_description: 介绍如何启用网络策略扩展组件。
+:ks_weight: 01
+:ks_icon:
+
+
+本节介绍如何启用网络策略扩展组件。
+
+
+== 前提条件link:[id=47e4e3baa8524c7b85e164b8325b12c5]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=19c9ee5f87f44392a6475b710051866d]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:network:networkpolicy:enabled** 参数设置为 **true**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  network:
+    networkpolicy:
+      enabled: true
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionEnabled.adoc[]
+
+* 网络策略启用后，集群导航栏将显示**网络策略**选项，项目导航栏将显示**网络隔离**选项。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

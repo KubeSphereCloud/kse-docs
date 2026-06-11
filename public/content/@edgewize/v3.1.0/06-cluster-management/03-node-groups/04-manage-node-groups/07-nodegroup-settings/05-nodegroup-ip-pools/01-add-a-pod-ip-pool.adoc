@@ -1,0 +1,52 @@
+---
+title: "添加容器组 IP 池"
+weight: 01
+---
+
+
+:ks_permission: **节点组管理**
+:ks_navigation: **节点组设置 > 容器组 IP 池**
+
+
+本节介绍如何为节点组添加容器组 IP 池，即将节点组与容器组 IP 池绑定。
+
+// 绑定后，在边缘运行时为 openyurt 的边缘集群中部署应用时，选择节点组，会自动显示与该节点组绑定的容器组 IP 池。
+
+
+== 前提条件
+
+* {empty}
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+* 当前集群的边缘运行时为 openyurt。
+
+* 已在当前边缘集群中创建容器组 IP 池，且将 IP 池分配给与当前节点组绑定的项目。
+有关更多信息，请参阅link:../../../../../07-network/02-pod-ip-pool/01-create-a-pod-ip-pool[创建容器组 IP 池]、link:../../../../../07-network/02-pod-ip-pool/04-assign-a-project-to-a-ip-pool[将容器组 IP 池分配到项目]和link:../../../05-projects/01-bind-to-a-project[绑定项目到节点组]。
+
+== 操作步骤
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 点击**添加**。
+
+. 在**绑定容器组 IP 池**对话框，选择**边缘项目**以及分配到该项目的**容器组 IP 池**，然后点击**确定**。
++
+--
+容器组 IP 池添加完成后将显示在节点组的容器组 IP 池列表中。
+
+在节点组目录页面，点击该节点组，在右侧的节点组概览信息中也会看到与之绑定的容器组 IP 池的信息。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+一个节点组可以绑定多个项目的容器组 IP 池，但只能为每个项目选择一个容器组 IP 池。
+|===
+--

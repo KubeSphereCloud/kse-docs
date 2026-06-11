@@ -1,0 +1,31 @@
+---
+title: "自动安装"
+weight: 20
+---
+
+== 注意事项
+
+使用自动安装方式，系统盘默认需要安装在 sda 盘上，所以系统盘的磁盘盘符必须为 sda，否则可能导致安装失败。
+
+include::../../../../../../_components/note.adoc[]
+
+可以尝试把所有数据盘拔出，或者修改 iso 内部的配置文件 autoinstall.seed（系统版本为 ubuntun 20.04.1 时，则需要修改文件 /auto-sda/user-data）。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+== 前提条件
+
+已获取自动安装镜像 QingCloud-X.X.X.X-AutoInstall.iso。 
+
+== 安装说明
+
+* 如果需要手动配置 net 和 disk，则可以使用自动安装 iso 的第二个选项 `Qingcloud Manualinstall`。如下图所示。
++
+image::/images/ep_offline/installation/deploy_server_conf_os_auto.png[,60%]
+
+* 安装完成后，系统默认用户名密码为 `yop/zhu1241jie`。
+
+include::../../../../../../_components/note.adoc[]
+操作系统安装完成后，建议多重启几次服务器，观察网络和磁盘顺序，确保网络通畅，磁盘顺序正常。
+
+include::../../../../../../_components/table_footer.adoc[]

@@ -1,0 +1,50 @@
+---
+title: "Publish an App Version to the App Store"
+keywords: "Kubernetes, {ks_product}, workspace, app template, publish app version to app store"
+description: "Describes how to publish an app template to the App Store."
+weight: 10
+---
+
+:ks_permission: **App/App Version/App Instance Management**
+:ks_navigation: **App Management > App Templates**
+
+This section describes how to publish an app version to the App Store.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. On the **Versions** tab of the app template details page, click the app version you want to publish, then click **Submit for Review** in the expanded area.
+
+. After the App Store administrator approves and lists it, click **App Store** to view the listed app version in the App Store.
++
+--
+// Note
+include::../../../../../../_ks_components/admonitions/note.adoc[]
+
+* After approval, the app version's status will change to **Published**, indicating it can be listed in the App Store by the App Store administrator. Once listed, all project members can install the app version from the App Store into their projects.
+
+* For more information about app review and listing, refer to link:../../../03-app-store-management/[App Store Management].
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

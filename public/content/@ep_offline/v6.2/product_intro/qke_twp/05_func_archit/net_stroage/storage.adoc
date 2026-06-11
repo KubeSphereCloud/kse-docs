@@ -1,0 +1,22 @@
+---
+title: "存储"
+weight: 20
+---
+
+== 功能特性
+
+存储卷快照是企业级存储系统的必备功能。在容器领域，Volume Snapshot 在 Kubernetes v1.17 从 alpha 升级到 beta，因此 KubeSphere 3.0 增加存储卷快照功能。
+
+== 主要组件
+
+在 Kubernetes 中，Volume Snapshot 的设计借鉴了 Persistent Volume，相关概念对应关系如下。
+
+* VolumeSnapshotClass 对应 StorageClass
+* VolumeSnapshot 对应 PersistentVolumeClaim
+* VolumeSnapshotContent 对应 PersistentVolume
+
+在设计上，KubeSphere 3.0 之前，存储类型指的是 StorageClass；在 KubeSphere 3.0 中，存储类型包含 StorageClass 和 VolumeSnapshotClass，即：支持快照的存储类型，包含 StorageClass 和同名的 VolumeSnapshotClass；不支持快照的存储类型，只包含 StorageClass。
+
+== 架构设计
+
+为了更好的用户体验和精简的前后端交互，前端只负责操作 StorageClass。在创建、删除、更新存储类型时，ks-controller 会负责VolumeSnapshotClass 的相关处理。

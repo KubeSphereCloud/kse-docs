@@ -1,0 +1,26 @@
+---
+title: "实现原理"
+weight: 30
+---
+
+监控与告警实现逻辑如下图。
+
+image::/images/ep_offline/ep_twp/cloudsat_01.png[]
+
+. *监控数据采集*。
+
+** 通过部署在各个 Hyper 节点上的 compute_monitor 服务将云平台资源的监控数据进行采集，并上报到 CloudSat 的 Kafka 集群。
+** 通过自定义监控数据上报接口 UploadMonitorData 将第三方的监控数据按照格式要求上报到 CloudSat 的 Kafka 集群。
+
+. *监控数据处理*。
+
+** 通过 sat-transfer 服务处理 Kafka 中的监控原始数据，根据业务逻辑将部分不符合要求的垃圾数据进行清洗，将监控数据保存到 ClickHouse 数据库，同时将监控数据按资源 id 拆分重新写入 Kafka 集群。     
+** 基于 ClickHouse 的高性能数据库（相比传统数据库读写速度快100-1000倍），通过 ClickHouse 自带的时序聚合能力，利用物化视图将 10s 粒度的监控数据自动聚合成 5min 粒度的历史监控数据，提供更加高效，灵活的监控数据聚合查询能力。并通过 sat-api 服务对外提供 iaas、paas 及自定义监控数据查询功能。
+
+. *监控告警处理*。
+
+** 基于 Flink 服务，开发 flink_custom_job 服务，通过数据聚合算法将采集粒度 10s 的原始监控数据，聚合成 1min及 5min 这两种粒度的聚合数据，然后重新写回 Kafka 集群。
+** sat-alarm 服务读取 Kafka 集群中的 1min/5min 的聚合监控数据，并从 PostgreSQL 数据库中加载所有的告警策略数据，根据资源 id、namespace 等信息，对每一份聚合监控数据进行校验，判定是否满足告警策略中的告警规则。当发生告警，或者告警恢复正常时，cloudsat 服务会请求 nf 服务，将生成的告警数据、恢复正常数据发送给指定的对象。
+** 还可以配置自动伸缩策略，当满足触发规则时，自动申请或释放云服务资源。
++
+image::/images/ep_offline/ep_twp/cloudsat_03.png[]

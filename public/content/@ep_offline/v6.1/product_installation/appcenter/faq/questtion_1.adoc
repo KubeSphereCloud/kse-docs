@@ -1,0 +1,55 @@
+---
+title: 导入时接口超时、连接数据库失败等问题
+weight: 1
+---
+
+== 问题描述
+
+在 AppCenter 应用导入时，提示 `接口超时` 或 `连接数据库失败` 等。
+
+
+
+== 可能原因
+
+在排查部分问题时发现环境本身存在问题，需要实施人员确认环境正常的情况下才能执行导入操作。针对这部分问题在脚本中都会有相应的提示，实施人员根据提示信息确认错误原因。
+
+== 解决方法
+
+从排查此类问题的经验中，得出数据库 `ws_server` 与 `pg` 出现问题的频次较低，`cassandra` 数据库出现问题的频次较高。这里给出 `cassandra` 数据库出现问题的解决方法。
+
+
+{product_name} v5.0.2、v5.1.1 及以下版本部署 Ubuntu 20.04.1 版本的 Zoocassa 节点的 Cassandra 集群异常，比如三个节点中总有个别节点是 `DN` 状态，且重启 Cassandra 服务后，PID 不变。
+
+针对此类问题，{product_name}已经在 v5.1.2 以及 v5.0.3 的版本中进行了解决，对于存量环境，可按照以下步骤解决。
+
+. 登录{product_name}的 Zoocassa 节点，执行以下脚本。
++
+[source,shell]
+----
+#!/bin/bash
+ 
+service cassandra stop
+pid=`ps -aux | grep -E 'cassandra' | grep -v 'grep' | awk '{print $2}'`
+if [ "x${pid}" != "x" -a -d "/proc/${pid}" ]; then
+    kill -9 ${pid}
+fi
+ 
+if [ -f /etc/init.d/cassandra ]; then
+    sed -i 's/start-stop-daemon -K -p/start-stop-daemon -K -u cassandra -p/g' /etc/init.d/cassandra
+fi
+ 
+systemctl daemon-reload
+service cassandra start
+----
+
+. 待各节点 `cassandra` 服务重启完成后，登录{product_name}的 FirstBox 节点，执行以下命令行确认 Zoocassa 节点状态。
++
+[source,shell]
+----
+cd /pitrix/upgrade
+./exec_nodes.sh zoocassa " nodetool status "
+----
++
+输出内容如下所示，各节点状态均为 `UN` 即为正常。
++
+image::/images/ep_offline/installation/app_import_5.png[]

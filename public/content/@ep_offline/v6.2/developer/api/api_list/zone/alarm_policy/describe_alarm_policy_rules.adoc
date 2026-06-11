@@ -1,0 +1,189 @@
+---
+title: 查询告警策略规则信息（DescribeAlarmPolicyRules）
+weight: 12
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy
+| String
+| true
+| 策略id
+
+| limit
+| Integer
+| true
+| 返回数据条数
+
+| offset
+| Integer
+| true
+| 分页起始索引
+
+| owner
+| String
+| false
+| 用户
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy_rule_set
+| Object
+| false
+| 告警规则信息
+
+| alarm_policy_rule_set.alarm_level_id
+| String
+| false
+| 规则级别
+
+| alarm_policy_rule_set.alarm_policy_id
+| String
+| false
+| 告警策略Id
+
+| alarm_policy_rule_set.alarm_policy_rule_id
+| String
+| false
+| 规则Id
+
+| alarm_policy_rule_set.alarm_policy_rule_name
+| String
+| false
+| 规则名称
+
+| alarm_policy_rule_set.condition_type
+| String
+| false
+| 条件
+
+| alarm_policy_rule_set.consecutive_count
+| String
+| false
+| 连续次数
+
+| alarm_policy_rule_set.consecutive_periods
+| Integer
+| false
+| 连续周期
+
+| alarm_policy_rule_set.create_time
+| String
+| false
+| 创建时间
+
+| alarm_policy_rule_set.data_processor
+| String
+| false
+| 数据类型
+
+| alarm_policy_rule_set.disabled
+| Integer
+| false
+| 是否禁用
+
+| alarm_policy_rule_set.event_total_count
+| String
+| false
+| 事件总数
+
+| alarm_policy_rule_set.meter
+| String
+| false
+| 规则指标
+
+| alarm_policy_rule_set.owner
+| String
+| false
+| 用户Id
+
+| alarm_policy_rule_set.period_end_hhmm
+| String
+| false
+| 规则生效截至时间
+
+| alarm_policy_rule_set.period_start_hhmm
+| String
+| false
+| 规则生效开始时间
+
+| alarm_policy_rule_set.status
+| String
+| false
+| 规则状态
+
+| alarm_policy_rule_set.thresholds
+| String
+| false
+| 阈值
+
+| total_count
+| Integer
+| false
+| blic信息总条数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAlarmPolicyRules",
+  "alarm_policy": "alp-1ug2yruu",
+  "limit": 10,
+  "offset": 0,
+  "owner": "usr-rrPKHDpJ",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAlarmPolicyRulesResponse",
+  "alarm_policy_rule_set": [
+    {
+      "alarm_level_id": "level-00000000",
+      "alarm_policy_id": "alp-1ug2yruu",
+      "alarm_policy_rule_id": "alpr-ai5nrns9",
+      "alarm_policy_rule_name": "",
+      "condition_type": "gt",
+      "consecutive_periods": 1,
+      "console_id": "admin",
+      "controller": "self",
+      "create_time": "2023-06-02T03:40:08Z",
+      "data_processor": "raw",
+      "disabled": 0,
+      "meter": "StopInstances",
+      "owner": "usr-rrPKHDpJ",
+      "period_end_hhmm": "23:59",
+      "period_start_hhmm": "00:00",
+      "root_user_id": "usr-rrPKHDpJ",
+      "thresholds": "1"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 3
+}
+----

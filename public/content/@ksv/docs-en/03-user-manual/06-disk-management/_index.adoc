@@ -1,0 +1,41 @@
+---
+title: "Disks"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, management"
+description: "Describes how to manage disks in the {ks_product} web console."
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 2ce07449f5ad44918c0b1dceb75964fe
+:ks_xref_id: 0ddf5d2df2b84872b56d66d138aa2c6d
+:ks_comp: ../../../components/
+:ks_title: Disks
+:ks_description: Describes how to manage disks in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, management
+:ks_weight: 06
+:ks_logo:
+:ks_download_url:
+
+
+In {ks_product_abbr_full}, disks are block-level virtual resources for storage. Each disk is a filesystem on a server. For use purposes, {ks_product_abbr_full} provides system disks and data disks. The following content lists the differences between system disks and data disks:
+
+* System disk: a virtual disk that contains an OS. A system disk is created each time you create a VM. The lifecyle of a system disk is the same as that of the VM.
+* Data disk: a disk for storage. You can create a data disk when or after a VM is created.
+
+The **Disks** module is available to all users.  User **admin** can view and manage all disks in all projects. The following table compares the permissions granted to non-admin users of different project roles.
+
+[cols='1a,3a']
+|===
+|Project role |Permission
+
+|Administrator
+|View and manage all disks in the projects to which they belong.
+
+|Operator
+|View and manage all disks in the projects to which they belong.
+
+|Viewer
+|View only all disks in the projects to which they belong.
+|===

@@ -1,0 +1,91 @@
+---
+title: "View the details of a user"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, users, details, view"
+description: "Describes how to view the details of a user in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: cd7b8de375c94ee69fee3b40fa4ef573
+:ks_xref_id: 21e916c49cb24763956c259998a18cf5
+:ks_comp: ../../../components/
+:ks_title: View the details of a user
+:ks_description: Describes how to view the details of a user in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, users, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view the details of a user in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=73a35ad5e4d6445e8b35ae93d1ddee43]
+
+include::../../../_custom-en/users/user-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=03b658bb81ab48a4a229a5436cfa1259]
+
+include::../../../_custom-en/users/user-steps.adoc[]
+
+. On the **Local Users** page, click the name of the user that you want to view. The details page of the user appears.
+. On the left side of the details page, view basic information about the user.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Email
+|The email address of the user.
+
+The email address can be used to log in to the {ks_product} web console.
+
+|Created by
+|The time when the user was created.The creator of the user.  Only user **admin** can create users.
+
+|Created at
+|The login time.
+|===
+--
+. On the **Projects** tab, view the projects to which the user belongs.  Each user can be added to one or more projects.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Project Name
+|The projects to which the user belongs.
+
+|Role
+|The role of the user in the project.
+|===
+--
+. On the **Login History** tab, view the login records of the user.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Time
+|The login time.
+
+|Status
+|The login status.
+
+|Source IP Address
+|The IP address of the user.
+
+|Description
+|The description of the user login.
+|===
+--

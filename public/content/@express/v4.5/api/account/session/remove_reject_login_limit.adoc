@@ -1,0 +1,53 @@
+---
+title: 移除拒绝登录限制（RemoveRejectLoginLimit）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user
+| String
+| true
+| 用户id
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "RemoveRejectLoginLimit",
+  "user": "usr-dQFUel6D"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "RemoveRejectLoginLimitResponse",
+  "ret_code": 0,
+  "user_id": "usr-dQFUel6D"
+}
+----

@@ -1,0 +1,23 @@
+---
+title: "WizTelemetry Tracing"
+keywords: "Kubernetes, {ks_product}, Tracing, Network, Observability"
+description: "Introduces how to use the 'WizTelemetry Tracing' extension."
+weight: 13
+layout: "second"
+---
+
+This section introduces how to use the "WizTelemetry Tracing" extension.
+
+WizTelemetry Tracing provides distributed tracing functionality based on link:https://opentelemetry.io/docs/specs/otel/trace/[OpenTelemetry].
+
+Tracing is a technique for monitoring distributed systems. It identifies each request with a unique Trace ID and records the request's flow path across various services. As a request traverses the system, key operations within each service are recorded as Spans, containing critical information such as duration and status. These Spans form a complete call chain (Trace) through parent-child relationships, allowing you to clearly observe the full request flow through visualization tools and quickly locate delays, errors, or performance bottlenecks. For more information, please refer to the link:https://opentelemetry.io/zh/docs/concepts/signals/traces/[OpenTelemetry official documentation].
+
+After installing the "WizTelemetry Tracing" extension, the **Tracing** menu will appear in the WizTelemetry Observability Platform within the Component Dock.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more information about extension configuration, please refer to the description on the details page of the "WizTelemetry Tracing" extension in the Extensions Center.
+|===

@@ -1,0 +1,134 @@
+---
+title: "重置 pg_watcher 节点状态"
+weight: 3
+---
+
+== 运维场景
+
+云易捷内置 pg_watcher 节点，用来监控 pgserver、pgpool2 集群，并支持主从切换和宕机恢复。在某些情况下不能自动处理，则需要重置 pg_watcher 的状态。
+
+== 操作步骤
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 检查 pg_watcher 配置。
++
+[source,shell]
+----
+vim /pitrix/conf/variables/global/server.yaml.<zone_id>
+----
++
+[,yaml]
+----
+......
+pg_watcher:
+  inactive_failover: 0
+  using_master_by_ts: 1
+  auto_fix_async: 1
+  auto_fix_pgpool: 1
+  pg_node_info:
+    cd1a-ks0:
+      zone_id: 'cd1a'
+      pgpools: 'cd1a-ks0,cd1a-ks1'
+    cd1a-ks1:
+      zone_id: 'cd1a'
+      pgpools: 'cd1a-ks0,cd1a-ks1'
+  globals: 'cdr01n02,cdr01n00,cdr01n01'
+  cluster_iaas:
+    inactive_failover: 0
+    using_master_by_ts: 1
+    auto_fix_async: 1
+    auto_fix_pgpool: 1
+    pg_node_info:
+      cd1a-ks0:
+        zone_id: 'cd1a'
+        pgpools: 'cd1a-ks0,cd1a-ks1'
+      cd1a-ks1:
+        zone_id: 'cd1a'
+        pgpools: 'cd1a-ks0,cd1a-ks1'
+    globals: 'cdr01n02,cdr01n00,cdr01n01'
+  cluster_boss:
+    inactive_failover: 0
+    using_master_by_ts: 1
+    auto_fix_async: 1
+    auto_fix_pgpool: 1
+    pg_node_info:
+    cd1a-ks0:
+        zone_id: 'cd1a'
+        pgpools: 'cd1a-ks0,cd1a-ks1'
+    cd1a-ks1:
+        zone_id: 'cd1a'
+        pgpools: 'cd1a-ks0,cd1a-ks1'
+    globals: 'cdr01n02,cdr01n00,cdr01n01'
+......
+----
++
+include::../../../../../../_components/note.adoc[]
+<zone_id> 需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 依次执行如下命令，打包 glocal_conf 并下发。
++
+[source,shell]
+----
+/pitrix/upgrade/build_global_conf.sh
+----
++
+[source,shell]
+----
+/pitrix/upgrade/update.sh  all global-conf
+----
+
+. 关闭所有 pg_watcher 节点。
++
+[source,shell]
+----
+fb exec_nodes all supervisorctl stop pg_watcher
+----
++
+[source,shell]
+----
+sleep 60
+----
+. 重新启动所有 pg_watcher 节点。
++
+[source,shell]
+----
+fb exec_nodes all supervisorctl start pg_watcher
+----
++
+[source,shell]
+----
+sleep 60
+----
+
+. 检查 pg_watcher 状态。
++
+[source,shell]
+----
+fb exec_nodes -f <zone_id>-ks0 cat /var/run/pg_watcher.PGNode
+----
++
+include::../../../../../../_components/note.adoc[]
+* <zone_id> 需根据实际情况进行修改。
+* 返回结果中 ``status`` 为 ``active`` 则表示状态正常。
+include::../../../../../../_components/table_footer.adoc[]
+
+

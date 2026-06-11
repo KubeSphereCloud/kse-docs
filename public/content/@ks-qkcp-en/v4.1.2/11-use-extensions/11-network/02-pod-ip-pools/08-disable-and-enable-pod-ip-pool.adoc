@@ -1,0 +1,52 @@
+---
+title: "Disable and Enable Pod IP Pools"
+keywords: "Kubernetes, {ks_product-en}, cluster management, network, pod IP pool, disable and enable pod IP pool"
+description: "Introduce how to disable and enable pod IP pools."
+weight: 08
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Pod IP Pools**
+
+
+This section introduces how to disable and enable pod IP pools.
+
+After a pod IP pool is disabled, it will not continue to allocate IP addresses and will not affect the network of pods that have already been allocated IP addresses. However, disabling a pod IP pool will automatically unbind its associated projects. When migrating a pod IP pool, the number of available addresses in the new IP pool must not be less than the number of IP addresses used in the current IP pool.
+
+//warning
+[.admon.warning,cols="a"]
+|===
+|Warning
+
+|
+After migration, workloads will be restarted. Please proceed with caution.
+
+|===
+
+== Prerequisites
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeSphere Network** should have been installed and enabled.
+
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the pod IP pool you want to operate, and then select **Disable** from the dropdown list.
+
+. In the **Disable Pod IP Pool** dialog box, click **OK**.
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the disabled pod IP pool, and then select **Enable** from the dropdown list to enable the pod IP pool.
+
++
+--
+If there are allocated IPs in the disabled pod IP pool, check **Migrate Pod IP Pool** to migrate the pods with allocated IP addresses to a new pod IP pool.
+--

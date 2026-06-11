@@ -1,0 +1,28 @@
+---
+title: "VPC 同一 vxnet 内通信"
+weight: 10
+---
+
+如下图所示，云服务器 VM1 与 VM2 属于不同计算节点，加入了同一个 VPC 同一个 vxnet 内，两台 VM 可以实现二层互访，支持组播广播通信，其数据流量转发逻辑与 VBC 内部互访的逻辑一致。
+
+image::/images/ep_offline/ep_twp/vpc_same_vxnet_forward.png[]
+
+VM1 访问 VM2 的流量转发逻辑如下：
+
+. VM1 以广播方式发送 ARP 请求，解析 VM2 的 MAC 地址。
+
+. DVR11 的 VTEP 接口接收到该 ARP 请求后，查询 ARP 表中存在 VM2 的静态 ARP 记录，便直接向 VM1 回复 ARP 报文，告知 VM2 的 MAC 地址。
+
+. VM1 接收到 ARP 响应报文，将 VM2 的 MAC 地址加入到本机的 ARP 表中，同时将 IP 数据包进行封包，目的 IP/MAC 均为 VM2，从 vNIC 发送后进入 DVR11-bridge。
+
+. DVR11-bridge 根据目的 MAC 查询 bridge FDB 表（类似于交换机 MAC 地址表），将数据包发送至 VTEP 接口处理。
+
+. DVR11-bridge 查询 VXLAN FDB 表，对数据包进行 VXLAN 封装，VXLAN 封包目标 IP 为 Hyper2 的 IP 地址 10.88.1.2。
+
+. Hyper1 根据 10.88.1.2 查询路由/ARP 表信息，从 ETH 口发送后进入 CSW（物理交换机）。
+
+. CSW 根据数据包 MAC 地址信息，转发至 Hyper2。
+
+. Hyper2 收到 VXLAN 数据包后，根据 VNI ID 交给对应的 VTEP 设备处理，对数据数据包进行 VXLAN 解封装，进入 DVR12 进行转发处理。
+
+. DVR12 根据目标 MAC 查询 bridge FDB 表，将数据包转发至 VM2。

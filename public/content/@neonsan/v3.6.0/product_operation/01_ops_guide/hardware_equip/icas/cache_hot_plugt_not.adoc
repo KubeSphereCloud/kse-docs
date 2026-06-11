@@ -1,0 +1,328 @@
+---
+title: "更换 cache 盘（不支持热插拔）"
+weight: 2
+---
+
+
+
+== 注意事项
+
+
+不支持热插拔的 cache 盘，必须在服务器关机状态下进行更换。
+
+
+== 操作步骤
+
+. 参考前文内容，link:../../move_disk/[移除待下线的磁盘]。
+
++
+include::../../../../../../_components/note.adoc[]
+移除磁盘的过程中，需**迁移待下线磁盘所在节点的所有数据**。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 收集 CAS 盘的 Cache Line 信息，稍后启动时按照这个参数启动。
+.. 查看 CAS 盘 ID 信息。
++
+[,shell]
+----
+casadm -L
+----
+
+.. 查看指定 CAS 盘的 Cache Line 信息
++
+--
+[,shell]
+----
+casadm -P -i 1
+----
+
+回显示例
+
+[,shell]
+----
+... ...
+Cache line size 4 [KiB]
+... ...
+----
+--
++
+include::../../../../../../_components/note.adoc[]
+* ``-i`` 指定 CAS 盘 ID。
+* 若该 CAS 盘异常，可查询本节点其他 CAS 或登录至其他节点查看 CAS 盘的 ``Cache Line`` 信息。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 停止待下线磁盘所在存储节点上的所有服务。
+.. 查询该节点上部署的服务
++
+[,shell]
+----
+supervisorctl status
+----
+.. 逐一停止该节点上的各项服务
++
+[,shell]
+----
+supervisorctl stop xxxxx
+----
++
+include::../../../../../../_components/note.adoc[]
+* xxxxx 为服务名称需根据实际情况进行修改。
+* 若集群中使用的数据库为 Xenondb，则通过 ``/opt/xenondb/bin/xenon_service.py stop`` 命令停止 Xenondb 服务
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录查看其它 Zookeeper 节点与数据库节点，检查服务是否正常。
++
+若数据库服务与 Zookeeper 服务异常，需调查原因并恢复。直至其他节点上的数据库服务与 Zookeeper 服务正常，再继续以下步骤。
++
+* Zookeeper 服务
++
+[,shell]
+----
+supervisorctl status zookeeper
+----
+
+* 数据库服务，根据集群中的数据库类型选择相应查看命令。
++
+--
+QingStor MySQL 数据库
+[,shell]
+----
+supervisorctl status mysql_neonsan
+----
+
+Galera 数据库
+[,shell]
+----
+supervisorctl status galera_cluster
+----
+
+Xenondb 数据库
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
+--
+
+. 修改 iCAS 配置，将需要更换的 cas 盘的 caches 与 cores 注释：
++
+--
+[,shell]
+----
+vi /etc/intelcas/intelcas.conf
+----
+注释掉以下内容。
+[,conf]
+----
+... ....
+## Caches configuration section
+[caches]
+## Cache ID Cache device Cache mode Extra fields (optional)
+1 /dev/disk/by-id/nvme-P45C7032C21_P60112026022 WB
+[cores]
+## Cache ID Core ID Core device
+1 1 /dev/disk/by-id/scsi-366c92bf000696827245801c30f49a0bf
+1 2 /dev/disk/by-id/scsi-366c92bf000696827245801d21036559d
+... ...
+----
+--
+
+. 将待下线磁盘信息从配置文件中删除：
++
+--
+[,shell]
+----
+vi /etc/neonsan/store.conf
+----
+删除或注释掉 dev 字段内容。
+[,shell]
+----
+... ...
+//待下线盘符相关信息
+[ssd.4]
+trim_on_reclaim=1
+zero_on_reclaim=0
+#dev="/dev/intelcas1-1" 
+type="SSD"
+... ...
+----
+--
+. 关掉节点服务器。
+. 换盘。
+. 启动节点服务器。
+. 修改 iCAS 的配置文件，将已更换的 cas 盘的 caches 与 cores 注释打开，并更新相应字段：
+.. 查看新添加盘的 by-id。
++
+--
+[,shell]
+----
+ls -l /dev/disk/by-id/*
+----
+回显示例
+[,shell]
+----
+lrwxrwxrwx 1 root root  9 Jan 20 12:09 /dev/disk/by-id/virtio-vol-j3fz88pt -> ../../vdc
+----
+--
+.. 将新添加盘的 by-id 写进配置文件中。
++
+--
+[,shell]
+----
+vi /etc/intelcas/intelcas.conf
+----
+修改内容
+[,shell]
+----
+... ....
+[caches]
+## Cache ID     Cache device            Cache mode Extra fields (optional)
+1  /dev/disk/by-id/virtio-vol-j3fz88pt  WB
+
+[cores]
+## Cache ID     Core ID         Core device
+1              1               /dev/disk/by-id/virtio-vol-ltpuq6if
+... ...
+----
+--
++
+include::../../../../../../_components/note.adoc[]
+这里更换的是 cache 盘，需将 ``[caches]`` 字段对应的 by-id 修改为新加盘的 by-id。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 启动 iCAS 并添加 core。
+.. 启动 iCAS。
++
+[,shell]
+----
+casadm --start-cache --cache-line-size 4 --cache-device /dev/vdc –force --cache-mode wb
+----
++
+include::../../../../../../_components/note.adoc[]
+启动 iCAS 的命令行中，``cache-line-size`` 的值，需根据步骤 2 中收集的信息进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+. 添加 core。
++
+[,shell]
+----
+casadm --add-core --cache-id 1 --core-device /dev/vdd
+----
++
+include::../../../../../../_components/note.adoc[]
+``--cache-id``指定的 cache id 和 ``--core-device`` 指定的盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+. 查看新的 iCAS 盘的盘符信息。
++
+--
+[,shell]
+----
+casadm -L
+----
+回显示例
+[,shell]
+----
+type id disk status write policy device
+cache 1 /dev/vdc Running wb - └core 1 /dev/vdd Active - /dev/intelcas1-1
+----
+--
+. 设置 cut-off 策略。
++
+[,shell]
+----
+casadm --set-param --name seq-cutoff --cache-id <cache_id> --core-id <core_id> --policy always --threshold 4096
+----
++
+include::../../../../../../_components/note.adoc[]
+``cache-id`` 和 ``core-id`` 需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 对新的 cas 盘的盘头前 20G 进行写零操作。
++
+[,shell]
+----
+dd if=/dev/zero of=/dev/intelcas1-1 bs=10M count=2048 oflag=direct
+----
++
+include::../../../../../../_components/note.adoc[]
+``of`` 指定的参数为新插入盘的盘符。为上一步骤中，``casadm -L`` 命令查询到的盘符。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 将新盘添加到对应节点。
++
+--
+* NeonSAN v3.0.0 及以后版本。
++
+[,shell]
+----
+neonsan add_ssd -dev <dev_name> -store_id <storeid>
+----
+
+* NeonSAN v3.0.0 之前版本。
++
+[,shell]
+----
+neonsan add_ssd -dev <dev_name> -store_ip <storeIp> 
+----
+
+include::../../../../../../_components/note.adoc[]
+``-dev`` 参数指定的 dev_name 需要与原有的磁盘盘符格式保持一致。
+include::../../../../../../_components/table_footer.adoc[]
+--
+
+. 查看配置文件。
++
+[,shell]
+----
+vi /etc/neonsan/store.conf
+
+... ...
+# 添加新插入盘符相关信息
+
+[ssd.4]
+trim_on_reclaim=1
+zero_on_reclaim=0
+dev="/dev/intelcas1-1"
+type="SSD"
+... ...
+----
++
+include::../../../../../../_components/note.adoc[]
+* NeonSAN v3.0.0 及之后版本，``add_ssd`` 命令执行成功后，配置文件中会自动添加新插入磁盘的信息，无需手动添加。
+* ``trim_on_reclaim`` 参数需根据磁盘类型来指定，若为 iCAS 盘，该参数的值需为 0。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 启动 store 服务。
++
+[,shell]
+----
+supervisorctl start neonstore
+----
+
+. 确认卷的状态，SSD 状态，以及 Store 的状态。
++
+[,shell]
+----
+neonsan list_volume -detail
+neonsan list_ssd
+neonsan list_store
+----
++
+include::../../../../../../_components/note.adoc[]
+若磁盘信息中存在无效磁盘记录，可参考。link:../../../fault_process/disk/clear_disk_record[清理磁盘记录]进行处理。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令对集群内的 SSD 进行负载均衡。
++
+[,shell]
+----
+neonsan rebalance_ssd
+----
++
+include::../../../../../../_components/note.adoc[]
+该命令为异步执行，可以通过 ``neonsan list_job`` 查看进程。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+
+

@@ -1,0 +1,33 @@
+---
+title: "Enable Workspace Network Isolation"
+keywords: "Kubernetes, {ks_product-en}, workspace, workspace settings, basic information, enable and disable network isolation"
+description: "Introduce how to enable and disable workspace network isolation."
+weight: 01
+---
+
+:ks_permission: **Workspace NetworkPolicy Management**
+:ks_navigation: **Workspace Settings > Basic Info**
+
+
+This section introduces how to enable and disable network isolation for clusters authorized to a workspace.
+
+When network isolation is enabled for a cluster authorized to a workspace, pods belonging to the workspace and running in the cluster cannot be accessed by clients outside the workspace or outside the cluster. The egress traffic of pods belonging to the workspace and running in the cluster is not restricted.
+
+== Prerequisites
+
+* {empty}
+include::../../../../../_custom-en/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+* **KubeSphere Network** should have been installed and enabled.
+
+== Steps
+
+include::../../../../../_custom-en/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. In the **Network Isolation** area, click the switch on the right side of the cluster to enable or disable network isolation for the cluster.

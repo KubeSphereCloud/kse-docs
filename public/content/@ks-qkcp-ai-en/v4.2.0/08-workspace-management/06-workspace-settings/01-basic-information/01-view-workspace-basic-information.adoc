@@ -1,0 +1,41 @@
+---
+title: "View Workspace Basic Information"
+keywords: "Kubernetes, {ks_product}, Workspace, Workspace Settings, Basic Information, View Workspace Basic Information"
+description: "Introduces how to view workspace basic information."
+weight: 01
+---
+
+:ks_navigation: **Workspace Settings > Basic Information**
+
+This section describes how to view workspace basic information.
+
+
+== Prerequisites
+
+You need to join a workspace. For more information, refer to link:../../03-workspace-members/[Workspace Members] and link:../../04-workspace-roles/[Workspace Roles].
+
+
+== Steps
+
+. Log in to the KubeSphere web console and navigate to your workspace.
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+--
+The **Basic Information** page provides the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Workspace Information
+|Information about the current workspace, including the workspace name, administrator, creation time, and number of workspace members.
+
+// |Network Isolation
+// |The network isolation status of the clusters authorized to the workspace. When network isolation is enabled on a cluster authorized to the workspace, pods belonging to this workspace and running on this cluster cannot be accessed by clients outside the workspace, nor by clients outside the cluster. Outbound traffic from pods belonging to this workspace and running on this cluster is not restricted.
+
+// Enabled by default. When the "KubeSphere Network" extension is installed, workspace network isolation can be enabled.
+|===
+--

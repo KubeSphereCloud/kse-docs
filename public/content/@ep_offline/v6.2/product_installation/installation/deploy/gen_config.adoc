@@ -1,0 +1,79 @@
+---
+title: "生成配置文件"
+weight: 4
+---
+
+当配置文件 `variables.<zone_id>.yaml` 及 `setting.<zone_id>.yaml` 正确填写完成后，请在 FirstBox 上执行以下操作，生成配置文件，下发配置任务。
+
+== 操作步骤
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，生成配置文件。
++
+[source,shell]
+----
+/pitrix/cli/config-qingcloud.py -v '/pitrix/config/variables.<zone_id>.yaml' -s '/pitrix/config/settings.<zone_id>.yaml'
+----
+
++
+回显如下信息，表示任务下发成功。
++
+image::/images/ep_offline/installation/deploy_modify_config_config_01.png[,40%]
+
+. 执行以下命令，查看配置任务的执行状态。
++
+[source,shell]
+----
+/pitrix/cli/get-config-qingcloud-status.py
+----
++
+回显如下，状态为 `successful` 时，表示任务执行成功。
++
+image::/images/ep_offline/installation/deploy_modify_config_config_02.png[]
++
+
+include::../../../../../_components/note.adoc[]
+
+* 若状态为 `step1`，表示任务正在执行中，请耐心等待，稍后重新执行该命令查看状态。
+
+* 若状态异常，请查看如下日志，检查报错原因并修复。若仍不能解决，请联系技术支持。
+
+** 详细日志文件路径：`/pitrix/log/config`、`/pitrix/log/installer.log`。
+** 简略日志查看，可执行命令行 `/pitrix/cli/get-config-qingcloud-log.py`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 待任务成功执行完成，需在目录 `/pitrix/conf/variables` 和 `/pitrix/conf/settings` 下面查看生成的配置文件。详细内容参考link:../check_config/[校验配置文件]。
++
+
+
+
+
+== 配置文件列表
+
+include::../../../../../_components/attention.adoc[]
+
+配置文件生成后，如需再次修改相关配置信息，需修改 `/pitrix/conf/variables` 和 `/pitrix/conf/settings` 目录下相应的配置文件。
+
+include::../../../../../_components/table_footer.adoc[]
+
+* `/pitrix/conf/variables` 目录下的配置文件
++
+`variables.yaml` 文件中包含了在 `variables.<zone_id>.yaml` 中填写的所有信息，以及各服务角色的管理 IP 及 VIP。
++
+image::/images/ep_offline/installation/deploy_modify_config_config_03.png[]
+
+
+* `/pitrix/conf/settings` 目录下的配置文件
++
+该目录下的文件为各服务角色的基本信息，包括网络信息、主机信息等。
++
+image::/images/ep_offline/installation/deploy_modify_config_config_04.png[,40%]
+
+

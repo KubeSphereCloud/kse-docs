@@ -1,0 +1,158 @@
+---
+title: 查询消息中心用户ID（DescribeNotificationCenterUserIDs）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| activated
+| String
+| false
+| 是否激活
+
+| billing_resources
+| Array
+| false
+| 计费资源类型
+
+| billing_zone
+| String
+| false
+| 计费区域
+
+| console_id
+| String
+| false
+| 控制台
+
+| end_balance
+| String
+| false
+| 最大余额
+
+| end_rating
+| String
+| false
+| 最大星级
+
+| limit
+| Integer
+| false
+| 查询数量
+
+| notification_center_post_id
+| String
+| false
+| 消息中心id
+
+| offset
+| Integer
+| false
+| 查询偏移量
+
+| role
+| Array
+| false
+| 用户角色
+
+| search_word
+| String
+| false
+| 用户搜索关键字
+
+| start_balance
+| String
+| false
+| 最小余额
+
+| start_rating
+| String
+| false
+| 最小星级
+
+| status
+| Array
+| false
+| 用户注册状态
+
+| tags
+| Json
+| false
+| 查询wh_server用户标签
+
+| user_type
+| Array
+| false
+| 账户类型
+
+| zones
+| Array
+| false
+| 用户可访问区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+
+| users
+| Array
+| false
+| 用户id集合
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeNotificationCenterUserIDs",
+  "activated": 1,
+  "limit": 1,
+  "role": [
+    "user",
+    "partner"
+  ],
+  "start_balance": "100",
+  "status": [
+    "active",
+    "disabled"
+  ],
+  "user_filter_type": "condition",
+  "user_type": [
+    "0",
+    "1"
+  ],
+  "zones": []
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeNotificationCenterUserIDsResponse",
+  "ret_code": 0,
+  "total_count": 44,
+  "users": [
+    "usr-xxxxxxxx"
+  ]
+}
+----

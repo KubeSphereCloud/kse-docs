@@ -1,0 +1,29 @@
+---
+title: "卸载 KubeSphere 企业版"
+weight: 02
+---
+
+本节介绍如何卸载 KubeSphere Core，即卸载{ks_product_left}。当前集群中运⾏的 Kubernetes 将不会被卸载。
+
+// Warning
+include::../../../_ks_components/admonitions/warning.adoc[]
+
+* 虽然此操作不会卸载 Kubernetes，如果当前集群中运行的业务使用了{ks_product_both}提供的功能，此操作仍然可能导致业务中断。
+
+* 此操作不能撤销，请谨慎执行此操作。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件
+
+为避免数据丢失，请提前备份所有重要数据。
+
+== 操作步骤
+
+执行以下命令卸载{ks_product_left}。
+
+[,bash]
+----
+helm -n kubesphere-system uninstall ks-core
+----

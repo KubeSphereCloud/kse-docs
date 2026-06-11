@@ -1,0 +1,112 @@
+---
+title: "拷贝原管理节点配置"
+weight: 2
+---
+
+. 登录待迁移的原管理节点。
+
+. 依次创建以下临时目录，用于保存当前节点配置内容。
++
+[,shell]
+----
+mkdir /opt/all_profile
+mkdir /opt/all_profile/1
+mkdir /opt/all_profile/2
+mkdir /opt/all_profile/3
+----
+. 拷贝当前管理节点上的配置到指定临时目录。
+
+.. 将 mysql_neonsan，mysql_qingstor，zookeeper，etcd 配置文件拷贝至 ``/opt/all_profile/1`` 目录。
++
+[,shell]
+----
+cp /qingstor/etc/etcd_hosts /opt/all_profile/1/
+cp /qingstor/etc/xtradb-neonsan.cnf /opt/all_profile/1/
+cp /qingstor/etc/xtradb-qingstor.cnf /opt/all_profile/1/
+cp /opt/zookeeper-3.4.13/conf/zoo.cfg /opt/all_profile/1/
+cp /qingstor/data/zookeeper/myid /opt/all_profile/1/
+cp /etc/default/etcd /opt/all_profile/1/
+----
+
+.. 将 keepalived，nginx，prometheus，qingstor-zero-web，qingstor-zero-agent，vire_redis，qs_alerter，redis_exporter 配置文件拷贝至 ``/opt/all_profile/2`` 目录。
++
+* 创建所需临时目录。
++
+[,shell]
+----
+mkdir /opt/all_profile/2/keepalived
+mkdir /opt/all_profile/2/nginx
+mkdir /opt/all_profile/2/prometheus
+----
+* 拷贝配置文件。
++
+[,shell]
+----
+cp -r /etc/keepalived/conf.d/* /opt/all_profile/2/keepalived/
+cp -r /etc/nginx/conf.d/* /opt/all_profile/2/nginx/
+cp /qingstor/etc/qingstor-zero-web.yaml /opt/all_profile/2/
+cp /qingstor/etc/qingstor-zero-agent.yaml /opt/all_profile/2/
+cp /qingstor/etc/vire_redis.conf /opt/all_profile/2/
+cp /opt/redis_exporter/conf/redis_exporter.yml /opt/all_profile/2/
+cp /qingstor/etc/supervisord.d/redis_exporter.ini /opt/all_profile/2/
+----
+
+.. 将 ntp，hosts，pip.conf，qingstor.list 配置文件拷贝至 ``/opt/all_profile/3`` 目录。
++
+[,shell]
+----
+cp /etc/ntp.conf /opt/all_profile/3/
+cp /etc/hosts /opt/all_profile/3/
+cp /root/.pip/pip.conf /opt/all_profile/3/
+cp /etc/apt/sources.list.d/qingstor.list /opt/all_profile/3/
+----
+
+.. 若当前节点部署了 prometheus 和 qs_alerter 服务，拷贝相应配置文件至 ``/opt/all_profile/2`` 目录。
++
+[,shell]
+----
+cp /opt/prometheus/prometheus.yml /opt/all_profile/2/prometheus/
+cp -r /qingstor/data/prometheus/data /opt/all_profile/2/prometheus/
+cp /qingstor/etc/qs_alerter.yaml /opt/all_profile/2/
+----
+
+. 若待迁移节点（最后一个待迁移节点）也是 FirstBox 节点，则需拷贝相应配置文件至 ``/opt/all_profile/3`` 目录。
++
+include::../../../../../../_components/attention.adoc[]
+FirstBox 所在的管理节点最后迁移，其他管理节点请跳过此步骤。
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 登录至 FirstBox。
++
+[,shell]
+----
+ssh qingstor-firstbox -p 6023
+----
+
+.. 备份 FirstBox。
++
+[,shell]
+----
+/qingstor/install/bin/backup_fb.sh
+----
+.. 拷贝配置到 FistBox 所在管理节点。
++
+[,shell]
+----
+scp /qingstor/firstbox/backup/fb-202305301700.tar.gz <fb_IP>:/opt/all_profile/3
+
+scp /etc/hosts <fb_IP>:/opt/all_profile/3/fb-hosts
+
+scp /root/.pip/pip.conf <fb_IP>:/opt/all_profile/3/fb-pip.conf
+
+scp /etc/apt/sources.list.d/qingstor.list <fb_IP>:/opt/all_profile/3/fb-qingstor.list
+----
++
+include::../../../../../../_components/note.adoc[]
+命令行中 <fb_IP> 为 FirstBox 的管理 IP，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+
+

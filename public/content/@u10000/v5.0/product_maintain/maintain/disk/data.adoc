@@ -1,0 +1,193 @@
+---
+title: 更换数据盘
+weight: 1
+---
+
+当环境中存在异常磁盘，需要进行更换时，可执行如下操作步骤来筛选出具体的故障磁盘，将其更换后，如何进行数据恢复等。
+
+
+
+== 收集故障盘信息
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，从 FirstBox 节点跳转至 `core0` 节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，获取存储集群 ID。
++
+[source,shell]
+----
+docker exec -it hydro_confd /bin/bash
+hydro cluster list
+----
+
+. 执行如下命令行，收集故障磁盘信息。命令行中的 `<cluster_id>` 为存储集群 ID，根据上一步查询结果进行填写。
++
+[source,shell]
+----
+hydro cluster <cluster_id> info
+----
++
+include::../../../../../_components/note.adoc[]
+
+* 需依次查询各存储集群中的磁盘信息。
+
+* 收集磁盘状态为 `DiskError`、`DiskIOError`、`DiskNotFound` 的节点 IP、磁盘 UUID 以及 Device ID。
+
+include::../../../../../_components/table_footer.adoc[]
++
+节点 IP
++
+image::/images/u10000_v5.0/maintain_7.png[maintain_7,50%]
++
+磁盘 UUID
++
+image::/images/u10000_v5.0/maintain_8.png[maintain_8,100%]
+
+. 执行如下命令行，跳转至故障磁盘所在节点。命令行中的 `<Host Addr>` 为上一步查询到的故障磁盘所在节点 IP 地址。
++
+[source,shell]
+----
+ssh <Host Addr>
+----
+
+. 在故障磁盘所在节点上，执行如下命令行，查看所有磁盘信息。
++
+[source,shell]
+----
+ls -lt /dev/disk/by-uuid/
+----
++
+命令行回显内容示例
++
+[source,shell]
+----
+lrwxrwxrwx 1 root root  9 Jul 24 17:04 b544d4af-1bc3-11ee-ac11-525496415041 -> ../../vde
+lrwxrwxrwx 1 root root  9 Jul 24 17:04 b3a3763e-1bc3-11ee-8019-525496415041 -> ../../vdd
+lrwxrwxrwx 1 root root  9 Jul  6 14:42 654056c1-6a92-411d-bcd5-04ae965ad3ce -> ../../vdc
+lrwxrwxrwx 1 root root 10 Jul  6 14:42 3b20d2ca-73cb-43dc-a374-23148049e3e5 -> ../../vda2
+lrwxrwxrwx 1 root root  9 Jul  6 14:42 48eb1df6-1663-4a52-ab30-040d552c2d76 -> ../../vdb
+----
+
+. 将以上命令行回显内容与前面步骤查询到的故障磁盘的 UUID 做比对，得出故障磁盘的盘符。
+
+
+== 更换故障盘
+
+确定故障磁盘后，将故障磁盘进行更换，并对替换后的磁盘进行初始化。详细操作如下。
+
+. 将故障磁盘从节点上取下，并将新磁盘接入节点。
+
+. 执行如下命令行，登录故障磁盘所在节点。命令行中的 `<Host Addr>` 为前文查询到的故障磁盘所在节点 IP 地址。
++
+[source,shell]
+----
+ssh <Host Addr>
+----
+
+. 执行如下命令行，查看新接入磁盘的盘符。
++
+[source,shell]
+----
+lsblk
+----
+
+. 执行如下命令行，对新接入磁盘进行初始化操作。命令行中的 `<dev_path>` 为新插入磁盘的盘符，根据上文查询结果进行填写。
++
+[source,shell]
+----
+/qingstor/bin/hydro_stor/hydro-disk-tool mkfs -d <dev_path>
+----
++
+include::../../../../../_components/note.adoc[]
+
+命令行中的 `<dev_path>` 需带上 `/dev/` 前缀。如查询新盘盘符为 `vdc`，则命令行中的 `<dev_path>` 需替换为 `/dev/vdc`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令行，查看新接入磁盘信息。命令行中的 `<dev_path>` 为新插入磁盘盘符。
++
+[source,shell]
+----
+/qingstor/bin/hydro_stor/hydro-disk-tool info <dev_path>
+----
++
+输出结果如下，则表示新磁盘初始化成功。
++
+image::/images/u10000_v5.0/maintain_9.png[maintain_9,70%]
+
+== 修改集群信息
+
+新磁盘成功接入节点后，需将原存储集群中的故障磁盘信息进行更换。详细操作如下。
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，从 FirstBox 节点跳转至 `core0` 节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，将集群中的故障盘替换为新磁盘。
++
+[source,shell]
+----
+/qingstor/bin/hydro cluster <cluster_id> dev <dev_id> replace <dev_path>
+----
++
+参数说明
++
+[cols='1,3']
+|===
+| 参数 | 说明
+
+| cluster_id | 存储集群 ID，这里填写故障磁盘所在的存储集群 ID，根据link:#_收集故障盘信息[前文]查询结果进行填写。
+| dev_id | 故障磁盘的 Device ID，根据link:#_收集故障盘信息[前文]查询结果进行填写。
+| dev_path | 新磁盘盘符，根据link:#_更换故障盘[前文]内容进行填写。
+|===
++
+命令行示例
++
+[source,shell]
+----
+/qingstor/bin/hydro cluster 1 dev 25 replace /dev/sdg
+----
+
+
+. 可执行命令行查看存储集群中磁盘状态，命令行中的 `<cluster_id>` 为存储集群 ID，根据上一步的内容进行填写。
++
+[source,shell]
+----
+hydro cluster <cluster_id> info
+----
++
+include::../../../../../_components/note.adoc[]
+
+* 磁盘信息更新完成后，新磁盘的 Device ID 会更新。
+* 在集群有负载的情况下，新磁盘会自动开始全量修复，此时的磁盘状态为 `Learner` 状态，在完成容量的同步后会更新到 `Follower` 状态。
+* 在全量修复过程中，禁止 `Leader` 切换操作，否则会影响磁盘全量修复。
+
+include::../../../../../_components/table_footer.adoc[]
++
+示例
++
+image::/images/u10000_v5.0/maintain_10.png[maintain_10,70%]
+
+

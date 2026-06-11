@@ -1,0 +1,18 @@
+---
+title: 生成 settings 文件失败
+weight: 09
+---
+
+== 问题现象
+
+管理网络和业务网络分离部署时（variables.<zone_id>.yaml 文件中 **network_separated** 配置为 `1`），执行 `/pitrix/cli/config-qingcloud.py` 命令，生成 settings 配置文件失败。
+
+== 可能原因
+
+Hyper 节点上没有配置好业务网络。
+
+**network_separated** 配置为 `1`，前提是 Hyper 节点上已经配置好了管理网络和业务网络，即 `/etc/network/interfaces` 文件中有两个网络，例如，管理网络配置 bond0 网口，业务网络配置 bond1 网口。但可能业务网络交换机刚上架，还没配置 LACP 链路聚合，所以 Hyper 节点上的 bond1 网口此时尚未 `up`，检查 bond1 时，发现没有 `up` 就报错了。
+
+== 解决方法
+
+在交换机侧配置 LACP 链路聚合后，网卡灯亮，确认 Hyper 节点上 bond1 网口 `up` 后，再重新新生成配置文件。

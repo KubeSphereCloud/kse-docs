@@ -1,0 +1,63 @@
+---
+title: "删除 HPA 资源"
+weight: 08
+---
+
+:ks_permission: **容器水平伸缩管理**
+:ks_navigation: **弹性伸缩 > 容器水平伸缩**
+
+
+本节介绍如何删除 HPA 资源。
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* KubeSphere 平台需要安装并启用 **Metrics Server** 扩展组件。
+
+
+== 删除单个 HPA 
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. 在需要删除的 HPA 右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除**。
+
+. 在**删除容器水平伸缩**对话框，输入 HPA 的名称，然后点击**确定**。
+
+
+
+== 批量删除 HPA 
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. 选择需要删除的 HPA 左侧的复选框，然后在 HPA 列表上方点击**删除**。
+
+. 在**批量删除容器水平伸缩**对话框，输入 HPA 的名称，然后点击**确定**。
++
+--
+include::../../../../_custom/note-separateNamesByComma.adoc[]
+--

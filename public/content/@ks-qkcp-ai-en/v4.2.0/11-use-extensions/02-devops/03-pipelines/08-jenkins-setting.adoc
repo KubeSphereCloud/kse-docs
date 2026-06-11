@@ -1,0 +1,49 @@
+---
+title: "Configure Jenkins System"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Use DevOps, Pipeline"
+description: "Introduce how to configure Jenkins on the Jenkins dashboard and reload the configuration."
+weight: 08
+---
+
+The DevOps system provides containerized CI/CD capabilities based on Jenkins. As the de facto standard for CI/CD workflows, Jenkins is powerful and flexible. However, many plugins require users to perform system-level configuration before using Jenkins.
+
+To provide a schedulable Jenkins environment, KubeSphere adopts the **Configuration as Code** approach for Jenkins system setup. Users need to log in to the Jenkins dashboard, modify the configuration, and then reload it.
+
+This document demonstrates how to configure Jenkins and reload the configuration.
+
+== Prerequisites
+
+The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+== Jenkins Configuration as Code
+
+KubeSphere installs the Jenkins Configuration as Code plugin by default, which supports defining the desired state of Jenkins through YAML files, making it easy to reproduce Jenkins configurations (including plugin configurations). Please refer to the link:https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos[this directory] to view specific Jenkins configurations and example YAML files.
+
+// Additionally, you can find the **formula.yaml** file in the link:https://github.com/kubesphere/ks-jenkins[ks-jenkins] repository to view plugin versions and customize them as needed.
+
+== Modify ConfigMap
+
+It is recommended to configure Jenkins in KubeSphere through Configuration as Code (CasC). The built-in Jenkins CasC file is stored as a ConfigMap.
+
+. Log in to the KubeSphere web console as the **admin** user.
+
+. Click **Cluster Management** and enter a cluster.
+
+. In the left navigation pane, select **ConfigMaps** under **Configuration**. On the **ConfigMaps** page, select the **kubesphere-devops-system** project from the drop-down list in the top left corner, then click **jenkins-casc-config**.
+
+. On the details page, click **Operation**, and select **Edit YAML** from the drop-down list.
+
+. The configuration template for **jenkins-casc-config** is a YAML file located in the **data:jenkins_user.yaml:** section. Modify the container image, tags, resource requests (Request) and limits (Limit) in the agent (Kubernetes Jenkins Agent) of the ConfigMap, or add containers in the podTemplate. After completing the operation, click **OK**.
+
+. Wait for 1 to 2 minutes, and the new configuration will be reloaded automatically.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+* For more information on how to set up Jenkins via CasC, please refer to the link:https://github.com/jenkinsci/configuration-as-code-plugin[Jenkins documentation].
+
+* In the current version, not all plugins support CasC setup. CasC will only override plugin configurations set via CasC.
+
+|===

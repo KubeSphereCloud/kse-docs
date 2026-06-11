@@ -1,0 +1,51 @@
+---
+title: "使用卷快照创建持久卷"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 存储, 卷快照, 创建持久卷声明"
+description: "介绍如何使用卷快照创建持久卷。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: d13a0bdee9cf4cffbfe7ee74a7e57ce5
+:ks_xref_id: 3efcefcd260348b9a7d6d24661a75910
+:ks_comp: ../../../../components/
+:ks_title: 使用卷快照创建持久卷
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 存储, 卷快照, 创建持久卷声明
+:ks_description: 介绍如何使用卷快照创建持久卷。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **卷快照管理**
+:ks_navigation: **存储 > 卷快照**
+
+
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-desc-createAPersistentVolumeFromAVolumeSnapshot.adoc[]
+
+
+== 前提条件link:[id=305410afcbec4e8aaa87c0322a7f7a2d]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=4379ed68dd6d461895da31feb0304ea3]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-oper-createAPersistentVolumeFromAVolumeSnapshot.adoc[]

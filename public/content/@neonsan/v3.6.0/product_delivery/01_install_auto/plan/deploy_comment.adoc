@@ -1,0 +1,37 @@
+---
+title: "部署建议"
+weight: 4
+---
+
+== 须知
+
+* 管理节点：部署了管理服务的节点，管理服务主要包括 ZooKeeper、数据库、Portal 等服务。
+
+* 存储节点：部署了存储服务的节点，存储服务主要包括 neonsan-center、neonsan-store 以及 neonsan-monitor 服务。 
+
+
+== 建议
+
+* **管理节点部署建议**
+
+** 管理节点数一般为 3 个，支持奇数扩展。
+** NeoSAN 独立部署场景下，均建议使用物理机。
+** 与 IaaS 融合部署场景下，管理节点可使用虚拟机，即运行于 IaaS KS 管理节点上的虚拟机（需提前规划可用 IP），其配置要求为 8 核 16G。
+** 详细内容可参考《NeonSAN 分布式存储最佳实践》。
+
+* **存储节点部署建议**
+
+** 均建议使用物理机。
+** 详细内容可参考《NeonSAN 分布式存储最佳实践》。
+
+* **FirstBox 部署建议**
+
+** NeonSAN 独立部署的场景中， FirstBox 创建在某一待部署 NeonSAN 服务的节点上，无需另外指定。
+** 与 IaaS 融合部署的场景下，一般情况下，建议 NeonSAN 的 FirstBox 创建在 IaaS 的某一 KS 管理节点上，若资源不足，可将其创建在 IaaS 的某一 Hyper 节点上。
+
+* **服务限制**
++
+在集群节点数充足（大于 3）的情况下，neonsan-center 与 ZooKeeper 建议尽量分配在不同的节点上，此时需手动指定各服务所在节点。例如，集群有 6 个节点，则 neonsan-center 与 ZooKeeper 分别占用 3 个节点即可。若只有 5 节点时，neonsan-center 与 ZooKeeper 分别占用 2 个节点后，最后一个节点同时部署 neonsan-center 和 ZooKeeper 服务。 
+
+
+

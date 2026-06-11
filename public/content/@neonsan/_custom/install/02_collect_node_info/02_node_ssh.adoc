@@ -1,0 +1,39 @@
+
+// 建立节点间免密访问
+
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+include::../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+include::../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，建立待部署节点间 SSH 免密访问。
++
+[source,shell]
+----
+/qingstor/install/bin/establish_ssh.sh /root/ip_list <SSH_PORT> <USER> <PASSWD>
+----
++
+include::../../../../_components/note.adoc[]
+* <SSH_PORT> 为端口号，默认为 22，无需修改。
+* <USER> 与 <PASSWD> 为各节点服务器登录用户名与密码，根据“**安装环境要求** > **操作系统**”相关内容进行填写。
+include::../../../../_components/table_footer.adoc[]
+
+. 若步骤 2 执行失败，可执行如下命令，查看相关日志文件查找失败原因。
++
+[source,shell]
+----
+cat /qingstor/log/establish_ssh.log
+----
++
+
+include::../../../../_components/note.adoc[]
+需调查原因并解决后再次执行步骤 2。
+include::../../../../_components/table_footer.adoc[]

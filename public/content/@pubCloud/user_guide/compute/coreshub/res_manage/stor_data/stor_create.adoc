@@ -1,0 +1,40 @@
+---
+title: "创建用户目录"
+weight: 1
+linkkey: coreshub_create_stor
+---
+
+通用文件存储服务，用来保存数据、源代码等文件。
+
+== 注意事项
+
+若创建的用户目录连续 1 个月未被使用，相应目录及其内数据将会被清空回收。
+
+== 前提条件
+
+* 已经获取 {console_name}账户和密码。
+* 已完成个人实名认证且账户余额大于 0 元。
+
+== 操作步骤
+
+//tag::create_stor[]
+. 登录 {console_name}。
+. 在顶部导航栏，点击**产品与服务** > **{coreshub_name_cn}** > **{coreshub_name_cn}**，进入其**总览**页面。
+. 在左侧导航栏，选择**存储与数据服务**，进行相应管理页面。
+
+. 在**存储与数据服务**页面，点击**创建用户目录**，在弹出的创建用户目录窗口中，输入**用户目录**，设置**存储配额**，点击**确定**即可。
++
+include::../../../../../../_components/attention.adoc[]
+* 此处**用户目录**名需要全局唯一，不可重名。
+* 每个用户只可创建一个用户目录。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 返回**存储与数据服务**管理页面，可查看已创建完成的**文件目录**，状态为``正常``。
++
+image::/images/cloud_service/compute/coreshub/res_manage_stor_create_3.png[]
+
+//end::create_stor[]
+
+
+
+

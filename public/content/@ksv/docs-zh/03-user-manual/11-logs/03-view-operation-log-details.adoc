@@ -1,0 +1,71 @@
+---
+title: "查看操作日志详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 日志, 操作日志, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看操作日志详情。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 5b32000ad515419196006044679379af
+:ks_xref_id: 6b9bdece510e493f90b46bb713e074da
+:ks_comp: ../../../components/
+:ks_title: 查看操作日志详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看操作日志详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 日志, 操作日志, 详情, 查看
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看操作日志详情。日志的默认保留期限为 **7** 天。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=096948bec0d44c3e95d7ce57a7655c6e]
+
+系统 **admin** 用户可以查看集群中所有项目中的操作日志，普通项目管理员、操作员或观察员可以查看各自所属项目中的操作日志。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=99c3e3c4d8644a2b8003a8c1e9f66556]
+
+include::../../../_custom/logs/logs-steps.adoc[]
+
+. 在**操作日志**页签，点击待查看详情的操作日志条目。
+
+. 在弹出的对话框中查看操作日志详情。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|时间
+|生成操作日志的时间。
+
+|操作行为
+|对给定资源所执行的操作。
+
+|状态
+|服务器对浏览器请求作出的响应状态。
+
+|项目
+|被操作的资源所在的项目。
+
+|资源类型与名称
+|被操作的资源的类型与名称。
+
+|操作者
+|对资源进行操作的用户。
+
+|源 IP 地址
+|访问资源的机器的 IP 地址。
+
+|原因
+|HTTP 请求失败的原因。
+|===
+--

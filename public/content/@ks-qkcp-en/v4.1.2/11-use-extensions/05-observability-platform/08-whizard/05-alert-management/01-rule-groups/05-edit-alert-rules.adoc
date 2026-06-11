@@ -1,0 +1,48 @@
+---
+title: "Edit Alert Rules"
+keywords: "Kubernetes, {ks_product-en}, platform management, Whizard Observability Center, alert management, rule groups, edit alerting rules"
+description: "Describes how to edit alert rules in rule groups."
+weight: 05
+---
+
+// :ks_permission: **Rule Group Management**
+// :ks_menu: **Platform Management > Whizard Observability Center**
+:ks_navigation: **Global Alerts > Built-in Rule Groups/Custom Rule Groups**
+
+
+This section describes how to edit alert rules in rule groups.
+
+
+== Prerequisites
+
+You should have the **platform-admin** role on the {ks_product-en} platform. For more information, see link:../../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+
+== Steps
+
+include::../../../../../../_custom-en/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/grid.svg[grid,18,18] in the upper-right corner of the page and click **Whizard Observability Center**.
+
++
+
+include::../../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../../../_custom-en/clusterManagement/ruleGroups/ruleGroups-oper-editAnAlertingPolicy.adoc[]
+
++
+
+include::../../../../../../_custom-en/clusterManagement/ruleGroups/ruleGroups-oper-editAlertRules.adoc[]
+
++
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|For built-in rule groups, it is not supported to delete and add alert rules, only existing alert rules can be edited.
+|===

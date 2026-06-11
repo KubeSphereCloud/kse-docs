@@ -1,0 +1,64 @@
+---
+title: re-send（SendEmailVeriCode）
+weight: 36
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| email
+| String
+| false
+| 邮箱
+
+| email_code
+| String
+| false
+| 邮箱验证码
+
+| user
+| String
+| false
+| 用户
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "email": "4743******",
+  "email_code": "47asda",
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SendEmailVeriCodeResponse",
+  "ret_code": 0,
+  "user_id": "user_id"
+}
+----

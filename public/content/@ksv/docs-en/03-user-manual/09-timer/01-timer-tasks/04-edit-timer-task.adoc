@@ -1,0 +1,50 @@
+---
+title: "Edit a timer task"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, timer tasks, edit"
+description: "Describes how to edit a timer task in the {ks_product} web console."
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 45a78b22241140069d48c37d36d6ce86
+:ks_xref_id: d99a04a36e524cf38daa9057ff17cc5e
+:ks_comp: ../../../../components/
+:ks_title: Edit a timer task
+:ks_description: Describes how to edit a timer task in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, timer tasks, edit
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to edit a timer task in the {ks_product_abbr_full} web console. The edit operation allows you to modify the basic information and policy of a timer task.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=58f9d575d5f942ddbb823db00d8eaf7c]
+
+User **admin** can edit all timer tasks in your cluster. Project administrators and operators can edit the timer tasks created on their own, and project viewers cannot edit timer tasks.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Edit from the list of timer taskslink:[id=5f7a9b5e10434b85822f1e96cffd61e9]
+
+include::../../../../_custom-en/timer/timer-task-steps.adoc[]
+
+. Find the timer task that you want to edit, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Edit** from the drop-down list.
+. In the dialog box that appears, modify the basic information and policy of the timer task, and click **OK**. For more information about parameters, see link:../01-create-timer-task/[Create a timer task].
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Edit from the timer task details pagelink:[id=86810236d7e749128df419d12604e1d6]
+
+include::../../../../_custom-en/timer/timer-task-steps.adoc[]
+
+. On the **Timer Tasks** tab, click the name of the task that you want to edit. The details page of the timer task appears.
+. On the left side of the details page, click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Edit** from the drop-down list.
+. In the dialog box that appears, modify the basic information and policy of the timer task, and click **OK**. For more information about parameters, see link:../01-create-timer-task/[Create a timer task].

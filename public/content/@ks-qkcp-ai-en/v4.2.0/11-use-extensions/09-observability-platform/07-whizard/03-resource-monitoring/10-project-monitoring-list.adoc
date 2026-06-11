@@ -1,0 +1,38 @@
+---
+title: "View Project Key Metrics Ranking"
+keywords: "Kubernetes, {ks_product}, WizTelemetry Global Monitoring, Project, Key Metrics Ranking"
+description: "Introduces how to sort projects based on multi-dimensional monitoring metrics."
+weight: 10
+---
+
+:ks_navigation: **Global Monitoring > Project**
+
+This section introduces how to sort projects based on multi-dimensional monitoring metrics.
+
+== Prerequisites
+
+You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
++
+--
+View the cluster each project belongs to, the number of workloads, and data from other monitoring metrics.
+
+include::../../../../../_custom/WizTelemetry/sort-by-clusters-fields-and-order.adoc[]
+
+* Click the search box above the list and enter keywords to search for projects by name.
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+--

@@ -1,0 +1,93 @@
+---
+title: "查看节点详情"
+weight: 04
+---
+
+
+:ks_permission: **节点查看**
+:ks_navigation: **边缘节点 > 节点接入**
+
+
+本节介绍接入的边缘节点的详情页面。
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+
+. 在节点列表中点击一个节点的名称打开其详情页面。
+
+. 在节点详情页面左侧的**属性**区域查看节点的资源属性。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|状态
+|
+include::../../../../_custom/clusterManagement/nodes/nodes-para-nodeStatus_all.adoc[]
+
+|IP 地址
+|节点的 IP 地址。
+
+// |角色
+// |
+// 各节点在集群中的角色，取值为**代理/边缘节点**。
+
+|创建时间
+|节点加入当前集群的时间。
+
+|系统架构
+|节点的 CPU 架构。
+
+|操作系统版本
+|节点的操作系统发行版和版本。
+
+|操作系统类型
+|节点的操作系统类型。
+
+|规格
+|节点的硬件资源配置。
+
+|边缘节点时间
+|节点当前的系统时间，可能与实际时间存在差异。
+
+|内核版本
+|节点的内核版本。
+
+// |容器运行时
+// |节点使用的容器运行时类型和版本。
+
+|Docker 版本
+|节点上安装的 Docker 版本。
+
+|Containerd 版本
+|节点上安装的 Containerd 版本。
+
+|EdgeCore 版本
+|节点上安装的 EdgeCore 版本。
+
+|Mosquitto 版本
+|节点上安装的 Mosquitto 版本。
+
+|Glibc 版本
+|节点上安装的 GNU C 标准库（glibc）版本。
+
+|最近同步时间
+|节点最近一次与边缘集群的同步时间。
+|===
+--
+
+. 在节点详情页面右侧的**任务执行信息**页签，查看节点上执行的任务信息。
+
+

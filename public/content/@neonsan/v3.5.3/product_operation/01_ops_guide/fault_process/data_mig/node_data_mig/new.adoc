@@ -1,0 +1,148 @@
+---
+title: "NeonSAN v3.5.0 及之后版本操作步骤"
+weight: 1
+---
+
+使用 evict_store 命令可直接迁移节点上所有的数据。执行 evict_store 命令会使得当前节点进行 maintain 状态，数据迁移完成后需执行 quit_maintenance 退出维护状态。针对该命令的详细介绍可参看本文。“附录 > evict_store 相关”。
+
+. 查看集群中剩余空间。
++
+[,shell]
+----
+neonsan list_store
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 集群剩余空间需大于集群总容量的 20%。
+* 除待迁移数据磁盘所在节点之外的其他节点的剩余空间，需大于待迁移数据磁盘已使用空间的两倍。
+* 若存在状态不为 OK 的节点，需调查原因后，再继续数据迁移操作。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 检查集群中卷的状态。
++
+若存在状态不为 OK 的卷，需link:../../../volume/[对相应卷进行恢复]后，再继续数据迁移操作。
++
+[,shell]
+----
+neonsan list_volume -detail
+----
+
+. 检查集群中磁盘状态
++
+[,shell]
+----
+neonsan list_ssd
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 若存在状态不为 OK 的磁盘，需调查原因后，再继续数据迁移操作。
+* 若已知磁盘为坏盘，则直接下线磁盘即可，可参考本文。“物理设备运维 > SSD 下线及换盘操作”相关内容。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 若集群开启了自动负载均衡和卷自动恢复功能，则需执行如下命令进行关闭。
++
+[,shell]
+----
+neonsan set_parameter -parameter auto_recovery -value 0
+neonsan set_parameter -parameter auto_balance -value 0
+----
++
+include::../../../../../../../_components/note.adoc[]
+可执行 ``neonsan list_parameter`` 是否开启了自动负载均衡和卷自动恢复功能，返回结果中 ``auto_balace`` 和 ``auto_recovery`` 参数的 ``VALUE`` 为 1，则表示当前集群已开启相应功能。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 迁移节点上的全部数据。
++
+[,shell]
+----
+neonsan evict_store -store_id <store_ID> -evacuate_data yes
+----
++
+include::../../../../../../../_components/note.adoc[]
+`-store_id` 用于指定待迁移数据的节点 ID，根据实际情况进行修改。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 查看异步任务队列里 evict_store 任务执行状态。
++
+[,shell]
+----
+neonsan list_job | head
+----
+
+* 根据下线任务执行时间，查看相应的异步任务 ID。
+* ``PERCENT`` 为 100%，``STATUS`` 为 ``succeeded`` 则表示执行成功。
+
+. 查询数据库，确认该存储节点的磁盘上是否存在状态为 OK 的副本分布。
++
+--
+QingStor MySQL 数据库
+
+[,sql]
+----
+mysql -uqingstor -p'QS!ows%0923' -h192.168.101.251 neonsan -e " select * from replica where ssd_uuid='xxxxx' and status='OK';"
+----
+Galera 数据库
+[,sql]
+----
+mysql -uneonsan -pzhu88jie neonsan -e "select * from replica where ssd_uuid='xxxxx' and status='OK';"
+----
+Xenondb 数据库
+
+[,shell]
+----
+mysql -uneonsan -pzhu88jie -h192.168.101.251 neonsan -e "select * from replica where ssd_uuid='xxxxx' and status='OK';"
+----
+--
+
+* 命令行中的 xxxxx 均为待迁移节点上磁盘的 UUID，需根据实际情况进行修改。
+* QingStor MySQL 数据库密码需使用单引号。
+* 针对 Xenondb 数据库，``-h`` 参数需要指定其虚 IP，需根据实际情况进行修改。
+* 若经查询数据库，**待迁移数据的节点的磁盘上无状态为 OK 的副本**，则可直接**进行步骤 9**。
+* 若经查询数据库，**待迁移数据的节点的磁盘上上仍有状态为 OK 的副本**，则需**从步骤 8 开始**。
+
+. 若待迁移数据的存储节点仍有状态为 OK 的副本存在，需执行如下命令，再次迁移相应磁盘上的数据，直至所有磁盘数据均迁移成功。
+.. 退出维护模式。
++
+[,shell]
+----
+curl http://$(qfcip):2600/fast_chan?op=quit_maintenance&store_id=1
+----
++
+include::../../../../../../../_components/note.adoc[]
+``store_id`` 指定待迁移数据的节点 ID，根据实际情况进行修改。
+include::../../../../../../../_components/table_footer.adoc[]
+
+.. 迁移步骤 7 查询到的磁盘上的数据。
++
+[,shell]
+----
+neonsan evict_ssd -ssd_uuid <ssd_uuid>
+----
++
+include::../../../../../../../_components/note.adoc[]
+* ``-ssd_uuid`` 为待迁移数据的磁盘 UUID，根据实际情况进行修改。
+* 所有磁盘数据均迁移成功后，再继续以下步骤。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 查看集群中卷的状态，并对降级卷进行恢复。
++
+[,shell]
+----
+neonsan list_volume --detail
+----
++
+include::../../../../../../../_components/note.adoc[]
+* 若系统中设置了 auto_recovery，则无需手动操作。
+* 若系统没有设置 auto_recovery，需link:../../../volume/degraded_recovery/[手动对降级卷进行恢复]。
+include::../../../../../../../_components/table_footer.adoc[]
+
+. 重复步骤 7~9，直至该节点上无 OK 状态的副本存在。
+. 若步骤 4 关闭了集群的自动负载均衡和卷自动恢复功能，则需执行如下命令进行开启。
++
+[,shell]
+----
+neonsan set_parameter -parameter auto_recovery -value 1
+neonsan set_parameter -parameter auto_balance -value 1
+----
+
+

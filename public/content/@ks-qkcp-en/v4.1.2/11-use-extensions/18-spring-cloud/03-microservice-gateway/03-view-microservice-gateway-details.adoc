@@ -1,0 +1,67 @@
+---
+title: "View Microservice Gateway Details"
+keywords: "Kubernetes, {ks_product-en}, project management, Spring Cloud, view microservice gateway details"
+description: "Learn how to view microservice gateway details."
+weight: 03
+---
+
+:ks_permission: **Spring Cloud Microservices Viewing**
+:ks_navigation: **Spring Cloud > Microservice Gateways**
+
+This section describes how to view microservice gateway details.
+
+== Prerequisites
+
+* **KubeSphere Spring Cloud** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+== Steps
+
+include::../../../../_custom-en/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. On the right side of the page, select **Manage > View Details** to open the gateway details page.
+
+. View the gateway's resource attributes in the **Attributes** area on the left side of the gateway details page.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the gateway belongs.
+
+|Creation Time
+|The creation time of the gateway.
+
+|Update Time
+|The update time of the gateway.
+
+|Creator
+|The user who enabled the gateway.
+|===
+--
+
+. View the gateway's pod replicas, container ports, and pods in the **Resource Status** tab on the right side of the gateway details page.
++
+====
+* The **Replicas** area displays the desired number of pod replicas and the current number of pod replicas for the gateway.
+
+* The **Ports** area displays the container port names, protocols, and port numbers for the gateway.
+
+* The **Pods** area displays all pod replicas for the gateway.
++
+--
+include::../../../../_custom-en/clusterManagement/nodes/nodes-para-podList.adoc[]
+--
+====
+
+. Click the **Metadata** tab on the right side of the gateway details page to view the gateway's labels and annotations.

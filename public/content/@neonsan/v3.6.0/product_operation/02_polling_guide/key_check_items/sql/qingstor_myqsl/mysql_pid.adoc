@@ -1,0 +1,28 @@
+---
+title: "检查 MySQL 进程及相应文件"
+weight: 3
+---
+
+. mysql 为元数据服务部署在管理节点，逐个登录管理节点。
+
+. 执行如下命令，查询当前节点上是都有 neonsan-mysql 和 qingstor-mysql 的 mysqld 进程。
++
+返回结果中有 ``mysqld --defaults-file=/opt/galera/conf/neonsan_galera.conf`` 或 ``mysqld --defaults-file=/opt/galera/conf/neonsan_galera.conf`` 相关内容，则表示该节点上有 neonsan-mysql 和 qingstor-mysql 的 mysqld 进程，否则表示无 mysqld 进程。
++
+[,shell]
+----
+ps -axf |grep mysqld
+----
+
+
+. 检查是否有如下相应的文件。若步骤 2 中未查到 mysqld 相关进程，但此处有以下文件，则需删除上述文件后，启动 mysqld 进程。
++
+[,shell]
+----
+/qingstor/run/mysql/neonsan-mysql.sock.lock
+/qingstor/run/mysql/qingstor-mysql.sock.lock
+----
+
+
+
+

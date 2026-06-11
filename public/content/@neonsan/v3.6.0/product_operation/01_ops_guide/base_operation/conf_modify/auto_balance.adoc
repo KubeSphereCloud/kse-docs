@@ -1,0 +1,21 @@
+---
+title: "配置自动均衡"
+weight: 3
+---
+
+登录 NeonSAN 集群任一节点，执行如下命令，设置 auto_balance 参数。
+
+[,shell]
+----
+neonsan set_parameter --parameter auto_balance --value 1
+----
+
+相关说明：
+
+* auto_balance 设置为 1，表示开启自动负载均衡；
++
+auto_balance 设置为 0，表示关闭自动负载均衡。
+
+* 负载均衡的条件是 SSD 的使用率超过 80%。若开启了自动负载均衡，当 SSD 使用率超过 80%，则系统会自动进行负载均衡操作。
+
+* 自动负载均衡默认需为开启状态，运维工作完成后需检查集群是否开启 auto_balance。若未开启，需执行如上命令进行设置。

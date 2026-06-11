@@ -1,0 +1,8 @@
+// :ks_include_id: 09fe14af1fd747b8aad60c34a228e54e
+The IP address of the cluster gateway or project gateway.
+
+// tag::bullets[]
+* If the external access mode of the gateway is NodePort, the gateway address is the IP address of a cluster node. Clients can access the backend service of the Ingress through the IP address and port of any cluster node.
+
+* If the external access mode of the gateway is LoadBalancer, the gateway address is the address of the load balancer.
+// end::bullets[]

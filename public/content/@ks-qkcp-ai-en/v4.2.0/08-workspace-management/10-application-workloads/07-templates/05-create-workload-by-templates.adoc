@@ -1,0 +1,39 @@
+---
+title: "Create a Workload from a Template"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Application Workloads, Workload, Create a Workload from a Template"
+description: "Describes how to create a workload from a template."
+weight: 05
+---
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Application Workloads > Workload Templates**
+
+This section describes how to create a workload from a template.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the right side of the workload template, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Create from Template** from the dropdown list.
+
+. In the **Create from Template** dialog box, configure the basic information, pod settings, storage settings, and advanced settings for the workload, then click **OK**.
++
+For detailed parameter configuration methods, please refer to link:../../03-workloads/01-create-a-workload#_parameter-description[Parameter Description].

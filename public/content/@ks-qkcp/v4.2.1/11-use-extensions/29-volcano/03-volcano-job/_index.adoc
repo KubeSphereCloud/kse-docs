@@ -1,0 +1,10 @@
+---
+title: "Volcano 作业"
+weight:  03
+---
+
+// 支持使用 Volcano Job 来进行
+
+Volcano 作业（Volcano Job，简称 vcjob）是 Volcano 自定义的 Job 资源类型。区别于 Kubernetes 任务，vcjob 提供了更多高级功能，如可指定调度器、支持最小运行 Pod 数、任务、生命周期管理、指定队列、优先级调度等。Volcano Job 更加适用于机器学习、大数据、科学计算等高性能计算场景，可用于 Spark、PyTorch、TensorFlow、Flink 等框架的一体化作业调度。
+
+任务（Task）是 Volcano Job 中的一个任务单元，它通过定义 Pod 模板和副本数，来描述作业中需要运行的一组相同规格的 Pod 实例。一个 Volcano Job 可能包含多个 Task。

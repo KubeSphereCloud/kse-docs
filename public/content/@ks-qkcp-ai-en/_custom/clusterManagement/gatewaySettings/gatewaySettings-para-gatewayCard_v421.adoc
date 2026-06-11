@@ -1,0 +1,49 @@
+// :ks_include_id: 6fca3db90bdf4fd8bb61eb771c1a7308
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+ifndef::gateway-overall[]
+|Name
+|The name of the gateway. The gateway name is automatically set by the system after the gateway is enabled.
+endif::[]
+
+|Status
+|The status of the gateway: Creating, Running, Warning, or Error.
+
+|Type
+|The type of the gateway: cluster gateway, workspace gateway, or project gateway.
+
+ifdef::gateway-overall[]
+|Creator
+|The user who enabled the gateway.
+
+|Creation Time
+|The time when the gateway was enabled.
+endif::[]
+
+|Access Mode
+|The external access mode of the gateway service.
+
+include::../services/services-para-externalAccess.adoc[tag=bullets]
+
+|Gateway Address
+|
+The external access address of the gateway.
+
+include::gatewaySettings-para-address.adoc[tag=bullets]
+
+|Node Port
+|The HTTP and HTTPS node ports of the gateway service. Displayed only when the external access mode of the gateway is NodePort.
+
+|Replicas
+|The number of replicas for the gateway workload.
+
+ifdef::gateway-overall[]
+|Actual Running Pod Replica Limits
+|Limits the minimum and maximum number of actual running pod replicas to ensure gateway performance while preventing resource exhaustion.
+endif::[]
+
+|Tracing
+|Whether the tracing feature is enabled for the gateway.
+|===

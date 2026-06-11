@@ -1,0 +1,71 @@
+---
+title: "View App Template List"
+keywords: "Kubernetes, {ks_product}, App Store Management, App, View App Template List"
+description: "Introduces how to view the app template list."
+weight: 01
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **Apps**
+
+
+This section describes how to view the list of app templates in the App Store.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The KubeSphere platform must have the **KubeSphere App Store Management** extension installed and enabled.
+
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+* The **Apps** page displays the app templates in the App Store and provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-appTemplateName.adoc[]
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-status_v4.adoc[]
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-workspace.adoc[]
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-latestVersion_v4.adoc[]
+
+// |Category
+// |The category to which the app template belongs. Assigning an app template to a category facilitates management. For more information, please refer to link:../../02-app-categories/[App Categories].
+
+|App Template
+|The type of the app template, such as **HELM App**, **YAML App**, or **operator App**.
+// include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-para-type_v42.adoc[]
+
+|Update Time
+|The last update time of the app template.
+|===
+--
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-searchForAppTemplates.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

@@ -1,0 +1,31 @@
+---
+title: 创建 SSH 密钥
+weight: 3
+---
+
+由于后续用户需要通过本地主机连接访问云服务器，因此这里使用的是本地主机的 SSH 公钥。后续创建云服务器时，使用该 SSH 密钥，即可将本地主机的 SSH 公钥成功添加至云服务器中。
+
+
+
+
+. 登录 link:https://console.qingcloud.com/[Console]，输入正确的用户名密码。
+
+. 选择**产品与服务** > **计算** > **云服务器**，进入计算基础服务主页面。
++
+image::/images/u10000/vm_main.png[vm_main,100%]
+
+. 点击 **SSH 密钥**，进入 SSH 密钥主页面。
++
+image::/images/u10000/ssh_main.png[ssh_main,100%]
+
+. 点击**创建**，弹出**创建SSH密钥**对话框，页面参数中，`方式` 选择 `使用已有公钥`，并将本地主机的 SSH 公钥拷贝粘贴至此。
++
+image::/images/u10000/ssh_create.png[ssh_create, pdfwidth=60%]
+
+. 正确输入参数后，点击**提交**。
+
+. 进入 SSH 密钥主页面，查看已创建的 SSH 密钥。
++
+image::/images/u10000/ssh_list.png[ssh_list,100%]
+
+

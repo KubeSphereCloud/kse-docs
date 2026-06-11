@@ -1,0 +1,82 @@
+---
+title: "查看应用仓库列表"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 企业空间, 应用仓库, 查看应用仓库列表"
+description: "介绍如何查看应用仓库列表。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 303a3babb5de4a9c9d496c9e29323056
+:ks_xref_id: ca30f3fb4a1f40568152cf1316e041c8
+:ks_comp: ../../../../components/
+:ks_title: 查看应用仓库列表
+:ks_keywords: Kubernetes, {ks_product}, 企业空间, 应用仓库, 查看应用仓库列表
+:ks_description: 介绍如何查看应用模板列表。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **应用仓库查看**
+:ks_navigation: **应用管理 > 应用仓库**
+
+
+本节介绍如何查看应用仓库列表。
+
+
+== 前提条件link:[id=9ca05ca573ea402da96c8123de03b8f9]
+
+
+
+:relfileprefix: ../../../../
+* 您需要加入一个企业空间并在企业空间中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:06-workspace-management/06-workspace-settings/03-workspace-members/_index.adoc[企业空间成员]、xref:06-workspace-management/06-workspace-settings/04-workspace-roles/_index.adoc[企业空间角色]和xref:06-workspace-management/06-workspace-settings/05-departments/_index.adoc[部门]。
+
+// include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-prer-enableAppManagment.adoc[]
+
+
+== 操作步骤link:[id=0a2da59bccbe406ca723ab2ce18d31b2]
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+* 应用仓库列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|应用仓库的名称和描述信息。
+
+|状态
+|应用仓库当前的状态。
+
+* **成功**：应用仓库已添加并同步成功。
+
+* **同步中**：应用仓库正在与 Helm Chart 仓库同步中。
+
+* **失败**：应用仓库与 Helm Chart 仓库同步失败。
+
+|URL
+|Helm Chart 仓库的 URL。
+
+|创建时间
+|应用模板的创建时间。
+|===
+--
+
+* 在列表上方点击搜索框并输入关键字，可搜索名称包含特定关键字的应用仓库。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

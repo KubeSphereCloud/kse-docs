@@ -1,0 +1,206 @@
+---
+title: "KubeSphere 企业版 v3.5.0 版本说明"
+keywords: "v3.5.0 版本说明, KubeSphere 企业版"
+description: "介绍 KubeSphere 企业版新特性、功能增强以及问题修复。"
+weight: 01
+---
+
+
+== DevOps
+
+=== 优化增强
+
+- 支持在 Installer 配置中自定义 jenkins service 类型，同时优化 ArgoCD 相关服务的探针超时时间。
+- 合并 DevOps 相关告警规则到一个 group 中。
+- 升级 Jenkins 版本到 2.346.3 并升级部分插件。
+- Jenkins 中增加获取构建用户信息的插件并添加该 step 到图形化流水线面板中。
+- 重构 DevOps 接口，避免从 jenkins 直接获取数据。
+
+=== 问题修复
+
+- 修复 DevOps 单分支流水线请求分支接口 bug。
+- 修复多分支流水线 git 类型 discover branches 默认值。
+- 修复图形化编辑流水线时 shell 面板保存无效的问题。
+- 修复流水线运行日志过大无法在线查看的问题。
+- 修复回放流水线时的报错提示问题。
+- 修复 DevOps 运行日志页面布局。
+- 修复 DevOps 项目在最近访问菜单中的显示问题。
+
+
+== 多集群
+
+=== 优化增强
+
+- 添加集群时校验集群角色。
+
+
+=== 问题修复
+
+- 修复针对新集群的 webhook 校验问题。
+- 仅在集群就绪时清理集群。
+- 修复删除集群后未移除企业空间授权的问题。
+- 修复添加集群时，设置的标签没有生效。
+
+
+== 可观测性
+
+=== 新特性
+
+==== 监控
+
+- 增加 calico-exporter 组件，为 Calico 提供监控指标，包括 BGP、IPPool 和 IPAM。
+
+==== 告警
+
+- 支持按照关键字过滤告警消息。
+- 添加/更新规则时支持设置 labels。
+
+==== 日志
+
+- 支持用户以正序/倒序的方式导出日志。
+
+==== 通知
+
+- 更新 notification manager 版本以支持用户使用正则表达式来过滤通知。
+- 支持多个接收者 & 配置通知过滤/静默可以支持正则表达式。
+
+
+=== 优化增强
+
+==== 监控
+
+- Whizard 部署支持更多参数配置。
+- 优化 process-exporter 配置提高其响应速度。
+- 更新 blackbox-exporter 至 v0.24.0 版本。
+- 更新内置的部分无告警级别规则为提示(info)级别。
+- Whizard 升级至 v0.9.0 版本。
+- 可观测中心选择要监控的集群时，至少要选中一个集群。
+- 集群概览页面的”集群配额统计“移除用量信息。
+
+==== 告警
+
+- 增加 default-http-backend 的 CPU limits 以避免 CPUThrottlingHigh 告警。
+- 增加一个 NodeExporterDown 内置告警规则，调整 kube-state-metrics 默认导出 kube_node_info 指标。
+- 更新部分监控组件 cpu limit 避免 CPUThrottlingHigh告警。
+- 支持配置提示(Info)级别的告警规则。
+- 增加 calico 相关的告警规则。
+- 显示监控目标全名。
+
+==== 日志
+
+- 优化 fluentbit 的各项参数，提高日志采集效率。
+- 用户使用外置 Elasticsearch/OpenSearch 集群时可以自动更新账户名与密码。
+- 用户可以控制 Elasticsearch/OpenSearch curator 插件开启或者关闭。
+- 添加开关以便用户可以禁用 output 从而停止向 elasticsearch/opensearch 输出日志。
+
+==== 通知
+
+- 升级 notification manager 到 v2.4.0。
+
+==== 审计
+
+- 升级 kube-auditing 到 v0.3.0 版本。
+
+
+=== 问题修复
+
+==== 监控
+
+- 修复企业空间存储统计问题。
+- 修复全局告警的模板规则生效范围过大的问题。
+- 修复部分 target down 规则在多集群模式下不能按预期告警的问题。
+- 优化 pvc 监控提示文案。
+
+==== 告警
+
+- 修复 member 集群解绑后，仍能在可观测中心看到来自该 member 集群的告警信息。
+- 修复当集群被移除后，基于该集群创建的告警规则依然存在。
+- 修复多集群场景下通知渠道中配置了集群过滤条件时收到重复通知的问题。
+- 修复创建自定义规则组时，获取不到集群下的企业空间 system-workspace。
+- 修复了在创建自定义规则组时，不设置标签，保存按钮无法点击的问题。
+- 修复了「集群」和「项目」的「告警」中规则名称不显示的问题。
+- 在告警规则的监控目标中，项目名称没有回填。
+
+==== 通知
+
+- 修复了通知历史在 containerd 环境下的适配问题。
+
+
+
+== 存储
+
+=== 新特性
+
+- 支持存储用量按照存储类型分类统计。
+
+=== 优化增强
+
+- 创建存储类时，移除 GlusterFS 和 Ceph RBD 的选项。
+
+=== 问题修复
+
+- 修复了在某些情况下存储类授权规则失效的问题。
+- 修复了存储类授权规则的 webhookrules。
+
+
+== 网关
+
+=== 问题修复
+
+- 修复没有指定网关安装位置时，更新企业空间网关的错误。
+- 修复普通账户设置企业空间的 regular 或 self-provisioner 权限后，查看企业空间网关报权限错误。
+- 修复普通账户设置企业空间的 regular 或 self-provisioner 权限后，查看企业空间网关监控报权限错误。
+
+== DMP
+
+=== 增强和升级
+ 
+- OpenSearch 中新增 Logstash 角色参数配置和独立监控告警功能。
+- OpenSearch 支持版本从 2.3.0 升级到 OpenSearch 2.8.0。
+- Kafka 支持针对用户的限流限速功能，并增加权限规则描述提示。
+- Kafka 默认证书有效期调整为 10 年。
+- Kafka 支持增加已创建 topic 的 partition 数量。
+- Kafka 新增 Jmx 参数，支持开启 Jmx 端口对接 cmak。
+- 升级 Kafka Operator 为 0.2.0 版本，升级 OpenSearch Operator 为 2.0.25 版本，下架 ECK、ClickHouse 应用，下架 Redis Cluster & Standalone 6.2.5 版本。
+- OpenSearch、Kafka、Redis 支持预置集群告警。
+
+=== 问题修复   
+
+- OpenSearch 修正部分监控指标的 PromQL。
+- OpenSearch 将 Logstash 角色修改为 Statefulset 以保证重建 pod 仍然可以获取到监控信息。
+
+
+== 用户体验
+
+=== 新特性
+
+- 增加了通过模糊搜索 pod ip 对 pod 进行筛选。
+- 通过 url 配置 ldap 的登陆页面登录。
+- Pod 列表支持通过 ip 查询。
+
+=== 优化增强
+
+- 修改 Informer 的默认同步周期为 10 小时。
+- License 维保过期不再提示更新许可证，并去除有关 kubesphere.cloud 的描述。
+- License 失效后，通知历史与用户视角的通知配置页面的功能不再被锁定。
+
+=== 问题修复
+
+- 修复了「可观测中心」首页的样式问题。
+- 修复在创建工作负载时，不选择镜像tag，添加的容器镜像有误 。
+- 修复编辑工作负载时容器镜像无法搜索。
+- 修复在编辑 crd 时显示其 status 数据。
+- 修复从应用模板中部署时没有 values.yaml 导致 loading 状态异常。
+- 修复为项目分配企业空间，清除企业空间信息时不会同步清除管理员信息。
+
+== 认证和授权
+
+=== 优化增强
+
+- 为 redis、openldap、metrics-server 添加资源配置。
+
+== 网络
+
+=== 优化增强
+
+- 支持项目空间网络策略自定义端口范围（后端）。

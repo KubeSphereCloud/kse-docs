@@ -1,0 +1,216 @@
+---
+title: "环境检查"
+weight: 7
+---
+
+待{product_name}安装部署完成后，我们需要对当前已部署的环境进行检查，确认当前的部署流程均正常执行完成。详细内容如下。
+
+== 整体环境检查
+
+{product_name}开发丰富的脚本协助实施人员进行相关环境验证。此处，我们可以使用 `check.py` 脚本来进行{product_name}的整体环境检查。
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，查看环境简略信息。`check.py` 更多使用方式，请执行 `check.py -h` 命令查看。
++
+[source,shell]
+----
+/pitrix/check/check.py -n all -v
+----
++
+**命令回显**
++
+image::/images/ep_offline/installation/deploy_check.png[,40%]
++
+**Result 字段说明**
++
+[cols='1,1a']
+|===
+| 字段值 | 说明
+
+| Normal/ok | 环境正常。
+|  Ignored | 忽略检查的配置项。
+| Abnormal/Unknown/error | 环境不正常。
+
+|===
+
+
+. 执行以下命令，查看不正常项的详细信息。
++
+[source,shell]
+----
+cat /pitrix/check/formatted_result | egrep 'Abnormal|Unknown|error'
+----
++
+* 若没有输出内容，表示环境正常运行。
+* 若有输出内容，说明存在异常项，此时可执行如下命令行，重启不正常的服务，若仍然未恢复到正常状态，请逐一排查并进行修复。
++
+[source,shell]
+----
+fb exec_nodes <Hostname> 'supervisorctl restart <Service>'
+----
++
+命令行示例一：重启所有 Webservice 节点上的 `alarm_server` 服务。
++
+[source,shell]
+----
+fb exec_nodes webservice 'supervisorctl status alarm_server'
+----
++
+命令行示例二：重启 `uat1a-webservice0` 节点上的 `alarm_server` 服务。
++
+[source,shell]
+----
+fb exec_nodes uat1a-webservice0 'supervisorctl status alarm_server'
+----
+
+
+== 登录{product_name}
+
+安装部署完成后，实施人员可登录{product_name}的 Console、BOSS 与配置中心进行相关检查与设置操作。
+
+include::../../../../../_components/attention.adoc[]
+此时还未对云平台进行初始化，还不能在 Console 上创建虚拟机。
+
+include::../../../../../_components/table_footer.adoc[]
+
+=== 配置 hosts 文件
+
+通过 Web 访问{product_name}的环境，需要配置本地主机 的 hosts 文件，指定域名地址。
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 获取 hosts 信息。推荐使用方式一。
++
+* 方式一：执行以下命令，获取 hosts 信息。
++
+[source,shell]
+----
+/pitrix/bin/dump_hosts.py
+----
++
+image::/images/ep_offline/installation/login_01.png[]
++
+* 方式二：
++
+.. 执行以下命令，获取 hosts_JOB_ID 文件名称。
++
+[source,shell]
+----
+cd /pitrix/log/deploy/
+ls -al
+----
++
+命令回显如下所示，文件名称为 `host_j-ygSvX8AW`。
++
+image::/images/ep_offline/installation/login_02.png[,50%]
++
+.. 执行以下命令，获取 hosts 信息。其中 `<hosts_JOB_ID>` 为上一步查询结果。
++
+[source,shell]
+----
+cat /pitrix/log/deploy/<hosts_JOB_ID>
+----
++
+示例
++
+[source,shell]
+----
+cat /pitrix/log/deploy/host_j-ygSvX8AW
+----
++
+命令回显内容，如下所示。
++
+image::/images/ep_offline/installation/login_03.png[]
+
+. 打开本地主机 的 hosts 文件，写入获取到的 hosts 信息。
++
+[source,shell]
+----
+// hosts 示例：
+10.10.0.231 console.democloud.com appcenter.democloud.com api.democloud.com docs.democloud.com
+10.10.0.211 cb0zcsf1.democloud.com
+10.10.0.212 cb1zcsf1.democloud.com
+10.10.0.231 boss.democloud.com
+----
++
+** Linux 系统 hosts 文件路径为 `/etc/hosts`。
+** Windows 系统 hosts 文件路径为 `C:\Windows\System32\drivers\etc\hosts`。
++
+
+
+=== 登录 Console
+
+. 本地主机配置云平台的link:#_配置_hosts_文件[ Host 信息]。
+
+. 本地主机使用 Chrome 或火狐浏览器根据如下信息，访问{product_name} Console。其中 `<domain>` 可根据link:../modify_config/variables/#_common[前期配置]进行填写。
++
+[source,shell]
+----
+Web 地址：console.<domain>
+默认用户名：admin@<domain>
+默认密码：zhu88jie
+----
++
+如系统配置 `domain` 为 `democloud.com`，则登录信息如下。
++
+[source,shell]
+----
+Web 地址：console.democloud.com
+默认用户名：admin@democloud.com
+默认密码：zhu88jie
+----
+
+=== 登录 BOSS
+
+. 本地主机配置云平台的link:#_配置_hosts_文件[ Host 信息]。
+
+. 本地主机使用 Chrome 或火狐浏览器根据如下信息，访问{product_name} BOSS。其中 `<domain>` 可根据link:../modify_config/variables/#_common[前期配置]进行填写。
++
+[source,shell]
+----
+Web 地址：boss.<domain>
+默认用户名：boss@<domain>
+默认密码：zhu88jie
+----
++
+如系统配置 `domain` 为 `democloud.com`，则登录信息如下。
++
+[source,shell]
+----
+Web 地址：boss.democloud.com
+默认用户名：boss@democloud.com
+默认密码：zhu88jie
+----
+
+=== 登录配置中心
+
+. 本地主机配置云平台的link:#_配置_hosts_文件[ Host 信息]。
+
+. 本地主机使用 Chrome 或火狐浏览器根据如下信息，访问{product_name}的配置中心。其中 `<domain>` 可根据link:../modify_config/variables/#_common[前期配置]进行填写。
++
+[source,shell]
+----
+Web 地址：cadmin.<domain>
+默认用户名：admin@<domain>
+默认密码：zhu88jie
+----
++
+如系统配置 `domain` 为 `democloud.com`，则登录信息如下。
++
+[source,shell]
+----
+Web 地址：cadmin.democloud.com
+默认用户名：admin@democloud.com
+默认密码：zhu88jie
+----

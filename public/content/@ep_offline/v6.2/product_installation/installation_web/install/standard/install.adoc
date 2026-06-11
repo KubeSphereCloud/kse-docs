@@ -1,0 +1,82 @@
+---
+title: "第五步：安装"
+weight: 6
+---
+
+include::../../../../../../_components/note.adoc[]
+
+* 本页面的配置文件将不会上传到服务器，实施人员确认配置文件无误后，可自行复制备份至本地。
+* 实施人员在本页面修改的临时内容，页面刷新后将会丢失，安装前请务必先备份至本地。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+== 配置文件
+
+前文填写的参数，将以配置文件的方式显示在此。用户需再次确认各配置参数是否正确填写，是否符合前期规划。
+
+image::/images/ep_offline/installation/webinstaller_35.png[webinstaller_35,100%]
+
+== 修改配置
+
+若配置文件中存在不符合实际规划的内容时，实施人员可以手动修改当前页面展示的配置文件中的相应参数后再点击**开始安装**。
+
+
+== 开始安装
+
+整个安装过程分为配置产品与部署集群。整个部署过程持续时间较长，请耐心等待。
+
+=== 安装失败
+
+在 `配置产品` 过程失败时，实施人员可点击查看失败操作的日志，点击**返回修改配置**后再安装。若在 `部署集群` 过程中失败，建议登录 FirstBox 节点查看相关日志信息，调查出错原因并解决后，再回到该页面点击**再试一次**。
+
+image::/images/ep_offline/installation/webinstaller_37.png[webinstaller_37,100%]
+
+
+FirstBox 节点相关日志信息如下。
+
+* 简略日志
++
+可执行命令 `/pitrix/cli/get-deploy-qingcloud-log.py`，查看任务的简略日志。
+* 详细日志
++
+可在目录 `/pitrix/log/deploy` 下，查看对应 Job 的执行日志。
+* build 日志
++
+. 执行如下命令行，进入各安装包的日志目录。
++
+[source,shell]
+----
+/pitrix/log/build_pkgs/
+----
++
+. 根据如下日志文件，确认具体的部署失败的包名。
++
+[source,shell]
+----
+pitrix/log/build_pkgs/build_pkgs.log
+----
++
+. 根据查询出来的失败的包名，查看对应包的详细 build 日志文件。这里以 `build_ks_proxy` 为例说明。
++
+[source,shell]
+----
+/pitrix/log/build_pkgs/build_ks_proxy.log
+----
+
+
+* Install 节点的日志目录
++
+可在目录 `/pitrix/log/install_nodes/` 下，查看对应节点的安装日志。更为详细的节点日志在对应节点的日志目录：`/opt/install/{os,network,disk,post}`。
+* Deploy 包的日志目录
++
+可在目录 `/pitrix/log/update_nodes/` 下查看 Deploy 包的日志目录。
+
+=== 安装成功
+
+若安装过程中，无异常出现，整个流程成功执行完成，如下图所示，则说明安装成功。
+
+image::/images/ep_offline/installation/webinstaller_38.png[webinstaller_38,100%]
+
+=== Host 信息
+
+如上图所示，安装成功后，页面会提供相关的 Host 信息。后续用户如需通过 Web 访问{product_name}的环境，需将该 Host 信息添加至本地主机的 Hosts 文件中。

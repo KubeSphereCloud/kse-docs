@@ -1,0 +1,52 @@
+---
+title: "Use the Container Log Query Tool"
+keywords: "Kubernetes, {ks_product-en}, cluster management, toolbox, query container logs"
+description: "This section introduces how to use the container log search tool."
+weight: 01
+---
+
+This section introduces how to query container logs.
+
+Container logs: Logs obtained from the container's standard output. The content of container logs is determined by the application running in the container.
+
+== Prerequisites
+
+* You should have resource viewing permissions for the platform, cluster, workspace, or project to view logs within a specific scope.
+
+* **WhizardTelemetry Logging** should have been installed and enabled.
+
+== Steps
+
+. Log in to the {ks_product-en} web console with a user who has the resource viewing permissions.
+
+. Hover the cursor over image:/images/ks-qkcp/zh/icons/hammer.svg[hammer,18,18] at the bottom right of the page, then select **Container Log Search** from the menu.
+
+. In the pop-up dialog, set the search conditions to query logs.
++
+--
+* If there are multiple clusters, click the **Cluster** dropdown list to query logs in a specific cluster.
+
+* Click the search box, set the search conditions, then press **Enter** to view logs that meet specific conditions. You can set multiple search conditions at the same time.
+
+* On the query results page, you can view the time distribution chart of the logs. Click the histogram to switch to the log list for that time period. Click image:/images/ks-qkcp/zh/icons/start-dark.svg[start-dark,18,18]/image:/images/ks-qkcp/zh/icons/stop-dark-white.svg[stop-dark-white,18,18] to start/stop real-time data refresh, click the **Log Export** dropdown list to select ascending or descending order to export container logs, click the **Refresh Rate** time to select the data refresh frequency.
+
+* Click image:/images/ks-qkcp/zh/icons/cogwheel.svg[cogwheel,18,18] in the upper right corner of the query results list to customize the information displayed in the list.
+
+* Click on a log entry in the query results to view the detailed information of the log.
+--
+
+== Query Calico Logs
+
+The "WhizardTelemetry Logging" extension collects Calico logs by default, including information about the allocation and release of Calico pod IPs. You can set query conditions to query Calico logs.
+
+. Hover the cursor over the image:/images/ks-qkcp/zh/icons/hammer.svg[hammer,18,18] icon at the bottom right of the page, then select **Container Log Search** from the menu.
+
+. In the pop-up dialog, set the search conditions to query Calico logs.
++
+--
+namespace: `kube-system`
+
+pod: `<node name>`
+
+container: `calico-cni`
+--

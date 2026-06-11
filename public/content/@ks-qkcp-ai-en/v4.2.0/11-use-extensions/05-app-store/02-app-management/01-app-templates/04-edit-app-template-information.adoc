@@ -1,0 +1,68 @@
+---
+title: "Edit Application Template Information"
+keywords: "Kubernetes, {ks_product}, Workspace, Application Template, Edit Application Template Information"
+description: "Describes how to edit application template information."
+weight: 04
+---
+
+:ks_permission: **Application/Application Version/Application Instance Management**
+:ks_navigation: **Application Management > Application Templates**
+
+This section describes how to edit application template information.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. On the application template details page, click **Operation > Edit**.
+
+. In the **Edit Information** dialog box, set the parameters for the application template, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Alias
+|The alias of the application.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-). It cannot start or end with a hyphen (-) and has a maximum length of 63 characters.
+
+|Description
+|The description of the application. The description can contain any characters and has a maximum length of 120 characters.
+
+|Icon
+|The icon of the application. If no icon is set for the application template, the system will use the first character of the application name in uppercase as the default icon. The icon format must be .png or .jpg, and cannot exceed 96 x 96 pixels and 20 KB.
+
+|Application Category
+|The functional category of the application. After the application template is uploaded to the App Store, it will be automatically classified under the category selected here.
+
+|Vendor Website
+|The website address of the vendor. Users who install the application from the App Store can contact the vendor for technical support.
+
+|Application Screenshots
+|Introduction images for the application. A maximum of 6 screenshots are supported. Each screenshot cannot exceed 2 MB.
+
+|Application Introduction
+|Introduction information for the application. Supports markdown-formatted text and image introductions.
+|===
+--

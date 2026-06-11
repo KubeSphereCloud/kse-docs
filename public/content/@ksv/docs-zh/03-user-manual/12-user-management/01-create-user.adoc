@@ -1,0 +1,80 @@
+---
+title: "创建用户"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 用户, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建用户。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 1aeedb8ccce74335b857075786c314d4
+:ks_xref_id: ee115630d79c40f88b3cfa2075bcebbb
+:ks_comp: ../../../components/
+:ks_title: 创建用户
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建用户。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 用户, 创建
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建用户。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=65770d17a48d468887c5bca7066b6942]
+
+include::../../../_custom/users/user-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=c1e6567eea124f888a17ceb2895b8edf]
+
+include::../../../_custom/users/user-steps.adoc[]
+
+. 在**本地用户**页面，点击右上角的**创建**。
+
+. 在弹出的对话框中设置用户的信息。
++
+--
+[cols='1a,3a']
+|===
+|参数 |描述
+
+|用户名
+|用户的名称。
+
+include::../../../_custom/security-groups/naming-convention.adoc[]
+
+|邮箱
+|用户的邮箱地址。
+
+邮箱地址可用于登录{ks_product_both}Web 控制台。
+
+|密码
+|用户的密码。
+
+include::../../../_custom/users/password-rule.adoc[]
+
+|确认新密码
+|再次输入密码以确认。
+
+|项目
+|用户所属的项目。
+
+如果创建用户时没有设置用户所属的项目，用户登录 Web 控制台后将无法查看和操作任何资源。您可以在用户创建后手动将用户邀请到项目中。有关更多信息，请参阅 link:../../04-projects-management/05-add-project-member/[添加项目成员]和 link:../../04-projects-management/07-remove-project-member/[移除项目成员]。
+
+|角色
+|用户在项目中的角色。
+
+|描述
+|用户的描述信息。
+
+include::../../../_custom/networks/description-convention.adoc[]
+|===
+--
+
+. 点击**确定**。用户创建后将显示在用户列表中。

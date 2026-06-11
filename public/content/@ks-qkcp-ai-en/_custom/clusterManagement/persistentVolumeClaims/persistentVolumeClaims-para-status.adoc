@@ -1,0 +1,12 @@
+// :ks_include_id: 3728661e623d44fcaae41fd16cf87c08
+The current status of a PersistentVolumeClaim.
+
+* **Bound**: The system has created a PersistentVolume based on the PersistentVolumeClaim, and the PersistentVolumeClaim has been bound to the PersistentVolume.
+
+* **Pending**: The system has created the PersistentVolumeClaim, but the corresponding PersistentVolume has not been created.
+
+* **Updating**: The settings of the PersistentVolumeClaim have changed, and the system is updating the PersistentVolumeClaim.
+
+* **Deleting**: The system is deleting the PersistentVolumeClaim.
+
+* **Lost**: The system has bound the PersistentVolumeClaim to a PersistentVolume, but the bound PersistentVolume cannot be found. In this state, the PersistentVolume may have been deleted.

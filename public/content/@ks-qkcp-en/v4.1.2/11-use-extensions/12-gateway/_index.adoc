@@ -1,0 +1,38 @@
+---
+title: "KubeSphere Gateway"
+description: "Introduce how to use the KubeSphere Gateway extension."
+weight: 12
+layout: "second"
+---
+
+This section introduces how to use the "KubeSphere Gateway" extension to enable and manage gateways for clusters, workspaces, and projects, as well as manage application routes for clusters and projects.
+
+include::../../../_custom-en/clusterManagement/gatewaySettings/gatewaySettings-desc-gateway.adoc[]
+
+KubeSphere provides a cluster gateway for each cluster, a workspace gateway for each workspace in the cluster, and a project gateway for each project in the workspace, respectively used to provide reverse proxy for services in the entire cluster, a single workspace, and a single project.
+
+After installing the "KubeSphere Gateway" extension,
+
+* The **Gateway Settings** option will be displayed under the **Cluster Settings** menu in the left navigation pane of the cluster;
+* The **Gateway Settings** option will be displayed under the **Workspace Settings** menu in the left navigation pane of the workspace;
+* The **Gateway Settings** option will be displayed under the **Project Settings** menu in the left navigation pane of the project.
+* Ingresses can be created and managed under clusters and projects.
+
+[.admon.tip,cols="a"]
+|===
+|Tip
+
+|
+After enabling the cluster gateway, workspace gateway, or project gateway, when creating an Ingress under the **Application Workloads > Ingresses** menu of the cluster or project, you can select the IngressClassName of the corresponding gateway on the **Advanced Settings** tab.
+|===
+
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+* To use the tracing function, **KubeSphere Service Mesh** should be installed and enabled.
+* To use the monitoring function for gateways, **WhizardTelemetry Monitoring** should be installed and enabled.
+* To use the log search function for gateways, **WhizardTelemetry Logging** should be installed and enabled.
+|===

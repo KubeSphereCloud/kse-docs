@@ -1,0 +1,221 @@
+---
+title: "配置 OpenSearch 集群客户端证书"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB OpenSearch,证书"
+description: "介绍如何配置 OpenSearch 集群客户端证书。"
+weight: 01
+---
+
+
+
+本节介绍如何对接配置 OpenSearch 集群客户端证书。
+
+
+== 创建 OpenSearch 集群
+
+. 修改 **opensearch.yaml** 文件。
++
+--
+.. 在 **spec.general.additionalConfig** 区域，增加 **plugins.security.ssl.http.clientauth_mode: OPTIONAL** 配置。
+.. 集群开启 TLS 认证。
+
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+apiVersion: opensearch.opster.io/v1 kind: OpenSearchCluster
+metadata:
+name: os-001 spec:
+general:
+version: 2.3.0 httpPort: 9200 vendor: opensearch serviceName: os-001 additionalConfig:
+plugins.security.ssl.http.clientauth_mode: OPTIONAL dashboards:
+version: 2.3.0 enable: true replicas: 1 resources:
+requests: memory: "1Gi" cpu: "500m"
+limits:
+memory: "1Gi" cpu: "500m"
+tls:
+enable: true generate: true
+confMgmt: smartScaler: true
+security: config:
+securityConfigSecret:
+# Pre create this secret with required security configs, to override the default settings
+name: securityconfig-secret adminCredentialsSecret:
+name: admin-credentials-secret tls:
+transport: generate: true
+http:
+generate: true
+nodePools:
+- component: masters
+replicas: 3 diskSize: "50Gi" persistence:
+pvc:
+storageClass: csi-qingcloud accessModes:
+- ReadWriteOnce nodeSelector:
+resources: requests:
+memory: "1Gi"
+cpu: "500m" limits:
+memory: "1Gi"
+cpu: "500m" roles:
+- "cluster_manager"
+- component: data-hot replicas: 2
+diskSize: "80Gi" persistence:
+pvc:
+storageClass: csi-qingcloud accessModes:
+- ReadWriteOnce additionalConfig:
+node.attr.datatier: "hot" # warm, cold resources:
+requests: memory: "1Gi" cpu: "500m"
+limits:
+memory: "1Gi" cpu: "500m"
+roles:
+- "data"
+--- apiVersion: v1 kind: Secret metadata:
+name: admin-credentials-secret type: Opaque
+data:
+username: c2h1YWliMTIz password: c2h1YWliMTIz
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在 **securityconfig.yaml** 中增加 **clientcert_auth_domain** 配置。
+
++
+--
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+config.yml: |- _meta:
+type: "config"
+config_version: "2" config:
+dynamic: http:
+anonymous_auth_enabled: false authc:
+basic_internal_auth_domain: http_enabled: true transport_enabled: true order: "4" http_authenticator:
+type: basic
+challenge: true authentication_backend:
+type: internal clientcert_auth_domain:
+http_enabled: true transport_enabled: true order: 1 http_authenticator:
+type: clientcert #config:
+#username_attribute: cn #optional, if omitted DN becomes username challenge: false
+authentication_backend: type: noop
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令创建集群。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+ root@master1:/home/ubuntu/opensearch# kubectl -n opensearch apply -f ./security-config.yaml 
+ root@master1:/home/ubuntu/opensearch# kubectl -n opensearch apply -f ./os-ssl-true.yaml
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+
+== 生成客户端证书
+
+. 获取 CA 证书。集群自生成的 CA 证书名称为 <cluster-name>-ca。
+
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@master1:/home/ubuntu/opensearch# kubectl -n opensearch get secret os-001-ca -oyaml
+echo <ca.crt 内容> | base64 -d > root-ca.pem 
+echo <ca.key 内容> | base64 -d > root-ca-key.pem
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 签发客户端证书。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+openssl genrsa -out client-key-temp.pem 2048
+openssl pkcs8 -inform PEM -outform PEM -in client-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out client-key.pem 
+openssl req -new -key client-key.pem -subj "/C=CA/ST=ONTARIO/L=TORONTO/O=ORG/OU=UNIT/CN=CLIENT" -out client.csr 
+openssl x509 -req -in client.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out client.pem -days 730
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+其中 **-subj** 后的内容可以自定义。
+--
+
+. 获取客户端证书的专有名称（DN）。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@master1:/home/ubuntu/opensearch/certs# openssl x509 -subject -nameopt RFC2253 -noout -in client.pem
+subject=CN=CLIENT,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 在 OpenSearch Dashboards 将在上一步获得的映射给用户。
++
+--
+image::/images/dmp/os-dashboards.png[]
+--
+
+. 使用证书访问集群。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+root@i-abmm2sr0:~/test# curl -k --cert client.pem --key client-key.pem https://172.22.9.17:30201/_cat/nodes?pretty
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+其中：
+
+* **-k**： 忽略服务端证书验证。
+
+* **--cert**： 指定客户端证书。
+
+* **--key**： 指定客户端证书的 key。
+
+* **172.22.9.17**： 任意节点 IP。
+
+* **30201**：9200 暴露在集群外部的端口号。
+
+--
+
+
+== 多用户访问集群
+
+
+用户使用客户端证书绑定的 role 来获取相应的权限，根据实际情况，不同用户可配置不同的 role，同时生成对应的证书访问集群。
+
+下面举例如何将生成的证书绑定在 all_access 和 dashboard_read_only 两个 role 上。关于如何生成证书，请参阅link:#_生成客户端证书[生成客户端证书]。
+
+. 进入 OpenSearch Dashboards 管理页面，在左侧导航栏选择 **Security** > **Roles**。
+
+. 在右侧的 **Roles** 页面，点击 **Create role**，输入角色名称并设置权限，点击 **Submit**。
++
+--
+image::/images/dmp/multiuser-access.png[]
+--
+
+. 测试绑定是否成功。
+
+.. 使用 all_access 证书访问集群，如果出现以下信息，则代表访问集群成功。
++
+--
+image::/images/dmp/all-access-success.png[]
+--
+
+.. 使用 dashboard_read_only 证书访问 Dashboard，如果出现以下信息，则代表访问集群成功。
++
+--
+image::/images/dmp/dashboard-only-success.png[]
+--
+
+.. 使用 dashboard_read_only 证书访问集群。如果出现报错，则符合预期。
++
+--
+image::/images/dmp/dashboard-only-fail.png[]
+--

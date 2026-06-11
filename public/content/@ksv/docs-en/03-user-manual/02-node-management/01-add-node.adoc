@@ -1,0 +1,167 @@
+---
+title: "Add nodes"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, add, nodes"
+description: "Describes how to add nodes to a {ks_product} cluster."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 27f44010172c4b3ab7a80ffccaa387a2
+:ks_xref_id: 85efd7b29b284ee5848b27d342184903
+:ks_comp: ../../../components/
+:ks_title: Add nodes
+:ks_description: Describes how to add nodes to a {ks_product} cluster.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, add, nodes
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to add nodes to a {ks_product_abbr_full} cluster.
+
+{ks_product} allows you to add nodes only. You cannot delete nodes from a {ks_product} cluster.  {ks_product} supports the following methods to add nodes:
+
+--
+* link:#1a56cf34095244ae9a18894c77b57d55[Use the {ks_product} web console to add nodes]
+* link:#fe1ceee33752481ba72a862d674c103b[Use Terminal to add nodes]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=5bdf9c7178714377a3ac1ba5349166c5]
+
+Make sure the number of nodes you want to add does not exceed the resource quota of your {ks_product} cluster.  In single-node mode, {ks_product} Basic Edition allows you to add another two nodes. To deploy more nodes or VMs, you can subscribe to {ks_product} Developer or Enterprise Edition based on business requirements. For more information about editions and resource quotas, see link:../../../01-introduction/03-editions/[Editions].
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Use the {ks_product} web console to add nodeslink:[id=1a56cf34095244ae9a18894c77b57d55]
+
+. Log in to the {ks_product} web console as user **admin**.
+. In the top navigation bar, click **Physical Resources** to go to the management page of physical resources.
+. In the left-side navigation pane, choose **Nodes** > **Physical Nodes**.
+. In the upper-right corner of the **Physical Nodes** page, click **Add** to open the wizard to add a node.
+. In the dialog box that appears, configure the following parameters for the node that you want to add.
++
+--
+[cols="1a,3a"]
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the node.
+
+include::../../../_custom-en/security-groups/naming-convention.adoc[]
+
+|SSH Login
+|The SSH login method of the node.  {ks_product} provides the following methods to add a node: 
+
+* **Username and Password**: Log in to the server node using a username and its password.
+* **SSH Key**: Log in to the server node using an SSH key.
+
+|Username
+|The username used for SSH login.  This parameter is available only when **SSH Login** is set to **Username and Password**.  By default, user **root** is used to log in to the server node.
+
+|Password
+|The password used for SSH login.  This parameter is available only when **SSH Login** is set to **Username and Password**. 
+
+|Internal IP Address
+|The internal IP address of the node. This IP address is accessible to all nodes in the cluster.
+
+To specify multiple internal IP addresses, click **Add**.
+|===
+--
+. Click **Add**. The node appears in the node list after it is added.
++
+--
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+To view the progress of adding nodes, place the cursor in the lower-right corner of the page to open the toolbox and choose **Upload Progress** > **Nodes**.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. (Optional) Run the following command to enable high availability:
++
+--
+// Bash
+
+include::../../../../_ks_components/code/bash.adoc[]
+
+ksv set-ceph-ha
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
++
+--
+If the following message appears, high availability is enabled:
+--
++
+--
+// Bash
+
+include::../../../../_ks_components/code/bash.adoc[]
+
+set pool 2 size to 3
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
++
+--
+// Note
+
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+Before you run the command to enable high availability, log in to the server node as user **root** and go the directory generated after the installation package is decompressed.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Use Terminal to add nodeslink:[id=fe1ceee33752481ba72a862d674c103b]
+
+. Log in to the server node on which {ks_product} is installed as user **root**.
+. Go to the directory generated after the installation package is decompressed.
+. Run the following command to edit **config-sample.yaml**:
++
+--
+// Bash
+
+include::../../../../_ks_components/code/bash.adoc[]
+
+vi config-sample.yaml
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+. Modify the **hosts** and **roleGroups** specifications in **config-sample.yaml**:
++
+--
+include::../../../_custom-en/nodes/add-node-config-parameters.adoc[]
+--
+. Run the following command to add nodes:
++
+--
+// Bash
+
+include::../../../../_ks_components/code/bash.adoc[]
+
+Make sure the number of nodes you want to add does not exceed the resource quota of your {ks_product} cluster.  In single-node mode, {ks_product} allows you to add another two nodes. If you want to add more nodes, we recommend that you purchase the Enterprise Edition.  For more information about editions and resource quotas, see link:../../../01-introduction/03-editions/[Billing].
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+If the following command output appears, the nodes are added:
+
+// Bash
+
+include::../../../../_ks_components/code/bash.adoc[]
+
+Congratulations! Scaling cluster is successful.
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--

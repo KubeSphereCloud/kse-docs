@@ -1,0 +1,56 @@
+---
+title: 基础测试
+weight: 2
+---
+
+. 执行如下命令行，登录 FirstBox。命令行中的 `<firstbox ip>` 可查看link:../../install/#_创建_firstbox[前文内容]。
+
++
+[source,shell]
+----
+# ssh -p 6023 root@<firstbox ip>
+----
+
+. 进入脚本所在目录：
+
++
+[source,shell]
+----
+# cd /root/qs-installer
+----
+
+. 执行如下命令行，对当前环境进行基础检查。
++
+[source,shell]
+----
+# ./qs_installer tools --check-u1w
+----
++
+命令行返回结果如下图所示，则说明环境检查通过。若有异常输出，需根据输出内容进行排查并解决相关异常。
++
+image::/images/u10000/install_1.png[install_1,60%]
+
+. 登录 Portal 与 Console 页面，确认服务可用。详细登录信息如下，其中的 `iaas_domain` 需根据配置文件中的内容进行替换。若当前环境没有对接 IaaS，则不需要登录 Console 页面进行验证。
+
+* 登录 Portal：
++
+[source,shell]
+----
+Portal链接：portal.<zone_id>.<global_domain>
+默认用户名：qingstor@<iaas_domain>
+默认密码：zhu88jie
+----
+
+* 登录 Console：
++
+[source,shell]
+----
+Console 链接：console.<iaas_domain>
+默认用户名：qingstor@<iaas_domain>
+默认密码：zhu88jie
+----
+
+. 成功创建 Bucket，并上传下载文件成功。
+
+. 成功创建文件系统和文件系统共享，挂载后按设置的权限操作文件成功。
+

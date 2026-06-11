@@ -1,0 +1,35 @@
+---
+title: "WizTelemetry Events Alerting"
+keywords: "Kubernetes, {ks_product}, Events, Auditing, Alerting"
+description: "Introduces how to use the 'WizTelemetry Events Alerting' extension."
+weight: 09
+layout: "second"
+---
+
+This section introduces how to use the "WizTelemetry Events Alerting" extension.
+
+WizTelemetry Events Alerting supports auditing alerts, event alerts, and log alerting features. It allows you to define alerting rules for Kubernetes/KubeSphere auditing events, Kubernetes native events, and container logs. It evaluates incoming event and log data and sends alerts to specified receivers, such as alertmanager.
+
+Among these, log alerting supports keyword-triggered alerts and sliding window-triggered alerts.
+
+- Keyword-based alerts: Trigger an alert when specific keywords appear in the logs.
+
+- Sliding window alerts: Trigger an alert when the volume of log data meeting specified conditions reaches a user-defined threshold within a sliding time window.
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|
+- WizTelemetry Events Alerting relies on event, auditing, and log data sent by the WizTelemetry Data Pipeline extension. Before use, ensure this extension is installed and configured.
+- Auditing alerts and event alerts are enabled by default. Ensure the WizTelemetry Events and WizTelemetry Auditing extensions are installed and configured.
+- Log alerting is disabled by default. You can enable this feature by modifying the "Extension Configuration".
+|===
+
+[.admon.note,cols="a"]
+|===
+|Info
+
+|
+For more information about component configuration, please refer to the description on the details page of the "WizTelemetry Events Alerting" extension in the Extensions Center.
+|===

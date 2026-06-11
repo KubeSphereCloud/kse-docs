@@ -1,0 +1,20 @@
+---
+title: "Overview"
+keywords: "Kubernetes, {ks_product-en}, certificate management, update certificates"
+description: "Learn about the Cert Manager extension."
+weight: 01
+---
+
+Cert Manager creates TLS certificates for workloads in Kubernetes and renews them before they expire.
+
+Cert Manager can obtain certificates from various certificate authorities, including: Let’s Encrypt, HashiCorp Vault, Venafi, and private PKI.
+
+When installing the extension, enabling parameters under the `defaultIssuer` field in the extension configuration will generate a ClusterIssuer named `default-issuer`. The default ClusterIssuer can be used to issue certificates for other components. For example, when using the KubeSphere Gateway, it can automatically generate and update certificates for ingresses.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more information on extension configuration, see the details page of the "Cert Manager" extension in the Extensions Center.
+|===

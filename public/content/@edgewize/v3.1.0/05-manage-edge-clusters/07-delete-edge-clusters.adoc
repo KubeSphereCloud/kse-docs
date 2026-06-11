@@ -1,0 +1,34 @@
+---
+title: "移除边缘集群"
+weight: 07
+---
+
+本节介绍如何移除边缘集群。
+
+[.admon.warning,cols="a"]
+|===
+|警告
+
+|
+* 边缘集群被删除后，边缘集群中原有的资源不会被自动清除。
+* 边缘集群被删除后，边缘集群中原有的多集群配置数据不会被自动清除，卸载 KubeSphere 或删除关联资源时可能会导致用户数据丢失。请手动清理被移除集群中原有的多集群配置数据。
+|===
+
+== 前提条件
+
+您需要在{ks_product_both}平台具有 **platform-admin** 角色。
+
+== 操作步骤
+
+. 进入**边缘集群管理**页面。
+
+. 在需要操作的集群右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除集群**。
+
+. 在**移除集群**对话框，确认需要移除的集群的信息，将滑块拖动到右侧，输入需要移除的集群的名称，然后点击**移除**。
+
+. 登录被移除的成员集群节点，执行以下命令清理集群中的多集群配置数据：
++
+[source,bash]
+----
+for ns in $(kubectl get ns --field-selector status.phase!=Terminating -o jsonpath='{.items[*].metadata.name}'); do kubectl label ns $ns kubesphere.io/workspace- && kubectl patch ns $ns --type merge -p '{"metadata":{"ownerReferences":[]}}'; done
+----

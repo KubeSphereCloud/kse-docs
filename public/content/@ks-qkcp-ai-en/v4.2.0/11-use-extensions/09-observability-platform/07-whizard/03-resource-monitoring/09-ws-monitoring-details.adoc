@@ -1,0 +1,92 @@
+---
+title: "View Workspace Monitoring Details"
+keywords: "Kubernetes, {ks_product}, WizTelemetry Global Monitoring, Workspace, Resource Usage Ranking"
+description: "Describes how to view the resource usage details of a workspace."
+weight: 09
+---
+
+:ks_navigation: **Global Monitoring > Workspace**
+
+This section describes how to view the monitoring details of a single workspace.
+
+== Prerequisites
+
+You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
+. In the workspace list, click the name of a workspace to open its details page.
+
+. In the upper area of the details page, click **Manage Workspace** to enter the management page of the current workspace.
+
+. Under the **Overview** tab on the details page, view the overview information of the workspace.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Area |Description
+
+|Resource Statistics
+|The number of authorized clusters in the current workspace, and the number of created projects, Deployments, StatefulSets, DaemonSets, Jobs, Services, Persistent Volume Claims, Ingresses, and pods.
+
+|Real-time Resource Usage
+|The real-time usage and total amount of CPU and memory in the current workspace; as well as persistent volume usage and persistent volume reserved quantity. Click **All** to view the persistent volume usage and reserved quantity for different types of storage.
+
+Click the corresponding area to view the real-time usage percentage of that resource.
+
+|Workspace Quota
+|
+ifeval::["{file_output_type}" == "html"]
+For more information on parameters, refer to link:../../../../../08-workspace-management/06-workspace-settings/02-workspace-quotas/02-view-workspace-quotas/[View Workspace Quotas].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For more information on parameters, refer to the "Workspace Quotas" chapter in the *KubeSphere Workspace and Project Management Guide*.
+endif::[]
+
+|Pods
+|The number of various types of pods in the current workspace.
+
+Pod status types include:
+
+include::../../../../../_custom/clusterManagement/pods/pods-para-podStatus_overview.adoc[]
+
+Pod QoS (Quality of Service) types include:
+
+include::../../../../../_custom/clusterManagement/pods/pods-para-qosTypes.adoc[]
+
+include::../../../../../_custom/clusterManagement/pods/pods-para-oomTypes.adoc[]
+|===
+--
+
+. Click the **Projects** and **Clusters** tabs on the details page to view monitoring information for projects and authorized clusters within the workspace.
++
+--
+include::../../../../../_custom/WizTelemetry/sort-by-fields-and-order.adoc[]
+
+* Click the search box above the list and enter keywords to search for projects or clusters by name.
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+--
+
+. Click the **Monitoring** tab on the details page to view detailed information of monitoring metrics within a specified time range.
++
+--
+include::../../../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshData.adoc[]
+--

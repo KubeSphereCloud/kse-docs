@@ -1,0 +1,61 @@
+---
+title: 步骤一：准备软件包
+weight: 2
+---
+
+//== 下载安装包
+
+
+. 登录内部link:ins.qingcloud.com[ FTP 服务器]。
+
+. 进入 `/pitrix/installer/k8s/QKE/` 目录，目录中名称带有 `_informal` 后缀的文件夹，是用于存放支持单独升级 KSE & KS 组件的 QKE Plus 的软件包。
++
+image::/images/ep_offline/qke_upgrade/qke_upgrade_5.png[qke_upgrade_5]
++
+include::../../../../../_components/note.adoc[]
+
+对照link:../../overview/#_kse_ks_升级说明[ KSE & KS 升级说明]，我们可以知道，`v3.0.1_informal` 对应 KS 版本 v3.3.2，`v3.1.1_informal` 对应 KSE 版本 v3.5.0。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 实施人员可参考以上步骤，获取目标版本的 QKE Plus 的软件包。
++
+* KS v3.3.2 对应的补丁包目录为 `/pitrix/installer/k8s/QKE/v3.0.1_informal/amd64/kylinOs`。
+* KSE v3.5.0 对应的补丁包目录为 `/pitrix/installer/k8s/QKE/v3.1.1_informal/amd64/kylinOs`。
+
+
+. 分别进入如下目录，下载目标版本的 KSE & KS 软件包。
++
+include::../../../../../_components/note.adoc[]
+
+进入目标版本目录后，下载带有 `-offline-` 字符串的软件包。
+
+include::../../../../../_components/table_footer.adoc[]
++
+* KS 软件包目录为 `/pitrix/installer/k8s/KubeSphere`。
++
+image::/images/ep_offline/qke_upgrade/qke_upgrade_6.png[qke_upgrade_6]
++
+* KSE 软件包目录为 `/pitrix/installer/k8s/KSE`。
++
+image::/images/ep_offline/qke_upgrade/qke_upgrade_7.png[qke_upgrade_7]
+
+
+// == 上传安装包
+
+// //将link:#_下载安装包[前文]下载的安装包 `qke-cli-v3.0.1.tar.gz`、`qke-installer-v3.0.1.tar.gz` 上传至{product_name}，其具体存放位置，根据前期{product_name}安装部署 QKE Plus 配置的不同，稍有差别。
+
+// //将link:#_下载安装包[前文]下载的安装包上传至{product_name}，其具体存放位置，根据前期{product_name}安装部署 QKE Plus 配置的不同，稍有差别。
+
+// . 将link:#_下载安装包[前文]下载的 QKE Plus 安装包上传至{product_name}，其具体存放位置，根据前期{product_name}安装部署 QKE Plus 配置的不同，稍有差别。
+// +
+// * 文件存储
+// +
+// 若安装部署 QKE Plus 时，使用的是文件存储服务，则将上述安装包上传至对应的文件存储服务器的 `/data/qke` 目录下。
+// +
+// * 对象存储
+// +
+// 若安装部署 QKE Plus 时，使用的是对象存储服务，则将上述安装包上传至对应的对象存储的 Bucket 目录下。
+
+
+// . 将link:#_下载安装包[前文]下载的 KSE 或 KS 软件包上传至{product_name}。

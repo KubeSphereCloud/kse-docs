@@ -1,0 +1,41 @@
+---
+title: "Add Project Cluster"
+keywords: "Kubernetes, {ks_product-en}, multi-cluster projects, project settings, basic information, add project cluster"
+description: "Learn how to add project clusters."
+weight: 04
+---
+
+:ks_permission: **Federated Project Management**
+:ks_navigation: **Project Settings > Basic Information**
+
+
+This section describes how to add the current project to anther clusters. After adding, the project will be automatically created in the corresponding clusters.
+
+
+== Prerequisites
+
+* **Application Management for Cluster Federation** should have been installed and enabled.
+
+* {empty}
+include::../../../../../_custom-en/multi-clusterProjectManagement/projectManagement-prer-requiredPermission_v4.adoc[]
+
+
+== Steps
+
+include::../../../../../_custom-en/multi-clusterProjectManagement/projectManagement-oper-openProjectPage_v4.adoc[]
+
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. On the **Basic Information** page, click **Manage**, then select **Add Cluster** from the dropdown list.
+
+. In the pop-up dialog, select the clusters to which you want to add the current project from the dropdown list, then click **OK**. The clusters will automatically create the current project after they are added.
++
+--
+* Click **Add Cluster** to add the current project to one or more clusters.
+
+* Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] to delete the cluster to be added.
+--

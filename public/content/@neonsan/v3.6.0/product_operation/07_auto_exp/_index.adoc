@@ -1,0 +1,69 @@
+---
+title: '扩容指南'
+weight: 3
+#draft: true
+pdf_docVersion: '04'
+pdf_releaseDate: 2024-02-06
+---
+
+{product_name} 分布式存储系统支持在线使用 QingStor Instller 工具进行扩容操作，以适应未来业务和数据量的快速增长。
+
+
+本文档仅适用于由版本号为 QingStor Instller v2.0.0 及以上的安装工具部署的 NeonSAN 集群。
+
+== 版本要求
+
+* QingStor Instller v2.0.0 及以上
+* 扩容节点的 NeonSAN 版本与原集群版本相同
+
+== 读者对象
+
+本文档主要用于以下工程师：
+
+* {product_name} 技术支持工程师
+* {product_name} 运维工程师等
+
+== 名词解释
+
+[cols="2,3",options="header"]
+|===
+|名词 |解释
+|qingstor-installer
+|Qingstor {product_name} 的自动化安装部署工具。
+
+|存储池（RG）
+|为了资源合理利用以及管理的方便性，可将集群的存储节点划分为多个存储池，每个存储池最多支持 24 个存储节点。
+
+|Common 服务
+|数据库、Zookeeper 和 Portal 等。
+
+|全闪节点
+|存储节点上数据盘为闪存介质，即支持 NVMe/SAS/SATA SSD，标准部署为 NVMe SSD。
+
+|混插节点
+|存储节点上数据盘为磁盘介质，即缓存盘为 NVMe SSD，数据盘为 SATA HDD类型。
+|===
+
+== 修订记录
+
+[cols="1,3,1",options="header"]
+|===
+|版本|修订内容|日期
+|04
+|适配 QingStor Installer v3.0.0 版本
+|2024-02-06
+
+|03
+a| * 节点扩容方式中，补充扩容前准备相关操作。
+* 新增磁盘扩容方式操作指南。
+
+|2024-01-18
+
+|02
+|更新新增节点配置要求，以及升级 Installer 步骤
+|2023-02-02
+
+|01
+|第一次正式发布
+|2022-12-20
+|===

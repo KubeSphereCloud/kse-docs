@@ -1,0 +1,19 @@
+---
+title: '互斥卷相关'
+weight: 2
+---
+
+[cols="2,2,3,3a",options="header"]
+|===
+|英文词汇|中文/缩略词 |解释说明|应用 
+|mutex group 
+|互斥卷组
+|用于保证在 HDFS 集群未划分 rack 的情况下，可以在 {product_name} 内创建特定的卷，使得每一个卷占若干存储节点。创建互斥卷组时指定的物理节点数不能超过存储池的节点数。
+|创建互斥卷组：`neonsan create_mutex_group -group_name hdfs -rg_name mutex_rg -mutex_volume_count 3`，其中 -mutex_volume_count 参数用于用于指定互斥卷数。创建互斥卷组时指定的互斥卷数不能超过存储池的节点数。
+
+|mutex volume
+|互斥卷  
+|互斥卷为单副本的卷，且每一个互斥卷的数据分别专享一个存储节点，互不交叉。即互斥卷是以节点互斥的单副本卷，归属于某一互斥卷组的互斥卷彼此互斥。
+|创建互斥卷：`neonsan create_volume -volume pool1/vol_mutex01 -size 10G -repcont 1 -policy mutex -mutex_group hdfs`
+创建互斥卷时，卷副本数必须为1，且指定的卷组需为提前创建好的互斥卷组。
+|===

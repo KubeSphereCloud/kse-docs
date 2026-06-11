@@ -1,0 +1,73 @@
+---
+title: "Delete Image Builder"
+keywords: "Kubernetes, {ks_product}, Image Builder, Delete Image Builder"
+description: "Describes how to delete an image builder."
+weight: 08
+---
+
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Image Builder**
+
+
+This section describes how to delete an image builder.
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+Once deleted, the image builder cannot be recovered. Please perform this operation with caution.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Delete a Single Image Builder
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the right side of the image builder you want to delete, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Delete** from the dropdown list.
+
+. In the **Delete Image Builder** dialog box, enter the name of the image builder, then click **OK**.
+
+
+== Batch Delete Image Builders
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. Select the checkbox on the left of the image builder(s) you want to delete, then select **Delete** above the image builder list.
+
+. In the **Batch Delete Image Builders** dialog box, enter the name(s) of the image builder(s), then click **OK**.
++
+--
+include::../../../_custom/note-separateNamesByComma.adoc[]
+--

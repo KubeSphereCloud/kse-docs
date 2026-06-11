@@ -1,0 +1,47 @@
+---
+title: "编辑告警规则"
+keywords: "Kubernetes, {ks_product}, 项目管理, 监控告警, 规则组, 编辑告警规则"
+description: "介绍如何编辑告警规则。"
+weight: 05
+---
+
+:ks_permission: **规则组管理**
+:ks_navigation: **监控告警 > 规则组**
+
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-editAnAlertingPolicy.adoc[]
+
+
+== 前提条件link:[id=23f057cdcb4b4401a472be62fa47be94]
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+:relfileprefix: ../../../../
+* 您需要加入一个项目并在项目中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:07-project-management/10-project-settings/04-project-members/_index.adoc[项目成员]和xref:07-project-management/10-project-settings/03-project-roles/02-view-a-project-role-list.adoc[项目角色]。
+
+:relfileprefix: ./
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-exposeMetrics.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=71cee6d4c8074657b42dcad6156daf24]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-editAnAlertingPolicy.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-editAlertRules.adoc[]

@@ -1,0 +1,45 @@
+---
+title: "View Node Resource Usage Ranking"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Monitoring & Alerting, Cluster Status, Resource Usage"
+description: "Describes how to sort nodes by the usage of specific resources."
+weight: 06
+---
+
+:ks_permission: **Monitoring View**
+:ks_navigation: **Monitoring & Alerting > Cluster Monitoring**
+
+
+This section describes how to sort nodes by the usage of specific resources.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **WizTelemetry Monitoring** extension must be installed and enabled on the KubeSphere platform.
+
+
+
+== Steps
+
+include::../../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Cluster Monitoring** page, click the **Resource Usage Ranking** tab to view the resource usage of each node.
++
+--
+* Click the dropdown list in the top-left corner to select sorting nodes by CPU usage, CPU average load, memory usage, disk usage, Inode usage, or pod usage.
+
+include::../../../../../_custom/clusterManagement/clusterStatus/clusterStatus-oper-sortAscendingDescending.adoc[]
+
+include::../../../../../_custom/clusterManagement/clusterStatus/clusterStatus-oper-exportJsonData.adoc[]
+--

@@ -1,0 +1,33 @@
+---
+title: "GPU 直通"
+weight: 10
+---
+
+GPU 直通（GPU Passthrough）是指将承载虚拟机的云平台的物理主机上的 GPU 显卡不经过宿主机的 OS 层，直接透传给虚拟机，虚拟机就可以使用 GPU 获取 3D 加速能力。
+
+青云企业云在部署时会提供一个 GPU 的 XML 配置文件，通过查看 GPU 的 PCI 信息，在 XML 配置文件中进行相应配置即可实现 GPU 直通。该 XML 文件路径为： `/pitrix/data/vmxml/i-xxxx.xml`。
+
+GPU 直通具体实现方法如下：
+
+. 在物理机上使用 `lspci` 命令查看 GPU 的 PCI 号。
+. 配置 XML 文件，将 GPU 直通给虚拟机。
++
+添加 <hostdev> 标签如下：
+
+* <source> 里面对应的是 GPU 的 PCI 号，其中 domain 对应前 4 位，bus 对应第5，6 位，slot 对应第 7，8 位，function 对应第 9 位。
+* 如果需要添加多个 GPU，只需要增加 <hostdev> 标签即可。使用 GPU 加速的代码中可以指定使用哪个 GPU。
++
+[source,xml]
+----
+<devices>
+...
+
+     <hostdev mode='subsystem' type='pci' managed='yes'>
+      <driver name='vfio'/>
+      <source>
+        <address domain='0x0000' bus='0xb6' slot='0x00' function='0x0'/>
+      </source>
+    </hostdev>
+</devices>
+----
+

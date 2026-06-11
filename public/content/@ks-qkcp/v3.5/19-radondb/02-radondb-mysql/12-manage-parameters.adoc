@@ -1,0 +1,165 @@
+---
+title: "修改 RadonDB MySQL 数据库配置参数"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB MySQL, 配置参数, 修改数据库参数"
+description: "介绍如何修改 RadonDB MySQL 数据库配置参数。"
+weight: 12
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 8dcb57c7f4a04c95a2a541f7aefe0801
+:ks_xref_id: 15c60f3dc170467fba9258b82bb6710c
+:ks_comp: ../../../components/
+:ks_title: 修改 RadonDB MySQL 数据库配置参数
+:ks_keywords: Kubernetes, {ks_product}, RadonDB MySQL, 配置参数, 修改数据库参数
+:ks_description: 介绍如何修改 RadonDB MySQL 数据库配置参数。
+:ks_weight: 12
+:ks_icon:
+:ks_permission: **应用负载管理**
+
+RadonDB MySQL 应用支持配置参数管理功能，通过管理配置参数可调优数据库性能，并可启用数据库高可用性能。本小节主要介绍如何修改 RadonDB MySQL 数据库配置参数。
+
+== 参数简介link:[id=521a38717cc54628b46b6465e5820bc0]
+
+
+=== 日志参数link:[id=4b0581bb891f47829587503c161e6ace]
+
+[%header,cols="1,5"]
+|===
+|参数 |说明
+
+|Audit_log_policy
+a|表示审计日志插件写日志的策略。
+
+|Audit_log_format
+a|表示审计日志文件格式。
+
+|Audit_log_rotate_on_size
+a|表示单个审计日志文件大小。默认值 **104857600**。
+
+|Audit_log_rotations
+a|表示审计日志最大文件数。默认值 **6**，表示最多保留 6 个文件。
+
+|Expire_logs_days
+a|表示 binlog 日志文件保留天数，单位为天。
+
+默认值**7**，表示日志最长保留 7 天时间。
+
+|===
+
+
+
+=== 性能参数link:[id=408990eb531d4ce48808398c05e3bed2]
+
+[%header,cols="1,5"]
+|===
+|参数 |说明
+
+|Default-storage-engine	
+a|表示默认存储引擎类型，仅 MySQL 5.7 支持 TokuDB 存储引擎。
+
+默认值 **InnoDB**。
+
+|Innodb_buffer_pool_size
+a|表示 Innodb 缓存池大小。
+
+若该值为**-1**，该参数设置为内存的 60%。
+
+|Character_set_server
+a|表示服务器安装时指定的默认字符集设定。
+
+默认值 **utf8mb4**。
+
+|Long_query_time
+a|表示慢查询日志时间，单位为秒。
+
+默认值3，表示慢日志查询时间为 3 秒。
+
+|Max_connections
+a|表示同时处理请求的最大连接数量。默认值 **1024**。
+
+|Max_connect_errors
+a|表示最大连接错误次数。该参数是 MySQL 中与安全有关的计数器值，负责阻止过多尝试失败的客户端以防止暴力破解密码。默认值 **655360**。
+
+|Wait_timeout
+a|表示等待超时时间，单位为秒。
+
+默认值 **3600**，表示等待超时时间为 1 小时。
+
+|Max_allowed_packet
+a|表示限制 Server 接受的数据包大小。默认值1073741824。
+
+若该值不是 1024 的整数倍，将下调到 1024 的整数倍；若需修改该参数，须保证 **slave_pending_jobs_size_max** 值大于等于该参数值，否则可能会导致主从复制异常。
+
+|Slave_parallel_workers
+|表示多线程并行复制。默认值**8**。
+
+|Skip-name-resolve
+a|表示是否禁用 DNS 解析功能。
+
+默认值**0**，表示禁用。
+
+|Autocommit
+a|表示是否启用自动提交功能。
+
+默认值**1**，表示启用自动提交功能。
+
+|Transaction_isolation
+a|表示隔离级别。
+
+默认值 **READ-COMMITTED**，表示读提交不允许脏读，但允许不可重复读。
+
+|Innodb_flush_method
+a|表示 InnoDB 数据文件及 redo log 的打开、刷写模式。
+
+默认值 **O_DIRECT**，表示 InnoDB 使用O_DIRECT 打开数据文件，使用 fsync()刷写数据文件跟 redo log。
+
+|Innodb_use_native_aio
+a|表示 InnoDB 的 AIO 特性开关。
+
+默认值 **1**，表示启用 AIO 特性。
+
+|===
+
+
+== 修改配置参数link:[id=e35b910dc7e44fb38149c92d8c1ec22f]
+
+本小节主要介绍如何查看 RadonDB MySQL 基本配置参数。
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+修改部分配置参数后，MySQL 服务会重启，造成业务中断。请谨慎操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+
+=== 前提条件link:[id=5928ccc0f6544f53953545868f8daaae]
+
+* 请确保已获取{ks_product_both}平台登录用户帐号和密码，且已获取平台管理权限。
+
+* 请确保已创建 RadonDB MySQL 应用。
+
+
+
+=== 操作步骤link:[id=ae25a3554f9f4e1fa08c3e7036af2266]
+
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
+
+. 点击页面右侧的**参数**页签，点击**编辑**即可修改应用配置参数。

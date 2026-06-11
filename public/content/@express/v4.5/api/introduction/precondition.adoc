@@ -1,0 +1,151 @@
+---
+title: "前置条件"
+weight: 2
+---
+
+API 是通过 HTTP/HTTPS 接口调用的，虚拟资源类、账户密钥类为 GET 方式，管理服务类为 POST 方式。
+
+构建 GET 的 query string 或 POST 的 body 内容时，需要通过密钥（包括 access_key_id 和私钥 secret_access_key）来生成签名，并将 access_key_id 作为参数的一部分传输到后台。
+
+因此，获取密钥是调用 API 的前置条件。
+
+include::../../../../_components/note.adoc[]
+SDK/CLI 也是封装 API，因此也需要密钥。
+include::../../../../_components/table_footer.adoc[]
+
+== *获取密钥须知*
+
+* 虚拟资源类 API、管理服务类 API 对应的 server 不同，因此需要不同的 key，其获得方式也有所不同。
+* 获取 API key 需要登录系统后台，如果不熟悉操作，建议联系您的运维管理员。
+* API 密钥的私钥需要被妥善保管，请勿外传。
+
+== *获取虚拟资源类 API 密钥*
+
+步骤如下：
+
+* 使用 yop 账号访问 firstbox 节点，假设其 IP 为 192.168.0.11。
+* 切换为 root 账号，输入密码。
+* 进入 ks0 节点，假设其 IP 为 192.168.0.12。
+* 获取 admin 账号的 access_keys。
+* 如果获取不到，可以用 create-access-key 创建一个新的 key。
+
+[,shell]
+----
+ssh yop@192.168.0.11
+sudo -i
+ssh 192.168.0.12
+/pitrix/cli/describe-access-keys -o admin -c self
+/pitrix/cli/create-access-key -o admin
+----
+
+以下是一个 describe-access-keys 命令返回结果示例：
+[,shell]
+----
+root@wuhana-ks0:/pitrix/cli# /pitrix/cli/describe-access-keys -o admin -c self
+=======================================
+sending: {
+  "access_keys":[],
+  "action":"DescribeAccessKeys",
+  "controller":"self",
+  "limit":20,
+  "offset":0,
+  "owner":[
+    "admin"
+  ]
+}
+=======================================
+recv: {
+  "action":"DescribeAccessKeysResponse",
+  "total_count":1,
+  "access_key_set":[
+    {
+      "status":"active",
+      "description":"",
+      "access_key_name":"",
+      "secret_access_key":"zxk5s7jsdjFoByvEUsLsAtNTORToFGEfr0ccGuEE",
+      "ip_white_list":"",
+      "console_id":"expresscloud",
+      "root_user_id":"admin",
+      "create_time":"2023-06-19T06:38:16Z",
+      "access_key_id":"WMGWFUFQYGQQGCIOQNFC",
+      "owner":"admin",
+      "status_time":"2023-06-19T06:38:16Z",
+      "controller":"self"
+    }
+  ],
+  "ret_code":0
+}
+----
+
+以下是一个 create-access-key 之后，再用 describe-access-keys 命令返回结果示例：
+[,shell]
+----
+root@xxx-ks0:/pitrix/cli# /pitrix/cli/create-access-key -o admin
+=======================================
+sending: {
+  "owner":"admin",
+  "action":"CreateAccessKey"
+}
+=======================================
+recv: {
+  "action":"CreateAccessKeyResponse",
+  "access_key_id":"WMGWFUFQYGQQGCIOQNFC",
+  "secret_access_key":"zxk5s7jsdjFoByvEUsLsAtNTORToFGEfr0ccGuEE",
+  "ret_code":0
+}
+
+root@xxx-ks0:/pitrix/cli# /pitrix/cli/describe-access-keys -a WMGWFUFQYGQQGCIOQNFC
+=======================================
+sending: {
+  "access_keys":[
+    "WMGWFUFQYGQQGCIOQNFC"
+  ],
+  "action":"DescribeAccessKeys",
+  "controller":"",
+  "limit":20,
+  "offset":0,
+  "owner":[]
+}
+=======================================
+recv: {
+  "action":"DescribeAccessKeysResponse",
+  "total_count":1,
+  "access_key_set":[
+    {
+      "status":"active",
+      "description":"",
+      "access_key_name":"",
+      "secret_access_key":"zxk5s7jsdjFoByvEUsLsAtNTORToFGEfr0ccGuEE",
+      "ip_white_list":"",
+      "console_id":"expresscloud",
+      "root_user_id":"admin",
+      "create_time":"2023-06-19T06:38:16Z",
+      "access_key_id":"WMGWFUFQYGQQGCIOQNFC",
+      "owner":"admin",
+      "status_time":"2023-06-19T06:38:16Z",
+      "controller":"self"
+    }
+  ],
+  "ret_code":0
+}
+----
+
+== *获取管理服务类 API 密钥*
+
+以下是在 ks 节点上，用命令获取管理服务类 API 密钥的示例：
+
+[,shell]
+----
+root@xxx-ks0:/pitrix/cli# boss2 create_api_key boss@expresscloud.com
+{
+  "access_key": "ZMTRQOZCOFRSCQXYPFSZ",
+  "secret_key": "8IpCoW7XqOvZGLMvtJBXfqklrlCYMvhXrUvbW1Hf"
+}
+----
+
+== *API 请求限制*
+
+调用 API 有配额和数据集长度的限制。
+
+* *配额限制*: 为了保证用户能合理地使用 API ，我们对每位用户的 API 访问配额进行了限制，初始用户： 2000次 / 3600秒，如配额不够，可以用命令调整。
+* *返回数据集长度限制*: 当获取资源列表时，系统返回的最大数据长度是 100 ，即便你传了更大的 limit ， 所以如果你需要获取很多的数据时，请根据返回的 total_sum （根据请求时的过滤参数，得到的数据集总数）分批获取。

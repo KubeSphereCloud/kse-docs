@@ -1,0 +1,69 @@
+---
+title: "View Volume Snapshot Class List"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Volume Snapshot Class, View Volume Snapshot Class List"
+description: "Describes how to view the volume snapshot class list."
+weight: 02
+---
+
+
+:ks_permission: **Volume Snapshot Class View**
+:ks_navigation: **Storage > Volume Snapshot Classes**
+
+
+This section describes how to view the volume snapshot class list.
+
+
+== Prerequisites
+
+* The KubeSphere platform requires the **KubeSphere Storage** extension to be installed and enabled.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+====
+* The volume snapshot class list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name, alias, and description of the volume snapshot class.
+
+|Volume Snapshots
+|The number of volume snapshots created using the volume snapshot class.
+
+|Provisioner
+|The storage plugin used by the volume snapshot class.
+
+|Deletion Policy
+|
+include::../../../../_custom/clusterManagement/volumeSnapshotContents/volumeSnapshotContents-para-deletionPolicy.adoc[]
+
+|Creation Time
+|The creation time of the volume snapshot class.
+|===
+
+--
+
+* Click the search box above the list and set search criteria to search for volume snapshot classes by name.
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

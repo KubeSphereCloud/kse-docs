@@ -1,0 +1,26 @@
+---
+title: "边缘计算"
+weight: 10
+---
+
+KubeSphere 通过 KubeEdge 扩展组件将容器化应用程序编排功能扩展到边缘的主机。
+
+== 功能特性
+
+* 支持 KubeEdge 云端组件的安装部署。
+* 支持 KubeEdge 边缘节点的添加。
+* 支持边缘节点的日志和监控数据采集。
+* 支持边缘节点网络配置自动化的加入和退出。
+* 边缘节点在加入集群时，支持自动添加污点。
+* 支持通过添加 nodeAffinity 禁止云端工作负载（如 DaemonSet）调度到边缘节点。
+* 支持调度工作负载至边缘节点。
+
+== 主要组件
+
+KubeEdge。
+
+== 架构设计
+
+KubeEdge 的组件在两个单独的位置运行——云上和边缘节点上。在云上运行的组件统称为 CloudCore，包括 Controller 和 Cloud Hub。Cloud Hub 作为接收边缘节点发送请求的网关，Controller 则作为编排器。在边缘节点上运行的组件统称为 EdgeCore，包括 EdgeHub，EdgeMesh，MetadataManager 和 DeviceTwin。
+
+image::/images/ep_offline/qke_twp/05_kubeedge.png[]

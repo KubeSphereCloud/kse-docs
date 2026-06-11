@@ -1,0 +1,37 @@
+---
+title: 服务管理 
+weight: 2
+---
+
+== 功能描述
+
+Portal 管理平台提供对集群环境内各项服务状态的监控管理功能。
+
+== 操作步骤
+
+. 登录 link:../../login[Portal 管理界面]。
+
+. 选择左侧导航栏**运维管理** > **服务管理**，进入服务管理页面，当前页面默认显示集群内所有节点上的全部服务。
++
+image::/images/neonsan/portal_service_manage_1.png[]
+
+. 点击筛选的下拉框，可针对指定节点对相关服务进行筛选。
++
+image::/images/neonsan/portal_service_manage_2.png[]
+
+. 在**搜索框**中输入关键词，可对服务进行更精确的筛选，如只在服务列表中显示与 {product_name} 相关的服务。 
++
+
+include::../../../../../_components/note.adoc[]
+筛选与 {product_name} 相关的服务，需在搜索框中输入 “neon” 字符后，回车确认即可。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/neonsan/portal_service_manage_3.png[]
+
+
+. 点击各项服务名称前的``+``，可展开查看各节点上该服务最近三个月的的运行状态。其中，绿色标识符表示运行状态正常，红色表示状态异常。
++
+image::/images/neonsan/portal_service_manage_4.png[]
+
+

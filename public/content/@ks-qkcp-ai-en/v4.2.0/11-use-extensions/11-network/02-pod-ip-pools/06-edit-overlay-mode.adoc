@@ -1,0 +1,72 @@
+---
+title: "Edit Overlay Mode"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Network, Pod IP Pool, Edit Overlay Mode"
+description: "Describes how to edit the Overlay mode."
+weight: 06
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Pod IP Pool**
+
+
+This section describes how to edit the Overlay mode.
+
+The Overlay mode enables cross-host communication between containers without modifying the physical network of the host machines.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+* The **KubeSphere Network** extension must be installed and enabled on the KubeSphere platform.
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the pod IP pool you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Edit Overlay Mode** from the drop-down list.
+
+. In the **Edit Overlay Mode** dialog box, select IPIP mode or VXLAN mode, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Mode |Description
+
+|IPIP Mode
+|Creates an IP in IP tunnel on each node to enable communication between containers. The options are as follows:
+
+** **Always**: Always perform IPIP encapsulation (default).
+
+** **CrossSubnet**: Perform IPIP encapsulation only when crossing subnets.
+
+** **Never**: Never perform IPIP encapsulation.
+
+|VXLAN Mode
+|Creates a VXLAN tunnel on each node to enable communication between containers. The options are as follows:
+
+** **Always**: Always perform VXLAN encapsulation.
+
+** **CrossSubnet**: Perform VXLAN encapsulation only when crossing subnets.
+
+** **Never**: Never perform VXLAN encapsulation.
+|===
+--
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+If both are set to Never, BGP mode is used.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]

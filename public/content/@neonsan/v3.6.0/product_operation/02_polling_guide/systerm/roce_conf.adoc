@@ -1,0 +1,20 @@
+---
+title: "检查流控配置"
+weight: 9
+---
+
+该操作仅针对已配置了 RoCE 流控的集群。
+
+. 下载流控配置检查脚本 link:https://cwiki.yunify.com/pages/viewpage.action?pageId=132621125&preview=/132621125/137057778/rdma_tool[rdma_tool]。 
+
+. 将上述脚本上传至 NeonSAN 集群任一 Store 节点的 ``/usr/local/bin`` 目录下。 
+
+. 登录集群中上传有脚本的 Store 节点。 
+
+. 执行如下命令，检查节点的流控配置是否符合 NeonSAN 存储的配置要求。返回结果中，提示 ``ALL RDMA QoS checks passed!`` 即可。
++
+[,shell]
+----
+rdma_tool -c
+----
+

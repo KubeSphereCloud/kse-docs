@@ -1,0 +1,97 @@
+---
+title: "更新 Webservice 配置"
+weight: 1
+---
+
+
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是原环境的 FirstBox 节点 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+ssh root@<firstbox ip address>
+----
+
+. 执行如下命令行，查看当前环境中 Webservice 节点的 Hostname。
++
+[source,shell]
+----
+cat /etc/hosts | grep web
+----
+
+. 执行如下命令行，查看当前环境中 Zoocassa 节点的 Hostname。
++
+[source,shell]
+----
+cat /etc/hosts | grep zoocassa
+----
+
+
+. 执行如下命令行，修改配置文件 `server.yaml`。命令行中的 `<global_zone_id>` 为 Global Zone 的 ID，需根据实际情况进行填写。
++
+[source,shell]
+----
+vi /pitrix/conf/variables/global/server.yaml.<global_zone_id>
+----
++
+修改 `allow_zone_access_in_region` 为 `1`。
++
+[source,shell]
+----
+    ws_server:
+
+      allow_zone_access_in_region: 1
+----
+
+. 执行如下命令行，将配置打包并下发至相关节点。
++
+[source,shell]
+----
+fb build_pkgs -p pitrix-global-conf
+fb update all pitrix-glocal-conf
+----
+
+. 执行如下命令行，登录当前环境中 Global Zone 的任意一台 Webservice 节点。
++
+命令行中的 `<hostname>` 为 Global Zone 的任意一台 Webservice 节点的 Hostname，需根据前文步骤查询结果进行填写。
++
+[source,shell]
+----
+ssh <hostname>
+----
+
+
+. 执行如下命令行，同步用户信息。
++
+命令行中的 `<zoocassa_hostname_1>`、`<zoocassa_hostname_2>`、`<zoocassa_hostname_3>` 均为 Global Zone 中的 Zoocassa 节点的 Hostname，需根据前文步骤查询结果依次进行填写。
++
+[source,shell]
+----
+/pitrix/lib/pitrix-scripts/cache/operate_cache_by_re -S "<zoocassa_hostname_1>:11211;<zoocassa_hostname_2>:11211;<zoocassa_hostname_3>:11211" -A delete -P "Pitrix.Zone.Zone.UserZone.yunify" -F
+----
+
+. 执行如下命令行，将新 Zone 开放给所有用户。
++
+命令行中的 `<region_id>` 为当前环境的 Region ID，需根据实际情况进行填写。
++
+[source,shell]
+----
+/pitrix/lib/pitrix-scripts/region/merge_zone/grant_region_to_user --region <region_id> --dry 0
+----
++
+include::../../../../../../_components/note.adoc[]
+
+如需开放给指定用户，可使用命令行：
+
+`/pitrix/lib/pitrix-scripts/region/merge_zone/grant_region_to_user --region cd1 --users <usr-Gjl0Xlsu> --dry 0`
+
+其中 `<usr-Gjl0Xlsu>` 为指定用户，需根据实际情况进行填写。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 返回至 FirstBox 节点，执行如下命令行，重启相关服务。
++
+[source,shell]
+----
+fb exec_nodes webservice "supervisorctl restart ws_server billing_resource"
+----

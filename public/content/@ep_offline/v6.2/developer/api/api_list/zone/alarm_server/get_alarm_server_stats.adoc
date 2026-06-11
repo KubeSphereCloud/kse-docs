@@ -1,0 +1,71 @@
+---
+title: 获取alarm（GetAlarmServerStats）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| public
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| stats
+| String
+| false
+| 告警服务状态
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetAlarmServerStats"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetAlarmServerStatsResponse",
+  "ret_code": 0,
+  "stats": {
+    "webservice1": {
+      "alarm_manager": {
+        "is_ready": true,
+        "local_alarm_count": 1,
+        "locks": 1
+      },
+      "dispatcher": {
+        "last_check_time": "2023-05-26 11:15:24",
+        "policy_count": 0
+      },
+      "is_master": true,
+      "scheduler": {
+        "count": 1,
+        "length": 1,
+        "stopped": false
+      }
+    }
+  }
+}
+----

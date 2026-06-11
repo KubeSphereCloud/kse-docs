@@ -1,0 +1,38 @@
+---
+title: "Edit Project Annotations"
+keywords: "Kubernetes, {ks_product}, Federated Project, Project Settings, Basic Information, Add Project Cluster"
+description: "Describes how to edit project annotations."
+weight: 03
+---
+
+:ks_permission: **Federated Project Management**
+:ks_navigation: **Project Settings > Basic Information**
+
+This section describes how to edit project annotations.
+
+== Prerequisites
+
+* The **Federated Cluster Application Management** extension must be installed and enabled on the KubeSphere platform.
+
+* {empty}
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-prer-requiredPermission_v4.adoc[]
+
+== Steps
+
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage_v4.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Basic Information** page, click **Manage**, then select **Edit Annotations** from the dropdown list.
+
+. In the dialog box that appears, set the key-value pairs for the annotations, then click **OK**. After the annotations are added, they will be displayed on the project's Basic Information page.
++
+--
+* Click **Add** to add one or more annotations for the current project.
+
+* Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] to delete the annotation currently pending addition.
+--

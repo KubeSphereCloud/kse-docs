@@ -1,0 +1,52 @@
+---
+title: "Review Application Versions"
+keywords: "Kubernetes, {ks_product}, App Store, Application Review, Review Application Version"
+description: "Describes how to review application versions submitted to the App Store."
+weight: 01
+---
+
+:ks_navigation: **Application Review**
+:ks_permission: **App Store Management**
+
+This section describes how to review application versions submitted to the App Store.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+* A workspace member has submitted an application version and the version has not yet been reviewed.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **New Submissions** tab, click the name of the application version you want to review.
+
+. In the **Application Details** area, review the application information, then click **Reject** or **Approve** as needed.
++
+--
+// Note
+include::../../../../../../_ks_components/admonitions/note.adoc[]
+
+* If you click **Reject**, you need to further enter the reason for rejecting the application release in the **Rejection Reason** dialog box, then click **OK**.
+
+* After an application version is approved, it still needs to be listed by the App Store administrator before it can be published to the App Store.
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,178 @@
+---
+title: "强制 Recovery"
+weight: 2
+---
+
+== 适用场景
+
+NeonSAN 恢复降级卷时，若 Error 副本所在磁盘状态异常，不为 OK，此时系统会根据该 Error 副本所在的 Shard 分布情况，选择没有该 Shard 分布的节点上的磁盘，作为恢复该 Error 副本的磁盘。
+
+若此时集群没有满足条件的磁盘，则 Recovery 失败。此时，若需选择该 Error 副本同节点的其他磁盘用作数据恢复，则可执行如下步骤
+
+== 操作步骤
+
+. 查看集群状态。
++
+[,shell]
+----
+neonsan list_volume -detail                                  
+                                                                      
+neonsan list_ssd                                               
+                                                                         
+neonsan list_store                                              
+                                                                         
+neonsan list_rg -detail
+----
++
+include::../../../../../../_components/note.adoc[]
+* 若集群中存在状态异常的卷，磁盘，节点，需调查原因并解决后再执行后续操作。
+* 若异常的磁盘与卷为已知待处理的卷与磁盘，直接执行后续步骤。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 查看集群中的异步任务列表。
++
+[,shell]
+----
+neonsan list_job
+----
++
+include::../../../../../../_components/note.adoc[]
+若有状态为 processing 的异步任务，需等待该任务执行完成后，再执行后续步骤
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录数据库节点，手动备份数据。
+.. 查看定时备份配置。
++
+[,shell]
+----
+crontab -e
+----
+
+.. 根据定时备份的配置，手动执行备份命令。
++
+IP 地址需根据实际情况进行修改。
++
+[,shell]
+----
+sh /opt/neonsan/backup-db.sh 192.168.101.25
+----
+. 登录数据库节点，查看数据库集群状态。
++
+若返回结果中存在服务异常的节点，需调查原因并解决后，再次执行该步骤。
++
+--
+* QinStor MySQL 数据库
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
+* Galera 数据库
++
+[,shell]
+----
+/opt/galera/bin/galera_cluster status
+----
+* Xenondb 数据库
++
+[,shell]
+----
+/opt/xenondb/bin/xenoncli cluster status
+----
+--
+
+. 登录数据库，关闭自动提交。
+.. 登录数据库。
++
+--
+* QinStor MySQL 数据库
++
+可参考本文：“Qingstor 融合部署运维 > 登录数据库”相关章节内容。
+* Galera 数据库
++
+[,shell]
+----
+mysql -uneonsan -pzhu88jie neonsan
+----
+* Xenondb 数据库
++
+Xenondb 数据库登录时，命令行中的 IP 为 Xenondb 数据库的虚 IP。
++
+[,shell]
+----
+mysql -uneonsan -pzhu88jie -h192.168.101.251 neonsan
+----
+
+--
+.. 关闭自动提交。
++
+[,sql]
+----
+mysql> set autocommit=0;
+----
+
+. 根据步骤 1 中查询到的降级卷以及异常磁盘的 UUID，在数据库中查找需要修复的 Error 副本。
++
+[,sql]
+----
+mysql> select * from replica_ext where vfname='vol/iscsi_test3' and status='ERROR' and ssd_uuid ='xxxxxxx';
+----
++
+include::../../../../../../_components/note.adoc[]
+* 根据降级卷的 full_name，以及状态异常的磁盘 UUID 查询待修复的副本。
+
+* 记录该副本的 Volume ID 与对应的磁盘 UUID。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 更新待修复的 Error 副本所在的磁盘。
++
+[,sql]
+----
+mysql> update replica set ssd_uuid='bbbbb' where volume_id=1111111 and status='ERROR' and ssd_uuid='xxxxxxx';
+----
++
+include::../../../../../../_components/note.adoc[]
+* 根据上一步查询的 Volume ID 与磁盘 UUID，将指定副本所在磁盘更新为同节点的其他状态为 OK 的磁盘。
+* ``ssd_uuid='bbbbb'`` 为该副本所在磁盘的同节点上的其他状态为 OK 的磁盘 UUID。即，用作恢复该副本的磁盘 UUID。
+* ``ssd_uuid='xxxxxxx'`` 为该副本所在磁盘的 UUID。为上一步中输入的磁盘 UUID。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 确认上一步的修改结果。
++
+确认当前副本所对应的磁盘 UUID 已经更新为上一步骤中设置的磁盘 UUID。
++
+[,sql]
+----
+mysql> select * from replica_ext where vfname='vol/iscsi_test3' and status='ERROR';
+----
+. 确认以上步骤无误后，提交修改。
++
+[,sql]
+----
+mysql> commit;
+----
+. 根据以上步骤，逐个修改异常卷的 Error 副本所在的磁盘 UUID。即将异常卷的 Error 副本所在的磁盘 UUID 修改为同节点其他状态为 OK 的磁盘 UUID。
+
+. 待所有修改均完成后，执行如下命令开启数据库自动提交。
++
+[,sql]
+----
+mysql> set autocommit=1;
+----
+. 执行如下命令确认是否开启自动提交。
++
+[,sql]
+----
+mysql> show variables like 'autoco%';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| autocommit | ON |
++---------------+-------+
+1 row in set (0.01 sec)
+----
+
+. 退出数据库，并对link../degraded_recovery[降级的卷进行恢复]。
+
+
+

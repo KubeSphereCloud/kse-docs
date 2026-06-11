@@ -1,0 +1,90 @@
+---
+title: "View Service Topology"
+keywords: "Kubernetes, {ks_product}, BPFConductor, Service Topology, Observability"
+description: "Describes how to view service topology."
+weight: 01
+---
+
+:ks_navigation: **Network > Service Topology**
+
+This section describes how to view the service topology diagram and the HTTP traffic list of services.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role on the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Network Observability** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
+. In the dropdown lists at the top of the page, select the cluster and project to view the service topology diagram and HTTP traffic data for services within that specific cluster and project.
++
+--
+// include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+* Click image:/images/ks-qkcp/zh/icons/refresh-light.svg[refresh,18,18] in the upper right corner to refresh the page information.
+
+// include::../../../../../../_ks_components/oper-selectTimeRange.adoc[]
+* Click image:/images/ks-qkcp/zh/icons/clock-2.svg[clock-2,18,18] in the upper right corner to set the time range for the data. The default is **Last 30 minutes**.
+--
+
+. The **Service Topology Diagram** displays the resource type (pod, cluster node, or IP address), resource name of each topology node, and the dependencies between topology nodes. You can also perform the following operations to get more information.
++
+--
+* Hover over a topology node to view the nodes that interact with it and the direction of the calls.
+
+* Click a topology node to view its resource name and the project it belongs to.
+
+* Hover over a topology connection line to view the topology nodes at both ends of the line, and use image:/images/ks-qkcp/zh/icons/left-right-button.svg[left-right-button,18,18] to understand the call direction.
+
+* Click a topology connection line or the image:/images/ks-qkcp/zh/icons/left-right-button.svg[left-right-button,18,18] on it to view the start point, end point, RPS (Requests Per Second), and total request duration of the service call.
+
+include::../../../../../_custom/WizTelemetry/view-topology-tools.adoc[]
+--
+
+. In the **Service HTTP Traffic** area, view the service traffic data for the selected project within the specified time range.
++
+--
+include::../../../../../../_ks_components/oper-sortAscendingDescending.adoc.adoc[]
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Client
+|The source endpoint initiating the HTTP request, showing its resource type and resource name.
+
+|Server
+|The target endpoint receiving the HTTP request, showing its resource type and resource name.
+
+|Request Path
+|The API path of the HTTP request (e.g., /health).
+
+|​​Requests Per Second
+|The number of HTTP requests per second.
+
+|Error Rate
+|The proportion of failed requests (e.g., 0% means all succeeded).
+
+|P99 Latency
+|The 99th percentile latency of all requests within the specified time range, meaning 99% of requests had a latency less than or equal to this value.
+
+|P95 Latency
+|The 95th percentile latency of all requests within the specified time range, meaning 95% of requests had a latency less than or equal to this value.
+
+|Inbound Throughput
+|The amount of data received per second by the server endpoint.
+
+|Outbound Throughput
+|The amount of data returned per second by the server endpoint.
+|===
+--

@@ -1,0 +1,38 @@
+---
+title: "新建安置组（可选）"
+weight: 20
+---
+
+系统提供一些默认的安置组，用户也可以根据实际情况创建新的安置组。
+
+== 创建安置组
+
+1. 登录 BOSS。
+2. 选择**基础设施** > *计算* > **安置组**，进入安置组页面。
+3. 点击**创建**，弹出创建安置对话框。
++
+image::/images/ep_offline/installation/initialize_plg_create_plg_01.png[,80%]
+4. 配置CPU超卖比、内存超卖比和硬盘超卖比。
++
+
+include::../../../../../_components/attention.adoc[]
+硬盘的超卖比对 NeonSAN 以及其他独立存储不适用。
+
+include::../../../../../_components/table_footer.adoc[]
+
+5. 点击**创建**，完成创建安置组操作。
++
+配置完成后，可能需要刷新界面才能看到修改后的结果。
++
+若配置后列表没有立即更新，请刷新界面，即可看到修改后的结果。
+
+== 添加规则
+
+1. 找到添加的安置组，在右侧选择**规则**页签。
++
+image::/images/ep_offline/installation/initialize_plg_create_plg_02.png[]
+2. 点击**添加规则**，弹出添加规则对话框。
++
+image::/images/ep_offline/installation/initialize_plg_create_plg_03.png[,80%]
+3. 选择该安置组适用的资源类型和账户。
+4. 点击**添加**，添加规则完成。

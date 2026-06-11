@@ -1,0 +1,19 @@
+---
+title: "打补丁"
+weight: 30
+---
+
+集群打补丁的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_19.png[]
+
+功能流程说明：
+
+. 将 patch-audit 注册到 metadata service 中。
+. 更新集群的 patch_id 字段。
+. 通过配置包中指定的 snapshot 创建出硬盘。
+. 将硬盘挂载到节点虚拟机指定的目录上。
+. 执行配置包指定的 patch cmd。
+. 卸载 3 步骤创建的硬盘并销毁。
+. 将步骤 1 中注册的 patch-audit 从 metadata service 中删除。
+. 根据步骤 5 的结果返回成功或失败。

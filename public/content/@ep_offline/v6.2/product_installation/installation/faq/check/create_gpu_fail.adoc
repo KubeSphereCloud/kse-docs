@@ -1,0 +1,48 @@
+---
+title: 在 Console 上创建 GPU 主机失败
+weight: 45
+---
+// 后续 GPU 安装文档有了之后，该 FAQ 放到 GPU 的安装文档中
+
+== 问题现象
+
+在 Console 上创建 GPU 加速型主机提示：“服务错误！消息格式错误, 当前区还不支持 GPU”。
+
+image::/images/ep_offline/installation/faq_create_gpu_fail.png[]
+
+== 解决方法
+
+. 登录本环境的配置中心。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 在**应用**和**配置**搜索框中输入 `global` 和 `server`，点击**搜索**。
++
+image::/images/ep_offline/cadmin/example_global_server.png[]
+. 找到需要修改的 server 配置，点击操作列的**管理配置**，进入 server 配置页面。
++
+include::../../../../../../_components/note.adoc[]
+server 配置目前仅支持文本模式。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在 **resource_limits** 的 Region 和 Zone 下增加 ``gpu_zones`` 的配置（Region 和 Zone 都要加上）。
++
+[source]
+----
+   zbu1a:
+      gpu_zones:
+        - 'zbu1'
+        - 'zbu1a'
+ 
+    zbu1:
+      bm_zones:
+        - 'zbu1a'
+      public_zones:
+        - 'zbu1a'
+      gpu_zones:
+        - 'zbu1'
+        - 'zbu1a'
+----
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。
++
+约一分钟后生效，重新创建 GPU 主机即可。

@@ -1,0 +1,30 @@
+---
+title: "Re-adopt Member Clusters to Another Host Cluster"
+keywords: "Kubernetes, {ks_product}, Multi-cluster Management, Cluster, Re-adopt Member Cluster"
+description: "How to re-adopt a removed member cluster to a new host cluster."
+weight: 11
+---
+
+This section describes how to re-adopt a removed member cluster to another host cluster.
+
+== Unbinding a Cluster in Normal State
+
+If a member cluster is removed while in a normal state, no additional operations are required. The member cluster can be directly adopted by another host cluster. For detailed steps, please refer to link:../01-add-a-member-cluster[Add a Member Cluster].
+
+== Unbinding a Cluster in Abnormal State
+
+If a member cluster is removed while in an abnormal state, execute the following command on the member cluster to clear its adoption information. After that, the cluster can be normally adopted by another host cluster.
+
+[,bash]
+----
+kubectl patch ns kubesphere-system --type merge -p '{"metadata":{"annotations": null}}'
+----
+
+== Cleaning Up Multi-cluster Configuration Data
+
+After a cluster is unbound, the original resources and multi-cluster configuration data within the cluster are not automatically cleared. If the unbound cluster has workspace-related configurations, execute the following command to manually clean up the configuration data in the removed cluster before proceeding with adoption.
+
+[,bash]
+----
+for ns in $(kubectl get ns --field-selector status.phase!=Terminating -o jsonpath='{.items[*].metadata.name}'); do kubectl label ns $ns kubesphere.io/workspace- && kubectl patch ns $ns --type merge -p '{"metadata":{"ownerReferences":[]}}'; done
+----

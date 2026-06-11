@@ -1,0 +1,81 @@
+---
+title: 注册证书（RegisterLicense）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| license_code
+| String
+| true
+| 证书编码
+
+| license_type
+| String
+| true
+| 证书类型
+
+| status
+| String
+| true
+| 状态
+
+| zone
+| String
+| true
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 操作名称
+
+| license_id
+| String
+| false
+| 证书编号
+
+| ret_code
+| Integer
+| false
+| 操作结果
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "license_code": "app-123123",
+  "license_type": "app",
+  "status": "active",
+  "zone": "pek"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "RegisterLicenseResponse",
+  "license_id": "app-xxx",
+  "ret_code": 0
+}
+----

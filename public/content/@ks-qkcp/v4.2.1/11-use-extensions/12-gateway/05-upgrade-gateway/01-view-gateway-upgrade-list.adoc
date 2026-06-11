@@ -1,0 +1,42 @@
+---
+title: "查看网关升级列表"
+weight: 01
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **网关 > 网关升级**
+
+
+本节介绍网关升级列表，其展示了集群中所有网关实例的信息。
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **KubeSphere 网关**扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**网关升级**页签，查看集群中所有网关实例的信息。
++
+--
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-para-gatewayUpgrade.adoc[]
+
+* 在列表上方点击搜索框并设置搜索条件，可按名称搜索网关实例。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+--

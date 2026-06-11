@@ -1,0 +1,87 @@
+---
+title: "Windows挂载卷的扩容"
+weight: 5
+---
+
+Windows 通过 iSCSI 挂载使用 NeonSAN 卷的场景下，暂不支持在线扩容卷。该场景下，扩容卷的详细步骤如下。
+
+. 关闭 Windows 客户端使用 NeonSAN 卷的所有业务。
+. 登录 NeonSAN 服务端，输入如下命令行，记录卷相关内容：
++
+[,shell]
+----
+neonsan list_vol_ini -volume vol/iscsi_test1
+----
++
+image::/images/neonsan/ops_guide_12.png[]
++
+include::../../../../../../_components/note.adoc[]
+* 命令行中 ``-volume`` 指定的参数为查询的卷名，需根据实际情况进行修改。
+* 记录命令行回显的 ``INI LUNID`` 字段，即卷的 ``Lun ID``。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 输入如下命令行，解除卷与客户端的绑定关系：
++
+[,shell]
+----
+neonsan delete_vol_ini -initiatorip x.x.x.x -targetwwn iqn.xxxxxx -vip x.x.x.x -volume vol/iscsi_test1
+----
++
+include::../../../../../../_components/note.adoc[]
+* 命令行中各参数根据实际情况进行填写。
+* 该命令行详细介绍，请参考《NeonSAN CLI 使用手册》
+include::../../../../../../_components/table_footer.adoc[]
+
+. 再次输入如下命令行，查看卷与客户端的绑定关系。
++
+返回结果中，``Volume_initiator Count`` 为 0，则说明卷没有绑定客户端。
++
+[,shell]
+----
+neonsan list_vol_ini -volume vol/iscsi_test1
+
+Volume_initiator Count:0
+----
+
+. 输入如下命令行，对卷进行扩容：
++
+[,shell]
+----
+neonsan resize_volume -volume vol/iscsi_test1 -size 200G
+----
++
+include::../../../../../../_components/note.adoc[]
+* 命令行中 ``-volume``，``-size`` 参数根据实际情况进行填写。
+* 该命令行详细介绍，请参考link:https://box.yunify.com/s/ap4BLEMpbw6MoLL[《NeonSAN CLI 使用手册》]。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 输入如下命令行，确认扩容后的卷大小：
++
+[,shell]
+----
+neonsan list_volume -volume vol/iscsi_test1
+----
++
+include::../../../../../../_components/note.adoc[]
+* 命令行中 ``-volume`` 参数根据实际情况进行填写。
+* 扩容后的卷大小应为步骤 5 中 ``-size`` 参数设置的卷大小。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 再次将卷与客户端进行绑定：
++
+[,shell]
+----
+neonsan add_vol_ini -volume vol/iscsi_test1 -vip x.x.x.x -targetwwn iqn.xxxxxx -initiatorip x.x.x.x 
+----
++
+include::../../../../../../_components/note.adoc[]
+* 命令行中各参数根据实际情况进行填写。
+* 该命令行详细介绍，请参考《NeonSAN CLI 使用手册》。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 客户端再次扫描，加载 NeonSAN 卷，并确认扩容卷的大小。
++
+详细步骤可参考link:https://box.yunify.com/s/APjoEtymsEHyBc9[《iSCSI 配置使用指南》]。
+
+. 逐一启动相关业务。
+

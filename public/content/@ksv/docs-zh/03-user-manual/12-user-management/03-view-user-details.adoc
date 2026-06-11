@@ -1,0 +1,94 @@
+---
+title: "查看用户详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 用户, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看用户详情。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: cd7b8de375c94ee69fee3b40fa4ef573
+:ks_xref_id: 21e916c49cb24763956c259998a18cf5
+:ks_comp: ../../../components/
+:ks_title: 查看用户详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看用户详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 用户, 详情, 查看
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看用户详情。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=73a35ad5e4d6445e8b35ae93d1ddee43]
+
+include::../../../_custom/users/user-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=03b658bb81ab48a4a229a5436cfa1259]
+
+include::../../../_custom/users/user-steps.adoc[]
+
+. 在**本地用户**页面，点击目标用户名称，进入用户详情页面。
+
+. 在用户详情页面的左侧区域，查看用户的基本信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|邮箱
+|用户的邮箱地址。
+
+邮箱地址可用于登录{ks_product_both}Web 控制台。
+
+|创建者
+|用户的创建者。目前只有 **admin** 用户可以创建用户。
+
+|创建时间
+|创建用户的时间。
+|===
+--
+
+. 在页面右侧的**归属项目**页签，查看用户所属的项目信息。一个用户可以同时加入到一个或多个项目。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|项目名称
+|用户所属的项目名称。
+
+|角色
+|用户在项目中的角色。
+|===
+--
+
+. 在页面右侧的**登录历史**页签，查看用户登录到{ks_product_both}Web 控制台的历史记录。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|时间
+|用户登录到{ks_product_both}Web 控制台的时间。
+
+|状态
+|用户登录的状态。
+
+|源 IP 地址
+|用户的访问 IP 地址。
+
+|描述
+|用户登录的描述信息。
+|===
+--

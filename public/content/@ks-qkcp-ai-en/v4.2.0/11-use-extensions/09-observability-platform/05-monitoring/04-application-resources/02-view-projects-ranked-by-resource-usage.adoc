@@ -1,0 +1,41 @@
+---
+title: "View Project Resource Usage Rankings"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Application Resources, Usage Rankings"
+description: "Describes how to view project resource usage rankings."
+weight: 02
+---
+
+:ks_permission: **Monitoring View**
+:ks_navigation: **Monitoring & Alerting > Application Monitoring**
+
+This section describes how to view the rankings of projects by resource usage.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **WizTelemetry Monitoring** extension must be installed and enabled on the KubeSphere platform.
+
+== View Usage Rankings
+
+include::../../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Application Monitoring** page, click the **Usage Rankings** tab to view the resource usage of various projects.
++
+--
+* Click the dropdown list in the upper-left corner of the list to choose to sort projects by **CPU Usage**, **Memory Usage**, **Pod Count**, **Outbound Traffic**, or **Inbound Traffic**.
+
+include::../../../../../_custom/clusterManagement/clusterStatus/clusterStatus-oper-sortAscendingDescending.adoc[]
+
+include::../../../../../_custom/clusterManagement/clusterStatus/clusterStatus-oper-exportJsonData.adoc[]
+--

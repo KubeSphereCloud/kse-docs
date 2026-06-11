@@ -1,0 +1,66 @@
+// :ks_include_id: 53806508deb8493a8bded94825780b98
+. On the workload details page, view the resource attributes of the workload in the **Attributes** area.
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Project
+|The project to which the workload belongs.
+
+|Application
+|The name of the application to which the workload belongs. You can create an application that contains multiple services, each corresponding to a workload.
+
+|Creation Time
+|The creation time of the workload.
+
+|Update Time
+|The update time of the workload.
+
+|Creator
+|The user who created the workload.
+|===
+--
+
+. On the workload details page, view the number of pod replicas, container ports, and pods of the workload on the **Resource Status** tab.
++
+--
+include::para-replicasPortsPods.adoc[]
+--
+
+. On the workload details page, click the **Metadata** tab to view the labels and annotations of the workload.
+
+. On the workload details page, click the **Monitoring** tab to view the real-time resource usage of the workload.
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|CPU Usage
+|The real-time CPU usage of all pods managed by the workload.
+
+|Memory Usage
+|The real-time memory usage of all pods managed by the workload.
+
+|Outbound Traffic
+|The outbound traffic of all pods managed by the workload.
+
+|Inbound Traffic
+|The inbound traffic of all pods managed by the workload.
+|===
+
+* In the first dropdown list on the right side of **Monitoring**, you can select to view resource monitoring information for a specified cluster.
+include::../../../../_ks_components/oper-selectTimeRange.adoc[]
+include::../../../../_ks_components/oper-Autorefresh.adoc[]
+include::../../../../_ks_components/oper-refreshData.adoc[]
+--
+
+. On the workload details page, click the **Events** tab to view events related to the workload.
++
+--
+include::../../clusterManagement/clusterManagement-para-eventsTab.adoc[]
+--

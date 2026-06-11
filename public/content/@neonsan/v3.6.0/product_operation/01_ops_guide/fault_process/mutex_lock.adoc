@@ -1,0 +1,56 @@
+---
+title: "解决网卡 mutex lock 死锁问题"
+weight: 8
+---
+
+== 问题描述
+
+物理主机使用 Mellanox 网卡，开机后出现 mutex lock 死锁问题。可参考以下步骤解决。
+
+== 操作步骤
+
+. 登录配置了流控的节点。
+. 修改 ``/etc/rc.local`` 文件，即将启动 Supervisord 服务的配置内容放置在流控配置之后，如下。
++
+[,shell]
+----
+vi /etc/rc.local
+----
++
+流控配置如下：
++
+[,shell]
+----
+mlnx_qos -i ens2f1 --trust dscp
+mlnx_qos -i ens3f1 --trust dscp
+ 
+echo 106 > /sys/class/infiniband/mlx5_1/tc/1/traffic_class
+echo 106 > /sys/class/infiniband/mlx5_3/tc/1/traffic_class
+ 
+cma_roce_tos -d mlx5_1 -t 106
+cma_roce_tos -d mlx5_3 -t 106
+ 
+sysctl -w net.ipv4.tcp_ecn=1
+ 
+echo 1 > /sys/class/net/ens2f1/ecn/roce_np/enable/3
+echo 1 > /sys/class/net/ens2f1/ecn/roce_rp/enable/3
+echo 1 > /sys/class/net/ens3f1/ecn/roce_np/enable/3
+echo 1 > /sys/class/net/ens3f1/ecn/roce_rp/enable/3
+ 
+echo 48 > /sys/class/net/ens2f1/ecn/roce_np/cnp_dscp
+echo 48 > /sys/class/net/ens3f1/ecn/roce_np/cnp_dscp
+ 
+mlnx_qos -i ens2f1 --trust=dscp --pfc 0,0,0,1,0,0,1,0
+mlnx_qos -i ens3f1 --trust=dscp --pfc 0,0,0,1,0,0,1,0
+ 
+## 最后为启动supervisord 服务的配置内容##
+# supervisord
+if [ ! -S /var/run/supervisor.sock ]; then
+    # safe supervisord
+    /usr/bin/supervisord
+fi
+ 
+exit 0
+----
+
+

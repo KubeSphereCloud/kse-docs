@@ -1,0 +1,66 @@
+---
+title: "Traffic Logs"
+keywords: "Kubernetes, {ks_product}, BPFConductor, HTTP Traffic, Traffic Logs, Observability"
+description: "Describes how to view HTTP traffic logs."
+weight: 01
+---
+
+:ks_navigation: **Network > HTTP Traffic**
+
+This section describes how to view detailed records of HTTP requests within the cluster.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role on the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Network Observability** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
+. On the page, use the dropdown menus at the top to select the cluster and project (the project where the traffic flows into) to view the HTTP traffic logs for the selected project within the specified time range.
++
+--
+* Click image:/images/ks-qkcp/zh/icons/clock-2.svg[clock-2,18,18] in the upper right corner to set the time range for the data. The default is **Last 30 minutes**.
+// include::../../../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+* Click the search box above the list and set search criteria to quickly search for HTTP traffic logs.
+
+include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components/oper-customizeColumns.adoc[]
+
+* {empty}
+include::../../../../../../_ks_components/oper-sortAscendingDescending.adoc.adoc[]
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+​|​Time​​
+|The time when the request was initiated.
+​|​Client​​
+|The source endpoint that initiated the HTTP request, showing its resource type and resource name.
+​|​Request Method​​
+|The HTTP method (e.g., GET, POST).
+|Request Path
+|The API path of the HTTP request (e.g., /health).
+​|​Status Code​
+|The HTTP status code (200 indicates success).
+​|​Latency​​
+|The time elapsed from when the client initiated the HTTP request to when the server's response was fully received, i.e., the **total request duration**.
+|Server
+|The target endpoint that received the HTTP request, showing its resource type and resource name.
+|===
+
+* Click a log entry to open the right panel and view the log details. Click image:/images/ks-qkcp/zh/icons/code.png[code,18,18] to view the log information in JSON format, which can be copied with one click.
+--

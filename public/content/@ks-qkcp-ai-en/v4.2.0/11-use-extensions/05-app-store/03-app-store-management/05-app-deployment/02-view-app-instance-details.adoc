@@ -1,0 +1,84 @@
+---
+title: "View Application Details"
+description: "Describes how to view application details."
+weight: 02
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **Deployment Management**
+
+This section describes how to view the details of a deployed application.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Deployment Management** page, click the name of an application to open its details page.
+
+. In the **Attributes** area of the application details page, view the resource attributes of the application.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the application belongs.
+
+|Project
+|The project to which the application belongs.
+
+include::../../../../../_custom/projectManagement/apps/apps-para-status_v4.adoc[]
+
+|Application
+|The application template used by the application.
+
+include::../../../../../_custom/projectManagement/apps/apps-para-details2.adoc[]
+|===
+--
+
++
+
+include::../../../../../_custom/projectManagement/apps/apps-oper-viewResourceStatus_v42.adoc[]
+
++
+
+. On the application details page, click **Application Template** to view the application template information.
++
+--
+* Click **Application Description** to view the introduction information of the application.
+
+* Click **Chart Files** to view the files in the Helm Chart package. Click the drop-down list on the right side of **Chart Files** to select the file you want to view.
+// Click image:/images/ks-qkcp/zh/icons/download-dark-white.svg[download,18,18] to download the file to your local machine.
+--
+
+. On the application details page, click **Application Settings** to view the application's configuration information.
++
+--
+// Note
+include::../../../../../../_ks_components/admonitions/note.adoc[]
+
+The default settings of the application are saved in the **values.yaml** file within the Helm Chart package. The **Application Settings** page displays the settings customized by the user when installing the application.
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

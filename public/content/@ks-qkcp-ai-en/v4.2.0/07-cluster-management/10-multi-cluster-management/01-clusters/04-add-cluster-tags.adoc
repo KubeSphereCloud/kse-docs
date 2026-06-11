@@ -1,0 +1,42 @@
+---
+title: "Add Cluster Labels"
+keywords: "Kubernetes, {ks_product}, Multi-cluster Management, Cluster, Add Cluster Labels"
+description: "Instructions on how to add cluster labels."
+weight: 04
+---
+
+:ks_permission: **Cluster Management**
+
+This section describes how to add cluster labels.
+
+You can use labels to categorize and manage clusters.
+
+== Prerequisites
+
+* You need to have pass:a,q[{ks_permission}] permissions on the KubeSphere platform.
+
+* You need to create cluster labels in advance. For more information, refer to link:../../02-cluster-tags/01-create-a-cluster-tag/[Create a Cluster Label].
+
+== Add Labels to a Single Cluster
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
+. Click **Cluster Management**.
+
++
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-oper-addClusterTags.adoc[]
+
+== Add Labels to Multiple Clusters
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
+. Click **Cluster Management**.
+
+. Select the checkboxes to the left of the clusters you want to add labels to, then click **Add Labels** above the list.
+
+. In the **Add Labels** dialog box, select the key and value for the label, click **Add**, and then click **OK**.
+// +
+// --
+// After the labels are added, you can click the search box above the cluster list to search for clusters by label.
+// --

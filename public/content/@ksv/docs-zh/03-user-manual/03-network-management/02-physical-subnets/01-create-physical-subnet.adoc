@@ -1,0 +1,67 @@
+---
+title: "创建物理子网"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 物理子网, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建物理子网。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 39d145bf122b46e1b8d96587a1869e98
+:ks_xref_id: cea707fe3f2245ebb017ac3bb450754f
+:ks_comp: ../../../../components/
+:ks_title: 创建物理子网
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建物理子网。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 物理子网, 创建
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建物理子网。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=8af32b1eabb54d208e21b1d37e763987]
+
+* 请确保您有使用{ks_product_both}Web 控制台**物理资源**模块的权限。物理资源模块仅对系统 **admin** 用户可见。
+
+* 请确认系统中有已创建好的物理网络。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=868904ea95cc479aac2af649c1bd4745]
+
+include::../../../../_custom/networks/physical-subnet-steps.adoc[]
+
+. 在物理子网列表页面，点击右上角的**创建**。
+
+. 在弹出的对话框中，配置物理子网的基本信息，然后点击**下一步**。
++
+--
+[cols='1a,3a']
+|===
+|参数 |描述
+
+|名称
+|物理子网的名称。
+
+include::../../../../_custom/networks/physical-network-naming-convention.adoc[]
+
+|描述
+|用户自定义的描述信息。
+
+include::../../../../_custom/networks/description-convention.adoc[]
+|===
+--
+
+. 在**网络信息**页签，配置物理子网的网络信息。具体参数描述如下表所示。
++
+--
+include::../../../../_custom/networks/physical-subnet-parameters.adoc[]
+--
+
+. 点击**确定**。物理子网创建后将显示在物理子网列表中。

@@ -1,0 +1,211 @@
+---
+title: "安全加固工具使用"
+weight: 11
+---
+
+
+NeonSAN 集群在做安全扫描时，可能会出现部分安全漏洞。未解决此类问题，可使用 NeonSAN 加固工具对集群进行检测、加固和修复。
+
+== 适用范围
+
+* 使用 Qingstor Installer 自动化部署的 NeonSAN 集群。
+
+* 要求 NeonSAN v3.0.3 及以上版本，Qingstor Installer v2.0.3 及以上版本。
+
+* 必须在集群的 FirstBox 上使用加固工具。
+
+== 操作步骤
+
+. 从以下 FTP 路径，获取 NeonSAN 加固工具包。
++
+[,shell]
+----
+ftp://ins.qingcloud.com/neonsan/security
+----
++
+include::../../../../../_components/note.adoc[]
+工具内包含 pitrix-security-neonsan.aarch.tar.gz 和 pitrix-security-neonsan.x86.tar.gz 两个压缩包，主要包含环境检查、环境加固以及 iptables 安全规则维护三个功能。
+include::../../../../../_components/table_footer.adoc[]
+. 将 NeonSAN 加固工具压缩包全部上传至 FirstBox 上，并解压至/root 目录下。
+. 使用 **sec-check.py** 工具，进行环境检查。
++
+--
+* **sec-check.py 使用说明**：
++
+[,shell]
+----
+python sec-check.py -r <ROLE_NAME> | -n <NODE_IP> [-h] [--show]
+----
+** **必须指定 ``-r`` 或 ``-n`` 其中一个参数，且不能同时指定。** 
+** ``-h`` 用于查看帮助信息。
+** ``-r`` 用于指定角色名，如 neonsan-store、neonsan-monitor 或 neonsan-center 等，可执行 ``installer role-list`` 查看所有角色名称。不可与 ``-n`` 同时使用。
+** ``-n`` 用于指定节点管理 IP，不可与 ``-r`` 同时使用。
+** ``-i`` 可选参数，用于手动指定 IP 段白名单，用于设置某些组件的访问限制。若不指定该参数，工具将会自动从 installer node_list 中获取 mgmt_network_address 自动生成 16 位网段。其中，白名单要就每行一个 IP 网段。
+** ``--show`` 可选参数，用于显示检查节点的组件加固配置的详细信息。
+
+* **sec-check.py 使用示例**：
+
+** 查看所有节点上指定角色的加固状态，如 zero-web 角色。
++
+[,shell]
+----
+python sec-check.py -r zero-web
+
+{
+    "172.16.90.3": {
+        "nginx": "nginx/1.16.1",  # 未加固：版本号暴露，并且版本较低，存在公开漏洞
+        "python": "Werkzeug/1.0.1 Python/2.7.18"
+    },
+    "172.16.90.4": {
+        "nginx": "nginx/1.16.1",
+        "python": "Werkzeug/1.0.1 Python/2.7.18"
+    },
+    "172.16.90.5": {
+        "nginx": "nginx/1.16.1",
+        "python": "Werkzeug/1.0.1 Python/2.7.18"
+    }
+}
+----
+
+** 查看指定节点上所有角色的加固状态.
++
+[,shell]
+----
+python sec-check.py -n 172.16.90.3
+
+{
+    "172.16.90.3": {
+        "iptable_etcd": "off",  # on: 表示已添加规则, off: 表示未添加规则
+        "iptable_iscsi_target": "off",
+        "iptable_keepalived": "off",
+        "iptable_mysqld_exporter_neonsan": "off",
+        "iptable_mysqld_exporter_qingstor": "off",
+        "iptable_neonsan_galera_cluster": "off",
+        "iptable_nginx": "off",
+        "iptable_node_exporter": "off",
+        "iptable_promethues": "off",
+        "iptable_qingstor_galera_cluster": "off",
+        "iptable_redis_exporter": "off",
+        "iptable_vire_redis": "off",
+        "iptable_zookeeper": "off"
+    }
+}
+----
+
+** 若集群内节点均设置了所有加固措施，则示例如下。
++
+[,shell]
+----
+python sec-check.py -r neonsan-store
+[info] everything is ok.
+----
+--
+
+. 环境加固，使用 **sec-fix.py** 工具。
++
+--
+* **sec-check.py 使用说明**：
++
+[,shell]
+----
+python sec-fix.py -r <ROLE_NAME> | -n <NODE_IP> [-h]
+----
+
+** **必须指定 ``-r`` 或 ``-n`` 其中一个参数，且不能同时指定。** 
+** ``-h`` 用于查看帮助信息。
+** ``-r`` 用于指定角色名，如 neonsan-store、neonsan-monitor 或 neonsan-center 等，可执行 ``installer role-list`` 查看所有角色名称。不可与 ``-n`` 同时使用。
+** ``-n`` 用于指定节点管理 IP，不可与 ``-r`` 同时使用。
+** ``-i`` 可选参数，用于手动指定 IP 段白名单，用于设置某些组件的访问限制。若不指定该参数，工具将会自动从 installer node_list 中获取 mgmt_network_address 自动生成 16 位网段。其中，白名单要就每行一个 IP 网段。
+
+* **sec-check.py 使用示例**：
+** 对指定节点进行加固。
++
+[,shell]
+----
+python sec-fix.py -n 172.16.90.3
+
+[info] <172.16.90.3> hide python version success.
+----
+
+** 对指定角色的节点进行加固。
++
+[,shell]
+----
+python sec-fix.py -r neonsan-store
+[info] <172.16.90.4> hide nginx version success.
+----
+
+** 对所有角色节点进行加固。
++
+[,shell]
+----
+python sec-fix.py -r all
+[info] <172.16.90.3> hide nginx version success.
+[info] <172.16.90.4> hide nginx version success.
+[info] <172.16.90.5> hide nginx version success.
+----
+--
+
+. 为节点添加或删除 iptable 规则，用于设定白名单 IP 段内的地址访问特定服务，使用 **sec-rule.py** 工具。支持自定义白名单，默认情况下，工具将会自动从 installer node_list 中获取 mgmt_network_address 自动生成 16 位网段的白名单。
++
+--
+* **sec-rule.py 使用说明**：
++
+[,shell]
+----
+python sec-rule.py -r ROLE | -n NODE [-h][--add] [-i WHITE_LIST_FILE] [--clear]
+----
+** ``-h`` 用于查看帮助信息。
+** ``-r`` 用于指定角色名，如 neonsan-store、neonsan-monitor 或 neonsan-center 等，可执行 ``installer role-list`` 查看所有角色名称。不可与 ``-n`` 同时使用。
+** ``-n`` 用于指定节点管理 IP，不可与 ``-r`` 同时使用。
+** ``--add`` 在节点上添加 iptable 加固规则。
+** ``--clear`` 清除节点上的 iptable 加固规则。
+** ``-i`` 可选参数，用于手动指定 IP 段白名单，用于设置某些组件的访问限制。若不指定该参数，工具将会自动从 installer node_list 中获取 mgmt_network_address 自动生成 16 位网段。其中，白名单要就每行一个 IP 网段。
+
+* **sec-rule.py 使用示例**：
+** 对所有角色添加 iptable 加固规则。
++
+[,shell]
+----
+python sec-rule.py -r all --add
+----
+** 对指定角色添加 iptable 加固规则。
++
+[,shel]
+----
+python sec-rule.py -r neonsan-store --add
+----
+
+** 清除指定角色的加固规则。
++
+[,shell]
+----
+python sec-rule.py -r neonsan-store –clear
+----
+
+** iptable 加固规则的添加与清除，均需要使用 sec-check.py 工具进行检查。
+
+** 使用 -i 参数指定白名单时，如白名单中设定的网段不能包含集群各节点管理网络的 IP，则将会有相应的错误提示。如下：
++
+创建白名单
++
+[,shell]
+----
+vim whitelist
+
+192.168.0.0/24
+192.168.1.0/16
+----
++
+为指定角色添加 iptable 加固规则。
++
+[,shell]
+----
+python sec-rule.py -r neonsan-store --add -i whitelist
+
+[error] mgmt_ip 172.16.90.3 not in whitelist
+192.168.0.0/24,192.168.1.0/16.
+----
+--
+
+

@@ -1,0 +1,51 @@
+---
+title: 修改云硬盘副本数
+weight: 26
+---
+
+本小节主要介绍如何修改**通用型 SSD 云盘**支持的副本数和默认副本数。
+
+== Console 位置
+
+在创建云硬盘时，可以选择硬盘的副本数量：
+
+image::/images/ep_offline/cadmin/example_iaas_volume_00.png[]
+
+== 参数路径
+
+[cols='1,1,2']
+|===
+| 应用 | 配置 | 参数
+
+| webconsole-iaas
+| iaas-volume
+a|
+
+* volume_type：硬盘类型 ID。
+* default_replica_count：默认副本数。
+* replica_counts：支持的副本数。
+|===
+
+== 操作步骤
+
+. link:../../../manual/login[登录配置中心]。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 选择 `webconsole-iaas` 应用，选择 `iaas-volume` 配置。
++
+image::/images/ep_offline/cadmin/example_iaas_volume.png[]
+. 在 iaas-volume 配置所在行，点击右侧的**管理配置**，进入 iaas-volume 配置页面。
++
+
+include::../../../../../../_components/note.adoc[]
+配置页面支持表单模式和文本模式，默认为表单模式（默认值可以自行定义，详细操作请参见link:../../../manual/system[系统设置]），可以通过右侧的按钮临时进行切换。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+**通用型 SSD 云盘**的 volume_type 为 5（更多磁盘类型请参见link:../../../faq/instance_class/#_硬盘类型_volume_type[硬盘类型]），找到如下参数，即可修改支持的副本数和默认副本数。
++
+image::/images/ep_offline/cadmin/example_iaas_volume_01.png[]
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。
++
+大约一分钟后生效，登录 Console 可在创建云硬盘页面看到修改效果。

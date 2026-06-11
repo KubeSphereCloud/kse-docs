@@ -1,0 +1,71 @@
+---
+title: "查看网卡 Ring Buffer 配置"
+weight: 10
+---
+
+. 逐一登录 NeonSAN 集群各节点。 
+
+. 执行如下命令，查看当前节点是否安装 ethtool。 
++
+[,shell]
+----
+ethtool –version 
+----
++ 
+include::../../../../../_components/note.adoc[]
+* 返回结果中有相应的版本信息，即证明已安装。
+* 否则，执行 ``apt-get install ethtool`` 进行安装。
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令，查看当前节点上网卡的 Ring Buffer 最大值。10Gb 网卡 Ring Buffer 最大值须配置为 4096，25Gb 网卡 Ring Buffer 最大值须配置为 8192。
++
+[,shell]
+----
+ethtool –g ens3f0
+----
++
+回显示例：
++
+[,shell]
+----
+Ring parameters for ens3f0: 
+Pre-set maximums:
+RX:		8192
+RX Mini:	0
+RX Jumbo:	0
+TX:		8192
+Current hardware settings:
+RX:		4096
+RX Mini:	0
+RX Jumbo:	0
+TX:		4096
+----
++ 
+include::../../../../../_components/note.adoc[]
+``-g`` 用于指定网卡名，需根据实际情况进行修改。 
+include::../../../../../_components/table_footer.adoc[]
+
+. 若上一步骤中查看到的 Ring Buffer 不满足配置，执行如下命令，进行修改。
++
+* 设置发送方向的 Ring Buffer。 
++
+[,shell]
+----
+ethtool -G ens3f0 rx 8192
+----
+* 设置接收方向的 Ring Buffer。
++
+[,shell]
+----
+ethtool -G ens3f0 tx 8192 
+----
++ 
+include::../../../../../_components/note.adoc[]
+``-G`` 用于指定网卡名，需根据实际情况进行修改。 
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+
+

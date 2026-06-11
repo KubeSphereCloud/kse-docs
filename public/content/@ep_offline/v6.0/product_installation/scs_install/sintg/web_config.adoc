@@ -1,0 +1,51 @@
+---
+title: "修改前端配置"
+weight: 50
+---
+
+安装完成后，需要在 webconsole 的 product_directories 配置中启用安全服务和其下的**安全资源池**服务，才可在 Console 中显示。
+
+1. 登录配置中心。
+2. 在左侧导航栏，选择**应用管理**，进入应用管理页面。
+3. 选择 webconsole 应用，进入 webconsole 配置管理页面。
+4. 在 product_directories 所在行，点击右侧的**管理配置**。
++
+image::/images/ep_offline/scs_install/cfw_web_config.png[]
+5. 进入 product_directories 配置页面。
++
+启用**安全服务**和其下的**安全资源池**服务。
++
+示例如下：
++
+[source,yaml]
+----
+- name: security
+  title: Security Services
+  enable: true # 这里改成true
+  items:
+    - name: security_groups
+      title: Security Groups
+      enable: true
+      zn-cn: 安全组
+    - name: network_access_control
+      title: Network Access Control
+      enable: true
+      zh-cn: 网络访问控制
+    - name: waf
+      title: Web Application Firewall(WAF)
+      enable: true
+      zh-cn: Web 应用防火墙（WAF）
+    - name: cfw
+      title: Cloud Firewall
+      enable: true
+      link: /cfw/
+      zh-cn: 云防火墙 CFW
+    - name: srp
+      title: Security Resource Pool
+      enable: true # 这里改成true
+      zh-cn: 安全资源池
+      link: /srp/
+  zh-cn: 安全服务
+----
+6. 配置完成后，点击**保存**，在弹出的对话框中输入备注信息，点击**提交**。
+7. 在右侧点击**启用**，大约一分钟后生效，即可登录 Console 查看并使用安全资源池服务。

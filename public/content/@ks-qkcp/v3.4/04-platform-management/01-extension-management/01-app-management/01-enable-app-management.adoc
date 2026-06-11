@@ -1,0 +1,71 @@
+---
+title: "启用应用管理"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, 应用管理, 启用应用管理"
+description: "介绍如何启用应用管理扩展组件。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: a95cf789199e4562831e1781c94e7d0a
+:ks_xref_id: 0c4f3d3faad04d9193f553c4e24750d1
+:ks_comp: ../../../../components/
+:ks_title: 启用应用管理
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, 应用管理, 启用应用管理
+:ks_description: 介绍如何启用应用管理扩展组件。
+:ks_weight: 01
+:ks_icon:
+
+
+
+本节介绍如何启用应用管理扩展组件。
+
+
+== 前提条件link:[id=8e39118e7b104a3fa0608938c5ce836a]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=b6f4bec9418d4d6697f89b1971bf2414]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:openpitrix:store:enabled** 参数设置为 **true**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  openpitrix:
+    store:
+      enabled: true
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionEnabled.adoc[]
+
+* 应用管理启用后，{ks_product_right} Web 控制台页面左上角将显示**应用商店**选项，**平台管理**菜单将显示**应用商店管理**选项，企业空间导航栏将显示**应用模板**选项。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

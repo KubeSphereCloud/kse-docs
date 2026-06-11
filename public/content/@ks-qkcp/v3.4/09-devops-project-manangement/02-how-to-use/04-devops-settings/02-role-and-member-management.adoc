@@ -1,0 +1,110 @@
+---
+title: "角色和成员管理"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, DevOps 项目, 使用 DevOps"
+description: "介绍如何管理 DevOps 项目，以及如何在 DevOps 项目中管理流水线和 DevOps 项目设置。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 697bda3433b04bdb8de251506c794d8f
+:ks_xref_id: e4689f0d3fd54a3ca91555fdc68cdd34
+:ks_comp: ../../../../components/
+:ks_title: 角色和成员管理
+:ks_keywords: Kubernetes, {ks_product}, DevOps 项目, 使用 DevOps
+:ks_description: 介绍如何管理 DevOps 项目，以及如何在 DevOps 项目中管理流水线和 DevOps 项目设置。
+:ks_weight: 02
+:ks_icon:
+
+
+本教程演示如何在 DevOps 项目中管理角色和成员。
+
+在 DevOps 项目范围内，您可以向角色授予以下资源的权限：
+
+* 流水线
+* 凭证
+* DevOps 项目设置
+* 访问控制
+
+
+== 准备工作link:[id=8e2ffb98e568404581aa20cf3304753b]
+
+至少已创建一个 DevOps 项目，例如 **demo-devops**。此外，您需要一个在 DevOps 项目级别具有 **admin** 角色的用户（例如 **devops-admin**）。
+
+
+== 内置角色link:[id=4955df3e40ad45c6835b60b4d81000c9]
+
+在 **DevOps 项目角色**中，有三个可用的内置角色，如下所示。创建 DevOps 项目时，{ks_product_right}会自动创建内置角色，并且无法编辑或删除这些角色。
+
+[%header,cols="1a,4a"]
+|===
+|内置角色|描述信息
+
+|viewer
+|DevOps 项目观察者，可以查看 DevOps 项目下所有的资源。
+
+|operator
+|DevOps 项目普通成员，可以在 DevOps 项目下创建流水线凭证等。
+
+|admin
+|DevOps 项目管理员，可以管理 DevOps 项目下所有的资源。
+|===
+
+
+== 创建 DevOps 项目角色link:[id=f44265c8d5ec454bb9d2ee91c6cc6af4]
+
+. 以 **devops-admin** 身份登录控制台，然后前往 **DevOps 项目**页面选择一个 DevOps 项目（例如 **demo-devops**）。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+本教程使用 **devops-admin** 帐户作为示例。只要您使用的帐户被授予的角色包含 DevOps 项目级别**访问控制**中的**成员查看**、**角色管理**和**角色查看**的权限，此帐户便可以创建 DevOps 项目角色。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 转到 **DevOps 项目设置**中的 **DevOps 项目角色**，点击**创建**并设置**名称**。在本示例中，将创建一个名为 **pipeline-creator** 的角色。点击**编辑权限**继续。
+
+. 在**流水线管理**中，选择您希望授予该角色的权限。例如，为此角色选择了**流水线管理**和**流水线查看**。点击**确定**完成操作。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+**依赖于**表示首先需要选择主要权限（**依赖于**之后列出的），以便可以分配关联权限。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 新创建的角色将列在 **DevOps 项目角色**中。您可以点击右侧的 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] 对其进行编辑。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+**pipeline-creator** 角色仅被授予**流水线管理**和**流水线查看**权限，可能无法满足您的实际需求。本示例仅用于演示，您可以根据实际需要创建自定义角色。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+
+== 邀请新成员link:[id=f7d5480598aa42f0ac4ef8be8a8db20f]
+
+. 在 **DevOps 项目设置**中选择 **DevOps 项目成员**，然后点击**邀请**。
+
+. 点击 image:/images/ks-qkcp/zh/icons/add-dark.svg[add,18,18] 邀请帐户加入此 DevOps 项目，并向此帐户授予 **pipeline-creator** 角色。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+必须先邀请用户加入 DevOps 项目所在的企业空间。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 点击**确定**将用户添加到此 DevOps 项目。在 **DevOps 项目成员**中，您可以看到列出了新邀请的成员。
+
+. 您还可以通过编辑现有成员来更改其角色或将其从 DevOps 项目中删除。

@@ -1,0 +1,75 @@
+---
+title: 扩容节点
+weight: 3
+---
+
+== 初始化节点
+
+. 执行如下命令行，登录原环境的 FirstBox 节点。命令行中的 `<firstbox ip>` 是原环境的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，进入脚本所在目录。
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，初始化待扩容节点。
++
+[source,shell]
+----
+./qs_installer init --firstbox --tags=init_sshkey
+./qs_installer init --common -l storage-cluster2
+----
++
+include::../../../../../_components/note.adoc[]
+
+* 命令行中 `storage-cluster2` 需填写新扩容的数据存储池名称，需根据link:../config/#_base_ini[前文]数据存储池配置内容进行替换。
+* 若link:../config/#_base_ini[前文]填写内容中，新扩容的数据存储池为 `cluster3`，则此处需修改为 `storage-cluster3`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 部署新节点
+
+延续前文步骤，执行以下命令行，完成待扩容节点的安装部署。
+
+. 执行如下命令行，清理缓存文件。
++
+[source,shell]
+----
+./qs_installer deploy --rm_cachefile
+----
+
+. 执行如下命令行，待扩容节点上部署存储服务。
++
+[source,shell]
+----
+./qs_installer deploy --all -l storage-cluster2:all_node
+----
++
+include::../../../../../_components/note.adoc[]
+
+* 命令行中 `storage-cluster2` 需填写新扩容的数据存储池名称，需根据link:../config/#_base_ini[前文]数据存储池配置内容进行替换。
+* 若link:../config/#_base_ini[前文]填写内容中，新扩容的数据存储池为 `cluster3`，则此处需修改为 `storage-cluster3`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令行，修改监控配置文件，添加新增数据存储池。
++
+[source,shell]
+----
+./qs_installer deploy --monitor2 --tags prometheus2
+./qs_installer deploy --qingstor_zero_web --tags zero-web
+----
+
+. 执行如下命令行，更新所有节点的 `hosts` 文件。
++
+[source,shell]
+----
+./qs_installer update --hosts
+----

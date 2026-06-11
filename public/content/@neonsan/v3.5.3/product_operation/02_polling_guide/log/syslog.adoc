@@ -1,0 +1,36 @@
+---
+title: "查看系统日志"
+weight: 11
+---
+
+. 逐个登录集群节点。 
+
+. 执行如下命令，查看完整的系统日志文件。
++
+[,shell]
+----
+vi /var/log/syslog 
+----
+. 部分错误日志关键字解释及建议，其他未列出错误可联系 NeonSAN 产研团队进行排查。
++
+[options="header",cols="1,1,3"]
+|===
+|关键字|含义|建议
+|ntp.*?Deleti ng interface 
+|网卡或链路可能 down 
+|建议检查对应网卡的物理链路状态 
+
+|Power-on or device reset occurred scsi 
+|磁盘发生重置 
+|建议检查对应设备在内核日志和 Store 日志中有无 Store I/O 错误日志 
+
+|Controller encountered an error and was reset 
+|RAID 控制器被重置 
+|建议检查对应设备在内核日志和 Store 日志中有无 store I/O 错误日志 
+
+|Found FW in FAULT state 
+|RAID 卡固件故障 
+|建议检查对应设备在内核日志和 Store 日志中有无 Store I/O 错误日志
+|===
+
+

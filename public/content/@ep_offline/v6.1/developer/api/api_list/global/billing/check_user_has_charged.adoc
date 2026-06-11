@@ -1,0 +1,77 @@
+---
+title: 查询用户是否充值过（CheckUserHasCharged）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| charge_type
+| String
+| true
+| 充值类型
+
+| user_id
+| String
+| true
+| 用户ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| charge_type
+| String
+| false
+| 
+
+| first_charged_time
+| String
+| false
+| 
+
+| is_charged
+| Boolean
+| false
+| 
+
+| user_id
+| String
+| false
+| 
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "charge_type": "principal",
+  "user_id": "usr-0te3yics"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CheckUserHasChargedResponse",
+  "charge_type": "principal",
+  "first_charged_time": "2021-11-08 16:05:51",
+  "is_charged": true,
+  "ret_code": 0,
+  "user_id": "usr-0te3yics"
+}
+----

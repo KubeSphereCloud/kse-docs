@@ -1,0 +1,169 @@
+---
+title: 获取邮件任务（DescribeEmailJobs）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| false
+| 控制台
+
+| email_jobs
+| String
+| false
+| 邮件任务id
+
+| limit
+| String
+| false
+| 查询数量
+
+| offset
+| String
+| false
+| 查询偏移量
+
+| owner
+| String
+| false
+| 所属用户id
+
+| search_word
+| String
+| false
+| 模糊查询
+
+| status
+| String
+| false
+| 状态
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| email_job_set
+| Array
+| false
+| 邮件任务集合
+
+| email_job_set[].condition
+| String
+| false
+| 用户查询条件
+
+| email_job_set[].console_id
+| String
+| false
+| 控制台
+
+| email_job_set[].content
+| String
+| false
+| 邮件内容
+
+| email_job_set[].create_time
+| String
+| false
+| 创建时间
+
+| email_job_set[].email_job_id
+| String
+| false
+| 邮件任务id
+
+| email_job_set[].owner
+| String
+| false
+| 所属用户id
+
+| email_job_set[].result
+| String
+| false
+| 结果
+
+| email_job_set[].status
+| String
+| false
+| 状态
+
+| email_job_set[].status_time
+| String
+| false
+| 状态更新时间
+
+| email_job_set[].succ_count
+| Integer
+| false
+| 成功数
+
+| email_job_set[].title
+| String
+| false
+| 邮件标题
+
+| email_job_set[].total_count
+| Integer
+| false
+| 总数
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeEmailJobs",
+  "email_jobs": [],
+  "limit": 1,
+  "offset": 0,
+  "owner": 0,
+  "status": ""
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeEmailJobsResponse",
+  "email_job_set": [
+    {
+      "condition": "{\"status\":\"active\",\"role\":\"user\",\"users\":[\"usr-xxxxxxxx\"],\"console\":\"alphacloud\",\"activated\":1,\"user_type\":0,\"console_id\":\"alphacloud\"}",
+      "console_id": "alphacloud",
+      "content": "email test",
+      "create_time": "2020-04-01T15:49:46Z",
+      "email_job_id": "ejob-xxxxxxxx",
+      "owner": "admin",
+      "result": "",
+      "status": "succeeded",
+      "status_time": "2020-04-01T15:49:47Z",
+      "succ_count": 0,
+      "title": "email-title",
+      "total_count": 1
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 720
+}
+----

@@ -1,0 +1,53 @@
+---
+title: "Edit Mute Duration"
+keywords: "Kubernetes, {ks_product}, Platform Settings, Notification Management, Notification Settings, Mute Policy, Edit Mute Duration"
+description: "This section describes how to edit notification mute duration."
+weight: 04
+---
+
+
+:ks_navigation: **Notification > Notification Settings**
+// :ks_permission: **Platform Settings Management**
+
+This section describes how to edit notification mute duration.
+
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The KubeSphere platform needs to have the **WizTelemetry Notification** extension installed and enabled.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. To the right of the mute policy you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], then select **Edit Mute Duration** from the dropdown list.
+
+. In the **Edit Mute Duration** dialog box, select the mute duration type and set the relevant parameters, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Continuous Mute
+|Notifications that meet the mute conditions are muted at all times.
+
+|Mute within a Specific Time Range
+|Notifications that meet the mute conditions are muted within the specified time range. You need to select the mute start time and end time.
+
+|Periodic Mute
+|Notifications that meet the mute conditions are muted daily, weekly, or monthly within the specified time range. You need to select the mute day, start time, and end time.
+|===
+--

@@ -1,0 +1,48 @@
+---
+title: "查询管理节点信息"
+weight: 6
+---
+
+
+. 登录 NeonSAN 集群任一节点。 
+. 执行如下命令，获取管理节点在线信息。返回结果中，所列节点的 ``STATUS`` 均为 ``OK``，即表示正常。
++
+[,shell]
+----
+neonsan list_center
+----
++
+image::/images/neonsan/polling_guide_29.png[]
++
+回显说明：
++
+* ``MNGT IP``：对应管理节点的 IP 地址。
+* ``ROLE``：对应管理节点的角色，其中只有一个节点为 leader 角色（主节点）。
+* ``ROLE TIME``：对应管理节点的角色变更时间。
+* ``STATUS``：对应管理节点当前的状态。
+
+. 若上一步骤中，返回结果中，ROLE 为 leader 的 Center 节点的状态不为 OK，则可登录相应的 Center 节点，执行如下命令查看 neoncenter 服务状态。 
++
+[,shell]
+----
+supervisorctl status neoncenter 
+----
+. 执行如下命令，重启主 Center 节点的 neoncenter 服务状态，促使集群切换主节点。 
++
+[,shell]
+----
+supervisorctl restart neoncenter 
+----
+. 执行如下命令，查看主 Center 节点是否切换。 
++
+[,shell]
+----
+qfcip
+----
++ 
+若返回结果 IP 地址仍为原状态异常的 Center 节点，可登录至异常 Center 节点，执行如下命令，关闭相应的 Center 服务，或联系 NeonSAN 产研团队。
++
+[,shell]
+----
+supervisorctl stop neoncenter
+----

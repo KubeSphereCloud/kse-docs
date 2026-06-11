@@ -1,0 +1,56 @@
+---
+title: "Create a Microservices Gateway"
+keywords: "Kubernetes, {ks_product}, Project Management, Spring Cloud, Create Microservices Gateway"
+description: "Describes how to create a microservices gateway."
+weight: 01
+---
+
+:ks_permission: ** Spring Cloud Microservices Management**
+:ks_navigation:  **Spring Cloud > Microservices Gateway**
+
+
+This section describes how to create a microservices gateway.
+
+The process of creating a microservices gateway essentially creates a deployment running Spring Cloud Gateway.
+
+
+== Prerequisites
+
+* The **KubeSphere Spring Cloud** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+* You need to prepare a Spring Cloud Gateway container image in advance. For more information, refer to the link:https://spring.io/projects/spring-cloud-gateway#overview[Spring Cloud Gateway] official documentation. This section uses the registry.cn-beijing.aliyuncs.com/kse/spring-cloud-gateway:latest container image as an example. You can also build your own container image as needed.
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. On the **Gateway Settings** tab, set the parameters for the microservices gateway, then click **Next**.
+
+. On the **Advanced Settings** tab, choose whether to enable external access and select the external access mode, then click **Create**.
++
+Refer to link:#_parameter-description[Parameter Description] to set the parameters for the microservices gateway.
+
+== Parameter Description
+
+include::../../../../_custom/projectManagement/microserviceGateway/microserviceGateway-para-microserviceGatewaySettings.adoc[]

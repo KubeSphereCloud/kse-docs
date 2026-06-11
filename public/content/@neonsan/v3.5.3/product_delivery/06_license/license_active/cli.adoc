@@ -1,0 +1,80 @@
+---
+title: "命令行方式"
+weight: 2
+---
+
+== 前提条件
+
+已成功申请 License，且已获得 License 授权证书。
+
+== 应用场景
+
+* NeonSAN 集群进行升级时。
+* Portal 管理平台无法正常登录时。
+
+== 注意事项
+
+* NeonSAN 集群完成 NeonCenter 组件的升级后，即可使用 API 命令行导入并激活 License。
+* NeonCenter 组件的升级完成前未导入 License 时，会影响 NeonSAN 卷的创建、以及 IaaS 侧虚拟机和硬盘的创建，其影响时长由集群规模而定，受影响``总时间 = 升级节点数 x 3 min``。建议此段时间内请勿进行卷、虚拟机以及硬盘的创建。
+
+== 操作步骤
+
+. 查看 License 授权证书邮件，记录 license_code。
+. 登录 NeonSAN 集群中的任意一个节点。
+. 执行如下命令，导入有效的 License 密钥。
++
+* CLI 命令
++
+[source,shell]
+----
+neonsan import_license -code ${license_code}
+----
++
+* API 命令
++
+[source,shell]
+----
+curl -Ls "http://$(qfcip):2600/qfa?op=import_license&code= D25dLByl%2B%2BJ8UtvwA5Lia3UU1Sh4beL19UE3ERV7TQghjLXt3KnXvMlH20uPTixF"
+----
++
+include::../../../../../_components/note.adoc[]
+* ``-code`` 参数用于指定 License 密钥，即步骤 1 中 License 授权证书中记录的 license_code。
+* 使用新的 License 密钥重新激活时，会覆盖集群中原有的 License。
+include::../../../../../_components/table_footer.adoc[]
+
+. License 文件导入成功后，执行如下命令，查看相应的 License 证书，返回结果中 ``STATUS`` 值为 ``active`` 即表示当前 License 已激活。
++
+[source,shell]
+----
+neonsan list_license -H
+----
++
+image::/images/neonsan/license_4.png[]
++
+**回显字段说明**：
++
+[options="header",cols="1,2"]
+|===
+|参数 |详细说明
+|LICENSE ID	
+|License 证书的 ID
+
+|CLUSTER ID	
+|集群 ID
+
+|CAPACITY	
+|License 授权容量
+
+|START TIME	
+|License 有效期的开始时间
+
+|END TIME	
+|License 有效期的截止时间
+
+|STATUS	
+a|License 状态
+
+* active：已激活
+* inactive：未激活
+|===
+

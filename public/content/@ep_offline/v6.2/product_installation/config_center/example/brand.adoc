@@ -1,0 +1,91 @@
+---
+title: 替换品牌
+weight: 90
+---
+
+本小节主要介绍替换环境品牌信息的配置文件及参数。
+
+== Console 品牌信息
+
+=== 参数路径
+
+|===
+| 功能 | 应用 | 配置
+
+| Logo | webconsole-common | logo
+| 主题色 | webconsole-common | theme
+| 品牌词/关键字 | webconsole-common | brand
+|===
+
+=== 替换 Logo
+
+. link:../../manual/login[登录配置中心]。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 在配置管理页面，找到如下配置。
++
+image::/images/ep_offline/cadmin/example_logo.png[]
+. 点击操作列的**管理配置**。
+. 根据需要修改 Logo。
++
+image::/images/ep_offline/cadmin/example_logo_02.png[]
+
+=== 修改主题色
+
+. link:../../manual/login[登录配置中心]。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 在配置管理页面，找到如下配置。
++
+image::/images/ep_offline/cadmin/example_theme.png[]
+. 点击操作列的**管理配置**。
+. 在**表单模式**下，修改 **primary** 参数即可快速完成主题色的修改。
++
+
+include::../../../../../_components/note.adoc[]
+* 在**表单模式**下，通过修改 **primary** 参数，即可完成 Console 所有模块的主题色修改，包括 Console 登录页、Console 相关组件、AppCenter 的主题色。
+* 在**文本模式**下，需要手动修改每一个参数。
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/ep_offline/cadmin/example_theme_02.png[]
+
+=== 替换品牌词/关键字
+
+. link:../../manual/login[登录配置中心]。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 在配置管理页面，找到如下配置。
++
+image::/images/ep_offline/cadmin/example_brand_01.png[]
+. 点击操作列的**管理配置**。
+. 根据需要对品牌相关信息进行修改。
++
+image::/images/ep_offline/cadmin/example_brand_02.png[]
+
+include::../../../../../_components/note.adoc[]
+若 **brand 配置**未覆盖完所有的关键词和语句，仍可通过 custom.poe 配置文件进行修改，详细操作请参见 link:../../attach/custom[custom 配置说明]。
+include::../../../../../_components/table_footer.adoc[]
+
+== BOSS
+
+以下为 BOSS 页面品牌信息对应的参数，用户可以根据下表在配置中心找到对应的应用和配置，然后进入配置详情页面修改对应的参数即可，详细操作步骤此处不再赘述。
+
+|===
+| 功能 | 应用 | 配置
+
+| 主题色 | boss2 | boss_theme
+| Logo/品牌词/关键字 | boss2 | customized
+|===
+
+== 文档中心
+
+以下为文档中心页面品牌信息对应的参数，用户可以根据下表在配置中心找到对应的应用和配置，然后进入配置详情页面修改对应的参数即可，详细操作步骤此处不再赘述。
+
+|===
+| 功能 | 应用 | 配置
+
+| 主题色 | webconsole-common | theme
+| Logo/品牌词/关键字 | docs-center | docs_center_params
+|===
+
+include::../../../../../_components/note.adoc[]
+文档中心的主题色由 Console 的主题色参数（**webconsole-common 应用** > **theme 配置**）进行控制，若已修改 Console 的主题色，文档中心的主题色不用再单独配置。
+include::../../../../../_components/table_footer.adoc[]
+

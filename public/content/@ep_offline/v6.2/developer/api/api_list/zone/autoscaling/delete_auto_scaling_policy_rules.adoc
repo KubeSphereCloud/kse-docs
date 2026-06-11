@@ -1,0 +1,80 @@
+---
+title: 删除自动伸缩策略规则（DeleteAutoScalingPolicyRules）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| autoscaling_policy_rules
+| Array
+| true
+| 自动伸缩策略规则ID
+
+| owner
+| String
+| true
+| 所有者
+
+| zone
+| String
+| true
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 操作名称
+
+| autoscaling_policy_rules
+| Array
+| false
+| true
+
+| ret_code
+| Integer
+| false
+| 操作结果
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeleteAutoScalingPolicyRules",
+  "autoscaling_policy_rules": [
+    "aspr-pjx1epnp"
+  ],
+  "owner": "usr-DnmqVpLq",
+  "zone": "qa"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteAutoScalingPolicyRulesResponse",
+  "autoscaling_policy_rules": [
+    "aspr-pjx1epnp"
+  ],
+  "ret_code": 0
+}
+----

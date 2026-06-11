@@ -1,0 +1,107 @@
+---
+title: "修改 cache 盘的 cache line size"
+weight: 3
+---
+
+. 参考前文内容，link:../../../fault_process/data_mig/node_data_mig/new/[迁移节点数据]。
+
+. 停掉该磁盘所在存储节点上的 store 服务。
++
+[,shell]
+----
+supervisorctl stop neonstore
+----
+
+. 重做 iCAS，修改 cache line size。
+.. 确认 cache id。
++
+[,shell]
+----
+casadm -L
+----
+.. 确认当前 cache line size。
++
+[,shell]
+----
+casadm -P -i 1
+----
++
+include::../../../../../../_components/note.adoc[]
+``-i`` 用于指定对应的 cache id。
+include::../../../../../../_components/table_footer.adoc[]
+.. 停止 cache device。
++
+[,shell]
+----
+casadm -T -i 1
+----
++
+include::../../../../../../_components/note.adoc[]
+``-i`` 用于指定对应的 cache id。
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 开启 cache device，并修改 cache line size 改为 8K。
++
+[,shell]
+----
+casadm --start-cache --cache-line-size 8 --cache-device /dev/nvme1n1 --force --cache-mode wb
+----
++
+include::../../../../../../_components/note.adoc[]
+``--cache-line-size`` 用于指定相应的 cache line size 。
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 将 core 设备加入到 cache 设备中。
++
+[,shell]
+----
+casadm --add-core --cache-id 1 --core-device /dev/sdc
+----
++
+include::../../../../../../_components/note.adoc[]
+``--cache-id`` 指定的 cache id 和 ``--core-device`` 指定的盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 将 Sequential cutoff policy 配置修改为 always:
++
+[,shell]
+----
+casadm --set-param --name seq-cutoff --cache-id 1 --core-id 1 --policy always --threshold 4096
+----
+
++
+include::../../../../../../_components/note.adoc[]
+``--cache-id`` 指定的 cache id 和 ``--core-id`` 指定的 core id，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 参考上一步骤，依次修改本节点其他 cache 设备的的 cache line size。
+. 待该节点所有 cache 设备的的 cache line size 修改完后，启动该节点的 store 服务。
++
+[,shell]
+----
+supervisorctl start neonstore
+----
+. 查看集群状态。
++
+[,shell]
+----
+neonsan list_store
+neonsan list_ssd -H
+neonsan list_rg --detail -H
+----
++
+include::../../../../../../_components/note.adoc[]
+若 list_ssd 显示该节点上有 ``CANDIDATE`` 状态的磁盘，可执行 ``supervisorctl restart neonmonitor`` 重启该节点上的 neonmonitor 服务。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令对集群内的 SSD 进行负载均衡。
++
+[,shell]
+----
+neonsan rebalance_ssd
+----
++
+include::../../../../../../_components/note.adoc[]
+该命令为异步执行，可以通过 ``neonsan list_job`` 查看进程。
+include::../../../../../../_components/table_footer.adoc[]

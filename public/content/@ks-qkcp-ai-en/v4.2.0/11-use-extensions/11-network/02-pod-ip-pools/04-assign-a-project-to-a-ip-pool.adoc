@@ -1,0 +1,47 @@
+---
+title: "Assign Pod IP Pools to Projects"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Network, Pod IP Pool, Disable Auto-Assignment"
+description: "Introduces how to assign Pod IP Pools to projects."
+weight: 04
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Pod IP Pools**
+
+
+This section describes how to assign Pod IP Pools to projects.
+
+If a project is assigned a Pod IP Pool, and when creating workloads and Jobs within that project without specifying a Pod IP Pool, the pods in the project will be assigned to that Pod IP Pool by default.
+
+If a project is not assigned a Pod IP Pool (the project is not bound to any Pod IP Pool), and when creating workloads and Jobs within that project without specifying a Pod IP Pool, the pods in the project will be assigned to any available Pod IP Pool.
+
+One IP pool can be assigned to multiple projects, and one project can be bound to multiple IP pools.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere Network** extension needs to be installed and enabled on the KubeSphere platform.
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. In the Pod IP Pool list, click the name of a Pod IP Pool to open its details page.
+
+. On the **Projects** tab, click **Add Project**, select a project from the dropdown list, and then click **OK**.
+
+. Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash,18,18] on the right side of a project to unbind the Pod IP Pool from that project. Click **Remove All** in the upper right corner to unbind the Pod IP Pool from all assigned projects.
++
+After removing a project, the project will no longer be subject to the resource allocation restrictions of that IP pool. The project pods that have already been assigned IP addresses are not affected.

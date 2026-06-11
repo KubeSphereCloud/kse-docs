@@ -1,0 +1,422 @@
+---
+title: 获取alarm信息（DescribeAlarms）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| true
+| action名称
+
+| alarm_policy_category
+| String
+| false
+| 告警策略类型
+
+| alarms
+| Array
+| false
+| 告警id数组
+
+| limit
+| Integer
+| true
+| 返回数据条数
+
+| offset
+| Integer
+| true
+| 分页起始索引
+
+| owner
+| String
+| true
+| 用户id
+
+| policy_usage
+| String
+| false
+| 告警策略用途
+
+| resource_id
+| String
+| false
+| 资源id，以英文逗号分隔
+
+| resource_type
+| String
+| false
+| 资源类型
+
+| reverse
+| Integer
+| false
+| 是否逆序
+
+| sort_key
+| String
+| false
+| 排序字段名称
+
+| status
+| Array
+| false
+| 告警状态
+
+| verbose
+| String
+| false
+| 是否返回告警关联资源信息
+
+| zone
+| String
+| true
+| zone区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| DescribeAlarmsResponse
+
+| alarm_set
+| Object
+| false
+| 告警信息
+
+| alarm_set.alarm_id
+| String
+| false
+| 告警Id
+
+| alarm_set.console_id
+| String
+| false
+| ConsoleId
+
+| alarm_set.controller
+| String
+| false
+| 控制器
+
+| alarm_set.create_time
+| String
+| false
+| 创建时间
+
+| alarm_set.owner
+| String
+| false
+| 用户Id
+
+| alarm_set.policy
+| Object
+| false
+| 告警策略详情
+
+| alarm_set.policy.alarm_policy_category
+| String
+| false
+| 告警策略类型
+
+| alarm_set.policy.alarm_policy_id
+| String
+| false
+| 告警策略Id
+
+| alarm_set.policy.alarm_policy_name
+| String
+| false
+| 告警策略名称
+
+| alarm_set.policy.alarm_policy_type
+| String
+| false
+| 告警策略类型
+
+| alarm_set.policy.create_time
+| String
+| false
+| 创建时间
+
+| alarm_set.policy.description
+| String
+| false
+| 描述
+
+| alarm_set.policy.is_applied
+| Integer
+| false
+| 是否应用
+
+| alarm_set.policy.notice_count
+| Integer
+| false
+| 通知次数
+
+| alarm_set.policy.operator
+| String
+| false
+| 操作
+
+| alarm_set.policy.owner
+| String
+| false
+| 用户Id
+
+| alarm_set.policy.period
+| String
+| false
+| 监控周期
+
+| alarm_set.policy.resource_info
+| String
+| false
+| 资源信息
+
+| alarm_set.policy.status
+| String
+| false
+| 策略状态
+
+| alarm_set.policy.status_time
+| String
+| false
+| 创建时间
+
+| alarm_set.policy.sub_code
+| Integer
+| false
+| 子编码
+
+| alarm_set.policy.usage
+| String
+| false
+| 用途
+
+| alarm_set.reason
+| String
+| false
+| 告警原因
+
+| alarm_set.related_resource
+| String
+| false
+| 关联资源Id
+
+| alarm_set.resource
+| Object
+| false
+| 资源信息
+
+| alarm_set.resource.resource_id
+| String
+| false
+| 资源Id
+
+| alarm_set.resource.resource_name
+| String
+| false
+| 资源名称
+
+| alarm_set.resource.resource_type
+| String
+| false
+| 资源类型
+
+| alarm_set.root_user_id
+| String
+| false
+| root用户Id
+
+| alarm_set.rules
+| Object
+| false
+| 告警规则
+
+| alarm_set.rules.alarm_level_id
+| String
+| false
+| 规则级别
+
+| alarm_set.rules.alarm_policy_id
+| String
+| false
+| 告警策略Id
+
+| alarm_set.rules.alarm_policy_rule_id
+| String
+| false
+| 规则Id
+
+| alarm_set.rules.alarm_policy_rule_name
+| String
+| false
+| 规则名称
+
+| alarm_set.rules.condition_type
+| String
+| false
+| 条件
+
+| alarm_set.rules.consecutive_count
+| String
+| false
+| 连续次数
+
+| alarm_set.rules.consecutive_periods
+| Integer
+| false
+| 连续周期
+
+| alarm_set.rules.create_time
+| String
+| false
+| 创建时间
+
+| alarm_set.rules.data_processor
+| String
+| false
+| 数据类型
+
+| alarm_set.rules.disabled
+| Integer
+| false
+| 是否禁用
+
+| alarm_set.rules.event_total_count
+| String
+| false
+| 事件总数
+
+| alarm_set.rules.meter
+| String
+| false
+| 规则指标
+
+| alarm_set.rules.owner
+| String
+| false
+| 用户Id
+
+| alarm_set.rules.period_end_hhmm
+| String
+| false
+| 规则生效截至时间
+
+| alarm_set.rules.period_start_hhmm
+| String
+| false
+| 规则生效开始时间
+
+| alarm_set.rules.status
+| String
+| false
+| 规则状态
+
+| alarm_set.rules.thresholds
+| String
+| false
+| 阈值
+
+| alarm_set.status
+| String
+| false
+| 告警状态
+
+| alarm_set.update_time
+| String
+| false
+| 更新时间
+
+| alarm_set.used_notice_count
+| Integer
+| false
+| 通知次数
+
+| ret_code
+| Integer
+| false
+| 返回码
+
+| total_count
+| Integer
+| false
+| 告警信息总条数
+
+| trace_id
+| String
+| false
+| 追踪Id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAlarms",
+  "limit": 10,
+  "offset": 0,
+  "owner": "usr-jdxUgG5s",
+  "policy_usage": "alarm",
+  "reverse": 1,
+  "sort_key": "update_time",
+  "status": [
+    "alarm"
+  ],
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAlarmsResponse",
+  "alarm_set": [
+    {
+      "alarm_id": "alm-7cxj5qpy",
+      "alarm_policy_id": "alp-x78shdsa",
+      "console_id": "testingcloud",
+      "controller": "self",
+      "create_time": "2023-05-11T07:10:38Z",
+      "owner": "usr-jdxUgG5s",
+      "reason": "unhealthy||0",
+      "related_resource": "",
+      "resource": {
+        "loadbalancer": {
+          "loadbalancer_id": "lb-327k8q2r"
+        },
+        "resource_id": "lbl-0sg9klyw",
+        "resource_name": "cloudsat",
+        "resource_type": "loadbalancer_listener"
+      },
+      "root_user_id": "usr-jdxUgG5s",
+      "status": "alarm",
+      "update_time": "2023-05-26T06:56:12Z",
+      "used_notice_count": 1
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

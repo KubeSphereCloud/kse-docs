@@ -1,0 +1,72 @@
+---
+title: "View Microservice Gateway Information"
+keywords: "Kubernetes, {ks_product-en}, project management, Spring Cloud, view microservice gateway information"
+description: "Learn how to view microservice gateway information."
+weight: 02
+---
+
+:ks_permission: **Spring Cloud Microservices Viewing**
+:ks_navigation: **Spring Cloud > Microservice Gateways**
+
+This section describes how to view microservice gateway information.
+
+== Prerequisites
+
+* **KubeSphere Spring Cloud** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+== Steps
+
+include::../../../../_custom-en/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
++
+--
+The **Microservice Gateways** page provides the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Type
+|The type of the gateway. For microservice gateways, the parameter value is **Microservice Gateway**.
+
+|Status
+|The current status of the gateway.
+
+* **Running**: The microservice gateway is running normally.
+
+* **Updating**: The microservice gateway is being created or its settings are being updated.
+
+|Creator
+|The user who created the gateway.
+
+|Creation Time
+|The creation time of the gateway.
+
+|Access Mode
+|The access mode of the gateway.
+
+include::../../../../_custom-en/clusterManagement/services/services-para-externalAccess.adoc[tag=bullets]
+
+* **ClusterIP**: The gateway cannot be accessed from outside the KubeSphere cluster and can only be accessed within the KubeSphere cluster via a virtual IP address.
+
+|Gateway Address
+|
+The access address of the gateway.
+
+include::../../../../_custom-en/clusterManagement/gatewaySettings/gatewaySettings-para-address.adoc[tag=bullets]
+
+* If the gateway's access mode is **ClusterIP**, the gateway cannot be accessed from outside the cluster, and the **Gateway Address** is the virtual IP address of the gateway within the KubeSphere cluster.
+
+|Node Port
+|The HTTP and HTTPS node ports of the gateway service. Only displayed when the gateway's external access mode is NodePort.
+
+|Replicas
+|The number of pod replicas for the gateway workload.
+|===
+--

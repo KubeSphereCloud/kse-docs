@@ -1,0 +1,70 @@
+---
+title: 开启计费
+weight: 05
+---
+
+计费是企业云平台的增值功能，默认关闭，可根据实际情况进行开启。
+
+本小节主要介绍如何开启计费功能。
+
+== 参数路径
+
+[cols='1,1,2']
+|===
+| 应用 | 配置 | 参数
+
+| webconsole-common
+| system_settings
+a|
+
+* support_billing：云平台前端是否开启计费功能。
+* support_subscription：是否支持包年包月功能。
+
+| global
+| server
+| enable_billing：云平台后端是否开启计费功能。
+|===
+
+== 前端开启计费
+
+. link:../../manual/login[登录配置中心]。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 选择 webconsole-common 应用，选择 system_settings 配置。
++
+image::/images/ep_offline/cadmin/example_billing.png[]
+. 在 system_settings 配置所在行，点击右侧的**管理配置**，进入 system_settings 配置页面。
++
+
+include::../../../../../_components/note.adoc[]
+配置页面支持表单模式和文本模式，默认为表单模式（默认值可以自行定义，详细操作请参见link:../../manual/system[系统设置]），可以通过右侧的按钮临时进行切换。
+
+include::../../../../../_components/table_footer.adoc[]
++
+打开 **support_billing** 开关，还可以选择是否开启包年包月功能。
++
+image::/images/ep_offline/cadmin/example_billing_02.png[]
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。
++
+大约一分钟后生效，登录 Console 可在页面右上方看到**费用**菜单。
+
+== 后端开启计费
+
+. link:../../manual/login[登录配置中心]。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 选择 global 应用，选择 server 配置。
++
+image::/images/ep_offline/cadmin/example_global_server.png[]
+. 找到需要修改的 server 配置，点击操作列的**管理配置**，进入 server 配置页面。
++
+include::../../../../../_components/note.adoc[]
+server 配置目前仅支持文本模式。
+include::../../../../../_components/table_footer.adoc[]
++
+设置 **enable_billing** 为 ``true``。
++
+image::/images/ep_offline/cadmin/example_billing_06.png[,50%]
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。

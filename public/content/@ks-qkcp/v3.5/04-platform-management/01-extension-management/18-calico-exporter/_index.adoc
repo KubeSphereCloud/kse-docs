@@ -1,0 +1,181 @@
+---
+title: "Calico Exporter"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理"
+description: "介绍如何启用和禁用 Calico Exporter 扩展组件。"
+weight: 18
+---
+
+
+
+本节介绍如何启用和禁用 Calico Exporter 扩展组件。
+
+Calico Exporter 用来提供 Calico 相关的监控指标，包括 BGP、IPPool、IPAM。
+
+由于 Calico 开源版中没有提供 BGP 监控指标，虽然提供了 IPAM 监控指标，但缺少了一些 metadata 信息以及从 IPPool 维度统计的部分指标，所以 Calico Exporter 组件实现了 bgp-collector 和 ippool-collector 以满足对 BGP 和 IPPool 相关监控指标的需求；对于 IPAM 相关监控指标，增加了相关 service 和 ServiceMonitor，将官方提供的 IPAM 相关监控指标采集到 Prometheus。
+
+Calico Exporter 提供的监控指标如下：
+//note
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+* 当集群为单节点时，Calico Exporter 不提供 calico_bgp_route_xxx 监控指标。
+* 当集群为多节点时，Calico Exporter 提供所有监控指标。
+
+|===
+
+== BGP 监控指标
+Router
+
+[,bash]
+----
+calico_bgp_router_info{asn="64512.000000", container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", job="calico-exporter-bgp", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", router_id="172.31.73.51", service="calico-exporter-bgp", up="true"}
+----
+
+Peer
+[,bash]
+----
+calico_bgp_peers{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", job="calico-exporter-bgp", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_peer_info{asn="64512", bgp_state="Established", bird_state="up", container="kube-rbac-proxy", endpoint="https-metrics", hold_timer="138/240", instance="node2", ip="172.31.73.51", ip_version="IPv4", job="calico-exporter-bgp", keepalive_timer="1/80", name="Mesh_172_31_73_51", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-m8c6v", service="calico-exporter-bgp", type="ibgp"}
+----
+
+Route
+[,bash]
+----
+calico_bgp_route_import_updates_received_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_import_updates_rejected_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_import_updates_filtered_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_import_updates_ignored_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+
+[,bash]
+----
+calico_bgp_route_import_updates_accepted_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_import_withdraws_received_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_import_withdraws_rejected_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_import_withdraws_ignored_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_import_withdraws_accepted_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_export_updates_received_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_export_updates_rejected_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_export_updates_filtered_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_export_updates_accepted_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_export_withdraws_received_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+[,bash]
+----
+calico_bgp_route_export_withdraws_accepted_total{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", ip="172.31.73.127", ip_version="IPv4", job="calico-exporter-bgp", name="Mesh_172_31_73_127", namespace="kubesphere-monitoring-system", pod="calico-exporter-bgp-w7whd", service="calico-exporter-bgp"}
+----
+
+== IPPool 监控指标
+
+[,bash]
+----
+calico_ippools{container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", job="calico-exporter-ippool", namespace="kubesphere-monitoring-system", pod="calico-exporter-ippool-5875ffb744-5f6xk", service="calico-exporter-ippool"}
+----
+
+[,bash]
+----
+calico_ippool_info{cidr="10.233.64.0/18", container="kube-rbac-proxy", disabled="false", endpoint="https-metrics", instance="master1", ipipmode="Always", job="calico-exporter-ippool", name="default-ipv4-ippool", namespace="kubesphere-monitoring-system", nat="true", pod="calico-exporter-ippool-5875ffb744-5f6xk", service="calico-exporter-ippool", vxlanmode="Never"}
+----
+
+[,bash]
+----
+calico_ippool_capacity{cidr="10.233.64.0/18", container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", job="calico-exporter-ippool", name="default-ipv4-ippool", namespace="kubesphere-monitoring-system", pod="calico-exporter-ippool-5875ffb744-5f6xk", service="calico-exporter-ippool"}
+----
+
+[,bash]
+----
+calico_ippool_allocated_ips{cidr="10.233.64.0/18", container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", job="calico-exporter-ippool", name="default-ipv4-ippool", namespace="kubesphere-monitoring-system", pod="calico-exporter-ippool-5875ffb744-5f6xk", service="calico-exporter-ippool"}
+----
+
+[,bash]
+----
+calico_ippool_available_ips{cidr="10.233.64.0/18", container="kube-rbac-proxy", endpoint="https-metrics", instance="master1", job="calico-exporter-ippool", name="default-ipv4-ippool", namespace="kubesphere-monitoring-system", pod="calico-exporter-ippool-5875ffb744-5f6xk", service="calico-exporter-ippool"}
+----
+
+== IPAM 监控指标
+
+[,bash]
+----
+calico_ipam_ippool_size{endpoint="http-metrics", instance="node1", ippool="default-ipv4-ippool", job="calico-exporter-ipam", namespace="kube-system", pod="calico-kube-controllers-69d878584c-xnh9l", service="calico-exporter-ipam"}
+----
+
+[,bash]
+----
+calico_ipam_allocations_per_node{endpoint="http-metrics", instance="node1", job="calico-exporter-ipam", namespace="kube-system", node="master1", pod="calico-kube-controllers-69d878584c-xnh9l", service="calico-exporter-ipam"}
+----
+
+[,bash]
+----
+calico_ipam_allocations_borrowed{endpoint="http-metrics", instance="node1", ippool="default-ipv4-ippool", job="calico-exporter-ipam", namespace="kube-system", node="master1", pod="calico-kube-controllers-69d878584c-xnh9l", service="calico-exporter-ipam"}
+----
+
+[,bash]
+----
+calico_ipam_allocations_gc_candidates{endpoint="http-metrics", instance="node1", ippool="default-ipv4-ippool", job="calico-exporter-ipam", namespace="kube-system", node="master1", pod="calico-kube-controllers-69d878584c-xnh9l", service="calico-exporter-ipam"}
+----
+
+[,bash]
+----
+calico_ipam_blocks{endpoint="http-metrics", instance="node1", ippool="default-ipv4-ippool", job="calico-exporter-ipam", namespace="kube-system", node="master1", pod="calico-kube-controllers-69d878584c-xnh9l", service="calico-exporter-ipam"}
+----
+
+[,bash]
+----
+calico_ipam_blocks_per_node{endpoint="http-metrics", instance="node1", job="calico-exporter-ipam", namespace="kube-system", node="master1", pod="calico-kube-controllers-69d878584c-xnh9l", service="calico-exporter-ipam"}
+----

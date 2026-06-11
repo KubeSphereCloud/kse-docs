@@ -1,0 +1,191 @@
+---
+title: "系统架构"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, 系统, 架构"
+description: ""
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 7c65b8204d4c4de3ba85c336b844be03
+:ks_xref_id: d186db42df4e4b56a4f0296654e8878f
+:ks_comp: ../../components/
+:ks_title: 系统架构
+:ks_description:
+:ks_keywords: {ks_product_full}, {ks_product}, 系统, 架构
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 功能架构link:[id=885a678c6ccd4a829c12c88c0b0d9751]
+
+{ks_product_right}主要包含物理节点、网络、存储、虚拟机、镜像、硬盘、安全组等功能组件，具体产品组件架构图如下图所示。
+
+image::/images/ksv/en/introduction/architecture.png[architecture]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 资源类型link:[id=9dbe74ddc44d4588a58506174dfaff13]
+
+在{ks_product_both}中，资源主要分为物理资源和虚拟资源两种类型。物理资源是指从物理维度上定义的 IT 基础设施设备，如服务器节点、物理网络和存储设备等。虚拟资源是逻辑层面的资源，是经过虚拟化技术改造的、用户使用方便的资源，如 VPC 网络、虚拟机、磁盘、快照等。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 物理资源link:[id=fcb69e5b9ff64118ba09e4bdbf915577]
+
+下表列举了使用{ks_product_both}过程中涉及的常见物理资源类型。
+
+[cols="1a,3a"]
+|===
+|资源 |描述
+
+|物理节点
+|{ks_product_right}集群中的基础服务器，在节点上可以创建虚拟机。{ks_product_right}提供以下两种节点类型：
+
+* 控制节点：控制平面节点，专用于管理和控制集群中的任务流。
+* 工作节点：用于运行工作负载的节点。
+
+|物理 CPU
+|物理节点上实际插入的 CPU 数量。
+
+|CPU 核数
+|一块物理 CPU 上能处理数据的芯片组数量。
+
+|物理内存
+|物理节点上物理内存条提供的内存空间。
+
+|物理磁盘
+|集群存储设备上的磁盘。
+
+|物理子网
+|物理网络的单位，一个物理网络可划分为若干个子网。
+|===
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== 虚拟资源link:[id=9ebd2060eb264d559b272bbff8ead2e0]
+
+下表列举了使用{ks_product_both}过程中涉及的常见虚拟资源类型。
+
+[cols="1a,3a"]
+|===
+|资源 |描述
+
+|项目
+|用于对资源进行分组管理。您可以将用户分配到项目中，并指定用户的角色以控制用户在项目中的权限。
+
+|虚拟机
+|虚拟机创建在{ks_product_both}集群节点上，可以用于运行工作负载。
+
+|虚拟机模板
+|虚拟机的一种主副本，包含了虚拟机的具体配置。
+
+|镜像
+|虚拟机的一种标准交付物，用于打包虚拟机相关配置及其依赖的环境。
+
+|磁盘
+|为虚拟机提供的块级别的虚拟存储资源，以文件夹的形式存在于宿主机上。
+
+|弹性 IP
+|提供独立的公网 IP 资源，包括公网 IP 地址。
+
+|VPC 网络
+|云上私有网络，不同的 VPC 之间逻辑上完全隔离。
+
+|虚拟子网
+|VPC 内的 IP 地址范围。
+
+|SSH 密钥
+|通过加密算法生成的一对密钥，由公钥和私钥组成。
+
+|安全组
+|一种虚拟防火墙，用于控制与其关联资源的入流量和出流量。
+|===
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 硬件配置link:[id=399100966c194adeb9f45c347c6bf855]
+
+单节点模式下，服务器节点的硬件配置要求如下：
+
+[cols="1a,1a,1a"]
+|===
+|硬件 |最低配置 |推荐配置
+
+|CPU
+|4 核
+|8 核
+
+|内存
+|8 GB
+|16 GB
+
+|系统磁盘
+|100 GB
+|100 GB
+|===
+
+多节点模式下，每个服务器节点的硬件配置要求如下：
+
+[cols="1a,1a,1a"]
+|===
+|硬件 |最低配置 |推荐配置
+
+|CPU
+|4 核
+|8 核
+
+|内存
+|8 GB
+|16 GB
+
+|系统磁盘
+|100 GB
+|100 GB
+
+|未格式化且未分区的磁盘，或未格式化的分区
+|100 GB
+|200 GB
+|===
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 安装模式link:[id=eca02350dccd49b18b365527e4b204ec]
+
+{ks_product_right}支持以下安装模式：
+
+* 单节点模式：{ks_product_right}安装在单个服务器节点上。在单节点模式下，{ks_product_right}只需要一台计算机即可安装，便于个人用户用于开发、测试和学习。
+* 多节点模式：{ks_product_right}安装在由多个服务器节点组成的集群中。{ks_product_right}在多节点模式下支持增加和删除集群节点并提供高可用性。在部分节点出现故障时，多节点模式支持将虚拟迁移到其他节点上以保证业务连续。多节点模式主要面向生产环境业务。
+
+您可以从以下维度考虑如何安装并使用{ks_product_left}：
+
+* 节点服务器
++
+--
+{ks_product_right}支持 Linux 操作系统，内核版本需要在 4 以上。推荐您使用 Ubuntu 18.04、Ubuntu 20.04、CentOS 7.9、CentOS 8.5、统信UOS、银河麒麟 V10 或华为 EulerOS 操作系统。
+--
+* 网络规划
++
+--
+{ks_product_right}建议您规划 2 个网络段，具体如下：
+
+* 管理网络：{ks_product_right}节点服务器所在的网络，建议采用专有 VLAN，以 trunk 方式接入。
+* 业务网络：虚拟化资源所在的网络，可以根据业务需求配置多个 VLAN，以 trunk 方式接入。
+--
+* 安全方案
++
+--
+{ks_product_right}提供安全组功能，控制安全组内虚拟机的进出口流量和端口监听状态，从而提高虚拟化服务的安全性。
+
+为保证业务处理的正确性，{ks_product_right}还提供快照备份功能。建议您通过为磁盘、虚拟机创建快照，实现应用容灾。
+--

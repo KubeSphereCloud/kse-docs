@@ -1,0 +1,86 @@
+---
+title: 清理监控数据（ClearHistoryMonitoring）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| owner
+| String
+| false
+| 用户Id
+
+| resource
+| String
+| false
+| 资源Id
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| resource
+| String
+| false
+| 资源Id
+
+| ret_code
+| Integer
+| false
+| 返回码
+
+| trace_id
+| String
+| false
+| 追踪Id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ClearHistoryMonitoring",
+  "owner": "usr-rrPKHDpJ",
+  "resource": "cl-av5lr3nr"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ClearHistoryMonitoringResponse",
+  "resource": "cl-av5lr3nr",
+  "ret_code": 0,
+  "trace_id": "0py4178J"
+}
+----

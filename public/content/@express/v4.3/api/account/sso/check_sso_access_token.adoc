@@ -1,0 +1,82 @@
+---
+title: 检查单点登录（CheckSsoAccessToken）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_token
+| String
+| true
+| 
+
+| is_filter_user_verify
+| Boolean
+| false
+| 
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_key
+| String
+| false
+| 
+
+| secret_key
+| String
+| false
+| 
+
+| sk
+| String
+| false
+| 
+
+| token
+| String
+| false
+| 
+
+| user
+| Dict
+| false
+| 用户信息
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "access_token": "JZOHGWGENRXLKPMEMZYR",
+  "is_filter_user_verify": 0
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "access_key": "JZOHGWGENRXLKPMEMZYR",
+  "action": "CheckSsoAccessTokenResponse",
+  "ret_code": 0,
+  "secret_key": "******",
+  "sk": "7jU85RMTIWLwhsMwHjrhBfxRlEgr9GIYQhhrYRz5",
+  "token": "85RMTIWLwhsMwHjrhBfxRlEgr9GIYQhhrYRz5",
+  "user": {}
+}
+----

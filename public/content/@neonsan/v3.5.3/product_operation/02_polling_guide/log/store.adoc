@@ -1,0 +1,63 @@
+---
+title: "查看 Store 日志文件"
+weight: 2
+---
+
+. 逐个登录 NeonSAN Store 的每个节点。 
+
+. 输入如下命令，查看 Store 的异常日志。
++
+[,shell]
+----
+cat /var/log/neonstore.log | grep ERRO 
+
+cat /var/log/neonstore.log | grep WARN 
+----
+. 若上一步中有内容输出，说明服务有异常，需要输入如下命令，查看 Store 的完整日志。
++
+[,shell]
+----
+vi /var/log/neonstore.log 
+----
+
+. 部分错误日志关键字解释及建议，其他未列出错误可联系 NeonSAN 产研团队进行排查。
++
+[options="header",cols="3,2,3"]
+|===
+|关键字|含义|建议
+|Event queue replicator is full 
+|Store I/O 队列出现堆积 
+|提交工单，联系 NeonSAN 产研团队进行处理
+
+|TCP_RCV_DATA 或 TCP_SEND_DATA 
+|客户端与 Store 间 TCP 网络连接质量差 
+|检查网络质量 
+
+|RDMA_READ.*?cos t.* 
+|RDMA 流控可能配置不正确 
+|检查 RDMA 流控配置
+
+|Failed IO on ssd 
+|Store I/O 异常 
+|检查 kern.log 日志查询是否有磁盘介质或读写错误
+
+|Event queue /dev/.*? is block on.* 
+|磁盘 I/O 性能异常 
+|检查磁盘性能
+
+|heartbeat timeout 
+|Store 到 Store 或者 Store 到 Center 的心跳超时 
+|检查网络连通性和网络质量
+
+|connection rejected 
+|由于 ACL，客户端连接被拒绝 
+|执行 ``neonsan list_acl`` 检查不必要的 ACL 规则并删除
+
+|Connection error 
+|Store 间连接失败 
+|检查网络连通性
+
+|IO timeout detected.*?for local SSD 
+|本地磁盘 I/O 超时 
+|NVMe 盘检查磁盘性能，RAID 盘检查 RAID 状态、CC、LD 缓存策略、BBU 和 CV 是否都缺失
+|===

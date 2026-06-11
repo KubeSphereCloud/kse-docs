@@ -1,0 +1,25 @@
+---
+title: "查看 galera 日志文件"
+weight: 5
+---
+
+. 逐个登录 galera 集群的每个节点。 
+
+. 输入如下命令，查看 galera 的异常日志。
++
+[,shell]
+----
+cat /data/galera/log/mysqld.log |grep ERROR 
+----
+. 若步骤 2 有内容输出，说明服务异常，需要输入如下命令，查看 galera 的完整日志。 
++
+[,shell]
+----
+vi /data/galera/log/mysqld.log
+----
+. 部分错误日志关键信息解释及建议，其他未列出错误可联系 NeonSAN 产研团队进行排查。 
++
+若日志中出现 ``SST failed``，则表明 galera 节点间全量数据同步失败，建议检查 galera 数据库状态
+
+
+

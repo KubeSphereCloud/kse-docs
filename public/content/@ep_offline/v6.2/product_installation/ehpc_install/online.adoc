@@ -1,0 +1,51 @@
+---
+title: "上架 EHPC"
+weight: 5
+---
+
+EHPC 各项服务均部署完成后，管理员用户需登录至当前环境的 BOSS 平台进行功能服务的上线，从而对外提供服务。
+
+. 登录当前环境的 BOSS 平台。
+
+. 在左侧导航栏，选择**基础设施** > **计算** > **计算节点**，进入计算节点列表页面。
+
+. 选择所有状态为``活跃中``的计算节点，点击其右侧更多操作，选择**设置安置组**。
++
+image::/images/ep_offline/ehpc_install/ehpc_7.png[]
+
+. 在弹出的**设置计算节点安置组**的窗口中，勾选所有与 hpc 相关安置组项后，点击**设置**。
++
+image::/images/ep_offline/ehpc_install/ehpc_8.png[,70%]
+
+. 在左侧导航栏，选择**资源管理** > **AppCenter** > **云应用**，进入 AppCenter 云应用管理页面。
+
+. 搜索 E-HPC，在搜索结果中，点击其**应用名称/ ID**，跳转至 E-HPC 应用的详情页面。
+
+. 在应用详情页面，选择**版本**页签，在版本列表中，点击最新**版本名称/ ID**，打开最新上架的应用详情页面。
++
+image::/images/ep_offline/ehpc_install/ehpc_9.png[]
+
+. 在**配置文件**页签，选择 ``config.json`` 配置文件，点击右上角**编辑文件**。
++
+image::/images/ep_offline/ehpc_install/ehpc_10.png[]
+
+. 修改 ``config.json`` 配置文件中 ``properties`` 字段下的 ``default`` 和 ``rang`` 值。
++
+
+include::../../../../_components/note.adoc[]
+可以将配置文件拷贝下来后进行修改处理。
+
+include::../../../../_components/table_footer.adoc[]
++
+.. 查找到 ``"label": "Instance Class"`` 配置内容。
+.. login 节点（登录节点）对应的 ``properties`` 下 ``default`` 和 ``range`` 字段均设置为 ``1101``。
++
+image::/images/ep_offline/ehpc_install/ehpc_11.png[]
+
+.. controller 节点（管控节点）对应的 ``properties`` 下 ``default`` 和 ``range`` 字段均设置为 ``1211``。
++
+image::/images/ep_offline/ehpc_install/ehpc_12.png[]
+
+.. compute 节点（计算节点）对应的 ``properties`` 下 ``default`` 字段设置为 1202， ``range`` 字段均设置为 ``1202、1201、1311``。
++
+image::/images/ep_offline/ehpc_install/ehpc_13.png[]

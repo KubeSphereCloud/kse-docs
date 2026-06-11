@@ -1,0 +1,86 @@
+---
+title: LoginServerAuthorize
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| code
+| String
+| false
+| 
+
+| login_ip
+| String
+| false
+| 登录IP
+
+| login_server
+| String
+| false
+| 登陆服务器
+
+| login_server_id
+| String
+| true
+| 登录服务器ID
+
+| passwd
+| String
+| false
+| 密码
+
+| user
+| String
+| false
+| 用户
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_server_ids
+| Array
+| false
+| 被删除的login
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "code": "1",
+  "login_ip": "127.0.0.1",
+  "login_server": "login_server",
+  "login_server_id": "login_server_id_1",
+  "passwd": "**********",
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "LoginServerAuthorizeResponse",
+  "ret_code": 0,
+  "sk": "********************",
+  "user": {
+    "lang": "ZH_CN",
+    "user_id": "admin"
+  }
+}
+----

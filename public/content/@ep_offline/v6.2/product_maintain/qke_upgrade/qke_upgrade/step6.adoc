@@ -1,0 +1,46 @@
+---
+title: 步骤六：确认 QKE Plus 升级成功
+weight: 6
+---
+
+== 创建 QKE Plus v3.1.0 集群
+
+. 使用浏览器登录{product_name}的 Console。
+
+. 点击**产品与服务** > **容器服务** > **容器引擎 QKE**，进入容器引擎 QKE 的主页面。
+
+. 点击**创建集群**，进入创建集群页面。在**集群版本**下拉框里，选择 `v3.1.0` 的版本，其余参数按需填写。
++
+image::/images/ep_offline/qke_upgrade/qke_upgrade_4.png[qke_upgrade_4]
+
+. 点击创建 QKE Plus v3.1.0 的集群。
++
+include::../../../../../_components/note.adoc[]
+
+* 若集群成功创建，则说明升级成功。
+* 若集群创建失败，需调查并解决相关问题后，再次参考以上步骤创建 QKE Plus v3.1.0 的集群。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+== 升级 QKE Plus 集群至 v3.1.0
+
+. 使用浏览器登录{product_name}的 Console。
+
+. 点击**产品与服务** > **容器服务** > **容器引擎 QKE**，进入容器引擎 QKE 的主页面。
+
+. 点击待升级的 QKE Plus 集群名称，进入集群概览页面。
+
+. 在左侧导航栏，点击**集群运维** > **升级检查**，进入**升级检查**页面。
++
+image::/images/ep_offline/qke_upgrade/qke_upgrade_10.png[qke_upgrade_10]
+
+. 选择目标版本 `v3.1.0`，点击**立即升级**。
+
+. 等待升级进度条显示 `100%`，集群状态由 `更新中` 变为 `活跃`，则说明升级完成。
++
+include::../../../../../_components/note.adoc[]
+
+若集群升级失败，需调查并解决相关问题后，再次参考以上步骤升级原有 QKE Plus 集群至 v3.1.0 版本。
+
+include::../../../../../_components/table_footer.adoc[]

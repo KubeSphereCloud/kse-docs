@@ -1,0 +1,28 @@
+---
+title: '创建互斥卷'
+weight: 5
+draft: false
+---
+
+. 登录 link:../../../login[Portal 管理界面]。
+
+. 选择左侧导航栏**存储服务** > **块存储** > **卷管理**，进入卷管理页面。
+
+. 点击右侧**创建卷**，弹出**创建卷**窗口，输入``卷名``，选择``卷组``并勾选``作为互斥卷``，选定``互斥卷组``。
++
+image::/images/neonsan/portal_create_mutex_vol_1.png[,60%]
+
+. 点击**下一步**，设置卷的各项参数，包括``卷容量``、``卷副本``、``卷类型``、是否``加密``或``批量创建``，根据实际需要进行选择性设置后，点击**保存**即可。。
++
+
+include::../../../../../../_components/note.adoc[]
+* 卷容量支持 10G ~ 100T。
+* 互斥卷副本数只能为 1。
+* 卷类型支持自精简卷和全置备卷。
+* 加密和批量创建可参看link:../create_vol[创建普通卷]相关内容。
+include::../../../../../../_components/table_footer.adoc[]
+
++
+image::/images/neonsan/portal_create_mutex_vol_2.png[,60%]
+
+

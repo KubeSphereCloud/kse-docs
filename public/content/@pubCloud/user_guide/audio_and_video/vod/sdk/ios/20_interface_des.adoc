@@ -1,0 +1,115 @@
+---
+title: "接口说明"
+keywords: 云点播,视频点播,SDK,iOS端集成
+description: 本章节介绍云点播 SDK 简介。
+draft: false
+collapsible: false
+weight: 20
+
+---
+本文提供 iOS 播放器 SDK 的接口说明。
+
+== 播放器接口
+
+[cols="1,2"]
+|===
+| API | 描述
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayerView.html#//api/name/setMediaController:[- (void)setMediaController:(QCMediaControlView *)mediaController;]
+| 为播放器设置视频控制器。 +
+用户可自定义自己的视频控制器，但必须继承基类 https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCMediaControlView.html[QCMediaControlView]。 如无设置，默认使用青云自定义的控制器 QCCustomMediaControlView。如果只想显示视频，不需要控制器，传 Null。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayerView.html#//api/name/playWithUrl:[- (void)playWithUrl:(NSString *)url;]
+| 直接传入视频地址进行播放。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayerView.html#//api/name/playWithModel:[- (void)playWithModel:(QCPlayerModel *)model;]
+| 配置一个视频原子对象进行播放。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayerView.html#//api/name/resetPlay[- (void)resetPlay;]
+| 重制视图内的播放内容，并释放该视图。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayerView.html#//api/name/destroyVideo[- (void)destroyVideo;]
+| 退出播放器并销毁。
+|===
+
+== 播放基础接口
+
+[cols="1,2"]
+|===
+| API | 描述
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (void)play]
+| 开始播放。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (void)stop]
+| 停止播放。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (void)pause]
+| 暂停播放。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (void)seekTo:(NSInteger)ms]
+| 跳转到视频流指定时间点，单位毫秒。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (NSInteger)getDuration]
+| 获取总时长，单位毫秒。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (NSInteger)getCurrentPosition]
+| 获取当前播放时间，单位毫秒。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (BOOL)isPlaying]
+| 是否正在播放。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (void)suspend]
+| 停止播放，并释放播放器资源。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (void)setBrightness:(float)percentage]
+| 设置亮度。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (void)enableHWCodec:(BOOL)enable]
+| 设置是否启动硬解码。
+|===
+
+== 播放器配置类接口
+
+[cols="1,2"]
+|===
+| API | 描述
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayerConfig.html[timeout]
+| 设置播放器连接超时时间，单位秒(s)。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayerConfig.html[enableAccurateSeek]
+| 设置是否精确 seek，默认 true。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayerConfig.html[maxBufferSize]
+| 最大预加载大小，单位 MB。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayerConfig.html[isAutoplay]
+| startPlay 后是否立即播放，默认 YES。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayerConfig.html[cacheFolderPath]
+| 视频缓存目录。
+|===
+
+== 视频相关接口
+
+[cols="1,2"]
+|===
+| API | 描述
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (UIImage *)screenShot]
+| 返回抽帧截图的图片。
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (void)setRate:(float)rate]
+| 设置倍速率。
+|===
+
+== 音频相关接口
+
+[cols="1,2"]
+|===
+| API | 描述
+
+| https://vod-sdk.pek3b.qingstor.com/doc/iOS/html/Classes/QCPlayer.html[- (void)setVolume:(NSInteger)volume]
+| 设置音量。
+|===

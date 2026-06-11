@@ -1,0 +1,135 @@
+---
+title: 初始化计算节点
+weight: 2
+---
+
+== 启用计算节点
+
+部署完成后，{product_name}所有计算节点均不会自动启用。实施人员需登录 BOSS，将计算节点状态设置为 `活跃中`，以启用计算节点。详细操作如下。
+
+. 登录 BOSS。详细操作可参考link:../../deploy/check_env/#_登录_boss[前文]。
+. 选择**基础设施** > *计算* > **计算节点**，进入计算节点主页面。
++
+image::/images/ep_offline/installation/initialize_enable_host_01.png[]
+. 在目标计算节点的操作列，点击更多图标，选择**标记状态**；或勾选目标计算节点，在列表上方点击**标记状态**进行批量修改，弹出标记计算节点状态对话框。
+. 在**标记节点状态**对话框中，设置计算节点状态为``活跃中``，点击**标记**，即可完成启用计算节点操作。
+
+. 回到计算节点主页面，查看计算节点的状态。若修改后状态没有立即改变，请点击列表右上方的刷新按钮进行刷新，页面刷新后即可看到修改后的结果。
++
+image::/images/ep_offline/installation/initialize_enable_host_02.png[,90%]
+
+
+== 设置安置组
+
+{product_name}通过安置组来配置每个计算节点所支持的资源类型。因此，在云平台投入使用前，实施人员需将各计算节点，添加至相应的安置组。
+
+
+
+本小节主要介绍如何在 BOSS 平台上为计算节点设置安置组。
+
+include::../../../../../_components/note.adoc[]
+
+无论当前计算节点使用哪种存储类型，请务必将默认安置组 `sas group` 配置到所有计算节点，否则将导致 Console 上创建 VPC 等服务失败。
+
+include::../../../../../_components/table_footer.adoc[]
+
+**操作步骤**
+
+. 登录 BOSS。详细操作可参考link:../../deploy/check_env/#_登录_boss[前文]。
+
+. 选择**基础设施** > *计算* > **计算节点**，进入计算节点页面。
++
+image::/images/ep_offline/installation/initialize_plg_config_plg_01.png[,80%]
+
+. 在目标计算节点的操作列，点击更多图标，选择**设置安置组**，弹出**设置计算节点安置组**对话框。
++
+image::/images/ep_offline/installation/initialize_plg_config_plg_02.png[,40%]
+. 勾选需要设置的**安置组**，填写**操作原因**后，点击**设置**。
++
+
+include::../../../../../_components/note.adoc[]
+* 所有环境都必须勾选 `性能型: sas group`。
+* Hyper-Repl 环境必须勾选 `超高性能型: ssd group`。
+* Hyper-Sanc 环境必须勾选 `sanc group`。
+//* s2 server 配置说明：如果使用 s2 server 还需要确保添加了性能型或超高性能型 PLG。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 回到计算节点主页面，查看计算节点的**安置组**信息。若修改后状态没有立即改变，请点击列表右上方的刷新按钮进行刷新，页面刷新后即可看到修改后的结果。
++
+image::/images/ep_offline/installation/initialize_plg_config_plg_03.png[]
+
+== 附录
+
+=== 创建安置组
+
+在{product_name}的安装部署过程中，系统会创建若干link:#_默认安置组[默认安置组]，若默认安置组均不满足需求，实施人员可以根据实际情况link:#_创建安置组[创建新的安置组]，再为计算节点设置安置组。
+
+//当默认安置组不满足要求时，可参考如下步骤创建新的安置组。
+
+. 登录 BOSS。详细操作可参考link:../../deploy/check_env/#_登录_boss[前文]。
+
+. 选择**基础设施** > *计算* > **安置组**，进入安置组列表页面。
+
+. 点击**创建**，弹出创建安置对话框。实施人员根据页面信息，填写相关参数后，点击**创建**，即可完成安置组的创建操作。
++
+image::/images/ep_offline/installation/initialize_plg_create_plg_01.png[,40%]
++
+
+include::../../../../../_components/attention.adoc[]
+硬盘的超卖比对 NeonSAN 以及其他独立存储不适用。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 可在安置组列表页面查看成功创建的安置组。若安置组列表没有立即更新，请刷新界面，即可看到创建后的结果。
+
+. 选择刚添加的安置组，在右侧选择**规则**页签。
++
+image::/images/ep_offline/installation/initialize_plg_create_plg_02.png[]
+. 点击**添加规则**，弹出**添加规则**对话框。
++
+image::/images/ep_offline/installation/initialize_plg_create_plg_03.png[,60%]
+
+. 选择该安置组适用的资源类型和账户。
+. 点击**添加**，添加规则完成。至此，安置组创建完成。
+
+
+=== 默认安置组
+
+系统默认的常用安置组如下。
+
+[cols='1,1,2,1']
+|===
+| 安置组名称 | 安置组 ID | 描述 | 资源类型
+
+| sas group	| plg-00000000	| 性能型主机安置组	| instance_class_0
+| ssd group	| plg-00000001	| 超高性能型主机安置组	| instance_class_1
+| sata group | plg-00000002 | 本地容量盘主机安置组 |  -
+| sanc group | plg-00000003	| sanc 主机安置组	| -
+| gpu group	| plg-g0000000	| gpu 主机安置组
+
+节点包含 GPU，CPU 可以是任意型号 | -
+
+| e1 group	| plg-00000201	| 企业型 e1 安置组  | instance_class_201
+| e2 group	| plg-00000202	| 企业型 e2 安置组	| instance_class_202
+
+volume_type_200
+
+| e3 group	| plg-00000203	| 企业型 e3 安置组	| instance_class_203
+| p1 group	| plg-00000301	| 专业增强型 p1 安置组  | 	-
+| nfv group	| plg-00000nfv	| nfv 安置组	| -
+| s1 group	| plg-00000101	| 基础型 s1 安置组	| instance_class_101
+
+volume_type_100
+
+| win_s1_group	| plg-w0000101	| 基础型 s1 安置组（Windows主机）
+
+Windows 专用，与 win_e1_group 绑定到相同 Hyper | -
+
+| win_e1_group	| plg-w0000201	| 企业型 e1 安置组（Windows主机）
+
+Windows 专用，与 win_s1_group 绑定到相同 Hyper | -
+
+| win e2 group	| plg-w0000202	| 企业型 e2 安置组（Windows主机） | -
+| win e3 group	| plg-w0000203	| 企业型 e3 安置组（Windows主机） | -
+|===

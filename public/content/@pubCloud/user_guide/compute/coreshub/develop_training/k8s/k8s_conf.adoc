@@ -1,0 +1,43 @@
+---
+title: "查看和适配容器环境"
+weight: 4
+---
+
+== 前提条件
+
+容器实例已创建成功，且状态为``运行中``。
+
+== 操作步骤
+
+. 登录容器实例后台，可参考link:../k8s_login[访问实例]相关内容。
+//tag::conf_k8s[]
+. 用户可执行如下命令，查看系统默认源。
++
+[,shell]
+----
+cat /etc/apt/sources.list
+----
+
+. 可使用 ``apt`` 命令，安装相应工具以适配训练任务所需的软件环境。
++
+--
+如安装网络工具集，可依次执行如下命令。用户可根据实际训练任务所需的软件环境安装相应工具，此处只做示例。
+[,shell]
+----
+apt install net-tools
+apt install iproute2 
+----
+image::/images/cloud_service/compute/coreshub/develop_training_k8s_conf_1.png[]
+--
+
+. 工具安装成功后即可使用相关命令，如上一步示例安装的网络工具，可执行如下命令，查看容器实例中网络接口信息。
++
+[,shell]
+----
+ip a
+----
++
+image::/images/cloud_service/compute/coreshub/develop_training_k8s_conf_2.png[]
+//end::conf_k8s[]
+
+

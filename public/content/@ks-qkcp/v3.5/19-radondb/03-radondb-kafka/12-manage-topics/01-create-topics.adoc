@@ -1,0 +1,93 @@
+---
+title: "创建主题"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, Kafka, 创建主题"
+description: "介绍如何创建主题。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 9027e7423e1a4f9f9062a324fe720fca
+:ks_xref_id: c4dd31f2aacb47ff9d9bcb6808fbba4a
+:ks_comp: ../../../../components/
+:ks_title: 创建主题
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, Kafka, 创建主题
+:ks_description: 介绍如何创建主题。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何创建 RadonDB Kafka 主题。
+
+
+== 前提条件link:[id=2c565c86b85c4c1e8cae79de136ce2c9]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbKafka/radondbkafka-prer-installRadondbkafka.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbKafka/radondbkafka-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=9c27e81f92ac47d8ae5a3ff0aeaeaf7f]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面右侧点击**主题**。
+
+. 在**创建主题**对话框，输入主题名称，并设置分区数量和副本数量。
+
+. 点击**高级设置**，设置以下参数，点击**确定**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|cleanup.policy
+|Kafka 日志清理策略。支持**删除**和**压缩**。
+
+|min.insync.replicas
+|当生产者的 **request.requird.acks** 参数设置为 **1** 时，副本的最小数量。
+
+|unclean.leader.election.enable
+|是否允许不属于 ISR 的副本被选为领导。
+
+|segment.ms
+|段文件轮滚的最大时间间隔，单位为毫秒，最小值为 **86400000**。
+
+|retention.ms
+|日志文件最大保留时间，单位为毫秒。
+
+|retention.bytes
+|日志文件的大小上限。超过上限的日志文件将被删除。如果同时设置了 **retention.ms** 和 **retention.bytes**，日志文件将在达到任一阈值是被删除。参数值 **-1** 表示保留所有日志文件。
+
+|max.message.bytes
+|主题级别的消息大小上限。如果未设置此参数，系统将采用实例级别的消息大小上限 1 MB。
+|===
+--

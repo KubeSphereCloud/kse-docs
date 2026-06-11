@@ -1,0 +1,48 @@
+---
+title: 添加主机类型和磁盘类型
+weight: 70
+---
+
+1. 登录企业云平台的 FirstBox。
+2. 执行以下命令，修改 server.yaml.Zone_ID 文件，添加磁盘类型和主机类型。
++
+[source,shell]
+----
+vi /pitrix/conf/variables/global/server.yaml.Zone_ID
+----
++
+按照格式添加如下配置参数：
++
+[source,yaml]
+----
+common:
+  enable_tpsc_support: 1
+  resource_limits:
+    default:
+      tpsc_support_instance_classes: '100'
+      min_tps_volume_size: 10
+      max_tps_volume_size: 200
+      tps_volume_step: 10
+----
++
+修改如下配置参数：
++
+[source,yaml]
+----
+valid_volume_types: '0, 2, 3, 5, 6, 7, 100, 200, 20'
+valid_instance_classes: '0,1,5,6,7,1003,1601,101'
+----
++
+**参数说明**
+
+ ** **enable_tpsc_support**：配置为 `1` 时会根据 archive 删除不用的 lvm 卷。
+ ** **tpsc_support_instance_classes**：配置为 `100`，tpsc 的硬盘才能挂载到 101 类型的主机上。
+ ** **valid_volume_types**：增加一个新的 volume type 类型 `20`。
+ ** **valid_instance_types**：增加一个新的 instance type 类型 `101`。
+3. 执行以下命令，刷新 server.yaml.Zone_ID 到节点。
++
+[source,shell]
+----
+/pitrix/upgrade/build_global_conf.sh
+/pitrix/upgrade/update.sh -f all pitrix-global-conf
+----

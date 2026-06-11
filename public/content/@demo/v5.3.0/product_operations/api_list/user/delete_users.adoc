@@ -1,0 +1,58 @@
+---
+title: delete（DeleteUsers）
+weight: 14
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| users
+| Array
+| true
+| 待删除的用户列表
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| users
+| Array
+| false
+| 已经删除的用户列表
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "users": [
+    "user_1",
+    "user_2"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteUsersResponse",
+  "ret_code": 0,
+  "users": [
+    "user_1",
+    "user_2"
+  ]
+}
+----

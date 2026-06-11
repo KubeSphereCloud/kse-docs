@@ -1,0 +1,57 @@
+---
+title: "下载 Helm Chart 压缩包"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 企业空间, 应用模板, 下载 Helm Chart 压缩包"
+description: "介绍如何下载应用版本的 Helm Chart 压缩包。"
+weight: 09
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 7d17a857f779458b97bffc0b57a4e813
+:ks_xref_id: 6f4f37e8a1694caa8a988e61b23bb3d8
+:ks_comp: ../../../../components/
+:ks_title: 下载 Helm Chart 压缩包
+:ks_keywords: Kubernetes, {ks_product}, 企业空间, 应用模板, 下载 Helm Chart 压缩包
+:ks_description: 介绍如何下载应用版本的 Helm Chart 压缩包。
+:ks_weight: 09
+:ks_icon:
+:ks_permission: **应用模板管理**
+:ks_navigation: **应用管理 > 应用模板**
+
+
+本节介绍如何下载应用版本的 Helm Chart 压缩包。
+
+
+== 前提条件link:[id=63e6e94318524a4d8a42d6293d4da94b]
+
+:relfileprefix: ../../../../
+* 您需要加入一个企业空间并在企业空间中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:06-workspace-management/06-workspace-settings/03-workspace-members/_index.adoc[企业空间成员]、xref:06-workspace-management/06-workspace-settings/04-workspace-roles/_index.adoc[企业空间角色]和xref:06-workspace-management/06-workspace-settings/05-departments/_index.adoc[部门]。
+
+// include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-prer-enableAppManagment.adoc[]
+
+
+== 操作步骤link:[id=840045ac31024782bc48b754f742cabc]
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. 在应用模板详情页面右侧的**版本**页签，点击所需的应用版本，然后在展开的区域中点击**下载**。
++
+--
+应用版本的 Helm Chart 压缩包将通过浏览器下载到本地。
+--

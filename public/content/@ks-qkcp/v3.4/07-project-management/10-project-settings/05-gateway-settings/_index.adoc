@@ -1,0 +1,35 @@
+---
+title: "网关设置"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 项目管理, 项目设置, 网关设置"
+description: "介绍如何管理项目网关。"
+weight: 05
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 91ff3845283e479e96227f245dd1f191
+:ks_xref_id: f036877354074ff2a85b6af95c118d48
+:ks_comp: ../../../../components/
+:ks_title: 网关设置
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 项目设置, 网关设置
+:ks_description: 介绍如何管理项目网关。
+:ks_weight: 05
+:ks_icon:
+
+
+本节介绍如何管理项目网关。
+
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-desc-gateway.adoc[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+{ks_product_right}对每个集群提供一个集群网关，并且对集群中每个项目提供一个项目网关，分别用于为整个集群和单个项目中的服务提供反向代理。有关集群网关的更多信息，请参阅《{ks_product_right}集群管理指南》的“网关设置”章节。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "html"]
+
+{ks_product_right}对每个集群提供一个集群网关，并且对集群中每个项目提供一个项目网关，分别用于为整个集群和单个项目中的服务提供反向代理。
+
+endif::[]

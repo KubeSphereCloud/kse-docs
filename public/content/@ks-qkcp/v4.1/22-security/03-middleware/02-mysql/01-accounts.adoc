@@ -1,0 +1,15 @@
+---
+title: "账号说明"
+weight:  01
+---
+
+[%header,cols="1a,4a"]
+|===
+|账号名 |说明
+
+|radondb_metrics	|用于采集数据库的监控指标信息，仅限本地登录
+|radondb_usr	|普通用户，用于创建集群后，用户进行测试
+|radondb_operator	|用于 Operator 对 MySQL 进行操作
+|radondb_repl	|MySQL 集群内部进行数据同步的用户
+|super	|超级账号，仅限本地登录，super 用于数据库集群故障切换时，对数据库进行一些主动干预的操作来保证数据库数据的一致性，同时，能够提供给数据库后台管理人员进行故障分析和性能诊断
+|===

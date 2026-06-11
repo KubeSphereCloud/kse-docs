@@ -1,0 +1,82 @@
+---
+title: "View Storage Class List"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Storage Class, View Storage Class List"
+description: "Describes how to view the storage class list."
+weight: 02
+---
+
+:ks_permission: **Storage Class View**
+:ks_navigation: **Storage > Storage Classes**
+
+This section describes how to view the storage class list.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+====
+* The storage class list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name, alias, and description of the storage class.
+
+|Storage Type
+|Block storage, object storage, or file storage.
+
+|Number of Persistent Volume Claims
+|The number of persistent volume claims created through the storage class.
+
+// |Default Storage Class
+// |
+// include::../../../../_custom/clusterManagement/storageClasses/systemClasses-para-defaultStorageClass.adoc[]
+
+|Allow Volume Cloning
+|
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-para-allowVolumeCloning.adoc[]
+
+// |Allow Volume Snapshot
+// |
+// include::../../../../_custom/clusterManagement/storageClasses/systemClasses-para-allowVolumeSnapshot.adoc[]
+// Displayed only after storage components are installed
+
+|Allow Volume Expansion
+|
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-para-allowVolumeExpansion.adoc[]
+
+|Provisioner
+|
+include::../../../../_custom/clusterManagement/persistentVolumes/persistentVolumes-para-provisioner.adoc[]
+|===
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+**Allow Volume Cloning** and **Allow Volume Expansion** only indicate whether users are allowed to perform these operations on the KubeSphere web console. Whether persistent volume claims actually support these operations depends on the backend storage system. For more information, see link:../05-enable-and-disable-volume-operations/[Configure Volume Operations].
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+* Click the search box above the list and set search criteria to search for storage classes by name and storage type.
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

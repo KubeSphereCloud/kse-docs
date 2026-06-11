@@ -1,0 +1,76 @@
+---
+title: "修改 EPFS 服务配置"
+weight: 10
+---
+
+EPFS 服务其实是 Lustre 文件系统的管理服务，其对外提供调用的接口。因此，为了更好的使用 Lustre 文件系统，需要在 EPFS 服务中配置 Lustre 集群信息。同时，在云平台上的其他服务中配置 EPFS 的主机和端口信息。
+
+. 登录至企业云平台的 FirstBox 节点。
+
+. 执行如下命令，修改 ``server.yaml.ZONE_ID`` 配置文件中的 ``qfs_default`` 配置内容。
++
+[source,shell]
+----
+# cat /pitrix/conf/variables/global/server.yaml.ZONE_ID
+......
+qfs_default:
+  host: 'epfs-api.{{admin}}.com'
+  port: 8119
+  protocol: 'http'
+  connection_retries: 3
+  timeout: 60
+  log_level: 'info'
+......
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* ZONE_ID 需根据实际情况进行修改。
+* 配置文件中 ``host`` 字段中的 {{admin}} 需修改为当前环境的域名。
+* 配置文件中 ``port`` 字段为 EPFS 服务端口，保持 ``8119`` 即可。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 在云平台的 FirstBox 节点上，执行如下命令，查看 EHPC 节点信息。
++
+[source,shell]
+----
+# cat /etc/hosts | grep hpc
+----
+
+. 逐一登录 EHPC 节点。
+
+. 执行如下命令，修改 ``/pitrix/conf/epfs_fg_server.yaml`` 配置文件。
++
+[source,shell]
+----
+# vi /pitrix/conf/epfs_fg_server.yaml
+......
+  lustre:
+    lfs_agent_ip: "10.10.10.32"
+    lfs_agent_port: 22
+    lfs_mgs_ip: "10.10.10.31"
+    lfs_mgs_port: 22
+    lfs_lnet_if: "tcp0"
+    lfs_name: "lustrefs"
+    lfs_mount_point: "10.10.10.31@tcp:/lustrefs"
+    lfs_local_path: "/public/epfs"
+    lfs_restrict_quota: 1024
+    ignore_mgs_error: false
+    ignore_agent_error: false
+    ignore_export_not_empty_to_remove_error: false
+......
+----
++
+**重要字段说明**：
++
+* ``lfs_agent_ip``：MinIO 服务所在主机 IP地址，若有公网 IP，此处建议使用公网 IP，若无公网IP，即基础网络即可。
+* ``lfs_agent_port``：SSH 端口，默认为 22，无需修改。
+* ``lfs_mgs_ip``：MDT 服务所在的主机 IP 地址。
+* ``lfs_mgs_port``：SSH 端口，默认为 22，无需修改。
+* ``lfs_lnet_if``：网络类型，支持设置为 ``tcp0`` 或 ``o2ib``，即根据实际云平台环境中使用的网络模式进行修改。若使用 IB 网络，则需设置为 ``o2ib``，若使用以太网需设置为 ``tcp0``。
+* ``lfs_name``：Lustre 配置中文件系统名称，一般设置为 lustrefs。
+* ``lfs_mount_point``：MDT 中所设置的 servicenode。
+* ``lfs_local_path``： MinIO 服务挂载的 Lustre 文件系统路径，一般设置为 /public/epfs。
+
+
+

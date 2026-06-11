@@ -1,0 +1,73 @@
+---
+title: "查看告警策略列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 告警, 策略, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看告警策略列表。"
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e7894e1bd55d4da285f6c0b8b277158d
+:ks_xref_id: 446767444f8d4b8eb60719878a03dc5d
+:ks_comp: ../../../components/
+:ks_title: 查看告警策略列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看告警策略列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 告警, 策略, 列表, 查看
+:ks_weight: 04
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看告警策略列表。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=20e8a328fc5547d982ef1ffb38f37854]
+
+系统 **admin** 用户可以查看集群中所有已创建的告警策略，普通项目管理员、操作员或观察员可以查看各自所属项目中已创建的告警策略。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=19e9dd8329274265bad2eac0aa5f14e3]
+
+include::../../../_custom/alerts/alert-steps.adoc[]
+
+. 在**告警策略**页签，查看告警策略列表。
++
+--
+告警策略列表展示系统中的所有告警策略，并提供以下信息：
+
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|告警策略的名称。
+
+您也可以在告警策略名称下方查看告警策略的别名。
+
+|状态
+|告警的状态。包括以下状态类型：
+
+include::../../../_custom/alerts/alert-status-description.adoc[]
+
+|级别
+|告警的严重程度，包括以下三个级别：
+
+include::../../../_custom/alerts/alert-severity-levels.adoc[]
+
+|监控目标
+|告警的监控目标。目前支持对节点和虚拟机进行监控。
+
+|规则
+|告警策略使用的告警规则。
+
+|===
+--
+
+. （可选）点击告警策略列表上方的搜索框并设置搜索条件，可按告警策略名称、状态或告警级别搜索告警策略。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的告警策略。
+
+. （可选）在告警策略列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。

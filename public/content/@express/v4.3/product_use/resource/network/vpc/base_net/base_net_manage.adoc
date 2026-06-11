@@ -1,0 +1,78 @@
+---
+title: "管理基础网络 IP"
+weight: 2
+---
+
+== 功能描述
+
+云易捷支持用户对已申请成功的基础网络 IP 进行管理，包括查看修改属性、绑定/解绑主机、绑定/解绑标签、删除等操作。
+
+== 修改属性
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，选择**资源** > **网络** > **VPC 网络**，选择**基础网络 IP** 页签，进入基础网络 IP 列表页面。
+
+. 点击指定基础网络 IP 所在行右侧的更多操作，选择**修改**。
+
++
+image::/images/express/console/base_net_modify_2.png[]
+. 在弹出的**修改属性**的窗口中，输入新的名称或相关描述，点击**修改**即可。
+
+
+
+== 绑定/解绑主机
+
+. 在基础网络 IP 列表页面，点击指定基础网络 IP 所在行右侧的更多操作，选择**分配主机**。
+
++
+image::/images/express/console/base_net_bind_vm_1.png[]
+
+. 在弹出的**选择主机**的窗口中，选择待绑定至当前网络的主机，点击**确定**即可。返回基础网络 IP 列表，其状态变为``已分配``。
++
+image::/images/express/console/base_net_bind_vm_2.png[,50%]
+
+. 点击指定基础网络 IP 所在行右侧的更多操作，选择**离开主机**。
+
++
+image::/images/express/console/base_net_bind_vm_3.png[]
+
+. 在弹出的解绑基础网络的提示窗口中，若确定操作无误，点击**解绑**即可。
+
+== 绑定/解绑标签
+
+. 在基础网络 IP 列表页面，点击指定基础网络 IP 所在行右侧的更多操作，选择**标签** > **绑定**。
+
++
+image::/images/express/console/base_net_label_bind_1.png[]
+
+. 在弹出绑定标签的窗口中，勾选单个或多个标签后，点击**绑定**即可。
+
++
+
+include::../../../../../../../_components/note.adoc[]
+若无合适的标签，点击当前窗口中的**创建**，可以创建新的标签。
+
+include::../../../../../../../_components/table_footer.adoc[]
+//+
+//image::/images/express/console/base_net_label_bind_2.png[,50%]
+
+. 点击指定私有网络所在行右侧的更多操作，选择**标签** > **解绑**。
++
+image::/images/express/console/base_net_label_bind_3.png[]
+
+. 在弹出的新窗口中，删除待解绑的标签后，点击**确定**即可。
+
+== 删除基础网络 IP
+
+. 在基础网络 IP 列表页面，点击指定基础网络 IP 所在行右侧的更多操作，选择**删除**。
++
+
+include::../../../../../../../_components/note.adoc[]
+在删除基础网络 IP 之前，需提前解绑其上的主机资源。
+
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/base_net_delete_1.png[]
+
+. 若确定无误，则在弹出的提示窗口中，点击**删除**即可。

@@ -1,0 +1,38 @@
+---
+title: "Edit Microservice Instance Weight"
+keywords: "Kubernetes, {ks_product-en}, project management, Spring Cloud, edit microservice instance weight"
+description: "Learn how to edit the microservice instance weight."
+weight: 03
+---
+
+:ks_permission: **Spring Cloud Microservices Management**
+:ks_navigation: **Spring Cloud > Microservices**
+
+This section describes how to edit the microservice instance weight.
+
+The weight of a microservice instance is used to determine the traffic distribution of the microservice instance. Traffic sent to the microservice will be distributed to microservice instances based on their weights.
+
+== Prerequisites
+
+* **KubeSphere Spring Cloud** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+== Steps
+
+include::../../../../_custom-en/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom-en/projectManagement/microservices/microservices-oper-openInstanceList.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the microservice instance you want to edit, and then select **Edit Weight** from the drop-down list.
+
+. In the **Edit Weight** dialog, set the weight of the microservice instance, and then click **OK**.

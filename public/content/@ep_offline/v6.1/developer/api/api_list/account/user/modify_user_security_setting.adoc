@@ -1,0 +1,95 @@
+---
+title: 修改用户账户安全设置（ModifyUserSecuritySetting）
+weight: 25
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| change_password_interval
+| Integer
+| false
+| 
+
+| deactivate_key
+| Integer
+| false
+| 
+
+| disable_offline_session
+| Integer
+| false
+| 关闭脱机sesion
+
+| enable_2fa
+| Integer
+| false
+| 
+
+| enable_password_fail_notify
+| Integer
+| false
+| 是否启用密码验证失败通知
+
+| reject_login_for_wrong_password
+| Integer
+| false
+| 拒绝错误密码登录
+
+| session_cnt
+| Integer
+| false
+| 
+
+| user
+| String
+| true
+| 用户
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "change_password_interval": 0,
+  "deactivate_key": 0,
+  "disable_offline_session": 0,
+  "enable_2fa": 0,
+  "enable_password_fail_notify": 0,
+  "reject_login_for_wrong_password": 0,
+  "session_cnt": 0,
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyUserSecuritySettingResponse",
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

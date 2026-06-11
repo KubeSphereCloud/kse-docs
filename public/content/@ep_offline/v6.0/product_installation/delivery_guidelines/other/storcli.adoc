@@ -1,0 +1,98 @@
+---
+title: StorCLI 工具使用
+weight: 1
+---
+
+
+
+== 安装
+
+在 Linux 环境执行如下步骤，安装 StorCLI 工具。
+
+. 下载 StorCLI 安装包。
+
+. 执行如下命令行，安装 StorCLI RPM 工具包。
++
+[source,shell]
+----
+# rpm -ivh <StorCLI-x.xx-x.noarch.rpm>
+----
+
+. 执行如下命令行，升级 StorCLI RPM 工具包。
++
+[source,shell]
+----
+# rpm -Uvh <StorCLI-x.xx-x.noarch.rpm>
+----
+
+
+== 使用
+
+=== 命令行说明
+
+* 查看 StorCLI 的版本号
++
+[source,shell]
+----
+# Storcli –v
+----
+
+* 查看 StorCLI 帮助
++
+[source,shell]
+----
+# Storcli –h
+----
+
+* 查看 RAID 卡信息
++
+[source,shell]
+----
+# Storcli –show
+----
+
+* 查看 RAID 卡缓存容量
++
+[source,shell]
+----
+# Storcli /cx show freespace
+----
+
+=== 使用实例
+
+. 查看当前系统中，RAID 卡数量。
++
+[source,shell]
+----
+# storcli show ctrlcount
+----
+
+
+. 依次查看 RAID 卡状态
++
+[source,shell]
+----
+# /opt/qs-device/tools/storcli /c0/bbu show
+
+# /opt/qs-device/tools/storcli /c0/cv show
+----
+
++
+include::../../../../../_components/note.adoc[]
+
+* 命令行中，`c0` 为 RAID 卡 ID，需根据前文步骤逐一进行查看，可替换为 `c1`。一般情况下，一台服务器仅一张 RAID，因此命令行中仅列举了 `c0`。
+* 一张 RAID 卡的带电模式，要么使用 BBU，要么使用 CV，因此上面两条命令行中，哪条命令行能正常执行，就是哪种模式。
+
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+. 依次查看 RAID 卡信息，该命令行，输出 RAID 卡的模式，可用于查看是否为 WriteBack。
++
+[source,shell]
+----
+# storcli /c0/vall show
+----
+
+

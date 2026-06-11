@@ -1,0 +1,143 @@
+---
+title: 查询资源绑定的IAM身份（DescribeIAMRolesWithResource）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| false
+| ConsoleID
+
+| limit
+| Integer
+| false
+| 偏移量
+
+| offset
+| Integer
+| false
+| 起始坐标
+
+| owner
+| String
+| false
+| 所有者
+
+| resources
+| String
+| true
+| 资源ID
+
+| reverse
+| Integer
+| false
+| 是否降序查询
+
+| root_user
+| String
+| false
+| 根用户ID
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| sort_key
+| String
+| false
+| 排序使用的列
+
+| zone
+| String
+| true
+| ZONE
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| associations
+| Object
+| false
+| 关联身份映射
+
+| associations.create_time
+| String
+| false
+| 创建时间
+
+| associations.description
+| String
+| false
+| 描述信息
+
+| associations.instance_id
+| String
+| false
+| 主机ID
+
+| associations.qrn
+| String
+| false
+| IAM身份唯一资源标识
+
+| associations.role_id
+| String
+| false
+| IAM身份ID
+
+| associations.role_name
+| String
+| false
+| IAM身份名称
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMRolesWithResource",
+  "resources": [
+    "i-j7q50akf"
+  ],
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMRolesWithResourceResponse",
+  "associations": {
+    "i-j7q50akf": [
+      {
+        "create_time": "2023-06-21T18:20:33",
+        "description": "",
+        "instance_id": "i-j7q50akf",
+        "qrn": "qrn:qingcloud:iam::admin:role/iamr-m6b5sg29",
+        "role_id": "iamr-m6b5sg29",
+        "role_name": "iam-yangjialei"
+      }
+    ]
+  },
+  "ret_code": 0
+}
+----

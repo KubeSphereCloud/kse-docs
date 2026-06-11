@@ -1,0 +1,61 @@
+---
+title: "创建项目"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 项目, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建项目。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 4f5b020bd5db4153bf6cf9e256b062e4
+:ks_xref_id: 2830ba8cc26f435595b72c7ca2a6ef08
+:ks_comp: ../../../components/
+:ks_title: 创建项目
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建项目。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 项目, 创建
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建项目。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=e9165155d88e4c949ba48caec8c7ac0d]
+
+请确保您是以系统 **admin** 用户登录。普通项目管理员或操作员仅对项目具有编辑权限，无法创建项目。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=71e1b7077f3c49f788f573953a7b5aae]
+
+include::../../../_custom/projects/project-manage-steps.adoc[]
+
+. 在项目列表页面，点击右上角的**创建**。
+
+. 在弹出的对话框中设置项目的**名称**、**别名**和**描述**。
++
+--
+[cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|
+include::../../../_custom/projects/project-name-description.adoc[]
+
+|别名
+|
+include::../../../_custom/projects/project-alias-description.adoc[]
+
+|描述
+|
+include::../../../_custom/projects/project-description.adoc[]
+|===
+--
+
+. 点击**创建**。项目创建后将显示在项目列表中。

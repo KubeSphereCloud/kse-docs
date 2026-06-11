@@ -1,0 +1,263 @@
+---
+title: "安装 mysql-server"
+weight: 2
+---
+
+== 特殊说明
+
+本章节中出现的 ``<xx.xx.xx.xx>`` 均为当前环境其他健康数据库节点的 IP 地址，需根据实际情况进行修改。
+
+== 操作步骤
+
+. 登录新的管理节点。
+
+. 依次执行如下命令，从其他数据库节点同步 apt 源配置。
++
+[source,shell]
+----
+mv /etc/apt/sources.list /etc/apt/sources.list.bk
+----
++
+[source,shell]
+----
+scp <xx.xx.xx.xx>:/etc/apt/sources.list.d/qingstor.list /etc/apt/sources.list.d/
+apt update
+----
+
+. 执行如下命令，安装必要的软件包。
++
+[source,shell]
+----
+apt -y install apparmor mysqlmgr percona-xtradb-cluster-server-5.7
+----
++
+include::../../../../../../_components/note.adoc[]
+若提示输入密码，直接回车跳过即可。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 依次执行如下命令，停止当前节点系统自带的 MySQL 服务并禁用开机启动。
++
+[source,shell]
+----
+systemctl stop mysql
+update-rc.d mysql remove
+----
+
+. 执行如下命令创建临时 ``/qingstor/data/ssd/tmp/`` 目录。
++
+[source,shell]
+----
+mkdir -p /qingstor/data/ssd/tmp/
+chmod 1777 /qingstor/data/ssd/tmp/
+----
+
+. 执行如下命令，创建数据目录并设置所有者为 mysql。
++
+[source,shell]
+----
+mkdir -p /qingstor/log/mysql /qingstor/run/mysql /qingstor/data/ssd/qingstor-mysql /qingstor/data/ssd/neonsan-mysql /qingstor/data/qingstor-mysql /qingstor/data/neonsan-mysql
+----
++
+[source,shell]
+----
+chown -R mysql:mysql /qingstor/log/mysql /qingstor/run/mysql /qingstor/data/ssd/qingstor-mysql /qingstor/data/ssd/neonsan-mysql /qingstor/data/qingstor-mysql /qingstor/data/neonsan-mysql
+----
+
+. 从其他数据库节点拷贝 ``xtradb-qingstor.cnf`` 配置文件，并修改相应参数。
++
+[source,shell]
+----
+scp -p <xx.xx.xx.xx>:/qingstor/etc/xtradb-qingstor.cnf /qingstor/etc/xtradb-qingstor.cnf
+----
++
+[source,shell]
+----
+vi /qingstor/etc/xtradb-qingstor.cnf
+----
++
+待修改参数示例如下：
++
+[source]
+----
+... ...
+wsrep_node_name=qingstor-mysql0  
+wsrep_node_address=172.16.90.3:3407 
+wsrep_provider_options="gcache.recover=yes;base_port=3407;ist.recv_addr=172.16.90.3:3607;gcs.fc_limit=5000;gcache.size=512M;pc.wait_prim_timeout=PT1200S"  
+wsrep_sst_receive_address=172.16.90.3:3507  
+
+... ...
+
+server-id = 0
+
+... ...
+----
++
+**修改说明**：
++
+* ``wsrep_node_name`` 修改为当前 qingstor-mysql 数据库节点的角色名。
+* ``wsrep_node_address``  修改为当前节点的 IP 地址，端口号不变。
+* ``wsrep_provider_options``中的 ``ist.recv_addr`` 需修改为当前节点的 IP 地址，其他保持不变。
+* ``wsrep_sst_receive_address`` 修改为当前节点的 IP 地址，端口号不变。
+* ``server-id`` 修改为当前节点角色名的 Index 值。
+* 配置文件中的其他参数保持不变即可。
+
+. 恢复管理脚本 ``/qingstor/bin/qingstor-mysql``。
++
+[source,shell]
+----
+scp -p <xx.xx.xx.xx>:/qingstor/bin/qingstor-mysql /qingstor/bin/qingstor-mysql
+----
+
+. 从其他数据库节点，拷贝 ``xtradb-neonsan.cnf`` 文件，并修改相应参数。
++
+[source,shell]
+----
+scp -p <xx.xx.xx.xx>:/qingstor/etc/xtradb-neonsan.cnf /qingstor/etc/xtradb-neonsan.cnf
+----
++
+[source,shell]
+----
+vi /qingstor/etc/xtradb-neonsan.cnf
+----
++
+待修改参数示例如下：
++
+[source]
+----
+... ...
+wsrep_node_name=neonsan-mysql0
+wsrep_node_address=172.16.90.3:3406  
+wsrep_provider_options = "gcache.recover=yes;base_port=3406;ist.recv_addr=172.16.90.3:3606;gcs.fc_limit=5000;gcache.size=512M;pc.wait_prim_timeout=PT1200S" 
+wsrep_sst_receive_address=172.16.90.3:3506 
+
+... ...
+
+server-id = 0
+
+... ...
+----
++
+**修改说明**：
++
+* ``wsrep_node_name`` 修改为当前 neonsan-mysql 数据库节点的角色名。
+* ``wsrep_node_address``  修改为当前节点的 IP 地址，端口号不变。
+* ``wsrep_provider_options``中的 ``ist.recv_addr`` 需修改为当前节点的 IP 地址，其他保持不变。
+* ``wsrep_sst_receive_address`` 修改为当前节点的 IP 地址，端口号不变。
+* ``server-id`` 修改为当前节点角色名的 Index 值。
+* 配置文件中的其他参数保持不变即可。
+
+. 恢复管理脚本 ``/qingstor/bin/neonsan-mysql``。
++
+[source,shell]
+----
+scp -p <xx.xx.xx.xx>:/qingstor/bin/neonsan-mysql /qingstor/bin/neonsan-mysql
+----
+
+
+. 恢复 supervisor 配置文件。
++
+[source,shell]
+----
+scp -p <xx.xx.xx.xx>:/qingstor/etc/supervisord.d/qingstor-mysql.ini /qingstor/etc/supervisord.d/qingstor-mysql.ini
+ 
+scp -p <xx.xx.xx.xx>:/qingstor/etc/supervisord.d/neonsan-mysql.ini /qingstor/etc/supervisord.d/neonsan-mysql.ini
+----
+
+. 依次执行如下命令，更新 supervisor，并启动 MySQL 服务。
++
+[source,shell]
+----
+supervisorctl update
+----
++
+[source,shell]
+----
+supervisorctl start mysql_qingstor
+supervisorctl start mysql_neonsan
+----
+
+. 等待 MySQL 启动成功，执行如下命令，查看数据库集群状态。
+.. 检查 qingstor-mysql 集群状态，返回结果中 ``started nodes`` 和 ``live nodes`` 均恢复即正常
++
+[source,shell]
+----
+/qingstor/bin/qingstor-mysql list
+----
++
+[source]
+----
+cluster qingstor
+started nodes:
+     172.16.90.3:3307
+     172.16.90.4:3307
+     172.16.90.5:3307
+live nodes:
+     172.16.90.3:3307
+     172.16.90.4:3307
+     172.16.90.5:3307
+arbitors:
+----
+.. 检查 neonsan-mysql 集群状态，返回结果中 ``started nodes`` 和 ``live nodes`` 均恢复即正常
++
+[source,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
++
+[source]
+----
+cluster neonsan
+started nodes:
+     172.16.90.3:3306
+     172.16.90.4:3306
+     172.16.90.5:3306
+live nodes:
+     172.16.90.3:3306
+     172.16.90.4:3306
+     172.16.90.5:3306
+arbitors:
+----
+
+.. 登录 qingstor-mysql 和 neonsan-mysql 数据库，查看集群大小，返回结果中 ``Value`` 值为数据库节点总数即恢复正常。
+* qingstor-mysql 数据库
++
+[source,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h127.0.0.1 -P 3307
+----
++
+[source,sql]
+----
+show status like "%wsrep_cluster_size%";
+
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| wsrep_cluster_size | 3     |
++--------------------+-------+
+1 row in set (0.00 sec)
+----
+
+* neonsan-mysql 数据库
++
+[source,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h127.0.0.1 -P 3306
+----
++
+[source,sql]
+----
+show status like "%wsrep_cluster_size%";
+
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| wsrep_cluster_size | 3     |
++--------------------+-------+
+1 row in set (0.00 sec)
+----
++
+include::../../../../../../_components/note.adoc[]
+<xx.xx.xx.xx> 为当前环境其他健康数据库节点的 IP 地址，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+

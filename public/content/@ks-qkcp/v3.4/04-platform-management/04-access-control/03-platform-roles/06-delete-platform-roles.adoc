@@ -1,0 +1,58 @@
+---
+title: "删除平台角色"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 平台管理, 访问控制, 平台角色, 删除平台角色"
+description: "介绍如何删除平台角色。"
+weight: 06
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: e6908999cf3c42c9aa29b407959d9706
+:ks_xref_id: f5f1f40ade6d497c819be9539042c4f5
+:ks_comp: ../../../../components/
+:ks_title: 删除平台角色
+:ks_keywords: Kubernetes, {ks_product}, 平台管理, 访问控制, 平台角色, 删除平台角色
+:ks_description: 介绍如何删除平台角色。
+:ks_weight: 06
+:ks_icon:
+:ks_menu: **平台管理 > 访问控制**
+:ks_permission: **角色管理**
+:ks_navigation: **平台角色**
+
+
+本节介绍如何删除平台角色。
+
+您可以删除用户创建的平台角色。预置平台角色无法删除。
+
+
+== 前提条件link:[id=53351550fe6f4d72894d54662a66aa63]
+
+//:relfileprefix: ../../../../
+
+* 您需要在{ks_product_both}平台具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅link:../../../../04-platform-management/04-access-control/02-users/_index/[用户]和link:../../../../04-platform-management/04-access-control/03-platform-roles/_index/[平台角色]。
+// include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+
+//:relfileprefix: ./
+
+
+* 如果需要删除的平台角色已经分配给用户，您需要删除用户或修改其角色。
+
+
+== 操作步骤link:[id=5bd9a846f84a4790b9a4272bb3bdfda9]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要删除的平台角色右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除**。
+
+. 在**删除角色**对话框点击**确定**。

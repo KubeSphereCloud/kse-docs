@@ -1,0 +1,59 @@
+---
+title: "修改 mysql-operator 日志等级"
+weight: 08
+---
+
+. 获取 mysql-operator
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# kubectl -n mysql get deploy
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+demo-mysql-operator                1/1     1            1           5d1h
+----
+
+. 更新 mysql-operator 日志等级, 修改 --zap-log-level=info 或者 error
++
+--
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# kubectl -n mysql edit deploy demo-mysql-operator
+----
+
+image:/images/ks-qkcp/zh/security-handbook/328-change-level/01.png[]
+
+image:/images/ks-qkcp/zh/security-handbook/328-change-level/02.png[]
+--
+
+. 关闭 demo-mysql-operator
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# kubectl -n mysql scale deploy demo-mysql-operator --replicas=0
+deployment.apps/demo-mysql-operator scaled
+----
+
+. 重启 demo-mysql-operator
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# kubectl -n mysql scale deploy demo-mysql-operator --replicas=1
+deployment.apps/demo-mysql-operator scaled
+----
+
+. 获取 demo-mysql-operator pod
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# kubectl -n mysql get pod
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+demo-mysql-operator-6485b589b4-bsrrc               1/1     Running   0          85s
+----
+
+. 查看日志
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# kubectl logs demo-mysql-operator-6485b589b4-bsrrc
+----
+

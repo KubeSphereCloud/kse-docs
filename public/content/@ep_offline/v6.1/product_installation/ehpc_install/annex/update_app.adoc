@@ -1,0 +1,54 @@
+---
+title: "升级 AppCenter"
+weight: 2
+---
+
+. 从以下 ftp 路径获取 AppCenter 更新脚本。
++
+[source,shell]
+----
+ftp://ins.qingcloud.com/hotfix/appcenter/
+----
++
+
+include::../../../../../_components/note.adoc[]
+获取最新版本的 AppCenter 更新脚本。
+include::../../../../../_components/table_footer.adoc[]
+
+. 将 AppCenter 更新脚本上传至当前环境的 FirstBox 节点的 /root 目录。
+
+. 登录当前环境的 FirstBox 节点。
+
+. 执行如下命令，解压脚本。
++
+[source,shell]
+----
+# tar -zxvf import_app_script_release_xxxxxxxx.tar.gz
+----
++
+
+include::../../../../../_components/note.adoc[]
+安装包名称需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，查看环境中 webservice 节点信息。
++
+[source,shell]
+----
+# cat /etc/hosts | grep webservice
+----
+
+. 执行如下命令，升级 AppCenter。
++
+[source,shell]
+----
+# ./import_app_script_release_xxxxxxx/upgrade_import_scripts -n ZONE-webservice0,ZONE-webservice1
+----
++
+
+include::../../../../../_components/note.adoc[]
+* -n 参数用于指定环境中 webservice 节点，需根据实际情况进行修改。
+* 安装包名称需根据实际情况进行修改。
+
+include::../../../../../_components/table_footer.adoc[]
+

@@ -1,0 +1,14 @@
+---
+title: "文件检查（3 级）"
+weight: 2
+---
+
+. 逐个登录 NeonSAN 集群各节点。
+. 查看是否存在 ``/var/crash/*`` 文件，若有，则说明进程发生过 coredump。
+. 执行如下命令查看时间戳。若该 coredump 是 3 天内发生，需联系 NeonSAN 产研人员进行进一步判断和处理。
++
+[,shell]
+----
+ls -al /var/crash/
+----
+

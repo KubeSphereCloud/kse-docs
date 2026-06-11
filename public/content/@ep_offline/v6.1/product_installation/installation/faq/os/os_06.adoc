@@ -1,0 +1,23 @@
+---
+title: 无法使用 U 盘自动安装
+weight: 06
+draft: true
+---
+
+== 问题现象
+
+制作 U 盘的镜像为 FTP 服务器上的 QingCloud-16.04.5.3-AutoInstall.iso。
+
+安装操作系统时出现以下问题，无法自动安装：
+
+* RAID 卡驱动问题，无法在 Legacy 下识别磁盘分区。
+* U 盘被识别成 sda。
+* 自动安装 16.4.5.3 时，安装到一半报 `no root file system is defined`。
+
+== 问题原因
+
+RAID 卡驱动问题、U 盘识别问题。
+
+== 解决方法
+
+使用 FTP 上这个镜像：``isos/QingCloud-16.04.5.3-AutoInstall-huawei.iso``。

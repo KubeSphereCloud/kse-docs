@@ -1,0 +1,83 @@
+---
+title: "查看算力节点列表"
+keywords: "Kubernetes, {ks_product}, 集群管理, 算力节点, 查看算力节点列表"
+description: "介绍如何查看算力节点列表。"
+weight: 03
+---
+
+
+:ks_permission: **算力节点查看**
+:ks_navigation: **集群 > 算力节点**
+
+
+本节介绍算力节点列表的信息。
+
+
+== 前提条件
+
+* 已部署算力节点。
+
+* KubeSphere 平台需要安装并启用**算力设备管理**扩展组件。
+
+:relfileprefix: ../../../
+* {empty}
+include::../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在算力节点页面上方，查看集群中算力节点的总数量、GPU/vGPU/NPU/vNPU 节点的数量、显卡总数量、以及显存总容量。
+
+. 算力节点列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|各节点的主机名称和在子网内部的 IP 地址。
+// 各节点的主机名称由用户安装集群时在安装配置文件 **config-sample.yaml** 中设置。
+
+|状态
+|
+include::../../../_custom/clusterManagement/computingNodes/nodes-para-computingNodeStatus.adoc[]
+
+|角色
+|
+include::../../../_custom/clusterManagement/nodes/nodes-para-nodeRole_new.adoc[]
+
+|显卡型号
+|节点上安装的显卡型号。
+
+|类型
+|显卡类型。
+
+|调度策略
+|
+* **显卡独占**：一个任务独享整张物理显卡的所有计算和显存资源，从而获得最佳且稳定的性能。
+
+* **隔离共享**：将一张物理显卡通过虚拟化技术分割成多个 vGPU，允许多个任务同时共享该显卡，并在任务间提供资源隔离。
+
+|显存
+|显卡的显存容量大小。
+
+|显卡状态
+|​正常和异常状态的显卡数量。
+|===
+
+* 在列表上方点击搜索框并输入关键字，可按名称搜索节点。
+
+include::../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../_ks_components/oper-customizeColumns.adoc[]
+--

@@ -1,0 +1,139 @@
+---
+title: "第一步：基本信息"
+weight: 2
+---
+
+
+
+
+第一步，根据页面提示信息，正确填写待部署{product_name}的基础信息后，点击**下一步**。
+
+image::/images/ep_offline/installation/webinstaller_04.png[webinstaller_04]
+
+== 参数说明
+
+页面参数，均需根据前期规划内容进行填写。
+
+[cols='1,3a']
+|===
+| 参数 | 说明
+
+| 区域 ID | 资源所在的区域 ID。简称 Region ID。
+
+include::../../../../../../_components/note_in_table.adoc[]
+* 区域通过地理位置划分，不同区域间内网隔离，不能互相访问。
+* 一个区域可以包括多个可用区，每个可用区都相互独立但网络互通，同一可用区内的主机网络延时更小。
+* 填写时，不能与 `可用区 ID`、`门户 ID` 相同。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+| 可用区类型 | 请根据环境规划进行填写。可选值有 `全局与计算` 与 `仅计算`。
+
+* 选择 `全局与计算` 类型时，会同时部署 Global 与 Sub 服务。
+* 选择 `仅计算` 类型时，不会部署 Global 服务，并且在部署完成后，需与 link:../overview/#_部署模式[Global Zone] 进行对接。
+
+| 可用区 ID | 资源所在的可用区 ID。简称 Zone ID。
+
+include::../../../../../../_components/note_in_table.adoc[]
+
+填写时，不能与 `区域 ID`、`门户 ID` 相同。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| 可用区名称 | 资源所在的可用区中文名称。
+
+
+| 可用区编码 | 资源所在的可用区编码。
+
+include::../../../../../../_components/note_in_table.adoc[]
+**可用区类型**选择 `仅计算` 时，需与同一 Global Zone 所纳管的其他可用区保持不同。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| 门户主域名 | 用于访问 Console 等 Web 环境。
+
+include::../../../../../../_components/note_in_table.adoc[]
+**可用区类型**选择 `仅计算` 时，需与 Global Zone 保持一致。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| 门户 ID | Console ID，Console 的唯一标识。
+include::../../../../../../_components/note_in_table.adoc[]
+* **可用区类型**选择 `仅计算` 时，需与 Global Zone 保持一致。
+* 填写时，不能与 `区域 ID`、`可用区 ID` 相同。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+
+| 门户名称 | Console 名称。
+
+include::../../../../../../_components/note_in_table.adoc[]
+**可用区类型**选择 `仅计算` 时，需与 Global Zone 保持一致。
+
+include::../../../../../../_components/footer_in_table.adoc[]
+| 协议 | 设置 Web 服务使用的网络协议，支持 `http`、`https`。
+
+* **可用区类型**选择 `仅计算` 时，协议类型选择需与 Global Zone 保持一致。
+* 如需使用 `https`，需提前准备相关的泛域名证书并上传。**可用区类型**选择 `仅计算` 时，上传的域名证书也需与 Global Zone 保持一致。
++
+image::/images/ep_offline/installation/webinstaller_06.png[webinstaller_06]
+
+//* 证书相关内容可参考[ SSL 证书 todo]。
+
+| 服务器时间 | 填写外部 NTP 服务器的 IP 地址，多个 IP 地址之间使用 `,` 隔开。若不填写，系统会自动从 KS 节点同步时间。
+// | 外部 NTP 服务器 | 
+// | 远端存储 | 是否使用第三方存储。
+
+// * 如需将第三方存储通过 ISCSI 或 FC_SAN 对接到当前环境中使用，需开启该设置并填写第三存储的相关参数。
+// +
+// image::/images/ep_offline/installation/webinstaller_07.png[webinstaller_07,60%]
+
+// * 支持同时对接多块第三方存储设备。
+
+|===
+
+== 高级设置
+
+点击页面中的**展开高级设置**，配置以下参数。如下图所示，高级设置中的相关参数，均有默认值，若无特殊要求，无需修改。
+
+image::/images/ep_offline/installation/webinstaller_05.png[webinstaller_05]
+
+
+
+**参数说明**
+
+[cols='1,3a']
+|===
+| 参数 | 说明
+
+| SSH 端口 | SSH 协议使用的端口号，默认为 `22`，若无特殊要求，无需修改。
+| 计算节点最大传输单元 (MTU for Hyper) | 
+* 默认值为 `1550`，对应的交换机侧的 MTU 需要配置为 `9216`。
+* 无特殊要求，维持默认即可。
+| 集群规模 a| 设置当前环境的部署规模，用于控制 `postgres` 或 `pgpool` 的最大连接数。需根据待部署环境中物理服务器数量进行选择。
+
+* 节点数小于 200，为 `小型` 集群。
+* 节点数 200 至 500，为 `中型` 集群。
+* 节点数大于 500，为 `大型` 集群。
+
+| 项目 POC | 是否用于 POC 项目。开启 POC 场景后，会获得部分未经全面测试的实验性功能，正式生产环境不建议启用。
+| 初始支持云服务器类型 | 用于初始化产品中心的主机类型，已内置如下主机类型。
+
+* 性能型
+* 超高性能型
+* SAN 存储超高性能型
+* SAN 存储性能型
+* GPU 计算
+* 弹性裸金属云服务器
+
+更多云服务器类型可在{product_name}成功部署后于产品中心上架或管理。
+
+| 初始支持云硬盘类型 | 用于初始化产品中心的硬盘类型，已内置如下硬盘类型。
+
+* 性能型本地盘
+* 超高性能型本地盘
+* 通用型 SSD 云盘
+* 容量型云盘
+
+更多云硬盘类型可在{product_name}成功部署后于产品中心上架或管理。
+|===
+
+

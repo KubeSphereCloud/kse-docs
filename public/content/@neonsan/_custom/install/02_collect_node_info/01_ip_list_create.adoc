@@ -1,0 +1,40 @@
+// 创建 ip_list 文件
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+
+include::../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+include::../../../../_components/table_footer.adoc[]
+
+. 在 root 目录下创建 ip_list 文件。
++
+[source,shell]
+----
+touch /root/ip_list
+----
+
+. 将待部署的物理节点的管理 IP，以每行一个的方式，写入 ip_list 文件中。
++
+[source,shell]
+----
+vi /root/ip_list
+----
++
+[source]
+----
+x.x.x.x
+x.x.x.x
+x.x.x.x
+----
++
+include::../../../../_components/note.adoc[]
+* 一行一个 IP 地址。
+* 所有待部署的物理节点的管理 IP，均需添加至该文件中。
+include::../../../../_components/table_footer.adoc[]

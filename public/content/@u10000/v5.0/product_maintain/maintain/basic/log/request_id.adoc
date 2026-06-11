@@ -1,0 +1,71 @@
+---
+title: 获取请求 ID
+weight: 1
+---
+
+
+
+当 {product_name} 成功接受用户端发送的请求时，无论该请求成功与否，{product_name} 均会返回响应。
+
+* 当用户端请求成功时，Request ID 将包含在 Response Header 里，返回给用户。
+* 当用户端请求失败时，Request ID 将包含在 Response Body里，返回给用户。
+* 若对接 S3 的接口，Response Header 里面的 Request ID 对应 `x-amz-request-id` 字段。
+
+具体可参考如下方式获取 Request ID。
+
+== 方式一
+
+直接从请求响应中获取 Request ID。
+
+* 用户请求成功，Request ID 包含在 Response Header 里。
++
+[source,yaml]
+----
+HTTP/1.1 201 CREATED
+Server: QingStor
+Date: Sun, 16 Aug 2015 09:05:00 GMT
+Content-Length: 0
+Connection: close
+x-qs-request-id: aa08cf7a43f611e5886952542e6ce14b
+
+// 若对接 S3 接口，此处返回字段为：
+x-amz-request-id: 794bfa3ab2313a53
+……
+
+----
++
+`x-qs-request-id` 或 `x-amz-request-id` 字段值即为 Request ID。
+
+* 用户请求失败，Request ID 包含在 Response Body 里。
++
+[source,yaml]
+----
+{
+  "code": "bad_request",
+  "message": "Invalid argument(s) or invalid argument value(s)",
+  "request_id": "aa08cf7a43f611e5",
+  "url": "http://docs.qingcloud.com/qingstor/api/common/error_code.html"
+}
+
+
+----
++
+`request_id` 字段值即为 Request ID。
+
+
+
+== 方式二
+
+从浏览器侧，也可以获取到 Request ID。操作步骤如下。
+
+. 打开浏览器，点击右键，弹出的选项框内，点击**检查**，进入浏览器调试界面。
++
+image::/images/u10000_v5.0/maintain_2.png[maintain_2,50%]
+
+. 浏览器调试界面点击**网络**，查看 Web 应用发送的请求。
++
+image::/images/u10000_v5.0/maintain_3.png[maintain_3,50%]
+
+. 点击待查看的 Web 应用发送的请求，查看相应的头信息。
++
+image::/images/u10000_v5.0/maintain_4.png[maintain_4,100%]

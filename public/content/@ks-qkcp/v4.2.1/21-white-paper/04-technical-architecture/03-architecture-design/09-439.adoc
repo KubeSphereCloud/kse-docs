@@ -1,0 +1,39 @@
+---
+title: "存储"
+weight: 09
+---
+
+== 核心功能
+
+* 支持对接本地存储、NFS、网络存储、云存储等多种存储系统
+* 支持创建卷快照和基于卷快照的持久卷恢复
+* 支持持久卷自动扩容
+* 支持租户级别的存储类隔离
+* 支持自定义持久卷初始化，无需修改应用
+* 各项功能独立控制，可根据所需分别开启和关闭
+
+== 架构设计
+
+=== 主要组件
+
+以下是 KubeSphere 存储包含的所有组件：
+
+* snapshot-controller: 用于为 PVC 创建快照。
+* snapshotclass-controller: 用于为快照计数。
+* pvc-auto-resizer: 用于为 PVC 在容量不足的情况下实现自动扩容。
+* storageclass-accessor: 提供准入控制器，用来验证是否准许在某个项目或企业空间创建 PVC。
+* volume-initializer: 提供准入控制器，用来为 pod 注入初始化 PVC volumes 的初始容器。
+* nfs-pv-static-provisioner: 根据 PVC 的注解，自动创建 NFS 类型的 PV 并与已有的 NFS volume 关联。
+* apiserver: 提供存储相关的 API。
+
+=== 架构设计
+
+存储类、持久卷、持久卷声明的 API 和控制器由 Kubernetes 组件支持和提供。
+
+卷快照类，卷快照，卷快照内容由 Kubernetes 官方社区提供 CRD 和控制器进行支持。KubeSphere 存储扩展组件包含了这些 CRD 和控制器。
+
+持久卷自动扩容依赖 Prometheus 对持久卷的容量监测，可在剩余容量达到用户设置的阈值时，由 KubeSphere 存储扩展组件自动对其扩容。
+
+存储类隔离借助 ValidatingAdmissionWebhook 机制，集群管理员可将存储类开放给特定的企业空间或项目使用。
+
+持久卷初始化借助 MutatingAdmissionWebhook 机制，为指定 pod 创建一个初始化容器（initcontainer), 在初始化容器中对持久卷的权限或数据进行自定义初始化。

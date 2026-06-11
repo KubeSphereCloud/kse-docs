@@ -1,0 +1,29 @@
+---
+title: "配置 HTTPS 支持"
+weight: 20
+---
+
+如果使用 HTTPS 协议访问企业云平台，还需要预先上传证书。
+
+== 准备证书
+
+由用户申请（购买）SSL 泛域名证书，证书包括 crt 、 key 两个文件。
+
+例如：
+
+* crt文件：.cloud.lianluo.com_bundle.crt
+* key文件：.cloud.lianluo.com.key
+
+准备安装所需的 server.pem、server-key.pem、server-chained.pem 文件。
+
+* server.pem = crt 文件 + key 文件
+* server-key.pem = key 文件
+* server-chained.pem = crt 文件
+
+== 上传证书
+
+把准备好的三个文件，上传到 FirstBox 如下目录，并覆盖目录的原始文件。
+
+* /pitrix/conf/packages/pitrix-ks-webservice-base/cert/server.pem
+* /pitrix/conf/packages/pitrix-ks-proxy/cert/server-key.pem
+* /pitrix/conf/packages/pitrix-ks-proxy/cert/server-chained.pem

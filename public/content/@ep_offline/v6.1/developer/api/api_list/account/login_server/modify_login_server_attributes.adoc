@@ -1,0 +1,217 @@
+---
+title: 修改第三方登录服务器属性（ModifyLoginServerAttributes）
+weight: 13
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| authorization_endpoint
+| String
+| false
+| 
+
+| base_dn
+| String
+| false
+| 
+
+| client_id
+| String
+| false
+| 
+
+| client_secret
+| String
+| false
+| 
+
+| description
+| String
+| false
+| 描述
+
+| enable_sso
+| Integer
+| false
+| 是否允许单点登录
+
+| icon
+| String
+| false
+| 图标地址
+
+| introspection_endpoint
+| String
+| false
+| 
+
+| ldap_type
+| Integer
+| false
+| 
+
+| login_server_id
+| String
+| true
+| 
+
+| logout_endpoint
+| String
+| false
+| 
+
+| prompt
+| String
+| false
+| 
+
+| provider
+| String
+| false
+| 
+
+| redirect_uri
+| String
+| false
+| 重定向uri
+
+| response_type
+| String
+| false
+| 响应类型
+
+| root_passwd
+| String
+| false
+| root
+
+| root_user
+| String
+| false
+| root
+
+| scope
+| String
+| false
+| 
+
+| server_host
+| String
+| true
+| 服务器主机名
+
+| server_name
+| String
+| false
+| 服务器名称
+
+| server_port
+| Integer
+| false
+| 服务器端口
+
+| server_protocol
+| String
+| false
+| 服务器协议类型
+
+| server_type
+| String
+| false
+| 服务器类型
+
+| status
+| String
+| false
+| 
+
+| token_endpoint
+| String
+| false
+| 
+
+| userinfo_endpoint
+| String
+| false
+| 
+
+| userpool_id
+| String
+| false
+| 
+
+| zones
+| Array
+| false
+| zone
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| login_server_id
+| String
+| false
+| 登录服务器ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "authorization_endpoint": "authorization_endpoint_1",
+  "base_dn": "base_dn_1",
+  "client_id": "client_id_1",
+  "client_secret": "********",
+  "description": "description",
+  "enable_sso": 1,
+  "icon": "http://icon",
+  "introspection_endpoint": "introspection_endpoint_1",
+  "ldap_type": 1,
+  "login_server_id": "login_server_id_1",
+  "logout_endpoint": "logout_endpoint_1",
+  "prompt": "yes",
+  "provider": "admin",
+  "redirect_uri": "http://redirct_uri",
+  "response_type": "http",
+  "root_passwd": "*******",
+  "root_user": "root",
+  "scope": "all",
+  "server_host": "server_host_1",
+  "server_name": "server_name_1",
+  "server_port": 80,
+  "server_protocol": "ssl",
+  "server_type": "linux",
+  "status": "activated",
+  "token_endpoint": "token_endpoint_1",
+  "userinfo_endpoint": "userinfo_endpoint_1",
+  "userpool_id": "userpool_id_1",
+  "zones": [
+    "pek3"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyLoginServerAttributesResponse",
+  "login_server_id": "login_server_id_1",
+  "ret_code": 0
+}
+----

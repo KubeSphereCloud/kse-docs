@@ -1,0 +1,43 @@
+---
+title: "View Alert List"
+keywords: "Kubernetes, {ks_product-en}, cluster management, alerts, view alert list"
+description: "Describes how to view the alert list."
+weight: 01
+---
+
+:ks_permission: **Alert Viewing**
+:ks_navigation: **Monitoring Alerting > Alerts**
+
+
+include::../../../../../_custom-en/clusterManagement/alerts/alerts-desc-viewAnAlertingMessageList.adoc[]
+
+
+== Prerequisites
+
+* **WhizardTelemetry Alerting** should have been installed and enabled.
+
+* {empty}
+include::../../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject.adoc[]
+
+
+== Steps
+
+. Log in to the {ks_product-en} web console with a user who has the pass:a,q[{ks_permission}] permission and enter your cluster or project.
++
+
+include::../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../..//_custom-en/clusterManagement/alerts/alerts-oper-openListPage.adoc[]
+
++
+====
+include::../../../../../_custom-en/clusterManagement/alerts/alerts-para-alertingMessageList.adoc[]
+
+include::../../../../../_custom-en/clusterManagement/alerts/alerts-oper-searchForAlertingMessages_new.adoc[]
+
+include::../../../../../../_ks_components-en/oper-refreshListData.adoc[]
+
+include::../../../../../../_ks_components-en/oper-customizeColumns.adoc[]
+====

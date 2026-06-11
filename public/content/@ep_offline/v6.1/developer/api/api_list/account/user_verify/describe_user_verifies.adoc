@@ -1,0 +1,110 @@
+---
+title: 获取用户认证信息（DescribeUserVerifies）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Int
+| false
+| 
+
+| nofuzzy
+| Int
+| false
+| 不脱敏处理
+
+| offset
+| Int
+| false
+| 
+
+| search_word
+| String
+| false
+| 索引词
+
+| status
+| Array
+| true
+| 认证状态
+
+| users
+| Array
+| false
+| 用户id列表
+
+| verify_type
+| String
+| false
+| 认证类型
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_verify_set
+| Array
+| false
+| 用户认证信息列表
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "limit": "DEFAULT_LIMIT",
+  "nofuzzy": "0",
+  "offset": "0",
+  "search_word": "",
+  "status": "",
+  "users": "",
+  "verify_type": ""
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeUserVerifiesResponse",
+  "ret_code": 0,
+  "total_count": 1,
+  "user_verify_set": [
+    {
+      "address": "*****",
+      "bonus_status": 1,
+      "company_code": "",
+      "company_name": "",
+      "console_id": "qingcloud",
+      "create_time": "2022-08-17T06:15:59Z",
+      "credential_type": "",
+      "nationality": "",
+      "personal_code": "4307**********4037",
+      "personal_name": "*****",
+      "quota_status": 1,
+      "realname_ignore": false,
+      "remarks": "",
+      "status": "passed",
+      "status_time": "2022-08-17T08:09:31Z",
+      "user_id": "usr-HrbpDJnY",
+      "verify_type": "personal"
+    }
+  ]
+}
+----

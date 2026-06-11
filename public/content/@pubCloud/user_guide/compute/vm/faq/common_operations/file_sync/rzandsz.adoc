@@ -1,0 +1,63 @@
+---
+title: "安装及使用 rz/sz 工具"
+weight: 10
+
+---
+
+
+rz，sz 是 Linux 同 Windows 进行文件传输的命令行工具，优点就是不用再开一个 SFTP 工具登录上去上传下载文件，该工具需要借助 XSHELL 才能使用，不能直接在 VNC 上使用。
+
+* sz：send zmodem，将选定的文件发送（send）到本地主机，即将文件从 Linux 主机下载至 Windows 系统。
+* rz：receive zmodem，运行该命令会弹出一个文件选择窗口，从本地（Windows 系统）选择文件上传到 Linux 服务器。
+
+
+== 安装 lrzsz 工具
+
+* CentOS 系统
++
+[source,shell]
+----
+yum install lrzsz  
+----
+
+* Ubuntu 系统
++
+[source,shell]
+----
+sudo apt-get install lrzsz  
+----
+
+== sz 工具使用
+
+* 下载单个文件
++
+[source,shell]
+----
+sz filename   
+----
++
+image::/images/cloud_service/compute/vm/faq_rzandsz01.jpg[rzandsz01]
+
+* 下载多个文件
++
+[source,shell]
+----
+sz filename1 filename2   
+----
+
+* 下载指定文件夹目录下的所有文件，不包含该目录下的文件夹
++
+[source,shell]
+----
+sz dir/*  
+----
+
+
+== rz 工具使用
+
+[source,shell]
+----
+rz
+----
+
+image::/images/cloud_service/compute/vm/faq_rzandsz02.jpg[rzandsz02]

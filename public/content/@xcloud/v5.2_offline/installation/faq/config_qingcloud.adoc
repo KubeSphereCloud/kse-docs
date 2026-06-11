@@ -1,0 +1,28 @@
+---
+title: "生成配置文件失败"
+weight: 20
+---
+
+== 可能原因
+
+* yaml配置文件格式不规范。
+* setting.ZONE_ID.yaml 配置文件中 IP 地址填写错误。
+
+== 查看 ConfigQingCloud 在 FirstBox 上执行了哪些命令
+
+[source]
+----
+grep -a 'Execing the script' /pitrix/log/service/qingcloud_server.log | grep {job_id}
+----
+
+**参数说明**：
+
+{job_id} 可以通过如下命令查看。
+
+[source]
+----
+/pitrix/cli/get-config-qingcloud-status.py
+----
+回显信息如下，可以看到具体执行的命令，以及日志文件路径。
+
+image::/images/ep_offline/installation/faq_config_qingcloud.png[]

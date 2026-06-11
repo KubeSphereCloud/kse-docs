@@ -1,0 +1,63 @@
+---
+title: 创建子用户会话（CreateSubUserSession）
+weight: 10
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user
+| String
+| true
+| 子用户的用户ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| lang
+| String
+| false
+| 语言
+
+| sk
+| String
+| false
+| 会话的密钥
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateSubUserSession",
+  "user": "usr-xqm5ieFD"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateSubUserSessionResponse",
+  "ret_code": 0,
+  "sk": "DXQBRaIqkeNWKD1dvwUZJeR6EAyxBdnj",
+  "user": {
+    "lang": "zh-cn",
+    "user_id": "usr-xqm5ieFD"
+  }
+}
+----

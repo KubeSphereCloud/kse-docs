@@ -1,0 +1,83 @@
+---
+title: "卸载{ks_product_left}"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, 卸载"
+description: "介绍如何卸载{ks_product_left}。"
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 29a4b68ecb50470da45266e2d4973aad
+:ks_xref_id: 8438044214244287905adc9b63b2f86f
+:ks_comp: ../../components/
+:ks_title: 卸载{ks_product_left}
+:ks_description: 介绍如何卸载{ks_product_left}。
+:ks_keywords: {ks_product_full}, {ks_product}, 卸载
+:ks_weight: 07
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何卸载{ks_product_abbr_full_left}。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=2f8b0abfb4bb4a1fb92d42f2cf4c764b]
+
+请确保您已安装{ks_product_left}。有关更多信息，请参阅 link:../01-install-ksv-in-single-node-mode/[单节点模式安装]和 link:../02-install-ksv-in-multi-node-mode/[多节点模式安装]。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=f30e650507b7464cbeb36d36671207c2]
+
+. 以 **root** 用户登录安装{ks_product_both}时所使用的服务器节点。
+
+. 进入安装包解压后生成的目录。
++
+--
+* x86 架构
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+cd kubesphere-virtualization-x86_64
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+* ARM64 架构
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+cd kubesphere-virtualization-arm64
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令开始卸载：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+ ./uninstall.sh -m
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+如果显示如下信息则卸载成功：
+
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+INFO[14:25:16 CST] Successful. 
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+若卸载过程持续超过 15 分钟，您可以尝试重启服务器节点再执行卸载操作。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--

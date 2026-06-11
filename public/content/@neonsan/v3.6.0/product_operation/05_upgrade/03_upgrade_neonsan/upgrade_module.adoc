@@ -1,0 +1,186 @@
+---
+title: "方式二：按模块升级"
+weight: 3
+---
+
+. 将 NeonSAN 升级所需安装包及升级脚本上传至集群的任一 Center 节点。
+
+. 登录上述 Center 节点。
+
+. 在当前节点，创建 ``/root/ip_list.txt`` 文件，内容为当前集群内所有节点 IP。
++
+[source,shell]
+----
+vi ip_list.txt
+xx.xx.xx.xx xx.xx.xx.xx xx.xx.xx.xx
+----
++
+include::../../../../../_components/attention.adoc[]
+节点 IP 以空格分隔，且数据库所在节点 IP 需位于 IP 列表的前端，其他节点 IP 的顺序则任意。
+include::../../../../../_components/table_footer.adoc[]
+
+. 在当前节点，运行升级脚本，进入升级脚本操作界面。
++
+[source,shell]
+----
+./upgrade_v1.20.sh
+----
++
+image::/images/neonsan/upgrade_neonsan_1.png[]
+
+. 根据提示信息，输入 ``n``，进入按模块升级模式。
++
+include::../../../../../_components/attention.adoc[]
+若待升级环境为私有云混插环境，在升级过程正式开始之前，需执行 14，再继续后面步骤，即在操作界面输入 ``14``。
+include::../../../../../_components/table_footer.adoc[]
+. 根据提示信息，输入 ``1``，进入基础工具检查阶段，返回结果中出现 ``basic tools for upgrade is ready`` 提示则表示正常可继续进行升级操作。 
++
+[source,shell]
+----
+please input 1-15 number: 1
+----
++
+image::/images/neonsan/upgrade_neonsan_2.png[]
++
+include::../../../../../_components/note.adoc[]
+* 若检查不通过，脚本运行异常，会红色字体显示提示信息，升级工具退出。用户需根据提示信息，安装相应的组件，再继续操作。
+* 安装相应组件可参考命令 ``apt-get install jq``。
+include::../../../../../_components/table_footer.adoc[]
+
+. 根据提示信息，输入 ``2``，进入集群状态检查阶段。若返回结果中，各检查项均显示绿色字体，即表示操作正常，可继续下一步操作
++
+[source,shell]
+----
+please input 1-15 number: 2
+----
++
+image::/images/neonsan/upgrade_neonsan_3.png[]
++
+include::../../../../../_components/note.adoc[]
+脚本运行异常，会以红色字体提示，注意查看执行结果。
+include::../../../../../_components/table_footer.adoc[]
+
+. 根据提示信息，输入 ``3`` 后，再输入 ``y``，根据示例，指定当前版本和升级后的目标版本。回车后，输出 ``Check upgrade version successful`` 提示信息，即可正常继续升级操作。
++
+[source,shell]
+----
+please input 1-15 number: 3
+----
+//+
+//image::/images/neonsan/upgrade_neonsan_4.png[]
+
+. 根据提示信息，在操作界面输入 ``4`` 后，输入升级所需安装包所在的目录，开始拷贝升级包至集群其他节点。
++
+[source,shell]
+----
+please input 1-15 number: 4
+----
+//+
+//..image::/images/neonsan/upgrade_neonsan_5.png[]
++
+include::../../../../../_components/note.adoc[]
+拷贝正常结束后，会输出 ``Copy upgrade deb packets successfully`` 提示信息，即可进行下一步操作。
+include::../../../../../_components/table_footer.adoc[]
+
+. 根据提示信息，在操作界面输入 ``5``，进行升级前的准备。返回结果中，出现绿色字体提示操作成功，即可正常继续升级操作。
++
+[source,shell]
+----
+please input 1-15 number: 5
+----
++
+image::/images/neonsan/upgrade_neonsan_6.png[]
++
+include::../../../../../_components/note.adoc[]
+* 该操作会对数据库进行备份，并关闭自动负载均衡和自动恢复降级卷功能。
+* 该操作会检查当前的异步任务列表，若有正在执行的任务列表，则需等待该任务执行完成才可以继续一步操作。
+include::../../../../../_components/table_footer.adoc[]
+
+. 根据提示信息，在操作界面输入 ``6``，升级 neoncenter 服务。支持一键升级或逐个节点升级。
++
+[source,shell]
+----
+please input 1-15 number: 6
+----
++
+* 所有 Center 节点一键升级。根据提示信息，输入 ``y`` 即可，无需额外操作，只需等待所有 center 节点升级完成。
++
+image::/images/neonsan/upgrade_neonsan_7.png[]
+
+* 逐个节点升级。根据提示信息，输入 ``n`` 后，根据返回结果确定是否升级当前节点。
++
+image::/images/neonsan/upgrade_neonsan_8.png[]
++
+include::../../../../../_components/note.adoc[]
+* 注意屏幕的打印信息，无红色字体提示信息出现，即表示该步操作执行正常。
+* 根据提示信息，直至所有节点的 neoncenter 服务升级完成。
+include::../../../../../_components/table_footer.adoc[]
+
+. 根据提示信息，在操作界面输入 ``7``，升级 neontool 服务。检查结果如下所示，即表示升级正产完成，可进行下一升级操作。
++
+[source,shell]
+----
+please input 1-15 number: 7
+----
++
+image::/images/neonsan/upgrade_neonsan_9.png[]
++
+include::../../../../../_components/note.adoc[]
+该操作，会将整个集群内所有节点上的 neontool 服务升级。
+include::../../../../../_components/table_footer.adoc[]
+
+. 根据提示信息，在操作界面输入 ``8``，升级 neonstore 服务。
++
+[source,shell]
+----
+please input 1-15 number: 8
+----
++
+根据提示，输入 ``y``，逐个节点的升级 neonstore 服务，直至所有节点升级完成。
+//+
+//image::/images/neonsan/upgrade_neonsan_10.png[]
++
+include::../../../../../_components/note.adoc[]
+如果升级 store 失败，或者升级 store 后，store 长时间状态一直为 ``OFFLINE``，需联系 NeonSAN 研发小组排查升级失败的原因。
+include::../../../../../_components/table_footer.adoc[]
+
+. 根据提示信息，在操作界面输入 ``9``，升级 neonmonitor 服务。检查结果如下所示，即表示升级正常完成，可进行下一步升级操作
++
+[source,shell]
+----
+please input 1-15 number: 9
+----
++
+image::/images/neonsan/upgrade_neonsan_11.png[]
++
+include::../../../../../_components/note.adoc[]
+该步操作，会将整个集群内所有节点上的 neonmonitor 服务升级。
+include::../../../../../_components/table_footer.adoc[]
+
+. 升级操作完成后，需对集群进行检查，删除升级包等操作。根据提示信息，在操作界面输入 ``11``。集群正常，则会提示 ``Operation after upgrade excute successful``，升级操作完成
++
+[source,shell]
+----
+please input 1-15 number: 11
+----
++
+include::../../../../../_components/note.adoc[]
+脚本执行过程中，会提示是否需要删除安装包，建议升级后删除安装包。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 根据提示信息，在操作界面输入 ``12``，退出升级操作。
++
+[source,shell]
+----
+please input 1-15 number: 12
+----
+
+. 退出升级操作后，在系统终端输入如下命令，查看 NeonSAN 版本信息，确认升级成功完成。
++
+[source,shell]
+----
+neonsan list_version -detail
+----
+
+

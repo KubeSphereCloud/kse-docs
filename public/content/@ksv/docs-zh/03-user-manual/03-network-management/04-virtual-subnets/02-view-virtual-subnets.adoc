@@ -1,0 +1,73 @@
+---
+title: "查看虚拟子网列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟子网, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看虚拟子网列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: e62a3addd9da4e0fa9d96feb032bca7f
+:ks_xref_id: 46306d599ba340fdaa2a30b419c05ee2
+:ks_comp: ../../../../components/
+:ks_title: 查看虚拟子网列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看虚拟子网列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟子网, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看虚拟子网列表。
+
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=193918007dbb471784f05ab62cdf0ad2]
+
+include::../../../../_custom/networks/virtual-subnet-steps.adoc[]
+
++
+--
+虚拟子网列表展示当前项目中的所有虚拟子网，包括默认虚拟子网和用户自建虚拟子网。具体参数信息如下表所示。
+
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|虚拟子网的名称。
+
+include::../../../../_custom/networks/naming-convention.adoc[]
+
+|ID
+|虚拟子网在系统中的通用唯一标识符，由系统自动分配。
+
+|状态
+|虚拟子网当前的状态。
+
+|VPC
+|虚拟子网所在的 VPC 网络。
+
+|网段
+|虚拟子网的网段范围，它是虚拟子网所在的 VPC 网段的子集。
+
+|可用IP
+|虚拟子网中当前可用的 IP 地址数。
+
+|已用IP
+|虚拟子网中已使用的 IP 地址数。
+
+|创建者
+|虚拟子网的创建者。
+
+|创建时间
+|虚拟子网的创建时间。
+|===
+--
+
+. （可选）点击虚拟子网列表上方的搜索框并设置搜索条件，可按名称、ID 或 VPC 搜索虚拟子网。例如，使用**名称:ab** 搜索名称包含字符串 **ab** 的虚拟子网。
+
+. （可选）在虚拟子网列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。

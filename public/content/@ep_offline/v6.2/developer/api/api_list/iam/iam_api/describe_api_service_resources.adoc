@@ -1,0 +1,114 @@
+---
+title: 查询IAM纳管服务下资源（DescribeIAMApiServiceResources）
+weight: 15
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Integer
+| false
+| 偏移量
+
+| offset
+| Integer
+| false
+| 起始坐标
+
+| resource_types
+| Array
+| false
+| 资源类型
+
+| reverse
+| Integer
+| false
+| 是否降序查询
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| service_name
+| String
+| false
+| 纳管服务英文名
+
+| sort_key
+| String
+| false
+| 排序使用的列
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resources
+| Object
+| false
+| 资源类型
+
+| resources.create_time
+| String
+| false
+| 创建时间
+
+| resources.resource_name
+| String
+| false
+| 资源名称
+
+| resources.resource_type
+| String
+| false
+| 资源类型
+
+| resources.service_name
+| String
+| false
+| 纳管服务英文名
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMApiServiceResources",
+  "service_name": "project"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMApiServiceResourcesResponse",
+  "resources": {
+    "project": [
+      {
+        "create_time": "2021-11-09T21:10:29",
+        "resource_name": "用户id",
+        "resource_type": "owner",
+        "service_name": "project"
+      }
+    ]
+  },
+  "ret_code": 0,
+  "total_count": 1
+}
+----

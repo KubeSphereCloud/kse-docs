@@ -1,0 +1,35 @@
+---
+title: 收集硬件信息报错
+weight: 10
+---
+
+== 问题现象
+
+执行收集硬件信息命令 `/pitrix/cli/collect-nodes.py -I /root/ip_list` 报错 “Initialization failed for the nodes below”。
+
+. 查看收集节点的日志 `/pitrix/log/node/collect.log`，报错信息如下。
++
+[source]
+----
+2022-07-11 10:25:24.166 INFO 16504 140432344348416 The command [/pitrix/node/collect/init_nodes.sh 78.10.1.23 22] is executed OK. Result [{'err': '', 'ret': 1, 'out': 'Initializing [78.xx.1.23] ...\\n2022-07-11 10:25:24 Initialize node for [78.xx.1.23] Error!\\n2022-07-11 10:25:24 Initialize [78.xx.1.23] Done.\\n\\x1b[31m**Initialization failed for the nodes below**: \\x1b[m\\n\\x1b[31m78.10.1.23 \\x1b[m'}], Exec time [3.043]s. (exec_cmd.py:141)
+----
+. 继续查找日志 `/pitrix/log/node/initialize_78.xx.1.22.log`，有如下报错。
++
+image::/images/ep_offline/installation/faq_collect_nodes_01.png[]
+
+. 执行 `df -h` 查看，arm-18.04 ISO 没有挂载。
++
+image::/images/ep_offline/installation/faq_collect_nodes_02.png[]
+
+== 问题原因
+
+ISO 没有自动挂载。
+
+== 解决方法
+
+执行以下命令，手动挂载 ISO 并修改 `/etc/fstab`。
+
+[source]
+----
+mount -o loop -t iso9660 /pitrix/kernels/ubuntu-18.04.1-server-arm64.iso /var/www/repo/18.04.1-arm/iso/
+----

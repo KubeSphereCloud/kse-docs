@@ -1,0 +1,30 @@
+---
+title: 创建并验证安全组
+weight: 1
+---
+
+
+[cols='^1h,4a']
+|===
+| 验收目的 | 创建并验证安全组。
+| 预置条件 | * {platform_name_cn}已部署完成，且当前运行状态正常，所有 Hyper 节点状态均正常。
+* 已创建好测试用户 User-1 并分配适当资源配额。
+
+| 操作步骤 | 
+. 使用 User-1 的账户密码登录{platform_name_cn}的 Web Console。
+. 在 Web Console 相关页面，创建安全组 Security-1，设置规则为拒绝 ICMP 协议。
+. 创建云服务器 VM-1，VM-2，并加入同一基础网络。
+. 给云服务器 VM-1，绑定安全组 Security-1。
+. 在云服务器 VM-2 内 `ping` 云服务器 VM-1。
+. 设置安全组 Security-1 的规则为接受 ICMP 协议。
+. 在云服务器 VM-2 内再次 `ping` 云服务器 VM-1。
+
+| 预期结果 | . 成功创建安全组。
+. 当安全组 Security-1，设置规则为拒绝 ICMP 协议时，云服务器 VM-2 内 `ping` 云服务器 VM-1 失败。
+. 当安全组 Security-1，设置规则为接受 ICMP 协议时，云服务器 VM-2 内 `ping` 云服务器 VM-1 成功。
+
+| 验证结果 | 
+| 备注 |
+|===
+
+

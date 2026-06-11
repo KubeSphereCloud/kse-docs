@@ -1,0 +1,33 @@
+---
+title: "费用变更"
+collapsible: false
+draft: false
+weight: 50
+---
+== 变更计费模式
+
+变更计费模式有如下两种场景：
+
+* 从按需计费变更为包年包月：包年包月模式可以享受更大的价格优惠。
+* 从包年包月变更为按需计费：按需计费相比包年包月单价更高，但使用更灵活。
+
+include::../../../../../_components/note.adoc[]
+对于包年包月模式，变更配置不会改变实例到期时间，变更配置后，增加/退回的费用为从当前时间到实例和带宽到期时间之间的费用。
+
+include::../../../../../_components/table_footer.adoc[]
+
+[options="header",cols="1,1,3"]
+|===
+| 原计费模式 | 目标计费模式 | 操作说明
+
+| 按需计费
+| 包年包月
+| 执行link:../../usermanual/30_access_point/billing_operation/21_switch_billing_mode[修改计费模式]操作，变更立即生效，用户需一次性支付合约的费用。包年包月计费可享受更大的价格优惠。
+
+| 包年包月
+| 按需计费
+a|* 包年包月模式设置为自动续费时，若当前账户余额不足以支付下个周期费用，到期后，**包年包月**模式自动转为**按需计费**模式。转按需计费模式后，自动续费关闭。
+* 执行link:../../usermanual/30_access_point/billing_operation/21_switch_billing_mode/[修改计费模式]操作，当前周期结束后，SD-WAN 实例和带宽将按照按需计费模式进行收费。
+* 执行link:../../usermanual/30_access_point/billing_operation/23_unsubscribe/[退订]操作，选择**是否销毁资源**为``否``，操作成功后，将保留接入点实例及当前配置项，以按需计费的方式对实例进行收费，后期可通过对接入点进行调整带宽操作继续使用，减少大量接入点配置工作。
+|===
+

@@ -1,0 +1,137 @@
+---
+title: 查询用户应用,list（DescribeAppUsers）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| apps
+| Array
+| true
+| 应用id数组
+
+| limit
+| Integer
+| false
+| 分页数量
+
+| offset
+| Integer
+| false
+| 查询数据起始偏移量
+
+| users
+| Array
+| true
+| 应用拥有者
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_user_set
+| Array
+| false
+| 查询结果
+
+| app_user_set[].app_id
+| String
+| false
+| 应用id
+
+| app_user_set[].create_time
+| String
+| false
+| 记录创建时间
+
+| app_user_set[].user
+| Object
+| false
+| 用户信息
+
+| app_user_set[].user.company_name
+| String
+| false
+| 用户公司
+
+| app_user_set[].user.email
+| String
+| false
+| 用户邮箱
+
+| app_user_set[].user.phone
+| String
+| false
+| 用户手机
+
+| app_user_set[].user.user_id
+| String
+| false
+| 用户id
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "apps": [
+    "app-fdyvu2wk"
+  ],
+  "limit": 20,
+  "offset": 0,
+  "users": [
+    "admin"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAppUsersResponse",
+  "app_user_set": [
+    {
+      "app_id": "app-fdyvu2wk",
+      "create_time": "2021-10-28T09:55:18",
+      "user": {
+        "company_name": "",
+        "email": "jasminzhang@yunify.com",
+        "phone": "86-13590341635",
+        "user_id": "usr-u5JDC3MS"
+      }
+    },
+    {
+      "app_id": "app-fdyvu2wk",
+      "create_time": "2021-10-27T18:17:35",
+      "user": {
+        "company_name": "",
+        "email": "yxytest1@yunify.com",
+        "phone": "",
+        "user_id": "usr-qsbCXHkk"
+      }
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 20
+}
+----

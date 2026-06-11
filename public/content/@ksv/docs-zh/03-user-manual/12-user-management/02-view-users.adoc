@@ -1,0 +1,70 @@
+---
+title: "查看用户列表"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 用户, 列表, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看用户列表。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: ee3e268d14f04619a95691479efb2f93
+:ks_xref_id: 63e8a58e32a34c07accfc37ed7ae8663
+:ks_comp: ../../../components/
+:ks_title: 查看用户列表
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看用户列表。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 用户, 列表, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看用户列表。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=7e6fb3b942b04d3d8e969d99ad7c4c22]
+
+include::../../../_custom/users/user-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=e7a21cc4b8254d279a2fefc69fe4eead]
+
+include::../../../_custom/users/user-steps.adoc[]
+
+. 在**本地用户**页面，查看用户列表。
++
+--
+用户列表展示系统中所有的用户，并提供以下信息：
+
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|用户的名称。
+
+include::../../../_custom/security-groups/naming-convention.adoc[]
+
+|邮箱
+|用户的邮箱地址。
+
+邮箱地址可用于登录{ks_product_both}Web 控制台。
+
+|项目 / 角色
+|用户所属的项目和用户在项目中的角色。
+
+|最后登录时间
+|用户最后一次登录 Web 控制台的时间。
+
+|创建者
+|用户的创建者。目前只有 **admin** 用户可以创建用户。
+|===
+--
+
+. （可选）点击用户列表上方的搜索框并设置搜索条件，可按名称搜索用户。例如，使用**名称:ab** 搜索包含字符串 **ab** 的用户。
+
+. （可选）在用户列表右上角点击 image:/images/ksv/zh/icons/refresh-light.svg[refresh,15] 可刷新列表数据。

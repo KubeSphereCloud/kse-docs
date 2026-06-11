@@ -1,0 +1,90 @@
+---
+title: "查看集群列表"
+keywords: "Kubernetes, {ks_product}, 多集群管理, 集群, 查看集群列表"
+description: "介绍如何查看集群列表。"
+weight: 02
+---
+
+// :ks_include_id: 279c6d70f2b44c0ba43f4c3924f8b8e0
+:ks_xref_id: d15731e0f04847d8812f2db6f08acdc6
+:ks_comp: ../../../../components/
+:ks_title: 查看集群列表
+:ks_keywords: Kubernetes, {ks_product}, 多集群管理, 集群, 查看集群列表
+:ks_description: 介绍如何查看集群列表。
+:ks_weight: 02
+:ks_icon:
+:ks_menu: **平台管理 > 集群管理**
+:ks_permission: **集群查看**
+
+
+本节介绍如何查看集群列表。
+
+
+== 前提条件link:[id=34521a9b9cc744fab85d7ea7ea95b3c8]
+
+* 您需要在{ks_product_both}平台具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅link:../../../../04-platform-management/04-access-control/02-users/_index/[用户]和link:../../../../04-platform-management/04-access-control/03-platform-roles/_index/[平台角色]。
+// :relfileprefix: ../../../../
+
+// include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+
+// :relfileprefix: ./
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-prer-enableMulticlusterManagement.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=6a324ba97e1c4ee3aba78ce37c0a96f3]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
++
+====
+* 集群列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称、标签和描述
+|集群的名称、标签和描述信息。
+
+|节点数量
+|集群中服务器节点的数量。
+
+|Kubernetes 版本
+|集群中运行的 Kubernetes 版本。
+
+|提供商
+|集群环境的提供商。
+
+|创建时间
+|集群加入{ks_product_left} Web 控制台的时间。
+|===
+--
+
+* 在列表上方点击搜索框并设置搜索条件，可按名称、类型或标签搜索集群。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+* 点击集群的名称可进入集群管理集群中的资源。有关集群资源管理的更多信息，请参阅《{ks_product_right}集群管理指南》。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "html"]
+
+* 点击集群的名称可进入集群管理集群中的资源。
+
+endif::[]
+====

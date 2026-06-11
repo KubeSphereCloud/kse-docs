@@ -1,0 +1,175 @@
+---
+title: "安装 FirstBox"
+weight: 20
+---
+
+FirstBox 是平台安装节点，用于下发配置和安装包到管理和计算节点。
+用户可以选择任一 KS 节点作为 FirstBox 宿主机。
+
+== 前提条件
+
+已获取安装包 qingcloud-installer_6.0.0-20220630_XXXX_amd64.tar.gz。
+
+== 操作步骤
+
+. 使用传输工具将安装包上传到任一 KS节点的 /root 目录下。
+. 使用 SSH 远程连接工具登录已上传安装包的 KS 节点。
++
+
+include::../../../../_components/note.adoc[]
+用户名密码为安装操作系统时设置的用户名和密码，默认为 `yop/zhu1241jie`。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，切换到 root 用户。后续所有的安装操作均需要使用 root 用户。
++
+[source]
+----
+sudo su
+----
++
+根据提示输入当前用户的密码。
+. 配置本地 PC 与节点间的免密访问（访问用户为 root）。
++
+
+include::../../../../_components/attention.adoc[]
+* 安装企业云平台过程中，会自动关闭所有节点的密码登录，请在首次安装时，配置免密访问。
+* 若用户需要保留该 KS 节点的密码登录方式（例如 POC 场景），请在安装完 FirstBox 后修改 /etc/ssh/sshd_config 文件，把 `PasswordAuthentication no` 改为 `PasswordAuthentication yes`，然后执行命令 `systemctl restart ssh`，重启 ssh 服务。**请注意，开启密码登录方式为高危操作，将带来安全风险，请谨慎操作。**
+
+include::../../../../_components/table_footer.adoc[]
+
+ ** 方式一：使用用户已有密钥。
++
+如果用户已有密钥，请执行以下步骤将公钥添加到环境中。
+
+  ... 执行以下命令，编辑 authorized_keys 文件。
++
+[source]
+----
+vim /root/.ssh/authorized_keys
+----
+  ... 将自己的公钥复制到 /root/.ssh/authorized_keys 中。
+ ** 方式二：重新创建密钥。
++
+如果用户没有密钥，请执行以下步骤创建密钥并将公钥添加到环境中。
+
+  ... 执行以下命令，生成密钥。
++
+[source]
+----
+cd /root/.ssh
+ssh-keygen -t rsa -P "" -f '/root/.ssh/id_rsa'
+----
+  ... 执行以下命令，将生成的公钥写入 /root/.ssh/authorized_keys 中。
++
+[source]
+----
+cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+----
+  ... 执行以下命令，或通过文件传输工具，复制私钥文件并保存到本地 PC（例如 .ssh 目录）。
++
+[source]
+----
+scp /root/.ssh/id_rsa <本地 PC IP>:/Users/xxx/.ssh/ 
+----
++
+本地 PC 访问该 KS 节点和 FirstBox 时，使用密钥认证方式，选择已保存的私钥即可。
+
++
+
+include::../../../../_components/attention.adoc[]
+请务必保存好私钥文件，以防止后续无法登录节点。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，解压安装包。
++
+[source]
+----
+tar -zxvf /root/qingcloud-installer_6.0.0-20220630_XXXX_amd64.tar.gz -C /root/
+----
+. （可选）执行以下命令，开启 tmux。
++
+[source]
+----
+tmux
+----
++
+
+include::../../../../_components/note.adoc[]
+因为安装时间较长，若中途网络断连可能会导致操作终止，使用 tmux 方式可以避免此问题。
+
+开启 tmux 后，在命令执行操作过程中，若网络断连，命令会在后台继续执行。恢复连接后，执行 `tmux attach` 即可恢复到之前的操作界面。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，安装 FirstBox。安装过程较长（大约需要 30 分钟），请耐心等待。
++
+[source]
+----
+/root/qingcloud-installer/bootstrap/bootstrap_allinone.sh -m <mgmt_interface > -a <firstbox ip address>
+----
++
+示例：
++
+[source]
+----
+/root/qingcloud-installer/bootstrap/bootstrap_allinone.sh -m ens3f1 -a 172.31.60.190
+----
++
+参数说明如下：
+
+ ** -a 参数：指定 FirstBox 的管理 IP。
++
+该 IP 需要和物理节点的管理网络处于同一个网段。可以从管理网络地址池中选择一个未被使用的 IP 地址分配给 FirstBox。
+ ** -m 参数（可选）：指定当前 KS 节点的管理网卡。请根据环境规划进行配置。
++
+网卡的状态必须为 UP，可以执行以下命令，查看网卡的状态。
++
+[source]
+----
+ip a
+----
++
+image::/images/ep_offline/installation/deploy_create_firstbox_01.png[]
+
+ ** -p 参数（可选）：仅融合模式（fusion 模式，KS 节点与 Hyper 节点部署在同一物理服务器）场景，需要配置 -p 参数。用于挂载 /pitrix 目录到 OS 盘，不要选择数据盘。
+. 回显如下信息，表示安装成功。
++
+
+include::../../../../_components/attention.adoc[]
+安装时，请勿强制中断安装进程，否则可能导致未知错误。
+
+include::../../../../_components/table_footer.adoc[]
++
+image::/images/ep_offline/installation/deploy_create_firstbox_02.png[]
++
+
+include::../../../../_components/note.adoc[]
+若命令执行失败，请查看如下日志，检查报错原因并修复。若仍不能解决，请联系技术支持。
+
+* KS 节点日志：/root/enable_vt.log、/root/launch_fb.log。
+* FirstBox 节点日志：/root/deploy.log。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，登录 FirstBox。
++
+[source]
+----
+ssh root@<firstbox ip address>
+----
++
+参数说明：
++
+**<firstbox ip address>**：安装 FirstBox 时配置的管理 IP。
+. 执行以下命令，检查服务状态。
++
+[source]
+----
+supervisorctl status
+----
++
+回显信息如下，服务状态均为 RUNNING，表示服务正常运行，可继续执行后续操作。
++
+image::/images/ep_offline/installation/deploy_create_firstbox_03.png[]

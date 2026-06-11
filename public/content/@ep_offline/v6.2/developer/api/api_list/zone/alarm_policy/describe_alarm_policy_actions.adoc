@@ -1,0 +1,148 @@
+---
+title: 获取告警行为（DescribeAlarmPolicyActions）
+weight: 11
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy
+| String
+| true
+| 告警策略id
+
+| limit
+| Integer
+| true
+| 返回数据条数
+
+| offset
+| Integer
+| true
+| 分页起始索引
+
+| owner
+| String
+| false
+| 用户
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policy_action_set
+| Object
+| false
+| 告警行为数组
+
+| alarm_policy_action_set.action_name
+| String
+| false
+| false
+
+| alarm_policy_action_set.alarm_policy_action_id
+| String
+| false
+| 告警行为id
+
+| alarm_policy_action_set.alarm_policy_id
+| String
+| false
+| 告警策略id
+
+| alarm_policy_action_set.console_id
+| String
+| false
+| ConsoleId
+
+| alarm_policy_action_set.controller
+| String
+| false
+| 控制器
+
+| alarm_policy_action_set.create_time
+| String
+| false
+| 创建时间
+
+| alarm_policy_action_set.owner
+| String
+| false
+| false
+
+| alarm_policy_action_set.root_user_id
+| String
+| false
+| root用户Id
+
+| alarm_policy_action_set.trigger_action
+| String
+| false
+| 告警通知人
+
+| alarm_policy_action_set.trigger_status
+| String
+| false
+| 告警状态
+
+| total_count
+| Integer
+| false
+| 信息总条数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAlarmPolicyActions",
+  "alarm_policy": "alp-f0t3obl0",
+  "limit": 10,
+  "offset": 0,
+  "owner": "usr-rrPKHDpJ",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAlarmPolicyActionsResponse",
+  "alarm_policy_action_set": [
+    {
+      "action_name": "jackluo",
+      "alarm_policy_action_id": "alpa-yvgkafnn",
+      "alarm_policy_id": "alp-f0t3obl0",
+      "console_id": "admin",
+      "controller": "self",
+      "create_time": "2023-05-24T08:19:39Z",
+      "owner": "usr-rrPKHDpJ",
+      "root_user_id": "usr-rrPKHDpJ",
+      "trigger_action": "nl-ia8kfkuv",
+      "trigger_status": "ok"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 2,
+  "trace_id": "ETxikORK"
+}
+----

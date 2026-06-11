@@ -1,0 +1,54 @@
+---
+title: "Manage App Categories"
+keywords: "Kubernetes, {ks_product}, App Store Management, App Category, Manage App Categories"
+description: "Introduces how to create, edit, and delete app categories."
+weight: 01
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **App Categories**
+
+This section describes how to create, edit, and delete app categories.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **App Categories** page, create, edit, or delete app categories as needed.
++
+====
+* Click image:/images/ks-qkcp/zh/icons/add-light.svg[add,18,18] in the upper right corner of the app category list. In the dialog box that appears, set the name and icon for the app category, then click **OK** to create it.
+
+* Click image:/images/ks-qkcp/zh/icons/pen-light.svg[pen,18,18] on the right side of an existing app category to edit its name and icon.
+
+* Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] on the right side of an existing app category, then click **OK** in the dialog box that appears to delete the app category.
++
+--
+// Note
+include::../../../../../../_ks_components/admonitions/note.adoc[]
+
+Before deleting an app category, you need to reassign the apps in that category to other categories or set them as **Uncategorized**.
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+====

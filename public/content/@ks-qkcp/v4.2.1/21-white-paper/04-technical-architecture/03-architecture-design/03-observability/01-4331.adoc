@@ -1,0 +1,26 @@
+---
+title: "监控"
+weight: 01
+---
+
+== 核心功能
+
+1. 基于主流监控框架 Prometheus
+2. 支持高可用
+3. 提供不同维度的监控信息：平台->租户->项目/DevOps 工程->工作负载-> Pod ->容器
+4. 提供高级监控信息的管理配置界面
+5. 可集成第三方监控服务，支持监控数据导出
+
+== 架构设计
+
+=== 主要组件
+
+. Prometheus Operator：管理和运维 Prometheus 集群
+. Prometheus 工作负载：后端 Prometheus 集群服务，收集监控数据
+. Node Exporter：采集集群节点监控数据
+. cAdvisor/Kubelet
+. kube-state-metrics：监听 Kubernetes API server，并采集监控数据
+
+=== 架构设计
+
+image::/images/ks-qkcp/zh/technical-white-papers/4331.jpeg[]

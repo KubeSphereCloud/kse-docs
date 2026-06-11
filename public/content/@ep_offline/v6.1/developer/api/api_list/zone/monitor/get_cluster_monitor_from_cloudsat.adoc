@@ -1,0 +1,280 @@
+---
+title: 从Cloudsat获取监控数据（GetClusterMonitorFromCloudsat）
+weight: 10
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| end_time
+| String
+| true
+| 结束时间
+
+| resource_id
+| String
+| true
+| 资源ID
+
+| start_time
+| String
+| true
+| 开始时间
+
+| step
+| Integer
+| false
+| 步长
+
+| zone
+| String
+| true
+| 可用区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| meter_set
+| Array
+| false
+| 数据集合
+
+| meter_set[].data
+| Array
+| false
+| 监控数据
+
+| meter_set[].meter_id
+| String
+| false
+| 监控项ID
+
+| meter_set[].step
+| String
+| false
+| 步长
+
+| monitor_meta_info
+| Object
+| false
+| 监控元数据信息
+
+| monitor_meta_info.alarm
+| Array
+| false
+| 告警监控项
+
+| monitor_meta_info.cmd
+| String
+| false
+| 执行命令
+
+| monitor_meta_info.display
+| Array
+| false
+| 展示项
+
+| monitor_meta_info.groups
+| Object
+| false
+| 监控项分组
+
+| monitor_meta_info.groups.memory
+| Array
+| false
+| （自定义）display项2
+
+| monitor_meta_info.groups.state
+| Array
+| false
+| （自定义）display项1
+
+| monitor_meta_info.items
+| Object
+| false
+| 数据条目
+
+| monitor_meta_info.items.http_requests_total
+| Object
+| false
+| （自定义）监控条目2
+
+| monitor_meta_info.items.http_requests_total.statistics_type
+| String
+| false
+| 统计类型
+
+| monitor_meta_info.items.process_resident_memory_bytes
+| Object
+| false
+| （自定义）监控条目1
+
+| monitor_meta_info.items.process_resident_memory_bytes.statistics_type
+| String
+| false
+| 统计类型
+
+| resource_id
+| String
+| false
+| 资源ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetClusterMonitorFromCloudsat",
+  "end_time": "2023-07-18T03:02:45.510Z",
+  "resource_id": "cln-w981htyj",
+  "start_time": "2023-07-08T03:02:45.510Z",
+  "step": 1000000,
+  "zone": "pek3b"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetClusterMonitorFromCloudsatResponse",
+  "meter_set": [
+    {
+      "data": [
+        [
+          1685971200,
+          43233280
+        ]
+      ],
+      "meter_id": "process_resident_memory_bytes",
+      "step": 100000
+    },
+    {
+      "data": [
+        [
+          1685971200,
+          170190
+        ]
+      ],
+      "meter_id": "http_requests_total",
+      "step": 100000
+    },
+    {
+      "data": [
+        [
+          1685971200,
+          1
+        ]
+      ],
+      "meter_id": "etcd_server_has_leader",
+      "step": 100000
+    },
+    {
+      "data": [
+        [
+          1685971200,
+          0
+        ]
+      ],
+      "meter_id": "etcd_server_is_leader",
+      "step": 100000
+    },
+    {
+      "data": [
+        [
+          1685971200,
+          10808332288
+        ]
+      ],
+      "meter_id": "process_virtual_memory_bytes",
+      "step": 100000
+    },
+    {
+      "data": [
+        [
+          1685971200,
+          891070835
+        ]
+      ],
+      "meter_id": "etcd_network_peer_sent_bytes_total",
+      "step": 100000
+    },
+    {
+      "data": [
+        [
+          1685971200,
+          2
+        ]
+      ],
+      "meter_id": "etcd_server_leader_changes_seen_total",
+      "step": 100000
+    }
+  ],
+  "monitor_meta_info": {
+    "alarm": [
+      "etcd_server_has_leader"
+    ],
+    "cmd": "/opt/app/bin/ctl.sh measure",
+    "display": [
+      "state",
+      "data",
+      "memory",
+      "http_requests_total"
+    ],
+    "groups": {
+      "data": [
+        "etcd_network_peer_sent_bytes_total"
+      ],
+      "memory": [
+        "process_resident_memory_bytes",
+        "process_virtual_memory_bytes"
+      ],
+      "state": [
+        "etcd_server_has_leader",
+        "etcd_server_is_leader",
+        "etcd_server_leader_changes_seen_total"
+      ]
+    },
+    "items": {
+      "etcd_network_peer_sent_bytes_total": {
+        "statistics_type": "latest"
+      },
+      "etcd_server_has_leader": {
+        "statistics_type": "latest"
+      },
+      "etcd_server_is_leader": {
+        "statistics_type": "latest"
+      },
+      "etcd_server_leader_changes_seen_total": {
+        "statistics_type": "latest"
+      },
+      "http_requests_total": {
+        "statistics_type": "latest"
+      },
+      "process_resident_memory_bytes": {
+        "statistics_type": "latest"
+      },
+      "process_virtual_memory_bytes": {
+        "statistics_type": "latest"
+      }
+    }
+  },
+  "resource_id": "cln-w981htyj",
+  "ret_code": 0,
+  "trace_id": "Mh4nSLbi"
+}
+----

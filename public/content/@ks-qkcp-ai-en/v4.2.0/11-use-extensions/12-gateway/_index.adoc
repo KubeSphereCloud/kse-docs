@@ -1,0 +1,47 @@
+---
+title: "KubeSphere Gateway"
+description: "Introduces how to use the 'KubeSphere Gateway' extension."
+weight: 12
+layout: "second"
+---
+
+This section describes how to use the "KubeSphere Gateway" extension to enable and manage gateways at the cluster, workspace, and project levels.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|The KubeSphere Community Edition only allows the creation of project gateways. It does not support the creation of cluster gateways or workspace gateways.
+
+|===
+
+include::../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-desc-gateway.adoc[]
+
+KubeSphere provides a cluster gateway for each cluster, a workspace gateway for each workspace within a cluster, and a project gateway for each project within a workspace. These are used to provide reverse proxy for services across the entire cluster, within a single workspace, and within a single project, respectively.
+
+Cluster gateways, workspace gateways, and project gateways are independent of each other, allowing you to freely enable any one of them.
+
+After installing the "KubeSphere Gateway" extension,
+
+* The **Gateway Settings** option will appear under the **Cluster Settings** menu in the cluster's left navigation pane, allowing you to enable the cluster gateway.
+* The **Gateway Settings** option will appear under the **Workspace Settings** menu in the workspace's left navigation pane, allowing you to enable workspace gateways and project gateways.
+
+[.admon.tip,cols="a"]
+|===
+|Tip
+
+|
+After enabling a cluster gateway, workspace gateway, or project gateway, when you create an Ingress under the **Application Workloads > Ingress** menu of a cluster or workspace, you can select the corresponding gateway's IngressClassName on the **Routing Rule** tab.
+// It has been confirmed that this is optional.
+|===
+
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+* To use the tracing feature, the KubeSphere platform needs to have the **KubeSphere Service Mesh** extension installed and enabled.
+* To use the gateway monitoring feature, the KubeSphere platform needs to have the **WizTelemetry Monitoring** extension installed and enabled.
+* To use the gateway log search feature, the KubeSphere platform needs to have the **WizTelemetry Logging** extension installed and enabled.
+|===

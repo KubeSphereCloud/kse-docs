@@ -1,0 +1,19 @@
+---
+title: "常见错误解决方法"
+weight: 3
+---
+
+在部署 NeonSAN 的过程中，如遇下列错误：
+[source,shell]
+----
+ERROR：could not insert ‘kvm_intel’:Operation not sypper\n
+----
+
+可通过修改如下配置文件解决。
+[source,shell]
+----
+vi /qingstor/install/deployment/environment/group_vars/all/common
+
+//添加如下内容
+on_test_vm: true   # 字段 true 前需加空格。
+----

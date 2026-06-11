@@ -1,0 +1,65 @@
+---
+title: "Edit App Template"
+description: "Describes how to edit the information of an app template in the App Store."
+weight: 04
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **Apps**
+
+This section describes how to edit the information of an app template in the App Store.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
+. On the right side of the app template you want to edit, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Edit** from the drop-down list.
+
+. In the **Edit Information** dialog box, set the parameters for the app template, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Alias
+|The alias of the app.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-). It cannot start or end with a hyphen (-) and has a maximum length of 63 characters.
+
+|Description
+|The description of the app. The description can contain any characters and has a maximum length of 120 characters.
+
+|Icon
+|The icon of the app. If no icon is set for the app template, the system will use the first character of the app name in uppercase as the default icon. The icon format must be .png or .jpg, and cannot exceed 96 x 96 pixels and 20 KB.
+
+|App Category
+|The functional category of the app. After the app template is uploaded to the App Store, it will be automatically classified under the category selected here.
+
+|Vendor Website
+|The website address of the vendor. Users who install the app from the App Store can contact the vendor for technical support.
+
+|App Screenshots
+|Introduction images for the app. Up to 6 screenshots can be uploaded, and each screenshot cannot exceed 2 MB.
+
+|App Introduction
+|Introduction information for the app. Supports markdown-formatted text and image introductions.
+|===
+--

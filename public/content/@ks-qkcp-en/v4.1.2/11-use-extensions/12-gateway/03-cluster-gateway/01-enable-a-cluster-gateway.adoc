@@ -1,0 +1,51 @@
+---
+title: "Enable Cluster Gateway"
+keywords: "Kubernetes, {ks_product-en}, cluster management, cluster settings, gateway settings, enable cluster gateway"
+description: "Introduce how to enable cluster gateways."
+weight: 01
+---
+
+// :ks_permission: **Cluster Settings Management**
+:ks_navigation: **Cluster Settings > Gateway Settings**
+
+
+This section introduces how to enable cluster gateways.
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+If a workspace gateway or project gateway has not been enabled, after enabling the cluster gateway, you will no longer be able to enable the workspace gateway and project gateway.
+|===
+
+== Prerequisites
+
+* **KubeSphere Gateway** should have been installed and enabled.
+
+// // * {empty}
+// include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+// 
+
+* You should be a member of a cluster and have the **cluster-admin** role in the cluster. For more information, please refer to link:../../../../07-cluster-management/09-cluster-settings/03-cluster-members/[Cluster Members] and link:../../../../07-cluster-management/09-cluster-settings/04-cluster-roles/[Cluster Roles].
+
+
+== Steps
+
+// include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
+. Log in to the {ks_product-en} web console with a user who has the **cluster-admin** role.
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. Click **Enable Gateway** on the right side of the page.
+
+. In the pop-up dialog box, set the parameters for the gateway, and then click **OK**.
++
+--
+include::../../../../_custom-en/clusterManagement/gatewaySettings/gatewaySettings-para-enableGateway_v4.adoc[]
+--

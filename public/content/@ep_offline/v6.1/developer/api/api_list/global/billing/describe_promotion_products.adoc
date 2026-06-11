@@ -1,0 +1,162 @@
+---
+title: 获取促销产品信息（DescribePromotionProducts）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| promotion_ids
+| Array
+| false
+| 促销活动
+
+| promotion_type
+| String
+| false
+| 促销类型
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| promotion_products
+| Object
+| false
+| 促销活动产品信息集合
+
+| promotion_products.condition
+| String
+| false
+| 促销活动的限制条件
+
+| promotion_products.console_id
+| String
+| false
+| 控制台ID
+
+| promotion_products.duration
+| Integer
+| false
+| 促销产品适用周期
+
+| promotion_products.effect_time
+| String
+| false
+| 生效时间
+
+| promotion_products.everyday_quota
+| Integer
+| false
+| 促销产品的每日限量数目
+
+| promotion_products.everyone_count
+| Integer
+| false
+| 促销产品的每人限制数目
+
+| promotion_products.expire_time
+| String
+| false
+| 过期时间
+
+| promotion_products.price
+| Integer
+| false
+| 价格
+
+| promotion_products.product_condition
+| String
+| false
+| 促销产品的限制条件
+
+| promotion_products.product_id
+| String
+| false
+| 促销产品ID
+
+| promotion_products.promotion_everyone_charge
+| Integer
+| false
+| 促销活动的每日限量数目
+
+| promotion_products.promotion_id
+| String
+| false
+| 促销活动ID
+
+| promotion_products.resource_info
+| String
+| false
+| 促销产品的具体描述信息
+
+| promotion_products.resource_type
+| String
+| false
+| 促销产品支持的资源类型
+
+| promotion_products.sub_name
+| String
+| false
+| 子名称
+
+| promotion_products.sub_product_id
+| String
+| false
+| 关联的子促销产品ID
+
+| promotion_products.zone_id
+| String
+| false
+| 区域别称
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "promotion_type": "trial"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeLeftEverydayPromotionQuotaResponse",
+  "promotion_products": [
+    {
+      "condition": 1,
+      "console_id": "alphacloud",
+      "duration": 1,
+      "effect_time": "2021-04-20T00:00:00",
+      "everyone_count": -1,
+      "expire_time": "2021-09-30T00:00:00",
+      "price": 0,
+      "product_condition": "",
+      "product_id": "prod-trial-test1",
+      "promotion_everyone_charge": 2,
+      "promotion_id": "prom-trial-test2",
+      "resource_info": "cpu_4_memory_4096_class_202_size_20",
+      "resource_type": "instance",
+      "sub_name": "instance",
+      "sub_product_id": "",
+      "zone_id": "test"
+    }
+  ],
+  "ret_code": 0
+}
+----

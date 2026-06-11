@@ -1,0 +1,60 @@
+---
+title: 执行部署脚本时进入了交互模式
+weight: 15
+---
+
+== 现象一
+
+* **问题现象**
++
+脚本执行到部署 OS 步骤时，出现报错 “PAM configuration” 并有乱码。
+
+* **问题原因**
++
+系统进入了交互模式。
+
+* **解决方法**
++
+--
+. 在失败的节点执行命令 `killall dpkg`。
+. 在失败节点执行命令 `apt-get install -f`。
+. 根据提示执行 `dpkg --configure -a`。
+. 会弹出 PAM 的交互窗口，选择 `no`。
++
+image::/images/ep_offline/installation/faq_deploy_qingcloud_03.png[]
+
+. 重新执行部署脚本。
+--
+
+== 现象二
+
+* **问题现象**
++
+--
+脚本执行到部署 OS 步骤时，长时间卡住不动。
+
+日志如下：
+
+image::/images/ep_offline/installation/faq_deploy_qingcloud_04.png[]
+
+查看 FirstBox 所在物理服务器 /opt/install/os 的 Log 日志，出现如下信息：
+
+image::/images/ep_offline/installation/faq_deploy_qingcloud_05.png[]
+--
+
+* **问题原因**
++
+系统在刷新 kernel 时进了交互界面。
+
+* **解决方法**
++
+--
+. 在失败的节点执行命令 `vi install_os.log`，在日志中查看最后执行的命令。
+. 重启异常的服务器，重启完成后手动执行上一步查看到的命令。
+. 根据提示执行 `dpkg --configure -a`。
+. 弹出 PAM 的交互窗口，选择 `Ok`。
++
+image::/images/ep_offline/installation/faq_deploy_qingcloud_06.png[]
+
+. 重新执行部署脚本。
+--

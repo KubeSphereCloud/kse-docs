@@ -1,0 +1,99 @@
+---
+title: "挂载 iSCSI 存储"
+weight: 40
+---
+
+. 依次登录所有计算节点（Hyper节点）。
+. 执行以下命令，配置计算节点的 InitiatorName 信息。
++
+[source]
+----
+vi /etc/iscsi/initiatorname.iscsi
+----
++
+示例：
++
+[source,language,attributes]
+----
+root@sanlockr01n04:~# cat /etc/iscsi/initiatorname.iscsi | grep -v "^#"
+InitiatorName=iqn.2022-12.com.qingcloud:tpsc1
+root@sanlockr01n05:~# cat /etc/iscsi/initiatorname.iscsi | grep -v "^#"
+InitiatorName=iqn.2022-12.com.qingcloud:tpsc1
+----
++
+
+include::../../../../../../_components/attention.adoc[]
+此处配置的 InitiatorName 必须要加到存储侧的 acls 中，否则将无法正常与存储侧进行连接。 
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行以下命令，为 Hyper 节点挂载 iSCSI 目标盘。
++
+[source]
+----
+iscsiadm -m discovery -t st -p <iscsi ip> -l
+----
++
+**示例**：
++
+[source]
+----
+iscsiadm -m discovery -t st -p 172.16.80.6 -l
+----
++
+**参数说明**： 
++
+**iscsi ip**：iSCSI 存储的 IP 地址。
+. 执行以下命令，查看盘符。
++
+[source]
+----
+lsblk -S
+----
+
+. 执行以下命令，设置卷开机自动挂载。
++
+[source]
+----
+iscsiadm -m node -T <iqn> -p <iscsi ip>:<port> --op update -n node.startup -v automatic
+----
++
+**示例**：
++
+[source]
+----
+iscsiadm -m node -T  iqn.2018-10.qingcloud.com:test -p 172.16.80.6:3260 --op update -n node.startup -v automatic
+----
++
+**参数说明**：
+
+ ** **iqn**：iSCSI 存储卷的 IQN 标识符。可以在存储服务器上执行 `targetcli` 命令进入 CLI，执行 `ls` 命令进行查看。如果存储有 Web 可视化页面，也可以直接在界面上进行查看。
+ ** **iscsi ip**：iSCSI 存储的 IP 地址。
+ ** **port**：默认为 3260。
+
+. 执行以下命令，重启 Hyper 节点服务器。
++
+[source]
+----
+reboot
+----
+
+. 执行以下命令，查看盘符。验证存储是否能自动挂载上，且盘符不变。
++
+[source]
+----
+lsblk -S
+----
++
+
+include::../../../../../../_components/note.adoc[]
+iSCSI 的 tpsc_dev 采用 /dev/disk/by-id/xxx 的方式，可通过 `ls -l /dev/disk/by-id/` 命令查看。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 检查磁盘是否格式化过，若没有，需要执行以下命令进行格式化。
++
+[source,language]
+----
+dd if=/dev/zero of=/dev/disk/by-id/xxx
+----

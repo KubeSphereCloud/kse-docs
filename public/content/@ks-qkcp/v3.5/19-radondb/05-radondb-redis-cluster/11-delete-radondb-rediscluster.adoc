@@ -1,0 +1,60 @@
+---
+title: "删除 RadonDB Redis Cluster"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Redis Cluster, 删除 RadonDB Redis Cluster"
+description: "介绍如何删除 RadonDB Redis Cluster。"
+weight: 11
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: dd34340813464a2c937e10e368948016
+:ks_xref_id: 2bb8002942a740b884df3778f68aa452
+:ks_comp: ../../../components/
+:ks_title: 删除 RadonDB Redis Cluster
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB Redis Cluster, 删除 RadonDB Redis Cluster
+:ks_description: 介绍如何删除 RadonDB Redis Cluster。
+:ks_weight: 11
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何删除 RadonDB Redis Cluster 应用。
+
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+此操作将删除 RadonDB Redis Cluster 数据库和数据库中的所有数据，请谨慎执行此操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=eee986ebc12643428d6172c65469e840]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+* 您需要获取 RadonDB Redis Cluster 应用授权。有关更多信息，请联系{ks_product_both}技术支持。
+
+* 为避免数据丢失，请提前备份数据。
+
+
+== 操作步骤link:[id=5f55c9d682484bc69674778794ad40c0]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+. 在 RadonDB Redis Cluster 应用右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除**。
+
+. 在**删除应用**对话框，输入 RadonDB Redis Cluster 应用的名称，然后点击**确定**。

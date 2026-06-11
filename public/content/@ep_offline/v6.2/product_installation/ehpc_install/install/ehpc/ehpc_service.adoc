@@ -1,0 +1,84 @@
+---
+title: "部署 EHPC 服务"
+weight: 1
+---
+
+== 新环境部署
+
+若在进行企业云平台搭建时，已经规划了 EHPC 服务的安装部署，则仅需在部署云平台的过程中，将 ``variables.ZONE_ID.yaml`` 配置文件中的 ``deploy_hpc`` 字段配置为 ``1`` 即可。
+
+include::../../../../../../_components/attention.adoc[]
+ZONE_ID 为云平台环境的实际 ZONE ID，需根据情况进行修改。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+== 旧环境追加部署
+
+. 登录至企业云平台的 FirstBox 节点。
+
+. 执行如下命令，拷贝示例文件至指定目录下，并修改文件名为 ``vm_variables.ZONE_ID.yaml``。
++
+[source,shell]
+----
+# cp -f /pitrix/config/templates/vm_variables.template.yaml /pitrix/config/vm_variables.ZONE_ID.yaml
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* 拷贝得到的文件名必须为 vm_variables.ZONE_ID.yaml 格式，以便区分 region 模式下，不同 ZONE 的配置文件。
+* 其中，ZONE_ID 须修改为云平台内实际待部署 EHPC 服务的 ZONE ID。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，更改 ``vm_variables.ZONE_ID.yaml`` 配置文件中的 ``deploy_hpc`` 字段为 ``1``。
++
+[source,shell]
+----
+# vi /pitrix/config/vm_variables.ZONE_ID.yaml
+......
+deploy_hpc: 1
+......
+----
+
+. 执行如下命令，部署管理节点。
++
+[source,shell]
+----
+# /pitrix/cli/deploy-qingcloud-component.py -v /pitrix/config/vm_variables.ZONE_ID.yaml
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* 此部署步骤耗时较长，请耐心等待。
+* ZONE_ID 需根据实际情况进行修改。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令，查看部署任务执行状态。
++
+[source,shell]
+----
+# /pitrix/cli/get-deploy-qingcloud-component-status.py
+----
++
+
+include::../../../../../../_components/note.adoc[]
+返回结果中 ``status`` 字段为 ``successful`` 表示部署成功。
+
+include::../../../../../../_components/table_footer.adoc[]
+. 若部署失败，可执行如下命令，查看相关日志。
+** 查看简略日志。
++
+[source,shell]
+----
+# /pitrix/cli/get-deploy-qingcloud-component-log.py
+----
+** 详细日志内容，可进入如下目录，查看相应的 job 日志。
++
+[source,shell]
+----
+# cd /pitrix/log/deploy
+----
+
+

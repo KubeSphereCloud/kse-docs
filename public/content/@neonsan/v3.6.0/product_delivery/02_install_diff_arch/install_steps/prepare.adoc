@@ -1,0 +1,81 @@
+---
+title: "准备工作 "
+weight: 1
+---
+
+. 建立集群中所有节点间（包括 x86 和 ARM 架构的所有节点）的免密访问。
++
+
+include::../../../../../_components/note.adoc[]
+建立节点间的免密访问可参考link:../../annex/ssh[附录]内容。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 集群中 x86 架构的节点完全参考link:https://box.yunify.com/s/cqeLDymqt7nmRES[《NeonSAN 安装部署指南》]安装过程进行部署即可。
++
+
+include::../../../../../_components/note.adoc[]
+* 记录此安装部署过程中 FirstBox 所在宿主机的 IP 地址。
+* 整个集群中有且仅有当前所指的一个 FirstBox。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 从如下路径，获取 ARM 架构节点安装部署所需安装包。
++
+[source,shell]
+----
+ftp://ins.qingcloud.com/neonsan/qingstor-installer-1.0/
+----
++
+
+include::../../../../../_components/attention.adoc[]
+* 此处获取的安装包信息，除架构信息不一致之外，其他安装包版本信息均应与部署 x86 架构节点所用安装包保持一致。
+* 非信创平台安装包名称为：``qingstor-installer_2.X.X_neonsan_3.X.X_18.04.1_arm64.tar.gz``
+* 信创平台安装包名称为：``qingstor-installer_2.X.X_neonsan_3.X.X.kylin_v10_arm64.tar.gz``
+* 若安装包下载路径不能访问，请与 QingCloud Installer 组联系。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 将安装包上传至 FirstBox 所在宿主机的 ``/root/`` 目录下。
+
+. 登录至 FistBox 所在宿主机。执行如下命令，将上传至当前节点的 ARM 架构安装包进行解压，所有安装包将会自动解压至 /root/qingstor-installer 目录下。
++
+[source,shell]
+----
+tar -zxf /root/qingstor-installer_2.X.X_neonsan_3.X.X_18.04.1_arm64.tar.gz
+----
++
+
+include::../../../../../_components/note.adoc[]
+安装包名称需根据实际情况进行修改。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，分别解压相应的安装包。
++
+[source,shell]
+----
+tar -xf /root/qingstor-installer/repo/qingstor-zero-neonsan-packages-3.x.x-xxxxxxxx-all.tar -C /root/qingstor-installer/repo/
+tar -xf /root/qingstor-installer/repo/qingstor-zero-packages-xxxxxxxx-ubuntu-18.04.1-aarch64.tar -C /root/qingstor-installer/repo/
+----
++
+
+include::../../../../../_components/note.adoc[]
+安装包名称需根据实际情况进行修改。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，分别将部署所需文件，同步至指定目录下。
++
+[source,shell]
+----
+rsync -azPS /root/qingstor-installer/repo/neonsan/18.04.1-arm/ /var/www/neonsan/18.04.1-arm/
+rsync -azPS /root/qingstor-installer/repo/18.04.1-arm/ /var/www/18.04.1-arm/
+---- 
++
+
+include::../../../../../_components/note.adoc[]
+路径需根据实际情况进行修改。
+
+include::../../../../../_components/table_footer.adoc[]
+

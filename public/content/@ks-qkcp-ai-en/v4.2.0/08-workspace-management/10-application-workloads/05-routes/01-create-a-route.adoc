@@ -1,0 +1,53 @@
+---
+title: "Create an Ingress"
+keywords: "Kubernetes, {ks_product}, Project Management, Application Workloads, Ingress, Create an Ingress"
+description: "Introduces how to create an Ingress."
+weight: 01
+---
+
+:ks_permission: **Application Workload Management**
+:ks_navigation: **Application Workloads > Ingress**
+:project:
+
+include::../../../../_custom/clusterManagement/routes/routes-desc-createARoute.adoc[]
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+After installing the "KubeSphere Gateway" extension and enabling the cluster gateway, workspace gateway, or project gateway, when creating an Ingress, you can select the corresponding gateway's IngressClassName on the **Routing Rule** tab.
+|===
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+* To create an Ingress that supports the HTTPS protocol, you need to create a **TLS Information** type Secret. The Secret must contain the Base64-encoded certificate and private key. For more information, please refer to link:../../../12-configuration/01-secrets/01-create-a-secret/[Create a Secret].
+
+* There is at least one Service in the project to which the Ingress belongs. For more information, please refer to link:../../02-services/01-create-a-service/01-create-a-stateful-or-stateless-service/[Create a Service].
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/routes/routes-oper-createARoute_v42.adoc[]

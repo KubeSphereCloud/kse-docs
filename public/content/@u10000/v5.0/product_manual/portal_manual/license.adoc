@@ -1,0 +1,76 @@
+---
+title: License 管理
+description: 
+weight: 6
+draft: true
+---
+
+Portal 提供 {product_name} 的 License 管理功能。
+
+
+include::../../../../_components/note.adoc[]
+
+当 {product_name} 部署完成后，默认提供一个月的试用期，可用于 POC。
+
+* 若需要延长 POC 时间，运维人员需要申请 POC 的 License 进行导入。
+* 若部署的是生产环境，运维人员需要在试用期内申请正式的 License 并导入激活。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+
+
+== License 申请流程
+
+. 成功link:../login[登录 Portal]。
+
+. 点击页面右上角的**系统设置**。
++
+image::/images/u10000_v5.0/license_1.png[license_1,100%]
+
+
+. 进入**系统设置**页面后，点击** License 管理**标签，进入 License 主页面。
++
+image::/images/u10000_v5.0/license_main.png[license_main,40%]
++
+页面信息说明
++
+[cols="1,3a", options="header"]
+|===
+| 页面参数 |说明
+
+|有效期 | 当前环境可使用的时间期限。
+|授权容量 | 能使用的集群容量。
+|集群容量 | 当前环境，实际部署的集群容量。
+|特性扩展包 | 列举需授权的高级功能。若当前 License 支持某一扩展包，相应的特性即被点亮。
+|===
+
+. 复制**集群 ID**，并登录link:https://apps.yunify.com/[全象云]申请产品许可。
+
+. 点击**激活 License**，弹出**激活 License** 对话框。
+. 根据对话框提示信息，将申请到的 License 信息，正确填入后，点击**激活**。
+. 产品激活，立马生效。用户可至 License 主页面查看详细信息。
+
+== License 状态说明
+
+License 的状态分为 `试用`、`已激活`、`授权容量不足`、`过期`。不同状态下，用户所受限制不同。详细说明如下。
+
+* 试用
++
+当 {product_name} 部署完成后，默认提供一个月的试用期，可用于 POC，此时 License 状态为 `试用`。该状态下，用户的授权容量不受限制，特性扩展包里面的功能，均可使用。
+
+** 试用期满后，若用户没有导入延长 POC 时间的 License 或正式的 License，License 状态将更新为 `过期`，此时将影响集群的正常使用。
+** 导入延长 POC 时间的 License，License 状态仍为 `试用`，有效期延长。
+** 导入正式的 License，License 状态更新为 `已激活`。
+
+* 已激活
++
+导入正式的 License 后，有效期无限制，用户的授权容量根据 License 申请的容量进行限制。当授权容量不足时，License 状态更新为 `授权容量不足`。
+
+* 授权容量不足
++
+该状态将影响集群的正常使用，需导入新的 License。导入新的 License 后，License 状态更新为 `已激活`。
+
+* 过期
++
+当试用期满，用户没有及时导入新的 License，则 License 状态更新为 `过期`。该状态将影响集群的正常使用，需尽快导入新的 License。

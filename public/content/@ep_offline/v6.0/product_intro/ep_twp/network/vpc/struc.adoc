@@ -1,0 +1,16 @@
+---
+title: "VPC 网络架构"
+weight: 5
+---
+
+VPC 网络可以由租户完全自主管理，可根据业务需求自主规划 IP 地址范围，设置子网。不同 VPC 网络之间的云服务器或其他云资源无法直接进行通信，即便拥有相同的 IP 地址，也不会有 IP 地址冲突的情况。VPC 网络在企业云环境中的架构如下图所示。
+
+image::/images/ep_offline/ep_twp/vpc_struc.png[]
+
+
+上图中，VPC1 和 VPC2 为两个完全隔离的 VPC 网络，其中 VPC1 横跨了多个计算节点。VPC1 有 2 个私有网络（vxnet1:10.101.101.0/24，vxnet2:10.101.102.0/24），每个私有网络都有对应的 DVR 集群部署于 VM 所在的计算节点上，vxnet1 的 DVR 集群由 dvr11(master/controller)、dvr12、dvr13 组成，vxnet2 的 DVR 集群由 dvr14(master/controller) 和 dvr15 组成。
+
+每个 VPC 都有一个管理路由器（简称 KVR），部署于计算节点上的 LXC 容器实例。如图中 KVR1 为 VPC1 的管理路由器。KVR 会接入基础网络，可实现与 VPC 外部网络的通信，转发来自 VPN、隧道、端口转发等的流量，但不处理子网之间的转发流量。
+
+DVR 之间通过建立 VXLAN Tunnel 实现 VPC 内部通信，DVR 与 KVR 之间也会通过 VXLAN 隧道通信，并通过 KVR 实现 VPC 外部访问。
+

@@ -1,0 +1,31 @@
+---
+title: "监控"
+weight: 1
+---
+
+== 功能特性
+
+* 可对接云平台 CloudSat 监控服务。
+* 基于主流监控框架 Prometheus。
+* 支持高可用。
+* 提供不同维度的监控信息：平台、租户、项目/DevOps工程、工作负载、Pod、容器。
+* 提供高级监控信息的管理配置界面。
+* 可集成第三方监控服务，支持监控数据导出。
+
+== 主要组件
+
+* Prometheus Operator：管理和运维 Prometheus 集群。
+* Prometheus 工作负载：后端 Prometheus 集群服务，收集监控数据。
+* Node Exporter：采集集群节点监控数据。
+* cAdvisor/Kubelet：
+* kube-state-metrics：监听 Kubernetes API server，并采集监控数据。
+
+== 架构设计
+
+image::/images/ep_offline/qke_twp/05_monitor.png[]
+
+* Prometheus Operator：管理和运维 Prometheus 集群。
+* Prometheus 工作负载：后端 Prometheus 集群服务，收集监控数据。
+* Node Exporter：采集集群节点监控数据。
+* cAdvisor/Kubelet：Docker Container 监控工具，对运行中的容器进行资源使用和性能分析
+* kube-state-metrics：监听 Kubernetes API server，并采集监控数据。

@@ -1,0 +1,12 @@
+---
+title: "弹性伸缩"
+weight: 24
+---
+
+在云原生架构中，弹性伸缩是确保应用能够高效、经济地应对业务负载波动的核心技术。它允许系统根据预设的规则或实时指标，自动调整资源分配，从而实现高可用性、提升资源利用率并优化成本。在 KubeSphere 平台，弹性伸缩功能主要体现在以下几个方面：
+
+* 容器水平伸缩（HPA - Horizontal Pod Autoscaler）：根据 CPU 使用率、内存使用率，自动调整 Pod 副本的数量。HPA 适用于服务波动较大、服务数量多且需要频繁扩缩容的业务场景。
+
+* 容器垂直伸缩（VPA - Vertical Pod Autoscaling）：根据容器的历史资源使用情况，自动调整现有 Pod 的 CPU 和内存的请求值（Request）与限制值（Limit）。VPA 适用于需要稳定资源配置的有状态应用的扩容等场景。
+
+* 事件驱动伸缩（KEDA - Kubernetes Event-driven Autoscaling）：根据各种外部事件和指标（如消息队列长度、HTTP 请求等），动态调整 Pod 副本的数量。

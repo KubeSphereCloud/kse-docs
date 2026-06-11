@@ -1,0 +1,23 @@
+---
+title: "跨 RG 迁移网络配置"
+weight: 2
+---
+
+若集群后期需使用跨 RG 迁移功能，则不同 RG 内的各节点所配置的 repl 网络（即存储网络）需在同一网段内。 
+
+若两个 RG 的节点所配置的存储网络不在同一网段内，则需逐个登录各 RG 内的所有节点添加静态路由。
+[source,shell]
+----
+ip r add networkA-1 via networkA.254 dev replA
+ip r add networkA-2 via networkA.254 dev replA
+ip r add networkA-3 via networkA.254 dev replA
+
+ip r add networkB-1 via networkB.254 dev replB
+ip r add networkB-2 via networkB.254 dev replB
+ip r add networkB-3 via networkB.254 dev replB
+----
+
+include::../../../../../../_components/note.adoc[]
+* replA 所属网段为 networkA，根据实际情况进行修改。
+* replB 所属网段为 networkB，根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]

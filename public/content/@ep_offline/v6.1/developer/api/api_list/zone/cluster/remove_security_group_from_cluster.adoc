@@ -1,0 +1,78 @@
+---
+title: 集群解绑安全组（RemoveSecurityGroupFromCluster）
+weight: 8
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cluster
+| String
+| true
+| 集群ID
+
+| security_group_id
+| String
+| true
+| 安全组ID
+
+| zone
+| String
+| true
+| 可用区
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cluster
+| String
+| false
+| 集群ID
+
+| job_id
+| String
+| false
+| 任务ID
+
+| ret_code
+| String
+| false
+| 返回状态码
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "RemoveSecurityGroupFromCluster",
+  "cluster": "cl-57iza1dg",
+  "security_group_id": "sg-78xbktnc",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "RemoveSecurityGroupFromClusterResponse",
+  "cluster": "cl-57iza1dg",
+  "job_id": "j-jdpsdr9ybnq",
+  "ret_code": 0,
+  "trace_id": "LyuG6DRF"
+}
+----

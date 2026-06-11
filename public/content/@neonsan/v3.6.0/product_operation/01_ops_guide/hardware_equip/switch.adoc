@@ -1,0 +1,93 @@
+---
+title: '更换存储网络的交换机'
+weight: 15
+---
+
+== 注意事项
+
+* 仅适用于更换存储网络的交换机，不适用于其他，如业务网络中的交换机。
+
+* 存储网络为标准配置，即存储网络中用于数据传输的的网卡其两个网口分别连接在不同的交换机上，如下图所示。
++
+image::/images/neonsan/ops_guide_25.png[,70%]
+
+* 更换过程需遵循：在交换机侧拔网线 > 更换交换机 > 插回网线的基本流程。**不可直接对交换机进行下电操作**。
+
+
+== 操作步骤
+
+. 确认网络连接符合标准配置，即用于数据传输的网卡其两个网口连接不同的交换机。
+. 检查集群网络状态：
++
+[,shell]
+----
+inspection check_network -port_type RDMA
+----
++
+include::../../../../../_components/note.adoc[]
+``-port_type`` 为节点间的连接方式，可为 `TCP` 或 `RDMA`，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录集群，执行如下命令，逐个检查所有存储节点间的连接状态：
++
+[,shell]
+----
+neonsan list_peer -store_id <store id>
+----
++
+include::../../../../../_components/note.adoc[]
+``-store_id`` 为存储节点 ID，需逐个输入集群中的所有节点ID进行检查，根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 检查集群状态：
++
+[,shell]
+----
+neonsan list_store |grep -v OK
+neonsan list_ssd |grep -v OK
+neonsan list_volume -detail |grep -v OK
+----
++
+include::../../../../../_components/note.adoc[]
+若返回结果均为空，则表示集群状态正常，可进行后续步骤。否则，需先将集群状态恢复正常后，再进行后续步骤。
+include::../../../../../_components/table_footer.adoc[]
+
+. *在交换机端*，拔掉网线。
+. 下架旧交换机，安装新交换机，并确认新交换机可正常运行。
+. 在新更换的交换机上插回网线，并确认物理连接正常。
+. 等待 1 分钟后，登录集群，检查网络状态：
++
+[,shell]
+----
+inspection check_network -port_type RDMA
+----
++
+include::../../../../../_components/note.adoc[]
+``-port_type`` 为节点间的连接方式，可为 `TCP` 或 `RDMA`，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 登录集群，执行如下命令，逐个检查所有存储节点间的连接状态：
++
+[,shell]
+----
+neonsan list_peer -store_id <store id>
+----
++
+include::../../../../../_components/note.adoc[]
+``-store_id`` 为存储节点 ID，需逐个输入集群中的所有节点ID进行检查，根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 再次检查集群状态：
++
+[,shell]
+----
+neonsan list_store |grep -v OK
+neonsan list_ssd |grep -v OK
+neonsan list_volume -detail |grep -v OK
+----
++
+include::../../../../../_components/note.adoc[]
+若返回结果均为空，则表示集群状态正常，可进行后续步骤。否则，需先将集群状态恢复正常后，再进行后续步骤。
+include::../../../../../_components/table_footer.adoc[]
+
+. 至此，存储网络中的交换机更换完成。若需更换另一台交换机，重复步骤 1～10 即可。

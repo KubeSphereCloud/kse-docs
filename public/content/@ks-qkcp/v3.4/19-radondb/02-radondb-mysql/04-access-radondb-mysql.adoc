@@ -1,0 +1,137 @@
+---
+title: "访问 RadonDB MySQL 数据库"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB MySQL, 访问, 连接, 数据库"
+description: "介绍如何访问 RadonDB MySQL 数据库。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 84240fae45b041d9bb46c7fbe31413e0
+:ks_xref_id: 1950eaa4114b499abf9af1ffd84f690d
+:ks_comp: ../../../components/
+:ks_title: 访问 RadonDB MySQL 数据库
+:ks_keywords: Kubernetes, {ks_product}, RadonDB MySQL, 访问, 连接, 数据库
+:ks_description: 介绍如何访问 RadonDB MySQL 数据库。
+:ks_weight: 04
+:ks_icon:
+
+
+本节介绍如何访问 RadonDB MySQL 数据库。
+
+
+== 前提条件link:[id=36b9c36d44d54965b13d444bb577fd6a]
+
+* 请确保已获取{ks_product_both}平台登录用户帐号和密码，且已获取平台操作管理权限。
+
+* 请确保已安装 RadonDB MySQL 应用。
+
+* 您需要获取 MySQL 数据库用户名和密码。有关更多信息，请参阅link:../03-manage-database-users/01-create-a-database-user/[创建数据库用户]。
+
+== 通过{ks_product_both}平台访问link:[id=f311876464024ce3a5b5c70ec88797bd]
+
+以下演示在{ks_product_both}平台访问 RadonDB MySQL 的方式。
+
+在{ks_product_both}平台右下角工具箱中选择 kubectl 工具，通过 kubectl 工具访问 RadonDB MySQL。
+
+执行如下命令连接应用，连接成功后即可使用 RadonDB MySQL 应用。
+
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+kubectl exec -it <pod_name> -c mysql -n <project_name> -- mysql --user=<user_name> --password=<user_password>
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+== 通过 mysql-client 访问link:[id=e83ae25717ad415c9af1a8b02a4efc22]
+
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+使用如下方式，需提前安装可用于连接 MySQL 客户端工具。
+
+* 当客户端的与数据库不在同一{ks_product_both}环境时，可通过配置端口转发、负载均衡等方式连接。
+* 当客户端的与数据库在同一{ks_product_both}环境时，默认通过 **service_name** 方式连接。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+以下为客户端与数据库在同一{ks_product_both}平台内，访问 RadonDB MySQL 的方式。
+
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+**service_name** 方式不适用于从{ks_product_both}集群的物理机访问数据库 Pod。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+连接 RadonDB MySQL 数据库命令如下：
+
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+mysql -h <leader_service_name>.<project_name> -u <user_name> -p
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+以下示例中相应参数取值如下：
+
+* **leader_service_name** 为 _radondb-olmq1i-leader_
+
+* **project_name** 为 _ts_
+
+* **user_name** 为 _radondb_
+
+* **user_password** 为 _RadonDB@123_
+
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+mysql -h radondb-olmqli-leader.ts -u radondb -p
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+如果您需要通过物理机或物理机所在的网络访问 MySQL，您需要先用 NodePort 暴露该应用。
+
+. 进入{ks_product_both}目标项目。
+
+. 点击**应用负载** > **服务**，找到新建的 MySQL 应用对应的 leader 和 follower 服务，如下图所示。
++
+--
+image::/images/ks-qkcp/zh/radondb-management/edit-external-service.png[edit-external-service]
+--
+
+. 点击**更多操作** > **编辑外部访问**。
+
+. 将 leader 和 follower 服务的访问模式设置为 **NodePort**，点击**确定**。
+
+. 点击**应用负载** > **应用** > **RadonDB 应用**，然后点击已创建的 MySQL 应用进入详情页面。
+
+. 在应用详情页左侧区域，查看读写地址，输入以下命令访问 RadonDB MySQL 数据库。
++
+--
+// Bash
+include::../../../../_ks_components/code/bash.adoc[]
+
+mysql -h <leader_service_name>.<project_name> -u <user_name> -p
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+取决于您的 Kubernetes 集群的部署位置，您可能需要在安全组中放行端口并配置相关的端口转发规则。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+

@@ -1,0 +1,18 @@
+---
+title: "日志持久化"
+weight: 02
+---
+
+更新 nginx-ingress 的 configmap 配置。
+
+[,yaml]
+----
+kind: ConfigMap
+apiVersion: v1
+metadata:
+name: ingress-nginx-controller
+namespace: kubesphere-system
+data:
+    access-log-path: /var/log/nginx/access.log  # <----- 新增 nginx 访问日志
+    error-log-path: /var/log/nginx/error.log      # <----- 新增 nginx 错误日志
+----

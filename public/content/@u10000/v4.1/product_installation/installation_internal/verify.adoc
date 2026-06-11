@@ -1,0 +1,49 @@
+---
+title: 环境验证
+weight: 5
+---
+
+当用户根据本文已经完成安装部署后，用户需登录 Portal 与 Console 页面，确认服务可用。
+
+== 配置 hosts 文件
+
+在用户登录 Portal 与 Console 页面，确认服务可用之前，需在本地 hosts 文件中，添加以下信息。
+
+[source,shell]
+----
+139.198.3.63 console.qingstorage.com portal.rose.stor.qingstorage.com rose.stor.qingstorage.com stor.qingstorage.com
+----
+
+include::../../../../_components/note.adoc[]
+
+* 由于云服务器直接访问不了，因此，这里填写公网 IP。
+* 并且需要将公网 IP 做link:../prepare/port[端口转发]。
+
+include::../../../../_components/table_footer.adoc[]
+
+== 基础测试
+
+. 登录 Portal 与 Console 页面，确认服务可用。
+
+* 登录 Portal：
++
+[source,shell]
+----
+Portal链接：portal.rose.stor.qingstorage.com
+默认用户名：qingstor@qingstorage.com
+默认密码：zhu88jie
+----
+
+* 登录 Console：
++
+[source,shell]
+----
+Console 链接：console.qingstorage.com
+默认用户名：qingstor@qingstorage.com
+默认密码：zhu88jie
+----
+
+. 成功创建 Bucket，并上传下载文件成功。
+
+. 成功创建文件系统和文件系统共享，挂载后按设置的权限操作文件成功。
+

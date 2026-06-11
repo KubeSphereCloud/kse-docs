@@ -1,0 +1,21 @@
+---
+title: "Cluster Visibility"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Cluster Visibility"
+description: "Introduces how to manage cluster visibility."
+weight: 02
+layout: "second"
+---
+
+
+
+This section introduces how to manage cluster visibility. Cluster visibility is used to control which workspaces a cluster is authorized to.
+
+* You can authorize a cluster to multiple workspaces, allowing resources in those workspaces to run on that cluster.
+
+ifeval::["{file_output_type}" == "html"]
+* You can also authorize multiple clusters to the same workspace, enabling the creation of federated projects within that workspace. For more information about federated projects, please refer to link:../../../11-use-extensions/07-kubefed[Federated Projects].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+* You can also authorize multiple clusters to the same workspace, enabling the creation of federated projects within that workspace. For more information about federated projects, please refer to the "Federated Cluster Application Management" chapter in the *KubeSphere Extensions Usage Guide*.
+endif::[]

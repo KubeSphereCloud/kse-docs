@@ -1,0 +1,79 @@
+---
+title: 通过 BOSS 平台导入
+weight: 2
+draft: true
+---
+
+. 进入 *AppCenter: 云应用* 面板，点击**全局配置**，对私有云环境进行资源配置。
++
+image::/images/boss/manual/resource_mgt/cluster_apps_6.png[]
++
+参数说明如下：
++
+[cols="2,8", options="header"]
+|===
+|参数名称
+|参数说明
+
+|虚拟化类型
+|包括 KVM 和 LXC。可多选。
+
+|主机类型
+|包括性能型、超高性能型、SAN 云服务器、弹性裸金属服务器等多种类型。可多选。
+
+|存储类型
+|包括性能型、容量型、超高容量型、超高性能型等多种类型。可多选。
+
+|导入应用
+|配置导入应用的类型，包括``导入镜像与配置包``、``仅导入配置包``和``仅导入镜像``。
+
+|资源载入地址
+|App 镜像资源的地址，根据实际情况进行配置。需确保 BOSS 平台能正常访问该地址。
+|===
+
++
+配置完成后，点击 *确认*。
+
+. 进入 *AppCenter: 云应用* 面板，点击**导入云应用**。
++
+image::/images/boss/manual/resource_mgt/cluster_apps_1.png[]
+
+. 弹出 *导入云应用* 对话框，输入 *导入地址*，点击 *载入资源*。
++
+image::/images/boss/manual/resource_mgt/cluster_apps_2.png[]
++
+
+include::../../../../../_components/note.adoc[]
+当前仅支持本地导入。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 勾选待导入应用，点击 *下一步*。
++
+image::/images/boss/manual/resource_mgt/cluster_apps_3.png[]
+
+. 选择应用版本，点击 *导入*。
++
+image::/images/boss/manual/resource_mgt/cluster_apps_4.png[]
++
+参数说明如下：
++
+[cols="2,8", options="header"]
+|===
+|参数名称
+|参数说明
+
+|是否已有
+|表示该私有云环境是否已有该应用。
+
+|是否覆盖
+|表示应用导入时是否需要覆盖原应用。
+
+|版本更新说明
+|该版本的更新说明。
+|===
+
+
+. 进入 *AppCenter: 云应用* 面板，点击 *导入日志*，可查看导入情况。
++
+image::/images/boss/manual/resource_mgt/cluster_apps_5.png[]

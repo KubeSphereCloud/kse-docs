@@ -1,0 +1,106 @@
+---
+title: 新增IAM用户组成员（CreateIAMGroupMember）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| group_id
+| String
+| false
+| IAM用户组ID
+
+| root_user
+| String
+| false
+| 根用户ID
+
+| user_ids
+| Array
+| false
+| 用户ID列表
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| iam_group_set
+| Array
+| false
+| IAM用户组成员详情列表
+
+| iam_group_set[].console_id
+| String
+| false
+| 控制台ID
+
+| iam_group_set[].create_time
+| String
+| false
+| 创建时间
+
+| iam_group_set[].group_id
+| String
+| false
+| IAM用户组ID
+
+| iam_group_set[].owner
+| String
+| false
+| 所有者ID
+
+| iam_group_set[].root_user_id
+| String
+| false
+| 主账户ID
+
+| iam_group_set[].user_id
+| String
+| false
+| 用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateIAMGroupMember",
+  "group_id": "iamg-6sysj1u7",
+  "user_ids": [
+    "usr-g8ZyBo6l"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateIAMGroupMemberResponse",
+  "iam_group_set": [
+    {
+      "console_id": "testing",
+      "create_time": "2023-06-02T16:53:52",
+      "group_id": "iamg-6sysj1u7",
+      "owner": "admin",
+      "root_user_id": "admin",
+      "user_id": "usr-g8ZyBo6l"
+    }
+  ],
+  "ret_code": 0
+}
+----

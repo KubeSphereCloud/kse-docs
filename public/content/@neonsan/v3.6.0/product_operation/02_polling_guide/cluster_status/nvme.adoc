@@ -1,0 +1,37 @@
+---
+title: "查看 NVMe 磁盘信息"
+weight: 17
+---
+
+. 逐个登录 NeonSAN 集群节点。 
+
+. 执行 ``lsblk`` 命令，查看当前节点上的硬盘列表，其中命名形式如 ``nvme0n1`` 的硬盘即为 NVMe 硬盘。
++
+include::../../../../../_components/note.adoc[]
+若返回结果中无 NVMe 硬盘，则无需进行后续查看 NVMe 磁盘信息的操作。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，查看本节点上 NVMe 盘的型号，SN，容量，FW 等信息。
++
+[,shell]
+----
+nvme list
+----
++
+image::/images/neonsan/polling_guide_44.png[]
+
+. 执行如下命令，查看指定 NVMe 盘的详细信息。
++
+[,shell]
+----
+nvme smart-log /dev/nvme0n1
+----
++
+image::/images/neonsan/polling_guide_45.png[,70%]
++
+include::../../../../../_components/note.adoc[]
+* ``media_errors`` 为 0，说明该存储介质正常。 
+* 若 media_errors 数值较高，可参考“《NeonSAN 运维手册》：物理 设备变更 > SSD 下线及换盘操作”相关内容更换磁盘。
+include::../../../../../_components/table_footer.adoc[]
+
+

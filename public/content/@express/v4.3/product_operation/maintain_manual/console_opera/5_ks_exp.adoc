@@ -1,0 +1,76 @@
+---
+title: "手动扩容 KS 节点内存"
+weight: 5
+---
+
+== 运维场景
+
+在云易捷环境的实际使用中，一般情况下，KS 节点 12G 的内存足够使用，若出现内存不足的情况时，可优先考虑清理历史数据并排查异常进程。若仍无法解决内存不足的情况，可参考以下步骤进行 KS 节点的内存扩容。
+
+== 注意事项
+
+* 扩容过程中须要停止云易捷 Console 平台的使用。
+* 扩容完成后需检查集群状态。
+
+== 操作步骤
+
+. 登录{product_console_name}，在顶部导航栏选择**物理资源** > **管理节点**，进入**管理节点**页面。查看并记录待扩容的 KS 节点**所属物理（Hyper）节点**。
++
+image::/images/express/maintain/ks_exp_1.png[]
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 登录 KS 节点所在的 Hyper 节点。
+
+. 执行如下命令，修改 KS 节点的最大内存。
++
+[source,shell]
+----
+virsh edit <ks_hostname>
+----
++
+即修改配置文件中的 ``<memory unit='KiB'>`` 值。
++
+[source,shell]
+----
+...
+  <memory unit='KiB'>12582912</memory>
+  <currentMemory unit='KiB'>12582912</currentMemory>
+  <vcpu placement='static'>4</vcpu>
+...
+----
++
+include::../../../../../_components/note.adoc[]
+<ks_hostname> 需根据实际情况进行修改，即在 Console 平台上管理节点的名称。
+include::../../../../../_components/table_footer.adoc[]
+
+. 依次执行如下命令，重启扩容内存的 KS 节点。
++
+[source,shell]
+----
+virsh destroy <ks_hostname>
+----
++
+[source,shell]
+----
+virsh start <ks_hostname>
+----
+
+

@@ -1,0 +1,206 @@
+---
+title: "Configuring NFS"
+keywords: "Kubernetes, {ks_product}, Installation, Preparation, Persistent Storage, Network File System, NFS"
+description: "Describes how to configure a Network File System (NFS) for a KubeSphere cluster in a production environment."
+weight: 05
+---
+
+
+This section describes how to configure a Network File System (NFS) for a KubeSphere cluster in a production environment.
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+NFS is incompatible with some applications (e.g., Prometheus) and may cause pod creation to fail. If you must use NFS in a production environment, ensure you understand the associated risks or consult QingCloud's official solution experts or delivery service experts.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+== Setting Up the NFS Server
+
+Before configuring NFS for KubeSphere, you need to set up an NFS server. If you already have a usable NFS server, you can skip this step. The following uses installing the NFS Kernel Server on an Ubuntu operating system as an example to describe how to set up an NFS server. For specific operations for other NFS servers and other operating systems, refer to the user guides for the NFS server and operating system.
+
+
+=== Prerequisites
+
+You need to prepare a Linux server (the following uses Ubuntu as an example) that must be network-accessible from the KubeSphere cluster nodes.
+
+
+=== Steps
+
+. Log in to the server to be used as the NFS server and run the following command to install the NFS Kernel Server:
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+sudo apt update
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+sudo apt install nfs-kernel-server
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Run the following command to create a directory for KubeSphere to use (replace `<directory>` with the actual directory path, e.g., **/mnt/demo**):
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+sudo mkdir -p <directory>
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Run the following command to remove access restrictions on the directory (replace `<directory>` with the actual directory path, e.g., **/mnt/demo**):
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+sudo chown nobody:nogroup <directory>
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+sudo chmod 777 <directory>
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Run the following command to edit the configuration file of the NFS Kernel Server:
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+sudo vi /etc/exports
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Add the information of the KubeSphere cluster nodes to the file to allow the servers to access the NFS server, and save the file:
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+<directory> <IP address>(rw,sync,no_subtree_check)
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+Replace the following parameters with actual values:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|<directory>
+|The directory for KubeSphere to use, e.g., **/mnt/demo**.
+
+|<IP address>
+|The IP address of a KubeSphere cluster node, e.g., 192.168.0.2.
+|===
+
+If there are multiple KubeSphere cluster nodes, set multiple configuration entries. You can also set `<IP address>` to a network segment to allow all servers in that segment to access the NFS server, e.g., **192.168.0.0/24**.
+--
+
+. Run the following command to enable directory sharing:
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+sudo exportfs -a
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Run the following command to restart the NFS server for the configuration to take effect:
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+sudo systemctl restart nfs-kernel-server
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+== Configuring KubeSphere Cluster Nodes
+
+After the NFS server is set up, you need to install the client tool on the KubeSphere cluster nodes and create a configuration file for use during the subsequent KubeSphere installation. After KubeSphere is installed, it will use the NFS server specified in the configuration file as persistent storage. The following uses installing NFS Common on Ubuntu as an example to describe how to install the NFS client and create a configuration file. For specific operations for other NFS clients and other operating systems, refer to the user guides for the NFS client and operating system.
+
+
+=== Prerequisites
+
+You need to set up an NFS server. For more information, refer to link:#_setting_up_the_nfs_server[Setting Up the NFS Server].
+
+
+=== Steps
+
+. Log in to all KubeSphere cluster nodes and run the following command to install nfs-common:
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+sudo apt update
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+sudo apt install nfs-common
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Log in to the cluster node used to perform the KubeSphere installation and run the following command to create an NFS storage plugin configuration file:
++
+--
+// Note
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+vi nfs-client.yaml
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Add the following information to the configuration file and save the file for use during the subsequent KubeSphere installation:
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+nfs:
+  server: "<IP address>"
+  path: "<directory>"
+storageClass:
+  defaultClass: true
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+Replace the following parameters with actual values:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|<IP address>
+|The IP address of the NFS server.
+
+|<directory>
+|The directory on the NFS server for KubeSphere to use.
+|===
+
+The above configuration file only includes the mandatory parameters. To set other parameters, refer to link:https://github.com/kubesphere/helm-charts/blob/master/src/main/nfs-client-provisioner/values.yaml[NFS Client Configuration].
+--

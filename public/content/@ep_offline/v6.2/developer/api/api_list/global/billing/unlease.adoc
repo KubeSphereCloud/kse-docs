@@ -1,0 +1,88 @@
+---
+title: 取消扣费（Unlease）
+weight: 26
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cease
+| Integer
+| false
+| 传入1时没有跳过终止时间等待，租赁终止后，立即cease租赁
+
+| force
+| Integer
+| false
+| 传入1时不检查资源状态，直接cease租赁
+
+| refund_policy
+| String
+| false
+| private
+
+| resources
+| Array
+| true
+| 资源ID
+
+| user
+| String
+| false
+| 用户ID
+
+| zone
+| String
+| true
+| 区域ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resource_set
+| Array
+| false
+| 资源ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "Unlease",
+  "cease": 0,
+  "resources": [
+    "i-rvegpg7h"
+  ],
+  "user": "usr-xxxx",
+  "zone": "test"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "UnleaseResponse",
+  "resource_set": [
+    {
+      "resource_id": "i-rvegpg7h"
+    }
+  ],
+  "ret_code": 0
+}
+----

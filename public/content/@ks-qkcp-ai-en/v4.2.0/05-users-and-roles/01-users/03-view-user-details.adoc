@@ -1,0 +1,59 @@
+---
+title: "View User Details"
+keywords: "Kubernetes, {ks_product}, Access Control, User, View User Details"
+description: "Introduces how to view user details."
+weight: 03
+---
+
+:ks_menu: **Users and Role Management**
+:ks_navigation: **Users**
+:ks_permission: **User Viewing**
+
+This section introduces how to view user details.
+
+== Prerequisites
+
+You need to have pass:a,q[{ks_permission}] permissions in the KubeSphere platform. For more information, please refer to link:../../01-users/[Users] and link:../../02-platform-roles/[Platform Roles].
+
+== Steps
+
+include::../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
++
+. click pass:a,q[{ks_menu}].
+. In the left navigation pane, select **Users**.
+. In the user list, click the name of a user to open their details page.
+. On the user details page, view the user's resource attributes in the **Attributes** area.
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Platform Role
+|The user's platform role.
+
+|Email
+|The user's email address.
+
+|Last Login
+|The time the user last logged into the KubeSphere web console.
+|===
+
+. On the user details page, view the user's login history on the **Login History** tab.
++
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Time
+|The user's login time.
+
+|Status
+|Whether the user logged in successfully.
+
+|Source IP Address
+|The client IP address from which the user logged into the KubeSphere web console.
+
+|Reason
+|If the user failed to log in, the reason for the login failure is displayed.
+|===

@@ -1,0 +1,257 @@
+---
+title: "查看 Kafka 运行状态"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Kafka, 查看 Kafka 运行状态"
+description: "介绍如何查看 RadonDB Kafka 运行状态。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: c3e276316f134da6b321301b6c9fb99f
+:ks_xref_id: 761a549657554b81a272c78c23adc971
+:ks_comp: ../../../components/
+:ks_title: 查看 Kafka 运行状态
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB Kafka, 查看 Kafka 运行状态
+:ks_description: 介绍如何查看 RadonDB Kafka 运行状态。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载查看**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何查看 RadonDB Kafka 运行状态。
+
+
+== 前提条件link:[id=bb11d8561d464631a04810570bc957e3]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/radondb/radondbKafka/radondbkafka-prer-installRadondbkafka.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=ea8fa81270244200bb5e66000e4a1eb8]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|RadonDB Kafka 应用在{ks_product_both}平台的名称。
+
+|状态
+|RadonDB Kafka 应用的运行状态。
+
+* **创建中**：应用正在创建过程中。
+
+* **更新中**：应用正在更新配置。
+
+* **已完成**：应用更新完成，即将开始运行。
+
+* **失败**：应用创建过程中出现错误导致创建失败。
+
+* **运行中**：应用运行正常。
+
+|应用模板
+|创建 RadonDB Kafka 应用所使用的应用模板名称。
+
+|版本
+|Kafka 的版本。
+
+|访问地址
+|Kafka 的访问地址。每个数据库可提供多个不同用途的访问地址。将光标悬停在访问地址列的数字上可查看 NodePort 的读写地址。
+
+|创建时间
+|RadonDB Kafka 应用的创建时间。
+|===
+--
+
++
+
+include::../../../_custom/radondb/radondbKafka/radondbkafka-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左侧区域，您可以查看 Kafka 应用属性和访问地址，下载 CA 证书，并查看 CA 密码和证书有效期。
+
+. 在详情页面右侧的**概览**页签查看数据库的基本信息和数据库节点。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|基本信息
+|显示 Kafka 的运行状态、Kafka 和 ZooKeeper 节点数量、每个 Kafka 和 ZooKeeper 节点的 CPU 和内存资源以及挂载的卷容量。
+
+|节点
+|显示 Kafka 的所有节点及其创建时间、运行状态、容器组 IP 地址、CPU 和内存资源、卷容量。
+|===
+--
+
+. 点击节点最右侧的监控图标，您可以查看单个节点的监控数据，包括网络处理器空闲率、磁盘写入速率、磁盘读取速率、内存用量、CPU 用量、每秒接收消息数量、JVM 内存用量、JVM 线程数量和可用磁盘空间。
+
++
+--
+ifeval::["{file_output_type}" == "pdf"]
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+在{ks_product_both}平台，每个 Kafka 节点被创建为一个容器组。有关容器组的更多信息，请参阅《{ks_product_right}项目管理指南》。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+endif::[]
+--
+
+. 在详情页面右侧点击**监控**页签查看 Kafka 的监控指标。
++
+--
+* 点击下拉列表可选择需要查看的 Kafka 节点。
+
+include::../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../_ks_components/oper-refreshData.adoc[]
+--
+
+**所有 Kafka 监控项**
+
+[%header,cols="3,5"]
+|===
+|监控项 |说明
+
+|在线中介（Broker）数量
+|在线的 Kafka Broker 数量。
+
+
+|ISR 少于下限分区数量
+|当前 ISR 低于下限的所有 Partition 总量。
+
+
+|离线分区数量
+|离线的分区数量。
+
+|每秒流入字节数（B/s）
+|每秒流入的字节数，单位为 B/s。
+
+
+|每秒流出字节数（B/s）
+|每秒流出的字节数，单位为 B/s。
+
+|每秒流入消息数
+|每秒流入的消息数量。
+
+|每秒客户端请求数
+|每秒的客户端请求数量。
+
+|===
+
+
+**单个 Kafka 监控项**
+
+[%header,cols="3,5"]
+|===
+|监控项 |说明
+
+|NetworkProcessor 线程空闲率（%）
+|NetworkProcessor 线程的平均空闲比例。
+
+
+|磁盘写入（B/s）
+|磁盘写入速率。
+
+
+|磁盘读取（B/s）
+|磁盘读取速率。
+
+
+|内存用量（Gi）
+|已占用的内存。
+
+|CPU 用量
+|已占用的 CPU 资源。
+
+|每秒流入消息数
+|每秒流入的消息数量。
+
+|JVM 内存用量（Mi）
+|JVM 内存用量。
+
+|可用磁盘空间（Gi）
+|剩余的磁盘空间容量。
+
+|===
+
+
+**ZooKeeper 监控项**
+
+[%header,cols="3,5"]
+|===
+|监控项 |说明
+
+|法定节点数量
+|法定节点的数量。
+
+|Znode 数量
+|Znode 的数量。
+
+|活动连接
+|活动连接的数量。
+
+|观察者数量
+|观察者的数量。
+
+|===
+
+
+**单个 ZooKeeper 监控项**
+
+[%header,cols="3,5"]
+|===
+|监控项 |说明
+
+
+|内存用量（Gi）
+|已占用的内存。
+
+|CPU 用量
+|已占用的 CPU 资源。
+
+|打开文件描述符数量
+|打开的文件描述符个数。
+
+|JVM 线程
+|JVM 线程数量。
+
+|JVM 内存用量（Mi）
+|JVM 内存用量。
+
+|平均请求延迟（s）
+|平均请求延迟时间。
+
+|最大请求延迟（s）
+|最大请求延迟时间。
+
+|可用磁盘空间（Gi）
+|剩余的磁盘空间容量。
+|===

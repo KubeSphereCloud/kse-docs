@@ -1,0 +1,193 @@
+---
+title: 获取定时器任务列表（DescribeSchedulerTasks）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Integer
+| false
+| 返回数量
+
+| offset
+| Integer
+| false
+| 偏移量
+
+| owner
+| String
+| false
+| 资源的所有者
+
+| scheduler
+| String
+| true
+| 定时器id
+
+| zone
+| String
+| true
+| 请求区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| scheduler_task_set
+| Array
+| false
+| 定时器任务详情列表
+
+| scheduler_task_set[].console_id
+| String
+| false
+| 控制台id
+
+| scheduler_task_set[].create_time
+| String
+| false
+| 创建时间
+
+| scheduler_task_set[].owner
+| String
+| false
+| 所有者
+
+| scheduler_task_set[].resources
+| Array
+| false
+| 资源列表
+
+| scheduler_task_set[].root_user_id
+| String
+| false
+| 资源主账户id
+
+| scheduler_task_set[].scheduler_id
+| String
+| false
+| 定时器id
+
+| scheduler_task_set[].scheduler_task_id
+| String
+| false
+| 定时器任务id
+
+| scheduler_task_set[].scheduler_task_name
+| String
+| false
+| 定时器任务名称
+
+| scheduler_task_set[].status
+| String
+| false
+| 任务状态
+
+| scheduler_task_set[].status_time
+| String
+| false
+| 任务状态时间
+
+| scheduler_task_set[].task_params
+| Object
+| false
+| 任务参数
+
+| scheduler_task_set[].task_params.resources
+| Array
+| false
+| false
+
+| scheduler_task_set[].task_params.scheduler
+| String
+| false
+| false
+
+| scheduler_task_set[].task_script
+| String
+| false
+| 任务脚本
+
+| scheduler_task_set[].task_type
+| String
+| false
+| 任务类型
+
+| scheduler_task_set[].update_time
+| String
+| false
+| 更新时间
+
+| total_count
+| Integer
+| false
+| 总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeSchedulerTasks",
+  "limit": 10,
+  "offset": 0,
+  "owner": "usr-BnnisHWR",
+  "scheduler": "schd-0g60lk75",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeSchedulerTasksResponse",
+  "ret_code": 0,
+  "scheduler_task_set": [
+    {
+      "console_id": "testingcloud",
+      "create_time": "2023-07-05T00:41:51Z",
+      "owner": "usr-BnnisHWR",
+      "resources": [
+        {
+          "resource_id": "i-g1l5c926",
+          "resource_name": "rtr-0eqsosdc",
+          "resource_type": "instance"
+        }
+      ],
+      "root_user_id": "usr-BnnisHWR",
+      "scheduler_id": "schd-0g60lk75",
+      "scheduler_task_id": "st-vy8dwhzo",
+      "scheduler_task_name": "a",
+      "status": "active",
+      "status_time": "2023-07-05T00:41:51Z",
+      "task_params": {
+        "resources": [
+          "i-g1l5c926"
+        ],
+        "scheduler": "schd-0g60lk75"
+      },
+      "task_script": "",
+      "task_type": "restart_instances",
+      "update_time": "2023-07-05T00:41:51Z"
+    }
+  ],
+  "total_count": 1,
+  "trace_id": "EFgCkR2N"
+}
+----

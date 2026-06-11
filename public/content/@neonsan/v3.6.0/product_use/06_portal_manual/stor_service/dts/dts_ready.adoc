@@ -1,0 +1,28 @@
+---
+title: '前期准备'
+weight: 1
+draft: false
+---
+
+此处的容灾管理服务是指异步灾备。
+
+. 在主站点 NeonSAN 集群上创建一个卷或多个卷，可参考link:../../volume/create_vol[创建卷]相关操作。
+
+. 在备站点 NeonSAN 集群上创建与主站点卷名，参数完全一致的卷。由于备站点没有部署 Portal 服务，故而，需要在备站点服务器上通过 CLI 命令创建相应的卷。
++
+[,shell]
+----
+# neonsan create_volume -pool test_pool -volume test_vol1 -size 50G -repcount 1
+//参数需与主站点相应的卷保持一致
+----
+
+. 设置主站点卷的角色为 master，可参考link:../../volume/vol/vol_role[修改卷角色]相关操作。
+
+. 设置备站点相应的卷的角色为 slave。
++
+[,shell]
+----
+# neonsan set_volume_role -pool test_pool -volume test_vol1 -role slave
+//volume名需与主站点相应的卷保持一致
+----
+

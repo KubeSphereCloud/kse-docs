@@ -1,0 +1,57 @@
+---
+title: "Set Authorization Rules"
+description: "Introduces how to set authorization rules for storage classes."
+weight: 01
+---
+
+:ks_permission: **Storage Class Access Rule Management**
+:ks_navigation: **Storage > Storage Classes**
+
+
+This section describes how to set authorization rules for storage classes.
+
+After setting and enabling authorization rules, users can only use the storage class within specific projects and workspaces.
+
+== Prerequisites
+
+* The **KubeSphere Storage** extension needs to be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-oper-openDetailsPage.adoc[]
+
++
+
+. On the storage class details page, click **Operations > Set Authorization Rules**.
+
+. In the **Set Authorization Rules** dialog box, click the **Disabled** button on the right side of the page to enable authorization rules.
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+To disable authorization rules, click **Enabled** on the right side of the page.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. In the **Authorization Rules** setting area, configure the usage of this storage class within specific projects and workspaces.
++
+image:/images/ks-qkcp/zh/v4.1/storage1.png[ rule,100%]
+
+. After completing the configuration, click **OK**.

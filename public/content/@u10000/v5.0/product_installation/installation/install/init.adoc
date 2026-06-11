@@ -1,0 +1,60 @@
+---
+title: 初始化服务器
+weight: 1
+---
+
+该部分操作将对各节点服务器进行初始化，使其符合 {product_name} 的部署要求。具体操作包括基本网络配置，内核参数设定，基本软件包的安装等。
+
+include::../../../../../_components/note.adoc[]
+
+* 在进行初始化之前，需确保配置文件填写无误。
+* 以下操作均在 {product_name} 的 FirstBox 上执行。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令行，登录 FirstBox。命令行中的 `<firstbox ip>` 可查看link:../../firstbox[前文内容]。
+
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 编辑 SSH 密钥文件，删除其中 {product_name} 开发人员的公钥，并添加其他相关人员的密钥信息。
++
+[source,shell]
+----
+vi /qingstor/etc/.authorized_keys
+----
+
+. 进入脚本所在目录。
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，初始化 FirstBox。
++
+[source,shell]
+----
+./qs_installer deploy --firstbox
+----
+
+. 执行如下命令行，完成各节点之间的互信。
++
+[source,shell]
+----
+./qs_installer deploy --ssh
+----
+
+. 执行如下命令行，初始化节点服务器。
++
+[source,shell]
+----
+./qs_installer deploy --common
+----
+
+. 至此，节点服务器的初始化完成。
+

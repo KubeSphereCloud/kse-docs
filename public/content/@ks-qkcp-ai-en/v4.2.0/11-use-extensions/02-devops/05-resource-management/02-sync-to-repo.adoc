@@ -1,0 +1,42 @@
+---
+title: "Synchronize Resource Files to Code Repository"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Resource Management"
+description: "Describes how to select resource files in a project and synchronize them to a code repository."
+weight: 01
+---
+
+:ks_navigation:  **DevOps > Resource Management**
+
+
+This section describes how to synchronize resource files in a project to a code repository. After synchronization, you can manage the project's resource files in the code repository.
+
+
+== Prerequisites
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+* A workspace, a DevOps project, and a user (for example, **project-regular**) have been created. The user has been invited to the DevOps project and granted the **operator** role. Refer to link:../../02-devops-project-mangement/03-project-members/01-invite-a-user-to-a-project/[Invite a User to a DevOps Project].
+
+* A code repository has been link:../../06-code-repositories/01-import-code-repositories/[imported].
+
+== Steps
+
+include::../../../../_custom/devops/project-regular-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/devops/devops-oper-dropdownList.adoc[]
+
+. Click the **Custom Resource List** button. In the directory tree or the list on the right, select the resource files to be synchronized to the code repository. You can also click **Add to List** on the file content details page. The selected files will be displayed in the Pending Synchronization Resource List on the right.
+
+. Under the Pending Synchronization Resource List, click **Sync to Code Repository**.
+
+. On the **Basic Information** tab, confirm the resources to be synchronized, then click **Next**.
++
+Click image:/images/ks-qkcp/zh/icons/pen-light.svg[pen-light,18,18] to edit the resource file. After editing, click image:/images/ks-qkcp/zh/icons/check-dark.svg[check-dark,18,18] at the bottom to save.
+
+. On the **Application Settings** tab, select the cluster, DevOps project, code repository, and branch. Set the storage directory, commit information, etc. Click **OK** to start the synchronization.

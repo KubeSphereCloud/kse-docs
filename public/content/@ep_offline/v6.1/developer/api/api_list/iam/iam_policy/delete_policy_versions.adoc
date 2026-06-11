@@ -1,0 +1,90 @@
+---
+title: 删除IAM策略版本（DeleteIAMPolicyVersions）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| audit_log
+| String
+| false
+| 审计日志
+
+| console
+| String
+| false
+| Console
+
+| owner
+| String
+| false
+| IAM策略所属账号
+
+| policy
+| String
+| true
+| IAM策略ID
+
+| root_user
+| String
+| false
+| IAM策略所属根账号
+
+| versions
+| Array
+| true
+| 策略版本号
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| policy
+| String
+| false
+| public
+
+| versions
+| Array
+| false
+| 已删除的版本号
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeleteIAMPolicyVersions",
+  "policy": "iamp-dy7mtlyu",
+  "versions": [
+    1
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeleteIAMPolicyVersionsResponse",
+  "policy": "iamp-dy7mtlyu",
+  "ret_code": 0,
+  "versions": [
+    1
+  ]
+}
+----

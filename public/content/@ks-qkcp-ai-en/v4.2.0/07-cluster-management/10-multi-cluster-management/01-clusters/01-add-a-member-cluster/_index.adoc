@@ -1,0 +1,42 @@
+---
+title: "Add a Member Cluster"
+keywords: "Kubernetes, {ks_product}, Multi-cluster Management, Cluster, Add a Member Cluster"
+description: "Describes how to add a member cluster."
+weight: 01
+layout: "second"
+---
+
+
+
+This section describes how to add a member cluster.
+
+// [.admon.note,cols="a"]
+// |===
+// |Note
+
+// |This feature is only available in KubeSphere ``Standard, Advanced, and Enterprise editions``.
+
+// |===
+
+Depending on your network environment, the host cluster and the member cluster can be connected in the following ways:
+
+* Direct connection: If the host cluster can access the Kubernetes API service of the member cluster, you can add the kubeconfig information of the member cluster to the host cluster to directly connect the host cluster and the member cluster.
+
+* Proxy connection: If the host cluster cannot access the Kubernetes API service of the member cluster, you can configure the member cluster to connect to the proxy service tower exposed by the host cluster, thereby connecting the host cluster and the member cluster through the proxy service tower.
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+ifeval::["{file_output_type}" == "html"]
+To use proxy connection, the **KubeSphere Multi-cluster Proxy Connection** extension must be installed and enabled on the KubeSphere platform. For more information, see link:../../../../11-use-extensions/19-tower/02-add-a-member-cluster-using-proxy-connection/[Add a Member Cluster Using Proxy Connection].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+To use proxy connection, the **KubeSphere Multi-cluster Proxy Connection** extension must be installed and enabled on the KubeSphere platform. For more information, see the "KubeSphere Multi-cluster Proxy Connection" chapter in the *KubeSphere Extensions Usage Guide*.
+endif::[]
+|===
+
+
+Regardless of whether using direct connection or proxy connection, at least one of the host cluster and the member cluster must be able to access the service exposed by the other.

@@ -1,0 +1,31 @@
+---
+title: "扩展数据库节点"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Redis Sentinel, 扩展数据库"
+description: "介绍如何扩展 RadonDB Redis Sentinel 数据库的节点。"
+weight: 08
+---
+
+:ks_db_product: Redis Sentinel
+
+本节介绍如何扩展 RadonDB {ks_db_product} 数据库的节点。
+
+include::../../../_ks_components/admonitions/warning.adoc[]
+
+* 若选择节点数低于当前节点数，将删除超出的节点。
+* 扩展节点可能会中断数据库服务，请在非高峰时段执行此操作。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 在页面左上角选择**更多操作 > 扩展**。
+. 在**扩展**对话框，选择节点的数量，然后点击**确定**。待实例状态切换为**运行中**，则新增节点完成。

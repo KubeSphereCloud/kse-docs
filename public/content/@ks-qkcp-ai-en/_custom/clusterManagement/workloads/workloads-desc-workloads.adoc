@@ -1,0 +1,19 @@
+// :ks_include_id: d035ff78f85d42acb9f1d0b5715617e3
+This section describes how to manage application workloads.
+
+In the KubeSphere platform, applications run in pods. To ensure business continuity when a single pod fails, it is usually necessary to create multiple replicas of a pod for an application. An application workload is a resource used to manage pod replicas. It is responsible for managing multiple replicas of an application's pods, primarily providing the following functions:
+
+// * Automatically scale the number of pod replicas based on user-defined conditions. Requires Horizontal Pod Autoscaler (HPA).
+
+* Monitor pod status and automatically restart or replace unhealthy pods.
+* Allocate and limit resources such as CPU and memory for pods.
+* Automatically update pods according to the user-specified update strategy.
+* Roll back pods to a previous version.
+
+The KubeSphere platform supports the following types of application workloads:
+
+* Deployment: Used to manage stateless applications. Multiple pod replicas managed by a Deployment share a single volume. When a pod replica is recreated, the new pod replica has a different name from the old one.
+
+* StatefulSet: Used to manage stateful applications. Multiple pod replicas managed by a StatefulSet can use independent volumes. Each pod replica has a fixed ordinal name. When a pod replica is recreated, the new pod replica has the same name as the old one.
+
+* DaemonSet: Used to manage daemon processes. A DaemonSet ensures that all or specific nodes run a pod replica. When a new node is added to the cluster, if the new node meets the pod scheduling rules, the DaemonSet automatically creates a pod replica on the new node.

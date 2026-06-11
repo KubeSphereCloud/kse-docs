@@ -1,0 +1,37 @@
+---
+title: "查看巡检规则组详情"
+weight:  05
+---
+
+:ks_navigation: **巡检规则组**
+
+
+本节介绍如何查看巡检规则组的详细信息。
+
+== 前提条件
+
+* 您需要在 KubeSphere 平台具有 **platform-admin** 角色。
+
+* 已创建巡检规则。
+
+
+== 操作步骤
+
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+. 点击**组件坞 > 集群巡检**，进入集群巡检页面。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. 点击一个巡检规则组的名称打开其详情页面。
+
+. **关联巡检任务**页签展示了使用当前巡检规则的巡检任务。点击**即时巡检**下拉框，选择**定时巡检**可查看关联的定时巡检任务。
+有关更多信息，请参阅link:../../05-inspect-tasks/[巡检任务]。
+
+. 点击 **YAML** 页签，查看巡检规则的 yaml 配置，不支持修改。
+

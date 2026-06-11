@@ -1,0 +1,65 @@
+---
+title: 创建 FirstBox
+weight: 2
+---
+
+//部署脚本 `qs_installer` 运行前会校验配置文件中填写的 IP 地址 的 22 端口是否可连接。若配置文件没有根据前文正确配置，则创建 FirstBox 的过程可能会失败。因此，在执行如下步骤创建 FirstBox 之前，需再次确认配置文件填写无误。
+
+// include::../../../../_components/note.adoc[]
+
+// FirstBox 成功创建后，配置文件会被移动至 FirstBox 节点的 `/qingstor/etc` 目录下。后续如需更改配置，需登录至 FirstBox 节点中修改相应文件。
+
+// include::../../../../_components/table_footer.adoc[]
+
+创建 FirstBox 的详细操作步骤如下。
+
+. 登录上传有安装包的节点服务器，该节点服务器作为待创建 FirstBox 的宿主机。
+
+. 执行如下命令，进入脚本所在目录。
+
++
+[source,shell]
+----
+cd /root/qs-installer/bin/
+----
+
+
+. 执行如下命令行，创建 FirstBox 容器。
++
+[source,shell]
+----
+./init_firstbox_container.sh <node_password> <zone_id>
+----
++ 
+
+* 命令行中的 `<zone_id>` 需根据link:../config/base/[配置文件]的 `zone_id` 进行填写。
+* 命令行中的 `<node_password>` 需根据link:../prepare/prepare_hardware/#_操作系统[安装操作系统]时配置的，用于登录各节点服务器的用户名对应的密码进行填写。
++
+如：安装操作系统 `ubuntu20` 时，默认用户 `root`，配置了用户 `yop`，若登录节点服务器时使用 `yop` 用户，此处就需要填写 `yop` 用户对应的密码。
+
+
+. 若上面命令执行完成，且没有报错，则可执行如下命令行，登录 FirstBox。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
++
+* 命令行中的 `<firstbox ip>` 为link:../config/ip/[ ip.ini 文件]中 `role` 字段下的第一个节点的 IP 地址。
+* 登录密码为 `zhu88jie`。
+
+// . 编辑 SSH 密钥文件，删除其中 {product_name} 开发人员的公钥，并添加其他相关人员的密钥信息。
+// +
+// [source,shell]
+// ----
+// vi /qingstor/etc/.authorized_keys
+// ----
+
+// . 修改完成后，执行如下命令行，完成 FirstBox 节点与当前环境中其他各节点之间的互信。
+// +
+// [source,shell]
+// ----
+// cd /root/qs-installer
+// ./qs_installer deploy --ssh
+// ----
+

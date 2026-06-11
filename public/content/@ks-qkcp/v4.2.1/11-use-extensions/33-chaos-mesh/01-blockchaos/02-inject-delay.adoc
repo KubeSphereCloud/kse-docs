@@ -1,0 +1,72 @@
+---
+title: "注入块存储延迟（delay）"
+weight:  03
+---
+
+本节介绍如何为块设备的 I/O 调用注入延迟。
+
+故障注入期间，在目标 Pod 中通过 fio 命令进行读写测试，将出现明显的 I/O 延迟。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *BlockChaos*。
+. 配置以下参数后点击 *创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|故障类型（action）
+|选择 `delay`，为块设备 I/O 注入延迟。
+
+|延迟时间（latency）
+|I/O 延迟的基准值，例如 `5s`。
+
+|抖动时间（jitter）
+|在基准延迟基础上叠加的随机抖动范围，例如 `5s`。
+
+|持续时间（duration）
+|故障持续时间，例如 `10m`。
+
+|生效范围（selector）
+|选择故障注入的目标命名空间和 Pod。
+|===
+
+
+   对应 YAML 示例如下：
+
+[source,yaml]
+----
+apiVersion: chaos-mesh.org/v1alpha1
+kind: BlockChaos
+metadata:
+  name: block-delay
+  namespace: default
+spec:
+  action: delay
+  delay:
+    latency: 5s
+    correlation: '0'
+    jitter: 5s
+  mode: all
+  duration: 10m
+  selector:
+    namespaces:
+      - default
+    pods:
+      default:
+        - "{{podID}}"
+----
+
+
+验证故障效果：在注入 Pod 中执行 fio 读写测试，观察是否出现明显延迟。
+
+[source,shell]
+----
+kubectl exec "{{podID}}" -- fio --name=mytest --ioengine=sync \
+  --rw=randread --bs=4k --size=1G --numjobs=3 \
+  --time_based --runtime=1m --directory=/usr/share/nginx/html
+----
+
+
+   故障注入期间，块设备读写延迟将显著增大。

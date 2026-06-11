@@ -1,0 +1,50 @@
+---
+title: "Edit an SSH key"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, SSH, keys, edit"
+description: "Describes how to edit an SSH key in the {ks_product} web console."
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 1a13fcb45aa0488490ff7ddb9a676934
+:ks_xref_id: b213ba229c5b4e569af0dffc71b2e998
+:ks_comp: ../../../components/
+:ks_title: Edit an SSH key
+:ks_description: Describes how to edit an SSH key in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, SSH, keys, edit
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to edit an SSH key in the {ks_product_abbr_full} web console. For security purposes, each user can edit only the SSH keys created on their own. The edit operation allows you to modify the name and description of an SSH key. 
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=02a7825063ee46379d8dbb8eeb34f547]
+
+include::../../../_custom-en/ssh/ssh-key-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Edit from the list of SSH keyslink:[id=cde14d1f72084ea9b2f8a0cad6cfdd77]
+
+include::../../../_custom-en/ssh/ssh-key-steps.adoc[]
+
+. Find the SSH key that you want to edit, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Edit** from the drop-down list.
+. In the dialog box that appears, modify **Name** and **Description** of the SSH key, and click **OK**.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Edit from the SSH key details pagelink:[id=62d845cdd9a8455aa6668e888d3bbb08]
+
+include::../../../_custom-en/ssh/ssh-key-steps.adoc[]
+
+. On the **SSH Keys** page, click the name of an SSH key to view its details.
+. On the left side of the details page, click **Edit** in the upper-left corner.
+. In the dialog box that appears, modify **Name** and **Description** of the SSH key, and click **OK**.

@@ -1,0 +1,100 @@
+---
+title: "管理单机系统"
+weight: 2
+---
+
+== 功能描述
+
+云易捷支持用户对已创建完成的单机系统进行管理，包括修改属性、绑定/解绑主机、绑定/解绑网络等操作。
+
+== 修改属性
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，选择**运维工具** > **计算大屏**，进入计算大屏管理页面。
++
+image::/images/express/console/gui_sys_manage_1.png[]
+
+. 点击指定单机系统所在行右侧的更多操作，选择**修改**。
++
+image::/images/express/console/gui_sys_manage_2.png[]
+
+. 在弹出的**修改属性**窗口中，支持用户对其标签、名称、以及相关描述进行修改。
++
+
+include::../../../../../../_components/attention.adoc[]
+此处修改完成后，需登录至**配置大屏**页面手动同步进行修改。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/gui_sys_manage_3.png[,50%]
+
+
+== 绑定/解绑主机
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，选择**运维工具** > **计算大屏**，进入计算大屏管理页面。
+
+. 点击指定单机系统所在行右侧的更多操作，选择**已绑定到主机** > **绑定**。
++
+image::/images/express/console/gui_sys_manage_4.png[]
+
+. 在弹出的**选择主机**窗口中，勾选待绑定的主机，点击**确定**即可。
++
+
+include::../../../../../../_components/note.adoc[]
+支持选择多个主机。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 点击指定单机系统所在行右侧的更多操作，选择**已绑定到主机** > **解绑**。
+
+. 在弹出的**解绑单机系统**窗口中，删除待解绑的主机，点击**确定**即可。
++
+image::/images/express/console/gui_sys_manage_5.png[,50%]
+
+== 绑定/解绑网络
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，选择**运维工具** > **计算大屏**，进入计算大屏管理页面。
+
+. 点击指定单机系统所在行右侧的更多操作，选择**已绑定到网络** > **绑定**。
++
+image::/images/express/console/gui_sys_manage_6.png[]
+
+. 在弹出的**选择网络**窗口中，勾选待绑定的网络，点击**确定**即可。
+
++
+
+include::../../../../../../_components/note.adoc[]
+支持选择多个网络。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 点击指定单机系统所在行右侧的更多操作，选择**已绑定到网络** > **解绑**。
+
+. 在弹出的**解绑单机系统**窗口中，删除待解绑的主机，点击**确定**即可。
++
+image::/images/express/console/gui_sys_manage_7.png[,50%]
+
+== 删除
+
+须提前解绑单机系统上的主机和网络资源后，才能对其进行删除。
+
+. 登录{product_console_name}。
+
+. 在顶部导航栏，选择**运维工具** > **计算大屏**，进入计算大屏管理页面。
+
+. 对指定单机系统进行link:#_绑定解绑主机[解绑主机]和link:#_绑定解绑网络[解绑网络]操作。
+
+. 点击指定单机系统所在行右侧的更多操作，选择**删除**，在弹出的删除页面中，点击**删除**即可。
+
++
+
+include::../../../../../../_components/attention.adoc[]
+此处删除单机系统后，需登录至**配置大屏**页面手动同步进行删除。
+
+include::../../../../../../_components/table_footer.adoc[]
+

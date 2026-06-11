@@ -1,0 +1,94 @@
+---
+title: "设置部门组织结构"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 企业空间管理, 企业空间设置, 部门, 设置部门组织结构"
+description: "介绍如何设置部门组织结构。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 95a137b59f46485d9f2d2c1a77a6ea91
+:ks_xref_id: 03e291677df34ca0a8af7151e9a39139
+:ks_comp: ../../../../components/
+:ks_title: 设置部门组织结构
+:ks_keywords: Kubernetes, {ks_product}, 企业空间管理, 企业空间设置, 部门, 设置部门组织结构
+:ks_description: 介绍如何设置部门组织结构。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **部门管理**
+:ks_navigation: **企业空间设置 > 部门**
+
+
+本节介绍如何设置部门组织结构。
+
+
+== 前提条件link:[id=e21787907f5442978026d765b336d0a9]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=6e7cbcc1becb420a9500e1a3232703a0]
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在页面右侧点击**设置部门**。
+
+. 在**设置部门**对话框右侧点击**创建部门**。
++
+--
+// Tip
+include::../../../../../_ks_components/admonitions/tip.adoc[]
+
+如果当前企业空间中已存在部门，您可以在**设置部门**对话框左侧选择一个部门，然后在右侧点击**创建部门**从而在部门中创建子部门。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在**设置部门**对话框右侧设置部门的参数，然后点击**确定**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|部门的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+|别名
+|部门的别名。同一个企业空间中不同部门的别名可以相同。别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。
+
+|企业空间角色
+|部门成员在当前企业空间中的角色。
+
+|项目角色
+|部门成员在当前企业空间的项目中的角色。
+
+|DevOps 项目角色
+|部门成员在当前企业空间的 DevOps 项目中的角色。
+|===
+
+**设置部门**对话框左侧结构树将显示已创建的部门，右侧将显示每个部门下属的子部门。
+
+* 在已创建的部门右侧点击 image:/images/ks-qkcp/zh/icons/pen-light.svg[pen,18,18] 可编辑部门的设置。
+
+* 在已创建的部门右侧点击 image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] 可删除部门。
+--
+
+. 部门组织结构设置完成后，点击**关闭**。
++
+--
+**部门**页面左侧的结构树将显示已创建部门。
+--

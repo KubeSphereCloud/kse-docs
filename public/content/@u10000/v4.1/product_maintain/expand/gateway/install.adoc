@@ -1,0 +1,134 @@
+---
+title: 扩容节点
+weight: 3
+---
+
+== 初始化节点
+
+. 执行如下命令行，登录原环境的 FirstBox 节点。命令行中的 `<firstbox ip>` 是原环境的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，进入脚本所在目录。
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，初始化待扩容节点。
++
+[source,shell]
+----
+./qs_installer init --firstbox --tags=init_sshkey
+./qs_installer init --common -l gateway3
+----
++
+include::../../../../../_components/note.adoc[]
+
+* 命令行中 `gateway3` 需填写新扩容的网关节点名称。
+* 若link:../config/#_base_ini[原配置文件]中有 3 个网关节点，新扩容了 1 个网关节点，可根据示例内容进行填写。
+* 若link:../config/#_base_ini[原配置文件]中有 4 个网关节点，新扩容了 1 个网关节点，则需修改为 `gateway4`。
+* 若link:../config/#_base_ini[原配置文件]中有 3 个网关节点，新扩容了 2 个网关节点，则需修改为 `gateway3,gateway4`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 部署新节点
+
+延续前文步骤，执行以下命令行，完成待扩容节点的安装部署。
+
+关于以下命令行中出现的 `gateway3` 做以下说明。
+
+include::../../../../../_components/note.adoc[]
+
+* 命令行中 `gateway3` 需填写新扩容的网关节点名称。
+* 若link:../config[原配置文件]中有 3 个网关节点，新扩容了 1 个网关节点，可根据示例内容进行填写。
+* 若link:../config[原配置文件]中有 4 个网关节点，新扩容了 1 个全能节点，则需修改为 `gateway4`。
+* 若link:../config[原配置文件]中有 3 个网关节点，新扩容了 2 个全能节点，则需修改为 `gateway3,gateway4`。
+
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令行，清理缓存文件。
++
+[source,shell]
+----
+./qs_installer deploy --rm_cachefile
+----
+
+. 执行如下命令行，待扩容全能节点上部署 `redis-cache` 服务。
++
+[source,shell]
+----
+./qs_installer deploy --redis-cache -l gateway3
+----
+
+
+. 执行如下命令行，待扩容节点上部署 `tikv` 服务。
++
+[source,shell]
+----
+./qs_installer deploy --tikv -l gateway3
+----
+
+. 执行如下命令行，待扩容节点上部署 `qs-index` 服务。
++
+[source,shell]
+----
+./qs_installer deploy --hydro_node -l gateway3
+----
+
+. 执行如下命令行，待扩容节点上部署 `qs-gateway3` 服务。
++
+[source,shell]
+----
+./qs_installer deploy --gateway -l gateway3
+----
+
+. 执行如下命令行，待扩容节点上部署文件存储服务。
++
+[source,shell]
+----
+./qs_installer deploy --hydro_nas
+----
++
+include::../../../../../_components/note.adoc[]
+
+根据link:../config[前文配置]，若新扩容节点上，没有部署 `nas` 角色，则无需执行该步骤。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 执行如下命令行，待扩容节点上部署 `monitor-agent2` 等服务及更新配置。
++
+[source,shell]
+----
+./qs_installer deploy --all -l gateway:all_node
+----
+
+
+. 执行如下命令行，修改监控配置文件，添加新增节点。
++
+[source,shell]
+----
+./qs_installer deploy --monitor2 --tags prometheus2
+./qs_installer deploy --qingstor_zero_web --tags zero-web
+----
+
+
+. 执行如下命令行，更新 DNS。
++
+[source,shell]
+----
+./qs_installer deploy --dns
+----
+
+. 执行如下命令行，更新所有节点的 `hosts` 文件。
++
+[source,shell]
+----
+./qs_installer update --hosts
+----

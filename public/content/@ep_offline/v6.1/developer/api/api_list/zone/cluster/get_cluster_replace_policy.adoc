@@ -1,0 +1,134 @@
+---
+title: 查询替换策略（GetClusterReplacePolicy）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| false
+| 应用id
+
+| app_version
+| String
+| false
+| 应用版本
+
+| cluster_id
+| String
+| false
+| 集群id
+
+| zone
+| String
+| true
+| 可用区
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| replace_policy
+| Object
+| false
+| 替换策略
+
+| replace_policy.cpu_model
+| Array
+| false
+| cpu架构替换策略
+
+| replace_policy.cpu_model[].dst
+| String
+| false
+| 目标替换值
+
+| replace_policy.cpu_model[].src
+| String
+| false
+| 待替换参数值
+
+| replace_policy.instance_class
+| Array
+| false
+| 主机类型替换策略
+
+| replace_policy.instance_class[].dst
+| String
+| false
+| 目标替换值
+
+| replace_policy.instance_class[].src
+| String
+| false
+| 待替换参数值
+
+| replace_policy.volume_class
+| Array
+| false
+| 硬盘类型替换策略
+
+| replace_policy.volume_class[].dst
+| Integer
+| false
+| 目标替换值,如果值为多个，则为string
+
+| replace_policy.volume_class[].src
+| String
+| false
+| 待替换参数值
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app_id": "app-p6au3oyq",
+  "app_version": "appv-ofp0nga1",
+  "zone": "pekt3d"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetClusterReplacePolicyResponse",
+  "replace_policy": {
+    "cpu_model": [
+      {
+        "dst": "Haswell",
+        "src": "Broadwell"
+      }
+    ],
+    "instance_clss": [
+      {
+        "dst": "201",
+        "src": "202,203"
+      }
+    ],
+    "volume_class": [
+      {
+        "dst": 5,
+        "src": "6"
+      }
+    ]
+  },
+  "ret_code": 0
+}
+----

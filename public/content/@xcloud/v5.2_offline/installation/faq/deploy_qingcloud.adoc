@@ -1,0 +1,55 @@
+---
+title: "安装企业云平台失败"
+weight: 30
+---
+
+== 查看 DeployQingCloud 执行的命令
+
+**命令**：
+
+[source]
+----
+grep -a 'Execing the script' /pitrix/log/service/qingcloud_server.log | grep {job_id}
+----
+
+**参数说明**：
+
+{job_id} 可以通过如下命令查看。
+
+[source]
+----
+/pitrix/cli/get-deploy-qingcloud-status.py
+----
+
+回显信息如下，可以看到具体执行的命令，以及日志文件路径。
+
+image::/images/ep_offline/installation/faq_deploy_qingcloud_01.png[]
+
+步骤对应日志：
+[cols='2,3,4'] 
+|===
+| 步骤 | 命令 | 日志位置
+
+| step0	| build installer packages	| /pitrix/log/build_pkgs/
+| step1-1	| install shared node	| /pitrix/log/install_nodes/
+| step1-2	| install other phy nodes	| /pitrix/log/install_nodes/
+| step2	| launch ks vms	| /pitrix/log/launch_vms/
+| step3	| install vm nodes	| /pitrix/log/install_nodes/
+| step4	| deploy all nodes	| /pitrix/log/deploy_nodes/deploy_nodes_allinone.log
+| step5-1	| dump the hosts	| /pitrix/log/deploy/dump_hosts.log
+| step5-2	| dump vbc route	| /pitrix/log/deploy/vbc_route_{job_id}
+|===
+
+== 部署过程被Killed
+
+**问题现象**
+
+image::/images/ep_offline/installation/faq_deploy_qingcloud_02.png[]
+
+**可能原因**
+
+节点负载压力大，导致 deploy 进程被 killed。
+
+**解决措施**
+
+重新执行安装脚本即可。

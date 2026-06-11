@@ -1,0 +1,60 @@
+---
+title: "Create Application Template"
+keywords: "Kubernetes, {ks_product}, Workspace, Application Template, Create Application Template"
+description: "Describes how to create an application template."
+weight: 01
+---
+
+:ks_permission: **Application/Application Version/Application Instance Creation**
+:ks_navigation: **Application Management > Application Template**
+
+This section describes how to create an application template.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+* A Helm Chart archive in .tar.gz or .tgz format, or the application's YAML file(s) must be prepared. You can link:https://kubesphere.io/files/application-templates/nginx-0.1.0.tgz[download the Nginx Helm Chart] for testing. For more information, please refer to the link:https://helm.sh/zh/docs/topics/charts/[Helm official documentation].
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the **Create Application** dialog box, click **Upload Helm Chart** and select the locally stored Helm Chart archive in .tar.gz or .tgz format.
++
+Alternatively, click **Create yaml Application**, enter the application name and version number, and use YAML file(s) to create the application.
++
+--
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Click image:/images/ks-qkcp/zh/icons/upload-dark-white.svg[upload-dark,18,18] to upload YAML file(s) from your local machine.
+
+Click image:/images/ks-qkcp/zh/icons/download-dark-white.svg[download-dark,18,18] to download the YAML file(s) to your local machine.
+|===
+--
+
+. Click **OK**.
++
+--
+Once the application template is created, it will appear in the application template list.
+--

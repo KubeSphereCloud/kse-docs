@@ -1,0 +1,160 @@
+---
+title: 应用管理
+keywords: 实时音视频 RTC,应用管理
+description: 本章节介绍应用管理的作用，获取 APP ID, App 证书和临时 Token等，便于开启 RTC 服务。
+draft: false
+collapsible: false
+weight: 20
+linkkey: rtc_application_guide
+---
+应用管理用于获取项目的 App ID、App证书和临时 Token 以及配置应用的其他参数，以便开启 RTC 服务。
+
+== 前提条件
+
+已获取管理控制台的账号和密码。
+
+== 约束条件
+
+* 最多可创建 10 个应用（包括已关闭的应用）。若需要创建更多的应用，请通过工单系统进行申请。
+* 用户分钟数大于 0 时，才能创建应用。
+
+== 创建应用
+
+. 登录管理控制台。
+. 选择**产品与服务** > *音视频服务* > *实时音视频 RTC*，进入实时音视频 RTC 的**概览**页面。
++
+image::/images/cloud_service/audio_and_video/rtc/qs_app_list.png[]
+
+. 在左侧导航栏中，点击**应用管理**，进入**应用管理**页面。
++
+image::/images/cloud_service/audio_and_video/rtc/um_app_list.png[]
+
+. 点击**创建应用**，弹出**创建应用**窗口。
++
+image::/images/cloud_service/audio_and_video/rtc/um_create_app.png[,50%]
+
+. 在**应用名称**文本框中，输入应用的名称。
+. 在**使用场景**下拉列表中，根据您的需要选择使用场景。
++
+RTC 包含以下使用场景：*互动教学*、*语音聊天室*、*电商*、*PK 直播连麦*、*线上交友*、*在线会议*、*在线教育*、*智能客服*、*远程医疗*、**金融保险**或者**其他**。
+
+. 点击**确定**，页面弹出**创建应用提交成功**，则表示应用创建成功。
++
+应用创建成功后，在**应用管理**列表中，您可以查看应用名称、应用状态、APP ID、创建时间以及云录制的状态。
++
+应用状态默认为**开启**，云录制默认为**关闭**。您可以通过**编辑应用**的方式，修改应用相关信息。
+
+== 编辑应用
+
+您可以通过编辑应用的方式，修改应用的使用场景、应用状态、云录制状态。
+
+. 登录管理控制台。
+. 选择**产品与服务** > *音视频服务* > *实时音视频 RTC*，进入实时音视频 RTC 的**概览**页面。
++
+image::/images/cloud_service/audio_and_video/rtc/qs_app_list.png[]
+
+. 在左侧导航栏中，点击**应用管理**，进入**应用管理**页面。
++
+image::/images/cloud_service/audio_and_video/rtc/um_app_list.png[]
+
+. 在待编辑应用所在行的**操作**列，点击**编辑应用**，进入**编辑应用**页面。
++
+image::/images/cloud_service/audio_and_video/rtc/um_edit_app.png[]
+
+. 在**编辑应用**页面，编辑相关信息。参数说明，如下表所示。
++
+[cols="1,2"]
+|===
+| 参数 | 参数说明
+
+| 使用场景
+| 您可以根据需要修改应用的使用场景。
+
+| APP 证书
+| 若出现证书泄漏等情况，您可以点击**重置证书**，将证书重置。
+
+| 应用状态
+a| 您可以将应用切换为**关闭**或者**开启**状态。 
+
+include::../../../../../_components/attention_in_table.adoc[]
+
+**关闭应用**为敏感操作，需要进行身份验证，您可以根据提示信息完成身份验证。 +
+关闭应用后，当前应用的通话将会失败，请谨慎操作！
+
+include::../../../../../_components/footer_in_table.adoc[]
+
+| 开启云录制配置
+| 您可以根据需要开启云录制，开启云录制后，可以将音视频互动内容录制并存储在对象存储的 Bucket 桶中。 +
+您可以在对象存储中对录制的音视频进行下载、分享等处理。 +
+开启云录制，详细操作请参见link:../30_enable_cloudlive/[云录制管理]。
+|===
+
+. 应用编辑完成后，点击**提交**。
++
+页面弹出**编辑应用修改成功**，则表示编辑应用成功。
+
+== 相关操作
+
+=== 生成临时 Token
+
+Token（动态密钥）对即将加入频道的用户进行鉴权。
+
+您可以直接在管理控制台生成**临时 Token** 用于调试。临时 Token 有效期为 24 小时，过期后将不能使用。
+
+. 登录管理控制台。
+. 选择**产品与服务** > *音视频服务* > *实时音视频 RTC*，进入实时音视频 RTC 的**概览**页面。
++
+image::/images/cloud_service/audio_and_video/rtc/qs_app_list.png[]
+
+. 在左侧导航栏中，点击**应用管理**，进入**应用管理**页面。
++
+image::/images/cloud_service/audio_and_video/rtc/um_app_list.png[]
+
+. 在待生成临时 Token 的应用所在行的**操作**列，点击**生成临时 Token**，弹出**生成临时 Token** 窗口。
+
+. 在**频道名**文本框中，输入频道名称。
+
+. 点击**生成临时 Token**，生成如下图所示的临时 Token。
++
+image::/images/cloud_service/audio_and_video/rtc/um_temporary_token.png[,50%]
+
+. 点击**复制临时 Token**，复制临时 Token。
++
+复制完成后，您即可粘贴并使用该临时 Token。
+
+=== 重置证书
+
+若您的证书泄漏，或者系统升级导致证书不可用，您可以将证书进行重置。
+
+include::../../../../../_components/attention.adoc[]
+
+证书重置后，将会使线上所有通过该证书加入频道的请求失效，同时将无法通过原证书发起任何 RTC 通信。请确认所有用户将会升级到重置后的证书。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 登录管理控制台。
+. 选择**产品与服务** > *音视频服务* > *实时音视频 RTC*，进入实时音视频 RTC 的**概览**页面。
+//image::/images/cloud_service/audio_and_video/rtc/qs_app_list.png[]
+
+. 在左侧导航栏中，点击**应用管理**，进入**应用管理**页面。
++
+image::/images/cloud_service/audio_and_video/rtc/um_app_list.png[]
+
+. 在待重置证书的应用所在行的**操作**列，点击**编辑应用**，进入**编辑应用**页面。
++
+image::/images/cloud_service/audio_and_video/rtc/um_edit_app.png[]
+
+. 点击**重置证书**，弹出**身份校验**窗口。
++
+
+include::../../../../../_components/note.adoc[]
+
+重置证书为敏感操作，需要进行身份认证。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/cloud_service/audio_and_video/rtc/um_reset_certificate.png[,50%]
+
+. 点击**使用备选校验方式**，您可以根据自己的需要使用其他身份验证的方式，包含**手机验证**和**邮箱验证**。
+

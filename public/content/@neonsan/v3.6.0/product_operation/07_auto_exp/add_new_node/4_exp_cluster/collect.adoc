@@ -1,0 +1,95 @@
+---
+title: '检查并收集新增节点信息'
+weight: 1
+---
+
+. 登录集群中的任一节点。
+
+. 执行如下命令，登录集群的 FirstBox。
++
+[,shell]
+----
+ ssh qingstor-firstbox -p 6023
+----
+
+. 生成扩容所需的 ip_list 文件，该文件中应包含所有新增节点的管理 IP 地址，逐行填写即可。
++
+[,shell]
+----
+vim  scale_ip_list
+192.168.100.2
+----
+
+. 拷贝节点配置文件至 /root/ 目录。
++
+[,shell]
+----
+cp /qingstor/install/test/yaml/nodes.yaml /root/scale_nodes.yaml
+----
+. 修改 scale_nodes.yaml 文件。
++
+[,shell]
+----
+vi /root/scale_nodes.yaml
+----
++
+image::/images/neonsan/auto_exp_3.png[auto_exp_3,70%]
++
+
+include::../../../../../../_components/note.adoc[]
+* 将新增的节点管理 IP 地址，如示例所示逐行填写在 nodes 字段下，IP 地址根据实际情况进行填写。
+* 删除 fused_node 和 vm_node 字段相关内容。
+
+include::../../../../../../_components/table_footer.adoc[]
++ 
+
+. 执行如下命令，收集新增节点的硬件信息。
++
+[,shell]
+----
+installer node-add -c scale_nodes.yaml --auto-collect
+
++----------+----------+
+| Property | Value    |
++----------+----------+
+|  nodes   | n-w0SUpU |
++----------+----------+
+| task_id  | t-jLI91P |
++----------+----------+
+----
+
+. 执行如下命令，查看新增节点的硬件信息是否收集成功。
++
+[,shell]
+----
+ installer task-show ${task_id}
++----------+---------------------------------------------+
+| task_id  | task info                                   |
++----------+---------------------------------------------+
+| t-jLI91P | {                                           |
+|          |   "action": "CollectNode",                  |
+|          |   "createtime": "Mon Oct 31 17:37:39 2022", |
+|          |   "id": "t-jLI91P",                         |
+|          |   "owner": "admin",                         |
+|          |   "prestatus": "running",                   |
+|          |   "status": "successful",                   |
+|          |   "subprocessnum": 1,                       |
+|          |   "type": "Collect",                        |
+|          |   "updatetime": "Mon Oct 31 17:38:05 2022"  |
+|          | }                                           |
++----------+---------------------------------------------+
+----
++
+
+include::../../../../../../_components/note.adoc[]
+* ${task_id} 为步骤 6 返回结果中 `task_id` 所对应的 `Value` 值，需根据实际情况进行修改.
+* 返回结果中 `status` 字段对应 `successful` 即证明硬件收集成功。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，检查所有节点的硬件信息。注意核对新增节点的硬件信息，主要包括新增节点上的数据磁盘信息以及网络配置信息是否准确。
++
+[,shell]
+----
+installer node-list -s available -a data_disks,networks
+----

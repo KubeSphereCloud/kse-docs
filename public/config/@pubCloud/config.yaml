@@ -1,0 +1,130 @@
+title: 公有云文档中心
+
+markup:
+  asciidocExt:
+    attributes:
+      toc:
+      toclevels: 2
+      file_output_type: html
+      # 全局变量
+      platform_name_cn: 青云QingCloud
+      platform_shortname: 青云
+      brand_name_cap: QingCloud
+      brand_name_low: qingcloud
+      api_url: https://api.qingcloud.com/iaas/
+      console_name: QingCloud 管理控制台
+      # 产品变量
+      qingstor_cap: QingStor
+      qingstor_low: qingstor
+      k8s_engine_fullname: 容器引擎 QKE
+      k8s_engine_shortname: QKE
+      qci_shortname: QCI
+      qci_fullname: 弹性容器实例(QCI)
+      coreshub_name_cn: AI 算力云服务
+
+linkkeyUnchecked:
+  # 老产品老文档，已不需要
+  - bigdata_nifi_guide
+  - bigdata_storm_guide
+  - middleware_tomcat_guide
+  # 迁移中心，仅企业云
+  - management_smc_v2v_migration_guide
+  # IOT，产品已停，且非公有云文档
+  - iot_guide
+  # 老AppCenter，已下线不需要
+  - appcenter_image_app_guide
+  # 安全资源池，仅企业云
+  - security_srp_ahvlog_guide
+  - security_srp_ahvngfw_guide
+  - security_srp_ahvwaf_guide
+  - security_srp_ahvusm_guide
+  - security_srp_ahvras_guide
+  - security_srp_ahvdb_guide
+  - security_srp_ahvedr_guide
+  - security_srp_ahvngfw_eip_guide
+  - security_srp_ahvedr_vm_protection_guide
+  - security_srp_opration_log_guide
+  - security_srp_product_price_billing
+  - security_srp_ahvdb_protection_guide
+  #主机安全，目前仅企业云
+  - security_hss_product_guide
+  - security_hss_product_info
+  - security_hss_product_price_billing
+  #流量牵引，仅企业云
+  - network_mms_example_guide
+  - network_mms_enable_eip_guide
+  - network_mms_eip_guide
+  #高防IP老版本，产品及文档均已下线
+  - security_high_defense_guide
+  - security_ddos_defense_guide
+  #专属宿主机，已下线，无文档
+  - compute_dedicated_host_guide
+  - compute_dedicated_host_manual
+  #弹性裸金属服务器网络配置，针对企业云
+  - compute_instances_baremetal_router_border
+  #信息已过时，文档没有，也不需要
+  - compute_instances_samedata_multiple_faq
+  #云桌面，产品及文档已下线
+  - compute_cloud_desktop_manual
+  #VIP，仅企业云
+  - network_vpc_vip_guide
+  - network_vpc_base_vip_guide
+  #人工智能产品，已下架
+  - ai_deeplearning_guide
+  - ai_inference_guide
+  #PCDN，已下架，无文档
+  - network_pcdn_price_billing
+  #企业云产品导航文档，公有云暂时没有该文档
+  - navigation_guide
+  #QFS 仅发布在企业云，公有云无 QFS
+  - storage_qfs_guide
+  - storage_qfs_auth_guide
+  - storage_qfs_file_system_guide
+  - storage_qfs_intro
+  - storage_qfs_client_use
+
+
+
+params:
+  description: "这里是公有云文档页面"
+  favicon: "/images/favicon.ico"
+  keywords: "云计算,青云,QingCloud,文档"
+  logo: "/images/qingcloud-logo.svg"
+  logoInfo: "文档"
+  disableVersions: true
+  docHostPort: http://pubcloud.doccenter.dev.com:8000 # 内嵌版必填
+  homeLink: https://www.qingcloud.com/
+  footer: |
+    <a href="https://beian.miit.gov.cn/" target="_blank">京ICP备13019086号</a>&nbsp;
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502030190">
+      <img src="https://www.qingcloud.com/static/assets/images/ghs.png">
+      <span>&nbsp;京公网安备11010502030190</span>
+    </a>
+    &nbsp;代理域名注册服务机构：新网
+  navLink:
+    - title: 旧版文档
+      url: https://docsv3.qingcloud.com
+    - title: 备案
+      url: https://www.qingcloud.com/icp
+    - title: 登录
+      url: https://console.qingcloud.com/login?redirect_uri=https://docsv4.qingcloud.com
+      class: is-hidden
+    - title: |
+        <img src="/images/cloud_service/gift.svg" style="width:20px;height:100%;">&nbsp;注册有礼
+      url: https://console.qingcloud.com/signup?redirect_uri=https://docsv4.qingcloud.com
+      class: is-hidden
+
+  # PDF 配置
+  pdf:
+    pdf_projectName: 公有云
+    pdf_docVersion: 01
+    pdf_copyright: 版权所有 © 北京青云科技股份有限公司
+    pdf_legalInfo: 版权所有 © 北京青云科技股份有限公司 2023。保留所有权利。
+    pdf_projectVersion: v1.2.2
+    pdf_companyFullName: 北京青云科技股份有限公司
+    pdf_companyName: 青云
+    pdf_companyUrl: https://www.qingcloud.com
+    pdf_companyIcon: /images/pdf/qingcloud-logo-icon.png
+    pdf_coverDocName: QingCloud 公有云
+    pdf_coverDocLogo: /images/pdf/qingcloud-logo-color.png
+    pdf_coverDocImage: /images/pdf/cover_doc_image.svg

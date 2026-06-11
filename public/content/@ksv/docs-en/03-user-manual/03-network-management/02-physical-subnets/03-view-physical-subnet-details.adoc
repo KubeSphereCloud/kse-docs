@@ -1,0 +1,108 @@
+---
+title: "View physical subnet details"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, physical subnets, details, view"
+description: "Describes how to view physical subnet details in the {ks_product} web console."
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: a0353d3ebb9e49c4b576fd28fcf314fb
+:ks_xref_id: 5484d64657fa4df480746e7fcd4adf22
+:ks_comp: ../../../../components/
+:ks_title: View physical subnet details
+:ks_description: Describes how to view physical subnet details in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, physical subnets, details, view
+:ks_weight: 03
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view physical subnet details in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=4d2ce484cad64b1bb7e8b80a3971207d]
+
+include::../../../../_custom-en/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=a5c4910c7b694012a28c36d2c4898674]
+
+include::../../../../_custom-en/networks/physical-subnet-steps.adoc[]
+
+. On the **Subnets** page, click the name of the physical subnet that you want to view. The details page of the physical subnet appears.
+. On the left side of the details page, view basic information about the physical subnet.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|ID
+|The universally unique identifier (UUID) of the physical subnet in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the physical subnet.
+
+|Physical Network
+|The physical network in which the subnet is created.
+
+|VLAN ID
+|The VLAN ID that corresponds to the physical subnet.
+
+|IP Range
+|The IP address range in which the physical subnet resides.
+
+|Gateway
+|The gateway address of the physical subnet.
+
+|DNS Server
+|The Domain Name System (DNS) server address that corresponds to the physical subnet.
+
+|Bandwidth
+|The maximum bandwidth of the physical subnet.
+
+|Available IPs
+|The number of IP addresses available in the physical subnet.
+
+|Used IPs
+|The number of IP addresses used in the physical subnet.
+
+|Logical Gateway
+|Specifies whether the logical gateway is enabled.
+
+|Excluded IPs
+|The IP address or IP address range that is excluded from the physical subnet.
+
+|Created at
+|The time when the physical subnet was created.
+
+|Created by
+|The username that is used to create the physical subnet.
+|===
+--
+. On the right side of the page, view resources that are associated with the physical subnet. The following table describes the parameters.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the associated resource.
+
+|ID
+|The UUID of the associated resource in the system. The UUID is automatically assigned by the system.
+
+|Status
+|The status of the associated resource.
+
+|IP Address
+|The IP address of the associated resource.
+|===
+--

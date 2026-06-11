@@ -1,0 +1,21 @@
+---
+title: "重建集群"
+weight: 35
+---
+
+重建集群的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_21.png[]
+
+功能流程说明：
+
+. 执行 get_nodes_order 获取节点执行顺序。
+. 各角色节点依次执行下面重建步骤：
+.. 执行 stop cmd 和 confd agent。
+.. 系统盘容量设置为：系统盘 + 挂载盘。
+.. 迁移 kvm 虚拟机到 lxc 物理机。
+.. 节点用户数据保存到当前 hyper 上临时数据目录，重置虚拟机，修改 hypervisor 字段，删除 agent_ctl 文件。
+.. 再次重置虚拟机，临时数据目录文件拷贝到新主机中，删除临时目录。
+.. 修改集群的主机类型、集群状态、节点状态信息。
+.. 销毁原主机硬盘。
+.. 启动集群主机 confd agent，执行 start cmd。

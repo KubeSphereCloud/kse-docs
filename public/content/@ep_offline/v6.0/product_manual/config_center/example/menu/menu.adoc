@@ -1,0 +1,86 @@
+---
+title: 管理产品与服务菜单
+weight: 01
+---
+
+企业云平台 Console 顶部的**产品与服务**菜单用于展示云平台支持的产品和服务。
+
+云平台的管理员可以根据实际情况，对**产品与服务**菜单进行自定义，隐藏/显示某些产品和服务。
+
+image::/images/ep_offline/cadmin/example_menu_00.png[,70%]
+
+== 配置参数路径
+
+**产品与服务**菜单通过如下配置进行控制。
+
+[cols='1,1,2']
+|===
+| 应用 | 配置 | 涉及参数
+
+| webconsole
+| product_directories
+a|
+
+* 在表单模式下，找到对应产品/服务的**隐藏此菜单**参数。
+* 在文本模式下，找到对应产品/服务的 **hide_for_all** 参数。
+|===
+
+== 操作步骤
+
+. link:../../../manual/login[登录配置中心]。
+. 在左侧导航栏，选择**配置管理**，进入配置管理页面。
+. 在**应用**和**配置**搜索框中输入 `webconsole` 和 `product_directories`，点击**搜索**。
++
+image::/images/ep_offline/cadmin/example_menu.png[]
+. 在 product_directories 配置所在行，点击右侧的**管理配置**，进入 product_directories 配置页面。
++
+
+include::../../../../../../_components/note.adoc[]
+配置页面支持表单模式和文本模式，默认为表单模式（默认值可以自行定义，详细操作请参见link:../../../manual/system[系统设置]），可以通过右侧的按钮临时进行切换。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+** 表单模式
++
+如下示例中，安全资源池的``隐藏此菜单``开关为关闭，表示在**产品与服务**菜单中显示**安全资源池**。
++
+image::/images/ep_offline/cadmin/example_menu_02.png[,70%]
+
+** 文本模式
++
+将安全资源池下的 **hide_for_all** 参数设置为 ``false``，表示在产品与服务菜单中显示**安全资源池**。
++
+
+include::../../../../../../_components/note.adoc[]
+若文本模式下没有该参数，请按图中示例的格式手动添加。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/ep_offline/cadmin/example_menu_01.png[,70%]
+
+. 配置完成后，点击**启用**，弹出的保存并启用对话框。
+. 输入描述信息，点击**保存并启用**，完成操作。
++
+约一分钟后生效，登录 Console 查看**产品与服务**菜单，可以看到对应的产品/服务已显示或隐藏。
+
+== 常见问题
+
+[discrete]
+=== 配置了显示菜单，但 Console 上没生效。
+
+**可能原因**：部分产品需要先在产品中心上架，可能产品中心还未上架该产品。
+
+**解决方法**：执行以下步骤，在 BOSS 产品中心上架产品。
+
+. 登录 BOSS。
+. 选择**运营管理** > **产品中心** > **产品管理**，进入产品管理页面。
+. 在产品目录树中找到目标产品，点击页面右上角的**上架**。
++
+image::/images/ep_offline/cadmin/example_menu_03.png[]
+. 点击页面右上角的**更新**，完成上架。
++
+include::../../../../../../_components/note.adoc[]
+此操作约 30 分钟左右生效，请耐心等待。
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/ep_offline/cadmin/example_menu_04.png[]

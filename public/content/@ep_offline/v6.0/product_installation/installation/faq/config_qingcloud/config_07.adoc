@@ -1,0 +1,16 @@
+---
+title: indexError：list index out of range
+weight: 07
+---
+
+== 问题现象
+
+生成配置文件提示 “indexError: list index out of range”。
+
+== 问题原因
+
+企业云平台 v6.0.2 及以后版本，新部署环境时，一个 Region 里只需要部署 2 台 Cloudsat 节点，当配置为 3 个节点时，会出现该错误提示。
+
+== 解决方法
+
+在 `setting.<zone_id>.yaml` 配置文件里去掉个 Cloudsat 节点，只保留 cloudsat0、cloudsat1。

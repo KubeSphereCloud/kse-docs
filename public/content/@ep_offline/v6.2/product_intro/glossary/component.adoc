@@ -1,0 +1,39 @@
+---
+title: 管理服务 
+weight: 2
+---
+
+
+
+[cols="1a,3a"]
+|===
+|术语  |说明
+
+|VG 服务 | 虚拟网关服务。
+|VG 节点 | 部署有 VG 服务的节点。
+|DNS Master | DNS 服务，用于提供内网域名服务。
+|Zoocassa  | 一组服务的统称。包括：
+
+* Zookeeper：集群管理服务
+* Cassandra：存放监控数据
+* Redis：计费服务缓存
+* Memcache：前端缓存服务
+
+|Pgserver  | PostgreSQL 数据库，用于存放云平台管理信息。
+|Pgpool | PostgreSQL 数据库连接池。
+|Webservice   | 提供 Web Console 服务。
+|Proxy   | Web Console 服务的接入代理。
+|Snapshot   | 数据备份服务。
+|Snapshot 节点 | 用于存放数据备份的节点。
+|VBR   | 虚拟备份恢复服务。
+|VBR 节点  |用于数据压缩。
+|Seed  |镜像模板服务。
+|BOSS  |云计算运维管理服务。
+|Cronus  |监控组件数据库。
+|Warehouse  |消费统计预估。
+|Cloudsat  |云监控服务
+|HPC  |超性能计算服务。
+|SMC  |迁移中心。比如将虚拟机从 VMware 平台迁移至{product_name}
+
+|===
+

@@ -1,0 +1,64 @@
+---
+title: "禁用 Metrics Server"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, Metrics Server, 禁用 Metrics Server"
+description: "介绍如何禁用 Metrics Server 扩展组件。"
+weight: 02
+---
+
+// :ks_include_id: eeb0bd12bac74ff0befcab9d94a2eac8
+:ks_xref_id: f2b438f8a2254401ae886d2286456730
+:ks_comp: ../../../../components/
+:ks_title: 禁用 Metrics Server
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, Metrics Server, 禁用 Metrics Server
+:ks_description: 介绍如何禁用 Metrics Server 扩展组件。
+:ks_weight: 02
+:ks_icon:
+
+
+本节介绍如何禁用 Metrics Server 扩展组件。
+
+
+== 前提条件link:[id=a2df66ce72f342e69e6f6711c9f10618]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=30145256e2f74ebab7eb4b54ab356761]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:metrics_server:enabled** 参数设置为 **false**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  metrics_server:
+    enabled: false
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,89 @@
+---
+title: "Edit Platform Role Permissions"
+keywords: "Kubernetes, {ks_product}, Platform Management, Access Control, Platform Role, Edit Platform Role Permissions"
+description: "Describes how to edit platform role permissions."
+weight: 05
+---
+
+:ks_menu: **Users and Roles Management**
+:ks_permission: **Role Management**
+:ks_navigation: **Platform Roles**
+
+This section describes how to edit platform role permissions.
+
+You can only edit the permissions of user-created platform roles. The permissions of built-in platform roles cannot be edited.
+
+== Prerequisites
+
+You need to have the pass:a,q[{ks_permission}] permission on the KubeSphere platform. For more information, see link:../../01-users/[Users] and link:../../02-platform-roles/[Platform Roles].
+
+== Steps
+
+include::../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
++
+. Click pass:a,q[{ks_menu}].
+. In the left navigation pane, select **Platform Roles**.
+. On the right side of the platform role you want to operate, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18], and then select **Edit Permissions** from the drop-down list.
+. In the **Edit Permissions** dialog box, set the permissions for the platform role, and then click **OK**.
++
+--
+The permissions that can be set for a platform role are as follows:
+
+* App Store Management
++
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|App Store Management
+|Manage the App Store on the KubeSphere platform, such as app review, release, removal, etc.
+|===
+
+* Workspace
++
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Workspace Creation
+|Create a workspace.
+
+|Workspace Management
+|Manage all workspaces and resources within workspaces.
+
+|Workspace View
+|View all workspaces and resources within workspaces.
+|===
+
+* Cluster Management
++
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Cluster Management
+|Create clusters, delete clusters, and manage all resources within clusters.
+
+|Cluster View
+|View all clusters and cluster resources.
+|===
+
+* Access Control
++
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Role View
+|View the platform role list, view platform role details.
+
+|User View
+|View the user list, view user details.
+
+// |User Management
+// |Create users, edit user information, enable and disable users, modify user roles, delete users.
+
+// |Role Management
+// |Create platform roles, edit platform role information, edit platform role permissions, delete platform roles.
+|===
+--

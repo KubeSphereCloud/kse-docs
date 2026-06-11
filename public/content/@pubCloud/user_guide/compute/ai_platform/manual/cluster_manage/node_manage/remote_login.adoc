@@ -1,0 +1,80 @@
+---
+title: "登录节点"
+weight: 5
+---
+
+AI 集群后台需通过登录计算节点进行实现，目前支持 VNC 连接、jupyter 登录方式。
+
+== 前提条件
+
+已创建 AI 集群。
+
+
+==  VNC 连接
+
+. 登录管理控制台。
+
+. 选择**产品与服务** > *计算* > *AI 算力平台*，选择**集群管理**页面。
+. 在**节点列表页面**，选择待登录的计算节点所在行右侧的更多操作，选择**远程登录**。
+. 在弹出的**远程连接**窗口中，选择 *VNC 连接*，点击**确定**。
+ 
+. 在弹出的 Web 终端页面中输入相应的账户和密码即可登录集群。
++
+
+include::../../../../../../../_components/note.adoc[]
+用户名和密码为集群内已存在的户名和密码，可通过进入集群详情页面内的**用户与权限组**列表进行查看。
+include::../../../../../../../_components/table_footer.adoc[]
+
+== JupyterLab 登录
+
+//tag::jupyter[]
+
+使用 JupyterLab 登录时，**需注意请勿开启浏览器的弹窗拦截**。
+
+
+. 登录管理控制台。
+. 选择**产品与服务** > *计算* > *AI 算力平台*，选择**训练服务**页面，并点击**启动开发环境**。
++
+image::/images/cloud_service/compute/ai/remote_login_2.png[]
+
+. 弹出**启动开发环境**窗口，根据实际情况选择需要登录的计算节点，点击**确定**。
++
+image::/images/cloud_service/compute/ai/remote_login_3.png[,40%]
+
+. 在弹出的 Jupyterhub 登录窗口，输入集群内已有的用户名和密码。
++
+include::../../../../../../../_components/note.adoc[]
+用户名和密码为集群内已存在的户名和密码，可通过进入集群详情页面内的**用户与权限组**列表进行查看。
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/cloud_service/compute/ai/remote_login_4.png[]
+
+. 点击 **Sign in**，即登录至相应节点后台。在 **Terminal 1** 窗口即可输入指定指令。
++
+image::/images/cloud_service/compute/ai/remote_login_5.png[]
+//end::jupyter[]
+
+
+////
+== WebSSH 远程连接
+
+. 登录管理控制台。
+
+. 选择**产品与服务** > *计算* > *AI 算力平台*，选择**集群管理**页面。
+. 在**节点列表页面**，选择待登录的计算节点所在行右侧的更多操作，选择**远程登录**。
++
+image::/images/cloud_service/compute/ai/remote_login_more_operation.png[]
+
+. 在弹出的**远程连接**窗口中，选择 *WebSSH 远程连接*，并输入用户名和密码，点击**确定**即可。
+
++
+include::../../../../../../../_components/note.adoc[]
+用户名和密码为集群内已存在的户名和密码，可通过进入集群详情页面内的**用户与权限组**列表进行查看。
+include::../../../../../../../_components/table_footer.adoc[]
++
+image::/images/cloud_service/compute/ai/remote_login_1.png[,50%]
+////
+
+
+
+

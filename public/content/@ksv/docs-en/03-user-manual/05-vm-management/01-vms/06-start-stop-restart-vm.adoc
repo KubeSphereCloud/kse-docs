@@ -1,0 +1,70 @@
+---
+title: "Start, stop, or restart a VM"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, start, stop, restart"
+description: "Describes how to start, stop, or restart a VM in the {ks_product} web console."
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: de322db5f624463c98be05354059954c
+:ks_xref_id: ff758598e1e441d9a41e59a8ef71cb35
+:ks_comp: ../../../../components/
+:ks_title: Start, stop, or restart a VM
+:ks_description: Describes how to start, stop, or restart a VM in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, start, stop, restart
+:ks_weight: 06
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to start, stop, or restart a VM in the {ks_product_abbr_full} web console.
+
+{ks_product} allows you to forcibly restart or stop VMs. If a VM becomes abnormal, you can restart the VM to recover. If a VM is no longer used, you can stop the VM.
+
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Stopping or restarting a VM may affect the cluster performance. We recommend that you do not stop or restart a VM that is in a running state unless otherwise required such as fault recovery.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=c26d581e0dc0438bb96266d773a1aab4]
+
+include::../../../../_custom-en/vms/vm-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=36468a7657a448fda06260f94e523067]
+
+include::../../../../_custom-en/vms/vm-view-steps.adoc[]
+
+. On the **VMs** page, find the VM that you want to manage, right-click on the blank area to open the shortcuts for VM operations, and then select **Stop**, **Start**, or **Restart** from the drop-down list.
++
+--
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+You can also click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Force Stop** or **Force Start** from the drop-down list to forcibly stop or start the VM.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. In the dialog box that appears, click **OK** to proceed with the operation.
++
+--
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* The VM start, stop, and restart operations may take a while. The VM status will be updated automatically after the operation is complete.
+* Depending on the status of the VMs, some operations may not be supported.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

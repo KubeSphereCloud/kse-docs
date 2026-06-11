@@ -1,0 +1,56 @@
+// 更新 IaaS 端网络配置
+
+与 IaaS 融合部署场景中，NeonSAN 的存储网络，需在部署了 IaaS 后再进行配置。否则，部署 IaaS 过程中会将该网络清理掉。故此章节用于指导用户配置 NeonSAN 的存储网络，**仅与 IaaS 融合部署场景下需要**。
+
+. 登录 IaaS 端的 FirstBox。
+. 执行如下命令，查看 Hyper 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/hyper
+----
+
+. 逐一登录 Hyper 节点。
+
+. 查看当前节点的 NeonSAN 存储网络的 IP 地址，即配置文件中 ``rep_port`` 字段对应的 IP 地址。
++
+[source,shell]
+----
+cat /etc/neonsan/store.conf
+----
+
+. 修改 ``/etc/network/interfaces``，新增 NeonSAN 存储网络信息即可。
++
+[source,shell]
+----
+vi /etc/network/interfaces
+----
++
+[source]
+----
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# mgmt network
+auto ens1f1
+iface ens1f1 inet static
+  address 172.31.60.205
+  netmask 255.255.255.0
+  gateway 172.31.60.254
+  dns-nameservers 172.31.60.209
+
+# repl network  // NeonSAN 存储网络
+auto ens1f0
+iface ens1f0 inet static
+  address 192.168.0.3
+  netmask 255.255.255.0
+----
+
+. 修改完成后，重启网络。
++
+[source,shell]
+----
+service networking restart
+----
+

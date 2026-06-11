@@ -1,0 +1,53 @@
+---
+title: "新增云服务器规格"
+weight: 30
+---
+
+系统默认已提供常用的云服务器规格，用户也可以新增自定义规格。
+
+== 新增SKU
+
+用户可以通过新增 SKU，为规格配置属性参数。新增 SKU 后，规格的属性参数不支持修改。
+
+1. 登录 BOSS。
+2. 选择**运营管理** > **产品中心** > **产品管理** ，进入产品管理页面。
+3. 在产品目录树中选择**云平台** > **计算** > **云服务器**，进入云服务器详情页面。
++
+image::/images/ep_offline/installation/initialize_vm_specification_add_specification_01.png[]
+4. 选择**计费项**页签，点击**主机规格**后的 **SKU 详情**，进入 SKU 详情页面。
++
+image::/images/ep_offline/installation/initialize_vm_specification_add_specification_02.png[]
+5. 点击**新增 SKU**，进入创建 SKU 页面。 
++
+image::/images/ep_offline/installation/initialize_vm_specification_add_specification_03.png[]
+6. 点击**选择属性**，进入选择属性页面。
++
+根据实际情况选择控制台、可用区、主机类型、CPU、内存、网络类型、GPU、GPU类型，点击**确定**。
++
+image::/images/ep_offline/installation/initialize_vm_specification_add_specification_04.png[]
+7. 为相应属性，选择枚举属性值。
++
+image::/images/ep_offline/installation/initialize_vm_specification_add_specification_05.png[]
+8. 配置完成后，点击**创建**，自动跳转到SKU详情页面。可以查看到新增的SKU。
+
+== 修改标签
+
+SKU 创建完成后，仅配置了属性参数，用户还需要配置标签参数。
+
+1. 在新增的 SKU 的操作列，点击更多图标image:/images/ep_offline/installation/icon_more.png[,50%]，选择**编辑标签**。
++
+image::/images/ep_offline/installation/initialize_vm_specification_add_specification_06.png[]
+2. 在编辑标签页面，配置标签参数。
+ ** 状态：请选择**上架**。
+ ** 其他参数请根据实际情况进行配置。
+3. 配置完成后，点击**保存**，完成规格的标签参数配置。
+
+== 上架规格
+
+1. 登录 BOSS。
+2. 选择**运营管理** > **产品中心** > **产品管理**，进入产品管理页面。
+3. 在产品目录树中选择**云平台** > **计算** > **云服务器**，进入云服务器详情页面。
+4. 点击右上角的**更新**，完成上架。
++
+image::/images/ep_offline/installation/initialize_vm_specification_add_specification_07.png[]
+5. 上架完成后，在 Console 创建云服务器时就可以选到该规格了。

@@ -1,0 +1,77 @@
+---
+title: "更改控制器类型"
+weight: 16
+---
+
+== 运维场景
+
+对于没有进行适配的 U 盘驱动器，会出现无法识别的情况。此时，可以通过更改控制器类型解决。
+
+USB 协议与控制器了类型对应关系：
+
+* USB 1.0 协议支持 OHCI 和 UHCI 控制器，具体包括：pix3-uhci、piix4-uhci、ich9-uhci1、ich9-uhci2、ich9-uhci3、vt82c686b-uhci、pci-ohci。
+* USB 2.0 协议支持 EHCI 控制器，具体包括：ehci、ich9-ehcil、qusb1、qusb2。
+* USB 3.0 协议支持 XHCI 控制器，具体包括：nec-xhci、qemu-xhci。
+
+== 操作步骤
+
+. 登录{product_console_name}，在顶部导航栏选择**资源** > **虚拟机**，选择 **ExpressCloud 主机**页签，点击待修改控制器类型的虚拟机 ID，进入其详情页面，查看并记录该虚拟机所属的计算节点以及虚拟机 ID。
++
+image::/images/express/maintain/usb_1.png[]
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 登录至待修改控制器类型的虚拟机所在的计算节点。
+
+. 执行如下命令，将虚拟机的 xml 文件拷贝到当前目录。
++
+[source,shell]
+----
+cp /pitrix/data/vmxml/<vm_id>.xml ./
+----
++
+include::../../../../../_components/note.adoc[]
+<vm_id> 为待修改控制器类型的虚拟机 ID，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 编辑 ``<vm_id>.xml`` 文件。
++
+[source,shell]
+----
+vi <vm_id>.xml
+----
++
+image::/images/express/maintain/usb_2.png[]
++
+include::../../../../../_components/note.adoc[]
+``<controller index="0" model="ich9-ehci1" type="usb"/>`` 中 ``model`` 值需修改为适配的控制器类型。
+include::../../../../../_components/table_footer.adoc[]
+
+. 修改完成后，执行如下命令，重建 ``<vm_id>.xml`` 文件。
++
+[source,shell]
+----
+virsh destroy <vm_id>; virsh create <vm_id>.xml
+----
++
+include::../../../../../_components/note.adoc[]
+<vm_id> 需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+

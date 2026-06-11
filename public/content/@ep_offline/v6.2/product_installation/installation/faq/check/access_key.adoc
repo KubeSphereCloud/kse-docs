@@ -1,0 +1,29 @@
+---
+title: 误删了 admin 账号的 access_key，如何恢复
+weight: 20
+---
+
+== 问题现象
+
+数据库里没有 admin 账号的 access_key。
+
+[source,sql]
+----
+account=# select * from access_key where owner='admin';
+ access_key_id | secret_access_key | access_key_name | description | create_time | console_id | status | status_time | owner | controller | root_user_id | ip_white_list
+---------------+-------------------+-----------------+-------------+-------------+------------+--------+-------------+-------+------------+--------------+---------------
+(0 rows)
+----
+
+== 可能原因
+
+操作人员使用 admin 账号登录 Console 后，在 Console 上删除了对应的 access_key，导致数据库里没有该信息。
+
+== 解决方法
+
+在如下文件中有 admin 账号 access_key 的 SQL，重新插入即可。
+
+[source,shell]
+----
+/pitrix/build/packages/deb/pitrix-ks-webservice-base/pitrix/ks/webservice-base/db/account/init_table.sql
+----

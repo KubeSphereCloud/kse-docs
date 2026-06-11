@@ -1,0 +1,28 @@
+---
+title: "步骤 3：创建高可用 Target"
+weight: 3
+---
+
+
+. 登录{product_console_name}。
+. 选择**物理资源** > **资源池管理** > **iSCSI 外挂**，进入 iSCSI 外挂管理页面，点击 **iSCSI 配置**。在 iSCSI 配置页面，点击**创建高可用 Target**。
++
+image::/images/express/console/iscsi_step3_1.png[]
+
+. 在弹出的**创建高可用 Target** 窗口中，配置 **Target WWN** 和 **VIP**，点击**确定**即可。
++
+
+include::../../../../../../_components/note.adoc[]
+* Target WWN 为自定义的 Target 的 WWN，不能含有大写字母。相同的 Target WWN 可以绑定在多个前端服务器上，作为高可用 Target。
+* VIP 为环境中已创建完成的 VIP 存储，根据实际情况进行选择即可。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/iscsi_step3_2.png[,50%]
+
+. 创建成功后，在 iSCSI 配置页面，点击某一前端服务器右侧的的下拉框，可看到创建完成的高可用 Target 显示在列。
++
+image::/images/express/console/iscsi_step3_3.png[]
+
+
+

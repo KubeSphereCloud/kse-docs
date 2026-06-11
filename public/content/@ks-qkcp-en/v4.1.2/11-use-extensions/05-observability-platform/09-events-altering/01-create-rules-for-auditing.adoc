@@ -1,0 +1,80 @@
+---
+title: "Create Alert Rules for Events/Auditing"
+description: "Describes how to create alert rules for events and auditing."
+weight: 01
+---
+
+This section describes how to define alert rules for Kubernetes native events and Kubernetes/KubeSphere audit events.
+
+
+== Prerequisites
+
+* You should have the **platform-admin** role on the {ks_product-en} platform.
+
+* **WhizardTelemetry Events Alerting** should have been extension installed and enabled.
+
+
+== Steps
+
+. On any cluster node, create a yaml file to define alert rules for events and auditing in that cluster.
++
+--
+Click link:../02-example-rules-for-auditing[here] to view a complete example of alert rules. Refer to link:../02-example-rules-for-auditing/#_parameter_description[Parameter Description] to set the parameters for the alert rules.
+
+A simple example is as follows:
+
+[,yaml]
+----
+apiVersion: logging.whizard.io/v1alpha1
+kind: ClusterRuleGroup
+metadata:
+  name: example-auditing-rule
+  namespace: kubesphere-logging-system
+spec:
+  type: auditing
+  rules:
+    - desc: all action not need to be audit
+      expr:
+        kind: list
+        list:
+          - get
+          - list
+          - watch
+      name: ignore-action
+    - desc: all operator need to be audit
+      expr:
+        kind: list
+        list:
+          - create
+          - delete
+          - update
+          - patch
+      name: action
+    - desc: pod
+      expr:
+        kind: macro
+        macro: ObjectRef.Resource="pods"
+      name: pod
+    - desc: service
+      expr:
+        kind: macro
+        macro: ObjectRef.Resource="services"
+      name: service
+    - desc: the alias of the user related to audit event
+      expr:
+        alias: User.username
+        kind: alias
+      name: user
+----
+--
+
+. Run the following command to create the CRD (Custom Resource Definition).
++
+[,bash]
+----
+kubectl apply -f xxx.yaml  # Replace with the name of the yaml file
+----
+
+. After successful execution, search for **ClusterRuleGroup** on the Cluster **CRDs** page.
+
+. Click **ClusterRuleGroup** to enter the details page and view, edit, or delete the alert rules on the right side of the page.

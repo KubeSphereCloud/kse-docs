@@ -1,0 +1,94 @@
+---
+title: when（GetClusterAlarmMeters）
+weight: 14
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_versions
+| Array
+| true
+| 集群版本数组
+
+| apps
+| Array
+| true
+| appId数组
+
+| owner
+| String
+| false
+| 用户
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| meters
+| Object
+| false
+| 指标信息详情
+
+| meters.app_id
+| String
+| false
+| APP监控指标字典，具体请参考示例
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetClusterAlarmMeters",
+  "app_versions": [
+    "appv-sa1f3vqd"
+  ],
+  "apps": [
+    "app-gtusp816"
+  ],
+  "owner": "usr-ywtcdYqC",
+  "zone": "pek3"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetClusterAlarmMetersResponse",
+  "meters": {
+    "app-gtusp816": {
+      "appv-sa1f3vqd": {
+        "pg": {
+          "cln_healthy": {
+            "scale_factor_when_display": 1,
+            "unit": "",
+            "value_type": "int"
+          }
+        }
+      }
+    }
+  },
+  "ret_code": 0,
+  "trace_id": "B58PS24c"
+}
+----

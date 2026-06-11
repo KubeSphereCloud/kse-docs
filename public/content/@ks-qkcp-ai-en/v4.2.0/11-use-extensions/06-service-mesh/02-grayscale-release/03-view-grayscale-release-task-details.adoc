@@ -1,0 +1,66 @@
+---
+title: "View Grayscale Release Job Details"
+keywords: "Kubernetes, {ks_product}, Project Management, Grayscale Release, View Grayscale Release Job Details"
+description: "Describes how to view grayscale release job details."
+weight: 03
+---
+
+:ks_permission: ** Service Mesh View**
+:ks_navigation: **Grayscale Release > Grayscale Release**
+
+This section describes how to view grayscale release job details.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere Service Mesh** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/grayscaleRelease/grayscaleRelease-oper-openDetailsPage.adoc[]
++
+--
+The grayscale release job details page provides the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the grayscale release job and its release mode.
+
+|Version
+|The number of pod replicas, pod names, CPU usage, and memory usage for the old and new versions.
+
+|Traffic Distribution
+|
+* For Blue-Green Deployment, shows the service version currently receiving all traffic.
+
+* For Canary Release, shows the traffic reception ratio between the old and new versions.
+
+* For Traffic Mirroring, shows the same replica of traffic from the new version being received by the old version.
+
+|Release Strategy
+|
+* Switch Immediately: Immediately switch all traffic to the corresponding version.
+
+* Switch After Ready: Automatically switch traffic after the pods of the corresponding version are ready.
+
+* Pause Switch: Actively pause traffic switching, maintaining the current traffic distribution state.
+
+include::../../../../_custom/projectManagement/grayscaleRelease/grayscaleRelease-para-trafficSuccessLatency.adoc[]
+|===
+--

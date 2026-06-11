@@ -1,0 +1,60 @@
+---
+title: "View Log Receiver List"
+keywords: "Kubernetes, {ks_product-en}, cluster management, cluster settings, log receivers, view log receiver list"
+description: "This section introduces how to view the log receiver list."
+weight: 02
+---
+
+:ks_permission: **Cluster Settings Viewing**
+:ks_navigation: **Cluster Settings > Log Receivers**
+
+This section introduces how to view the log receiver list.
+
+== Prerequisites
+
+* {empty}
+include::../../../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* A log receiver has been added.
+
+== Steps
+
+include::../../../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+. On the **Log Receivers** page, click **Container Logs**, **Resource Events**, **Audit Logs**, or **Notification History** to open the log receiver list.
+
++
+====
+* The log receiver list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the log receiver. {ks_product-en} supports Elasticsearch, OpenSearch, and Kafka log receivers.
+
+|Address
+|
+include::../../../../../../_custom-en/clusterManagement/logReceivers/logReceivers-para-address.adoc[]
+
+|Status
+|Whether the log receiver is enabled, with values of **Enabled** or **Disabled**.
+
+|Type
+|The type of the log receiver, which can be **Logging**, **Events**, **Audit Logs**, or **Notification History**.
+
+|Creation Time
+|The creation time of the log receiver.
+|===
+--
+
+include::../../../../../../../_ks_components-en/oper-refreshListData.adoc[]
+====

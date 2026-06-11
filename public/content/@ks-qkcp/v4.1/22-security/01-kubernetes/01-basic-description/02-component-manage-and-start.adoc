@@ -1,0 +1,36 @@
+---
+title: "组件管理/启动方式"
+weight: 02
+---
+
+[%header,cols="1a, 1a, 3a"]
+|===
+|组件	|启动/管理方式	|更新方式
+
+|etcd	|systemd	|更新配置后 systemctl 重启
+
+|kubelet	|systemd	|更新配置后 systemctl 重启
+
+|kube-apiserver	|kubernetes static pod	
+|修改配置文件后，组件自动重启
+
+/etc/kubernetes/manifests/kube-apiserver.yaml
+
+|kube-controller-manager	|kubernetes static pod	
+|修改配置文件后，组件自动重启
+
+/etc/kubernetes/manifests/kube-controller-manager.yaml
+
+|kube-scheduler	|kubernetes static pod	
+|修改配置文件后，组件自动重启
+
+/etc/kubernetes/manifests/kube-scheduler.yaml
+
+|kube-proxy	|kubernetes daemonsets	
+|修改配置后自动更新
+
+kubectl -n kube-system edit daemonsets.apps 
+kube-proxy
+|docker registry	|systemd	|更新配置后 systemctl 重启
+
+|===

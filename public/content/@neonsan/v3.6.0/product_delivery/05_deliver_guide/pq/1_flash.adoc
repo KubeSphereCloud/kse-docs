@@ -1,0 +1,129 @@
+---
+title: "全闪环境"
+weight: 2
+---
+
+
+
+
+[cols="^1h,6"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统的性能。
+
+|预置条件	
+a|. QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+. 各节点服务配置正确，且状态正常。
+
+
+|预置检查
+a|
+//include::check.adoc[]
+link:../check[检查并设置集群节点的 CPU 工作模式。]
+
+|测试过程
+a|
+. 配置集群内三节点的绑核参数以及启动的线程数，详细步骤可参考《NeonSAN 产品性能测试指南》相关内容。
+. 清理存储空间，即删除集群内已存在的卷，并回收空间。
++
+[source,shell]
+----
+neonsan delete_volume -volume pool/test_vol 
+----
++
+[source,shell]
+----
+neonsan gc
+----
+. 查看资源回收是否已完成。若返回结果中 ``STATUS`` 为 ``succeeded``，则表示回收完成。
++
+[source,shell]
+----
+neonsan list_job -queue_name gc
+----
+. 创建一个 768G，3 副本的卷：
++
+[source,shell]
+----
+neonsan create_volume -volume poc_vol_61 -pool pool -size 768G  -repcount 3 -policy most_balanced -thick_pov
+----
+
+. 登录数据库，查看步骤 4 创建的卷是否均匀分布。若均匀分布，则可继续后续操作，否则，需重新进入步骤 1。
++
+[source,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h neonsan-mysql0 -P 3306
+----
++
+[source,mysql]
+----
+use neonsan;
+----
++
+[source,mysql]
+----
+select ssd_uuid,store_id,count(*) from replica_ext where vname='poc_vol_1' and is_primary=1 group by ssd_uuid;
+----
+ifeval::["{file_output_type}" == "pdf"]
+|===
+<<<
+[cols="^1h,5"]
+|===
+|测试过程
+a|
+[start=6]
+endif::[]
+. 将卷挂载至客户端，并查看相应的盘符。如：挂载后盘符为 /dev/qbd0。
++
+[source,shell]
+----
+qbd -m pool/poc_vol_61
+----
++
+[source,shell]
+----
+qbd -l
+----
+. 在客户端执行如下命令，查询块存储设备是否已 4KiB 对齐。若返回结果中 ``Start`` 的值能被 8 整除，即为 4KiB 对齐。否则，需完成 4KiB 对齐后再进行性能测试。
++
+[source,shell]
+----
+sudo fdisk -lu
+----
+
+. 在客户端使用FIO工具测试集群性能。
+* 4K 随机读。
++
+[source,shell]
+----
+fio -name=test_1 -filename=/dev/qbd1 -bs=4k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=600 -time_based -rw=randread -iodepth=32 -numjobs=2
+----
+* 4K 随机写。
++
+[source,shell]
+----
+fio -name=test_1 -filename=/dev/qbd1 -bs=4k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=600 -time_based -rw=randwrite -iodepth=32 -numjobs=2
+----
+* 128K 顺序读。
++
+[source,shell]
+----
+fio -name=test_10 -filename=/dev/qbd2 -bs=128k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=600 -time_based -rw=read -iodepth=8 -numjobs=1
+----
+* 128K 顺序写。
++
+[source,shell]
+----
+fio -name=test_10 -filename=/dev/qbd2 -bs=128k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=600 -time_based -rw=write-iodepth=8 -numjobs=1
+----
+
+
+|预期结果	
+|TCP client 4K 随机写性能区间在 40 ~ 70K iops。由于硬件环境差异，该性能结果仅供参考。
+
+
+|验证结果	
+|可填写至附录内测试报告表格内。
+|===
+
+<<<

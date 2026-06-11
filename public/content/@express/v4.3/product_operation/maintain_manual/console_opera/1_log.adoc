@@ -1,0 +1,47 @@
+---
+title: '收集 Console 平台操作日志'
+weight: 1
+---
+
+
+== 运维场景
+
+有些情况下，在对集群进行检查和运维的过程中，需要获取当前平台内相关资源的操作日志，可参考以下步骤获取。
+
+== 操作步骤
+
+. 登录云易捷 Console 控制平台，在顶部导航栏，选择**运维工具** > **操作日志**，记录待收集的操作任务的 job id。
++
+image::/images/express/maintain/base_opera_log_1.png[]
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，收集指定操作任务的详细日志。收集成功的日志会保存在 ``/tmp`` 目录下，文件名为 ``collect_log.tar.gz``。
++
+[source,shell]
+----
+/pitrix/bin/collect_log.py -j <job_id>
+----
++
+include::../../../../../_components/note.adoc[]
+``-j`` 用于指定操作任务的 ID，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+

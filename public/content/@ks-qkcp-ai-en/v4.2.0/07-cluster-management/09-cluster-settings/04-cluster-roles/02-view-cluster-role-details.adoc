@@ -1,0 +1,202 @@
+---
+title: "View Cluster Role Details"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Cluster Settings, Cluster Members, View Cluster Role Details"
+description: "Describes how to view cluster member details."
+weight: 02
+---
+
+:ks_permission: **Role Viewing**
+:ks_navigation: **Cluster Settings > Cluster Roles**
+
+This section describes how to view cluster role details.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. In the cluster role list, click the name of a cluster role to open its details page.
+
+. On the cluster role details page, click the **Permissions** tab to view the permissions granted to the cluster role.
++
+====
+All cluster members can view cluster resource information. Permissions required for other operations are as follows:
+
+* Storage
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Persistent Volume Claim Viewing
+|View Persistent Volume Claim list, view Persistent Volume Claim details, view Persistent Volume list, view Persistent Volume details.
+
+|Persistent Volume Claim Management
+|Create Persistent Volume Claim, clone Persistent Volume Claim, expand Persistent Volume Claim, edit Persistent Volume Claim information, edit Persistent Volume information, delete Persistent Volume Claim, delete Persistent Volume.
+
+|Storage Class Viewing
+|View Storage Class list, view Storage Class details.
+
+|Storage Class Management
+|Create Storage Class, set default Storage Class, enable and disable volume operations, edit Storage Class information, delete Storage Class.
+
+// |Volume Snapshot Viewing
+// |View Volume Snapshot list, view Volume Snapshot details, view Volume Snapshot Content list, view Volume Snapshot Content details.
+
+// |Volume Snapshot Management
+// |Create Volume Snapshot, create Persistent Volume using Volume Snapshot, delete Volume Snapshot, edit Volume Snapshot Content information, delete Volume Snapshot Content.
+
+// |Volume Snapshot Class Viewing
+// |View Volume Snapshot Class list, view Volume Snapshot Class details.
+
+// |Volume Snapshot Class Management
+// |Create Volume Snapshot Class, edit Volume Snapshot Class information, delete Volume Snapshot Class.
+|===
+--
+
+* Access Control
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Role Viewing
+|View cluster role list, view cluster role details.
+
+|Member Viewing
+|View cluster member list.
+
+|Member Management
+|Invite users to join the cluster, modify cluster member roles, remove cluster members.
+|===
+--
+
+* Projects
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+// |Project Resource Viewing
+// |
+// * Secret Viewing: View Secret list, view Secret details.
+
+// * ConfigMap Viewing: View ConfigMap list, view ConfigMap details.
+
+// * Service Account Viewing: View Service Account list, view Service Account details.
+
+// |Project Resource Management
+// |
+
+// * Secret Management: Create Secret, edit Secret information, edit Secret settings, delete Secret.
+
+// * ConfigMap Management: Create ConfigMap, edit ConfigMap information, edit ConfigMap settings, delete ConfigMap.
+
+// * Service Account Management: Create Service Account, edit Service Account information, assign roles to Service Account, delete Service Account.
+
+|Project Viewing
+|View project list, view project details.
+
+|Project Management
+|Create project, edit project information, edit project annotations, edit project quotas, edit default container quotas, delete project.
+|===
+--
+
+* Cluster Resources
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Node Viewing
+|View node list, view node details.
+
+|Node Management
+|Cordon and uncordon nodes, access node terminal, edit node taints, edit node labels.
+
+// |System Component Viewing
+// |View system component list, view system component details.
+
+|Custom Resource Definition Viewing
+|View Custom Resource Definition list, view Custom Resource Definition details.
+
+|Custom Resource Definition Management
+|Edit Custom Resource, delete Custom Resource.
+|===
+--
+
+* Cluster Settings
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Cluster Settings Viewing
+|View cluster overview information, view cluster basic information, view cluster visibility.
+
+|Cluster Settings Management
+|Use cluster management functions, edit cluster basic information, edit cluster visibility.
+|===
+--
+
+* Application Workloads
++
+--
+[%header,cols="1a,4a"]
+|===
+|Permission |Allowed Operations
+
+|Application Workloads Viewing
+|
+* Workload Viewing: View workload list, view workload details.
+
+* Job Viewing: View Job list, view Job details.
+
+* Pod Viewing: View pod list, view pod details, view container details.
+
+* Service Viewing: View Service list, view Service details.
+
+* Ingress Viewing: View Ingress list, view Ingress details, access backend services of Ingress.
+
+* Workload Template Viewing: View workload template list.
+
+|Application Workloads Management
+|
+* Workload Management: Create workload, edit workload information, recreate workload, adjust pod replicas, stop workload, rollback workload settings, edit workload settings, delete workload.
+
+* Job Management: Create Job, edit Job information, rerun Job, suspend CronJob, delete Job.
+
+* Pod Management: Access container terminal, delete pod.
+
+* Service Management: Create Service, edit Service information, edit Service settings, edit Service external access settings, delete Service.
+
+* Ingress Management: Create Ingress, edit Ingress information, edit routing rules, edit Ingress annotations, delete Ingress.
+
+* Workload Template Management: Create workload template, edit template settings, create workload from template, delete workload template.
+|===
+--
+====
+
+. Click the **Authorized Users** tab to view users who have the current cluster role.
++
+--
+include::../../../../_custom/clusterManagement/clusterRoles/clusterRoles-para-authorizedUsers.adoc[]
+--

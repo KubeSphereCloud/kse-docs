@@ -1,0 +1,74 @@
+---
+title: "如何测试硬盘性能"
+weight: 1
+---
+
+本文旨在指导用户准确的测试其所创建的硬盘的性能参数，以 CentOS 7.6 64bit 操作系统为例，不同操作系统的格式化操作可能不同，该测试流程仅供参考。
+
+== 注意事项
+
+* 需提前安装好 FIO 性能测试工具。
+* 测试性能时须确保相应分区的初试磁柱已 4KB 对齐，否则会影响硬盘性能。
+
+
+== 操作步骤
+
+. 登录云服务器并切换成 root 用户。
+. 执行如下命令，检查待测试设备是否已经进行 4KB 对齐。若返回结果中相应的 ``Start`` 值能被 8 整除，即为 4KB 对齐。否则，需完成 4KB 对齐后再进行性能测试。
++
+[source,shell]
+----
+fdisk lu
+----
++
+include::../../../../../_components/attention.adoc[]
+重新进行 4KB 对齐须删除待测试设备原有分区并重新按照 4KB 对齐选取初始磁柱编号，故会造成数据丢失。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令测试硬盘的性能。
++
+include::../../../../../_components/attention.adoc[]
+* 由于 FIO 性能测试会破坏文件系统，故使用 FIO 工具进行裸盘性能测试时，不要在已创建文件系统的磁盘上测试，否则将导致硬盘变为只读。
+* 尽量不要在保存业务数据的硬盘上进行测试。
+include::../../../../../_components/table_footer.adoc[]
+* 随机读 IOPS
++
+[source,shell]
+----
+fio -name=randread_iops -filename=/dev/vdc -bs=4k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=600 -time_based -rw=randread -iodepth=32 -numjobs=1
+----
+* 随机写 IOPS
++
+[source,shell]
+----
+fio -name=randwrite_iops -filename=/dev/vdc -bs=4k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=600 -time_based -rw=randwrite -iodepth=32 -numjobs=1
+----
+* 写吞吐量
++
+[source,shell]
+----
+fio -name=write_bw -filename=/dev/vdc -bs=1024k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=600 -time_based -rw=randwrite -iodepth=32 -numjobs=1
+----
+* 读吞吐量
++
+[source,shell]
+----
+fio -name=read_bw -filename=/dev/vdc -bs=1024k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=600 -time_based -rw=randwrite -iodepth=32 -numjobs=1
+----
+* 单队列随机读时延
++
+[source,shell]
+----
+fio -name=randread_late -filename=/dev/vdc -bs=4k -direct=1 -ioengine=libaio -group_reporting --eta-newline=1 -runtime=60 -time_based -rw=randread -iodepth=1 -numjobs=1   
+----
+
++
+**重要参数说明**：
+* ``—name`` 用于指定测试任务的名称。
+* ``-filename`` 用于指定待测试的设备名称，即代表裸盘的性能。
+* ``-bs`` 用于指定 IO 的块大小（block size），默认值为4 KB。
+* ``-iodepth`` 用于指定测试时的 IO 队列深度。
+* ``-numjobs`` 用于指定测试时的并发线程数。
+* ``-rw`` 用于指定读写策略。
+
+

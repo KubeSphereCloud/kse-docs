@@ -1,0 +1,261 @@
+---
+title: "KubeSphere Enterprise"
+linkTitle: "{ks_title}"
+keywords: ""
+description: ""
+weight: 04
+logo: "{ks_logo}"
+downloadUrl: "{ks_download_url}"
+---
+
+// :ks_include_id: 6c1daf480f1c43d5a51b258ece1cf4b5
+:ks_xref_id: e7cb93f1e9224d408770ba601ee3bcfc
+:ks_comp: ../../components/
+:ks_title: KubeSphere Enterprise
+:ks_description:
+:ks_keywords:
+:ks_weight: 04
+
+
+On top of open source KubeSphere, we have built KubeSphere Enterprise for commercial use. With all capabilities of KubeSphere, KubeSphere Enterprise improves features in multi-cloud cluster management, DevSecOps, microservice governance, application management, and other core business scenarios, offering concierge-like technical support.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Compare editionslink:[id=1fc35b09e9d24ec9b8604086d368f9df]
+
+The following table compares the features between KubeSphere and KubeSphere Enterprise.
+
+[%header, cols="1a,3a,1a,1a"]
+|===
+|Category
+|Feature
+|KubeSphere Enterprise
+|KubeSphere
+
+|Business support
+|Stable business support
+|Yes
+|No
+
+|Architecture
+|ARM and CPUs manufactured by Chinese vendors
+|Yes
+|No
+
+|Pluggable architecture
+|App center for open source and commerical plug-ins
+|Yes
+|No
+
+|Pluggable architecture
+|Unified, visualized management of plug-ins in multiple clusters
+|Yes
+|No
+
+|Pluggable architecture
+|Dynamic updates for commerical plug-ins, including features and security
+|Yes
+|No
+
+|Pluggable architecture
+|Custom web console and plug-in development on your own
+|Yes
+|No
+
+|Observability
+|Tenant-based multi-dimensional CPU and memory monitoring
+|Yes
+|Yes
+
+|Observability
+|Multi-cluster monitoring and unified alerting
+|Yes
+|No
+
+|Observability
+|Built-in multi-dimensional alert rules and custom notification channels
+|Yes
+|Yes
+
+|Observability
+|Notification configuration and historical notifications
+|Yes
+|No
+
+|Observability
+|GPU monitoring
+|Yes
+|No
+
+|DevOps
+|S2I and B2I
+|Yes
+|Yes
+
+|DevOps
+|Jenkins pipelines and built-in editing panels
+|Yes
+|Yes
+
+|Applications
+|Built-in RadonDB
+|Yes
+|No
+
+|Applications
+|Full lifecycle management of applications, from review, rollout, to removal
+|Yes
+|Yes
+
+|Business operations
+|Monitoring dashboards available for billing and metering of multi-dimensional resources in clusters and workspaces
+|Yes
+|Yes
+
+|Microservice governance
+|Blue-green deployment, grayscale release, and fine-grained flow control
+|Yes
+|Yes
+
+|Microservice governance
+|Built-in tracing analysis without the need for manual configuration
+|Yes
+|Yes
+
+|Microservice governance
+|Built-in Spring Cloud
+|Yes
+|No
+
+|Multi-tenancy and access control
+|Tenant resource isolation and quota management based on workspaces
+|Yes
+|Yes
+
+|Multi-tenancy and access control
+|Multi-tenancy available for all features
+|Yes
+|Yes
+
+|Networking and storage
+|Cluster gateways and data statistics
+|Yes
+|Yes
+
+|Networking and storage
+|Visualized configuration of Kubenetes network policies
+|Yes
+|Yes
+
+|Networking and storage
+|Volume cloning, snapshot management, and PV monitoring in the console
+|Yes
+|Yes
+
+|Security
+|Out-of-the-box features with enhanced security
+|Yes
+|Yes
+
+|Security
+|Enhanced security in testing, audit, and configuration
+|Yes
+|No
+
+|Security
+|Continuous security updates during lifecycle
+|Yes
+|No
+|===
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delivery modelslink:[id=276eab7d91a64970ae48f7d20a537838]
+
+To meet diverse business requirements, KubeSphere Enterprise offers the following delivery models:
+
+* **On-premises deployment**
++
+--
+In all-in-one mode, this solution combines KubeSphere Enterprise and Kubernetes and supports native Kubernetes, x86, and ARM architecture.
+--
+* **KubeSphere Enterprise HCI**
++
+--
+This solution combines KubeSphere Enterprise and QingStor NeonSAN, delivering out-of-the-box features with industry-leading SAN storage.
+--
+* **KubeSphere Enterprise on QingCloud**
++
+--
+In this solution, you can deploy KubeSphere Enterprise on QingCloud, which supports private and public clouds at the same time.
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== QingCloud Kubernetes Enginelink:[id=2e37b1b55c934e15add320ed7e86e5c4]
+
+QingCloud Kubernetes Engine is a container management service built on QingCloud. With integrated resources of cloud servers, storage, and networks, this service can help you deploy high-availability and high-performance Kubernetes clusters in a few clicks. With this, you can manage multiple clusters in a visualized manner, and enable auto scaling and O&M monitoring at ease.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Cluster typeslink:[id=a28e7ec756604a2784780c65c6624a1f]
+
+With QingCloud Kubernetes Engine, you can create clusters of the following types:
+
+* Self-managed clusters
++
+--
+Create and manage control nodes and work nodes on your own. This way, you can manage clusters all around and enable fine-grained control.
+
+Manging clusters of this type requires planning and O&M capabilities, which is suitable for large-scale enterprises that have professional O&M team and desire to plan and manage clusters on their own.
+
+In this mode, you don't need to pay for cluster management, but for the fees incurred by control nodes, worker nodes, and other infrastructure resources.
+--
+* Managed clusters
++
+--
+If you create managed clusters, the control nodes are created and managed by QingCloud Kubernetes Engine, and you only need to create and manage worker nodes.
+
+This cluster type ensures stability and high availability and reduces O&M costs, without having to care about control nodes. This helps you focus on the business logic of your applications.
+
+Managed clusters are suitable for enterprises with few O&M personnel, with business requirements for lower costs and worry-free O&M.
+--
+* Serverless clusters
++
+--
+Regarding serverless clusters, you do not need to create control or  worker nodes, and applications can run directly without having to manage any nodes.
+
+This cluster type is suitable for enterprises that require out-of-the-box features for batch task processing, sudden traffic spikes, and CI/CD testing.
+
+In this mode, you are charged based on the resource uitilization and cluster running duration (in seconds).
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+=== Benefitslink:[id=ac4479a40c6b4e24a6280edbd96e4113]
+
+* Simple and efficient
++
+--
+Built-in KubeSphere to help you manage Kubernetes clusters in a web console.
+--
+* Secure and stable
++
+--
+Cluster nodes and workloads across zones and support for geo-disaster recovery.
+--
+* Cost-effective
++
+--
+Worry-free master node management without extra charges.
+--
+* Auto scaling
++
+--
+Resource auto scaling for dynamic business requirements, including cluster nodes, pods, and disks.
+--

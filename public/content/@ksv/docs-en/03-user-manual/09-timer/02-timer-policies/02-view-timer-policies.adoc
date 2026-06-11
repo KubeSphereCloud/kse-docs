@@ -1,0 +1,68 @@
+---
+title: "View timer policies"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, timer policies, list, view"
+description: "Describes how to view timer policies in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: a3381b299c6a40d9998aa7c6e53aa1a8
+:ks_xref_id: 94cf4c80c37f49f6a07776dc665db720
+:ks_comp: ../../../../components/
+:ks_title: View timer policies
+:ks_description: Describes how to view timer policies in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, timer policies, list, view
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view timer policies in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=e7b74413786d486c9d22c56a29bd6aa3]
+
+include::../../../../_custom-en/timer/timer-policy-view-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=7847693ae6234c3696553fb41d96f100]
+
+include::../../../../_custom-en/timer/timer-policy-steps.adoc[]
+
++
+
+--
+You can view all timer policies in the project. The following table describes the parameters.
+
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The custom name of the timer policy.
+
+|ID
+|The universally unique identifier (UUID) of the timer policy in the system.
+
+|Interval
+|The task execution time defined in the timer policy. A timer task can run every day, every N days, every N hours, every week, or every month.
+
+|Execution Time
+|The interval for task execution defined in the timer policy.  A timer task can run every day, every N days, every N hours, every week, or every month.
+
+|Project
+|The project name in which the timer policy is created.
+
+|Created at
+|The time when the timer policy was created.
+|===
+--
+
+. (Optional) Click the search box above the timer policy list and specify a condition to search for timer policies by name, ID, or interval. For example, use **Name:ab** to search for timer policies whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

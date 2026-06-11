@@ -1,0 +1,63 @@
+---
+title: 管理域名接入业务
+description: 删除域名业务
+draft: false
+weight: 20
+keywords: 高防IP, 高防IP实例, 续费
+linkkey: security_ddosip_service_access_guide
+---
+本小节为您介绍域名接入业务管理操作，包括修改域名接入业务和删除域名接入业务。
+
+== 操作步骤
+
+. 登录管理控制台。
+. 在控制台导航栏中，选择**产品与服务** > *安全服务* > *高防IP*，进入**高防 IP-实例列表**页面。
+. 点击**业务接入**。
++
+进入**业务接入**页面。
++
+image::/images/cloud_service/security/antiddos_ip/service_access.png[]
+
+=== 修改域名接入业务
+
+. 选择域名接入页签，在末尾**操作**栏点击**修改**。
++
+image::/images/cloud_service/security/antiddos_ip/domain_modify.png[]
+
+. 在右侧**编辑**页签修改参数。
++
+
+include::../../../../../../_components/note.adoc[]
+
+不支持更改关联高防 IP。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+. 点击**保存修改**。
++
+
+include::../../../../../../_components/note.adoc[]
+
+若修改了域名，需按照link:../../../quickstart/antiddos_access/#_域名接入[域名接入]完成域名过白、测试网络通信、放行回源地址以及 DNS 解析操作，确保新的域名业务接入成功。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+=== 删除域名接入业务
+
+. 选择域名接入页签，在末尾**操作**栏点击**删除**。
++
+image::/images/cloud_service/security/antiddos_ip/domain_delete.png[]
++
+
+若需要删除多个域名接入业务，请勾选待删除的网站域名名称，点击上方的**删除**进行批量删除。
+
+. 弹出提示框，点击**确定**。
++
+
+include::../../../../../../_components/attention.adoc[]
+
+删除的域名业务需要及时进行 DNS 解析操作，将流量牵引至真实源站服务器，避免正常运行的业务受影响。
+
+include::../../../../../../_components/table_footer.adoc[]

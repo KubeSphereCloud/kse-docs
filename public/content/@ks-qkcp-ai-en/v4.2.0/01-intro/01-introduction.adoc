@@ -1,0 +1,78 @@
+---
+title: "Product Introduction"
+description: "Introduces KubeSphere and the core features of v4.2."
+weight: 01
+---
+
+link:https://kubesphere.com.cn/kse/[KubeSphere] is a distributed, multi-tenant commercial cloud-native operating system based on Kubernetes. Building upon open-source capabilities, it extends functionality across multiple core business scenarios including multi-cloud cluster management, microservices governance, application management, and observability. Each feature is highly modularized to meet the business requirements of different scenarios. With a robust enterprise-grade cloud-native foundation, comprehensive expert-level solutions, and service support, it empowers enterprises in digital transformation and large-scale operations.
+
+Starting from KubeSphere v4.0, an extension mechanism was introduced, launching the new architecture: **KubeSphere LuBan**. Built on top of link:https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/[Kubernetes], it supports high configurability and extensibility. Based on the KubeSphere LuBan cloud-native extensible open architecture, KubeSphere can easily achieve upstream and downstream linkage of applications, integrate various high-quality extensions anytime and anywhere, and provide seamlessly integrated business capabilities with a highly consistent product experience.
+
+== New Features
+
+KubeSphere v4.2 is a significant release containing numerous core features, focusing on improvements and enhancements in four key areas, specifically covering the following aspects:
+
+[discrete]
+=== New UI Design and Product Experience Optimization
+
+Redesigned the interface, simplified operation paths, and improved interaction efficiency to help users manage various resources more efficiently.
+
+* Page Framework Optimization: Added global perspective switching to the top navigation bar, integrating platform-level management functions. The side navigation bar is now always visible, supporting quick resource switching and search, enhancing operational fluency.
+* Quick Access Functionality: Supports customizing access entries for clusters, workspaces, and extensions, personalizing the interface to improve operational efficiency.
+* Simplified Workload Creation Process: Added workload templates within workspaces, reducing hierarchy and pre-configuring parameters for quicker and more convenient creation.
+* Enhanced Extension Invocation: The workload details page integrates a unified extension invocation mechanism, allowing associated resource operations through pop-up windows while maintaining page continuity.
+* Enhanced Debugging Experience: Directly displays and debugs containers and replicas on the details page, making fault troubleshooting more efficient.
+
+[discrete]
+=== Fully Pluggable Extensions
+
+This version further optimizes the extension mechanism and enhances the flexibility of the system architecture. By introducing more extension points, deeply decoupling functional modules, supporting on-demand loading of components, providing flexible configuration mechanisms, and improving lifecycle management systems, it comprehensively addresses key issues such as high module coupling, inability to update independently, and long delivery cycles, significantly improving the platform's flexibility, maintainability, and continuous delivery capabilities.
+
+Core Advantages:
+
+* Agile Delivery, Rapid Response: Supports independent upgrades and releases of functional modules, significantly shortening the cycle for new feature rollouts and issue fixes, improving overall delivery efficiency.
+* Flexible Architecture, On-Demand Extension: Provides rich extension points and component configuration options to meet diverse business needs, supporting the continuous evolution of platform capabilities.
+* Precisely Tailored to Business Scenarios: Modular design allows functions to be combined and tailored, helping enterprises quickly adapt to different application scenarios and usage habits.
+* Enhanced Operational Efficiency: Simplifies operational processes, reduces platform management costs, and improves system stability and controllability.
+
+[discrete]
+=== Significant Enhancement of Scenario-Based Features
+
+[discrete]
+==== Comprehensive Enhancement of Edge Computing Capabilities
+
+EdgeWize Edge Computing Platform v3.1.0 is released simultaneously, bringing three core functional upgrades:
+
+* Enhanced Operational Capabilities: Supports smooth migration of KubeEdge clusters, and enables automatic installation of KubeEdge/Docker on edge nodes via OTA, significantly improving system stability and maintenance efficiency, making enterprise operations more worry-free.
+* Cloud-Edge Collaboration: Cloud-edge collaboration solves challenges such as network isolation and limited communication between the cloud and edge devices. Through efficient and secure data channels, it enables seamless data and business flow, helping enterprises unlock the value of edge intelligence.
+* Migration of AI-Related Foundational Capabilities: Seamlessly supports diverse AI scenarios, promoting edge intelligence upgrades.
+
+[discrete]
+==== Major Upgrade of the Observability Platform
+
+WizTelemetry Observability Platform v2.0 adds two core features: distributed tracing and network observability, helping users quickly troubleshoot performance issues, grasp the operational status of the entire link, and significantly improve operational efficiency.
+
+* Distributed Tracing (Tracing): Built on OpenTelemetry, supports automatic generation of service topology, analysis of link latency and error rates, enabling quick identification of call bottlenecks.
+* Network Observability: Generates real-time Layer 4 network and Layer 7 service topologies, combined with RED metrics and HTTP request logs, providing deep insights into inter-service communication and performance.
+
+[discrete]
+=== Product Optimization
+
+[discrete]
+==== Network Isolation Optimization
+
+Network functionality has been upgraded and optimized, with four key features helping enterprise network management become more secure and efficient!
+
+* Added "Project Network Policy" Read-Only View: Users can intuitively view network policies from the workspace and project perspectives, enabling quick troubleshooting and improving operational efficiency.
+* Decoupled "Project Network Isolation" and "Whitelist": Supports various isolation scenarios, allowing flexible configuration of network policies, enhancing security and controllability.
+* Added Workspace/Project Egress Traffic Restrictions: Completes bidirectional control, meeting enterprise security standards and improving reliability.
+* Optimized Whitelist Configuration Process: Supports workspace filtering, simplifying operations and reducing selection difficulties.
+
+[discrete]
+==== App Store Optimization
+
+Supports one-click synchronization of applications from the system repository to the App Store.
+
+For small and medium-sized enterprises and open-source users, this feature skips the cumbersome review and listing processes, quickly injecting applications into the store, greatly simplifying the operation path and improving deployment efficiency. Large enterprises retain the original process to meet strict permission and control requirements.
+
+This optimization caters to different enterprise scenarios, providing a flexible and convenient application management experience, helping users deploy applications efficiently.

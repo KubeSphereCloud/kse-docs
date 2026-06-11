@@ -1,0 +1,144 @@
+// :ks_include_id: ae48f9c2af1e46bca4bede49d4447413
+. On the Job details page, view the resource attributes of the Job in the **Attributes** area.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the Job belongs.
+
+|Project
+|The project to which the Job belongs.
+
+|Status
+|
+The current status of the Job.
+
+include::jobs-para-jobStatus.adoc[]
+
+|Max Retries
+|The maximum number of times the pods in the Job can be restarted. If the Job completion condition is not met after reaching the maximum number of retries, the Job will be marked as failed. Displayed only for regular Jobs.
+
+|Pods Completed
+|The number of pods that must successfully complete to mark the Job as completed. Displayed only for regular Jobs.
+
+|Parallel Pods
+|The number of pod replicas running in parallel in the Job. Displayed only for regular Jobs.
+
+|Max Running Time
+|The maximum running time of the Job, in seconds. If the Job completion condition is not met after reaching the maximum running time, the Job will be terminated and marked as failed. Displayed only for regular Jobs.
+
+|Schedule
+|The CRON expression for the running cycle of the CronJob. Displayed only for CronJobs.
+
+|Max Starting Delay
+|The maximum delay time for starting the Job when it fails to start as scheduled for some reason. Displayed only for CronJobs.
+
+|Successful Jobs History Limit
+|The number of successful Jobs allowed to be retained. The default value is 3. Displayed only for CronJobs.
+
+|Failed Jobs History Limit
+|The number of failed Jobs allowed to be retained. The default value is 1. Displayed only for CronJobs.
+
+|Concurrency Policy
+|The strategy the system adopts when multiple Jobs created by a CronJob overlap.
+
+* **Run Jobs Concurrently**: New Jobs and old Jobs run concurrently.
+
+* **Skip New Job**: The new Job is not run.
+
+* **Skip Old Job**: The old Job is terminated immediately and then the new Job is run.
+
+Displayed only for CronJobs.
+
+|Creation Time
+|The creation time of the Job.
+
+|Creator
+|The user who created the Job.
+|===
+--
+
+. On the Job details page, click the **Run Records** tab to view the run records of the Job.
++
+--
+The system generates run records when a user manually reruns a regular Job or when a CronJob runs according to its schedule.
+
+For regular Jobs, the **Run Records** tab displays the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Sequence
+|The sequence number of the Job run, indicating which run the record corresponds to.
+
+|Status
+|The status result of each Job run.
+
+include::jobs-para-jobStatus.adoc[]
+
+* **Incomplete**: The user manually reran the Job during its execution.
+
+|Message
+|The message returned by the Job run.
+
+|Start Time
+|The time when the Job started running.
+
+|End Time
+|The time when the Job finished running.
+|===
+
+For CronJobs, the **Run Records** tab displays the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Job
+|The name of the regular Job created by the CronJob.
+
+|Status
+|The status of the regular Job created by the CronJob.
+
+include::jobs-para-jobStatus.adoc[]
+
+|Start Time
+|The time when the regular Job started running.
+
+|End Time
+|The time when the regular Job finished running.
+|===
+--
+
+. For regular Jobs, click the **Resource Status** tab on the Job details page to view the number of pod replicas and the pods in the Job.
++
+--
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Replicas
+|The number of pod replicas in the Job.
+
+|Pods
+|
+The pods in the Job.
+
+include::../nodes/nodes-para-podList.adoc[]
+|===
+--
+
+. On the Job details page, click the **Metadata** tab to view the labels and annotations of the Job.
+
+. For regular Jobs, click the **Environment Variables** tab on the Job details page to view the environment variables of all containers in the Job.
+
+. On the Job details page, click the **Events** tab to view events related to the Job.
++
+--
+include::../clusterManagement-para-eventsTab.adoc[]
+--

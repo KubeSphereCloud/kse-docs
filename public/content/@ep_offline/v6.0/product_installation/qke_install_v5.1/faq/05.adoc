@@ -1,0 +1,54 @@
+---
+title: 使用 hostnic 网卡插件创建 QKE 集群失败
+weight: 01
+---
+
+== 问题描述
+
+使用 calico 网卡插件创建 QKE 集群成功，但是使用 hostnic 网卡插件创建 QKE 集群失败。
+
+== 问题原因
+
+IaaS v5.1 版本不支持基础网络 VLAN 模式通过 API 分配 VIP，导致 hostnic 不可用。
+
+== 解决方法
+
+执行以下步骤，修改所有 `server.yaml.<zone_id>` 配置文件，以允许 Console 的云服务器访问 IaaS API。
+
+. 登录{product_name} FirstBox 节点。
+. 执行以下命令，获取 Proxy 节点的内网网卡 VIP（**proxy_floating_ip** 参数）。
++
+[source]
+----
+cat /pitrix/conf/variables/variables.yaml
+----
+. 执行以下命令，修改 `/server.yaml.<zone_id>` 文件。其中，`<zone_id>` 为环境的 Zone ID，所有 Zone 都需要修改。
++
+[source]
+----
+vim /pitrix/conf/variables/global/server.yaml.<zone_id>
+----
+. 在 `server.yaml.<zone_id>` 里面添加如下配置。其中，`<proxy_vip>` 为步骤 2 获取到的 Proxy 节点的 VIP。
++
+[source]
+----
+# 修改或者添加 intranet_api_server
+intranet_api_server:  
+  api_host: '<proxy_vip>'  # 填写步骤 2 获取的 proxy 的 vip
+  api_port: '7777'   # 如果是 http，填写 7777；如果是 https，默认是 443
+  api_protocol: 'http'  # http 或 https
+ 
+# 修改 public_user_services 添加 proxy_vip, 允许 console 访问后台 proxy ip
+  public_user_services:
+    - '<proxy_vip>/32'  # 如果是单个 IP 必须带掩码
+----
+
+. 执行以下命令，将修改同步到 Webservice 节点和 Hyper 节点。
++
+[source]
+----
+/pitrix/build/build_pkgs.py -p pitrix-global-conf
+/pitrix/upgrade/update.sh webservice,hyper pitrix-global-conf
+----
+
+. 操作完成后，用户即可使用 hostnic 网卡插件创建 QKE 集群（VPC 也需要重新创建）。

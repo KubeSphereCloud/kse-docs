@@ -1,0 +1,21 @@
+---
+title: "检查 Python 模块"
+weight: 16
+---
+
+. 逐个登录集群节点。
+. 执行如下命令，检查各节点 Python 模块版本。
++
+[,shell]
+----
+pip list | grep setuptools
+----
++
+返回结果中版本信息需大于 40.6.0，否则请升级 setuptools 版本。
++
+[,shell]
+----
+pip install --upgrade setuptools
+----
+
+

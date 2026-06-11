@@ -1,0 +1,152 @@
+---
+title: "使用 OpenYurt 添加边缘节点"
+weight: 02
+---
+
+:ks_permission: **节点管理**
+:ks_menu: **边缘节点 > 节点管理**
+
+
+本节介绍如何使用 OpenYurt 边缘运行时添加边缘节点。
+
+== 前提条件
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+== 准备工作
+
+执行节点配置命令前，需要在边缘节点上安装必要的系统软件包。
+
+. 安装依赖项。若边缘节点使用的是 Ubuntu 操作系统，执行以下命令为边缘节点安装依赖项：
++
+--
+[,bash]
+----
+sudo apt-get update
+sudo apt install wireguard wireguard-tools socat conntrack -y
+----
+
+若边缘节点使用其他操作系统，请将 apt 替换为操作系统对应的软件包管理工具。
+--
+
+. 安装 docker 20.10
++
+[,bash]
+----
+curl -fsSL https://get.docker.com -o install-docker.sh && sh install-docker.sh --version 20.10
+----
+
+. 修改 cgroupdriver
++
+[,bash]
+----
+
+cat > /etc/docker/daemon.json <<EOF
+{
+ "exec-opts": ["native.cgroupdriver=systemd"]
+}
+EOF
+----
+
+. 重启 docker
++
+[,bash]
+----
+service docker restart
+----
+
+. 启用 IP 转发。
++
+[,bash]
+----
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.ipv4.ip_forward                 = 1
+EOF
+sysctl --system
+----
+
+
+== 添加边缘节点
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
+
+. 在页面右侧点击**添加**。
+
+. 在**添加边缘节点**对话框，设置边缘节点的参数。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|镜像仓库地址
+|使用默认镜像地址时，无需输入。若要使用非默认的镜像地址，请参阅link:#_配置镜像地址[配置镜像地址]。
+
+|名称
+|边缘节点的名称。系统会自动为边缘节点生成名称，您也可以手动设置边缘节点的名称。
+名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+|添加默认污点
+|是否为边缘节点添加污点以阻止容器组调度到边缘节点上。
+
+|===
+--
+
+. 点击**验证**生成边缘节点配置命令。
++
+====
+* 若该边缘集群为物理集群，yurtadm join 为该物理集群的 IP 地址或者可以直接访问的域名。
++
+image:/images/edgewize/zh/v3.0/physical-cluster-add-node.png[,70%]
+
+* 若该边缘集群为虚拟集群，yurtadm join 为边缘集群名+部署集群时设置的域名（如：oy1.edgewize.io）。在边缘节点上需要修改 hosts 或者 DNS 使其能够解析到 host 集群的 IP 地址上。
++
+--
+image:/images/edgewize/zh/v3.0/vcluster-add-node.png[,70%]
+
+[,bash]
+----
+vi /etc/hosts
+----
+
+[,yaml]
+----
+<host-node-ip> oy1.edgewize.io
+----
+--
+====
+
+. 登录边缘节点并执行上一步生成的命令。
+
+. 刷新{ks_product_left} Web 控制台的**边缘节点**页面。如果添加成功，边缘节点将显示在边缘节点列表。
+
+=== 配置镜像地址
+
+使用 OpenYurt 添加节点时，若要使用非默认的镜像仓库地址，需将配置字典 `yurt-static-set-yurt-hub` 中的镜像地址改为变量，这时在**添加边缘节点**对话框中配置的镜像地址才能生效。
+
+. 进入将使用 OpenYurt 添加节点的边缘集群页面。
+
+. 在左侧导航栏选择**配置 > 配置字典**。
+
+. 搜索 `yurt-static-set-yurt-hub`，点击进入详情页面。
+
+. 点击**更多操作 > 编辑 YAML**。
+
+. 修改 image 配置如下，点击**确定**。
++
+image:/images/edgewize/zh/v3.0/change-image.png[, 80%]
+
+. 在**添加边缘节点**对话框中输入实际的镜像地址。
++
+image:/images/edgewize/zh/v3.0/openyurt-change-image.png[,70%]
+
+== 重置边缘节点
+
+重置节点将清除边缘节点上因执行节点配置命令而创建的资源。
+
+[,bash]
+----
+./yurtadm reset -f
+----

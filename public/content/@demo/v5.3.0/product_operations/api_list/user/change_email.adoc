@@ -1,0 +1,70 @@
+---
+title: ChangeEmail
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| email
+| String
+| true
+| 邮箱
+
+| need_confirm
+| Integer
+| false
+| 是否需要确认
+
+| user
+| String
+| false
+| 用户
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| email
+| String
+| false
+| 邮箱
+
+| user_id
+| String
+| false
+| 用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "email": "4743******",
+  "need_confirm": 0,
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ChangeEmailResponse",
+  "email": "4743******",
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

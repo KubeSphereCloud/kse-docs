@@ -1,0 +1,71 @@
+---
+title: "Set Volume Auto-Expansion"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Persistent Volume Claim, Persistent Volume, Auto-Expansion"
+description: "Introduces how to set volume auto-expansion."
+weight: 02
+---
+
+:ks_permission: **Storage Class Management**
+:ks_navigation: **Storage > Storage Classes**
+
+
+This section describes how to set volume auto-expansion.
+
+Volume capacity auto-expansion refers to the system automatically expanding the volume capacity when the remaining space of the volume falls below a threshold.
+
+
+== Prerequisites
+
+* The **KubeSphere Storage** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+// include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-prer-persistentVolumeCreated.adoc[]
+
+ifeval::["{file_output_type}" == "html"]
+* Ensure that the backend storage system supports volume expansion and that the storage class has the volume expansion feature enabled. For more information, see link:../../../../07-cluster-management/08-storage/02-storage-classes/05-enable-and-disable-volume-operations[Enable and Disable Volume Operations].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+* Ensure that the backend storage system supports volume expansion and that the storage class has the volume expansion feature enabled. For more information, see the "Storage Classes > Enable and Disable Volume Operations" chapter in the *KubeSphere Cluster Management Guide*.
+endif::[]
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-oper-openDetailsPage.adoc[]
+
++
+
+. On the storage class details page, click **Operation > Set Auto-Expansion**.
+
+. In the **Set Auto-Expansion** dialog box, click the **Disabled** button on the right side of the page to enable the auto-expansion feature.
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+If you need to disable the auto-expansion feature, click **Enabled** on the right side of the page.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. In the **Auto-Expansion** settings area, set the maximum capacity, threshold, and increment for expansion.
++
+image:/images/ks-qkcp/zh/v4.1/storage2.png[ scale,100%]
+
+. (Optional) If you need the system to automatically check the volume status and restart the workload, select **Auto-Restart Workload**.
+
+. After the settings are complete, click **OK**.

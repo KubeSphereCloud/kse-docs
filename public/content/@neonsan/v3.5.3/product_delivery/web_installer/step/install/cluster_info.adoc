@@ -1,0 +1,37 @@
+---
+title: "步骤一：集群信息"
+weight: 2
+---
+
+. 登录 NeonSAN Installer 可视化部署界面。
+
+. 进入第一步，根据页面提示，正确填写 NeonSAN 集群信息。
++
+image::/images/neonsan/web_installer_cluster_info_1.png[,70%]
++
+**参数说明：**
++
+* ``集群名称``：当前待部署集群的名称，根据实际情况进行填写，如 ``neonsan``。
+* ``网络``：选择当前环境的网络部署形式，支持**两网部署**或**三网部署**。默认选择**两网部署**，若客户有等保或安全需求，可选择三网部署。
+** 两网部署：NeonSAN 的管理和业务网络复用同一网络，即图中 NeonSAN 管理业务网络，存储网络独立使用单独网络。每个 NeonSAN 节点需要配置两个不同网段的网络。
++
+image::/images/neonsan/web_installer_cluster_info_2.png[,50%]
+** 三网部署：NeonSAN 管理网络、业务网络和存储网络均使用独立网络。每个 NeonSAN 节点需要配置三个不同网段的网络。
++
+image::/images/neonsan/web_installer_cluster_info_3.png[,50%]
+* ``管理网络``：根据网络规划填写管理网络所在网段即可。**两网部署**场景下，业务网络将复用管理网络。
+* ``业务网络``：**三网部署**场景下，需单独配置业务网络，此处填写相应网段即可。
+* ``存储网络``：根据网络规划，填写存储网络所在网段，支持最多填写 2 个存储网络。
+
+* ``管理平台 VIP``：NeonSAN 管理平台 Portal 和 MySQL 服务的虚拟 IP，该 IP 地址可用于登录 Portal Web 页面。配置为与部署 NeonSAN 服务的物理节点的管理 IP 同一网段内未被使用过的 IP 地址均可。
+
+* ``外部 NTP 服务器``：选填项，如需采用外部 NTP 服务器，点击**添加**并填写相应服务器的 IP 地址，否则，保持为空即可。与 IaaS 融合部署场景下，此处需填写 IaaS 的ntp-server 地址。
+* ``告警推送到 BOSS``：是否对接 NeonSAN 告警到 boss。根据实际情况进行修改，默认为``否``。若需要对接 NeonSAN 告警到 boss，则需设置为``是``，并配置以下参数。
+
+** ``url``：开启**告警推送到 BOSS**开关后需配置该参数，BOSS 的 Webhook 服务器的 url，一般使用 proxy vip 和 6777 端口，若使用其他 IP 端口请自行更改 url 中的 IP 和端口。与 SANC 融合部署时，proxy vip 可在企业云平台的 FirstBox 节点查看 /pitrix/conf/variables/variables.yaml 文件的。proxy_floating_ip 字段 。
+** ``zone``：NeonSAN 告警所对接的 boss 的 zone 名称。与 SANC 融合部署时，可从企业云平台的相关配置进行查看，即云平台提前规划好的 zone_name。
+
+
+
+
+

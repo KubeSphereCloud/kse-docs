@@ -1,0 +1,112 @@
+---
+title: 修改IAM用户绑定资源状态（ModifyIAMUserResource）
+weight: 9
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| iam_user_id
+| String
+| false
+| IAM用户ID
+
+| resources
+| Array
+| true
+| 资源ID列表
+
+| status
+| String
+| false
+| 状态
+
+| zone
+| String
+| false
+| Zone
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| iam_user_resource_set
+| Object
+| false
+| 资源列表
+
+| iam_user_resource_set.create_time
+| String
+| false
+| 绑定时间
+
+| iam_user_resource_set.iam_user_id
+| String
+| false
+| IAM用户ID
+
+| iam_user_resource_set.resource_id
+| String
+| false
+| 资源ID
+
+| iam_user_resource_set.resource_type
+| String
+| false
+| 资源类型
+
+| iam_user_resource_set.status
+| String
+| false
+| 状态
+
+| iam_user_resource_set.zone
+| String
+| false
+| 可用区
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMUserResource",
+  "iam_user_id": "iamu-k0i2m98t",
+  "resources": [
+    "i-esdaf97b"
+  ],
+  "status": "active"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyIAMUserResourceResponse",
+  "iam_user_resource_set": [
+    {
+      "create_time": "2023-08-01T08:02:07Z",
+      "iam_user_id": "iamu-k0i2m98t",
+      "resource_id": "i-esdaf97w",
+      "resource_type": "instance",
+      "status": "active",
+      "zone": "testing"
+    }
+  ],
+  "ret_code": 0
+}
+----

@@ -1,0 +1,138 @@
+---
+title: "查看数据库运行状态"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB ClickHouse, 查看数据库运行状态"
+description: "介绍如何查看 ClickHouse 数据库运行状态。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 60febb57984846058bb5606f70555135
+:ks_xref_id: 92fdd32a7294430e91c755c494d22af1
+:ks_comp: ../../../components/
+:ks_title: 查看数据库运行状态
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB ClickHouse, 查看数据库运行状态
+:ks_description: 介绍如何查看 ClickHouse 数据库运行状态。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **应用负载查看**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何查看 ClickHouse 数据库运行状态。
+
+
+== 前提条件link:[id=39323c7f3b674fb7b4b0659be6cf32ff]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/radondb/radondbClickhouse/radondbClickhouse-prer-installRadondbClickHouse.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=af6303972b014f6ca90a6fd91167f92e]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
++
+--
+已安装的 RadonDB ClickHouse 应用将显示在 RadonDB 应用列表中。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|RadonDB ClickHouse 应用在{ks_product_both}平台的名称。
+
+|状态
+|RadonDB ClickHouse 应用的运行状态。
+
+* **创建中**：应用正在创建过程中。
+
+* **更新中**：应用正在更新配置。
+
+* **已完成**：应用更新完成，即将开始运行。
+
+* **失败**：应用创建过程中出现错误导致创建失败。
+
+* **运行中**：应用运行正常。
+
+|应用模板
+|创建 RadonDB ClickHouse 应用所使用的应用模板名称。
+
+|版本
+|ClickHouse 数据库的版本。
+
+|访问地址
+|ClickHouse 数据库的访问地址。每个数据库可提供多个不同用途的访问地址。将光标悬停在访问地址列的数字上可查看 ClusterIP 地址和 NodePort 地址。
+
+* ClusterIP: 用于从{ks_product_both}集群内部的读写 ClickHouse 数据库的地址。
+
+* NodePort: 用于从{ks_product_both}集群外部的读写 ClickHouse 数据库的地址，由{ks_product_both}集群节点 IP 地址和节点端口组成。
+
+以上端口仅监听 HTTP 协议，不支持 TCP 协议客户端（例如 clickhouse-client）。同时，为避免 TCP 连接导致数据倾斜，不建议使用 TCP 协议客户端。
+
+|创建时间
+|RadonDB ClickHouse 应用的创建时间。
+|===
+--
+
++
+
+include::../../../_custom/radondb/radondbClickhouse/radondbClickhouse-oper-openDetailsPage.adoc[]
+
++
+
+. 在 RadonDB ClickHouse 详情页面右侧的**概览**页签查看数据库的基本信息和数据库节点。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|基本信息
+|显示 ClickHouse 数据库的运行状态、分片数据、每个分片的副本数量、每个数据库节点的 CPU 和内存资源、每个数据库节点挂载的卷容量。
+
+|节点
+|显示 ClickHouse 数据库的所有节点及其创建时间、运行状态、容器组 IP 地址、CPU 和内存资源、卷容量。
+|===
+
+ifeval::["{file_output_type}" == "pdf"]
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+在{ks_product_both}平台，每个 ClickHouse 数据库节点被创建为一个容器组。有关容器组的更多信息，请参阅《{ks_product_right}项目管理指南》。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+endif::[]
+--
+
+. 在详情页面右侧点击**监控**页签查看数据库的监控指标。
++
+--
+* 点击下拉列表可选择需要查看的数据库节点。
+
+include::../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../_ks_components/oper-refreshData.adoc[]
+
+有关 ClickHouse 监控指标的更多信息，请参阅 link:https://clickhouse.com[ClickHouse 官方文档]。
+--

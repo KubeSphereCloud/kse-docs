@@ -1,0 +1,30 @@
+---
+title: "View Workspace List"
+keywords: "Kubernetes, {ks_product}, Access Control, Workspace, View Workspace List"
+description: "Describes how to view the workspace list."
+weight: 02
+---
+
+:ks_permission: **Workspace Viewing**
+
+This section describes how to view the workspace list.
+
+== Prerequisites
+
+You need to have the pass:a,q[{ks_permission}] permission on the KubeSphere platform.
+
+== Steps
+
+include::../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
++
+. Click **Workspace Management**. The workspace list displays all workspaces on the current platform.
++
+--
+* In the workspace list, click the name of a workspace to enter it and view and manage resources within the workspace.
+
+* Click the search box above the list and enter a keyword to search for workspaces by name.
+
+include::../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../_ks_components/oper-customizeColumns.adoc[]
+--

@@ -1,0 +1,40 @@
+
+// 准备安装包
+
+. 从以下路径获取最新版本的 Installer 安装包。
++
+[source,shell]
+----
+ftp://ins.qingcloud.com/neonsan/qingstor-installer-1.0/
+----
++
+
+include::../../../../_components/note.adoc[]
+若安装包下载路径不能访问，请与 QingCloud Installer 组联系。
+include::../../../../_components/table_footer.adoc[]
+
+. 选择待部署集群的任一节点。
++
+include::../../../../_components/note.adoc[]
+与 IaaS 融合部署场景下，选择任意一个待部署 NeonSAN 服务的 IaaS Hyper 节点。
+include::../../../../_components/table_footer.adoc[]
+
+. 建立自己电脑与安装节点的 SSH 免密访问通道，访问用户为 root，且后面所有的安装部署均需要使用 root 用户。
++
+include::../../../../_components/note.adoc[] 
+* 该过程为采用访问远端服务器的方式进行 NeonSAN 存储系统部署时所必须。
+* 步骤详见附录 SSH 免密访问。
+include::../../../../_components/table_footer.adoc[]
+
+. 将部署包放置在 root 目录并解压。
++
+[source,shell]
+----
+tar -zxf /root/qingstor-installer_2.X.X_neonsan_3.X.X_all_amd64.tar.gz -C /root/
+----
++
+include::../../../../_components/note.adoc[]
+* 命令行中的包名需替换为实际的包，信创平台安装包名称为：``qingstor-installer_2.X.X_neonsan_3.X.X.kylin_v10_amd64.tar.gz``。
+* 2.X.X 为 Installer 的版本号，建议使用最新的稳定版本。
+* neonsan_3.X.X 为 NeonSAN 的版本号，建议使用最新的稳定版本。
+include::../../../../_components/table_footer.adoc[]

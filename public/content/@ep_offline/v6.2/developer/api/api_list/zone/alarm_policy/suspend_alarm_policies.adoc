@@ -1,0 +1,68 @@
+---
+title: 暂停告警策略（SuspendAlarmPolicies）
+weight: 21
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| alarm_policies
+| Array
+| true
+| 策略id数组
+
+| owner
+| String
+| false
+| 用户
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| job_id
+| String
+| false
+| 任务id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "SuspendAlarmPolicies",
+  "alarm_policies": [
+    "alp-yqugoish"
+  ],
+  "owner": "usr-rrPKHDpJ",
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SuspendAlarmPoliciesResponse",
+  "job_id": "j-iqdopljn63f",
+  "ret_code": 0
+}
+----

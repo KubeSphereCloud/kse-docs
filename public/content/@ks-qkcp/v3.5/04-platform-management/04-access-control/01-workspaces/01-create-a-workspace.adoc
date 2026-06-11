@@ -1,0 +1,79 @@
+---
+title: "创建企业空间"
+keywords: "Kubernetes, {ks_product}, 访问控制, 企业空间, 创建企业空间"
+description: "介绍如何创建企业空间。"
+weight: 01
+---
+
+// :ks_include_id: ec4ace890efb4b96ac74fcc4a511d133
+:ks_xref_id: cb4491a3dc474b08b6c64600aadce03c
+:ks_comp: ../../../../components/
+:ks_title: 创建企业空间
+:ks_keywords: Kubernetes, {ks_product}, 访问控制, 企业空间, 创建企业空间
+:ks_description: 介绍如何创建企业空间。
+:ks_weight: 01
+:ks_icon:
+:ks_menu: **平台管理 > 访问控制**
+:ks_navigation: **企业空间**
+:ks_permission: **企业空间管理**
+
+
+本节介绍如何创建企业空间。
+
+
+== 前提条件link:[id=59b178559123451ab7bea28605f3861c]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=d094182d073e455c900a31f2eccb7761]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. 在**创建企业空间**页面，设置企业空间的基本信息，然后点击**创建**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|企业空间的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+include::../../../../_custom/platformManagement/accessControl/workspaces/workspaces-para-alias.adoc[]
+
+|管理员
+|企业空间的管理员。
+
+include::../../../../_custom/platformManagement/accessControl/workspaces/workspaces-para-description.adoc[]
+|===
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+如果{ks_product_both}平台已启用多集群管理扩展组件，您需要继续在**集群设置**页签选择需要授权给企业空间的集群。企业空间中的资源可以创建在授权给企业空间的集群上。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+企业空间创建完成后将显示在企业空间列表中。
+--

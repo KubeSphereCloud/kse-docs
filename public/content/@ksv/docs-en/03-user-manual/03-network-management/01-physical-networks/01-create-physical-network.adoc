@@ -1,0 +1,67 @@
+---
+title: "Create a physical network"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, physical networks, creation"
+description: "Describes how to create a physical network in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 18ce657aa06441bdb7ecdf186997d5dd
+:ks_xref_id: 15f02bc4edfd44068d2c0d5b24ee7733
+:ks_comp: ../../../../components/
+:ks_title: Create a physical network
+:ks_description: Describes how to create a physical network in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, physical networks, creation
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to create a physical network in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=68d62183f6e94ed894a9f0cf9dd87f5a]
+
+include::../../../../_custom-en/networks/physical-network-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=17dbeb28067045b796c4d2b59f6ed63d]
+
+include::../../../../_custom-en/networks/physical-network-steps.adoc[]
+
+. On the **Physical Networks** page, click **Create** in the upper-right corner.
+. In the dialog box that appears, configure basic information for the physical network, and then click **Next**.  The following table describes the parameters. The following table describes the parameters.
++
+--
+[cols='1a,3a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the physical network.
+
+include::../../../../_custom-en/networks/physical-network-naming-convention.adoc[]
+
+|Type
+|The description of the network {ks_product} provides the following network types:
+
+include::../../../../_custom-en/networks/network-type-description.adoc[]
+
+|Description
+|The description of the network.
+
+include::../../../../_custom-en/networks/description-convention.adoc[]
+|===
+--
+. In the **Select NIC** step, select the NIC that you want to use, and then click **Next**.
++
+--
+include::../../../../_custom-en/networks/nic-config-description.adoc[]
+--
+. Verify that you have selected a valid NIC and click **OK**. The network appears in the network list after it is created.

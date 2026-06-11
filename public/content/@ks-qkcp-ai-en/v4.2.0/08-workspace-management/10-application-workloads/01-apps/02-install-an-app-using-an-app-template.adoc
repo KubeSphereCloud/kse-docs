@@ -1,0 +1,75 @@
+---
+title: "Install an App from an App Template"
+keywords: "Kubernetes, {ks_product}, Project Management, App, Install an App from an App Template"
+description: "Describes how to install an app from an app template."
+weight: 02
+---
+
+
+:ks_permission: **App Instance Creation**
+:ks_navigation: **Application Workloads > Apps**
+
+
+This section describes how to install an app from an app template in a workspace or a third-party app repository.
+
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+To use app templates in a workspace, you need to install and enable the "KubeSphere App Store Management" extension. After installation, the **App Templates** option will appear under the **App Management** menu of the workspace. Then workspace members with relevant permissions can create app templates for the workspace.
+
+|===
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the **Create App** dialog box, click **From App Template**.
+
+. On the **App Template** page, click the **Current Workspace** drop-down list and select **Current Workspace** or an app repository.
+
+. Click the app template you want to use, and then click **Install**.
+
+. Select the installation location for the app, and then click **OK**.
+
++
+
+include::../../../../_custom/projectManagement/apps/apps-oper-installApp.adoc[]
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+App templates and app repositories are created by workspace members with relevant permissions.
+
+For more information about app feature parameters, please contact the app provider.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+After the app is created, it will appear in the app list of the project it belongs to.
+--

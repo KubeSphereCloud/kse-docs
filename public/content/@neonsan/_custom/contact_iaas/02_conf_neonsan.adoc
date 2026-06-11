@@ -1,0 +1,94 @@
+// 配置 NeonSAN
+
+NeonSAN 和 IaaS 均部署完成后，需将 NeonSAN 集群信息添加至 IaaS 端的配置中，详细操作如下。
+
+. 登录 NeonSAN 的任一节点。
+. 执行如下命令，查看 Center 节点 IP 地址。
++
+[source,shell]
+----
+neonsan list_center
+----
+
+. 登录任一 Center 节点，执行以下命令，获取 NeonSAN 的 ZooKeeper 节点 IP 地址和集群名称。
++
+[source,shell]
+----
+cat /etc/neonsan/center.conf
+----
++
+image::/images/neonsan/add_stor_neonsan_config_01.png[,50%]
+
+
+. 登录 IaaS 端的 FirstBox。
+
+. 执行以下命令，修改 `/pitrix/conf/variables/variables.yaml` 文件中如下参数，配置 NeonSAN 集群信息。
++
+[source,shell]
+----
+vi /pitrix/conf/variables/variables.yaml
+----
++
+[source]
+----
+......
+Zone_ID:
+  support_neonsan: 1
+  ...
+  neonsan:
+    neonsan_zookeeper_ips:
+      - '172.30.80.3'
+      - '172.30.80.4'
+      - '172.30.80.5'
+    neonsan_center_ips:
+      - '172.30.80.6'
+      - '172.30.80.7'
+      - '172.30.80.8'
+    neonsan_cluster_name: 'neonsan'
+----
++
+**参数说明**
++
+[cols='1,2']
+|===
+| 参数 | 说明 
+
+| support_neonsan | 修改配置为 `1`。
+| neonsan_zookeeper_ips | 根据示例格式，填写 NeonSAN 集群的 ZooKeeper 节点 IP 地址。
+| neonsan_center_ips | 根据示例格式，填写 NeonSAN 集群的 Center 节点 IP 地址。
+| neonsan_cluster_name | 填写 NeonSAN 集群名称。
+|===
+
++
+include::../../../_components/note.adoc[]
+* 若没有对应参数，则按照示例格式添加对应参数。
+* 若安装企业云平台时已配置 NeonSAN 参数，此步骤仅需查看并确保以上参数均正确配置即可。
+include::../../../_components/table_footer.adoc[]
+
+. 执行以下命令，刷新 NeonSAN 配置到 Hyper、VBR、Webservice 节点。
++
+[source,shell]
+----
+/pitrix/build/build_pkgs.py -p pitrix-neonsan-conf
+----
++
+[source,shell]
+----
+/pitrix/upgrade/update.sh webservice,vbr,hyper pitrix-neonsan-conf,pitrix-neonsan-tool
+----
+. 登录任意 Hyper 或 VBR 节点，执行以下命令，确认配置是否正确。
++
+[source,shell]
+----
+qbd --version
+----
++
+image::/images/neonsan/add_stor_neonsan_config_02.png[,50%]
++
+[source,shell]
+----
+neonsan list_store && neonsan list_ssd && neonsan list_port && neonsan list_pool && neonsan list_parameter
+----
+
++
+image::/images/neonsan/add_stor_neonsan_config_03.png[]

@@ -1,0 +1,47 @@
+---
+title: "Add a security group rule"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, security groups, rules, add"
+description: "Describes how to add a security group rule in the {ks_product} web console."
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: f496795b3d9744c39e879a37be07a7e1
+:ks_xref_id: b5c0921bdf94488fb670cd03b053801b
+:ks_comp: ../../../components/
+:ks_title: Add a security group rule
+:ks_description: Describes how to add a security group rule in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, security groups, rules, add
+:ks_weight: 02
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to add a security group rule in the {ks_product_abbr_full} web console.
+
+{ks_product} provides preset security group rules. You can add a security group rule based on business requirements. User **admin** can add rules to all security groups in your cluster. Project administrators and operators can add rules to the security groups created on their own, and project viewers can view only the security group rules created in the projects to which they belong.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=81f0a12a9fac4e5dbe9e56fbcb8d62e4]
+
+A security group is created, and inbound and outbound traffic is planned for the resources in the security group.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=df7053d52d0a45bf860757e417636513]
+
+include::../../../_custom-en/security-groups/security-group-steps.adoc[]
+
+. On the **Security Groups** page, click the name of a security group to view its details.
+. On the right side of the details page, click **Add Rule**.
+. In the dialog box that appears, configure parameters for the security group rule. You can also select a preset rule in the **Preset Rules** section. 
++
+--
+include::../../../_custom-en/security-groups/security-group-rule-parameters.adoc[]
+--
+. Click **OK**.  The security group rule appears in the security group rule list after it is added.

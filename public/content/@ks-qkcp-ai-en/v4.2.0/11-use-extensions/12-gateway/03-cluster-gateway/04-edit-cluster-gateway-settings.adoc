@@ -1,0 +1,39 @@
+---
+title: "Edit Cluster Gateway Settings"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Cluster Settings, Gateway Settings, Edit Cluster Gateway Settings"
+description: "Describes how to edit cluster gateway settings."
+weight: 04
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: **Cluster Settings > Gateway Settings**
+
+
+This section describes how to edit cluster gateway settings.
+
+
+== Prerequisites
+
+* The **KubeSphere Gateway** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the right side of the page, select **Manage > Edit**.
+
+. In the dialog box that appears, modify the gateway parameters, and then click **OK**.
++
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-para-enableGateway_v42.adoc[]

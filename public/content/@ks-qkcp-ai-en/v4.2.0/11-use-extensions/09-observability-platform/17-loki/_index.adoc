@@ -1,0 +1,21 @@
+---
+title: "Grafana Loki for WizTelemetry"
+keywords: "Kubernetes, {ks_product}, Grafana, loki, Object Storage, Monitoring, Dashboard, Observability"
+description: "Introduces how to use the Grafana Loki for WizTelemetry extension."
+weight: 17
+layout: "second"
+---
+
+Loki is a horizontally scalable, highly available, multi-tenant log aggregation system inspired by Prometheus. By collecting, indexing, and storing log data, it enables users to easily search, query, and visualize log information. Loki supports storing logs in object storage and querying logs from it, making it an excellent choice for low-cost storage of massive logs.
+
+// Loki does not index the content of logs but instead creates a set of labels for each log stream. These labels consist of key-value pairs and are crucial for efficiently organizing, filtering, and searching log data.
+
+The Grafana Loki for WizTelemetry extension supports viewing KubeSphere logs, audit logs, events, and notification history data stored in Loki from the Grafana console.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+The Grafana Loki for WizTelemetry extension only needs to be installed in one cluster.
+|===

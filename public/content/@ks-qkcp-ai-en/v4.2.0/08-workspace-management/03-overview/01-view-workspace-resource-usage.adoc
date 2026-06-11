@@ -1,0 +1,54 @@
+---
+title: "View Resource Usage"
+keywords: "Kubernetes, {ks_product}, Workspace Management, Overview, View Workspace Resource Usage"
+description: "Describes how to view workspace resource usage."
+weight: 01
+---
+
+:ks_permission: **Workspace Settings View**
+:ks_navigation: **Overview > Resource Usage**
+
+This section describes how to view workspace resource usage.
+
+== Prerequisites
+
+:relfileprefix: ../../../
+
+include::../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+== Steps
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
++
+View the number of workspace roles and workspace members.
+
+// ====
+// * The **Resource Usage** tab on the **Overview** page provides the following information:
+// +
+// --
+// [%header,cols="1a,4a"]
+// |===
+// |Parameter |Description
+
+// |Physical Resources
+// |CPU and memory usage of the workspace in the specified cluster.
+
+// |Application Resources
+// |The number of Deployments, StatefulSets, DaemonSets, Jobs, CronJobs, and PersistentVolumeClaims created by the workspace in the specified cluster.
+// |===
+// --
+
+// include::../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+// include::../../../../_ks_components/oper-Autorefresh.adoc[]
+
+// include::../../../../_ks_components/oper-refreshData.adoc[]
+
+// * Click the **Cluster** dropdown in the upper right corner to view data for a specific cluster.
+// ====

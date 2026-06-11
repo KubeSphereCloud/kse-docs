@@ -1,0 +1,13 @@
+---
+title: "应用镜像制作"
+weight: 20
+---
+
+在整个云化应用过程中，制作镜像是最花时间也是最容易出错的一部分，因为每个应用的部署架构不同，调试时间也会差异很大。AppCenter 主要支持 KVM 与 LXC，目前 LXC 暂未开放给用户。
+
+制作镜像主要需要以下几步：
+
+. 创建云服务器。在控制台选择需要的系统镜像创建云服务器，有 Ubuntu、CentOS、Debian、OpenSUSE、Fedora、Windows 等。
+. 安装应用服务。根据应用实际情况进行安装。
+. 安装 agent。下载 AppCenter 提供的 app agent ，有 Linux 版本、 Windows 版本，解压后运行 ./install.sh （Windows 下双击 install.bat）进行安装。agent 中包含了自动配置文件程序 confd， 该程序在开源 confd 的基础上修改了一些 bug 并且增加了一些算术功能。
+. 创建模板文件。模板文件会监听 metadata service 的变化从而更新自己应用的配置文件。这些文件后缀名为 toml 和 tmpl， 每个配置文件需要一套相应的 toml 和 tmpl 模板对应。

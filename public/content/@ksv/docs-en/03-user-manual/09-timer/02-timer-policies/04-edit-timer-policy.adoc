@@ -1,0 +1,50 @@
+---
+title: "Edit a timer policy"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, timer policies, edit"
+description: "Describes how to edit a timer policy in the {ks_product} web console."
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: b5b275eac6114a78b516711658ecfad4
+:ks_xref_id: c3571fe649cb488688b97541c22571d4
+:ks_comp: ../../../../components/
+:ks_title: Edit a timer policy
+:ks_description: Describes how to edit a timer policy in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, timer policies, edit
+:ks_weight: 04
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to edit a timer policy in the {ks_product_abbr_full} web console. The edit operation allows you to modify the name, project, execution interval, and time of a timer policy.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=c9bf2b69024a45d8a780af9bc102d20d]
+
+User **admin** can edit all timer policies in your cluster. Project administrators and operators can edit the timer policies created on their own, and project viewers cannot edit timer policies.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Edit from the list of timer policieslink:[id=07ae7fda608540bf88dce4492643a810]
+
+include::../../../../_custom-en/timer/timer-policy-steps.adoc[]
+
+. Find the timer policy that you want to edit, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Edit** from the drop-down list.
+. In the dialog box that appears, modify the name, project, execution interval, and time of the timer policy, and click **OK**. For more information about parameters, see link:../01-create-timer-policy/[Create a timer policy].
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Edit from the timer policy details pagelink:[id=df3e65de5d7a4178b48648dc1d117bcb]
+
+include::../../../../_custom-en/timer/timer-policy-steps.adoc[]
+
+. On the **Timer Policies** tab, click the name of the timer policy that you want to edit. The details page of the timer policy appears.
+. On the details page of the timer policy, click **Edit** in the upper-left corner.
+. In the dialog box that appears, modify the name, project, execution interval, and time of the timer policy, and click **OK**. For more information about parameters, see link:../01-create-timer-policy/[Create a timer policy].

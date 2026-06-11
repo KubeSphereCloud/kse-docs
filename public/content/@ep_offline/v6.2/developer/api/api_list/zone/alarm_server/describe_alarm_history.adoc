@@ -1,0 +1,410 @@
+---
+title: 获取告警历史信息（DescribeAlarmHistory）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| true
+| action名称
+
+| alarm
+| String
+| false
+| 告警id
+
+| alarm_policy_category
+| String
+| false
+| 告警策略类型
+
+| from_fg
+| Boolean
+| false
+| 是否来自fg的请求
+
+| history_type
+| Array
+| false
+| 告警历史类型
+
+| limit
+| Integer
+| true
+| 返回数据条数
+
+| offset
+| Integer
+| true
+| 分页起始索引
+
+| owner
+| String
+| true
+| 用户id
+
+| verbose
+| String
+| false
+| 是否远程获取告警历史
+
+| zone
+| String
+| true
+| zone区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| DescribeAlarmsResponse
+
+| alarm_history_set
+| Object
+| false
+| 告警历史信息
+
+| alarm_history_set.alarm_history_id
+| String
+| false
+| 告警历史记录Id
+
+| alarm_history_set.alarm_id
+| String
+| false
+| 告警Id
+
+| alarm_history_set.console_id
+| String
+| false
+| ConsoleId
+
+| alarm_history_set.controller
+| String
+| false
+| 控制器
+
+| alarm_history_set.create_time
+| String
+| false
+| 创建时间
+
+| alarm_history_set.description
+| String
+| false
+| 描述
+
+| alarm_history_set.history_data
+| Object
+| false
+| 告警历史记录数据详情
+
+| alarm_history_set.history_data.action
+| Object
+| false
+| 告警行为
+
+| alarm_history_set.history_data.action.create_time
+| String
+| false
+| 创建时间
+
+| alarm_history_set.history_data.action.is_account_contacts
+| Integer
+| false
+| 是否账户联系人
+
+| alarm_history_set.history_data.action.items
+| Object
+| false
+| 通知对象
+
+| alarm_history_set.history_data.action.items.content
+| String
+| false
+| 通知对象内容
+
+| alarm_history_set.history_data.action.items.create_time
+| String
+| false
+| 创建时间
+
+| alarm_history_set.history_data.action.items.notification_item_id
+| String
+| false
+| 通知对象Id
+
+| alarm_history_set.history_data.action.items.notification_item_type
+| String
+| false
+| 通知对象类型
+
+| alarm_history_set.history_data.action.items.remarks
+| String
+| false
+| 备注
+
+| alarm_history_set.history_data.action.items.verified
+| Integer
+| false
+| 是否认证
+
+| alarm_history_set.history_data.action.notification_list_id
+| String
+| false
+| 通知列表Id
+
+| alarm_history_set.history_data.action.notification_list_name
+| String
+| false
+| 通知列表名称
+
+| alarm_history_set.history_data.action.owner
+| String
+| false
+| 用户Id
+
+| alarm_history_set.history_data.action.remarks
+| String
+| false
+| 备注
+
+| alarm_history_set.history_data.action.visibility
+| String
+| false
+| 权限
+
+| alarm_history_set.history_data.trigger_status
+| String
+| false
+| 触发状态
+
+| alarm_history_set.history_type
+| String
+| false
+| 历史记录类型
+
+| alarm_history_set.owner
+| String
+| false
+| 用户Id
+
+| alarm_history_set.policy
+| Object
+| false
+| 告警策略详情
+
+| alarm_history_set.policy.alarm_policy_category
+| String
+| false
+| 告警策略类型
+
+| alarm_history_set.policy.alarm_policy_id
+| String
+| false
+| 告警策略Id
+
+| alarm_history_set.policy.alarm_policy_name
+| String
+| false
+| 告警策略名称
+
+| alarm_history_set.policy.alarm_policy_type
+| String
+| false
+| 告警策略类型
+
+| alarm_history_set.policy.create_time
+| String
+| false
+| 创建时间
+
+| alarm_history_set.policy.description
+| String
+| false
+| 描述
+
+| alarm_history_set.policy.is_applied
+| Integer
+| false
+| 是否应用
+
+| alarm_history_set.policy.notice_count
+| Integer
+| false
+| 通知次数
+
+| alarm_history_set.policy.operator
+| String
+| false
+| 操作
+
+| alarm_history_set.policy.owner
+| String
+| false
+| 用户Id
+
+| alarm_history_set.policy.period
+| String
+| false
+| 监控周期
+
+| alarm_history_set.policy.resource_info
+| String
+| false
+| 资源信息
+
+| alarm_history_set.policy.status
+| String
+| false
+| 策略状态
+
+| alarm_history_set.policy.status_time
+| String
+| false
+| 创建时间
+
+| alarm_history_set.policy.sub_code
+| Integer
+| false
+| 子编码
+
+| alarm_history_set.policy.usage
+| String
+| false
+| 用途
+
+| alarm_history_set.reason
+| String
+| false
+| 告警原因
+
+| alarm_history_set.related_resource
+| String
+| false
+| 关联资源Id
+
+| alarm_history_set.root_user_id
+| String
+| false
+| root用户Id
+
+| ret_code
+| Integer
+| false
+| 返回码
+
+| total_count
+| Integer
+| false
+| 告警历史信息总条数
+
+| trace_id
+| String
+| false
+| 追踪Id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeAlarmHistory",
+  "alarm": "alm-wcvojma9",
+  "alarm_policy_category": "threshold",
+  "history_type": [
+    "status_change",
+    "trigger_action",
+    "config_update"
+  ],
+  "limit": 100,
+  "offset": 0,
+  "owner": "usr-rrPKHDpJ",
+  "verbose": 1,
+  "zone": "staging"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeAlarmHistoryResponse",
+  "alarm_history_set": [
+    {
+      "alarm_history_id": "almh-3apoasvw",
+      "alarm_id": "alm-wcvojma9",
+      "create_time": "2023-05-08T07:23:05Z",
+      "description": "from alarm to ok",
+      "history_data": {
+        "new_status": "ok",
+        "old_status": "alarm",
+        "period": "1m",
+        "policy_type": "instance",
+        "rules": [
+          {
+            "alarm_level_id": "level-00000000",
+            "alarm_policy_id": "alp-nd2ga56x",
+            "alarm_policy_rule_id": "alpr-chgz93r9",
+            "alarm_policy_rule_name": "",
+            "condition_type": "gt",
+            "consecutive_periods": 1,
+            "create_time": "2023-05-04T22:12:14",
+            "data_processor": "raw",
+            "disabled": 0,
+            "group_id": "alpr-chgz93r9",
+            "level": {
+              "alarm_level_id": "level-00000000",
+              "create_time": "2018-04-09T12:52:09",
+              "mail": true,
+              "name": "P0",
+              "owner": "defalut",
+              "root_user_id": "",
+              "sms": true,
+              "update_time": "2018-04-09T12:52:09",
+              "webhook": true,
+              "wechat": true
+            },
+            "meter": "disk-us",
+            "owner": "usr-rrPKHDpJ",
+            "period_end_hhmm": "23:59",
+            "period_start_hhmm": "00:00",
+            "recent_monitor_data": {
+              "/": [
+                [
+                  1683530584,
+                  60
+                ]
+              ]
+            },
+            "status": "ok",
+            "thresholds": "90"
+          }
+        ]
+      },
+      "history_type": "status_change"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 31
+}
+----

@@ -1,0 +1,34 @@
+---
+title: "文件存储 EPFS"
+weight: 5
+draft: true
+---
+// 非基础or重点，不呈现，仅HPC使用
+
+并行文件存储 EPFS（Elastic Parallel File System）是云平台为用户提供的并行文件系统服务，具备弹性扩展、高可靠以及超高性能等特性，可面向超级计算服务等高性能场景。
+
+== 系统架构
+
+EPFS 是承载在 Lustre 文件系统之上的一套云平台管理服务，其架构如下：
+
+image::/images/ep_offline/ep_twp/epfs_01.png[,70%]
+
+== 服务组成
+
+EPFS 服务包含以下三部分：
+
+* QFS 服务：文件系统管理服务，用于管理租户的存储实例（挂载点）。向上提供兼容 QingStor Nas 的统一 API。包含组件：qfs_gateway、qfs_meta、qfs_monitor、lustre_mgs、lustre_agent。
+* Minio 服务：文件管理服务，用于管理租户存储目录下的文件及列表，类似于一个简单的网盘服务。兼容开源 minio API，即 AWS S3 接口。包含组件：minio、lustre_agent。
+* EPFS Console：EPFS 可视化管理控制台，对租户提供挂载点及文件的可视化操作管理界面。
+
+*各组件介绍如下：*
+
+* QFS Gateway：QFS 网关服务，用于处理 HTTP Rest API 请求。
+* QFS Meta：QFS 元数据服务，用于保存业务数据。QFS 内部通过 RPC 通信。
+* Lustre MGS：Lustre 配置管理服务器。QFS Gateway 通过 SSH 通道向 Lustre MGS 下发配置/命令。
+* Luster Agent：Lustre 特权客户端节点。QFS Gateway 通过 SSH 通道向 Lustre Agent 下发配置/命令。
+* IAAS Account：QFS Gateway/Meta 对接 IAAS Account，对 API 请求进行身份鉴权。
+* NewBilling：QFS Gateway 对接 NewBilling，完成 Order、Instance、Notify 等处理。
+* Minio：简单网盘服务，minio 服务一般部署在 Lustre Agent 节点上。
+
+//典型应用场景：https://cwiki.yunify.com/pages/viewpage.action?pageId=23670523

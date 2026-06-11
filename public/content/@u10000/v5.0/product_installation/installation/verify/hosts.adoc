@@ -1,0 +1,95 @@
+---
+title: 配置 Hosts 文件
+weight: 1
+---
+
+在用户登录 Portal 与 Console 页面，确认服务可用之前，需在本地 Hosts 文件中，添加相关信息。详细操作步骤如下。
+
+. 执行如下命令行，登录 FirstBox。命令行中的 `<firstbox ip>` 可查看link:../../firstbox[前文内容]。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 进入脚本所在目录。
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，生成 Host 相关信息。
++
+[source,shell]
+----
+./qs_installer tools --generate-hosts
+----
++
+输出内容如下所示，其中 `default_user` 与 `default_pass` 可用于登录 Portal 与 Console。
++
+[source,shell]
+----
+Usage config dir: /qingstor/etc/
+
+192.168.100.212 console.qingstorage.com
+192.168.100.212 portal.noah.stor.qingstorage.com
+192.168.100.212 stor.qingstorage.com noah.stor.qingstorage.com
+192.168.100.212 s3.stor.qingstorage.com s3.noah.stor.qingstorage.com
+192.168.100.222 n0.noah.stor.qingstorage.com
+192.168.100.222 s0.noah.stor.qingstorage.com
+
+# default_user: qingstor@qingstorage.com
+# default_pass: zhu88jie
+----
+
+. 将以上返回的 Host 相关信息，添加至本机的 Hosts 文件中即可。
++
+include::../../../../../_components/note.adoc[]
+
+* `console.qingstorage.com` 为当前环境的 Console 访问链接。
+* `portal.noah.stor.qingstorage.com` 为当前环境的 Portal 访问链接。
+* `n0.noah.stor.qingstorage.com` 为当前环境文件存储 NFS 服务域名。
+* `s0.noah.stor.qingstorage.com` 为当前环境文件存储 SMB 服务域名。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+// 在用户登录 Portal 与 Console 页面，确认服务可用之前，需在本地 hosts 文件中，添加以下信息。
+
+// [source,shell]
+// ----
+// xx.xx.xx.xx console.<iaas_domain> portal.<zone_id>.<global_domain> <zone_id>.<global_domain> <global_domain>
+// ----
+
+// **填写说明**
+
+// * 各域名之间使用空格隔开，`zone_id、global_domain、iaas_domain` 需根据link:../config_modify/#_base_ini[配置文件]中的内容进行替换。
+// * IP 地址 `xx.xx.xx.xx` 需根据实际情况修改为 {product_name} 网关节点的 IP 地址。
+// * 若以上参数为：
+
+// ** `xx.xx.xx.xx` 为 192.168.100.210
+// ** `zone_id` 为 test
+// ** `global_domain` 为 stor.qingstorage.com
+// ** `iaas_domain` 为 qingcloud.com
+
+
+
+// **示例一**
+
+
+
+// [source,shell]
+// ----
+// 192.168.100.210 console.qingcloud.com portal.test.stor.qingstorage.com test.stor.qingstorage.com stor.qingstorage.com
+// ----
+
+// **示例二**
+
+// 若没有对接 IaaS，则 `iaas_domain` 为 `global_domain` 的上级域名，示例如下：
+
+// [source,shell]
+// ----
+// 192.168.100.210 console.qingstorage.com portal.test.stor.qingstorage.com test.stor.qingstorage.com stor.qingstorage.com
+// ----
+

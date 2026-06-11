@@ -1,0 +1,49 @@
+---
+title: 加载价格（LoadPrice）
+weight: 17
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| apps
+| String
+| false
+| appID
+
+| price_type
+| String
+| false
+| 价格类型
+|===
+
+== 返回数据
+
+此接口仅包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+
+== 请求示例
+[,javascript]
+----
+{
+  "price_type": "reserved_contract"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "LoadPriceResponse",
+  "ret_code": 0
+}
+----

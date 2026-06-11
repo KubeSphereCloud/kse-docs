@@ -1,0 +1,51 @@
+---
+title: "View Federated Project Overview Information"
+keywords: "Kubernetes, {ks_product}, Federated Project, Overview, View Federated Project Overview Information"
+description: "Describes how to view federated project overview information."
+weight: 01
+---
+
+:ks_permission: **Federated Project View**
+:ks_navigation: **Overview**
+
+This section describes how to view federated project overview information.
+
+== Prerequisites
+
+* The **Federated Cluster Application Management** extension must be installed and enabled on the KubeSphere platform.
+
+* {empty}
+include::../../../../_custom/multi-clusterProjectManagement/projectManagement-prer-requiredPermission_v4.adoc[]
+
+== Steps
+
+include::../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage_v4.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+--
+The **Overview** page provides the following information:
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Workspace
+|The workspace to which the federated project belongs.
+
+|Creator
+|The user who created the federated project.
+
+|Resource Status
+|The application resources created and the physical resources used in the federated project. Click the dropdown list in the upper right corner to select a specific cluster where the federated project resides and the time range for the data.
+
+* **Application Resources**: The number of Deployments, StatefulSets, Persistent Volume Claims, Services, and Ingresses created in the federated project.
+
+* **Physical Resources**: The CPU and memory usage of the federated project.
+
+|Top 5 Resource Consumers
+|The 5 workloads with the highest consumption of specific resources in the federated project. Click the dropdown list to select a specific cluster where the federated project resides and sort by CPU, memory, outbound traffic, or inbound traffic.
+|===
+--

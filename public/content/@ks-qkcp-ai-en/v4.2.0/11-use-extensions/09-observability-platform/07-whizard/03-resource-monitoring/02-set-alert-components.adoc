@@ -1,0 +1,146 @@
+---
+title: "Configure Extension"
+keywords: "Kubernetes, {ks_product}, Platform Management, WizTelemetry Global Monitoring, Configure Extension"
+description: "Describes how to configure Whizard extension."
+weight: 02
+---
+
+
+This section describes how to configure the WizTelemetry Global Monitoring extension.
+
+
+== Prerequisites
+
+You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+. On the **Global Overview** page, click image:/images/ks-qkcp/zh/icons/cogwheel.svg[cogwheel,18,18] on the right to enter the **Extension Settings** page.
+
+
+. On the **Data Ingestion** tab, configure the following parameters.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Gateway Settings
+|
+
+* Extension Replicas: Set the number of replicas for the storage gateway extension. The default value is 2.
+
+* Container Quota: Set CPU requests and limits, and memory requests and limits.
+
+|Data Routing
+|
+
+* Data Retention Replicas: Set the number of replicas for the data retention extension. The default value is 1.
+
+* Extension Replicas: Set the number of replicas for the data routing extension. The default value is 2.
+
+* Container Quota: Set CPU requests and limits, and memory requests and limits.
+
+|Local Storage
+|
+
+* Local Data Retention Period: Set the storage duration for local data. The minimum period is at least 3 days, default is 7 days.
+
+* Extension Replicas: Set the number of replicas for the local storage extension. The default value is 2.
+
+* Container Quota: Set CPU requests and limits, and memory requests and limits.
+|===
+--
+
+. On the **Data Query** tab, configure the following parameters.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Basic Settings
+|
+
+* Extension Replicas: Set the number of replicas for the Query extension. The default value is 2.
+
+* Container Quota: Set CPU requests and limits, and memory requests and limits.
+
+|Cache Settings
+|
+
+* Extension Replicas: Set the number of replicas for the Cache extension. The default value is 2.
+
+* Container Quota: Set CPU requests and limits, and memory requests and limits.
+
+|===
+--
+
+. On the **Long-term Storage** tab, click **Enable** to enable the long-term storage extension. After enabling, you can configure parameters for object storage, gateway, retention period, and downsampling.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Object Storage
+|
+
+* Bucket Name: The name of the S3 object storage bucket.
+
+* Region: The geographical region where you created the Bucket.
+
+* Endpoint: The AWS S3 object storage address to connect to.
+
+* Access Key: The key associated with the AWS access key ID.
+
+* Secret Key: The secret key associated with the AWS Access Key ID.
+
+**Advanced Settings**
+
+* HTTP Protocol: Determines whether to enable the insecure HTTP protocol.
+
+* Add Storage Class: Add user metadata for object storage. When enabled, you need to add key-value pairs for the object storage parameters.
+
+* HTTP Configuration: Configure the HTTP client used by the receiver to communicate with HTTP-based API services.
+
+** TLS Certificate: Enable to prove your identity or indicate your right to access online services by submitting a digital certificate.
+
+** TLS Connection
+
+*** CA Certificate: The CA file used to verify the server certificate.
+
+*** Cert File: The certificate file used for client certificate authentication to the server.
+
+*** Key: The key file used for client certificate authentication to the server.
+
+*** Server Name: The ServerName extension to indicate the server's name.
+
+*** Server Certificate Verification: Whether to prove your identity or indicate your right to access online services by submitting a digital certificate.
+
+|Storage Gateway
+|Set CPU requests and limits, and memory requests and limits.
+
+|Compression & Downsampling
+|
+
+* Raw Data Retention Period: The storage period for raw data. Raw data will be deleted after this period.
+
+* 5m Downsampled Data Retention Period: Specifies the storage period for data downsampled to a 5-minute interval.
+
+* 1h Downsampled Data Retention Period: Specifies the storage period for data downsampled to a 1-hour interval.
+
+* Container Quota: Set CPU requests and limits, and memory requests and limits.
+|===
+--
+
+. On the **Rule Calculation** tab, configure the container quota. After configuration, click **OK**.

@@ -1,0 +1,73 @@
+---
+title: "混插环境配置检查"
+weight: 1
+---
+
+[cols="^1h,5"]
+|===
+|验收目的	
+|验证 QingStor NeonSAN 存储系统混插相关配置
+
+|预置条件	
+|QingStor NeonSAN 存储系统已经安装部署完毕，且运行正常。
+
+|测试过程
+a|
+. 逐一登录 NeonSAN 节点服务器。
+. 查看机械盘，objectsize 设置，是否关闭了 trim 以及超时设置。
++
+[source,shell]
+----
+cat /etc/neonsan/store.conf
+----
+
+
+|预期结果	
+a|
+. 成功登录 NeonSAN 节点。
+
+. store.conf文件中，配置需确认如下。
+
+* 磁盘配置
++
+[source,config]
+----
+......
+[ssd.0]
+type="CachedHDD"
+objectsize=4
+[dispatcher]
+ssd_io_timeout=60
+......
+----
+
+* 需配置如下参数：
++
+[source,config]
+----
+......
+[dispatcher]
+conn_close_wait_time=650
+[replicator]
+rep_io_timeout=65
+......
+----
+
+* 私有云磁盘清盘模式：
++
+[source,shell]
+----
+......
+trim_on_reclaim=0
+zero_on_reclaim=0
+......
+----
+
+|验证结果	
+|
+
+|备注	
+|
+|===
+
+

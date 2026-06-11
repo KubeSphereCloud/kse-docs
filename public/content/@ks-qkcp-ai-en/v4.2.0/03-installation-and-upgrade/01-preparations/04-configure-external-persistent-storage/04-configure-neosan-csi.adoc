@@ -1,0 +1,331 @@
+---
+title: "Configuring NeonSAN CSI"
+keywords: "Kubernetes, {ks_product}, Installation, Preparation, Persistent Storage, Network File System, NeonSAN CSI"
+description: "Describes how to configure NeonSAN CSI for a KubeSphere cluster in a production environment."
+weight: 04
+---
+
+
+
+NeonSAN is an enterprise-level distributed block storage system from QingCloud. NeonSAN CSI is a storage plugin provided by the NeonSAN team for Kubernetes, enabling dynamic creation of persistent volumes on the Kubernetes platform.
+
+This section describes how to configure NeonSAN CSI for a KubeSphere cluster in a production environment.
+
+
+== Prerequisites
+
+- You have successfully deployed NeonSAN v2.2.0 or later, and the QBD is installed on each node of the container cluster to connect with NeonSAN. For specific operations, please consult QingCloud's official solution experts or delivery service experts.
+- You have installed Kubernetes v1.16 or later.
+- You have installed Helm on the master node of the container cluster. This section uses Helm 3 as an example.
+
+
+== Steps
+
+
+=== Installing NeonSAN CSI Online
+
+Online installation is suitable when the container cluster can access the external network.
+
+. Execute the following command to add a Helm repository, for example, https://charts.kubesphere.io/test.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ helm repo add ks-test https://charts.kubesphere.io/test
+"ks-test" has been added to your repositories
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to check if the repository was added successfully.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ helm repo list
+NAME        URL
+ks-test     https://charts.kubesphere.io/test
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to update the Chart list in the repository.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ helm repo update
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to search for the NeonSAN CSI installation package in the repository.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ helm search repo neonsan
+NAME                CHART VERSION   APP VERSION DESCRIPTION
+ks-test/csi-neonsan 1.2.2           1.2.0       A Helm chart for NeonSAN CSI Driver
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Check the qbd version installed on the Master node.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ qbd -v
+Package Version:       2.2.0-336092c-202202101432-ubuntu2004
+Loaded Module Version: 2.2.0-336092c-202209010306-testlangchaor01n01
+NeonSAN Static Library Version: 3.0.0-092498bf
+NeonSAN Protocol Version: 1
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to install NeonSAN CSI. Based on the qbd version installed on the Master node's operating system, set the **driver.repository** parameter. For example, if the queried qbd version is 2.2.0, the parameter in the command should be **driver.repository="csiplugin/csi-neonsan-qbd2.2.0"**.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ helm install csi-neonsan ks-test/csi-neonsan --namespace kube-system --set driver.tag="v1.2.3" --set sc.rep_count=2 --set driver.repository="csiplugin/csi-neonsan-qbd2.2.0"
+NAME: csi-neonsan
+LAST DEPLOYED: Fri Nov 20 10:28:32 2020
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to check if NeonSAN CSI was installed successfully.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ helm list -n kube-system
+NAME                    NAMESPACE   REVISION    UPDATED                                 STATUS      CHART                           APP VERSION
+csi-neonsan             kube-system 1           2020-11-20 10:28:32.240990384 +0800 CST deployed    csi-neonsan-1.2.2               1.2.0
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Check if the pods are in the Running state.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ kubectl get pod -n kube-system | grep csi-neonsan
+   kube-system                    csi-neonsan-controller-75dc5cbcff-6gk54                5/5     Running     0          38s
+   kube-system                    csi-neonsan-node-8vd8l                                 2/2     Running     0          38s
+   kube-system                    csi-neonsan-node-dxk2z                                 2/2     Running     0          38s
+   kube-system                    csi-neonsan-node-mp2b2                                 2/2     Running     0          38s
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Check if all NeonSAN CSI components are running normally.
++
+====
+* When the **READY** value equals the **AVAILABLE** value, csi-neonsan-controller is normal.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ kubectl -n kube-system get deployments.apps  csi-neonsan-controller
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+csi-neonsan-controller   1/1     1            1           66m
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+* When the **DESIRED** value equals the **READY** and **AVAILABLE** values, csi-neonsan-node is normal.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ kubectl -n kube-system get daemonsets.apps csi-neonsan-node
+NAME               DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+      csi-neonsan-node   3         3         3       3            3           <none>          66m
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+====
+
+. Check if the StorageClass is installed.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ kubectl get storageclass
+NAME              PROVISIONER                            RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+csi-neonsan       neonsan.csi.qingstor.com               Delete          Immediate              true                   2m56s
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. View the storage pool used by the StorageClass. This storage pool must exist in NeonSAN; otherwise, you cannot use this StorageClass to create volumes.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ kubectl get storageclass csi-neonsan -o yaml | grep pool_name
+pool_name: kube
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Log in to the NeonSAN server and check if the storage pool used by the StorageClass exists. If it does not exist, use the **neonsan create_pool** command to create the storage pool.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ neonsan list_pool -pool kube -detail
+Pool Count:  1
++----------+------+---------------------------+
+|    ID    | NAME |       CREATED TIME        |
++----------+------+---------------------------+
+| 33554432 | kube | 2020-08-07T14:53:52+08:00 |
++----------+------+---------------------------+
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+
+=== Installing NeonSAN CSI Offline
+
+Offline installation is suitable when the container cluster cannot access the external network.
+
+. On your local machine, download the NeonSAN CSI installation package and copy it to the cluster's Master node.
+
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ helm repo add ks-test https://charts.kubesphere.io/test
+"ks-test" has been added to your repositories
+$ helm pull ks-test/csi-neonsan
+$ ls -l csi-neonsan*.tgz
+-rw-r--r--. 1 root root 5196 Nov 20 13:13 csi-neonsan-1.2.2.tgz
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to view all the image files required by NeonSAN CSI.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ helm show values ks-test/csi-neonsan
+driver:
+  repository: csiplugin/csi-neonsan
+  tag: v1.2.0
+  node:
+    repository: csiplugin/csi-neonsan-ubuntu
+    tag: v1.2.0
+provisioner:
+  repository: csiplugin/csi-provisioner
+  tag: v1.5.0
+  volumeNamePrefix: pvc
+attacher:
+  repository: csiplugin/csi-attacher
+  tag: v2.1.1
+resizer:
+  repository: csiplugin/csi-resizer
+  tag: v0.4.0
+snapshotter:
+  repository: csiplugin/csi-snapshotter
+  tag: v2.0.1
+registrar:
+  repository: csiplugin/csi-node-driver-registrar
+  tag: v1.2.0
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Use Docker to download all images to your local machine and package them, or upload them to an internal repository (such as harbor).
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+docker pull csiplugin/csi-neonsan:v1.2.0
+docker pull csiplugin/csi-neonsan-ubuntu:v1.2.0
+docker pull csiplugin/csi-provisioner:v1.5.0
+docker pull csiplugin/csi-attacher:v2.1.1
+docker pull csiplugin/csi-resizer:v0.4.0
+docker pull csiplugin/csi-snapshotter:v2.0.1
+docker pull csiplugin/csi-node-driver-registrar:v1.2.0
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+docker save csiplugin/csi-neonsan:v1.2.0 \
+  csiplugin/csi-neonsan-ubuntu:v1.2.0 \
+  csiplugin/csi-provisioner:v1.5.0 \
+  csiplugin/csi-attacher:v2.1.1 \
+  csiplugin/csi-resizer:v0.4.0 \
+  csiplugin/csi-snapshotter:v2.0.1 \
+  csiplugin/csi-node-driver-registrar:v1.2.0 \
+  -o neonsan-csi-images.tar
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to upload the image package to a directory on all nodes of the cluster, such as the **/tmp** directory, then extract and install it.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ scp neonsan-csi-images.tar user@node1:/tmp/
+scp neonsan-csi-images.tar user@node2:/tmp/
+...
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ tar -xvf /tmp/neonsan-csi-images.tar -C /
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Execute the following command to check if the installation is complete. If you see all NeonSAN CSI images in the list, the installation was successful.
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+$ docker images
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. Refer to steps 8 - 12 in link:#_在线安装_neonsan_csi[Online Installation] to perform post-installation checks.
++
+--
+After NeonSAN CSI is successfully installed, you can view it in the **Storage** area on the KubeSphere web console.
+--

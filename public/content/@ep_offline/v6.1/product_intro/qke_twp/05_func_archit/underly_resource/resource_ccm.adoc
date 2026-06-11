@@ -1,0 +1,10 @@
+---
+title: "资源调用与管理（CCM）"
+weight: 2
+---
+
+CCM（cloud-controller-manager）属于 kubernetes 一个控制平面的组件，运行了特定的云平台的逻辑。
+
+QKE 内置了 https://github.com/yunify/qingcloud-csi[qingcloud-controller-manager]，主要与青云的 IaaS API 进行交互，为 Loadbalancer 类型的服务（service）创建负载均衡器，并配置相关 IP。
+
+image::/images/ep_offline/qke_twp/05_ccm.png[]

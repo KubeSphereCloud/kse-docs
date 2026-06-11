@@ -1,0 +1,28 @@
+---
+title: "iSCSI 存储"
+weight: 2
+---
+
+. 登录{product_console_name_en}。
+. 点击**物理资源** > **存储池管理** > **远端存储**，选择 **iSCSI 存储**页签。
+
+. 平台内的 iSCSI 存储显示在列。列表信息包括：``ID/名称``、``存储 IP 地址``、``端口``以及``添加时间``。
++
+image::/images/express/console/rg_manage_stor_iscsi_2_4.5.png[]
+
+. 点击 iSCSI 存储所在行右侧的更多操作，支持对其进行``编辑``、``删除``和``重新扫描``操作。
++
+
+include::../../../../../../_components/note.adoc[]
+* 编辑操作支持修改其名称 CHAP 用户名和密码。
+* 删除操作时需注意当前的 iSCSI 存储服务器上是否有虚拟磁盘正在使用，若有，则无法删除。
+* 重新扫描操作是对已经添加的 iSCSI 存储进行服务器内的 LUN 扫描。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+
+
+
+

@@ -1,0 +1,149 @@
+---
+title: 查询共享单元成员（GetResourceShareUsers）
+weight: 6
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| limit
+| Integer
+| false
+| 分页大小
+
+| offset
+| Integer
+| false
+| 分页偏移量
+
+| owner
+| String
+| false
+| 资源的所有者
+
+| resource_share_id
+| String
+| false
+| 共享单元id
+
+| zone
+| String
+| true
+| 请求区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| current_count
+| Integer
+| false
+| 当前返回的共享单元数量
+
+| resource_share_user
+| Array
+| false
+| 共享单元用户
+
+| resource_share_user[].email
+| String
+| false
+| 共享单元成员邮箱
+
+| resource_share_user[].iam_role_id
+| String
+| false
+| 共享单元成员角色id
+
+| resource_share_user[].resource_shares
+| Array
+| false
+| 共享单元列表
+
+| resource_share_user[].resources
+| Object
+| false
+| 共享资源信息
+
+| resource_share_user[].resources.resource_share_id
+| String
+| false
+| 共享资源id
+
+| resource_share_user[].status
+| String
+| false
+| 共享单元成员状态
+
+| resource_share_user[].user_id
+| String
+| false
+| 共享单元成员id
+
+| resource_share_user[].user_name
+| String
+| false
+| 共享单元成员名称
+
+| resource_share_user[].user_type
+| String
+| false
+| 共享单元成员类型
+
+| total_count
+| Integer
+| false
+| 共享单元总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "GetResourceShareUsers",
+  "limit": 10,
+  "offset": 0,
+  "owner": "admin",
+  "resource_share_id": "rsg-7d3vqp5i",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetResourceShareUsersResponse",
+  "current_count": 1,
+  "resource_shares_user": [
+    {
+      "email": "welwei@yunify.com",
+      "iam_role_id": "iamr-v3tx07u1",
+      "resource_shares": [
+        "rsg-7d3vqp5i"
+      ],
+      "resources": {},
+      "status": "active",
+      "user_id": "usr-gqn3h1yJ",
+      "user_name": "welwei",
+      "user_type": 0
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1,
+  "trace_id": "Ne6l1F3k"
+}
+----

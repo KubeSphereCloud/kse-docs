@@ -1,0 +1,47 @@
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+ifdef::enable-gateway[]
+|Nginx Ingress Version
+|The version of Nginx Ingress. The KubeSphere gateway extension provides gateway management functionality based on Nginx Ingress.
+endif::[]
+
+|IngressClassName
+|The name of the IngressClass.
+
+|Pod Replicas
+|The desired number of pod replicas. This value must be within the configured range of the minimum and maximum number of actually running pod replicas.
+
+|Running Pod Replica Limits
+|Limits the minimum and maximum number of actually running pod replicas to ensure gateway performance and prevent resource exhaustion.
+
+|External Access Mode
+|The external access mode for the gateway service.
+
+include::../services/services-para-externalAccess.adoc[tag=bullets]
+
+|Tracing
+|Whether to enable tracing for the gateway. To use the tracing feature, the **KubeSphere Service Mesh** extension must be installed and enabled on the KubeSphere platform.
+
+|Load Balancer Provider
+|The load balancer provider for the gateway. When the gateway's external access mode is LoadBalancer, you need to set annotations for the gateway service according to the load balancer plugin and infrastructure environment to create the required load balancer. After selecting a load balancer provider, the system will provide annotation hints when setting gateway service annotations. Available only when the gateway service's external access mode is **LoadBalancer**.
+
+|Annotations
+|Annotations for the gateway service. If a load balancer provider has been selected, the system will display annotation hints in a dropdown list when you click the **Key** text box. Available only when the gateway service's external access mode is **LoadBalancer**. For more information, please contact your infrastructure environment provider.
+
+|Configuration Options
+|Configuration options for the gateway. KubeSphere's gateway functionality is implemented based on the Nginx Ingress Controller. You can set gateway configuration options to control gateway behavior. For more information, please refer to the link:https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/[Nginx Ingress Controller official documentation].
+
+|CPU Reservation
+|The CPU resources reserved for each gateway container, in cores.
+
+|CPU Limit
+|The maximum CPU resources allowed for each gateway container, in cores.
+
+|Memory Reservation
+|The memory resources reserved for each gateway container, in MiB.
+
+|Memory Limit
+|The maximum memory resources allowed for each gateway container, in MiB.
+|===

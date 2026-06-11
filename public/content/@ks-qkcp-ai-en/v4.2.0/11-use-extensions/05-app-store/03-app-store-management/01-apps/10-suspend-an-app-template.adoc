@@ -1,0 +1,47 @@
+---
+title: "Unpublish App Template"
+keywords: "Kubernetes, {ks_product}, App Store Management, App, Unpublish App Template"
+description: "Introduces how to unpublish an app template."
+weight: 10
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **App**
+
+
+
+This section describes how to unpublish an app template.
+
+After an app template is unpublished, the app template and all its app versions will be removed from the App Store. Meanwhile, App Store administrators and workspace members can delete the entire app template or a specific app version within it.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The KubeSphere platform needs to have the **KubeSphere App Store Management** extension installed and enabled.
+
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. On the app template details page, click **Operations**, select **Unpublish**, and then click **OK** in the dialog box that appears.

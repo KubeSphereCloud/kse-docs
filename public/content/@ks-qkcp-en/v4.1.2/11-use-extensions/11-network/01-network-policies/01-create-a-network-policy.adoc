@@ -1,0 +1,52 @@
+---
+title: "Create Network Policies"
+keywords: "Kubernetes, {ks_product-en}, cluster management, network, network policy, create network policy"
+description: "Introduce how to create network policies."
+weight: 01
+---
+
+:ks_permission: **Cluster Network Resource Management**
+:ks_navigation: **Network > Network Policies**
+
+
+This section introduces how to create network policies.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeSphere Network** should have been installed and enabled.
+
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-clickCreate.adoc[]
+
++
+
+. In the **Create Network Policy** dialog box, set the configuration for the network policy, and then click **OK**.
++
+--
+* Click image:/images/ks-qkcp/zh/icons/upload-dark-white.svg[upload-dark-white,18,18] in the upper right corner to upload the configuration file.
+
+* Click image:/images/ks-qkcp/zh/icons/download-dark-white.svg[download-dark-white,18,18] in the upper right corner to download the configuration file.
+
+// Note
+include::../../../../../_ks_components-en/admonitions/note.adoc[]
+
+{ks_product-en} currently does not support creating network policies in a graphical way. For specific parameters of the network policy configuration file, please refer to the link:https://kubernetes.io/zh/docs/concepts/services-networking/network-policies/[Kubernetes Documentation].
+
+include::../../../../../_ks_components-en/admonitions/admonEnd.adoc[]
+
+After the network policy is created, it will be displayed in the network policy list.
+--

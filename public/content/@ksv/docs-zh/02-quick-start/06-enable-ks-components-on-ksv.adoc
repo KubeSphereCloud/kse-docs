@@ -1,0 +1,71 @@
+---
+title: "在{ks_product_both}中开启 KubeSphere 相关组件"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, KubeSphere, 组件, 开启"
+description: "介绍如何在{ks_product_both}中开启 KubeSphere 相关组件。"
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 545e841ae1ac412aa66c149e656d4830
+:ks_xref_id: f784f7016cd1468c8e87dc8d63ccdad7
+:ks_comp: ../../components/
+:ks_title: 在{ks_product_both}中开启 KubeSphere 相关组件
+:ks_description: 介绍如何在{ks_product_both}中开启 KubeSphere 相关组件。
+:ks_keywords: {ks_product_full}, {ks_product}, KubeSphere, 组件, 开启
+:ks_weight: 06
+:ks_logo: 
+:ks_download_url: 
+
+
+{ks_product_abbr_full_right}v1.6.0 及之后的版本支持和 KubeSphere 容器平台融合部署，实现容器和虚拟化工作负载共存共管。本节介绍如何在{ks_product_both}中开启 KubeSphere 相关组件。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=bdfea0e9fdf84e31b06958a0660c4523]
+
+* 请确保您当前的{ks_product_both}集群版本为 v1.6.0 及以上。
+
+* {ks_product_right}集群中默认集成了 KubeSphere 以及监控、日志、审计和事件相关组件。如需开启其他组件，您可以使用开源工具 KubeKey 制作镜像包并导入相关组件。有关 KubeKey 的更多信息，请访问 link:https://github.com/kubesphere/kubekey[GitHub KubeKey 仓库]。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=c691ad4a27fa4f898b73d9e27f0a0d43]
+
+. 以 **admin** 用户登录{ks_product_left} Web 控制台。
+
+. 将光标悬停在页面右下角的 image:/images/ksv/zh/icons/hammer.svg[hammer,18,18] 图标，然后在菜单中选择 **Kubectl**。
+
+. 在 **kubectl** 对话框，执行以下命令开启 KubeSphere 组件：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl -n kubesphere-system patch cc ks-installer -p '{"spec": {"common": {"core": {"console": {"enabled": true}}}}}' --type='merge'
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+. 执行以下命令查看启用日志：
++
+--
+// Bash
+include::../../../_ks_components/code/bash.adoc[]
+
+kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l 'app in (ks-install, ks-installer)' -o jsonpath='{.items[0].metadata.name}') -f
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../_ks_components/admonitions/note.adoc[]
+
+* 组件启用过程可能需要一定时间，请等待启用完成。
+
+* 组件启用完成后，{ks_product} Web 控制台**概览**页面的**系统组件**区域将显示已启用的组件。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--

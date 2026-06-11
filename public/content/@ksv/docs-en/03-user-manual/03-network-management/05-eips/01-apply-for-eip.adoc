@@ -1,0 +1,53 @@
+---
+title: "Apply for an EIP"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, elastic, IP addresses, application"
+description: "Describes how to apply for an EIP in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 5bd2b5a7aacf4f7abed0acd1b37373c3
+:ks_xref_id: e6c0d6b97b424f5cacbefcbeb5edb72c
+:ks_comp: ../../../../components/
+:ks_title: Apply for an EIP
+:ks_description: Describes how to apply for an EIP in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, elastic, IP addresses, application
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to apply for an elastic IP address (EIP) in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=a66686d07bd44f1d927b62be0d08121a]
+
+include::../../../../_custom-en/networks/eip-steps.adoc[]
+
+. On the **EIPs** page, click **Apply** in the upper-right corner.
+. In the dialog box that appears, specify **Name** and **Description** for the EIP.  The following table describes the parameters.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Name
+|The name of the EIP.
+
+include::../../../../_custom-en/networks/naming-convention.adoc[]
+
+|Type
+|The address type of the EIP.   By default, {ks_product} uses IPv4.
+
+|Description
+|The description of the EIP.
+
+include::../../../../_custom-en/networks/description-convention.adoc[]
+|===
+--
+. Click **OK**. The EIP appears in the EIP list after this operation is performed.

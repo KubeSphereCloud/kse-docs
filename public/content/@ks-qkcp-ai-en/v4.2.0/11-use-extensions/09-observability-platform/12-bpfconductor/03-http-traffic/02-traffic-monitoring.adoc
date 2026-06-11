@@ -1,0 +1,69 @@
+---
+title: "Traffic Monitoring"
+keywords: "Kubernetes, {ks_product}, BPFConductor, HTTP Traffic, Traffic Logs, Observability"
+description: "Describes how to view HTTP traffic monitoring for services and pods."
+weight: 02
+---
+
+
+:ks_navigation: **Network > HTTP Traffic**
+
+This section describes how to view HTTP traffic data for a single service or pod.
+
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, see link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Network Observability** extension needs to be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
+. Click the **Traffic Monitoring** tab, then navigate to the **Service Traffic Monitoring** or **Pod Traffic Monitoring** page.
+
+. In the dropdown lists at the top of the page, select the cluster, project, service, or pod to view the HTTP traffic details for the selected service or pod within the specified time range.
++
+--
+// include::../../../../../../_ks_components/oper-refreshListData.adoc[]
+* Click image:/images/ks-qkcp/zh/icons/refresh-light.svg[refresh,18,18] in the upper right corner to refresh the page information.
+
+// include::../../../../../../_ks_components/oper-selectTimeRange.adoc[]
+* Click image:/images/ks-qkcp/zh/icons/clock-2.svg[clock-2,18,18] in the upper right corner to set the time range for the data. The default is **Last 30 minutes**.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|HTTP Request Rate
+|The number of HTTP requests per second.
+
+|HTTP Error Rate
+|The proportion of failed requests (e.g., 0% means all succeeded).
+
+|HTTP Latency
+|
+* P99 Latency: The 99th percentile latency of all requests within the specified time range, meaning 99% of requests had a latency less than or equal to this value.
+
+* P95 Latency: The 95th percentile latency of all requests within the specified time range, meaning 95% of requests had a latency less than or equal to this value.
+
+* Average Latency: The average latency of all requests within the specified time range.
+
+|HTTP Response Data Throughput
+|The total amount of HTTP response data successfully transmitted from the server to the client per second.
+
+|HTTP Route TOP 10
+|This section defaults to showing the top 10 HTTP route endpoints with the highest request volume, along with key performance indicators (such as latency, error rate).
+
+You can also click the dropdown list above the list to select other sorting fields and sorting methods.
+|===
+--

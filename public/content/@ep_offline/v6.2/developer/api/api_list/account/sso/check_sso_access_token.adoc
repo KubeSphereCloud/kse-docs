@@ -1,0 +1,108 @@
+---
+title: 检查单点登录访问凭证（CheckSsoAccessToken）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_token
+| String
+| true
+| 用户访问凭证
+
+| is_filter_user_verify
+| Boolean
+| false
+| 是否过滤用户认证信息
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| access_key
+| String
+| false
+| 用户API秘钥的id
+
+| secret_key
+| String
+| false
+| 用户API秘钥的私钥
+
+| sk
+| String
+| false
+| 用户会话session_key
+
+| token
+| String
+| false
+| 用户访问凭证
+
+| user
+| Object
+| false
+| 用户信息
+
+| user.email
+| String
+| false
+| 用户邮箱
+
+| user.lang
+| String
+| false
+| 用户语言
+
+| user.user_id
+| String
+| false
+| 用户ID
+
+| user.user_name
+| String
+| false
+| 用户名称
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "access_token": "JZOHGWGENRXLKPMEMZYR",
+  "is_filter_user_verify": 0
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "access_key": "JZOHGWGENRXLKPMEMZYR",
+  "action": "CheckSsoAccessTokenResponse",
+  "ret_code": 0,
+  "secret_key": "******",
+  "sk": "7jU85RMTIWLwhsMwHjrhBfxRlEgr9GIYQhhrYRz5",
+  "token": "85RMTIWLwhsMwHjrhBfxRlEgr9GIYQhhrYRz5",
+  "user": {
+    "email": "test@example.com",
+    "lang": "zh-cn",
+    "user_id": "usr-d3Jni5hE",
+    "user_name": "test"
+  }
+}
+----

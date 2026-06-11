@@ -1,0 +1,63 @@
+---
+title: "登录数据库"
+weight: 3
+---
+
+. 登录 QingStor Firstbox。
+
+. 进入安装部署目录。
++
+[,shell]
+----
+cd /qingstor/install/
+----
+
+. 查看数据库的配置文件，记录下用户名密码，及对应的节点信息：
++
+--
+[,shell]
+----
+cat /qingstor/install/deployment/environment/group_vars/all/databases
+----
+回显示例
+[,shell]
+----
+... ...
+mysql_user: "qingstor"              //数据库用户名
+mysql_passwd: 'QS!ows%0923'        //数据库密码
+... ...
+mysql_clusters:
+  neonsan:                             //NeonSAN 示例配置
+... ...
+    masters: 
+      - neonsan-mysql0               //数据库节点
+      - neonsan-mysql1 
+      - neonsan-mysql2 
+mysql_port: 3306
+----
+--
+
+. 根据上一步查询结果，登录数据库节点：
++
+[,shell]
+----
+ssh neonsan-mysql0
+---- 
++
+include::../../../../../../_components/note.adoc[]
+`neonsan-mysql0` 为数据库节点的主机名，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 登录数据库：
++
+[,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h neonsan-mysql0 -P 3306
+----
++
+include::../../../../../../_components/note.adoc[]
+命令行中的数据库名，密码，主机名及端口号，根据步骤 3 查询结果修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+

@@ -1,0 +1,53 @@
+---
+title: "删除安全组规则"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台,安全组, 规则, 删除"
+description: "介绍如何使用{ks_product_both}Web 控制台删除安全组规则。"
+weight: 04
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 5d49c1423e4a48ba90f40d92c768ddef
+:ks_xref_id: 3e3aa3bbd20243d7aacd93268b08c374
+:ks_comp: ../../../components/
+:ks_title: 删除安全组规则
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台删除安全组规则。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台,安全组, 规则, 删除
+:ks_weight: 04
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台删除安全组规则。
+
+系统 **admin** 用户可以删除集群中所有已创建的安全组规则，普通项目管理员和操作员可以删除自身创建的安全组规则，项目观察员没有删除权限。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=3e20c415766d4843b6aa27411cddf422]
+
+include::../../../_custom/security-groups/security-group-rule-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=fce2078b5bda4d02a4566aa60e6e0e62]
+
+include::../../../_custom/security-groups/security-group-steps.adoc[]
+
+. 在安全组列表页面，点击目标安全组名称，进入安全组详情页面。
+
+. 在**上行规则**或**下行规则**页签，找到目标安全组规则，点击右侧的 image:/images/ksv/zh/icons/more.svg[operation-menu,13]，然后在下拉列表中选择**删除**。
+
+. 点击**确定**即可删除目标安全组规则。
++
+--
+// Warning
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+安全组规则删除后无法恢复，请谨慎操作。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

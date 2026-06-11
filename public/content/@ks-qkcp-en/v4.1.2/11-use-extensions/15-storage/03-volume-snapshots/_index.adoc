@@ -1,0 +1,19 @@
+---
+title: "Volume Snapshots"
+keywords: "Kubernetes, {ks_product-en}, cluster management, storage, volume snapshots"
+description: "Learn how to manage volume snapshots."
+weight: 03
+layout: "second"
+---
+
+include::../../../../_custom-en/clusterManagement/volumeSnapshots/volumeSnapshots-desc-volumeSnapshots.adoc[]
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+If you did not specify an external persistent storage system when installing {ks_product-en}, KubeSphere will use the local storage system of the cluster nodes as the persistent storage system. Typically, the local storage system of cluster nodes does not support volume snapshot functionality. 
+
+Before creating a volume snapshot, you need to install a storage plugin for clusters to ensure that the backend storage system supports volume snapshot functionality, and create a link:../04-volume-snapshot-classes/01-create-a-volume-snapshot-class[Volume Snapshot Class].
+|===

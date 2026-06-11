@@ -1,0 +1,178 @@
+---
+title: "使用应用模板安装应用"
+keywords: "Kubernetes, {ks_product}, 企业空间, 应用模板, 使用应用模板安装应用"
+description: "介绍如何使用应用模板安装应用。"
+weight: 05
+---
+
+:ks_permission: **应用/应用版本/应用实例管理**
+:ks_navigation: **边缘管理 > 边缘模板管理**
+
+
+本节介绍如何使用企业空间中的应用模板安装应用。
+
+
+== 前提条件
+
+* {empty}
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+* {ks_product_right}平台需要安装并启用 **KubeSphere 应用商店管理**扩展组件。
+
+ifeval::["{file_output_type}" == "html"]
+* 被部署应用的边缘集群，其节点组需已添加节点，并已绑定将被部署应用的项目。若集群的边缘运行时为 openyurt，节点组还需绑定与该项目对应的容器组 IP 池。有关更多信息，请参阅link:../../../../06-cluster-management/03-node-groups/04-manage-node-groups/03-nodes-in-node-groups/01-add-nodes-to-groups/[在节点组中添加节点]、link:../../../../06-cluster-management/03-node-groups/04-manage-node-groups/05-projects/01-bind-to-a-project/[绑定项目到节点组]、
+link:../../../../06-cluster-management/03-node-groups/04-manage-node-groups/07-nodegroup-settings/05-nodegroup-ip-pools/01-add-a-pod-ip-pool[添加容器组 IP 池]。
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+* 被部署应用的边缘集群，其节点组需已添加节点，并已绑定将被部署应用的项目。若集群的边缘运行时为 openyurt，节点组还需绑定与该项目对应的容器组 IP 池。有关更多信息，请参阅《集群资源管理指南》的“在节点组中添加节点”、“绑定项目到节点组”和“添加容器组 IP 池”章节。
+endif::[]
+
+* 被部署应用的项目已经分配给一个边缘企业空间。
+
+* 您在该项目中具有**应用实例创建**权限。有关更多信息，请参阅“项目成员”和“项目角色”。
+
+== 操作步骤
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. 在应用模板详情页面右侧的**版本**页签，点击所需的应用版本，然后在展开的区域中点击**部署**。
+
+. 在弹出的**位置**对话框，选择应用将被部署到的边缘集群，然后点击**确定**。
+
+. 在**容器组信息**页面，为应用模板管理的容器组设置副本数量、容器、更新策略、安全上下文、调度规则和元数据，然后点击**部署**。
+
+. 在**基本信息**页签，设置应用的基本信息，选择**节点组** > **边缘节点** > **项目/
+IP 池**，然后点击**下一步**。
+
+. 在**存储设置**页签，为应用管理的容器挂载卷，然后点击**下一步**。
+
+. 在**高级设置**页签，设置应用的元数据，然后点击**安装**。
++
+应用安装完成后，即可在目标项目中查看已安装的应用。
+
+== 参数描述
+
+以下介绍如何设置应用的参数。
+
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-basicInformation.adoc[]
+* 基本信息
++
+--
+设置应用的基本信息。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|用户自定义的应用名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母开头并以小写字母或数字结尾，最长 32 个字符。
+
+// |版本
+// |需要安装的应用版本。
+
+|别名
+|应用的别名。不同应用的别名可以相同。别名只能包含中文、字母、数字和连字符（-），不得以连字符（-）开头或结尾，最长 63 个字符。
+
+|描述
+|应用的描述信息。描述可包含任意字符，最长 256 个字符。
+
+// |位置
+// |应用所属的集群和项目。应用所属的企业空间默认为应用模板所属的企业空间。
+
+|边缘节点
+|将容器组副本调度到指定的边缘节点。
+
+点击**添加边缘节点**，依次选择**节点组**、**边缘节点**。
+
+* 若应用将被部署到的边缘集群的运行时为 kubeedge，还需选择**项目**。
+* 若应用将被部署到的边缘集群的运行时为 openyurt，还需选择与选定节点组绑定的 **IP 池**（可手动分配 IP 地址）。因节点组中的 IP 池已经与特定项目绑定，选择 IP 池即选择了应用将被部署到的项目。
+|===
+--
+
+* 存储设置
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-mountVolume.adoc[]
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-collectLogsOnVolume.adoc[]
+
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-enableLogCollectionCluster.adoc[]
+
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-addPVCTemplate.adoc[]
+
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountVolume.adoc[]
+|挂载卷
+|为容器挂载临时卷或 HostPath 卷。
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountSecretOrConfigmap.adoc[]
+|===
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-oper-editDeleteVolume_new.adoc[]
+--
+
+// * 存储设置 > 添加持久卷声明模板
+// +
+// --
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-volumeTemplate.adoc[]
+// --
+
+// * 存储设置 > 挂载卷 > 持久卷
+// +
+// --
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-persistentVolume.adoc[]
+// --
+
+* 存储设置 > 挂载卷 > 临时卷
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-temporaryVolume_new.adoc[]
+--
+
+* 存储设置 > 挂载卷 > HostPath 卷
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-hostpathVolume.adoc[]
+--
+
+* 存储设置 > 挂载配置字典或保密字典
++
+--
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountConfigmapSecret.adoc[]
+--
+
+* 高级设置
++
+--
+设置应用的元数据。
+
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-podIpPool.adoc[]
+
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-selectNode.adoc[]
+
+|添加元数据
+|
+// include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-setWorkloadMetadata.adoc[]
+
+include::../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-Metadata.adoc[]
+|===
+--

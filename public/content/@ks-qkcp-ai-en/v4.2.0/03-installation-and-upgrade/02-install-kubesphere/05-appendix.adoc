@@ -1,0 +1,671 @@
+---
+title: "Appendix: KubeSphere Core Advanced Configuration"
+weight: 05
+---
+
+// Source: https://github.com/kubesphere/project/issues/6557#issuecomment-3060026514
+== KubeSphere Helm Chart Parameters
+
+[discrete]
+=== Global Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `global.imageRegistry`    | Global Docker image registry address                     | `registry.cn-beijing.aliyuncs.com`
+| `global.tag`              | Global Docker image tag                     | `""`
+| `global.imagePullSecrets` | Global Docker registry secret name array             | `[]`
+|===
+
+[discrete]
+=== Common Parameters
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `nameOverride`      | String to partially override `common.names.fullname`     | `""`
+| `fullnameOverride`  | String to fully override `common.names.fullname`     | `""`
+| `commonLabels`      | Labels added to all deployed objects                    | `{}`
+| `commonAnnotations` | Annotations added to all deployed objects                    | `{}`
+|===
+
+[discrete]
+=== Multi-cluster Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `multicluster.role`            | Multi-cluster role (host/member)   | `""`
+| `multicluster.hostClusterName` | Host cluster name                 | `""`
+|===
+
+[discrete]
+=== Portal Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `portal.hostname`  | Public ingress domain name or IP address for the `ks-console` service          | `ks-console.kubesphere-system.svc`
+| `portal.http.port` | HTTP port number exposed by the `ks-console` service through the public ingress                             | `30880`
+|===
+
+[discrete]
+=== S3 Storage Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `s3.endpoint`        | S3 endpoint URL      | `""`
+| `s3.region`          | S3 region          | `us-east-1`
+| `s3.disableSSL`      | Disable S3 SSL      | `true`
+| `s3.forcePathStyle`  | Force S3 path style | `true`
+| `s3.accessKeyID`     | S3 access key ID   | `admin`
+| `s3.secretAccessKey` | S3 secret access key  | `admin`
+| `s3.bucket`          | S3 bucket name    | `uploads`
+|===
+
+[discrete]
+=== Authentication Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `authentication.authenticateRateLimiterMaxTries`     | Maximum authentication attempts         | `10`
+| `authentication.authenticationRateLimiterDuration`   | Rate limiter duration           | `10m0s`
+| `authentication.loginHistoryRetentionPeriod`         | Login history retention period         | `168h`
+| `authentication.enableMultiLogin`                    |  Enable multi-point login           | `true`
+| `authentication.maxInactivityDuration`               | Maximum inactivity duration       | `0s`
+| `authentication.adminPassword`                       | Administrator password               | `""`
+| `authentication.issuer.maximumClockSkew`             | Maximum allowed clock skew during JWT token verification         | `10s`
+| `authentication.issuer.jwtSecret`                    | Secret key used to sign JWTs                 | `""`
+| `authentication.issuer.accessTokenMaxAge`            | Access token maximum validity period       | `2h`
+| `authentication.issuer.accessTokenInactivityTimeout` | Inactivity timeout for JWT access tokens       | `30m`
+|===
+
+[discrete]
+=== Security Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `security.passwordPolicy.expireEnabled`       | Enable password expiration                                | `false`
+| `security.passwordPolicy.maxAgeDays`          | Maximum password validity period (days)                        | `90`
+| `security.passwordPolicy.reminderDays`        | Reminder days before password expiration                          | `7`
+| `security.passwordPolicy.forceChangeOnExpire` | Force user to change password upon expiration                  | `false`
+|===
+
+[discrete]
+=== Experimental Features
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `experimental.validationDirective`           | Resource validation mode (Strict/Ignore/Warn)                 | `""`
+| `experimental.maintenance.enabled`           | Enable maintenance mode                            | `false`
+| `experimental.maintenance.platformMaintenance` | Enable platform maintenance                            | `false`
+| `experimental.maintenance.description`       | Description information during platform maintenance                                | `""`
+| `experimental.openAPI.enabled`               | Enable OpenAPI                           | `false`
+| `experimental.hnc.enabled`                   | Enable HNC (Hierarchical Namespace Controller)           | `false`
+|===
+
+[discrete]
+=== Auditing Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `auditing.enable`              | Enable auditing                                | `false`
+| `auditing.auditLevel`          | Audit level (Metadata/Request/RequestResponse)         | `Metadata`
+| `auditing.logOptions.path`     | Audit log path                            | `/etc/audit/audit.log`
+| `auditing.logOptions.maxAge`   | Maximum retention days for audit logs                     | `7`
+| `auditing.logOptions.maxBackups` | Maximum number of audit log backups                      | `10`
+| `auditing.logOptions.maxSize`  | Maximum size of audit log file (MB)               | `100`
+|===
+
+[discrete]
+=== Service Account Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `serviceAccount.create`     | Create service account         | `true`
+| `serviceAccount.annotations` | Service account annotations         | `{}`
+| `serviceAccount.name`       | Service account name         | `kubesphere`
+|===
+
+[discrete]
+=== Pod Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `tolerations` | Pod toleration configuration                            | `[]`
+| `affinity`    | Pod affinity configuration                          | `{}`
+| `nodeSelector` | Pod node selector                          | `{}`
+| `internalTLS` | Enable inter-component TLS communication                      | `false`
+|===
+
+[discrete]
+=== API Server Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `apiserver.image.registry`    | Image registry address for ks-apiserver                                     | `""`
+| `apiserver.image.repository`  | Image repository path for ks-apiserver                            | `kse/ks-apiserver`
+| `apiserver.image.tag`         | Image tag for ks-apiserver                                     | `""`
+| `apiserver.image.digest`      | Image digest for ks-apiserver                                    | `""`
+| `apiserver.image.pullPolicy`  | Image pull policy for ks-apiserver                     | `IfNotPresent`
+| `apiserver.containerPorts`    | List of ports enabled for the ks-apiserver container                                   | `[]`
+| `apiserver.resources.limits`  | Resource limits for the ks-apiserver container                                       | `{}`
+| `apiserver.resources.requests` | Resource requests for the ks-apiserver container                                       | `{}`
+| `apiserver.command`           | Override default container command                                                 | `[]`
+| `apiserver.extraEnvVars`      | List of additional environment variables                            | `[]`
+| `apiserver.extraVolumeMounts` | List of additional volumeMounts                         | `[]`
+| `apiserver.extraVolumes`      | List of additional volumes                              | `[]`
+| `apiserver.hardAntiAffinity`  | Whether to enable hard anti-affinity scheduling                            | `false`
+|===
+
+[discrete]
+=== Console Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `console.image.registry`              |  Console image registry address                                                 | `""`
+| `console.image.repository`            | Image namespace for console                                             | `kse/ks-console`
+| `console.image.tag`                   | Console image tag                                                 | `""`
+| `console.image.digest`                | Console image digest                                                 | `""`
+| `console.image.pullPolicy`            | Console image pull policy                                             | `IfNotPresent`
+| `console.config.enableKubeConfig`     | Enable kubeconfig in the console                                       | `true`
+| `console.config.enenableNodeListTerminal` | Enable node list terminal in the console                                     | `true`
+| `console.containerPorts`              | List of ports enabled for the ks-console container                                   | `[]`
+| `console.nodePort`                    | Node port for the console service                                           | `30880`
+| `console.resources.limits`            | Resource limits for the ks-console container                                       | `{}`
+| `console.resources.requests`          | Resource requests for the ks-console container                                       | `{}`
+| `console.command`                     | Override default container command                                               | `[]`
+| `console.extraEnvVars`                | Array of additional environment variables added to ks-console                             | `[]`
+| `console.extraVolumeMounts`           | List of additional volumeMounts for the ks-console container                           | `[]`
+| `console.extraVolumes`                | List of additional volumes for the ks-console Pod                                | `[]`
+| `console.hardAntiAffinity`            | Whether to force ks-console Pods to run on different nodes                         | `false`
+|===
+
+[discrete]
+=== Controller Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `controller.image.registry`   | Controller image registry address                                                           | `""`
+| `controller.image.repository` | Image namespace for controller                                                       | `kse/ks-controller-manager`
+| `controller.image.tag`        | Controller image tag                                                           | `""`
+| `controller.image.digest`     | Controller image digest                                                           | `""`
+| `controller.image.pullPolicy` | Controller image pull policy                                                       | `IfNotPresent`
+| `controller.containerPorts`   | List of ports enabled for the ks-controller-manager container                                   | `[]`
+| `controller.resources.limits` | Resource limits for the ks-controller-manager container                                       | `{}`
+| `controller.resources.requests` | Resource requests for the ks-controller-manager container                                       | `{}`
+| `controller.command`          | Override default container command                                                         | `[]`
+| `controller.extraEnvVars`     | Array of additional environment variables added to ks-controller-manager                            | `[]`
+| `controller.extraVolumeMounts` | List of additional volumeMounts for the ks-controller-manager container                          | `[]`
+| `controller.extraVolumes`     | List of additional volumes for the ks-controller-manager Pod                               | `[]`
+| `controller.hardAntiAffinity` | Whether to force ks-controller-manager Pods to run on different nodes                        | `false`
+|===
+
+[discrete]
+=== Agent Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+
+| `agent.replicaCount` | Agent replica count        | `1`
+|===
+
+[discrete]
+=== Helm Executor Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default
+| `helmExecutor.timeout`           | Helm executor timeout                | `10m`
+| `helmExecutor.historyMax`        | Maximum number of Helm history records              | `2`
+| `helmExecutor.jobTTLAfterFinished` | Time-to-live after Job completion               | `0s`
+| `helmExecutor.image.registry`    | Helm executor image registry address                | `""`
+| `helmExecutor.image.repository`  | Helm executor image namespace            | `kubesphereio/kubectl`
+| `helmExecutor.image.tag`         | Helm executor image tag                | `v1.33.1`
+| `helmExecutor.image.pullPolicy`  | Helm executor image pull policy            | `IfNotPresent`
+| `helmExecutor.resources.limits`   | Helm executor resource limits              | `{}`
+| `helmExecutor.resources.requests` | Helm executor resource requests              | `{}`
+| `helmExecutor.affinity`           | Helm executor affinity configuration            | `{}`
+|===
+
+[discrete]
+=== Composed App Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `composedApp.appSelector` | Selector for filtering K8s applications that need coordination          | `""`
+|===
+
+[discrete]
+=== Kubectl Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `kubectl.image.registry`   | Kubectl image registry address    | `""`
+| `kubectl.image.repository` | Kubectl image namespace | `kubesphereio/kubectl`
+| `kubectl.image.tag`        | Kubectl image tag     | `v1.33.1`
+| `kubectl.image.pullPolicy` | Kubectl image pull policy | `IfNotPresent`
+|===
+
+[discrete]
+=== Ingress Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `ingress.enabled`          | Enable Ingress                            | `false`
+| `ingress.ingressClassName` | Ingress class name                          | `""`
+| `ingress.tls.enabled`      | Enable TLS                                | `true`
+| `ingress.tls.source`       | TLS source (generation/importation/Let's Encrypt)       | `generation`
+| `ingress.tls.secretName`   | TLS certificate Secret name                      | `kubesphere-tls-certs`
+|===
+
+[discrete]
+=== Let's Encrypt Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `letsEncrypt.environment` | Let's Encrypt environment (production/staging)          | `production`
+|===
+
+[discrete]
+=== Certificate Manager Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `certmanager.duration`    | Certificate validity period                     | `2160h`
+| `certmanager.renewBefore` | Certificate renewal time before expiration               | `360h`
+|===
+
+[discrete]
+=== Terminal Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `terminal.kubectl.enabled`          | Enable kubectl terminal              | `true`
+| `terminal.kubectl.image.registry`   | kubectl terminal image registry address          | `""`
+| `terminal.kubectl.image.repository` | kubectl terminal image namespace      | `kubesphereio/kubectl`
+| `terminal.kubectl.image.tag`        | kubectl terminal image tag          | `v1.33.1`
+| `terminal.kubectl.image.pullPolicy` | kubectl terminal image pull policy      | `IfNotPresent`
+| `terminal.node.enabled`             | Enable node terminal                 | `true`
+| `terminal.node.image.registry`      | Node terminal image registry address             | `""`
+| `terminal.node.image.repository`    | Node terminal image namespace         | `kubesphereio/kubectl`
+| `terminal.node.image.tag`           | Node terminal image tag             | `v1.33.1`
+| `terminal.node.image.pullPolicy`    | Node terminal image pull policy         | `IfNotPresent`
+| `terminal.pod.enabled`              | Enable pod terminal                 | `true`
+| `terminal.pod.uploadFileLimit`      | Pod terminal file upload limit          | `100Mi`
+| `terminal.pod.uploadFileEnabled`    | Enable file upload for pod terminal      | `true`
+| `terminal.pod.downloadFileEnabled`  | Enable file download for pod terminal      | `true`
+|===
+
+[discrete]
+=== Cloud Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `cloud.enabled`   | Enable cloud features                     | `false`
+| `cloud.env`       | Cloud environment                         | `kubesphere.cloud`
+| `cloud.customEnv` | Custom cloud environment configuration                | `{}`
+|===
+
+[discrete]
+=== Extension Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `extension.imageRegistry`            | Image registry address for extensions                  | `""`
+| `extension.nodeSelector`             | Node selector for extensions              | `{}`
+| `extension.ingress.ingressClassName` | Ingress class name for extensions           | `""`
+| `extension.ingress.domainSuffix`     | Domain suffix automatically assigned to extensions             | `""`
+| `extension.ingress.httpPort`         | HTTP port automatically assigned to extensions               | `80`
+| `extension.ingress.httpsPort`        | HTTPS port automatically assigned to extensions                | `443`
+|===
+
+[discrete]
+=== High Availability Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `ha.enabled` | Enable high availability mode      | `false`
+|===
+
+[discrete]
+=== Redis Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `redis.port`                     | Redis service port           | `6379`
+| `redis.replicaCount`             | Redis replica count           | `1`
+| `redis.image.registry`           | Redis image registry address        | `""`
+| `redis.image.repository`         | Redis image namespace        | `kubesphereio/redis`
+| `redis.image.digest`             | Redis image digest            | `""`
+| `redis.image.tag`                | Redis image tag            | `7.2.4-alpine`
+| `redis.image.pullPolicy`         | Redis image pull policy        | `IfNotPresent`
+| `redis.persistentVolume.enabled` | Enable Redis persistent volume        | `true`
+| `redis.persistentVolume.size`    | Redis persistent volume size        | `2Gi`
+|===
+
+[discrete]
+=== Redis High Availability Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `redisHA.enabled`                      | Enable Redis high availability            | `false`
+| `redisHA.redis.port`                   | Redis high availability port            | `6379`
+| `redisHA.image.registry`               | Redis high availability image registry address      | `""`
+| `redisHA.image.repository`             | Redis high availability image namespace      | `kubesphereio/redis`
+| `redisHA.image.tag`                    | Redis high availability image tag          | `7.2.8-alpine`
+| `redisHA.image.pullPolicy`             | Redis high availability image pull policy      | `IfNotPresent`
+| `redisHA.persistentVolume.enabled`     | Enable Redis high availability persistent volume      | `true`
+| `redisHA.persistentVolume.size`        | Redis high availability persistent volume size      | `2Gi`
+| `redisHA.auth`                         | Enable Redis high availability authentication         | `true`
+| `redisHA.existingSecret`               | Redis high availability existing secret name      | `redis-secret`
+| `redisHA.tolerations`                  | Redis high availability tolerations         | `[]`
+| `redisHA.hardAntiAffinity`             | Redis high availability hard anti-affinity        | `false`
+| `redisHA.additionalAffinities`         | Redis high availability additional affinity settings    | `{}`
+| `redisHA.haproxy.servicePort`          | HAProxy service port            | `6379`
+| `redisHA.haproxy.containerPort`        | HAProxy container port            | `6379`
+| `redisHA.haproxy.image.registry`       | HAProxy image registry address         | `""`
+| `redisHA.haproxy.image.repository`     | HAProxy image namespace         | `kubesphereio/haproxy`
+| `redisHA.haproxy.image.tag`            | HAProxy image tag             | `3.0.8-alpine`
+| `redisHA.haproxy.image.digest`         | HAProxy image digest             | `""`
+| `redisHA.haproxy.image.pullPolicy`     | HAProxy image pull policy         | `IfNotPresent`
+| `redisHA.haproxy.hardAntiAffinity`     | HAProxy hard anti-affinity settings        | `false`
+| `redisHA.haproxy.additionalAffinities` | HAProxy additional affinity configuration        | `{}`
+|===
+
+[discrete]
+=== KubeSphere CRDs Configuration  
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `ksCRDs.kubectl.image.registry`   | kubectl image registry address used for CRDs | `""`
+| `ksCRDs.kubectl.image.repository` | kubectl image namespace used for CRDs | `kubesphereio/kubectl`
+| `ksCRDs.kubectl.image.tag`        | kubectl image tag used for CRDs    | `v1.33.1`
+| `ksCRDs.kubectl.image.pullPolicy` | kubectl image pull policy used for CRDs | `IfNotPresent`
+|===
+
+[discrete]
+=== KSE Extension Repository Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `kseExtensionRepository.enabled`          | Enable KSE extension repository            | `true`
+| `kseExtensionRepository.image.registry`   | Extension repository image registry address              | `""`
+| `kseExtensionRepository.image.repository` | Extension repository image namespace              | `kse/extensions-museum`
+| `kseExtensionRepository.image.tag`        | Extension repository image tag                 | `v11.0.0`
+| `kseExtensionRepository.image.pullPolicy` | Extension repository image pull policy              | `IfNotPresent`
+|===
+
+[discrete]
+=== KubeSphere Console Embed Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `ksConsoleEmbed.image.repository` | Console embed image namespace      | `kse/ks-console-embed`
+| `ksConsoleEmbed.image.tag`        | Console embed image tag          | `""`
+| `ksConsoleEmbed.image.pullPolicy` | Console embed image pull policy      | `IfNotPresent`
+|===
+
+[discrete]
+=== Application Configuration
+
+[%header,cols="1a,3a,1a"]
+|===
+|Parameter |Description |Default Value
+
+| `application.builtinRepo.enabled` | Enable built-in repository      | `true`
+|===
+
+
+== TLS Configuration
+
+. Select SSL Configuration
++
+--
+KubeSphere security configuration is divided into two parts: **Gateway SSL Configuration** and **Internal Service SSL Configuration**. The **Gateway SSL Configuration** supports the following three modes by default to enable SSL/TLS for secure access.
+--
+
+.. Gateway SSL Configuration
++
+--
+[%header,cols="1,2,1"]
+|===
+|Configuration
+|Helm Chart Option
+|Requires cert-manager
+
+|TLS certificate generated by KubeSphere |ingress.tls.source=generation |No
+|Let’s Encrypt |ingress.tls.source=letsEncrypt |Yes
+|Import existing certificate |ingress.tls.source=importation |No
+
+|===
+
+* TLS certificate generated by KubeSphere: Supports both cert-manager and helm methods.
+
+** If cert-manager is already installed in the Kubernetes cluster, cert-manager is preferred for generating certificates. KubeSphere uses cert-manager to issue and manage certificates. KubeSphere generates its own CA certificate, uses that CA to sign the certificate, and then cert-manager manages that certificate.
+
+** If cert-manager is not installed, helm is used to generate the certificate. During the helm installation process, KubeSphere generates a CA and TLS certificate based on the configured `hostname`. Under this option, certificates do not support automatic expiration rotation.
+
+* Let's Encrypt
++
+Using the Let's Encrypt option requires cert-manager. However, in this case, cert-manager is combined with a special issuer for Let's Encrypt that performs all the operations required to obtain a certificate issued by Let's Encrypt, including request and validation. This configuration uses HTTP validation (HTTP-01), so the load balancer must have a public DNS record accessible from the internet.
+
+* Import existing certificate
++
+Use an existing public or private certificate issued by a CA. KubeSphere will use this certificate to secure WebSocket and HTTPS traffic. In this case, you must upload the certificate and its associated key in PEM format named tls.crt and tls.key respectively. If you are using a private CA, you must also upload that CA certificate. This is because your nodes may not trust this private CA.
+--
+
+.. Internal Service SSL Configuration
++
+--
+After enabling internal SSL configuration, both the Console UI and Apiserver in KubeSphere will enable HTTPS, with built-in support for cert-manager and helm to generate certificates. If cert-manager is installed in the Kubernetes cluster, cert-manager is prioritized for generating/managing certificates. The certificate's DNS defaults to the internal Service DNS of the Console UI and Apiserver within the Kubernetes cluster.
+
+[%header,cols="1,1,1"]
+|===
+|Configuration |Helm Chart Option |Requires cert-manager
+|Enable internal SSL |internalTLS=true |No
+
+|===
+--
+
+. Install cert-manager 
++
+--
+If using your own certificate file (ingress.tls.source=importation), you can skip this step.
+
+Installing cert-manager is only required when using certificates generated by KubeSphere (ingress.tls.source=generation) or certificates issued by Let's Encrypt (ingress.tls.source=letsEncrypt).
+
+[,bash]
+----
+# Add Jetstack Helm repository
+helm repo add jetstack https://charts.jetstack.io
+
+# Update local Helm Chart repository cache
+helm repo update
+
+# Install cert-manager Helm Chart
+helm install cert-manager jetstack/cert-manager -n cert-manager --create-namespace --set prometheus.enabled=false
+# Or
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/<VERSION>/cert-manager.yaml
+    
+----
+After installing cert-manager, check the running pods in the cert-manager namespace to verify it has been deployed correctly:
+
+[,bash]
+----
+kubectl get pods --namespace cert-manager
+----
+--
+
+. Enable SSL configuration for KubeSphere via Helm based on your chosen certificate option.
+
+.. Enable Gateway SSL Configuration
++
+--
+* KubeSphere Generated Certificate
++
+[,bash]
+----
+helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version \
+--set ingress.enabled=true \
+--set hostname=kubesphere.my.org
+----
+
+* Let's Encrypt
++
+This option uses cert-manager to automatically request and renew Let's Encrypt certificates. Let's Encrypt is free and a trusted CA, thus providing valid certificates.
++
+[,bash]
+----
+helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version \
+--set hostname=kubesphere.my.org \
+--set ingress.enabled=true \
+--set ingress.tls.source=letsEncrypt \
+--set letsEncrypt.email=me@example.org
+----
+
+* Import External Certificate
++
+[,bash]
+----
+# Import external certificate
+kubectl create secret tls tls-ks-core-ingress --cert=tls.crt --key=tls.key -n kubesphere-system
+
+# Install KubeSphere
+helm upgrade --install -n kubesphere-system --create-namespace ks-core
+$chart --version $version \
+--set ingress.enabled=true \
+--set hostname=kubesphere.my.org \
+--set ingress.tls.source=importation
+----
+--
+
+.. Enable Internal Service SSL Configuration
++
+[,bash]
+----
+helm upgrade --install -n kubesphere-system --create-namespace ks-core
+$chart --version $version \
+--set internalTLS=true
+----
+
+== Configure the ratelimit Rate Limiter
+
+After enabling the rate limiter, it will independently rate-limit requests for all users, primarily supporting the following two methods:
+
+* Set a rate limit for each user in KubeSphere. Setting an independent rate limit for each user is not currently supported.
+
+* Set an independent rate limit for each ServiceAccount in KubeSphere.
+
+[discrete]
+=== Enable the Rate Limiter
+
+Enabling the rate limiter sets a rate limit for each user in KubeSphere.
+
+. Modify the kubesphere-system configuration file.
++
+--
+[,bash]
+----
+kubectl -n kubesphere-system edit cm kubesphere-system
+----
+
+Add the following content:
+[,yaml]
+----
+rateLimit:
+  enable: true   # Enable the rate limiter
+  driver: memory # Memory mode
+  QPS: 40.0      # Token recovery rate
+  burst: 80      # Token bucket capacity
+----
+--
+
+. Restart ks-apiserver.
++
+[,bash]
+----
+kubectl -n kubesphere-system rollout restart deploy ks-apiserver
+----
+
+[discrete]
+=== Set ServiceAccount Rate Limiter
+
+Before setting, you need to enable the rate limiter as per the previous step. Then execute the following command to set the rate limit for a ServiceAccount.
+
+[,bash]
+----
+kubectl -n <Namespace> patch serviceaccounts.kubesphere.io <ServiceAccount> --type merge -p '{"metadata": {"annotations": {"kubesphere.io/ratelimiter-qps": "20.0", "kubesphere.io/ratelimiter-burst": "40"}}}'
+----
+
+[discrete]
+=== Parameter Description
+
+[%header,cols="1,1,3a"]
+|===
+|Option |Default Value |Description
+|rateLimit.enable |false |bool - Enable the rate limiter.
+|rateLimit.driver |memory |string - Rate limiter storage type, options: "memory".
+|rateLimit.QPS |5.0 |float32 - Number of tokens restored per second in the rate limiter's token bucket algorithm.
+|rateLimit.burst |10 |int - Maximum capacity of the token bucket in the rate limiter's token bucket algorithm.
+|===
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|It is recommended to set the token recovery rate QPS to half of the bucket capacity burst.
+|===

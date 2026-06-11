@@ -1,0 +1,58 @@
+---
+title: 解锁账户（UnlockUser）
+weight: 39
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| passwd
+| String
+| true
+| 账户锁密码
+
+| user
+| String
+| true
+| 用户id
+|===
+
+== 返回数据
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| user_id
+| String
+| false
+| 用户id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "passwd": "*****",
+  "user": "admin"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "UnlockUserResponse",
+  "ret_code": 0,
+  "user_id": "admin"
+}
+----

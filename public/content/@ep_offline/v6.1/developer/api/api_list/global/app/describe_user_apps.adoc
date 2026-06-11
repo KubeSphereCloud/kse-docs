@@ -1,0 +1,231 @@
+---
+title: 查询用户安装过的应用（DescribeUserApps）
+weight: 14
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app
+| String
+| false
+| app_id
+
+| app_type
+| String
+| false
+| 
+
+| exclude_apps
+| Array
+| false
+| 排除的app_id
+
+| limit
+| Integer
+| false
+| 数据展示数量
+
+| offset
+| Integer
+| false
+| 偏移量
+
+| owner
+| String
+| true
+| app
+
+| project_id
+| String
+| false
+| 所属项目
+
+| reverse
+| Integer
+| false
+| 是否倒序展示
+
+| search_word
+| String
+| false
+| 查询条件
+
+| status
+| Array
+| false
+| app状态
+
+| usage_status
+| String
+| false
+| 使用状态
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_set
+| Array
+| false
+| app集合
+
+| app_set[].abstraction
+| String
+| false
+| 
+
+| app_set[].access_sys_id
+| String
+| false
+| 
+
+| app_set[].app_iam_policy_id
+| String
+| false
+| 
+
+| app_set[].app_id
+| String
+| false
+| 应用id
+
+| app_set[].app_name
+| String
+| false
+| 应用名称
+
+| app_set[].app_type
+| String
+| false
+| 应用类型
+
+| app_set[].approved_app_iam_policy_id
+| String
+| false
+| 
+
+| app_set[].approved_auth_level
+| String
+| false
+| 
+
+| app_set[].auth_level
+| String
+| false
+| 
+
+| app_set[].category
+| String
+| false
+| 
+
+| app_set[].cluster_statistics
+| String
+| false
+| 
+
+| app_set[].description
+| String
+| false
+| 
+
+| app_set[].icon
+| String
+| false
+| 图片id
+
+| app_set[].plugins
+| String
+| false
+| 
+
+| app_set[].saas_multiple_instance
+| String
+| false
+| 
+
+| app_set[].sso_login
+| String
+| false
+| 
+
+| app_set[].status
+| String
+| false
+| 
+
+| app_set[].url
+| String
+| false
+| 外链
+
+| app_set[].usage_status
+| String
+| false
+| 
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "owner": "admin",
+  "status": [
+    "active"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeUserAppsResponse",
+  "app_set": [
+    {
+      "abstraction": "",
+      "access_sys_id": "",
+      "app_iam_policy_id": "",
+      "app_id": "app-n28v5lhg",
+      "app_name": "RabbitMQ",
+      "app_type": "cluster",
+      "approved_app_iam_policy_id": "",
+      "approved_auth_level": 0,
+      "auth_level": 0,
+      "category": "bigdata",
+      "cluster_statistics": {},
+      "create_time": "2023-04-23T10:10:20Z",
+      "description": "",
+      "icon": "ca-3zo3ta52",
+      "plugins": null,
+      "saas_multiple_instance": "0",
+      "sso_login": "0",
+      "status": "active",
+      "status_time": "2023-05-17T03:00:11Z",
+      "url": "",
+      "usage_status": "enabled"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 47
+}
+----

@@ -1,0 +1,69 @@
+{
+  "build": {
+    "beforeBuildCommand": "",
+    "beforeDevCommand": "",
+    "devPath": "../public/ep_offline",
+    "distDir": "../public/ep_offline"
+  },
+  "package": {
+    "productName": "QingCloud Enterprise Offline Docs",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "copyright": "Copyright © 2023, QingCloud Technology Corp. 北京青云科技股份有限公司",
+      "targets": ["deb", "nsis", "dmg"],
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.qingcloud.www",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": "",
+        "wix": {
+          "language": "zh-CN"
+        }
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 600,
+        "maximized": true,
+        "resizable": true,
+        "title": "青云企业云-产品文档",
+        "width": 800
+      }
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+---
+title: 登录 Portal
+description: 
+weight: 1
+---
+
+
+在使用 Portal 之前，用户需根据部署人员提供的信息登录 Portal 页面，也可参考如下步骤，获取 Portal 的登录信息。
+
+
+// 用户需在浏览器中输入正确的 Portal 地址，并使用正确的用户名与密码登录 Portal。
+
+// 打开浏览器，用户根据部署人员提供的信息直接登录 Portal 页面。用户也可参考如下步骤，获取登录链接。
+
+. 登录当前环境的 FirstBox。`<firstbox ip address>` 为当前环境 FirstBox 节点的 IP 地址，需根据实际情况进行填写。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip address>
+----
+
+
+. 进入脚本所在目录。
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，生成 Host 相关信息。
++
+[source,shell]
+----
+./qs_installer tools --generate-hosts
+----
++
+命令行回显示例
++
+[source,shell]
+----
+Usage config dir: /qingstor/etc/
+
+192.168.100.212 console.qingstorage.com
+192.168.100.212 portal.noah.stor.qingstorage.com
+192.168.100.212 stor.qingstorage.com noah.stor.qingstorage.com
+192.168.100.212 s3.stor.qingstorage.com s3.noah.stor.qingstorage.com
+192.168.100.222 n0.noah.stor.qingstorage.com
+192.168.100.222 s0.noah.stor.qingstorage.com
+
+# default_user: qingstor@qingstorage.com
+# default_pass: zhu88jie
+----
+
+. 将以上返回的 Host 相关信息，添加至本机的 Hosts 文件中即可。
++
+include::../../../../_components/note.adoc[]
+
+* `console.qingstorage.com` 为当前环境的 Console 访问链接。
+* `portal.noah.stor.qingstorage.com` 为当前环境的 Portal 访问链接。
+* `n0.noah.stor.qingstorage.com` 为当前环境文件存储 NFS 服务域名。
+* `s0.noah.stor.qingstorage.com` 为当前环境文件存储 SMB 服务域名。
+
+include::../../../../_components/table_footer.adoc[]
+
+
+. 根据以上内容，得出本例中 Portal 登录信息如下。
++
+> Portal 链接：portal.noah.stor.qingstorage.com +
+> 默认用户名：qingstor@qingstorage.com +
+> 默认密码：zhu88jie
+

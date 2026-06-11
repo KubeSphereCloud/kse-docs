@@ -1,0 +1,87 @@
+---
+title: "域名管理"
+description: 介绍如何创建和使用 CDN。
+keywords: CDN 服务, 域名, 缓存
+draft: false
+weight: 3
+---
+
+== 创建域名
+
+. 登录管理控制台，选择**产品与服务** > *网络服务* > *CDN 服务*，进入 CDN 页面。
+
+. 在左侧边栏，点击**域名管理**，进入域名列表页面。
++
+image::/images/cloud_service/network/cdn/cdn_domain.png[]
+
+. 点击** + 添加**，弹出**添加域名**对话框。根据页面提示信息，输入主域名后，点击**提交**。
++
+image::/images/cloud_service/network/cdn/domain_add.png[domain_add,50%]
++
+
+include::../../../../../_components/note.adoc[]
+
+例如，用户要为域名 `cdnexample.qingcloud.com` 加速，则它的主域名是 `qingcloud.com`，此处需填写的内容是 `qingcloud.com`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 创建域名记录
+
+. 登录管理控制台，选择**产品与服务** > *网络服务* > *CDN 服务*，进入 CDN 页面。
+
+. 在左侧边栏，点击**域名管理**，进入域名列表页面。
++
+image::/images/cloud_service/network/cdn/cdn_domain.png[]
+
+. 点击待添加域名记录的域名，进入域名详情页面。
++
+image::/images/cloud_service/network/cdn/cdn_domain_info.png[]
+
+. 点击** + 创建**，弹出**创建域名记录**对话框。用户根据页面提示信息填写相关参数后，点击**提交**。
++
+image::/images/cloud_service/network/cdn/cdn_domain_recode.png[cdn_domain_recode,50%]
++
+[cols="1,4", options="header"]
+|===
+|参数 |说明
+
+| 名称 | 填写用户要加速的子域名。子域名是指域名中除去主域名的部分。如 `cdnexample.qingcloud.com` 中的 `cdnexample`。
+
+|回源地址 a|
+
+* 用户源站的地址，静态资源的所在站点。当 CDN 中不存在请求的内容时，系统会去源站请求资源，并返回给用户后，再将该内容缓存至 CDN 缓存服务器中。
+* 这里可填写 IP 地址或域名，如果是绑定 DDoS 防护的域名记录其回源地址只能是公网 IP 地址。
+| 回源协议 | 选择回源协议。
+| HTTPS 服务 a| 
+
+* 选择是否开启 HTTPS 服务。
+* 如需开启，则点击 `同时支持 HTTP/HTTPS 服务` 或 `强制 HTTPS 服务`，然后在证书列表中选择一个要使用的证书。
+* 使用 HTTPS 只支持网页类型加速，不支持下载和点播。
+* 使用 `强制 HTTPS 服务` 会让 HTTP 访问的用户跳转成 HTTPS 访问。
+
+|===
+
+. 在域名详情页面查看成功创建的域名记录。
+
+== 修改回源协议 HTTPS/HTTP
+
+include::../../../../../_components/attention.adoc[]
+
+修改协议可能会造成大量回源，请谨慎使用。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 登录管理控制台，选择**产品与服务** > *网络服务* > *CDN 服务*，进入 CDN 页面。
+
+. 在左侧边栏，点击**域名管理**，进入域名列表页面。
++
+image::/images/cloud_service/network/cdn/cdn_domain.png[]
+
+. 点击目标域名，进入域名详情页面。
++
+image::/images/cloud_service/network/cdn/cdn_domain_info.png[]
+
+. 选择目标域名记录，点击**右键** > **更多操作** > **修改**来修改当前协议。
++
+image::/images/cloud_service/network/cdn/cdn_domain_recode_more.png[]

@@ -1,0 +1,260 @@
+---
+title: "Implementing Continuous Deployment for Applications Using GitOps"
+keywords: "Kubernetes, {ks_product}, DevOps Project, Using DevOps"
+description: "Introduces how to create a continuous deployment to implement application deployment."
+weight: 01
+---
+
+
+KubeSphere introduces a concept for implementing continuous deployment for cloud-native applications – GitOps. The core idea of GitOps is to have a Git repository and store the declarative infrastructure and applications of the application system in the Git repository for version control. GitOps, combined with Kubernetes, can leverage automated delivery pipelines to apply changes to any number of specified clusters, thereby solving the consistency issues of cross-cloud deployments.
+
+This document demonstrates how to create a continuous deployment to implement application deployment.
+
+
+== Prerequisites
+
+* The **DevOps** extension must be installed and enabled on the KubeSphere platform.
+
+* A workspace, a DevOps project, and a user (e.g., **project-regular**) have been created, and the user has been invited to the DevOps project and granted the **operator** role. Please refer to link:../../02-devops-project-mangement/03-project-members/01-invite-a-user-to-a-project/[Invite a User to a DevOps Project].
+
+* A project has been created in the workspace under **Project Management > Project List**.
+
+
+== Import a Code Repository
+
+include::../../../../_custom/devops/project-regular-oper-logIn.adoc[]
+
++
+
+. In the left navigation pane, click **DevOps > Code Repositories**.
+
++
+
+include::../../../../_custom/devops/devops-oper-dropdownList.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
+. In the **Import Code Repository** dialog box, enter a code repository name, such as **open-podcasts**, and then click to select a code repository. You can also set an alias and add a description for the code repository.
+
+
+. In the **Select Code Repository** dialog box, click **Git**. In the **Repository URL** field, enter the repository URL, such as link:https://github.com/kubesphere-sigs/open-podcasts[], and click **OK**.
++
+--
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+This imports a public repository, so no credential creation is required. If you are adding a private repository, you need to create a credential. For more information on how to add credentials, please refer to link:../../07-credentials/01-credential-management/[Credentials].
+
+|===
+--
+
+
+== Create a Continuous Deployment
+
+. In the left navigation pane, click **Continuous Deployments**.
+
+. On the **Continuous Deployments** page on the right, click **Create**.
+
+. On the **Basic Information** tab, enter a name for the continuous deployment, such as **open-podcasts**. In the **Deployment Location** section, select the cluster and project for the continuous deployment. Click **Next**.
+
+. On the **Code Repository Settings** tab, select the code repository created in the previous step, and set the branch or tag of the code repository and the path to the Kustomization manifest file. Click **Next**.
++
+--
+[%header, cols="1a,3a"]
+|===
+|Parameter |Description
+
+|Revision
+|The commit ID, branch, or tag in the Git repository. For example, **master**, **v1.2.0**, **0a1b2c3**, or **HEAD**.
+
+|Manifest File Path
+|Set the path to the manifest file. For example, **deployments/nginx** or **deployments/**.
+|===
+--
+
+. In the **Sync Policy** section, select **Auto Sync** or **Manual Sync** as needed.
++
+--
+
+* **Auto Sync**: Automatically triggers application synchronization when a discrepancy is detected between the manifests in the Git repository and the live state of the deployed resources, according to the set sync options. The specific parameters are as follows.
++
+====
+[%header, cols="1a,3a"]
+|===
+|Parameter |Description
+
+|Prune Resources
+|If checked, resources that do not exist in the Git repository will be deleted during auto-sync. If unchecked, resources in the cluster will not be deleted when auto-sync is triggered.
+
+|Self-Heal
+|If checked, when a deviation is detected between the state defined in the Git repository and the deployed resources, the definition in the Git repository will be forcibly applied. If unchecked, changes made to the deployed resources will not trigger auto-sync.
+|===
+====
+
+* **Manual Sync**: Manually triggers application synchronization according to the set sync options.
+
+// The specific parameters are as follows.
+// +
+// ====
+// [%header, cols="1a,3a"]
+// |===
+// |Parameter |Description
+
+// |Prune
+// |If checked, resources that do not exist in the Git repository will be deleted during sync. If unchecked, resources in the cluster will not be deleted during sync, and **out-of-sync** will be displayed.
+
+// |Dry Run
+// |Simulates synchronization without affecting the final deployed resources.
+
+// |Apply Only
+// |If checked, skips **pre/post** hooks when applying resources during sync, and only executes **kubectl apply**.
+
+// |Force Apply
+// |If checked, executes **kubectl apply --force** during sync.
+// |===
+// ====
+
+--
+
+. In the **Sync Settings** section, set the synchronization-related parameters as needed.
++
+--
+[%header, cols="1a,3a"]
+|===
+|Parameter |Description
+
+|Skip Schema Validation
+|Skips **kubectl** validation. Adds the **--validate=false** flag when executing **kubectl apply**.
+
+|Auto Create Namespace
+|Automatically creates a namespace for the application resources if the namespace does not exist.
+
+|Prune Last
+|During sync operations, resources are pruned only after all other resources have been deployed and are in a healthy state.
+
+|Selective Sync
+|Only synchronizes resources in the **out-of-sync** state.
+|===
+--
+
+
+. In the **Prune Propagation Policy** section, select a prune propagation policy as needed.
++
+--
+[%header, cols="1a,3a"]
+|===
+|Parameter |Description
+
+|foreground
+|Deletes dependent resources first, then deletes the owner resource.
+
+|background
+|Deletes the owner resource first, then deletes dependent resources.
+
+|orphan
+|Deletes the owner resource, leaving dependent resources as orphans.
+|===
+--
+
+. In the **Replace Resource** section, choose whether to replace existing resources.
++
+--
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+
+If checked, the **kubectl replace/create** command will be executed to synchronize resources. If unchecked, the **kubectl apply** command will be used to synchronize resources.
+|===
+--
+
+. Click **Create**. After the resource is created, it will be displayed in the continuous deployment list.
+
+
+== View Continuous Deployment Information
+
+. View the information of the created continuous deployment in the **Continuous Deployments** list. The specific parameters are as follows.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the continuous deployment.
+
+|Health Status
+|The health status of the continuous deployment. Mainly includes the following statuses:
+
+* **Healthy**: The resource is healthy.
+* **Degraded**: The resource has been degraded.
+* **Progressing**: The resource is synchronizing. This status is returned by default.
+* **Suspended**: The resource has been suspended and is waiting to be resumed.
+* **Unknown**: The health status of the resource is unknown.
+* **Missing**: The resource is missing.
+
+|Sync Status
+|The synchronization status of the continuous deployment. Mainly includes the following statuses:
+
+* **Synced**: Resource synchronization is complete.
+* **OutOfSync**: The actual running state of the resource is inconsistent with the desired state.
+* **Unknown**: The synchronization status of the resource is unknown.
+
+|Deployment Location
+|The cluster and project where the resource is deployed.
+
+|Update Time
+|The time when the resource was updated.
+|===
+--
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the continuous deployment to perform the following operations:
++
+--
+* **Edit Information**: Edit the alias and description.
+
+* **Edit YAML**: Edit the YAML file of the continuous deployment.
+
+* **Sync**: Trigger resource synchronization.
+
+* **Delete**: Delete the continuous deployment.
+
+//warning
+[.admon.warning,cols="a"]
+|===
+|Warning
+
+|Deleting a continuous deployment will also delete the resources associated with that continuous deployment. Please proceed with caution.
+|===
+--
+
+. Click the name of the continuous deployment to enter its details page and view the sync status and sync results.
+
+
+== Access the Created Application
+
+. In the left navigation pane, click **Application Workloads > Services**. In the project drop-down list, select the project to which the continuous deployment belongs.
+
+. In the **Services** list, find the deployed application, click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right, and select **Edit External Access**.
+
+. In **Access Mode**, select **NodePort** and click **OK**.
+
+. On the service list page, check the exposed port in the **External Access** column and access the application via {Node IP}:{NodePort}.
++
+--
+//note
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Before accessing the service, ensure that the port in the security group is open.
+|===
+--

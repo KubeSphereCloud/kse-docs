@@ -1,0 +1,91 @@
+---
+title: 修改通知方式对应关系信息（ModifyNotificationMapAttributes）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_map
+| Json
+| false
+| 通知方式对应关系
+
+| user
+| String
+| false
+| 用户id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| finance
+| String
+| false
+| 财务消息类型
+
+| notification_map
+| String
+| false
+| false
+
+| notification_types
+| String
+| false
+| false
+
+| other
+| String
+| false
+| 其他消息类型
+
+| user
+| String
+| false
+| false
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ModifyNotificationMapAttributes",
+  "notification_map": {
+    "finance": "nl-xxxxxxx",
+    "other": "nl-xxxxxxx"
+  },
+  "user": "usr-xxxxxxx"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyNotificationMapAttributesResponse",
+  "notification_map": {
+    "finance": "nl-xxxxxxx",
+    "other": "nl-xxxxxxx"
+  },
+  "notification_types": [
+    "finance",
+    "other"
+  ],
+  "ret_code": 0,
+  "user_id": "usr-xxxxxxx"
+}
+----

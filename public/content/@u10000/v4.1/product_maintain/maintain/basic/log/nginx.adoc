@@ -1,0 +1,89 @@
+---
+title: 查看 Nginx 日志
+weight: 2
+---
+
+Nginx 服务是所有请求的入口。
+
+//== 操作步骤
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，跳转至 {product_name} 任一网关节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，查看 Nginx 日志。
++
+[source,shell]
+----
+vi /var/log/nginx/access.log
+vi /var/log/nginx/error.log
+----
+
+// == 批量搜索
+
+// 使用 {product_name} 的运维工具，可批量搜索相关日志。
+
+// . 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
+// +
+// [source,shell]
+// ----
+// ssh -p 6023 root@<firstbox ip>
+// ----
+
+// . 执行如下命令行，搜索 Nginx 日志。
+// +
+// [source,shell]
+// ----
+// /qingstor/bin/search_nginx_log <keyword>
+// ----
+// +
+// include::../../../../../../_components/note.adoc[]
+
+// * `<keyword>` 是搜索关键字，可以是 HTTP 的错误码，如 `400`、`500`、`502` 等，也可以是 `request-id` 的值，也可以是 Bucket 名，对象名等。 
+// * 该命令行回显内容会包括当天所有符合条件的请求，如果请求量大，则会大量刷屏。因此，可在执行该命令行时，将结果重定向到一个文件后，再进行查看看。
+
+// include::../../../../../../_components/table_footer.adoc[]
+
+// == 手工搜索
+
+// 如果正在处理故障，想要查看相应服务是否成功恢复，系统中是否还在继续报错，是否还存在新的 `500`、`499` 错误码等，此时可以执行以下步骤。
+
+// . 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
+// +
+// [source,shell]
+// ----
+// ssh -p 6023 root@<firstbox ip>
+// ----
+
+// . 从 FirstBox 节点，逐个跳转至网关节点。
+// +
+// [source,shell]
+// ----
+// ssh core0
+// ----
+
+// . 在每个网关节点上，执行如下命令行，查看日志信息。
+// +
+// [source,shell]
+// ----
+// tail -f /var/log/nginx/access.log | grep '" 499 '
+// tail -f /var/log/nginx/access.log | grep '" 500 '
+// ----
+// +
+// include::../../../../../../_components/note.adoc[]
+
+// Status Code `499` 前面有双引号和空格。
+
+// include::../../../../../../_components/table_footer.adoc[]
+
+

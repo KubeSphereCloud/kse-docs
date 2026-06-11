@@ -1,0 +1,58 @@
+---
+title: 标记用户站内信消息已读（ReadNotificationCenterUserPosts）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_center_posts
+| Array
+| true
+| 消息id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_center_posts
+| Array
+| false
+| 消息id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "ReadNotificationCenterUserPosts",
+  "notification_center_posts": [
+    "nfp-xxxxxxxx"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ReadNotificationCenterUserPostsResponse",
+  "notification_center_posts": [
+    "nfp-xxxxxxxx"
+  ],
+  "ret_code": 0
+}
+----

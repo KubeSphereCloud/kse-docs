@@ -1,0 +1,35 @@
+---
+title: "CLI 命令行获取"
+weight: 2
+---
+
+== 应用场景
+
+* 旧版本 NeonSAN 集群需升级至 v3.4.1 及以上版本时。
+* Portal 管理平台无法正常登录时。
+
+== 操作步骤
+
+. 登录 NeonSAN 集群任意一个节点。
+. 执行如下命令，获取集群 ID。
++
+* NeonSAN 集群已是 v3.4.1 及以上版本，但 Portal 管理平台无法正常登录时。
++
+image::/images/neonsan/license_4.png[]
+
++
+* 旧版本升级至 NeonSAN v3.4.1 及以上版本时，可执行如下命令。
++
+[source,shell]
+----
+uuidgen
+----
++
+include::../../../../../../_components/note.adoc[]
+针对集群升级场景下，需提前申请商业版 License，待获得 License 授权证书后，再进行集群的升级操作。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 复制并记录集群 ID，用于申请 License。
+
+
+

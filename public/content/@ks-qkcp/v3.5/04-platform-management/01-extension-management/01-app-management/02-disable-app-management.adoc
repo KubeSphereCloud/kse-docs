@@ -1,0 +1,66 @@
+---
+title: "禁用应用管理"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, 应用管理, 禁用应用管理"
+description: "介绍如何禁用应用管理扩展组件。"
+weight: 02
+---
+
+// :ks_include_id: 600cea7c1321405091425c3efceb12d4
+:ks_xref_id: 9039f22dd0e74b09a863ea9daae66f71
+:ks_comp: ../../../../components/
+:ks_title: 禁用应用管理
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, 应用管理, 禁用应用管理
+:ks_description: 介绍如何禁用应用管理扩展组件。
+:ks_weight: 02
+:ks_icon:
+
+
+
+本节介绍如何禁用应用管理扩展组件。
+
+
+== 前提条件link:[id=cf33601acb2b4c89ab1f226bbbc201a3]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=15cc564d6c56467b8fd8a96f3b23db62]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-editCC.adoc[]
+
++
+
+. 在集群配置文件中，将 **spec:openpitrix:store:enabled** 参数设置为 **false**，然后保存文件。
++
+--
+// YAML
+include::../../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  openpitrix:
+    store:
+      enabled: false
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

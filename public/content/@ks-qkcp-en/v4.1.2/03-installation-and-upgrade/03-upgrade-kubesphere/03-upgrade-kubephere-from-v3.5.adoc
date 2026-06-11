@@ -1,0 +1,570 @@
+---
+title: "Upgrade from v3.5.0 to v4.1.2"
+keywords: "Kubernetes, KubeSphere Enterprise, installation, upgrade KubeSphere Enterprise"
+description: "This guide describes how to upgrade KubeSphere Enterprise."
+weight: 03
+---
+
+This section describes how to upgrade from KubeSphere Enterprise v3.5.0 to KubeSphere Enterprise v4.1.2 while keeping the Kubernetes version unchanged.
+
+
+== Prerequisites
+
+* Contact the KubeSphere Enterprise support team to get the KubeSphere Enterprise v4.1.2 installation package and license.
+
+* Ensure that the current version of KubeSphere Enterprise is v3.5.0. If your KubeSphere Enterprise version is lower than v3.5.0, please upgrade to v3.5.0 first.
+
+* Ensure that the current Kubernetes version is v1.21.x, v1.22.x, v1.23.x, v1.24.x, v1.25.x, v1.26.x, v1.27.x or v1.28.x.
+
+* {empty}
+include::../../../_custom-en/installationAndUpgrade/installationAndUpgrade-prer-backUpData.adoc[]
+
+== Preparation
+
+=== 1. Unpack the Installation Package
+
+. Transfer the {ks_product-en} installation package to the cluster node to be upgraded and log in to that node.
+
+. Run the following command to unpack the v4.1.2 installation package (replace <package name> with the actual package name).
++
+--
+[,bash]
+----
+tar -zxvf <package name>
+----
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|Ensure that the directory has sufficient available space, preferably greater than 100 GB.
+|===
+--
+
+. Enter the directory generated after unpacking the installation package.
++
+--
+[,bash]
+----
+cd <directory>
+----
+
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+To know the purpose of each file in the installation package, refer to link:../../02-install-kubesphere/02-install-kubernetes-and-kubesphere/#_view_the_installation_package[View the Installation Package].
+|===
+--
+
+=== 2. Push Images
+
+. In the v4.1.2 directory, edit the **config-sample.yaml** file created during the installation and modify the **registry** section within it.
++
+--
+[,yaml]
+----
+    privateRegistry: "dockerhub.kubekey.local/kse" # Replace with the actual image registry address
+        auths:
+          "dockerhub.kubekey.local":  # Replace with the actual image registry address
+              username: admin           # Replace with the username of the image registry
+              password: Harbor12345     # Replace with the password of the image registry
+              skipTLSVerify: true
+              plainHTTP: true   # Set this parameter to true if the image registry uses http
+----
+--
+
+. Push the images to the image registry.
++
+[,bash]
+----
+./kk artifact images push -f config-sample.yaml -a kubekey-artifact.tar.gz
+----
+
+=== 3. Modify the Upgrade Configuration File
+
+Edit the **ks-core-values.yaml** file in the `tools` directory of the installation package, and configure the extensions that need to be upgraded to `true`.
+
+--
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+* In `ks-core-values.yaml`, you can set the extensions that are not enabled in the cluster to `enabled: false`. The components `core` and `iam` must be configured as `enabled: true` and cannot be disabled.
+
+* Some extensions, in certain circumstances (such as requiring access to external service addresses), cannot use **Default Configuration** during the upgrade and require manual configuration of some parameters. Refer to the **Component Upgrade Configuration Documentation** to check if your extensions have this issue and make the necessary changes in `ks-core-values.yaml`.
+Please view the "Default Configuration" and "Component Upgrade Configuration Documentation" in the **Upgrade Configuration Documentation** folder in the KubeSphere Enterprise v4.1.2 user guide.
+|===
+--
+
+=== 4. Pre-Upgrade Check
+
+On the cluster node, run the **pre-check.sh** script from the installation package to check if the upgrade conditions are met. Ensure that all checks pass. If any check fails, the subsequent upgrade is likely to fail.
+
+[,bash]
+----
+bash pre-check.sh
+----
+
+=== 5. Backup System Resources
+
+On the cluster node, run the script **backup.sh** in the installation package to back up critical resources in all projects under the system workspace (system-workspace), as well as all custom roles and permission-related resources.
+
+Run the following command to start the backup. The relevant resources will be backed up to the **backup-$timestamp** directory.
+
+[,bash]
+----
+bash backup.sh
+----
+
+The backup will be completed as shown in the following picture.
+
+image:/images/ks-qkcp/zh/v4.1/backup.png[ backup, 100%]
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+During the upgrade process, the `kubesphere-devops-worker` project will be deleted and recreated. If you have critical data (such as persistent volumes) under this project, please migrate and back up the data on your own.
+|===
+
+== Single Cluster Upgrade
+
+. Copy the `charts` directory from the installation package to the `tools` directory.
++
+[,bash]
+----
+cp -r charts tools/
+----
+
+. Enter the `tools` directory and run the following command to start upgrading {ks_product-en}.
++
+--
+[,bash]
+----
+IMAGE_REGISTRY=dockerhub.kubekey.local/kse bash upgrade.sh host | tee host-upgrade.log
+----
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+Replace `dockerhub.kubekey.local/kse` with the actual image registry address.
+|===
+--
+
+. Follow the steps below to check if the host cluster has been successfully upgraded.
+
+.. Run the following command; the upgrade job should have completed successfully as shown below.
++
+[,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get job | grep upgrade
+ks-core-post-upgrade    1/1           16s        28m
+ks-core-pre-upgrade     1/1           58s        31m
+prepare-upgrade         1/1           26s        32m
+----
+
+.. Run the following command; the pods (ks-apiserver, ks-console, ks-controller-manager) should be in the running state as shown below.
++
+[,bash]
+----
+root@xxx:~# watch kubectl get pod -n kubesphere-system
+NAME                                     READY   STATUS      RESTARTS        AGE
+ks-apiserver-594bb884db-phrlv            1/1     Running     0               28m
+ks-console-7cd55dd9f9-f2jl9              1/1     Running     0               28m
+ks-controller-manager-785fc676dc-9d9j2   1/1     Running     0               28m
+----
+
+. Use the IP address of the original web console, administrator username, and password, and log in to the v4.1.2 {ks_product-en} web console using a web browser.
+
+. Follow the activation prompts and click **Activate** to import the KubeSphere Enterprise license.
+
+. Check if all functions and data of the host cluster are normal.
+
+
+== Multi-cluster Upgrade
+
+. Follow the steps in the link:#_single_cluster_upgrade[Single Cluster Upgrade] section to complete the upgrade of the host cluster.
+
+. On the member cluster node, enter the directory generated after unpacking the installation package and run the following command to start upgrading {ks_product-en}.
++
+--
+[,bash]
+----
+IMAGE_REGISTRY=dockerhub.kubekey.local/kse bash upgrade.sh member | tee member-upgrade.log
+----
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+Replace `dockerhub.kubekey.local/kse` with the actual image registry address.
+|===
+--
+
+. Follow the steps below to check if the member cluster has been successfully upgraded.
+
+.. Run the following command; the upgrade job should have completed successfully as shown below.
++
+[,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get job | grep upgrade
+ks-core-post-upgrade    1/1           16s        28m
+ks-core-pre-upgrade     1/1           58s        31m
+prepare-upgrade         1/1           26s        32m
+----
+
+.. Run the following command; the `ks-agent` pod should be in the running state as shown below.
++
+[,bash]
+----
+root@xxx:~# kubectl -n kubesphere-system get pod
+NAME                          READY   STATUS      RESTARTS        AGE
+ks-agent-5dc5b57977-4x6mf     2/2     Running     0               59m
+----
+
+. After the member cluster is successfully upgraded, run the following command on the host cluster to modify the status of the member cluster so that the extension agent can be scheduled to the member cluster.
++
+--
+[,bash]
+----
+kubectl get clusters.cluster.kubesphere.io {member-x} -o json | jq 'del(.status.conditions[] | select(.type=="Schedulable"))' | kubectl apply -f -
+----
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+| Run `kubectl get cluster` to get cluster names and replace `{member-x}`.
+
+|===
+
+If the cluster node does not support the `jq` command, you can achieve this by editing the cluster resource. Edit the member cluster's `status.conditions` and set the `status` to `true` for the condition with `type: Schedulable`.
+
+[,bash]
+----
+kubectl edit clusters.cluster.kubesphere.io {member-x}
+----
+
+[,yaml]
+----
+status:
+  conditions:
+  - lastTransitionTime: "2024-04-11T09:12:22Z"
+    lastUpdateTime: "2024-04-11T09:12:22Z"
+    message: Cluster has been initialized
+    reason: Initialized
+    status: "True"
+    type: Initialized
+  - lastTransitionTime: "2024-04-12T07:59:14Z"
+    lastUpdateTime: "2024-04-12T07:59:14Z"
+    message: Cluster has joined federation control plane successfully
+    status: "True"
+    type: Federated
+  - lastTransitionTime: "2024-04-12T08:02:56Z"
+    lastUpdateTime: "2024-04-12T08:02:56Z"
+    message: KS Core is available now
+    reason: KSCoreReady
+    status: "True"
+    type: KSCoreReady
+  - lastTransitionTime: "2024-04-12T08:02:56Z"
+    lastUpdateTime: "2024-04-12T08:02:56Z"
+    message: Not schedulable now
+    reason: Upgrading
+    status: "False"   # Edit here
+    type: Schedulable
+  - lastTransitionTime: "2024-04-12T08:24:27Z"
+    lastUpdateTime: "2024-04-12T08:24:27Z"
+    message: Agent has connected to proxy successfully.
+    status: "True"
+    type: AgentAvailable
+  - lastTransitionTime: "2024-04-12T08:57:40Z"
+    lastUpdateTime: "2024-04-12T08:57:40Z"
+    message: Cluster is available now
+    reason: Ready
+    status: "True"
+    type: Ready
+----
+--
+
+. Log in to the {ks_product-en} web console of the host cluster, navigate to the **Cluster Management** page, and check if all functions and data of this member cluster are normal.
+
+. Continue with the above steps for the next member cluster until all clusters have been upgraded.
+
+== Upgrade Gateway Resources
+
+=== 1. Check the Image Address of the Gateway Configuration
+
+Before upgrading the gateway resources, please check whether the image push path of {ks_product-en} v4.1.2 is different from that of v3.5.0. If the push path is different, you need to confirm and modify the configuration information of `kubesphere-gateway-backup-config` under `kubesphere-system` and `gateway-agent-backend-config` under `extension-gateway`.
+
+Taking the following image path as an example, the image push path is different, so the configuration information needs to be modified.
+
+* v3.x `nginx-ingress-controller` image is
++
+`dockerhub.kubekey.local/kse/nginx-ingress-controller`
+
+* v4.x `nginx-ingress-controller` image is
++
+`dockerhub.kubekey.local/kse/kubesphere/nginx-ingress-controller`
+
+[,bash]
+----
+# Modify the value of gateway.repository in kubesphere-gateway-backup-config to the repository address of the new version
+kubectl -n kubesphere-system get configmap kubesphere-gateway-backup-config -oyaml
+kubectl -n kubesphere-system edit configmap kubesphere-gateway-backup-config
+ 
+# Modify the configuration of gateway-agent-backend-config, the newly enabled gateway (not created during the upgrade) will use the valuesOverride parameter in it. Modify the value of gateway.valuesOverride.controller.image.repository in the configuration to the repository address of the new version
+kubectl -n extension-gateway get configmap gateway-agent-backend-config -oyaml
+kubectl -n extension-gateway edit configmap gateway-agent-backend-config
+----
+
+=== 2. Upgrade Gateway
+
+Upgrade all gateways.
+
+[,bash]
+----
+IMAGE_REGISTRY=dockerhub.kubekey.local/kse bash upgrade.sh gateway all | tee gateway-upgrade.log
+----
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+Replace `dockerhub.kubekey.local/kse` with the actual image registry address.
+|===
+
+== FAQ
+
+=== Unable to operate a member cluster that has not been upgraded
+
+Issue: After the host cluster is upgraded to v4.1.0, unable to view and operate member clusters that has not been upgraded in the KubeSphere Enterprise web console.
+
+Reason: APIs are incompatible between v4.1.0 and v3.5.0.
+
+Solution:
+
+* Upgrade the member clusters as soon as possible.
+* You can directly access them through the web console of the member clusters before upgrading the member clusters.
+
+
+=== Unable to log in to the web console of member clusters
+
+Issue: Before upgrading the member cluster, it is impossible to log in through the member cluster's web console, with the message "incorrect username or password."
+
+Reason: KubeSphere Enterprise v3.x by default prohibits direct access to the member cluster's web console.
+
+Solution:
+
+. Run the following command to add the following configuration.
++
+--
+[,bash]
+----
+kubectl -n kubesphere-system edit cm kubesphere-config
+----
+
+[,yaml]
+----
+authentication:
+  oauthOptions:
+    accessTokenMaxAge: 0
+    clients:
+    - name: kubesphere
+      secret: kubesphere
+      redirectURIs:
+      - '*'
+----
+--
+
+. Run the following command to restart ks-apiserver, which allows logging in to the member cluster's web console.
+
++
+[,bash]
+----
+kubectl -n kubesphere-system rollout restart deployment ks-apiserver
+----
+
+=== The upgrade script exits unexpectedly
+
+Issue: During the upgrade process, the upgrade script abnormally exits, resulting in a failed upgrade.
+
+Solution: Run the following command to view the logs of upgrade jobs and troubleshoot the upgrade failure.
+
+
+[,bash]
+----
+kubectl -n kubesphere-system get job/prepare-upgrade
+
+kubectl -n kubesphere-system get pod |grep prepare-upgrade
+
+# View the logs of upgrade jobs
+kubectl -n kubesphere-system logs prepare-upgrade-gvc6p
+----
+
+[,bash]
+----
+kubectl -n kubesphere-system get job/ks-core-pre-upgrade
+
+kubectl -n kubesphere-system get pod |grep ks-core-pre-upgrade
+
+# View the logs of upgrade jobs
+kubectl -n kubesphere-system logs ks-core-pre-upgrade-4n7tp
+----
+
+[,bash]
+----
+kubectl -n kubesphere-system get job/ks-core-post-upgrade
+
+kubectl -n kubesphere-system get pod |grep ks-core-post-upgrade
+
+# View the logs of upgrade jobs
+kubectl -n kubesphere-system logs ks-core-post-upgrade-4nzhk
+----
+
+=== The permission items of custom roles are empty
+
+Issue: After the upgrade, the permission items of custom roles are empty, causing users assigned with custom roles unable to use KubeSphere Enterprise normally.
+
+Solution:
+
+The upgrade script `backup.sh` has backed up custom roles and their bindings. However, due to changes in permissions, it can not automatically convert their permissions during the upgrade. Therefore, users need to manually supplement the permissions of custom roles after the upgrade.
+
+. After backing up using `backup.sh`, check the already backed up custom roles in `backup-$timestamp/kse35-backup-iam-xxx.yaml`.
+
+. Find `metadata.annotations[iam.kubesphere.io/aggregation-roles]`, and compare its values with the names in the **3.x** column of the table. Then, find the corresponding permission names in the **Description** column on the KubeSphere Enterprise web console.
++
+--
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+Please refer to the following **Platform** table for platform custom roles, the following **Workspace** table for workspace custom roles, and the following **Project** table for project custom roles, to confirm the corresponding relationships.
+|===
+--
+
+**Example:**
+
+The information of the backed-up platform custom role `test` is as follows:
+
+```yaml
+apiVersion: iam.kubesphere.io/v1alpha2
+kind: GlobalRole
+metadata:
+  annotations:
+    iam.kubesphere.io/aggregation-roles: '["role-template-view-roles","role-template-view-users","role-template-view-basic","role-template-manage-clusters","role-template-view-clusters"]'
+    kubesphere.io/alias-name: test-name
+    kubesphere.io/creator: admin
+  creationTimestamp: "2024-04-11T11:59:08Z"
+  generation: 3
+  name: test     # The name of the custom role
+  resourceVersion: "529194"
+  uid: a3ad5e39-2959-4e14-aa8f-e0c0ad8e6889
+rules:
+    ...
+    ...
+``` 
+
+. Get the value of `metadata.annotations[iam.kubesphere.io/aggregation-roles]` as follows:
++
+```yaml
+'["role-template-view-roles","role-template-view-users","role-template-view-basic","role-template-manage-clusters","role-template-view-clusters"]'
+```
+
+. Compare the values of `metadata.annotations[iam.kubesphere.io/aggregation-roles]` with the **3.x** column in the following **Platform** table. The corresponding permission items in the **Description** column of the table should be checked in the web console, including **Role Viewing**, **User Viewing**, **Basic Viewing**, **Cluster Management**, and **Cluster Viewing**. However, since **Basic Viewing** is marked as `none` in the **4.1** column, **Basic Viewing** cannot be selected.
+
+. Edit the permissions of the `test` role on the **Platform Roles** page in the KubeSphere Enterprise web console.
++
+--
+// image:/images/ks-qkcp/zh/v4.1/edit-permission.png[ edit-permission, 100%]
+
+Select **Role Viewing**, **User Viewing**, **Cluster Viewing**, and **Cluster Management**.
+
+// image:/images/ks-qkcp/zh/v4.1/check-permission.png[ check-permission, 100%]
+--
+
+[.admon.attention,cols="a"]
+|===
+|Attention
+
+|
+Some permission items have been removed in v4.1.0 and are marked as `none`. Others have not been removed, but for security reasons, they cannot be granted to custom roles and are marked as `can not use`. Permission items marked as `none` or `can not use` cannot be selected when editing the permissions of custom roles.
+|===
+
+**Platform**
+[%header,cols="1a,2a,2a"]
+|===
+| Description | 3.x | 4.1
+
+|Workspace Creation|role-template-create-workspaces| global-create-workspaces
+|App Template Management|role-template-manage-app-templates |  `none`
+|Cluster Management|role-template-manage-clusters | global-manage-clusters
+|Platform Settings Management| role-template-manage-platform-settings | `can not use`
+|Role Management| role-template-manage-roles | `can not use`
+|User Management|role-template-manage-users | `can not use`
+|Workspace Management|role-template-manage-workspaces | global-manage-workspaces
+|App Viewing| role-template-view-app-templates | `none`
+|Basic Viewing|role-template-view-basic | `none`
+|Cluster Viewing|role-template-view-clusters | global-view-clusters
+|Role Viewing|role-template-view-roles | global-view-roles
+|User Viewing| role-template-view-users | global-view-users
+|Workspace Viewing|role-template-view-workspaces | global-view-workspaces
+|===
+
+**Workspace**
+[%header,cols="1a,2a,2a"]
+|===
+| Description | 3.x | 4.1
+
+|DevOps Project Creation|role-template-create-devops | workspace-create-devops
+|Project Creation|role-template-create-projects | workspace-create-projects
+|App Repository Management|role-template-manage-app-repos | workspace-manage-app-repos
+|App Template Management|role-template-manage-app-templates | workspace-manage-app-templates
+|DevOps Project Management|role-template-manage-devops | workspace-manage-devops
+|Department Management |role-template-manage-groups | `none`
+|Member Management|role-template-manage-members | `can not use`
+|Project Management|role-template-manage-projects | workspace-manage-projects
+|Role Management|role-template-manage-roles | `can not use`
+|Workspace Settings Management|role-template-manage-workspace-settings | `can not use`
+|App Repository Viewing|role-template-view-app-repos | workspace-view-app-repos
+|App Template Viewing|role-template-view-app-templates | workspace-view-app-templates
+|Basic Viewning|role-template-view-basic | `none`
+|DevOps Project Viewing|role-template-view-devops | workspace-view-devops
+|Department Viewing|role-template-view-groups | `none`
+|Member Viewing|role-template-view-members | workspace-view-members
+|Role Viewing|role-template-view-roles | workspace-view-roles
+|Workspace Settings Viewing|role-template-view-workspace-settings | `can not use`
+|===
+
+**Project**
+
+[%header,cols="1a,2a,2a"]
+|===
+| Description | 3.x | 4.1
+
+|Application Workload Management|role-template-manage-app-workloads | namespace-manage-app-workloads
+|ConfigMap Management|role-template-manage-configmaps | namespace-manage-configmaps
+|Member Management|role-template-manage-members | `can not use`
+|Project Settings Management|role-template-manage-project-settings | namespace-manage-project-settings
+|Role Management|role-template-manage-roles | `can not use`
+|Secret Management|role-template-manage-secrets | namespace-manage-secrets
+|Service Account Management|role-template-manage-serviceaccount | namespace-manage-serviceaccount
+|PersistentVolumeClaims Management|role-template-manage-volumes | namespace-manage-persistentvolumeclaims
+|Application Workload Viewing|role-template-view-app-workloads | namespace-manage-app-workloads
+|Basic Viewing|role-template-view-basic|`none`
+|ConfigMap Viewing|role-template-view-configmaps | namespace-view-configmaps
+|Member Viewing|role-template-view-members | namespace-view-members
+|Role Viewing|role-template-view-roles | namespace-view-roles
+|Secret Viewing|role-template-view-secrets | namespace-view-secrets
+|Service Account Viewing|role-template-view-serviceaccount | namespace-view-serviceaccount
+|PersistentVolumeClaims Viewing|role-template-view-volumes | namespace-view-persistentvolumeclaims
+|===

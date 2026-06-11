@@ -1,0 +1,68 @@
+---
+title: "Create Constraint"
+description: "Describes how to create a constraint."
+weight: 01
+---
+
+:ks_permission: ** cluster-admin **
+:ks_navigation: ** Gatekeeper > Constraints**
+
+This section describes how to create a constraint.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The KubeSphere platform needs to have the **Gatekeeper** extension installed and enabled.
+
+* A constraint template has been created.
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the **Create Constraint** dialog box, set the following parameters, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Constraint Name
+|The name of the constraint.
+
+|Constraint Type
+|The constraint template used by the constraint.
+
+|enforcementAction
+|The `enforcementAction` field defines the action to take for constraint violations. It is set to `deny` by default, meaning any admission request that violates the constraint is denied by default. For more information, refer to link:https://open-policy-agent.github.io/gatekeeper/website/docs/violations/[Constraint Violation Handling].
+
+|Match Kinds
+|The `match` field defines the resources to which the constraint applies. For more information, refer to link:https://open-policy-agent.github.io/gatekeeper/website/docs/howto/#the-match-field[match].
+
+`kinds` accepts a list of objects containing `apiGroups` and `kinds` fields, which list the groups/kinds of objects the constraint applies to. If multiple groups/kinds objects are specified, a resource is in scope for the constraint if it matches any one of those objects.
+
+|Namespace Labels
+|Identifiable key-value pairs set for the namespace where the object resides or for the object itself if the object is a namespace.
+
+|Parameters
+|Used to describe the intent of the constraint. For more information, refer to link:https://open-policy-agent.github.io/gatekeeper/website/docs/howto/#the-parameters-field[parameters].
+|===
+
+You can view the created constraint on the **Constraints** page.
+--

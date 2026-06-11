@@ -1,0 +1,20 @@
+---
+title: "安装安全服务时提示找不到对应的角色节点"
+weight: 10
+---
+
+== 问题现象
+
+部署时提示找不到对应的角色节点。
+
+image::/images/ep_offline/scs_install/faq_01.png[]
+
+== 临时解决方法
+
+1. 登录云平台 FirstBox。
+2. 执行以下命令，手动将基础网络网段添加到 iptables 白名单中。
++
+[source]
+----
+root@qingcloud-firstbox:/pitrix/upgrade# ./exec_nodes.sh all "iptables -t filter -I INPUT -s 10.30.1.0/24 -j ACCEPT"
+----

@@ -1,0 +1,43 @@
+---
+title: "Delete Notification Subscriptions"
+description: "Describes how to delete notification subscriptions."
+weight: 04
+---
+
+:ks_navigation: **Notification > Notification Subscriptions**
+// // :ks_permission: **Platform Settings Management**
+
+This section describes how to delete notification subscriptions.
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, refer to link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Notification** extension must be installed and enabled on the KubeSphere platform.
+
+== Delete a Single Notification Subscription
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
++
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
++
+include::../../../../../../_ks_components/oper-navigate.adoc[]
++
+. On the **Notification Subscriptions** page, **Email** tab, view the list of created notification subscriptions.
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the notification subscription you want to operate on, then select **Delete** from the dropdown list.
+. In the **Delete Notification Subscription** dialog box, enter the name of the notification subscription, then click **OK**.
+
+== Batch Delete Notification Subscriptions
+
+. Log in to the KubeSphere web console as a user with pass:a,q[{ks_permission}] permissions.
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+. Select pass:a,q[{ks_navigation}] from the left navigation pane.
+. On the **Notification Subscriptions** page, **Email** tab, view the list of created notification subscriptions.
+. Check the checkbox on the left of the notification subscriptions you want to delete, then click **Delete** above the list.
+. In the **Batch Delete Notification Subscriptions** dialog box, enter the names of the notification subscriptions, then click **OK**.
++
+--
+include::../../../../../_custom/note-separateNamesByComma.adoc[]
+--

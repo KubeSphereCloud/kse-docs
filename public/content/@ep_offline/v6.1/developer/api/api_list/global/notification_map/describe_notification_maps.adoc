@@ -1,0 +1,121 @@
+---
+title: 获取通知方式对应关系信息（DescribeNotificationMaps）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| email
+| String
+| false
+| 邮箱
+
+| limit
+| Integer
+| false
+| 查询数量
+
+| offset
+| Integer
+| false
+| 查询偏移量
+
+| root_user
+| String
+| false
+| 根用户id
+
+| users
+| Array
+| false
+| 用户id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_map_set
+| Array
+| false
+| 消息集合
+
+| notification_map_set[].notification_map
+| Object
+| false
+| 通知对应关系
+
+| notification_map_set[].notification_map.finance
+| String
+| false
+| 财务消息类型
+
+| notification_map_set[].notification_map.other
+| String
+| false
+| 其他消息类型
+
+| notification_map_set[].notification_types
+| Array
+| false
+| 通知类型列表
+
+| notification_map_set[].user_id
+| String
+| false
+| 用户id
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeNotificationMaps",
+  "limit": 1,
+  "offset": 0,
+  "users": [
+    "usr-xxxxxxx"
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeNotificationMapsResponse",
+  "notification_map_set": [
+    {
+      "notification_map": {
+        "finance": "",
+        "other": "nl-xxxxxxx"
+      },
+      "notification_types": [
+        "finance",
+        "other"
+      ],
+      "user_id": "usr-xxxxxxx"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

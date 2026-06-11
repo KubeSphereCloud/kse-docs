@@ -1,0 +1,52 @@
+---
+title: "查看内核日志文件"
+weight: 10
+---
+
+. 逐个登录集群节点。 
+
+. 执行如下命令，查看完整的内核日志文件。
++
+[,shell]
+----
+vi /var/log/kern.log 
+----
+
+. 部分错误日志关键字解释，其他未列出错误可联系 NeonSAN 产研团队进行排查。
++
+[options="header",cols="2,1,3"]
+|===
+|关键字|含义|建议
+|Unrecovered read error 或 critical medium error 
+|磁盘出现不可恢 复的 I/O 错误 
+|建议更换磁盘 
+
+|NIC Link is Down 
+|网卡链路 down 
+|建议检查网络连通性和网络质量 
+
+|SCSI device is removed JBOD.*?for PD.*? Is now OFFLINE device offline for <N> seconds
+|磁盘离线 
+|建议检查磁盘状态
+
+|mlx5_core.*?Link down 
+|磁盘离线 
+|建议检查磁盘状态 
+
+|link status definitely down 
+|网卡链路 down 
+|建议检查网络 
+
+|print_req_error.*?critical target error 
+|磁盘发生读写错误 
+|建议更换磁盘 
+
+|I/O error .*? 
+|发生 I/O error 
+|建议检查发生的 QBD 设备对应的卷在 Center 中的降级日志 
+
+|EXT4-fs (qbd[0-9]+): Remounting filesystem read-only 
+|QBD 文件系统只读 
+|建议重新挂载磁盘或重启虚拟机
+|===
+

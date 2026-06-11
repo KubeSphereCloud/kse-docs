@@ -1,0 +1,298 @@
+== General Terms
+
+[%header,cols="1a,4a"]
+|===
+|Term
+|Description
+
+|Cluster
+|A cluster is a larger computer service system composed of a group of independent computers or servers.
+
+|Node
+|A node is each working machine that makes up a cluster, which can be a virtual machine or a physical machine. Each node can operate and process tasks independently.
+
+|Workspace
+|A workspace is the basic logical unit for managing projects and organizing members, serving as the foundation of the KubeSphere multi-tenant system.
+
+|Workspace Member
+|A user invited to work in a workspace, possessing specific permissions.
+
+|Project
+|A project in KubeSphere corresponds to a namespace in Kubernetes.
+
+|Multi-cluster Project
+|A project where workloads are deployed across multiple clusters.
+
+|Project Member
+|A user invited to work in a project, possessing specific permissions.
+
+|Console
+|The user login page, which displays resources the tenant has access to, such as workspaces and projects.
+
+|Pod
+|A Pod is the smallest manageable unit of an application in Kubernetes, equivalent to the logical host of the application. Each Pod contains one or more containers that share resources such as network and storage. Each Pod is typically used to run a single instance of a given application.
+
+|Container
+|A container is a portable, executable, lightweight image used as an independent runtime environment to encapsulate an application and its dependencies.
+
+|Image
+|An image is a static template for a container, containing the application's code, runtime environment, and dependencies, used to create container instances.
+
+|Docker
+|An open-source application container engine for creating, deploying, and managing containers.
+
+|Docker Hub
+|A container image repository.
+
+|KubeKey
+|A brand-new installation tool offering flexible installation choices. It can install only Kubernetes or both Kubernetes and KubeSphere simultaneously. KubeKey also supports various installation options, such as All-in-One, multi-node installation, and offline installation. Users only need to prepare the configuration file and then execute the relevant commands.
+
+// |ks-installer
+// |An installation package for deploying KubeSphere on an existing Kubernetes cluster.
+
+|kube-proxy
+|kube-proxy is a network proxy that runs on each node in the cluster.
+
+|Kubectl
+|kubectl is the command-line tool for Kubernetes, used to communicate with the cluster's control plane. It supports cluster management, application deployment, resource status queries, and other operations.
+
+|Kubelet
+|kubelet runs on every node in the cluster. It ensures that containers are running in Pods.
+|===
+
+
+== Cluster
+
+[%header,cols="1a,4a"]
+|===
+|Term
+|Description
+
+|Cluster Node
+|A node local to the cluster, typically where all cluster nodes belong to the same private network. Includes control plane nodes and worker nodes.
+
+|Control Plane Node
+|Also known as the master node, used to control and manage the entire cluster.
+
+|Worker Node
+|Provides the container runtime environment, used to run the actually deployed applications.
+
+|Edge Node
+|A node deployed in an edge environment, managed by KubeSphere, typically used to process local data and provide low-latency services.
+
+|Host Cluster
+|Also known as the host cluster, it manages member clusters and provides a unified multi-cluster central control plane.
+
+|Member Cluster
+|Also known as a member cluster, it is uniformly managed by the host cluster in a multi-cluster architecture.
+
+|Direct Connection
+|This method can be used to directly connect the host cluster and member cluster when any node of the host cluster can access the kube-apiserver address of the member cluster.
+
+|Agent Connection
+|This method can be used to connect the host cluster and member cluster via an agent when the host cluster cannot directly connect to the member cluster.
+
+|jwtSecret
+|The secret key used in the host cluster and member clusters to generate and validate user identity tokens (JWT).
+
+|Tower
+|A multi-cluster agent connection component, consisting of proxy and agent parts, deployed on the host cluster and member clusters respectively.
+
+|Agent Service Address
+|When using an agent connection, this is the communication service address of the host cluster that the Tower agent on the member cluster needs to obtain.
+
+|Cluster Visibility
+|Controls which workspaces a cluster is authorized to, enabling those workspaces to use the authorized cluster.
+|===
+
+== Applications and Application Workloads
+
+[%header,cols="1a,4a"]
+|===
+|Term
+|Description
+
+|OpenPitrix
+|An open-source system for packaging, deploying, and managing different types of applications.
+
+|Application Template
+|A template for a specific application. Tenants can use application templates to deploy new application instances.
+
+|App Store
+|The App Store contains built-in applications. Platform tenants can also share different applications in the App Store.
+
+|Workload
+|A workload is an application running on KubeSphere, responsible for managing one or more Pods of an application.
+
+|Deployment
+|A type of workload used to manage stateless applications. A deployment runs several replicas of an application and automatically replaces instances that crash or fail. For more information, see link:https://kubernetes.io/zh/docs/concepts/workloads/controllers/deployment/[Deployment].
+
+|StatefulSet
+|A StatefulSet is a workload object used to manage stateful applications, such as MySQL. For more information, see link:https://kubernetes.io/zh/docs/concepts/workloads/controllers/statefulset/[StatefulSet].
+
+|DaemonSet
+|A DaemonSet manages multiple Pod replicas, ensuring that Pod replicas run on a set of nodes in the cluster. For more information, see link:https://kubernetes.io/zh/docs/concepts/workloads/controllers/daemonset/[DaemonSet].
+
+|Job
+|A Job is a deterministic or batch task that needs to run to completion, used to manage Pods that run only once or periodically. For more information, see link:https://kubernetes.io/zh/docs/concepts/workloads/controllers/job/[Job].
+
+|CronJob
+|A CronJob is a batch task that needs to run at a specific time or repeatedly at specified intervals. For more information, see link:https://kubernetes.io/zh/docs/concepts/workloads/controllers/cron-jobs/[CronJob].
+
+|Service
+|Exposes an application running on Pods as a network service, providing a fixed address (domain name or IP address) for client access. For more information, see link:https://kubernetes.io/zh/docs/concepts/services-networking/service/[Service].
+
+|NodePort
+|Exposes a service using the IP address and a static port (NodePort) on each node. The service can be accessed via `<Node IP>:<NodePort>`.
+
+|LoadBalancer
+|Exposes a service externally using a load balancer provided by a cloud service provider.
+
+|Ingress
+|Ingress is used to aggregate services within the cluster and provide external access. Each Ingress contains mapping rules from a domain name and its subpaths to different services. KubeSphere Ingress corresponds to Kubernetes Ingress.
+|===
+
+== Storage
+
+[%header,cols="1a,4a"]
+|===
+|Term
+|Description
+
+|Volume
+|A basic resource object used to provide storage to containers.
+
+|Storage Class
+|Defines the types of volumes available for containers to use.
+
+|Persistent Volume Claim (PVC)
+|A Persistent Volume Claim is a user's declaration of storage requirements. It is a resource within a namespace, where specifications like storage size and access mode can be defined. The system binds or creates a Persistent Volume based on the PVC.
+
+|Persistent Volume (PV)
+|A storage area created in the backend storage system based on the parameters in the Persistent Volume Claim, available for containers to use. It is a general-purpose, pluggable, persistent resource not constrained by the lifecycle of a single Pod.
+
+|Volume Snapshot Class
+|Defines a class of volume snapshots that can save snapshot data.
+
+|Volume Snapshot
+|A complete copy or mirror of a volume's data at a specific point in time. Data can be fully restored to the snapshot point using a snapshot.
+
+|Volume Snapshot Content
+|The snapshot data saved in the backend storage system according to the parameters in the Volume Snapshot.
+|===
+
+== DevOps
+
+[%header,cols="1a,4a"]
+|===
+|Term
+|Description
+
+|DevOps Project
+|A DevOps project is used to create and manage pipelines, credentials, and CI/CD-related resources.
+
+|SCM (Source Control Management)
+|Source Control Management, such as GitHub and GitLab.
+
+|In-SCM
+|Building a pipeline based on a Jenkinsfile through an SCM tool.
+
+|Out-of-SCM
+|Building a pipeline through a graphical editing panel without writing a Jenkinsfile.
+
+|CI Node
+|A dedicated node for pipeline, S2I, and B2I tasks. Generally, applications often need to pull multiple dependencies during the build process, which can lead to issues like long pull times, network instability, and build failures. To ensure pipeline stability and speed up builds (via caching), you can configure one or a set of CI nodes dedicated for CI/CD pipelines and S2I/B2I tasks.
+
+|B2I (Binary-to-Image)
+|B2I is a set of tools and workflows for building reproducible container images from binary executables (e.g., Jar and War files). After developers and operations teams package projects into artifacts like War and Jar files, they can quickly package these artifacts or binary packages into Docker images and publish them to image repositories like DockerHub or Harbor.
+
+|S2I (Source-to-Image)
+|S2I is a set of tools and workflows for building reproducible container images from source code. By injecting source code into a container image, it automatically packages the compiled code into an image. In KubeSphere, S2I is supported for building images, and it also supports creating services to generate images from source code with one click, push them to a repository, and create their deployments and services, ultimately publishing them to Kubernetes automatically.
+|===
+
+== Logging, Events, and Auditing
+
+[%header,cols="1a,4a"]
+|===
+|Term
+|Description
+
+|Log
+|A log is a list of events recorded by a cluster or application.
+
+|Log Receiver
+|Collects various types of system logs, including: container logs, resource events, and audit logs.
+
+|Audit Policy
+|An audit policy defines a series of rules for event recording and the data they contain.
+
+|Audit Rule
+|An audit rule defines how audit logs are handled.
+
+|Audit Webhook
+|Kubernetes audit logs are sent to the audit webhook.
+|===
+
+== Network
+
+[%header,cols="1a,4a"]
+|===
+|Term
+|Description
+
+|Gateway
+|Provides reverse proxy for services. The gateway forwards business traffic to different services based on the rules defined in the Ingress.
+
+|Network Policy
+|Used to control the access and accessibility permissions of Pods within a cluster. It can restrict Pods to access only specific other Pods or network segments, and allow Pods to be accessed only by specific other Pods or network segments.
+
+|Pod IP Pool
+|Contains multiple virtual IP addresses used to assign virtual IP addresses to Pods. Each Pod IP pool contains a private IP network segment accessible within the cluster.
+|===
+
+== Monitoring, Alerting, and Notification
+[%header,cols="1a,4a"]
+|===
+|Term
+|Description
+
+|Alerting Rule Group
+|Used to generate alerts when specific monitoring metrics meet preset conditions and durations.
+
+|Prometheus
+|Responsible for monitoring and storing various system data, and sending alert information to the Alertmanager based on alerting rules.
+|===
+
+== Others
+[%header,cols="1a,4a"]
+|===
+|Term
+|Description
+
+|Taint
+|A mark created by a user on a node, consisting of a key, value, and effect. Used in conjunction with tolerations created on Pods to ensure Pods are not scheduled onto unsuitable nodes.
+
+|Toleration
+|A toleration indicates that a Pod can be scheduled onto a node or node group with a corresponding taint. It consists of a key, value, and effect. Tolerations and taints work together to ensure Pods are not scheduled onto unsuitable nodes.
+
+|Label
+|A label is an identifiable key-value pair set on an object, typically used to manage and select subsets of objects.
+
+|Annotation
+|An annotation attaches arbitrary, non-identifying metadata to a resource object in the form of key-value pairs.
+
+|Session Affinity
+|Forwards all requests from the same client in the same session to the same Pod.
+
+|Secret
+|Contains Base64-encoded key-value pairs, used to store confidential data such as passwords, tokens, and keys.
+
+|ConfigMap
+|Stores non-confidential data such as environment variables, command-line arguments, and configuration files in the form of key-value pairs.
+
+|ServiceAccount
+|Stores the current cluster's access information, used to provide cluster access permissions to applications inside and outside the cluster.
+
+|CustomResourceDefinition (CRD)
+|Uses a CustomResourceDefinition to create custom resources. It adds resource objects to the API server through customized code without needing to compile a complete custom API server.
+|===

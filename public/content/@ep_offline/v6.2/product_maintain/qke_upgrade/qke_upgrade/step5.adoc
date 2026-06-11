@@ -1,0 +1,74 @@
+---
+title: 步骤五：更新 QKE Plus 配置
+weight: 5
+---
+
+
+
+. 登录{product_name} Global Zone 的任意一台 Webservice 节点。
+
+. 修改配置文件 `/pitrix/lib/pitrix-script/qke/conf/config.yaml` 中 `qke_version_info` 字段。
++
+* 示例
++
+[source,shell]
+----
+......
+qke_version_info:
+  normal:
+    appid: app-o6lvbkhm
+    appv: appv-hr1rhbqz
+    resource_kit: ca-frfymnvi
+    qke_version: v3.1.0
+    qke_cli_version: v3.1.0
+    kubesphere_version: v3.3.1
+    kse_version: v3.4.1
+    kubernetes_version: v1.25.10
+    compatibility_k8s: 'v1.21.5,v1.22.10,1.25.10'
+    compatibility_ks: 'v1.21.5,v1.22.10,v1.23.8,1.25.10'
+    compatibility_qkcp: 'v1.21.5,v1.22.10,v1.23.8,1.25.10'
+    install_url: ${对应的文件服务器地址，如不是HTTP根，则需要带路径}
+    cli_url: ${对应的文件服务器地址}/qke-cli-v3.1.0.tar.gz
+    private_registry: ${对应的私有仓库地址}
+----
++
+* 填写说明
++
+[cols='1,3a']
+|===
+| 参数  | 说明 
+
+| appid| 无需修改。
+| appv a| 填写 `appv-hr1rhbqz`。麒麟或 ARM 版本可参考link:../../../../product_installation/qke_install/overview/resources/#_应用版本说明[ FTP 目录详解]中的内容进行查询。
+| resource_kit a| 填写 `ca-frfymnvi`。麒麟或 ARM 版本可参考link:../../../../product_installation/qke_install/overview/resources/#_应用版本说明[ FTP 目录详解]中的内容进行查询。
+| qke_version a| 填写 `v3.1.0`。
+| qke_cli_version | 填写 `v3.1.0`。
+| kubesphere_version | 填写 `v3.3.1`。
+| kse_version | 填写 `v3.4.1`。
+| kubernetes_version | 填写 `v1.25.10`。
+| compatibility_k8s | 无需修改。
+| compatibility_ks | 无需修改。
+| compatibility_qkcp | 无需修改。
+| install_url | 无需修改。
+| cli_url | 只需要将地址中包名部分替换为 `qke-cli-v3.1.0.tar.gz` 即可。
+| private_registry | 无需修改。
+|===
+
+
+. 确认配置文件修改无误后，执行以下命令行，确认生成的 SQL 是否符合预期。
++
+[source,shell]
+----
+./qke --upgrade=1
+----
++
+命令行回显结果如下，参考上一步配置内容确认 KubeSphere 的版本、Zone ID、`install_url` 以及 `private_registry` 地址是否正确。
++
+image::/images/ep_offline/qke_upgrade/qke_upgrade_3.png[qke_upgrade_3]
+
+. 确认以上内容无误后，执行以下命令行，插入新版本。
++
+[source,shell]
+----
+./qke --upgrade=1 --dry-run=0
+----

@@ -1,0 +1,19 @@
+---
+title: "安装监控组件"
+weight: 20
+---
+
+. 登录云平台 FirstBox。
+. 执行以下命令，安装监控组件。
++
+[source]
+----
+fb update {zone_id}-scs pitrix-cronus-telegraf-resource pitrix-cronus-telegraf
+fb update {zone_id}-srp pitrix-cronus-telegraf-resource pitrix-cronus-telegraf
+----
++
+回显信息如下，表示安装成功。
++
+image::/images/ep_offline/scs_install/cfw_monitor_01.png[]
++
+image::/images/ep_offline/scs_install/cfw_monitor_02.png[]

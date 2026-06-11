@@ -1,0 +1,166 @@
+---
+title: 通过标签查询IAM纳管API信息（DescribeIAMApiActionsByTag）
+weight: 13
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| owner
+| String
+| true
+| 所有者
+
+| tag
+| String
+| true
+| 标签
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| actions
+| Object
+| false
+| API操作信息详情集合
+
+| actions.action_group
+| String
+| false
+| API分组
+
+| actions.attributes
+| String
+| false
+| 属性
+
+| actions.audit_log
+| String
+| false
+| 审计日志
+
+| actions.create_time
+| String
+| false
+| 创建时间
+
+| actions.gateway
+| String
+| false
+| 网关
+
+| actions.id
+| String
+| false
+| API操作ID
+
+| actions.keys
+| String
+| false
+| 必选可选参数
+
+| actions.permission
+| String
+| false
+| 默认权限
+
+| actions.service_name
+| String
+| false
+| 服务名
+
+| actions.status
+| String
+| false
+| 状态
+
+| actions.translated_name
+| String
+| false
+| 中文服务名
+
+| actions.type
+| String
+| false
+| 类型(服务,接口)
+
+| actions.visible
+| String
+| false
+| 是否可见
+
+| total_count
+| Integer
+| false
+| API总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMApiActions",
+  "limit": 20,
+  "offset": 0,
+  "reverse": 1,
+  "sort_key": "create_time"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMApiActionsResponse",
+  "actions": {
+    "appCenter": {
+      "instance": {
+        "DescribeLoadBalancerPolicies": {
+          "action_group": "ReadOnly",
+          "attributes": {
+            "actionGroups": [
+              "ReadOnly"
+            ],
+            "optionalResources": [
+              "loadbalancer_policy"
+            ],
+            "requiredResources": []
+          },
+          "audit_log": "",
+          "create_time": "2023-04-03T14:49:49",
+          "gateway": "",
+          "id": "DescribeLoadBalancerPolicies",
+          "keys": {
+            "optional": [
+              "loadbalancer_policies"
+            ],
+            "required": []
+          },
+          "permission": "deny",
+          "service_name": "elb",
+          "status": "active",
+          "translated_name": "查询负载均衡策略",
+          "type": "action",
+          "visible": "visible"
+        }
+      }
+    }
+  },
+  "ret_code": 0,
+  "total_count": 1
+}
+----

@@ -1,0 +1,60 @@
+---
+title: "删除卷快照"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 存储, 卷快照, 删除卷快照"
+description: "介绍如何删除卷快照。"
+weight: 05
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: bec23433e69d424299536f0def58c502
+:ks_xref_id: e4ba6da06976451c8b2b030c5f8ba392
+:ks_comp: ../../../../components/
+:ks_title: 删除卷快照
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 存储, 卷快照, 删除卷快照
+:ks_description: 介绍如何删除卷快照。
+:ks_weight: 05
+:ks_icon:
+:ks_permission: **卷快照管理**
+:ks_navigation: **存储 > 卷快照**
+
+
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-desc-deleteVolumeSnapshots.adoc[]
+
+
+== 前提条件link:[id=52466387948e43259203b9f76dfc5b33]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 删除单个卷快照link:[id=6328e2d62bc643b092cefda4dd962629]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-oper-deleteASingleVolumeSnapshot.adoc[]
+
+
+== 批量删除卷快照link:[id=bd45c8f1ae3f4469b02f9fcf10296b2e]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/volumeSnapshots/volumeSnapshots-oper-deleteMultipleVolumeSnapshots.adoc[]

@@ -1,0 +1,25 @@
+---
+title: "平台监控服务"
+weight: 5
+draft: true
+---
+
+BOSS 平台的监控主要来源于物理资源和虚拟资源的监控。
+
++++<br/>+++
+
+image::/images/ep_offline/boss_twp/30_60.png[]
+
+* *物力资源监控*
++
+** 监控数据通过 Cronus Gateway 提供。
+** 由 BOSS Monitor 模块采集。
+** 监控数据主要来源于管理节点和计算节点。
+
+* *虚拟资源监控*
+** 监控数据通过 IaaS API Service 获取。
+** 通过 BOSS Monitor 模块采集。
+** 监控数据主要来源于虚拟资源、虚拟网络等。
+
++++<br/>+++
+

@@ -1,0 +1,51 @@
+---
+title: "WizTelemetry Monitoring"
+keywords: "Kubernetes, {ks_product}, Platform Management, Whizard Observability Center"
+description: "Introduces how to use the 'WizTelemetry Monitoring' extension."
+weight: 05
+layout: "second"
+---
+
+
+This section introduces how to use the "WizTelemetry Monitoring" extension.
+
+WizTelemetry Monitoring is an extension within the WizTelemetry Observability Platform that provides monitoring capabilities. It offers multi-tenant, cloud-native resource monitoring, including real-time and historical data display of core monitoring metrics for objects such as multi-clusters, nodes, workloads, GPUs, and the K8s control plane.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+WizTelemetry Monitoring no longer includes the Whizard Observability Center. The WizTelemetry Global Monitoring extension will encompass the functionalities of the original Whizard Observability Center.
+|===
+
+This section only covers monitoring features in a single-cluster environment. For alerting features in a single cluster, please refer to link:../06-alerting[WizTelemetry Alerting]. For monitoring and alerting features in multi-cluster environments, please refer to link:../07-whizard[WizTelemetry Global Monitoring].
+
+After installing the "WizTelemetry Monitoring" extension, the **Monitoring & Alerting** option will appear in the left navigation pane for both clusters and workspaces. Services under application workloads in clusters and workspaces will support **Edit Monitoring Exporter**. The following pages will also display relevant monitoring metric data:
+
+[%header,cols="1a,3a"]
+|===
+|Module
+|Pages
+
+|Cluster
+|
+* Overview page;
+* List and detail pages for cluster nodes and projects;
+* Detail pages for workloads, Jobs, pods, services, and persistent volume claims;
+* Basic Information page under Cluster Settings.
+
+|Workspace
+|
+* Overview page;
+* Project list;
+* Detail pages for workloads, Jobs, pods, services, and persistent volume claims.
+|===
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more information about extension configuration, please refer to the description on the detail page of the "WizTelemetry Monitoring" extension in the Extensions Center.
+|===

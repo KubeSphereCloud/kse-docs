@@ -1,0 +1,63 @@
+---
+title: "启用企业空间网关"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 企业空间管理, 企业空间设置,启用企业空间网关"
+description: "介绍如何启用企业空间网关。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 37bd69ee823740cbba707378cb029ad6
+:ks_xref_id: 37329c49be1a4db1845cd4bab9442a57
+:ks_comp: ../../../../components/
+:ks_title: 启用企业空间网关
+:ks_keywords: Kubernetes, {ks_product}, 企业空间管理, 企业空间设置,启用企业空间网关
+:ks_description: 介绍如何启用企业空间网关。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **企业空间设置**
+:ks_navigation: **企业空间设置 > 网关设置**
+
+
+本节介绍如何启用企业空间网关。
+
+
+== 前提条件link:[id=7e7aa49c9b424def954a051923598567]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=762551498ebb431bbfd8522da2bd90e7]
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在页面右侧的**网关设置**页面，点击目标企业空间右侧的**启用网关**。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+- 如果您需要启用企业空间网关，请将 KubeSphere 升级到 3.4 或以上版本。
+- 不支持在**网关设置**页面设置项目网关。如果您需要设置项目网关，请前往对应的项目。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在弹出的**启用网关**对话框，设置网关的参数，然后点击**确定**。
++
+--
+include::../../../../_custom/clusterManagement/gatewaySettings/gatewaySettings-para-enableGateway.adoc[]
+--

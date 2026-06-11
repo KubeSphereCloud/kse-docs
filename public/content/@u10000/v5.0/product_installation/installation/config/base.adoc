@@ -1,0 +1,255 @@
+---
+title: base.ini
+weight: 1
+---
+
+该配置文件内容分为存储池通用配置与数据存储池相关配置。
+
+// {product_name} 的存储集群支持使用缓存盘来提高读写效率。存储集群是否使用缓存盘，其相应的配置填写方式稍有不同。
+
+//== 通用配置
+
+== 示例
+
+[source,ini]
+----
+[base]
+allow_passwd_login = true
+is_instance_on_iaas = true
+zone_id = xxx
+region_id = yyy
+global_domain = stor.qingstorage.com
+qingstor_version = u1w-v5.0
+
+[cluster1]
+vol_type = replica 3
+storage_class = standard
+block = vdc vdd
+block_count = 2
+
+[cluster2]
+vol_type = ec 4+2
+storage_class = standard_ia
+block_count = 3
+[cluster2.block]
+192.168.100.6 = vda vdb vdc 
+192.168.100.7 = vde vdg vdh
+192.168.100.8 = vde vdf vdh
+----
+
+== 参数说明
+
+// {product_name} 支持各存储节点上数据盘盘符不一致。
+
+// 当各存储节点上数据盘盘符一致时，`cluster` 字段使用 `block` 参数，来填写数据盘盘符，参考示例中的 `cluster1` 配置。
+
+// 当各存储节点上数据盘盘符不一致时，`cluster` 字段使用 `cluster.block` 参数，来填写数据盘盘符，参考示例中的 `cluster2` 配置。
+
+// include::../../../../_components/note.adoc[]
+
+// * 仅填写数据盘盘符，索引盘盘符无需填写，且所填写数据盘盘符均需在存储节点存在。
+// * 参数 `cluster.block` 与 `block` 在配置中，根据实际情况选择一个进行配置即可。
+
+// include::../../../../_components/table_footer.adoc[]
+
+=== base 
+
+用于设置存储池通用配置信息。
+
+[cols="1,3", options="header"]
+|===
+| 参数 | 说明 
+
+|allow_passwd_login a| 用于设置是否允许用户通过 SSH 用户名 & 密码的方式登录该环境。
+
+* 取值为 `True` 或 `False`。配置为 `False` 时，仅允许用户通过 SSH Key 的方式登录。
+* 默认值为 `False`。
+* 若网关节点配置有公网 IP，则此参数必须设置为 `False`。
+
+|is_instance_on_iaas a|用于标记待部署环境是否由虚拟机搭建。
+
+* 取值为 `True` 或 `False`。
+* 默认值为 `False`，表示使用物理机搭建环境。
+* 若使用虚拟机搭建环境时，需修改该参数为 `True`。
+
+|zone_id a|用于配置当前环境的 Zone ID。由不超过 12 个字符的小写字母，数字，以及中划线组成的以小写字母开头，且以小写字母或数字结尾的字符串组成。
+
+* 不与 IaaS 对接的环境中，需根据前期规划进行填写。
+* 与 IaaS 对接的环境中，填写对接的 IaaS 区域的 Zone ID。
+|region_id a|用于配置当前环境的 Region ID。
+
+* 不与 IaaS 对接的环境中，若前期规划仅一个 Zone，则无需填写；若前期规划为多个 Zone 的环境，则需要根据前期规划进行填写。
+* 与 IaaS 对接的环境中，填写对接的 IaaS 区域所属的 Region ID。
+|global_domain a|用于配置当前环境的 Global 域名。用户可根据前期规划进行填写。
+|qingstor_version a|用于填写 {product_name} 的版本号，需根据实际情况进行填写。
+
+|===
+
+=== cluster
+
+用于设置数据存储池的相关信息。可以设置多个，依次使用 `cluster1`、`cluster2`......​进行标识。
+
+[cols="1,3", options="header"]
+|===
+| 参数 | 说明 
+
+|vol_type a| 用于设置数据存储池的冗余策略。
+
+* 可选值为 `replicate` 与 `ec`。分别表示硬盘的冗余模式为副本或纠删码类型。
+* 副本填写格式为 `vol_type = replica 3`，其中 3 表示副本数，可根据实际情况进行修改。
+* 纠删码填写格式为 `vol_type = ec 4+2`，其中 4+2 表示 EC 的数据块与校验块的配比，可根据实际情况进行修改。
+|storage_class a|用于设置据存储池的存储级别。可选值为 `standard` 与 `standard_ia`，分别表示标准存储和低频存储。
+|block a|* 填写数据盘的设备名称，多个盘符之间使用空格分隔。
+* 当各存储节点上数据盘盘符一致时，使用该参数，来填写数据盘盘符，参考示例中的 `cluster1` 配置。
+
+include::../../../../../_components/note_in_table.adoc[]
+
+* 仅填写数据盘盘符，索引盘盘符无需填写，且所填写数据盘盘符均需在存储节点存在。
+* 参数 `cluster.block` 与 `block` 在配置中，根据实际情况选择一个进行配置即可。
+
+include::../../../../../_components/footer_in_table.adoc[]
+
+|cluster.block a|* 填写数据盘的设备名称，多个盘符之间使用空格分隔。
+* 当各存储节点上数据盘盘符不一致时，使用该参数，来填写数据盘盘符，参考示例中的 `cluster2` 配置。
+* 填写格式参考示例，分别填写相应的存储节点 IP 及该节点上的数据盘盘符。
+
+include::../../../../../_components/note_in_table.adoc[]
+
+* 仅填写数据盘盘符，索引盘盘符无需填写，且所填写数据盘盘符均需在存储节点存在。
+* 参数 `cluster.block` 与 `block` 在配置中，根据实际情况选择一个进行配置即可。
+
+include::../../../../../_components/footer_in_table.adoc[]
+
+
+|block_count a|用于填写数据盘数量。
+|===
+
+// == 使用缓存盘
+
+// 若存储集群使用缓存盘，则有如下限制。
+
+// * 若同一环境中，存储集群使用缓存盘，则所有存储集群都得使用缓存盘，{product_name} 暂时不支持有部分存储集群使用缓存盘，部分存储集群不使用缓存盘。
+// * 每个存储集群都应配备单独的缓存盘，{product_name} 暂不支持多个存储集群共享缓存盘。
+
+// 根据部署方式的不同，使用缓存盘时，不同的场景下，`cluster` 的配置也有一定的区别。下文仅给出 `cluster` 配置的示例，进行详细说明。
+
+
+
+// === 示例一
+
+// 各集群之间不共享存储节点，使用缓存盘，且各节点上缓存盘盘符一致时，参考如下配置方式。
+
+// * 示例
+// +
+// [source,ini]
+// ----
+// [cluster1]
+// vol_type = replica 3
+// storage_class = standard
+// block = vdc vdd
+// cache = vdb
+// block_count = 2
+
+// [cluster2]
+// vol_type = replica 3
+// storage_class = standard
+// block = vdc vdd
+// cache = vdb
+// block_count = 2
+// ----
+
+// * 参数说明
+// +
+// 仅列举较于link:#_参数说明[通用配置]中有差异的参数。
+// +
+// [cols="1,3", options="header"]
+// |===
+// | 参数 | 说明 
+
+// |cache a|缓存盘盘符，各节点上缓存盘需保持盘符一致。
+// |===
+
+
+// === 示例二
+
+// 各集群之间不共享存储节点，使用缓存盘，且各节点上缓存盘盘符与数据盘盘符都不一致时，参考如下配置方式。
+
+// * 示例
+// +
+// [source,ini]
+// ----
+
+// [cluster5]
+// vol_type = replica 3
+// storage_class = standard
+// block_count = 3
+// [cluster5.cache]
+// 192.168.100.6 = vde
+// 192.168.100.7 = vdf
+// 192.168.100.8 = vdg
+// [cluster5.block]
+// 192.168.100.6 = vdf vdg vdh
+// 192.168.100.7 = vde vdg vdh
+// 192.168.100.8 = vde vdf vdh
+// ----
+
+// * 参数说明
+// +
+// 仅列举较于link:#_参数说明[通用配置]中有差异的参数。
+// +
+// [cols="1,3", options="header"]
+// |===
+// | 参数 | 说明 
+
+// |cluster.cache a|* 填写缓存盘的设备名称，多个盘符之间使用空格分隔。
+// * 当各存储节点上缓存盘盘符不一致时，使用该参数，来填写缓存盘盘符。
+// * 填写格式参考示例，分别填写相应的存储节点 IP 及该节点上的缓存盘盘符。
+
+// include::../../../../../_components/note_in_table.adoc[]
+
+// 参数 `cluster.cache` 与 `cache` 在配置中，根据实际情况选择一个进行配置即可。
+
+// include::../../../../../_components/footer_in_table.adoc[]
+// |===
+
+// === 示例三
+
+// 多集群共享存储节点，使用缓存盘，且各节点上缓存盘盘符一致时，参考如下配置方式。
+
+// * 示例
+// +
+// [source,ini]
+// ----
+// [cluster1]
+// vol_type = replica 3
+// storage_class = standard
+// block = vde vdf
+// cache = vda
+// block_count = 2
+// cache_used_count = 0
+
+// [cluster2]
+// vol_type = replica 3
+// storage_class = standard
+// block = vdc vdd
+// cache = vdb
+// block_count = 2
+// cache_used_count = 2
+// ----
+
+// * 参数说明
+// +
+// 仅列举较于link:#_参数说明[通用配置]中有差异的参数。
+// +
+// [cols="1,3", options="header"]
+// |===
+// | 参数 | 说明 
+
+// |cache a|缓存盘盘符。各 `cluster` 字段的配置中，`cache` 参数填写的盘符，应保持不同。
+// |cache_used_count a|同节点上，已使用缓存的数据盘数量。
+
+// * 如上所示，`cluster1` 为第一个存储集群，此时缓存盘没有投入使用，因此 `cache_used_count` 设置为 `0`。
+// * 如上所示，`cluster2` 为第二个存储集群，此时 `cluster1` 已有 2 块数据盘使用了缓存盘，因此 `cache_used_count` 设置为 `2`。
+// |===
+
+

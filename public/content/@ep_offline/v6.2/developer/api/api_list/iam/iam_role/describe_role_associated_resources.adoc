@@ -1,0 +1,107 @@
+---
+title: 查询IAM身份绑定的资源（DescribeIAMRoleAssociatedResources）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| false
+| ConsoleID
+
+| limit
+| Integer
+| false
+| 偏移量
+
+| offset
+| Integer
+| false
+| 起始坐标
+
+| owner
+| String
+| false
+| 所有者
+
+| reverse
+| Integer
+| false
+| 是否降序查询
+
+| role
+| String
+| true
+| IAM身份ID
+
+| root_user
+| String
+| false
+| 根用户ID
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| sort_key
+| String
+| false
+| 排序使用的列
+
+| zone
+| String
+| true
+| ZONE
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| resources
+| Array
+| false
+| 资源ID
+
+| role
+| String
+| false
+| IAM身份ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMRoleAssociatedResources",
+  "role": "iamr-xj92xa37"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeIAMRoleAssociatedResourcesResponse",
+  "resources": [
+    "i-07cdxc0x"
+  ],
+  "ret_code": 0,
+  "role": "iamr-xj92xa37"
+}
+----

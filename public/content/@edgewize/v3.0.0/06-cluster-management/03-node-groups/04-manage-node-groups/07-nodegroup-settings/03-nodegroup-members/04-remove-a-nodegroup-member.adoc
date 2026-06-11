@@ -1,0 +1,42 @@
+---
+title: "移除节点组成员"
+weight: 04
+---
+
+:ks_permission: **节点组管理**
+:ks_navigation: **节点组设置 > 节点组成员**
+
+
+本节介绍如何移除节点组成员。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+用户被从节点组中移除后，将失去节点组角色提供的权限。
+|===
+
+
+== 前提条件
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+
+== 操作步骤
+
+include::../../../../../../_custom/clusterManagement/nodegroups/nodegroup-oper-openNodeGroupPage.adoc[]
+
++
+
+include::../../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在需要移除的节点组成员右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后选择**移除**。
+
+. 在**移除成员**对话框输出节点组成员的用户名，然后点击**确定**。
++
+--
+节点组成员被移除后将不再显示在节点组成员列表中。
+--

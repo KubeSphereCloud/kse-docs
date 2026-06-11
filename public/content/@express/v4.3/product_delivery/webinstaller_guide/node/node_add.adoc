@@ -1,0 +1,30 @@
+---
+title: "添加节点"
+weight: 2
+---
+
+
+若云易捷集群安装部署完成后，需要再次添加新的节点，即对集群进行扩容操作时，可参考如下步骤，进行新节点的添加。
+
+include::../../../../../_components/attention.adoc[]
+在 {product_installer_name} 上进行添加节点操作之前，云易捷相关安装包须提前在服务器上进行安装部署。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. link:../../login[登录 {product_installer_name}]，在左侧导航栏选择**节点管理**。
+
+. 在**节点管理**页面，点击**添加节点**，在弹出的**添加节点**窗口中，再次点击**添加节点**。
++
+image::/images/express/installer/node_2.png[,60%]
+
+. 在新的**添加节点**窗口中，输入**节点 IP 地址**，点击**扫描可用节点**，系统会自动扫描并添加新的节点。
++
+
+include::../../../../../_components/note.adoc[]
+* 此处支持输入单个 IP 地址或 IP 范围。
+* 若仅需添加单个节点时，此处输入相应节点 IP 地址即可。
+* 若需要添加多个节点，则需要输入相应的 IP 范围。需要添加的节点的 IP 地址，必须在当前窗口所输入的 IP 范围内。
+
+include::../../../../../_components/table_footer.adoc[]
++
+image::/images/express/installer/node_3.png[,60%]

@@ -1,0 +1,97 @@
+---
+title: "bird 监听端口"
+weight: 01
+---
+
+. 下载 calico 的客户端工具。
++
+--
+
+[,bash]
+----
+# arm64(aarch64) 架构
+curl -SsL https://github.com/projectcalico/calico/releases/download/v3.23.2/calicoctl-linux-arm64 -o calicoctl
+
+# x86-64 架构
+curl -SsL https://github.com/projectcalico/calico/releases/download/v3.23.2/calicoctl-linux-amd64 -o calicoctl
+
+# 其他系统架构的 calico 客户端工具的下载链接见
+https://github.com/projectcalico/calico/releases/tag/v3.23.2
+----
+--
+
+. 添加可执行权限。
++
+[,bash]
+----
+chmod +x calicoctl
+----
+
+. 查询 BGPConfiguration 配置。
++
+--
+[,bash]
+----
+./calicoctl get BGPConfiguration
+----
+
+如果未查询到配置，则按以下命令创建 BGPConfiguration.yaml。
+
+如果查询到配置，则修改 BGPConfiguration.yaml 中的 bindMode 为 `bindMode: NodeIP`。
+
+[,bash]
+----
+cat > BGPConfiguration.yaml <<EOF
+apiVersion: projectcalico.org/v3
+kind: BGPConfiguration
+metadata:
+  name: default
+spec:
+  logSeverityScreen: Info
+  nodeToNodeMeshEnabled: true
+  nodeMeshMaxRestartTime: 120s
+  asNumber: 64512
+  serviceClusterIPs: []
+  serviceExternalIPs: []
+  listenPort: 179
+  bindMode: NodeIP
+  communities: []
+  prefixAdvertisements: []
+EOF
+----
+
+创建 default 配置。
+
+[,bash]
+----
+./calicoctl apply -f BGPConfiguration.yaml
+----
+
+查看配置。
+
+[,bash]
+----
+./calicoctl get BGPConfiguration
+----
+--
+
+. 重启 calico-node。
++
+[,bash]
+----
+kubectl -n kube-system rollout restart ds calico-node
+----
+
+. 执行以下命令，可发现监听地址已修改为节点 IP。
++
+[,bash]
+----
+netstat -tlnup |grep bird
+----
+
++
+[,bash]
+----
+[root@qyicsl-isdp-master-001 ~]# netstat -tlnup|grep bird
+tcp        0      0 172.31.50.147:179       0.0.0.0:*               LISTEN      25308/bird
+----

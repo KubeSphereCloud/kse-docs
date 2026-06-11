@@ -1,0 +1,81 @@
+---
+title: "检查并修改 supervisorctl update 代码"
+weight: 3
+---
+
+== 适用范围
+
+**仅针对使用 Installer v3.0.0 之前版本**部署的 NeonSAN 集群。
+
+== 原因描述
+
+``supervisorctl update`` 会导致自动重启所有服务配置发生了变化的服务，进而造成集群中卷的降级，或服务重启影响业务，故在进行扩容前，需相应代码进行修改。
+
+== 操作步骤
+
+. 登录原集群的 FirstBox。
+
+. 执行如下命令，查找 supervisorctl update 相关代码。
++
+[,shell]
+----
+cd /qingstor/install/deployment/roles/ && grep "supervisorctl update" . -rn | grep -v ".git" |grep -v "dashboard.yml" | grep -v "upgrade_neonsan.sh" | grep -v "qs-global-gateway" | grep -v "qs-filebeat" | grep -v "loki" | grep -v "codis" | grep -v "aggregator" | grep -v "qs-scheduler" | grep -v "qs-producer" | grep -v "qs-gateway" | grep -v "dns" | grep -v "qs-dispatcher" | grep -v "init"
+----
++
+image::/images/neonsan/auto_exp_10.png[]
+
+. 根据上一步的查询结果，将每个相应配置文件中与 supervisorctl update 相关内容进行修改。
++
+--
+如上步示例中，包含 supervisorctl update 相关内容的配置文件有一个为 ``./neonsan-store/handlers/main.yml``，对其进行修改。
+[,shell]
+----
+vi ./neonsan-store/handlers/main.yml
+----
+image::/images/neonsan/auto_exp_11.png[]
+将配置文件中的 ``supervisorctl update && supervisorctl restart neonstore`` 修改为 ``supervisorctl update neonstore && supervisorctl restart neonstore``，即在 supervisorctl update 后添加相应的服务。
+--
+
+. 将所有查询到的配置文件均进行修改保存即可，无需重启服务。
+
+== 修改示例
+
+**修改相关代码前**，查询结果：
+[,shell]
+----
+./mysql-server/tasks/xtradb57.yml:137: shell: supervisorctl update; supervisorctl start mysql_{{cluster_name}}
+./mysql-server/tasks/xtradb57.yml:151: shell: supervisorctl update; supervisorctl start mysql_{{cluster_name}}
+./mysql-server/tasks/xtradb57.yml:165: shell: supervisorctl update; supervisorctl start arbitor_{{cluster_name}}
+./neonsan-store/handlers/main.yml:2: shell: supervisorctl update && supervisorctl restart neonstore
+./alerter/handlers/main.yml:2: shell: supervisorctl update && supervisorctl restart qs_alerter
+./alerter/handlers/main.yml:5: shell: supervisorctl update && supervisorctl restart prometheus
+./neonsan-monitor/handlers/main.yml:2: shell: supervisorctl update && supervisorctl restart neonmonitor
+./zookeeper/handlers/main.yml:2: shell: supervisorctl update && supervisorctl restart zookeeper
+./mysqld-exporter/handlers/main.yml:3: shell: supervisorctl update; supervisorctl restart mysqld_exporter_{{ cluster_name }}
+./neonsan-mrgw/handlers/main.yml:8: shell: supervisorctl update && supervisorctl restart neonmrgw
+./prometheus/handlers/main.yml:2: shell: supervisorctl reread && supervisorctl update
+./neonsan-center/handlers/main.yml:2: shell: supervisorctl update && supervisorctl restart neoncenter
+----
+
+**修改代码后**，查询结果：
+
+[,shell]
+----
+./mysql-server/tasks/xtradb57.yml:137: shell: supervisorctl update mysql_{{cluster_name}}; supervisorctl start mysql_{{cluster_name}}
+./mysql-server/tasks/xtradb57.yml:151: shell: supervisorctl update mysql_{{cluster_name}}; supervisorctl start mysql_{{cluster_name}}
+./mysql-server/tasks/xtradb57.yml:165: shell: supervisorctl update arbitor_{{cluster_name}}; supervisorctl start arbitor_{{cluster_name}}
+./neonsan-store/handlers/main.yml:2: shell: supervisorctl update neonstore && supervisorctl restart neonstore
+./alerter/handlers/main.yml:2: shell: supervisorctl update qs_alerter && supervisorctl restart qs_alerter
+./alerter/handlers/main.yml:5: shell: supervisorctl update prometheus && supervisorctl restart prometheus
+./neonsan-monitor/handlers/main.yml:2: shell: supervisorctl update neonmonitor && supervisorctl restart neonmonitor
+./zookeeper/handlers/main.yml:2: shell: supervisorctl update  zookeeper && supervisorctl restart zookeeper
+./mysqld-exporter/handlers/main.yml:3: shell: supervisorctl update mysqld_exporter_{{ cluster_name }}; supervisorctl restart mysqld_exporter_{{ cluster_name }}
+./neonsan-mrgw/handlers/main.yml:8: shell: supervisorctl update neonmrgw && supervisorctl restart neonmrgw
+./prometheus/handlers/main.yml:2: shell: supervisorctl reread && supervisorctl update prometheus
+./neonsan-center/handlers/main.yml:2: shell: supervisorctl update neoncenter && supervisorctl restart neoncenter
+----
+
+
+
+
+

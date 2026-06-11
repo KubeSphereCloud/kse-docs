@@ -1,0 +1,120 @@
+---
+title: 保存账号下身份Profile（SaveAccountRoleProfile）
+weight: 15
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| function
+| Array
+| true
+| 函数
+
+| owner
+| String
+| true
+| 归属账号ID
+
+| role_id
+| String
+| true
+| IAM身份ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| function
+| Array
+| false
+| 功能列表
+
+| function[].storeData
+| Array
+| false
+| 控制台可见模块
+
+| role_id
+| String
+| false
+| IAM身份ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "SaveAccountRoleProfile",
+  "function": [
+    {
+      "storeData": [
+        "testing",
+        "instances",
+        "images",
+        "keypairs",
+        "routers",
+        "loadbalancers",
+        "vxnets",
+        "eips",
+        "volumes",
+        "snapshots",
+        "security_groups",
+        "monitors",
+        "alarms",
+        "tickets",
+        "notifications",
+        "nics",
+        "routing_tables"
+      ]
+    }
+  ],
+  "role_id": "iamr-13sd9s6E"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SaveAccountRoleProfileResponse",
+  "function": [
+    {
+      "storeData": [
+        "testing",
+        "instances",
+        "images",
+        "keypairs",
+        "routers",
+        "loadbalancers",
+        "vxnets",
+        "eips",
+        "volumes",
+        "snapshots",
+        "security_groups",
+        "monitors",
+        "alarms",
+        "tickets",
+        "notifications",
+        "nics",
+        "routing_tables"
+      ]
+    }
+  ],
+  "ret_code": 0,
+  "role_id": "iamr-xv3xwskt"
+}
+----

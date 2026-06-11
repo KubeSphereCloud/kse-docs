@@ -1,0 +1,117 @@
+---
+title: 获取应付欠款信息（GetArrearsInfos）
+weight: 9
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| is_force_elastic
+| Integer
+| false
+| 是否以按需的计费模式恢复资源(恢复按月资源时有效)，可选值:
+
+| resources
+| String
+| true
+| 资源ID
+
+| user
+| String
+| false
+| 用户ID
+
+| zone
+| String
+| true
+| 区域别称
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| arrears_info_set
+| Object
+| false
+| 待恢复的资源合约列表
+
+| arrears_info_set.duration
+| Integer
+| false
+| 计费周期,3600:按需计费;1-60:包年包月计费
+
+| arrears_info_set.fee
+| Integer
+| false
+| 恢复费用
+
+| arrears_info_set.price
+| Integer
+| false
+| 合约价格
+
+| arrears_info_set.renewal_time
+| String
+| false
+| 资源到期时间
+
+| arrears_info_set.resource_id
+| String
+| false
+| 资源ID
+
+| total_count
+| Integer
+| false
+| 返回资源的数量
+
+| total_sum
+| Integer
+| false
+| 合计费用
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "is_force_elastic": 1,
+  "resources": [
+    "vol-yqsnj8m8"
+  ],
+  "zone": "testing1a"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "GetArrearsInfosResponse",
+  "arrears_info_set": [
+    {
+      "duration": 3600,
+      "fee": "0.218",
+      "price": 1090,
+      "renewal_time": "2022-03-24T09:32:00Z",
+      "resource_id": "vol-yqsnj8m8"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1,
+  "total_sum": "0.218"
+}
+----

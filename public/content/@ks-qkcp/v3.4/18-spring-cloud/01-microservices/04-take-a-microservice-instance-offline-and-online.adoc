@@ -1,0 +1,49 @@
+---
+title: "下线和上线微服务实例"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 项目管理, Spring Cloud, 下线微服务实例"
+description: "介绍如何下线和上线微服务实例。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 7ed188d6846e41e38a1e6ad680b2481d
+:ks_xref_id: f3790bc13f6049f6ba38e4758d06758d
+:ks_comp: ../../../components/
+:ks_title: 下线和上线微服务实例
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, Spring Cloud, 下线微服务实例
+:ks_description: 介绍如何下线和上线微服务实例。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **工作负载管理**
+:ks_navigation:  **Spring Cloud > 微服务**
+
+
+本节介绍如何下线和上线微服务实例。微服务实例下线后将不再接收业务流量。
+
+
+== 前提条件link:[id=a039947b0ec74ac29c34eb2bec207779]
+
+include::../../../_custom/projectManagement/microservices/microservices-prer-enableSpringCloud.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+
+== 操作步骤link:[id=22860a4091ef49b5b6317849308bd99d]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/projectManagement/microservices/microservices-oper-openInstanceList.adoc[]
+
++
+
+. 在需要操作的微服务实例右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**下线**可下线微服务。
+
+. 在已下线的微服务实例右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**上线**可重新上线微服务。

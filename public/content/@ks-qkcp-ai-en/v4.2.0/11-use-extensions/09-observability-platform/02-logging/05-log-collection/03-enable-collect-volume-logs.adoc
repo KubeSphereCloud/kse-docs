@@ -1,0 +1,52 @@
+---
+title: "Enable Collection of Logs on Volumes"
+keywords: "Kubernetes, {ks_product}, Project Management, Project Settings, Log Collection, Collect Logs on Volumes"
+description: "Introduces how to enable collection of logs on volumes."
+weight: 03
+---
+
+
+:ks_permission: **Application Workloads Management**
+
+ifeval::["{file_output_type}" == "html"]
+This section describes how to enable the collection of logs on volumes when creating a workload, service, or job. For more information, see link:../../../../../08-workspace-management/10-application-workloads/03-workloads/01-create-a-workload/[Create a Workload], link:../../../../../08-workspace-management/10-application-workloads/02-services/01-create-a-service/01-create-a-stateful-or-stateless-service/[Create a Stateful or Stateless Service], or link:../../../../../08-workspace-management/10-application-workloads/04-jobs/01-create-a-job/[Create a Job].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+This section describes how to enable the collection of logs on volumes when creating a workload, service, or job. For more information, refer to the "Application Workloads" chapter in the *KubeSphere Workspace and Project Management Guide*, Create a Workload or Create a Job.
+endif::[]
+
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+* The KubeSphere platform requires the **WizTelemetry Logging** extension to be installed and enabled, and you must have link:../02-enable-project-log-collection/[enabled log collection in the project].
+
+== Steps
+
+include::../../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
+. In the left navigation pane, select **Application Workloads > Workloads**, **Services**, or **Jobs**.
+
+. On the Workloads page, click **Deployments**, **StatefulSets**, or **DaemonSets** to open the workload list, or on the Jobs page, click **Jobs** or **CronJobs** to open the job list.
++
+
+include::../../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. On the page, click **Create**.
+
+. On the **Storage Settings** tab, click the **Collect Logs on Volumes** toggle switch to enable the feature.
+
+. Click **Mount Volume** to mount a **Read-Write** mode persistent volume, temporary volume, or persistent volume claim template for the container, and set the **Container Log Path**.
+
+. Configure the application in the container to export logs to the container log path under the volume mount directory.
++
+Once log collection is complete, the logs will be printed to the container's standard output, and you can use the log query tool to search and view the container logs. For more information, see link:../../03-log-query/[Log Query].

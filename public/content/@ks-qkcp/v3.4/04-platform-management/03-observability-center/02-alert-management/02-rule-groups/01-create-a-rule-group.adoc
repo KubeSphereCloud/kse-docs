@@ -1,0 +1,124 @@
+---
+title: "创建规则组"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 监控告警, 告警管理, 规则组, 创建规则组"
+description: "介绍如何创建告警规则组。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 48002a882ea34e37be29a2e34bcea82f
+:ks_xref_id: 27d8301704134518a501cfda63e4c906
+:ks_comp: ../../../../../components/
+:ks_title: 创建规则组
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 监控告警, 告警管理, 规则组, 创建规则组
+:ks_description: 介绍如何创建告警规则组。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **规则组管理**
+:ks_menu: **平台管理 > Whizard 可观测中心**
+:ks_navigation: **监控告警 > 规则组**
+
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-desc-createAnAlertingPolicy.adoc[]
+
+
+== 前提条件link:[id=3e7ad1928783497bb59aea8320505557]
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-prer-creationPrerequisites.adoc[]
+
+:relfileprefix: ../../../../../
+* 您需要在{ks_product_both}平台具有 **platform-admin** 角色。有关更多信息，请参阅xref:04-platform-management/04-access-control/02-users/_index.adoc[用户]和xref:04-platform-management/04-access-control/03-platform-roles/_index.adoc[平台角色]。 
+
+// include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+ifeval::["{file_output_type}" == "pdf"]
+
+* 如需对应用程序的指标进行监控，您需要配置运行在容器中的应用程序将符合 link:https://prometheus.io/docs/instrumenting/clientlibs/[Prometheus 规范]的监控指标暴露在某个服务端路径下，并在用于暴露工作负载的服务上设置监控导出器以声明提供应用程序监控指标的路径。有关更多信息，请参阅《{ks_product_right}项目管理指南》的“编辑监控导出器”章节。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "html"]
+
+* 如需对应用程序的指标进行监控，您需要配置运行在容器中的应用程序将符合 link:https://prometheus.io/docs/instrumenting/clientlibs/[Prometheus 规范]的监控指标暴露在某个服务端路径下，并在用于暴露工作负载的服务上设置监控导出器以声明提供应用程序监控指标的路径。
+
+endif::[]
+
+
+== 操作步骤link:[id=383c70cf7db54817b9a714159ad2493a]
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-openListPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-setBasicInfo.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-addAlertRule.adoc[]
++
+====
+include::../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-commonParameters.adoc[]
+
+* 规则模板
++
+--
+通过下拉列表选择监控目标和触发条件。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|监控目标
+|需要监控的集群节点或工作负载。
+
+include::../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-triggerCondition.adoc[]
+|===
+--
+
+* 自定义规则
++
+--
+通 PromQL 表达式指定监控目标和触发条件。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|集群
+|需要监控的资源所在的集群。
+
+include::../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-duration.adoc[]
+
+|告警级别
+|
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-para-alertLevel.adoc[]
+
+include::../../../../../_custom/platformManagement/observabilityCenter/ruleGroups/ruleGroups-para-ruleExpression.adoc[]
+|===
+--
+====
+
++
+
+include::../../../../../_custom/clusterManagement/ruleGroups/ruleGroups-oper-clickOK.adoc[]

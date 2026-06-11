@@ -1,0 +1,109 @@
+---
+title: "查看 VPC 网络详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 网络, VPC, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看 VPC 网络详情。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 846f7a38961a42149423e50a57659d51
+:ks_xref_id: 01a78b8c94984de3be3f4633703165b3
+:ks_comp: ../../../../components/
+:ks_title: 查看 VPC 网络详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看 VPC 网络详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 网络, VPC, 详情, 查看
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看 VPC 网络详情。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=38d73c11dcbd422c9adebae8ec436ec5]
+
+include::../../../../_custom/networks/vpc-steps.adoc[]
+
+. 在 VPC 列表页面，点击目标 VPC 名称，进入 VPC 详情页面。
+
+. 在 VPC 详情页面的左侧区域，查看 VPC 的基本信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|ID
+|VPC 在系统中的通用唯一标识符，由系统自动分配。
+
+|状态
+|VPC 的状态。
+
+|IP 地址范围
+|VPC 的网段范围。
+
+|创建时间
+|VPC 的创建时间。
+
+|创建者
+|VPC 的创建者。
+|===
+--
+
+. 在**绑定资源**区域，查看已和 VPC 绑定的弹性 IP 地址。
+
+. 在 VPC 详情页面的右侧区域，点击**子网**页签，查看 VPC 中已创建的子网列表。
+
+. 点击目标子网名称，在**子网关联资源**区域，查看已关联到目标子网的资源。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|已关联资源的名称。
+
+|ID
+|已关联资源在系统中的通用唯一标识符。
+
+|状态
+|已关联资源的状态。
+
+|IP地址
+|已关联资源的 IP 地址。
+|===
+--
+    
+
+. 在 VPC 详情页面的右侧区域，点击**端口转发**页签，查看 VPC 的端口转发规则。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|端口转发规则的名称。
+
+include::../../../../_custom/networks/naming-convention.adoc[]
+
+|协议
+|数据传输的协议类型。{ks_product_right}支持 **TCP** 和 **UDP** 协议。
+
+
+|内网端口
+|VPC 对公网暴露服务的端口。
+
+|内网IP
+|内网 IP 地址。
+
+
+|源端口
+|外网访问 VPC 的端口。
+|===
+--

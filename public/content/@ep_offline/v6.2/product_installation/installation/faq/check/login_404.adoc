@@ -1,0 +1,21 @@
+---
+title: 登录 BOSS 显示 404
+weight: 45
+---
+
+== 问题现象
+
+部署完成后，登录 BOSS 显示 404，且在 proxy 节点执行 `nginx -t` 有如下报错：
+
+image::/images/ep_offline/installation/faq_login_404.png[]
+
+== 问题原因
+
+proxy 节点的 /etc/nginx/nginx.conf 缺少一个配置 `map_hash_bucket_size 64`。
+
+== 解决方法
+
+. 修改两个 proxy 节点的配置文件，增加 `map_hash_bucket_size 64`。
++
+image::/images/ep_offline/installation/faq_login_404_01.png[]
+. 重启 nginx。

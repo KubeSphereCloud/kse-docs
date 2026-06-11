@@ -1,0 +1,51 @@
+---
+title: "Associate EIPs with resources"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, EIPs, association"
+description: "Describes how to associate EIPs with resources in the {ks_product} web console."
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: cd171b38ca1442b280df9e1de54fa32a
+:ks_xref_id: 1cb6fcecd86145839bfa48aa755d2adb
+:ks_comp: ../../../../components/
+:ks_title: Associate EIPs with resources
+:ks_description: Describes how to associate EIPs with resources in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, EIPs, association
+:ks_weight: 06
+:ks_logo:
+:ks_download_url:
+
+
+You can associate elastic IP addresses (EIPs) with virtual private clouds (VPCs) or VMs based on business requirements. After VPCs or VMs are associated, you can access the VPCs or VMs over the Internet by using the EIPs.
+
+This topic describes how to associate EIPs with VPCs or VMs in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=68a159e63e4643b8984f7b478c14b462]
+
+include::../../../../_custom-en/networks/eip-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=f3ada0089408412db27f81bbffd3ac90]
+
+include::../../../../_custom-en/networks/eip-steps.adoc[]
+
+. Find the EIP that you want to associate, click image:/images/ksv/en/icons/more.svg[operation-menu,13] on the right side, and then select **Associate VPC** or **Associate VM** from the drop-down list.
+. In the dialog box that appears, select the VPC or VM that you want to associate, and click **OK**.
++
+--
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Each EIP can be associated with one VM or one VPC.  If no EIP is available, you can click **Apply** in the upper-right corner of the page to apply for an EIP. For more information, see link:../01-apply-for-eip/[Apply for an EIP].
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

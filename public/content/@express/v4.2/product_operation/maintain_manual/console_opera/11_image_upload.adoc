@@ -1,0 +1,82 @@
+---
+title: "手动上传镜像"
+weight: 11
+---
+
+== 运维场景
+
+一般来说，镜像文件可通过云易捷部署管理平台上进行上传，若无法完成，可参考以下步骤进行镜像文件的手动上传。
+
+== 操作流程
+
+. 从以下 FTP 路径下，下载 seed-image-system-xxxx.tar.gz 文件。
++
+[source,shell]
+----
+ftp://ins.qingcloud.com/express/image
+----
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，查看 seed 节点信息。
++
+[source,shell]
+----
+cat /pitrix/conf/nodes/seed
+----
++
+[source,shell]
+----
+nodes=( yijie01n01 yijie01n02 );
+----
+
+. 将下载的 seed-image-xxxx.tar.gz 文件上传至某一 seed 节点。
+
+. 解压镜像文件至 seed 节点的 ``/tmp`` 目录，可获得相应的镜像文件和 ``images.sql`` 文件。
++
+[source,shell]
+----
+tar -zxf seed-image-system-xxxx.tar.gz -C /tmp/
+----
+
+. 解压后，将相应目录下的镜像文件复制至 seed 节点的 ``/pitrix/image-repo/`` 目录下。例如解压的为 ``seed-image-system-windows-2016-standard-chinese.tar.gz`` 包，则复制命令如下所示。
++
+[source,shell]
+----
+cp -ar /tmp/seed-image-system-windows-2016-standard-chinese/wi/* /pitrix/image-repo/wi/
+----
+
+. 执行如下命令查看集群的 pg_master 节点。
++
+[source,shell]
+----
+fb exec_nodes -f webservice cat /pitrix/run/pg_master
+----
+
+. 将上述步骤中解压得到的 ``images.sql`` 拷贝至 pg_master 节点的 ``/tmp`` 目录。
+
+. 登录至 pg_master 节点，并执行如下命令即可。
++
+[source,shell]
+----
+su - postgres -c 'psql -d zone -f /tmp/images.sql'
+----
+
+

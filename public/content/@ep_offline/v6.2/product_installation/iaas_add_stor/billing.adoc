@@ -1,0 +1,50 @@
+---
+title: 添加计费信息
+weight: 60
+---
+
+== 添加计费信息
+
+1. 登录任一 Webservice 节点。
++
+[source,shell]
+----
+ssh {{ zone_id }}-webservice
+----
+2. 执行以下命令，进入 pricing 目录。
++
+[source,shell]
+----
+cd /pitrix/lib/pitrix-scripts/pricing
+----
+3. 执行以下命令，添加计费信息。
++
+[source,shell]
+----
+./init_price_from_price_list_data -p price_data/<xxx>.json -z <region_id> -c <console_id> -U
+----
++
+示例：
++
+[source,shell]
+----
+# 主机
+./init_price_from_price_list_data -p price_data/s1_instance_price_list.json -z devops -c devopscloud -U
+# 磁盘
+./init_price_from_price_list_data -p price_data/volume_type_20_price_list.json -z devops -c devopscloud -U
+----
+
+== 关闭计费
+
+不需要计费时，可以修改 server.yaml.Zone_ID 文件，将 *enble_billing* 配置为 `false`，关闭计费。
+[source,shell]
+----
+vi /pitrix/conf/global/server.yaml.Zone_ID
+----
+
+配置示例：
+[source,shell]
+----
+common:
+  enable_billing: false
+----

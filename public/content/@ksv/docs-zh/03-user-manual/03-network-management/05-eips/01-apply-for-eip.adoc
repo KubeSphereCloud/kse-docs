@@ -1,0 +1,55 @@
+---
+title: "申请弹性 IP"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 弹性, IP, 申请"
+description: "介绍如何使用{ks_product_both}Web 控制台申请弹性 IP。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 5bd2b5a7aacf4f7abed0acd1b37373c3
+:ks_xref_id: e6c0d6b97b424f5cacbefcbeb5edb72c
+:ks_comp: ../../../../components/
+:ks_title: 申请弹性 IP
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台申请弹性 IP。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 弹性, IP, 申请
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台申请弹性 IP。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=a66686d07bd44f1d927b62be0d08121a]
+
+include::../../../../_custom/networks/eip-steps.adoc[]
+
+. 在弹性 IP 列表页面，点击右上角的**申请**。
+
+. 在弹出的对话框中设置弹性 IP 的**名称**和**描述**。具体参数描述如下表所示。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|弹性 IP 的名称。
+
+include::../../../../_custom/networks/naming-convention.adoc[]
+
+|类型
+|弹性 IP 的地址类型。 {ks_product_right}默认使用 IPv4 地址类型。
+
+|描述
+|用户自定义的描述信息。
+
+include::../../../../_custom/networks/description-convention.adoc[]
+|===
+--
+
+. 点击**确定**。弹性 IP 申请后将显示在弹性 IP 列表中。

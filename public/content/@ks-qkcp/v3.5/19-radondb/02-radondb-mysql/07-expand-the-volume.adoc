@@ -1,0 +1,72 @@
+---
+title: "扩展卷"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 扩展卷"
+description: "介绍如何扩展挂载到数据库节点的卷。"
+weight: 07
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 4a8ff9b222e64ae29c409a5efa2ba141
+:ks_xref_id: 608958af17c947658d77842c9654b502
+:ks_comp: ../../../components/
+:ks_title: 扩展卷
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 扩展卷
+:ks_description: 介绍如何扩展挂载到数据库节点的卷。
+:ks_weight: 07
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何扩展挂载到数据库节点的卷。
+
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+* 目前不支持对使用{ks_product_both}集群本地存储创建的卷（local）进行扩展。
+
+* 目前仅支持增加卷容量，不支持减少卷容量。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=20d2323ed1d441548e16554dcb06ff7c]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/radondb/radondbMySql/radondbmysql-prer-installRadondbmysql.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../_custom/radondb/radondbMySql/radondbmysql-prer-databaseStatusRunning.adoc[]
+
+
+== 操作步骤link:[id=2016e5218351429c82e17b1cb17b5d58]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 扩展卷**。
+
+. 在**扩展卷**对话框，设置卷的容量，然后点击**确定**。

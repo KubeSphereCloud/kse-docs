@@ -1,0 +1,54 @@
+---
+title: "Enable Project Network Isolation"
+keywords: "Kubernetes, {ks_product}, Project Management, Project Settings, Network Isolation, Enable Network Isolation"
+description: "Describes how to enable project network isolation."
+weight: 03
+---
+
+:ks_permission: **Project Network Isolation Management**
+:ks_navigation: **Service Network > Project Network Isolation**
+
+This section describes how to enable project network isolation.
+
+After enabling project network isolation, pods in the current project cannot be accessed by pods from other projects, other node host environments, or any network segments outside the cluster.
+
+// By default, there are no restrictions on egress traffic. That is, without setting whitelist entries, pods in the current project can communicate with pods from other projects, other node host environments, and all network segments outside the cluster. After adding whitelist entries, only communication between pods in the current project and pods from specific projects, other node host environments, and external network segments is allowed.
+
+Enabling project network isolation does not restrict egress traffic by default, but you can choose whether to restrict it. After restricting egress traffic, pods in the current project will not be able to access other projects and can only access resources within the current project.
+
+However, when project network isolation (including egress traffic restriction) is enabled, you can link:../04-set-whitelist/[add a whitelist] to allow specific projects, services, network segments, or ports to communicate with pods in the current project.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere Network** extension must be installed in the cluster to which the project belongs.
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. (Optional) After checking **Egress Traffic Restriction**, the project will not be able to access other projects.
+
+. Click the switch on the right to enable or disable project network isolation.
++
+[.admon.note,cols="a"]
+|===
+|Note
+
+|After enabling "Project Network Isolation", you cannot enable or disable "Egress Traffic Restriction". You need to disable "Project Network Isolation" first, then check/uncheck "Egress Traffic Restriction".
+|===

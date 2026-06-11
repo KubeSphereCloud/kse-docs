@@ -1,0 +1,81 @@
+---
+title: "Create Volume Snapshot Class"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Volume Snapshot, Create Volume Snapshot Class"
+description: "Introduces how to create a volume snapshot class."
+weight: 01
+---
+
+
+:ks_permission: **Volume Snapshot Class Management**
+:ks_navigation: **Storage > Volume Snapshot Classes**
+
+
+This section describes how to create a volume snapshot class.
+
+
+== Prerequisites
+
+* The **KubeSphere Storage** extension must be installed and enabled on the KubeSphere platform.
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* To ensure the volume snapshot class can provide storage resources normally, you need to configure the storage system in advance and install the corresponding storage plugin for the storage system. For more information, please contact your storage system provider.
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. On the **Basic Information** tab, set the basic information for the volume snapshot class, then click **Next**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the volume snapshot class. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and has a maximum length of 63 characters.
+
+|Storage Type
+|Block storage, object storage, or file storage.
+
+|Alias
+|The alias of the volume snapshot class. Different volume snapshot classes can have the same alias.
+// The alias can only contain Chinese characters, letters, numbers, and hyphens (-), must not start or end with a hyphen (-), and has a maximum length of 63 characters.
+
+|Description
+|The description of the volume snapshot class. The description can contain any characters and has a maximum length of 256 characters.
+|===
+--
+
+. On the **Volume Snapshot Class Settings** tab, set the provisioner and deletion policy for the volume snapshot class, then click **Create**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Provisioner
+|The storage plugin used by the volume snapshot class.
+
+|Deletion Policy
+|
+include::../../../../_custom/clusterManagement/volumeSnapshotContents/volumeSnapshotContents-para-deletionPolicy.adoc[]
+|===
+
+After the volume snapshot class is created, it will appear in the volume snapshot class list.
+--

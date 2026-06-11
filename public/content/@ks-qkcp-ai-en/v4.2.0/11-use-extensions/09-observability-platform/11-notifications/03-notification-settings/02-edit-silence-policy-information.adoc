@@ -1,0 +1,50 @@
+---
+title: "Edit Muting Policy Information"
+keywords: "Kubernetes, {ks_product}, Platform Settings, Notification Management, Notification Settings, Muting Policy, Edit Muting Policy Information"
+description: "This section describes how to edit muting policy information."
+weight: 02
+---
+
+
+:ks_navigation: **Notification > Notification Settings**
+// :ks_permission: **Platform Settings Management**
+
+
+This section describes how to edit muting policy information.
+
+You can edit the alias and description of a muting policy. KubeSphere does not support editing the name of a created muting policy.
+
+
+== Prerequisites
+
+* You need to have the **platform-admin** role in the KubeSphere platform. For more information, see link:../../../../../05-users-and-roles/01-users/[Users] and link:../../../../../05-users-and-roles/02-platform-roles/[Platform Roles].
+
+* The **WizTelemetry Notification** extension needs to be installed and enabled on the KubeSphere platform.
+
+
+== Steps
+
+include::../../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../../_custom/WizTelemetry/enter-into-WizTelemetry.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the muting policy you want to operate on, and then select **Edit Information** from the drop-down list.
+
+. In the **Edit Information** dialog box, set the alias and description for the muting policy, and then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../../_custom/platformManagement/platformSettings/platformSettings/platformSettings-para-aliasDescription.adoc[]
+|===
+--

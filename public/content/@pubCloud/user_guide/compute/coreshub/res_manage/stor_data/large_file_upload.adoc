@@ -1,0 +1,40 @@
+---
+title: "上传本地大文件"
+weight: 9
+linkkey: coreshub_large_file_upload
+---
+
+若用户需将本地超过 10GB 的大文件或多个小文件，上传至容器实例上挂载的文件存储目录，可使用 SFTP 客户端进行上传。
+
+== 注意事项
+
+* 容器实例link:../../../develop_training/k8s/ssh_login[可使用 SSH 免密访问]。
+* SFTP 客户端种类繁多，需用户根据各 SFTP 工具官方介绍为主进行实际操作。本文档以 link:https://filezilla-project.org/[FileZilla 客户端]为例。
+
+== 操作步骤
+
+. 下载并安装 SFTP 工具。
+. 配置容器实例 link:../../../develop_training/k8s/ssh_login[SSH 免密访问]。
+. 打开 SFTP 工具，以 FileZilla 客户端为例，点击左上角的**新站点**。
++
+image::/images/cloud_service/compute/coreshub/stor_data_large_file_upload_2.png[]
+
+. 在弹出的 Site Manager 窗口中，配置各项参数。
++
+image::/images/cloud_service/compute/coreshub/stor_data_large_file_upload_1.png[]
++
+* ``Protocol``：选择 ``SFTP-SSH File Transfer Protocol``。
+* ``Host``：登录容器实例列表页面，点击待上传文件的容器实例所在行右侧的更多操作，选择**复制 SSH 命令**，此处填写 SSH 命令中的 IP 地址。
+* ``Port``：复制得到的 SSH 命令中的端口号。
+* logon Type：选择 ``Key file``。
+* ``User``：设置为 ``Root``。
+* ``Key File``：用户本地主机私钥文件（即 ``id_rsa`` 文件）所在路径，一般为 ``\user\<user_name>\.ssh\id_rsa``，具体位置根据用户本地实际保存路径进行修改。
+
+. 点击 **Connect**，建立连接，待状态提示窗口中提示 ``Status: Directory listing of "/root" successful``，则表示连接成功。
+
+. 用户在 Remote site 文件目录窗口中，选择 ``/root/epfs`` 即为容器实例挂载的文件存储目录，用户可直接将待上传的本地文件移至该目录即可。
++
+image::/images/cloud_service/compute/coreshub/stor_data_large_file_upload_3.png[]
+. 上传完成的文件，可直接在link:../file_manage[用户目录中进行管理]。
+
+

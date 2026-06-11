@@ -1,0 +1,47 @@
+---
+title: "步骤 2：创建目标门户组"
+weight: 2
+---
+
+. 登录 {console_name}.
+
+. 在导航栏中点击**产品与服务** > **存储服务** > **共享存储**，即可进入 **Virtual SAN** 列表页面。
+
+. 点击列表中创建成功的 Virtual SAN 服务器 ID。 进入 Virtual SAN 服务器的详细信息页面。
++
+image::/images/cloud_service/storage/share/vsan_2.png[]
+
+. 点击**+创建目标门户组**，配置好 iSCSI 标识后，点击**提交**。
+
++
+image::/images/cloud_service/storage/share/vsan_3.png[,50%]
++
+[options="header",cols="1,3a"]
+|===
+|参数名称 | 参数说明    
+|目标类型  
+|默认为 iSCSI。
+
+|iSCSI 标识
+| 根据实际情况为目标指定 iSCSI 标识，也可以输入一个短名（中间不允许有空格，下划线等），系统会自动生成合法的 iSCSI 标识。 +
+格式是：“iqn” + “.” + “年月” + “.” + “域名的颠倒” + “:” + “设备的具体名称”，颠倒域名是为了避免可能的冲突。
+|===
+
+. 目标门户组创建成功后，返回至 Virtual SAN 服务器详情页面，点击**添加存储**。
++
+image::/images/cloud_service/storage/share/vsan_4.png[]
+
+. 在弹出的**添加存储**的页面中，勾选单个或多个硬盘，点击**提交**。
++
+image::/images/cloud_service/storage/share/vsan_5.png[,60%]
+
+. （可选）添加 iSCSI 客户端标识。在 Virtual SAN 服务器的详细信息页面，点击**操作** > **设置iSCSI客户端**，进入如下界面，设置参数，点击**提交**。
++
+为了 Virtual SAN 的安全性，可以指定 iSCSI 客户端登录到目标，即设置 iSCSI 客户端的 initiator name。
++
+image::/images/cloud_service/storage/share/vsan_6.png[,50%]
+
+. 上述步骤均完成后，点击**应用修改**。Virtual SAN 服务端即设置完成。
+
+
+

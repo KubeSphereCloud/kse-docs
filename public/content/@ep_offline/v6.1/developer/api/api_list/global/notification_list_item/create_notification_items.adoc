@@ -1,0 +1,121 @@
+---
+title: 创建接收人联系方式（CreateNotificationItems）
+weight: 1
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_items
+| Array
+| true
+| 联系方式详情
+
+| notification_items[].content
+| String
+| true
+| 联系方式
+
+| notification_items[].notification_item_type
+| String
+| true
+| 联系方式类型
+
+| notification_items[].remarks
+| String
+| true
+| 备注
+
+| owner
+| String
+| false
+| 所属用户id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| notification_items
+| Array
+| false
+| 联系方式详情
+
+| notification_items[].content
+| String
+| false
+| 联系方式
+
+| notification_items[].create_time
+| String
+| false
+| 创建时间
+
+| notification_items[].notification_item_id
+| String
+| false
+| 通知列表项id
+
+| notification_items[].notification_item_type
+| String
+| false
+| 联系方式类型
+
+| notification_items[].remarks
+| String
+| false
+| 备注
+
+| notification_items[].verified
+| Integer
+| false
+| 是否已验证
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateNotificationItems",
+  "notification_items": [
+    {
+      "content": "133****8888",
+      "notification_item_type": "phone",
+      "remarks": ""
+    }
+  ],
+  "owner": "usr-a6KqZcSI",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateNotificationItemsResponse",
+  "notification_items": [
+    {
+      "content": "133****8888",
+      "create_time": "",
+      "notification_item_id": "ni-xxxxxxxx",
+      "notification_item_type": "phone",
+      "remarks": "",
+      "verified": 0
+    }
+  ],
+  "ret_code": 0
+}
+----

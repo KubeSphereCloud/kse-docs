@@ -1,0 +1,39 @@
+---
+title: API 接口测试
+description: 
+weight: 16
+draft: true
+---
+
+[cols="1,3", options="header"]
+|===
+| 用例编号 |  
+
+|测试目的
+|验证 {product_name} 支持浏览器查询桶信息，支持上传、下载和删除对象等操作。
+
+|预置条件
+a| {product_name} 已经安装部署完毕，且运行正常。
+
+
+
+|测试步骤
+a|
+. 使用正确的用户名和密码，通过浏览器登录 Console。
+. 在 Console 上创建桶。
+. 在 Console 上进行上传对象、下载对象和删除对象等操作。
+. 在 Console 上删除桶操作。
+
+
+
+|预期结果
+a|
+. 成功登录 Console。
+. Console 上创建桶成功。
+. Console 上上传对象、下载对象和删除对象等操作均成功。
+. Console 上删除桶操作成功。
+
+
+|实测结果 |
+
+|===

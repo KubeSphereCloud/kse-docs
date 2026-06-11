@@ -1,0 +1,111 @@
+---
+title: "查看物理子网详情"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 物理子网, 详情, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台查看物理子网详情。"
+weight: 03
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: a0353d3ebb9e49c4b576fd28fcf314fb
+:ks_xref_id: 5484d64657fa4df480746e7fcd4adf22
+:ks_comp: ../../../../components/
+:ks_title: 查看物理子网详情
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台查看物理子网详情。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 物理子网, 详情, 查看
+:ks_weight: 03
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台查看物理子网详情。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=4d2ce484cad64b1bb7e8b80a3971207d]
+
+include::../../../../_custom/nodes/prerequisites-view.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=a5c4910c7b694012a28c36d2c4898674]
+
+include::../../../../_custom/networks/physical-subnet-steps.adoc[]
+
+. 在物理子网列表页面，点击目标物理子网名称，进入物理子网详情页面。
+
+. 在物理子网详情页面的左侧区域，查看物理子网的基本信息。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|ID
+|物理子网在系统中的通用唯一标识符，由系统自动分配。
+
+|状态
+|物理子网当前的状态。
+
+|物理网络
+|物理子网所在的物理网络。
+
+|物理 VLAN
+|物理子网所在的 VLAN ID。
+
+|网段
+|物理子网所在的网段范围。
+
+|网关地址
+|物理子网对应的网关地址。
+
+|域名服务器
+|物理子网对应的域名服务器的 IP 地址。
+
+|带宽
+|最大带宽限制。
+
+|可用IP
+|物理子网中当前可用的 IP 地址数。
+
+|已用IP
+|物理子网中当前已用的 IP 地址数。
+
+|逻辑网关
+|是否开启逻辑网关。
+
+|排除的IP地址
+|物理子网中排除单个 IP 地址或指定范围的 IP 网段。
+
+|创建时间
+|物理子网的创建时间。
+
+|创建者
+|物理子网的创建者。
+|===
+--
+
+
+. 在页面右侧的**绑定资源**区域，查看物理子网已绑定资源信息。具体参数描述如下表所示。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|已绑定资源的名称。
+
+|ID
+|已绑定资源在系统中的通用唯一标识符，由系统自动分配。
+
+|状态
+|已绑定资源的状态。
+
+|IP 地址
+|已绑定资源的 IP 地址。
+|===
+--

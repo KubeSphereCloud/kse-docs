@@ -1,0 +1,55 @@
+---
+title: "访问应用路由的后端服务"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 集群管理, 应用负载, 应用路由, 访问应用路由的后端服务"
+description: "介绍如何访问应用路由的后端服务。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: bcecaf98ac144f88a64f3bc7e9183ce5
+:ks_xref_id: 3abe733e269348389a5b364766d0adc6
+:ks_comp: ../../../../components/
+:ks_title: 访问应用路由的后端服务
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 应用负载, 应用路由, 访问应用路由的后端服务
+:ks_description: 介绍如何访问应用路由的后端服务。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **项目资源查看**
+:ks_navigation: **应用负载 > 应用路由**
+
+
+include::../../../../_custom/clusterManagement/routes/routes-desc-accessABackendServiceOfARoute.adoc[]
+
+
+== 前提条件link:[id=e4fdf77b0d994cda8535cd20373aa135]
+
+:relfileprefix: ../../../../
+* 您需要加入一个集群并在集群中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:05-cluster-management/12-cluster-settings/03-cluster-members/_index.adoc[集群成员]和xref:05-cluster-management/12-cluster-settings/04-cluster-roles/_index.adoc[集群角色]。
+
+// include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+* 您需要启用{ks_product_both}集群网关或项目网关。有关更多信息，请参阅link:../../../12-cluster-settings/06-gateway-settings/[网关设置]。
+
+include::../../../../_custom/clusterManagement/routes/routes-prer-accessABackendServiceOfARoute.adoc[]
+
+
+== 操作步骤link:[id=6cb761ebe4c64ff0b9b3f04e19deb7b0]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/routes/routes-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/routes/routes-oper-accessABackendServiceOfARoute.adoc[]

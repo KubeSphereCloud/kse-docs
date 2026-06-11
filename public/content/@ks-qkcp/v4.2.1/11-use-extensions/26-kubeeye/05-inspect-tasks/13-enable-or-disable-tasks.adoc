@@ -1,0 +1,35 @@
+---
+title: "禁用/启用定时巡检任务"
+weight: 13
+---
+
+
+:ks_navigation: **巡检任务**
+
+
+本节介绍如何禁用/启用定时巡检任务，以暂停/恢复定时巡检。此操作仅对定时巡检任务可用。
+
+
+== 前提条件
+
+* 您需要在 KubeSphere 平台具有 **platform-admin** 角色。
+
+* 已创建定时巡检任务。
+
+
+== 操作步骤
+
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+. 点击**组件坞 > 集群巡检**，进入集群巡检页面。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. 在巡检任务页面，点击**定时巡检任务**打开巡检任务列表。
+
+. 在需要操作的定时巡检任务右侧，点击**任务状态**列的滑块，禁用当前任务。禁用后，点击滑块可再次启用当前任务。

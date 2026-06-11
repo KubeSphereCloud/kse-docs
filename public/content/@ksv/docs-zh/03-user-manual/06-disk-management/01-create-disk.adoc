@@ -1,0 +1,68 @@
+---
+title: "创建磁盘"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 磁盘, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建磁盘。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 528b5ebc87f4446aa1c30c4936ca5df2
+:ks_xref_id: a2f7007d2c734b64a84b9da3ed6f43df
+:ks_comp: ../../../components/
+:ks_title: 创建磁盘
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建磁盘。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 磁盘, 创建
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建磁盘。磁盘可以挂载到虚拟机上用于存储数据。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=01620f00c8574b63b3e0408944201191]
+
+系统 **admin** 用户可以在集群中的所有项目中创建磁盘，普通项目管理员或操作员可以在各自所属项目中创建磁盘。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=16daa4c2a5124754b92a255ba94a5573]
+
+include::../../../_custom/disks/disk-steps.adoc[]
+
+. 在磁盘列表页面，点击右上角的**创建**。
+
+. 在弹出的对话框中，为磁盘配置相关参数。
++
+--
+[cols="1a,3a"]
+|===
+|配置名称 |描述
+
+|名称
+|磁盘的自定义名称。
+
+include::../../../_custom/vms/vm-naming-convention.adoc[]
+
+|项目
+|选择磁盘所在的项目。
+
+|容量
+|磁盘的容量大小。
+
+|数量
+|需要创建的磁盘的数量。目前支持一次性创建最多 50 个磁盘。
+
+|描述
+|用户自定义的磁盘描述信息。
+
+include::../../../_custom/networks/description-convention.adoc[]
+|===
+--
+
+. 点击**创建**。磁盘创建后将显示在磁盘列表中。

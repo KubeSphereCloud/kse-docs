@@ -1,0 +1,24 @@
+---
+title: '网络架构'
+weight: 2
+---
+
+[cols="2,2,6a",options="header"]
+|===
+|英文词汇|中文/缩略词 |解释说明
+|data_port
+|业务网络（前端网络）
+|QB D或 iSCSI 等客户端与存储节点间的网络，负责将上层业务的IO分发到具体的存储节点上。
+
+|mgmt_port
+|管理网络
+|{product_name} GUI 管理平台或云平台等与 Zookeeper、管理节点间的网络，通过查询ZK找到当前集群主管理节点，将 API 请求分发到主管理节点。
+
+|repl_port
+|存储网络
+|{product_name} 存储节点间副本或纠删码数据同步的网络。
+
+|mrgw_port
+|网关网络
+|{product_name} 异步复制功能，主站点集群与备站点集群进行数据异步复制的网络。
+|===

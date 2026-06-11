@@ -1,0 +1,23 @@
+// :ks_include_id: d77f09013e3f495b8bea4d8b7300d5e0
+. On the workload details page, select **More Operations > Edit Auto Scaling**.
+
+. In the **Auto Scaling** dialog box, set the auto-scaling parameters for the workload, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Target CPU Usage
+|The target CPU usage for all pod replicas in the workload, in percentage. When the actual CPU usage is greater/less than the target value, the system automatically decreases/increases the number of pod replicas.
+
+|Target Memory Usage
+|The target memory usage for all pod replicas in the workload, in MiB. When the actual memory usage is greater/less than the target value, the system automatically decreases/increases the number of pod replicas.
+
+|Minimum Replicas
+|The minimum allowed number of pod replicas. The default value is **1**.
+
+|Maximum Replicas
+|The maximum allowed number of pod replicas. The default value is **1**.
+|===
+--

@@ -1,0 +1,73 @@
+---
+title: "查看日志接收器列表"
+keywords: "Kubernetes, {ks_product}, 集群管理, 集群设置, 日志接收器, 查看日志接收器列表"
+description: "介绍如何查看日志接收器列表。"
+weight: 02
+---
+
+// :ks_include_id: a42cc02ad6ff46df8d2f4043b023894a
+:ks_xref_id: 27dc9357ab2246e19a04a8a38c232d96
+:ks_comp: ../../../../components/
+:ks_title: 查看日志接收器列表
+:ks_keywords: Kubernetes, {ks_product}, 集群管理, 集群设置, 日志接收器, 查看日志接收器列表
+:ks_description: 介绍如何查看日志接收器列表。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **监控信息查看**
+:ks_navigation: **集群设置 > 日志接收器**
+
+
+本节介绍如何查看日志接收器列表。
+
+
+== 前提条件link:[id=be91a545a84c4bd699e7e15743410e63]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=5e343182d8b14db7a1f5004e085e0477]
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/logReceivers/logReceivers-oper-openListPage.adoc[]
++
+====
+* 日志接收器列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|日志接收器的名称。{ks_product_right}支持 Elasticsearch、 Opensearch、Kafka 和 Fluentd 日志接收器。
+
+|地址
+|
+include::../../../../_custom/clusterManagement/logReceivers/logReceivers-para-address.adoc[]
+
+|状态
+|日志接收器是否已启用，取值为**已启用**或**已禁用**。
+
+|类型
+|日志接收器的类型，可以为**日志**、**事件**、或**审计日志**。
+
+|创建时间
+|日志接收器的创建时间。
+|===
+--
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+====

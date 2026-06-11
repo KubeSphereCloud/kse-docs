@@ -1,0 +1,62 @@
+---
+title: "节点 io task pool 使用情况检查（2 级）"
+weight: 10 
+---
+
+
+== NeonSAN v3.1.5 及以上版本
+//tag::io_task_new[]
+. 登录 NeonSAN 集群中的任一存储（Store）节点。
+
+. 执行如下命令，查看指定节点的 io task pool 的统计信息。
++
+[,shell]
+----
+neonsan list_task_pool_stats -store_id 1
+----
++
+image::/images/neonsan/polling_guide_16.png[,80%]
++
+include::../../../../../_components/note.adoc[]
+* -store_id 用于指定存储节点 ID，需根据实际情况进行修改。
+* 返回结果中主要关注 ``FREE`` 字段，其表示各 dispatcher 线程的 Task Pool 剩余数。
+include::../../../../../_components/table_footer.adoc[]
+
+. 剩余 io task pool 为：步骤 2 返回结果中，dispatcher 所有线程对应的 io_task_pool 剩余数（返回结果中 ``FREE`` 字段对应的值）的和。
++
+include::../../../../../_components/attention.adoc[]
+当 io task pool 使用量大于 80% 时，请反馈给研发组，进行评估，并作出相应的处理操作。
+include::../../../../../_components/table_footer.adoc[]
+//end::io_task_new[]
+
+== NeonSAN v3.1.5 之前版本
+
+//tag::io_task_old[]
+. 从以下链接获取依赖包和检查工具。
++
+* IO Task 检查工具依赖 Python3，在离线状态下可link:https://cwiki.yunify.com/pages/viewpage.action?pageId=101879995#NeonSANiotask%E6%A3%80%E6%9F%A5%E5%B7%A5%E5%85%B7check_iotask.py-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8C%85[直接从此处获取相应软件包]。若此处无可用系统的依赖包，可联系 NeonSAN 产研团队。
+* link:https://cwiki.yunify.com/pages/viewpage.action?pageId=101879995&preview=/101879995/101880003/check_iotask.py#NeonSANiotask%E6%A3%80%E6%9F%A5%E5%B7%A5%E5%85%B7check_iotask.py-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8C%85[IO Task 检查工具]。
+
+. 安装 IO Task 检查工具的依赖包。
++
+* 离线安装，将步骤 1 获取的依赖包，上传至集群中的任一 Store 节点后，登录相应 Store 节点，进行 deb 包的安装即可。
+
+* 在线安装，登录 NeonSAN 任一 Store 节点执行如下命令进行安装。
++
+[,shell]
+----
+apt install python3 python3-paramiko python3-requests -y
+----
+. 将 IO Task 检查工具上传至上一步骤中安装了相应依赖包的 Store节点，并为其添加执行权限。
+
+. 执行如下命令，对指定存储池的 IO Task 进行检查，重点关注返回结果中的 ``conns_avail`` 值，若其低于 50，则说明当前 Store 节点的 IO Task 不足。
++
+[,shell]
+----
+./check_iotask.py -r <rg_name> -q
+----
++
+image::/images/neonsan/polling_guide_17.png[]
+
+//end::io_task_old[]
+

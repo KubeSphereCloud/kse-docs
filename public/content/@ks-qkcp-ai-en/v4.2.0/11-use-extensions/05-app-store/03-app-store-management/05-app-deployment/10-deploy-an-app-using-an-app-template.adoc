@@ -1,0 +1,70 @@
+---
+title: "Deploy an App from an App Template"
+keywords: "Kubernetes, {ks_product}, Project Management, App, Deploy an App from an App Template"
+description: "Describes how to deploy an app from an app template."
+weight: 10
+---
+
+:ks_permission: **App Store Management**
+:ks_navigation: **Deployment Management**
+
+This section describes how to deploy an app from an app template on the App Store Management page.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere App Store Management** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_custom/appStore/accessStoreManagement.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the **Create App** dialog box, click **From App Template**.
+
+. On the **App Template** page, click the **Current Workspace** drop-down list and select **Current Workspace** or an app repository.
+
+. Click the app template you want to use, and then click **Install**.
++
+--
+// Note
+include::../../../../../../_ks_components/admonitions/note.adoc[]
+
+App templates are created by workspace members with relevant permissions, and app repositories are created by App Store administrators.
+For more information, see link:../../../02-app-management/01-app-templates/01-create-an-app-template/[Create an App Template] and link:../../../03-app-store-management/04-app-repositories/01-add-an-app-repository/[Add an App Repository].
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
++
+
+include::../../../../../_custom/projectManagement/apps/apps-oper-installApp.adoc[]
++
+--
+// Note
+include::../../../../../../_ks_components/admonitions/note.adoc[]
+
+For more information about app feature parameters, contact the app provider.
+
+include::../../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+After the app is created, it will be displayed in the app list.
+--

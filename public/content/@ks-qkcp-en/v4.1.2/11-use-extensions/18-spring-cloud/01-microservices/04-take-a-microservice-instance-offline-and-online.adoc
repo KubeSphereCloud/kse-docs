@@ -1,0 +1,36 @@
+---
+title: "Take Microservice Instances Offline and Online"
+keywords: "Kubernetes, {ks_product-en}, project management, Spring Cloud, take offline microservice instance"
+description: "Learn how to take microservice instances offline and online."
+weight: 04
+---
+
+:ks_permission: **Spring Cloud Microservices Management**
+:ks_navigation: **Spring Cloud > Microservices**
+
+This section describes how to take microservice instances offline and online. After a microservice instance is offline, it will no longer receive business traffic.
+
+== Prerequisites
+
+* **KubeSphere Spring Cloud** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+== Steps
+
+include::../../../../_custom-en/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom-en/projectManagement/microservices/microservices-oper-openInstanceList.adoc[]
+
++
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the microservice instance you want to operate, and then select **Take Offline** from the drop-down list.
+
+. Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] on the right side of the offline microservice instance, and then select **Take Online** from the drop-down list to bring the microservice back online.

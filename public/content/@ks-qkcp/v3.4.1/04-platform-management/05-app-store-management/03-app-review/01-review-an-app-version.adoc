@@ -1,0 +1,81 @@
+---
+title: "审核应用版本"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 应用商店, 应用审核, 审核应用版本"
+description: "介绍如何审核提交到应用商店的应用版本。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 50f0837982ee42cfba86f88e3c8b1730
+:ks_xref_id: f0280977b23248b5b5af698d4864d143
+:ks_comp: ../../../../components/
+:ks_title: 审核应用版本
+:ks_keywords: Kubernetes, {ks_product}, 应用商店, 应用审核, 审核应用版本
+:ks_description: 介绍如何审核提交到应用商店的应用版本。
+:ks_weight: 01
+:ks_icon:
+:ks_menu: **平台管理 > 应用商店管理**
+:ks_navigation: **应用审核**
+:ks_permission: **应用模板管理**
+
+
+本节介绍如何审核提交到应用商店的应用版本。
+
+
+== 前提条件link:[id=cc1388b6ce144f6f8748ba8619429322]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-enableAppStore.adoc[]
+
+:relfileprefix: ./
+
+
+* 您需要在{ks_product_both}平台具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅link:../../../../04-platform-management/04-access-control/02-users/_index/[用户]和link:../../../../04-platform-management/04-access-control/03-platform-roles/_index/[平台角色]。
+
+
+
+* 企业空间成员已提交应用版本并且应用版本尚未被审核。
+
+
+== 操作步骤link:[id=5125062d5e1140fc9cb601139ee8051b]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**新提交**页签，点击需要审核的应用版本的名称。
+
+. 在**应用详情**区域，查看应用的相关信息，然后根据需要点击**拒绝**或**批准**。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* 如果点击**拒绝**，您需要在**拒绝原因**对话框进一步输入拒绝应用发布的原因，然后点击**确定**。
+
+ifeval::["{file_output_type}" == "pdf"]
+
+* 应用版本审核通过后，还需要企业空间成员进一步操作才能将应用版本发布到应用商店。有关更多信息，请参阅《{ks_product_right}企业空间管理指南》的“将应用版本发布到应用商店”章节。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "html"]
+
+* 应用版本审核通过后，还需要企业空间成员进一步操作才能将应用版本发布到应用商店。
+
+endif::[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

@@ -1,0 +1,104 @@
+---
+title: "禁用 DevOps"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 扩展组件管理, DevOps, 禁用 DevOps"
+description: "介绍如何启用 DevOps 扩展组件。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 272f28b3dfb94b04998d5d3c59269cc9
+:ks_xref_id: e82b81a7764e473a9e8190bdfbb357a5
+:ks_comp: ../../../../components/
+:ks_title: 禁用 DevOps
+:ks_keywords: Kubernetes, {ks_product}, 扩展组件管理, DevOps, 禁用 DevOps
+:ks_description: 介绍如何启用 DevOps 扩展组件。
+:ks_weight: 02
+:ks_icon:
+
+
+
+本节介绍如何禁用 DevOps 扩展组件。
+
+
+== 前提条件link:[id=a1e2ef30192f4f44a8cae86dd3df4ee4]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-prer-platformAdmin.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=18fef358b56546858e8f8c9b237abd37]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl.adoc[]
+
++
+
+. 在 **kubectl** 对话框，执行以下命令禁用 DevOps 扩展组件并删除 DevOps 功能相关资源：
++
+--
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+helm uninstall -n kubesphere-devops-system devops
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl patch -n kubesphere-system cc ks-installer --type=json -p='[{"op": "remove", "path": "/status/devops"}]'
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+
+kubectl patch -n kubesphere-system cc ks-installer --type=json -p='[{"op": "replace", "path": "/spec/devops/enabled", "value": false}]'
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+for devops_crd in $(kubectl get crd -o=jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' | grep "devops.kubesphere.io"); do
+    for ns in $(kubectl get ns -ojsonpath='{.items..metadata.name}'); do
+        for devops_res in $(kubectl get $devops_crd -n $ns -oname); do
+            kubectl patch $devops_res -n $ns -p '{"metadata":{"finalizers":[]}}' --type=merge
+        done
+    done
+done
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl get crd -o=jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' | grep "devops.kubesphere.io" | xargs -I crd_name kubectl delete crd crd_name
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Bash
+include::../../../../../_ks_components/code/bash.adoc[]
+
+kubectl delete namespace kubesphere-devops-system
+
+include::../../../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-desc-waitForExtensionDisabled.adoc[]
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

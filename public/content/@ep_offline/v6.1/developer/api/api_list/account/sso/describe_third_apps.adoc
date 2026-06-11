@@ -1,0 +1,185 @@
+---
+title: 查询第三方APP（DescribeThirdApps）
+weight: 8
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| client_ids
+| Array
+| true
+| 客户端ID列表
+
+| limit
+| Integer
+| false
+| 查询数量
+
+| offset
+| Integer
+| false
+| 查询偏移
+
+| owner
+| String
+| false
+| 
+
+| reverse
+| Integer
+| false
+| 数据是否反向排序
+
+| sort_key
+| String
+| false
+| 排序字段
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| third_app_set
+| Array
+| false
+| 第三方APP详情列表
+
+| third_app_set[].client_id
+| String
+| false
+| 客户端id
+
+| third_app_set[].client_name
+| String
+| false
+| 客户端名称
+
+| third_app_set[].client_secret
+| String
+| false
+| 客户端秘钥
+
+| third_app_set[].console_id
+| String
+| false
+| 控制台id
+
+| third_app_set[].create_time
+| String
+| false
+| 创建时间
+
+| third_app_set[].description
+| String
+| false
+| 第三方APP描述信息
+
+| third_app_set[].logo_uri
+| String
+| false
+| 第三方APP的LOGO链接地址
+
+| third_app_set[].logout_uri
+| String
+| false
+| 登出的uri地址
+
+| third_app_set[].owner
+| String
+| false
+| 第三方APP的所有者
+
+| third_app_set[].redirect_uri
+| String
+| false
+| 重定向uri地址
+
+| third_app_set[].root_user_id
+| String
+| false
+| 主账号id
+
+| third_app_set[].scope
+| Integer
+| false
+| 第三方APP的可见范围
+
+| third_app_set[].status
+| String
+| false
+| 第三方APP状态
+
+| third_app_set[].status_time
+| String
+| false
+| 第三方APP状态改变时间
+
+| third_app_set[].total_count
+| Integer
+| false
+| 查询总数
+
+| total_count
+| String
+| false
+| 查询总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "client_ids": [
+    "client_id1",
+    "client_id2"
+  ],
+  "limit": 10,
+  "offset": 1,
+  "owner": "admin",
+  "reverse": 1,
+  "sort_key": "client_name"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeThirdAppsResponse",
+  "ret_code": 0,
+  "third_app_set": [
+    {
+      "client_id": "app-jb8jbsya",
+      "client_name": "test-saas",
+      "client_secret": "ESmHH5nIykzngYNCYrbFIIYLU2QcGvfrsksiUQ0h",
+      "console_id": "system",
+      "create_time": "2022-04-21T06:27:14Z",
+      "description": "Create from app(app-jb8jbsya)",
+      "logo_uri": "",
+      "logout_uri": "",
+      "owner": "system",
+      "redirect_uri": "http://console.qingcloud.com/app/app-jb8jbsya/apply",
+      "root_user_id": "system",
+      "scope": 0,
+      "status": "active",
+      "status_time": "2022-04-22T03:30:10Z",
+      "token_issuer": "iam"
+    }
+  ],
+  "total_count": 10
+}
+----

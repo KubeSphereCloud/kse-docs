@@ -1,0 +1,30 @@
+---
+title: "使用须知"
+weight: 1
+---
+
+## 注意事项
+
+* 本升级方案仅适用于 QingStor Installer v2.0.18 及以上版本，支持 Installer 升级、Installer 升级回滚、Portal 升级以及 Patch 升级。
+* 该自动化升级方案不支持虚拟机架构的 FirstBox 直接升级。
+* 升级 Installer 之前，需将 NeonSAN 集群升级至 Installer 所对应的 NeonSAN 版本。例如，若需升级 QingStor Installer 至 v2.0.18 则需升级 NeonSAN 至 v3.5.3 版本。
+
+
+## 升级流程
+
+使用自动化脚本升级 Installer 之前，需先将 NeonSAN 升级至目标 Installer 所对应版本，完成 Installer 升级之后才可进行 Poratl 升级。
+
+[options="header",cols="1,2"]
+|====
+|流程 |步骤
+|准备工作 
+a|. 将 NeonSAN 升级到 Installer 所对应的版本。
+. 升级前检查。
+. 准备安装包。
+
+|升级操作
+a|. 升级 Installer。
+. 升级 Portal。
+. 升级 Patch。QingStor Installer v3.0.0 及之后版本支持。 
+|====
+

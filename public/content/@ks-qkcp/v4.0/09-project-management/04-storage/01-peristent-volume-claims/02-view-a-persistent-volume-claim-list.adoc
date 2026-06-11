@@ -1,0 +1,53 @@
+---
+title: "查看持久卷声明列表"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 项目管理, 存储, 持久卷声明, 查看持久卷声明列表"
+description: "介绍如何查看持久卷声明列表。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 76d69ba3fc184e1c99513735d62a7397
+:ks_xref_id: bb9fbd66e657448586dc8939c8e8b825
+:ks_comp: ../../../../components/
+:ks_title: 查看持久卷声明列表
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 存储, 持久卷声明, 查看持久卷声明列表
+:ks_description: 介绍如何查看持久卷声明列表。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **持久卷声明查看**
+:ks_navigation: **存储 > 持久卷声明**
+
+
+include::../../../../_custom/clusterManagement/pods/pods-desc-viewAPersistentVolumeList.adoc[]
+
+
+== 前提条件
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-para-persistentVolumeClaimList.adoc[]
+
+include::../../../../_custom/clusterManagement/persistentVolumeClaims/persistentVolumeClaims-oper-searchForPersistentVolumeClaims.adoc[]
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

@@ -1,0 +1,53 @@
+---
+title: "访问应用路由的后端服务"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 项目管理, 应用负载, 应用路由, 访问应用路由的后端服务"
+description: "介绍如何访问应用路由的后端服务。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: b17757d9bc3a47ffbd5ca0e39cf2a03c
+:ks_xref_id: 9535141dca664e9eaa75dcc35c9cab14
+:ks_comp: ../../../../components/
+:ks_title: 访问应用路由的后端服务
+:ks_keywords: Kubernetes, {ks_product}, 项目管理, 应用负载, 应用路由, 访问应用路由的后端服务
+:ks_description: 介绍如何访问应用路由的后端服务。
+:ks_weight: 04
+:ks_icon:
+:ks_permission: **应用负载查看**
+:ks_navigation: **应用负载 > 应用路由**
+
+
+include::../../../../_custom/clusterManagement/routes/routes-desc-accessABackendServiceOfARoute.adoc[]
+
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* 您需要启用{ks_product_both}集群网关或项目网关。
+
+include::../../../../_custom/clusterManagement/routes/routes-prer-accessABackendServiceOfARoute.adoc[]
+
+
+== 操作步骤
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/routes/routes-oper-openDetailsPage.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/routes/routes-oper-accessABackendServiceOfARoute.adoc[]

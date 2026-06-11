@@ -1,0 +1,39 @@
+---
+title: 查询 Hydro 集群
+weight: 1
+---
+
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，跳转至 {product_name} 任一网关节点。
++
+[source,shell]
+----
+ssh core0
+----
+
+. 执行如下命令行，查看 `hydro_confd` 集群信息。
++
+[source,shell]
+----
+cat /qingstor/etc/hydro_confd.yaml
+----
++
+命令回显示例
++
+[source,shell]
+----
+......
+confd_addr:
+  - "172.16.0.9:9296"
+  - "172.16.0.10:9296"
+  - "172.16.0.11:9296"
+......
+----
+

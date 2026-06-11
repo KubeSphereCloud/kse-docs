@@ -1,0 +1,37 @@
+---
+title: "重新执行即时巡检任务"
+weight: 11
+---
+
+
+:ks_navigation: **巡检任务**
+
+
+本节介绍如何再次执行即时巡检任务。此操作仅对即时巡检任务可用。
+
+
+== 前提条件
+
+* 您需要在 KubeSphere 平台具有 **platform-admin** 角色。
+
+* 已创建即时巡检任务。
+
+
+== 操作步骤
+
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+. 点击**组件坞 > 集群巡检**，进入集群巡检页面。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
+. 在巡检任务页面，点击**即时巡检任务**打开巡检任务列表。
+
+. 在需要操作的即时巡检任务右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中**重新执行**。
++
+巡检任务将重新开始运行，并自动生成一条新的巡检记录。

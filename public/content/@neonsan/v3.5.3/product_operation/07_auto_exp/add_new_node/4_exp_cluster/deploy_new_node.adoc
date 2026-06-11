@@ -1,0 +1,28 @@
+---
+title: '部署新增节点'
+weight: 4
+---
+
+. 登录集群中的任一节点。
+
+. 执行如下命令，登录集群的 FirstBox。
++
+[,shell]
+----
+ ssh qingstor-firstbox -p 6023
+----
+
+. 在新增节点上部署 Common 服务，即初始化新增节点，修改 Common 配置。
++
+[,shell]
+----
+installer product-deploy common -I scale_ip_list
+----
+
+. 在新增节点上部署 {product_name} 服务。
++
+[,shell]
+----
+installer product-deploy neonsan -I scale_ip_list
+----
+

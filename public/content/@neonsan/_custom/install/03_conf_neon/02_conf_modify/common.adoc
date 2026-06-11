@@ -1,0 +1,150 @@
+// common.yaml 配置修改
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+
+include::../../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 拷贝示例文件至/root 目录下。
++
+[source,shell]
+----
+cp /qingstor/install/test/yaml/common.yaml /root/
+----
+. 修改 common.yaml。
++
+[source,shell]
+----
+vi /root/common.yaml
+----
++
+[source]
+----
+common:
+  is_private_cloud: true
+  domain: qingcloud.com
+  console_id: admin
+  # whether deploy with iaas on same nodes
+  with_iaas: false
+  # if deploy with iaas, get iaas netconsole_server from /pitrix/conf/variables/variables.yaml
+  iaas_netconsole_server: ""
+  object_storage_zone:
+    name: qszone
+    translation: "区域"
+  file_storage_zone: qfszone
+  # deploy account
+  deploy_account: false
+  # portal use account
+  use_account: false
+  # if use other deployed account service, please query account info and fill in the dict
+  account_info:
+    account_api:
+      host: api.qingstor.me
+      port: 7777
+      protocol: http
+    qs_user_id: usr-QdhE86RU
+    qs_access_key_id: YYTFSJXCNWKEEOLFOOSD
+    qs_access_key: IwclboI2YSCNvwtHtd9fFGQoayvM76WrUjEasyLd
+    qs_secret_access_key_id: 70KdavJR+lQWRxqFaS16urM2VM+W6OSs3K6XbEPzRac=
+    qs_secret_access_key: k0ZJQtX62A9OF4Ekozm5uxKXdHhrCMEc9rMf/45fYVwWIfCVAixhv1jTTe0DLrqs
+    console_key_id: GFUNYJRXNZOWEGGUDWTF
+    console_key: sgb0zIBPMczoWf2rE1mxVTUfAwnwbQCaLj2zn3Wy
+    secret_console_key: iLo+F6bZBpxYsUSCxP2nHgWpl7C2bajqj8zhdrmfLGiW/M+XUdZaQXSKt/txVwCB
+    admin_access_key_id: 70KdavJR+lQWRxqFaS16urM2VM+W6OSs3K6XbEPzRac=
+    admin_secret_access_key: k0ZJQtX62A9OF4Ekozm5uxKXdHhrCMEc9rMf/45fYVwWIfCVAixhv1jTTe0DLrqs
+  # ip address of external ntp server, keep default if no external ntp server
+  ntp_servers: []
+  # network card name, support regular expression
+  zero_web_network_card: eth[0-9]
+  # supervisor version support 3.2.0 and 3.3.5
+  supervisor_version: 3.3.5
+  # use cassandra instead of scylla, if cpu is arm, set true
+  use_cassandra: false
+  # whether enable prometheus volume monitor
+  #prometheus_volume_monitor: true
+qingstor_mysql_vip:
+  vip: 172.16.0.15
+dns_vip:
+  vip: 172.16.0.22
+neonsan_alert:
+  alert_to_boss: false
+  # boss zone name
+  alert_zone: test
+  # boss neonsan alert url
+  alert_url: http://10.10.10.10:6777/alert_receiver/neonsan/
+----
++
+**配置字段说明如下表所示**，据实际情况对相应字段进行修改。
++
+[options="header",cols="1,3"]
+|===
+|字段	|说明
+|is_private_cloud	
+|是否为私有云，私有云填 true，否则为 false
+
+|domain	
+|文件存储和对象存储域名，此处只部署 NeonSAN，则该项保持默认值即可
+
+|console_id	
+|保持默认即可
+
+|with_iaas	
+|是否与 IaaS 融合部署。是，则修改为 true；否，则修改为 false
+
+|iaas_netconsole_server	
+|与 IaaS 融合部署时，若使用 IaaS 的 netconsole_server，地址可以从 IaaS 的 FirstBox 节点获取，即配置文件 /pitrix/conf/variables/variables.yaml 的 netconsole_server 字段，否则配置为空
+
+|object_storage_zone
+|对象存储 Zone 名及其中文翻译，若不部署对象存储，保持默认值即可
+
+|file_storage_zone
+|文件存储的 Zone 名，若不部署文件存储，保持默认值即可
+
+|deploy_account
+|已废弃，保持默认即可
+//部署对象存储时使用，是否部署 account 服务
+
+|use_account	
+|已废弃，保持默认即可
+//部署对象存储时使用，是否配置 account，对接已有的 acccount 或者使用自己部署的 account 均改为 true，并配置 account_info 参数。否则，保持 false
+
+|ntp_servers	
+|若使用已经存在的 NTP 服务器，就在该配置内写明 NTP 服务器的 IP 地址列表。否则保持默认即可。与 IaaS 融合部署场景下，请填写 IaaS 的 ntp-server 地址
+
+|zero_web_network_card	
+|所有节点的管理 IP 的网卡名，支持正则表达式，如 eth[0-9] 或 enp[132,6]s0f0。非特殊情况，保持默认即可
+
+|supervisor_version
+|supervisor 版本，推荐使用可用的最新版本。
+
+|use_cassandra	
+|使用 cassandra 代替 scylla，若 CPU 是 ARM 架构，该参数需要设置为 true，对于一些国产 x86 架构的 CPU，可能也需要使用 cassandra 代替 scylla
+
+|qingstor_mysql_vip	
+|数据库和 Portal 的虚 IP。其为与部署 NeonSAN 服务的物理节点的管理 IP 同一网段内未被使用过的 IP 地址均可，注意请勿使用广播 IP。该 IP 地址可用于登录 Portal Web 页面
+
+|dns_vip	
+|DNS 服务的 虚 IP，若不使用 account 仅部署 NeonSAN，可忽略
+
+|neonsan_alert	
+|将 NeonSAN 告警对接到 boss 的信息
+
+|alert_to_boss	
+|是否对接 NeonSAN 告警到 boss。根据实际情况进行修改，默认为 false。若需要对接 NeonSAN 告警到 boss，则设置为 true
+
+|alert_zone	
+|当 alert_to_boss 参数为 true 时，NeonSAN 告警所对接的 boss 的 zone 名称。与 IaaS 融合部署时，可从 IaaS 端相关配置进行查看，即 IaaS 端规划好的 zone_name
+
+|alert_url	
+|当 alert_to_boss 参数为 true 时，boss 接收 NeonSAN 告警的 url，一般使用 proxy vip 和 6777 端口，若使用其他 IP 端口请自行更改 url 中的 IP 和端口。与 IaaS 融合部署时，proxy vip 可在 IaaS 的 FirstBox 节点查看 /pitrix/conf/variables/variables.yaml 文件的 proxy_floating_ip 字段
+|===
+
+

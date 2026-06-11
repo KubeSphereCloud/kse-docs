@@ -1,0 +1,87 @@
+// :ks_include_id: ec83e4ff0eb74cdaa02d3a52062d9bc5
+. On the service details page, view the resource attributes of the service in the **Attributes** area.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster
+|The cluster to which the service belongs.
+
+|Project
+|The project to which the service belongs.
+
+|Type
+|
+include::services-para-internalAccess.adoc[]
+
+include::services-para-virtualip-headless.adoc[]
+
+include::services-para-externalName.adoc[]
+
+|Application
+|The name of the application to which the service belongs. You can create an application that contains multiple services, with each service corresponding to a workload.
+
+|Virtual IP Address
+|The virtual IP address used for internal cluster access to the service. This is only displayed for services of type VirtualIP.
+
+|External IP Address
+|The IP address used for external access to the service. This is only displayed when external access is enabled for the service.
+
+|Session Affinity
+|Indicates whether the session persistence feature is enabled. Possible values are:
+
+* **Enabled**: Session persistence is enabled. If the service has multiple pods, requests from the same client IP address will be forwarded to the same pod for a certain period (default is 10800 seconds).
+
+* **Disabled**: Session persistence is not enabled. If the service has multiple pods, requests from the same client IP address will be randomly forwarded to different pods.
+
+|Selector
+|The pod selector for the service. The pod selector consists of one or more pod labels. The service forwards client requests to pods that have all the specified labels.
+
+|DNS
+|The internal domain name of the service within the cluster, which can be accessed internally.
+
+|Endpoints
+|The virtual IP addresses and container ports of the target pods for the service.
+
+|Creation Time
+|The time when the service was created.
+
+|Creator
+|The user who created the service.
+|===
+--
+
+. On the **Resource Status** tab, view the container ports, workloads, and pods of the service.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Ports
+|To ensure containers can be accessed properly, the following port types are defined on the KubeSphere platform:
+
+* Container Port: The port on which the application inside the container listens. It can only be accessed within the pod.
+
+* Service Port: The port on the service's virtual IP address. It can only be accessed within the cluster. Requests sent to the service port are forwarded to the container port.
+
+* Node Port: The port on the node host. It can be accessed from outside the cluster. Requests sent to the node port are forwarded to the service port. Services of type NodePort or LoadBalancer have a node port.
+
+|Workloads
+|Displays the name, update time, type, status, and current modification records of the workloads managing the pods.
+
+|Pods
+|
+include::../nodes/nodes-para-podList.adoc[]
+|===
+--
+
+. Click the **Metadata** tab to view the labels and annotations of the service.
+
+. Click the **Events** tab to view events related to the service.
++
+--
+include::../clusterManagement-para-eventsTab.adoc[]
+--

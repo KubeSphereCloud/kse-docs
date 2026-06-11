@@ -1,0 +1,107 @@
+---
+title: "移除成员集群"
+keywords: "Kubernetes, {ks_product}, 多集群管理, 集群, 移除成员集群"
+description: "介绍如何移除成员集群。"
+weight: 09
+---
+
+:ks_menu: **集群管理**
+
+
+本节介绍如何移除成员集群。
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* 主集群无法移除。
+
+* 成员集群移除后，KubeSphere 将无法管理该集群。集群中原有的 Kubernetes 资源将不会被删除。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+// Warning
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+集群被移除后，集群中原有的多集群配置数据不会被自动清除，卸载 KubeSphere 或删除关联资源时可能会导致用户数据丢失。请务必在被移除的集群上执行link:#_步骤_3清理多集群配置数据[清理多集群配置数据]步骤。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件
+
+您需要在主集群和被移除的成员集群上都具有 **platform-admin** 角色。
+
+== 步骤 1：移除扩展组件 Agent
+
+部分扩展组件有 agent 部署在成员集群并提供服务，移除成员集群前，您需要将成员集群的扩展组件agent 进行卸载。
+
+. 登录成员集群节点，查看已安装的扩展组件 agent。
++
+--
+[source,bash]
+----
+helm list -Aa |grep -E 'kubesphere|extension'
+----
+
+回显示例：
+
+----
+ks-core                 	kubesphere-system           	1       	2025-11-14 03:10:51.296433006 +0000 UTC	deployed	ks-core-1.2.2                  	v4.2.0-community
+whizard-monitoring-agent	kubesphere-monitoring-system	1       	2025-11-14 03:16:41.807291141 +0000 UTC	deployed	whizard-monitoring-1.2.1-beta.0
+----
+--
+
+. 登录 host 集群，进入扩展中心，搜索对应扩展组件，移除其 agent。
++
+--
+方法如下：在扩展组件详情页面，点击组件图标下的image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，选择**集群 Agent 配置**。取消勾选成员集群，点击**下一步**，然后点击**确定**。
+
+image::/images/ks-qkcp/zh/v4.2.1/cancel-member-agent.png[]
+--
+
+. 等待 agent 卸载。重复该步骤，将成员集群已安装的所有扩展组件 agent 卸载完成。
+
+
+== 步骤 2：移除集群
+
+=== 通过 Web 控制台移除集群
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-oper-logInToHost.adoc[]
+
+. 点击**集群管理**。
+
+. 在需要操作的集群右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**移除集群**。
+
+. 在**移除集群**对话框，确认需要移除的集群的信息，将滑块拖动到右侧，输入需要移除的集群的名称，然后点击**移除**。
+
+=== 通过命令行移除集群
+
+某些情况下可能无法从 Web 控制台移除成员集群。例如，成员集群的凭证存在错误。在此情况下，您可以执行以下步骤通过命令行移除不健康的成员集群：
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-oper-logInToHost.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-openKubectl_v42.adoc[]
+
++
+
+. 在 **kubectl** 对话框，执行以下命令移除成员集群（将 <cluster name> 替换为成员集群的名称）：
++
+--
+// Bash
+[source,bash]
+----
+kubectl delete cluster <cluster name>
+----
+--
+
+
+== 步骤 3：清理多集群配置数据
+
+登录被移除的成员集群节点，执行以下命令清理集群中的多集群配置数据：
+
+[,bash]
+----
+for ns in $(kubectl get ns --field-selector status.phase!=Terminating -o jsonpath='{.items[*].metadata.name}'); do kubectl label ns $ns kubesphere.io/workspace- && kubectl patch ns $ns --type merge -p '{"metadata":{"ownerReferences":[]}}'; done
+----

@@ -1,0 +1,20 @@
+---
+title: "KubeSphere Multi-Cluster Proxy Connection"
+description: "Introduces how to use the 'KubeSphere Multi-Cluster Proxy Connection' extension for proxy connections between clusters."
+weight: 19
+layout: "second"
+---
+
+This section describes how to use the 'KubeSphere Multi-Cluster Proxy Connection' extension for proxy connections between clusters.
+
+KubeSphere's Tower component is used for proxy connections. Tower is a tool for establishing network connections between clusters through a proxy. If the host cluster cannot directly access member clusters, you can expose the proxy service address of the host cluster, allowing member clusters to connect to the host cluster via the proxy. This connection method is applicable when member clusters are deployed in a private environment (e.g., an IDC) and the host cluster can expose its proxy service. It is also suitable when your clusters are distributed across different cloud providers.
+
+After installing the 'KubeSphere Multi-Cluster Proxy Connection' extension in the host cluster, a service named `tower` will be automatically created in the system project `kubesphere-system`. Through this service, member clusters can be added via proxy connection.
+
+[.admon.note,cols="a"]
+|===
+|Note
+
+|
+For more information about the extension configuration, please refer to the description on the details page of the 'KubeSphere Multi-Cluster Proxy Connection' extension in the Extensions Center.
+|===

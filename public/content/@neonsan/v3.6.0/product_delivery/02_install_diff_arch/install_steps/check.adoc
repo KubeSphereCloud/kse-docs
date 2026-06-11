@@ -1,0 +1,62 @@
+---
+title: "检查环境"
+weight: 5
+---
+
+. 部署完成后，退出 FirstBox 节点，登录集群的任一节点。
+
+. 执行如下命令，查看集群内所有的存储池。
++
+[source,shell]
+----
+neonsan list_rg
+----
++
+[source,shell]
+----
+RG count:  2
++-------+---------+
+| RG ID | RG NAME |
++-------+---------+
+|     1 | SSD0    |
+|     2 | testSSD |
++-------+---------+
+----
++
+
+include::../../../../../_components/note.adoc[]
+* 返回结果中 `RG NAME` 所对应的值为存储池名，`RG ID` 即为存储池所对应的 ID。
+* 返回结果中应该包含两个存储池，分别为 x86 架构节点所属存储池和 ARM 架构节点所属存储池。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，查看 ARM 节点是否在步骤 1 查询到的存储池内。
++
+[source,shell]
+----
+neonsan list_store -rg <rg_id>
+----
++
+
+include::../../../../../_components/note.adoc[]
+* 此处的 <rg_id> 为步骤 2 查询到的 ARM 节点所属存储池的 `RG ID`。
+* 注意查看返回结果中的 MNGT IP 字段，需包含所有 ARM 节点的管理 IP 地址。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令确认服务是否正常。
++
+[source,shell]
+----
+neonsan list_store && neonsan list_ssd && neonsan list_port && neonsan list_pool && neonsan list_parameter && neonsan list_rg -detail
+----
++
+
+include::../../../../../_components/note.adoc[]
+* 命令执行成功，无错误提示，即部署成功。
+* 若任一命令执行失败，可登录至 NeonSAN 任一节点，进入 ``/var/log/`` 目录查看相关日志调查原因并解决后，再次执行该命令。
+
+include::../../../../../_components/table_footer.adoc[]
+
+
+

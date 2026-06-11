@@ -1,0 +1,147 @@
+---
+title: "安装 KubeSphere 企业版"
+keywords: "Kubernetes, {ks_product}, 快速入门, 安装, KubeSphere Core"
+description: "介绍如何最小化安装 KubeSphere 企业版。"
+weight: 01
+---
+
+本节介绍如何以最⼩化⽅式安装{ks_product_left}。此安装方法仅适用于测试，若要在生产环境中安装{ks_product_left}，请参阅link:../../03-installation-and-upgrade/02-install-kubesphere/02-install-kubernetes-and-kubesphere/[安装 Kubernetes 和 KubeSphere 企业版]。
+
+== 安装{ks_product_left}
+
+=== 前提条件
+
+* 准备一台 Linux 主机，并确保其满足最低硬件要求：CPU > 2 核，内存 > 2 GB， 磁盘空间 > 40 GB。
+
+* 您需要提前安装 Helm。具体请参阅link:https://helm.sh/zh/docs/intro/install/[安装 Helm]。
+
+=== 操作步骤
+
+. （可选）如果您没有可用的 Kubernetes 集群，执行以下命令快速创建一个 Kubernetes 集群。
+
+.. 如果您访问 GitHub/Googleapis 受限，请登录 Linux 主机，执行以下命令设置下载区域。
++
+[,bash]
+----
+export KKZONE=cn
+----
+
+.. 执行以下命令安装⼯具 KubeKey。
++
+--
+下载完成后当前目录下将生成 KubeKey 二进制文件 **kk**。
+
+[,bash]
+----
+curl -sfL https://get-kk.kubesphere.io | sh -
+----
+--
+
+.. 执行以下命令安装依赖项。
++
+[,bash]
+----
+apt install socat conntrack -y
+----
+
+.. 执行以下命令快速创建一个 Kubernetes 集群。
++
+[,bash]
+----
+./kk create cluster --skip-pull-images --with-local-storage  --with-kubernetes v1.27.4 --container-manager containerd  -y
+----
+
+. 如果您已经拥有可用的 Kubernetes 集群，执行以下命令通过 `helm` 安装{ks_product_left}的核心组件 KubeSphere Core。
++
+[,bash]
+----
+chart=oci://hub.kubesphere.com.cn/kse/ks-core
+version=1.0.8
+
+helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart \
+--debug \
+--wait \
+--set cloud.enabled=true \
+--version $version
+----
+
+. 安装完成后，输出信息会显示{ks_product_left} Web 控制台的 IP 地址和端口号，默认的 NodePort 是 30880。
++
+--
+[,yaml]
+----
+NOTES:
+Thank you for choosing KubeSphere Helm Chart.
+
+Please be patient and wait for several seconds for the KubeSphere deployment to complete.
+
+1. Wait for Deployment Completion
+
+    Confirm that all KubeSphere components are running by executing the following command:
+
+    kubectl get pods -n kubesphere-system
+
+2. Access the KubeSphere Console
+
+    Once the deployment is complete, you can access the KubeSphere console using the following URL:
+
+    http://192.168.6.10:30880
+
+3. Login to KubeSphere Console
+
+    Use the following credentials to log in:
+
+    Account: admin
+    Password: P@88w0rd
+
+NOTE: It is highly recommended to change the default password immediately after the first login.
+
+For additional information and details, please visit https://kubesphere.io.
+----
+
+执行以下命令检查 Pod 状态。
+
+[,bash]
+----
+kubectl get pods -n kubesphere-system
+----
+
+当 Pod 状态都为 **Running** 时，使用默认的账户和密码 (admin/P@88w0rd) 通过 <NodeIP>:30880 访问{ks_product_left} Web 控制台。
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+取决于您的网络环境，您可能需要配置流量转发规则并在防火墙中放行 30880 端口。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+== 激活{ks_product_left}
+
+登录{ks_product_left} Web 控制台后，您需要绑定 KubeSphere 云账号，订阅{ks_product_left}，以使用它的全部功能。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+{ks_product_right} v4.1.1 为每位用户提供了单个集群 24 vCPU 30 天的免费试用许可。到期后，您需要付费订阅{ks_product_left}。
+|===
+
+=== 操作步骤
+
+// 内容同v4.1.1/03-installation-and-upgrade/02-install-kubesphere/03-activate-kse.adoc
+// 仅把 具有 **platform-admin** 角色的 改为 **admin**
+
+. 以 **admin** 用户登录{ks_product_left} Web 控制台。 
+
+. 点击顶部的**绑定 KubeSphere 云账号**提示，输入云账号信息并授权，完成账号绑定。
+
+. 在**平台设置 > 云账号**页面，点击**前往订阅**。
+
+. 选择**订阅方案**和**订阅时长**，确认**集群 ID**，点击**提交订单**，并完成支付。
++
+--
+image:/images/ks-qkcp/zh/v4.1.1/activate-kse.png[activate-kse]
+--
+
+. 在支付成功页面，下拉到页面底部，点击**返回**按钮回到{ks_product_left} Web 控制台。

@@ -1,0 +1,96 @@
+---
+title: 创建子用户（CreateSubUser）
+weight: 9
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| change_passwd_first_login
+| Int
+| false
+| 子用户第一次登录是否需要修改密码
+
+| email
+| String
+| true
+| 子用户的电子邮件地址
+
+| nologin
+| Int
+| false
+| 子用户是否禁止登录
+
+| notify_email
+| String
+| true
+| 子用户的告警电子邮件地址
+
+| passwd
+| String
+| true
+| 子用户的密码
+
+| phone
+| String
+| false
+| 子用户的电话号码
+
+| user_name
+| String
+| false
+| 子用户的用户名称
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| email
+| String
+| false
+| 子用户的电子邮件地址
+
+| user_id
+| String
+| false
+| 子用户的用户ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "CreateSubUser",
+  "change_passwd_first_login": 0,
+  "email": "xx@testing.com#xx",
+  "nologin": 0,
+  "notify_email": "ntf@testing.com",
+  "passwd": "Zhu@88jie",
+  "phone": "18760925121",
+  "user_name": "xxxxx"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "CreateSubUserResponse",
+  "email": "xx@testing.com#xx",
+  "ret_code": 0,
+  "user_id": "usr-xqm5xxFD"
+}
+----

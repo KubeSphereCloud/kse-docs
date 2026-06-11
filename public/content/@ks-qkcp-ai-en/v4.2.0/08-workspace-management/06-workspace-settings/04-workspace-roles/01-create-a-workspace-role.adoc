@@ -1,0 +1,65 @@
+---
+title: "Create Workspace Role"
+keywords: "Kubernetes, {ks_product}, workspace, Workspace Settings, workspace role, create workspace role"
+description: "Introduces how to create a workspace role."
+weight: 01
+---
+
+:ks_permission: **Role Management**
+:ks_navigation: **Workspace Settings > Workspace Roles**
+
+
+This section describes how to create a workspace role.
+
+// [.admon.note,cols="a"]
+// |===
+// |Note
+
+// |This feature is only available in KubeSphere ``Standard, Advanced, and Ultimate Editions``.
+
+// |===
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the **Create Workspace Role** dialog box, set the name, alias, and description for the workspace role, then click **Edit Permissions**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the workspace role. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and can be up to 63 characters long.
+
+include::../../../../_custom/workspaceManagement/workspaceRoles/workspaceRoles-para-aliasAndDescription.adoc[]
+|===
+--
+
+. In the **Edit Permissions** dialog box, set the permissions for the workspace role, then click **OK**.
++
+====
+include::../../../../_custom/workspaceManagement/workspaceRoles/workspaceRoles-para-permissions_v4.adoc[]
+====

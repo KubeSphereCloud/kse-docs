@@ -1,0 +1,57 @@
+---
+title: "驱动管理"
+weight: 8
+---
+
+== 功能描述
+云易捷支持用户使用自主上传的 Windows 和 Linux 系统所需要的驱动程序。
+
+== 前提条件
+
+* 已获得{product_console_name}的登录账户和密码。
+* 已获得云易捷部署管理平台的登录账户和密码。
+* 云易捷部署管理平台已上传相应的驱动程序。
+
+== 上传驱动程序
+
+. 根据如下链接，登录云易捷部署管理平台。
++
+[,shell]
+----
+http://${FirstBox}:9998/login
+----
++
+
+include::../../../../../../../../_components/note.adoc[]
+* ${FirstBox} 为云易捷的启动节点 IP，需根据实际情况进行修改。
+* 登录的默认账户密码为：admin/zhu88jie
+
+include::../../../../../../../../_components/table_footer.adoc[]
+
+. 在云易捷管理平台页面，点击左侧导航栏中的**高级设置**，选择**上传驱动**，在弹出的窗口中根据驱动类型选择相应的文件进行上传即可。
+
++
+image::/images/express/console/vm_manage_drive_1.png[,60%]
+
+. 驱动上传完成后，可通过点击**查看详情**，可以查看或删除已有的驱动文件。
++
+image::/images/express/console/vm_manage_drive_2.png[,60%]
+
+
+== 驱动管理
+
+. {product_console_name}。
+. 在顶部导航栏选择**资源** > **虚拟机**，点击 **ExpressCloud 主机**，进入 ExpressCloud 主机列表页面。
+
+. 点击虚拟机所在行右侧的更多操作，选择**驱动管理**，在弹出的**驱动管理**窗口中，点击待挂载驱动文件的驱动盘右侧的**选择驱动文件**。根据实际需要选择驱动文件后，点击**确定**即可。
+
++
+
+include::../../../../../../../../_components/note.adoc[]
+选择驱动文件并确定后，相应的虚拟机会重启。
+
+include::../../../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/vm_manage_drive_3.png[,60%]
+
+

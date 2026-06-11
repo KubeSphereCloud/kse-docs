@@ -1,0 +1,70 @@
+---
+title: "View security groups"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, security groups, list, view"
+description: "Describes how to view security groups in the {ks_product} web console."
+weight: 05
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 598f08d444b64de0aa8e47194372bbc6
+:ks_xref_id: e7dc263363324a2aaf4144f5429d2625
+:ks_comp: ../../../components/
+:ks_title: View security groups
+:ks_description: Describes how to view security groups in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, security groups, list, view
+:ks_weight: 05
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to view security groups in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=742a1ad4c8534a578b9c35b1a63a4054]
+
+include::../../../_custom-en/security-groups/security-group-limits.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=0b23fe063039456d95b960c52d27ff40]
+
+include::../../../_custom-en/security-groups/security-group-steps.adoc[]
+
++
+
+--
+You can view all security groups in your project.  The following table describes the parameters.
+
+[cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the security group.
+
+include::../../../_custom-en/security-groups/naming-convention.adoc[]
+
+|ID
+|The universally unique identifier (UUID) of the security group in the system. The UUID is automatically assigned by the system.
+
+|Associated Resources
+|The number of resources that are added to the security group.
+
+|Rules
+|The number of rules added to the security group.
+
+|Created by
+|The username that is used to create the security group.
+
+|Created at
+|The time when the security group was created.
+|===
+--
+
+. (Optional) Click the search box above the security group list and specify a condition to search for security groups by name or ID. For example, use **Name:ab** to search for security groups whose name contains the string **ab**.
+. (Optional) In the upper-right corner of the page, click image:/images/ksv/en/icons/refresh-light.svg[refresh,15] to refresh data.

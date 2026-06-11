@@ -1,0 +1,176 @@
+---
+title: 修改已上架应用或版本信息（管理员使用）（ModifyApprovedApp）
+weight: 20
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| abstraction
+| String
+| false
+| 概述
+
+| app
+| String
+| true
+| 应用ID
+
+| app_name
+| String
+| true
+| 应用名称
+
+| category
+| String
+| false
+| 分类
+
+| company_url
+| String
+| false
+| 公司网址
+
+| description
+| String
+| true
+| 描述
+
+| feedback
+| String
+| true
+| 修改原因
+
+| iaas_recommend
+| String
+| false
+| 应用版本推荐企业云版本（逗号分隔）
+
+| icon
+| String
+| false
+| 图标
+
+| is_hide
+| Integer
+| false
+| 是否隐藏应用，默认0
+
+| screenshots
+| Array
+| false
+| 截图
+
+| sla_period
+| Integer
+| false
+| 交付周期（license）
+
+| terms_of_service
+| String
+| false
+| 服务条款
+
+| usage_instructions
+| String
+| false
+| 使用说明
+
+| version_attachment_content
+| String
+| false
+| 配置包内容
+
+| version_description
+| String
+| false
+| 版本描述（管理）
+
+| version_detailed_description
+| String
+| false
+| 版本详细描述（用户）
+
+| version_id
+| String
+| false
+| 应用版本ID
+
+| version_name
+| String
+| false
+| 版本名称
+
+| version_seq
+| Integer
+| false
+| 版本排序
+
+| version_service_version
+| String
+| false
+| 应用服务版本
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| false
+| 应用ID
+
+| modify_key
+| Array
+| false
+| 应用修改字段
+
+| version_modify_key
+| Array
+| false
+| 版本修改字段
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "app": "app-xxxxxx",
+  "app_name": "测试应用",
+  "feedback": "修改应用和版本信息",
+  "iaas_recommend": "5.1,6.0,6.1",
+  "is_hide": 0,
+  "version_id": "appv-xxxxxx",
+  "version_name": "测试版本"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "ModifyApprovedAppResponse",
+  "modify_key": [
+    "app_name",
+    "is_hide"
+  ],
+  "ret_code": 0,
+  "version_modify_key": [
+    "version_name",
+    "iaas_recommend"
+  ]
+}
+----

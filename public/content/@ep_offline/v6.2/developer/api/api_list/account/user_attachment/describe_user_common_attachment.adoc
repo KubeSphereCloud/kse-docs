@@ -1,0 +1,106 @@
+---
+title: 查询用户公共附件（DescribeUserCommonAttachment）
+weight: 2
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| attachment
+| String
+| true
+| 附件id
+
+| owner
+| String
+| true
+| 附件所有者的用户id
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| attachment_set
+| Array
+| false
+| 附件详情列表
+
+| attachment_set[].attachment_category
+| String
+| false
+| public
+
+| attachment_set[].attachment_content
+| String
+| false
+| 附件内容，为base64编码
+
+| attachment_set[].attachment_id
+| String
+| false
+| public
+
+| attachment_set[].attachment_sub_category
+| String
+| false
+| 附件子目录
+
+| attachment_set[].create_time
+| String
+| false
+| public
+
+| attachment_set[].owner
+| String
+| false
+| 附件所有者的用户id
+
+| total_count
+| Integer
+| false
+| 附件总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeUserCommonAttachments",
+  "attachment": "usca-ebkch62k",
+  "owner": "usr-ddyfbbTV"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeUserCommonAttachmentsResponse",
+  "attachment_set": [
+    {
+      "attachment_category": "user_verify",
+      "attachment_content": "c2RhbHNsYXNkYWxramdsa2FqZ2wK",
+      "attachment_id": "usca-ebkch62k",
+      "attachment_sub_category": "id",
+      "create_time": "2023-06-14T08:20:03Z",
+      "owner": "usr-ddyfbbTV"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1,
+  "trace_id": "41nikL7z"
+}
+----

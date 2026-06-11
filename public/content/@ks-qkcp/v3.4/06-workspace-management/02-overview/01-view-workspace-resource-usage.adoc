@@ -1,0 +1,68 @@
+---
+title: "概览"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 企业空间管理, 概览, 查看企业空间资源用量"
+description: "介绍如何查看企业空间资源用量。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: f302edf26a5b4bd585106c21000fbeae
+:ks_xref_id: 405e7622b5134c9a921bbf4448e05d4b
+:ks_comp: ../../../components/
+:ks_title: 概览
+:ks_keywords: Kubernetes, {ks_product}, 企业空间管理, 概览, 查看企业空间资源用量
+:ks_description: 介绍如何查看企业空间资源用量。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **企业空间设置查看**
+:ks_navigation: **概览**
+
+
+本节介绍如何查看企业空间资源用量。
+
+
+== 前提条件link:[id=146b65f8c1b44bcdb2a4e8a45cb5e35d]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=3f86fc0ebef944cc9b586004cc2e0d15]
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
++
+====
+* **概览**页面的**资源用量**页签提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|物理资源
+|企业空间在指定集群中的 CPU 和内存使用情况。
+
+|应用资源
+|企业空间在指定集群中创建的部署、有状态副本集、守护进程集、任务、定时任务和持久卷声明的数量。
+|===
+--
+
+include::../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../_ks_components/oper-refreshData.adoc[]
+
+* 在右上角点击**集群**下拉列表可查看特定集群中的数据。
+====

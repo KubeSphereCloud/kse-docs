@@ -1,0 +1,50 @@
+---
+title: "查看企业空间基本信息"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 企业空间, 企业空间设置, 基本信息, 查看企业空间基本信息"
+description: "介绍如何查看企业空间基本信息。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 11a798ec9ed24d1d988125b491c0fd08
+:ks_xref_id: 0161adffb55b464099730e2d43cc3e49
+:ks_comp: ../../../../components/
+:ks_title: 查看企业空间基本信息
+:ks_keywords: Kubernetes, {ks_product}, 企业空间, 企业空间设置, 基本信息, 查看企业空间基本信息
+:ks_description: 介绍如何查看企业空间基本信息。
+:ks_weight: 01
+:ks_icon:
+:ks_navigation: **企业空间设置 > 基本信息**
+
+
+本节介绍如何查看企业空间基本信息。
+
+
+== 前提条件link:[id=0eb63db43c494d10b179556a4d892661]
+
+您需要加入一个企业空间。有关更多信息，请参阅link:../../03-workspace-members/[企业空间成员]、link:../../04-workspace-roles/[企业空间角色]和link:../../05-departments/[部门]。
+
+== 操作步骤link:[id=311b1040e36a41fa8ce6636dce8d8366]
+
+. 登录{ks_product_left} Web 控制台并进入您的企业空间。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+--
+**基本信息**页面提供以下信息：
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|企业空间信息
+|当前企业空间的信息，包括企业空间的名称、管理员、创建时间、项目数量、DevOps 项目数量、企业空间成员数量。
+
+|网络隔离
+|授权给企业空间的集群的网络隔离状态。当授权给企业空间的集群开启网络隔离后，属于该企业空间且运行在该集群中的容器组将不能被企业空间外部的客户端访问，也不能被集群外部的客户端访问。属于该企业空间且运行在该集群中的容器组的出站流量不受限制。
+|===
+--

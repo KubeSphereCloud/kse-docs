@@ -1,0 +1,74 @@
+---
+title: 取消合约（RollbackContract）
+weight: 23
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| true
+| 控制台ID
+
+| contract
+| String
+| true
+| 合同ID
+
+| refund_policy
+| String
+| false
+| private
+
+| resource
+| String
+| true
+| 资源ID
+
+| user
+| String
+| true
+| 用户ID
+
+| zone
+| String
+| true
+| 区域ID
+|===
+
+== 返回数据
+
+此接口仅包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "RollbackContract",
+  "console": "testingcloud",
+  "contract": "ct-BczKbNPH",
+  "resource": "vol-klps2tf8",
+  "user": "usr-mSbsvdQ5",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "RollbackContractResponse",
+  "ret_code": 0
+}
+----

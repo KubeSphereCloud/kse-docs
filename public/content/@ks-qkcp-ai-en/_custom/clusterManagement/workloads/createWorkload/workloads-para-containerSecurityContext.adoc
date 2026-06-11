@@ -1,0 +1,27 @@
+// :ks_include_id: 03ba4803bc5e4930b178cd6397356d2c
+Set the permissions of container processes in the Linux system.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Access Control
+|
+Access permissions for container processes.
+
+* **Privileged Mode**: Runs the container process as the **root** user on the host.
+
+* **Allow Privilege Escalation**: Allows the container process to acquire more privileges than its parent process. This option is enabled by default when **Privileged Mode** is enabled.
+
+* **Read-only Root Filesystem**: Sets the root directory of the container's filesystem to read-only.
+
+include::workloads-para-uidGidSelinux.adoc[]
+
+|Capabilities
+|
+Additional permissions added to or removed from container processes in the Linux system. Refer to the link:https://man7.org/linux/man-pages/man7/capabilities.7.html[Linux official documentation] for a list of Linux process capabilities.
+
+* When adding or removing capabilities for container processes, you need to remove the **CAP_** prefix from the capability name. For example, entering **SYS_TIME** in the **Remove** text box removes the **CAP_SYS_TIME** capability from the container process.
+
+* Click **Add** to set multiple capability addition or removal instructions.
+|===

@@ -1,0 +1,50 @@
+---
+title: 获取 {product_name} 信息
+weight: 1
+---
+
+== DNS 服务器
+
+. 登录 {product_name} 的 FirstBox。其中 `<firstbox ip address>` 为 {product_name} 的 FirstBox IP 地址。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip address>
+----
+
+. 执行如下命令行，查找 {product_name} 的 DNS 服务器信息。
++
+[source,shell]
+----
+# grep core /etc/hosts
+101.100.11.2 core0
+101.100.11.3 core1
+101.100.11.4 core2
+----
++
+include::../../../../../../_components/note.adoc[]
+
+由于 core 节点上部署有 DNS 服务，因此查询 core 节点服务器即为 DNS 节点服务器。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+== 密钥信息
+
+. 登录 {product_name} 的 FirstBox。其中 `<firstbox ip address>` 为 {product_name} 的 FirstBox IP 地址。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip address>
+----
+
+. 查看如下配置文件。
++
+[source,shell]
+----
+cat /root/qs-installer/qs-deploy/env/<zone_id>/group_vars/all 
+……
+qs_secret_access_key_id
+qs_secret_access_key
+……
+----
+

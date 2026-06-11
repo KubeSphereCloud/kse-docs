@@ -1,0 +1,79 @@
+---
+title: 扩容节点
+weight: 3
+---
+
+== 初始化节点
+
+. 执行如下命令行，登录原环境的 FirstBox 节点。命令行中的 `<firstbox ip>` 是原环境的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，进入脚本所在目录。
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，初始化待扩容节点。
++
+[source,shell]
+----
+./qs_installer deploy --ssh -l firstbox:node3
+./qs_installer deploy --common -l node3
+----
++
+include::../../../../../_components/note.adoc[]
+
+* 命令行中 `node3` 填写新扩容的节点。
+* 若原环境中有 3 个节点，新扩容了 1 个节点，可直接参考示例填写。
+* 若原环境中有 4 个节点，新扩容了 1 个节点，则需修改为 `node4`。
+* 若原环境中有 3 个节点，新扩容了 2 个节点，则需修改为 `node3:node4`。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 部署新节点
+
+延续前文步骤，执行以下命令行，完成待扩容节点的安装部署。
+
+. 执行如下命令行，清理缓存文件。
++
+[source,shell]
+----
+./qs_installer deploy --rm_cachefile
+./qs_installer deploy --all -l '!core:!global' --skip-tags=reboot -e restart=yes
+----
+
+
+. 执行如下命令行，修改监控配置文件，添加新增节点。
++
+[source,shell]
+----
+./qs_installer deploy --monitor2 --tags prometheus2
+./qs_installer deploy --qingstor_zero_web --tags zero-web
+----
+
+
+. 执行如下命令行，更新所有节点的 `hosts` 文件。
++
+[source,shell]
+----
+./qs_installer tools --update-hosts
+----
+
+. 执行如下命令行，重启新节点。
++
+[source,shell]
+----
+./qs_installer deploy --reboot_box -l node3
+----
++
+include::../../../../../_components/note.adoc[]
+
+命令行中 `node3` 为新扩容的节点，可根据前文内容进行填写。
+
+include::../../../../../_components/table_footer.adoc[]

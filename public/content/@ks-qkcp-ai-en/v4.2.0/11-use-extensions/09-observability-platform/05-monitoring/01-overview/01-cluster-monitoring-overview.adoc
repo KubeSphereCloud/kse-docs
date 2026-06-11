@@ -1,0 +1,83 @@
+---
+title: "View Cluster Monitoring Overview"
+description: "Describes how to view monitoring information on the cluster overview page."
+weight: 01
+---
+
+:ks_permission: **Monitoring View**
+:ks_navigation: **Overview**
+
+This section describes how to view monitoring information on the cluster overview page.
+
+ifeval::["{file_output_type}" == "html"]
+For other information about the cluster overview page, please refer to link:../../../../../07-cluster-management/02-overview/01-view-cluster-overall-information/[View Cluster Overview Information].
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+For other information about the cluster overview page, please refer to the "Overview" chapter in the *KubeSphere Cluster Management Guide*.
+endif::[]
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **WizTelemetry Monitoring** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+--
+The **Overview** page provides the following monitoring information:
+
+[%header,cols="1a,4a"]
+|===
+|Area |Description
+
+|Cluster Quota Statistics
+|CPU and memory quotas for containers and projects in the current cluster, including reserved amount, limit amount, and total amount.
+
+|Node Resource Usage
+|Total and real-time usage of CPU, memory, and disk for all nodes, as well as the total number of pods allowed to be created in the cluster and the number of pods already created. By default, each node allows a maximum of 110 pods.
+
+Click the corresponding area to view the real-time usage percentage of that resource.
+
+|Pods
+|The number of various types of pods in the current cluster.
+
+Pod status types include:
+
+include::../../../../../_custom/clusterManagement/pods/pods-para-podStatus_overview.adoc[]
+
+Pod QoS (Quality of Service) types include:
+
+include::../../../../../_custom/clusterManagement/pods/pods-para-qosTypes.adoc[]
+
+include::../../../../../_custom/clusterManagement/pods/pods-para-oomTypes.adoc[]
+
+|Kubernetes Status
+|API requests per second, API request latency, pod scheduling count, and pod scheduling failure count for the current cluster.
+
+// |System Components
+// |System components in the current cluster. System components are workloads running on the KubeSphere platform to implement platform features.
+
+|Resource Usage Ranking
+|The top 5 nodes, pods, and projects with the highest usage of specific resources in the current cluster.
+
+* Select node, pod, or project from the left dropdown list, and choose different sorting criteria from the right dropdown list.
+
+* Click image:/images/ks-qkcp/zh/icons/sort-ascending.svg[sort-ascending,18,18]/image:/images/ks-qkcp/zh/icons/sort-descending.svg[sort-descending,18,18] above the list to sort in ascending/descending order.
+
+* Click **View More** below to view detailed resource usage for nodes, pods, and projects.
+|===
+--

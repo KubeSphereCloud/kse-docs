@@ -1,0 +1,85 @@
+---
+title: "申请 License"
+weight: 20
+---
+
+软件部署后有 3 个月的试用版 License，试用版 License 到期后，用户需要申请 POC License 或正式环境 License，才能继续使用{product_name}。
+
+执行以下操作申请 IaaS License。
+
+== 前提条件
+
+* 已获取申请信息。
+* 已获取 License 系统的登录账号，且账号拥有许可申请权限。
+
+== 操作步骤
+
+. 登录青云 License 管理系统。
+ ** 地址：link:https://license.yunify.com[]。
+ ** 账号：青云域账号。用户名为青云邮箱地址。
+. 在左侧导航栏，选择**流程** > **流程选择与申请**，进入 License 申请页面。
++
+image::/images/ep_offline/license/iaas_apply_01.png[]
+. 在**青云 IAAS 环境许可申请**区域，根据需求点击需要申请的类型。
+. 填写申请表单。
++
+必填参数说明如下，其他选填参数（比如**订单编号**、**合同编号**）根据实际情况进行填写即可。
++
+[cols='1,3'] 
+|===
+| 参数 | 说明 
+
+| 控制台标识	| 已获取的{product_name} console id。
+| 区域标识	| 已获取的{product_name} zone id 或 region id。
+| 平台唯一标识	| 已获取的{product_name} platform id。
+| 计算节点数量	| 通过 License 限制{product_name}中可用区/区域内能使用的计算节点（Hyper 节点）数量。
+
+该值必须为正整数。
+| 接收者邮件地址	| 接收 License 信息的接收人邮箱地址。
+
+仅支持单个邮箱地址。
+| POC 编号	| 仅 **POC 许可申请**需要填写。
+
+填写 POC 环境在 home.yunify.com 中的 POC 编号。
+| 开始时间	| 点击输入框，手动选择许可生效时间。
+
+默认为当前时间。
+| 结束时间	| 点击输入框，手动选择许可到期时间。
+| 备注/说明	| 建议填写项目及环境说明信息，尽量描述清楚。
+|===
+
++
+正式环境许可申请：
++
+image::/images/ep_offline/license/iaas_apply_02.png[]
++
+image::/images/ep_offline/license/iaas_apply_03.png[]
++
+POC 许可申请：
++
+image::/images/ep_offline/license/iaas_apply_04.png[]
+
+. 点击**确定**，提交申请。
+. 等待审批通过后，申请时配置的**接收者邮件地址**会收到系统发送的 License 信息邮件。
++
+授权证书内容示例如下：
++
+image::/images/ep_offline/license/iaas_apply_05.png[]
++
+参数说明：
++
+[cols='1,3'] 
+|===
+| 参数 | 说明 
+
+| license_id	| License 许可证的 ID。
+| start_time	| License 的开始日期。
+| end_time	| License 的结束日期。
+| hypernode_count	| License 授权的计算节点数量。
+| zone_id	| License 授权的区域。
+| console_id	| License 授权的 Console。
+| applicant	| License 申请人信息。
+| description	| 申请 License 时填写的描述信息。
+| license_code	| License 密钥，用于注册 License。
+| application_code	| 申请密钥。
+|===

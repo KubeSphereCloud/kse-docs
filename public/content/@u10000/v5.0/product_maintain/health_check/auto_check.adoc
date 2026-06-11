@@ -1,0 +1,51 @@
+---
+title: 自动检查
+description: 
+weight: 2
+---
+
+{product_name} 集群服务均运行在容器中，确认集群状态，首先需确认各集群服务所在容器状态是否正常，再登录至各集群服务所在容器内，查看集群详细信息来判断集群状态是否正常。
+
+
+{product_name} 提供自动检查工具，方便用户简单快速的完成巡检任务。
+
+
+. 登录当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
++
+include::../../../../_components/note.adoc[]
+
+* 命令行中的 `<firstbox ip>` 为当前环境的 FirstBox 节点 IP，需根据实际情况进行填写。
+* 登录密码默认为 `zhu88jie`。
+
+include::../../../../_components/table_footer.adoc[]
+
+. 进入脚本所在目录。
+
++
+[source,shell]
+----
+cd /root/qs-installer
+----
+
+. 执行如下命令行，对当前环境进行基础检查。
++
+[source,shell]
+----
+./qs_installer tools --check-u1w
+----
++
+命令行返回结果如下图所示，则说明环境检查通过。
++
+image::/images/u10000/install_1.png[install_1,50%]
++
+include::../../../../_components/note.adoc[]
+
+若有异常输出，需根据输出内容进行排查并解决相关异常，也可参考link:../manual_check[手动检查]相关章节内容。
+
+include::../../../../_components/table_footer.adoc[]
+

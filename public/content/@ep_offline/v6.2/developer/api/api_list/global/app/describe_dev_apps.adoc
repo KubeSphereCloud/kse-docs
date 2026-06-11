@@ -1,0 +1,341 @@
+---
+title: 查询应用列表（未上架或已上架）（DescribeDevApps）
+weight: 10
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app
+| Array
+| false
+| 应用
+
+| app_name
+| String
+| false
+| 应用名称
+
+| app_type
+| Array
+| false
+| 查询应用类型
+
+| display_columns
+| Array
+| false
+| 返回字段
+
+| exclude_apps
+| Array
+| false
+| 排除应用列表
+
+| exclude_hide
+| Integer
+| false
+| 是否排除隐藏应用
+
+| limit
+| Integer
+| false
+| 个数
+
+| offset
+| Integer
+| false
+| 偏移
+
+| owner
+| String
+| false
+| 应用所有者
+
+| reverse
+| Integer
+| false
+| 是否倒序
+
+| search_word
+| String
+| false
+| 关键词
+
+| sort_key
+| String
+| false
+| 排序字段
+
+| status
+| Array
+| false
+| 状态
+
+| status_time_end
+| String
+| false
+| 状态结束时间
+
+| status_time_start
+| String
+| false
+| 状态起始时间
+
+| verbose
+| Integer
+| false
+| 冗余字段级别
+
+| visibility
+| String
+| false
+| 可见状态
+
+| with_stat
+| Integer
+| false
+| 是否查询统计数据
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_set
+| Array
+| false
+| 应用列表
+
+| app_set[].abstraction
+| String
+| false
+| 概述
+
+| app_set[].app_id
+| String
+| false
+| 应用ID
+
+| app_set[].app_name
+| String
+| false
+| 应用名称
+
+| app_set[].app_type
+| String
+| false
+| 应用类型
+
+| app_set[].bundle
+| String
+| false
+| bundle包ID
+
+| app_set[].category
+| String
+| false
+| 应用分类
+
+| app_set[].company_url
+| String
+| false
+| 公司网址
+
+| app_set[].cover_img
+| String
+| false
+| 封面
+
+| app_set[].create_time
+| String
+| false
+| 创建时间
+
+| app_set[].description
+| String
+| false
+| 描述
+
+| app_set[].edition
+| Array
+| false
+| 系列信息
+
+| app_set[].edition[].app_id
+| String
+| false
+| 应用ID
+
+| app_set[].edition[].create_time
+| String
+| false
+| 创建时间
+
+| app_set[].edition[].description
+| String
+| false
+| 描述
+
+| app_set[].edition[].edition_id
+| String
+| false
+| 系列ID
+
+| app_set[].edition[].is_default
+| Integer
+| false
+| 是否默认
+
+| app_set[].edition[].name
+| String
+| false
+| 系列名称
+
+| app_set[].icon
+| String
+| false
+| 图标
+
+| app_set[].icon_link
+| String
+| false
+| 图标链接
+
+| app_set[].owner
+| String
+| false
+| 所有者
+
+| app_set[].screenshot_links
+| Array
+| false
+| 截图链接
+
+| app_set[].screenshots
+| Array
+| false
+| 截图
+
+| app_set[].sla_period
+| Integer
+| false
+| 交付周期（license）
+
+| app_set[].status
+| String
+| false
+| 应用状态
+
+| app_set[].status_time
+| String
+| false
+| 状态时间
+
+| app_set[].sub_category
+| String
+| false
+| 子分类
+
+| app_set[].tags
+| Array
+| false
+| 标签
+
+| app_set[].terms_of_service
+| String
+| false
+| 服务条款
+
+| app_set[].terms_of_service_link
+| String
+| false
+| 服务条款链接
+
+| app_set[].usage_instructions
+| String
+| false
+| 使用说明
+
+| app_set[].usage_instructions_link
+| String
+| false
+| 使用说明链接
+
+| total_count
+| Integer
+| false
+| 总数量
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "limit": 50,
+  "offset": 0
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeDevAppsResponse",
+  "app_set": [
+    {
+      "abstraction": "概述",
+      "app_id": "app-gtusp816",
+      "app_name": "PostgreSQL",
+      "app_type": "cluster",
+      "bundle": "bun-qingcloud",
+      "category": "database",
+      "company_url": "https://www.qingcloud.com/",
+      "cover_img": "",
+      "create_time": "2017-10-26T06:56:47Z",
+      "description": "描述",
+      "edition": [
+        {
+          "app_id": "app-xxxxxx",
+          "create_time": "2020-05-06T14:02:26",
+          "description": "",
+          "edition_id": "appe-xxxxxx",
+          "is_default": 0,
+          "name": "基础版"
+        }
+      ],
+      "icon": "ca-59l1ake2",
+      "icon_link": "https://pek3a.qingstor.com/attachment-4-appcenter/public/ca-59l1ake2",
+      "owner": "usr-xxxxxx",
+      "screenshot_links": [
+        "https://pek3a.qingstor.com/attachment-4-appcenter/public/ca-dzofhrdy"
+      ],
+      "screenshots": [
+        "ca-dzofhrdy"
+      ],
+      "sla_period": null,
+      "status": "active",
+      "status_time": "2023-07-13T02:35:54Z",
+      "sub_category": "",
+      "tags": [],
+      "terms_of_service": "https://www.qingcloud.com/terms#MySQL-terms",
+      "terms_of_service_link": "https://pek3a.qingstor.com/term-4-appcenter/app_approved/xxxxxx",
+      "usage_instructions": "https://docsv4.qingcloud.com/user_guide/database/postgresql/",
+      "usage_instructions_link": "https://pek3a.qingstor.com/usage-instructions-appcenter/xxxx"
+    }
+  ],
+  "ret_code": 0,
+  "total_count": 1
+}
+----

@@ -1,0 +1,290 @@
+---
+title: 查询标签（DescribeTags）
+weight: 4
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console_id
+| String
+| false
+| 控制台ID
+
+| limit
+| Integer
+| false
+| 
+
+| offset
+| Integer
+| false
+| 
+
+| owner
+| String
+| false
+| 拥有者
+
+| project_id
+| String
+| false
+| 项目id
+
+| resources
+| Array
+| false
+| 资源id集合
+
+| root_user_id
+| String
+| false
+| 主账户id
+
+| scope
+| String
+| false
+| 范围
+
+| search_word
+| String
+| false
+| 搜索关键字
+
+| status
+| Array
+| false
+| 状态集合
+
+| tag_key
+| String
+| false
+| 标签key
+
+| tag_name
+| String
+| false
+| 标签名称
+
+| tag_status
+| Array
+| false
+| 标签状态集合
+
+| tags
+| Array
+| false
+| 标签id集合
+
+| types
+| Array
+| false
+| 类型集合
+
+| verbose
+| Integer
+| false
+| 详细度
+
+| zone
+| String
+| false
+| 区域ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| tag_set
+| Array
+| false
+| 标签详情集合
+
+| tag_set[].color
+| String
+| false
+| 标签颜色
+
+| tag_set[].console_id
+| String
+| false
+| 控制台ID
+
+| tag_set[].controller
+| String
+| false
+| 
+
+| tag_set[].create_time
+| String
+| false
+| 创建时间
+
+| tag_set[].description
+| String
+| false
+| 标签描述
+
+| tag_set[].owner
+| String
+| false
+| 拥有者
+
+| tag_set[].resource_count
+| Integer
+| false
+| 资源数量
+
+| tag_set[].resource_tag_pairs
+| Array
+| false
+| 资源标签对
+
+| tag_set[].resource_tag_pairs[].resource_id
+| String
+| false
+| 资源id
+
+| tag_set[].resource_tag_pairs[].resource_type
+| String
+| false
+| 资源类型
+
+| tag_set[].resource_tag_pairs[].status
+| String
+| false
+| 状态
+
+| tag_set[].resource_tag_pairs[].status_time
+| String
+| false
+| 状态更新时间
+
+| tag_set[].resource_tag_pairs[].tag_id
+| String
+| false
+| 标签id
+
+| tag_set[].resource_tag_pairs[].zone_id
+| String
+| false
+| 区域id
+
+| tag_set[].resource_type_count
+| Array
+| false
+| 资源类型数量
+
+| tag_set[].resource_type_count[].count
+| Integer
+| false
+| 数量
+
+| tag_set[].resource_type_count[].resource_type
+| String
+| false
+| 资源类型
+
+| tag_set[].root_user_id
+| String
+| false
+| 主账户id
+
+| tag_set[].tag_id
+| String
+| false
+| 标签id
+
+| tag_set[].tag_key
+| String
+| false
+| 标签key
+
+| tag_set[].tag_name
+| String
+| false
+| 标签名称
+
+| tag_set[].tag_status
+| String
+| false
+| 标签状态
+
+| total_count
+| Integer
+| false
+| 查询结果总数
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeTags",
+  "limit": 2,
+  "offset": 0,
+  "owner": [],
+  "resources": [],
+  "scope": "zone",
+  "tag_key": null,
+  "tag_name": "",
+  "tags": [],
+  "types": [],
+  "verbose": 0
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeTagsResponse",
+  "ret_code": 0,
+  "tag_set": [
+    {
+      "color": "#c096e0",
+      "console_id": "testepcloud",
+      "controller": "self",
+      "create_time": "2023-05-12T08:39:38Z",
+      "description": "",
+      "owner": "admin",
+      "resource_count": 0,
+      "resource_type_count": [],
+      "root_user_id": "admin",
+      "tag_id": "tag-aspau33h",
+      "tag_key": "ll",
+      "tag_name": "ll",
+      "tag_status": "active"
+    },
+    {
+      "color": "#79c0f3",
+      "console_id": "testepcloud",
+      "controller": "self",
+      "create_time": "2023-04-26T07:03:57Z",
+      "description": "",
+      "owner": "usr-BQxQnhPI",
+      "resource_count": 0,
+      "resource_type_count": [],
+      "root_user_id": "usr-BQxQnhPI",
+      "tag_id": "tag-ful6wwgy",
+      "tag_key": "00",
+      "tag_name": "00",
+      "tag_status": "active"
+    }
+  ],
+  "total_count": 11
+}
+----

@@ -1,0 +1,77 @@
+---
+title: "恢复 RadonDB MySQL 数据库"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 恢复"
+description: "介绍如何恢复 RadonDB MySQL 数据库。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 7d57787c1c6b4018a298777504555cef
+:ks_xref_id: 5a8e62b770234ae0af3fbcc07e65dc9f
+:ks_comp: ../../../../components/
+// :ks_include_id: 
+:ks_xref_id: 
+:ks_title: 恢复 RadonDB MySQL 数据库
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 恢复
+:ks_description: 介绍如何恢复 RadonDB MySQL 数据库。
+:ks_weight: 03
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何恢复 RadonDB MySQL 数据库。
+
+
+== 前提条件link:[id=0658395c669440f09029d464cbfce5f1]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-installRadondbmysql.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-databaseStatusRunning.adoc[]
+
+* 您已经创建了备份任务。
+
+
+
+== 操作步骤link:[id=d5f03d8327174003af98d7d74ee5c073]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面右侧点击**备份**页签，找到目标备份任务，点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，选择**从备份恢复**。
+
+. 在弹出的应用信息页面，点击**安装**。安装过程请参阅link:../../01-install-radondb-mysql/[安装 RadonDB MySQL]。
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+* 安装成功后，会新建一个 RadonDB MySQL 集群。
+* 新创建的恢复集群磁盘规格必须大于或等于原集群，以免因磁盘不足导致恢复失败。
+* 集群恢复到的时间点为备份任务开始的时间。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]

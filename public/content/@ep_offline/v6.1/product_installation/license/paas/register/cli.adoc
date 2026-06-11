@@ -1,0 +1,27 @@
+---
+title: "通过 CLI 命令导入"
+weight: 20
+---
+
+== 应用场景
+
+{product_name}当前版本低于 v6.0，且需要升级到 v6.0 及以上版本。
+
+== 前提条件
+
+已申请足够授权的 License，且已获取授权证书。
+
+== 操作步骤
+
+. 登录{product_name}的 FirstBox。
+. 执行以下命令，导入 License。
++
+[source]
+----
+/pitrix/cli/register-license -t pass -c <license_code>
+----
++
+**参数说明**：
+
+ ** <license_code> 为link:../../apply[申请 License] 中步骤 6 接收到的邮件中 license_code 信息。
+ ** 使用 -h 参数，可以查看命令参数及说明。

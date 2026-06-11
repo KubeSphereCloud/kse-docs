@@ -1,0 +1,21 @@
+---
+title: "删除 Initiator"
+weight: 6
+---
+
+. 登录{product_console_name_en}。
+. 选择**物理资源** > **资源池管理** > **iSCSI 外挂**，进入 iSCSI 外挂管理页面，选择 **Initiators** 页签。
+. 点击待删除的 Initiator 所在行右侧的更多操作，选择**删除**。
++
+
+include::../../../../../../../_components/attention.adoc[]
+* 待删除的 Initiator 上不应有卷绑定。
+* 若有卷与待删除的 Initiator 绑定，则需先link:../iscsi_unbind_vol[将卷解绑]，再删除 Initiator。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
++
+image::/images/express/console/iscsi_initiator_del_1.png[]
+
+. 在弹出的删除窗口中，点击删除进行确认即可。
+

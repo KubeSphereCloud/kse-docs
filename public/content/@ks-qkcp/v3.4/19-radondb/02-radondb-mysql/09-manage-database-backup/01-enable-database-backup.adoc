@@ -1,0 +1,78 @@
+---
+title: "开启 RadonDB MySQL 数据库备份"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 备份"
+description: "介绍如何开启 RadonDB MySQL 数据库备份。"
+weight: 01
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 37138e96a6b74f0fa859d8308f901f39
+:ks_xref_id: f82cb211abfc444bb80722b7b1fcb6fe
+:ks_comp: ../../../../components/
+:ks_title: 开启 RadonDB MySQL 数据库备份
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 备份
+:ks_description: 介绍如何开启 RadonDB MySQL 数据库备份。
+:ks_weight: 01
+:ks_icon:
+:ks_permission: **应用负载管理**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何开启 RadonDB MySQL 数据库备份。
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+备份过程可能会导致数据库服务压力过大，请在非高峰时段执行此操作。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=144584085dc242c3bdef1f9542e83a6f]
+
+include::../../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-installRadondbmysql.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-prer-databaseStatusRunning.adoc[]
+
+
+
+== 操作步骤link:[id=53ca2b6cb86a4978ad9bc12376c03794]
+
+include::../../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
+
++
+
+include::../../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
++
+
+. 在页面左上角选择**更多操作 > 备份**。
+
+. 在**备份**对话框，输入备份任务名称，然后点击**备份**。您可以在右侧的**备份**页签查看创建的备份任务。
+
+. 如果您需要设置自动备份，选择**更多操作 > 设置自动备份**。
+
+. 在**设置自动备份**对话框，开启自动备份，设置备份时间和备份日期，点击**确定**。
+
+
+

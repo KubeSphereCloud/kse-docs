@@ -1,0 +1,22 @@
+// :ks_include_id: dfb36f0881804a72bed1b36dbcb98042
+. In the cluster configuration file, set the **spec:monitoring:whizard:enabled** parameter to **false**, and delete the **status:alerting:status** and **status:monitoring:status** parameters, then save the file.
++
+--
+// YAML
+include::../../../../_ks_components/code/yaml.adoc[]
+
+spec:
+  monitoring:
+    whizard:
+      enabled: false          # Set the whizard:enabled parameter to false
+
+status:
+  alerting:
+    enabledTime: XXXX-XX-XXXXX:XX:XXXXX
+    status: enabled           # Delete alerting:status:enabled
+  monitoring:
+    enabledTime: XXXX-XX-XXXXX:XX:XXXXX
+    status: enabled           # Delete monitoring:status:enabled
+
+include::../../../../_ks_components/code/codeEnd.adoc[]
+--

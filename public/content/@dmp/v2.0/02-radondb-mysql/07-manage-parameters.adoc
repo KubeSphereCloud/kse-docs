@@ -1,0 +1,137 @@
+---
+title: "修改数据库配置参数"
+keywords: "Kubernetes, {ks_product}, RadonDB MySQL, 配置参数, 修改数据库参数"
+description: "介绍如何修改 RadonDB MySQL 数据库配置参数。"
+weight: 07
+---
+
+:ks_db_product: MySQL
+
+本节介绍如何修改 RadonDB {ks_db_product} 数据库的配置参数。
+
+RadonDB {ks_db_product} 实例支持编辑配置参数，通过管理配置参数可调优数据库性能，并可启用数据库高可用性能。
+
+// Warning
+include::../../../_ks_components/admonitions/warning.adoc[]
+
+修改部分配置参数后，{ks_db_product} 服务会重启，造成业务中断。请谨慎操作。
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 点击页面右侧的**参数管理**页签，点击**编辑**即可修改配置参数。
+. 点击**确定**保存。
+
+
+== 参数简介
+
+=== 日志参数
+
+[%header,cols="1,4"]
+|===
+|参数 |说明
+
+|Audit_log_policy
+a|审计日志插件将事件写入其日志文件时采用的策略。
+
+|Audit_log_format
+a|审计日志文件格式。
+
+|Audit_log_rotate_on_size
+a|单个审计日志文件的大小。默认值 **104857600**。
+
+如果参数值不是 4096 的整数倍，参数值将被下调为 4096 的整数倍。
+
+|Audit_log_rotations
+a|审计日志文件的最大数量。默认值 **6**，表示最多保留 6 个文件。
+
+|Expire_logs_days
+a|二进制日志文件的保留期限，单位为天。
+
+默认值 **7**，表示日志最长保留 7 天。
+
+|===
+
+
+=== 性能参数
+
+[%header,cols="1,4"]
+|===
+|参数 |说明
+
+// |Default-storage-engine	
+// a|表示默认存储引擎类型，仅 {ks_db_product} 5.7 支持 TokuDB 存储引擎。
+
+// 默认值 **InnoDB**。
+
+|Innodb_buffer_pool_size
+a|缓冲池大小。最多可以分配 80% 的内存。
+
+若该值为 -1，该参数设置为内存的 60%。
+
+|Character_set_server
+a|数据库服务器的默认字符集。
+
+默认值 **utf8mb4**。
+
+|Long_query_time
+a|慢查询时间阈值。花费时间大于此参数值的 SQL 语句将被视为慢查询，单位为秒。
+
+默认值 **3**，表示慢日志查询时间为 3 秒。
+
+|Max_connections
+a|同时处理请求的最大连接数量。默认值 **1024**。
+
+|Max_connect_errors
+a|最大连接错误次数。该参数是 {ks_db_product} 中与安全有关的计数器值，负责阻止过多尝试失败的客户端以防止暴力破解密码。默认值 **655360**。
+
+|Wait_timeout
+a|数据库服务器等待非交互连接的最大时间，单位为秒。超过时间限制后连接将被关闭。
+
+默认值 **3600**，表示等待超时时间为 1 小时。
+
+|Max_allowed_packet
+a|接收数据包的大小上限。默认值 **1073741824**。
+
+若该值不是 1024 的整数倍，将下调到 1024 的整数倍；若需修改该参数，须保证 **slave_pending_jobs_size_max** 值大于等于该参数值，否则可能会导致主从复制异常。
+
+|Slave_parallel_workers
+|并行复制线程的数量。默认值 **8**。
+
+|Skip-name-resolve
+a|是否禁止域名解析。
+
+默认值 **0**，表示禁用。
+
+|Autocommit
+a|是否启用自动提交模式。
+
+默认值 **1**，表示启用自动提交功能。
+
+|Transaction_isolation
+a|事务隔离级别。
+
+默认值 **READ-COMMITTED**，表示读提交不允许脏读，但允许不可重复读。
+
+|Innodb_flush_method
+a|InnoDB 数据文件及 redo log 的打开、刷写模式。
+
+默认值 **O_DIRECT**，表示 InnoDB 使用 O_DIRECT 打开数据文件，使用 fsync()刷写数据文件跟 redo log。
+
+|Innodb_use_native_aio
+a|InnoDB 的 AIO 特性开关。
+
+默认值 **1**，表示启用 AIO 特性。
+
+|===

@@ -1,0 +1,24 @@
+---
+title: ubuntu16.04.3 没有 BCM57412 网卡驱动，不显光口名
+weight: 21
+draft: true
+---
+
+//anybox 文件打不开，待确认后再补充
+
+== 问题现象
+
+DELL R740 装完 ubuntu16.04.3 后不显示光口，网卡为博通 BCM57412 NetXtreme-E 10Gb，内核版本为 4.4.0-87。
+
+== 问题原因
+
+驱动问题
+
+== 解决方法
+
+驱动包地址：https://yunify.anybox.qingcloud.com/s/xGaxpxoXfVxaDQshYLa7y0d0jKabIKvh
+
+驱动包支持 ubuntu16.04.3，内核版本为 4.4.0-87 和 4.4.0-116。
+
+. dpkg -i + 下载好后的驱动包 ，会自动加载。
+. 安装完驱动包网卡名应该就有了，重启系统看是否能自动加载。

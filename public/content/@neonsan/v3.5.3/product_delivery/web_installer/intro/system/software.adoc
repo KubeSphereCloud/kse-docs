@@ -1,0 +1,15 @@
+---
+title: "操作系统"
+weight: 2
+---
+
+* 待部署节点的操作系统需通过  QingCloud 定制的自动化部署  ISO 镜像来安装。
+* x86 下操作系统版本适配：“Ubuntu 16.04.3”、“Ubuntu 16.04.5” 或 “Ubuntu 20.04.1”。Qingstor NeonSAN 目前主要推荐使用 “Ubuntu 20.04.1”。
+* ARM 架构下操作系统版本适配：Ubuntu 18.04.1。
+* 国产操作系统适配：Kylin 青云  QingCloud 定制版  V10 SP2。
+* 除 SSH 软件之外，安装系统时不勾选任何多余的软件包。安装后需校验是否有 ethtool 包，若无，则需补充安装。
+* 安装系统时，设置用户名和密码，并且建议所有节点的账户名和密码一致。
+* 若环境需安装部署卷性能监控，系统盘要求不低于 480G SATA SSD。Promethus 作为 NeonSAN 的监控数据需要单独分区使用，大小为 300G。
+* 网卡如需要配置 bond，则需额外手动安装 ifenslave 包（pool/main/i/ifenslave/ifenslave_xxx.deb），且 bond 名必须命名为 bond0/bond1。同一网卡不同网口做 bond。
+* 网卡如需配置 vlan，则需额外手动装 vlan 包（pool/main/v/vlan/vlan_xxx.deb），且 vlan 名必须类似于 vlan123/vlan234。
+* 系统安装完成后，多重启几次服务器，确保网络依旧连通，磁盘顺序不乱。

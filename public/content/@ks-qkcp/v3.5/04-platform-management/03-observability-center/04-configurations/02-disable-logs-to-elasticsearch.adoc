@@ -1,0 +1,108 @@
+---
+title: "禁止日志写入到外部 Elasticsearch/OpenSearch 集群"
+weight: 02
+---
+
+
+本节介绍如何在{ks_product}安装前及安装完成后，编辑配置文件，以禁止日志写入到外部 Elasticsearch/OpenSearch 集群。
+
+== 在{ks_product}安装前配置
+
+. 登录集群节点，执行以下命令编辑 cluster-configuration.yaml 配置文件：
++
+--
+// bash
+[,bash]
+----
+vi cluster-configuration.yaml
+----
+--
+
+. 将 **spec:common:observability:logging:enableStreamMode**  参数设置为 **true**，然后保存⽂件。
++
+--
+// YAML
+[,yaml]
+----
+spec:
+  common:
+      observability:
+          logging:
+            enableStreamMode: true
+----
+--
+
+== 在{ks_product}安装后配置
+
+=== 前提条件
+
+您需要在{ks_product_both}平台具有 **platform-admin** 角色。
+
+
+=== 禁止日志写入
+
+. 以具有 **platform-admin** 角色的用户登录{ks_product_left} Web 控制台。
+
+. 将光标悬停在页面右下角的image:/images/ks-qkcp/zh/icons/hammer.svg[hammer,18,18] 图标，然后在菜单中选择 **kubectl**。
+
+. 在 **kubectl** 对话框，执行以下命令编辑集群配置文件：
++
+--
+// bash
+[,bash]
+----
+kubectl edit cc ks-installer -n kubesphere-system
+----
+--
+
+. 在集群配置文件中，将 **spec:common:observability:logging:enableStreamMode**  参数设置为 **true**，然后保存⽂件。
++
+--
+// YAML
+[,yaml]
+----
+spec:
+  common:
+      observability:
+          logging:
+            enableStreamMode: true
+----
+--
+
+. 待 pod 运行完成后，在页面左上角选择**平台管理 > 集群管理**。
+.  在**集群管理**⻚⾯点击⼀个集群的名称进⼊集群。
+. 在左侧导航栏选择**定制资源定义**。
+. 搜索 **Output**，点击名称进入详情页面。
+. 删除页面右侧的自定义资源，如 opensearch、opensearch-auditing、opensearch-events、opensearch-notification。
++
+image:/images/ks-qkcp/zh/platform/log-elasticsearch.png[,100%]
+
+=== 允许日志写入
+
+. 以具有 **platform-admin** 角色的用户登录{ks_product_left} Web 控制台。
+
+. 将光标悬停在页面右下角的image:/images/ks-qkcp/zh/icons/hammer.svg[hammer,18,18] 图标，然后在菜单中选择 **kubectl**。
+
+. 在 **kubectl** 对话框，执行以下命令编辑集群配置文件：
++
+--
+// bash
+[,bash]
+----
+kubectl edit cc ks-installer -n kubesphere-system
+----
+--
+
+. 在集群配置文件中，将 **spec:common:observability:logging:enableStreamMode**  参数设置为 **false**，并删除 **status:auditing**、**status:events**、**status:notification**、**status:opensearch** 参数的全部内容，然后保存⽂件。
++
+--
+// YAML
+[,yaml]
+----
+spec:
+  common:
+      observability:
+          logging:
+            enableStreamMode: false
+----
+--

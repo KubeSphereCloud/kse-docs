@@ -1,0 +1,51 @@
+---
+title: "Alerter 服务"
+weight: 2
+---
+
+. 登录安装有 alerter 服务的 NeonSAN 节点，alerter 服务相关操作如下。
++
+* 启动 alerter 服务。
++
+[,shell]
+----
+supervisorctl start alerter
+----
+* 重启 alerter 服务。
++
+[,shell]
+----
+supervisorctl restart alerter
+----
+* 停止 alerter 服务。
++
+[,shell]
+----
+supervisorctl stop alerter
+----
+* 查看 alerter 服务状态。
++
+[,shell]
+----
+supervisorctl status alerter
+----
+* 查看 alerter 服务的日志文件。
++
+[,shell]
+----
+cat /qingstor/log/alerter.log
+cat /qingstor/log/alerter.log.wf 
+----
+* 查看 alerter 的 supervisor 配置文件。
++
+[,shell]
+----
+cat /qingstor/etc/supervisord.d/alerter.ini
+----
+
+. 查看 alerter 的配置文件。
++
+[,shell]
+----
+/qingstor/etc/alerter.conf
+----

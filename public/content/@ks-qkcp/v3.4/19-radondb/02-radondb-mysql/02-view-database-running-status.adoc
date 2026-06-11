@@ -1,0 +1,190 @@
+---
+title: "查看数据库运行状态"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 查看数据库运行状态"
+description: "介绍如何查看 RadonDB MySQL 数据库运行状态。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 334fcc2787914fecb827245795f36e71
+:ks_xref_id: 3133683dafe543d0b6b895b6dd12a608
+:ks_comp: ../../../components/
+:ks_title: 查看数据库运行状态
+:ks_keywords: Kubernetes, {ks_product}, RadonDB, RadonDB MySQL, 查看数据库运行状态
+:ks_description: 介绍如何查看 RadonDB MySQL 数据库运行状态。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **应用负载查看**
+:ks_navigation: **应用负载 > 应用**
+
+
+本节介绍如何查看 RadonDB MySQL 数据库运行状态。
+
+
+== 前提条件link:[id=959d116c70cd4c4eba45d59fd6cb5c3a]
+
+include::../../../_custom/radondb/radondb-prer-requiredPermission.adoc[]
+
+include::../../../_custom/radondb/radondb-prer-enableDmp.adoc[]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/radondb/radondbMySql/radondbmysql-prer-installRadondbmysql.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=988cd66b3bdc4d81852d78289740f4e2]
+
+include::../../../_custom/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../_custom/radondb/radondb-oper-clickRadondbAppsTab.adoc[]
++
+--
+已安装的 RadonDB MySQL 应用将显示在 RadonDB 应用列表中。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|RadonDB MySQL 应用在{ks_product_both}平台的名称。
+
+|状态
+|RadonDB MySQL 应用的运行状态。
+
+* **创建中**：应用正在创建过程中。
+
+* **更新中**：应用正在更新配置。
+
+* **已完成**：应用更新完成，即将开始运行。
+
+* **失败**：应用创建过程中出现错误导致创建失败。
+
+* **运行中**：应用运行正常。
+
+|应用模板
+|创建 RadonDB MySQL 应用所使用的应用模板名称。
+
+|版本
+|MySQL 应用的版本。
+
+|访问地址
+|MySQL 数据库的访问地址。每个数据库可提供多个不同用途的访问地址。将光标悬停在访问地址列的数字上可查看 ClusterIP 的读写地址和只读地址。
+
+|创建时间
+|RadonDB MySQL 应用的创建时间。
+|===
+--
+
++
+
+include::../../../_custom/radondb/radondbMySql/radondbmysql-oper-openDetailsPage.adoc[]
+
++
+
+. 点击RadonDB MySQL 详情页面右侧的**概览**页签查看数据库的基本信息和数据库节点。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|基本信息
+|显示 MySQL 数据库的运行状态、节点和副本数量、每个数据库节点的 CPU 和内存资源、每个数据库节点挂载的卷容量。
+
+|节点
+|显示 MySQL 数据库的所有节点及其创建时间、运行状态、容器组 IP 地址、CPU 和内存资源、卷容量。
+|===
+
+ifeval::["{file_output_type}" == "pdf"]
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+在{ks_product_both}平台，每个 MySQL 数据库节点被创建为一个容器组。有关容器组的更多信息，请参阅《{ks_product_right}项目管理指南》。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+endif::[]
+--
+
+. 在详情页面右侧点击**监控**页签查看数据库的监控指标。
+
+
++
+--
+* 点击下拉列表可选择需要查看的数据库节点。
+
+include::../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../_ks_components/oper-refreshData.adoc[]
+--
++
+--
+[%header,cols="1,5"]
+|===
+|监控项 |说明
+
+|最大使用连接数量
+a|统计数据库的最大连接数。
+
+主要监控指标为 **最大使用连接数量**。
+
+|线程数量
+a|统计数据库连接线程数。
+
+主要监控指标包括 **最大已连接线程数量**、**最大运行中线程数**和**平均运行中线程数量**。
+
+|已中止连接数量
+a|统计已经连接失败的 MySQL 服务器尝试连接的次数。
+
+主要监控项包括 **中止连接尝试次数**和**客户端超时次数**。
+
+|问题（Question）数量
+a|统计问题的数量。
+
+主要监控指标为**问题（Question）数量**。
+
+|Select 数量
+a|统计使用索引的 Select 语句执行次数。
+
+主要监控指标包括 **Select Full Join**、**Select Full Range Jion**、**Select Range**、**Select Range Check**、**Select Scan**。
+
+|Sort 数量
+a|统计使用索引的排序记录次数。
+
+主要监控指标包括 **Sort Rows**、**Sort Range**、**Sort Merge Passes**、**Sort Scan**。
+
+|慢查询数量
+a|统计超过 long_query_time 时间的查询数。
+
+主要监控指标为**慢查询数量**。
+
+|表锁数量
+a|统计表锁数。
+
+主要监控指标包括**立即表锁数量**和**等待表锁数量**。
+
+|临时表和文件
+a|统计创建的临时表和文件数。
+
+主要监控指标包括**已创建临时表数量**、**已创建临时磁盘表数量**和**已创建临时文件数量**。
+
+|网络流量
+a|统计网络输入和输出吞吐量，单位为 bytes/s。
+
+主要监控指标包括**入站**和**出站**流量。
+
+|===
+--

@@ -1,0 +1,98 @@
+---
+title: 导入应用失败
+weight: 50
+---
+
+== 可能原因一：缺少 QKE 基础镜像
+
+. link:https://ins.qingcloud.com/repos/hotfix/check_image.py[下载镜像校验脚本]。
+. 将脚本上传到 IaaS 任意节点、任意路径下。
+. 登录已上传镜像校验脚本的节点，执行以下命令开始检查。
++
+--
+[source]
+----
+python check_image.py
+----
+
+回显示例如下：
+
+[source]
+----
+root@demo1r01n00:~/yang# python check_image.py
+开始执行镜像检查[y/n]: y
+Exception in thread Thread-1 (most likely raised during interpreter shutdown):
+
+seed 3 个镜像不存在, image 表 3 个 SQL 不存在, 详情查看 ./req_imgs.txt
+----
+--
+
+. 根据回显中的提示信息，查看缺少的镜像列表。
++
+--
+[source]
+----
+cat req_imgs.txt
+----
+
+回显示例如下：
+
+[source]
+----
+root@demo1r01n00:~# cat req_imgs.txt
+---------------seed缺少文件列表--------------------
+/pitrix/images-repo/bi/bionic4x64a.lz4
+/pitrix/images-repo/bi/bionic5x64.lz4
+/pitrix/images-repo/xe/xenial6x64a.lz4
+
+---------------image缺少的镜像ID--------------------
+bionic4x64
+bionic3x64a
+bionicx64
+----
+--
+
+. 根据回显提示信息，手动导入缺少的镜像到 Seed 节点对应的 /pitrix/imamges-repo/{xx} 目录下。
+
+
+== 可能原因二：需升级 AppCenter
+
+. 从以下 FTP 路径获取最新版本的 AppCenter 脚本。
++
+[source,shell]
+----
+ftp://ins.qingcloud.com/hotfix/appcenter/
+----
+
+. 将 AppCenter 脚本上传至当前环境的 FirstBox 节点的 /root 目录。
+
+. 登录当前环境的 FirstBox 节点。
+
+. 执行以下命令，解压脚本。安装包名称需根据实际情况进行修改。
++
+[source,shell]
+----
+tar -zxvf import_app_script_release_xxxxxxxx.tar.gz
+----
+
+. 执行以下命令，查看环境中 Webservice 节点信息。
++
+[source,shell]
+----
+cat /etc/hosts | grep webservice
+----
+
+. 执行以下命令，升级 AppCenter。
++
+[source,shell]
+----
+./import_app_script_release_xxxxxxx/upgrade_import_scripts -n <zone_id>-webservice0,<zone_id>-webservice1
+----
++
+
+include::../../../../../_components/note.adoc[]
+* **-n** 参数用于指定环境中 Webservice 节点，需根据实际情况进行修改。
+* 安装包名称需根据实际情况进行修改。
+
+include::../../../../../_components/table_footer.adoc[]
+

@@ -1,0 +1,65 @@
+---
+title: "创建 VPC 网络"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, VPC, 网络, 创建"
+description: "介绍如何使用{ks_product_both}Web 控制台创建 VPC 网络。"
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: d16a7740b4ae4c2080ec18856256ec7a
+:ks_xref_id: b2f37a1386834ea892288a4a780e7dbc
+:ks_comp: ../../../../components/
+:ks_title: 创建 VPC 网络
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台创建 VPC 网络。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, VPC, 网络, 创建
+:ks_weight: 01
+:ks_logo: 
+:ks_download_url: 
+
+
+本节介绍如何使用{ks_product_abbr_full_both}Web 控制台创建 VPC 网络。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 前提条件link:[id=2ae5fdee503d426aaffffe2b3f9d304f]
+// 待修改
+include::../../../../_custom/networks/vpc-manage-prerequisites.adoc[]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 操作步骤link:[id=bd32502168064f6b91947e4bb2b070e7]
+
+include::../../../../_custom/networks/vpc-steps.adoc[]
+
+. 在 VPC 列表页面，点击右上角的**创建**。
+
+. 在弹出的对话框中配置 VPC 相关参数。具体参数描述请参见下表。
++
+--
+[cols='1a,4a']
+|===
+|参数 |描述
+
+|名称
+|VPC 的名称。
+
+include::../../../../_custom/networks/naming-convention.adoc[]
+
+|网段范围
+|VPC 的网段范围。VPC 创建后，网段范围不可修改。
+
+|默认虚拟子网
+|VPC 网络所在的默认虚拟子网。
+
+|描述
+|用户自定义的描述信息。
+
+include::../../../../_custom/networks/description-convention.adoc[]
+|===
+--
+
+. 点击**创建**。VPC 创建后将显示在 VPC 列表中。

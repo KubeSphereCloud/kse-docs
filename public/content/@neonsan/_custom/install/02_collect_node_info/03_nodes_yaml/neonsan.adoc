@@ -1,0 +1,73 @@
+// 独立部署 NeonSAN 场景
+
+
+. 登录 FirstBox。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+include::../../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 拷贝示例文件至 /root 目录下。
++
+[source,shell]
+----
+cp /qingstor/install/test/yaml/nodes.yaml /root/nodes.yaml
+----
+
+. 修改 nodes.yaml 文件。
++
+[source,shell]
+----
+vi /root/nodes.yaml
+----
++
+[source]
+----
+# Physical nodes that deploy QingStor and do not deploy IAAS.
+nodes:
+  - 172.16.0.30
+# Physical nodes that deploy QingStor and IAAS.
+fused_nodes:
+  - 172.16.0.20
+# NeonSAN management vm nodes running in the IAAS environment.
+vm_nodes:
+...
+----
++
+*主要配置字段说明*
++
+[options="header",cols="1,2"]
+|===
+|字段 |说明
+|nodes	
+|仅部署 NeonSAN 场景下，待部署节点的管理 IP 地址，需参考示例逐行填写各节点 IP
+
+|fused_nodes	
+|与 IaaS 融合部署时使用的配置字段，仅部署 NeonSAN 时，可删除
+
+|vm_nodes	
+|与 IaaS 融合部署时使用的配置字段，仅部署 NeonSAN 时，可删除
+|===
+
+. 删除不需要的节点类型，如示例中的 fused_nodes 和 vm_nodes，修改后，配置内容如下所示。
++
+[source,shell]
+----
+cat /root/nodes.yaml
+----
++
+[source]
+----
+# Physical nodes that deploy QingStor and do not deploy IAAS.
+nodes:
+  - 192.168.0.8
+  - 192.168.0.9
+  - 192.168.0.10
+----

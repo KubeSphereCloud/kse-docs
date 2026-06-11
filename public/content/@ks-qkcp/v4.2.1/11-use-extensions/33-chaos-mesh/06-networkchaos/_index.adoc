@@ -1,0 +1,23 @@
+---
+title: "网络故障模拟"
+weight: 06
+---
+
+本节介绍如何模拟网络故障（NetworkChaos）。
+
+NetworkChaos 通过 Linux 内核的流量控制模块（`tc`）向 Pod 的网络接口注入故障，模拟真实网络环境中的各类异常，用于验证业务在网络劣化时的表现。
+
+== 前提条件
+
+* 节点 Linux 内核需加载 `NET_SCH_NETEM` 模块。
+* KubeSphere 平台需要安装并启用混沌工程扩展组件。
+
+== 支持的操作
+
+* 准备测试环境
+* 网络分区（partition）
+* 网络丢包（loss）
+* 网络延迟（delay）
+* 网络包重复（duplicate）
+* 网络包错误（corrupt）
+* 带宽限制（bandwidth）

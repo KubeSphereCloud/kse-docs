@@ -1,0 +1,20 @@
+---
+title: "Overview"
+keywords: "Kubernetes, {ks_product}, GPU Operator, NVIDIA"
+description: "Introduces the NVIDIA GPU Operator extension."
+weight: 01
+---
+
+NVIDIA GPU Operator is an extension adapted from link:https://github.com/NVIDIA/gpu-operator[GPU Operator] to fit the KubeSphere LuBan pluggable architecture, supporting the creation, configuration, and management of GPUs on Kubernetes.
+
+Kubernetes provides access to special hardware resources like NVIDIA GPUs, NICs, Infiniband adapters, etc., through the link:https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/[device plugin framework]. However, configuring and managing nodes with these hardware resources requires setting up multiple software components such as drivers, container runtimes, or other libraries, which is complex and error-prone. NVIDIA GPU Operator uses the link:https://cloud.redhat.com/blog/introducing-the-operator-framework[operator framework] within Kubernetes to automatically manage all NVIDIA software components required for GPUs. This includes NVIDIA drivers for enabling CUDA, the Kubernetes device plugin for GPUs, the NVIDIA container runtime, automatic node labeling, monitoring based on link:https://developer.nvidia.com/dcgm[DCGM], and more.
+
+== Audience and Use Cases
+
+GPU Operator allows Kubernetes cluster administrators to manage GPU nodes just like CPU nodes. Administrators do not need to provision specific OS images for GPU nodes. Instead, they can rely on standard OS images for both CPU and GPU nodes and then depend on GPU Operator to provide the necessary software components for the GPUs.
+
+It's important to note that GPU Operator is particularly suitable for scenarios where a Kubernetes cluster needs to scale quickly, such as adding GPU nodes in the cloud or on-premises and managing the lifecycle of underlying software components. Since GPU Operator runs everything as containers, including the NVIDIA drivers, administrators can easily swap out various components—simply by starting or stopping containers.
+
+== Product Documentation
+
+For platform support and getting started information, please visit the link:https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/overview.html[official documentation].

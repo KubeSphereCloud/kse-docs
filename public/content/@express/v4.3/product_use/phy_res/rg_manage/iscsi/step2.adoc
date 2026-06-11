@@ -1,0 +1,31 @@
+---
+title: "步骤 2：创建 VIP 存储"
+weight: 2
+---
+
+. 登录{product_console_name}。
+. 选择**物理资源** > **资源池管理** > **iSCSI 外挂**，进入 iSCSI 外挂管理页面，选择 **VIP 存储**页签，点击**创建 VIP**。
+
+. 在弹出的**创建 VIP** 窗口中，输入提前规划好的虚拟 IP，点击**确定**即可。
++
+
+include::../../../../../../_components/attention.adoc[]
+* VIP 需与前端服务器保持同一网段，即link:../step1[配置 iSCSI]章节中开启 iSCSI 功能的服务器。
+* 创建 VIP 时，需确保集群中至少有 3 个前端服务器。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/iscsi_step2_1.png[,50%]
+
+. VIP 创建成功后，会显示在 VIP 存储列表。
++
+
+include::../../../../../../_components/note.adoc[]
+* 系统会将 VIP 与 3 个前端服务器绑定。
+* 根据需求，可创建多个 VIP。
+
+include::../../../../../../_components/table_footer.adoc[]
++
+image::/images/express/console/iscsi_step2_2.png[]
+
+

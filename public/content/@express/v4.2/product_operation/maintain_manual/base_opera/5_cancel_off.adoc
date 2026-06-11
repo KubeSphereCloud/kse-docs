@@ -1,0 +1,50 @@
+---
+title: "手动取消关机"
+weight: 5
+---
+
+
+== 运维场景
+
+在尝试了自动取消关机无法生效的情况下，可参考以下方式进行手动取消关机的操作。
+
+== 操作步骤
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 切换至 postgres 用户。
++
+[source,shell]
+----
+su -postgres
+----
+
+. 将关机任务手动设置为 ``successful``。
++
+[source,shell]
+----
+psql -d installer -c "update job set status ='successful' where job_action='ShutdownQingCloud' "
+----
+
+
+
+
+
+

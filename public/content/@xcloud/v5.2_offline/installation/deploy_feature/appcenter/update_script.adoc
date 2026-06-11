@@ -1,0 +1,47 @@
+---
+title: "更新 AppCenter 导入脚本（可选）"
+weight: 20
+---
+
+该操作主要用于替换 webservice 节点的 /pitrix/lib/pitrix-scripts/appcenter2/ 文件。
+
+如果环境有多个 zone，则每个 zone 都需要更新。
+
+== 操作场景
+
+**企业云平台安装完成后，已自带 AppCenter 导入脚本，若使用该脚本能正常导入 APP 镜像，则无需执行该步骤。**
+
+当环境中的脚本无法正常执行，或用户需要使用最新版本的 APP 功能时，可以更新 AppCenter 导入脚本。
+
+== 前提条件
+
+已获取最新的 AppCenter 脚本：ftp://ins.qingcloud.com/hotfix/appcenter/import_app_script_release_<yymmdd>.tar.gz。
+
+include::../../../../../_components/note.adoc[]
+若下载路径不能访问，请联系技术支持。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 操作步骤
+
+1. 将脚本压缩包上传到 FirstBox 上。
+2. 登录 FirstBox。
+3. 执行以下命令，解压脚本。
++
+[source]
+----
+tar -zxvf import_app_script_release_<yymmdd>.tar.gz 
+----
+4. 执行以下命令，更新脚本到 webservice 节点。
++
+[source]
+----
+./import_app_script_release_<yymmdd>/upgrade_import_scripts -n <zone_id>-webservice0,<zone_id>-webservice1
+----
++
+示例：
++
+[source]
+----
+./import_app_script_release_20220720/upgrade_import_scripts -n testcloud1-webservice0,testcloud1-webservice1
+----

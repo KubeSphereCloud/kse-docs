@@ -1,0 +1,28 @@
+---
+title: "WizTelemetry Events"
+keywords: "Kubernetes, {ks_product}, Events"
+description: "Introduces how to use the 'WizTelemetry Events' extension."
+weight: 03
+layout: "second"
+---
+
+
+This section introduces how to use the 'WizTelemetry Events' extension.
+
+This extension can persistently store events from resources such as workloads, Jobs, pods, Services, Ingresses, etc., and provides multi-tenant event search and viewing capabilities.
+
+After installing the 'WizTelemetry Events' extension,
+
+* The WizTelemetry Observability Platform in the Component Dock will display a **Logging** menu, and under the **Logging** menu, an **Event Query** option will appear.
+
+* The cluster's left navigation pane will display a **Logging** menu, and under the **Logging** menu, **Log Receivers** and **Event Query** options will appear. The **Log Receivers** page will display a **Resource Events** tab, supporting the addition of various types of log receivers. For more information, please refer to link:../02-logging/02-log-receivers/[Log Receivers]. The **Event Query** page allows users to query resource events within their permission scope.
+
+//attention
+[.admon.attention,cols="a"]
+|===
+| Note
+
+|
+WizTelemetry Events depends on the WizTelemetry Platform Service and the WizTelemetry Data Pipeline. Therefore, before installing WizTelemetry Events, you must first install and configure these two extensions. Otherwise, the event-related features will not function properly!
+
+|===

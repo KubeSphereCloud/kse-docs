@@ -1,0 +1,21 @@
+---
+title: "删除 SidecarSet"
+weight: 05
+---
+本节介绍如何删除 SidecarSet。SidecarSet 删除后无法恢复。已通过该 SidecarSet 注入到存量容器组中的 Sidecar 容器不会自动移除，请谨慎执行此操作。
+
+== 删除单个 SidecarSet
+
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *SidecarSet*。
+. 在目标 SidecarSet 右侧点击操作图标，然后选择 *删除*。
+. 在 *删除 SidecarSet* 对话框中输入 SidecarSet 的名称，然后点击 *确定*。
+
+== 批量删除 SidecarSet
+
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *SidecarSet*。
+. 勾选需要删除的 SidecarSet 左侧复选框，然后在列表上方点击 *删除*。
+. 在 *批量删除 SidecarSet* 对话框中输入 SidecarSet 的名称，然后点击 *确定*。
++
+
+*注意*：批量删除时，请确认输入的名称与待删除的 SidecarSet 完全一致。
+

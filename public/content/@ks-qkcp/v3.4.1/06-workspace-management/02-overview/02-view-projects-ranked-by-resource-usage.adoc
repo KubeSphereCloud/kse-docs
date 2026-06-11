@@ -1,0 +1,57 @@
+---
+title: "查看项目资源用量排行"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 企业空间管理, 概览, 查看项目资源用量排行"
+description: "介绍如何查看项目资源用量排行。"
+weight: 02
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: bbc52eebef0c4c07a50f279b2cd533f8
+:ks_xref_id: 76da61bd674849ca84e9c50e7a48556b
+:ks_comp: ../../../components/
+:ks_title: 查看项目资源用量排行
+:ks_keywords: Kubernetes, {ks_product}, 企业空间管理, 概览, 查看项目资源用量排行
+:ks_description: 介绍如何查看项目资源用量排行。
+:ks_weight: 02
+:ks_icon:
+:ks_permission: **企业空间设置查看**
+:ks_navigation: **概览**
+
+
+本节介绍如何查看项目资源用量排行。
+
+
+== 前提条件link:[id=8e0215d12ab44be791083a3e358ea5e4]
+
+
+:relfileprefix: ../../../
+
+include::../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=9f5ec6691b2549788ffc7c5785a9fb28]
+
+include::../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. 在**概览**页面点击**用量排行**页签查看企业空间中的项目的资源使用情况。
++
+--
+* 在列表左上角点击**集群**下拉列表可查看特定集群中的数据。
+
+* 在列表上方点击下拉列表可选择按照 CPU 用量、内存用量、容器组数量、出站流量或入站流量对项目进行排序。
+
+* 在列表上方点击 image:/images/ks-qkcp/zh/icons/sort-ascending.svg[sort-ascending,18,18]/image:/images/ks-qkcp/zh/icons/sort-descending.svg[sort-descending,18,18] 可按升序/降序排序。
+
+include::../../../_custom/clusterManagement/clusterStatus/clusterStatus-oper-exportJsonData.adoc[]
+--

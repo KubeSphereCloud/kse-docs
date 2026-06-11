@@ -1,0 +1,42 @@
+---
+title: "Set Default Storage Class"
+keywords: "Kubernetes, {ks_product}, Cluster Management, Storage, Storage Class, Set Default Storage Class"
+description: "Describes how to set the default storage class."
+weight: 04
+---
+
+:ks_permission: **Storage Class Management**
+:ks_navigation: **Storage > Storage Classes**
+
+
+This section describes how to set the default storage class. After setting a default storage class, the system will use it to create PersistentVolumeClaims if no specific storage class is specified. Only one default storage class is allowed per KubeSphere cluster.
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+
+
+== Steps
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/clusterManagement/storageClasses/systemClasses-oper-openDetailsPage.adoc[]
+
++
+
+. On the storage class details page, click **Operation > Set as Default Storage Class**.
+
+. In the **Set as Default Storage Class** dialog box, click **OK**.

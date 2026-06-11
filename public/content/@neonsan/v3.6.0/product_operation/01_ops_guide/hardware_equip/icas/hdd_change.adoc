@@ -1,0 +1,120 @@
+---
+title: "更换 HDD 盘"
+weight: 4
+---
+
+== 重做 RAID 模式下
+
+可参考。更换 cache 盘（不支持热插拔）相关操作步骤。其他场景，参考更换 cache 盘的相应操作。
+
+include::../../../../../../_components/attention.adoc[]
+此处更换的是 HDD 盘，修改 ``/etc/intelcas/intelcas.conf`` 时，注意修改的是 ``cores`` 字段。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+== 直通模式下
+
+. 参考前文内容，link:../../move_disk/[移除待下线的磁盘]。
++
+include::../../../../../../_components/note.adoc[]
+移除磁盘的过程中，**仅需迁移待更换的 cache 盘上的所有数据**即可。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，确认待下线磁盘的状态是否为 ``candidate``。
++
+[,shell]
+----
+neonsan list_ssd
+----
++
+include::../../../../../../_components/note.adoc[]
+* 若是，则执行后续步骤；
+* 若否，需查明原因并解决后，执行后续步骤。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令查看各 cache 的 ID 信息。
++
+--
+[,shell]
+----
+casadm -L
+----
+回显示例。
+
+image::/images/neonsan/ops_guide_22.png[]
+--
+
+. 执行如下命令，移除待下线的 core 盘。
++
+[,shell]
+----
+casadm -R -cache-id 1 -core-id 1
+----
++
+include::../../../../../../_components/note.adoc[]
+``--cache-id`` 指定的 cache id 和 ``--core-id`` 指定的 core id，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 拔盘。
+. 插入待更换的磁盘。
+. 执行如下命令，重建 iCAS。
++
+[,shell]
+----
+casadm -A -cache-id 1 -core-device /dev/intelcas1-1
+----
++
+include::../../../../../../_components/note.adoc[]
+``--cache-id`` 指定的 cache id 和 ``--core-device`` 指定的 core 盘符，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 将新盘添加到对应节点。
++
+--
+* NeonSAN v3.0.0 及以后版本。
++
+[,shell]
+----
+neonsan add_ssd -dev <dev_name> -store_id <storeid>
+----
+
+* NeonSAN v3.0.0 之前版本。
++
+[,shell]
+----
+neonsan add_ssd -dev <dev_name> -store_ip <storeIp> 
+----
+
+include::../../../../../../_components/note.adoc[]
+``-dev`` 参数指定的 dev_name 需要与原有的磁盘盘符格式保持一致。
+include::../../../../../../_components/table_footer.adoc[]
+--
+
+
+. 确认卷的状态，SSD 状态，以及 Store 的状态。
++
+[,shell]
+----
+neonsan list_volume -detail
+neonsan list_ssd
+neonsan list_store
+----
++
+include::../../../../../../_components/note.adoc[]
+若磁盘信息中存在无效磁盘记录，可参考。link:../../../fault_process/disk/clear_disk_record[清理磁盘记录]进行处理。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令对集群内的 SSD 进行负载均衡。
++
+[,shell]
+----
+neonsan rebalance_ssd
+----
++
+include::../../../../../../_components/note.adoc[]
+该命令为异步执行，可以通过 ``neonsan list_job`` 查看进程。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+

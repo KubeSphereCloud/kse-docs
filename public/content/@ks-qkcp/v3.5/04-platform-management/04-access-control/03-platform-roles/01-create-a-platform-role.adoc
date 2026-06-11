@@ -1,0 +1,71 @@
+---
+title: "创建平台角色"
+keywords: "Kubernetes, {ks_product}, 平台管理, 访问控制, 平台角色, 创建平台角色"
+description: "介绍如何创建平台角色。"
+weight: 01
+---
+
+// :ks_include_id: 935b529d41a04b36a25092e3f1b41780
+:ks_xref_id: d36134e377b84b1fb890a4b951b525a7
+:ks_comp: ../../../../components/
+:ks_title: 创建平台角色
+:ks_keywords: Kubernetes, {ks_product}, 平台管理, 访问控制, 平台角色, 创建平台角色
+:ks_description: 介绍如何创建平台角色。
+:ks_weight: 01
+:ks_icon:
+:ks_menu: **平台管理 > 访问控制**
+:ks_permission: **角色管理**
+:ks_navigation: **平台角色**
+
+
+本节介绍如何创建平台角色。
+
+
+== 前提条件link:[id=5c1edecef5d741e89626ccc9938f59ba]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=746eada2b7684cebb046ca098294209c]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. 在**创建平台角色**对话框，设置平台角色的名称、别名和描述，然后点击**编辑权限**。
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|名称
+|平台角色的名称。名称只能包含小写字母、数字和连字符（-），必须以小写字母或数字开头和结尾，最长 63 个字符。
+
+include::../../../../_custom/platformManagement/accessControl/platformRoles/platformRoles-para-aliasDescription.adoc[]
+|===
+--
+
+. 在**编辑权限**对话框，设置企业空间角色的权限，然后点击**确定**。
++
+====
+include::../../../../_custom/platformManagement/accessControl/platformRoles/platformRoles-para-permissions.adoc[]
+====

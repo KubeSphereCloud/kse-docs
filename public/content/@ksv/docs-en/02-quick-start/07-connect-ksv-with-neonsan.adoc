@@ -1,0 +1,260 @@
+---
+title: "Connect {ks_product} with NeonSAN"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, NeonSAN, connection"
+description: "Describes how to connect KSV with NeonSAN storage."
+weight: 07
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: fb7560de882c49db8671898dcfb8a477
+:ks_xref_id: 7fe08819f752496ba5094329f2c17277
+:ks_comp: ../../components/
+:ks_title: Connect {ks_product} with NeonSAN
+:ks_description: Describes how to connect KSV with NeonSAN storage.
+:ks_keywords: {ks_product_full}, {ks_product}, NeonSAN, connection
+:ks_weight: 07
+:ks_logo:
+:ks_download_url:
+
+
+NeonSAN is an enterprise-grade distributed block storage system powered by QingCloud. NeonSAN Container Storage Interface (CSI) is a storage plug-in provided by NeonSAN, with the capability to dynamically create persistent volumes (PVs) on Kubernetes.
+
+{ks_product_abbr_full} supports deep integration with QingStor NeonSAN, empowering enterprises to step into cloud native.  This topic describes how to connect KSV with NeonSAN storage.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=4ddfee66ba7442fa95492c5ca7085b93]
+
+* Make sure that NeonSAN CSI is installed. If not, contact NeonSAN technical support. For more information, visit link:https://github.com/yunify/qingstor-csi[QingStor-CSI].
++
+--
+Run the following command to check whether NeonSAN CSI is installed. If the output is empty, NeonSAN CSI is not installed.
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+$ kubectl get pod --all-namespaces | grep csi-neonsan
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+* Make sure that the target node meets all the prerequisites for installing {ks_product}. For more information, see link:https://kubesphere.cloud/docs/ksv/02-quick-start/01-install-ksv-in-single-node-mode/[Install KSV in single-node mode] and link:https://kubesphere.cloud/docs/ksv/02-quick-start/02-install-ksv-in-multi-node-mode/[Install KSV in multi-node mode].
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Procedurelink:[id=e7d33157b79b45a196af25e5dcf29b6b]
+
+. Log in to the server node where NeonSAN CSI is installed as user **root**.
+. Run the following command to view the etcd service on the node:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+systemctl status etcd
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Command output:
+
+image:{ks_image}{d02f2171c02b43bd9e0c83338954a234}[output,500px]
+
+The return shows that the installation path of etcd is **/opt/etcd**.
+--
+. Run the following command to go to the installation path of etcd:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cd /opt/etcd
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Run the following command to view etcd cluster information:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Command output:
+
+image:{ks_image}{4cbe9eff35784c00a4fe79f7f2f85e73}[]
+--
+. Run the following command to query the architecture of the server node:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+uname -m
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Download the installation package based on the architecture of the server node:
++
+--
+* x86 architecture
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+curl -OL https://virtualization.kubesphere.cloud/v1.6.1/kubesphere-virtualization-x86_64-v1.6.1.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+* ARM64 architecture
+
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+curl -OL https://virtualization.kubesphere.cloud/v1.6.1/kubesphere-virtualization-arm64-v1.6.1.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Decompress the installation package:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+tar -zxvf kubesphere-virtualization-<package name>.tar.gz
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+In the preceding command, replace <package name> with the name of the installation package you download.
+
+* x86 architecture: Replace <package name> with **x86_64-{ks_product_ver}**.
+* ARM64 architecture: Replace <package name> with **arm64-{ks_product_ver}**.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. Go to the directory generated after the installation package is decompressed:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+cd kubesphere-virtualization-<file path>
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+// Note
+
+include::../../../_ks_components/admonitions/note.adoc[]
+
+In the preceding command, replace <file path> with the name of the directory generated.
+
+* x86 architecture: Replace <file path> with **x86_64-**.
+* ARM64 architecture: Replace <file path> with **arm64**.
+
+include::../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+. Run the following command to edit **config-sample.yaml**:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+vi config-sample.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. Modify the **etcd** and **addons** parameters in the **config-sample.yaml** file as follows:
++
+--
+image:{ks_image}{22e58eca13fb4bbdabd3fd7d499ff9cc}[parameter,500px]
+
+For more information about parameters, see link:https://github.com/kubesphere/kubekey/blob/master/docs/config-example.md[config-example].
+--
+. Modify **values.yaml** of csi-neonsan:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+# Go to the charts directory
+cd charts/csi-neonsan
+
+# Modify values
+vim values.yaml
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+Modify the parameters based on the following configuration:
+
+* Set **repository** under **provisioner** to **kubespheredev/csi-provisioner** and **tag** to **v3.1.0**.
+* Set **repository** under **attacher** to **kubespheredev/csi-attacher** and **tag** to **v3.4.0**.
+* Set **repository** under **resizer** to **kubespheredev/csi-resizer** and **tag** to **v1.4.0**.
+* Set **repository** under **snapshotter** to **kubespheredev/csi-snapshotter** and **tag** to **v5.0.1**.
+* Set **repository** under **registrar** to **kubespheredev/csi-node-driver-registrar** and **tag** to **v2.5.0**.
+
+For more information about parameters, see link:https://github.com/kubesphere/ksv-installer/blob/ksv/package/amd64/manifest-sample.yaml[manifest-sample].
+--
+. Run the following command to install {ks_product}:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+# Install {ks_product} in single- or multi-node mode. Example:
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Verificationlink:[id=f331ffe7c68d418da062d62878dc1436]
+
+. After the installation is complete, verify that csi-neonsan is working:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+root@node1:~# kubectl -n kube-system get pod | grep csi-neonsan
+csi-neonsan-controller-c85c94b84-cpkh2   5/5     Running   4          18d
+csi-neonsan-node-bb4f5                   2/2     Running   8          26d
+csi-neonsan-node-g8wlf                   2/2     Running   2          26d
+csi-neonsan-node-trkbb                   2/2     Running   2          26d
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+--
+. View {ks_product} installation logs:
++
+--
+// Bash
+
+include::../../../_ks_components/code/bash.adoc[]
+
+ksv logs
+
+include::../../../_ks_components/code/codeEnd.adoc[]
+
+The installation is successful if a message similar to the following appears:
+
+image:{ks_image}{84198a4eaf36458eb0c302108175867f}[log,500px]
+--

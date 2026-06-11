@@ -1,0 +1,120 @@
+---
+title: 设置续费（SetRenewal）
+weight: 24
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| console
+| String
+| true
+| 控制台ID
+
+| dry_run
+| String
+| false
+| 
+
+| months
+| Integer
+| true
+| 续费时长，支持1～60，单位月
+
+| promotion_id
+| String
+| false
+| 促销ID
+
+| refund_policy
+| String
+| false
+| private
+
+| resource
+| String
+| true
+| 资源ID
+
+| root_user
+| String
+| true
+| 主账号ID
+
+| user
+| String
+| true
+| 
+
+| zone
+| String
+| true
+| 
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| failed
+| Array
+| false
+| 失败未处理的资源ID
+
+| renewal_contract_set
+| Object
+| false
+| 续约资源对应的合同ID
+
+| renewal_contract_set.TODO
+| String
+| false
+| 待定义
+
+| success
+| Array
+| false
+| 成功处理的资源ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "SetRenewal",
+  "console": "testingcloud",
+  "months": 1,
+  "resource": "vol-klps2tf8",
+  "root_user": "usr-mSbsvdQ5",
+  "user": "usr-mSbsvdQ5",
+  "zone": "testing"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "SetRenewalResponse",
+  "failed": [],
+  "renewal_contract_set": {
+    "vol-klps2tf8": "ct-BczKbNPH"
+  },
+  "ret_code": 0,
+  "success": [
+    "vol-klps2tf8"
+  ]
+}
+----

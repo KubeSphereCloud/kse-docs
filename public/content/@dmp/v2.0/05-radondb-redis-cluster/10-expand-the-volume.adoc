@@ -1,0 +1,38 @@
+---
+title: "扩展卷"
+keywords: "Kubernetes, {ks_product}, RadonDB, RadonDB Redis Cluster, 扩展卷"
+description: "介绍如何扩展挂载到数据库节点的卷。"
+weight: 10
+---
+
+:ks_db_product: Redis Cluster
+
+本节介绍如何扩展挂载到数据库节点的卷。
+
+//note
+[.admon.note,cols="a"]
+|===
+|备注
+
+|
+* 目前不支持对使用{ks_product_both}集群本地存储创建的卷（local）进行扩展。
+
+* 目前仅支持增加卷容量，不支持减少卷容量。
+
+* 此操作可能会中断数据库服务，请在非高峰时段执行此操作。
+
+|===
+
+
+== 前提条件
+
+* RadonDB {ks_db_product} 实例状态为**运行中**。
+
+
+== 操作步骤
+
+. 以 platform-admin 角色登录{ks_product_left} Web 控制台并进入数据库管理平台。
+. 在左侧导航栏选择 **{ks_db_product}**。
+. 在 {ks_db_product} 实例列表中，点击一个实例名称打开其详情页面。
+. 在页面左上角选择**更多操作 > 扩展卷**。
+. 在**扩展卷**对话框，选择节点角色，设置卷的容量，然后点击**确定**。

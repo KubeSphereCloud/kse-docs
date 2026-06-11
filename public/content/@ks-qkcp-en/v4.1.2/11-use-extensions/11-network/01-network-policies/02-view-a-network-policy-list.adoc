@@ -1,0 +1,48 @@
+---
+title: "View Network Policy List"
+keywords: "Kubernetes, {ks_product-en}, cluster management, network, network policy, view network policy list"
+description: "Introduce how to view the network policy list."
+weight: 02
+---
+
+:ks_permission: **Cluster Network Resource Viewing**
+:ks_navigation: **Network > Network Policies**
+
+This section introduces how to view the network policy list.
+
+
+== Prerequisites
+
+* {empty}
+include::../../../../_custom-en/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+* **KubeSphere Network** should have been installed and enabled.
+
+
+== Steps
+
+include::../../../../_custom-en/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
+
++
+====
+* The network policy list provides the following information:
++
+--
+[options="header",cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../_custom-en/clusterManagement/networkPolicies/networkPolicies-para-information.adoc[]
+|===
+--
+
+* Select a project from the dropdown list at the top left of the list to view network policies in a specific project.
+
+include::../../../../../_ks_components-en/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components-en/oper-customizeColumns.adoc[]
+====

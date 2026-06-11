@@ -1,0 +1,96 @@
+---
+title: "硬件配置"
+weight: 1
+---
+
+
+[options="header",cols="1,1,3"]
+|===
+|节点类型 |硬件类型 |配置要求
+.5+|全闪
+|CPU	
+|2 x Intel Silver4314_16 Cores 及以上
+
+|内存	
+|64 G
+
+|OS 盘	
+|2*480 G
+
+|数据盘	
+|1～8 x U.2NVMe 闪存
+
+|网卡	
+|4x10/25GbE，支持 RDMA
+
+.6+|混插
+|CPU	
+|2 x Intel Silver4310_12 Cores 及以上
+
+|内存	
+|128 G
+
+|OS 盘	
+|2*480 G
+
+|数据盘	
+|12 x HDD
+
+|缓存盘	
+|1 x NVMe SSD，可扩展至 2 个
+
+|网卡	
+|4x10/25GbE，支持 RDMA
+|===
+
+
+* 混插节点默认推荐采用直通模式，需部署 NeonSAN v3.1.5 及以上版本。若有数据冗余或者其他考虑，可采用 RAID 模式，RAID 卡必须配备大于 2Gb 的缓存和 BBU 电池。RAID卡推荐型号：LSI 9361-8i/LSI 9364-8i/LSI 9400 series/LSI 9500 series。
+
+* 缓存软硬件配置要求：
+** 混插节点缓存盘需使用 NVMe SSD，其他类型 SSD 暂不支持。
+** 混插节点 icas 和 bcache 缓存盘和数据盘的配比 5%-10%，不低于 5%； icas 内存与缓存配比为 1%：即在基准内存 64GB 基础上，每增加 1 个 3.2T 的缓存，则内存需增加 32G。bcache 内存与缓存配比为 0.8%： 即在基准内存 64GB 基础上，每增加 1 个 3.2T 的缓存，则内存需增加 25.6G。
+** NeonSAN 不同应用场景下，缓存软件与操作系统版本及平台对应关系如下。
++
+[options="header",cols="1,2,1"]
+|===
+|应用场景|版本/平台|缓存软件
+.4+|云易捷
+|ubuntu x86 16.04/Intel/海光                  
+|bcache
+
+|ubuntu x86 20.04/Intel/海光 	
+|bcache
+
+|ubuntu arm 18.04/鲲鹏/飞腾 	
+|bcache
+
+|kylin sp2 v10 /海光/鲲鹏/飞腾	
+|bcache
+
+.4+|企业云（SANC 融合/分离）
+|ubuntu x86 16.04/Intel/海光                  
+|icas/opencas
+
+|ubuntu x86 20.04/Intel/海光 	
+|icas/opencas
+
+|ubuntu arm 18.04/鲲鹏/飞腾 	
+|bcache
+
+|kylin sp2 v10 /海光/鲲鹏/飞腾	
+|bcache
+|===
++
+
+include::../../../../../../_components/note.adoc[]
+icas/opencas 和 bcache 缓存软件不能在同一存储池内融合部署使用。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+* 网络及网卡配置要求：
+** 网卡选用原则：全闪节点默认配置 RDMA 网络，故网卡需支持 RDMA；混插节点默认配置 TCP 网络，网卡可按需选择。
+** 同一集群内存在全闪和混插存储池，混插采用 TCP 网络，全闪采用 RDMA 网络。 
+** 网卡可选用 Mellanox CX4 10G 或 Mellanox CX5 25G 以及光模 块，推荐使用 Mellanox CX5 25G，也可选用 Intel 同类型网卡(Intel Corporation 82599ES 2-Port 10-Gigabitbe，该网卡不支持 RDMA)
+
+* 更加详细的硬件配置指导可参考link:https://box.yunify.com/s/tYcYJkdm2DXJcXZ[《NeonSAN 存储系统最佳实践指南》]。
+

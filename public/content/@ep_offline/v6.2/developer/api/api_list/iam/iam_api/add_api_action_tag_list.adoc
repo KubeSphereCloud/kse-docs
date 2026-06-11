@@ -1,0 +1,95 @@
+---
+title: 批量添加IAM纳管API绑定标签（AddIAMApiActionTagList）
+weight: 3
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| apis
+| Array
+| true
+| API操作码列表
+
+| audit_log
+| String
+| true
+| 审计日志
+
+| owner_tag_list
+| Array
+| true
+| 归属和标签对应关系
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| apis
+| Array
+| false
+| API操作码列表
+
+| owner_tag_list
+| Array
+| false
+| 归属和标签对应关系
+
+| owner_tag_list[].owner
+| String
+| false
+| 所有者
+
+| owner_tag_list[].tag
+| String
+| false
+| 标签
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "AddIAMApiActionTagList",
+  "apis": [
+    "AddIAMApiActionTag"
+  ],
+  "owner_tag_list": [
+    {
+      "owner": "test",
+      "tag": "eip"
+    }
+  ]
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "AddIAMApiActionTagListResponse",
+  "apis": [
+    "AddIAMApiActionTag"
+  ],
+  "owner_tag_list": [
+    {
+      "owner": "test",
+      "tag": "eip"
+    }
+  ],
+  "ret_code": 0
+}
+----

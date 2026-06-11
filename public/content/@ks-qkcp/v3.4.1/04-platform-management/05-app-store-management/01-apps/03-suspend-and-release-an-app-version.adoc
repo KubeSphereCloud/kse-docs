@@ -1,0 +1,61 @@
+---
+title: "下架和发布应用版本"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 应用商店管理, 应用, 下架和发布应用版本"
+description: "介绍如何下架和发布应用版本。"
+weight: 03
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 6175408d45294835a90600609f6c9830
+:ks_xref_id: 1a6bf5b543fc427b9daed2d3aa78f042
+:ks_comp: ../../../../components/
+:ks_title: 下架和发布应用版本
+:ks_keywords: Kubernetes, {ks_product}, 应用商店管理, 应用, 下架和发布应用版本
+:ks_description: 介绍如何下架和发布应用版本。
+:ks_weight: 03
+:ks_icon:
+:ks_menu: **平台管理 > 应用商店管理**
+:ks_navigation: **应用**
+:ks_permission: **应用模板管理**
+
+
+本节介绍如何下架和发布应用版本。
+
+应用版本下架后将被从应用商店中移除，同时企业空间成员可以删除应用版本。
+
+
+== 前提条件link:[id=4c287d9cbd164b278198166570d19e79]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-enableAppStore.adoc[]
+
+:relfileprefix: ./
+
+
+* 您需要在{ks_product_both}平台具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅link:../../../../04-platform-management/04-access-control/02-users/_index/[用户]和link:../../../../04-platform-management/04-access-control/03-platform-roles/_index/[平台角色]。
+
+
+
+== 操作步骤link:[id=fd350bd5df0a479582abadd00e00eaeb]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. 在应用模板详情页面右侧的**版本**页签，点击需要操作的应用版本，在展开的区域点击**下架**或**发布**，然后在弹出的对话框中点击**确定**。

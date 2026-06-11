@@ -1,0 +1,185 @@
+---
+title: "检查原集群状态"
+weight: 2
+---
+
+. 登录原集群任一管理节点，依次执行如下命令，检查 etcd 状态。
+
+.. 查看 etcd 节点信息，IP 地址为原集群管理节点 IP，需根据实际情况进行修改。
++
+--
+[,shell]
+----
+/opt/etcd/etcdctl --endpoints "http://172.31.30.172:2379,http://172.31.30.173:2379,http://172.31.30.171:2379" member list
+----
+
+回显示例：
+
+[,shell]
+----
+187874282506b127: name=etcd1 peerURLs=http://172.31.30.172:2380 clientURLs=http://172.31.30.172:2379 isLeader=false
+a7b62a29d1f66ec5: name=etcd2 peerURLs=http://172.31.30.173:2380 clientURLs=http://172.31.30.173:2379 isLeader=false
+ffda748202f1d777: name=etcd0 peerURLs=http://172.31.30.171:2380 clientURLs=http://172.31.30.171:2379 isLeader=true
+----
+--
+
+.. 查看 etcd 健康状态，IP 地址为原集群管理节点 IP，需根据实际情况进行修改。
++
+--
+[,shell]
+----
+/opt/etcd/etcdctl --endpoints "http://172.31.30.172:2379,http://172.31.30.173:2379,http://172.31.30.171:2379" cluster-health
+----
+
+回显示例：
+
+[,shell]
+----
+member 187874282506b127 is healthy: got healthy result from http://172.31.30.172:2379
+member a7b62a29d1f66ec5 is healthy: got healthy result from http://172.31.30.173:2379
+member ffda748202f1d777 is healthy: got healthy result from http://172.31.30.171:2379
+cluster is healthy
+----
+--
+
+. 逐一登录原集群管理节点，检查 ZooKeeper 状态。要求返回结果中，只有一个节点的 ``Mode`` 值为 ``leader``，其他节点的 ``Mode`` 值均为 ``follower``。
++
+[,shell]
+----
+/opt/zookeeper/bin/zkServer.sh status
+----
++
+image::/images/neonsan/migrate_manage_node_2.png[,70%]
+
+. 检查原集群 neonsan-mysql 状态。
+.. 登录任一管理节点，查看 neonsan-mysql 集群信息。
++
+[,shell]
+----
+/qingstor/bin/neonsan-mysql list
+----
++
+回显示例：
++
+[,shell]
+----
+cluster neonsan
+started nodes:
+         172.31.30.26:3306
+         172.31.30.27:3306
+         172.31.30.28:3306
+live nodes:
+         172.31.30.26:3306
+         172.31.30.27:3306
+         172.31.30.28:3306
+arbitors:
+----
++
+include::../../../../../_components/note.adoc[]
+* started nodes：数据库集群中所有节点信息，包含 IP 与端口号。
+* live nodes：集群存活的节点，在没有 arbitor 节点的情况下，live
+nodes 下的节点与 started nodes 下的节点应保持一一对应。
+* arbitors：arbitor 节点，即仲裁节点。
+include::../../../../../_components/table_footer.adoc[]
+
+.. 根据上一步查询到的数据库节点信息，执行如下命令，查看各个 neonsan-mysql 集群节点状态。
++
+``-h`` 用于指定数据库集群中的节点 IP 地址，根据实际情况进行修改，需如下逐一查看所有节点的节点状态，并对比输出结果是否一致。
++
+* 查看第一个数据库节点状态。 
++
+[,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h 172.31.30.26 -e "show status like 'wsrep_connected';show status like 'wsrep_cluster_status';show status like 'wsrep_cluster_size';show status like 'wsrep_local_state_comment';show status like 'wsrep_cluster_state_uuid';show status like 'wsrep_local_state_uuid'"
+----
+
+* 查看第二个数据库节点状态。
++
+[,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h 172.31.30.27 -e "show status like 'wsrep_connected';show status like 'wsrep_cluster_status';show status like 'wsrep_cluster_size';show status like 'wsrep_local_state_comment';show status like 'wsrep_cluster_state_uuid';show status like 'wsrep_local_state_uuid'"
+----
+
+* 查看第三个数据库节点状态。
++
+[,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h 172.31.30.28 -e "show status like 'wsrep_connected';show status like 'wsrep_cluster_status';show status like 'wsrep_cluster_size';show status like 'wsrep_local_state_comment';show status like 'wsrep_cluster_state_uuid';show status like 'wsrep_local_state_uuid'"
+----
++
+**每个数据库节点状态查询结果示例如下，要求三个节点中所有字段所对应的值均一样。即 ``wsrep_connected`` 为 ``ON``、``wsrep_cluster_status`` 为 ``Primary``，``wsrep_cluster_size`` 为 ``3``，``wsrep_local_state_comment`` 为 ``Synced``， ``wsrep_cluster_state_uuid`` 和 ``wsrep_local_state_uuid`` 字段对应值一样。**
++
+image::/images/neonsan/migrate_manage_node_3.png[,70%]
+
+
+. 检查原集群 qingstor-mysql 状态。
+.. 任一登录管理节点，查看 qingstor-mysql 集群信息。
++
+[,shell]
+----
+/qingstor/bin/qingstor-mysql list
+----
++
+回显示例：
++
+[,shell]
+----
+cluster qingstor
+started nodes:
+         172.31.30.26:3307
+         172.31.30.27:3307
+         172.31.30.28:3307
+live nodes:
+         172.31.30.26:3307
+         172.31.30.27:3307
+         172.31.30.28:3307
+arbitors:
+----
++
+include::../../../../../_components/note.adoc[]
+* started nodes：数据库集群中所有节点信息，包含 IP 与端口号。
+* live nodes：集群存活的节点，在没有 arbitor 节点的情况下，live
+nodes 下的节点与 started nodes 下的节点应保持一一对应。
+* arbitors：arbitor 节点，即仲裁节点。
+include::../../../../../_components/table_footer.adoc[]
+
+.. 根据上一步查询到的数据库节点信息，执行如下命令，查看各个 qingstor-mysql 集群节点状态。
++
+``-h`` 用于指定数据库集群中的节点 IP 地址，根据实际情况进行修改，需如下逐一查看所有节点的节点状态，并对比输出结果是否一致。
++
+* 查看第一个数据库节点状态。 
++
+[,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h 172.31.30.26 -P 3307 -e "show status like 'wsrep_connected';show status like 'wsrep_cluster_status';show status like 'wsrep_cluster_size';show status like 'wsrep_local_state_comment';show status like 'wsrep_cluster_state_uuid';show status like 'wsrep_local_state_uuid'"
+----
+
+* 查看第二个数据库节点状态。 
++
+[,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h 172.31.30.27 -P 3307 -e "show status like 'wsrep_connected';show status like 'wsrep_cluster_status';show status like 'wsrep_cluster_size';show status like 'wsrep_local_state_comment';show status like 'wsrep_cluster_state_uuid';show status like 'wsrep_local_state_uuid'"
+----
+
+* 查看第三个数据库节点状态。 
++
+[,shell]
+----
+mysql -uqingstor -p'QS!ows%0923' -h 172.31.30.28 -P 3307 -e "show status like 'wsrep_connected';show status like 'wsrep_cluster_status';show status like 'wsrep_cluster_size';show status like 'wsrep_local_state_comment';show status like 'wsrep_cluster_state_uuid';show status like 'wsrep_local_state_uuid'"
+----
++
+**每个数据库节点状态查询结果示例如下，要求三个节点中所有字段所对应的值均一样。即 ``wsrep_connected`` 为 ``ON``、``wsrep_cluster_status`` 为 ``Primary``，``wsrep_cluster_size`` 为 ``3``，``wsrep_local_state_comment`` 为 ``Synced``， ``wsrep_cluster_state_uuid`` 和 ``wsrep_local_state_uuid`` 字段对应值一样。**
++
+image::/images/neonsan/migrate_manage_node_4.png[,70%]
+
+. 依次执行如下命令，检查 NeonSAN 集群状态。
++
+[,shell]
+----
+neonsan list_center
+neonsan list_store
+neonsan list_ssd
+neonsan list_job
+neonsan list_volume --detail |grep -v OK
+----
+

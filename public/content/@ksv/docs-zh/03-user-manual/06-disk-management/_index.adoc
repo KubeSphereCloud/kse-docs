@@ -1,0 +1,42 @@
+---
+title: "磁盘管理"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 管理"
+description: "介绍{ks_product_both}Web 控制台的磁盘管理功能。"
+weight: 06
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 2ce07449f5ad44918c0b1dceb75964fe
+:ks_xref_id: 0ddf5d2df2b84872b56d66d138aa2c6d
+:ks_comp: ../../../components/
+:ks_title: 磁盘管理
+:ks_description: 介绍{ks_product_both}Web 控制台的磁盘管理功能。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 虚拟机, 管理
+:ks_weight: 06
+:ks_logo: 
+:ks_download_url: 
+
+
+磁盘是{ks_product_abbr_full_both}为虚拟机提供的块级别的虚拟存储资源，以文件夹的形式存在于宿主机上。根据用途分类，{ks_product_abbr_full_right}提供数据盘和系统盘两种磁盘类型。两种磁盘类型的具体区别如下：
+
+* 系统盘：装有操作系统的虚拟硬盘，只能随虚拟机创建，生命周期与挂载的虚拟机相同。
+
+* 数据盘：用于存储应用数据，可以随虚拟机同时创建，也可以单独创建。
+
+**磁盘**模块对所有用户可见。**admin** 用户可以查看系统中的所有磁盘，并且可以对磁盘执行所有操作。其他具有不同角色的普通用户在**磁盘**模块中的权限如下：
+
+[cols='1a,3a']
+|===
+|项目角色 |权限
+
+|管理员
+|查看所属项目中的磁盘，并且可以对磁盘执行所有操作。
+
+|操作员
+|查看所属项目中的磁盘，并且可以对磁盘执行所有操作。
+
+|观察员
+|只能查看所属项目中的磁盘，不能对磁盘执行任何操作。
+|===

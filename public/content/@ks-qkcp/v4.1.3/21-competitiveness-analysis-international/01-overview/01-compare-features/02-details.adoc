@@ -1,0 +1,482 @@
+---
+title: "指标详细参数"
+weight: 02
+---
+
+== 产品概述
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 |KubeSphere 企业版 |OpenShift |Rancher
+
+|公司名称 |QingCloud Technologies |Red Hat |Rancher Labs
+
+|母公司 |无 |IBM |SUSE
+
+|母公司注册地 |中国 |美国 |卢森堡
+|===
+
+== 开源建设
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 |KubeSphere 企业版 |OpenShift |Rancher
+
+|开源 |基于开源产品 KubeSphere |对应开源产品 OKD（Origin Kubernetes Distribution） |开源产品 Rancher，存在专门面向中国的企业版代号 Pandaria
+
+|GitHub Star/Fork 
+|15.6K Star / 2.2K Fork 
+|8.8K Star / 5.7K Fork 
+|19.7K Star / 2.8K Fork
+|===
+
+== 安装与升级
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 |KubeSphere 企业版 |OpenShift |Rancher
+
+|安装简便性 |提供便捷安装工具 KubeKey |无便捷安装工具 |提供便捷安装工具 RancherD
+
+|安装操作系统 |支持所有主流 Linux 操作系统 |绑定 Red Hat 底层 RHCOS 与 RHEL | * 支持所有主流 Linux 操作系统
+* 2.3+ 版本支持 Windows 操作系统
+
+|物理机部署 |支持，无需额外引导主机 |需要借助引导主机 bootstrap，对部署节点配置要求高 |支持，无需额外引导主机
+|单节点部署 |所有版本支持 |4.8 及以上版本支持 |所有版本支持
+|===
+
+== 机构认证
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 |KubeSphere 企业版 |OpenShift |Rancher
+
+|CNCF K8s 一致性认证 |是 |是 |是
+
+|可信云认证 |是 |是 |是
+
+|K8s 原生性 |未修改任何 Kubernetes 代码 |深度定制 |官方推荐搭配 K8s 发行版 RKE
+|===
+
+== 可观测性
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 
+|KubeSphere 企业版 
+|OpenShift 
+|Rancher
+
+|监控 
+
+|支持多层次、多维度、多租户监控，含自定义面板与 Grafana 模板导入，深度集成多集群与 GPU 监控 
+
+|仅支持简单指标展示，复杂指标需借助 Grafana + Prometheus 
+
+|仅支持简单指标展示，复杂指标需借助 Grafana + Prometheus；支持 GPU 监控
+
+|日志 
+
+|* 内置多租户、多维度日志检索系统，支持日志罗盘，可灵活对接多个外部日志接收器
+* 支持日志清理周期配置 
+
+|需借助第三方 ELK 自建，记录可视化需要手动配置 Kibana 
+
+|集成了 Logging Operator，需要手动配置 logging-operator
+
+|审计 
+
+|* 内置可视化界面支持全局、集群、项目、应用多维度审计日志检索
+* 支持审计清理周期配置 
+
+|支持通过 OpenShift CLI 查看审计日志 
+
+|内置 Audit Logging 记录 API 调用和操作历史，支持全局、集群、项目等多维度审计日志查看
+
+|事件 
+
+|* 界面提供多租户多维度的事件查询中心，支持转发至多个存储后端
+* 支持事件清理周期配置 
+
+|支持统一的事件查询与管理 
+
+|支持统一的事件查询与管理
+
+|告警 
+
+|* 内置多维度告警规则，灵活支持自定义配置多维度告警策略
+* 支持 calico-exporter 组件，为 Calico 提供监控指标，包括 BGP、IPPool 和 IPAM 
+
+|需通过 OpenShift CLI 自定义告警规则 
+
+|内置部分告警规则，支持页面配置告警规则
+
+|通知 
+
+|自研开源 Notification Manager，支持飞书、公有云短信、钉钉、企业微信、支持用户视角的通知配置 
+
+|支持 PagerDuty，支持 Slack、Email、Webhook 
+
+|支持 PagerDuty、Microsoft Teams、钉钉、企业微信，支持 Slack、Email、Webhook
+
+|可观测 Dashboard 
+
+|支持跨集群、节点、项目、应用多维度的可观测性的 Dashboard 
+
+|支持跨集群可观测性的 Dashboard，需手动配置 
+
+|支持集群、节点、组件、应用可观测性的 Dashboard，支持全局监控
+|===
+
+== DevOps
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 
+
+|KubeSphere 企业版 
+
+|OpenShift 
+
+|Rancher
+
+|应用打包与发布 
+
+|支持 Source-to-Image 和 Binary-to-Image 
+
+|支持 Source-to-Image 和 Binary-to-Image 
+
+|不支持 Source-to-Image 和 Binary-to-Image
+
+|CI/CD 流水线 
+
+| * 支持 Jenkins 流水线，内置可视化图形化编辑面板
+* 支持 argoCD 持续部署
+* 支持提供审计、通知、动态日志功能
+* 支持应用版本可快速回滚、自动化更新应用
+
+|* 支持 Jenkins 流水线，内置可视化编辑面板（OpenShift Pipeline）
+* 支持 GitOps，内置集成 Argo CD 与 Tekton 
+
+|支持 Jenkins 流水线，内置可视化编辑面板
+
+|代码扫描 
+
+|支持集成 SonarQube，自动进行静态代码扫描与质量分析，并在 UI 展示扫描结果 
+
+|需手动配置 SonarQube 进行静态代码扫描 
+
+|需手动配置 SonarQube 进行静态代码扫描
+|===
+
+== 应用
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 
+
+|KubeSphere 企业版 
+
+|OpenShift 
+
+|Rancher
+
+|应用部署 
+
+|支持 Helm Chart 形式的应用商店，支持配置应用仓库
+
+|支持 Operator Hub 与 Helm Chart，支持配置应用仓库 
+
+|* 支持 Helm Chart 形式的应用商店，支持配置应用仓库
+* 支持跨集群应用克隆
+
+|应用生命周期管理 
+
+|* 支持包含应用上架、下架、审核等完整的生命周期管理
+* 支持应用仓库管理、一键部署应用等 
+
+|支持包含应用上架、下架、审核等完整的生命周期管理 
+
+|不支持
+
+|应用目录 
+
+|提供 NGINX、Tomcat、Redis 等 40+ 款应用，内置自研集群级容器数据库 RadonDB、MySQL、PG、ClickHouse，且有内嵌数据库控制台 
+
+|默认提供 13 款 Helm 应用，492 款 operator 应用 
+
+|提供 Longhorn，openEBS 等 34 款应用
+|===
+
+== 企业运营
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 
+
+|KubeSphere 企业版 
+
+|OpenShift 
+
+|Rancher
+
+|大屏监控 
+
+|提供可配置监控指标的可视化大屏监控
+
+|不支持 
+
+|不支持
+|===
+
+== 微服务治理
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 
+
+|KubeSphere 企业版 
+
+|OpenShift 
+
+|Rancher
+
+|灰度发布 
+
+|支持蓝绿部署、灰度发布、流量镜像，无需学习 Istio 
+
+|支持蓝绿部署、金丝雀发布和实验性更新 
+
+|支持蓝绿部署，金丝雀部署，和 A/B，需要手动配置和通过命令行来使用 Istio 实现灰度发布
+
+|流量治理 
+
+|内置微服务流量拓扑图，支持调整细粒度流量治理策略 
+
+|内置 Argo Rollouts 和 OpenShift Service Mesh，支持应用版本之间的流量权重切换 
+
+|手动配置与对接第三方工具 Kiali
+
+|Tracing 
+
+|内置微服务链路追踪，支持可视化展示微服务间的流量情况，支持限流与熔断配置，无需手动配置 
+
+|手动配置 Jaeger UI 
+
+|手动配置 Jaeger UI
+
+|SpringCloud 
+
+|内置集成 SpringCloud，通过 UI 动态管理微服务 
+
+|未深度集成 
+
+|未深度集成
+|===
+
+== 多云与边缘
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 
+
+|KubeSphere 企业版 
+
+|OpenShift 
+
+|Rancher
+
+|多云支持 
+
+|与主流公有云容器服务 AWS EKS、Azure AKS、DigitalOcean K8s、QKE 深度集成，支持导入主流公有云托管容器服务集群和私有自建 Kubernetes 集群 
+
+|与主流公有云容器服务 AWS、Azure、IBM Cloud 深度集成，不支持导入任意 K8s 集群或托管服务，底层操作系统需依赖 RHCOS 和 RHEL 
+
+|与主流公有云容器服务阿里云 ECS、腾讯云 TKE、华为云 CCE、AWS EKS、Azure AKS 深度集成，支持导入主流公有云托管容器服务集群
+
+|多集群管理 
+
+| * 支持任意原生 K8s 以及任意基于 K8s 的容器管理平台
+* 提供跨集群统一的应用分发与调度
+* 支持多集群 CI/CD 流水线 
+* 支持多集群维度的多“企业空间”租户管理 
+* 支持添加成员集群、更新 kubeconfig、移除集群及管理集群资源等 
+
+|支持管理和纳管多个 OpenShift 集群，但对于更复杂的多集群场景（如跨集群策略、可观测性或大规模集群管理），需要使用红帽商业订阅解决方案 Advanced Cluster Management for Kubernetes (ACM) 来实现 
+
+|* 支持通过 UI 与 API 纳管任意原生 K8s 以及任意基于 K8s 的容器管理平台
+* 支持跨多集群的安全策略配置
+
+|边缘计算 
+
+|* 深度集成 KubeEdge，支持 K3s
+* 支持提供云边资源统一监控
+* 支持异构算力
+* 支持提供云边资源统一监控 
+
+|产品功能尚未支持，需通过商业解决方案支持 
+
+|发起 K3s 项目，作为 Rancher 边缘集群方案
+|===
+
+== 网络与存储
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 
+
+|KubeSphere 企业版 
+
+|OpenShift 
+
+|Rancher
+
+|网络与网关 
+
+|* 自研开源 OpenELB 负载均衡器提供 LoadBalancer
+* 支持多种开源网络插件，支持容器网络部署使用 Calico 模式或 Flannel 模式
+* 深度集成 Intel 多网卡解决方案 Multus
+* 支持集群级别的网关，支持网关业务常用指标集成监控 
+
+|* 内置 OpenShift SDN，支持使用 OpenvSwitch（OVS）配置 Overlay 网络，支持三层模型
+* 支持 Flannel, Nuage and Kuryer 等 CNI 
+
+|* 内置 Flannel + Macvlan 和 Canal + Macvlan 组合插件
+* 支持 Calico、Flannel、Canal 等 CNI
+
+|存储 
+
+|* 提供全自研生产级分布式块存储 NeonSAN 与分布式文件存储，安装时默认内置 OpenEBS 以动态供应本地存储卷 
+* 支持多种主流存储系统/插件，包括不限于 Ceph、NFS、GlusterFS 等
+* UI 界面中支持卷克隆及快照管理、卷用量数据监控等操作
+* 支持 PVC 根据使用量动态扩容
+* 支持 namespace 级别的存储类隔离
+
+| * 基于 Rook Ceph、NooBaa 自定义 SDS 方案
+* 支持通过 CSI 对接主流存储系统如 Ceph、GlusterFS、NFS 等
+* UI 界面中支持卷克隆及快照管理、卷用量数据监控等操作 
+
+| * 自研开源 Longhorn 块存储提供底层容器存储
+* 支持通过 CSI 对接主流存储系统如 Ceph、GlusterFS、NFS 等
+* UI 界面中不支持卷克隆及快照管理、卷用量数据监控等操作
+
+|网络策略与管理 
+
+|* 提供可视化 K8s 原生网络策略管理
+* 支持不同租户（企业空间）与项目（namespace）间网络隔离
+* 内置 Pod IP 池可视化管理
+* 基于 Weave 提供可视化网络流量拓扑 
+
+|支持 K8s 原生网络策略管理，支持不同租户与项目间网络隔离 
+
+|集成 F5 CIS，支持可视化界面完成负载均衡服务的发布与管理
+|===
+
+== 多租户与安全
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 
+
+|KubeSphere 企业版 
+
+|OpenShift 
+
+|Rancher
+
+|多租户与权限管理 
+
+| KubeSphere 通过集群管理、企业空间、RBAC、资源配额、网络策略等机制，实现了更加完善的多租户管理，适用于企业级 Kubernetes 资源隔离、精细化权限控制的场景
+
+|* 支持项目级别租户管理
+* 支持通过配置 YAML 文件配置用户角色权限
+* 支持通过配置 YAML 配置项目配额
+* 内置管理员和开发者两个管理入口 
+
+|* 支持项目统一管理多个 namespace
+* 支持项目配额
+* 支持页面添加成员，为成员绑定角色
+
+| 鉴权与认证 
+| 支持本地认证、LDAP、OAuth2、OIDC、CAS，内置 OAuth2 Server 支持 OIDC 协议为其他应用提供统一的身份认证能力
+
+|* 内置 OAuth 服务对接多种身份提供商
+* 支持对接 LDAP, Keystone, OpenID Connect, and OAuth 等身份 
+
+|* 集成 AD、OpenLDAP、 FreeIPA、CAS
+* 支持 OAuth 与 SAML 身份提供商，如 Keycloak and Okta
+
+| 安全性 
+| * 支持认证安全策略配置、多因素认证、防暴力破解、API 流控等安全特性
+* 内置 Gatekeeper 安全策略引擎
+* 支持审计
+* 支持证书管理
+* 支持数据加密
+* 支持通过 Kube Eye 进行合规扫描
+
+|使用 Security Context Constraints 作为 Pod 安全策略管理，通常使用 oc 命令行工具进行配置和管理 
+
+|* 集成容器安全平台 SUSE NeuVector
+* 支持平台全局的 PSP 和 OPA GateKeeper 作为安全策略的一致性管理工具
+* 支持 SLSA 3 级供应链安全
+|===
+
+== 架构支持
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 
+
+|KubeSphere 企业版 
+
+|OpenShift 
+
+|Rancher
+
+|ARM 64 
+
+|支持 
+
+|支持 
+
+|支持
+
+|Windows 节点支持 
+
+|不支持 
+
+|支持作为工作节点 
+
+|支持作为工作节点
+|===
+
+== 商业服务与支持
+
+[cols="1,2a,2a,2a", options="header"]
+|===
+|对比项 
+
+|KubeSphere 企业版 
+
+|OpenShift 
+
+|Rancher
+
+|服务与支持 
+
+|提供订阅与维保服务，提供 7*24 的电子化支持服务，问题分级处理，最快 15 分钟响应
+
+|提供按严重级别划分的阶梯性支持，最快最初反应时间（最高严重级别）为 1 小时内响应，持续响应 2 小时，支持 7*24
+
+|提供按严重级别划分的阶梯性支持，最快最初反应时间（最高严重级别）为 1 小时内响应，持续响应 1 小时，支持 7*24
+
+|价格 
+
+|$ 
+
+|$ $ $ $ $ 
+
+|$ $ $
+|===
+
+注：排序均按产品名首字母进行排序

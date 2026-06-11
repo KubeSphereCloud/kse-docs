@@ -1,0 +1,291 @@
+---
+title: "Create a Workload"
+keywords: "Kubernetes, {ks_product}, Federated Project, Application Workloads, Workload, Create a Workload"
+description: "Describes how to create a workload."
+weight: 01
+---
+
+:ks_permission: **Federated Project Management**
+:ks_navigation: **Application Workloads > Workloads**
+
+:project:
+:multicluster:
+
+include::../../../../../_custom/clusterManagement/workloads/workloads-desc-createAWorkload.adoc[]
+
+
+== Prerequisites
+
+* The **Federated Cluster Application Management** extension must be installed and enabled on the KubeSphere platform.
+
+* {empty}
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-prer-requiredPermission_v4.adoc[]
+
+
+== Steps
+
+Refer to link:#_parameter-description[Parameter Description] to set the workload parameters.
+
+include::../../../../../_custom/multi-clusterProjectManagement/projectManagement-oper-openProjectPage_v4.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/workloads/workloads-multi-project-oper-openListPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+include::../../../../../_custom/clusterManagement/workloads/workloads-multi-project-oper-createAWorkload-ClusterDiff.adoc[]
+
+
+== Parameter Description
+
+The following describes how to set the workload parameters.
+
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-basicInformation.adoc[]
+
+
+* Pod Settings > Replica Scheduling Mode
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Specify Replica Count
+|Manually set the number of pod replicas for each cluster.
+
+Click image:/images/ks-qkcp/zh/icons/add-light.svg[add,18,18]/image:/images/ks-qkcp/zh/icons/substract-light.svg[subtract,18,18] to increase/decrease the number of pod replicas. The minimum value is **1**.
+
+|Specify Weight
+|Set the total number of pod replicas and the weight for each cluster. Pod replicas will be scheduled to each cluster based on the weight ratio.
+
+Click image:/images/ks-qkcp/zh/icons/add-light.svg[add,18,18]/image:/images/ks-qkcp/zh/icons/substract-light.svg[subtract,18,18] to increase/decrease the weight of a cluster. The minimum value is **1**.
+
+For example: If the total number of pod replicas is 10, and the weights for the host and member clusters are 3 and 2 respectively, then the host cluster will have 6 pod replicas and the member cluster will have 4 pod replicas.
+|===
+--
+
+// include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-podReplicas.adoc[]
+
+* Pod Settings > Add Container
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-addContainer.adoc[]
+--
+
+* Pod Settings > Add Container > Container Settings
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-setImageNameTypeResource.adoc[]
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerImage.adoc[]
+
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerName.adoc[]
+
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerType.adoc[]
+
+include::../../../../../_custom/clusterManagement/projects/projects-para-containerQuotas.adoc[]
+|===
+--
+
+* Pod Settings > Add Container > Port Settings
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-Port.adoc[]
+--
+
+* Pod Settings > Add Container > Image Pull Policy
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-imagePullPolicy.adoc[]
+--
+
+* Pod Settings > Add Container > Health Check
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-healthCheck.adoc[]
+--
+
+* Pod Settings > Add Container > Health Check > Add Probe
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-addProbe.adoc[]
+--
+
+* Pod Settings > Add Container > Lifecycle Management
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-lifecycleManagement.adoc[]
+--
+
+* Pod Settings > Add Container > Lifecycle Management > Add Action
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-addAction.adoc[]
+--
+
+* Pod Settings > Add Container > Startup Command
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-startCommand.adoc[]
+--
+
+* Pod Settings > Add Container > Environment Variables
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-environmentVariables.adoc[]
+--
+
+* Pod Settings > Add Container > Container Security Context
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-containerSecurityContext.adoc[]
+--
+
+* Pod Settings > Add Container > Sync Host Timezone
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-syncTimeZone.adoc[]
+--
+
+* Pod Settings > Update Policy
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-updatePolicy.adoc[]
+--
+
+* Pod Settings > Update Policy > Rolling Update Settings
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-rollingUpdate.adoc[]
+--
+
+* Pod Settings > Pod Security Context
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-podSecurityContext.adoc[]
+--
+
+* Pod Settings > Pod Scheduling Rules
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-podSchedulingRules.adoc[]
+--
+
+* Pod Settings > Pod Scheduling Rules > Custom Rules
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-customRules.adoc[]
+--
+
+* Pod Settings > Pod Graceful Termination
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-PodGracePeriod.adoc[]
+--
+
+* Pod Settings > Add Metadata
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-PodMetadata.adoc[]
+--
+
+* Storage Settings
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-mountVolume.adoc[]
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+// include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-collectLogsOnVolume.adoc[]
+
+// include::../../../../../_custom/projectManagement/workloads/workloads-desc-enableLogCollectionProject.adoc[]
+
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-addPVCTemplate.adoc[]
+
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountVolume.adoc[]
+
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountSecretOrConfigmap.adoc[]
+|===
+
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-oper-editDeleteVolume.adoc[]
+--
+
+* Storage Settings > Add PersistentVolumeClaim Template
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-volumeTemplate.adoc[]
+--
+
+* Storage Settings > Mount Volume > Persistent Volume
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-persistentVolume.adoc[]
+--
+
+* Storage Settings > Mount Volume > Temporary Volume
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-temporaryVolume.adoc[]
+--
+
+* Storage Settings > Mount Volume > HostPath Volume
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-hostpathVolume.adoc[]
+--
+
+* Storage Settings > Mount ConfigMap or Secret
++
+--
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-mountConfigmapSecret.adoc[]
+--
+
+* Advanced Settings
++
+--
+Specify nodes for the pods managed by the workload and set the workload's metadata.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+// include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-podIpPool.adoc[]
+
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-selectNode.adoc[]
+
+|Add Metadata
+|
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-desc-setWorkloadMetadata.adoc[]
+
+include::../../../../../_custom/clusterManagement/workloads/createWorkload/workloads-para-Metadata.adoc[]
+|===
+--
+
+* Cluster Differential Settings
++
+--
+Configure differential settings for workloads in different clusters based on containers, ports, and environment variables.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../../_custom/multi-clusterProjectManagement/workloads/workloads-oper-setClusterDiff.adoc[]
+
+|===
+--

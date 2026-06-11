@@ -1,0 +1,114 @@
+---
+title: "参数与指令"
+weight: 1
+---
+
+本章节主要罗列常用的 Bcache 指令和参数。以 ``bcache0`` 为例，若实际生产环境中存在多个 Bcache 盘，则其盘符需根据实际情况进行修改。
+
+* 关闭 cutoff
++
+[,shell]
+----
+echo 0 > /sys/block/bcache0/bcache/sequential_cutoff
+----
++
+include::../../../../../../_components/note.adoc[]
+此种方式系统重启后将会失效，所以需要在系统启动脚本 `/etc/tmpfiles.d/` 中，增加 bcache 系统启动设置。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+* 开启 cutoff，并设置阈值（默认 4m）
++
+--
+x86 版本：
+[,shell]
+----
+echo 4m > /sys/block/bcache0/bcache/sequential_cutoff
+----
+
+ARM 版本：
+[,shell]
+----
+echo 4194304 > /sys/block/bcache0/bcache/sequential_cutoff
+----
+--
++
+include::../../../../../../_components/note.adoc[]
+如果设置其他值，需要在系统启动脚本 `rc.local` 中增加设置命令。
+include::../../../../../../_components/table_footer.adoc[]
+
+* 查询缓存状态
++
+--
+[,shell]
+----
+cat /sys/block/bcache0/bcache/state
+----
+返回结果中，``state`` 对应的状态说明：
+
+** no cache：还未附加到缓存集(cache set)。
+** clean：缓存集的一部分，且 cache 没有脏数据。
+** dirty：缓存集的一部分，且 cache 有脏数据。
+** inconsistent：不一致，当 cache 中存在脏数据但缓存集不可用时，backing device 被用户强制运行；backing device 上的任何数据可能已损坏了
+--
+
+* 查询脏数据大小
++
+[,shell]
+----
+cat /sys/block/bcache0/bcache/dirty_data
+----
+
+* 把脏数据下刷到存储盘上，直至查看脏数据大小为 0
++
+[,shell]
+----
+echo 0 > /sys/block/bcache0/bcache/writeback_percent
+----
+
+* 恢复缓存脏数据（默认 10）
++
+[,shell]
+----
+echo 10 > /sys/block/bcache0/bcache/writeback_percent
+----
+
+* 重置 IO 计数器（统计数据在 `/sys/block/bcache0/bcache/stats_total/` 中）
++
+[,shell]
+----
+echo 1 > /sys/block/bcache0/bcache/clear_stats
+----
+
+* 缓存计数器（命中率等）
++
+** 某个 bcache 盘：位置在 `/sys/block/bcache*/bcache/stats_total/` 中，包含缓存命中，缓存不命中预读等计数，其中 `stats_day/`、`tats_five_minute/`、`stats_hour/` 也包含不同的统计频率。
+
+** 某个 cache 盘：位置在 `/sys/fs/bcache/UUID/stats_total/` 中，包含缓存命中，缓存不命中预读等计数，其中 `stats_day/`、`tats_five_minute/`、`stats_hour/` 也包含不同的统计频率。
+
+* 查看使用的内存大小（btree 数据）
++
+[,shell]
+----
+cat /sys/fs/bcache/<UUID>/btree_cache_size
+----
++
+include::../../../../../../_components/note.adoc[]
+`<UUID>` 是 cache 盘的 cset.uuid。
+include::../../../../../../_components/table_footer.adoc[]
+
+* 查看缓存 bucket 可用数量百分比
++
+[,shell]
+----
+cat /sys/fs/bcache/<UUID>/cache_available_percent
+----
++
+include::../../../../../../_components/note.adoc[]
+* 若返回结果低于 30，则说明缓存已经写穿，writeback模式无法被启用，只能暂停业务等待脏数据下刷释放空间。
+* `<UUID>` 是 cache 盘的 cset.uuid。
+include::../../../../../../_components/table_footer.adoc[]
+
+
+
+

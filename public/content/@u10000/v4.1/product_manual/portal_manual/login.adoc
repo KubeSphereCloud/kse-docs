@@ -1,0 +1,49 @@
+---
+title: 系统登录
+description: 
+weight: 1
+---
+
+
+在使用 Portal 之前，用户需在浏览器中输入正确的 Portal 地址，并使用正确的用户名与密码登录 Portal。
+
+打开浏览器，用户根据部署人员提供的链接登录 Portal 页面。若部署人员没有提供链接，用户可参考如下步骤，获取登录链接。
+
+. 登录当前环境的 FirstBox。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip address>
+----
+
+. 查看配置文件内容。
++
+[source,shell]
+----
+cat /qingstor/etc/base.ini
+----
++
+输出内容如下：
++
+[source,shell]
+----
+[base]
+zone_id = zonea
+global_domain: stor.qingstor.me
+----
+
+. 获得 Portal 登录链接、用户名及密码。
++
+* 格式如下：
++
+> Portal链接：portal.<zone_id>.<global_domain> +
+> 默认用户名：qingstor@qingstor.me +
+> 默认密码：zhu88jie
+
++
+* 本例中，Portal 链接如下：
++
+> Portal链接：portal.zonea.stor.qingstor.me +
+> 默认用户名：qingstor@qingstor.me +
+> 默认密码：zhu88jie
+

@@ -1,0 +1,31 @@
+---
+title: FIO 常用参数
+description: 
+weight: 1
+---
+
+FIO 常用参数说明如下。
+
+[cols="1,5", options="header"]
+|===
+| 参数 | 说明 
+
+|randrepeat	|随机序列是否可重复，`1` 表示随机序列可重复，`0` 表示随机序列不可重复。
+|ioengine	|IO 引擎。
+|direct	|是否使用 directIO。`direct=1` 表示测试过程绕过系统自带的 buffer，使测试磁盘的结果更真实。
+|name	|任务名称。
+|iodepth	|请求 I/O 的队列深度。
+|numjobs	|一个任务的线程数。
+|size	|每个线程读写的数据量。
+|bs	|单次 I/O 的块文件大小。
+|group_reporting	|关于显示结果，汇总每个进程的信息。
+|readwrite	|读写模式。取值包括顺序读 `read`、顺序写 `write`、随机读 `randread`、随机写 `randwrite`、混合随机读写 `randrw`和混合顺序读写 `rw，readwrite`。
+|time_based	|指定采用时间模式。无需设置该参数值。
+|runtime	|指定测试时长。
+|sync	|是否使用 `sync` 来进行 buffered 写。
+|fdatasync	|是否使用 `fdatasync` 来同步数据。
+|filename	|测试对象，即待测试的磁盘设备名称。
+
+|===
+
+

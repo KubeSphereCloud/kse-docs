@@ -1,0 +1,28 @@
+---
+title: "卸载"
+weight: 10
+---
+
+1. 执行以下命令，卸载服务并删除资源。
++
+[source]
+----
+sic-deploy -s undeploy-{server_code} --script_opts="--to_delete_res;--zone_id={zone_id}"
+----
++
+回显信息如下，表示卸载成功。
++
+image::/images/ep_offline/scs_install/appendix_uninstall.png[]
+
+2. 执行以下命令，先备份工作目录。
++
+[source]
+----
+cp -rpf  /pitrix/conf/sic_deployment/{zone_id}/{server_code}  /pitrix/conf/sic_deployment/{zone_id}/{server_code}.$(date +%Y%m%d)
+----
+3. 执行以下命令，删除工作目录。
++
+[source]
+----
+rm -rf /pitrix/conf/sic_deployment/{zone_id}
+----

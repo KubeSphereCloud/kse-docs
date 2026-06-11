@@ -1,0 +1,77 @@
+---
+title: "View Physical Resource Status"
+keywords: "Kubernetes, {ks_product}, Monitoring and Alerting, Cluster Status, Physical Resource Status"
+description: "Describes how to view physical resource status."
+weight: 02
+---
+
+:ks_permission: **Monitoring View**
+:ks_navigation: **Monitoring and Alerting > Cluster Monitoring**
+
+This section describes how to view physical resource status.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **WizTelemetry Monitoring** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Cluster Monitoring** page, click **Physical Resource Monitoring** to view the usage of cluster physical resources.
++
+====
+* The **Physical Resource Monitoring** tab provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|CPU Usage
+|Displays the cluster CPU usage percentage within the specified time range.
+
+|CPU Average Load
+|Displays the cluster CPU average load within the specified time range. CPU average load is a dimensionless value representing the average number of active processes per unit time.
+
+|Memory Usage
+|Displays the cluster memory usage percentage within the specified time range.
+
+|Disk Usage
+|Displays the cluster disk usage within the specified time range.
+
+|Inode Usage
+|Displays the cluster Inode usage percentage within the specified time range.
+
+|Disk Throughput
+|Displays the cluster disk read/write rate within the specified time range.
+
+|IOPS
+|Displays the cluster disk read/write operations per second within the specified time range.
+
+|Network Traffic
+|Displays the cluster network inbound/outbound rate within the specified time range.
+
+|Pod Status
+|Displays the number of running, completed, and abnormal pods in the cluster within the specified time range.
+|===
+--
+
+include::../../../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshData.adoc[]
+====

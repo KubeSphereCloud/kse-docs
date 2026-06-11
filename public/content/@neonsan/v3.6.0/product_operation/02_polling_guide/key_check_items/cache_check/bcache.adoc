@@ -1,0 +1,56 @@
+---
+title: "bcache 缓存方案"
+weight: 2
+---
+
+== 适用范围
+
+NeonSAN 集群为**混插环境**，且使用 bcache 缓存方案，节点服务器要求：
+
+* 鲲鹏或飞腾 ARM 架构的 CPU，且操作系统为 Ubuntu。
+* 海光、鲲鹏或飞腾 x86 架构的 CPU，其操作系统为 Kylin。
+
+== 操作步骤
+
+. 逐个登录 NeonSAN 集群各存储（Store）节点。
+. 查看当前 Store 节点的缓存盘。一块设备下挂多个 bcache 设备，则此设备即为缓存盘，例如 bcache0 上对应的设备即为缓存盘。
++
+[,shell]
+----
+lsblk
+----
++
+image::/images/neonsan/polling_guide_7.png[]
++
+再次执行如下命令确认，输出的 ``sb.version`` 字段是 ``cache``。
++
+[,shell]
+----
+bcache-super-show /dev/nvme1n1
+----
++
+image::/images/neonsan/polling_guide_8.png[]
+
+. 检查并清理缓存盘脏数据。
+.. 查看缓存盘内的脏数据情况。
++
+[,shell]
+----
+cat /sys/block/bcache<N>/bcache/dirty_data
+----
++
+image::/images/neonsan/polling_guide_9.png[]
+
+.. 若返回结果中，脏数据量占用 /bcache 设备总容量比例超过 85%，可执行如下命令将脏数据下刷至数据盘。
++
+[,shell]
+----
+echo 30 > /sys/block/bcache<N>/bcache/writeback_percent
+----
++
+include::../../../../../../_components/note.adoc[]
+其中，指定的值允许设置范围为 20~40。
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 若下刷数据 30min 后，脏数据比例仍然超过 85%，可迁移当前节点数据。节点数据迁移可参考《NeonSAN 运维手册》。
+

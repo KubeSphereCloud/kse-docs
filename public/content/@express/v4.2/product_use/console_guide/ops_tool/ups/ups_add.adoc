@@ -1,0 +1,49 @@
+---
+title: "添加 UPS 电源"
+description: 本小节主要介绍如何提添加 UPS 电源。
+draft: false
+weight: 1
+---
+== 功能描述
+
+当市电线路故障时，支持给集群持续性供电，并且当 UPS 电量降低到一定阙值时，支持虚拟机关机和集群关机。
+
+== 前提条件
+
+* 已获得{product_console_name}的登录账户和密码。
+* UPS 电源必须配置 SNMP 卡。
+
+== 操作步骤
+
+. 登录{product_console_name}。
+. 在顶部导航栏，选择**运维工具** > *UPS 电源*，进入 **UPS 电源**列表页面。
++
+image::/images/express/console/ups_add_1.png[add_ups_1]
+
+. 点击**添加**，在弹出的添加窗口中，输入 UPS 电源名称，设置各项目参数后，点击**添加**即可。
++
+image::/images/express/console/ups_add_2.png[,50%]
++
+*参数说明*
++
+[options="header",cols="1,2"]
+|===
+|参数	|详细说明
+
+|名称	
+|用户自定义，便于搜索与浏览。
+
+|IP	
+|UPS 电源配置的 SNMP 卡 IP 地址。
+
+|UPS 版本	
+|支持选择 1、2c 或 2。
+
+|OID	
+|UPS 电源所配置的 SNMP 卡的对象标识符。
+|===
+
+
+. 返回 UPS 电源列表，新添加的 UPS 电源已显示在列。当前列表主要显示 UPS 名称、UPS 网络连通状态（正常、待机）、剩余电量、UPS IP、OID 库、关机策略信息。
++
+image::/images/express/console/ups_add_3.png[add_ups_3]

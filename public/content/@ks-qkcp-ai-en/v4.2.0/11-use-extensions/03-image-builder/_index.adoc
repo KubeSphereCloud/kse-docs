@@ -1,0 +1,51 @@
+---
+title: "Image Builder"
+keywords: "Kubernetes, {ks_product}, Image Builder, s2i, b2i"
+description: "How to build container images from source code or binary executables."
+weight: 03
+layout: "second"
+---
+
+
+
+This section describes how to manage the Image Builder.
+
+After installing the "Image Builder" extension, the **Image Builder** menu will appear in the left navigation pane of the workspace.
+
+You can use the Image Builder to build container images from source code or binary executables (S2I & B2I), push the images to a specified image service, and finally deploy them to Kubernetes.
+
+[.admon.attention,cols="a"]
+|===
+|Note
+
+|Only the docker runtime is supported for building images, meaning docker must be installed on the node.
+
+|===
+
+== Configuration
+
+Before link:01-create-an-image-builder/02-create-an-image-builder-using-an-artifact/[Creating an Image Builder Using an Artifact], you must configure a read-write S3 Bucket in the Image Builder extension configuration to store binary files.
+
+Example (replace with actual information):
+
+[source,yaml]
+----
+backend:
+  kubesphereConfig:
+    s3:
+      endpoint: "<endpoint>"
+      region: "<region>"
+      disableSSL: false
+      forcePathStyle: true
+      accessKeyID: "<access-key>"
+      secretAccessKey: "<secret-key>"
+      bucket: "<bucket>"
+      sessionToken: ""
+----
+
+After the configuration is complete and the extension is updated, you need to restart `s2iapiserver` for the changes to take effect.
+
+[source,yaml]
+----
+kubectl -n extension-s2ibuilder rollout restart deploy s2iapiserver
+----

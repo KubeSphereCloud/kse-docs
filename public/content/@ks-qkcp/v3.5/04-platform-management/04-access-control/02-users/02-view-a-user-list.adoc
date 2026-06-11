@@ -1,0 +1,75 @@
+---
+title: "查看用户列表"
+keywords: "Kubernetes, {ks_product}, 访问控制, 用户, 查看用户列表"
+description: "介绍如何查看用户列表。"
+weight: 02
+---
+
+// :ks_include_id: 4ca448653d6a4570921cf387178134b3
+:ks_xref_id: fc6b7e4eb47144a7b4254d5142d80c50
+:ks_comp: ../../../../components/
+:ks_title: 查看用户列表
+:ks_keywords: Kubernetes, {ks_product}, 访问控制, 用户, 查看用户列表
+:ks_description: 介绍如何查看用户列表。
+:ks_weight: 02
+:ks_icon:
+:ks_menu: **平台管理 > 访问控制**
+:ks_navigation: **用户**
+:ks_permission: **用户查看**
+
+
+本节介绍如何查看用户列表。
+
+
+== 前提条件link:[id=2e53304a89014f59b19165f461499323]
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 操作步骤link:[id=58bece9f05744407b017bcce65f24b02]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+====
+* 用户列表提供以下信息：
++
+--
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|用户名
+|用户的名称。
+
+|状态
+|用户当前的状态。
+
+include::../../../../_custom/clusterManagement/clusterMembers/clusterMembers-para-userStatus.adoc[]
+
+|平台角色
+|用户在{ks_product_both}平台的角色。
+
+include::../../../../_custom/platformManagement/accessControl/users/users-para-lastLogin.adoc[]
+|===
+--
+
+* 在列表上方点击搜索框并输入关键字，可搜索用户名包含特定关键字的用户。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+====

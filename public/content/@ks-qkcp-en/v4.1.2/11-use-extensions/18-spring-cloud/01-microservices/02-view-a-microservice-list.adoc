@@ -1,0 +1,55 @@
+---
+title: "View Microservice List"
+keywords: "Kubernetes, {ks_product-en}, project management, Spring Cloud, view microservice list"
+description: "Learn how to view the microservice list."
+weight: 02
+---
+
+:ks_permission: **Spring Cloud Microservices Viewing**
+:ks_navigation: **Spring Cloud > Microservices**
+
+This section describes how to view the microservice list.
+
+== Prerequisites
+
+* **KubeSphere Spring Cloud** should have been installed and enabled.
+
+* {empty}
+include::../../../../_custom-en/projectManagement/projectManagement-prer-requiredPermission_new.adoc[]
+
+== Steps
+
+include::../../../../_custom-en/projectManagement/projectManagement-oper-openProjectPage.adoc[]
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
++
+====
+* The service registry displays the address of the service registry, the number of microservices, the number of microservice instances, and the number of healthy instances.
+
+* The microservice list displays the number of instances, the number of healthy instances for each microservice, and whether the current microservice has triggered the health protection mechanism.
++
+--
+// Note
+include::../../../../../_ks_components-en/admonitions/note.adoc[]
+
+* To prevent excessive instances from being unhealthy, leading to all traffic being directed to healthy instances and causing traffic pressure that overwhelms the healthy instances, resulting in a cascading effect, Nacos supports setting a health protection threshold. When the proportion of healthy instances to the total number of instances of a microservice is less than this value, regardless of the health status of the instances, that instance will be returned to the client.
+
+* The default health protection threshold for KubeSphere is 0, meaning the health protection mechanism is not used by default. You can refer to the link:https://nacos.io[Nacos Documentation] to set the health protection threshold for Nacos.
+
+include::../../../../../_ks_components-en/admonitions/admonEnd.adoc[]
+--
+
+* Click the search box at the top of the list to search for microservices by name.
+
+include::../../../../../_ks_components-en/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components-en/oper-customizeColumns.adoc[]
+====
+
+. Click image:/images/ks-qkcp/zh/icons/plus-square.svg[plus-square,18,18] on the right side of the microservice to view all instances of the microservice.
++
+--
+include::../../../../_custom-en/projectManagement/microservices/microservices-para-instances.adoc[]
+--

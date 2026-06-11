@@ -1,0 +1,193 @@
+---
+title: "通用术语"
+weight: 10
+draft: true
+---
+
+
+== A
+
+* *AI*
++
+Artificial Intelligence，人工智能，是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+
+* *ARP*
++
+Address Resolution Protocol，地址解析协议，是根据 IP 地址获取物理地址的一个 TCP/IP 协议。
+
+* *ARM*
+* *API*
+* *ACL*
+
+== I
+
+* *IoT*
++
+Internet of Things，物联网，是互联网、传统电信网等信息承载体，让所有能行使独立功能的普通物体实现互联互通的网络。
+
+== D
+
+* *DRBD*
++
+DIstributed Replicated Block Device，分布式块设备复制，是基于软件的、网络的块复制存储解决方案。用于服务器之间的磁盘、分区、逻辑卷等进行数据镜像。
+
+* *DNS*
+
+Domain Name System，域名
+
+== G
++
+* *GPU*
++
+Graphics Processing Unit，图形处理器，又称显示核心、视觉处理器、显示芯片，是一种在个人电脑、工作站、游戏机和一些移动设备（如平板电脑、智能手机等）上做图像和图形相关运算工作的微处理器。
+
++
+GPU 通常包括图形显存控制器、压缩单元、BIOS、图形和计算阵列、总线接口、电源管理单元、视频管理单元、显示界面。
+
+== I
+
+[#iaas]
+* *IaaS*
++
+Infrastructure as a Service，基础设施即服务，是指把 IT 基础设施作为一种服务通过网络对外提供，并根据用户对资源的实际使用量或占用量进行计费的一种服务模式。IaaS 是云服务的最底层，主要提供一些基础资源。
+
+* *ioctl*
++
+ioctl 是一个专用于设备输入输出操作的系统调用，该调用传入一个跟设备有关的请求码，系统调用的功能完全取决于请求码。
+
+== K
+
+* *KVM*
++
+Kernel-Based Virtual Machine，是 Linux 下 x86 硬件平台上的全功能虚拟化解决方案，包含一个可加载的内核模块 kvm.ko 提供和虚拟化核心架构和处理器规范模块。使用 KVM ，可允许运行多个虚拟机，包括 Linux 和 Windows 操作系统。每个虚拟机有私有的硬件，包括网卡、磁盘以及图形适配卡等。
+
+== N
+
+* *NAS*
++
+Network Attached Storage，网络附属存储，一种特殊的专用数据存储服务器，包括存储器件和内嵌系统软件，可提供跨平台文件共享功能。
+
+* *NFV*
++
+Network Functions Virtualization，网络功能虚拟化，一种对于网络架构的概念，利用虚拟化技术，将网络节点阶层的功能，分割成几个功能区块，分别以软件方式实现，不再局限于硬件架构。
+
+== T
+
+* *TFLOPS* 
++
+teraFLOPS，每秒万亿浮点运算次数。
+
+== L
+
+* *LVM*
++
+Logical Volume Manager，逻辑卷管理，是 Linux 环境下对磁盘分区进行管理的一种机制。LVM 是建立在硬盘和分区之上的一个逻辑层，可用来提高磁盘分区管理的灵活性。
+
+== NAT
+
+Network Address Transmition，网络地址转换，一种地址转换技术，它可以将 IP 数据报文头中的 IP 地址转换为另一个 IP 地址，并通过转换端口号达到地址重用的目的。
+
+== P
+
+* *PaaS*
+Platform as a Service，平台即服务，把服务器平台或开发环境作为一种服务进行提供，介于 <<iaas,IaaS>> 与 <<saas,SaaS>>之间，使用户只需要关注自己的业务逻辑，不需要关注底层。
+
+== Q
+
+* *QCOW2*
++
+Qemu Copy on Write，2 为版本号，是 QEMU 虚拟机的一种镜像格式。
+
+* *QEMU*
++
+Quick Emulator，是一款由法布里斯·贝拉等人编写的通用且免费的可执行硬件虚拟化的开源仿真器。
+
+
+== R
+
+RAW 
+== S
+
+[#saas]
+* *SaaS*
++
+Software as a Service，软件即服务，是一种软件交付模式。在这种交付模式中，软件仅需通过网络，不须经过传统的安裝步骤即可使用，软件及其相关的数据集中托管于云端服务。
+
+* *SAN*
++
+Storage Area Network，存储区域网络，采用网状通道（Fibre Channel，简称 FC）技术，可通过FC 交换机连接存储阵列和服务器，以建立专用于数据存储的区域网络。SAN 存储是一种专用于企业级应用的存储方式，可以简单地理解为在计算机和存储系统之间提供数据传输的高级网络。
+
+* *SDN*
++
+Soft Define Network，软件定义网络，是一种新型网络架构，是网络虚拟化的一种实现方式。其核心原则是通过将网络设备的控制面与数据面分离开来，以实现网络流量的灵活控制，使网络具有更大的自动化和可编程性。
+
+
+* *SDS*
++
+Soft Define Storage，软件定义存储，是一种将存储软件与硬件分隔开的存储架构。其核心是存储虚拟化技术。
+
+////
+[cols="1,4"]
+|===
+| 名词 | 说明 
+
+| Hyper
+| 计算节点
+
+| KS
+| 核心服务，云平台的服务进程。一般指管理节点。 +
+KS 又分 Global KS 和 Zone KS。
+
+| WS
+| Web Service，global 的消息入口。
+
+| fg
+| frontgate，zone 的消息入口，zone 和 global 消息交互的唯一通道， 主要功能为用户界面和 API 服务的提供接口。
+
+|zk
+|名字服务，所有云平台的服务都会向 zk 注册自己的信息。
+
+|VG
+|Virtual Gateway，虚拟网关，完成云平台内网与外网（企业网络）的连接，并部署网络控制器。
+
+
+|VBR
+|分布式虚拟路由器
+
+| Seed
+|
+
+|SG
+| 安全组
+
+| Boss
+| 
+
+|===
+////
+////
+[cols="1,4"]
+|===
+| 名词 | 说明 
+
+|QCOW2
+|Qemu Copy on Write，QEMU 的一种镜像格式。
+
+|SDS
+| Soft Define Storage，软件定义存储，将存储软件与硬件分隔开的存储架构。
+
+青云的 SDS 经历了 SDS1.0（Pair模式）、SDS2.0（Repl模式）、Nasc模式、Sanc模式，到现在的 Tpsc模式。
+
+|DRBD
+| DIstributed Replicated Block Device，分布式块设备复制。基于软件的、网络的块复制存储解决方案。用于服务器之间的磁盘、分区、逻辑卷等进行数据镜像。
+
+|SDN
+| Soft Define Network，软件定义网络。
+
+|GPU
+| Graphics Processing Unit，图形处理器，又称显示核心、视觉处理器、显示芯片，是一种在个人电脑、工作站、游戏机和一些移动设备（如平板电脑、智能手机等）上做图像和图形相关运算工作的微处理器。
+
+GPU 通常包括图形显存控制器、压缩单元、BIOS、图形和计算阵列、总线接口、电源管理单元、视频管理单元、显示界面。
+
+|===
+////

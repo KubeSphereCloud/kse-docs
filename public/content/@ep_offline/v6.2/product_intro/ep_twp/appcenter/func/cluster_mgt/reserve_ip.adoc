@@ -1,0 +1,39 @@
+---
+title: "交换预留 IP"
+weight: 18
+---
+
+交换预留 IP 功能的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_10.png[]
+
+include::../../../../../../../_components/note.adoc[]
+* local 集群：当前操作集群。
+* remote 集群：和当前集群交换 IP 的集群。
+
+include::../../../../../../../_components/table_footer.adoc[]
+
+功能流程说明：
+
+. 将 exchange-reserved-ips-audit 注册到 remote 集群的 metadata service 内。
+. 将 exchange-reserved-ips-audit 注册到 local 集群的 metadata service 内。
+. remote 集群不同角色节点按 order 升序执行 exchange-reserved-ips pre_check 脚本：
++
+* 如果执行报错（返回非 0），执行步骤 4。
+* 如果执行正常（返回 0），执行步骤 5。
+
+. 删除 remote 和 local 注册到 metadata service 的 exchange-reserved-ips-audit 数据，退出流程，操作结束。
+. local 集群不同角色节点按 order 升序执行 exchange-reserved-ips pre_check 脚本：
++
+* 如果执行报错（返回非 0），执行步骤 6。
+* 如果执行正常（返回 0），执行步骤 7。
+. 删除 local 和 remote 注册到 metadata service 的 exchange-reserved-ips-audit 数据，退出流程，操作结束。
+. local 集群不同角色节点按 order 升序执行 stop cmd 脚本。
+. remote 集群不同角色节点按 order 升序执行 stop cmd 脚本。
+. 交换两个集群的预留 IP，更新数据库相关记录。
+. 将交换后的预留 IP 注册到 local 集群 metadata service 的 /endpoints 中。
+. local 集群不同角色节点按 order 升序执行 start cmd。
+. 将交换后的预留 IP 注册到 remote 集群 metadata service 的 /endpoints 中。
+. remote 集群不同角色节点按 order 升序执行 start cmd。
+. 删除 local 和 remote 注册到 metadata service 的 exchange-reserved-ips-audit 数据，流程完成。
+

@@ -1,0 +1,18 @@
+---
+title: "查询未注册的 PaaS 应用"
+weight: 5
+---
+
+在申请 License 前，请先查询未注册的 PaaS 应用，然后再根据查询结果申请相应的 PaaS License。
+
+. 登录 FirstBox 。
+. 执行以下命令，查询未注册的 PaaS 应用。
++
+[source]
+----
+/pitrix/bin/check_or_install_license.sh -c
+----
++
+在**缺失 PaaS 许可证的应用**中查看未注册授权的应用。
++
+image::/images/ep_offline/license/paas_inquire_01.png[,80%]

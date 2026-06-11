@@ -1,0 +1,172 @@
+---
+title: BOSS 邮件告警
+weight: 6
+---
+
+
+BOSS 系统配置邮件告警后，找回密码、二次认证、密码过期通知、告警通知和生成日报表等功能才能正常使用。
+
+== 前提条件
+
+* 需提前获取 SMTP 邮件服务器的 IP 地址、用户名和密码。
+* {product_name}中，以下节点 IP 需开通到邮件服务器和 DNS 的网络策略。
+** dnsmaster0/1
+** boss0/1
+** proxy0/1
+
+== 配置步骤
+
+
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+. 执行以下命令，修改配置文件 `boss2.yaml.<zone_id>`。
++
+[source,shell]
+----
+# vim /pitrix/conf/variables/boss2/boss2.yaml.<zone_id> 
+----
++
+**配置示例**
++
+[source,yaml]
+----
+email:
+  host: '10.1.188.82'
+  user: 'lixiang@cebbank.com' 
+  password: 'L0fXAIRGac33+N4HoeSL5w==' 
+  port: 25
+  use_localtime: false 
+  encrypt: '' 
+  ssl_keyfile: null 
+  ssl_certfile: null
+  timeout: null
+  subject_prefix: '[BOSS2-cebdaas2a]' 
+  from_user: 'BOSS2-cebdaas2a' 
+  from_addr: 'lixiang@cebbank.com'
+----
++
+**参数说明**
++
+[cols='1,3'] 
+|===
+| 参数 | 说明 
+
+| host | SMTP 邮件服务器地址。
+| user | 邮件服务器用户名。
+| password | 邮件服务器密码。
+| port | SMTP 邮件服务器端口，默认为 25。无需修改。
+| use_localtime | false。
+| encrypt | 选择加密方法，支持 `SSL`、`TLS`。为空，则表示不加密。
+| ssl_keyfile | 配置加密方法的 Key 文件。若 `encrypt` 填写 `SSL`，需要配置该参数。 
+| ssl_certfile | 配置加密方法的 Cert 证书文件。若 `encrypt` 填写 `SSL`，需要配置该参数。 
+| timeout | 邮件超时时长。`null` 表示不超时。
+| subject_prefix | 邮件标题前缀，可设置为 `[BOSS2]`。
+| from_user | 邮件的发件人名字，不是邮箱地址。
+| from_addr | 邮件的发件地址，可保持和邮件的账号一致以免被退信。
+|===
++
+
+
+
+. 执行以下命令，下发 Boss 的配置。
++
+[source,shell]
+----
+# /pitrix/build/build_pkgs.py -p pitrix-ks-boss2-conf
+# /pitrix/upgrade/update.sh boss pitrix-ks-boss2-conf
+# /pitrix/upgrade/exec_nodes.sh boss 'supervisorctl restart boss2_manager'
+----
+
+
+== 测试
+
+* 方式一：发送测试邮件
++
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+. 执行如下命令，发送一封测试邮件，检验配置是否正常。
++
+[source,shell]
+----
+# Boos2 send_email <收件邮箱>
+----
++
+. 至收件邮箱接收测试邮件。若收件邮箱成功收到告警邮件，则配置成功。
+
+* 方式二：API 接口邮件测试方法
++
+. 执行如下命令行，登录 FirstBox。其中 `<firstbox ip address>` 是安装 FirstBox 时配置的管理 IP，需根据实际情况进行修改。
++
+[source,shell]
+----
+# ssh root@<firstbox ip address>
+----
+
+. 执行如下操作。
++
+[source,shell]
+----
+curl -X POST http://<proxy vip>:<port>/alert_receiver/nf/ -H 'Content-Type: application/json' -H 'cache-control: no-cache' -d '{
+"action": "PushAlert",
+"data": {
+  "alertList": [
+    {
+      "alertDesc": "[<zone id>] [<zone id>] has alerts |@@|=== test.log.wf ===|@@|this is a test alert",
+      "alertTime": ""
+    }
+  ]
+}
+}'
+----
++
+**参数说明**
++
+[cols='1,3']
+|===
+| 参数 | 说明 
+
+| proxy vip | Proxy 服务器的 VIP 地址。请根据实际环境进行修改。
+| port | 端口号，固定为 `6777`。
+| zone id | 可用区 ID。可根据 `variables.<zone_id>.yaml` 配置文件名中的 `<zone_id>` 进行填写。
+| alertTime | 告警时间，根据实际情况修改。接近当前时间即可。
+|===
++
+**配置示例**
++
+[source,shell]
+----
+curl -X POST http://10.200.5.172:6777/alert_receiver/nf/ -H 'Content-Type: application/json' -H 'cache-control: no-cache' -d '{
+"action": "PushAlert",
+"data": {
+  "alertList": [
+    {
+      "alertDesc": "[cebdaas2b] [tr02n12] has alerts |@@|=== test.log.wf ===|@@|this is a test alert",
+      "alertTime": "2020-06-08 23:44:44"
+    }
+  ]
+}
+}'
+----
+. 查看返回内容。
+** 如下所示，`ret_code` 为 `0`，表示配置成功。
++
+[source,shell]
+----
+# {"task": "81889d13-2a7e-4edd-95ba-168476f7a0f4", "ret_code": 0, "action": "Boss2RecvNfAlertResponse"}
+----
+** 如下所示，`ret_code` 为非 `0`，表示配置失败。请检查 BOSS 主机上的日志文件 `/pitrix/log/*`。
++
+[source,shell]
+----
+# {"action": "Boss2RecvNfAlertResponse", "ret_code": 1100, "message": "no available alert to process"}
+----

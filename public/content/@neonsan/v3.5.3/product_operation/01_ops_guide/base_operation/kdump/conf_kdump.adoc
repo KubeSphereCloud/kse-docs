@@ -1,0 +1,48 @@
+---
+title: "安装配置 kdump"
+weight: 2
+---
+
+. 逐个登录集群内的各节点。
+. 执行如下命令，安装kernel crash dump。
++
+[,shell]
+----
+sudo apt install linux-crashdump
+----
++ 
+出现以下弹窗，选择 ``Yes`` 即可。
++
+image::/images/neonsan/ops_guide_2.png[,70%]
++
+image::/images/neonsan/ops_guide_3.png[,70%]
+
+. 执行如下命令，重新启动系统以激活crashkernel= boot参数以及开启kdump-tools配置。
++
+[,shell]
+----
+reboot
+----
+. 待系统重启完成，执行如下命令查看当前节点的kdump状态。
++
+[,shell]
+----
+kdump-config show
+----
++
+回显：
++
+[,shell]
+----
+DUMP_MODE:		kdump
+USE_KDUMP:		1
+KDUMP_COREDIR:		/var/crash
+crashkernel addr: 0x73000000
+   /var/lib/kdump/vmlinuz: symbolic link to /boot/vmlinuz-5.15.0-25-generic
+kdump initrd:
+   /var/lib/kdump/initrd.img: symbolic link to /var/lib/kdump/initrd.img-5.15.0-25-generic
+current state:    ready to kdump
+
+kexec command:
+  /sbin/kexec -p --command-line="BOOT_IMAGE=/boot/vmlinuz-5.15.0-25-generic root=UUID=63a35cf8-4d22-4a79-a93d-eb178abc8c07 ro video=800x600 console=ttyS0 net.ifnames=0 biosdevname=0 nopti l1tf=off mds=off console=tty1 console=ttyS0 reset_devices systemd.unit=kdump-tools-dump.service nr_cpus=1 irqpoll nousb" --initrd=/var/lib/kdump/initrd.img /var/lib/kdump/vmlinuz
+----

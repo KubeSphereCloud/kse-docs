@@ -1,0 +1,78 @@
+---
+title: "注入文件系统延迟"
+weight:  02
+---
+
+本节介绍如何为文件系统调用注入延迟。
+
+故障注入期间，对 `/usr/share/nginx/html/` 目录下文件的读取操作将 100% 出现 10 秒延迟，访问 Pod 提供的页面时将明显感知延迟。
+
+== 操作步骤
+. 登录 KubeSphere Web 控制台，进入目标集群，在左侧导航栏点击 *混沌工程*。
+. 点击 *创建*，选择故障类型为 *IOChaos*。
+. 配置以下参数后点击 *创建*。
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|故障类型（action）
+|选择 `latency`，为文件系统调用注入延迟。
+
+|延迟时间（delay）
+|文件系统调用的延迟值，例如 `10s`。
+
+|挂载路径（volumePath）
+|注入故障的目标目录，例如 `/usr/share/nginx/html/`。
+
+|触发概率（percent）
+|触发故障的概率，例如 `100` 表示 100%。
+
+|影响方法（methods）
+|触发故障的系统调用类型，例如 `read`。
+
+|持续时间（duration）
+|故障持续时间，例如 `10m`。
+
+|生效范围（selector）
+|选择故障注入的目标命名空间和 Pod。
+|===
+
+
+   对应 YAML 示例如下：
+
+[source,yaml]
+----
+apiVersion: chaos-mesh.org/v1alpha1
+kind: IOChaos
+metadata:
+  name: io-latency
+  namespace: default
+spec:
+  action: latency
+  duration: 10m
+  delay: 10s
+  volumePath: /usr/share/nginx/html/
+  percent: 100
+  methods:
+    - read
+  mode: all
+  selector:
+    namespaces:
+      - default
+    pods:
+      default:
+        - "{{podID}}"
+----
+
+
+验证故障效果：获取 Pod IP 后发起 HTTP 请求，观察响应时间。
+
+[source,shell]
+----
+kubectl get pod "{{podID}}" -o wide
+curl "{{podIP}}"
+----
+
+
+   正常情况下立即返回页面；故障注入期间响应将出现约 10 秒延迟。

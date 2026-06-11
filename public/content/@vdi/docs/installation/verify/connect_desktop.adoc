@@ -1,0 +1,57 @@
+---
+title: 软终端连接云桌面
+weight: 60
+---
+
+软终端（即软客户端）是指安装在 PC 或移动设备（包括便携笔记本、上网本、平板电脑等）上的软件客户端，需要单独安装 QingCloud 桌面云软终端包。用户通过软终端使用 QingCloud 桌面云平台中的云桌面资源。
+
+桌面池和云桌面创建成功后，需要配置终端，并使用终端用户登录云桌面。
+
+本文以**软终端**为例，连接云桌面。其他终端的配置和连接云桌面的方法类似。
+
+== 操作须知
+
+* 软终端接入网关端口是 ``8443``。
+* 若用户的本地 Windows 机器与 QingCloud 桌面云主机在同一个内网环境，则软终端的网关接入地址是 ``QingCloud 桌面云主机 IP:8443``。
+* 若用户的本地 Windows 机器与 QingCloud 桌面云主机不在同一个内网环境，则需要使用外网访问。此时，软终端的网关接入地址是 ``QingCloud 桌面云主机所在 VPC 网络的公网 IP: 8443 端口转发后的端口``。
+
+== 前提条件
+
+* 已在 QingCloud 桌面云平台上创建桌面池和桌面，并创建用户组及用户。
+* 准备一台 Windows 机器，并安装 QingCloud 桌面云软终端软件。
+* 已获取 QingCloud 桌面云主机 IP 地址或 QingCloud 桌面云主机所在 VPC 网络的公网 IP。
+* 已在 QingCloud 云平台上为接入网关端口link:../../deploy/port[添加端口转发规则]（用于外网访问）。
+
+== 在 Windows 机器上添加 hosts
+
+参考 QingCloud 桌面云主机link:../../deploy/hosts[添加 hosts] 的方法在 Windows 机器上添加 hosts。
+
+hosts 示例如下：
+
+----
+36.xxx.xxx.36 console.pekdemo.com supervisor.pekdemo.com appcenter.pekdemo.com boss.pekdemo.com 
+36.xxx.xxx.35 api.pekdemo.com
+----
+
+include::../../../../_components/attention.adoc[]
+请用实际 IP 地址和域名替换 hosts 示例中的 IP 和域名。
+include::../../../../_components/table_footer.adoc[]
+
+== 连接云桌面
+
+在本地 Windows 机器上添加 hosts 后，可通过软终端登录云桌面。
+
+1. 在 Windows 机器上打开软终端软件。
++
+image::/images/vdi/installation/verify_connect_desktop_01.png[,60%]
+2. 在软终端登录页面，点击右下角的**设置**图标，进入终端设置页面。
++
+image::/images/vdi/installation/verify_connect_desktop_02.png[,60%]
+3. 在左侧的菜单栏中，选择**接入网关**，点击右上角的 **+**，设置新的接入网关。
++
+image::/images/vdi/installation/verify_connect_desktop_03.png[,60%]
+4. 接入网关设置后，输入用户的用户名和密码，即可登录软终端。
+5. 用户登录成功后，将会看到用户可使用的云桌面资源。
++
+image::/images/vdi/installation/verify_connect_desktop_04.png[,60%]
+6. 点击**进入桌面**，云桌面登录完成，说明 QingCloud 桌面云平台安装成功。

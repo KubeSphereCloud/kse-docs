@@ -1,0 +1,83 @@
+---
+title: "查看 HPA 详情"
+weight: 03
+---
+
+
+:ks_permission: **容器水平伸缩查看**
+:ks_navigation: **弹性伸缩 > 容器水平伸缩**
+
+
+本节介绍如何查看 HPA 的详情信息。
+
+== 前提条件
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_clusterandproject_v42.adoc[]
+
+:relfileprefix: ./
+
+* KubeSphere 平台需要安装并启用 **Metrics Server** 扩展组件。
+
+
+== 操作步骤
+
+. 以具有pass:a,q[{ks_permission}]权限的用户登录 KubeSphere Web 控制台并进入您的集群或企业空间。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
+
+. 在 HPA 列表中点击一个 HPA 的名称打开其详情页面。
+
+. 在**属性**区域，查看 HPA 的资源属性，如当前状态、所属集群和项目。
++
+若状态异常，鼠标悬停于图标上可查看错误详情。
+
+. 在**资源状态**页签，查看 HPA 的详细状态信息和伸缩对象信息。
++
+--
+* 状态信息
++
+[.admon.note,cols="a"]
+|===
+|说明
+
+|如果显示image:/images/ks-qkcp/zh/icons/check-healthy.svg["healthy",15px,15px]则表明状态正常，如果显示image:/images/ks-qkcp/zh/icons/failure.svg["unhealthy",20px,20px]则表明出现异常，如果显示image:/images/ks-qkcp/zh/icons/question-colorful.svg["question",20px,20px]则表明因信息不足无法确定状态。
+|===
++
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|可伸缩
+|是否允许新的弹性伸缩操作。
+
+HPA 每次做出扩容或缩容动作后，会进入一段冷却期。在冷却期内，HPA 不会立刻再次调整副本数。
+
+|指标有效
+|是否成功获取有效指标并能计算出期望副本数。
+
+|副本不受限
+|期望副本数是否受限于最小副本数或最大副本数。
+
+若状态正常，表明期望副本数在允许的范围内，无需调整。若状态异常，表明期望副本数超出允许的范围，无法继续扩缩。
+|===
+
+
+* 伸缩对象
++
+查看 HPA 所管理的工作负载的当前副本数、期望副本数、允许的副本数范围、目标 CPU 和内存用量，以及当前实际用量。
+--
+
+. 点击**事件**页签，查看 HPA 相关的事件。
++
+--
+include::../../../../_custom/clusterManagement/clusterManagement-para-eventsTab.adoc[]
+--

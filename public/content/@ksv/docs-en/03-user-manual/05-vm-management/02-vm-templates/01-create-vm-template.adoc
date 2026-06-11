@@ -1,0 +1,98 @@
+---
+title: "Create a VM template"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, VMs, templates, creation"
+description: "Describes how to create a VM template in the {ks_product} web console."
+weight: 01
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: fd1acbe7ec45447499ef47b44ebc2146
+:ks_xref_id: 0e2bc7adfb7744fe9fa520ec39d53a8f
+:ks_comp: ../../../../components/
+:ks_title: Create a VM template
+:ks_description: Describes how to create a VM template in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, VMs, templates, creation
+:ks_weight: 01
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to create a VM template in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=83f379831e1a4357a9c87b46b176a3c6]
+
+include::../../../../_custom-en/vms/vm-template-manage-prerequisites.adoc[]
+
+{ks_product} allows you to create a new template or replicate an existing template. You can use one of the following methods to create a template as needed:
+
+* link:#788ee17e33f340c7807cba6d2c5bb52c[Create a new template]
+* link:#175febe1b7fa4cc7a9604649fa92ad67[Replicate an existing template]
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Create a new templatelink:[id=788ee17e33f340c7807cba6d2c5bb52c]
+
+include::../../../../_custom-en/vms/vm-template-steps.adoc[]
+
+. On the **VM Templates** page, click **Create** and select **Create Template** from the drop-down list.
+include::../../../../_custom-en/vms/vm-template-create-basic-parameters.adoc[]
+. On the **Configuration** tab, configure parameters for the VM template.  The following table describes the parameters.
++
+--
+[cols='1a,4a']
+|===
+|Parameter |Description
+
+|Image
+|The VM image defined in the template.
+
+|CPU
+|The number of CPU cores defined in the template.
+
+|Memory
+|The memory size defined in the template.
+
+|System Disk
+|The system disk size defined in the template.
+
+|Data Disk
+|The data disk size defined in the template.  You can click **Add** to add more data disks and set the disk size.
+
+|Login Method
+|The login method for the VM.  {ks_product} allows you to use a username and its passord or an SSH key for login.
+
+|Network
+|The network used by the VM and the method for IP address allocation.
+
+|Shared
+|Specifies whether the template can be shared with other users.  If this feature is enabled, users in other projects can replicate the template.
+|===
+--
+. Click **OK**.  The template appears in the VM template list after it is created.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Replicate an existing templatelink:[id=175febe1b7fa4cc7a9604649fa92ad67]
+
+include::../../../../_custom-en/vms/vm-template-steps.adoc[]
+
+. On the **VM Templates** page, click **Create** and select **Replicate Template** from the drop-down list.
+include::../../../../_custom-en/vms/vm-template-create-basic-parameters.adoc[]
+. In the **Select Template** section, select the VM template that you want to replicate, and click **OK**. The template appears in the VM template list after it is created.
++
+--
+// Note
+
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+Before you replicate a template, make sure the sharing feature is enabled for the template that you want to replicate. You can only replicate shared templates.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

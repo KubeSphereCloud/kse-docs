@@ -1,0 +1,152 @@
+---
+title: 获取监控数据（DescribeNicsWithMonitor）
+weight: 5
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| instances
+| String
+| false
+| 云主机Id
+
+| limit
+| Integer
+| false
+| 每页数量
+
+| meters
+| Array
+| false
+| 指标
+
+| nics
+| Array
+| false
+| 网卡Id
+
+| offset
+| Integer
+| false
+| 页数
+
+| owner
+| String
+| false
+| 用户Id
+
+| reverse
+| Integer
+| false
+| 反转
+
+| sort_key
+| String
+| false
+| 排序字段
+
+| vxnets
+| String
+| false
+| 私有网络
+
+| zone
+| String
+| false
+| 区域
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| action
+| String
+| false
+| 方法
+
+| meter_set
+| Object
+| false
+| 监控详情
+
+| meter_set.data_set
+| Object
+| false
+| 监控数据
+
+| meter_set.meter_id
+| String
+| false
+| 指标Id
+
+| resource_id
+| String
+| false
+| 资源Id
+
+| ret_code
+| Integer
+| false
+| 返回码
+
+| trace_id
+| String
+| false
+| 追踪Id
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DescribeNicsWithMonitor",
+  "instances": "i-av5lr3nr",
+  "limit": 100,
+  "meters": [
+    "healthy"
+  ],
+  "nics": [
+    "52:54:d5:a5:9b:51"
+  ],
+  "offset": 0,
+  "owner": "usr-rrPKHDpJ",
+  "reverse": 1,
+  "sort_key": "create_time",
+  "vxnets": "vxnet-cjsaohj"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DescribeNicsWithMonitorResponse",
+  "meter_set": [
+    {
+      "data_set": [],
+      "meter_id": "healthy"
+    }
+  ],
+  "ret_code": 0,
+  "trace_id": "0py4178J"
+}
+----

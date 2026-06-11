@@ -1,0 +1,40 @@
+---
+title: "产品动态"
+collapsible: false
+
+product:
+
+    - time: 2023-06-25
+      title: SD-WAN 接入点支持 IPsec 隧道服务
+      content: 通过配置 IPsec 隧道，可以在青云平台比较方便得使用 vCPE 实现入云需求、快速连通传统设备，还可通过其他云平台的 VPN 网关实现入云。IPsec 隧道以加密方式进行数据传输，支持身份验证，能够有效保证数据的私密性、合法性及完整性，适用于对安全性要求较高的业务场景。
+      url: ../../usermanual/30_access_point/50_mgmt_net/49_cfg_ipsec/
+      tags:
+      - 新功能 
+    - time: 2023-05-25
+      title: SD-WAN 接入点支持配置 NAT 过滤
+      content: 当环境中以旁挂模式部署了 SD-WAN 设备，设备 WAN 口既用于设备上线，又用于传输其他站点或云端过来的数据包时，会在 WAN 口做 NAT。通过配置 NAT 过滤，可以将指定的源到目的数据包不做 NAT，以方便溯源。
+      url: ../../usermanual/30_access_point/50_mgmt_net/21_nat_ignore/
+      tags:
+      - 新功能 
+    - time: 2023-05-12
+      title: SD-WAN 接入点支持 GRE 隧道服务
+      content: 通过配置 GRE 隧道，可以在青云平台比较方便得使用 vCPE 实现入云需求、快速连通传统设备，还可通过其他云平台的 VPN 网关实现入云。GRE 隧道配置简单，易部署，适用于需要低延迟和高吞吐量的场景。
+      url: ../../usermanual/30_access_point/50_mgmt_net/50_cfg_gre/
+      tags:
+      - 新功能 
+
+    - time: 2022-06-07
+      title: SD-WAN 实例和接入带宽新增包年包月计费模式
+      content: SD-WAN 实例和接入带宽新增包年包月计费模式，包年包月属于预付费模式，按月或按年收费，且享有大幅的优惠折扣，适合中长期稳定IT需求。支持修改计费模式和撤销修改、持退订服务。按需计费模式支持随时升降带宽。支持手动续费和自动续费。
+      url: ../../new_billing/10_new_billing
+      tags:
+      - 新功能 
+
+    - time: 2022-04-07
+      title: 首次发布上线，以全软件化形式提供应用即组网
+      content: SD-WAN（新版）是基于 SDN 技术对广域网环境进行优化而打造的智能化网络运营平台，为用户提供分支互联和企业上云等服务。企业总部、分支机构零配置部署光盒 CPE 以及云计算虚拟化部署 VCPE（Virtual CPE），就近接入可快速扩容的 POP，快速构建企业总部分支互联和企业上云的专属网络。
+      url: ../../intro/10_sdwan
+      tags:
+      - 新产品 
+---
+// 设置上述参数可生成产品动态页

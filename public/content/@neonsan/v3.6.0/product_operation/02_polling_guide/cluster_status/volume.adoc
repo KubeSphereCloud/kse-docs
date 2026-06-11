@@ -1,0 +1,31 @@
+---
+title: "查询卷信息"
+weight: 10
+---
+
+. 登录 NeonSAN 集群任一节点。 
+. 执行如下命令，查询存储系统各 volume 状态信息，返回结果中，所有卷的状态须均为 OK，则表示正常。
++
+[,shell]
+----
+neonsan list_volume -detail -H
+----
++
+image::/images/neonsan/polling_guide_33.png[]
++
+include::../../../../../_components/note.adoc[]
+* 返回结果中，``Volume Count`` 表示集群中当前所有的 volume 个数，这里表示整个集群有 16 个卷。 
+* 返回结果中，``STATUS``表示卷的状态，分别有 ``OK`` 表示正常，``DEGRADED`` 表示降级，``ERROR`` 表示出错。
+* 根据以上返回结果，neonpool 卷组下的 vol_case8 这个卷状态为降级卷。需要查看 store 的日志，对降级原因进行调查，并对此降级卷做恢复处理。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，查看指定卷上连接的客户端。如下，表示卷 vol/express_snapshot_vic02.img 上通过 TCP 方式连接了一个客户端，该客户端 IP 为 172.31.194.71。
++
+[,shell]
+----
+neonsan list_volume_conns -volume vol/express_snapshot_vic02.img
+----
++
+image::/images/neonsan/polling_guide_34.png[]
+
+

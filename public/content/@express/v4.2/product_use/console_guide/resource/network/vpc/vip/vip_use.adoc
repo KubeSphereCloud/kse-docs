@@ -1,0 +1,65 @@
+---
+title: "使用虚拟 IP"
+weight: 2
+---
+
+== 前提条件
+* VPC 网络中link:../../vpc_link_vxnet[已连接虚拟主机]。
+* VPC 网络中link:../vip_create[已创建虚拟 IP]。
+* 虚拟主机和虚拟 IP 在同一个 VPC 网络中。
+
+== 操作步骤
+
+. 登录 VPC 网络内的虚拟主机，详细步骤可参考link:../../../../vm/express_vm/vm_login/express_web_login[登录虚拟主机]相关内容。
+. 在当前主机的 VNC 页面内，执行如下命令，复制一份网络配置文件，并重新命名。
++
+[,shell]
+----
+cp /etc/sysconfig/network-scripts/ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-eth0:0
+----
++
+
+include::../../../../../../../../_components/note.adoc[]
+* ``ifcfg-eth0`` 为网络配置文件名，需根据实际情况进行修改。
+* ``ifcfg-eth0:0`` 为重命名的网络配置文件名，可根据实际情况进行填写。
+
+include::../../../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，修改步骤 2 中新的网络配置文件 ifcfg-eth0:0。
++
+[,shell]
+----
+vim /etc/sysconfig/network-scripts/ifcfg-eth0:0
+----
+
++
+
+include::../../../../../../../../_components/note.adoc[]
+* 将 “IPADDR=” 后面的 IP 改为已经申请成功的虚拟IP。
+* 将 DEVICE="eth0" 改为 DEVICE="eth0:0"。
+* 删除 "GATEWAY=" 行。
+
+include::../../../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，重启网路。
++
+[,shell]
+----
+service network restart
+----
+. 检查虚拟 IP 是否添加成功。
++
+[,shell]
+----
+ip a
+----
++
+
+include::../../../../../../../../_components/note.adoc[]
+返回结果中可查看到已绑定至网卡上的虚拟 IP。
+
+include::../../../../../../../../_components/table_footer.adoc[]
+
+. 返回控制台中私有网络的虚拟 IP 页面，可查看虚拟 IP 状态变更为``已绑定到云服务器``。
+
+

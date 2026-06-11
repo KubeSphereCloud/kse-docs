@@ -1,0 +1,26 @@
+---
+title: "概述"
+weight: 1
+---
+
+{product_name_cn}是一款功能强大的超融合产品，所有的资源操作和管理行为，您都可以在控制台完成。同时，为了方便您在软件开发、其他软件使用{product_name_cn}的能力，我们向用户开放所有资源操作、管理操作相关的 API。
+
+== *API 分类*
+
+API 按操作对象分为三大类：
+
+* *虚拟资源类*：使用{product_name_cn}系统创建的资源，例如主机、硬盘、VPC、负载均衡器、账户等。
+* *管理服务类*：承载{product_name_cn}软件的物理设备和管理服务，如计算节点、服务进程、报表、巡检等。
+* *账号密钥类*：管理{product_name_cn}系统的用户、登录、控制台密钥等信息。
+
+为方便您的开发和直接使用，我们提供了三种方法：
+
+* *API*：按文档描述的规定格式封装 HTTP 请求，构建请求体、按步骤生成签名，并发送到服务端。适合于在代码中使用，不限制编程语言。
+* *SDK*：使用 {platform_name_cn} 官方提供的 link:https://docsv4.qingcloud.com/user_guide/development_docs/sdk/[Python SDK]，直接在代码中调用发送 API 请求，获得结果。适合于在代码中使用，语言要求为 Python。
+* *CLI*：使用 {platform_name_cn} 官方提供的 link:https://docsv4.qingcloud.com/user_guide/development_docs/cli/[CLI 命令行工具]，在 shell 终端调用，或由脚本、代码调用。
+
+== *阅读建议*
+
+接下来的章节，我们将分别描述使用 API 的前置条件、API 封装方法（包括请求结构、公共参数、签名方法、错误码）、SDK 使用方法、CLI 使用方法。
+
+其中，前置条件是三种使用方式都需了解的，如果您直接使用 SDK 或 CLI，可以不必阅读封装方法的部分，直接跳到相应使用方法即可。

@@ -1,0 +1,68 @@
+---
+title: "查看巡检记录列表"
+weight: 03
+---
+
+:ks_navigation: **巡检记录**
+
+
+巡检任务每次执行后，都会生成一条巡检记录。
+
+本节介绍巡检记录列表的信息。
+
+== 前提条件
+
+* 您需要在 KubeSphere 平台具有 **platform-admin** 角色。
+
+* 已创建并执行巡检任务。
+
+
+== 操作步骤
+
+
+include::../../../../_custom/platformManagement/extensionManagement/extensionManagement-oper-logInAsPlatformAdmin.adoc[]
+
++
+
+. 点击**组件坞 > 集群巡检**，进入集群巡检页面。
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
++
+--
+巡检记录列表提供以下信息：
+
+[%header,cols="1a,4a"]
+|===
+|参数 |描述
+
+|开始时间
+|此次巡检的开始时间。
+
+|巡检任务
+|被执行的巡检任务。点击巡检任务名称可link:../../05-inspect-tasks/05-view-task-details/[查看任务的详细信息]。
+
+|状态
+|
+// * 等待中：巡检任务待执行。
+* 巡检中：正在执行巡检任务。
+* 已完成：巡检任务执行完成。
+* 失败：巡检任务执行失败。
+
+|巡检范围
+|被巡检的目标集群。
+
+|巡检策略
+|即时巡检或定时巡检。
+
+|持续时间
+|此次巡检的持续时长。
+|===
+
+* 在列表上方点击搜索框并输入关键字，可按状态、巡检策略搜索巡检记录。
+
+include::../../../../../_ks_components/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components/oper-customizeColumns.adoc[]
+--

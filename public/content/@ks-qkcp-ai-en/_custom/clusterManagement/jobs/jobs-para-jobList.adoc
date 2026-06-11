@@ -1,0 +1,36 @@
+// :ks_include_id: f4fbda985b234075830531d6835efefe
+* The Job list provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name and description of the Job.
+
+|Status
+|
+The current status of the Job.
+
+* **Running**: The Job is currently running.
+
+* **Completed**: The Job has run successfully and is completed.
+
+* **Failed**: The Job has failed.
+
+ifndef::project[]
+|Project
+|The project to which the Job belongs.
+endif::[]
+
+|Last Run Time
+|The time when the Job last ran. Displayed only for **regular Jobs**.
+
+|Schedule
+|The CRON expression for the run cycle of the CronJob. Displayed only for **CronJobs**.
+
+|Creation Time
+|The creation time of the CronJob. Displayed only for **CronJobs**.
+|===
+--

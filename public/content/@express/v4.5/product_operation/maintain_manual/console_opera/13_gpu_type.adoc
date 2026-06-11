@@ -1,0 +1,78 @@
+---
+title: "修改 GPU 类型名称"
+weight: 13
+---
+
+== 运维场景
+
+需要将默认的 GPU 类型名 AMD FirePro S7150 修改为其他类型时，可参考以下操作步骤。
+
+== 操作流程
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，查看 KS 节点信息。
++
+[source,shell]
+----
+cat /etc/hosts | grep ks
+----
+
+. 登录 ks0 节点。
+. 查看并复制 ``/pitrix/lib/pitrix-webexpress/server/conf/config.yaml`` 文件中关于 GPU 的配置内容。
++
+[source,shell]
+----
+vim  /pitrix/lib/pitrix-webexpress/server/conf/config.yaml
+----
++
+[source,yaml]
+----
+......
+ gpu_instance_class_map:
+    - gpu_class: 0
+      name: NVIDIA Tesla P100
+    - gpu_class: 1
+      name: AMD FirePro S7150
+    - gpu_class: 2
+      name: AMD Radeon Pro WX9100
+......
+----
+
+. 将上一步骤中复制的 GPU 配置内容，添加至 ``/pitrix/lib/pitrix-webexpress/server/conf/local_config.yaml `` 文件末尾。
++
+[source,shell]
+----
+vim /pitrix/lib/pitrix-webexpress/server/conf/local_config.yaml
+----
++
+include::../../../../../_components/attention.adoc[]
+修改配置文件时，注意缩进格式。
+include::../../../../../_components/table_footer.adoc[]
+
+
+. 重启 pm2 服务。
++
+[source,shell]
+----
+pm2  restart express
+----
+
+. 登录其他 KS 节点，参考上述步骤，进行配置文件修改和 pm2 服务的重启即可。

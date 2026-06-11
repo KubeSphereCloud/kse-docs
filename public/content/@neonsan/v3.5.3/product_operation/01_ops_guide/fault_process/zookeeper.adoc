@@ -1,0 +1,63 @@
+---
+title: "解决 ZooKeeper 超时导致 Center 重启问题"
+weight: 7
+---
+
+ZooKeeper session 超时导致 Center 重启，可通过调节 ZooKeeper 最小会话超时时间的方式进行解决：
+
+== 排查方式
+
+. 根据其中一个节点 store 日志中的 zk session ID，在 zk leader 节点查询日志，若发现有如下日志：
++
+image::/images/neonsan/ops_guide_18.png[]
+
+. 进一步查看 Center 节点和 Store 节点中的 zookeeper.log 的日志：
++
+[,shell]
+----
+cat /var/log/zookeeper.log | grep Expiring
+----
+
+== 操作步骤
+
+. Zookeeper 节点 IP，可登录集群任一节点执行如下命令查看：
++
+[,shell]
+----
+ssh qingstor-firstbox "cat /etc/hosts|zookeeper"
+----
+
+. 逐个登录 Zookeeper 集群的节点。
+
+. 修改/opt/zookeeper-3.4.13/conf/zoo.cfg 文件，增大 minSessionTimeout 参数的值：
++
+[,shell]
+----
+vi /opt/zookeeper-3.4.13/conf/zoo.cfg
+
+... ...
+minSessionTimeout=1000
+... ...
+----
+* 可适当调大该参数至 5000 ms。
+* 一般情况下，该参数保持默认即可。
+
+. 依次重启 ZooKeeper 集群的 follower 和 leader 节点后，观察问题是否解决。
+.. 需查看 zookeeper 的 follower 和 leader 状态。
++
+[,shell]
+----
+/opt/zookeeper-3.4.13/bin/zkServer.sh status
+
+ZooKeeper JMX enabled by default
+Using config: /opt/zookeeper-3.4.13/bin/../conf/zoo.cfg
+Mode: follower
+----
+.. 依次重启 zookeeper 集群的 follower 和 leader 节点。
++
+[,shell]
+----
+supervisorctl restart zookeeper
+----
+
+

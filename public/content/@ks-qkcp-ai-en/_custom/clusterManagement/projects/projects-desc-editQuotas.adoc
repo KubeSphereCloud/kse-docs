@@ -1,0 +1,12 @@
+// :ks_include_id: c47c51f776564c1bba3cf7decf79a67d
+This section describes how to edit project quotas.
+
+Project quotas include the following settings:
+
+*  Resource Reservation: Container resource reservation is the resources reserved by the system for a single container. The project resource reservation is the maximum sum of all container resource reservations in the project. The KubeSphere platform currently supports setting CPU and memory reservations for projects.
+
+*  Resource Limits: Container resource limits are the maximum resources a single container can use. The project resource limit is the maximum sum of all container resource limits in the project. KubeSphere projects can set CPU limits, memory limits, and GPU limits.
+
+*  Storage Resource Quotas: You can limit the total storage resources under a project, including the total storage resources and the resources associated with the storage class.
+
+*  Application Resource Quotas: The maximum number of pods, Deployments, StatefulSets, DaemonSets, Jobs, CronJobs, Persistent Volume Claims, Services, Ingresses, Secrets, and ConfigMaps that can be created in a project.

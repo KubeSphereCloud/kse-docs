@@ -1,0 +1,94 @@
+---
+title: "删除集群标签"
+linkTitle: "{ks_title}"
+keywords: "Kubernetes, {ks_product}, 多集群管理, 集群标签, 删除标签"
+description: "介绍如何删除集群标签。"
+weight: 04
+layout: "second"
+icon: ""
+---
+
+// :ks_include_id: 70909f815c68404ba254e7e440ac0084
+:ks_xref_id: 1a65e423390c4c7caa77cbc55366e04es
+:ks_comp: ../../../../components/
+:ks_title: 删除集群标签
+:ks_keywords: Kubernetes, {ks_product}, 多集群管理, 集群标签, 删除标签
+:ks_description: 介绍如何删除集群标签。
+:ks_weight: 04
+:ks_icon:
+:ks_menu: **平台管理 > 集群管理**
+:ks_permission: **集群管理**
+
+
+本节介绍如何删除集群标签。
+
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+如果标签已添加到集群，标签删除后将被从集群上移除。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+
+
+== 前提条件link:[id=dd481f6f9df34fb69313b5a59aaa7653]
+
+//:relfileprefix: ../../../../
+* 您需要在{ks_product_both}平台具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅link:../../../../04-platform-management/04-access-control/02-users/_index/[用户]和link:../../../../04-platform-management/04-access-control/03-platform-roles/_index/[平台角色]。
+// include::../../../../_custom/platformManagement/platformManagement-prer-requiredPermission.adoc[]
+//:relfileprefix: ./
+
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusters/clusters-prer-enableMulticlusterManagement.adoc[]
+
+:relfileprefix: ./
+
+
+
+== 删除单个标签link:[id=a048f73d3dfe42388f94363bb0c621fc]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusterTags/clusterTags-openListPage.adoc[]
+
++
+
+. 在需要删除的标签右侧点击 image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除**。
+
+. 在**删除标签**对话框，输入标签的键和值，然后点击**确定**。
+
+
+== 批量删除标签link:[id=68c892cdb31e49d68cb8ecc0ad616b3a]
+
+include::../../../../_custom/platformManagement/platformManagement-oper-logIn.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-selectMenu.adoc[]
+
++
+
+include::../../../../_custom/platformManagement/multiclusterManagement/clusterTags/clusterTags-openListPage.adoc[]
+
++
+
+. 选择需要删除的标签左侧的复选框，然后在列表上方点击**删除**。
+
+. 在**删除标签**对话框，输入标签的键和值，然后点击**确定**。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+
+请使用半角逗号（,）和空格分隔多个标签键值对。
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

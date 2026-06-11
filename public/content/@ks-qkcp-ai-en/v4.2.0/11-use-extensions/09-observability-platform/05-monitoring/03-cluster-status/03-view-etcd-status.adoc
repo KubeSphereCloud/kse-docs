@@ -1,0 +1,90 @@
+---
+title: "View etcd Database Status"
+keywords: "Kubernetes, {ks_product}, Monitoring and Alerting, Cluster Status, etcd Status"
+description: "Describes how to view the etcd database status."
+weight: 03
+---
+
+:ks_permission: **Monitoring View**
+:ks_navigation: **Monitoring and Alerting > Cluster Monitoring**
+
+This section describes how to view the etcd database status.
+
+// [.admon.note,cols="a"]
+// |===
+// |Note
+
+// |
+// To view etcd monitoring information, you need to enable etcd monitoring in advance. For more information, refer to the description on the details page of the **WizTelemetry Monitoring** extension in the Extensions Center.
+// |===
+
+== Prerequisites
+
+:relfileprefix: ../../../../../
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **WizTelemetry Monitoring** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Cluster Monitoring** page, click the **etcd Monitoring** tab to view the running status of the etcd database.
++
+====
+* The **etcd Monitoring** tab provides the following information:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Service Status
+|Displays the Leader node of the etcd cluster, the IP address of each node, and the number of Leader changes within the last hour.
+
+|Database Size
+|The size of the etcd database within the specified time range.
+
+|Client Traffic
+|Displays the data traffic sent to and received from gRPC clients.
+
+|gRPC Stream Messages
+|Displays the number of gRPC stream messages received and sent per second on the server side.
+
+|WAL Fsync Duration
+|Displays the latency of WAL calling fsync. Before applying log entries, etcd calls **wal_fsync** when persisting log entries to disk.
+
+|DB Fsync Duration
+|Displays the distribution of backend commit latency. When etcd commits its latest incremental snapshot to disk, it calls **backend_commit**. High disk operation latency (long WAL fsync duration or DB fsync duration) usually indicates a disk problem, which may lead to high request latency or cluster instability.
+
+|Raft Proposals
+|
+Displays the current number of Raft proposals per second for etcd. Hover over the line chart to view the proposal data at a specific point in time.
+
+* **Proposal Commit Rate**: The commit rate of consensus proposals. If the cluster is healthy, this metric should increase over time. Several healthy members of an etcd cluster can have different general proposals simultaneously. A sustained large lag between a single member and its Leader indicates that the member is slow or unhealthy.
+
+* **Proposal Apply Rate**: The total application rate of consensus proposals. The etcd server applies each committed proposal asynchronously. The difference between the proposal commit rate and the proposal apply rate should be small (only a few thousand even under high load). If the difference between them continues to increase, it indicates that the etcd server is overloaded. This may occur when using large-scale queries such as large range queries or a large number of txn operations.
+
+* **Proposal Failure Rate**: The total rate of proposal failures. This value is affected by two factors: temporary failures related to Leader elections; and prolonged downtime due to the number of cluster members falling below the required number.
+
+* **Proposals Pending**: The current number of pending proposals. An increase in pending proposals indicates high client load or that members are unable to commit proposals.
+|===
+
+For more information about etcd database parameters, refer to the link:https://etcd.io/docs/v3.5/metrics/[etcd official documentation].
+--
+
+include::../../../../../../_ks_components/oper-selectTimeRange.adoc[]
+
+include::../../../../../../_ks_components/oper-Autorefresh.adoc[]
+
+include::../../../../../../_ks_components/oper-refreshData.adoc[]
+====

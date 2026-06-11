@@ -1,0 +1,60 @@
+---
+title: "准备工作"
+weight: 20
+---
+
+== 准备安装工具
+
+[cols="1,2,2"] 
+|===
+| 类型 | 工具 | 描述
+
+| SSH 连接工具
+| 例如：Xshell、MobaXtem、SCRT 等。
+| 用于执行远程调试命令。
+
+| 介质传输工具
+| 例如：使用 sftp 或移动硬盘传输。
+| 用于传输安装包镜像等。
+
+| KVM 工具
+| 服务器厂商的 KVM 工具或显示器键盘。
+| 用于调试 BIOS 安装系统等。
+|===
+
+== 准备安装包
+
+include::../../../_components/note.adoc[]
+若下载路径不能访问，请联系技术支持。
+
+include::../../../_components/table_footer.adoc[]
+
+[cols='3,2,3'] 
+|===
+| 安装包 | 描述 | 获取方式
+
+| 企业云平台：QingCloud-X.X.X.X-AutoInstall.iso
+
+信创企业云平台： +
+QingCloud-X.X.X.X-AutoInstall-arm64.iso +
+uos-xx-server-arm64.iso +
+Kylin-Server-xxxx.iso
+| 操作系统自动安装镜像
+| \ftp://ins.qingcloud.com/isos/
+
+| 企业云平台：QingCloud-X.X.X.X-NoAutoInstall.iso
+| 操作系统手动安装镜像
+| \ftp://ins.qingcloud.com/isos/
+
+| qingcloud-installer_6.0.x-20220630_XXXX_amd64.tar.gz
+| 企业云平台基础软件安装包
+| \ftp://ins.qingcloud.com/qingcloud/
+
+| images-repo
+| VM 镜像包
+| \ftp://ins.qingcloud.com/images-repo/
+
+| migrate_appcenter2_qingcloud
+| AppCenter 镜像包
+| \ftp://ins.qingcloud.com/migrate_appcenter2_qingcloud/
+|===

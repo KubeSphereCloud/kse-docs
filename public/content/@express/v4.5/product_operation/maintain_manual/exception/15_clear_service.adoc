@@ -1,0 +1,91 @@
+---
+title: "清除 Supervisor 管理的指定服务"
+weight: 15
+---
+
+== 运维场景
+
+在云易捷集群升级完成后，在进行各节点上服务状态检查的过程中，发现某一 KS 节点上仍含有本应该清除掉的 **production_xxxx** 等服务，可参考以下步骤进行处理。 +
+KS 节点上由 Supervisor 接管的全部服务，如下所示。
+
+image::/images/express/maintain/clear_service_1.png[]
+
+== 操作步骤
+
+. 登录至当前环境的 FirstBox 节点。
++
+[source,shell]
+----
+ssh yop@xx.xx.xx.xx
+----
++
+include::../../../../../_components/note.adoc[]
+* xx.xx.xx.xx 为环境中 FirstBox 节点 IP，需根据实际情况进行修改。
+* 用户名密码：yop/zhu1241jie。
+include::../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令，输入当前主机密码，切换至 root 用户。
++
+[source,shell]
+----
+sudo -i
+----
+
+. 执行如下命令，查看 KS 节点信息。
++
+[source,shell]
+----
+cat /etc/hosts | grep ks
+----
+
+. 登录 KS 节点，执行如下命令，查看节点上是否含有多余的服务，且状态不为 ``RUNNING``。若有，则参考后续步骤进行清除。
++
+[source,shell]
+----
+supervisorctl status
+----
+
+. 执行如下命令，停止待清除的服务。
++
+[source,shell]
+----
+supervisorctl stop <service_name>
+----
++
+include::../../../../../_components/note.adoc[]
+<service_name> 为待清除的服务名称，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 删除相应服务的配置文件。
++
+[source,shell]
+----
+rm -fr /etc/supervisor/conf.d/<service_name>.conf
+----
++
+include::../../../../../_components/note.adoc[]
+<service_name> 为待清除的服务名称，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+. 重读服务。
++
+[source,shell]
+----
+supervisorctl reread
+----
+
+. 删除服务。
++
+[source,shell]
+----
+supervisorctl remove <service_name>
+----
++
+include::../../../../../_components/note.adoc[]
+<service_name> 为待清除的服务名称，需根据实际情况进行修改。
+include::../../../../../_components/table_footer.adoc[]
+
+
+
+
+

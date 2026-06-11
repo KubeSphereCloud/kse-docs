@@ -1,0 +1,116 @@
+---
+title: "View License Information"
+keywords: "Kubernetes, KubeSphere Enterprise, platform settings, license, view license information"
+description: "Learn how to view license information."
+weight: 01
+---
+
+:ks_navigation: **Licenses**
+:ks_permission: **Platform Settings Management**
+
+
+This section explains how to view license information.
+
+
+== Prerequisites
+
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom-en/platformManagement/platformManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom-en/platformManagement/platformManagement-oper-logIn.adoc[]
+
+. Click image:/images/ks-qkcp/zh/icons/cogwheel.svg[cogwheel,18,18] in the top-right corner of the page to access **Platform Settings**.
+
++
+
+include::../../../../../_ks_components-en/oper-navigate.adoc[]
++
+. On the **Licenses Information** tab, view the licenses for KubeSphere Enterprise and installed extensions.
++
+====
+* KubeSphere Enterprise License
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Authorized Organization
+|The organization that is authorized to use KubeSphere Enterprise.
+
+|Authorization Status
+|
+* **Unauthorized**: No license for KubeSphere Enterprise has been obtained.
+* **Authorization Expired**: The license for KubeSphere Enterprise has expired.
+* **Insufficient Number of Authorizations**: The current cluster size exceeds the licensed cluster size for KubeSphere Enterprise.
+* **Authorized**: KubeSphere Enterprise is properly authorized.
+
+|Maintenance Status
+|
+* **No Maintenance**: No maintenance services are provided.
+* **Expired**: Maintenance services have expired.
+* **Maintenance Available**: Within the maintenance services period.
+
+|Cluster ID
+|The current cluster ID used to determine the authorization status.
+
+|Authorization Type
+|**No Activation Code**, **Subscription**, or **Permanent Authorization**.
+
+|Authorized Usage
+|Displays the current cluster size and the licensed cluster size for using KubeSphere Enterprise, in **cores**.
+
+|Effective Time
+|The effective time of the license.
+
+|Due Time
+|The expiration time of the license.
+|===
+
+* Extension Licenses
++
+--
+Displays the licenses for the installed extensions in the KubeSphere Enterprise platform.
+
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the extension.
+
+|Authorization Status
+|
+* **Unauthorized**: No license for the extension has been obtained.
+* **Authorization Expired**: The license for the extension has expired.
+* **Authorized**: The extension is properly authorized.
+
+|Authorization Type
+|**No Activation Code**, **Subscription**, or **Permanent Authorization**.
+
+|Authorized Unit
+|CPU or vCPU.
+
+|Authorized Usage
+|Displays the current cluster size and the licensed cluster size for using KubeSphere Enterprise, in **cores**.
+
+|Effective Time
+|The effective time of the license.
+
+|Due Time
+|The expiration time of the license.
+|===
+
+* Click the search box above the list and enter the extension name to search for the extension's license.
+
+include::../../../../../_ks_components-en/oper-refreshListData.adoc[]
+
+include::../../../../../_ks_components-en/oper-customizeColumns.adoc[]
+--
+====

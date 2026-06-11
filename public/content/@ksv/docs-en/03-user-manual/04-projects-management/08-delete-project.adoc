@@ -1,0 +1,66 @@
+---
+title: "Delete projects"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, web console, projects, single, deletion"
+description: "Describes how to delete projects in the {ks_product} web console."
+weight: 08
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 4f383c53e17443298e5a5607c006144a
+:ks_xref_id: 5d6ae832349b453ca04b8bdc11f5dc8b
+:ks_comp: ../../../components/
+:ks_title: Delete projects
+:ks_description: Describes how to delete projects in the {ks_product} web console.
+:ks_keywords: {ks_product_full}, {ks_product}, web console, projects, single, deletion
+:ks_weight: 08
+:ks_logo:
+:ks_download_url:
+
+
+This topic describes how to delete projects in the {ks_product_abbr_full} web console.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Prerequisiteslink:[id=33486893339a40aa948dc4d250dad1a5]
+
+Make sure you are logged in as user **admin**. Project administrators and operators can edit projects, but have no permissions to delete projects.
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete a projectlink:[id=373d2ec3263d42e690ede296071896da]
+
+include::../../../_custom-en/projects/project-manage-steps.adoc[]
+
+. On the **Projects** page, click the name of the project that you want to delete. The details page of the project appears.
+. On the left side of the details page, click image:/images/ksv/en/icons/more.svg[operation-menu,13] and select **Delete** from the drop-down list.
+. In the dialog box that appears, enter the name of the project and click **OK**.
++
+--
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+The project cannot be restored after it is deleted. After a project is deleted, all VMs, images, and disks of the project are also deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== Delete multiple projects at a timelink:[id=063e0be6cda242d79bfdff5668b4fa36]
+
+include::../../../_custom-en/projects/project-manage-steps.adoc[]
+
+. On the **Projects** page, select the check boxes next to the projects that you want to manage, and click **Delete**.
+. In the dialog box that appears, click **OK**.
++
+--
+include::../../../../_ks_components/admonitions/warning.adoc[]
+
+Projects cannot be restored after they are deleted. After a project is deleted, all VMs, images, and disks of the project are also deleted. Exercise caution when you perform this operation.
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

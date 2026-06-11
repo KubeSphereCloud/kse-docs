@@ -1,0 +1,42 @@
+---
+title: "删除节点组"
+weight: 15
+---
+
+:ks_permission: **节点组管理**
+:ks_menu: **节点组**
+
+
+本节介绍如何删除节点组。
+
+[.admon.attention,cols="a"]
+|===
+|注意
+
+|
+删除节点组时，请确保节点组下没有节点。若有，请先link:../04-remove-nodes-from-a-group/[将节点从该节点组中移除]。
+|===
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **KubeSphere 节点组**扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+// include::../../../../_custom/clusterManagement/nodegroups/nodegroup-prer-requiredPermission.adoc[]
+
+== 操作步骤
+
+include::../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+. 在左侧导航栏选择pass:a,q[{ks_menu}]。
+
+. 在需要操作的节点组右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**删除**。
+
+. 在**删除节点组**对话框，输入节点组名称，然后点击**确定**。

@@ -1,0 +1,80 @@
+---
+title: 注册数据集群到管理集群（RegisterClusterMetadata）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cfgmgmt_id
+| String
+| true
+| 管理集群ID
+
+| cluster_id
+| String
+| true
+| 集群ID
+
+| zone
+| String
+| true
+| 可用区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| cluster_ids
+| Array
+| false
+| 集群ID
+
+| job_id
+| String
+| false
+| 任务ID
+
+| ret_code
+| String
+| false
+| 返回状态码
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "RegisterClusterMetadata",
+  "cfgmgmt_id": "cl-ewkhpf0v",
+  "cluster_id": "cl-w1mh8rys",
+  "zone": "testing1a"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "RegisterClusterMetadataResponse",
+  "cluster_ids": [
+    "cl-w1mh8rys"
+  ],
+  "job_id": "j-bn5t5e2vscj",
+  "ret_code": 0,
+  "trace_id": "YompWK5C"
+}
+----

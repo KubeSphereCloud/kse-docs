@@ -1,0 +1,127 @@
+---
+title: "生成配置"
+weight: 3
+---
+
+. 登录 FirstBox 节点。
++
+[source,shell]
+----
+ssh x.x.x.x -p 6023
+----
++
+
+include::../../../../../_components/note.adoc[]
+* x.x.x.x 需替换为 FirstBox 所在宿主机的管理 IP。
+* 用户名密码为 root/zhu88jie。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 为 ARM 架构节点添加 neonsan-store 角色。
++
+[source,shell]
+----
+installer role-node-add neonsan-store -I scale_ip_list
+----
++
+
+include::../../../../../_components/note.adoc[]
+此步骤可能耗时稍长，请耐心等待。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 拷贝 {product_name} 配置文件至 /root/ 目录。
++
+[source,shell]
+----
+cp /qingstor/install/test/yaml/neonsan-settings.yaml /root/scale_neonsan-settings.yaml
+----
+
+. 修改 {product_name} 节点配置。
++
+
+include::../../../../../_components/note.adoc[]
+* 根据实际情况对配置文件进行修改，此配置文件包含混插和全闪环境配置内容，注意区分选择，可删除不需要的配置内容。其中，use_icas 或 use_bcache 字段为 true 表示混插，两者均为 false 表示全闪。
+
+* 针对混插环境，ubuntu 18.04 arm 平台缓存软件使用 bcache。
+
+include::../../../../../_components/table_footer.adoc[]
++
+[source,shell]
+----
+vim /root/scale_neonsan-settings.yaml
+----
++
+配置文件各字段说明:
++
+[cols="1,4",options="header"]
+|===
+|字段|说明
+|repl_network
+|存储网络的网段，与部署 x86 节点时所填写内容保持一致，即 ``/root/neonsan-settings.yaml`` 配置文件内的 ``repl_network`` 字段。
+
+|data_networks
+|存储前端网络所处网段，用于配置三网独立部署，需根据实际情况进行修改。
+配置之后，Installer 会自动扫描并生成相关的 IP 配置。若是 spine-leaf 场景，填写 data 的大网段即可，如示例文件中格式。
+若不配置，默认将使用存储管理网
+
+|neonsan_groups	
+|在同时有混插和全闪的环境或者部分节点配置有差异的部署需求中，通过根据 IP 分组节点的方式区分部署，且相同类型的磁盘需放在同一个 group 内。
+
+|host
+|填写各 ARM 架构节点的管理 IP。
+
+|ssd_disks
+|填写 ARM 架构节点上使用的 SSD 盘的盘符，若各节点的盘符不一致时，可选择清空内容，只保留该字段即可。 +
+若有多个磁盘，需采用一行一个的形式进行填写。
+
+|sata_disks
+|混插配置中，新增节点上 SATA 盘的盘符，也可清空只保留该字段，系统会自动使用节点上全部未使用的 SATA 盘。若为全闪配置，保持该配置项为空或者删除该配置项。
+
+|rg_name
+|存储池名。由于 ARM 架构节点和 x86 架构节点不能同属于一个存储池，故此处存储池名必须与 ``/root/neonsan-settings.yaml`` 文件内配置的不同。 +
+建议此处存储池名称命名形式为 ``testXXX``。
+
+|use_icas
+|是否使用 intelcas，即是否开启 icas 混插部署，ture 表示开启，false 表示关闭。
+
+|use_bcache
+a|表示是否使用 bcache，即是否开启 bcache 混插部署，ture 表示开启，false 表示关闭。
+
+include::../../../../../_components/attention_in_table.adoc[]
+当前仅 ubuntu18.04.1 ARM，kylin Hygon，kylin Kunpeng 允许配置 bcache，详细的平台与缓存软件适配信息，可参考link:../../annex/cache[附录]内容。
+
+include::../../../../../_components/footer_in_table.adoc[]
+
+|failure_domain
+|neonsan failure domain，不填写将会自动从主机名生成，示例：sh1ar01n01→failure_domain: sh1ar01。保持为空即可。
+|===
+
+. 生成节点的配置。
++
+[source,shell]
+----
+installer product-config neonsan-settings -c scale_neonsan-settings.yaml
+----
+  
+. 检查生成的配置。
++
+* 检查集群中各节点角色信息。其中，ARM 架构所有节点均应添加至 [neonsan-store] 列。 
++
+[source,shell]
+----
+less /qingstor/install/deployment/environment/hosts
+----
+* 检查 ARM 架构存储节点的配置信息。
++
+[source.shell]
+----
+# cd /qingstor/install/deployment/environment/group_vars/neonsan/
+# less neonsan-store3
+----
++
+
+include::../../../../../_components/note.adoc[]
+neonsan-store3 为 ARM 架构的 {product_name} 存储节点，需根据实际情况进行修改。
+
+include::../../../../../_components/table_footer.adoc[]

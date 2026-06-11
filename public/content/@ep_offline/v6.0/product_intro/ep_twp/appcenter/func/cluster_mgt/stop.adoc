@@ -1,0 +1,15 @@
+---
+title: "关闭集群"
+weight: 10
+---
+
+关闭集群的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_04.png[]
+
+功能流程说明：
+
+. 不同角色节点按照 order 升序执行 stop cmd。
+. 关闭每个节点的 confd agent。
+. 关闭节点虚拟机。
+. 将本集群中所有信息从 metadata service 中注销。

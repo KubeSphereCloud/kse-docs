@@ -1,0 +1,198 @@
+---
+title: iaas.ini
+weight: 4
+---
+
+
+以下场景，需要填写本文件相关参数，其他场景，可忽略本章节内容。
+
+* 对接已有的 IaaS 环境时，需要填写本文件相关参数。
+* 对接已有的 {product_name} 的 Global Zone 时，需要填写本文件相关参数。
+//* 使用自主搭建的 NTP、DNS 服务器时，需要填写本文件相关参数。
+
+详细操作步骤为：
+
+. 登录至上传有安装包的物理节点服务器。
+. 将示例文件 `/root/qs-installer/etc_example/iaas.ini` 拷贝至 `/root/qs-installer/etc/` 目录下。
+. 根据本节内容修改相关参数。
+
+== 示例
+
+[source,ini]
+----
+[base]
+iaas_domain = qingcloud.com
+regions = pek3
+
+[account_api]
+ip =  127.0.0.1
+port = 7777
+protocol =  http
+
+[console_settings]
+console_id =  console
+console_name =  console
+console_domain = console.qingcloud.com
+
+[access_keys]
+console_key_id =  console_key_id
+secret_console_key =  SXL8kfennISU5SE7vwvn1M4EAVel+zcCcWFl1ELENos=
+qs_user_id =  qs_user_id
+qs_access_key_id =  qs_access_key_id
+qs_secret_access_key =  8OuYVSg7C+TT4mv491bKzy2RGln+XN++vBJiWvHwXcE=
+
+[billing]
+enabled  = true
+host     = 127.0.0.1
+port     = 9236
+protocol = http
+
+[global_servers]
+127.0.0.1
+127.0.0.2
+127.0.0.3
+
+[ntp_servers]
+127.0.0.1
+127.0.0.2
+
+[dns_servers]
+127.0.0.1
+127.0.0.2
+
+----
+
+== 参数说明
+
+=== base
+
+用于配置待对接的 IaaS 环境或 Global Zone 环境的域名以及 Region ID。需根据查询结果进行填写。
+
+[cols="1,3a", options="header"]
+|===
+| 参数 | 说明 
+
+|iaas_domain a| * 对接 IaaS 的情况下，用于填写 IaaS 的域名。
+* 对接 QingStor U10000 的 Global Zone 的情况下，将 Global Zone 的 `global_domain` 字段去掉第一级后的内容填写在此处。如，Global Zone 的 `global_domain = stor.qingstorage.com`，则此处填写 `qingstorage.com`。
+* 对象存储默认管理员账户为：qingstor@<iaas_domain>，用于登录 Console 和 Portal。
+
+|regions a|用于配置待对接的环境中 Region 与 Zone 的对应关系。
+
+* 填写格式为 `regions = bj:bj1,bj2 gd:gd1,gd2`。
++
+其中 `bj` 与 `gd` 为 Region ID，`bj1` 与 `bj2` 为 `bj` 下面的 Zone ID，`gd1` 与 `gd2` 为 `gd` 下面的 Zone ID。
+
+* 对接 IaaS 的情况下，填写 IaaS 环境中的 Region 与 Zone 的对应关系。
+* 对接 QingStor U10000 的 Global Zone 时，填写 QingStor U10000 的 Region 与 Zone 的对应关系。
+
+// * 当对接的是 QingStor U10000 的 Global Zone 时，填写格式为 `regions = bj:bj1,bj2`。
+// +
+// 其中 `bj` 为对接的 Global Zone 的 Region ID，`bj1` 与 `bj2` 为该 Region ID 下对应的 Zone ID。
+
+// * 当对接的 IaaS 只有一个 Region 和一个 Zone 时，填写格式为 `regions = bj`。
+// +
+// 其中 `bj` 为对接的 IaaS 的 Region ID。
+
+// * 当对接的 IaaS 有一个 Region 和多个 Zone 时，填写格式为 `regions = bj:bj1,bj2`。
+// +
+// 其中 `bj` 为对接的 IaaS 的 Region ID，`bj1` 与 `bj2` 为该 Region ID 下对应的 Zone ID。
+
+// * 当对接的 IaaS 有多个 Region 和多个 Zone 时，填写格式为 `regions = bj:bj1,bj2 gd:gd1,gd2`。
+// +
+// 其中 `bj` 与 `gd` 为对接的 IaaS 的 Region ID，`bj1` 与 `bj2` 为 `bj` 下面的 Zone ID，`gd1` 与 `gd2` 为 `gd` 下面的 Zone ID。
+
+|===
+
+=== account_api
+
+* 对接 IaaS 环境时，填写对接的 Zone 中的 IaaS Account 服务的 VIP、端口及协议。
+* 对接 QingStor U10000 的 Global Zone 时，从 Global Zone  的 `group_vars/all` 文件获取相关信息填写。
+
+[cols="1,3", options="header"]
+|===
+| 参数 | 说明 
+
+|ip | Account 服务的 VIP。
+|port a|Account 服务的端口。
+|protocol a|Account 服务的协议。
+
+|===
+
+
+=== console_settings
+
+
+用于 Console 的相关信息设置。
+
+* 对接 IaaS 环境时，直接使用 IaaS 的 Console 服务，需填写 IaaS 环境的 Console 信息。具体内容，可根据查询的 IaaS Console 信息进行填写。
+* 对接 QingStor U10000 的 Global Zone 时，从 Global Zone  的 `group_vars/all` 文件获取相关信息进行填写。
+
+[cols="1,3", options="header"]
+|===
+| 参数 | 说明 
+|console_id | 对应查询结果中的 `console_id`。
+|console_name | 对应查询结果中的 `console_name`。
+|console_domain | 对应查询结果中的 `console_domain`。
+
+|===
+
+
+
+=== access_keys
+
+填写访问 Account 服务的密钥信息。
+
+* 对接 IaaS 环境，说明当前环境需使用 IaaS 的 Account 服务，因此需要填写用于访问 IaaS Account 服务的 Access Key。具体内容，可根据查询的 IaaS Account 服务信息 IaaS Console Key 信息进行填写。
+
+* 对接 QingStor U10000 的 Global Zone 时，从 Global Zone  的 `group_vars/all` 文件获取相关信息进行填写。
+
+[cols="1,3", options="header"]
+|===
+| 参数 | 说明 
+
+|console_key_id | 对应查询结果中的 `console_key_id`。
+|secret_console_key | 对应查询结果中的 `secret_console_key`。
+|qs_user_id | 对应查询结果中的 `root_user_id`。
+|qs_access_key_id | 对应查询结果中的 `access_key_id`。
+|qs_secret_access_key | 对应查询结果中的 `secret_access_key`。
+
+|===
+
+=== billing
+
+用于设置 Billing 服务的相关配置。
+
+[cols="1,3", options="header"]
+|===
+| 参数 | 说明 
+
+| enabled a| 是否开启计费功能，无需开启，则维持默认即可。
+
+* `False`: 不开启。
+* `True`: 开启。
+
+|host a|计费服务所在服务器的 IP 地址或域名。
+
+|port a| 计费服务端口号。
+|protocol a|计费服务协议。
+
+|===
+
+=== ntp_servers
+
+用于配置 NTP 服务器 IP 地址，可填写多个。
+
+* 对接 IaaS 的环境中，此处需填写对接的 IaaS Zone 中的 NTP 服务器的 IP 地址。可参考 FAQ 文档相关章节内容。
+* 对接 QingStor U10000 的 Global Zone 时，填写 Global Zone  的 Global 节点 IP。
+* 若客户部署有本地的 NTP 服务器，则此处可填写客户的 NTP 服务器的 IP 地址。
+* 除以上场景外，维持默认，无需填写即可。
+
+=== dns_servers
+
+用于配置当前环境的域名解析服务器的 IP 地址，可填写多个。
+
+* 对接 IaaS 的环境中，此处需填写对接的 IaaS Zone 中的 DNS 服务器的 IP 地址。可参考 FAQ 文档相关章节内容。
+* 对接 QingStor U10000 的 Global Zone 时，填写 Global Zone  的 Global 节点 IP。
+* 如不填写，则默认使用当前 Zone 的 DNS 服务器 IP 地址。
+* 若环境中配置有其他 DNS 服务器负责 {product_name} 的域名解析，则填写对应的 DNS 服务器地址即可。
+

@@ -1,0 +1,63 @@
+---
+title: "Create a Project"
+keywords: "Kubernetes, {ks_product}, Workspace Management, Project, How to Create a Project"
+description: "Describes how to create a project."
+weight: 01
+---
+
+
+:ks_permission: **Project Creation**
+:ks_navigation: **Project Management > Project List**
+
+
+This section describes how to create a project.
+
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission_v4.adoc[]
+
+:relfileprefix: ./
+
+
+== Steps
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-clickCreate.adoc[]
+
++
+
+. In the dialog box that appears, configure the project parameters, then click **OK**.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+include::../../../../_custom/clusterManagement/projects/projects-para-name.adoc[]
+
+include::../../../../_custom/clusterManagement/projects/projects-para-aliasDescription.adoc[]
+
+|Cluster
+|The cluster available for the project. Resources in the project run on the cluster selected here.
+|===
+
+After the project is created, you can invite users to join the project and deploy services within it.
+
+[.admon.attention,cols="a"]
+|===
+| Note
+
+|
+Resources in the project are aggregated and displayed in the workspace. To view resource objects (such as workloads, Secrets, and PersistentVolumeClaims, etc.) in a specific project, you need to go to the corresponding resource page within the current workspace and select the corresponding cluster and project from the drop-down list in the upper-left corner of the page.
+|===
+--

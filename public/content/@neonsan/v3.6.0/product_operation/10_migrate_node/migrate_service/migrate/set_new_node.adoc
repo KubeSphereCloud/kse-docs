@@ -1,0 +1,272 @@
+---
+title: "配置新管理节点完成迁移"
+weight: 3
+---
+
+. 登录至待迁移的原管理节点，将已备份的配置文件拷贝至新目标管理节点上。
++
+[,shell]
+----
+scp -r /opt/all_profile xx.xx.xx.xx:/opt/
+----
++
+include::../../../../../../_components/note.adoc[]
+``xx.xx.xx.xx``：为新管理节点的 IP 地址，需根据实际情况进行修改。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 依次执行如下命令，清除原管理节点的网络配置并将其关机。
++
+[,shell]
+----
+mv /etc/network/interfaces /etc/network/interfacesbak
+
+init 0
+----
+
+. 登录至新管理节点上，将之前拷贝得到的原管理节点配置文件放置指定目录，并覆盖当前节点上相关文件。
+* ``/opt/all_profile/1`` 目录下文件。
++
+[,shell]
+----
+cp /opt/all_profile/1/etcd_hosts /qingstor/etc/
+cp /opt/all_profile/1/xtradb-neonsan.cnf /qingstor/etc/
+cp /opt/all_profile/1/xtradb-qingstor.cnf /qingstor/etc/
+cp /opt/all_profile/1/zoo.cfg /opt/zookeeper-3.4.13/conf/zoo.cfg
+cp /opt/all_profile/1/myid /qingstor/data/zookeeper/
+cp /opt/all_profile/1/etcd /etc/default
+----
+
+* ``/opt/all_profile/2`` 目录下文件。
++
+[,shell]
+----
+cp -r /opt/all_profile/2/keepalived/* /etc/keepalived/conf.d/
+cp -r /opt/all_profile/2/nginx/* /etc/nginx/conf.d/
+cp /opt/all_profile/2/qingstor-zero-web.yaml /qingstor/etc/
+cp /opt/all_profile/2/qingstor-zero-agent.yaml /qingstor/etc/
+cp /opt/all_profile/2/vire_redis.conf  /qingstor/etc/
+cp /opt/all_profile/2/redis_exporter.yml /opt/redis_exporter/conf/
+cp /opt/all_profile/2/redis_exporter.ini /qingstor/etc/supervisord.d/
+----
+
+* ``/opt/all_profile/3`` 目录下文件。
++
+[,shell]
+----
+cp /opt/all_profile/3/ntp.conf /etc/
+cp /opt/all_profile/3/hosts /etc/
+cp /opt/all_profile/3/pip.conf /root/.pip/
+cp /opt/all_profile/3/qingstor.list /etc/apt/sources.list.d/
+----
+
+* 若迁移的原管理节点上部署了 prometheus 和 qs_alerter 服务，则需复制相应配置文件至指定目录。
++
+[,shell]
+----
+cp /opt/all_profile/2/prometheus/prometheus.yml /opt/prometheus/
+mv /qingstor/data/prometheus/data /qingstor/data/prometheus/data-bak
+cp -r /opt/all_profile/2/prometheus/data /qingstor/data/prometheus/
+cp /opt/all_profile/2/qs_alerter.yaml /qingstor/etc/
+----
+
+. 修改当前新管理节点的 Hostname，使其与原下线管理节点保持一致，根据实际情况修改即可。
++
+[,shell]
+----
+hostnamectl set-hostname <HOST_NAME>
+----
+
+. 修改并重启当前新管理节点的网络配置，使其 IP 地址与原下线管理节点保持一致，根据实际情况修改即可。
++
+[,shell]
+----
+vim /etc/network/interfaces
+
+systemctl restart networking
+----
+
+. 重新登录新的管理节点，执行如下命令，将当前管理节点，添加至 etcd 集群。
++
+由于当前新管理节点的网络配置已修改为与原集群下线节点一致，故此处 IP 地址仍然和原集群管理节点一样。
++
+--
+[,shell]
+----
+/opt/etcd/etcdctl --endpoints "http://172.31.30.172:2379,http://172.31.30.173:2379,http://172.31.30.171:2379" member add etcd1 http://172.31.30.172:2380
+----
+
+回显示例：
+
+[,shell]
+----
+Added member named etcd1 with ID 187874282506b127 to cluster
+----
+--
+
+. 执行如下命令，启动相应服务。
+* 启动 etcd。
++
+[,shell]
+----
+systemctl start etcd
+----
+* 启动 ntp。
++
+[,shell]
+----
+systemctl start ntp
+----
+* 启动 ZooKeeper。
++
+[,shell]
+----
+supervisorctl start zookeeper
+----
+* 启动 mysql_neonsan。
++
+[,shell]
+----
+supervisorctl start mysql_neonsan
+----
+* 启动 mysql_qingstor。
++
+[,shell]
+----
+supervisorctl start mysql_qingstor
+----
+* 启动 mysqld_exporter_neonsan。
++
+[,shell]
+----
+supervisorctl start mysqld_exporter_neonsan
+----
+* 启动 mysqld_exporter_qingstor。
++
+[,shell]
+----
+supervisorctl start mysqld_exporter_qingstor
+----
+* 启动 vire_redis。
++
+[,shell]
+----
+supervisorctl start vire_redis
+----
+* 启动 nginx。
++
+[,shell]
+----
+supervisorctl start nginx
+----
+* 启动 redis_exporter。
++
+[,shell]
+----
+supervisorctl update redis_exporter
+supervisorctl start redis_exporter
+----
+* 启动 qingstor-zero-web
++
+[,shell]
+----
+supervisorctl start qingstor-zero-web
+----
+* 启动 qingstor-zero-agent。
++
+[,shell]
+----
+supervisorctl start qingstor-zero-agent
+----
+
+* 若迁移节点上部署了 prometheus 和 qs_alerter 服务，需开启相应服务。
++
+[,shell]
+----
+supervisorctl add prometheus
+
+supervisorctl start prometheus
+
+supervisorctl add qs_alerter
+
+supervisorctl start qs_alerter
+----
+
+. 修改定期备份数据库的配置。
++
+[,shell]
+----
+vi /etc/cron.d/neonsan_galera_dailybackup
+----
++
+将以下内容中的 ``xx.xx.xx.xx`` 修改为当前节点的实际 IP 地址。
++
+[,shell]
+----
+#Ansible: Backup neonsan tables
+0 2 * * * root sh /opt/neonsan/backup-neonsan-db.sh xx.xx.xx.xx
+----
+
+. 检查集群状态，严格参考link:../../check_service[前文内容]进行检查。
++
+include::../../../../../../_components/attention.adoc[]
+检查过程中管理节点已包含当前新节点。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 若迁移节点（最后一个迁移节点）也是 FirstBox 节点，则需在新管理节点上对 FirstBox 节点进行恢复。
++
+include::../../../../../../_components/attention.adoc[]
+若迁移节点上无 FirstBox，请跳过此步骤。
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 将所需文件拷贝至 FirstBox 上。
++
+[,shell]
+----
+scp -P 6023  /opt/all_profile/3/fb-202305301700.tar.gz <fb_IP>:/root
+scp -P 6023 /opt/all_profile/3/fb-hosts <fb_IP>:/etc/hosts
+scp -P 6023 /opt/all_profile/3/fb-pip.conf <fb_IP>:/root/.pip/pip.conf
+scp -P 6023 /opt/all_profile/3/fb-qingstor.list <fb_IP>:/etc/apt/sources.list.d/qingstor.list
+----
++
+include::../../../../../../_components/note.adoc[]
+<fb_IP> 即为当前管理节点的 IP。
+include::../../../../../../_components/table_footer.adoc[]
+
+.. 登录 FirstBox。
++
+[,shell]
+----
+ssh <fb_IP> -p 6023
+----
+.. 恢复 FirstBox 数据库。
++
+[,shell]
+----
+ll fb-202305301700.tar.gz
+
+/qingstor/install/bin/restore_fb.sh /root/fb-202305301700.tar.gz
+----
+
+.. 恢复 FistBox 配置文件。
++
+[,shell]
+----
+apt update
+----
+
+. 重启当前节点。
++
+[,shell]
+----
+reboot
+----
+
+. 再次检查集群状态，严格参考link:../../check_service[前文内容]进行检查。
++
+include::../../../../../../_components/attention.adoc[]
+检查过程中管理节点已包含当前新节点。
+include::../../../../../../_components/table_footer.adoc[]
+
+. 其他管理节点参考上述部署完成迁移即可。
+
+

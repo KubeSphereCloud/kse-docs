@@ -1,0 +1,156 @@
+---
+title: 共享模式创建集群（DeploySharedAppVersion）
+weight: 7
+---
+
+== 基本信息
+
+=== Path
+/iaas
+
+=== Method
+GET
+
+== 请求参数
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| true
+| 应用ID
+
+| app_type
+| String
+| true
+| 应用类型
+
+| auto_renew
+| Integer
+| false
+| 自动续费
+
+| charge_mode
+| String
+| false
+| 计费模式
+
+| conf
+| String
+| true
+| 集群详细配置
+
+| debug
+| Integer
+| false
+| 开发者模式
+
+| months
+| Integer
+| false
+| 续费时长（月）
+
+| multi_deploy_zones
+| Array
+| false
+| 多可用区域部署
+
+| version_id
+| String
+| true
+| 应用版本ID
+
+| zone
+| String
+| true
+| 可用区ID
+|===
+
+== 返回数据
+此接口除以下返回参数外，还包含公共响应头。关于公共响应头的更多信息，请参见link:../../../../overview/#_api_返回结构[前文内容]。
+[cols="1,1,1,2", options="header"]
+|===
+| 参数名 | 类型 | 是否必须 | 描述
+
+| app_id
+| String
+| false
+| 应用ID
+
+| app_version
+| String
+| false
+| 应用版本
+
+| cluster_id
+| String
+| false
+| 集群ID
+
+| cluster_name
+| String
+| false
+| 集群名称
+
+| job_id
+| String
+| false
+| 任务ID
+
+| node_count
+| String
+| false
+| 节点数量
+
+| node_ids
+| Array
+| false
+| 节点id
+
+| ret_code
+| Integer
+| false
+| 返回状态码
+
+| vxnet_id
+| String
+| false
+| 私有网络ID
+|===
+
+== 请求示例
+[,javascript]
+----
+{
+  "action": "DeploySharedAppVersion",
+  "app_id": "app-kvxc559w",
+  "app_type": "cluster",
+  "charge_mode": "elastic",
+  "conf": "{\"cluster\":{\"name\":\"12132\",\"description\":\"123132\",\"vxnet\":\"vxnet-s5cp1um\",\"global_uuid\":\"75112219801798514\"},\"version\":\"appv-1dwfyr5u\",\"zone\":\"pek3b\",\"vpc\":\"rtr-2m9tvgcp\"}",
+  "debug": 1,
+  "multi_deploy_zones": [],
+  "version_id": "appv-1dwfyr5u",
+  "zone": "pek3b"
+}
+----
+
+== 返回示例
+[,javascript]
+----
+{
+  "action": "DeploySharedAppVersionResponse",
+  "app_id": "app-kvxc559w",
+  "app_version": "appv-1dwfyr5u",
+  "cluster_id": "cl-8we98h70",
+  "cluster_name": "12132",
+  "job_id": "j-oq44o1wonel",
+  "node_count": 1,
+  "node_ids": [
+    "cln-aejiw5h6"
+  ],
+  "ret_code": 0,
+  "trace_id": "p9jaSxbM",
+  "vxnet_id": "vxnet-s5cp1um"
+}
+----

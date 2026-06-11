@@ -1,0 +1,88 @@
+---
+title: 日志归档
+weight: 11
+---
+
+{product_name} 的服务端使用 Logrotate 工具对日志进行轮循、压缩以及删除旧的日志文件。
+
+== 归档配置
+
+Logrotate 工具的相关配置，可登陆 {product_name} 的 FirstBox 节点，进行查看。
+
+配置文件存放路径为：
+
+[source,shell]
+----
+/etc/logrotate.conf
+/etc/logrotate.d/
+----
+
+默认配置下，{product_name} 会在每天凌晨 3 点左右对 Ngnix 日志文件进行 Logrotate 轮循，其日志默认保存时间为 180天。
+
+// * Ngnix 日志：180天。
+// * qs-gateway 日志：2—10天。
+// * qs-global-gateway 日志：2—10天。
+// * qs-index 日志：10天。
+// * qs-cache 日志：10天。
+
+== 历史日志
+
+根据前文说明，{product_name} 日志会定期轮循，如需查看当天之前的日志，可从日志存放的 Bucket 中下载相应服务日志进行查看。具体操作如下。
+
+
+. 执行如下命令行，登录 {product_name} 的 FirstBox 节点。命令行中的 `<firstbox ip>` 为 {product_name} 的 FirstBox 节点 IP。
++
+[source,shell]
+----
+ssh -p 6023 root@<firstbox ip>
+----
+
+. 执行如下命令行，查看配置文件，确认日志存放的 Bucket。
++
+[source,shell]
+----
+cat /etc/cron.daily/logarchive
+----
++
+命令行回显内容示例
++
+[source,shell]
+----
+……
+bucket="log-archive"
+zone="dsry1"
+hostname="$(hostname)"
+day="$(date '+%Y-%m-%d')"
+……
+----
++
+include::../../../../../../_components/note.adoc[]
+
+* 根据命令行回显内容可知，日志文件归档至 `dsry1` Zone 中的名为 `log-archive-dsry1` 的 Bucket 中。
+* 用户通过管理员账号登陆 {product_name} 的 Console 后，即可下载日志文件。
+
+include::../../../../../../_components/table_footer.adoc[]
+
+. 执行如下命令行，可查看 Bucket 下已归档的日志文件，然后根据需求，查看相应的日志压缩包。
++
+[source,shell]
+----
+qsctl ls log-archive-dsry1/ks0/qingstor/
+----
+
+. 执行如下命令行，下载日志文件压缩包。
++
+[source,shell]
+----
+qsctl cp qs://log-archive-gamma/ks0/qingstor/qs_dispatcher.log-20211214.gz ${local_path}
+----
++
+include::../../../../../../_components/note.adoc[]
+
+* 命令行中的 `log-archive-gamma/ks0/qingstor/qs_dispatcher.log-20211214.gz` 为目标文件路径，`${local_path}` 为本地存放路径。
+* 命令行中的目标文件与本地存放路径，可根据实际情况进行修改。
+* qsctl 的 `cp` 操作，可参考link:https://docsv4.qingcloud.com/user_guide/storage/object_storage/manual/tool/qsctl/#_%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6[文档]。
+
+
+include::../../../../../../_components/table_footer.adoc[]
+

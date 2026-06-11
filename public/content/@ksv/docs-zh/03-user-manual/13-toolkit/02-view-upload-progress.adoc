@@ -1,0 +1,71 @@
+---
+title: "查看操作进度"
+linkTitle: "{ks_title}"
+keywords: "{ks_product_full}, {ks_product}, Web 控制台, 操作, 进度, 查看"
+description: "介绍如何使用{ks_product_both}Web 控制台的工具箱查看操作进度。"
+weight: 02
+logo: ""
+downloadUrl: ""
+---
+
+// :ks_include_id: 9a1b1714edab4061b32b289072abb6de
+:ks_xref_id: ac188a685d6f498397de1757027939e2
+:ks_comp: ../../../components/
+:ks_title: 查看操作进度
+:ks_description: 介绍如何使用{ks_product_both}Web 控制台的工具箱查看操作进度。
+:ks_keywords: {ks_product_full}, {ks_product}, Web 控制台, 操作, 进度, 查看
+:ks_weight: 02
+:ks_logo: 
+:ks_download_url: 
+
+
+{ks_product_abbr_full_right}Web 控制台的工具箱显示镜像上传的进度、镜像复制的进度以及添加节点的进度。本节介绍如何使用工具箱查看资源操作进度。
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 查看镜像操作进度link:[id=f9fa7be51b6040fba7480e4804efc575]
+
+. 以 **admin** 用户或属于至少一个项目的其他用户登录{ks_product_both}Web 控制台。
+
+. 在页面右下角的 image:/images/ksv/zh/icons/hammer.svg[18px,18px] 图标上悬停以打开工具箱。
+
+. 在弹出菜单中选择**上传进度** > **镜像**。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+您需要先上传镜像或者复制镜像才能查看镜像的操作进度。有关更多信息，请参阅 link:../../05-vm-management/03-images/01-create-image/[创建镜像]。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+ifeval::["{ks_output_type}" == "pdf"]
+[discrete]
+endif::[]
+== 查看节点操作进度link:[id=e23d3d91c6b846c7bc54a68e2971cfc7]
+
+. 以 **admin** 用户登录{ks_product_both}Web 控制台。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+仅 **admin** 用户有权限查看物理节点资源。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 在页面右下角的 image:/images/ksv/zh/icons/hammer.svg[18px,18px] 图标上悬停以打开工具箱。
+
+. 在弹出菜单中选择**上传进度** > **节点**。
++
+--
+// Note
+include::../../../../_ks_components/admonitions/note.adoc[]
+
+您需要先添加节点才能查看节点的操作进度。有关更多信息，请参阅 link:../../02-node-management/01-add-node/[添加节点]。
+
+include::../../../../_ks_components/admonitions/admonEnd.adoc[]
+--

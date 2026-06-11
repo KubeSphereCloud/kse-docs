@@ -1,0 +1,127 @@
+---
+title: 回收站
+weight: 15
+draft: false
+keywords: 回收站, 删除云服务器, 恢复云服务器, 云计算
+linkkey: management_recyclebin_guide
+---
+
+被删除的资源，在 2 小时内，可对其进行恢复操作。同时，在资源恢复时，用户可对其计费模式进行选择。需要注意的是：
+
+* 批量资源恢复时，不支持计费模式的选择，即恢复至删除前的计费模式。
+* 单条资源恢复时，根据资源的不同，可选择的计费模式存在区别。
+** 镜像、缓存与备份，仅支持``按需计费``计费模式。
+** 主机、集群与磁盘，支持``按需计费``与``包年包月``的计费模式选择。
+
+* 资源恢复时，需确保账户余额中金额大于欠费总金额，否则资源将无法恢复。
+* 在``按需计费``的模式下，资源恢复后，需要支付在回收站期间的费用。
+
+
+本文以恢复一台云服务器、恢复一个镜像、批量恢复资源的过程为例，分别介绍资源恢复时，计费模式的区别。
+
+
+== 恢复已删除的云服务器
+
+单条云服务器、集群与磁盘资源恢复时，支持``按需计费``与``包年包月``的计费模式选择。
+
+. 登录 QingCloud 管理控制台，选择**产品与服务** > **运维与管理** > **回收站**，进入回收站主页面。
++
+image::/images/cloud_service/operation/tools/recycle_bin_main.png[recycle_bin_main,100%]
+
+. 在回收站主页面，勾选目标云服务器，点击**右键** > **恢复**。
++
+include::../../../../../_components/note.adoc[]
+回收站提供筛选功能，用户可根据需求，分别选择**产品与服务器**、**资源类型**，从而快速过滤待选择资源。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 弹出确认对话框，用户可在该页面，选择恢复后的资源计费方式。如图所示，可选择``包年包月``与``按需计费``。
++
+选择``包年包月``的计费方式后，需选择相应的``时长``。然后点击**确认恢复**。
++
+image::/images/cloud_service/operation/tools/recycle_bin_vm.png[recycle_bin_vm,60%]
+
+. 用户可至回收站主页面，确认成功恢复的云服务器，不在列表显示。
+
+. 用户可至云服务器主页面，确认云服务器恢复成功。
++
+image::/images/cloud_service/operation/tools/recycle_bin_vm_2.png[recycle_bin_vm_2,100%]
++
+include::../../../../../_components/note.adoc[]
+* 恢复后的云服务器计费模式，与步骤 3 中选择的计费模式保持一致。
+* 云服务器恢复后，如果选择的``按需计费``的模式，资源需要支付在回收站期间的费用。
+
+include::../../../../../_components/table_footer.adoc[]
+
+== 恢复已删除的镜像
+
+单条镜像、缓存与备份资源恢复时，仅支持``按需计费``的计费模式选择。
+
+
+. 登录 QingCloud 管理控制台，选择**产品与服务** > **运维与管理** > **回收站**，进入回收站主页面。
++
+image::/images/cloud_service/operation/tools/recycle_bin_main.png[recycle_bin_main,100%]
+
+. 在回收站主页面，勾选目标镜像资源，点击**右键** > **恢复**。
++
+include::../../../../../_components/note.adoc[]
+回收站提供筛选功能，用户可根据需求，分别选择**产品与服务器**、**资源类型**，从而快速过滤待选择资源。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 弹出确认对话框，如图所示，计费模式为``按需计费``，不可修改。点击**确认恢复**。
++
+image::/images/cloud_service/operation/tools/recycle_bin_image.png[recycle_bin_image,60%]
+
+. 用户可至回收站主页面，确认成功恢复的镜像资源，不在列表显示。
+
+. 用户可至镜像主页面，确认镜像恢复成功。
++
+image::/images/cloud_service/operation/tools/recycle_bin_image_2.png[recycle_bin_image_2,100%]
+
+
+== 批量恢复已删除的资源
+
+批量资源恢复时，不支持计费模式的选择，所有资源均恢复至删除前的计费模式。
+
+
+. 登录 QingCloud 管理控制台，选择**产品与服务** > **运维与管理** > **回收站**，进入回收站主页面。
++
+image::/images/cloud_service/operation/tools/recycle_bin_main.png[recycle_bin_main,100%]
+
+. 在回收站主页面，勾选多个目标资源，点击**批量恢复**。
++
+include::../../../../../_components/note.adoc[]
+回收站提供筛选功能，用户可根据需求，分别选择**产品与服务器**、**资源类型**，从而快速过滤待选择资源。
+
+include::../../../../../_components/table_footer.adoc[]
+
+. 弹出确认对话框，如图所示，不可修改计费模式。确认操作无误后，点击**确认恢复**。
++
+image::/images/cloud_service/operation/tools/recycle_bin_batch.png[recycle_bin_batch,60%]
+
+. 用户可至回收站主页面，确认成功恢复的资源，不在列表显示。
+
+. 用户可至其他资源主页面，确认各资源恢复成功。
+
+
+
+== 彻底删除资源
+
+资源被删除后，默认在回收站内保存 2 小时，且在该期间，用户可以按需对其进行恢复。2 小时后，回收站资源将被彻底删除。
+
+用户也可人为彻底删除回收站资源。资源彻底删除后，将不可恢复。
+
+
+. 登录 QingCloud 管理控制台，选择**产品与服务** > **运维与管理** > **回收站**，进入回收站主页面。
++
+image::/images/cloud_service/operation/tools/recycle_bin_main.png[recycle_bin_main,100%]
+
+. 在回收站主页面，勾选多个目标资源或单条目标资源后，点击**彻底删除**。
+
+
+. 弹出确认对话框，用户确认操作无误后，点击**删除**。
+
+
+. 用户可至回收站主页面，确认彻底删除的资源，不在列表显示。
+

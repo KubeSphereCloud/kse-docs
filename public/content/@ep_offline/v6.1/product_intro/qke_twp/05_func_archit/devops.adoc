@@ -1,0 +1,37 @@
+---
+title: "DevOps"
+weight: 15
+---
+
+DevOps（Development 和 Operations 的组合词）是一种重视“软件开发员（Dev）”和“IT运维技术人员（Ops）”之间沟通合作的文化、运动或惯例。透过自动化“软件交付”和“架构变更”的流程，来使得构建、测试、发布软件能够更加地快捷、频繁和可靠。
+
+DevOps 项目是 KubeSphere 提供的一种服务能力，为用户提供从开发到部署的一整套 Auto DevOps 流程。用户只要提供 Git 地址，就能为其自动生成成一个以该源代码为基础的部署好的测试环境甚至是生产环境。
+
+== 功能特点
+
+* 在 KubeSphere 上构建，原生支持 Kubernetes。
+* 在SCM中增强了代码仓库管理，内置 Gitlab，集成多个 DevOps 常用开源组件，自动添加 Webhook。
+* 内建主流开发语言和主流框架的模板，降低编译-测试-部署的复杂性，所需手工配置较少。
+* 项目架构微服务化，一键部署到主流容器服务中，并且能够在多种云平台和私有云快速部署，提高企业的开发效率。
+* 支持 source to image / binary to image，快速交付容器镜像。
+* 兼容 Jenkinsfile in & out of SCM（Source Code Management）两种模式。
+* 独立 DevOps 工程，提供访问可控、安全隔离的 CI/CD 操作空间。
+* 可视化流水线编辑工具，降低 CI/CD 学习成本。
+* 代码静态扫描。
+
+== 主要组件
+
+以下组件都是以微服务的形式提供。
+
+* *API Server*：系统核心组件，负责统一各个模块，管理Pipeline和提供与KubeSphere交互的接⼝。
+* *GitLab*：内置代码仓库（可选），提供版本控制和软件源代码托管服务。
+* *Harbor*：镜像管理（可选）。
+* *MonogoDB*： API Server数据库。
+* *SonarQube*：代码静态审查。
+* *Jenkins*：CI/CD功能。
+
+== 架构设计
+
+系统中有一些功能以 Jenkins 插件的方式提供，有一些功能在服务中开发集成。
+
+image::/images/ep_offline/qke_twp/05_devops.png[]

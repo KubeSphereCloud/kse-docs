@@ -1,0 +1,20 @@
+---
+title: "容器水平伸缩"
+weight: 01
+---
+
+// 高级设置部分的参数说明可参考：https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#configurable-scaling-behavior
+
+Metrics Server 是一个可扩展、高效的容器资源度量源，为 Kubernetes 内置的自动扩展管道提供服务。
+
+Metrics Server 支持基于 CPU/内存的容器水平伸缩（HPA）。系统将目标工作负载中所有 Pod 的平均 CPU/内存用量，与在 HPA 中配置的 CPU/内存指标的目标值进行比较，从而自动调整 Pod 副本的数量。
+
+安装 Metrics Server 扩展组件后，集群和企业空间左侧导航栏的**弹性伸缩**菜单下将显⽰**容器水平伸缩**选项。
+
+[.admon.note,cols="a"]
+|===
+|说明
+
+|
+有关组件的更多信息，请参阅扩展中心 Metrics Server 扩展组件的详情页说明。
+|===

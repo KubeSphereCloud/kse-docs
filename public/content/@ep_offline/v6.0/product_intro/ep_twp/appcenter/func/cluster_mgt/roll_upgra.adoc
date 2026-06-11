@@ -1,0 +1,32 @@
+---
+title: "滚动升级"
+weight: 24
+---
+
+集群滚动升级的实现逻辑如下图所示。
+
+image::/images/ep_offline/ep_twp/appcenter_c_15.png[]
+
+功能流程说明：
+
+. 将 upgrade-audit 注册到 metadata service。
+. 不同角色节点按照 order 升序执行 upgrade_pre_check 脚本：
++
+* 如果返回异常（非 0），升级失败，删除 upgrade-audit，退出升级流程。
+* 如果返回 0，执行步骤 3。
+. 执行 get_nodes_order 脚本，获取角色对应的节点升级顺序。
+. 每个节点按照顺序依次执行如下操作：
+.. 执行 upgrade pre_cmd 脚本:
++
+* 如果 5 步骤脚本返回报错（非 0），升级失败，删除 upgrade-audit，退出升级流程。
+* 如果返回 0，继续执行。 
+.. 执行 stop_cmd 脚本，关闭服务。
+.. 关闭 confd agent 服务。
+.. 关闭节点虚拟机，替换新版本镜像并启动虚拟机。
+.. 是否配置 post_start_service：
++
+* 是，先执行 start cmd 脚本，再执行 upgrade  cmd 脚本。
+* 否，先执行 upgrade cmd 脚本，再执行 start cmd 脚本。
+
+. 如果有任一节点 start/upgrade cmd 执行失败，升级失败，删除 upgrade-audit，退出升级流程。
+. 如果所有节点 start/upgrade cmd 执行成功，升级成功，删除 upgrade-audit。

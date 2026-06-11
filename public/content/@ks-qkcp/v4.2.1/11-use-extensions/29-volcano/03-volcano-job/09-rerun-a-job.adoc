@@ -1,0 +1,40 @@
+---
+title: "重新运行 Volcano 作业"
+weight: 09
+---
+
+
+:ks_permission: ** project-admin **
+:ks_navigation: ** Volcano 调度 > Volcano 作业**
+
+
+本节介绍如何再次运行 Volcano 作业。
+
+
+== 前提条件
+
+* KubeSphere 平台需要安装并启用 **Volcano** 扩展组件。
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+== 操作步骤
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. 在需要操作的 Volcano 作业右侧点击image:/images/ks-qkcp/zh/icons/more.svg[more,18,18]，然后在下拉列表中选择**重新运行**。
++
+Volcano 作业将重新开始运行，并自动生成一条新的运行记录。

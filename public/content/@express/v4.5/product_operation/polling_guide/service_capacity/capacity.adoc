@@ -1,0 +1,38 @@
+---
+title: "平台容量检查"
+weight: 2
+---
+
+[cols="1h,4a"]
+|===
+|巡检目的
+|对云易捷云平台当前容量资源占用情况进行巡检
+
+|巡检条件
+|云平台可正常稳定运行
+
+|巡检过程
+|
+. admin 用户登录云易捷 Console 界面 （http://console.xxxxx.com, admin@xxxxx.com 用户登录）。
+. 在顶部导航栏，选择**概览**。
+. 查看**物理资源使用率**，且节点选择**总量**。
+. 查看**备份存储空间**。
+
+|预期结果
+|
+. 可正常登录云易捷管理平台。
+. 云平台概览页面可正常显示。
+. 可成功切换至总量物理资源使用率页面，且CPU、内存、物理硬盘使用量均低于60%。
+. 备份存储空间使用率低于70%。
++
+include::../../../../../_components/note_in_table.adoc[]
+云平台的稳定运行、高可靠性需要依赖冗余的资源。
+include::../../../../../_components/footer_in_table.adoc[]
+
+|检查结果示例
+|
+image::/images/express/polling/polling_capacity_1.png[,70%]
+
+|===
+
+

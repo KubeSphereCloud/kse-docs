@@ -1,0 +1,140 @@
+---
+title: "Configure Whitelist"
+keywords: "Kubernetes, {ks_product}, Project Management, Project Settings, Network Isolation, Add Whitelist"
+description: "Describes how to configure and manage whitelists."
+weight: 04
+---
+
+:ks_permission: **Project Network Isolation Management**
+:ks_navigation: **Service Network > Project Network Isolation**
+
+This section describes how to configure and manage whitelists.
+
+When "workspace network isolation" or "project network isolation" is enabled, configuring a whitelist in the selected project allows pods in the current project to access and be accessed by other specific projects, services, network segments, or ports.
+
+Before configuring a whitelist, "workspace network isolation" or "project network isolation" must be enabled. Otherwise, configuration is not possible. After a whitelist is configured, if both "workspace network isolation" and "project network isolation" are disabled, the whitelist will be cleared; if either one remains enabled, the whitelist remains effective.
+
+== Prerequisites
+
+:relfileprefix: ../../../../
+* {empty}
+include::../../../../_custom/projectManagement/projectManagement-prer-requiredPermission_v42.adoc[]
+
+:relfileprefix: ./
+
+* The **KubeSphere Network** extension must be installed in the cluster to which the project belongs.
+
+* Before configuring a whitelist, "workspace network isolation" or "project network isolation" must be enabled. Otherwise, configuration is not possible.
+
+== Add Whitelist
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/projectManagement/projects-oper-dropdownList.adoc[]
+
++
+
+. Under the **Project/Service-based Whitelist** or **Segment/Port-based Whitelist** tab, click **Add**.
+
+. In the dialog box that appears, set the basic information for the whitelist entry, then click **Next**.
++
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Name
+|The name of the whitelist entry. The name can only contain lowercase letters, numbers, and hyphens (-), must start and end with a lowercase letter or number, and can be up to 253 characters long.
+
+|Alias
+|The alias of the whitelist entry. Different whitelist entries can have the same alias.
+
+|Description
+|The description of the whitelist entry. The description can contain any characters and can be up to 256 characters long.
+|===
+
+. In the **Whitelist Settings** tab of the dialog box, set the parameters for the whitelist entry, then click **Create**.
++
+====
+* For a project/service-based whitelist, set the following parameters:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Traffic Direction
+|The traffic direction allowed by the whitelist entry.
+
+* **Egress**: The direction from the current project to other projects.
+
+* **Ingress**: The direction from other projects to the current project.
+
+|Whitelist Type
+|How the whitelist entry matches pods from other projects.
+
+* **Project**: Pods in the current project can communicate with all pods in the specified project.
++
+You can directly specify a project, or filter projects by labels and expressions, or specify a workspace. When a workspace is specified, the whitelist will apply to all projects under the selected workspace.
+
+* **Service**: Pods in the current project can communicate with the backend pods of the specified service.
+|===
+--
+
+* For a segment/port-based whitelist, set the following parameters:
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Traffic Direction
+|The traffic direction allowed by the whitelist entry.
+
+* **Egress**: The direction from the current project to other projects.
+
+* **Ingress**: The direction from other projects to the current project.
+
+|Segment
+|The network address and subnet mask external to the project. Supports Classless Inter-Domain Routing (CIDR).
+
+* Click image:/images/ks-qkcp/zh/icons/copy-light.svg[copy-light,18,18] to the right of an added segment to create a copy.
+* Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] to the right of an added segment to delete it.
+* Click **Add New Segment** to set multiple segments.
+
+|Port
+|The port number allowed by the whitelist entry.
+
+* For an egress whitelist entry, this port refers to the port of the external address.
+
+* For an ingress whitelist entry, this port refers to the port of the pods in the current project.
+
+* Click image:/images/ks-qkcp/zh/icons/copy-light.svg[copy-light,18,18] to the right of an added port to create a copy.
+* Click image:/images/ks-qkcp/zh/icons/trash-light.svg[trash-light,18,18] to the right of an added port to delete it.
+* Click **Add New Port Range** to set multiple port ranges, or click **Add New Port** to set multiple individual ports.
+|===
+--
+
+After creation, the whitelist entry will be displayed in the whitelist list.
+====
+
+== Manage Whitelist
+
+* In the whitelist list, click the whitelist name to view its details.
+
+* Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] > **Edit Info** to the right of a whitelist entry to edit its alias and description.
+
+* Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] > **Whitelist Settings** to the right of a whitelist entry to modify its settings.
+
+* Click image:/images/ks-qkcp/zh/icons/more.svg[more,18,18] > **Delete** to the right of a whitelist entry to delete it.
++
+include::../../../../../_ks_components/admonitions/warning.adoc[]
+
+Deleting a whitelist entry may cause network connectivity interruptions for pods in the current project. Please perform this operation with caution.
+
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]

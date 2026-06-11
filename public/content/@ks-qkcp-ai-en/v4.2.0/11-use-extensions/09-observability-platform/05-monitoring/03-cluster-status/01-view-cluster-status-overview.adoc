@@ -1,0 +1,60 @@
+---
+title: "View Cluster Status Overview"
+keywords: "Kubernetes, {ks_product}, Monitoring and Alerting, Cluster Status, Overview"
+description: "Describes how to view the cluster status overview."
+weight: 01
+---
+
+:ks_permission: **Monitoring View**
+:ks_navigation: **Monitoring and Alerting > Cluster Monitoring**
+
+This section describes how to view the cluster status overview.
+
+== Prerequisites
+
+:relfileprefix: ../../../../../../
+* {empty}
+include::../../../../../_custom/clusterManagement/clusterManagement-prer-requiredPermission_new.adoc[]
+
+:relfileprefix: ./
+
+* The **WizTelemetry Monitoring** extension must be installed and enabled on the KubeSphere platform.
+
+== Steps
+
+include::../../../../../_custom/clusterManagement/clusterManagement-oper-openClusterPage.adoc[]
+
++
+
+include::../../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+. On the **Cluster Monitoring** page, under the **Overview** tab, view the status of cluster nodes, cluster resources, etcd, and service components.
++
+--
+[%header,cols="1a,4a"]
+|===
+|Parameter |Description
+
+|Cluster Node Status
+|The total number of nodes in the cluster and the number of healthy nodes.
+
+|Cluster Resource Usage
+|The total and used amounts of CPU, memory, and disk resources in the cluster, as well as the total number of pods that can be created in the cluster and the number already created. By default, each healthy cluster node can host up to 110 pods.
+
+|etcd Monitoring
+|The service status, Raft proposal count, database size, and client traffic of the etcd database.
+
+* **Service Status**: Shows the Leader node of the etcd cluster, the IP address of each node, and the number of Leader changes in the last 1 hour.
+
+* **Raft Proposals**: Shows the number of committed proposals per second, applied proposals per second, failed proposals per second, and the number of proposals in the queue.
+
+* **Database Size**: The change in etcd database size over time.
+
+* **Client Traffic**: The data traffic sent to and received from gRPC clients.
+
+|Service Component Monitoring
+|The request latency and requests per second for the Kubernetes API server, as well as the cumulative scheduling count and scheduling attempts per second for the scheduler.
+|===
+--

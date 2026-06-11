@@ -1,0 +1,76 @@
+---
+title: "将应用版本发布到应用商店"
+keywords: "Kubernetes, {ks_product}, 企业空间, 应用模板, 将应用版本发布到应用商店"
+description: "介绍如何将应用模板发布到应用商店。"
+weight: 10
+---
+
+// :ks_include_id: 05d2e28ac92c477f98feb74fb9897460
+:ks_xref_id: b486534250f24ff09e0cc78ad2e84b10
+:ks_comp: ../../../../components/
+:ks_title: 将应用版本发布到应用商店
+:ks_keywords: Kubernetes, {ks_product}, 企业空间, 应用模板, 将应用版本发布到应用商店
+:ks_description: 介绍如何将应用模板发布到应用商店。
+:ks_weight: 10
+:ks_icon:
+:ks_permission: **应用模板管理**
+:ks_navigation: **应用管理 > 应用模板**
+
+
+本节介绍如何将应用版本发布到应用商店。
+
+应用版本发布到应用商店后，用户可以从应用商店将应用版本安装到项目中。
+
+
+== 前提条件link:[id=1f97258d4c1d448d80741fe1d1785cba]
+
+
+:relfileprefix: ../../../../
+* 您需要加入一个企业空间并在企业空间中具有pass:a,q[{ks_permission}]权限。有关更多信息，请参阅xref:06-workspace-management/06-workspace-settings/03-workspace-members/_index.adoc[企业空间成员]、xref:06-workspace-management/06-workspace-settings/04-workspace-roles/_index.adoc[企业空间角色]和xref:06-workspace-management/06-workspace-settings/05-departments/_index.adoc[部门]。
+
+// include::../../../../_custom/workspaceManagement/workspaceManagement-prer-requiredPermission.adoc[]
+
+:relfileprefix: ./
+
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-prer-enableAppManagment.adoc[]
+
+
+== 操作步骤link:[id=2a9444d7785048598e85b23df1793d49]
+
+include::../../../../_custom/workspaceManagement/workspaceManagement-oper-openWorkspacePage.adoc[]
+
++
+
+include::../../../../../_ks_components/oper-navigate.adoc[]
+
++
+
+include::../../../../_custom/workspaceManagement/appTemplates/appTemplates-oper-openDetailsPage.adoc[]
+
++
+
+. 在应用模板详情页面右侧的**版本**页签，点击需要发布的应用版本，然后在展开的区域中点击**提交审核**。
++
+--
+// Note
+include::../../../../../_ks_components/admonitions/note.adoc[]
+ifeval::["{file_output_type}" == "html"]
+
+应用模板将提交给应用商店管理员审核。您需要在审核通过后进行下一步操作。
+
+endif::[]
+
+ifeval::["{file_output_type}" == "pdf"]
+
+应用模板将提交给应用商店管理员审核。您需要在审核通过后进行下一步操作。有关更多信息，请参阅《{ks_product_right}平台管理指南》。
+
+endif::[]
+include::../../../../../_ks_components/admonitions/admonEnd.adoc[]
+--
+
+. 应用商店管理员审核通过后，在应用模板详情页面右侧的**版本**页签，点击需要发布的应用版本，然后在展开的区域中点击**发布**。
++
+--
+应用版本将被发布到应用商店。您可以在页面左上角点击**应用商店**，然后在应用商店中查看已发布的应用版本。
+--
