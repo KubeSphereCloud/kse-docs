@@ -24434,7 +24434,7 @@ spec:
 version=1.2.4
 helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart \
   --debug --wait --version $version --reset-values --take-ownership \
-  --set global.imageRegistry=hub.kubesphere.com.cn,extension.imageRegistry=hub.kubesphere.com.cn
+  --set global.imageRegistry=hub.kubesphere.com.cn,extension.imageRegistry=hub.kubesphere.com.cn \
   --set kseExtensionRepository.image.tag=v11.2.0</code></pre>
 </div>
 </div>
