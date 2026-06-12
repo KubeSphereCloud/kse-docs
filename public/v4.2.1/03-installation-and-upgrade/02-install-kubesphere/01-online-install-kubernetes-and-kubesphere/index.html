@@ -23360,7 +23360,7 @@
     在线安装 Kubernetes 和 KubeSphere</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2026-06-04 10:56:14
+      更新时间：2026-06-12 07:37:18
     </div>
     
     
@@ -24434,7 +24434,8 @@ spec:
 version=1.2.4
 helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart \
   --debug --wait --version $version --reset-values --take-ownership \
-  --set global.imageRegistry=hub.kubesphere.com.cn,extension.imageRegistry=hub.kubesphere.com.cn</code></pre>
+  --set global.imageRegistry=hub.kubesphere.com.cn,extension.imageRegistry=hub.kubesphere.com.cn \
+  --set kseExtensionRepository.image.tag=v11.2.0</code></pre>
 </div>
 </div>
 <div class="paragraph">
