@@ -23360,7 +23360,7 @@
     离线安装 Kubernetes 和 KubeSphere</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2026-06-12 07:37:18
+      更新时间：2026-07-08 03:38:14
     </div>
     
     
@@ -24551,6 +24551,12 @@ spec:
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">apiVersion: kubekey.kubesphere.io/v1
 kind: Config
 spec:
+  download:
+    arch:
+     - amd64
+     - arm64
+  images:
+    policy: warn
   image_registry:
     auth:
       registry: dockerhub.kubekey.local
@@ -24579,6 +24585,20 @@ spec:
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spec.download.arch</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">推送镜像的架构。值可以是 <code>amd64</code>，<code>arm64</code> 或 <code>arm64 + arm64</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spec.download.images.policy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">镜像检查策略。可选值：<code>warn</code> 或 <code>strict</code>，推送多架构镜像时请设置为 warn。</p>
+<p class="tableblock">* <strong>warn</strong>：如果离线包里的镜像架构不包含推送镜像的架构，仅记录警告</p>
+<p class="tableblock">* <strong>strict</strong>：离线包里的镜像架构必须包含推送的镜像架构</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>spec.image_registry.auth.registry</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
