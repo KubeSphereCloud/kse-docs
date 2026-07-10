@@ -23360,7 +23360,7 @@
     添加集群节点</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2026-07-07 10:29:40
+      更新时间：2026-07-10 05:57:57
     </div>
     
     
@@ -23379,7 +23379,7 @@
     <li><a href="#_获取当前集群配置文件">获取当前集群配置文件</a>
       <ul>
         <li><a href="#_获取_inventory_yaml">获取 inventory.yaml</a></li>
-        <li><a href="#_获取_config_yaml">获取 config.yaml</a></li>
+        <li><a href="#_获取_config_json">获取 config.json</a></li>
       </ul>
     </li>
     <li><a href="#_方式一通过_inventory_yaml_分组添加">方式一：通过 inventory.yaml 分组添加</a></li>
@@ -23457,7 +23457,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_获取_config_yaml">获取 config.yaml</h3>
+<h3 id="_获取_config_json">获取 config.json</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">cat schema/config.json | jq &#39;{spec: .[&#34;kubernetes.json&#34;]}&#39; &gt; kkv4-config.json</code></pre>
@@ -23513,7 +23513,7 @@
 <p>执行以下命令添加节点：</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">./kk add nodes -i inventory.yaml -c config.yaml</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">./kk add nodes -i inventory.yaml -c config.json</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -23566,7 +23566,7 @@
 <p>执行以下命令添加节点并指定角色：</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">./kk add nodes --control-plane node1 --worker node2 -i inventory.yaml -c config.yaml --override</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">./kk add nodes --control-plane node1 --worker node2 -i inventory.yaml -c config.json --override</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -23666,7 +23666,7 @@
     <li><a href="#_获取当前集群配置文件">获取当前集群配置文件</a>
       <ul>
         <li><a href="#_获取_inventory_yaml">获取 inventory.yaml</a></li>
-        <li><a href="#_获取_config_yaml">获取 config.yaml</a></li>
+        <li><a href="#_获取_config_json">获取 config.json</a></li>
       </ul>
     </li>
     <li><a href="#_方式一通过_inventory_yaml_分组添加">方式一：通过 inventory.yaml 分组添加</a></li>
