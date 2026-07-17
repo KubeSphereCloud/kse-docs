@@ -23360,7 +23360,7 @@
     离线安装 Kubernetes 和 KubeSphere</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2026-07-14 03:09:48
+      更新时间：2026-07-16 10:20:29
     </div>
     
     
@@ -24422,83 +24422,63 @@ spec:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">spec:
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">apiVersion: kubekey.kubesphere.io/v1
+kind: Config
+spec:
+  download:
+    arch:  # 推送镜像的架构
+     - amd64
+     - arm64
+    images:
+      # 镜像检查策略。
+      # warn: 如果镜像缺少某些CPU架构或操作系统，仅记录警告
+      # strict: 拉取的镜像必须包含所有选定的CPU架构和操作系统，否则报错。（默认）
+      policy: warn # 有些镜像可能只有amd64单架构，推送多架构镜像时请设置为 warn
   image_registry:
-    # 镜像仓库类型。支持 harbor、docker-registry；留空则不安装
-    type: &#34;harbor&#34;
     auth:
-      # 私有镜像仓库地址
-      registry: &#34;dockerhub.kubekey.local&#34;</code></pre>
+      registry: dockerhub.kubekey.local # 私有镜像仓库地址
+      username: admin # 私有镜像仓库登录用户名
+      password: Harbor12345 # 私有镜像仓库登录密码
+      skip_tls_verify: false # 是否跳过 TLS 证书验证，默认为 false
+      plain_http: false # 是否使用 HTTP 明文传输，默认为 false</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_5_配置集群参数">5. 配置集群参数</h4>
-<div class="paragraph">
-<p>在 <code>config-v1.32.11.yaml</code> 中配置 Kubernetes 集群信息：</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;"/>
-<col style="width: 75%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">参数</th>
-<th class="tableblock halign-left valign-top">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">文件及镜像的下载区域。离线安装时无需联网，但此项在构建离线包时生效</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kubernetes</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Kubernetes 相关配置</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcd</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">etcd 相关配置</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image_registry</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">私有镜像仓库相关配置</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cri</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">容器运行时相关配置</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cni</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">网络插件相关配置</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>storage_class</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">存储插件相关配置</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dns</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">域名解析相关配置</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image_manifests</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">需要下载的额外镜像</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p><strong>注意：</strong></p>
-</div>
-<div class="paragraph">
-<p>完整的配置参数说明，请参考 <a href="https://github.com/kubesphere/kubekey/blob/main/docs/zh/reference/config.md">配置参考</a>。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_6_安装集群">6. 安装集群</h4>
+<h4 id="_5_安装集群">5. 安装集群</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">./kk create cluster -a kubekey-artifact.tgz -i inventory.yaml -c config-v1.32.11.yaml</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_6_推送镜像单独部署私有镜像仓库时需要操作">6. 推送镜像（单独部署私有镜像仓库时需要操作）</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># 推送镜像到私有仓库
+kk artifact images --push -c config-v1.32.13.yaml -a kubekey-artifact.tgz</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_7_安装_kubesphere">7. 安装 KubeSphere</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">helm upgrade --install \
+  -n kubesphere-system \
+  --create-namespace \
+  ks-core \
+  ./charts/ks-core-1.2.4.tgz \
+  --debug \
+  --wait \
+  --reset-values \
+  --set kseExtensionRepository.image.tag=v11.2.0 \
+  --set auditing.enable=true \
+  --set ha.enabled=true \
+  --set redisHA.enabled=true \
+  --set global.imageRegistry=dockerhub.kubekey.local \
+  --set extension.imageRegistry=dockerhub.kubekey.local</code></pre>
 </div>
 </div>
 </div>
