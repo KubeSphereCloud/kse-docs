@@ -23538,7 +23538,7 @@
     在线升级到 v4.3.0</h1>
   <div class="post-info">
     <div class="post-date">
-      更新时间：2026-08-27 07:19:07
+      更新时间：2026-10-30 03:40:42
     </div>
     
     
@@ -23805,9 +23805,9 @@ helm get values -n kubesphere-system ks-core
 cat &lt;&lt;EOF &gt; kse-v4.3.0-host-custom-values.yaml
 # 以下两个参数分别用来指定 ks-core 所使用镜像以及扩展组件所使用镜像的镜像仓库地址，根据环境实际信息修改。
 global:
-  imageRegistry: dockerhub.kubekey.local   #按v4.3.0离线镜像推送仓库地址填写
+  imageRegistry: hub.kubesphere.com.cn
 extension:
-  imageRegistry: dockerhub.kubekey.local  #按v4.3.0离线镜像推送仓库地址填写
+  imageRegistry: hub.kubesphere.com.cn
 # 开启 ks-core 组件（ks-apiserver、ks-controller-manager、ks-console）高可用，根据集群实际情况配置
 ha:
   enabled: true
@@ -23845,13 +23845,11 @@ helm get values -n kubesphere-system ks-core</code></pre>
 kubectl get node
 
 # 执行升级 （注意替换为实际使用的镜像仓库）（执行升级命令后，可在新的终端窗口中执行watch kubectl get pod -n kubesphere-system 观察 kubesphere-system 下 pod 变化）
-# 离线包中 ks-core 的 chart 存放于 charts 目录下，如果路径有变更，请注意替换命令中 chart 路径（charts/ks-core）为当前环境的真实路径
-helm upgrade --install ks-core charts/ks-core-1.2.5.tgz -n kubesphere-system -f kse-v4.3.0-host-custom-values.yaml --wait --debug --take-ownership
 
 # 在线升级命令(helm版本需要&gt;=3.17.0)
-# chart=oci://hub.kubesphere.com.cn/kse/ks-core
-# version=1.2.5
-# helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version -f kse-v4.3.0-host-custom-values.yaml --wait --debug --take-ownership</code></pre>
+chart=oci://hub.kubesphere.com.cn/kse/ks-core
+version=1.2.5
+helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version -f kse-v4.3.0-host-custom-values.yaml --wait --debug --take-ownership</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -24026,9 +24024,9 @@ helm get values -n kubesphere-system ks-core
 cat &lt;&lt;EOF &gt; kse-v4.3.0-host-custom-values.yaml
 # 以下两个参数分别用来指定 ks-core 所使用镜像以及扩展组件所使用镜像的镜像仓库地址，根据环境实际信息修改。
 global:
-  imageRegistry: dockerhub.kubekey.local   #按v4.3.0离线镜像推送仓库地址填写
+  imageRegistry: hub.kubesphere.com.cn
 extension:
-  imageRegistry: dockerhub.kubekey.local  #按v4.3.0离线镜像推送仓库地址填写
+  imageRegistry: hub.kubesphere.com.cn
 # 开启 ks-core 组件（ks-apiserver、ks-controller-manager、ks-console）高可用，根据集群实际情况配置
 ha:
   enabled: true
@@ -24066,13 +24064,11 @@ helm get values -n kubesphere-system ks-core</code></pre>
 kubectl get node
 
 # 执行升级 （注意替换为实际使用的镜像仓库）（执行升级命令后，可在新的终端窗口中执行watch kubectl get pod -n kubesphere-system 观察 kubesphere-system 下 pod 变化）
-# 离线包中 ks-core 的 chart 存放于 charts 目录下，如果路径有变更，请注意替换命令中 chart 路径（charts/ks-core）为当前环境的真实路径
-helm upgrade --install ks-core charts/ks-core-1.2.5.tgz -n kubesphere-system -f kse-v4.3.0-host-custom-values.yaml --wait --debug --take-ownership
 
 # 在线升级命令(helm版本需要&gt;=3.17.0)
-# chart=oci://hub.kubesphere.com.cn/kse/ks-core
-# version=1.2.5
-# helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version -f kse-v4.3.0-host-custom-values.yaml --wait --debug --take-ownership</code></pre>
+chart=oci://hub.kubesphere.com.cn/kse/ks-core
+version=1.2.5
+helm upgrade --install -n kubesphere-system --create-namespace ks-core $chart --version $version -f kse-v4.3.0-host-custom-values.yaml --wait --debug --take-ownership</code></pre>
 </div>
 </div>
 <div class="paragraph">
